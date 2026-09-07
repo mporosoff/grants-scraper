@@ -3,6 +3,7 @@ import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
+import { installSubmissionSchedule } from "../helpers/submission-schedule.mjs";
 
 const FIXED_NOW = new Date("2026-08-30T00:00:00.000Z");
 const [matcherSource, retrievalSource, appSource, teamPage, releaseSource] = await Promise.all([
@@ -155,6 +156,7 @@ test("child evidence can help only runtime-current parents and final rows stay e
     liveEntry(result) { return { d: { id: result.id }, result }; },
   };
   vm.createContext(context);
+  installSubmissionSchedule(context, appSource, FIXED_NOW.toISOString().slice(0, 10));
   vm.runInContext(`${buildSharedSource()}\nthis.output = buildShared(profiles);`, context);
 
   assert.deepEqual(observedChildIds, ["topic-current"]);

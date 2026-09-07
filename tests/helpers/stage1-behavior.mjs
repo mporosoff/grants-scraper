@@ -1,3 +1,4 @@
+import { installSubmissionSchedule } from "./submission-schedule.mjs";
 import {createHash} from 'node:crypto';
 import vm from 'node:vm';
 export async function captureBehavior(app) {
@@ -17,6 +18,7 @@ class Url extends URL {static createObjectURL(value){blob=value;return 'blob:fix
 const state={savedItems:[],ready:true,searched:true,query:'carbon capture',sort:'relevance',filters:{agency:new Set(['NSF'])},profile:{active:false},refinement:{assessments:new Map()},ai:{assessments:new Map()},deployment:{review:{}},strongMatches:[{index:0}]};
 const sandbox={URL:Url,Blob,Set,Map,Date,encodeURIComponent,state,$,FACETS:{agency:{}},catalog:{opportunities:[record]},location:{href:'https://example.org/match_explorer.html?q=old',protocol:'https:'},history:{replaceState(a,b,url){urlState=String(url)}},currentDisplayMatches:()=>[{index:0,workflowTier:'strong'}],hybridFilterState:()=>({agencies:['NSF']}),ALERTS_API:{open(value){alert=value}},recordById:()=>record,RESULT_WORKFLOW_API:{potentialEvidence:()=>null,workflowTierLabel:()=> 'Strong'},hasPlaceholderAward:()=>false,evidenceFacts:()=>[],recordDeploymentUsage:()=>{},document:{createElement:()=>({click(){},remove(){}}),body:{appendChild(){}}}};
 vm.createContext(sandbox);
+installSubmissionSchedule(sandbox, app);
 for(const name of ['escapeHtml','escapeAttribute','safeUrl','safeEmail','recordId','primaryContact','programContactAction','officialActions','deadlineEvidenceLabel','fundingEvidenceLabel','csvCell','exportCsv','syncStateToUrl','savedSearchAlertDefinition','openSavedSearchAlert','openOpportunityAlert']) vm.runInContext(fn(name),sandbox);
 sandbox.exportCsv(); sandbox.syncStateToUrl();sandbox.openSavedSearchAlert();
 const searchAlert=JSON.parse(JSON.stringify(alert));sandbox.openOpportunityAlert(record.opportunity_id,null);

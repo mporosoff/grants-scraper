@@ -26,6 +26,7 @@ from urllib.parse import quote
 from xml.sax.saxutils import escape, quoteattr
 
 from scripts.currentness import filter_current
+from scripts.submission_schedule import next_submission
 
 SITE_BASE = "https://mporosoff.github.io/grants-scraper"
 APP_URL = f"{SITE_BASE}/match_explorer.html"
@@ -120,12 +121,16 @@ def entry_id(record: dict) -> str:
     return f"urn:funding-finder:{source}:{quote(str(ident), safe='')}"
 
 
-def summarize(record: dict) -> str:
+def summarize(record: dict, as_of=None) -> str:
     bits = []
     if record.get("agency"):
         bits.append(str(record["agency"]))
-    if record.get("close_date"):
-        bits.append(f"Closes {record['close_date']}")
+    submission = next_submission(record, as_of)
+    if submission['date']:
+        stage = (submission['event'].get('kind') or 'submission').replace('_', ' ')
+        bits.append(f"{stage.title()} {submission['date']}")
+        if submission['access'] != 'open':
+            bits.append(submission['access'].replace('_', ' '))
     elif record.get("status"):
         bits.append(str(record["status"]).title())
     description = (record.get("description") or "").strip()
@@ -138,7 +143,7 @@ def sorted_recent(records: list[dict], limit: int) -> list[dict]:
     return sorted(records, key=entry_datetime, reverse=True)[:limit]
 
 
-def build_atom(title: str, self_path: str, records: list[dict], updated: datetime) -> str:
+def build_atom(title: str, self_path: str, records: list[dict], updated: datetime, *, as_of=None) -> str:
     self_url = f"{FEEDS_BASE}/{self_path}"
     lines = [
         '<?xml version="1.0" encoding="utf-8"?>',
@@ -161,7 +166,7 @@ def build_atom(title: str, self_path: str, records: list[dict], updated: datetim
             lines.append(f"    <author><name>{escape(str(record['agency']))}</name></author>")
         for topic in (record.get("topic_areas") or [])[:8]:
             lines.append(f"    <category term={quoteattr(str(topic))}/>")
-        lines.append(f"    <summary>{escape(summarize(record))}</summary>")
+        lines.append(f"    <summary>{escape(summarize(record, as_of or updated.date()))}</summary>")
         lines.append("  </entry>")
     lines.append("</feed>")
     return "\n".join(lines) + "\n"
@@ -188,23 +193,28 @@ def build_feeds(
     *,
     as_of=None,
 ) -> list[dict]:
+    now = catalog_datetime(catalog)
+    # Source-merge bookkeeping may run later than the pinned catalog/source
+    # frame. It timestamps the feed, but cannot advance its submission clock.
+    if as_of is None:
+        frame = parse_date(catalog.get("document_evidence_generated_at") or catalog.get("generated_at"))
+        as_of = frame.date() if frame else now.date()
     records, excluded = filter_current(
         catalog.get("opportunities") or [],
         as_of,
     )
-    now = catalog_datetime(catalog)
     manifest: list[dict] = []
     generated_paths: set[Path] = set()
 
     def emit(title, rel_path, subset):
         destination = out_dir / rel_path
-        _write(destination, build_atom(title, rel_path, sorted_recent(subset, FACET_LIMIT), now))
+        _write(destination, build_atom(title, rel_path, sorted_recent(subset, FACET_LIMIT), now, as_of=as_of))
         generated_paths.add(destination)
         manifest.append({"title": title, "url": f"{FEEDS_BASE}/{rel_path}", "count": len(subset)})
 
     # All opportunities (larger limit).
     all_feed = out_dir / "all.xml"
-    _write(all_feed, build_atom("Funding Finder | all new opportunities", "all.xml", sorted_recent(records, ALL_LIMIT), now))
+    _write(all_feed, build_atom("Funding Finder | all new opportunities", "all.xml", sorted_recent(records, ALL_LIMIT), now, as_of=as_of))
     generated_paths.add(all_feed)
     manifest.append({"title": "All new opportunities", "url": f"{FEEDS_BASE}/all.xml", "count": len(records)})
 

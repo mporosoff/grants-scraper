@@ -1,0 +1,27 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352688",
+    "retrieved_at": "2026-09-07T12:37:01.069239+00:00",
+    "sha256": "608a1d2376c51b982e09ae37989ba5b6e00def0ff5fd079f47f5cc3b9764d343"
+  },
+  "document_name": "FA955026S0001 Amendment 0001 AFOSR Open BAA.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 78,
+      "section": null,
+      "anchor": null,
+      "text": "\nare true, complete, and accurate to the best of your knowledge. \nSee section G.2. Administrative and National Policy Requirements  for more \ninformation and links to the full text of these items. \n18 You must attach the completed SF-LLL Disclosure of Lobbying Activities if your \ngrant amount exceeds $100,000 and have lobbying activity to disclose. \nSee section G.2. Administrative and National Policy Requirements  for more \ninformation and links to the full text of these items. \nD.4.b. R&R Other Project Information Form \nComplete this form as indicated. You must include all necessary attachments. \n \nFIELD INSTRUCTION \n1, 1a. You must address al"
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 78, lobbying disclosure",
+      "rationale": "The disclosure threshold is not an award amount.",
+      "forbid": {
+        "type": "award_range"
+      }
+    }
+  ]
+}

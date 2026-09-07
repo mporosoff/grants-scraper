@@ -1,0 +1,38 @@
+{
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/rui-roa-pui-facilitating-research-predominantly-undergraduate/nsf14-579/solicitation",
+    "sha256": "5397b88d46e60b963a057ec754bd2b59ba10c00a36ad32f9563b1e6227a85b48",
+    "retrieved_at": "2026-09-07T12:37:03.604198+00:00"
+  },
+  "annotations": [
+    {
+      "location": "Cost Sharing Requirements",
+      "rationale": "Voluntary committed prohibition must not become a required match.",
+      "require": {
+        "type": "cost_share",
+        "value": false,
+        "obligation": "voluntary_committed_prohibited"
+      }
+    },
+    {
+      "location": "Limit on Number of Proposals per Organization",
+      "rationale": "The explicit no-restrictions field belongs to the organization.",
+      "require": {
+        "type": "institutional_submission_policy",
+        "value": {
+          "unlimited": true,
+          "maximum": null
+        }
+      }
+    },
+    {
+      "location": "Full Proposal Deadline(s), Proposals Accepted Anytime",
+      "rationale": "No numeric deadline may be invented from the open submission field.",
+      "forbid": {
+        "type": "deadline"
+      }
+    }
+  ],
+  "format": "html_excerpt",
+  "text": "<h2>Eligibility and Submission Fields</h2><p>Full Proposal Deadline(s) (due by 5 p.m. submitter&#x27;s local time):</p><p>Proposals Accepted Anytime</p><p>Submission deadlines vary by program and proposals must meet program-specific requirements to be considered for review. PIs should contact cognizant program officers for guidance.</p><p>Limit on Number of Proposals per Organization:</p><p>There are no restrictions or limits.</p><p>Limit on Number of Proposals per PI or co-PI:</p><p>The number of allowed proposals per PI varies by program and prospective PIs should contact cognizant program officers for guidance.</p><p>Inclusion of voluntary committed cost sharing is prohibited.</p>"
+}

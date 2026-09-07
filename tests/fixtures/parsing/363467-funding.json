@@ -1,0 +1,50 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354415",
+    "sha256": "3d6010b40bb0f62f3cf30c04c61f00506fe7aae9d4f0b80a4a2a9ebe515b2ef8",
+    "retrieved_at": "2026-09-07T18:59:15.746914+00:00"
+  },
+  "annotation_method": "Original IES 84.324B page 7 explicitly sets the Early Career base award at $500,000. Page 33 gives optional grant-administration support only for early career faculty at non-R1 institutions: $50,000 per year, $200,000 total. These are separate scopes; no universal $700,000 ceiling is inferred.",
+  "money_containers": [
+    {
+      "page": 7,
+      "text": "Early Career Award Limits. The maximum award for Early Career grants has been reduced to \n$500,000. However, Early Career PIs at institutions that are not R1 institutions may request, \nwith justification, up to an additional $200,000 (maximum of $50,000 per year) to support the \ncosts of grant administration and management. \n• "
+    },
+    {
+      "page": 33,
+      "text": "Optional Funding for Grant Administration (for Early Career Applications Only) \nEarly career faculty at non-R1 institutions may request additional funding for grant administration (up to \n$50,000 per year and $200,000 total in direct and indirect costs) to support a grant and/or budget \nmanager or assistants to carry out such tasks as overseeing the budget and invoices or working with or for \nthe other offices at the university involved in grant management (for example, Office of Sponsored \nProjects). \n"
+    }
+  ],
+  "expected_awards": [
+    {
+      "value": {
+        "minimum": null,
+        "maximum": 50000
+      },
+      "track": "Early Career applications",
+      "basis": "per_year",
+      "funding_basis": "optional_supplement",
+      "applicant_condition": "Early career faculty at non-R1 institutions"
+    },
+    {
+      "value": {
+        "minimum": null,
+        "maximum": 200000
+      },
+      "track": "Early Career applications",
+      "basis": "total_project",
+      "funding_basis": "optional_supplement",
+      "applicant_condition": "Early career faculty at non-R1 institutions"
+    },
+    {
+      "value": {
+        "minimum": null,
+        "maximum": 500000
+      },
+      "track": "Early Career grants",
+      "basis": "total_project",
+      "funding_basis": "base_award",
+      "applicant_condition": null
+    }
+  ]
+}

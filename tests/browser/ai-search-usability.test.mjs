@@ -1,3 +1,4 @@
+import { installSubmissionSchedule } from "../helpers/submission-schedule.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
@@ -17,6 +18,50 @@ function fn(source, name) {
   const end = source.indexOf("\n  }", start) + 4;
   return source.slice(start, end);
 }
+
+test("deadline details and AI retain recommended dates and named applicant routes", () => {
+  const context = { formatDate: value => value, evidenceFacts: record => record.document_evidence.facts,
+    deadlineCitation: () => null };
+  vm.createContext(context);
+  for (const name of ["escapeHtml", "deadlineKindLabel", "deadlineRows", "truncate", "compactJsonValue", "compactDocumentEvidence"])
+    vm.runInContext(fn(app, name), context);
+  const html = context.deadlineRows({deadlines: [{kind: "application", date: "2026-11-16",
+    date_qualifier: "recommended", track: "Partner <group>"}]});
+  assert.match(html, /Recommended application submission/);
+  assert.match(html, /Partner &lt;group&gt;/);
+  const result = context.compactDocumentEvidence({document_evidence_status: "current", document_evidence: {document: {}, facts: [
+    {id: "recommended", type: "deadline", date_qualifier: "recommended", track: "Partner group", citation: {}}]}});
+  assert.equal(result.facts[0].qualifiers.date_qualifier, "recommended");
+  assert.equal(result.facts[0].qualifiers.track, "Partner group");
+});
+
+test("AI evidence keeps the monetary basis and scoped cap instead of a bare amount", () => {
+  const context = { evidenceFacts: record => record.document_evidence.facts };
+  vm.createContext(context);
+  for (const name of ["truncate", "compactJsonValue", "compactDocumentEvidence"]) vm.runInContext(fn(app, name), context);
+  const record = { document_evidence_status: "current", document_evidence: { document: {}, facts: [
+    { id: "federal-cap", type: "award_range", value: { minimum: null, maximum: 12000000 },
+      track: "Topic Area 2", subject: "award", basis: "total_project", funding_basis: "federal_share",
+      citation: { quote: "Federal Funds – Up to $12,000,000 per award", document_url: "https://example.gov/notice" } },
+    { id: "average-annual", type: "award_range", value: { minimum: null, maximum: 5000000 },
+      subject: "award", basis: "per_year", estimate_kind: "average", citation: {} },
+    { id: "component", type: "award_range", value: { minimum: 750000, maximum: 1000000 },
+      subject: "award", track: "Component A", basis: "per_budget_period", citation: {} },
+    { id: "conditional", type: "award_range", value: { minimum: null, maximum: 600000 },
+      subject: "award", track: "Track 1", basis: "total_project",
+      applicant_condition: "Institutions that have not received NSF funding in the past 5 years", citation: {} },
+  ] } };
+  const result = JSON.parse(JSON.stringify(context.compactDocumentEvidence(record)));
+  assert.deepEqual(result.facts.map(fact => fact.qualifiers), [
+    { subject: "award", track: "Topic Area 2", basis: "total_project", funding_basis: "federal_share" },
+    { subject: "award", basis: "per_year", estimate_kind: "average" },
+    { subject: "award", track: "Component A", basis: "per_budget_period" },
+    { subject: "award", track: "Track 1", basis: "total_project",
+      applicant_condition: "Institutions that have not received NSF funding in the past 5 years" },
+  ]);
+  record.document_evidence_status = "failed";
+  assert.equal(context.compactDocumentEvidence(record), null);
+});
 
 test("question retrieval keeps scientific qualifiers and recognizes factual follow-ups", () => {
   assert.equal(ui.retrievalQuery("What opportunities fit heterogeneous catalysis? Name a few options."), "heterogeneous catalysis");
@@ -45,6 +90,7 @@ test("chat uses up to ten relevant results regardless of question wording, card 
     hybridSearchClient: { search: () => { throw new Error("Chat must not substitute another subset"); } },
   };
   vm.createContext(context);
+  installSubmissionSchedule(context, app);
   for (const name of ["compareValues", "sortMatches", "retrieveChatContext"]) vm.runInContext(fn(app, name), context);
   const ids = records.slice(0, 10).map(record => record.opportunity_id);
   const previous = [{ role: "assistant", contextIds: ["77", "78"], resultIds: ["78"] }];
@@ -91,6 +137,7 @@ test("unfiltered browsing stays disabled until a search or any non-default filte
   const state = { query: "", profile: { active: false }, ai: { active: false }, filters: { agency: new Set(), discipline: new Set() } };
   const context = { state, $, FACETS: { agency: {}, discipline: {} }, currentChatIds: () => Array(100).fill("a"), hasNofoDocument: () => false };
   vm.createContext(context);
+  installSubmissionSchedule(context, app);
   for (const name of ["hybridFilterState", "hasResultChatScope", "chatHasContext"]) vm.runInContext(fn(app, name), context);
   assert.equal(context.chatHasContext(), false);
   for (const id of ["query", "sort"]) {
@@ -148,6 +195,7 @@ test("Ask AI shows its ten-opportunity limit and explains the disabled unfiltere
   $("status-archived").checked = false;
   $("audience-filter").value = "all";
   vm.createContext(context);
+  installSubmissionSchedule(context, app);
   for (const name of ["hybridFilterState", "hasNofoDocument", "hasResultChatScope", "chatHasContext", "renderChatProviderState", "renderChat"]) vm.runInContext(fn(app, name), context);
   context.renderChat();
   assert.equal($("open-results-chat").disabled, true);
@@ -229,7 +277,8 @@ test("award evidence navigation honors sorted positions and resets canonical evi
     fetchPageWithRecovery: async request => requests.push(request),
     setBusy: () => {}, requestAnimationFrame: fn => fn(), evidenceDomId: id => id, $: () => null,
   };
-  vm.createContext(context); vm.runInContext(fn(source, "focusAwardEvidence"), context);
+  vm.createContext(context);
+  installSubmissionSchedule(context, app); vm.runInContext(fn(source, "focusAwardEvidence"), context);
   await context.focusAwardEvidence("NSF:example");
   assert.equal(requests[0].page, 3);
   assert.equal(requests[0].sort, "title");
@@ -256,7 +305,8 @@ test("returning browsers load the current local snapshot sorting module through 
 test("award scope descriptions explain each selected order", async () => {
   const source = await read("assets/institutional-intelligence-snapshots.js");
   const context = {};
-  vm.createContext(context); vm.runInContext(fn(source, "awardSortDescription"), context);
+  vm.createContext(context);
+  installSubmissionSchedule(context, app); vm.runInContext(fn(source, "awardSortDescription"), context);
   assert.match(context.awardSortDescription("newest"), /^Newest/);
   assert.match(context.awardSortDescription("oldest"), /^Oldest/);
   assert.match(context.awardSortDescription("title"), /ordered by title/);

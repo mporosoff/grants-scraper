@@ -154,13 +154,14 @@
 <script src="assets/search-v2-config.js?v=app-1.3.0"></script>
 <script src="./data/opportunities.js?v=catalog-20260907T013541802971Z"></script>
 <script src="data/faculty_matches.js?v=286d44dadd25b2a8dae08d0e5daf0a10b015904c3aab2c02cda07f55c42222ea"></script>
+<script src="assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"></script>
 <script src="assets/search-query.js?v=app-1.3.0"></script>
 <script src="assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d"></script>
 <script src="assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"></script>
 <script src="assets/search-hybrid.js?v=app-1.3.0-explanation1"></script>
 <script src="assets/team-hybrid.js?v=00a14620c5288c0793939cd69f1b9f43314b2855eb071b5b0d7afca1c06f9e8d"></script>
 <script src="assets/team-researchers.js?v=9af008d5547a3553b6ef590ab6c0d22762b751438d6f4199ce1a6846ea1cd98e"></script>
-<script src="assets/team-matcher.js?v=09cecc8d245f78f667c003df1613978eab4108fc7b9667e71185226f5a665f21"></script>
+<script src="assets/team-matcher.js?v=40ba71f054623a718d5ecb9d0b5897884cba3c716295276b6c281d734b9d49e6"></script>
 <script src="data/researcher_directory.js?v=597a1d429186a55cb592a59795992deb9febfbd7f82089a3d27d7e8af806f8ec"></script>
 <script src="data/opportunity_team_index.js?v=597a1d429186a55cb592a59795992deb9febfbd7f82089a3d27d7e8af806f8ec"></script>
 <script src="assets/opportunity-team.js?v=62a8c2b388a475ca490316a5cf40ea037c6e40522786b94a23ba78ef2636af8e"></script>
@@ -496,9 +497,12 @@
     var status = String(record.status || "posted").toLowerCase() === "forecasted" ? "forecasted" : "open";
     var statusLabel = status === "forecasted" ? "Forecasted" : "Open";
     var listed = d.listing_date || record.posted_date || record.source_first_seen_date || "";
-    var closeDate = record.close_date || "";
-    var deadlineLabel = record.rolling ? "Rolling deadline" : closeDate ? "Application deadline" : "Deadline";
-    var deadlineValue = record.rolling ? "Rolling / ongoing" : closeDate ? formatDate(closeDate) : (d.deadline || "Not listed");
+    var submission = globalThis.FUNDING_SUBMISSION_SCHEDULE.nextSubmission(record);
+    var closeDate = submission.date || "";
+    var deadlineLabel = submission.event ? submission.event.kind.replace(/_/g, " ") + " deadline" : "Deadline";
+    var deadlineValue = closeDate ? formatDate(closeDate) : (d.deadline || "Not listed");
+    var accessLabel = globalThis.FUNDING_SUBMISSION_SCHEDULE.ACCESS_LABELS[submission.access];
+    if (accessLabel) deadlineValue += " · " + accessLabel;
     var eligibility = (record.applicant_types || []).join("; ") || record.eligibility_text || "Not listed";
     var contact = record.contact || (record.contacts || [])[0] || {};
     var contactName = contact.name || record.contact_name || "Not listed";
@@ -559,9 +563,10 @@
   }
   function addTeamDeadlineToCalendar(id) {
     var record = byId[id] || {};
-    if (!/^\d{4}-\d{2}-\d{2}$/.test(String(record.close_date || ""))) return;
-    var compact = record.close_date.replace(/-/g, "");
-    var next = new Date(record.close_date + "T00:00:00Z");
+    var submission = globalThis.FUNDING_SUBMISSION_SCHEDULE.nextSubmission(record);
+    if (!submission.date) return;
+    var compact = submission.date.replace(/-/g, "");
+    var next = new Date(submission.date + "T00:00:00Z");
     next.setUTCDate(next.getUTCDate() + 1);
     var nextCompact = next.toISOString().slice(0, 10).replace(/-/g, "");
     var source = record.funding_opportunity_url || record.detail_page || record.url || "";
@@ -570,7 +575,8 @@
       "BEGIN:VEVENT", "UID:" + calendarText(id) + "@funding-finder",
       "DTSTART;VALUE=DATE:" + compact, "DTEND;VALUE=DATE:" + nextCompact,
       "SUMMARY:" + calendarText("Funding deadline: " + (record.title || id)),
-      "DESCRIPTION:" + calendarText("Opportunity " + (record.opportunity_number || id) + (source ? "\\n" + source : "")),
+      "DESCRIPTION:" + calendarText(["Opportunity " + (record.opportunity_number || id), submission.event.kind,
+        submission.event.time, submission.event.timezone, globalThis.FUNDING_SUBMISSION_SCHEDULE.ACCESS_LABELS[submission.access], source].filter(Boolean).join(" · ")),
       "END:VEVENT", "END:VCALENDAR", ""
     ].join("\r\n");
     var href = URL.createObjectURL(new Blob([ics], { type: "text/calendar;charset=utf-8" }));
@@ -693,7 +699,7 @@
         title: parentRecord.title,
         agency: parentRecord.agency,
         url: parentRecord.primary_document_url || parentRecord.funding_opportunity_url || parentRecord.detail_page || "",
-        deadline: parentRecord.close_date ? "Closes " + parentRecord.close_date : "",
+        deadline: globalThis.FUNDING_SUBMISSION_SCHEDULE.nextSubmission(parentRecord).date || "",
         postedDate: parentRecord.posted_date || parentRecord.source_first_seen_date || "",
         updatedDate: parentRecord.last_updated || "",
         new: Boolean(parentResult && parentResult.new),

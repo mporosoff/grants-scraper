@@ -1,0 +1,36 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "334971",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319693",
+        "sha256": "ed7b40d5b7f89f5199a89777acb6f6da65752ecf166fe374d9a69d16ef3978c8",
+        "retrieved_at": "2026-09-07T20:44:50.834903+00:00"
+      },
+      "container": {
+        "page": 16,
+        "text": "Award Ceiling: \n$975,000 \nPer Project Period \n \nAward Floor: \n$150,000 \nPer Project Period"
+      },
+      "expected": {
+        "minimum": 150000,
+        "maximum": 975000
+      }
+    },
+    {
+      "opportunity_id": "334972",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319713",
+        "sha256": "f6dc792bfc92caabb7eb5a33497f667e0ca30dd84ba1f40b99d339c42abfe12c",
+        "retrieved_at": "2026-09-07T20:44:50.956544+00:00"
+      },
+      "container": {
+        "page": 15,
+        "text": "Award Ceiling: \n$975,000 \nPer Project Period \n \nAward Floor: \n$150,000 \nPer Project Period"
+      },
+      "expected": {
+        "minimum": 150000,
+        "maximum": 975000
+      }
+    }
+  ]
+}

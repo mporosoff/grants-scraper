@@ -40,6 +40,8 @@ VERSIONED_ASSETS = (
     "data/opportunity_team_index.js",
 )
 CONTENT_HASHED_ASSETS = (
+    "assets/submission-schedule.js",
+    "assets/saved.js",
     "assets/search-retrieval.js",
     "assets/team-matcher.js",
     "assets/team-hybrid.js",

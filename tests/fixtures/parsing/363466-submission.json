@@ -1,0 +1,4096 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354412",
+    "sha256": "61f560d9ddd72f2418e28a733c7996d8179ec5830cc46646f019b5c82ce78582",
+    "retrieved_at": "2026-09-07T18:16:46.866747+00:00"
+  },
+  "annotation_method": "Official PDF cover visually inspected. The Letter of Intent/date/URL row is separate from application-package availability, application deadline and possible start dates. PDF page 38 explicitly states that the LOI is non-binding and optional. Pages 6, 11 and 33 distinguish the $500,000 base Early Career award from optional grant administration support for non-R1 faculty: $50,000 per year/$200,000 total. These are not a universal $700,000 ceiling.",
+  "containers": [
+    {
+      "page": 1,
+      "section": null,
+      "anchor": null,
+      "text": "NATIONAL CENTER FOR EDUCATION RESEARCH \nAssistance Listing Number (ALN): 84.305B \nResearch Training Programs in the \nEducation Sciences \nRequest for Applications \nLetter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit \nApplication Package Available August 6, 2026 https://www.grants.gov/ \nApplication Deadline 11:59:59 p.m. Eastern Time on \nOctober 1, 2026 \nhttps://www.grants.gov/ \nPossible Start Dates July 1 – September 1, 2027 \n \nSee the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on \npreparing and submitting applications through Grants.gov.",
+      "structure": [
+        {
+          "block_id": "pdf-1-1",
+          "kind": "line",
+          "text": "NATIONAL CENTER FOR EDUCATION RESEARCH ",
+          "span": [
+            0,
+            39
+          ],
+          "reading_order": 0,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-2",
+          "kind": "line",
+          "text": "Assistance Listing Number (ALN): 84.305B ",
+          "span": [
+            40,
+            81
+          ],
+          "reading_order": 1,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-3",
+          "kind": "line",
+          "text": "Research Training Programs in the ",
+          "span": [
+            82,
+            116
+          ],
+          "reading_order": 2,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-4",
+          "kind": "line",
+          "text": "Education Sciences ",
+          "span": [
+            117,
+            136
+          ],
+          "reading_order": 3,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-5",
+          "kind": "line",
+          "text": "Request for Applications ",
+          "span": [
+            137,
+            162
+          ],
+          "reading_order": 4,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-6",
+          "kind": "line",
+          "text": "Letter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit ",
+          "span": [
+            163,
+            237
+          ],
+          "reading_order": 5,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-7",
+          "kind": "line",
+          "text": "Application Package Available August 6, 2026 https://www.grants.gov/ ",
+          "span": [
+            238,
+            307
+          ],
+          "reading_order": 6,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-8",
+          "kind": "line",
+          "text": "Application Deadline 11:59:59 p.m. Eastern Time on ",
+          "span": [
+            308,
+            359
+          ],
+          "reading_order": 7,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-9",
+          "kind": "line",
+          "text": "October 1, 2026 ",
+          "span": [
+            360,
+            376
+          ],
+          "reading_order": 8,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-10",
+          "kind": "line",
+          "text": "https://www.grants.gov/ ",
+          "span": [
+            377,
+            401
+          ],
+          "reading_order": 9,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-11",
+          "kind": "line",
+          "text": "Possible Start Dates July 1 – September 1, 2027 ",
+          "span": [
+            402,
+            450
+          ],
+          "reading_order": 10,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-12",
+          "kind": "line",
+          "text": " ",
+          "span": [
+            451,
+            452
+          ],
+          "reading_order": 11,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-13",
+          "kind": "line",
+          "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on ",
+          "span": [
+            453,
+            570
+          ],
+          "reading_order": 12,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-14",
+          "kind": "line",
+          "text": "preparing and submitting applications through Grants.gov.",
+          "span": [
+            571,
+            628
+          ],
+          "reading_order": 13,
+          "page": 1,
+          "repeated_header": false,
+          "toc": false
+        }
+      ],
+      "layout_rows": [
+        {
+          "line": 1,
+          "text": "NATIONAL CENTER FOR EDUCATION RESEARCH",
+          "cells": [
+            {
+              "text": "NATIONAL CENTER FOR EDUCATION RESEARCH",
+              "column_start": 0,
+              "column_end": 38
+            }
+          ]
+        },
+        {
+          "line": 3,
+          "text": "Assistance Listing Number (ALN): 84.305B",
+          "cells": [
+            {
+              "text": "Assistance Listing Number (ALN): 84.305B",
+              "column_start": 0,
+              "column_end": 40
+            }
+          ]
+        },
+        {
+          "line": 4,
+          "text": "Research                                                                                   Training                                                                        Programs in the",
+          "cells": [
+            {
+              "text": "Research",
+              "column_start": 0,
+              "column_end": 8
+            },
+            {
+              "text": "Training",
+              "column_start": 91,
+              "column_end": 99
+            },
+            {
+              "text": "Programs in the",
+              "column_start": 171,
+              "column_end": 186
+            }
+          ]
+        },
+        {
+          "line": 5,
+          "text": "Education Sciences",
+          "cells": [
+            {
+              "text": "Education Sciences",
+              "column_start": 0,
+              "column_end": 18
+            }
+          ]
+        },
+        {
+          "line": 7,
+          "text": "Request for Applications",
+          "cells": [
+            {
+              "text": "Request for Applications",
+              "column_start": 0,
+              "column_end": 24
+            }
+          ]
+        },
+        {
+          "line": 10,
+          "text": "    Letter of Intent                                                                                                                                                                                                                                                                                                                                                                                              September 3, 2026                                                                                                                                                                                                                                                                                                                                                                      https://iesreview.ed.gov/LOI/LOISubmit",
+          "cells": [
+            {
+              "text": "Letter of Intent",
+              "column_start": 4,
+              "column_end": 20
+            },
+            {
+              "text": "September 3, 2026",
+              "column_start": 402,
+              "column_end": 419
+            },
+            {
+              "text": "https://iesreview.ed.gov/LOI/LOISubmit",
+              "column_start": 777,
+              "column_end": 815
+            }
+          ]
+        },
+        {
+          "line": 13,
+          "text": "    Application Package Available                                                                  August 6, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                          https://www.grants.gov/",
+          "cells": [
+            {
+              "text": "Application Package Available",
+              "column_start": 4,
+              "column_end": 33
+            },
+            {
+              "text": "August 6, 2026",
+              "column_start": 99,
+              "column_end": 113
+            },
+            {
+              "text": "https://www.grants.gov/",
+              "column_start": 539,
+              "column_end": 562
+            }
+          ]
+        },
+        {
+          "line": 16,
+          "text": "    Application Deadline                                                                                                                                                                                                                                                                 11:59:59 p.m. Eastern Time on https://www.grants.gov/",
+          "cells": [
+            {
+              "text": "Application Deadline",
+              "column_start": 4,
+              "column_end": 24
+            },
+            {
+              "text": "11:59:59 p.m. Eastern Time on https://www.grants.gov/",
+              "column_start": 281,
+              "column_end": 334
+            }
+          ]
+        },
+        {
+          "line": 17,
+          "text": "                                                                                                                                              October 1, 2026",
+          "cells": [
+            {
+              "text": "October 1, 2026",
+              "column_start": 142,
+              "column_end": 157
+            }
+          ]
+        },
+        {
+          "line": 20,
+          "text": "    Possible Start Dates                                                                                                                                                                                                                                                                                          July 1 –          September 1, 2027",
+          "cells": [
+            {
+              "text": "Possible Start Dates",
+              "column_start": 4,
+              "column_end": 24
+            },
+            {
+              "text": "July 1 –",
+              "column_start": 306,
+              "column_end": 314
+            },
+            {
+              "text": "September 1, 2027",
+              "column_start": 324,
+              "column_end": 341
+            }
+          ]
+        },
+        {
+          "line": 26,
+          "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on",
+          "cells": [
+            {
+              "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on",
+              "column_start": 0,
+              "column_end": 116
+            }
+          ]
+        },
+        {
+          "line": 27,
+          "text": "preparing and submitting applications through Grants.gov.",
+          "cells": [
+            {
+              "text": "preparing and submitting applications through Grants.gov.",
+              "column_start": 0,
+              "column_end": 57
+            }
+          ]
+        }
+      ],
+      "truncated": false,
+      "toc": false
+    },
+    {
+      "page": 38,
+      "section": null,
+      "anchor": null,
+      "text": "Posted August 6, 2026 Institute of Education Sciences | 35 \nnot apply to book chapters, editorials, reviews, or non-peer-reviewed conference proceedings. As the \ndesignated representative for the grantee institution, IES holds the PI responsible for ensuring that \nauthors of publications stemming from the grant comply with this requirement. \nThe author's final manuscript is defined as the final version accepted for journal publication and includes \nall modifications from the peer review process. Submission of accepted manuscripts for public \naccessibility through ERIC must occur immediately upon acceptance for publication. \nThe ERIC website includes a homepage for the Grantee and Online Submission System \n(https://eric.ed.gov/submit/), as well as a Frequently Asked Questions page \n(https://eric.ed.gov/?granteefaq). During the submission process, authors will submit bibliographic \ninformation from the publication, including the Digital Object Identifier (DOI), title, authors’ names and \npersistent identifiers (PIDs such as ORCID), publication date, journal title and International Standard \nSerial Number (ISSN), and associated IES award number(s). \nPublic Access to Data \nIES program officers will review Early Career DSMPs annually to ensure Early Career grantees are on \ntrack for being in compliance with this public access requirement. \n(b) Pre-Registration \nEarly Career grantees must register their studies on a suitable pre-registration platform within the first \nyear of receiving a new award. There are several options for pre-registration including but not limited to \nthe Registry of Efficacy and Effectiveness Studies (REES; https://sreereg.icpsr.umich.edu/sreereg/), the \nOpen Science Framework (OSF; https://osf.io/), ClinicalTrials.gov (https://clinicaltrials.gov/), AEA \nRegistry (https://www.socialscienceregistry.org/), AsPredicted (https://aspredicted.org/), and trial \nregistries in the WHO Registry Network (https://www.who.int/ictrp/network/en/). \n(c) Specific Conditions on Grants \nIES may impose specific conditions on a grant pertinent to the proper implementation of key aspects of \nthe proposed research design or to reaching data access goals, if the grantee is not financially stable, has a \nhistory of unsatisfactory performance, has an unsatisfactory financial or other management system, has \nnot fulfilled the conditions of a prior grant, is not compliant with a statutory or regulatory requirement or \na requirement of this RFA or is otherwise not responsible. \n(d) Attendance at the Annual IES Principal Investigators Meeting \nThe PI is required to attend one meeting each year (for up to 3 days) in Washington, DC with other IES \ngrantees and IES staff. The project’s budget should include this meeting. Should the PI not be able to \nattend the meeting, they may designate another person who is key personnel on the research team to \nattend. \nC. Overview of Application and Scientific Peer Review Process \n1. Submitting a Letter of Intent \nLetters of intent are submitted online at the IES Peer Review Information Management Online (PRIMO) \nsystem (https://iesreview.ed.gov/LOI/LOISubmit). Select the letter of intent form for the grant program \nunder which you plan to submit your application. The online submission form contains fields for each of \nthe content areas listed below. Use these fields to provide the following information. The project \ndescription should be single-spaced and is recommended to be no more than one page (about 3,500 \ncharacters). \nThe letter of intent is non-binding and optional but strongly recommended. IES staff use the information \nin letters of intent to identify the expertise needed for the scientific peer review panels and to secure a \nsufficient number of reviewers to handle the anticipated number of applications.",
+      "structure": [
+        {
+          "block_id": "pdf-38-1",
+          "kind": "line",
+          "text": "Posted August 6, 2026 Institute of Education Sciences | 35 ",
+          "span": [
+            0,
+            59
+          ],
+          "reading_order": 0,
+          "page": 38,
+          "repeated_header": true,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-2",
+          "kind": "line",
+          "text": "not apply to book chapters, editorials, reviews, or non-peer-reviewed conference proceedings. As the ",
+          "span": [
+            60,
+            161
+          ],
+          "reading_order": 1,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-3",
+          "kind": "line",
+          "text": "designated representative for the grantee institution, IES holds the PI responsible for ensuring that ",
+          "span": [
+            162,
+            264
+          ],
+          "reading_order": 2,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-4",
+          "kind": "line",
+          "text": "authors of publications stemming from the grant comply with this requirement. ",
+          "span": [
+            265,
+            343
+          ],
+          "reading_order": 3,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-5",
+          "kind": "line",
+          "text": "The author's final manuscript is defined as the final version accepted for journal publication and includes ",
+          "span": [
+            344,
+            452
+          ],
+          "reading_order": 4,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-6",
+          "kind": "line",
+          "text": "all modifications from the peer review process. Submission of accepted manuscripts for public ",
+          "span": [
+            453,
+            547
+          ],
+          "reading_order": 5,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-7",
+          "kind": "line",
+          "text": "accessibility through ERIC must occur immediately upon acceptance for publication. ",
+          "span": [
+            548,
+            631
+          ],
+          "reading_order": 6,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-8",
+          "kind": "line",
+          "text": "The ERIC website includes a homepage for the Grantee and Online Submission System ",
+          "span": [
+            632,
+            714
+          ],
+          "reading_order": 7,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-9",
+          "kind": "line",
+          "text": "(https://eric.ed.gov/submit/), as well as a Frequently Asked Questions page ",
+          "span": [
+            715,
+            791
+          ],
+          "reading_order": 8,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-10",
+          "kind": "line",
+          "text": "(https://eric.ed.gov/?granteefaq). During the submission process, authors will submit bibliographic ",
+          "span": [
+            792,
+            892
+          ],
+          "reading_order": 9,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-11",
+          "kind": "line",
+          "text": "information from the publication, including the Digital Object Identifier (DOI), title, authors’ names and ",
+          "span": [
+            893,
+            1000
+          ],
+          "reading_order": 10,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-12",
+          "kind": "line",
+          "text": "persistent identifiers (PIDs such as ORCID), publication date, journal title and International Standard ",
+          "span": [
+            1001,
+            1105
+          ],
+          "reading_order": 11,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-13",
+          "kind": "line",
+          "text": "Serial Number (ISSN), and associated IES award number(s). ",
+          "span": [
+            1106,
+            1164
+          ],
+          "reading_order": 12,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-14",
+          "kind": "line",
+          "text": "Public Access to Data ",
+          "span": [
+            1165,
+            1187
+          ],
+          "reading_order": 13,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-15",
+          "kind": "line",
+          "text": "IES program officers will review Early Career DSMPs annually to ensure Early Career grantees are on ",
+          "span": [
+            1188,
+            1288
+          ],
+          "reading_order": 14,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-16",
+          "kind": "line",
+          "text": "track for being in compliance with this public access requirement. ",
+          "span": [
+            1289,
+            1356
+          ],
+          "reading_order": 15,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-17",
+          "kind": "line",
+          "text": "(b) Pre-Registration ",
+          "span": [
+            1357,
+            1378
+          ],
+          "reading_order": 16,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-18",
+          "kind": "line",
+          "text": "Early Career grantees must register their studies on a suitable pre-registration platform within the first ",
+          "span": [
+            1379,
+            1486
+          ],
+          "reading_order": 17,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-19",
+          "kind": "line",
+          "text": "year of receiving a new award. There are several options for pre-registration including but not limited to ",
+          "span": [
+            1487,
+            1594
+          ],
+          "reading_order": 18,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-20",
+          "kind": "line",
+          "text": "the Registry of Efficacy and Effectiveness Studies (REES; https://sreereg.icpsr.umich.edu/sreereg/), the ",
+          "span": [
+            1595,
+            1700
+          ],
+          "reading_order": 19,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-21",
+          "kind": "line",
+          "text": "Open Science Framework (OSF; https://osf.io/), ClinicalTrials.gov (https://clinicaltrials.gov/), AEA ",
+          "span": [
+            1701,
+            1802
+          ],
+          "reading_order": 20,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-22",
+          "kind": "line",
+          "text": "Registry (https://www.socialscienceregistry.org/), AsPredicted (https://aspredicted.org/), and trial ",
+          "span": [
+            1803,
+            1904
+          ],
+          "reading_order": 21,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-23",
+          "kind": "line",
+          "text": "registries in the WHO Registry Network (https://www.who.int/ictrp/network/en/). ",
+          "span": [
+            1905,
+            1985
+          ],
+          "reading_order": 22,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-24",
+          "kind": "line",
+          "text": "(c) Specific Conditions on Grants ",
+          "span": [
+            1986,
+            2020
+          ],
+          "reading_order": 23,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-25",
+          "kind": "line",
+          "text": "IES may impose specific conditions on a grant pertinent to the proper implementation of key aspects of ",
+          "span": [
+            2021,
+            2124
+          ],
+          "reading_order": 24,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-26",
+          "kind": "line",
+          "text": "the proposed research design or to reaching data access goals, if the grantee is not financially stable, has a ",
+          "span": [
+            2125,
+            2236
+          ],
+          "reading_order": 25,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-27",
+          "kind": "line",
+          "text": "history of unsatisfactory performance, has an unsatisfactory financial or other management system, has ",
+          "span": [
+            2237,
+            2340
+          ],
+          "reading_order": 26,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-28",
+          "kind": "line",
+          "text": "not fulfilled the conditions of a prior grant, is not compliant with a statutory or regulatory requirement or ",
+          "span": [
+            2341,
+            2451
+          ],
+          "reading_order": 27,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-29",
+          "kind": "line",
+          "text": "a requirement of this RFA or is otherwise not responsible. ",
+          "span": [
+            2452,
+            2511
+          ],
+          "reading_order": 28,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-30",
+          "kind": "line",
+          "text": "(d) Attendance at the Annual IES Principal Investigators Meeting ",
+          "span": [
+            2512,
+            2577
+          ],
+          "reading_order": 29,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-31",
+          "kind": "line",
+          "text": "The PI is required to attend one meeting each year (for up to 3 days) in Washington, DC with other IES ",
+          "span": [
+            2578,
+            2681
+          ],
+          "reading_order": 30,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-32",
+          "kind": "line",
+          "text": "grantees and IES staff. The project’s budget should include this meeting. Should the PI not be able to ",
+          "span": [
+            2682,
+            2785
+          ],
+          "reading_order": 31,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-33",
+          "kind": "line",
+          "text": "attend the meeting, they may designate another person who is key personnel on the research team to ",
+          "span": [
+            2786,
+            2885
+          ],
+          "reading_order": 32,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-34",
+          "kind": "line",
+          "text": "attend. ",
+          "span": [
+            2886,
+            2894
+          ],
+          "reading_order": 33,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-35",
+          "kind": "line",
+          "text": "C. Overview of Application and Scientific Peer Review Process ",
+          "span": [
+            2895,
+            2957
+          ],
+          "reading_order": 34,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-36",
+          "kind": "line",
+          "text": "1. Submitting a Letter of Intent ",
+          "span": [
+            2958,
+            2991
+          ],
+          "reading_order": 35,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-37",
+          "kind": "line",
+          "text": "Letters of intent are submitted online at the IES Peer Review Information Management Online (PRIMO) ",
+          "span": [
+            2992,
+            3092
+          ],
+          "reading_order": 36,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-38",
+          "kind": "line",
+          "text": "system (https://iesreview.ed.gov/LOI/LOISubmit). Select the letter of intent form for the grant program ",
+          "span": [
+            3093,
+            3197
+          ],
+          "reading_order": 37,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-39",
+          "kind": "line",
+          "text": "under which you plan to submit your application. The online submission form contains fields for each of ",
+          "span": [
+            3198,
+            3302
+          ],
+          "reading_order": 38,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-40",
+          "kind": "line",
+          "text": "the content areas listed below. Use these fields to provide the following information. The project ",
+          "span": [
+            3303,
+            3402
+          ],
+          "reading_order": 39,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-41",
+          "kind": "line",
+          "text": "description should be single-spaced and is recommended to be no more than one page (about 3,500 ",
+          "span": [
+            3403,
+            3499
+          ],
+          "reading_order": 40,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-42",
+          "kind": "line",
+          "text": "characters). ",
+          "span": [
+            3500,
+            3513
+          ],
+          "reading_order": 41,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-43",
+          "kind": "line",
+          "text": "The letter of intent is non-binding and optional but strongly recommended. IES staff use the information ",
+          "span": [
+            3514,
+            3619
+          ],
+          "reading_order": 42,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-44",
+          "kind": "line",
+          "text": "in letters of intent to identify the expertise needed for the scientific peer review panels and to secure a ",
+          "span": [
+            3620,
+            3728
+          ],
+          "reading_order": 43,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-38-45",
+          "kind": "line",
+          "text": "sufficient number of reviewers to handle the anticipated number of applications.",
+          "span": [
+            3729,
+            3809
+          ],
+          "reading_order": 44,
+          "page": 38,
+          "repeated_header": false,
+          "toc": false
+        }
+      ],
+      "layout_rows": [
+        {
+          "line": 1,
+          "text": "not apply to book chapters, editorials, reviews, or non-peer-reviewed conference proceedings. As the",
+          "cells": [
+            {
+              "text": "not apply to book chapters, editorials, reviews, or non-peer-reviewed conference proceedings. As the",
+              "column_start": 0,
+              "column_end": 100
+            }
+          ]
+        },
+        {
+          "line": 2,
+          "text": "designated representative for the grantee institution, IES holds the PI          responsible for ensuring that",
+          "cells": [
+            {
+              "text": "designated representative for the grantee institution, IES holds the PI",
+              "column_start": 0,
+              "column_end": 71
+            },
+            {
+              "text": "responsible for ensuring that",
+              "column_start": 81,
+              "column_end": 110
+            }
+          ]
+        },
+        {
+          "line": 3,
+          "text": "authors of publications stemming from the grant comply with this requirement.",
+          "cells": [
+            {
+              "text": "authors of publications stemming from the grant comply with this requirement.",
+              "column_start": 0,
+              "column_end": 77
+            }
+          ]
+        },
+        {
+          "line": 5,
+          "text": "The author's final manuscript is defined as the final version accepted for journal publication and includes",
+          "cells": [
+            {
+              "text": "The author's final manuscript is defined as the final version accepted for journal publication and includes",
+              "column_start": 0,
+              "column_end": 107
+            }
+          ]
+        },
+        {
+          "line": 6,
+          "text": "all modifications from the peer review process. Submission of accepted manuscripts for public",
+          "cells": [
+            {
+              "text": "all modifications from the peer review process. Submission of accepted manuscripts for public",
+              "column_start": 0,
+              "column_end": 93
+            }
+          ]
+        },
+        {
+          "line": 7,
+          "text": "accessibility through ERIC must occur immediately upon acceptance for publication         .",
+          "cells": [
+            {
+              "text": "accessibility through ERIC must occur immediately upon acceptance for publication",
+              "column_start": 0,
+              "column_end": 81
+            },
+            {
+              "text": ".",
+              "column_start": 90,
+              "column_end": 91
+            }
+          ]
+        },
+        {
+          "line": 9,
+          "text": "The ERIC website includes a homepage for the Grantee and Online Submission System",
+          "cells": [
+            {
+              "text": "The ERIC website includes a homepage for the Grantee and Online Submission System",
+              "column_start": 0,
+              "column_end": 81
+            }
+          ]
+        },
+        {
+          "line": 10,
+          "text": "(https://eric.ed.gov/submit/), as well as a Frequently Asked Questions page",
+          "cells": [
+            {
+              "text": "(https://eric.ed.gov/submit/), as well as a Frequently Asked Questions page",
+              "column_start": 0,
+              "column_end": 75
+            }
+          ]
+        },
+        {
+          "line": 11,
+          "text": "(https://eric.ed.gov/?granteefaq). During the submission process, authors will submit bibliographic",
+          "cells": [
+            {
+              "text": "(https://eric.ed.gov/?granteefaq). During the submission process, authors will submit bibliographic",
+              "column_start": 0,
+              "column_end": 99
+            }
+          ]
+        },
+        {
+          "line": 12,
+          "text": "information from the publication, including the Digital Object Identifier (DOI), title, authors’ names and",
+          "cells": [
+            {
+              "text": "information from the publication, including the Digital Object Identifier (DOI), title, authors’ names and",
+              "column_start": 0,
+              "column_end": 106
+            }
+          ]
+        },
+        {
+          "line": 13,
+          "text": "persistent identifiers (PIDs such as ORCID                                                                               ), publication date, journal title and International Standard",
+          "cells": [
+            {
+              "text": "persistent identifiers (PIDs such as ORCID",
+              "column_start": 0,
+              "column_end": 42
+            },
+            {
+              "text": "), publication date, journal title and International Standard",
+              "column_start": 121,
+              "column_end": 182
+            }
+          ]
+        },
+        {
+          "line": 14,
+          "text": "Serial Number (ISSN), and associated IES award number(s).",
+          "cells": [
+            {
+              "text": "Serial Number (ISSN), and associated IES award number(s).",
+              "column_start": 0,
+              "column_end": 57
+            }
+          ]
+        },
+        {
+          "line": 16,
+          "text": "Public Access to Data",
+          "cells": [
+            {
+              "text": "Public Access to Data",
+              "column_start": 0,
+              "column_end": 21
+            }
+          ]
+        },
+        {
+          "line": 17,
+          "text": "IES program officers will review Early Career          DSMPs annually to ensure Early Career           grantees are on",
+          "cells": [
+            {
+              "text": "IES program officers will review Early Career",
+              "column_start": 0,
+              "column_end": 45
+            },
+            {
+              "text": "DSMPs annually to ensure Early Career",
+              "column_start": 55,
+              "column_end": 92
+            },
+            {
+              "text": "grantees are on",
+              "column_start": 103,
+              "column_end": 118
+            }
+          ]
+        },
+        {
+          "line": 18,
+          "text": "track for being in compliance with this public access requirement.",
+          "cells": [
+            {
+              "text": "track for being in compliance with this public access requirement.",
+              "column_start": 0,
+              "column_end": 66
+            }
+          ]
+        },
+        {
+          "line": 20,
+          "text": "(b) Pre-Registration",
+          "cells": [
+            {
+              "text": "(b) Pre-Registration",
+              "column_start": 0,
+              "column_end": 20
+            }
+          ]
+        },
+        {
+          "line": 21,
+          "text": "Early Career grantees must register their studies on a suitable pre-                   registration platform within the first",
+          "cells": [
+            {
+              "text": "Early Career grantees must register their studies on a suitable pre-",
+              "column_start": 0,
+              "column_end": 68
+            },
+            {
+              "text": "registration platform within the first",
+              "column_start": 87,
+              "column_end": 125
+            }
+          ]
+        },
+        {
+          "line": 22,
+          "text": "year of receiving a new award. There are several options for pre-registration including but not limited to",
+          "cells": [
+            {
+              "text": "year of receiving a new award. There are several options for pre-registration including but not limited to",
+              "column_start": 0,
+              "column_end": 106
+            }
+          ]
+        },
+        {
+          "line": 23,
+          "text": "the Registry of Efficacy and Effectiveness Studies (REES; https://sreereg.icpsr.umich.edu/sreereg/          ), the",
+          "cells": [
+            {
+              "text": "the Registry of Efficacy and Effectiveness Studies (REES; https://sreereg.icpsr.umich.edu/sreereg/",
+              "column_start": 0,
+              "column_end": 98
+            },
+            {
+              "text": "), the",
+              "column_start": 108,
+              "column_end": 114
+            }
+          ]
+        },
+        {
+          "line": 24,
+          "text": "Open Science Framework (OSF; https://osf.io/), ClinicalTrials.gov (                             https://clinicaltrials.gov/), AEA",
+          "cells": [
+            {
+              "text": "Open Science Framework (OSF; https://osf.io/), ClinicalTrials.gov (",
+              "column_start": 0,
+              "column_end": 67
+            },
+            {
+              "text": "https://clinicaltrials.gov/), AEA",
+              "column_start": 96,
+              "column_end": 129
+            }
+          ]
+        },
+        {
+          "line": 25,
+          "text": "Registry (https://www.socialscienceregistry.org/), AsPredicted (https://aspredicted.org/), and trial",
+          "cells": [
+            {
+              "text": "Registry (https://www.socialscienceregistry.org/), AsPredicted (https://aspredicted.org/), and trial",
+              "column_start": 0,
+              "column_end": 100
+            }
+          ]
+        },
+        {
+          "line": 26,
+          "text": "registries in the WHO Registry Network (https://www.who.int/ictrp/network/en/).",
+          "cells": [
+            {
+              "text": "registries in the WHO Registry Network (https://www.who.int/ictrp/network/en/).",
+              "column_start": 0,
+              "column_end": 79
+            }
+          ]
+        },
+        {
+          "line": 28,
+          "text": "(c) Specific                        Conditions on Grants",
+          "cells": [
+            {
+              "text": "(c) Specific",
+              "column_start": 0,
+              "column_end": 12
+            },
+            {
+              "text": "Conditions on Grants",
+              "column_start": 36,
+              "column_end": 56
+            }
+          ]
+        },
+        {
+          "line": 29,
+          "text": "IES may impose specific           conditions on a grant pertinent to the proper implementation of key aspects of",
+          "cells": [
+            {
+              "text": "IES may impose specific",
+              "column_start": 0,
+              "column_end": 23
+            },
+            {
+              "text": "conditions on a grant pertinent to the proper implementation of key aspects of",
+              "column_start": 34,
+              "column_end": 112
+            }
+          ]
+        },
+        {
+          "line": 30,
+          "text": "the proposed research design or to reaching data access goals,                                                   if the grantee is not financially stable, has a",
+          "cells": [
+            {
+              "text": "the proposed research design or to reaching data access goals,",
+              "column_start": 0,
+              "column_end": 62
+            },
+            {
+              "text": "if the grantee is not financially stable, has a",
+              "column_start": 113,
+              "column_end": 160
+            }
+          ]
+        },
+        {
+          "line": 31,
+          "text": "history of unsatisfactory performance, has an unsatisfactory financial or other management system, has",
+          "cells": [
+            {
+              "text": "history of unsatisfactory performance, has an unsatisfactory financial or other management system, has",
+              "column_start": 0,
+              "column_end": 102
+            }
+          ]
+        },
+        {
+          "line": 32,
+          "text": "not fulfilled the conditions of a prior grant, is not compliant with a statutory or regulatory requirement or",
+          "cells": [
+            {
+              "text": "not fulfilled the conditions of a prior grant, is not compliant with a statutory or regulatory requirement or",
+              "column_start": 0,
+              "column_end": 109
+            }
+          ]
+        },
+        {
+          "line": 33,
+          "text": "a requirement of this RFA or is otherwise not responsible          .",
+          "cells": [
+            {
+              "text": "a requirement of this RFA or is otherwise not responsible",
+              "column_start": 0,
+              "column_end": 57
+            },
+            {
+              "text": ".",
+              "column_start": 67,
+              "column_end": 68
+            }
+          ]
+        },
+        {
+          "line": 35,
+          "text": "(d) Attendance at the Annual IES Principal Investigators Meeting",
+          "cells": [
+            {
+              "text": "(d) Attendance at the Annual IES Principal Investigators Meeting",
+              "column_start": 0,
+              "column_end": 64
+            }
+          ]
+        },
+        {
+          "line": 36,
+          "text": "The PI is required to attend one meeting each year (for up to 3 days) in Washington, DC with other IES",
+          "cells": [
+            {
+              "text": "The PI is required to attend one meeting each year (for up to 3 days) in Washington, DC with other IES",
+              "column_start": 0,
+              "column_end": 102
+            }
+          ]
+        },
+        {
+          "line": 37,
+          "text": "grantees and IES staff. The project’s budget should include this meeting. Should the PI not be able to",
+          "cells": [
+            {
+              "text": "grantees and IES staff. The project’s budget should include this meeting. Should the PI not be able to",
+              "column_start": 0,
+              "column_end": 102
+            }
+          ]
+        },
+        {
+          "line": 38,
+          "text": "attend the meeting, they may designate another person who is key personnel on the research team to",
+          "cells": [
+            {
+              "text": "attend the meeting, they may designate another person who is key personnel on the research team to",
+              "column_start": 0,
+              "column_end": 98
+            }
+          ]
+        },
+        {
+          "line": 39,
+          "text": "attend.",
+          "cells": [
+            {
+              "text": "attend.",
+              "column_start": 0,
+              "column_end": 7
+            }
+          ]
+        },
+        {
+          "line": 40,
+          "text": "C. Overview of Application and Scientific Peer Review Process",
+          "cells": [
+            {
+              "text": "C. Overview of Application and Scientific Peer Review Process",
+              "column_start": 0,
+              "column_end": 61
+            }
+          ]
+        },
+        {
+          "line": 41,
+          "text": "1. Submitting a Letter of Intent",
+          "cells": [
+            {
+              "text": "1. Submitting a Letter of Intent",
+              "column_start": 0,
+              "column_end": 32
+            }
+          ]
+        },
+        {
+          "line": 42,
+          "text": "Letters of intent are submitted online at           the IES Peer Review Information Management Online (PRIMO)",
+          "cells": [
+            {
+              "text": "Letters of intent are submitted online at",
+              "column_start": 0,
+              "column_end": 41
+            },
+            {
+              "text": "the IES Peer Review Information Management Online (PRIMO)",
+              "column_start": 52,
+              "column_end": 109
+            }
+          ]
+        },
+        {
+          "line": 43,
+          "text": "system (https://iesreview.ed.gov/LOI/LOISubmit). Select the l                                       etter of intent form for the grant program",
+          "cells": [
+            {
+              "text": "system (https://iesreview.ed.gov/LOI/LOISubmit). Select the l",
+              "column_start": 0,
+              "column_end": 61
+            },
+            {
+              "text": "etter of intent form for the grant program",
+              "column_start": 100,
+              "column_end": 142
+            }
+          ]
+        },
+        {
+          "line": 44,
+          "text": "under which you plan to submit your application. The online submission form contains fields for each of",
+          "cells": [
+            {
+              "text": "under which you plan to submit your application. The online submission form contains fields for each of",
+              "column_start": 0,
+              "column_end": 103
+            }
+          ]
+        },
+        {
+          "line": 45,
+          "text": "the content areas listed below. Use these fields to provide the following                              information. The project",
+          "cells": [
+            {
+              "text": "the content areas listed below. Use these fields to provide the following",
+              "column_start": 0,
+              "column_end": 73
+            },
+            {
+              "text": "information. The project",
+              "column_start": 103,
+              "column_end": 127
+            }
+          ]
+        },
+        {
+          "line": 46,
+          "text": "description should be single-spaced and                is recommended to be no morethan one page (about 3,500",
+          "cells": [
+            {
+              "text": "description should be single-spaced and",
+              "column_start": 0,
+              "column_end": 39
+            },
+            {
+              "text": "is recommended to be no morethan one page (about 3,500",
+              "column_start": 55,
+              "column_end": 109
+            }
+          ]
+        },
+        {
+          "line": 47,
+          "text": "characters).",
+          "cells": [
+            {
+              "text": "characters).",
+              "column_start": 0,
+              "column_end": 12
+            }
+          ]
+        },
+        {
+          "line": 49,
+          "text": "The letter of intent is non                                              -binding and optional but strongly recommended. IES staff use the information",
+          "cells": [
+            {
+              "text": "The letter of intent is non",
+              "column_start": 0,
+              "column_end": 27
+            },
+            {
+              "text": "-binding and optional but strongly recommended. IES staff use the information",
+              "column_start": 73,
+              "column_end": 150
+            }
+          ]
+        },
+        {
+          "line": 50,
+          "text": "in letters of intent to identify the expertise needed for the scientific                                                   peer review panels and to secure a",
+          "cells": [
+            {
+              "text": "in letters of intent to identify the expertise needed for the scientific",
+              "column_start": 0,
+              "column_end": 72
+            },
+            {
+              "text": "peer review panels and to secure a",
+              "column_start": 123,
+              "column_end": 157
+            }
+          ]
+        },
+        {
+          "line": 51,
+          "text": "sufficient number of reviewers to handle the anticipated number of applications.",
+          "cells": [
+            {
+              "text": "sufficient number of reviewers to handle the anticipated number of applications.",
+              "column_start": 0,
+              "column_end": 80
+            }
+          ]
+        },
+        {
+          "line": 54,
+          "text": "Posted August 6, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 Institute of Education Sciences | 35",
+          "cells": [
+            {
+              "text": "Posted August 6, 2026",
+              "column_start": 0,
+              "column_end": 21
+            },
+            {
+              "text": "Institute of Education Sciences | 35",
+              "column_start": 918,
+              "column_end": 954
+            }
+          ]
+        }
+      ],
+      "truncated": false,
+      "toc": false
+    }
+  ],
+  "expected": [
+    {
+      "deadline_kind": "letter_of_intent",
+      "date": "2026-09-03",
+      "required": false,
+      "time": null,
+      "timezone": null
+    },
+    {
+      "deadline_kind": "application",
+      "date": "2026-10-01",
+      "required": null,
+      "time": "11:59:59 p.m.",
+      "timezone": "Eastern"
+    }
+  ],
+  "money_containers": [
+    {
+      "page": 6,
+      "section": null,
+      "anchor": null,
+      "text": "Posted August 6, 2026 Institute of Education Sciences | 3 \n• Adheres to all page limit maximums for the training program narrative and appendices. IES will \nremove any pages above the maximum before forwarding an application for scientific peer review \n• Includes all required appendices (see Part III.C) \no Appendix A: Engagement and Dissemination Plan \no Appendix B: Response to Reviewers (Resubmissions only) \no Appendix D: Letters of Agreement \no Appendix E: Data Sharing and Management Plan (Early Career applications only) \no Appendix F: Alignment with SEER Standards \n(c) Responsiveness \n• Meets the general requirements for the selected training program (see Part II) \n• Meets the training program narrative requirements for the selected training program (see Part II) \nD. Changes in the FY 2027 RFA \nEveryone involved in preparing and submitting an application, whether new or revised, should carefully \nread all relevant parts of this RFA. Major changes to the Research Training Programs in the Education \nSciences for FY 2027 are listed below and described fully in the relevant sections of the RFA. \n• Training Programs. For FY 2027, NCER is accepting applications under two programs : Early \nCareer and Methods Training. \n• Guidance on Use of Artificial Intelligence (AI). IES added guidance on the use of AI in \npreparing grant applications (see Part III.A). The use of artificial intelligence (AI) in the \ndevelopment of grant applications is allowable. Applicants submitting a grant application must \ncertify on the standard application form to the “true, complete, and accurate” nature of all of the \ncontents of their grant application, regardless of whether it is generated by AI \n(https://www.federalregister.gov/d/2025-16571). \n• Changes to Appendices. \nο IES added a new appendix, Alignment with SEER Principles , that is required for all \napplications. Appendix F must include information about how the project aligns with the \ncurrent Standards for Excellence in Education Research (SEER; https://ies.ed.gov/usework/standards-excellence-education-research-seer). \nο Appendix C, Summary of Research and Training Projects, is no longer required. Instead, \nAppendix C is optional and should be used to include supplemental materials. \nApplications to the Methods Training program should describe prior methods training \nprojects in the personnel section of the training program narrative. \nο The page limit for Supplemental Materials (now Appendix C) has been reduced from 10 \npages to 5 pages. \n• Pre-Award Requirements. IES added two new pre-award requirements. \nο If your application is being considered for funding, IES program officers will review the \ncompleteness and acceptability of the information in Appendix F: Alignment with SEER \nStandards prior to making the new award. \nο All recipients of IES research and research training funds are required to be in \ncompliance with the research security requirements described in Part IV prior to \nreceiving IES funding. \n• Early Career PI Eligibility. There are several changes to the eligibility criteria for Early Career \napplicant institutions and PIs. (1) The eligibility window was extended, such that PIs must have \ncompleted a doctoral degree no earlier than April 1, 2019 and no later than the start of the award \nperiod. (2) PIs who are faculty at academic institutions must not have received tenure from their \ninstitution by the application submission deadline. \n• Early Career Research Project Types. NCER added a requirement to specify a project type \nthat describes the research you propose to do. Applicants may propose to conduct Measurement, \nExploration, or Development and Innovation projects. \n• Early Career Award Limits. The maximum award for Early Career grants has been increased \nto $500,000. Additionally, Early Career PIs at institutions that are not R1 institutions may",
+      "structure": [
+        {
+          "block_id": "pdf-6-1",
+          "kind": "line",
+          "text": "Posted August 6, 2026 Institute of Education Sciences | 3 ",
+          "span": [
+            0,
+            58
+          ],
+          "reading_order": 0,
+          "page": 6,
+          "repeated_header": true,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-2",
+          "kind": "line",
+          "text": "• Adheres to all page limit maximums for the training program narrative and appendices. IES will ",
+          "span": [
+            59,
+            156
+          ],
+          "reading_order": 1,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-3",
+          "kind": "line",
+          "text": "remove any pages above the maximum before forwarding an application for scientific peer review ",
+          "span": [
+            157,
+            252
+          ],
+          "reading_order": 2,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-4",
+          "kind": "line",
+          "text": "• Includes all required appendices (see Part III.C) ",
+          "span": [
+            253,
+            305
+          ],
+          "reading_order": 3,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-5",
+          "kind": "line",
+          "text": "o Appendix A: Engagement and Dissemination Plan ",
+          "span": [
+            306,
+            354
+          ],
+          "reading_order": 4,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-6",
+          "kind": "line",
+          "text": "o Appendix B: Response to Reviewers (Resubmissions only) ",
+          "span": [
+            355,
+            412
+          ],
+          "reading_order": 5,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-7",
+          "kind": "line",
+          "text": "o Appendix D: Letters of Agreement ",
+          "span": [
+            413,
+            448
+          ],
+          "reading_order": 6,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-8",
+          "kind": "line",
+          "text": "o Appendix E: Data Sharing and Management Plan (Early Career applications only) ",
+          "span": [
+            449,
+            529
+          ],
+          "reading_order": 7,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-9",
+          "kind": "line",
+          "text": "o Appendix F: Alignment with SEER Standards ",
+          "span": [
+            530,
+            574
+          ],
+          "reading_order": 8,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-10",
+          "kind": "line",
+          "text": "(c) Responsiveness ",
+          "span": [
+            575,
+            594
+          ],
+          "reading_order": 9,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-11",
+          "kind": "line",
+          "text": "• Meets the general requirements for the selected training program (see Part II) ",
+          "span": [
+            595,
+            676
+          ],
+          "reading_order": 10,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-12",
+          "kind": "line",
+          "text": "• Meets the training program narrative requirements for the selected training program (see Part II) ",
+          "span": [
+            677,
+            777
+          ],
+          "reading_order": 11,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-13",
+          "kind": "line",
+          "text": "D. Changes in the FY 2027 RFA ",
+          "span": [
+            778,
+            808
+          ],
+          "reading_order": 12,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-14",
+          "kind": "line",
+          "text": "Everyone involved in preparing and submitting an application, whether new or revised, should carefully ",
+          "span": [
+            809,
+            912
+          ],
+          "reading_order": 13,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-15",
+          "kind": "line",
+          "text": "read all relevant parts of this RFA. Major changes to the Research Training Programs in the Education ",
+          "span": [
+            913,
+            1015
+          ],
+          "reading_order": 14,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-16",
+          "kind": "line",
+          "text": "Sciences for FY 2027 are listed below and described fully in the relevant sections of the RFA. ",
+          "span": [
+            1016,
+            1111
+          ],
+          "reading_order": 15,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-17",
+          "kind": "line",
+          "text": "• Training Programs. For FY 2027, NCER is accepting applications under two programs : Early ",
+          "span": [
+            1112,
+            1204
+          ],
+          "reading_order": 16,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-18",
+          "kind": "line",
+          "text": "Career and Methods Training. ",
+          "span": [
+            1205,
+            1234
+          ],
+          "reading_order": 17,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-19",
+          "kind": "line",
+          "text": "• Guidance on Use of Artificial Intelligence (AI). IES added guidance on the use of AI in ",
+          "span": [
+            1235,
+            1325
+          ],
+          "reading_order": 18,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-20",
+          "kind": "line",
+          "text": "preparing grant applications (see Part III.A). The use of artificial intelligence (AI) in the ",
+          "span": [
+            1326,
+            1420
+          ],
+          "reading_order": 19,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-21",
+          "kind": "line",
+          "text": "development of grant applications is allowable. Applicants submitting a grant application must ",
+          "span": [
+            1421,
+            1516
+          ],
+          "reading_order": 20,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-22",
+          "kind": "line",
+          "text": "certify on the standard application form to the “true, complete, and accurate” nature of all of the ",
+          "span": [
+            1517,
+            1617
+          ],
+          "reading_order": 21,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-23",
+          "kind": "line",
+          "text": "contents of their grant application, regardless of whether it is generated by AI ",
+          "span": [
+            1618,
+            1699
+          ],
+          "reading_order": 22,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-24",
+          "kind": "line",
+          "text": "(https://www.federalregister.gov/d/2025-16571). ",
+          "span": [
+            1700,
+            1748
+          ],
+          "reading_order": 23,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-25",
+          "kind": "line",
+          "text": "• Changes to Appendices. ",
+          "span": [
+            1749,
+            1774
+          ],
+          "reading_order": 24,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-26",
+          "kind": "line",
+          "text": "ο IES added a new appendix, Alignment with SEER Principles , that is required for all ",
+          "span": [
+            1775,
+            1861
+          ],
+          "reading_order": 25,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-27",
+          "kind": "line",
+          "text": "applications. Appendix F must include information about how the project aligns with the ",
+          "span": [
+            1862,
+            1950
+          ],
+          "reading_order": 26,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-28",
+          "kind": "line",
+          "text": "current Standards for Excellence in Education Research (SEER; https://ies.ed.gov/usework/standards-excellence-education-research-seer). ",
+          "span": [
+            1951,
+            2087
+          ],
+          "reading_order": 27,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-29",
+          "kind": "line",
+          "text": "ο Appendix C, Summary of Research and Training Projects, is no longer required. Instead, ",
+          "span": [
+            2088,
+            2177
+          ],
+          "reading_order": 28,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-30",
+          "kind": "line",
+          "text": "Appendix C is optional and should be used to include supplemental materials. ",
+          "span": [
+            2178,
+            2255
+          ],
+          "reading_order": 29,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-31",
+          "kind": "line",
+          "text": "Applications to the Methods Training program should describe prior methods training ",
+          "span": [
+            2256,
+            2340
+          ],
+          "reading_order": 30,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-32",
+          "kind": "line",
+          "text": "projects in the personnel section of the training program narrative. ",
+          "span": [
+            2341,
+            2410
+          ],
+          "reading_order": 31,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-33",
+          "kind": "line",
+          "text": "ο The page limit for Supplemental Materials (now Appendix C) has been reduced from 10 ",
+          "span": [
+            2411,
+            2497
+          ],
+          "reading_order": 32,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-34",
+          "kind": "line",
+          "text": "pages to 5 pages. ",
+          "span": [
+            2498,
+            2516
+          ],
+          "reading_order": 33,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-35",
+          "kind": "line",
+          "text": "• Pre-Award Requirements. IES added two new pre-award requirements. ",
+          "span": [
+            2517,
+            2585
+          ],
+          "reading_order": 34,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-36",
+          "kind": "line",
+          "text": "ο If your application is being considered for funding, IES program officers will review the ",
+          "span": [
+            2586,
+            2678
+          ],
+          "reading_order": 35,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-37",
+          "kind": "line",
+          "text": "completeness and acceptability of the information in Appendix F: Alignment with SEER ",
+          "span": [
+            2679,
+            2764
+          ],
+          "reading_order": 36,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-38",
+          "kind": "line",
+          "text": "Standards prior to making the new award. ",
+          "span": [
+            2765,
+            2806
+          ],
+          "reading_order": 37,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-39",
+          "kind": "line",
+          "text": "ο All recipients of IES research and research training funds are required to be in ",
+          "span": [
+            2807,
+            2890
+          ],
+          "reading_order": 38,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-40",
+          "kind": "line",
+          "text": "compliance with the research security requirements described in Part IV prior to ",
+          "span": [
+            2891,
+            2972
+          ],
+          "reading_order": 39,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-41",
+          "kind": "line",
+          "text": "receiving IES funding. ",
+          "span": [
+            2973,
+            2996
+          ],
+          "reading_order": 40,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-42",
+          "kind": "line",
+          "text": "• Early Career PI Eligibility. There are several changes to the eligibility criteria for Early Career ",
+          "span": [
+            2997,
+            3099
+          ],
+          "reading_order": 41,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-43",
+          "kind": "line",
+          "text": "applicant institutions and PIs. (1) The eligibility window was extended, such that PIs must have ",
+          "span": [
+            3100,
+            3197
+          ],
+          "reading_order": 42,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-44",
+          "kind": "line",
+          "text": "completed a doctoral degree no earlier than April 1, 2019 and no later than the start of the award ",
+          "span": [
+            3198,
+            3297
+          ],
+          "reading_order": 43,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-45",
+          "kind": "line",
+          "text": "period. (2) PIs who are faculty at academic institutions must not have received tenure from their ",
+          "span": [
+            3298,
+            3396
+          ],
+          "reading_order": 44,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-46",
+          "kind": "line",
+          "text": "institution by the application submission deadline. ",
+          "span": [
+            3397,
+            3449
+          ],
+          "reading_order": 45,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-47",
+          "kind": "line",
+          "text": "• Early Career Research Project Types. NCER added a requirement to specify a project type ",
+          "span": [
+            3450,
+            3540
+          ],
+          "reading_order": 46,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-48",
+          "kind": "line",
+          "text": "that describes the research you propose to do. Applicants may propose to conduct Measurement, ",
+          "span": [
+            3541,
+            3635
+          ],
+          "reading_order": 47,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-49",
+          "kind": "line",
+          "text": "Exploration, or Development and Innovation projects. ",
+          "span": [
+            3636,
+            3689
+          ],
+          "reading_order": 48,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-50",
+          "kind": "line",
+          "text": "• Early Career Award Limits. The maximum award for Early Career grants has been increased ",
+          "span": [
+            3690,
+            3780
+          ],
+          "reading_order": 49,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-6-51",
+          "kind": "line",
+          "text": "to $500,000. Additionally, Early Career PIs at institutions that are not R1 institutions may",
+          "span": [
+            3781,
+            3873
+          ],
+          "reading_order": 50,
+          "page": 6,
+          "repeated_header": false,
+          "toc": false
+        }
+      ],
+      "layout_rows": [
+        {
+          "line": 1,
+          "text": "       •                                             Adheres to all page limit maximums for the training program                              narrative and appendices. IES will",
+          "cells": [
+            {
+              "text": "•                                             Adheres to all page limit maximums for the training program",
+              "column_start": 7,
+              "column_end": 112
+            },
+            {
+              "text": "narrative and appendices. IES will",
+              "column_start": 142,
+              "column_end": 176
+            }
+          ]
+        },
+        {
+          "line": 2,
+          "text": "               remove any pages above the maximum before forwarding an application for scientific peer review",
+          "cells": [
+            {
+              "text": "remove any pages above the maximum before forwarding an application for scientific peer review",
+              "column_start": 15,
+              "column_end": 109
+            }
+          ]
+        },
+        {
+          "line": 3,
+          "text": "       •                                             Includes all required appendices                                 (see Part III.C                         )",
+          "cells": [
+            {
+              "text": "•                                             Includes all required appendices",
+              "column_start": 7,
+              "column_end": 85
+            },
+            {
+              "text": "(see Part III.C",
+              "column_start": 118,
+              "column_end": 133
+            },
+            {
+              "text": ")",
+              "column_start": 158,
+              "column_end": 159
+            }
+          ]
+        },
+        {
+          "line": 4,
+          "text": "                       o                                       Appendix A: Engagement and Dissemination Plan",
+          "cells": [
+            {
+              "text": "o                                       Appendix A: Engagement and Dissemination Plan",
+              "column_start": 23,
+              "column_end": 108
+            }
+          ]
+        },
+        {
+          "line": 5,
+          "text": "                       o                                       Appendix B: Response to Reviewers (Resubmissions only)",
+          "cells": [
+            {
+              "text": "o                                       Appendix B: Response to Reviewers (Resubmissions only)",
+              "column_start": 23,
+              "column_end": 117
+            }
+          ]
+        },
+        {
+          "line": 6,
+          "text": "                       o                                       Appendix D: Letters of Agreement",
+          "cells": [
+            {
+              "text": "o                                       Appendix D: Letters of Agreement",
+              "column_start": 23,
+              "column_end": 95
+            }
+          ]
+        },
+        {
+          "line": 7,
+          "text": "                       o                                       Appendix E: Data Sharing and Management Plan          (Early Career a          pplications only          )",
+          "cells": [
+            {
+              "text": "o                                       Appendix E: Data Sharing and Management Plan",
+              "column_start": 23,
+              "column_end": 107
+            },
+            {
+              "text": "(Early Career a",
+              "column_start": 117,
+              "column_end": 132
+            },
+            {
+              "text": "pplications only",
+              "column_start": 142,
+              "column_end": 158
+            },
+            {
+              "text": ")",
+              "column_start": 168,
+              "column_end": 169
+            }
+          ]
+        },
+        {
+          "line": 8,
+          "text": "                       o                                       Appendix F          : Alignment with SEER Standards",
+          "cells": [
+            {
+              "text": "o                                       Appendix F",
+              "column_start": 23,
+              "column_end": 73
+            },
+            {
+              "text": ": Alignment with SEER Standards",
+              "column_start": 83,
+              "column_end": 114
+            }
+          ]
+        },
+        {
+          "line": 10,
+          "text": "(c) Responsiveness",
+          "cells": [
+            {
+              "text": "(c) Responsiveness",
+              "column_start": 0,
+              "column_end": 18
+            }
+          ]
+        },
+        {
+          "line": 11,
+          "text": "       •                                             Meets the general requirements for the selected t                                              raining p         rogram (seePart II)",
+          "cells": [
+            {
+              "text": "•                                             Meets the general requirements for the selected t",
+              "column_start": 7,
+              "column_end": 102
+            },
+            {
+              "text": "raining p",
+              "column_start": 148,
+              "column_end": 157
+            },
+            {
+              "text": "rogram (seePart II)",
+              "column_start": 166,
+              "column_end": 185
+            }
+          ]
+        },
+        {
+          "line": 12,
+          "text": "       •                                             Meets the t                              raining program n         arrative requirements                          for the selected t          raining p         rogram (see Part II)",
+          "cells": [
+            {
+              "text": "•                                             Meets the t",
+              "column_start": 7,
+              "column_end": 64
+            },
+            {
+              "text": "raining program n",
+              "column_start": 94,
+              "column_end": 111
+            },
+            {
+              "text": "arrative requirements",
+              "column_start": 120,
+              "column_end": 141
+            },
+            {
+              "text": "for the selected t",
+              "column_start": 167,
+              "column_end": 185
+            },
+            {
+              "text": "raining p",
+              "column_start": 195,
+              "column_end": 204
+            },
+            {
+              "text": "rogram (see Part II)",
+              "column_start": 213,
+              "column_end": 233
+            }
+          ]
+        },
+        {
+          "line": 13,
+          "text": "D. Changes in the FY 2027 RFA",
+          "cells": [
+            {
+              "text": "D. Changes in the FY 2027 RFA",
+              "column_start": 0,
+              "column_end": 29
+            }
+          ]
+        },
+        {
+          "line": 14,
+          "text": "Everyone involved in preparing and submitting an application, whether new or revised, should carefully",
+          "cells": [
+            {
+              "text": "Everyone involved in preparing and submitting an application, whether new or revised, should carefully",
+              "column_start": 0,
+              "column_end": 102
+            }
+          ]
+        },
+        {
+          "line": 15,
+          "text": "read all relevant parts of this RFA. Major changes to the Research Training Programs in the Education",
+          "cells": [
+            {
+              "text": "read all relevant parts of this RFA. Major changes to the Research Training Programs in the Education",
+              "column_start": 0,
+              "column_end": 101
+            }
+          ]
+        },
+        {
+          "line": 16,
+          "text": "Sciences for FY 2027           are listed below and described fully in the relevant sections of the RFA.",
+          "cells": [
+            {
+              "text": "Sciences for FY 2027",
+              "column_start": 0,
+              "column_end": 20
+            },
+            {
+              "text": "are listed below and described fully in the relevant sections of the RFA.",
+              "column_start": 31,
+              "column_end": 104
+            }
+          ]
+        },
+        {
+          "line": 17,
+          "text": "       •                                         Training Programs. For FY 2027, NCER is accepting applications under two programs: Early",
+          "cells": [
+            {
+              "text": "•                                         Training Programs. For FY 2027, NCER is accepting applications under two programs: Early",
+              "column_start": 7,
+              "column_end": 137
+            }
+          ]
+        },
+        {
+          "line": 18,
+          "text": "               Career and Methods Training         .",
+          "cells": [
+            {
+              "text": "Career and Methods Training",
+              "column_start": 15,
+              "column_end": 42
+            },
+            {
+              "text": ".",
+              "column_start": 51,
+              "column_end": 52
+            }
+          ]
+        },
+        {
+          "line": 19,
+          "text": "       •                                           Guidance on Use of Artificial Intelligence (AI). IES added guidance on the use of AI in",
+          "cells": [
+            {
+              "text": "•                                           Guidance on Use of Artificial Intelligence (AI). IES added guidance on the use of AI in",
+              "column_start": 7,
+              "column_end": 138
+            }
+          ]
+        },
+        {
+          "line": 20,
+          "text": "               preparing grant applications (see Part III.A          ). The use of artificial intelligence (AI) in the",
+          "cells": [
+            {
+              "text": "preparing grant applications (see Part III.A",
+              "column_start": 15,
+              "column_end": 59
+            },
+            {
+              "text": "). The use of artificial intelligence (AI) in the",
+              "column_start": 69,
+              "column_end": 118
+            }
+          ]
+        },
+        {
+          "line": 21,
+          "text": "               development of grant applications is allowable. Applicants submitting a grant application must",
+          "cells": [
+            {
+              "text": "development of grant applications is allowable. Applicants submitting a grant application must",
+              "column_start": 15,
+              "column_end": 109
+            }
+          ]
+        },
+        {
+          "line": 22,
+          "text": "               certify on the standard application form to the “true, complete, and accurate” nature of all of the",
+          "cells": [
+            {
+              "text": "certify on the standard application form to the “true, complete, and accurate” nature of all of the",
+              "column_start": 15,
+              "column_end": 114
+            }
+          ]
+        },
+        {
+          "line": 23,
+          "text": "               contents of their grant application, regardless of whether it is generated by AI",
+          "cells": [
+            {
+              "text": "contents of their grant application, regardless of whether it is generated by AI",
+              "column_start": 15,
+              "column_end": 95
+            }
+          ]
+        },
+        {
+          "line": 24,
+          "text": "               (https://www.federalregister.gov/d/2025-16571).",
+          "cells": [
+            {
+              "text": "(https://www.federalregister.gov/d/2025-16571).",
+              "column_start": 15,
+              "column_end": 62
+            }
+          ]
+        },
+        {
+          "line": 25,
+          "text": "       •                                           Changes to Appendices.",
+          "cells": [
+            {
+              "text": "•                                           Changes to Appendices.",
+              "column_start": 7,
+              "column_end": 73
+            }
+          ]
+        },
+        {
+          "line": 26,
+          "text": "                       ο                                         IES added a new appendix, Alignment with SEER Principles          , that is required for all",
+          "cells": [
+            {
+              "text": "ο                                         IES added a new appendix, Alignment with SEER Principles",
+              "column_start": 23,
+              "column_end": 121
+            },
+            {
+              "text": ", that is required for all",
+              "column_start": 131,
+              "column_end": 157
+            }
+          ]
+        },
+        {
+          "line": 27,
+          "text": "                               applications. Appendix F must include information about how the project aligns with the",
+          "cells": [
+            {
+              "text": "applications. Appendix F must include information about how the project aligns with the",
+              "column_start": 31,
+              "column_end": 118
+            }
+          ]
+        },
+        {
+          "line": 28,
+          "text": "                               current Standards for Excellence in Education Research (SEER; https://ies.ed.gov/use-",
+          "cells": [
+            {
+              "text": "current Standards for Excellence in Education Research (SEER; https://ies.ed.gov/use-",
+              "column_start": 31,
+              "column_end": 116
+            }
+          ]
+        },
+        {
+          "line": 29,
+          "text": "                               work/standards-excellence-education-research-seer).",
+          "cells": [
+            {
+              "text": "work/standards-excellence-education-research-seer).",
+              "column_start": 31,
+              "column_end": 82
+            }
+          ]
+        },
+        {
+          "line": 30,
+          "text": "                       ο                                         Appendix C, Summary of Research and Training Projects, is no longer required. Instead,",
+          "cells": [
+            {
+              "text": "ο                                         Appendix C, Summary of Research and Training Projects, is no longer required. Instead,",
+              "column_start": 23,
+              "column_end": 151
+            }
+          ]
+        },
+        {
+          "line": 31,
+          "text": "                               Appendix C is optional and should be used to include supplemental materials.",
+          "cells": [
+            {
+              "text": "Appendix C is optional and should be used to include supplemental materials.",
+              "column_start": 31,
+              "column_end": 107
+            }
+          ]
+        },
+        {
+          "line": 32,
+          "text": "                               Applications to the Methods Training p         rogram should describe prior methods training",
+          "cells": [
+            {
+              "text": "Applications to the Methods Training p",
+              "column_start": 31,
+              "column_end": 69
+            },
+            {
+              "text": "rogram should describe prior methods training",
+              "column_start": 78,
+              "column_end": 123
+            }
+          ]
+        },
+        {
+          "line": 33,
+          "text": "                               projects in the personnel section of the training program narrative.",
+          "cells": [
+            {
+              "text": "projects in the personnel section of the training program narrative.",
+              "column_start": 31,
+              "column_end": 99
+            }
+          ]
+        },
+        {
+          "line": 34,
+          "text": "                       ο                                         The page limit for Supplemental Materials (now Appendix C) has been reduced from 10",
+          "cells": [
+            {
+              "text": "ο                                         The page limit for Supplemental Materials (now Appendix C) has been reduced from 10",
+              "column_start": 23,
+              "column_end": 148
+            }
+          ]
+        },
+        {
+          "line": 35,
+          "text": "                               pages to 5 pages.",
+          "cells": [
+            {
+              "text": "pages to 5 pages.",
+              "column_start": 31,
+              "column_end": 48
+            }
+          ]
+        },
+        {
+          "line": 36,
+          "text": "       •                                          Pre-Award Requirements. IES added two new pre          -award requirements.",
+          "cells": [
+            {
+              "text": "•                                          Pre-Award Requirements. IES added two new pre",
+              "column_start": 7,
+              "column_end": 95
+            },
+            {
+              "text": "-award requirements.",
+              "column_start": 105,
+              "column_end": 125
+            }
+          ]
+        },
+        {
+          "line": 37,
+          "text": "                       ο                                         If your application is being considered for funding, IES program officers will review the",
+          "cells": [
+            {
+              "text": "ο                                         If your application is being considered for funding, IES program officers will review the",
+              "column_start": 23,
+              "column_end": 154
+            }
+          ]
+        },
+        {
+          "line": 38,
+          "text": "                               completeness and acceptability of the information in Appendix F: Alignment with SEER",
+          "cells": [
+            {
+              "text": "completeness and acceptability of the information in Appendix F: Alignment with SEER",
+              "column_start": 31,
+              "column_end": 115
+            }
+          ]
+        },
+        {
+          "line": 39,
+          "text": "                               Standards prior to making the new award.",
+          "cells": [
+            {
+              "text": "Standards prior to making the new award.",
+              "column_start": 31,
+              "column_end": 71
+            }
+          ]
+        },
+        {
+          "line": 40,
+          "text": "                       ο                                         All recipients of IES research and research training funds are required to be in",
+          "cells": [
+            {
+              "text": "ο                                         All recipients of IES research and research training funds are required to be in",
+              "column_start": 23,
+              "column_end": 145
+            }
+          ]
+        },
+        {
+          "line": 41,
+          "text": "                               compliance with the research security requirements described in Part IV          prior to",
+          "cells": [
+            {
+              "text": "compliance with the research security requirements described in Part IV",
+              "column_start": 31,
+              "column_end": 102
+            },
+            {
+              "text": "prior to",
+              "column_start": 112,
+              "column_end": 120
+            }
+          ]
+        },
+        {
+          "line": 42,
+          "text": "                               receiving IES funding.",
+          "cells": [
+            {
+              "text": "receiving IES funding.",
+              "column_start": 31,
+              "column_end": 53
+            }
+          ]
+        },
+        {
+          "line": 43,
+          "text": "       •                                           Early Career PI Eligibility. There are several changes to the eligibility criteria for Early Career",
+          "cells": [
+            {
+              "text": "•                                           Early Career PI Eligibility. There are several changes to the eligibility criteria for Early Career",
+              "column_start": 7,
+              "column_end": 150
+            }
+          ]
+        },
+        {
+          "line": 44,
+          "text": "               applicant institutions and PIs. (1) The eligibility window was extended, such that PIs must have",
+          "cells": [
+            {
+              "text": "applicant institutions and PIs. (1) The eligibility window was extended, such that PIs must have",
+              "column_start": 15,
+              "column_end": 111
+            }
+          ]
+        },
+        {
+          "line": 45,
+          "text": "               completed a doctoral degree no earlier than April 1, 2019 and no later than the start of the award",
+          "cells": [
+            {
+              "text": "completed a doctoral degree no earlier than April 1, 2019 and no later than the start of the award",
+              "column_start": 15,
+              "column_end": 113
+            }
+          ]
+        },
+        {
+          "line": 46,
+          "text": "               period. (2) PIs who are faculty at academic institutions must not have received tenure from their",
+          "cells": [
+            {
+              "text": "period. (2) PIs who are faculty at academic institutions must not have received tenure from their",
+              "column_start": 15,
+              "column_end": 112
+            }
+          ]
+        },
+        {
+          "line": 47,
+          "text": "               institution by the application submission deadline.",
+          "cells": [
+            {
+              "text": "institution by the application submission deadline.",
+              "column_start": 15,
+              "column_end": 66
+            }
+          ]
+        },
+        {
+          "line": 48,
+          "text": "       •                                           Early Career Research Project Types. NCER added a requirement to specify           a project type",
+          "cells": [
+            {
+              "text": "•                                           Early Career Research Project Types. NCER added a requirement to specify",
+              "column_start": 7,
+              "column_end": 123
+            },
+            {
+              "text": "a project type",
+              "column_start": 134,
+              "column_end": 148
+            }
+          ]
+        },
+        {
+          "line": 49,
+          "text": "               that describes the research you propose to do. Applicants may propose to conduct Measurement,",
+          "cells": [
+            {
+              "text": "that describes the research you propose to do. Applicants may propose to conduct Measurement,",
+              "column_start": 15,
+              "column_end": 108
+            }
+          ]
+        },
+        {
+          "line": 50,
+          "text": "               Exploration, or Development and Innovation projects.",
+          "cells": [
+            {
+              "text": "Exploration, or Development and Innovation projects.",
+              "column_start": 15,
+              "column_end": 67
+            }
+          ]
+        },
+        {
+          "line": 51,
+          "text": "       •                                           Early Career Award Limits. The maximum award                                               for Early Career           grants has been increased",
+          "cells": [
+            {
+              "text": "•                                           Early Career Award Limits. The maximum award",
+              "column_start": 7,
+              "column_end": 95
+            },
+            {
+              "text": "for Early Career",
+              "column_start": 142,
+              "column_end": 158
+            },
+            {
+              "text": "grants has been increased",
+              "column_start": 169,
+              "column_end": 194
+            }
+          ]
+        },
+        {
+          "line": 52,
+          "text": "               to $500,000. Additionally,           Early Career PIs at institutions that are not R1 institutions may",
+          "cells": [
+            {
+              "text": "to $500,000. Additionally,",
+              "column_start": 15,
+              "column_end": 41
+            },
+            {
+              "text": "Early Career PIs at institutions that are not R1 institutions may",
+              "column_start": 52,
+              "column_end": 117
+            }
+          ]
+        },
+        {
+          "line": 55,
+          "text": "Posted August 6, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       Institute of Education Sciences | 3",
+          "cells": [
+            {
+              "text": "Posted August 6, 2026",
+              "column_start": 0,
+              "column_end": 21
+            },
+            {
+              "text": "Institute of Education Sciences | 3",
+              "column_start": 940,
+              "column_end": 975
+            }
+          ]
+        }
+      ],
+      "truncated": false,
+      "toc": false
+    },
+    {
+      "page": 33,
+      "section": null,
+      "anchor": null,
+      "text": "Posted August 6, 2026 Institute of Education Sciences | 30 \nPart IV: Competition Regulations and Review Criteria \nA. Funding Mechanisms and Restrictions \n1. Mechanism of Support \nIES intends to award grants pursuant to this Request for Applications. \n2. Funding Available \nAll awards pursuant to this RFA are contingent upon the availability of funds and the receipt of \nmeritorious applications. IES makes its awards to the highest quality applications as determined through \nscientific peer review. \n3. Special Considerations for Budget Expenses \n(a) Indirect Cost Rate \nU.S. Department of Education policy (34 CFR 75.562 (c)(2)) limits indirect cost reimbursement on a \ntraining grant to the recipient’s actual indirect costs, as determined by its negotiated indirect cost rate \nagreement, or 8 percent of a modified total direct cost base, whichever amount is less. MTDC is defined in \n2 CFR §200.1 (https://www.ecfr.gov/current/title-2/subtitle-A/chapter-II/part-200/subpart-A/subjectgroup-ECFR2a6a0087862fd2c/section-200.1). Institutions, both primary grantees and subawardees, not \nlocated in the territorial United States cannot charge indirect costs. \n(b) Meetings and Conferences \nIf you are requesting funds to cover expenses for hosting meetings or conferences, please note that there \nare statutory and regulatory requirements in determining whether costs are reasonable and necessary. \nPlease refer to the Office of Management and Budget’s (OMB’s) Uniform Administrative Requirements, \nCost Principles, and Audit Requirements for Federal Awards (Uniform Guidance), 2 CFR, §200.432 \nConferences (https://www.ecfr.gov/cgi-bin/textidx?SID=dcd3efbcf2b6092f84c3b1af32bdcc34&node=se2.1.200_1432&rgn=div8 ). \nFederal grant funds cannot be used to pay for alcoholic beverages or entertainment, which includes costs \nfor amusement, diversion, and social activities. In general, federal funds may not be used to pay for food. \nA grantee hosting a meeting or conference may not use grant funds to pay for food for conference \nattendees unless doing so is necessary to accomplish legitimate meeting or conference business. You may \nrequest funds to cover expenses for working meetings, such as working lunches; however, IES will \ndetermine whether these costs are allowable in keeping with the new OMB Uniform Cost Principles. \nGrantees are responsible for the proper use of their grant awards and may have to repay funds to the \nDepartment if they violate the rules for meeting- and conference-related expenses or other disallowed \nexpenditures. \n(c) Optional Funding for Grant Administration (for Early Career Applications Only) \nEarly career faculty at non-R1 institutions may request additional funding for grant administration (up to \n$50,000 per year and $200,000 total in direct and indirect costs) to support a grant and/or budget \nmanager or assistants to carry out such tasks as overseeing the budget and invoices or working with or for \nthe other offices at the university involved in grant management (for example, Office of Sponsored \nProjects). \nTo request these additional funds, include up to $50,000 per year under the Other Direct Costs section of \nthe Research & Related Budget form (see the IES Application Submission Guide for more information on \nthis form, https://ies.ed.gov/application-submission-guide). IES does not expect a detailed budget for \nthese additional funds at the time of application. If your Early Career application is being considered for \nfunding, the IES program officer will work with you to clarify your plans for using these funds for grant \nadministration and management.",
+      "structure": [
+        {
+          "block_id": "pdf-33-1",
+          "kind": "line",
+          "text": "Posted August 6, 2026 Institute of Education Sciences | 30 ",
+          "span": [
+            0,
+            59
+          ],
+          "reading_order": 0,
+          "page": 33,
+          "repeated_header": true,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-2",
+          "kind": "line",
+          "text": "Part IV: Competition Regulations and Review Criteria ",
+          "span": [
+            60,
+            113
+          ],
+          "reading_order": 1,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-3",
+          "kind": "line",
+          "text": "A. Funding Mechanisms and Restrictions ",
+          "span": [
+            114,
+            153
+          ],
+          "reading_order": 2,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-4",
+          "kind": "line",
+          "text": "1. Mechanism of Support ",
+          "span": [
+            154,
+            178
+          ],
+          "reading_order": 3,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-5",
+          "kind": "line",
+          "text": "IES intends to award grants pursuant to this Request for Applications. ",
+          "span": [
+            179,
+            250
+          ],
+          "reading_order": 4,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-6",
+          "kind": "line",
+          "text": "2. Funding Available ",
+          "span": [
+            251,
+            272
+          ],
+          "reading_order": 5,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-7",
+          "kind": "line",
+          "text": "All awards pursuant to this RFA are contingent upon the availability of funds and the receipt of ",
+          "span": [
+            273,
+            370
+          ],
+          "reading_order": 6,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-8",
+          "kind": "line",
+          "text": "meritorious applications. IES makes its awards to the highest quality applications as determined through ",
+          "span": [
+            371,
+            476
+          ],
+          "reading_order": 7,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-9",
+          "kind": "line",
+          "text": "scientific peer review. ",
+          "span": [
+            477,
+            501
+          ],
+          "reading_order": 8,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-10",
+          "kind": "line",
+          "text": "3. Special Considerations for Budget Expenses ",
+          "span": [
+            502,
+            548
+          ],
+          "reading_order": 9,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-11",
+          "kind": "line",
+          "text": "(a) Indirect Cost Rate ",
+          "span": [
+            549,
+            572
+          ],
+          "reading_order": 10,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-12",
+          "kind": "line",
+          "text": "U.S. Department of Education policy (34 CFR 75.562 (c)(2)) limits indirect cost reimbursement on a ",
+          "span": [
+            573,
+            672
+          ],
+          "reading_order": 11,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-13",
+          "kind": "line",
+          "text": "training grant to the recipient’s actual indirect costs, as determined by its negotiated indirect cost rate ",
+          "span": [
+            673,
+            781
+          ],
+          "reading_order": 12,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-14",
+          "kind": "line",
+          "text": "agreement, or 8 percent of a modified total direct cost base, whichever amount is less. MTDC is defined in ",
+          "span": [
+            782,
+            889
+          ],
+          "reading_order": 13,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-15",
+          "kind": "line",
+          "text": "2 CFR §200.1 (https://www.ecfr.gov/current/title-2/subtitle-A/chapter-II/part-200/subpart-A/subjectgroup-ECFR2a6a0087862fd2c/section-200.1). Institutions, both primary grantees and subawardees, not ",
+          "span": [
+            890,
+            1088
+          ],
+          "reading_order": 14,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-16",
+          "kind": "line",
+          "text": "located in the territorial United States cannot charge indirect costs. ",
+          "span": [
+            1089,
+            1160
+          ],
+          "reading_order": 15,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-17",
+          "kind": "line",
+          "text": "(b) Meetings and Conferences ",
+          "span": [
+            1161,
+            1190
+          ],
+          "reading_order": 16,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-18",
+          "kind": "line",
+          "text": "If you are requesting funds to cover expenses for hosting meetings or conferences, please note that there ",
+          "span": [
+            1191,
+            1297
+          ],
+          "reading_order": 17,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-19",
+          "kind": "line",
+          "text": "are statutory and regulatory requirements in determining whether costs are reasonable and necessary. ",
+          "span": [
+            1298,
+            1399
+          ],
+          "reading_order": 18,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-20",
+          "kind": "line",
+          "text": "Please refer to the Office of Management and Budget’s (OMB’s) Uniform Administrative Requirements, ",
+          "span": [
+            1400,
+            1499
+          ],
+          "reading_order": 19,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-21",
+          "kind": "line",
+          "text": "Cost Principles, and Audit Requirements for Federal Awards (Uniform Guidance), 2 CFR, §200.432 ",
+          "span": [
+            1500,
+            1595
+          ],
+          "reading_order": 20,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-22",
+          "kind": "line",
+          "text": "Conferences (https://www.ecfr.gov/cgi-bin/textidx?SID=dcd3efbcf2b6092f84c3b1af32bdcc34&node=se2.1.200_1432&rgn=div8 ). ",
+          "span": [
+            1596,
+            1715
+          ],
+          "reading_order": 21,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-23",
+          "kind": "line",
+          "text": "Federal grant funds cannot be used to pay for alcoholic beverages or entertainment, which includes costs ",
+          "span": [
+            1716,
+            1821
+          ],
+          "reading_order": 22,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-24",
+          "kind": "line",
+          "text": "for amusement, diversion, and social activities. In general, federal funds may not be used to pay for food. ",
+          "span": [
+            1822,
+            1930
+          ],
+          "reading_order": 23,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-25",
+          "kind": "line",
+          "text": "A grantee hosting a meeting or conference may not use grant funds to pay for food for conference ",
+          "span": [
+            1931,
+            2028
+          ],
+          "reading_order": 24,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-26",
+          "kind": "line",
+          "text": "attendees unless doing so is necessary to accomplish legitimate meeting or conference business. You may ",
+          "span": [
+            2029,
+            2133
+          ],
+          "reading_order": 25,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-27",
+          "kind": "line",
+          "text": "request funds to cover expenses for working meetings, such as working lunches; however, IES will ",
+          "span": [
+            2134,
+            2231
+          ],
+          "reading_order": 26,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-28",
+          "kind": "line",
+          "text": "determine whether these costs are allowable in keeping with the new OMB Uniform Cost Principles. ",
+          "span": [
+            2232,
+            2329
+          ],
+          "reading_order": 27,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-29",
+          "kind": "line",
+          "text": "Grantees are responsible for the proper use of their grant awards and may have to repay funds to the ",
+          "span": [
+            2330,
+            2431
+          ],
+          "reading_order": 28,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-30",
+          "kind": "line",
+          "text": "Department if they violate the rules for meeting- and conference-related expenses or other disallowed ",
+          "span": [
+            2432,
+            2534
+          ],
+          "reading_order": 29,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-31",
+          "kind": "line",
+          "text": "expenditures. ",
+          "span": [
+            2535,
+            2549
+          ],
+          "reading_order": 30,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-32",
+          "kind": "line",
+          "text": "(c) Optional Funding for Grant Administration (for Early Career Applications Only) ",
+          "span": [
+            2550,
+            2633
+          ],
+          "reading_order": 31,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-33",
+          "kind": "line",
+          "text": "Early career faculty at non-R1 institutions may request additional funding for grant administration (up to ",
+          "span": [
+            2634,
+            2741
+          ],
+          "reading_order": 32,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-34",
+          "kind": "line",
+          "text": "$50,000 per year and $200,000 total in direct and indirect costs) to support a grant and/or budget ",
+          "span": [
+            2742,
+            2841
+          ],
+          "reading_order": 33,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-35",
+          "kind": "line",
+          "text": "manager or assistants to carry out such tasks as overseeing the budget and invoices or working with or for ",
+          "span": [
+            2842,
+            2949
+          ],
+          "reading_order": 34,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-36",
+          "kind": "line",
+          "text": "the other offices at the university involved in grant management (for example, Office of Sponsored ",
+          "span": [
+            2950,
+            3049
+          ],
+          "reading_order": 35,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-37",
+          "kind": "line",
+          "text": "Projects). ",
+          "span": [
+            3050,
+            3061
+          ],
+          "reading_order": 36,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-38",
+          "kind": "line",
+          "text": "To request these additional funds, include up to $50,000 per year under the Other Direct Costs section of ",
+          "span": [
+            3062,
+            3168
+          ],
+          "reading_order": 37,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-39",
+          "kind": "line",
+          "text": "the Research & Related Budget form (see the IES Application Submission Guide for more information on ",
+          "span": [
+            3169,
+            3270
+          ],
+          "reading_order": 38,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-40",
+          "kind": "line",
+          "text": "this form, https://ies.ed.gov/application-submission-guide). IES does not expect a detailed budget for ",
+          "span": [
+            3271,
+            3374
+          ],
+          "reading_order": 39,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-41",
+          "kind": "line",
+          "text": "these additional funds at the time of application. If your Early Career application is being considered for ",
+          "span": [
+            3375,
+            3483
+          ],
+          "reading_order": 40,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-42",
+          "kind": "line",
+          "text": "funding, the IES program officer will work with you to clarify your plans for using these funds for grant ",
+          "span": [
+            3484,
+            3590
+          ],
+          "reading_order": 41,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-33-43",
+          "kind": "line",
+          "text": "administration and management.",
+          "span": [
+            3591,
+            3621
+          ],
+          "reading_order": 42,
+          "page": 33,
+          "repeated_header": false,
+          "toc": false
+        }
+      ],
+      "layout_rows": [
+        {
+          "line": 1,
+          "text": "Part IV: Competition Regulations and Review Criteria",
+          "cells": [
+            {
+              "text": "Part IV: Competition Regulations and Review Criteria",
+              "column_start": 0,
+              "column_end": 52
+            }
+          ]
+        },
+        {
+          "line": 3,
+          "text": "A. Funding Mechanisms and Restrictions",
+          "cells": [
+            {
+              "text": "A. Funding Mechanisms and Restrictions",
+              "column_start": 0,
+              "column_end": 38
+            }
+          ]
+        },
+        {
+          "line": 4,
+          "text": "1. Mechanism of Support",
+          "cells": [
+            {
+              "text": "1. Mechanism of Support",
+              "column_start": 0,
+              "column_end": 23
+            }
+          ]
+        },
+        {
+          "line": 5,
+          "text": "IES intends to award grants pursuant to this Request for Applications.",
+          "cells": [
+            {
+              "text": "IES intends to award grants pursuant to this Request for Applications.",
+              "column_start": 0,
+              "column_end": 70
+            }
+          ]
+        },
+        {
+          "line": 6,
+          "text": "2. Funding Available",
+          "cells": [
+            {
+              "text": "2. Funding Available",
+              "column_start": 0,
+              "column_end": 20
+            }
+          ]
+        },
+        {
+          "line": 7,
+          "text": "All awards pursuant to this RFA are contingent upon the availability of funds and the receipt of",
+          "cells": [
+            {
+              "text": "All awards pursuant to this RFA are contingent upon the availability of funds and the receipt of",
+              "column_start": 0,
+              "column_end": 96
+            }
+          ]
+        },
+        {
+          "line": 8,
+          "text": "meritorious applications. IES makes its awards to the highest quality applications as determined through",
+          "cells": [
+            {
+              "text": "meritorious applications. IES makes its awards to the highest quality applications as determined through",
+              "column_start": 0,
+              "column_end": 104
+            }
+          ]
+        },
+        {
+          "line": 9,
+          "text": "scientific peer review.",
+          "cells": [
+            {
+              "text": "scientific peer review.",
+              "column_start": 0,
+              "column_end": 23
+            }
+          ]
+        },
+        {
+          "line": 10,
+          "text": "3. Special Considerations for Budget Expenses",
+          "cells": [
+            {
+              "text": "3. Special Considerations for Budget Expenses",
+              "column_start": 0,
+              "column_end": 45
+            }
+          ]
+        },
+        {
+          "line": 11,
+          "text": "(a) Indirect Cost Rate",
+          "cells": [
+            {
+              "text": "(a) Indirect Cost Rate",
+              "column_start": 0,
+              "column_end": 22
+            }
+          ]
+        },
+        {
+          "line": 12,
+          "text": "U.S. Department of Education policy (34 CFR 75.562 (c)(2)) limits indirect cost reimbursement on a",
+          "cells": [
+            {
+              "text": "U.S. Department of Education policy (34 CFR 75.562 (c)(2)) limits indirect cost reimbursement on a",
+              "column_start": 0,
+              "column_end": 98
+            }
+          ]
+        },
+        {
+          "line": 13,
+          "text": "training grant to the recipient’s actual indirect costs, as determined by its negotiated indirect cost rate",
+          "cells": [
+            {
+              "text": "training grant to the recipient’s actual indirect costs, as determined by its negotiated indirect cost rate",
+              "column_start": 0,
+              "column_end": 107
+            }
+          ]
+        },
+        {
+          "line": 14,
+          "text": "agreement, or 8 percent of a modified total direct cost base, whichever amount is less. MTDC is defined in",
+          "cells": [
+            {
+              "text": "agreement, or 8 percent of a modified total direct cost base, whichever amount is less. MTDC is defined in",
+              "column_start": 0,
+              "column_end": 106
+            }
+          ]
+        },
+        {
+          "line": 15,
+          "text": "2 CFR §                                       200.1 (https://www.ecfr.gov/current/title-2/subtitle-A/chapter-II/part-200/subpart-A/subject-",
+          "cells": [
+            {
+              "text": "2 CFR §",
+              "column_start": 0,
+              "column_end": 7
+            },
+            {
+              "text": "200.1 (https://www.ecfr.gov/current/title-2/subtitle-A/chapter-II/part-200/subpart-A/subject-",
+              "column_start": 46,
+              "column_end": 139
+            }
+          ]
+        },
+        {
+          "line": 16,
+          "text": "group-ECFR2a6a0087862fd2c/section-200.1). Institutions, both primary grantees and subawardees, not",
+          "cells": [
+            {
+              "text": "group-ECFR2a6a0087862fd2c/section-200.1). Institutions, both primary grantees and subawardees, not",
+              "column_start": 0,
+              "column_end": 98
+            }
+          ]
+        },
+        {
+          "line": 17,
+          "text": "located in the territorial United States cannot charge indirect costs.",
+          "cells": [
+            {
+              "text": "located in the territorial United States cannot charge indirect costs.",
+              "column_start": 0,
+              "column_end": 70
+            }
+          ]
+        },
+        {
+          "line": 19,
+          "text": "(b) Meetings and Conferences",
+          "cells": [
+            {
+              "text": "(b) Meetings and Conferences",
+              "column_start": 0,
+              "column_end": 28
+            }
+          ]
+        },
+        {
+          "line": 20,
+          "text": "If you are requesting funds to cover expenses for hosting meetings or conferences, please note that there",
+          "cells": [
+            {
+              "text": "If you are requesting funds to cover expenses for hosting meetings or conferences, please note that there",
+              "column_start": 0,
+              "column_end": 105
+            }
+          ]
+        },
+        {
+          "line": 21,
+          "text": "are statutory and regulatory requirements in determining whether costs are reasonable and necessary.",
+          "cells": [
+            {
+              "text": "are statutory and regulatory requirements in determining whether costs are reasonable and necessary.",
+              "column_start": 0,
+              "column_end": 100
+            }
+          ]
+        },
+        {
+          "line": 22,
+          "text": "Please refer to the Office of Management and Budget’s (OMB’s) Uniform Administrative Requirements,",
+          "cells": [
+            {
+              "text": "Please refer to the Office of Management and Budget’s (OMB’s) Uniform Administrative Requirements,",
+              "column_start": 0,
+              "column_end": 98
+            }
+          ]
+        },
+        {
+          "line": 23,
+          "text": "Cost Principles, and Audit Requirements for Federal Awards (Uniform Guidance), 2 CFR, §200.432",
+          "cells": [
+            {
+              "text": "Cost Principles, and Audit Requirements for Federal Awards (Uniform Guidance), 2 CFR, §200.432",
+              "column_start": 0,
+              "column_end": 94
+            }
+          ]
+        },
+        {
+          "line": 24,
+          "text": "Conferences (https://www.ecfr.gov/cgi-bin/text-",
+          "cells": [
+            {
+              "text": "Conferences (https://www.ecfr.gov/cgi-bin/text-",
+              "column_start": 0,
+              "column_end": 47
+            }
+          ]
+        },
+        {
+          "line": 25,
+          "text": "idx?SID=dcd3efbcf2b6092f84c3b1af32bdcc34&node=se2.1.200_1432&rgn=div8).",
+          "cells": [
+            {
+              "text": "idx?SID=dcd3efbcf2b6092f84c3b1af32bdcc34&node=se2.1.200_1432&rgn=div8).",
+              "column_start": 0,
+              "column_end": 71
+            }
+          ]
+        },
+        {
+          "line": 27,
+          "text": "Federal grant funds cannot be used to pay for alcoholic beverages or entertainment, which includes costs",
+          "cells": [
+            {
+              "text": "Federal grant funds cannot be used to pay for alcoholic beverages or entertainment, which includes costs",
+              "column_start": 0,
+              "column_end": 104
+            }
+          ]
+        },
+        {
+          "line": 28,
+          "text": "for amusement, diversion, and social activities. In general, federal funds may not be used to pay for food.",
+          "cells": [
+            {
+              "text": "for amusement, diversion, and social activities. In general, federal funds may not be used to pay for food.",
+              "column_start": 0,
+              "column_end": 107
+            }
+          ]
+        },
+        {
+          "line": 29,
+          "text": "A grantee hosting a meeting or conference may not use grant funds to pay for food for conference",
+          "cells": [
+            {
+              "text": "A grantee hosting a meeting or conference may not use grant funds to pay for food for conference",
+              "column_start": 0,
+              "column_end": 96
+            }
+          ]
+        },
+        {
+          "line": 30,
+          "text": "attendees unless doing so is necessary to accomplish legitimate meeting or conference business. You may",
+          "cells": [
+            {
+              "text": "attendees unless doing so is necessary to accomplish legitimate meeting or conference business. You may",
+              "column_start": 0,
+              "column_end": 103
+            }
+          ]
+        },
+        {
+          "line": 31,
+          "text": "request funds to cover expenses for working meetings, such as working lunches; however, IES will",
+          "cells": [
+            {
+              "text": "request funds to cover expenses for working meetings, such as working lunches; however, IES will",
+              "column_start": 0,
+              "column_end": 96
+            }
+          ]
+        },
+        {
+          "line": 32,
+          "text": "determine whether these costs are allowable in keeping with the new OMB Uniform Cost Principles.",
+          "cells": [
+            {
+              "text": "determine whether these costs are allowable in keeping with the new OMB Uniform Cost Principles.",
+              "column_start": 0,
+              "column_end": 96
+            }
+          ]
+        },
+        {
+          "line": 33,
+          "text": "Grantees are responsible for the proper use of their grant awards and may have to repay funds to the",
+          "cells": [
+            {
+              "text": "Grantees are responsible for the proper use of their grant awards and may have to repay funds to the",
+              "column_start": 0,
+              "column_end": 100
+            }
+          ]
+        },
+        {
+          "line": 34,
+          "text": "Department if they violate the rules for meeting- and conference-related expenses or other disallowed",
+          "cells": [
+            {
+              "text": "Department if they violate the rules for meeting- and conference-related expenses or other disallowed",
+              "column_start": 0,
+              "column_end": 101
+            }
+          ]
+        },
+        {
+          "line": 35,
+          "text": "expenditures.",
+          "cells": [
+            {
+              "text": "expenditures.",
+              "column_start": 0,
+              "column_end": 13
+            }
+          ]
+        },
+        {
+          "line": 37,
+          "text": "(c) Optional Funding for Grant Administration (for Early Career Applications Only)",
+          "cells": [
+            {
+              "text": "(c) Optional Funding for Grant Administration (for Early Career Applications Only)",
+              "column_start": 0,
+              "column_end": 82
+            }
+          ]
+        },
+        {
+          "line": 38,
+          "text": "Early career faculty at non                          -R1 institutions may request additional funding for grant administration (up to",
+          "cells": [
+            {
+              "text": "Early career faculty at non",
+              "column_start": 0,
+              "column_end": 27
+            },
+            {
+              "text": "-R1 institutions may request additional funding for grant administration (up to",
+              "column_start": 53,
+              "column_end": 132
+            }
+          ]
+        },
+        {
+          "line": 39,
+          "text": "$50,000 per year and $200,000 total in direct and indirect costs) to support a grant and/or budget",
+          "cells": [
+            {
+              "text": "$50,000 per year and $200,000 total in direct and indirect costs) to support a grant and/or budget",
+              "column_start": 0,
+              "column_end": 98
+            }
+          ]
+        },
+        {
+          "line": 40,
+          "text": "manager or assistants to carry out such tasks as overseeing the budget and invoices or working with or for",
+          "cells": [
+            {
+              "text": "manager or assistants to carry out such tasks as overseeing the budget and invoices or working with or for",
+              "column_start": 0,
+              "column_end": 106
+            }
+          ]
+        },
+        {
+          "line": 41,
+          "text": "the other offices at the university involved in grant management (for example, Office of Sponsored",
+          "cells": [
+            {
+              "text": "the other offices at the university involved in grant management (for example, Office of Sponsored",
+              "column_start": 0,
+              "column_end": 98
+            }
+          ]
+        },
+        {
+          "line": 42,
+          "text": "Projects).",
+          "cells": [
+            {
+              "text": "Projects).",
+              "column_start": 0,
+              "column_end": 10
+            }
+          ]
+        },
+        {
+          "line": 44,
+          "text": "To request these additional funds, include up to $50,000 per year under the Other Direct Costs section of",
+          "cells": [
+            {
+              "text": "To request these additional funds, include up to $50,000 per year under the Other Direct Costs section of",
+              "column_start": 0,
+              "column_end": 105
+            }
+          ]
+        },
+        {
+          "line": 45,
+          "text": "the Research & Related Budget form (see the IES Application Submission Guide for more information on",
+          "cells": [
+            {
+              "text": "the Research & Related Budget form (see the IES Application Submission Guide for more information on",
+              "column_start": 0,
+              "column_end": 100
+            }
+          ]
+        },
+        {
+          "line": 46,
+          "text": "this form, https://ies.ed.gov/application          -submission               -guide). IES does not expect a detailed budget for",
+          "cells": [
+            {
+              "text": "this form, https://ies.ed.gov/application",
+              "column_start": 0,
+              "column_end": 41
+            },
+            {
+              "text": "-submission",
+              "column_start": 51,
+              "column_end": 62
+            },
+            {
+              "text": "-guide). IES does not expect a detailed budget for",
+              "column_start": 77,
+              "column_end": 127
+            }
+          ]
+        },
+        {
+          "line": 47,
+          "text": "these additional funds at the time of application. If your Early Career application is being considered for",
+          "cells": [
+            {
+              "text": "these additional funds at the time of application. If your Early Career application is being considered for",
+              "column_start": 0,
+              "column_end": 107
+            }
+          ]
+        },
+        {
+          "line": 48,
+          "text": "funding, the           IES program officer will work with you to clarify                                                                  your plans for using these funds for grant",
+          "cells": [
+            {
+              "text": "funding, the",
+              "column_start": 0,
+              "column_end": 12
+            },
+            {
+              "text": "IES program officer will work with you to clarify",
+              "column_start": 23,
+              "column_end": 72
+            },
+            {
+              "text": "your plans for using these funds for grant",
+              "column_start": 138,
+              "column_end": 180
+            }
+          ]
+        },
+        {
+          "line": 49,
+          "text": "administration and management.",
+          "cells": [
+            {
+              "text": "administration and management.",
+              "column_start": 0,
+              "column_end": 30
+            }
+          ]
+        },
+        {
+          "line": 51,
+          "text": "Posted August 6, 2026                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             Institute of Education Sciences | 30",
+          "cells": [
+            {
+              "text": "Posted August 6, 2026",
+              "column_start": 0,
+              "column_end": 21
+            },
+            {
+              "text": "Institute of Education Sciences | 30",
+              "column_start": 914,
+              "column_end": 950
+            }
+          ]
+        }
+      ],
+      "truncated": false,
+      "toc": false
+    }
+  ],
+  "expected_awards": [
+    {
+      "value": {
+        "minimum": null,
+        "maximum": 50000
+      },
+      "track": "Early Career applications",
+      "basis": "per_year",
+      "funding_basis": "optional_supplement",
+      "applicant_condition": "Early career faculty at non-R1 institutions"
+    },
+    {
+      "value": {
+        "minimum": null,
+        "maximum": 200000
+      },
+      "track": "Early Career applications",
+      "basis": "total_project",
+      "funding_basis": "optional_supplement",
+      "applicant_condition": "Early career faculty at non-R1 institutions"
+    },
+    {
+      "value": {
+        "minimum": null,
+        "maximum": 500000
+      },
+      "track": "Early Career grants",
+      "basis": "total_project",
+      "funding_basis": "base_award",
+      "applicant_condition": null
+    }
+  ]
+}

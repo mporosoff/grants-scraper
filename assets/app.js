@@ -606,15 +606,29 @@
   }
 
   function deadlineLabel(record) {
-    if (record.rolling && record.close_date) return `Rolling through ${formatDate(record.close_date)}`;
-    if (record.rolling) return "Rolling / open until superseded";
-    const formatted = formatDate(record.close_date);
-    return record.status === "forecasted" && record.close_date
+    const selected = nextSubmission(record);
+    const qualifier = globalThis.FUNDING_SUBMISSION_SCHEDULE?.ACCESS_LABELS?.[selected.access] || "";
+    if (!selected.date) return qualifier || (record.rolling ? "Rolling / open until superseded" : "Date not listed");
+    const formatted = formatDate(selected.date);
+    const label = record.status === "forecasted" && selected.date
       ? `Estimated ${formatted}`
       : formatted;
+    return qualifier ? `${label} · ${qualifier}` : label;
+  }
+
+  function nextSubmission(record) {
+    return globalThis.FUNDING_SUBMISSION_SCHEDULE?.nextSubmission(record, runtimeDateIso())
+      || (record.next_submission?.as_of === runtimeDateIso() ? record.next_submission : null)
+      || {date: record.close_date, event: null, access: "verify_stage"};
+  }
+
+  function nextSubmissionDate(record) {
+    return nextSubmission(record).date;
   }
 
   function primaryDeadline(record) {
+    const selected = nextSubmission(record);
+    if (selected.event) return selected.event;
     const application = (record.deadlines || []).find(deadline =>
       ["application", "estimated_application"].includes(deadline.kind)
     );
@@ -1237,8 +1251,8 @@
 
     const deadlineFrom = $("deadline-from").value;
     const deadlineTo = $("deadline-to").value;
-    if (deadlineFrom && (!record.close_date || record.close_date < deadlineFrom)) return false;
-    if (deadlineTo && (!record.close_date || record.close_date > deadlineTo)) return false;
+    if (deadlineFrom && (!nextSubmissionDate(record) || nextSubmissionDate(record) < deadlineFrom)) return false;
+    if (deadlineTo && (!nextSubmissionDate(record) || nextSubmissionDate(record) > deadlineTo)) return false;
 
     const awardMinimum = Number($("award-min").value || 0);
     const awardMaximum = Math.max(
@@ -1329,17 +1343,17 @@
         return hybridOrder
           || evidenceOrder
           || right.score - left.score
-          || compareValues(a.close_date, b.close_date);
+          || compareValues(nextSubmissionDate(a), nextSubmissionDate(b));
       }
-      if (mode === "posted") return compareValues(a.posted_date, b.posted_date, -1) || compareValues(a.close_date, b.close_date);
+      if (mode === "posted") return compareValues(a.posted_date, b.posted_date, -1) || compareValues(nextSubmissionDate(a), nextSubmissionDate(b));
       if (mode === "award") {
         const aAward = Math.max(Number(a.award_ceiling || 0), Number(a.award_floor || 0));
         const bAward = Math.max(Number(b.award_ceiling || 0), Number(b.award_floor || 0));
-        return bAward - aAward || compareValues(a.close_date, b.close_date);
+        return bAward - aAward || compareValues(nextSubmissionDate(a), nextSubmissionDate(b));
       }
       if (mode === "agency") return compareValues(a.agency, b.agency) || compareValues(a.title, b.title);
       if (mode === "title") return compareValues(a.title, b.title);
-      return compareValues(a.close_date, b.close_date) || compareValues(a.title, b.title);
+      return compareValues(nextSubmissionDate(a), nextSubmissionDate(b)) || compareValues(a.title, b.title);
     });
     return matches;
   }
@@ -2606,6 +2620,7 @@
   function deadlineRows(record) {
     return (record.deadlines || []).map(deadline => {
       const timing = [
+        deadline.window_start ? `Window opens ${formatDate(deadline.window_start, { long: true })}` : "",
         deadline.date ? formatDate(deadline.date, { long: true }) : "",
         deadline.time || "",
         deadline.timezone || "",
@@ -2619,7 +2634,7 @@
         ? evidenceCitation(citationData, citationData.location)
         : "";
       return `<div>
-        <dt>${escapeHtml(deadlineKindLabel(deadline.kind))}</dt>
+        <dt>${escapeHtml(deadline.date_qualifier === "recommended" ? `Recommended ${deadlineKindLabel(deadline.kind).toLowerCase().replace("deadline", "submission")}` : deadline.date_qualifier === "anticipated" ? `Anticipated ${deadlineKindLabel(deadline.kind).toLowerCase()}` : deadlineKindLabel(deadline.kind))}${deadline.track ? ` · ${escapeHtml(deadline.track)}` : ""}</dt>
         <dd>${escapeHtml(timing)}${escapeHtml(verification)}${note ? `<small class="deadline-note">${escapeHtml(note)}</small>` : ""}${citation ? `<span class="inline-citation">${citation}</span>` : ""}</dd>
       </div>`;
     }).join("");
@@ -3016,10 +3031,10 @@
       (record.document_status_signals || []).some(value => ["cancelled", "superseded"].includes(value))
         ? `<span class="badge warning">Document status review</span>`
         : "",
-      Number.isInteger(daysUntil(record.close_date))
-        && daysUntil(record.close_date) >= 0
-        && daysUntil(record.close_date) <= 30
-        ? `<span class="badge warning">Closing in ${daysUntil(record.close_date)} days</span>`
+      nextSubmission(record).access === "open" && Number.isInteger(daysUntil(nextSubmissionDate(record)))
+        && daysUntil(nextSubmissionDate(record)) >= 0
+        && daysUntil(nextSubmissionDate(record)) <= 30
+        ? `<span class="badge warning">Closing in ${daysUntil(nextSubmissionDate(record))} days</span>`
         : "",
     ].filter(Boolean).join("");
     const aiBlock = assessment
@@ -3058,7 +3073,7 @@
     const primarySource = sourceAnchors.find(anchor => anchor.includes('class="source-action primary"')) || "";
     cardMenuActions.set(id, [
       { label: "Analyze", html: `<button class="source-action" type="button" data-chat-record="${escapeAttribute(id)}">Ask AI about this opportunity</button>${fundedAwardsHref ? `<a class="source-action" data-funded-awards="${escapeAttribute(id)}" href="${escapeAttribute(fundedAwardsHref)}" target="_blank" rel="noopener">View funded awards ↗<span class="sr-only"> (opens in a new tab)</span></a>` : ""}` },
-      { label: "Track", html: `<button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Create email alert</button>${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Create program alert</button>` : ""}<button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add deadline to calendar</button>` },
+      { label: "Track", html: `<button class="source-action" type="button" data-watch-opportunity="${escapeAttribute(id)}">Create email alert</button>${programIdentity ? `<button class="source-action" type="button" data-watch-program="${escapeAttribute(programIdentity.id)}" data-watch-program-label="${escapeAttribute(programIdentity.label)}">Create program alert</button>` : ""}<button type="button" class="source-action" data-calendar="${escapeAttribute(id)}"${nextSubmissionDate(record) ? "" : " disabled"}>Add deadline to calendar</button>` },
       { label: "Sources", html: sourceAnchors.filter(anchor => anchor !== primarySource).join("") },
       { label: "Contact", html: contactAction },
     ]);
@@ -3530,11 +3545,11 @@
   }
 
   function calendarEvents(record) {
-    const deadlines = (record.deadlines || []).filter(item =>
+    const deadlines = (globalThis.FUNDING_SUBMISSION_SCHEDULE?.events(record) || record.deadlines || []).filter(item =>
       /^\d{4}-\d{2}-\d{2}$/.test(String(item?.date || ""))
       && item.date >= runtimeDateIso()
     );
-    if (!deadlines.length && record.close_date && record.close_date >= runtimeDateIso()) {
+    if (!globalThis.FUNDING_SUBMISSION_SCHEDULE && !deadlines.length && record.close_date && record.close_date >= runtimeDateIso()) {
       deadlines.push({
         kind: record.status === "forecasted" ? "estimated_application" : "application",
         date: record.close_date,
@@ -3544,12 +3559,17 @@
     return deadlines.map((deadline, index) => ({
       uid: `${recordId(record)}-${deadline.kind || "deadline"}-${index}@funding-finder`,
       date: deadline.date,
-      summary: `${deadlineKindLabel(deadline.kind)}: ${record.title}`,
+      summary: `${deadlineKindLabel(deadline.kind)}${deadline.application_class && deadline.application_class !== "unspecified" ? ` (${deadline.application_class})` : ""}: ${record.title}`,
       description: [
         record.agency,
         record.opportunity_number,
         deadline.time,
         deadline.timezone,
+        deadline.cycle,
+        deadline.track ? `Track ${deadline.track}` : "",
+        deadline.required === true ? "Required" : deadline.required === false ? "Optional" : "",
+        deadline.invitation_required ? "Invitation required" : "",
+        nextSubmission(record).date === deadline.date ? globalThis.FUNDING_SUBMISSION_SCHEDULE?.ACCESS_LABELS?.[nextSubmission(record).access] : "",
         source,
       ].filter(Boolean).join(" · "),
       url: source,
@@ -3591,7 +3611,8 @@
   }
 
   function recordById(id) {
-    return catalog.opportunities.find(record => recordId(record) === id);
+    return globalThis.FUNDING_SUBMISSION_SCHEDULE?.recordById(catalog.opportunities, id)
+      || catalog.opportunities.find(record => recordId(record) === id);
   }
 
   function exportEvaluation() {
@@ -3647,9 +3668,14 @@
       "Match ratings exported with the current search text, filters, and rankings. API keys, profile/CV text, and chat were excluded.";
   }
 
+  function canonicalSavedId(id) {
+    const record = state.ready ? recordById(id) : null;
+    return record ? recordId(record) : id;
+  }
+
   function refreshSavedState(items) {
     state.savedItems = items || [];
-    state.savedIds = new Set(state.savedItems.map(SAVED_API.idOf));
+    state.savedIds = new Set(state.savedItems.map(item => canonicalSavedId(SAVED_API.idOf(item))));
   }
 
   function setSavedStatus(message = "", { error = false } = {}) {
@@ -3710,7 +3736,7 @@
         : escapeHtml(item.title);
       const meta = [
         item.agency, item.source,
-        item.close_date ? `due ${formatDate(item.close_date)}` : "",
+        deadlineLabel((state.ready ? recordById(SAVED_API.idOf(item)) : null) || item),
       ].filter(Boolean).map(escapeHtml).join(" · ");
       const id = SAVED_API.idOf(item);
       return `<div class="saved-item">
@@ -3736,10 +3762,10 @@
 
   function toggleSave(id) {
     if (!state.ready) return runCatalogAction(() => toggleSave(id));
-    const record = catalog.opportunities.find(item => recordId(item) === id);
+    const record = recordById(id);
     if (!record) return;
     const snapshot = { ...record, url: officialActions(record).url || record.detail_page };
-    const result = SAVED_API.toggle(snapshot);
+    const result = SAVED_API.toggle(snapshot, undefined, canonicalSavedId);
     if (savedMutationFailed(result)) return;
     renderSaved();
     renderResults();
@@ -3778,7 +3804,7 @@
     ALERTS_API.open({
       type: "opportunity",
       definition: {
-        opportunity_id: id,
+        opportunity_id: recordId(record),
         triggers: ["deadline_changed", "amended", "closing_reminders", "status_changed"],
       },
       summary: `${record.title} · ${record.agency || "Agency not listed"}`,
@@ -4122,6 +4148,7 @@
       "Cited FOA facts", "Citation URLs", "Source review queue",
       "Reviewer source verdict", "Reviewer checked field",
       "Primary FOA URL", "Agency notice URL", "Source record URL",
+      "Source close date", "Next submission stage", "Submission access", "Submission schedule",
     ]];
     currentDisplayMatches().forEach(match => {
       const record = catalog.opportunities[match.index];
@@ -4137,7 +4164,7 @@
       const potentialEvidence = RESULT_WORKFLOW_API.potentialEvidence(match);
       rows.push([
         record.title, record.agency, record.source, record.status, record.opportunity_number,
-        record.close_date, record.posted_date, record.award_floor,
+        nextSubmissionDate(record), record.posted_date, record.award_floor,
         record.award_ceiling, record.total_program_funding,
         record.expected_number_of_awards,
         deadlineEvidenceLabel(record), record.preliminary_deadline,
@@ -4170,6 +4197,8 @@
         sourceReview.status, sourceReview.field,
         record.primary_document_url,
         record.funding_opportunity_url, record.detail_page,
+        record.close_date, nextSubmission(record).event?.kind, nextSubmission(record).access,
+        JSON.stringify(globalThis.FUNDING_SUBMISSION_SCHEDULE?.events(record) || record.deadlines || []),
       ]);
     });
     const csv = rows.map(row => row.map(csvCell).join(",")).join("\r\n");
@@ -4302,6 +4331,10 @@
         label: truncate(fact.label, 200),
         value: compactJsonValue(fact.value, 320),
         display_value: truncate(fact.display_value, 240),
+        qualifiers: compactJsonValue(Object.fromEntries([
+          "subject", "stage", "track", "cycle", "basis", "cost_basis", "funding_basis", "estimate_kind", "applicant_condition", "currency", "obligation",
+          "required", "application_class", "invitation_required", "prerequisite", "rolling", "window_start", "date_qualifier", "exclusions", "reconciliation",
+        ].filter(key => fact[key] != null).map(key => [key, fact[key]])), 1100),
         confidence: truncate(fact.confidence, 80),
         citation: {
           location: truncate(fact.citation?.location, 240) || null,
@@ -4328,7 +4361,9 @@
       source: truncate(record.source, 160),
       source_type: truncate(record.source_type, 120),
       status: truncate(record.status, 80),
-      deadline: truncate(record.close_date, 80),
+      deadline: truncate(nextSubmissionDate(record), 80),
+      source_close_date: truncate(record.close_date, 80),
+      next_submission: compactJsonValue(nextSubmission(record), 1400),
       deadline_note: truncate(record.close_date_note, 400),
       deadlines: (record.deadlines || []).slice(0, 6).map(item => compactJsonValue(item, 400)),
       deadline_source: deadlineEvidenceLabel(record),
@@ -4674,7 +4709,7 @@
         </div>
         <div class="nofo-match-actions">
           <button type="button" class="save-button${state.savedIds.has(id) ? " saved" : ""}" data-save="${escapeAttribute(id)}" aria-pressed="${state.savedIds.has(id)}">${state.savedIds.has(id) ? "★ Saved" : "☆ Save"}</button>
-          <button type="button" class="text-button" data-calendar="${escapeAttribute(id)}"${record.close_date ? "" : " disabled"}>Add to calendar</button>
+          <button type="button" class="text-button" data-calendar="${escapeAttribute(id)}"${nextSubmissionDate(record) ? "" : " disabled"}>Add to calendar</button>
           <button type="button" class="text-button" data-chat-jump="${escapeAttribute(id)}">View full card</button>
           ${source.url ? `<a data-source-open="chat" href="${escapeAttribute(source.url)}" target="_blank" rel="noopener">Official source <span aria-hidden="true">↗</span></a>` : ""}
           <button type="button" class="text-button nofo-reject-match" data-nofo-reject-match="${escapeAttribute(id)}"${state.ai.busy ? " disabled" : ""}>Not this opportunity</button>
@@ -5935,6 +5970,7 @@
       excluded: candidate.opportunities.length - nextRecords.length,
     };
     state.ready = true;
+    refreshSavedState(state.savedItems);
     applyPendingFacetSelections();
     refreshProfileQuery();
     renderAllFacets();

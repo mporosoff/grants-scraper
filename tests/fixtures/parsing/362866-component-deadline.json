@@ -1,0 +1,206 @@
+{
+  "opportunity_id": "362866",
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+    "name": "HT942526PRPEIRA_GG.pdf",
+    "source_kind": "primary_notice",
+    "content_type": "application/pdf",
+    "sha256": "7406e73b5b21d5f52b9869b9bd1f924f92e715756879899d390be6d5155e8dee",
+    "version": 1,
+    "first_seen_at": "2026-07-26T20:05:30.061543Z",
+    "last_seen_at": "2026-08-24T10:48:19.939507Z",
+    "changed_since_previous": false
+  },
+  "source_checked_at": "2026-08-24T10:48:19.939507Z",
+  "record": {
+    "opportunity_id": "362866",
+    "close_date": "2026-11-06",
+    "deadlines": [
+      {
+        "kind": "application",
+        "date": "2026-11-06",
+        "time": null,
+        "timezone": null,
+        "note": null,
+        "estimated": false,
+        "source": "Grants.gov XML extract",
+        "source_url": "https://www.grants.gov/search-results-detail/362866",
+        "source_field": "CloseDate",
+        "confidence": "official_structured",
+        "detail_checked_at": "2026-07-30T18:51:36.535366Z",
+        "document_evidence_id": "evidence-362866-430dc0caae11",
+        "document_confidence": "machine_extracted_needs_verification"
+      },
+      {
+        "kind": "application",
+        "date": "2026-10-23",
+        "time": null,
+        "timezone": null,
+        "estimated": false,
+        "source": "Official notice (machine extracted)",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "confidence": "machine_extracted_needs_verification",
+        "evidence_id": "evidence-362866-004a10a74ea7",
+        "required": true
+      },
+      {
+        "kind": "preapplication",
+        "date": "2032-09-30",
+        "time": "5:00 p.m.",
+        "timezone": "East",
+        "estimated": false,
+        "source": "Official notice (machine extracted)",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "confidence": "machine_extracted_needs_verification",
+        "evidence_id": "evidence-362866-b93d80525036",
+        "required": true
+      },
+      {
+        "kind": "preapplication",
+        "date": "2027-09-30",
+        "time": "5:00 p.m.",
+        "timezone": "East",
+        "estimated": false,
+        "source": "Official notice (machine extracted)",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "confidence": "machine_extracted_needs_verification",
+        "evidence_id": "evidence-362866-66f88a7452ff",
+        "required": true
+      },
+      {
+        "kind": "application",
+        "date": "2026-11-13",
+        "time": "5:00 p.m.",
+        "timezone": "East",
+        "estimated": false,
+        "source": "Official notice (machine extracted)",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "confidence": "machine_extracted_needs_verification",
+        "evidence_id": "evidence-362866-4f41a08ed006",
+        "required": false
+      }
+    ]
+  },
+  "legacy_facts": [
+    {
+      "id": "evidence-362866-004a10a74ea7",
+      "type": "deadline",
+      "label": "Full application deadline",
+      "value": "2026-10-23",
+      "display_value": "2026-10-23",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154#page=1",
+        "document_name": "HT942526PRPEIRA_GG.pdf",
+        "sha256": "7406e73b5b21d5f52b9869b9bd1f924f92e715756879899d390be6d5155e8dee",
+        "page": 1,
+        "section": null,
+        "location": "page 1",
+        "quote": "…Defense Health Agency Parkinson’s Research Program Early Investigator Research Award Funding Opportunity Number: HT942526PRPEIRA Pre-Application Due: October 23, 2026 Application Due: November 6, 2026",
+        "extracted_at": "2026-07-26T20:05:30.061543Z"
+      },
+      "deadline_kind": "application",
+      "date": "2026-10-23",
+      "time": null,
+      "timezone": null,
+      "required": true
+    },
+    {
+      "id": "evidence-362866-430dc0caae11",
+      "type": "deadline",
+      "label": "Full application deadline",
+      "value": "2026-11-06",
+      "display_value": "2026-11-06",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154#page=1",
+        "document_name": "HT942526PRPEIRA_GG.pdf",
+        "sha256": "7406e73b5b21d5f52b9869b9bd1f924f92e715756879899d390be6d5155e8dee",
+        "page": 1,
+        "section": null,
+        "location": "page 1",
+        "quote": "…s Research Program Early Investigator Research Award Funding Opportunity Number: HT942526PRPEIRA Pre-Application Due: October 23, 2026 Application Due: November 6, 2026",
+        "extracted_at": "2026-07-26T20:05:30.061543Z"
+      },
+      "deadline_kind": "application",
+      "date": "2026-11-06",
+      "time": null,
+      "timezone": null,
+      "required": true
+    },
+    {
+      "id": "evidence-362866-b93d80525036",
+      "type": "deadline",
+      "label": "Preapplication deadline",
+      "value": "2032-09-30",
+      "display_value": "2032-09-30 · 5:00 p.m. East",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154#page=4",
+        "document_name": "HT942526PRPEIRA_GG.pdf",
+        "sha256": "7406e73b5b21d5f52b9869b9bd1f924f92e715756879899d390be6d5155e8dee",
+        "page": 4,
+        "section": null,
+        "location": "page 4",
+        "quote": "…The maximum period of performance is 2 years. It is anticipated that awards made from this FY26 funding opportunity will be funded with FY26 funds, which will expire for use on September 30, 2032. Awards supported with FY26 funds will be made no later than September 30, 2027. Submission and Review Dates and Times • Pre-Application (Letter of Intent) Submis…",
+        "extracted_at": "2026-07-26T20:05:30.061543Z"
+      },
+      "deadline_kind": "preapplication",
+      "date": "2032-09-30",
+      "time": "5:00 p.m.",
+      "timezone": "East",
+      "required": true
+    },
+    {
+      "id": "evidence-362866-66f88a7452ff",
+      "type": "deadline",
+      "label": "Preapplication deadline",
+      "value": "2027-09-30",
+      "display_value": "2027-09-30 · 5:00 p.m. East",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154#page=4",
+        "document_name": "HT942526PRPEIRA_GG.pdf",
+        "sha256": "7406e73b5b21d5f52b9869b9bd1f924f92e715756879899d390be6d5155e8dee",
+        "page": 4,
+        "section": null,
+        "location": "page 4",
+        "quote": "…e from this FY26 funding opportunity will be funded with FY26 funds, which will expire for use on September 30, 2032. Awards supported with FY26 funds will be made no later than September 30, 2027. Submission and Review Dates and Times • Pre-Application (Letter of Intent) Submission Deadline: 5:00 p.m. Eastern Time (ET), October 23, 2026 • Application Subm…",
+        "extracted_at": "2026-07-26T20:05:30.061543Z"
+      },
+      "deadline_kind": "preapplication",
+      "date": "2027-09-30",
+      "time": "5:00 p.m.",
+      "timezone": "East",
+      "required": true
+    },
+    {
+      "id": "evidence-362866-4f41a08ed006",
+      "type": "deadline",
+      "label": "Full application deadline",
+      "value": "2026-11-13",
+      "display_value": "2026-11-13 · 5:00 p.m. East",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353154#page=4",
+        "document_name": "HT942526PRPEIRA_GG.pdf",
+        "sha256": "7406e73b5b21d5f52b9869b9bd1f924f92e715756879899d390be6d5155e8dee",
+        "page": 4,
+        "section": null,
+        "location": "page 4",
+        "quote": "…adline: 5:00 p.m. Eastern Time (ET), October 23, 2026 • Application Submission Deadline: 11:59 p.m. ET, November 6, 2026 • End of Application Verification Period: 5:00 p.m. ET, November 13, 2026 • Confidential Letters of Recommendation Submission Deadline: 5:00 p.m. ET, November 13, 2026 • Peer Review: January 2027 • Programmatic Review: March 2027 Announc…",
+        "extracted_at": "2026-07-26T20:05:30.061543Z"
+      },
+      "deadline_kind": "application",
+      "date": "2026-11-13",
+      "time": "5:00 p.m.",
+      "timezone": "East",
+      "required": false
+    }
+  ]
+}

@@ -101,6 +101,7 @@ test("restored saved items enable alerts before catalog loading or searching and
     recordById() { throw new Error("No catalog yet"); },
   };
   vm.createContext(context);
+  vm.runInContext(appSource.slice(appSource.indexOf("  function recordId("), appSource.indexOf("  function validateCatalog(")), context);
   vm.runInContext(appSource.slice(appSource.indexOf("  function openOpportunityAlert("), appSource.indexOf("  function paginationItems(")), context);
   context.updateSavedOpportunityAlertUi(); context.updateSavedSearchAlertUi();
   assert.equal(dom.document.getElementById("alert-saved-opportunities").disabled, false);
@@ -108,6 +109,10 @@ test("restored saved items enable alerts before catalog loading or searching and
   context.openSavedOpportunityAlert(); context.openOpportunityAlert("retained");
   assert.equal(calls[0].type, "saved_opportunities");
   assert.equal(calls[1].definition.opportunity_id, "retained");
+  state.ready = true;
+  context.recordById = () => ({opportunity_id: "canonical", title: "Retained opportunity"});
+  context.openOpportunityAlert("retained");
+  assert.equal(calls[2].definition.opportunity_id, "canonical", "loaded aliases target the canonical watch identity");
   assert.doesNotMatch(JSON.stringify(calls[0].savedOpportunities), /private|note/);
   state.savedItems = []; context.updateSavedOpportunityAlertUi();
   assert.equal(dom.document.getElementById("alert-saved-opportunities").disabled, true);

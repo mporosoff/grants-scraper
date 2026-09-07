@@ -22,6 +22,7 @@ from scripts.build_feeds import (
     rfc3339,
 )
 from scripts.currentness import parse_date, record_is_current
+from scripts.submission_schedule import events as submission_events, next_submission
 
 SCHEMA_VERSION = 1
 RETENTION_DAYS = 90
@@ -29,11 +30,34 @@ CLOSING_SOON_DAYS = 30
 EVENT_LABELS = {
     "new": "New opportunity",
     "deadline_changed": "Deadline changed",
+    'source_correction': 'Source interpretation corrected',
     "amended": "Opportunity amended",
     "status_changed": "Status changed",
     "closing_soon": "Closing soon",
     "closed_or_removed": "Closed or removed",
 }
+
+
+def source_submission_fields(record):
+    """Compare source-owned values without reversible document enrichment."""
+    fields = {key: record.get(key) for key in (
+        'close_date', 'close_date_kind', 'deadline_time', 'deadline_timezone',
+        'description', 'synopsis', 'source_summary')}
+    owned = []
+    keys = ('kind', 'date', 'time', 'timezone', 'required', 'rolling', 'application_class',
+            'cycle', 'track', 'window_start', 'date_qualifier', 'prerequisite', 'invitation_required')
+    for event in submission_events(record):
+        if event.get('evidence_id'):
+            continue
+        event = dict(event)
+        for key, original in (event.get('document_source_fields') or {}).items():
+            if original['present']:
+                event[key] = original['value']
+            else:
+                event.pop(key, None)
+        owned.append({key: event[key] for key in keys if event.get(key) is not None})
+    fields['events'] = sorted(owned, key=lambda event: json.dumps(event, sort_keys=True))
+    return fields
 
 
 def record_id(record: dict) -> str:
@@ -68,6 +92,7 @@ def _snapshot(record: dict) -> dict:
         "status",
         "posted_date",
         "close_date",
+        'deadlines', 'submission_requirements', 'next_submission', 'source_aliases',
         "last_updated",
         "version",
         "topic_areas",
@@ -105,6 +130,8 @@ def diff_catalogs(
     changed_at = str(current.get("generated_at") or datetime.now(timezone.utc).isoformat())
     before = _records(previous)
     after = _records(current)
+    aliases = {str(alias['opportunity_id']): record for record in after.values()
+               for alias in record.get('source_aliases') or [] if alias.get('opportunity_id')}
     events: list[dict] = []
 
     def add(kind, record, detail="", **extra):
@@ -124,7 +151,8 @@ def diff_catalogs(
     for ident, record in after.items():
         if not record_is_current(record, as_of)[0]:
             continue
-        old = before.get(ident)
+        old = before.get(ident) or next((before[str(alias['opportunity_id'])] for alias in record.get('source_aliases') or []
+                                       if str(alias.get('opportunity_id')) in before), None)
         if old is None:
             add("new", record, "First appeared in the public catalog")
         else:
@@ -138,11 +166,19 @@ def diff_catalogs(
                     old_status=old_status,
                     new_status=new_status,
                 )
-            old_deadline = old.get("close_date")
-            new_deadline = record.get("close_date")
+            old_deadline = next_submission(old, as_of)['date']
+            new_deadline = next_submission(record, as_of)['date']
+            old_document = ((old.get('document_evidence') or {}).get('document') or {})
+            new_document = ((record.get('document_evidence') or {}).get('document') or {})
+            source_changed = (any(old.get(key) != record.get(key) for key in ('last_updated', 'version', 'api_revision'))
+                              or bool(old_document.get('sha256') and new_document.get('sha256')
+                                      and old_document['sha256'] != new_document['sha256']))
             if old_deadline != new_deadline:
+                correction = (not source_changed and bool(old_document.get('sha256'))
+                    and old_document['sha256'] == new_document.get('sha256')
+                    and source_submission_fields(old) == source_submission_fields(record))
                 add(
-                    "deadline_changed",
+                    'source_correction' if correction else "deadline_changed",
                     record,
                     f"{old_deadline or 'not listed'} → {new_deadline or 'not listed'}",
                     old_deadline=old_deadline,
@@ -160,9 +196,10 @@ def diff_catalogs(
             ):
                 add("amended", record, "Official source record changed")
 
-        deadline = parse_date(record.get("close_date"))
+        submission = next_submission(record, as_of)
+        deadline = parse_date(submission['date']) if submission['access'] == 'open' else None
         if deadline and as_of <= deadline <= as_of + timedelta(days=closing_days):
-            old_deadline = parse_date((old or {}).get("close_date"))
+            old_deadline = parse_date(next_submission(old or {}, as_of)['date'])
             previous_day = as_of - timedelta(days=1)
             already_close = bool(
                 old_deadline
@@ -179,7 +216,7 @@ def diff_catalogs(
                 )
 
     for ident, record in before.items():
-        current_record = after.get(ident)
+        current_record = after.get(ident) or aliases.get(ident)
         if current_record and record_is_current(current_record, as_of)[0]:
             continue
         # A source that deliberately withholds unsafe cached records during an

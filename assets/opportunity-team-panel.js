@@ -19,6 +19,7 @@
   function catalogRecord(identifier) {
     var records = global.GRANT_CATALOG && global.GRANT_CATALOG.opportunities || [];
     var target = String(identifier || "");
+    if (global.FUNDING_SUBMISSION_SCHEDULE) return global.FUNDING_SUBMISSION_SCHEDULE.recordById(records, target);
     return records.find(function (record) {
       return String(record.opportunity_id || record.opportunity_number || record.title || "") === target;
     }) || null;

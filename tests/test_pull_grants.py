@@ -258,6 +258,7 @@ class FeedTests(unittest.TestCase):
             "opportunity_id": "100",
             "opportunity_number": "DOE-TEST-1",
             "title": "Current opportunity",
+            'agency': 'Department of Energy',
             "status": "forecasted",
             "version": 1,
         }

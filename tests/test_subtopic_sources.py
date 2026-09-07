@@ -316,21 +316,12 @@ class HtmlAttachmentTests(unittest.TestCase):
         self.assertEqual(len(found), 1)
         self.assertEqual(found[0]["size"], 137_389)
 
-    def test_html_bytes_reach_the_container_path_but_headings_are_not_an_outline(self):
-        """Cov2 selects and parses HTML. It does **not** yet segment it.
+    def test_html_topic_headings_retain_owned_scientific_bodies(self):
+        """Retained explicit topic headings feed the existing bounded family.
 
-        This test asserts a measured gap, not a desired behaviour, and it was
-        rewritten during the Cov2 commit when it failed: extract_html_sections
-        puts the heading in the container's ``section`` and the prose in its
-        ``text``, so every text-scanning family looks straight past the
-        headings. §6.6 says to "use the section tree as the outline equivalent"
-        and nothing does.
-
-        Not built here, deliberately. Cov2's own measurement is that **0 of 20
-        non-stub NIH HTML announcements contain a fundable list** -- so an HTML
-        outline layer would be speculative work against a population measured
-        to yield nothing. When something does need it, this test is the
-        record of what is missing; flip it and build the layer then.
+        The former test recorded a measured missing-structure gap. Structure
+        preservation now closes that gap; assert source-owned bodies instead
+        of preserving an empty outcome or admitting title-only summaries.
         """
         page = html_notice(TOPICS)
 
@@ -350,7 +341,11 @@ class HtmlAttachmentTests(unittest.TestCase):
             page, "text/html", "notice.html", "https://example.gov/notice.html"
         )
         self.assertEqual(extraction["content_kind"], "html")
-        self.assertEqual(len(containers), len(TOPICS))
+        # Heading-only overview blocks are now retained as source structure.
+        # That preservation does not itself establish independent topic scope.
+        topic_containers = [c for c in containers if c.get("section") in TOPICS]
+        self.assertEqual(len(topic_containers), len(TOPICS))
+        self.assertTrue(all("Awards support single investigators" in c["text"] for c in topic_containers))
         self.assertIn(
             TOPICS[0], [container.get("section") for container in containers],
             "the h2 headings did not survive into the section tree",
@@ -370,10 +365,14 @@ class HtmlAttachmentTests(unittest.TestCase):
             fetched, ["https://example.gov/notice.html"],
             "the HTML attachment was not selected for a fetch",
         )
-        self.assertEqual(
-            result.subtopics, (),
-            "HTML headings now segment -- delete this test and assert the list",
-        )
+        self.assertEqual([s.title for s in result.subtopics],
+                         [title.split(" ", 3)[3] for title in TOPICS])
+        for topic in result.subtopics:
+            self.assertIn("Awards support single investigators", topic.summary)
+            self.assertIn("character", " ".join(topic.subtopic_terms))
+            for sibling in result.subtopics:
+                if sibling.title != topic.title:
+                    self.assertNotIn(sibling.title, topic.summary)
 
     def test_the_stub_rule_touches_only_html(self):
         self.assertFalse(sources._is_html_stub("tiny.pdf", 400))

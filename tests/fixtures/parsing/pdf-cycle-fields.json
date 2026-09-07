@@ -1,0 +1,227 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "355044",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351713",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351713",
+        "sha256": "7a2dc92d1157624fd1d2e1a7ae18cdc225bd7fe57e26ecdab9420681a75e104c",
+        "retrieved_at": "2026-09-07T21:00:22.236094+00:00"
+      },
+      "containers": [
+        {
+          "page": 2,
+          "text": "Key Dates \nPosted Date May 4, 2026 \nOpen Date \n(Earliest \nSubmission Date) \nMay 4, 2026 \n \nLetter of Intent \nDue Date(s) \nNot applicable for June 05, 2026 application due date. \n \nApril 14, 2027, for May 14, 2027 application due date. \n \nApril 12, 2028, for May 12, 2028 application due date. \n \nTechnical Session \n(Optional) \nMay 11, 2026 1:00 PM–2:30 PM EDT \n",
+          "toc": false
+        },
+        {
+          "page": 3,
+          "text": "Application Due \nDate(s) \nJune 12, 2026 \nMay 14, 2027 \nMay 12, 2028 \n \nAll applications are due by 11:59 PM local time of applicant \norganization. All types of non-AIDS applications allowed for this \nnotice of funding opportunity are due on the listed date(s) \n \nApplicants are encouraged to apply early to allow adequate time to \nmake any corrections to errors found in the application during the \nsubmission process by the due date. \n \nLate applications will not be accepted for this FOA. \nAIDS Application \nDue Date(s) \nNot Applicable \nScientific Merit \nReview \nAugust 2024, June of each subsequent year \nAdvisory Council \nReview \nNot Applicable \nEarliest Start Date September 2026 \nExpiration Date September 30, 2028 \nDue Dates for E.O. \n12372 \nNot Applicable \n \n",
+          "toc": false
+        },
+        {
+          "page": 7,
+          "text": "Letter of Intent \nAlthough a letter of intent is not required, is not binding, and does not enter into the review of a \nsubsequent application, the information that it contains allows IC staff to estimate the potential review \nworkload and plan the review. \n \nBy the date listed in Part 1. Overview Information, prospective applicants are asked to submit a letter \nof intent that includes the following information: \n• Descriptive title of proposed activity \n• Name(s), address(es), and telephone number(s) of the PD(s)/PI(s) \n• Names of other key personnel \n• Participating institution(s) \n• Number and title of this funding opportunity \n \nThe letter of intent should be sent to: \n \nJenise McNair \nEmail: jenise.mcnair@fda.hhs.gov \n \n",
+          "toc": false
+        }
+      ],
+      "expected": [
+        [
+          "letter_of_intent",
+          "2027-04-14",
+          null,
+          null,
+          "2027-05-14",
+          false
+        ],
+        [
+          "letter_of_intent",
+          "2028-04-12",
+          null,
+          null,
+          "2028-05-12",
+          false
+        ],
+        [
+          "application",
+          "2026-06-12",
+          "11:59 PM",
+          "applicant_local",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2027-05-14",
+          "11:59 PM",
+          "applicant_local",
+          "2027-05-14",
+          null
+        ],
+        [
+          "application",
+          "2028-05-12",
+          "11:59 PM",
+          "applicant_local",
+          "2028-05-12",
+          null
+        ]
+      ]
+    },
+    {
+      "opportunity_id": "360593",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351937",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351937",
+        "sha256": "d198bd20db41cbcfccdc29a591982d0e25061b4d41341de242fee0c9a5eb2ab4",
+        "retrieved_at": "2026-09-07T21:00:22.468090+00:00"
+      },
+      "containers": [
+        {
+          "page": 1,
+          "text": "Notice of Funding Opportunity \nApplication due \nOctober 2, 2026, \nFebruary 3, 2027, \nOctober 4, 2027, \nFebruary 3, 2028, \nOctober 3, 2028, \nFebruary 6, 2029 \nNational Institute of General Medical Sciences (NIGMS) \nMaximizing Investigators \nResearch Award (MIRA) \nfor Early Stage \nInvestigators (ESI) (R35 - \nClinical Trial Optional) \nOpportunity number: PAR-27-032",
+          "toc": false
+        },
+        {
+          "page": 43,
+          "text": "Submission requirements \nand deadlines \nApplication due dates: \nDue on October 2, 2026, February 3, 2027, October 4, 2027, February 3, 2028, October \n3, 2028, February 6, 2029 at 5:00 p.m. local time of the applicant organization. \n",
+          "toc": false
+        }
+      ],
+      "expected": [
+        [
+          "application",
+          "2026-10-02",
+          "5:00 p.m.",
+          "applicant_local",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2027-02-03",
+          "5:00 p.m.",
+          "applicant_local",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2027-10-04",
+          "5:00 p.m.",
+          "applicant_local",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2028-02-03",
+          "5:00 p.m.",
+          "applicant_local",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2028-10-03",
+          "5:00 p.m.",
+          "applicant_local",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2029-02-06",
+          "5:00 p.m.",
+          "applicant_local",
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "opportunity_id": "362034",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351449",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/351449",
+        "sha256": "5a959b9bd91071baa078438ecf7f0bf32d523e1d680d90ec4998d0b9e272d53a",
+        "retrieved_at": "2026-09-07T21:00:21.839258+00:00"
+      },
+      "containers": [
+        {
+          "page": 2,
+          "text": "NOAA NOFO Page 1 of 15 \n \nTable of Contents \nNOTICE OF FUNDING OPPORTUNITY .................................................................................................................1 \nExecutive Summary ..............................................................................................................................................1 \nFull Text of Announcement ..................................................................................................................................2 \nI. Funding Opportunity Description .................................................................................................................2 \nII. Award Information .......................................................................................................................................3 \nIII. Eligibility Information ..................................................................................................................................4 \nIV. Application and Submission Information ..................................................................................................4 \nV. Application Review Information ..................................................................................................................8 \nVI. Award Administration Information ..........................................................................................................11 \nVII. Agency Contacts ......................................................................................................................................15 \nVIII. Other Information ...................................................................................................................................15 \n \n \nExecutive Summary \nFederal Agency Name \nNational Oceanic and Atmospheric Administration (NOAA) \nFunding Opportunity Title \n2026 Alaska Marine Education and Training Mini-Grant Program \nAnnouncement Type \nCompetitive \nFunding Opportunity Number \nNOAA-NMFS-AK-2026-33268 \nAssistance Listing Number(s) \n11.455 \nDates \nApplications will be accepted and considered on an annual basis, with due dates of June 22, 2026; May 3, \n2027; and May 1, 2028. Applications for projects starting no earlier than September 1, 2026, must be \nreceived through www.grants.gov by 7:59 p.m. Alaska Standard Time (AKST) on June 22, 2026. To be \nconsidered for funding in subsequent fiscal years, applications must be received by 7:59 p.m. AKST on \nMay 3, 2027, for projects starting no earlier than September 1, 2027, and May 1, 2028, for projects starting \nno earlier than September 1, 2028. The earliest date for receipt of awards for this funding opportunity is \nanticipated to be September 1, 2026. Further application details are provided in the announcement. \n \n",
+          "toc": true
+        }
+      ],
+      "expected": [
+        [
+          "application",
+          "2026-06-22",
+          "7:59 p.m.",
+          "AKST",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2027-05-03",
+          "7:59 p.m.",
+          "AKST",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2028-05-01",
+          "7:59 p.m.",
+          "AKST",
+          null,
+          null
+        ]
+      ]
+    },
+    {
+      "opportunity_id": "356231",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/342420",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/342420",
+        "sha256": "c9c6b61929aa75f0ec802d6fe3c746287442711b5d509f68a30fd57a59b346f8",
+        "retrieved_at": "2026-09-07T21:00:22.912127+00:00"
+      },
+      "containers": [
+        {
+          "page": 2,
+          "text": "NOAA NOFO Page 1 of 32 \n \nTable of Contents \nNOTICE OF FUNDING OPPORTUNITY ....................................................................................................................1 \nExecutive Summary ........................................................................................................................................................1 \nFull Text of Announcement ............................................................................................................................................2 \nI. Funding Opportunity Description ...........................................................................................................................2 \nII. Award Information ................................................................................................................................................6 \nIII. Eligibility Information ..........................................................................................................................................7 \nIV. Application and Submission Information ............................................................................................................9 \nV. Application Review Information .........................................................................................................................20 \nVI. Award Administration Information ....................................................................................................................27 \nVII. Agency Contacts ...............................................................................................................................................32 \nVIII. Other Information ............................................................................................................................................32 \n \n \nExecutive Summary \nFederal Agency Name \nFisheries Habitat Conservation Program Office (HCPO) \nFunding Opportunity Title \nNOAA Great Lakes Fish Habitat Restoration Partnership Grants \nAnnouncement Type \nCompetitive \nFunding Opportunity Number \nNOAA-NMFS-HCPO-2024-28122 \nAssistance Listing Number(s) \n11.463 \nDates \nApplications will be accepted and considered on an annual basis, with due dates of October 28, 2024; September 5, \n2025; and September 4, 2026. Applications for projects starting approximately October 1, 2025 must be received \nthrough www.Grants.gov by 11:59 p.m. Eastern Time on October 28, 2024. To be considered for funding in \nsubsequent fiscal years, applications must be received by 11:59 p.m.on September 5, 2025 for projects starting on \napproximately October 1, 2026, and September 4, 2026 for projects starting approximately October 1, 2027. The \nearliest date for receipt of awards for this funding opportunity is anticipated to be October 1, 2025. Further \napplication details are provided in the announcement. \n \n",
+          "toc": true
+        }
+      ],
+      "expected": [
+        [
+          "application",
+          "2024-10-28",
+          "11:59 p.m.",
+          "Eastern",
+          null,
+          null
+        ],
+        [
+          "application",
+          "2025-09-05",
+          "11:59 p.m.",
+          null,
+          null,
+          null
+        ],
+        [
+          "application",
+          "2026-09-04",
+          "11:59 p.m.",
+          null,
+          null,
+          null
+        ]
+      ]
+    }
+  ]
+}

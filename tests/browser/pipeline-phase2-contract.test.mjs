@@ -1,3 +1,4 @@
+import { installSubmissionSchedule } from "../helpers/submission-schedule.mjs";
 import assert from "node:assert/strict";
 import { execFileSync } from "node:child_process";
 import { mkdtemp, readFile, rm } from "node:fs/promises";
@@ -31,6 +32,7 @@ const unsuitable = catalog.opportunities.find(r => r.opportunity_id.endsWith(":w
 const now = new Date("2026-09-06T12:00:00Z");
 const registry = JSON.parse(await readFile(join(temporary, "config/researcher_registry.json"), "utf8"));
 const app = await readFile(join(root, "assets/app.js"), "utf8");
+installSubmissionSchedule(context, app, "2026-09-06");
 function appFunction(name) {
   const source = app.match(new RegExp(`  function ${name}\\([^]*?\\n  }`));
   assert.ok(source, name);

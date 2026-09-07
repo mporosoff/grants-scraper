@@ -1,0 +1,36 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
+    "retrieved_at": "2026-09-07T12:37:02.019376+00:00",
+    "sha256": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1"
+  },
+  "annotation_method": "Funding Details pages 7–8 inspected from the retrieved official PDF; topic-scoped federal award caps remain distinct from total project funds and program budgets.",
+  "containers": [
+    {
+      "page": 7,
+      "text": " \nMultiple Topic Areas \nApproximate total available funding including all topic areas:  Federal Funds – Up to \n$150,000,000; Minimum 20% Cost Share Funds – $37,500,000 Total Project Funds - \n$187,500,000 \nTopic Area 1a: Field Test Site Research and Development of Technologies for Enhanced \nRecovery from Unconventional Oil and Gas Reservoirs \n• Approximate total available funding: Federal Funds – Up to $30,000,000; Minimum \n20% Cost Share Funds - $7,500,000; Total Project Funds - $37,500,000 \n• Approximate number of awards: 0-2 \n• Approximate dollar amount of individual awards: Federal Funds – Up to $15,000,000; \nMinimum 20% Cost Share Funds - $3,750,000; Total Project Funds - $18,750,000 \n• Minimum cost share required: 20% of the total project costs \n• Approximate award project period: 60 months \n• Anticipated length of budget periods: 12-24 months "
+    },
+    {
+      "page": 8,
+      "text": "Notice of Funding Opportunity, Part 1 \nPage 8 of 58 Version 4.0 \n \n \nTopic Area 1b: Advanced Characterization of Fracture Propagation, Proppant Behavior, \nand Well Diagnostics \n• Approximate total available funding: Federal Funds – Up to $36,000,000; Minimum \n20% Cost Share Funds - $9,000,000; Total Project Funds - $45,000,000 \n• Approximate number of awards: 0-3  \n• Approximate dollar amount of individual awards: Federal Funds – Up to $12,000,000; \nMinimum 20% Cost Share Funds - $3,000,000; Total Project Funds - $15,000,000 \n• Minimum cost share required:  20% of the total project costs \n• Approximate award project period: 60 months  \n• Anticipated length of budget periods: 12-24 months  \n \nTopic Area 1c: Enhanced Recovery of Oil and Gas from Unconventional Reservoirs Using \nCO2 \n• Approximate total available funding: Federal Funds – Up to $60,000,000; Minimum \n20% Cost Share Funds - $15,000,000; Total Project Funds - $75,000,000 \n• Approximate number of awards: 0-3  \n• Approximate dollar amount of individual awards: Federal Funds – Up to $20,000,000; \nMinimum 20% Cost Share Funds - $5,000,000; Total Project Funds - $25,000,000 \n• Minimum cost share required: 20% of the total project costs \n• Approximate award project period: 60 months  \n• Anticipated length of budget periods: 12-24 months  \n \nTopic Area 2: Advanced Field-Testing of Multi-Scale Produced Water Treatment \nTechnologies & Processes \n• Approximate total available funding: Federal Funds – Up to $24,000,000; Minimum \n20% Cost Share Funds - $6,000,000; Total Project Funds - $30,000,000 \n• Approximate number of awards: 0-2  \n• Approximate dollar amount of individual awards: Federal Funds – Up to $12,000,000; \nMinimum 20% Cost Share Funds - $3,000,000; Total Project Funds - $15,000,000 \n• Minimum cost share required: 20% of the total project costs \n• Approximate award project period: 60 months  \n• Anticipated length of budget periods: 12-24 months  \n \n"
+    }
+  ],
+  "expected": [
+    {
+      "track": "Topic Area 1a",
+      "maximum": 15000000
+    },
+    {
+      "track": "Topic Area 1b",
+      "maximum": 12000000
+    },
+    {
+      "track": "Topic Area 1c",
+      "maximum": 20000000
+    },
+    {
+      "track": "Topic Area 2",
+      "maximum": 12000000
+    }
+  ]
+}

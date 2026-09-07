@@ -493,7 +493,7 @@ def compact_detail(record, detail, fetched_at):
             ),
             "date": parse_text_date(preliminary_text),
             "text": preliminary_text,
-            "required": bool(normalized.get("preliminary_required")),
+            "required": normalized.get("preliminary_required"),
             "confidence": "machine_extracted_needs_verification",
         }
 

@@ -1,0 +1,42 @@
+{
+  "source": {
+    "url": "https://eere-exchange.energy.gov/#FoaId4d0f9925-93dc-4997-b8f9-652937afbce3",
+    "retrieved_at": "2026-09-07T12:37:03.251798+00:00",
+    "sha256": "6ee543c8f0288a560b504e7b8c7e08bc44e8edf705d674521c460e27a3f8fa61"
+  },
+  "document_name": null,
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "html_excerpt",
+  "text": "<h2>Submission Deadlines</h2><p>The required Concept Paper due date for this NOFO is 10/09/2026 at 5PM ET. The Full Application due date for this NOFO is 12/01/2026 at 5PM ET.</p><p>Concept Paper Submission Deadline: 10/9/2026 5:00 PM ET</p><p>Full Application Submission Deadline: 12/1/2026 5:00 PM ET</p>",
+  "annotations": [
+    {
+      "location": "Notice-specific Submission Deadlines section",
+      "rationale": "Each submission label owns its date and ET clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "concept_paper",
+        "date": "2026-10-09",
+        "timezone": "ET"
+      }
+    },
+    {
+      "location": "Notice-specific Submission Deadlines section",
+      "rationale": "Each submission label owns its date and ET clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2026-12-01",
+        "timezone": "ET"
+      }
+    },
+    {
+      "location": "Notice-specific Submission Deadlines section",
+      "rationale": "The full-application date must not be assigned to the concept paper.",
+      "forbid": {
+        "type": "deadline",
+        "deadline_kind": "concept_paper",
+        "date": "2026-12-01"
+      }
+    }
+  ]
+}

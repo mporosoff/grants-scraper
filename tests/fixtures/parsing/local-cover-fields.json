@@ -1,0 +1,194 @@
+{
+  "annotation_method": "Actual cached official-source field excerpts inspected during corpus review; preserve supported fields and reject unrelated dates. Full-source retrieval remains separately pending.",
+  "cases": [
+    {
+      "opportunity_id": "363514",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354731",
+        "name": "01 - 030ADV26R0050 - 0001 - NOFO - LHI - 2027-2029 .pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "c57c0a0c8a2cfa85f92ff2f736298bfc8444c6da9edf24f7e6d12cc313d0c5aa",
+        "version": 1,
+        "first_seen_at": "2026-08-21T16:39:20.902607Z",
+        "last_seen_at": "2026-09-05T16:20:56.348828Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-05T16:20:56.348828Z",
+      "legacy_fact": {
+        "id": "evidence-363514-edf081584367",
+        "type": "deadline",
+        "label": "Full application deadline",
+        "value": "2026-09-10",
+        "display_value": "2026-09-10 · 1:00 PM ET",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354731",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354731#page=6",
+          "document_name": "01 - 030ADV26R0050 - 0001 - NOFO - LHI - 2027-2029 .pdf",
+          "sha256": "c57c0a0c8a2cfa85f92ff2f736298bfc8444c6da9edf24f7e6d12cc313d0c5aa",
+          "page": 6,
+          "section": null,
+          "location": "page 6",
+          "quote": "…ck here to register o September 9, 2026: 10:00 AM ET: Click here to register General Questions Submission Deadline September 7, 2026 Technical Questions Submission Deadline September 10, 2026 Application Submission Deadline 2:00 PM Eastern Time September 18, 2026 Estimated Funds Available and Number of Awards The Library intends to issue up to six awards o…",
+          "extracted_at": "2026-08-21T16:39:20.902607Z"
+        },
+        "deadline_kind": "application",
+        "date": "2026-09-10",
+        "time": "1:00 PM",
+        "timezone": "ET",
+        "required": false
+      },
+      "expected": [
+        {
+          "kind": "application",
+          "date": "2026-09-18",
+          "time": "2:00 PM"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362644",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352581",
+        "name": "Foa_Content_of_R26AS00021_Final_5.14.26.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "d6d9adab6706b79176f82baa0b77399f27c6d89ae1bb14c774741536f44c4792",
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:17:05.080489Z",
+        "last_seen_at": "2026-08-24T19:19:38.443582Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-08-24T19:19:38.443582Z",
+      "legacy_fact": {
+        "id": "evidence-362644-fb0e0e17369c",
+        "type": "deadline",
+        "label": "Full application deadline",
+        "value": "2026-09-23",
+        "display_value": "2026-09-23 · 4:00 p.m.",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352581",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352581#page=13",
+          "document_name": "Foa_Content_of_R26AS00021_Final_5.14.26.pdf",
+          "sha256": "d6d9adab6706b79176f82baa0b77399f27c6d89ae1bb14c774741536f44c4792",
+          "page": 13,
+          "section": null,
+          "location": "page 13",
+          "quote": "…to Grants.gov, or an applicant’s SAM.gov registration are not considered technical issues with the Grants.gov system. Submission Dates and Times Closing Date for Applications: 09/23/2026 Closing Date Explanation Applications must be submitted no later than 4:00 p.m., MT, on the listed application due date. Submission Instructions Apply Through Grants.gov T…",
+          "extracted_at": "2026-07-27T14:17:05.080489Z"
+        },
+        "deadline_kind": "application",
+        "date": "2026-09-23",
+        "time": "4:00 p.m.",
+        "timezone": null,
+        "required": true
+      },
+      "expected": [
+        {
+          "kind": "application",
+          "date": "2026-09-23",
+          "time": null
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363631",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354645",
+        "name": "CCG NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "148aceb5fca7dc268ba1ac3d5f664aa07fa51ffb92249b58f8a4260f5e1d7737",
+        "version": 1,
+        "first_seen_at": "2026-08-21T17:11:42.170633Z",
+        "last_seen_at": "2026-09-05T16:20:56.348828Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-05T16:20:56.348828Z",
+      "legacy_fact": {
+        "id": "evidence-363631-1abc4a653d24",
+        "type": "deadline",
+        "label": "Full application deadline",
+        "value": "2026-10-01",
+        "display_value": "2026-10-01 · 11:59 PM East",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354645",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354645#page=1",
+          "document_name": "CCG NOFO.pdf",
+          "sha256": "148aceb5fca7dc268ba1ac3d5f664aa07fa51ffb92249b58f8a4260f5e1d7737",
+          "page": 1,
+          "section": null,
+          "location": "page 1",
+          "quote": "…l Year 2026 Notice of Funding Opportunity Funding Opportunity Number: USDA-AMS-TM-CCG-G-26-0001 Publication Date: August 17, 2026 Application Due Date: 11:59 PM Eastern Time on October 1, 2026",
+          "extracted_at": "2026-08-21T17:11:42.170633Z"
+        },
+        "deadline_kind": "application",
+        "date": "2026-10-01",
+        "time": "11:59 PM",
+        "timezone": "East",
+        "required": true
+      },
+      "expected": [
+        {
+          "kind": "application",
+          "date": "2026-10-01",
+          "time": "11:59 PM"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "arpa-h:fastpass",
+      "source": {
+        "url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "8c7960264e1116fd680740235bf8cf2fb94b9cb81f7972833791ee02625504fe",
+        "version": 1,
+        "first_seen_at": "2026-09-07T01:21:25.564825Z",
+        "last_seen_at": "2026-09-07T01:21:25.564825Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-07T01:21:25.564825Z",
+      "legacy_fact": {
+        "id": "evidence-arpa-h:fastpass-437c45933124",
+        "type": "deadline",
+        "label": "Full application deadline",
+        "value": "2026-11-10",
+        "display_value": "2026-11-10 · 4:00PM ET",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+          "citation_url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+          "document_name": null,
+          "sha256": "8c7960264e1116fd680740235bf8cf2fb94b9cb81f7972833791ee02625504fe",
+          "page": null,
+          "section": "Solicitation",
+          "location": "section “Solicitation”",
+          "quote": "…apply. Solution Summary Due: September 21, 2026 (4:00PM ET) Submitting a Solution Summary presentation slide deck is required to move forward with this opportunity. Proposal Due: November 10, 2026 (4:00PM ET) Reminder: Details subject to change. Please reference the solicitation documents for the most up-to-date information. Review Solicitation Details Rea…",
+          "extracted_at": "2026-09-07T01:21:25.564825Z"
+        },
+        "deadline_kind": "application",
+        "date": "2026-11-10",
+        "time": "4:00PM",
+        "timezone": "ET",
+        "required": true
+      },
+      "expected": [
+        {
+          "kind": "preapplication",
+          "date": "2026-09-21",
+          "time": "4:00PM"
+        },
+        {
+          "kind": "application",
+          "date": "2026-11-10",
+          "time": "4:00PM"
+        }
+      ]
+    }
+  ]
+}

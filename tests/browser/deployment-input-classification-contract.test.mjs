@@ -46,6 +46,7 @@ test("Alerts Worker deployment inputs include source, migrations, config, and bu
     "assets/match-explain.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
+    "assets/submission-schedule.js",
     "assets/search-v2-config.js",
   ]);
   const result = classifyWorkerDeployment("alerts", [
@@ -55,7 +56,7 @@ test("Alerts Worker deployment inputs include source, migrations, config, and bu
     ...WORKER_DEPLOYMENT_INPUTS.alerts.files,
   ]);
   assert.equal(result.deployRequired, true);
-  assert.equal(result.deploymentInputs.length, 8);
+  assert.equal(result.deploymentInputs.length, 9);
 });
 
 test("shared UI and release-support changes retain both existing Worker versions", () => {
@@ -292,12 +293,12 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
     "Capture and verify the protected main release base",
     "Classify Alerts Worker inputs since the active deployment",
     "Capture the active Alerts Worker version for rollback",
+    "Verify Pages serves the committed alert surfaces and catalog",
     "Reconfirm protected main immediately before Alerts Worker mutation",
     "Apply committed D1 migrations",
     "Deploy the committed Alerts Worker",
     "Wait for the Alerts Worker health contract",
     "Run bounded Alerts Worker smokes",
-    "Verify Pages serves the committed alert surfaces",
   ]);
   assert.doesNotMatch(workflowStep(alertsWorkflow, "Verify Pages serves the committed alert surfaces"), /deploy_required/);
   assert.equal(

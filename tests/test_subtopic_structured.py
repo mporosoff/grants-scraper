@@ -45,11 +45,11 @@ class HgeoTests(unittest.TestCase):
             [
                 "===== 4 =====",
                 "Subtopic 1A: Coal",
-                "Applicants select this subtopic.",
+                "The research supports sensors for real-time monitoring or digital twins to enable timely operational changes and pathways for automation and remote operations.",
                 "Subtopic 1B: Oil & Gas",
-                "Applicants select this subtopic.",
+                "The research supports development of advanced characterization techniques for unconventional reservoirs to improve resource assessment and predict optimal extraction strategies.",
                 "Subtopic 1C: Geothermal",
-                "Applicants select this subtopic.",
+                "The research supports development and testing of next-generation materials with enhanced durability for high-pressure, high-temperature geothermal environments.",
             ]
         )
 
@@ -73,12 +73,31 @@ class HgeoTests(unittest.TestCase):
         )
         self.assertTrue(outcome.claimed)
         self.assertEqual(len(outcome.records), 3)
+        self.assertEqual([item["subtopic_id"] for item in outcome.records],
+                         ["363594:a-1", "363594:b-1", "363594:c-1"])
+        self.assertEqual(outcome.diagnostics["body_parser_version"], structured.HGEO_BODY_VERSION)
         self.assertEqual([item["subtopic_code"] for item in outcome.records],
                          ["1A", "1B", "1C"])
         for item in outcome.records:
             self.assertEqual(item["subtopic_source"], records.INLINE)
             self.assertEqual(item["child_type"], "subject")
             self.assertEqual(item["source_role"], "authoritative_announcement")
+            self.assertNotIn("applicant-selectable", item["summary"])
+            self.assertGreater(len(item["summary"]), 100)
+
+    def test_title_only_topics_are_not_scientific_scope(self):
+        text = self.text()
+        import re
+        text = re.sub(r"The research[^\n]+", "Applicants select this subtopic.", text)
+        self.assertEqual(structured.parse_hgeo(text, "DE-FOA-0003215"), [])
+
+    def test_same_format_later_notice_uses_source_bodies_without_number_list(self):
+        text = self.text().replace("1A", "2A").replace("1B", "2B").replace("1C", "2C")
+        children = structured.parse_hgeo(text, "DE-FOA-0099999")
+        self.assertEqual([c['code'] for c in children], ['2A', '2B', '2C'])
+        self.assertIn('real-time monitoring', children[0]['text'])
+        self.assertNotIn('unconventional reservoirs', children[0]['text'])
+        self.assertNotIn('geothermal', children[1]['text'])
 
     def test_a_recognized_parent_with_collapsed_structure_fails_closed(self):
         content = b"===== 4 =====\nSubtopic 1A: Coal\n"

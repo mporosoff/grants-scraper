@@ -1,0 +1,113 @@
+{
+  "opportunity_id": "337086",
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599",
+    "name": "Foa_Content_of_CDC-RFA-TP22-2201_122024.pdf",
+    "source_kind": "primary_notice",
+    "content_type": "application/pdf",
+    "sha256": "9e11c3bc0402ebfc9da7206c325ac276b38e8c0cea4ecb8ab4368380367df424",
+    "version": 1,
+    "first_seen_at": "2026-07-28T12:14:44.323320Z",
+    "last_seen_at": "2026-08-25T03:13:26.882006Z",
+    "changed_since_previous": false
+  },
+  "source_checked_at": "2026-08-25T03:13:26.882006Z",
+  "legacy_facts": [
+    {
+      "id": "evidence-337086-957d5eba23de",
+      "type": "deadline",
+      "label": "Letter of intent deadline",
+      "value": "2024-09-21",
+      "display_value": "2024-09-21 · 11:59 p.m.",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599#page=3",
+        "document_name": "Foa_Content_of_CDC-RFA-TP22-2201_122024.pdf",
+        "sha256": "9e11c3bc0402ebfc9da7206c325ac276b38e8c0cea4ecb8ab4368380367df424",
+        "page": 3,
+        "section": null,
+        "location": "page 3",
+        "quote": "Page 2 of 50 F. Dates: 1. Due Date for Letter of Intent (LOI): 09/21/2024 2. Due Date for Applications: 02/11/2027 11:59 p.m. U.S. Eastern Standard Time, at www.grants.gov. 3. Due Date for Informational Conference Call: Please send inquiries regard…",
+        "extracted_at": "2026-07-28T12:14:44.323320Z"
+      },
+      "deadline_kind": "letter_of_intent",
+      "date": "2024-09-21",
+      "time": "11:59 p.m.",
+      "timezone": null,
+      "required": true
+    },
+    {
+      "id": "evidence-337086-6605980b9f6c",
+      "type": "deadline",
+      "label": "Full application deadline",
+      "value": "2027-02-11",
+      "display_value": "2027-02-11 · 11:59 p.m.",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599#page=3",
+        "document_name": "Foa_Content_of_CDC-RFA-TP22-2201_122024.pdf",
+        "sha256": "9e11c3bc0402ebfc9da7206c325ac276b38e8c0cea4ecb8ab4368380367df424",
+        "page": 3,
+        "section": null,
+        "location": "page 3",
+        "quote": "Page 2 of 50 F. Dates: 1. Due Date for Letter of Intent (LOI): 09/21/2024 2. Due Date for Applications: 02/11/2027 11:59 p.m. U.S. Eastern Standard Time, at www.grants.gov. 3. Due Date for Informational Conference Call: Please send inquiries regarding the NOFO to the program office at DSLRC…",
+        "extracted_at": "2026-07-28T12:14:44.323320Z"
+      },
+      "deadline_kind": "application",
+      "date": "2027-02-11",
+      "time": "11:59 p.m.",
+      "timezone": null,
+      "required": true
+    },
+    {
+      "id": "evidence-337086-fa8a49a32996",
+      "type": "deadline",
+      "label": "Full application deadline",
+      "value": "2022-04-04",
+      "display_value": "2022-04-04",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599#page=25",
+        "document_name": "Foa_Content_of_CDC-RFA-TP22-2201_122024.pdf",
+        "sha256": "9e11c3bc0402ebfc9da7206c325ac276b38e8c0cea4ecb8ab4368380367df424",
+        "page": 25,
+        "section": null,
+        "location": "page 25",
+        "quote": "…ed Registrations An organization must be registered at the three following locations before it can submit an application for funding at www.grants.gov. PLEASE NOTE: Effective April 4, 2022, applicants must have a Unique Entity Identifier (UEI) at the time of application submission (SF-424, field 8c). The UEI is generated as part of SAM.gov registration. Cu…",
+        "extracted_at": "2026-07-28T12:14:44.323320Z"
+      },
+      "deadline_kind": "application",
+      "date": "2022-04-04",
+      "time": null,
+      "timezone": null,
+      "required": true
+    },
+    {
+      "id": "evidence-337086-faf424e93687",
+      "type": "deadline",
+      "label": "Full application deadline",
+      "value": "2024-09-21",
+      "display_value": "2024-09-21 · 11:59 pm",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599#page=27",
+        "document_name": "Foa_Content_of_CDC-RFA-TP22-2201_122024.pdf",
+        "sha256": "9e11c3bc0402ebfc9da7206c325ac276b38e8c0cea4ecb8ab4368380367df424",
+        "page": 27,
+        "section": null,
+        "location": "page 27",
+        "quote": "…authorized to submit a paper application, it must be received by the deadline provided by OGS. a. Letter of Intent Deadline (must be emailed) Number Of Days from Publication 30 09/21/2024 b. Application Deadline Due Date for Applications 02/11/2027 02/11/2027 11:59 pm U.S. Eastern Time, at www.grants.gov. If Grants.gov is inoperable and cannot receive appl…",
+        "extracted_at": "2026-07-28T12:14:44.323320Z"
+      },
+      "deadline_kind": "application",
+      "date": "2024-09-21",
+      "time": "11:59 pm",
+      "timezone": null,
+      "required": true
+    }
+  ]
+}

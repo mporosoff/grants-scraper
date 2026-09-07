@@ -38,6 +38,7 @@ import hashlib
 from urllib.parse import urlparse
 
 from scripts.subtopic_segmentation import SegmentationResult, segment_document
+from scripts.source_documents import document_candidates
 
 
 # How many attachments to try per record, best-ranked first. A record with more
@@ -98,21 +99,11 @@ def _is_html_stub(name, size):
 
 
 def subtopic_only_primary(record):
-    """The first document to try for a record `source_for_record()` declines.
+    """Fallback source for attachment exploration without a canonical route.
 
-    §18.1 Cov1. `source_for_record()` returns ``None`` for **685 of 1,475
-    catalog records -- 46.4%** -- and 672 of those have never been fetched even
-    once (docs/COVERAGE_SURVEY.md). Two measured populations sit inside that
-    number: **236 carry live Grants.gov attachments**, which
-    :func:`attachment_sources` already reaches, and **221 carry an agency URL
-    that is declined only because the record needs no gap-fill**. The second
-    group is what this function is for.
-
-    It is deliberately not a change to `source_for_record()`. That function
-    answers *"which document may this record cite?"* -- a question where a
-    wrong one-click link is worse than none -- and it must keep answering it
-    the same way. This answers *"which bytes may segmentation read?"*, which
-    publishes no link at all.
+    Official agency notices now enter shared evidence extraction even when
+    their headline fields are complete. This helper remains available to the
+    bounded topic-only route; its scientific admission gates still apply.
     """
     url = (record or {}).get("funding_opportunity_url")
     if not url:
@@ -367,9 +358,14 @@ def best_segmentation(
     # judged against the same answer to "which document is the announcement?".
     announcement = _announcement_url(record, primary_document)
     opportunity_id = record.get("opportunity_id") or record.get("opportunity_number")
-    for source in attachment_sources(
-        opportunity_id, detail_fetcher=detail_fetcher, collector=collector
-    ):
+    sources = attachment_sources(opportunity_id, detail_fetcher=detail_fetcher, collector=collector)
+    sources.extend({'url': item['url'], 'name': item.get('name') or 'Official source document',
+                    'size': None, 'id': None} for item in document_candidates(record)
+                   if item['url'] != (primary_document or {}).get('url'))
+    # Both canonical and supplemental candidates share the existing attachment
+    # bound and selection gates; no per-consumer opportunity IDs are needed.
+    unique_sources = {item['url']: item for item in sources}
+    for source in list(unique_sources.values())[:MAX_ATTACHMENTS]:
         if run_budget is not None and run_budget.exhausted():
             attempts.append({"source": source["name"], "outcome": "run_budget"})
             break

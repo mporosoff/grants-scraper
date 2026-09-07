@@ -1,0 +1,56 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+    "retrieved_at": "2026-09-07T12:37:01.714937+00:00",
+    "sha256": "b720863805a224a41bfcd3b0e394f8ea1f4b4f74f92cc2159f75f9ee661a03d8"
+  },
+  "document_name": "N0001426SBC11.POST.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 3,
+      "section": null,
+      "anchor": null,
+      "text": "Approved, DCN# 2026-5-14-2288   \n \nBAA Call Number N0001426SBC11 \n \n3 \nDISTRIBUTION STATEMENT A. Approved for public release: distribution is unlimited \n \nWhite papers should not exceed 5 single-sided pages, exclusive of cover page, references and \nresume of principal investigator, and should be in 12-point Times New Roman font with margins \nnot less than one inch.  White papers shall be in Adobe PDF format (preferred) or in Microsoft \nWord format compatible with at least Microsoft Word 2016.   \n \nThe 5-page body of the white paper should include the following information:   \n \n• Technical Concept: A description of the technology innovation and technical risk areas. \n• Future Naval Relevance (where applicable) – A description of potential Naval relevance \nand contributions of the effort to the agency’s specific mission. \n• Operational Naval Concept (where applicable) – A description of the project objectives, \nthe concept of operation for the new capabilities to be delivered, and the expected \noperational performance improvements. \n• Operational Utility Assessment Plan (where applicable) – A plan for demonstrating and \nevaluating the operational effectiveness of the Offeror’s proposed products or processes \nin field experiments and/or tests in a simulated environment. \n• Goals and Benchmarks - Describe the goals of the research and the benchmarks that will \nbe used to measure the progress and success of those goals. \n• Gold Standard Science: Describe your success in implementing Gold Standard  \nScience in accordance with EO 14303 – Restoring Gold Standard Science\n \n(https://www.federalregister.gov/documents/2025/05/29/2025-09802/restoring-gold-\nstandard-science). \n \n• Rough Order of Magnitude (ROM) cost estimate \n \nA resume of the principal investigator, not to exceed 1 page, should also be included after the 5-\npage body of the white paper.   \n \nWhite papers must be submitted through ONR Submission Portal at \nhttps://submissions.nre.navy.mil/ in accordance with Section F, Submission Requirements and \nDeadline, Section 4. White Paper Submissions in N0001425SB001.   \n \nTo ensure full, timely consideration for funding, white papers should be submitted no later than \nJuly 31, 2026.  White papers received after that date will be considered as time and availability \nof funding permit. \n \nThe planned date for completing the review of white papers is August 14, 2026. \n \nAn expanded oral presentation will be requested from those Offerors whose proposed \ntechnologies have been identified as being of \"particular value\" to the Government. However, a \npositive email response to the oral presentation does not assure a subsequent award. The purpose \nof the oral presentation is to better acquaint the Government with the Offeror's proposal, "
+    },
+    {
+      "page": 4,
+      "section": null,
+      "anchor": null,
+      "text": "Approved, DCN# 2026-5-14-2288   \n \nBAA Call Number N0001426SBC11 \n \n4 \nDISTRIBUTION STATEMENT A. Approved for public release: distribution is unlimited \nespecially in its understanding of the technical approach and impact. The oral presentations are \ntentatively scheduled for September 10, 2026. \n \nIV.  FULL PROPOSAL SUBMISSION AND AWARD INFORMATION \n \nFull proposals should be submitted under N0001425SB001 or its successor N0001427SB001 by \nNovember 16, 2026.  Full proposals submitted after that due date should be submitted under its \nsuccessor N0001427SB001 and will be considered as time and availability of funding permit. \n \nONR anticipates that both grants and contracts will be issued for this effort.  \n \nFull proposals for contracts should be submitted in accordance with the Appendix 2 of the \nN0001425SB001.  Full proposals for grants should be submitted via Grants.gov in accordance \nwith Appendix 1 of N0001425SB001. \n \nGold Science Standard (Supplement to SF424 (R&R), block 17, Financial Assistance \nCertifications and Representations) \n \nBy Checking “I Agree” on the SF 424 (R&R) block 17, you agree to comply with the \nadministration policies, procedures and guidance respecting the Gold Standard Science in \naccordance with EO 14303 \n(https://www.federalregister.gov/documents/2025/05/29/2025-09802/restoring-gold-\nstandard-science).   \n \n \nThe period of performance for projects may be from one, two or three years. \n \nONR plans to fund five (5) to six (6) individual awards with a value of $250,000 to $500,000 per \nyear, using research funds. However, lower and higher cost proposals will be considered \n \nAlthough ONR expects the above described program plan to be executed, ONR reserve the right \nto make changes.  \n \nFunding decisions should be made by October 5, 2026. Selected projects will have an estimated \naward date of April 15, 2027. \n  "
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 3, White papers",
+      "rationale": "The five-page cap belongs to the white-paper body, excluding named attachments.",
+      "require": {
+        "type": "page_limit",
+        "subject": "White paper",
+        "value": 5
+      }
+    },
+    {
+      "location": "PDF page 3, principal investigator resume",
+      "rationale": "The one-page resume cap must not become a proposal cap.",
+      "require": {
+        "type": "page_limit",
+        "subject": "PI resume",
+        "value": 1
+      }
+    },
+    {
+      "location": "PDF page 4, individual awards",
+      "rationale": "The $250,000–$500,000 range is explicitly annual.",
+      "require": {
+        "type": "award_range",
+        "basis": "per_year",
+        "value": {
+          "minimum": 250000,
+          "maximum": 500000
+        }
+      }
+    }
+  ]
+}

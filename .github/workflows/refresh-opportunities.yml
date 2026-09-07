@@ -11,6 +11,10 @@ on:
       - "scripts/solicitation_identity.py"
       - "scripts/enrich_catalog.py"
       - "scripts/extract_document_evidence.py"
+      - "scripts/notice_*.py"
+      - "scripts/source_documents.py"
+      - "scripts/submission_schedule.py"
+      - "scripts/subtopic_*.py"
       - "scripts/faculty_match.py"
       - "scripts/researcher_registry.py"
       - "scripts/build_opportunity_teams.py"
@@ -25,6 +29,7 @@ on:
       - "scripts/currentness.py"
       - "scripts/alert_match.py"
       - "tools/run_refresh_validation.py"
+      - "tools/verify_notice_publication.py"
   schedule:
     - cron: "17 10 * * *"
   workflow_dispatch:
@@ -90,6 +95,8 @@ jobs:
             exit 1
           fi
           echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
+      - name: Verify the generated notice publication projection
+        run: python -m tools.verify_notice_publication
       - name: Capture the active Worker version for rollback
         id: candidate-prior-worker
         shell: bash
@@ -216,6 +223,22 @@ jobs:
         run: cp data/opportunities.js "$RUNNER_TEMP/opportunities.previous.js"
       - run: python -m pip install -r requirements.txt
       - run: pnpm install --frozen-lockfile
+      - name: Detect a required interpreted-data publication checkpoint
+        id: notice-checkpoint
+        shell: bash
+        run: |
+          python -m tools.verify_notice_publication --detect --output "$RUNNER_TEMP/notice-publication-before.json"
+          python - <<'PY'
+          import json, os
+          from pathlib import Path
+          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "notice-publication-before.json").read_text())
+          required = not report["publication_ready"]
+          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
+              output.write(f"required={str(required).lower()}\n")
+          if required:
+              with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
+                  summary.write("The committed notice projection requires a corrected generated package. This refresh will use the existing manual validation checkpoint before protected merge.\n")
+          PY
       - name: Test live product before refresh
         run: python -m tools.run_refresh_validation
       - name: Test canonical browser application
@@ -251,6 +274,12 @@ jobs:
           --write
           --summary-output "${{ runner.temp }}/source-refresh-summary.json"
           --fail-on-degraded
+      - name: Restore private normalized notice structure
+        uses: actions/cache/restore@v4
+        with:
+          path: .cache/notice-structure
+          key: notice-structure-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: notice-structure-${{ runner.os }}-
       - name: Extract citation-backed facts from official notices
         id: document_evidence
         continue-on-error: true
@@ -265,6 +294,12 @@ jobs:
           --request-delay 0.2
           --recheck-days 14
           --enable-subtopics
+      - name: Save private normalized notice structure
+        if: always() && steps.document_evidence.outcome != 'skipped'
+        uses: actions/cache/save@v4
+        with:
+          path: .cache/notice-structure
+          key: notice-structure-${{ runner.os }}-${{ github.run_id }}
       - name: Rebuild faculty metadata and live team-matcher configuration
         run: >-
           python -m scripts.faculty_match
@@ -379,6 +414,8 @@ jobs:
             echo "Current main: $current_main_sha" >&2
             exit 1
           fi
+      - name: Verify the generated notice publication projection
+        run: python -m tools.verify_notice_publication
       - name: Capture the active Worker version for rollback
         id: prior-worker
         shell: bash
@@ -497,7 +534,7 @@ jobs:
         shell: bash
         env:
           GH_TOKEN: ${{ github.token }}
-          MANUAL_RELEASE_VALIDATION: ${{ github.event_name == 'workflow_dispatch' && inputs.manual_release_validation }}
+          MANUAL_RELEASE_VALIDATION: ${{ (github.event_name == 'workflow_dispatch' && inputs.manual_release_validation) || steps.notice-checkpoint.outputs.required == 'true' }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |

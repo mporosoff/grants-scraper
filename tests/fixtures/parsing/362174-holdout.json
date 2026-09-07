@@ -1,0 +1,99 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351800",
+    "sha256": "547dc6489cdbca0f47bdc5b928d4a20fa886fabe62ae1d4ce89c158e44610ca4",
+    "retrieved_at": "2026-09-07T12:37:03.506346+00:00"
+  },
+  "annotations": [
+    {
+      "location": "Physical PDF page 4, Funding Details",
+      "rationale": "The program allotment and explicit per-award total cost cap have distinct subjects.",
+      "require": {
+        "type": "program_funding",
+        "value": 2650000
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Funding Details",
+      "rationale": "The program allotment and explicit per-award total cost cap have distinct subjects.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "minimum": null,
+          "maximum": 1325000
+        }
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Submission and Review Dates and Times",
+      "rationale": "Each bullet explicitly owns its stage, date, and clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "preproposal",
+        "date": "2026-07-22",
+        "time": "5:00 p.m.",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Submission and Review Dates and Times",
+      "rationale": "Each bullet explicitly owns its stage, date, and clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2026-10-22",
+        "time": "11:59 p.m.",
+        "timezone": "ET"
+      }
+    },
+    {
+      "location": "Physical PDF page 5, Cost Sharing",
+      "rationale": "The source expressly says cost sharing is not an eligibility requirement.",
+      "require": {
+        "type": "cost_share",
+        "value": false
+      }
+    },
+    {
+      "location": "Physical PDF page 5, Eligible Applicants",
+      "rationale": "The substantive organization section must be recovered.",
+      "require": {
+        "type": "eligibility_excerpt"
+      },
+      "contains_text": {
+        "value": "foreign and domestic"
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Invitation to Submit",
+      "rationale": "An invitation date is not an application submission date.",
+      "forbid": {
+        "type": "deadline",
+        "date": "2026-09-03"
+      }
+    },
+    {
+      "location": "Physical PDF page 5, individual PI administrative actions",
+      "rationale": "Withdrawing an excess individual application does not withdraw the solicitation.",
+      "forbid": {
+        "type": "status_signal",
+        "status_signal": "cancelled"
+      }
+    }
+  ],
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 4,
+      "text": "Section Shortcuts \nBasic Information | Eligibility | Program Description | Application Contents and Format | Submission Requirements \nApplication Review Information | Federal Award Notices | Post-Award Requirements | Other Information \nFY26 Tick-Borne Disease Therapeutic/Diagnostic Research Award 4 \n1. Basic Information About the Funding Opportunity \nSummary: The intent of the fiscal year 2026 (FY26) Tick-Borne Disease Research Program \n(TBDRP) Therapeutic/Diagnostic Research Award (TDRA) is to support product-driven \ntherapeutic and diagnostic development research aimed at reducing the burden of Lyme \ndisease and/or other tick-borne diseases and conditions, and improving patient care and/or \nquality of life. Treatment-focused applications should be therapeutic evaluation studies designed \nto advance new ideas aimed at drug or treatment discovery that are still in the early/preclinical \nstages of development. Diagnosis-focused applications should propose diagnostic approaches \nthat will be readily integrated into clinical settings.   \nFunding Details: The Congressionally Directed Medical Research Programs (CDMRP) expects \nto allot roughly $2.65M to fund approximately two Therapeutic/Diagnostic Research Award \napplications with total cost caps of $1.325M per award. The maximum period of performance is \n3 years. It is anticipated that awards made from this FY26 funding opportunity will be funded \nwith FY26 funds, which will expire for use on September 30, 2032. Awards supported with FY26 \nfunds will be made no later than September 30, 2027. \nSubmission and Review Dates and Times \n\u2022 Pre-Application (Preproposal) Submission Deadline: 5:00 p.m. Eastern Time (ET), July \n22, 2026 \n\u2022 Invitation to Submit an Application: September 3, 2026 \n\u2022 Application Submission Deadline: 11:59 p.m. ET, October 22, 2026  \n\u2022 End of Application Verification Period: 5:00 p.m. ET, October 27, 2026  \n\u2022 Peer Review: December 2026 \n\u2022 Programmatic Review: February 2027 \nAnnouncement Type: Initial  \nFunding Opportunity Number: HT942526TBDRPTDRA   \nAssistance Listing Number: 12.420  ",
+      "section": null,
+      "anchor": null
+    },
+    {
+      "page": 5,
+      "text": "Section Shortcuts \nBasic Information | Eligibility | Program Description | Application Contents and Format | Submission Requirements \nApplication Review Information | Federal Award Notices | Post-Award Requirements | Other Information \nFY26 Tick-Borne Disease Therapeutic/Diagnostic Research Award 5 \n2. Eligibility Information \n2.1. Eligible Applicants \n2.1.1. Organization  \nExtramural and intramural U.S. Department of War (DOW) organizations are eligible to apply, \nincluding foreign and domestic organizations, for-profit and nonprofit organizations, and \npublic or private entities.  \n2.1.2. Principal Investigator \nIndependent investigators at all career levels may be named by their organizations as the \nPrincipal Investigator (PI) on the application. \nIndividuals in a mentored position (e.g., postdoctoral fellows, clinical fellows) are not considered \nindependent investigators. \nIndependent investigators affiliated with an eligible organization are eligible to be named PI on \nthe application, regardless of ethnicity, nationality or citizenship status.  \n2.2. Cost Sharing \nCost sharing is not an eligibility requirement.  \n2.3. Other \nAwards are made to eligible organizations, not to individuals. Refer to the GAI for additional \nrecipient qualification requirements. \n ",
+      "section": null,
+      "anchor": null
+    }
+  ]
+}

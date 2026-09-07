@@ -1,0 +1,212 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "363446",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354313",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354313",
+        "sha256": "de1fc960841b6064d9e8bcf05fbfd99fcc341251964ceee6e45a32413c033212",
+        "retrieved_at": "2026-09-07T20:44:50.270726+00:00",
+        "bytes": 624057,
+        "content_type": "application/pdf"
+      },
+      "containers": [
+        {
+          "page": 1,
+          "text": "NHTSA will evaluate applications in three phases as follows: \nPhase one (1): NHTSA will evaluate applications submitted no later than 9/3/2026. \nPhase two (2): NHTSA will evaluate applications submitted no later than 3/1/2027. \nPhase three (3): NHTSA will evaluate applications submitted no later than 9/1/2027. \n**Note: All applications are due by 5pm EST. on the date(s) above** \nNHTSA will only accept one (1) application per eligible applicant during each \napplication phase. Applicants that were not selected during an earlier phase may \nsubmit a revised application during a subsequent phase, provided the application \ncontinues to meet all eligibility requirements. (see Section II ‘Eligibility’)."
+        }
+      ],
+      "expected_upcoming": [
+        [
+          "application",
+          "2027-03-01",
+          "5pm",
+          "EST",
+          "Phase two (2)",
+          null
+        ],
+        [
+          "application",
+          "2027-09-01",
+          "5pm",
+          "EST",
+          "Phase three (3)",
+          null
+        ]
+      ],
+      "annotation": "Manual source labels and values from the original PDF. NHTSA page 1 and WaterSMART page 3 rendered and inspected. Preserve the source-printed seasonal timezone; CDC Part 1 list plus section IV explicitly optional LOI and application-only clock."
+    },
+    {
+      "opportunity_id": "362394",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352024",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/352024",
+        "sha256": "d1da7fca476fec0b7265d359b043f692fcc7d08ebda714a08cc61dcf58d54503",
+        "retrieved_at": "2026-09-07T20:44:50.127924+00:00",
+        "bytes": 240075,
+        "content_type": "application/pdf"
+      },
+      "containers": [
+        {
+          "page": 3,
+          "text": "Closing Date Explanation \nThis funding opportunity will have two application deadlines. The first application period will \nclose Wednesday, September 9th, 2026, and the second application period will close \nWednesday, September 8th, 2027. \nWednesday, September 9th, 2026, 4:00pm MDT \nAnd Wednesday, September 8th, 2027, 4:00pm MDT \nU.S. states and local governments may be required under Executive Order 12372, \nIntergovernmental Review of Federal Programs to submit their application to their State Single \nPoint of Contact (SPOC) for review. For more information, see the Intergovernmental Review \nSPOC List. \n"
+        }
+      ],
+      "expected_upcoming": [
+        [
+          "application",
+          "2026-09-09",
+          "4:00pm",
+          "MDT",
+          "First submission period",
+          null
+        ],
+        [
+          "application",
+          "2027-09-08",
+          "4:00pm",
+          "MDT",
+          "Second submission period",
+          null
+        ]
+      ],
+      "annotation": "Manual source labels and values from the original PDF. NHTSA page 1 and WaterSMART page 3 rendered and inspected. Preserve the source-printed seasonal timezone; CDC Part 1 list plus section IV explicitly optional LOI and application-only clock."
+    },
+    {
+      "opportunity_id": "362755",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352917",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/352917",
+        "sha256": "c84e553209b8a7d7a531f8d3e1867760d57ef02a93f760edb306f735a0bffd7d",
+        "retrieved_at": "2026-09-07T20:44:51.140691+00:00",
+        "bytes": 240939,
+        "content_type": "application/pdf"
+      },
+      "containers": [
+        {
+          "page": 3,
+          "text": "Closing Date Explanation \nFirst Round: October 7, 2026, 4:00 p.m. Mountain Standard Time \nSecond Round: February 24, 2027, 4:00 p.m. Mountain Daylight Savings Time \nThird Round: September 1, 2027, 4:00 p.m. Mountain Standard Time \nFourth Round: February 15, 2028, 4:00 p.m. Mountain Daylight Savings Time \nU.S. states and local governments may be required under Executive Order 12372, \nIntergovernmental Review of Federal Programs to submit their application to their State Single \nPoint of Contact (SPOC) for review. For more information, see the Intergovernmental Review \nSPOC List. \n"
+        }
+      ],
+      "expected_upcoming": [
+        [
+          "application",
+          "2026-10-07",
+          "4:00 p.m.",
+          "MST",
+          "First Round",
+          null
+        ],
+        [
+          "application",
+          "2027-02-24",
+          "4:00 p.m.",
+          "MDT",
+          "Second Round",
+          null
+        ],
+        [
+          "application",
+          "2027-09-01",
+          "4:00 p.m.",
+          "MST",
+          "Third Round",
+          null
+        ],
+        [
+          "application",
+          "2028-02-15",
+          "4:00 p.m.",
+          "MDT",
+          "Fourth Round",
+          null
+        ]
+      ],
+      "annotation": "Manual source labels and values from the original PDF. NHTSA page 1 and WaterSMART page 3 rendered and inspected. Preserve the source-printed seasonal timezone; CDC Part 1 list plus section IV explicitly optional LOI and application-only clock."
+    },
+    {
+      "opportunity_id": "334971",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319693",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/319693",
+        "sha256": "ed7b40d5b7f89f5199a89777acb6f6da65752ecf166fe374d9a69d16ef3978c8",
+        "retrieved_at": "2026-09-07T20:44:50.834903+00:00",
+        "bytes": 941767,
+        "content_type": "application/pdf"
+      },
+      "containers": [
+        {
+          "page": 4,
+          "text": "Key Dates \nPublication Date: \nTo receive notification of any changes to RFA-OH-22-005, return to the synopsis page of this \nannouncement at www.grants.gov and click on the \"Send Me Change Notification Emails\" link. \nAn email address is needed for this service. \nLetter of Intent Due Date: \nThe LOI date will generate once the Synopsis is published if Days or a Date are entered. \nJuly 29, 2022; December 30, 2022; July 28, 2023; December 29, 2023; July 26, 2024; December \n27, 2024; August 1, 2025; January 2, 2026; July 31, 2026; December 31, 2026 \nApplication Due Date: \n08/30/2022 \nAugust 30, 2022; January 27, 2023; August 25, 2023; January 26, 2024; August 23, 2024; \nJanuary 24, 2025; August 29, 2025; January 30, 2026; August 28, 2026; January 29, 2027 \nOn-time submission requires that electronic applications be error-free and made available to \nCDC for processing from the NIH eRA system on or before the deadline date. Applications must \nbe submitted to and validated successfully by Grants.gov no later than 11:59 PM U.S. Eastern \nTime. \n"
+        },
+        {
+          "page": 22,
+          "text": "3. Letter of Intent \nNumber Of Days from Publication 30 \nThe LOI date will generate once the Synopsis is published if Days or a Date are entered. \nAlthough a letter of intent is not required, is not binding, and does not enter into the review of a \nsubsequent application, the information it contains allows CDC staff to plan the review. By the \ndate listed above and in Part 1. Overview Information, prospective applicants are asked to submit \na letter of intent that includes the following information:"
+        }
+      ],
+      "expected_upcoming": [
+        [
+          "letter_of_intent",
+          "2026-12-31",
+          null,
+          null,
+          null,
+          false
+        ],
+        [
+          "application",
+          "2027-01-29",
+          "11:59 PM",
+          "Eastern",
+          null,
+          null
+        ]
+      ],
+      "annotation": "Manual source labels and values from the original PDF. NHTSA page 1 and WaterSMART page 3 rendered and inspected. Preserve the source-printed seasonal timezone; CDC Part 1 list plus section IV explicitly optional LOI and application-only clock."
+    },
+    {
+      "opportunity_id": "334972",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/319713",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/319713",
+        "sha256": "f6dc792bfc92caabb7eb5a33497f667e0ca30dd84ba1f40b99d339c42abfe12c",
+        "retrieved_at": "2026-09-07T20:44:50.956544+00:00",
+        "bytes": 919556,
+        "content_type": "application/pdf"
+      },
+      "containers": [
+        {
+          "page": 3,
+          "text": "Key Dates \nPublication Date: \nTo receive notification of any changes to RFA-OH-22-006, return to the synopsis page of this \nannouncement at www.grants.gov and click on the \"Send Me Change Notification Emails\" link. \nAn email address is needed for this service. \nLetter of Intent Due Date: \nThe LOI date will generate once the Synopsis is published if Days or a Date are entered. \nJuly 29, 2022; December 30, 2022; July 28, 2023; December 29, 2023; July 26, 2024; December \n27, 2024; August 1, 2025; January 2, 2026; July 31, 2026; December 31, 2026 \nApplication Due Date: \nApplication Due Date will be submitted as: date based on the value specified for Due Date for \nApplications \nAugust 26, 2022; January 27, 2023; August 25, 2023; January 26, 2024; August 23, 2024; \nJanuary 24, 2025; August 29, 2025; January 30, 2026; August 28, 2026; January 29, 2027"
+        },
+        {
+          "page": 4,
+          "text": "Page 3 of 49 \nOn-time submission requires that electronic applications be error-free and made available to \nCDC for processing from the NIH eRA system on or before the deadline date. Applications must \nbe submitted to and validated successfully by Grants.gov no later than 11:59 PM U.S. Eastern \nTime. \n"
+        },
+        {
+          "page": 21,
+          "text": "3. Letter of Intent \nNumber Of Days from Publication 30 \nThe LOI date will generate once the Synopsis is published if Days or a Date are entered. \nAlthough a letter of intent is not required, is not binding, and does not enter into the review of a \nsubsequent application, the information it contains allows CDC staff to plan the review. By the \ndate listed above and in Part 1. Overview Information, prospective applicants are asked to submit \na letter of intent that includes the following information:"
+        }
+      ],
+      "expected_upcoming": [
+        [
+          "letter_of_intent",
+          "2026-12-31",
+          null,
+          null,
+          null,
+          false
+        ],
+        [
+          "application",
+          "2027-01-29",
+          "11:59 PM",
+          "Eastern",
+          null,
+          null
+        ]
+      ],
+      "annotation": "Manual source labels and values from the original PDF. NHTSA page 1 and WaterSMART page 3 rendered and inspected. Preserve the source-printed seasonal timezone; CDC Part 1 list plus section IV explicitly optional LOI and application-only clock."
+    }
+  ]
+}

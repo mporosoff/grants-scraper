@@ -1,0 +1,77 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353013",
+    "sha256": "aba06a1b3717c4f27e46c6c7ccedadef625554f484063d831301e7f35f127a91",
+    "retrieved_at": "2026-09-07T12:37:03.793456+00:00"
+  },
+  "annotations": [
+    {
+      "location": "Physical PDF page 3 (printed page 2), Basic Information",
+      "rationale": "The labeled award floor and ceiling are independent of the program total.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "minimum": 30000,
+          "maximum": 220000
+        }
+      }
+    },
+    {
+      "location": "Physical PDF pages 3 and 5, Cost Sharing Required field",
+      "rationale": "The source field says Yes and confirms the statutory 25 percent match.",
+      "require": {
+        "type": "cost_share",
+        "value": true
+      }
+    },
+    {
+      "location": "Physical PDF page 5, Eligibility",
+      "rationale": "The substantive organization list survives.",
+      "require": {
+        "type": "eligibility_excerpt"
+      },
+      "contains_text": {
+        "value": "State governments"
+      }
+    },
+    {
+      "location": "Physical PDF page 3, Closing Date Explanation",
+      "rationale": "Round One independently owns its application date; the same field explicitly assigns ET.",
+      "require": {
+        "type": "deadline",
+        "date": "2026-08-14",
+        "deadline_kind": "application",
+        "time": "5:00 p.m.",
+        "timezone": "ET",
+        "cycle": "Round One"
+      }
+    },
+    {
+      "location": "Physical PDF page 3, Closing Date Explanation",
+      "rationale": "Round Two independently owns its application date; the same field explicitly assigns ET.",
+      "require": {
+        "type": "deadline",
+        "date": "2026-10-16",
+        "deadline_kind": "application",
+        "time": "5:00 p.m.",
+        "timezone": "ET",
+        "cycle": "Round Two"
+      }
+    }
+  ],
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 3,
+      "text": " \n  Page 2 of 22 \n \n \n \nBASIC INFORMATION \nAnnouncement Type: Initial \nFunding Opportunity Number: L26AS00064 \nAssistance Listing Number(s): 15.243 \nEstimated Total Program Funding: $900,000 \nExpected Number of Awards: 8 \nAward Ceiling: $220,000 \nAward Floor: $30,000 \nCost Sharing Required?                                                                   \nYes \nClosing Date Explanation \nElectronically submitted applications must be submitted no later than 5:00 p.m., ET, on the listed \napplication due dates. Applications must be submitted through grants.gov. \nApplications will be reviewed, rated, ranked and selected via merit review committee. \nOpen from June 12, 2026, through October 16, 2026. \nRound One Applications Due: August 14, 2026 \nRound Two Applications Due: October 16, 2026  \nRefer to \u201cRelated Documents\u201d tab for individual project details and closing dates. \nExtensions to NOFO close dates will be unallowed, except in extenuating circumstances. \n  \nU.S. states and local governments may be required under Executive Order 12372, \nIntergovernmental Review of Federal Programs to submit their application to their State Single \nPoint of Contact (SPOC) for review. For more information, see the Intergovernmental Review \nSPOC List. \nOMB Control Number: \nHave Questions? \nApplicants are also encouraged to contact the Grants Management Officer, Chanda Brown at \nchanda_brown@ios.doi.gov or the BLM National Youth Programs Lead, Michael Brown at \nm55brown@blm.gov with any questions. \nAlaska, Arizona, Colorado, Eastern States, Idaho, Montana/Dakotas, Nevada, Wyoming, \nNational Interagency Fire Center (NIFC), and the National Operations Center (NOC) will \nnot be accepting applications during Round 1 under this Notice of Funding Opportunity \n(NOFO).  This NOFO may be updated/revised in the future to include additional projects ",
+      "section": null,
+      "anchor": null
+    },
+    {
+      "page": 5,
+      "text": " \n  Page 4 of 22 \n \n\u2022 In-house projects, such as cartography, records management, realty or wildland fire \nsupport, must demonstrate a clear benefit to natural or cultural resources and include a \nfield component of at least 120 hours. \nELIGIBILITY \nEligible Applicants \nState governments \nCounty governments \nCity or township governments \nSpecial district governments \nPublic and State controlled institutions of higher education \nNative American tribal governments (Federally recognized) \nNative American tribal organizations (other than Federally recognized tribal governments) \nNonprofits having a 501(c)(3) status with the IRS, other than institutions of higher education \nNonprofits without 501(c)(3) status with the IRS, other than institutions of higher education \nPrivate institutions of higher education \nAdditional Information on Eligibility \nIndividuals and for-profit organizations are ineligible to apply for awards under this NOFO. \n \nThis program NOFO does support entities hiring interns or crews under the Public Lands Corps \nAct of 1993. The Public Lands Corps Act of 1993, 16 USC, Chapter 37, Subchapter II-Public \nLands Corps, is the only legislative authority that allows BLM to \"hire\" interns under this \nauthority. Therefore, eligible Youth Conservation Corps may only apply for projects developed \nunder NOFO 15.243 \u2013 BLM Youth Conservation Opportunities on Public Lands. \nCost Sharing Requirement \nCost Sharing Required? \nYes \nA required 25% match for all 15.243 Youth Conservation Corps Agreements by statute.  \nGET READY TO APPLY \nRequired System Registrations \nUnique Entity Identifier and SAM.gov Registration   \nBefore applying, all applicants except individuals applying as a natural person must be \nregistered in SAM.gov. During the SAM.gov registration the entity will obtain their Unique \nEntity Identifier (UEI).  \nThe SAM.gov registration process can take several months. If your organization is not \nalready registered in SAM.gov, begin the registration process as soon as possible.   ",
+      "section": null,
+      "anchor": null
+    }
+  ]
+}

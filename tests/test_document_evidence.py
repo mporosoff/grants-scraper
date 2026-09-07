@@ -93,6 +93,89 @@ def response(content=NOTICE_HTML, etag='"notice-v1"'):
 
 
 class DocumentEvidenceTests(unittest.TestCase):
+    def test_http_success_without_notice_text_is_a_retrieval_failure(self):
+        from copy import deepcopy
+        from pathlib import Path
+        record = base_record()
+        checked = datetime(2026, 7, 26, tzinfo=timezone.utc)
+        source = source_for_record(record)
+        previous, _ = build_document_entry(record, source, response(), None, checked)
+        original = deepcopy(previous)
+        challenge = (Path(__file__).parent / 'fixtures/parsing/empty-challenge.html').read_bytes()
+        with self.assertRaisesRegex(ValueError, 'no readable notice text'):
+            build_document_entry(record, source, response(challenge), previous, checked + timedelta(days=10))
+        self.assertEqual(previous, original)
+        cache = empty_cache(); cache['records'][record['opportunity_id']] = previous
+        output, cache = enrich_document_evidence({'opportunities': [record]}, cache, max_documents=1,
+            now=checked + timedelta(days=10), recheck_days=1, request_delay=0, fetcher=lambda *_: response(challenge))
+        entry = cache['records'][record['opportunity_id']]
+        self.assertEqual(entry['status'], 'failed')
+        self.assertEqual(entry['checked_at'], original['checked_at'])
+        self.assertEqual(entry['document']['sha256'], original['document']['sha256'])
+        self.assertEqual(output['opportunities'][0]['close_date'], record['close_date'])
+        self.assertFalse(output['opportunities'][0].get('document_evidence'))
+
+    def test_conflicting_notice_date_cannot_replace_an_authoritative_stage(self):
+        from copy import deepcopy
+        from scripts import extract_document_evidence as e
+        from scripts.submission_schedule import next_submission
+        record = base_record()
+        container = {'text': 'Closing Date for Applications: 09/23/2026', 'page': 1}
+        facts = e.extract_document_facts(record, [container], {'url': record['primary_document_url'],
+            'sha256': 'source'}, '2026-07-27T14:17:05Z', families={'deadlines'})
+        self.assertEqual([f['date'] for f in facts], ['2026-09-23'])
+        entry = {'status': 'current', 'checked_at': '2026-07-27T14:17:05Z', 'facts': facts,
+                 'deadline_extractor_identity': e.DEADLINE_EXTRACTOR_IDENTITY,
+                 'document': {'url': record['primary_document_url'], 'sha256': 'source'}}
+        output = e.merge_document_entry(record, deepcopy(entry))
+        self.assertEqual(next_submission(output, '2026-09-07')['date'], '2026-09-30')
+        self.assertEqual(output['deadlines'], record['deadlines'])
+        self.assertTrue(output['document_evidence']['facts'][0]['reconciliation']['structured_authority_preserved'])
+        self.assertTrue(any(q['type'] == 'deadline_source_conflict' for q in output['document_evidence']['review_queue']))
+        self.assertEqual(output['document_evidence_checked_at'], entry['checked_at'])
+        self.assertEqual(e.merge_document_entry(output, deepcopy(entry)), output)
+        # A separately labeled cycle remains actionable, as does a preliminary
+        # stage; authoritative full-application dates do not govern either.
+        for qualifiers in ({'cycle': 'FY2027'}, {'deadline_kind': 'letter_of_intent', 'stage': 'letter_of_intent'}):
+            changed = deepcopy(facts[0]); changed.update(qualifiers)
+            self.assertEqual(e.structured_deadline_conflicts(record, changed, [changed]), [])
+        conflicting_scope = deepcopy(record)
+        conflicting_scope['deadlines'][0]['cycle'] = 'FY2027'
+        changed = deepcopy(facts[0]); changed['cycle'] = 'FY2027'
+        self.assertTrue(e.structured_deadline_conflicts(conflicting_scope, changed, [changed]))
+
+    def test_native_date_list_retains_independent_rounds_with_structured_close_date(self):
+        from scripts import extract_document_evidence as e
+        from scripts.submission_schedule import next_submission
+        record = base_record()
+        text = '<table><tr><td>Application Due Date(s)</td><td>September 23, 2026; September 30, 2026</td></tr></table>'
+        containers = e.extract_html_sections(text.encode())[0]
+        facts = e.extract_document_facts(record, containers, {'url': record['primary_document_url'], 'sha256': 'source'},
+                                         '2026-07-27T14:17:05Z', families={'deadlines'})
+        self.assertEqual([f['date'] for f in facts], ['2026-09-23', '2026-09-30'])
+        output = e.merge_document_entry(record, {'status': 'current', 'facts': facts,
+            'deadline_extractor_identity': e.DEADLINE_EXTRACTOR_IDENTITY, 'document': {'sha256': 'source'}})
+        self.assertEqual(next_submission(output, '2026-09-07')['date'], '2026-09-23')
+
+    def test_distinct_cached_quotes_cannot_manufacture_one_multidate_field(self):
+        from scripts import extract_document_evidence as e
+        record = base_record()
+        source = {'url': record['primary_document_url'], 'sha256': 'source'}
+        facts = []
+        for date, text in [('2026-09-23', 'Application Due Date: September 23, 2026'),
+                           ('2026-09-24', 'Application Due Date: September 24, 2026')]:
+            citation = e.citation_for({'page': 1, 'text': text}, source, 0, len(text), 'original')
+            facts.append(e.make_fact(record['opportunity_id'], 'deadline', 'Application deadline', date,
+                date, citation, deadline_kind='application', date=date, time=None, timezone=None))
+        entry = {'status': 'current', 'document': source, 'facts': facts, 'checked_at': 'original',
+                 'parser_dependencies': {**e.parser_dependencies(), 'deadlines': 'prior'}}
+        e.quarantine_legacy_facts(record, {}, entry, None)
+        self.assertEqual(len(entry['facts']), 2)
+        refs = [f['citation']['structural_reference']['field_id'] for f in entry['facts']]
+        self.assertEqual(len(set(refs)), 2)
+        self.assertTrue(all(e.structured_deadline_conflicts(record, f, entry['facts']) for f in entry['facts']))
+        self.assertEqual(entry['checked_at'], 'original')
+
     def test_reads_pdf_pages_without_retaining_the_source_file(self):
         writer = PdfWriter()
         writer.add_blank_page(width=612, height=792)
@@ -446,8 +529,8 @@ class SubtopicOnlyCandidateTests(unittest.TestCase):
     """§18.1 Cov1, and §0.5 -- the flag-off path must not notice this exists."""
 
     def declined_record(self):
-        # No primary document and no gap-fill needed, so source_for_record()
-        # returns None: the shape of 685 catalog records.
+        # Historically declined solely because headline fields were complete.
+        # Shared extraction now admits its official agency route.
         record = base_record()
         record["primary_document_url"] = None
         record["primary_document_name"] = None
@@ -456,8 +539,11 @@ class SubtopicOnlyCandidateTests(unittest.TestCase):
         record["close_date"] = "2026-09-30"
         return record
 
-    def test_a_declined_record_is_a_subtopic_only_candidate(self):
+    def test_complete_headline_fields_do_not_exclude_shared_notice_extraction(self):
         record = self.declined_record()
+        self.assertEqual(source_for_record(record)['url'], record['funding_opportunity_url'])
+        self.assertEqual(subtopic_only_candidates([record], enabled=True), [])
+        record['funding_opportunity_url'] = None
         self.assertIsNone(source_for_record(record))
         self.assertEqual(
             [oid for oid, _ in subtopic_only_candidates([record], enabled=True)],
@@ -506,6 +592,14 @@ class SubtopicOnlyCandidateTests(unittest.TestCase):
 
 
 class DocumentBudgetTests(unittest.TestCase):
+    def setUp(self):
+        # Isolate the independent fallback queue's budgets from route admission.
+        # SourceIdentityTests and SubtopicOnlyCandidateTests exercise actual
+        # admission; this queue still serves records lacking a primary route.
+        selector = mock.patch('scripts.extract_document_evidence.source_for_record', return_value=None)
+        selector.start()
+        self.addCleanup(selector.stop)
+
     def declined_records(self, count):
         records = []
         for index in range(count):

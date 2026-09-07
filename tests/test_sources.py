@@ -66,6 +66,16 @@ class SchemaParityTests(unittest.TestCase):
         missing = base_keys - external_keys
         self.assertEqual(missing, set(), f"external record missing fields: {missing}")
 
+    def test_preliminary_optionality_survives_source_normalization(self):
+        from scripts.submission_schedule import next_submission
+        for description, required, access in [
+            ('An optional concept paper is encouraged.', False, 'open'),
+            ('A concept paper is required.', True, 'verify_prerequisite'),
+            ('Discuss a concept paper with the program office.', None, 'verify_prerequisite')]:
+            record = an_external_record(description=description, close_date='2027-05-01')
+            self.assertIs(record['preliminary_required'], required)
+            self.assertEqual(next_submission(record, '2026-09-07')['access'], access)
+
     def test_derives_topics_and_signals(self):
         record = an_external_record(
             title="Early-career award: carbon capture and utilization",
@@ -111,7 +121,7 @@ class MergeTests(unittest.TestCase):
         self.assertEqual(stats2["dropped_duplicate_identity"], 1)
         self.assertEqual(len(combined2), len(combined))
 
-    def test_drops_cross_source_duplicate_of_base(self):
+    def test_similar_title_without_sponsor_and_number_is_not_identity(self):
         base_record = a_base_record()
         base = [base_record]
         clash = an_external_record(
@@ -120,8 +130,8 @@ class MergeTests(unittest.TestCase):
             close_date=base_record["close_date"],
         )
         _, stats = merge_records(base, [clash])
-        self.assertEqual(stats["external_added"], 0)
-        self.assertEqual(stats["dropped_cross_source_duplicate"], 1)
+        self.assertEqual(stats["external_added"], 1)
+        self.assertEqual(stats["dropped_cross_source_duplicate"], 0)
 
     def test_drops_cross_source_duplicate_by_opportunity_number(self):
         base_record = a_base_record()
@@ -129,6 +139,7 @@ class MergeTests(unittest.TestCase):
             external_id="SOURCE-ID",
             title="Different source title for the same solicitation",
             opportunity_number=base_record["opportunity_number"],
+            agency=base_record['agency'],
         )
         _, stats = merge_records([base_record], [clash])
         self.assertEqual(stats["external_added"], 0)
@@ -138,11 +149,13 @@ class MergeTests(unittest.TestCase):
         base_record = {
             **a_base_record(),
             "opportunity_number": "26-511",
+            'agency': 'National Science Foundation', 'agency_code': 'NSF',
             "title": "NSF Small Business Innovation Research Phase I",
         }
         email_copy = an_external_record(
             external_id="NSF26-511",
             opportunity_number="NSF26-511",
+            agency='National Science Foundation',
             title="NEW NSF Small Business Innovation Research Phase I | NSF 26-511",
         )
 
@@ -152,7 +165,7 @@ class MergeTests(unittest.TestCase):
         self.assertEqual(combined[0]["source"], "Grants.gov")
         self.assertEqual(stats["dropped_cross_source_duplicate"], 1)
 
-    def test_catalog_wins_when_email_title_only_adds_sponsor_and_acronym(self):
+    def test_email_title_cannot_supply_missing_official_identity(self):
         base_record = {
             **a_base_record(),
             "opportunity_number": None,
@@ -168,9 +181,10 @@ class MergeTests(unittest.TestCase):
 
         combined, stats = merge_records([base_record], [email_copy])
 
-        self.assertEqual(len(combined), 1)
-        self.assertEqual(combined[0]["source"], "Grants.gov")
-        self.assertEqual(stats["dropped_cross_source_duplicate"], 1)
+        # The previous title backstop violated P11: an acronym in prose does
+        # not establish sponsor/number identity. Both records remain distinct.
+        self.assertEqual(len(combined), 2)
+        self.assertEqual(stats["dropped_cross_source_duplicate"], 0)
 
 
 class RegistryTests(unittest.TestCase):
@@ -1270,7 +1284,9 @@ class DoeExchangeParseTests(unittest.TestCase):
 
         ccc = by_title["Carbon Capture Catalysis (CCC)"].to_record(
             slug="arpa-e", source="ARPA-E eXCHANGE", source_type="Federal")
-        self.assertEqual(ccc["close_date"], "2026-09-15")   # next open date
+        self.assertEqual(ccc["close_date"], "2026-12-01")   # window end; next submission is a separate projection
+        self.assertEqual(ccc['deadlines'][0]['date'], '2026-09-15')
+        self.assertTrue(all(d['kind'] == 'submission' for d in ccc['deadlines']))  # summary lacks owned stage labels
         self.assertIn("2026-12-01", [d.get("date") for d in ccc["deadlines"]])  # later round kept
         self.assertIn("11111111", ccc["detail_page"])
 

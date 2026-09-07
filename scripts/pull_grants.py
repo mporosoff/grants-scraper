@@ -26,6 +26,10 @@ from pathlib import Path
 
 import requests
 
+if __package__ in (None, ""):
+    sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from scripts.notice_schedule import preliminary_requirement
+
 SEARCH_URL = "https://api.grants.gov/v1/api/search2"
 DETAIL_URL = "https://api.grants.gov/v1/api/fetchOpportunity"
 DETAIL_PAGE = "https://www.grants.gov/search-results-detail/{opp_id}"
@@ -345,7 +349,8 @@ def normalize(stub, detail):
     preliminary_mention = first_match(
         CONCEPT_PAPER_MENTION_RE, text_blob
     )
-    limited_submission = first_match(LIMITED_SUB_RE, text_blob)
+    from scripts.notice_semantics import institutional_limit_signal
+    limited_submission = institutional_limit_signal(text_blob)
     cost_share_detail = first_match(COST_SHARE_RE, text_blob)
 
     attachments = collect_attachments(detail)
@@ -456,10 +461,9 @@ def normalize(stub, detail):
         "has_preliminary_stage": bool(preliminary_mention),
         "preliminary_stage_type": preliminary_mention,
         "preliminary_deadline_text": preliminary_with_date,
-        "preliminary_required": bool(
-            preliminary_mention and REQUIRED_RE.search(text_blob)
-        ),
+        "preliminary_required": preliminary_requirement(text_blob, preliminary_mention),
         "limited_submission": bool(limited_submission),
+        'limited_submission_source': 'synopsis_heuristic',
         "limited_submission_criteria": limited_submission,
         "cost_share_required": source_record.get("costSharing"),
         "cost_share_detail": cost_share_detail,
@@ -525,13 +529,10 @@ def parse_grants_date(value):
 
 
 def record_identity(record):
-    number = re.sub(
-        r"\s+", "", str(record.get("opportunity_number") or "")
-    ).casefold()
-    if number:
-        return f"number:{number}"
-    opportunity_id = record.get("opportunity_id")
-    return f"id:{opportunity_id}" if opportunity_id is not None else None
+    from scripts.build_catalog import record_identity as canonical_identity
+    if record.get('opportunity_id') is None and not record.get('opportunity_number'):
+        return None
+    return canonical_identity(record)
 
 
 def record_rank(record):

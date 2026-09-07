@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
+import { opportunityTeamFixture } from "../fixtures/opportunity-team-model.mjs";
 
 const [indexSource, dataSource, directorySource, teamSource, retrievalSource, panelSource, appSource, page, teamPage] = await Promise.all([
   readFile(new URL("../../data/opportunity_team_index.js", import.meta.url), "utf8"),
@@ -15,21 +16,27 @@ const [indexSource, dataSource, directorySource, teamSource, retrievalSource, pa
   readFile(new URL("../../team_match.html", import.meta.url), "utf8"),
 ]);
 
-function loadApi() {
+function loadApi(fixture = null) {
   const context = {
     globalThis: {},
     document: {
       querySelector(selector) {
         return selector === 'meta[name="opportunity-team-generation"]'
-          ? { getAttribute: () => loadIndex().generation_id }
+          ? { getAttribute: () => context.globalThis.OPPORTUNITY_TEAM_INDEX.generation_id }
           : null;
       },
     },
   };
-  vm.runInNewContext(indexSource, context);
+  if (fixture) {
+    context.globalThis.OPPORTUNITY_TEAM_INDEX = fixture.index;
+    context.globalThis.OPPORTUNITY_TEAM_DATA = fixture.data;
+    context.globalThis.RESEARCHER_DIRECTORY = fixture.directory;
+  } else {
+    vm.runInNewContext(indexSource, context);
+    vm.runInNewContext(dataSource, context);
+    vm.runInNewContext(directorySource, context);
+  }
   vm.runInNewContext(retrievalSource, context);
-  vm.runInNewContext(dataSource, context);
-  vm.runInNewContext(directorySource, context);
   vm.runInNewContext(teamSource, context);
   return {
     api: context.globalThis.OpportunityTeam,
@@ -69,7 +76,7 @@ test("validates the registry-identified staged directory without fixed counts", 
 });
 
 test("scope availability grows without a fixed pilot count and rejects mismatched counts", () => {
-  const { api, data, index } = loadApi();
+  const { api, data, index } = loadApi(opportunityTeamFixture());
   const additional = JSON.parse(JSON.stringify(data.opportunities[0]));
   additional.id = "new-specific-scope";
   data.opportunities.push(additional);
@@ -128,18 +135,20 @@ test("directory search omits inactive, departed, and hidden researchers while pr
 });
 
 test("stale teams are withheld without blocking the directory or unaffected scopes", () => {
-  const { api, data, index } = loadApi();
+  const { api, data, index } = loadApi(opportunityTeamFixture());
   data.opportunities[0].review_state = "needs_revalidation";
   index.scopes[0].review_state = "needs_revalidation";
   const engine = api.create(data);
   assert.equal(api.availableScopes().some(scope => scope.id === data.opportunities[0].id), false);
-  assert.ok(api.searchFaculty(data, "Porosoff").length);
+  assert.ok(api.searchFaculty(data, "Fixture alpha").length);
   assert.throws(() => engine.proposal(data.opportunities[0]), /revalidation/);
+  assert.throws(() => engine.proposalView({ opportunityId: data.opportunities[0].id, selectedIds: [] }), /revalidation/);
+  assert.equal(engine.proposalOptions({ opportunityId: data.opportunities[0].id }).length, 0);
   assert.ok(engine.proposal(data.opportunities[1]).selectedIds.length);
 });
 
 test("proposed variants are distinct and never reintroduce an excluded researcher", () => {
-  const { api, data } = loadApi();
+  const { api, data } = loadApi(opportunityTeamFixture());
   const engine = api.create(data);
   const opportunity = data.opportunities.find(scope => scope.roles.some(role => role.alternative_ids.length && role.coverage === "direct"));
   const state = engine.proposal(opportunity);
@@ -196,19 +205,24 @@ test("published child teams stay reachable without an umbrella phrase in the par
 });
 
 test("equal-coverage options start with direct experience and expose method transfer", () => {
-  const { api, data } = loadApi();
-  const opportunity = data.opportunities.find(scope => scope.id === "344592:ab-0054");
+  const { api, data } = loadApi(opportunityTeamFixture());
+  const opportunity = data.opportunities.find(scope => scope.id === "fixture-broad:mixed");
   const engine = api.create(data);
-  const view = engine.proposalView(engine.proposal(opportunity));
+  const proposal = engine.proposal(opportunity);
+  assert.deepEqual(Array.from(proposal.selectedIds), ["fixture-alternative", "fixture-beta"]);
+  const view = engine.proposalView(proposal);
   const conversion = view.roles.find(role => /wavelength conversion/i.test(role.label));
   assert.equal(conversion.directEvidence, true);
   assert.ok(view.roles.some(role => role.filled && !role.directEvidence));
   const options = engine.proposalOptions(engine.proposal(opportunity));
+  assert.ok(options.length >= 2, "both equal-coverage variants are exercised");
+  assert.equal(options[0].direct, 1);
+  assert.ok(options.some(option => option.direct === 0), "method transfer must not count as direct evidence");
   assert.ok(options.every(option => option.direct <= options[0].direct));
 });
 
 test("a generated alternative retains its exact claim evidence instead of generic profile terms", () => {
-  const { api, data, directory } = loadApi();
+  const { api, data, directory } = loadApi(opportunityTeamFixture());
   const opportunity = data.opportunities[0];
   const person = directory.researchers.find(person => person.status === "active" && person.auto_proposable &&
     person.claims.some(claim => claim.status === "active") && !opportunity.members.some(member => member.faculty_id === person.id));
@@ -229,34 +243,34 @@ test("a generated alternative retains its exact claim evidence instead of generi
 });
 
 test("admits only current specific parents, eligible children, and declared branches", () => {
-  const { api, data } = loadApi();
+  const { api, data } = loadApi(opportunityTeamFixture());
   const engine = api.create(data);
   const now = new Date("2026-09-01T12:00:00Z");
   const specific = engine.resolveScope({
-    parentId: "358021",
-    scopeId: "358021",
-    record: record("358021"),
+    parentId: "fixture-specific",
+    scopeId: "fixture-specific",
+    record: record("fixture-specific"),
     isBroad: false,
     now,
   });
   assert.equal(specific.ok, true);
 
   const broad = engine.resolveScope({
-    parentId: "344592",
-    record: record("344592"),
+    parentId: "fixture-broad",
+    record: record("fixture-broad"),
     isBroad: true,
     now,
   });
   assert.equal(broad.ok, false);
   assert.equal(broad.reason, "specific_scope_required");
-  assert.ok(broad.scopes.some(scope => scope.id === "344592:ab-0019"));
-  assert.ok(broad.scopes.some(scope => scope.id === "344592:ab-0079"));
+  assert.ok(broad.scopes.some(scope => scope.id === "fixture-broad:first"));
+  assert.ok(broad.scopes.some(scope => scope.id === "fixture-broad:second"));
   assert.ok(broad.scopes.every(scope => scope.record_type !== "specific_parent"));
 
   const missingChild = engine.resolveScope({
-    parentId: "361526",
-    scopeId: "361526:g-12",
-    record: record("361526"),
+    parentId: "fixture-child-parent",
+    scopeId: "fixture-child-parent:topic",
+    record: record("fixture-child-parent"),
     childCatalog: { opportunities: [] },
     isBroad: true,
     now,
@@ -264,12 +278,12 @@ test("admits only current specific parents, eligible children, and declared bran
   assert.equal(missingChild.reason, "child_not_publication_eligible");
 
   const eligibleChild = engine.resolveScope({
-    parentId: "361526",
-    scopeId: "361526:g-12",
-    record: record("361526"),
+    parentId: "fixture-child-parent",
+    scopeId: "fixture-child-parent:topic",
+    record: record("fixture-child-parent"),
     childCatalog: { opportunities: [{
-      subtopic_id: "361526:g-12",
-      parent_id: "361526",
+      subtopic_id: "fixture-child-parent:topic",
+      parent_id: "fixture-child-parent",
       publication_state: "publishable",
     }] },
     isBroad: true,
@@ -278,9 +292,9 @@ test("admits only current specific parents, eligible children, and declared bran
   assert.equal(eligibleChild.ok, true);
 
   const branch = engine.resolveScope({
-    parentId: "332894",
-    scopeId: "332894:superconducting-qubits",
-    record: record("332894"),
+    parentId: "fixture-branch-parent",
+    scopeId: "fixture-branch-parent:branch",
+    record: record("fixture-branch-parent"),
     isBroad: true,
     now,
   });
@@ -289,56 +303,56 @@ test("admits only current specific parents, eligible children, and declared bran
 });
 
 test("runtime catalog state overrides a generated proposal at one immutable clock", () => {
-  const { api, data } = loadApi();
+  const { api, data } = loadApi(opportunityTeamFixture());
   const engine = api.create(data);
   const before = engine.resolveScope({
-    parentId: "358021", scopeId: "358021",
-    record: record("358021", { close_date: "2026-09-01" }),
+    parentId: "fixture-specific", scopeId: "fixture-specific",
+    record: record("fixture-specific", { close_date: "2026-09-01" }),
     isBroad: false, now: new Date("2026-09-01T23:59:59Z"),
   });
   assert.equal(before.ok, true);
   const after = engine.resolveScope({
-    parentId: "358021", scopeId: "358021",
-    record: record("358021", { close_date: "2026-09-01" }),
+    parentId: "fixture-specific", scopeId: "fixture-specific",
+    record: record("fixture-specific", { close_date: "2026-09-01" }),
     isBroad: false, now: new Date("2026-09-02T00:00:01Z"),
   });
   assert.equal(after.reason, "not_current");
   const rolling = engine.resolveScope({
-    parentId: "358021", scopeId: "358021",
-    record: record("358021", { close_date: "2020-01-01", rolling: true }),
+    parentId: "fixture-specific", scopeId: "fixture-specific",
+    record: record("fixture-specific", { close_date: "2020-01-01", rolling: true }),
     isBroad: false, now: new Date("2026-09-02T00:00:01Z"),
   });
   assert.equal(rolling.reason, "not_current");
   const forecasted = engine.resolveScope({
-    parentId: "358021", scopeId: "358021",
-    record: record("358021", { status: "forecasted", close_date: "2026-12-31" }),
+    parentId: "fixture-specific", scopeId: "fixture-specific",
+    record: record("fixture-specific", { status: "forecasted", close_date: "2026-12-31" }),
     isBroad: false, now: new Date("2026-09-02T00:00:01Z"),
   });
   assert.equal(forecasted.ok, true);
   const archived = engine.resolveScope({
-    parentId: "358021", scopeId: "358021",
-    record: record("358021", { status: "archived" }),
+    parentId: "fixture-specific", scopeId: "fixture-specific",
+    record: record("fixture-specific", { status: "archived" }),
     isBroad: false, now: new Date("2026-09-01T00:00:00Z"),
   });
   assert.equal(archived.reason, "not_current");
   const staleUndated = engine.resolveScope({
-    parentId: "358021", scopeId: "358021",
-    record: record("358021", { close_date: "", posted_date: "2018-01-01" }),
+    parentId: "fixture-specific", scopeId: "fixture-specific",
+    record: record("fixture-specific", { close_date: "", posted_date: "2018-01-01" }),
     isBroad: false, now: new Date("2026-09-01T00:00:00Z"),
   });
   assert.equal(staleUndated.reason, "not_current");
   const informational = engine.resolveScope({
-    parentId: "358021", scopeId: "358021",
-    record: record("358021", { title: "Request for Information: imaging methods" }),
+    parentId: "fixture-specific", scopeId: "fixture-specific",
+    record: record("fixture-specific", { title: "Request for Information: imaging methods" }),
     isBroad: false, now: new Date("2026-09-01T00:00:00Z"),
   });
   assert.equal(informational.reason, "not_current");
 });
 
 test("removal exposes missing roles and replacements cannot silently claim unaudited coverage", () => {
-  const { api, data } = loadApi();
+  const { api, data } = loadApi(opportunityTeamFixture());
   const engine = api.create(data);
-  const opportunity = engine.opportunityById.get("361526:g-12");
+  const opportunity = engine.opportunityById.get("fixture-child-parent:topic");
   let state = engine.proposal(opportunity);
   const initial = engine.proposalView(state);
   assert.equal(initial.complete, true);
@@ -416,10 +430,12 @@ test("the eager availability index is exact, bounded, and omits the full team gr
     Array.from(index.scopes, scope => [scope.id, scope.parent_id, scope.record_type]),
     Array.from(data.opportunities, scope => [scope.id, scope.parent_id, scope.record_type]),
   );
-  const specific = data.opportunities.find(scope => scope.record_type === "specific_parent");
-  const branch = data.opportunities.find(scope => scope.record_type === "declared_branch");
-  assert.equal(api.hasAvailableScope({ parentId: specific.parent_id, scopeId: specific.id }), true);
-  assert.equal(api.hasAvailableScope({ parentId: branch.parent_id }), true);
+  for (const scope of index.scopes) {
+    assert.equal(api.hasAvailableScope({ parentId: scope.parent_id, scopeId: scope.id }),
+      scope.review_state !== "needs_revalidation", scope.id);
+    assert.equal(api.hasAvailableScope({ parentId: scope.parent_id }),
+      index.scopes.some(other => other.parent_id === scope.parent_id && other.review_state !== "needs_revalidation"), scope.parent_id);
+  }
   assert.equal(api.hasAvailableScope({ parentId: "unsupported" }), false);
   assert.doesNotMatch(indexSource, /faculty|why_team|why_person|missing_skills/);
 });

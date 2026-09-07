@@ -44,7 +44,7 @@ from scripts.build_catalog import (
 from .registry import REGISTRY, AdapterResult, collect
 from .validate import filter_publishable, within_health_bounds
 from .discoverability import augment_records
-from scripts.solicitation_identity import research_solicitation_key
+from scripts.source_documents import merge_duplicate_evidence
 
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/source_records.json")
@@ -391,47 +391,26 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
     """Combine base (Grants.gov) and external records; base always wins."""
     combined = [normalize_record_facets(dict(record)) for record in base]
     external = [normalize_record_facets(dict(record)) for record in external]
-    seen_identity = {record_identity(r) for r in combined}
-    # These research calls have an authoritative sponsor + solicitation key.
-    # Titles can be shared by distinct calls, and numbers by distinct sponsors.
-    unscoped = [r for r in combined if not research_solicitation_key(r)]
-    title_numbers = {}
-    for record in unscoped:
-        for title in {_norm_title(record), _canonical_title(record)} - {""}:
-            title_numbers.setdefault(title, set()).add(_norm_number(record.get("opportunity_number")))
-    base_numbers = {
-        _norm_number(r.get("opportunity_number"))
-        for r in unscoped if r.get("opportunity_number")
-    }
-
+    # A normalized sponsor and complete official number prove a cross-source
+    # duplicate. Similar titles alone never do. Stable public IDs are retained.
+    identities = {record_identity(record): record for record in combined}
+    ids = {str(record.get('opportunity_id')): record for record in combined if record.get('opportunity_id')}
     added = dropped_identity = dropped_crossdup = 0
     for record in external:
         identity = record_identity(record)
-        if identity in seen_identity:
-            dropped_identity += 1
+        winner = identities.get(identity) or ids.get(str(record.get('opportunity_id')))
+        if winner is not None:
+            if (winner.get('opportunity_id') == record.get('opportunity_id')
+                or winner.get('opportunity_number') == record.get('opportunity_number')):
+                dropped_identity += 1
+            else:
+                dropped_crossdup += 1
+            merge_duplicate_evidence(winner, record)
             continue
-        number = _norm_number(record.get("opportunity_number"))
-        title = _norm_title(record)
-        canonical_title = _canonical_title(record)
-        scoped = research_solicitation_key(record)
-        # A reused title cannot collapse explicitly different solicitations.
-        # Title fallback remains available when either source lacks a number.
-        title_duplicate = any(key in title_numbers and
-                              (not number or "" in title_numbers[key] or number in title_numbers[key])
-                              for key in (title, canonical_title) if key)
-        if not scoped and (
-            (number and number in base_numbers)
-            or title_duplicate
-        ):
-            dropped_crossdup += 1
-            continue
-        seen_identity.add(identity)
         combined.append(record)
-        if number and not scoped:
-            base_numbers.add(number)
-        if not scoped:
-            for key in {title, canonical_title} - {""}:
-                title_numbers.setdefault(key, set()).add(number)
+        identities[identity] = record
+        if record.get('opportunity_id'):
+            ids[str(record['opportunity_id'])] = record
         added += 1
 
     combined.sort(

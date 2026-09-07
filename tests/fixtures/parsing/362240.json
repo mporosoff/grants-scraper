@@ -1,0 +1,65 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352338",
+    "retrieved_at": "2026-09-07T12:37:01.068384+00:00",
+    "sha256": "ab130e47cb2f372c62c56748b6223b71ba4dd50fbd0b24afcd23f9d1fb527425"
+  },
+  "document_name": "HT942526MRPIA_GG.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 4,
+      "section": null,
+      "anchor": null,
+      "text": "• After submitting the required pre-application, investigators must receive an invitation to \nsubmit a full application. \nFunding Details: The Congressionally Directed Medical Research Programs expects to allot \nroughly $5.6M to fund approximately 10 Idea Award applications with total cost caps of $0.56M \nper award. The maximum period of performance is 2 years. It is anticipated that awards made \nfrom this FY26 funding opportunity will be funded with FY26 funds, which will expire for use on \nSeptember 30, 2032. Awards supported with FY26 funds will be made no later than September \n30, 2027. \nSubmission and Review Dates and Times \n• Pre-Application (Preproposal) Submission Deadline: 5:00 p.m. Eastern Time (ET), \nJuly 13, 2026 \n• Invitation to Submit an Application: August 19, 2026 \n• Application Submission Deadline: 11:59 p.m. ET, October 14, 2026  \n• End of Application Verification Period: 5:00 p.m. ET, October 20, 2026  \n• Peer Review: December 2026 \n• Programmatic Review: March 2027 \n"
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 4, Funding Details",
+      "rationale": "The source explicitly distinguishes the per-award cap from program funding.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "maximum": 560000
+        },
+        "subject": "award"
+      }
+    },
+    {
+      "location": "PDF page 4, funding and review block",
+      "rationale": "Funding expiration and review dates do not establish solicitation withdrawal.",
+      "forbid": {
+        "type": "status_signal",
+        "status_signal": "cancelled"
+      }
+    },
+    {
+      "location": "PDF page 4, Submission and Review Dates and Times",
+      "rationale": "Owned preproposal and application fields have different stages.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "preproposal",
+        "date": "2026-07-13"
+      }
+    },
+    {
+      "location": "PDF page 4, Submission and Review Dates and Times",
+      "rationale": "Owned preproposal and application fields have different stages.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2026-10-14"
+      }
+    },
+    {
+      "location": "PDF page 4, End of Application Verification Period",
+      "rationale": "Verification is not a new full-application deadline.",
+      "forbid": {
+        "type": "deadline",
+        "date": "2026-10-20"
+      }
+    }
+  ]
+}

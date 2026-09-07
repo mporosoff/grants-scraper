@@ -1,0 +1,859 @@
+{
+  "format": "pdf_text_excerpt",
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354916",
+    "sha256": "0d7ec3bcfc09a8dd0f9ff35600e0bc02e3ef2fca6c8d76ada1f4414d7aa66892",
+    "retrieved_at": "2026-09-07T17:40:40.557466+00:00"
+  },
+  "containers": [
+    {
+      "page": 9,
+      "section": null,
+      "anchor": null,
+      "text": "Award Overview 7 \n \nReview Opportunity Prepare & Submit Learn About Review Post-Award Other Information Additional Guidance \nFunding Details \nTotal amount of funding \nIMLS expects to award \nthrough this announcement \n$11,500,000 \nExpected performance indicators, \ntargets, baseline data, and data \ncollection \nSee Performance Measures \nAnticipated number of awards 45 \n Planning $75,000 - $200,000 \n Forum $75,000 - $200,000 \nAward amount range Community-Centered \nImplementation \n$25,000 - $100,000 \n \nNational Implementation $75,000 - $1,000,000 \nApplied Research $75,000 - $750,000 \nAverage amount of funding per \naward experienced in previous \nyears \n$264,123 \nThe funding in the above Award Overview is subject to the availability of funds and the \nInstitute of Museum and Library Services’ (IMLS’s) discretion. We are not bound by any \nestimates in this announcement. \nContingent upon the availability of funds, the quality of applications, and IMLS’s discretion, \nwe may make additional awards from the pool of unfunded applications from this \ncompetition.",
+      "structure": [
+        {
+          "block_id": "pdf-9-1",
+          "kind": "line",
+          "text": "Award Overview 7 ",
+          "span": [
+            0,
+            17
+          ],
+          "reading_order": 0,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-2",
+          "kind": "line",
+          "text": " ",
+          "span": [
+            18,
+            19
+          ],
+          "reading_order": 1,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-3",
+          "kind": "line",
+          "text": "Review Opportunity Prepare & Submit Learn About Review Post-Award Other Information Additional Guidance ",
+          "span": [
+            20,
+            124
+          ],
+          "reading_order": 2,
+          "page": 9,
+          "repeated_header": true,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-4",
+          "kind": "line",
+          "text": "Funding Details ",
+          "span": [
+            125,
+            141
+          ],
+          "reading_order": 3,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-5",
+          "kind": "line",
+          "text": "Total amount of funding ",
+          "span": [
+            142,
+            166
+          ],
+          "reading_order": 4,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-6",
+          "kind": "line",
+          "text": "IMLS expects to award ",
+          "span": [
+            167,
+            189
+          ],
+          "reading_order": 5,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-7",
+          "kind": "line",
+          "text": "through this announcement ",
+          "span": [
+            190,
+            216
+          ],
+          "reading_order": 6,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-8",
+          "kind": "line",
+          "text": "$11,500,000 ",
+          "span": [
+            217,
+            229
+          ],
+          "reading_order": 7,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-9",
+          "kind": "line",
+          "text": "Expected performance indicators, ",
+          "span": [
+            230,
+            263
+          ],
+          "reading_order": 8,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-10",
+          "kind": "line",
+          "text": "targets, baseline data, and data ",
+          "span": [
+            264,
+            297
+          ],
+          "reading_order": 9,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-11",
+          "kind": "line",
+          "text": "collection ",
+          "span": [
+            298,
+            309
+          ],
+          "reading_order": 10,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-12",
+          "kind": "line",
+          "text": "See Performance Measures ",
+          "span": [
+            310,
+            335
+          ],
+          "reading_order": 11,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-13",
+          "kind": "line",
+          "text": "Anticipated number of awards 45 ",
+          "span": [
+            336,
+            368
+          ],
+          "reading_order": 12,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-14",
+          "kind": "line",
+          "text": " Planning $75,000 - $200,000 ",
+          "span": [
+            369,
+            398
+          ],
+          "reading_order": 13,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-15",
+          "kind": "line",
+          "text": " Forum $75,000 - $200,000 ",
+          "span": [
+            399,
+            425
+          ],
+          "reading_order": 14,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-16",
+          "kind": "line",
+          "text": "Award amount range Community-Centered ",
+          "span": [
+            426,
+            464
+          ],
+          "reading_order": 15,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-17",
+          "kind": "line",
+          "text": "Implementation ",
+          "span": [
+            465,
+            480
+          ],
+          "reading_order": 16,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-18",
+          "kind": "line",
+          "text": "$25,000 - $100,000 ",
+          "span": [
+            481,
+            500
+          ],
+          "reading_order": 17,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-19",
+          "kind": "line",
+          "text": " ",
+          "span": [
+            501,
+            502
+          ],
+          "reading_order": 18,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-20",
+          "kind": "line",
+          "text": "National Implementation $75,000 - $1,000,000 ",
+          "span": [
+            503,
+            548
+          ],
+          "reading_order": 19,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-21",
+          "kind": "line",
+          "text": "Applied Research $75,000 - $750,000 ",
+          "span": [
+            549,
+            585
+          ],
+          "reading_order": 20,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-22",
+          "kind": "line",
+          "text": "Average amount of funding per ",
+          "span": [
+            586,
+            616
+          ],
+          "reading_order": 21,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-23",
+          "kind": "line",
+          "text": "award experienced in previous ",
+          "span": [
+            617,
+            647
+          ],
+          "reading_order": 22,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-24",
+          "kind": "line",
+          "text": "years ",
+          "span": [
+            648,
+            654
+          ],
+          "reading_order": 23,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-25",
+          "kind": "line",
+          "text": "$264,123 ",
+          "span": [
+            655,
+            664
+          ],
+          "reading_order": 24,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-26",
+          "kind": "line",
+          "text": "The funding in the above Award Overview is subject to the availability of funds and the ",
+          "span": [
+            665,
+            753
+          ],
+          "reading_order": 25,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-27",
+          "kind": "line",
+          "text": "Institute of Museum and Library Services’ (IMLS’s) discretion. We are not bound by any ",
+          "span": [
+            754,
+            841
+          ],
+          "reading_order": 26,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-28",
+          "kind": "line",
+          "text": "estimates in this announcement. ",
+          "span": [
+            842,
+            874
+          ],
+          "reading_order": 27,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-29",
+          "kind": "line",
+          "text": "Contingent upon the availability of funds, the quality of applications, and IMLS’s discretion, ",
+          "span": [
+            875,
+            970
+          ],
+          "reading_order": 28,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-30",
+          "kind": "line",
+          "text": "we may make additional awards from the pool of unfunded applications from this ",
+          "span": [
+            971,
+            1050
+          ],
+          "reading_order": 29,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        },
+        {
+          "block_id": "pdf-9-31",
+          "kind": "line",
+          "text": "competition.",
+          "span": [
+            1051,
+            1063
+          ],
+          "reading_order": 30,
+          "page": 9,
+          "repeated_header": false,
+          "toc": false
+        }
+      ],
+      "layout_rows": [
+        {
+          "line": 1,
+          "text": "Review Opportunity                                       Prepare & Submit                                        Learn About Review                                                Post-Award                                    Other Information                                  Additional Guidance",
+          "cells": [
+            {
+              "text": "Review Opportunity",
+              "column_start": 0,
+              "column_end": 18
+            },
+            {
+              "text": "Prepare & Submit",
+              "column_start": 57,
+              "column_end": 73
+            },
+            {
+              "text": "Learn About Review",
+              "column_start": 113,
+              "column_end": 131
+            },
+            {
+              "text": "Post-Award",
+              "column_start": 179,
+              "column_end": 189
+            },
+            {
+              "text": "Other Information",
+              "column_start": 225,
+              "column_end": 242
+            },
+            {
+              "text": "Additional Guidance",
+              "column_start": 276,
+              "column_end": 295
+            }
+          ]
+        },
+        {
+          "line": 5,
+          "text": "                                     Funding Details",
+          "cells": [
+            {
+              "text": "Funding Details",
+              "column_start": 37,
+              "column_end": 52
+            }
+          ]
+        },
+        {
+          "line": 7,
+          "text": "                                     Total amount of funding",
+          "cells": [
+            {
+              "text": "Total amount of funding",
+              "column_start": 37,
+              "column_end": 60
+            }
+          ]
+        },
+        {
+          "line": 8,
+          "text": "                                     IM LS  exp ec ts to award                                                                                        $11,500,000",
+          "cells": [
+            {
+              "text": "IM LS",
+              "column_start": 37,
+              "column_end": 42
+            },
+            {
+              "text": "exp ec ts to award",
+              "column_start": 44,
+              "column_end": 62
+            },
+            {
+              "text": "$11,500,000",
+              "column_start": 150,
+              "column_end": 161
+            }
+          ]
+        },
+        {
+          "line": 9,
+          "text": "                                     through this announcement",
+          "cells": [
+            {
+              "text": "through this announcement",
+              "column_start": 37,
+              "column_end": 62
+            }
+          ]
+        },
+        {
+          "line": 11,
+          "text": "                                     Expected per  formance indicators,",
+          "cells": [
+            {
+              "text": "Expected per",
+              "column_start": 37,
+              "column_end": 49
+            },
+            {
+              "text": "formance indicators,",
+              "column_start": 51,
+              "column_end": 71
+            }
+          ]
+        },
+        {
+          "line": 12,
+          "text": "                                     targets, baseline data, and data                                                                                 See Per formance Measures",
+          "cells": [
+            {
+              "text": "targets, baseline data, and data",
+              "column_start": 37,
+              "column_end": 69
+            },
+            {
+              "text": "See Per formance Measures",
+              "column_start": 150,
+              "column_end": 175
+            }
+          ]
+        },
+        {
+          "line": 13,
+          "text": "                                     collection",
+          "cells": [
+            {
+              "text": "collection",
+              "column_start": 37,
+              "column_end": 47
+            }
+          ]
+        },
+        {
+          "line": 15,
+          "text": "                                     Anticipated number of awards                                                                                     45",
+          "cells": [
+            {
+              "text": "Anticipated number of awards",
+              "column_start": 37,
+              "column_end": 65
+            },
+            {
+              "text": "45",
+              "column_start": 150,
+              "column_end": 152
+            }
+          ]
+        },
+        {
+          "line": 17,
+          "text": "                                                                                                                                                      Planning                                                                       $75,000 -$200,000",
+          "cells": [
+            {
+              "text": "Planning",
+              "column_start": 150,
+              "column_end": 158
+            },
+            {
+              "text": "$75,000 -$200,000",
+              "column_start": 229,
+              "column_end": 246
+            }
+          ]
+        },
+        {
+          "line": 19,
+          "text": "                                                                                                                                                      Forum                                                                          $75,000 -$200,000",
+          "cells": [
+            {
+              "text": "Forum",
+              "column_start": 150,
+              "column_end": 155
+            },
+            {
+              "text": "$75,000 -$200,000",
+              "column_start": 229,
+              "column_end": 246
+            }
+          ]
+        },
+        {
+          "line": 21,
+          "text": "                                     Award amount range                                                                                               Community -Centered                                                            $25,000 -$100,000",
+          "cells": [
+            {
+              "text": "Award amount range",
+              "column_start": 37,
+              "column_end": 55
+            },
+            {
+              "text": "Community -Centered",
+              "column_start": 150,
+              "column_end": 169
+            },
+            {
+              "text": "$25,000 -$100,000",
+              "column_start": 229,
+              "column_end": 246
+            }
+          ]
+        },
+        {
+          "line": 22,
+          "text": "                                                                                                                                                      Implementation",
+          "cells": [
+            {
+              "text": "Implementation",
+              "column_start": 150,
+              "column_end": 164
+            }
+          ]
+        },
+        {
+          "line": 23,
+          "text": "                                                                                                                                                      National Implementation                                                        $75,000 -$1,000,000",
+          "cells": [
+            {
+              "text": "National Implementation",
+              "column_start": 150,
+              "column_end": 173
+            },
+            {
+              "text": "$75,000 -$1,000,000",
+              "column_start": 229,
+              "column_end": 248
+            }
+          ]
+        },
+        {
+          "line": 24,
+          "text": "                                                                                                                                                                                                                                     $75,000 -$750,000",
+          "cells": [
+            {
+              "text": "$75,000 -$750,000",
+              "column_start": 229,
+              "column_end": 246
+            }
+          ]
+        },
+        {
+          "line": 25,
+          "text": "                                                                                                                                                      Applied Research",
+          "cells": [
+            {
+              "text": "Applied Research",
+              "column_start": 150,
+              "column_end": 166
+            }
+          ]
+        },
+        {
+          "line": 26,
+          "text": "                                     Average amount of funding per",
+          "cells": [
+            {
+              "text": "Average amount of funding per",
+              "column_start": 37,
+              "column_end": 66
+            }
+          ]
+        },
+        {
+          "line": 27,
+          "text": "                                     award experienced in previous                                                                                    $264,123",
+          "cells": [
+            {
+              "text": "award experienced in previous",
+              "column_start": 37,
+              "column_end": 66
+            },
+            {
+              "text": "$264,123",
+              "column_start": 150,
+              "column_end": 158
+            }
+          ]
+        },
+        {
+          "line": 28,
+          "text": "                                     year s",
+          "cells": [
+            {
+              "text": "year s",
+              "column_start": 37,
+              "column_end": 43
+            }
+          ]
+        },
+        {
+          "line": 30,
+          "text": "                                   The funding in the above Awa rd  Over  vi ew             is subject to the availability of funds andthe",
+          "cells": [
+            {
+              "text": "The funding in the above Awa rd",
+              "column_start": 35,
+              "column_end": 66
+            },
+            {
+              "text": "Over",
+              "column_start": 68,
+              "column_end": 72
+            },
+            {
+              "text": "vi ew",
+              "column_start": 74,
+              "column_end": 79
+            },
+            {
+              "text": "is subject to the availability of funds andthe",
+              "column_start": 92,
+              "column_end": 138
+            }
+          ]
+        },
+        {
+          "line": 31,
+          "text": "                                   Institute of Museum and Librar y Ser vices’(                       IMLS’s) discretion. We are not bound by any",
+          "cells": [
+            {
+              "text": "Institute of Museum and Librar y Ser vices’(",
+              "column_start": 35,
+              "column_end": 79
+            },
+            {
+              "text": "IMLS’s) discretion. We are not bound by any",
+              "column_start": 102,
+              "column_end": 145
+            }
+          ]
+        },
+        {
+          "line": 32,
+          "text": "                                   estimates in this announcement.",
+          "cells": [
+            {
+              "text": "estimates in this announcement.",
+              "column_start": 35,
+              "column_end": 66
+            }
+          ]
+        },
+        {
+          "line": 33,
+          "text": "                                   Contingent upon the availability of funds, the quality of applications, and IMLS’s                            discretion,",
+          "cells": [
+            {
+              "text": "Contingent upon the availability of funds, the quality of applications, and IMLS’s",
+              "column_start": 35,
+              "column_end": 117
+            },
+            {
+              "text": "discretion,",
+              "column_start": 145,
+              "column_end": 156
+            }
+          ]
+        },
+        {
+          "line": 34,
+          "text": "                                   we may make additional awards from the pool of unfunded applications from this",
+          "cells": [
+            {
+              "text": "we may make additional awards from the pool of unfunded applications from this",
+              "column_start": 35,
+              "column_end": 113
+            }
+          ]
+        },
+        {
+          "line": 35,
+          "text": "                                   competition.",
+          "cells": [
+            {
+              "text": "competition.",
+              "column_start": 35,
+              "column_end": 47
+            }
+          ]
+        },
+        {
+          "line": 49,
+          "text": "                                   Award Overview                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                             7",
+          "cells": [
+            {
+              "text": "Award Overview",
+              "column_start": 35,
+              "column_end": 49
+            },
+            {
+              "text": "7",
+              "column_start": 1582,
+              "column_end": 1583
+            }
+          ]
+        }
+      ],
+      "truncated": false,
+      "toc": false
+    }
+  ],
+  "annotation_method": "Visually inspected original funding table on PDF page 9 (printed page 7). Award amount range is a single vertically spanning left cell across all five rows. The historical average below is a different field.",
+  "expected": [
+    {
+      "track": "Planning",
+      "value": {
+        "minimum": 75000,
+        "maximum": 200000
+      }
+    },
+    {
+      "track": "Forum",
+      "value": {
+        "minimum": 75000,
+        "maximum": 200000
+      }
+    },
+    {
+      "track": "Community-Centered Implementation",
+      "value": {
+        "minimum": 25000,
+        "maximum": 100000
+      }
+    },
+    {
+      "track": "National Implementation",
+      "value": {
+        "minimum": 75000,
+        "maximum": 1000000
+      }
+    },
+    {
+      "track": "Applied Research",
+      "value": {
+        "minimum": 75000,
+        "maximum": 750000
+      }
+    }
+  ]
+}

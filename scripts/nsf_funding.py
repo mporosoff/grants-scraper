@@ -12,9 +12,10 @@ from html.parser import HTMLParser
 import re
 
 from scripts.build_catalog import clean_text
+from scripts.notice_structure import VOID_TAGS, IGNORED_TAGS
 
 
-NSF_FUNDING_PAGE_PARSER_VERSION = 3
+NSF_FUNDING_PAGE_PARSER_VERSION = 4
 NSF_ARCHIVED_RE = re.compile(
     r"\bstatus\s*:\s*archived\b|"
     r"\barchived funding opportunity\b|"
@@ -56,54 +57,59 @@ class _NsfFundingPageParser(HTMLParser):
         self.skip_depth = 0
         self.visible_parts: list[str] = []
         self.synopsis_parts: list[str] = []
+        self.frames = []
+        self.main_parts = []
+        self.saw_main = False
 
     def handle_starttag(self, tag, attrs):
-        if tag in {"script", "style", "noscript", "template"}:
-            self.skip_depth += 1
+        attributes = dict(attrs)
+        classes = attributes.get("class", "").split()
+        parent = self.frames[-1] if self.frames else {}
+        ignored = parent.get("ignored", False) or tag in IGNORED_TAGS or bool(re.search(
+            r"(?:^|[\s_-])(?:sidebar|related-opportunities|related-programs)(?:$|[\s_-])",
+            attributes.get("class", "") + " " + attributes.get("id", ""), re.I))
+        frame = {"tag": tag, "ignored": ignored,
+            "capture": not ignored and (parent.get("capture", False) or "field-funding-synopsis" in classes),
+            "main": parent.get("main", False) or tag == "main"}
+        if tag not in VOID_TAGS:
+            self.frames.append(frame)
+        self.saw_main = self.saw_main or tag == "main"
+        self.capture_depth = int(frame["capture"])
+        self.skip_depth = int(ignored)
+        if ignored:
             return
-        if self.skip_depth:
-            return
-
-        classes = dict(attrs).get("class", "").split()
-        if not self.capture_depth and "field-funding-synopsis" in classes:
-            self.capture_depth = 1
-        elif self.capture_depth:
-            self.capture_depth += 1
-
         if tag in BLOCK_TAGS:
-            self.visible_parts.append("\n")
-            if self.capture_depth:
-                self.synopsis_parts.append("\n")
+            self.append("\n", frame)
         if tag == "li" and self.capture_depth:
             self.synopsis_parts.append("• ")
 
     def handle_startendtag(self, tag, attrs):
-        if not self.skip_depth and tag in BLOCK_TAGS:
-            self.visible_parts.append("\n")
-            if self.capture_depth:
-                self.synopsis_parts.append("\n")
+        self.handle_starttag(tag, attrs)
+        if tag not in VOID_TAGS:
+            self.handle_endtag(tag)
 
     def handle_endtag(self, tag):
-        if tag in {"script", "style", "noscript", "template"}:
-            if self.skip_depth:
-                self.skip_depth -= 1
-            return
-        if self.skip_depth:
-            return
-        if tag in BLOCK_TAGS:
-            self.visible_parts.append("\n")
-            if self.capture_depth:
-                self.synopsis_parts.append("\n")
-        if self.capture_depth:
-            self.capture_depth -= 1
+        frame = self.frames[-1] if self.frames else {}
+        if tag in BLOCK_TAGS and not frame.get("ignored"):
+            self.append("\n", frame)
+        index = next((i for i in range(len(self.frames) - 1, -1, -1) if self.frames[i]["tag"] == tag), None)
+        if index is not None:
+            del self.frames[index:]
+        frame = self.frames[-1] if self.frames else {}
+        self.capture_depth, self.skip_depth = int(frame.get("capture", False)), int(frame.get("ignored", False))
+
+    def append(self, value, frame):
+        self.visible_parts.append(value)
+        if frame.get("main"):
+            self.main_parts.append(value)
+        if frame.get("capture"):
+            self.synopsis_parts.append(value)
 
     def handle_data(self, data):
         if self.skip_depth:
             return
         value = re.sub(r"\s+", " ", data)
-        self.visible_parts.append(value)
-        if self.capture_depth:
-            self.synopsis_parts.append(value)
+        self.append(value, self.frames[-1] if self.frames else {})
 
 
 def parse_nsf_funding_page(
@@ -116,7 +122,7 @@ def parse_nsf_funding_page(
     parser.feed(str(html or ""))
     parser.close()
 
-    visible_text = clean_text("".join(parser.visible_parts)) or ""
+    visible_text = clean_text("".join(parser.main_parts if parser.saw_main else parser.visible_parts)) or ""
     archived = bool(NSF_ARCHIVED_RE.search(visible_text))
     synopsis = clean_text("".join(parser.synopsis_parts)) or ""
     synopsis = re.sub(r"^Synopsis(?:\s+|$)", "", synopsis, count=1).strip()

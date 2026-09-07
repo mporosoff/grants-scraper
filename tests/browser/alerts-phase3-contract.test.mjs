@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
+import { execFileSync } from "node:child_process";
 import test from "node:test";
 
 import { normalizeSubscription } from "../../workers/alerts/src/contract.js";
@@ -522,6 +523,50 @@ test("opportunity watches send the exact 30, 14, and 7 day reminders once", asyn
   );
 });
 
+test("source-generated listing amendments remain deliverable while proven parser corrections stay quiet", async () => {
+  const buildChanges = (before, after) => JSON.parse(execFileSync("python", ["-c",
+    "import json,sys; from datetime import date; from scripts.build_changes import diff_catalogs; p=json.load(sys.stdin); print(json.dumps(diff_catalogs(p[0],p[1],as_of=date(2026,9,2))))"], {
+    input: JSON.stringify([{opportunities: [before]}, {generated_at: "2026-09-02T00:00:00Z", opportunities: [after]}]), encoding: "utf8",
+  }));
+  for (const parserOnly of [false, true]) {
+    const old = record({source: "Official listing", close_date: "2026-10-15",
+      document_evidence: {document: {sha256: "a".repeat(64)}}});
+    const current = parserOnly ? {...old, deadlines: [{kind: "concept_paper", date: "2026-10-01", evidence_id: "document-field"}]}
+      : {...old, close_date: "2026-10-01", next_submission: {date: "2026-10-01"}};
+    const events = buildChanges(old, current);
+    assert.equal(events.filter(event => event.type === (parserOnly ? "source_correction" : "deadline_changed")).length, 1);
+    const store = new MemoryStore(), provider = new MockEmailProvider();
+    await store.upsertSubscriber({id: "fixture-person", email: "fixture@example.test", manageToken: "m".repeat(43)});
+    store.subscriptions.set("fixture-watch", {
+      id: "fixture-watch", subscriber_id: "fixture-person", type: "opportunity", active: 1,
+      verified_at: fixedNow.toISOString(), cadence: "immediate", baseline_at: fixedNow.toISOString(),
+      definition_json: JSON.stringify({opportunity_id: "opp-1", triggers: ["deadline_changed"]}),
+    });
+    const now = new Date("2026-09-02T12:00:00Z");
+    await evaluateSubscriptions({store, assets: assets({records: [current], events}), env, now});
+    await dispatchNotifications({store, provider, env, now});
+    assert.equal(provider.messages.length, parserOnly ? 0 : 1);
+    if (!parserOnly) assert.match(provider.messages[0].text, /2026-10-15.*2026-10-01/);
+  }
+});
+
+test("internal submission gates suppress later sponsor reminders unless explicitly optional", async () => {
+  for (const required of [null, false]) {
+    const store = new MemoryStore(), provider = new MockEmailProvider();
+    await store.upsertSubscriber({id: "fixture-person", email: "fixture@example.test", manageToken: "m".repeat(43)});
+    store.subscriptions.set("fixture-watch", {
+      id: "fixture-watch", subscriber_id: "fixture-person", type: "opportunity", active: 1,
+      verified_at: fixedNow.toISOString(), cadence: "immediate", baseline_at: fixedNow.toISOString(),
+      definition_json: JSON.stringify({opportunity_id: "opp-1", triggers: ["closing_reminders"]}),
+    });
+    const state = assets({records: [record({close_date: "2026-10-01", limited_submission: false,
+      deadlines: [{kind: "internal", date: "2026-08-21", required, source: "source_listed"}]})]});
+    await evaluateSubscriptions({store, assets: state, env, now: fixedNow});
+    await dispatchNotifications({store, provider, env, now: fixedNow});
+    assert.equal(provider.messages.length, required === false ? 1 : 0);
+  }
+});
+
 test("opportunity watches detect a non-closing status transition", async () => {
   const store = new MemoryStore();
   const provider = new MockEmailProvider();
@@ -585,7 +630,7 @@ test("saved-search creation baselines existing Strong matches and alerts once fo
   assert.ok(queuedStrongEvent);
   const publicPayload = JSON.parse(queuedStrongEvent.payload_json);
   assert.deepEqual(Object.keys(publicPayload).sort(), [
-    "agency", "close_date", "detail", "funding_finder_url", "official_url", "program", "title", "why_matched",
+    "agency", "close_date", "detail", "funding_finder_url", "official_url", "program", "source_close_date", "submission_access", "submission_stage", "title", "why_matched",
   ]);
   assert.doesNotMatch(JSON.stringify(publicPayload), /cv|profile|orcid|publication|uploaded|document|notes?|chat/i);
   await dispatchNotifications({ store, provider, env, now: fixedNow });

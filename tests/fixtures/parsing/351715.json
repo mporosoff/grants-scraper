@@ -1,0 +1,21 @@
+{
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering",
+    "retrieved_at": "2026-09-07T12:37:03.197297+00:00",
+    "sha256": "c7027d7ad5236490ee0b4dcc98f61bfe40ec3bc53da9fca084ff8a85549be28d"
+  },
+  "document_name": null,
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "nsf_synopsis_excerpt",
+  "text": "<main><div class=\"field-funding-synopsis\">Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitalize on opportunities for bringing fundamental plasma science investigations to bear on problems of societal and technological need within the scope of science and engineering supported by the participating NSF programs.\nThe ECLIPSE meta-program has been created to foster an inclusive community of scientists and engineers, an ecosystem spanning multiple NSF Directorates, in the pursuit of translational research at the interface of fundamental plasma science and technological innovation. The ECLIPSE program builds on the long history of NSF leadership in supporting multi-disciplinary research in </div></main>",
+  "annotations": [
+    {
+      "location": "Primary program Synopsis",
+      "rationale": "The primary scientific scope survives capture without requiring funding amounts or dates.",
+      "require": {},
+      "contains_text": {
+        "text": "fundamental plasma science investigations"
+      }
+    }
+  ]
+}

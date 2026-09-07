@@ -50,6 +50,22 @@
       source: cleanString(record.source, 120),
       source_type: cleanString(record.source_type, 60),
       close_date: cleanString(record.close_date, 10),
+      has_preliminary_stage: record.has_preliminary_stage === true,
+      preliminary_required: typeof record.preliminary_required === "boolean" ? record.preliminary_required : null,
+      ...Object.fromEntries(["deadlines", "submission_requirements"].filter(key => Array.isArray(record[key])).map(key => [key,
+        record[key].slice(0, 50).filter(event => event && typeof event === "object").map(event => ({
+        kind: cleanString(event.kind, 40), date: cleanString(event.date, 10) || null,
+        window_start: cleanString(event.window_start, 10) || null,
+        time: cleanString(event.time, 40) || null, timezone: cleanString(event.timezone, 80) || null,
+        application_class: cleanString(event.application_class, 40) || null,
+        cycle: cleanString(event.cycle, 60) || null, track: cleanString(event.track, 500) || null,
+        required: typeof event.required === "boolean" ? event.required : null,
+        invitation_required: event.invitation_required === true,
+        prerequisite: cleanString(event.prerequisite, 60) || null,
+        rolling: event.rolling === true,
+        date_qualifier: ["recommended", "anticipated"].includes(event.date_qualifier) ? event.date_qualifier : null,
+        estimated: event.estimated === true,
+      }))])),
       url: cleanString(
         record.url || record.detail_page || record.funding_opportunity_url
           || record.primary_document_url,
@@ -105,8 +121,8 @@
     }
   }
 
-  function isSaved(items, id) {
-    return (items || []).some(item => idOf(item) === id);
+  function isSaved(items, id, resolveId = value => value) {
+    return (items || []).some(item => resolveId(idOf(item)) === resolveId(id));
   }
 
   function mutationResult(ok, items, details = {}) {
@@ -119,16 +135,18 @@
     };
   }
 
-  function toggle(record, storage) {
+  function toggle(record, storage, resolveId = value => value) {
     const persistedItems = load(storage);
     const item = sanitizeItem(record);
     if (!item) return mutationResult(false, persistedItems, { saved: false, error: "invalid_item" });
-    const key = idOf(item);
-    const items = persistedItems.map(existing => ({ ...existing }));
-    const index = items.findIndex(existing => idOf(existing) === key);
+    const key = resolveId(idOf(item));
+    let items = persistedItems.map(existing => ({ ...existing }));
+    const existingSaved = isSaved(items, key, resolveId);
     let saved;
-    if (index >= 0) {
-      items.splice(index, 1);
+    if (existingSaved) {
+      // Resolve membership without rewriting durable pursuit notes/status.
+      // An explicit unsave removes every snapshot of this one canonical call.
+      items = items.filter(existing => resolveId(idOf(existing)) !== key);
       saved = false;
     } else {
       items.unshift(item);
@@ -136,7 +154,7 @@
     }
     if (!persist(items, storage)) {
       return mutationResult(false, persistedItems, {
-        saved: isSaved(persistedItems, key), error: "storage_rejected",
+        saved: isSaved(persistedItems, key, resolveId), error: "storage_rejected",
       });
     }
     return mutationResult(true, items, { saved, changed: true });

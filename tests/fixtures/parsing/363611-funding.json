@@ -1,0 +1,27 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354624",
+    "sha256": "d0264e29a717e1e5c02d23749bcaeb7acc84da20d3819a2cea694cb4ed744d71",
+    "retrieved_at": "2026-09-07T19:43:14.764161+00:00"
+  },
+  "containers": [
+    {
+      "page": 4,
+      "text": "D. Funding Details: \nIt is anticipated that approximately 20 awards will be made under this announcement. The amount of \nfunding is expected to be approximately $3.5 million, with individual awards up to $175,000 in federal \nfunds, depending on Agency funding levels, the quality of applications received, agency priorities, and \nother applicable considerations. Awards funded under this opportunity are expected to have generally a \n1 – 2 year project period."
+    }
+  ],
+  "expected_awards": [
+    {
+      "value": {
+        "minimum": null,
+        "maximum": 175000
+      },
+      "subject": "award",
+      "basis": "total_project",
+      "cost_basis": "unspecified",
+      "funding_basis": "federal_share",
+      "track": null
+    }
+  ],
+  "annotation_method": "The retrieved and visually inspected EPA-OW-OWOW-26-01 PDF page 4 distinguishes approximately $3.5m program funding from individual awards up to $175,000 in federal funds. The latter is the federal share per award, not the whole project including any recipient contribution."
+}

@@ -29,6 +29,7 @@ export const WORKER_DEPLOYMENT_INPUTS = Object.freeze({
       "assets/match-explain.js",
       "assets/search-query.js",
       "assets/search-retrieval.js",
+      "assets/submission-schedule.js",
       "assets/search-v2-config.js",
     ]),
   }),

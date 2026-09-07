@@ -502,12 +502,12 @@ class MergePrecedenceTests(unittest.TestCase):
         self.assertEqual(kept[0]["detail_page"], rival["detail_page"])
         self.assertEqual(kept[0]["source"], "Grants.gov")
 
-    def test_normalised_title_collision_also_drops_the_external_record(self):
-        """The framework's pre-existing backstop, shown agreeing with P8's key."""
+    def test_normalised_title_without_number_cannot_prove_an_element_alias(self):
+        """P11 replaces the unsafe title backstop with owned solicitation keys."""
         rival = catalog_record(None, self.external[0]["title"])
         combined, stats = merge_records([rival], self.external)
-        self.assertEqual(stats["dropped_cross_source_duplicate"], 1)
-        self.assertEqual(len(combined), len(self.external))
+        self.assertEqual(stats["dropped_cross_source_duplicate"], 0)
+        self.assertEqual(len(combined), len(self.external) + 1)
 
     def test_merging_twice_does_not_create_a_second_identity(self):
         once, _ = merge_records(CATALOG_ROSES, self.external)

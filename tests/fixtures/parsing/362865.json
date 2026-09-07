@@ -1,0 +1,50 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353153",
+    "retrieved_at": "2026-09-07T12:37:02.573851+00:00",
+    "sha256": "0770b74bc02ab1159c2253d30e4fe4e88bd8f6ec277ab80585afb10d77517c49"
+  },
+  "document_name": "HT942526KCRPIDA_GG2.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 4,
+      "section": null,
+      "anchor": null,
+      "text": "• Partnering Principal Investigator Option: Supports meaningful and productive \npartnerships between two investigators, termed the Initiating Principal Investigator (PI) and \nPartnering PI, collaborating on a single application. Only the Initiating PI will submit a pre-\napplication, but all PIs will need to submit full applications. The Partnering PI’s application is \nan abbreviated package specific to their distinct portion of the research project. Be advised, \nall associated applications for a research project may be withdrawn if the initiating or \npartnering application is rejected or administratively withdrawn. \nFunding Details: The Congressionally Directed Medical Research Programs (CDMRP) expects \nto allot roughly $7.8M to fund approximately 8 Idea Development Award applications with total \ncost caps of $900,000 for the IDA or $1.2M for the IDA – Partnering PI Option. The maximum \nperiod of performance is 3 years. It is anticipated that awards made from this FY26 funding \nopportunity will be funded with FY26 funds, which will expire for use on September 30, 2032. \nAwards supported with FY26 funds will be made no later than September 30, 2027. \nSubmission and Review Dates and Times \n• Pre-Application (Letter of Intent) Submission Deadline: 5:00 p.m. Eastern Time (ET), \nSeptember 14, 2026 \n• Application Submission Deadline: 11:59 p.m. ET, September 28, 2026 \n• End of Application Verification Period: 5:00 p.m. ET, October 5, 2026  \n• Peer Review: December 2026 \n• Programmatic Review: March 2027 \n"
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 4, Funding Details",
+      "rationale": "The source explicitly distinguishes the per-award cap from program funding.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "maximum": 900000
+        },
+        "subject": "award"
+      }
+    },
+    {
+      "location": "PDF page 4, Funding Details",
+      "rationale": "The source explicitly distinguishes the per-award cap from program funding.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "maximum": 1200000
+        },
+        "subject": "award"
+      }
+    },
+    {
+      "location": "PDF page 4, funding and review block",
+      "rationale": "Funding expiration and review dates do not establish solicitation withdrawal.",
+      "forbid": {
+        "type": "status_signal",
+        "status_signal": "cancelled"
+      }
+    }
+  ]
+}

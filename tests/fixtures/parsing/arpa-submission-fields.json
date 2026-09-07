@@ -1,0 +1,496 @@
+{
+  "note": "Retained official source excerpts; expected stages, dates, clocks and requirements are independently annotated in the regression test. Original source receipts preserved.",
+  "cases": [
+    {
+      "opportunity_id": "arpa-h:stream",
+      "source": {
+        "url": "https://arpa-h.gov/explore-funding/programs/stream",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "a0c90c57e3edd34365ee3055c8bd721416eba882250e77c526860987066f83b6",
+        "version": 1,
+        "first_seen_at": "2026-09-07T01:21:25.564825Z",
+        "last_seen_at": "2026-09-07T01:21:25.564825Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-07T01:21:25.564825Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-arpa-h:stream-ff1cbf2f919f",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-09-14",
+          "display_value": "2026-09-14 · 11:59 pm ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/programs/stream",
+            "citation_url": "https://arpa-h.gov/explore-funding/programs/stream",
+            "document_name": null,
+            "sha256": "a0c90c57e3edd34365ee3055c8bd721416eba882250e77c526860987066f83b6",
+            "page": null,
+            "section": "Solicitation",
+            "location": "section “Solicitation”",
+            "quote": "…Solution Summary, be sure to select \"STREAM\" from the Solution Summary dropdown list when prompted. Sign-in required to submit a Solution Summary. Submissions must be submitted by September 14, 2026 (11:59 pm ET) . Await feedback: After submitting your Solution Summary, you should wait to hear back from ARPA-H with feedback before proceeding with a full pr…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-09-14",
+          "time": "11:59 pm",
+          "timezone": "ET",
+          "required": true
+        }
+      ],
+      "containers": [
+        {
+          "text": "…Solution Summary, be sure to select \"STREAM\" from the Solution Summary dropdown list when prompted. Sign-in required to submit a Solution Summary. Submissions must be submitted by September 14, 2026 (11:59 pm ET) . Await feedback: After submitting your Solution Summary, you should wait to hear back from ARPA-H with feedback before proceeding with a full pr…",
+          "page": null,
+          "section": "Solicitation"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "arpa-h:tigar",
+      "source": {
+        "url": "https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "a918738c9d66b186781c82f48da08293d7b31ff80531672fe6c0d18ad6622376",
+        "version": 1,
+        "first_seen_at": "2026-09-07T01:21:25.564825Z",
+        "last_seen_at": "2026-09-07T01:21:25.564825Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-07T01:21:25.564825Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-arpa-h:tigar-aa69ad91eca7",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-06-08",
+          "display_value": "2026-06-08 · 5:00PM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar",
+            "citation_url": "https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar",
+            "document_name": null,
+            "sha256": "a918738c9d66b186781c82f48da08293d7b31ff80531672fe6c0d18ad6622376",
+            "page": null,
+            "section": "Solicitation",
+            "location": "section “Solicitation”",
+            "quote": "…tunity and its requirements, key dates and deadlines, submission documents and templates, evaluation criteria for submissions, and information on how to apply. Solution Video due: June 8, 2026 A Solution Video submission is required to submit a full proposal. Full proposal due: September 17, 2026 at 5:00PM ET After submission of a Solution Video, proposers…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-06-08",
+          "time": "5:00PM",
+          "timezone": "ET",
+          "required": true
+        },
+        {
+          "id": "evidence-arpa-h:tigar-485bb281810b",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-09-17",
+          "display_value": "2026-09-17 · 5:00PM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar",
+            "citation_url": "https://arpa-h.gov/explore-funding/initiatives-and-sprints/tigar",
+            "document_name": null,
+            "sha256": "a918738c9d66b186781c82f48da08293d7b31ff80531672fe6c0d18ad6622376",
+            "page": null,
+            "section": "Solicitation",
+            "location": "section “Solicitation”",
+            "quote": "…criteria for submissions, and information on how to apply. Solution Video due: June 8, 2026 A Solution Video submission is required to submit a full proposal. Full proposal due: September 17, 2026 at 5:00PM ET After submission of a Solution Video, proposers will either be encouraged or discouraged from submission of a full proposal. It is strongly recommen…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-09-17",
+          "time": "5:00PM",
+          "timezone": "ET",
+          "required": true
+        }
+      ],
+      "containers": [
+        {
+          "text": "…tunity and its requirements, key dates and deadlines, submission documents and templates, evaluation criteria for submissions, and information on how to apply. Solution Video due: June 8, 2026 A Solution Video submission is required to submit a full proposal. Full proposal due: September 17, 2026 at 5:00PM ET After submission of a Solution Video, proposers…",
+          "page": null,
+          "section": "Solicitation"
+        },
+        {
+          "text": "…criteria for submissions, and information on how to apply. Solution Video due: June 8, 2026 A Solution Video submission is required to submit a full proposal. Full proposal due: September 17, 2026 at 5:00PM ET After submission of a Solution Video, proposers will either be encouraged or discouraged from submission of a full proposal. It is strongly recommen…",
+          "page": null,
+          "section": "Solicitation"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363390",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312",
+        "name": "INL.NOFO-FINAL FY26v.1-FINAL (Mar 2026)-Individual FINAL VERSION.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "edfad577cf030d4b1cb042eec15bde06bceb222bf4e4ca7479cfce903c4ddd40",
+        "version": 1,
+        "first_seen_at": "2026-08-04T12:22:29.523883Z",
+        "last_seen_at": "2026-08-24T19:19:38.443582Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-08-24T19:19:38.443582Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-363390-312581d65230",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-07-30",
+          "display_value": "2026-07-30 · 11:59 PM CET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312#page=1",
+            "document_name": "INL.NOFO-FINAL FY26v.1-FINAL (Mar 2026)-Individual FINAL VERSION.pdf",
+            "sha256": "edfad577cf030d4b1cb042eec15bde06bceb222bf4e4ca7479cfce903c4ddd40",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…000.00 U.S. Dollars Anticipated Number of Awards: 2 awards Initial Project Implementation Length: 12-18 months Estimated Project Start Date: November 2026 NOFO Issuance Date: July 30, 2026 Deadline for Submission of Questions: August 28, 2026 by 11:59 PM CET via email Deadline for Submission of Applications: September 28, 2026 by 11:59 PM CET",
+            "extracted_at": "2026-08-04T12:22:29.523883Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-07-30",
+          "time": "11:59 PM",
+          "timezone": "CET",
+          "required": false
+        },
+        {
+          "id": "evidence-363390-9eca8a874bcf",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-08-28",
+          "display_value": "2026-08-28 · 11:59 PM CET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312#page=1",
+            "document_name": "INL.NOFO-FINAL FY26v.1-FINAL (Mar 2026)-Individual FINAL VERSION.pdf",
+            "sha256": "edfad577cf030d4b1cb042eec15bde06bceb222bf4e4ca7479cfce903c4ddd40",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…wards Initial Project Implementation Length: 12-18 months Estimated Project Start Date: November 2026 NOFO Issuance Date: July 30, 2026 Deadline for Submission of Questions: August 28, 2026 by 11:59 PM CET via email Deadline for Submission of Applications: September 28, 2026 by 11:59 PM CET",
+            "extracted_at": "2026-08-04T12:22:29.523883Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-08-28",
+          "time": "11:59 PM",
+          "timezone": "CET",
+          "required": false
+        },
+        {
+          "id": "evidence-363390-d768a6088bff",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-09-28",
+          "display_value": "2026-09-28 · 11:59 PM CET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312#page=1",
+            "document_name": "INL.NOFO-FINAL FY26v.1-FINAL (Mar 2026)-Individual FINAL VERSION.pdf",
+            "sha256": "edfad577cf030d4b1cb042eec15bde06bceb222bf4e4ca7479cfce903c4ddd40",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…Date: November 2026 NOFO Issuance Date: July 30, 2026 Deadline for Submission of Questions: August 28, 2026 by 11:59 PM CET via email Deadline for Submission of Applications: September 28, 2026 by 11:59 PM CET",
+            "extracted_at": "2026-08-04T12:22:29.523883Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-09-28",
+          "time": "11:59 PM",
+          "timezone": "CET",
+          "required": false
+        },
+        {
+          "id": "evidence-363390-1f15227172e2",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-12-01",
+          "display_value": "2026-12-01",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354312#page=13",
+            "document_name": "INL.NOFO-FINAL FY26v.1-FINAL (Mar 2026)-Individual FINAL VERSION.pdf",
+            "sha256": "edfad577cf030d4b1cb042eec15bde06bceb222bf4e4ca7479cfce903c4ddd40",
+            "page": 13,
+            "section": null,
+            "location": "page 13",
+            "quote": "…on of proposals. Further, the U.S. government reserves the rig ht to reject any or all proposals received. Unsuccessful applicants: Unsuccessful applicants will be notified by December 1, 2026 via email. Payment Method: Recipients will be required to request payments by completing form SF -270—Request for Advance or Reimbursement and submitting the form to…",
+            "extracted_at": "2026-08-04T12:22:29.523883Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-12-01",
+          "time": null,
+          "timezone": null,
+          "required": true
+        }
+      ],
+      "containers": [
+        {
+          "text": "…000.00 U.S. Dollars Anticipated Number of Awards: 2 awards Initial Project Implementation Length: 12-18 months Estimated Project Start Date: November 2026 NOFO Issuance Date: July 30, 2026 Deadline for Submission of Questions: August 28, 2026 by 11:59 PM CET via email Deadline for Submission of Applications: September 28, 2026 by 11:59 PM CET",
+          "page": 1,
+          "section": null
+        },
+        {
+          "text": "…wards Initial Project Implementation Length: 12-18 months Estimated Project Start Date: November 2026 NOFO Issuance Date: July 30, 2026 Deadline for Submission of Questions: August 28, 2026 by 11:59 PM CET via email Deadline for Submission of Applications: September 28, 2026 by 11:59 PM CET",
+          "page": 1,
+          "section": null
+        },
+        {
+          "text": "…Date: November 2026 NOFO Issuance Date: July 30, 2026 Deadline for Submission of Questions: August 28, 2026 by 11:59 PM CET via email Deadline for Submission of Applications: September 28, 2026 by 11:59 PM CET",
+          "page": 1,
+          "section": null
+        },
+        {
+          "text": "…on of proposals. Further, the U.S. government reserves the rig ht to reject any or all proposals received. Unsuccessful applicants: Unsuccessful applicants will be notified by December 1, 2026 via email. Payment Method: Recipients will be required to request payments by completing form SF -270—Request for Advance or Reimbursement and submitting the form to…",
+          "page": 13,
+          "section": null
+        }
+      ]
+    },
+    {
+      "opportunity_id": "arpa-h:fastpass",
+      "source": {
+        "url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "8c7960264e1116fd680740235bf8cf2fb94b9cb81f7972833791ee02625504fe",
+        "version": 1,
+        "first_seen_at": "2026-09-07T01:21:25.564825Z",
+        "last_seen_at": "2026-09-07T01:21:25.564825Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-07T01:21:25.564825Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-arpa-h:fastpass-d58f5cabb538",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-09-21",
+          "display_value": "2026-09-21 · 4:00PM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+            "citation_url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+            "document_name": null,
+            "sha256": "8c7960264e1116fd680740235bf8cf2fb94b9cb81f7972833791ee02625504fe",
+            "page": null,
+            "section": "Solicitation",
+            "location": "section “Solicitation”",
+            "quote": "…nity and its requirements, key dates and deadlines, submission documents and templates, evaluation criteria for submissions, and information on how to apply. Solution Summary Due: September 21, 2026 (4:00PM ET) Submitting a Solution Summary presentation slide deck is required to move forward with this opportunity. Proposal Due: November 10, 2026 (4:00PM ET…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-09-21",
+          "time": "4:00PM",
+          "timezone": "ET",
+          "required": true
+        },
+        {
+          "id": "evidence-arpa-h:fastpass-437c45933124",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-11-10",
+          "display_value": "2026-11-10 · 4:00PM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+            "citation_url": "https://arpa-h.gov/explore-funding/programs/fastpass",
+            "document_name": null,
+            "sha256": "8c7960264e1116fd680740235bf8cf2fb94b9cb81f7972833791ee02625504fe",
+            "page": null,
+            "section": "Solicitation",
+            "location": "section “Solicitation”",
+            "quote": "…apply. Solution Summary Due: September 21, 2026 (4:00PM ET) Submitting a Solution Summary presentation slide deck is required to move forward with this opportunity. Proposal Due: November 10, 2026 (4:00PM ET) Reminder: Details subject to change. Please reference the solicitation documents for the most up-to-date information. Review Solicitation Details Rea…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-11-10",
+          "time": "4:00PM",
+          "timezone": "ET",
+          "required": true
+        }
+      ],
+      "containers": [
+        {
+          "text": "…nity and its requirements, key dates and deadlines, submission documents and templates, evaluation criteria for submissions, and information on how to apply. Solution Summary Due: September 21, 2026 (4:00PM ET) Submitting a Solution Summary presentation slide deck is required to move forward with this opportunity. Proposal Due: November 10, 2026 (4:00PM ET…",
+          "page": null,
+          "section": "Solicitation"
+        },
+        {
+          "text": "…apply. Solution Summary Due: September 21, 2026 (4:00PM ET) Submitting a Solution Summary presentation slide deck is required to move forward with this opportunity. Proposal Due: November 10, 2026 (4:00PM ET) Reminder: Details subject to change. Please reference the solicitation documents for the most up-to-date information. Review Solicitation Details Rea…",
+          "page": null,
+          "section": "Solicitation"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "arpa-h:sbir",
+      "source": {
+        "url": "https://arpa-h.gov/explore-funding/sbir",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "8673cb6d29a2182ff6104624232ed56c244813b22d4fffb1809d179fb373245b",
+        "version": 1,
+        "first_seen_at": "2026-09-07T01:21:25.564825Z",
+        "last_seen_at": "2026-09-07T01:21:25.564825Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-07T01:21:25.564825Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-arpa-h:sbir-4717bc994d74",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-07-17",
+          "display_value": "2026-07-17 · 11:59AM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/sbir",
+            "citation_url": "https://arpa-h.gov/explore-funding/sbir",
+            "document_name": null,
+            "sha256": "8673cb6d29a2182ff6104624232ed56c244813b22d4fffb1809d179fb373245b",
+            "page": null,
+            "section": "Key Dates:",
+            "location": "section “Key Dates:”",
+            "quote": "Solution Summary Due: July 17, 2026 (11:59AM ET) Applicants who are successful in the Solution Summary phase will be encouraged to pitch. Technical Presentation Deck, Cost Proposal, and Task Description Document Due…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-07-17",
+          "time": "11:59AM",
+          "timezone": "ET",
+          "required": true
+        },
+        {
+          "id": "evidence-arpa-h:sbir-cf11653ebb1b",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-09-11",
+          "display_value": "2026-09-11 · 11:59AM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/sbir",
+            "citation_url": "https://arpa-h.gov/explore-funding/sbir",
+            "document_name": null,
+            "sha256": "8673cb6d29a2182ff6104624232ed56c244813b22d4fffb1809d179fb373245b",
+            "page": null,
+            "section": "Key Dates:",
+            "location": "section “Key Dates:”",
+            "quote": "…11:59AM ET) Applicants who are successful in the Solution Summary phase will be encouraged to pitch. Technical Presentation Deck, Cost Proposal, and Task Description Document Due: September 11, 2026 at 12:00PM ET (noon) for Topics 1, 2, 3, 4, 6, and 7. October 1, 2026 at 12:00PM ET (noon) for Topic 5. Pitch presentations will be held after the deck submiss…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-09-11",
+          "time": "11:59AM",
+          "timezone": "ET",
+          "required": true
+        },
+        {
+          "id": "evidence-arpa-h:sbir-230fe47c5465",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-10-01",
+          "display_value": "2026-10-01 · 12:00PM ET",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/sbir",
+            "citation_url": "https://arpa-h.gov/explore-funding/sbir",
+            "document_name": null,
+            "sha256": "8673cb6d29a2182ff6104624232ed56c244813b22d4fffb1809d179fb373245b",
+            "page": null,
+            "section": "Key Dates:",
+            "location": "section “Key Dates:”",
+            "quote": "…ill be encouraged to pitch. Technical Presentation Deck, Cost Proposal, and Task Description Document Due: September 11, 2026 at 12:00PM ET (noon) for Topics 1, 2, 3, 4, 6, and 7. October 1, 2026 at 12:00PM ET (noon) for Topic 5. Pitch presentations will be held after the deck submission deadline and scheduled separately as per instructions from ARPA-H in…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-10-01",
+          "time": "12:00PM",
+          "timezone": "ET",
+          "required": true
+        }
+      ],
+      "containers": [
+        {
+          "text": "Solution Summary Due: July 17, 2026 (11:59AM ET) Applicants who are successful in the Solution Summary phase will be encouraged to pitch. Technical Presentation Deck, Cost Proposal, and Task Description Document Due…",
+          "page": null,
+          "section": "Key Dates:"
+        },
+        {
+          "text": "…11:59AM ET) Applicants who are successful in the Solution Summary phase will be encouraged to pitch. Technical Presentation Deck, Cost Proposal, and Task Description Document Due: September 11, 2026 at 12:00PM ET (noon) for Topics 1, 2, 3, 4, 6, and 7. October 1, 2026 at 12:00PM ET (noon) for Topic 5. Pitch presentations will be held after the deck submiss…",
+          "page": null,
+          "section": "Key Dates:"
+        },
+        {
+          "text": "…ill be encouraged to pitch. Technical Presentation Deck, Cost Proposal, and Task Description Document Due: September 11, 2026 at 12:00PM ET (noon) for Topics 1, 2, 3, 4, 6, and 7. October 1, 2026 at 12:00PM ET (noon) for Topic 5. Pitch presentations will be held after the deck submission deadline and scheduled separately as per instructions from ARPA-H in…",
+          "page": null,
+          "section": "Key Dates:"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "arpa-h:rest",
+      "source": {
+        "url": "https://arpa-h.gov/explore-funding/programs/rest",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "80819a5d3594603b758548b8cf03573ec7b252791dbc497b8be24f402b0811c0",
+        "version": 1,
+        "first_seen_at": "2026-09-07T01:21:25.564825Z",
+        "last_seen_at": "2026-09-07T01:21:25.564825Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-07T01:21:25.564825Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-arpa-h:rest-7cd13e25c908",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-08-12",
+          "display_value": "2026-08-12",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://arpa-h.gov/explore-funding/programs/rest",
+            "citation_url": "https://arpa-h.gov/explore-funding/programs/rest",
+            "document_name": null,
+            "sha256": "80819a5d3594603b758548b8cf03573ec7b252791dbc497b8be24f402b0811c0",
+            "page": null,
+            "section": "Solicitation",
+            "location": "section “Solicitation”",
+            "quote": "…nity and its requirements, key dates and deadlines, submission documents and templates, evaluation criteria for submissions, and information on how to apply. Solution Summary Due: August 12, 2026 A summary is required to submit a full proposal. Full Proposal Due: Anticipated Fall 2026 Invited submissions only, details to follow. Reminder: Dates are estimat…",
+            "extracted_at": "2026-09-07T01:21:25.564825Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-08-12",
+          "time": null,
+          "timezone": null,
+          "required": true
+        }
+      ],
+      "containers": [
+        {
+          "text": "…nity and its requirements, key dates and deadlines, submission documents and templates, evaluation criteria for submissions, and information on how to apply. Solution Summary Due: August 12, 2026 A summary is required to submit a full proposal. Full Proposal Due: Anticipated Fall 2026 Invited submissions only, details to follow. Reminder: Dates are estimat…",
+          "page": null,
+          "section": "Solicitation"
+        }
+      ]
+    }
+  ]
+}

@@ -131,10 +131,19 @@ def build_document_stage(ambient_now, *, pin_to=None):
         catalog = work / "opportunities.js"
         cache = work / "document_evidence.json"
         catalog.write_bytes((frozen / catalog.name).read_bytes())
-        cache.write_bytes((frozen / cache.name).read_bytes())
+        # This contract isolates source TTL rollover from parser migration.
+        # Legacy-cache recovery is exercised by test_notice_structure_cache;
+        # do not rewrite the shared frozen corpus to simulate a warm parser.
+        payload = json.loads((frozen / cache.name).read_text())
+        for entry in payload.get('records', {}).values():
+            entry['parser_dependencies'] = extract_document_evidence.parser_dependencies()
+            entry['extractor_identity'] = extract_document_evidence.EXTRACTOR_IDENTITY
+            entry['deadline_extractor_identity'] = extract_document_evidence.DEADLINE_EXTRACTOR_IDENTITY
+        cache.write_text(json.dumps(payload))
         argv = [
             "--catalog", str(catalog),
             "--cache", str(cache),
+            '--structure-cache', str(work / '.private-notice-cache'),
             "--max-documents", "0",
             "--request-delay", "0",
         ]

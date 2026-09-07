@@ -1,0 +1,519 @@
+{
+  "schema_version": 1,
+  "selection_sha256": "0a72069aa835f01c866ec1d363236144c66f29f160c9e13ee8767c531a653bc3",
+  "baseline_code": "d70e9561f481d3a8ed8fc6b6c36e66fd8a06aba3",
+  "notices": [
+    {
+      "opportunity_id": "362240",
+      "opportunity_number": "HT942526MRPIA",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352338",
+      "document_name": "HT942526MRPIA_GG.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352338",
+        "retrieved_at": "2026-09-07T12:37:01.068384+00:00",
+        "sha256": "ab130e47cb2f372c62c56748b6223b71ba4dd50fbd0b24afcd23f9d1fb527425"
+      },
+      "fixtures": [
+        {
+          "path": "362240.json",
+          "sha256": "877a05ed52eadbf1cbb33123c3874143f8e9fd5fb52e417255773437929072d0"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362681",
+      "opportunity_number": "FA955026S0001",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352688",
+      "document_name": "FA955026S0001 Amendment 0001 AFOSR Open BAA.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/352688",
+        "retrieved_at": "2026-09-07T12:37:01.069239+00:00",
+        "sha256": "608a1d2376c51b982e09ae37989ba5b6e00def0ff5fd079f47f5cc3b9764d343"
+      },
+      "fixtures": [
+        {
+          "path": "362681.json",
+          "sha256": "94fb0a98e1cc6fbe58de62fbe4a43a7cdae7fd79915d7a74c790074cbab7f0ed"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "348923",
+      "opportunity_number": "693JJ323NF00014",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+      "document_name": "693JJ323NF00014.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+        "retrieved_at": "2026-09-07T12:37:00.920620+00:00",
+        "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84"
+      },
+      "fixtures": [
+        {
+          "path": "348923.json",
+          "sha256": "ac5be8a4d0955d58b2e6e51a4098b217709db45c6dbf5fa5ce963a9a44c63bfb"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "327047",
+      "opportunity_number": "20-576",
+      "source_url": "https://www.nsf.gov/funding/opportunities/plant-biotic-interactions/nsf20-576/solicitation",
+      "document_name": null,
+      "split": "development",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/plant-biotic-interactions/nsf20-576/solicitation",
+        "retrieved_at": "2026-09-07T12:37:01.098871+00:00",
+        "sha256": "9972d50dab3869a2f93ca69d3874613d0b645475481deff622b8595f9dbd6b27"
+      },
+      "fixtures": [
+        {
+          "path": "327047.json",
+          "sha256": "41b9150b7aa3752895ae25e90feb92086f4caf84df255c86b492ad4d83c981f4"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363622",
+      "opportunity_number": "26-524",
+      "source_url": "https://www.nsf.gov/funding/opportunities/efri-wbc-emerging-frontiers-research-innovation-efri-wave-based/nsf26-524/solicitation",
+      "document_name": null,
+      "split": "development",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/efri-wbc-emerging-frontiers-research-innovation-efri-wave-based/nsf26-524/solicitation",
+        "retrieved_at": "2026-09-07T12:37:01.166607+00:00",
+        "sha256": "5e760ca667e652f5a01cf95dd4887934a8f17b63bdb8b079acd400bafae3120a"
+      },
+      "fixtures": [
+        {
+          "path": "363622.json",
+          "sha256": "32ad6da010b4ac05ce4f02d48a5c4c67d80f3c71976df0b03bb0b9fc3d545687"
+        },
+        {
+          "path": "363622-schedule-funding.json",
+          "sha256": "67e7b69f8c2aef82b189e82d34707c738607dbd4f5686e13b838a400a6fc0c75"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "360199",
+      "opportunity_number": "RFA-CK-26-035",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354339",
+      "document_name": "rfa-ck-26-035-v3.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354339",
+        "retrieved_at": "2026-09-07T12:37:01.541489+00:00",
+        "sha256": "2c6a147d63df965236830552930af2e05de5d6190cc42fbdf5e998e0821a0fb6"
+      },
+      "fixtures": [
+        {
+          "path": "360199.json",
+          "sha256": "231865aea3a60d9f9870a381247da36abe733cec2708e5700e81a032ce62374d"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "360200",
+      "opportunity_number": "RFA-CK-26-036",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354383",
+      "document_name": "rfa-ck-26-036_v7.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354383",
+        "retrieved_at": "2026-09-07T12:37:01.542026+00:00",
+        "sha256": "0f00e3a9624fb9cd6a55ef640738c01f9ba3a1627379c2f3adfbb8de98e189bb"
+      },
+      "fixtures": [
+        {
+          "path": "360200.json",
+          "sha256": "697c4546eb81a6c624fffe469f13b3b12e1d45b4a865027ce2b8cc5ed08a2dcb"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363815",
+      "opportunity_number": "DE-FOA-0003647",
+      "source_url": "https://eere-exchange.energy.gov/",
+      "document_name": null,
+      "split": "development",
+      "source": {
+        "url": "https://eere-exchange.energy.gov/",
+        "retrieved_at": "2026-09-07T12:37:03.251798+00:00",
+        "sha256": "6ee543c8f0288a560b504e7b8c7e08bc44e8edf705d674521c460e27a3f8fa61"
+      },
+      "fixtures": [
+        {
+          "path": "363815.json",
+          "sha256": "d8f701ba26ca65678893bc283f5a28537b66d35f305410de370a63c3901a1bad"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362836",
+      "opportunity_number": "N0001426SBC11",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+      "document_name": "N0001426SBC11.POST.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+        "retrieved_at": "2026-09-07T12:37:01.714937+00:00",
+        "sha256": "b720863805a224a41bfcd3b0e394f8ea1f4b4f74f92cc2159f75f9ee661a03d8"
+      },
+      "fixtures": [
+        {
+          "path": "362836.json",
+          "sha256": "ead420141c0108745d3ad2c71687727817f01b821c4dbe446315485c4f0099a0"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363065",
+      "opportunity_number": "DE-FOA-0003627",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
+      "document_name": "FundOpp_DE-FOA-0003627_Amd_000003.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
+        "retrieved_at": "2026-09-07T12:37:02.019376+00:00",
+        "sha256": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1"
+      },
+      "fixtures": [
+        {
+          "path": "363065.json",
+          "sha256": "23bbb25b3e74bf77814a18a5e6c2f8f7be7ffc99e0a0623bcd0be8513676e05c"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363302",
+      "opportunity_number": "DE-FOA-0003634",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354120",
+      "document_name": "DE-FOA-0003634_Part 2.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354120",
+        "retrieved_at": "2026-09-07T12:37:02.281127+00:00",
+        "sha256": "41a0087dd15dabc35245432b143f6b2c0bbb4083bf0a906f91b1b516eaf2f6dd"
+      },
+      "fixtures": [
+        {
+          "path": "363302.json",
+          "sha256": "bf03c95a59508a427068e67c86e6eb881079424816db7e84df855a8e0f4b19c7"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363594",
+      "opportunity_number": "DE-FOA-0003215",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354567",
+      "document_name": "DE-FOA-0003215-Part 2.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354567",
+        "retrieved_at": "2026-09-07T12:37:02.419829+00:00",
+        "sha256": "2e4b3f79516007c7f2190ab68e1b4aef7ef867045272c63f7cf93c8975fea183"
+      },
+      "fixtures": [
+        {
+          "path": "363594.json",
+          "sha256": "4ff329a007a2b576ad6f7b7a0828d24671b84f3da0dee22320a3b739361ae936"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362865",
+      "opportunity_number": "HT942526KCRPIDA",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353153",
+      "document_name": "HT942526KCRPIDA_GG2.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353153",
+        "retrieved_at": "2026-09-07T12:37:02.573851+00:00",
+        "sha256": "0770b74bc02ab1159c2253d30e4fe4e88bd8f6ec277ab80585afb10d77517c49"
+      },
+      "fixtures": [
+        {
+          "path": "362865.json",
+          "sha256": "9cd52811a3476f88f52315938527529b1ce18b77232185ad6a99989f3cf1b143"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "360008",
+      "opportunity_number": "RFA-FD-25-020",
+      "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-FD-25-020.html",
+      "document_name": "Foa_Content_of_RFA-FD-25-020.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-FD-25-020.html",
+        "retrieved_at": "2026-09-07T12:37:02.723535+00:00",
+        "sha256": "9d1dd22b90cc36d40e6df7b1b27c31463a2f4c02455e223c581715fd4c7464f8"
+      },
+      "fixtures": [
+        {
+          "path": "360008.json",
+          "sha256": "f9c2104ba5942a1ec26a6aefba9a05f651b0bc82d60ea7e616621353b415be88"
+        },
+        {
+          "path": "360008-canonical-pdf.json",
+          "sha256": "bd68603c5959ae43cff295017f3a324a8314ec686a8ae9470f4dbf78ea8b5ced"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362195",
+      "opportunity_number": "HT942526ALSRPPCTA",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353129",
+      "document_name": "HT942526ALSRPPCTA_GG2.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353129",
+        "retrieved_at": "2026-09-07T12:37:02.900662+00:00",
+        "sha256": "04690a47b9c2901125ef5ee076916074f93fde9601caf73ce2a6481ed347ae70"
+      },
+      "fixtures": [
+        {
+          "path": "362195.json",
+          "sha256": "0b3ad855f1ef13d4cbfd2fc7a1d22c8b24fd8d5718e200c929fa2d3fe0a51ad5"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362267",
+      "opportunity_number": "HT942526PRCRPIPA",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351811",
+      "document_name": "HT942526PRCRPIPA_GG.pdf",
+      "split": "development",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351811",
+        "retrieved_at": "2026-09-07T12:37:03.038008+00:00",
+        "sha256": "4bebffd60a38fc0ee1a275e3e976057548a791e8be045d05a993caec8eb92d75"
+      },
+      "fixtures": [
+        {
+          "path": "362267.json",
+          "sha256": "8f3996e8cd6b00fca0251450dc66dbe8f1305c64904337057a286ae6eceb12a4"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "341244",
+      "opportunity_number": "22-606",
+      "source_url": "https://www.nsf.gov/funding/opportunities/che-drpndp-division-chemistry-disciplinary-research-programs-no/506080/nsf22-606/solicitation",
+      "document_name": null,
+      "split": "development",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/che-drpndp-division-chemistry-disciplinary-research-programs-no/506080/nsf22-606/solicitation",
+        "retrieved_at": "2026-09-07T12:37:03.051054+00:00",
+        "sha256": "09915af4196e3a384840ec7ad0caffe2bc2a7aebd969efc7f65d1d852f7c1f68"
+      },
+      "fixtures": [
+        {
+          "path": "341244.json",
+          "sha256": "499e8bc17de6103167af53327eace3b39a4c47b05e82bf5d38ec064b95048a1e"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "349655",
+      "opportunity_number": "23-612",
+      "source_url": "https://www.nsf.gov/funding/opportunities/mps-materials-mps-materials-research-programs/nsf23-612/solicitation",
+      "document_name": null,
+      "split": "development",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/mps-materials-mps-materials-research-programs/nsf23-612/solicitation",
+        "retrieved_at": "2026-09-07T12:37:03.125984+00:00",
+        "sha256": "f975225964be8b33f3403a77de1ff6755e0d3fb4f9e042d5229887ec1a3631c7"
+      },
+      "fixtures": [
+        {
+          "path": "349655.json",
+          "sha256": "cf1afe151918a7543af1edb3934af3d0fd6fc9bc0c2661ec04f819df7ed08150"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362062",
+      "opportunity_number": "PD-26-369Y",
+      "source_url": "https://www.nsf.gov/funding/opportunities/engineering-biological-biomedical-systems",
+      "document_name": null,
+      "split": "development",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/engineering-biological-biomedical-systems",
+        "retrieved_at": "2026-09-07T12:37:03.202466+00:00",
+        "sha256": "8df465410c7d612db72f9fc687f69bfea3a2df416a0efc397490b932db70c80b"
+      },
+      "fixtures": [
+        {
+          "path": "362062.json",
+          "sha256": "481758134563445400daab03084cb5582e4b1f5f3d6a7fe66aa7869fe287aa6e"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "351715",
+      "opportunity_number": "PD-24-110Z",
+      "source_url": "https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering",
+      "document_name": null,
+      "split": "development",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering",
+        "retrieved_at": "2026-09-07T12:37:03.197297+00:00",
+        "sha256": "c7027d7ad5236490ee0b4dcc98f61bfe40ec3bc53da9fca084ff8a85549be28d"
+      },
+      "fixtures": [
+        {
+          "path": "351715.json",
+          "sha256": "7966b545b3a1022a6d045ae95ba0c221b94c74e0be58c7a476b4d55d6141e154"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362174",
+      "opportunity_number": "HT942526TBDRPTDRA",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351800",
+      "document_name": "HT942526TBDRPTDRA_GG.pdf",
+      "split": "holdout",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351800",
+        "retrieved_at": "2026-09-07T12:37:03.506346+00:00",
+        "sha256": "547dc6489cdbca0f47bdc5b928d4a20fa886fabe62ae1d4ce89c158e44610ca4"
+      },
+      "fixtures": [
+        {
+          "path": "362174-holdout.json",
+          "sha256": "5d93e50a760abe22cccb97f54fdec9cdf6ab32da94b7154a9e12c142797ff9d3"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362854",
+      "opportunity_number": "HT942526BMFRPIDA",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353128",
+      "document_name": "HT942526BMFRPIDA_GG.pdf",
+      "split": "holdout",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353128",
+        "retrieved_at": "2026-09-07T12:37:03.491661+00:00",
+        "sha256": "0e6c0e32a779f37ade311aba16955be60069b16c112d27a991fc8d94085f5338"
+      },
+      "fixtures": [
+        {
+          "path": "362854-holdout.json",
+          "sha256": "1e13c38701ed2c4c3dd7e1b46c3e0c21153ae9fac2b19a61ef08757e84923c08"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "348375",
+      "opportunity_number": "23-595",
+      "source_url": "https://www.nsf.gov/funding/opportunities/crest-centers-research-excellence-science-technology/nsf23-595/solicitation",
+      "document_name": null,
+      "split": "holdout",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/crest-centers-research-excellence-science-technology/nsf23-595/solicitation",
+        "retrieved_at": "2026-09-07T12:37:03.526078+00:00",
+        "sha256": "d322fe8c7d6c852f62cb131c26fe9833d586f01a866ce4f7010f706a3bb6bb43"
+      },
+      "fixtures": [
+        {
+          "path": "348375-holdout.json",
+          "sha256": "e4ed017e04dd8927dc4ef285d982e1637721354b5a258e82ab2b55d4faf11f85"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "357609",
+      "opportunity_number": "25-516",
+      "source_url": "https://www.nsf.gov/funding/opportunities/cesev-chemical-evolution-solid-earth-volcanology/nsf25-516/solicitation",
+      "document_name": null,
+      "split": "holdout",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/cesev-chemical-evolution-solid-earth-volcanology/nsf25-516/solicitation",
+        "retrieved_at": "2026-09-07T12:37:03.598397+00:00",
+        "sha256": "fa3ac233b276335ce9adc5db54c31f29480fdabe08a1396edbde423ea8ea7ece"
+      },
+      "fixtures": [
+        {
+          "path": "357609-holdout.json",
+          "sha256": "0d1257da69694ac43b2f145f81800d2393c8fc430667d6d296f790919be1855e"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "358403",
+      "opportunity_number": "14-579",
+      "source_url": "https://www.nsf.gov/funding/opportunities/rui-roa-pui-facilitating-research-predominantly-undergraduate/nsf14-579/solicitation",
+      "document_name": null,
+      "split": "holdout",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/rui-roa-pui-facilitating-research-predominantly-undergraduate/nsf14-579/solicitation",
+        "retrieved_at": "2026-09-07T12:37:03.604198+00:00",
+        "sha256": "5397b88d46e60b963a057ec754bd2b59ba10c00a36ad32f9563b1e6227a85b48"
+      },
+      "fixtures": [
+        {
+          "path": "358403-holdout.json",
+          "sha256": "adc2237b5b93cbcdf8f7a93b6830e659a4010a73cf8ecf559d09f09f169d09d2"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "360350",
+      "opportunity_number": "25-545",
+      "source_url": "https://www.nsf.gov/funding/opportunities/stem-k-12-nsf-stem-k-12/nsf25-545/solicitation",
+      "document_name": null,
+      "split": "holdout",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/stem-k-12-nsf-stem-k-12/nsf25-545/solicitation",
+        "retrieved_at": "2026-09-07T12:37:04.634508+00:00",
+        "sha256": "0ffd3a33573482a473b50fcc66f6dd61f7e3ba4073f989bce37bc53371babf7a"
+      },
+      "fixtures": [
+        {
+          "path": "360350-holdout.json",
+          "sha256": "d4c46fc7b94266a85e132eea9b8a2c9fce4aff74b2e8b12be72871a3cbf66f58"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362787",
+      "opportunity_number": "L26AS00064",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353013",
+      "document_name": "Foa_Content_of_L26AS00064 Youth.pdf",
+      "split": "holdout",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353013",
+        "retrieved_at": "2026-09-07T12:37:03.793456+00:00",
+        "sha256": "aba06a1b3717c4f27e46c6c7ccedadef625554f484063d831301e7f35f127a91"
+      },
+      "fixtures": [
+        {
+          "path": "362787-holdout.json",
+          "sha256": "9335c708cafdf92046eb281de7380cb975eb3be3b3225a6cc5fa6fc7f17aa77d"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "358024",
+      "opportunity_number": "PAR-25-324",
+      "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-324.html",
+      "document_name": null,
+      "split": "holdout",
+      "source": {
+        "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-324.html",
+        "retrieved_at": "2026-09-07T12:37:03.776031+00:00",
+        "sha256": "202fd1ddc0520aa24b08c9c68091e3611778938999d48e611b3af8807ba075ca"
+      },
+      "fixtures": [
+        {
+          "path": "358024-holdout.json",
+          "sha256": "c35477584cca4438ce241fafa6e638e74d0314491a0887fab0c7732ee602e5e5"
+        }
+      ]
+    }
+  ]
+}

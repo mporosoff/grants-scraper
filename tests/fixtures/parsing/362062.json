@@ -1,0 +1,21 @@
+{
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/engineering-biological-biomedical-systems",
+    "retrieved_at": "2026-09-07T12:37:03.202466+00:00",
+    "sha256": "8df465410c7d612db72f9fc687f69bfea3a2df416a0efc397490b932db70c80b"
+  },
+  "document_name": null,
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "nsf_synopsis_excerpt",
+  "text": "<main><div class=\"field-funding-synopsis\">The Engineering Biological and Biomedical Systems (EBBS) program expands our understanding of biological and physiological systems, and it helps improve human health. For U.S. leadership in biotechnology, the engineering of biology is required at every scale. Engineering is needed for sensing biomarkers to making proteins to restoring functions of the body. In EBBS, fundamental mechanistic insights are combined with experimental and computational techniques. This approach helps develop platforms, devices, organisms, tissues, and processes that bring new understanding and control of biological functions.\nEBBS supports studies of mechanisms that drive the behavior of microbial populations and cells, and of therapeutic cells and tissues. This includes discovering the underlying engineering principles that are needed to capture the responses of biological systems and bioreactors. It also includes the creation of novel biosensing platforms and new optical imaging and modulation strategies. </div></main>",
+  "annotations": [
+    {
+      "location": "Primary program Synopsis",
+      "rationale": "The primary scientific scope survives capture without requiring funding amounts or dates.",
+      "require": {},
+      "contains_text": {
+        "text": "biological and physiological systems"
+      }
+    }
+  ]
+}

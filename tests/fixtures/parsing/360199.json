@@ -1,0 +1,65 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354339",
+    "retrieved_at": "2026-09-07T12:37:01.541489+00:00",
+    "sha256": "2c6a147d63df965236830552930af2e05de5d6190cc42fbdf5e998e0821a0fb6"
+  },
+  "document_name": "rfa-ck-26-035-v3.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 5,
+      "section": null,
+      "anchor": null,
+      "text": "Key dates \nApplication submission \ndeadline: November 5, 2026 \nRequired letter of intent:\nSeptember 15, 2025 \nExpected scientific review \ndate: December 15, 2026 \nExpected secondary review \ndate: January 12, 2027 \nExpected award date:\nAugust 2, 2027 \nExpected start date:\nSeptember 1, 2027 \nExpiration date: December \n7, 2026 \nSee Submit Your Application \nfor other submission \nrequirements and deadlines \nthat may apply to this NOFO. \n"
+    },
+    {
+      "page": 47,
+      "section": null,
+      "anchor": null,
+      "text": "Submission requirements \nand deadlines \nRequired letter of intent \nDue on September 15, 2026 \nYou must let us know if you plan to apply for this opportunity. We do this to \nplan for the number of reviewers we will need to evaluate applications. You \nmust submit a letter of intent to apply. \nPlease email the notice to SPittBarnes@cdc.gov. \nIn your email, include: \n• The funding opportunity number and title. \n• Your organization’s name and address. \n• A contact name, phone number, and email address. \n• The descriptive title of your proposed research. \n• Names of your project director or principal investigator and other key \npersonnel. \n• Participating institutions. \nApplication \nDue on November 5, 2026 at 11:59 p.m. ET. \n"
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 47, Required letter of intent",
+      "rationale": "Detailed submission instructions explicitly require the LOI.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "letter_of_intent",
+        "date": "2026-09-15",
+        "required": true
+      }
+    },
+    {
+      "location": "PDF page 47, Application",
+      "rationale": "The application owns its 11:59 p.m. ET clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2026-11-05",
+        "time": "11:59 p.m.",
+        "timezone": "ET"
+      }
+    },
+    {
+      "location": "PDF pages 5 and 47",
+      "rationale": "The 2025 summary date contradicts the 2026 detailed instructions and must be disclosed.",
+      "require": {
+        "type": "deadline_source_conflict",
+        "alternate_date": "2025-09-15"
+      },
+      "target": "review_queue"
+    },
+    {
+      "location": "PDF pages 5 and 47",
+      "rationale": "The contradictory summary date remains a disclosed alternative, not a second operative LOI deadline.",
+      "forbid": {
+        "type": "deadline",
+        "deadline_kind": "letter_of_intent",
+        "date": "2025-09-15"
+      }
+    }
+  ]
+}

@@ -25,6 +25,7 @@ import os
 from pathlib import Path
 import re
 import socket
+import sys
 import tempfile
 import time
 from urllib.parse import unquote, urljoin, urlparse
@@ -40,12 +41,13 @@ from scripts.build_catalog import (
     write_catalog,
 )
 from scripts.enrich_catalog import read_catalog
-from scripts import program_areas
+from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache
 
 
 EVIDENCE_SCHEMA_VERSION = 1
-EXTRACTOR_IDENTITY = "official-evidence-2"
-DEADLINE_EXTRACTOR_IDENTITY = "submission-date-3"
+EXTRACTOR_IDENTITY = "official-evidence-3"
+DEADLINE_EXTRACTOR_IDENTITY = "submission-date-6"
+FACT_CONTRACT_VERSION = "typed-notice-facts-1"
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
 DEFAULT_SUBTOPIC_CACHE = Path("data/subtopics.js")
@@ -70,9 +72,9 @@ DATE_RE = re.compile(
     re.I,
 )
 TIME_RE = re.compile(
-    r"\b((?:1[0-2]|0?[1-9])(?::[0-5]\d)?\s*(?:a\.?m\.?|p\.?m\.?))(?![A-Za-z])"
-    r"(?:\s*\(noon\))?(?:\s+(Eastern|Central|Mountain|Pacific|Alaska|Hawaii(?:-Aleutian)?|Atlantic|UTC|GMT|AK[SD]T|HST|[ECMPA][SD]?T)\b"
-    r"(?:\s+(?:Time|Standard Time|Daylight Time))?)?",
+    r"(?<![\d:])\b((?:1[0-2]|0?[1-9])(?::[0-5]\d(?::[0-5]\d)?)?\s*(?:a\.?m\.?|p\.?m\.?))(?![A-Za-z])"
+    r"(?:\s*\(noon\))?(?:\s+(?:U\.S\.\s+)?(Eastern|Central|Mountain|Pacific|Alaska|Hawaii(?:-Aleutian)?|Atlantic|UTC|GMT|CET|AK[SD]T|HST|[ECMPA][SD]?T)\b"
+    r"(?:\s+(?:Time|Standard Time|Daylight(?: Savings)? Time))?)?",
     re.I,
 )
 DEADLINE_CUE_RE = re.compile(
@@ -136,8 +138,8 @@ DEADLINE_KINDS = (
     ),
 )
 MONEY_RE = re.compile(
-    r"\$\s*(\d[\d,]*(?:\.\d+)?)\s*"
-    r"(thousand|million|billion|[KMB])?\b",
+    r"\$\s*(\d[\d,]*(?:\.\d+)?)"
+    r"(?:\s*(thousand|million|billion|(?<=\d)[KMB]|(?-i:[KMB])(?!\.)))?\b",
     re.I,
 )
 AWARD_CUE_RE = re.compile(
@@ -398,148 +400,129 @@ def context_quote(text, start, end, maximum=MAX_QUOTE_CHARS):
     )
 
 
-class NoticeHTMLParser(HTMLParser):
-    """Collect readable HTML blocks with their nearest heading."""
-
-    BLOCK_TAGS = {
-        "p",
-        "li",
-        "td",
-        "th",
-        "div",
-        "section",
-        "article",
-        "br",
-    }
-
-    def __init__(self):
-        super().__init__(convert_charrefs=True)
-        self.blocks = []
-        self.buffer = []
-        self.current_section = "Official notice"
-        self.current_anchor = None
-        self.heading_tag = None
-        self.heading_buffer = []
-        self.heading_anchor = None
-        self.ignored_depth = 0
-
-    def handle_starttag(self, tag, attrs):
-        tag = tag.casefold()
-        attributes = dict(attrs)
-        if tag in {"script", "style", "noscript", "svg"}:
-            self.ignored_depth += 1
-            return
-        if self.ignored_depth:
-            return
-        if tag in {"h1", "h2", "h3", "h4", "h5", "h6"}:
-            self._flush()
-            self.heading_tag = tag
-            self.heading_buffer = []
-            self.heading_anchor = attributes.get("id")
-        elif tag in self.BLOCK_TAGS:
-            self._flush()
-
-    def handle_endtag(self, tag):
-        tag = tag.casefold()
-        if tag in {"script", "style", "noscript", "svg"}:
-            self.ignored_depth = max(0, self.ignored_depth - 1)
-            return
-        if self.ignored_depth:
-            return
-        if tag == self.heading_tag:
-            heading = clean_document_text(" ".join(self.heading_buffer))
-            if heading:
-                self.current_section = heading[:180]
-                self.current_anchor = self.heading_anchor
-            self.heading_tag = None
-            self.heading_buffer = []
-            self.heading_anchor = None
-        elif tag in self.BLOCK_TAGS:
-            self._flush()
-
-    def handle_data(self, data):
-        if self.ignored_depth:
-            return
-        if self.heading_tag:
-            self.heading_buffer.append(data)
-        else:
-            self.buffer.append(data)
-
-    def close(self):
-        super().close()
-        self._flush()
-
-    def _flush(self):
-        text = clean_document_text(" ".join(self.buffer))
-        self.buffer = []
-        if len(text) >= 20:
-            self.blocks.append(
-                {
-                    "text": text,
-                    "section": self.current_section,
-                    "anchor": self.current_anchor,
-                }
-            )
+# Shared source structure retains short fields and table ownership.
+from scripts.notice_structure import NoticeHTMLParser, STRUCTURE_VERSION
 
 
 def extract_pdf_pages(content):
     reader = PdfReader(io.BytesIO(content), strict=False)
     if reader.is_encrypted:
         try:
-            reader.decrypt("")
-        except Exception:  # noqa: BLE001 - extraction warning below
-            pass
+            if not reader.decrypt(""):
+                raise RuntimeError("Official PDF is encrypted and cannot be read.")
+        except Exception as error:
+            raise RuntimeError("Official PDF is encrypted and cannot be read.") from error
     total_pages = len(reader.pages)
     pages = []
+    unreadable, truncated_pages, layout_unavailable = [], [], []
     for index, page in enumerate(reader.pages, start=1):
         if index > MAX_PDF_PAGES:
             break
         try:
-            text = clean_document_text(page.extract_text() or "")
+            raw_text = page.extract_text() or ""
+            text = clean_document_text(raw_text)
         except Exception:  # noqa: BLE001 - retain other readable pages
             text = ""
+        if not text:
+            unreadable.append(index)
         if text:
+            try:
+                layout = "\n".join(line.rstrip() for line in (page.extract_text(extraction_mode="layout") or "").splitlines())
+                if not layout:
+                    layout_unavailable.append(index)
+            except Exception:
+                layout = ""
+                layout_unavailable.append(index)
+            if len(text) > MAX_PAGE_CHARS:
+                truncated_pages.append(index)
+            if len(layout) > MAX_PAGE_CHARS and index not in truncated_pages:
+                truncated_pages.append(index)
+            text = text[:MAX_PAGE_CHARS]
+            layout = layout[:MAX_PAGE_CHARS]
+            blocks = []
+            for line in re.finditer(r"[^\n]+", text):
+                blocks.append({"block_id": f"pdf-{index}-{len(blocks) + 1}", "kind": "line",
+                    "text": line.group(), "span": line.span(), "reading_order": len(blocks),
+                    "page": index})
             pages.append(
                 {
                     "page": index,
                     "section": None,
                     "anchor": None,
-                    "text": text[:MAX_PAGE_CHARS],
+                    "text": text,
+                    "structure": blocks,
+                    # Preserve physical column positions without guessing which
+                    # column is a deadline, amount, or qualifier. Native readers
+                    # must establish that from the actual source headers.
+                    "layout_rows": [{"line": n + 1, "text": line,
+                        "cells": [{"text": m.group().strip(), "column_start": m.start(), "column_end": m.end()}
+                                  for m in re.finditer(r"\S(?:.*?\S)?(?=\s{2,}|$)", line)]}
+                        for n, line in enumerate(layout.splitlines()) if line.strip()],
+                    "truncated": index in truncated_pages,
                 }
             )
+    # Repeated running headings are evidence context, not substantive sections.
+    edges = {}
+    for container in pages:
+        lines = container["structure"]
+        for block in lines[:5] + lines[-2:]:
+            key = re.sub(r"\d+", "#", block["text"].strip())
+            if len(key) > 8:
+                edges.setdefault(key, set()).add(container["page"])
+    repeated = {text for text, seen in edges.items() if len(seen) >= max(3, len(pages) // 2)}
+    for container in pages:
+        container["toc"] = bool(re.search(r"^\s*(?:Table of Contents|Contents?)\s*$", container["text"][:1800], re.I | re.M))
+        for block in container["structure"]:
+            block["repeated_header"] = re.sub(r"\d+", "#", block["text"].strip()) in repeated
+            block["toc"] = container["toc"]
     return pages, {
         "method": "pypdf",
         "page_count": total_pages,
         "pages_read": min(total_pages, MAX_PDF_PAGES),
         "pages_with_text": len(pages),
-        "truncated": total_pages > MAX_PDF_PAGES,
+        "truncated": total_pages > MAX_PDF_PAGES or bool(truncated_pages),
+        "truncated_pages": truncated_pages,
+        "unreadable_pages": unreadable,
+        "layout_unavailable_pages": layout_unavailable,
+        "structure_version": STRUCTURE_VERSION,
     }
 
 
-def extract_html_sections(content):
+def extract_html_sections(content, *, nsf_submission_component=False):
     decoded = content.decode("utf-8", errors="replace")
-    parser = NoticeHTMLParser()
+    parser = NoticeHTMLParser(nsf_submission_component=nsf_submission_component)
     parser.feed(decoded)
     parser.close()
+    if nsf_submission_component:
+        leaves = {'program-due-dates__date-type', 'program-due-dates__desc', 'program-due-dates__due-by-time-text', 'program-due-dates__sub-type'}
+        parser.blocks = [b for b in parser.blocks if b.get('source_component') != 'nsf_submission_fields'
+                         or (parser.submission_components == 1 and any(
+                             leaves.intersection(a.get('class', '').split()) for a in b.get('ancestors', [])))]
+        if parser.submission_components > 1:
+            parser.diagnostics.append('ambiguous_nsf_submission_component')
     grouped = []
     for block in parser.blocks:
         if (
             grouped
             and grouped[-1]["section"] == block["section"]
             and grouped[-1]["anchor"] == block["anchor"]
+            and grouped[-1].get('source_component') == block.get('source_component')
             and len(grouped[-1]["text"]) + len(block["text"]) < MAX_PAGE_CHARS
         ):
             start = len(grouped[-1]["text"]) + 1
             grouped[-1]["text"] += f"\n{block['text']}"
             grouped[-1]["blocks"].append((start, len(grouped[-1]["text"])))
+            grouped[-1]["structure"].append({**block, "span": (start, len(grouped[-1]["text"]))})
         else:
             grouped.append(
                 {
                     "page": None,
                     "section": block["section"],
                     "anchor": block["anchor"],
+                    **({'source_component': block['source_component']} if block.get('source_component') else {}),
                     "text": block["text"],
                     "blocks": [(0, len(block["text"]))],
+                    "structure": [{**block, "span": (0, len(block["text"]))}],
                 }
             )
     return grouped, {
@@ -548,20 +531,28 @@ def extract_html_sections(content):
         "pages_read": None,
         "pages_with_text": len(grouped),
         "truncated": False,
+        "structure_version": STRUCTURE_VERSION,
+        "warnings": parser.diagnostics,
     }
 
 
 def content_kind(content, content_type, name, final_url):
     media = str(content_type or "").split(";", 1)[0].strip().casefold()
     suffix_text = f"{name or ''} {final_url or ''}".casefold()
-    if content[:5] == b"%PDF-" or media == "application/pdf" or ".pdf" in suffix_text:
+    if content[:5] == b"%PDF-":
         return "pdf"
-    if media in {"text/html", "application/xhtml+xml"} or re.search(
+    if re.search(
         br"^\s*<(?:!doctype\s+html|html)\b",
         content[:500],
         re.I,
     ):
         return "html"
+    if media == "application/pdf":
+        return "pdf"
+    if media in {"text/html", "application/xhtml+xml"}:
+        return "html"
+    if ".pdf" in suffix_text and media in {"", "application/octet-stream"}:
+        return "pdf"
     if media.startswith("text/"):
         return "text"
     return "unsupported"
@@ -572,16 +563,16 @@ def extract_containers(content, content_type, name, final_url):
     if kind == "pdf":
         containers, extraction = extract_pdf_pages(content)
     elif kind == "html":
-        containers, extraction = extract_html_sections(scoped_html(content, final_url))
+        containers, extraction = extract_html_sections(scoped_html(content, final_url),
+            nsf_submission_component=urlparse(final_url).hostname in {'www.nsf.gov', 'nsf.gov'})
     elif kind == "text":
+        decoded = clean_document_text(content.decode("utf-8", errors="replace"))
         containers = [
             {
                 "page": None,
                 "section": "Official notice",
                 "anchor": None,
-                "text": clean_document_text(
-                    content.decode("utf-8", errors="replace")
-                )[:MAX_PAGE_CHARS],
+                "text": decoded[:MAX_PAGE_CHARS],
             }
         ]
         extraction = {
@@ -589,7 +580,7 @@ def extract_containers(content, content_type, name, final_url):
             "page_count": None,
             "pages_read": None,
             "pages_with_text": int(bool(containers[0]["text"])),
-            "truncated": False,
+            "truncated": len(decoded) > MAX_PAGE_CHARS,
         }
     else:
         raise RuntimeError(
@@ -604,14 +595,18 @@ def extract_containers(content, content_type, name, final_url):
 
 def source_scope_identity(url):
     parsed = urlparse(str(url or ""))
-    return "simons-grant-article-1" if parsed.hostname in {"simonsfoundation.org", "www.simonsfoundation.org"} and parsed.path.startswith("/grant/") else None
+    if parsed.hostname in {"simonsfoundation.org", "www.simonsfoundation.org"} and parsed.path.startswith("/grant/"):
+        return "simons-grant-article-1"
+    if parsed.hostname in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov", "netl-exchange.energy.gov"}:
+        return "exchange-notice-group-2"
+    return None
 
 
 def scoped_html(content, url):
     """A supported notice owns one bounded element, never linked sibling calls."""
     parsed = urlparse(str(url or ""))
     article = source_scope_identity(url) == "simons-grant-article-1"
-    if not article and parsed.hostname not in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov"}:
+    if not article and parsed.hostname not in {"arpa-e-foa.energy.gov", "eere-exchange.energy.gov", "netl-exchange.energy.gov"}:
         return content
     target = unquote(parsed.fragment)
     if not article and not re.fullmatch(r"FoaId[0-9a-fA-F-]{36}", target, re.I):
@@ -663,6 +658,41 @@ def scoped_html(content, url):
 
     fragment = Fragment()
     fragment.feed(content.decode("utf-8", errors="replace"))
+    if not article and not fragment.matches:
+        # The same official portal also nests a named FoaId anchor within one
+        # .foaGroup. Own that complete group, never the summary grid or siblings.
+        class ExchangeGroup(Fragment):
+            def __init__(self):
+                super().__init__()
+                self.groups, self.owned = [], 0
+
+            def handle_starttag(self, tag, attrs):
+                attributes = dict(attrs)
+                selected = tag == "div" and "foaGroup" in attributes.get("class", "").split()
+                if not self.depth:
+                    if not selected:
+                        return
+                    self.depth, self.parts, self.owned = 1, [], 0
+                elif tag == "div":
+                    self.depth += 1
+                if tag == "a" and (attributes.get("name") or attributes.get("id") or "").casefold() == target.casefold():
+                    self.owned += 1
+                self.parts.append(self.get_starttag_text())
+
+            def handle_endtag(self, tag):
+                if self.depth:
+                    self.parts.append("</" + tag + ">")
+                    if tag == "div":
+                        self.depth -= 1
+                    if not self.depth and self.owned:
+                        if self.owned != 1:
+                            raise ValueError("official Exchange group has ambiguous ownership")
+                        self.groups.append(list(self.parts))
+
+        groups = ExchangeGroup()
+        groups.feed(content.decode("utf-8", errors="replace"))
+        if len(groups.groups) == 1 and not groups.depth:
+            return "".join(groups.groups[0]).encode("utf-8")
     if fragment.matches != 1 or fragment.depth or not fragment.parts:
         raise ValueError("official notice does not expose one complete bounded article" if article
                          else "official Exchange notice does not expose one complete bounded fragment")
@@ -680,6 +710,12 @@ def citation_for(container, document, start, end, extracted_at):
     else:
         citation_url = url
         location = f"section “{container.get('section') or 'Official notice'}”"
+    owned = [block for block in container.get("structure", [])
+             if block.get("span") and block["span"][0] <= start < block["span"][1]]
+    structural_reference = None
+    if len(owned) == 1:
+        structural_reference = {key: owned[0][key] for key in
+            ("block_id", "kind", "row", "table_id", "heading_path", "source_position") if key in owned[0]}
     return {
         "document_url": url,
         "citation_url": citation_url,
@@ -690,6 +726,7 @@ def citation_for(container, document, start, end, extracted_at):
         "location": location,
         "quote": context_quote(container["text"], start, end),
         "extracted_at": extracted_at,
+        **({"structural_reference": structural_reference} if structural_reference else {}),
     }
 
 
@@ -734,6 +771,13 @@ def make_fact(
         "display_value": display_value,
         "confidence": "machine_extracted_needs_verification",
         "citation": citation,
+        "fact_contract": FACT_CONTRACT_VERSION,
+        "source_authority": "machine_extracted_official_document",
+        "subject": {"deadline": "submission", "expected_awards": "program_awards",
+                    "project_duration": "award_project"}.get(fact_type, fact_type),
+        "parser_version": EXTRACTOR_IDENTITY,
+        # Semantic extractors supply applicable subject/stage/basis/obligation;
+        # absence means unknown, never an inferred negative or a source mandate.
     }
     fact.update(extra)
     return fact
@@ -770,11 +814,12 @@ _DEADLINE_FIELD = re.compile(
     rf"|{_SUBMISSION_SUBJECT}\s+(?:(?:is\s+required\s+and\s+)?(?:must|shall)\s+be\s+(?:submitted|received|filed)|(?:are|is|will\s+be)\s+due)"
     rf"|(?:submissions?|solution\s+summar(?:y|ies))\s+(?:due|must\s+be\s+(?:submitted|received))"
     rf"|application\s+period\s+will\s+close|closing\s+date(?:\s+for\s+this\s+opportunity)?"
-    rf"|submission\s+deadlines?|(?P<generic>deadline))\b", re.I)
+    rf"|(?P<generic>submission\s+deadlines?|deadline))\b", re.I)
 _REQUIREMENT = re.compile(r"(?<!\w)(?:\(\s*(?:required|optional)\s*\)|\[\s*(?:required|optional)\s*\]|not\s+required|required|optional)(?!\w)", re.I)
+_REPLACEMENT_LINK = r"(?:(?:has\s+been|was)\s+)?(?:extended|moved|changed|revised)\s+(?:to|until)\s+"
 _VALUE_LINK = re.compile(
     r"[\s,:=–—\-()\[\]]*(?:(?:is|are|was)\s+)?"
-    r"(?:(?:(?:has\s+been|was)\s+)?(?:extended|moved|changed|revised)\s+(?:to|until)\s+)?"
+    rf"(?:{_REPLACEMENT_LINK})?"
     r"(?:(?:on|by|at|of|due|no\s+later\s+than)\s*)*[\s,:=–—\-()\[\]]*", re.I)
 _CLOCK_LINK = re.compile(
     r"[\s,:()\[\]]*(?:(?:at|by|due\s+(?:at|by))|"
@@ -805,13 +850,17 @@ def _deadline_boundaries(text, start, end):
 
 def _clock_extent(text, clock):
     """Return the whole clock token and whether its redundant zone agrees."""
+    noon = re.match(r'\s*\(noon\)', text[clock.end():], re.I)
+    if noon:
+        value = re.sub(r'[.\s]', '', clock.group(1)).casefold()
+        return clock.end() + noon.end(), value in {'12pm', '12:00pm', '12:00:00pm'}
     alias = re.match(r'\s*\(([A-Z]{2,4})\)', text[clock.end():], re.I)
     if not alias:
         return clock.end(), True
     zone = (clock.group(2) or '').casefold()
     stems = {'eastern': 'E', 'central': 'C', 'mountain': 'M', 'pacific': 'P',
              'alaska': 'AK', 'atlantic': 'A', 'hawaii': 'H', 'hawaii-aleutian': 'H'}
-    descriptor = re.search(r'\b(Standard|Daylight)\s+Time\b', clock.group(0), re.I)
+    descriptor = re.search(r'\b(Standard|Daylight)(?:\s+Savings)?\s+Time\b', clock.group(0), re.I)
     expected = (stems[zone] + (descriptor.group(1)[0].upper() if descriptor else '') + 'T'
                 if zone in stems else zone.upper())
     if zone == 'hawaii' and not descriptor:
@@ -822,7 +871,7 @@ def _clock_extent(text, clock):
 def deadline_timezone(clock):
     if not clock or not clock.group(2):
         return None
-    descriptor = re.search(r'\b(Standard|Daylight)\s+Time\b', clock.group(0), re.I)
+    descriptor = re.search(r'\b(Standard|Daylight)(?:\s+Savings)?\s+Time\b', clock.group(0), re.I)
     stems = {'eastern': 'E', 'central': 'C', 'mountain': 'M', 'pacific': 'P',
              'alaska': 'AK', 'atlantic': 'A', 'hawaii': 'H', 'hawaii-aleutian': 'H'}
     zone = clock.group(2)
@@ -981,7 +1030,8 @@ def qualify_deadline_sequence(facts, review_queue=None):
             ("I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"), 1)}
         words = {value: str(index) for index, value in enumerate(
             ("ONE", "TWO", "THREE", "FOUR", "FIVE", "SIX", "SEVEN", "EIGHT", "NINE", "TEN"), 1)}
-        values = {}
+        values = {key: {str(fact[key])} for key in ('cycle', 'track', 'application_class')
+                  if fact.get(key) and fact.get(key) != 'unspecified'}
         for context in stage_contexts(fact):
             for match in SUBMISSION_GROUP_RE.finditer(context):
                 kind = (match.group("kind") or "fiscal_year").casefold()
@@ -997,7 +1047,9 @@ def qualify_deadline_sequence(facts, review_queue=None):
                    for kind in left.keys() | right.keys())
 
     preliminary = [fact for fact in facts if fact.get("type") == "deadline"
-                   and fact.get("deadline_kind") != "application"]
+                   and fact.get("deadline_kind") != "application" and fact.get('required') is not False]
+    full_dates = {fact.get('date') for fact in facts if fact.get('type') == 'deadline'
+                  and fact.get('deadline_kind') == 'application'}
     if not preliminary:
         return facts
     kept = []
@@ -1006,6 +1058,14 @@ def qualify_deadline_sequence(facts, review_queue=None):
             kept.append(fact)
             continue
         own_group = submission_group(fact)
+        cycle_owned = any(own_group.get(key) for key in ('cycle', 'round', 'fiscal_year', 'phase'))
+        if fact.get('field_authority') == 'official_notice_field' and len(full_dates) > 1 and not cycle_owned:
+            # Each source-native row is independently a proved submission
+            # date. Unknown cross-cycle prerequisite relationships cannot turn
+            # a later preliminary row into a reason to delete an earlier full
+            # cycle. The access projection separately withholds that relation.
+            kept.append(fact)
+            continue
         applicable = [item["date"] for item in preliminary
                       if same_submission_group(own_group, submission_group(item))]
         explicit_full = any(re.search(r"\b(?:full|final)\s+(?:application|proposal)\b", context, re.I)
@@ -1030,10 +1090,10 @@ def cached_deadline_time_supported(fact, match):
 
     def clock(value):
         value = re.sub(r"[.\s]", "", value).upper()
-        for pattern in ("%I:%M%p", "%I%p", "%H:%M"):
+        for pattern in ("%I:%M:%S%p", "%I:%M%p", "%I%p", "%H:%M:%S", "%H:%M"):
             try:
                 parsed = datetime.strptime(value, pattern)
-                return parsed.hour, parsed.minute
+                return parsed.hour, parsed.minute, parsed.second
             except ValueError:
                 pass
         return None
@@ -1105,11 +1165,23 @@ def revalidate_cached_deadlines(entry):
 
 
 def extract_deadlines(opportunity_id, containers, document, extracted_at, review_queue=None):
-    facts = []
+    # Conflict handling must be identical even for callers that do not request
+    # the optional diagnostics list.
+    review_queue = review_queue if review_queue is not None else []
+    facts = notice_schedule.extract_native(sys.modules[__name__], opportunity_id,
+        containers, document, extracted_at, review_queue)
+    native_dates = {(f['deadline_kind'], f['date']) for f in facts}
+    superseded_fields = {(item.get('deadline_kind'), item.get('alternate_date'),
+                          (item.get('alternate_citation') or {}).get('page'))
+                         for item in review_queue or [] if item.get('type') == 'deadline_source_conflict'}
     seen = {}
     for container in containers:
+        if container.get('source_component') == 'nsf_submission_fields':
+            continue  # Only the source-native reader owns this component.
         text = container["text"]
         for match in DATE_RE.finditer(text):
+            if any(start <= match.start() < end for start, end in container.get('_native_field_values', [])):
+                continue  # The supported native field reader owns this value.
             context, offset = deadline_context(container, match)
             kind_result = deadline_kind(context, offset)
             if not supported_submission_date(context, offset):
@@ -1121,6 +1193,16 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                 continue
             kind, label = kind_result
             identity = (kind, parsed)
+            if (kind, parsed, container.get('page')) in superseded_fields:
+                continue
+            if identity in native_dates:
+                continue
+            if kind == 'preapplication' and any(
+                f['date'] == parsed and f['deadline_kind'] in {'preproposal', 'letter_of_intent'}
+                and re.search(r'Pre[\s-]Application\s*\(',
+                    (f.get('citation', {}).get('structural_reference') or {}).get('field_label', ''), re.I)
+                for f in facts):
+                continue
             time_match = nearest_deadline_time(context, offset, len(match.group(0)))
             deadline_time = clean_text(time_match.group(1)) if time_match else None
             timezone_value = deadline_timezone(time_match)
@@ -1166,6 +1248,17 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
 
 
 def finish_deadlines(facts, containers, review_queue):
+    facts = notice_schedule.consolidate_final_period_aliases(sys.modules[__name__], facts)
+    # A requirement first found as undated prose is redundant when the local
+    # fallback proves its date in the same source clause. Native TBD fields
+    # remain independent events, including their own cycle/track boundaries.
+    facts = [fact for fact in facts if not (
+        fact.get('type') == 'submission_requirement' and not fact.get('field_authority')
+        and any(other.get('type') == 'deadline' and other.get('deadline_kind') == fact.get('deadline_kind')
+                and other.get('required') == fact.get('required')
+                and (fact.get('requirement_citation') or {}).get('quote')
+                and clean_text(fact['requirement_citation']['quote']) in clean_text(other.get('citation', {}).get('quote', ''))
+                for other in facts))]
     if review_queue is not None and any(c.get('_deadline_uncertain_component') for c in containers):
         review_queue.append({'type': 'deadline_evidence_withheld', 'status': 'needs_review',
             'label': 'Verify official submission dates; ambiguous narrative information was withheld',
@@ -1174,62 +1267,10 @@ def finish_deadlines(facts, containers, review_queue):
 
 
 def extract_award_range(opportunity_id, containers, document, extracted_at):
-    for container in containers:
-        text = container["text"]
-        for cue in AWARD_CUE_RE.finditer(text):
-            start = max(0, cue.start() - 120)
-            end = min(len(text), cue.end() + 260)
-            context = text[start:end]
-            if PROGRAM_TOTAL_RE.search(context):
-                continue
-            amounts = [
-                parse_money(match.group(1), match.group(2))
-                for match in MONEY_RE.finditer(context)
-            ]
-            amounts = [amount for amount in amounts if amount]
-            if not amounts:
-                continue
-            minimum = None
-            maximum = None
-            if len(amounts) >= 2 and re.search(
-                r"\b(?:between|range|from)\b.{0,100}\b(?:and|to|through|-)\b",
-                context,
-                re.I | re.S,
-            ):
-                minimum, maximum = min(amounts[:2]), max(amounts[:2])
-            elif re.search(
-                r"\b(?:up\s+to|maximum|not\s+(?:to\s+)?exceed|ceiling)\b",
-                context,
-                re.I,
-            ):
-                maximum = amounts[0]
-            elif re.search(r"\bminimum|floor\b", context, re.I):
-                minimum = amounts[0]
-            else:
-                maximum = amounts[0]
-            display = (
-                f"{format_money(minimum)}–{format_money(maximum)}"
-                if minimum and maximum and minimum != maximum
-                else f"Up to {format_money(maximum)}"
-                if maximum
-                else f"From {format_money(minimum)}"
-            )
-            citation = citation_for(
-                container,
-                document,
-                start + max(0, cue.start() - start),
-                min(len(text), end),
-                extracted_at,
-            )
-            return make_fact(
-                opportunity_id,
-                "award_range",
-                "Per-award amount",
-                {"minimum": minimum, "maximum": maximum},
-                display,
-                citation,
-            )
-    return None
+    """Compatibility wrapper; the document builder retains each typed range."""
+    return next((fact for fact in notice_semantics.amount_facts(
+        sys.modules[__name__], opportunity_id, containers, document, extracted_at)
+        if fact["type"] == "award_range"), None)
 
 
 def first_pattern_fact(
@@ -1270,91 +1311,13 @@ def first_pattern_fact(
 
 
 def extract_cost_share(opportunity_id, containers, document, extracted_at):
-    for container in containers:
-        text = container["text"]
-        for match in COST_SHARE_RE.finditer(text):
-            start = max(0, match.start() - 150)
-            end = min(len(text), match.end() + 220)
-            context = text[start:end]
-            not_required = bool(
-                re.search(
-                    r"\b(?:not|required\s+is\s+not|no)\b.{0,45}"
-                    r"(?:cost[\s-]?sharing|match)",
-                    context,
-                    re.I | re.S,
-                )
-                or re.search(
-                    r"(?:cost[\s-]?sharing|match).{0,45}\bnot\s+required\b",
-                    context,
-                    re.I | re.S,
-                )
-            )
-            required = bool(
-                re.search(
-                    r"(?:cost[\s-]?sharing|matching).{0,70}\b"
-                    r"(?:is|required|must|minimum)\b",
-                    context,
-                    re.I | re.S,
-                )
-            ) and not not_required
-            if not (not_required or required):
-                continue
-            value = not not_required
-            citation = citation_for(
-                container,
-                document,
-                match.start(),
-                match.end(),
-                extracted_at,
-            )
-            return make_fact(
-                opportunity_id,
-                "cost_share",
-                "Cost sharing",
-                value,
-                "Required" if value else "Not required",
-                citation,
-            )
-    return None
+    return next(iter(notice_semantics.cost_share_facts(
+        sys.modules[__name__], opportunity_id, containers, document, extracted_at)), None)
 
 
-def extract_heading_excerpt(
-    opportunity_id,
-    containers,
-    document,
-    extracted_at,
-    *,
-    fact_type,
-    label,
-    heading_pattern,
-):
-    for container in containers:
-        text = container["text"]
-        section = container.get("section") or ""
-        match = heading_pattern.search(section) or heading_pattern.search(text)
-        if not match:
-            continue
-        if re.search(r"\btable\s+of\s+contents\b", text[:300], re.I):
-            continue
-        start = match.start() if match.re is heading_pattern and match.string == text else 0
-        end = min(len(text), start + 420)
-        citation = citation_for(
-            container,
-            document,
-            start,
-            end,
-            extracted_at,
-        )
-        excerpt = re.sub(r"\s+", " ", text[start:end]).strip()
-        return make_fact(
-            opportunity_id,
-            fact_type,
-            label,
-            excerpt[:320],
-            excerpt[:220] + ("…" if len(excerpt) > 220 else ""),
-            citation,
-        )
-    return None
+def extract_heading_excerpt(opportunity_id, containers, document, extracted_at, **kwargs):
+    return notice_semantics.heading_excerpt(sys.modules[__name__], opportunity_id,
+        containers, document, extracted_at, **kwargs)
 
 
 def extract_repeated_signals(
@@ -1431,170 +1394,144 @@ def extract_program_areas(containers, document, extracted_at, maximum=MAX_PROGRA
     return hits
 
 
+FACT_FAMILIES = {
+    "deadline": "deadlines", "submission_requirement": "deadlines", "award_range": "amounts", "program_funding": "amounts",
+    "expected_awards": "award_context", "project_duration": "award_context",
+    "page_limit": "components", "application_component": "components", "cost_share": "cost_share",
+    "eligibility_excerpt": "sections", "review_criteria": "sections", "limited_submission": "limits",
+    "investigator_submission_limit": "limits", "institutional_submission_policy": "limits",
+    "investigator_submission_policy": "limits", "status_signal": "status",
+}
+
+
+def parser_dependencies():
+    versions = {**notice_semantics.SEMANTIC_VERSIONS,
+            "deadlines": f"{DEADLINE_EXTRACTOR_IDENTITY}:{notice_schedule.SCHEDULE_VERSION}",
+            "award_context": "award-context-1"}
+    # Context admission affects every semantic reader, independently of the
+    # bytes/structure cache. Same-content revalidation must apply this policy.
+    return {family: version + ':primary-program-context-1:substantive-boundaries-2' for family, version in versions.items()}
+
+
 def extract_document_facts(
     record,
     containers,
     document,
     extracted_at,
     review_queue=None,
+    *,
+    families=None,
 ):
     opportunity_id = str(
         record.get("opportunity_id")
         or record.get("opportunity_number")
         or "unknown"
     )
+    enabled = set(parser_dependencies()) if families is None else set(families)
+    if enabled - set(parser_dependencies()):
+        raise ValueError("Unknown semantic extraction family")
+    if (urlparse(document.get('url') or '').hostname or '').lower() in {'nsf.gov', 'www.nsf.gov'}:
+        # NSF program pages include linked *other* programs below the main
+        # program. Their requirements cannot become this opportunity's facts.
+        # The section label also preserves this boundary in legacy citations.
+        containers = [container for container in containers
+                      if (container.get('section') or '').strip().casefold() != 'additional program resources']
     facts = extract_deadlines(
         opportunity_id,
         containers,
         document,
         extracted_at,
         review_queue,
-    )
+    ) if "deadlines" in enabled else []
 
-    award = extract_award_range(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-    )
-    if award:
-        facts.append(award)
+    # The explicit NSF date component is an exception to sidebar exclusion
+    # for submission fields only. Its descriptions cannot supply other facts.
+    containers = [c for c in containers if c.get('source_component') != 'nsf_submission_fields']
 
-    expected_awards = first_pattern_fact(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-        pattern=EXPECTED_AWARDS_RE,
-        fact_type="expected_awards",
-        label="Expected number of awards",
-        value_builder=lambda match: int(match.group(1)),
-        display_builder=lambda value: str(value),
-    )
-    if expected_awards:
-        facts.append(expected_awards)
+    if "amounts" in enabled:
+        facts.extend(notice_semantics.amount_facts(
+            sys.modules[__name__], opportunity_id, containers, document, extracted_at))
 
-    duration = first_pattern_fact(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-        pattern=DURATION_RE,
-        fact_type="project_duration",
-        label="Project duration",
-        value_builder=lambda match: {
-            "amount": int(match.group(1)),
-            "unit": match.group(2).casefold(),
-        },
-        display_builder=lambda value: (
-            f"{value['amount']} {value['unit']}"
-        ),
-    )
-    if duration:
-        facts.append(duration)
-
-    page_limit = first_pattern_fact(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-        pattern=PAGE_LIMIT_RE,
-        fact_type="page_limit",
-        label="Application page limit",
-        value_builder=lambda match: int(
-            next(group for group in match.groups() if group)
-        ),
-        display_builder=lambda value: f"{value} pages",
-    )
-    if page_limit:
-        facts.append(page_limit)
-
-    cost_share = extract_cost_share(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-    )
-    if cost_share:
-        facts.append(cost_share)
-
-    eligibility = extract_heading_excerpt(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-        fact_type="eligibility_excerpt",
-        label="Eligibility evidence",
-        heading_pattern=re.compile(
-            r"\b(?:eligible\s+applicants?|eligibility)\b",
-            re.I,
-        ),
-    )
-    if eligibility:
-        facts.append(eligibility)
-
-    review_criteria = extract_heading_excerpt(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-        fact_type="review_criteria",
-        label="Review criteria",
-        heading_pattern=re.compile(
-            r"\b(?:merit\s+review|review\s+criteria|selection\s+criteria)\b",
-            re.I,
-        ),
-    )
-    if review_criteria:
-        facts.append(review_criteria)
-
-    component_patterns = list(APPLICATION_COMPONENTS.items())
-    facts.extend(
-        extract_repeated_signals(
+    if "award_context" in enabled:
+        expected_awards = first_pattern_fact(
             opportunity_id,
             containers,
             document,
             extracted_at,
-            patterns=component_patterns,
-            fact_type="application_component",
-            maximum=8,
+            pattern=EXPECTED_AWARDS_RE,
+            fact_type="expected_awards",
+            label="Expected number of awards",
+            value_builder=lambda match: int(match.group(1)),
+            display_builder=lambda value: str(value),
         )
-    )
+        if expected_awards:
+            facts.append(expected_awards)
 
-    limited_patterns = [
-        ("Potential institutional submission limit", LIMITED_SUBMISSION_RE)
-    ]
-    facts.extend(
-        extract_repeated_signals(
+        duration = first_pattern_fact(
             opportunity_id,
             containers,
             document,
             extracted_at,
-            patterns=limited_patterns,
-            fact_type="limited_submission",
-            maximum=1,
+            pattern=DURATION_RE,
+            fact_type="project_duration",
+            label="Project duration",
+            value_builder=lambda match: {
+                "amount": int(match.group(1)),
+                "unit": match.group(2).casefold(),
+            },
+            display_builder=lambda value: (
+                f"{value['amount']} {value['unit']}"
+            ),
         )
-    )
+        if duration:
+            facts.append(duration)
 
-    status_patterns = [
-        (label, pattern)
-        for _, label, pattern in STATUS_SIGNAL_PATTERNS
-    ]
-    status_facts = extract_repeated_signals(
-        opportunity_id,
-        containers,
-        document,
-        extracted_at,
-        patterns=status_patterns,
-        fact_type="status_signal",
-        maximum=4,
-    )
-    for fact in status_facts:
-        for status, label, _ in STATUS_SIGNAL_PATTERNS:
-            if fact["label"] == label:
-                fact["status_signal"] = status
-                break
-    facts.extend(status_facts)
+    if "components" in enabled:
+        facts.extend(notice_semantics.component_facts(
+            sys.modules[__name__], opportunity_id, containers, document, extracted_at))
+
+    if "cost_share" in enabled:
+        facts.extend(notice_semantics.cost_share_facts(
+            sys.modules[__name__], opportunity_id, containers, document, extracted_at))
+
+    if "sections" in enabled:
+        eligibility = extract_heading_excerpt(
+            opportunity_id,
+            containers,
+            document,
+            extracted_at,
+            fact_type="eligibility_excerpt",
+            label="Eligibility evidence",
+            heading_pattern=re.compile(
+                r"\b(?:eligible\s+applicants?|eligibility)\b",
+                re.I,
+            ),
+        )
+        if eligibility:
+            facts.append(eligibility)
+
+        review_criteria = extract_heading_excerpt(
+            opportunity_id,
+            containers,
+            document,
+            extracted_at,
+            fact_type="review_criteria",
+            label="Review criteria",
+            heading_pattern=re.compile(
+                r"\b(?:merit\s+review|review\s+criteria|selection\s+criteria)\b",
+                re.I,
+            ),
+        )
+        if review_criteria:
+            facts.append(review_criteria)
+
+    if "limits" in enabled:
+        facts.extend(notice_semantics.limit_facts(
+            sys.modules[__name__], opportunity_id, containers, document, extracted_at))
+
+    if "status" in enabled:
+        facts.extend(notice_semantics.status_facts(
+            sys.modules[__name__], opportunity_id, containers, document, extracted_at))
 
     unique = {}
     for fact in facts:
@@ -1602,9 +1539,70 @@ def extract_document_facts(
     return list(unique.values())[:MAX_FACTS]
 
 
+def structured_fact_conflicts(record, fact):
+    """Compare only the same subject and basis; structured facts keep authority."""
+    comparisons = []
+    if fact.get('type') == 'cost_share' and type(fact.get('value')) is bool:
+        comparisons.append(('cost_share_required', fact['value']))
+    if (fact.get('type') == 'award_range' and fact.get('basis') == 'total_project'
+        and fact.get('cost_basis') in {'total', 'unspecified'} and not fact.get('track')
+        and not fact.get('estimate_kind') and not fact.get('applicant_condition')):
+        comparisons.extend((field, (fact.get('value') or {}).get(bound))
+                           for field, bound in [('award_floor', 'minimum'), ('award_ceiling', 'maximum')])
+    return [{'field': field, 'structured_value': record[field], 'notice_value': value}
+            for field, value in comparisons if value is not None and record.get(field) is not None
+            and record[field] != value]
+
+
+def structured_deadline_conflicts(record, fact, facts):
+    """A source date keeps its own stage/scope when a notice disagrees.
+
+    Explicitly different classes/cycles/tracks and native multi-date fields
+    describe independent submissions. A lone unqualified notice date cannot
+    replace an authoritative date for the same stage by sorting earlier.
+    """
+    if fact.get('type') != 'deadline':
+        return []
+    scope_keys = ('application_class', 'cycle', 'track')
+    unknown = (None, '', 'unspecified')
+    ref = fact.get('citation', {}).get('structural_reference') or {}
+    # A retained native field can explicitly list several submission dates.
+    # The field identity and source identity must both match, not just its kind.
+    if fact.get('field_authority') == 'official_notice_field' and ref.get('field_id'):
+        multi = [f for f in facts if f.get('type') == 'deadline'
+                 and f.get('deadline_kind') == fact.get('deadline_kind')
+                 and f.get('field_authority') == 'official_notice_field'
+                 and (f.get('citation', {}).get('structural_reference') or {}).get('field_id') == ref['field_id']
+                 and all(f.get('citation', {}).get(k) == fact.get('citation', {}).get(k)
+                         for k in ('document_url', 'sha256', 'page', 'section'))
+                 and all(f.get(k) == fact.get(k) for k in scope_keys)]
+        if len({f.get('date') for f in multi}) > 1:
+            return []
+    conflicts = []
+    for event in record.get('deadlines') or []:
+        if (event.get('evidence_id') or event.get('confidence') != 'official_structured'
+            or event.get('kind') != fact.get('deadline_kind') or not event.get('date')
+            or event['date'] == fact.get('date')):
+            continue
+        if any(fact.get(k) not in unknown and event.get(k) != fact[k] for k in scope_keys):
+            continue
+        window = notice_schedule.explicit_submission_window_end(sys.modules[__name__], event.get('note') or '')
+        if (fact.get('field_authority') == 'official_notice_field' and event.get('source_field') == 'CloseDate'
+            and window == (event['date'], fact.get('date'))):
+            continue  # The structured note itself distinguishes the two events.
+        conflicts.append({'field': 'deadline:' + event['kind'], 'structured_value': event['date'],
+                          'notice_value': fact.get('date')})
+    return conflicts
+
+
 def build_review_queue(record, facts, changed_since_previous, extraction):
     queue = []
     for fact in facts:
+        conflicts = structured_fact_conflicts(record, fact)
+        if conflicts:
+            queue.append({'type': 'structured_fact_conflict', 'status': 'needs_review',
+                'label': 'The official notice and structured record disagree; verify the cited field',
+                'evidence_ids': [fact['id']], 'conflicts': conflicts})
         if fact["type"] == "limited_submission":
             queue.append(
                 {
@@ -1685,15 +1683,24 @@ def source_for_record(record):
             # Only a Grants.gov attachment earns that ownership shortcut.
             "kind": "agency_notice" if supplemental else "primary_notice",
         }
+    from scripts.source_documents import document_candidates
+    duplicate_primary = next((candidate for candidate in document_candidates(record)
+                              if candidate.get('role') == 'primary_notice'), None)
+    if duplicate_primary:
+        return {'url': duplicate_primary['url'], 'name': duplicate_primary.get('name'), 'kind': 'agency_notice'}
     agency_url = record.get("funding_opportunity_url") or (record.get("detail_page") if supplemental else None)
-    needs_gap_fill = (
-        not record.get("close_date")
-        or not (record.get("award_floor") or record.get("award_ceiling"))
-        or record.get("status_verification_required")
-        or record.get("has_preliminary_stage")
-        or record.get("limited_submission")
-    )
-    if agency_url and (needs_gap_fill or supplemental):
+    if not agency_url:
+        agency_url = next((candidate['url'] for candidate in document_candidates(record)
+                           if candidate.get('role') == 'agency_notice'), None)
+    # Complete headline fields do not prove complete requirements or scientific
+    # scope. Every supported official route enters the same bounded queue.
+    if agency_url:
+        parsed = urlparse(agency_url)
+        if parsed.hostname in {'eere-exchange.energy.gov', 'arpa-e-foa.energy.gov', 'netl-exchange.energy.gov'} and not re.fullmatch(
+                r'FoaId[0-9a-fA-F-]{36}', unquote(parsed.fragment), re.I):
+            # A multi-notice inventory is not the canonical call's evidence.
+            # Attachment discovery may still use the separate ownership gate.
+            return None
         return {
             "url": agency_url,
             "name": None,
@@ -1856,8 +1863,10 @@ def needs_subtopics(entry, enabled):
     """
     if not enabled:
         return False
-    from scripts import subtopic_records, subtopic_segmentation
+    from scripts import subtopic_records, subtopic_segmentation, subtopic_structured
 
+    if subtopic_structured.needs_body_revalidation(entry):
+        return True
     return subtopic_records.needs_subtopic_extraction(
         entry,
         enabled=True,
@@ -2055,6 +2064,7 @@ def build_document_entry(
     *,
     enable_subtopics=False,
     backfill_subtopics=False,
+    structure_cache=None,
 ):
     fetched_at = iso_utc(now)
     content = response["content"]
@@ -2065,9 +2075,11 @@ def build_document_entry(
     previous_hash = previous_document.get("sha256")
     changed_since_previous = bool(previous_hash and previous_hash != digest)
 
+    document_url = resolved_document_url(source, response)
     same_extractor = (previous and previous.get("extractor_identity") == EXTRACTOR_IDENTITY
+                      and previous.get("parser_dependencies") == parser_dependencies()
                       and previous.get("source_scope_identity") == source_scope_identity(source["url"]))
-    same_route = previous_document.get("url") == (response.get("url") or source["url"])
+    same_route = previous_document.get("url") == document_url
     if previous_hash == digest and same_extractor and same_route:
         entry = deepcopy(previous)
         entry["source_signature"] = source_signature(record, source)
@@ -2075,6 +2087,7 @@ def build_document_entry(
         entry.pop("last_attempt_at", None)
         entry["last_error"] = None
         entry["status"] = "current"
+        entry.pop('parser_pending', None)
         entry["document"]["last_seen_at"] = fetched_at
         entry["document"]["etag"] = response.get("etag") or entry[
             "document"
@@ -2088,13 +2101,20 @@ def build_document_entry(
         # through to the full-extraction path: that would re-run fact
         # extraction and rewrite facts, review_queue and version, churning the
         # cache for no reason.
-        if enable_subtopics and backfill_subtopics:
+        structure_dependencies = notice_structure_cache.identity(entry['document'], source_scope_identity(source['url']))
+        missing_structure = structure_cache is not None and structure_cache.read(structure_dependencies) is None
+        if (enable_subtopics and backfill_subtopics) or missing_structure:
             containers, _extraction = extract_containers(
                 content,
                 response.get("content_type"),
                 source.get("name"),
                 entry["document"].get("url") or source["url"],
             )
+            if structure_cache:
+                structure_cache.write(structure_dependencies, containers, _extraction)
+        if enable_subtopics and backfill_subtopics:
+            entry.pop("subtopic_revalidation", None)
+            entry.pop("subtopic_reason", None)
             entry.update(
                 subtopic_fields(
                     record,
@@ -2123,7 +2143,7 @@ def build_document_entry(
     version = (int(previous_document.get("version") or 1) if previous_hash == digest
                else int(previous_document.get("version") or 0) + 1)
     document = {
-        "url": response.get("url") or source["url"],
+        "url": document_url,
         "name": source.get("name"),
         "source_kind": source["kind"],
         "content_type": response.get("content_type"),
@@ -2132,16 +2152,22 @@ def build_document_entry(
         "etag": response.get("etag"),
         "last_modified": response.get("last_modified"),
         "version": version,
-        "first_seen_at": fetched_at,
+        "first_seen_at": previous_document.get("first_seen_at", fetched_at) if previous_hash == digest else fetched_at,
         "last_seen_at": fetched_at,
         "changed_since_previous": changed_since_previous,
     }
-    containers, extraction = extract_containers(
-        content,
-        response.get("content_type"),
-        source.get("name"),
-        document["url"],
-    )
+    structure_dependencies = notice_structure_cache.identity(document, source_scope_identity(source['url']))
+    restored = structure_cache.read(structure_dependencies) if structure_cache else None
+    if restored is None:
+        containers, extraction = extract_containers(content, response.get('content_type'), source.get('name'), document['url'])
+        if not any(container.get('text', '').strip() for container in containers):
+            raise ValueError('Official document response contains no readable notice text')
+        if structure_cache:
+            structure_cache.write(structure_dependencies, containers, extraction)
+    else:
+        containers, extraction = restored
+        if not any(container.get('text', '').strip() for container in containers):
+            raise ValueError('Official document response contains no readable notice text')
     deadline_review = []
     facts = extract_document_facts(
         record,
@@ -2168,6 +2194,9 @@ def build_document_entry(
         "extractor_identity": EXTRACTOR_IDENTITY,
         **({"source_scope_identity": source_scope_identity(source["url"])} if source_scope_identity(source["url"]) else {}),
         "deadline_extractor_identity": DEADLINE_EXTRACTOR_IDENTITY,
+        "parser_dependencies": parser_dependencies(),
+        "structure_identity": structure_dependencies,
+        "interpreted_at": fetched_at,
         "checked_at": fetched_at,
         "status": "current",
         "last_error": None,
@@ -2184,15 +2213,203 @@ def build_document_entry(
     }, True
 
 
+def resolved_document_url(source, response):
+    """HTTP omits fragments; retain the selector of an actually scoped notice."""
+    final_url = response.get('url') or source['url']
+    fragment = urlparse(source['url']).fragment
+    if fragment and source_scope_identity(source['url']):
+        return final_url.split('#', 1)[0] + '#' + fragment
+    return final_url
+
+
+def reparse_from_structure(record, source, previous, now, structure_cache):
+    """Reinterpret changed semantic families without claiming a source check."""
+    if (not previous or previous.get('last_error') or previous.get('status') not in {'current', 'needs_revalidation'}
+        or previous.get('source_scope_identity') != source_scope_identity(source['url'])):
+        return None
+    dependencies = parser_dependencies()
+    old_dependencies = previous.get('parser_dependencies') or {}
+    changed = {name for name, version in dependencies.items() if old_dependencies.get(name) != version}
+    if not changed:
+        return None
+    document = previous.get('document') or {}
+    restored = structure_cache.read(notice_structure_cache.identity(document, source_scope_identity(source['url'])))
+    if restored is None:
+        return None
+    containers, extraction = restored
+    if len(previous.get('facts') or []) >= MAX_FACTS:
+        # A shortened projection cannot reveal which omitted facts should now
+        # enter the public cap. Rebuild the projection from complete structure.
+        changed = set(dependencies)
+    review = []
+    interpreted_at = iso_utc(now)
+    replacements = extract_document_facts(record, containers, document, interpreted_at, review, families=changed)
+    retained = [deepcopy(f) for f in previous.get('facts') or [] if FACT_FAMILIES.get(f.get('type')) not in changed]
+    order = {name: index for index, name in enumerate(('deadlines', 'amounts', 'award_context', 'components', 'cost_share', 'sections', 'limits', 'status'))}
+    facts = sorted(retained + replacements, key=lambda f: order.get(FACT_FAMILIES.get(f.get('type')), 99))[:MAX_FACTS]
+    entry = deepcopy(previous)
+    entry.pop('parser_pending', None)
+    entry.update(facts=facts, parser_dependencies=dependencies, interpreted_at=interpreted_at,
+                 extractor_identity=EXTRACTOR_IDENTITY, deadline_extractor_identity=DEADLINE_EXTRACTOR_IDENTITY,
+                 status='current', last_error=None)
+    entry['review_queue'] = build_review_queue(record, facts, bool(document.get('changed_since_previous')), extraction)
+    if 'deadlines' not in changed:
+        review.extend(deepcopy([item for item in previous.get('review_queue') or [] if item.get('type') in {
+            'deadline_source_conflict', 'deadline_stage_order_conflict', 'deadline_evidence_withheld'}]))
+    entry['review_queue'].extend(review)
+    entry['parser_migration'] = {'changed_families': sorted(changed),
+        'source_retrieved': False, 'source_checked_at': previous.get('checked_at')}
+    return entry
+
+
+def quarantine_legacy_facts(record, source, entry, structure_cache):
+    """Retain only locally provable changed facts while full-source work queues.
+
+    A shortened quote can prove a retained assertion, but cannot prove the
+    absence of other source facts. Never mark this fallback as a full reparse.
+    Unchanged semantic families and source receipts retain their identities.
+    """
+    dependencies = parser_dependencies()
+    changed = {name for name, version in dependencies.items()
+               if (entry.get('parser_dependencies') or {}).get(name) != version}
+    if not changed or entry.get('parser_pending', {}).get('target_dependencies') == dependencies:
+        return
+    prior = entry.get('facts') or []
+    document = entry.get('document') or {}
+    retained, withheld, corrected = [], [], 0
+    def retained_citation(candidate, original):
+        citation = deepcopy(original)
+        reference = candidate.get('citation', {}).get('structural_reference')
+        if reference:
+            citation['structural_reference'] = deepcopy(reference)
+            citation['structural_reference']['basis'] = 'limited_cached_quote'
+            if reference.get('field_id'):
+                # Offsets in distinct shortened quotes are not one source
+                # field even when they coincidentally have the same number.
+                quote_hash = hashlib.sha256((original.get('quote') or '').encode('utf-8')).hexdigest()
+                citation['structural_reference']['field_id'] = f"quote:{quote_hash}:{reference['field_id']}"
+        return citation
+
+    for fact in prior:
+        family = FACT_FAMILIES.get(fact.get('type'))
+        if family not in changed:
+            retained.append(fact)
+            continue
+        citation = fact.get('citation') or {}
+        quote = citation.get('quote') or ''
+        # Citation text from a different document cannot revalidate this entry.
+        matches = []
+        if (quote and document.get('sha256') and citation.get('sha256') == document['sha256']
+            and citation.get('document_url') == document.get('url')):
+            container = {'text': quote, 'page': citation.get('page'), 'section': citation.get('section')}
+            matches = extract_document_facts(record, [container], document,
+                citation.get('extracted_at') or entry.get('checked_at'), families={family})
+        accepted = next((candidate for candidate in matches
+            if candidate.get('type') == fact.get('type') and candidate.get('value') == fact.get('value')
+            and (family != 'deadlines' or all(candidate.get(key) == fact.get(key)
+                 for key in ('date', 'deadline_kind', 'time', 'timezone')))), None)
+        if accepted:
+            # Keep the exact source receipt and stable fact ID; enrich its typed
+            # meaning only from the supported local assertion, never old guesses.
+            accepted.update(id=fact['id'], citation=retained_citation(accepted, citation),
+                            interpretation_basis='limited_cached_quote')
+            retained.append(accepted)
+            if family == 'amounts' and fact.get('type') == 'award_range':
+                # Preserve the source's field order when a corrected quote
+                # expands one old fact into several independently owned caps.
+                retained.pop()
+                for candidate in matches:
+                    if candidate.get('type') != 'award_range':
+                        continue
+                    candidate.update(citation=retained_citation(candidate, citation), interpretation_basis='limited_cached_quote')
+                    retained.append(candidate)
+                    if candidate is not accepted:
+                        corrected += 1
+                continue
+            if family in {'deadlines', 'amounts', 'components'}:
+                # One old assertion can share a citation with several complete
+                # fields. Retaining it must not discard a separately owned
+                # preliminary date or funding track proved by the same quote.
+                for candidate in matches:
+                    if candidate is accepted or (family == 'deadlines' and candidate.get('field_authority') != 'official_notice_field'):
+                        continue
+                    if family == 'amounts' and candidate.get('type') != 'award_range':
+                        continue
+                    if family == 'components' and candidate.get('type') != fact.get('type'):
+                        continue
+                    candidate.update(citation=retained_citation(candidate, citation), interpretation_basis='limited_cached_quote')
+                    retained.append(candidate)
+                    corrected += 1
+        else:
+            withheld.append(fact)
+            # A complete explicit local assertion can correct a previous
+            # interpretation (for example "cost sharing is not required").
+            # This remains quote-based partial recovery, not a full-source
+            # reparse or proof that another source assertion is absent.
+            if family in {'amounts', 'cost_share', 'limits', 'components', 'sections', 'status', 'deadlines'}:
+                for candidate in matches:
+                    undated_requirement = family == 'deadlines' and candidate.get('type') == 'submission_requirement'
+                    if candidate.get('type') != fact.get('type') and not undated_requirement:
+                        continue
+                    if family == 'deadlines' and not undated_requirement and not (
+                        candidate.get('field_authority') == 'official_notice_field'
+                        or (candidate.get('date') == fact.get('date')
+                            and candidate.get('deadline_kind') == fact.get('deadline_kind'))):
+                        continue
+                    candidate.update(citation=retained_citation(candidate, citation),
+                        interpretation_basis='limited_cached_quote', replaces_evidence_id=fact['id'])
+                    retained.append(candidate)
+                    corrected += 1
+    receipt = structure_cache.quarantine(document, withheld, changed) if structure_cache and withheld else None
+    unique = {}
+    for fact in retained:
+        # Repeated legacy excerpts may expose the same explicit native field.
+        # Consolidate that event without mixing distinct clocks/cycles/tracks.
+        key = (fact['type'], tuple(str(fact.get(k)) for k in (
+            'date', 'deadline_kind', 'application_class', 'cycle', 'track', 'time', 'timezone',
+            'required', 'invitation_required', 'prerequisite'))) if fact['type'] in {'deadline', 'submission_requirement'} else fact['id']
+        if fact['type'] == 'award_range':
+            key = ('award_range', tuple(str(fact.get(k)) for k in ('value', 'subject', 'track', 'basis',
+                'cost_basis', 'funding_basis', 'estimate_kind', 'applicant_condition')))
+        unique.setdefault(key, fact)
+    # A clipped excerpt may prove only the date while a second receipt from
+    # this same document proves the identical event's clock. Consolidate the
+    # redundant clockless copy only when the complete clock is uncontested.
+    clock_groups = {}
+    for fact in unique.values():
+        if fact['type'] != 'deadline':
+            continue
+        key = tuple(str(fact.get(k)) for k in ('date', 'deadline_kind', 'application_class', 'cycle', 'track',
+            'required', 'invitation_required', 'prerequisite')) + tuple(fact.get('citation', {}).get(k) for k in ('document_url', 'sha256'))
+        clock_groups.setdefault(key, []).append(fact)
+    redundant = set()
+    for group in clock_groups.values():
+        clocks = {(f.get('time'), f.get('timezone')) for f in group if f.get('time')}
+        if len(clocks) == 1:
+            redundant.update(id(f) for f in group if not f.get('time') and not f.get('timezone'))
+    entry['facts'] = notice_schedule.consolidate_preliminary_aliases(
+        notice_schedule.consolidate_final_period_aliases(sys.modules[__name__],
+            [f for f in unique.values() if id(f) not in redundant]))[:MAX_FACTS]
+    entry['parser_pending'] = {'target_dependencies': dependencies, 'changed_families': sorted(changed),
+        'reason': 'original_source_structure_required', 'withheld_count': len(withheld),
+        'retained_count': len(entry['facts']), 'corrected_count': corrected, 'quarantine_receipt': receipt}
+    # These deadlines have already undergone the limited conservative check;
+    # the pending marker continues to require full-source recovery.
+    entry['deadline_extractor_identity'] = DEADLINE_EXTRACTOR_IDENTITY
+    ids = {fact['id'] for fact in entry['facts']}
+    entry['review_queue'] = [item for item in entry.get('review_queue') or []
+        if not item.get('evidence_ids') or set(item['evidence_ids']).issubset(ids)]
+    entry['review_queue'].append({'type': 'parser_revalidation_pending', 'status': 'needs_review',
+        'label': 'Verify current official notice details',
+        'message': 'Some cached interpretations need the original source structure; retained excerpts do not establish complete coverage.'})
+
+
 def subtopic_only_candidates(records, *, enabled):
-    """Catalog records the administrative path never fetches (§18.1 Cov1).
+    """Fallback discovery for records with no canonical official document route.
 
-    Measured: `source_for_record()` declines **685 of 1,475 records**, and 672
-    of them have no evidence entry at all, so no pattern can reach them because
-    no bytes ever arrive (docs/COVERAGE_SURVEY.md stage 3).
-
-    Returns ``[]`` when the flag is off, so the flag-off candidate set -- and
-    therefore every flag-off artifact -- is untouched (§0.5).
+    Complete headline fields no longer exclude an official agency notice from
+    shared extraction. This independent bounded pass still explores attachments
+    that have not qualified as a primary notice, under its existing safeguards.
     """
     if not enabled:
         return []
@@ -2244,7 +2461,7 @@ def refresh_subtopics_without_source(
     }
     if not enabled:
         return store, metrics
-    from scripts import subtopic_sources
+    from scripts import subtopic_sources, subtopic_structured
 
     candidates = subtopic_only_candidates(records, enabled=True)
     candidate_ids = {opportunity_id for opportunity_id, _ in candidates}
@@ -2267,6 +2484,9 @@ def refresh_subtopics_without_source(
         prior_signature = store[opportunity_id].get("source_signature")
         if prior_signature is not None and prior_signature != signature:
             store[opportunity_id]["status"] = "source_changed"
+            due.append(item)
+            continue
+        if subtopic_structured.needs_body_revalidation(store[opportunity_id]):
             due.append(item)
             continue
         checked_at = store[opportunity_id].get("checked_at")
@@ -2365,14 +2585,19 @@ def merge_subtopic_sidecar(cache, sources, current_parent_ids, *, as_of):
 def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False):
     if not entry:
         return True
+    # Parser recovery is due independently of HTTP freshness. A failed source
+    # keeps its normal retry backoff even when recovery remains pending.
+    if (entry.get('parser_dependencies') != parser_dependencies()
+        and entry.get('status') != 'failed' and not entry.get('last_error')):
+        return True
     # §8.3 insertion 3, gate 1. On a steady-state night nearly every document
     # takes one of §4's three skip gates, so without this the ~1,400 already
     # cached documents are never even candidates and never get subtopics.
-    if needs_subtopics:
+    if needs_subtopics and entry.get('status') != 'failed' and not entry.get('last_error'):
         return True
     if entry.get("status") == "needs_revalidation":
         return True
-    if entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
+    if entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY) and not entry.get('last_error'):
         return True
     if entry.get("source_signature") != signature:
         return True
@@ -2398,13 +2623,17 @@ def citation_deadline(fact):
         "time": fact.get("time"),
         "timezone": fact.get("timezone"),
         "note": fact["citation"].get("quote"),
-        "estimated": False,
+        "estimated": fact.get('estimated') is True,
         "source": "Official notice (machine extracted)",
         "source_url": fact["citation"].get("document_url"),
         "confidence": fact.get("confidence"),
         "evidence_id": fact["id"],
         "citation": fact["citation"],
         "required": fact.get("required"),
+        **{key: deepcopy(fact[key]) for key in (
+            'subject', 'stage', 'application_class', 'cycle', 'track', 'track_citation', 'window_start', 'obligation',
+            'invitation_required', 'prerequisite', 'requirement_citation', 'prerequisite_citation', 'clock_citation', 'cycle_citation',
+            'field_authority', 'parser_version', 'rolling', 'rolling_citation', 'date_qualifier', 'date_qualifier_citation') if key in fact},
     }
 
 
@@ -2429,6 +2658,11 @@ def merge_document_entry(record, entry):
         if deadline.get("evidence_id"):
             continue
         deadline = deepcopy(deadline)
+        for key, original in deadline.pop('document_source_fields', {}).items():
+            if original['present']:
+                deadline[key] = original['value']
+            else:
+                deadline.pop(key, None)
         if deadline.pop("document_evidence_id", None):
             deadline.pop("citation", None)
             deadline.pop("document_confidence", None)
@@ -2437,6 +2671,7 @@ def merge_document_entry(record, entry):
         output["deadlines"] = deadlines
     output.pop("document_evidence_checked_at", None)
     output.pop("document_status_signals", None)
+    output.pop('submission_requirements', None)
     output.pop("limited_submission_review", None)
     previous_program_labels = list(output.pop("document_program_areas", None) or [])
     previous_program_topics = set(program_areas.topics_for(previous_program_labels))
@@ -2458,6 +2693,12 @@ def merge_document_entry(record, entry):
         return output
 
     facts = deepcopy(entry.get("facts") or [])
+    for fact in facts:
+        conflicts = structured_fact_conflicts(output, fact) + structured_deadline_conflicts(output, fact, facts)
+        if conflicts:
+            fact['reconciliation'] = {'status': 'conflict', 'structured_authority_preserved': True,
+                                      'conflicts': conflicts}
+            fact['display_value'] = f"{fact.get('display_value') or 'Notice value'} — differs from structured record; verify"
     output["document_evidence_status"] = "current"
     output["document_evidence_checked_at"] = entry.get("checked_at")
     output["document_evidence"] = {
@@ -2490,12 +2731,52 @@ def merge_document_entry(record, entry):
         # from the remaining facts. Keep them through repeated projections.
         output["document_evidence"]["review_queue"].extend(deepcopy([
             item for item in entry.get("review_queue") or []
-            if item.get("type") in {"deadline_stage_order_conflict", "deadline_evidence_withheld"}
+            if item.get("type") in {"deadline_stage_order_conflict", "deadline_evidence_withheld", "deadline_source_conflict", "parser_revalidation_pending"}
         ]))
 
     deadlines = deepcopy(output.get("deadlines") or [])
+    for deadline in deadlines:
+        window = notice_schedule.explicit_submission_window_end(sys.modules[__name__], deadline.get('note') or '')
+        if (window and deadline.get('kind') == 'application' and deadline.get('confidence') == 'official_structured'
+            and deadline.get('source_field') == 'CloseDate' and window[0] == deadline.get('date') and any(
+                f.get('deadline_kind') == 'application' and f.get('date') == window[1]
+                and f.get('field_authority') == 'official_notice_field' for f in facts)):
+            deadline.setdefault('document_source_fields', {})['kind'] = {'present': True, 'value': deadline['kind']}
+            deadline['kind'] = 'submission'
+        # An estimated XML close date can describe a preliminary window. Its
+        # own closing-date explanation must prove the same stage/date as the
+        # source notice before refining the generic projection label. Preserve
+        # the source value, estimate flag, clock, note and receipt verbatim.
+        if (deadline.get('kind') == 'estimated_application' and deadline.get('confidence') == 'official_estimate'
+            and deadline.get('source_field') == 'EstimatedSynopsisCloseDate'):
+            windows = list(notice_schedule.submission_windows(sys.modules[__name__], deadline.get('note') or ''))
+            if (len(windows) == 1 and windows[0][2] == deadline.get('date') and any(
+                f.get('type') == 'deadline' and f.get('deadline_kind') == 'letter_of_intent'
+                and f.get('date') == deadline.get('date') and f.get('field_authority') == 'official_notice_field' for f in facts)):
+                deadline.setdefault('document_source_fields', {})['kind'] = {'present': True, 'value': deadline['kind']}
+                deadline['kind'] = 'letter_of_intent'
+        # A source listing's generic application default is weaker than a
+        # named field on that same official page. Refine only a unique owned
+        # stage at the exact listed date; never reinterpret structured fields.
+        if (deadline.get('kind') == 'application' and deadline.get('confidence') == 'source_listed'
+            and deadline.get('source_field') == 'source listing'):
+            owned = [fact for fact in facts if fact.get('type') == 'deadline'
+                and fact.get('field_authority') == 'official_notice_field'
+                and fact.get('date') == deadline.get('date')
+                and fact.get('citation', {}).get('document_url') == deadline.get('source_url')]
+            stages = {fact.get('deadline_kind') for fact in owned}
+            if len(stages) == 1 and next(iter(stages)) in {'preapplication', 'preproposal', 'concept_paper', 'white_paper', 'letter_of_intent'}:
+                deadline.setdefault('document_source_fields', {})['kind'] = {'present': True, 'value': deadline['kind']}
+                deadline['kind'] = next(iter(stages))
+    output['submission_requirements'] = [citation_deadline(fact) for fact in facts
+                                       if fact.get('type') == 'submission_requirement']
     for fact in facts:
         if fact.get("type") != "deadline":
+            continue
+        if structured_deadline_conflicts(output, fact, facts):
+            output['document_evidence']['review_queue'].append({'type': 'deadline_source_conflict',
+                'status': 'needs_review', 'label': 'Application dates differ; structured date retained',
+                'evidence_ids': [fact['id']], 'conflicts': fact['reconciliation']['conflicts']})
             continue
         duplicate = next(
             (
@@ -2509,6 +2790,8 @@ def merge_document_entry(record, entry):
                     if fact.get("deadline_kind") == "application"
                     else None,
                 }
+                and all(deadline.get(key) in (None, 'unspecified', fact.get(key))
+                        or fact.get(key) in (None, 'unspecified') for key in ('application_class', 'cycle', 'track'))
             ),
             None,
         )
@@ -2516,6 +2799,21 @@ def merge_document_entry(record, entry):
             duplicate["document_evidence_id"] = fact["id"]
             duplicate["citation"] = fact["citation"]
             duplicate["document_confidence"] = fact["confidence"]
+            enriched = citation_deadline(fact)
+            conflicts = [{'field': key, 'structured_value': duplicate[key], 'notice_value': enriched[key]}
+                         for key in ('time', 'timezone', 'required', 'invitation_required')
+                         if duplicate.get(key) is not None and enriched.get(key) is not None
+                         and duplicate[key] != enriched[key]]
+            if conflicts:
+                output['document_evidence']['review_queue'].append({'type': 'deadline_source_conflict',
+                    'status': 'needs_review', 'label': 'Submission metadata differs; structured values retained',
+                    'evidence_ids': [fact['id']], 'conflicts': conflicts})
+            for key in ('time', 'timezone', 'stage', 'application_class', 'cycle', 'track', 'track_citation', 'window_start', 'required', 'obligation',
+                        'invitation_required', 'prerequisite', 'requirement_citation', 'prerequisite_citation', 'clock_citation', 'cycle_citation',
+                        'date_qualifier', 'date_qualifier_citation'):
+                if duplicate.get(key) in (None, 'unspecified', 'unknown') and enriched.get(key) not in (None, 'unspecified', 'unknown'):
+                    duplicate.setdefault('document_source_fields', {})[key] = {'present': key in duplicate, 'value': duplicate.get(key)}
+                    duplicate[key] = enriched[key]
         else:
             deadlines.append(citation_deadline(fact))
     output["deadlines"] = deadlines
@@ -2552,6 +2850,10 @@ def merge_document_entry(record, entry):
             "evidence_id": limited["id"],
             "citation": limited["citation"],
         }
+    elif output.get('limited_submission_source') == 'synopsis_heuristic' and any(
+        fact.get('type') == 'institutional_submission_policy' and (fact.get('value') or {}).get('unlimited')
+        for fact in facts):
+        output['limited_submission'] = False
 
     status_signals = [
         fact.get("status_signal")
@@ -2840,6 +3142,28 @@ def validate_refresh_health(metrics, minimum_attempts=5, maximum_failure_rate=0.
         )
 
 
+def withhold_outdated_topic_bodies(entry, structure_cache):
+    """Invalidate only superseded scientific-body interpretations before work.
+
+    Keep source-check timestamps and the old parser identity: the normal
+    bounded backfill queue must still recover this parent's source bodies.
+    The empty decision also removes its dependent sidecar scopes and teams.
+    """
+    from scripts import subtopic_structured
+    if not subtopic_structured.needs_body_revalidation(entry):
+        return
+    prior = entry.get("subtopics") or []
+    if prior:
+        receipt = structure_cache.quarantine(
+            entry.get("subtopic_source_document") or entry.get("document") or {},
+            prior, {"scientific_topic_bodies"})
+        entry["subtopic_revalidation"] = {"reason": "scientific_body_parser_changed",
+            "withheld_count": len(prior), "quarantine_receipt": receipt,
+            "target_version": subtopic_structured.HGEO_BODY_VERSION}
+    entry["subtopics"] = []
+    entry["subtopic_reason"] = "scientific_body_revalidation_pending"
+
+
 def enrich_document_evidence(
     catalog,
     cache,
@@ -2851,8 +3175,10 @@ def enrich_document_evidence(
     fetcher=download_document,
     now=None,
     enable_subtopics=False,
+    structure_cache=None,
 ):
     now = now or utc_now()
+    structure_cache = structure_cache if structure_cache is not None else notice_structure_cache.StructureCache()
     prune_cache_to_catalog(cache, catalog)
     cached_records = cache.setdefault("records", {})
     records = catalog["opportunities"]
@@ -2861,6 +3187,10 @@ def enrich_document_evidence(
         entry["archived_from_catalog_at"] = None
         if entry.get("program_areas"):
             entry["program_areas"] = validated_program_area_hits(entry)
+
+    if enable_subtopics:
+        for entry in list(cached_records.values()) + list((cache.get("subtopic_only") or {}).values()):
+            withhold_outdated_topic_bodies(entry, structure_cache)
 
     candidates = []
     for record in records:
@@ -2875,8 +3205,6 @@ def enrich_document_evidence(
             prior_url = entry.get("source_url") or str(entry.get("source_signature") or "").split("|", 1)[0]
             if not source or (prior_url and prior_url != source["url"]):
                 entry["status"] = "source_changed"
-            elif entry.get("extractor_identity") not in (None, EXTRACTOR_IDENTITY):
-                entry["status"] = "needs_revalidation"
             elif source_scope_identity(source["url"]) != entry.get("source_scope_identity"):
                 entry["status"] = "needs_revalidation"
         if not opportunity_id or not source:
@@ -2894,6 +3222,7 @@ def enrich_document_evidence(
             candidates.append((record, source, signature, entry, backfill))
     candidates.sort(
         key=lambda item: (
+            0 if (item[3] or {}).get("subtopic_reason") == "scientific_body_revalidation_pending" else 1,
             0
             if item[3]
             and item[3].get("source_signature") != item[2]
@@ -2922,6 +3251,9 @@ def enrich_document_evidence(
 
     refreshed = 0
     not_modified = 0
+    reparsed = requests = 0
+    # Recover only bounded full-source projections. All remaining changed
+    # families are quarantined before publication, preserving unrelated facts.
     failures = []
     for record, source, signature, previous, backfill in candidates[:max_documents]:
         opportunity_id = str(
@@ -2929,11 +3261,20 @@ def enrich_document_evidence(
             or record.get("opportunity_number")
         )
         headers = {}
+        if previous and not backfill:
+            recovered = reparse_from_structure(record, source, previous, now, structure_cache)
+            if recovered:
+                cached_records[opportunity_id] = previous = recovered
+                reparsed += 1
+                # Interpretation is not a source freshness check. If a check
+                # is also due, this same budget slot still performs it.
+                if not due_for_check(previous, signature, now, recheck_days):
+                    continue
         previous_document = (previous or {}).get("document") or {}
         # §8.3 insertion 3, gate 2. A 304 returns no body, and you cannot
         # segment bytes you did not receive -- so a document needing backfill
         # asks for the whole thing.
-        if (previous and not backfill and previous.get("extractor_identity") in (None, EXTRACTOR_IDENTITY)
+        if (previous and not backfill and previous.get('parser_dependencies') == parser_dependencies()
                 and previous.get("source_scope_identity") == source_scope_identity(source["url"])
                 and previous_document.get("url") == source["url"]):
             if previous_document.get("etag"):
@@ -2943,9 +3284,10 @@ def enrich_document_evidence(
                     "last_modified"
                 ]
         try:
+            requests += 1
             response = fetcher(source["url"], headers)
             if response.get("status_code") == 304:
-                if not previous or not headers or response.get("url", source["url"]) != previous_document.get("url"):
+                if not previous or not headers or resolved_document_url(source, response) != previous_document.get("url"):
                     raise ValueError("unbound not-modified response")
                 previous["checked_at"] = iso_utc(now)
                 previous.pop("last_attempt_at", None)
@@ -2963,6 +3305,7 @@ def enrich_document_evidence(
                     now,
                     enable_subtopics=enable_subtopics,
                     backfill_subtopics=backfill,
+                    structure_cache=structure_cache,
                 )
                 cached_records[opportunity_id] = entry
                 if enable_subtopics:
@@ -3008,9 +3351,12 @@ def enrich_document_evidence(
             or record.get("opportunity_number")
             or ""
         )
-        merged.append(
-            merge_document_entry(record, cached_records.get(opportunity_id))
-        )
+        entry = cached_records.get(opportunity_id)
+        source = source_for_record(record)
+        if entry and source and entry.get('status') == 'current' and not entry.get('last_error'):
+            quarantine_legacy_facts(record, source, entry, structure_cache)
+        from scripts.submission_schedule import project as project_schedule
+        merged.append(project_schedule(merge_document_entry(record, cached_records.get(opportunity_id)), now.date()))
     output = deepcopy(catalog)
     output["opportunities"] = merged
     output["search_index"] = build_search_index(merged)
@@ -3035,6 +3381,10 @@ def enrich_document_evidence(
         0,
         len(candidates) - min(len(candidates), max_documents),
     )
+    metrics['parser_recovery'] = {'reparsed_from_structure': reparsed, 'source_requests': requests,
+        'pending_records': sum(bool(entry.get('parser_pending')) for entry in cached_records.values()),
+        'withheld_facts': sum((entry.get('parser_pending') or {}).get('withheld_count', 0) for entry in cached_records.values()),
+        'structure_cache': dict(structure_cache.counters)}
     if enable_subtopics:
         # §8.3 insertion 4. Only present with the flag on, so the diagnostics
         # block is byte-identical when it is off.
@@ -3089,6 +3439,8 @@ def parse_args(argv=None):
             "administrative evidence pass (default: 45)."
         ),
     )
+    parser.add_argument('--structure-cache', type=Path, default=notice_structure_cache.DEFAULT_ROOT,
+                        help='Private normalized source cache; never place inside published data assets.')
     parser.add_argument(
         "--max-subtopic-documents",
         type=int,
@@ -3179,6 +3531,7 @@ def main(argv=None):
         recheck_days=args.recheck_days,
         enable_subtopics=args.enable_subtopics,
         now=args.now,
+        structure_cache=notice_structure_cache.StructureCache(args.structure_cache),
     )
     write_cache(cache, args.cache)
     if args.enable_subtopics:

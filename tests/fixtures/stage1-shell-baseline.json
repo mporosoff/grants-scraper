@@ -18,7 +18,7 @@
     "note": "FOA selected from official Grants.gov attachment metadata (review confidence). Confirm that it is the current amended notice."
   },
   "contact": "<a class=\"source-action\" href=\"mailto:public@example.org?subject=Question%20about%20STAGE-1\" aria-label=\"Email public@example.org\" title=\"public@example.org · public@example.org\">Program contact</a>",
-  "csv": "\"Title\",\"Agency\",\"Source\",\"Status\",\"Opportunity number\",\"Deadline\",\"Posted\",\"Award floor\",\"Award ceiling\",\"Program funding\",\"Expected awards\",\"Deadline evidence\",\"Preliminary deadline\",\"Funding evidence\",\"Funding instruments\",\"Categories\",\"Disciplines\",\"Topics\",\"Eligible applicants\",\"Limited submission\",\"Cost share required\",\"Contact name\",\"Contact email\",\"Contact phone\",\"Contact role\",\"Preliminary stage\",\"Workflow tier\",\"AI identified\",\"AI discovery phrases\",\"Potential evidence source field\",\"Potential evidence source label\",\"Potential evidence excerpt\",\"AI verdict\",\"AI score\",\"AI rationale\",\"Document evidence status\",\"Document version\",\"Document SHA-256\",\"Cited FOA facts\",\"Citation URLs\",\"Source review queue\",\"Reviewer source verdict\",\"Reviewer checked field\",\"Primary FOA URL\",\"Agency notice URL\",\"Source record URL\"\r\n\"Fixture, official notice\",\"NSF\",\"Grants.gov\",\"posted\",\"STAGE-1\",\"2026-12-31\",\"\",\"\",\"\",\"\",\"\",\"Grants.gov structured record\",\"\",\"Grants.gov XML extract\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"public@example.org\",\"\",\"\",\"\",\"Strong\",\"No\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"https://www.nsf.gov/notice.pdf\",\"https://www.nsf.gov/funding/notice\",\"https://www.grants.gov/search-results-detail/stage1-fixture\"",
+  "csv": "\"Title\",\"Agency\",\"Source\",\"Status\",\"Opportunity number\",\"Deadline\",\"Posted\",\"Award floor\",\"Award ceiling\",\"Program funding\",\"Expected awards\",\"Deadline evidence\",\"Preliminary deadline\",\"Funding evidence\",\"Funding instruments\",\"Categories\",\"Disciplines\",\"Topics\",\"Eligible applicants\",\"Limited submission\",\"Cost share required\",\"Contact name\",\"Contact email\",\"Contact phone\",\"Contact role\",\"Preliminary stage\",\"Workflow tier\",\"AI identified\",\"AI discovery phrases\",\"Potential evidence source field\",\"Potential evidence source label\",\"Potential evidence excerpt\",\"AI verdict\",\"AI score\",\"AI rationale\",\"Document evidence status\",\"Document version\",\"Document SHA-256\",\"Cited FOA facts\",\"Citation URLs\",\"Source review queue\",\"Reviewer source verdict\",\"Reviewer checked field\",\"Primary FOA URL\",\"Agency notice URL\",\"Source record URL\",\"Source close date\",\"Next submission stage\",\"Submission access\",\"Submission schedule\"\r\n\"Fixture, official notice\",\"NSF\",\"Grants.gov\",\"posted\",\"STAGE-1\",\"2026-12-31\",\"\",\"\",\"\",\"\",\"\",\"Grants.gov structured record\",\"\",\"Grants.gov XML extract\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"public@example.org\",\"\",\"\",\"\",\"Strong\",\"No\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"\",\"https://www.nsf.gov/notice.pdf\",\"https://www.nsf.gov/funding/notice\",\"https://www.grants.gov/search-results-detail/stage1-fixture\",\"2026-12-31\",\"application\",\"open\",\"[{\"\"kind\"\":\"\"application\"\",\"\"date\"\":\"\"2026-12-31\"\",\"\"time\"\":null,\"\"timezone\"\":null,\"\"source\"\":\"\"Grants.gov\"\"}]\"",
   "url": "https://example.org/match_explorer.html?q=carbon+capture&f_agency=NSF",
   "searchAlert": {
     "type": "saved_search",
@@ -57,12 +57,12 @@
     "focus": null
   },
   "functionHashes": {
-    "exportCsv": "99d4278f91ef06e32f07a2fe70ecc620bee50cd31c45e5f885ba880903c41b4c",
+    "exportCsv": "b34136375298f574167f8a65322358e718d87bcf77fa398b38f2ea778d94b0bd",
     "syncStateToUrl": "cdd92506211bd6759f925dbce78e82a75a142e0e30af768ad58428b12927cd49",
     "hydrateStateFromUrl": "dddf387a7cd6aa9c844babb9bef48540c94f78a87281b227c37b88c0970bfd8c",
     "savedSearchAlertDefinition": "b2689fae846fe18ec4f7a254e9409fc7bfd591ba5bb6ad4a03181e71492866d0",
     "openSavedSearchAlert": "7c281171ff399f1d5c210573c82f9fbfb63cd7249d777f10136a0370c7cf9ee0",
-    "openOpportunityAlert": "96af8459683c5a66187cd2bda92664d7e1b05d8e41da2906f3a38cff1f6a11f5",
+    "openOpportunityAlert": "0e1c74a7598b56c520032e0a486ef3a83ce471f0bac86d82d4af6d92c9f4d6b3",
     "openProgramAlert": "f3a103604f38ba1107dc8df46ef8c5b8f742f2c223880fe3c158801394921c6b",
     "officialActions": "311272c9c58f97493f46b1e17f1d863fbbc21750f3449914992602af33d7bf5f",
     "opportunityTeamScopeId": "03e8d3663a4602a7653d7e52bcac8eb6208f28398fcb66d27c4bf24a54bfa42a",

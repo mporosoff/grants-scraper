@@ -285,11 +285,14 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             f'<link rel="stylesheet" href="./assets/app.css?v={app_style_version}">',
             explorer_html,
         )
-        for asset in ("nofo.js", "review.js", "saved.js"):
+        for asset in ("nofo.js", "review.js"):
             self.assertIn(
                 f'<script src="./assets/{asset}?v={release_version}"></script>',
                 explorer_html,
             )
+        for asset in ("saved.js", "submission-schedule.js"):
+            digest = hashlib.sha256((REPOSITORY_ROOT / "assets" / asset).read_bytes()).hexdigest()
+            self.assertIn(f'<script src="./assets/{asset}?v={digest}"></script>', explorer_html)
         ai_provider_hash = hashlib.sha256(
             (REPOSITORY_ROOT / "assets" / "ai-provider.js").read_bytes()
         ).hexdigest()
