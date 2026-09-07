@@ -1,0 +1,40 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "356517",
+      "source": {
+        "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-301.html",
+        "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-301.html",
+        "sha256": "5280ab289bfd135b9c639876a6e305397d7dd702aa2dab40b561ccdb1795c306",
+        "retrieved_at": "2026-09-07T20:44:50.320189+00:00",
+        "bytes": 161670,
+        "content_type": "text/html;charset=UTF-8"
+      },
+      "html": "<h2>Key Dates</h2><div data-section-code=\"KD\"><p>The following table includes NIH standard due dates marked with an asterisk.</p><table id=\"keyDatesContentTable\"><tr>\n\t\t\t<th scope=\"col\" colspan=\"3\" style=\"border:2px solid #bcbcbc;\" class=\"text-center\">Application Due Dates</th>\n\t\t\t<th scope=\"col\" colspan=\"3\" style=\"border:2px solid #bcbcbc;\" class=\"text-center\">Review and Award Cycles</th>\n\t\t</tr><tr> \n\t\t\t<th scope=\"col\" style=\"width:16.66%;border-left:2px solid #bcbcbc;\" class=\"text-center\">New</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%\" class=\"text-center\">Renewal / Resubmission / Revision (as allowed)</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%;border-right:2px solid #bcbcbc;\" class=\"text-center\">AIDS - New/Renewal/Resubmission/Revision, as allowed</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%\" class=\"text-center\">Scientific Merit Review</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%\" class=\"text-center\">Advisory Council Review</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%;border-right:2px solid #bcbcbc;\" class=\"text-center\">Earliest Start Date</th>\n\t\t</tr><tr>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tJanuary 25, 2025  * \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tJanuary 25, 2025 * \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tNot Applicable\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>July 2025</td>\n\t\t\t\t\t<td>\t\t\t\t\t\t\tOctober 2025\n\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>December 2025</td>\n\t\t\t\t</tr><tr>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 25, 2026  * \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 25, 2026 * \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tNot Applicable\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>March 2027</td>\n\t\t\t\t\t<td>\t\t\t\t\t\t\tMay 2027\n\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>July 2027</td>\n\t\t\t\t</tr><tr>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 25, 2027  * \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 25, 2027 * \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tNot Applicable\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>March 2028</td>\n\t\t\t\t\t<td>\t\t\t\t\t\t\tMay 2028\n\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>July 2028</td>\n\t\t\t\t</tr></table><p>All applications are due by 5:00 PM local time of applicant organization.</p></div>",
+      "expected_new_dates": [
+        "2025-01-25",
+        "2026-09-25",
+        "2027-09-25"
+      ],
+      "annotation": "Original NIH Key Dates table: retain first, next and final receipt cycles and their new/resubmission columns; exclude the separately owned review/award columns. Shared source clock is 5 PM applicant local."
+    },
+    {
+      "opportunity_id": "356316",
+      "source": {
+        "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-272.html",
+        "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-24-272.html",
+        "sha256": "789d9f08655924efb93c33b306e8b712ae56c0458754e4ee3bce9ea923e32f46",
+        "retrieved_at": "2026-09-07T20:44:50.451690+00:00",
+        "bytes": 256379,
+        "content_type": "text/html;charset=UTF-8"
+      },
+      "html": "<h2>Key Dates</h2><div data-section-code=\"KD\"><table id=\"keyDatesContentTable\"><tr>\n\t\t\t<th scope=\"col\" colspan=\"3\" style=\"border:2px solid #bcbcbc;\" class=\"text-center\">Application Due Dates</th>\n\t\t\t<th scope=\"col\" colspan=\"3\" style=\"border:2px solid #bcbcbc;\" class=\"text-center\">Review and Award Cycles</th>\n\t\t</tr><tr> \n\t\t\t<th scope=\"col\" style=\"width:16.66%;border-left:2px solid #bcbcbc;\" class=\"text-center\">New</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%\" class=\"text-center\">Renewal / Resubmission / Revision (as allowed)</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%;border-right:2px solid #bcbcbc;\" class=\"text-center\">AIDS - New/Renewal/Resubmission/Revision, as allowed</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%\" class=\"text-center\">Scientific Merit Review</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%\" class=\"text-center\">Advisory Council Review</th>\n\t\t\t<th scope=\"col\" style=\"width:16.66%;border-right:2px solid #bcbcbc;\" class=\"text-center\">Earliest Start Date</th>\n\t\t</tr><tr>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tMarch 13, 2025 \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tMarch 13, 2025\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tNot Applicable\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>June 2025</td>\n\t\t\t\t\t<td>\t\t\t\t\t\t\tOctober 2025\n\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>December 2025</td>\n\t\t\t\t</tr><tr>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 28, 2026 \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 28, 2026\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tNot Applicable\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>March 2027</td>\n\t\t\t\t\t<td>\t\t\t\t\t\t\tMay 2027\n\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>July 2027</td>\n\t\t\t\t</tr><tr>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 28, 2027 \n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tSeptember 28, 2027\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>\n\t\t\t\t\t\t\tNot Applicable\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>March 2028</td>\n\t\t\t\t\t<td>\t\t\t\t\t\t\tMay 2028\n\n\t\t\t\t\t</td>\n\t\t\t\t\t<td>July 2028</td>\n\t\t\t\t</tr></table><p>All applications are due by 5:00 PM local time of applicant organization.</p></div>",
+      "expected_new_dates": [
+        "2025-03-13",
+        "2026-09-28",
+        "2027-09-28"
+      ],
+      "annotation": "Original NIH Key Dates table: retain first, next and final receipt cycles and their new/resubmission columns; exclude the separately owned review/award columns. Shared source clock is 5 PM applicant local."
+    }
+  ]
+}

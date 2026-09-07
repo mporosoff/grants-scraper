@@ -1,0 +1,69 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
+    "retrieved_at": "2026-09-07T12:53:07.612228+00:00",
+    "sha256": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6"
+  },
+  "document_name": "DE-FOA-0003634_Part 2.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "hgeo_section_excerpt",
+  "text": "===== 15 =====\nTopic Area 1:  Enhanced Resource Utilization and Production Technologies \nTopic Area 1 will fund the development, testing, and validation of advanced \ntechnologies to improve the utilization of natural gas and natural gas liquids (NGLs) that are \ncurrently being lost through operational inefficiencies and/or technology gaps.  Specifically, \n===== 16 =====\n \nVersion 4.0 Page 16 of 52 \n \nNotice of Funding Opportunity, Part 1 \nthe targets are natural gas lost to flaring and venting, sour gas that is stranded due to its \ncomposition, and NGLs that are stranded due to a lack of effective separation and processing \nsolutions.  These challenges will be addressed by projects in two Sub-Topic Areas:   \n \n Topic Area 1a:  Laboratory Validation of Catalysts and Unit Operations \n Topic Area 1b:  Field Validation of Full System Prototypes  \n \nOver the last 10 years, flaring and venting of natural gas associated with oil \nproduction across the U.S. has resulted in a lost monetary value of almost $\n===== 16 =====\nTopic Area 1a:  Laboratory Validation of Catalysts and Unit Operations \nThe objective of Topic Area 1a is to apply computational approaches (e.g., AI/ML, \ncomputational fluid dynamics) and process intensification R&D approaches to rapidly \ndevelop and validate new catalysts, reactor systems, and separation technologies—at the \nlaboratory through prototype-scale—to increase the production and deliverability efficiency \nof hydrocarbons containing high sulfur and/or excess NGLs.  Research efforts of interest may \ninclude but are not limited to:   \n \nNatural Gas Product Loss  \n Employ AI and quantum-scale simulation technologies to design and optimize \nnew catalysts and high-performance support structures (e.g., catalytic \n===== 17 =====\n \nVersion 4.0 Page 17 of 52 \n \nNotice of Funding Opportunity, Part 1 \nmembranes), identify new molecular configurations, and discover new \nreaction pathways to convert associated natural gas and/or NGLs into valuable \nproducts. \n High throughput synthesi\n===== 18 =====\nTopic Area 1b:  Field Validation of Full System Prototypes \nThe objective of Topic Area 1b is field testing across multiple oil and gas (O&G) \nproduction basins and well sites to confirm the precommercial validation of new modular \ndecentralized gas conversion systems, sour gas processing, and other innovative direct \nutilization applications that validate the profitable use of unused or underutilized natural gas \nstreams.  Research efforts of interest may include but are not limited to:   \n \nNatural Gas Product Loss  \n Precommercial validation of economic potential (including product take-off, \ntransport, and side product and waste stream disposal) of new advanced \nreactor concepts operating at decentralized and off-grid locations. \n Validation of AI-powered autonomous control schemes for optimal \noperational efficiency and adaptation to variable well gas streams. \n Other on-site innovative energy systems that utilize raw associated streams by \nother means, such as distributed elec\n===== 20 =====\nTopic Area 2:  Resilient Infrastructure Technology Enhancement \nThe objective of Topic Area 2 is to develop, validate, and field test advanced \ntechnologies to enhance the durability, reliability, and deliverability of the U.S. oil and \nnatural gas supply chain by improving existing facility-level equipment and associated \ntransport infrastructure, while paving the way for next-gen infrastructure.  Specifically, the \ntargets are areas of infrastructure that are subject to chronic leaks, corrosion-related failures, \nand unplanned downtime due to equipment operating failures.   \n \nAging infrastructure and harsh operating environments lead to significant economic \nlosses within the U.S. oil and natural gas supply chain.  Nearly $875.3 million in product \nvalue is squandered annually due to product losses across the natural gas production, \nprocessing, and transportation sectors.  Industry faces $1.372 billion in annual costs from \ncorrosion impacts to pipelines, facilities, and equipment.\n===== 22 =====\nTopic Area 3:  Hydrocarbon Infrastructure Test Sites (HITS) \nThe objective of Topic Area 3 is to increase the production efficiency and \ndeliverability of the oil and natural gas supply chain by establishing and leveraging both \ncontrolled10 and actively operating production, processing, and transportation facilities to \nvalidate innovative continuous monitoring technologies, AI-supported digital twins, and \nadvanced analytics and control systems.  HITS will act as a full-scale, field-based validation \nplatform to accelerate the commercial readiness of advanced surface hydrocarbon operations.  \n \n8 TRLs are a standardized 1-to-9 scale used by the DOE and other Federal agencies to \nassess the maturity of a technology.  The TRL scale can be found in the Technology \nReadiness Levels section at the end of this NOFO. \n9 The Adoption Readiness Levels framework is a tool to assess the commercialization \nrisks facing a technology as it crosses the RDD&D continuum to reach successful \ncommercia",
+  "excerpt_assembly": "Noncontiguous opening scientific paragraphs with original page markers; this excerpt does not represent all NOFO constraints.",
+  "annotations": [
+    {
+      "location": "PDF page 15, scientific Topic/Subtopic 1",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1",
+        "page_start": 15
+      },
+      "contains_text": {
+        "text": "natural gas"
+      }
+    },
+    {
+      "location": "PDF page 16, scientific Topic/Subtopic 1a",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1a",
+        "page_start": 16
+      },
+      "contains_text": {
+        "text": "computational approaches"
+      }
+    },
+    {
+      "location": "PDF page 18, scientific Topic/Subtopic 1b",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1b",
+        "page_start": 18
+      },
+      "contains_text": {
+        "text": "field testing"
+      }
+    },
+    {
+      "location": "PDF page 20, scientific Topic/Subtopic 2",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "2",
+        "page_start": 20
+      },
+      "contains_text": {
+        "text": "durability"
+      }
+    },
+    {
+      "location": "PDF page 22, scientific Topic/Subtopic 3",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "3",
+        "page_start": 22
+      },
+      "contains_text": {
+        "text": "production efficiency"
+      }
+    }
+  ]
+}

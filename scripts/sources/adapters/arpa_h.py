@@ -10,6 +10,7 @@ are not misrepresented as the child program's own number.
 from __future__ import annotations
 
 from datetime import datetime
+import hashlib
 from html import unescape
 import re
 from urllib.parse import urljoin, urlparse
@@ -64,6 +65,18 @@ def _date(text):
         return datetime.strptime(found.group(1), "%B %d, %Y").date().isoformat()
     except ValueError:
         return None
+
+
+def notice_schedule(html, url):
+    """Use the common source-field reader; a summary is not a full proposal."""
+    from scripts import extract_document_evidence as evidence
+    content = html.encode('utf-8')
+    containers, _ = evidence.extract_html_sections(content)
+    document = {'url': url, 'sha256': hashlib.sha256(content).hexdigest()}
+    facts = evidence.notice_schedule.extract_native(evidence, 'source-field', containers, document, None)
+    return [{**evidence.citation_deadline(fact), 'evidence_id': None,
+             'source': 'Official ARPA-H submission field', 'source_field': 'notice submission section',
+             'confidence': 'source_listed', 'date_status': 'known' if fact.get('date') else 'unknown'} for fact in facts]
 
 
 def parse_listing(html):
@@ -173,6 +186,12 @@ class ArpaHAdapter(SourceAdapter):
             if notice and row["external_id"] not in _SHARED_UMBRELLA_SLUGS:
                 number = notice.group(1).upper()
             close_date = _date(detail)
+            additional = notice_schedule(pages.get(row.get('path'), ''), row['url']) if row.get('path') else []
+            # Retain the legacy close-date value when available. Its generic
+            # application label must not compete with the source-owned stages.
+            if not close_date:
+                dated = [item['date'] for item in additional if item.get('date')]
+                close_date = max(dated) if dated else None
             description = row.get("description") or (
                 f"Current ARPA-H {row['opportunity_class'].replace('_', ' ')}. "
                 f"{detail[:1800]}"
@@ -185,6 +204,8 @@ class ArpaHAdapter(SourceAdapter):
                 agency=AGENCY,
                 description=description,
                 close_date=close_date,
+                additional_deadlines=additional,
+                extra={'close_date_kind': 'submission_window_end'} if additional else {},
                 deadline_note=(
                     "Current date published on the official ARPA-H opportunity page."
                     if close_date else None

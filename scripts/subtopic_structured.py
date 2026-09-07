@@ -8,7 +8,7 @@ ladder's first-refusal/fail-closed rule in executable form.
 
 from __future__ import annotations
 
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from datetime import date
 from functools import lru_cache
 import hashlib
@@ -17,6 +17,15 @@ import re
 
 from scripts import subtopic_records
 from scripts.subtopic_segmentation import build_term_map, summarize
+
+
+HGEO_BODY_VERSION = "hgeo-scientific-body-2"
+
+
+def needs_body_revalidation(entry):
+    """Only this changed source family invalidates its earlier topic bodies."""
+    return bool(entry and entry.get("subtopic_method") == "hgeo_declared_topics"
+                and (entry.get("subtopic_structured") or {}).get("body_parser_version") != HGEO_BODY_VERSION)
 
 
 ARL_NUMBER = "W911NF-23-S-0001"
@@ -105,38 +114,60 @@ def _page_before(text, offset):
 
 
 def parse_hgeo(text, opportunity_number):
-    """Reproduce the adjudicated 4/5/3 source-specific applicant units."""
+    """Read DOE Part 1 topic bodies within the scientific-topic section.
+
+    Retained source codes preserve published identity. Funding summaries and
+    TOCs cannot substitute for scientific bodies. The same section grammar is
+    usable for a subsequent notice without adding its number to this parser.
+    """
     expected = HGEO_EXPECTED.get(opportunity_number)
-    if not expected:
+    sections = list(re.finditer(r"(?im)^\s*D[.]\s+Topic Areas\s*$", text))
+    start = sections[-1].end() if sections else 0
+    if not sections:
+        subsection = re.search(r"(?im)^\s*(?:\d+[.])+\s*TA\s+\d+[—–-]Subtopic\s+\d+[A-Za-z]?\s*:", text)
+        if subsection:
+            start = subsection.start()
+    stop = re.search(r"(?im)^\s*(?:E[.]\s+Applications Specifically Not of Interest\s*$|IV[.]?\s+Application Content and Form\s*$|1[.]4\s+Technical Elements)", text[start:])
+    end = start + stop.start() if stop else len(text)
+    window = text[start:end]
+    marker = re.compile(r"(?im)^[ \t]*(?:(?:\d+[.])+[ \t]*(?:TA[ \t]+\d+[—–-])?[ \t]*)?"
+        r"(?:Topic[ \t]+Area|Subtopic)[ \t]+(?P<code>\d+[A-Za-z]?)[ \t]*[:–—][ \t]*(?P<title>[^\n]+)")
+    matches = list(marker.finditer(window))
+    if not matches or len(matches) > 20:
         return []
-    flat = _collapse(text).casefold()
+    codes = [m.group('code').casefold() for m in matches]
+    if len(set(codes)) != len(codes):
+        return []
+    if expected and codes != [code.casefold() for code, _ in expected]:
+        return []
     children = []
-    for ordinal, (code, title) in enumerate(expected, start=1):
-        tokens = re.findall(r"[a-z0-9]+", title.casefold())
-        # Long source-published titles are the canary. Matching the first six
-        # substantive tokens tolerates PDF line wrapping but not structure loss.
-        needle = " ".join(tokens[: min(6, len(tokens))])
-        if needle not in re.sub(r"[^a-z0-9]+", " ", flat):
+    for index, match in enumerate(matches):
+        stop = matches[index + 1].start() if index + 1 < len(matches) else len(window)
+        chunk = window[match.end():stop]
+        # Strip only physical page furniture, retaining source scientific prose.
+        lines = [line.strip() for line in chunk.splitlines() if line.strip()
+                 and not re.match(r"^(?:=====|Version \d|Page \d|Notice of Funding Opportunity|Section III:)", line.strip())]
+        title_lines = [match.group('title').strip()]
+        while lines and not re.match(r"^(?:The\b|What\b|Although\b|In \d|Topic Area \d+ will\b|[•▪])", lines[0]):
+            if len(' '.join(title_lines)) > 220 or re.search(r"[.!?]$", lines[0]):
+                return []
+            title_lines.append(lines.pop(0))
+        body = _collapse('\n'.join(lines))
+        # The owned scientific section, not a generic keyword vocabulary,
+        # establishes this text's source role. Team admission remains separate.
+        if len(body) < 100:
             return []
-        if opportunity_number == "DE-FOA-0003215":
-            marker = rf"Subtopic\s+{re.escape(code)}\s*:\s*{re.escape(title)}"
-        else:
-            marker = rf"Topic\s+Area\s+{re.escape(code)}\b"
-        found = re.search(marker, text, re.I)
-        if not found:
-            return []
-        children.append({
-            "code": code,
-            "title": title,
-            "ordinal": ordinal,
-            "summary": (
-                f"{title}. The notice identifies this as an applicant-selectable "
-                "topic or subtopic."
-            ),
-            "text": title,
-            "page_start": _page_before(text, found.start()),
-            "anchor": f"p{_page_before(text, found.start())}" if _page_before(text, found.start()) else None,
-        })
+        source_title = _collapse(' '.join(title_lines))
+        code = expected[index][0] if expected else match.group('code')
+        # Codes own stable child identity; titles and scope come from the
+        # actual scientific section, not a differently worded funding table.
+        title = source_title
+        page = _page_before(text, start + match.start())
+        children.append({"code": code, "title": title, "ordinal": index + 1,
+            "summary": summarize(body), "text": f"{source_title} {body}",
+            "page_start": page, "page_end": _page_before(text, start + stop - 1),
+            "char_start": start + match.start(), "char_end": start + stop,
+            "anchor": f"p{page}" if page else None})
     return children
 
 
@@ -458,13 +489,15 @@ def first_refusal(
             children = parse_hgeo(text, number)
             return children, {"expected": len(HGEO_EXPECTED[number]), "parsed": len(children)}
 
-        return _named_document_outcome(
+        outcome = _named_document_outcome(
             record, primary_content, primary_document,
             filename_re=HGEO_FILENAMES[number], parser=parser,
             provenance=subtopic_records.INLINE, method="hgeo_declared_topics",
             detail_fetcher=detail_fetcher, collector=collector, download=download,
             extract_containers=extract_containers, as_of=as_of,
         )
+        return replace(outcome, method="hgeo_declared_topics", diagnostics={
+            **outcome.diagnostics, "body_parser_version": HGEO_BODY_VERSION})
 
     if number == ARL_NUMBER and parent_id == ARL_PARENT_ID:
         def parser(content, document):

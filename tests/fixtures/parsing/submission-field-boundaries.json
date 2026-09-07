@@ -1,0 +1,546 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "361002",
+      "record": {
+        "opportunity_id": "361002",
+        "close_date": "2026-10-26",
+        "has_preliminary_stage": true,
+        "preliminary_required": null,
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-10-26",
+            "time": "11:59 pm",
+            "timezone": "ET",
+            "note": "Electronically submitted applications must be submitted no later than 11:59 pm ET on the listed application due date.",
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/361002",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-27T09:00:40.641863Z",
+            "document_evidence_id": "evidence-361002-7fbd202bf643",
+            "document_confidence": "machine_extracted_needs_verification"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-09-17",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-361002-5c0f3e86355b",
+            "required": false
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-09-26",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-361002-f138ca292a68",
+            "required": false
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2027-08-01",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-361002-827581c08d9a",
+            "required": false
+          },
+          {
+            "kind": "application",
+            "date": "2027-09-01",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-361002-fdeb7a9cdb36",
+            "required": false
+          }
+        ]
+      },
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+        "name": "cdc-rfa-dd-26-0222_forPublication.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "c158be3abf10fcf3dfdcc4bd3a17ad5ce5433d118d15193082c6a96401ac2240",
+        "version": 1,
+        "first_seen_at": "2026-08-27T09:01:59.872946Z",
+        "last_seen_at": "2026-08-27T09:01:59.872946Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-08-27T09:01:59.872946Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-361002-7fbd202bf643",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-10-26",
+          "display_value": "2026-10-26",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798#page=1",
+            "document_name": "cdc-rfa-dd-26-0222_forPublication.pdf",
+            "sha256": "c158be3abf10fcf3dfdcc4bd3a17ad5ce5433d118d15193082c6a96401ac2240",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "Notice of Funding Opportunity Application due Monday, October 26, 2026 Division of Birth Defects and Infant Disorders National Center on Birth Defects and Development Disabilities Long-term health outcomes of people living with spina bifida Opp…",
+            "extracted_at": "2026-08-27T09:01:59.872946Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-10-26",
+          "time": null,
+          "timezone": null,
+          "required": true
+        },
+        {
+          "id": "evidence-361002-5c0f3e86355b",
+          "type": "deadline",
+          "label": "Letter of intent deadline",
+          "value": "2026-09-17",
+          "display_value": "2026-09-17",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798#page=5",
+            "document_name": "cdc-rfa-dd-26-0222_forPublication.pdf",
+            "sha256": "c158be3abf10fcf3dfdcc4bd3a17ad5ce5433d118d15193082c6a96401ac2240",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…unity number: CDC-RFA-DD-26-0222 Assistance listing: 93.073 NOFO version: Original Key dates Application submission deadline: Monday, October 26, 2026 Informational call: September 17, 2026 Optional letter of intent deadline: September 26, 2026 Expected award date: August 1, 2027 Expected start date: September 1, 2027 See Submit Your Application for other…",
+            "extracted_at": "2026-08-27T09:01:59.872946Z"
+          },
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-09-17",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-361002-f138ca292a68",
+          "type": "deadline",
+          "label": "Letter of intent deadline",
+          "value": "2026-09-26",
+          "display_value": "2026-09-26",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798#page=5",
+            "document_name": "cdc-rfa-dd-26-0222_forPublication.pdf",
+            "sha256": "c158be3abf10fcf3dfdcc4bd3a17ad5ce5433d118d15193082c6a96401ac2240",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…73 NOFO version: Original Key dates Application submission deadline: Monday, October 26, 2026 Informational call: September 17, 2026 Optional letter of intent deadline: September 26, 2026 Expected award date: August 1, 2027 Expected start date: September 1, 2027 See Submit Your Application for other time frames that may apply to this NOFO. Summary This NOF…",
+            "extracted_at": "2026-08-27T09:01:59.872946Z"
+          },
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-09-26",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-361002-827581c08d9a",
+          "type": "deadline",
+          "label": "Letter of intent deadline",
+          "value": "2027-08-01",
+          "display_value": "2027-08-01",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798#page=5",
+            "document_name": "cdc-rfa-dd-26-0222_forPublication.pdf",
+            "sha256": "c158be3abf10fcf3dfdcc4bd3a17ad5ce5433d118d15193082c6a96401ac2240",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…lication submission deadline: Monday, October 26, 2026 Informational call: September 17, 2026 Optional letter of intent deadline: September 26, 2026 Expected award date: August 1, 2027 Expected start date: September 1, 2027 See Submit Your Application for other time frames that may apply to this NOFO. Summary This NOFO has two funding components: • Compo…",
+            "extracted_at": "2026-08-27T09:01:59.872946Z"
+          },
+          "deadline_kind": "letter_of_intent",
+          "date": "2027-08-01",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-361002-fdeb7a9cdb36",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2027-09-01",
+          "display_value": "2027-09-01",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354798#page=5",
+            "document_name": "cdc-rfa-dd-26-0222_forPublication.pdf",
+            "sha256": "c158be3abf10fcf3dfdcc4bd3a17ad5ce5433d118d15193082c6a96401ac2240",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…y, October 26, 2026 Informational call: September 17, 2026 Optional letter of intent deadline: September 26, 2026 Expected award date: August 1, 2027 Expected start date: September 1, 2027 See Submit Your Application for other time frames that may apply to this NOFO. Summary This NOFO has two funding components: • Component A: National Spina Bifida Patient…",
+            "extracted_at": "2026-08-27T09:01:59.872946Z"
+          },
+          "deadline_kind": "application",
+          "date": "2027-09-01",
+          "time": null,
+          "timezone": null,
+          "required": false
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363632",
+      "record": {
+        "opportunity_id": "363632",
+        "close_date": "2026-10-30",
+        "has_preliminary_stage": false,
+        "preliminary_required": null,
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-10-30",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363632",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-21T16:38:23.903640Z",
+            "document_evidence_id": "evidence-363632-fdccb6206acc",
+            "document_confidence": "machine_extracted_needs_verification"
+          },
+          {
+            "kind": "application",
+            "date": "2026-10-16",
+            "time": "5:00 pm",
+            "timezone": "Ques",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363632-ef2585412ddc",
+            "required": true
+          },
+          {
+            "kind": "application",
+            "date": "2026-10-29",
+            "time": "5:00 pm",
+            "timezone": "Ques",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363632-7b73d40dbf6f",
+            "required": true
+          },
+          {
+            "kind": "application",
+            "date": "2027-02-16",
+            "time": "5:00 pm",
+            "timezone": "Ques",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363632-8a3516c5ce54",
+            "required": true
+          },
+          {
+            "kind": "application",
+            "date": "2027-04-01",
+            "time": "5:00 pm",
+            "timezone": "Ques",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363632-15ede7e12437",
+            "required": true
+          },
+          {
+            "kind": "application",
+            "date": "2000-12-06",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363632-e64d6b7bf11e",
+            "required": false
+          }
+        ]
+      },
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+        "name": "FY27 YIP NOFO N0001426SF004_ (003).pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "ca730306caa5aa8ae1e287c540e8b4fab797d733beed3767bdbd1e3c27131268",
+        "version": 1,
+        "first_seen_at": "2026-08-21T16:39:20.902607Z",
+        "last_seen_at": "2026-09-05T14:03:41.249498Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-09-05T14:03:41.249498Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-363632-ef2585412ddc",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-10-16",
+          "display_value": "2026-10-16 · 5:00 pm Ques",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646#page=7",
+            "document_name": "FY27 YIP NOFO N0001426SF004_ (003).pdf",
+            "sha256": "ca730306caa5aa8ae1e287c540e8b4fab797d733beed3767bdbd1e3c27131268",
+            "page": 7,
+            "section": null,
+            "location": "page 7",
+            "quote": "…apons. 7. Key Dates Anticipated Schedule of Events * Event Date (MM/DD/YEAR) Time (Local Eastern Time) Questions Regarding Eligibility and Technical Requirements ** 10/16/2026 5:00 pm Questions for Grants Officer Regarding Proposal Submission** 10/29/2026 5:00 pm Proposals Due Date 10/30/2026 5:00 pm Notification of Selection for Award * 02/16/2…",
+            "extracted_at": "2026-08-21T16:39:20.902607Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-10-16",
+          "time": "5:00 pm",
+          "timezone": "Ques",
+          "required": true
+        },
+        {
+          "id": "evidence-363632-7b73d40dbf6f",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-10-29",
+          "display_value": "2026-10-29 · 5:00 pm Ques",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646#page=7",
+            "document_name": "FY27 YIP NOFO N0001426SF004_ (003).pdf",
+            "sha256": "ca730306caa5aa8ae1e287c540e8b4fab797d733beed3767bdbd1e3c27131268",
+            "page": 7,
+            "section": null,
+            "location": "page 7",
+            "quote": "…AR) Time (Local Eastern Time) Questions Regarding Eligibility and Technical Requirements ** 10/16/2026 5:00 pm Questions for Grants Officer Regarding Proposal Submission** 10/29/2026 5:00 pm Proposals Due Date 10/30/2026 5:00 pm Notification of Selection for Award * 02/16/2027 Start Date of Grant* 04/01/2027 *These dates are estimates as of the date of…",
+            "extracted_at": "2026-08-21T16:39:20.902607Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-10-29",
+          "time": "5:00 pm",
+          "timezone": "Ques",
+          "required": true
+        },
+        {
+          "id": "evidence-363632-fdccb6206acc",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-10-30",
+          "display_value": "2026-10-30 · 5:00 pm Ques",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646#page=7",
+            "document_name": "FY27 YIP NOFO N0001426SF004_ (003).pdf",
+            "sha256": "ca730306caa5aa8ae1e287c540e8b4fab797d733beed3767bdbd1e3c27131268",
+            "page": 7,
+            "section": null,
+            "location": "page 7",
+            "quote": "…Regarding Eligibility and Technical Requirements ** 10/16/2026 5:00 pm Questions for Grants Officer Regarding Proposal Submission** 10/29/2026 5:00 pm Proposals Due Date 10/30/2026 5:00 pm Notification of Selection for Award * 02/16/2027 Start Date of Grant* 04/01/2027 *These dates are estimates as of the date of this announcement. **Questions submitted…",
+            "extracted_at": "2026-08-21T16:39:20.902607Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-10-30",
+          "time": "5:00 pm",
+          "timezone": "Ques",
+          "required": true
+        },
+        {
+          "id": "evidence-363632-8a3516c5ce54",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2027-02-16",
+          "display_value": "2027-02-16 · 5:00 pm Ques",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646#page=7",
+            "document_name": "FY27 YIP NOFO N0001426SF004_ (003).pdf",
+            "sha256": "ca730306caa5aa8ae1e287c540e8b4fab797d733beed3767bdbd1e3c27131268",
+            "page": 7,
+            "section": null,
+            "location": "page 7",
+            "quote": "…16/2026 5:00 pm Questions for Grants Officer Regarding Proposal Submission** 10/29/2026 5:00 pm Proposals Due Date 10/30/2026 5:00 pm Notification of Selection for Award * 02/16/2027 Start Date of Grant* 04/01/2027 *These dates are estimates as of the date of this announcement. **Questions submitted after the Q&A deadline may not be answered. IMPORTA…",
+            "extracted_at": "2026-08-21T16:39:20.902607Z"
+          },
+          "deadline_kind": "application",
+          "date": "2027-02-16",
+          "time": "5:00 pm",
+          "timezone": "Ques",
+          "required": true
+        },
+        {
+          "id": "evidence-363632-15ede7e12437",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2027-04-01",
+          "display_value": "2027-04-01 · 5:00 pm Ques",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646#page=7",
+            "document_name": "FY27 YIP NOFO N0001426SF004_ (003).pdf",
+            "sha256": "ca730306caa5aa8ae1e287c540e8b4fab797d733beed3767bdbd1e3c27131268",
+            "page": 7,
+            "section": null,
+            "location": "page 7",
+            "quote": "…ants Officer Regarding Proposal Submission** 10/29/2026 5:00 pm Proposals Due Date 10/30/2026 5:00 pm Notification of Selection for Award * 02/16/2027 Start Date of Grant* 04/01/2027 *These dates are estimates as of the date of this announcement. **Questions submitted after the Q&A deadline may not be answered. IMPORTANT NOTE: White Papers are NOT bei…",
+            "extracted_at": "2026-08-21T16:39:20.902607Z"
+          },
+          "deadline_kind": "application",
+          "date": "2027-04-01",
+          "time": "5:00 pm",
+          "timezone": "Ques",
+          "required": true
+        },
+        {
+          "id": "evidence-363632-e64d6b7bf11e",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2000-12-06",
+          "display_value": "2000-12-06",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354646#page=39",
+            "document_name": "FY27 YIP NOFO N0001426SF004_ (003).pdf",
+            "sha256": "ca730306caa5aa8ae1e287c540e8b4fab797d733beed3767bdbd1e3c27131268",
+            "page": 39,
+            "section": null,
+            "location": "page 39",
+            "quote": "…research and to proposals submitted to ONR for funding. The government wide policy published by the Office of Science and Technology Policy in the Federal Register (65 FR 76260, December 6, 2000) is implemented by DOW at DODI 3210.7 “Research Integrity and Misconduct” and by ONR at ONRINST 5041.2A “Policy for Handling Allegations of Scientific Research Mis…",
+            "extracted_at": "2026-08-21T16:39:20.902607Z"
+          },
+          "deadline_kind": "application",
+          "date": "2000-12-06",
+          "time": null,
+          "timezone": null,
+          "required": false
+        }
+      ]
+    },
+    {
+      "opportunity_id": "vpr-email:vpr-ddde5b48dc92bba2",
+      "record": {
+        "opportunity_id": "vpr-email:vpr-ddde5b48dc92bba2",
+        "close_date": "2026-10-29",
+        "has_preliminary_stage": true,
+        "preliminary_required": null,
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-10-29",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "letter_of_intent",
+            "date": "2026-10-29",
+            "time": "12 p.m.",
+            "timezone": "Eastern",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-vpr-email:vpr-ddde5b48dc92bba2-031eae36e778",
+            "required": null,
+            "subject": "submission",
+            "parser_version": "official-evidence-3"
+          }
+        ]
+      },
+      "source": {
+        "url": "https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "0e7909b67b5ae97225024d6db759ae248bcde0fa09b7f1d3777a25c553ea60d8",
+        "version": 2,
+        "first_seen_at": "2026-09-07T17:40:40.039540Z",
+        "last_seen_at": "2026-09-07T17:40:40.039540Z",
+        "changed_since_previous": true
+      },
+      "source_checked_at": "2026-09-07T17:40:40.039540Z",
+      "legacy_facts": [
+        {
+          "id": "evidence-vpr-email:vpr-ddde5b48dc92bba2-031eae36e778",
+          "type": "deadline",
+          "label": "Letter of intent deadline",
+          "value": "2026-10-29",
+          "display_value": "2026-10-29 · 12 p.m. Eastern",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/",
+            "citation_url": "https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/",
+            "document_name": null,
+            "sha256": "0e7909b67b5ae97225024d6db759ae248bcde0fa09b7f1d3777a25c553ea60d8",
+            "page": null,
+            "section": "Simons Collaborations in Mathematics and the Physical Sciences",
+            "location": "section “Simons Collaborations in Mathematics and the Physical Sciences”",
+            "quote": "…ns Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program. Deadline for Letter of Intent (LOI) submission: October 29, 2026, at 12 p.m. (noon) Eastern time.",
+            "extracted_at": "2026-09-07T17:40:40.039540Z",
+            "structural_reference": {
+              "block_id": "html-46",
+              "kind": "paragraph",
+              "heading_path": [
+                "Simons Collaborations in Mathematics and the Physical Sciences"
+              ],
+              "source_position": [
+                154,
+                11
+              ]
+            }
+          },
+          "fact_contract": "typed-notice-facts-1",
+          "source_authority": "machine_extracted_official_document",
+          "subject": "submission",
+          "parser_version": "official-evidence-3",
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-10-29",
+          "time": "12 p.m.",
+          "timezone": "Eastern",
+          "required": null
+        }
+      ]
+    }
+  ]
+}

@@ -34,6 +34,9 @@ on:
       - "team_match.html"
       - "scripts/import_opportunity_team_model.py"
       - "tools/build_search_release_package.mjs"
+      - "tools/verify_notice_publication.py"
+      - "assets/submission-schedule.js"
+      - "assets/saved.js"
       - "tools/build_search_v2_voyage_vectors.mjs"
       - "tools/smoke_search_worker.mjs"
       - "workers/search-voyage-proxy/**"
@@ -75,6 +78,8 @@ jobs:
           cache: pnpm
       - run: pnpm install --frozen-lockfile
       - run: python -m pip install -r requirements.txt
+      - name: Verify the committed notice publication projection
+        run: python -m tools.verify_notice_publication
       - name: Verify the committed search package
         run: node tools/build_search_release_package.mjs --check
       - name: Run the complete Python product gate

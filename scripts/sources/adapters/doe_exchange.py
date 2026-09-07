@@ -22,6 +22,7 @@ merge dedups any that are.
 from __future__ import annotations
 
 from datetime import date
+import hashlib
 from html import unescape
 import re
 from typing import Iterable
@@ -85,17 +86,33 @@ def _deadlines_after_type(text: str, as_of: date):
         pairs.setdefault(parsed, re.sub(r"\s+", " ", time).upper() if time else None)
     ordered = sorted(pairs.items())
     future = [(d, t) for d, t in ordered if d >= as_of]
-    primary = future[0][0] if future else (ordered[-1][0] if ordered else None)
+    primary = ordered[-1][0] if ordered else None
     additional = [
-        {"kind": "application", "date": d.isoformat(), "time": t,
-         "timezone": "ET" if t else None, "note": None}
-        for d, t in future
+        {"kind": "submission", "date": d.isoformat(), "time": t,
+         "timezone": "ET" if t else None, "note": 'Submission stage not established by the listing',
+         'stage': 'unknown', 'required': None, 'obligation': 'unknown'}
+        for d, t in ordered
     ]
     note = (
         f"Next of {len(future)} open submission dates; later dates are in the details."
         if len(future) > 1 else None
     )
     return (primary.isoformat() if primary else None), additional, office, note
+
+
+def notice_schedule(html, url, as_of):
+    """Reuse the shared native reader on exactly this portal notice group."""
+    from scripts import extract_document_evidence as evidence
+    try:
+        content = evidence.scoped_html(html.encode('utf-8'), url)
+    except ValueError:
+        return None
+    containers, _ = evidence.extract_html_sections(content)
+    document = {'url': url, 'sha256': hashlib.sha256(content).hexdigest()}
+    facts = evidence.notice_schedule.extract_native(evidence, 'source-field', containers, document, None)
+    return [{**evidence.citation_deadline(fact), 'evidence_id': None,
+             'source': 'Official Exchange submission field', 'source_field': 'notice submission section',
+             'confidence': 'source_listed', 'date_status': 'known' if fact.get('date') else 'unknown'} for fact in facts]
 
 
 class EEREExchangeAdapter(SourceAdapter):
@@ -140,15 +157,23 @@ class EEREExchangeAdapter(SourceAdapter):
             close_date, additional, office, note = _deadlines_after_type(
                 type_and_dates, as_of
             )
+            url = f"{self.list_url}#FoaId{row.group('guid')}"
+            native = notice_schedule(html, url, as_of)
+            if native:
+                additional = native
+                known_dates = [event['date'] for event in native if event.get('date')]
+                close_date = max(known_dates, default=None)
+                note = 'See the cited submission stages and any required preliminary step.'
             opportunities.append(CanonicalOpportunity(
                 external_id=number,
                 opportunity_number=number,
                 title=title,
                 agency=office or self.display_name,
-                url=f"{self.list_url}#FoaId{row.group('guid')}",
+                url=url,
                 close_date=close_date,
                 deadline_note=note,
                 additional_deadlines=additional,
+                extra={'close_date_kind': 'submission_window_end', 'agency_code': 'DOE'},
             ))
         if not opportunities:
             raise ValueError(

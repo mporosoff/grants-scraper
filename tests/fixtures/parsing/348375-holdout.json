@@ -1,0 +1,38 @@
+{
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/crest-centers-research-excellence-science-technology/nsf23-595/solicitation",
+    "sha256": "d322fe8c7d6c852f62cb131c26fe9833d586f01a866ce4f7010f706a3bb6bb43",
+    "retrieved_at": "2026-09-07T12:37:03.526078+00:00"
+  },
+  "annotations": [
+    {
+      "location": "Cost Sharing Requirements",
+      "rationale": "Voluntary committed prohibition must not become a required match.",
+      "require": {
+        "type": "cost_share",
+        "value": false,
+        "obligation": "voluntary_committed_prohibited"
+      }
+    },
+    {
+      "location": "Limit on Number of Proposals per Organization: 1",
+      "rationale": "This is a real institutional limit, which must be retained.",
+      "require": {
+        "type": "limited_submission",
+        "value": 1,
+        "subject": "organization"
+      }
+    },
+    {
+      "location": "Full Proposal Deadline(s)",
+      "rationale": "The explicitly printed historical field must remain historical; do not synthesize its biennial recurrence.",
+      "require": {
+        "type": "deadline",
+        "date": "2024-12-06",
+        "timezone": "applicant_local"
+      }
+    }
+  ],
+  "format": "html_excerpt",
+  "text": "<h2>Eligibility and Submission Fields</h2><p>Full Proposal Deadline(s) (due by 5 p.m. submitting organization&#x27;s local time):</p><p>December 06, 2024</p><p>First Friday in December, Every Other Year Thereafter</p><p>Limit on Number of Proposals per Organization: 1</p><p>Only one preliminary proposal may be submitted per eligible institution and due date.</p><p>Limit on Number of Proposals per PI or co-PI: 1</p><p>Eligible individuals may be listed as the PI or co-PI on only one CREST Center proposal at the time of proposal submission.</p><p>Inclusion of voluntary committed cost sharing is prohibited.</p>"
+}

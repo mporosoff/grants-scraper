@@ -585,7 +585,7 @@ test("saved-search creation baselines existing Strong matches and alerts once fo
   assert.ok(queuedStrongEvent);
   const publicPayload = JSON.parse(queuedStrongEvent.payload_json);
   assert.deepEqual(Object.keys(publicPayload).sort(), [
-    "agency", "close_date", "detail", "funding_finder_url", "official_url", "program", "title", "why_matched",
+    "agency", "close_date", "detail", "funding_finder_url", "official_url", "program", "source_close_date", "submission_access", "submission_stage", "title", "why_matched",
   ]);
   assert.doesNotMatch(JSON.stringify(publicPayload), /cv|profile|orcid|publication|uploaded|document|notes?|chat/i);
   await dispatchNotifications({ store, provider, env, now: fixedNow });

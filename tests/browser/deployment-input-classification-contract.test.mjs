@@ -46,6 +46,7 @@ test("Alerts Worker deployment inputs include source, migrations, config, and bu
     "assets/match-explain.js",
     "assets/search-query.js",
     "assets/search-retrieval.js",
+    "assets/submission-schedule.js",
     "assets/search-v2-config.js",
   ]);
   const result = classifyWorkerDeployment("alerts", [
@@ -55,7 +56,7 @@ test("Alerts Worker deployment inputs include source, migrations, config, and bu
     ...WORKER_DEPLOYMENT_INPUTS.alerts.files,
   ]);
   assert.equal(result.deployRequired, true);
-  assert.equal(result.deploymentInputs.length, 8);
+  assert.equal(result.deploymentInputs.length, 9);
 });
 
 test("shared UI and release-support changes retain both existing Worker versions", () => {

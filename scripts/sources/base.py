@@ -18,6 +18,8 @@ from datetime import date, datetime
 import hashlib
 import re
 from typing import Any, Iterable, Optional
+from scripts.notice_semantics import institutional_limit_signal
+from scripts.notice_schedule import preliminary_requirement
 
 # Reuse Grants.gov's own normalization so external records get identical
 # topic tagging, signal detection, and money/text cleaning. Importing this
@@ -152,7 +154,7 @@ class CanonicalOpportunity:
         early_career = EARLY_CAREER_RE.search(text_blob)
 
         deadlines = []
-        if close_date:
+        if close_date and self.extra.get('close_date_kind') != 'submission_window_end':
             deadlines.append(
                 {
                     "kind": (
@@ -172,7 +174,7 @@ class CanonicalOpportunity:
                 }
             )
         seen_deadlines = {
-            (deadline.get("kind"), deadline.get("date"))
+            (deadline.get("kind"), deadline.get("date"), deadline.get('application_class'), deadline.get('cycle'), deadline.get('track'))
             for deadline in deadlines
         }
         for item in self.additional_deadlines[:50]:
@@ -180,11 +182,11 @@ class CanonicalOpportunity:
                 continue
             item_date = to_iso_date(item.get("date"))
             item_kind = clean_text(item.get("kind")) or "application"
-            identity = (item_kind, item_date)
-            if not item_date:
+            identity = (item_kind, item_date, item.get('application_class'), item.get('cycle'), item.get('track'))
+            if not item_date and item.get('date_status') != 'unknown':
                 continue
             if identity in seen_deadlines:
-                existing = next(d for d in deadlines if (d["kind"], d["date"]) == identity)
+                existing = next(d for d in deadlines if (d["kind"], d["date"], d.get('application_class'), d.get('cycle'), d.get('track')) == identity)
                 for key in ("time", "timezone", "note"):
                     if not existing.get(key) and item.get(key):
                         existing[key] = clean_text(item[key])
@@ -206,6 +208,9 @@ class CanonicalOpportunity:
                     or "source listing",
                     "confidence": clean_text(item.get("confidence"))
                     or "source_listed",
+                    **{key: item[key] for key in ('stage', 'application_class', 'cycle', 'track', 'required', 'obligation',
+                        'invitation_required', 'prerequisite', 'date_status', 'citation', 'field_authority',
+                        'requirement_citation', 'prerequisite_citation') if key in item},
                 }
             )
 
@@ -215,7 +220,8 @@ class CanonicalOpportunity:
             "opportunity_number": clean_text(self.opportunity_number),
             "title": title,
             "agency": clean_text(self.agency) or source,
-            "agency_code": None,
+            'agency_authority': 'source_listed' if clean_text(self.agency) else 'source_default',
+            "agency_code": clean_text(self.extra.get('agency_code')),
             "status": status,
             "source": source,
             "source_type": source_type,
@@ -282,8 +288,10 @@ class CanonicalOpportunity:
             ],
             # --- deterministic signals ---
             "has_preliminary_stage": bool(preliminary),
+            "preliminary_required": preliminary_requirement(text_blob, preliminary.group(1) if preliminary else None),
             "preliminary_stage_type": preliminary.group(1) if preliminary else None,
-            "limited_submission": bool(LIMITED_SUBMISSION_RE.search(text_blob)),
+            "limited_submission": bool(institutional_limit_signal(text_blob)),
+            'limited_submission_source': 'synopsis_heuristic',
             "career_stage_signal": early_career.group(1) if early_career else None,
             "description": (description or "")[:12000] or None,
             # --- shared evidence stage fills these after canonical merge;
@@ -327,6 +335,8 @@ class CanonicalOpportunity:
                     page_provenance[field_name] = normalized
         if page_provenance:
             record["page_field_provenance"] = page_provenance
+        if self.extra.get('close_date_kind') == 'submission_window_end':
+            record['close_date_kind'] = 'submission_window_end'
         return normalize_record_facets(record)
 
 

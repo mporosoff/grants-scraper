@@ -1,0 +1,99 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353128",
+    "sha256": "0e6c0e32a779f37ade311aba16955be60069b16c112d27a991fc8d94085f5338",
+    "retrieved_at": "2026-09-07T12:37:03.491661+00:00"
+  },
+  "annotations": [
+    {
+      "location": "Physical PDF page 4, Funding Details",
+      "rationale": "The program allotment and explicit per-award total cost cap have distinct subjects.",
+      "require": {
+        "type": "program_funding",
+        "value": 4000000
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Funding Details",
+      "rationale": "The program allotment and explicit per-award total cost cap have distinct subjects.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "minimum": null,
+          "maximum": 800000
+        }
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Submission and Review Dates and Times",
+      "rationale": "Each bullet explicitly owns its stage, date, and clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "preproposal",
+        "date": "2026-08-05",
+        "time": "5:00 p.m.",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Submission and Review Dates and Times",
+      "rationale": "Each bullet explicitly owns its stage, date, and clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2026-11-04",
+        "time": "11:59 p.m.",
+        "timezone": "ET"
+      }
+    },
+    {
+      "location": "Physical PDF page 5, Cost Sharing",
+      "rationale": "The source expressly says cost sharing is not an eligibility requirement.",
+      "require": {
+        "type": "cost_share",
+        "value": false
+      }
+    },
+    {
+      "location": "Physical PDF page 5, Eligible Applicants",
+      "rationale": "The substantive organization section must be recovered.",
+      "require": {
+        "type": "eligibility_excerpt"
+      },
+      "contains_text": {
+        "value": "foreign and domestic"
+      }
+    },
+    {
+      "location": "Physical PDF page 4, Invitation to Submit",
+      "rationale": "An invitation date is not an application submission date.",
+      "forbid": {
+        "type": "deadline",
+        "date": "2026-09-16"
+      }
+    },
+    {
+      "location": "Physical PDF page 5, individual PI administrative actions",
+      "rationale": "Withdrawing an excess individual application does not withdraw the solicitation.",
+      "forbid": {
+        "type": "status_signal",
+        "status_signal": "cancelled"
+      }
+    }
+  ],
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 4,
+      "text": "Section Shortcuts \nBasic Information | Eligibility | Program Description | Application Contents and Format | Submission Requirements \nApplication Review Information | Federal Award Notices | Post-Award Requirements | Other Information \nFY26 Bone Marrow Failure Idea Development Award 4 \n1. Basic Information About the Funding Opportunity \nSummary: The BMFRP Idea Development Award (IDA) is intended to support innovative ideas \nand high-impact approaches based on scientifically sound evidence to move toward the \nBMFRP\u2019s vision of understanding and curing BMF diseases.   \nDistinctive Features:  \n\u2022 This funding opportunity is open to Established Investigators (EIs) and Early-Career \nInvestigators (ECIs). Reviewers will assess Principal Investigators (PIs) using distinct review \ncriteria based on their eligibility as an EI or ECI.  \n\u2022 Preliminary data is not required. Applications should demonstrate the ability to achieve \ninterpretable results in the absence of preliminary data supporting the hypothesis. \nFunding Details: The Congressionally Directed Medical Research Programs (CDMRP) expects \nto allot roughly $4.0M to fund approximately five Idea Development Award applications with total \ncost caps of $0.8M per award. The maximum period of performance is 3 years. It is anticipated \nthat awards made from this fiscal year 2026 (FY26) funding opportunity will be funded with \nFY26 funds, which will expire for use on September 30, 2032. Awards supported with FY26 \nfunds will be made no later than September 30, 2027. \nSubmission and Review Dates and Times \n\u2022 Pre-Application (Preproposal) Submission Deadline: 5:00 p.m. Eastern Time (ET), \nAugust 5, 2026 \n\u2022 Invitation to Submit an Application: September 16, 2026 \n\u2022 Application Submission Deadline: 11:59 p.m. ET, November 4, 2026  \n\u2022 End of Application Verification Period: 5:00 p.m. ET, November 12, 2026  \n\u2022 Peer Review: January 2027 \n\u2022 Programmatic Review: March 2027 \nAnnouncement Type: Initial  \nFunding Opportunity Number: HT942526BMFRPIDA \nAssistance Listing Number: 12.420  \n \n ",
+      "section": null,
+      "anchor": null
+    },
+    {
+      "page": 5,
+      "text": "Section Shortcuts \nBasic Information | Eligibility | Program Description | Application Contents and Format | Submission Requirements \nApplication Review Information | Federal Award Notices | Post-Award Requirements | Other Information \nFY26 Bone Marrow Failure Idea Development Award 5 \n2. Eligibility Information \n2.1. Eligible Applicants \n2.1.1. Organization  \nExtramural and intramural U.S. Department of War (DOW) organizations are eligible to apply, \nincluding foreign and domestic organizations, for-profit and nonprofit organizations, and \npublic or private entities.  \n2.1.2. Principal Investigator \nIndependent investigators affiliated with an eligible organization are eligible to be named PI on \nthe application, regardless of ethnicity, nationality or citizenship status. \nAn investigator may be named as a PI on a maximum of two applications to this program \nannouncement. If an investigator is named as a PI on more than two BMFRP IDA applications, \nonly the first two applications received will be accepted; additional applications will be \nadministratively withdrawn. \nEstablished Investigators: Investigators who are 10 or more years from obtaining their first \nappointment as an independent investigator at the time of the application submission deadline \nare eligible to be named as the EI on the application. The EI should demonstrate BMF disease-\nrelated expertise and background through their funding and publication record. The EI should \nplan research collaborations and dedicate a level of effort that is appropriate for the successful \nconduct of the proposed work.  \nEarly-Career Investigators: Investigators who are less than 10 years from obtaining their first \nappointment as an independent investigator at the time of the application submission deadline \nare eligible to be named as the ECI on the application. Time spent on extended family medical \nleave will not count against the 10-year eligibility restriction, and associated lapses in research \ntime and appointments should be articulated in the application. The biographical sketch should \nclearly articulate the PI\u2019s current appointment status and aggregate time from first appointment \nas an independent investigator. Postdoctoral or clinical fellows are not eligible for ECI \ndesignation. The ECI\u2019s training should demonstrate the ability to accomplish the proposed \nwork. The PI should demonstrate institutional commitment beyond financial backing such as, \nbut not limited to, independent laboratory space, dedicated research time and potential \ncollaborations. The ECI should propose to dedicate a level of effort for the proposed work that is \nappropriate to successfully conduct the research project. \n2.2. Cost Sharing \nCost sharing is not an eligibility requirement.  \n2.3. Other \nAwards are made to eligible organizations, not to individuals. Refer to the GAI for additional \nrecipient qualification requirements. ",
+      "section": null,
+      "anchor": null
+    }
+  ]
+}

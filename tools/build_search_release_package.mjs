@@ -238,6 +238,8 @@ async function run() {
     "assets/app-config.js",
     "assets/app.css",
     "assets/app.js",
+    "assets/submission-schedule.js",
+    "assets/saved.js",
     "assets/site-shell.js",
     "assets/site-shell.css",
     "assets/site-nav.js",

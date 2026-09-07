@@ -1,0 +1,41 @@
+{
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/mps-materials-mps-materials-research-programs/nsf23-612/solicitation",
+    "retrieved_at": "2026-09-07T12:37:03.125984+00:00",
+    "sha256": "f975225964be8b33f3403a77de1ff6755e0d3fb4f9e042d5229887ec1a3631c7"
+  },
+  "document_name": null,
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "html_excerpt",
+  "text": "<h2>Eligibility and Cost Sharing</h2><p>Limit on Number of Proposals per Organization:</p><p>There are no restrictions or limits.</p><p>Limit on Number of Proposals per PI or co-PI:</p><p>The NSF fiscal year begins on October 1st and ends on September 30th of the following year. The submission date of a proposal from an investigator, whether as PI or co-PI, to any of the programs covered by this solicitation cannot be within the same fiscal year as another proposal from the same investigator, whether as PI or co-PI, to any DMR-TMRP. A list of DMR-TMRPs can be found at https://www.nsf.gov/funding/programs.jsp?org=DMR, under &quot;Topical Materials Research Programs.&quot; Failure to observe this submission constraint will lead to the offending proposal(s) being returned without review. This restriction also includes proposals under Grant Opportunities for Academic Liaison with Industry (GOALI), Facilitating Research at Primarily Undergraduate Institutions (RUI/ROA), Computational and Data-Enabled Science and Engineering (CDS&amp;E), international collaborative research programs, as well as any other type of proposal submitted directly to the TMRPs. There are no limits to participating as Faculty Associate (as defined in PAPPG Exhibit II-3.A.2) on multiple proposals concurrently under review.</p><p>Inclusion of voluntary committed cost sharing is prohibited.</p>",
+  "annotations": [
+    {
+      "location": "Eligibility, Limit on Number of Proposals per Organization",
+      "rationale": "The explicit no-limit field applies to the organization, independently of PI rules.",
+      "require": {
+        "type": "institutional_submission_policy",
+        "subject": "organization",
+        "value": {
+          "unlimited": true,
+          "maximum": null
+        }
+      }
+    },
+    {
+      "location": "Cost Sharing Requirements",
+      "rationale": "Prohibited voluntary committed cost sharing is not a mandatory contribution.",
+      "require": {
+        "type": "cost_share",
+        "value": false,
+        "obligation": "voluntary_committed_prohibited"
+      }
+    },
+    {
+      "location": "Eligibility, organization and PI fields",
+      "rationale": "A PI limit must never become an institutional limit.",
+      "forbid": {
+        "type": "limited_submission"
+      }
+    }
+  ]
+}

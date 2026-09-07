@@ -1,0 +1,38 @@
+{
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/stem-k-12-nsf-stem-k-12/nsf25-545/solicitation",
+    "sha256": "0ffd3a33573482a473b50fcc66f6dd61f7e3ba4073f989bce37bc53371babf7a",
+    "retrieved_at": "2026-09-07T12:37:04.634508+00:00"
+  },
+  "annotations": [
+    {
+      "location": "Cost Sharing Requirements",
+      "rationale": "Voluntary committed prohibition must not become a required match.",
+      "require": {
+        "type": "cost_share",
+        "value": false,
+        "obligation": "voluntary_committed_prohibited"
+      }
+    },
+    {
+      "location": "Limit on Number of Proposals per Organization",
+      "rationale": "The explicit no-restrictions field belongs to the organization.",
+      "require": {
+        "type": "institutional_submission_policy",
+        "value": {
+          "unlimited": true,
+          "maximum": null
+        }
+      }
+    },
+    {
+      "location": "Full Proposal Deadline(s), Proposals Accepted Anytime",
+      "rationale": "No numeric deadline may be invented from the open submission field.",
+      "forbid": {
+        "type": "deadline"
+      }
+    }
+  ],
+  "format": "html_excerpt",
+  "text": "<h2>Eligibility and Submission Fields</h2><p>Full Proposal Deadline(s) (due by 5 p.m. submitting organization&#x27;s local time):</p><p>Proposals Accepted Anytime</p><p>Important Information And Revision Notes</p><p>Limit on Number of Proposals per Organization:</p><p>There are no restrictions or limits.</p><p>Limit on Number of Proposals per PI or co-PI:</p><p>Inclusion of voluntary committed cost sharing is prohibited.</p><p>Proposal Review Information Criteria</p><p>D. Research.gov/Grants.gov Requirements</p>"
+}

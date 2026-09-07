@@ -1,0 +1,47 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354568",
+    "retrieved_at": "2026-09-07T12:53:09.761960+00:00",
+    "sha256": "e0d726d61ce72d12111d0449e7699a09d5e32cc472e752569aec5f3978956c52"
+  },
+  "document_name": "DE-FOA-0003215-Part 2.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "hgeo_section_excerpt",
+  "text": "===== 15 =====\n1.3.1. TA 1—Subtopic 1A:  Coal \n• Mining and Processing: \n• Sensors for real-time monitoring or digital twins to enable timely operational \nchanges and pathways for automation and remote operations. \n• Novel and efficient methods for extracting critical minerals and materials (CMM) \nand rare earth elements (REE), from coal-based byproducts. \n• Power and Capture: \n• Development of advanced, cost-effective and scalable technologies for the \nmanagement of water and co-products from existing coal-power plants (including \ncoal combustion residuals, gypsum, zero-liquid discharge, etc.). \n• Development of advanced carbon dioxide (CO2) capture materials to \neconomically capture waste CO2 from coal-fired power plants. \n• Conversion and Products: \n• Exploration of marketable products from coal conversion via technoeconomic \nanalysis. \n• Low-temperature electrochemical conversion of CO2 to CO or formic acid.\n===== 15 =====\n1.3.2. TA 1—Subtopic 1B:  Oil & Gas \n===== 16 =====\n \nVersion 4.0  Page 16 of 43 \n \n \nNotice of Funding Opportunity Part 1 \nSection III: Program Description \n \n \n \n• Optimization of Oil & Gas Resources: \n• Development of advanced characterization techniques for unconventional \nreservoirs (e.g., shale, tight oil/gas) to improve resource assessment and predict \noptimal extraction strategies. \n• Exploration of the underlying fluid dynamics, rheology, and geochemical \ninteractions of engineered fracturing fluids, or the physics of rock failure under \nalternative stimulation approaches that maximize resource extraction. \n• Methods for extracting CMM and REE from produced water and other oil and gas \nwaste streams. \n \n• Artificial Intelligence (AI) and Machine Learning (ML) for Digital Oilfields: \n• Application of advanced AI/ML algorithms for predictive modeling of reservoir \nbehavior, optimizing production, and enhancing decision-making. \n• Development of intelligent autonomous systems for\n===== 16 =====\n1.3.3. TA 1—Subtopic 1C:  Geothermal  \n• Extreme Environment Drilling and Production: \n• Development and testing of next-generation materials for life cycle reductions in \nwell field development cost (e.g., alloys, composites, coatings, seals, smart \nmaterials) with enhanced durability for high-pressure, high-temperature \ngeothermal environments.  \n• Enhanced Geothermal Systems (EGS) and Reservoir Engineering: \n• Advanced modeling and characterization of subsurface fracture networks to \noptimize EGS development and performance. \n• Novel stimulation and operational strategies to create and sustain permeability in \ngeothermal reservoirs. \n• Critical Mineral Extraction from Geothermal Brines: \n• Development of highly selective and efficient technologies for the direct \nextraction of lithium and other critical minerals from geothermal fluids. \n \n1.4    Technical Elements that Must be Included in Applications \nRefer to Section IV.D.3 Technical Volume for a table of technical elements that m",
+  "excerpt_assembly": "Noncontiguous opening scientific paragraphs with original page markers; this excerpt does not represent all NOFO constraints.",
+  "annotations": [
+    {
+      "location": "PDF page 15, scientific Topic/Subtopic 1A",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1A",
+        "page_start": 15
+      },
+      "contains_text": {
+        "text": "Sensors for real-time monitoring"
+      }
+    },
+    {
+      "location": "PDF page 15, scientific Topic/Subtopic 1B",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1B",
+        "page_start": 15
+      },
+      "contains_text": {
+        "text": "characterization"
+      }
+    },
+    {
+      "location": "PDF page 16, scientific Topic/Subtopic 1C",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1C",
+        "page_start": 16
+      },
+      "contains_text": {
+        "text": "next-generation"
+      }
+    }
+  ]
+}

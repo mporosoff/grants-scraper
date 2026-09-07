@@ -1,3 +1,4 @@
+import { installSubmissionSchedule } from "../helpers/submission-schedule.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
@@ -135,6 +136,7 @@ test("card actions preserve every prior route in one lazily materialized grouped
   };
   for (const name of ["perAwardLabel", "programFundingLabel", "eligibilityOverview", "formatDate", "amendmentNotice", "matchedTopics", "truncate", "structuredDescription", "fundingEvidenceLabel", "deadlineEvidenceLabel", "deadlineRows", "pageFieldProvenance", "matchExplanation"]) context[name] = () => "";
   vm.createContext(context);
+  installSubmissionSchedule(context, app);
   for (const name of ["escapeHtml", "escapeAttribute", "safeUrl", "safeEmail", "recordId", "primaryContact", "contactOverview", "programContactAction", "officialActions", "opportunityTeamScopeId", "resultCard"]) vm.runInContext(fn(name), context);
   const html = context.resultCard({ index: 0 }, 1);
   const card = load(html);

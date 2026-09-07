@@ -1,0 +1,108 @@
+{
+  "record": {
+    "opportunity_id": "363396",
+    "close_date": "2026-10-09",
+    "close_date_note": "Letters of Interest (LOI) can be submitted beginning at 11:59 a.m. Eastern Time (ET) on September 8, 2026, until 11:59 a.m. ET on October 9,2026.",
+    "deadlines": [
+      {
+        "kind": "estimated_application",
+        "date": "2026-10-09",
+        "time": "11:59 a.m.",
+        "timezone": "Eastern Time",
+        "note": "Letters of Interest (LOI) can be submitted beginning at 11:59 a.m. Eastern Time (ET) on September 8, 2026, until 11:59 a.m. ET on October 9,2026.",
+        "estimated": true,
+        "source": "Grants.gov XML extract",
+        "source_url": "https://www.grants.gov/search-results-detail/363396",
+        "source_field": "EstimatedSynopsisCloseDate",
+        "confidence": "official_estimate",
+        "detail_checked_at": "2026-08-21T16:38:23.903640Z"
+      },
+      {
+        "kind": "letter_of_intent",
+        "date": "2026-10-09",
+        "time": "11:59 a.m.",
+        "timezone": "East",
+        "estimated": false,
+        "source": "Official notice (machine extracted)",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275",
+        "confidence": "machine_extracted_needs_verification",
+        "evidence_id": "evidence-363396-95da3aa1bf39",
+        "required": false
+      },
+      {
+        "kind": "application",
+        "date": "2026-10-09",
+        "time": "11:59 a.m.",
+        "timezone": "East",
+        "estimated": false,
+        "source": "Official notice (machine extracted)",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275",
+        "confidence": "machine_extracted_needs_verification",
+        "evidence_id": "evidence-363396-090cb23b686e",
+        "required": true
+      }
+    ]
+  },
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275",
+    "name": "PART 2026 NOFO v2.pdf",
+    "source_kind": "primary_notice",
+    "content_type": "application/pdf",
+    "sha256": "03d318c53dcf2114abf77ae56f3a840153fa089f27e0ecc366c4ffe1a842d7be",
+    "version": 2,
+    "first_seen_at": "2026-08-06T10:33:14.856349Z",
+    "last_seen_at": "2026-09-05T13:28:23.030410Z",
+    "changed_since_previous": true
+  },
+  "source_checked_at": "2026-09-05T13:28:23.030410Z",
+  "legacy_facts": [
+    {
+      "id": "evidence-363396-95da3aa1bf39",
+      "type": "deadline",
+      "label": "Letter of intent deadline",
+      "value": "2026-10-09",
+      "display_value": "2026-10-09 · 11:59 a.m. East",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275#page=2",
+        "document_name": "PART 2026 NOFO v2.pdf",
+        "sha256": "03d318c53dcf2114abf77ae56f3a840153fa089f27e0ecc366c4ffe1a842d7be",
+        "page": 2,
+        "section": null,
+        "location": "page 2",
+        "quote": "…Funding Opportunity (NOFO) Assistance Listing Number: 10.757 Dates: LOIs can be submitted beginning at 11:59 a.m. Eastern Time (ET) on September 8, 2026 until 11:59 a.m. ET on October 9, 2026. Executive Summary: The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is solicit…",
+        "extracted_at": "2026-08-06T10:33:14.856349Z"
+      },
+      "deadline_kind": "letter_of_intent",
+      "date": "2026-10-09",
+      "time": "11:59 a.m.",
+      "timezone": "East",
+      "required": false
+    },
+    {
+      "id": "evidence-363396-090cb23b686e",
+      "type": "deadline",
+      "label": "Full application deadline",
+      "value": "2026-10-09",
+      "display_value": "2026-10-09 · 11:59 a.m. East",
+      "confidence": "machine_extracted_needs_verification",
+      "citation": {
+        "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275",
+        "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354275#page=17",
+        "document_name": "PART 2026 NOFO v2.pdf",
+        "sha256": "03d318c53dcf2114abf77ae56f3a840153fa089f27e0ecc366c4ffe1a842d7be",
+        "page": 17,
+        "section": null,
+        "location": "page 17",
+        "quote": "…applicant. 4.4 Submission Dates and T imes (a) LOI Submissions. LOIs must be submitted beginning at 11:59 a.m. Eastern Time (ET) on September 8,2026, and until 11:59 a.m. ET on October 9, 2026. Letters of Interest will not be accepted after 11:59 a.m. ET on October 9, 2026. (b) Application Submissions. A LOI submitter that receives an Invitation to Proceed…",
+        "extracted_at": "2026-08-06T10:33:14.856349Z"
+      },
+      "deadline_kind": "application",
+      "date": "2026-10-09",
+      "time": "11:59 a.m.",
+      "timezone": "East",
+      "required": true
+    }
+  ]
+}

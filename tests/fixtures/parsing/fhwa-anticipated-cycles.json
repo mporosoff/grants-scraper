@@ -1,0 +1,1471 @@
+{
+  "opportunity_id": "348923",
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+    "name": "693JJ323NF00014.pdf",
+    "source_kind": "primary_notice",
+    "content_type": "application/pdf",
+    "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+    "bytes": 300915,
+    "etag": null,
+    "last_modified": null,
+    "version": 1,
+    "first_seen_at": "2026-07-26T18:37:51.451981Z",
+    "last_seen_at": "2026-09-07T12:37:00.920620Z",
+    "changed_since_previous": false
+  },
+  "source_checked_at": "2026-09-07T12:37:00.920620Z",
+  "containers": [
+    {
+      "anchor": null,
+      "layout_rows": [
+        {
+          "cells": [
+            {
+              "column_end": 69,
+              "column_start": 0,
+              "text": "NOTICE OF FUNDING OPPORTUNITY FOR Fiscal Year (FY) 2022-2026 Advanced"
+            }
+          ],
+          "line": 1,
+          "text": "NOTICE OF FUNDING OPPORTUNITY FOR Fiscal Year (FY) 2022-2026 Advanced"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 47,
+              "column_start": 0,
+              "text": "Digital Construction Management Systems (ADCMS)"
+            }
+          ],
+          "line": 2,
+          "text": "Digital Construction Management Systems (ADCMS)"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 7,
+              "column_start": 0,
+              "text": "AGENCY:"
+            },
+            {
+              "column_end": 80,
+              "column_start": 9,
+              "text": "U.S. Department of Transportation (DOT), Federal Highway Administration"
+            }
+          ],
+          "line": 4,
+          "text": "AGENCY:  U.S. Department of Transportation (DOT), Federal Highway Administration"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 6,
+              "column_start": 0,
+              "text": "(FHWA)"
+            }
+          ],
+          "line": 5,
+          "text": "(FHWA)"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 7,
+              "column_start": 0,
+              "text": "ACTION:"
+            },
+            {
+              "column_end": 55,
+              "column_start": 9,
+              "text": "Notice of Funding Opportunity (NOFO) for ADCMS"
+            }
+          ],
+          "line": 7,
+          "text": "ACTION:  Notice of Funding Opportunity (NOFO) for ADCMS"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 27,
+              "column_start": 0,
+              "text": "FUNDING OPPORTUNITY NUMBER:"
+            },
+            {
+              "column_end": 44,
+              "column_start": 29,
+              "text": "693JJ323NF00014"
+            }
+          ],
+          "line": 9,
+          "text": "FUNDING OPPORTUNITY NUMBER:  693JJ323NF00014"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 26,
+              "column_start": 0,
+              "text": "ASSISTANCE LISTING NUMBER:"
+            },
+            {
+              "column_end": 77,
+              "column_start": 28,
+              "text": "20.200 - Highway Research and Development Program"
+            }
+          ],
+          "line": 11,
+          "text": "ASSISTANCE LISTING NUMBER:  20.200 - Highway Research and Development Program"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 23,
+              "column_start": 0,
+              "text": "TOTAL AMOUNT AVAILABLE:"
+            },
+            {
+              "column_end": 75,
+              "column_start": 25,
+              "text": "This NOFO will result in the distribution of up to"
+            }
+          ],
+          "line": 13,
+          "text": "TOTAL AMOUNT AVAILABLE:  This NOFO will result in the distribution of up to"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 92,
+              "column_start": 0,
+              "text": "$34 million of Federal funds for combined FYs 2022 and 2023 and up to $17 million of Federal"
+            }
+          ],
+          "line": 14,
+          "text": "$34 million of Federal funds for combined FYs 2022 and 2023 and up to $17 million of Federal"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 39,
+              "column_start": 0,
+              "text": "funds each for FY 2024, 2025, and 2026."
+            },
+            {
+              "column_end": 93,
+              "column_start": 41,
+              "text": "The actual amount available to be awarded under this"
+            }
+          ],
+          "line": 15,
+          "text": "funds each for FY 2024, 2025, and 2026.  The actual amount available to be awarded under this"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 52,
+              "column_start": 0,
+              "text": "notice will be subject to the availability of funds."
+            },
+            {
+              "column_end": 99,
+              "column_start": 54,
+              "text": "This NOFO will result in the award of grants."
+            }
+          ],
+          "line": 16,
+          "text": "notice will be subject to the availability of funds.  This NOFO will result in the award of grants."
+        },
+        {
+          "cells": [
+            {
+              "column_end": 26,
+              "column_start": 0,
+              "text": "DEADLINE FOR APPLICATIONS:"
+            },
+            {
+              "column_end": 80,
+              "column_start": 28,
+              "text": "For FYs 2022 and 2023, applications must be received"
+            }
+          ],
+          "line": 18,
+          "text": "DEADLINE FOR APPLICATIONS:  For FYs 2022 and 2023, applications must be received"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 39,
+              "column_start": 0,
+              "text": "by August 28, 2023, at 11:59 p.m., EDT."
+            },
+            {
+              "column_end": 90,
+              "column_start": 41,
+              "text": "See Attachment A for application deadlines for FY"
+            }
+          ],
+          "line": 19,
+          "text": "by August 28, 2023, at 11:59 p.m., EDT.  See Attachment A for application deadlines for FY"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 10,
+              "column_start": 0,
+              "text": "2022-2026."
+            },
+            {
+              "column_end": 86,
+              "column_start": 12,
+              "text": "FHWA will make a call for submissions announcement for FYs 2024, 2025, and"
+            }
+          ],
+          "line": 20,
+          "text": "2022-2026.  FHWA will make a call for submissions announcement for FYs 2024, 2025, and"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 85,
+              "column_start": 0,
+              "text": "2026 in accordance with Attachment A at https://www.fhwa.dot.gov/construction/ADCMS/."
+            }
+          ],
+          "line": 21,
+          "text": "2026 in accordance with Attachment A at https://www.fhwa.dot.gov/construction/ADCMS/."
+        },
+        {
+          "cells": [
+            {
+              "column_end": 93,
+              "column_start": 0,
+              "text": "The FHWA plans to conduct outreach regarding this program in the form of a virtual meeting on"
+            }
+          ],
+          "line": 23,
+          "text": "The FHWA plans to conduct outreach regarding this program in the form of a virtual meeting on"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 33,
+              "column_start": 0,
+              "text": "July 25, 2023, at 2:00 p.m., EDT."
+            },
+            {
+              "column_end": 89,
+              "column_start": 35,
+              "text": "To join the Webinar, follow the instructions posted on"
+            }
+          ],
+          "line": 24,
+          "text": "July 25, 2023, at 2:00 p.m., EDT.  To join the Webinar, follow the instructions posted on"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 45,
+              "column_start": 0,
+              "text": "https://www.fhwa.dot.gov/construction/ADCMS/."
+            },
+            {
+              "column_end": 86,
+              "column_start": 47,
+              "text": "The audio portion of the Webinar can be"
+            }
+          ],
+          "line": 25,
+          "text": "https://www.fhwa.dot.gov/construction/ADCMS/.  The audio portion of the Webinar can be"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 39,
+              "column_start": 0,
+              "text": "accessed from this teleconference line:"
+            },
+            {
+              "column_end": 79,
+              "column_start": 41,
+              "text": "TOLL FREE +1 669-254-5252; ACCESS CODE"
+            }
+          ],
+          "line": 26,
+          "text": "accessed from this teleconference line:  TOLL FREE +1 669-254-5252; ACCESS CODE"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 35,
+              "column_start": 0,
+              "text": "845380 and WEBINAR ID 160 551 5559."
+            },
+            {
+              "column_end": 87,
+              "column_start": 37,
+              "text": "The FHWA is committed to providing equal access to"
+            }
+          ],
+          "line": 27,
+          "text": "845380 and WEBINAR ID 160 551 5559.  The FHWA is committed to providing equal access to"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 45,
+              "column_start": 0,
+              "text": "this meeting (or event) for all participants."
+            },
+            {
+              "column_end": 101,
+              "column_start": 47,
+              "text": "If you need alternative formats or services because of"
+            }
+          ],
+          "line": 28,
+          "text": "this meeting (or event) for all participants.  If you need alternative formats or services because of"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 96,
+              "column_start": 0,
+              "text": "a disability, please contact David Scott at (651) 318-5402 or via email david.scott@dot.gov with"
+            }
+          ],
+          "line": 29,
+          "text": "a disability, please contact David Scott at (651) 318-5402 or via email david.scott@dot.gov with"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 96,
+              "column_start": 0,
+              "text": "your request by close of business at least 5 business days (July 19, 2023) prior to the Webinar."
+            }
+          ],
+          "line": 30,
+          "text": "your request by close of business at least 5 business days (July 19, 2023) prior to the Webinar."
+        },
+        {
+          "cells": [
+            {
+              "column_end": 23,
+              "column_start": 0,
+              "text": "SUBMIT APPLICATIONS TO:"
+            },
+            {
+              "column_end": 72,
+              "column_start": 25,
+              "text": "The FHWA uses www.grants.gov for receipt of all"
+            }
+          ],
+          "line": 32,
+          "text": "SUBMIT APPLICATIONS TO:  The FHWA uses www.grants.gov for receipt of all"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 13,
+              "column_start": 0,
+              "text": "applications."
+            },
+            {
+              "column_end": 97,
+              "column_start": 15,
+              "text": "Applicants must register and use the system to submit applications electronically."
+            }
+          ],
+          "line": 33,
+          "text": "applications.  Applicants must register and use the system to submit applications electronically."
+        },
+        {
+          "cells": [
+            {
+              "column_end": 94,
+              "column_start": 0,
+              "text": "Applicants are encouraged to register in advance of the submission deadline and to register to"
+            }
+          ],
+          "line": 34,
+          "text": "Applicants are encouraged to register in advance of the submission deadline and to register to"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 59,
+              "column_start": 0,
+              "text": "receive notifications of updates/amendments to this notice."
+            },
+            {
+              "column_end": 99,
+              "column_start": 61,
+              "text": "Approval of user registrations for the"
+            }
+          ],
+          "line": 35,
+          "text": "receive notifications of updates/amendments to this notice.  Approval of user registrations for the"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 28,
+              "column_start": 0,
+              "text": "site may take several weeks."
+            },
+            {
+              "column_end": 96,
+              "column_start": 30,
+              "text": "It is the Applicant’s responsibility to monitor for any updates to"
+            }
+          ],
+          "line": 36,
+          "text": "site may take several weeks.  It is the Applicant’s responsibility to monitor for any updates to"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 12,
+              "column_start": 0,
+              "text": "this notice."
+            }
+          ],
+          "line": 37,
+          "text": "this notice."
+        }
+      ],
+      "page": 1,
+      "section": null,
+      "structure": [
+        {
+          "block_id": "pdf-1-1",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 0,
+          "repeated_header": false,
+          "span": [
+            0,
+            70
+          ],
+          "text": "NOTICE OF FUNDING OPPORTUNITY FOR Fiscal Year (FY) 2022-2026 Advanced ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-2",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 1,
+          "repeated_header": false,
+          "span": [
+            71,
+            119
+          ],
+          "text": "Digital Construction Management Systems (ADCMS) ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-3",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 2,
+          "repeated_header": false,
+          "span": [
+            120,
+            121
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-4",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 3,
+          "repeated_header": false,
+          "span": [
+            122,
+            202
+          ],
+          "text": "AGENCY: U.S. Department of Transportation (DOT), Federal Highway Administration ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-5",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 4,
+          "repeated_header": false,
+          "span": [
+            203,
+            210
+          ],
+          "text": "(FHWA) ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-6",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 5,
+          "repeated_header": false,
+          "span": [
+            211,
+            212
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-7",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 6,
+          "repeated_header": false,
+          "span": [
+            213,
+            268
+          ],
+          "text": "ACTION: Notice of Funding Opportunity (NOFO) for ADCMS ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-8",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 7,
+          "repeated_header": false,
+          "span": [
+            269,
+            270
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-9",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 8,
+          "repeated_header": false,
+          "span": [
+            271,
+            315
+          ],
+          "text": "FUNDING OPPORTUNITY NUMBER: 693JJ323NF00014 ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-10",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 9,
+          "repeated_header": false,
+          "span": [
+            316,
+            317
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-11",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 10,
+          "repeated_header": false,
+          "span": [
+            318,
+            395
+          ],
+          "text": "ASSISTANCE LISTING NUMBER: 20.200 - Highway Research and Development Program ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-12",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 11,
+          "repeated_header": false,
+          "span": [
+            396,
+            397
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-13",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 12,
+          "repeated_header": false,
+          "span": [
+            398,
+            473
+          ],
+          "text": "TOTAL AMOUNT AVAILABLE: This NOFO will result in the distribution of up to ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-14",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 13,
+          "repeated_header": false,
+          "span": [
+            474,
+            567
+          ],
+          "text": "$34 million of Federal funds for combined FYs 2022 and 2023 and up to $17 million of Federal ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-15",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 14,
+          "repeated_header": false,
+          "span": [
+            568,
+            661
+          ],
+          "text": "funds each for FY 2024, 2025, and 2026. The actual amount available to be awarded under this ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-16",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 15,
+          "repeated_header": false,
+          "span": [
+            662,
+            761
+          ],
+          "text": "notice will be subject to the availability of funds. This NOFO will result in the award of grants. ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-17",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 16,
+          "repeated_header": false,
+          "span": [
+            762,
+            763
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-18",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 17,
+          "repeated_header": false,
+          "span": [
+            764,
+            844
+          ],
+          "text": "DEADLINE FOR APPLICATIONS: For FYs 2022 and 2023, applications must be received ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-19",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 18,
+          "repeated_header": false,
+          "span": [
+            845,
+            935
+          ],
+          "text": "by August 28, 2023, at 11:59 p.m., EDT. See Attachment A for application deadlines for FY ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-20",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 19,
+          "repeated_header": false,
+          "span": [
+            936,
+            1022
+          ],
+          "text": "2022-2026. FHWA will make a call for submissions announcement for FYs 2024, 2025, and ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-21",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 20,
+          "repeated_header": false,
+          "span": [
+            1023,
+            1109
+          ],
+          "text": "2026 in accordance with Attachment A at https://www.fhwa.dot.gov/construction/ADCMS/. ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-22",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 21,
+          "repeated_header": false,
+          "span": [
+            1110,
+            1111
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-23",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 22,
+          "repeated_header": false,
+          "span": [
+            1112,
+            1206
+          ],
+          "text": "The FHWA plans to conduct outreach regarding this program in the form of a virtual meeting on ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-24",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 23,
+          "repeated_header": false,
+          "span": [
+            1207,
+            1296
+          ],
+          "text": "July 25, 2023, at 2:00 p.m., EDT. To join the Webinar, follow the instructions posted on ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-25",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 24,
+          "repeated_header": false,
+          "span": [
+            1297,
+            1383
+          ],
+          "text": "https://www.fhwa.dot.gov/construction/ADCMS/. The audio portion of the Webinar can be ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-26",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 25,
+          "repeated_header": false,
+          "span": [
+            1384,
+            1463
+          ],
+          "text": "accessed from this teleconference line: TOLL FREE +1 669-254-5252; ACCESS CODE ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-27",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 26,
+          "repeated_header": false,
+          "span": [
+            1464,
+            1551
+          ],
+          "text": "845380 and WEBINAR ID 160 551 5559. The FHWA is committed to providing equal access to ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-28",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 27,
+          "repeated_header": false,
+          "span": [
+            1552,
+            1653
+          ],
+          "text": "this meeting (or event) for all participants. If you need alternative formats or services because of ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-29",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 28,
+          "repeated_header": false,
+          "span": [
+            1654,
+            1751
+          ],
+          "text": "a disability, please contact David Scott at (651) 318-5402 or via email david.scott@dot.gov with ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-30",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 29,
+          "repeated_header": false,
+          "span": [
+            1752,
+            1849
+          ],
+          "text": "your request by close of business at least 5 business days (July 19, 2023) prior to the Webinar. ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-31",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 30,
+          "repeated_header": false,
+          "span": [
+            1850,
+            1851
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-32",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 31,
+          "repeated_header": false,
+          "span": [
+            1852,
+            1924
+          ],
+          "text": "SUBMIT APPLICATIONS TO: The FHWA uses www.grants.gov for receipt of all ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-33",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 32,
+          "repeated_header": false,
+          "span": [
+            1925,
+            2022
+          ],
+          "text": "applications. Applicants must register and use the system to submit applications electronically. ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-34",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 33,
+          "repeated_header": false,
+          "span": [
+            2023,
+            2118
+          ],
+          "text": "Applicants are encouraged to register in advance of the submission deadline and to register to ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-35",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 34,
+          "repeated_header": false,
+          "span": [
+            2119,
+            2218
+          ],
+          "text": "receive notifications of updates/amendments to this notice. Approval of user registrations for the ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-36",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 35,
+          "repeated_header": false,
+          "span": [
+            2219,
+            2315
+          ],
+          "text": "site may take several weeks. It is the Applicant’s responsibility to monitor for any updates to ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-1-37",
+          "kind": "line",
+          "page": 1,
+          "reading_order": 36,
+          "repeated_header": false,
+          "span": [
+            2316,
+            2328
+          ],
+          "text": "this notice.",
+          "toc": false
+        }
+      ],
+      "text": "NOTICE OF FUNDING OPPORTUNITY FOR Fiscal Year (FY) 2022-2026 Advanced \nDigital Construction Management Systems (ADCMS) \n \nAGENCY: U.S. Department of Transportation (DOT), Federal Highway Administration \n(FHWA) \n \nACTION: Notice of Funding Opportunity (NOFO) for ADCMS \n \nFUNDING OPPORTUNITY NUMBER: 693JJ323NF00014 \n \nASSISTANCE LISTING NUMBER: 20.200 - Highway Research and Development Program \n \nTOTAL AMOUNT AVAILABLE: This NOFO will result in the distribution of up to \n$34 million of Federal funds for combined FYs 2022 and 2023 and up to $17 million of Federal \nfunds each for FY 2024, 2025, and 2026. The actual amount available to be awarded under this \nnotice will be subject to the availability of funds. This NOFO will result in the award of grants. \n \nDEADLINE FOR APPLICATIONS: For FYs 2022 and 2023, applications must be received \nby August 28, 2023, at 11:59 p.m., EDT. See Attachment A for application deadlines for FY \n2022-2026. FHWA will make a call for submissions announcement for FYs 2024, 2025, and \n2026 in accordance with Attachment A at https://www.fhwa.dot.gov/construction/ADCMS/. \n \nThe FHWA plans to conduct outreach regarding this program in the form of a virtual meeting on \nJuly 25, 2023, at 2:00 p.m., EDT. To join the Webinar, follow the instructions posted on \nhttps://www.fhwa.dot.gov/construction/ADCMS/. The audio portion of the Webinar can be \naccessed from this teleconference line: TOLL FREE +1 669-254-5252; ACCESS CODE \n845380 and WEBINAR ID 160 551 5559. The FHWA is committed to providing equal access to \nthis meeting (or event) for all participants. If you need alternative formats or services because of \na disability, please contact David Scott at (651) 318-5402 or via email david.scott@dot.gov with \nyour request by close of business at least 5 business days (July 19, 2023) prior to the Webinar. \n \nSUBMIT APPLICATIONS TO: The FHWA uses www.grants.gov for receipt of all \napplications. Applicants must register and use the system to submit applications electronically. \nApplicants are encouraged to register in advance of the submission deadline and to register to \nreceive notifications of updates/amendments to this notice. Approval of user registrations for the \nsite may take several weeks. It is the Applicant’s responsibility to monitor for any updates to \nthis notice.",
+      "toc": false,
+      "truncated": false,
+      "_native_field_values": [
+        [
+          848,
+          878
+        ]
+      ],
+      "_deadline_uncertain_component": true
+    },
+    {
+      "anchor": null,
+      "layout_rows": [
+        {
+          "cells": [
+            {
+              "column_end": 59,
+              "column_start": 29,
+              "text": "ATTACHMENT A – IMPORTANT DATES"
+            }
+          ],
+          "line": 1,
+          "text": "                             ATTACHMENT A – IMPORTANT DATES"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 26,
+              "column_start": 15,
+              "text": "Competition"
+            },
+            {
+              "column_end": 48,
+              "column_start": 37,
+              "text": "Anticipated"
+            },
+            {
+              "column_end": 70,
+              "column_start": 59,
+              "text": "Anticipated"
+            },
+            {
+              "column_end": 92,
+              "column_start": 81,
+              "text": "Anticipated"
+            }
+          ],
+          "line": 3,
+          "text": "               Competition           Anticipated           Anticipated           Anticipated"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 24,
+              "column_start": 20,
+              "text": "Year"
+            },
+            {
+              "column_end": 47,
+              "column_start": 35,
+              "text": "Announcement"
+            },
+            {
+              "column_end": 69,
+              "column_start": 58,
+              "text": "Application"
+            },
+            {
+              "column_end": 91,
+              "column_start": 81,
+              "text": "Award Date"
+            }
+          ],
+          "line": 4,
+          "text": "                    Year           Announcement           Application            Award Date"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 45,
+              "column_start": 41,
+              "text": "Date"
+            },
+            {
+              "column_end": 68,
+              "column_start": 60,
+              "text": "Deadline"
+            }
+          ],
+          "line": 5,
+          "text": "                                         Date               Deadline"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 22,
+              "column_start": 13,
+              "text": "FY 2022 &"
+            },
+            {
+              "column_end": 49,
+              "column_start": 36,
+              "text": "June 27, 2023"
+            },
+            {
+              "column_end": 71,
+              "column_start": 56,
+              "text": "August 28, 2023"
+            },
+            {
+              "column_end": 92,
+              "column_start": 83,
+              "text": "Fall 2023"
+            }
+          ],
+          "line": 6,
+          "text": "             FY 2022 &              June 27, 2023       August 28, 2023            Fall 2023"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 17,
+              "column_start": 13,
+              "text": "2023"
+            }
+          ],
+          "line": 7,
+          "text": "             2023"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 20,
+              "column_start": 13,
+              "text": "FY 2024"
+            },
+            {
+              "column_end": 48,
+              "column_start": 36,
+              "text": "May 31, 2024"
+            },
+            {
+              "column_end": 71,
+              "column_start": 58,
+              "text": "July 31, 2024"
+            },
+            {
+              "column_end": 92,
+              "column_start": 83,
+              "text": "Fall 2024"
+            }
+          ],
+          "line": 8,
+          "text": "             FY 2024                May 31, 2024          July 31, 2024            Fall 2024"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 20,
+              "column_start": 13,
+              "text": "FY 2025"
+            },
+            {
+              "column_end": 48,
+              "column_start": 36,
+              "text": "May 31, 2025"
+            },
+            {
+              "column_end": 71,
+              "column_start": 58,
+              "text": "July 31, 2025"
+            },
+            {
+              "column_end": 92,
+              "column_start": 83,
+              "text": "Fall 2025"
+            }
+          ],
+          "line": 9,
+          "text": "             FY 2025                May 31, 2025          July 31, 2025            Fall 2025"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 20,
+              "column_start": 13,
+              "text": "FY 2026"
+            },
+            {
+              "column_end": 48,
+              "column_start": 36,
+              "text": "May 31, 2026"
+            },
+            {
+              "column_end": 71,
+              "column_start": 58,
+              "text": "July 31, 2026"
+            },
+            {
+              "column_end": 92,
+              "column_start": 83,
+              "text": "Fall 2026"
+            }
+          ],
+          "line": 10,
+          "text": "             FY 2026                May 31, 2026          July 31, 2026            Fall 2026"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 22,
+              "column_start": 17,
+              "text": "Note:"
+            },
+            {
+              "column_end": 88,
+              "column_start": 24,
+              "text": "The FHWA call for submissions announcement on the Program Office"
+            }
+          ],
+          "line": 12,
+          "text": "                 Note:  The FHWA call for submissions announcement on the Program Office"
+        },
+        {
+          "cells": [
+            {
+              "column_end": 72,
+              "column_start": 17,
+              "text": "Website at https://www.fhwa.dot.gov/construction/ADCMS/"
+            }
+          ],
+          "line": 13,
+          "text": "                 Website at https://www.fhwa.dot.gov/construction/ADCMS/"
+        }
+      ],
+      "page": 30,
+      "section": null,
+      "structure": [
+        {
+          "block_id": "pdf-30-1",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 0,
+          "repeated_header": false,
+          "span": [
+            0,
+            31
+          ],
+          "text": "ATTACHMENT A – IMPORTANT DATES ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-2",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 1,
+          "repeated_header": false,
+          "span": [
+            32,
+            33
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-3",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 2,
+          "repeated_header": false,
+          "span": [
+            34,
+            46
+          ],
+          "text": "Competition ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-4",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 3,
+          "repeated_header": false,
+          "span": [
+            47,
+            52
+          ],
+          "text": "Year ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-5",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 4,
+          "repeated_header": false,
+          "span": [
+            53,
+            65
+          ],
+          "text": "Anticipated ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-6",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 5,
+          "repeated_header": false,
+          "span": [
+            66,
+            79
+          ],
+          "text": "Announcement ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-7",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 6,
+          "repeated_header": false,
+          "span": [
+            80,
+            85
+          ],
+          "text": "Date ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-8",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 7,
+          "repeated_header": false,
+          "span": [
+            86,
+            98
+          ],
+          "text": "Anticipated ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-9",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 8,
+          "repeated_header": false,
+          "span": [
+            99,
+            111
+          ],
+          "text": "Application ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-10",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 9,
+          "repeated_header": false,
+          "span": [
+            112,
+            121
+          ],
+          "text": "Deadline ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-11",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 10,
+          "repeated_header": false,
+          "span": [
+            122,
+            134
+          ],
+          "text": "Anticipated ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-12",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 11,
+          "repeated_header": false,
+          "span": [
+            135,
+            146
+          ],
+          "text": "Award Date ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-13",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 12,
+          "repeated_header": false,
+          "span": [
+            147,
+            157
+          ],
+          "text": "FY 2022 & ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-14",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 13,
+          "repeated_header": false,
+          "span": [
+            158,
+            163
+          ],
+          "text": "2023 ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-15",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 14,
+          "repeated_header": false,
+          "span": [
+            164,
+            204
+          ],
+          "text": "June 27, 2023 August 28, 2023 Fall 2023 ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-16",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 15,
+          "repeated_header": false,
+          "span": [
+            205,
+            250
+          ],
+          "text": "FY 2024 May 31, 2024 July 31, 2024 Fall 2024 ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-17",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 16,
+          "repeated_header": false,
+          "span": [
+            251,
+            296
+          ],
+          "text": "FY 2025 May 31, 2025 July 31, 2025 Fall 2025 ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-18",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 17,
+          "repeated_header": false,
+          "span": [
+            297,
+            342
+          ],
+          "text": "FY 2026 May 31, 2026 July 31, 2026 Fall 2026 ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-19",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 18,
+          "repeated_header": false,
+          "span": [
+            343,
+            344
+          ],
+          "text": " ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-20",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 19,
+          "repeated_header": false,
+          "span": [
+            345,
+            417
+          ],
+          "text": " Note: The FHWA call for submissions announcement on the Program Office ",
+          "toc": false
+        },
+        {
+          "block_id": "pdf-30-21",
+          "kind": "line",
+          "page": 30,
+          "reading_order": 20,
+          "repeated_header": false,
+          "span": [
+            418,
+            474
+          ],
+          "text": " Website at https://www.fhwa.dot.gov/construction/ADCMS/",
+          "toc": false
+        }
+      ],
+      "text": "ATTACHMENT A – IMPORTANT DATES \n \nCompetition \nYear \nAnticipated \nAnnouncement \nDate \nAnticipated \nApplication \nDeadline \nAnticipated \nAward Date \nFY 2022 & \n2023 \nJune 27, 2023 August 28, 2023 Fall 2023 \nFY 2024 May 31, 2024 July 31, 2024 Fall 2024 \nFY 2025 May 31, 2025 July 31, 2025 Fall 2025 \nFY 2026 May 31, 2026 July 31, 2026 Fall 2026 \n \n Note: The FHWA call for submissions announcement on the Program Office \n Website at https://www.fhwa.dot.gov/construction/ADCMS/",
+      "toc": false,
+      "truncated": false,
+      "_native_field_values": [
+        [
+          147,
+          203
+        ],
+        [
+          205,
+          249
+        ],
+        [
+          251,
+          295
+        ],
+        [
+          297,
+          341
+        ]
+      ]
+    }
+  ],
+  "expected_dates": [
+    "2023-08-28",
+    "2024-07-31",
+    "2025-07-31",
+    "2026-07-31"
+  ],
+  "expected_qualifiers": [
+    null,
+    "anticipated",
+    "anticipated",
+    "anticipated"
+  ],
+  "annotation": "Original PDF page 30 rendered and inspected: application column only; announcement and award columns excluded. Page 1 establishes the actual August 28, 2023 11:59 p.m. EDT deadline; future fiscal-year rows are expressly anticipated."
+}

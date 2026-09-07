@@ -1,0 +1,48 @@
+{
+  "annotation_method": "Actual CDMRP FY26 source excerpt: prohibition on submitting the NIH plan is separate from the CDMRP plan requested only after a funding recommendation. Annotated from the retained official source receipt, without new retrieval.",
+  "opportunity_id": "362171",
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351795",
+    "name": "HT942526TBDRPIDA_GG.pdf",
+    "source_kind": "primary_notice",
+    "content_type": "application/pdf",
+    "sha256": "57dbd9f07779bbf5bd40a45ca5430e95165ed13f96d7601ef220b0fb1478d6eb",
+    "bytes": 778545,
+    "etag": null,
+    "last_modified": null,
+    "version": 1,
+    "first_seen_at": "2026-07-26T20:05:30.061543Z",
+    "last_seen_at": "2026-08-24T10:48:19.939507Z",
+    "changed_since_previous": false
+  },
+  "source_checked_at": "2026-08-24T10:48:19.939507Z",
+  "legacy_fact": {
+    "id": "evidence-362171-6a2d1c5422c7",
+    "type": "application_component",
+    "label": "Data management plan",
+    "value": "Data management plan",
+    "display_value": "Data management plan",
+    "confidence": "machine_extracted_needs_verification",
+    "citation": {
+      "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351795",
+      "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351795#page=16",
+      "document_name": "HT942526TBDRPIDA_GG.pdf",
+      "sha256": "57dbd9f07779bbf5bd40a45ca5430e95165ed13f96d7601ef220b0fb1478d6eb",
+      "page": 16,
+      "section": null,
+      "location": "page 16",
+      "quote": "…their primary care provider, including results from any screening or diagnostic tests performed as part of the study. Do not submit a copy of the National Institutes of Health Data Management and Sharing Plan or duplicate the Data Management Plan which will be requested only after a recommendation for funding is made. Refer to the CDMRP Directive on Sharin…",
+      "extracted_at": "2026-07-26T20:05:30.061543Z"
+    }
+  },
+  "expected": [
+    {
+      "stage": "application",
+      "obligation": "prohibited"
+    },
+    {
+      "stage": "post_recommendation",
+      "obligation": "conditional"
+    }
+  ]
+}

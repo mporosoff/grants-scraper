@@ -341,6 +341,10 @@ def running_lines(containers, threshold: float = 0.4) -> set:
     """
     counts = Counter()
     for container in containers:
+        # HTML sections have no physical running page header. Shared prose in
+        # neighboring topic sections must not be stripped as page furniture.
+        if container.get("page") is None:
+            continue
         lines = [line.strip() for line in (container.get("text") or "").splitlines()]
         lines = [line for line in lines if line]
         # §6.5's sketch counted `lines[:3] + lines[-3:]` directly, which counts
@@ -351,7 +355,7 @@ def running_lines(containers, threshold: float = 0.4) -> set:
         # twice for being near both ends of a short one.
         for line in dict.fromkeys(lines[:3] + lines[-3:]):
             counts[re.sub(r"\d+", "#", line)] += 1
-    cutoff = threshold * max(1, len(containers))
+    cutoff = threshold * max(1, sum(c.get("page") is not None for c in containers))
     return {line for line, count in counts.items() if count >= cutoff}
 
 

@@ -83,7 +83,12 @@
     return "";
   }
 
-  function deadlineText(record) {
+  function deadlineText(record, now) {
+    const selection = globalThis.FUNDING_SUBMISSION_SCHEDULE?.nextSubmission(record, new Date(now || Date.now()).toISOString().slice(0, 10));
+    if (selection) {
+      const qualifier = globalThis.FUNDING_SUBMISSION_SCHEDULE.ACCESS_LABELS[selection.access];
+      return [selection.date, qualifier].filter(Boolean).join(" · ");
+    }
     const closeDate = cleanDate(record.close_date);
     if (closeDate) return `Closes ${closeDate}`;
     return String(record.deadline_note || record.close_date_note || "");
@@ -162,7 +167,8 @@
         .filter(value => value !== null && value >= 0)
         .reduce((best, value) => best === null ? value : Math.min(best, value), null);
       const closeIn = (() => {
-        const age = daysBetween(record.close_date, now);
+        const nextDate = globalThis.FUNDING_SUBMISSION_SCHEDULE?.nextSubmission(record, new Date(now).toISOString().slice(0, 10)).date;
+        const age = daysBetween(nextDate === undefined ? record.close_date : nextDate, now);
         return age === null ? null : -age;
       })();
       const prepared = {
@@ -533,7 +539,7 @@
         title: prepared.record.title || "Untitled opportunity",
         agency: prepared.record.agency || "",
         url: bestUrl(prepared.record),
-        deadline: deadlineText(prepared.record),
+        deadline: deadlineText(prepared.record, now),
         closeIn: prepared.closeIn,
         closingSoon: prepared.closeIn !== null && prepared.closeIn >= 0 && prepared.closeIn <= 21,
         postedDate: cleanDate(prepared.record.posted_date || prepared.record.source_first_seen_date),

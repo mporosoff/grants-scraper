@@ -1,3 +1,4 @@
+import { installSubmissionSchedule } from "../helpers/submission-schedule.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -57,6 +58,7 @@ test("official actions, calendar, CSV and opportunity watches retain each call's
     document: { createElement: () => ({ click() {}, remove() {} }), body: { appendChild() {} } },
   };
   vm.createContext(context);
+  installSubmissionSchedule(context, sources[3]);
   for (const name of ["escapeHtml", "escapeAttribute", "safeUrl", "safeEmail", "recordId", "primaryContact", "officialActions", "deadlineEvidenceLabel", "fundingEvidenceLabel", "csvCell", "exportCsv", "calendarEvents", "openOpportunityAlert"]) {
     vm.runInContext(fn(name), context);
   }

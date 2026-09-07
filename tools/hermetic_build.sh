@@ -90,6 +90,7 @@ python -m scripts.sources merge \
 python -m scripts.extract_document_evidence \
   --catalog "$OUT/opportunities.js" \
   --cache "$OUT/document_evidence.json" \
+  --structure-cache "$OUT/.work/notice-structure" \
   --max-documents 0 --request-delay 0 \
   --now "$PIPELINE_NOW" >/dev/null
 

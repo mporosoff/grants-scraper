@@ -1,0 +1,39 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353129",
+    "retrieved_at": "2026-09-07T12:37:02.900662+00:00",
+    "sha256": "04690a47b9c2901125ef5ee076916074f93fde9601caf73ce2a6481ed347ae70"
+  },
+  "document_name": "HT942526ALSRPPCTA_GG2.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 4,
+      "section": null,
+      "anchor": null,
+      "text": "• Clinical Care: Improving aspects of clinical care and symptom management for ALS. \nDistinctive Features: Funding from this award mechanism must support a clinical trial. The \nclinical trial should begin no later than 12 months after the award date or 18 months for U.S. \nFood and Drug Administration (FDA)-regulated studies.  \nProjects proposing a therapeutic intervention (drug, biologic, and/or device) must incorporate \nbiomarkers specific to the intervention into the trial design. \nAll pre-applications and applications are required to incorporate community collaboration, as \ndescribed in Section 3.2.2, to optimize research impact. \nApplications must include a detailed Regulatory Strategy plan that outlines the approach for \nobtaining regulatory approvals, if required, specifically for the funded portion of the study. In \naddition, applications must provide a separate Transition Plan that describes how the outcomes \nof the study will be advanced to the next phase of development, beyond the scope of the funded \nwork. \nFunding Details: The Congressionally Directed Medical Research Programs (CDMRP) expects \nto allot roughly $5.6 million (M) to fund approximately two Pilot Clinical Trial Award applications \nwith total cost caps of $2.8M per award. The maximum period of performance is three years. It \nis anticipated that awards made from this FY26 funding opportunity will be funded with FY26 \nfunds, which will expire for use on September 30, 2032. Awards supported with FY26 funds will \nbe made no later than September 30, 2027. \nSubmission and Review Dates and Times \n• Pre-Application (Preproposal) Submission Deadline: 5:00 p.m. Eastern Time (ET), \nJune 24, 2026 \n• Invitation to Submit an Application: August 3, 2026 \n• Application Submission Deadline: 11:59 p.m. ET, September 30, 2026  \n• End of Application Verification Period: 5:00 p.m. ET, October 6, 2026  \n• Peer Review: November 2026 \n• Programmatic Review: January 2027 \n"
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 4, Funding Details",
+      "rationale": "The source explicitly distinguishes the per-award cap from program funding.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "maximum": 2800000
+        },
+        "subject": "award"
+      }
+    },
+    {
+      "location": "PDF page 4, funding and review block",
+      "rationale": "Funding expiration and review dates do not establish solicitation withdrawal.",
+      "forbid": {
+        "type": "status_signal",
+        "status_signal": "cancelled"
+      }
+    }
+  ]
+}

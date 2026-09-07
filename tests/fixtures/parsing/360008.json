@@ -1,0 +1,79 @@
+{
+  "source": {
+    "url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-FD-25-020.html",
+    "retrieved_at": "2026-09-07T12:37:02.723535+00:00",
+    "sha256": "9d1dd22b90cc36d40e6df7b1b27c31463a2f4c02455e223c581715fd4c7464f8"
+  },
+  "document_name": null,
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "html_excerpt",
+  "text": "<h2>Key Dates</h2>\n<div class=\"col-md-4 datalabel\" data-element-id=\"247135\" data-section-code=\"KD\" data-element-type=\"DATE\">Posted Date</div>\n<div class=\"col-md-4 datalabel\" data-element-id=\"247136\" data-section-code=\"KD\" data-element-type=\"LINKED_ELEMENT\">Open Date (Earliest Submission Date)</div>\n<div class=\"col-md-4 datalabel\" data-element-id=\"247137\" data-section-code=\"KD\" data-element-type=\"TEXT\">Letter of Intent Due Date(s)</div>\n<div class=\"heading4\" data-element-id=\"247138\" data-section-code=\"KD\" data-element-type=\"TEXT\">Application Due Date(s)</div>\n<div data-element-id=\"247138\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">October 21, 2025, by 11:59 PM Eastern Time</div>\n<div data-element-id=\"247138\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">October 20, 2026, by 11:59 PM Eastern Time</div>\n<div data-element-id=\"247138\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">October 19, 2027, by 11:59 PM Eastern Time.</div>\n<div data-element-id=\"247138\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found in the application during the submission process by the due date. Resubmissions ONLY Application Due Date(s): May 19, 2026; May 18, 2027; May 16, 2028 by 11:59 PM Eastern Time. See resubmission eligibility requirement below. Applicants should be aware that on-time submission means that an application is submitted error free (of both Grants.gov and eRA Commons errors) by 11:59 PM Eastern Time on the application due date.</div>\n<div data-element-id=\"247139\" data-element-has-label=\"false\" data-section-code=\"KD\" data-element-type=\"TEXT\">All applications are due by 11:59 PM Eastern Time.</div>\n<div data-element-id=\"247139\" data-element-has-label=\"false\" data-section-code=\"KD\" data-element-type=\"TEXT\">Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found in the application during the submission process by the due date.</div>\n<div data-element-id=\"247140\" data-element-has-label=\"false\" data-section-code=\"KD\" data-element-type=\"CHECKBOX\">No late applications will be accepted for this Notice of Funding Opportunity (NOFO).</div>\n<div class=\"heading4\" data-element-id=\"247141\" data-section-code=\"KD\" data-element-type=\"TEXT\">AIDS Application Due Date(s)</div>\n<div data-element-id=\"247141\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">Not Applicable</div>\n<div class=\"heading4\" data-element-id=\"247142\" data-section-code=\"KD\" data-element-type=\"TEXT\">Scientific Merit Review</div>\n<div data-element-id=\"247142\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">New Applications: February/March 2026, 2027, 2028</div>\n<div data-element-id=\"247142\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">Resubmissions: June 2026, 2027, 2028</div>\n<div class=\"heading4\" data-element-id=\"247143\" data-section-code=\"KD\" data-element-type=\"TEXT\">Earliest Start Date</div>\n<div data-element-id=\"247143\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">July 2026</div>\n<div class=\"col-md-4 datalabel\" data-element-id=\"247144\" data-section-code=\"KD\" data-element-type=\"LINKED_ELEMENT\">Expiration Date</div>\n<div class=\"heading4\" data-element-id=\"247145\" data-section-code=\"KD\" data-element-type=\"TEXT\">Advisory Council Review</div>\n<div data-element-id=\"247145\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">Not Applicable</div>\n<div class=\"col-md-4 datalabel\" data-element-id=\"247146\" data-section-code=\"KD\" data-element-type=\"TEXT\">Due Dates for E.O. 12372</div>\n<div class=\"heading4\" data-element-id=\"247147\" data-section-code=\"KD\" data-element-type=\"TEXT\">Required Application Instructions</div>\n<div data-element-id=\"247147\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">Conformance to all requirements, both in the the Research (R) Instructions How to Apply - Application Guide and in the NOFO, is required and strictly enforced. Applicants must read and follow all application instructions in the How to Apply - Application Guide as well as any program-specific instructions noted in Section IV of this NOFO or an applicable related Notice posted to the Guide for Grants and Contracts. When the program-specific instructions deviate from those in the How to Apply - Application Guide, follow the program-specific instructions.</div>\n<div data-element-id=\"247147\" data-element-has-label=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">Applications that do not comply with these instructions may be delayed or not accepted for review.</div>",
+  "annotations": [
+    {
+      "location": "Key Dates, Application Due Date(s)",
+      "rationale": "The official field separately identifies standard and resubmission-only dates.",
+      "require": {
+        "type": "deadline",
+        "date": "2025-10-21",
+        "application_class": "new",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Key Dates, Application Due Date(s)",
+      "rationale": "The official field separately identifies standard and resubmission-only dates.",
+      "require": {
+        "type": "deadline",
+        "date": "2026-10-20",
+        "application_class": "new",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Key Dates, Application Due Date(s)",
+      "rationale": "The official field separately identifies standard and resubmission-only dates.",
+      "require": {
+        "type": "deadline",
+        "date": "2027-10-19",
+        "application_class": "new",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Key Dates, Application Due Date(s)",
+      "rationale": "The official field separately identifies standard and resubmission-only dates.",
+      "require": {
+        "type": "deadline",
+        "date": "2026-05-19",
+        "application_class": "resubmission",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Key Dates, Application Due Date(s)",
+      "rationale": "The official field separately identifies standard and resubmission-only dates.",
+      "require": {
+        "type": "deadline",
+        "date": "2027-05-18",
+        "application_class": "resubmission",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Key Dates, Application Due Date(s)",
+      "rationale": "The official field separately identifies standard and resubmission-only dates.",
+      "require": {
+        "type": "deadline",
+        "date": "2028-05-16",
+        "application_class": "resubmission",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    }
+  ]
+}

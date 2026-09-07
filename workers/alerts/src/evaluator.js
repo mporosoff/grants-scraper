@@ -1,4 +1,5 @@
 import "../../../assets/award-links.js";
+import "../../../assets/submission-schedule.js";
 
 import { recordId } from "./contract.js";
 import {
@@ -7,6 +8,7 @@ import {
 import { digestEmail, eventEmail, verificationEmail } from "./email.js";
 
 const LINKS_API = globalThis.FUNDING_AWARD_LINKS;
+const SCHEDULE_API = globalThis.FUNDING_SUBMISSION_SCHEDULE;
 const CHANGE_KINDS = new Set(["new", "deadline_changed", "amended", "status_changed", "closed_or_removed"]);
 export const DIGEST_MAX_EVENTS = 25;
 export const EVALUATION_CHANGE_LIMIT = 25;
@@ -82,13 +84,18 @@ function boundedReason(value, maximum = 320) {
   return `${prefix.slice(0, boundary >= Math.floor(maximum * 0.7) ? boundary : maximum - 1).trim()}…`;
 }
 
-function payloadFor(record, detail, env, whyMatched = []) {
+function payloadFor(record, detail, env, whyMatched = [], asOf) {
+  const submission = SCHEDULE_API.nextSubmission(record || {}, asOf);
   return {
     title: String(record?.title || "Funding opportunity").slice(0, 600),
     agency: String(record?.agency || "").slice(0, 300),
     program: programLabel(record),
-    close_date: String(record?.close_date || "").slice(0, 10),
-    detail: String(detail || "").replace(/\s+/g, " ").trim().slice(0, 600),
+    close_date: String(submission.date || "").slice(0, 10),
+    source_close_date: String(record?.close_date || "").slice(0, 10),
+    submission_stage: submission.event?.kind || null,
+    submission_access: submission.access,
+    detail: [detail, submission.access !== "open" ? SCHEDULE_API.ACCESS_LABELS[submission.access] : ""]
+      .filter(Boolean).join(" · ").replace(/\s+/g, " ").trim().slice(0, 600),
     why_matched: whyMatched.slice(0, 2).map(value => boundedReason(value)).filter(Boolean),
     funding_finder_url: fundingFinderUrl(record, env),
     official_url: officialUrl(record),
@@ -219,7 +226,8 @@ function relevantChanges(
 
 async function evaluateOpportunity(store, subscription, assets, env, now, changes, evaluationContext) {
   const definition = JSON.parse(subscription.definition_json);
-  const ids = new Set(definition.opportunity_ids || [definition.opportunity_id]);
+  const ids = new Set((definition.opportunity_ids || [definition.opportunity_id]).map(id =>
+    recordId(SCHEDULE_API.recordById(assets.catalog.opportunities, id) || {opportunity_id: id})));
   const triggers = new Set(definition.triggers);
   let matched = 0;
   for (const event of changes) {
@@ -231,23 +239,24 @@ async function evaluateOpportunity(store, subscription, assets, env, now, change
       eventKey: `${event.type}:${event.id}`,
       eventKind: kind,
       opportunityId: id,
-      payload: payloadFor(event.record, event.detail, env),
+      payload: payloadFor(event.record, event.detail, env, [], isoDate(evaluationContext.evaluationAsOf || now)),
     }, now, evaluationContext);
     if (inserted) matched += 1;
   }
   if (triggers.has("closing_reminders")) {
     for (const id of ids) {
-      const record = assets.catalog.opportunities.find(item => recordId(item) === id);
-      const remaining = record
-        ? daysBetween(isoDate(evaluationContext.evaluationAsOf || now), record.close_date)
+      const record = SCHEDULE_API.recordById(assets.catalog.opportunities, id);
+      const selected = record ? SCHEDULE_API.nextSubmission(record, isoDate(evaluationContext.evaluationAsOf || now)) : null;
+      const remaining = selected?.access === "open"
+        ? daysBetween(isoDate(evaluationContext.evaluationAsOf || now), selected.date)
         : null;
       const threshold = [7, 14, 30].find(value => remaining === value);
       if (threshold) {
         const inserted = await enqueue(store, subscription, {
-          eventKey: `closing:${id}:${record.close_date}:${threshold}`,
+          eventKey: `closing:${id}:${selected.date}:${threshold}`,
           eventKind: "closing_reminder",
           opportunityId: id,
-          payload: payloadFor(record, `${threshold}-day closing reminder`, env),
+          payload: payloadFor(record, `${threshold}-day closing reminder`, env, [], isoDate(evaluationContext.evaluationAsOf || now)),
         }, now, evaluationContext);
         if (inserted) matched += 1;
       }
@@ -277,7 +286,7 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
         eventKey: `strong:${id}:${sourceEvent?.id || assets.changes.generated_at}`,
         eventKind: "strong_match",
         opportunityId: id,
-        payload: payloadFor(record, sourceEvent?.detail || "", env, matchDetails.get(id)?.reasons),
+        payload: payloadFor(record, sourceEvent?.detail || "", env, matchDetails.get(id)?.reasons, asOf),
       }, now, evaluationContext);
       if (inserted) matched += 1;
     }
@@ -308,7 +317,7 @@ async function evaluateProgram(store, subscription, assets, env, now, changes, e
       eventKey: `program:${definition.program_id}:${event.id}`,
       eventKind,
       opportunityId: String(event.opportunity_id || ""),
-      payload: payloadFor(event.record, event.detail, env),
+      payload: payloadFor(event.record, event.detail, env, [], isoDate(evaluationContext.evaluationAsOf || now)),
     }, now, evaluationContext);
     if (inserted) matched += 1;
   }

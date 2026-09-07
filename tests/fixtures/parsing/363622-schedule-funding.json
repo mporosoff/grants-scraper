@@ -1,0 +1,79 @@
+{
+  "format": "html_excerpt",
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/efri-wbc-emerging-frontiers-research-innovation-efri-wave-based/nsf26-524/solicitation",
+    "sha256": "5e760ca667e652f5a01cf95dd4887934a8f17b63bdb8b079acd400bafae3120a",
+    "retrieved_at": "2026-09-07T12:37:01.166607+00:00"
+  },
+  "text": "<h2>Submission and Funding Fields</h2><p>Full Proposal Deadline(s) (due by 5 p.m. submitting organization&#x27;s local time):</p><p>February 11, 2027</p><p>February 10, 2028</p><p>Each prospective Principal Investigator (PI) interested in submitting a proposal to the EFRI Wave-Based Computing solicitation must submit a Concept Outline via email to EFRI2027-2028@nsf.gov by November 19, 2026 for proposal submission for the Fiscal Year (FY) 2027 cycle or by November 16, 2027 for proposal submission for the FY 2028 cycle. Refer to Section V. Proposal Preparation and Submission Instructions for further details.</p><p>The anticipated budget for this program solicitation is $15,000,000 in FY 2027 and $15,000,000 in FY 2028, pending the availability of funds. Each award will be funded as a Standard Grant or Continuing Grant. The anticipated number of awards in each fiscal year will vary depending on the number of Track 1 and Track 2 proposals funded. Track 1 proposals may receive support of $100,000-$400,000 for up to two years. Track 2 proposals may receive support of up to $2,000,000 over four years.</p><p>PO Concurrence email. Upload the Concept Outline PO Concurrence email that indicates PO permission to submit a full proposal.</p>",
+  "annotations": [
+    {
+      "location": "Full Proposal Deadline(s)",
+      "rationale": "Both official full-proposal fields retain the owned local clock and required PO permission.",
+      "require": {
+        "type": "deadline",
+        "date": "2027-02-11",
+        "deadline_kind": "application",
+        "timezone": "applicant_local",
+        "invitation_required": true
+      }
+    },
+    {
+      "location": "Full Proposal Deadline(s)",
+      "rationale": "Both official full-proposal fields retain the owned local clock and required PO permission.",
+      "require": {
+        "type": "deadline",
+        "date": "2028-02-10",
+        "deadline_kind": "application",
+        "timezone": "applicant_local",
+        "invitation_required": true
+      }
+    },
+    {
+      "location": "Important Information and Revision Notes, Concept Outline",
+      "rationale": "The source explicitly pairs each required concept date with a fiscal submission cycle.",
+      "require": {
+        "type": "deadline",
+        "date": "2026-11-19",
+        "deadline_kind": "concept_paper",
+        "required": true,
+        "cycle": "FY2027"
+      }
+    },
+    {
+      "location": "Important Information and Revision Notes, Concept Outline",
+      "rationale": "The source explicitly pairs each required concept date with a fiscal submission cycle.",
+      "require": {
+        "type": "deadline",
+        "date": "2027-11-16",
+        "deadline_kind": "concept_paper",
+        "required": true,
+        "cycle": "FY2028"
+      }
+    },
+    {
+      "location": "Award Information, anticipated budget",
+      "rationale": "The explicit proposal-support sentence owns these per-track bounds.",
+      "require": {
+        "type": "award_range",
+        "track": "Track 1",
+        "value": {
+          "minimum": 100000,
+          "maximum": 400000
+        }
+      }
+    },
+    {
+      "location": "Award Information, anticipated budget",
+      "rationale": "The explicit proposal-support sentence owns these per-track bounds.",
+      "require": {
+        "type": "award_range",
+        "track": "Track 2",
+        "value": {
+          "minimum": null,
+          "maximum": 2000000
+        }
+      }
+    }
+  ]
+}

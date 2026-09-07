@@ -1,0 +1,47 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354383",
+    "retrieved_at": "2026-09-07T12:37:01.542026+00:00",
+    "sha256": "0f00e3a9624fb9cd6a55ef640738c01f9ba3a1627379c2f3adfbb8de98e189bb"
+  },
+  "document_name": "rfa-ck-26-036_v7.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 5,
+      "section": null,
+      "anchor": null,
+      "text": "Key dates \nApplication submission \ndeadline: \nNovember 5, 2026 \nRequired letter of intent \ndeadline: \nSeptember 15, 2026 \nExpected scientific review \ndates: \nDecember 15, 2026 \nExpected secondary review \ndates: \nJanuary 12, 2027 \nExpected award date: \nSeptember 1, 2027 \nExpected start date: \nSeptember 30, 2027 \nExpiration date: \nDecember 7, 2026 \nSee Submit your Application \nfor other submission \nrequirements and deadlines \nthat may apply to this NOFO. \n"
+    },
+    {
+      "page": 45,
+      "section": null,
+      "anchor": null,
+      "text": "Submission requirements \nand deadlines \nRequired letter of intent \nDue on September 15, 2026. \nYou must let us know if you plan to apply for this opportunity. \nWe do this to plan for the number of reviewers we will need to evaluate \napplications. \nYou must submit a letter of intent to apply. \nPlease email the notice to SPittBarnes@cdc.gov. \nIn your email, include: \n• The funding opportunity number and title. \n• Your organization’s name and address. \n• A contact name, phone number, and email address. \n• The descriptive title of your proposed research. \n• Names of your project director or principal investigator and other \nkey personnel. \n• Participating institutions. \nApplication \nDue on November 5, 2026 at 11:59 p.m. ET. \n"
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 45, Required letter of intent",
+      "rationale": "Detailed submission instructions explicitly require the LOI.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "letter_of_intent",
+        "date": "2026-09-15",
+        "required": true
+      }
+    },
+    {
+      "location": "PDF page 45, Application",
+      "rationale": "The application owns its 11:59 p.m. ET clock.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2026-11-05",
+        "time": "11:59 p.m.",
+        "timezone": "ET"
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "source": {
+    "url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-324.html",
+    "sha256": "202fd1ddc0520aa24b08c9c68091e3611778938999d48e611b3af8807ba075ca",
+    "retrieved_at": "2026-09-07T12:37:03.776031+00:00"
+  },
+  "annotations": [
+    {
+      "location": "Key Dates, Application Due Date(s)",
+      "rationale": "The explicitly stated first due date is historical; it must not be replaced with expiration or a guessed recurrence year.",
+      "require": {
+        "type": "deadline",
+        "date": "2025-03-03",
+        "time": "5:00 PM",
+        "timezone": "applicant_local"
+      }
+    },
+    {
+      "location": "Key Dates, Expiration Date",
+      "rationale": "Notice expiration is not an application deadline.",
+      "forbid": {
+        "type": "deadline",
+        "date": "2028-09-08"
+      }
+    }
+  ],
+  "format": "html_excerpt",
+  "text": "<h2>Key Dates</h2><div class=\"row\" data-index=\"20\">\n\t\t\t<div class=\"col-md-4 datalabel\" tabindex=\"0\" data-element-id=\"229389\" data-element-required=\"true\" data-element-has-value=\"true\" data-section-code=\"KD\" data-element-type=\"TEXT\">\n\t\t\t\t\t<a id='_bookmark229389' tabindex='-1' aria-hidden='true'></a>Application Due Date(s) \n\t\t\t</div>\n\t\t<div class=\" col-md-8 datacolumn\">\n                <p>The first Application Due Date is March 3, 2025.</p><p>NCI ESI MERIT Award Extension requests are due during the penultimate award year, either on March 1, July 1, or November 1. For more details, refer to the <a href=\"https://www.cancer.gov/grants-training/grants-funding/funding-opportunities/merit/extension-process\">deadlines table</a> for the NCI ESI MERIT Awards.</p><p>Recipients are encouraged to contact the NCI program director and grants management specialist assigned to the R37 award for details.</p><p>All applications are due by 5:00 PM local time of applicant organization. All <a href=\"https://grants.nih.gov/grants/guide/pa-files/PAR-21-138.html#Application%20Types%20Allowed\">types of non-AIDS applications</a> allowed for this funding opportunity announcement are due on the listed date(s).</p> \n\t\t</div>\n\t</div>\n\n\t\n\t\t\n\t\n\t\n\t\t\n\t\t\n\t<div class=\"row\" data-index=\"26\">\n\t\t\t<div class=\"col-md-4 datalabel\" tabindex=\"0\" data-element-id=\"229395\" data-element-required=\"true\" data-element-has-value=\"true\" data-section-code=\"KD\" data-element-type=\"LINKED_ELEMENT\">\n\t\t\t\t\t<a id='_bookmark229395' tabindex='-1' aria-hidden='true'></a>Expiration Date \n\t\t\t</div>\n\t\t<div class=\" col-md-8 datacolumn\">\n                September 08, 2028 \n\t\t</div>\n\t</div>\n\n\t\n\t\t\n\t\n\t\n\t\t\n\t\t\n\t"
+}

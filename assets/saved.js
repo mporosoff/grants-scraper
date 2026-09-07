@@ -50,6 +50,22 @@
       source: cleanString(record.source, 120),
       source_type: cleanString(record.source_type, 60),
       close_date: cleanString(record.close_date, 10),
+      has_preliminary_stage: record.has_preliminary_stage === true,
+      preliminary_required: typeof record.preliminary_required === "boolean" ? record.preliminary_required : null,
+      ...Object.fromEntries(["deadlines", "submission_requirements"].filter(key => Array.isArray(record[key])).map(key => [key,
+        record[key].slice(0, 50).filter(event => event && typeof event === "object").map(event => ({
+        kind: cleanString(event.kind, 40), date: cleanString(event.date, 10) || null,
+        window_start: cleanString(event.window_start, 10) || null,
+        time: cleanString(event.time, 40) || null, timezone: cleanString(event.timezone, 80) || null,
+        application_class: cleanString(event.application_class, 40) || null,
+        cycle: cleanString(event.cycle, 60) || null, track: cleanString(event.track, 500) || null,
+        required: typeof event.required === "boolean" ? event.required : null,
+        invitation_required: event.invitation_required === true,
+        prerequisite: cleanString(event.prerequisite, 60) || null,
+        rolling: event.rolling === true,
+        date_qualifier: ["recommended", "anticipated"].includes(event.date_qualifier) ? event.date_qualifier : null,
+        estimated: event.estimated === true,
+      }))])),
       url: cleanString(
         record.url || record.detail_page || record.funding_opportunity_url
           || record.primary_document_url,

@@ -26,6 +26,8 @@ from xml.etree.ElementTree import iterparse
 from zipfile import ZipFile
 
 import requests
+from scripts.notice_semantics import institutional_limit_signal
+from scripts.notice_schedule import preliminary_requirement
 
 
 EXTRACT_PAGE = "https://www.grants.gov/xml-extract"
@@ -720,14 +722,14 @@ def normalize_element(element, as_of):
         ),
         "contacts": [],
         "has_preliminary_stage": bool(PRELIMINARY_RE.search(text_blob)),
+        "preliminary_required": preliminary_requirement(text_blob, PRELIMINARY_RE.search(text_blob).group(1) if PRELIMINARY_RE.search(text_blob) else None),
         "preliminary_stage_type": (
             PRELIMINARY_RE.search(text_blob).group(1)
             if PRELIMINARY_RE.search(text_blob)
             else None
         ),
-        "limited_submission": bool(
-            LIMITED_SUBMISSION_RE.search(text_blob)
-        ),
+        "limited_submission": bool(institutional_limit_signal(text_blob)),
+        'limited_submission_source': 'synopsis_heuristic',
         "career_stage_signal": (
             EARLY_CAREER_RE.search(text_blob).group(1)
             if EARLY_CAREER_RE.search(text_blob)
@@ -756,16 +758,13 @@ def iter_catalog_records(xml_stream, as_of):
 
 
 def record_identity(record):
-    from scripts.solicitation_identity import research_solicitation_key
+    from scripts.solicitation_identity import solicitation_key
 
-    scoped = research_solicitation_key(record)
+    scoped = solicitation_key(record)
     if scoped:
         return f"solicitation:{scoped[0]}:{scoped[1]}"
-    number = re.sub(
-        r"\s+", "", str(record.get("opportunity_number") or "")
-    ).casefold()
-    if number:
-        return f"number:{number}"
+    # Unknown sponsor identity cannot collapse two independently published
+    # records merely because their local RFP numbers happen to agree.
     return f"id:{record.get('opportunity_id')}"
 
 

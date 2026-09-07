@@ -1,0 +1,1637 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "363468",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354409",
+        "sha256": "44cc84bfffc262bf445e1dd0dba7c29041d02e434f5a23854a662934466a9959",
+        "retrieved_at": "2026-09-07T18:59:15.336900+00:00"
+      },
+      "containers": [
+        {
+          "page": 1,
+          "section": null,
+          "anchor": null,
+          "text": "NATIONAL CENTER FOR EDUCATION RESEARCH \nAssistance Listing Number (ALN): 84.305D \nStatistical and Research \nMethodology in Education \nRequest for Applications \nLetter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit \nApplication Package Available August 6, 2026 https://www.grants.gov \nApplication Deadline 11:59:59 Eastern Time on \nOctober 1, 2026 \nhttps://www.grants.gov \nPossible Start Dates July 1, 2027 – September 1, 2027 \n \nSee the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on \npreparing and submitting applications through Grants.gov.",
+          "structure": [
+            {
+              "block_id": "pdf-1-1",
+              "kind": "line",
+              "text": "NATIONAL CENTER FOR EDUCATION RESEARCH ",
+              "span": [
+                0,
+                39
+              ],
+              "reading_order": 0,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-2",
+              "kind": "line",
+              "text": "Assistance Listing Number (ALN): 84.305D ",
+              "span": [
+                40,
+                81
+              ],
+              "reading_order": 1,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-3",
+              "kind": "line",
+              "text": "Statistical and Research ",
+              "span": [
+                82,
+                107
+              ],
+              "reading_order": 2,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-4",
+              "kind": "line",
+              "text": "Methodology in Education ",
+              "span": [
+                108,
+                133
+              ],
+              "reading_order": 3,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-5",
+              "kind": "line",
+              "text": "Request for Applications ",
+              "span": [
+                134,
+                159
+              ],
+              "reading_order": 4,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-6",
+              "kind": "line",
+              "text": "Letter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit ",
+              "span": [
+                160,
+                234
+              ],
+              "reading_order": 5,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-7",
+              "kind": "line",
+              "text": "Application Package Available August 6, 2026 https://www.grants.gov ",
+              "span": [
+                235,
+                303
+              ],
+              "reading_order": 6,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-8",
+              "kind": "line",
+              "text": "Application Deadline 11:59:59 Eastern Time on ",
+              "span": [
+                304,
+                350
+              ],
+              "reading_order": 7,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-9",
+              "kind": "line",
+              "text": "October 1, 2026 ",
+              "span": [
+                351,
+                367
+              ],
+              "reading_order": 8,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-10",
+              "kind": "line",
+              "text": "https://www.grants.gov ",
+              "span": [
+                368,
+                391
+              ],
+              "reading_order": 9,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-11",
+              "kind": "line",
+              "text": "Possible Start Dates July 1, 2027 – September 1, 2027 ",
+              "span": [
+                392,
+                446
+              ],
+              "reading_order": 10,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-12",
+              "kind": "line",
+              "text": " ",
+              "span": [
+                447,
+                448
+              ],
+              "reading_order": 11,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-13",
+              "kind": "line",
+              "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on ",
+              "span": [
+                449,
+                566
+              ],
+              "reading_order": 12,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-14",
+              "kind": "line",
+              "text": "preparing and submitting applications through Grants.gov.",
+              "span": [
+                567,
+                624
+              ],
+              "reading_order": 13,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            }
+          ],
+          "layout_rows": [
+            {
+              "line": 1,
+              "text": "NATIONAL CENTER FOR EDUCATION RESEARCH",
+              "cells": [
+                {
+                  "text": "NATIONAL CENTER FOR EDUCATION RESEARCH",
+                  "column_start": 0,
+                  "column_end": 38
+                }
+              ]
+            },
+            {
+              "line": 2,
+              "text": "Assistance Listing Number (ALN): 84.305D",
+              "cells": [
+                {
+                  "text": "Assistance Listing Number (ALN): 84.305D",
+                  "column_start": 0,
+                  "column_end": 40
+                }
+              ]
+            },
+            {
+              "line": 3,
+              "text": "Statistical and Research",
+              "cells": [
+                {
+                  "text": "Statistical and Research",
+                  "column_start": 0,
+                  "column_end": 24
+                }
+              ]
+            },
+            {
+              "line": 4,
+              "text": "Methodology in Education",
+              "cells": [
+                {
+                  "text": "Methodology in Education",
+                  "column_start": 0,
+                  "column_end": 24
+                }
+              ]
+            },
+            {
+              "line": 6,
+              "text": "Request for Applications",
+              "cells": [
+                {
+                  "text": "Request for Applications",
+                  "column_start": 0,
+                  "column_end": 24
+                }
+              ]
+            },
+            {
+              "line": 9,
+              "text": "   Letter of Intent                                                                                                                                                                                                                                                                                                                                                                                               September 3, 2026                                                                                                                                                                                                                                                                                                                 https://iesreview.ed.gov/LOI/LOISubmit",
+              "cells": [
+                {
+                  "text": "Letter of Intent",
+                  "column_start": 3,
+                  "column_end": 19
+                },
+                {
+                  "text": "September 3, 2026",
+                  "column_start": 402,
+                  "column_end": 419
+                },
+                {
+                  "text": "https://iesreview.ed.gov/LOI/LOISubmit",
+                  "column_start": 724,
+                  "column_end": 762
+                }
+              ]
+            },
+            {
+              "line": 12,
+              "text": "   Application Package Available                                                                    August 6, 2026                                                                                                                                                                                                                                                                                                                                                                                     https://www.grants.gov",
+              "cells": [
+                {
+                  "text": "Application Package Available",
+                  "column_start": 3,
+                  "column_end": 32
+                },
+                {
+                  "text": "August 6, 2026",
+                  "column_start": 100,
+                  "column_end": 114
+                },
+                {
+                  "text": "https://www.grants.gov",
+                  "column_start": 487,
+                  "column_end": 509
+                }
+              ]
+            },
+            {
+              "line": 15,
+              "text": "   Application Deadline                                                                                                                                                                                                                                                                    11:59:59 Eastern Time on https://www.grants.gov",
+              "cells": [
+                {
+                  "text": "Application Deadline",
+                  "column_start": 3,
+                  "column_end": 23
+                },
+                {
+                  "text": "11:59:59 Eastern Time on https://www.grants.gov",
+                  "column_start": 283,
+                  "column_end": 330
+                }
+              ]
+            },
+            {
+              "line": 16,
+              "text": "                                                                                                                             October 1, 2026",
+              "cells": [
+                {
+                  "text": "October 1, 2026",
+                  "column_start": 125,
+                  "column_end": 140
+                }
+              ]
+            },
+            {
+              "line": 19,
+              "text": "   Possible Start Dates                                                                                                                                                                                                                                                                                            July 1, 2027 –          September 1, 2027",
+              "cells": [
+                {
+                  "text": "Possible Start Dates",
+                  "column_start": 3,
+                  "column_end": 23
+                },
+                {
+                  "text": "July 1, 2027 –",
+                  "column_start": 307,
+                  "column_end": 321
+                },
+                {
+                  "text": "September 1, 2027",
+                  "column_start": 331,
+                  "column_end": 348
+                }
+              ]
+            },
+            {
+              "line": 24,
+              "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on",
+              "cells": [
+                {
+                  "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on",
+                  "column_start": 0,
+                  "column_end": 116
+                }
+              ]
+            },
+            {
+              "line": 25,
+              "text": "preparing and submitting applications through Grants.gov.",
+              "cells": [
+                {
+                  "text": "preparing and submitting applications through Grants.gov.",
+                  "column_start": 0,
+                  "column_end": 57
+                }
+              ]
+            }
+          ],
+          "truncated": false,
+          "toc": false
+        },
+        {
+          "text": "The letter of intent is non-binding and optional but strongly recommended.",
+          "page": 32
+        }
+      ],
+      "expected": [
+        {
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-09-03",
+          "required": false,
+          "time": null,
+          "timezone": null
+        },
+        {
+          "deadline_kind": "application",
+          "date": "2026-10-01",
+          "required": null,
+          "time": null,
+          "timezone": null
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363469",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354413",
+        "sha256": "5583cdf171896a6cd5d70a10e4dbcb03f645bc7416a8e4c782850a5153a3605e",
+        "retrieved_at": "2026-09-07T18:59:15.355640+00:00"
+      },
+      "containers": [
+        {
+          "page": 1,
+          "section": null,
+          "anchor": null,
+          "text": "NATIONAL CENTER FOR EDUCATION RESEARCH \nAssistance Listing Number (ALN): 84.305S \nUsing Longitudinal Data to Support \nState Education Policymaking \nRequest for Applications \nLetter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit \nApplication Package Available August 6, 2026 https://www.grants.gov \nApplication Deadline 11:59:59 Eastern Time on \nOctober 1, 2026 \nhttps://www.grants.gov \nPossible Start Dates July 1, 2027 – September 1, 2027 \n \nSee the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on \npreparing and submitting applications through Grants.gov.",
+          "structure": [
+            {
+              "block_id": "pdf-1-1",
+              "kind": "line",
+              "text": "NATIONAL CENTER FOR EDUCATION RESEARCH ",
+              "span": [
+                0,
+                39
+              ],
+              "reading_order": 0,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-2",
+              "kind": "line",
+              "text": "Assistance Listing Number (ALN): 84.305S ",
+              "span": [
+                40,
+                81
+              ],
+              "reading_order": 1,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-3",
+              "kind": "line",
+              "text": "Using Longitudinal Data to Support ",
+              "span": [
+                82,
+                117
+              ],
+              "reading_order": 2,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-4",
+              "kind": "line",
+              "text": "State Education Policymaking ",
+              "span": [
+                118,
+                147
+              ],
+              "reading_order": 3,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-5",
+              "kind": "line",
+              "text": "Request for Applications ",
+              "span": [
+                148,
+                173
+              ],
+              "reading_order": 4,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-6",
+              "kind": "line",
+              "text": "Letter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit ",
+              "span": [
+                174,
+                248
+              ],
+              "reading_order": 5,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-7",
+              "kind": "line",
+              "text": "Application Package Available August 6, 2026 https://www.grants.gov ",
+              "span": [
+                249,
+                317
+              ],
+              "reading_order": 6,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-8",
+              "kind": "line",
+              "text": "Application Deadline 11:59:59 Eastern Time on ",
+              "span": [
+                318,
+                364
+              ],
+              "reading_order": 7,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-9",
+              "kind": "line",
+              "text": "October 1, 2026 ",
+              "span": [
+                365,
+                381
+              ],
+              "reading_order": 8,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-10",
+              "kind": "line",
+              "text": "https://www.grants.gov ",
+              "span": [
+                382,
+                405
+              ],
+              "reading_order": 9,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-11",
+              "kind": "line",
+              "text": "Possible Start Dates July 1, 2027 – September 1, 2027 ",
+              "span": [
+                406,
+                460
+              ],
+              "reading_order": 10,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-12",
+              "kind": "line",
+              "text": " ",
+              "span": [
+                461,
+                462
+              ],
+              "reading_order": 11,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-13",
+              "kind": "line",
+              "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on ",
+              "span": [
+                463,
+                580
+              ],
+              "reading_order": 12,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-14",
+              "kind": "line",
+              "text": "preparing and submitting applications through Grants.gov.",
+              "span": [
+                581,
+                638
+              ],
+              "reading_order": 13,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            }
+          ],
+          "layout_rows": [
+            {
+              "line": 1,
+              "text": "NATIONAL CENTER FOR EDUCATION RESEARCH",
+              "cells": [
+                {
+                  "text": "NATIONAL CENTER FOR EDUCATION RESEARCH",
+                  "column_start": 0,
+                  "column_end": 38
+                }
+              ]
+            },
+            {
+              "line": 3,
+              "text": "Assistance Listing Number (ALN): 84.305S",
+              "cells": [
+                {
+                  "text": "Assistance Listing Number (ALN): 84.305S",
+                  "column_start": 0,
+                  "column_end": 40
+                }
+              ]
+            },
+            {
+              "line": 4,
+              "text": "Using Longitudinal Data to Support",
+              "cells": [
+                {
+                  "text": "Using Longitudinal Data to Support",
+                  "column_start": 0,
+                  "column_end": 34
+                }
+              ]
+            },
+            {
+              "line": 5,
+              "text": "State Education Policymaking",
+              "cells": [
+                {
+                  "text": "State Education Policymaking",
+                  "column_start": 0,
+                  "column_end": 28
+                }
+              ]
+            },
+            {
+              "line": 7,
+              "text": "Request for Applications",
+              "cells": [
+                {
+                  "text": "Request for Applications",
+                  "column_start": 0,
+                  "column_end": 24
+                }
+              ]
+            },
+            {
+              "line": 11,
+              "text": "   Letter of Intent                                                                                                                                                                                                                                                                                                                                                                                                   September 3, 2026                                                                                                                                                                                                                                                                                                                https://iesreview.ed.gov/LOI/LOISubmit",
+              "cells": [
+                {
+                  "text": "Letter of Intent",
+                  "column_start": 3,
+                  "column_end": 19
+                },
+                {
+                  "text": "September 3, 2026",
+                  "column_start": 406,
+                  "column_end": 423
+                },
+                {
+                  "text": "https://iesreview.ed.gov/LOI/LOISubmit",
+                  "column_start": 727,
+                  "column_end": 765
+                }
+              ]
+            },
+            {
+              "line": 14,
+              "text": "   Application Package Available                                                                       August 6, 2026                                                                                                                                                                                                                                                                                                                                                                                     https://www.grants.gov",
+              "cells": [
+                {
+                  "text": "Application Package Available",
+                  "column_start": 3,
+                  "column_end": 32
+                },
+                {
+                  "text": "August 6, 2026",
+                  "column_start": 103,
+                  "column_end": 117
+                },
+                {
+                  "text": "https://www.grants.gov",
+                  "column_start": 490,
+                  "column_end": 512
+                }
+              ]
+            },
+            {
+              "line": 17,
+              "text": "   Application Deadline                                                                                                                                                                                                                                                                      11:59:59 Eastern Time on https://www.grants.gov",
+              "cells": [
+                {
+                  "text": "Application Deadline",
+                  "column_start": 3,
+                  "column_end": 23
+                },
+                {
+                  "text": "11:59:59 Eastern Time on https://www.grants.gov",
+                  "column_start": 285,
+                  "column_end": 332
+                }
+              ]
+            },
+            {
+              "line": 18,
+              "text": "                                                                                                                              October 1, 2026",
+              "cells": [
+                {
+                  "text": "October 1, 2026",
+                  "column_start": 126,
+                  "column_end": 141
+                }
+              ]
+            },
+            {
+              "line": 21,
+              "text": "   Possible Start Dates                                                                                                                                                                                                                                                                                               July 1, 2027                                  – September 1, 2027",
+              "cells": [
+                {
+                  "text": "Possible Start Dates",
+                  "column_start": 3,
+                  "column_end": 23
+                },
+                {
+                  "text": "July 1, 2027",
+                  "column_start": 310,
+                  "column_end": 322
+                },
+                {
+                  "text": "– September 1, 2027",
+                  "column_start": 356,
+                  "column_end": 375
+                }
+              ]
+            },
+            {
+              "line": 26,
+              "text": "See the companion IES Application Submission Guide (                              https://ies.ed.gov/application-submission-guide) for guidance on",
+              "cells": [
+                {
+                  "text": "See the companion IES Application Submission Guide (",
+                  "column_start": 0,
+                  "column_end": 52
+                },
+                {
+                  "text": "https://ies.ed.gov/application-submission-guide) for guidance on",
+                  "column_start": 82,
+                  "column_end": 146
+                }
+              ]
+            },
+            {
+              "line": 27,
+              "text": "preparing and submitting applications through Grants.gov.",
+              "cells": [
+                {
+                  "text": "preparing and submitting applications through Grants.gov.",
+                  "column_start": 0,
+                  "column_end": 57
+                }
+              ]
+            }
+          ],
+          "truncated": false,
+          "toc": false
+        },
+        {
+          "text": "The letter of intent is non-binding and optional but strongly recommended.",
+          "page": 27
+        }
+      ],
+      "expected": [
+        {
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-09-03",
+          "required": false,
+          "time": null,
+          "timezone": null
+        },
+        {
+          "deadline_kind": "application",
+          "date": "2026-10-01",
+          "required": null,
+          "time": null,
+          "timezone": null
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363467",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354415",
+        "sha256": "3d6010b40bb0f62f3cf30c04c61f00506fe7aae9d4f0b80a4a2a9ebe515b2ef8",
+        "retrieved_at": "2026-09-07T18:59:15.746914+00:00"
+      },
+      "containers": [
+        {
+          "page": 1,
+          "section": null,
+          "anchor": null,
+          "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH \nAssistance Listing Number (ALN): 84.324B \nResearch Training Programs in \nSpecial Education \nRequest for Applications \nLetter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit \nApplication Package Available August 6, 2026 https://www.grants.gov/ \nApplication Deadline 11:59:59 p.m. Eastern Time on \nOctober 1, 2026 \nhttps://www.grants.gov/ \nPossible Start Dates July 1 – September 1, 2027 \n \nSee the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on \npreparing and submitting applications through Grants.gov.",
+          "structure": [
+            {
+              "block_id": "pdf-1-1",
+              "kind": "line",
+              "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH ",
+              "span": [
+                0,
+                47
+              ],
+              "reading_order": 0,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-2",
+              "kind": "line",
+              "text": "Assistance Listing Number (ALN): 84.324B ",
+              "span": [
+                48,
+                89
+              ],
+              "reading_order": 1,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-3",
+              "kind": "line",
+              "text": "Research Training Programs in ",
+              "span": [
+                90,
+                120
+              ],
+              "reading_order": 2,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-4",
+              "kind": "line",
+              "text": "Special Education ",
+              "span": [
+                121,
+                139
+              ],
+              "reading_order": 3,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-5",
+              "kind": "line",
+              "text": "Request for Applications ",
+              "span": [
+                140,
+                165
+              ],
+              "reading_order": 4,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-6",
+              "kind": "line",
+              "text": "Letter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit ",
+              "span": [
+                166,
+                240
+              ],
+              "reading_order": 5,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-7",
+              "kind": "line",
+              "text": "Application Package Available August 6, 2026 https://www.grants.gov/ ",
+              "span": [
+                241,
+                310
+              ],
+              "reading_order": 6,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-8",
+              "kind": "line",
+              "text": "Application Deadline 11:59:59 p.m. Eastern Time on ",
+              "span": [
+                311,
+                362
+              ],
+              "reading_order": 7,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-9",
+              "kind": "line",
+              "text": "October 1, 2026 ",
+              "span": [
+                363,
+                379
+              ],
+              "reading_order": 8,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-10",
+              "kind": "line",
+              "text": "https://www.grants.gov/ ",
+              "span": [
+                380,
+                404
+              ],
+              "reading_order": 9,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-11",
+              "kind": "line",
+              "text": "Possible Start Dates July 1 – September 1, 2027 ",
+              "span": [
+                405,
+                453
+              ],
+              "reading_order": 10,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-12",
+              "kind": "line",
+              "text": " ",
+              "span": [
+                454,
+                455
+              ],
+              "reading_order": 11,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-13",
+              "kind": "line",
+              "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on ",
+              "span": [
+                456,
+                573
+              ],
+              "reading_order": 12,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-14",
+              "kind": "line",
+              "text": "preparing and submitting applications through Grants.gov.",
+              "span": [
+                574,
+                631
+              ],
+              "reading_order": 13,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            }
+          ],
+          "layout_rows": [
+            {
+              "line": 1,
+              "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH",
+              "cells": [
+                {
+                  "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH",
+                  "column_start": 0,
+                  "column_end": 46
+                }
+              ]
+            },
+            {
+              "line": 3,
+              "text": "Assistance Listing Number (ALN): 84.324B",
+              "cells": [
+                {
+                  "text": "Assistance Listing Number (ALN): 84.324B",
+                  "column_start": 0,
+                  "column_end": 40
+                }
+              ]
+            },
+            {
+              "line": 4,
+              "text": "Research Training Programs in",
+              "cells": [
+                {
+                  "text": "Research Training Programs in",
+                  "column_start": 0,
+                  "column_end": 29
+                }
+              ]
+            },
+            {
+              "line": 5,
+              "text": "Special Education",
+              "cells": [
+                {
+                  "text": "Special Education",
+                  "column_start": 0,
+                  "column_end": 17
+                }
+              ]
+            },
+            {
+              "line": 7,
+              "text": "Request for Applications",
+              "cells": [
+                {
+                  "text": "Request for Applications",
+                  "column_start": 0,
+                  "column_end": 24
+                }
+              ]
+            },
+            {
+              "line": 10,
+              "text": "    Letter of Intent                                                                                                                                                                                                                                                                                                                                                                                              September 3          , 2026                                                                                                                                                                                                                                                                                                                                                            https://iesreview.ed.gov/LOI/LOISubmit",
+              "cells": [
+                {
+                  "text": "Letter of Intent",
+                  "column_start": 4,
+                  "column_end": 20
+                },
+                {
+                  "text": "September 3",
+                  "column_start": 402,
+                  "column_end": 413
+                },
+                {
+                  "text": ", 2026",
+                  "column_start": 423,
+                  "column_end": 429
+                },
+                {
+                  "text": "https://iesreview.ed.gov/LOI/LOISubmit",
+                  "column_start": 777,
+                  "column_end": 815
+                }
+              ]
+            },
+            {
+              "line": 13,
+              "text": "    Application Package Available                                                                  August 6, 202         6                                                                                                                                                                                                                                                                                                                                                                                                                                          https://www.grants.gov/",
+              "cells": [
+                {
+                  "text": "Application Package Available",
+                  "column_start": 4,
+                  "column_end": 33
+                },
+                {
+                  "text": "August 6, 202",
+                  "column_start": 99,
+                  "column_end": 112
+                },
+                {
+                  "text": "6                                                                                                                                                                                                                                                                                                                                                                                                                                          https://www.grants.gov/",
+                  "column_start": 121,
+                  "column_end": 571
+                }
+              ]
+            },
+            {
+              "line": 16,
+              "text": "    Application Deadline                                                                                                                                                                                                                                                                 11:59:59 p.m. Eastern Time on https://www.grants.gov/",
+              "cells": [
+                {
+                  "text": "Application Deadline",
+                  "column_start": 4,
+                  "column_end": 24
+                },
+                {
+                  "text": "11:59:59 p.m. Eastern Time on https://www.grants.gov/",
+                  "column_start": 281,
+                  "column_end": 334
+                }
+              ]
+            },
+            {
+              "line": 17,
+              "text": "                                                                                                                                        October 1          , 202          6",
+              "cells": [
+                {
+                  "text": "October 1",
+                  "column_start": 136,
+                  "column_end": 145
+                },
+                {
+                  "text": ", 202",
+                  "column_start": 155,
+                  "column_end": 160
+                },
+                {
+                  "text": "6",
+                  "column_start": 170,
+                  "column_end": 171
+                }
+              ]
+            },
+            {
+              "line": 20,
+              "text": "    Possible Start Dates                                                                                                                                                                                                                                                                                          July 1 –          September 1, 202         7",
+              "cells": [
+                {
+                  "text": "Possible Start Dates",
+                  "column_start": 4,
+                  "column_end": 24
+                },
+                {
+                  "text": "July 1 –",
+                  "column_start": 306,
+                  "column_end": 314
+                },
+                {
+                  "text": "September 1, 202",
+                  "column_start": 324,
+                  "column_end": 340
+                },
+                {
+                  "text": "7",
+                  "column_start": 349,
+                  "column_end": 350
+                }
+              ]
+            },
+            {
+              "line": 26,
+              "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on",
+              "cells": [
+                {
+                  "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on",
+                  "column_start": 0,
+                  "column_end": 116
+                }
+              ]
+            },
+            {
+              "line": 27,
+              "text": "preparing and submitting applications through Grants.gov.",
+              "cells": [
+                {
+                  "text": "preparing and submitting applications through Grants.gov.",
+                  "column_start": 0,
+                  "column_end": 57
+                }
+              ]
+            }
+          ],
+          "truncated": false,
+          "toc": false
+        },
+        {
+          "text": "The letter of intent is non-binding and optional but strongly recommended.",
+          "page": 39
+        }
+      ],
+      "expected": [
+        {
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-09-03",
+          "required": false,
+          "time": null,
+          "timezone": null
+        },
+        {
+          "deadline_kind": "application",
+          "date": "2026-10-01",
+          "required": null,
+          "time": "11:59:59 p.m.",
+          "timezone": "Eastern"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363471",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354416",
+        "sha256": "3a57a031b2a4fdf0eb1c6552ec1b58af0c2ca3e1560f3e0f5aa072bebc50330a",
+        "retrieved_at": "2026-09-07T18:59:15.723831+00:00"
+      },
+      "containers": [
+        {
+          "page": 1,
+          "section": null,
+          "anchor": null,
+          "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH \nAssistance Listing Number (ALN): 84.324S \nUsing Longitudinal Data to Support \nState Education Policymaking in \nSpecial Education \nRequest for Applications \nLetter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit \nApplication Package Available August 6, 2026 https://www.grants.gov \nApplication Deadline 11:59:59 Eastern Time on \nOctober 1, 2026 \nhttps://www.grants.gov \nPossible Start Dates July 1, 2027 – September 1, 2027 \n \nSee the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on \npreparing and submitting applications through Grants.gov.",
+          "structure": [
+            {
+              "block_id": "pdf-1-1",
+              "kind": "line",
+              "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH ",
+              "span": [
+                0,
+                47
+              ],
+              "reading_order": 0,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-2",
+              "kind": "line",
+              "text": "Assistance Listing Number (ALN): 84.324S ",
+              "span": [
+                48,
+                89
+              ],
+              "reading_order": 1,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-3",
+              "kind": "line",
+              "text": "Using Longitudinal Data to Support ",
+              "span": [
+                90,
+                125
+              ],
+              "reading_order": 2,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-4",
+              "kind": "line",
+              "text": "State Education Policymaking in ",
+              "span": [
+                126,
+                158
+              ],
+              "reading_order": 3,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-5",
+              "kind": "line",
+              "text": "Special Education ",
+              "span": [
+                159,
+                177
+              ],
+              "reading_order": 4,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-6",
+              "kind": "line",
+              "text": "Request for Applications ",
+              "span": [
+                178,
+                203
+              ],
+              "reading_order": 5,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-7",
+              "kind": "line",
+              "text": "Letter of Intent September 3, 2026 https://iesreview.ed.gov/LOI/LOISubmit ",
+              "span": [
+                204,
+                278
+              ],
+              "reading_order": 6,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-8",
+              "kind": "line",
+              "text": "Application Package Available August 6, 2026 https://www.grants.gov ",
+              "span": [
+                279,
+                347
+              ],
+              "reading_order": 7,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-9",
+              "kind": "line",
+              "text": "Application Deadline 11:59:59 Eastern Time on ",
+              "span": [
+                348,
+                394
+              ],
+              "reading_order": 8,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-10",
+              "kind": "line",
+              "text": "October 1, 2026 ",
+              "span": [
+                395,
+                411
+              ],
+              "reading_order": 9,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-11",
+              "kind": "line",
+              "text": "https://www.grants.gov ",
+              "span": [
+                412,
+                435
+              ],
+              "reading_order": 10,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-12",
+              "kind": "line",
+              "text": "Possible Start Dates July 1, 2027 – September 1, 2027 ",
+              "span": [
+                436,
+                490
+              ],
+              "reading_order": 11,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-13",
+              "kind": "line",
+              "text": " ",
+              "span": [
+                491,
+                492
+              ],
+              "reading_order": 12,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-14",
+              "kind": "line",
+              "text": "See the companion IES Application Submission Guide (https://ies.ed.gov/application-submission-guide) for guidance on ",
+              "span": [
+                493,
+                610
+              ],
+              "reading_order": 13,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            },
+            {
+              "block_id": "pdf-1-15",
+              "kind": "line",
+              "text": "preparing and submitting applications through Grants.gov.",
+              "span": [
+                611,
+                668
+              ],
+              "reading_order": 14,
+              "page": 1,
+              "repeated_header": false,
+              "toc": false
+            }
+          ],
+          "layout_rows": [
+            {
+              "line": 1,
+              "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH",
+              "cells": [
+                {
+                  "text": "NATIONAL CENTER FOR SPECIAL EDUCATION RESEARCH",
+                  "column_start": 0,
+                  "column_end": 46
+                }
+              ]
+            },
+            {
+              "line": 3,
+              "text": "Assistance Listing Number (ALN): 84.3              24S",
+              "cells": [
+                {
+                  "text": "Assistance Listing Number (ALN): 84.3",
+                  "column_start": 0,
+                  "column_end": 37
+                },
+                {
+                  "text": "24S",
+                  "column_start": 51,
+                  "column_end": 54
+                }
+              ]
+            },
+            {
+              "line": 4,
+              "text": "Using Longitudinal Data to Support",
+              "cells": [
+                {
+                  "text": "Using Longitudinal Data to Support",
+                  "column_start": 0,
+                  "column_end": 34
+                }
+              ]
+            },
+            {
+              "line": 5,
+              "text": "State Education Policymaking in",
+              "cells": [
+                {
+                  "text": "State Education Policymaking in",
+                  "column_start": 0,
+                  "column_end": 31
+                }
+              ]
+            },
+            {
+              "line": 6,
+              "text": "Special Education",
+              "cells": [
+                {
+                  "text": "Special Education",
+                  "column_start": 0,
+                  "column_end": 17
+                }
+              ]
+            },
+            {
+              "line": 8,
+              "text": "Request for Applications",
+              "cells": [
+                {
+                  "text": "Request for Applications",
+                  "column_start": 0,
+                  "column_end": 24
+                }
+              ]
+            },
+            {
+              "line": 13,
+              "text": "   Letter of Intent                                                                                                                                                                                                                                                                                                                                                                                               September 3, 2026                                                                                                                                                                                                                                                                                                                 https://iesreview.ed.gov/LOI/LOISubmit",
+              "cells": [
+                {
+                  "text": "Letter of Intent",
+                  "column_start": 3,
+                  "column_end": 19
+                },
+                {
+                  "text": "September 3, 2026",
+                  "column_start": 402,
+                  "column_end": 419
+                },
+                {
+                  "text": "https://iesreview.ed.gov/LOI/LOISubmit",
+                  "column_start": 724,
+                  "column_end": 762
+                }
+              ]
+            },
+            {
+              "line": 16,
+              "text": "   Application Package Available                                                                    August 6, 202         6                                                                                                                                                                                                                                                                                                                                                                                     https://www.grants.gov",
+              "cells": [
+                {
+                  "text": "Application Package Available",
+                  "column_start": 3,
+                  "column_end": 32
+                },
+                {
+                  "text": "August 6, 202",
+                  "column_start": 100,
+                  "column_end": 113
+                },
+                {
+                  "text": "6                                                                                                                                                                                                                                                                                                                                                                                     https://www.grants.gov",
+                  "column_start": 122,
+                  "column_end": 518
+                }
+              ]
+            },
+            {
+              "line": 19,
+              "text": "   Application Deadline                                                                                                                                                                                                                                                                    11:59:59 Eastern Time on https://www.grants.gov",
+              "cells": [
+                {
+                  "text": "Application Deadline",
+                  "column_start": 3,
+                  "column_end": 23
+                },
+                {
+                  "text": "11:59:59 Eastern Time on https://www.grants.gov",
+                  "column_start": 283,
+                  "column_end": 330
+                }
+              ]
+            },
+            {
+              "line": 20,
+              "text": "                                                                                                                     October 1, 2026",
+              "cells": [
+                {
+                  "text": "October 1, 2026",
+                  "column_start": 117,
+                  "column_end": 132
+                }
+              ]
+            },
+            {
+              "line": 23,
+              "text": "   Possible Start Dates                                                                                                                                                                                                                                                                                            July 1, 202         7 –          September 1, 202                   7",
+              "cells": [
+                {
+                  "text": "Possible Start Dates",
+                  "column_start": 3,
+                  "column_end": 23
+                },
+                {
+                  "text": "July 1, 202",
+                  "column_start": 307,
+                  "column_end": 318
+                },
+                {
+                  "text": "7 –",
+                  "column_start": 327,
+                  "column_end": 330
+                },
+                {
+                  "text": "September 1, 202",
+                  "column_start": 340,
+                  "column_end": 356
+                },
+                {
+                  "text": "7",
+                  "column_start": 375,
+                  "column_end": 376
+                }
+              ]
+            },
+            {
+              "line": 29,
+              "text": "See the companion IES Application Submission Guide (         https://ies.ed.gov/application-submission-guide) for guidance on",
+              "cells": [
+                {
+                  "text": "See the companion IES Application Submission Guide (",
+                  "column_start": 0,
+                  "column_end": 52
+                },
+                {
+                  "text": "https://ies.ed.gov/application-submission-guide) for guidance on",
+                  "column_start": 61,
+                  "column_end": 125
+                }
+              ]
+            },
+            {
+              "line": 30,
+              "text": "preparing and submitting applications through Grants.gov.",
+              "cells": [
+                {
+                  "text": "preparing and submitting applications through Grants.gov.",
+                  "column_start": 0,
+                  "column_end": 57
+                }
+              ]
+            }
+          ],
+          "truncated": false,
+          "toc": false
+        },
+        {
+          "text": "The letter of intent is non-binding and optional but strongly recommended.",
+          "page": 25
+        }
+      ],
+      "expected": [
+        {
+          "deadline_kind": "letter_of_intent",
+          "date": "2026-09-03",
+          "required": false,
+          "time": null,
+          "timezone": null
+        },
+        {
+          "deadline_kind": "application",
+          "date": "2026-10-01",
+          "required": null,
+          "time": null,
+          "timezone": null
+        }
+      ]
+    }
+  ]
+}

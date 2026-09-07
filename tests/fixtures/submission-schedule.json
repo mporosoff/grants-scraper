@@ -1,0 +1,545 @@
+[
+  {
+    "name": "structured deadline retained",
+    "as_of": "2026-09-07",
+    "record": {
+      "close_date": "2027-05-01"
+    },
+    "expected": {
+      "date": "2027-05-01",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "new versus resubmission",
+    "as_of": "2026-05-01",
+    "record": {
+      "close_date": "2028-05-16",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-05-19",
+          "application_class": "resubmission"
+        },
+        {
+          "kind": "application",
+          "date": "2026-10-20",
+          "application_class": "new",
+          "time": "11:59 PM",
+          "timezone": "Eastern"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-10-20",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "resubmission only",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2027-05-18",
+          "application_class": "resubmission"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "resubmission_only",
+      "kind": null
+    }
+  },
+  {
+    "name": "required preliminary next",
+    "as_of": "2026-09-07",
+    "record": {
+      "close_date": "2026-12-01",
+      "deadlines": [
+        {
+          "kind": "concept_paper",
+          "date": "2026-10-09",
+          "required": true
+        },
+        {
+          "kind": "application",
+          "date": "2026-12-01"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-10-09",
+      "access": "open",
+      "kind": "concept_paper"
+    }
+  },
+  {
+    "name": "required preliminary closed",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "preproposal",
+          "date": "2026-07-13",
+          "required": true
+        },
+        {
+          "kind": "application",
+          "date": "2026-10-14"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-10-14",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "optional preliminary closed",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "letter_of_intent",
+          "date": "2026-07-13",
+          "required": false
+        },
+        {
+          "kind": "application",
+          "date": "2026-10-14"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-10-14",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "TBD required preliminary",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-12-01"
+        }
+      ],
+      "submission_requirements": [
+        {
+          "kind": "concept_paper",
+          "date": null,
+          "required": true
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-12-01",
+      "access": "verify_prerequisite",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "invitation required",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-10-14",
+          "invitation_required": true
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-10-14",
+      "access": "invitation_required",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "independent owned cycles",
+    "as_of": "2027-03-01",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "concept_paper",
+          "date": "2026-11-19",
+          "cycle": "FY2027",
+          "required": true
+        },
+        {
+          "kind": "concept_paper",
+          "date": "2027-11-16",
+          "cycle": "FY2028",
+          "required": true
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-11",
+          "cycle": "FY2027"
+        },
+        {
+          "kind": "application",
+          "date": "2028-02-10",
+          "cycle": "FY2028"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-11-16",
+      "access": "open",
+      "kind": "concept_paper"
+    }
+  },
+  {
+    "name": "unknown cross-cycle relation",
+    "as_of": "2027-01-01",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "concept_paper",
+          "date": "2026-11-19",
+          "cycle": "FY2027",
+          "required": true
+        },
+        {
+          "kind": "concept_paper",
+          "date": "2027-11-16",
+          "cycle": "FY2028",
+          "required": true
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-11"
+        },
+        {
+          "kind": "application",
+          "date": "2028-02-10"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-02-11",
+      "access": "verify_prerequisite",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "expired schedule",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-05-01"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "closed",
+      "kind": null
+    }
+  },
+  {
+    "name": "summary stage unknown",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "submission",
+          "date": "2026-10-09"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-10-09",
+      "access": "verify_stage",
+      "kind": "submission"
+    }
+  },
+  {
+    "name": "unrecovered source preliminary stage keeps access qualified",
+    "as_of": "2026-09-07",
+    "record": {
+      "close_date": "2027-05-01",
+      "has_preliminary_stage": true
+    },
+    "expected": {
+      "date": "2027-05-01",
+      "access": "verify_prerequisite",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "explicitly optional source preliminary stage does not block",
+    "as_of": "2026-09-07",
+    "record": {
+      "close_date": "2027-05-01",
+      "has_preliminary_stage": true,
+      "preliminary_required": false
+    },
+    "expected": {
+      "date": "2027-05-01",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "explicitly rolling required white paper stays open before the source close date",
+    "as_of": "2026-09-07",
+    "record": {
+      "close_date": "2026-09-15",
+      "submission_requirements": [
+        {
+          "kind": "white_paper",
+          "date": null,
+          "required": true,
+          "rolling": true
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-09-15",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "rolling language does not override a closed dated prerequisite",
+    "as_of": "2026-09-07",
+    "record": {
+      "close_date": "2026-09-15",
+      "deadlines": [
+        {
+          "kind": "white_paper",
+          "date": "2026-09-01",
+          "required": true,
+          "rolling": true
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-09-15",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "owned preliminary date does not create a second default full application",
+    "as_of": "2026-09-07",
+    "record": {
+      "close_date": "2026-09-14",
+      "deadlines": [
+        {
+          "kind": "preapplication",
+          "date": "2026-09-14",
+          "time": "11:59 pm",
+          "timezone": "ET",
+          "required": null
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-09-14",
+      "access": "open",
+      "kind": "preapplication"
+    }
+  },
+  {
+    "name": "elapsed recommendation requires current instructions",
+    "as_of": "2026-11-17",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-11-16",
+          "date_qualifier": "recommended"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "verify_stage",
+      "kind": null
+    }
+  },
+  {
+    "name": "elapsed recommendation cannot override an independent hard deadline",
+    "as_of": "2026-11-17",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-11-16",
+          "date_qualifier": "recommended"
+        },
+        {
+          "kind": "application",
+          "date": "2026-11-16"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "closed",
+      "kind": null
+    }
+  },
+  {
+    "name": "undated full-invitation requirement governs the matching structured date",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2027-05-01",
+          "track": "Group One"
+        }
+      ],
+      "submission_requirements": [
+        {
+          "kind": "application",
+          "date": null,
+          "invitation_required": true,
+          "track": null
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-05-01",
+      "access": "invitation_required",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "undated full-invitation requirement does not cross a named group",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2027-05-01",
+          "track": "Group One"
+        }
+      ],
+      "submission_requirements": [
+        {
+          "kind": "application",
+          "date": null,
+          "invitation_required": true,
+          "track": "Different group"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-05-01",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "a remaining paper-waiver route is not an ordinary or resubmission-only deadline",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2027-05-01",
+          "application_class": "paper_waiver"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "verify_stage",
+      "kind": null
+    }
+  },
+  {
+    "name": "scoped full rolling retains prerequisite gate rolling",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-08-02",
+          "track": "Engineering"
+        }
+      ],
+      "submission_requirements": [
+        {
+          "kind": "application",
+          "date": null,
+          "rolling": true,
+          "track": "Chemistry"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "rolling",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "scoped full rolling retains prerequisite gate prerequisite_closed",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-08-02",
+          "track": "Engineering"
+        },
+        {
+          "kind": "concept_paper",
+          "date": "2026-08-01",
+          "required": true,
+          "track": "Chemistry"
+        }
+      ],
+      "submission_requirements": [
+        {
+          "kind": "application",
+          "date": null,
+          "rolling": true,
+          "track": "Chemistry"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "anticipated past cycle needs current source verification",
+    "as_of": "2026-09-07",
+    "record": {
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-07-31",
+          "date_qualifier": "anticipated",
+          "estimated": true,
+          "cycle": "FY 2026"
+        }
+      ]
+    },
+    "expected": {
+      "date": null,
+      "access": "verify_stage",
+      "kind": null
+    }
+  }
+]

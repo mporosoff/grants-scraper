@@ -1,0 +1,50 @@
+{
+  "source": {
+    "url": "https://www.nsf.gov/funding/opportunities/efri-wbc-emerging-frontiers-research-innovation-efri-wave-based/nsf26-524/solicitation",
+    "retrieved_at": "2026-09-07T12:37:01.166607+00:00",
+    "sha256": "5e760ca667e652f5a01cf95dd4887934a8f17b63bdb8b079acd400bafae3120a"
+  },
+  "document_name": null,
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "html_excerpt",
+  "text": "<h2>Eligibility and Cost Sharing</h2><p>Inclusion of voluntary committed cost sharing is prohibited.</p><p>Limit on Number of Proposals per Organization:</p><p>There are no restrictions or limits.</p><p>Limit on Number of Proposals per PI or co-PI: 1</p><p>An individual may participate as PI or co-PI on a maximum of one proposal submitted to this solicitation in a single fiscal year. The submitting organization is responsible for ensuring this limit is met.</p>",
+  "annotations": [
+    {
+      "location": "Eligibility, Limit on Number of Proposals per Organization",
+      "rationale": "The explicit no-limit field applies to the organization, independently of PI rules.",
+      "require": {
+        "type": "institutional_submission_policy",
+        "subject": "organization",
+        "value": {
+          "unlimited": true,
+          "maximum": null
+        }
+      }
+    },
+    {
+      "location": "Cost Sharing Requirements",
+      "rationale": "Prohibited voluntary committed cost sharing is not a mandatory contribution.",
+      "require": {
+        "type": "cost_share",
+        "value": false,
+        "obligation": "voluntary_committed_prohibited"
+      }
+    },
+    {
+      "location": "Eligibility, organization and PI fields",
+      "rationale": "A PI limit must never become an institutional limit.",
+      "forbid": {
+        "type": "limited_submission"
+      }
+    },
+    {
+      "location": "Eligibility, Limit on Number of Proposals per PI or co-PI",
+      "rationale": "The explicit numeric field is owned by the investigator.",
+      "require": {
+        "type": "investigator_submission_limit",
+        "value": 1,
+        "subject": "investigator"
+      }
+    }
+  ]
+}

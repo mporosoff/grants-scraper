@@ -1,0 +1,58 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
+    "retrieved_at": "2026-09-07T12:37:02.019376+00:00",
+    "sha256": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1"
+  },
+  "document_name": "FundOpp_DE-FOA-0003627_Amd_000003.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "hgeo_section_excerpt",
+  "text": "===== 17 =====\n1. Topic Area 1a – Field Test Site Research and Development of Technologies \nfor Enhanced Recovery from Unconventional Oil and Gas Reservoirs \nWhat are commonly referred to as unconventional reservoirs (i.e., oil-bearing and gas-\nbearing shales and other tight rocks that are being developed via long horizontal laterals coupled \nwith high volume hydraulic fracturing) are exhibiting recoveries that are often less than 10 \npercent of the original hydrocarbons in place. For this NOFO, an unconventional oil and gas \nreservoir is considered a geological formation where hydrocarbons are tightly trapped due to low \npermeability (typically less than 1 millidarcy [mD]) requiring specialized extraction methods like \nhydraulic fracturing and horizontal drilling for economic production. Given the fact that these \nformations are laterally and vertically extensive in multiple producing basins, the potentially \nproducible domestic oil and natural gas resource is significant, and the inability to recov\n===== 20 =====\n2. Topic Area 1b – Advanced Characterization of Fracture Propagation, \nProppant Behavior, and Well Diagnostics \nAlthough the development of unconventional oil and natural gas plays has grown \ndramatically over the past two decades, there remains a distinct lack of understanding related to \nwhere operators are leaving recoverable resources behind after well production has declined. \nUnderstanding and characterizing the reservoir domains where depletion has occurred and where \nhydrocarbon saturations remain undrained is key to increasing overall recovery of the resource \nbeyond the less-than-10% levels currently achieved. \n \nSome of the most important questions are related to proppant transport and placement; \nwe still do not know for certain where the proppant is going and how it is distributed within \nfractures and across the stimulated reservoir volume. Hydraulic geometries of the created \nfractures are known to be very large, but proppant transport, distribution, and fracture \nconduc\n===== 24 =====\n3. Topic Area 1c – Enhanced Recovery of Oil and Gas from Unconventional \nReservoirs Using CO2 \nWhat are commonly referred to as unconventional reservoirs (i.e., oil-bearing and gas-\nbearing shales and other tight rocks that are being developed via long horizontal laterals coupled \nwith high volume hydraulic fracturing) are exhibiting recoveries that are often less than 10 \npercent of the original hydrocarbons in place. For this NOFO, an unconventional oil and gas \nreservoir is considered a geological formation where hydrocarbons are tightly trapped due to low \npermeability (typically less than 1 mD) requiring specialized extraction methods like hydraulic \nfracturing and horizontal drilling for economic production. Given the fact that these formations \nare laterally and vertically extensive in multiple producing basins, the potentially producible \ndomestic oil resource is significant, and the inability to recover a larger portion of that resource \nconstitutes a major economic loss exten\n===== 27 =====\n4. Topic Area 2 – Advanced Field-Testing of Multi-Scale Produced Water \nTreatment Technologies & Processes \nIn 2025, the Permian Basin was estimated to produce approximately 22 million barrels \nper day of water associated with oil and natural gas production. The continued increase in water \ncut from the Permian Basin production highlights the key need for highly scalable technologies \nfor produced water treatment that can support opportunities for the reuse of treated produced \nwater to avoid deep well injection and the potential related issues with induced seismicity and \ninteraction with underground sources of drinking water. \n \nThis NOFO seeks to support the field testing and validation of produced water treatment \ntechnologies at high throughput scale, over a period longer than 1 year (not including design or \nconstruction time). The focus is on the ultimate development of a centralized, multi-stage water \ntreatment facility using customizable treatment trains to produce different",
+  "excerpt_assembly": "Noncontiguous opening scientific paragraphs with original page markers; this excerpt does not represent all NOFO constraints.",
+  "annotations": [
+    {
+      "location": "PDF page 17, scientific Topic/Subtopic 1a",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1a",
+        "page_start": 17
+      },
+      "contains_text": {
+        "text": "recoveries"
+      }
+    },
+    {
+      "location": "PDF page 20, scientific Topic/Subtopic 1b",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1b",
+        "page_start": 20
+      },
+      "contains_text": {
+        "text": "understanding"
+      }
+    },
+    {
+      "location": "PDF page 24, scientific Topic/Subtopic 1c",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "1c",
+        "page_start": 24
+      },
+      "contains_text": {
+        "text": "reservoirs"
+      }
+    },
+    {
+      "location": "PDF page 27, scientific Topic/Subtopic 2",
+      "rationale": "The declared code must retain its independently owned scientific body.",
+      "require": {
+        "code": "2",
+        "page_start": 27
+      },
+      "contains_text": {
+        "text": "Permian Basin"
+      }
+    }
+  ]
+}

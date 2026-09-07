@@ -1,0 +1,841 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "103313",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/85665",
+        "name": "noaa-oar-cpo-2012-2003041-ffo-report[1].pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "f0c08c359e2251581815dd1c2b276d5ecf4f6d442b0c0d2f3160be4f44e483a7",
+        "version": 1,
+        "first_seen_at": "2026-07-26T17:56:06.367881Z",
+        "last_seen_at": "2026-09-05T13:28:23.030410Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-07-26T17:56:06.367881Z",
+      "containers": [
+        {
+          "text": "…1, Climate and Atmospheric Research Dates: 1. Letters of Intent Letters of Intent for all Competitions should be received by the Competition Manager by 5 p.m. Eastern Time, July 26, 2011. Applicants who have not received a response to their Letter of Intent within four weeks should contact the Competition Manager. 2. Full Application Full applications for…",
+          "page": 1,
+          "_native_field_values": [
+            [
+              153,
+              187
+            ]
+          ]
+        },
+        {
+          "text": "…2. Full Application Full applications for all Competitions except for the CSI-International Research and Applications Project (IRAP) must be received by 5:00 p.m. Eastern Time, October 3, 2011. Applications for the CSI-IRAP Competition must be received by 5:00 p.m. Eastern Time, November 2, 2011. Applications received after these times will not be consider…",
+          "page": 1,
+          "_native_field_values": [
+            [
+              154,
+              193
+            ],
+            [
+              257,
+              297
+            ]
+          ]
+        },
+        {
+          "text": "…and Applications Project (IRAP) must be received by 5:00 p.m. Eastern Time, October 3, 2011. Applications for the CSI-IRAP Competition must be received by 5:00 p.m. Eastern Time, November 2, 2011. Applications received after these times will not be considered for funding. For applications submitted through grants.gov a date and time receipt indication is i…",
+          "page": 1,
+          "_native_field_values": [
+            [
+              156,
+              196
+            ]
+          ],
+          "_deadline_uncertain_component": true
+        }
+      ],
+      "legacy_facts": [
+        {
+          "id": "evidence-103313-727e1710ba97",
+          "type": "deadline",
+          "label": "Letter of intent deadline",
+          "value": "2011-07-26",
+          "display_value": "2011-07-26 · 5 p.m. East",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/85665",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/85665#page=1",
+            "document_name": "noaa-oar-cpo-2012-2003041-ffo-report[1].pdf",
+            "sha256": "f0c08c359e2251581815dd1c2b276d5ecf4f6d442b0c0d2f3160be4f44e483a7",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…1, Climate and Atmospheric Research Dates: 1. Letters of Intent Letters of Intent for all Competitions should be received by the Competition Manager by 5 p.m. Eastern Time, July 26, 2011. Applicants who have not received a response to their Letter of Intent within four weeks should contact the Competition Manager. 2. Full Application Full applications for…",
+            "extracted_at": "2026-07-26T17:56:06.367881Z"
+          },
+          "deadline_kind": "letter_of_intent",
+          "date": "2011-07-26",
+          "time": "5 p.m.",
+          "timezone": "East",
+          "required": false
+        },
+        {
+          "id": "evidence-103313-6227ca390e17",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2011-10-03",
+          "display_value": "2011-10-03 · 5:00 p.m. East",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/85665",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/85665#page=1",
+            "document_name": "noaa-oar-cpo-2012-2003041-ffo-report[1].pdf",
+            "sha256": "f0c08c359e2251581815dd1c2b276d5ecf4f6d442b0c0d2f3160be4f44e483a7",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…2. Full Application Full applications for all Competitions except for the CSI-International Research and Applications Project (IRAP) must be received by 5:00 p.m. Eastern Time, October 3, 2011. Applications for the CSI-IRAP Competition must be received by 5:00 p.m. Eastern Time, November 2, 2011. Applications received after these times will not be consider…",
+            "extracted_at": "2026-07-26T17:56:06.367881Z"
+          },
+          "deadline_kind": "application",
+          "date": "2011-10-03",
+          "time": "5:00 p.m.",
+          "timezone": "East",
+          "required": true
+        },
+        {
+          "id": "evidence-103313-13d8b591329c",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2011-11-02",
+          "display_value": "2011-11-02 · 5:00 p.m. East",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/85665",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/85665#page=1",
+            "document_name": "noaa-oar-cpo-2012-2003041-ffo-report[1].pdf",
+            "sha256": "f0c08c359e2251581815dd1c2b276d5ecf4f6d442b0c0d2f3160be4f44e483a7",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…and Applications Project (IRAP) must be received by 5:00 p.m. Eastern Time, October 3, 2011. Applications for the CSI-IRAP Competition must be received by 5:00 p.m. Eastern Time, November 2, 2011. Applications received after these times will not be considered for funding. For applications submitted through grants.gov a date and time receipt indication is i…",
+            "extracted_at": "2026-07-26T17:56:06.367881Z"
+          },
+          "deadline_kind": "application",
+          "date": "2011-11-02",
+          "time": "5:00 p.m.",
+          "timezone": "East",
+          "required": true
+        }
+      ],
+      "expected": [
+        [
+          "2011-07-26",
+          "5 p.m.",
+          "Eastern",
+          "for all Competitions",
+          null
+        ],
+        [
+          "2011-10-03",
+          "5:00 p.m.",
+          "Eastern",
+          "for all Competitions except for the CSI-International Research and Applications Project (IRAP)",
+          null
+        ],
+        [
+          "2011-11-02",
+          "5:00 p.m.",
+          "Eastern",
+          "for the CSI-IRAP Competition",
+          null
+        ]
+      ],
+      "annotation": "Previously fetched source quotations; these prove historical receipt dates and their explicit scope, not new source currentness or future recurrence."
+    },
+    {
+      "opportunity_id": "359225",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/348021",
+        "name": "EDA FY25 Disaster Supplemental NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "0f3088baee78dd0a3acf7f47db2db035ff8788d961c10e209990cf3f07071833",
+        "version": 1,
+        "first_seen_at": "2026-07-26T18:37:51.451981Z",
+        "last_seen_at": "2026-09-05T14:03:41.249498Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-07-26T18:37:51.451981Z",
+      "containers": [
+        {
+          "text": "…chnology and other equipment for workforce training courses. The deadline for applications submitted under the Industry Transformation Path is 5:00 pm Eastern Time on Tuesday, March 3, 2026. For more information on applying for the Industry Transformation Path, please see Appendix I.3. 3. Considerations when selecting a path a. How does the Readiness Path…",
+          "page": 13,
+          "_native_field_values": [
+            [
+              144,
+              190
+            ]
+          ]
+        }
+      ],
+      "legacy_facts": [
+        {
+          "id": "evidence-359225-131d565062ff",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-03-03",
+          "display_value": "2026-03-03 · 5:00 pm East",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/348021",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/348021#page=13",
+            "document_name": "EDA FY25 Disaster Supplemental NOFO.pdf",
+            "sha256": "0f3088baee78dd0a3acf7f47db2db035ff8788d961c10e209990cf3f07071833",
+            "page": 13,
+            "section": null,
+            "location": "page 13",
+            "quote": "…chnology and other equipment for workforce training courses. The deadline for applications submitted under the Industry Transformation Path is 5:00 pm Eastern Time on Tuesday, March 3, 2026. For more information on applying for the Industry Transformation Path, please see Appendix I.3. 3. Considerations when selecting a path a. How does the Readiness Path…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-03-03",
+          "time": "5:00 pm",
+          "timezone": "East",
+          "required": false
+        }
+      ],
+      "expected": [
+        [
+          "2026-03-03",
+          "5:00 pm",
+          "Eastern",
+          "submitted under the Industry Transformation Path",
+          null
+        ]
+      ],
+      "annotation": "Previously fetched source quotations; these prove historical receipt dates and their explicit scope, not new source currentness or future recurrence."
+    },
+    {
+      "opportunity_id": "348923",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+        "name": "693JJ323NF00014.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+        "version": 1,
+        "first_seen_at": "2026-07-26T18:37:51.451981Z",
+        "last_seen_at": "2026-09-05T14:03:41.249498Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-07-26T18:37:51.451981Z",
+      "containers": [
+        {
+          "text": "…will be subject to the availability of funds. This NOFO will result in the award of grants. DEADLINE FOR APPLICATIONS: For FYs 2022 and 2023, applications must be received by August 28, 2023, at 11:59 p.m., EDT. See Attachment A for application deadlines for FY 2022-2026. FHWA will make a call for submissions announcement for FYs 2024, 2025, and 2026 in ac…",
+          "page": 1,
+          "_native_field_values": [
+            [
+              176,
+              206
+            ]
+          ]
+        },
+        {
+          "text": "…services because of a disability, please contact David Scott at (651) 318-5402 or via email david.scott@dot.gov with your request by close of business at least 5 business days (July 19, 2023) prior to the Webinar. SUBMIT APPLICATIONS TO: The FHWA uses www.grants.gov for receipt of all applications. Applicants must register and use the system to submit appl…",
+          "page": 1,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "ATTACHMENT A – IMPORTANT DATES Competition Year Anticipated Announcement Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The F…",
+          "page": 30,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…Competition Year Anticipated Announcement Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Pro…",
+          "page": 30,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…Year Anticipated Announcement Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office…",
+          "page": 30,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.…",
+          "page": 30,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…pated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.gov/constructi…",
+          "page": 30,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…icipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.gov/construction/ADCMS/",
+          "page": 30,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…rd Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.gov/construction/ADCMS/",
+          "page": 30,
+          "_deadline_uncertain_component": true
+        }
+      ],
+      "legacy_facts": [
+        {
+          "id": "evidence-348923-870f2ffbb6a6",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2023-08-28",
+          "display_value": "2023-08-28 · 11:59 p.m.",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=1",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…will be subject to the availability of funds. This NOFO will result in the award of grants. DEADLINE FOR APPLICATIONS: For FYs 2022 and 2023, applications must be received by August 28, 2023, at 11:59 p.m., EDT. See Attachment A for application deadlines for FY 2022-2026. FHWA will make a call for submissions announcement for FYs 2024, 2025, and 2026 in ac…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2023-08-28",
+          "time": "11:59 p.m.",
+          "timezone": null,
+          "required": true
+        },
+        {
+          "id": "evidence-348923-5bc7302366f6",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2023-07-19",
+          "display_value": "2023-07-19",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=1",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…services because of a disability, please contact David Scott at (651) 318-5402 or via email david.scott@dot.gov with your request by close of business at least 5 business days (July 19, 2023) prior to the Webinar. SUBMIT APPLICATIONS TO: The FHWA uses www.grants.gov for receipt of all applications. Applicants must register and use the system to submit appl…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2023-07-19",
+          "time": null,
+          "timezone": null,
+          "required": true
+        },
+        {
+          "id": "evidence-348923-eb40f01b9228",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2023-06-27",
+          "display_value": "2023-06-27",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=30",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 30,
+            "section": null,
+            "location": "page 30",
+            "quote": "ATTACHMENT A – IMPORTANT DATES Competition Year Anticipated Announcement Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The F…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2023-06-27",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-348923-449b8ffb0114",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2024-05-31",
+          "display_value": "2024-05-31",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=30",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 30,
+            "section": null,
+            "location": "page 30",
+            "quote": "…Competition Year Anticipated Announcement Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Pro…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2024-05-31",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-348923-51166af6b0b7",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2024-07-31",
+          "display_value": "2024-07-31",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=30",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 30,
+            "section": null,
+            "location": "page 30",
+            "quote": "…Year Anticipated Announcement Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2024-07-31",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-348923-65471b07b447",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2025-05-31",
+          "display_value": "2025-05-31",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=30",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 30,
+            "section": null,
+            "location": "page 30",
+            "quote": "…Date Anticipated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2025-05-31",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-348923-929e8f3c16b4",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2025-07-31",
+          "display_value": "2025-07-31",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=30",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 30,
+            "section": null,
+            "location": "page 30",
+            "quote": "…pated Application Deadline Anticipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.gov/constructi…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2025-07-31",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-348923-fde0766f8fd6",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-05-31",
+          "display_value": "2026-05-31",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=30",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 30,
+            "section": null,
+            "location": "page 30",
+            "quote": "…icipated Award Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.gov/construction/ADCMS/",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-05-31",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-348923-a7d24d0f7b42",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2026-07-31",
+          "display_value": "2026-07-31",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027#page=30",
+            "document_name": "693JJ323NF00014.pdf",
+            "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84",
+            "page": 30,
+            "section": null,
+            "location": "page 30",
+            "quote": "…rd Date FY 2022 & 2023 June 27, 2023 August 28, 2023 Fall 2023 FY 2024 May 31, 2024 July 31, 2024 Fall 2024 FY 2025 May 31, 2025 July 31, 2025 Fall 2025 FY 2026 May 31, 2026 July 31, 2026 Fall 2026 Note: The FHWA call for submissions announcement on the Program Office Website at https://www.fhwa.dot.gov/construction/ADCMS/",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2026-07-31",
+          "time": null,
+          "timezone": null,
+          "required": false
+        }
+      ],
+      "expected": [
+        [
+          "2023-08-28",
+          "11:59 p.m.",
+          "EDT",
+          null,
+          "FYs 2022 and 2023"
+        ]
+      ],
+      "annotation": "Previously fetched source quotations; these prove historical receipt dates and their explicit scope, not new source currentness or future recurrence."
+    },
+    {
+      "opportunity_id": "279638",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+        "name": "reap nosa 2016-october 6 2015.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+        "version": 1,
+        "first_seen_at": "2026-07-26T18:37:51.451981Z",
+        "last_seen_at": "2026-09-05T14:03:41.249498Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": "2026-07-26T18:37:51.451981Z",
+      "containers": [
+        {
+          "text": "…nd applications and agency statements of organization and functions are examples of documents appearing in this section. Notices Federal Register 60349 Vol. 80, No. 193 Tuesday, October 6, 2015 DEPARTMENT OF AGRICULTURE Agricultural Research Service Submission for OMB Review; Comment Request September 30, 2015. The Department of Agriculture has submitted t…",
+          "page": 1,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…can be submitted on an ongoing basis. This Notice announces the deadline times and dates to submit applications for the REAP funds provided by the Agricultural Act of 2014, on February 7, 2014 (2014 Farm Bill), for fiscal year 2016 for grants, guaranteed loans, and combined grants and guaranteed loans to purchase and install renewable energy systems, and m…",
+          "page": 2,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…ar. (6) Fiscal Year 2015 Renewable Energy System and Energy Efficiency Improvement Grant Applications for $20,000 or less. If an application for a project was submitted after April 30, 2015, for the first time for fiscal year 2015 funding and that initial application was determined eligible but was not funded in either the State or National unrestricted co…",
+          "page": 4,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…application was determined eligible but was not funded in either the State or National unrestricted competitions, the Agency will consider that application for funding in the November 2, 2015, and May 2, 2016, State competitions for grants of $20,000 or less and the National competition for grants of $20,000 or less in fiscal year 2016. If an applicant sub…",
+          "page": 4
+        },
+        {
+          "text": "…ined eligible but was not funded in either the State or National unrestricted competitions, the Agency will consider that application for funding in the November 2, 2015, and May 2, 2016, State competitions for grants of $20,000 or less and the National competition for grants of $20,000 or less in fiscal year 2016. If an applicant submitted the initial app…",
+          "page": 4,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…y to be funded. (3) Energy audits and renewable energy development assistance grant applications. Complete applications must be received no later than 4:30 p.m. local time on February 1, 2016. VerDate Sep<11>2014 18:31 Oct 05, 2015 Jkt 238001 PO 00000 Frm 00004 Fmt 4703 Sfmt 4703 E:\\FR\\FM\\06OCN1.SGM 06OCN1tkelley on DSK3SPTVN1PROD with NOTICES",
+          "page": 4,
+          "_native_field_values": [
+            [
+              152,
+              192
+            ]
+          ],
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…ble energy development assistance grant applications. Complete applications must be received no later than 4:30 p.m. local time on February 1, 2016. VerDate Sep<11>2014 18:31 Oct 05, 2015 Jkt 238001 PO 00000 Frm 00004 Fmt 4703 Sfmt 4703 E:\\FR\\FM\\06OCN1.SGM 06OCN1tkelley on DSK3SPTVN1PROD with NOTICES",
+          "page": 4,
+          "_native_field_values": [
+            [
+              108,
+              148
+            ]
+          ],
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…s Application window closing dates Renewable Energy Systems and Energy Efficiency Improvement Grants ($20,000 or less competing for up to 50 percent of the set aside funds). July 1, 2015 ........................ November 2, 2015. Renewable Energy Systems and Energy Efficiency Improvement Grants ($20,000 or less competing for the remaining set aside funds).…",
+          "page": 5,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…Improvement Guaranteed Loans Continuous application cycle. Continuous application cycle. Energy Audit and Renewable Energy Development Assistance Grants ...................... February 13, 2015 .............. February 1, 2016.* * Applications received after this date will be considered for the next funding cycle in the subsequent fiscal year. F. Intergover…",
+          "page": 5,
+          "_deadline_uncertain_component": true
+        },
+        {
+          "text": "…ill be competed against other applications for grants of $20,000 or less from other States at a final national competition. Obligations of these funds will take place prior to June 30, 2016. (c) Renewable energy system and energy efficiency improvement unrestricted grant State funds. Renewable energy system and energy efficiency improvement grant funds tha…",
+          "page": 6
+        }
+      ],
+      "legacy_facts": [
+        {
+          "id": "evidence-279638-20c67de8f978",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2015-10-06",
+          "display_value": "2015-10-06",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=1",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…nd applications and agency statements of organization and functions are examples of documents appearing in this section. Notices Federal Register 60349 Vol. 80, No. 193 Tuesday, October 6, 2015 DEPARTMENT OF AGRICULTURE Agricultural Research Service Submission for OMB Review; Comment Request September 30, 2015. The Department of Agriculture has submitted t…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2015-10-06",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-279638-6e0040677e70",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2014-02-07",
+          "display_value": "2014-02-07",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=2",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 2,
+            "section": null,
+            "location": "page 2",
+            "quote": "…can be submitted on an ongoing basis. This Notice announces the deadline times and dates to submit applications for the REAP funds provided by the Agricultural Act of 2014, on February 7, 2014 (2014 Farm Bill), for fiscal year 2016 for grants, guaranteed loans, and combined grants and guaranteed loans to purchase and install renewable energy systems, and m…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2014-02-07",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-279638-d6d0a74a826c",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2015-04-30",
+          "display_value": "2015-04-30",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=4",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…ar. (6) Fiscal Year 2015 Renewable Energy System and Energy Efficiency Improvement Grant Applications for $20,000 or less. If an application for a project was submitted after April 30, 2015, for the first time for fiscal year 2015 funding and that initial application was determined eligible but was not funded in either the State or National unrestricted co…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2015-04-30",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-279638-5ec6f718fbd5",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2015-11-02",
+          "display_value": "2015-11-02",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=4",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…application was determined eligible but was not funded in either the State or National unrestricted competitions, the Agency will consider that application for funding in the November 2, 2015, and May 2, 2016, State competitions for grants of $20,000 or less and the National competition for grants of $20,000 or less in fiscal year 2016. If an applicant sub…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2015-11-02",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-279638-acc4c8cb2cb2",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2016-05-02",
+          "display_value": "2016-05-02",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=4",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…ined eligible but was not funded in either the State or National unrestricted competitions, the Agency will consider that application for funding in the November 2, 2015, and May 2, 2016, State competitions for grants of $20,000 or less and the National competition for grants of $20,000 or less in fiscal year 2016. If an applicant submitted the initial app…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2016-05-02",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-279638-9c172a84a014",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2016-02-01",
+          "display_value": "2016-02-01 · 4:30 p.m. loca",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=4",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…y to be funded. (3) Energy audits and renewable energy development assistance grant applications. Complete applications must be received no later than 4:30 p.m. local time on February 1, 2016. VerDate Sep<11>2014 18:31 Oct 05, 2015 Jkt 238001 PO 00000 Frm 00004 Fmt 4703 Sfmt 4703 E:\\FR\\FM\\06OCN1.SGM 06OCN1tkelley on DSK3SPTVN1PROD with NOTICES",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2016-02-01",
+          "time": "4:30 p.m.",
+          "timezone": "loca",
+          "required": true
+        },
+        {
+          "id": "evidence-279638-3aefb4426292",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2015-10-05",
+          "display_value": "2015-10-05 · 4:30 p.m. loca",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=4",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…ble energy development assistance grant applications. Complete applications must be received no later than 4:30 p.m. local time on February 1, 2016. VerDate Sep<11>2014 18:31 Oct 05, 2015 Jkt 238001 PO 00000 Frm 00004 Fmt 4703 Sfmt 4703 E:\\FR\\FM\\06OCN1.SGM 06OCN1tkelley on DSK3SPTVN1PROD with NOTICES",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2015-10-05",
+          "time": "4:30 p.m.",
+          "timezone": "loca",
+          "required": true
+        },
+        {
+          "id": "evidence-279638-f2066a246d8d",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2015-07-01",
+          "display_value": "2015-07-01",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=5",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…s Application window closing dates Renewable Energy Systems and Energy Efficiency Improvement Grants ($20,000 or less competing for up to 50 percent of the set aside funds). July 1, 2015 ........................ November 2, 2015. Renewable Energy Systems and Energy Efficiency Improvement Grants ($20,000 or less competing for the remaining set aside funds).…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2015-07-01",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-279638-60a343c37018",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2015-02-13",
+          "display_value": "2015-02-13",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=5",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…Improvement Guaranteed Loans Continuous application cycle. Continuous application cycle. Energy Audit and Renewable Energy Development Assistance Grants ...................... February 13, 2015 .............. February 1, 2016.* * Applications received after this date will be considered for the next funding cycle in the subsequent fiscal year. F. Intergover…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2015-02-13",
+          "time": null,
+          "timezone": null,
+          "required": false
+        },
+        {
+          "id": "evidence-279638-b6ac34f0256c",
+          "type": "deadline",
+          "label": "Full application deadline",
+          "value": "2016-06-30",
+          "display_value": "2016-06-30",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/246456#page=6",
+            "document_name": "reap nosa 2016-october 6 2015.pdf",
+            "sha256": "fedb6e95d5aa2ac958444c83bea0dbd1c6c3988ea705802b4ba1c416d251b2fe",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "…ill be competed against other applications for grants of $20,000 or less from other States at a final national competition. Obligations of these funds will take place prior to June 30, 2016. (c) Renewable energy system and energy efficiency improvement unrestricted grant State funds. Renewable energy system and energy efficiency improvement grant funds tha…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          },
+          "deadline_kind": "application",
+          "date": "2016-06-30",
+          "time": null,
+          "timezone": null,
+          "required": false
+        }
+      ],
+      "expected": [
+        [
+          "2016-02-01",
+          "4:30 p.m.",
+          null,
+          "Energy audits and renewable energy development assistance grant applications",
+          null
+        ]
+      ],
+      "annotation": "Previously fetched source quotations; these prove historical receipt dates and their explicit scope, not new source currentness or future recurrence."
+    }
+  ]
+}

@@ -1,0 +1,480 @@
+{
+  "cases": [
+    {
+      "opportunity_id": "363611",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354624",
+        "sha256": "d0264e29a717e1e5c02d23749bcaeb7acc84da20d3819a2cea694cb4ed744d71",
+        "retrieved_at": "2026-09-07T19:43:14.764161+00:00"
+      },
+      "containers": [
+        {
+          "page": 4,
+          "text": "C. Key Dates: \n \nSeptember 9, 2026 3:30 pm ET Information Webinar 1 \nSeptember 17, 2026 1:00 pm ET Informational Webinar 2 \nOctober 23, 2026 11:59 pm ET FAQ Submission Deadline \nNovember 9, 2026 11:59 pm ET Application Submission Deadline \nSpring 2027 Anticipated Selection Notiﬁcation",
+          "layout_rows": [
+            {
+              "line": 27,
+              "text": "                                                                                                                             20 Awards",
+              "cells": [
+                {
+                  "text": "20 Awards",
+                  "column_start": 125,
+                  "column_end": 134
+                }
+              ]
+            },
+            {
+              "line": 28,
+              "text": "September 9, 2026 3:30 pm ET                                                                         Information Webinar 1",
+              "cells": [
+                {
+                  "text": "September 9, 2026 3:30 pm ET",
+                  "column_start": 0,
+                  "column_end": 28
+                },
+                {
+                  "text": "Information Webinar 1",
+                  "column_start": 101,
+                  "column_end": 122
+                }
+              ]
+            },
+            {
+              "line": 29,
+              "text": "September 17, 2026 1:00 pm ET                                                           Informational Webinar 2",
+              "cells": [
+                {
+                  "text": "September 17, 2026 1:00 pm ET",
+                  "column_start": 0,
+                  "column_end": 29
+                },
+                {
+                  "text": "Informational Webinar 2",
+                  "column_start": 88,
+                  "column_end": 111
+                }
+              ]
+            },
+            {
+              "line": 30,
+              "text": "October 23, 2026 11:59 pm ET                                                                                          FAQ Submission Deadline",
+              "cells": [
+                {
+                  "text": "October 23, 2026 11:59 pm ET",
+                  "column_start": 0,
+                  "column_end": 28
+                },
+                {
+                  "text": "FAQ Submission Deadline",
+                  "column_start": 118,
+                  "column_end": 141
+                }
+              ]
+            },
+            {
+              "line": 31,
+              "text": "November 9, 2026 11:59 pm ET                                                         Application Submission Deadline",
+              "cells": [
+                {
+                  "text": "November 9, 2026 11:59 pm ET",
+                  "column_start": 0,
+                  "column_end": 28
+                },
+                {
+                  "text": "Application Submission Deadline",
+                  "column_start": 85,
+                  "column_end": 116
+                }
+              ]
+            },
+            {
+              "line": 32,
+              "text": "Spring 2027                                                                                                                                                                                                                                                                                                                                                                                                                                                              Anticipated Selection Notiﬁcation",
+              "cells": [
+                {
+                  "text": "Spring 2027",
+                  "column_start": 0,
+                  "column_end": 11
+                },
+                {
+                  "text": "Anticipated Selection Notiﬁcation",
+                  "column_start": 457,
+                  "column_end": 490
+                }
+              ]
+            },
+            {
+              "line": 33,
+              "text": "D. Funding Details:",
+              "cells": [
+                {
+                  "text": "D. Funding Details:",
+                  "column_start": 0,
+                  "column_end": 19
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "record": {
+        "opportunity_id": "363611",
+        "close_date": "2026-11-09",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-09",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/363611",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-21T16:38:23.903640Z",
+            "document_evidence_id": "evidence-363611-8dbf17754cbb",
+            "document_confidence": "machine_extracted_needs_verification"
+          },
+          {
+            "kind": "application",
+            "date": "2026-09-09",
+            "time": "3:30 pm",
+            "timezone": "ET",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354624",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363611-b7833ca1414a",
+            "required": false
+          },
+          {
+            "kind": "application",
+            "date": "2026-09-17",
+            "time": "3:30 pm",
+            "timezone": "ET",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354624",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363611-578bda5fb5c5",
+            "required": false
+          },
+          {
+            "kind": "application",
+            "date": "2026-10-23",
+            "time": "3:30 pm",
+            "timezone": "ET",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354624",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363611-eabbe7285cb9",
+            "required": false
+          },
+          {
+            "kind": "application",
+            "date": "2025-10-10",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354624",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-363611-719c2b27fe02",
+            "required": true
+          }
+        ]
+      },
+      "expected": [
+        {
+          "deadline_kind": "application",
+          "date": "2026-11-09",
+          "time": "11:59 pm",
+          "timezone": "ET",
+          "required": null,
+          "date_qualifier": null
+        }
+      ]
+    },
+    {
+      "opportunity_id": "362836",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+        "sha256": "b720863805a224a41bfcd3b0e394f8ea1f4b4f74f92cc2159f75f9ee661a03d8",
+        "retrieved_at": "2026-09-07T12:37:01.714937+00:00"
+      },
+      "containers": [
+        {
+          "page": 2,
+          "text": "Although not required, white papers are strongly encouraged for all offerors seeking funding."
+        },
+        {
+          "page": 5,
+          "text": "V. SIGNIFICANT DATES AND TIMES \n \nEvent Date Time \nRecommended White Paper Submission \nDate* \n7/31/2026 4 pm Eastern Time \nNotification of White Paper Valuation* 8/14/2026 \nOral Presentations 9/10/2026 \nNotification of Selection: Full Proposals * 10/05/2026 \nRecommended Full Proposal Submission 11/16/2026 4 pm Eastern Time \nAwards * 4/15/2027 \n \n Note: * These are approximate dates.",
+          "layout_rows": [
+            {
+              "line": 8,
+              "text": "                                                   Event                                                             Date                                      Time",
+              "cells": [
+                {
+                  "text": "Event",
+                  "column_start": 51,
+                  "column_end": 56
+                },
+                {
+                  "text": "Date",
+                  "column_start": 117,
+                  "column_end": 121
+                },
+                {
+                  "text": "Time",
+                  "column_start": 159,
+                  "column_end": 163
+                }
+              ]
+            },
+            {
+              "line": 9,
+              "text": "             Recommended White Paper Submission                                                          7/31/2026                                  4 pm Eastern Time",
+              "cells": [
+                {
+                  "text": "Recommended White Paper Submission",
+                  "column_start": 13,
+                  "column_end": 47
+                },
+                {
+                  "text": "7/31/2026",
+                  "column_start": 105,
+                  "column_end": 114
+                },
+                {
+                  "text": "4 pm Eastern Time",
+                  "column_start": 148,
+                  "column_end": 165
+                }
+              ]
+            },
+            {
+              "line": 10,
+              "text": "             Date*",
+              "cells": [
+                {
+                  "text": "Date*",
+                  "column_start": 13,
+                  "column_end": 18
+                }
+              ]
+            },
+            {
+              "line": 11,
+              "text": "             Notification of White Paper Valuation*                                                      8/14/2026",
+              "cells": [
+                {
+                  "text": "Notification of White Paper Valuation*",
+                  "column_start": 13,
+                  "column_end": 51
+                },
+                {
+                  "text": "8/14/2026",
+                  "column_start": 105,
+                  "column_end": 114
+                }
+              ]
+            },
+            {
+              "line": 12,
+              "text": "             Oral Presentations                                                                          9/10/2026",
+              "cells": [
+                {
+                  "text": "Oral Presentations",
+                  "column_start": 13,
+                  "column_end": 31
+                },
+                {
+                  "text": "9/10/2026",
+                  "column_start": 105,
+                  "column_end": 114
+                }
+              ]
+            },
+            {
+              "line": 13,
+              "text": "             Notification of Selection: Full Proposals *                                                 10/05/2026",
+              "cells": [
+                {
+                  "text": "Notification of Selection: Full Proposals *",
+                  "column_start": 13,
+                  "column_end": 56
+                },
+                {
+                  "text": "10/05/2026",
+                  "column_start": 105,
+                  "column_end": 115
+                }
+              ]
+            },
+            {
+              "line": 14,
+              "text": "             Recommended Full Proposal Submission                                                         11/16/2026                                 4 pm Eastern Time",
+              "cells": [
+                {
+                  "text": "Recommended Full Proposal Submission",
+                  "column_start": 13,
+                  "column_end": 49
+                },
+                {
+                  "text": "11/16/2026",
+                  "column_start": 106,
+                  "column_end": 116
+                },
+                {
+                  "text": "4 pm Eastern Time",
+                  "column_start": 149,
+                  "column_end": 166
+                }
+              ]
+            },
+            {
+              "line": 15,
+              "text": "             Awards *                                                                                    4/15/2027",
+              "cells": [
+                {
+                  "text": "Awards *",
+                  "column_start": 13,
+                  "column_end": 21
+                },
+                {
+                  "text": "4/15/2027",
+                  "column_start": 105,
+                  "column_end": 114
+                }
+              ]
+            },
+            {
+              "line": 17,
+              "text": "Note: * These are approximate dates.",
+              "cells": [
+                {
+                  "text": "Note: * These are approximate dates.",
+                  "column_start": 0,
+                  "column_end": 36
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "record": {
+        "opportunity_id": "362836",
+        "close_date": "2026-11-16",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-11-16",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/362836",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z",
+            "document_evidence_id": "evidence-362836-d4e17774cf05",
+            "document_confidence": "machine_extracted_needs_verification"
+          },
+          {
+            "kind": "white_paper",
+            "date": null,
+            "text": null,
+            "required": false,
+            "confidence": "machine_extracted_needs_verification",
+            "estimated": false,
+            "source": "Grants.gov synopsis text",
+            "source_url": "https://www.grants.gov/search-results-detail/362836",
+            "detail_checked_at": "2026-08-02T11:34:50.877871Z"
+          },
+          {
+            "kind": "white_paper",
+            "date": "2026-07-31",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-362836-fc273301ba39",
+            "required": true
+          },
+          {
+            "kind": "application",
+            "date": "2026-09-10",
+            "time": null,
+            "timezone": null,
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-362836-d853acd5afac",
+            "required": true
+          },
+          {
+            "kind": "white_paper",
+            "date": "2026-08-14",
+            "time": "4 pm",
+            "timezone": "East",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-362836-06dccaf4a78d",
+            "required": false
+          },
+          {
+            "kind": "application",
+            "date": "2026-10-05",
+            "time": "4 pm",
+            "timezone": "East",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-362836-57c5057d9189",
+            "required": false
+          },
+          {
+            "kind": "application",
+            "date": "2027-04-15",
+            "time": "4 pm",
+            "timezone": "East",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353106",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-362836-be6bb4b0f192",
+            "required": true
+          }
+        ]
+      },
+      "expected": [
+        {
+          "deadline_kind": "white_paper",
+          "date": "2026-07-31",
+          "time": "4 pm",
+          "timezone": "Eastern",
+          "required": false,
+          "date_qualifier": "recommended"
+        },
+        {
+          "deadline_kind": "application",
+          "date": "2026-11-16",
+          "time": "4 pm",
+          "timezone": "Eastern",
+          "required": null,
+          "date_qualifier": "recommended"
+        }
+      ]
+    }
+  ]
+}

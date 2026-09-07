@@ -1,0 +1,31 @@
+{
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/330027",
+    "retrieved_at": "2026-09-07T12:37:00.920620+00:00",
+    "sha256": "42f23cd3d47ce03600701d05deedd05db4a353a8621f6067b19469bdfc213f84"
+  },
+  "document_name": "693JJ323NF00014.pdf",
+  "annotation_method": "Authoritative source section inspected independently; bounded source excerpt, not production input.",
+  "format": "pdf_text_excerpt",
+  "containers": [
+    {
+      "page": 7,
+      "section": null,
+      "anchor": null,
+      "text": " \n \nSECTION B – FEDERAL AWARD INFORMATION \n \n1. FUNDING \n \nSection 13006(a) of BIL, codified at 23 U.S.C. 503(c)(5)(C), provides $20 million of TIDP funds \nper fiscal year for FY 2022-2026 to accelerate the deployment and implementation of ADCMS.  \nDue to the imposition of the obligation limitation on the Highway Trust Fund, as well as \nreserving funds necessary for other activities to accelerate the deployment and implementation of \nADCMS activities, such as peer exchanges, the development and deployment of best practices, \nand training, up to $17 million is expected to be available for each fiscal year from 2022 to 2026 \nfor award under the ADCMS Program. The first round of awards will combine FY 2022 and FY \n2023 funding, for a total of $34 million.  The actual amount available to be awarded under each \nNOFO will be subject to the availability of funds and applications received. The Government \nreserves the right to make no awards under this NOFO. \n \n2. AWARD SIZE \n \nFor each of FYs 2022-2026, the FHWA has set the minimum ADCMS Program Federal share \nper grant award at $1,000,000 and the maximum Federal share per award at $5,000,000.  The \nFHWA anticipates awarding 5 to 10 ADCMS Program grants for each of FY 2022 to FY 2026, \nsubject to the availability of funds.  The FY 2022 and FY 2023 funding is combined in the first \nround of awards and, therefore, FHWA anticipates awarding 10 to 20 ADCMS grants in that \nround.  Eligible Applicants may apply each year and receive awards for multiple independent \nprojects. \n \n3.  TYPE OF AWARD  \n \nThe planned award type is a cost reimbursement grant with cost-sharing.  ADCMS Program \nfunds will be awarded upon the execution of a project agreement, which is a type of grant \nagreement for administration of funds to a State DOT using the DOT Payment System named \nFiscal Management Information System (FMIS).   \n \n4.  PERIOD OF PERFORMANCE \n \nThe period of performance for the award is anticipated to be 1 to 4 years from the effective date \nof the grant award.  The start of the period of performance will begin on the date that funds are \nobligated in FMIS and end on the project end date in FMIS.   \n \n \n \n \n \n \n "
+    }
+  ],
+  "annotations": [
+    {
+      "location": "PDF page 7, Federal share per grant award",
+      "rationale": "Explicit lower and upper bounds belong to the same per-award Federal share.",
+      "require": {
+        "type": "award_range",
+        "value": {
+          "minimum": 1000000,
+          "maximum": 5000000
+        }
+      }
+    }
+  ]
+}

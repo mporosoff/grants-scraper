@@ -1,0 +1,122 @@
+{
+  "format": "pdf_text_excerpt",
+  "source": {
+    "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351142",
+    "sha256": "d7acc03171c3419870370695bc465228875b9b44fdfe23f1c76f038fbd8b6eb8",
+    "retrieved_at": "2026-09-07T15:31:20.201864+00:00"
+  },
+  "containers": [
+    {
+      "page": 2,
+      "text": "FDA Research OCT FY2025_1 Page 2 of 36 \n \nNumber of Applications \n \nSee Part 2, Section III. 3. Additional Information on Eligibility. \n \n Assistance Listing \nNumber(s) \n \n93.103 \n \nFunding Opportunity \nPurpose \n \nThe purpose of this Notice of Funding Opportunity (NOFO) is to fund \nclinical trials of products evaluating efficacy and/or safety in support \nof a new indication or change in labeling to address unmet needs in \nrare diseases or conditions. Additionally, through the funding of \ncollaborative, efficient, and/or innovative clinical trials, FDA expects to \nincrease the number of approved treatments for rare diseases and \nexert a broad and positive impact on rare disease drug development. \n \n Funding Opportunity \nGoals \n \nThe goal of this Notice of Funding Opportunity (NOFO) is intended to \nsupport clinical trials of orphan products in all phases of product \ndevelopment (phase 1, 2 and/or 3) for rare diseases with unmet \nmedical needs. These clinical trials should evaluate safety and/or \nefficacy of medical products in support of a new indication or a change \nin labeling. \n \nKey Dates \nPosted Date \n \nJuly 11, 2025 \n \nOpen Date (Earliest \nSubmission Date) \n \nAugust 22, 2025 \n \nLetter of Intent Due \nDate(s) \n \nSeptember 22, 2025 (Optional) \nSeptember 21, 2026 (Optional) \nSeptember 20, 2027 (Optional) \n \nApplication Due Date(s) \nOctober 21, 2025, by 11:59 PM Eastern Time \nOctober 20, 2026, by 11:59 PM Eastern Time \nOctober 19, 2027, by 11:59 PM Eastern Time.",
+      "section": null,
+      "anchor": null
+    },
+    {
+      "page": 3,
+      "text": "FDA Research OCT FY2025_1 Page 3 of 36 \n \nApplicants are encouraged to apply early to allow adequate time to make any corrections to errors found \nin the application during the submission process by the due date. Resubmissions ONLY Application Due \nDate(s): May 18, 2027; May 16, 2028 by 11:59 PM Eastern Time. See resubmission eligibility requirement \nbelow. Applicants should be aware that on-time submission means that an application is submitted error \nfree (of both Grants.gov and eRA Commons errors) by 11:59 PM Eastern Time on the application due \ndate. \n \nAll applications are due by 11:59 PM Eastern Time. \nApplicants are encouraged to apply early to allow adequate time to make any corrections to errors found \nin the application during the submission process by the due date. \nNo late applications will be accepted for this Notice of Funding Opportunity (NOFO). \nAIDS Application Due Date(s) \nNot Applicable \nScientific Merit Review \nNew Applications: February/March 2026, 2027, 2028 \nResubmissions: June 2027, 2028 \nEarliest Start Date \nJuly 2026 \n Expiration Date \n \nMay 31, 2028 \n \nAdvisory Council Review \nNot Applicable \nDue Dates for E.O. \n12372 \n \nNot Applicable \n \n",
+      "section": null,
+      "anchor": null
+    }
+  ],
+  "annotations": [
+    {
+      "location": "Official canonical PDF, physical pages 2\u20133, Key Dates",
+      "rationale": "The canonical PDF separately labels application dates and resubmissions; its source differs from the HTML notice.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2025-10-21",
+        "application_class": "new",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical pages 2\u20133, Key Dates",
+      "rationale": "The canonical PDF separately labels application dates and resubmissions; its source differs from the HTML notice.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2026-10-20",
+        "application_class": "new",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical pages 2\u20133, Key Dates",
+      "rationale": "The canonical PDF separately labels application dates and resubmissions; its source differs from the HTML notice.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2027-10-19",
+        "application_class": "new",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical pages 2\u20133, Key Dates",
+      "rationale": "The canonical PDF separately labels application dates and resubmissions; its source differs from the HTML notice.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2027-05-18",
+        "application_class": "resubmission",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical pages 2\u20133, Key Dates",
+      "rationale": "The canonical PDF separately labels application dates and resubmissions; its source differs from the HTML notice.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "application",
+        "date": "2028-05-16",
+        "application_class": "resubmission",
+        "time": "11:59 PM",
+        "timezone": "Eastern"
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical page 2, Letter of Intent Due Dates",
+      "rationale": "Each source line explicitly marks this LOI date optional.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "letter_of_intent",
+        "date": "2025-09-22",
+        "required": false
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical page 2, Letter of Intent Due Dates",
+      "rationale": "Each source line explicitly marks this LOI date optional.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "letter_of_intent",
+        "date": "2026-09-21",
+        "required": false
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical page 2, Letter of Intent Due Dates",
+      "rationale": "Each source line explicitly marks this LOI date optional.",
+      "require": {
+        "type": "deadline",
+        "deadline_kind": "letter_of_intent",
+        "date": "2027-09-20",
+        "required": false
+      }
+    },
+    {
+      "location": "Official canonical PDF, physical page 3, Expiration Date",
+      "rationale": "Expiration must not become an application deadline.",
+      "forbid": {
+        "type": "deadline",
+        "date": "2028-05-31"
+      }
+    }
+  ]
+}

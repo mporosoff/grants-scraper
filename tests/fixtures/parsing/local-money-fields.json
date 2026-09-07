@@ -1,0 +1,2337 @@
+{
+  "annotation_method": "Actual official-source excerpts inspected in bounded 146-record monetary change-ledger review. Expected semantics are separately annotated; no fresh retrieval is claimed.",
+  "cases": [
+    {
+      "opportunity_id": "363363",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354402",
+        "name": "Forest Legacy Program - FY2028 NOFO - FINAL.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "652f0fc7336f9161b0698819f13a3793549a691653128720a634405725f80213",
+        "version": 2,
+        "first_seen_at": "2026-08-13T11:12:25.948354Z",
+        "last_seen_at": "2026-08-27T09:01:59.872946Z",
+        "changed_since_previous": true
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363363-e9329d51c63e",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 20000000
+          },
+          "display_value": "Up to $20,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354402",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354402#page=3",
+            "document_name": "Forest Legacy Program - FY2028 NOFO - FINAL.pdf",
+            "sha256": "652f0fc7336f9161b0698819f13a3793549a691653128720a634405725f80213",
+            "page": 3,
+            "section": null,
+            "location": "page 3",
+            "quote": "…y $130 million) of the previous year’s appropriated funding. o Expected Number of Awards: 10-15 awards estimated, to be determined by Congress through annual appropriations. o Individual Award Funding: Up to $20,000,000 per project for eligible land acquisition and transactional costs. The Agency reserves the right to award an applicant less than the fundi…",
+            "extracted_at": "2026-08-13T11:12:25.948354Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 20000000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363818",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354981",
+        "name": "FY26-STEM-NOFO-P.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "f04f7d5ec78891322f3e235efaa83e658cc4c139d1b7cae83fd6de61c1013ef3",
+        "version": 1,
+        "first_seen_at": "2026-09-05T10:08:42.497366Z",
+        "last_seen_at": "2026-09-05T10:08:42.497366Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363818-8cc3345e217e",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 25000,
+            "maximum": 1905210
+          },
+          "display_value": "$25,000–$1,905,210",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354981",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354981#page=1",
+            "document_name": "FY26-STEM-NOFO-P.pdf",
+            "sha256": "f04f7d5ec78891322f3e235efaa83e658cc4c139d1b7cae83fd6de61c1013ef3",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…Technology, Engineering, and Mathematics Fields FUNDING YEAR: Fiscal Year (FY) 2026 APPLICATION DEADLINE: September 14, 2026 ANTICIPATED PROGRAM FUNDING: AVERAGE INDIVIDUAL AWARD RANGE: $1,905,210 $25,000 - $200,000 FUNDING OPPORTUNITY NUMBER: USDA-NIFA-WAMS-011117 ASSISTANCE LISTING NUMBER: 10.318",
+            "extracted_at": "2026-09-05T10:08:42.497366Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 25000,
+            "maximum": 200000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "358955",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/347648",
+        "name": "FY25 MSE NOFO Amendment.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "6314ba155e4302ac9b4dd60a2f969aaae7a62899ac295ca3a0d39cbec59d13e3",
+        "version": 1,
+        "first_seen_at": "2026-07-26T19:41:23.121484Z",
+        "last_seen_at": "2026-09-06T13:42:07.018645Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-358955-e4448f2d196f",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 5000
+          },
+          "display_value": "Up to $5,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/347648",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/347648#page=6",
+            "document_name": "FY25 MSE NOFO Amendment.pdf",
+            "sha256": "6314ba155e4302ac9b4dd60a2f969aaae7a62899ac295ca3a0d39cbec59d13e3",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "…e mission of the CRDO. However, NIST cannot be an official sponsor or co-sponsor for any event funded through this program. Support is generally provided in increments of $5,000 per award. Applications for other purposes may be considered. b. CHIPS Metrology Program: All objectives of interest will focus on conducting the measurement science, or metrology,…",
+            "extracted_at": "2026-07-26T19:41:23.121484Z"
+          }
+        }
+      ],
+      "expected_awards": [],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363628",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354641",
+        "name": "FY 2025 and 2026 ADCMS NOFO FINAL.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "ed75ab42f2312d2eef39470efe4b0cc15a2e2cbfb33f7c12f158629103d87651",
+        "version": 1,
+        "first_seen_at": "2026-08-21T16:39:20.902607Z",
+        "last_seen_at": "2026-09-05T16:20:56.348828Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363628-e4f4579fb937",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 1000000
+          },
+          "display_value": "Up to $1,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354641",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354641#page=3",
+            "document_name": "FY 2025 and 2026 ADCMS NOFO FINAL.pdf",
+            "sha256": "ed75ab42f2312d2eef39470efe4b0cc15a2e2cbfb33f7c12f158629103d87651",
+            "page": 3,
+            "section": null,
+            "location": "page 3",
+            "quote": "…nts. The actual amount available to be awarded under this notice will be subject to the availability of funds. There is a minimum of $1 million and a maximum of $5 million award amount for each ADCMS Program award. Key Dates Application Due Date: 09/16/2026 at 11:59 PM ET. DOT anticipates announcing award selections the week of December 14, 2026. Executive…",
+            "extracted_at": "2026-08-21T16:39:20.902607Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 1000000,
+            "maximum": 5000000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363014",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353498",
+        "name": "Scholarly Editions 2026 NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "fe0ef84642793223e7efbfc5bc39a2604d91936bb6d8a06f733815c50d2b47c2",
+        "version": 1,
+        "first_seen_at": "2026-07-27T14:17:05.080489Z",
+        "last_seen_at": "2026-08-24T17:46:18.380745Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363014-3c696b59b64b",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 50000
+          },
+          "display_value": "Up to $50,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353498",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353498#page=2",
+            "document_name": "Scholarly Editions 2026 NOFO.pdf",
+            "sha256": "fe0ef84642793223e7efbfc5bc39a2604d91936bb6d8a06f733815c50d2b47c2",
+            "page": 2,
+            "section": null,
+            "location": "page 2",
+            "quote": "…$65,000 Implementation: Up to $100,000 per year in outright funds, plus an additional $50,000 in matching funds, for a maximum of $150,000 per year and a maximum of $450,000 per award. Chairman’s Special Awards in American History and Culture: up to $1,000,000 in outright and matching funds. See B. Federal Award Information. Cost Sharing/Match Required No,…",
+            "extracted_at": "2026-07-27T14:17:05.080489Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 150000
+          },
+          "track": "Implementation",
+          "basis": "per_year"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 450000
+          },
+          "track": "Implementation",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362321",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351884",
+        "name": "HT942526PRMRPCTA_GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "00dbe32c7a87ffbdbc5590439367460a5388d38ee1e7dd68745c5c8a1558f33d",
+        "version": 1,
+        "first_seen_at": "2026-07-26T19:41:23.121484Z",
+        "last_seen_at": "2026-09-06T13:42:07.018645Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362321-6c2a61cf2ce9",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 6000000
+          },
+          "display_value": "Up to $6,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351884",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351884#page=4",
+            "document_name": "HT942526PRMRPCTA_GG.pdf",
+            "sha256": "00dbe32c7a87ffbdbc5590439367460a5388d38ee1e7dd68745c5c8a1558f33d",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…with total cost caps of $800,000 for the planning phase of a Clinical Trial with Planning Phase, $6M for Funding Level 1, $10M for Funding Level 2, and $20M for Funding Level 3 per award. The maximum period of performance is 4 years for the clinical trial, and 12 months for the planning phase. It is anticipated that awards made from this FY26 funding oppor…",
+            "extracted_at": "2026-07-26T19:41:23.121484Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 800000
+          },
+          "track": "planning phase of a Clinical Trial with Planning Phase",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 6000000
+          },
+          "track": "Funding Level 1",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 10000000
+          },
+          "track": "Funding Level 2",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 20000000
+          },
+          "track": "Funding Level 3",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362178",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351685",
+        "name": "HT942526AZRPTrCA_GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "c9f00197083ee3c654bfa9f889803365b0df7e76345471941772009f6c2e0e2c",
+        "version": 1,
+        "first_seen_at": "2026-07-26T19:41:23.121484Z",
+        "last_seen_at": "2026-09-06T13:42:07.018645Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362178-9b30e788955c",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 5400000
+          },
+          "display_value": "Up to $5,400,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351685",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351685#page=4",
+            "document_name": "HT942526AZRPTrCA_GG.pdf",
+            "sha256": "c9f00197083ee3c654bfa9f889803365b0df7e76345471941772009f6c2e0e2c",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…etails: The Congressionally Directed Medical Research Programs (CDMRP) expects to allot roughly $5.4M to fund approximately three TrCA applications with total cost caps of $1.6M per award for the single PI option and $1.9M combined for the CIT Partnership Option. The maximum period of performance is 4 years. It is anticipated that awards made from this FY2…",
+            "extracted_at": "2026-07-26T19:41:23.121484Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 1600000
+          },
+          "track": "single PI option",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 1900000
+          },
+          "track": "CIT Partnership Option",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362180",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351688",
+        "name": "HT942526AZRPTrRA_GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "d6b107cc058cd29b07e7552580a7935689f5eaf6432d1bd43637fb30d1828c4f",
+        "version": 1,
+        "first_seen_at": "2026-07-26T19:41:23.121484Z",
+        "last_seen_at": "2026-08-23T21:26:44.423566Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362180-ad370efe7629",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 4000000
+          },
+          "display_value": "Up to $4,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351688",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351688#page=4",
+            "document_name": "HT942526AZRPTrRA_GG.pdf",
+            "sha256": "d6b107cc058cd29b07e7552580a7935689f5eaf6432d1bd43637fb30d1828c4f",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…Details: The Congressionally Directed Medical Research Programs (CDMRP) expects to allot roughly $4.0M to fund approximately four TrRA applications with total cost caps of $1.0M per award for the single PI option and $1.0M combined for the CIT Partnership Option. The maximum period of performance is 3 years. It is anticipated that awards made from this FY2…",
+            "extracted_at": "2026-07-26T19:41:23.121484Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 1000000
+          },
+          "track": "single PI option",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 1000000
+          },
+          "track": "CIT Partnership Option",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363359",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354224",
+        "name": "CADI America First Research NOFO_FINAL.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "55768041fada14b6472c94a9cbf9074c9f5c7424c4580173ebed81bd0a749f28",
+        "version": 1,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_seen_at": "2026-08-24T19:19:38.443582Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363359-fe19d1572c02",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 100000
+          },
+          "display_value": "Up to $100,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354224",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354224#page=8",
+            "document_name": "CADI America First Research NOFO_FINAL.pdf",
+            "sha256": "55768041fada14b6472c94a9cbf9074c9f5c7424c4580173ebed81bd0a749f28",
+            "page": 8,
+            "section": null,
+            "location": "page 8",
+            "quote": "…t the following information after USDA/FAS notification of our intent to make a Federal award, but prior to a Federal award, if the applicant request for funding or the intended award amount is over $100,000: • Grants.gov Lobbying Form • Standard Form SF-LLL, Disclosure of Lobbying Activities, if applicable to the applicant",
+            "extracted_at": "2026-07-29T12:21:41.359843Z"
+          }
+        }
+      ],
+      "expected_awards": [],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "360678",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/349515",
+        "name": "DE-FOA-0003600.000001.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "60cffb3796f5ff5cbc7eabf76db8d425fac6ef18eae3c9014011ad3d0cafc3ea",
+        "version": 1,
+        "first_seen_at": "2026-07-28T12:14:44.323320Z",
+        "last_seen_at": "2026-08-24T19:19:38.443582Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-360678-0ff3f3de98b2",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 500000
+          },
+          "display_value": "Up to $500,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/349515",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/349515#page=96",
+            "document_name": "DE-FOA-0003600.000001.pdf",
+            "sha256": "60cffb3796f5ff5cbc7eabf76db8d425fac6ef18eae3c9014011ad3d0cafc3ea",
+            "page": 96,
+            "section": null,
+            "location": "page 96",
+            "quote": "…ement and discouragement decisions by March 27, 2026. To be reviewed by the panel, applications associated with encouraged pre-applications must be submitted by May 1, 2026. The award ceiling is $500,000 per year in total across all institutions for a three-year award. HEP expects to make at most three awards. Areas that are out of scope include: • Topics…",
+            "extracted_at": "2026-07-28T12:14:44.323320Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 500000
+          },
+          "track": null,
+          "basis": "per_year"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363757",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+        "name": "Regional State Groups NOFO Part 1-DE-FOA-0003617.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363757-aa3df80e9a2e",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 1360000
+          },
+          "display_value": "Up to $1,360,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900#page=5",
+            "document_name": "Regional State Groups NOFO Part 1-DE-FOA-0003617.pdf",
+            "sha256": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…isted below. Funding for all awards combined would be in tranches of up to $1.36 million per year for the 5-year period of fiscal years (FYs) 2027 through 2031. Funding for each individual award would be in tranches of up to $340,000 per year for the 5-year period of fiscal years (FYs) 2027 through 2031 Assistance Listing Number and Name 81.121 Announcemen…",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 340000
+          },
+          "track": null,
+          "basis": "per_year"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363631",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354645",
+        "name": "CCG NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "148aceb5fca7dc268ba1ac3d5f664aa07fa51ffb92249b58f8a4260f5e1d7737",
+        "version": 1,
+        "first_seen_at": "2026-08-21T17:11:42.170633Z",
+        "last_seen_at": "2026-09-05T16:20:56.348828Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363631-810471a28835",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 2000000
+          },
+          "display_value": "Up to $2,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354645",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354645#page=5",
+            "document_name": "CCG NOFO.pdf",
+            "sha256": "148aceb5fca7dc268ba1ac3d5f664aa07fa51ffb92249b58f8a4260f5e1d7737",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…t less than or more than the respective minimum/maximum amounts. Applicants must justify the requested funding amounts within the Project Narrative. Duration Start Date End Date Minimum award Maximum award 2 years September 30, 2026* September 29, 2028* $2M $7.5M *Dates are approximate. Start dates are set at the time of the award. 1.4 TIPS FOR APPLICANTS…",
+            "extracted_at": "2026-08-21T17:11:42.170633Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 2000000,
+            "maximum": 7500000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363657",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354700",
+        "name": "EPA-OW-OWM-26-03 -Innovative Water Workforce_ Final.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "ff1bf822723b5f9acf151ab374e31ac11d2e503b20f601aab8a92b7b675a463c",
+        "version": 1,
+        "first_seen_at": "2026-08-21T17:11:42.170633Z",
+        "last_seen_at": "2026-09-05T16:20:56.348828Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363657-7aec89182718",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 1000000,
+            "maximum": 7800000
+          },
+          "display_value": "$1,000,000–$7,800,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354700",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354700#page=5",
+            "document_name": "EPA-OW-OWM-26-03 -Innovative Water Workforce_ Final.pdf",
+            "sha256": "ff1bf822723b5f9acf151ab374e31ac11d2e503b20f601aab8a92b7b675a463c",
+            "page": 5,
+            "section": null,
+            "location": "page 5",
+            "quote": "…ation D. Funding Details: It is anticipated that up to 15 awards will be made under this announcement. The amount of funding is expected to be between $1,000,000 and $7,800,000 per award for Project Area 1, and between $250,000 and $1,000,000 per award for Project Area 2-4, depending on Agency funding levels, the quality of applications received, agency pr…",
+            "extracted_at": "2026-08-21T17:11:42.170633Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 1000000,
+            "maximum": 7800000
+          },
+          "track": "Project Area 1",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": 250000,
+            "maximum": 1000000
+          },
+          "track": "Project Area 2-4",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363479",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354401",
+        "name": "FY26-HEC-NOFO-P.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "d1125bd97bc73558a9c4b6884e0ed268ef15be7d85aeb252bc747ebc92e05883",
+        "version": 2,
+        "first_seen_at": "2026-08-24T19:19:38.443582Z",
+        "last_seen_at": "2026-08-25T10:51:03.530169Z",
+        "changed_since_previous": true
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363479-92135a09c89a",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 150000
+          },
+          "display_value": "Up to $150,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354401",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354401#page=9",
+            "document_name": "FY26-HEC-NOFO-P.pdf",
+            "sha256": "d1125bd97bc73558a9c4b6884e0ed268ef15be7d85aeb252bc747ebc92e05883",
+            "page": 9,
+            "section": null,
+            "location": "page 9",
+            "quote": "…er 15, 2026 Grant Duration: Standard – 36 to 48 months Collaborative 1 (CG1) – 36 to 48 months Collaborative 2 (CG2) – 36 to 48 months Anticipated # of Awards: 18 Approximate Maximum Award Amount: Standard – $150,000 Collaborative 1 (CG1) – $300,000 Collaborative 2 (CG2) –$750,000 Projects must focus on one or more of the Educational Need Areas listed belo…",
+            "extracted_at": "2026-08-24T19:19:38.443582Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 150000
+          },
+          "track": "Standard",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 300000
+          },
+          "track": "Collaborative 1 (CG1)",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 750000
+          },
+          "track": "Collaborative 2 (CG2)",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362171",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351795",
+        "name": "HT942526TBDRPIDA_GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "57dbd9f07779bbf5bd40a45ca5430e95165ed13f96d7601ef220b0fb1478d6eb",
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-08-24T10:48:19.939507Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362171-7885746988ea",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 3500000
+          },
+          "display_value": "Up to $3,500,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351795",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351795#page=4",
+            "document_name": "HT942526TBDRPIDA_GG.pdf",
+            "sha256": "57dbd9f07779bbf5bd40a45ca5430e95165ed13f96d7601ef220b0fb1478d6eb",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…cted Medical Research Programs (CDMRP) expects to allot roughly $3.5M to fund approximately three IDA applications and two IDA-CDO applications, with total cost caps of $800,000 per award for the IDA and $550,000 per award for the IDA-CDO. The maximum period of performance is 3 years. It is anticipated that awards made from this FY26 funding opportunity wi…",
+            "extracted_at": "2026-07-26T20:05:30.061543Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 800000
+          },
+          "track": "IDA",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 550000
+          },
+          "track": "IDA-CDO",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362880",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353622",
+        "name": "Foa_Content_of_OFH-2600-DC-021A.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "d75866c51c0e75e4b9bb7bb4f3ccc61e99dcda98a1fbb8d838f66b7c84b07245",
+        "version": 1,
+        "first_seen_at": "2026-07-28T12:14:44.323320Z",
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362880-a03cc274f3fb",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 1000000,
+            "maximum": 2500000
+          },
+          "display_value": "$1,000,000–$2,500,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353622",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353622#page=6",
+            "document_name": "Foa_Content_of_OFH-2600-DC-021A.pdf",
+            "sha256": "d75866c51c0e75e4b9bb7bb4f3ccc61e99dcda98a1fbb8d838f66b7c84b07245",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "…ection process contained in this NOFO. Estimated Number of Awards 34 awards from available funding FHEO expects to make approximately 1 award from the EOI-NMC. Maximum EOI-NMC award amount is $2,500,000. Minimum EOI-NMC award amount is $1,000,000. FHEO expects to make approximately 33 awards from the EOI-G. Maximum EOI-G award amount is $250,000. Minimum E…",
+            "extracted_at": "2026-07-28T12:14:44.323320Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 1000000,
+            "maximum": 2500000
+          },
+          "track": "EOI-NMC",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 250000
+          },
+          "track": "EOI-G",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363728",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354834",
+        "name": "01-P27AS00032-Full Announcement.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "5b31ff767f60a5bf9c7a00cf6f4fe215745c1b21b7f75ecf1d6b705537aedf31",
+        "version": 1,
+        "first_seen_at": "2026-08-28T21:13:02.902602Z",
+        "last_seen_at": "2026-08-28T21:13:02.902602Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363728-f1e36f0e98a3",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 10000,
+            "maximum": 10000
+          },
+          "display_value": "Up to $10,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354834",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354834#page=3",
+            "document_name": "01-P27AS00032-Full Announcement.pdf",
+            "sha256": "5b31ff767f60a5bf9c7a00cf6f4fe215745c1b21b7f75ecf1d6b705537aedf31",
+            "page": 3,
+            "section": null,
+            "location": "page 3",
+            "quote": "…umber of Awards: 26 Award Ceiling: $50,000 Award Floor: $10,000 Award Floor/Ceiling Explanation: An estimated range of $10,000 to $50,000 of funding is anticipated for each award. The amount of funding available per award for this NOFO will be determined as part of the application review process based on applications received and funding made available thr…",
+            "extracted_at": "2026-08-28T21:13:02.902602Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 10000,
+            "maximum": 50000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363268",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery/nsf26-512/solicitation",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "43b518852d82b05c74bf78663feb5bf6c1d40726aaaa0296a4df82bd1fe62e67",
+        "version": 2,
+        "first_seen_at": "2026-08-27T09:58:08.083433Z",
+        "last_seen_at": "2026-08-27T09:58:08.083433Z",
+        "changed_since_previous": true
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363268-9e977ef20437",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 2000000
+          },
+          "display_value": "Up to $2,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery/nsf26-512/solicitation",
+            "citation_url": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery/nsf26-512/solicitation",
+            "document_name": null,
+            "sha256": "43b518852d82b05c74bf78663feb5bf6c1d40726aaaa0296a4df82bd1fe62e67",
+            "page": null,
+            "section": "III. Award Information",
+            "location": "section “III. Award Information”",
+            "quote": "Impact awards : up to 3 years and a maximum $2,000,000 per award, approximately 10 to 20 awards. Planning grants : maximum $200,000 per award, approximately 10 to 20 awards. As the AI aspects of scientific datasets are advancing rapidly and research community objectives are still evolving, proposers are encouraged to make use of planning grants to address e…",
+            "extracted_at": "2026-08-27T09:58:08.083433Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 2000000
+          },
+          "track": "Impact awards",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 200000
+          },
+          "track": "Planning grants",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "360199",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354339",
+        "name": "rfa-ck-26-035-v3.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "2c6a147d63df965236830552930af2e05de5d6190cc42fbdf5e998e0821a0fb6",
+        "version": 1,
+        "first_seen_at": "2026-08-04T12:22:29.523883Z",
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-360199-1514915463fd",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 5000000
+          },
+          "display_value": "Up to $5,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354339",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354339#page=6",
+            "document_name": "rfa-ck-26-035-v3.pdf",
+            "sha256": "2c6a147d63df965236830552930af2e05de5d6190cc42fbdf5e998e0821a0fb6",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "…funding per budget period: Component A: $1,000,000; Component B: $5,000,000 Expected funding per applicant per budget period: Component A: $1,000,000; Component B: $5,000,000 Maximum award amount per budget period: Component A: $1,000,000; Component B: $5,000,000 Minimum award amount per budget period: Component A: $750,000; Component B: $1,000,000 1. Revi…",
+            "extracted_at": "2026-08-04T12:22:29.523883Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 750000,
+            "maximum": 1000000
+          },
+          "track": "Component A",
+          "basis": "per_budget_period"
+        },
+        {
+          "value": {
+            "minimum": 1000000,
+            "maximum": 5000000
+          },
+          "track": "Component B",
+          "basis": "per_budget_period"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "360200",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354383",
+        "name": "rfa-ck-26-036_v7.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "0f00e3a9624fb9cd6a55ef640738c01f9ba3a1627379c2f3adfbb8de98e189bb",
+        "version": 1,
+        "first_seen_at": "2026-08-06T10:33:14.856349Z",
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-360200-e884f4198712",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 1000000
+          },
+          "display_value": "Up to $1,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354383",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354383#page=6",
+            "document_name": "rfa-ck-26-036_v7.pdf",
+            "sha256": "0f00e3a9624fb9cd6a55ef640738c01f9ba3a1627379c2f3adfbb8de98e189bb",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "…00 Expected total program funding per budget period: $1,000,000 Expected funding per applicant per budget period: $1,000,000 Maximum award amount per budget period: $1,000,000 Minimum award amount per budget period: $750,000 1. Review 2. Get Ready 3. Build 4. Understand 5. Submit 6. Award Contacts Step 1: Review the Opportunity 6",
+            "extracted_at": "2026-08-06T10:33:14.856349Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 750000,
+            "maximum": 1000000
+          },
+          "track": null,
+          "basis": "per_budget_period"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362225",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351758",
+        "name": "HT942526SCIRPCTRA_GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "11da0db1dc18f21925baed7456b548901b3de0c3af2c6205ba047f03b53aad16",
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-08-24T10:48:19.939507Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362225-fc0147b3f68b",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 2000000
+          },
+          "display_value": "Up to $2,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351758",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/351758#page=4",
+            "document_name": "HT942526SCIRPCTRA_GG.pdf",
+            "sha256": "11da0db1dc18f21925baed7456b548901b3de0c3af2c6205ba047f03b53aad16",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…y $6.12M to fund approximately 3 Clinical Translation Research Award applications with total cost caps of $2.0M for a Single PI or $2.16M for the Early-Career Partnership Option per award. The maximum period of performance is 3 years. It is anticipated that awards made from this FY26 funding opportunity will be funded with FY26 funds, which will expire for…",
+            "extracted_at": "2026-07-26T20:05:30.061543Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 2000000
+          },
+          "track": "Single PI",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 2160000
+          },
+          "track": "Early-Career Partnership Option",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363765",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354915",
+        "name": "fy27-ols-lb21-NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "81f73c766dbd5570203a6d740cff2befa24a42ccdb0e4c39ab03eaf7e6c71ab1",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363765-3fb8464f5ab3",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 75000,
+            "maximum": 200000
+          },
+          "display_value": "$75,000–$200,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354915",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354915#page=9",
+            "document_name": "fy27-ols-lb21-NOFO.pdf",
+            "sha256": "81f73c766dbd5570203a6d740cff2befa24a42ccdb0e4c39ab03eaf7e6c71ab1",
+            "page": 9,
+            "section": null,
+            "location": "page 9",
+            "quote": "…rough this announcement $8,500,000 Expected performance indicators, targets, baseline data, and data collection See Performance Measures. Anticipated number of awards 35 Award amount range Planning $75,000 - $200,000 Forum $75,000 - $200,000 Community-Centered Implementation $25,000 - $100,000 National Implementation $75,000 - $1,000,000 Early Career Resea…",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 75000,
+            "maximum": 200000
+          },
+          "track": "Planning",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": 75000,
+            "maximum": 200000
+          },
+          "track": "Forum",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": 25000,
+            "maximum": 100000
+          },
+          "track": "Community-Centered Implementation",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": 75000,
+            "maximum": 1000000
+          },
+          "track": "National Implementation",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363772",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354922",
+        "name": "fy27-oms-alhc-NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "79faef14d6100a48723a0ea88c5905fe6a5786d140d6a341c47fa49d06e2bdfd",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363772-d6258baad102",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 5000
+          },
+          "display_value": "Up to $5,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354922",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354922#page=8",
+            "document_name": "fy27-oms-alhc-NOFO.pdf",
+            "sha256": "79faef14d6100a48723a0ea88c5905fe6a5786d140d6a341c47fa49d06e2bdfd",
+            "page": 8,
+            "section": null,
+            "location": "page 8",
+            "quote": "…seline data, and data collection See Performance Measures. Anticipated number of awards 16 Expected amount of individual awards $5,000 - $500,000 Average amount of funding per award in previous years $375,000 The funding in the above Award Overview is subject to the availability of funds and the Institute of Museum and Library Services’ (IMLS’s) discretion…",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 5000,
+            "maximum": 500000
+          },
+          "track": null,
+          "basis": "total_project",
+          "estimate_kind": null
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363776",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354925",
+        "name": "fy27-oms-me-NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "0cab67b76abeca7672903f53016e1de8b7dd64486be4716637f9bd98c2bd9840",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363776-46345db8f619",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 5000
+          },
+          "display_value": "Up to $5,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354925",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354925#page=8",
+            "document_name": "fy27-oms-me-NOFO.pdf",
+            "sha256": "0cab67b76abeca7672903f53016e1de8b7dd64486be4716637f9bd98c2bd9840",
+            "page": 8,
+            "section": null,
+            "location": "page 8",
+            "quote": "…aseline data, and data collection See Performance Measures. Anticipated number of awards 20 Expected amount of individual awards $5,000 - $350,000 Average amount of funding per award in previous years $214,950 The funding in the above Award Overview is subject to the availability of funds and the Institute of Museum and Library Services’ (IMLS’s) discretio…",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 5000,
+            "maximum": 350000
+          },
+          "track": null,
+          "basis": "total_project",
+          "estimate_kind": null
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363773",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354928",
+        "name": "fy27-oms-nlgm-NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "d755072fe842bb3462175bb970a8e907c5814970d0b65c499e6527e9bbeaa5e5",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363773-2abeb960fa4f",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 50000
+          },
+          "display_value": "Up to $50,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354928",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354928#page=8",
+            "document_name": "fy27-oms-nlgm-NOFO.pdf",
+            "sha256": "d755072fe842bb3462175bb970a8e907c5814970d0b65c499e6527e9bbeaa5e5",
+            "page": 8,
+            "section": null,
+            "location": "page 8",
+            "quote": "…seline data, and data collection See Performance Measures. Anticipated number of awards 17 Expected amount of individual awards $50,000 - $750,000 Average amount of funding per award experienced in previous years $453,106",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 50000,
+            "maximum": 750000
+          },
+          "track": null,
+          "basis": "total_project",
+          "estimate_kind": null
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363762",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354913",
+        "name": "fy27-ols-nae-NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/octet-stream",
+        "sha256": "46b5013f529b272ad22921e9e925efdbccfc5e341ec9e7cbfe1c1c557dd14d51",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363762-1e530d05145b",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 50000
+          },
+          "display_value": "Up to $50,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354913",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354913#page=6",
+            "document_name": "fy27-ols-nae-NOFO.pdf",
+            "sha256": "46b5013f529b272ad22921e9e925efdbccfc5e341ec9e7cbfe1c1c557dd14d51",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "…through this announcement $3,500,000 Expected performance indicators, targets, baseline data, and data collection See Performance Measures. Anticipated number of awards 25 Award amount range $50,000 - $150,000 Average amount of funding per award experienced in previous years $130,000 The funding in the above Award Overview is subject to the availability of…",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 50000,
+            "maximum": 150000
+          },
+          "track": null,
+          "basis": "total_project",
+          "estimate_kind": null
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362857",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353135",
+        "name": "HT942526JWMRPMMRDA_GG2.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "d35a41ca3a34811ceb2843650f1e7e60a5c6a558d9959fba29bab1d894cf72d3",
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-08-24T10:48:19.939507Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362857-3ef1c3df15cf",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 8800000
+          },
+          "display_value": "Up to $8,800,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353135",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353135#page=4",
+            "document_name": "HT942526JWMRPMMRDA_GG2.pdf",
+            "sha256": "d35a41ca3a34811ceb2843650f1e7e60a5c6a558d9959fba29bab1d894cf72d3",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…he Congressionally Directed Medical Research Programs (CDMRP) expects to allot roughly $8.8M to fund approximately two MMRDA applications/proposals with total cost caps of $1.4M per award for the MMRDA, and approximately two MMRDA-CRCTO applications/proposals with total cost caps of $3.0M per award for the MMRDA-CRCTO. The maximum period of performance is…",
+            "extracted_at": "2026-07-26T20:05:30.061543Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 1400000
+          },
+          "track": "MMRDA",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 3000000
+          },
+          "track": "MMRDA-CRCTO",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362961",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353373",
+        "name": "HT942526CRRPTRA_GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "eb3f8f59a14084c22fe89f239e2dcb1b9fb0fa6cb759e58ee17b6380ea3c7d65",
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-08-24T10:48:19.939507Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362961-ddd8629bc24c",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 4370000
+          },
+          "display_value": "Up to $4,370,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353373",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353373#page=4",
+            "document_name": "HT942526CRRPTRA_GG.pdf",
+            "sha256": "eb3f8f59a14084c22fe89f239e2dcb1b9fb0fa6cb759e58ee17b6380ea3c7d65",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…y Directed Medical Research Programs (CDMRP) expects to allot roughly $4.37M to fund approximately three Translational Research Award applications with total cost caps of $2.45M per award, of which $1.45M of FY26 funds will be used for a base award. A $1.00M optional research effort (Option Phase) may be funded with future funds, if appropriated. The maxim…",
+            "extracted_at": "2026-07-26T20:05:30.061543Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 2450000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "362524",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353134",
+        "name": "HT942526ORPCRA_GG.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "c2261f0ae22943f309be1417dcefb4c480fc70202d2853fdc105d2ab7e3a7d36",
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-08-24T11:07:51.132870Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-362524-b2e793e52286",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 4000000
+          },
+          "display_value": "Up to $4,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353134",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353134#page=4",
+            "document_name": "HT942526ORPCRA_GG.pdf",
+            "sha256": "c2261f0ae22943f309be1417dcefb4c480fc70202d2853fdc105d2ab7e3a7d36",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "…tails: The Congressionally Directed Medical Research Programs (CDMRP) expects to allot roughly $4.0M to fund approximately two CRA-RL1 applications with total cost caps of $2.0M per award; and allot roughly $9.6M to fund approximately three CRA-RL2 applications with total cost caps of $3.2M per award. The maximum period of performance is 4 years for both l…",
+            "extracted_at": "2026-07-26T20:05:30.061543Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 2000000
+          },
+          "track": "CRA-RL1",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 3200000
+          },
+          "track": "CRA-RL2",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "345083",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/322999",
+        "name": "P23AS00132 - NPS CESU Master Cooperative Agreements NOFO.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "bfe523adb5df7510ac9ec93b82bcf1a7d1571faba2d8715fd18f968058adab11",
+        "version": 1,
+        "first_seen_at": "2026-07-26T20:05:30.061543Z",
+        "last_seen_at": "2026-08-24T11:07:51.132870Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-345083-bebf8de976c1",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 40000000,
+            "maximum": 50000000
+          },
+          "display_value": "$40,000,000–$50,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/322999",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/322999#page=7",
+            "document_name": "P23AS00132 - NPS CESU Master Cooperative Agreements NOFO.pdf",
+            "sha256": "bfe523adb5df7510ac9ec93b82bcf1a7d1571faba2d8715fd18f968058adab11",
+            "page": 7,
+            "section": null,
+            "location": "page 7",
+            "quote": "…Master Cooperative Agreements. Subsequent funded Task Agreements will be determined once final fiscal year appropriations have been made for subject Task Agreement. Expected Award Amount: ($0) Based on prior year data, the NPS anticipates awarding between $40M and $50M annually in financial assistance to CESU network participants across all the CESU region…",
+            "extracted_at": "2026-07-26T20:05:30.061543Z"
+          }
+        }
+      ],
+      "expected_awards": [],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "345738",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/331796",
+        "name": "RFA-OH-24-001 National Construction Center (U54).pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "5b86b3c94f19c4c9cb7d4861036535f4d3ed305a85fc44cf8da295b4cdfee0bd",
+        "version": 1,
+        "first_seen_at": "2026-07-28T12:14:44.323320Z",
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-345738-6458676136ee",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 5750000
+          },
+          "display_value": "Up to $5,750,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/331796",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/331796#page=18",
+            "document_name": "RFA-OH-24-001 National Construction Center (U54).pdf",
+            "sha256": "5b86b3c94f19c4c9cb7d4861036535f4d3ed305a85fc44cf8da295b4cdfee0bd",
+            "page": 18,
+            "section": null,
+            "location": "page 18",
+            "quote": "…ed under this NOFO is contingent upon the availability of funds and the submission of a sufficiently meritorious application. Award Budget $5,750,000 Total Costs per budget period Award Ceiling: $5,750,000 total costs per budget period Award Floor: $3,000,000 total costs per budget period It is anticipated that the maximum amount for each application/award…",
+            "extracted_at": "2026-07-28T12:14:44.323320Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 3000000,
+            "maximum": 5750000
+          },
+          "track": null,
+          "basis": "per_budget_period"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "361876",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354590",
+        "name": "SCMP NOFO Approved Final_accessible_081426.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "382b545c190def30bbb9ac6ca0e94d44bae86ad44d25fd5a479aa75166d9cbaf",
+        "version": 2,
+        "first_seen_at": "2026-08-15T10:39:33.040620Z",
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "changed_since_previous": true
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-361876-f41d5560f496",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 250000
+          },
+          "display_value": "Up to $250,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354590",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354590#page=6",
+            "document_name": "SCMP NOFO Approved Final_accessible_081426.pdf",
+            "sha256": "382b545c190def30bbb9ac6ca0e94d44bae86ad44d25fd5a479aa75166d9cbaf",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "6 Project types Award Period Start Date End Date Minimum award Maximum award All Project Area Types 3 years September 30, 2026* September 29, 2029* $250,000 $1,000,000 *Dates are approximate. Start dates are set at the time of the award. 1.5 TIPS FOR APPLICANTS • To submit your application electronically using Grants.gov, you must: o Have a Unique Entity Id…",
+            "extracted_at": "2026-08-15T10:39:33.040620Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 250000,
+            "maximum": 1000000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "361169",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350088",
+        "name": "FY26-AFRI-EWD-NOFO-P.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "f7f42173df4f69ca7fc2bd9f29274d5740e9cecd96c79e7c0b7637bc3db1f5c8",
+        "version": 1,
+        "first_seen_at": "2026-07-28T12:14:44.323320Z",
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-361169-fa23734f3fed",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 500000000000000
+          },
+          "display_value": "Up to $500,000,000,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350088",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350088#page=12",
+            "document_name": "FY26-AFRI-EWD-NOFO-P.pdf",
+            "sha256": "f7f42173df4f69ca7fc2bd9f29274d5740e9cecd96c79e7c0b7637bc3db1f5c8",
+            "page": 12,
+            "section": null,
+            "location": "page 12",
+            "quote": "…t II, C.2 for requirements specific to FASE Grant applications. Application Deadline FY 2026: Thursday, March 19, 2026 (5:00 p.m. Eastern Time) Grant Duration: 36-48 months Maximum Award Amount(s): a. Including indirect costs: $500,000 b. A minimum of 50% of project direct costs requested must be for participant support. c. Each review cycle NIFA may award…",
+            "extracted_at": "2026-07-28T12:14:44.323320Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 500000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "337086",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599",
+        "name": "Foa_Content_of_CDC-RFA-TP22-2201_122024.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "9e11c3bc0402ebfc9da7206c325ac276b38e8c0cea4ecb8ab4368380367df424",
+        "version": 1,
+        "first_seen_at": "2026-07-28T12:14:44.323320Z",
+        "last_seen_at": "2026-08-25T03:13:26.882006Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-337086-3862be92e75a",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 5000000
+          },
+          "display_value": "Up to $5,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345599#page=4",
+            "document_name": "Foa_Content_of_CDC-RFA-TP22-2201_122024.pdf",
+            "sha256": "9e11c3bc0402ebfc9da7206c325ac276b38e8c0cea4ecb8ab4368380367df424",
+            "page": 4,
+            "section": null,
+            "location": "page 4",
+            "quote": "Page 3 of 50 d. Average One Year Award Amount: $5,000,000 This average one year award amount is an estimate for both components. It is not possible to approximate an amount of funding due to the nature of this NOFO (the intent to establish a quick funding mechanism for pre-approved recipients faced with a public health emergency or imminent threat). Award a…",
+            "extracted_at": "2026-07-28T12:14:44.323320Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 5000000
+          },
+          "track": null,
+          "basis": "per_year",
+          "estimate_kind": "average"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "361333",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/pesose-pathways-enable-secure-open-source-ecosystems/nsf26-506/solicitation",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "13dba07db6fb4bf9a2924d5c82acb80c0e91eaf80a751d3bd753808ee367fc27",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-361333-2485713a123d",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 300000
+          },
+          "display_value": "Up to $300,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://www.nsf.gov/funding/opportunities/pesose-pathways-enable-secure-open-source-ecosystems/nsf26-506/solicitation",
+            "citation_url": "https://www.nsf.gov/funding/opportunities/pesose-pathways-enable-secure-open-source-ecosystems/nsf26-506/solicitation",
+            "document_name": null,
+            "sha256": "13dba07db6fb4bf9a2924d5c82acb80c0e91eaf80a751d3bd753808ee367fc27",
+            "page": null,
+            "section": "Award Information",
+            "location": "section “Award Information”",
+            "quote": "Anticipated Type of Award: Standard Grant or Continuing Grant Estimated Number of Awards: 40 to 60 Track 1: maximum $300,000 per award, approximately 30 awards Track 2: maximum $1,500,000 per award, approximately 10 awards Track 3: maximum $1,500,000 per award, approximately 10 awards The estimated program budget, number of awards, and average award size/du…",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 300000
+          },
+          "track": "Track 1",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 1500000
+          },
+          "track": "Track 2",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 1500000
+          },
+          "track": "Track 3",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "351923",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-epscor-research/nsf24-528/solicitation",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "d7db66efc13a96cabf67f119a4b7e3c5a894ba66f88720c91d38c78211e77756",
+        "version": 2,
+        "first_seen_at": "2026-08-28T21:13:02.902602Z",
+        "last_seen_at": "2026-08-28T21:13:02.902602Z",
+        "changed_since_previous": true
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-351923-68651def3808",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 300000
+          },
+          "display_value": "Up to $300,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-epscor-research/nsf24-528/solicitation",
+            "citation_url": "https://www.nsf.gov/funding/opportunities/epscor-research-infrastructure-improvement-epscor-research/nsf24-528/solicitation",
+            "document_name": null,
+            "sha256": "d7db66efc13a96cabf67f119a4b7e3c5a894ba66f88720c91d38c78211e77756",
+            "page": null,
+            "section": "III. Award Information",
+            "location": "section “III. Award Information”",
+            "quote": "EPSCoR Research Fellows: NSF and EPSCoR Research Fellows: @NASA awards will be made as standard grants. The award amount will not exceed $300,000 for EPSCoR Research Fellows: NSF and $300,000 for EPSCoR Research Fellows: @NASA (additional $60K externally provided by NASA). Project duration is limited to 24 months. Estimated program budget, number of awards…",
+            "extracted_at": "2026-08-28T21:13:02.902602Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 300000
+          },
+          "track": "EPSCoR Research Fellows: NSF",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 300000
+          },
+          "track": "EPSCoR Research Fellows: @NASA",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "357725",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/e-core-epscor-research-infrastructure-improvement-program-epscor/nsf25-523/solicitation",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "8e1f72954c451f82d9c4b192b3322269d13e012cb495bfd31cc7a42898acec3c",
+        "version": 2,
+        "first_seen_at": "2026-09-02T19:35:34.555177Z",
+        "last_seen_at": "2026-09-02T19:35:34.555177Z",
+        "changed_since_previous": true
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-357725-4c188fc7dc51",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 10000000
+          },
+          "display_value": "Up to $10,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://www.nsf.gov/funding/opportunities/e-core-epscor-research-infrastructure-improvement-program-epscor/nsf25-523/solicitation",
+            "citation_url": "https://www.nsf.gov/funding/opportunities/e-core-epscor-research-infrastructure-improvement-program-epscor/nsf25-523/solicitation",
+            "document_name": null,
+            "sha256": "8e1f72954c451f82d9c4b192b3322269d13e012cb495bfd31cc7a42898acec3c",
+            "page": null,
+            "section": "Award Information",
+            "location": "section “Award Information”",
+            "quote": "…submitted proposals. Funding requests must be for a duration of four (4) years, with a maximum budget of $10 million total for the first four years and an optional renewal project award maximum budget of $8 million total for an additional four years. Within the maximum award budget, there is no restriction on the amount requested annually. Note that in onl…",
+            "extracted_at": "2026-09-02T19:35:34.555177Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 10000000
+          },
+          "track": "Initial project",
+          "basis": "total_project"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 8000000
+          },
+          "track": "Optional renewal",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363446",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354313",
+        "name": "NHTSA ITSE NOFO 8.3.2026.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "de1fc960841b6064d9e8bcf05fbfd99fcc341251964ceee6e45a32413c033212",
+        "version": 1,
+        "first_seen_at": "2026-08-04T12:22:29.523883Z",
+        "last_seen_at": "2026-08-27T09:01:59.872946Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363446-145979c309ee",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 500000,
+            "maximum": 2000000
+          },
+          "display_value": "$500,000–$2,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354313",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354313#page=2",
+            "document_name": "NHTSA ITSE NOFO 8.3.2026.pdf",
+            "sha256": "de1fc960841b6064d9e8bcf05fbfd99fcc341251964ceee6e45a32413c033212",
+            "page": 2,
+            "section": null,
+            "location": "page 2",
+            "quote": "…g. The anticipated number of awards is between 8 to 15, with an anticipated funding range of $500,000 to $2,000,000 each. NHTSA reserves the discretion to change the minimum and maximum award sizes upon receiving the full pool of applications in each phase and assessing the needs of the project in relation to the ITSE Grant Program objectives described in…",
+            "extracted_at": "2026-08-04T12:22:29.523883Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 500000,
+            "maximum": 2000000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "344437",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/322132",
+        "name": "USUN Geneva 2023 NOFO grants.gov.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "3fc6722c1cc44ffefa0af1eed5f9bd79ed5cd0a7b7bae9c58973a230b3009d9f",
+        "version": 1,
+        "first_seen_at": "2026-07-26T18:37:51.451981Z",
+        "last_seen_at": "2026-09-05T16:20:56.348828Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-344437-144c9c7cfb3e",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 15000,
+            "maximum": 200000
+          },
+          "display_value": "$15,000–$200,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/322132",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/322132#page=1",
+            "document_name": "USUN Geneva 2023 NOFO grants.gov.pdf",
+            "sha256": "3fc6722c1cc44ffefa0af1eed5f9bd79ed5cd0a7b7bae9c58973a230b3009d9f",
+            "page": 1,
+            "section": null,
+            "location": "page 1",
+            "quote": "…3-002 Deadline for Applications: Rolling Basis until September 1 of each year CFDA Number: 19.040 – Public Diplomacy Programs Total Amount Available: $200,000.00 Maximum for Each Award: Average Awards range from approximately $15,000 to $40,000 A. PROGRAM DESCRIPTION This Notice of Funding Opportunity (NOFO) outlines funding priorities, strategic areas of…",
+            "extracted_at": "2026-07-26T18:37:51.451981Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 15000,
+            "maximum": 40000
+          },
+          "track": null,
+          "basis": "total_project",
+          "estimate_kind": "average"
+        }
+      ],
+      "coverage_note": "Complete locally owned fields in this retained excerpt are mandatory; clipped trailing fields remain pending original-source recovery."
+    },
+    {
+      "opportunity_id": "363758",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354907",
+        "name": "Foa_Content_of_NOAA-NMFS-HCPO-2026-33781.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "b36103b88ac06a073bceecf718d58e4d40e8ce3fd7931cbf24872bd3ce2e5977",
+        "version": 1,
+        "first_seen_at": "2026-09-02T18:07:03.212968Z",
+        "last_seen_at": "2026-09-02T18:07:03.212968Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363758-d2c717213f61",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": 2500000,
+            "maximum": 50000000
+          },
+          "display_value": "$2,500,000–$50,000,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354907",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354907#page=3",
+            "document_name": "Foa_Content_of_NOAA-NMFS-HCPO-2026-33781.pdf",
+            "sha256": "b36103b88ac06a073bceecf718d58e4d40e8ce3fd7931cbf24872bd3ce2e5977",
+            "page": 3,
+            "section": null,
+            "location": "page 3",
+            "quote": "…ative agreements under this competition is up to $100 million. NOAA anticipates that a typical, awarded cooperative agreement will range from $2.5 million to $50 million, with a maximum award of $100 million. NOAA will not accept proposals with a first year budget less than $500,000 or more than $20 million under this solicitation. Eligible applicants are…",
+            "extracted_at": "2026-09-02T18:07:03.212968Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": 2500000,
+            "maximum": 50000000
+          },
+          "track": null,
+          "basis": "total_project",
+          "estimate_kind": "typical_range"
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 100000000
+          },
+          "track": null,
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "The cited cooperative agreement sentence explicitly states a typical range and a separate absolute maximum. Preserve both meanings; first-year budget bounds are a different unit."
+    },
+    {
+      "opportunity_id": "363466",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354412",
+        "name": "2027_84305B.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "61f560d9ddd72f2418e28a733c7996d8179ec5830cc46646f019b5c82ce78582",
+        "version": 1,
+        "first_seen_at": "2026-08-07T11:07:56.290112Z",
+        "last_seen_at": "2026-08-23T21:26:44.423566Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363466-7f804996f7b8",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 500000
+          },
+          "display_value": "Up to $500,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354412",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354412#page=6",
+            "document_name": "2027_84305B.pdf",
+            "sha256": "61f560d9ddd72f2418e28a733c7996d8179ec5830cc46646f019b5c82ce78582",
+            "page": 6,
+            "section": null,
+            "location": "page 6",
+            "quote": "…at describes the research you propose to do. Applicants may propose to conduct Measurement, Exploration, or Development and Innovation projects. • Early Career Award Limits. The maximum award for Early Career grants has been increased to $500,000. Additionally, Early Career PIs at institutions that are not R1 institutions may",
+            "extracted_at": "2026-08-07T11:07:56.290112Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 500000
+          },
+          "track": "Early Career grants",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "The award-amount field explicitly names the program or grant track whose cap changed. Preserve that name."
+    },
+    {
+      "opportunity_id": "329436",
+      "source": {
+        "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/346954",
+        "name": "DE-FOA-0002265 Amend 004_Final.pdf",
+        "source_kind": "primary_notice",
+        "content_type": "application/pdf",
+        "sha256": "10bf737c38a4a7f4d11eab6bbba976589f10a15e4e06f12d08fbfb67c64c6a2a",
+        "version": 1,
+        "first_seen_at": "2026-07-29T12:21:41.359843Z",
+        "last_seen_at": "2026-08-25T10:51:03.530169Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-329436-1d85484a8442",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 10000
+          },
+          "display_value": "Up to $10,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/346954",
+            "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/346954#page=2",
+            "document_name": "DE-FOA-0002265 Amend 004_Final.pdf",
+            "sha256": "10bf737c38a4a7f4d11eab6bbba976589f10a15e4e06f12d08fbfb67c64c6a2a",
+            "page": 2,
+            "section": null,
+            "location": "page 2",
+            "quote": "…n areas including, but not limited to, nuclear operations, mechanical and electrical maintenance, and radiation protection in Section I.A.1, and Section III.A. 3. Increased the award amount for the Four-year College/University Undergraduate Scholarship Program to $10,000 in Section II.C and Appendix A. 4. Added new Two-year Trade School and Community Colle…",
+            "extracted_at": "2026-07-29T12:21:41.359843Z"
+          }
+        }
+      ],
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 10000
+          },
+          "track": "Four-year College/University Undergraduate Scholarship Program",
+          "basis": "total_project"
+        }
+      ],
+      "coverage_note": "The award-amount field explicitly names the program or grant track whose cap changed. Preserve that name."
+    },
+    {
+      "opportunity_id": "363752",
+      "source": {
+        "url": "https://www.nsf.gov/funding/opportunities/ityc-iuse-innovation-two-year-college-stem-education/nsf23-584/solicitation",
+        "name": null,
+        "source_kind": "agency_notice",
+        "content_type": "text/html; charset=UTF-8",
+        "sha256": "7c54c873b68824a9e63c19882595e3c4cc5316cbed27d2298779419a4a415681",
+        "version": 1,
+        "first_seen_at": "2026-09-02T06:01:52.308951Z",
+        "last_seen_at": "2026-09-02T06:01:52.308951Z",
+        "changed_since_previous": false
+      },
+      "source_checked_at": null,
+      "legacy_facts": [
+        {
+          "id": "evidence-363752-c87a586a258f",
+          "type": "award_range",
+          "label": "Per-award amount",
+          "value": {
+            "minimum": null,
+            "maximum": 500000
+          },
+          "display_value": "Up to $500,000",
+          "confidence": "machine_extracted_needs_verification",
+          "citation": {
+            "document_url": "https://www.nsf.gov/funding/opportunities/ityc-iuse-innovation-two-year-college-stem-education/nsf23-584/solicitation",
+            "citation_url": "https://www.nsf.gov/funding/opportunities/ityc-iuse-innovation-two-year-college-stem-education/nsf23-584/solicitation",
+            "document_name": null,
+            "sha256": "7c54c873b68824a9e63c19882595e3c4cc5316cbed27d2298779419a4a415681",
+            "page": null,
+            "section": "II. Program Description",
+            "location": "section “II. Program Description”",
+            "quote": "…may also engage in discipline-based education research (DBER) that generates knowledge specific to the advancement of STEM education at two-year colleges. Track 1 projects have a maximum award of $500,000 for up to three years. Institutions that have not received NSF funding in the past 5 years are eligible for a maximum of $600,000 for up to four years. A…",
+            "extracted_at": "2026-09-02T06:01:52.308951Z"
+          }
+        }
+      ],
+      "coverage_note": "NSF Track 1 ordinary maximum and immediately adjacent funding-history exception retain their shared track and explicit applicant condition. Do not merge them into a single unconditional cap.",
+      "expected_awards": [
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 500000
+          },
+          "track": "Track 1",
+          "basis": "total_project",
+          "applicant_condition": null
+        },
+        {
+          "value": {
+            "minimum": null,
+            "maximum": 600000
+          },
+          "track": "Track 1",
+          "basis": "total_project",
+          "applicant_condition": "Institutions that have not received NSF funding in the past 5 years"
+        }
+      ]
+    }
+  ]
+}
