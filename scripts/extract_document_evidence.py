@@ -80,17 +80,29 @@ DEADLINE_CUE_RE = re.compile(
     r"no later than|must be filed|applications? by|proposals? by)\b",
     re.I,
 )
-DEADLINE_LABEL_RE = re.compile(
-    r"\b(?:(?:(?:full|final)\s+)?(?:applications?|proposals?)|"
+DEADLINE_SUBMISSION_LABEL = (
+    r"(?:(?:(?:full|final)\s+)?(?:applications?|proposals?)|"
     r"pre[\s-]?(?:applications?|proposals?)|preliminary\s+proposals?|"
     r"letters?\s+of\s+(?:intent|interest)|LOIs?|concept\s+papers?|white\s+papers?)"
-    r"\s+(?:submission\s+)?deadlines?\b|\b(?:submission\s+deadlines?|deadlines?\s+for)\b",
+)
+DEADLINE_LABEL_RE = re.compile(
+    rf"\b{DEADLINE_SUBMISSION_LABEL}\s+(?:submission\s+)?deadlines?\b|"
+    rf"\b(?:submission\s+deadlines?|deadlines?\s+for(?:\s+{DEADLINE_SUBMISSION_LABEL})?)\b",
     re.I,
 )
 UNKNOWN_DEADLINE_VALUE_RE = re.compile(
-    r"\b(?:TBD|TBA|to\s+be\s+(?:announced|determined)|not\s+yet|not\s+available|pending|rolling|none|N/A)\b",
+    r"\b(?:TBD|TBA|unknown|unannounced|to\s+be\s+(?:announced|determined)|not\s+yet|not\s+announced|not\s+available|pending|rolling|none|N/A)\b",
     re.I,
 )
+# Complete predicate/value grammar, shared by direct and modified replacements.
+# Noun-bearing annotations cannot satisfy this grammar merely by containing a date.
+DEADLINE_COPULA = r"(?:is|are|was|were|will|shall|has|have|may|might|can|could|should|must|be|been|being|remains?|becomes?)"
+DEADLINE_REPLACEMENT_ACTION = r"(?:(?:chang|mov|revis)(?:e|es|ed)|extend(?:ed|s)?|(?:re)?scheduled|deferred|set|fixed)"
+DEADLINE_VALUE_CONNECTOR = r"(?:due|for|on|by|at|to|until|till|through)"
+DEADLINE_VALUE_MODIFIER = r"(?:now|still|expected|anticipated|estimated|planned|intended|proposed|[a-z]+ly)"
+DEADLINE_PREDICATE_RE = re.compile(rf"(?:[:=–—-]|(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION})\b)", re.I)
+DEADLINE_VALUE_LINK_RE = re.compile(rf"(?:[:=–—-]|(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION}|{DEADLINE_VALUE_CONNECTOR}|currently|now|still)\b)\s*", re.I)
+DEADLINE_VALUE_BRIDGE_RE = re.compile(rf"\s*(?:(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION}|{DEADLINE_VALUE_CONNECTOR}|{DEADLINE_VALUE_MODIFIER})\b\s*)*", re.I)
 SUBMISSION_GROUP_VALUE = r"(?:[IVX]+|\d+|one|two|three|four|five|six|seven|eight|nine|ten)"
 SUBMISSION_GROUP_PATTERN = rf"(?:(?:phase|round|cycle|year)\s+{SUBMISSION_GROUP_VALUE}|FY\s*\d{{2,4}})\b"
 SUBMISSION_GROUP_PREFIX_RE = re.compile(rf"\b(?:{SUBMISSION_GROUP_PATTERN}\s*[-:–—,(\[]?\s*)+$", re.I)
@@ -798,22 +810,23 @@ def deadline_context(container, match):
             if close >= 0:
                 value_start = close + 1
         suffix = text[value_start:end].lstrip()
+        was_postfix = bool(postfix)
         # A grouped heading still owns any value after its closing delimiter.
         # Empty, explicitly unknown, and newly dated values cannot borrow the
         # preceding date. Scope annotations such as "for all applicants" keep
         # the explicit postfix label with its date.
-        value_link = re.match(r"(?:[:=–—-]|(?:is|are|was|were|will|shall|has|have|may|might|can|could|"
-                              r"should|must|remains?|becomes?|changed?|changes|moved?|moves|"
-                              r"be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\b)\s*", suffix, re.I)
+        value_link = DEADLINE_VALUE_LINK_RE.match(suffix)
         if value_link:
             value = suffix[value_link.end():].strip()
-            value = re.sub(r"^(?:(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+)+",
-                           "", value, flags=re.I)
+            while not (DATE_RE.match(value) or UNKNOWN_DEADLINE_VALUE_RE.match(value)):
+                leading_link = re.match(r"(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+", value, re.I)
+                if not leading_link:
+                    break
+                value = value[leading_link.end():]
             # A replacement needs a complete value-linking phrase. A date inside
             # a scope annotation ("for applicants eligible as of April 1") is
             # not the label's value, even after a colon or copula.
-            predicate = re.match(r"(?:[:=–—-]|(?:is|are|was|were|will|shall|has|have|may|might|can|could|"
-                                 r"should|must|remains?|becomes?|changed?|changes|moved?|moves)\b)", suffix, re.I)
+            predicate = DEADLINE_PREDICATE_RE.match(suffix)
             owned_value = value
             next_label = DEADLINE_LABEL_RE.search(owned_value)
             if next_label:
@@ -827,19 +840,62 @@ def deadline_context(container, match):
             if predicate:
                 def introduced_value(candidate):
                     if not candidate:
-                        return False
+                        return None
                     bridge = owned_value[:candidate.start()]
-                    # A balanced, date-free aside may interrupt the predicate:
-                    # "may, subject to confirmation, become April 1".
-                    bridge = re.sub(r",[^,]+,", " ", bridge)
-                    return bool(re.fullmatch(
-                        r"\s*(?:(?:be|been|being|is|are|was|were|will|shall|has|have|"
-                        r"may|might|can|could|should|must|remain|remains|become|becomes|"
-                        r"changed|changes|moved|moves|set|scheduled|rescheduled|due|for|on|by|at|to|"
-                        r"now|still|expected|anticipated|estimated|planned|intended|proposed|"
-                        r"extended|deferred|fixed|[a-z]+ly)\b\s*)*", bridge, re.I))
-                dated_value = introduced_value(dated_value)
-                unknown_value = introduced_value(unknown_value)
+                    # Commas inside complete dates are not aside delimiters.
+                    # Test every candidate so an incidental date inside an aside
+                    # cannot hide the actual value following that aside.
+                    bridge_dates = list(DATE_RE.finditer(bridge))
+                    commas = [m.start() for m in re.finditer(",", bridge)
+                              if not any(d.start() <= m.start() < d.end() for d in bridge_dates)]
+                    parts = []
+                    in_aside = False
+                    boundaries = [-1, *commas, len(bridge)]
+                    for index, (left, right) in enumerate(zip(boundaries, boundaries[1:])):
+                        part = bridge[left + 1:right]
+                        linked = DEADLINE_VALUE_BRIDGE_RE.fullmatch(TIME_RE.sub(" ", part))
+                        if index == 0 and not linked:
+                            return None  # A scope phrase cannot be discarded as an aside.
+                        if linked:
+                            parts.append(part)
+                            in_aside = False
+                        else:
+                            in_aside = True
+                    # The predicate must resume after an annotation; a candidate
+                    # still inside an unclosed annotation is not its value.
+                    return " ".join(parts) if not in_aside else None
+                introduced_dates = []
+                for candidate in DATE_RE.finditer(owned_value):
+                    bridge = introduced_value(candidate)
+                    if bridge is None and introduced_dates:
+                        prior, prior_bridge = introduced_dates[-1]
+                        connector = TIME_RE.sub("", owned_value[prior.end():candidate.start()])
+                        if re.fullmatch(r"\s*(?:[,;]|\b(?:and|or|at|by|on)\b)\s*(?:[,;]|\b(?:and|or|at|by|on)\b|\s)*", connector, re.I):
+                            bridge = prior_bridge
+                    if bridge is not None:
+                        introduced_dates.append((candidate, bridge))
+                dated_value = bool(introduced_dates)
+                unknown_value = any(introduced_value(candidate) is not None
+                                    for candidate in UNKNOWN_DEADLINE_VALUE_RE.finditer(owned_value))
+                if was_postfix and (dated_value or unknown_value):
+                    if match.start() == previous.start():
+                        return "", 0  # The explicitly superseded value has no current ownership.
+                    owned_start = text.find(owned_value, value_start, end)
+                    if owned_start <= match.start() < owned_start + len(owned_value):
+                        own = next(((candidate, bridge) for candidate, bridge in introduced_dates
+                                    if owned_start + candidate.start() == match.start()), None)
+                        if own is None:
+                            return "", 0  # Incidental dates inside the replacement clause.
+                        candidate, bridge = own
+                        value_end = candidate.end()
+                        clock = TIME_RE.search(owned_value, value_end)
+                        if clock and re.fullmatch(r"[\s,(]*(?:(?:at|by)\s*)?", owned_value[value_end:clock.start()], re.I):
+                            value_end = clock.end()
+                        # Semantic context contains only the proved predicate and
+                        # owned value/clock. Citations still quote the original
+                        # source; annotation clocks and later dates stay excluded.
+                        prefix = text[label_start:value_start] + " " + bridge
+                        return prefix + owned_value[candidate.start():value_end], len(prefix)
             if not value or dated_value or unknown_value:
                 postfix = False
         if DATE_RE.match(suffix) or UNKNOWN_DEADLINE_VALUE_RE.match(suffix):
@@ -851,6 +907,14 @@ def deadline_context(container, match):
             elif previous.start() > match.start():
                 end = previous.start()
                 break
+            else:
+                # A postfix annotation owns the preceding date and only a
+                # directly attached clock, never clocks inside its scope prose.
+                postfix_end = value_start
+                clock = TIME_RE.search(text, value_start, end)
+                if clock and re.fullmatch(r"[\s,:=(]*(?:(?:at|by)\s*)?", text[value_start:clock.start()], re.I):
+                    postfix_end = clock.end()
+                end = min(end, postfix_end)
             continue
         if label_start <= match.start():
             start = label_start

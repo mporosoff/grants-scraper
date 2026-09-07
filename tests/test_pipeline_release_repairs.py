@@ -14,6 +14,7 @@ from scripts.build_changes import diff_catalogs
 from scripts.extract_document_evidence import (
     build_document_entry, extract_containers, merge_document_entry,
     enrich_document_evidence, empty_cache, source_for_record, scoped_html, extract_deadlines,
+    DATE_RE, parse_document_date,
 )
 from scripts.sources.registry import collect
 from scripts.sources.merge import resolve_live_records, rebuild_catalog
@@ -83,6 +84,31 @@ The individual award amount is $99 million.</p></article></body></html>'''
 
 
 class DeadlineOwnership(unittest.TestCase):
+    def assert_replacement_projection(self, text, expected):
+        """Exercise real fresh extraction and a legacy receipt with incidental dates."""
+        record, entry = self.entry()
+        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+        self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts], expected)
+        expected_dates = {date for date, _, _ in expected}
+        invalid = []
+        for match in DATE_RE.finditer(text):
+            if parse_document_date(match.group(0)) in expected_dates:
+                continue
+            seeded = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline ' + match.group(0)}],
+                entry['document'], entry['checked_at'])
+            for fact in seeded:
+                fact['citation']['quote'] = text
+            invalid.extend(seeded)
+        entry['facts'] = facts + invalid
+        entry.pop('deadline_extractor_identity', None)
+        stamp, digest = entry['checked_at'], entry['document']['sha256']
+        published = merge_document_entry(record, entry)
+        self.assertEqual([(d['date'], d.get('time'), d.get('timezone')) for d in published['deadlines'] if d.get('evidence_id')], expected)
+        self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
+        if invalid:
+            self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' and q['status'] == 'needs_review'
+                                for q in published['document_evidence']['review_queue']))
+
     def entry(self):
         record = base_record() | {'primary_document_url': 'https://www.simonsfoundation.org/grant/synthetic-contract/',
                                  'close_date': '2099-10-29', 'deadlines': []}
@@ -502,6 +528,90 @@ class DeadlineOwnership(unittest.TestCase):
                     published = merge_document_entry(record, entry)
                     self.assertEqual([d['date'] for d in published['deadlines'] if d.get('evidence_id')], ['2027-03-01'])
                     self.assertEqual(entry['checked_at'], stamp)
+
+    def test_replacement_candidates_exclude_incidental_dates_and_times(self):
+        record, entry = self.entry()
+        for incidental in ['April 1 2027', 'April 1, 2027', 'TBD']:
+            for replacement in ['May 1 2027 at 5 PM Eastern', 'May 1, 2027 at 5 PM Eastern', 'TBD']:
+                with self.subTest(incidental=incidental, replacement=replacement):
+                    text = ('March 1, 2027 (Application Deadline) is expected, after applicant eligibility '
+                            f'is assessed at 4 PM Pacific on {incidental}, to be {replacement}')
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                    expected = [('2027-05-01', '5 PM', 'Eastern')] if replacement.startswith('May') else []
+                    self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts], expected)
+                    legacy = extract_deadlines(record['opportunity_id'],
+                        [{'text': 'Application Deadline March 1, 2027; Application Deadline April 1, 2027'}],
+                        entry['document'], entry['checked_at'])
+                    for fact in legacy:
+                        fact['citation']['quote'] = text
+                    entry['facts'] = legacy + facts
+                    entry.pop('deadline_extractor_identity', None)
+                    stamp = entry['checked_at']
+                    published = merge_document_entry(record, entry)
+                    self.assertEqual([d['date'] for d in published['deadlines'] if d.get('evidence_id')],
+                                     ['2027-05-01'] if expected else [])
+                    self.assertEqual(entry['checked_at'], stamp)
+
+    def test_deadline_extensions_and_replacement_lists_keep_every_owned_value(self):
+        record, entry = self.entry()
+        for connector in ['to', 'until', 'till', 'through']:
+            for values, expected in [('April 1, 2027', ['2027-04-01']),
+                                     ('April 1, 2027 or May 1, 2027', ['2027-04-01', '2027-05-01']),
+                                     ('TBD', [])]:
+                with self.subTest(connector=connector, values=values):
+                    text = f'March 1, 2027 (Application Deadline) has been extended {connector} {values}'
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                    self.assertEqual([f['date'] for f in facts], expected)
+                    entry['facts'] = facts
+                    entry.pop('deadline_extractor_identity', None)
+                    published = merge_document_entry(record, entry)
+                    self.assertEqual([d['date'] for d in published['deadlines'] if d.get('evidence_id')], expected)
+
+    def test_complete_replacement_predicate_and_value_matrix(self):
+        predicates = ['is', ':', 'has been extended to', 'has been extended until', 'has been moved to',
+                      'has been changed to', 'has been revised to', 'revised to', 'extended until',
+                      'will probably be', 'may become', 'is expected to be', 'is now scheduled for']
+        values = [('May 1, 2027', [('2027-05-01', None, None)]),
+                  ('May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
+                  ('5 PM Pacific on May 1, 2027', [('2027-05-01', '5 PM', 'Pacific')])]
+        values.extend((value, []) for value in ['TBD', 'unknown', 'unannounced', 'to be announced', 'not yet announced'])
+        for opening, closing in [('(', ')'), ('[', ']')]:
+            for predicate in predicates:
+                for value, expected in values:
+                    with self.subTest(opening=opening, predicate=predicate, value=value):
+                        self.assert_replacement_projection(f'March 1, 2027 {opening}Application Deadline{closing} {predicate} {value}', expected)
+
+    def test_replacement_annotation_and_neighbor_matrix(self):
+        asides = ['eligibility is assessed on April 1, 2027', 'projects begin April 1, 2027',
+                  'appointments begin April 1, 2027', 'students graduate April 1, 2027',
+                  'eligibility is checked April 1, 2027 and appointments begin April 2, 2027',
+                  'eligibility is checked April 1 2027, and appointments begin April 2 2027']
+        for opening, closing in [('(', ')'), ('[', ']')]:
+            for aside in asides:
+                for timed in [False, True]:
+                    with self.subTest(opening=opening, aside=aside, timed=timed):
+                        target = 'May 1, 2027' + (' at 5 PM Eastern' if timed else '')
+                        text = (f'March 1, 2027 {opening}Application Deadline{closing} is expected, after {aside}, '
+                                f'to be {target} for applicants with appointments beginning at 4 PM Pacific on June 1, 2027')
+                        self.assert_replacement_projection(text, [('2027-05-01', '5 PM' if timed else None, 'Eastern' if timed else None)])
+        for boundary in ['; ', '. ', ' • ', ' | ']:
+            for timed in [False, True]:
+                with self.subTest(boundary=boundary, timed=timed):
+                    text = ('March 1, 2027 (Application Deadline) is revised to May 1, 2027' +
+                            (' at 5 PM Eastern' if timed else '') + boundary + 'Application Deadline July 1, 2027 at 6 PM Pacific')
+                    self.assert_replacement_projection(text, [('2027-05-01', '5 PM' if timed else None, 'Eastern' if timed else None),
+                                                             ('2027-07-01', '6 PM', 'Pacific')])
+
+    def test_annotations_without_replacements_keep_only_the_original_deadline_clock(self):
+        for opening, closing in [('(', ')'), ('[', ']')]:
+            for annotation in [': for applicants eligible as of April 1, 2027',
+                               'is for applicants assessed at 4 PM Pacific on April 1, 2027',
+                               'is applicable to students graduating April 1, 2027 and starting appointments June 1, 2027']:
+                for timed in [False, True]:
+                    with self.subTest(opening=opening, annotation=annotation, timed=timed):
+                        text = ('March 1, 2027' + (' at 5 PM Eastern' if timed else '') +
+                                f' {opening}Application Deadline{closing} {annotation}')
+                        self.assert_replacement_projection(text, [('2027-03-01', '5 PM' if timed else None, 'Eastern' if timed else None)])
 
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()

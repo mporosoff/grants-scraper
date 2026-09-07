@@ -181,6 +181,16 @@ precede the application, while distinct declared rounds remain independent.
 Replacement values require a complete linking phrase, including supported modal
 modifiers. Dates and statuses inside applicant, eligibility or project-scope
 annotations cannot replace the actual deadline or become submission evidence.
+The predicate grammar evaluates every candidate, treats date-internal commas as
+part of dates, and requires the predicate to resume after an incidental clause.
+Only proved values and their own clocks reach semantic deadline context; original
+source quotations are preserved. Replacement lists retain their independently
+owned values, and unknown/unannounced replacements withhold superseded dates.
+The regression matrix checks direct/moved/changed/revised/extended replacements,
+modal forms, multiple incidental dates before/after the value, absent replacements,
+unknown statuses, time and zone ownership, both postfix delimiters and neighboring
+field boundaries through fresh extraction and legacy-cache publication. Local
+revalidation never advances the source-check timestamp or document hash.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
