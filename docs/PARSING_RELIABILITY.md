@@ -33,6 +33,20 @@ Required undated prerequisites remain represented; a later full date does not
 prove unrestricted applicant access. Recurring yearless dates are not expanded
 into invented years.
 
+Submission policy version 2 also treats a source-listed internal deadline as an
+institutional entry gate unless it is explicitly optional. It respects the same
+cycle/track boundaries and preserves unknown or anticipated dates. The reviewed
+1,419-record replay changes access for two records on September 7, and four on
+September 19, without changing a date, clock, source field or retrieval timestamp.
+The acceptance receipt records these four source-backed dispositions separately
+from the semantic-extraction ledger.
+
+Parser-only change events require a matching nonempty document hash and unchanged
+source-owned submission fields. A fresh listing amendment remains alertable even
+when its attachment is unchanged. Saved aliases resolve for membership, toggles
+and new watches while existing browser-local notes and pursuit status remain on
+their original durable snapshots; ambiguous aliases are not guessed.
+
 `notice_structure_cache` stores normalized original structure privately under
 `.cache/notice-structure`. Its identity binds source URL, material hash, structure
 version and notice selector. Semantic families have separate versions. A parser
@@ -179,7 +193,11 @@ projection already reflects its safe, explicitly incomplete interpretation.
 This is a necessary consistency check, not a substitute for source review, package
 checks or the complete integrated manual suite.
 
-Pages and committed-search workflows run this check before production mutation.
+Pages, committed-search and Alerts workflows run this check before production mutation.
+Alerts also verifies the exact served catalog and existing HTML surfaces before
+D1, signing-secret or Worker changes, with a bounded three-minute wait. A failed
+pre-mutation check retains the active Worker. Corrected catalog publication
+triggers this path; unchanged compatible Worker inputs retain the existing version.
 The refresh detects a mismatched starting projection and automatically uses the
 existing manual generated-package checkpoint, including on a code-triggered run.
 An explicit false manual input cannot bypass that detected migration. The newly

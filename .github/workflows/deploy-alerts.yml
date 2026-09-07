@@ -17,11 +17,13 @@ on:
       - "assets/search-query.js"
       - "assets/search-retrieval.js"
       - "assets/submission-schedule.js"
+      - "data/opportunities.js"
       - "assets/search-v2-config.js"
       - "assets/funded-awards.js"
       - "match_explorer.html"
       - "funded_awards.html"
       - "tools/classify_worker_deployment.mjs"
+      - "tools/verify_notice_publication.py"
       - "tools/smoke_alerts_worker.mjs"
       - "tools/validate_alert_capability_rotation.mjs"
       - "workers/alerts/**"
@@ -43,6 +45,13 @@ jobs:
       - uses: actions/setup-node@v6
         with:
           node-version: "22"
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+          cache: pip
+      - run: python -m pip install -r requirements.txt
+      - name: Verify the committed notice publication projection
+        run: python -m tools.verify_notice_publication
       - name: Verify the bounded alert and Phase 5 release contracts
         run: >-
           node --check tools/classify_worker_deployment.mjs &&
@@ -105,6 +114,31 @@ jobs:
               end
           ' <<<"$deployments" 2>/dev/null || true)"
           echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
+      - name: Verify Pages serves the committed alert surfaces and catalog
+        id: pages-verify
+        shell: bash
+        run: |
+          verified=false
+          verification_deadline=$((SECONDS + 180))
+          while [ "$SECONDS" -lt "$verification_deadline" ]; do
+            for file in match_explorer.html funded_awards.html data/opportunities.js; do
+              target="/tmp/alerts-published-$(basename "$file")"
+              curl --fail --silent --show-error --max-time 10 --max-filesize 67108864 \
+                --header 'Cache-Control: no-cache' \
+                "https://mporosoff.github.io/grants-scraper/${file}?deploy=${GITHUB_SHA}" -o "$target" || true
+            done
+            if cmp -s match_explorer.html /tmp/alerts-published-match_explorer.html \
+              && cmp -s funded_awards.html /tmp/alerts-published-funded_awards.html \
+              && cmp -s data/opportunities.js /tmp/alerts-published-opportunities.js; then
+              verified=true
+              break
+            fi
+            sleep 10
+          done
+          if [ "$verified" != "true" ]; then
+            echo "::error::Pages did not serve the verified Alerts catalog and surfaces within the bounded verification window. The existing Worker remains unchanged."
+            exit 1
+          fi
       - name: Reconfirm protected main immediately before Alerts Worker mutation
         if: ${{ steps.worker-inputs.outputs.deploy_required == 'true' }}
         shell: bash
@@ -233,24 +267,6 @@ jobs:
             echo
             echo "The Worker, D1 migration, provider, and signing contracts are deployed, but delivery readiness remains false until one bounded genuine daily scheduler recovery execution succeeds."
           } >> "$GITHUB_STEP_SUMMARY"
-      - name: Verify Pages serves the committed alert surfaces
-        id: pages-verify
-        shell: bash
-        run: |
-          verified=false
-          for attempt in $(seq 1 18); do
-            curl --fail --silent --show-error --max-time 15 "https://mporosoff.github.io/grants-scraper/match_explorer.html?deploy=${GITHUB_SHA}" -o /tmp/match_explorer.html || true
-            curl --fail --silent --show-error --max-time 15 "https://mporosoff.github.io/grants-scraper/funded_awards.html?deploy=${GITHUB_SHA}" -o /tmp/funded_awards.html || true
-            if cmp -s match_explorer.html /tmp/match_explorer.html && cmp -s funded_awards.html /tmp/funded_awards.html; then
-              verified=true
-              break
-            fi
-            sleep 10
-          done
-          if [ "$verified" != "true" ]; then
-            echo "::error::GitHub Pages did not serve the committed alert surfaces within the verification window."
-            exit 1
-          fi
       - name: Record retained Alerts Worker version
         if: ${{ steps.worker-inputs.outputs.deploy_required != 'true' }}
         shell: bash

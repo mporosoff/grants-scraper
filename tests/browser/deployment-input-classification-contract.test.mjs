@@ -293,12 +293,12 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
     "Capture and verify the protected main release base",
     "Classify Alerts Worker inputs since the active deployment",
     "Capture the active Alerts Worker version for rollback",
+    "Verify Pages serves the committed alert surfaces and catalog",
     "Reconfirm protected main immediately before Alerts Worker mutation",
     "Apply committed D1 migrations",
     "Deploy the committed Alerts Worker",
     "Wait for the Alerts Worker health contract",
     "Run bounded Alerts Worker smokes",
-    "Verify Pages serves the committed alert surfaces",
   ]);
   assert.doesNotMatch(workflowStep(alertsWorkflow, "Verify Pages serves the committed alert surfaces"), /deploy_required/);
   assert.equal(

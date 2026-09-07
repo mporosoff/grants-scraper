@@ -27,7 +27,7 @@ class SubmissionScheduleTests(unittest.TestCase):
 
     def test_parser_correction_is_not_a_sponsor_amendment(self):
         before = rec('one', close_date='2026-12-01', document_evidence={'document': {'sha256': 'same'}})
-        after = {**before, 'deadlines': [{'kind': 'concept_paper', 'date': '2026-10-09', 'required': True},
+        after = {**before, 'deadlines': [{'kind': 'concept_paper', 'date': '2026-10-09', 'required': True, 'evidence_id': 'document-field'},
                                        {'kind': 'application', 'date': '2026-12-01'}]}
         after['next_submission'] = next_submission(after, '2026-09-07')
         changes = diff_catalogs(catalog([before]), catalog([after]), as_of=date(2026, 9, 7))
@@ -35,6 +35,33 @@ class SubmissionScheduleTests(unittest.TestCase):
         after['document_evidence'] = {'document': {'sha256': 'material-amendment'}}
         changes = diff_catalogs(catalog([before]), catalog([after]), as_of=date(2026, 9, 7))
         self.assertEqual({event['type'] for event in changes}, {'deadline_changed', 'amended'})
+
+    def test_listing_deadline_changes_are_not_suppressed_without_revision_metadata(self):
+        before = rec('source:one', source='Official listing', close_date='2026-12-01',
+                     last_updated=None, version=None)
+        for document in [None, {'document': {'sha256': 'unchanged-attachment'}}]:
+            with self.subTest(document=document):
+                old = {**before, 'document_evidence': document}
+                after = {**old, 'close_date': '2026-12-15'}
+                after['next_submission'] = next_submission(after, '2026-09-07')
+                changed = diff_catalogs(catalog([old]), catalog([after]), as_of=date(2026, 9, 7))
+                self.assertEqual([event['type'] for event in changed], ['deadline_changed'])
+        # A source-listed stage can change independently of the headline date.
+        old = {**before, 'deadlines': [{'kind': 'concept_paper', 'date': '2026-10-01', 'required': True}],
+               'document_evidence': {'document': {'sha256': 'same'}}}
+        after = deepcopy(old)
+        after['deadlines'][0]['date'] = '2026-10-09'
+        after['next_submission'] = next_submission(after, '2026-09-07')
+        changed = diff_catalogs(catalog([old]), catalog([after]), as_of=date(2026, 9, 7))
+        self.assertEqual([event['type'] for event in changed], ['deadline_changed'])
+
+    def test_same_document_with_new_listing_text_is_not_proven_parser_only(self):
+        before = rec('one', close_date='2026-12-01', document_evidence={'document': {'sha256': 'same'}})
+        after = {**before, 'description': 'The agency added a concept paper requirement.',
+                 'deadlines': [{'kind': 'concept_paper', 'date': '2026-10-09', 'evidence_id': 'doc-new-field'}]}
+        after['next_submission'] = next_submission(after, '2026-09-07')
+        changed = diff_catalogs(catalog([before]), catalog([after]), as_of=date(2026, 9, 7))
+        self.assertEqual([event['type'] for event in changed], ['deadline_changed'])
 
     def test_alias_transition_does_not_emit_new_or_closure_alerts(self):
         before = rec('exchange:one')

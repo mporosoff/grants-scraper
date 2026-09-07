@@ -22,7 +22,7 @@ from scripts.build_feeds import (
     rfc3339,
 )
 from scripts.currentness import parse_date, record_is_current
-from scripts.submission_schedule import next_submission
+from scripts.submission_schedule import events as submission_events, next_submission
 
 SCHEMA_VERSION = 1
 RETENTION_DAYS = 90
@@ -36,6 +36,28 @@ EVENT_LABELS = {
     "closing_soon": "Closing soon",
     "closed_or_removed": "Closed or removed",
 }
+
+
+def source_submission_fields(record):
+    """Compare source-owned values without reversible document enrichment."""
+    fields = {key: record.get(key) for key in (
+        'close_date', 'close_date_kind', 'deadline_time', 'deadline_timezone',
+        'description', 'synopsis', 'source_summary')}
+    owned = []
+    keys = ('kind', 'date', 'time', 'timezone', 'required', 'rolling', 'application_class',
+            'cycle', 'track', 'window_start', 'date_qualifier', 'prerequisite', 'invitation_required')
+    for event in submission_events(record):
+        if event.get('evidence_id'):
+            continue
+        event = dict(event)
+        for key, original in (event.get('document_source_fields') or {}).items():
+            if original['present']:
+                event[key] = original['value']
+            else:
+                event.pop(key, None)
+        owned.append({key: event[key] for key in keys if event.get(key) is not None})
+    fields['events'] = sorted(owned, key=lambda event: json.dumps(event, sort_keys=True))
+    return fields
 
 
 def record_id(record: dict) -> str:
@@ -152,8 +174,9 @@ def diff_catalogs(
                               or bool(old_document.get('sha256') and new_document.get('sha256')
                                       and old_document['sha256'] != new_document['sha256']))
             if old_deadline != new_deadline:
-                correction = not source_changed and (bool(record.get('next_submission'))
-                    or bool(old_document.get('sha256') and old_document.get('sha256') == new_document.get('sha256')))
+                correction = (not source_changed and bool(old_document.get('sha256'))
+                    and old_document['sha256'] == new_document.get('sha256')
+                    and source_submission_fields(old) == source_submission_fields(record))
                 add(
                     'source_correction' if correction else "deadline_changed",
                     record,

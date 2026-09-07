@@ -4,6 +4,22 @@ import {readFileSync} from "node:fs";
 
 const workflow = name => readFileSync(new URL(`../../.github/workflows/${name}.yml`, import.meta.url), "utf8");
 
+test("Alerts verifies both its interpreted projection and served catalog before any production mutation", () => {
+  const text = workflow("deploy-alerts");
+  const gate = text.indexOf("run: python -m tools.verify_notice_publication");
+  const served = text.indexOf("id: pages-verify");
+  assert.ok(gate > text.indexOf("python -m pip install -r requirements.txt"));
+  assert.ok(served > gate);
+  for (const marker of ["d1 migrations apply", "Configure the Alerts capability-signing secrets", "name: Deploy the committed Alerts Worker"]) {
+    assert.ok(text.indexOf(marker) > served, marker);
+  }
+  const verification = text.slice(served, text.indexOf("Reconfirm protected main immediately before Alerts Worker mutation"));
+  assert.match(verification, /cmp -s data\/opportunities\.js/);
+  assert.match(verification, /SECONDS \+ 180/);
+  assert.match(verification, /--max-time 10 --max-filesize 67108864/);
+  assert.ok(text.includes('"data/opportunities.js"'));
+});
+
 test("Pages verifies the interpreted package before upload or deployment", () => {
   const text = workflow("pages");
   const gate = text.indexOf("run: python -m tools.verify_notice_publication");

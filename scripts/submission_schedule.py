@@ -8,7 +8,7 @@ from copy import deepcopy
 from datetime import date
 import re
 
-VERSION = 1
+VERSION = 2
 PRELIMINARY = {'letter_of_intent', 'concept_paper', 'white_paper', 'preapplication', 'preproposal'}
 FULL = {'application', 'estimated_application', 'full_application', 'proposal'}
 KINDS = PRELIMINARY | FULL | {'submission', 'internal'}
@@ -37,6 +37,12 @@ def events(record):
 def compatible(left, right):
     return all(not left.get(key) or not right.get(key) or left[key] == right[key]
                or 'unspecified' in (left[key], right[key]) for key in ('application_class', 'cycle', 'track'))
+
+
+def required_gate(event):
+    # A source-listed internal submission deadline is an institutional gate,
+    # even when the older listing did not separately encode required=True.
+    return event.get('required') is True or (event.get('kind') == 'internal' and event.get('required') is not False)
 
 
 def next_submission(record, as_of=None, *, application_class='new'):
@@ -68,27 +74,32 @@ def next_submission(record, as_of=None, *, application_class='new'):
     result.update(date=chosen.get('date'), event=chosen, access='rolling' if chosen.get('rolling') is True and chosen.get('date') is None else 'open')
     if chosen.get('kind') == 'submission' or chosen.get('date_qualifier') == 'anticipated':
         result['access'] = 'verify_stage'
-    if chosen.get('kind') in FULL:
-        preliminary = [event for event in relevant if event.get('kind') in PRELIMINARY and compatible(event, chosen)
-                       and event.get('required') is not False]
+    preliminary = [event for event in relevant if compatible(event, chosen) and event.get('required') is not False
+                   and ((chosen.get('kind') in FULL and event.get('kind') in PRELIMINARY)
+                        or (chosen.get('kind') != 'internal' and event.get('kind') == 'internal'))]
+    if chosen.get('kind') in FULL or preliminary:
         # Without explicit cycle identity, several historical cycles cannot be
         # joined by nearest-date proximity. Keep the full date and qualify access.
         if not chosen.get('cycle') and len({event.get('cycle') for event in preliminary if event.get('cycle')}) > 1:
             result['access'] = 'verify_prerequisite'
         else:
             result['prerequisites'] = preliminary
-            if any(event.get('required') is True and valid_date(event.get('date')) and event['date'] < today for event in preliminary):
+            uncertain = {'recommended', 'anticipated'}
+            if any(required_gate(event) and event.get('date_qualifier') not in uncertain
+                   and valid_date(event.get('date')) and event['date'] < today for event in preliminary):
                 result['access'] = 'prerequisite_closed'
-            elif any(event.get('required') is True and not valid_date(event.get('date')) and event.get('rolling') is not True for event in preliminary):
+            elif any(required_gate(event) and (event.get('date_qualifier') in uncertain
+                     or (not valid_date(event.get('date')) and event.get('rolling') is not True)) for event in preliminary):
                 result['access'] = 'verify_prerequisite'
-            elif any(event.get('required') is None for event in preliminary):
+            elif any(event.get('required') is None and not required_gate(event) for event in preliminary):
                 result['access'] = 'verify_prerequisite'
-        if (not any(event.get('kind') in PRELIMINARY for event in all_events)
+        if (chosen.get('kind') in FULL and result['access'] != 'prerequisite_closed'
+            and not any(event.get('kind') in PRELIMINARY for event in all_events)
             and record.get('has_preliminary_stage') is True and record.get('preliminary_required') is not False):
             # A source-declared preliminary stage with no recovered event is
             # unresolved access, not proof that a new applicant can enter now.
             result['access'] = 'verify_prerequisite'
-        if (chosen.get('invitation_required') is True or chosen.get('prerequisite') == 'invitation'
+        if chosen.get('kind') in FULL and (chosen.get('invitation_required') is True or chosen.get('prerequisite') == 'invitation'
             or any(event.get('kind') in FULL and event.get('date') is None and compatible(event, chosen)
                    and event.get('invitation_required') is True for event in relevant)):
             result['access'] = 'invitation_required'

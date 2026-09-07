@@ -3668,9 +3668,14 @@
       "Match ratings exported with the current search text, filters, and rankings. API keys, profile/CV text, and chat were excluded.";
   }
 
+  function canonicalSavedId(id) {
+    const record = state.ready ? recordById(id) : null;
+    return record ? recordId(record) : id;
+  }
+
   function refreshSavedState(items) {
     state.savedItems = items || [];
-    state.savedIds = new Set(state.savedItems.map(SAVED_API.idOf));
+    state.savedIds = new Set(state.savedItems.map(item => canonicalSavedId(SAVED_API.idOf(item))));
   }
 
   function setSavedStatus(message = "", { error = false } = {}) {
@@ -3757,10 +3762,10 @@
 
   function toggleSave(id) {
     if (!state.ready) return runCatalogAction(() => toggleSave(id));
-    const record = catalog.opportunities.find(item => recordId(item) === id);
+    const record = recordById(id);
     if (!record) return;
     const snapshot = { ...record, url: officialActions(record).url || record.detail_page };
-    const result = SAVED_API.toggle(snapshot);
+    const result = SAVED_API.toggle(snapshot, undefined, canonicalSavedId);
     if (savedMutationFailed(result)) return;
     renderSaved();
     renderResults();
@@ -3799,7 +3804,7 @@
     ALERTS_API.open({
       type: "opportunity",
       definition: {
-        opportunity_id: id,
+        opportunity_id: recordId(record),
         triggers: ["deadline_changed", "amended", "closing_reminders", "status_changed"],
       },
       summary: `${record.title} · ${record.agency || "Agency not listed"}`,
@@ -5965,6 +5970,7 @@
       excluded: candidate.opportunities.length - nextRecords.length,
     };
     state.ready = true;
+    refreshSavedState(state.savedItems);
     applyPendingFacetSelections();
     refreshProfileQuery();
     renderAllFacets();

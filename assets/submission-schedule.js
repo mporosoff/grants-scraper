@@ -5,8 +5,8 @@
   const FULL = new Set(["application", "estimated_application", "full_application", "proposal"]);
   const KINDS = new Set([...PRELIMINARY, ...FULL, "submission", "internal"]);
   const ACCESS_LABELS = Object.freeze({
-    open: "", prerequisite_closed: "Required preliminary submission has closed",
-    invitation_required: "Invitation required for the full application", verify_prerequisite: "Verify the required preliminary stage",
+    open: "", prerequisite_closed: "Required submission step has closed",
+    invitation_required: "Invitation required for the full application", verify_prerequisite: "Verify the required submission step",
     verify_stage: "Verify the submission stage", resubmission_only: "Remaining dates are for resubmissions only",
     closed: "No upcoming submission date", rolling: "Rolling / open until superseded", not_listed: "Date not listed",
   });
@@ -27,6 +27,9 @@
     return ["application_class", "cycle", "track"].every(key => !left[key] || !right[key] || left[key] === right[key]
       || left[key] === "unspecified" || right[key] === "unspecified");
   }
+  function requiredGate(event) {
+    return event.required === true || (event.kind === "internal" && event.required !== false);
+  }
   function nextSubmission(record, asOf = new Date().toISOString().slice(0, 10), applicationClass = "new") {
     if (!validDate(asOf)) throw new Error("Submission selection requires an ISO calendar date");
     const allEvents = events(record);
@@ -36,7 +39,7 @@
       .sort((a, b) => compare(a.date, b.date) || compare(a.kind, b.kind) || compare(a.cycle || "", b.cycle || "") || compare(a.track || "", b.track || ""));
     if (!future.length) future = relevant.filter(event => FULL.has(event.kind) && event.rolling === true && event.date == null)
       .sort((a, b) => compare(a.cycle || "", b.cycle || "") || compare(a.track || "", b.track || ""));
-    const result = {version: 1, as_of: asOf, application_class: applicationClass, date: null, event: null, access: "not_listed", prerequisites: []};
+    const result = {version: 2, as_of: asOf, application_class: applicationClass, date: null, event: null, access: "not_listed", prerequisites: []};
     if (!future.length) {
       const full = relevant.filter(event => FULL.has(event.kind) && validDate(event.date));
       const latest = full.map(event => event.date).sort().at(-1);
@@ -50,22 +53,24 @@
     const chosen = future[0];
     Object.assign(result, {date: chosen.date ?? null, event: chosen, access: chosen.rolling === true && chosen.date == null ? "rolling" : "open"});
     if (chosen.kind === "submission" || chosen.date_qualifier === "anticipated") result.access = "verify_stage";
-    if (FULL.has(chosen.kind)) {
-      const preliminary = relevant.filter(event => PRELIMINARY.has(event.kind) && compatible(event, chosen) && event.required !== false);
+    const preliminary = relevant.filter(event => compatible(event, chosen) && event.required !== false
+      && ((FULL.has(chosen.kind) && PRELIMINARY.has(event.kind)) || (chosen.kind !== "internal" && event.kind === "internal")));
+    if (FULL.has(chosen.kind) || preliminary.length) {
       if (!chosen.cycle && new Set(preliminary.map(event => event.cycle).filter(Boolean)).size > 1) {
         result.access = "verify_prerequisite";
       } else {
         result.prerequisites = preliminary;
-        if (preliminary.some(event => event.required === true && validDate(event.date) && event.date < asOf)) result.access = "prerequisite_closed";
-        else if (preliminary.some(event => event.required === true && !validDate(event.date) && event.rolling !== true)) result.access = "verify_prerequisite";
-        else if (preliminary.some(event => event.required == null)) result.access = "verify_prerequisite";
+        const uncertain = new Set(["recommended", "anticipated"]);
+        if (preliminary.some(event => requiredGate(event) && !uncertain.has(event.date_qualifier) && validDate(event.date) && event.date < asOf)) result.access = "prerequisite_closed";
+        else if (preliminary.some(event => requiredGate(event) && (uncertain.has(event.date_qualifier) || (!validDate(event.date) && event.rolling !== true)))) result.access = "verify_prerequisite";
+        else if (preliminary.some(event => event.required == null && !requiredGate(event))) result.access = "verify_prerequisite";
       }
-      if (!allEvents.some(event => PRELIMINARY.has(event.kind)) && record.has_preliminary_stage === true && record.preliminary_required !== false) {
+      if (FULL.has(chosen.kind) && result.access !== "prerequisite_closed" && !allEvents.some(event => PRELIMINARY.has(event.kind)) && record.has_preliminary_stage === true && record.preliminary_required !== false) {
         result.access = "verify_prerequisite";
       }
-      if (chosen.invitation_required === true || chosen.prerequisite === "invitation"
+      if (FULL.has(chosen.kind) && (chosen.invitation_required === true || chosen.prerequisite === "invitation"
         || relevant.some(event => FULL.has(event.kind) && event.date == null && compatible(event, chosen)
-          && event.invitation_required === true)) result.access = "invitation_required";
+          && event.invitation_required === true))) result.access = "invitation_required";
     }
     return result;
   }
@@ -75,5 +80,5 @@
     const aliases = records.filter(record => (record.source_aliases || []).some(alias => String(alias.opportunity_id || "") === String(id)));
     return aliases.length === 1 ? aliases[0] : null;
   }
-  globalThis.FUNDING_SUBMISSION_SCHEDULE = Object.freeze({version: 1, events, nextSubmission, validDate, recordById, ACCESS_LABELS});
+  globalThis.FUNDING_SUBMISSION_SCHEDULE = Object.freeze({version: 2, events, nextSubmission, validDate, recordById, ACCESS_LABELS});
 })();

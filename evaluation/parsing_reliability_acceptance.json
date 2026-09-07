@@ -17620,5 +17620,525 @@
         }
       ]
     }
-  ]
+  ],
+  "submission_policy_remediation": {
+    "reviewed_sha": "92e0ad4bc910cfa3e03bc03d18dc3838d2acbe40",
+    "catalog_sha256": "b4540f6921988985719fd8c8268b5bba3060e1477bb59b9b016275c52ecc6e2c",
+    "records": 1419,
+    "source_requests": 0,
+    "provider_requests": 0,
+    "policy_before": 1,
+    "policy_after": 2,
+    "changes": [
+      {
+        "opportunity_id": "vpr-email:infoready-2024058",
+        "as_of": "2026-09-07",
+        "before": {
+          "as_of": "2026-09-07",
+          "application_class": "new",
+          "date": "2027-01-19",
+          "event": {
+            "kind": "application",
+            "date": "2027-01-19",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "after": {
+          "as_of": "2026-09-07",
+          "application_class": "new",
+          "date": "2027-01-19",
+          "event": {
+            "kind": "application",
+            "date": "2027-01-19",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "prerequisite_closed",
+          "prerequisites": [
+            {
+              "kind": "internal",
+              "date": "2026-08-21",
+              "time": null,
+              "timezone": null,
+              "note": "UR internal / limited-submission deadline",
+              "estimated": false,
+              "source": "VPR funding digest (limited submissions & foundations)",
+              "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+              "source_field": "source listing",
+              "confidence": "source_listed"
+            }
+          ]
+        },
+        "source_fields": [
+          {
+            "kind": "application",
+            "date": "2027-01-19",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "internal",
+            "date": "2026-08-21",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal / limited-submission deadline",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "disposition": "Supported internal submission gate corrected; sponsor date, clock and source fields retained.",
+        "source_justification": "The source-listed internal deadline is explicitly identified as the university internal/limited-submission deadline. Its absence from the older separate required flag is not evidence that the internal gate is optional."
+      },
+      {
+        "opportunity_id": "vpr-email:vpr-36e6aed03b0511a5",
+        "as_of": "2026-09-07",
+        "before": {
+          "as_of": "2026-09-07",
+          "application_class": "new",
+          "date": "2027-02-04",
+          "event": {
+            "kind": "application",
+            "date": "2027-02-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "after": {
+          "as_of": "2026-09-07",
+          "application_class": "new",
+          "date": "2027-02-04",
+          "event": {
+            "kind": "application",
+            "date": "2027-02-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "prerequisite_closed",
+          "prerequisites": [
+            {
+              "kind": "internal",
+              "date": "2026-08-21",
+              "time": null,
+              "timezone": null,
+              "note": "UR internal / limited-submission deadline",
+              "estimated": false,
+              "source": "VPR funding digest (limited submissions & foundations)",
+              "source_url": "https://rochester.infoready4.com/",
+              "source_field": "source listing",
+              "confidence": "source_listed"
+            }
+          ]
+        },
+        "source_fields": [
+          {
+            "kind": "application",
+            "date": "2027-02-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "internal",
+            "date": "2026-08-21",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal / limited-submission deadline",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "disposition": "Supported internal submission gate corrected; sponsor date, clock and source fields retained.",
+        "source_justification": "The source-listed internal deadline is explicitly identified as the university internal/limited-submission deadline. Its absence from the older separate required flag is not evidence that the internal gate is optional."
+      },
+      {
+        "opportunity_id": "vpr-email:infoready-2028013",
+        "as_of": "2026-09-19",
+        "before": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2026-12-04",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline September 18, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "after": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2026-12-04",
+          "event": {
+            "kind": "application",
+            "date": "2026-12-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline September 18, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "prerequisite_closed",
+          "prerequisites": [
+            {
+              "kind": "internal",
+              "date": "2026-09-18",
+              "time": null,
+              "timezone": null,
+              "note": "UR internal / limited-submission deadline",
+              "estimated": false,
+              "source": "VPR funding digest (limited submissions & foundations)",
+              "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+              "source_field": "source listing",
+              "confidence": "source_listed"
+            }
+          ]
+        },
+        "source_fields": [
+          {
+            "kind": "application",
+            "date": "2026-12-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline September 18, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "internal",
+            "date": "2026-09-18",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal / limited-submission deadline",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "disposition": "Supported internal submission gate corrected; sponsor date, clock and source fields retained.",
+        "source_justification": "The source-listed internal deadline is explicitly identified as the university internal/limited-submission deadline. Its absence from the older separate required flag is not evidence that the internal gate is optional."
+      },
+      {
+        "opportunity_id": "vpr-email:infoready-2024058",
+        "as_of": "2026-09-19",
+        "before": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2027-01-19",
+          "event": {
+            "kind": "application",
+            "date": "2027-01-19",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "after": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2027-01-19",
+          "event": {
+            "kind": "application",
+            "date": "2027-01-19",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "prerequisite_closed",
+          "prerequisites": [
+            {
+              "kind": "internal",
+              "date": "2026-08-21",
+              "time": null,
+              "timezone": null,
+              "note": "UR internal / limited-submission deadline",
+              "estimated": false,
+              "source": "VPR funding digest (limited submissions & foundations)",
+              "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+              "source_field": "source listing",
+              "confidence": "source_listed"
+            }
+          ]
+        },
+        "source_fields": [
+          {
+            "kind": "application",
+            "date": "2027-01-19",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "internal",
+            "date": "2026-08-21",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal / limited-submission deadline",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "disposition": "Supported internal submission gate corrected; sponsor date, clock and source fields retained.",
+        "source_justification": "The source-listed internal deadline is explicitly identified as the university internal/limited-submission deadline. Its absence from the older separate required flag is not evidence that the internal gate is optional."
+      },
+      {
+        "opportunity_id": "vpr-email:vpr-36e6aed03b0511a5",
+        "as_of": "2026-09-19",
+        "before": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2027-02-04",
+          "event": {
+            "kind": "application",
+            "date": "2027-02-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "after": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2027-02-04",
+          "event": {
+            "kind": "application",
+            "date": "2027-02-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "prerequisite_closed",
+          "prerequisites": [
+            {
+              "kind": "internal",
+              "date": "2026-08-21",
+              "time": null,
+              "timezone": null,
+              "note": "UR internal / limited-submission deadline",
+              "estimated": false,
+              "source": "VPR funding digest (limited submissions & foundations)",
+              "source_url": "https://rochester.infoready4.com/",
+              "source_field": "source listing",
+              "confidence": "source_listed"
+            }
+          ]
+        },
+        "source_fields": [
+          {
+            "kind": "application",
+            "date": "2027-02-04",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline August 21, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "internal",
+            "date": "2026-08-21",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal / limited-submission deadline",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "https://rochester.infoready4.com/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "disposition": "Supported internal submission gate corrected; sponsor date, clock and source fields retained.",
+        "source_justification": "The source-listed internal deadline is explicitly identified as the university internal/limited-submission deadline. Its absence from the older separate required flag is not evidence that the internal gate is optional."
+      },
+      {
+        "opportunity_id": "vpr-email:infoready-2028504",
+        "as_of": "2026-09-19",
+        "before": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2027-02-12",
+          "event": {
+            "kind": "application",
+            "date": "2027-02-12",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline September 18, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "after": {
+          "as_of": "2026-09-19",
+          "application_class": "new",
+          "date": "2027-02-12",
+          "event": {
+            "kind": "application",
+            "date": "2027-02-12",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline September 18, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "prerequisite_closed",
+          "prerequisites": [
+            {
+              "kind": "internal",
+              "date": "2026-09-18",
+              "time": null,
+              "timezone": null,
+              "note": "UR internal / limited-submission deadline",
+              "estimated": false,
+              "source": "VPR funding digest (limited submissions & foundations)",
+              "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+              "source_field": "source listing",
+              "confidence": "source_listed"
+            }
+          ]
+        },
+        "source_fields": [
+          {
+            "kind": "application",
+            "date": "2027-02-12",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal deadline September 18, 2026",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          {
+            "kind": "internal",
+            "date": "2026-09-18",
+            "time": null,
+            "timezone": null,
+            "note": "UR internal / limited-submission deadline",
+            "estimated": false,
+            "source": "VPR funding digest (limited submissions & foundations)",
+            "source_url": "http://rochester.infoready4.com/CompetitionSpace/",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "disposition": "Supported internal submission gate corrected; sponsor date, clock and source fields retained.",
+        "source_justification": "The source-listed internal deadline is explicitly identified as the university internal/limited-submission deadline. Its absence from the older separate required flag is not evidence that the internal gate is optional."
+      }
+    ],
+    "distinct_affected_records": 4,
+    "date_or_clock_changes": 0,
+    "reviewed": true,
+    "hermetic_changes": {
+      "artifacts": [
+        "feeds/changes.json",
+        "opportunities.js"
+      ],
+      "leaf_changes": 9,
+      "only_change": "next_submission.version 1 to 2; membership, evidence, dates and rankings unchanged"
+    }
+  }
 }

@@ -121,8 +121,8 @@
     }
   }
 
-  function isSaved(items, id) {
-    return (items || []).some(item => idOf(item) === id);
+  function isSaved(items, id, resolveId = value => value) {
+    return (items || []).some(item => resolveId(idOf(item)) === resolveId(id));
   }
 
   function mutationResult(ok, items, details = {}) {
@@ -135,16 +135,18 @@
     };
   }
 
-  function toggle(record, storage) {
+  function toggle(record, storage, resolveId = value => value) {
     const persistedItems = load(storage);
     const item = sanitizeItem(record);
     if (!item) return mutationResult(false, persistedItems, { saved: false, error: "invalid_item" });
-    const key = idOf(item);
-    const items = persistedItems.map(existing => ({ ...existing }));
-    const index = items.findIndex(existing => idOf(existing) === key);
+    const key = resolveId(idOf(item));
+    let items = persistedItems.map(existing => ({ ...existing }));
+    const existingSaved = isSaved(items, key, resolveId);
     let saved;
-    if (index >= 0) {
-      items.splice(index, 1);
+    if (existingSaved) {
+      // Resolve membership without rewriting durable pursuit notes/status.
+      // An explicit unsave removes every snapshot of this one canonical call.
+      items = items.filter(existing => resolveId(idOf(existing)) !== key);
       saved = false;
     } else {
       items.unshift(item);
@@ -152,7 +154,7 @@
     }
     if (!persist(items, storage)) {
       return mutationResult(false, persistedItems, {
-        saved: isSaved(persistedItems, key), error: "storage_rejected",
+        saved: isSaved(persistedItems, key, resolveId), error: "storage_rejected",
       });
     }
     return mutationResult(true, items, { saved, changed: true });

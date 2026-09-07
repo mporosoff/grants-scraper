@@ -541,5 +541,300 @@
       "access": "verify_stage",
       "kind": null
     }
+  },
+  {
+    "name": "source-listed internal deadline blocks later sponsor application even without limited flag",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-08-21",
+          "source": "VPR funding digest",
+          "confidence": "source_listed"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "internal gate remains actionable on its own date",
+    "as_of": "2026-09-18",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-09-18",
+          "source": "VPR funding digest",
+          "confidence": "source_listed"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-09-18",
+      "access": "open",
+      "kind": "internal"
+    }
+  },
+  {
+    "name": "internal gate closes the next day",
+    "as_of": "2026-09-19",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-09-18",
+          "source": "VPR funding digest",
+          "confidence": "source_listed"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "explicitly optional internal date does not block",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-08-21",
+          "source": "VPR funding digest",
+          "confidence": "source_listed",
+          "required": false
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "unknown internal gate date requires verification",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": null,
+          "source": "VPR funding digest",
+          "confidence": "source_listed"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "verify_prerequisite",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "explicitly rolling internal gate is available",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": null,
+          "source": "VPR funding digest",
+          "confidence": "source_listed",
+          "rolling": true
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "internal gates do not leak across cycles",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-08-21",
+          "source": "VPR funding digest",
+          "confidence": "source_listed",
+          "cycle": "2025"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed",
+          "cycle": "2026"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "internal gates do not leak across tracks",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-08-21",
+          "source": "VPR funding digest",
+          "confidence": "source_listed",
+          "track": "A"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed",
+          "track": "B"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "internal gate also protects subsequent sponsor preliminary submission",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-08-21",
+          "source": "VPR funding digest",
+          "confidence": "source_listed"
+        },
+        {
+          "kind": "concept_paper",
+          "date": "2027-01-19",
+          "confidence": "source_listed",
+          "required": true
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "prerequisite_closed",
+      "kind": "concept_paper"
+    }
+  },
+  {
+    "name": "tentative internal gate does not prove confirmed closure",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-08-21",
+          "source": "VPR funding digest",
+          "confidence": "source_listed",
+          "date_qualifier": "anticipated"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "verify_prerequisite",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "known closed internal gate stays closed with another unresolved preliminary step",
+    "as_of": "2026-09-07",
+    "record": {
+      "limited_submission": false,
+      "close_date": "2027-01-19",
+      "deadlines": [
+        {
+          "kind": "internal",
+          "date": "2026-08-21",
+          "source": "VPR funding digest",
+          "confidence": "source_listed"
+        },
+        {
+          "kind": "application",
+          "date": "2027-01-19",
+          "confidence": "source_listed"
+        }
+      ],
+      "has_preliminary_stage": true,
+      "preliminary_required": true
+    },
+    "expected": {
+      "date": "2027-01-19",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
   }
 ]
