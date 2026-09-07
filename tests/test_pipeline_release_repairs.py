@@ -350,6 +350,30 @@ class DeadlineOwnership(unittest.TestCase):
             facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
             self.assertEqual([f['deadline_kind'] for f in facts], ['letter_of_intent'])
 
+    def test_an_empty_later_deadline_field_never_borrows_an_issue_date(self):
+        record, entry = self.entry()
+        for label in ['Application Deadline', 'Letter of Intent Deadline', 'Phase II Application Deadline',
+                      'Submission Deadline for Full Applications']:
+            for value in ['', 'TBD', 'to be announced', 'to be determined', 'not yet scheduled',
+                          'pending', 'see forthcoming notice']:
+                with self.subTest(label=label, value=value):
+                    text = f'RFA Issue Date: March 17, 2027 {label}: {value}'
+                    self.assertEqual(extract_deadlines(record['opportunity_id'], [{'text': text}],
+                                     entry['document'], entry['checked_at']), [])
+
+    def test_legacy_issue_date_with_an_unvalued_deadline_is_withheld(self):
+        record, entry = self.entry()
+        facts = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline March 17, 2027'}],
+                                  entry['document'], entry['checked_at'])
+        facts[0]['citation']['quote'] = 'RFA Issue Date: March 17, 2027 Application Deadline: TBD'
+        entry['facts'] = facts
+        entry.pop('deadline_extractor_identity')
+        stamp = entry['checked_at']
+        result = merge_document_entry(record, entry)
+        self.assertFalse(any(d.get('evidence_id') for d in result['deadlines']))
+        self.assertEqual(entry['checked_at'], stamp)
+        self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' for q in result['document_evidence']['review_queue']))
+
     def test_legacy_cached_time_requires_its_own_quote_support(self):
         record, entry = self.entry()
         text = 'Application Deadline March 1, 2027, Application Deadline April 1, 2027 at 6:00 p.m. Pacific Time'

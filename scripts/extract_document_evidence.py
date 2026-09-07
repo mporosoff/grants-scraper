@@ -772,11 +772,15 @@ def deadline_context(container, match):
         if qualifier:
             label_start = start + qualifier.start()
         previous = next((date for date in reversed(dates) if date.end() <= label_start), None)
-        following = next((date for date in dates if date.start() >= label.end()), None)
         link = TIME_RE.sub("", text[previous.end():label_start]) if previous else ""
-        postfix = previous and (following is None or
-            re.fullmatch(r"[\s,]*(?:(?:is|was|will\s+be)\s+(?:the\s+)?|[-–—:]\s*)", link, re.I) or
-            re.search(r"[;•|]|[.!?]\s+(?=[A-Z])", TIME_RE.sub("", text[label.end():following.start()])))
+        link = re.sub(r"\b(?:at|by)\b", "", link, flags=re.I)
+        # Absence of another date is not evidence of backward ownership: an
+        # adjacent prefix field may be empty/TBD. Require an explicit link.
+        postfix = previous and re.fullmatch(
+            r"[\s,]*(?:(?:is|was|will\s+be)\s+(?:the\s+)?|[-–—:]\s*)", link, re.I)
+        if re.match(r"\s*:\s*(?:TBD|to\s+be\s+(?:announced|determined)|not\s+yet|pending|$)",
+                    text[label.end():end], re.I):
+            postfix = False
         if postfix:
             if previous.start() < match.start():
                 # This earlier postfix label cannot become the next date's cue.
