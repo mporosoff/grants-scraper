@@ -751,8 +751,16 @@ def deadline_context(container, match):
             start, end = max(start, left), min(end, right)
             break
     scan_start = start
-    for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])", text[scan_start:end]):
+    for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|;\s*", text[scan_start:end]):
         position = scan_start + boundary.end()
+        if boundary.group(0).startswith(";"):
+            following = text[position:end]
+            next_date = DATE_RE.search(following)
+            label = following[:next_date.start()] if next_date else ""
+            # A shared list inherits its due-date cue; a new labeled clause
+            # owns its own stage/time. These are different uses of semicolons.
+            if not (DEADLINE_CUE_RE.search(label) and deadline_kind(label)):
+                continue
         if re.search(r"\b[ap]\.?m\.\s*$", text[:position], re.I):
             continue
         if position <= match.start():
@@ -761,6 +769,25 @@ def deadline_context(container, match):
             end = scan_start + boundary.start() + 1
             break
     return text[start:end], match.start() - start
+
+
+def nearest_deadline_time(context, offset, date_length):
+    matches = list(TIME_RE.finditer(context))
+    left = context.rfind(";", 0, offset) + 1
+    right = context.find(";", offset + date_length)
+    right = len(context) if right < 0 else right
+    local = [item for item in matches if left <= item.start() < right]
+    if not local:
+        # A time explicitly before the first date can govern a shared list.
+        # A time attached to a later list item cannot silently fill earlier ones.
+        first = DATE_RE.search(context)
+        local = [item for item in matches if first and item.end() <= first.start()
+                 and DEADLINE_CUE_RE.search(context[:item.start()])]
+    direct = [item for item in local if item.start() >= offset + date_length
+              and re.fullmatch(r"[\s,(]*(?:(?:at|by)\s*)?", context[offset + date_length:item.start()], re.I)]
+    choices = direct or local
+    return min(choices, key=lambda item: max(item.start() - offset - date_length,
+                                              offset - item.end(), 0)) if choices else None
 
 
 def supported_submission_date(context, offset):
@@ -850,7 +877,7 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                 continue
             kind, label = kind_result
             identity = (kind, parsed)
-            time_match = TIME_RE.search(context)
+            time_match = nearest_deadline_time(context, offset, len(match.group(0)))
             deadline_time = clean_text(time_match.group(1)) if time_match else None
             timezone_value = (
                 clean_text(time_match.group(2))

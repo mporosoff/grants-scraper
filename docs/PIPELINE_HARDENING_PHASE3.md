@@ -154,6 +154,10 @@ start dates do not become deadlines, and a later precise repetition can supply
 the same deadline's time/timezone when its first listing omitted them. The
 reported NOAA multi-year schedule has a fresh-extraction and cached-projection
 regression; Alaska time and every submission year remain supported.
+Semicolons that introduce a separately labeled deadline instead start a new
+clause, and time expressions bind to the nearest date span. Regressions cover
+shared lists, independent stages, different timezones, and times before/after
+their dates through fresh extraction and cached catalog projection.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and

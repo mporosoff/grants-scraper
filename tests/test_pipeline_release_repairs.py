@@ -199,6 +199,36 @@ class DeadlineOwnership(unittest.TestCase):
                 facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
                 self.assertIn(('2026-12-15', kind), [(f['date'], f['deadline_kind']) for f in facts])
 
+    def test_independently_timed_clauses_keep_their_own_stage_and_timezone(self):
+        record, entry = self.entry()
+        for text, kinds in [
+            ('Application Deadline March 1, 2027 at 5:00 p.m. Eastern Time; Application Deadline April 1, 2027 at 6:00 p.m. Pacific Time', ['application', 'application']),
+            ('Letter of Intent Deadline March 1, 2027 at 5:00 p.m. Eastern Time; full application deadline April 1, 2027 at 6:00 p.m. Pacific Time', ['letter_of_intent', 'application']),
+            ('Application due dates: March 1, 2027 at 5:00 p.m. Eastern Time; April 1, 2027 at 6:00 p.m. Pacific Time', ['application', 'application']),
+            ('Application Deadline at 5:00 p.m. Eastern Time on March 1, 2027; Application Deadline at 6:00 p.m. Pacific Time on April 1, 2027', ['application', 'application']),
+            ('Application Deadline March 1, 2027 at 5:00 p.m. Eastern Time, Application Deadline April 1, 2027 at 6:00 p.m. Pacific Time', ['application', 'application']),
+        ]:
+            with self.subTest(text=text):
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts],
+                    [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-04-01', '6:00 p.m.', 'Pacific')])
+                self.assertEqual([f['deadline_kind'] for f in facts], kinds)
+                entry['facts'] = facts
+                entry.pop('deadline_extractor_identity', None)
+                published = merge_document_entry(record, entry)
+                self.assertEqual([(d['date'], d['time'], d['timezone']) for d in published['deadlines'] if d.get('evidence_id')],
+                    [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-04-01', '6:00 p.m.', 'Pacific')])
+
+    def test_a_list_item_time_does_not_fill_another_item_with_unknown_time(self):
+        record, entry = self.entry()
+        for text, times in [
+            ('Application due dates March 1, 2027; April 1, 2027 at 6:00 p.m. Pacific Time', [None, '6:00 p.m.']),
+            ('Application due dates at 5:00 p.m. Eastern Time on March 1, 2027; April 1, 2027', ['5:00 p.m.', '5:00 p.m.']),
+        ]:
+            with self.subTest(text=text):
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertEqual([f['time'] for f in facts], times)
+
 
 class NegativeResponseDiagnostics(unittest.TestCase):
     setUp = team_fixtures.ProposedTeamTests.setUp
