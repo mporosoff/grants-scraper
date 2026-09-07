@@ -149,74 +149,56 @@ and paragraph end tags while rejecting missing/duplicate notice containers. This
 was checked against the saved official Simons HTML as well as synthetic fixtures;
 the projection retains its October 29 LOI with Eastern time and publishes warnings
 for inconsistent full-application dates, without holiday or sibling deadlines.
-Shared submission cues survive semicolon-separated annual date lists. Project
-start dates do not become deadlines, and a later precise repetition can supply
-the same deadline's time/timezone when its first listing omitted them. The
-reported NOAA multi-year schedule has a fresh-extraction and cached-projection
-regression; Alaska time and every submission year remain supported.
-Semicolons that introduce a separately labeled deadline instead start a new
-clause, and time expressions bind to the nearest date span. Regressions cover
-shared lists, independent stages, different timezones, and times before/after
-their dates through fresh extraction and cached catalog projection.
-Explicit deadline headings also separate adjacent PDF fields before punctuation
-is interpreted. Comma-attached times remain with their own date; unknown times
-cannot inherit another item's value. Preliminary labels exclude their embedded
-generic application/proposal word, and independently labeled phases do not impose
-one another's stage order. Cached stage/time values require support in their own
-date's quotation, allowing equivalent 12/24-hour and canonical regional timezone
-representations without accepting partial or conflicting zones. Unsupported
-legacy facts are withheld with the existing review warning and no new source-check
-timestamp. The regression matrix includes the adjacent fields reported in 361526.
-Date ownership includes explicit labels after a date and phase qualifiers before
-a label. Postfix labels cannot become a later field's cue, and a phase qualifier
-stays attached for ordering checks. Same-phase contradictions remain withheld.
-Backward label ownership requires explicit linking syntax; an empty or TBD
-deadline field cannot borrow an earlier issue date.
-Balanced parenthesized/bracketed postfix labels are explicit links; unclosed,
-nested, unvalued, or separately dated groups cannot assign a label backward.
-Value expressions after a grouped heading are checked through the closing
-delimiter and their linking words. Explicit phase, round, cycle, year and fiscal
-year qualifiers constrain stage ordering; every applicable preliminary stage must
-precede the application, while distinct declared rounds remain independent.
-Replacement values require a complete linking phrase, including supported modal
-modifiers. Dates and statuses inside applicant, eligibility or project-scope
-annotations cannot replace the actual deadline or become submission evidence.
-The predicate grammar evaluates every candidate, treats date-internal commas as
-part of dates, and requires the predicate to resume after an incidental clause.
-Only proved values and their own clocks reach semantic deadline context; original
-source quotations are preserved. Replacement lists retain their independently
-owned values, and unknown/unannounced replacements withhold superseded dates.
-The regression matrix checks direct/moved/changed/revised/extended replacements,
-modal forms, multiple incidental dates before/after the value, absent replacements,
-unknown statuses, time and zone ownership, both postfix delimiters and neighboring
-field boundaries through fresh extraction and legacy-cache publication. Local
-revalidation never advances the source-check timestamp or document hash.
-Direct, abbreviated and modal forms now use one ordered value sequence. Unknown
-items carry list ownership without producing dates; explicit subsequent revisions
-supersede earlier values. A proved `from` value is historical, and its clock cannot
-leak into the replacement. The same complete clock-cue rule handles postfix and
-replacement values, including `due at`, `closes at` and `must be received by`.
-Postfix scope prose cannot reuse a deadline's cue for incidental later dates.
-Prefix headings use the same value ownership, preserving explicit required and
-optional markers while excluding historical and incidental dates.
-Complete, balanced requirement markers remain attached across value lists and
-revisions, including markers before or after an owned clock. Scope annotations
-are not normalized as markers. Clock predicates may name their submission
-subject; they still require a complete due/receipt/closing predicate and cannot
-borrow a clock from a different submission stage.
-An owned value's explicit required/optional marker overrides inherited metadata
-and receipt/clock wording. Lists propagate only the latest effective marker.
-Legacy flags that contradict an explicit source marker are withheld through the
-existing warning and reference-cleanup path, without advancing source timestamps.
-Field metadata before/after the separator and contiguous requirement/stage
-prefixes share that ownership. Historical `from` values retain their effective
-metadata through a revision. Explicit fields require a complete value predicate;
-eligibility dates cannot use an otherwise empty field's heading as their cue.
-Complete submission predicates and matching redundant timezone abbreviations
-remain supported by the common value/clock grammar.
-Bare required/optional/not-required field markers have the same ownership on
-both sides of a separator. Redundant timezone aliases must match the complete
-named generic, standard or daylight phrase; conflicting aliases are not erased.
+Narrative deadlines now use a deliberately bounded local-field contract
+(`submission-date-3`). An explicit submission heading/predicate owns one date
+and only complete, adjacent clock and requirement components. Straightforward
+`Application deadline:`, `Applications due`, and `Deadline extended to/until`
+forms remain supported, as do independently labeled PDF fields, simple balanced
+postfix labels, and explicit stage/phase groups. Full application dates must
+follow every applicable preliminary stage. Standard/daylight zone qualifiers
+retain their explicit offset abbreviation; contradictory aliases lose the clock.
+
+Multi-date fields, replacement histories, unknown replacement values, scope
+asides, malformed field structure, conflicting groups and unsupported prose are
+withheld. This intentionally replaces the previous growing English-grammar
+matrix: annual inherited lists, incidental-date skipping and general replacement
+interpretation are no longer promised. Coverage loss is acceptable; a nearby
+date is never substituted. Representative supported and fail-closed regressions
+exercise fresh extraction and old-cache projection. Unproved cached requirement
+metadata becomes unknown; incompatible dates, stages and clocks are withheld.
+Local revalidation retains source hashes/check timestamps and unrelated facts,
+removes dangling references and publishes one existing verification diagnostic.
+Authoritative structured deadlines and close dates remain untouched.
+
+A read-only real-corpus audit is reproducible with:
+
+```sh
+python -m tools.audit_deadline_corpus --baseline a763d3c79b285fa45016f8b3537c295749167f78 --output .cache/deadline-corpus.json
+```
+
+It calls the normal shared enrichment entrypoint with zero source/provider
+requests. The report includes every retained/withheld cached fact, its source
+URL, quote, document hash and original check timestamp, plus before/after date
+sets for every changed current record. This is local receipt revalidation, not
+new source verification. On the 1,419-record candidate, all 912
+`official_structured` deadlines and all 1,360 source-owned deadline items remain
+unchanged (the latter also includes estimates, source-listed items and synopsis
+extraction). There are 71 retained and 2,499 withheld cached narrative facts.
+Relative to the prior verified generation, 435 current records have changed
+date sets, including removals; no retained date changes its time/timezone. No
+structured value is overridden, no source receipt is advanced, and no retained
+narrative stage ordering is impossible. No replacement date is invented.
+
+All retained quotes were inspected. Three retained historical dates are explicit
+source deadlines, not newly inferred current dates: round one on August 14, 2026
+in 362787, the first LOI on November 1, 2023 in 345738, and the first application
+on March 3, 2025 in 358024. Their historical role is stated in the stored source
+quotation; none is an unsupported policy-effective or award-period date. Removed
+facts include NIH implementation notices/review tables, DoD award-period dates,
+ambiguous multi-date fields, and Simons receipts requiring the article boundary
+upgrade. Each withdrawal is tied to its unchanged source receipt in the report.
+The corrected bounded refresh must repeat this audit on its generated package
+before publication; these in-memory projections do not edit production data.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -257,8 +239,11 @@ Pages generation; it does not repeat provider work or rebuild the package.
 `tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
 verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
 fact/reference cleanup, boundary-change revalidation and strict negative-output
-diagnostics. The current correction passed 132 focused source/document tests,
-1008 required Python tests and 713 Node contracts, with unchanged hermetic,
-frozen-query and scoring expectations and a valid release package. A
-bounded live diagnostic returned four verified DARPA calls despite IARPA's 403;
-one provider request returned a valid exact-quote decomposition with zero retries.
+diagnostics. The bounded precision correction passes 40 focused document/repair
+tests, 967 required Python tests and 713 Node contracts. Frozen-query and scoring
+expectations and the committed release package remain unchanged. Hermetic,
+exact-head review, manual complete-suite and generated-release evidence are
+recorded separately for the exact candidate; earlier evidence does not clear
+changed code. A bounded live diagnostic previously returned four verified DARPA
+calls despite IARPA's 403; one provider request returned a valid exact-quote
+decomposition with zero retries.

@@ -126,7 +126,7 @@ class DeadlineOwnership(unittest.TestCase):
         published = merge_document_entry(record, entry)
         republished = merge_document_entry(published, entry)
         warnings = [q for q in republished['document_evidence']['review_queue'] if q['type'] == 'deadline_stage_order_conflict']
-        self.assertEqual(len(warnings), 2)
+        self.assertEqual(len(warnings), 1)
         self.assertTrue(all(q['label'] and q['status'] == 'needs_review' for q in warnings))
         self.assertEqual(published['document_evidence']['review_queue'], republished['document_evidence']['review_queue'])
         containers, _ = extract_containers(NOTICE, 'text/html', '', record['primary_document_url'])
@@ -194,694 +194,105 @@ class DeadlineOwnership(unittest.TestCase):
             extract_containers(notice.replace(b'<h1>', b'<article class="o-detail"></article><h1>', 1),
                                'text/html', '', record['primary_document_url'])
 
-    def test_shared_due_dates_survive_semicolons_and_keep_later_precise_times(self):
-        record, entry = self.entry()
-        text = ('Applications have annual due dates of June 22, 2026; May 3, 2027; and May 1, 2028. '
-                'Applications for projects starting no earlier than September 1, 2026, must be received '
-                'by 7:59 p.m. Alaska Standard Time on June 22, 2026. '
-                'Applications must be received by 7:59 p.m. AKST on May 3, 2027, for projects starting '
-                'no earlier than September 1, 2027, and May 1, 2028, for projects starting no earlier than September 1, 2028.')
-        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-        self.assertEqual([f['date'] for f in facts], ['2026-06-22', '2027-05-03', '2028-05-01'])
-        self.assertTrue(all(f['time'] == '7:59 p.m.' for f in facts))
-        self.assertEqual([f['timezone'] for f in facts], ['Alaska', 'AKST', 'AKST'])
-        entry['facts'] = facts
-        entry.pop('deadline_extractor_identity')
-        result = merge_document_entry(record, entry)
-        self.assertTrue({'2026-06-22', '2027-05-03', '2028-05-01'} <= {d['date'] for d in result['deadlines']})
-
-    def test_explicit_submission_labels_survive_local_context_validation(self):
-        record, entry = self.entry()
-        for text, kind in [
-            ('Application Deadlines: May 11, 2026, and December 15, 2026.', 'application'),
-            ('Submissions must be submitted by December 15, 2026 (11:59 pm ET).', 'application'),
-            ('Solution Summary Due: December 15, 2026 (4:00PM ET).', 'application'),
-            ('The application period will close December 15, 2026.', 'application'),
-            ('Closing Date for this opportunity is December 15, 2026.', 'application'),
-            ('Following notification of funding amount: Full proposals will be submitted. Submission Dates and Times Closing Date for Applications: December 15, 2026.', 'application'),
-            ('Letters of Interest must be submitted by December 15, 2026.', 'letter_of_intent'),
+    # Precision boundary: these representative fixtures replace the former
+    # expanding English-grammar matrix. Unsupported narrative loses coverage;
+    # authoritative source fields and unrelated evidence remain intact.
+    def test_supported_local_fields_fresh_and_legacy(self):
+        for text in [
+            'Application deadline: May 1, 2027',
+            'Applications due May 1, 2027',
+            'Applications are due May 1, 2027',
+            'Applications must be received no later than May 1, 2027',
+            'Deadline extended to May 1, 2027',
+            'Deadline extended until May 1, 2027',
+            'Application Deadline has been extended until May 1, 2027',
+            'Application Deadline moved to May 1, 2027',
+            'Application Deadline changed to May 1, 2027',
+            'Application Deadline revised to May 1, 2027',
+            'May 1, 2027 (Application Deadline)',
+            'May 1, 2027 [Application Deadline]',
         ]:
             with self.subTest(text=text):
-                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                self.assertIn(('2026-12-15', kind), [(f['date'], f['deadline_kind']) for f in facts])
+                self.assert_replacement_projection(text, [('2027-05-01', None, None)])
 
-    def test_independently_timed_clauses_keep_their_own_stage_and_timezone(self):
-        record, entry = self.entry()
-        for text, kinds in [
-            ('Application Deadline March 1, 2027 at 5:00 p.m. Eastern Time; Application Deadline April 1, 2027 at 6:00 p.m. Pacific Time', ['application', 'application']),
-            ('Letter of Intent Deadline March 1, 2027 at 5:00 p.m. Eastern Time; full application deadline April 1, 2027 at 6:00 p.m. Pacific Time', ['letter_of_intent', 'application']),
-            ('Application due dates: March 1, 2027 at 5:00 p.m. Eastern Time; April 1, 2027 at 6:00 p.m. Pacific Time', ['application', 'application']),
-            ('Application Deadline at 5:00 p.m. Eastern Time on March 1, 2027; Application Deadline at 6:00 p.m. Pacific Time on April 1, 2027', ['application', 'application']),
-            ('Application Deadline March 1, 2027 at 5:00 p.m. Eastern Time, Application Deadline April 1, 2027 at 6:00 p.m. Pacific Time', ['application', 'application']),
+    def test_unsupported_ownership_is_withheld_fresh_and_legacy(self):
+        for text in [
+            'Application deadline March 1, 2027 has been extended until April 1, 2027',
+            'Revised the Application due date from October 05, 2026, to September 08, 2026.',
+            'Application Deadline: for applicants appointed March 1, 2027, May 1, 2027',
+            'Application deadline May 1, 2027 for projects starting June 1, 2027',
+            'Applications have annual due dates of June 22, 2026; May 3, 2027; May 1, 2028.',
+            'Applications Due on or after January 25, 2027',
+            'Implementation Changes for Plans Included with Applications Due May 1, 2027',
+            'Application Deadline May 1, 2027 has been extended to TBD',
+            'Application Deadline May 1, 2027 revised to an unannounced date',
+            'Application Deadline May 1, 2027 (optional] ',
+            'Letter of Intent Full Application Deadline May 1, 2027',
+            'May 1, 2027 (Application Deadline) changed to June 1, 2027',
+            'Eligibility requires appointment before May 1, 2027',
         ]:
             with self.subTest(text=text):
+                self.assert_replacement_projection(text, [])
+
+    def test_corpus_pdf_fields_and_html_boundaries(self):
+        record, entry = self.entry()
+        for separator in [' • ', '; ', '. ', '\n']:
+            text = separator.join([
+                'Pre-Application (Letter of Intent) Submission Deadline: 5:00 p.m. Eastern Time (ET), September 14, 2026',
+                'Full Application Submission Deadline: 11:59 p.m. ET, September 28, 2026',
+                'End of Application Verification Period: 5:00 p.m. ET, October 5, 2026',
+            ])
+            with self.subTest(separator=separator):
                 facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
                 self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts],
-                    [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-04-01', '6:00 p.m.', 'Pacific')])
-                self.assertEqual([f['deadline_kind'] for f in facts], kinds)
-                entry['facts'] = facts
-                entry.pop('deadline_extractor_identity', None)
-                published = merge_document_entry(record, entry)
-                self.assertEqual([(d['date'], d['time'], d['timezone']) for d in published['deadlines'] if d.get('evidence_id')],
-                    [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-04-01', '6:00 p.m.', 'Pacific')])
+                    [('2026-09-14', '5:00 p.m.', 'Eastern'), ('2026-09-28', '11:59 p.m.', 'ET')])
+        html = b'<p>Application deadline May 1, 2027</p><p>Project start June 1, 2027</p>'
+        containers, _ = extract_containers(html, 'text/html', '', 'https://www.nsf.gov/example')
+        self.assertEqual([f['date'] for f in extract_deadlines(record['opportunity_id'], containers,
+            entry['document'], entry['checked_at'])], ['2027-05-01'])
 
-    def test_a_list_item_time_does_not_fill_another_item_with_unknown_time(self):
+    def test_only_clear_requirement_and_clock_components_are_retained(self):
         record, entry = self.entry()
-        for text, times in [
-            ('Application due dates March 1, 2027; April 1, 2027 at 6:00 p.m. Pacific Time', [None, '6:00 p.m.']),
-            ('Application due dates at 5:00 p.m. Eastern Time on March 1, 2027; April 1, 2027', ['5:00 p.m.', '5:00 p.m.']),
+        for text, required, clock, zone in [
+            ('May 1, 2027 (Application Deadline) required', True, None, None),
+            ('May 1, 2027 [Application Deadline] optional', False, None, None),
+            ('Applications must be received by May 1, 2027 at 5 p.m. Eastern Time', True, '5 p.m.', 'Eastern'),
+            ('A concept paper is required and must be submitted by May 1, 2027', True, None, None),
+            ('Application deadline May 1, 2027 at 5 p.m. Eastern Standard Time (EST)', None, '5 p.m.', 'EST'),
+            ('Application deadline May 1, 2027 at 5 p.m. Eastern Standard Time (EDT)', None, None, None),
+            ('Application deadline May 1, 2027 at 5 p.m. Eastern or 6 p.m. Pacific', None, None, None),
         ]:
             with self.subTest(text=text):
                 facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                self.assertEqual([f['time'] for f in facts], times)
+                if ' or ' in text:
+                    self.assertEqual(facts, [])  # Competing clocks: the field is unsupported.
+                else:
+                    self.assertEqual([(f['date'], f['required'], f['time'], f['timezone']) for f in facts],
+                        [('2027-05-01', required, clock, zone)])
+        self.assert_replacement_projection('Application deadline (required) May 1, 2027 (optional)', [])
 
-    def test_missing_times_stay_unknown_across_all_list_clause_boundaries(self):
+    def test_cached_unproved_metadata_is_withheld_without_changing_structured_deadline(self):
         record, entry = self.entry()
-        for separator in ['; ', ', ', ', and ', ' and ', ' or ', ' • ', ' | ']:
-            for labeled in [False, True]:
-                for timed_first in [False, True]:
-                    for time_before in [False, True]:
-                        with self.subTest(separator=separator, labeled=labeled,
-                                          timed_first=timed_first, time_before=time_before):
-                            items = []
-                            for index, date in enumerate(['March 1, 2027', 'April 1, 2027']):
-                                label = 'Application Deadline ' if labeled else ''
-                                timed = (index == 0) == timed_first
-                                time = '6:00 p.m. Pacific Time'
-                                items.append(label + ((f'at {time} on {date}' if time_before else f'{date} at {time}') if timed else date))
-                            text = ('' if labeled else 'Application due dates: ') + separator.join(items)
-                            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                            # An explicitly introductory time governs an unlabeled shared list.
-                            expected = ['6:00 p.m.' if (index == 0) == timed_first or
-                                        (not labeled and timed_first and time_before) else None for index in range(2)]
-                            self.assertEqual([f['time'] for f in facts], expected)
-                            self.assertEqual([f['timezone'] for f in facts], ['Pacific' if time else None for time in expected])
-                            entry['facts'] = facts
-                            entry.pop('deadline_extractor_identity', None)
-                            published = merge_document_entry(record, entry)
-                            self.assertEqual([d['time'] for d in published['deadlines'] if d.get('evidence_id')], expected)
-
-    def test_comma_attached_time_and_date_internal_comma_keep_their_owners(self):
-        record, entry = self.entry()
-        text = 'Application due dates: March 1, 2027, at 5:00 p.m. Eastern Time, April 1, 2027, May 1, 2027 at 6:00 p.m. Pacific Time'
-        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-        self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts],
-            [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-04-01', None, None), ('2027-05-01', '6:00 p.m.', 'Pacific')])
-
-    def test_pdf_field_bullets_do_not_publish_administrative_dates(self):
-        record, entry = self.entry()
-        text = ('Pre-Application Submission Deadline: 5:00 p.m. Eastern Time (ET), March 1, 2027 '
-                '• Invitation to Submit an Application: April 1, 2027 '
-                '• Application Submission Deadline: 11:59 p.m. ET, May 1, 2027 '
-                '• End of Application Verification Period: 5:00 p.m. ET, June 1, 2027')
-        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-        self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts],
-            [('2027-03-01', '5:00 p.m.', 'Eastern'), ('2027-05-01', '11:59 p.m.', 'ET')])
-        self.assertEqual([f['deadline_kind'] for f in facts], ['preapplication', 'application'])
-
-    def test_adjacent_pdf_deadline_fields_keep_attached_times_and_independent_phases(self):
-        record, entry = self.entry()
-        for separator in [' ', ', ', '; ', ' • ']:
-            with self.subTest(separator=separator):
-                text = separator.join([
-                    'RFA Issue Date: March 17, 2026',
-                    'Submission Deadline for FY26 Phase I Applications: May 1, 2026, at 11:59 PM Eastern',
-                    'Submission Deadline for FY26 Phase II Letters of Intent: May 1, 2026, at 5 PM Eastern',
-                    'Submission Deadline for FY26 Phase II Applications: May 19, 2026, at 11:59 PM Eastern',
-                    'Submission Deadline for Phase II Applications resulting from FY26 Phase I Awards: December 17, 2026, at 11:59 PM Eastern'])
-                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                self.assertEqual([(f['date'], f['deadline_kind'], f['time']) for f in facts],
-                    [('2026-05-01', 'application', '11:59 PM'), ('2026-05-01', 'letter_of_intent', '5 PM'),
-                     ('2026-05-19', 'application', '11:59 PM'), ('2026-12-17', 'application', '11:59 PM')])
-                entry['facts'] = facts
-                entry.pop('deadline_extractor_identity', None)
-                published = merge_document_entry(record, entry)
-                self.assertEqual([d['time'] for d in published['deadlines'] if d.get('evidence_id')],
-                                 ['11:59 PM', '5 PM', '11:59 PM', '11:59 PM'])
-
-    def test_specific_preliminary_labels_do_not_match_embedded_generic_words(self):
-        record, entry = self.entry()
-        for label, expected in [('Pre-Application', 'preapplication'), ('Pre application', 'preapplication'),
-                                ('Pre-Proposal', 'preproposal'), ('Preliminary Proposal', 'preproposal'),
-                                ('Full Application', 'application')]:
-            with self.subTest(label=label):
-                text = f'{label} Submission Deadline: March 1, 2027, at 5 PM Eastern'
-                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                self.assertEqual([(f['deadline_kind'], f['time']) for f in facts], [(expected, '5 PM')])
-
-    def test_amendment_word_is_not_an_am_time(self):
-        record, entry = self.entry()
-        facts = extract_deadlines(record['opportunity_id'],
-            [{'text': '1 Amendment: Applications are due March 1, 2027.'}], entry['document'], entry['checked_at'])
-        self.assertEqual([f['time'] for f in facts], [None])
-
-    def test_postfix_deadline_labels_retain_date_time_and_stage(self):
-        record, entry = self.entry()
-        for text, kind, time in [
-            ('March 1, 2027 is the deadline for applications', 'application', None),
-            ('March 1, 2027 — Application Deadline', 'application', None),
-            ('March 1, 2027 at 5 PM Eastern is the deadline for applications', 'application', '5 PM'),
-            ('March 1, 2027 — Letter of Intent Deadline', 'letter_of_intent', None),
-            ('March 1, 2027, at 5 PM Eastern — Pre-Application Deadline', 'preapplication', '5 PM'),
+        structured = {'kind': 'application', 'date': '2027-05-01', 'time': '17:00',
+                      'timezone': 'America/New_York', 'confidence': 'official_structured', 'required': True}
+        record.update(close_date='2027-05-01', deadlines=[structured])
+        for text, updates in [
+            ('Application deadline May 1, 2027', {'required': False}),
+            ('Application deadline May 1, 2027 at 5 p.m. Eastern Standard Time (EDT)',
+             {'time': '5 p.m.', 'timezone': 'Eastern'}),
         ]:
             with self.subTest(text=text):
-                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                self.assertEqual([(f['date'], f['deadline_kind'], f['time']) for f in facts], [('2027-03-01', kind, time)])
-                entry['facts'] = facts
+                entry['facts'] = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                entry['facts'][0].update(updates)
                 entry.pop('deadline_extractor_identity', None)
+                stamp, digest = entry['checked_at'], entry['document']['sha256']
                 result = merge_document_entry(record, entry)
-                self.assertEqual([d['kind'] for d in result['deadlines'] if d.get('evidence_id')], [kind])
-
-    def test_phase_qualifiers_before_or_after_labels_preserve_independent_order(self):
-        record, entry = self.entry()
-        for first, second in [
-            ('Phase I Letter of Intent Deadline: July 1, 2027', 'Phase II Application Deadline: June 1, 2027'),
-            ('Phase I — Letter of Intent Deadline: July 1, 2027', 'Phase II — Application Deadline: June 1, 2027'),
-            ('Phase I (Letter of Intent Deadline): July 1, 2027', 'Phase II (Application Deadline): June 1, 2027'),
-            ('July 1, 2027 — Phase I Letter of Intent Deadline', 'June 1, 2027 — Phase II Application Deadline'),
-        ]:
-            for separator in ['; ', ' • ', '. ']:
-                with self.subTest(first=first, separator=separator):
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': first + separator + second}], entry['document'], entry['checked_at'])
-                    self.assertEqual([(f['date'], f['deadline_kind']) for f in facts],
-                        [('2027-07-01', 'letter_of_intent'), ('2027-06-01', 'application')])
-                    entry['facts'] = facts
-                    entry.pop('deadline_extractor_identity', None)
-                    result = merge_document_entry(record, entry)
-                    self.assertEqual(len([d for d in result['deadlines'] if d.get('evidence_id')]), 2)
-
-    def test_same_phase_invalid_order_is_still_withheld(self):
-        record, entry = self.entry()
-        for phase, equivalent in [('I', 'I'), ('II', 'II'), ('1', '1'), ('2', '2'), ('I', '1'), ('02', 'II')]:
-            text = f'Phase {phase} Letter of Intent Deadline: July 1, 2027; Phase {equivalent} Application Deadline: June 1, 2027'
-            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-            self.assertEqual([f['deadline_kind'] for f in facts], ['letter_of_intent'])
-
-    def test_an_empty_later_deadline_field_never_borrows_an_issue_date(self):
-        record, entry = self.entry()
-        for label in ['Application Deadline', 'Letter of Intent Deadline', 'Phase II Application Deadline',
-                      'Submission Deadline for Full Applications']:
-            for value in ['', 'TBD', 'to be announced', 'to be determined', 'not yet scheduled',
-                          'pending', 'see forthcoming notice']:
-                with self.subTest(label=label, value=value):
-                    text = f'RFA Issue Date: March 17, 2027 {label}: {value}'
-                    self.assertEqual(extract_deadlines(record['opportunity_id'], [{'text': text}],
-                                     entry['document'], entry['checked_at']), [])
-
-    def test_explicit_administrative_date_ownership_cannot_be_overridden_by_later_labels(self):
-        record, entry = self.entry()
-        for field in ['RFA Issue Date:', 'Publication Date:', 'Announcement Date:', 'Date Posted:',
-                      'Amendment issued on', 'Notice released on']:
-            for wording in ['estimated as TBD', 'anticipated to be announced', 'forthcoming', 'unknown', '']:
-                with self.subTest(field=field, wording=wording):
-                    text = f'{field} March 1, 2027 (Application Deadline) {wording}'
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                    self.assertEqual(facts, [])
-                    text += '; Full applications are due April 1, 2027 at 5 PM Eastern.'
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                    self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-04-01', '5 PM')])
-
-    def test_legacy_issue_date_with_an_unvalued_deadline_is_withheld(self):
-        record, entry = self.entry()
-        facts = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline March 17, 2027'}],
-                                  entry['document'], entry['checked_at'])
-        facts[0]['citation']['quote'] = 'RFA Issue Date: March 17, 2027 Application Deadline: TBD'
-        entry['facts'] = facts
-        entry.pop('deadline_extractor_identity')
-        stamp = entry['checked_at']
-        result = merge_document_entry(record, entry)
-        self.assertFalse(any(d.get('evidence_id') for d in result['deadlines']))
-        self.assertEqual(entry['checked_at'], stamp)
-        self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' for q in result['document_evidence']['review_queue']))
-
-    def test_balanced_postfix_labels_are_explicit_but_unclosed_or_unvalued_fields_are_not(self):
-        record, entry = self.entry()
-        for opening, closing in [('(', ')'), ('[', ']')]:
-            for label, kind in [('Application Deadline', 'application'), ('Deadline for Applications', 'application'),
-                                ('Phase II Letter of Intent Deadline', 'letter_of_intent')]:
-                for timed in ['', ' at 5 PM Eastern']:
-                    with self.subTest(opening=opening, label=label, timed=timed):
-                        text = f'March 1, 2027{timed} {opening}{label}{closing}'
-                        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                        self.assertEqual([(f['date'], f['deadline_kind'], f['time']) for f in facts],
-                            [('2027-03-01', kind, '5 PM' if timed else None)])
-                        entry['facts'] = facts
-                        entry.pop('deadline_extractor_identity', None)
-                        published = merge_document_entry(record, entry)
-                        self.assertEqual(len([d for d in published['deadlines'] if d.get('evidence_id')]), 1)
-            invalid_suffixes = ['', ': April 1, 2027' + closing, opening + closing]
-            invalid_suffixes.extend(': ' + value + closing for value in ['TBD', 'TBA', 'to be announced', 'N/A', 'pending', 'rolling'])
-            for suffix in invalid_suffixes:
-                text = f'RFA Issue Date: March 1, 2027 {opening}Application Deadline{suffix}'
-                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                self.assertNotIn('2027-03-01', [f['date'] for f in facts])
-
-    def test_values_after_closed_headings_cannot_borrow_the_prior_issue_date(self):
-        record, entry = self.entry()
-        for opening, closing in [('(', ')'), ('[', ']')]:
-            cases = [(separator, value) for separator in [': ', '= ', '— ', '', 'is ', 'will be ',
-                      'has been ', 'is currently ', 'may be ', 'was set to ', 'has not yet been announced: ']
-                     for value in ['TBD', 'TBA', 'to be announced', 'pending', 'rolling', 'N/A', 'April 1, 2027']]
-            cases.append((': ', ''))
-            cases.extend((linker, value) for linker in ['scheduled for ', 'currently ', 'set to ', 'now ', 'due on ']
-                         for value in ['TBD', 'April 1, 2027'])
-            for separator, value in cases:
-                with self.subTest(opening=opening, value=value, separator=separator):
-                    text = f'RFA Issue Date: March 1, 2027 {opening}Application Deadline{closing} {separator}{value}'
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                    self.assertNotIn('2027-03-01', [f['date'] for f in facts])
-                    legacy = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline March 1, 2027'}],
-                                               entry['document'], entry['checked_at'])
-                    legacy[0]['citation']['quote'] = text
-                    entry['facts'] = legacy
-                    entry.pop('deadline_extractor_identity', None)
-                    published = merge_document_entry(record, entry)
-                    self.assertFalse(any(d.get('evidence_id') for d in published['deadlines']))
-            text = f'March 1, 2027 {opening}Application Deadline{closing}: 5 PM Eastern'
-            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-            self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-03-01', '5 PM')])
-
-    def test_postfix_scope_annotations_do_not_replace_the_explicit_deadline(self):
-        record, entry = self.entry()
-        for suffix in ['for all applicants', 'on the sponsor portal', 'due to the revised schedule',
-                       'currently applicable to universities', 'for Phase II', ': for all applicants']:
-            for timing in ['', ' at 5 PM Eastern']:
-                with self.subTest(suffix=suffix, timing=timing):
-                    text = f'March 1, 2027{timing} (Application Deadline) {suffix}'
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                    self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-03-01', '5 PM' if timing else None)])
-                    entry['facts'] = facts
-                    entry.pop('deadline_extractor_identity', None)
-                    published = merge_document_entry(record, entry)
-                    self.assertEqual(len([d for d in published['deadlines'] if d.get('evidence_id')]), 1)
-        for suffix in ['for TBD', 'currently TBD', 'scheduled for April 1, 2027', 'is April 1, 2027', ':']:
-            text = f'March 1, 2027 (Application Deadline) {suffix}'
-            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-            self.assertNotIn('2027-03-01', [f['date'] for f in facts])
-
-    def test_modified_replacement_values_do_not_preserve_the_superseded_date(self):
-        record, entry = self.entry()
-        for wording in ['is expected to be', 'will probably be', 'has provisionally been moved to',
-                        'may, subject to confirmation, become', ': provisionally expected to be']:
-            for value in ['April 1, 2027', 'TBD', 'to be announced']:
-                for opening, closing in [('(', ')'), ('[', ']')]:
-                    with self.subTest(wording=wording, value=value, opening=opening):
-                        text = f'March 1, 2027 {opening}Application Deadline{closing} {wording} {value}'
-                        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                        self.assertEqual([f['date'] for f in facts], ['2027-04-01'] if value.startswith('April') else [])
-                        legacy = extract_deadlines(record['opportunity_id'], [{'text': 'Application Deadline March 1, 2027'}],
-                                                   entry['document'], entry['checked_at'])
-                        legacy[0]['citation']['quote'] = text
-                        entry['facts'] = legacy
-                        entry.pop('deadline_extractor_identity', None)
-                        stamp = entry['checked_at']
-                        published = merge_document_entry(record, entry)
-                        self.assertFalse(any(d.get('evidence_id') for d in published['deadlines']))
-                        self.assertEqual(entry['checked_at'], stamp)
-
-    def test_descriptive_postfix_clauses_cannot_borrow_another_fields_value(self):
-        record, entry = self.entry()
-        for suffix in ['is applicable to all applicants. Award notification April 1, 2027',
-                       'is applicable to all applicants; award notification April 1, 2027',
-                       'for applicants pending IRB review',
-                       'is applicable to all applicants; Application Deadline April 1, 2027']:
-            text = f'March 1, 2027 (Application Deadline) {suffix}'
-            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-            self.assertIn('2027-03-01', [f['date'] for f in facts])
-
-    def test_scope_dates_and_statuses_are_not_deadline_replacements(self):
-        record, entry = self.entry()
-        for annotation in [': for applicants eligible as of April 1, 2027',
-                           'is for applicants eligible as of April 1, 2027',
-                           'is applicable to students graduating on April 1, 2027',
-                           ': for research projects beginning April 1, 2027',
-                           ': for applicants pending institutional approval',
-                           'is open to investigators with appointments beginning April 1, 2027']:
-            for timing in ['', ' at 5 PM Eastern']:
-                with self.subTest(annotation=annotation, timing=timing):
-                    text = f'March 1, 2027{timing} (Application Deadline) {annotation}'
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                    self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-03-01', '5 PM' if timing else None)])
-                    entry['facts'] = facts
-                    entry.pop('deadline_extractor_identity', None)
-                    stamp = entry['checked_at']
-                    published = merge_document_entry(record, entry)
-                    self.assertEqual([d['date'] for d in published['deadlines'] if d.get('evidence_id')], ['2027-03-01'])
-                    self.assertEqual(entry['checked_at'], stamp)
-
-    def test_replacement_candidates_exclude_incidental_dates_and_times(self):
-        record, entry = self.entry()
-        for incidental in ['April 1 2027', 'April 1, 2027', 'TBD']:
-            for replacement in ['May 1 2027 at 5 PM Eastern', 'May 1, 2027 at 5 PM Eastern', 'TBD']:
-                with self.subTest(incidental=incidental, replacement=replacement):
-                    text = ('March 1, 2027 (Application Deadline) is expected, after applicant eligibility '
-                            f'is assessed at 4 PM Pacific on {incidental}, to be {replacement}')
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                    expected = [('2027-05-01', '5 PM', 'Eastern')] if replacement.startswith('May') else []
-                    self.assertEqual([(f['date'], f['time'], f['timezone']) for f in facts], expected)
-                    legacy = extract_deadlines(record['opportunity_id'],
-                        [{'text': 'Application Deadline March 1, 2027; Application Deadline April 1, 2027'}],
-                        entry['document'], entry['checked_at'])
-                    for fact in legacy:
-                        fact['citation']['quote'] = text
-                    entry['facts'] = legacy + facts
-                    entry.pop('deadline_extractor_identity', None)
-                    stamp = entry['checked_at']
-                    published = merge_document_entry(record, entry)
-                    self.assertEqual([d['date'] for d in published['deadlines'] if d.get('evidence_id')],
-                                     ['2027-05-01'] if expected else [])
-                    self.assertEqual(entry['checked_at'], stamp)
-
-    def test_deadline_extensions_and_replacement_lists_keep_every_owned_value(self):
-        record, entry = self.entry()
-        for connector in ['to', 'until', 'till', 'through']:
-            for values, expected in [('April 1, 2027', ['2027-04-01']),
-                                     ('April 1, 2027 or May 1, 2027', ['2027-04-01', '2027-05-01']),
-                                     ('TBD', [])]:
-                with self.subTest(connector=connector, values=values):
-                    text = f'March 1, 2027 (Application Deadline) has been extended {connector} {values}'
-                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                    self.assertEqual([f['date'] for f in facts], expected)
-                    entry['facts'] = facts
-                    entry.pop('deadline_extractor_identity', None)
-                    published = merge_document_entry(record, entry)
-                    self.assertEqual([d['date'] for d in published['deadlines'] if d.get('evidence_id')], expected)
-
-    def test_complete_replacement_predicate_and_value_matrix(self):
-        predicates = ['is', ':', 'has been extended to', 'has been extended until', 'has been moved to',
-                      'has been changed to', 'has been revised to', 'revised to', 'extended until',
-                      'will probably be', 'may become', 'is expected to be', 'is now scheduled for',
-                      '', 'now', 'currently', 'scheduled for', 'set to', 'for', 'to']
-        values = [('May 1, 2027', [('2027-05-01', None, None)]),
-                  ('May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
-                  ('5 PM Pacific on May 1, 2027', [('2027-05-01', '5 PM', 'Pacific')])]
-        values.extend((value, []) for value in ['TBD', 'unknown', 'unannounced', 'to be announced', 'not yet announced'])
-        for opening, closing in [('(', ')'), ('[', ']')]:
-            for predicate in predicates:
-                for value, expected in values:
-                    with self.subTest(opening=opening, predicate=predicate, value=value):
-                        self.assert_replacement_projection(f'March 1, 2027 {opening}Application Deadline{closing} {predicate} {value}', expected)
-
-    def test_replacement_annotation_and_neighbor_matrix(self):
-        asides = ['eligibility is assessed on April 1, 2027', 'projects begin April 1, 2027',
-                  'appointments begin April 1, 2027', 'students graduate April 1, 2027',
-                  'eligibility is checked April 1, 2027 and appointments begin April 2, 2027',
-                  'eligibility is checked April 1 2027, and appointments begin April 2 2027']
-        for opening, closing in [('(', ')'), ('[', ']')]:
-            for aside in asides:
-                for timed in [False, True]:
-                    with self.subTest(opening=opening, aside=aside, timed=timed):
-                        target = 'May 1, 2027' + (' at 5 PM Eastern' if timed else '')
-                        text = (f'March 1, 2027 {opening}Application Deadline{closing} is expected, after {aside}, '
-                                f'to be {target} for applicants with appointments beginning at 4 PM Pacific on June 1, 2027')
-                        self.assert_replacement_projection(text, [('2027-05-01', '5 PM' if timed else None, 'Eastern' if timed else None)])
-        for boundary in ['; ', '. ', ' • ', ' | ']:
-            for timed in [False, True]:
-                with self.subTest(boundary=boundary, timed=timed):
-                    text = ('March 1, 2027 (Application Deadline) is revised to May 1, 2027' +
-                            (' at 5 PM Eastern' if timed else '') + boundary + 'Application Deadline July 1, 2027 at 6 PM Pacific')
-                    self.assert_replacement_projection(text, [('2027-05-01', '5 PM' if timed else None, 'Eastern' if timed else None),
-                                                             ('2027-07-01', '6 PM', 'Pacific')])
-
-    def test_annotations_without_replacements_keep_only_the_original_deadline_clock(self):
-        for opening, closing in [('(', ')'), ('[', ']')]:
-            for annotation in [': for applicants eligible as of April 1, 2027',
-                               'is for applicants assessed at 4 PM Pacific on April 1, 2027',
-                               'is applicable to students graduating April 1, 2027 and starting appointments June 1, 2027']:
-                for timed in [False, True]:
-                    with self.subTest(opening=opening, annotation=annotation, timed=timed):
-                        text = ('March 1, 2027' + (' at 5 PM Eastern' if timed else '') +
-                                f' {opening}Application Deadline{closing} {annotation}')
-                        self.assert_replacement_projection(text, [('2027-03-01', '5 PM' if timed else None, 'Eastern' if timed else None)])
-
-    def test_unknown_and_dated_values_share_replacement_list_ownership(self):
-        for unknown in ['TBD', 'unknown', 'unannounced', 'to be announced', 'not yet announced']:
-            for values, expected in [
-                    (f'{unknown} or May 1, 2027', [('2027-05-01', None, None)]),
-                    (f'April 1, 2027, {unknown}, or May 1, 2027', [('2027-04-01', None, None), ('2027-05-01', None, None)]),
-                    (f'{unknown}, May 1, 2027 at 5 PM Eastern, or {unknown}', [('2027-05-01', '5 PM', 'Eastern')])]:
-                with self.subTest(unknown=unknown, values=values):
-                    self.assert_replacement_projection('March 1, 2027 (Application Deadline) has been extended to ' + values, expected)
-
-    def test_direct_and_abbreviated_replacements_exclude_later_scope_values(self):
-        for predicate in ['', ':', 'now', 'currently', 'scheduled for', 'for', 'to']:
-            for value, expected in [('May 1, 2027', [('2027-05-01', None, None)]),
-                                    ('May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
-                                    ('TBD', [])]:
-                with self.subTest(predicate=predicate, value=value):
-                    text = (f'March 1, 2027 [Application Deadline] {predicate} {value} '
-                            'for appointments beginning at 4 PM Pacific on June 1, 2027')
-                    self.assert_replacement_projection(text, expected)
-
-    def test_from_to_changes_and_successive_revisions_keep_only_current_values(self):
-        cases = [
-            ('has been revised from April 1, 2027 to May 1, 2027', [('2027-05-01', None, None)]),
-            ('has been revised from TBD to May 1, 2027', [('2027-05-01', None, None)]),
-            ('has been moved from April 1, 2027 at 4 PM Pacific to May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
-            ('has been moved from 4 PM Pacific on April 1, 2027 to 5 PM Eastern on May 1, 2027', [('2027-05-01', '5 PM', 'Eastern')]),
-            ('was moved to April 1, 2027 and then revised to May 1, 2027', [('2027-05-01', None, None)]),
-            ('was moved to April 1, 2027 at 4 PM Pacific and then changed to May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
-            ('was moved to April 1, 2027 and then revised to TBD', []),
-        ]
-        for clause, expected in cases:
-            with self.subTest(clause=clause):
-                self.assert_replacement_projection('March 1, 2027 (Application Deadline) ' + clause, expected)
-
-    def test_deadline_clock_cues_bind_to_the_owned_value_only(self):
-        for cue in ['at', 'by', 'due at', 'closes at', 'will close at', 'must be received by', 'no later than']:
-            for opening, closing in [('(', ')'), ('[', ']')]:
-                for replacement in [False, True]:
-                    with self.subTest(cue=cue, opening=opening, replacement=replacement):
-                        text = f'March 1, 2027 {opening}Application Deadline{closing}'
-                        if replacement:
-                            text += ' is moved to May 1, 2027'
-                        text += f', {cue} 5 PM Eastern for applicants assessed at 4 PM Pacific on June 1, 2027'
-                        self.assert_replacement_projection(text, [('2027-05-01' if replacement else '2027-03-01', '5 PM', 'Eastern')])
-
-    def test_postfix_scope_prose_cannot_reuse_a_clock_cue_for_its_own_dates(self):
-        for scope in ['for applications reviewed June 1, 2027',
-                      'for applications from investigators appointed June 1, 2027',
-                      'for projects with application eligibility assessed June 1, 2027']:
-            self.assert_replacement_projection('March 1, 2027 (Application Deadline), due at 5 PM Eastern ' + scope,
-                                               [('2027-03-01', '5 PM', 'Eastern')])
-        for separator in ['; ', '. ', ' • ']:
-            self.assert_replacement_projection('March 1, 2027 (Application Deadline), due at 5 PM Eastern' +
-                separator + 'Applications are due June 1, 2027 at 6 PM Pacific',
-                [('2027-03-01', '5 PM', 'Eastern'), ('2027-06-01', '6 PM', 'Pacific')])
-
-    def test_prefix_and_postfix_fields_share_replacement_and_clock_ownership(self):
-        for text, expected in [
-                ('Application Deadline: March 1, 2027 has been extended until May 1, 2027', [('2027-05-01', None, None)]),
-                ('Application Deadline: TBD or May 1, 2027', [('2027-05-01', None, None)]),
-                ('Application Deadline: May 1, 2027 for appointments beginning June 1, 2027', [('2027-05-01', None, None)]),
-                ('Application Deadline: March 1, 2027 at 4 PM Pacific is revised to May 1, 2027, due at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')])]:
-            with self.subTest(text=text):
-                self.assert_replacement_projection(text, expected)
-        record, entry = self.entry()
-        for marker, required in [('required', True), ('optional', False)]:
-            text = f'Letter of Intent Deadline: May 1, 2027 at 5 PM Eastern ({marker})'
-            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-            self.assertEqual([(f['date'], f['deadline_kind'], f['required']) for f in facts], [('2027-05-01', 'letter_of_intent', required)])
-
-    def test_requirement_markers_do_not_interrupt_value_transitions(self):
-        for marker in ['(required)', '[required]', '(optional)', '[optional]']:
-            for first in ['March 1, 2027 ' + marker,
-                          'March 1, 2027 at 4 PM Pacific ' + marker,
-                          'March 1, 2027 ' + marker + ' at 4 PM Pacific',
-                          'TBD ' + marker]:
-                for clause, expected in [
-                        ('has been extended until May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')]),
-                        ('and then revised to May 1, 2027', [('2027-05-01', None, None)]),
-                        ('has been moved to TBD', [])]:
-                    with self.subTest(marker=marker, first=first, clause=clause):
-                        for prefix in ['Application Deadline: ', 'February 1, 2027 (Application Deadline) is ']:
-                            self.assert_replacement_projection(prefix + first + ' ' + clause, expected)
-            self.assert_replacement_projection('Application Deadline: ' + marker + ' May 1, 2027',
-                                               [('2027-05-01', None, None)])
-            self.assert_replacement_projection('Application Deadline: April 1, 2027 ' + marker + ', or May 1, 2027',
-                                               [('2027-04-01', None, None), ('2027-05-01', None, None)])
-            self.assert_replacement_projection('Application Deadline: has been revised from April 1, 2027 ' + marker + ' to May 1, 2027',
-                                               [('2027-05-01', None, None)])
-
-    def test_requirement_annotations_cannot_supply_a_replacement_or_cross_a_field(self):
-        for annotation in ['(required for applicants graduating June 1, 2027)',
-                           '[optional for appointments beginning June 1, 2027]',
-                           '(required] for applicants eligible June 1, 2027']:
-            self.assert_replacement_projection('Application Deadline: March 1, 2027 ' + annotation,
-                                               [('2027-03-01', None, None)])
-        for separator in ['; ', '. ', ' • ']:
-            self.assert_replacement_projection('Application Deadline: March 1, 2027 (required)' + separator +
-                'Application Deadline: May 1, 2027 [optional]',
-                [('2027-03-01', None, None), ('2027-05-01', None, None)])
-        record, entry = self.entry()
-        text = 'Letter of Intent Deadline: March 1, 2027 (required) has been extended until May 1, 2027'
-        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-        self.assertEqual([(f['date'], f['required']) for f in facts], [('2027-05-01', True)])
-
-    def test_complete_submission_subject_clock_predicates_preserve_owned_time(self):
-        for subject in ['applications', 'proposals', 'submissions', 'the application', 'all submissions']:
-            for predicate in ['must be received by', 'are due at', 'shall be submitted by', 'close at']:
-                for field in ['Application Deadline: March 1, 2027',
-                              'March 1, 2027 (Application Deadline)',
-                              'February 1, 2027 [Application Deadline] has been extended until March 1, 2027']:
-                    with self.subTest(subject=subject, predicate=predicate, field=field):
-                        self.assert_replacement_projection(field + f', {subject} {predicate} 5 PM Eastern',
-                                                           [('2027-03-01', '5 PM', 'Eastern')])
-        for suffix in ['(required), applications must be received by 5 PM Eastern',
-                       'applications must be received by 5 PM Eastern (required)']:
-            self.assert_replacement_projection('Application Deadline: March 1, 2027 ' + suffix +
-                ' and then moved to May 1, 2027, submissions are due at 6 PM Pacific',
-                [('2027-05-01', '6 PM', 'Pacific')])
-
-    def test_clock_subjects_do_not_admit_scope_or_other_stage_predicates(self):
-        for clause in ['applications reviewed at', 'project appointments must be received by',
-                       'applications from investigators appointed at', 'applications',
-                       'applications are eligible at']:
-            self.assert_replacement_projection('Application Deadline: March 1, 2027, ' + clause + ' 5 PM Eastern',
-                                               [('2027-03-01', None, None)])
-        record, entry = self.entry()
-        for subject, expected_time in [('letters of intent', '5 PM'), ('submissions', '5 PM'), ('applications', None)]:
-            text = f'Letter of Intent Deadline: March 1, 2027, {subject} must be received by 5 PM Eastern'
-            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-            self.assertEqual([(f['date'], f['time'], f['deadline_kind']) for f in facts],
-                             [('2027-03-01', expected_time, 'letter_of_intent')])
-
-    def test_current_requirement_marker_overrides_inherited_metadata(self):
-        record, entry = self.entry()
-        for old, new in [('required', 'optional'), ('optional', 'required')]:
-            for opening, closing in [('(', ')'), ('[', ']')]:
-                prior = f'{opening}{old}{closing}'
-                current = f'{opening}{new}{closing}'
-                for connection, expected_dates in [
-                        ('has been revised to', ['2027-05-01']),
-                        (', or', ['2027-03-01', '2027-05-01'])]:
-                    for value in [f'{current} May 1, 2027', f'May 1, 2027 {current}',
-                                  f'May 1, 2027 {current}, submissions must be received by 5 PM Eastern',
-                                  f'May 1, 2027, submissions are due at 5 PM Eastern {current}']:
-                        with self.subTest(old=old, new=new, connection=connection, value=value):
-                            text = f'Letter of Intent Deadline: March 1, 2027 {prior} {connection} {value}'
-                            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                            self.assertEqual([f['date'] for f in facts], expected_dates)
-                            self.assertEqual([f['required'] for f in facts],
-                                             ([old == 'required'] if len(expected_dates) > 1 else []) + [new == 'required'])
-                            entry['facts'] = facts
-                            entry.pop('deadline_extractor_identity', None)
-                            stamp, digest = entry['checked_at'], entry['document']['sha256']
-                            published = merge_document_entry(record, entry)
-                            self.assertEqual([d['required'] for d in published['deadlines'] if d.get('evidence_id')],
-                                             [f['required'] for f in facts])
-                            self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
-            for connection in [', or', 'and then moved to']:
-                text = f'Letter of Intent Deadline: March 1, 2027 ({old}), or May 1, 2027 ({new}) {connection} June 1, 2027'
-                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                self.assertEqual(facts[-1]['date'], '2027-06-01')
-                self.assertEqual(facts[-1]['required'], new == 'required')
-
-    def test_cache_withholds_requirement_flags_contradicting_the_owned_marker(self):
-        for marker in ['required', 'optional']:
-            record, entry = self.entry()
-            text = f'Letter of Intent Deadline: May 1, 2027 ({marker}), submissions must be received by 5 PM Eastern'
-            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-            self.assertEqual(facts[0]['required'], marker == 'required')
-            facts[0]['required'] = marker != 'required'
-            entry['facts'] = facts
-            entry.pop('deadline_extractor_identity', None)
-            stamp, digest = entry['checked_at'], entry['document']['sha256']
-            published = merge_document_entry(record, entry)
-            self.assertFalse(any(d.get('evidence_id') for d in published['deadlines']))
-            self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' for q in published['document_evidence']['review_queue']))
-            self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
-
-    def test_field_requirement_metadata_is_owned_before_and_after_the_separator(self):
-        record, entry = self.entry()
-        for old, new in [('required', 'optional'), ('optional', 'required')]:
-            for opening, closing in [('(', ')'), ('[', ']')]:
-                marker = opening + old + closing
-                for heading in [f'Letter of Intent Deadline {marker}:', f'Letter of Intent Deadline: {marker}',
-                                f'{marker} Letter of Intent Deadline:', f'{old} Letter of Intent Deadline:',
-                                f'{old} Phase I Letter of Intent Deadline:', f'Phase I {marker} Letter of Intent Deadline:']:
-                    for timed in ['', ', submissions must be received by 5 PM Eastern']:
-                        text = f'{heading} March 1, 2027{timed}, or May 1, 2027 ({new}), or June 1, 2027'
-                        with self.subTest(heading=heading, timed=timed):
-                            facts = extract_deadlines(record['opportunity_id'], [{'text':text}], entry['document'], entry['checked_at'])
-                            self.assertEqual([(f['date'], f['required']) for f in facts],
-                                [('2027-03-01', old == 'required'), ('2027-05-01', new == 'required'), ('2027-06-01', new == 'required')])
-                            entry['facts'] = facts
-                            entry.pop('deadline_extractor_identity', None)
-                            stamp, digest = entry['checked_at'], entry['document']['sha256']
-                            published = merge_document_entry(record, entry)
-                            self.assertEqual([d['required'] for d in published['deadlines'] if d.get('evidence_id')],
-                                             [f['required'] for f in facts])
-                            self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
-        text = 'Not required Phase II Letter of Intent Deadline: May 1, 2027, submissions must be received by 5 PM Eastern'
-        facts = extract_deadlines(record['opportunity_id'], [{'text':text}], entry['document'], entry['checked_at'])
-        self.assertFalse(facts[0]['required'])
-
-    def test_from_to_revisions_preserve_only_effective_requirement_metadata(self):
-        record, entry = self.entry()
-        for old in ['required', 'optional']:
-            for historical in [f'March 1, 2027 ({old})', f'[{old}] March 1, 2027',
-                               f'March 1, 2027 at 4 PM Pacific ({old})', f'TBD [{old}]']:
-                for new in ['', '(required)', '[optional]']:
-                    text = f'Letter of Intent Deadline: has been revised from {historical} to May 1, 2027 {new}, submissions must be received by 5 PM Eastern'
-                    with self.subTest(historical=historical, new=new):
-                        self.assert_replacement_projection(text, [('2027-05-01', '5 PM', 'Eastern')])
-                        facts = extract_deadlines(record['opportunity_id'], [{'text':text}], entry['document'], entry['checked_at'])
-                        self.assertEqual(facts[0]['required'], new == '(required)' if new else old == 'required')
-
-    def test_field_metadata_does_not_borrow_values_across_empty_or_neighboring_fields(self):
-        for value in ['', 'TBD', 'for applicants eligible June 1, 2027']:
-            self.assert_replacement_projection('Issued on March 1, 2027. Application Deadline (required): ' + value,
-                                               [])
-        for separator in ['; ', '. ', ' • ']:
-            self.assert_replacement_projection('Application Deadline (required): March 1, 2027' + separator +
-                'Application Deadline [optional]: May 1, 2027',
-                [('2027-03-01', None, None), ('2027-05-01', None, None)])
-
-    def test_application_must_follow_every_applicable_stage_with_requirement_prefixes(self):
-        record, entry = self.entry()
-        text = ('Phase I Required Letter of Intent Deadline: June 1, 2027; '
-                'Required Phase I Application Deadline: May 1, 2027; '
-                'Phase II [required] Application Deadline: May 15, 2027')
-        facts = extract_deadlines(record['opportunity_id'], [{'text':text}], entry['document'], entry['checked_at'])
-        self.assertEqual([(f['date'], f['deadline_kind']) for f in facts],
-                         [('2027-06-01', 'letter_of_intent'), ('2027-05-15', 'application')])
-
-    def test_explicit_fields_keep_complete_submission_predicates_and_owned_zone_aliases(self):
-        for predicate in ['applications must be received by', 'submissions are due on', 'must be submitted by']:
-            self.assert_replacement_projection('Application Deadline (required): ' + predicate + ' May 1, 2027 at 5 PM Eastern',
-                                               [('2027-05-01', '5 PM', 'Eastern')])
-        for zone, alias in [('Eastern', 'ET'), ('Pacific', 'PT'), ('Central', 'CT')]:
-            self.assert_replacement_projection(f'Application Deadline [optional]: 5 PM {zone} Time ({alias}), May 1, 2027',
-                                               [('2027-05-01', '5 PM', zone)])
-            self.assert_replacement_projection(f'Application Deadline: March 1, 2027 at 4 PM {zone} Time ({alias}) (required) '
-                'has been revised to May 1, 2027 at 5 PM Eastern', [('2027-05-01', '5 PM', 'Eastern')])
-
-    def test_bare_requirement_field_markers_share_separator_and_value_ownership(self):
-        record, entry = self.entry()
-        for marker, required in [('required', True), ('optional', False), ('not required', False)]:
-            for label in ['Letter of Intent Deadline', 'February 1, 2027 (Letter of Intent Deadline)',
-                          'February 1, 2027 [Letter of Intent Deadline]']:
-                for separator in [f': {marker}', f'{marker}:', f'= {marker}']:
-                    text = f'{label} {separator} March 1, 2027, submissions must be received by 5 PM Eastern, or May 1, 2027 (optional)'
-                    with self.subTest(marker=marker, label=label, separator=separator):
-                        self.assert_replacement_projection(text, [('2027-03-01', '5 PM', 'Eastern'), ('2027-05-01', None, None)])
-                        facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
-                        self.assertEqual([f['required'] for f in facts], [required, False])
-            for value, expected in [('TBD', []), ('for applicants eligible May 1, 2027', [])]:
-                self.assert_replacement_projection(f'Application Deadline: {marker} {value}', expected)
-
-    def test_zone_aliases_match_the_complete_named_time_phrase(self):
-        for name, stem in [('Eastern', 'E'), ('Central', 'C'), ('Mountain', 'M'), ('Pacific', 'P'), ('Alaska', 'AK')]:
-            for descriptor, abbreviation in [('Time', stem + 'T'), ('Standard Time', stem + 'ST'), ('Daylight Time', stem + 'DT')]:
-                clock = f'5 PM {name} {descriptor} ({abbreviation})'
-                for text in [f'Application Deadline: {clock}, May 1, 2027',
-                             f'Application Deadline: March 1, 2027 at {clock} (required) has been revised to May 1, 2027 at 6 PM Eastern']:
-                    with self.subTest(name=name, descriptor=descriptor, text=text):
-                        expected = [('2027-05-01', '6 PM', 'Eastern')] if 'revised' in text else [('2027-05-01', '5 PM', name)]
-                        self.assert_replacement_projection(text, expected)
-        for phrase in ['Eastern Standard Time (EDT)', 'Eastern Daylight Time (EST)', 'Pacific Standard Time (EST)']:
-            self.assert_replacement_projection(f'Application Deadline: 5 PM {phrase}, May 1, 2027', [])
+                self.assertEqual(result['close_date'], record['close_date'])
+                self.assertEqual([{k: v for k, v in d.items() if k not in
+                    {'document_evidence_id', 'document_confidence', 'citation'}} for d in result['deadlines']], [structured])
+                self.assertTrue(all(f.get('required') is None for f in result['document_evidence']['facts']))
+                self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
+                self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' for q in result['document_evidence']['review_queue']))
 
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()

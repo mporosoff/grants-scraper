@@ -45,7 +45,7 @@ from scripts import program_areas
 
 EVIDENCE_SCHEMA_VERSION = 1
 EXTRACTOR_IDENTITY = "official-evidence-2"
-DEADLINE_EXTRACTOR_IDENTITY = "submission-date-2"
+DEADLINE_EXTRACTOR_IDENTITY = "submission-date-3"
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/document_evidence.json")
 DEFAULT_SUBTOPIC_CACHE = Path("data/subtopics.js")
@@ -90,29 +90,6 @@ DEADLINE_LABEL_RE = re.compile(
     rf"\b(?:submission\s+deadlines?|deadlines?\s+for(?:\s+{DEADLINE_SUBMISSION_LABEL})?)\b",
     re.I,
 )
-UNKNOWN_DEADLINE_VALUE_RE = re.compile(
-    r"\b(?:TBD|TBA|unknown|unannounced|to\s+be\s+(?:announced|determined)|not\s+yet(?:\s+(?:announced|determined|scheduled|available))?|not\s+announced|not\s+available|pending|rolling|none|N/A)\b",
-    re.I,
-)
-# Complete predicate/value grammar, shared by direct and modified replacements.
-# Noun-bearing annotations cannot satisfy this grammar merely by containing a date.
-DEADLINE_COPULA = r"(?:is|are|was|were|will|shall|has|have|may|might|can|could|should|must|be|been|being|remains?|becomes?)"
-DEADLINE_REPLACEMENT_ACTION = r"(?:(?:chang|mov|revis)(?:e|es|ed)|extend(?:ed|s)?|(?:re)?scheduled|deferred|set|fixed)"
-DEADLINE_VALUE_CONNECTOR = r"(?:due|for|on|by|at|to|until|till|through)"
-DEADLINE_VALUE_MODIFIER = r"(?:now|still|expected|anticipated|estimated|planned|intended|proposed|[a-z]+ly)"
-DEADLINE_VALUE_BRIDGE_RE = re.compile(rf"\s*(?:(?:{DEADLINE_COPULA}|{DEADLINE_REPLACEMENT_ACTION}|{DEADLINE_VALUE_CONNECTOR}|{DEADLINE_VALUE_MODIFIER})\b\s*)*", re.I)
-DEADLINE_REQUIREMENT_RE = re.compile(r"\(\s*(?:required|optional)\s*\)|\[\s*(?:required|optional)\s*\]", re.I)
-DEADLINE_BARE_REQUIREMENT_RE = re.compile(r"\b(?:not\s+required|required|optional)\b", re.I)
-DEADLINE_FIELD_REQUIREMENT_RE = re.compile(
-    rf"(?:{DEADLINE_REQUIREMENT_RE.pattern}|{DEADLINE_BARE_REQUIREMENT_RE.pattern})", re.I)
-DEADLINE_FIELD_REQUIREMENT_PREFIX_RE = re.compile(
-    rf"{DEADLINE_FIELD_REQUIREMENT_RE.pattern}\s*[-:–—,]?\s*$", re.I)
-DEADLINE_VALUE_PREFIX_RE = re.compile(
-    rf"\s*(?:{DEADLINE_FIELD_REQUIREMENT_RE.pattern}\s*)*(?P<separator>[:=–—-])?\s*"
-    rf"(?:{DEADLINE_FIELD_REQUIREMENT_RE.pattern}\s*)*", re.I)
-DEADLINE_CLOCK_BRIDGE_RE = re.compile(
-    rf"[\s,:=(]*(?:(?P<subject>(?:(?:the|all)\s+)?(?:{DEADLINE_SUBMISSION_LABEL}|submissions?))\s+)?"
-    rf"(?P<predicate>(?:(?:{DEADLINE_COPULA}|due|close[sd]?|closing|submitted|received|filed|at|by|on|no\s+later\s+than)\b\s*)*)", re.I)
 SUBMISSION_GROUP_VALUE = r"(?:[IVX]+|\d+|one|two|three|four|five|six|seven|eight|nine|ten)"
 SUBMISSION_GROUP_PATTERN = rf"(?:(?:phase|round|cycle|year)\s+{SUBMISSION_GROUP_VALUE}|FY\s*\d{{2,4}})\b"
 SUBMISSION_GROUP_PREFIX_RE = re.compile(rf"\b(?:{SUBMISSION_GROUP_PATTERN}\s*[-:–—,(\[]?\s*)+$", re.I)
@@ -777,363 +754,213 @@ def deadline_kind(context, date_offset=None):
             )
             matches.append((distance, match.start(), kind, label))
     if not matches:
-        if re.search(r"\b(?:submissions?|closing\s+date|due\s+dates?|solution\s+summar(?:y|ies))\b", context, re.I):
+        if re.search(r"\b(?:submissions?|closing\s+date|due\s+dates?|solution\s+summar(?:y|ies))\b|^deadline\b", context, re.I):
             return "application", "Full application deadline"
         return None
     _, _, kind, label = min(matches, key=lambda item: (item[0], item[1]))
     return kind, label
 
 
-def deadline_requirement_end(text, start, end):
-    """Consume only complete, directly attached field requirement markers."""
-    while start < end:
-        space = re.match(r"[\s,]*", text[start:end]).end()
-        marker = DEADLINE_REQUIREMENT_RE.match(text, start + space, end)
-        if not marker:
-            break
-        start = marker.end()
-    return start
+# Deliberately bounded field grammar. This is not a general English parser:
+# unsupported lists, replacements and scope annotations lose narrative evidence.
+_SUBMISSION_SUBJECT = rf"{DEADLINE_SUBMISSION_LABEL}(?:\s*\((?:LOI|Letter of Intent|Preproposal)\))?"
+_DEADLINE_FIELD = re.compile(
+    rf"\b(?:{_SUBMISSION_SUBJECT}\s+(?:submission\s+)?(?:deadlines?|due(?:\s+dates?)?)"
+    rf"|(?:deadlines?|closing\s+date)\s+for\s+{_SUBMISSION_SUBJECT}(?:\s+submission)?"
+    rf"|{_SUBMISSION_SUBJECT}\s+(?:(?:is\s+required\s+and\s+)?(?:must|shall)\s+be\s+(?:submitted|received|filed)|(?:are|is|will\s+be)\s+due)"
+    rf"|(?:submissions?|solution\s+summar(?:y|ies))\s+(?:due|must\s+be\s+(?:submitted|received))"
+    rf"|application\s+period\s+will\s+close|closing\s+date(?:\s+for\s+this\s+opportunity)?"
+    rf"|submission\s+deadlines?|(?P<generic>deadline))\b", re.I)
+_REQUIREMENT = re.compile(r"(?<!\w)(?:\(\s*(?:required|optional)\s*\)|\[\s*(?:required|optional)\s*\]|not\s+required|required|optional)(?!\w)", re.I)
+_VALUE_LINK = re.compile(
+    r"[\s,:=–—\-()\[\]]*(?:(?:is|are|was)\s+)?"
+    r"(?:(?:(?:has\s+been|was)\s+)?(?:extended|moved|changed|revised)\s+(?:to|until)\s+)?"
+    r"(?:(?:on|by|at|of|due|no\s+later\s+than)\s*)*[\s,:=–—\-()\[\]]*", re.I)
+_CLOCK_LINK = re.compile(
+    r"[\s,:()\[\]]*(?:(?:at|by|due\s+(?:at|by))|"
+    r"(?:(?:applications?|submissions?)\s+)?(?:must\s+be\s+received|are\s+due|closes?)\s+(?:at|by))?\s*", re.I)
 
 
-def deadline_field_start(text, start, label_start):
-    """Only contiguous stage qualifiers and requirement metadata prefix a field."""
-    while start < label_start:
-        prefix = text[start:label_start]
-        matches = [match for pattern in (SUBMISSION_GROUP_PREFIX_RE, DEADLINE_FIELD_REQUIREMENT_PREFIX_RE)
-                   if (match := pattern.search(prefix))]
-        if not matches:
-            break
-        label_start = start + min(match.start() for match in matches)
-    return label_start
+def _balanced_deadline_field(text):
+    stack = []
+    for character in text:
+        if character in '([':
+            stack.append(character)
+        elif character in ')]':
+            if not stack or stack.pop() != {')': '(', ']': '['}[character]:
+                return False
+    return not stack
 
 
-def explicit_deadline_requirement(context):
-    """The owned value's explicit marker overrides inherited field metadata."""
-    markers = [(match.start(), bool(re.search(r'\brequired\b', match.group(0), re.I)))
-               for match in DEADLINE_REQUIREMENT_RE.finditer(context)]
-    for label in DEADLINE_LABEL_RE.finditer(context):
-        start = deadline_field_start(context, 0, label.start())
-        markers.extend((match.start(), match.group(0).casefold() == 'required')
-                       for match in DEADLINE_BARE_REQUIREMENT_RE.finditer(context, start, label.start()))
-        # A bounded postfix heading includes its closing delimiter in semantic
-        # context. Bare field markers have the same role on either side of ':'.
-        value_start = label.end()
-        closing = re.match(r'\s*[)\]]', context[value_start:])
-        if closing:
-            value_start += closing.end()
-        value_prefix = DEADLINE_VALUE_PREFIX_RE.match(context, value_start)
-        markers.extend((match.start(), match.group(0).casefold() == 'required')
-                       for match in DEADLINE_BARE_REQUIREMENT_RE.finditer(context, value_start, value_prefix.end()))
-    return max(markers, key=lambda item: item[0])[1] if markers else None
+def _deadline_boundaries(text, start, end):
+    for boundary in re.finditer(r'[;•|\n]|[.!?]\s+(?=[A-Z])', text[start:end]):
+        position = start + boundary.start()
+        if text[position] == '\n':
+            following = position + 1 + len(text[position + 1:]) - len(text[position + 1:].lstrip())
+            if TIME_RE.match(text, following) or DATE_RE.match(text, following):
+                continue  # A source line wrap inside a field is not a new field.
+        if not re.search(r'\b[ap]\.?m\.$', text[:position + 1], re.I):
+            yield position, start + boundary.end()
 
 
-def deadline_submission_bridge(text, owner_context=None):
-    """A complete submission predicate must belong to the field's stage."""
-    bridge = DEADLINE_CLOCK_BRIDGE_RE.fullmatch(text)
-    if not bridge:
-        return None
-    subject = bridge.group('subject')
-    if subject:
-        if not re.search(r'\b(?:due|close[sd]?|closing|submitted|received|filed|by|no\s+later\s+than)\b', bridge.group('predicate'), re.I):
-            return None  # A submission noun alone is not a complete predicate.
-        owner_kind = deadline_kind(owner_context) if owner_context else None
-        subject_kind = deadline_kind(subject)
-        generic = re.fullmatch(r'(?:(?:the|all)\s+)?submissions?', subject, re.I)
-        if owner_kind and subject_kind and not generic and owner_kind[0] != subject_kind[0]:
-            return None  # Another submission stage cannot supply this value.
-    return bridge
-
-
-def deadline_clock_token_end(text, clock):
-    """A redundant parenthesized zone must agree with the named clock zone."""
+def _clock_extent(text, clock):
+    """Return the whole clock token and whether its redundant zone agrees."""
     alias = re.match(r'\s*\(([A-Z]{2,4})\)', text[clock.end():], re.I)
-    zones = {'eastern': 'ET', 'central': 'CT', 'mountain': 'MT', 'pacific': 'PT',
-             'alaska': 'AKT', 'hawaii': 'HST', 'atlantic': 'AT', 'utc': 'UTC', 'gmt': 'GMT'}
+    if not alias:
+        return clock.end(), True
     zone = (clock.group(2) or '').casefold()
-    expected = zones.get(zone, zone.upper())
+    stems = {'eastern': 'E', 'central': 'C', 'mountain': 'M', 'pacific': 'P',
+             'alaska': 'AK', 'atlantic': 'A', 'hawaii': 'H', 'hawaii-aleutian': 'H'}
+    descriptor = re.search(r'\b(Standard|Daylight)\s+Time\b', clock.group(0), re.I)
+    expected = (stems[zone] + (descriptor.group(1)[0].upper() if descriptor else '') + 'T'
+                if zone in stems else zone.upper())
+    if zone == 'hawaii' and not descriptor:
+        expected = 'HST'
+    return clock.end() + alias.end(), alias.group(1).upper() == expected
+
+
+def deadline_timezone(clock):
+    if not clock or not clock.group(2):
+        return None
     descriptor = re.search(r'\b(Standard|Daylight)\s+Time\b', clock.group(0), re.I)
     stems = {'eastern': 'E', 'central': 'C', 'mountain': 'M', 'pacific': 'P',
-             'alaska': 'AK', 'hawaii': 'H', 'hawaii-aleutian': 'H', 'atlantic': 'A'}
-    if descriptor and zone in stems:
-        expected = stems[zone] + descriptor.group(1)[0].upper() + 'T'
-    return clock.end() + alias.end() if alias and alias.group(1).upper() == expected else clock.end()
+             'alaska': 'AK', 'atlantic': 'A', 'hawaii': 'H', 'hawaii-aleutian': 'H'}
+    zone = clock.group(2)
+    if descriptor and zone.casefold() in stems:
+        return stems[zone.casefold()] + descriptor.group(1)[0].upper() + 'T'
+    return clean_text(zone)
 
 
-def remove_deadline_clocks(text):
+def _without_clocks(text):
     parts, end = [], 0
     for clock in TIME_RE.finditer(text):
-        parts.append(text[end:clock.start()])
-        parts.append(' ')
-        end = deadline_clock_token_end(text, clock)
+        parts.extend((text[end:clock.start()], ' '))
+        end, _ = _clock_extent(text, clock)
     return ''.join(parts) + text[end:]
 
 
-def deadline_clock_end(text, start, end, owner_context=None):
-    """Accept an attached clock predicate and markers, never a scope clock."""
-    start = deadline_requirement_end(text, start, end)
-    clock = TIME_RE.search(text, start, end)
-    if not clock or not deadline_submission_bridge(text[start:clock.start()], owner_context):
-        return start
-    return deadline_requirement_end(text, deadline_clock_token_end(text, clock), end)
-
-
-def deadline_value_bridge(text, *, list_connector=False, owner_context=None):
-    """Prove a complete linking phrase, allowing only bounded incidental asides.
-
-    The first segment must belong to the predicate; noun-bearing scope text
-    cannot disappear as an aside. A predicate/list connector must resume after
-    every incidental clause. Commas inside dates are never clause delimiters.
-    """
-    if list_connector and not re.search(r'[,;]|\b(?:and|or)\b', text, re.I):
-        return None
-    dates = list(DATE_RE.finditer(text))
-    commas = [m.start() for m in re.finditer(',', text)
-              if not any(d.start() <= m.start() < d.end() for d in dates)]
-    boundaries = [-1, *commas, len(text)]
-    parts = []
-    in_aside = False
-    for index, (left, right) in enumerate(zip(boundaries, boundaries[1:])):
-        part = text[left + 1:right]
-        semantic = part
-        if not list_connector:
-            # An explicitly changed FROM value is historical, not another live
-            # deadline. Require both the change predicate and its TO connector.
-            values = sorted([*DATE_RE.finditer(part), *UNKNOWN_DEADLINE_VALUE_RE.finditer(part)],
-                            key=lambda value: value.start())
-            for old in values:
-                from_links = list(re.finditer(r'\bfrom\b', part[:old.start()], re.I))
-                from_link = from_links[-1] if from_links else None
-                if not from_link:
-                    continue
-                before = part[:from_link.start()]
-                if (not re.search(rf'\b{DEADLINE_REPLACEMENT_ACTION}\b', before, re.I)
-                        or not DEADLINE_VALUE_BRIDGE_RE.fullmatch(remove_deadline_clocks(DEADLINE_REQUIREMENT_RE.sub(' ', before)))
-                        or not DEADLINE_VALUE_BRIDGE_RE.fullmatch(remove_deadline_clocks(DEADLINE_REQUIREMENT_RE.sub(' ', part[from_link.end():old.start()])))):
-                    continue
-                old_end = deadline_clock_end(part, old.end(), len(part))
-                after = part[old_end:]
-                if re.match(r'\s*(?:to|until|till|through)\b', after, re.I):
-                    markers = list(DEADLINE_REQUIREMENT_RE.finditer(part, from_link.end(), old_end))
-                    requirement = markers[-1].group(0) if markers else ''
-                    semantic = before + ' ' + requirement + ' ' + after
-                    break
-        without_clocks = remove_deadline_clocks(DEADLINE_REQUIREMENT_RE.sub(' ', semantic))
-        if list_connector:
-            linked = re.fullmatch(r'\s*(?:(?:and|or|at|by|on)\b\s*|;\s*)*', without_clocks, re.I)
-        else:
-            linked = (DEADLINE_VALUE_BRIDGE_RE.fullmatch(without_clocks)
-                      or deadline_submission_bridge(without_clocks, owner_context))
-        if index == 0 and not linked:
-            return None
-        if linked:
-            parts.append(semantic)
-            in_aside = False
-        else:
-            in_aside = True
-    return ' '.join(parts) if not in_aside else None
-
-
-def deadline_replacement_values(value, owner_context=None):
-    """One ordered ownership sequence for dates and explicitly unknown values.
-
-    Unknown items carry list ownership without producing a dated fact. A later
-    explicit change predicate supersedes the earlier values; a plain list does
-    not. Every form, including a bare date and an abbreviated 'now', uses this
-    same proof and therefore cannot admit trailing scope dates through a bypass.
-    """
-    candidates = sorted([(match, 'date') for match in DATE_RE.finditer(value)] +
-                        [(match, 'unknown') for match in UNKNOWN_DEADLINE_VALUE_RE.finditer(value)],
-                        key=lambda item: item[0].start())
-    introduced = []
-    for candidate, kind in candidates:
-        bridge = deadline_value_bridge(value[:candidate.start()], owner_context=owner_context)
-        if bridge is None and introduced:
-            prior, _, prior_bridge = introduced[-1]
-            attached_end = deadline_clock_end(value, prior.end(), candidate.start(), owner_context)
-            connector = value[attached_end:candidate.start()]
-            markers = list(DEADLINE_REQUIREMENT_RE.finditer(prior_bridge + ' ' + value[prior.end():attached_end]))
-            requirement = markers[-1].group(0) + ' ' if markers else ''
-            list_bridge = deadline_value_bridge(connector, list_connector=True)
-            if list_bridge is not None:
-                bridge = requirement + DEADLINE_REQUIREMENT_RE.sub(' ', prior_bridge) + ' ' + list_bridge
-            else:
-                transition = re.sub(r'^\s*[,;]?\s*(?:(?:and|but)\s+)?(?:(?:then|subsequently)\s+)?',
-                                    '', connector, flags=re.I)
-                changed = re.search(rf'\b{DEADLINE_REPLACEMENT_ACTION}\b', transition, re.I)
-                transition_bridge = deadline_value_bridge(transition, owner_context=owner_context) if changed else None
-                if transition_bridge is not None:
-                    bridge = requirement + transition_bridge
-                    introduced = []
-        if bridge is not None:
-            introduced.append((candidate, kind, bridge))
-    return introduced
+def explicit_deadline_requirement(context):
+    values = {not bool(re.search(r'optional|not\s+required', match.group(0), re.I))
+              for match in _REQUIREMENT.finditer(context)}
+    if len(values) == 1:
+        return values.pop()
+    if not values and re.search(r'\b(?:must|shall)\b', context, re.I):
+        return True
+    return None
 
 
 def deadline_context(container, match):
-    """Bind a date to its own HTML block and sentence, never a nearby field."""
-    text = container["text"]
+    """Prove one date's local field; never borrow another value or infer a list."""
+    text = container['text']
     start, end = max(0, match.start() - 230), min(len(text), match.end() + 230)
-    for left, right in container.get("blocks") or []:
+    block_end = len(text)
+    for left, right in container.get('blocks') or []:
         if left <= match.start() < right:
             start, end = max(start, left), min(end, right)
+            block_end = right
             break
-    # PDF fields can be adjacent without punctuation. Explicit deadline labels
-    # establish ownership before punctuation is examined, so a comma-attached
-    # time cannot be cut off merely because another label follows it later.
-    dates = list(DATE_RE.finditer(text, start, end))
-    for label in DEADLINE_LABEL_RE.finditer(text, start, end):
-        label_start = deadline_field_start(text, start, label.start())
-        previous = next((date for date in reversed(dates) if date.end() <= label_start), None)
-        link = TIME_RE.sub("", text[previous.end():label_start]) if previous else ""
-        link = re.sub(r"\b(?:at|by)\b", "", link, flags=re.I)
-        # Absence of another date is not evidence of backward ownership: an
-        # adjacent prefix field may be empty/TBD. Require an explicit link.
-        postfix = previous and re.fullmatch(
-            r"[\s,]*(?:(?:is|was|will\s+be)\s+(?:the\s+)?|[-–—:]\s*)", link, re.I)
-        value_start = label.end()
-        opening = re.fullmatch(r"[\s,]*(\(|\[)\s*", link)
-        if previous and opening:
-            closing = {"(": ")", "[": "]"}[opening.group(1)]
-            close = text.find(closing, label.end(), end)
-            enclosed = text[label_start:close] if close >= 0 else ""
-            postfix = (close >= 0 and not re.search(r"[()\[\]]", enclosed)
-                       and not DATE_RE.search(enclosed)
-                       and not UNKNOWN_DEADLINE_VALUE_RE.search(enclosed))
-            if close >= 0:
-                value_start = close + 1
-        suffix = text[value_start:end].lstrip()
-        was_postfix = bool(postfix)
-        # A grouped heading still owns any value after its closing delimiter.
-        # Empty, explicitly unknown, and newly dated values cannot borrow the
-        # preceding date. Scope annotations such as "for all applicants" keep
-        # the explicit postfix label with its date.
-        # Field metadata may precede or follow its separator. Keep it in the
-        # heading, so each value inherits it until that value supplies an override.
-        field_prefix = DEADLINE_VALUE_PREFIX_RE.match(suffix)
-        value = suffix[field_prefix.end():]
-        heading = text[label_start:value_start] + ' ' + field_prefix.group(0)
-        owned_value = value
-        next_label = DEADLINE_LABEL_RE.search(owned_value)
-        if next_label:
-            owned_value = owned_value[:next_label.start()]
-        for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|[;•|]", owned_value):
-            if not re.search(r"\b[ap]\.?m\.\s*$", owned_value[:boundary.end()], re.I):
-                owned_value = owned_value[:boundary.start()]
-                break
-        owned_start = text.find(owned_value, value_start, end)
-        introduced = deadline_replacement_values(owned_value, heading)
-        if (not introduced and not was_postfix and field_prefix.group('separator')
-                and owned_start <= match.start() < owned_start + len(owned_value)):
-            return "", 0  # An explicit field cannot publish an unproved scope date.
-        if introduced:
-            if was_postfix and match.start() == previous.start():
-                return "", 0
-            if owned_start <= match.start() < owned_start + len(owned_value):
-                own = next(((candidate, bridge) for candidate, kind, bridge in introduced
-                            if kind == 'date' and owned_start + candidate.start() == match.start()), None)
-                if own is None:
-                    return "", 0
-                candidate, bridge = own
-                value_end = deadline_clock_end(owned_value, candidate.end(), len(owned_value), heading)
-                # Citation construction still uses the original source. Semantic
-                # context contains only the proved field, value and owned clock.
-                prefix = heading + " " + bridge
-                return prefix + owned_value[candidate.start():value_end], len(prefix)
-        if introduced or (not value and field_prefix.group('separator')):
-            postfix = False
+    fields = list(_DEADLINE_FIELD.finditer(text, start, end))
+    boundaries = list(_deadline_boundaries(text, start, end))
+    for index, field in enumerate(fields):
+        field_start = field.start()
+        qualifier = SUBMISSION_GROUP_PREFIX_RE.search(text[start:field_start])
+        if qualifier:
+            field_start = start + qualifier.start()
+        left = max([start] + [after for _, after in boundaries if after <= field_start])
+        next_start = fields[index + 1].start() if index + 1 < len(fields) else end
+        next_qualifier = SUBMISSION_GROUP_PREFIX_RE.search(text[field.end():next_start])
+        if next_qualifier:
+            next_start = field.end() + next_qualifier.start()
+        right = min([end] + [before for before, _ in boundaries if before >= field.end()]
+                    + [next_start])
+        if right == end and end < block_end:
+            continue  # The bounded window cannot prove how this field ends.
+        if field.group('generic') and text[left:field_start].strip(' \t:–—-'):
+            continue  # E.g. an award/policy deadline cannot become an application.
+        value_start = field.end()
+        before = list(DATE_RE.finditer(text, left, field_start))
+        previous = before[-1] if before else None
+        gap = text[previous.end():field_start] if previous else ''
+        postfix = bool(previous and re.fullmatch(r'[\s,]*(?:at\s+|by\s+)?', _without_clocks(gap.rstrip(' ([')), re.I)
+                       and gap.rstrip().endswith(('(', '[')))
         if postfix:
-            if previous.start() < match.start():
-                if owned_start <= match.start() < owned_start + len(owned_value):
-                    return "", 0  # Scope prose cannot reuse this postfix field's cue.
-                # This earlier postfix label cannot become the next date's cue.
-                start = max(start, label.end())
-            elif previous.start() > match.start():
-                end = previous.start()
-                break
-            else:
-                # A postfix annotation owns the preceding date and only a
-                # directly attached clock, never clocks inside its scope prose.
-                postfix_end = deadline_clock_end(text, value_start, end, text[label_start:value_start])
-                end = min(end, postfix_end)
-            continue
-        if label_start <= match.start():
-            start = label_start
-        elif label_start >= match.end():
-            end = label_start
-            break
-    scan_start = start
-    for boundary in re.finditer(r"[.!?]\s+(?=[A-Z])|[;,•|]\s*|\b(?i:and|or)\s+", text[scan_start:end]):
-        position = scan_start + boundary.end()
-        if any(date.start() <= scan_start + boundary.start() < date.end() for date in dates):
-            continue  # The comma inside March 1, 2027 is part of the date.
-        if boundary.group(0)[0] not in ".!?":
-            following = text[position:end]
-            next_date = DATE_RE.search(following)
-            label = following[:next_date.start()] if next_date else ""
-            # A shared list inherits its due-date cue; a new labeled clause
-            # owns its own stage/time regardless of its list punctuation.
-            field_label = re.sub(r"\b(?:and|or|on|at|by)\b", "", TIME_RE.sub("", label), flags=re.I)
-            new_field = boundary.group(0)[0] in "•|" and re.search(r"[A-Za-z]", field_label)
-            if not (new_field or (DEADLINE_CUE_RE.search(label) and deadline_kind(label))):
+            closing = ')' if gap.rstrip().endswith('(') else ']'
+            close = re.match(r'\s*' + re.escape(closing), text[value_start:right])
+            if not close:
                 continue
-        if re.search(r"\b[ap]\.?m\.\s*$", text[:position], re.I):
+            value_start += close.end()
+            if DATE_RE.search(text, value_start, right):
+                continue  # An old value plus a possible replacement is withheld.
+            if match.start() != previous.start():
+                continue
+            value = text[previous.start():field_start].rstrip(' ([') + ' ' + text[value_start:right]
+        else:
+            if not value_start <= match.start() < right:
+                continue
+            if index == 0 and not re.fullmatch(r'\s*(?:(?:a|the)\s+)?', text[left:field_start], re.I):
+                continue
+            value = text[value_start:right]
+        dates = list(DATE_RE.finditer(value))
+        if len(dates) != 1 or not _balanced_deadline_field(value):
             continue
-        if position <= match.start():
-            start = position
-        elif scan_start + boundary.start() >= match.end():
-            end = scan_start + boundary.start() + 1
-            break
-    return text[start:end], match.start() - start
+        date = dates[0]
+        prefix = value[:date.start()]
+        if not _VALUE_LINK.fullmatch(SUBMISSION_GROUP_RE.sub(' ', _REQUIREMENT.sub(' ', _without_clocks(prefix)))):
+            continue
+        header = text[field_start:field.end()] + ' ' + ' '.join(m.group(0) for m in SUBMISSION_GROUP_RE.finditer(prefix))
+        groups = {}
+        for group in SUBMISSION_GROUP_RE.finditer(header):
+            groups.setdefault(group.group('kind') or 'fiscal_year', set()).add(
+                (group.group('value') or group.group('fy')).casefold())
+        if any(len(values) > 1 for values in groups.values()):
+            continue
+        markers = list(_REQUIREMENT.finditer(prefix))
+        clocks = list(TIME_RE.finditer(value))
+        owned_clock = None
+        tail_start = date.end()
+        if len(clocks) == 1:
+            clock = clocks[0]
+            clock_end, valid = _clock_extent(value, clock)
+            gap = _REQUIREMENT.sub(' ', value[date.end():clock.start()])
+            if valid and (clock.end() <= date.start() or _CLOCK_LINK.fullmatch(gap)):
+                owned_clock = clock
+                tail_start = max(tail_start, clock_end)
+                markers.extend(_REQUIREMENT.finditer(value, date.end(), clock.start()))
+        tail = value[tail_start:]
+        clean_tail = _REQUIREMENT.sub(' ', tail)
+        if re.fullmatch(r'[\s,.:()\[\]]*', clean_tail):
+            markers.extend(_REQUIREMENT.finditer(tail))
+        elif clocks and re.fullmatch(r'[\s,.:()\[\]]*(?:at\s+|by\s+)?[\s,.:()\[\]]*',
+                                    _without_clocks(clean_tail), re.I):
+            # A complete but contradictory clock may lose its precision while
+            # the directly owned date survives. Arbitrary trailing prose cannot.
+            owned_clock = None
+        else:
+            continue
+        flags = {not bool(re.search(r'optional|not\s+required', marker.group(0), re.I)) for marker in markers}
+        if len(flags) > 1:
+            continue  # Contradictory metadata cannot reassign a date.
+        if flags:
+            header += ' (required)' if flags.pop() else ' (optional)'
+        if clocks and owned_clock is None:
+            container['_deadline_uncertain_component'] = True
+        # This semantic slice contains only proved fields. Citations still use
+        # the original container, and local revalidation never claims a fetch.
+        header += ' '
+        context = header + date.group(0)
+        if owned_clock:
+            context += ' at ' + owned_clock.group(0)
+        return context, len(header)
+    return '', 0
 
 
 def nearest_deadline_time(context, offset, date_length):
-    matches = list(TIME_RE.finditer(context))
-    dates = list(DATE_RE.finditer(context))
-    boundaries = []
-    for previous, following in zip(dates, dates[1:]):
-        # Split only between complete dates, never at a date's internal comma.
-        # A time directly attached to the previous date belongs to that item,
-        # including "March 1, 2027, at 5 p.m., April 1, 2027".
-        after = previous.end()
-        attached = [item for item in matches if after <= item.start() < following.start()
-                    and re.fullmatch(r"[\s,(]*(?:(?:at|by)\s*)?", context[after:item.start()], re.I)
-                    and not re.fullmatch(r"\s+on\s+", context[item.end():following.start()], re.I)]
-        if attached:
-            after = attached[0].end()
-        delimiter = re.search(r"[;,•|]|\b(?:and|or)\b", context[after:following.start()], re.I)
-        boundaries.append(after + delimiter.end() if delimiter else following.start())
-    left = max([0] + [position for position in boundaries if position <= offset])
-    right = min([len(context)] + [position for position in boundaries if position >= offset + date_length])
-    local = [item for item in matches if left <= item.start() < right]
-    if not local:
-        # A time explicitly before the first date can govern a shared list.
-        # A time attached to a later list item cannot silently fill earlier ones.
-        first = DATE_RE.search(context)
-        local = [item for item in matches if first and item.end() <= first.start()
-                 and DEADLINE_CUE_RE.search(context[:item.start()])]
-    direct = [item for item in local if item.start() >= offset + date_length
-              and re.fullmatch(r"[\s,(]*(?:(?:at|by)\s*)?", context[offset + date_length:item.start()], re.I)]
-    choices = direct or local
-    return min(choices, key=lambda item: max(item.start() - offset - date_length,
-                                              offset - item.end(), 0)) if choices else None
+    clocks = list(TIME_RE.finditer(context))
+    return clocks[0] if len(clocks) == 1 else None
 
 
 def supported_submission_date(context, offset):
-    prefix = context[:offset]
-    if re.search(r"\bprojects?\s+(?:starting|beginning)(?:\s+no earlier than)?\s*$", prefix, re.I):
-        return False
-    # Dates for holidays, decisions, appointments and project starts are not
-    # applicant submission deadlines, even beside a valid deadline field.
-    administrative = list(re.finditer(r"\b(?:holidays?|office hours?|notifications?|notified|award duration|invitation\s+to\s+submit|"
-                 r"(?:issue|issuance|publication|announcement|release|posted)\s+date|date\s+posted|"
-                 r"(?:issued|published|released|posted)\s+on|"
-                 r"positions?[^.!?]{0,150}\bfilled|(?:will|shall)\s+(?:begin|start)|start and end dates)\b", prefix, re.I))
-    if administrative:
-        explicit = list(re.finditer(r"\b(?:deadlines?|due|closing\s+date|submission\s+dates?|"
-                                     r"must\s+be\s+(?:submitted|received)|received\s+by)\b", prefix, re.I))
-        if not explicit or administrative[-1].start() > explicit[-1].start():
-            return False
-    return bool(DEADLINE_CUE_RE.search(context) and deadline_kind(context, offset))
+    return bool(context and deadline_kind(context, offset))
 
 
 def qualify_deadline_sequence(facts, review_queue=None):
@@ -1197,7 +1024,7 @@ def qualify_deadline_sequence(facts, review_queue=None):
 
 def cached_deadline_time_supported(fact, match):
     if not fact.get("time"):
-        return True
+        return not fact.get('timezone')
     if not match:
         return False
 
@@ -1222,7 +1049,7 @@ def cached_deadline_time_supported(fact, match):
                 "america/anchorage": "alaska", "pacific/honolulu": "hawaii"}.get(value, value)
 
     return (clock(fact["time"]) is not None and clock(fact["time"]) == clock(match.group(1))
-            and (not fact.get("timezone") or zone(fact["timezone"]) == zone(match.group(2))))
+            and (not fact.get("timezone") or zone(fact["timezone"]) == zone(deadline_timezone(match))))
 
 
 def revalidate_cached_deadlines(entry):
@@ -1231,6 +1058,7 @@ def revalidate_cached_deadlines(entry):
         return
     prior = entry.get("facts") or []
     kept = []
+    uncertain_metadata = []
     for fact in prior:
         if fact.get("type") != "deadline":
             kept.append(fact)
@@ -1250,13 +1078,18 @@ def revalidate_cached_deadlines(entry):
             required = explicit_deadline_requirement(context)
             if required is not None and fact.get('required') is not required:
                 continue
+            if required is None and fact.get('required') is not None:
+                fact = deepcopy(fact)
+                fact['required'] = None
+                uncertain_metadata.append(fact['id'])
             supported = True
             break
         if supported:
             kept.append(fact)
     kept = qualify_deadline_sequence(kept)
-    removed = [fact["id"] for fact in prior if fact not in kept]
-    if removed:
+    kept_ids = {fact['id'] for fact in kept}
+    removed = [fact["id"] for fact in prior if fact['id'] not in kept_ids]
+    if removed or uncertain_metadata:
         entry["facts"] = kept
         entry["deadline_extractor_identity"] = DEADLINE_EXTRACTOR_IDENTITY
         for item in entry.get("review_queue") or []:
@@ -1267,8 +1100,8 @@ def revalidate_cached_deadlines(entry):
         entry.setdefault("review_queue", []).append({"type": "deadline_evidence_withheld",
             "label": "Verify the current submission stages; unsupported cached submission dates were withheld",
             "status": "needs_review",
-            "message": "Unbound or inconsistent submission dates were withheld; verify the current official submission stages.",
-            "withheld_fact_ids": removed})
+            "message": "Unbound or inconsistent submission dates or metadata were withheld; verify the current official submission stages.",
+            "withheld_fact_ids": removed, "withheld_metadata_fact_ids": uncertain_metadata})
 
 
 def extract_deadlines(opportunity_id, containers, document, extracted_at, review_queue=None):
@@ -1280,6 +1113,8 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
             context, offset = deadline_context(container, match)
             kind_result = deadline_kind(context, offset)
             if not supported_submission_date(context, offset):
+                if DEADLINE_CUE_RE.search(text):
+                    container['_deadline_uncertain_component'] = True
                 continue
             parsed = parse_document_date(match.group(0))
             if not parsed:
@@ -1288,19 +1123,13 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
             identity = (kind, parsed)
             time_match = nearest_deadline_time(context, offset, len(match.group(0)))
             deadline_time = clean_text(time_match.group(1)) if time_match else None
-            timezone_value = (
-                clean_text(time_match.group(2))
-                if time_match and time_match.group(2)
-                else None
-            )
+            timezone_value = deadline_timezone(time_match)
             if identity in seen:
                 prior = facts[seen[identity]]
                 if not deadline_time or (prior.get("time") and
                         (prior.get("timezone") or prior["time"] != deadline_time or not timezone_value)):
                     continue
             required = explicit_deadline_requirement(context)
-            if required is None:
-                required = bool(re.search(r"\b(?:must|required|shall|due|no later than)\b", context, re.I))
             citation = citation_for(
                 container,
                 document,
@@ -1332,7 +1161,15 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                 seen[identity] = len(facts)
                 facts.append(fact)
             if len(facts) >= 12:
-                return qualify_deadline_sequence(facts, review_queue)
+                return finish_deadlines(facts, containers, review_queue)
+    return finish_deadlines(facts, containers, review_queue)
+
+
+def finish_deadlines(facts, containers, review_queue):
+    if review_queue is not None and any(c.get('_deadline_uncertain_component') for c in containers):
+        review_queue.append({'type': 'deadline_evidence_withheld', 'status': 'needs_review',
+            'label': 'Verify official submission dates; ambiguous narrative information was withheld',
+            'message': 'Only locally owned submission dates and components are published.'})
     return qualify_deadline_sequence(facts, review_queue)
 
 
