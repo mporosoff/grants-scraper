@@ -204,6 +204,10 @@ revisions, including markers before or after an owned clock. Scope annotations
 are not normalized as markers. Clock predicates may name their submission
 subject; they still require a complete due/receipt/closing predicate and cannot
 borrow a clock from a different submission stage.
+An owned value's explicit required/optional marker overrides inherited metadata
+and receipt/clock wording. Lists propagate only the latest effective marker.
+Legacy flags that contradict an explicit source marker are withheld through the
+existing warning and reference-cleanup path, without advancing source timestamps.
 
 The same refresh exposed responses with empty objectives for negative decisions.
 The prompts now state the existing validator's bounds for both positive and
@@ -244,8 +248,8 @@ Pages generation; it does not repeat provider work or rebuild the package.
 `tests/test_pipeline_release_repairs.py` covers independent sponsor failure and
 verified withdrawal, owned submission stages/timezones, sibling exclusion, cached
 fact/reference cleanup, boundary-change revalidation and strict negative-output
-diagnostics. The current correction passed 123 focused source/document tests,
-999 required Python tests and 713 Node contracts, with unchanged hermetic,
+diagnostics. The current correction passed 125 focused source/document tests,
+1001 required Python tests and 713 Node contracts, with unchanged hermetic,
 frozen-query and scoring expectations and a valid release package. A
 bounded live diagnostic returned four verified DARPA calls despite IARPA's 403;
 one provider request returned a valid exact-quote decomposition with zero retries.

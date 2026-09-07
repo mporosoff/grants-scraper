@@ -787,6 +787,12 @@ def deadline_requirement_end(text, start, end):
     return start
 
 
+def explicit_deadline_requirement(context):
+    """The owned value's explicit marker overrides inherited field metadata."""
+    markers = list(DEADLINE_REQUIREMENT_RE.finditer(context))
+    return bool(re.search(r'\brequired\b', markers[-1].group(0), re.I)) if markers else None
+
+
 def deadline_clock_end(text, start, end, owner_context=None):
     """Accept an attached clock predicate and markers, never a scope clock."""
     start = deadline_requirement_end(text, start, end)
@@ -878,8 +884,9 @@ def deadline_replacement_values(value, owner_context=None):
             connector = value[attached_end:candidate.start()]
             markers = list(DEADLINE_REQUIREMENT_RE.finditer(prior_bridge + ' ' + value[prior.end():attached_end]))
             requirement = markers[-1].group(0) + ' ' if markers else ''
-            if deadline_value_bridge(connector, list_connector=True) is not None:
-                bridge = requirement + prior_bridge
+            list_bridge = deadline_value_bridge(connector, list_connector=True)
+            if list_bridge is not None:
+                bridge = requirement + DEADLINE_REQUIREMENT_RE.sub(' ', prior_bridge) + ' ' + list_bridge
             else:
                 transition = re.sub(r'^\s*[,;]?\s*(?:(?:and|but)\s+)?(?:(?:then|subsequently)\s+)?',
                                     '', connector, flags=re.I)
@@ -1169,6 +1176,9 @@ def revalidate_cached_deadlines(entry):
             time_match = nearest_deadline_time(context, offset, len(match.group(0)))
             if not cached_deadline_time_supported(fact, time_match):
                 continue
+            required = explicit_deadline_requirement(context)
+            if required is not None and fact.get('required') is not required:
+                continue
             supported = True
             break
         if supported:
@@ -1217,13 +1227,9 @@ def extract_deadlines(opportunity_id, containers, document, extracted_at, review
                 if not deadline_time or (prior.get("time") and
                         (prior.get("timezone") or prior["time"] != deadline_time or not timezone_value)):
                     continue
-            required = bool(
-                re.search(
-                    r"\b(?:must|required|shall|due|no later than)\b",
-                    context,
-                    re.I,
-                )
-            )
+            required = explicit_deadline_requirement(context)
+            if required is None:
+                required = bool(re.search(r"\b(?:must|required|shall|due|no later than)\b", context, re.I))
             citation = citation_for(
                 container,
                 document,

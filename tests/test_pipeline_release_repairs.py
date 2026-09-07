@@ -746,6 +746,52 @@ class DeadlineOwnership(unittest.TestCase):
             self.assertEqual([(f['date'], f['time'], f['deadline_kind']) for f in facts],
                              [('2027-03-01', expected_time, 'letter_of_intent')])
 
+    def test_current_requirement_marker_overrides_inherited_metadata(self):
+        record, entry = self.entry()
+        for old, new in [('required', 'optional'), ('optional', 'required')]:
+            for opening, closing in [('(', ')'), ('[', ']')]:
+                prior = f'{opening}{old}{closing}'
+                current = f'{opening}{new}{closing}'
+                for connection, expected_dates in [
+                        ('has been revised to', ['2027-05-01']),
+                        (', or', ['2027-03-01', '2027-05-01'])]:
+                    for value in [f'{current} May 1, 2027', f'May 1, 2027 {current}',
+                                  f'May 1, 2027 {current}, submissions must be received by 5 PM Eastern',
+                                  f'May 1, 2027, submissions are due at 5 PM Eastern {current}']:
+                        with self.subTest(old=old, new=new, connection=connection, value=value):
+                            text = f'Letter of Intent Deadline: March 1, 2027 {prior} {connection} {value}'
+                            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                            self.assertEqual([f['date'] for f in facts], expected_dates)
+                            self.assertEqual([f['required'] for f in facts],
+                                             ([old == 'required'] if len(expected_dates) > 1 else []) + [new == 'required'])
+                            entry['facts'] = facts
+                            entry.pop('deadline_extractor_identity', None)
+                            stamp, digest = entry['checked_at'], entry['document']['sha256']
+                            published = merge_document_entry(record, entry)
+                            self.assertEqual([d['required'] for d in published['deadlines'] if d.get('evidence_id')],
+                                             [f['required'] for f in facts])
+                            self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
+            for connection in [', or', 'and then moved to']:
+                text = f'Letter of Intent Deadline: March 1, 2027 ({old}), or May 1, 2027 ({new}) {connection} June 1, 2027'
+                facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                self.assertEqual(facts[-1]['date'], '2027-06-01')
+                self.assertEqual(facts[-1]['required'], new == 'required')
+
+    def test_cache_withholds_requirement_flags_contradicting_the_owned_marker(self):
+        for marker in ['required', 'optional']:
+            record, entry = self.entry()
+            text = f'Letter of Intent Deadline: May 1, 2027 ({marker}), submissions must be received by 5 PM Eastern'
+            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+            self.assertEqual(facts[0]['required'], marker == 'required')
+            facts[0]['required'] = marker != 'required'
+            entry['facts'] = facts
+            entry.pop('deadline_extractor_identity', None)
+            stamp, digest = entry['checked_at'], entry['document']['sha256']
+            published = merge_document_entry(record, entry)
+            self.assertFalse(any(d.get('evidence_id') for d in published['deadlines']))
+            self.assertTrue(any(q['type'] == 'deadline_evidence_withheld' for q in published['document_evidence']['review_queue']))
+            self.assertEqual((entry['checked_at'], entry['document']['sha256']), (stamp, digest))
+
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()
         for application_date, other_phase, expected in [('April 1', 'I', False), ('June 1', 'I', True),
