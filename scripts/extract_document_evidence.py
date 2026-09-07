@@ -799,8 +799,9 @@ def deadline_context(container, match):
                 value_start = close + 1
         suffix = text[value_start:end].lstrip()
         # A grouped heading still owns any value after its closing delimiter.
-        # Only a complete clock-only annotation can augment a postfix date;
-        # an empty/unknown/new date field cannot borrow the preceding date.
+        # Empty, explicitly unknown, and newly dated values cannot borrow the
+        # preceding date. Scope annotations such as "for all applicants" keep
+        # the explicit postfix label with its date.
         value_link = re.match(r"(?:[:=–—-]|(?:is|are|was|were|will|shall|has|have|may|might|can|could|"
                               r"should|must|remains?|becomes?|changed?|changes|moved?|moves|"
                               r"be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\b)\s*", suffix, re.I)
@@ -808,8 +809,7 @@ def deadline_context(container, match):
             value = suffix[value_link.end():].strip()
             value = re.sub(r"^(?:(?:be|been|being|currently|now|still|set|scheduled|due|for|on|by|at|to)\s+)+",
                            "", value, flags=re.I)
-            clock = TIME_RE.match(value)
-            if not clock or value[clock.end():].strip(" ."):
+            if not value or DATE_RE.match(value) or UNKNOWN_DEADLINE_VALUE_RE.match(value):
                 postfix = False
         if DATE_RE.match(suffix) or UNKNOWN_DEADLINE_VALUE_RE.match(suffix):
             postfix = False

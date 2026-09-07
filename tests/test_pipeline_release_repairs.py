@@ -435,6 +435,24 @@ class DeadlineOwnership(unittest.TestCase):
             facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
             self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-03-01', '5 PM')])
 
+    def test_postfix_scope_annotations_do_not_replace_the_explicit_deadline(self):
+        record, entry = self.entry()
+        for suffix in ['for all applicants', 'on the sponsor portal', 'due to the revised schedule',
+                       'currently applicable to universities', 'for Phase II', ': for all applicants']:
+            for timing in ['', ' at 5 PM Eastern']:
+                with self.subTest(suffix=suffix, timing=timing):
+                    text = f'March 1, 2027{timing} (Application Deadline) {suffix}'
+                    facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+                    self.assertEqual([(f['date'], f['time']) for f in facts], [('2027-03-01', '5 PM' if timing else None)])
+                    entry['facts'] = facts
+                    entry.pop('deadline_extractor_identity', None)
+                    published = merge_document_entry(record, entry)
+                    self.assertEqual(len([d for d in published['deadlines'] if d.get('evidence_id')]), 1)
+        for suffix in ['for TBD', 'currently TBD', 'scheduled for April 1, 2027', 'is April 1, 2027', ':']:
+            text = f'March 1, 2027 (Application Deadline) {suffix}'
+            facts = extract_deadlines(record['opportunity_id'], [{'text': text}], entry['document'], entry['checked_at'])
+            self.assertNotIn('2027-03-01', [f['date'] for f in facts])
+
     def test_application_must_follow_every_applicable_preliminary_stage(self):
         record, entry = self.entry()
         for application_date, other_phase, expected in [('April 1', 'I', False), ('June 1', 'I', True),
