@@ -75,13 +75,18 @@ export function validateAsset(manifest, binary, canaries, { requireReusable = fa
   }
   if (requireReusable || manifest.reuse_contract) {
     const config = manifest.reuse_contract;
-    if (!config || typeof manifest.reuse_permitted !== "boolean"
+    // The preceding contract had no explicit reuse policy. Keep its intact
+    // packages deployable, but never admit their rows to the reuse path.
+    const hasPolicy = Object.hasOwn(manifest, "reuse_permitted")
+      || Object.hasOwn(canaries, "reuse_permitted") || Object.hasOwn(canaries, "batch_space_checks");
+    if ((requireReusable || hasPolicy) && (typeof manifest.reuse_permitted !== "boolean"
       || manifest.reuse_permitted !== canaries?.reuse_permitted
       || !Array.isArray(canaries?.batch_space_checks)
       || canaries.batch_space_checks.some(check => typeof check?.exact_match !== "boolean"
         || !Number.isFinite(check.minimum_cosine) || !Number.isFinite(check.mean_cosine)
         || check.minimum_cosine < .95 || check.mean_cosine < .98
-        || check.gross_discontinuity !== false || (manifest.reuse_permitted && !check.exact_match))
+        || check.gross_discontinuity !== false || (manifest.reuse_permitted && !check.exact_match)))) fail("reuse manifest integrity");
+    if (!config
       || digest(JSON.stringify(config)) !== manifest.configuration_sha256
       || JSON.stringify(config) !== JSON.stringify(configuration(config.preprocessing_sha256))
       || !/^[a-f0-9]{64}$/.test(config.preprocessing_sha256)

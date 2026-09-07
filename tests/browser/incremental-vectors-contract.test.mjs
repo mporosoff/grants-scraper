@@ -90,6 +90,20 @@ test("corrupt shape, bytes, hashes, ownership, row layout and canaries recover c
   }
 });
 
+test("the preceding intact reuse contract stays deployable but cannot supply cached rows", async () => {
+  const cold = await build(inputs);
+  delete cold.manifest.reuse_permitted;
+  delete cold.canaries.reuse_permitted;
+  delete cold.canaries.batch_space_checks;
+  cold.manifest.canary_sha256 = digest(JSON.stringify(cold.canaries));
+  cold.manifest.integrity_sha256 = manifestDigest(cold.manifest);
+  assert.equal(validateAsset(cold.manifest, cold.binary, cold.canaries), true);
+  assert.throws(() => validateAsset(cold.manifest, cold.binary, cold.canaries, {requireReusable: true}), /reuse manifest integrity/);
+  assert.equal((await build(inputs, cold)).result.reused, 0);
+  cold.binary[0] ^= 1;
+  assert.throws(() => validateAsset(cold.manifest, cold.binary, cold.canaries), /binary contract/);
+});
+
 test("failures and overall request/time exhaustion produce no replacement release", async () => {
   const cold = await build(inputs);
   const before = Buffer.from(cold.binary);

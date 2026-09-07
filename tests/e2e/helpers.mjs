@@ -1063,7 +1063,16 @@ export function mockAlerts(target, { status = 202, errorCode = "", responseBody 
   return calls;
 }
 
+async function mockUsageTelemetry(page) {
+  // The production telemetry origin permits Pages, not the isolated test
+  // server. Keep catalog/UI validation deterministic and avoid real events.
+  await page.route("https://funding-usage.urochestercheme.workers.dev/**", route => (
+    route.fulfill({ status: 204, headers: corsHeaders() })
+  ));
+}
+
 export async function openFundingFinder(page, { sidecarFailure = false, evaluation = false } = {}) {
+  await mockUsageTelemetry(page);
   if (sidecarFailure) {
     await page.route("**/data/subtopics.js*", route => route.fulfill({
       status: 404,
@@ -1081,6 +1090,7 @@ export async function openFundingFinder(page, { sidecarFailure = false, evaluati
 }
 
 export async function openFundingFinderShell(page, { path = "/match_explorer.html" } = {}) {
+  await mockUsageTelemetry(page);
   await page.goto(path);
   await expect(page.locator("#query")).toBeVisible();
   await expect(page.locator("#query")).toBeEnabled();
@@ -1092,6 +1102,7 @@ export async function openFundingFinderShell(page, { path = "/match_explorer.htm
 }
 
 export async function openTeamMatch(page, { sidecarFailure = false } = {}) {
+  await mockUsageTelemetry(page);
   if (sidecarFailure) {
     await page.route("**/data/subtopics.js*", route => route.fulfill({
       status: 404,
