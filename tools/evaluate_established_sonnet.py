@@ -11,13 +11,13 @@ from tools import evaluate_offline_ai as original
 from tools import evaluate_team_prompt_repair as trial
 from tools.offline_ai import Client, Ledger, ConfigurationFailure, atomic_json, compatible_model, config, identity
 
-PROTOCOL = Path('evaluation/established_sonnet_repair_frozen.json')
+PROTOCOL = Path('evaluation/established_sonnet_repair_2_frozen.json')
 PAUSE = 'bounded_established_service_check_only'
-GRANT = 'established_sonnet_repair_authorization_consumed'
+GRANT = 'established_sonnet_repair_2_authorization_consumed'
 
 
-def population():
-    protocol = json.loads(PROTOCOL.read_bytes())
+def population(path=PROTOCOL):
+    protocol = json.loads(path.read_bytes())
     prior, cases = trial.population()
     if identity(prior) != protocol['original_protocol_sha256'] or protocol['acceptance'] != prior['acceptance']:
         raise ValueError('Frozen prior comparison or unchanged criteria mismatch')
@@ -34,7 +34,28 @@ class RepairClient:
     def json(self, route, stage, prompt, data, schema, validate, *, stage_config=None):
         if route != config()['routes']['sonnet']:
             raise ValueError('Only the established Sonnet route is authorized')
-        return self.client.json(route, stage, self.protocol['prompts'][stage], data, schema, validate,
+        def diagnosed(value):
+            try:
+                return validate(value)
+            except (ValueError, TypeError, KeyError) as error:
+                directory = getattr(self.client, 'diagnostics', None)
+                if directory is not None:
+                    # Frozen public inputs only. No transport envelope, headers,
+                    # credentials or unrestricted source/provider text is retained.
+                    safe = {key: value.get(key) for key in ('specific', 'suitable_for_team')
+                            if isinstance(value, dict) and type(value.get(key)) is bool}
+                    if isinstance(value, dict):
+                        for key in ('roles', 'edges'):
+                            rows = value.get(key)
+                            if isinstance(rows, list):
+                                safe[key] = [{k: str(v)[:400] for k, v in row.items()
+                                    if k in ('id', 'label', 'quote', 'role_id', 'claim_id', 'coverage')}
+                                    for row in rows[:24] if isinstance(row, dict)]
+                    atomic_json(directory / (identity([stage, data, safe, type(error).__name__]) + '.json'),
+                        {'stage': stage, 'input_hash': identity(data), 'error_type': type(error).__name__,
+                         'validator_error': str(error)[:160], 'bounded_response_fields': safe})
+                raise
+        return self.client.json(route, stage, self.protocol['prompts'][stage], data, schema, diagnosed,
             stage_config=dict(stage_config or config()['stages'][stage], prompt_version=self.protocol['version']))
 
 
@@ -125,15 +146,18 @@ def cov4(ledger, directory, protocol):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('phase', choices=['recovery-sonnet', 'cov4-sonnet', 'recovery-replay'])
+    parser.add_argument('phase', choices=['recovery-sonnet', 'cov4-sonnet', 'recovery-replay',
+                                         'scope-repair-sonnet', 'scope-repair-replay'])
     parser.add_argument('--state', type=Path, required=True)
     args = parser.parse_args()
-    protocol, cases = population()
+    phase = args.phase
+    is_replay = phase in ('recovery-replay', 'scope-repair-replay')
+    protocol, cases = population(PROTOCOL if phase.startswith('scope-repair-') else
+                                Path('evaluation/established_sonnet_repair_frozen.json'))
     directory = args.state / protocol['version']
     directory.mkdir(parents=True, exist_ok=True)
     ledger = Ledger(args.state / 'ledger.json', original.TASK, config()['budgets_usd']['evaluation'],
                     max_requests=config()['max_requests'])
-    phase = args.phase
     expected = contract(protocol, phase)
     marker = directory / (phase + '-completed.json')
     result, complete = None, False
@@ -144,7 +168,7 @@ def main():
             if retained['evaluation_contract'] != expected or files != retained['files']:
                 raise ValueError('Completed service check changed; no silent repeat')
             result, complete = retained['result'], True
-        elif phase == 'recovery-replay':
+        elif is_replay:
             before = ledger.path.read_bytes()
             rows = team_rows(trial.ReplayClient(args.state / 'cache'), directory, protocol, cases, replay=True)
             if ledger.path.read_bytes() != before:
@@ -158,12 +182,13 @@ def main():
                 complete = True
             else:
                 client = Client(ledger, args.state / 'cache', deadline=time.monotonic() + 2400)
+                client.diagnostics = directory / 'validation-failures'
                 rows = team_rows(client, directory, protocol, cases)
                 result = trial.metrics(cases, rows) | {'decision': 'pending_independent_source_review',
                     'required_source_checks': protocol['required_source_checks'], 'limitation': protocol['limitation']}
                 complete = all(row['state'] in original.SCIENTIFIC_STATES | {'provider_refusal'} for row in rows)
     finally:
-        if phase != 'recovery-replay':
+        if not is_replay:
             pause(ledger)
         files = {path.name: identity(json.loads(path.read_bytes())) for path in directory.glob('team-*.json')}
         receipt = {'evaluation_contract': expected, 'protocol_sha256': identity(protocol),

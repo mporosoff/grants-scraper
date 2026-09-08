@@ -7,7 +7,7 @@ on:
         description: One frozen phase within the shared $15 logical evaluation
         required: true
         type: choice
-        options: [preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay, recovery-sonnet, cov4-sonnet, recovery-replay]
+        options: [preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay, recovery-sonnet, cov4-sonnet, recovery-replay, scope-repair-sonnet, scope-repair-replay]
         default: preflight
       authorize_anthropic_baseline:
         description: Consume the user's one evaluation-only Sonnet baseline authorization; production pause stays intact
@@ -51,11 +51,11 @@ jobs:
       - name: Run the selected finite evaluation with provider-specific credentials
         env:
           EVALUATION_PHASE: ${{ inputs.phase }}
-          OPENAI_API_KEY: ${{ inputs.phase != 'teams-sonnet' && inputs.phase != 'round2-sonnet' && inputs.phase != 'replay' && inputs.phase != 'round2-replay' && inputs.phase != 'recovery-sonnet' && inputs.phase != 'cov4-sonnet' && inputs.phase != 'recovery-replay' && secrets.OPENAI_API_KEY || '' }}
-          ANTHROPIC_API_KEY: ${{ (inputs.phase == 'teams-sonnet' || inputs.phase == 'teams-luna-sonnet-verifier' || inputs.phase == 'stability' || inputs.phase == 'round2-sonnet' || inputs.phase == 'recovery-sonnet' || inputs.phase == 'cov4-sonnet') && secrets.ANTHROPIC_API_KEY || '' }}
+          OPENAI_API_KEY: ${{ inputs.phase != 'teams-sonnet' && inputs.phase != 'round2-sonnet' && inputs.phase != 'replay' && inputs.phase != 'round2-replay' && inputs.phase != 'recovery-sonnet' && inputs.phase != 'cov4-sonnet' && inputs.phase != 'recovery-replay' && inputs.phase != 'scope-repair-sonnet' && inputs.phase != 'scope-repair-replay' && secrets.OPENAI_API_KEY || '' }}
+          ANTHROPIC_API_KEY: ${{ (inputs.phase == 'teams-sonnet' || inputs.phase == 'teams-luna-sonnet-verifier' || inputs.phase == 'stability' || inputs.phase == 'round2-sonnet' || inputs.phase == 'recovery-sonnet' || inputs.phase == 'cov4-sonnet' || inputs.phase == 'scope-repair-sonnet') && secrets.ANTHROPIC_API_KEY || '' }}
           AUTHORIZE_ANTHROPIC_BASELINE: ${{ inputs.authorize_anthropic_baseline && 'true' || 'false' }}
         run: |
-          if [[ "$EVALUATION_PHASE" == recovery-* || "$EVALUATION_PHASE" == cov4-sonnet ]]; then
+          if [[ "$EVALUATION_PHASE" == recovery-* || "$EVALUATION_PHASE" == cov4-sonnet || "$EVALUATION_PHASE" == scope-repair-* ]]; then
             python -m tools.evaluate_established_sonnet "$EVALUATION_PHASE" --state "$RUNNER_TEMP/offline-ai"
           elif [[ "$EVALUATION_PHASE" == round2-* ]]; then
             python -m tools.evaluate_team_prompt_repair "$EVALUATION_PHASE" --state "$RUNNER_TEMP/offline-ai"

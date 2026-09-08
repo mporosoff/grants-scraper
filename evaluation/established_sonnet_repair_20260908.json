@@ -1,0 +1,62 @@
+{
+  "version": "established-service-check-20260908-1",
+  "evaluation_sha": "6a909f7faae3fe934f5418f5d82b9fe507fbcb85",
+  "sonnet_run": "34282884790",
+  "cov4_run": "34283278316",
+  "replay_run": "34283892954",
+  "production_modified": false,
+  "team_result": {
+    "scope_correct": 7,
+    "scope_count": 9,
+    "legitimate_accepted": 4,
+    "legitimate_count": 6,
+    "provider_requests": 21,
+    "schema_valid_responses": 19,
+    "schema_fraction": 0.9047619047619048,
+    "estimated_spend_usd": 0.607586,
+    "quality_gate": "failed",
+    "corrected_confirmed_defects": [
+      "361050 bounded structural biology goal accepted",
+      "361205 required neural and peripheral-physiology gaps retained",
+      "356811 inferred neural-recording edges downgraded and recording gap retained"
+    ],
+    "remaining_confirmed_defects": [
+      "361526:g-12 named fundable child incorrectly rejected as umbrella",
+      "362218 explicit hearing-restoration therapeutic goal incorrectly rejected as administrative"
+    ],
+    "next_action": "second focused decomposition-contract repair; preserve unchanged evidence-transfer prompts, criteria and reference population"
+  },
+  "cov4_result": {
+    "access": "available, returned claude-sonnet-5 on both calls",
+    "provider_requests": 2,
+    "estimated_spend_usd": 0.004764,
+    "quality_gate": "failed",
+    "positive_child": "own:360678-same-number correctly accepted",
+    "contaminant": "360678:x-org-bes incorrectly accepted as research area by established Sonnet",
+    "production_available_for_new_classifications": false,
+    "production_topics_published": 0,
+    "next_action": "retain failed established-route evidence and existing fail-closed pause; no additional Cov4 model/prompt search"
+  },
+  "logical_budget": {
+    "requests": 273,
+    "max_requests": 300,
+    "charged_usd": 2.77263,
+    "limit_usd": 15,
+    "remaining_requests": 27
+  },
+  "replay": {
+    "scopes": 9,
+    "new_provider_requests": 0,
+    "ledger_byte_identical": true
+  },
+  "recovery": {
+    "prior_available": 96,
+    "retained": 15,
+    "restored": 61,
+    "current_available": 76,
+    "paid_reassessed": 0,
+    "legitimately_removed": 0,
+    "pending": 20,
+    "live_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+  }
+}
