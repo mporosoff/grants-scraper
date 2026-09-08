@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-08T09:56:47.135Z",
+  "generated_at": "2026-09-08T15:58:34.118Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "response_model": "voyage-4-lite",
@@ -12,8 +12,8 @@
   "passage_count": 1640,
   "parent_passage_count": 1413,
   "child_passage_count": 227,
-  "corpus_sha256": "5cdb27281771a6491ae35683bc6563a1673bc114c14879b6a7f11636d9865a83",
-  "vector_sha256": "0fc7f7742e1c67e4115cda810fc6fd0d746cfd99a9aa43de30c4c8c00d8177e7",
+  "corpus_sha256": "669dc7e810c5e058737dd3b7fa609a4d4d2310c55fbd7a827d29ec65e460cc5c",
+  "vector_sha256": "658faa91f62bef34a58b261ff2bbe42dba99f02a0f8f89a54618a1ee784d4620",
   "vector_bytes": 3358720,
   "model_space_fingerprint": "c4d3be4b72e33661569455ec63b787810c60e206970d52211a6a01279ab2afb5",
   "model_space": {
@@ -21,17 +21,17 @@
     "canary_count": 6,
     "fingerprint_method": "sha256 of exact unrounded canaries and complete embedding configuration",
     "comparison_to_prior_generation": {
-      "prior_fingerprint": "f60bce25862886594a00dabbc8527a044dca1f05e684936d269b13039e3af4af",
-      "drift_detected": true,
-      "minimum_cosine": 0.99997,
-      "mean_cosine": 0.999974,
+      "prior_fingerprint": "c4d3be4b72e33661569455ec63b787810c60e206970d52211a6a01279ab2afb5",
+      "drift_detected": false,
+      "minimum_cosine": 1,
+      "mean_cosine": 1,
       "per_canary_cosine": {
-        "carbon-catalysis": 0.999972,
-        "critical-minerals": 0.99997,
-        "rural-health": 0.999979,
-        "quantum-sensing": 0.999973,
-        "maritime-autonomy": 0.999978,
-        "ecosystem-resilience": 0.999971
+        "carbon-catalysis": 1,
+        "critical-minerals": 1,
+        "rural-health": 1,
+        "quantum-sensing": 1,
+        "maritime-autonomy": 1,
+        "ecosystem-resilience": 1
       },
       "minimum_cosine_gate": 0.95,
       "mean_cosine_gate": 0.98,
@@ -55,7 +55,7 @@
   },
   "configuration_sha256": "0d744b1f0a030785424559ba7018e4375f608f6c503619753eba91dbb68fea47",
   "reuse_space_identity": "c4d3be4b72e33661569455ec63b787810c60e206970d52211a6a01279ab2afb5",
-  "canary_sha256": "78abf75cd35b1d88758cb301ef15e78ab45463b79f4c09fc400306c8e010f7f0",
+  "canary_sha256": "229d6971ac343c25a5a83ac25ce6fd7e834d4e0b1de9fc501d2401f050a14210",
   "stable_passage_id_contract": "parent:<opportunity_id> or child:<subtopic_id>",
   "passages": [
     {
@@ -2407,7 +2407,7 @@
       "parent_id": "347026",
       "passage_kind": "parent",
       "record_id": "347026",
-      "text_sha256": "c9fa9b8a2fdaae0fcb6199e41e7fccf12e108cabf64323d37b2a39ca1d144d2f",
+      "text_sha256": "25a9f1d5b6d4707bd623734b7527e8057b110e54297b664bdb1f0cb45b0fd76a",
       "vector_row": 293
     },
     {
@@ -3007,7 +3007,7 @@
       "parent_id": "353413",
       "passage_kind": "parent",
       "record_id": "353413",
-      "text_sha256": "015576badaa0197a326c9d78ecb9d231073a58cbb54445037170fec4c17e2db3",
+      "text_sha256": "c01f36ea0a1dbf829401cbc3a099f147314a09744243f8fdf0dc7c6db7f35422",
       "vector_row": 368
     },
     {
@@ -3399,7 +3399,7 @@
       "parent_id": "356119",
       "passage_kind": "parent",
       "record_id": "356119",
-      "text_sha256": "9a2e0b9c2a24d9d31b38e73c69be38b98cd2da795dfaadb74f3c15a840d4105e",
+      "text_sha256": "78005141240a4312944a037367b02683832b749adf4b9401c0a28973a584e298",
       "vector_row": 417
     },
     {
@@ -6175,7 +6175,7 @@
       "parent_id": "360149",
       "passage_kind": "parent",
       "record_id": "360149",
-      "text_sha256": "e738e05dc8c186757c27d36def1a85c23a733115319fa60e5807fe8a94cd3c29",
+      "text_sha256": "6b88c38ebceb1593ae73191d8a7b0c00b18c3859fcaef3e8428e247a89537572",
       "vector_row": 764
     },
     {
@@ -9471,7 +9471,7 @@
       "parent_id": "363199",
       "passage_kind": "parent",
       "record_id": "363199",
-      "text_sha256": "4e027bc4f52e880097b51f09713774c0bde0523ea3dfdebe6b633dd4df4557a7",
+      "text_sha256": "c0145ffdd13872e7363e5cc8f11baf7f79a7a2b34b36da4dc8305ac37bb40061",
       "vector_row": 1176
     },
     {
@@ -9943,7 +9943,7 @@
       "parent_id": "363331",
       "passage_kind": "parent",
       "record_id": "363331",
-      "text_sha256": "2d910069cfc2afd4f0fa04f1f33e0892df203d6edb28c2be755abc33af421530",
+      "text_sha256": "ac8fb616a3374b63780e88e915a0ce3bfb8441f2a07eb31957c3658c70a6137b",
       "vector_row": 1235
     },
     {
@@ -12479,7 +12479,7 @@
       "parent_id": "nsf-cbet:PD-26-370Y",
       "passage_kind": "parent",
       "record_id": "nsf-cbet:PD-26-370Y",
-      "text_sha256": "99758cc93ec8ddf8f8c5ceb2acfc75677932011ceb673f9c90be365407131f25",
+      "text_sha256": "b462ed929875368403254919d4d07a6a7a04a2fb03dd031ee0d31f100f0e1ed6",
       "vector_row": 1552
     },
     {
@@ -13111,7 +13111,7 @@
       "parent_id": "vpr-email:vpr-aed7d81578b24028",
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-aed7d81578b24028",
-      "text_sha256": "41f1734d86f5e09f4f7b9b2a740c8c3a07ceb25c715d23ef2453a103426db918",
+      "text_sha256": "10ffd5e8d95a234369d409b8098a35bbb1312794517f71c01447526da8d95c8f",
       "vector_row": 1631
     },
     {
@@ -13159,7 +13159,7 @@
       "parent_id": "vpr-email:vpr-e4ce54abf9b529bf",
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-e4ce54abf9b529bf",
-      "text_sha256": "930064815003d8a5422ef84accc761bbc820fae9bb22ed011550ec002fed6a49",
+      "text_sha256": "2094f351f03c48c224f5e747b83d3d9c0ad2e0cdb7a81cf1e3a314ad086a2189",
       "vector_row": 1637
     },
     {
@@ -13179,5 +13179,5 @@
       "vector_row": 1639
     }
   ],
-  "integrity_sha256": "acbcf40c105cab04df5a038a692f202ca9e330afe1e9ee36e17ac2c60ea8885f"
+  "integrity_sha256": "633a6ffdbebdd810bfa98fc5a1ff3001f27de38e7ecdfceb2fe6bb965e29f59e"
 }

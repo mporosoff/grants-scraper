@@ -1,5 +1,5 @@
 {
-  "generated_at": "2026-09-08T09:42:24Z",
+  "generated_at": "2026-09-08T15:55:18Z",
   "excluded_noncurrent": 0,
   "feeds": [
     {
@@ -30,7 +30,7 @@
     {
       "title": "Funding Finder | Artificial intelligence and machine learning",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml",
-      "count": 244
+      "count": 246
     },
     {
       "title": "Funding Finder | Arts and culture",
@@ -55,7 +55,7 @@
     {
       "title": "Funding Finder | Catalysis and reaction engineering",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml",
-      "count": 19
+      "count": 21
     },
     {
       "title": "Funding Finder | Climate change",
@@ -70,12 +70,12 @@
     {
       "title": "Funding Finder | Cybersecurity",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml",
-      "count": 179
+      "count": 180
     },
     {
       "title": "Funding Finder | Data science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml",
-      "count": 243
+      "count": 245
     },
     {
       "title": "Funding Finder | Education and workforce",
@@ -110,7 +110,7 @@
     {
       "title": "Funding Finder | Materials science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml",
-      "count": 49
+      "count": 51
     },
     {
       "title": "Funding Finder | Neuroscience",
@@ -125,7 +125,7 @@
     {
       "title": "Funding Finder | Quantum science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml",
-      "count": 29
+      "count": 30
     },
     {
       "title": "Funding Finder | Separations and membranes",
@@ -155,7 +155,7 @@
     {
       "title": "Funding Finder | Water",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml",
-      "count": 32
+      "count": 33
     },
     {
       "title": "Opportunity changes",
