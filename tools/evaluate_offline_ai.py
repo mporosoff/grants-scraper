@@ -80,6 +80,8 @@ def evaluation_contract(phase="teams-luna"):
 
 
 def phase_complete(phase, result):
+    if phase == 'preflight':
+        return result.get('status') == 'supported'
     if phase.startswith("teams-"):
         return result["completed"] == result["total"]
     if phase == "cov4":
@@ -229,14 +231,21 @@ def main():
         resume_preflight_credential(ledger)
     client = Client(ledger, args.state / "cache", deadline=time.monotonic() + 2400)
     marker = args.state / (args.phase + "-completed.json")
+    retained = json.loads(marker.read_bytes()) if marker.exists() else None
+    if args.phase == 'preflight' and retained and not phase_complete('preflight', retained['result']):
+        # Older entrypoints marked unavailable access as complete. Keep that
+        # evidence, but it must not impersonate a successful credential probe.
+        atomic_json(args.state / 'history' / ('preflight-' + identity(retained) + '.json'), retained)
+        marker.unlink()
+        retained = None
     contract = evaluation_contract(args.phase)
     if args.phase == "replay":
         contract = identity([contract, {path.name: identity(json.loads(path.read_bytes()))
                                        for path in sorted(args.state.glob("team-*.json"))}])
     result = None
     try:
-        if marker.exists():
-            result = json.loads(marker.read_bytes())
+        if retained is not None:
+            result = retained
             if result.get("evaluation_contract") != contract:
                 raise ValueError("evaluation_contract_changed; retained evidence is historical")
             result = result["result"]
