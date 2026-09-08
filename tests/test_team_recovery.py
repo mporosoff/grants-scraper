@@ -114,7 +114,7 @@ class RetainedTeamRecovery(unittest.TestCase):
                         self.assertEqual(row.get(field), before['opportunities'][0].get(field))
 
     def test_reviewed_citation_reprojection_preserves_decisions_and_requires_exact_proofs(self):
-        for key in ('363179', '357493'):
+        for key in ('363179',):
             for fault in (None, 'before', 'after', 'unknown_role', 'scope', 'decision', 'unreviewed', 'claim'):
                 with self.subTest(key=key, fault=fault):
                     model, candidates, registry, settings = (copy.deepcopy(self.model), copy.deepcopy(self.candidates),
@@ -161,6 +161,18 @@ class RetainedTeamRecovery(unittest.TestCase):
                                              {k: v for k, v in new.items() if k != 'source_quote'})
                         self.assertNotIn(key, teams.invalidate_stale_sources(model, teams.source_fingerprints(model, candidates)))
                         self.assertEqual(maintenance.restore_proven_teams(model, candidates, registry), [])
+
+    def test_generic_trial_objective_does_not_clear_coordination_role_revalidation(self):
+        model = copy.deepcopy(self.model)
+        model['opportunities'] = [r for r in model['opportunities'] if r['id'] == '357493']
+        before = copy.deepcopy(model)
+        current = next(c for c in self.candidates if c['id'] == '357493')
+        self.assertIn('investigator-initiated mid-phase clinical trials', current['text'])
+        self.assertNotIn('357493', config()['targeted_team_recovery']['reviewed_source_changes'])
+        with patch('requests.post', side_effect=AssertionError('Withheld evidence needs no provider')):
+            results = maintenance.restore_proven_teams(model, self.candidates, self.registry)
+        self.assertEqual(model, before)
+        self.assertEqual(results[0]['state'], 'pending')
 
     def test_curated_review_uses_its_own_source_contract_and_preserves_legacy_evidence(self):
         for key in ('363375', 'eere-exchange:DE-TA1-0003589'):
