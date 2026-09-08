@@ -90,6 +90,17 @@ Missing, conflicting or mixed serving provenance blocks publication. Health is
 only a compatibility handshake, never provenance. Changed Worker inputs deploy
 only after validation, with exact serving version captured for normal rollback.
 The pre-publication provider smoke and post-Pages provider smoke remain required.
+An older unannotated version may be reconciled read-only only when an isolated
+pinned build of protected Git inputs matches every authenticated serving module
+byte, the download ETag binds those bytes to the inspected version, all declared
+runtime/binding/route configuration matches, and the deployment stays unchanged
+at 100% traffic. The proof records file hashes, actual version, configuration
+fingerprint and protected input SHA. It does not claim that the older version
+was originally generated at that SHA. A missing annotation is never replaced by
+an assumed historical commit; any absent or mismatched proof blocks publication.
+Secrets are neither fetched nor retained. Assigned Durable Object namespace IDs
+are distinguished from the declared local class binding. Unknown deployment
+configuration is rejected before any local build command runs.
 Pages staging re-reads authenticated active deployment/version metadata after the
 protected PR wait. Live verification, including a manual `verify` retry, checks
 the exact retained `worker-after.json` version, Git checkpoint and complete input
