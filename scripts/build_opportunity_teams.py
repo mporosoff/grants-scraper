@@ -836,6 +836,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--generate", action="store_true")
     parser.add_argument("--mode", choices=("maintenance", "backfill", "pilot", "replay"), default="maintenance")
+    parser.add_argument("--recovery-only", action="store_true", help="Limit paid selection to the pinned previously available scopes")
     parser.add_argument("--baseline", type=Path)
     parser.add_argument("--state", type=Path)
     parser.add_argument("--max-scopes", type=int, default=60)
@@ -894,6 +895,7 @@ def main():
     previous_snapshot = (json.loads(args.baseline.read_bytes()) if args.baseline else
                          model.get("accepted_scope_snapshot") or current_snapshot)
     affected_contracts = maintenance.migrate_legacy(model, candidates, claims_generation, current_snapshot['claims'])
+    recovery_results = maintenance.restore_proven_teams(model, candidates, registry)
     attempts = model.setdefault("generation_attempts", {})
     def attempt_key(scope, state=None):
         attempt = attempts.get(scope["id"])
@@ -916,6 +918,12 @@ def main():
         pending, existing, attempts, previous_snapshot, current_snapshot,
         maintenance.retained_queue_reasons(retained_report, input_generation, RESPONSE_VERSION))
     selected = backfill_queue if args.mode == 'backfill' else maintenance_queue
+    recovery = settings.get('targeted_team_recovery')
+    if args.recovery_only:
+        if not recovery or args.mode not in ('maintenance', 'pilot'):
+            parser.error('Recovery requires a pinned prior publication and maintenance/pilot mode')
+        selected = [scope for scope in selected if scope['id'] in recovery['published_decisions']]
+        args.max_scopes = min(args.max_scopes, recovery['max_scopes_per_batch'])
     if args.mode == 'replay':
         selected = []
     due = [s for s in selected if attempt_due(attempts.get(s["id"]), attempt_key(s))
@@ -931,6 +939,9 @@ def main():
               "eligibility": eligibility,
               "source_invalidations": affected_sources, "assessment_invalidations": affected_contracts,
               "assembly_updates": assembly_updates,
+              "targeted_recovery": {"published_scope_count": len(recovery['published_decisions']),
+                  "deterministic_results": recovery_results, "recovery_only": args.recovery_only,
+                  "selected_pending_scopes": len(selected)} if recovery else None,
               "coverage_before": coverage(existing.values()), "results": []}
     provider = None
     if args.generate and claims and due:

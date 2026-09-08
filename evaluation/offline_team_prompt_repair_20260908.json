@@ -1,0 +1,599 @@
+{
+  "version": 1,
+  "protocol_sha256": "0ee3c2e9fbe13e1873362344bbcf024736975ed983ead20d4fd1f7479f853b33",
+  "evaluation_sha": "6b0eeca92db892d8294d8b74ba31b9725f41e1a4",
+  "acceptance": {
+    "critical_false_accepts": 0,
+    "fabricated_quotes_or_claims": 0,
+    "unsupported_upgrades": 0,
+    "cross_topic_leakage": 0,
+    "scope_decision_accuracy_min": 0.9,
+    "legitimate_scope_acceptance_min": 0.85,
+    "useful_proposals_noninferiority_absolute": 0.1,
+    "valid_schema_fraction_min": 0.95,
+    "manual_source_annotation_review_required": true
+  },
+  "new_route_promoted": false,
+  "routes": {
+    "sonnet": {
+      "run": "34265194226",
+      "receipt_sha256": "813668472d0d48ef56f551548a2998a28c67fe990108f0c117fa092b0be16602",
+      "receipt": {
+        "complete": true,
+        "evaluation_contract": "bff617c7d6d747e0b590670fa5ddef40d6c10fcb1938e3eea88f74ff92ab675a",
+        "protocol_sha256": "0ee3c2e9fbe13e1873362344bbcf024736975ed983ead20d4fd1f7479f853b33",
+        "result": {
+          "completed": 24,
+          "decision": "pending_independent_source_review",
+          "holdout": {
+            "completed": 6,
+            "legitimate_acceptance": 0.6666666666666666,
+            "legitimate_accepted": 2,
+            "legitimate_scopes": 3,
+            "proposed": 1,
+            "scope_accuracy": 0.8333333333333334,
+            "scope_correct": 5,
+            "total": 6
+          },
+          "legitimate_acceptance": 0.8333333333333334,
+          "legitimate_accepted": 15,
+          "legitimate_scopes": 18,
+          "proposed": 12,
+          "route": "sonnet",
+          "scope_accuracy": 0.875,
+          "scope_correct": 21,
+          "total": 24
+        }
+      },
+      "requests": 59,
+      "retries": 3,
+      "estimated_cost_usd": 1.746518,
+      "request_statuses": {
+        "valid": 56,
+        "ValueError": 3
+      },
+      "known_usage": {
+        "input_tokens": 259819,
+        "cached_input_tokens": 0,
+        "output_tokens": 122688
+      },
+      "returned_models": [
+        "claude-sonnet-5"
+      ],
+      "cases": [
+        {
+          "scope_id": "344592:ab-0019",
+          "case_hash": "b3372cfe01fb479273df6bcf883ea4bc893522144726864009d12480a4b8dcc3",
+          "holdout": false,
+          "result_sha256": "7db4d52a6b65a443c581ba64bc2a2f44ad0c6dbb82fbe1baa47dab8c1e472b2e",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "344592:ab-0079",
+          "case_hash": "2a540d1ed45d6223f583294bcd572675d2790d6088a084bc8917bdc9c16c68ce",
+          "holdout": false,
+          "result_sha256": "b4444ad8f826a1577826234cabddc75d929e3cfdec3c75e4fb0b0254b763675a",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "358021",
+          "case_hash": "43d0a170fb8761cdecb516f1263ea21e1346cbf4e1222f5c00c14217ef5b9df6",
+          "holdout": false,
+          "result_sha256": "462242b6f59628ecfb45e44fcf6be93895cb755c6dca61fbaa279f485e48fe87",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "361050",
+          "case_hash": "aac5b86894950b2e4b18aca2413a45f356bb5c131a38cfe2d97a6013c2d30b6e",
+          "holdout": false,
+          "result_sha256": "a97640e14dba1a30d67b518298422e5ac229164e03ec95938a4508eb233fd431",
+          "state": "not_specific",
+          "expected_scope": "bounded_research",
+          "scope_correct": false
+        },
+        {
+          "scope_id": "361205",
+          "case_hash": "2235e77fdb434903c71ce27f8a28fc1dc86917f3d733057f091bcb8690f4af81",
+          "holdout": false,
+          "result_sha256": "2f026942e9d292b446d3aff56c7947b0f2786ef1a2042fcdde2b9220a430ecea",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "361526:g-12",
+          "case_hash": "966c956650548810f961ed22890512cbd71eaeab345f3088ab800b7bcfff5647",
+          "holdout": false,
+          "result_sha256": "46c7cf401d9405b4b4fca3fe1b7468d791a035894fd0acbf235c85c123fdfca9",
+          "state": "not_specific",
+          "expected_scope": "bounded_research",
+          "scope_correct": false
+        },
+        {
+          "scope_id": "363489",
+          "case_hash": "5512e218ae3aa210cc07100986a24f5f7a4a72bb63379ef6d1cd18a27868cbfb",
+          "holdout": false,
+          "result_sha256": "fe8f01560d772e6d3542ce66d976d880788696f2b26264ce78e33a4f26555a70",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "356888",
+          "case_hash": "d2f47ba91da69869246bb4ee3d356a56ca081d5e3ae34a5e1bfa014a624d2a72",
+          "holdout": false,
+          "result_sha256": "310aa833ffc621f1bd67d99da2cc188388d7d1bf304119ec9829a3d08952bfbd",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "356981",
+          "case_hash": "dc47ba06b4332d90daf55f574a5426afe0b86d158f361d5591daaddc4e48df4d",
+          "holdout": false,
+          "result_sha256": "c2b50d95f2aa95579884ec2114649fb063fdd31d09404350f01d93051e5c705a",
+          "state": "insufficient_evidence",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "357337",
+          "case_hash": "bad85f9a9c85a0472f7feb41a9dd9b5ff62dfb02b3fbc86fe95151b378cef975",
+          "holdout": false,
+          "result_sha256": "d69e4907665ec12f78012e9043301943211b56ffba5939d27ec3390151b8c37e",
+          "state": "insufficient_evidence",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "357137",
+          "case_hash": "421bcca4e733cc5e7d5e860f8c17f8debd1016122512d0dca936f54eeb41a263",
+          "holdout": false,
+          "result_sha256": "ed99ba28ad2bdeb34177bc2092c171bef4de336314346e31e465c3e93ce6fa8d",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "357308",
+          "case_hash": "080b4d0c520e0452b3f51daa66b555901112b5ac9495da8141ac680d6a9861c7",
+          "holdout": false,
+          "result_sha256": "14129fc503eff4469c2ff102286bc1076dee6af01ce59317a6fc4717790d683f",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "360398",
+          "case_hash": "3997ec3648b6012f2e70b45163672431868932b8177d8393529b3ca4af381cb1",
+          "holdout": false,
+          "result_sha256": "932556c19da266bdd335684ff05b18644f517afb67937f13d2987899999b3dac",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "342475",
+          "case_hash": "3472d137eb0f5be6923e50fb33d368e5207b902eee73335273cedc109dbf5e92",
+          "holdout": false,
+          "result_sha256": "2dbe5138b95e771d82114a6fd98bed8233265e45df909c629478168750ec05f7",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "356811",
+          "case_hash": "8ab31021bdee9fafdcc9ffd12db9507b2063ca92cff99dba600538dfb890fbe6",
+          "holdout": false,
+          "result_sha256": "44ff04f2a2df0eb9e7e6c187cbb178287a8253b4d50f85bfad4cdca23daf7f77",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363616",
+          "case_hash": "5f11d7ba09da48f54e10269c27965d15accd02dc1b694b03daf35df9cad93e5f",
+          "holdout": false,
+          "result_sha256": "dc5a5cc355a13786bc6970348570c279d4cb99359d5668ef72c96de00815b4df",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363618",
+          "case_hash": "d7fcf628f622e7062500d848673702c186b749cc6593d610603010cac2d8add0",
+          "holdout": false,
+          "result_sha256": "d46df88dd40b73e69e817e086a652d7317f09a9512c548c69ed74b882a425727",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "360006",
+          "case_hash": "62fd10e3aeb2e7627ef845fc50326efb1a60dad91218c1e0b8f4237d72551393",
+          "holdout": false,
+          "result_sha256": "46e82bee2fa9bfedd01f2069655ac2a116da068f92ddc599ea9741cee5100a77",
+          "state": "unsuitable_scope",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363302:a-1",
+          "case_hash": "3f60c65df44b78fd2e233c46e371cc827850e9f5c63e1a29baa428156c629a5f",
+          "holdout": true,
+          "result_sha256": "c2c598a602ff77447bb1cc1a3973389d0b964dd50f1f518af8acde2d014e5aa5",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "362218",
+          "case_hash": "57baf3ceb8b21073fc78d07bba3812a01ce322b0c0a11f980ef62424de2cd146",
+          "holdout": true,
+          "result_sha256": "99156c72df9f3f4e44db1e916688347da7a6e5f8d66cdb719fd0d133ba1abc2a",
+          "state": "not_specific",
+          "expected_scope": "bounded_research",
+          "scope_correct": false
+        },
+        {
+          "scope_id": "361532",
+          "case_hash": "9c3a5c8515b636559f8be1d56a4cbb7a1e58bb1de4ba9cc0ff0836d6c12a8b3c",
+          "holdout": true,
+          "result_sha256": "10d6faa0cd2299a1048e8b5f1e0a6df10b2cd3929280ee865d0cc29902e7a401",
+          "state": "insufficient_evidence",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363290",
+          "case_hash": "46e10950b2d3b876b3f118f47cb1ca5e78c4b9a49a352e71a138a234b2d45975",
+          "holdout": true,
+          "result_sha256": "424aa24be2bfa93324da95d460795547ada02c15aa37afd90de44503d86dd174",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363525",
+          "case_hash": "9fce28f18f025396c585cbbc19b2ac31ab8afd34e2603d0c3f07894bd08d4749",
+          "holdout": true,
+          "result_sha256": "8f5ca4ba33b1d8bf73c989c8e117760d2e948f687a0cd25867fadf46ef80f10d",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "362378",
+          "case_hash": "96a5521797c0aa1f9db79fcb46a5738555c2714a7a2746e1ceb79ced597ef651",
+          "holdout": true,
+          "result_sha256": "05c0df4753d59aa462abaec9ebf4b1cead3660d567161c1946cf6fecc0472ce8",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        }
+      ],
+      "quality": "failed_unchanged_scope_gates"
+    },
+    "luna": {
+      "run": "34267226821",
+      "receipt_sha256": "f9f018a5b035dd02f735c5c0a3814b0ed504b43d96493d919a4cd9b168eb7659",
+      "receipt": {
+        "complete": true,
+        "evaluation_contract": "a5d5a75182f2c025d6fdfa347005b444962e54ba5827947ece883eb68312d431",
+        "protocol_sha256": "0ee3c2e9fbe13e1873362344bbcf024736975ed983ead20d4fd1f7479f853b33",
+        "result": {
+          "completed": 24,
+          "decision": "pending_independent_source_review",
+          "holdout": {
+            "completed": 6,
+            "legitimate_acceptance": 0.3333333333333333,
+            "legitimate_accepted": 1,
+            "legitimate_scopes": 3,
+            "proposed": 0,
+            "scope_accuracy": 0.6666666666666666,
+            "scope_correct": 4,
+            "total": 6
+          },
+          "legitimate_acceptance": 0.7777777777777778,
+          "legitimate_accepted": 14,
+          "legitimate_scopes": 18,
+          "proposed": 11,
+          "route": "luna",
+          "scope_accuracy": 0.8333333333333334,
+          "scope_correct": 20,
+          "total": 24
+        }
+      },
+      "requests": 52,
+      "retries": 0,
+      "estimated_cost_usd": 0.062044,
+      "request_statuses": {
+        "valid": 52
+      },
+      "known_usage": {
+        "input_tokens": 168058,
+        "cached_input_tokens": 0,
+        "output_tokens": 23676
+      },
+      "returned_models": [
+        "gpt-5.6-luna"
+      ],
+      "cases": [
+        {
+          "scope_id": "344592:ab-0019",
+          "case_hash": "b3372cfe01fb479273df6bcf883ea4bc893522144726864009d12480a4b8dcc3",
+          "holdout": false,
+          "result_sha256": "2d505d8598505da6da990f2066c0fe69621ca90f92df475e354083e7a4bf0bf0",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "344592:ab-0079",
+          "case_hash": "2a540d1ed45d6223f583294bcd572675d2790d6088a084bc8917bdc9c16c68ce",
+          "holdout": false,
+          "result_sha256": "457ee2bb3b6227403277335ec5766c6a0f47c0e57f3311c8e7dabbb052947ade",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "358021",
+          "case_hash": "43d0a170fb8761cdecb516f1263ea21e1346cbf4e1222f5c00c14217ef5b9df6",
+          "holdout": false,
+          "result_sha256": "b45d31ec1be5433a9fe9a64ac3fc78ea90a8ef888d8dbbe54ab64de624095776",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "361050",
+          "case_hash": "aac5b86894950b2e4b18aca2413a45f356bb5c131a38cfe2d97a6013c2d30b6e",
+          "holdout": false,
+          "result_sha256": "fffc4f35d46d16a440e5e3d554b4db665dcc162246bc5dd8464fd90008c48aa8",
+          "state": "not_specific",
+          "expected_scope": "bounded_research",
+          "scope_correct": false
+        },
+        {
+          "scope_id": "361205",
+          "case_hash": "2235e77fdb434903c71ce27f8a28fc1dc86917f3d733057f091bcb8690f4af81",
+          "holdout": false,
+          "result_sha256": "e1d061cc9ad4027ef14940c26fedad51cc46fd71f08ca0b2736069f0071272aa",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "361526:g-12",
+          "case_hash": "966c956650548810f961ed22890512cbd71eaeab345f3088ab800b7bcfff5647",
+          "holdout": false,
+          "result_sha256": "3cb7b159a3e9a2a320cb7359e6ffdc3f63efc416422e0e4fe5d5d24852d52b3e",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363489",
+          "case_hash": "5512e218ae3aa210cc07100986a24f5f7a4a72bb63379ef6d1cd18a27868cbfb",
+          "holdout": false,
+          "result_sha256": "df1633a576ad808095601083cd481c55855c4ae0b28d4cbcc20ee7fe05e1c2d0",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "356888",
+          "case_hash": "d2f47ba91da69869246bb4ee3d356a56ca081d5e3ae34a5e1bfa014a624d2a72",
+          "holdout": false,
+          "result_sha256": "001e9c0e4e1db6b4a4631f02dff3c0aab45eda31c73e1e8e6f2fbe3db3f1ba00",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "356981",
+          "case_hash": "dc47ba06b4332d90daf55f574a5426afe0b86d158f361d5591daaddc4e48df4d",
+          "holdout": false,
+          "result_sha256": "4da1a937b0beafa89a9a0d55d6d793dfe0e58eda0a5621e95e2daa4eabf7439c",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "357337",
+          "case_hash": "bad85f9a9c85a0472f7feb41a9dd9b5ff62dfb02b3fbc86fe95151b378cef975",
+          "holdout": false,
+          "result_sha256": "8fd4bc170e415ca0c83a1b6df9a0710efd1297271c51c187814f0db750a47c67",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "357137",
+          "case_hash": "421bcca4e733cc5e7d5e860f8c17f8debd1016122512d0dca936f54eeb41a263",
+          "holdout": false,
+          "result_sha256": "f6504465f4274d1194e2023cac9f6578fa2373f31729f81ccf8eea27d05e953f",
+          "state": "insufficient_evidence",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "357308",
+          "case_hash": "080b4d0c520e0452b3f51daa66b555901112b5ac9495da8141ac680d6a9861c7",
+          "holdout": false,
+          "result_sha256": "2b20526957c43a6462f7e1036235ab946430d06b19ec50e5fc3e87a0ab22f9d8",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "360398",
+          "case_hash": "3997ec3648b6012f2e70b45163672431868932b8177d8393529b3ca4af381cb1",
+          "holdout": false,
+          "result_sha256": "43b6016f0c0b870481c785641492aaf46347abaad2a9b692840bad5d9eaabcf4",
+          "state": "insufficient_evidence",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "342475",
+          "case_hash": "3472d137eb0f5be6923e50fb33d368e5207b902eee73335273cedc109dbf5e92",
+          "holdout": false,
+          "result_sha256": "c44c60e3ea225b863c50b860dc57a1c14ceb0112c77b830ae45f375e4d68a18c",
+          "state": "not_specific",
+          "expected_scope": "bounded_research",
+          "scope_correct": false
+        },
+        {
+          "scope_id": "356811",
+          "case_hash": "8ab31021bdee9fafdcc9ffd12db9507b2063ca92cff99dba600538dfb890fbe6",
+          "holdout": false,
+          "result_sha256": "8bc43411e57adc761d7bbd69c173561ef0aa3b8eb1a33d6b1c50ecc7f228ceeb",
+          "state": "proposed",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363616",
+          "case_hash": "5f11d7ba09da48f54e10269c27965d15accd02dc1b694b03daf35df9cad93e5f",
+          "holdout": false,
+          "result_sha256": "a0820e9d240b5ae71c650cdb8cae19f546d7ddbf0e1122eb2d3dac8b5c0b4e9c",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363618",
+          "case_hash": "d7fcf628f622e7062500d848673702c186b749cc6593d610603010cac2d8add0",
+          "holdout": false,
+          "result_sha256": "f10e8d7ca56fe98951194f3eed3d3cb713fbb888a8375da67495e4ad50efd1f2",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "360006",
+          "case_hash": "62fd10e3aeb2e7627ef845fc50326efb1a60dad91218c1e0b8f4237d72551393",
+          "holdout": false,
+          "result_sha256": "2843c3f19d4b3a791cfb85fd9e703cd90d1391b647865d73dc6a58c9a83da789",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363302:a-1",
+          "case_hash": "3f60c65df44b78fd2e233c46e371cc827850e9f5c63e1a29baa428156c629a5f",
+          "holdout": true,
+          "result_sha256": "5f75a30bba657bc1772366c8b100df2fe78ccad1893a230231053643d3303c71",
+          "state": "insufficient_evidence",
+          "expected_scope": "bounded_research",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "362218",
+          "case_hash": "57baf3ceb8b21073fc78d07bba3812a01ce322b0c0a11f980ef62424de2cd146",
+          "holdout": true,
+          "result_sha256": "6f8431ea159743cde663a29b0a93cc7b542786ca4f1ab81d040597f02dbd21eb",
+          "state": "not_specific",
+          "expected_scope": "bounded_research",
+          "scope_correct": false
+        },
+        {
+          "scope_id": "361532",
+          "case_hash": "9c3a5c8515b636559f8be1d56a4cbb7a1e58bb1de4ba9cc0ff0836d6c12a8b3c",
+          "holdout": true,
+          "result_sha256": "406bd299881a65c815e1d4312b3baf9174ce67c96a1fbb370a1b6d6fafe59d34",
+          "state": "not_specific",
+          "expected_scope": "bounded_research",
+          "scope_correct": false
+        },
+        {
+          "scope_id": "363290",
+          "case_hash": "46e10950b2d3b876b3f118f47cb1ca5e78c4b9a49a352e71a138a234b2d45975",
+          "holdout": true,
+          "result_sha256": "61ca9d230bd633c9cfc1a8dd55619c70a9bf39dfb223f0d4d2d55868a03e843d",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "363525",
+          "case_hash": "9fce28f18f025396c585cbbc19b2ac31ab8afd34e2603d0c3f07894bd08d4749",
+          "holdout": true,
+          "result_sha256": "0473811ae0d8aea4e59de55624358e7229fabbf305d21d9d38c59c56fc694f8d",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        },
+        {
+          "scope_id": "362378",
+          "case_hash": "96a5521797c0aa1f9db79fcb46a5738555c2714a7a2746e1ceb79ced597ef651",
+          "holdout": true,
+          "result_sha256": "cb5687cd12f13d791bda2921bbe332eeab3b99475e8bb4078135af9f9c0187e8",
+          "state": "not_specific",
+          "expected_scope": "reject",
+          "scope_correct": true
+        }
+      ],
+      "quality": "failed_unchanged_scope_gates"
+    }
+  },
+  "sonnet_consequential_findings": [
+    {
+      "scope_ids": [
+        "361050",
+        "361526:g-12",
+        "362218"
+      ],
+      "contract": "Accept source-backed bounded research goals without requiring a single project or method.",
+      "observed": "Three legitimate scopes rejected as broad mechanisms or titles.",
+      "consequence": "Previously supported research scopes lose team coverage."
+    },
+    {
+      "scope_id": "361205",
+      "contract": "Preserve explicit essential capabilities and honest gaps.",
+      "observed": "The trial produces gate_state=pass and missing_skills=[] despite absent direct synchronous neural and peripheral-physiology measurement evidence. The broad biobehavioral role merges distinct source requirements.",
+      "consequence": "The proposed team appears complete without required capabilities."
+    },
+    {
+      "scope_id": "356811",
+      "claim_ids": [
+        "urh-000087-c001",
+        "urh-000011-c001"
+      ],
+      "contract": "Do not infer experimental capability from a domain label or modeling evidence.",
+      "observed": "Verification upgrades neural encoding of speech in noise and peripheral auditory neurobiology to a covering neural-recording contribution by inferring electrophysiological recording.",
+      "consequence": "The published gap list would omit an unproven recording capability."
+    }
+  ],
+  "limitations": [
+    "These are finite source/claim-frozen trials, not corpus-wide accuracy estimates.",
+    "The original Sonnet baseline is now available but does not satisfy the unchanged quality thresholds; new production requests remain paused pending a focused consequential-defect repair.",
+    "Repaired Luna fails mandatory gates; no stability run, promotion, hybrid or further model search is justified.",
+    "Original trial evidence and all ledger charges remain retained. Provider outputs from these runs have not been published.",
+    "Functional recovery of independently proven prior teams does not depend on promoting Luna."
+  ],
+  "logical_spend": {
+    "requests": 250,
+    "limit_requests": 300,
+    "charged_usd": 2.16028,
+    "limit_usd": 15,
+    "production_anthropic_pause": "retained_pending_quality_repair",
+    "evaluation_anthropic_pause": "bounded_baseline_scope_only"
+  },
+  "warm_replay": {
+    "run": "34268178167",
+    "complete": true,
+    "completed_scopes_replayed": 48,
+    "new_provider_requests": 0,
+    "ledger_byte_identical": true,
+    "receipt_sha256": "a84ce15fb579ec149c154b16539a9dce5d5b501894c1d30fd0b34afcc9f39083"
+  }
+}

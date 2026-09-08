@@ -22,6 +22,37 @@ Current proposal coverage and processing outcomes are recorded by
 generation, generation mode, and completion status before using a receipt.
 Counts are diagnostics, not scientific quality gates.
 
+### Targeted recovery of prior availability
+
+The current recovery manifest in `config/offline_ai.json` pins the 96 scopes
+available in protected publication `1730af28abd77cd38abf44f56c99bb1bb5231f60`,
+including hashes of its canonical/public files and individual scientific graphs.
+The prior pipeline is reproduced from protected history. Its relevant
+deterministic validators match current code; later prompt changes spelled out
+existing schema constraints. This does not authorize blanket flag clearing.
+
+`restore_proven_teams` requires an exact retained graph, compatible scientific
+contract, current source fingerprint, eligible current researcher claims and
+revisions, valid source quotes, and successful current complementary-team
+assembly. It checks an active copy before changing a withheld row, preserves
+original generation attribution, and records a separate zero-request recovery
+proof. Missing provenance or changed evidence remains withheld.
+
+Before this repair, 15 of those scopes remain available. A read-only assessment
+finds 61 additional exact decisions restorable, 19 source-changed scopes needing
+reassessment, and one declared branch needing source revalidation. These are
+prepublication counts, not a claim that recovery is already live or complete.
+
+Team-only assembly uses `--recovery-only` while this manifest is configured:
+paid selection is restricted to previously available scopes, at most five per
+batch, within the existing pilot/maintenance spend ceilings. Ordinary source
+maintenance and explicitly requested backfill retain their separate selection
+contracts. No source collection, document extraction, or semantic vector build
+is required for this recovery. Completed work is retained between batches.
+The generation report records deterministic restorations separately from new
+assessments and pending work. The independent provider comparison does not
+gate restoration of already-proven decisions.
+
 Deferred maintenance keeps its queue ownership when the accepted source snapshot
 advances, including older failed or backfill attempts that become maintenance
 after a source change. Their original decision key, failure state, cooldown, and
