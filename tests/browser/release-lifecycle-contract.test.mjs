@@ -82,6 +82,26 @@ test('verified historical upload checkpoint fingerprints actual input bytes with
   assert.equal(value.version_id, id);
 });
 
+test('automatic deployment summary requires exact full active-version provenance', () => {
+  const message=version.annotations['workers/message'];
+  const summarized={...deployment,source:'wrangler',annotations:{
+    'workers/triggered_by':'upload','workers/message':`${message.slice(0,47)}...`}};
+  const serving=servingFingerprint([summarized],version);
+  assert.equal(serving.fingerprint,fp);
+  assert.equal(serving.checkpoint.baseSha,sha);
+  assert.equal(serving.checkpoint.source,'active-version-message');
+  assert.equal(decideWorker(fp,serving).deploy_required,false);
+  assert.equal(verifyServingIdentity(fp,decideWorker(fp,serving),serving).verified,true);
+  for(const change of ['different_prefix','non_upload','missing_version_message','malformed_full_message']) {
+    const d=structuredClone(summarized),v=structuredClone(version);
+    if(change==='different_prefix') d.annotations['workers/message']=`protected-main:${'c'.repeat(33)}...`;
+    if(change==='non_upload') d.annotations['workers/triggered_by']='deployment';
+    if(change==='missing_version_message') v.annotations={};
+    if(change==='malformed_full_message') v.annotations['workers/message']=`${message}; input-sha256:bad`;
+    assert.throws(() => servingFingerprint([d],v),undefined,change);
+  }
+});
+
 test('live retries verify freshly read active version and complete inputs against retained publication', () => {
   const expected = decideWorker(fp, servingFingerprint([deployment], version));
   let reads = 0;

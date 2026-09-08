@@ -108,18 +108,24 @@ export async function reconcile(baseSha, expectedDeployment, expectedVersion, {r
   if (before.versionId !== expectedVersion || before.deployment.id !== expectedDeployment) throw new Error('Serving Worker changed before reconciliation');
   const version = await request(`/versions/${expectedVersion}`);
   if (version.id !== expectedVersion) throw new Error('Serving version metadata mismatch');
-  const response = await request('', true);
-  const etag = response.headers.get('etag')?.replaceAll('"', '');
-  if (!etag || etag !== version.resources?.script?.etag) throw new Error('Downloaded Worker is not the inspected serving version');
+  // Script download returns the latest upload, which need not be serving after
+  // rollback. This authenticated API binds every module to the exact active ID.
+  const content = await request(`/versions/${expectedVersion}?include=modules`, 'workers');
+  if (content.id !== expectedVersion || !Array.isArray(content.modules) || !content.modules.length) {
+    throw new Error('Downloaded Worker is not the inspected serving version');
+  }
+  const etag = version.resources?.script?.etag;
+  if (!/^[a-f0-9]{64}$/.test(etag || '')) throw new Error('Missing inspected serving script identity');
   const modules = {};
-  for (const [name, file] of await response.formData()) {
-    if (Object.hasOwn(modules, name) || name.includes('/') || name.includes('\\')) {
+  for (const {name, content_base64: encoded, content_type: type} of content.modules) {
+    if (typeof name !== 'string' || !name || Object.hasOwn(modules, name) || name.includes('/') || name.includes('\\')
+        || type !== 'application/javascript+module') {
       throw new Error('Unsupported or ambiguous serving Worker module');
     }
-    // Cloudflare returns JavaScript parts without a filename parameter; native
-    // FormData exposes those UTF-8 parts as strings. Binary/file parts retain
-    // their raw bytes. Either form must hash exactly to the protected build.
-    modules[name] = hash(typeof file === 'string' ? Buffer.from(file, 'utf8') : Buffer.from(await file.arrayBuffer()));
+    if (typeof encoded !== 'string' || Buffer.from(encoded, 'base64').toString('base64') !== encoded) {
+      throw new Error('Malformed serving Worker module bytes');
+    }
+    modules[name] = hash(Buffer.from(encoded, 'base64'));
   }
   verifyModules(built.modules, modules);
   const configurationFingerprint = verifyConfiguration(built.config, version.resources);
@@ -130,7 +136,7 @@ export async function reconcile(baseSha, expectedDeployment, expectedVersion, {r
   return {fingerprint:fingerprintFiles(files), version_id:expectedVersion,
     checkpoint:{baseSha, source:'verified-serving-bytes', activeDeploymentId:expectedDeployment, activeVersionId:expectedVersion},
     reconciliation:{schema_version:1, observed_at:new Date().toISOString(), protected_input_sha:baseSha,
-      script_etag:etag, module_hashes:modules, input_hashes:files, configuration_fingerprint:configurationFingerprint,
+      script_etag:etag, content_version_id:content.id, module_hashes:modules, input_hashes:files, configuration_fingerprint:configurationFingerprint,
       method:'authenticated-serving-bytes-and-configuration', production_mutated:false}};
 }
 
@@ -138,11 +144,12 @@ async function run() {
   const [baseSha, deployment, version] = process.argv.slice(2);
   const account = process.env.CLOUDFLARE_ACCOUNT_ID, token = process.env.CLOUDFLARE_API_TOKEN;
   if (!account || !token) throw new Error('Existing Cloudflare credentials are required for read-only provenance reconciliation');
-  const prefix = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(account)}/workers/scripts/funding-finder-voyage-search`;
-  const request = async (suffix, raw=false) => {
-    const response = await fetch(prefix + suffix, {headers:{Authorization:`Bearer ${token}`}, signal:AbortSignal.timeout(30_000)});
+  const prefix = `https://api.cloudflare.com/client/v4/accounts/${encodeURIComponent(account)}/workers`;
+  const request = async (suffix, api='scripts') => {
+    if (!['scripts', 'workers'].includes(api)) throw new Error('Unsupported serving provenance API');
+    const response = await fetch(`${prefix}/${api}/funding-finder-voyage-search${suffix}`,
+      {headers:{Authorization:`Bearer ${token}`}, signal:AbortSignal.timeout(30_000)});
     if (!response.ok) throw new Error(`Serving provenance read failed (HTTP ${response.status})`);
-    if (raw) return response;
     const value = await response.json();
     if (!value.success || !value.result) throw new Error('Serving provenance API response was incomplete');
     return value.result;

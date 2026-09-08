@@ -15,8 +15,15 @@ export function fingerprintFiles(files) {
 export function servingFingerprint(deployments, version, readCheckpointFiles, reconcileUnannotated) {
   const active = activeDeployment(deployments);
   if (version?.id !== active.versionId) throw new Error('Active Search Worker version metadata mismatch');
-  const messages = [version.annotations, active.deployment.annotations]
-    .map(value => String(value?.['workers/message'] || ''));
+  const uploaded = String(version.annotations?.['workers/message'] || '');
+  const deployed = String(active.deployment.annotations?.['workers/message'] || '');
+  // Automatic uploads retain a 50-character deployment summary while the
+  // immutable version keeps the full message. Only an exact redundant summary
+  // may be omitted; the full version provenance below must still verify.
+  const uploadSummary = active.deployment.source === 'wrangler'
+    && active.deployment.annotations?.['workers/triggered_by'] === 'upload'
+    && uploaded.length > 50 && deployed === `${uploaded.slice(0, 47)}...`;
+  const messages = uploadSummary ? [uploaded] : [uploaded, deployed];
   const hashes = messages.map(value => {
     if (value.includes('protected-main:') && (!/^protected-main:[a-f0-9]{40}(?:;|$)/.test(value)
         || value.split('protected-main:').length !== 2)) throw new Error('Malformed Search Worker Git provenance');
