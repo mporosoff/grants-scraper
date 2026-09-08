@@ -18292,7 +18292,7 @@
       "state": "deferred"
     }
   },
-  "generation_id": "18ed4772c72bf854a115aae627cbc159a7716712c256c86c73af072121ca6380",
+  "generation_id": "908917089a74b0bd9bbc5abd3f34920256c27d471300cad8bde59c92287bc46e",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
@@ -19265,8 +19265,36 @@
       "opportunity_number": "R26AS00052",
       "parent_id": "363375",
       "record_type": "specific_parent",
-      "revalidation_reason": "The official opportunity scope changed or is no longer eligible.",
-      "review_state": "needs_revalidation",
+      "recovery_proof": {
+        "provider_requests": 0,
+        "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+        "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+        "retained_decision_hash": "ecbac4afe86b9651834352dbefc06b4b722a5bd20268d8846888a21f3fd75ef1",
+        "source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
+        "source_revalidation": {
+          "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment.",
+          "prior_source_fingerprint": "662d5c63faf785a4d1ba1edcc27bccbdba6343a76afee86ccf7989e6250db5b3",
+          "record_type": "specific_parent",
+          "review_kind": "curated_source_revalidation",
+          "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
+          "reviewed_profile_hashes": {
+            "urh-000014": "c9e6d8ea9e1cf52764277c8f1225b24a33d3426a5e3571730dbc83f40e60ac30",
+            "urh-000017": "dc3ce9fcba9719fddd9219c45d41c41bbe49c5dfc3879e745fd9a518d42cde06",
+            "urh-000046": "c335387b56cef4d732132aff9b6275185a1ee296d0aeefc9062094f36eb7f475",
+            "urh-000146": "d88ef0691fa8d78fccdd7166e824f2e1819ed08bdcf5c28803414a0d5920e0fc",
+            "urh-000150": "3fc9a79f4e331b234ed12c8c066df6ac0ba14c94b8614df86cab37bddfb31a05"
+          },
+          "reviewed_source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
+          "role_source_quotes": {
+            "role-1": "treating impaired water for beneficial uses",
+            "role-2": "conduct innovative laboratory and pilot-scale water treatment research",
+            "role-3": "reducing the costs, energy requirements, and other barriers to adoption",
+            "role-4": "conduct innovative laboratory and pilot-scale water treatment research"
+          }
+        },
+        "validation_contract": "curated-source-and-profile-1",
+        "version": "retained-team-recovery-1"
+      },
       "roles": [
         {
           "accepted_terms": [
@@ -19332,7 +19360,7 @@
         }
       ],
       "scope_label": "Desalination and water-purification research",
-      "source_fingerprint": "662d5c63faf785a4d1ba1edcc27bccbdba6343a76afee86ccf7989e6250db5b3",
+      "source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
       "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354243",
       "why_team": "Müller anchors water-treatment chemistry, Tenhaeff adds membrane materials, and Storer adds multiscale transport context. That combination is scientifically adjacent and potentially useful, but it lacks a pilot-scale desalination engineer and a water-process energy-optimization lead."
     },
@@ -19500,8 +19528,40 @@
       "opportunity_number": "DE-TA1-0003589",
       "parent_id": "eere-exchange:DE-TA1-0003589",
       "record_type": "declared_branch",
-      "revalidation_reason": "The official opportunity scope changed or is no longer eligible.",
-      "review_state": "needs_revalidation",
+      "recovery_proof": {
+        "provider_requests": 0,
+        "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+        "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+        "retained_decision_hash": "c8d299e12a4dfad3c963a843b9c20aa1c8f4cb5a4f569175c59f25305d3ced60",
+        "source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
+        "source_revalidation": {
+          "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment.",
+          "prior_source_fingerprint": "5708af92dc02febceb5e20a683917f88306815a17cf86d61477187b67d12e7cf",
+          "record_type": "declared_branch",
+          "review_kind": "curated_source_revalidation",
+          "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
+          "reviewed_profile_hashes": {
+            "urh-000029": "f69b7f2ba5ed796ee8ea81257c06f9d6d185337e3f19f96095a702758885c695",
+            "urh-000061": "515c8cf73fd000b887758b2f77b7bcbe95db870eb6991e442dd07c1826f892c1",
+            "urh-000082": "944a42732d8257e0a684391c612a2b6f008d66ab3512512240af9006823d2987",
+            "urh-000100": "2ff7fd263af0b217240aba53470ab83fd79300003664c80bee3719c7b9a8b721",
+            "urh-000103": "698555d868e1dfb0ea07761fd11419624845a8bce78024d692538940f1c10727",
+            "urh-000105": "ab513b7e0c96bd4130bffc3ac7290259beec632afc18a5c3234abed25644b7e3",
+            "urh-000109": "fc270291fe161b06829ef47f472fdb561881d1454b6d8c841982fc5593e2cca1",
+            "urh-000111": "a0aac6d0c35ec9da7b2eca0db11a24113c9094e59ee4d3cfbfa59121a245bcba",
+            "urh-000113": "c5bdc6cd74b7cfae1560ce638c2a90ab58bdd1b9a80572048d4078362939953e"
+          },
+          "reviewed_source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
+          "role_source_quotes": {
+            "role-1": "Recovery and production from postconsumer scrap",
+            "role-2": "from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap",
+            "role-3": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+            "role-4": "Recovery and production from postconsumer scrap"
+          }
+        },
+        "validation_contract": "curated-source-and-profile-1",
+        "version": "retained-team-recovery-1"
+      },
       "roles": [
         {
           "accepted_terms": [
@@ -19575,7 +19635,7 @@
         }
       ],
       "scope_label": "Critical-material recovery from manufacturing and postconsumer scrap",
-      "source_fingerprint": "5708af92dc02febceb5e20a683917f88306815a17cf86d61477187b67d12e7cf",
+      "source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
       "source_url": "https://www.energy.gov/cmei/ammto/critical-minerals-and-materials-accelerator-0",
       "why_team": "Bhalode, Abdolrahim, and Funkenbusch span feed handling, phase/purity characterization, and manufacturing validation; Anthamatten supplies interfacial-material context. The group is a credible process core, but it needs a direct critical-mineral recovery chemist before it becomes a complete team."
     },

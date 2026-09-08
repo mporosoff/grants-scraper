@@ -1,13 +1,13 @@
 {
-  "run_id": "34287621491",
+  "run_id": "34290241070",
   "run_attempt": "1",
   "generation_requested": true,
-  "started_at": "2026-09-08T22:48:46.977933+00:00",
+  "started_at": "2026-09-08T23:22:28.188992+00:00",
   "response_contract": "team-response-1",
   "input_generation": "28e5e86096720896315e35a8bc3be3682e32503b503f522ebc784e82cc618938",
   "mode": "maintenance",
   "queue_counts": {
-    "maintenance": 78,
+    "maintenance": 76,
     "backfill": 1409
   },
   "queue_reasons": {
@@ -205,7 +205,6 @@
     "360547": "historical_unassessed_backfill",
     "363390": "historical_unassessed_backfill",
     "361208": "historical_unassessed_backfill",
-    "363375": "stale_published_team",
     "351715": "historical_unassessed_backfill",
     "361207": "historical_unassessed_backfill",
     "352282": "historical_unassessed_backfill",
@@ -1398,7 +1397,6 @@
     "nsf-funding:https://www.nsf.gov/funding/opportunities/cdse-computational-data-enabled-science-engineering/pd24-8084": "historical_unassessed_backfill",
     "nsf-funding:https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing/nsf25-543": "historical_unassessed_backfill",
     "363615": "historical_unassessed_backfill",
-    "eere-exchange:DE-TA1-0003589": "stale_published_team",
     "308873": "historical_unassessed_backfill",
     "353475": "historical_unassessed_backfill",
     "332126": "historical_unassessed_backfill",
@@ -1694,8 +1692,8 @@
     "max_provider_requests": 300
   },
   "eligible_scopes": 1577,
-  "pending_scopes": 1487,
-  "due_scopes": 5,
+  "pending_scopes": 1485,
+  "due_scopes": 3,
   "eligibility": [
     {
       "scope_id": "vpr-email:25-543",
@@ -2286,56 +2284,28 @@
     "332894:superconducting-qubits",
     "363375",
     "eere-exchange:DE-TA1-0003589",
-    "359068",
-    "357748",
-    "356530",
-    "357334",
     "357346",
-    "356903",
-    "356874",
-    "357340",
     "356953",
-    "357015",
     "357186",
     "356680",
-    "363622",
-    "361008",
     "363179",
-    "357430",
-    "352947",
-    "357433",
-    "357493",
-    "357424"
+    "357493"
   ],
   "assessment_invalidations": [
     "360006",
     "344592:ab-0065",
     "344592:ab-0076",
-    "359068",
-    "357748",
-    "356530",
-    "357334",
     "356879",
     "357346",
-    "356903",
-    "356874",
-    "357340",
     "356953",
     "360894",
     "359269",
-    "357015",
     "362948",
     "357186",
     "356680",
-    "363622",
-    "361008",
     "363179",
-    "357430",
     "darpa-iarpa:darpa-darpapa250704",
-    "352947",
-    "357433",
-    "357493",
-    "357424"
+    "357493"
   ],
   "assembly_updates": [],
   "targeted_recovery": {
@@ -2349,195 +2319,75 @@
       },
       {
         "scope_id": "363375",
-        "state": "pending",
+        "state": "restored_from_retained_evidence",
         "provider_requests": 0,
-        "reason": "source_changed"
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "ecbac4afe86b9651834352dbefc06b4b722a5bd20268d8846888a21f3fd75ef1",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
+          "provider_requests": 0,
+          "validation_contract": "curated-source-and-profile-1",
+          "source_revalidation": {
+            "review_kind": "curated_source_revalidation",
+            "record_type": "specific_parent",
+            "prior_source_fingerprint": "662d5c63faf785a4d1ba1edcc27bccbdba6343a76afee86ccf7989e6250db5b3",
+            "reviewed_source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
+            "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
+            "role_source_quotes": {
+              "role-1": "treating impaired water for beneficial uses",
+              "role-2": "conduct innovative laboratory and pilot-scale water treatment research",
+              "role-3": "reducing the costs, energy requirements, and other barriers to adoption",
+              "role-4": "conduct innovative laboratory and pilot-scale water treatment research"
+            },
+            "reviewed_profile_hashes": {
+              "urh-000014": "c9e6d8ea9e1cf52764277c8f1225b24a33d3426a5e3571730dbc83f40e60ac30",
+              "urh-000017": "dc3ce9fcba9719fddd9219c45d41c41bbe49c5dfc3879e745fd9a518d42cde06",
+              "urh-000046": "c335387b56cef4d732132aff9b6275185a1ee296d0aeefc9062094f36eb7f475",
+              "urh-000146": "d88ef0691fa8d78fccdd7166e824f2e1819ed08bdcf5c28803414a0d5920e0fc",
+              "urh-000150": "3fc9a79f4e331b234ed12c8c066df6ac0ba14c94b8614df86cab37bddfb31a05"
+            },
+            "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment."
+          }
+        }
       },
       {
         "scope_id": "eere-exchange:DE-TA1-0003589",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "359068",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "f3433038dd349c424bc725e7702c2cf69fa71e626fccf5ded132be61386416e7",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "retained_decision_hash": "c8d299e12a4dfad3c963a843b9c20aa1c8f4cb5a4f569175c59f25305d3ced60",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "ceb36a719e32f83239383c41c0f52c2397203694f13885d53c792f228859186a",
+          "source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
           "provider_requests": 0,
+          "validation_contract": "curated-source-and-profile-1",
           "source_revalidation": {
-            "prior_source_fingerprint": "58daf0b0e279cd556fb14e515a4d4e0419687b4afff8a10a491bcc13d01f960c",
-            "reviewed_source_fingerprint": "ceb36a719e32f83239383c41c0f52c2397203694f13885d53c792f228859186a",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "37b0d5fa0190244c70dc68de532d316b968c59ca02441a53e804942fa7fbe345",
-            "current_projection_sha256": "10630ad323198f6b82519b6e1c459c8a97bcce764b88f200861bb46adbcc2f8b",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "357748",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "fe92ed7dcb2e8f40cf31f439475926b5340141824f343670ecfe69dad0dce74b",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "45dbe423561b597952e966d9d8ce6a3bd46db389c9c99f18e1efdb5cf8eef5d5",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "2caec9820e3d5d025d356b1608b406d2a7ae1f1b44079b8d4802f4f0337522b1",
-            "reviewed_source_fingerprint": "45dbe423561b597952e966d9d8ce6a3bd46db389c9c99f18e1efdb5cf8eef5d5",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "fd5da0c5dcab6deea7d67bbcc69ec987d811b9ccec70117eadf6bb047a27d53f",
-            "current_projection_sha256": "7100e6d8bbdaf1a7f06aa43ce9545674172fc3d9fcf616e587a1f3822a27a228",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "356530",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "e6579514a29916387d54e22927e9b5cabbb8cce32ccfcd24c96949f477862b29",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "d6f046671a5f409d52b4d8482c7b690c3a3a5191c6feaf3ed9a279d06293d362",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "9de356fbe8bfb5334ceb78d9a122642b9cd09b1b296d7f4d979540964f800824",
-            "reviewed_source_fingerprint": "d6f046671a5f409d52b4d8482c7b690c3a3a5191c6feaf3ed9a279d06293d362",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "6d909eef25b1c528d73d7221231d0fe2f2f24f9ace31ebb436db6b7a00e9c7da",
-            "current_projection_sha256": "6528b4d119abd377eca9da9984b10d934e6fbf1d1aae12251ce7bdbaaec8ea97",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "357334",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "e1e742147459d540f148a551598737e72338033febfd7700f2711b524070a082",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "07c1e1e70279552825244809dc27a80bb80ada26a969eecd135053686806de99",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "0e78f9b62ad1fd27d4df2045ba64eadd33968e7e6140da06483076dadeb4aecb",
-            "reviewed_source_fingerprint": "07c1e1e70279552825244809dc27a80bb80ada26a969eecd135053686806de99",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "5ad1e9a3d0c1628f5c0fab8fc2aa078a539cd839d600732ee325f6e62fd858f7",
-            "current_projection_sha256": "54b53408c433c39bc25ea1afa968117a6f86f543a8e7e111bc85864545b6e5e0",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "356903",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "fc676321ce83c370b7b749e51ff4d50a53055c8f6cf869bff4fbe5922f7f4d0c",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "dc62de5f0d56d9f1d7940dc227c1f8dfb3f9029df2fcee77ddb0c568e77e1d49",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "049d501ccb30fa91d814b1cc3b324e33b864fed8cd7fc0cd59931592d9a6621d",
-            "reviewed_source_fingerprint": "dc62de5f0d56d9f1d7940dc227c1f8dfb3f9029df2fcee77ddb0c568e77e1d49",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "b8fe194e15c380d7e0ec42de27dd936e938e3dc1ee18d58230d3ecbff8a33742",
-            "current_projection_sha256": "5830658300274ddd1aaeaeca6eb44af99d7abd2480cffda1591a95e9964afd3c",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "356874",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "ae61c72bed9fbd46833cbf585f4680cc8833cd764dc27580778bd2d332664e13",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "210c06bf1cfcf4bd8e8a279ab9a48c7e1535f586a4d14018f366675fb6ecb6a4",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "55306686ad5a1f5a00679675d7ae8fceece6c552e59a5d60d527d550dc6bca53",
-            "reviewed_source_fingerprint": "210c06bf1cfcf4bd8e8a279ab9a48c7e1535f586a4d14018f366675fb6ecb6a4",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "cf91316bb5fabe51efe4e8ebd0747bf374c72fbbf88f01c32ebec65bcd95b844",
-            "current_projection_sha256": "0d09d1b4bc3cc7b7db9bf72a8a6ac5c39e8d615b6afc60c0de12f923be62ae44",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "357340",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "a2913b8131eec67ea33826e72d13f033e30b435318dec1c0a4c3abcd0baae475",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "8afa697facd4a5567d0ad138d823c7f81d42df44fcd935d9df1b00bee218b9b0",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "028802ae054604529fc186241472c4698f35f887c8c0909ac98adc10d63e725a",
-            "reviewed_source_fingerprint": "8afa697facd4a5567d0ad138d823c7f81d42df44fcd935d9df1b00bee218b9b0",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "9f957230c479805382e3fd1f9f30c2369b6829ad873a46d41bad347e3eb2dd0a",
-            "current_projection_sha256": "859944ecf96742b8873e7b58e3ade44d4f77e7c987658c66497554f0b6d21ae7",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+            "review_kind": "curated_source_revalidation",
+            "record_type": "declared_branch",
+            "prior_source_fingerprint": "5708af92dc02febceb5e20a683917f88306815a17cf86d61477187b67d12e7cf",
+            "reviewed_source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
+            "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
+            "role_source_quotes": {
+              "role-1": "Recovery and production from postconsumer scrap",
+              "role-2": "from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap",
+              "role-3": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+              "role-4": "Recovery and production from postconsumer scrap"
+            },
+            "reviewed_profile_hashes": {
+              "urh-000029": "f69b7f2ba5ed796ee8ea81257c06f9d6d185337e3f19f96095a702758885c695",
+              "urh-000061": "515c8cf73fd000b887758b2f77b7bcbe95db870eb6991e442dd07c1826f892c1",
+              "urh-000082": "944a42732d8257e0a684391c612a2b6f008d66ab3512512240af9006823d2987",
+              "urh-000100": "2ff7fd263af0b217240aba53470ab83fd79300003664c80bee3719c7b9a8b721",
+              "urh-000103": "698555d868e1dfb0ea07761fd11419624845a8bce78024d692538940f1c10727",
+              "urh-000105": "ab513b7e0c96bd4130bffc3ac7290259beec632afc18a5c3234abed25644b7e3",
+              "urh-000109": "fc270291fe161b06829ef47f472fdb561881d1454b6d8c841982fc5593e2cca1",
+              "urh-000111": "a0aac6d0c35ec9da7b2eca0db11a24113c9094e59ee4d3cfbfa59121a245bcba",
+              "urh-000113": "c5bdc6cd74b7cfae1560ce638c2a90ab58bdd1b9a80572048d4078362939953e"
+            },
+            "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment."
           }
         }
       },
@@ -2548,207 +2398,25 @@
         "reason": "source_changed"
       },
       {
-        "scope_id": "357015",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "aa913bb20eede728ceef8221c7a3ead1397a8131e978404a3e874da0be951a6e",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "5663b64dc57651fc6000dc441ddbade46359f9313af9c018de7f85e4fbe7fbb8",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "37f7d2a0707e63b565e155ac91c0dab7cb38b615f37421681aa5e4a3afeadec3",
-            "reviewed_source_fingerprint": "5663b64dc57651fc6000dc441ddbade46359f9313af9c018de7f85e4fbe7fbb8",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "475d844a5f5ff6d9588ff91f720c225431b0adeed057ae1662bb22ea93db9f85",
-            "current_projection_sha256": "7a24051c1509f5fd7525bd926e47533bb6dd0268852171c73ee63e9611817269",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "363622",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "71e696b1b41f9795cc86cc74f366882324cfc1b1be1cf0df9dbc81e17406fc56",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "f0785d0a9c5050d4e66d092741197c8d4217e955bdd63e0d3b636f784a50e031",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "db63663d811efe2948ce0fdb8ec9a527b95af123d493202ffb92bb2c28288875",
-            "reviewed_source_fingerprint": "f0785d0a9c5050d4e66d092741197c8d4217e955bdd63e0d3b636f784a50e031",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "7b01df12edccdf6db06572898d40bfe38f63b0fe6f33de2a4b581e0b2793e8ce",
-            "current_projection_sha256": "49e664198c2d4d613d95d0e88e77f8279fe0520acb9aef0e26c8b6a3f85b50fd",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "361008",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "cb4cfeaa26d36899a4f37a6283529380a043a9ad136fa37014526c494f5a4987",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "45e4bb1f97c48f1bededb7a9d896f7df5ef3fbcc9e3b8e37bf59b59487cac866",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "e6474ec1b6e4cdbe0d5f7ba93cc80287449d970a3da94f05d52808daea2baf83",
-            "reviewed_source_fingerprint": "45e4bb1f97c48f1bededb7a9d896f7df5ef3fbcc9e3b8e37bf59b59487cac866",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "a16f51259a9eee7d1c90ccab9e37cc2632a13ec8ee352002be1e857e881ef7ee",
-            "current_projection_sha256": "922a30855f43c7e6a50bcf874a43accd8f01137d23592fe3cd34076840b4fb3d",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
         "scope_id": "363179",
         "state": "pending",
         "provider_requests": 0,
         "reason": "source_changed"
       },
       {
-        "scope_id": "357430",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "2626521081b4bb4d9f7905ab92246272d4511e3b3ee25b76007cb6f044724f9d",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "a6fbd35be0d654e2bfcda4da16908d90d4907fe104f207de557e5f5497b5dc4d",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "13ea93d34632d1e2dc4587bbe870b35e042c1e94813748ad0298d967f84b4c7f",
-            "reviewed_source_fingerprint": "a6fbd35be0d654e2bfcda4da16908d90d4907fe104f207de557e5f5497b5dc4d",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "9feabc1fb39b6eafb8025d1c6f2deb69c729a5120d26e8efa3396b8c092f9bb9",
-            "current_projection_sha256": "9c1889c49e2c33661836c42206ea4165388f0d11291e15855ec18b098ed1a60d",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "352947",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "aecd7c2e31f25d1878122c81c8607f00f16acd864f535500034e564049e2dbf7",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "ababf987710c6ca9ebf04ff35ede882f7cbb0f61954aea59ff626ae476718777",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "c5e8dfbaa050a51c6167eff5a5a67b8b9545afae644fa83ce266845b98e41ef0",
-            "reviewed_source_fingerprint": "ababf987710c6ca9ebf04ff35ede882f7cbb0f61954aea59ff626ae476718777",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "3c583bf006580d9b18839a8376338b46c2bcad795651f5321de5a532c4984389",
-            "current_projection_sha256": "6413b6c0ddfc152e6f850161011f8aaa977d7c0e7bec9298f7ca50f65a117876",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
-        "scope_id": "357433",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "b5980031ec0873048c540aaa61f16290fd612a71dc24a82e75fc730223475fc8",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "e7fc47645c54fb7beb5acb9024590c0dbab3bbde8ab8f87bd84cd403fb18a828",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "0e04b950d8aee9a6e14a231496b46b63ab385ace86b2d4da3588dcf696893d2b",
-            "reviewed_source_fingerprint": "e7fc47645c54fb7beb5acb9024590c0dbab3bbde8ab8f87bd84cd403fb18a828",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "3e60a0e91c7e80dc469d11136f2e39c38bf16f56424f26405ce7bb7de68ebdf8",
-            "current_projection_sha256": "9b6107ff99959dbffa82a5814cf56d0b5af466d4311ef4cfbee486de54717926",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
-      },
-      {
         "scope_id": "357493",
         "state": "pending",
         "provider_requests": 0,
         "reason": "source_changed"
-      },
-      {
-        "scope_id": "357424",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "2fc2205e835fc34f93c87f652084fdb6234d6c75e3181f72b34a459bcf47360a",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "3f9e7d43c5b1c311ba23973a085d94afc8aedc4596f21483bbb49be31624b9f8",
-          "provider_requests": 0,
-          "source_revalidation": {
-            "prior_source_fingerprint": "d9587a70ae557c574b0bf0abbd029c9d2d842570fa435199fd3aaafa7c71834c",
-            "reviewed_source_fingerprint": "3f9e7d43c5b1c311ba23973a085d94afc8aedc4596f21483bbb49be31624b9f8",
-            "changed_fields": [
-              "document_search_text"
-            ],
-            "prior_projection_sha256": "8ce01abfed2d5e0b8b5beb0823a62f51b1147098413a4aa788cfd70b7f980b39",
-            "current_projection_sha256": "dece7f0cda0e6535494592bc74896ba74ffc4fe4eb8ba80fafa625cf2515ce34",
-            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
-            "review_kind": "source_projection_revalidation",
-            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-          }
-        }
       }
     ],
     "recovery_only": true,
-    "selected_pending_scopes": 5
+    "selected_pending_scopes": 3
   },
   "coverage_before": {
-    "scopes": 90,
-    "parent_calls": 60,
-    "team_combinations": 235
+    "scopes": 92,
+    "parent_calls": 62,
+    "team_combinations": 237
   },
   "results": [],
   "processing_failure": {
@@ -2766,7 +2434,7 @@
   },
   "embedding_reuse_permitted": true,
   "llm_usage": {
-    "logical_id": "offline-34287621491",
+    "logical_id": "offline-34290241070",
     "limit_usd": 2.0,
     "charged_usd": 0.0,
     "by_provider_model_stage": {},
@@ -2781,11 +2449,11 @@
     "llm": 0
   },
   "coverage_after": {
-    "scopes": 90,
-    "parent_calls": 60,
-    "team_combinations": 235
+    "scopes": 92,
+    "parent_calls": 62,
+    "team_combinations": 237
   },
-  "pending_after": 1487,
+  "pending_after": 1485,
   "deferred": [
     {
       "scope_id": "363315",
@@ -4529,15 +4197,6 @@
       "parent_id": "361208",
       "stage": "queue",
       "input_fingerprint": "c4c4218419caac20f5357c6c76fd162bc5bbbb8ff5609bcb55336c4ff60035d9",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363375",
-      "parent_id": "363375",
-      "stage": "queue",
-      "input_fingerprint": "edd72a2b43d660b7c960704e4d33624e6c4a24c0f7e220d244c98e7d8f6d7608",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15271,15 +14930,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "eere-exchange:DE-TA1-0003589",
-      "parent_id": "eere-exchange:DE-TA1-0003589",
-      "stage": "queue",
-      "input_fingerprint": "4dc58324e4bad39213eab8117cc4fa8efda15d76145af915de649d0054ca801c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "308873",
       "parent_id": "308873",
       "stage": "queue",
@@ -16173,6 +15823,6 @@
   ],
   "assessed_scopes": 0,
   "outcomes": {},
-  "elapsed_seconds": 1.505,
+  "elapsed_seconds": 2.288,
   "status": "completed"
 }
