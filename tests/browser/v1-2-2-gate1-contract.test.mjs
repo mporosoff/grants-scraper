@@ -178,12 +178,18 @@ test("Worker smoke performs the real bounded sequence and fails on provider reje
   });
 });
 
-test("package-sensitive changes can reuse generated data through the single release owner", () => {
+test("package-sensitive changes can reuse generated data through the single release owner", async () => {
   const reuse = refreshWorkflow.slice(refreshWorkflow.indexOf('  assemble:'), refreshWorkflow.indexOf('  candidate:'));
-  assert.match(reuse, /tools.release_candidate dependencies/);
+  const assembler = await readFile(new URL('tools/assemble_release_candidate.py', root), 'utf8');
+  assert.match(assembler, /c.verify_dependencies\(root, manifest, allowed=\('teams',\) if team_update else \(\)\)/);
   assert.match(reuse, /tools.assemble_release_candidate/);
   assert.match(reuse, /build_search_release_package\.mjs --write/);
-  assert.doesNotMatch(reuse, /scripts\.build_catalog|build_search_v2_voyage_vectors|--generate/);
+  assert.doesNotMatch(reuse, /scripts\.build_catalog|build_search_v2_voyage_vectors/);
+  for (const step of reuse.split('      - name:').slice(1)) {
+    if (/--generate|secrets\.(?:ANTHROPIC|OPENAI|VOYAGE)_API_KEY/.test(step)) {
+      assert.match(step, /if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'/);
+    }
+  }
   assert.match(refreshWorkflow, /if: steps.worker-inputs.outputs.deploy_required == 'true'/);
 });
 

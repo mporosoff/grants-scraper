@@ -263,8 +263,12 @@ unsupported explanation. DEC-17 permits shipment without MEAS-10; no 3–5
 researcher pilot occurred, and MEAS-10 remains explicitly unperformed
 post-launch human validation.
 
-Recurring scheduled classification uses only the dedicated GitHub Actions
-secret `ANTHROPIC_API_KEY`, exposed to the document-evidence step alone. It
+At this historical P11 checkpoint, scheduled classification used the dedicated
+GitHub Actions secret `ANTHROPIC_API_KEY` only in document processing. Current
+offline team routing is independently configured in `config/offline_ai.json`: each
+generation step receives only its selected provider key, and validation/publication
+receive neither generation key. Cov4 retains its established production route
+until a separately identified migration evaluation passes. The P11 classifier
 fails closed and records aggregate call and token usage. The cache-aware warm
 feature dispatch made zero classifier/API calls and used zero tokens. The first
 production refresh made 23 calls for exactly 23 candidate spans across three of
@@ -292,8 +296,10 @@ remained #31; the known JHU workbook 403 updated existing degraded-source issue
 ### 2.8 v1.2.1 production hardening
 
 Catalog publication and hosted Potential matching are one release package.
-Every scheduled production refresh rebuilds all current public document
-vectors with one model contract, records a fixed-canary model-space
+At the historical v1.2.1 checkpoint, scheduled refresh rebuilt current public
+document vectors with one model contract. The current dependency-aware release
+planner reuses compatible data and vectors, and deploys a Worker only when its
+verified input fingerprint changes. Source generation still records a fixed-canary model-space
 fingerprint, generates a current/previous Worker allowlist, runs all product
 gates, deploys the compatibility Worker, and only then commits the complete
 package. A failed vector build, integrity check, Worker deployment, or live

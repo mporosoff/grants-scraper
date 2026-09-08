@@ -43,7 +43,7 @@ class PipelineAcceptance(unittest.TestCase):
 
     def test_coordinated_and_hermetic_workflows_enrich_after_canonical_merge(self):
         workflow = (fixture.ROOT / ".github/workflows/refresh-opportunities.yml").read_text()
-        commands = ["python -m scripts.enrich_catalog", "python -m scripts.sources merge", "python -m scripts.extract_document_evidence",
+        commands = ["python -m scripts.enrich_catalog", "python -m scripts.sources merge", "python -m tools.run_budgeted_documents",
                     "python -m scripts.faculty_match", "python -m scripts.build_opportunity_teams --generate", "python -m scripts.build_changes"]
         positions = [workflow.index(command) for command in commands]
         self.assertEqual(positions, sorted(positions))

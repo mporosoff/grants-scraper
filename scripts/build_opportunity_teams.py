@@ -39,7 +39,10 @@ from scripts.currentness import parse_date, record_is_current
 from scripts.faculty_match import _load_catalog
 from scripts.researcher_registry import content_hash, load_registry, synchronize_opportunity_team_model
 from scripts.import_opportunity_team_model import write_outputs, update_version_target
-from scripts.subtopic_cov4 import MODEL
+from tools.offline_ai import Deferred, ConfigurationFailure, Refusal, atomic_json, Ledger, config as ai_config
+from tools.team_provider import routes, contract as provider_contract
+
+MODEL = routes()["decomposition"]["model"]
 
 VERSION = "opportunity-teams-2"
 RESPONSE_VERSION = "team-response-1"
@@ -480,7 +483,10 @@ def refresh_assemblies(existing, candidates, claims, registry_generation):
 
 
 class Provider:
-    def __init__(self, cache, deadline=float("inf"), max_requests=300):
+    def __init__(self, cache, deadline=float("inf"), max_requests=300, ledger=None):
+        self.ledger = ledger
+        self.offline = None
+        self.provenance = threading.local()
         self.cache = Path(cache)
         self.cache.mkdir(parents=True, exist_ok=True)
         self.calls = 0
@@ -609,32 +615,8 @@ class Provider:
             raise
 
     def json(self, prompt, data):
-        signature = content_hash([RESPONSE_VERSION, MODEL, prompt, data])
-        path = self.cache / (signature + ".json")
-        cached = self.read_cache(path, lambda value: validate_response(prompt, data, value))
-        if cached is not None:
-            return cached
-        def request():
-            result = self.post("https://api.anthropic.com/v1/messages", {
-                "model": MODEL, "max_tokens": 8000, "system": prompt,
-                "messages": [{"role": "user", "content": json.dumps(data, ensure_ascii=False)}],
-            }, "ANTHROPIC_API_KEY", {"anthropic-version": "2023-06-01"})
-            try:
-                if not isinstance(result, dict) or result.get("stop_reason") != "end_turn":
-                    raise ValueError("incomplete model response")
-                content = result.get("content")
-                if not isinstance(content, list) or any(not isinstance(item, dict) for item in content):
-                    raise ValueError("invalid response content")
-                text = "".join(item.get("text", "") for item in content if item.get("type") == "text")
-                text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
-                return validate_response(prompt, data, json.loads(text))
-            except (ValueError, TypeError, KeyError) as error:
-                self.count("invalid_outputs")
-                self.count("invalid_output:" + validation_reason(error))
-                raise
-        parsed = self.retry(request)
-        self.write_cache(path, parsed)
-        return parsed
+        from tools.team_provider import request
+        return request(self, prompt, data)
 
     def establish_embedding_space(self):
         # Only runs when there is due work. Exact unrounded document AND query
@@ -764,6 +746,7 @@ def generate_scope(scope, provider, claims, vectors, registry_generation, deadli
     if time.monotonic() >= deadline:
         return result | {"state": "deferred", "reason_code": "budget_exhausted", "retry_eligible": True}, None
     ids = list(claims)
+    provider.provenance.stages = {}
     try:
         source = {"scope": scope["text"], "record_type": scope["record_type"]}
         if scope.get("source_fingerprint"):
@@ -785,6 +768,7 @@ def generate_scope(scope, provider, claims, vectors, registry_generation, deadli
         payload = {"scope": scope["text"], "source_fingerprint": scope.get("source_fingerprint"), "objective": decomposition["objective"], "roles": roles,
                    "claims": [{key: claim[key] for key in ("claim_id", "revision", "material_hash", "researcher_id",
                                                            "label", "evidence", "source_url")} for claim in subset.values()]}
+        result["claim_dependencies"] = list(subset)
         result["stage"] = "adjudication"
         edges = validate_response(ADJUDICATE, payload, provider.json(ADJUDICATE, payload))["edges"]
         result["stage"] = "verification"
@@ -796,8 +780,14 @@ def generate_scope(scope, provider, claims, vectors, registry_generation, deadli
                                   {(e["role_id"], e["claim_id"]): e["coverage"] for e in edges})
         result["stage"] = "assembly"
         proposal = assemble(scope, decomposition, verified, subset, registry_generation)
+        if proposal:
+            proposal["provider_provenance"] = dict(provider.provenance.stages)
         return result | {"state": "proposed" if proposal else "insufficient_evidence"}, proposal
-    except BudgetExhausted:
+    except Refusal:
+        return result | {"state": "provider_refusal", "reason_code": "provider_safety_refusal", "retry_eligible": False}, None
+    except ConfigurationFailure as error:
+        return result | {"state": "unavailable", "reason_code": str(error), "retry_eligible": False}, None
+    except (BudgetExhausted, Deferred):
         return result | {"state": "deferred", "reason_code": "budget_exhausted", "retry_eligible": True}, None
     except (ValueError, RuntimeError, requests.RequestException, KeyError, TypeError, OSError) as error:
         # Truncated or malformed provider responses are transport/output failures,
@@ -845,6 +835,9 @@ def coverage(rows):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--generate", action="store_true")
+    parser.add_argument("--mode", choices=("maintenance", "backfill", "pilot", "replay"), default="maintenance")
+    parser.add_argument("--baseline", type=Path)
+    parser.add_argument("--state", type=Path)
     parser.add_argument("--max-scopes", type=int, default=60)
     parser.add_argument("--workers", type=int, default=3)
     parser.add_argument("--max-seconds", type=int, default=900)
@@ -858,6 +851,13 @@ def main():
         parser.error("max-seconds must be 60-14400")
     if not 1 <= args.workers <= 4:
         parser.error("workers must be 1-4")
+    if args.generate and args.state is None:
+        parser.error("Paid generation requires --state with durable logical budget provenance")
+    settings = ai_config()
+    if args.mode == "pilot":
+        args.max_scopes = min(args.max_scopes, settings["pilot_max_scopes"])
+    args.max_seconds = min(args.max_seconds, settings["max_seconds"])
+    args.workers = min(args.workers, settings["max_workers"])
     started = time.monotonic()
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
@@ -874,37 +874,55 @@ def main():
     model = synchronize_opportunity_team_model(registry, path, model=model, write=False)
     claims = eligible_claims(registry)
     claims_generation = content_hash([{key: c[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for c in claims.values()])
-    pipeline_hash = content_hash([VERSION, MODEL, DECOMPOSE, ADJUDICATE, VERIFY])
+    from tools import team_maintenance as maintenance
+    pipeline_hash = maintenance.science_contract()
     eligibility = []
     candidates = scopes(diagnostics=eligibility)
+    input_generation = content_hash([claims_generation, [scope['source_fingerprint'] for scope in candidates]])
+    progress_path = args.state / 'team-progress.json' if args.state else None
+    if progress_path and progress_path.exists():
+        retained = json.loads(progress_path.read_bytes())
+        if (retained.get('input_generation') == input_generation and retained.get('science_contract') == pipeline_hash
+                and retained.get('provider_contract') == provider_contract()):
+            for key in ('opportunities', 'generation_attempts', 'discovery_queue'):
+                model[key] = retained[key]
+            model = synchronize_opportunity_team_model(registry, path, model=model, write=False)
     existing = {row["id"]: row for row in model["opportunities"]}
     affected_sources = invalidate_stale_sources(model, source_fingerprints(model, candidates))
-    affected_contracts = []
-    for row in existing.values():
-        if row.get("generator_version") and row.get("pipeline_hash") != pipeline_hash:
-            row["review_state"] = "needs_revalidation"
-            row["revalidation_reason"] = "The source assessment or verification contract changed."
-            affected_contracts.append(row["id"])
+    current_snapshot = maintenance.snapshot(candidates, claims)
+    previous_snapshot = (json.loads(args.baseline.read_bytes()) if args.baseline else
+                         model.get("accepted_scope_snapshot") or current_snapshot)
+    affected_contracts = maintenance.migrate_legacy(model, candidates, claims_generation, current_snapshot['claims'])
     attempts = model.setdefault("generation_attempts", {})
     def attempt_key(scope, state=None):
-        return content_hash([pipeline_hash, scope["source_fingerprint"], claims_generation,
-            ASSEMBLY_VERSION if (state or (attempts.get(scope["id"], {}).get("state")
-                if isinstance(attempts.get(scope["id"]), dict) else None)) == "insufficient_evidence" else None])
+        attempt = attempts.get(scope["id"])
+        if state:
+            attempt = (attempt if isinstance(attempt, dict) else {}) | {'state': state}
+        return maintenance.decision_key(scope, attempt, current_snapshot['claims'], pipeline_hash)
     assembly_updates = refresh_assemblies(existing, candidates, claims, registry["registry_generation"])
     by_id = {scope["id"]: scope for scope in candidates}
     for result in assembly_updates:
         if result["state"] == "insufficient_evidence":
             row = existing[result["scope_id"]]
             # Do not suppress generation if researcher evidence has expanded.
-            if row.get("claims_generation_at_generation") == claims_generation and row.get("pipeline_hash") == pipeline_hash:
+            if row.get("claims_generation_at_generation") == claims_generation and row.get("decision_contract") == pipeline_hash:
                 attempts[result["scope_id"]] = {"key": attempt_key(by_id[result["scope_id"]], result["state"]), "state": result["state"], "response_contract": RESPONSE_VERSION}
     pending = [s for s in candidates if (s["id"] not in existing or existing[s["id"]].get("review_state") == "needs_revalidation"
                or (existing[s["id"]].get("generator_version")
-                   and existing[s["id"]].get("pipeline_hash") != pipeline_hash))
+                   and existing[s["id"]].get("decision_contract") != pipeline_hash))
                and not attempt_completed(attempts.get(s["id"]), attempt_key(s), existing.get(s["id"]))]
-    due = [s for s in pending if attempt_due(attempts.get(s["id"]), attempt_key(s))]
+    maintenance_queue, backfill_queue, queue_reasons = maintenance.queues(
+        pending, existing, attempts, previous_snapshot, current_snapshot)
+    selected = backfill_queue if args.mode == 'backfill' else maintenance_queue
+    if args.mode == 'replay':
+        selected = []
+    due = [s for s in selected if attempt_due(attempts.get(s["id"]), attempt_key(s))
+           and not (isinstance(attempts.get(s['id']), dict) and attempts[s['id']].get('state') == 'provider_refusal'
+                    and attempts[s['id']].get('key') == attempt_key(s))]
     report = run | {
               "input_generation": content_hash([claims_generation, [s["source_fingerprint"] for s in candidates]]),
+              "mode": args.mode, "queue_counts": {"maintenance": len(maintenance_queue), "backfill": len(backfill_queue)},
+              "queue_reasons": queue_reasons, "provider_contract": provider_contract(),
               "provider_requests": 0, "version": VERSION, "model": MODEL, "registry_generation": registry["registry_generation"],
               "limits": {"max_scopes": args.max_scopes, "max_seconds": args.max_seconds, "max_provider_requests": 300},
               "eligible_scopes": len(candidates), "pending_scopes": len(pending), "due_scopes": len(due),
@@ -915,8 +933,18 @@ def main():
     provider = None
     if args.generate and claims and due:
         # Reserve time for canonical output synchronization and checkpoint writes.
-        provider = Provider(args.cache, deadline=started + args.max_seconds - 5)
+        ledger = Ledger(args.state / 'ledger.json', args.state.name,
+                        settings['budgets_usd'][args.mode], max_requests=settings['max_requests'])
+        provider = Provider(args.cache, deadline=started + args.max_seconds - 5, ledger=ledger)
         try:
+            blocked = ledger.read()['blocked_providers']
+            for route in routes().values():
+                if route['provider'] in blocked:
+                    raise ConfigurationFailure(blocked[route['provider']])
+                key_name = 'OPENAI_API_KEY' if route['provider'] == 'openai' else 'ANTHROPIC_API_KEY'
+                if not os.environ.get(key_name):
+                    ledger.block(route['provider'], 'missing_actions_step_credential')
+                    raise ConfigurationFailure('missing_actions_step_credential')
             ids = list(claims)
             vectors = provider.embed_claims([claims[i] for i in ids])
             progress = discovery_checkpoint(model.get("discovery_queue"), by_id)
@@ -967,15 +995,23 @@ def main():
                     if proposal:
                         proposal["claims_generation_at_generation"] = claims_generation
                         proposal["pipeline_hash"] = pipeline_hash
+                        proposal["decision_contract"] = pipeline_hash
                         existing[scope["id"]] = proposal
                     elif result["state"] in {"not_specific", "unsuitable_scope", "insufficient_evidence"}:
                         if scope["id"] in existing and existing[scope["id"]].get("generator_version"):
                             existing[scope["id"]]["review_state"] = "needs_revalidation"
-                    attempts[scope["id"]] = {"key": attempt_key(scope, result["state"]), "state": result["state"],
+                    attempts[scope["id"]] = {"state": result["state"], 'mode': args.mode,
+                        'decision_contract': pipeline_hash, 'claim_dependencies': result.get('claim_dependencies', list(claims)),
                         "response_contract": RESPONSE_VERSION, "stage": result["stage"],
                         "retry_after": time.time() + 3600 if result["state"] not in COMPLETED_STATES else 0}
-                    result["retry_eligible"] = result["state"] not in COMPLETED_STATES
+                    attempts[scope["id"]]['key'] = attempt_key(scope)
+                    attempts[scope["id"]]['next_action'] = ('retain_scientific_decision' if result['state'] in COMPLETED_STATES else
+                        'human_provider_configuration' if result['state'] == 'provider_refusal' else 'retry_' + args.mode)
+                    result["retry_eligible"] = result.get('retry_eligible', result["state"] not in COMPLETED_STATES)
                     report["results"].append(result)
+                    atomic_json(args.state / 'team-progress.json', {'input_generation': report['input_generation'],
+                        'science_contract': pipeline_hash, 'provider_contract': provider_contract(),
+                        'opportunities': list(existing.values()), 'generation_attempts': attempts, 'discovery_queue': progress})
                     print(json.dumps(result), flush=True)
         except BudgetExhausted:
             report["time_budget_exhausted"] = True
@@ -987,6 +1023,17 @@ def main():
             report["provider_requests"] = provider.calls
             report["counters"] = provider.counters
             report["embedding_reuse_permitted"] = provider.vector_reuse_allowed
+            report['llm_usage'] = ledger.summary()
+            report['provider_requests_by_surface'] = {'voyage': provider.calls - provider.counters.get('assessment_requests', 0),
+                                                     'llm': provider.counters.get('assessment_requests', 0)}
+    if args.generate and args.mode in ('maintenance', 'pilot'):
+        for scope in selected:
+            if scope['id'] not in {r['scope_id'] for r in report['results'] if r['state'] != 'deferred'}:
+                previous = attempts.get(scope['id'])
+                if not isinstance(previous, dict) or previous.get('state') in COMPLETED_STATES:
+                    attempts[scope['id']] = {'state': 'deferred', 'mode': args.mode, 'decision_contract': pipeline_hash,
+                        'stage': 'queue', 'reason': queue_reasons[scope['id']], 'next_action': 'retry_maintenance', 'retry_after': 0}
+                    attempts[scope['id']]['key'] = attempt_key(scope)
     report["coverage_after"] = coverage(existing.values())
     report["pending_after"] = sum(not attempt_completed(attempts.get(scope["id"]), attempt_key(scope), existing.get(scope["id"])) for scope in pending)
     assessed = {result["scope_id"] for result in report["results"]}
@@ -999,6 +1046,10 @@ def main():
     report["outcomes"] = {state: sum(row["state"] == state for row in report["results"])
                           for state in sorted({row["state"] for row in report["results"]})}
     if args.write:
+        model['accepted_scope_snapshot'] = current_snapshot if args.generate else previous_snapshot
+        if args.generate and args.mode == 'pilot':
+            model['economical_pilot'] = {'run_id': run['run_id'], 'max_scopes': settings['pilot_max_scopes'],
+                'budget_usd': settings['budgets_usd']['pilot'], 'status': 'attempted', 'provider_contract': provider_contract()}
         model["opportunities"] = list(existing.values())
         for opportunity in model["opportunities"]:
             for role in opportunity.get("roles", []):

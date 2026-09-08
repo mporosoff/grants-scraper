@@ -60,8 +60,33 @@ class Incomplete(ValueError):
     pass
 
 
+def error_diagnostics(response):
+    """Allowlisted error categories only; never retain a provider body/message."""
+    result = {'http_status': response.status_code}
+    try:
+        error = response.json().get('error', {})
+        kind = error.get('type') or error.get('code')
+        if isinstance(kind, str) and re.fullmatch(r'[a-zA-Z0-9_-]{1,80}', kind):
+            result['error_type'] = kind
+        message = str(error.get('message', '')).lower()
+        result['category'] = next((category for category, phrases in (
+            ('insufficient_credit', ('credit balance', 'insufficient credit', 'billing')),
+            ('model_unavailable', ('model not found', 'model is not', 'model does not exist', 'invalid model')),
+            ('invalid_credential', ('invalid api key', 'invalid x-api-key', 'authentication')),
+            ('invalid_request', ('invalid', 'required', 'not supported')))
+            if any(phrase in message for phrase in phrases)), 'unclassified_provider_error')
+    except (ValueError, AttributeError, TypeError):
+        result['category'] = 'unstructured_provider_error'
+    return result
+
+
 def config():
     return json.loads((ROOT / "config/offline_ai.json").read_bytes())
+
+
+def compatible_model(requested, returned):
+    return isinstance(returned, str) and (returned == requested or
+        re.fullmatch(re.escape(requested) + r'-\d{4}-\d{2}-\d{2}', returned) is not None)
 
 
 def normalize_usage(provider, payload):
@@ -200,6 +225,14 @@ class Ledger:
                     group[key] += value
                 elif key == "reasoning_tokens":
                     group["reasoning_usage_unknown"] += 1
+        for group in groups.values():
+            tokens = ('input_tokens', 'cached_input_tokens', 'cache_write_tokens', 'output_tokens', 'reasoning_tokens')
+            group['known_usage_totals'] = {key: group[key] for key in tokens}
+            if group['unknown_usage_requests']:
+                for key in tokens:
+                    group[key] = None
+            if group['reasoning_usage_unknown']:
+                group['reasoning_tokens'] = None
         return {"logical_id": self.logical_id, "limit_usd": self.limit / 1e6,
             "charged_usd": sum(r["charged_microusd"] for r in state["requests"]) / 1e6,
             "by_provider_model_stage": groups, "events": state["events"],
@@ -217,6 +250,8 @@ def request_body(route, stage, prompt, data, schema):
 
 
 def response_value(provider, payload):
+    if not isinstance(payload, dict):
+        raise ValueError('invalid_response_envelope')
     if provider == "openai":
         parts = [part for item in payload.get("output", []) if item.get("type") == "message"
                  for part in item.get("content", [])]
@@ -230,7 +265,10 @@ def response_value(provider, payload):
             raise Refusal("provider_safety_refusal")
         if payload.get("stop_reason") != "end_turn":
             raise Incomplete("incomplete_response")
-        text = "".join(part.get("text", "") for part in payload.get("content", []) if part.get("type") == "text")
+        content = payload.get('content')
+        if not isinstance(content, list) or any(not isinstance(part, dict) for part in content):
+            raise ValueError('invalid_response_content')
+        text = "".join(part.get("text", "") for part in content if part.get("type") == "text")
         text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
     return json.loads(text)
 
@@ -259,10 +297,11 @@ class Client:
                     self.ledger.event(provider=route["provider"], model=route["model"], stage=stage_name,
                                       event="retained_refusal", key=key)
                     raise Refusal("retained_provider_safety_refusal")
-                if not cached["returned_model"]:
+                if not compatible_model(route['model'], cached['returned_model']):
                     raise ValueError("cache_model_identity_missing")
                 value = validate(cached["value"])
             except (FileNotFoundError, ValueError, TypeError, KeyError):
+                path.unlink(missing_ok=True)
                 self.ledger.event(provider=route["provider"], model=route["model"], stage=stage_name,
                                   event="cache_miss", key=key, reason="missing_or_invalid_exact_contract")
             else:
@@ -301,14 +340,24 @@ class Client:
                     latency = int((time.monotonic() - started) * 1000)
                     self.ledger.complete(token, http_status=response.status_code, latency_ms=latency)
                     if response.status_code in (400, 401, 403, 404, 422):
+                        self.ledger.complete(token, diagnostics=error_diagnostics(response))
                         reason = f"{provider}_configuration_http_{response.status_code}"
                         self.ledger.block(provider, reason)
                         raise ConfigurationFailure(reason)
                     if response.status_code != 200:
                         raise requests.RequestException(f"provider_http_{response.status_code}")
                     payload = response.json()
+                    if not isinstance(payload, dict):
+                        raise ValueError('invalid_response_envelope')
                     usage = normalize_usage(provider, payload)
-                    self.ledger.complete(token, usage=usage, returned_model=payload.get("model"),
+                    returned = payload.get('model')
+                    model_matches = compatible_model(route['model'], returned)
+                    self.ledger.complete(token, usage=usage, returned_model=returned,
+                        status='received_model_unverified')
+                    if not model_matches:
+                        self.ledger.block(provider, 'unexpected_returned_model_identity')
+                        raise ConfigurationFailure('unexpected_returned_model_identity')
+                    self.ledger.complete(token,
                         status="received_unvalidated", charged_microusd=cost_microusd(usage, price) if usage else amount)
                     value = validate(response_value(provider, payload))
                     if not isinstance(payload.get("model"), str) or not payload["model"]:

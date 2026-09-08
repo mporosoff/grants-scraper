@@ -156,7 +156,7 @@ def privacy_check(path):
         inspect(read_json(path))
 
 
-def create(root, output, *, generation_sha=None, run_id=None, attempt=None, parent=None):
+def create(root, output, *, generation_sha=None, run_id=None, attempt=None, parent=None, team_update=False):
     root, output = Path(root), Path(output)
     if output.exists():
         raise ValueError("Candidate destination already exists; immutable artifacts cannot be overwritten")
@@ -164,8 +164,9 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
     generation = generation_dependencies(root)
     if parent:
         original = load(parent)
-        verify_dependencies(root, original)
-        verify_files(root, original["generation_files"])
+        verify_dependencies(root, original, allowed=('teams',) if team_update else ())
+        retained = {n: h for n, h in original['generation_files'].items() if not team_update or n not in policy['team_outputs']}
+        verify_files(root, retained)
     else:
         original = None
     names = paths(root, policy["generated"] + policy["package"] + policy["runtime"])
@@ -197,11 +198,21 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
                 "semantic_identity": {k: semantic.get(k) for k in ("schema_version", "model", "response_model", "dimension", "input_type", "source_output_dtype", "model_space_fingerprint", "corpus_sha256")},
                 "team_identity": {"generation_id": team.get("generation_id"), "input_sha256": files["config/opportunity_team_model.json"]},
                 "release_identity": {k: release.get(k) for k in ("current_corpus_sha256", "previous_corpus_sha256", "model_space_fingerprint", "worker_allowlist_sha256")}}
+    from tools.release_dependencies import snapshot
+    if 'dependency_groups' in policy:
+        manifest['dependency_groups'] = snapshot(root)
     if original:
         for key in ("generation_sha", "generation_run_id", "generation_run_attempt", "generation_timestamp", "generation_dependencies", "generator_versions", "generation_baseline", "generation_files", "team_identity", "semantic_identity"):
-            manifest[key] = original[key]
+            if not team_update or key not in ('generation_baseline', 'generation_files', 'team_identity'):
+                manifest[key] = original[key]
         manifest["derived_from_candidate"] = original["candidate_id"]
         manifest["assembly_sha"] = git(root, "rev-parse", "HEAD")
+        if team_update:
+            manifest['team_generation'] = {'sha': sha, 'run_id': str(run_id or os.environ['GITHUB_RUN_ID']),
+                'run_attempt': str(attempt or os.environ.get('GITHUB_RUN_ATTEMPT', '1')),
+                'timestamp': timestamp(), 'parent_candidate_id': original['candidate_id'],
+                'pinned_inputs': original['generation_files'], 'retained_output_hashes': retained,
+                'provider_contract': read_json(root / 'config/offline_ai.json')}
     manifest["candidate_id"] = digest(encoded(manifest))
     for name in names:
         privacy_check(root / name)
@@ -234,18 +245,24 @@ def load(bundle, expected_id=None):
     return value
 
 
-def verify_dependencies(root, manifest):
+def verify_dependencies(root, manifest, allowed=()):
     if not re.fullmatch(r'[a-f0-9]{40}', manifest.get('generation_sha', '')):
         raise ValueError('Invalid historical generation provenance')
     if subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor', manifest['generation_sha'], 'HEAD'],
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode != 0:
         raise ValueError('Generation SHA is not in the protected release history')
+    policy = read_json(Path(root) / POLICY)
     current = generation_dependencies(root)
-    if current != manifest["generation_dependencies"]:
+    if 'dependency_groups' in policy:
+        from tools.release_dependencies import verify
+        verify(root, manifest, allowed)
+    elif current != manifest["generation_dependencies"]:
         changed = sorted(k for k in set(current["files"]) | set(manifest["generation_dependencies"]["files"])
                          if current["files"].get(k) != manifest["generation_dependencies"]["files"].get(k))
         raise ValueError(f"Generation dependencies changed; request one new generation: {changed}")
     for name, baseline in manifest["generation_baseline"].items():
+        if 'teams' in allowed and name in policy.get('team_outputs', []):
+            continue
         actual = digest(checked_path(root, name).read_bytes())
         if actual not in (baseline, manifest["files"][name]):
             raise ValueError(f"Generation data input changed: {name}; candidate invalidated")
@@ -261,6 +278,8 @@ def materialize(root, bundle):
         if digest(checked_path(root, name).read_bytes()) not in (baseline, manifest['files'][name]):
             raise ValueError(f'Release runtime changed: {name}; assemble a reuse candidate without generation')
     for name in manifest["files"]:
+        if name in ('README.md', 'PROJECT.md') and digest(checked_path(root, name).read_bytes()) != manifest['files'][name]:
+            raise ValueError('Authored documentation changed; assemble a derived candidate preserving current prose: ' + name)
         target = checked_path(root, name)
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(Path(bundle) / "files" / name, target)
@@ -299,9 +318,10 @@ def main():
     parser.add_argument("--candidate-id")
     parser.add_argument("--receipt", type=Path)
     parser.add_argument("--parent", type=Path)
+    parser.add_argument('--team-update', action='store_true')
     args = parser.parse_args()
     if args.command == "create":
-        manifest = create(args.root, args.bundle, parent=args.parent)
+        manifest = create(args.root, args.bundle, parent=args.parent, team_update=args.team_update)
     else:
         manifest = load(args.bundle, args.candidate_id)
         if args.command == "materialize":

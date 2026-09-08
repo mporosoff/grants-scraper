@@ -6,10 +6,10 @@ import shutil
 from tools import release_candidate as c
 
 
-def assemble(root, bundle):
+def assemble(root, bundle, team_update=False):
     root, bundle = Path(root), Path(bundle)
     manifest = c.load(bundle)
-    c.verify_dependencies(root, manifest)
+    c.verify_dependencies(root, manifest, allowed=('teams',) if team_update else ())
     for name in manifest['generation_files']:
         target = c.checked_path(root, name)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -28,8 +28,9 @@ def assemble(root, bundle):
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--bundle', type=Path, required=True)
+    parser.add_argument('--team-update', action='store_true')
     args = parser.parse_args()
-    assemble(c.ROOT, args.bundle)
+    assemble(c.ROOT, args.bundle, args.team_update)
 
 
 if __name__ == '__main__':

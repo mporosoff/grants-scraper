@@ -171,7 +171,11 @@ positive coverage. This is a bounded acceptance set, not corpus-wide recall.
 Usable next dates change from 1,298 to 1,296. One unavailable ACS response is
 withheld; one NOAA project-start date is corrected to its actual past submission
 date. Nineteen records retain required preliminary events. The parser migration
-has 613 records awaiting original structure; the normal source budget is unchanged.
+then had 613 records awaiting original structure. This historical acceptance
+measurement is not the current backlog. Current unique-record counts, overlapping
+field categories and deltas are computed in `evaluation/release_coverage.json`
+and the Actions summary. Missing pending-age/unsupported-source measurements
+remain explicitly unknown. The normal source request budget is unchanged.
 Archived response replay and these audits make zero provider/source requests.
 Source receipts record actual earlier retrievals separately.
 

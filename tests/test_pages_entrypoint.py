@@ -702,7 +702,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("schedule:", workflow)
         self.assertIn("python -m scripts.build_catalog", workflow)
         self.assertIn("python -m scripts.enrich_catalog", workflow)
-        self.assertIn("python -m scripts.extract_document_evidence", workflow)
+        self.assertIn("python -m tools.run_budgeted_documents", workflow)
         self.assertIn("python -m scripts.sources merge", workflow)
         self.assertIn("python -m scripts.build_feeds", workflow)
         self.assertIn("--fail-on-degraded", workflow)

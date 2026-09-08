@@ -4,6 +4,7 @@ from copy import deepcopy
 import hashlib
 import io
 import json
+import os
 from pathlib import Path
 import sys
 import tempfile
@@ -81,6 +82,7 @@ class ParsingTeamIntegration(unittest.TestCase):
             with chdir(root), ExitStack() as stack, redirect_stdout(io.StringIO()):
                 stack.enter_context(patch('requests.sessions.Session.request', side_effect=AssertionError('Fixture attempted live network')))
                 stack.enter_context(patch('scripts.currentness.date', fixture.FixedDate))
+                stack.enter_context(patch.dict(os.environ, {'ANTHROPIC_API_KEY': 'synthetic'}))
                 stack.enter_context(patch.object(teams.Provider, 'json', answer))
                 stack.enter_context(patch.object(teams.Provider, 'embed', side_effect=lambda texts, *_: [[1.0, 0.0] for _ in texts]))
                 stack.enter_context(patch.object(teams.Provider, 'embed_reusable', side_effect=lambda texts, *_, **kwargs: [[1.0, 0.0] for _ in texts]))
@@ -88,7 +90,7 @@ class ParsingTeamIntegration(unittest.TestCase):
                 # per parent in a pass. Resume its persisted pending work to
                 # reach the laboratory child; do not bypass that reservation.
                 for _ in range(len(children)):
-                    with patch.object(sys, 'argv', ['build_opportunity_teams', '--generate', '--write', '--workers', '1']):
+                    with patch.object(sys, 'argv', ['build_opportunity_teams', '--generate', '--mode', 'backfill', '--state', '.spend/fixture', '--write', '--workers', '1']):
                         self.assertEqual(teams.main(), 0)
                     if json.loads(model_path.read_bytes())['opportunities']:
                         break

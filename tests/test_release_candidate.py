@@ -84,6 +84,45 @@ class CandidateLifecycleTests(unittest.TestCase):
         self.assertFalse((self.reports / 'validation.json').exists())
         self.assertEqual(len(commands), len(c.GATES))
 
+    def test_expired_or_missing_candidate_recovers_only_exact_protected_bytes(self):
+        from tools import fetch_release_artifact as artifacts
+        manifest = self.create()
+        c.materialize(self.root, self.bundle)
+        c.write_json(self.root / 'release/candidate.json', manifest)
+        c.write_json(self.root / 'release/candidate-source.json', {'candidate_id': manifest['candidate_id'], 'artifact_run': '123'})
+        self.commit()
+        c.git(self.root, 'update-ref', 'refs/remotes/origin/main', 'HEAD')
+        meta = {'head_branch': 'main', 'path': '.github/workflows/refresh-opportunities.yml', 'event': 'push'}
+        original = subprocess.check_output
+        for expired in (False, True):
+            name = 'candidate-' + manifest['candidate_id']
+            rows = [{'name': name, 'expired': True}] if expired else []
+            def call(command, **kwargs):
+                if command[0] == 'gh':
+                    return json.dumps({'artifacts': rows} if 'artifacts?' in command[-1] else meta).encode()
+                return original(command, **kwargs)
+            destination = Path(self.temp.name) / ('expired' if expired else 'missing')
+            with patch.object(c, 'ROOT', self.root), patch.object(subprocess, 'check_output', side_effect=call):
+                artifacts.fetch('owner/repo', '123', name, destination)
+                self.assertEqual(c.load(destination, manifest['candidate_id']), manifest)
+                with self.assertRaises(artifacts.ArtifactUnavailable):
+                    artifacts.reconstruct('owner/repo', '124', name, destination / 'wrong-run')
+                with self.assertRaises(artifacts.ArtifactUnavailable):
+                    artifacts.reconstruct('owner/repo', '123', 'validation-' + manifest['candidate_id'], destination / 'receipt')
+
+    def test_artifact_authentication_or_corruption_never_triggers_reconstruction(self):
+        from tools import fetch_release_artifact as artifacts
+        import zipfile
+        meta = {'head_branch': 'main', 'path': '.github/workflows/refresh-opportunities.yml', 'event': 'push'}
+        name = 'candidate-' + 'a' * 64
+        cases = [subprocess.CalledProcessError(1, ['gh', 'api']),
+                 [json.dumps(meta).encode(), json.dumps({'artifacts': [{'name': name, 'expired': False, 'id': 1}]}).encode(), b'corrupt']]
+        for result in cases:
+            with patch.object(subprocess, 'check_output', side_effect=result), patch.object(artifacts, 'reconstruct') as recover:
+                with self.assertRaises((subprocess.CalledProcessError, zipfile.BadZipFile)):
+                    artifacts.fetch('owner/repo', '123', name, self.bundle)
+                recover.assert_not_called()
+
     def test_validator_correction_revalidates_same_bytes_without_generation(self):
         manifest = self.create()
         commands = []
@@ -160,6 +199,39 @@ class CandidateLifecycleTests(unittest.TestCase):
         self.assertEqual(derived['generation_sha'], original['generation_sha'])
         self.assertEqual(derived['generation_run_id'], '123')
         self.assertEqual(derived['worker_fingerprint'], original['worker_fingerprint'])
+
+    def test_team_only_derived_candidate_preserves_source_vectors_and_historical_provenance(self):
+        self.policy['team_outputs'] = ['config/opportunity_team_model.json']
+        self.policy['dependency_groups'] = {key: {'patterns': names, 'excluded': []} for key, names in {
+            'source': ['scripts/parser.py', 'config/source.json'], 'teams': ['scripts/teams.py', 'config/offline_ai.json'],
+            'semantic': ['tools/vectors.mjs'], 'runtime': self.policy['runtime'], 'validation': self.policy['validation']}.items()}
+        c.write_json(self.root / c.POLICY, self.policy)
+        c.write_json(self.root / 'config/offline_ai.json', {'model': 'retained'})
+        (self.root / '.github/workflows/refresh-opportunities.yml').write_text('jobs:\n  generate:\n    steps: []\n')
+        self.commit()
+        self.source_sha = c.git(self.root, 'rev-parse', 'HEAD')
+        original = self.create()
+        (self.root / 'scripts/teams.py').write_text('MODEL = "new-default"\n')
+        self.commit()
+        with self.assertRaisesRegex(ValueError, 'required action teams'):
+            c.verify_dependencies(self.root, original)
+        c.write_json(self.root / 'config/opportunity_team_model.json', {'generation_id': 'new-team-output'})
+        derived_path = Path(self.temp.name) / 'team-derived'
+        derived = c.create(self.root, derived_path, run_id='456', attempt='1', parent=self.bundle, team_update=True)
+        self.assertEqual(derived['generation_sha'], original['generation_sha'])
+        self.assertEqual(derived['generation_run_id'], '123')
+        self.assertEqual(derived['team_generation']['sha'], c.git(self.root, 'rev-parse', 'HEAD'))
+        self.assertEqual(derived['team_generation']['run_id'], '456')
+        self.assertEqual(derived['worker_fingerprint'], original['worker_fingerprint'])
+        for name in ('data/opportunities.js', 'data/search-v2-voyage-manifest.json'):
+            self.assertEqual(derived['files'][name], original['files'][name])
+        receipt = validate(self.root, derived_path, self.reports, execute=self.execute([]))
+        c.verify_receipt(self.root, derived_path, receipt)
+        c.materialize(self.root, derived_path)
+        c.verify_files(self.root, derived['files'])
+        (self.root / 'scripts/parser.py').write_text('VERSION = 2\n')
+        with self.assertRaisesRegex(ValueError, 'required action generate'):
+            c.verify_dependencies(self.root, derived)
 
     def test_private_and_unmanifested_bytes_are_rejected(self):
         self.create()

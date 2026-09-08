@@ -112,7 +112,8 @@ retry restores the team.
 ## AI boundary
 
 Browsing a published proposal requires no provider call. The offline generator
-uses the configured Anthropic model to decompose a bounded source, Voyage to
+uses independent decomposition/adjudication/verification routes from
+`config/offline_ai.json` to decompose a bounded source, Voyage to
 retrieve relevant eligible claims, and separate adjudication and independent
 verification calls to assess those exact claims. Verification cannot invent
 edges or upgrade proposed coverage. Source quotes, identities, evidence limits,
@@ -121,11 +122,11 @@ claim revisions, and currentness remain publication requirements.
 ## Generation and failure recovery
 
 The coordinated refresh first invalidates source/profile dependencies, restores
-the existing public-evidence cache, then runs the bounded generator. The normal
-command remains:
+the existing public-evidence cache, then runs the bounded generator. The protected workflow reserves a durable logical budget before invoking the
+generator. Its maintenance command is:
 
 ```sh
-python -m scripts.build_opportunity_teams --generate --max-scopes 60 --workers 3 --write
+python -m scripts.build_opportunity_teams --generate --mode maintenance --state "$RUNNER_TEMP/offline-$GITHUB_RUN_ID" --baseline "$RUNNER_TEMP/accepted-scopes.json" --max-scopes 60 --workers 3 --write
 ```
 
 Omit `--generate` to perform invalidation and deterministic assembly without
@@ -139,13 +140,29 @@ scientific evidence that an opportunity is unsuitable. Cache reads are
 revalidated; invalid entries are evicted, and only validated replacements are
 atomically admitted. Transient transport errors and invalid outputs receive at
 most three attempts with bounded backoff. Authentication/configuration errors
-stop further network attempts for that provider instance. Failed calls count
-against the request and overall time budgets.
+stop new requests for that provider in the durable logical run. Safety refusals
+are retained under their exact contract and are not retried. Failed calls count
+against request/time bounds and the durable dollar allowance. Each concurrent
+request reserves its conservative input/output allowance before dispatch, then
+reconciles actual provider usage. Unknown usage remains charged at the reservation.
+The initial pilot is at most five scopes/$2, normal maintenance $2, and manual
+backfill $5; no recurring backfill is enabled. Stage caches live in the durable
+spend checkpoint as well as an optional cross-run cache, so a late failure does
+not repeat completed earlier stages. `--mode replay` disables new selection and
+requires zero team-provider calls. OpenAI Responses uses only the Actions
+`OPENAI_API_KEY`; selected Sonnet stages use `ANTHROPIC_API_KEY`; Voyage stays
+separate. Publication/validation never receive generation keys. Interactive AI
+features are unchanged. See [offline evaluation](OFFLINE_AI_EVALUATION.md).
 
-The versioned attempt contract retains valid scientific decisions separately
-from retryable processing failures. Legacy negative receipts without a current
-validated decision become eligible for bounded reconsideration; compatible
-published teams are retained. Failed per-scope processing receives a one-hour
+The versioned attempt contract retains scientific validity separately from
+provider routing and raw-cache compatibility. Exact hash-proven legacy Sonnet
+teams and negative decisions retain their original provenance. A default model
+change does not resubmit them. Unprovable legacy evidence is never relabeled.
+Source-only negatives do not depend on unrelated researcher claims. Insufficient
+evidence decisions track their retrieved claim revisions and eligible claim
+inventory; relevant changes may reopen them. New scopes are measured against the
+prior accepted snapshot. Historical untouched scopes remain in manual backfill;
+unused maintenance budget never fills that queue. Failed per-scope processing receives a one-hour
 cooldown, while changed inputs are immediately eligible. Source or researcher
 invalidation always happens before provider work, so an outage cannot republish
 unsupported teams. A failed generation exits nonzero after persisting safe

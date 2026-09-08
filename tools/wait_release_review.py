@@ -65,6 +65,18 @@ def parsed_time(value):
     return datetime.fromisoformat(value.replace('Z', '+00:00'))
 
 
+def reviewed_head(repository, body, head):
+    match = re.search(r'Reviewed commit:?\*{0,2}:?\s*`?([a-f0-9]{10,40})\b', body)
+    if not match or not head.startswith(match[1]):
+        return False
+    if match[1] == head:
+        return True
+    # GitHub's terminal bot comment uses ten characters. Resolve that prefix
+    # through authenticated repository metadata; a textual prefix alone is not
+    # exact-head evidence and an ambiguous/unavailable resolution fails closed.
+    return api(f'repos/{repository}/commits/{match[1]}').get('sha') == head
+
+
 def review_state(repository, number, head, created_at=None):
     pr = api(f'repos/{repository}/pulls/{number}')
     if pr['head']['sha'] != head or pr['base']['ref'] != 'main':
@@ -78,7 +90,7 @@ def review_state(repository, number, head, created_at=None):
     bot = lambda row: row.get('user', {}).get('login') == BOT
     terminal_reviews = [row for row in reviews if bot(row) and row.get('commit_id') == head and row.get('state') in ('APPROVED', 'COMMENTED', 'CHANGES_REQUESTED')]
     terminal_comments = [row for row in comments if bot(row) and 'Codex Review' in row.get('body', '')
-                         and re.search(r'Reviewed commit:?\*{0,2}:?\s*`?' + head, row.get('body', ''))]
+                         and reviewed_head(repository, row.get('body', ''), head)]
     clean_reaction = any(bot(row) and row.get('content') == '+1' and parsed_time(row['created_at']) >= parsed_time(created_at) for row in reactions)
     completed = bool(terminal_reviews or terminal_comments or clean_reaction)
     findings = [row for thread in threads if not thread['isResolved'] for row in thread['comments']['nodes']

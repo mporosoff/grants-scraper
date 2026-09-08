@@ -3,6 +3,7 @@ from contextlib import ExitStack, redirect_stdout, chdir
 from datetime import date, datetime, timezone
 import io
 import json
+import os
 from pathlib import Path
 import shutil
 import sys
@@ -158,10 +159,11 @@ def run_pipeline(directory):
         documents.main(["--enable-subtopics", "--subtopic-cache", "data/subtopics.js", "--now", NOW.isoformat(), "--request-delay", "0", "--max-documents", "20"])
         stack.enter_context(patch.object(sys, "argv", ["faculty_match"]))
         faculty_match.main()
+        stack.enter_context(patch.dict(os.environ, {"ANTHROPIC_API_KEY": "synthetic"}))
         stack.enter_context(patch.object(teams.Provider, "json", provider_response))
         stack.enter_context(patch.object(teams.Provider, "embed", side_effect=lambda texts, kind: [[1.0, 0.0] for _ in texts]))
         stack.enter_context(patch.object(teams.Provider, "embed_reusable", side_effect=lambda texts, kind, dependencies=None: [[1.0, 0.0] for _ in texts]))
-        with patch.object(sys, "argv", ["build_opportunity_teams", "--generate", "--write", "--workers", "1"]):
+        with patch.object(sys, "argv", ["build_opportunity_teams", "--generate", "--write", "--workers", "1", "--mode", "backfill", "--state", ".spend/fixture"]):
             assert teams.main() == 0
         final = documents.read_catalog("data/opportunities.js")
         build_feeds.build_feeds(final, Path("feeds"), as_of=AS_OF)
