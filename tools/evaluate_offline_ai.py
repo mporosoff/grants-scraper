@@ -196,6 +196,19 @@ def cov4(client, destination):
     return report
 
 
+def resume_preflight_credential(ledger):
+    """Clear only the obsolete missing-key stop when the Actions step has a key."""
+    if not os.environ.get('OPENAI_API_KEY'):
+        return
+    with ledger.locked():
+        state = ledger.read()
+        if state['blocked_providers'].get('openai') == 'missing_actions_step_credential':
+            del state['blocked_providers']['openai']
+            state['events'].append({'kind': 'actions_credential_available', 'provider': 'openai',
+                                    'prior_reason': 'missing_actions_step_credential', 'stage': 'preflight'})
+            atomic_json(ledger.path, state)
+
+
 def preflight(client):
     def validate(value):
         if value != {"ready": True} or type(value.get("ready")) is not bool:
@@ -212,6 +225,8 @@ def main():
     args = parser.parse_args()
     args.state.mkdir(parents=True, exist_ok=True)
     ledger = Ledger(args.state / "ledger.json", TASK, config()["budgets_usd"]["evaluation"], max_requests=config()["max_requests"])
+    if args.phase == 'preflight':
+        resume_preflight_credential(ledger)
     client = Client(ledger, args.state / "cache", deadline=time.monotonic() + 2400)
     marker = args.state / (args.phase + "-completed.json")
     contract = evaluation_contract(args.phase)
