@@ -51,7 +51,13 @@ def http_diagnostic(response, body):
 
 
 def public_path(name):
-    return name == '.nojekyll' or name.endswith('.html') or name.startswith(('assets/', 'data/', 'feeds/'))
+    return name.endswith('.html') or name.startswith(('assets/', 'data/', 'feeds/'))
+
+
+def pages_path(name):
+    # .nojekyll controls Pages processing but is not an HTTP-served asset.
+    # Keep it in the immutable bundle, protected merge and hashed staging tree.
+    return name == '.nojekyll' or public_path(name)
 
 
 def fetch(url):
@@ -126,14 +132,14 @@ def stage_site(bundle, reports, output):
         raise ValueError('Pages staging directory must be new')
     import shutil
     for name in manifest['files']:
-        if public_path(name):
+        if pages_path(name):
             target = c.checked_path(output, name)
             target.parent.mkdir(parents=True, exist_ok=True)
             shutil.copyfile(Path(bundle) / 'files' / name, target)
     c.write_json(output / 'release/candidate.json', manifest)
     c.write_json(output / 'release/publication.json', publication)
     (output / 'pages-release-sha.txt').write_text(publication['publication_sha'] + '\n', encoding='utf-8')
-    c.verify_files(output, {k: v for k, v in manifest['files'].items() if public_path(k)})
+    c.verify_files(output, {k: v for k, v in manifest['files'].items() if pages_path(k)})
 
 
 def validate_publication(manifest, publication, validation):
