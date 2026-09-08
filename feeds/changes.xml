@@ -4,8 +4,1064 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-09-07T01:35:26Z</updated>
+  <updated>2026-09-08T09:56:30Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Opportunity amended: Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
+    <link href="https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons"/>
+    <id>urn:funding-finder:change:fb2f0be6f0514415213c</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363645"/>
+    <id>urn:funding-finder:change:f922f50e1a534dbc3eb8</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Long-term health outcomes of people living with spina bifida</title>
+    <link href="https://www.grants.gov/search-results-detail/361002"/>
+    <id>urn:funding-finder:change:f3119308b81b07709f74</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-17 → 2026-09-26</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Computational and Data-Enabled Science and Engineering</title>
+    <link href="https://www.grants.gov/search-results-detail/356055"/>
+    <id>urn:funding-finder:change:f26e3f6755a7d9e4fad9</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-11-16 → not listed</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Tribal Broadband Connectivity Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362843"/>
+    <id>urn:funding-finder:change:f20deb0ff98415cfb158</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-17 → 2026-11-17</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Postdoctoral Research Fellowships in Biology (PRFB)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/prfb-postdoctoral-research-fellowships-biology/nsf26-504"/>
+    <id>urn:funding-finder:change:f17e8b9b5b44cace3992</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Special Program Announcement for Office of Naval Research Research Opportunity: FY27 Communications and Networking Applied Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362836"/>
+    <id>urn:funding-finder:change:eed0f2a6118835659b8b</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-10 → 2026-11-16</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Toxic Exposures Investigator Initiated Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362304"/>
+    <id>urn:funding-finder:change:ed44a81718842801b463</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-01 → 2026-11-19</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: SHINE</title>
+    <link href="https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view"/>
+    <id>urn:funding-finder:change:eccc25dee049d36694fa</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NIH Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PAR-25-322.html"/>
+    <id>urn:funding-finder:change:e933226c883ed5db32a9</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-28</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Environmental Health Sciences Core Centers Program (P30 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357121"/>
+    <id>urn:funding-finder:change:e72881041f26786460c1</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-01-30 → 2027-04-20</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Rare Cancers Resource and Community Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362850"/>
+    <id>urn:funding-finder:change:e6a5c500aa9da1d419f7</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-30 → 2026-11-18</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Title XVI Water Reclamation and Reuse Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362396"/>
+    <id>urn:funding-finder:change:e53a7388892cf5d230b8</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-11-20 → 2027-08-26</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
+    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
+    <id>urn:funding-finder:change:e1badd834cdb2b714eed</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Energy, Power, Control, and Networks</title>
+    <link href="https://www.grants.gov/search-results-detail/348258"/>
+    <id>urn:funding-finder:change:e16bc1c804deaad57ab2</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: US Travelers Health Research, Surveillance, Communication, and Outreach Network</title>
+    <link href="https://www.grants.gov/search-results-detail/360200"/>
+    <id>urn:funding-finder:change:e0844dc7a1e449f57102</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-15 → 2026-11-05</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Rare Cancers Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362849"/>
+    <id>urn:funding-finder:change:df83cb641d2dc9ab0a39</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-30 → 2026-11-18</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Commercial Fishing Occupational Safety Training Project Grants (T03)</title>
+    <link href="https://www.grants.gov/search-results-detail/334972"/>
+    <id>urn:funding-finder:change:dd3c32f29b76c5c5ec63</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-12-31 → 2027-01-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Schizophrenia and related disorders during mid- to late-life (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357181"/>
+    <id>urn:funding-finder:change:dbd6233f18b03187d536</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/iusepfe-red-iuseprofessional-formation-engineers-revolutionizing/nsf24-564"/>
+    <id>urn:funding-finder:change:d5dd16a9202f9c58f3fc</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-08</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Electronics, Photonics and Magnetic Devices</title>
+    <link href="https://www.grants.gov/search-results-detail/345872"/>
+    <id>urn:funding-finder:change:d3777f0f69377a0b44b8</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Stimulating Access to Research in Residency (StARR) (R38 Independent Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359130"/>
+    <id>urn:funding-finder:change:d3472f0d1d935b5926a4</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-14 → 2028-01-10</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Computational and Data-Enabled Science and Engineering (CDS&amp;E)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/cdse-computational-data-enabled-science-engineering/pd24-8084"/>
+    <id>urn:funding-finder:change:ce36244f20b4069a7962</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: EDU Core Research (ECR: Core)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588"/>
+    <id>urn:funding-finder:change:cd185197193e4f71759c</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-01</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: MPPEP Phase 3 Invasive Wild-Caught Catfish</title>
+    <link href="https://www.grants.gov/search-results-detail/363804"/>
+    <id>urn:funding-finder:change:cd0660f5dc47906b2d68</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NEW NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs : A Pilot Emphasis on Scientific Instrumentation. | NSF 26-511</title>
+    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology-0"/>
+    <id>urn:funding-finder:change:c94e843e7148ae121bdf</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot</title>
+    <link href="https://www.grants.gov/search-results-detail/341244"/>
+    <id>urn:funding-finder:change:c6bed6040ab7fe4d3adf</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise (SoS: BIO)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/sosbio-science-science-approach-analyzing-innovating-biomedical/nsf23-569"/>
+    <id>urn:funding-finder:change:c2471576d31fc40133cb</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Reissue of RFA-FD-23-001- Clinical Studies of Orphan Products Addressing Unmet Needs of Rare Diseases (R01 Clinical Trials Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/360008"/>
+    <id>urn:funding-finder:change:c1e0ff3887de6c75448d</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-21 → 2027-05-18</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core"/>
+    <id>urn:funding-finder:change:c1ab5fa78dd9e6898b56</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-10</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
+    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
+    <id>urn:funding-finder:change:bfbe826eb0703c244eb3</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Social disconnection and Suicide Risk in Late Life (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357198"/>
+    <id>urn:funding-finder:change:bee5c4d8220ed381416d</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Spinal Cord Injury, Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362224"/>
+    <id>urn:funding-finder:change:ba3e20395eb0093ffc19</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-18 → 2026-11-12</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Substance Use/Substance Use Disorder Dissertation Research Award (R36 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357974"/>
+    <id>urn:funding-finder:change:b91a37a14032acc80368</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: ONR FY27 NOFO for Young Investigator Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363632"/>
+    <id>urn:funding-finder:change:b6d9e398ac0ba1ab9f1b</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-16 → 2026-10-30</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Fiscal Year (FY) 2026 Funding Opportunity for Indian Tribes and Intertribal Consortia for Nonpoint Source Management Grants Under Clean Water Act Section 319</title>
+    <link href="https://www.grants.gov/search-results-detail/363611"/>
+    <id>urn:funding-finder:change:b66372b402dba9c4177c</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-09 → 2026-11-09</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Research Projects to Enhance Applicability of Mammalian Models for Translational Research (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357005"/>
+    <id>urn:funding-finder:change:b4b75be6c09dd8045fe5</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Division of Materials Research: Topical Materials Research Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/349655"/>
+    <id>urn:funding-finder:change:af85086deec8e95f9d0b</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NIH Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)</title>
+    <link href="https://files.simpler.grants.gov/opportunities/9a4aeb2f-d0ac-403b-ac67-9d1fd24d9556/attachments/2037e87d-aae5-4621-8e37-b3fb158c3c26/PAR-27-032-Full-Announcement.pdf"/>
+    <id>urn:funding-finder:change:ad84664063c2fbc29020</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-02</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Orthopaedic, Applied Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362520"/>
+    <id>urn:funding-finder:change:ad70d08665695135cd3e</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-25 → 2026-11-18</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Ruth L. Kirschstein National Research Service Award (NRSA) Institutional Research Training Grant (Parent T32)</title>
+    <link href="https://www.grants.gov/search-results-detail/357140"/>
+    <id>urn:funding-finder:change:accfb433252437ee86bf</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-25 → 2028-05-04</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Division of Chemistry: Disciplinary Research Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/347749"/>
+    <id>urn:funding-finder:change:ac6792ace64049f5663c</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering/pd24-110z"/>
+    <id>urn:funding-finder:change:ac20ea0d162d82f67ea6</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Assay development and screening for discovery of chemical probes, drugs or immunomodulators (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357014"/>
+    <id>urn:funding-finder:change:a8c11878a26825d5e05b</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Powering Affordable Reliable Technology (PART) Energy Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363396"/>
+    <id>urn:funding-finder:change:a6e740aaa6b7754691c7</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>forecasted → posted</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512</title>
+    <link href="https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery"/>
+    <id>urn:funding-finder:change:a02f91bd045f35e0fc4f</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Advanced Technologies and Instrumentation for the Astronomical Sciences</title>
+    <link href="https://www.grants.gov/search-results-detail/343166"/>
+    <id>urn:funding-finder:change:9ec098aaaa1b4ff03c90</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: WaterSMART: Desalination Construction Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362395"/>
+    <id>urn:funding-finder:change:9ac02d0b2d8dcaab8828</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-11-20 → 2027-08-26</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Computer and Information Science and Engineering : Future Computing Research (Future CoRe)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing/nsf25-543"/>
+    <id>urn:funding-finder:change:9a376602bed5a02e0c7a</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Spinal Cord Injury, Investigator-Initiated Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362226"/>
+    <id>urn:funding-finder:change:99819ee63585c1408907</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-18 → 2026-11-12</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Expeditions in Computing</title>
+    <link href="https://www.grants.gov/search-results-detail/324456"/>
+    <id>urn:funding-finder:change:97cfd24674ee831c0364</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Simons Foundation</title>
+    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
+    <id>urn:funding-finder:change:9740c3e0e4a367d8f705</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NSF Computer and Information Science and Engineering : Core Programs 25-543</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/computer-information-science-engineering-core"/>
+    <id>urn:funding-finder:change:972106b4f3c1038cb60e</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Advanced Technological Education (ATE)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/ate-advanced-technological-education/nsf24-584"/>
+    <id>urn:funding-finder:change:953f08d40b768525c2e7</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-01</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Bone Marrow Failure, Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362854"/>
+    <id>urn:funding-finder:change:94d99e1dffd2d72db342</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-16 → 2026-11-04</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering/pd24-110z"/>
+    <id>urn:funding-finder:change:94d4fe25918d5b0aa021</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Cold Chain Grants for Emergency Food Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363631"/>
+    <id>urn:funding-finder:change:945b8c577f6b2113b489</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-30 → 2026-10-01</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Orthopaedic, Clinical Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362524"/>
+    <id>urn:funding-finder:change:92eaa54f191180302ede</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-25 → 2026-11-18</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:change:8eb1dae04f875579dc15</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-23 → 2026-09-28</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: WaterSMART Enhancing Water Resources Projects</title>
+    <link href="https://www.grants.gov/search-results-detail/362394"/>
+    <id>urn:funding-finder:change:87f3eabff01763630860</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-09 → 2027-09-08</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Spinal Cord Injury, Translational Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362222"/>
+    <id>urn:funding-finder:change:805a2a12bcad2938593a</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-18 → 2026-11-12</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Innovative Water Infrastructure Workforce Development Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/363657"/>
+    <id>urn:funding-finder:change:75ad909fdf967c7141fd</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-14 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Bone Marrow Failure, Investigator-Initiated Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362855"/>
+    <id>urn:funding-finder:change:74523db145ae82c995b9</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-16 → 2026-11-04</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Social disconnection and Suicide Risk in Late Life (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357197"/>
+    <id>urn:funding-finder:change:727b178a5f9ad43e6902</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: EDU Core Research (ECR: Core)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588"/>
+    <id>urn:funding-finder:change:716b2756f96ac3358f3b</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Plant Genome Research Program</title>
+    <link href="https://www.grants.gov/search-results-detail/352500"/>
+    <id>urn:funding-finder:change:70ba8086a223598a34fa</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Alcohol Treatment, Pharmacotherapy, and Recovery Research (R34 Clinical Trial required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357444"/>
+    <id>urn:funding-finder:change:703dfe584a6eb946ec39</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Spinal Cord Injury, Clinical Translation Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362225"/>
+    <id>urn:funding-finder:change:6fbef5a2370242619016</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-18 → 2026-11-12</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Air Force Basic Research Sciences Conference and Workshop Support</title>
+    <link href="https://simpler.grants.gov/opportunity/b7fddbe0-486a-4d82-bfa3-14fb0f0b0527"/>
+    <id>urn:funding-finder:change:6c440a5f5b9c6444938b</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NSF Plasma Physics</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
+    <id>urn:funding-finder:change:6c0f451f5ae3c512c400</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: QBIT Stage A</title>
+    <link href="https://sam.gov/opp/4a1aad28cb2a4b2ab1ee408c639202ef/view"/>
+    <id>urn:funding-finder:change:6bfe3e932cf2cf517204</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: New NSF MPS funding opportunities for core research programs</title>
+    <link href="https://links-2.govdelivery.com/CL0/https:"/>
+    <id>urn:funding-finder:change:6b8044aa6be37a82a263</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Cellular and Molecular Biology of Complex Brain Disorders (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357182"/>
+    <id>urn:funding-finder:change:6b7c66efa44ce2737bbd</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363645"/>
+    <id>urn:funding-finder:change:6a438626b8e6c75b216d</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-09-17 → 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Dental Primary Care Practice-Based Research Network: Clinical Trial or Observational Study Planning and Implementation Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/360375"/>
+    <id>urn:funding-finder:change:696265c1ef630725d872</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Commercial Fishing Occupational Safety Research Cooperative Agreement (U01)</title>
+    <link href="https://www.grants.gov/search-results-detail/334971"/>
+    <id>urn:funding-finder:change:6396184eb4cecab24323</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-12-31 → 2028-01-31</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Joint DMS/NIGMS Initiative to Support Research at the Interface of the Biological and Mathematical Sciences (DMS/NIGMS)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600"/>
+    <id>urn:funding-finder:change:5fecf5194e2474876746</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-18</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DOW Combat Readiness - Medical Research Program Translational Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362961"/>
+    <id>urn:funding-finder:change:5c779f3cbc5f6404e648</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-14 → 2026-11-18</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Animal and Veterinary Innovation Centers (U18)</title>
+    <link href="https://www.grants.gov/search-results-detail/355044"/>
+    <id>urn:funding-finder:change:5aa1256506dd4b8749a2</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-03-31 → 2028-05-12</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Native Entities Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362842"/>
+    <id>urn:funding-finder:change:5a369f87ee560d5cc490</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-17 → 2026-11-17</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: 2026 Alaska Marine Education and Training Mini-Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362034"/>
+    <id>urn:funding-finder:change:57e616af68cabbf24cd7</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-05-03 → 2028-05-01</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Postdoctoral Research Fellowships in Biology (PRFB)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/prfb-postdoctoral-research-fellowships-biology/nsf26-504"/>
+    <id>urn:funding-finder:change:5498bfc5668b8a8b7e23</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Cellular and Molecular Biology of Complex Brain Disorders (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357180"/>
+    <id>urn:funding-finder:change:53ca650c8f990ef777ee</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Ruth L. Kirschstein National Research Service Award (NRSA) Short-Term Institutional Research Training Grant (Parent T35)</title>
+    <link href="https://www.grants.gov/search-results-detail/357996"/>
+    <id>urn:funding-finder:change:51e5fc40dffc0c54eefc</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-25 → 2028-05-07</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Novel Mechanism Research on Neuropsychiatric Symptoms (NPS) in Alzheimer's Dementia (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357199"/>
+    <id>urn:funding-finder:change:5177e87fc3af8a67a70d</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Resilient</title>
+    <link href="https://sam.gov/opp/f0e3e0d303254053922d9b2c7a67e878/view"/>
+    <id>urn:funding-finder:change:50e59af1a915fb873c9a</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Toxic Exposures Translational Research Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362305"/>
+    <id>urn:funding-finder:change:4f923cafd2b3a66b14b4</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-01 → 2026-11-19</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Specialty Crop Multi-State Grant Program 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/361876"/>
+    <id>urn:funding-finder:change:4dc1b7e3e00d72a1f8e6</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-30 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: National Centers for Biomedical Imaging and Bioengineering (NCBIB) (P41 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/349618"/>
+    <id>urn:funding-finder:change:4d818a5a46484e24f9ca</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Alcohol Health Services Research (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357440"/>
+    <id>urn:funding-finder:change:45c485cba83a45cc0017</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Novel Mechanism Research on Neuropsychiatric Symptoms (NPS) in Alzheimer's Dementia (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357200"/>
+    <id>urn:funding-finder:change:448bba0b0982b641ac0f</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Computational and Data-Enabled Science and Engineering (CDS&amp;E)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/cdse-computational-data-enabled-science-engineering/pd24-8084"/>
+    <id>urn:funding-finder:change:43206cf2de0e6f4c66cb</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-15</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)</title>
+    <link href="https://www.grants.gov/search-results-detail/360593"/>
+    <id>urn:funding-finder:change:3fdc05074461abe76a95</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-02 → 2029-02-06</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Schizophrenia and related disorders during mid- to late-life (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357183"/>
+    <id>urn:funding-finder:change:3d70bf9e59d91f3ce2b2</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:change:3d6867fc7fb0564a0d40</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-03-01 → 2027-09-01</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Alcohol Treatment, Pharmacotherapy, and Recovery Research (R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357442"/>
+    <id>urn:funding-finder:change:38fd7462ff9d8ca6fe4d</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Fiscal Year (FY) 2027 Department of War (DoW) Defense University Research Instrumentation Program (DURIP)</title>
+    <link href="https://simpler.grants.gov/opportunity/812b55e0-deb1-43cc-a2e2-f9f82ad735ad"/>
+    <id>urn:funding-finder:change:350c34bc2e3c09d8c514</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Directorate of Engineering</title>
+    <link href="https://www.nsf.gov/funding/opportunities/eccs-engineering-eng-electrical-communications-computing-systems"/>
+    <id>urn:funding-finder:change:34086cf3e3fb2d6fb9c5</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU) Equipment/Instrumentation</title>
+    <link href="https://www.grants.gov/search-results-detail/363724"/>
+    <id>urn:funding-finder:change:32fd7e549ade6bffaf9e</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-30 → 2026-10-09</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: High Priority HIV and Substance Use Research (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/355867"/>
+    <id>urn:funding-finder:change:329c0bda411e8f260537</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-01-08 → 2027-03-06</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Astronomy and Astrophysics Research Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/342959"/>
+    <id>urn:funding-finder:change:322d7f11399b99f9401d</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Alcohol Health Services Research (R34 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357438"/>
+    <id>urn:funding-finder:change:3164e33f798f77b54632</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Security, Privacy, and Trust in Cyberspace (SaTC 2.0)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/satc-20-security-privacy-trust-cyberspace/nsf25-515"/>
+    <id>urn:funding-finder:change:307802ed329d26096bd3</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Restorative &amp; health-Enhancing Sleep Time (REST)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
+    <id>urn:funding-finder:change:2f012115888703c0f585</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: AEIF 2026 Alumni Summit: Freedom 250</title>
+    <link href="https://www.grants.gov/search-results-detail/363824"/>
+    <id>urn:funding-finder:change:2e6ee5b4d411462e60c2</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-14</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Title X Family Planning Services Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/361754"/>
+    <id>urn:funding-finder:change:2a6e3f7f9f965042b10a</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-11-09 → 2027-01-11</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Preclinical Proof of Concept Studies for Rare Diseases (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357570"/>
+    <id>urn:funding-finder:change:283a5895e757d263b481</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-06-03 → 2027-07-02</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Priority HIV/AIDS Research within the Mission of NIDDK (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358086"/>
+    <id>urn:funding-finder:change:27e7864314544b26c3a5</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-01-08 → 2027-11-05</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Advanced Technological Education (ATE)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/ate-advanced-technological-education/nsf24-584"/>
+    <id>urn:funding-finder:change:27c6ff6a420d7980ebd8</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Communications, Circuits, and Sensing-Systems</title>
+    <link href="https://www.grants.gov/search-results-detail/346204"/>
+    <id>urn:funding-finder:change:258fedd778c677a05db7</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: WaterSMART Cooperative Watershed Management Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362755"/>
+    <id>urn:funding-finder:change:24f9006b428a18aca875</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-07 → 2028-02-15</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NIH Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PAR-25-322.html"/>
+    <id>urn:funding-finder:change:2477df99221c0186b077</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: AEIF 2026 Alumni Summit: Freedom 250</title>
+    <link href="https://www.grants.gov/search-results-detail/363824"/>
+    <id>urn:funding-finder:change:22f4118bcf88c2a31269</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Authority to Accept Unsolicited Proposals for Research Partnerships Notice of Intent (NOI)</title>
+    <link href="https://www.grants.gov/search-results-detail/362364"/>
+    <id>urn:funding-finder:change:22cfe3428ed13c23db4b</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2027-05-01 → 2027-06-09</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Joint DMS/NIGMS Initiative to Support Research at the Interface of the Biological and Mathematical Sciences (DMS/NIGMS)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600"/>
+    <id>urn:funding-finder:change:22a105a017b369925ac2</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363622"/>
+    <id>urn:funding-finder:change:21aacfc10ff00ac9291d</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-11-19 → 2027-02-11</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: NOAA Great Lakes Fish Habitat Restoration Partnership Grants</title>
+    <link href="https://www.grants.gov/search-results-detail/356231"/>
+    <id>urn:funding-finder:change:1fddfb2d69cb796f6941</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-01 → not listed</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/360199"/>
+    <id>urn:funding-finder:change:1d7aa266376508c106c6</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-15 → 2026-11-05</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NIH Exploratory/Developmental Research Project Grant (Parent R21 Clinical Trial Not Allowed)</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-304.html"/>
+    <id>urn:funding-finder:change:1c0e05344afb8fdeee85</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: NICHD Resource Program Grants in Bioinformatics (P41 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356517"/>
+    <id>urn:funding-finder:change:1aa88dd8537e946e79cf</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-25 → 2027-09-25</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Clinical and Translational Science Award (UM1 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356316"/>
+    <id>urn:funding-finder:change:1a993bc4b7d1bcb7ba19</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-28 → 2027-09-28</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Doctoral New Investigator (DNI) Grants</title>
+    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/doctoral-new-investigator-grants.html"/>
+    <id>urn:funding-finder:change:16b49045081c972de028</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-14 → not listed</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: QBI Topic: Independent Verification and Validation</title>
+    <link href="https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view"/>
+    <id>urn:funding-finder:change:153407d40d3d14627b82</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NIH Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)</title>
+    <link href="https://files.simpler.grants.gov/opportunities/9a4aeb2f-d0ac-403b-ac67-9d1fd24d9556/attachments/2037e87d-aae5-4621-8e37-b3fb158c3c26/PAR-27-032-Full-Announcement.pdf"/>
+    <id>urn:funding-finder:change:131cb750a01f4371bf52</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: IUSE/Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
+    <link href="https://www.nsf.gov/funding/opportunities/iusepfe-red-iuseprofessional-formation-engineers-revolutionizing/nsf24-564"/>
+    <id>urn:funding-finder:change:12e9c2507028b93621bb</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Established Program to Stimulate Competitive Research (EPSCoR): Workshop Opportunities</title>
+    <link href="https://www.grants.gov/search-results-detail/352339"/>
+    <id>urn:funding-finder:change:12bd4d14b21af53733ac</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029</title>
+    <link href="https://www.grants.gov/search-results-detail/363514"/>
+    <id>urn:funding-finder:change:100683a1be63195c7fbb</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-09 → 2026-09-18</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Toxic Exposures Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362302"/>
+    <id>urn:funding-finder:change:07a7d0528a3ac0c205ae</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-10-01 → 2026-11-19</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: Logistical Support for Citizen Security, counternarcotics, border security, criminal deterrence and Law Enforcement Projects in Honduras</title>
+    <link href="https://www.grants.gov/search-results-detail/363590"/>
+    <id>urn:funding-finder:change:06a7a8295a0e6d753ad6</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-11 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Powering Affordable Reliable Technology (PART) Energy Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363396"/>
+    <id>urn:funding-finder:change:050f068bd644030b21e7</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Source interpretation corrected: DoW Joint Warfighter Medical, Military Medical Research and Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362857"/>
+    <id>urn:funding-finder:change:044cb21347a2d3322fff</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="source_correction"/>
+    <summary>2026-09-21 → 2026-11-16</summary>
+  </entry>
+  <entry>
+    <title>Status changed: Cyberinfrastructure for Public Access and Open Science</title>
+    <link href="https://www.grants.gov/search-results-detail/353475"/>
+    <id>urn:funding-finder:change:03eb57298fb9475c788c</id>
+    <updated>2026-09-08T09:38:27.382745Z</updated>
+    <category term="status_changed"/>
+    <summary>archived → posted</summary>
+  </entry>
   <entry>
     <title>Closing soon: Neural Ensembles &amp; Used Substances (NExUS) Collaboratory: Building a Multimodal Inventory of Cell Ensembles Encoding the Effects of Addictive Substances</title>
     <link href="https://www.grants.gov/search-results-detail/360562"/>
@@ -549,1061 +1605,5 @@
     <updated>2026-09-05T10:08:13.857021Z</updated>
     <category term="closed_or_removed"/>
     <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: American Alligators as Ecological Indicators of Everglades Restoration</title>
-    <link href="https://www.grants.gov/search-results-detail/363822"/>
-    <id>urn:funding-finder:change:54ede5e3ff3404f1df50</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Addressing Dementia in Tribal and Urban Indian Communities: CAReS Program</title>
-    <link href="https://www.grants.gov/search-results-detail/360294"/>
-    <id>urn:funding-finder:change:50ac081df95fe0949d06</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Conservation and Forestry Program Support (2026-2031) for Environmental Natural Resources Management Division, Directorate of Public Works, Joint Readiness Training Center and Fort Polk, Louisiana</title>
-    <link href="https://www.grants.gov/search-results-detail/363721"/>
-    <id>urn:funding-finder:change:4e1d757e8ad97901417a</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01)</title>
-    <link href="https://www.grants.gov/search-results-detail/349976"/>
-    <id>urn:funding-finder:change:48ac144b455b93a5ae66</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Improving the Capacity of Tribal Communities to Identify Emerging Drug Threats</title>
-    <link href="https://www.grants.gov/search-results-detail/363788"/>
-    <id>urn:funding-finder:change:3f157539ba3dc2ebdf3c</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363421"/>
-    <id>urn:funding-finder:change:37c77ec070bf9e3b18d4</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Groundwater and Surficial Water Salinity Changes in Everglades National Park using Aerial Electromagnetic Surveys</title>
-    <link href="https://www.grants.gov/search-results-detail/363817"/>
-    <id>urn:funding-finder:change:375c2bcf2e7fe42a5219</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01)</title>
-    <link href="https://www.grants.gov/search-results-detail/349976"/>
-    <id>urn:funding-finder:change:28dd327de777a4fd9673</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-10-30 → 2026-09-05</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Investigator Initiated Innovation in Computational Genomics and Data Science (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357194"/>
-    <id>urn:funding-finder:change:26af0e8d9d62e8aab4e5</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Juvenile Sportfish Community and Habitat Suitability in Florida Bay</title>
-    <link href="https://www.grants.gov/search-results-detail/363819"/>
-    <id>urn:funding-finder:change:259ca14bd04a0287eb6b</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Selective Harnessing of Intrinsic Neuroplasticity Engineering (SHINE)</title>
-    <link href="https://sam.gov/opp/0396f5debf814299b35bcb146365d675/view"/>
-    <id>urn:funding-finder:change:24b0a9dbf149c1bdad53</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html"/>
-    <id>urn:funding-finder:change:219bfb5e4efdaedd34f8</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Fiscal Year (FY) 2027 Service Area Competition (SAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363423"/>
-    <id>urn:funding-finder:change:142c843cfdc4bf26c7b1</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Science, Technology, Engineering, and Mathematics Fields</title>
-    <link href="https://www.grants.gov/search-results-detail/363818"/>
-    <id>urn:funding-finder:change:0d58ed9a6093d64ba37a</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-14</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: FY26-22-Baltimore Penn Station Facility Improvements</title>
-    <link href="https://www.grants.gov/search-results-detail/363674"/>
-    <id>urn:funding-finder:change:0a8e86fa696208428412</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Investigator Initiated Innovation in Computational Genomics and Data Science (R21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/357195"/>
-    <id>urn:funding-finder:change:08a08049842627df33df</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Research Areas</title>
-    <link href="https://sam.gov/opp/b77f1caefb244d1193ded7f6187ede52/view"/>
-    <id>urn:funding-finder:change:06d7bbc267908af6c8dd</id>
-    <updated>2026-09-05T10:08:13.857021Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Documentation of Hateful Rhetoric Targeting Minority Populations in South Africa</title>
-    <link href="https://www.grants.gov/search-results-detail/363485"/>
-    <id>urn:funding-finder:change:f426a0ea76693f4c6a0c</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 Atlantic Gateway, Arlington to Alexandria Fourth Track - CMAQ Funds</title>
-    <link href="https://www.grants.gov/search-results-detail/363798"/>
-    <id>urn:funding-finder:change:f0305b3e0491200e304b</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-09</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Emergency Department Alternatives to Opioids Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363813"/>
-    <id>urn:funding-finder:change:ef246ad52048a9791ce3</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DRL Ensuring Resilient Seafood Supply Chains: Countering Forced Labor and any associated Illegal, Unreported and Unregulated Fishing</title>
-    <link href="https://www.grants.gov/search-results-detail/363486"/>
-    <id>urn:funding-finder:change:ec188194b32ce69a6ab1</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: FY26 Atlantic Gateway, Arlington to Alexandria Fourth Track - CMAQ Funds</title>
-    <link href="https://www.grants.gov/search-results-detail/363798"/>
-    <id>urn:funding-finder:change:ddf7c135870251d6def4</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363786"/>
-    <id>urn:funding-finder:change:d5028de6435e247815c3</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: English Access Microscholarship Program for Central and Southern Iraq</title>
-    <link href="https://www.grants.gov/search-results-detail/363743"/>
-    <id>urn:funding-finder:change:d3bbbe1d02e19359b3f3</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Ocean Technology and Interdisciplinary Coordination</title>
-    <link href="https://www.grants.gov/search-results-detail/45793"/>
-    <id>urn:funding-finder:change:cefa7e884e46c2db0946</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>Official status is archived</summary>
-  </entry>
-  <entry>
-    <title>Status changed: DoW Breast Cancer, Clinical Research Extension Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363671"/>
-    <id>urn:funding-finder:change:b8894b38ea31d8b47edf</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="status_changed"/>
-    <summary>forecasted → posted</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Building Communities of Recovery</title>
-    <link href="https://www.grants.gov/search-results-detail/363810"/>
-    <id>urn:funding-finder:change:b65001d5c4516304a569</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIH Director's Pioneer Award (DP1 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363801"/>
-    <id>urn:funding-finder:change:aecea872d4996659344a</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Residential Treatment for Pregnant and Postpartum Women</title>
-    <link href="https://www.grants.gov/search-results-detail/363807"/>
-    <id>urn:funding-finder:change:aa84c1033df64d640f8e</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Biological Oceanography (BioOce)</title>
-    <link href="https://www.grants.gov/search-results-detail/344858"/>
-    <id>urn:funding-finder:change:a5fbbb0c2261af1c2c24</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>Official status is archived</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: BJA FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide Program: Joint Task Force Crossroads America - Indiana Invitation to Apply</title>
-    <link href="https://www.grants.gov/search-results-detail/363805"/>
-    <id>urn:funding-finder:change:a0ef47625584e7bada75</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-09</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NIH Director’s Transformative Research Award for Individual and Group Science (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/361084"/>
-    <id>urn:funding-finder:change:a04b41be080d53c239b3</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: State Pilot Program for Treatment for Pregnant and Postpartum Women</title>
-    <link href="https://www.grants.gov/search-results-detail/363808"/>
-    <id>urn:funding-finder:change:9f379e49a85e4f4103b9</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Status changed: DoW Breast Cancer, Breakthrough Award Levels 1 and 2</title>
-    <link href="https://www.grants.gov/search-results-detail/363670"/>
-    <id>urn:funding-finder:change:9efda4a7d1d94325343a</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="status_changed"/>
-    <summary>forecasted → posted</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: International Programs &amp; Trade, Invasive Species Program Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363287"/>
-    <id>urn:funding-finder:change:9b59aef4af24fcd878ca</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Improving the Capacity of Tribal Communities to Identify Emerging Drug Threats</title>
-    <link href="https://www.grants.gov/search-results-detail/363788"/>
-    <id>urn:funding-finder:change:98633160a6dcce2624e0</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Center for Inherited Disease Research (CIDR) High Throughput Sequencing and Genotyping Resource Access (X01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362723"/>
-    <id>urn:funding-finder:change:94d3db4e1cc2732fe664</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIH Director's Early Independence Award (DP5 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363800"/>
-    <id>urn:funding-finder:change:808437c04d30350449e0</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Limited Competition: Small Grant Program for NHLBI K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359675"/>
-    <id>urn:funding-finder:change:6ef568bb3bfac49241bb</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: PFE: Research Initiation in Engineering Formation (PFE: RIEF)</title>
-    <link href="https://www.grants.gov/search-results-detail/363764"/>
-    <id>urn:funding-finder:change:67ea3f7b796bba09501b</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: DoW Breast Cancer, Clinical Research Extension Award</title>
-    <link href="https://www.grants.gov/search-results-detail/363671"/>
-    <id>urn:funding-finder:change:59ea3b4254b3a9902f72</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: GLS Campus Suicide Prevention</title>
-    <link href="https://www.grants.gov/search-results-detail/363809"/>
-    <id>urn:funding-finder:change:5786b5bdefc1b4fe8f63</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Cancer Prevention and Control Programs for State, Territorial, and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/363814"/>
-    <id>urn:funding-finder:change:4821f3a2cf4402984ee1</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Children's Mental Health Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/363812"/>
-    <id>urn:funding-finder:change:3da1c466d244151ca7c1</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Physical Oceanography</title>
-    <link href="https://www.grants.gov/search-results-detail/361184"/>
-    <id>urn:funding-finder:change:3ae8cfc36dd66c19cc5c</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>Official status is archived</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIH Director's Transformative Research Award (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363802"/>
-    <id>urn:funding-finder:change:37137ebddafe91f13e2e</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Providers Clinical Support System - Universities</title>
-    <link href="https://www.grants.gov/search-results-detail/363806"/>
-    <id>urn:funding-finder:change:36621126c04b8a75ffcd</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: 1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363796"/>
-    <id>urn:funding-finder:change:34dcb28b556eb95734c5</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Assisted Outpatient Treatment</title>
-    <link href="https://www.grants.gov/search-results-detail/363811"/>
-    <id>urn:funding-finder:change:2c28dc020bf0be6b41ee</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIH Director's New Innovator Award (DP2 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/363799"/>
-    <id>urn:funding-finder:change:2afb8a1ebb8440dc4b4f</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Bridging Immigration-Related Deficits Experienced Nationwide Program: Joint Task Force Crossroads America - Indiana Invitation to Apply</title>
-    <link href="https://www.grants.gov/search-results-detail/363805"/>
-    <id>urn:funding-finder:change:2abc2b4ced6cfb9f95c8</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363793"/>
-    <id>urn:funding-finder:change:2a5ad6b80e38ab64c8ad</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: DoW Breast Cancer, Breakthrough Award Levels 1 and 2</title>
-    <link href="https://www.grants.gov/search-results-detail/363670"/>
-    <id>urn:funding-finder:change:17ba6ae7c0d30e3e0185</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Chemical Oceanography</title>
-    <link href="https://www.grants.gov/search-results-detail/275150"/>
-    <id>urn:funding-finder:change:137d8252ed81e60ad613</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>Official status is archived</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: MENA Freedom 250 NFL Flag Football Launch and Championship</title>
-    <link href="https://www.grants.gov/search-results-detail/363746"/>
-    <id>urn:funding-finder:change:0acca435f29585562953</id>
-    <updated>2026-09-04T12:40:17.254377Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: CONTAMINATED ALASKA NATIVE CLAIMS SETTLEMENT ACT LANDS ASSISTANCE PROGRAM</title>
-    <link href="https://www.grants.gov/search-results-detail/351547"/>
-    <id>urn:funding-finder:change:fe85eb8f9870ef48ed36</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Prostate Cancer, Early Investigator Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362260"/>
-    <id>urn:funding-finder:change:f6f4366489c6a4d258b5</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
-    <link href="https://www.grants.gov/search-results-detail/362349"/>
-    <id>urn:funding-finder:change:f286c035b5800b97bc93</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-10-31 → 2027-01-11</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Media Literacy and Capacity Building Workshop Series</title>
-    <link href="https://www.grants.gov/search-results-detail/363441"/>
-    <id>urn:funding-finder:change:f1c23260fdc2fd81514d</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363113"/>
-    <id>urn:funding-finder:change:f1832f393309f5c62913</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Emergency Citrus Disease Research and Extension Pre-Applications</title>
-    <link href="https://www.grants.gov/search-results-detail/363785"/>
-    <id>urn:funding-finder:change:edebd82088a9e15a3e7f</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Prostate Cancer, Data Science Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362259"/>
-    <id>urn:funding-finder:change:df45b3eeb26e2b01493a</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: OVC FY 2026 Victim Reunification Travel Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363761"/>
-    <id>urn:funding-finder:change:d9055035419fdd45b53b</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363735"/>
-    <id>urn:funding-finder:change:c97995f18ee6517881cf</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: ROSES 2025: A.17 Hydrosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363789"/>
-    <id>urn:funding-finder:change:c3cf0877a31695d6de1f</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Paul B. Beeson Emerging Leaders Career Development Award in Aging (K76 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360909"/>
-    <id>urn:funding-finder:change:bbac877269ae890c9102</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Prostate Cancer, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362261"/>
-    <id>urn:funding-finder:change:b764e80766dd901f2ab5</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: ROSES25: A.17 Hydrosphere</title>
-    <link href="https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO"/>
-    <id>urn:funding-finder:change:afd9b666f61919b0126a</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Residential Services for Unaccompanied Alien Children</title>
-    <link href="https://www.grants.gov/search-results-detail/363790"/>
-    <id>urn:funding-finder:change:9dab5d6a185d17a003a9</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363793"/>
-    <id>urn:funding-finder:change:86467d1fb7cdd88d50f2</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: FY26 National Dam Safety Program State Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363603"/>
-    <id>urn:funding-finder:change:79e147cd1c074bb1b7f0</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Tribal Colleges Extension Program Special Emphasis</title>
-    <link href="https://www.grants.gov/search-results-detail/363784"/>
-    <id>urn:funding-finder:change:722855b0b1fde6c6b3c7</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Controlling and Preventing STIs in US Health Departments (CAP-STIs)</title>
-    <link href="https://www.grants.gov/search-results-detail/362349"/>
-    <id>urn:funding-finder:change:6c42f42b02571c074913</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: BJA FY 2026 Enhancing Security Measures for Houses of Worship</title>
-    <link href="https://www.grants.gov/search-results-detail/363280"/>
-    <id>urn:funding-finder:change:6a9d88c0b7e4e3233bda</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Early Head Start Expansion and Early Head Start - Child Care Partnership Grants in Multiple States</title>
-    <link href="https://www.grants.gov/search-results-detail/363792"/>
-    <id>urn:funding-finder:change:5e4845daa3d48de4b0f3</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: NIDCD Clinical Research Center Grant (P50 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358863"/>
-    <id>urn:funding-finder:change:58ae2b04b218a57a9f26</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-03</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Lung Cancer Translational Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362250"/>
-    <id>urn:funding-finder:change:58ad5e9bcce4d247c5fe</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363722"/>
-    <id>urn:funding-finder:change:5566a840379994d7b8d6</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Improving the Capacity of Tribal Communities to Identify Emerging Drug Threats</title>
-    <link href="https://www.grants.gov/search-results-detail/363788"/>
-    <id>urn:funding-finder:change:54ff7441a941d022c272</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-13</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Lung Cancer Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362243"/>
-    <id>urn:funding-finder:change:526e6216f1a4bddf7532</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Safeguarding U.S. Critical Minerals Supply Chains- Tunisia</title>
-    <link href="https://www.grants.gov/search-results-detail/363793"/>
-    <id>urn:funding-finder:change:4df2f93952e02b022aae</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-03</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Improving the Capacity of Tribal Communities to Identify Emerging Drug Threats</title>
-    <link href="https://www.grants.gov/search-results-detail/363788"/>
-    <id>urn:funding-finder:change:4aed27d9a98d365f06fc</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: CONTAMINATED ALASKA NATIVE CLAIMS SETTLEMENT ACT LANDS ASSISTANCE PROGRAM</title>
-    <link href="https://www.grants.gov/search-results-detail/351547"/>
-    <id>urn:funding-finder:change:4410187144d5fa0bcbcb</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2027-12-31 → 2029-12-31</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: New York Economy-Wide Regulation Model Design and Build</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001HwzX6AAJ"/>
-    <id>urn:funding-finder:change:3c77144106fcf6c27a49</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Head Start/Early Head Grants in Multiple States</title>
-    <link href="https://www.grants.gov/search-results-detail/363791"/>
-    <id>urn:funding-finder:change:30df56ca9c1ccd1c53ab</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Information Processing Techniques Office Office-Wide</title>
-    <link href="https://www.grants.gov/search-results-detail/362905"/>
-    <id>urn:funding-finder:change:2deeda3649561707203d</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:change:21cb909570b43d8e16fa</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Increasing Market Opportunities in Vietnam for U.S. Innovative Biofertilizer Exporters</title>
-    <link href="https://www.grants.gov/search-results-detail/363449"/>
-    <id>urn:funding-finder:change:1b88131058efb08d7513</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Lung Cancer Patient-Centered Outcomes and Survivorship Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362247"/>
-    <id>urn:funding-finder:change:175af6507322159f1b2c</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:change:15a1a12d329aa548ae0f</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-04</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363786"/>
-    <id>urn:funding-finder:change:0fa991efd86f8aeb8845</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: International Programs &amp; Trade, Invasive Species Program Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363287"/>
-    <id>urn:funding-finder:change:0c3547227dc0168a1005</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Prostate Cancer, Physician Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362262"/>
-    <id>urn:funding-finder:change:0be397c47515ab549074</id>
-    <updated>2026-09-03T14:36:02.486473Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Expanding Global Health Security through local partnerships in Senegal</title>
-    <link href="https://www.grants.gov/search-results-detail/360334"/>
-    <id>urn:funding-finder:change:fd340b1142dfc518009d</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Strengthening Global Health Security through local partnerships in Sierra Leone</title>
-    <link href="https://www.grants.gov/search-results-detail/360335"/>
-    <id>urn:funding-finder:change:f95100212eb953bc9e56</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Expanding global health security though local partnerships in Tanzania</title>
-    <link href="https://www.grants.gov/search-results-detail/360337"/>
-    <id>urn:funding-finder:change:b294799aa0eb735a1332</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Strengthening global health security in India to contain public health threats and accelerate outbreak response</title>
-    <link href="https://www.grants.gov/search-results-detail/360336"/>
-    <id>urn:funding-finder:change:a82859ec0d4cd578f6c2</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Expanding global health security through local partnerships in Ethiopia</title>
-    <link href="https://www.grants.gov/search-results-detail/360333"/>
-    <id>urn:funding-finder:change:a2b746dd4d1f5ff62dd0</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Sheep Production and Marketing Grant Program FY 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363376"/>
-    <id>urn:funding-finder:change:84bc14a4125cf37fc7a3</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Logistics Center for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U24 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359268"/>
-    <id>urn:funding-finder:change:5db1df50a87c82753219</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Validation Center for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U54 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359269"/>
-    <id>urn:funding-finder:change:5816f1d8bbdc89a7f2bc</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Pilot and Feasibility Studies in Preparation for Substance Use and HIV Prevention Intervention and Services Research Trials</title>
-    <link href="https://www.grants.gov/search-results-detail/361204"/>
-    <id>urn:funding-finder:change:4caa6fe24d7563e2800b</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Expanding global health security through local partnerships in Nigeria</title>
-    <link href="https://www.grants.gov/search-results-detail/360332"/>
-    <id>urn:funding-finder:change:3bef90a7e24c91891f8d</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Novel Experiential Technologies Assisting Individual Learning (NExT AI) Hubs (P20 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359949"/>
-    <id>urn:funding-finder:change:320902ea3d86cb2df553</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Limited Competition: Intellectual and Developmental Disabilities Research Centers 2027 (P50 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/358915"/>
-    <id>urn:funding-finder:change:2ef3ee71f2185a8a5326</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Expanding global health security through local partnerships in Indonesia</title>
-    <link href="https://www.grants.gov/search-results-detail/360338"/>
-    <id>urn:funding-finder:change:1dc72dca6753e5048265</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Improving global health security in Côte d'Ivoire to stop the spread of infectious disease</title>
-    <link href="https://www.grants.gov/search-results-detail/360324"/>
-    <id>urn:funding-finder:change:093c3cabd1a7401dab50</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Protecting and Improving Global Health Security by Engaging Local Partners: Strengthening and Sustaining Public Health Systems in Ghana</title>
-    <link href="https://www.grants.gov/search-results-detail/360455"/>
-    <id>urn:funding-finder:change:033c902ee317606ca1ad</id>
-    <updated>2026-09-02T20:02:24.678622Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: ROSES25: A.17 Hydrosphere</title>
-    <link href="https://solicitation.nasaprs.com/NNH25ZDA001N-HYDRO"/>
-    <id>urn:funding-finder:change:2bd92192059619b9a054</id>
-    <updated>2026-09-02T19:35:13.236638Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Emergency Assistance for Fundamental Freedom Defenders</title>
-    <link href="https://www.grants.gov/search-results-detail/363780"/>
-    <id>urn:funding-finder:change:fdd801685b91f46c3016</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-08</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) CAPACITY BUILDING (CB)</title>
-    <link href="https://www.grants.gov/search-results-detail/363530"/>
-    <id>urn:funding-finder:change:fb392dc665b7f24f4083</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Egypt Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363735"/>
-    <id>urn:funding-finder:change:f9a1180933d06a5526ef</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363757"/>
-    <id>urn:funding-finder:change:f3a0647a256423cbecc5</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Native Hawaiian Health Care Improvement Act Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363781"/>
-    <id>urn:funding-finder:change:f28c5aadd705decdc4c6</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) (R03 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/359940"/>
-    <id>urn:funding-finder:change:f0b512522bbd2eb11c04</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OVC FY 2026 Victim Reunification Travel Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363761"/>
-    <id>urn:funding-finder:change:ee364ab1da23acf8cc70</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-02</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIOSH Mentored Research Scientist Development Award (K01)</title>
-    <link href="https://www.grants.gov/search-results-detail/363783"/>
-    <id>urn:funding-finder:change:e7458dc5c16381d63df3</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Status changed: NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360554"/>
-    <id>urn:funding-finder:change:e0b0caec32ce09e02451</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="status_changed"/>
-    <summary>forecasted → posted</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Supporting Community Application of Life-Saving Evidence to Prevent Injury and Violence (SCALE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363782"/>
-    <id>urn:funding-finder:change:e00306bfc695b27ebd5b</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363757"/>
-    <id>urn:funding-finder:change:de8729793c50730a1a71</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-30</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: National Leadership Grants for Libraries (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363766"/>
-    <id>urn:funding-finder:change:d8f0c9ed850b79b79d04</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Museum Grants for African American History and Culture (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363770"/>
-    <id>urn:funding-finder:change:d60d92b4f5de7789e21a</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Clinical Research Network on Antimicrobial Resistance (UM1 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361065"/>
-    <id>urn:funding-finder:change:d31312d818f262d4a5be</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-09-29 → 2026-11-10</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OVW Fiscal Year 2026 Violence Against Women Tribal Special Assistant U.S. Attorney (SAUSA) Initiative - Invitation to Apply</title>
-    <link href="https://www.grants.gov/search-results-detail/363760"/>
-    <id>urn:funding-finder:change:cb329ac8da5303eced44</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Native Hawaiian Library Services Grants (2027)</title>
-    <link href="https://www.grants.gov/search-results-detail/363763"/>
-    <id>urn:funding-finder:change:ca23eedb67a8582b0f9b</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Drug-Free Communities (DFC) Support Program - Competing Continuation (Year 6)</title>
-    <link href="https://www.grants.gov/search-results-detail/363354"/>
-    <id>urn:funding-finder:change:c6c3b3204a1490c98864</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Silvio O. Conte Centers for Basic Neuroscience or Translational Mental Health Research (P50 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/360574"/>
-    <id>urn:funding-finder:change:c4b66b590899fb3636ee</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) - RESEARCH COLLABORATION (RC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363526"/>
-    <id>urn:funding-finder:change:bca599e189767e9ac528</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/360651"/>
-    <id>urn:funding-finder:change:b60683392ff14392dce0</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/360651"/>
-    <id>urn:funding-finder:change:b605f78b4110f3c3d384</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/360651"/>
-    <id>urn:funding-finder:change:a66335a62d70cd8f0673</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2029-09-30 → 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: The Research on Research Security Program (RoRS)</title>
-    <link href="https://www.grants.gov/search-results-detail/358684"/>
-    <id>urn:funding-finder:change:a60152c98cf7f3f99460</id>
-    <updated>2026-09-02T18:06:23.039030Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
   </entry>
 </feed>
