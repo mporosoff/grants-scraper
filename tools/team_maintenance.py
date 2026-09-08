@@ -65,7 +65,37 @@ def migrate_legacy(model, candidates, claims_generation, claims):
     return invalidated
 
 
-def queues(pending, existing, attempts, previous, current):
+def retained_queue_reasons(report, input_generation, response_contract):
+    """Recover queue provenance from the exact completed generation's safe report."""
+    if (report.get('status') != 'completed' or report.get('generation_requested') is not True
+            or report.get('mode') not in ('maintenance', 'pilot')
+            or report.get('input_generation') != input_generation
+            or report.get('response_contract') != response_contract):
+        return {}
+    reasons = {'stale_published_team', 'new_since_accepted_snapshot', 'source_changed',
+               'decision_inputs_changed', 'retryable_maintenance_failure'}
+    return {key: value for key, value in report.get('queue_reasons', {}).items() if value in reasons}
+
+
+def preserve_deferred(attempts, selected, results, reasons, mode, scientific_identity, attempt_key):
+    """Keep maintenance ownership without rewriting a prior failed assessment."""
+    processed = {row['scope_id'] for row in results if row['state'] != 'deferred'}
+    for scope in selected:
+        key = scope['id']
+        if key in processed:
+            continue
+        previous = attempts.get(key)
+        from scripts.build_opportunity_teams import COMPLETED_STATES
+        if not isinstance(previous, dict) or previous.get('state') in COMPLETED_STATES:
+            attempts[key] = {'state': 'deferred', 'mode': mode, 'decision_contract': scientific_identity,
+                'stage': 'queue', 'reason': reasons[key], 'next_action': 'retry_maintenance', 'retry_after': 0}
+            attempts[key]['key'] = attempt_key(scope)
+        else:
+            previous['maintenance_pending'] = {'reason': reasons[key], 'next_action':
+                'human_provider_configuration' if previous.get('state') == 'provider_refusal' else 'retry_maintenance'}
+
+
+def queues(pending, existing, attempts, previous, current, retained_reasons=None):
     maintenance, backfill, reasons = [], [], {}
     for scope in pending:
         key = scope['id']
@@ -75,7 +105,9 @@ def queues(pending, existing, attempts, previous, current):
                   'new_since_accepted_snapshot' if prior is None else
                   'source_changed' if prior != scope['source_fingerprint'] else
                   'decision_inputs_changed' if isinstance(attempt, dict) and attempt.get('state') in ('insufficient_evidence', 'proposed') else
-                  'retryable_maintenance_failure' if isinstance(attempt, dict) and attempt.get('mode') in ('maintenance', 'pilot') else None)
+                  'retryable_maintenance_failure' if (isinstance(attempt, dict) and
+                      (attempt.get('mode') in ('maintenance', 'pilot') or attempt.get('maintenance_pending')))
+                      or key in (retained_reasons or {}) else None)
         (maintenance if reason else backfill).append(scope)
         reasons[key] = reason or 'historical_unassessed_backfill'
     return maintenance, backfill, reasons

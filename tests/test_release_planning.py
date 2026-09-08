@@ -190,6 +190,48 @@ class ReleasePlanning(unittest.TestCase):
         with patch.object(review, 'api', return_value={'sha': '0' * 40}):
             self.assertFalse(review.reviewed_head('owner/repo', body, head))
 
+    def test_legacy_failed_maintenance_survives_snapshot_advancement_without_reassessment(self):
+        scope = {'id': '347026', 'source_fingerprint': 'changed'}
+        historical = {'id': 'historical', 'source_fingerprint': 'unchanged'}
+        previous = {'scopes': {'347026': 'old', 'historical': 'unchanged'}}
+        current = {'scopes': {'347026': 'changed', 'historical': 'unchanged'}}
+        original = {'state': 'rejected_evidence', 'key': 'original-input', 'stage': 'decomposition',
+                    'retry_after': 9999999999, 'response_contract': teams.RESPONSE_VERSION}
+        attempts = {'347026': dict(original)}
+        due, backfill, reasons = maintenance.queues([scope, historical], {}, attempts, previous, current)
+        self.assertEqual(due, [scope])
+        self.assertEqual(backfill, [historical])
+        maintenance.preserve_deferred(attempts, due, [], reasons, 'maintenance', 'science', lambda s: 'new-input')
+        self.assertEqual({key: attempts['347026'][key] for key in original}, original)
+        due, backfill, _ = maintenance.queues([scope, historical], {}, attempts, current, current)
+        self.assertEqual(due, [scope])
+        self.assertEqual(backfill, [historical])
+
+    def test_exact_completed_report_recovers_maintenance_but_not_historical_work(self):
+        report = {'status': 'completed', 'generation_requested': True, 'mode': 'pilot',
+                  'input_generation': 'pinned', 'response_contract': teams.RESPONSE_VERSION,
+                  'queue_reasons': {'347026': 'source_changed', 'old': 'historical_unassessed_backfill'}}
+        scope = {'id': '347026', 'source_fingerprint': 'current'}
+        old = {'id': 'old', 'source_fingerprint': 'old'}
+        current = {'scopes': {'347026': 'current', 'old': 'old'}}
+        reasons = maintenance.retained_queue_reasons(report, 'pinned', teams.RESPONSE_VERSION)
+        self.assertEqual(reasons, {'347026': 'source_changed'})
+        due, backfill, _ = maintenance.queues([scope, old], {}, {}, current, current, reasons)
+        self.assertEqual((due, backfill), ([scope], [old]))
+        for changed in ({'status': 'starting'}, {'generation_requested': False}, {'mode': 'backfill'},
+                        {'input_generation': 'different'}, {'response_contract': 'different'}):
+            self.assertEqual(maintenance.retained_queue_reasons(report | changed, 'pinned', teams.RESPONSE_VERSION), {})
+
+    def test_queue_retention_preserves_refusal_and_actual_backfill_attempt_provenance(self):
+        scope = {'id': 'scope', 'source_fingerprint': 'same'}
+        original = {'state': 'provider_refusal', 'mode': 'backfill', 'key': 'refused-input',
+                    'next_action': 'human_provider_configuration', 'retry_after': 9999999999}
+        attempts = {'scope': dict(original)}
+        maintenance.preserve_deferred(attempts, [scope], [], {'scope': 'source_changed'},
+                                      'maintenance', 'science', lambda s: 'different')
+        self.assertEqual({key: attempts['scope'][key] for key in original}, original)
+        self.assertEqual(attempts['scope']['maintenance_pending']['next_action'], 'human_provider_configuration')
+
 
 if __name__ == '__main__':
     unittest.main()

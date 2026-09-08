@@ -22,6 +22,14 @@ Current proposal coverage and processing outcomes are recorded by
 generation, generation mode, and completion status before using a receipt.
 Counts are diagnostics, not scientific quality gates.
 
+Deferred maintenance keeps its queue ownership when the accepted source snapshot
+advances, including older failed or backfill attempts that become maintenance
+after a source change. Their original decision key, failure state, cooldown, and
+provider provenance remain intact. A matching completed generation report can
+restore missing queue ownership; historical backfill is never promoted merely
+because maintenance has unused capacity. Empty-selection replay includes that
+report and proves zero new provider calls against the retained inputs.
+
 The compact browser projection is `data/opportunity_teams.js` and remains lazy.
 The eager `data/opportunity_team_index.js` contains scope identifiers, parent
 identifiers, and record types; it contains no faculty, role, or explanation
