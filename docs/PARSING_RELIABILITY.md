@@ -213,3 +213,22 @@ and rollback steps intact. Do not bypass a failed boundary with a manual deploy.
 The release receipt must separately record actual merge SHA, tested code/package
 identity, generated PR and refresh run, published Pages hashes, compatible Worker
 identities and non-destructive live results. This runbook is not a release receipt.
+
+### Worker checkpoint and generated identity gates
+
+Award and Alerts deployment classification reads the latest deployment's fully
+serving version through pinned Wrangler `versions view --json`. The upload's
+`workers/message` supplies its exact protected-main source checkpoint. A legacy
+version can use an exact deployment/rollback message only after its version ID
+has been verified. Conflicting checkpoints, unknown ownership, mixed traffic,
+or a failed bounded metadata lookup stop before mutation. An unannotated active
+Worker no longer silently inherits the historical PR #63 baseline. Recovery
+requires verifying that active version's actual source checkpoint; never guess
+it from a healthy response or the current repository SHA. Compatible unchanged
+Worker inputs retain the existing version and normal Pages checks still run.
+
+The generated catalog gate checks both stable canonical IDs and the builder's
+sponsor-aware solicitation identity. Official numbers can coincide across
+sponsors or records whose sponsor ownership remains unresolved. Those number
+collisions alone are not evidence for merging records. Repeated canonical IDs
+or repeated authoritative sponsor/number identities still fail publication.
