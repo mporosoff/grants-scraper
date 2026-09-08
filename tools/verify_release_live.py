@@ -3,6 +3,7 @@ import argparse
 from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
+import re
 import time
 from urllib.request import Request, urlopen
 
@@ -35,8 +36,7 @@ def worker_check(manifest):
 def stage_site(bundle, reports, output):
     manifest = c.load(bundle)
     publication = c.read_json(Path(reports) / 'publication.json')
-    if publication['candidate_id'] != manifest['candidate_id'] or publication['candidate_hashes'] != manifest['files']:
-        raise ValueError('Publication receipt does not match candidate')
+    validate_publication(manifest, publication, c.read_json(Path(reports) / 'validation.json'))
     output = Path(output)
     if output.exists():
         raise ValueError('Pages staging directory must be new')
@@ -52,8 +52,27 @@ def stage_site(bundle, reports, output):
     c.verify_files(output, {k: v for k, v in manifest['files'].items() if public_path(k)})
 
 
+def validate_publication(manifest, publication, validation):
+    if (publication.get('schema_version') != 1
+            or publication.get('candidate_id') != manifest['candidate_id']
+            or publication.get('candidate_hashes') != manifest['files']
+            or publication.get('generation_sha') != manifest['generation_sha']
+            or publication.get('generation_run_id') != manifest['generation_run_id']
+            or publication.get('validation_sha') != validation.get('validation_sha')
+            or publication.get('validation_receipt_sha256') != c.digest(c.encoded(validation))
+            or validation.get('candidate_id') != manifest['candidate_id']
+            or validation.get('identity', {}).get('candidate_hashes') != manifest['files']
+            or validation.get('gates') != {gate: 'passed' for gate in c.GATES}
+            or any(not re.fullmatch(r'[a-f0-9]{40}', publication.get(key, ''))
+                   for key in ('publication_sha', 'release_code_sha', 'validation_sha'))):
+        raise ValueError('Publication receipt does not cover this exact candidate and validation checkpoint')
+
+
 def verify(bundle, reports, *, attempts=18, sleep=time.sleep):
     manifest = c.load(bundle)
+    expected_publication = c.read_json(Path(reports) / 'publication.json')
+    validate_publication(manifest, expected_publication, c.read_json(Path(reports) / 'validation.json'))
+    publication_query = '?publication=' + c.digest(c.encoded(expected_publication))
     paths = {name: value for name, value in manifest['files'].items() if public_path(name)}
     def check(item):
         name, expected = item
@@ -68,11 +87,14 @@ def verify(bundle, reports, *, attempts=18, sleep=time.sleep):
             differences = [x for x in executor.map(check, paths.items()) if x]
         report['differences'] = differences
         try:
-            live_manifest = json.loads(fetch(SITE + 'release/candidate.json'))
-            live_publication = json.loads(fetch(SITE + 'release/publication.json'))
-            if live_manifest != manifest or live_publication['candidate_id'] != manifest['candidate_id']:
+            live_manifest = json.loads(fetch(SITE + 'release/candidate.json' + publication_query))
+            live_publication = json.loads(fetch(SITE + 'release/publication.json' + publication_query))
+            stamp = fetch(SITE + 'pages-release-sha.txt' + publication_query).decode('utf-8')
+            if (live_manifest != manifest or live_publication != expected_publication
+                    or stamp != expected_publication['publication_sha'] + '\n'):
                 raise ValueError('Live release identity mismatch')
-            report['publication_sha'] = live_publication['publication_sha']
+            report['publication_sha'] = expected_publication['publication_sha']
+            report['publication_receipt_sha256'] = c.digest(c.encoded(expected_publication))
             report['worker'] = worker_check(manifest)
             report.pop('handshake_error', None)
         except Exception as error:

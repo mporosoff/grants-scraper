@@ -197,8 +197,106 @@ class CandidateLifecycleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Generation dependencies changed'):
             c.verify_dependencies(self.root, manifest)
 
+    def test_stale_pr_rebases_unchanged_candidate_only_after_terminal_review(self):
+        from tools.publish_release_candidate import reconcile_candidate_branch
+        manifest = self.create()
+        self.commit()
+        old_head = c.git(self.root, 'rev-parse', 'HEAD')
+        c.git(self.root, 'checkout', '-qb', 'advanced-main', self.source_sha)
+        (self.root / 'operations.md').write_text('unrelated main advancement')
+        self.commit()
+        advanced = c.git(self.root, 'rev-parse', 'HEAD')
+        c.materialize(self.root, self.bundle)
+        c.git(self.root, 'add', '.')
+        existing = {'headRefOid': old_head, 'headRefName': 'automation/release-test', 'url': 'https://github.com/owner/repo/pull/10'}
+        observed = []
+        def execute(*args):
+            observed.append(args)
+            if args[:2] == ('git', 'commit'):
+                return c.git(self.root, *args[1:])
+            return ''
+        def waiting(*args):
+            observed.append(('review', *args))
+            raise ValueError('still pending')
+        with self.assertRaisesRegex(ValueError, 'still pending'):
+            reconcile_candidate_branch(self.root, existing, manifest, 'owner/repo', execute=execute, wait=waiting)
+        self.assertEqual(c.git(self.root, 'rev-parse', 'HEAD'), advanced)
+        self.assertFalse(any(row[0] == 'git' for row in observed))
+        observed.clear()
+        head, boundary = reconcile_candidate_branch(self.root, existing, manifest, 'owner/repo', execute=execute,
+                                                    wait=lambda *args: observed.append(('review', *args)))
+        self.assertEqual(observed[0], ('review', 'owner/repo', 10, old_head))
+        self.assertEqual(c.git(self.root, 'rev-parse', 'HEAD^'), advanced)
+        self.assertNotEqual(head, old_head)
+        self.assertIn(f'--force-with-lease=refs/heads/automation/release-test:{old_head}', observed[-1])
+        self.assertTrue(boundary)
+        c.verify_files(self.root, manifest['files'])
+        self.assertEqual(c.load(self.bundle)['generation_sha'], self.source_sha)
+
+    def test_live_identity_rejects_same_candidate_with_stale_publication_or_stamp(self):
+        from tools import verify_release_live as live
+        manifest = self.create()
+        receipt = validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        publication = {'schema_version': 1, 'candidate_id': manifest['candidate_id'], 'candidate_hashes': manifest['files'],
+                       'generation_sha': manifest['generation_sha'], 'generation_run_id': manifest['generation_run_id'],
+                       'validation_sha': receipt['validation_sha'], 'publication_sha': 'b' * 40, 'release_code_sha': 'c' * 40,
+                       'validation_receipt_sha256': c.digest(c.encoded(receipt)), 'timestamp': '2026-09-08T00:00:00Z'}
+        c.write_json(self.reports / 'publication.json', publication)
+        served = deepcopy(publication)
+        stamp = publication['publication_sha'] + '\n'
+        def fetch(url):
+            name = url.removeprefix(live.SITE).split('?')[0]
+            if name == 'release/candidate.json':
+                return c.encoded(manifest)
+            if name == 'release/publication.json':
+                return c.encoded(served)
+            if name == 'pages-release-sha.txt':
+                return stamp.encode()
+            return (self.bundle / 'files' / name).read_bytes()
+        with patch.object(live, 'fetch', side_effect=fetch), patch.object(live, 'worker_check', return_value={'service': 'available'}):
+            served['publication_sha'] = 'd' * 40
+            with self.assertRaisesRegex(ValueError, 'Live verification failed'):
+                live.verify(self.bundle, self.reports, attempts=1)
+            served.update(publication)
+            stamp = 'e' * 40 + '\n'
+            with self.assertRaisesRegex(ValueError, 'Live verification failed'):
+                live.verify(self.bundle, self.reports, attempts=1)
+            stamp = publication['publication_sha'] + '\n'
+            report = live.verify(self.bundle, self.reports, attempts=1)
+        self.assertTrue(report['verified'])
+        self.assertEqual(report['publication_sha'], publication['publication_sha'])
+        self.assertEqual(report['publication_receipt_sha256'], c.digest(c.encoded(publication)))
+        self.assertEqual(c.load(self.bundle), manifest)
+
+    def test_publication_noop_requires_committed_bytes_not_materialized_working_copy(self):
+        from tools.publish_release_candidate import committed_candidate_matches
+        manifest = self.create()
+        c.materialize(self.root, self.bundle)
+        c.verify_files(self.root, manifest['files'])
+        self.assertFalse(committed_candidate_matches(self.root, self.source_sha, manifest))
+        self.commit()
+        self.assertTrue(committed_candidate_matches(self.root, c.git(self.root, 'rev-parse', 'HEAD'), manifest))
+
 
 class ExactReviewTests(unittest.TestCase):
+    def test_old_approval_reaction_does_not_cover_rebased_head(self):
+        from tools import wait_release_review as review
+        head = 'b' * 40
+        pr = {'head': {'sha': head}, 'base': {'ref': 'main'}, 'created_at': '2026-09-08T00:00:00Z',
+              'body': f'Review head: `{"a" * 40}`', 'user': {'login': 'github-actions[bot]'}}
+        request = {'user': pr['user'], 'created_at': '2026-09-08T01:00:05Z',
+                   'body': f'<!-- funding-finder-review:{head} -->\nReview boundary: 2026-09-08T01:00:00+00:00'}
+        reaction = {'user': {'login': review.BOT}, 'content': '+1', 'created_at': '2026-09-08T00:30:00Z'}
+        def pages(path):
+            if path.endswith('/reactions'):
+                return [reaction]
+            return [request] if '/issues/' in path and path.endswith('/comments') else []
+        with patch.object(review, 'api', return_value=pr), patch.object(review, 'all_pages', side_effect=pages), \
+             patch.object(review, 'all_threads', return_value=[]):
+            self.assertEqual(review.review_state('owner/repo', 1, head), (False, []))
+            reaction['created_at'] = '2026-09-08T01:01:00Z'
+            self.assertEqual(review.review_state('owner/repo', 1, head), (True, []))
+
     def test_terminal_top_level_completion_needs_full_head_and_no_unresolved_findings(self):
         from tools import wait_release_review as review
         head = 'a' * 40

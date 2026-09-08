@@ -22,6 +22,12 @@ on:
       receipt_run:
         description: Run containing the prior validation receipt (optional for validate/publish, required for verify)
         type: string
+      publication_run:
+        description: Run containing the expected publication checkpoint (required for verify)
+        type: string
+      publication_attempt:
+        description: Exact publication attempt when selecting older retained evidence
+        type: string
 
 permissions:
   actions: write
@@ -58,6 +64,8 @@ jobs:
           CANDIDATE_RUN: ${{ inputs.candidate_run }}
           CANDIDATE_ID: ${{ inputs.candidate_id }}
           RECEIPT_RUN: ${{ inputs.receipt_run }}
+          PUBLICATION_RUN: ${{ inputs.publication_run }}
+          PUBLICATION_ATTEMPT: ${{ inputs.publication_attempt }}
           HEAD_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
           python - <<'PY'
@@ -75,6 +83,10 @@ jobs:
               raise SystemExit('Resume requires an exact retained candidate run and identity')
           if stage == 'verify' and not re.fullmatch(r'[1-9][0-9]*', os.environ['RECEIPT_RUN']):
               raise SystemExit('Live verification requires a validation receipt run')
+          if stage == 'verify' and not re.fullmatch(r'[1-9][0-9]*', os.environ['PUBLICATION_RUN']):
+              raise SystemExit('Live verification requires the expected publication checkpoint run')
+          if os.environ['PUBLICATION_ATTEMPT'] and not re.fullmatch(r'[1-9][0-9]*', os.environ['PUBLICATION_ATTEMPT']):
+              raise SystemExit('Invalid publication attempt')
           with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
               output.write(f'stage={stage}\ncandidate_run={run}\ncandidate_id={identity}\n')
           PY
@@ -504,10 +516,10 @@ jobs:
         run: >-
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
-      - uses: actions/download-artifact@v4
-        with:
-          name: validation-${{ needs.candidate.outputs.candidate_id }}-${{ github.run_attempt }}
-          path: ${{ runner.temp }}/reports
+      - name: Load the latest validation checkpoint, including prior workflow attempts
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$GITHUB_RUN_ID" --name "validation-$CANDIDATE_ID" --destination "$RUNNER_TEMP/reports"
       - name: Verify receipt before materializing the candidate
         run: |
           python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/reports/validation.json"
@@ -604,10 +616,40 @@ jobs:
         run: >-
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
+      - name: Load the expected publication receipt and its original validation evidence
+        env:
+          PUBLICATION_RUN: ${{ needs.publish.result == 'success' && github.run_id || inputs.publication_run }}
+          PUBLICATION_ATTEMPT: ${{ needs.plan.outputs.stage == 'verify' && inputs.publication_attempt || '' }}
+        run: |
+          artifact="publication-$CANDIDATE_ID"
+          if [ -n "$PUBLICATION_ATTEMPT" ]; then artifact="$artifact-$PUBLICATION_ATTEMPT"; fi
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY" \
+            --run "$PUBLICATION_RUN" --name "$artifact" --destination "$RUNNER_TEMP/reports"
       - name: Check exact Pages bytes, runtime, catalog, teams, vectors and Worker handshake
+        id: live-assets
         run: python -m tools.verify_release_live verify --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke after Pages propagation
+        id: live-provider
         run: node tools/smoke_search_worker.mjs
+      - name: Record the complete live result including provider smoke
+        if: always()
+        env:
+          ASSET_OUTCOME: ${{ steps.live-assets.outcome }}
+          PROVIDER_OUTCOME: ${{ steps.live-provider.outcome }}
+        run: |
+          python - <<'PY'
+          import os
+          from pathlib import Path
+          from tools import release_candidate as c
+          path = Path(os.environ['RUNNER_TEMP']) / 'reports/live-verification.json'
+          report = c.read_json(path) if path.exists() else {'candidate_id': os.environ['CANDIDATE_ID']}
+          report['asset_verification'] = os.environ['ASSET_OUTCOME']
+          report['provider_smoke'] = os.environ['PROVIDER_OUTCOME']
+          report['verified'] = (report.get('verified') is True and report['asset_verification'] == 'success' and report['provider_smoke'] == 'success')
+          report['next_retry_stage'] = None if report['verified'] else 'verify'
+          report['completed_at'] = c.timestamp()
+          c.write_json(path, report)
+          PY
       - name: Retain live release identity and verification evidence
         if: always()
         uses: actions/upload-artifact@v4

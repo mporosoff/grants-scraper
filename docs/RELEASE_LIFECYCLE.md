@@ -44,13 +44,24 @@ Use the workflow dispatch `stage` input:
 | `reuse` | Current `release/candidate-source.json` | Verify generation inputs and data bytes; assemble current runtime around unchanged data, persist a derived candidate and release |
 | `validate` | `candidate_run`, full `candidate_id` | Load candidate, run current deterministic gates, retain reports/receipt |
 | `publish` | `candidate_run`, full `candidate_id`; optional `receipt_run` | Reuse a matching receipt or validate; prepare Worker, protected merge, Pages and live verification |
-| `verify` | `candidate_run`, full `candidate_id`, `receipt_run` | Verify existing receipt and exact live release; no generation or publication |
+| `verify` | `candidate_run`, full `candidate_id`, `receipt_run`, `publication_run` | Verify the expected retained publication receipt, stamped SHA and exact live release; no generation or publication |
 
 Supply `receipt_run` after a downstream failure to reuse passing gates. A failed
 validation retains the candidate; correct a validator/release-control defect and
 dispatch `validate` or `publish` against the same artifact. A genuine generation
 defect requires one consolidated repair and one new `generate`. Workflow reruns
 restore an already persisted generation before executing expensive steps.
+For live-only retries, `publication_run` selects the expected publication
+checkpoint; `publication_attempt` can select an earlier retained attempt
+explicitly. An older live receipt for the same candidate does not pass. Failed
+job reruns can load receipts retained by an earlier workflow attempt.
+
+If main advances while a generated PR is reviewed, a publication retry waits for
+that old-head review to finish, verifies unchanged generation dependencies and
+candidate bytes, and rebases the same branch using an exact force-with-lease.
+It requests one new exact-head review only if one was not automatically started.
+Old approval reactions cannot validate the new head. Publication checks committed
+hashes even when a candidate marker is already present on main.
 
 The original failed run 34174544563 retained no artifacts, so it cannot be
 replayed. The first production candidate under this lifecycle requires a new

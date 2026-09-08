@@ -1,5 +1,6 @@
 """Read all review surfaces for one immutable generated PR; never request duplicates."""
 import json
+from datetime import datetime
 import re
 import subprocess
 import time
@@ -46,11 +47,30 @@ def all_threads(repository, number):
         cursor = page['pageInfo']['endCursor']
 
 
-def review_state(repository, number, head, created_at):
+def request_boundary(pr, comments, head):
+    requests = [re.search(r'Review boundary: ([^\s]+)', row.get('body', '')).group(1)
+                if re.search(r'Review boundary: ([^\s]+)', row.get('body', '')) else row['created_at'] for row in comments
+                if f'<!-- funding-finder-review:{head} -->' in row.get('body', '')
+                and row.get('user', {}).get('login') == pr.get('user', {}).get('login')]
+    if requests:
+        return max(requests, key=parsed_time)
+    if f'Review head: `{head}`' in pr.get('body', ''):
+        return pr['created_at']
+    # An exact-head submitted review remains acceptable. A reaction without a
+    # verifiable request boundary must never approve a different, rebased head.
+    return '9999-12-31T23:59:59Z'
+
+
+def parsed_time(value):
+    return datetime.fromisoformat(value.replace('Z', '+00:00'))
+
+
+def review_state(repository, number, head, created_at=None):
     pr = api(f'repos/{repository}/pulls/{number}')
     if pr['head']['sha'] != head or pr['base']['ref'] != 'main':
         raise ValueError('Generated PR changed during exact-head review')
     comments = all_pages(f'repos/{repository}/issues/{number}/comments')
+    created_at = created_at or request_boundary(pr, comments, head)
     reviews = all_pages(f'repos/{repository}/pulls/{number}/reviews')
     inline = all_pages(f'repos/{repository}/pulls/{number}/comments')
     reactions = all_pages(f'repos/{repository}/issues/{number}/reactions')
@@ -58,8 +78,8 @@ def review_state(repository, number, head, created_at):
     bot = lambda row: row.get('user', {}).get('login') == BOT
     terminal_reviews = [row for row in reviews if bot(row) and row.get('commit_id') == head and row.get('state') in ('APPROVED', 'COMMENTED', 'CHANGES_REQUESTED')]
     terminal_comments = [row for row in comments if bot(row) and 'Codex Review' in row.get('body', '')
-                         and re.search(r'Reviewed commit:\s*`?' + head, row.get('body', ''))]
-    clean_reaction = any(bot(row) and row.get('content') == '+1' and row.get('created_at', '') >= created_at for row in reactions)
+                         and re.search(r'Reviewed commit:?\*{0,2}:?\s*`?' + head, row.get('body', ''))]
+    clean_reaction = any(bot(row) and row.get('content') == '+1' and parsed_time(row['created_at']) >= parsed_time(created_at) for row in reactions)
     completed = bool(terminal_reviews or terminal_comments or clean_reaction)
     findings = [row for thread in threads if not thread['isResolved'] for row in thread['comments']['nodes']
                 if (row.get('originalCommit') or {}).get('oid') == head
@@ -71,12 +91,11 @@ def review_state(repository, number, head, created_at):
 
 
 def wait_for_review(repository, number, head, *, timeout=1800, interval=30):
-    created_at = api(f'repos/{repository}/pulls/{number}')['created_at']
     deadline = time.monotonic() + timeout
     errors = 0
     while time.monotonic() < deadline:
         try:
-            completed, findings = review_state(repository, number, head, created_at)
+            completed, findings = review_state(repository, number, head)
         except (OSError, subprocess.SubprocessError):
             errors += 1
             if errors >= 3:
