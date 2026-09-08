@@ -253,7 +253,9 @@ class CandidateLifecycleTests(unittest.TestCase):
             if name == 'pages-release-sha.txt':
                 return stamp.encode()
             return (self.bundle / 'files' / name).read_bytes()
-        with patch.object(live, 'fetch', side_effect=fetch), patch.object(live, 'worker_check', return_value={'service': 'available'}):
+        serving = {'verified': True, 'fingerprint': manifest['worker_fingerprint'], 'version_id': 'serving-version'}
+        with patch.object(live, 'fetch', side_effect=fetch), patch.object(live, 'worker_check', return_value={'service': 'available'}), \
+             patch.object(live, 'worker_provenance', return_value=serving) as provenance:
             served['publication_sha'] = 'd' * 40
             with self.assertRaisesRegex(ValueError, 'Live verification failed'):
                 live.verify(self.bundle, self.reports, attempts=1)
@@ -262,11 +264,39 @@ class CandidateLifecycleTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'Live verification failed'):
                 live.verify(self.bundle, self.reports, attempts=1)
             stamp = publication['publication_sha'] + '\n'
+            # Supported verify retry: exact Pages and healthy corpus/model are
+            # insufficient when authenticated active Worker inputs changed.
+            provenance.side_effect = ValueError('Active Search Worker differs from the publication version/input checkpoint')
+            with self.assertRaisesRegex(ValueError, 'Live verification failed'):
+                live.verify(self.bundle, self.reports, attempts=1)
+            self.assertFalse(c.read_json(self.reports / 'live-verification.json')['verified'])
+            provenance.side_effect = None
             report = live.verify(self.bundle, self.reports, attempts=1)
+            self.assertEqual(report['worker_provenance'], serving)
+            # A change during the provider-smoke interval must also fail closed.
+            provenance.side_effect = ValueError('Active Search Worker differs from the publication version/input checkpoint')
+            with self.assertRaisesRegex(ValueError, 'Complete live verification failed'):
+                live.complete_live(self.bundle, self.reports, 'success', 'success')
+            self.assertFalse(c.read_json(self.reports / 'live-verification.json')['verified'])
+            provenance.side_effect = None
+            live.verify(self.bundle, self.reports, attempts=1)
+            report = live.complete_live(self.bundle, self.reports, 'success', 'success')
         self.assertTrue(report['verified'])
         self.assertEqual(report['publication_sha'], publication['publication_sha'])
         self.assertEqual(report['publication_receipt_sha256'], c.digest(c.encoded(publication)))
         self.assertEqual(c.load(self.bundle), manifest)
+
+    def test_live_provenance_reads_authenticated_metadata_and_rejects_stale_success(self):
+        from tools import verify_release_live as live
+        self.create()
+        c.write_json(self.reports / 'worker-live.json', {'verified': True, 'version_id': 'old'})
+        # A failed fresh metadata read cannot reuse a successful earlier observation.
+        with patch.object(live.subprocess, 'run', return_value=subprocess.CompletedProcess([], 1)) as execute:
+            with self.assertRaisesRegex(ValueError, 'Worker provenance verification failed'):
+                live.worker_provenance(self.bundle, self.reports)
+        arguments = execute.call_args.args[0]
+        self.assertEqual(arguments[:3], ['node', str(c.ROOT / 'tools/search_worker_checkpoint.mjs'), '--verify-live'])
+        self.assertIn(str(self.reports / 'worker-after.json'), arguments)
 
     def test_publication_noop_requires_committed_bytes_not_materialized_working_copy(self):
         from tools.publish_release_candidate import committed_candidate_matches

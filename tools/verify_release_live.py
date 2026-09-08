@@ -4,6 +4,7 @@ from concurrent.futures import ThreadPoolExecutor
 import json
 from pathlib import Path
 import re
+import subprocess
 import time
 from urllib.request import Request, urlopen
 
@@ -33,10 +34,23 @@ def worker_check(manifest):
     return {key: health.get(key) for key in ('service', 'budget_state', 'corpus_sha256', 'model_space_fingerprint')}
 
 
+def worker_provenance(bundle, reports):
+    """Read authenticated serving metadata now, never accept a cached live observation."""
+    output = Path(reports) / 'worker-live.json'
+    result = subprocess.run(['node', str(c.ROOT / 'tools/search_worker_checkpoint.mjs'), '--verify-live',
+                             str(bundle), str(Path(reports) / 'worker-after.json'), str(output)],
+                            capture_output=True, text=True, timeout=180)
+    state = c.read_json(output) if output.exists() else {}
+    if result.returncode or state.get('verified') is not True:
+        raise ValueError('Worker provenance verification failed: ' + str(state.get('error', 'metadata unavailable'))[:300])
+    return state
+
+
 def stage_site(bundle, reports, output):
     manifest = c.load(bundle)
     publication = c.read_json(Path(reports) / 'publication.json')
     validate_publication(manifest, publication, c.read_json(Path(reports) / 'validation.json'))
+    worker_provenance(bundle, reports)
     output = Path(output)
     if output.exists():
         raise ValueError('Pages staging directory must be new')
@@ -81,7 +95,7 @@ def verify(bundle, reports, *, attempts=18, sleep=time.sleep):
             return None if actual == expected else {'path': name, 'expected': expected, 'actual': actual}
         except Exception as error:
             return {'path': name, 'error': type(error).__name__}
-    report = {'candidate_id': manifest['candidate_id'], 'timestamp': c.timestamp(), 'next_retry_stage': 'verify', 'production_mutated': False}
+    report = {'candidate_id': manifest['candidate_id'], 'timestamp': c.timestamp(), 'next_retry_stage': 'verify', 'production_mutated': False, 'verified': False}
     for attempt in range(attempts):
         with ThreadPoolExecutor(max_workers=8) as executor:
             differences = [x for x in executor.map(check, paths.items()) if x]
@@ -96,6 +110,8 @@ def verify(bundle, reports, *, attempts=18, sleep=time.sleep):
             report['publication_sha'] = expected_publication['publication_sha']
             report['publication_receipt_sha256'] = c.digest(c.encoded(expected_publication))
             report['worker'] = worker_check(manifest)
+            if not differences:
+                report['worker_provenance'] = worker_provenance(bundle, reports)
             report.pop('handshake_error', None)
         except Exception as error:
             report['handshake_error'] = str(error)[:300]
@@ -111,12 +127,34 @@ def verify(bundle, reports, *, attempts=18, sleep=time.sleep):
     raise ValueError('Live verification failed; retry verify/publication using the same candidate')
 
 
+def complete_live(bundle, reports, asset_outcome, provider_outcome):
+    """Close the provider-smoke interval with a fresh authenticated serving check."""
+    path = Path(reports) / 'live-verification.json'
+    report = c.read_json(path) if path.exists() else {'candidate_id': c.load(bundle)['candidate_id']}
+    ready = report.get('verified') is True and asset_outcome == provider_outcome == 'success'
+    report.update(verified=False, asset_verification=asset_outcome, provider_smoke=provider_outcome,
+                  next_retry_stage='verify', completed_at=c.timestamp())
+    c.write_json(path, report)
+    try:
+        if ready:
+            report['worker_provenance'] = worker_provenance(bundle, reports)
+            report.update(verified=True, next_retry_stage=None)
+    except Exception as error:
+        report['worker_provenance_error'] = str(error)[:400]
+    c.write_json(path, report)
+    if not report['verified']:
+        raise ValueError('Complete live verification failed; retain candidate and retry verify')
+    return report
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('command', choices=['stage', 'worker', 'verify'])
+    parser.add_argument('command', choices=['stage', 'worker', 'verify', 'complete'])
     parser.add_argument('--bundle', required=True, type=Path)
     parser.add_argument('--reports', type=Path, default=Path('release-reports'))
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--asset-outcome')
+    parser.add_argument('--provider-outcome')
     args = parser.parse_args()
     if args.command == 'stage':
         stage_site(args.bundle, args.reports, args.output)
@@ -129,6 +167,8 @@ def main():
                 if attempt == 11:
                     raise
                 time.sleep(5)
+    elif args.command == 'complete':
+        complete_live(args.bundle, args.reports, args.asset_outcome, args.provider_outcome)
     else:
         verify(args.bundle, args.reports)
 

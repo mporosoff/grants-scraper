@@ -576,6 +576,9 @@ jobs:
           --config workers/search-voyage-proxy/wrangler.jsonc
           --message "Automatic rollback to the captured serving version after candidate publication failure"
       - name: Package verified candidate bytes for Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.verify_release_live stage --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --output "$RUNNER_TEMP/site"
       - uses: actions/configure-pages@v6
       - uses: actions/upload-pages-artifact@v5
@@ -627,6 +630,9 @@ jobs:
             --run "$PUBLICATION_RUN" --name "$artifact" --destination "$RUNNER_TEMP/reports"
       - name: Check exact Pages bytes, runtime, catalog, teams, vectors and Worker handshake
         id: live-assets
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.verify_release_live verify --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke after Pages propagation
         id: live-provider
@@ -636,20 +642,11 @@ jobs:
         env:
           ASSET_OUTCOME: ${{ steps.live-assets.outcome }}
           PROVIDER_OUTCOME: ${{ steps.live-provider.outcome }}
-        run: |
-          python - <<'PY'
-          import os
-          from pathlib import Path
-          from tools import release_candidate as c
-          path = Path(os.environ['RUNNER_TEMP']) / 'reports/live-verification.json'
-          report = c.read_json(path) if path.exists() else {'candidate_id': os.environ['CANDIDATE_ID']}
-          report['asset_verification'] = os.environ['ASSET_OUTCOME']
-          report['provider_smoke'] = os.environ['PROVIDER_OUTCOME']
-          report['verified'] = (report.get('verified') is True and report['asset_verification'] == 'success' and report['provider_smoke'] == 'success')
-          report['next_retry_stage'] = None if report['verified'] else 'verify'
-          report['completed_at'] = c.timestamp()
-          c.write_json(path, report)
-          PY
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: >-
+          python -m tools.verify_release_live complete --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
+          --asset-outcome "$ASSET_OUTCOME" --provider-outcome "$PROVIDER_OUTCOME"
       - name: Retain live release identity and verification evidence
         if: always()
         uses: actions/upload-artifact@v4

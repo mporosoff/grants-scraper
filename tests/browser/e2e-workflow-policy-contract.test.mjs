@@ -27,5 +27,8 @@ test("Playwright is manual-only while pull requests retain fast Python and brows
   assert.match(repositoryPolicy, /bounded monitoring, reading status\/logs\/results\/artifacts/);
   assert.doesNotMatch(repositoryPolicy, /Do not wait for or poll E2E jobs/);
   assert.match(repositoryPolicy, /required Python and Node\/browser contracts/);
-  assert.match(repositoryPolicy, /one integrated review, one consolidated remediation batch if needed, and one exact-head verification review/);
+  assert.match(repositoryPolicy, /Review\/remediation rounds are bounded individually, not globally/);
+  assert.match(repositoryPolicy, /The first clean exact-head verification ends review/);
+  assert.match(repositoryPolicy, /same concrete consequential defect remains unresolved after two distinct focused repair attempts/);
+  assert.doesNotMatch(repositoryPolicy, /A new explicit instruction may authorize one new bounded round/);
 });

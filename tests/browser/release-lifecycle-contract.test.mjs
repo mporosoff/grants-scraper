@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync } from 'node:fs';
 import test from 'node:test';
-import { decideWorker, servingFingerprint, fingerprintFiles } from '../../tools/search_worker_checkpoint.mjs';
+import { decideWorker, servingFingerprint, fingerprintFiles, readLiveServing, verifyServingIdentity } from '../../tools/search_worker_checkpoint.mjs';
 
 const read = name => readFileSync(new URL(`../../${name}`, import.meta.url), 'utf8');
 const workflow = read('.github/workflows/refresh-opportunities.yml');
@@ -80,4 +80,46 @@ test('verified historical upload checkpoint fingerprints actual input bytes with
   assert.equal(observed, sha);
   assert.equal(value.fingerprint, fingerprintFiles(files));
   assert.equal(value.version_id, id);
+});
+
+test('live retries verify freshly read active version and complete inputs against retained publication', () => {
+  const expected = decideWorker(fp, servingFingerprint([deployment], version));
+  let reads = 0;
+  const live = readLiveServing({deployments: () => { reads++; return [deployment]; }, version: actual => {
+    assert.equal(actual, id); return version;
+  }});
+  assert.equal(reads, 2);
+  assert.equal(verifyServingIdentity(fp, expected, live).version_id, id);
+  // Same /health corpus/model/provider behavior cannot establish input equivalence.
+  const otherId = '22222222-2222-4222-8222-222222222222';
+  const otherVersion = {...version, id:otherId, annotations:{'workers/message':`protected-main:${sha}; input-sha256:${'c'.repeat(64)}`}};
+  const changed = readLiveServing({deployments:() => [{...deployment, versions:[{version_id:otherId, percentage:100}]}], version:() => otherVersion});
+  assert.throws(() => verifyServingIdentity(fp, expected, changed), /differs from the publication/);
+  assert.throws(() => verifyServingIdentity(fp, expected, {...live, version_id:otherId,
+    checkpoint:{...live.checkpoint, activeVersionId:otherId}}), /differs from the publication/);
+  assert.throws(() => verifyServingIdentity(fp, {}, live), /Missing or malformed/);
+  assert.throws(() => verifyServingIdentity(fp, {...expected, fingerprint:'c'.repeat(64)}, live), /Missing or malformed/);
+});
+
+test('live metadata reads fail closed on mixed, conflicting, malformed or changing serving provenance', () => {
+  const readVersion = () => version;
+  assert.throws(() => readLiveServing({deployments:() => [{...deployment, versions:[{version_id:id,percentage:50}]}], version:readVersion}), /single fully active/);
+  assert.throws(() => readLiveServing({deployments:() => [deployment], version:() => ({id})}), /no verified Git checkpoint/);
+  for (const message of [`protected-main:${sha}; input-sha256:broken`,
+    `protected-main:${sha}; input-sha256:${fp}; input-sha256:${'c'.repeat(64)}`,
+    `protected-main:broken; input-sha256:${fp}`]) {
+    assert.throws(() => readLiveServing({deployments:() => [deployment], version:() => ({id, annotations:{'workers/message':message}})}), /Malformed/);
+  }
+  assert.throws(() => readLiveServing({deployments:() => [{...deployment, annotations:{'workers/message':`protected-main:${'d'.repeat(40)}; input-sha256:${fp}`}}], version:readVersion}), /checkpoints conflict/);
+  let reads = 0;
+  assert.throws(() => readLiveServing({deployments:() => [{...deployment, id:++reads === 1 ? 'old' : 'new'}], version:readVersion}), /changed while reading/);
+});
+
+test('Pages staging and live closeout re-read Worker provenance, including after provider smoke', () => {
+  const staging = workflow.slice(workflow.indexOf('      - name: Package verified candidate'), workflow.indexOf('\n  pages:\n'));
+  const verification = workflow.slice(workflow.indexOf('  verify-live:'), workflow.indexOf('  closeout:'));
+  assert.match(staging, /CLOUDFLARE_API_TOKEN/);
+  assert.equal((verification.match(/CLOUDFLARE_API_TOKEN:/g) || []).length, 2);
+  assert.ok(verification.indexOf('tools.verify_release_live complete') > verification.indexOf('node tools/smoke_search_worker.mjs'));
+  assert.match(live, /def stage_site[\s\S]*?worker_provenance\(bundle, reports\)/);
 });

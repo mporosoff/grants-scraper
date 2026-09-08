@@ -3,7 +3,9 @@
 ## Bounded reviews and consequential findings
 
 - Bind each automated review to one complete commit SHA. While it is pending, do not edit, commit, push, or resolve individual threads. Collect all terminal findings, then audit the affected invariant family read-only before remediation.
-- Default review budget: one integrated review, one consolidated remediation batch if needed, and one exact-head verification review. Do not enable indefinite continuous convergence. A further consequential same-scope defect after the verification round requires a checkpoint with the SHA, consolidated findings, completed evidence, and recommended next action. A new explicit instruction may authorize one new bounded round.
+- Begin with one integrated review, consolidate its consequential findings into one remediation batch, then run one exact-head verification review. Review/remediation rounds are bounded individually, not globally.
+- If verification identifies new independently confirmed consequential defects in supported paths, automatically start one new bounded round: reproduce, consolidate all accepted findings, minimally repair, run focused affected checks and required gates, then obtain one exact-head verification review. No new user authorization is needed because a previous round was used. Follow-up verification covers the changed subsystem and affected release-safety interfaces, not another comprehensive repository-wide review.
+- The first clean exact-head verification ends review. Proceed to the authorized merge/release; do not seek another broad review or theoretical completeness. A genuine convergence failure exists only when the same concrete consequential defect remains unresolved after two distinct focused repair attempts, or a genuine stop condition below applies. Preserve exact evidence and both repair attempts at that checkpoint.
 - A finding blocks release only when it demonstrates a reproducible supported-path correctness, data-integrity, security/privacy, release-safety defect, or user-path regression. Identify the violated contract, reachable path, and practical consequence.
 - Whitespace, formatting, naming, comment wording, optional refactors, unsupported hypothetical parser grammars, synthetic cases without a reachable supported-path defect, and speculative enhancements do not reopen implementation.
 - Use an automatically triggered comprehensive review; never request a duplicate. After remediation request exactly one exact-head verification review if the update did not already trigger it.
@@ -20,7 +22,7 @@
 ## Autonomous release completion
 
 - An explicitly authorized autonomous release-completion task includes workflow monitoring, logs/artifacts, required checks, protected merge operations within the approved plan, deployment, publication, normal rollback, and live verification. Do not repeatedly ask for routine approval.
-- Use the normal interactive approval flow when required. A hard platform/security denial must not be bypassed. Stop for missing authority/credentials, unsafe or destructive actions outside existing procedures, irreconcilable release requirements, bounded-review convergence failure, unestablishable provenance, or material scope expansion.
+- Use the normal interactive approval flow when required. A user-selected authorization option is authorization; do not request another prose confirmation. A hard platform/security denial must not be bypassed. Stop for missing authority/credentials, unsafe or destructive actions outside existing procedures, irreconcilable release requirements, the same consequential defect surviving two focused repair attempts, unestablishable provenance, or material scope expansion.
 - Infrastructure hardening does not authorize broad product/parser redesign. Keep repairs bounded to concrete supported-path failures.
 
 ## Immutable release lifecycle and expensive-work reuse

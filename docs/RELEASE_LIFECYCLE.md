@@ -90,6 +90,20 @@ Missing, conflicting or mixed serving provenance blocks publication. Health is
 only a compatibility handshake, never provenance. Changed Worker inputs deploy
 only after validation, with exact serving version captured for normal rollback.
 The pre-publication provider smoke and post-Pages provider smoke remain required.
+Pages staging re-reads authenticated active deployment/version metadata after the
+protected PR wait. Live verification, including a manual `verify` retry, checks
+the exact retained `worker-after.json` version, Git checkpoint and complete input
+fingerprint; health and provider smoke cannot substitute for that proof. The
+check repeats after the live provider smoke and retains `worker-live.json` plus
+the observed identity in the live receipt. Missing, malformed, conflicting or
+mixed serving provenance fails closed. An unchanged verified serving Worker is
+retained; an unexpected serving version requires publication reconciliation.
+
+Review rounds are individually bounded. A new confirmed consequential finding
+starts one focused consolidated repair and one exact-head verification, without
+another operator authorization. The first clean verification ends review. Only
+the same concrete defect surviving two distinct focused repair attempts is a
+convergence failure; ordinary review-round exhaustion is not a stop condition.
 
 Approved researcher publication remains an input-producing workflow. It waits
 for the release owner without holding the owner's lock and marks the submission
