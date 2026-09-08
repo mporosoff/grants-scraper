@@ -42,11 +42,42 @@ class EstablishedSonnetTests(unittest.TestCase):
             self.assertEqual(args[2], protocol['prompts'][name])
             self.assertEqual(args[3], before)
             self.assertEqual(args[4], schemas()[name])
-            self.assertIs(args[5], validate)
+            fixture = {'unchanged': 'original validator input'}
+            args[5](fixture)
+            validate.assert_called_with(fixture)
             self.assertEqual(kwargs['stage_config'], settings | {'prompt_version': protocol['version']})
         with self.assertRaises(ValueError):
             probe.RepairClient(delegate, protocol).json(config()['routes']['luna'], 'decomposition', teams.DECOMPOSE,
                 data, schemas()['decomposition'], validate)
+
+    def test_second_attempt_preserves_population_criteria_and_successful_evidence_prompts(self):
+        previous, prior_cases = probe.population(Path('evaluation/established_sonnet_repair_frozen.json'))
+        current, cases = probe.population()
+        self.assertEqual(cases, prior_cases)
+        self.assertEqual(current['acceptance'], previous['acceptance'])
+        for stage in ('adjudication', 'verification'):
+            self.assertEqual(current['prompts'][stage], previous['prompts'][stage])
+        self.assertNotEqual(current['prompts']['decomposition'], previous['prompts']['decomposition'])
+        self.assertEqual(current['cov4_cases'], previous['cov4_cases'])
+        self.assertIn('It does not mean a fully designed experiment', current['prompts']['decomposition'])
+        self.assertIn('short published focus-area name', current['prompts']['decomposition'])
+
+    def test_invalid_response_diagnostics_are_bounded_and_do_not_retain_envelopes(self):
+        protocol, _ = probe.population()
+        with tempfile.TemporaryDirectory() as tmp:
+            delegate = Mock(diagnostics=Path(tmp))
+            validate = Mock(side_effect=ValueError('quote is not supported by source'))
+            probe.RepairClient(delegate, protocol).json(config()['routes']['sonnet'], 'decomposition', teams.DECOMPOSE,
+                {'scope': 'Public frozen input'}, schemas()['decomposition'], validate)
+            invalid = {'roles': [{'id': 'role-1', 'label': 'role', 'quote': 'x' * 500,
+                                  'unrestricted': 'do not retain this field'}], 'headers': 'test-sensitive-envelope'}
+            with self.assertRaises(ValueError):
+                delegate.json.call_args.args[5](invalid)
+            report = next(Path(tmp).glob('*.json')).read_text()
+            self.assertNotIn('test-sensitive-envelope', report)
+            self.assertNotIn('do not retain this field', report)
+            self.assertEqual(len(json.loads(report)['bounded_response_fields']['roles'][0]['quote']), 400)
+            self.assertEqual(json.loads(report)['validator_error'], 'quote is not supported by source')
 
     def test_grant_cannot_clear_new_billing_security_or_configuration_stop(self):
         protocol, _ = probe.population()
@@ -77,20 +108,20 @@ class EstablishedSonnetTests(unittest.TestCase):
             ledger.complete(token, status='ConfigurationFailure')
             ledger.block('anthropic', probe.trial.SCOPED_PAUSE)
             prior = ledger.read()['requests'][0]
-            with patch('requests.post', return_value=response) as post, patch('sys.argv', ['probe', 'recovery-sonnet', '--state', tmp]):
+            with patch('requests.post', return_value=response) as post, patch('sys.argv', ['probe', 'scope-repair-sonnet', '--state', tmp]):
                 probe.main()
                 probe.main()
                 self.assertEqual(post.call_count, 1)
             self.assertEqual(ledger.read()['requests'][0], prior)
             before = ledger.path.read_bytes()
             with patch('requests.post', side_effect=AssertionError('replay must be offline')), \
-                    patch('sys.argv', ['probe', 'recovery-replay', '--state', tmp]):
+                    patch('sys.argv', ['probe', 'scope-repair-replay', '--state', tmp]):
                 probe.main()
             self.assertEqual(before, ledger.path.read_bytes())
             self.assertEqual(ledger.read()['blocked_providers']['anthropic'], probe.PAUSE)
             row = next((state / protocol['version']).glob('team-*.json'))
             retained = json.loads(row.read_bytes()); retained['state'] = 'proposed'; atomic_json(row, retained)
-            with patch('sys.argv', ['probe', 'recovery-sonnet', '--state', tmp]), self.assertRaises(ValueError):
+            with patch('sys.argv', ['probe', 'scope-repair-sonnet', '--state', tmp]), self.assertRaises(ValueError):
                 probe.main()
         self.assertEqual(production, Path('config/offline_ai.json').read_bytes())
 
@@ -132,9 +163,10 @@ class EstablishedSonnetTests(unittest.TestCase):
         workflow = yaml.safe_load(Path('.github/workflows/offline-ai-evaluation.yml').read_bytes())
         steps = workflow['jobs']['evaluate']['steps']
         step = next(step for step in steps if 'EVALUATION_PHASE' in step.get('env', {}))
-        for phase in ('recovery-sonnet', 'cov4-sonnet', 'recovery-replay'):
+        for phase in ('recovery-sonnet', 'cov4-sonnet', 'recovery-replay', 'scope-repair-sonnet', 'scope-repair-replay'):
             self.assertIn("inputs.phase != '" + phase + "'", step['env']['OPENAI_API_KEY'])
         self.assertNotIn('recovery-replay', step['env']['ANTHROPIC_API_KEY'])
+        self.assertNotIn('scope-repair-replay', step['env']['ANTHROPIC_API_KEY'])
         self.assertIn('tools.offline_ai_checkpoint', str(steps))
         self.assertIn('tools.evaluate_established_sonnet', step['run'])
 
