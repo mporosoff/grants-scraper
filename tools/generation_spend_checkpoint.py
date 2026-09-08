@@ -34,6 +34,8 @@ def prepare(repository, run, attempt, destination, reservation, mode):
         if not (destination / 'ledger.json').exists():
             raise ValueError('Authoritative generation ledger missing')
     ledger = Ledger(destination / 'ledger.json', destination.name, config()['budgets_usd'][mode], config()['max_requests'])
+    for provider, evidence in config().get('generation_provider_pauses', {}).items():
+        ledger.block(provider, evidence['reason'])
     atomic_json(reservation, {'run_id': str(run), 'attempt': str(attempt), 'mode': mode,
         'maximum_logical_spend_usd': config()['budgets_usd'][mode], 'prior_ledger_hash': identity(ledger.read())})
 

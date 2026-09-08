@@ -100,3 +100,14 @@ maintenance/backfill, independent routing, accounting and caches do not require
 an unproven provider promotion. The exact access/evaluation evidence is recorded
 in `evaluation/offline_ai_selection.json`. The immutable frozen inputs and
 historical Cov4/MEAS3 evidence remain unchanged.
+The production pilot in run `34244913333` selected five scopes. Three concurrent
+Sonnet decomposition requests returned the sanitized `insufficient_credit`
+category; no later requests were dispatched and no scope completed. Reported
+tokens are unknown; $0.273103 remains conservatively reserved, separate from
+seven Voyage requests. This is no evidence of model quality or cost savings.
+The candidate was rejected for an independent document-wrapper module-identity
+defect before production mutation. Its reports remain retained. The confirmed
+Anthropic account stop is recorded in `generation_provider_pauses` so a corrected
+replacement cannot repeat the paid pilot or spend on document classification.
+Restoring credit and explicitly clearing that application pause are future
+operator actions; existing valid derived outputs remain reusable.

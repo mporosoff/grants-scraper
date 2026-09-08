@@ -116,5 +116,13 @@
       "max_output_tokens": 8000
     }
   },
-  "production_cap_basis": "Retain established Sonnet ceilings until comparable reported stage usage is available; no savings claim from cap changes"
+  "production_cap_basis": "Retain established Sonnet ceilings until comparable reported stage usage is available; no savings claim from cap changes",
+  "generation_provider_pauses": {
+    "anthropic": {
+      "reason": "insufficient_credit",
+      "evidence_run": "34244913333",
+      "evidence_candidate": "c1c644721a8988d0073417d50e79123cabc127c317e46850f13ac78b24986a2f",
+      "next_action": "Restore account credit, then explicitly clear this application pause before requesting new paid generation"
+    }
+  }
 }
