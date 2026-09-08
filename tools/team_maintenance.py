@@ -90,7 +90,11 @@ def restore_proven_teams(model, candidates, registry):
         result = {'scope_id': row['id'], 'state': 'pending', 'provider_requests': 0}
         results.append(result)
         scope = scopes.get(row['id'])
-        if not scope or row.get('source_fingerprint') != scope['source_fingerprint']:
+        source_review = proof.get('reviewed_source_changes', {}).get(row['id'])
+        reviewed_change = bool(scope and source_review
+            and source_review.get('prior_source_fingerprint') == row.get('source_fingerprint')
+            and source_review.get('reviewed_source_fingerprint') == scope['source_fingerprint'])
+        if not scope or (row.get('source_fingerprint') != scope['source_fingerprint'] and not reviewed_change):
             result['reason'] = ('source_changed' if scope else
                 'declared_scope_requires_source_revalidation' if row['id'] in current_sources else 'source_ineligible')
             continue
@@ -126,6 +130,10 @@ def restore_proven_teams(model, candidates, registry):
             'retained_decision_hash': proof['published_decisions'][row['id']],
             'scientific_contract': scientific, 'registry_generation': registry['registry_generation'],
             'source_fingerprint': scope['source_fingerprint'], 'provider_requests': 0}
+        if reviewed_change:
+            # Preserve the old generated decision's source attribution separately
+            # from this explicit review of the exact current source snapshot.
+            row['recovery_proof']['source_revalidation'] = source_review
         row.pop('revalidation_reason', None)
         result.update(state='restored_from_retained_evidence', proof=row['recovery_proof'])
     return results
