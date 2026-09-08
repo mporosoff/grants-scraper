@@ -6,10 +6,10 @@ import { join } from "node:path";
 import test from "node:test";
 
 import {
-  INITIAL_WORKER_DEPLOYMENT_CHECKPOINTS,
   WORKER_DEPLOYMENT_INPUTS,
   changedPathsBetween,
   classifyWorkerDeployment,
+  readWorkerVersionMetadata,
   resolveWorkerDeploymentCheckpoint,
 } from "../../tools/classify_worker_deployment.mjs";
 import { validateAlertCapabilityRotation } from "../../tools/validate_alert_capability_rotation.mjs";
@@ -76,50 +76,97 @@ test("shared UI and release-support changes retain both existing Worker versions
   assert.throws(() => classifyWorkerDeployment("unknown", uiOnlyChanges), /Unknown Worker/);
 });
 
-test("active deployment messages provide the exact comparison checkpoint with a verified PR 63 bootstrap", () => {
-  assert.deepEqual(INITIAL_WORKER_DEPLOYMENT_CHECKPOINTS, {
-    "award-api": "6165c2778297fb736e908c8432724d23b913adae",
-    alerts: "6165c2778297fb736e908c8432724d23b913adae",
+const activeVersion = "e91048c4-f180-42d0-a0b5-681f5893f16e";
+const otherVersion = "11111111-1111-4111-8111-111111111111";
+const deployedSha = "9be83a9341e956226aa52b849e4d877644135814";
+const deployment = (overrides = {}) => ({
+  id: "560a2f5c-225d-425d-b9f2-ee84024a6ff4", created_on: "2026-09-06T20:03:10.000Z",
+  versions: [{ version_id: activeVersion, percentage: 100 }], ...overrides,
+});
+const metadata = (sha = deployedSha, id = activeVersion) => ({
+  id, annotations: { "workers/message": `protected-main:${sha}; protected main deployment` },
+});
+
+test("Wrangler upload metadata supplies the exact active Worker checkpoint without a historical bootstrap", () => {
+  for (const worker of ["award-api", "alerts"]) {
+    assert.deepEqual(resolveWorkerDeploymentCheckpoint(worker, [deployment()], metadata()), {
+      baseSha: deployedSha, source: "active-version-message",
+      activeDeploymentId: deployment().id, activeVersionId: activeVersion,
+    });
+  }
+});
+
+test("rollback ownership follows the newest deployment and its serving version, not an older upload", () => {
+  const rollback = deployment({
+    id: "rollback", created_on: "2026-09-06T20:03:10.250Z",
+    versions: [{ version_id: otherVersion, percentage: 0 }, { version_id: activeVersion, percentage: 100 }],
+    annotations: { "workers/message": `protected-main:${deployedSha.toUpperCase()}; automatic rollback because main advanced` },
   });
-  assert.deepEqual(resolveWorkerDeploymentCheckpoint("award-api", []), {
-    baseSha: INITIAL_WORKER_DEPLOYMENT_CHECKPOINTS["award-api"],
-    source: "verified-pr63-bootstrap",
-    activeDeploymentId: "",
-  });
-  assert.deepEqual(resolveWorkerDeploymentCheckpoint("alerts", [
-    {
-      id: "inactive-newer",
-      created_on: "2026-08-26T12:00:01.000Z",
-      versions: [{ percentage: 0 }],
-      annotations: { "workers/message": `protected-main:${"f".repeat(40)}` },
-    },
-    {
-      id: "active-older",
-      created_on: "2026-08-26T12:00:00.125Z",
-      versions: [{ percentage: 100 }],
-      annotations: { "workers/message": `protected-main:${"a".repeat(40)}` },
-    },
-    {
-      id: "active-rollback",
-      created_on: "2026-08-26T12:00:00.250Z",
-      versions: [{ percentage: 100 }],
-      annotations: { "workers/message": `protected-main:${"B".repeat(40)}; automatic rollback because main advanced` },
-    },
-  ]), {
-    baseSha: "b".repeat(40),
-    source: "active-deployment-message",
-    activeDeploymentId: "active-rollback",
-  });
-  assert.equal(
-    resolveWorkerDeploymentCheckpoint("alerts", [{
-      id: "manual",
-      created_on: "2026-08-26T12:00:00Z",
-      versions: [{ percentage: 100 }],
-      annotations: { "workers/message": "unrecognized manual deployment" },
-    }]).source,
-    "verified-pr63-bootstrap",
-  );
+  const stale = deployment({ versions: [{ version_id: otherVersion, percentage: 100 }] });
+  for (const rows of [[rollback, stale], [stale, rollback]]) {
+    assert.equal(resolveWorkerDeploymentCheckpoint("alerts", rows, metadata()).baseSha, deployedSha);
+    // Legacy uploads can use the exact rollback deployment message, after
+    // verifying that the metadata really belongs to the active version.
+    assert.equal(resolveWorkerDeploymentCheckpoint("alerts", rows, { id: activeVersion }).source, "active-deployment-message");
+  }
+});
+
+test("missing, mismatched and contradictory checkpoints stop classification rather than asserting PR 63 ownership", () => {
   assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", {}), /JSON array/);
+  assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", []), /No active/);
+  assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", [deployment()]), /does not belong/);
+  assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", [deployment()], metadata(deployedSha, otherVersion)), /does not belong/);
+  for (const message of [undefined, "manual upload", "protected-main:short", `protected-main:${"0".repeat(40)}`, `protected-main:${deployedSha}suffix`]) {
+    assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", [deployment()], {
+      id: activeVersion, annotations: { "workers/message": message },
+    }), /no verified Git checkpoint/);
+  }
+  assert.throws(() => resolveWorkerDeploymentCheckpoint("award-api", [deployment({
+    annotations: { "workers/message": `protected-main:${"a".repeat(40)}` },
+  })], metadata()), /checkpoints conflict/);
+});
+
+test("mixed traffic, malformed latest deployment and ambiguous ordering cannot select a convenient prior checkpoint", () => {
+  for (const versions of [
+    [], [{ version_id: activeVersion, percentage: 0 }],
+    [{ version_id: activeVersion, percentage: 90 }],
+    [{ version_id: activeVersion, percentage: 100 }, { version_id: otherVersion, percentage: 1 }],
+    [{ version_id: activeVersion, percentage: 60 }, { version_id: otherVersion, percentage: 40 }],
+    [{ version_id: activeVersion, percentage: "100" }],
+    [{ version_id: activeVersion, percentage: 100 }, { version_id: otherVersion, percentage: -1 }],
+    [{ version_id: "--config=other", percentage: 100 }],
+  ]) {
+    assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", [deployment({
+      id: "newer", created_on: "2026-09-06T20:03:11Z", versions,
+    }), deployment()], metadata()), /weights|single fully active|exact UUID/);
+  }
+  assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", [deployment(), deployment({ id: "tie" })], metadata()), /ambiguous timestamp/);
+  assert.throws(() => resolveWorkerDeploymentCheckpoint("alerts", [deployment({ created_on: null })], metadata()), /timestamp/);
+});
+
+test("active version metadata is retrieved through pinned bounded Wrangler and only checkpoint fields leave the reader", () => {
+  let calls = 0;
+  const value = readWorkerVersionMetadata("award-api", activeVersion, { execute: (command, args, options) => {
+    calls += 1;
+    assert.equal(command, "npx");
+    assert.deepEqual(args, ["--yes", "wrangler@4.125.0", "versions", "view", activeVersion,
+      "--config", "workers/award-api/wrangler.jsonc", "--json"]);
+    assert.equal(options.timeout, 60_000);
+    assert.equal(options.maxBuffer, 1024 * 1024);
+    assert.deepEqual(options.stdio, ["ignore", "pipe", "pipe"]);
+    return JSON.stringify({ ...metadata(), resources: { bindings: [{ value: "private-binding" }] } });
+  } });
+  assert.equal(calls, 1);
+  assert.deepEqual(value, metadata());
+  for (const execute of [() => { throw new Error("private output"); }, () => "invalid json", () => "null"]) {
+    assert.throws(() => readWorkerVersionMetadata("alerts", activeVersion, { execute }), error => {
+      assert.equal(error.message, "Unable to read active Worker version metadata; publication is blocked.");
+      return true;
+    });
+  }
+  assert.throws(() => readWorkerVersionMetadata("other", activeVersion), /Unknown Worker/);
+  assert.throws(() => readWorkerVersionMetadata("__proto__", activeVersion), /Unknown Worker/);
+  assert.throws(() => readWorkerVersionMetadata("alerts", "--config=other"), /exact UUID/);
 });
 
 test("a queued UI-only push still deploys a Worker change missed after the prior checkpoint", async () => {
@@ -144,6 +191,13 @@ test("a queued UI-only push still deploys a Worker change missed after the prior
     git("add", "match_explorer.html");
     git("commit", "--quiet", "-m", "queued UI change");
     const uiPush = git("rev-parse", "HEAD");
+
+    const checkpoint = resolveWorkerDeploymentCheckpoint("award-api", [deployment()], metadata(workerPush));
+    assert.equal(
+      classifyWorkerDeployment("award-api", changedPathsBetween(checkpoint.baseSha, uiPush, { cwd: repository })).deployRequired,
+      false,
+      "a healthy Worker uploaded at the real checkpoint is retained across an unrelated UI push",
+    );
 
     assert.equal(
       classifyWorkerDeployment("award-api", changedPathsBetween(workerPush, uiPush, { cwd: repository })).deployRequired,

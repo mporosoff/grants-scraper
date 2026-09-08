@@ -4,11 +4,47 @@ import json
 from pathlib import Path
 import unittest
 
+from scripts.build_catalog import record_identity
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
 
 
 class GitHubPagesEntrypointTests(unittest.TestCase):
+    def assert_unique_catalog_identities(self, records):
+        ids = [record.get("opportunity_id") for record in records]
+        self.assertTrue(all(isinstance(value, str) and value.strip() for value in ids),
+                        "Every published record needs a stable canonical ID")
+        self.assertEqual(len(set(ids)), len(records), "Duplicate canonical opportunity IDs")
+        # The normal builder/merge scopes official numbers by authoritative
+        # sponsor and uses stable IDs when sponsor ownership is unresolved.
+        # A solicitation number alone is not a globally unique identifier.
+        identities = [record_identity(record) for record in records]
+        self.assertEqual(len(set(identities)), len(records), "Duplicate sponsor-scoped opportunity identities")
+
+    def test_published_identity_gate_retains_distinct_sponsors_and_unresolved_ownership(self):
+        for agencies in [("DOE", "NSF"), (None, None), ("Unknown", "Unknown")]:
+            with self.subTest(agencies=agencies):
+                self.assert_unique_catalog_identities([
+                    {"opportunity_id": str(i), "opportunity_number": "RFP-1", "agency": agency}
+                    for i, agency in enumerate(agencies)
+                ])
+        self.assert_unique_catalog_identities([
+            {"opportunity_id": str(i), "opportunity_number": "RFP-1", "agency": "DOE",
+             "agency_authority": "source_default"} for i in range(2)
+        ])
+
+    def test_published_identity_gate_rejects_duplicates_and_missing_ids(self):
+        for records in [
+            [{"opportunity_id": "same", "agency": agency, "opportunity_number": "RFP-1"}
+             for agency in ("DOE", "NSF")],
+            [{"opportunity_id": str(i), "agency": agency, "opportunity_number": number}
+             for i, (agency, number) in enumerate((("DOE", "RFP-1"), ("Department of Energy", "rfp 1")))],
+            [{"opportunity_id": None, "agency": "DOE", "opportunity_number": "RFP-1"}],
+            [{"opportunity_id": " ", "agency": "DOE", "opportunity_number": "RFP-1"}],
+        ]:
+            with self.subTest(records=records), self.assertRaises(AssertionError):
+                self.assert_unique_catalog_identities(records)
+
     def test_root_page_opens_match_explorer(self):
         index_html = (REPOSITORY_ROOT / "index.html").read_text(encoding="utf-8")
 
@@ -537,11 +573,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
         self.assertIn("agency", catalog["facets"])
         self.assertIn("quality", catalog["diagnostics"])
         self.assertIn("document_evidence", catalog["diagnostics"])
-        identities = {
-            record.get("opportunity_number") or record.get("opportunity_id")
-            for record in catalog["opportunities"]
-        }
-        self.assertEqual(len(identities), catalog["record_count"])
+        self.assert_unique_catalog_identities(catalog["opportunities"])
         self.assertTrue(
             all(record.get("source") and record.get("source_type")
                 for record in catalog["opportunities"])

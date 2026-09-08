@@ -88,11 +88,13 @@ jobs:
           echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
       - name: Classify Award Worker inputs since the active deployment
         id: worker-inputs
+        timeout-minutes: 3
         shell: bash
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: |
+          set -euo pipefail
           npx --yes wrangler@4.125.0 deployments list --config workers/award-api/wrangler.jsonc --json > /tmp/award-worker-deployments.json
           node tools/classify_worker_deployment.mjs award-api /tmp/award-worker-deployments.json "$GITHUB_SHA"
       - name: Capture the active Award Worker version for rollback
