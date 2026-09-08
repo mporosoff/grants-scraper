@@ -182,3 +182,49 @@ Keep the original results and holdouts intact, preserve Anthropic's pause, and
 do not regenerate the catalog to address a model-quality failure. Exact phase
 contracts, receipt hashes, case results, accounting and separate outcomes are in
 `evaluation/offline_ai_access_quality_20260908.json`.
+
+## Authorized prompt-repair round
+
+After these failed trials, the user authorized one new bounded team-prompt repair
+evaluation with independently reviewed source references and six fresh holdouts.
+The user also reported funding Anthropic and separately authorized **one baseline
+only**, within the same remaining $15 evaluation allowance. This supersedes the
+evaluation billing stop only for that finite baseline. The production Anthropic
+pause, Cov4 configuration, historical results, original holdouts, prices, request
+limit and all previously charged usage remain intact.
+
+`evaluation/offline_team_prompt_repair_frozen.json` pins the original 18 development
+cases without changing their source or claim inputs, plus six new holdouts from
+verified public candidate `16bf1e7f39f04e6b15a7ab47ce6b43a80ae804a2f21c180570ae1f09522d0395`.
+The new cases cover a funded catalyst/reactor child, hearing restoration research,
+canine cancer immunotherapy research, conferences, scholarships and service
+delivery. Scope expectations and capability limits are grounded in their supplied
+source before either route runs. Every numerical acceptance criterion is copied
+unchanged from the original frozen evaluation. Historical model decisions are
+not truth labels, and new holdouts cannot be relabeled after results are opened.
+
+The Sonnet baseline uses the unchanged production prompt. The one all-Luna
+candidate clarifies only decomposition: a coherent funded research domain may
+offer multiple methods without prescribing one experiment. It still rejects
+whole umbrellas and operational/service scopes, retains verbatim source quotes,
+and uses the existing independent adjudication/verification and deterministic
+evidence validators. Source and claim pools are identical across both routes.
+No production prompt, route, scientific contract or generated asset changes here.
+
+Run the existing protected workflow with `phase=round2-sonnet` and
+`authorize_anthropic_baseline=true` once, then `phase=round2-luna`. Both phases
+restore `economical-ai-20260908` accounting and persist its outer reservation
+before provider work. The first baseline dispatch records a consumed grant tied
+to the frozen protocol. The same interrupted baseline may resume completed stages;
+it cannot clear a new authentication/billing/provider failure or authorize a
+different protocol. Between baseline jobs Anthropic is paused in evaluation, so
+the grant does not enable old Sonnet or hybrid phases. Production's separate
+`insufficient_credit` pause is never cleared by this entrypoint.
+
+If mandatory quality checks pass, `phase=round2-stability` repeats only Luna's
+two predeclared cases. It receives no Anthropic key. `phase=round2-replay` forbids
+provider transport and replays only retained scientific decisions. Completed
+case/phase contracts fail closed on identity mismatch; a late workflow failure
+does not authorize a new trial, altered holdouts, or reset spending. Promotion
+still requires independent source/claim review, matched useful-output comparison,
+all unchanged gates, and a separately reviewed production configuration.
