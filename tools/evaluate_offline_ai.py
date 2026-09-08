@@ -1,10 +1,12 @@
 """Finite protected evaluation. Never mutates production config or catalog."""
 import argparse
+import ast
 import inspect
 import json
 import os
 from pathlib import Path
 import time
+import textwrap
 from unittest.mock import patch
 import requests
 
@@ -15,20 +17,60 @@ TASK = "economical-ai-20260908"
 SCIENTIFIC_STATES = {"proposed", "insufficient_evidence", "not_specific", "unsuitable_scope"}
 
 
-def evaluation_contract():
+def function_hash(function):
+    tree = ast.parse(textwrap.dedent(inspect.getsource(function)))
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.Module, ast.FunctionDef, ast.ClassDef)) and node.body:
+            first = node.body[0]
+            if isinstance(first, ast.Expr) and isinstance(first.value, ast.Constant) and isinstance(first.value.value, str):
+                node.body.pop(0)
+    return identity(ast.dump(tree, include_attributes=False))
+
+
+def module_hash(path):
+    tree = ast.parse(Path(path).read_bytes())
+    for node in ast.walk(tree):
+        if isinstance(node, (ast.Module, ast.FunctionDef, ast.ClassDef)) and node.body:
+            first = node.body[0]
+            if isinstance(first, ast.Expr) and isinstance(first.value, ast.Constant) and isinstance(first.value.value, str):
+                node.body.pop(0)
+    return identity(ast.dump(tree, include_attributes=False))
+
+
+def evaluation_contract(phase="teams-luna"):
+    from tools import offline_ai as ai
     from scripts import build_opportunity_teams as t
-    from scripts import subtopic_cov4 as gate
-    from tools.run_cov4_ownership import load_candidates
     settings = config()
-    return identity({"routes": settings["routes"], "stages": settings["stages"],
-        "prompts": [t.DECOMPOSE, t.ADJUDICATE, t.VERIFY],
-        "validators": [inspect.getsource(f) for f in (t.validate_roles, t.validate_edges, t.validate_response, t.assemble)],
-        "schemas": schemas(), "frozen": json.loads(Path("evaluation/offline_team_frozen.json").read_bytes()),
-        "cov4": {"manifest": json.loads(Path("evaluation/offline_cov4_frozen.json").read_bytes()),
+    common = {"request_response": [function_hash(f) for f in (ai.Client.json, ai.request_body, ai.response_value,
+                ai.normalize_usage, ai.cost_microusd, ai.Ledger.reserve, ai.Ledger.complete)],
+              "client_and_accounting_module": module_hash("tools/offline_ai.py"),
+              "pricing": settings["prices_per_million"], "prices_verified_at": settings["prices_verified_at"]}
+    if phase == "cov4":
+        from scripts import subtopic_cov4 as gate
+        from tools import run_cov4_validation as harness
+        from tools.run_cov4_ownership import load_candidates
+        return identity(common | {"route": settings["routes"]["luna"], "stage": settings["stages"]["cov4"],
+            "schema": schemas()["cov4"], "adapter": function_hash(cov4),
+            "manifest": json.loads(Path("evaluation/offline_cov4_frozen.json").read_bytes()),
             "population": load_candidates(), "prompts": [gate.render_prompt(row) for row in load_candidates()],
-            "implementation": {name: identity(Path(name).read_text(encoding="utf-8")) for name in
-                ("scripts/subtopic_cov4.py", "scripts/subtopic_records.py", "tools/run_cov4_validation.py",
-                 "tools/run_cov4_ownership.py")}}})
+            "implementation": [function_hash(f) for f in (gate.determine_ownership, gate.apply_gate,
+                gate.render_prompt, harness.run, harness.generic_records, harness.bypassed_records)],
+            "modules": {name: module_hash(name) for name in ("scripts/subtopic_records.py", "scripts/subtopic_cov4.py",
+                "tools/run_cov4_validation.py", "tools/run_cov4_ownership.py")}})
+    if phase == "preflight":
+        return identity(common | {"route": settings["routes"]["luna"], "stage": settings["stages"]["preflight"],
+                                  "schema": schemas()["preflight"], "adapter": function_hash(preflight)})
+    names = ("decomposition", "adjudication", "verification")
+    route = phase.removeprefix("teams-")
+    routes = [route] if route in settings["routes"] else ["luna", "sonnet"] if route == "luna-sonnet-verifier" else list(settings["routes"])
+    return identity(common | {"routes": {r: settings["routes"][r] for r in routes},
+        "stages": {name: settings["stages"][name] for name in names},
+        "adapter": function_hash(team_case),
+        "versions": [t.VERSION, t.RESPONSE_VERSION, t.ASSEMBLY_VERSION],
+        "prompts": [t.DECOMPOSE, t.ADJUDICATE, t.VERIFY],
+        "validators": [function_hash(f) for f in (t.clean, t.validate_roles, t.validate_edges, t.validate_response, t.assemble)],
+        "schemas": {name: schemas()[name] for name in names},
+        "frozen": json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())})
 
 
 def phase_complete(phase, result):
@@ -82,7 +124,7 @@ def team_case(client, route_name, case):
 
 def load_or_assess(client, destination, route, case):
     path = destination / f"team-{route}-{identity(case)}.json"
-    contract = evaluation_contract()
+    contract = evaluation_contract("teams-" + route)
     if path.exists():
         row = json.loads(path.read_bytes())
         if (row.get("case_hash") != identity(case) or row.get("route") != route
@@ -166,7 +208,10 @@ def main():
     ledger = Ledger(args.state / "ledger.json", TASK, config()["budgets_usd"]["evaluation"], max_requests=config()["max_requests"])
     client = Client(ledger, args.state / "cache", deadline=time.monotonic() + 2400)
     marker = args.state / (args.phase + "-completed.json")
-    contract = evaluation_contract()
+    contract = evaluation_contract(args.phase)
+    if args.phase == "replay":
+        contract = identity([contract, {path.name: identity(json.loads(path.read_bytes()))
+                                       for path in sorted(args.state.glob("team-*.json"))}])
     result = None
     try:
         if marker.exists():

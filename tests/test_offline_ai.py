@@ -98,7 +98,13 @@ class OfflineAIContracts(unittest.TestCase):
                 with self.assertRaises(error):
                     client.json(a.config()["routes"]["luna"], "decomposition", "stable", {}, schemas()["preflight"], valid)
                 self.assertEqual(post.call_count, 1)
-                self.assertFalse(list((Path(tmp) / "cache").glob("*.json")))
+                if error is a.Refusal:
+                    self.assertEqual(len(list((Path(tmp) / "cache").glob("*.json"))), 1)
+                    with self.assertRaises(a.Refusal):
+                        client.json(a.config()["routes"]["luna"], "decomposition", "stable", {}, schemas()["preflight"], valid)
+                    self.assertEqual(post.call_count, 1)
+                else:
+                    self.assertFalse(list((Path(tmp) / "cache").glob("*.json")))
 
     def test_frozen_population_and_holdouts_precede_model_results(self):
         frozen = json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())
@@ -144,12 +150,15 @@ class OfflineAIContracts(unittest.TestCase):
     def test_cov4_checkpoint_covers_prompt_population_and_frozen_manifest(self):
         from scripts import subtopic_cov4 as gate
         from tools import run_cov4_ownership
-        original = e.evaluation_contract()
+        original = e.evaluation_contract("cov4")
+        team_original = e.evaluation_contract("teams-luna")
         with patch.object(gate, "PROMPT", gate.PROMPT + "\nchanged"):
-            self.assertNotEqual(original, e.evaluation_contract())
+            self.assertNotEqual(original, e.evaluation_contract("cov4"))
+            self.assertEqual(team_original, e.evaluation_contract("teams-luna"))
         cases = run_cov4_ownership.load_candidates()
         with patch.object(run_cov4_ownership, "load_candidates", return_value=cases[:-1]):
-            self.assertNotEqual(original, e.evaluation_contract())
+            self.assertNotEqual(original, e.evaluation_contract("cov4"))
+            self.assertEqual(team_original, e.evaluation_contract("teams-luna"))
         read = Path.read_bytes
         def changed(path):
             value = read(path)
@@ -157,7 +166,32 @@ class OfflineAIContracts(unittest.TestCase):
                 return json.dumps(json.loads(value) | {"version": "new"}).encode()
             return value
         with patch.object(Path, "read_bytes", changed):
-            self.assertNotEqual(original, e.evaluation_contract())
+            self.assertNotEqual(original, e.evaluation_contract("cov4"))
+            self.assertEqual(team_original, e.evaluation_contract("teams-luna"))
+        def altered_adapter(client, destination):
+            return {"changed_output_translation": True}
+        with patch.object(e, "cov4", altered_adapter):
+            self.assertNotEqual(original, e.evaluation_contract("cov4"))
+            self.assertEqual(team_original, e.evaluation_contract("teams-luna"))
+        def altered_request(self, *args, **kwargs):
+            return {"changed_response_validation": True}
+        with patch.object(a.Client, "json", altered_request):
+            self.assertNotEqual(original, e.evaluation_contract("cov4"))
+            self.assertNotEqual(team_original, e.evaluation_contract("teams-luna"))
+
+    def test_cov4_resume_reuses_refusals_without_another_request(self):
+        refused = response(output=[{"type": "message", "content": [{"type": "refusal", "refusal": "no"}]}])
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, OPENAI_API_KEY="test-only"):
+            ledger = a.Ledger(Path(tmp) / "ledger.json", "test", 1)
+            post = Mock(return_value=refused)
+            client = a.Client(ledger, Path(tmp) / "cache", post=post)
+            first = e.cov4(client, Path(tmp))
+            count = post.call_count
+            self.assertGreater(count, 0)
+            second = e.cov4(client, Path(tmp))
+            self.assertEqual(post.call_count, count)
+            self.assertFalse(e.phase_complete("cov4", first))
+            self.assertFalse(e.phase_complete("cov4", second))
 
     def test_nonterminal_phase_resumes_only_incomplete_case_and_retains_refusal(self):
         frozen = json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())
@@ -167,14 +201,14 @@ class OfflineAIContracts(unittest.TestCase):
             key = case["scope"]["id"]
             calls.append(key)
             return {"scope_id": key, "state": "deferred" if key == deferred_id and calls.count(key) == 1 else "not_specific"}
-        with tempfile.TemporaryDirectory() as tmp, patch.object(e, "team_case", side_effect=assess):
+        with tempfile.TemporaryDirectory() as tmp, patch.object(e, "team_case", side_effect=assess), patch.object(e, "evaluation_contract", return_value="fixture-contract"):
             first = e.teams(None, Path(tmp), "luna")
             self.assertFalse(e.phase_complete("teams-luna", first))
             second = e.teams(None, Path(tmp), "luna")
             self.assertTrue(e.phase_complete("teams-luna", second))
             self.assertEqual(len(calls), 25)
             self.assertEqual(calls.count(deferred_id), 2)
-        with tempfile.TemporaryDirectory() as tmp, patch.object(e, "team_case", return_value={"state": "provider_refusal"}) as assess:
+        with tempfile.TemporaryDirectory() as tmp, patch.object(e, "team_case", return_value={"state": "provider_refusal"}) as assess, patch.object(e, "evaluation_contract", return_value="fixture-contract"):
             for _ in range(2):
                 e.load_or_assess(None, Path(tmp), "luna", frozen["cases"][0])
             self.assertEqual(assess.call_count, 1)

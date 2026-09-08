@@ -253,8 +253,14 @@ class Client:
             path = self.cache / (key + ".json")
             try:
                 cached = json.loads(path.read_bytes())
-                if cached["key"] != key or not cached["returned_model"]:
+                if cached["key"] != key:
                     raise ValueError("cache_identity_mismatch")
+                if cached.get("status") == "refusal":
+                    self.ledger.event(provider=route["provider"], model=route["model"], stage=stage_name,
+                                      event="retained_refusal", key=key)
+                    raise Refusal("retained_provider_safety_refusal")
+                if not cached["returned_model"]:
+                    raise ValueError("cache_model_identity_missing")
                 value = validate(cached["value"])
             except (FileNotFoundError, ValueError, TypeError, KeyError):
                 self.ledger.event(provider=route["provider"], model=route["model"], stage=stage_name,
@@ -310,7 +316,11 @@ class Client:
                     atomic_json(path, {"key": key, "returned_model": payload["model"], "value": value})
                     self.ledger.complete(token, status="valid")
                     return value
-                except (ConfigurationFailure, Refusal) as error:
+                except Refusal:
+                    atomic_json(path, {"key": key, "status": "refusal", "returned_model": payload.get("model")})
+                    self.ledger.complete(token, status="Refusal")
+                    raise
+                except ConfigurationFailure as error:
                     self.ledger.complete(token, status=type(error).__name__)
                     raise
                 except (ValueError, TypeError, KeyError, requests.RequestException) as error:
