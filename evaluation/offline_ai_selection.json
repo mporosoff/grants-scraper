@@ -227,5 +227,16 @@
       "Stage caps remain unchanged because the tested replacement routes did not qualify for production.",
       "Spend is a dated application estimate, not an account invoice; prior unknown-usage charges remain retained."
     ]
+  },
+  "established_service_followup": {
+    "evidence": "evaluation/established_sonnet_repair_20260908.json",
+    "team_access": "available",
+    "team_quality": "failed independent source gate after numerical scope/schema repair",
+    "production_team_pause": "retained",
+    "new_route_promoted": false,
+    "cov4_access": "available",
+    "cov4_quality": "failed organizational-heading contamination gate",
+    "cov4_new_classifications": "unavailable",
+    "openai_credential_wiring": "working; no new OpenAI trial in this followup"
   }
 }

@@ -75,6 +75,44 @@ class RetainedTeamRecovery(unittest.TestCase):
                 self.assertFalse(any(r['state'] == 'restored_from_retained_evidence' for r in results))
                 self.assertEqual(model, before)
 
+    def test_explicit_source_review_binds_both_snapshots_and_still_checks_claims_and_quotes(self):
+        for change in (None, 'prior_snapshot', 'current_snapshot', 'claim', 'quote'):
+            with self.subTest(change=change):
+                model, candidates, registry, settings = self.fixture()
+                row = model['opportunities'][0]
+                current = next(c for c in candidates if c['id'] == self.key)
+                old_fingerprint = row['source_fingerprint']
+                row['source_fingerprint'] = '0' * 64
+                proof = settings['targeted_team_recovery']
+                proof['published_decisions'][self.key] = maintenance.retained_decision_hash(row)
+                reviewed = {'prior_source_fingerprint': row['source_fingerprint'],
+                            'reviewed_source_fingerprint': current['source_fingerprint'],
+                            'review_kind': 'source_projection_revalidation'}
+                proof['reviewed_source_changes'] = {self.key: reviewed}
+                if change == 'prior_snapshot':
+                    reviewed['prior_source_fingerprint'] = 'wrong historical source'
+                elif change == 'current_snapshot':
+                    current['source_fingerprint'] = 'another amendment'
+                elif change == 'claim':
+                    ref = next(ref for role in row['roles'] for ref in role['claim_refs'])
+                    person = next(p for p in registry['researchers'] if p['researcher_id'] == ref['researcher_id'])
+                    next(c for c in person['claims'] if c['claim_id'] == ref['claim_id'])['revision'] += 1
+                elif change == 'quote':
+                    current['text'] = 'The retained quotes no longer occur in this exact official scope.'
+                before = copy.deepcopy(model)
+                with patch.object(maintenance, 'config', return_value=settings), \
+                        patch('requests.post', side_effect=AssertionError('Restoration is provider-free')):
+                    results = maintenance.restore_proven_teams(model, candidates, registry)
+                if change:
+                    self.assertEqual(model, before)
+                    self.assertFalse(any(r['state'] == 'restored_from_retained_evidence' for r in results))
+                else:
+                    self.assertEqual(row['source_fingerprint'], old_fingerprint)
+                    self.assertEqual(row['recovery_proof']['source_revalidation']['prior_source_fingerprint'], '0' * 64)
+                    self.assertEqual(row['recovery_proof']['source_revalidation'], reviewed)
+                    for field in ('pipeline_hash', 'generator_version', 'claims_generation_at_generation'):
+                        self.assertEqual(row.get(field), before['opportunities'][0].get(field))
+
 
 if __name__ == '__main__':
     unittest.main()

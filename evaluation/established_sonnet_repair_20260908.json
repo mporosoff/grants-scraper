@@ -38,11 +38,11 @@
     "next_action": "retain failed established-route evidence and existing fail-closed pause; no additional Cov4 model/prompt search"
   },
   "logical_budget": {
-    "requests": 273,
+    "requests": 295,
     "max_requests": 300,
-    "charged_usd": 2.77263,
+    "charged_usd": 3.577096,
     "limit_usd": 15,
-    "remaining_requests": 27
+    "remaining_requests": 5
   },
   "replay": {
     "scopes": 9,
@@ -58,5 +58,48 @@
     "legitimately_removed": 0,
     "pending": 20,
     "live_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
-  }
+  },
+  "second_focused_repair": {
+    "evaluation_sha": "d7a40c52eb52f551b7e76e8ecbf42eb423639c4b",
+    "run": "34284732993",
+    "replay_run": "34285066778",
+    "scope_correct": 9,
+    "scope_count": 9,
+    "legitimate_accepted": 6,
+    "legitimate_count": 6,
+    "proposals": 4,
+    "provider_requests": 22,
+    "schema_valid_responses": 21,
+    "schema_fraction": 0.9545454545454546,
+    "estimated_spend_usd": 0.804466,
+    "numerical_gates": "passed",
+    "independent_source_gate": "failed",
+    "remaining_confirmed_grounding_error": {
+      "scope_id": "344592:ab-0019",
+      "role_id": "role-2",
+      "claim_id": "urh-000063-c002",
+      "claim_evidence": "silicon integrated nanophotonics",
+      "verified_coverage": "direct",
+      "verified_reason": "Silicon integrated nanophotonics work directly evidences fabrication and processing of on-chip integrated optical components.",
+      "violated_contract": "Supplied domain/platform evidence cannot be upgraded to experimental fabrication or processing capability. Partial component support must not close a required role combining processing and component development.",
+      "consequence": "The verified role graph asserts fabrication/processing capability absent from the supplied claim; the complete route therefore cannot pass the unchanged zero-unsupported-upgrade gate."
+    },
+    "disposition": "Do not promote these prompts or clear the production pause. Retain the failed evidence; no additional paid trial is included in the source-only recovery."
+  },
+  "pending_source_review_restorations": [
+    "359068",
+    "357748",
+    "356530",
+    "357334",
+    "356903",
+    "356874",
+    "357340",
+    "357015",
+    "363622",
+    "361008",
+    "357430",
+    "352947",
+    "357433",
+    "357424"
+  ]
 }
