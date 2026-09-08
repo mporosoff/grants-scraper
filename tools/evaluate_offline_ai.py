@@ -80,6 +80,8 @@ def evaluation_contract(phase="teams-luna"):
 
 
 def phase_complete(phase, result):
+    if phase == 'preflight':
+        return result.get('status') == 'supported'
     if phase.startswith("teams-"):
         return result["completed"] == result["total"]
     if phase == "cov4":
@@ -196,6 +198,19 @@ def cov4(client, destination):
     return report
 
 
+def resume_preflight_credential(ledger):
+    """Clear only the obsolete missing-key stop when the Actions step has a key."""
+    if not os.environ.get('OPENAI_API_KEY'):
+        return
+    with ledger.locked():
+        state = ledger.read()
+        if state['blocked_providers'].get('openai') == 'missing_actions_step_credential':
+            del state['blocked_providers']['openai']
+            state['events'].append({'kind': 'actions_credential_available', 'provider': 'openai',
+                                    'prior_reason': 'missing_actions_step_credential', 'stage': 'preflight'})
+            atomic_json(ledger.path, state)
+
+
 def preflight(client):
     def validate(value):
         if value != {"ready": True} or type(value.get("ready")) is not bool:
@@ -212,16 +227,25 @@ def main():
     args = parser.parse_args()
     args.state.mkdir(parents=True, exist_ok=True)
     ledger = Ledger(args.state / "ledger.json", TASK, config()["budgets_usd"]["evaluation"], max_requests=config()["max_requests"])
+    if args.phase == 'preflight':
+        resume_preflight_credential(ledger)
     client = Client(ledger, args.state / "cache", deadline=time.monotonic() + 2400)
     marker = args.state / (args.phase + "-completed.json")
+    retained = json.loads(marker.read_bytes()) if marker.exists() else None
+    if args.phase == 'preflight' and retained and not phase_complete('preflight', retained['result']):
+        # Older entrypoints marked unavailable access as complete. Keep that
+        # evidence, but it must not impersonate a successful credential probe.
+        atomic_json(args.state / 'history' / ('preflight-' + identity(retained) + '.json'), retained)
+        marker.unlink()
+        retained = None
     contract = evaluation_contract(args.phase)
     if args.phase == "replay":
         contract = identity([contract, {path.name: identity(json.loads(path.read_bytes()))
                                        for path in sorted(args.state.glob("team-*.json"))}])
     result = None
     try:
-        if marker.exists():
-            result = json.loads(marker.read_bytes())
+        if retained is not None:
+            result = retained
             if result.get("evaluation_contract") != contract:
                 raise ValueError("evaluation_contract_changed; retained evidence is historical")
             result = result["result"]

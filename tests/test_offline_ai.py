@@ -147,6 +147,60 @@ class OfflineAIContracts(unittest.TestCase):
             self.assertIsNone(row["usage"])
             self.assertEqual(row["reserved_microusd"], row["charged_microusd"])
 
+    def test_added_actions_credential_resumes_only_missing_openai_stop_with_spend_intact(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, OPENAI_API_KEY='synthetic'):
+            ledger = a.Ledger(Path(tmp) / 'ledger.json', 'test', 1)
+            ledger.reserve('anthropic', 'claude-sonnet-5', 'decomposition', 'retained', 88875, 1)
+            ledger.block('anthropic', 'insufficient_credit')
+            ledger.block('openai', 'missing_actions_step_credential')
+            before = ledger.read()
+            e.resume_preflight_credential(ledger)
+            e.resume_preflight_credential(ledger)
+            after = ledger.read()
+            self.assertEqual(after['requests'], before['requests'])
+            self.assertEqual(after['limit_microusd'], before['limit_microusd'])
+            self.assertEqual(after['blocked_providers'], {'anthropic': 'insufficient_credit'})
+            self.assertEqual(len(after['events']), 1)
+            post = Mock(return_value=response())
+            self.assertEqual(e.preflight(a.Client(ledger, Path(tmp) / 'cache', post=post)), {'ready': True})
+            self.assertEqual(post.call_count, 1)
+            self.assertEqual(ledger.read()['requests'][0], before['requests'][0])
+
+    def test_preflight_does_not_clear_missing_or_denied_credentials(self):
+        for key, reason in (('', 'missing_actions_step_credential'), ('synthetic', 'openai_configuration_http_401'),
+                            ('synthetic', 'openai_configuration_http_403')):
+            with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, OPENAI_API_KEY=key):
+                ledger = a.Ledger(Path(tmp) / 'ledger.json', 'test', 1)
+                ledger.block('openai', reason)
+                ledger.block('anthropic', 'insufficient_credit')
+                before = ledger.read()
+                e.resume_preflight_credential(ledger)
+                self.assertEqual(ledger.read(), before)
+
+    def test_preflight_entrypoint_preserves_failed_marker_history_and_tests_new_key_once(self):
+        from contextlib import redirect_stdout
+        import io
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, OPENAI_API_KEY='synthetic'):
+            state = Path(tmp)
+            ledger = a.Ledger(state / 'ledger.json', e.TASK, a.config()['budgets_usd']['evaluation'], a.config()['max_requests'])
+            ledger.reserve('anthropic', 'claude-sonnet-5', 'decomposition', 'retained', 88875, 1)
+            ledger.block('anthropic', 'insufficient_credit')
+            ledger.block('openai', 'missing_actions_step_credential')
+            previous_request = ledger.read()['requests'][0]
+            failed = {'complete': True, 'evaluation_contract': 'historical-contract',
+                'result': {'phase': 'preflight', 'status': 'unavailable_or_invalid', 'error_type': 'ConfigurationFailure'}}
+            a.atomic_json(state / 'preflight-completed.json', failed)
+            with patch('sys.argv', ['evaluate', 'preflight', '--state', str(state)]), \
+                    patch.object(e.requests, 'post', return_value=response()) as post, redirect_stdout(io.StringIO()):
+                e.main()
+                e.main()
+            self.assertEqual(post.call_count, 1)
+            self.assertEqual(json.loads(next((state / 'history').glob('preflight-*.json')).read_bytes()), failed)
+            self.assertEqual(json.loads((state / 'preflight-completed.json').read_bytes())['result']['status'], 'supported')
+            self.assertEqual(ledger.read()['requests'][0], previous_request)
+            self.assertEqual(ledger.read()['blocked_providers'], {'anthropic': 'insufficient_credit'})
+            self.assertFalse(e.phase_complete('preflight', failed['result']))
+
     def test_cov4_checkpoint_covers_prompt_population_and_frozen_manifest(self):
         from scripts import subtopic_cov4 as gate
         from tools import run_cov4_ownership
