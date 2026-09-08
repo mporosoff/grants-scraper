@@ -79,7 +79,7 @@ def main():
     # native/reference guards and acceptance functions remain untouched.
     sys.argv[0] = 'scripts.extract_document_evidence'
     try:
-        runpy.run_module('scripts.extract_document_evidence', run_name='__main__')
+        runpy.run_module('scripts.extract_document_evidence', run_name='__main__', alter_sys=True)
     finally:
         atomic_json(state / 'usage-summary.json', ledger.summary())
 

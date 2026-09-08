@@ -45,5 +45,19 @@
     "No new model completed an assessment; schema/quality/noninferiority/cost claims are unavailable.",
     "Application-side reserved charges are not an account invoice.",
     "Production stage caps retain the established Sonnet ceiling until measured stage responses exist."
-  ]
+  ],
+  "pilot": {
+    "run": "34244913333",
+    "selected_scopes": 5,
+    "attempts": 3,
+    "retries": 0,
+    "valid_scopes": 0,
+    "reported_usage": null,
+    "conservative_reserved_usd": 0.273103,
+    "voyage_requests": 7,
+    "provider_failure": "insufficient_credit",
+    "route": "anthropic/claude-sonnet-5",
+    "candidate": "c1c644721a8988d0073417d50e79123cabc127c317e46850f13ac78b24986a2f",
+    "candidate_disposition": "Invalidated: document wrapper module-identity failure; publication prevented by validation. Preserve provider pause; no repeated paid pilot."
+  }
 }

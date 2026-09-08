@@ -75,7 +75,8 @@ def snapshot(root, revision=None):
             # Team routes/prompts/caps are independent. These are the only shared
             # configuration fields consumed by the document spending adapter.
             files['@document_spend_config'] = c.digest(c.encoded({key: settings[key] for key in
-                ('budgets_usd', 'max_requests', 'prices_per_million')}))
+                ('budgets_usd', 'max_requests', 'prices_per_million')} |
+                {'generation_provider_pauses': settings.get('generation_provider_pauses', {})}))
         result[group] = {'files': files, 'fingerprint': c.digest(c.encoded(files))}
     return result
 

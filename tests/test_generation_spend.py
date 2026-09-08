@@ -3,6 +3,7 @@ import io
 import json
 from pathlib import Path
 import tempfile
+import sys
 import unittest
 from unittest.mock import Mock, patch
 import zipfile
@@ -10,10 +11,44 @@ import zipfile
 from tools import generation_spend_checkpoint as checkpoint
 from tools.offline_ai import Ledger, error_diagnostics
 from tools.run_budgeted_documents import instrument
+from tools import run_budgeted_documents as wrapper
 from scripts import subtopic_cov4 as gate
 
 
 class GenerationSpend(unittest.TestCase):
+    def test_document_entrypoint_registers_its_own_module_for_schedule_callbacks(self):
+        # The production merge_document_entry callback passes sys.modules[__name__]
+        # to notice_schedule, which requires the extractor's DATE_RE attribute.
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            (root / 'document_entry_fixture.py').write_text(
+                'import re, sys\nDATE_RE = re.compile("date")\n'
+                'assert sys.modules[__name__].DATE_RE.pattern == "date"\n', encoding='utf-8')
+            original = wrapper.runpy.run_module
+            def invoke(name, **kwargs):
+                self.assertEqual(name, 'scripts.extract_document_evidence')
+                return original('document_entry_fixture', **kwargs)
+            with patch.object(sys, 'path', [str(root), *sys.path]), \
+                    patch.dict('os.environ', {'OFFLINE_AI_STATE': str(root / 'state'), 'TEAM_MODE': 'pilot'}), \
+                    patch.object(wrapper.runpy, 'run_module', side_effect=invoke), patch.object(gate, 'classify_fundability'):
+                wrapper.main()
+            self.assertTrue((root / 'state/usage-summary.json').exists())
+
+    def test_confirmed_provider_pause_survives_into_replacement_without_requests(self):
+        meta = {'path': '.github/workflows/refresh-opportunities.yml', 'head_branch': 'main'}
+        def api(repo, path):
+            return json.dumps({'artifacts': []} if 'artifacts?' in path else meta).encode()
+        settings = checkpoint.config() | {'generation_provider_pauses': {'anthropic': {'reason': 'insufficient_credit'}}}
+        with tempfile.TemporaryDirectory() as directory, patch.object(checkpoint, 'api', side_effect=api), \
+                patch.object(checkpoint, 'config', return_value=settings):
+            root = Path(directory)
+            checkpoint.prepare('owner/repo', '124', '1', root / 'offline-124', root / 'reservation.json', 'pilot')
+            ledger = Ledger(root / 'offline-124/ledger.json', 'offline-124', 2)
+            self.assertEqual(ledger.read()['blocked_providers']['anthropic'], 'insufficient_credit')
+            with self.assertRaisesRegex(RuntimeError, 'insufficient_credit'):
+                ledger.reserve('anthropic', gate.MODEL, 'decomposition', 'new', 1, 1)
+            self.assertEqual(ledger.read()['requests'], [])
+
     def test_resumed_logical_generation_keeps_reserved_unknown_spend(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -35,7 +70,7 @@ class GenerationSpend(unittest.TestCase):
             self.assertEqual(restored.summary()['charged_usd'], 1.9)
             self.assertTrue((root / 'offline-123/team-responses/completed.json').exists())
             with self.assertRaisesRegex(RuntimeError, 'budget_exhausted'):
-                restored.reserve('anthropic', gate.MODEL, 'verification', 'other', 200000, 1)
+                restored.reserve('openai', 'gpt-5.6-luna', 'verification', 'other', 200000, 1)
             artifacts['artifacts'].pop()
             with patch.object(checkpoint, 'api', side_effect=api), self.assertRaisesRegex(ValueError, 'remaining allowance unavailable'):
                 checkpoint.prepare('owner/repo', '123', '3', root / 'missing', root / 'reservation2.json', 'pilot')
