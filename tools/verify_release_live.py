@@ -39,7 +39,7 @@ def worker_provenance(bundle, reports):
     output = Path(reports) / 'worker-live.json'
     result = subprocess.run(['node', str(c.ROOT / 'tools/search_worker_checkpoint.mjs'), '--verify-live',
                              str(bundle), str(Path(reports) / 'worker-after.json'), str(output)],
-                            capture_output=True, text=True, timeout=180)
+                            capture_output=True, text=True, timeout=600)
     state = c.read_json(output) if output.exists() else {}
     if result.returncode or state.get('verified') is not True:
         raise ValueError('Worker provenance verification failed: ' + str(state.get('error', 'metadata unavailable'))[:300])

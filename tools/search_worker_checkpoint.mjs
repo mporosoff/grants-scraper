@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 import { execFileSync } from 'node:child_process';
 import { readFileSync, appendFileSync, writeFileSync } from 'node:fs';
-import { pathToFileURL } from 'node:url';
+import { pathToFileURL, fileURLToPath } from 'node:url';
 import { activeDeployment, readWorkerVersionMetadata, resolveWorkerDeploymentCheckpoint,
   classifyWorkerDeployment } from './classify_worker_deployment.mjs';
 
@@ -12,7 +12,7 @@ export function fingerprintFiles(files) {
   return createHash('sha256').update(`${JSON.stringify(ordered)}\n`).digest('hex');
 }
 
-export function servingFingerprint(deployments, version, readCheckpointFiles) {
+export function servingFingerprint(deployments, version, readCheckpointFiles, reconcileUnannotated) {
   const active = activeDeployment(deployments);
   if (version?.id !== active.versionId) throw new Error('Active Search Worker version metadata mismatch');
   const messages = [version.annotations, active.deployment.annotations]
@@ -27,7 +27,17 @@ export function servingFingerprint(deployments, version, readCheckpointFiles) {
   }).filter(Boolean);
   if (new Set(hashes).size > 1) throw new Error('Conflicting Search Worker input provenance');
   // Validate the protected-main checkpoint too, retaining PR #162 fail-closed behavior.
-  const checkpoint = resolveWorkerDeploymentCheckpoint(worker, deployments, version);
+  let checkpoint;
+  try {
+    checkpoint = resolveWorkerDeploymentCheckpoint(worker, deployments, version);
+  } catch (error) {
+    if (error.message === 'Active Worker has no verified Git checkpoint; publication is blocked.' && reconcileUnannotated) {
+      const verified = reconcileUnannotated(active.deployment.id, active.versionId);
+      if (hashes[0] && hashes[0] !== verified.fingerprint) throw new Error('Conflicting Search Worker input provenance');
+      return verified;
+    }
+    throw error;
+  }
   const fingerprint = hashes[0] || fingerprintFiles(readCheckpointFiles(checkpoint.baseSha));
   return { fingerprint, version_id: active.versionId, checkpoint };
 }
@@ -39,7 +49,7 @@ export function decideWorker(required, serving) {
   return { deploy_required: required !== serving.fingerprint, required_fingerprint: required, ...serving };
 }
 
-function checkpointFiles(sha) {
+export function checkpointFiles(sha) {
     const names = execFileSync('git', ['ls-tree', '-r', '--name-only', sha], { encoding: 'utf8' }).trim().split('\n');
     const inputs = classifyWorkerDeployment(worker, names).deploymentInputs;
     if (!inputs.includes('workers/search-voyage-proxy/generated/corpus-allowlist.json') || inputs.length < 3) {
@@ -55,13 +65,20 @@ function checkpointFiles(sha) {
 }
 
 export function verifyServingIdentity(required, expected, serving) {
+  const validReconciliation = state => state.checkpoint.source !== 'verified-serving-bytes' || (
+    state.reconciliation?.method === 'authenticated-serving-bytes-and-configuration'
+    && state.reconciliation.protected_input_sha === state.checkpoint.baseSha
+    && state.reconciliation.input_hashes && fingerprintFiles(state.reconciliation.input_hashes) === state.fingerprint
+    && /^[a-f0-9]{64}$/.test(state.reconciliation.configuration_fingerprint || '')
+    && Object.keys(state.reconciliation.module_hashes || {}).length > 0);
   const valid = state => state && /^[a-f0-9]{64}$/.test(state.fingerprint || '')
     && /^[0-9a-f]{8}(?:-[0-9a-f]{4}){3}-[0-9a-f]{12}$/i.test(state.version_id || '')
     && /^[a-f0-9]{40}$/.test(state.checkpoint?.baseSha || '')
     && !/^0{40}$/.test(state.checkpoint.baseSha)
     && state.checkpoint.activeVersionId === state.version_id
     && typeof state.checkpoint.activeDeploymentId === 'string' && state.checkpoint.activeDeploymentId.length > 0
-    && ['active-version-message', 'active-deployment-message'].includes(state.checkpoint.source);
+    && ['active-version-message', 'active-deployment-message', 'verified-serving-bytes'].includes(state.checkpoint.source)
+    && validReconciliation(state);
   if (!valid(expected) || !valid(serving) || expected.deploy_required !== false
       || expected.required_fingerprint !== required || expected.fingerprint !== required) {
     throw new Error('Missing or malformed verified publication Worker checkpoint');
@@ -86,7 +103,7 @@ function readDeployments() {
 }
 
 export function readLiveServing({ deployments = readDeployments,
-  version = id => readWorkerVersionMetadata(worker, id), files = checkpointFiles } = {}) {
+  version = id => readWorkerVersionMetadata(worker, id), files = checkpointFiles, reconcileUnannotated } = {}) {
   const before = deployments();
   const active = activeDeployment(before);
   const metadata = version(active.versionId);
@@ -95,7 +112,18 @@ export function readLiveServing({ deployments = readDeployments,
   if (current.versionId !== active.versionId || current.deployment.id !== active.deployment.id) {
     throw new Error('Active Search Worker changed while reading deployment provenance');
   }
-  return servingFingerprint(after, metadata, files);
+  return servingFingerprint(after, metadata, files, reconcileUnannotated);
+}
+
+function reconciliationReader(baseSha) {
+  return (deploymentId, versionId) => {
+    try {
+      return JSON.parse(execFileSync(process.execPath, [fileURLToPath(new URL('./reconcile_search_worker_provenance.mjs', import.meta.url)),
+        baseSha, deploymentId, versionId], {encoding:'utf8', timeout:300_000, maxBuffer:1024*1024, stdio:['ignore','pipe','pipe']}));
+    } catch (error) {
+      throw new Error(`Serving inputs could not be verified: ${String(error.stderr || 'reconciliation unavailable').trim().slice(0, 400)}`);
+    }
+  };
 }
 
 function run() {
@@ -105,7 +133,8 @@ function run() {
     try {
       const manifest = JSON.parse(readFileSync(`${bundle}/candidate.json`, 'utf8'));
       const expected = JSON.parse(readFileSync(expectedPath, 'utf8'));
-      const result = verifyServingIdentity(manifest.worker_fingerprint, expected, readLiveServing());
+      const result = verifyServingIdentity(manifest.worker_fingerprint, expected, readLiveServing({
+        reconcileUnannotated:reconciliationReader(expected.checkpoint?.baseSha)}));
       writeFileSync(outputPath, `${JSON.stringify(result, null, 2)}\n`);
       console.log(JSON.stringify(result));
     } catch (error) {
@@ -119,7 +148,16 @@ function run() {
   const deployments = JSON.parse(readFileSync(deploymentsPath, 'utf8'));
   const { versionId } = activeDeployment(deployments);
   const version = readWorkerVersionMetadata(worker, versionId);
-  const serving = servingFingerprint(deployments, version, checkpointFiles);
+  let serving;
+  try {
+    serving = servingFingerprint(deployments, version, checkpointFiles,
+      reconciliationReader(execFileSync('git', ['rev-parse', 'HEAD'], {encoding:'utf8'}).trim()));
+  } catch (error) {
+    writeFileSync(outputPath, `${JSON.stringify({verified:false, candidate_id:manifest.candidate_id,
+      active_version:version, active_deployment:activeDeployment(deployments).deployment,
+      error:error.message}, null, 2)}\n`);
+    throw error;
+  }
   const decision = decideWorker(manifest.worker_fingerprint, serving);
   writeFileSync(outputPath, `${JSON.stringify(decision, null, 2)}\n`);
   if (process.env.GITHUB_OUTPUT) appendFileSync(process.env.GITHUB_OUTPUT,
