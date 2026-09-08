@@ -90,7 +90,7 @@ The protected entrypoint merged in PR #171 at
 `facd83554751c6504592c934536e781f446552cc`. Preflight run `34234658950`
 found no `OPENAI_API_KEY` in the Actions step and made zero API requests.
 Repository and existing environment secret-name metadata also lacked that name;
-no secret values were accessed. Sonnet baseline run `34234760078` made one
+the operator inspected names only. Sonnet baseline run `34234760078` made one
 request and received HTTP 400, then stopped that provider's new requests.
 Its usage was unreported, so the ledger retains the conservative $0.088875
 reservation. The original adapter did not capture the provider error category;
@@ -118,8 +118,9 @@ remain reusable; a configured provider is not necessarily available.
 
 ## Resumed OpenAI access and finite quality results
 
-The user added repository Actions secret `OPENAI_API_KEY`. Its value was never
-read or copied. The existing evaluation-step mapping was correct; PR #178 fixed
+The user added repository Actions secret `OPENAI_API_KEY`. The trusted Actions
+step consumed it for API authentication; no value was inspected, printed or
+copied by the operator. The existing evaluation-step mapping was correct; PR #178 fixed
 only the obsolete missing-key stop and unsuccessful preflight marker. It merged
 as `92f3856adf5c4b432a2ad4bc340c709dcd0b9038` after clean exact-head review and
 required checks. Preflight [34255768570](https://github.com/mporosoff/grants-scraper/actions/runs/34255768570)

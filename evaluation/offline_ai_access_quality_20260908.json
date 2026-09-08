@@ -3,7 +3,8 @@
   "evaluation_task": "economical-ai-20260908",
   "code_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038",
   "credential_scope": "Repository Actions secret OPENAI_API_KEY in mporosoff/grants-scraper",
-  "credential_values_read": false,
+  "credential_values_exposed_to_operator": false,
+  "credential_consumed_by_trusted_actions_step": true,
   "phases": {
     "preflight": {
       "run_id": "34255768570",
