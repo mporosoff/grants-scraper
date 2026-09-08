@@ -194,6 +194,43 @@ class IncrementalTeams(unittest.TestCase):
         self.assertEqual((code, resumed["pending_after"]), (0, 0))
         self.assertEqual(self.run_main()[1]["provider_requests"], 0)
 
+    def test_interrupted_final_report_restores_deferred_ownership_from_progress(self):
+        _, _, model, _ = self.run_main()
+        identifier = model['opportunities'][0]['id']
+        model['opportunities'] = []
+        original = {'state': 'rejected_evidence', 'key': 'old-input', 'stage': 'decomposition',
+                    'response_contract': teams.RESPONSE_VERSION, 'retry_after': 0}
+        model['generation_attempts'][identifier] = dict(original)
+        self.model_path.write_text(json.dumps(model))
+        self.add_call()
+        def amend(rows):
+            next(row for row in rows if row['opportunity_id'] == identifier)['document_evidence']['document']['sha256'] = 'c' * 64
+        self.update_catalog(amend)
+        def one_completed(executor, queue, assess, provider, workers):
+            scope = next(row for row in queue if row['id'] == 'fixture-new-call')
+            yield scope, assess(scope)
+        write_text = Path.write_text
+        def interrupted(path, content, *args, **kwargs):
+            if path.name == 'opportunity_team_generation.json' and json.loads(content).get('status') == 'completed':
+                write_text(path, content[:20], *args, **kwargs)
+                raise InterruptedError('Interrupted final report')
+            return write_text(path, content, *args, **kwargs)
+        with patch.object(teams, 'bounded_assess', one_completed), patch.object(Path, 'write_text', interrupted):
+            with self.assertRaisesRegex(InterruptedError, 'final report'):
+                self.run_main()
+        state = self.root / '.spend/run-2'
+        saved = json.loads(self.model_path.read_bytes())
+        progress = json.loads((state / 'team-progress.json').read_bytes())
+        self.assertEqual(saved['generation_attempts'][identifier], progress['generation_attempts'][identifier])
+        self.assertIn('maintenance_pending', progress['generation_attempts'][identifier])
+        teams.Ledger(state / 'ledger.json', 'run-2', 2).block('anthropic', 'fixture_configuration_pause')
+        code, report, resumed, calls = self.run_main(args=['--state', str(state)],
+            response=lambda *args, **kwargs: self.fail('Paused retry must not call providers'))
+        self.assertEqual((report['provider_requests'], len(calls)), (0, 0))
+        self.assertEqual(report['queue_counts'], {'maintenance': 1, 'backfill': 0})
+        self.assertEqual(report['queue_reasons'][identifier], 'retryable_maintenance_failure')
+        self.assertEqual({key: resumed['generation_attempts'][identifier][key] for key in original}, original)
+
     def test_ranking_and_discovery_are_bounded_and_resume_across_invocations(self):
         def expand(rows):
             source = next(row for row in rows if row["opportunity_id"].endswith(":research"))

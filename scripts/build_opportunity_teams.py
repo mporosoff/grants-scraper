@@ -1031,6 +1031,13 @@ def main():
     if args.write and args.mode in ('maintenance', 'pilot'):
         maintenance.preserve_deferred(attempts, selected, report['results'], queue_reasons,
                                       args.mode, pipeline_hash, attempt_key)
+        if progress_path:
+            # Commit deferred ownership before the accepted model can advance.
+            # An interrupted final report must not restore older queue state.
+            atomic_json(progress_path, {'input_generation': input_generation,
+                'science_contract': pipeline_hash, 'provider_contract': provider_contract(),
+                'opportunities': list(existing.values()), 'generation_attempts': attempts,
+                'discovery_queue': model.get('discovery_queue', {})})
     report["coverage_after"] = coverage(existing.values())
     report["pending_after"] = sum(not attempt_completed(attempts.get(scope["id"]), attempt_key(scope), existing.get(scope["id"])) for scope in pending)
     assessed = {result["scope_id"] for result in report["results"]}
