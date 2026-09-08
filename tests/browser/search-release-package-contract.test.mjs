@@ -105,49 +105,17 @@ test("fixed public canaries fingerprint and gate the embedding space", () => {
   assert.match(worker, /body\.model_space_fingerprint !== generation\.model_space_fingerprint/);
 });
 
-test("scheduled publication deploys a validated compatibility Worker before one atomic commit", () => {
-  const ordered = [
-    "Build and validate complete public opportunity catalog",
-    "Build compatible production document vectors",
-    "Build the current/previous Worker compatibility package",
-    "Verify the complete search package is internally consistent",
-    "Run browser and search-package regression gates",
-    "Refuse to deploy a stale generation",
-    "Deploy the compatibility Worker before publishing Pages assets",
-    "Commit refreshed catalog",
-    "Dispatch refreshed catalog to GitHub Pages",
-    "Verify GitHub Pages serves the coordinated search package",
-  ].map(label => workflow.indexOf(label));
-  ordered.forEach(index => assert.ok(index >= 0));
-  assert.deepEqual(ordered, ordered.slice().sort((left, right) => left - right));
-  assert.match(workflow, /git add[^\n]*search-v2-voyage-manifest\.json[^\n]*search-v2-voyage-vectors\.f16[^\n]*search-v2-voyage-canaries\.json[^\n]*search-v2-release\.json/);
-  assert.match(workflow, /git add[^\n]*data\/opportunities\.js data\/catalog-metadata\.js/);
-  assert.match(workflow, /git add[^\n]*corpus-allowlist\.json/);
-  assert.match(workflow, /uses: actions\/checkout@v6[\s\S]*?with:[\s\S]*?ref: main/);
-  assert.match(workflow, /built_from_sha="\$\(git rev-parse HEAD\)"/);
-  assert.match(workflow, /current_main_sha="\$\(git ls-remote origin refs\/heads\/main/);
-  assert.match(workflow, /refusing to deploy stale Worker or Pages assets/);
+test("scheduled publication consumes a persisted validated package before protected merge and Pages", () => {
+  const ordered = ["Build and validate complete public opportunity catalog", "Build compatible production document vectors",
+    "Build the current/previous Worker compatibility package", "Persist the complete immutable candidate", "  validate:",
+    "tools.validate_release_candidate", "  publish:", "Deploy changed Worker inputs", "tools.publish_release_candidate",
+    "actions/upload-pages-artifact@v5", "\n  pages:\n", "  verify-live:"].map(label => workflow.indexOf(label));
+  assert.ok(ordered.every(index => index >= 0));
+  assert.deepEqual(ordered, [...ordered].sort((a,b) => a-b));
   assert.match(workflow, /pull-requests: write/);
   assert.match(workflow, /statuses: write/);
   assert.match(workflow, /actions: write/);
-  assert.match(workflow, /gh api --method POST "repos\/\$\{GITHUB_REPOSITORY\}\/statuses\/\$\{head_sha\}"/);
-  assert.match(workflow, /-f context=python/);
-  assert.match(workflow, /-f context=browser/);
   assert.doesNotMatch(workflow, /playwright|test:e2e|-f context=e2e/i);
-  const generatedCommitStatuses = workflow.slice(
-    workflow.indexOf('head_sha="$(git rev-parse HEAD)"'),
-    workflow.indexOf("if ! pr_url="),
-  );
-  for (const context of ["python", "browser"]) {
-    assert.match(generatedCommitStatuses, new RegExp(`-f context=${context}`));
-  }
-  assert.match(workflow, /gh pr create/);
-  assert.match(workflow, /gh pr merge "\$pr_url" --squash --delete-branch/);
-  assert.match(workflow, /gh workflow run pages\.yml --ref main/);
-  assert.doesNotMatch(
-    workflow.slice(workflow.indexOf("Build compatible production document vectors"), workflow.indexOf("Commit refreshed catalog")),
-    /continue-on-error:\s*true/,
-  );
 });
 
 test("release package verification is a deterministic no-write gate", () => {

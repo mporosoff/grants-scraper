@@ -1,0 +1,20 @@
+name: Release tools
+description: Install the pinned ordinary release toolchain without browser E2E
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-python@v6
+      with:
+        python-version: '3.13'
+        cache: pip
+    - uses: pnpm/action-setup@v6
+      with:
+        version: '11.19.0'
+    - uses: actions/setup-node@v6
+      with:
+        node-version: '22'
+        cache: pnpm
+    - shell: bash
+      run: python -m pip install -r requirements.txt
+    - shell: bash
+      run: pnpm install --frozen-lockfile

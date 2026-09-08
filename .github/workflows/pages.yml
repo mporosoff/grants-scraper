@@ -1,20 +1,15 @@
-name: Deploy GitHub Pages
+name: Publish validated Pages artifact
 
 on:
-  push:
-    branches:
-      - main
-  workflow_dispatch:
+  workflow_call:
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-concurrency:
-  group: pages
-  cancel-in-progress: false
-
+# The caller holds funding-finder-coordinated-release throughout publication.
+# No push, dispatch or independent checkout can race ahead of Worker preparation.
 jobs:
   deploy:
     environment:
@@ -22,24 +17,6 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Check out the published site
-        uses: actions/checkout@v6
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-          cache: pip
-      - run: python -m pip install -r requirements.txt
-      - name: Verify the committed notice publication projection
-        run: python -m tools.verify_notice_publication
-      - name: Configure GitHub Pages
-        uses: actions/configure-pages@v6
-      - name: Stamp the exact published commit
-        shell: bash
-        run: printf '%s\n' "$GITHUB_SHA" > pages-release-sha.txt
-      - name: Package the static site
-        uses: actions/upload-pages-artifact@v5
-        with:
-          path: .
-      - name: Deploy to GitHub Pages
+      - name: Deploy the exact Pages artifact prepared by the release owner
         id: deployment
         uses: actions/deploy-pages@v5

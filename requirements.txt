@@ -1,4 +1,5 @@
 requests>=2.31.0
+PyYAML==6.0.3
 # Exact pins for the PDF toolchain. An unpinned minor bump shifts character
 # positions and font names, which shifts subtopic spans, which surfaces as a
 # flood of phantom subtopic_amended events. pdfminer.six drives extraction and

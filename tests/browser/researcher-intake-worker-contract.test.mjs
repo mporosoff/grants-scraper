@@ -533,10 +533,11 @@ test("queue schema, worker config, and publication workflow preserve the registr
   assert.match(deploymentWorkflow, /pnpm\/action-setup@v6/);
   assertOrdered(deploymentWorkflow, "pnpm install --frozen-lockfile", "node --test tests/browser/researcher-intake-worker-contract.test.mjs");
   assert.match(workflow, /RESEARCHER_GITHUB_PUBLICATION_TOKEN/);
-  const publicationGroup = workflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
+  const publicationGroup = workflow.match(/\n  group: ([^\n]+)/)?.[1];
   const refreshGroup = refreshWorkflow.match(/concurrency:\n  group: ([^\n]+)/)?.[1];
-  assert.equal(publicationGroup, "funding-finder-coordinated-release");
-  assert.equal(publicationGroup, refreshGroup);
+  assert.equal(publicationGroup, "funding-finder-registry-publication");
+  assert.notEqual(publicationGroup, refreshGroup, "registry producer must release its lock while awaiting the release owner");
+  assert.match(workflow, /--workflow refresh-opportunities.yml/);
   assert.match(workerSource, /submission_id: row\.submission_id, approved_revision: row\.revision/);
   assert.doesNotMatch(workerSource.slice(workerSource.indexOf("client_payload"), workerSource.indexOf("client_payload") + 260), /approved_profile|repository_path|command/);
   assert.match(workflow, /Refuse every non-allowlisted path/);

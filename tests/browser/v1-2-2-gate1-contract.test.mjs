@@ -13,7 +13,7 @@ const [app, searchPage, teamPage, smoke, worker, refreshWorkflow, deployWorkflow
   readFile(new URL("tools/smoke_search_worker.mjs", root), "utf8"),
   readFile(new URL("workers/search-voyage-proxy/src/index.js", root), "utf8"),
   readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
-  readFile(new URL(".github/workflows/deploy-search-package.yml", root), "utf8"),
+  readFile(new URL("tools/publish_release_candidate.py", root), "utf8"),
   readFile(new URL("workers/search-voyage-proxy/generated/corpus-allowlist.json", root), "utf8").then(JSON.parse),
 ]);
 
@@ -178,41 +178,24 @@ test("Worker smoke performs the real bounded sequence and fails on provider reje
   });
 });
 
-test("package-sensitive changes have a bounded deploy-only workflow", () => {
-  for (const path of [
-    "assets/app.js",
-    "assets/result-workflow.js",
-    "assets/search-hybrid.js",
-    "assets/search-retrieval.js",
-    "assets/team-hybrid.js",
-    "assets/search-v2-config.js",
-    "config/search_v2.json",
-    "tools/build_search_v2_voyage_vectors.mjs",
-    "tools/build_search_release_package.mjs",
-    "workers/search-voyage-proxy/**",
-  ]) assert.match(deployWorkflow, new RegExp(path.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
-  assert.match(deployWorkflow, /build_search_release_package\.mjs --check/);
-  assert.match(deployWorkflow, /python -m tools\.run_refresh_validation/);
-  assert.match(deployWorkflow, /node --test tests\/browser\/\*\.test\.mjs/);
-  assert.match(deployWorkflow, /wrangler@4\.125\.0 deploy/);
-  assert.doesNotMatch(deployWorkflow, /scripts\.build_catalog|build_search_v2_voyage_vectors\.mjs --production --write/);
-  assert.match(deployWorkflow, /!\s*startsWith\(github\.event\.head_commit\.message, 'chore: refresh Grants\.gov catalog'\)/);
-  assert.equal((deployWorkflow.match(/node tools\/smoke_search_worker\.mjs/g) || []).length, 2);
-  assert.match(deployWorkflow, /jq -S -c \. data\/search-v2-release\.json/);
+test("package-sensitive changes can reuse generated data through the single release owner", () => {
+  const reuse = refreshWorkflow.slice(refreshWorkflow.indexOf('  assemble:'), refreshWorkflow.indexOf('  candidate:'));
+  assert.match(reuse, /tools.release_candidate dependencies/);
+  assert.match(reuse, /tools.assemble_release_candidate/);
+  assert.match(reuse, /build_search_release_package\.mjs --write/);
+  assert.doesNotMatch(reuse, /scripts\.build_catalog|build_search_v2_voyage_vectors|--generate/);
+  assert.match(refreshWorkflow, /if: steps.worker-inputs.outputs.deploy_required == 'true'/);
 });
 
-test("both deployment paths capture and restore the prior Worker around main-branch races", () => {
-  for (const workflow of [refreshWorkflow, deployWorkflow]) {
-    assert.match(workflow, /wrangler@4\.125\.0 deployments list[\s\S]*?version_id=\$prior_version/);
-    assert.match(workflow, /steps\.prior-worker\.outputs\.version_id/);
-    assert.match(workflow, /wrangler@4\.125\.0 rollback/);
-    assert.match(workflow, /built_from_sha="\$\(git rev-parse HEAD\)"/);
-    assert.match(workflow, /current_main_sha="\$\(git ls-remote origin refs\/heads\/main/);
-    assert.match(workflow, /group: funding-finder-coordinated-release/);
-    assert.equal((workflow.match(/node tools\/smoke_search_worker\.mjs/g) || []).length, 2);
-  }
-  assert.match(refreshWorkflow, /Recheck main immediately before refresh publication/);
-  assert.match(refreshWorkflow, /Automatic rollback after refresh merge failure/);
+test("the publication owner captures actual serving provenance and fails closed on main races", () => {
+  assert.match(refreshWorkflow, /tools\/search_worker_checkpoint.mjs/);
+  assert.match(refreshWorkflow, /steps.worker-inputs.outputs.version_id/);
+  assert.match(refreshWorkflow, /wrangler@4.125.0 rollback "\$PRIOR_VERSION"/);
+  assert.match(refreshWorkflow, /group: funding-finder-coordinated-release/);
+  assert.match(deployWorkflow, /'git', 'ls-remote', 'origin', 'refs\/heads\/main'/);
+  assert.match(deployWorkflow, /if remote != base/);
+  assert.match(deployWorkflow, /Protected merge changed candidate bytes/);
+  assert.equal((refreshWorkflow.match(/node tools\/smoke_search_worker.mjs/g) || []).length, 2);
 });
 
 test("reservations use bounded timestamps and health exposes aggregate totals only", () => {

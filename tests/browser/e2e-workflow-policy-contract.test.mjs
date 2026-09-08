@@ -23,8 +23,12 @@ test("Playwright is manual-only while pull requests retain fast Python and brows
   assert.match(manualWorkflow, /pnpm exec playwright install --with-deps chromium/);
   assert.match(manualWorkflow, /run: pnpm test:e2e/);
 
-  assert.match(repositoryPolicy, /Do not run local or automatic E2E or Playwright suites/);
-  assert.match(repositoryPolicy, /Do not wait for or poll E2E jobs/);
-  assert.match(repositoryPolicy, /E2E may run only when the user explicitly authorizes a dedicated manual cleanup or validation task/);
-  assert.match(repositoryPolicy, /required Python and browser checks for ordinary patches/);
+  assert.match(repositoryPolicy, /Full manual E2E\/Playwright may be started only with explicit user authorization/);
+  assert.match(repositoryPolicy, /bounded monitoring, reading status\/logs\/results\/artifacts/);
+  assert.doesNotMatch(repositoryPolicy, /Do not wait for or poll E2E jobs/);
+  assert.match(repositoryPolicy, /required Python and Node\/browser contracts/);
+  assert.match(repositoryPolicy, /Review\/remediation rounds are bounded individually, not globally/);
+  assert.match(repositoryPolicy, /The first clean exact-head verification ends review/);
+  assert.match(repositoryPolicy, /same concrete consequential defect remains unresolved after two distinct focused repair attempts/);
+  assert.doesNotMatch(repositoryPolicy, /A new explicit instruction may authorize one new bounded round/);
 });

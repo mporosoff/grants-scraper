@@ -24,7 +24,9 @@ permissions:
   actions: read
 
 concurrency:
-  group: funding-finder-coordinated-release
+  # Registry approval/merge is an input producer; the release owner alone
+  # publishes Pages. Do not hold its lock while waiting for that release.
+  group: funding-finder-registry-publication
   cancel-in-progress: false
 
 jobs:
@@ -178,12 +180,12 @@ jobs:
           echo "::error::The registry-only pull request did not merge within 30 minutes."
           exit 1
 
-      - name: Wait for exact-merge Pages deployment
+      - name: Wait for the coordinated release of the approved registry input
         run: |
           merge_sha='${{ steps.merge.outputs.sha }}'
           run_id=""
           for attempt in $(seq 1 60); do
-            run_id="$(gh run list --workflow pages.yml --commit "$merge_sha" --json databaseId --jq '.[0].databaseId // empty')"
+            run_id="$(gh run list --workflow refresh-opportunities.yml --commit "$merge_sha" --json databaseId --jq '.[0].databaseId // empty')"
             [ -n "$run_id" ] && break
             sleep 10
           done

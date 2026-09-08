@@ -9,7 +9,7 @@ const [evidence, alertWorkflow, awardWorkflow, searchWorkflow, refreshWorkflow, 
   readFile(new URL("evaluation/funded_awards_alerts_release_closeout.json", root), "utf8").then(JSON.parse),
   readFile(new URL(".github/workflows/deploy-alerts.yml", root), "utf8"),
   readFile(new URL(".github/workflows/deploy-award-api.yml", root), "utf8"),
-  readFile(new URL(".github/workflows/deploy-search-package.yml", root), "utf8"),
+  readFile(new URL("tools/classify_worker_deployment.mjs", root), "utf8"),
   readFile(new URL(".github/workflows/refresh-opportunities.yml", root), "utf8"),
   ...["index.html", "match_explorer.html", "funded_awards.html", "team_match.html"]
     .map(path => readFile(new URL(path, root), "utf8")),
@@ -46,11 +46,12 @@ test("parameterized product pages keep one canonical and the shared existing ima
   }
 });
 
-test("every release workflow selects the newest active deployment instead of trusting list order", () => {
-  for (const workflow of [alertWorkflow, awardWorkflow, searchWorkflow, refreshWorkflow]) {
+test("release workflows select the newest unambiguous serving deployment", () => {
+  for (const workflow of [alertWorkflow, awardWorkflow]) {
     assert.match(workflow, /sort_by\(\[\(\.created_on \/\/ ""\), \(\.id \/\/ ""\)\]\)/);
-    assert.match(workflow, /map\(select\(\(\.percentage \/\/ 0\) == 100\)\)/);
-    assert.match(workflow, /max_by\(\.percentage\)/);
     assert.doesNotMatch(workflow, /\.\[0\]\.versions/);
   }
+  assert.match(searchWorkflow, /const active = ordered\.at\(-1\)/);
+  assert.match(searchWorkflow, /serving\.length !== 1 \|\| serving\[0\]\.percentage !== 100/);
+  assert.match(refreshWorkflow, /tools\/search_worker_checkpoint\.mjs/);
 });

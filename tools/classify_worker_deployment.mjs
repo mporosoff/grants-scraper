@@ -7,6 +7,10 @@ import { pathToFileURL } from "node:url";
 export const WORKER_DEPLOYMENT_MESSAGE_PREFIX = "protected-main:";
 
 export const WORKER_DEPLOYMENT_INPUTS = Object.freeze({
+  "search-voyage-proxy": Object.freeze({
+    prefixes: Object.freeze(["workers/search-voyage-proxy/src/", "workers/search-voyage-proxy/generated/"]),
+    files: Object.freeze(["workers/search-voyage-proxy/wrangler.jsonc"]),
+  }),
   "award-api": Object.freeze({
     prefixes: Object.freeze(["workers/award-api/"]),
     files: Object.freeze([
@@ -32,7 +36,7 @@ function normalizedPath(value) {
   return String(value || "").trim().replaceAll("\\", "/").replace(/^\.\//, "");
 }
 
-function activeDeployment(deployments) {
+export function activeDeployment(deployments) {
   if (!Array.isArray(deployments)) throw new Error("Worker deployments must be a JSON array.");
   if (!deployments.length) throw new Error("No active Worker deployment checkpoint is available.");
   for (const deployment of deployments) {

@@ -1,41 +1,44 @@
-# Repository instructions
+# Repository operating policy
 
-## Review convergence and exact-head validation
+## Bounded reviews and consequential findings
 
-- Treat every automated PR or code review as an atomic round bound to one commit SHA.
-- After a review is requested or automatically triggered, do not edit code, commit, push, or resolve individual review threads while that review is pending. Wait for its terminal completed status and collect all findings from that SHA.
-- Consolidate completed-review findings before remediation. Group related findings by their underlying invariant and perform a bounded, read-only audit of the complete affected invariant family before editing.
-- Apply all accepted findings from a completed review in one remediation batch where they can be safely combined. Run targeted checks before launching another full protected gate.
-- If opening or updating a PR automatically triggers the configured comprehensive review, use that review and do not request a duplicate. If the candidate changes after completed-review remediation, request exactly one exact-head re-review.
-- Never describe a candidate, review, test run, or gate as “final” while any required review or check is pending.
-- Do not manually duplicate full-suite runs for the same SHA, and never use checks from an earlier SHA to merge a changed candidate.
-- If a completed exact-head re-review finds another consequential issue in the same subsystem after one remediation round, do not begin another autonomous fix/review loop. Stop and report the convergence failure, consolidated findings, current SHA, completed evidence, and recommended next action.
-- A convergence stop is a checkpoint, not a permanent block. After that checkpoint has been reported, a new explicit user instruction to resume the named work starts one new bounded remediation round. Preserve the candidate and completed evidence, address the consolidated finding in one batch, and repeat exact-head validation. During an explicitly authorized autonomous completion run, do not pause for routine test, review, merge, migration, deployment, or verification approval; stop only for a genuinely unsafe/destructive action, missing authority or credentials, or another condition that cannot be resolved within the named scope.
+- Bind each automated review to one complete commit SHA. While it is pending, do not edit, commit, push, or resolve individual threads. Collect all terminal findings, then audit the affected invariant family read-only before remediation.
+- Begin with one integrated review, consolidate its consequential findings into one remediation batch, then run one exact-head verification review. Review/remediation rounds are bounded individually, not globally.
+- If verification identifies new independently confirmed consequential defects in supported paths, automatically start one new bounded round: reproduce, consolidate all accepted findings, minimally repair, run focused affected checks and required gates, then obtain one exact-head verification review. No new user authorization is needed because a previous round was used. Follow-up verification covers the changed subsystem and affected release-safety interfaces, not another comprehensive repository-wide review.
+- The first clean exact-head verification ends review. Proceed to the authorized merge/release; do not seek another broad review or theoretical completeness. A genuine convergence failure exists only when the same concrete consequential defect remains unresolved after two distinct focused repair attempts, or a genuine stop condition below applies. Preserve exact evidence and both repair attempts at that checkpoint.
+- A finding blocks release only when it demonstrates a reproducible supported-path correctness, data-integrity, security/privacy, release-safety defect, or user-path regression. Identify the violated contract, reachable path, and practical consequence.
+- Whitespace, formatting, naming, comment wording, optional refactors, unsupported hypothetical parser grammars, synthetic cases without a reachable supported-path defect, and speculative enhancements do not reopen implementation.
+- Use an automatically triggered comprehensive review; never request a duplicate. After remediation request exactly one exact-head verification review if the update did not already trigger it.
+- Terminal Codex evidence includes a completed top-level `Codex Review` comment from `chatgpt-codex-connector[bot]` with `Reviewed commit: <sha>`, a submitted review anchored to that SHA, or the configured no-findings reaction when the PR head remained unchanged. Acknowledgements and working messages are not terminal. Inspect complete conversation comments, submitted reviews, inline threads, and reactions before declaring a review missing.
+- Normally, after three unchanged observations or 15 minutes after acknowledgement/completed CI, refresh all review surfaces and report a missing review. During an explicitly authorized autonomous release-completion task, continue monitoring that same acknowledged/running review at reduced cadence; do not trigger a duplicate. Terminal failure or an outage remaining after bounded retries may require a checkpoint.
+- Merge only with terminal clean exact-head review, required exact-head CI green, unchanged PR head, and no consequential unresolved finding. Do not call evidence final while required reviews or gates are pending.
 
-## Validation policy
+## Validation authorization
 
-- Do not run local or automatic E2E or Playwright suites during implementation, PR validation, merge, deployment, or post-merge closeout.
-- Do not wait for or poll E2E jobs.
-- E2E may run only when the user explicitly authorizes a dedicated manual cleanup or validation task.
-- Continue using focused contracts and the required Python and browser checks for ordinary patches.
+- Ordinary implementation and release validation use focused infrastructure contracts, required Python and Node/browser contracts, package checks, and frozen-query/scoring/no-drift gates.
+- Full manual E2E/Playwright may be started only with explicit user authorization. Workflow refactoring without material browser/runtime changes does not require another full manual E2E.
+- Authorization for a manual validation run includes starting it, bounded monitoring, reading status/logs/results/artifacts, diagnosing failures, and necessary bounded corrective handling within that validation scope. Never require another approval just to discover whether an authorized run passed.
 
-### Recognizing terminal Codex reviews
+## Autonomous release completion
 
-- A Codex GitHub review may finish as:
-  - a top-level PR conversation comment from `chatgpt-codex-connector[bot]` containing a completed `Codex Review` result and `Reviewed commit: <sha>`;
-  - a submitted PR review anchored to the candidate SHA; or
-  - the configured no-findings reaction, provided the PR head remained unchanged from the review request through that reaction.
-- An exact-head top-level completion comment is terminal even when `pull_request_review_id` is absent. Do not keep waiting for a formal review object or approval reaction after receiving that comment.
-- A review acknowledgement or “working” message is not terminal.
-- Before deciding that a review remains pending, inspect the complete PR conversation comments, submitted reviews, inline review threads, and reactions. Match the reviewed SHA to the complete current PR-head SHA.
-- When continuous convergence has not been explicitly authorized, bound review waiting. After three unchanged checks or 15 minutes following acknowledgement or completed CI, perform one comprehensive refresh of all review surfaces. If no terminal artifact exists, stop and report the missing review instead of polling indefinitely or triggering a duplicate review.
-- After a clean terminal exact-head result, proceed only if the PR head is unchanged, required CI is green, and no consequential unresolved review thread remains.
+- An explicitly authorized autonomous release-completion task includes workflow monitoring, logs/artifacts, required checks, protected merge operations within the approved plan, deployment, publication, normal rollback, and live verification. Do not repeatedly ask for routine approval.
+- Use the normal interactive approval flow when required. A user-selected authorization option is authorization; do not request another prose confirmation. A hard platform/security denial must not be bypassed. Stop for missing authority/credentials, unsafe or destructive actions outside existing procedures, irreconcilable release requirements, the same consequential defect surviving two focused repair attempts, unestablishable provenance, or material scope expansion.
+- Infrastructure hardening does not authorize broad product/parser redesign. Keep repairs bounded to concrete supported-path failures.
 
-### Explicitly authorized continuous convergence
+## Immutable release lifecycle and expensive-work reuse
 
-- The default same-subsystem convergence stop remains in force unless the user explicitly authorizes continuous convergence for a named task or PR.
-- During an explicitly authorized continuous-convergence run, a consequential exact-head re-review finding does not require another user checkpoint. Wait for the review to finish, collect all findings from that SHA, audit the complete affected invariant family, correct accepted findings in one coherent batch, and repeat exact-head validation and review.
-- During an explicitly authorized continuous-convergence or autonomous-completion run, an acknowledged or actively running review is not a reason to return control to the user. After the normal bounded waiting window, reduce the polling cadence and continue monitoring the same review until it reaches a terminal state. Do not request a duplicate review. Treat the wait as blocked only when the review service reports a terminal failure or an external outage remains unresolved after bounded retries.
-- Continue this process until the exact candidate has a terminal clean review, all required exact-head checks pass, and no consequential thread remains unresolved.
-- Continuous convergence does not authorize editing while a review is pending, using evidence from an earlier SHA, duplicating reviews or full-suite runs, bypassing failing checks, resolving uncorrected findings, fabricating production evidence, weakening privacy or security controls, or merging an unverified candidate.
-- Stop only for an unsafe or destructive action, missing authority or credentials, an external outage that remains terminal after bounded retries, or another condition that cannot be safely resolved within the named scope.
+- The authoritative path is GENERATE → PERSIST CANDIDATE → VALIDATE CANDIDATE → PUBLISH CANDIDATE → VERIFY LIVE. The refresh workflow owns the complete catalog/search/Pages boundary and lock; Pages is only a called stage.
+- Candidate artifact plus manifest is authoritative candidate identity. Validation and publication receipts are authoritative evidence. Caches/checkpoints are optional performance aids and never substitute for provenance.
+- Persist complete safe candidate bytes before downstream gates. Never retain private notice structures, raw private email, secrets, unrestricted extracted text, or provider caches in candidate artifacts.
+- Validation operates on copies, uses no source/provider generation, and reports canonical record IDs and bounded before/after field diagnostics. Preserve failed candidates and machine-readable reports.
+- Do not repeat completed source collection, enrichment, document extraction, team generation, embeddings, or full E2E merely because a downstream gate/deployment/publication/live check failed. Reuse their preserved outputs unless relevant inputs changed or no complete safe output exists.
+- Generation dependency fingerprints determine invalidation. Preserve the original generation SHA forever; validation and publication SHAs are separate. Validator/orchestration/diagnostic/UI-only changes ordinarily reuse generated data. Runtime changes may assemble a derived package from identical generated bytes. Parser/source/team/vector semantic changes invalidate the candidate.
+- Preserve bounded/deferred team generation, bounded degraded-source handling, sponsor-scoped solicitation identity, duplicate rejection, and strict embedding/model-space compatibility.
+- Publish exact artifact bytes through the normal protected PR mechanism. Verify hashes before and after merge. Establish verified Worker input compatibility before Pages; retain an unchanged verified Worker, and capture the actual serving version for rollback when deployment is necessary.
+- Healthy endpoints alone do not prove deployment equivalence. Missing/conflicting/mixed serving provenance fails closed. Never use a historical hardcoded SHA fallback.
+
+## Exact evidence
+
+- Record candidate IDs, exact hashes, generation run/attempt, original generation SHA, validation SHA, publication SHA, gate results, and live identity.
+- Never claim old tests cover materially changed code, or a receipt covers different candidate bytes. Do not duplicate full-suite runs on unchanged inputs. Preserve manual E2E evidence only for the runtime/package bytes it tested.
+- A failed later stage resumes from its latest valid checkpoint. Do not relabel an old generation as a newer commit or regenerate merely because main advanced without generation-relevant changes.
