@@ -549,7 +549,7 @@ jobs:
           npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
           --message "protected-main:$(git rev-parse HEAD); input-sha256:$WORKER_FINGERPRINT; candidate:$CANDIDATE_ID"
       - name: Verify the candidate-compatible Worker handshake
-        run: python -m tools.verify_release_live worker --bundle "$RUNNER_TEMP/candidate"
+        run: python -m tools.verify_release_live worker --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke before publication
         run: node tools/smoke_search_worker.mjs
       - name: Verify the active Worker fingerprint after deployment or retention
