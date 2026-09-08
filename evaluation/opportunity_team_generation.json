@@ -1,13 +1,13 @@
 {
-  "run_id": "34269973299",
+  "run_id": "34287621491",
   "run_attempt": "1",
   "generation_requested": true,
-  "started_at": "2026-09-08T19:38:09.536745+00:00",
+  "started_at": "2026-09-08T22:48:46.977933+00:00",
   "response_contract": "team-response-1",
   "input_generation": "28e5e86096720896315e35a8bc3be3682e32503b503f522ebc784e82cc618938",
   "mode": "maintenance",
   "queue_counts": {
-    "maintenance": 92,
+    "maintenance": 78,
     "backfill": 1409
   },
   "queue_reasons": {
@@ -184,7 +184,6 @@
     "361234": "historical_unassessed_backfill",
     "361534": "historical_unassessed_backfill",
     "350299": "historical_unassessed_backfill",
-    "352947": "stale_published_team",
     "363648": "historical_unassessed_backfill",
     "363647": "historical_unassessed_backfill",
     "356982": "historical_unassessed_backfill",
@@ -812,7 +811,6 @@
     "353055": "historical_unassessed_backfill",
     "363037": "historical_unassessed_backfill",
     "363789": "historical_unassessed_backfill",
-    "356903": "stale_published_team",
     "362946": "historical_unassessed_backfill",
     "362979": "historical_unassessed_backfill",
     "362978": "historical_unassessed_backfill",
@@ -842,7 +840,6 @@
     "360436": "historical_unassessed_backfill",
     "361832": "historical_unassessed_backfill",
     "363049": "historical_unassessed_backfill",
-    "363622": "stale_published_team",
     "356018": "retryable_maintenance_failure",
     "337086": "historical_unassessed_backfill",
     "363591": "historical_unassessed_backfill",
@@ -1018,7 +1015,6 @@
     "362947": "historical_unassessed_backfill",
     "363350": "historical_unassessed_backfill",
     "358934": "historical_unassessed_backfill",
-    "356530": "stale_published_team",
     "363349": "historical_unassessed_backfill",
     "359274": "historical_unassessed_backfill",
     "363557": "retryable_maintenance_failure",
@@ -1087,10 +1083,7 @@
     "357423": "historical_unassessed_backfill",
     "357426": "historical_unassessed_backfill",
     "357427": "historical_unassessed_backfill",
-    "357430": "stale_published_team",
-    "357433": "stale_published_team",
     "357434": "historical_unassessed_backfill",
-    "357424": "stale_published_team",
     "357421": "historical_unassessed_backfill",
     "356763": "historical_unassessed_backfill",
     "357422": "historical_unassessed_backfill",
@@ -1111,13 +1104,11 @@
     "356870": "historical_unassessed_backfill",
     "358086": "historical_unassessed_backfill",
     "vpr-email:NOFOAFRLAFOSR20260001": "historical_unassessed_backfill",
-    "359068": "stale_published_team",
     "363126": "historical_unassessed_backfill",
     "357474": "historical_unassessed_backfill",
     "357476": "historical_unassessed_backfill",
     "357000": "historical_unassessed_backfill",
     "357730": "historical_unassessed_backfill",
-    "357748": "stale_published_team",
     "357193": "historical_unassessed_backfill",
     "357485": "historical_unassessed_backfill",
     "357487": "historical_unassessed_backfill",
@@ -1182,8 +1173,6 @@
     "357545": "historical_unassessed_backfill",
     "357339": "historical_unassessed_backfill",
     "357330": "historical_unassessed_backfill",
-    "357334": "stale_published_team",
-    "357340": "stale_published_team",
     "nyserda:RFP23": "historical_unassessed_backfill",
     "345083": "historical_unassessed_backfill",
     "345241:tdac-baa-002": "historical_unassessed_backfill",
@@ -1205,9 +1194,7 @@
     "357963": "historical_unassessed_backfill",
     "356236": "historical_unassessed_backfill",
     "357192": "historical_unassessed_backfill",
-    "357015": "stale_published_team",
     "357138": "historical_unassessed_backfill",
-    "356874": "stale_published_team",
     "356893": "historical_unassessed_backfill",
     "356907": "historical_unassessed_backfill",
     "356920": "historical_unassessed_backfill",
@@ -1406,7 +1393,6 @@
     "363383": "historical_unassessed_backfill",
     "363812": "historical_unassessed_backfill",
     "103313": "historical_unassessed_backfill",
-    "361008": "stale_published_team",
     "346204": "historical_unassessed_backfill",
     "356055": "historical_unassessed_backfill",
     "nsf-funding:https://www.nsf.gov/funding/opportunities/cdse-computational-data-enabled-science-engineering/pd24-8084": "historical_unassessed_backfill",
@@ -1708,8 +1694,8 @@
     "max_provider_requests": 300
   },
   "eligible_scopes": 1577,
-  "pending_scopes": 1501,
-  "due_scopes": 19,
+  "pending_scopes": 1487,
+  "due_scopes": 5,
   "eligibility": [
     {
       "scope_id": "vpr-email:25-543",
@@ -2322,95 +2308,34 @@
     "357424"
   ],
   "assessment_invalidations": [
-    "344592:ab-0013",
     "360006",
-    "344592:ab-0015",
-    "344592:ab-0029",
-    "344592:ab-0032",
-    "344592:ab-0036",
-    "344592:ab-0038",
-    "344592:ab-0039",
-    "344592:ab-0040",
-    "344592:ab-0043",
-    "344592:ab-0047",
-    "344592:ab-0050",
-    "344592:ab-0052",
-    "344592:ab-0053",
-    "344592:ab-0054",
-    "344592:ab-0056",
-    "344592:ab-0057",
-    "344592:ab-0059",
-    "344592:ab-0062",
     "344592:ab-0065",
-    "344592:ab-0066",
-    "344592:ab-0075",
     "344592:ab-0076",
-    "344592:ab-0078",
-    "344592:ab-0080",
-    "344592:ab-0081",
-    "344592:ab-0082",
-    "344592:ab-0096",
-    "345241:tdac-baa-001",
-    "345241:tdac-baa-004",
-    "345241:tdac-baa-020",
-    "345241:tdac-baa-022",
-    "358022",
-    "344592:ab-0042",
-    "361304",
-    "361520",
-    "359666",
-    "361186",
-    "357002",
     "359068",
-    "363538",
     "357748",
-    "359649",
     "356530",
-    "363678",
     "357334",
-    "361831",
     "356879",
-    "361287",
-    "362954",
-    "360534",
     "357346",
     "356903",
     "356874",
     "357340",
-    "357003",
     "356953",
-    "360893",
     "360894",
     "359269",
-    "357345",
     "357015",
-    "363210",
     "362948",
-    "356802",
-    "356935",
     "357186",
     "356680",
-    "360606",
-    "359696",
     "363622",
     "361008",
     "363179",
     "357430",
-    "357492",
-    "363095",
     "darpa-iarpa:darpa-darpapa250704",
     "352947",
     "357433",
     "357493",
-    "357273",
-    "361447",
-    "357490",
-    "357424",
-    "359199",
-    "361399",
-    "361451",
-    "363748",
-    "362454"
+    "357424"
   ],
   "assembly_updates": [],
   "targeted_recovery": {
@@ -2435,661 +2360,185 @@
         "reason": "source_changed"
       },
       {
-        "scope_id": "344592:ab-0013",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "032bfaabaf1d7be2bc3594b2ab8bb97e7b2c4e9ccf280609be9d5e90c87d8331",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "854833046122861be4ed4c8cd70cf4ff18a126a2055753ac98ac88e9e251943f",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0015",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "e2d9b908570e802d1b324166410ee619c5ca374213fb1ad19a060f62685ad750",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "d97799593dc79e9e15a6cbe9916e8932ce6b7d1984887dc1a52239c2c73c7f91",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0029",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "1043c51392195798db3fb44d18f4162b8ea78fe0c3e2ad3df98f761dfe1e9203",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "3aed30fefdc231611f063839e0bbbca19a29d96832da08defd5ec314dc2893f9",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0032",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "9f99f745963caef9ce305b1318453706ede17d41d386e2ee690420fb91730db3",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "8dbf31f98333db29e99dea00d934ca1397619406bf163cbfa385d942e73c43f3",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0036",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "f0793e24219ff11149702ffe00502a15da1bf60e2acb66b26f258b552e7d79a5",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "97705946f8fb4992aaf28510a0126d45c8ec3f11fac9b13806fb6a3f4cf7114c",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0038",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "0dbd1666dad63916332f18035e41a37f76741a7532c8498f7cf3fa3200b46487",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "2a43711615b314db800eac9127937da4e0cc206ad21cb2755aa2d0a66c440967",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0039",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "1bbcb4d575f54f3dbed1161af41792d6f38eee18471eef37c21266c99ba517e4",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "94c49609e0130e57a68e149d3425afacf299980d372b4522cad8c54aeef9727f",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0040",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "d2b91806920f11cc2a87ce10f2a42669c9e88388a87801363015ac855f0ae6cc",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "82659ba04b9d12f7682e3e981fae39b02893a9b533706d94c9722c375aa944cf",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0043",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "82637bb315ba80c11a3d4a971e4933049eb8513bf8980c6eba42a21bda1f8353",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "4d8c9a984ab7c6a3003ecc597fe26df5c09ea200570c1ed8f9db6625d17df88b",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0047",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "3de37ca221e176be34e0ecfa13e00f4eccd13c3f2c14e5c6cb8c0a6e5fa4e53e",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "8b3d2b8870b5fe32fe2bfa4dd8f153c8bbe01d474e103b269391e8b310474010",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0050",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "7a3b30c2c6a4820ee85f5fb52f317b4f7139331fc4f73d49c988a3e6348038e4",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "627fc5cca4d355a437ab0b3e7c408c704df94a05e34ca9cecf8e52189599318f",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0052",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "39b7151c35290fe93a1ebcce92b642a4ad5e867394f958d4a4d129d0e8f76a6b",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "2dcc898116cb9a364603a4ec1a6fa38d4698f91819083302ca8ece46d7544f29",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0053",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "3ab80afe6334ff1f4b7c7dcf57e4abf1cdbacf2e90c8631138c881f1841f540e",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "56585ede4528c09baf0b82426c11f85aa693fc7ebb9f677ebf62d950e3e3c9f7",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0054",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "6bbb8b56f64be518b64b568658bb0380f374d1fcc66865e2215676d64330ebcf",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "42fa14d3eddbe9b24df081b1c089948ae7deda04c20dd7e9ff1de2f8cc3b9351",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0056",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "a50294b21d7cf582d2a18d63977388371a2b50c72d3f399c86b682bf063e54a8",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "f36752db30ab91980be9ad3361d5d6c1fc0887d165c0928306c216c9ebc6649f",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0057",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "66dc93ec9704b4710359dc37ba49fed9791683a352241b430bed5ef5ba51bc4b",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "b8e6be3a32884f6e58ce4dada1b2461b8624f97a4a424cd7a76d84162c60c27e",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0059",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "a86200fcf845e8468414bec0d32c97df25a29a99ffe10b89a3bc2ad824f7df30",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "549830e1e2a7756b04d39420a2be180ffb4b52249bb3dbdaefc50a96448f0fe5",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0062",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "b64b2cfad22654f957809817f0a5f2d72c4beecfcb736a96093ec47991aae6d0",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "0155ed11c9afccee8b40185e7417dd8f81df71defa3e0f68d874a51bf8252766",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0066",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "10e88f45ffd43797a4466dbe5a210f0219ec61becb8722d233d03571143ae2aa",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "ec2ae76ab34e8d582362057a7e6b94692d490f5b7dd519c86bd8f567dd972b8c",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0075",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "4aac3067a90b098d463c77e3997fb163131a0bcba3c077f55e9f846fe0b23ed3",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "696b80a73509401346aa4a4797428d0b3dbf1e64e47a7edfcb0ba21d7c648a03",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0078",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "2e5112061dfb1a686407802cdcc752687835e68500730aa6deb210f13dd9b3ce",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "dac1b75a44843054fa81bed3748b9d7b0b474f615577fe2f2288df6e24097c0f",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0080",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "f617f3fa9bbd0ce924c4e987a7181cc3c54fd48ad9e8231ee5e7d3b85e73d5d6",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "2230b6278999f6d1e1d16eb9b3f70e50e515aed5992cdb04497965629c78ab36",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0081",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "26a1567c76550ba830d6cf3f1fb4f8873809d1b8246bc4545d57c9dc17e0bf9e",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "9d49f80362c4eba81917fc482500b6b225e89978a19678b3188dcf0fa5dee455",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0082",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "0df2201a1ec58a92d81839db9c7be32f8487d9262714645c51cedee68aedeb8a",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "c7306083a89a3b032dc0575ab217f7ea8433162a1fe14dfbd0c3b19e27b108a1",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0096",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "90a1c3ac874a44a7c2ba5f592ee4e613a6d99989091b84db4040f279f60ccde9",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "59d7036ae54ed676dce56db4974d785a0b895f6b1bc06d2785ecab1e9fcf1572",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "345241:tdac-baa-001",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "6725f1194bb8f6a1f8eddce048243efa09e2b5e5f0cd7161e97dbb937378fd32",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "056071fae4942e5f9259fc43d4cd967ee54c922fd1e19e045bb248d5f959c6da",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "345241:tdac-baa-004",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "1b480920521d3c59e151c0f9d984875f25f59971bea8077c228c57e3b06ed5d3",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "99b240af83516c536073df2314c340315daba17357acf155fdb5753ab2df63ff",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "345241:tdac-baa-020",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "333dca551edf0dabbd400e0dd5d7523de433eccb42809dc8c25da4f2ab38acfd",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "7d81845e3da57d27c0f30ce7160a9afac3bd6c9ae05dba65d372110a8f307f6b",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "345241:tdac-baa-022",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "23400d7ddd607f8117dd1f8de346eca4b9e044ca2c18b0573957ccd5ffba6dab",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "489ff4fd2258a138558c54b2d46b2d4c02797c8fca53686a725f90fb462931b3",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "358022",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "5c083c69477eb7ac388a210e75c0d679debb3dba3d3245702d9197454940e6dd",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "512b38326a7c4f56c8ad900ce8f6d7bc466266882b35fae1365bb2217c899e2f",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "344592:ab-0042",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "7620e2a425927de828f9387ed21b9893d54247df0d7b85053740176e56a42527",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "6853f9ec4054c114c77672e3366f9d4b7a0219d4bae32b3cfd3eac8a3e00b7d6",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "361304",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "e37a64c269981bf157d12a7420785478bf783c18e34746ceec1902a93d636e59",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "2ed1a9039b5c3f07327d70b478f29ef365e5dd844029aa9a5bf930829fdd8bea",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "361520",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "ce0b1fae810932279d65236ea7b3f08b7869f5a14febcc7055566c7e9b5ee17b",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "2ae49c35ec5462bcba417d5d24f455bcde3b2141a1a4b59b0b9d8d17a25a6546",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "359666",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "ec204f9071dd03d3fc6c2d6c971ec09339d8d23ed4999a5bd376db26eea34147",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "989492cf89945981ab40be703eda2e5302bdc188a79766adbcd1f283f71da042",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "361186",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "f735840d861fbaebd7cf03942363d3d2b81e6cdc2dfa8d62e0fdc9e5b625ca38",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "8aff4699384a6c1bf3a375176aaecd81d231624084a182af62ee328bfb90e2f0",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "357002",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "f05ac120651cb86ce6bd9be6c8a1bc5dae8469a355176d7643d4417ad0041353",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "e3ac410fcce5c72cae1f5da53db08d13c4707870285a8278ea36717845f5c980",
-          "provider_requests": 0
-        }
-      },
-      {
         "scope_id": "359068",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "363538",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "63db9568d273bb24592b8ca882123147df2fd9560b9475d0b2a569ed34bf07e6",
+          "retained_decision_hash": "f3433038dd349c424bc725e7702c2cf69fa71e626fccf5ded132be61386416e7",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "fb1f61a245b8c6e64d89d999c9c32c9e9a872bda750beffc7a69ec4f2064f26d",
-          "provider_requests": 0
+          "source_fingerprint": "ceb36a719e32f83239383c41c0f52c2397203694f13885d53c792f228859186a",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "58daf0b0e279cd556fb14e515a4d4e0419687b4afff8a10a491bcc13d01f960c",
+            "reviewed_source_fingerprint": "ceb36a719e32f83239383c41c0f52c2397203694f13885d53c792f228859186a",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "37b0d5fa0190244c70dc68de532d316b968c59ca02441a53e804942fa7fbe345",
+            "current_projection_sha256": "10630ad323198f6b82519b6e1c459c8a97bcce764b88f200861bb46adbcc2f8b",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       },
       {
         "scope_id": "357748",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "359649",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "5d26bca2a73a54d989feaef213e64d4e3c0fd0b69b31152b4b5478afa8b1e220",
+          "retained_decision_hash": "fe92ed7dcb2e8f40cf31f439475926b5340141824f343670ecfe69dad0dce74b",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "9a4363b98b321c71e28cd8cd8e24984c8093b4754009e4ed554c39eaf9addabc",
-          "provider_requests": 0
+          "source_fingerprint": "45dbe423561b597952e966d9d8ce6a3bd46db389c9c99f18e1efdb5cf8eef5d5",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "2caec9820e3d5d025d356b1608b406d2a7ae1f1b44079b8d4802f4f0337522b1",
+            "reviewed_source_fingerprint": "45dbe423561b597952e966d9d8ce6a3bd46db389c9c99f18e1efdb5cf8eef5d5",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "fd5da0c5dcab6deea7d67bbcc69ec987d811b9ccec70117eadf6bb047a27d53f",
+            "current_projection_sha256": "7100e6d8bbdaf1a7f06aa43ce9545674172fc3d9fcf616e587a1f3822a27a228",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       },
       {
         "scope_id": "356530",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "363678",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "962ed672b4431704d99467ef6d7ee10df07eba7560de05cafb9231d9b9d82ff7",
+          "retained_decision_hash": "e6579514a29916387d54e22927e9b5cabbb8cce32ccfcd24c96949f477862b29",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "f284213d0495ec6fefbc717002fae4c3eda9dfeb167266cc572b35449c21877d",
-          "provider_requests": 0
+          "source_fingerprint": "d6f046671a5f409d52b4d8482c7b690c3a3a5191c6feaf3ed9a279d06293d362",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "9de356fbe8bfb5334ceb78d9a122642b9cd09b1b296d7f4d979540964f800824",
+            "reviewed_source_fingerprint": "d6f046671a5f409d52b4d8482c7b690c3a3a5191c6feaf3ed9a279d06293d362",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "6d909eef25b1c528d73d7221231d0fe2f2f24f9ace31ebb436db6b7a00e9c7da",
+            "current_projection_sha256": "6528b4d119abd377eca9da9984b10d934e6fbf1d1aae12251ce7bdbaaec8ea97",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       },
       {
         "scope_id": "357334",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "361831",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "44c2f91169f3105d775975388bd7a592d58d2990b62d377a99dded32f1212d58",
+          "retained_decision_hash": "e1e742147459d540f148a551598737e72338033febfd7700f2711b524070a082",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "d7298409447d10a610dba1ece94b1cdcd51b6ffafe95c33413e0922ccafce422",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "361287",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "63458fe0f4b1ad479bdfe902df5e5ce668401dcfafe5619b2374b41cfb593717",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "7dd428f8c090404a5910894350f765cddffb1760d6af24d3e09a3c7bbc8bae0c",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "362954",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "cffdd8a02c1161e166bc9a9e2dc0a732f480a5a9817e3d7871140e1c307944d0",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "40c36ef1bcde7b5659b57c075844c2831b63a77fe8b3acb78e57d48104024b9a",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "360534",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "a41ab2b5faf78d7b6baaed5843596dd0fdd384904e934891c308a6aec7f7753c",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "8cb19a626befe87dc5651b8fe0d5c0f8a3a75f5838ea03b649b576e346ef3f0d",
-          "provider_requests": 0
+          "source_fingerprint": "07c1e1e70279552825244809dc27a80bb80ada26a969eecd135053686806de99",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "0e78f9b62ad1fd27d4df2045ba64eadd33968e7e6140da06483076dadeb4aecb",
+            "reviewed_source_fingerprint": "07c1e1e70279552825244809dc27a80bb80ada26a969eecd135053686806de99",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "5ad1e9a3d0c1628f5c0fab8fc2aa078a539cd839d600732ee325f6e62fd858f7",
+            "current_projection_sha256": "54b53408c433c39bc25ea1afa968117a6f86f543a8e7e111bc85864545b6e5e0",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       },
       {
         "scope_id": "356903",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "356874",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "357340",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "357003",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "d2c7393b79d9ded3d9c0a16926b21e104f46ec40e62ec1a8fc4f07d44f73820d",
+          "retained_decision_hash": "fc676321ce83c370b7b749e51ff4d50a53055c8f6cf869bff4fbe5922f7f4d0c",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "39fc49acf0f65350e97065c5e300d74c8627350b32fc2ecd777add5d9f1ba0d5",
-          "provider_requests": 0
+          "source_fingerprint": "dc62de5f0d56d9f1d7940dc227c1f8dfb3f9029df2fcee77ddb0c568e77e1d49",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "049d501ccb30fa91d814b1cc3b324e33b864fed8cd7fc0cd59931592d9a6621d",
+            "reviewed_source_fingerprint": "dc62de5f0d56d9f1d7940dc227c1f8dfb3f9029df2fcee77ddb0c568e77e1d49",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "b8fe194e15c380d7e0ec42de27dd936e938e3dc1ee18d58230d3ecbff8a33742",
+            "current_projection_sha256": "5830658300274ddd1aaeaeca6eb44af99d7abd2480cffda1591a95e9964afd3c",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
+        }
+      },
+      {
+        "scope_id": "356874",
+        "state": "restored_from_retained_evidence",
+        "provider_requests": 0,
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "ae61c72bed9fbd46833cbf585f4680cc8833cd764dc27580778bd2d332664e13",
+          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "210c06bf1cfcf4bd8e8a279ab9a48c7e1535f586a4d14018f366675fb6ecb6a4",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "55306686ad5a1f5a00679675d7ae8fceece6c552e59a5d60d527d550dc6bca53",
+            "reviewed_source_fingerprint": "210c06bf1cfcf4bd8e8a279ab9a48c7e1535f586a4d14018f366675fb6ecb6a4",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "cf91316bb5fabe51efe4e8ebd0747bf374c72fbbf88f01c32ebec65bcd95b844",
+            "current_projection_sha256": "0d09d1b4bc3cc7b7db9bf72a8a6ac5c39e8d615b6afc60c0de12f923be62ae44",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
+        }
+      },
+      {
+        "scope_id": "357340",
+        "state": "restored_from_retained_evidence",
+        "provider_requests": 0,
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "a2913b8131eec67ea33826e72d13f033e30b435318dec1c0a4c3abcd0baae475",
+          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "8afa697facd4a5567d0ad138d823c7f81d42df44fcd935d9df1b00bee218b9b0",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "028802ae054604529fc186241472c4698f35f887c8c0909ac98adc10d63e725a",
+            "reviewed_source_fingerprint": "8afa697facd4a5567d0ad138d823c7f81d42df44fcd935d9df1b00bee218b9b0",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "9f957230c479805382e3fd1f9f30c2369b6829ad873a46d41bad347e3eb2dd0a",
+            "current_projection_sha256": "859944ecf96742b8873e7b58e3ade44d4f77e7c987658c66497554f0b6d21ae7",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       },
       {
@@ -3099,120 +2548,82 @@
         "reason": "source_changed"
       },
       {
-        "scope_id": "360893",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "3d6f06226ef9c6884643dd68fdbfeb1784513777dc6193fe8afccbc38c1ff078",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "dc7d8f0476e8b34c61eaa4478f72243a1920658055af90ceca4a114a09d560cb",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "357345",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "76808f4c8e8b3f87f9acd0ac07268f3db49159522328703521e3659ecff2cd1f",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "45051d37a75332fdae131c7a4c50ae2be6b7f0ecf92f3e87b449b27ec8096e3a",
-          "provider_requests": 0
-        }
-      },
-      {
         "scope_id": "357015",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "363210",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "b133ddf3925e3a0e3bb95d367f73dcaf4b30d8c8479535805080e7659253bf5d",
+          "retained_decision_hash": "aa913bb20eede728ceef8221c7a3ead1397a8131e978404a3e874da0be951a6e",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "e18d3a48154f096e11aa3ef0950bf0bf109fc74c32bf4154c1d8ee6ad7a852fa",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "356802",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "abc6d38e51bf8f507783379461b9b86cd83e1b6a61c2fa3d8a8c56faf3cba149",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "aa1cd96e2c5e6eafe4e3ce3f88480538ccd958acb9a350b5de1a9b4ed8f7d1d4",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "356935",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "89a4faa6cbf6e0e6d593f330d5fde9ced7218d0f2851501f7b15e4dbc65992ee",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "2cf69736b7f1309231081f770887e6abb8319db4cd2e13a9b775c8153bd41409",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "360606",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "87d26c1be64e69a46203e84b275e5338ffdedf3de859d4036e1090ee2c5034e2",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "46bba26f0b9c124cdac257c5299210fc8b9af5898b0a300d300ae82b1e74b566",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "359696",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "ea962dcdf29793e89d21c8220d5241b588b1a7cbf04becdc24322a847d7149b1",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "06562a9a12383f093366acec315fdf7d64db9d2ba6e8135d3802d5f91d5ab373",
-          "provider_requests": 0
+          "source_fingerprint": "5663b64dc57651fc6000dc441ddbade46359f9313af9c018de7f85e4fbe7fbb8",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "37f7d2a0707e63b565e155ac91c0dab7cb38b615f37421681aa5e4a3afeadec3",
+            "reviewed_source_fingerprint": "5663b64dc57651fc6000dc441ddbade46359f9313af9c018de7f85e4fbe7fbb8",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "475d844a5f5ff6d9588ff91f720c225431b0adeed057ae1662bb22ea93db9f85",
+            "current_projection_sha256": "7a24051c1509f5fd7525bd926e47533bb6dd0268852171c73ee63e9611817269",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       },
       {
         "scope_id": "363622",
-        "state": "pending",
+        "state": "restored_from_retained_evidence",
         "provider_requests": 0,
-        "reason": "source_changed"
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "71e696b1b41f9795cc86cc74f366882324cfc1b1be1cf0df9dbc81e17406fc56",
+          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "f0785d0a9c5050d4e66d092741197c8d4217e955bdd63e0d3b636f784a50e031",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "db63663d811efe2948ce0fdb8ec9a527b95af123d493202ffb92bb2c28288875",
+            "reviewed_source_fingerprint": "f0785d0a9c5050d4e66d092741197c8d4217e955bdd63e0d3b636f784a50e031",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "7b01df12edccdf6db06572898d40bfe38f63b0fe6f33de2a4b581e0b2793e8ce",
+            "current_projection_sha256": "49e664198c2d4d613d95d0e88e77f8279fe0520acb9aef0e26c8b6a3f85b50fd",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
+        }
       },
       {
         "scope_id": "361008",
-        "state": "pending",
+        "state": "restored_from_retained_evidence",
         "provider_requests": 0,
-        "reason": "source_changed"
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "cb4cfeaa26d36899a4f37a6283529380a043a9ad136fa37014526c494f5a4987",
+          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "45e4bb1f97c48f1bededb7a9d896f7df5ef3fbcc9e3b8e37bf59b59487cac866",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "e6474ec1b6e4cdbe0d5f7ba93cc80287449d970a3da94f05d52808daea2baf83",
+            "reviewed_source_fingerprint": "45e4bb1f97c48f1bededb7a9d896f7df5ef3fbcc9e3b8e37bf59b59487cac866",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "a16f51259a9eee7d1c90ccab9e37cc2632a13ec8ee352002be1e857e881ef7ee",
+            "current_projection_sha256": "922a30855f43c7e6a50bcf874a43accd8f01137d23592fe3cd34076840b4fb3d",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
+        }
       },
       {
         "scope_id": "363179",
@@ -3222,49 +2633,81 @@
       },
       {
         "scope_id": "357430",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "357492",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "46b4e1ae85c82d63dc88e5372b738f5a7ee7057a8a925648a65e36f67c539ca2",
+          "retained_decision_hash": "2626521081b4bb4d9f7905ab92246272d4511e3b3ee25b76007cb6f044724f9d",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "f550f9636d9e6c07ffb5304f553b1dc38ed8436916732810499572e742e79877",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "363095",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "37a71ff3874f9bf2954e000322af5784cde4f3de610a06a8c0bfc1fdf2ec6eb2",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "52882569a76d0c687e6490f37b9ed9d5bac342569f9670956fce8f42b562600b",
-          "provider_requests": 0
+          "source_fingerprint": "a6fbd35be0d654e2bfcda4da16908d90d4907fe104f207de557e5f5497b5dc4d",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "13ea93d34632d1e2dc4587bbe870b35e042c1e94813748ad0298d967f84b4c7f",
+            "reviewed_source_fingerprint": "a6fbd35be0d654e2bfcda4da16908d90d4907fe104f207de557e5f5497b5dc4d",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "9feabc1fb39b6eafb8025d1c6f2deb69c729a5120d26e8efa3396b8c092f9bb9",
+            "current_projection_sha256": "9c1889c49e2c33661836c42206ea4165388f0d11291e15855ec18b098ed1a60d",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       },
       {
         "scope_id": "352947",
-        "state": "pending",
+        "state": "restored_from_retained_evidence",
         "provider_requests": 0,
-        "reason": "source_changed"
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "aecd7c2e31f25d1878122c81c8607f00f16acd864f535500034e564049e2dbf7",
+          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "ababf987710c6ca9ebf04ff35ede882f7cbb0f61954aea59ff626ae476718777",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "c5e8dfbaa050a51c6167eff5a5a67b8b9545afae644fa83ce266845b98e41ef0",
+            "reviewed_source_fingerprint": "ababf987710c6ca9ebf04ff35ede882f7cbb0f61954aea59ff626ae476718777",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "3c583bf006580d9b18839a8376338b46c2bcad795651f5321de5a532c4984389",
+            "current_projection_sha256": "6413b6c0ddfc152e6f850161011f8aaa977d7c0e7bec9298f7ca50f65a117876",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
+        }
       },
       {
         "scope_id": "357433",
-        "state": "pending",
+        "state": "restored_from_retained_evidence",
         "provider_requests": 0,
-        "reason": "source_changed"
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "b5980031ec0873048c540aaa61f16290fd612a71dc24a82e75fc730223475fc8",
+          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "e7fc47645c54fb7beb5acb9024590c0dbab3bbde8ab8f87bd84cd403fb18a828",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "0e04b950d8aee9a6e14a231496b46b63ab385ace86b2d4da3588dcf696893d2b",
+            "reviewed_source_fingerprint": "e7fc47645c54fb7beb5acb9024590c0dbab3bbde8ab8f87bd84cd403fb18a828",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "3e60a0e91c7e80dc469d11136f2e39c38bf16f56424f26405ce7bb7de68ebdf8",
+            "current_projection_sha256": "9b6107ff99959dbffa82a5814cf56d0b5af466d4311ef4cfbee486de54717926",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
+        }
       },
       {
         "scope_id": "357493",
@@ -3273,131 +2716,39 @@
         "reason": "source_changed"
       },
       {
-        "scope_id": "357273",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "7eef20625dea3a7edc79d016b7e1fa8b84cb2546608e4d4c1c1a440182440077",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "65203068d878ecc4e860972b9aedea532e9283d16bd5996c7be94d5f47245571",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "361447",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "d15eaebf3f2cb7e692613c8020246a3d32cfe689416091bdaa7e4f63ab07188c",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "149f26c860d3f3e4a4ab7274ed2772029bab0846401240eac38316c1fbf1b3dd",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "357490",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "9606bdb133a2dc3ed9abf1080bcdeddc37a05d42addd6630f052ea8080915891",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "7c8029d357a42f8e79706d7f8769920e06e776fcb1b3c4259a51aecde965e2b0",
-          "provider_requests": 0
-        }
-      },
-      {
         "scope_id": "357424",
-        "state": "pending",
-        "provider_requests": 0,
-        "reason": "source_changed"
-      },
-      {
-        "scope_id": "359199",
         "state": "restored_from_retained_evidence",
         "provider_requests": 0,
         "proof": {
           "version": "retained-team-recovery-1",
           "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "64ec5df01f66f1e11eb9510d369a25297f5a96deb40e04d1aede36d6ba479c01",
+          "retained_decision_hash": "2fc2205e835fc34f93c87f652084fdb6234d6c75e3181f72b34a459bcf47360a",
           "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
           "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "89b020f64485b4bd75368ffb660f09bd4d167b54834932af683ff3e946acfb0c",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "361399",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "e8b79be09ee065339e8657b2303fab666f103b1b6cea2bd289152f90ae84f415",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "f3b62786ea4a692220b351e9c1a27c7e9ab6acc4e32fa5c39efcd5d8ca7693fe",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "361451",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "cf108188534430018522553293315fae88c7a26d2016890ed5f52885d03776bf",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "274a28d546fa007c4158dcff96d0d2afec7710535ee85718bd42bb43bf038911",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "363748",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "9c76de61ab401b2a4c05aa387503dd797d29d00e637f66a423845f7797a0797c",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "503b6d691fa85ffb0fbfe7d6a2917f1704d29abb6b16f1177c81693567b64eff",
-          "provider_requests": 0
-        }
-      },
-      {
-        "scope_id": "362454",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "f66d901c5c911e508b9cb91c98c76c06efffd83f2780fc898b22e88ebfec54e4",
-          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "c7a2517f4b5ac8217af222211cef8a1578cf21c5f0582af8b3e8827d58629762",
-          "provider_requests": 0
+          "source_fingerprint": "3f9e7d43c5b1c311ba23973a085d94afc8aedc4596f21483bbb49be31624b9f8",
+          "provider_requests": 0,
+          "source_revalidation": {
+            "prior_source_fingerprint": "d9587a70ae557c574b0bf0abbd029c9d2d842570fa435199fd3aaafa7c71834c",
+            "reviewed_source_fingerprint": "3f9e7d43c5b1c311ba23973a085d94afc8aedc4596f21483bbb49be31624b9f8",
+            "changed_fields": [
+              "document_search_text"
+            ],
+            "prior_projection_sha256": "8ce01abfed2d5e0b8b5beb0823a62f51b1147098413a4aa788cfd70b7f980b39",
+            "current_projection_sha256": "dece7f0cda0e6535494592bc74896ba74ffc4fe4eb8ba80fafa625cf2515ce34",
+            "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
+            "review_kind": "source_projection_revalidation",
+            "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+          }
         }
       }
     ],
     "recovery_only": true,
-    "selected_pending_scopes": 19
+    "selected_pending_scopes": 5
   },
   "coverage_before": {
-    "scopes": 76,
-    "parent_calls": 46,
-    "team_combinations": 198
+    "scopes": 90,
+    "parent_calls": 60,
+    "team_combinations": 235
   },
   "results": [],
   "processing_failure": {
@@ -3415,7 +2766,7 @@
   },
   "embedding_reuse_permitted": true,
   "llm_usage": {
-    "logical_id": "offline-34269973299",
+    "logical_id": "offline-34287621491",
     "limit_usd": 2.0,
     "charged_usd": 0.0,
     "by_provider_model_stage": {},
@@ -3430,11 +2781,11 @@
     "llm": 0
   },
   "coverage_after": {
-    "scopes": 76,
-    "parent_calls": 46,
-    "team_combinations": 198
+    "scopes": 90,
+    "parent_calls": 60,
+    "team_combinations": 235
   },
-  "pending_after": 1501,
+  "pending_after": 1487,
   "deferred": [
     {
       "scope_id": "363315",
@@ -4989,15 +4340,6 @@
       "parent_id": "350299",
       "stage": "queue",
       "input_fingerprint": "923486d5854bf87183757481c0ea3be25b2e0139422ab5e35a6839bbaaaa83af",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "352947",
-      "parent_id": "352947",
-      "stage": "queue",
-      "input_fingerprint": "1643c87109cdc4caefbc10adc23e37e895800bc0a58594420847c9bb71420c07",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10646,15 +9988,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "356903",
-      "parent_id": "356903",
-      "stage": "queue",
-      "input_fingerprint": "f844d486d7df4776b6026b3a09e7c03d6b90c1d6c8ad4d9501e66f595c17af22",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "362946",
       "parent_id": "362946",
       "stage": "queue",
@@ -10911,15 +10244,6 @@
       "parent_id": "363049",
       "stage": "queue",
       "input_fingerprint": "eb0f759f09cbdf7199ebf4aeeebf792d24a622a1f09116ad226fab19056f76a3",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363622",
-      "parent_id": "363622",
-      "stage": "queue",
-      "input_fingerprint": "a81a690f8fa64095b39b35fa1b800a13db8f29dc1866cc1c5dd91503d366545d",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -12500,15 +11824,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "356530",
-      "parent_id": "356530",
-      "stage": "queue",
-      "input_fingerprint": "0ce6ae616e10ba6fc73ed997ab2ded7ee8ca447f9709afb7853295ee81726f8f",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "363349",
       "parent_id": "363349",
       "stage": "queue",
@@ -13121,37 +12436,10 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "357430",
-      "parent_id": "357430",
-      "stage": "queue",
-      "input_fingerprint": "24ce1a0ad8f277fb6d3fa314d11294fd70d7502ae76857ca9f552c261b67f98c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357433",
-      "parent_id": "357433",
-      "stage": "queue",
-      "input_fingerprint": "a1a283290c1fcac41ded3c1dbf022ac07e1c388eae7f448f87340c1d84687cfc",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "357434",
       "parent_id": "357434",
       "stage": "queue",
       "input_fingerprint": "67fa78a4abfd372af201a03e5366efbef9de9a67a7848e956a20fb23985471b7",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357424",
-      "parent_id": "357424",
-      "stage": "queue",
-      "input_fingerprint": "feed105831d0ef0e8baf0045aa787182aae40c26ca18e04b3f92de884e85b6ee",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13337,15 +12625,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "359068",
-      "parent_id": "359068",
-      "stage": "queue",
-      "input_fingerprint": "2fce8d317e755ff729567f7b03bbff59c38d2409ab8269ff69ddb5d7a439ae89",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "363126",
       "parent_id": "363126",
       "stage": "queue",
@@ -13386,15 +12665,6 @@
       "parent_id": "357730",
       "stage": "queue",
       "input_fingerprint": "767065a9bf5611f6283f4e1bf6f5832b39755d49f00bb9639153753a7a93135b",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357748",
-      "parent_id": "357748",
-      "stage": "queue",
-      "input_fingerprint": "3053ffe348d939ec94a33f3138b95f40fb45cafb5f100288691c3a8cde9b26c8",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13976,24 +13246,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "357334",
-      "parent_id": "357334",
-      "stage": "queue",
-      "input_fingerprint": "55d1b6c84ff33a4571a6d886ba8c2c2be358858df15975a35c0df6ada4317df6",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357340",
-      "parent_id": "357340",
-      "stage": "queue",
-      "input_fingerprint": "35fb4bf758ecf2e96bcf3d0bbee86c0c17719c30c2d3431f359bba881e13c620",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "nyserda:RFP23",
       "parent_id": "nyserda:RFP23",
       "stage": "queue",
@@ -14183,28 +13435,10 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "357015",
-      "parent_id": "357015",
-      "stage": "queue",
-      "input_fingerprint": "82171cdb2f9d4b1eca6b2818569ccb38dfb83b7dde730be0b2b72bc6fdd61e15",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "357138",
       "parent_id": "357138",
       "stage": "queue",
       "input_fingerprint": "122822a5b28dcc500935ac31e691a1ff12c4a816947a20e8b62c986523255ac7",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "356874",
-      "parent_id": "356874",
-      "stage": "queue",
-      "input_fingerprint": "58ca7d2eb2672298a683a5980fc7610b7f4f79a3f671b4ed412eb008146605e1",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15992,15 +15226,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "361008",
-      "parent_id": "361008",
-      "stage": "queue",
-      "input_fingerprint": "9f0f0e3d1c22e53a59babca477c18d2ee684fe5040d8596e12a230b637c0eb50",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "346204",
       "parent_id": "346204",
       "stage": "queue",
@@ -16948,6 +16173,6 @@
   ],
   "assessed_scopes": 0,
   "outcomes": {},
-  "elapsed_seconds": 2.801,
+  "elapsed_seconds": 1.505,
   "status": "completed"
 }
