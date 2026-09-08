@@ -53,6 +53,11 @@ def evaluation_contract(phase="teams-luna"):
             "schema": schemas()["cov4"], "adapter": function_hash(cov4),
             "manifest": json.loads(Path("evaluation/offline_cov4_frozen.json").read_bytes()),
             "population": load_candidates(), "prompts": [gate.render_prompt(row) for row in load_candidates()],
+            # Hash actual deterministic gate inputs, including fixture parsing
+            # through the NASA/referenced adapters. This also covers transitive
+            # input changes without maintaining a partial dependency whitelist.
+            "materialized_generic_population": harness.generic_records(load_candidates()),
+            "materialized_bypass_population": harness.bypassed_records(),
             "implementation": [function_hash(f) for f in (gate.determine_ownership, gate.apply_gate,
                 gate.render_prompt, harness.run, harness.generic_records, harness.bypassed_records)],
             "modules": {name: module_hash(name) for name in ("scripts/subtopic_records.py", "scripts/subtopic_cov4.py",

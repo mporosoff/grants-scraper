@@ -193,6 +193,21 @@ class OfflineAIContracts(unittest.TestCase):
             self.assertFalse(e.phase_complete("cov4", first))
             self.assertFalse(e.phase_complete("cov4", second))
 
+    def test_changed_bypass_fixture_invalidates_cov4_but_keeps_team_evidence(self):
+        from tools import run_cov4_validation as harness
+        cov4_before = e.evaluation_contract("cov4")
+        team_before = e.evaluation_contract("teams-luna")
+        inputs_before = harness.bypassed_records()
+        original_read = Path.read_text
+        for suffix, text in (("roses/table3.html", "TROPICS"), ("army_tdac/topics.html", "Assistive Automation")):
+            def changed(path, *args, **kwargs):
+                value = original_read(path, *args, **kwargs)
+                return value.replace(text, "Changed " + text) if path.as_posix().endswith(suffix) else value
+            with self.subTest(fixture=suffix), patch.object(Path, "read_text", changed):
+                self.assertNotEqual(inputs_before, harness.bypassed_records())
+                self.assertNotEqual(cov4_before, e.evaluation_contract("cov4"))
+                self.assertEqual(team_before, e.evaluation_contract("teams-luna"))
+
     def test_nonterminal_phase_resumes_only_incomplete_case_and_retains_refusal(self):
         frozen = json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())
         deferred_id = frozen["cases"][0]["scope"]["id"]
