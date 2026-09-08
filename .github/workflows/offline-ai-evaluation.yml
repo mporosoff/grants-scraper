@@ -7,8 +7,12 @@ on:
         description: One frozen phase within the shared $15 logical evaluation
         required: true
         type: choice
-        options: [preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay]
+        options: [preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay]
         default: preflight
+      authorize_anthropic_baseline:
+        description: Consume the user's one evaluation-only Sonnet baseline authorization; production pause stays intact
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -47,9 +51,15 @@ jobs:
       - name: Run the selected finite evaluation with provider-specific credentials
         env:
           EVALUATION_PHASE: ${{ inputs.phase }}
-          OPENAI_API_KEY: ${{ inputs.phase != 'teams-sonnet' && inputs.phase != 'replay' && secrets.OPENAI_API_KEY || '' }}
-          ANTHROPIC_API_KEY: ${{ (inputs.phase == 'teams-sonnet' || inputs.phase == 'teams-luna-sonnet-verifier' || inputs.phase == 'stability') && secrets.ANTHROPIC_API_KEY || '' }}
-        run: python -m tools.evaluate_offline_ai "$EVALUATION_PHASE" --state "$RUNNER_TEMP/offline-ai"
+          OPENAI_API_KEY: ${{ inputs.phase != 'teams-sonnet' && inputs.phase != 'round2-sonnet' && inputs.phase != 'replay' && inputs.phase != 'round2-replay' && secrets.OPENAI_API_KEY || '' }}
+          ANTHROPIC_API_KEY: ${{ (inputs.phase == 'teams-sonnet' || inputs.phase == 'teams-luna-sonnet-verifier' || inputs.phase == 'stability' || inputs.phase == 'round2-sonnet') && secrets.ANTHROPIC_API_KEY || '' }}
+          AUTHORIZE_ANTHROPIC_BASELINE: ${{ inputs.authorize_anthropic_baseline && 'true' || 'false' }}
+        run: |
+          if [[ "$EVALUATION_PHASE" == round2-* ]]; then
+            python -m tools.evaluate_team_prompt_repair "$EVALUATION_PHASE" --state "$RUNNER_TEMP/offline-ai"
+          else
+            python -m tools.evaluate_offline_ai "$EVALUATION_PHASE" --state "$RUNNER_TEMP/offline-ai"
+          fi
       - name: Preserve accounting and safe completed stage responses after any outcome
         if: always()
         uses: actions/upload-artifact@v4
