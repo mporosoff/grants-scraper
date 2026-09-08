@@ -1,0 +1,33 @@
+{
+  "version": "offline-ai-1",
+  "prices_verified_at": "2026-09-08",
+  "price_sources": [
+    "https://developers.openai.com/api/docs/models/gpt-5.6-luna",
+    "https://developers.openai.com/api/docs/models/gpt-5.4-mini",
+    "https://platform.claude.com/docs/en/about-claude/pricing"
+  ],
+  "prices_per_million": {
+    "gpt-5.6-luna": {"input": 0.20, "cached": 0.02, "cache_write": 0.25, "output": 1.20},
+    "gpt-5.4-mini": {"input": 0.75, "cached": 0.075, "cache_write": 0.9375, "output": 4.50},
+    "claude-sonnet-5": {"input": 2.00, "cached": 0.20, "cache_write": 2.50, "output": 10.00}
+  },
+  "budgets_usd": {"evaluation": 15, "pilot": 2, "maintenance": 2, "backfill": 5},
+  "pilot_max_scopes": 5,
+  "max_requests": 300,
+  "max_seconds": 1200,
+  "max_workers": 3,
+  "production_route": "sonnet",
+  "promotion_evidence": null,
+  "routes": {
+    "sonnet": {"provider": "anthropic", "model": "claude-sonnet-5", "reasoning": "provider_default"},
+    "luna": {"provider": "openai", "model": "gpt-5.6-luna", "reasoning": "low"},
+    "mini": {"provider": "openai", "model": "gpt-5.4-mini", "reasoning": "low"}
+  },
+  "stages": {
+    "preflight": {"prompt_version": "access-1", "schema_version": "access-1", "max_output_tokens": 512, "timeout_seconds": 60, "max_attempts": 1},
+    "decomposition": {"prompt_version": "team-response-1", "schema_version": "roles-1", "max_output_tokens": 4096, "timeout_seconds": 90, "max_attempts": 3},
+    "adjudication": {"prompt_version": "team-response-1", "schema_version": "edges-1", "max_output_tokens": 8192, "timeout_seconds": 120, "max_attempts": 3},
+    "verification": {"prompt_version": "team-response-1", "schema_version": "verification-1", "max_output_tokens": 8192, "timeout_seconds": 120, "max_attempts": 3},
+    "cov4": {"prompt_version": "frozen-production-dec11", "schema_version": "cov4-1", "max_output_tokens": 2048, "timeout_seconds": 90, "max_attempts": 1}
+  }
+}
