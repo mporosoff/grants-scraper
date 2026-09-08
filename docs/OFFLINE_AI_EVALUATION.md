@@ -29,19 +29,24 @@ useful proposal coverage within 10 percentage points of the established baseline
 Both aggregate and six-holdout results must be reported. Rejecting everything
 cannot pass. This small sample cannot establish corpus-wide accuracy.
 
-Evaluate Sonnet and all-Luna once. Select all-Luna only if every stage passes.
-If only verification fails, evaluate the actual fixed Luna/Sonnet-verifier route.
-If Luna is inadequate, at most one mini comparison is allowed within remaining
-budget. Retain established stages where replacement evidence is insufficient.
+Select all-Luna only if every stage passes. An exact retained Sonnet baseline
+may be reused; the confirmed Anthropic billing pause prohibits new baseline or
+hybrid-verifier calls. If Luna is inadequate, at most one mini comparison is
+allowed within remaining budget. Retain established stages where replacement
+evidence is insufficient, while reporting their separate provider availability.
 The separate Cov4 evaluation uses all 43 frozen candidates, the unchanged
 production prompt and ownership guard, and real native/referenced bypasses.
 Its acceptance requires zero genuine-child losses, contaminants published,
 cross-opportunity publication, classifier errors, and bypass classifier calls.
 Insufficient evidence or budget retains production Cov4 unchanged.
 
-Run `offline-ai-evaluation.yml` on **main**, choosing one phase at a time:
-`preflight`, `teams-sonnet`, `teams-luna`, optional
-`teams-luna-sonnet-verifier` or `teams-mini`, `cov4`, `stability`, and `replay`.
+Run `offline-ai-evaluation.yml` on **main**, choosing one phase at a time.
+The completed September 8 phases are `preflight`, `teams-luna`, `teams-mini`,
+and `cov4`. Do not repeat them to seek a different result. `replay` reuses
+completed exact stages without provider calls. Do not dispatch `teams-sonnet`,
+`teams-luna-sonnet-verifier`, or the two-provider `stability` phase while
+Anthropic is paused. Repeating stability cannot qualify a route that already
+fails mandatory acceptance gates.
 No untrusted PR code receives credentials. OpenAI uses only `OPENAI_API_KEY`;
 Sonnet uses only `ANTHROPIC_API_KEY`. This workflow never receives Voyage,
 Cloudflare, private-notice, or publication credentials.
@@ -79,7 +84,7 @@ Receipts expose stage/provider tokens, latency, retries, cache events, failures,
 and conservative charges. The warm replay disables new selection and installs a
 transport that fails if any completed request tries to call a provider.
 
-## September 8 protected access result
+## Historical access and billing stops
 
 The protected entrypoint merged in PR #171 at
 `facd83554751c6504592c934536e781f446552cc`. Preflight run `34234658950`
@@ -92,14 +97,11 @@ reservation. The original adapter did not capture the provider error category;
 its cause is unknown. Later diagnostics allowlist error categories without
 retaining response bodies or error messages.
 
-No scope completed. There is no measured quality comparison, noninferiority
-result, useful-output cost or savings claim. Cov4 migration, optional fallback
-comparisons and stability repetitions remain unperformed. Production retains
-the established Sonnet routes and output ceilings; the planner, bounded
-maintenance/backfill, independent routing, accounting and caches do not require
-an unproven provider promotion. The exact access/evaluation evidence is recorded
-in `evaluation/offline_ai_selection.json`. The immutable frozen inputs and
-historical Cov4/MEAS3 evidence remain unchanged.
+Those initial runs completed no scope. They provide no matched quality,
+noninferiority, useful-output cost or savings evidence. They remain historical
+in `evaluation/offline_ai_selection.json`; the resumed results below supersede
+only the obsolete OpenAI credential-unavailable status. The immutable frozen
+inputs and historical Cov4/MEAS3 evidence remain unchanged.
 The production pilot in run `34244913333` selected five scopes. Three concurrent
 Sonnet decomposition requests returned the sanitized `insufficient_credit`
 category; no later requests were dispatched and no scope completed. Reported
@@ -109,5 +111,73 @@ The candidate was rejected for an independent document-wrapper module-identity
 defect before production mutation. Its reports remain retained. The confirmed
 Anthropic account stop is recorded in `generation_provider_pauses` so a corrected
 replacement cannot repeat the paid pilot or spend on document classification.
-Restoring credit and explicitly clearing that application pause are future
-operator actions; existing valid derived outputs remain reusable.
+The user confirmed that Anthropic has no credit. Preserve this persistent
+billing pause and all historical charges. Do not retry Anthropic, rotate its
+key, request replenishment, or clear the pause. Existing valid derived outputs
+remain reusable; a configured provider is not necessarily available.
+
+## Resumed OpenAI access and finite quality results
+
+The user added repository Actions secret `OPENAI_API_KEY`. Its value was never
+read or copied. The existing evaluation-step mapping was correct; PR #178 fixed
+only the obsolete missing-key stop and unsuccessful preflight marker. It merged
+as `92f3856adf5c4b432a2ad4bc340c709dcd0b9038` after clean exact-head review and
+required checks. Preflight [34255768570](https://github.com/mporosoff/grants-scraper/actions/runs/34255768570)
+then made one successful `gpt-5.6-luna` Responses request, zero retries,
+44 input and 14 output tokens, estimated at $0.000026.
+
+The same frozen 24 scopes and six holdouts were evaluated without changing
+prompts or acceptance criteria:
+
+| Route | Correct scope decisions | Legitimate scopes accepted | Holdout correct | Proposals | Requests / retries | Estimated cost |
+| --- | --- | --- | --- | --- | --- | --- |
+| Luna, [34255888466](https://github.com/mporosoff/grants-scraper/actions/runs/34255888466) | 17/24 (70.8%) | 11/18 (61.1%) | 3/6 | 9 | 46 / 0 | $0.050465 |
+| Mini, [34256488126](https://github.com/mporosoff/grants-scraper/actions/runs/34256488126) | 16/24 (66.7%) | 11/18 (61.1%) | 3/6 | 4 | 48 / 0 | $0.203133 |
+
+Both completed all schema-valid assessments, but both fail the unchanged 90%
+scope-accuracy and 85% legitimate-acceptance gates. Both rejected all three
+legitimate holdout scopes. For example, the frozen optoelectronics child was
+rejected as too broad. Mini also accepted the annotated NARMS surveillance scope
+as suitable, although assembly produced no team because evidence was insufficient.
+No exhaustive semantic safety pass is claimed after these blocking scope failures.
+No exact successful Sonnet baseline exists for this frozen three-stage comparison;
+historical team cards do not establish identical retrieved inputs. Matched
+noninferiority and measured savings remain unproven. The tested routes cannot
+be promoted by adjusting expectations or by adding an unfunded Sonnet verifier.
+
+Cov4's independent [34256646858](https://github.com/mporosoff/grants-scraper/actions/runs/34256646858)
+evaluated all 43 frozen candidates with the unchanged prompt and ownership guard.
+It retained all 28 genuine children, prevented both cross-opportunity cases, and
+made zero classifier calls for 5 native and 14 referenced bypasses. However, it
+admitted the annotated organizational heading `360678:x-org-bes` (Basic Energy
+Sciences), violating the zero-contaminant rule. Its 43 requests had no retries or
+API errors and cost an estimated $0.009219. This was evaluation-only publication
+eligibility; no trial topic was published to production. Production Cov4 remains
+configured for paused Anthropic and unavailable for new paid classifications.
+Unchecked topics remain withheld.
+
+The restored logical ledger now retains $0.351718 in estimated charges, including
+the original unknown-usage $0.088875 Anthropic reservation. New OpenAI work totals
+138 requests and $0.262843. No Anthropic request followed secret provisioning.
+A local copy of Luna's completed state passed a transport-forbidden replay with
+46 cache hits, zero new requests, unchanged charges and unchanged provider stops.
+The original artifact was untouched. These are dated application estimates, not
+invoice totals; fewer useful proposals are not evidence of cost-effectiveness.
+
+Infrastructure publication is complete: generated merge
+`bd933e91925c7ef8e67c8ea0cc9920f3cc135d1b`, candidate
+`16bf1e7f39f04e6b15a7ab47ce6b43a80ae804a2f21c180570ae1f09522d0395`, and
+run `34247479596` verified exact Pages assets, provider smoke and serving Worker
+version `312bf71d-19d0-4fef-8226-d2bbf7cc8c04` with its complete fingerprint.
+The later team assembly `34253575692` made zero provider calls but could not
+finalize its candidate artifact; no validation or production mutation followed.
+It was not regenerated. The already published release remains authoritative.
+
+Credential access is resolved. Provider migration and targeted recovery of
+previously available teams are **required but blocked**, not completed or optional:
+no tested replacement meets the frozen gates. A new bounded provider/prompt
+evaluation with independent evidence is needed before those outcomes can proceed.
+Keep the original results and holdouts intact, preserve Anthropic's pause, and
+do not regenerate the catalog to address a model-quality failure. Exact phase
+contracts, receipt hashes, case results, accounting and separate outcomes are in
+`evaluation/offline_ai_access_quality_20260908.json`.
