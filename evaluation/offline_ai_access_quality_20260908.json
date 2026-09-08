@@ -1,0 +1,989 @@
+{
+  "version": 1,
+  "evaluation_task": "economical-ai-20260908",
+  "code_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038",
+  "credential_scope": "Repository Actions secret OPENAI_API_KEY in mporosoff/grants-scraper",
+  "credential_values_exposed_to_operator": false,
+  "credential_consumed_by_trusted_actions_step": true,
+  "phases": {
+    "preflight": {
+      "run_id": "34255768570",
+      "run_url": "https://github.com/mporosoff/grants-scraper/actions/runs/34255768570",
+      "artifact_name": "offline-ai-economical-ai-20260908-state-34255768570-1",
+      "receipt_sha256": "ccd4b6afc919384a8225e22288137b8d8b4d60de30494455a9a30a6f771744f1",
+      "receipt": {
+        "complete": true,
+        "evaluation_contract": "8da06d50c499138019c7c72545319dd68e4f5b1cc11d733a0defaf094b1bd574",
+        "result": {
+          "phase": "preflight",
+          "result": {
+            "ready": true
+          },
+          "status": "supported"
+        }
+      },
+      "code_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038"
+    },
+    "teams-luna": {
+      "run_id": "34255888466",
+      "run_url": "https://github.com/mporosoff/grants-scraper/actions/runs/34255888466",
+      "artifact_name": "offline-ai-economical-ai-20260908-state-34255888466-1",
+      "receipt_sha256": "14ccfb3d3afd0fb6a28fbe49c2517ba07a0a252bdfed4edd78f60484f8d4a631",
+      "receipt": {
+        "complete": true,
+        "evaluation_contract": "5fa3a42e3467d38d0fcf7e866fcf51538b1f0eeccf5febfe30d00ae7c54ebe1f",
+        "result": {
+          "acceptance": {
+            "critical_false_accepts": 0,
+            "cross_topic_leakage": 0,
+            "fabricated_quotes_or_claims": 0,
+            "legitimate_scope_acceptance_min": 0.85,
+            "manual_source_annotation_review_required": true,
+            "scope_decision_accuracy_min": 0.9,
+            "unsupported_upgrades": 0,
+            "useful_proposals_noninferiority_absolute": 0.1,
+            "valid_schema_fraction_min": 0.95
+          },
+          "completed": 24,
+          "decision": "pending_independent_evidence_review",
+          "frozen_sha256": "362444a7f5418f6306bdfc88483edae65cee8cfc557c2ada30991b59d372887d",
+          "limitation": "Frozen public claims: reviewed curated members plus 24 token-overlap retrieved claims, cap 60. Same bounded input pool for every route. Evaluates model stages, not Voyage recall; production pilot covers the existing Voyage path.",
+          "proposed": 9,
+          "route": "luna",
+          "scope_correct": 17,
+          "total": 24
+        }
+      },
+      "independent_scope_metrics": {
+        "route": "luna",
+        "model": "gpt-5.6-luna",
+        "frozen_sha256": "362444a7f5418f6306bdfc88483edae65cee8cfc557c2ada30991b59d372887d",
+        "all": {
+          "cases": 24,
+          "completed": 24,
+          "scope_correct": 17,
+          "scope_accuracy": 0.7083333333333334,
+          "legitimate_scopes": 18,
+          "legitimate_accepted": 11,
+          "legitimate_acceptance": 0.6111111111111112,
+          "proposed": 9,
+          "annotated_rejects_accepted": 0
+        },
+        "holdout": {
+          "cases": 6,
+          "completed": 6,
+          "scope_correct": 3,
+          "scope_accuracy": 0.5,
+          "legitimate_scopes": 3,
+          "legitimate_accepted": 0,
+          "legitimate_acceptance": 0.0,
+          "proposed": 0,
+          "annotated_rejects_accepted": 0
+        },
+        "requests": 46,
+        "retries": 0,
+        "estimated_cost_usd": 0.050465,
+        "unknown_usage_requests": 0,
+        "usage": {
+          "input_tokens": 132921,
+          "cached_input_tokens": 0,
+          "output_tokens": 19886,
+          "reasoning_tokens": 7943
+        },
+        "cases": [
+          {
+            "scope_id": "344592:ab-0019",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "b3372cfe01fb479273df6bcf883ea4bc893522144726864009d12480a4b8dcc3"
+          },
+          {
+            "scope_id": "344592:ab-0079",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "2a540d1ed45d6223f583294bcd572675d2790d6088a084bc8917bdc9c16c68ce"
+          },
+          {
+            "scope_id": "358021",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "43d0a170fb8761cdecb516f1263ea21e1346cbf4e1222f5c00c14217ef5b9df6"
+          },
+          {
+            "scope_id": "361050",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "aac5b86894950b2e4b18aca2413a45f356bb5c131a38cfe2d97a6013c2d30b6e"
+          },
+          {
+            "scope_id": "361205",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "2235e77fdb434903c71ce27f8a28fc1dc86917f3d733057f091bcb8690f4af81"
+          },
+          {
+            "scope_id": "361526:g-12",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "966c956650548810f961ed22890512cbd71eaeab345f3088ab800b7bcfff5647"
+          },
+          {
+            "scope_id": "363489",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "5512e218ae3aa210cc07100986a24f5f7a4a72bb63379ef6d1cd18a27868cbfb"
+          },
+          {
+            "scope_id": "356888",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "d2f47ba91da69869246bb4ee3d356a56ca081d5e3ae34a5e1bfa014a624d2a72"
+          },
+          {
+            "scope_id": "356981",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "dc47ba06b4332d90daf55f574a5426afe0b86d158f361d5591daaddc4e48df4d"
+          },
+          {
+            "scope_id": "357337",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "bad85f9a9c85a0472f7feb41a9dd9b5ff62dfb02b3fbc86fe95151b378cef975"
+          },
+          {
+            "scope_id": "357137",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "421bcca4e733cc5e7d5e860f8c17f8debd1016122512d0dca936f54eeb41a263"
+          },
+          {
+            "scope_id": "357308",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "080b4d0c520e0452b3f51daa66b555901112b5ac9495da8141ac680d6a9861c7"
+          },
+          {
+            "scope_id": "360398",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "3997ec3648b6012f2e70b45163672431868932b8177d8393529b3ca4af381cb1"
+          },
+          {
+            "scope_id": "342475",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "3472d137eb0f5be6923e50fb33d368e5207b902eee73335273cedc109dbf5e92"
+          },
+          {
+            "scope_id": "356811",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "8ab31021bdee9fafdcc9ffd12db9507b2063ca92cff99dba600538dfb890fbe6"
+          },
+          {
+            "scope_id": "363616",
+            "holdout": false,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "5f11d7ba09da48f54e10269c27965d15accd02dc1b694b03daf35df9cad93e5f"
+          },
+          {
+            "scope_id": "363618",
+            "holdout": false,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "d7fcf628f622e7062500d848673702c186b749cc6593d610603010cac2d8add0"
+          },
+          {
+            "scope_id": "360006",
+            "holdout": false,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "62fd10e3aeb2e7627ef845fc50326efb1a60dad91218c1e0b8f4237d72551393"
+          },
+          {
+            "scope_id": "356617",
+            "holdout": true,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "0bab63a1fab57324222da76d356280860248517a39c13f374d626fa68b065964"
+          },
+          {
+            "scope_id": "363208",
+            "holdout": true,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "f783362189b77b023ba1e8f3c22900a2f552a6507e1c335e5d078bcce7e8b259"
+          },
+          {
+            "scope_id": "360368",
+            "holdout": true,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "b2508a2fead6fa0d914a1176eb8f4b1d9d87005b194f30dc5145de04fa4975b0"
+          },
+          {
+            "scope_id": "344592:ab-0025",
+            "holdout": true,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "b8b259f80eb081a08f642229935b79a42aab63d04f6d59e01f44f1bfb92adca0"
+          },
+          {
+            "scope_id": "344592:ab-0034",
+            "holdout": true,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "715999f4c8b86800dba868ebf0c343d3fb2c980eab820f8c6377c4c50c9b192d"
+          },
+          {
+            "scope_id": "344592:ab-0035",
+            "holdout": true,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "03cb00083a89ca5df7a60a6664e24c794531c5b3d758aa11d37bab273710bec4"
+          }
+        ]
+      },
+      "selection": "rejected",
+      "failed_gates": [
+        "scope_decision_accuracy_min",
+        "legitimate_scope_acceptance_min"
+      ],
+      "grounding_review": "No exhaustive semantic safety pass claimed: the unchanged scope gates already fail promotion.",
+      "code_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038"
+    },
+    "teams-mini": {
+      "run_id": "34256488126",
+      "run_url": "https://github.com/mporosoff/grants-scraper/actions/runs/34256488126",
+      "artifact_name": "offline-ai-economical-ai-20260908-state-34256488126-1",
+      "receipt_sha256": "f25709b54c6de8bf45900174f3532dc7f8f838b83d2d63901f6692dab2dd339d",
+      "receipt": {
+        "complete": true,
+        "evaluation_contract": "ae0d3dd8bec8b9536bcf3a49ee5c4f0a24f75e8312b129c4756a853db42afee2",
+        "result": {
+          "acceptance": {
+            "critical_false_accepts": 0,
+            "cross_topic_leakage": 0,
+            "fabricated_quotes_or_claims": 0,
+            "legitimate_scope_acceptance_min": 0.85,
+            "manual_source_annotation_review_required": true,
+            "scope_decision_accuracy_min": 0.9,
+            "unsupported_upgrades": 0,
+            "useful_proposals_noninferiority_absolute": 0.1,
+            "valid_schema_fraction_min": 0.95
+          },
+          "completed": 24,
+          "decision": "pending_independent_evidence_review",
+          "frozen_sha256": "362444a7f5418f6306bdfc88483edae65cee8cfc557c2ada30991b59d372887d",
+          "limitation": "Frozen public claims: reviewed curated members plus 24 token-overlap retrieved claims, cap 60. Same bounded input pool for every route. Evaluates model stages, not Voyage recall; production pilot covers the existing Voyage path.",
+          "proposed": 4,
+          "route": "mini",
+          "scope_correct": 16,
+          "total": 24
+        }
+      },
+      "independent_scope_metrics": {
+        "route": "mini",
+        "model": "gpt-5.4-mini",
+        "frozen_sha256": "362444a7f5418f6306bdfc88483edae65cee8cfc557c2ada30991b59d372887d",
+        "all": {
+          "cases": 24,
+          "completed": 24,
+          "scope_correct": 16,
+          "scope_accuracy": 0.6666666666666666,
+          "legitimate_scopes": 18,
+          "legitimate_accepted": 11,
+          "legitimate_acceptance": 0.6111111111111112,
+          "proposed": 4,
+          "annotated_rejects_accepted": 1
+        },
+        "holdout": {
+          "cases": 6,
+          "completed": 6,
+          "scope_correct": 3,
+          "scope_accuracy": 0.5,
+          "legitimate_scopes": 3,
+          "legitimate_accepted": 0,
+          "legitimate_acceptance": 0.0,
+          "proposed": 0,
+          "annotated_rejects_accepted": 0
+        },
+        "requests": 48,
+        "retries": 0,
+        "estimated_cost_usd": 0.203133,
+        "unknown_usage_requests": 0,
+        "usage": {
+          "input_tokens": 145524,
+          "cached_input_tokens": 0,
+          "output_tokens": 20883,
+          "reasoning_tokens": 7753
+        },
+        "cases": [
+          {
+            "scope_id": "344592:ab-0019",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "b3372cfe01fb479273df6bcf883ea4bc893522144726864009d12480a4b8dcc3"
+          },
+          {
+            "scope_id": "344592:ab-0079",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "2a540d1ed45d6223f583294bcd572675d2790d6088a084bc8917bdc9c16c68ce"
+          },
+          {
+            "scope_id": "358021",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "43d0a170fb8761cdecb516f1263ea21e1346cbf4e1222f5c00c14217ef5b9df6"
+          },
+          {
+            "scope_id": "361050",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "aac5b86894950b2e4b18aca2413a45f356bb5c131a38cfe2d97a6013c2d30b6e"
+          },
+          {
+            "scope_id": "361205",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "2235e77fdb434903c71ce27f8a28fc1dc86917f3d733057f091bcb8690f4af81"
+          },
+          {
+            "scope_id": "361526:g-12",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "966c956650548810f961ed22890512cbd71eaeab345f3088ab800b7bcfff5647"
+          },
+          {
+            "scope_id": "363489",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "5512e218ae3aa210cc07100986a24f5f7a4a72bb63379ef6d1cd18a27868cbfb"
+          },
+          {
+            "scope_id": "356888",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "d2f47ba91da69869246bb4ee3d356a56ca081d5e3ae34a5e1bfa014a624d2a72"
+          },
+          {
+            "scope_id": "356981",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "dc47ba06b4332d90daf55f574a5426afe0b86d158f361d5591daaddc4e48df4d"
+          },
+          {
+            "scope_id": "357337",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "bad85f9a9c85a0472f7feb41a9dd9b5ff62dfb02b3fbc86fe95151b378cef975"
+          },
+          {
+            "scope_id": "357137",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "421bcca4e733cc5e7d5e860f8c17f8debd1016122512d0dca936f54eeb41a263"
+          },
+          {
+            "scope_id": "357308",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "080b4d0c520e0452b3f51daa66b555901112b5ac9495da8141ac680d6a9861c7"
+          },
+          {
+            "scope_id": "360398",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "3997ec3648b6012f2e70b45163672431868932b8177d8393529b3ca4af381cb1"
+          },
+          {
+            "scope_id": "342475",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "3472d137eb0f5be6923e50fb33d368e5207b902eee73335273cedc109dbf5e92"
+          },
+          {
+            "scope_id": "356811",
+            "holdout": false,
+            "expected_scope": "bounded_research",
+            "state": "proposed",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": true,
+            "case_hash": "8ab31021bdee9fafdcc9ffd12db9507b2063ca92cff99dba600538dfb890fbe6"
+          },
+          {
+            "scope_id": "363616",
+            "holdout": false,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "5f11d7ba09da48f54e10269c27965d15accd02dc1b694b03daf35df9cad93e5f"
+          },
+          {
+            "scope_id": "363618",
+            "holdout": false,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "d7fcf628f622e7062500d848673702c186b749cc6593d610603010cac2d8add0"
+          },
+          {
+            "scope_id": "360006",
+            "holdout": false,
+            "expected_scope": "reject",
+            "state": "insufficient_evidence",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": true,
+            "case_hash": "62fd10e3aeb2e7627ef845fc50326efb1a60dad91218c1e0b8f4237d72551393"
+          },
+          {
+            "scope_id": "356617",
+            "holdout": true,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "0bab63a1fab57324222da76d356280860248517a39c13f374d626fa68b065964"
+          },
+          {
+            "scope_id": "363208",
+            "holdout": true,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "f783362189b77b023ba1e8f3c22900a2f552a6507e1c335e5d078bcce7e8b259"
+          },
+          {
+            "scope_id": "360368",
+            "holdout": true,
+            "expected_scope": "reject",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": true,
+            "accepted_scope": false,
+            "case_hash": "b2508a2fead6fa0d914a1176eb8f4b1d9d87005b194f30dc5145de04fa4975b0"
+          },
+          {
+            "scope_id": "344592:ab-0025",
+            "holdout": true,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "b8b259f80eb081a08f642229935b79a42aab63d04f6d59e01f44f1bfb92adca0"
+          },
+          {
+            "scope_id": "344592:ab-0034",
+            "holdout": true,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "715999f4c8b86800dba868ebf0c343d3fb2c980eab820f8c6377c4c50c9b192d"
+          },
+          {
+            "scope_id": "344592:ab-0035",
+            "holdout": true,
+            "expected_scope": "bounded_research",
+            "state": "not_specific",
+            "completed": true,
+            "correct_scope_decision": false,
+            "accepted_scope": false,
+            "case_hash": "03cb00083a89ca5df7a60a6664e24c794531c5b3d758aa11d37bab273710bec4"
+          }
+        ]
+      },
+      "selection": "rejected",
+      "failed_gates": [
+        "scope_decision_accuracy_min",
+        "legitimate_scope_acceptance_min"
+      ],
+      "grounding_review": "No exhaustive semantic safety pass claimed: the unchanged scope gates already fail promotion.",
+      "code_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038"
+    },
+    "cov4": {
+      "run_id": "34256646858",
+      "run_url": "https://github.com/mporosoff/grants-scraper/actions/runs/34256646858",
+      "artifact_name": "offline-ai-economical-ai-20260908-state-34256646858-1",
+      "receipt_sha256": "e7474338cc6788d4c8719274880b5e1b568412b68bfa1e9807906444bd41455a",
+      "receipt": {
+        "complete": true,
+        "evaluation_contract": "82e43e823ec92d8be1b8bd596264e0e6f16fa03c26504162fa41a5e0d588dffc",
+        "result": {
+          "api_errors": {},
+          "bypass_classifier_calls": 0,
+          "candidates_bypassed_by_provenance": {
+            "native": 5,
+            "referenced": 14
+          },
+          "candidates_offered": 43,
+          "classifier_calls": 43,
+          "classifier_transport": "offline-ai-1",
+          "contaminants_published": 1,
+          "contaminants_rejected": 10,
+          "cross_opportunity_fabrications_prevented": 2,
+          "cross_opportunity_fabrications_published": 0,
+          "dropped": 14,
+          "fundability_outcomes": {
+            "accept": 30,
+            "reject": 13
+          },
+          "genuine_children_lost": 0,
+          "genuine_children_retained": 28,
+          "live": true,
+          "model": "gpt-5.6-luna",
+          "net_auto_publishable_after_cov4": 29,
+          "net_auto_publishable_before_cov4": 43,
+          "ownership_outcomes": {
+            "not_owned": 2,
+            "owned": 40,
+            "unestablished": 1
+          },
+          "provider": "openai",
+          "raw": "/home/runner/work/_temp/offline-ai/cov4-luna-rows.jsonl",
+          "reasoning": "low",
+          "repeats": 1,
+          "review_queue_cases": 0,
+          "unresolved_truth_cases": 2
+        }
+      },
+      "selection": "rejected",
+      "failed_gates": [
+        "contaminants_published"
+      ],
+      "failure": {
+        "candidate_id": "360678:x-org-bes",
+        "label": "Basic Energy Sciences (BES)",
+        "frozen_truth": "Organizational program-office heading; the fundable units are the programs beneath it.",
+        "observed": "The evaluation gate marked the owned heading fundable and publishable.",
+        "production_published": false
+      },
+      "code_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038"
+    }
+  },
+  "usage": {
+    "blocked_providers": {
+      "anthropic": "anthropic_configuration_http_400"
+    },
+    "by_provider_model_stage": {
+      "anthropic/claude-sonnet-5/decomposition": {
+        "attempts": 1,
+        "cache_write_tokens": null,
+        "cached_input_tokens": null,
+        "charged_microusd": 88875,
+        "failures": 1,
+        "input_tokens": null,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 0,
+          "output_tokens": 0,
+          "reasoning_tokens": 0
+        },
+        "latency_ms": 219,
+        "output_tokens": null,
+        "reasoning_tokens": null,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 1,
+        "valid_completions": 0
+      },
+      "openai/gpt-5.4-mini/adjudication": {
+        "attempts": 12,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 82321,
+        "failures": 0,
+        "input_tokens": 60567,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 60567,
+          "output_tokens": 8198,
+          "reasoning_tokens": 3039
+        },
+        "latency_ms": 76114,
+        "output_tokens": 8198,
+        "reasoning_tokens": 3039,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 12
+      },
+      "openai/gpt-5.4-mini/decomposition": {
+        "attempts": 24,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 39665,
+        "failures": 0,
+        "input_tokens": 17183,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 17183,
+          "output_tokens": 5949,
+          "reasoning_tokens": 2278
+        },
+        "latency_ms": 54977,
+        "output_tokens": 5949,
+        "reasoning_tokens": 2278,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 24
+      },
+      "openai/gpt-5.4-mini/verification": {
+        "attempts": 12,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 81147,
+        "failures": 0,
+        "input_tokens": 67774,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 67774,
+          "output_tokens": 6736,
+          "reasoning_tokens": 2436
+        },
+        "latency_ms": 57685,
+        "output_tokens": 6736,
+        "reasoning_tokens": 2436,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 12
+      },
+      "openai/gpt-5.6-luna/adjudication": {
+        "attempts": 11,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 20566,
+        "failures": 0,
+        "input_tokens": 54552,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 54552,
+          "output_tokens": 8043,
+          "reasoning_tokens": 3357
+        },
+        "latency_ms": 87593,
+        "output_tokens": 8043,
+        "reasoning_tokens": 3357,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 11
+      },
+      "openai/gpt-5.6-luna/cov4": {
+        "attempts": 43,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 9219,
+        "failures": 0,
+        "input_tokens": 26992,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 26992,
+          "output_tokens": 3169,
+          "reasoning_tokens": 1228
+        },
+        "latency_ms": 79448,
+        "output_tokens": 3169,
+        "reasoning_tokens": 1228,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 43
+      },
+      "openai/gpt-5.6-luna/decomposition": {
+        "attempts": 24,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 9729,
+        "failures": 0,
+        "input_tokens": 17183,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 17183,
+          "output_tokens": 5237,
+          "reasoning_tokens": 2312
+        },
+        "latency_ms": 78072,
+        "output_tokens": 5237,
+        "reasoning_tokens": 2312,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 24
+      },
+      "openai/gpt-5.6-luna/preflight": {
+        "attempts": 1,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 26,
+        "failures": 0,
+        "input_tokens": 44,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 44,
+          "output_tokens": 14,
+          "reasoning_tokens": 0
+        },
+        "latency_ms": 2552,
+        "output_tokens": 14,
+        "reasoning_tokens": 0,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 1
+      },
+      "openai/gpt-5.6-luna/verification": {
+        "attempts": 11,
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "charged_microusd": 20170,
+        "failures": 0,
+        "input_tokens": 61186,
+        "known_usage_totals": {
+          "cache_write_tokens": 0,
+          "cached_input_tokens": 0,
+          "input_tokens": 61186,
+          "output_tokens": 6606,
+          "reasoning_tokens": 2274
+        },
+        "latency_ms": 75168,
+        "output_tokens": 6606,
+        "reasoning_tokens": 2274,
+        "reasoning_usage_unknown": 0,
+        "retries": 0,
+        "unknown_usage_requests": 0,
+        "valid_completions": 11
+      }
+    },
+    "charged_usd": 0.351718,
+    "limit_usd": 15.0,
+    "logical_id": "economical-ai-20260908",
+    "prices_verified_at": "2026-09-08"
+  },
+  "new_openai_requests": 138,
+  "new_openai_estimated_cost_usd": 0.262843,
+  "anthropic_requests_after_secret_provisioning": 0,
+  "historical_anthropic_requests_preserved": 1,
+  "anthropic_billing_pause": "insufficient_credit; retained; no retry, key rotation, replenishment request, or pause reset",
+  "latest_ledger_sha256": "a8ba993bac1cc0cdcf077795da19ff6b68e0e0e524deac93051bc2d2b79a8183",
+  "matched_sonnet_baseline": {
+    "completed_scopes": 0,
+    "exact_retained_decomposition_responses": 0,
+    "comparability": "Historical published cards do not establish identical frozen three-stage request inputs.",
+    "noninferiority": "unproven",
+    "new_baseline_requests": 0
+  },
+  "warm_replay": {
+    "input_run": "34255888466",
+    "original_artifact_unchanged": true,
+    "execution": "Local copy; provider transport forbidden; no generation credentials",
+    "receipt": {
+      "complete": true,
+      "evaluation_contract": "52310c820f8abf2967b8526e5e64cf3d28a9a6f48de2b6b2e1f4e2b51361b086",
+      "result": {
+        "new_provider_requests": 0,
+        "phase": "replay"
+      }
+    },
+    "accounting": {
+      "requests_unchanged": true,
+      "charges_unchanged": true,
+      "provider_pauses_unchanged": true,
+      "cache_hits_added": 46
+    }
+  },
+  "stability": "Not repeated: both team routes fail mandatory frozen gates; no promotion to certify.",
+  "hybrid_verifier": "Not run or enabled: Anthropic is paused and decomposition also fails.",
+  "outcomes": {
+    "credential_wiring": "complete; real protected preflight passed",
+    "infrastructure_publication": "complete; exact candidate and Worker verified live",
+    "provider_migration": "required but blocked by failed frozen quality gates; no route promoted",
+    "team_recovery": "required but blocked pending a validated replacement; no new generation started",
+    "cov4": "replacement rejected; configured Anthropic classifier unavailable for new requests; unchecked topics remain withheld"
+  },
+  "live_release": {
+    "candidate_id": "16bf1e7f39f04e6b15a7ab47ce6b43a80ae804a2f21c180570ae1f09522d0395",
+    "generation_sha": "fc154acb1e70625e9b6ccb7c98bc83244668759b",
+    "publication_sha": "bd933e91925c7ef8e67c8ea0cc9920f3cc135d1b",
+    "verified_run": "34247479596",
+    "worker_version": "312bf71d-19d0-4fef-8226-d2bbf7cc8c04",
+    "worker_input_fingerprint": "ab3b7398e4c0dfa8746754e38c8c59abbff840af281a78279d95e81a00cc0867",
+    "corpus_sha256": "669dc7e810c5e058737dd3b7fa609a4d4d2310c55fbd7a827d29ec65e460cc5c"
+  },
+  "later_assembly": {
+    "run": "34253575692",
+    "candidate_id": "64fee06127ac03ef79a11fa01644796b204b75e2d55ec913dc35388937526036",
+    "status": "artifact finalization failed; no candidate artifact established; no publication",
+    "provider_calls": 0,
+    "production_mutated": false,
+    "regenerated_after_failure": false
+  },
+  "next_required_work": "A new bounded provider/prompt evaluation with independent evidence is needed before migration and targeted recovery. Do not alter the existing holdout expectations, enable an untested route, retry Anthropic, or regenerate catalog data."
+}

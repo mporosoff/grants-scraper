@@ -1,17 +1,21 @@
 {
-  "version": 1,
+  "version": 2,
   "evaluation_task": "economical-ai-20260908",
-  "evaluation_sha": "facd83554751c6504592c934536e781f446552cc",
-  "preflight_run": "34234658950",
+  "evaluation_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038",
+  "preflight_run": "34255768570",
   "baseline_run": "34234760078",
   "frozen_team_scopes": 24,
   "untouched_holdouts": 6,
   "openai": {
     "requested_model": "gpt-5.6-luna",
-    "returned_model": null,
-    "status": "unavailable_actions_step_credential",
-    "requests": 0,
-    "reported_cost_usd": 0
+    "returned_model": "gpt-5.6-luna",
+    "status": "available_actions_preflight_passed",
+    "requests": 138,
+    "preflight_requests": 1,
+    "preflight_retries": 0,
+    "preflight_estimated_cost_usd": 2.6e-05,
+    "estimated_evaluation_cost_usd": 0.262843,
+    "credential_scope": "Repository Actions secret OPENAI_API_KEY in mporosoff/grants-scraper"
   },
   "sonnet_baseline": {
     "requested_model": "claude-sonnet-5",
@@ -25,8 +29,16 @@
     "diagnostic_limitation": "The original protected evaluation adapter did not retain the error category; no inference of the cause is made"
   },
   "cov4_migration": {
-    "status": "not_run_provider_unavailable",
-    "production_changed": false
+    "status": "rejected_frozen_contaminant_gate",
+    "run": "34256646858",
+    "production_changed": false,
+    "production_availability": "Anthropic insufficient_credit pause; no new classifications",
+    "candidates": 43,
+    "genuine_children_retained": 28,
+    "genuine_children_lost": 0,
+    "contaminants_published_in_evaluation": 1,
+    "failure_candidate": "360678:x-org-bes",
+    "unchecked_topics_published_to_production": false
   },
   "selection": {
     "decomposition": "retain_sonnet",
@@ -36,15 +48,75 @@
     "new_route_promoted": false
   },
   "measured_savings": null,
-  "quality_comparison": null,
+  "quality_comparison": {
+    "status": "both_allowed_team_routes_failed_frozen_gates",
+    "luna": {
+      "all": {
+        "cases": 24,
+        "completed": 24,
+        "scope_correct": 17,
+        "scope_accuracy": 0.7083333333333334,
+        "legitimate_scopes": 18,
+        "legitimate_accepted": 11,
+        "legitimate_acceptance": 0.6111111111111112,
+        "proposed": 9,
+        "annotated_rejects_accepted": 0
+      },
+      "holdout": {
+        "cases": 6,
+        "completed": 6,
+        "scope_correct": 3,
+        "scope_accuracy": 0.5,
+        "legitimate_scopes": 3,
+        "legitimate_accepted": 0,
+        "legitimate_acceptance": 0.0,
+        "proposed": 0,
+        "annotated_rejects_accepted": 0
+      },
+      "requests": 46,
+      "retries": 0,
+      "estimated_cost_usd": 0.050465
+    },
+    "mini": {
+      "all": {
+        "cases": 24,
+        "completed": 24,
+        "scope_correct": 16,
+        "scope_accuracy": 0.6666666666666666,
+        "legitimate_scopes": 18,
+        "legitimate_accepted": 11,
+        "legitimate_acceptance": 0.6111111111111112,
+        "proposed": 4,
+        "annotated_rejects_accepted": 1
+      },
+      "holdout": {
+        "cases": 6,
+        "completed": 6,
+        "scope_correct": 3,
+        "scope_accuracy": 0.5,
+        "legitimate_scopes": 3,
+        "legitimate_accepted": 0,
+        "legitimate_acceptance": 0.0,
+        "proposed": 0,
+        "annotated_rejects_accepted": 0
+      },
+      "requests": 48,
+      "retries": 0,
+      "estimated_cost_usd": 0.203133
+    },
+    "matched_sonnet_noninferiority": "unproven; baseline had zero completed scopes",
+    "evidence": "evaluation/offline_ai_access_quality_20260908.json"
+  },
   "useful_output_cost": null,
-  "remaining_optional_phases": "Deferred: replacement provider unavailable; no guessed model names, repeated access probes, or holdout changes",
   "price_date": "2026-09-08",
   "task_budget_usd": 15,
   "limitations": [
-    "No new model completed an assessment; schema/quality/noninferiority/cost claims are unavailable.",
-    "Application-side reserved charges are not an account invoice.",
-    "Production stage caps retain the established Sonnet ceiling until measured stage responses exist."
+    "Both team candidates fail unchanged scope-accuracy and legitimate-acceptance criteria; no route is promoted.",
+    "No exact successful Sonnet baseline exists, so matched noninferiority and measured savings remain unproven.",
+    "The Cov4 replacement admits one annotated organizational heading and cannot be promoted.",
+    "All provider outputs are evaluation evidence; no new teams or topics from these trials were published.",
+    "Stage caps remain unchanged because the tested replacement routes did not qualify for production.",
+    "Spend is a dated application estimate, not an account invoice; prior unknown-usage charges remain retained."
   ],
   "pilot": {
     "run": "34244913333",
@@ -59,5 +131,24 @@
     "route": "anthropic/claude-sonnet-5",
     "candidate": "c1c644721a8988d0073417d50e79123cabc127c317e46850f13ac78b24986a2f",
     "candidate_disposition": "Invalidated: document wrapper module-identity failure; publication prevented by validation. Preserve provider pause; no repeated paid pilot."
+  },
+  "historical_access_result": {
+    "evaluation_sha": "facd83554751c6504592c934536e781f446552cc",
+    "preflight_run": "34234658950",
+    "openai": {
+      "requested_model": "gpt-5.6-luna",
+      "returned_model": null,
+      "status": "unavailable_actions_step_credential",
+      "requests": 0,
+      "reported_cost_usd": 0
+    }
+  },
+  "required_next_step": "A new bounded provider/prompt evaluation with independent evidence is needed before migration and targeted recovery. Do not alter the existing holdout expectations, enable an untested route, retry Anthropic, or regenerate catalog data.",
+  "outcomes": {
+    "credential_wiring": "complete; real protected preflight passed",
+    "infrastructure_publication": "complete; exact candidate and Worker verified live",
+    "provider_migration": "required but blocked by failed frozen quality gates; no route promoted",
+    "team_recovery": "required but blocked pending a validated replacement; no new generation started",
+    "cov4": "replacement rejected; configured Anthropic classifier unavailable for new requests; unchecked topics remain withheld"
   }
 }
