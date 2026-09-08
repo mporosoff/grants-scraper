@@ -8,7 +8,7 @@ import time
 
 import requests
 
-from tools.offline_ai import (Ledger, config, identity, atomic_json, encoded, normalize_usage,
+from tools.offline_spend import (Ledger, config, identity, atomic_json, encoded, normalize_usage,
                               cost_microusd, ConfigurationFailure, error_diagnostics)
 
 

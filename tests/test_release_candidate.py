@@ -123,6 +123,29 @@ class CandidateLifecycleTests(unittest.TestCase):
                     artifacts.fetch('owner/repo', '123', name, self.bundle)
                 recover.assert_not_called()
 
+    def test_automatic_rerun_after_pages_resumes_verification_of_exact_candidate(self):
+        from tools import plan_release as planner
+        manifest = self.create()
+        receipt = validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        publication = {'schema_version': 1, 'candidate_id': manifest['candidate_id'], 'candidate_hashes': manifest['files'],
+            'generation_sha': self.source_sha, 'generation_run_id': '123', 'validation_sha': receipt['validation_sha'],
+            'validation_receipt_sha256': c.digest(c.encoded(receipt)), 'publication_sha': self.source_sha,
+            'release_code_sha': self.source_sha}
+        checkpoint = {'receipt': publication, 'validation': receipt, 'run': '123', 'attempt': '1', 'pages_complete': True}
+        c.write_json(self.root / 'release/candidate-source.json', {'candidate_id': manifest['candidate_id'], 'artifact_run': '123'})
+        environment = {'GITHUB_EVENT_NAME': 'schedule', 'GITHUB_RUN_ID': '123', 'GITHUB_RUN_ATTEMPT': '2'}
+        result = planner.plan(self.root, environment, resumed=manifest, receipt=receipt,
+                              live={'verified': False}, publication=checkpoint)
+        self.assertEqual(result['stage'], 'verify')
+        self.assertEqual(result['candidate_id'], manifest['candidate_id'])
+        self.assertEqual((result['candidate_run'], result['publication_run'], result['publication_attempt']), ('123', '123', '1'))
+        checkpoint['pages_complete'] = False
+        self.assertEqual(planner.plan(self.root, environment, resumed=manifest, publication=checkpoint)['stage'], 'publish')
+        checkpoint['pages_complete'] = True
+        publication['candidate_id'] = '0' * 64
+        with self.assertRaisesRegex(ValueError, 'Publication receipt'):
+            planner.plan(self.root, environment, resumed=manifest, publication=checkpoint)
+
     def test_validator_correction_revalidates_same_bytes_without_generation(self):
         manifest = self.create()
         commands = []

@@ -104,7 +104,9 @@
         "scripts/sources/**/*.py",
         "scripts/sources/fixtures/*.json",
         "config/source_intake.json",
-        "requirements.txt"
+        "requirements.txt",
+        "tools/run_budgeted_documents.py",
+        "tools/offline_spend.py"
       ],
       "excluded": [
         "scripts/build_opportunity_teams.py",
@@ -134,7 +136,8 @@
         "tools/offline_ai.py",
         "tools/offline_team_contract.py",
         "tools/team_maintenance.py",
-        "tools/team_provider.py"
+        "tools/team_provider.py",
+        "tools/offline_spend.py"
       ],
       "excluded": []
     },

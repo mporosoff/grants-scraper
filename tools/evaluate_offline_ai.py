@@ -44,6 +44,7 @@ def evaluation_contract(phase="teams-luna"):
     common = {"request_response": [function_hash(f) for f in (ai.Client.json, ai.request_body, ai.response_value,
                 ai.normalize_usage, ai.cost_microusd, ai.Ledger.reserve, ai.Ledger.complete)],
               "client_and_accounting_module": module_hash("tools/offline_ai.py"),
+              "shared_spending_module": module_hash("tools/offline_spend.py"),
               "pricing": settings["prices_per_million"], "prices_verified_at": settings["prices_verified_at"]}
     if phase == "cov4":
         from scripts import subtopic_cov4 as gate

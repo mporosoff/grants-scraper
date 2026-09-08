@@ -74,6 +74,9 @@ class ReleasePlanning(unittest.TestCase):
                 self.assertEqual(planner.decide({group: ['changed']}, requested=requested, **base), requested)
         self.assertEqual(planner.decide({}, **(base | {'event': 'schedule'})), 'generate')
         self.assertEqual(planner.decide({}, **(base | {'verified': False})), 'publish')
+        self.assertEqual(planner.decide({}, published=True, **(base | {'verified': False})), 'verify')
+        self.assertEqual(planner.decide({}, published=True, **(base | {'verified': False, 'receipt_current': False})), 'verify')
+        self.assertEqual(planner.decide({}, published=False, **(base | {'verified': False})), 'publish')
 
     def test_group_inventory_is_root_scoped_and_comments_are_not_semantics(self):
         self.assertTrue(dependencies.matches('scripts/sources/adapters/nasa.py', 'scripts/sources/**/*.py'))
@@ -90,8 +93,13 @@ class ReleasePlanning(unittest.TestCase):
                 key: {'patterns': [name], 'excluded': []} for key, name in
                 [('source', 'parser.py'), ('teams', 'team.py'), ('semantic', 'vectors.py'),
                  ('runtime', 'index.html'), ('validation', 'validator.py')]}}
+            policy['dependency_groups']['source']['patterns'] += ['tools/run_budgeted_documents.py', 'tools/offline_spend.py']
+            policy['dependency_groups']['teams']['patterns'] += ['tools/offline_ai.py', 'config/offline_ai.json']
             files = {'config/release_dependencies.json': json.dumps(policy), 'parser.py': 'x=1', 'team.py': 'x=1',
                      'vectors.py': 'x=1', 'index.html': 'a', 'validator.py': 'x=1',
+                     'tools/run_budgeted_documents.py': 'x=1', 'tools/offline_spend.py': 'x=1', 'tools/offline_ai.py': 'x=1',
+                     'config/offline_ai.json': json.dumps({'budgets_usd': {'maintenance': 2}, 'max_requests': 300,
+                                                         'prices_per_million': {}, 'production_route': 'sonnet'}),
                      '.github/workflows/refresh-opportunities.yml': 'jobs:\n  generate:\n    steps:\n      - run: python -m scripts.build_catalog --min-records 1000\n'}
             for name, content in files.items():
                 path = root / name; path.parent.mkdir(parents=True, exist_ok=True); path.write_text(content)
@@ -102,15 +110,41 @@ class ReleasePlanning(unittest.TestCase):
             sha = git('rev-parse', 'HEAD')
             baseline = dependencies.snapshot(root, sha)
             for name, group in [('validator.py', 'validation'), ('index.html', 'runtime'), ('team.py', 'teams'),
-                                ('parser.py', 'source'), ('vectors.py', 'semantic')]:
+                                ('parser.py', 'source'), ('vectors.py', 'semantic'),
+                                ('tools/run_budgeted_documents.py', 'source'), ('tools/offline_spend.py', 'source'),
+                                ('tools/offline_ai.py', 'teams')]:
                 (root / name).write_text('x=2')
                 changes = dependencies.changed_groups(baseline, dependencies.snapshot(root))
                 self.assertEqual(set(changes), {group})
                 (root / name).write_text(files[name])
+            settings = json.loads(files['config/offline_ai.json'])
+            (root / 'config/offline_ai.json').write_text(json.dumps(settings | {'production_route': 'luna'}))
+            self.assertEqual(set(dependencies.changed_groups(baseline, dependencies.snapshot(root))), {'teams'})
+            (root / 'config/offline_ai.json').write_text(json.dumps(settings | {'max_requests': 200}))
+            self.assertEqual(set(dependencies.changed_groups(baseline, dependencies.snapshot(root))), {'source', 'teams'})
+            (root / 'config/offline_ai.json').write_text(files['config/offline_ai.json'])
             (root / 'AGENTS.md').write_text('Changed operating prose')
             self.assertEqual(dependencies.changed_groups(baseline, dependencies.snapshot(root)), {})
             (root / '.github/workflows/refresh-opportunities.yml').write_text(files['.github/workflows/refresh-opportunities.yml'].replace('1000', '900'))
             self.assertEqual(set(dependencies.changed_groups(baseline, dependencies.snapshot(root))), {'source'})
+
+    def test_pages_checkpoint_is_bound_to_publication_artifact_attempt(self):
+        candidate = 'a' * 64
+        artifact = {'id': 9, 'name': f'publication-{candidate}-2', 'expired': False, 'workflow_run': {'id': 123}}
+        def download(repository, run, name, target):
+            target.mkdir(parents=True)
+            for filename in ('publication.json', 'validation.json'):
+                (target / filename).write_text('{}')
+        for conclusion, expected in [('success', True), ('failure', False)]:
+            def api(repository, path):
+                if path.startswith('actions/artifacts?'):
+                    return json.dumps({'artifacts': [artifact]})
+                self.assertIn('actions/runs/123/attempts/2/jobs?', path)
+                return json.dumps({'jobs': [{'name': 'pages / deploy', 'conclusion': conclusion}]})
+            with tempfile.TemporaryDirectory() as directory, patch('tools.offline_ai_checkpoint.api', side_effect=api), \
+                    patch('tools.fetch_release_artifact.fetch', side_effect=download):
+                run, evidence = planner.latest_report('owner/repo', candidate, 'publication', directory)
+            self.assertEqual((run, evidence['attempt'], evidence['pages_complete']), ('123', '2', expected))
 
     def test_provider_switch_preserves_proven_negative_and_original_provenance(self):
         scope = {'id': 'supported', 'source_fingerprint': 'source'}

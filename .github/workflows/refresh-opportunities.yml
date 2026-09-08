@@ -51,6 +51,8 @@ jobs:
       release_sha: ${{ steps.plan.outputs.release_sha }}
       team_mode: ${{ steps.plan.outputs.team_mode }}
       receipt_run: ${{ steps.plan.outputs.receipt_run }}
+      publication_run: ${{ steps.plan.outputs.publication_run }}
+      publication_attempt: ${{ steps.plan.outputs.publication_attempt }}
       openai: ${{ steps.plan.outputs.openai }}
       anthropic: ${{ steps.plan.outputs.anthropic }}
       candidate_run: ${{ steps.plan.outputs.candidate_run }}
@@ -579,16 +581,9 @@ jobs:
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$RECEIPT_RUN" --name "validation-$CANDIDATE_ID" --destination "$RUNNER_TEMP/previous-validation"
       - name: Validate a working copy of the persisted candidate or reuse its exact receipt
-        if: needs.plan.outputs.stage != 'verify'
         run: >-
           python -m tools.validate_release_candidate --bundle "$RUNNER_TEMP/candidate"
           --reports "$RUNNER_TEMP/reports" --previous "$RUNNER_TEMP/previous-validation/validation.json"
-      - name: Verify the existing receipt without rerunning gates for live verification
-        if: needs.plan.outputs.stage == 'verify'
-        run: |
-          python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/previous-validation/validation.json"
-          mkdir -p "$RUNNER_TEMP/reports"
-          cp "$RUNNER_TEMP/previous-validation/validation.json" "$RUNNER_TEMP/reports/validation.json"
       - name: Retain safe reports and receipt on success or failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -656,6 +651,8 @@ jobs:
       - name: Verify the candidate-compatible Worker handshake
         run: python -m tools.verify_release_live worker --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke before publication
+        env:
+          FUNDING_RELEASE_INPUT_ROOT: ${{ runner.temp }}/candidate/files
         run: node tools/smoke_search_worker.mjs
       - name: Verify the active Worker fingerprint after deployment or retention
         env:
@@ -726,8 +723,8 @@ jobs:
           --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
       - name: Load the expected publication receipt and its original validation evidence
         env:
-          PUBLICATION_RUN: ${{ needs.publish.result == 'success' && github.run_id || inputs.publication_run }}
-          PUBLICATION_ATTEMPT: ${{ needs.plan.outputs.stage == 'verify' && inputs.publication_attempt || '' }}
+          PUBLICATION_RUN: ${{ needs.publish.result == 'success' && github.run_id || needs.plan.outputs.publication_run }}
+          PUBLICATION_ATTEMPT: ${{ needs.plan.outputs.stage == 'verify' && needs.plan.outputs.publication_attempt || '' }}
         run: |
           artifact="publication-$CANDIDATE_ID"
           if [ -n "$PUBLICATION_ATTEMPT" ]; then artifact="$artifact-$PUBLICATION_ATTEMPT"; fi
@@ -741,6 +738,8 @@ jobs:
         run: python -m tools.verify_release_live verify --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke after Pages propagation
         id: live-provider
+        env:
+          FUNDING_RELEASE_INPUT_ROOT: ${{ runner.temp }}/candidate/files
         run: node tools/smoke_search_worker.mjs
       - name: Record the complete live result including provider smoke
         if: always()

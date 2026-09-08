@@ -70,6 +70,12 @@ def snapshot(root, revision=None):
             files['@generation_invocations'] = c.digest(c.encoded(invocations[group]))
             runtime_key = 'python' if group == 'source' else 'node'
             files['@generator_runtime'] = c.digest(c.encoded(recorded_policy.get('generation_contract', {}).get(runtime_key)))
+        if group == 'source' and 'tools/run_budgeted_documents.py' in inventory:
+            settings = json.loads(read('config/offline_ai.json'))
+            # Team routes/prompts/caps are independent. These are the only shared
+            # configuration fields consumed by the document spending adapter.
+            files['@document_spend_config'] = c.digest(c.encoded({key: settings[key] for key in
+                ('budgets_usd', 'max_requests', 'prices_per_million')}))
         result[group] = {'files': files, 'fingerprint': c.digest(c.encoded(files))}
     return result
 

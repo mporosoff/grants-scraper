@@ -103,6 +103,15 @@ UI-only assembly does not run collection, extraction, teams or vectors. The
 Worker input fingerprint covers its complete source/config/allowlist; HTML and
 CSS do not redeploy a verified equivalent Worker.
 
+Document transport/cache and its shared spending implementation are source
+dependencies. Team request/response routing is separate, so a team-only provider
+switch does not invalidate catalog evidence. Introducing the document budget
+adapter requires one new source candidate; subsequent retries reuse its exact
+persisted bytes. A logical workflow rerun first looks for its already completed
+candidate. A valid publication receipt plus a successful Pages job from that
+exact artifact attempt resumes live verification, including any newly required
+validation, without repeating Worker preparation or Pages publication.
+
 Missing, conflicting or mixed serving provenance blocks publication. Health is
 only a compatibility handshake, never provenance. Changed Worker inputs deploy
 only after validation, with exact serving version captured for normal rollback.

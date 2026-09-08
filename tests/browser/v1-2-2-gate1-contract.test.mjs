@@ -1,6 +1,8 @@
 import assert from "node:assert/strict";
 import { spawn } from "node:child_process";
-import { readFile } from "node:fs/promises";
+import { readFile, mkdtemp, mkdir, copyFile, writeFile, rm } from "node:fs/promises";
+import { tmpdir } from "node:os";
+import { join, dirname } from "node:path";
 import { createServer } from "node:http";
 import test from "node:test";
 import { fileURLToPath } from "node:url";
@@ -17,12 +19,13 @@ const [app, searchPage, teamPage, smoke, worker, refreshWorkflow, deployWorkflow
   readFile(new URL("workers/search-voyage-proxy/generated/corpus-allowlist.json", root), "utf8").then(JSON.parse),
 ]);
 
-function runSmoke(workerUrl) {
+function runSmoke(workerUrl, candidateRoot) {
   return new Promise((resolve, reject) => {
     const child = spawn(process.execPath, [
       fileURLToPath(new URL("tools/smoke_search_worker.mjs", root)),
       workerUrl,
-    ], { cwd: fileURLToPath(root) });
+    ], { cwd: fileURLToPath(root), env: {...process.env,
+      ...(candidateRoot ? {FUNDING_RELEASE_INPUT_ROOT: candidateRoot} : {})} });
     let stdout = "";
     let stderr = "";
     child.stdout.on("data", chunk => { stdout += chunk; });
@@ -44,7 +47,7 @@ function assertSafeFundingFinderTopicFallback(fallback) {
   );
 }
 
-async function withMockWorker({ failEmbed = false } = {}, callback) {
+async function withMockWorker({ failEmbed = false, packageAllowlist = allowlist } = {}, callback) {
   const observed = [];
   const server = createServer((request, response) => {
     let source = "";
@@ -54,8 +57,8 @@ async function withMockWorker({ failEmbed = false } = {}, callback) {
       if (request.url === "/health") {
         response.end(JSON.stringify({
           service: "available",
-          corpus_sha256: allowlist.current.corpus_sha256,
-          model_space_fingerprint: allowlist.current.model_space_fingerprint,
+          corpus_sha256: packageAllowlist.current.corpus_sha256,
+          model_space_fingerprint: packageAllowlist.current.model_space_fingerprint,
           previous_corpus_supported: true,
           budget_state: "available",
         }));
@@ -76,7 +79,7 @@ async function withMockWorker({ failEmbed = false } = {}, callback) {
         }));
         return;
       }
-      const generation = [allowlist.current, allowlist.previous]
+      const generation = [packageAllowlist.current, packageAllowlist.previous]
         .find(item => item.corpus_sha256 === body.corpus_sha256);
       if (!generation) {
         response.statusCode = 400;
@@ -99,6 +102,30 @@ async function withMockWorker({ failEmbed = false } = {}, callback) {
     await new Promise(resolve => server.close(resolve));
   }
 }
+
+test('release smoke reads the exact candidate package instead of the older release-code checkout', async () => {
+  const directory = await mkdtemp(join(tmpdir(), 'funding-smoke-'));
+  try {
+    for (const name of ['data/opportunities.js', 'data/subtopics.js', 'assets/search-hybrid.js']) {
+      await mkdir(dirname(join(directory, name)), {recursive: true});
+      await copyFile(new URL(name, root), join(directory, name));
+    }
+    const candidate = structuredClone(allowlist);
+    candidate.current.corpus_sha256 = '1'.repeat(64);
+    const name = 'workers/search-voyage-proxy/generated/corpus-allowlist.json';
+    await mkdir(dirname(join(directory, name)), {recursive: true});
+    await writeFile(join(directory, name), JSON.stringify(candidate));
+    await withMockWorker({packageAllowlist: candidate}, async workerUrl => {
+      const oldCheckout = await runSmoke(workerUrl);
+      assert.notEqual(oldCheckout.code, 0);
+      const exactCandidate = await runSmoke(workerUrl, directory);
+      assert.equal(exactCandidate.code, 0, exactCandidate.stderr);
+      assert.equal(JSON.parse(exactCandidate.stdout).current_corpus_sha256, candidate.current.corpus_sha256);
+    });
+  } finally {
+    await rm(directory, {recursive: true, force: true});
+  }
+});
 
 test("Funding Finder keeps parent search available when the topic sidecar fails", () => {
   const parentInit = app.indexOf("const nextSearchEngine = RETRIEVAL_API.create(candidate");

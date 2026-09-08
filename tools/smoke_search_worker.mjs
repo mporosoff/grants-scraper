@@ -4,8 +4,12 @@ import { readFile } from "node:fs/promises";
 import { webcrypto } from "node:crypto";
 import process from "node:process";
 import vm from "node:vm";
+import { resolve, sep } from "node:path";
+import { pathToFileURL } from "node:url";
 
-const ROOT = new URL("../", import.meta.url);
+const ROOT = process.env.FUNDING_RELEASE_INPUT_ROOT
+  ? pathToFileURL(resolve(process.env.FUNDING_RELEASE_INPUT_ROOT) + sep)
+  : new URL("../", import.meta.url);
 const DEFAULT_WORKER = "https://funding-finder-voyage-search.urochestercheme.workers.dev/";
 const ORIGIN = "https://mporosoff.github.io";
 
