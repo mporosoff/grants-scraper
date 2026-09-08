@@ -486,9 +486,13 @@ jobs:
           OPENAI_API_KEY: ${{ needs.plan.outputs.openai == 'true' && secrets.OPENAI_API_KEY || '' }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
-        run: >-
-          python -m scripts.build_opportunity_teams --generate --write --mode "$TEAM_MODE"
-          --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}" --baseline "$RUNNER_TEMP/accepted-scopes.json"
+        run: |
+          recovery_args=()
+          if [[ "$TEAM_MODE" != backfill ]] && python -c "from tools.offline_ai import config; import sys; sys.exit(0 if config().get('targeted_team_recovery') else 1)"; then
+            recovery_args+=(--recovery-only)
+          fi
+          python -m scripts.build_opportunity_teams --generate --write --mode "$TEAM_MODE" \
+            --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}" --baseline "$RUNNER_TEMP/accepted-scopes.json" "${recovery_args[@]}"
       - name: Rebuild current researcher projections without provider work
         if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
         run: python -m tools.team_maintenance --rebuild-projections

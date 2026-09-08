@@ -232,3 +232,30 @@ case/phase contracts fail closed on identity mismatch; a late workflow failure
 does not authorize a new trial, altered holdouts, or reset spending. Promotion
 still requires independent source/claim review, matched useful-output comparison,
 all unchanged gates, and a separately reviewed production configuration.
+
+## Completed comparison and independent functional recovery
+
+The authorized round is complete on protected SHA
+`6b0eeca92db892d8294d8b74ba31b9725f41e1a4`. Sonnet run `34265194226`
+established working access but scored 21/24 correct scope decisions and accepted
+15/18 legitimate scopes, below the unchanged 90% and 85% thresholds. It used
+59 requests including three retries, estimated at $1.746518. Source review also
+identified omitted required capabilities in scope `361205` and unsupported
+neural-recording inferences in `356811`. These trial outputs were not published.
+
+Repaired-Luna run `34267226821` scored 20/24 and 14/18, using 52 requests without
+retries, estimated at $0.062044. It is not promoted; no stability run, hybrid,
+additional model search, or relaxed quality criterion follows that failure.
+The exact receipts, per-case hashes, limitations, and consequential Sonnet
+findings are in `evaluation/offline_team_prompt_repair_20260908.json`.
+Replay `34268178167` verified all 48 retained decisions with zero requests and
+an unchanged ledger. Total evaluation accounting is 250 requests and $2.160280
+against the original 300-request/$15 ceiling; unknown historical charges remain.
+
+The user's subsequent authorization separates functional recovery from model
+optimization. Proven prior teams can be restored deterministically without a
+new model. Production Anthropic recovery requires working access and adequate
+behavior; because the baseline exposed concrete defects, those require focused
+repair before clearing its production pause. The established Sonnet Cov4 route
+has a separate authorized bounded service check; its failed OpenAI replacement
+does not establish Sonnet unavailability or authorize unchecked topics.

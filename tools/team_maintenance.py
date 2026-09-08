@@ -3,6 +3,7 @@ import argparse
 import ast
 import inspect
 import json
+import copy
 from pathlib import Path
 
 from tools.offline_ai import atomic_json, config, identity
@@ -63,6 +64,71 @@ def migrate_legacy(model, candidates, claims_generation, claims):
                 attempt['key'] = decision_key(scope, attempt, claims, scientific_identity)
                 break
     return invalidated
+
+
+def retained_decision_hash(row):
+    from scripts.build_opportunity_teams import content_hash
+    return content_hash({key: row.get(key) for key in (
+        'id', 'parent_id', 'record_type', 'source_fingerprint', 'pipeline_hash',
+        'generator_version', 'objective', 'roles', 'members', 'variants', 'missing_skills')})
+
+
+def restore_proven_teams(model, candidates, registry):
+    """Restore only exact previously published decisions with current evidence proofs."""
+    from scripts import build_opportunity_teams as t
+    from scripts.researcher_registry import validate_opportunity_team_dependencies
+    proof = config().get('targeted_team_recovery')
+    if not proof:
+        return []
+    scientific = science_contract()
+    scopes, claims = {row['id']: row for row in candidates}, t.eligible_claims(registry)
+    current_sources = t.source_fingerprints(model, candidates)
+    results = []
+    for row in model['opportunities']:
+        if row['id'] not in proof['published_decisions'] or row.get('review_state') != 'needs_revalidation':
+            continue
+        result = {'scope_id': row['id'], 'state': 'pending', 'provider_requests': 0}
+        results.append(result)
+        scope = scopes.get(row['id'])
+        if not scope or row.get('source_fingerprint') != scope['source_fingerprint']:
+            result['reason'] = ('source_changed' if scope else
+                'declared_scope_requires_source_revalidation' if row['id'] in current_sources else 'source_ineligible')
+            continue
+        if (proof['scientific_contract'] != scientific
+                or row.get('pipeline_hash') not in proof['compatible_pipeline_hashes']
+                or retained_decision_hash(row) != proof['published_decisions'][row['id']]):
+            result['reason'] = 'retained_decision_provenance_unestablished'
+            continue
+        try:
+            # The dependency validator intentionally skips withheld rows. Check
+            # an active copy; only the successful complete proof can clear flags.
+            inspected = copy.deepcopy(row)
+            inspected['review_state'] = 'proposed'
+            validate_opportunity_team_dependencies(registry,
+                {'faculty': model['faculty'], 'opportunities': [inspected]})
+            decomposition = {'specific': True, 'objective': row['objective'], 'roles': [
+                {'id': role['id'], 'label': role['label'], 'required': role['required'],
+                 'quote': role['source_quote']} for role in row['roles']]}
+            edges = [{'role_id': role['id'], 'claim_id': ref['claim_id'],
+                      'coverage': ref['coverage'], 'reason': ref['reason']}
+                     for role in row['roles'] for ref in role['claim_refs']]
+            proposal = t.assemble(scope, decomposition, edges, claims,
+                                  row['registry_generation_at_generation'])
+            if not proposal:
+                result['reason'] = 'no_complementary_team'
+                continue
+        except (ValueError, KeyError, TypeError):
+            result['reason'] = 'current_evidence_contract_failed'
+            continue
+        row.update(proposal)
+        row['decision_contract'] = scientific
+        row['recovery_proof'] = {'version': proof['version'], 'published_sha': proof['published_sha'],
+            'retained_decision_hash': proof['published_decisions'][row['id']],
+            'scientific_contract': scientific, 'registry_generation': registry['registry_generation'],
+            'source_fingerprint': scope['source_fingerprint'], 'provider_requests': 0}
+        row.pop('revalidation_reason', None)
+        result.update(state='restored_from_retained_evidence', proof=row['recovery_proof'])
+    return results
 
 
 def load_queue_report(path):

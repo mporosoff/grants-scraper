@@ -104,6 +104,29 @@ class IncrementalTeams(unittest.TestCase):
         self.assertEqual(len(updated["opportunities"]), 2)
         self.assertEqual(updated["opportunities"][0]["members"], model["opportunities"][0]["members"])
 
+    def test_targeted_recovery_reassesses_only_previous_scope_not_unrelated_maintenance(self):
+        from tools import team_maintenance
+        from tools.offline_ai import config
+        _, _, before, _ = self.run_main()
+        previous = before['opportunities'][0]['id']
+        self.add_call()
+        def amend(rows):
+            next(row for row in rows if row['opportunity_id'] == previous)['document_evidence']['document']['sha256'] = 'a' * 64
+        self.update_catalog(amend)
+        settings = config()
+        settings['targeted_team_recovery']['published_decisions'] = {previous: 'retained-prior-publication'}
+        settings['targeted_team_recovery']['max_scopes_per_batch'] = 1
+        with patch.object(teams, 'ai_config', return_value=settings), \
+                patch.object(team_maintenance, 'config', return_value=settings):
+            code, report, updated, calls = self.run_main(args=['--recovery-only'])
+        self.assertEqual(code, 0)
+        self.assertEqual(report['queue_counts']['maintenance'], 2)
+        self.assertEqual(report['targeted_recovery']['selected_pending_scopes'], 1)
+        self.assertEqual(report['limits']['max_scopes'], 1)
+        self.assertEqual({row['scope_id'] for row in report['results']}, {previous})
+        self.assertEqual(sum(call.kwargs['json'].get('system') == teams.DECOMPOSE for call in calls), 1)
+        self.assertFalse(any(row['id'] == 'fixture-new-call' for row in updated['opportunities']))
+
     def test_material_amendment_and_expiration_invalidate_only_exact_source(self):
         self.add_call()
         _, _, before, _ = self.run_main()
