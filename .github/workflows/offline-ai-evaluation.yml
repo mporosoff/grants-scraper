@@ -1,0 +1,60 @@
+name: Bounded offline AI evaluation
+
+on:
+  workflow_dispatch:
+    inputs:
+      phase:
+        description: One frozen phase within the shared $15 logical evaluation
+        required: true
+        type: choice
+        options: [preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay]
+        default: preflight
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: funding-finder-offline-evaluation-economical-ai-20260908
+  cancel-in-progress: false
+
+jobs:
+  evaluate:
+    if: github.ref == 'refs/heads/main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 50
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.txt
+      - name: Restore authoritative spend state before reserving further work
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python -m tools.offline_ai_checkpoint --state "$RUNNER_TEMP/offline-ai"
+          --reservation "$RUNNER_TEMP/reservation.json"
+      - name: Persist whole-logical-budget crash protection before any provider call
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-economical-ai-20260908-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reservation.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Run the selected finite evaluation with provider-specific credentials
+        env:
+          EVALUATION_PHASE: ${{ inputs.phase }}
+          OPENAI_API_KEY: ${{ inputs.phase != 'teams-sonnet' && inputs.phase != 'replay' && secrets.OPENAI_API_KEY || '' }}
+          ANTHROPIC_API_KEY: ${{ (inputs.phase == 'teams-sonnet' || inputs.phase == 'teams-luna-sonnet-verifier' || inputs.phase == 'stability') && secrets.ANTHROPIC_API_KEY || '' }}
+        run: python -m tools.evaluate_offline_ai "$EVALUATION_PHASE" --state "$RUNNER_TEMP/offline-ai"
+      - name: Preserve accounting and safe completed stage responses after any outcome
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-economical-ai-20260908-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/offline-ai
+          if-no-files-found: warn
+          retention-days: 90
