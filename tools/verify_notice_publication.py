@@ -23,7 +23,7 @@ PUBLIC_FIELDS = ('document_evidence_status', 'document_evidence', 'document_sear
     'preliminary_stage_type', 'preliminary_required', 'next_submission')
 
 
-VALIDATOR_VERSION = 'notice-publication-2'
+VALIDATOR_VERSION = 'notice-publication-3'
 
 
 def bounded_public_value(value, limit=2048):
@@ -32,6 +32,30 @@ def bounded_public_value(value, limit=2048):
         return value
     return {'preview': serialized[:limit], 'truncated': True,
             'sha256': hashlib.sha256(serialized.encode()).hexdigest(), 'characters': len(serialized)}
+
+
+def retained_retrieval_failure(before, after, catalog, cache, stamp):
+    """A zero-request replay cannot repeat an attested generation-time fetch failure.
+
+    Source invalidation runs before acquisition. A failed acquisition keeps its
+    old cache signature (never relabel old evidence as the new source), so replay
+    stops at source_changed. Both projections must still withhold all evidence.
+    """
+    if (before.get('document_evidence_status') != 'failed'
+            or after.get('document_evidence_status') != 'source_changed'
+            or any(row.get(key) is not None for row in (before, after)
+                   for key in ('document_evidence', 'document_search_text'))):
+        return False
+    identifier = str(before['opportunity_id'])
+    entry = (cache.get('records') or {}).get(identifier) or {}
+    source = evidence.source_for_record(before)
+    if (not source or entry.get('status') != 'failed' or not entry.get('last_error')
+            or entry.get('last_attempt_at') != stamp):
+        return False
+    failures = ((catalog.get('diagnostics') or {}).get('document_evidence') or {}).get('failures') or []
+    return any(str(failure.get('opportunity_id')) == identifier
+               and failure.get('url') == source['url']
+               and failure.get('error') == entry['last_error'] for failure in failures)
 
 
 def verify(catalog, cache, children=None, *, candidate_id='committed-working-copy'):
@@ -57,9 +81,15 @@ def verify(catalog, cache, children=None, *, candidate_id='committed-working-cop
     rebuilt = published_records(projected)
     if [row['opportunity_id'] for row in published] != [row['opportunity_id'] for row in rebuilt]:
         raise ValueError('Notice projection changed canonical membership or order')
-    changes = []
+    changes, replay_observations = [], []
     for before, after in zip(published, rebuilt):
         fields = [key for key in PUBLIC_FIELDS if before.get(key) != after.get(key)]
+        if retained_retrieval_failure(before, after, catalog, cache, stamp):
+            fields.remove('document_evidence_status')
+            replay_observations.append({'opportunity_id': str(before['opportunity_id']),
+                'field': 'document_evidence_status', 'before': before['document_evidence_status'],
+                'after': after['document_evidence_status'],
+                'reason': 'generation_retrieval_failure_not_replayed', 'generation_attempt_at': stamp})
         if fields:
             changes.append({'opportunity_id': str(before['opportunity_id']), 'fields': fields,
                 'differences': [{'field': key, 'before': bounded_public_value(before.get(key)),
@@ -79,7 +109,8 @@ def verify(catalog, cache, children=None, *, candidate_id='committed-working-cop
             'validator': 'notice-projection-idempotence', 'validator_version': VALIDATOR_VERSION,
             'validator_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
             'source_requests': 0, 'provider_requests': 0,
-            'publication_ready': not changes, 'changed_records': len({row['opportunity_id'] for row in changes}), 'changes': changes}
+            'publication_ready': not changes, 'changed_records': len({row['opportunity_id'] for row in changes}),
+            'changes': changes, 'replay_observations': replay_observations}
 
 
 def main():

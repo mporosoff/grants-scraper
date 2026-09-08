@@ -87,6 +87,49 @@ class NoticePublicationTests(unittest.TestCase):
                 now=datetime(2026, 9, 7, tzinfo=timezone.utc), structure_cache=StructureCache(directory))
         self.assertTrue(verify(catalog, cache)['publication_ready'])
 
+    def failed_changed_source(self):
+        catalog, cache = self.candidate()
+        catalog['opportunities'][0]['primary_document_url'] = 'https://example.gov/revised-notice.html'
+        def failed_fetch(*_):
+            raise ValueError('Unavailable official document')
+        with tempfile.TemporaryDirectory() as directory:
+            return e.enrich_document_evidence(catalog, cache,
+                now=datetime(2026, 9, 7, tzinfo=timezone.utc), max_documents=1, request_delay=0,
+                fetcher=failed_fetch, structure_cache=StructureCache(directory))
+
+    def test_failed_changed_source_replays_without_fetch_or_losing_failure_diagnostics(self):
+        catalog, cache = self.failed_changed_source()
+        before = deepcopy((catalog, cache))
+        report = verify(catalog, cache, candidate_id='retained-candidate')
+        self.assertTrue(report['publication_ready'])
+        self.assertEqual(report['changes'], [])
+        self.assertEqual(report['replay_observations'][0], {
+            'opportunity_id': 'fixture', 'field': 'document_evidence_status',
+            'before': 'failed', 'after': 'source_changed',
+            'reason': 'generation_retrieval_failure_not_replayed',
+            'generation_attempt_at': catalog['document_evidence_generated_at']})
+        self.assertEqual((report['source_requests'], report['provider_requests']), (0, 0))
+        self.assertEqual((catalog, cache), before)
+
+    def test_failed_source_status_requires_exact_current_failure_and_withheld_evidence(self):
+        for change in ('missing_failure', 'wrong_url', 'wrong_error', 'old_attempt', 'old_evidence', 'wrong_deadline'):
+            with self.subTest(change=change):
+                catalog, cache = self.failed_changed_source()
+                failures = catalog['diagnostics']['document_evidence']['failures']
+                if change == 'missing_failure':
+                    failures.clear()
+                elif change == 'wrong_url':
+                    failures[0]['url'] = 'https://example.gov/unrelated.html'
+                elif change == 'wrong_error':
+                    failures[0]['error'] = 'DifferentFailure'
+                elif change == 'old_attempt':
+                    cache['records']['fixture']['last_attempt_at'] = '2025-01-01T00:00:00Z'
+                elif change == 'old_evidence':
+                    catalog['opportunities'][0]['document_search_text'] = 'Old source facts must remain withheld'
+                else:
+                    catalog['opportunities'][0]['next_submission'] = {'date': '2099-01-01'}
+                self.assertFalse(verify(catalog, cache)['publication_ready'])
+
     def test_obsolete_scientific_children_block_even_when_parent_facts_match(self):
         catalog, cache = self.candidate()
         cache['records']['fixture'].update(subtopic_method='hgeo_declared_topics', subtopics=[])
