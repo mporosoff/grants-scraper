@@ -73,6 +73,16 @@ def retained_decision_hash(row):
         'generator_version', 'objective', 'roles', 'members', 'variants', 'missing_skills')})
 
 
+def curated_profile_hashes(row, registry):
+    from scripts.researcher_registry import legacy_faculty_projection
+    profiles = {profile['id']: profile for profile in legacy_faculty_projection(registry)}
+    references = {member['faculty_id'] for member in row['members']}
+    for role in row['roles']:
+        references.update(role.get('candidate_ids', []))
+        references.update(role.get('alternative_ids', []))
+    return {identifier: identity(profiles[identifier]) for identifier in sorted(references)}
+
+
 def restore_proven_teams(model, candidates, registry):
     """Restore only exact previously published decisions with current evidence proofs."""
     from scripts import build_opportunity_teams as t
@@ -91,15 +101,18 @@ def restore_proven_teams(model, candidates, registry):
         results.append(result)
         scope = scopes.get(row['id'])
         source_review = proof.get('reviewed_source_changes', {}).get(row['id'])
+        curated = bool(source_review and source_review.get('review_kind') == 'curated_source_revalidation'
+                       and not row.get('generator_version'))
+        fingerprint = current_sources.get(row['id']) if curated else (scope or {}).get('source_fingerprint')
         reviewed_change = bool(scope and source_review
             and source_review.get('prior_source_fingerprint') == row.get('source_fingerprint')
-            and source_review.get('reviewed_source_fingerprint') == scope['source_fingerprint'])
-        if not scope or (row.get('source_fingerprint') != scope['source_fingerprint'] and not reviewed_change):
+            and source_review.get('reviewed_source_fingerprint') == fingerprint)
+        if not scope or (row.get('source_fingerprint') != fingerprint and not reviewed_change):
             result['reason'] = ('source_changed' if scope else
                 'declared_scope_requires_source_revalidation' if row['id'] in current_sources else 'source_ineligible')
             continue
         if (proof['scientific_contract'] != scientific
-                or row.get('pipeline_hash') not in proof['compatible_pipeline_hashes']
+                or (not curated and row.get('pipeline_hash') not in proof['compatible_pipeline_hashes'])
                 or retained_decision_hash(row) != proof['published_decisions'][row['id']]):
             result['reason'] = 'retained_decision_provenance_unestablished'
             continue
@@ -110,14 +123,18 @@ def restore_proven_teams(model, candidates, registry):
             inspected['review_state'] = 'proposed'
             validate_opportunity_team_dependencies(registry,
                 {'faculty': model['faculty'], 'opportunities': [inspected]})
-            decomposition = {'specific': True, 'objective': row['objective'], 'roles': [
-                {'id': role['id'], 'label': role['label'], 'required': role['required'],
-                 'quote': role['source_quote']} for role in row['roles']]}
-            edges = [{'role_id': role['id'], 'claim_id': ref['claim_id'],
-                      'coverage': ref['coverage'], 'reason': ref['reason']}
-                     for role in row['roles'] for ref in role['claim_refs']]
-            proposal = t.assemble(scope, decomposition, edges, claims,
-                                  row['registry_generation_at_generation'])
+            if curated:
+                quotes = source_review.get('role_source_quotes', {})
+                if (not reviewed_change or row['record_type'] != source_review.get('record_type')
+                        or curated_profile_hashes(row, registry) != source_review.get('reviewed_profile_hashes')
+                        or set(quotes) != {role['id'] for role in row['roles']}
+                        or any(not isinstance(quote, str) or not 15 <= len(quote) <= 400
+                               or quote not in scope['text'] for quote in quotes.values())
+                        or len({member['faculty_id'] for member in row['members']}) < 2):
+                    raise ValueError('Curated source/profile proof mismatch')
+                proposal = {'source_fingerprint': fingerprint}
+            else:
+                proposal = restored_generated_proposal(row, scope, claims)
             if not proposal:
                 result['reason'] = 'no_complementary_team'
                 continue
@@ -125,18 +142,36 @@ def restore_proven_teams(model, candidates, registry):
             result['reason'] = 'current_evidence_contract_failed'
             continue
         row.update(proposal)
-        row['decision_contract'] = scientific
+        if curated:
+            row.pop('review_state', None)  # Restore the original curated representation.
+        else:
+            row['decision_contract'] = scientific
         row['recovery_proof'] = {'version': proof['version'], 'published_sha': proof['published_sha'],
             'retained_decision_hash': proof['published_decisions'][row['id']],
-            'scientific_contract': scientific, 'registry_generation': registry['registry_generation'],
-            'source_fingerprint': scope['source_fingerprint'], 'provider_requests': 0}
+            'registry_generation': registry['registry_generation'],
+            'source_fingerprint': fingerprint, 'provider_requests': 0}
+        if curated:
+            row['recovery_proof']['validation_contract'] = 'curated-source-and-profile-1'
+        else:
+            row['recovery_proof']['scientific_contract'] = scientific
         if reviewed_change:
-            # Preserve the old generated decision's source attribution separately
-            # from this explicit review of the exact current source snapshot.
             row['recovery_proof']['source_revalidation'] = source_review
         row.pop('revalidation_reason', None)
         result.update(state='restored_from_retained_evidence', proof=row['recovery_proof'])
     return results
+
+
+def restored_generated_proposal(row, scope, claims):
+    from scripts import build_opportunity_teams as t
+    # Generated decisions continue through their exact original assembly gate;
+    # explicit legacy curated reviews never make this gate optional for them.
+    decomposition = {'specific': True, 'objective': row['objective'], 'roles': [
+        {'id': role['id'], 'label': role['label'], 'required': role['required'],
+         'quote': role['source_quote']} for role in row['roles']]}
+    edges = [{'role_id': role['id'], 'claim_id': ref['claim_id'],
+              'coverage': ref['coverage'], 'reason': ref['reason']}
+             for role in row['roles'] for ref in role['claim_refs']]
+    return t.assemble(scope, decomposition, edges, claims, row['registry_generation_at_generation'])
 
 
 def load_queue_report(path):

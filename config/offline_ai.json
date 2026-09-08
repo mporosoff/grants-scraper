@@ -402,6 +402,52 @@
         "basis": "Official title, description, source URLs, opportunity number and agency are byte-identical to the retained publication. The changed public document projection contains application facts/administrative excerpts and general keywords; it does not change this retained scientific team decision. Every retained role quote, claim dependency, eligibility and complementary assembly was checked against the current snapshot. Required gaps remain explicit.",
         "review_kind": "source_projection_revalidation",
         "reviewed_against_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+      },
+      "363375": {
+        "review_kind": "curated_source_revalidation",
+        "record_type": "specific_parent",
+        "prior_source_fingerprint": "662d5c63faf785a4d1ba1edcc27bccbdba6343a76afee86ccf7989e6250db5b3",
+        "reviewed_source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
+        "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
+        "role_source_quotes": {
+          "role-1": "treating impaired water for beneficial uses",
+          "role-2": "conduct innovative laboratory and pilot-scale water treatment research",
+          "role-3": "reducing the costs, energy requirements, and other barriers to adoption",
+          "role-4": "conduct innovative laboratory and pilot-scale water treatment research"
+        },
+        "reviewed_profile_hashes": {
+          "urh-000014": "c9e6d8ea9e1cf52764277c8f1225b24a33d3426a5e3571730dbc83f40e60ac30",
+          "urh-000017": "dc3ce9fcba9719fddd9219c45d41c41bbe49c5dfc3879e745fd9a518d42cde06",
+          "urh-000046": "c335387b56cef4d732132aff9b6275185a1ee296d0aeefc9062094f36eb7f475",
+          "urh-000146": "d88ef0691fa8d78fccdd7166e824f2e1819ed08bdcf5c28803414a0d5920e0fc",
+          "urh-000150": "3fc9a79f4e331b234ed12c8c066df6ac0ba14c94b8614df86cab37bddfb31a05"
+        },
+        "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment."
+      },
+      "eere-exchange:DE-TA1-0003589": {
+        "review_kind": "curated_source_revalidation",
+        "record_type": "declared_branch",
+        "prior_source_fingerprint": "5708af92dc02febceb5e20a683917f88306815a17cf86d61477187b67d12e7cf",
+        "reviewed_source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
+        "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
+        "role_source_quotes": {
+          "role-1": "Recovery and production from postconsumer scrap",
+          "role-2": "from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap",
+          "role-3": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+          "role-4": "Recovery and production from postconsumer scrap"
+        },
+        "reviewed_profile_hashes": {
+          "urh-000029": "f69b7f2ba5ed796ee8ea81257c06f9d6d185337e3f19f96095a702758885c695",
+          "urh-000061": "515c8cf73fd000b887758b2f77b7bcbe95db870eb6991e442dd07c1826f892c1",
+          "urh-000082": "944a42732d8257e0a684391c612a2b6f008d66ab3512512240af9006823d2987",
+          "urh-000100": "2ff7fd263af0b217240aba53470ab83fd79300003664c80bee3719c7b9a8b721",
+          "urh-000103": "698555d868e1dfb0ea07761fd11419624845a8bce78024d692538940f1c10727",
+          "urh-000105": "ab513b7e0c96bd4130bffc3ac7290259beec632afc18a5c3234abed25644b7e3",
+          "urh-000109": "fc270291fe161b06829ef47f472fdb561881d1454b6d8c841982fc5593e2cca1",
+          "urh-000111": "a0aac6d0c35ec9da7b2eca0db11a24113c9094e59ee4d3cfbfa59121a245bcba",
+          "urh-000113": "c5bdc6cd74b7cfae1560ce638c2a90ab58bdd1b9a80572048d4078362939953e"
+        },
+        "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment."
       }
     }
   }
