@@ -3737,7 +3737,7 @@ test("a timed-out adopter older than 26 hours is fenced while its Sunday success
   let current = new Date("2026-09-08T16:00:00.000Z");
   const scheduled = createScheduledHandler({
     storeFactory: () => proxy, providerFactory: () => provider,
-    assetLoader: async () => assets, now: () => current,
+    assetLoader: async () => assets, now: () => current, clock: () => current.getTime(),
   });
   const firstPromise = scheduled(
     { scheduledTime: current.getTime(), cron: "2-57/5 * * * *" },

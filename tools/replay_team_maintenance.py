@@ -16,7 +16,8 @@ def replay(root):
     with tempfile.TemporaryDirectory() as directory:
         destination = Path(directory)
         names = ['config/opportunity_team_model.json', 'config/researcher_registry.json', 'data/opportunities.js',
-                 'data/subtopics.js', 'data/opportunity_teams.js', 'data/opportunity_team_index.js', 'match_explorer.html', 'team_match.html']
+                 'data/subtopics.js', 'data/opportunity_teams.js', 'data/opportunity_team_index.js', 'match_explorer.html', 'team_match.html',
+                 'evaluation/opportunity_team_generation.json']
         original_hashes = c.file_hashes(root, names)
         for name in names:
             target = destination / name

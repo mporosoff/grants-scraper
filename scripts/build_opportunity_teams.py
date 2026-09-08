@@ -861,6 +861,8 @@ def main():
     started = time.monotonic()
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
+    from tools import team_maintenance as maintenance
+    retained_report = maintenance.load_queue_report(report_path)
     run = {"run_id": os.environ.get("GITHUB_RUN_ID") or str(uuid.uuid4()),
            "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", "1"), "generation_requested": args.generate,
            "started_at": datetime.now(timezone.utc).isoformat(), "response_contract": RESPONSE_VERSION}
@@ -874,7 +876,6 @@ def main():
     model = synchronize_opportunity_team_model(registry, path, model=model, write=False)
     claims = eligible_claims(registry)
     claims_generation = content_hash([{key: c[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for c in claims.values()])
-    from tools import team_maintenance as maintenance
     pipeline_hash = maintenance.science_contract()
     eligibility = []
     candidates = scopes(diagnostics=eligibility)
@@ -912,7 +913,8 @@ def main():
                    and existing[s["id"]].get("decision_contract") != pipeline_hash))
                and not attempt_completed(attempts.get(s["id"]), attempt_key(s), existing.get(s["id"]))]
     maintenance_queue, backfill_queue, queue_reasons = maintenance.queues(
-        pending, existing, attempts, previous_snapshot, current_snapshot)
+        pending, existing, attempts, previous_snapshot, current_snapshot,
+        maintenance.retained_queue_reasons(retained_report, input_generation, RESPONSE_VERSION))
     selected = backfill_queue if args.mode == 'backfill' else maintenance_queue
     if args.mode == 'replay':
         selected = []
@@ -1026,14 +1028,16 @@ def main():
             report['llm_usage'] = ledger.summary()
             report['provider_requests_by_surface'] = {'voyage': provider.calls - provider.counters.get('assessment_requests', 0),
                                                      'llm': provider.counters.get('assessment_requests', 0)}
-    if args.generate and args.mode in ('maintenance', 'pilot'):
-        for scope in selected:
-            if scope['id'] not in {r['scope_id'] for r in report['results'] if r['state'] != 'deferred'}:
-                previous = attempts.get(scope['id'])
-                if not isinstance(previous, dict) or previous.get('state') in COMPLETED_STATES:
-                    attempts[scope['id']] = {'state': 'deferred', 'mode': args.mode, 'decision_contract': pipeline_hash,
-                        'stage': 'queue', 'reason': queue_reasons[scope['id']], 'next_action': 'retry_maintenance', 'retry_after': 0}
-                    attempts[scope['id']]['key'] = attempt_key(scope)
+    if args.write and args.mode in ('maintenance', 'pilot'):
+        maintenance.preserve_deferred(attempts, selected, report['results'], queue_reasons,
+                                      args.mode, pipeline_hash, attempt_key)
+        if progress_path:
+            # Commit deferred ownership before the accepted model can advance.
+            # An interrupted final report must not restore older queue state.
+            atomic_json(progress_path, {'input_generation': input_generation,
+                'science_contract': pipeline_hash, 'provider_contract': provider_contract(),
+                'opportunities': list(existing.values()), 'generation_attempts': attempts,
+                'discovery_queue': model.get('discovery_queue', {})})
     report["coverage_after"] = coverage(existing.values())
     report["pending_after"] = sum(not attempt_completed(attempts.get(scope["id"]), attempt_key(scope), existing.get(scope["id"])) for scope in pending)
     assessed = {result["scope_id"] for result in report["results"]}
