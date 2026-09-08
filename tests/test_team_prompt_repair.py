@@ -177,6 +177,37 @@ class TeamPromptRepairContracts(unittest.TestCase):
         self.assertEqual(result['legitimate_acceptance'], 0)
         self.assertLess(result['scope_accuracy'], .9)
 
+    def test_replay_after_baseline_then_luna_revalidates_expanded_exact_result_set(self):
+        protocol, cases = trial.population()
+        value = {'scope_id': cases[0]['scope']['id'], 'holdout': False, 'state': 'not_specific', 'stages': {}}
+        with tempfile.TemporaryDirectory() as tmp, patch.object(trial, 'population', return_value=(protocol, cases[:1])), \
+                patch.object(trial.original, 'evaluation_contract', return_value='same-team-contract'), \
+                patch.object(trial.original, 'team_case', return_value=value.copy()) as assess:
+            state = Path(tmp)
+            directory = state / protocol['version']
+            ledger = Ledger(state / 'ledger.json', trial.original.TASK, 15)
+            client = Client(ledger, state / 'cache', post=Mock(side_effect=AssertionError('no provider traffic')))
+            trial.assess(client, directory, protocol, 'sonnet', cases[0])
+            with patch('sys.argv', ['trial', 'round2-replay', '--state', str(state)]):
+                trial.main()
+                first = json.loads((directory / 'replay-completed.json').read_bytes())
+                self.assertEqual(first['result']['completed_scopes_replayed'], 1)
+                trial.assess(client, directory, protocol, 'luna', cases[0])
+                inputs = trial.replay_inputs(directory, cases[:1])
+                trial.main()
+                second = json.loads((directory / 'replay-completed.json').read_bytes())
+                self.assertEqual(second['result']['completed_scopes_replayed'], 2)
+                self.assertEqual(second['result']['result_file_hashes'], inputs)
+                self.assertNotEqual(first['evaluation_contract'], second['evaluation_contract'])
+                historical = list((directory / 'history').glob('replay-*.json'))
+                self.assertEqual(len(historical), 1)
+                self.assertEqual(json.loads(historical[0].read_bytes()), first)
+                completed_calls = assess.call_count
+                trial.main()
+                self.assertEqual(assess.call_count, completed_calls)
+                self.assertEqual(trial.replay_inputs(directory, cases[:1]), inputs)
+                self.assertEqual(ledger.read()['requests'], [])
+
     def test_workflow_has_explicit_baseline_grant_and_no_anthropic_stability_or_replay_key(self):
         workflow = yaml.safe_load(Path('.github/workflows/offline-ai-evaluation.yml').read_bytes())
         steps = workflow['jobs']['evaluate']['steps']

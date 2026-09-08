@@ -1,5 +1,6 @@
 """One separately frozen team-prompt trial; shared existing spend, no production mutation."""
 import argparse
+import hashlib
 import json
 import os
 from pathlib import Path
@@ -148,6 +149,18 @@ def replay(client, directory, protocol, cases):
             'new_provider_requests': len(client.ledger.read()['requests']) - before}
 
 
+def replay_inputs(directory, cases):
+    """The replay covers the exact retained result set, including later phases."""
+    result = {}
+    for route in ('sonnet', 'luna'):
+        for case in cases:
+            name = f'{route}-{identity(case)}.json'
+            path = directory / name
+            if path.is_file():
+                result[name] = hashlib.sha256(path.read_bytes()).hexdigest()
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('phase', choices=['round2-sonnet', 'round2-luna', 'round2-stability', 'round2-replay'])
@@ -162,17 +175,32 @@ def main():
     route = 'sonnet' if phase == 'sonnet' else 'luna'
     expected = identity({'protocol': protocol, 'phase': phase, 'contract': contract(protocol, route),
                          'metrics_version': original.function_hash(metrics)})
+    inputs = None
+    if phase == 'replay':
+        inputs = replay_inputs(directory, cases)
+        expected = identity({'trial': expected, 'result_files': inputs,
+                             'replay_validator': original.function_hash(replay)})
     marker = directory / (phase + '-completed.json')
     client = Client(ledger, args.state / 'cache', deadline=time.monotonic() + 2400)
     result, complete = None, False
     try:
-        if marker.exists():
-            retained = json.loads(marker.read_bytes())
+        retained = json.loads(marker.read_bytes()) if marker.exists() else None
+        if retained and phase == 'replay' and retained.get('evaluation_contract') != expected:
+            # Later completed results need a new zero-call proof. Keep the
+            # earlier subset receipt as history; never relabel its coverage.
+            atomic_json(directory / 'history' / ('replay-' + identity(retained) + '.json'), retained)
+            marker.unlink()
+            retained = None
+        if retained is not None:
             if retained.get('evaluation_contract') != expected:
                 raise ValueError('Completed trial contract changed; no silent rerun')
             result, complete = retained['result'], True
         elif phase == 'replay':
-            result, complete = replay(client, directory, protocol, cases), True
+            result = replay(client, directory, protocol, cases)
+            if replay_inputs(directory, cases) != inputs:
+                raise ValueError('Retained result files changed during read-only replay')
+            result['result_file_hashes'] = inputs
+            complete = True
         else:
             if phase == 'sonnet':
                 authorize_baseline(ledger, protocol, os.environ.get('AUTHORIZE_ANTHROPIC_BASELINE') == 'true')
