@@ -223,6 +223,60 @@ class TeamPromptRepairContracts(unittest.TestCase):
             if step is not generation:
                 self.assertNotIn('ANTHROPIC_API_KEY', step.get('env', {}))
 
+    def test_replay_rejects_changed_sonnet_contract_and_lost_or_mutated_covered_evidence(self):
+        protocol, cases = trial.population()
+        value = {'scope_id': cases[0]['scope']['id'], 'holdout': False, 'state': 'not_specific', 'stages': {}}
+        for change in ('sonnet_contract', 'deleted', 'metadata'):
+            with self.subTest(change=change), tempfile.TemporaryDirectory() as tmp, \
+                    patch.object(trial, 'population', return_value=(protocol, cases[:1])), \
+                    patch.object(trial.original, 'evaluation_contract', return_value='original') as contract, \
+                    patch.object(trial.original, 'team_case', return_value=value.copy()):
+                state = Path(tmp)
+                directory = state / protocol['version']
+                ledger = Ledger(state / 'ledger.json', trial.original.TASK, 15)
+                trial.assess(Client(ledger, state / 'cache'), directory, protocol, 'sonnet', cases[0])
+                with patch('sys.argv', ['trial', 'round2-replay', '--state', str(state)]):
+                    trial.main()
+                    marker = directory / 'replay-completed.json'
+                    original_receipt = marker.read_bytes()
+                    path = directory / ('sonnet-' + identity(cases[0]) + '.json')
+                    if change == 'sonnet_contract':
+                        contract.side_effect = lambda phase: 'new' if phase == 'teams-sonnet' else 'original'
+                    elif change == 'deleted':
+                        path.unlink()
+                    else:
+                        atomic_json(path, json.loads(path.read_bytes()) | {'scope_id': 'different-scope'})
+                    with self.assertRaises(ValueError):
+                        trial.main()
+                    self.assertEqual(marker.read_bytes(), original_receipt)
+                    self.assertFalse(json.loads((directory / 'replay-receipt.json').read_bytes())['complete'])
+
+    def test_replay_cache_failure_preserves_complete_ledger_and_cache_bytes(self):
+        protocol, cases = trial.population()
+        value = {'scope_id': cases[0]['scope']['id'], 'holdout': False, 'state': 'not_specific', 'stages': {}}
+        for corrupt in (False, True):
+            with self.subTest(corrupt=corrupt), tempfile.TemporaryDirectory() as tmp, \
+                    patch.object(trial.original, 'evaluation_contract', return_value='original'), \
+                    patch.dict(os.environ, OPENAI_API_KEY='', ANTHROPIC_API_KEY=''):
+                state = Path(tmp)
+                ledger = Ledger(state / 'ledger.json', trial.original.TASK, 15)
+                ledger.block('anthropic', trial.SCOPED_PAUSE)
+                client = Client(ledger, state / 'cache')
+                with patch.object(trial.original, 'team_case', return_value=value.copy()):
+                    trial.assess(client, state / 'results', protocol, 'luna', cases[0])
+                if corrupt:
+                    key = identity({'route': config()['routes']['luna'], 'stage': 'decomposition',
+                        'config': config()['stages']['decomposition'] | {'prompt_version': protocol['candidate_prompt_version']},
+                        'prompt': protocol['candidate_decomposition_prompt'], 'schema': schemas()['decomposition'],
+                        'inputs': {key: cases[0]['scope'][key] for key in ('record_type', 'source_fingerprint')} |
+                                  {'scope': cases[0]['scope']['text']}})
+                    atomic_json(state / 'cache' / (key + '.json'), {'key': key, 'value': 'corrupt'})
+                before = {str(path.relative_to(state)): path.read_bytes() for path in state.rglob('*') if path.is_file()}
+                with self.assertRaises(ValueError):
+                    trial.replay(client, state / 'results', protocol, cases[:1])
+                after = {str(path.relative_to(state)): path.read_bytes() for path in state.rglob('*') if path.is_file()}
+                self.assertEqual(after, before)
+
 
 if __name__ == '__main__':
     unittest.main()

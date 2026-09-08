@@ -223,7 +223,11 @@ the grant does not enable old Sonnet or hybrid phases. Production's separate
 
 If mandatory quality checks pass, `phase=round2-stability` repeats only Luna's
 two predeclared cases. It receives no Anthropic key. `phase=round2-replay` forbids
-provider transport and replays only retained scientific decisions. Completed
+provider transport and replays only retained scientific decisions. Its cache
+reader cannot modify caches, provider pauses, events, or spending. Replay receipts
+cover both route contracts and exact result-file hashes; new results may extend
+coverage only while every previously covered file remains byte-identical. Missing
+or modified evidence fails closed and preserves the prior receipt. Completed
 case/phase contracts fail closed on identity mismatch; a late workflow failure
 does not authorize a new trial, altered holdouts, or reset spending. Promotion
 still requires independent source/claim review, matched useful-output comparison,

@@ -7,7 +7,7 @@ from pathlib import Path
 import time
 
 from tools import evaluate_offline_ai as original
-from tools.offline_ai import Client, Ledger, ConfigurationFailure, atomic_json, config, identity
+from tools.offline_ai import Client, Ledger, ConfigurationFailure, atomic_json, compatible_model, config, identity
 
 PROTOCOL = Path('evaluation/offline_team_prompt_repair_frozen.json')
 GRANT_EVENT = 'team_prompt_repair_2_baseline_authorization_consumed'
@@ -125,11 +125,27 @@ def metrics(cases, rows):
         'proposed': sum(row['state'] == 'proposed' for row in rows)}
 
 
+class ReplayClient:
+    """Inspect exact completed cache entries without credentials, transport or ledger writes."""
+    def __init__(self, cache):
+        self.cache = cache
+
+    def json(self, route, stage, prompt, data, schema, validate, *, stage_config=None):
+        key = identity({'route': route, 'stage': stage,
+            'config': stage_config or config()['stages'][stage], 'prompt': prompt,
+            'schema': schema, 'inputs': data})
+        try:
+            cached = json.loads((self.cache / (key + '.json')).read_bytes())
+            if (cached['key'] != key or cached.get('status') == 'refusal'
+                    or not compatible_model(route['model'], cached['returned_model'])):
+                raise ValueError('Replay cache provenance mismatch')
+            return validate(cached['value'])
+        except (OSError, ValueError, TypeError, KeyError) as error:
+            raise ValueError('Replay requires an intact validated stage cache: ' + key) from error
+
+
 def replay(client, directory, protocol, cases):
-    before = len(client.ledger.read()['requests'])
-    def forbidden(*args, **kwargs):
-        raise AssertionError('Prompt-repair replay attempted a provider request')
-    client.post = forbidden
+    readonly = ReplayClient(client.cache)
     count = 0
     for route in ('sonnet', 'luna'):
         for case in cases:
@@ -137,16 +153,20 @@ def replay(client, directory, protocol, cases):
             if not path.exists():
                 continue
             retained = json.loads(path.read_bytes())
-            if retained['evaluation_contract'] != contract(protocol, route):
+            if (retained.get('evaluation_contract') != contract(protocol, route)
+                    or retained.get('case_hash') != identity(case) or retained.get('route') != route):
                 raise ValueError('Replay contract mismatch')
             if retained['state'] not in original.SCIENTIFIC_STATES:
                 continue
-            value = original.team_case(TrialClient(client, protocol, route), route, case)
-            if any(value[key] != retained[key] for key in ('state', 'stages')):
+            value = original.team_case(TrialClient(readonly, protocol, route), route, case)
+            value.update(case_hash=identity(case), route=route, evaluation_contract=contract(protocol, route))
+            if value != retained:
                 raise ValueError('Completed prompt-repair decision changed during replay')
             count += 1
+    if not count:
+        raise ValueError('Replay requires retained scientific decisions')
     return {'completed_scopes_replayed': count,
-            'new_provider_requests': len(client.ledger.read()['requests']) - before}
+            'new_provider_requests': 0}
 
 
 def replay_inputs(directory, cases):
@@ -179,17 +199,21 @@ def main():
     if phase == 'replay':
         inputs = replay_inputs(directory, cases)
         expected = identity({'trial': expected, 'result_files': inputs,
-                             'replay_validator': original.function_hash(replay)})
+            'route_contracts': {name: contract(protocol, name) for name in ('sonnet', 'luna')},
+            'replay_validator': original.function_hash(replay),
+            'cache_validator': original.function_hash(ReplayClient.json)})
     marker = directory / (phase + '-completed.json')
     client = Client(ledger, args.state / 'cache', deadline=time.monotonic() + 2400)
-    result, complete = None, False
+    result, complete, superseded = None, False, None
     try:
         retained = json.loads(marker.read_bytes()) if marker.exists() else None
         if retained and phase == 'replay' and retained.get('evaluation_contract') != expected:
-            # Later completed results need a new zero-call proof. Keep the
-            # earlier subset receipt as history; never relabel its coverage.
-            atomic_json(directory / 'history' / ('replay-' + identity(retained) + '.json'), retained)
-            marker.unlink()
+            covered = retained.get('result', {}).get('result_file_hashes')
+            if not covered or any(inputs.get(name) != digest for name, digest in covered.items()):
+                raise ValueError('Previously replayed evidence is missing or changed')
+            # Extend intact evidence or recheck under current validation code.
+            # Preserve the prior receipt until the replacement proof succeeds.
+            superseded = retained
             retained = None
         if retained is not None:
             if retained.get('evaluation_contract') != expected:
@@ -224,6 +248,8 @@ def main():
                    'complete': complete, 'result': result}
         atomic_json(directory / (phase + '-receipt.json'), receipt)
         if complete:
+            if superseded:
+                atomic_json(directory / 'history' / ('replay-' + identity(superseded) + '.json'), superseded)
             atomic_json(marker, receipt)
         atomic_json(args.state / 'usage-summary.json', ledger.summary())
         if os.environ.get('GITHUB_STEP_SUMMARY'):
