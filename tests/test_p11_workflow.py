@@ -24,14 +24,14 @@ class P11WorkflowTests(unittest.TestCase):
 
     def test_anthropic_secret_is_scoped_to_document_evidence_and_team_generation(self):
         source = WORKFLOW.read_text(encoding="utf-8")
-        self.assertEqual(source.count("secrets.ANTHROPIC_API_KEY"), 2)
+        self.assertEqual(source.count("secrets.ANTHROPIC_API_KEY"), 3)
         document = self.document_step()
         self.assertIn(
             "        env:\n          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}",
             document,
         )
         for step in self.steps():
-            if "id: document_evidence" in step or "name: Generate bounded new and changed proposed teams" in step:
+            if "id: document_evidence" in step or "name: Generate bounded new and changed proposed teams" in step or "name: Run only bounded selected team work" in step:
                 continue
             self.assertNotIn("ANTHROPIC_API_KEY", step)
         job_preamble = source.split("      - name:", 1)[0]

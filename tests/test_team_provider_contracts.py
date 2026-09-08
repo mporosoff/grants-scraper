@@ -15,15 +15,37 @@ import requests
 
 from scripts import build_opportunity_teams as teams
 from scripts.researcher_registry import content_hash, load_registry
+from tools.offline_ai import Ledger, Client, config, identity
+from tools.offline_team_contract import schemas
+from tools.team_provider import routes, stage_settings
 from tests import test_build_opportunity_teams as fixture_tests
 
 
 def response(value):
-    return {"stop_reason": "end_turn", "content": [{"type": "text", "text": json.dumps(value)}]}
+    return {"model": teams.MODEL, "usage": {"input_tokens": 100, "output_tokens": 100}, "stop_reason": "end_turn", "content": [{"type": "text", "text": json.dumps(value)}]}
 
 
 class TeamProviderContracts(unittest.TestCase):
-    setUp = fixture_tests.ProposedTeamTests.setUp
+    def setUp(self):
+        fixture_tests.ProposedTeamTests.setUp(self)
+        self.addCleanup(patch.stopall)
+        patch.dict(os.environ, {'ANTHROPIC_API_KEY': 'synthetic-key'}).start()
+
+    def provider(self, directory, **kwargs):
+        ledger = Ledger(Path(directory) / 'spend' / 'ledger.json', 'fixture', 2)
+        return teams.Provider(directory, ledger=ledger, **kwargs)
+
+    def cache_path(self, provider, prompt, data):
+        stage = {teams.DECOMPOSE: 'decomposition', teams.ADJUDICATE: 'adjudication', teams.VERIFY: 'verification'}[prompt]
+        key = identity({'route': routes()[stage], 'stage': stage, 'config': stage_settings(stage),
+                        'prompt': prompt, 'schema': schemas()[stage], 'inputs': data})
+        path = provider.ledger.path.parent / 'team-responses' / (key + '.json')
+        path.parent.mkdir(exist_ok=True)
+        return path
+
+    def llm_summary(self, provider):
+        return next(iter(provider.ledger.summary()['by_provider_model_stage'].values()))
+
 
     def test_decision_flags_and_negative_shapes_are_explicit(self):
         negative = {"specific": False, "objective": "A broad scientific program", "roles": []}
@@ -59,78 +81,78 @@ class TeamProviderContracts(unittest.TestCase):
                 if prompt == teams.VERIFY:
                     value["suitable_for_team"] = True
                 with tempfile.TemporaryDirectory() as directory, patch.object(teams.time, "sleep"), self.subTest(prompt=prompt, altered=altered):
-                    provider = teams.Provider(directory)
-                    with patch.object(provider, "post", return_value=response(value)) as post, self.assertRaises(ValueError):
+                    provider = self.provider(directory)
+                    with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: response(value))) as post, self.assertRaises(ValueError):
                         provider.json(prompt, data)
                     self.assertEqual(post.call_count, 3)
-                    self.assertEqual(list(Path(directory).iterdir()), [])
+                    self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
         data["proposed_edges"] = [self.edges[0] | {"coverage": "adjacent"}]
         with tempfile.TemporaryDirectory() as directory, patch.object(teams.time, "sleep"):
-            provider = teams.Provider(directory)
-            with patch.object(provider, "post", return_value=response({"suitable_for_team": True, "edges": self.edges[:1]})), self.assertRaisesRegex(ValueError, "upgrade"):
+            provider = self.provider(directory)
+            with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: response({"suitable_for_team": True, "edges": self.edges[:1]}))), self.assertRaisesRegex(ValueError, "upgrade"):
                 provider.json(teams.VERIFY, data)
-            self.assertEqual(list(Path(directory).iterdir()), [])
+            self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
 
     def test_poisoned_cache_is_evicted_and_success_is_validated_then_reused(self):
         data = {"scope": self.scope["text"], "record_type": self.scope["record_type"]}
         for poison in ("{", "{}", json.dumps(self.decomposition | {"roles": []})):
             with tempfile.TemporaryDirectory() as directory, self.subTest(poison=poison):
-                provider = teams.Provider(directory)
-                path = provider.cache / (content_hash([teams.RESPONSE_VERSION, teams.MODEL, teams.DECOMPOSE, data]) + ".json")
+                provider = self.provider(directory)
+                path = self.cache_path(provider, teams.DECOMPOSE, data)
                 path.write_text(poison, encoding="utf-8")
-                with patch.object(provider, "post", return_value=response(self.decomposition)) as post:
+                with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: response(self.decomposition))) as post:
                     self.assertEqual(provider.json(teams.DECOMPOSE, data), self.decomposition)
                     self.assertEqual(provider.json(teams.DECOMPOSE, data), self.decomposition)
                 self.assertEqual(post.call_count, 1)
-                self.assertEqual(provider.counters["invalid_cache_entries"], 1)
-                self.assertEqual(provider.counters["cache_hits"], 1)
-                self.assertEqual(json.loads(path.read_text()), self.decomposition)
+                self.assertEqual(sum(e["event"] == "cache_miss" for e in provider.ledger.read()["events"]), 1)
+                self.assertEqual(sum(e["event"] == "cache_hit" for e in provider.ledger.read()["events"]), 1)
+                self.assertEqual(json.loads(path.read_text())["value"], self.decomposition)
 
     def test_invalid_output_retries_are_bounded_and_never_admit_a_negative(self):
         data = {"scope": self.scope["text"], "record_type": self.scope["record_type"]}
         invalid_quote = copy.deepcopy(self.decomposition)
         invalid_quote["roles"][0]["quote"] = "Invented unsupported scientific requirement."
-        for payload in (response({}), response(invalid_quote), {"stop_reason": "max_tokens"},
-                        {"stop_reason": "end_turn", "content": [{"type": "text", "text": "{"}]},
-                        {"stop_reason": "end_turn", "content": None}, []):
+        for payload in (response({}), response(invalid_quote), response({}) | {"stop_reason": "max_tokens"},
+                        response({}) | {"content": [{"type": "text", "text": "{"}]},
+                        response({}) | {"content": None}, []):
             with tempfile.TemporaryDirectory() as directory, patch.object(teams.time, "sleep") as sleep, self.subTest(payload=payload):
-                provider = teams.Provider(directory)
-                with patch.object(provider, "post", return_value=payload) as post, self.assertRaises(ValueError):
+                provider = self.provider(directory)
+                with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: payload)) as post, self.assertRaises(ValueError):
                     provider.json(teams.DECOMPOSE, data)
                 self.assertEqual(post.call_count, 3)
-                self.assertEqual(provider.counters["invalid_outputs"], 3)
+                self.assertEqual(self.llm_summary(provider)["failures"], 3)
                 self.assertEqual([call.args[0] for call in sleep.call_args_list], [1, 2])
-                self.assertEqual(list(Path(directory).iterdir()), [])
+                self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
 
     def test_valid_scientific_negative_is_cached_and_revalidated(self):
         data = {"scope": self.scope["text"], "record_type": self.scope["record_type"]}
         negative = {"specific": False, "objective": "A broad scientific program", "roles": []}
         with tempfile.TemporaryDirectory() as directory:
-            provider = teams.Provider(directory)
-            with patch.object(provider, "post", return_value=response(negative)) as post:
+            provider = self.provider(directory)
+            with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: response(negative))) as post:
                 for _ in range(2):
                     result, proposal = teams.generate_scope(self.scope, provider, self.claims, [], "registry", float("inf"))
                     self.assertEqual(result["state"], "not_specific")
                     self.assertIsNone(proposal)
             self.assertEqual(post.call_count, 1)
-            with patch.object(teams, "validate_response", side_effect=ValueError("contract changed")), patch.object(teams.time, "sleep"), patch.object(provider, "post", return_value=response(negative)), self.assertRaises(ValueError):
+            with patch.object(teams, "validate_response", side_effect=ValueError("contract changed")), patch.object(teams.time, "sleep"), patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: response(negative))), self.assertRaises(ValueError):
                 provider.json(teams.DECOMPOSE, data)
-            self.assertEqual(list(Path(directory).iterdir()), [])
+            self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
 
     def test_timeouts_count_actual_network_attempts_and_do_not_leak_messages(self):
         with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {"ANTHROPIC_API_KEY": "synthetic-key"}), patch.object(teams.time, "sleep"):
-            provider = teams.Provider(directory)
+            provider = self.provider(directory)
             with patch.object(teams.requests, "post", side_effect=requests.Timeout("private request text must not appear")) as post:
                 result, proposal = teams.generate_scope(self.scope, provider, self.claims, [], "registry", float("inf"))
-            self.assertEqual((provider.calls, provider.counters["failed_requests"], post.call_count), (3, 3, 3))
-            self.assertEqual(provider.counters["retries"], 2)
+            self.assertEqual((provider.calls, self.llm_summary(provider)["failures"], post.call_count), (3, 3, 3))
+            self.assertEqual(self.llm_summary(provider)["retries"], 2)
             self.assertEqual(result["state"], "unavailable")
             self.assertNotIn("private", json.dumps(result))
             self.assertIsNone(proposal)
 
     def test_authentication_failure_is_not_retried_by_current_or_later_scopes(self):
         with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {"ANTHROPIC_API_KEY": "synthetic-key"}), patch.object(teams.time, "sleep") as sleep:
-            provider = teams.Provider(directory)
+            provider = self.provider(directory)
             with patch.object(teams.requests, "post", return_value=Mock(status_code=401)) as post:
                 for _ in range(2):
                     result, _ = teams.generate_scope(self.scope, provider, self.claims, [], "registry", float("inf"))
@@ -140,7 +162,7 @@ class TeamProviderContracts(unittest.TestCase):
 
     def test_request_budget_counts_retries_and_stops_before_an_extra_call(self):
         with tempfile.TemporaryDirectory() as directory, patch.dict(os.environ, {"ANTHROPIC_API_KEY": "synthetic-key"}), patch.object(teams.time, "sleep"):
-            provider = teams.Provider(directory, max_requests=2)
+            provider = self.provider(directory, max_requests=2)
             with patch.object(teams.requests, "post", side_effect=requests.Timeout) as post:
                 result, _ = teams.generate_scope(self.scope, provider, self.claims, [], "registry", float("inf"))
             self.assertEqual(post.call_count, 2)
@@ -149,7 +171,7 @@ class TeamProviderContracts(unittest.TestCase):
 
     def test_concurrent_cache_writes_only_publish_complete_values(self):
         with tempfile.TemporaryDirectory() as directory:
-            provider = teams.Provider(directory)
+            provider = self.provider(directory)
             path = provider.cache / "shared.json"
             values = [{"worker": i, "payload": [i] * 2000} for i in range(20)]
             def write(value):
@@ -158,11 +180,11 @@ class TeamProviderContracts(unittest.TestCase):
                 self.assertIn(actual, values)
             with ThreadPoolExecutor(max_workers=4) as executor:
                 list(executor.map(write, values))
-            self.assertEqual(list(Path(directory).iterdir()), [path])
+            self.assertEqual([p for p in Path(directory).iterdir() if p.is_file()], [path])
 
     def test_temporarily_unreadable_cache_is_a_miss_and_recovers_without_deletion(self):
         with tempfile.TemporaryDirectory() as directory:
-            provider = teams.Provider(directory)
+            provider = self.provider(directory)
             path = provider.cache / 'shared.json'
             provider.write_cache(path, {'edges': []})
             validate = lambda value: teams.validate_response(teams.ADJUDICATE,
@@ -176,7 +198,7 @@ class TeamProviderContracts(unittest.TestCase):
     def test_embedding_cache_corruption_and_failed_calls_recover(self):
         vector = [1.0] + [0.0] * 1023
         with tempfile.TemporaryDirectory() as directory, patch.object(teams.time, "sleep"):
-            provider = teams.Provider(directory)
+            provider = self.provider(directory)
             # Space establishment is covered independently by the incremental contracts.
             provider.space_identity = "synthetic-established-space"
             path = provider.cache / (provider.embedding_key(["Synthetic claim"], "document") + ".vectors.json")
@@ -200,7 +222,7 @@ class TeamProviderContracts(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory, chdir(directory):
             path = Path("receipt.json")
             path.write_text('{"status":"completed","run_id":"old"}', encoding="utf-8")
-            with patch("sys.argv", ["teams", "--generate", "--report", str(path)]), patch.object(teams, "load_registry", side_effect=ValueError("invalid registry")), self.assertRaises(ValueError):
+            with patch("sys.argv", ["teams", "--generate", "--state", ".spend/fixture", "--report", str(path)]), patch.object(teams, "load_registry", side_effect=ValueError("invalid registry")), self.assertRaises(ValueError):
                 teams.main()
             report = json.loads(path.read_text())
             self.assertEqual(report["status"], "starting")
@@ -230,8 +252,8 @@ class TeamProviderContracts(unittest.TestCase):
     def test_cache_dependencies_include_claim_ownership_revision_and_evidence(self):
         payload = {"roles": self.roles, "claims": list(self.claims.values())}
         with tempfile.TemporaryDirectory() as directory:
-            provider = teams.Provider(directory)
-            with patch.object(provider, "post", return_value=response({"edges": []})) as post:
+            provider = self.provider(directory)
+            with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: response({"edges": []}))) as post:
                 provider.json(teams.ADJUDICATE, payload)
                 provider.json(teams.ADJUDICATE, payload)
                 for field, value in (("revision", 2), ("researcher_id", "corrected-owner"),
@@ -266,7 +288,7 @@ class TeamProviderContracts(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory, chdir(directory), redirect_stdout(io.StringIO()):
             Path("config").mkdir()
             Path("config/opportunity_team_model.json").write_text(json.dumps(model), encoding="utf-8")
-            with patch("sys.argv", ["teams", "--generate", "--write"]), patch.object(teams, "load_registry", return_value=registry), patch.object(teams, "scopes", return_value=candidates), patch.object(teams, "source_fingerprints", return_value=baseline), patch.object(teams.Provider, "embed", side_effect=teams.ProviderUnavailable("synthetic outage")), patch.object(teams, "update_version_target"), patch.object(teams, "write_outputs") as write:
+            with patch("sys.argv", ["teams", "--generate", "--state", ".spend/fixture", "--write"]), patch.object(teams, "load_registry", return_value=registry), patch.object(teams, "scopes", return_value=candidates), patch.object(teams, "source_fingerprints", return_value=baseline), patch.object(teams.Provider, "embed", side_effect=teams.ProviderUnavailable("synthetic outage")), patch.object(teams, "update_version_target"), patch.object(teams, "write_outputs") as write:
                 self.assertEqual(teams.main(), 1)
             published = {r["id"]: r for r in write.call_args.args[0]["opportunities"]}
             self.assertEqual(published[source["id"]]["review_state"], "needs_revalidation")

@@ -8,10 +8,10 @@ on:
   workflow_dispatch:
     inputs:
       stage:
-        description: Generate once, reuse current data with new runtime, or resume a persisted checkpoint
+        description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [generate, reuse, validate, publish, verify]
-        default: generate
+        options: [auto, generate, teams, backfill, reuse, validate, publish, verify]
+        default: auto
         required: true
       candidate_run:
         description: Artifact-owning run ID (required for validate, publish and verify)
@@ -44,18 +44,28 @@ concurrency:
 
 jobs:
   plan:
-    if: >-
-      github.ref == 'refs/heads/main' &&
-      (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore: publish Funding Finder candidate'))
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
       stage: ${{ steps.plan.outputs.stage }}
+      release_sha: ${{ steps.plan.outputs.release_sha }}
+      team_mode: ${{ steps.plan.outputs.team_mode }}
+      receipt_run: ${{ steps.plan.outputs.receipt_run }}
+      publication_run: ${{ steps.plan.outputs.publication_run }}
+      publication_attempt: ${{ steps.plan.outputs.publication_attempt }}
+      openai: ${{ steps.plan.outputs.openai }}
+      anthropic: ${{ steps.plan.outputs.anthropic }}
       candidate_run: ${{ steps.plan.outputs.candidate_run }}
       candidate_id: ${{ steps.plan.outputs.candidate_id }}
     steps:
       - uses: actions/checkout@v6
         with:
           ref: main
+          fetch-depth: 0
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.txt
       - name: Resolve explicit lifecycle checkpoint
         id: plan
         shell: bash
@@ -66,30 +76,13 @@ jobs:
           RECEIPT_RUN: ${{ inputs.receipt_run }}
           PUBLICATION_RUN: ${{ inputs.publication_run }}
           PUBLICATION_ATTEMPT: ${{ inputs.publication_attempt }}
-          HEAD_MESSAGE: ${{ github.event.head_commit.message }}
-        run: |
-          python - <<'PY'
-          import json, os, re
-          from pathlib import Path
-          event = os.environ['GITHUB_EVENT_NAME']
-          stage = 'reuse' if event == 'push' else 'generate' if event == 'schedule' else os.environ['REQUESTED_STAGE']
-          if event == 'push' and os.environ['HEAD_MESSAGE'].startswith('Publish approved researcher registry change'):
-              stage = 'generate'
-          run, identity = os.environ['CANDIDATE_RUN'], os.environ['CANDIDATE_ID']
-          if stage == 'reuse' and not run and not identity:
-              pointer = json.loads(Path('release/candidate-source.json').read_bytes())
-              run, identity = pointer['artifact_run'], pointer['candidate_id']
-          if stage != 'generate' and (not re.fullmatch(r'[1-9][0-9]*', run) or not re.fullmatch(r'[a-f0-9]{64}', identity)):
-              raise SystemExit('Resume requires an exact retained candidate run and identity')
-          if stage == 'verify' and not re.fullmatch(r'[1-9][0-9]*', os.environ['RECEIPT_RUN']):
-              raise SystemExit('Live verification requires a validation receipt run')
-          if stage == 'verify' and not re.fullmatch(r'[1-9][0-9]*', os.environ['PUBLICATION_RUN']):
-              raise SystemExit('Live verification requires the expected publication checkpoint run')
-          if os.environ['PUBLICATION_ATTEMPT'] and not re.fullmatch(r'[1-9][0-9]*', os.environ['PUBLICATION_ATTEMPT']):
-              raise SystemExit('Invalid publication attempt')
-          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
-              output.write(f'stage={stage}\ncandidate_run={run}\ncandidate_id={identity}\n')
-          PY
+          GH_TOKEN: ${{ github.token }}
+        run: python -m tools.plan_release
+      - uses: actions/upload-artifact@v4
+        with:
+          name: release-plan-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/release-plan.json
+          retention-days: 90
 
   generate:
     needs: plan
@@ -102,7 +95,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ needs.plan.outputs.release_sha }}
           fetch-depth: 0
       - uses: ./.github/actions/release-setup
       - name: Restore an already persisted generation on workflow rerun
@@ -110,6 +103,28 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: python -m tools.restore_generation_checkpoint
+      - name: Restore the logical spend checkpoint
+        if: steps.restore.outputs.candidate_id == ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
+        run: >-
+          python -m tools.generation_spend_checkpoint --mode "$TEAM_MODE"
+          --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}"
+          --reservation "$RUNNER_TEMP/spend-reservation.json"
+      - name: Reserve the complete logical allowance before provider dispatch
+        if: steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-spend-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/spend-reservation.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Pin the prior accepted scope snapshot before changes
+        if: steps.restore.outputs.candidate_id == ''
+        run: |
+          python -m tools.team_maintenance --snapshot-before "$RUNNER_TEMP/accepted-scopes.json"
+          python -m tools.release_coverage --snapshot-before "$RUNNER_TEMP/coverage-before.json"
       - name: Preserve the prior catalog for change detection
         if: steps.restore.outputs.candidate_id == ''
         shell: bash
@@ -161,8 +176,10 @@ jobs:
         continue-on-error: true
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          OFFLINE_AI_STATE: ${{ runner.temp }}/offline-${{ github.run_id }}
+          TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
         run: >-
-          python -m scripts.extract_document_evidence
+          python -m tools.run_budgeted_documents
           --catalog data/opportunities.js
           --cache data/document_evidence.json
           --max-documents 45
@@ -186,7 +203,7 @@ jobs:
           --version-target team_match.html
       - name: Invalidate proposed teams whose public scope or researcher evidence changed
         if: steps.restore.outputs.candidate_id == ''
-        run: python -m scripts.build_opportunity_teams --write
+        run: python -m scripts.build_opportunity_teams --write --baseline "$RUNNER_TEMP/accepted-scopes.json"
       - name: Restore public-evidence team-generation cache
         if: steps.restore.outputs.candidate_id == ''
         uses: actions/cache@v4
@@ -200,9 +217,14 @@ jobs:
         timeout-minutes: 20
         continue-on-error: true
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ needs.plan.outputs.anthropic == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
+          OPENAI_API_KEY: ${{ needs.plan.outputs.openai == 'true' && secrets.OPENAI_API_KEY || '' }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
-        run: python -m scripts.build_opportunity_teams --generate --max-scopes 60 --workers 3 --write
+          TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
+        run: >-
+          python -m scripts.build_opportunity_teams --generate --max-scopes 60 --workers 3 --write
+          --mode "$TEAM_MODE" --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}"
+          --baseline "$RUNNER_TEMP/accepted-scopes.json"
       - name: Report automatic team coverage and remaining work
         if: steps.restore.outputs.candidate_id == '' && always()
         env:
@@ -257,6 +279,9 @@ jobs:
       - name: Regenerate catalog statistics in project documentation
         if: steps.restore.outputs.candidate_id == ''
         run: python -m scripts.update_catalog_docs
+      - name: Record current developer coverage and deltas
+        if: steps.restore.outputs.candidate_id == ''
+        run: python -m tools.release_coverage --previous "$RUNNER_TEMP/coverage-before.json"
       - name: Build compatible production document vectors
         if: steps.restore.outputs.candidate_id == ''
         id: semantic-vectors
@@ -288,6 +313,15 @@ jobs:
           path: ${{ runner.temp }}/candidate
           include-hidden-files: true
           if-no-files-found: error
+          retention-days: 90
+      - name: Retain spend and completed safe stages after any outcome
+        if: always() && steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-spend-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/offline-${{ github.run_id }}
+          include-hidden-files: true
+          if-no-files-found: warn
           retention-days: 90
       - name: Alert the project owner about a degraded external source
         if: >-
@@ -384,17 +418,24 @@ jobs:
 
   assemble:
     needs: plan
-    if: needs.plan.outputs.stage == 'reuse'
+    if: contains(fromJSON('["reuse","teams","backfill"]'), needs.plan.outputs.stage)
     runs-on: ubuntu-latest
+    timeout-minutes: 45
     outputs:
-      candidate_id: ${{ steps.persist.outputs.candidate_id }}
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ needs.plan.outputs.release_sha }}
           fetch-depth: 0
       - uses: ./.github/actions/release-setup
+      - name: Restore a completed derived candidate on workflow rerun
+        id: restore
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m tools.restore_generation_checkpoint
       - name: Load the currently published candidate for data reuse
+        if: steps.restore.outputs.candidate_id == ''
         env:
           GH_TOKEN: ${{ github.token }}
           CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
@@ -402,27 +443,93 @@ jobs:
         run: >-
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/previous-candidate"
-      - name: Verify generation dependencies and existing data bytes without provider work
+      - name: Verify and materialize unchanged source and semantic inputs
+        if: steps.restore.outputs.candidate_id == ''
+        env:
+          TEAM_UPDATE: ${{ needs.plan.outputs.stage != 'reuse' && '--team-update' || '' }}
+        run: python -m tools.assemble_release_candidate --bundle "$RUNNER_TEMP/previous-candidate" $TEAM_UPDATE
+      - name: Restore the logical spend checkpoint
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
+        run: >-
+          python -m tools.generation_spend_checkpoint --mode "$TEAM_MODE"
+          --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}"
+          --reservation "$RUNNER_TEMP/spend-reservation.json"
+      - name: Reserve the complete logical allowance before provider dispatch
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-spend-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/spend-reservation.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Pin the prior accepted scope snapshot before changes
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
         run: |
-          python -m tools.release_candidate dependencies --bundle "$RUNNER_TEMP/previous-candidate"
-          python -m tools.assemble_release_candidate --bundle "$RUNNER_TEMP/previous-candidate"
+          python -m tools.team_maintenance --snapshot-before "$RUNNER_TEMP/accepted-scopes.json"
+          python -m tools.release_coverage --snapshot-before "$RUNNER_TEMP/coverage-before.json"
+      - name: Restore optional public-derived team response and retrieval cache
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        uses: actions/cache@v4
+        with:
+          path: .cache/opportunity-teams
+          key: opportunity-teams-${{ runner.os }}-${{ github.run_id }}
+          restore-keys: opportunity-teams-${{ runner.os }}-
+      - name: Run only bounded selected team work on the pinned catalog
+        timeout-minutes: 20
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        continue-on-error: true
+        env:
+          ANTHROPIC_API_KEY: ${{ needs.plan.outputs.anthropic == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
+          OPENAI_API_KEY: ${{ needs.plan.outputs.openai == 'true' && secrets.OPENAI_API_KEY || '' }}
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+          TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
+        run: >-
+          python -m scripts.build_opportunity_teams --generate --write --mode "$TEAM_MODE"
+          --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}" --baseline "$RUNNER_TEMP/accepted-scopes.json"
+      - name: Rebuild current researcher projections without provider work
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        run: python -m tools.team_maintenance --rebuild-projections
+      - name: Record current developer coverage
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        run: python -m tools.release_coverage --previous "$RUNNER_TEMP/coverage-before.json"
+      - name: Prove a warm replay with new selection disabled
+        if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        run: python -m tools.replay_team_maintenance
+
       - name: Assemble runtime compatibility metadata around unchanged generated data
+        if: steps.restore.outputs.candidate_id == ''
         run: node tools/build_search_release_package.mjs --write
       - name: Persist derived candidate with original generation provenance
         id: persist
-        run: python -m tools.release_candidate create --bundle "$RUNNER_TEMP/candidate" --parent "$RUNNER_TEMP/previous-candidate"
+        if: steps.restore.outputs.candidate_id == ''
+        env:
+          TEAM_UPDATE: ${{ needs.plan.outputs.stage != 'reuse' && '--team-update' || '' }}
+        run: python -m tools.release_candidate create --bundle "$RUNNER_TEMP/candidate" --parent "$RUNNER_TEMP/previous-candidate" $TEAM_UPDATE
       - uses: actions/upload-artifact@v4
+        if: steps.restore.outputs.candidate_id == ''
         with:
           name: candidate-${{ steps.persist.outputs.candidate_id }}
           path: ${{ runner.temp }}/candidate
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
+      - name: Retain spend and completed safe stages after any outcome
+        if: always() && steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
+        uses: actions/upload-artifact@v4
+        with:
+          name: generation-spend-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/offline-${{ github.run_id }}
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
 
   candidate:
     needs: [plan, generate, assemble]
     if: >-
-      always() && needs.plan.result == 'success' &&
+      always() && needs.plan.result == 'success' && needs.plan.outputs.stage != 'noop' &&
       (needs.generate.result == 'success' || needs.assemble.result == 'success' ||
        (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped'))
     runs-on: ubuntu-latest
@@ -453,11 +560,11 @@ jobs:
       GH_TOKEN: ${{ github.token }}
       CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
       CANDIDATE_RUN: ${{ needs.candidate.outputs.candidate_run }}
-      RECEIPT_RUN: ${{ inputs.receipt_run }}
+      RECEIPT_RUN: ${{ needs.candidate.outputs.candidate_id == needs.plan.outputs.candidate_id && needs.plan.outputs.receipt_run || '' }}
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ needs.plan.outputs.release_sha }}
           fetch-depth: 0
       - uses: ./.github/actions/release-setup
       - name: Load the exact persisted candidate
@@ -469,21 +576,14 @@ jobs:
           python -m tools.release_candidate verify --bundle "$RUNNER_TEMP/candidate" --candidate-id "$CANDIDATE_ID"
           python -m tools.release_candidate dependencies --bundle "$RUNNER_TEMP/candidate"
       - name: Load prior validation evidence for checkpoint reuse
-        if: inputs.receipt_run != ''
+        if: env.RECEIPT_RUN != ''
         run: >-
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$RECEIPT_RUN" --name "validation-$CANDIDATE_ID" --destination "$RUNNER_TEMP/previous-validation"
       - name: Validate a working copy of the persisted candidate or reuse its exact receipt
-        if: needs.plan.outputs.stage != 'verify'
         run: >-
           python -m tools.validate_release_candidate --bundle "$RUNNER_TEMP/candidate"
           --reports "$RUNNER_TEMP/reports" --previous "$RUNNER_TEMP/previous-validation/validation.json"
-      - name: Verify the existing receipt without rerunning gates for live verification
-        if: needs.plan.outputs.stage == 'verify'
-        run: |
-          python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/previous-validation/validation.json"
-          mkdir -p "$RUNNER_TEMP/reports"
-          cp "$RUNNER_TEMP/previous-validation/validation.json" "$RUNNER_TEMP/reports/validation.json"
       - name: Retain safe reports and receipt on success or failure
         if: always()
         uses: actions/upload-artifact@v4
@@ -509,7 +609,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ needs.plan.outputs.release_sha }}
           fetch-depth: 0
       - uses: ./.github/actions/release-setup
       - name: Load the exact validated candidate
@@ -551,6 +651,8 @@ jobs:
       - name: Verify the candidate-compatible Worker handshake
         run: python -m tools.verify_release_live worker --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke before publication
+        env:
+          FUNDING_RELEASE_INPUT_ROOT: ${{ runner.temp }}/candidate/files
         run: node tools/smoke_search_worker.mjs
       - name: Verify the active Worker fingerprint after deployment or retention
         env:
@@ -612,7 +714,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
         with:
-          ref: main
+          ref: ${{ needs.plan.outputs.release_sha }}
           fetch-depth: 0
       - uses: ./.github/actions/release-setup
       - name: Load published candidate for read-only live verification
@@ -621,8 +723,8 @@ jobs:
           --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
       - name: Load the expected publication receipt and its original validation evidence
         env:
-          PUBLICATION_RUN: ${{ needs.publish.result == 'success' && github.run_id || inputs.publication_run }}
-          PUBLICATION_ATTEMPT: ${{ needs.plan.outputs.stage == 'verify' && inputs.publication_attempt || '' }}
+          PUBLICATION_RUN: ${{ needs.publish.result == 'success' && github.run_id || needs.plan.outputs.publication_run }}
+          PUBLICATION_ATTEMPT: ${{ needs.plan.outputs.stage == 'verify' && needs.plan.outputs.publication_attempt || '' }}
         run: |
           artifact="publication-$CANDIDATE_ID"
           if [ -n "$PUBLICATION_ATTEMPT" ]; then artifact="$artifact-$PUBLICATION_ATTEMPT"; fi
@@ -636,6 +738,8 @@ jobs:
         run: python -m tools.verify_release_live verify --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke after Pages propagation
         id: live-provider
+        env:
+          FUNDING_RELEASE_INPUT_ROOT: ${{ runner.temp }}/candidate/files
         run: node tools/smoke_search_worker.mjs
       - name: Record the complete live result including provider smoke
         if: always()

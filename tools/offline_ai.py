@@ -1,209 +1,18 @@
-"""Direct offline model requests with durable, conservative application budgets.
-
-No SDK retries, provider fallback, secret discovery, or public-runtime routing.
-Only validated public-derived decisions enter the response cache. Usage is
-recorded before output parsing; an uncertain request consumes its reservation.
-"""
+"""Direct team/evaluation requests with validated complete-stage reuse."""
 from __future__ import annotations
-
-from contextlib import contextmanager
-from decimal import Decimal, ROUND_CEILING
-import hashlib
 import json
 import os
 from pathlib import Path
 import re
 import threading
 import time
-import uuid
-
 import requests
 
-ROOT = Path(__file__).resolve().parents[1]
-
-
-def encoded(value):
-    return json.dumps(value, sort_keys=True, separators=(",", ":"), ensure_ascii=False).encode()
-
-
-def identity(value):
-    return hashlib.sha256(encoded(value)).hexdigest()
-
-
-def atomic_json(path, value):
-    path = Path(path)
-    path.parent.mkdir(parents=True, exist_ok=True)
-    temp = path.with_name(path.name + "." + uuid.uuid4().hex + ".tmp")
-    try:
-        with temp.open("xb") as stream:
-            stream.write(encoded(value) + b"\n")
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temp, path)
-    finally:
-        temp.unlink(missing_ok=True)
-
-
-class Deferred(RuntimeError):
-    pass
-
-
-class ConfigurationFailure(Deferred):
-    pass
-
-
-class Refusal(RuntimeError):
-    pass
-
-
-class Incomplete(ValueError):
-    pass
-
-
-def config():
-    return json.loads((ROOT / "config/offline_ai.json").read_bytes())
-
-
-def normalize_usage(provider, payload):
-    raw = payload.get("usage") if isinstance(payload, dict) else None
-    if not isinstance(raw, dict):
-        return None
-    def count(name, source=raw, default=None):
-        value = source.get(name, default)
-        return value if type(value) is int and value >= 0 else None
-    incoming, outgoing = count("input_tokens"), count("output_tokens")
-    if incoming is None or outgoing is None:
-        return None
-    if provider == "openai":
-        cached = count("cached_tokens", raw.get("input_tokens_details") or {}, 0)
-        reasoning = count("reasoning_tokens", raw.get("output_tokens_details") or {})
-        if cached is None or cached > incoming or (reasoning is not None and reasoning > outgoing):
-            return None
-        return dict(input_tokens=incoming, cached_input_tokens=cached, cache_write_tokens=0,
-                    output_tokens=outgoing, reasoning_tokens=reasoning)
-    cached, written = count("cache_read_input_tokens", default=0), count("cache_creation_input_tokens", default=0)
-    if cached is None or written is None:
-        return None
-    # Anthropic reports uncached input separately. OpenAI includes cached input.
-    return dict(input_tokens=incoming + cached + written, cached_input_tokens=cached,
-                cache_write_tokens=written, output_tokens=outgoing, reasoning_tokens=None)
-
-
-def cost_microusd(usage, prices):
-    # One token at $1 / million tokens is one microdollar.
-    uncached = usage["input_tokens"] - usage["cached_input_tokens"] - usage["cache_write_tokens"]
-    total = sum(Decimal(str(prices[key])) * value for key, value in (
-        ("input", uncached), ("cached", usage["cached_input_tokens"]),
-        ("cache_write", usage["cache_write_tokens"]), ("output", usage["output_tokens"])))
-    return int(total.to_integral_value(rounding=ROUND_CEILING))
-
-
-class Ledger:
-    """Cross-thread/process atomic reservations; a stale lock fails closed.
-
-    Actions retains this ledger plus an outer full-run reservation artifact
-    before dispatch. A missing checkpoint never restores a spent allowance.
-    """
-    def __init__(self, path, logical_id, limit_usd, max_requests=300):
-        self.path = Path(path)
-        self.logical_id = logical_id
-        self.limit = int(Decimal(str(limit_usd)) * 1_000_000)
-        self.max_requests = max_requests
-        self.path.parent.mkdir(parents=True, exist_ok=True)
-        with self.locked():
-            if self.path.exists():
-                self.read()
-            else:
-                atomic_json(self.path, {"version": 1, "logical_id": logical_id, "limit_microusd": self.limit,
-                    "max_requests": max_requests, "requests": [], "events": [], "blocked_providers": {}})
-
-    @contextmanager
-    def locked(self):
-        lock = self.path.with_suffix(".lock")
-        deadline = time.monotonic() + 10
-        while True:
-            try:
-                fd = os.open(lock, os.O_CREAT | os.O_EXCL | os.O_WRONLY)
-                os.close(fd)
-                break
-            except FileExistsError:
-                if time.monotonic() >= deadline:
-                    raise Deferred("budget_lock_unavailable")
-                time.sleep(.01)
-        try:
-            yield
-        finally:
-            lock.unlink()
-
-    def read(self):
-        value = json.loads(self.path.read_bytes())
-        if (value.get("version") != 1 or value.get("logical_id") != self.logical_id
-                or value.get("limit_microusd") != self.limit or value.get("max_requests") != self.max_requests):
-            raise ValueError("logical_budget_identity_mismatch")
-        return value
-
-    def reserve(self, provider, model, stage, key, amount, attempt):
-        with self.locked():
-            state = self.read()
-            if provider in state["blocked_providers"]:
-                raise ConfigurationFailure(state["blocked_providers"][provider])
-            spent = sum(r["charged_microusd"] for r in state["requests"])
-            if spent + amount > self.limit or len(state["requests"]) >= self.max_requests:
-                raise Deferred("logical_budget_exhausted")
-            token = uuid.uuid4().hex
-            state["requests"].append({"id": token, "provider": provider, "model": model,
-                "stage": stage, "key": key, "attempt": attempt, "reserved_microusd": amount,
-                "charged_microusd": amount, "status": "reserved_unknown", "usage": None})
-            atomic_json(self.path, state)
-            return token
-
-    def complete(self, token, **result):
-        with self.locked():
-            state = self.read()
-            row = next(r for r in state["requests"] if r["id"] == token)
-            row.update(result)
-            atomic_json(self.path, state)
-
-    def block(self, provider, reason):
-        with self.locked():
-            state = self.read()
-            state["blocked_providers"][provider] = reason
-            atomic_json(self.path, state)
-
-    def event(self, **event):
-        with self.locked():
-            state = self.read()
-            state["events"].append(event)
-            atomic_json(self.path, state)
-
-    def summary(self):
-        with self.locked():
-            state = self.read()
-        groups = {}
-        for row in state["requests"]:
-            group = groups.setdefault("/".join(row[k] for k in ("provider", "model", "stage")),
-                {"attempts": 0, "retries": 0, "valid_completions": 0, "failures": 0,
-                 "unknown_usage_requests": 0, "charged_microusd": 0, "latency_ms": 0,
-                 "input_tokens": 0, "cached_input_tokens": 0, "cache_write_tokens": 0,
-                 "output_tokens": 0, "reasoning_tokens": 0, "reasoning_usage_unknown": 0})
-            group["attempts"] += 1
-            group["retries"] += row["attempt"] > 1
-            group["valid_completions"] += row["status"] == "valid"
-            group["failures"] += row["status"] != "valid"
-            group["charged_microusd"] += row["charged_microusd"]
-            group["latency_ms"] += row.get("latency_ms", 0)
-            if row["usage"] is None:
-                group["unknown_usage_requests"] += 1
-                continue
-            for key, value in row["usage"].items():
-                if value is not None:
-                    group[key] += value
-                elif key == "reasoning_tokens":
-                    group["reasoning_usage_unknown"] += 1
-        return {"logical_id": self.logical_id, "limit_usd": self.limit / 1e6,
-            "charged_usd": sum(r["charged_microusd"] for r in state["requests"]) / 1e6,
-            "by_provider_model_stage": groups, "events": state["events"],
-            "blocked_providers": state["blocked_providers"], "prices_verified_at": config()["prices_verified_at"]}
+from tools.offline_spend import (
+    ROOT, encoded, identity, atomic_json, Deferred, ConfigurationFailure, Refusal,
+    Incomplete, error_diagnostics, config, compatible_model, normalize_usage,
+    cost_microusd, Ledger,
+)
 
 
 def request_body(route, stage, prompt, data, schema):
@@ -217,6 +26,8 @@ def request_body(route, stage, prompt, data, schema):
 
 
 def response_value(provider, payload):
+    if not isinstance(payload, dict):
+        raise ValueError('invalid_response_envelope')
     if provider == "openai":
         parts = [part for item in payload.get("output", []) if item.get("type") == "message"
                  for part in item.get("content", [])]
@@ -230,7 +41,10 @@ def response_value(provider, payload):
             raise Refusal("provider_safety_refusal")
         if payload.get("stop_reason") != "end_turn":
             raise Incomplete("incomplete_response")
-        text = "".join(part.get("text", "") for part in payload.get("content", []) if part.get("type") == "text")
+        content = payload.get('content')
+        if not isinstance(content, list) or any(not isinstance(part, dict) for part in content):
+            raise ValueError('invalid_response_content')
+        text = "".join(part.get("text", "") for part in content if part.get("type") == "text")
         text = re.sub(r"^```(?:json)?\s*|\s*```$", "", text.strip())
     return json.loads(text)
 
@@ -259,10 +73,11 @@ class Client:
                     self.ledger.event(provider=route["provider"], model=route["model"], stage=stage_name,
                                       event="retained_refusal", key=key)
                     raise Refusal("retained_provider_safety_refusal")
-                if not cached["returned_model"]:
+                if not compatible_model(route['model'], cached['returned_model']):
                     raise ValueError("cache_model_identity_missing")
                 value = validate(cached["value"])
             except (FileNotFoundError, ValueError, TypeError, KeyError):
+                path.unlink(missing_ok=True)
                 self.ledger.event(provider=route["provider"], model=route["model"], stage=stage_name,
                                   event="cache_miss", key=key, reason="missing_or_invalid_exact_contract")
             else:
@@ -301,14 +116,24 @@ class Client:
                     latency = int((time.monotonic() - started) * 1000)
                     self.ledger.complete(token, http_status=response.status_code, latency_ms=latency)
                     if response.status_code in (400, 401, 403, 404, 422):
+                        self.ledger.complete(token, diagnostics=error_diagnostics(response))
                         reason = f"{provider}_configuration_http_{response.status_code}"
                         self.ledger.block(provider, reason)
                         raise ConfigurationFailure(reason)
                     if response.status_code != 200:
                         raise requests.RequestException(f"provider_http_{response.status_code}")
                     payload = response.json()
+                    if not isinstance(payload, dict):
+                        raise ValueError('invalid_response_envelope')
                     usage = normalize_usage(provider, payload)
-                    self.ledger.complete(token, usage=usage, returned_model=payload.get("model"),
+                    returned = payload.get('model')
+                    model_matches = compatible_model(route['model'], returned)
+                    self.ledger.complete(token, usage=usage, returned_model=returned,
+                        status='received_model_unverified')
+                    if not model_matches:
+                        self.ledger.block(provider, 'unexpected_returned_model_identity')
+                        raise ConfigurationFailure('unexpected_returned_model_identity')
+                    self.ledger.complete(token,
                         status="received_unvalidated", charged_microusd=cost_microusd(usage, price) if usage else amount)
                     value = validate(response_value(provider, payload))
                     if not isinstance(payload.get("model"), str) or not payload["model"]:

@@ -15,9 +15,12 @@ run/attempt/time, generation dependencies and command configuration, generated
 input/output identities, semantic space, team inputs, and Worker input hash.
 The candidate ID hashes the canonical manifest excluding the ID itself. Artifact
 downloads verify the workflow and protected main provenance, ID and every file.
-Artifacts are retained for 90 days; expired artifacts fail closed. Download or
-extend retention through existing GitHub controls before expiry when longer
-retention is needed. An expired artifact is never replaced with a cache.
+Artifacts are retained for 90 days. Missing or expired candidate artifacts may
+be reconstructed only from the exact protected publication whose candidate
+pointer, original artifact run, manifest identity and every committed file hash
+match. Missing receipts require validation again; they are never invented.
+Authentication failures, conflicting artifacts and corruption fail closed and
+never trigger recovery or generation. A cache cannot substitute for an artifact.
 
 Each validation attempt preserves `validation-<candidate>-<attempt>` containing
 safe machine-readable diagnostics and, only on success, `validation.json`.
@@ -40,6 +43,9 @@ Use the workflow dispatch `stage` input:
 
 | Stage | Required checkpoint | Work performed |
 | --- | --- | --- |
+| `auto` | Verified candidate/publication and current protected main | Pin one SHA and choose no-op, validate, reuse, team work or generation from dependency fingerprints |
+| `teams` | Current validated candidate | Bounded maintenance on pinned catalog/subtopics/researcher inputs; preserve source and vector bytes |
+| `backfill` | Current validated candidate | Manual historical coverage work, at most $5 per logical run; same publication owner |
 | `generate` | Current protected main | One complete bounded generation; persist, validate, publish and verify |
 | `reuse` | Current `release/candidate-source.json` | Verify generation inputs and data bytes; assemble current runtime around unchanged data, persist a derived candidate and release |
 | `validate` | `candidate_run`, full `candidate_id` | Load candidate, run current deterministic gates, retain reports/receipt |
@@ -63,15 +69,22 @@ It requests one new exact-head review only if one was not automatically started.
 Old approval reactions cannot validate the new head. Publication checks committed
 hashes even when a candidate marker is already present on main.
 
-The original failed run 34174544563 retained no artifacts, so it cannot be
-replayed. The first production candidate under this lifecycle requires a new
-generation after the infrastructure merge. This is also the bootstrap for the
-committed candidate pointer; an earlier UI push cannot manufacture provenance.
+Historical bootstrap: run 34174544563 retained no reusable artifact. Run
+34211041411 produced candidate `57924d144bfcc276713789a0ba04736e0b671da95e645b9c11cd5b12f35951f6`,
+published at `4011bac6a4877bb57d5e630cce7c0b77178a7fba` and verified by
+34224157715. These are historical exact identities, not a substitute for reading
+the current candidate and latest retained receipt.
 
 ## Dependency boundaries
 
-`config/release_dependencies.json` declares generation, output, runtime, Worker
-and validation inputs. Python comments/docstrings are excluded from semantic
+`config/release_dependencies.json` declares five dependency groups: source/catalog,
+researcher/teams, semantic vectors, runtime/package, and validation/publication.
+The planner pins main once and all jobs use that SHA. Ordinary pushes do not
+implicitly publish: unchanged release identity is a no-op; validator-only changes
+validate preserved bytes; runtime/Worker changes assemble a derived package;
+source or vector dependencies select generation; team changes select team-only
+work. A generated publication commit is recognized by verified content, not its
+commit message. Exact named resumes never switch candidates or select generation. Python comments/docstrings are excluded from semantic
 fingerprints. Generation command arguments and safe environment configuration
 are also hashed, so changing a budget/source parameter in workflow YAML cannot
 silently reuse stale data. Secret values, cache keys and orchestration are not
@@ -81,10 +94,23 @@ verification code does not invalidate generated data.
 Candidate baseline hashes distinguish unchanged source inputs from the exact
 candidate already merged. A third generation's data is rejected. Unrelated main
 advancement is accepted only after fingerprint verification; changed runtime
-requires `reuse` assembly, and generation-relevant changes require `generate`.
+requires `reuse` assembly. Source/vector changes require `generate`; team-only
+changes preserve catalog/evidence/passages/vectors and rebuild dependent team
+projections/package hashes. A derived candidate keeps its original source SHA
+and records new team-generation SHA/run/provider provenance separately. Model
+routing changes do not make still-valid scientific decisions stale.
 UI-only assembly does not run collection, extraction, teams or vectors. The
 Worker input fingerprint covers its complete source/config/allowlist; HTML and
 CSS do not redeploy a verified equivalent Worker.
+
+Document transport/cache and its shared spending implementation are source
+dependencies. Team request/response routing is separate, so a team-only provider
+switch does not invalidate catalog evidence. Introducing the document budget
+adapter requires one new source candidate; subsequent retries reuse its exact
+persisted bytes. A logical workflow rerun first looks for its already completed
+candidate. A valid publication receipt plus a successful Pages job from that
+exact artifact attempt resumes live verification, including any newly required
+validation, without repeating Worker preparation or Pages publication.
 
 Missing, conflicting or mixed serving provenance blocks publication. Health is
 only a compatibility handshake, never provenance. Changed Worker inputs deploy
@@ -127,8 +153,16 @@ Private notice-structure caches, raw source documents/email, provider caches and
 secrets are excluded. Notice diagnostics identify every changed record/field,
 with bounded public before/after values and hashes for truncated values.
 
-Team generation retains 60 scopes, three workers and its 20-minute bounded,
-deferred contract. Degraded sources/document evidence retain their established
+Team generation retains its upper bound of 60 scopes, three workers and a
+20-minute step. The first automatic rollout is only five pilot scopes/$2. Later
+maintenance is at most $2; historical backfill remains an explicit manual $5
+mode. The spend ledger and complete stage responses are retained before/after
+provider work, outside release candidates; reruns never reset the allowance.
+An empty maintenance queue makes zero team calls, including Voyage canaries.
+Catalog refresh performs deterministic invalidation and never fills spare
+maintenance capacity with historical backfill. README/PROJECT authored prose is
+not materialized from reused artifacts; only their bounded statistics updater
+may change their generated sections. Degraded sources/document evidence retain their established
 bounded alert semantics. Compatible vectors may be reused; model-space drift
 continues to force incompatible vectors to rebuild. This infrastructure does
 not alter scientific parsing, opportunity facts, relevance or browser behavior.

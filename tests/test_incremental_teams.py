@@ -38,7 +38,7 @@ def provider_response(url, json, **kwargs):
             value = {"edges": edges}
             if prompt == teams.VERIFY:
                 value["suitable_for_team"] = True
-        payload = {"stop_reason": "end_turn", "content": [{"type": "text", "text": __import__("json").dumps(value)}]}
+        payload = {"model": teams.MODEL, "usage": {"input_tokens": 100, "output_tokens": 100}, "stop_reason": "end_turn", "content": [{"type": "text", "text": __import__("json").dumps(value)}]}
     return Mock(status_code=200, json=lambda: payload)
 
 
@@ -53,13 +53,18 @@ class IncrementalTeams(unittest.TestCase):
         self.empty["opportunities"] = []
         self.empty["generation_attempts"] = {}
         self.empty.pop("discovery_queue", None)
+        self.empty.pop("accepted_scope_snapshot", None)
+        self.invocation = 0
         self.model_path.write_text(json.dumps(self.empty), encoding="utf-8")
 
     def run_main(self, **options):
+        self.invocation += 1
+        current = json.loads(self.model_path.read_text())
+        mode = options.pop('mode', 'maintenance' if current.get('accepted_scope_snapshot') else 'backfill')
         with chdir(self.root), redirect_stdout(io.StringIO()), patch.dict(os.environ, {
             "ANTHROPIC_API_KEY": "synthetic", "VOYAGE_API_KEY": "synthetic"}), patch.object(
                 teams.requests, "post", side_effect=options.pop("response", provider_response)) as post, patch(
-                    "sys.argv", ["teams", "--generate", "--write", "--workers", "1", *options.pop("args", [])]):
+                    "sys.argv", ["teams", "--generate", "--write", "--workers", "1", "--mode", mode, "--state", f".spend/run-{self.invocation}", *options.pop("args", [])]):
             code = teams.main()
         report = json.loads((self.root / "evaluation/opportunity_team_generation.json").read_text())
         model = json.loads(self.model_path.read_text())
@@ -146,7 +151,7 @@ class IncrementalTeams(unittest.TestCase):
         self.assertEqual(refs[0]["revision"], claim["revision"])
         self.assertEqual(refs[0]["material_hash"], claim["material_hash"])
 
-    def test_new_claim_reopens_negatives_without_invalidating_a_compatible_team(self):
+    def test_new_claim_preserves_source_only_negatives_and_compatible_team(self):
         _, _, before, _ = self.run_main()
         path = self.root / "config/researcher_registry.json"
         registry = json.loads(path.read_text())
@@ -157,8 +162,8 @@ class IncrementalTeams(unittest.TestCase):
         path.write_text(json.dumps(registry), encoding="utf-8")
         code, report, after, _ = self.run_main()
         self.assertEqual(code, 0)
-        self.assertGreater(report["due_scopes"], 0, "new evidence must reopen old negative decisions")
-        self.assertEqual(report["counters"]["item_vector_misses"], 1)
+        self.assertEqual(report["due_scopes"], 0, "A new claim does not make a broad source scientifically specific")
+        self.assertEqual(report["provider_requests"], 0)
         self.assertEqual(before["opportunities"][0]["members"], after["opportunities"][0]["members"])
 
     def test_removed_claim_withholds_before_failed_provider_and_budget_is_resumable(self):
@@ -197,7 +202,7 @@ class IncrementalTeams(unittest.TestCase):
         self.update_catalog(expand)
         seen = set()
         for _ in range(3):
-            code, report, model, _ = self.run_main(args=["--max-scopes", "1"])
+            code, report, model, _ = self.run_main(mode="backfill", args=["--max-scopes", "1"])
             self.assertEqual(code, 0)
             self.assertLessEqual(report["ranking_window"], 2)
             self.assertEqual(report["assessed_scopes"], 1)

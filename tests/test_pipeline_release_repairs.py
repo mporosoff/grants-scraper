@@ -2,10 +2,12 @@
 import copy
 from datetime import datetime, timezone
 import json
+import os
 from pathlib import Path
 from tempfile import TemporaryDirectory
 import unittest
-from unittest.mock import patch
+from unittest.mock import patch, Mock
+from tools.offline_ai import Ledger
 
 import requests
 
@@ -378,16 +380,16 @@ class NegativeResponseDiagnostics(unittest.TestCase):
     setUp = team_fixtures.ProposedTeamTests.setUp
 
     def test_live_style_empty_negative_stays_retryable_with_a_safe_reason(self):
-        with TemporaryDirectory() as directory, patch.object(teams.time, 'sleep'):
-            provider = teams.Provider(directory)
-            with patch.object(provider, 'post', return_value=response({'specific': False, 'objective': '', 'roles': []})) as post:
+        with TemporaryDirectory() as directory, patch.object(teams.time, 'sleep'), patch.dict(os.environ, {'ANTHROPIC_API_KEY': 'synthetic'}):
+            provider = teams.Provider(directory, ledger=Ledger(Path(directory) / "spend" / "ledger.json", "fixture", 2))
+            with patch.object(teams.requests, 'post', return_value=Mock(status_code=200, json=lambda: response({'specific': False, 'objective': '', 'roles': []}))) as post:
                 result, proposal = teams.generate_scope(self.scope, provider, self.claims, [], 'registry', float('inf'))
             self.assertEqual(post.call_count, 3)
             self.assertIsNone(proposal)
             self.assertTrue(result['retry_eligible'])
             self.assertEqual(result['validation_reason'], 'invalid_scientific_objective')
-            self.assertEqual(provider.counters['invalid_output:invalid_scientific_objective'], 3)
-            self.assertEqual(list(Path(directory).iterdir()), [])
+            self.assertEqual([r['status'] for r in provider.ledger.read()['requests']], ['ValueError'] * 3)
+            self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
         self.assertEqual(teams.validation_reason(ValueError('sensitive provider body')), 'invalid_response_structure')
 
 

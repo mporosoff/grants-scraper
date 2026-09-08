@@ -1,29 +1,200 @@
 {
   "schema_version": 1,
   "generation": [
-    "scripts/*.py", "scripts/sources/**/*.py", "scripts/sources/fixtures/*.json",
-    "config/researcher_registry.json", "config/source_intake.json", "config/search_v2.json",
-    "requirements.txt", "package.json", "pnpm-lock.yaml",
-    "tools/build_search_v2_voyage_vectors.mjs", "tools/embedding_contract.mjs",
-    "tools/run_search_diagnosis.mjs", "tools/build_search_v2_config.mjs",
-    "assets/search-hybrid.js", "assets/search-query.js", "assets/search-retrieval.js",
-    "assets/search-v2-config.js", "assets/subtopic-runtime.js", "assets/submission-schedule.js",
-    "assets/match-explain.js", "assets/team-hybrid.js", "assets/team-matcher.js", "assets/team-researchers.js"
+    "scripts/*.py",
+    "scripts/sources/**/*.py",
+    "scripts/sources/fixtures/*.json",
+    "config/researcher_registry.json",
+    "config/source_intake.json",
+    "config/search_v2.json",
+    "requirements.txt",
+    "package.json",
+    "pnpm-lock.yaml",
+    "tools/build_search_v2_voyage_vectors.mjs",
+    "tools/embedding_contract.mjs",
+    "tools/run_search_diagnosis.mjs",
+    "tools/build_search_v2_config.mjs",
+    "assets/search-hybrid.js",
+    "assets/search-query.js",
+    "assets/search-retrieval.js",
+    "assets/search-v2-config.js",
+    "assets/subtopic-runtime.js",
+    "assets/submission-schedule.js",
+    "assets/match-explain.js",
+    "assets/team-hybrid.js",
+    "assets/team-matcher.js",
+    "assets/team-researchers.js"
   ],
-  "generation_excluded": ["scripts/verify_researcher_publication.py", "scripts/summarize_phase3_reviews.py", "scripts/evaluate_phase2.py", "scripts/generate_brand_icons.py"],
+  "generation_excluded": [
+    "scripts/verify_researcher_publication.py",
+    "scripts/summarize_phase3_reviews.py",
+    "scripts/evaluate_phase2.py",
+    "scripts/generate_brand_icons.py"
+  ],
   "generated": [
-    "data/opportunities.js", "data/catalog-metadata.js", "data/opportunity_enrichment.json",
-    "data/document_evidence.json", "data/source_records.json", "data/faculty_matches.js",
-    "data/researcher_directory.js", "data/researcher_registry_manifest.json", "data/link_health.json",
-    "data/subtopics.js", "data/opportunity_teams.js", "data/opportunity_team_index.js",
-    "data/search-v2-voyage-manifest.json", "data/search-v2-voyage-vectors.f16", "data/search-v2-voyage-canaries.json",
-    "config/opportunity_team_model.json", "evaluation/opportunity_team_generation.json",
-    "evaluation/search_v2_hybrid_vector_build.json", "feeds/*", "README.md", "PROJECT.md", ".github/last_build"
+    "data/opportunities.js",
+    "data/catalog-metadata.js",
+    "data/opportunity_enrichment.json",
+    "data/document_evidence.json",
+    "data/source_records.json",
+    "data/faculty_matches.js",
+    "data/researcher_directory.js",
+    "data/researcher_registry_manifest.json",
+    "data/link_health.json",
+    "data/subtopics.js",
+    "data/opportunity_teams.js",
+    "data/opportunity_team_index.js",
+    "data/search-v2-voyage-manifest.json",
+    "data/search-v2-voyage-vectors.f16",
+    "data/search-v2-voyage-canaries.json",
+    "config/opportunity_team_model.json",
+    "evaluation/opportunity_team_generation.json",
+    "evaluation/search_v2_hybrid_vector_build.json",
+    "feeds/*",
+    "evaluation/release_coverage.json"
   ],
-  "package": ["data/search-v2-release.json", "workers/search-voyage-proxy/generated/corpus-allowlist.json"],
-  "runtime": ["*.html", ".nojekyll", "assets/**/*", "workers/search-voyage-proxy/src/**/*", "workers/search-voyage-proxy/wrangler.jsonc"],
-  "worker": ["workers/search-voyage-proxy/src/**/*", "workers/search-voyage-proxy/wrangler.jsonc", "workers/search-voyage-proxy/generated/corpus-allowlist.json"],
-  "worker_toolchain": {"wrangler": "4.125.0"},
-  "validation": ["tools/*.py", "tools/*.mjs", "tools/verify_no_drift.sh", "tests/**/*", ".github/workflows/*.yml", "config/release_dependencies.json"],
-  "generation_contract": {"python": "3.13", "node": "22", "catalog_min": 1000, "catalog_max": 5000, "enrichment_max_updates": 250, "documents": 45, "subtopic_documents": 30, "document_recheck_days": 14, "team_max_scopes": 60, "team_workers": 3, "team_timeout_minutes": 20, "link_checks": 150, "link_workers": 8, "link_failure_threshold": 0.35, "vector_mode": "production"}
+  "package": [
+    "data/search-v2-release.json",
+    "workers/search-voyage-proxy/generated/corpus-allowlist.json"
+  ],
+  "runtime": [
+    "*.html",
+    ".nojekyll",
+    "assets/**/*",
+    "workers/search-voyage-proxy/src/**/*",
+    "workers/search-voyage-proxy/wrangler.jsonc"
+  ],
+  "worker": [
+    "workers/search-voyage-proxy/src/**/*",
+    "workers/search-voyage-proxy/wrangler.jsonc",
+    "workers/search-voyage-proxy/generated/corpus-allowlist.json"
+  ],
+  "worker_toolchain": {
+    "wrangler": "4.125.0"
+  },
+  "validation": [
+    "tools/*.py",
+    "tools/*.mjs",
+    "tools/verify_no_drift.sh",
+    "tests/**/*",
+    ".github/workflows/*.yml",
+    "config/release_dependencies.json"
+  ],
+  "generation_contract": {
+    "python": "3.13",
+    "node": "22",
+    "catalog_min": 1000,
+    "catalog_max": 5000,
+    "enrichment_max_updates": 250,
+    "documents": 45,
+    "subtopic_documents": 30,
+    "document_recheck_days": 14,
+    "team_max_scopes": 60,
+    "team_workers": 3,
+    "team_timeout_minutes": 20,
+    "link_checks": 150,
+    "link_workers": 8,
+    "link_failure_threshold": 0.35,
+    "vector_mode": "production"
+  },
+  "dependency_groups": {
+    "source": {
+      "patterns": [
+        "scripts/*.py",
+        "scripts/sources/**/*.py",
+        "scripts/sources/fixtures/*.json",
+        "config/source_intake.json",
+        "requirements.txt",
+        "tools/run_budgeted_documents.py",
+        "tools/offline_spend.py"
+      ],
+      "excluded": [
+        "scripts/build_opportunity_teams.py",
+        "scripts/import_opportunity_team_model.py",
+        "scripts/researcher_registry.py",
+        "scripts/faculty_match.py",
+        "config/researcher_registry.json",
+        "config/offline_ai.json",
+        "tools/offline_ai.py",
+        "tools/offline_team_contract.py",
+        "tools/team_maintenance.py",
+        "tools/team_provider.py",
+        "scripts/verify_researcher_publication.py",
+        "scripts/summarize_phase3_reviews.py",
+        "scripts/evaluate_phase2.py",
+        "scripts/generate_brand_icons.py"
+      ]
+    },
+    "teams": {
+      "patterns": [
+        "scripts/build_opportunity_teams.py",
+        "scripts/import_opportunity_team_model.py",
+        "scripts/researcher_registry.py",
+        "scripts/faculty_match.py",
+        "config/researcher_registry.json",
+        "config/offline_ai.json",
+        "tools/offline_ai.py",
+        "tools/offline_team_contract.py",
+        "tools/team_maintenance.py",
+        "tools/team_provider.py",
+        "tools/offline_spend.py"
+      ],
+      "excluded": []
+    },
+    "semantic": {
+      "patterns": [
+        "scripts/search_v2_contract.py",
+        "scripts/search_query.py",
+        "config/search_v2.json",
+        "tools/build_search_v2_voyage_vectors.mjs",
+        "tools/embedding_contract.mjs",
+        "tools/run_search_diagnosis.mjs",
+        "tools/build_search_v2_config.mjs",
+        "assets/search-hybrid.js",
+        "assets/search-query.js",
+        "assets/search-retrieval.js",
+        "assets/subtopic-runtime.js",
+        "assets/submission-schedule.js",
+        "tools/coherent_files.mjs"
+      ],
+      "excluded": []
+    },
+    "runtime": {
+      "patterns": [
+        "*.html",
+        ".nojekyll",
+        "assets/**/*",
+        "workers/search-voyage-proxy/src/**/*",
+        "workers/search-voyage-proxy/wrangler.jsonc",
+        "tools/build_search_release_package.mjs"
+      ],
+      "excluded": []
+    },
+    "validation": {
+      "patterns": [
+        "tools/*.py",
+        "tools/*.mjs",
+        "tools/verify_no_drift.sh",
+        "tests/**/*",
+        ".github/workflows/*.yml",
+        "config/release_dependencies.json",
+        "evaluation/*.json",
+        "evaluation/*.txt",
+        "tools/*.sh",
+        "package.json",
+        "pnpm-lock.yaml"
+      ],
+      "excluded": []
+    }
+  },
+  "team_outputs": [
+    "data/faculty_matches.js",
+    "data/researcher_directory.js",
+    "data/researcher_registry_manifest.json",
+    "data/opportunity_teams.js",
+    "data/opportunity_team_index.js",
+    "config/opportunity_team_model.json",
+    "evaluation/opportunity_team_generation.json",
+    "evaluation/release_coverage.json"
+  ]
 }

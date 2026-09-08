@@ -119,6 +119,14 @@ bounded opportunity scopes. It proposes complementary teams from current,
 source-traceable researcher claims, explains the team and
 each person, keeps missing roles visible, and supports remove/replacement and a
 manual-collaborator path. Broad parent programs never receive an automatic team.
+Offline provider routes and $2 maintenance/$5 manual-backfill budgets are
+configured independently from document classification. The initial automatic
+pilot is limited to five scopes/$2. Only selected generation steps receive
+`OPENAI_API_KEY` or `ANTHROPIC_API_KEY`; Voyage credentials remain separate.
+Browsing published teams requires no generation call. See the current
+[release lifecycle](docs/RELEASE_LIFECYCLE.md) and
+[team runbook](docs/OPPORTUNITY_TO_TEAM_ROLLOUT.md).
+
 Generated team membership is rechecked against the same runtime catalog
 currentness and publication-eligible child-topic contracts used by ordinary
 search. Team Match derives its current main, standby, and directory-only counts
@@ -175,9 +183,11 @@ referrer; network organization is aggregated server-side. Cloudflare Web
 Analytics is disabled on every URL that contains query parameters.
 
 Funding Finder v1.3.0 hardens this hosted path as one coordinated release
-package. A catalog refresh now rebuilds every public semantic passage and
-vector, validates fixed embedding-space canaries, deploys a Worker that accepts
-only the current and immediately previous package, and publishes the generated
+package. The release planner selects only the affected source, team, semantic
+or runtime work. Compatible vectors are reused only under the exact model-space
+contract; drift forces a rebuild. A changed Worker is prepared to accept the
+current and immediately previous package, while verified unchanged Worker inputs
+retain the serving version. The orchestrator publishes the generated
 assets only after all Python, browser, quality, and Worker-handshake gates pass.
 The Worker enforces separate embedding/reranking request limits, global request
 and daily-token ceilings, and a fail-closed circuit breaker. If enhanced search

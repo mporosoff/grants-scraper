@@ -11,7 +11,7 @@ const publisher = read('tools/publish_release_candidate.py');
 const live = read('tools/verify_release_live.py');
 
 test('one serialized owner persists before validation and gates Worker, publication, Pages and live verification', () => {
-  const ordered = ['  generate:', 'Persist the complete immutable candidate', 'actions/upload-artifact@v4',
+  const ordered = ['  generate:', 'Persist the complete immutable candidate', 'Retain authoritative candidate even if later stages fail',
     '  validate:', 'tools.validate_release_candidate', '  publish:', 'Verify receipt before materializing the candidate',
     'Deploy changed Worker inputs', 'tools.publish_release_candidate', 'actions/upload-pages-artifact@v5',
     '\n  pages:\n', '  verify-live:'].map(s => workflow.indexOf(s));

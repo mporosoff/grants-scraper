@@ -78,3 +78,25 @@ any claimed savings must use measured comparable requests, not cap differences.
 Receipts expose stage/provider tokens, latency, retries, cache events, failures,
 and conservative charges. The warm replay disables new selection and installs a
 transport that fails if any completed request tries to call a provider.
+
+## September 8 protected access result
+
+The protected entrypoint merged in PR #171 at
+`facd83554751c6504592c934536e781f446552cc`. Preflight run `34234658950`
+found no `OPENAI_API_KEY` in the Actions step and made zero API requests.
+Repository and existing environment secret-name metadata also lacked that name;
+no secret values were accessed. Sonnet baseline run `34234760078` made one
+request and received HTTP 400, then stopped that provider's new requests.
+Its usage was unreported, so the ledger retains the conservative $0.088875
+reservation. The original adapter did not capture the provider error category;
+its cause is unknown. Later diagnostics allowlist error categories without
+retaining response bodies or error messages.
+
+No scope completed. There is no measured quality comparison, noninferiority
+result, useful-output cost or savings claim. Cov4 migration, optional fallback
+comparisons and stability repetitions remain unperformed. Production retains
+the established Sonnet routes and output ceilings; the planner, bounded
+maintenance/backfill, independent routing, accounting and caches do not require
+an unproven provider promotion. The exact access/evaluation evidence is recorded
+in `evaluation/offline_ai_selection.json`. The immutable frozen inputs and
+historical Cov4/MEAS3 evidence remain unchanged.

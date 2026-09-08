@@ -1,0 +1,49 @@
+{
+  "version": 1,
+  "evaluation_task": "economical-ai-20260908",
+  "evaluation_sha": "facd83554751c6504592c934536e781f446552cc",
+  "preflight_run": "34234658950",
+  "baseline_run": "34234760078",
+  "frozen_team_scopes": 24,
+  "untouched_holdouts": 6,
+  "openai": {
+    "requested_model": "gpt-5.6-luna",
+    "returned_model": null,
+    "status": "unavailable_actions_step_credential",
+    "requests": 0,
+    "reported_cost_usd": 0
+  },
+  "sonnet_baseline": {
+    "requested_model": "claude-sonnet-5",
+    "returned_model": null,
+    "status": "configuration_http_400",
+    "requests": 1,
+    "retries": 0,
+    "valid_scopes": 0,
+    "actual_usage": null,
+    "conservative_reserved_usd": 0.088875,
+    "diagnostic_limitation": "The original protected evaluation adapter did not retain the error category; no inference of the cause is made"
+  },
+  "cov4_migration": {
+    "status": "not_run_provider_unavailable",
+    "production_changed": false
+  },
+  "selection": {
+    "decomposition": "retain_sonnet",
+    "adjudication": "retain_sonnet",
+    "verification": "retain_sonnet",
+    "cov4": "retain_sonnet",
+    "new_route_promoted": false
+  },
+  "measured_savings": null,
+  "quality_comparison": null,
+  "useful_output_cost": null,
+  "remaining_optional_phases": "Deferred: replacement provider unavailable; no guessed model names, repeated access probes, or holdout changes",
+  "price_date": "2026-09-08",
+  "task_budget_usd": 15,
+  "limitations": [
+    "No new model completed an assessment; schema/quality/noninferiority/cost claims are unavailable.",
+    "Application-side reserved charges are not an account invoice.",
+    "Production stage caps retain the established Sonnet ceiling until measured stage responses exist."
+  ]
+}
