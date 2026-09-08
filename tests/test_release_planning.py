@@ -216,11 +216,24 @@ class ReleasePlanning(unittest.TestCase):
         current = {'scopes': {'347026': 'current', 'old': 'old'}}
         reasons = maintenance.retained_queue_reasons(report, 'pinned', teams.RESPONSE_VERSION)
         self.assertEqual(reasons, {'347026': 'source_changed'})
-        due, backfill, _ = maintenance.queues([scope, old], {}, {}, current, current, reasons)
+        attempts = {'347026': {'state': 'rejected_evidence', 'key': 'prior-assessment'}}
+        due, backfill, _ = maintenance.queues([scope, old], {}, attempts, current, current, reasons)
         self.assertEqual((due, backfill), ([scope], [old]))
+        due, backfill, _ = maintenance.queues([scope, old], {}, {}, current, current, reasons)
+        self.assertEqual((due, backfill), ([], [scope, old]), 'A cleared model is not retained failed work')
         for changed in ({'status': 'starting'}, {'generation_requested': False}, {'mode': 'backfill'},
                         {'input_generation': 'different'}, {'response_contract': 'different'}):
             self.assertEqual(maintenance.retained_queue_reasons(report | changed, 'pinned', teams.RESPONSE_VERSION), {})
+
+    def test_incomplete_diagnostic_report_does_not_block_durable_queue_recovery(self):
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'report.json'
+            self.assertEqual(maintenance.load_queue_report(path), {})
+            for content in (b'', b'{"status":', b'[]', b'null', b'\xff'):
+                path.write_bytes(content)
+                self.assertEqual(maintenance.load_queue_report(path), {})
+            path.write_text('{"status":"completed"}')
+            self.assertEqual(maintenance.load_queue_report(path), {'status': 'completed'})
 
     def test_queue_retention_preserves_refusal_and_actual_backfill_attempt_provenance(self):
         scope = {'id': 'scope', 'source_fingerprint': 'same'}

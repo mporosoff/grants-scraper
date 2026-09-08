@@ -65,12 +65,22 @@ def migrate_legacy(model, candidates, claims_generation, claims):
     return invalidated
 
 
+def load_queue_report(path):
+    """A partial diagnostic write cannot block recovery from the durable model."""
+    try:
+        report = json.loads(Path(path).read_bytes())
+    except (OSError, ValueError, UnicodeError):
+        return {}
+    return report if isinstance(report, dict) else {}
+
+
 def retained_queue_reasons(report, input_generation, response_contract):
     """Recover queue provenance from the exact completed generation's safe report."""
     if (report.get('status') != 'completed' or report.get('generation_requested') is not True
             or report.get('mode') not in ('maintenance', 'pilot')
             or report.get('input_generation') != input_generation
-            or report.get('response_contract') != response_contract):
+            or report.get('response_contract') != response_contract
+            or not isinstance(report.get('queue_reasons'), dict)):
         return {}
     reasons = {'stale_published_team', 'new_since_accepted_snapshot', 'source_changed',
                'decision_inputs_changed', 'retryable_maintenance_failure'}
@@ -105,9 +115,9 @@ def queues(pending, existing, attempts, previous, current, retained_reasons=None
                   'new_since_accepted_snapshot' if prior is None else
                   'source_changed' if prior != scope['source_fingerprint'] else
                   'decision_inputs_changed' if isinstance(attempt, dict) and attempt.get('state') in ('insufficient_evidence', 'proposed') else
-                  'retryable_maintenance_failure' if (isinstance(attempt, dict) and
-                      (attempt.get('mode') in ('maintenance', 'pilot') or attempt.get('maintenance_pending')))
-                      or key in (retained_reasons or {}) else None)
+                  'retryable_maintenance_failure' if isinstance(attempt, dict) and
+                      (attempt.get('mode') in ('maintenance', 'pilot') or attempt.get('maintenance_pending')
+                       or key in (retained_reasons or {})) else None)
         (maintenance if reason else backfill).append(scope)
         reasons[key] = reason or 'historical_unassessed_backfill'
     return maintenance, backfill, reasons

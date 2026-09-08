@@ -861,7 +861,8 @@ def main():
     started = time.monotonic()
     report_path = Path(args.report)
     report_path.parent.mkdir(parents=True, exist_ok=True)
-    retained_report = json.loads(report_path.read_bytes()) if report_path.exists() else {}
+    from tools import team_maintenance as maintenance
+    retained_report = maintenance.load_queue_report(report_path)
     run = {"run_id": os.environ.get("GITHUB_RUN_ID") or str(uuid.uuid4()),
            "run_attempt": os.environ.get("GITHUB_RUN_ATTEMPT", "1"), "generation_requested": args.generate,
            "started_at": datetime.now(timezone.utc).isoformat(), "response_contract": RESPONSE_VERSION}
@@ -875,7 +876,6 @@ def main():
     model = synchronize_opportunity_team_model(registry, path, model=model, write=False)
     claims = eligible_claims(registry)
     claims_generation = content_hash([{key: c[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for c in claims.values()])
-    from tools import team_maintenance as maintenance
     pipeline_hash = maintenance.science_contract()
     eligibility = []
     candidates = scopes(diagnostics=eligibility)
