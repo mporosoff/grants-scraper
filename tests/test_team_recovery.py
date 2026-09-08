@@ -113,6 +113,55 @@ class RetainedTeamRecovery(unittest.TestCase):
                     for field in ('pipeline_hash', 'generator_version', 'claims_generation_at_generation'):
                         self.assertEqual(row.get(field), before['opportunities'][0].get(field))
 
+    def test_reviewed_citation_reprojection_preserves_decisions_and_requires_exact_proofs(self):
+        for key in ('363179', '357493'):
+            for fault in (None, 'before', 'after', 'unknown_role', 'scope', 'decision', 'unreviewed', 'claim'):
+                with self.subTest(key=key, fault=fault):
+                    model, candidates, registry, settings = (copy.deepcopy(self.model), copy.deepcopy(self.candidates),
+                                                           copy.deepcopy(self.registry), config())
+                    model['opportunities'] = [r for r in model['opportunities'] if r['id'] == key]
+                    row = model['opportunities'][0]
+                    review = settings['targeted_team_recovery']['reviewed_source_changes'][key]
+                    row['source_fingerprint'] = review['prior_source_fingerprint']
+                    row['review_state'] = 'needs_revalidation'
+                    updates = review['role_quote_updates']
+                    for role in row['roles']:
+                        if role['id'] in updates:
+                            role['source_quote'] = updates[role['id']]['before']
+                    update = next(iter(updates.values()))
+                    if fault in ('before', 'after'):
+                        update[fault] = 'Unreviewed source quotation.'
+                    elif fault == 'unknown_role':
+                        updates['role-99'] = copy.deepcopy(update)
+                    elif fault == 'scope':
+                        next(c for c in candidates if c['id'] == key)['source_fingerprint'] = 'later amendment'
+                    elif fault == 'decision':
+                        review['reviewed_decision_hash'] = 'different reviewed graph'
+                    elif fault == 'unreviewed':
+                        review['review_kind'] = 'source_projection_revalidation'
+                    elif fault == 'claim':
+                        ref = next(ref for role in row['roles'] for ref in role['claim_refs'])
+                        person = next(p for p in registry['researchers'] if p['researcher_id'] == ref['researcher_id'])
+                        next(c for c in person['claims'] if c['claim_id'] == ref['claim_id'])['revision'] += 1
+                    before = copy.deepcopy(model)
+                    with patch.object(maintenance, 'config', return_value=settings), \
+                            patch('requests.post', side_effect=AssertionError('Citation review needs no provider')):
+                        results = maintenance.restore_proven_teams(model, candidates, registry)
+                    if fault:
+                        self.assertEqual(model, before)
+                        self.assertEqual(results[0]['state'], 'pending')
+                    else:
+                        self.assertEqual(results[0]['state'], 'restored_from_retained_evidence')
+                        self.assertEqual(maintenance.retained_decision_hash(row), review['reviewed_decision_hash'])
+                        for field in ('objective', 'members', 'variants', 'missing_skills', 'pipeline_hash',
+                                      'generator_version', 'claims_generation_at_generation'):
+                            self.assertEqual(row[field], before['opportunities'][0][field])
+                        for old, new in zip(before['opportunities'][0]['roles'], row['roles']):
+                            self.assertEqual({k: v for k, v in old.items() if k != 'source_quote'},
+                                             {k: v for k, v in new.items() if k != 'source_quote'})
+                        self.assertNotIn(key, teams.invalidate_stale_sources(model, teams.source_fingerprints(model, candidates)))
+                        self.assertEqual(maintenance.restore_proven_teams(model, candidates, registry), [])
+
     def test_curated_review_uses_its_own_source_contract_and_preserves_legacy_evidence(self):
         for key in ('363375', 'eere-exchange:DE-TA1-0003589'):
             for change in (None, 'profile', 'source', 'quote', 'unreviewed', 'generated'):
