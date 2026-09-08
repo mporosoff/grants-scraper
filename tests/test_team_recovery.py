@@ -113,6 +113,47 @@ class RetainedTeamRecovery(unittest.TestCase):
                     for field in ('pipeline_hash', 'generator_version', 'claims_generation_at_generation'):
                         self.assertEqual(row.get(field), before['opportunities'][0].get(field))
 
+    def test_curated_review_uses_its_own_source_contract_and_preserves_legacy_evidence(self):
+        for key in ('363375', 'eere-exchange:DE-TA1-0003589'):
+            for change in (None, 'profile', 'source', 'quote', 'unreviewed', 'generated'):
+                with self.subTest(key=key, change=change):
+                    model, candidates, registry, settings = (copy.deepcopy(self.model), copy.deepcopy(self.candidates),
+                                                           copy.deepcopy(self.registry), config())
+                    model['opportunities'] = [row for row in model['opportunities'] if row['id'] == key]
+                    row = model['opportunities'][0]
+                    review = settings['targeted_team_recovery']['reviewed_source_changes'][key]
+                    # Reproduce the same historical reviewed row after publication too.
+                    row['source_fingerprint'] = review['prior_source_fingerprint']
+                    row['review_state'] = 'needs_revalidation'
+                    original = copy.deepcopy(row)
+                    if change == 'profile':
+                        person = next(p for p in registry['researchers'] if p['researcher_id'] == row['members'][0]['faculty_id'])
+                        person['auto_proposable'] = False
+                    elif change == 'source':
+                        review['reviewed_source_fingerprint'] = 'unreviewed amendment'
+                    elif change == 'quote':
+                        review['role_source_quotes']['role-1'] = 'A quoted method absent from the current bounded scope.'
+                    elif change == 'unreviewed':
+                        review['review_kind'] = 'not an explicit curated review'
+                    elif change == 'generated':
+                        row['generator_version'] = 'opportunity-teams-2'
+                        settings['targeted_team_recovery']['published_decisions'][key] = maintenance.retained_decision_hash(row)
+                    before = copy.deepcopy(model)
+                    with patch.object(maintenance, 'config', return_value=settings), \
+                            patch('requests.post', side_effect=AssertionError('Curated review needs no provider')):
+                        result = maintenance.restore_proven_teams(model, candidates, registry)
+                    if change:
+                        self.assertEqual(model, before)
+                    else:
+                        self.assertEqual(result[0]['state'], 'restored_from_retained_evidence')
+                        self.assertNotIn('review_state', row)
+                        self.assertNotIn('decision_contract', row)
+                        for field in ('roles', 'members', 'missing_skills', 'record_type', 'objective'):
+                            self.assertEqual(row[field], original[field])
+                        self.assertEqual(row['source_fingerprint'], review['reviewed_source_fingerprint'])
+                        self.assertNotIn(key, teams.invalidate_stale_sources(model, teams.source_fingerprints(model, candidates)))
+                        self.assertEqual(row['recovery_proof']['validation_contract'], 'curated-source-and-profile-1')
+
 
 if __name__ == '__main__':
     unittest.main()
