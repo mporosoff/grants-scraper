@@ -26,7 +26,7 @@ class CandidateLifecycleTests(unittest.TestCase):
             'generation': ['scripts/parser.py', 'scripts/teams.py', 'tools/vectors.mjs', 'config/source.json'],
             'generation_excluded': [], 'generation_contract': {'team_max_scopes': 60},
             'generated': ['data/opportunities.js', 'data/search-v2-voyage-manifest.json', 'config/opportunity_team_model.json'],
-            'runtime': ['index.html', 'assets/app.css', 'workers/search/src/index.js'],
+            'runtime': ['index.html', 'assets/app.css', 'workers/search/src/index.js', '.nojekyll'],
             'package': ['data/search-v2-release.json'], 'worker': ['workers/search/src/index.js'],
             'validation': ['tools/validator.py', '.github/workflows/release.yml'],
         }
@@ -37,7 +37,7 @@ class CandidateLifecycleTests(unittest.TestCase):
             'data/search-v2-voyage-manifest.json': '{"model": "test", "model_space_fingerprint": "space"}',
             'config/opportunity_team_model.json': '{"generation_id": "team"}',
             'data/search-v2-release.json': '{"current_corpus_sha256": "corpus"}',
-            'index.html': '<main>current</main>', 'assets/app.css': 'main {}',
+            'index.html': '<main>current</main>', 'assets/app.css': 'main {}', '.nojekyll': '',
             'workers/search/src/index.js': 'export default {};', 'tools/validator.py': 'VERSION = 1\n',
             '.github/workflows/release.yml': 'version: 1', 'evaluation/frozen.json': '{}',
             'tools/check.sh': 'true',
@@ -244,8 +244,12 @@ class CandidateLifecycleTests(unittest.TestCase):
         c.write_json(self.reports / 'publication.json', publication)
         served = deepcopy(publication)
         stamp = publication['publication_sha'] + '\n'
+        requested = []
         def fetch(url):
             name = url.removeprefix(live.SITE).split('?')[0]
+            requested.append(name)
+            if name == '.nojekyll':
+                raise AssertionError('Pages does not HTTP-serve its build-control file')
             if name == 'release/candidate.json':
                 return c.encoded(manifest)
             if name == 'release/publication.json':
@@ -256,6 +260,10 @@ class CandidateLifecycleTests(unittest.TestCase):
         serving = {'verified': True, 'fingerprint': manifest['worker_fingerprint'], 'version_id': 'serving-version'}
         with patch.object(live, 'fetch', side_effect=fetch), patch.object(live, 'worker_check', return_value={'service': 'available'}), \
              patch.object(live, 'worker_provenance', return_value=serving) as provenance:
+            site = self.root / 'staged-pages'
+            live.stage_site(self.bundle, self.reports, site)
+            self.assertEqual((site / '.nojekyll').read_bytes(), b'')
+            c.verify_files(site, {'.nojekyll': manifest['files']['.nojekyll']})
             served['publication_sha'] = 'd' * 40
             with self.assertRaisesRegex(ValueError, 'Live verification failed'):
                 live.verify(self.bundle, self.reports, attempts=1)
@@ -285,6 +293,9 @@ class CandidateLifecycleTests(unittest.TestCase):
         self.assertEqual(report['publication_sha'], publication['publication_sha'])
         self.assertEqual(report['publication_receipt_sha256'], c.digest(c.encoded(publication)))
         self.assertEqual(c.load(self.bundle), manifest)
+        self.assertNotIn('.nojekyll', requested)
+        self.assertIn('data/opportunities.js', requested)
+        self.assertIn('assets/app.css', requested)
 
     def test_live_provenance_reads_authenticated_metadata_and_rejects_stale_success(self):
         from tools import verify_release_live as live
