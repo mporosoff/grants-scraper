@@ -134,7 +134,25 @@ def restore_proven_teams(model, candidates, registry):
                     raise ValueError('Curated source/profile proof mismatch')
                 proposal = {'source_fingerprint': fingerprint}
             else:
-                proposal = restored_generated_proposal(row, scope, claims)
+                updates = (source_review or {}).get('role_quote_updates')
+                inspected = copy.deepcopy(row)
+                if updates is not None:
+                    if (not reviewed_change or source_review.get('review_kind') != 'source_quote_revalidation'
+                            or not isinstance(updates, dict) or not updates
+                            or not set(updates).issubset({role['id'] for role in inspected['roles']})):
+                        raise ValueError('Explicit source quote review required')
+                    for role in inspected['roles']:
+                        if role['id'] not in updates:
+                            continue
+                        change = updates[role['id']]
+                        if (change['before'] != role['source_quote'] or change['before'] in scope['text']
+                                or not isinstance(change['after'], str) or change['after'] not in scope['text']):
+                            raise ValueError('Reviewed old/current source quote mismatch')
+                        role['source_quote'] = change['after']
+                proposal = restored_generated_proposal(inspected, scope, claims)
+                if updates is not None and (not proposal or retained_decision_hash(dict(row, **proposal))
+                        != source_review.get('reviewed_decision_hash')):
+                    raise ValueError('Reviewed team decision changed during citation reprojection')
             if not proposal:
                 result['reason'] = 'no_complementary_team'
                 continue

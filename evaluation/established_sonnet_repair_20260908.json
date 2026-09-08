@@ -52,14 +52,14 @@
   "recovery": {
     "prior_available": 96,
     "retained": 15,
-    "restored": 75,
-    "current_available": 90,
+    "restored": 77,
+    "current_available": 92,
     "paid_reassessed": 0,
     "legitimately_removed": 0,
-    "pending": 6,
-    "live_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
-    "generated_merge_sha": "17262aad1f7d8036679d379b8973e512abac29fa",
-    "live_run": "34287621491",
+    "pending": 4,
+    "live_candidate": "3f7a93244cd6542a3d69a849608d2c96b347e58be6b07c1aeb96126719738de3",
+    "generated_merge_sha": "43cdd6a5f0b3649d57b91bfb4390a01ba54d1f77",
+    "live_run": "34290241070",
     "provider_requests": 0
   },
   "second_focused_repair": {
@@ -99,6 +99,19 @@
       "legitimately_removed": 0,
       "pending": 20,
       "live_candidate": "26bb1731731005c18fcd355184b4ad21805b52fd4c0216d51bbe7f9adf5f19c5"
+    },
+    {
+      "prior_available": 96,
+      "retained": 15,
+      "restored": 75,
+      "current_available": 90,
+      "paid_reassessed": 0,
+      "legitimately_removed": 0,
+      "pending": 6,
+      "live_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
+      "generated_merge_sha": "17262aad1f7d8036679d379b8973e512abac29fa",
+      "live_run": "34287621491",
+      "provider_requests": 0
     }
   ],
   "completed_source_review_restorations": [
@@ -117,10 +130,6 @@
     "357433",
     "357424"
   ],
-  "pending_curated_review_restorations": [
-    "363375",
-    "eere-exchange:DE-TA1-0003589"
-  ],
   "remaining_after_curated_publication": {
     "prior_available": 96,
     "proposed_available": 92,
@@ -137,5 +146,34 @@
     "provider_requests": 0,
     "production_sonnet_pause": "retained pending adequate grounded behavior",
     "cov4_new_classifications": "unavailable after established-route quality failure"
+  },
+  "completed_curated_review_restorations": [
+    "363375",
+    "eere-exchange:DE-TA1-0003589"
+  ],
+  "pending_source_citation_restorations": [
+    "363179"
+  ],
+  "remaining_after_citation_publication": {
+    "prior_available": 96,
+    "proposed_available": 93,
+    "restored": 78,
+    "retained": 15,
+    "source_reviews_within_restored": 17,
+    "paid_reassessed": 0,
+    "legitimately_removed": 0,
+    "pending": {
+      "332894:superconducting-qubits": "current bounded child-declaration evidence not established",
+      "356953": "retained required phased-milestone evidence absent from current exact scope",
+      "357493": "current clinical-trial objective does not specifically support the retained coordination/regulatory role; generic citation rejected in review"
+    },
+    "provider_requests": 0,
+    "production_sonnet_pause": "retained pending adequate grounded behavior",
+    "cov4_new_classifications": "unavailable after established-route quality failure"
+  },
+  "citation_review_remediation": {
+    "reviewed_sha": "6b7b467dcbb8cbc46bef559d86997c3548486421",
+    "scope_id": "357493",
+    "disposition": "Keep withheld. Remove the proposed generic trial-objective citation because it does not specifically support coordination/regulatory planning. No new candidate or production mutation used this proposal."
   }
 }

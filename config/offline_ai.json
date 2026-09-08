@@ -448,6 +448,22 @@
           "urh-000113": "c5bdc6cd74b7cfae1560ce638c2a90ab58bdd1b9a80572048d4078362939953e"
         },
         "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment."
+      },
+      "363179": {
+        "review_kind": "source_quote_revalidation",
+        "prior_source_fingerprint": "29f629367fe53b3b3ba2afc771cde8f91cf161c1085feafcac8c388b1e7491f4",
+        "reviewed_source_fingerprint": "de171add9cbf8c9c03420d057e54f8c56e167465994fab8840d0375a0e46a709",
+        "reviewed_against_candidate": "3f7a93244cd6542a3d69a849608d2c96b347e58be6b07c1aeb96126719738de3",
+        "prior_document_projection_hash": "eac8e4b046c4d60fc5f9c2056b42d0df413372c006039a9c2f8be613ab02b1c2",
+        "reviewed_document_projection_hash": "71c1b2c52fbcb77e79f2e70f0d7f19c7bf8da5bf86e4d1dbe144e8a79cb063f0",
+        "role_quote_updates": {
+          "role-2": {
+            "before": "4.5 Security Plan .................................................................................................................... 23",
+            "after": "support the development of a secure compute environment"
+          }
+        },
+        "reviewed_decision_hash": "d8844081c8ad07f971fb43e6dfdde3bf4f9ad2b843d1baf5ef3bd0e2a9c57e51",
+        "basis": "The current unchanged official description explicitly funds a secure compute environment. Replace the obsolete security-plan table-of-contents citation with that direct goal. Preserve the exact security contributions and their RAN-specific limitations, all members, and the commercialization gap."
       }
     }
   }
