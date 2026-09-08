@@ -15,7 +15,7 @@ const paths = {
   subtopic: "assets/subtopic-runtime.js",
   release: "data/search-v2-release.json",
   refresh: ".github/workflows/refresh-opportunities.yml",
-  deploy: ".github/workflows/deploy-search-package.yml",
+  deploy: "tools/verify_release_live.py",
 };
 const sources = Object.fromEntries(await Promise.all(
   Object.entries(paths).map(async ([key, path]) => [
@@ -176,12 +176,8 @@ test("release and refresh contracts publish and verify metadata with the exact c
     assert.equal(release.source_hashes[path], sha256(sources[sourceKey]));
   }
   assert.match(release.atomic_publication_contract, /startup metadata/);
-  assert.match(sources.refresh, /git add[^\n]*data\/opportunities\.js data\/catalog-metadata\.js/);
-  assert.match(sources.refresh, /live_metadata/);
-  assert.match(sources.refresh, /live_catalog_sha/);
-  assert.match(sources.deploy, /"assets\/catalog-loader\.js"/);
-  assert.match(sources.deploy, /"assets\/subtopic-runtime\.js"/);
-  assert.match(sources.deploy, /"data\/catalog-metadata\.js"/);
-  assert.match(sources.deploy, /live_metadata/);
-  assert.match(sources.deploy, /live_catalog_sha/);
+  assert.match(sources.refresh, /tools.publish_release_candidate/);
+  assert.match(sources.deploy, /manifest\['files'\]/);
+  assert.match(sources.deploy, /actual == expected/);
+  assert.match(sources.deploy, /public_path\(name\)/);
 });

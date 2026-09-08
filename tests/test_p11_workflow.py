@@ -51,12 +51,11 @@ class P11WorkflowTests(unittest.TestCase):
 
     def test_post_refresh_gate_preserves_closed_measurement_frames(self):
         source = WORKFLOW.read_text(encoding="utf-8")
-        self.assertEqual(
-            source.count("python -m tools.run_refresh_validation"),
-            2,
-        )
+        validator = (ROOT / "tools/validate_release_candidate.py").read_text()
+        self.assertIn("'python', '-m', 'tools.run_refresh_validation'", validator)
         self.assertNotIn("unittest discover", source)
-        self.assertIn('"tools/run_refresh_validation.py"', source)
+        self.assertIn("python -m tools.validate_release_candidate", source)
+        self.assertLess(source.index("Persist the complete immutable candidate"), source.index("  validate:"))
 
     def test_protected_ci_uses_the_same_live_product_measurement_boundary(self):
         source = TEST_WORKFLOW.read_text(encoding="utf-8")
@@ -105,7 +104,7 @@ class P11WorkflowTests(unittest.TestCase):
         self.assertIn("steps.additional-sources.outcome == 'failure'", source)
         self.assertIn("document evidence/subtopic classification", source)
         self.assertIn("External funding source refresh degraded", source)
-        self.assertIn("if: failure()", source)
+        self.assertIn("if: always()", source)
 
 
 if __name__ == "__main__":

@@ -1,0 +1,115 @@
+"""Verify exact published bytes and Search Worker identity; never generate data."""
+import argparse
+from concurrent.futures import ThreadPoolExecutor
+import json
+from pathlib import Path
+import time
+from urllib.request import Request, urlopen
+
+from tools import release_candidate as c
+
+SITE = 'https://mporosoff.github.io/grants-scraper/'
+WORKER = 'https://funding-finder-voyage-search.urochestercheme.workers.dev/health'
+
+
+def public_path(name):
+    return name == '.nojekyll' or name.endswith('.html') or name.startswith(('assets/', 'data/', 'feeds/'))
+
+
+def fetch(url):
+    with urlopen(Request(url, headers={'Origin': 'https://mporosoff.github.io', 'Cache-Control': 'no-cache'}), timeout=45) as response:
+        return response.read()
+
+
+def worker_check(manifest):
+    health = json.loads(fetch(WORKER))
+    expected = manifest['release_identity']
+    for key, value in {'service': 'available', 'budget_state': 'available',
+                       'corpus_sha256': expected['current_corpus_sha256'],
+                       'model_space_fingerprint': expected['model_space_fingerprint']}.items():
+        if health.get(key) != value:
+            raise ValueError(f'Worker handshake mismatch: {key}')
+    return {key: health.get(key) for key in ('service', 'budget_state', 'corpus_sha256', 'model_space_fingerprint')}
+
+
+def stage_site(bundle, reports, output):
+    manifest = c.load(bundle)
+    publication = c.read_json(Path(reports) / 'publication.json')
+    if publication['candidate_id'] != manifest['candidate_id'] or publication['candidate_hashes'] != manifest['files']:
+        raise ValueError('Publication receipt does not match candidate')
+    output = Path(output)
+    if output.exists():
+        raise ValueError('Pages staging directory must be new')
+    import shutil
+    for name in manifest['files']:
+        if public_path(name):
+            target = c.checked_path(output, name)
+            target.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(Path(bundle) / 'files' / name, target)
+    c.write_json(output / 'release/candidate.json', manifest)
+    c.write_json(output / 'release/publication.json', publication)
+    (output / 'pages-release-sha.txt').write_text(publication['publication_sha'] + '\n', encoding='utf-8')
+    c.verify_files(output, {k: v for k, v in manifest['files'].items() if public_path(k)})
+
+
+def verify(bundle, reports, *, attempts=18, sleep=time.sleep):
+    manifest = c.load(bundle)
+    paths = {name: value for name, value in manifest['files'].items() if public_path(name)}
+    def check(item):
+        name, expected = item
+        try:
+            actual = c.digest(fetch(f'{SITE}{name}?candidate={manifest["candidate_id"]}'))
+            return None if actual == expected else {'path': name, 'expected': expected, 'actual': actual}
+        except Exception as error:
+            return {'path': name, 'error': type(error).__name__}
+    report = {'candidate_id': manifest['candidate_id'], 'timestamp': c.timestamp(), 'next_retry_stage': 'verify', 'production_mutated': False}
+    for attempt in range(attempts):
+        with ThreadPoolExecutor(max_workers=8) as executor:
+            differences = [x for x in executor.map(check, paths.items()) if x]
+        report['differences'] = differences
+        try:
+            live_manifest = json.loads(fetch(SITE + 'release/candidate.json'))
+            live_publication = json.loads(fetch(SITE + 'release/publication.json'))
+            if live_manifest != manifest or live_publication['candidate_id'] != manifest['candidate_id']:
+                raise ValueError('Live release identity mismatch')
+            report['publication_sha'] = live_publication['publication_sha']
+            report['worker'] = worker_check(manifest)
+            report.pop('handshake_error', None)
+        except Exception as error:
+            report['handshake_error'] = str(error)[:300]
+        c.write_json(Path(reports) / 'live-verification.json', report)
+        if not differences and 'handshake_error' not in report:
+            report.update(verified=True, next_retry_stage=None, live_release_identity=manifest['release_identity'])
+            c.write_json(Path(reports) / 'live-verification.json', report)
+            print(json.dumps(report))
+            return report
+        print(f'Candidate {manifest["candidate_id"]}: propagation attempt {attempt + 1}/{attempts}, {len(differences)} byte mismatches', flush=True)
+        if attempt + 1 < attempts:
+            sleep(10)
+    raise ValueError('Live verification failed; retry verify/publication using the same candidate')
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('command', choices=['stage', 'worker', 'verify'])
+    parser.add_argument('--bundle', required=True, type=Path)
+    parser.add_argument('--reports', type=Path, default=Path('release-reports'))
+    parser.add_argument('--output', type=Path)
+    args = parser.parse_args()
+    if args.command == 'stage':
+        stage_site(args.bundle, args.reports, args.output)
+    elif args.command == 'worker':
+        for attempt in range(12):
+            try:
+                print(json.dumps(worker_check(c.load(args.bundle))))
+                return
+            except Exception:
+                if attempt == 11:
+                    raise
+                time.sleep(5)
+    else:
+        verify(args.bundle, args.reports)
+
+
+if __name__ == '__main__':
+    main()

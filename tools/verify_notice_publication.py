@@ -8,6 +8,7 @@ import argparse
 from copy import deepcopy
 from datetime import datetime, timezone
 import json
+import hashlib
 from pathlib import Path
 import tempfile
 
@@ -22,7 +23,18 @@ PUBLIC_FIELDS = ('document_evidence_status', 'document_evidence', 'document_sear
     'preliminary_stage_type', 'preliminary_required', 'next_submission')
 
 
-def verify(catalog, cache, children=None):
+VALIDATOR_VERSION = 'notice-publication-2'
+
+
+def bounded_public_value(value, limit=2048):
+    serialized = json.dumps(value, ensure_ascii=False, sort_keys=True, default=str)
+    if len(serialized) <= limit:
+        return value
+    return {'preview': serialized[:limit], 'truncated': True,
+            'sha256': hashlib.sha256(serialized.encode()).hexdigest(), 'characters': len(serialized)}
+
+
+def verify(catalog, cache, children=None, *, candidate_id='committed-working-copy'):
     stamp = catalog.get('document_evidence_generated_at') or catalog.get('generated_at')
     if not stamp:
         raise ValueError('Missing generated notice projection timestamp')
@@ -49,7 +61,9 @@ def verify(catalog, cache, children=None):
     for before, after in zip(published, rebuilt):
         fields = [key for key in PUBLIC_FIELDS if before.get(key) != after.get(key)]
         if fields:
-            changes.append({'opportunity_id': str(before['opportunity_id']), 'fields': fields})
+            changes.append({'opportunity_id': str(before['opportunity_id']), 'fields': fields,
+                'differences': [{'field': key, 'before': bounded_public_value(before.get(key)),
+                                 'after': bounded_public_value(after.get(key))} for key in fields]})
     entries = {**(cache.get('subtopic_only') or {}), **(cache.get('records') or {})}
     for identifier, child_entry in (children or {}).get('records', {}).items():
         entry = entries.get(identifier) or {}
@@ -57,8 +71,14 @@ def verify(catalog, cache, children=None):
                 or child_entry.get('segmentation_method') == 'hgeo_declared_topics'
                 or any(child.get('segmentation_method') == 'hgeo_declared_topics' for child in child_entry.get('subtopics') or []))
         if hgeo and child_entry.get('subtopics') and (entry.get('subtopic_structured') or {}).get('body_parser_version') != subtopic_structured.HGEO_BODY_VERSION:
-            changes.append({'opportunity_id': identifier, 'fields': ['scientific_topic_bodies']})
-    return {'schema_version': 1, 'source_requests': 0, 'provider_requests': 0,
+            changes.append({'opportunity_id': identifier, 'fields': ['scientific_topic_bodies'],
+                'differences': [{'field': 'scientific_topic_bodies',
+                    'before': (entry.get('subtopic_structured') or {}).get('body_parser_version'),
+                    'after': subtopic_structured.HGEO_BODY_VERSION}]})
+    return {'schema_version': 2, 'candidate_id': candidate_id,
+            'validator': 'notice-projection-idempotence', 'validator_version': VALIDATOR_VERSION,
+            'validator_sha256': hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+            'source_requests': 0, 'provider_requests': 0,
             'publication_ready': not changes, 'changed_records': len({row['opportunity_id'] for row in changes}), 'changes': changes}
 
 
@@ -68,14 +88,15 @@ def main():
     parser.add_argument('--cache', type=Path, default=Path('data/document_evidence.json'))
     parser.add_argument('--subtopics', type=Path, default=Path('data/subtopics.js'))
     parser.add_argument('--output', type=Path)
+    parser.add_argument('--candidate-id', default='committed-working-copy')
     parser.add_argument('--detect', action='store_true', help='Report whether a coordinated manual checkpoint is needed; never authorize publication')
     args = parser.parse_args()
     from scripts.subtopic_records import read_cache
-    report = verify(read_catalog(args.catalog), json.loads(args.cache.read_bytes()), read_cache(args.subtopics))
+    report = verify(read_catalog(args.catalog), json.loads(args.cache.read_bytes()), read_cache(args.subtopics), candidate_id=args.candidate_id)
     if args.output:
         args.output.parent.mkdir(parents=True, exist_ok=True)
         args.output.write_text(json.dumps(report, indent=2) + '\n', encoding='utf-8', newline='\n')
-    print(json.dumps({key: value for key, value in report.items() if key != 'changes'}, sort_keys=True))
+    print(json.dumps(report, sort_keys=True, ensure_ascii=False))
     if not report['publication_ready'] and not args.detect:
         raise SystemExit('Notice projection needs a coordinated generated package; retain the current release')
 

@@ -1,49 +1,27 @@
-name: Refresh Grants.gov opportunities
+name: Funding Finder immutable release
 
 on:
   push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/refresh-opportunities.yml"
-      - "requirements.txt"
-      - "scripts/build_catalog.py"
-      - "scripts/solicitation_identity.py"
-      - "scripts/enrich_catalog.py"
-      - "scripts/extract_document_evidence.py"
-      - "scripts/notice_*.py"
-      - "scripts/source_documents.py"
-      - "scripts/submission_schedule.py"
-      - "scripts/subtopic_*.py"
-      - "scripts/faculty_match.py"
-      - "scripts/researcher_registry.py"
-      - "scripts/build_opportunity_teams.py"
-      - "config/researcher_registry.json"
-      - "scripts/program_areas.py"
-      - "scripts/sources/**"
-      - "config/source_intake.json"
-      - "scripts/update_catalog_docs.py"
-      - "scripts/build_feeds.py"
-      - "scripts/build_changes.py"
-      - "scripts/check_links.py"
-      - "scripts/currentness.py"
-      - "scripts/alert_match.py"
-      - "tools/run_refresh_validation.py"
-      - "tools/verify_notice_publication.py"
+    branches: [main]
   schedule:
     - cron: "17 10 * * *"
   workflow_dispatch:
     inputs:
-      premerge_candidate:
-        description: Run only the protected pre-merge Worker candidate smoke
+      stage:
+        description: Generate once, reuse current data with new runtime, or resume a persisted checkpoint
+        type: choice
+        options: [generate, reuse, validate, publish, verify]
+        default: generate
         required: true
-        default: false
-        type: boolean
-      manual_release_validation:
-        description: Hold the generated PR for operator validation and protected merge
-        required: false
-        default: false
-        type: boolean
+      candidate_run:
+        description: Artifact-owning run ID (required for validate, publish and verify)
+        type: string
+      candidate_id:
+        description: Complete immutable candidate ID (required for resume)
+        type: string
+      receipt_run:
+        description: Run containing the prior validation receipt (optional for validate/publish, required for verify)
+        type: string
 
 permissions:
   actions: write
@@ -51,205 +29,88 @@ permissions:
   issues: write
   pull-requests: write
   statuses: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: funding-finder-coordinated-release
   cancel-in-progress: false
 
 jobs:
-  release-candidate-worker:
-    if: ${{ github.event_name == 'workflow_dispatch' && inputs.premerge_candidate }}
+  plan:
+    if: >-
+      github.ref == 'refs/heads/main' &&
+      (github.event_name != 'push' || !startsWith(github.event.head_commit.message, 'chore: publish Funding Finder candidate'))
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-
+    outputs:
+      stage: ${{ steps.plan.outputs.stage }}
+      candidate_run: ${{ steps.plan.outputs.candidate_run }}
+      candidate_id: ${{ steps.plan.outputs.candidate_id }}
     steps:
       - uses: actions/checkout@v6
         with:
-          fetch-depth: 0
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-          cache: pip
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "22"
-      - run: python -m pip install -r requirements.txt
-      - name: Verify the committed search package
-        run: node tools/build_search_release_package.mjs --check
-      - name: Run the complete Python product gate
-        run: python -c "from tools.run_refresh_validation import main; raise SystemExit(main())"
-      - name: Run browser, package, and frozen quality gates
-        run: >-
-          node --test tests/browser/*.test.mjs &&
-          node tools/query_baseline.mjs --check &&
-          node tools/p9_scoring_probe.mjs --check
-      - name: Capture and verify the protected main release base
-        id: candidate-base
-        shell: bash
-        run: |
-          git fetch --no-tags origin main
-          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          candidate_base_sha="$(git merge-base HEAD origin/main)"
-          if [ -z "$current_main_sha" ] || [ "$candidate_base_sha" != "$current_main_sha" ]; then
-            echo "::error::The candidate was not built from current protected main."
-            exit 1
-          fi
-          echo "main_sha=$current_main_sha" >> "$GITHUB_OUTPUT"
-      - name: Verify the generated notice publication projection
-        run: python -m tools.verify_notice_publication
-      - name: Capture the active Worker version for rollback
-        id: candidate-prior-worker
+          ref: main
+      - name: Resolve explicit lifecycle checkpoint
+        id: plan
         shell: bash
         env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          REQUESTED_STAGE: ${{ inputs.stage }}
+          CANDIDATE_RUN: ${{ inputs.candidate_run }}
+          CANDIDATE_ID: ${{ inputs.candidate_id }}
+          RECEIPT_RUN: ${{ inputs.receipt_run }}
+          HEAD_MESSAGE: ${{ github.event.head_commit.message }}
         run: |
-          deployments="$(npx --yes wrangler@4.125.0 deployments list \
-            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
-          prior_version="$(jq -er '
-            map(select(any(.versions[]?; (.percentage // 0) > 0)))
-            | sort_by([(.created_on // ""), (.id // "")])
-            | last
-            | .versions as $versions
-            | (($versions | map(select((.percentage // 0) == 100)) | first)
-              // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
-            | .version_id
-          ' <<<"$deployments")"
-          echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
-          echo "Prior Worker rollback version: \`$prior_version\`" >> "$GITHUB_STEP_SUMMARY"
-      - name: Deploy the pre-merge compatibility Worker
-        id: candidate-worker-deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
-      - name: Capture the candidate Worker version
-        id: candidate-worker
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          deployments="$(npx --yes wrangler@4.125.0 deployments list \
-            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
-          candidate_version="$(jq -er '
-            map(select(any(.versions[]?; (.percentage // 0) > 0)))
-            | sort_by([(.created_on // ""), (.id // "")])
-            | last
-            | .versions as $versions
-            | (($versions | map(select((.percentage // 0) == 100)) | first)
-              // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
-            | .version_id
-          ' <<<"$deployments")"
-          echo "version_id=$candidate_version" >> "$GITHUB_OUTPUT"
-          echo "Candidate Worker version: \`$candidate_version\`" >> "$GITHUB_STEP_SUMMARY"
-      - name: Wait for the candidate Worker identity
-        id: candidate-worker-handshake
-        shell: bash
-        run: |
-          candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
-          candidate_fingerprint="$(jq -r '.model_space_fingerprint' data/search-v2-release.json)"
-          health=""
-          for attempt in {1..12}; do
-            health="$(curl --fail --silent --show-error --max-time 10 \
-              -H 'Origin: https://mporosoff.github.io' \
-              'https://funding-finder-voyage-search.urochestercheme.workers.dev/health' || true)"
-            if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
-              && test "$(jq -r '.budget_state // empty' <<<"$health" 2>/dev/null)" = "available" \
-              && test "$(jq -r '.corpus_sha256 // empty' <<<"$health" 2>/dev/null)" = "$candidate_sha" \
-              && test "$(jq -r '.model_space_fingerprint // empty' <<<"$health" 2>/dev/null)" = "$candidate_fingerprint"; then
-              exit 0
-            fi
-            sleep 5
-          done
-          echo "::error::The candidate Worker identity did not become available."
-          exit 1
-      - name: Run the corrected real-provider smoke
-        id: candidate-worker-smoke
-        run: node ./tools/smoke_search_worker.mjs
-      - name: Restore the prior Worker if candidate smoke fails
-        if: ${{ always() && steps.candidate-worker-deploy.outcome == 'success' && (steps.candidate-worker-handshake.outcome == 'failure' || steps.candidate-worker-smoke.outcome == 'failure') }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: >-
-          npx --yes wrangler@4.125.0 rollback
-          "${{ steps.candidate-prior-worker.outputs.version_id }}"
-          --config workers/search-voyage-proxy/wrangler.jsonc
-          --message "Automatic rollback after pre-merge Worker smoke failure"
-      - name: Restore the prior Worker if protected main advanced
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          if [ -z "$current_main_sha" ] || [ "$current_main_sha" != "${{ steps.candidate-base.outputs.main_sha }}" ]; then
-            npx --yes wrangler@4.125.0 rollback \
-              "${{ steps.candidate-prior-worker.outputs.version_id }}" \
-              --config workers/search-voyage-proxy/wrangler.jsonc \
-              --message "Automatic rollback because main advanced after pre-merge Worker smoke"
-            echo "::error::Main advanced after Worker smoke; the prior Worker was restored."
-            exit 1
-          fi
-      - name: Record successful pre-merge candidate smoke
-        run: |
-          echo "Pre-merge candidate Worker smoke passed." >> "$GITHUB_STEP_SUMMARY"
-          echo "Protected main base: \`${{ steps.candidate-base.outputs.main_sha }}\`" >> "$GITHUB_STEP_SUMMARY"
+          python - <<'PY'
+          import json, os, re
+          from pathlib import Path
+          event = os.environ['GITHUB_EVENT_NAME']
+          stage = 'reuse' if event == 'push' else 'generate' if event == 'schedule' else os.environ['REQUESTED_STAGE']
+          if event == 'push' and os.environ['HEAD_MESSAGE'].startswith('Publish approved researcher registry change'):
+              stage = 'generate'
+          run, identity = os.environ['CANDIDATE_RUN'], os.environ['CANDIDATE_ID']
+          if stage == 'reuse' and not run and not identity:
+              pointer = json.loads(Path('release/candidate-source.json').read_bytes())
+              run, identity = pointer['artifact_run'], pointer['candidate_id']
+          if stage != 'generate' and (not re.fullmatch(r'[1-9][0-9]*', run) or not re.fullmatch(r'[a-f0-9]{64}', identity)):
+              raise SystemExit('Resume requires an exact retained candidate run and identity')
+          if stage == 'verify' and not re.fullmatch(r'[1-9][0-9]*', os.environ['RECEIPT_RUN']):
+              raise SystemExit('Live verification requires a validation receipt run')
+          with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
+              output.write(f'stage={stage}\ncandidate_run={run}\ncandidate_id={identity}\n')
+          PY
 
-  refresh:
-    if: ${{ github.event_name != 'workflow_dispatch' || ! inputs.premerge_candidate }}
+  generate:
+    needs: plan
+    if: needs.plan.outputs.stage == 'generate'
     runs-on: ubuntu-latest
     timeout-minutes: 75
-
+    outputs:
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+      sources_healthy: ${{ steps.additional-sources.outcome == 'success' && steps.document_evidence.outcome == 'success' }}
     steps:
       - uses: actions/checkout@v6
         with:
-          # Scheduled events can wait behind another refresh while retaining
-          # the SHA captured when queued. Always build current protected main.
           ref: main
-      - uses: actions/setup-python@v6
-        with:
-          python-version: "3.13"
-          cache: pip
-      - uses: actions/setup-node@v6
-        with:
-          node-version: "22"
-      - uses: pnpm/action-setup@v6
-        with:
-          version: "11.19.0"
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Restore an already persisted generation on workflow rerun
+        id: restore
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python -m tools.restore_generation_checkpoint
       - name: Preserve the prior catalog for change detection
+        if: steps.restore.outputs.candidate_id == ''
         shell: bash
         run: cp data/opportunities.js "$RUNNER_TEMP/opportunities.previous.js"
-      - run: python -m pip install -r requirements.txt
-      - run: pnpm install --frozen-lockfile
-      - name: Detect a required interpreted-data publication checkpoint
-        id: notice-checkpoint
-        shell: bash
-        run: |
-          python -m tools.verify_notice_publication --detect --output "$RUNNER_TEMP/notice-publication-before.json"
-          python - <<'PY'
-          import json, os
-          from pathlib import Path
-          report = json.loads((Path(os.environ["RUNNER_TEMP"]) / "notice-publication-before.json").read_text())
-          required = not report["publication_ready"]
-          with open(os.environ["GITHUB_OUTPUT"], "a") as output:
-              output.write(f"required={str(required).lower()}\n")
-          if required:
-              with open(os.environ["GITHUB_STEP_SUMMARY"], "a") as summary:
-                  summary.write("The committed notice projection requires a corrected generated package. This refresh will use the existing manual validation checkpoint before protected merge.\n")
-          PY
-      - name: Test live product before refresh
-        run: python -m tools.run_refresh_validation
-      - name: Test canonical browser application
-        run: node --test tests/browser/*.test.mjs
       - name: Build and validate complete public opportunity catalog
+        if: steps.restore.outputs.candidate_id == ''
         run: >-
           python -m scripts.build_catalog
           --output data/opportunities.js
           --min-records 1000
           --max-record-count 5000
       - name: Enrich new or changed records with official detail evidence
+        if: steps.restore.outputs.candidate_id == ''
         run: >-
           python -m scripts.enrich_catalog
           --catalog data/opportunities.js
@@ -257,6 +118,7 @@ jobs:
           --max-updates 250
           --request-delay 0.25
       - name: Merge additional (non-Grants.gov) sources
+        if: steps.restore.outputs.candidate_id == ''
         id: additional-sources
         continue-on-error: true
         env:
@@ -275,12 +137,14 @@ jobs:
           --summary-output "${{ runner.temp }}/source-refresh-summary.json"
           --fail-on-degraded
       - name: Restore private normalized notice structure
+        if: steps.restore.outputs.candidate_id == ''
         uses: actions/cache/restore@v4
         with:
           path: .cache/notice-structure
           key: notice-structure-${{ runner.os }}-${{ github.run_id }}
           restore-keys: notice-structure-${{ runner.os }}-
       - name: Extract citation-backed facts from official notices
+        if: steps.restore.outputs.candidate_id == ''
         id: document_evidence
         continue-on-error: true
         env:
@@ -295,12 +159,13 @@ jobs:
           --recheck-days 14
           --enable-subtopics
       - name: Save private normalized notice structure
-        if: always() && steps.document_evidence.outcome != 'skipped'
+        if: steps.restore.outputs.candidate_id == '' && always() && steps.document_evidence.outcome != 'skipped'
         uses: actions/cache/save@v4
         with:
           path: .cache/notice-structure
           key: notice-structure-${{ runner.os }}-${{ github.run_id }}
       - name: Rebuild faculty metadata and live team-matcher configuration
+        if: steps.restore.outputs.candidate_id == ''
         run: >-
           python -m scripts.faculty_match
           --catalog data/opportunities.js
@@ -308,14 +173,17 @@ jobs:
           --out data/faculty_matches.js
           --version-target team_match.html
       - name: Invalidate proposed teams whose public scope or researcher evidence changed
+        if: steps.restore.outputs.candidate_id == ''
         run: python -m scripts.build_opportunity_teams --write
       - name: Restore public-evidence team-generation cache
+        if: steps.restore.outputs.candidate_id == ''
         uses: actions/cache@v4
         with:
           path: .cache/opportunity-teams
           key: opportunity-teams-${{ runner.os }}-${{ github.run_id }}
           restore-keys: opportunity-teams-${{ runner.os }}-
       - name: Generate bounded new and changed proposed teams
+        if: steps.restore.outputs.candidate_id == ''
         id: team-generation
         timeout-minutes: 20
         continue-on-error: true
@@ -324,7 +192,7 @@ jobs:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
         run: python -m scripts.build_opportunity_teams --generate --max-scopes 60 --workers 3 --write
       - name: Report automatic team coverage and remaining work
-        if: always()
+        if: steps.restore.outputs.candidate_id == '' && always()
         env:
           TEAM_GENERATION_OUTCOME: ${{ steps.team-generation.outcome }}
         run: |
@@ -356,12 +224,14 @@ jobs:
               summary.write("Source/profile invalidation runs before provider generation. Unavailable responses remain retryable; broad or unsupported scopes do not receive teams.\n")
           PY
       - name: Build deadline, amendment, closing-soon, and closure events
+        if: steps.restore.outputs.candidate_id == ''
         run: >-
           python -m scripts.build_changes
           --previous "${{ runner.temp }}/opportunities.previous.js"
           --current data/opportunities.js
           --out feeds
       - name: Rotate through official links and record health and redirects
+        if: steps.restore.outputs.candidate_id == ''
         run: >-
           python -m scripts.check_links
           --catalog data/opportunities.js
@@ -370,15 +240,19 @@ jobs:
           --workers 8
           --fail-threshold 0.35
       - name: Generate static RSS/Atom feeds from the final catalog
+        if: steps.restore.outputs.candidate_id == ''
         run: python -m scripts.build_feeds --catalog data/opportunities.js --out feeds
       - name: Regenerate catalog statistics in project documentation
+        if: steps.restore.outputs.candidate_id == ''
         run: python -m scripts.update_catalog_docs
       - name: Build compatible production document vectors
+        if: steps.restore.outputs.candidate_id == ''
         id: semantic-vectors
         env:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
         run: node tools/build_search_v2_voyage_vectors.mjs --production --write
       - name: Build the current/previous Worker compatibility package
+        if: steps.restore.outputs.candidate_id == ''
         id: search-package
         shell: bash
         run: |
@@ -387,364 +261,25 @@ jobs:
             -o "${RUNNER_TEMP}/published-search-release.json"
           node tools/build_search_release_package.mjs --write \
             --published-release "${RUNNER_TEMP}/published-search-release.json"
-      - name: Verify the complete search package is internally consistent
-        id: package-integrity
-        run: node tools/build_search_release_package.mjs --check
-      - name: Run regression tests against generated asset
-        id: product-regression
-        run: python -m tools.run_refresh_validation
-      - name: Run browser and search-package regression gates
-        id: browser-regression
-        run: >-
-          node --test tests/browser/*.test.mjs &&
-          node tools/query_baseline.mjs --check &&
-          node tools/p9_scoring_probe.mjs --check
-      - name: Refuse to deploy a stale generation
-        shell: bash
-        run: |
-          built_from_sha="$(git rev-parse HEAD)"
-          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          if [ -z "$current_main_sha" ]; then
-            echo "::error::Could not resolve the current main SHA." >&2
-            exit 1
-          fi
-          if [ "$built_from_sha" != "$current_main_sha" ]; then
-            echo "::error::Main changed while this generation was building; refusing to deploy stale Worker or Pages assets." >&2
-            echo "Built from: $built_from_sha" >&2
-            echo "Current main: $current_main_sha" >&2
-            exit 1
-          fi
-      - name: Verify the generated notice publication projection
-        run: python -m tools.verify_notice_publication
-      - name: Capture the active Worker version for rollback
-        id: prior-worker
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          deployments="$(npx --yes wrangler@4.125.0 deployments list \
-            --config workers/search-voyage-proxy/wrangler.jsonc --json)"
-          prior_version="$(jq -er '
-            map(select(any(.versions[]?; (.percentage // 0) > 0)))
-            | sort_by([(.created_on // ""), (.id // "")])
-            | last
-            | .versions as $versions
-            | (($versions | map(select((.percentage // 0) == 100)) | first)
-              // ($versions | map(select((.percentage // 0) > 0)) | max_by(.percentage)))
-            | .version_id
-          ' <<<"$deployments")"
-          echo "version_id=$prior_version" >> "$GITHUB_OUTPUT"
-          echo "Captured the active Worker version for rollback."
-      - name: Recheck compatibility with the package actually served by Pages
-        shell: bash
-        run: |
-          curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
-            "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?predeploy=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
-            -o "${RUNNER_TEMP}/published-search-release.json"
-          node tools/build_search_release_package.mjs --check \
-            --published-release "${RUNNER_TEMP}/published-search-release.json"
-      - name: Deploy the compatibility Worker before publishing Pages assets
-        id: worker-deploy
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
-      - name: Verify the deployed Worker recognizes the candidate corpus
-        id: worker-handshake
-        shell: bash
-        run: |
-          candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
-          candidate_fingerprint="$(jq -r '.model_space_fingerprint' data/search-v2-release.json)"
-          health=""
-          for attempt in {1..12}; do
-            health="$(curl --fail --silent --show-error --max-time 10 \
-              -H 'Origin: https://mporosoff.github.io' \
-              'https://funding-finder-voyage-search.urochestercheme.workers.dev/health' || true)"
-            if test "$(jq -r '.service // empty' <<<"$health" 2>/dev/null)" = "available" \
-              && test "$(jq -r '.budget_state // empty' <<<"$health" 2>/dev/null)" = "available" \
-              && test "$(jq -r '.corpus_sha256 // empty' <<<"$health" 2>/dev/null)" = "$candidate_sha" \
-              && test "$(jq -r '.model_space_fingerprint // empty' <<<"$health" 2>/dev/null)" = "$candidate_fingerprint"; then
-              echo "Worker candidate handshake passed on attempt ${attempt}."
-              exit 0
-            fi
-            echo "Worker candidate generation is still propagating (attempt ${attempt}/12)."
-            sleep 5
-          done
-          echo "Expected corpus: $candidate_sha" >&2
-          echo "Observed corpus: $(jq -r '.corpus_sha256 // "unavailable"' <<<"$health" 2>/dev/null)" >&2
-          echo "Expected model fingerprint: $candidate_fingerprint" >&2
-          echo "Observed model fingerprint: $(jq -r '.model_space_fingerprint // "unavailable"' <<<"$health" 2>/dev/null)" >&2
-          exit 1
-      - name: Run a real provider smoke against the candidate Worker
-        id: worker-smoke
-        run: node tools/smoke_search_worker.mjs
-      - name: Restore the prior Worker if pre-publication smoke fails
-        if: ${{ always() && steps.worker-deploy.outcome == 'success' && (steps.worker-handshake.outcome == 'failure' || steps.worker-smoke.outcome == 'failure') }}
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: >-
-          npx --yes wrangler@4.125.0 rollback
-          "${{ steps.prior-worker.outputs.version_id }}"
-          --config workers/search-voyage-proxy/wrangler.jsonc
-          --message "Automatic rollback after candidate Worker smoke failure"
-      - name: Recheck main after Worker smoke
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          built_from_sha="$(git rev-parse HEAD)"
-          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          if [ -z "$current_main_sha" ] || [ "$built_from_sha" != "$current_main_sha" ]; then
-            npx --yes wrangler@4.125.0 rollback \
-              "${{ steps.prior-worker.outputs.version_id }}" \
-              --config workers/search-voyage-proxy/wrangler.jsonc \
-              --message "Automatic rollback because main advanced after Worker smoke"
-            echo "::error::Main advanced after Worker smoke; the prior Worker was restored."
-            exit 1
-          fi
-      - name: Record the build heartbeat
-        shell: bash
-        # Scheduled workflows are disabled after 60 days without repository
-        # activity, and diff-stable serialization means a quiet stretch can
-        # produce no commit at all -- so the schedule can lapse with no error
-        # anywhere. Writing this unconditionally guarantees one commit per
-        # successful run. Nothing reads it. See docs/TOPIC_LAYER_PLAN.md §16.3.
+      - name: Record the generation heartbeat before persistence
+        if: steps.restore.outputs.candidate_id == ''
         run: date -u +"%Y-%m-%dT%H:%M:%SZ" > .github/last_build
-      - name: Recheck main immediately before refresh publication
-        shell: bash
-        env:
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          built_from_sha="$(git rev-parse HEAD)"
-          current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-          if [ -z "$current_main_sha" ] || [ "$built_from_sha" != "$current_main_sha" ]; then
-            npx --yes wrangler@4.125.0 rollback \
-              "${{ steps.prior-worker.outputs.version_id }}" \
-              --config workers/search-voyage-proxy/wrangler.jsonc \
-              --message "Automatic rollback because main advanced before refresh publication"
-            echo "::error::Main advanced before refresh publication; the prior Worker was restored."
-            exit 1
-          fi
-      - name: Commit refreshed catalog through pull request
-        id: publish-pr
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-          MANUAL_RELEASE_VALIDATION: ${{ (github.event_name == 'workflow_dispatch' && inputs.manual_release_validation) || steps.notice-checkpoint.outputs.required == 'true' }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: |
-          built_from_sha="$(git rev-parse HEAD)"
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # data/subtopics.js is paired with its !/data/ allowlist
-          # line in .gitignore. `git add` on an ignored path exits non-zero and
-          # this step runs under bash -eo pipefail, so a missing allowlist line
-          # would abort the commit and stop the nightly publishing entirely.
-          # The file does not exist until --enable-subtopics is on, so the path
-          # is passed through git ls-files to stay a no-op until then.
-          git add README.md PROJECT.md match_explorer.html team_match.html data/opportunities.js data/catalog-metadata.js data/opportunity_enrichment.json data/document_evidence.json data/source_records.json data/faculty_matches.js data/link_health.json data/search-v2-voyage-manifest.json data/search-v2-voyage-vectors.f16 data/search-v2-voyage-canaries.json data/search-v2-release.json evaluation/search_v2_hybrid_vector_build.json workers/search-voyage-proxy/generated/corpus-allowlist.json feeds .github/last_build
-          git add config/opportunity_team_model.json data/opportunity_teams.js data/opportunity_team_index.js evaluation/opportunity_team_generation.json
-          if [ -f data/subtopics.js ]; then
-            git add data/subtopics.js
-          fi
-          if git diff --cached --quiet; then
-            echo "::error::The build heartbeat should make every successful refresh publishable."
-            exit 1
-          fi
-          git commit -m "chore: refresh Grants.gov catalog"
-          refresh_branch="automation/refresh-${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}"
-          git branch -M "$refresh_branch"
-          if ! git push origin "HEAD:refs/heads/${refresh_branch}"; then
-            npx --yes wrangler@4.125.0 rollback \
-              "${{ steps.prior-worker.outputs.version_id }}" \
-              --config workers/search-voyage-proxy/wrangler.jsonc \
-              --message "Automatic rollback after refresh branch push failure"
-            exit 1
-          fi
-
-          head_sha="$(git rev-parse HEAD)"
-          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${head_sha}" \
-            -f state=success \
-            -f context=python \
-            -f description='Refresh Python gate passed' \
-            -f target_url="$run_url"
-          gh api --method POST "repos/${GITHUB_REPOSITORY}/statuses/${head_sha}" \
-            -f state=success \
-            -f context=browser \
-            -f description='Refresh browser/search gate passed' \
-            -f target_url="$run_url"
-
-          if ! pr_url="$(gh pr create \
-              --base main \
-              --head "$refresh_branch" \
-              --title 'chore: refresh Grants.gov catalog' \
-              --body "Automated coordinated refresh from [run ${GITHUB_RUN_ID}](${run_url}). The exact generated commit passed the complete Python, browser, search-quality, Worker, and stale-generation gates before this pull request was created.")"; then
-            npx --yes wrangler@4.125.0 rollback \
-              "${{ steps.prior-worker.outputs.version_id }}" \
-              --config workers/search-voyage-proxy/wrangler.jsonc \
-              --message "Automatic rollback after refresh pull-request creation failure"
-            exit 1
-          fi
-          merge_ok=false
-          if [ "$MANUAL_RELEASE_VALIDATION" = "true" ]; then
-            echo "Generated package awaits manual validation: ${pr_url} (${head_sha})" >> "$GITHUB_STEP_SUMMARY"
-            if python -m tools.wait_refresh_review "$pr_url" "$head_sha" "$built_from_sha" "$(git rev-parse 'HEAD^{tree}')"; then
-              merge_ok=true
-            fi
-          elif gh pr merge "$pr_url" --squash --delete-branch; then
-            merge_ok=true
-          fi
-          if [ "$merge_ok" != "true" ]; then
-            current_main_sha="$(git ls-remote origin refs/heads/main | awk '{print $1}')"
-            echo "Refresh merge failed; current main is ${current_main_sha:-unresolved}."
-            # If another protected merge advanced main, do not roll its Worker
-            # back merely because this invocation could not observe PR state.
-            if [ "$current_main_sha" = "$built_from_sha" ]; then
-              npx --yes wrangler@4.125.0 rollback \
-                "${{ steps.prior-worker.outputs.version_id }}" \
-                --config workers/search-voyage-proxy/wrangler.jsonc \
-                --message "Automatic rollback after refresh merge failure"
-            fi
-            exit 1
-          fi
-          merge_sha="$(gh pr view "$pr_url" --json mergeCommit --jq '.mergeCommit.oid')"
-          if [ -z "$merge_sha" ] || [ "$merge_sha" = "null" ]; then
-            echo "::error::The refresh pull request did not produce a main-branch merge commit."
-            exit 1
-          fi
-          echo "merge_sha=$merge_sha" >> "$GITHUB_OUTPUT"
-      - name: Dispatch refreshed catalog to GitHub Pages
-        if: success()
-        shell: bash
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: gh workflow run pages.yml --ref main
-      - name: Verify GitHub Pages serves the coordinated search package
-        id: pages-verify
-        if: success()
-        shell: bash
-        run: |
-          candidate_sha="$(jq -r '.current_corpus_sha256' data/search-v2-release.json)"
-          candidate_release="$(jq -S -c . data/search-v2-release.json)"
-          verified=false
-          for attempt in $(seq 1 18); do
-            live_release="$(curl --fail --silent --show-error --max-time 15 \
-              "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?candidate=${candidate_sha}" \
-              || true)"
-            live_release="$(jq -S -c . <<<"$live_release" 2>/dev/null || true)"
-            if [ "$live_release" = "$candidate_release" ]; then
-              verified=true
-              break
-            fi
-            sleep 10
-          done
-          if [ "$verified" != "true" ]; then
-            echo "::error::GitHub Pages did not serve candidate corpus ${candidate_sha} within the verification window."
-            exit 1
-          fi
-          candidate_metadata="$(cat data/catalog-metadata.js)"
-          live_metadata="$(curl --fail --silent --show-error --max-time 15 \
-            "https://mporosoff.github.io/grants-scraper/data/catalog-metadata.js?candidate=${candidate_sha}")"
-          if [ "$live_metadata" != "$candidate_metadata" ]; then
-            echo "::error::GitHub Pages served catalog metadata from a different generation."
-            exit 1
-          fi
-          catalog_url="$(sed -n 's/^globalThis.GRANT_CATALOG_METADATA=//p' data/catalog-metadata.js | sed 's/;$//' | jq -r '.catalog_url')"
-          expected_catalog_sha="$(jq -r '.source_hashes["data/opportunities.js"]' data/search-v2-release.json)"
-          live_catalog_sha="$(curl --fail --silent --show-error --max-time 45 \
-            "https://mporosoff.github.io/grants-scraper/${catalog_url#./}" | sha256sum | awk '{print $1}')"
-          if [ "$live_catalog_sha" != "$expected_catalog_sha" ]; then
-            echo "::error::GitHub Pages catalog bytes do not match the metadata/release generation."
-            exit 1
-          fi
-          for team_asset in \
-            data/opportunity_team_index.js \
-            data/opportunity_teams.js \
-            data/faculty_matches.js \
-            data/researcher_directory.js \
-            data/researcher_registry_manifest.json \
-            assets/opportunity-team.js \
-            assets/opportunity-team-panel.js \
-            assets/app.js \
-            match_explorer.html \
-            team_match.html; do
-            expected_team_sha="$(jq -r --arg path "$team_asset" '.source_hashes[$path] // empty' data/search-v2-release.json)"
-            live_team_sha="$(curl --fail --silent --show-error --max-time 45 \
-              "https://mporosoff.github.io/grants-scraper/${team_asset}?candidate=${candidate_sha}" | sha256sum | awk '{print $1}')"
-            if [ -z "$expected_team_sha" ] || [ "$live_team_sha" != "$expected_team_sha" ]; then
-              echo "::error::GitHub Pages served mismatched opportunity-team asset ${team_asset}."
-              exit 1
-            fi
-          done
-      - name: Run a real provider smoke after Pages propagation
-        id: pages-worker-smoke
-        run: node tools/smoke_search_worker.mjs
-      - name: Resolve recovered refresh alerts
-        if: >-
-          success() &&
-          steps.additional-sources.outcome == 'success' &&
-          steps.document_evidence.outcome == 'success'
-        uses: actions/github-script@v8
+      - name: Persist the complete immutable candidate before downstream validation
+        if: steps.restore.outputs.candidate_id == ''
+        id: persist
+        run: python -m tools.release_candidate create --bundle "${{ runner.temp }}/candidate"
+      - name: Retain authoritative candidate even if later stages fail
+        if: steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
         with:
-          script: |
-            const fs = require("fs");
-            const titles = new Set([
-              "Automated Grants.gov refresh failed",
-              "External funding source refresh degraded",
-            ]);
-            const runUrl =
-              `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
-              `/actions/runs/${context.runId}`;
-            let disabledEvidence = "";
-            try {
-              const summaryPath = `${process.env.RUNNER_TEMP}/source-refresh-summary.json`;
-              const summary = JSON.parse(fs.readFileSync(summaryPath, "utf8"));
-              const disabled = (summary.disabled_sources || []).map(source =>
-                `- **${source.source}** (\`${source.slug}\`): ${source.reason}; ` +
-                `publication decision \`${source.publication_decision}\`.`
-              );
-              if (disabled.length) {
-                disabledEvidence =
-                  `\n\nDocumented disabled-source limitations:\n${disabled.join("\n")}`;
-              }
-            } catch (error) {
-              core.warning(`Could not read disabled-source evidence: ${error.message}`);
-            }
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: "open",
-              per_page: 100,
-            });
-            for (const issue of issues.filter(
-              item => !item.pull_request && titles.has(item.title)
-            )) {
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                body:
-                  `Recovered: the refresh completed with all enabled external-source and ` +
-                  `document-evidence layers healthy on ${new Date().toISOString()}. ` +
-                  `A source disabled for documented upstream unavailability is not ` +
-                  `represented as healthy.\n\nVerified run: ${runUrl}${disabledEvidence}`,
-              });
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: issue.number,
-                state: "closed",
-                state_reason: "completed",
-              });
-            }
+          name: candidate-${{ steps.persist.outputs.candidate_id }}
+          path: ${{ runner.temp }}/candidate
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
       - name: Alert the project owner about a degraded external source
         if: >-
+          steps.restore.outputs.candidate_id == '' &&
           always() &&
           (steps.additional-sources.outcome == 'failure' ||
           steps.document_evidence.outcome == 'failure')
@@ -834,78 +369,291 @@ jobs:
                 body,
               });
             }
-      - name: Alert the project owner
-        if: failure()
+
+  assemble:
+    needs: plan
+    if: needs.plan.outputs.stage == 'reuse'
+    runs-on: ubuntu-latest
+    outputs:
+      candidate_id: ${{ steps.persist.outputs.candidate_id }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Load the currently published candidate for data reuse
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
+          CANDIDATE_ID: ${{ needs.plan.outputs.candidate_id }}
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/previous-candidate"
+      - name: Verify generation dependencies and existing data bytes without provider work
+        run: |
+          python -m tools.release_candidate dependencies --bundle "$RUNNER_TEMP/previous-candidate"
+          python -m tools.assemble_release_candidate --bundle "$RUNNER_TEMP/previous-candidate"
+      - name: Assemble runtime compatibility metadata around unchanged generated data
+        run: node tools/build_search_release_package.mjs --write
+      - name: Persist derived candidate with original generation provenance
+        id: persist
+        run: python -m tools.release_candidate create --bundle "$RUNNER_TEMP/candidate" --parent "$RUNNER_TEMP/previous-candidate"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: candidate-${{ steps.persist.outputs.candidate_id }}
+          path: ${{ runner.temp }}/candidate
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
+  candidate:
+    needs: [plan, generate, assemble]
+    if: >-
+      always() && needs.plan.result == 'success' &&
+      (needs.generate.result == 'success' || needs.assemble.result == 'success' ||
+       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped'))
+    runs-on: ubuntu-latest
+    outputs:
+      candidate_id: ${{ steps.select.outputs.candidate_id }}
+      candidate_run: ${{ steps.select.outputs.candidate_run }}
+    steps:
+      - name: Select the immutable artifact checkpoint
+        id: select
+        env:
+          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id }}
+          REQUESTED_ID: ${{ needs.plan.outputs.candidate_id }}
+          REQUESTED_RUN: ${{ needs.plan.outputs.candidate_run }}
+        run: |
+          echo "candidate_id=${GENERATED_ID:-$REQUESTED_ID}" >> "$GITHUB_OUTPUT"
+          if [ -n "$GENERATED_ID" ]; then
+            echo "candidate_run=$GITHUB_RUN_ID" >> "$GITHUB_OUTPUT"
+          else
+            echo "candidate_run=$REQUESTED_RUN" >> "$GITHUB_OUTPUT"
+          fi
+
+  validate:
+    needs: [plan, candidate]
+    if: ${{ !cancelled() && needs.candidate.result == 'success' }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
+      CANDIDATE_RUN: ${{ needs.candidate.outputs.candidate_run }}
+      RECEIPT_RUN: ${{ inputs.receipt_run }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Load the exact persisted candidate
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
+      - name: Verify candidate provenance and current generation dependencies
+        run: |
+          python -m tools.release_candidate verify --bundle "$RUNNER_TEMP/candidate" --candidate-id "$CANDIDATE_ID"
+          python -m tools.release_candidate dependencies --bundle "$RUNNER_TEMP/candidate"
+      - name: Load prior validation evidence for checkpoint reuse
+        if: inputs.receipt_run != ''
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$RECEIPT_RUN" --name "validation-$CANDIDATE_ID" --destination "$RUNNER_TEMP/previous-validation"
+      - name: Validate a working copy of the persisted candidate or reuse its exact receipt
+        if: needs.plan.outputs.stage != 'verify'
+        run: >-
+          python -m tools.validate_release_candidate --bundle "$RUNNER_TEMP/candidate"
+          --reports "$RUNNER_TEMP/reports" --previous "$RUNNER_TEMP/previous-validation/validation.json"
+      - name: Verify the existing receipt without rerunning gates for live verification
+        if: needs.plan.outputs.stage == 'verify'
+        run: |
+          python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/previous-validation/validation.json"
+          mkdir -p "$RUNNER_TEMP/reports"
+          cp "$RUNNER_TEMP/previous-validation/validation.json" "$RUNNER_TEMP/reports/validation.json"
+      - name: Retain safe reports and receipt on success or failure
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: validation-${{ needs.candidate.outputs.candidate_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reports
+          if-no-files-found: warn
+          retention-days: 90
+
+  publish:
+    needs: [plan, candidate, validate]
+    if: >-
+      !cancelled() && needs.validate.result == 'success' &&
+      needs.plan.outputs.stage != 'validate' && needs.plan.outputs.stage != 'verify'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    outputs:
+      merge_sha: ${{ steps.publication.outputs.merge_sha }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
+      CANDIDATE_RUN: ${{ needs.candidate.outputs.candidate_run }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Load the exact validated candidate
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
+      - uses: actions/download-artifact@v4
+        with:
+          name: validation-${{ needs.candidate.outputs.candidate_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reports
+      - name: Verify receipt before materializing the candidate
+        run: |
+          python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/reports/validation.json"
+          python -m tools.release_candidate materialize --bundle "$RUNNER_TEMP/candidate"
+      - name: Recheck compatibility with the package actually served by Pages
+        run: |
+          curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
+            "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?predeploy=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o "$RUNNER_TEMP/reports/known-good-live-release.json"
+          node tools/build_search_release_package.mjs --check --published-release "$RUNNER_TEMP/reports/known-good-live-release.json"
+      - name: Capture actual serving Worker provenance and compare complete input fingerprints
+        id: worker-inputs
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4.125.0 deployments list --config workers/search-voyage-proxy/wrangler.jsonc --json > "$RUNNER_TEMP/deployments.json"
+          node tools/search_worker_checkpoint.mjs "$RUNNER_TEMP/candidate" "$RUNNER_TEMP/deployments.json" "$RUNNER_TEMP/reports/worker-checkpoint.json"
+      - name: Deploy changed Worker inputs before publishing Pages assets
+        id: worker-deploy
+        if: steps.worker-inputs.outputs.deploy_required == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          WORKER_FINGERPRINT: ${{ steps.worker-inputs.outputs.fingerprint }}
+        run: >-
+          npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
+          --message "protected-main:$(git rev-parse HEAD); input-sha256:$WORKER_FINGERPRINT; candidate:$CANDIDATE_ID"
+      - name: Verify the candidate-compatible Worker handshake
+        run: python -m tools.verify_release_live worker --bundle "$RUNNER_TEMP/candidate"
+      - name: Run a real provider smoke before publication
+        run: node tools/smoke_search_worker.mjs
+      - name: Verify the active Worker fingerprint after deployment or retention
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4.125.0 deployments list --config workers/search-voyage-proxy/wrangler.jsonc --json > "$RUNNER_TEMP/deployments-after.json"
+          node tools/search_worker_checkpoint.mjs "$RUNNER_TEMP/candidate" "$RUNNER_TEMP/deployments-after.json" "$RUNNER_TEMP/reports/worker-after.json"
+          test "$(jq -r .deploy_required "$RUNNER_TEMP/reports/worker-after.json")" = false
+      - name: Materialize exact candidate bytes through protected publication and verify merged hashes
+        id: publication
+        run: >-
+          python -m tools.publish_release_candidate --bundle "$RUNNER_TEMP/candidate"
+          --receipt "$RUNNER_TEMP/reports/validation.json" --reports "$RUNNER_TEMP/reports" --artifact-run "$CANDIDATE_RUN"
+      - name: Restore the captured serving version if pre-publication fails
+        if: ${{ failure() && steps.worker-deploy.outcome == 'success' && steps.publication.outcome != 'success' }}
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PRIOR_VERSION: ${{ steps.worker-inputs.outputs.version_id }}
+        run: >-
+          npx --yes wrangler@4.125.0 rollback "$PRIOR_VERSION"
+          --config workers/search-voyage-proxy/wrangler.jsonc
+          --message "Automatic rollback to the captured serving version after candidate publication failure"
+      - name: Package verified candidate bytes for Pages
+        run: python -m tools.verify_release_live stage --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --output "$RUNNER_TEMP/site"
+      - uses: actions/configure-pages@v6
+      - uses: actions/upload-pages-artifact@v5
+        with:
+          path: ${{ runner.temp }}/site
+      - name: Persist the publication checkpoint and exact serving-version evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: publication-${{ needs.candidate.outputs.candidate_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reports
+          if-no-files-found: warn
+          retention-days: 90
+
+  pages:
+    needs: publish
+    if: ${{ !cancelled() && needs.publish.result == 'success' }}
+    uses: ./.github/workflows/pages.yml
+
+  verify-live:
+    needs: [plan, candidate, validate, publish, pages]
+    if: >-
+      !cancelled() && needs.validate.result == 'success' &&
+      (needs.pages.result == 'success' || needs.plan.outputs.stage == 'verify')
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
+      CANDIDATE_RUN: ${{ needs.candidate.outputs.candidate_run }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: main
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Load published candidate for read-only live verification
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
+      - name: Check exact Pages bytes, runtime, catalog, teams, vectors and Worker handshake
+        run: python -m tools.verify_release_live verify --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
+      - name: Run a real provider smoke after Pages propagation
+        run: node tools/smoke_search_worker.mjs
+      - name: Retain live release identity and verification evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: live-${{ needs.candidate.outputs.candidate_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/reports
+          if-no-files-found: warn
+          retention-days: 90
+
+  closeout:
+    needs: [plan, generate, assemble, candidate, validate, publish, pages, verify-live]
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report the exact lifecycle checkpoint and allowed retry
         uses: actions/github-script@v8
+        env:
+          RESULTS: ${{ toJSON(needs) }}
         with:
           script: |
-            const fs = require("fs");
-            const title = "Automated Grants.gov refresh failed";
-            const runUrl =
-              `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}` +
-              `/actions/runs/${context.runId}`;
-            const outcomes = [
-              ["semantic vector build", "${{ steps.semantic-vectors.outcome }}"],
-              ["search package build", "${{ steps.search-package.outcome }}"],
-              ["package integrity", "${{ steps.package-integrity.outcome }}"],
-              ["product regression", "${{ steps.product-regression.outcome }}"],
-              ["browser regression", "${{ steps.browser-regression.outcome }}"],
-              ["Worker deployment", "${{ steps.worker-deploy.outcome }}"],
-              ["Worker package handshake", "${{ steps.worker-handshake.outcome }}"],
-              ["Worker provider smoke", "${{ steps.worker-smoke.outcome }}"],
-              ["Pages handshake", "${{ steps.pages-verify.outcome }}"],
-              ["post-Pages Worker provider smoke", "${{ steps.pages-worker-smoke.outcome }}"],
-            ];
-            const failingStage = outcomes.find(([, outcome]) => outcome === "failure")?.[0]
-              || "an earlier catalog/source stage";
-            let candidateCorpus = "not generated";
-            try {
-              candidateCorpus = JSON.parse(fs.readFileSync("data/search-v2-release.json", "utf8"))
-                .current_corpus_sha256;
-            } catch {}
-            let lastLiveCorpus = "unknown";
-            try {
-              const { data } = await github.rest.repos.getContent({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                path: "data/search-v2-release.json",
-                ref: "main",
-              });
-              lastLiveCorpus = JSON.parse(Buffer.from(data.content, "base64").toString("utf8"))
-                .current_corpus_sha256;
-            } catch {}
-            const body =
-              `The scheduled opportunity refresh failed during **${failingStage}** on ` +
-              `${new Date().toISOString()}.\n\n` +
-              `- Workflow: ${runUrl}\n` +
-              `- Last committed live corpus: \`${lastLiveCorpus}\`\n` +
-              `- Candidate corpus: \`${candidateCorpus}\`\n` +
-              `- Public-site state: ${failingStage === "Pages handshake" ? "candidate push completed; Pages propagation was not verified" : "the prior package remains authoritative; no candidate commit was published"}\n\n` +
-              `Fix or rerun the named stage. Do not publish the catalog separately from its vectors and Worker allowlist.`;
-            const { data: issues } = await github.rest.issues.listForRepo({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              state: "all",
-              sort: "updated",
-              direction: "desc",
-              per_page: 100,
-            });
-            const existing = issues.find(
-              issue => !issue.pull_request && issue.title === title
-            );
-            if (existing) {
-              await github.rest.issues.update({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: existing.number,
-                body,
-                state: "open",
-              });
-            } else {
-              await github.rest.issues.create({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                title,
-                body,
-              });
+            const needs = JSON.parse(process.env.RESULTS);
+            const order = ['plan', 'generate', 'assemble', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
+            const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
+            const candidate = needs.candidate.outputs.candidate_id || 'not persisted';
+            const generationRun = needs.candidate.outputs.candidate_run || 'none';
+            const next = failed === 'pages' ? 'publish' : failed === 'verify-live' ? 'verify' : ['publish', 'validate'].includes(failed) ? failed : 'generate';
+            const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
+            const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${failed || 'completed'}\n` +
+              `Release-control SHA: ${context.sha}\nProtected publication SHA: ${needs.publish.outputs.merge_sha || 'none confirmed'}\n` +
+              `Production mutation: ${needs.publish.result === 'success' ? 'protected publication completed' : needs.publish.result === 'failure' ? 'inspect publication receipt and rollback evidence' : 'none'}\n` +
+              `Known-good live identity: publication artifact known-good-live-release.json (when Worker preparation started)\n` +
+              `Evidence and safe diagnostics: ${runUrl}#artifacts\nAllowed next retry: ${failed ? next : 'none'}\n` +
+              `A persisted candidate must be reused after downstream failure. Caches are not release evidence.`;
+            await core.summary.addRaw(body).write();
+            if (failed) {
+              const title = 'Funding Finder release checkpoint failed';
+              const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
+              const existing = issues.find(issue => !issue.pull_request && issue.title === title);
+              if (existing) await github.rest.issues.update({...context.repo, issue_number:existing.number, body});
+              else await github.rest.issues.create({...context.repo, title, body});
+            } else if (needs['verify-live'].result === 'success') {
+              const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
+              const recovered = new Set(['Funding Finder release checkpoint failed', 'Automated Grants.gov refresh failed']);
+              if (needs.generate.outputs.sources_healthy === 'true') recovered.add('External funding source refresh degraded');
+              for (const issue of issues.filter(issue => !issue.pull_request && recovered.has(issue.title))) {
+                await github.rest.issues.update({...context.repo, issue_number:issue.number, state:'closed', state_reason:'completed',
+                  body: body + '\n\nRecovered after exact live verification. A source disabled for documented upstream unavailability is not represented as healthy.'});
+              }
             }
