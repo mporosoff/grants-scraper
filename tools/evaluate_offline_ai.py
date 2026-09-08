@@ -12,15 +12,33 @@ from tools.offline_ai import Client, Ledger, Deferred, ConfigurationFailure, Ref
 from tools.offline_team_contract import schemas
 
 TASK = "economical-ai-20260908"
+SCIENTIFIC_STATES = {"proposed", "insufficient_evidence", "not_specific", "unsuitable_scope"}
 
 
 def evaluation_contract():
     from scripts import build_opportunity_teams as t
+    from scripts import subtopic_cov4 as gate
+    from tools.run_cov4_ownership import load_candidates
     settings = config()
     return identity({"routes": settings["routes"], "stages": settings["stages"],
         "prompts": [t.DECOMPOSE, t.ADJUDICATE, t.VERIFY],
         "validators": [inspect.getsource(f) for f in (t.validate_roles, t.validate_edges, t.validate_response, t.assemble)],
-        "schemas": schemas(), "frozen": json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())})
+        "schemas": schemas(), "frozen": json.loads(Path("evaluation/offline_team_frozen.json").read_bytes()),
+        "cov4": {"manifest": json.loads(Path("evaluation/offline_cov4_frozen.json").read_bytes()),
+            "population": load_candidates(), "prompts": [gate.render_prompt(row) for row in load_candidates()],
+            "implementation": {name: identity(Path(name).read_text(encoding="utf-8")) for name in
+                ("scripts/subtopic_cov4.py", "scripts/subtopic_records.py", "tools/run_cov4_validation.py",
+                 "tools/run_cov4_ownership.py")}}})
+
+
+def phase_complete(phase, result):
+    if phase.startswith("teams-"):
+        return result["completed"] == result["total"]
+    if phase == "cov4":
+        return not result["api_errors"]
+    if phase == "stability":
+        return all(row["state"] in SCIENTIFIC_STATES for rows in result.values() for row in rows)
+    return True
 
 
 def team_case(client, route_name, case):
@@ -62,22 +80,30 @@ def team_case(client, route_name, case):
     return output
 
 
+def load_or_assess(client, destination, route, case):
+    path = destination / f"team-{route}-{identity(case)}.json"
+    contract = evaluation_contract()
+    if path.exists():
+        row = json.loads(path.read_bytes())
+        if (row.get("case_hash") != identity(case) or row.get("route") != route
+                or row.get("evaluation_contract") != contract):
+            raise ValueError("evaluation_checkpoint_mismatch")
+        # A refusal is an operational terminal result, never a scientific
+        # negative and never re-requested to obtain a different safety decision.
+        if row["state"] in SCIENTIFIC_STATES | {"provider_refusal"}:
+            return row
+    # Only nonterminal work resumes. Client.json reuses each validated earlier
+    # stage, so a final-stage outage cannot repeat decomposition/adjudication.
+    row = team_case(client, route, case) | {"case_hash": identity(case), "route": route,
+                                          "evaluation_contract": contract}
+    atomic_json(path, row)
+    return row
+
+
 def teams(client, destination, route):
     frozen = json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())
-    rows = []
-    for case in frozen["cases"]:
-        path = destination / f"team-{route}-{identity(case)}.json"
-        if path.exists():
-            row = json.loads(path.read_bytes())
-            if (row.get("case_hash") != identity(case) or row.get("route") != route
-                    or row.get("evaluation_contract") != evaluation_contract()):
-                raise ValueError("evaluation_checkpoint_mismatch")
-        else:
-            row = team_case(client, route, case) | {"case_hash": identity(case), "route": route,
-                                                    "evaluation_contract": evaluation_contract()}
-            atomic_json(path, row)
-        rows.append(row)
-    completed = [r for r in rows if r["state"] in {"proposed", "insufficient_evidence", "not_specific", "unsuitable_scope"}]
+    rows = [load_or_assess(client, destination, route, case) for case in frozen["cases"]]
+    completed = [r for r in rows if r["state"] in SCIENTIFIC_STATES]
     scope_correct = sum((r["state"] in {"not_specific", "unsuitable_scope"}) == (c["annotations"]["expected_scope"] == "reject")
                         for r, c in zip(rows, frozen["cases"]) if r in completed)
     summary = {"route": route, "frozen_sha256": identity(frozen), "total": len(rows), "completed": len(completed),
@@ -160,7 +186,7 @@ def main():
         elif args.phase == "stability":
             frozen = json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())
             repeated = Client(ledger, args.state / "stability-cache", deadline=client.deadline)
-            result = {route: [team_case(repeated, route, case) for case in frozen["cases"]
+            result = {route: [load_or_assess(repeated, args.state / "stability-results", route, case) for case in frozen["cases"]
                              if case["scope"]["id"] in frozen["stability_scope_ids"]]
                       for route in ("sonnet", "luna")}
         else:
@@ -181,8 +207,11 @@ def main():
                 if replay["state"] != row["state"] or replay["stages"] != row["stages"]:
                     raise ValueError("warm_replay_changed_completed_decision")
             result = {"phase": args.phase, "new_provider_requests": len(ledger.read()["requests"]) - before}
-        result = {"evaluation_contract": contract, "result": result}
-        atomic_json(marker, result)
+        complete = phase_complete(args.phase, result)
+        result = {"evaluation_contract": contract, "complete": complete, "result": result}
+        atomic_json(args.state / (args.phase + "-receipt.json"), result)
+        if complete:
+            atomic_json(marker, result)
     finally:
         atomic_json(args.state / "usage-summary.json", ledger.summary())
         if os.environ.get("GITHUB_STEP_SUMMARY"):

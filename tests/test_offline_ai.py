@@ -141,6 +141,45 @@ class OfflineAIContracts(unittest.TestCase):
             self.assertIsNone(row["usage"])
             self.assertEqual(row["reserved_microusd"], row["charged_microusd"])
 
+    def test_cov4_checkpoint_covers_prompt_population_and_frozen_manifest(self):
+        from scripts import subtopic_cov4 as gate
+        from tools import run_cov4_ownership
+        original = e.evaluation_contract()
+        with patch.object(gate, "PROMPT", gate.PROMPT + "\nchanged"):
+            self.assertNotEqual(original, e.evaluation_contract())
+        cases = run_cov4_ownership.load_candidates()
+        with patch.object(run_cov4_ownership, "load_candidates", return_value=cases[:-1]):
+            self.assertNotEqual(original, e.evaluation_contract())
+        read = Path.read_bytes
+        def changed(path):
+            value = read(path)
+            if path.name == "offline_cov4_frozen.json":
+                return json.dumps(json.loads(value) | {"version": "new"}).encode()
+            return value
+        with patch.object(Path, "read_bytes", changed):
+            self.assertNotEqual(original, e.evaluation_contract())
+
+    def test_nonterminal_phase_resumes_only_incomplete_case_and_retains_refusal(self):
+        frozen = json.loads(Path("evaluation/offline_team_frozen.json").read_bytes())
+        deferred_id = frozen["cases"][0]["scope"]["id"]
+        calls = []
+        def assess(client, route, case):
+            key = case["scope"]["id"]
+            calls.append(key)
+            return {"scope_id": key, "state": "deferred" if key == deferred_id and calls.count(key) == 1 else "not_specific"}
+        with tempfile.TemporaryDirectory() as tmp, patch.object(e, "team_case", side_effect=assess):
+            first = e.teams(None, Path(tmp), "luna")
+            self.assertFalse(e.phase_complete("teams-luna", first))
+            second = e.teams(None, Path(tmp), "luna")
+            self.assertTrue(e.phase_complete("teams-luna", second))
+            self.assertEqual(len(calls), 25)
+            self.assertEqual(calls.count(deferred_id), 2)
+        with tempfile.TemporaryDirectory() as tmp, patch.object(e, "team_case", return_value={"state": "provider_refusal"}) as assess:
+            for _ in range(2):
+                e.load_or_assess(None, Path(tmp), "luna", frozen["cases"][0])
+            self.assertEqual(assess.call_count, 1)
+        self.assertFalse(e.phase_complete("cov4", {"api_errors": {"timeout": 1}}))
+
 
 if __name__ == "__main__":
     unittest.main()
