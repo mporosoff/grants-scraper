@@ -362,6 +362,19 @@ test("Alerts workflow guards version capture, D1 migration, deployment, and roll
   assert.match(alertsWorkflow, /if: \$\{\{ always\(\) && steps\.worker-deploy\.outcome == 'success'/);
 });
 
+test("standalone Worker retries stay on protected main and retain all release gates", () => {
+  for (const workflow of [alertsWorkflow, awardWorkflow]) {
+    assert.match(workflow, /on:\s*\n\s+workflow_dispatch:/);
+    assert.match(workflow, /deploy:\s*\n\s+if: github\.ref == 'refs\/heads\/main'/);
+    assert.match(workflow, /cancel-in-progress: false/);
+    assert.match(workflow, /built_from_sha.*current_main_sha|current_main_sha.*built_from_sha/);
+    assert.match(workflow, /Classify .* Worker inputs since the active deployment/);
+    assert.match(workflow, /Verify Pages serves the committed/);
+    assert.match(workflow, /rollback/);
+    assert.doesNotMatch(workflow, /scripts\.fetch_opportunities|scripts\.extract_document_evidence|scripts\.build_opportunity_teams|build_search_v2_voyage_vectors/);
+  }
+});
+
 test("Alerts signing-key rotation fails closed except for the exact verified Phase 2 bootstrap", () => {
   const current = "1".repeat(16);
   const previous = "2".repeat(16);
