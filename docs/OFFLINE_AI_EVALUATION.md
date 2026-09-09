@@ -65,6 +65,20 @@ complete qualification cannot fit. Preserve the unused balance and pilot reserve
 an explicit request-limit extension is required before starting v3 qualification.
 The monetary allowance is not exhausted. No v3 provider request has been made.
 
+The user subsequently authorized **50 more requests and no extra dollars**.
+PR #212 is merged as `c8efab1a8fa94616a25d81929e9b4dfbebc2a36c`; the scientific
+candidate and frozen confirmations remain unchanged. The request-only extension
+`sonnet-team-scope-request-extension-20260909` replaces the unused remainder at
+run `34393056404`, retaining its 514 requests/$10.740756 and every prior event.
+The resulting task ceiling is **652 requests/$18.410234** (200 requests/$10 from
+the follow-on starting checkpoint); qualification becomes **185 requests/$8**.
+This leaves **123 qualification requests/$5.669478** and the unchanged
+15-request/$2 pilot reserve. Both grants use exact retained ledger checkpoints.
+Each commits atomically; retrying after either commit applies no duplicate grant.
+Qualification fails closed until its retained local grant and parent grant match.
+Missing qualification history cannot create a fresh counter. This authorization
+does not clear a provider stop or enable production teams.
+
 The first general correction was `sonnet-research-purpose-1` decomposition. Both known
 false rejections received complete retained input: the model confused a stated
 research purpose with missing application details, or related disciplines with
@@ -91,7 +105,9 @@ After protected merge and sufficient authorized request allowance, execute the
 existing entrypoints in this order:
 
 ```sh
-# Authorization is already applied; resume the existing state artifact.
+# Apply the request-only extension once after its protected merge.
+# If interrupted, this same phase safely completes the two retained grants.
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-authorization
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-focus
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-regression
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-population

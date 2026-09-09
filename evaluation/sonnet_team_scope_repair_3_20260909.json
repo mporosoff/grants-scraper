@@ -5038,11 +5038,29 @@
   },
   "qualification_budget": {
     "usd": 8,
-    "requests": 135,
+    "requests": 185,
     "reserved_pilot_usd": 2,
     "reserved_pilot_requests": 15,
-    "basis": "The same 135-request/$8 qualification ledger spans every repair version. At the version 3 checkpoint, 62 requests/$2.330522 have been used; 73 requests/$5.669478 remain. Preserve the 15-request/$2 pilot reservation. Exact unchanged stage contracts and inputs alone permit reuse. If the retained cap is reached, preserve incomplete qualification; do not skip cases, reset accounting or enable teams.",
-    "ledger_id": "sonnet-team-scope-repair-1"
+    "basis": "The user explicitly extended the task from 150 to 200 requests and qualification from 135 to 185 requests, with no additional dollars. Preserve all 62 prior qualification requests/$2.330522, the same ledger ID, the $8 qualification ceiling, and the 15-request/$2 pilot reserve. The original $10 task allowance and recurring limits remain unchanged. Exact unchanged stage contracts and inputs alone permit reuse.",
+    "ledger_id": "sonnet-team-scope-repair-1",
+    "authorization": {
+      "id": "sonnet-team-scope-request-extension-20260909-qualification",
+      "additional_requests": 123,
+      "additional_usd": 5.669478,
+      "cumulative_usd": 8.0,
+      "providers": [
+        "anthropic"
+      ],
+      "replacement_checkpoint": {
+        "run_id": "34393056404",
+        "ledger_sha256": "a1d67dcbd87cf01ca2fc8363516cff3a9381fa85a3e494de5f52ff9cea72cafb",
+        "ledger_identity": "6587034f25d24d5fe65d6e510463f99a3948d6e39aae7a4c7d174916bf54e4d9"
+      },
+      "new_requests_authorized": 50,
+      "new_usd_authorized": 0,
+      "scope": "Request-only extension explicitly approved in the current task. The replacement includes the prior unspent request and dollar balances; no monetary ceiling, recurring limit, historical request, uncertain charge or provider stop changes.",
+      "parent_authorization_id": "sonnet-team-scope-request-extension-20260909"
+    }
   },
   "pre_dispatch_inventory": {
     "authoritative_run": "34363866498",
@@ -5092,5 +5110,12 @@
     "qualification_estimated_usd": 2.330522,
     "qualification_gate_passed": false,
     "confirmation_outputs_observed": false
+  },
+  "request_extension": {
+    "authorization_id": "sonnet-team-scope-request-extension-20260909",
+    "new_requests": 50,
+    "new_usd": 0,
+    "prior_budget_checkpoint": "evaluation/sonnet_team_scope_repair_3_budget_checkpoint_20260909.json",
+    "scope": "Authorization/accounting only; scientific prompts, source/claim inputs, twelve confirmations and quality floors unchanged."
   }
 }

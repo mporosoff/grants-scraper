@@ -236,7 +236,7 @@ def evaluation_ledger(path):
     return restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], authorization)
 
 
-def replacement_authorization(state):
+def replace_retained_authorization(path, logical_id, authorization):
     """Atomically replace a specifically authorized remainder, retaining history.
 
     Use the existing shared grant implementation on a draft. Only the complete
@@ -247,13 +247,13 @@ def replacement_authorization(state):
     import tempfile
     from decimal import Decimal
     from tools.offline_spend import authorize_allowance, restore_ledger
-    path = Path(state) / 'ledger.json'
-    authorization = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())['authorization']
+    path = Path(path)
     prior = json.loads(path.read_bytes())
     if prior.get('active_allowance') == authorization:
-        return evaluation_ledger(path).summary()
+        return restore_ledger(path, logical_id, 0, 0, authorization)
     checkpoint = authorization['replacement_checkpoint']
-    ledger = restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], prior.get('active_allowance'))
+    ledger = restore_ledger(path, logical_id, Decimal(prior['limit_microusd']) / 1_000_000,
+                            prior['max_requests'], prior.get('active_allowance'))
     with ledger.locked():
         prior = ledger.read()
         import hashlib
@@ -268,9 +268,32 @@ def replacement_authorization(state):
         with tempfile.TemporaryDirectory(dir=path.parent) as directory:
             draft_path = Path(directory) / 'ledger.json'
             atomic_json(draft_path, draft)
-            granted = authorize_allowance(draft_path, TASK, authorization).read()
+            granted = authorize_allowance(draft_path, logical_id, authorization).read()
         atomic_json(path, granted)
-    return evaluation_ledger(path).summary()
+    return restore_ledger(path, logical_id, 0, 0, authorization)
+
+
+def replacement_authorization(state):
+    """Apply the task grant and its optional qualification reservation once.
+
+    Each ledger commits atomically. A retry always verifies both, including when
+    the process stopped after the task commit but before the qualification commit.
+    Mismatched run caps fail closed before any provider dispatch.
+    """
+    configuration = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())
+    protocol = (json.loads(Path(configuration['team_protocol']).read_bytes())
+                if configuration.get('team_protocol') else {})
+    budget = protocol.get('qualification_budget', {})
+    child = budget.get('authorization')
+    if child:
+        if child['parent_authorization_id'] != configuration['authorization']['id']:
+            raise ConfigurationFailure('qualification_allowance_parent_mismatch')
+    ledger = replace_retained_authorization(Path(state) / 'ledger.json', TASK, configuration['authorization'])
+    if child:
+        ledger_id = budget.get('ledger_id', protocol['version'])
+        qualified = replace_retained_authorization(Path(state) / ledger_id / 'ledger.json', ledger_id, child)
+        Ledger(qualified.path, ledger_id, budget['usd'], budget['requests']).read()
+    return ledger.summary()
 
 
 def production_preflight_configuration():
@@ -391,10 +414,19 @@ def production_teams(state, population, *, replay=False):
     destination.mkdir(parents=True, exist_ok=True)
     execution_ledger = ledger
     if not replay and protocol.get('qualification_budget'):
-        from tools.offline_spend import LinkedLedger
+        from tools.offline_spend import LinkedLedger, restore_ledger
         budget = protocol['qualification_budget']
         ledger_id = budget.get('ledger_id', protocol['version'])
-        local = Ledger(state / ledger_id / 'ledger.json', ledger_id, budget['usd'], budget['requests'])
+        local_path = state / ledger_id / 'ledger.json'
+        authorization = budget.get('authorization')
+        if authorization:
+            if not local_path.exists():
+                raise ConfigurationFailure('qualification_history_required')
+            retained = restore_ledger(local_path, ledger_id, budget['usd'], budget['requests'], authorization).read()
+            if (retained.get('active_allowance') != authorization
+                    or ledger.read().get('active_allowance', {}).get('id') != authorization['parent_authorization_id']):
+                raise ConfigurationFailure('qualification_allowance_required')
+        local = Ledger(local_path, ledger_id, budget['usd'], budget['requests'])
         execution_ledger = LinkedLedger(local, ledger)
     client = trial.ReplayClient(state / 'cache') if replay else Client(execution_ledger, state / 'cache', deadline=time.monotonic() + 2400)
     before = len(ledger.read()['requests'])
