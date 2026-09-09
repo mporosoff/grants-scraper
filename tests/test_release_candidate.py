@@ -248,6 +248,40 @@ class CandidateLifecycleTests(unittest.TestCase):
         final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
         self.assertTrue(c.verify_receipt(self.root, self.bundle, c.read_json(self.reports / 'validation.json')))
 
+    def test_named_reassembly_loads_unpublished_candidate_instead_of_current_pointer(self):
+        from tools import plan_release as planner
+        manifest = self.create()
+        current = c.create(self.root, Path(self.temp.name) / 'current',
+                           generation_sha=self.source_sha, run_id='999', attempt='1')
+        c.write_json(self.root / 'release/candidate.json', current)
+        c.write_json(self.root / 'release/candidate-source.json', {
+            'candidate_id': current['candidate_id'], 'artifact_run': '999'})
+        def download(repository, run, name, destination):
+            self.assertEqual((run, name), ('123', 'candidate-' + manifest['candidate_id']))
+            shutil.copytree(self.bundle, destination)
+        for stage in ('reuse', 'teams', 'backfill'):
+            env = {'REQUESTED_STAGE': stage, 'CANDIDATE_ID': manifest['candidate_id'], 'CANDIDATE_RUN': '123',
+                'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_EVENT_NAME': 'workflow_dispatch',
+                'GITHUB_RUN_ID': '456', 'RECEIPT_RUN': '', 'PUBLICATION_RUN': '', 'PUBLICATION_ATTEMPT': '',
+                'QUALIFICATION_PILOT': 'false', 'RUNNER_TEMP': str(self.root),
+                'GITHUB_OUTPUT': str(self.root / 'outputs'), 'GITHUB_STEP_SUMMARY': str(self.root / 'summary')}
+            with self.subTest(stage=stage), patch.dict(os.environ, env), patch.object(c, 'ROOT', self.root), \
+                    patch.object(planner, 'completed_attempt', return_value=None), \
+                    patch.object(planner, 'latest_report', return_value=('', None)) as reports, \
+                    patch('tools.fetch_release_artifact.fetch', side_effect=download), \
+                    patch.object(planner, 'snapshot', return_value={}), patch.object(planner, 'candidate_groups', return_value={}):
+                planner.main()
+                planned = c.read_json(self.root / 'release-plan.json')
+                self.assertEqual((planned['stage'], planned['candidate_id'], planned['candidate_run']),
+                                 (stage, manifest['candidate_id'], '123'))
+                self.assertTrue(all(call.args[1] == manifest['candidate_id'] for call in reports.call_args_list))
+                with patch.dict(os.environ, {'CANDIDATE_ID': 'invalid'}), self.assertRaisesRegex(ValueError, 'exact candidate'):
+                    planner.main()
+                (self.bundle / 'files/data/opportunities.js').write_text('corrupted artifact')
+                with self.assertRaisesRegex(ValueError, 'Candidate bytes differ'):
+                    planner.main()
+                shutil.copyfile(self.root / 'data/opportunities.js', self.bundle / 'files/data/opportunities.js')
+
     def test_expired_or_missing_candidate_recovers_only_exact_protected_bytes(self):
         from tools import fetch_release_artifact as artifacts
         manifest = self.create()

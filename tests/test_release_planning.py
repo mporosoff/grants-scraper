@@ -103,7 +103,7 @@ class ReleasePlanning(unittest.TestCase):
     def test_actual_git_main_advancement_and_dependency_groups(self):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            policy = {'generated': [], 'package': [], 'dependency_groups': {
+            policy = {'generated': ['README.md', 'PROJECT.md'], 'package': [], 'dependency_groups': {
                 key: {'patterns': [name], 'excluded': []} for key, name in
                 [('source', 'parser.py'), ('teams', 'team.py'), ('semantic', 'vectors.py'),
                  ('runtime', 'index.html'), ('validation', 'validator.py')]}}
@@ -111,6 +111,7 @@ class ReleasePlanning(unittest.TestCase):
             policy['dependency_groups']['teams']['patterns'] += ['tools/offline_ai.py', 'config/offline_ai.json']
             files = {'config/release_dependencies.json': json.dumps(policy), 'parser.py': 'x=1', 'team.py': 'x=1',
                      'vectors.py': 'x=1', 'index.html': 'a', 'validator.py': 'x=1',
+                     'README.md': 'Authored readme with generated statistics', 'PROJECT.md': 'Authored project instructions',
                      'tools/run_budgeted_documents.py': 'x=1', 'tools/offline_spend.py': 'x=1', 'tools/offline_ai.py': 'x=1',
                      'config/offline_ai.json': json.dumps({'budgets_usd': {'maintenance': 2}, 'max_requests': 300,
                                                          'prices_per_million': {}, 'production_route': 'sonnet'}),
@@ -124,6 +125,7 @@ class ReleasePlanning(unittest.TestCase):
             sha = git('rev-parse', 'HEAD')
             baseline = dependencies.snapshot(root, sha)
             for name, group in [('validator.py', 'validation'), ('index.html', 'runtime'), ('team.py', 'teams'),
+                                ('README.md', 'runtime'), ('PROJECT.md', 'runtime'),
                                 ('parser.py', 'source'), ('vectors.py', 'semantic'),
                                 ('tools/run_budgeted_documents.py', 'source'), ('tools/offline_spend.py', 'source'),
                                 ('tools/offline_ai.py', 'teams')]:

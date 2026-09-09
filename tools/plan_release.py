@@ -93,7 +93,7 @@ def completed_attempt(root, environment, destination):
     return manifest
 
 
-def plan(root, environment, *, receipt=None, live=None, publication=None, resumed=None):
+def plan(root, environment, *, receipt=None, live=None, publication=None, resumed=None, selected=None):
     root = Path(root)
     sha = c.git(root, 'rev-parse', 'HEAD')
     requested = environment.get('REQUESTED_STAGE', '')
@@ -110,7 +110,7 @@ def plan(root, environment, *, receipt=None, live=None, publication=None, resume
             raise ValueError('Invalid ' + field)
     if requested == 'verify' and not all(environment.get(k) for k in ('RECEIPT_RUN', 'PUBLICATION_RUN')):
         raise ValueError('Verify requires exact validation and publication evidence')
-    manifest = resumed or c.read_json(root / 'release/candidate.json')
+    manifest = resumed or selected or c.read_json(root / 'release/candidate.json')
     if explicit:
         return {'stage': requested, 'release_sha': sha, 'candidate_id': candidate, 'candidate_run': run, 'changes': {},
                 'publication_run': environment.get('PUBLICATION_RUN', ''),
@@ -163,7 +163,7 @@ def main():
     environment = dict(os.environ)
     pointer = c.read_json(c.ROOT / 'release/candidate-source.json')
     requested = environment.get('REQUESTED_STAGE', '')
-    receipt = live = publication = resumed = result = None
+    receipt = live = publication = resumed = selected = result = None
     receipt_run = environment.get('RECEIPT_RUN', '')
     with tempfile.TemporaryDirectory() as directory:
         if requested in ('validate', 'publish'):
@@ -176,13 +176,23 @@ def main():
                 receipt_run = latest_run
         if requested not in ('validate', 'publish', 'verify'):
             resumed = completed_attempt(c.ROOT, environment, Path(directory) / 'candidate')
+        if not resumed and requested in ('reuse', 'teams', 'backfill') and any(
+                environment.get(key) for key in ('CANDIDATE_RUN', 'CANDIDATE_ID')):
+            run, candidate_id = (environment.get(key, '') for key in ('CANDIDATE_RUN', 'CANDIDATE_ID'))
+            if not re.fullmatch(r'[1-9][0-9]*', run) or not re.fullmatch(r'[a-f0-9]{64}', candidate_id):
+                raise ValueError('An exact candidate run and identity are required; no implicit replacement')
+            from tools.fetch_release_artifact import fetch
+            bundle = Path(directory) / 'selected'
+            fetch(environment['GITHUB_REPOSITORY'], run, 'candidate-' + candidate_id, bundle)
+            selected = c.load(bundle, candidate_id)
+            c.verify_dependencies(c.ROOT, selected, allowed=('teams',) if requested != 'reuse' else ())
         if requested not in ('generate', 'validate', 'publish', 'verify') or resumed:
-            candidate = resumed['candidate_id'] if resumed else pointer['candidate_id']
+            candidate = (resumed or selected or pointer)['candidate_id']
             _, live = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'live', Path(directory) / 'live')
             receipt_run, receipt = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'validation', Path(directory) / 'validation')
             _, publication = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'publication', Path(directory) / 'publication')
     if result is None:
-        result = plan(c.ROOT, environment, receipt=receipt, live=live, publication=publication, resumed=resumed)
+        result = plan(c.ROOT, environment, receipt=receipt, live=live, publication=publication, resumed=resumed, selected=selected)
     result['receipt_run'] = receipt_run
     from tools.team_provider import provider_names
     result['openai'] = str('openai' in provider_names()).lower()
