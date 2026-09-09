@@ -1,0 +1,125 @@
+{
+  "decision_clock": "2026-09-09T22:44:26.317Z",
+  "files": {
+    "data/opportunities.js": {
+      "sha256": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+      "bytes": 14304071,
+      "gzip_bytes": 2136610
+    },
+    "data/subtopics.js": {
+      "sha256": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+      "bytes": 1894538,
+      "gzip_bytes": 224077
+    },
+    "data/researcher_directory.js": {
+      "sha256": "93b95b1f5e0656fa527c313f3ae40ccfc244e73b92f20e5e870cbe570f82da69",
+      "bytes": 388824,
+      "gzip_bytes": 38732
+    },
+    "data/opportunity_team_index.js": {
+      "sha256": "b51bf118e055ca11a4988c7c91cffc7f4c28da4385ac224d54919838b20e25c0",
+      "bytes": 10817,
+      "gzip_bytes": 1128
+    },
+    "data/opportunity_teams.js": {
+      "sha256": "a4a33d69c68bc9105d5acad7b4f32fa00b5e889bd1f8962762989d4b242a7f70",
+      "bytes": 1012069,
+      "gzip_bytes": 167858
+    },
+    "assets/search-retrieval.js": {
+      "sha256": "e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+      "bytes": 129536,
+      "gzip_bytes": 26027
+    },
+    "data/search-v2-voyage-manifest.json": {
+      "sha256": "8c5184faf674745b3cfd7e61a7cc1cb4106305a1c69eb37ea7b5721942149ced",
+      "bytes": 430445,
+      "gzip_bytes": 86922
+    },
+    "data/search-v2-voyage-vectors.f16": {
+      "sha256": "4888ab1d0c6d7bc044f4d1e8725838b0d533dddeda0f672905274f5a94403522",
+      "bytes": 3336192,
+      "gzip_bytes": 3067028
+    },
+    "config/sonnet_production_qualification.json": {
+      "sha256": "aa84a0f5c10905719baefe23e3b4392d60bcff7f7abf7d53c7d201908dbae497",
+      "bytes": 2493,
+      "gzip_bytes": 1042
+    }
+  },
+  "parents": 1422,
+  "current_parents": 1398,
+  "publishable_children": 223,
+  "current_children": 223,
+  "source_screened_candidates": 1007,
+  "source_screened_groups": 904,
+  "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+  "directory_counts": {
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 120,
+      "standby": 35,
+      "unadmitted": 3
+    },
+    "rankable": 155,
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "status_counts": {
+      "active": 158
+    },
+    "total": 158,
+    "unrankable": 3,
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    }
+  },
+  "active_eligible_claims": 427,
+  "deduplicated_eligible_passages": 402,
+  "claim_counts": {
+    "min": 1,
+    "median": 3,
+    "max": 9
+  },
+  "claim_text_chars": 14321,
+  "evidence_levels": {
+    "corroborated": 62,
+    "direct": 289,
+    "administrator_reviewed": 76
+  },
+  "missing_source_links": 0,
+  "legacy_scope_count": 107,
+  "legacy_parents": 75,
+  "legacy_review_states": {
+    "needs_revalidation": 16,
+    "available": 9,
+    "proposed": 82
+  },
+  "legacy_generation": "07f1b0b86c534b64ddd8e3dc4305c1e36d1f6652604581e48edfb5b6fdab8453",
+  "legacy_roles": 443,
+  "search_vectors": {
+    "model": "voyage-4-lite",
+    "dimension": 1024,
+    "passages": 1629,
+    "input_type": "document",
+    "dtype": "float16-le",
+    "fingerprint": "8c080778811e5c47d012f0d5db1f0d9c8cac63ae604eb9a12e7892202095f06d",
+    "reuse_permitted": false,
+    "claim_rows": 0
+  },
+  "compatible_aspect_vectors": 0,
+  "compatible_claim_vectors": 0,
+  "profile_and_scope_float32_estimate": {
+    "normal_150_6_aspects": 5947392,
+    "maximum_150_8_aspects": 7176192
+  },
+  "rollout": {
+    "selected": 150,
+    "unique_parents": 103,
+    "children": 50,
+    "first": 50
+  }
+}

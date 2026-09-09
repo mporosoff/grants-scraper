@@ -1,0 +1,18 @@
+✔ v1 rejects prepared/no-group members; this is a recorded migration boundary (5.6325ms)
+✔ v1 suppresses adjacent/gap candidates despite an available slot (3.0013ms)
+✔ v1 suppresses candidates when every modeled role is filled (2.3305ms)
+✔ v1 limits an otherwise feasible option pool to three and enforces four slots (3.449ms)
+✔ unchanged renderer truthfully distinguishes direct, method transfer, unconfirmed, and empty group (146.4908ms)
+✔ eight buttons render and clicked index resolves the same displayed member IDs (28.2839ms)
+✔ all modeled roles supported still allows every other admitted person through the existing dropdown (21.2638ms)
+✔ four occupied slots hide additions; removal exposes all seven other IDs including restore (18.9151ms)
+✔ zero members retains individual additions and handoff; failures and retry invoke no providers (43.0221ms)
+✔ record currentness conflict: legacy proposal actions never consult a clock (3.648ms)
+ℹ tests 10
+ℹ suites 0
+ℹ pass 10
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 785.9763

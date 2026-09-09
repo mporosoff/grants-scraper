@@ -1,0 +1,24 @@
+{
+  "observed_at": "2026-09-09T22:50:34.244916+00:00",
+  "assets": {
+    "release/candidate-source.json": {
+      "error": "HTTP Error 404: Not Found"
+    },
+    "release/candidate.json": {
+      "sha256": "aa52b80f5fa6f403b822148f352082d79be5d4ac9483a015c62aa640caba71ee",
+      "bytes": 118502,
+      "identity": {
+        "assembly_sha": "d8533c5f6391eda0a49c1963bdfbf71eb7651492",
+        "candidate_format": "immutable-release-1",
+        "candidate_id": "5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0",
+        "derived_from_candidate": "982d97210d2b161398f9dd60df8e54449f08d90f462e48762804ef53a5a53207",
+        "generation_run_attempt": "1",
+        "generation_run_id": "34360404301",
+        "generation_sha": "05cec746d1c1f2e9c27ee32f34fcea7415bd7c8a",
+        "generation_timestamp": "2026-09-09T14:02:58.496272+00:00",
+        "schema_version": 1,
+        "worker_fingerprint": "646ca5d3c5de42a3c3de2db04e56ffb9c64ea2362bc7775e5b410b88df2a28bf"
+      }
+    }
+  }
+}

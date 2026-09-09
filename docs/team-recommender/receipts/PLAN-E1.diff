@@ -1,0 +1,127 @@
+--- PLAN v2.0 original
++++ PLAN E1 evaluation amendment
+@@ -1,10 +1,12 @@
+ # Funding Finder: on-demand team recommender — revised implementation plan
+ 
+-**Version:** 2.0 · **Date:** September 9, 2026  
++**Version:** 2.0 + user evaluation amendment E1 · **Date:** September 9, 2026  
+ **Repository:** `mporosoff/grants-scraper`  
+ **Experimental branch:** `codex/on-demand-team-recommender`  
+ **Execution:** Four stages. Each ends with a complete report and STOP for user review.  
+ **Status:** Design and handoff only. Creating this plan did not create a branch, change the repository, start paid work, or deploy anything.
++
++**Evaluation amendment E1:** The user replaced conflicting human-annotation requirements during Stage 1. See `EVALUATION_AMENDMENT.md`, `evaluation-protocol.md`, and `annotation-packet.md`. The original v2.0 text is preserved in `history/PLAN-v2.0-original.md`. Architecture, presentation, stages, grouping, holdout and rollout constraints are unchanged. No paid execution is authorized by this amendment.
+ 
+ ## 0. Authority, scope, and the decision
+ 
+@@ -310,15 +312,17 @@
+ 
+ Historical exposed trials belong in development/regression reporting. Preserve the earlier twelve confirmations and document any overlap; do not label familiar examples fresh. Known-source overlap is not the same as new independent evidence. These tests assess unseen calls among the current researcher directory, not guaranteed transfer to a new university or entirely new faculty population.
+ 
+-### 8.2 Real annotation requirements
+-
+-Use a compact offline review table, not a new public UI. Rubric categories: strong useful match, plausible contribution/transfer, clearly unrelated, and insufficient information. The first two count as reasonable suggestions; insufficient information is reported explicitly, not silently converted to a success or dropped.
+-
+-Target roughly 600 development aspect–researcher judgments with at least 25% double-rated by two actually available knowledgeable reviewers. Include a representative probability-sampled component plus deliberate difficult examples. Preserve inclusion probabilities/stratum weights or keep a separate representative calibration subset. A hard-negative-enriched or active-learning sample cannot establish deployment probabilities without correction. [R7–R8]
+-
+-Stage 1 must identify actual annotation sources, reviewer availability, disagreement procedure, and estimated review workload. Do not invent experts, manufacture “human-reviewed” labels, or treat a second LLM as independent human validation. Models may help organize source evidence; mark their judgments separately. Missing labels defer trained/Bayesian claims, not safe work on an untrained numerical baseline. Missing independent final review remains a disclosed limit on deployment approval.
+-
+-Define group feasibility independently from the algorithm's willingness to produce output. Review source requirements and the directory before judging a particular algorithm's success. Mark unclear feasibility separately; report its prevalence and all-case results. Evaluators need not certify qualifications or predict grants.
++### 8.2 Model-led offline evaluation and bounded human audit (user amendment E1)
++
++Use deterministic tests for objective identities, currentness, ownership, duplicate membership, source-span integrity, numerical behavior, interface contracts and zero-call interactions. Use one fixed rubric-based model judge for most semantic evaluation: individual relevance, applicable method transfer, group coherence, complementarity and explanation faithfulness. Judge whether a collaborator is worth a scientific conversation; never certify facilities, qualifications, willingness or proposal success. Labels are strong / plausible / unrelated / insufficient-information, with ties and unresolved cases retained.
++
++Run judging in an evaluation context separate from implementation and recommendation generation. Supply original bounded call evidence and relevant original public profile passages, not just generated aspects or persuasive explanations. Audit explanations separately. Hide algorithm identities, numerical scores, expected winners and prior decisions; keep substantive evidence and formatting comparable. Use reproducibly balanced ordering and a predeclared small order-swap audit. Conflicts remain unresolved, not rerun until favorable. Prefer an already available different model family from any aspect generator when practical and budgeted; no new provider is mandatory and another model does not guarantee independence.
++
++Marc Porosoff is the sole confirmed human reviewer. Plan at most 40 compact requested items across the entire experiment: up to 20 development rubric/judge checks and up to 20 separate final-audit items after the finalist and judge protocol are frozen. Include individual and complete-team comparisons; no item may hide dozens of subjudgments. Development includes representative, borderline, transfer and unrelated controls. Preselect the final audit without favorable judge scores. Show original source/profile evidence first; hide the judge verdict until Marc records his assessment. Allow unable-to-assess; count every requested item including skips against the cap, with no automatic replacement or extra rounds. Additional human review needs explicit approval. Do not assume a second reviewer or require hundreds of manual labels.
++
++Distinguish human judgments, model judgments and deterministic tests. Model-generated development labels may support optional regularized/Bayesian fitting, explicitly as potentially noisy machine labels, not expert ground truth. Agreement with the training judge does not establish calibrated human preferences. Retain representative sampling/inclusion probabilities or a separate calibration subset, and report systematic errors, disagreements, missing information, empty outputs, denominators and clustered uncertainty. Keep existing targets visible and identify model-estimated versus actually human-observed metrics. The human audit is limited product evidence, not multi-expert validation across all fields.
++
++Use one primary judge, cached exact judgments, deduplicated evaluation items with retained occurrence counts, and a bounded request/token/dollar ceiling approved separately. If judging remains unreliable, report the failure; do not expand providers, human labeling or qualification loops. Safe simple-baseline development can continue with usefulness claims limited to actual evidence. Independently assess source coherence and directory feasibility before judging algorithm output; unclear feasibility remains explicit. Detailed finite item plans, human allocation, prompt/schema, bias controls and trusted-route limitations are in `evaluation-protocol.md` and `annotation-packet.md`.
+ 
+ ### 8.3 Development comparison and frozen model choice
+ 
+@@ -331,7 +335,7 @@
+ 
+ MMR/no-MMR is a paired ablation, not another model sweep. Use a small predeclared parameter grid. All preprocessing scalers, thresholds, weight choices, passage aggregation, and model selection use grouped development folds only. Do not fit on all data before splitting. [R7]
+ 
+-At the end of Stage 2, nominate one primary finalist and at most one simpler fallback under a fixed selection rule. Lock their code, scoring parameters, aspects/preprocessing version, test protocol, and release criteria before inspecting holdout outputs. Do not inspect a holdout leaderboard and then announce whichever arm won as independently confirmed.
++Freeze the judge rubric and protocol, candidate selection rule, and primary finalist before final evaluation. Do not tune against the sealed holdout or final human audit. At the end of Stage 2, nominate one primary finalist and at most one simpler fallback under a fixed selection rule. Lock their code, scoring parameters, aspects/preprocessing version, test protocol, and release criteria before inspecting holdout outputs. Do not inspect a holdout leaderboard and then announce whichever arm won as independently confirmed.
+ 
+ Stage 3 evaluates the frozen primary and comparison baseline; a predeclared fallback may also be assessed transparently. A failed primary is recorded as failed. Any use of the fallback is an explicit user-reviewed deployment decision, not erased selection history or a tuned new candidate.
+ 
+@@ -339,13 +343,13 @@
+ 
+ For held-out eligible scopes, judge top-five people when available, the primary group, and two alternatives. Audit a stratified sample of further options and post-removal/addition results. Deduplicate repeated judgments of the same aspect/person/evidence while preserving occurrences for per-scope outcomes.
+ 
+-Report macro per-scope and member-level metrics, actual list lengths, individual yield, group yield, no-group cases, reasonable-transfer and unrelated-outsider rates, and research-area slices. Bootstrap or otherwise calculate paired uncertainty clustered by parent/near-duplicate group—not by hundreds of correlated team variants. Small subgroups have wide uncertainty; do not claim broad generality from a few cases.
+-
+-If calibrated predictions are claimed, obtain a representative held-out aspect–researcher sample; top-ranked recommendations alone do not validate full-range probabilities. Match sampling and the predicted event, evaluate after researcher aggregation, and report reliability counts along with proper scores. Do not display numerical probability in the frozen UI.
++Report model-estimated and actually human-observed metrics separately. Report macro per-scope and member-level metrics, actual list lengths, individual yield, group yield, no-group cases, reasonable-transfer and unrelated-outsider rates, and research-area slices. Bootstrap or otherwise calculate paired uncertainty clustered by parent/near-duplicate group—not by hundreds of correlated team variants. Small subgroups have wide uncertainty; do not claim broad generality from a few cases.
++
++If calibrated predictions are claimed, identify calibration to the fixed model judge versus limited human observations and obtain a representative held-out aspect–researcher sample; top-ranked recommendations alone do not validate full-range probabilities. Match sampling and the predicted event, evaluate after researcher aggregation, and report reliability counts along with proper scores. Do not display numerical probability in the frozen UI.
+ 
+ ### 8.5 Proposed release targets, frozen at Stage 1
+ 
+-These are product targets and engineering choices, not measured achievements or literature constants. Stage 1 may revise them once before tuning/holdout, with reasons and user review.
++These are product targets and engineering choices, not measured achievements or literature constants. Under E1, semantic target estimates are primarily model-judged; report the capped human audit separately and never label those estimates human-validated by implication. Stage 1 may revise them once before tuning/holdout, with reasons and user review.
+ 
+ | Dimension | Acceptance and required context |
+ |---|---|
+@@ -389,7 +393,7 @@
+ 
+ ### 9.3 Budget and trusted execution
+ 
+-Stage 1 is zero-paid-provider. Inventory usable source/aspect/vector data, unique missing items, explicit extraction batches, estimated tokens, embedding calls, retries, and caches. Present one stage-spanning preparation ceiling with provider/model, cumulative dollars, request bounds, and existing trusted execution route. Explicit user approval is required before spending. Old Anthropic team-qualification allowance is not automatically repurposed.
++Stage 1 is zero-paid-provider. Inventory usable source/aspect/vector data, unique missing items, explicit extraction batches, estimated tokens, embedding calls, retries, and caches. Present one stage-spanning preparation/evaluation ceiling with provider/models, unique evaluation item bounds, cumulative dollars, input/output tokens, request bounds, and existing trusted execution route or its concrete limitation. Explicit user approval is required before spending. Old Anthropic team-qualification allowance is not automatically repurposed.
+ 
+ All usage/reservations are durable across retries; completed valid ingredients are reused. Model fitting and team arithmetic are local compute, not LLM calls. Count them separately from provider spend. Exhaustion defers paid preparation while preserving completed work; it does not authorize a new allowance or convert missing inputs into fake ready data.
+ 
+@@ -415,7 +419,7 @@
+ 
+ Freeze presentation hashes and record the allowed nonvisual seam. Prove a fixture can render existing confirmed, unconfirmed, no-group, and replacement outcomes without modifying the renderer. Identify the static-graph/index migration and candidate-list traps. Measure actual profile/vector counts and rough numerical/payload costs.
+ 
+-Create source/grouped corpus manifests, development/holdout boundary, reviewer rubric and actual label plan, preliminary scope/aspect schema, proposed 150/50 rollout selection rules, and all acceptance/parameter policies. Do not expose holdout recommendation outputs in the development task. Define unavailable-label and trusted-preprocessing paths explicitly.
++Create source/grouped corpus manifests, development/holdout boundary, amended model-judge rubric, actual label provenance plan and the capped Marc Porosoff review allocation, preliminary scope/aspect schema, proposed 150/50 rollout selection rules, and all acceptance/parameter policies. Do not expose holdout recommendation outputs in the development task. Define unavailable-label and trusted-preprocessing paths explicitly.
+ 
+ **Deliver:** `stage-1-report.md`, `experiment-state.json`, interface freeze/seam manifest, dataset/split manifests, source/ingredient schema proposal, annotation work packet, cost/execution proposal, and the precise Stage 2 scope.
+ 
+@@ -427,11 +431,11 @@
+ 
+ Build the pure numerical engine, versioned ingredient loader, truthful view adapter, deterministic state/caches, baseline comparisons, and tests. Reuse existing public preparation. Implement all-match reachability and remove the internal three-option cap; no presentation edit.
+ 
+-Fit simpler/Bayesian models only with available properly attributed development labels. Use bounded development parameter choices. Compare MMR/no-MMR and team-size behavior. Measure full-directory scoring before optimizing. Run focused code/contract/renderer-fixture tests, differential arithmetic, small-pool exact checks, and security/failure fixtures. No full E2E yet and no production enablement.
++Fit simpler/Bayesian models only with available properly attributed development labels, including machine-generated labels under E1; do not claim they are expert truth or calibrated human preferences. Use bounded development parameter choices. Compare MMR/no-MMR and team-size behavior. Measure full-directory scoring before optimizing. Run focused code/contract/renderer-fixture tests, differential arithmetic, small-pool exact checks, and security/failure fixtures. No full E2E yet and no production enablement.
+ 
+ Record unsuccessful approaches and actual review effort. Freeze one finalist and at most one predeclared simpler fallback, their thresholds, weights, feature transforms, model assets, selection budget, evidence mapping, and held-out analysis procedure.
+ 
+-**Deliver:** working experimental engine/adapter, development outputs and metric tables, actual annotation provenance, performance/cost inventory, failure examples, unit/contract receipts, frozen candidate/protocol identities, updated experiment state, and `stage-2-report.md`.
++**Deliver:** working experimental engine/adapter, development outputs and metric tables, actual model/human annotation provenance and counts against the 40-item human cap, performance/cost inventory, failure examples, unit/contract receipts, frozen candidate/protocol identities, updated experiment state, and `stage-2-report.md`.
+ 
+ **Exit:** explain which components earned inclusion and which did not; list all unresolved UI or scientific-usefulness weaknesses; STOP before the holdout.
+ 
+@@ -439,13 +443,13 @@
+ 
+ **Prerequisite:** explicit user direction after Stage 2; this stage's prompt explicitly authorizes the complete configured E2E/Playwright/accessibility suite and its bounded diagnosis/revalidation. No production merge/deployment yet.
+ 
+-Verify the frozen candidate and review protocol, then evaluate sealed cases once. Use actual full-directory scoring and appropriately blinded real review. Do not train on held-out examples, drop failures, adjust thresholds, select a new winner from the leaderboard, or represent model-generated judgments as human ones.
++Verify the frozen candidate and review protocol, then evaluate sealed cases once. Use actual full-directory scoring, the frozen blinded model judge, and up to 20 separately preselected final human-audit items within the 40-total cap. Do not train on held-out examples, drop failures, adjust thresholds, select a new winner from the leaderboard, or represent model-generated judgments as human ones.
+ 
+ Run the final integrated interface tests through the unchanged child, candidate, team-option, explanation, remove/add, source, saved-state, retry, and handoff flows. Compare rendered output to the old route using identical mock views; separate permitted recommendation content changes from presentation changes. Test eight options, no group, all slots full, unconfirmed suggestions, race conditions, corruption, stale inputs, network/provider blocking, and both activation cohorts.
+ 
+ Run all ordinary required checks and the full browser suite against the final integrated candidate; revalidate after material corrections. No duplicate full run of unchanged bytes. Compare the exact runtime numerical implementation with the fitted model/reference on held-out inputs. Prepare both cohort packages/manifests and offline rollback proof.
+ 
+-**Deliver:** `stage-3-report.md`, locked quality/evaluation report with denominators and uncertainty, real reviewer evidence, parity and full-suite receipts, final immutable dependency inventory, zero-paid-call proof, 50/150 source/currentness inventory, and precise Stage 4 rollout proposal.
++**Deliver:** `stage-3-report.md`, locked quality/evaluation report with denominators and uncertainty, separate model-judge results and actual capped human-review evidence, parity and full-suite receipts, final immutable dependency inventory, zero-paid-call proof, 50/150 source/currentness inventory, and precise Stage 4 rollout proposal.
+ 
+ **Exit:** pass/fail/inconclusive/not-run for every criterion, explicit ship/revise/defer recommendation, and any limited additional confirmation needed; STOP. No automatic launch because CI is green.
+ 
+@@ -472,7 +476,7 @@
+ 3. **Results:** cases and parent counts, denominators, yield/no-group outcomes, useful/unrelated rates, uncertainty, method comparisons, deterministic/reference tests, latency/memory/bytes.
+ 4. **Examples and failures:** a useful method transfer, an excluded irrelevant person, a no-group case, and every consequential failure with evidence and first failing boundary.
+ 5. **Interface and privacy:** frozen-file comparison, actual reachability and state-label checks, parity evidence, unsupported presentation conflicts, privacy/security checks.
+-6. **Resources:** authorized ceilings, actual provider/model requests/tokens/costs, cache hits, local compute, annotation availability, remaining allowance, and proof of zero paid interactions where applicable.
++6. **Resources:** authorized ceilings, actual provider/model requests/tokens/costs, cache hits, local compute, model/human annotation provenance, human items requested/completed/skipped against the 40-total cap, judge reliability and remaining allowance, and proof of zero paid interactions where applicable.
+ 7. **Production and risk:** exact mutations or none, service/routing state, current live cohort, rollback target, failed/not-run checks, known limitations.
+ 8. **Decision and next step:** proceed/revise/defer, the smallest next stage scope, missing authority/data, and a literal stop for user review.
+ 

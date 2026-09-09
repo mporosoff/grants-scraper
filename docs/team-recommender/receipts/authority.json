@@ -1,0 +1,8 @@
+{
+  "original_plan_sha256": "ae0a872aca1826d7ba0322b464e6f1373e0b45f2aa0b6c6cf710a96a71ce8dd3",
+  "amended_plan_sha256": "d2b22b76732b246f46d76d6361cd5eb91ee06e97a31de5219f7e51b6befc4a90",
+  "handoff_sha256": "154b9d9ce7e300c1572588c44cbceb99da0b15a5f0a98293b7a0bd898ad8ce8f",
+  "starting_checkout_AGENTS_sha256": "8523b19de8d2947560283cf717d2a1c8af3cfebf73b460dd3703afb5e29dec35",
+  "experimental_AGENTS_sha256": "ff7239d8a1ab8a3e2e5c5b8a87163b03bc20d02c07605967f4e8315e43861a40",
+  "precedence": "Explicit user Stage 1 and E1 instructions govern conflicting local review/evaluation prose. AGENTS unchanged. No stage beyond 1 or budget authorized."
+}

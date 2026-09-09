@@ -1,0 +1,37 @@
+✔ declared method transfer can pass despite weak topic similarity, but missing context cannot (2.0431ms)
+✖ synthetic tourism-only outsider is excluded from an optical measurement fixture (1.2492ms)
+✔ best of a uniformly poor pool is no group; one excellent person cannot fabricate a pair (0.2668ms)
+✔ complementary two-person group beats redundancy; aspect split preserves weight budget (0.2337ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 3
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 154.681
+
+✖ failing tests:
+
+test at docs\team-recommender\probes\math.test.mjs:9:1
+✖ synthetic tourism-only outsider is excluded from an optical measurement fixture (1.2492ms)
+  AssertionError [ERR_ASSERTION]: Expected values to be strictly equal:
+  + actual - expected
+  
+  + undefined
+  - false
+  
+      at TestContext.<anonymous> (file:///C:/Users/Marc%20Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender/docs/team-recommender/probes/math.test.mjs:10:9)
+      at Test.runInAsyncScope (node:async_hooks:227:14)
+      at Test.run (node:internal/test_runner/test:1382:25)
+      at Test.processPendingSubtests (node:internal/test_runner/test:960:18)
+      at Test.postRun (node:internal/test_runner/test:1522:19)
+      at Test.run (node:internal/test_runner/test:1447:12)
+      at async startSubtestAfterBootstrap (node:internal/test_runner/harness:387:3) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: undefined,
+    expected: false,
+    operator: 'strictEqual',
+    diff: 'simple'
+  }

@@ -1,0 +1,38 @@
+✔ validates the registry-identified staged directory without fixed counts (50.2948ms)
+✔ scope availability grows without a fixed pilot count and rejects mismatched counts (3.6809ms)
+✔ every current advertised parent reaches a usable scope in the actual catalog (383.1598ms)
+✔ directory search omits inactive, departed, and hidden researchers while preserving identities (12.0263ms)
+✔ stale teams are withheld without blocking the directory or unaffected scopes (2.9209ms)
+✔ proposed variants are distinct and never reintroduce an excluded researcher (5.6378ms)
+✔ generated team alternatives keep complementary contributions after exclusions (3715.1775ms)
+✔ an unsupported matched child falls back to the parent's topic selector (1.3743ms)
+✔ published child teams stay reachable without an umbrella phrase in the parent description (1.1397ms)
+✔ equal-coverage options start with direct experience and expose method transfer (2.8226ms)
+✔ a generated alternative retains its exact claim evidence instead of generic profile terms (2.2248ms)
+✔ admits only current specific parents, eligible children, and declared branches (1.5596ms)
+✔ runtime catalog state overrides a generated proposal at one immutable clock (1.2332ms)
+✔ removal exposes missing roles and replacements cannot silently claim unaudited coverage (3.3318ms)
+✔ Funding Finder team proposals are lazy, rerender-safe and use the shared drawer (0.9894ms)
+✔ the eager availability index is exact, bounded, and omits the full team graph (7.6225ms)
+✔ a stale or stalled lazy projection is discarded and retryable (13.4179ms)
+✔ Team Match exposes directory and governed missing-researcher paths (1.025ms)
+✔ existing researcher, legacy and claim mappings survive mutable registry publication (10.2369ms)
+✔ protected PR and push gates fetch the pre-change registry while refresh and publication use their current checkout (7.7754ms)
+✔ consistent regeneration cannot hide reassigned or removed historical identities (12.0368ms)
+✔ one generated registry generation owns every public researcher projection (9.1833ms)
+✔ stable researcher and claim identities preserve every legacy browser ID (7.7401ms)
+✔ runtime validates generated manifest counts instead of a frozen roster (0.6039ms)
+✔ Team Builder consumes the existing proposal/removal/replacement API and retains exact Team Match links (330.3592ms)
+✔ closed and rerendered team contexts cannot be repopulated by a late shared data load (34.9128ms)
+✔ Team Match currentness uses posted age only for undated non-rolling opportunities (11.7646ms)
+✔ child evidence can help only runtime-current parents and final rows stay eligible (8.5531ms)
+✔ Team Match cache and release identities cover the changed page (7.0502ms)
+✔ Funding Finder and Team Match delegate to one shared currentness contract (0.814ms)
+ℹ tests 30
+ℹ suites 0
+ℹ pass 30
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 5200.6417

@@ -1,0 +1,61 @@
+[
+  {
+    "scope_id": "344592:ab-0013",
+    "parent_id": "344592",
+    "scope_label": "Synthesis and Processing of Materials",
+    "review_state": "proposed",
+    "role": "Materials Synthesis and Processing Scientist",
+    "ref": {
+      "claim_id": "urh-000082-c002",
+      "coverage": "method_transfer",
+      "material_hash": "cf7bf47f14cd6967ad796cf3ff850784c0cf379ba60446c5b0d7f1e956557433",
+      "reason": "Retained method transfer evidence: VO2 nanocrystal synthesis and phase behavior",
+      "researcher_id": "urh-000082",
+      "revision": 1
+    },
+    "person": {
+      "id": "urh-000082",
+      "name": "Kathryn Knowles"
+    },
+    "claim": {
+      "id": "urh-000082-c002",
+      "revision": 1,
+      "evidence": "VO2 nanocrystal synthesis and phase behavior",
+      "source_urls": [
+        "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
+        "https://www.sas.rochester.edu/chm/groups/knowles/",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+      ]
+    }
+  },
+  {
+    "scope_id": "344592:ab-0013",
+    "parent_id": "344592",
+    "scope_label": "Synthesis and Processing of Materials",
+    "review_state": "proposed",
+    "role": "Materials Synthesis and Processing Scientist",
+    "ref": {
+      "claim_id": "urh-000140-c003",
+      "coverage": "method_transfer",
+      "material_hash": "182e01b27268ea46ca0f1933ef260881500d83896f14bdca0f8110f74ce07e71",
+      "reason": "Retained method transfer evidence: ultrafast laser material modification",
+      "researcher_id": "urh-000140",
+      "revision": 1
+    },
+    "person": {
+      "id": "urh-000140",
+      "name": "Wayne H. Knox"
+    },
+    "claim": {
+      "id": "urh-000140-c003",
+      "revision": 1,
+      "evidence": "ultrafast laser material modification",
+      "source_urls": [
+        "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
+        "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+        "https://www.hajim.rochester.edu/optics/news-events/colloquia/archives/2025/2025-01-27-wayne-knox.html"
+      ]
+    }
+  }
+]

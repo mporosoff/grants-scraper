@@ -1,0 +1,32 @@
+{
+  "status": "Stage 1 record proposal, not an implemented validator or ready package",
+  "schema_version": 2,
+  "manifest": {
+    "required": ["package_id", "engine_version", "schema_version", "registry_generation", "embedding_space", "feature_version", "scorer_identity", "selection_version", "assets", "routes"],
+    "asset": {"required": ["relative_path", "sha256", "byte_length", "row_count", "dtype", "dimension"], "validation": "Allowlisted same-origin immutable assets; byte/hash/shape check before adoption; finite nonzero vectors with declared norm tolerance; reject duplicates, unknown eligible IDs and mixed generations"},
+    "route": {"required": ["scope_id", "parent_id", "record_type", "owner", "source_identity", "preparation_state"], "owner_enum": ["legacy-v1", "ingredients-v2"], "preparation_state_enum": ["prepared", "unprepared", "unsupported", "expired"], "invariant": "Exactly one owner per coherent scope; prepared promises inputs, not a group"}
+  },
+  "scope": {
+    "required": ["scope_id", "parent_id", "record_type", "source_url", "source_hash", "currentness", "approaches"],
+    "record_type_enum": ["specific_parent", "publishable_child", "declared_branch"],
+    "approach": {"required": ["approach_id", "source_branch_identity", "core_vector_row", "aspects"], "maximum_displayed_aspects": 8, "minimum_aspects": 1, "invariant": "Evaluate only the selected coherent approach; no sibling blending or invented sponsor requirements"},
+    "aspect": {"required": ["aspect_id", "approach_id", "group_id", "description", "source_locator", "source_span", "source_span_hash", "kind", "contribution_type", "weight", "vector_row", "conditions", "exclusions"], "kind_enum": ["central", "supporting", "optional"], "contribution_type_enum": ["source_requirement", "planning_contribution"], "optional": ["source_supported_operation", "source_supported_context", "linked_passage_ids"], "invariant": "Nonnegative approach weights sum to one; synonyms/split aspects share source group budget; optional total <=.1; missing descriptor stays missing"}
+  },
+  "passage": {
+    "required": ["passage_id", "researcher_id", "claim_refs", "text", "text_hash", "source_urls", "source_checked_date", "evidence_kind", "vector_row", "registry_generation"],
+    "claim_ref": {"required": ["claim_id", "revision", "status"]},
+    "optional": ["source_supported_operation", "source_supported_context", "linkage_evidence"],
+    "invariant": "All deduplicated claim references retained. Eligibility/visibility/active revision validate against atomic registry; interests never relabeled demonstrated work; no private text"
+  },
+  "computed_outcome": {
+    "required": ["scope_id", "approach_id", "matrix_id", "prepared", "matched_people_count", "feasible_team_count", "selected_ids", "excluded_ids", "fixed_ids", "options", "evidence_states"],
+    "group_size": "2..4 automatically; selected state can be 0..4 after user edits or no-group",
+    "maximum_options": 8,
+    "invariant": "All admitted people remain in discovery independently of group membership/evidence confirmation. No result stored as source ingredient. Empty group is valid v2 data. Quantized stable-ID ordering and immutable option identity per state."
+  },
+  "provenance_link": {
+    "required": ["scope_id", "aspect_id", "aspect_hash", "researcher_id", "claim_id", "claim_revision", "relevance_score", "admission_route", "feature_values", "passage_id", "evidence_status"],
+    "evidence_status_enum": ["unconfirmed", "exact_reviewed_direct", "exact_reviewed_method_transfer", "missing", "excluded"],
+    "invariant": "Scores/word identity alone cannot promote evidence. Confirmed status requires an independent exact source-claim relation receipt bound to current revisions."
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "reference": {
+    "platform": "win32",
+    "arch": "x64",
+    "node": "v24.19.0",
+    "cpu": "Intel(R) Core(TM) Ultra 7 165U",
+    "logical_cpus": 14,
+    "physical_device": false,
+    "reference_class": "available developer workstation, not a midrange mobile reference"
+  },
+  "inputs": {
+    "researchers": 155,
+    "passages": 402,
+    "aspects": 8,
+    "dimensions": 1024,
+    "synthetic": true,
+    "semantic_quality_evaluated": false
+  },
+  "runs": 50,
+  "warmup": 5,
+  "dot_multiply_adds": 3293184,
+  "coverage_evaluations_per_recompute": 212351,
+  "timing_ms": {
+    "matrix_p50": 3.843399999999974,
+    "matrix_p95": 4.879500000000007,
+    "group_kernel_p50": 38.08889999999997,
+    "group_kernel_p95": 44.62030000000004,
+    "replacements_p95": 0.09100000000012187
+  },
+  "memory": {
+    "before": {
+      "rss": 39424000,
+      "heapTotal": 6545408,
+      "heapUsed": 5366192,
+      "external": 2112848,
+      "arrayBuffers": 139519
+    },
+    "after": {
+      "rss": 51011584,
+      "heapTotal": 10215424,
+      "heapUsed": 6856736,
+      "external": 4341944,
+      "arrayBuffers": 2368575
+    },
+    "vector_array_bytes": 1683456,
+    "matrix_bytes": 9920,
+    "limitation": "Process measurements include Node/GC; not browser incremental heap"
+  },
+  "payload": {
+    "normal_float32_bytes": 5947392,
+    "maximum_float32_bytes": 7176192,
+    "metadata_shape_bytes": 1084978,
+    "metadata_shape_gzip_bytes": 29837,
+    "measured_directory_gzip_bytes": 38732,
+    "conservative_max_transfer_bytes": 8649994,
+    "limitation": "No actual new ingredient bundle or claim/aspect vectors exists. Metadata placeholder compression is not an expected transfer claim. Uncompressed bound used.",
+    "ideal_20mbps_150ms_seconds": 3.6099976
+  }
+}

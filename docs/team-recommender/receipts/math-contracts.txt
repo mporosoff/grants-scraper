@@ -1,0 +1,12 @@
+✔ declared method transfer can pass despite weak topic similarity, but missing context cannot (1.3668ms)
+✔ synthetic tourism-only outsider is excluded from an optical measurement fixture (0.2658ms)
+✔ best of a uniformly poor pool is no group; one excellent person cannot fabricate a pair (0.31ms)
+✔ complementary two-person group beats redundancy; aspect split preserves weight budget (0.2731ms)
+ℹ tests 4
+ℹ suites 0
+ℹ pass 4
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 169.112

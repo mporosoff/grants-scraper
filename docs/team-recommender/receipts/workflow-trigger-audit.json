@@ -1,0 +1,45 @@
+{
+  "audit": "All branch pushes limited to main; experiment branch push has no matching push trigger. Tests runs on PR; pages only workflow_call; manual E2E only workflow_dispatch. No push, PR, dispatch performed.",
+  "files": {
+    "deploy-ai-gateway.yml": {
+      "sha256": "194b821e39d48c2769024674f526be53c99738f0992b2f4239886043f84d8075",
+      "trigger_excerpt": "name: Deploy hosted AI service\n\non:\n  push:\n    branches:\n      - main\n    paths:\n      - \".github/workflows/deploy-ai-gateway.yml\"\n      - \"assets/ai-provider.js\"\n      - \"assets/ai-prompts.mjs\"\n      - \"package.json\"\n      - \"pnpm-lock.yaml\"\n      - \"tests/browser/ai-gateway-contract.test.mjs\"\n      - \"tests/browser/ai-provider-contract.test.mjs\"\n      - \"workers/ai-gateway/**\"\n"
+    },
+    "deploy-alerts.yml": {
+      "sha256": "f6c3375190db6cbcfecac3aea07cc8071968d06d575961a730c01be15b8851ed",
+      "trigger_excerpt": "name: Deploy Funding Finder alerts\n\non:\n  workflow_dispatch:\n  push:\n    branches:\n      - main\n    paths:\n      - \".github/workflows/deploy-alerts.yml\"\n      - \"assets/alerts-config.js\"\n      - \"assets/alerts.css\"\n      - \"assets/alerts.js\"\n      - \"assets/award-links.js\"\n      - \"assets/saved.js\"\n      - \"assets/app.css\"\n      - \"assets/app.js\"\n      - \"assets/match-explain.js\"\n      - \"assets/search-query.js\"\n      - \"assets/search-retrieval.js\"\n      - \"assets/submission-schedule.js\"\n      - \"data/opportunities.js\"\n      - \"assets/search-v2-config.js\"\n      - \"assets/funded-awards.js\"\n      - \"match_explorer.html\"\n      - \"funded_awards.html\"\n      - \"tools/classify_worker_deployment.mjs\"\n      - \"tools/verify_notice_publication.py\"\n      - \"tools/smoke_alerts_worker.mjs\"\n      - \"tools/validate_alert_capability_rotation.mjs\"\n      - \"workers/alerts/**\""
+    },
+    "deploy-award-api.yml": {
+      "sha256": "88899d6ceacb31f5ae8b877de9290d4e73f6ce8dce22f02e23de0637791368c3",
+      "trigger_excerpt": "name: Deploy Funded Awards service\n\non:\n  workflow_dispatch:\n  push:\n    branches:\n      - main\n    paths:\n      - \".github/workflows/deploy-award-api.yml\"\n      - \"assets/award-api-config.js\"\n      - \"assets/dod-awards-browser.mjs\"\n      - \"assets/award-links.js\"\n      - \"assets/funded-awards-core.js\"\n      - \"assets/funded-awards.css\"\n      - \"assets/funded-awards.js\"\n      - \"assets/institutional-intelligence-core.js\"\n      - \"assets/institutional-intelligence.css\"\n      - \"assets/institutional-intelligence.js\"\n      - \"assets/institutional-intelligence-snapshots.js\"\n      - \"config/award_institutions.json\"\n      - \"funded_awards.html\"\n      - \"match_explorer.html\"\n      - \"package.json\"\n      - \"pnpm-lock.yaml\"\n      - \"tools/classify_worker_deployment.mjs\"\n      - \"tools/smoke_award_worker.mjs\"\n      - \"tools/smoke_phase3_award_worker.mjs\"\n      - \"tools/smoke_unit_b_award_worker.mjs\"\n      - \"workers/award-api/**\""
+    },
+    "deploy-researcher-intake.yml": {
+      "sha256": "d6d76ad6f3180a5ca0068ddf799cef317d1d9d321fadb8702e3e71698388d7c8",
+      "trigger_excerpt": "name: Deploy researcher intake\n\non:\n  push:\n    branches: [main]\n    paths:\n      - \"workers/researcher-intake/**\"\n      - \".github/workflows/deploy-researcher-intake.yml\"\n  workflow_dispatch:\n"
+    },
+    "e2e-manual.yml": {
+      "sha256": "aa7ebae658fca6c4916ba2c3ce07c93b39ede33814b9630bcdb1fb4764838994",
+      "trigger_excerpt": "name: Manual E2E\n\non:\n  workflow_dispatch:\n\nconcurrency:\n  group: manual-e2e-${{ github.ref }}\n  cancel-in-progress: false\n"
+    },
+    "offline-ai-evaluation.yml": {
+      "sha256": "33dbaa77a094e766cd76c19f7e6ec31b0707d8feb09b7f254e128bde97821639",
+      "trigger_excerpt": "name: Bounded offline AI evaluation\n\non:\n  workflow_dispatch:\n    inputs:\n      phase:\n        description: One frozen phase within the retained authorized logical allowance\n        required: true\n        type: choice\n        options: [production-authorization, production-teams-exposed, production-teams-focus, production-cov4-controls, production-cov4-population, production-cov4-replay, production-preflight, production-teams-regression, production-teams-population, production-teams-confirmation, production-teams-replay, preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay, recovery-sonnet, cov4-sonnet, recovery-replay, scope-repair-sonnet, scope-repair-replay, verification-sonnet, verification-replay]\n        default: preflight\n      authorize_anthropic_baseline:\n        description: Consume the user's one evaluation-only Sonnet baseline authorization; production pause stays intact\n        type: boolean\n        default: false\n"
+    },
+    "pages.yml": {
+      "sha256": "7ad34faa15f25b5f0b0fa946a8f3ee14a01208b115d5007c59ee43184043bee3",
+      "trigger_excerpt": "name: Publish validated Pages artifact\n\non:\n  workflow_call:\n"
+    },
+    "publish-researcher-registry.yml": {
+      "sha256": "b402b50f32bf634a3361d5d6ff3ad1e1cc408dca9118d21f2382a58f7dff9203",
+      "trigger_excerpt": "name: Publish approved researcher registry change\n\non:\n  repository_dispatch:\n    types: [researcher-registry-publish]\n  workflow_dispatch:\n    inputs:\n      submission_id:\n        description: Approved submission ID\n        required: true\n        type: string\n      approved_revision:\n        description: Approved queue revision\n        required: true\n        type: string\n      expected_registry_generation:\n        description: Expected base registry generation\n        required: true\n        type: string\n"
+    },
+    "refresh-opportunities.yml": {
+      "sha256": "55442d2cdd8b06ca0f2922642b9ff8c05c342caabe4fd26a37b35688c5811648",
+      "trigger_excerpt": "name: Funding Finder immutable release\n\non:\n  push:\n    branches: [main]\n  schedule:\n    - cron: \"17 10 * * *\"\n  workflow_dispatch:\n    inputs:\n      stage:\n        description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence\n        type: choice\n        options: [auto, generate, teams, backfill, reuse, validate, publish, verify]\n        default: auto\n        required: true\n      pilot_team_scopes:\n        description: Optional comma-separated current scope IDs for the manual qualification pilot (at most five)\n        type: string\n      qualification_pilot:\n        description: Use the existing five-scope/$2 pilot cap and link all LLM charges to the authorized repair task\n        type: boolean\n        default: false\n      final_integration:\n        description: Explicitly run the configured Playwright/accessibility suite on this assembled candidate before publication\n        type: boolean\n        default: false\n      candidate_run:\n        description: Artifact-owning run ID (required for validate, publish and verify)\n        type: string\n      candidate_id:\n        description: Complete immutable candidate ID (required for resume)\n        type: string\n      receipt_run:\n        description: Run containing the prior validation receipt (optional for validate/publish, required for verify)\n        type: string\n      publication_run:\n        description: Run containing the expected publication checkpoint (required for verify)\n        type: string\n      publication_attempt:\n        description: Exact publication attempt when selecting older retained evidence\n        type: string\n"
+    },
+    "tests.yml": {
+      "sha256": "eda72903f0a5590043e9521f6d7f516b3f3eba63d76fda57ed773920944222e6",
+      "trigger_excerpt": "name: Tests\n\non:\n  pull_request:\n  push:\n    branches:\n      - main\n\nconcurrency:\n  group: tests-${{ github.event.pull_request.number || github.ref }}\n  cancel-in-progress: true\n"
+    }
+  }
+}

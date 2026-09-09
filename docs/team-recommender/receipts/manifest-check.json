@@ -1,0 +1,14 @@
+{
+  "passed": true,
+  "cases": 240,
+  "scientific_candidate_scopes": 180,
+  "derived_controls": 60,
+  "development_parent_groups": 90,
+  "holdout_parent_groups": 90,
+  "group_overlap": 0,
+  "historically_exposed_holdout_parent_overlap": 0,
+  "rollout_150_parents": 103,
+  "rollout_children": 50,
+  "source_grouping_audit": "pending",
+  "recommendation_results_exposed": false
+}

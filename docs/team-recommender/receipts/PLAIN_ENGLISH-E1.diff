@@ -1,0 +1,35 @@
+--- PLAIN_ENGLISH v2.0 original
++++ PLAIN_ENGLISH E1 evaluation amendment
+@@ -1,3 +1,5 @@
++> Evaluation amended by the user during Stage 1: see EVALUATION_AMENDMENT.md. The original summary is preserved in history/PLAIN_ENGLISH-v2.0-original.md.
++
+ # The revised plan in plain English
+ 
+ **Version 2.0 · September 9, 2026**  
+@@ -61,7 +63,7 @@
+ 
+ It also does not earn its place automatically. We compare it with a simpler fixed score and a regularized non-Bayesian model. The simplest approach that delivers the needed usefulness can win.
+ 
+-A model needs real assessment data. Codex must not invent human reviewers, silently treat model-generated labels as expert judgments, or promise reliable probabilities from a few examples. If those labels are not available, the untrained mathematical baseline can still be built and tested; claims about Bayesian learning wait for actual evidence.
++Use one fixed offline model judge for most semantic assessment. Its development labels may train optional statistical scorers, but they are noisy machine labels, not expert ground truth or proof of calibrated human preferences. Marc is the sole confirmed human reviewer, with at most 20 compact development checks and 20 separate final-audit items. No paid judge runs occur in production interactions.
+ 
+ ## Handling updates and mistakes
+ 
+@@ -81,7 +83,7 @@
+ 
+ We select the winning method before looking at the sealed results. We do not try many models on the holdout and call whichever looks best independently confirmed.
+ 
+-Reviewers judge whether suggestions are reasonable and useful for discussion, whether a group brings complementary contributions, and whether explanations are truthful. They do not certify that the people must work together or will win a grant.
++The fixed model judge, supplemented by Marc’s capped evidence-first blind audit, assesses whether suggestions are reasonable and useful for discussion, whether a group brings complementary contributions, and whether explanations are truthful. They do not certify that the people must work together or will win a grant.
+ 
+ The target remains approximately four out of five top suggestions being reasonable, very few clearly unrelated automatic members, and useful groups where the directory supports them. We also report empty lists, no-group cases, short lists, and uncertainty. Returning almost nothing cannot manufacture a good score.
+ 
+@@ -97,7 +99,7 @@
+ 
+ ## Four stages, with a report and a stop after each
+ 
+-**Stage 1: inspect and settle the details.** Create or verify the isolated experimental branch, freeze the presentation, inspect data and loading costs, define the grouped evaluation, verify reviewer availability, and propose one explicit preprocessing budget and safe execution path. No paid calls or production changes.
++**Stage 1: inspect and settle the details.** Create or verify the isolated experimental branch, freeze the presentation, inspect data and loading costs, define the grouped evaluation, record the fixed judge route and Marc’s capped human audit, and propose one explicit preprocessing budget and safe execution path. No paid calls or production changes.
+ 
+ The report explains what exists, what is missing, what could conflict with the interface freeze, and exactly what Stage 2 would do. Then Codex stops.
+ 

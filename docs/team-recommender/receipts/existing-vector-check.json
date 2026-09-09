@@ -1,0 +1,10 @@
+{
+  "rows": 1629,
+  "dimension": 1024,
+  "finite_values": true,
+  "nonzero_norms": true,
+  "minimum_norm": 0.9999613165855408,
+  "maximum_norm": 1.0000382661819458,
+  "usable_claim_or_aspect_vectors": false,
+  "reason": "Whole-call document Float16 rows; no matching claim/aspect/query identity"
+}

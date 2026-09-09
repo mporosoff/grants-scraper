@@ -1,0 +1,23 @@
+{
+  ".cache/opportunity-teams": {
+    "exists": false,
+    "vector_cache_files": 0,
+    "vector_cache_bytes": 0,
+    "reused": 0,
+    "contents_read": false
+  },
+  "../../.cache/opportunity-teams": {
+    "exists": false,
+    "vector_cache_files": 0,
+    "vector_cache_bytes": 0,
+    "reused": 0,
+    "contents_read": false
+  },
+  "../economical-release/.cache/opportunity-teams": {
+    "exists": false,
+    "vector_cache_files": 0,
+    "vector_cache_bytes": 0,
+    "reused": 0,
+    "contents_read": false
+  }
+}

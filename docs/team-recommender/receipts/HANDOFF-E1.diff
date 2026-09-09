@@ -1,0 +1,48 @@
+--- HANDOFF v2.0 original
++++ HANDOFF E1 evaluation amendment
+@@ -1,6 +1,8 @@
+ # How to give this plan to Codex
+ 
+-**Version 2.0 · September 9, 2026**
++**Version 2.0 + user evaluation amendment E1 · September 9, 2026**
++
++Read `EVALUATION_AMENDMENT.md` and the amended PLAN evaluation provisions. Original handoff preserved in `history/HANDOFF-v2.0-original.md`. The amendment changes evaluation only; it does not authorize spending or another stage. The originally listed prompt/template/checksum files were not supplied; `prompts/EVALUATION_AMENDMENT.md` is a new limited supplement, not a recreated original authorization prompt.
+ 
+ ## Start here
+ 
+@@ -59,7 +61,7 @@
+ 
+ Paste `prompts/01_STAGE_1.md`. It authorizes isolated planning/prototypes and focused zero-paid checks. It does not authorize paid preprocessing, a main merge, full E2E, or deployment.
+ 
+-Read the returned `stage-1-report.md`. In particular, inspect the interface seam, all-match/no-group behavior, actual ingredient size, label/reviewer availability, evaluation split, and exact spending/trusted-execution proposal. This is where genuine uncertainty should be resolved, rather than letting it become an implicit assumption.
++Read the returned `stage-1-report.md`. In particular, inspect the interface seam, all-match/no-group behavior, actual ingredient size, the fixed offline judge route, Marc’s 20-development/20-final human-item cap, evaluation split, and exact spending/trusted-execution proposal. This is where genuine uncertainty should be resolved, rather than letting it become an implicit assumption.
+ 
+ ### 2. Approve Stage 2 explicitly
+ 
+@@ -67,7 +69,7 @@
+ 
+ ```text
+ I approve the preparation budget record identified in the accepted Stage 1
+-report, with the stated provider/model, cumulative request and dollar ceilings,
++report, with the stated preparation/judge providers and models, cumulative request/token/dollar ceilings,
+ and trusted execution route. This does not authorize a new provider, increased
+ recurring spending, or any per-click paid call.
+ ```
+@@ -93,7 +95,7 @@
+ Codex must write a full report under `docs/team-recommender/reports/` and update a small `experiment-state.json`. The report distinguishes:
+ 
+ - Inspected versus implemented versus actually executed.
+-- Developer/model judgments versus actual human/source review.
++- Deterministic tests, model-judge estimates and actual capped human observations, with their separate denominators.
+ - Passing CI versus recommendation usefulness versus deployment.
+ - Prepared scopes versus scopes with reasonable groups.
+ - Cached repeatability versus independent quality evidence.
+@@ -106,7 +108,7 @@
+ 
+ If a presentation change appears necessary, require the exact function/control conflict and alternatives using the current seam. Do not silently accept a redesign or a misleading badge.
+ 
+-If labels or reviewers are unavailable, safe development of the numerical baseline can proceed, but trained/calibrated quality claims must wait for real evidence. The task should return the compact assessment packet and specific gap, not impersonate an expert.
++Use one fixed rubric-based offline model judge for semantic evaluation and deterministic tests for objective properties. Marc Porosoff is the sole confirmed human reviewer: at most 20 compact development items and 20 separate final-audit items, including skips, evidence first and judge verdict hidden. Model labels may support optional fitted scorers as noisy machine labels; they do not establish calibrated human preferences. Never add a second reviewer, hundreds of manual labels or repeated paid judging loops. If the judge is unreliable, report its impact and continue only safe baseline work within the approved stage.
+ 
+ If provider access policy only permits protected-main code, resolve that before paid preparation. A separately approved narrow prerequisite may be needed. No production merge or secret exposure is justified merely by wanting benchmark inputs.
+ 

@@ -1,0 +1,10 @@
+# Evaluation instructions for current and later stages
+
+This is an E1 supplement created during Stage 1, not a recreated original stage prompt or permission to start any later stage. Original `01_STAGE_1.md`–`04_STAGE_4.md`, RESUME, template and checksums were not supplied.
+
+- Stage 1: prepare protocol, finite budget/trusted-route limitation, objective probes and 40-slot human packet; no provider calls or actual recommendation labeling. Deliver report/state and stop.
+- Stage 2, only after explicit approval: implement numerical engine and compare only development evidence. Use the proposed single judge only after its exact budget and trusted route are approved. Marc is the sole confirmed reviewer, at most 20 compact requested development items; count skips. Machine labels may fit C/D as noisy machine data. No new provider/reviewer or qualification loop. Freeze judge rubric/protocol, candidate selection rule and primary finalist before final evaluation. No holdout recommendation results or final human audit. Deliver report/state and stop.
+- Stage 3, only after explicit approval: run the frozen judge against sealed cases and show at most 20 separately preselected final human items, evidence first and judge verdict hidden. No tuning using final human/holdout outcomes. Report model estimates, human observations, deterministic checks and uncertainty separately. Full E2E requires the explicit dedicated authorization described in PLAN; this supplement does not grant it. Deliver report/state and stop.
+- Stage 4, only after explicit rollout approval: use accepted evidence and ordinary protected release rules. Do not treat machine labels as human expertise validation or expand the human cap beyond 40. No judge/embedding call in production interactions. Preserve old service states and ledger history. Report actual live evidence and stop.
+
+A resume reads PLAN, EVALUATION_AMENDMENT, current report/state and this supplement. It does not reset budget, human item counts or holdout exposure.

@@ -1,0 +1,282 @@
+[
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper",
+    "tracked_changes": 0,
+    "read_ok": true
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/Documents/Codex/2026-08-25/referenced-chatgpt-conversation-this-is-an/chat-output-refinement-fixes",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/Documents/Codex/2026-08-25/referenced-chatgpt-conversation-this-is-an/dean-readiness-audit",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/Documents/Codex/2026-08-25/referenced-chatgpt-conversation-this-is-an/funded-awards-live-loading",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/Documents/Codex/2026-08-25/referenced-chatgpt-conversation-this-is-an/team-ror-selection-ux",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/ai-model-offline-ab-benchmark",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/ai-search-mobile-polish",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/ai-service-privacy-copy",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/ask-ai-top-ten",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/catalog-openai-backend",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/catalog-refresh-team-handoff",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/darpa-iarpa-research",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/dod-funded-awards",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/doe-timeout-reliability",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/e2e-validation-fixes",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/economical-release",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/economical-release/.offline-rollout/v2-replay-checkout",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/economical-release/.offline-rollout/v3-replay-checkout",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/fix-header-source-pill",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/funding-finder-ai-additive",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/funding-finder-hajim-pr1",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/funding-search-pdf-drop",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/maintenance-warning-cleanup",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/manage-alert-unsubscribe-removal",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/minor-ui-data-fixes",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/normalize-investigators",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
+    "tracked_changes": 0,
+    "read_ok": true
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/opportunity-team-rollout",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/pages-refresh-dispatch",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/phase4-closeout",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/pipeline-hardening",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/post-phase4-abc-integration",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/post-phase4-unit-a-integration",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/post-phase4-unit-b",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/post-phase4-unit-d-closeout",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/pre-dean-full-validation",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/program-officer-award-navigation",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/program-officer-revival",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/recent-updates-validation",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/registry-source",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/release-date-full-validation-20260830",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/release-lifecycle",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/researcher-admin-review-hardening",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/researcher-registry-phase1",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/revert-pr88-team-match",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/saved-alerts-page-polish",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/search-team-catalog-expansion",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/stage1-site-shell",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/stage2-contextual-drawers",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/stage3-results-first",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/stage4-public-alignment",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/team-catalog-breadth",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/team-match-hajim-directory",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/ui-runtime-bugs",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper-alerts-incident",
+    "tracked_changes": 0,
+    "read_ok": false
+  },
+  {
+    "path": "C:/Users/Marc Porosoff/projects/grants-scraper-unit-a",
+    "tracked_changes": 0,
+    "read_ok": false
+  }
+]
