@@ -49,11 +49,48 @@ function loadHybrid(source) {
 
 async function requestJson(url, options = {}) {
   const response = await fetch(url, {
+    signal: AbortSignal.timeout(30000),
+    redirect: "error",
     ...options,
-    headers: { Origin: ORIGIN, ...(options.headers || {}) },
+    headers: {
+      Origin: ORIGIN,
+      Accept: "application/json",
+      "Cache-Control": "no-cache",
+      "User-Agent": "FundingFinder-ReleaseVerifier/1.0 (+https://github.com/mporosoff/grants-scraper)",
+      ...(options.headers || {}),
+    },
   });
   const body = await response.json().catch(() => ({}));
-  return { status: response.status, body };
+  return { status: response.status, body, content_type: response.headers.get("content-type")?.slice(0, 160) };
+}
+
+export async function waitForHealth(worker, generation, {
+  request = requestJson,
+  sleep = ms => new Promise(resolve => setTimeout(resolve, ms)),
+} = {}) {
+  const expected = {
+    service: "available",
+    corpus_sha256: generation.corpus_sha256,
+    model_space_fingerprint: generation.model_space_fingerprint,
+    previous_corpus_supported: true,
+    budget_state: "available",
+  };
+  const failures = [];
+  // A successful probe at one edge does not finish Worker propagation at every
+  // edge. Match the handshake's bounded read-only retry window before any POST.
+  for (let attempt = 1; attempt <= 12; attempt += 1) {
+    try {
+      const health = await request(new URL("health", worker));
+      const mismatch = Object.keys(expected).filter(key => health.body?.[key] !== expected[key]);
+      if (health.status === 200 && mismatch.length === 0) return;
+      failures.push({ attempt, status: health.status, content_type: health.content_type, mismatch });
+    } catch (error) {
+      // Error messages and provider bodies may contain arbitrary remote text.
+      failures.push({ attempt, transport_error: error instanceof Error ? error.name.slice(0, 80) : "Error" });
+    }
+    if (attempt < 12) await sleep(5000);
+  }
+  throw new Error(`Worker health does not match the release package: ${JSON.stringify(failures)}`);
 }
 
 async function main() {
@@ -86,14 +123,7 @@ async function main() {
   }
   if (!shared) throw new Error("No byte-identical current/previous passage was found.");
 
-  const health = await requestJson(new URL("health", worker));
-  if (health.status !== 200
-    || health.body.corpus_sha256 !== allowlist.current.corpus_sha256
-    || health.body.model_space_fingerprint !== allowlist.current.model_space_fingerprint
-    || health.body.previous_corpus_supported !== true
-    || health.body.budget_state !== "available") {
-    throw new Error("Worker health does not match the release package.");
-  }
+  await waitForHealth(worker, allowlist.current);
 
   const embed = await requestJson(new URL("embed-query", worker), {
     method: "POST",
@@ -157,7 +187,7 @@ async function main() {
   }, null, 2)}\n`);
 }
 
-main().catch(error => {
+if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) main().catch(error => {
   process.stderr.write(`${error.message}\n`);
   process.exitCode = 1;
 });
