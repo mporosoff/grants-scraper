@@ -31,8 +31,29 @@ class ScopeRepairContracts(unittest.TestCase):
             self.assertEqual(active['qualification_budget'][field], original['qualification_budget'][field])
         self.assertEqual(active['qualification_budget']['ledger_id'], original['version'])
         self.assertIn('concise source-declared heading', team_provider.stage_prompt('decomposition'))
-        for stage in ('adjudication', 'verification'):
-            self.assertEqual(team_provider.stage_prompt(stage), original['final_prompts'][stage])
+        self.assertEqual(team_provider.stage_prompt('adjudication'), original['final_prompts']['adjudication'])
+        self.assertEqual(team_provider.stage_prompt('verification'), active['final_prompts']['verification'])
+
+    def test_failed_trial_evidence_is_preserved_without_production_promotion(self):
+        prior = json.loads(Path('evaluation/sonnet_team_scope_repair_2_results_20260909.json').read_bytes())
+        active, _ = evaluation.production_team_cases('focus')
+        snapshot = Path(active['historical_protocol'])
+        # The receipt identifies immutable Git bytes, not platform checkout EOLs.
+        self.assertEqual(hashlib.sha256(snapshot.read_bytes().replace(b'\r\n', b'\n')).hexdigest(),
+                         active['revision_checkpoint']['prior_protocol_sha256'])
+        self.assertTrue(prior['regression']['execution_complete'])
+        self.assertFalse(prior['regression']['numerical_gate_passed'])
+        self.assertFalse(prior['quality_gate_passed'])
+        self.assertEqual(set(prior['consequential_findings']), {'363616', '361205', '361050'})
+        for trial_contract in ('d385627271e50e9e7d4489519568930c712788e688a68046e71a7fd1f268a59b',
+                               'e925feedd4e4c9b7e429d5d77632261c15b0b03ebec9bad6e02664cac7f0eea0'):
+            self.assertNotIn(trial_contract, team_maintenance.compatible_contracts('proposed'))
+        self.assertIn('25e9a5e0d34efdc1cb99675b1c35b6095a2beac2e98060f35fed241d22d25055',
+                      team_maintenance.compatible_contracts('proposed'))
+        # These assertions bind the active contract, not a claim of LLM quality.
+        self.assertNotIn('A source-declared research pathway may be selected', team_provider.stage_prompt('decomposition'))
+        self.assertIn('each as a separate required role', team_provider.stage_prompt('decomposition'))
+        self.assertIn('cannot add an operation absent from its evidence phrase', team_provider.stage_prompt('verification'))
 
     def test_protocol_revision_cannot_reset_qualification_requests_or_spend(self):
         # Exercise the production qualification entrypoint with real linked

@@ -21,7 +21,7 @@ separate research question or hypothesis, although the heading states the work.
 gate and source review. This is not a change to the accepted CO2-selectivity
 capability judgment; the failure occurred before capability assessment.
 
-The active `sonnet-research-purpose-2` prompt judges the work a concise heading
+The `sonnet-research-purpose-2` prompt judges the work a concise heading
 states, without requiring prose length or a separate purpose paragraph. Its
 versioned protocol is `evaluation/sonnet_team_scope_repair_2_20260909.json`.
 The original twelve confirmations, annotations, historical protocol and results
@@ -30,6 +30,40 @@ qualification ledger: the 30 requests/$1.040148 already used count against the
 135-request/$8 qualification cap. At this checkpoint 105 qualification requests
 and $6.959852 remain; the separate 15-request/$2 pilot reservation stays held.
 Do not rerun authorization or start paid work until the repair is protected-merged.
+
+PR #211 merged as `2e5a6d56ee4b5a8bbbd2b442e7685ad9129a09bb` after clean review
+and ordinary CI. Version 2 focus run `34392138448` completed 8/8 correctly, but
+regression `34393056404` failed with 8/9 scope accuracy despite 9/9 completion and
+6/6 legitimate acceptance. It chose a program from the CBET umbrella and combined
+roles from different programs. Source review also found an omitted peripheral
+measurement gap and an unevidenced design operation inserted into a rationale.
+The failed evidence is retained in `sonnet_team_scope_repair_2_results_20260909.json`.
+
+The active protocol is `sonnet_team_scope_repair_3_20260909.json`, using
+`sonnet-research-purpose-3` and `sonnet-production-verification-4`. It separates
+research alongside training from selection among independent programs, keeps
+explicit acquisition requirements as separate required roles, and prevents a
+taxonomy label or explanation from adding an unevidenced operation. Named methods
+may still transfer to different applications. The twelve confirmations and all
+historical labels/results remain frozen. Failed trial contracts are not declared
+compatible production evidence; compatible previously reviewed production teams
+retain their original provenance.
+
+The same qualification ledger now contains **62 requests/$2.330522**, leaving
+**73 requests/$5.669478** within its unchanged cap. The 15-request/$2 pilot reserve
+remains held. Further work must stop at the retained cap even if qualification is
+incomplete; neither a green implementation review nor an incomplete/failed
+scientific gate enables teams. No new allowance is available merely because the
+prompt version changes.
+
+Before v3 dispatch, `sonnet_team_scope_repair_3_budget_checkpoint_20260909.json`
+establishes an optimistic **80-call minimum**: 45 new decomposition calls, at least
+28 new verifier calls under the unchanged floors, and at least seven adjudication
+calls for never-exposed confirmations. This assumes every exposed adjudication
+can be reused and there are no retries. With 73 qualification requests left,
+complete qualification cannot fit. Preserve the unused balance and pilot reserve;
+an explicit request-limit extension is required before starting v3 qualification.
+The monetary allowance is not exhausted. No v3 provider request has been made.
 
 The first general correction was `sonnet-research-purpose-1` decomposition. Both known
 false rejections received complete retained input: the model confused a stated
@@ -53,7 +87,8 @@ additionally capped at 135 requests/$8, reserving 15 requests/$2 for the pilot.
 The source-only inventory estimates 107 initial qualification stage calls and
 $3.545113 using retained stage costs; actual bounded reservations govern.
 
-After protected merge, execute the existing entrypoints in this order:
+After protected merge and sufficient authorized request allowance, execute the
+existing entrypoints in this order:
 
 ```sh
 # Authorization is already applied; resume the existing state artifact.
