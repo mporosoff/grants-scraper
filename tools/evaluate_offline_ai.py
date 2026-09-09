@@ -220,14 +220,20 @@ def preflight(client):
                        {"ready": True}, schemas()["preflight"], validate)
 
 
+def evaluation_ledger(path):
+    from tools.offline_spend import restore_ledger
+    authorization = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())['authorization']
+    return restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], authorization)
+
+
 def production_preflight(state):
-    """One native Sonnet compatibility request under the new retained allowance."""
+    """One bounded native Sonnet compatibility check under the retained allowance."""
     from tools.offline_spend import authorize_allowance
     from tools.offline_ai import TRANSPORT_VERSION
     protocol = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())
     ledger = authorize_allowance(state / 'ledger.json', TASK, protocol['authorization'])
     settings = config()
-    stage = settings['stages']['preflight']
+    stage = settings['stages']['preflight'] | {'max_attempts': 3, 'durable_attempts': True}
     expected = identity({'route': settings['routes']['sonnet'], 'stage': stage,
                          'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION})
     marker = state / 'production-preflight-receipt.json'
@@ -280,7 +286,7 @@ def main():
             raise SystemExit(1)
         return
     args.state.mkdir(parents=True, exist_ok=True)
-    ledger = Ledger(args.state / "ledger.json", TASK, config()["budgets_usd"]["evaluation"], max_requests=config()["max_requests"])
+    ledger = evaluation_ledger(args.state / "ledger.json")
     if args.phase == 'preflight':
         resume_preflight_credential(ledger)
     client = Client(ledger, args.state / "cache", deadline=time.monotonic() + 2400)

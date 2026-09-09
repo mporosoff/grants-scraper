@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 
 from tools import offline_ai as ai
 from tools.offline_team_contract import schemas
-from tools.offline_spend import authorize_allowance
+from tools.offline_spend import authorize_allowance, restore_ledger
 
 
 def sonnet_response(value, stop='end_turn'):
@@ -20,6 +20,28 @@ def sonnet_response(value, stop='end_turn'):
 
 
 class SonnetTransport(unittest.TestCase):
+    def test_preflight_transient_retry_and_durable_attempt_limit(self):
+        from tools import evaluate_offline_ai as evaluation
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'), patch.object(ai.time, 'sleep'):
+            state = Path(tmp)
+            ai.Ledger(state / 'ledger.json', evaluation.TASK, 15)
+            with patch('requests.post', side_effect=[Mock(status_code=429), sonnet_response({'ready': True})]) as post:
+                self.assertTrue(evaluation.production_preflight(state)['complete'])
+            self.assertEqual(post.call_count, 2)
+            restored = evaluation.evaluation_ledger(state / 'ledger.json')
+            self.assertEqual(len(restored.read()['requests']), 2)
+            self.assertEqual(restored.max_requests, 200)
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'), patch.object(ai.time, 'sleep'):
+            state = Path(tmp)
+            ai.Ledger(state / 'ledger.json', evaluation.TASK, 15)
+            with patch('requests.post', return_value=Mock(status_code=503)) as post:
+                self.assertFalse(evaluation.production_preflight(state)['complete'])
+                # Model a runner dying after spending but before the receipt upload.
+                (state / 'production-preflight-receipt.json').unlink()
+                self.assertFalse(evaluation.production_preflight(state)['complete'])
+            self.assertEqual(post.call_count, 3)
+            self.assertEqual(len(evaluation.evaluation_ledger(state / 'ledger.json').read()['requests']), 3)
+
     def test_actual_preflight_entrypoint_is_once_and_separates_access_from_quality(self):
         from tools import evaluate_offline_ai as evaluation
         for successful in (True, False):
@@ -135,6 +157,13 @@ class SonnetTransport(unittest.TestCase):
                 self.assertEqual(after['limit_microusd'], min(15000000,
                     sum(row['charged_microusd'] for row in before['requests']) + 10000000))
                 self.assertEqual(authorize_allowance(path, 'test', auth).read(), after)
+                self.assertEqual(restore_ledger(path, 'test', 15, 50, auth).read(), after)
+                changed = copy.deepcopy(after)
+                changed['requests'][0]['charged_microusd'] += 1
+                ai.atomic_json(path, changed)
+                with self.assertRaises(ai.ConfigurationFailure):
+                    restore_ledger(path, 'test', 15, 50, auth)
+                ai.atomic_json(path, after)
                 with self.assertRaises(ai.ConfigurationFailure):
                     authorize_allowance(path, 'test', auth | {'additional_requests': 201})
                 with self.assertRaises(ai.ConfigurationFailure):

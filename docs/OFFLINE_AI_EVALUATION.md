@@ -14,7 +14,8 @@ ledger once from its actual request count and conservatively charged usage,
 including uncertain reservations. Re-dispatch cannot grant another allowance.
 Production per-run limits remain five pilot scopes and $2; backfill stays manual.
 
-The first phase is the one-call native structured-output compatibility preflight:
+The first phase is one native structured-output compatibility preflight (at most
+three durably counted attempts, including transient retries):
 
 ```sh
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-preflight

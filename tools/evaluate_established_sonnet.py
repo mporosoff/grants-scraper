@@ -156,8 +156,7 @@ def main():
                                 Path('evaluation/established_sonnet_repair_frozen.json'))
     directory = args.state / protocol['version']
     directory.mkdir(parents=True, exist_ok=True)
-    ledger = Ledger(args.state / 'ledger.json', original.TASK, config()['budgets_usd']['evaluation'],
-                    max_requests=config()['max_requests'])
+    ledger = original.evaluation_ledger(args.state / 'ledger.json')
     expected = contract(protocol, phase)
     marker = directory / (phase + '-completed.json')
     result, complete = None, False

@@ -207,7 +207,10 @@ class Client:
             headers = {"Content-Type": "application/json", "User-Agent": "FundingFinder-OfflineEvaluation/1.0"}
             headers.update({"Authorization": "Bearer " + secret} if provider == "openai" else
                            {"x-api-key": secret, "anthropic-version": "2023-06-01"})
-            for attempt in range(1, stage["max_attempts"] + 1):
+            prior_attempts = sum(row['key'] == key for row in self.ledger.read()['requests']) if stage.get('durable_attempts') else 0
+            if prior_attempts >= stage['max_attempts']:
+                raise Deferred('request_attempt_allowance_exhausted')
+            for attempt in range(prior_attempts + 1, stage["max_attempts"] + 1):
                 payload, parsed = None, None
                 remaining = self.deadline - time.monotonic()
                 if remaining <= 1:
