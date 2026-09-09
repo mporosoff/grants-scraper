@@ -1,0 +1,11 @@
+# Alert event identity and immediate delivery repair
+
+On September 8, 2026, the retained delivery ledger recorded 12 immediate messages for four calls across three saved searches and two recipients. One recipient's two overlapping searches accounted for four duplicate deliveries. The provider attempted each event once; this was not a provider retry storm. No addresses or private subscription definitions are included here.
+
+Two messages described `archived → posted`: Grants.gov 347749 and 341244. The before/after public records retained the same notice version, last-updated date, deadline and document hash. Saved-search eligibility returned when catalog archive handling changed; this alone is no longer announced as a new Strong match. Explicit opportunity status watches retain their requested status notifications.
+
+Two messages described `First appeared in the public catalog`: the NSF feed entries for ECLIPSE (PD-24-110Z) and CDSE (PD-24-8084). These calls already existed as Grants.gov 351715 and 356055. The official feed's source IDs did not inherit the existing alert identity. The alert evaluator now recognizes complete matching NSF solicitation numbers only with verified official-source/sponsor evidence, prefers the existing Grants.gov identity, preserves stored qualifications/aliases, and does not announce an additional source record as a new call. Unrelated sponsors, conflicting evidence, children and incomplete numbers are not equated. This repair does not change catalog facts, parsing, source collection or search scoring.
+
+Immediate deliveries for the same recipient and event are serialized at the D1 claim boundary. Once one is sent, later overlapping subscription events retain a `duplicate_recipient_event` suppression receipt. An uncertain provider outcome keeps its exact original message and idempotency key for reconciliation. Previously frozen multi-subscription messages still reconcile together, and independent recipients, subscriptions, explicit watches and weekly cadence remain intact. No subscriptions or historical spend/delivery ledgers are reset.
+
+Focused contracts cover the observed source-ID and restoration cases, true new calls across cursor pages, sponsor conflicts, retained aliases, concurrent claims, later subscription batches, provider uncertainty, cadence changes and unsubscribe boundaries.

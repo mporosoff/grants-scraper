@@ -469,8 +469,22 @@ export class D1AlertStore {
     if (!ids.length) return [];
     const staleBefore = staleClaimCutoff(now);
     const placeholders = ids.map(() => "?").join(",");
-    const claimable = "terminal_at IS NULL AND (status IN ('queued', 'failed') OR (status = 'sending' AND claimed_at IS NOT NULL AND claimed_at <= ?)) AND EXISTS (SELECT 1 FROM subscriptions WHERE id = notification_events.subscription_id AND unsubscribed_at IS NULL)";
     const claim = schedulerClaim(scheduler);
+    // Claim one immediate delivery per recipient/event, even when overlapping
+    // subscriptions are evaluated by different continuation jobs. A frozen
+    // uncertain provider outcome must reconcile under its original key first.
+    const peer = `SELECT 1 FROM notification_events peer JOIN subscriptions peer_subscription ON peer_subscription.id = peer.subscription_id JOIN subscriptions own_subscription ON own_subscription.id = notification_events.subscription_id WHERE notification_events.message_kind = 'notification' AND peer.message_kind = 'notification' AND own_subscription.cadence = 'immediate' AND peer_subscription.cadence = 'immediate' AND peer_subscription.subscriber_id = own_subscription.subscriber_id AND peer.event_key = notification_events.event_key AND peer.id <> notification_events.id`;
+    // A paused subscription is absent from pendingEvents. Release its expired,
+    // unreserved lease before testing peers; the old sender can no longer reserve
+    // a queued row. Reserved/uncertain messages keep their original ownership.
+    await this.db.prepare(
+      `UPDATE notification_events SET status = 'queued', claimed_at = NULL, attempts = MAX(0, attempts - 1) WHERE message_kind = 'notification' AND status = 'sending' AND terminal_at IS NULL AND provider_quota_key IS NULL AND claimed_at <= ? AND subscription_id IN (SELECT paused.id FROM subscriptions paused WHERE paused.active = 0 AND paused.unsubscribed_at IS NULL AND paused.subscriber_id IN (SELECT owner.subscriber_id FROM notification_events requested JOIN subscriptions owner ON owner.id = requested.subscription_id WHERE requested.id IN (${placeholders})))${claim.sql}`,
+    ).bind(staleBefore, ...ids, ...claim.values).run();
+    await this.db.prepare(
+      `UPDATE notification_events SET status = 'suppressed', error_code = 'duplicate_recipient_event', terminal_at = ?, claimed_at = NULL WHERE id IN (${placeholders}) AND terminal_at IS NULL AND status IN ('queued', 'failed') AND COALESCE(error_code, '') <> 'provider_outcome_reconcile' AND EXISTS (${peer} AND peer.status = 'sent')${claim.sql}`,
+    ).bind(now, ...ids, ...claim.values).run();
+    const sameFrozenMessage = "peer.provider_quota_key IS NOT NULL AND peer.provider_quota_key = notification_events.provider_quota_key";
+    const claimable = `terminal_at IS NULL AND (status IN ('queued', 'failed') OR (status = 'sending' AND claimed_at IS NOT NULL AND claimed_at <= ?)) AND EXISTS (SELECT 1 FROM subscriptions WHERE id = notification_events.subscription_id AND unsubscribed_at IS NULL) AND NOT EXISTS (${peer} AND NOT COALESCE((${sameFrozenMessage}), 0) AND (peer.status = 'sent' OR (peer.status = 'sending' AND (peer.terminal_at IS NULL OR peer.provider_quota_key IS NOT NULL)) OR (peer.error_code = 'provider_outcome_reconcile' AND peer.terminal_at IS NULL AND peer.provider_quota_key IS NOT NULL)))`;
     const result = await this.db.prepare(
       `UPDATE notification_events SET status = 'sending', attempts = attempts + 1, claimed_at = ? WHERE id IN (${placeholders}) AND ${claimable}${claim.sql} AND (SELECT COUNT(*) FROM notification_events WHERE id IN (${placeholders}) AND ${claimable}${claim.sql}) = ?`,
     ).bind(
