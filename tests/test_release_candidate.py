@@ -387,6 +387,27 @@ class CandidateLifecycleTests(unittest.TestCase):
         self.assertEqual(derived['generation_run_id'], '123')
         self.assertEqual(derived['worker_fingerprint'], original['worker_fingerprint'])
 
+    def test_generated_documentation_materializes_from_its_exact_authored_baseline(self):
+        self.policy['generated'] += ['README.md', 'PROJECT.md']
+        c.write_json(self.root / c.POLICY, self.policy)
+        for name in ('README.md', 'PROJECT.md'):
+            (self.root / name).write_text('Current authored prose; previous catalog statistics.\n')
+        self.commit()
+        self.source_sha = c.git(self.root, 'rev-parse', 'HEAD')
+        before = (self.root / 'README.md').read_bytes()
+        for name in ('README.md', 'PROJECT.md'):
+            (self.root / name).write_text('Current authored prose; generated catalog statistics.\n')
+        manifest = self.create()
+        self.assertEqual(manifest['documentation_baseline']['README.md'], c.digest(before))
+        self.assertNotIn('README.md', manifest['generation_files'])
+        (self.root / 'README.md').write_bytes(before)
+        c.materialize(self.root, self.bundle)
+        self.assertEqual((self.root / 'README.md').read_bytes(), (self.bundle / 'files/README.md').read_bytes())
+        (self.root / 'README.md').write_text('Newer authored instructions.\n')
+        with self.assertRaisesRegex(ValueError, 'Authored documentation changed'):
+            c.materialize(self.root, self.bundle)
+        self.assertEqual((self.root / 'README.md').read_text(), 'Newer authored instructions.\n')
+
     def test_team_only_derived_candidate_preserves_source_vectors_and_historical_provenance(self):
         self.policy['team_outputs'] = ['config/opportunity_team_model.json']
         self.policy['dependency_groups'] = {key: {'patterns': names, 'excluded': []} for key, names in {

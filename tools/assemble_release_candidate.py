@@ -18,10 +18,23 @@ def assemble(root, bundle, team_update=False):
     # update references and do not generate faculty data or select teams.
     from scripts.faculty_match import update_version_target as faculty_reference
     from scripts.import_opportunity_team_model import update_version_target as team_reference
+    from scripts.update_catalog_docs import catalog_stats, load_catalog, render_docs, update_catalog_asset_reference
     faculty_reference(root / 'team_match.html', root / 'data/faculty_matches.js')
     model = c.read_json(root / 'config/opportunity_team_model.json')
     for name in ('team_match.html', 'match_explorer.html'):
         team_reference(root / name, model['generation_id'])
+    # Older candidates did not retain their generated documentation. Derive
+    # only statistics from the saved catalog, preserving current authored prose.
+    if all((root / name).exists() for name in ('README.md', 'PROJECT.md')):
+        catalog = load_catalog(root / 'data/opportunities.js')
+        documents = [root / name for name in ('README.md', 'PROJECT.md')]
+        rendered = render_docs(*(path.read_text(encoding='utf-8') for path in documents), catalog_stats(catalog))
+        for path, content in zip(documents, rendered):
+            path.write_text(content, encoding='utf-8', newline='\n')
+        for name in ('team_match.html', 'match_explorer.html'):
+            path = root / name
+            path.write_text(update_catalog_asset_reference(path.read_text(encoding='utf-8'), catalog),
+                            encoding='utf-8', newline='\n')
     c.verify_files(root, manifest['generation_files'])
 
 

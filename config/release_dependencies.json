@@ -32,6 +32,8 @@
     "scripts/generate_brand_icons.py"
   ],
   "generated": [
+    "README.md",
+    "PROJECT.md",
     "data/opportunities.js",
     "data/catalog-metadata.js",
     "data/opportunity_enrichment.json",
