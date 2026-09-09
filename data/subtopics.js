@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 19,
- "record_count": 432,
+ "parent_count": 17,
+ "record_count": 426,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -14076,13 +14076,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "356119": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "356129": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -21046,6 +21039,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360458": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360510": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34163,13 +34163,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362237": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362240": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34408,20 +34401,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362377": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362378": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362393": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34444,20 +34423,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362396": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362404": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362412": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34738,13 +34703,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362753": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362754": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35212,362 +35170,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363065": {
-   "segmentation_method": "hgeo_declared_topics",
-   "subtopic_count": 4,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p17",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363065:a-1",
-     "ordinal_label": "1a",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 20,
-     "page_start": 17,
-     "parent_id": "363065",
-     "parent_opportunity_number": "DE-FOA-0003627",
-     "pattern_family": null,
-     "program_area_labels": [
-      "artificial intelligence"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
-     "source_role": "authoritative_announcement",
-     "source_version": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "status": "posted",
-     "subtopic_code": "1a",
-     "subtopic_code_norm": "a-1",
-     "subtopic_id": "363065:a-1",
-     "subtopic_ordinal": 1,
-     "subtopic_source": "inline",
-     "summary": "What are commonly referred to as unconventional reservoirs (i.e., oil-bearing and gasbearing shales and other tight rocks that are being developed via long horizontal laterals coupled with high volume hydraulic fracturing) are exhibiting recoveries that are often less than 10 percent of the original hydrocarbons in place.",
-     "term_display": {
-      "anticipat": "anticipated",
-      "area": "Area",
-      "bas": "based",
-      "basin": "Basin",
-      "but": "but",
-      "commitment": "commitment",
-      "data": "data",
-      "detail": "detailed",
-      "discussion": "discussion",
-      "economic": "economic",
-      "enhanc": "enhanced",
-      "eor": "EOR",
-      "field": "field",
-      "fluid": "fluid",
-      "gas": "gas",
-      "hnp": "HnP",
-      "hydrocarbon": "hydrocarbons",
-      "includ": "including",
-      "include": "include",
-      "injectant": "injectant",
-      "injection": "injection",
-      "letter": "letter",
-      "method": "methods",
-      "natural": "natural",
-      "oil": "oil",
-      "operation": "operation",
-      "pilot": "pilot",
-      "plan": "plans",
-      "plann": "planned",
-      "play": "plays",
-      "pressure": "pressure",
-      "prior": "prior",
-      "production": "production",
-      "propos": "proposed",
-      "recovery": "recovery",
-      "reservoir": "reservoirs",
-      "resource": "resource",
-      "shale": "shale",
-      "site": "site",
-      "technology": "technologies",
-      "test": "testing",
-      "topic": "Topic",
-      "unconventional": "unconventional",
-      "volume": "volumes",
-      "well": "well"
-     },
-     "title": "Field Test Site Research and Development of Technologies for Enhanced Recovery from Unconventional Oil and Gas Reservoirs",
-     "title_fingerprint": "f9410e6a",
-     "topic_areas": [
-      "Artificial intelligence and machine learning",
-      "Data science"
-     ]
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p20",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363065:b-1",
-     "ordinal_label": "1b",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 24,
-     "page_start": 20,
-     "parent_id": "363065",
-     "parent_opportunity_number": "DE-FOA-0003627",
-     "pattern_family": null,
-     "program_area_labels": [
-      "advanced computing",
-      "artificial intelligence"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
-     "source_role": "authoritative_announcement",
-     "source_version": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "status": "posted",
-     "subtopic_code": "1b",
-     "subtopic_code_norm": "b-1",
-     "subtopic_id": "363065:b-1",
-     "subtopic_ordinal": 2,
-     "subtopic_source": "inline",
-     "summary": "Although the development of unconventional oil and natural gas plays has grown dramatically over the past two decades, there remains a distinct lack of understanding related to where operators are leaving recoverable resources behind after well production has declined. Understanding and characterizing the reservoir domains where depletion has occurred and where hydrocarbon saturations remain undrained is key to increasing overall recovery of the resource beyond the less-than-10% levels currently achieved.",
-     "term_display": {
-      "area": "Area",
-      "bas": "based",
-      "characterization": "characterization",
-      "commitment": "commitment",
-      "data": "data",
-      "depletion": "depletion",
-      "diagnostic": "diagnostics",
-      "efficiency": "efficiency",
-      "field": "field",
-      "fluid": "fluid",
-      "fractur": "fracturing",
-      "fracture": "fracture",
-      "geometry": "geometries",
-      "how": "how",
-      "hydraulic": "hydraulic",
-      "improv": "Improved",
-      "include": "include",
-      "industry": "industry",
-      "method": "methods",
-      "plan": "plans",
-      "production": "production",
-      "propos": "proposed",
-      "proppant": "proppant",
-      "recovery": "recovery",
-      "relat": "related",
-      "relevant": "relevant",
-      "reservoir": "reservoir",
-      "site": "site",
-      "technology": "technologies",
-      "test": "test",
-      "transport": "transport",
-      "understand": "understanding",
-      "well": "well"
-     },
-     "title": "Advanced Characterization of Fracture Propagation, Proppant Behavior, and Well Diagnostics",
-     "title_fingerprint": "cb30c7e9",
-     "topic_areas": [
-      "Data science",
-      "Artificial intelligence and machine learning"
-     ]
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p24",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363065:c-1",
-     "ordinal_label": "1c",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 27,
-     "page_start": 24,
-     "parent_id": "363065",
-     "parent_opportunity_number": "DE-FOA-0003627",
-     "pattern_family": null,
-     "program_area_labels": [
-      "artificial intelligence"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
-     "source_role": "authoritative_announcement",
-     "source_version": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "status": "posted",
-     "subtopic_code": "1c",
-     "subtopic_code_norm": "c-1",
-     "subtopic_id": "363065:c-1",
-     "subtopic_ordinal": 3,
-     "subtopic_source": "inline",
-     "summary": "What are commonly referred to as unconventional reservoirs (i.e., oil-bearing and gasbearing shales and other tight rocks that are being developed via long horizontal laterals coupled with high volume hydraulic fracturing) are exhibiting recoveries that are often less than 10 percent of the original hydrocarbons in place.",
-     "term_display": {
-      "anticipat": "anticipated",
-      "area": "Area",
-      "bas": "based",
-      "bbl": "bbl",
-      "co2": "CO2",
-      "commercial": "commercial",
-      "commitment": "commitment",
-      "cost": "cost",
-      "data": "data",
-      "detail": "detailed",
-      "discussion": "discussion",
-      "doe": "DOE",
-      "drill": "drilling",
-      "dur": "during",
-      "economic": "economic",
-      "enhanc": "enhanced",
-      "eor": "EOR",
-      "factor": "factors",
-      "field": "field",
-      "fractur": "fracturing",
-      "gas": "gas",
-      "hnp": "HnP",
-      "how": "how",
-      "if": "if",
-      "include": "include",
-      "industry": "industry",
-      "injectant": "injectant",
-      "injection": "injection",
-      "letter": "letter",
-      "method": "methods",
-      "oil": "oil",
-      "per": "per",
-      "pilot": "pilot",
-      "plan": "plans",
-      "prior": "prior",
-      "production": "production",
-      "propos": "proposed",
-      "recover": "recovered",
-      "recovery": "recovery",
-      "reservoir": "reservoirs",
-      "resource": "resource",
-      "result": "results",
-      "site": "site",
-      "technology": "technologies",
-      "test": "test",
-      "unconventional": "unconventional",
-      "unit": "unit",
-      "used": "used",
-      "volume": "volumes",
-      "well": "well"
-     },
-     "title": "Enhanced Recovery of Oil and Gas from Unconventional Reservoirs Using CO2",
-     "title_fingerprint": "7fd958dd",
-     "topic_areas": [
-      "Artificial intelligence and machine learning",
-      "Data science"
-     ]
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p27",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363065:2",
-     "ordinal_label": "2",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 30,
-     "page_start": 27,
-     "parent_id": "363065",
-     "parent_opportunity_number": "DE-FOA-0003627",
-     "pattern_family": null,
-     "program_area_labels": [
-      "artificial intelligence",
-      "water"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354135",
-     "source_role": "authoritative_announcement",
-     "source_version": "bd02be187cea06956cb4b337c731e222cba7093c0e26854445324383b76945d1",
-     "status": "posted",
-     "subtopic_code": "2",
-     "subtopic_code_norm": "2",
-     "subtopic_id": "363065:2",
-     "subtopic_ordinal": 4,
-     "subtopic_source": "inline",
-     "summary": "In 2025, the Permian Basin was estimated to produce approximately 22 million barrels per day of water associated with oil and natural gas production. The continued increase in water cut from the Permian Basin production highlights the key need for highly scalable technologies for produced water treatment that can support opportunities for the reuse of treated produced water to avoid deep well injection and the potential related issues with induced seismicity and interaction with underground sources of drinking water.",
-     "term_display": {
-      "anticipat": "anticipated",
-      "applicable": "applicable",
-      "barrel": "barrel",
-      "bas": "based",
-      "beneficial": "beneficial",
-      "clearly": "clearly",
-      "commercial": "commercial",
-      "cost": "cost",
-      "current": "current",
-      "data": "data",
-      "describe": "describe",
-      "detail": "Details",
-      "discharge": "discharge",
-      "disposal": "disposal",
-      "economic": "economic",
-      "effluent": "effluent",
-      "end": "end",
-      "field": "field",
-      "includ": "including",
-      "include": "include",
-      "industry": "industry",
-      "per": "per",
-      "plan": "plan",
-      "produc": "produced",
-      "propos": "proposed",
-      "quality": "quality",
-      "regard": "regarding",
-      "requirement": "requirements",
-      "system": "system",
-      "technology": "technologies",
-      "threshold": "thresholds",
-      "treat": "treated",
-      "treatment": "treatment",
-      "water": "water"
-     },
-     "title": "Advanced Field-Testing of Multi-Scale Produced Water Treatment Technologies & Processes",
-     "title_fingerprint": "5656e3b5",
-     "topic_areas": [
-      "Artificial intelligence and machine learning",
-      "Data science",
-      "Water"
-     ]
-    }
-   ]
-  },
   "363069": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35798,13 +35400,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363199": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363204": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -36026,13 +35621,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363287": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363288": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -36561,174 +36149,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363315": {
-   "segmentation_method": "numbered",
-   "subtopic_count": 2,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p7",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-08-21",
-     "opportunity_id": "363315:c-2",
-     "ordinal_label": "2",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 7,
-     "page_start": 7,
-     "parent_id": "363315",
-     "parent_opportunity_number": "DOS-SAU-2602",
-     "pattern_family": "component",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "c27482902d79ba715bfad656f2927edfd4e68599f1a754479bc29a950fc0ed6e",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354160",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Component 2",
-     "subtopic_code_norm": "c-2",
-     "subtopic_id": "363315:c-2",
-     "subtopic_ordinal": 2,
-     "subtopic_source": "inferred",
-     "summary": "summer travel itinerary across two to three U.S. cities or states with high tech-sector prominence. Activities must include site visits to research centers, tech companies, startups, and accelerators. The schedule should embed workshops on AI policy, ethics, and governance, ideally linked to a concurrent U.S. AI summit. The recipient will pair each participant with an American mentor to begin three months of bi-weekly virtual career coaching. Cultural activities must also be integrated to deepen the participants' understanding of U.S. society.",
-     "term_display": {
-      "accelerator": "accelerators",
-      "across": "across",
-      "activity": "Activities",
-      "ai": "AI",
-      "american": "American",
-      "begin": "begin",
-      "bi-weekly": "bi-weekly",
-      "career": "career",
-      "center": "centers",
-      "city": "cities",
-      "coach": "coaching",
-      "company": "companies",
-      "component": "Component",
-      "concurrent": "concurrent",
-      "cultural": "Cultural",
-      "deepen": "deepen",
-      "detail": "detailed",
-      "ds-2019": "Ds-2019s",
-      "each": "each",
-      "emb": "embed",
-      "ethic": "ethics",
-      "exchange": "Exchange",
-      "governance": "governance",
-      "high": "high",
-      "ideally": "ideally",
-      "includ": "including",
-      "include": "include",
-      "insurance": "insurance",
-      "integrat": "integrated",
-      "issuance": "issuance",
-      "itinerary": "itinerary",
-      "link": "linked",
-      "logistic": "logistics",
-      "participant": "participant",
-      "recipient": "recipient",
-      "schedule": "schedule",
-      "three": "three",
-      "travel": "travel",
-      "two": "Two",
-      "u.s": "U.S"
-     },
-     "title": "U.S. Exchange (Two Weeks): The recipient will manage a two-week",
-     "title_fingerprint": "b3a4395e",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p7",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-08-21",
-     "opportunity_id": "363315:c-3",
-     "ordinal_label": "3",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 7,
-     "page_start": 7,
-     "parent_id": "363315",
-     "parent_opportunity_number": "DOS-SAU-2602",
-     "pattern_family": "component",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "c27482902d79ba715bfad656f2927edfd4e68599f1a754479bc29a950fc0ed6e",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354160",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Component 3",
-     "subtopic_code_norm": "c-3",
-     "subtopic_id": "363315:c-3",
-     "subtopic_ordinal": 3,
-     "subtopic_source": "inferred",
-     "summary": "the U.S. exchange, the recipient will organize a high-visibility capstone summit in Saudi Arabia. This event will showcase the participants’ learning and finalized AI capstone projects to the local tech community, potential investors, and key Saudi institutional partners. c. Expected Performance Monitoring, Indicators, and Outcomes: To ensure accountability, the applicant must incorporate a Performance Monitoring Plan (PMP) aligned with standard Department requirements.",
-     "term_display": {
-      "accountability": "accountability",
-      "active": "active",
-      "agency": "agency",
-      "ai": "AI",
-      "align": "aligned",
-      "applicant": "applicant",
-      "arabia": "Arabia",
-      "assessment": "assessments",
-      "baseline": "baselines",
-      "bilateral": "bilateral",
-      "both": "both",
-      "capacity": "capacity",
-      "capstone": "capstone",
-      "catalyze": "catalyze",
-      "community": "community",
-      "complet": "completed",
-      "component": "Component",
-      "establish": "establish",
-      "expect": "expects",
-      "follow": "following",
-      "indicator": "Indicators",
-      "local": "local",
-      "long-term": "long-term",
-      "monitor": "Monitoring",
-      "month": "months",
-      "outcome": "Outcomes",
-      "participant": "participants",
-      "percent": "percent",
-      "performance": "Performance",
-      "post-exchange": "post-exchange",
-      "professional": "professional",
-      "saudi": "Saudi",
-      "six": "six",
-      "summit": "Summit",
-      "survey": "surveys",
-      "target": "targets",
-      "technical": "technical",
-      "three": "three",
-      "track": "tracking",
-      "u.s": "U.S",
-      "via": "via"
-     },
-     "title": "Follow-On Summit (Saudi Arabia): Within three to six months following",
-     "title_fingerprint": "76ec6466",
-     "topic_areas": []
-    }
-   ]
-  },
   "363321": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -36926,7 +36346,6 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363374": {
@@ -37025,12 +36444,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363400": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopics": []
   },
   "363407": {
@@ -39837,20 +39250,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363778": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363780": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363781": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40110,6 +39509,34 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363825": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363826": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363827": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363829": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40160,6 +39587,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "arpa-h:ascent-ibo": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "arpa-h:ehi": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40243,6 +39677,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "nsf-funding:https://www.nsf.gov/funding/opportunities/future-core-computer-information-science-engineering-future-computing/nsf25-543": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40250,7 +39691,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "nsf-funding:https://www.nsf.gov/funding/opportunities/iusepfe-red-iuseprofessional-formation-engineers-revolutionizing/nsf24-564": {
+  "nsf-funding:https://www.nsf.gov/funding/opportunities/mfai-mathematical-foundations-artificial-intelligence/nsf24-569": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40743,8 +40184,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 169.75770925110132,
-  "document_count": 227,
+  "average_document_length": 156.0,
+  "document_count": 223,
   "document_lengths": [
    836,
    401,
@@ -40961,10 +40402,6 @@ globalThis.SUBTOPIC_CATALOG={
    12,
    12,
    12,
-   935,
-   959,
-   903,
-   950,
    273,
    430,
    585,
@@ -40984,11 +40421,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "000": [
-    218,
-    2,
-    219,
+    215,
     1,
-    223,
+    219,
     7
    ],
    "09": [
@@ -41162,13 +40597,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "1-to-9": [
-    221,
+    217,
     1,
-    223,
+    219,
     2
    ],
    "1.372": [
-    222,
+    218,
     1
    ],
    "1.4": [
@@ -41185,16 +40620,12 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     1,
     215,
-    1,
+    2,
     217,
     1,
+    218,
+    2,
     219,
-    2,
-    221,
-    1,
-    222,
-    2,
-    223,
     2
    ],
    "10-1000x": [
@@ -41206,7 +40637,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     2,
-    219,
+    215,
     1
    ],
    "1000": [
@@ -41458,7 +40889,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     81,
     2,
-    223,
+    219,
     1
    ],
    "12-mile": [
@@ -41492,7 +40923,7 @@ globalThis.SUBTOPIC_CATALOG={
    "13": [
     4,
     2,
-    223,
+    219,
     1
    ],
    "14": [
@@ -41502,13 +40933,11 @@ globalThis.SUBTOPIC_CATALOG={
    "15": [
     5,
     2,
-    218,
+    215,
+    1,
+    216,
     1,
     219,
-    1,
-    220,
-    1,
-    223,
     2
    ],
    "16": [
@@ -41540,24 +40969,14 @@ globalThis.SUBTOPIC_CATALOG={
    "1a": [
     215,
     1,
-    219,
-    1,
-    220,
+    216,
     5
    ],
    "1b": [
-    216,
-    1,
-    219,
-    1,
-    221,
-    7
-   ],
-   "1c": [
     215,
     1,
     217,
-    1
+    7
    ],
    "1d": [
     25,
@@ -41572,11 +40991,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     2,
-    221,
+    217,
     1,
-    222,
+    218,
     2,
-    223,
+    219,
     4
    ],
    "200": [
@@ -41584,7 +41003,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "2023": [
-    219,
+    215,
     1
    ],
    "2024": [
@@ -41751,13 +41170,7 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     2,
     81,
-    2,
-    215,
-    1
-   ],
-   "2025": [
-    218,
-    1
+    2
    ],
    "2026": [
     95,
@@ -41766,7 +41179,7 @@ globalThis.SUBTOPIC_CATALOG={
    "2030": [
     95,
     1,
-    222,
+    218,
     1
    ],
    "21": [
@@ -41775,9 +41188,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "22": [
     7,
-    2,
-    218,
-    1
+    2
    ],
    "225": [
     40,
@@ -41800,15 +41211,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     23,
     1,
-    222,
+    218,
     1
    ],
    "25": [
     10,
     2,
-    222,
+    218,
     2,
-    223,
+    219,
     1
    ],
    "25th": [
@@ -42012,7 +41423,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "320": [
-    222,
+    218,
     1
    ],
    "33": [
@@ -42033,9 +41444,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "37": [
     17,
-    2,
-    215,
-    1
+    2
    ],
    "38": [
     17,
@@ -42146,9 +41555,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     92,
     1,
-    218,
-    1,
-    219,
+    215,
     2
    ],
    "41": [
@@ -42211,10 +41618,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     2
    ],
-   "435": [
-    218,
-    1
-   ],
    "44": [
     21,
     2
@@ -42232,7 +41635,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "463": [
-    222,
+    218,
     1
    ],
    "467-0782": [
@@ -42265,8 +41668,6 @@ globalThis.SUBTOPIC_CATALOG={
     24,
     2,
     218,
-    1,
-    222,
     1
    ],
    "500": [
@@ -42386,7 +41787,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "589": [
-    222,
+    218,
     1
    ],
    "59": [
@@ -42458,7 +41859,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "700": [
-    223,
+    219,
     1
    ],
    "71": [
@@ -42508,7 +41909,7 @@ globalThis.SUBTOPIC_CATALOG={
    "80": [
     47,
     2,
-    221,
+    217,
     1
    ],
    "802-0880": [
@@ -42538,7 +41939,7 @@ globalThis.SUBTOPIC_CATALOG={
    "85": [
     51,
     2,
-    219,
+    215,
     1
    ],
    "86": [
@@ -42554,7 +41955,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "875.3": [
-    222,
+    218,
     1
    ],
    "88": [
@@ -42582,7 +41983,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "900": [
-    223,
+    219,
     1
    ],
    "91": [
@@ -42632,7 +42033,7 @@ globalThis.SUBTOPIC_CATALOG={
    "92": [
     56,
     2,
-    222,
+    218,
     1
    ],
    "93": [
@@ -42646,7 +42047,7 @@ globalThis.SUBTOPIC_CATALOG={
    "94": [
     57,
     2,
-    222,
+    218,
     1
    ],
    "949": [
@@ -42739,9 +42140,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     94,
-    3,
-    218,
-    1
+    3
    ],
    "abiological": [
     2,
@@ -42819,10 +42218,6 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1
    ],
-   "academic": [
-    218,
-    1
-   ],
    "accelerat": [
     20,
     1,
@@ -42880,11 +42275,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     217,
     1,
-    221,
+    218,
     1,
-    222,
-    1,
-    223,
+    219,
     4
    ],
    "accelerator": [
@@ -42919,13 +42312,7 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     89,
-    2,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
+    2
    ],
    "access": [
     0,
@@ -42946,15 +42333,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    215,
-    3,
-    216,
-    3,
     217,
-    3,
-    221,
     1,
-    222,
+    218,
     1
    ],
    "accessible": [
@@ -42993,8 +42374,6 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     1,
     34,
-    1,
-    215,
     1
    ],
    "accordingly": [
@@ -43013,8 +42392,6 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     58,
-    1,
-    218,
     1
    ],
    "accuracy": [
@@ -43034,7 +42411,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     74,
     2,
-    223,
+    219,
     1
    ],
    "accuracy-cost": [
@@ -43062,7 +42439,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "acetic": [
-    219,
+    215,
     1
    ],
    "achiev": [
@@ -43088,9 +42465,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     178,
     1,
-    216,
-    1,
-    221,
+    217,
     1
    ],
    "achievable": [
@@ -43134,21 +42509,19 @@ globalThis.SUBTOPIC_CATALOG={
    "acid": [
     2,
     2,
-    218,
-    2,
-    219,
+    215,
     1,
-    220,
+    216,
     4,
-    221,
+    217,
     2,
-    224,
+    220,
     1
    ],
    "acidic": [
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "acknowledg": [
@@ -43250,21 +42623,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    216,
-    2,
+    215,
+    1,
+    217,
+    1,
+    218,
+    1,
     219,
-    1,
-    221,
-    1,
-    222,
-    1,
-    223,
     2
    ],
    "act": [
     22,
     1,
-    223,
+    219,
     1
    ],
    "action": [
@@ -43297,9 +42668,7 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1,
     88,
-    2,
-    218,
-    1
+    2
    ],
    "actionable": [
     15,
@@ -43340,7 +42709,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     62,
     1,
-    223,
+    219,
     1
    ],
    "activity": [
@@ -43367,13 +42736,7 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     88,
-    1,
-    215,
-    2,
-    216,
-    2,
-    217,
-    2
+    1
    ],
    "activity-bas": [
     15,
@@ -43388,16 +42751,12 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     20,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     4
-   ],
-   "actually": [
-    216,
-    1
    ],
    "actuation": [
     6,
@@ -43526,7 +42885,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    221,
+    217,
     1
    ],
    "adaptative": [
@@ -43581,16 +42940,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1
    ],
-   "add": [
-    215,
-    2,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1
-   ],
    "addition": [
     0,
     1,
@@ -43617,14 +42966,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    1,
-    215,
-    1,
-    216,
-    2,
-    217,
-    2,
-    218,
     1
    ],
    "additional": [
@@ -43646,7 +42987,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    223,
+    219,
     1
    ],
    "additionally": [
@@ -43663,9 +43004,7 @@ globalThis.SUBTOPIC_CATALOG={
     67,
     4,
     72,
-    2,
-    216,
-    1
+    2
    ],
    "address": [
     0,
@@ -43704,19 +43043,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
+    215,
+    1,
     216,
     1,
     217,
     1,
     218,
-    1,
-    219,
-    1,
-    220,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "addresse": [
@@ -43734,7 +43067,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     2,
-    223,
+    219,
     1
    ],
    "adequacy": [
@@ -43753,10 +43086,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     83,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "adhere": [
@@ -43776,20 +43105,14 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     142,
     1,
+    216,
+    2,
     217,
-    1,
-    220,
-    2,
-    221,
     3,
-    222,
+    218,
     2,
-    223,
+    219,
     3
-   ],
-   "adsorb": [
-    215,
-    1
    ],
    "adsorption": [
     28,
@@ -43892,25 +43215,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     174,
     1,
+    215,
+    2,
     216,
-    4,
-    218,
-    2,
-    219,
-    2,
-    220,
     1,
-    221,
+    217,
     2,
-    222,
+    218,
     3,
-    223,
+    219,
     9,
-    224,
+    220,
     2,
-    225,
+    221,
     3,
-    226,
+    222,
     1
    ],
    "advance": [
@@ -43991,13 +43310,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    2,
-    215,
-    1,
-    216,
-    2,
-    217,
-    1
+    2
    ],
    "advancement": [
     6,
@@ -44016,9 +43329,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     205,
     1,
-    218,
-    1,
-    221,
+    217,
     1
    ],
    "advantage": [
@@ -44179,8 +43490,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     91,
-    1,
-    217,
     1
    ],
    "affective": [
@@ -44206,11 +43515,9 @@ globalThis.SUBTOPIC_CATALOG={
    "agency": [
     88,
     1,
-    218,
+    217,
     1,
-    221,
-    1,
-    223,
+    219,
     2
    ],
    "agent": [
@@ -44274,9 +43581,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "aging": [
-    222,
+    218,
     1,
-    223,
+    219,
     1
    ],
    "agnostic": [
@@ -44288,10 +43595,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     46,
     1
-   ],
-   "agricultural": [
-    218,
-    2
    ],
    "ahead": [
     68,
@@ -44378,13 +43681,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     212,
     1,
-    220,
+    216,
     2,
-    222,
+    218,
     2,
-    223,
+    219,
     7,
-    225,
+    221,
     4
    ],
    "ai-accelerat": [
@@ -44454,13 +43757,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "ai-power": [
-    221,
+    217,
     1
    ],
    "ai-support": [
     88,
     1,
-    223,
+    219,
     1
    ],
    "aid": [
@@ -44506,7 +43809,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    222,
+    218,
     1
    ],
    "aims": [
@@ -44524,7 +43827,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    223,
+    219,
     1
    ],
    "aiop": [
@@ -44698,7 +44001,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     157,
     1,
-    225,
+    221,
     2
    ],
    "algorithmic": [
@@ -44747,10 +44050,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     34,
-    1,
-    216,
-    2,
-    217,
     1
    ],
    "allow": [
@@ -44792,19 +44091,17 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     89,
     1,
-    218,
-    1,
-    223,
+    219,
     2
    ],
    "alloy": [
     26,
     1,
-    220,
+    216,
+    1,
+    218,
     1,
     222,
-    1,
-    226,
     1
    ],
    "almost": [
@@ -44814,16 +44111,14 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    219,
+    215,
     1
    ],
    "alone": [
     4,
     1,
     58,
-    2,
-    215,
-    1
+    2
    ],
    "along": [
     6,
@@ -44834,9 +44129,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     65,
     1,
-    217,
-    1,
-    219,
+    215,
     1
    ],
    "alongside": [
@@ -44868,11 +44161,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    219,
+    215,
+    1,
+    217,
     1,
     221,
-    1,
-    225,
     1
    ],
    "although": [
@@ -44883,8 +44176,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     84,
-    1,
-    216,
     1
    ],
    "alway": [
@@ -45007,10 +44298,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     89,
-    1,
-    215,
-    1,
-    218,
     1
    ],
    "amongst": [
@@ -45034,9 +44321,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    218,
-    1,
-    219,
+    215,
     1
    ],
    "amp": [
@@ -45064,7 +44349,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "analogou": [
-    223,
+    219,
     1
    ],
    "analyse": [
@@ -45079,14 +44364,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     3,
     94,
-    2,
-    215,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     2
    ],
    "analysi": [
@@ -45154,15 +44431,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     193,
     1,
+    216,
+    1,
     217,
     1,
-    218,
-    1,
     220,
-    1,
-    221,
-    1,
-    224,
     1
    ],
    "analyst": [
@@ -45194,13 +44467,7 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     95,
     1,
-    216,
-    2,
-    217,
-    1,
-    218,
-    1,
-    223,
+    219,
     7
    ],
    "analytical": [
@@ -45255,15 +44522,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     87,
-    1,
-    215,
-    1,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2
+    1
    ],
    "andrew": [
     54,
@@ -45492,11 +44751,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "annual": [
-    222,
+    218,
     2
    ],
    "annually": [
-    222,
+    218,
     1
    ],
    "anomaly": [
@@ -45504,9 +44763,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     1,
-    223,
+    219,
     2,
-    225,
+    221,
     2
    ],
    "another": [
@@ -45573,20 +44832,12 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     215,
-    4,
+    1,
     216,
-    3,
-    217,
-    5,
-    218,
-    11,
-    219,
-    1,
-    220,
     2,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "anticipation": [
@@ -45627,12 +44878,6 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     1
    ],
-   "appear": [
-    215,
-    2,
-    216,
-    1
-   ],
    "appli": [
     12,
     1,
@@ -45667,9 +44912,7 @@ globalThis.SUBTOPIC_CATALOG={
     12,
     1,
     20,
-    2,
-    218,
-    1
+    2
    ],
    "applicable": [
     22,
@@ -45677,24 +44920,14 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     66,
-    1,
-    215,
-    3,
-    216,
-    2,
-    217,
-    3,
-    218,
-    8
+    1
    ],
    "applicant": [
     32,
     1,
     79,
     1,
-    218,
-    2,
-    223,
+    219,
     1
    ],
    "application-aware": [
@@ -45720,9 +44953,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    217,
-    1,
-    220,
+    216,
     1
    ],
    "appreciate": [
@@ -45752,13 +44983,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    215,
-    3,
     217,
-    2,
-    221,
     1,
-    223,
+    219,
     1
    ],
    "approache": [
@@ -45848,19 +45075,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     145,
     1,
-    215,
-    2,
     216,
     2,
-    217,
-    2,
-    220,
-    2,
-    222,
+    218,
     1,
-    223,
+    219,
     1,
-    225,
+    221,
     1
    ],
    "appropriate": [
@@ -45876,19 +45097,11 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     86,
     1,
-    221,
+    217,
     1
    ],
    "approv": [
     84,
-    1
-   ],
-   "approval": [
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "approximat": [
@@ -45906,11 +45119,9 @@ globalThis.SUBTOPIC_CATALOG={
    "approximately": [
     91,
     1,
-    218,
+    215,
     1,
     219,
-    1,
-    223,
     4
    ],
    "approximation": [
@@ -45977,13 +45188,7 @@ globalThis.SUBTOPIC_CATALOG={
     163,
     1,
     164,
-    1,
-    215,
-    3,
-    216,
-    2,
-    217,
-    3
+    1
    ],
    "arctic": [
     3,
@@ -46213,22 +45418,14 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2,
     215,
-    5,
+    4,
     216,
-    6,
-    217,
-    4,
-    218,
-    4,
-    219,
-    4,
-    220,
     5,
-    221,
+    217,
     7,
-    222,
+    218,
     8,
-    223,
+    219,
     9
    ],
    "argonne": [
@@ -46416,13 +45613,13 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     87,
     1,
-    220,
+    216,
     2,
-    221,
+    217,
     2,
-    222,
+    218,
     2,
-    223,
+    219,
     2
    ],
    "arm": [
@@ -46982,13 +46179,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    216,
-    2,
-    217,
-    1,
-    218,
-    1,
-    225,
+    221,
     1
    ],
    "artificially": [
@@ -47044,7 +46235,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     3,
-    221,
+    217,
     1
    ],
    "assembly": [
@@ -47098,11 +46289,9 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     94,
     1,
-    216,
-    1,
-    221,
+    217,
     2,
-    223,
+    219,
     4
    ],
    "assesse": [
@@ -47136,17 +46325,15 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     1,
+    216,
+    1,
     217,
-    1,
-    220,
-    1,
+    2,
+    218,
+    2,
+    219,
+    2,
     221,
-    2,
-    222,
-    2,
-    223,
-    2,
-    225,
     1
    ],
    "asset": [
@@ -47174,7 +46361,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     198,
     1,
-    223,
+    219,
     6
    ],
    "assimilation": [
@@ -47232,29 +46419,17 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
+    215,
+    3,
+    216,
+    2,
     217,
     1,
     218,
-    4,
-    219,
-    3,
-    220,
-    2,
-    221,
-    1,
-    222,
     1
    ],
    "associate": [
     89,
-    1
-   ],
-   "assum": [
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "assume": [
@@ -47277,11 +46452,7 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     84,
-    5,
-    216,
-    2,
-    218,
-    1
+    5
    ],
    "assur": [
     0,
@@ -47310,7 +46481,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    223,
+    219,
     1
    ],
    "assure": [
@@ -47449,10 +46620,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1
    ],
-   "audience": [
-    218,
-    1
-   ],
    "augment": [
     16,
     1,
@@ -47462,11 +46629,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "augmentation": [
@@ -47475,9 +46642,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "august": [
     95,
-    8,
-    215,
-    1
+    8
    ],
    "austere": [
     36,
@@ -47506,7 +46671,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     200,
     1,
-    223,
+    219,
     2
    ],
    "automatic": [
@@ -47520,9 +46685,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     88,
     1,
-    223,
+    219,
     2,
-    224,
+    220,
     1
    ],
    "autonomou": [
@@ -47570,11 +46735,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     178,
     1,
-    221,
+    217,
     1,
-    223,
+    219,
     3,
-    225,
+    221,
     2
    ],
    "autonomously": [
@@ -47649,10 +46814,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "avenue": [
@@ -47672,7 +46833,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    223,
+    219,
     1
    ],
    "aviation": [
@@ -47689,8 +46850,6 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     84,
-    1,
-    218,
     1
    ],
    "avoidance": [
@@ -47739,8 +46898,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "away": [
     84,
-    1,
-    218,
     1
    ],
    "azimuth": [
@@ -48009,16 +47166,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "bacteria": [
     5,
-    1,
-    218,
     1
    ],
    "bacterial": [
     19,
-    1
-   ],
-   "bakken": [
-    217,
     1
    ],
    "balanc": [
@@ -48094,11 +47245,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "barrel": [
-    217,
-    2,
-    218,
-    7,
-    223,
+    219,
     1
    ],
    "barrier": [
@@ -48148,17 +47295,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    215,
-    4,
     216,
-    8,
-    217,
-    4,
-    218,
-    10,
-    220,
     1,
-    221,
+    217,
     1
    ],
    "base": [
@@ -48168,17 +47307,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     36,
     1,
-    218,
-    2,
-    220,
+    216,
     1
    ],
    "baseline": [
     218,
-    2,
-    222,
     1,
-    223,
+    219,
     1
    ],
    "basi": [
@@ -48241,14 +47376,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "basin": [
     215,
-    4,
+    1,
     217,
-    1,
-    218,
-    4,
-    219,
-    1,
-    221,
     1
    ],
    "batch": [
@@ -48310,18 +47439,8 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "bays": [
-    223,
+    219,
     1
-   ],
-   "bbl": [
-    215,
-    2,
-    216,
-    1,
-    217,
-    4,
-    218,
-    4
    ],
    "beam": [
     24,
@@ -48373,8 +47492,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "before": [
     6,
-    1,
-    218,
     1
    ],
    "begin": [
@@ -48390,11 +47507,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     217,
     1,
-    220,
-    1,
-    221,
-    1,
-    222,
+    218,
     1
    ],
    "behavior": [
@@ -48458,9 +47571,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
-    1,
-    225,
+    221,
     1
    ],
    "behavioral": [
@@ -48483,9 +47594,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "behind": [
     4,
-    2,
-    216,
-    1
+    2
    ],
    "behler": [
     59,
@@ -48505,10 +47614,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1
    ],
-   "beneficial": [
-    218,
-    7
-   ],
    "benefit": [
     0,
     1,
@@ -48526,11 +47631,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     2,
-    222,
+    218,
     1
    ],
    "benefitt": [
@@ -48555,22 +47660,14 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     81,
-    1,
-    215,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     1
    ],
    "best-in-class": [
-    223,
+    219,
     1
    ],
    "best-practice": [
-    223,
+    219,
     1
    ],
    "better": [
@@ -48655,8 +47752,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     93,
-    1,
-    218,
     1
    ],
    "beyond": [
@@ -48691,9 +47786,7 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1,
     84,
-    1,
-    216,
-    2
+    1
    ],
    "beyond-classical": [
     27,
@@ -48724,11 +47817,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "billion": [
+    215,
+    1,
+    218,
+    1,
     219,
-    1,
-    222,
-    1,
-    223,
     1
    ],
    "binary": [
@@ -48861,8 +47954,6 @@ globalThis.SUBTOPIC_CATALOG={
     127,
     1,
     134,
-    1,
-    218,
     1
    ],
    "biology": [
@@ -49154,19 +48245,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    215,
-    3,
-    216,
-    3,
-    217,
-    2,
-    223,
+    219,
     1
    ],
    "bottleneck": [
-    218,
-    1,
-    223,
+    219,
     1
    ],
    "bottom": [
@@ -49181,10 +48264,6 @@ globalThis.SUBTOPIC_CATALOG={
     19,
     1
    ],
-   "bottomhole": [
-    215,
-    1
-   ],
    "bound": [
     7,
     1,
@@ -49197,11 +48276,7 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     2,
     20,
-    5,
-    216,
-    1,
-    217,
-    1
+    5
    ],
    "boundary": [
     1,
@@ -49258,17 +48333,17 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "breadboard": [
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "break": [
     20,
     1,
-    222,
+    218,
     1
    ],
    "breakdown": [
@@ -49287,9 +48362,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     2,
     89,
-    2,
-    216,
-    1
+    2
    ],
    "breed": [
     147,
@@ -49332,7 +48405,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "brine": [
-    226,
+    222,
     1
    ],
    "bring": [
@@ -49365,11 +48438,7 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     1,
     82,
-    1,
-    217,
-    1,
-    218,
-    2
+    1
    ],
    "broad-band": [
     11,
@@ -49384,14 +48453,6 @@ globalThis.SUBTOPIC_CATALOG={
    "broaden": [
     23,
     1
-   ],
-   "broader": [
-    216,
-    1,
-    217,
-    1,
-    218,
-    2
    ],
    "broadly": [
     9,
@@ -49454,10 +48515,6 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "buildout": [
-    219,
-    1
-   ],
-   "buildup": [
     215,
     1
    ],
@@ -49491,10 +48548,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1
    ],
-   "buoyant": [
-    216,
-    1
-   ],
    "burden": [
     89,
     1,
@@ -49512,9 +48565,9 @@ globalThis.SUBTOPIC_CATALOG={
    "business": [
     91,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "but": [
@@ -49574,33 +48627,21 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    215,
-    6,
     216,
-    4,
+    1,
     217,
-    2,
+    1,
     218,
-    2,
-    220,
     1,
-    221,
-    1,
-    222,
-    1,
-    223,
-    2
-   ],
-   "butane": [
     219,
     2
    ],
-   "bypass": [
+   "butane": [
     215,
-    1
+    2
    ],
    "byproduct": [
-    224,
+    220,
     1
    ],
    "byrd": [
@@ -49720,15 +48761,11 @@ globalThis.SUBTOPIC_CATALOG={
    "calibration": [
     83,
     1,
-    223,
+    219,
     1
    ],
    "call": [
     11,
-    1
-   ],
-   "candidate": [
-    215,
     1
    ],
    "cannot": [
@@ -49860,7 +48897,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     95,
     1,
-    223,
+    219,
     1
    ],
    "capable": [
@@ -49890,11 +48927,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    218,
-    2,
-    220,
+    216,
     1,
-    221,
+    217,
     1
    ],
    "capacitor": [
@@ -49909,16 +48944,14 @@ globalThis.SUBTOPIC_CATALOG={
     23,
     1,
     41,
-    1,
-    218,
-    2
+    1
    ],
    "capital": [
-    222,
+    218,
     1
    ],
    "capitaliz": [
-    221,
+    217,
     1
    ],
    "capitalize": [
@@ -49944,7 +48977,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     1,
-    224,
+    220,
     3
    ],
    "carbide": [
@@ -49954,11 +48987,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "carbon": [
-    215,
-    1,
-    217,
-    1,
-    224,
+    220,
     1
    ],
    "carbon-carbon": [
@@ -49973,18 +49002,8 @@ globalThis.SUBTOPIC_CATALOG={
     10,
     1
    ],
-   "carri": [
-    215,
-    1,
-    217,
-    2
-   ],
    "carroll": [
     61,
-    1
-   ],
-   "carry": [
-    216,
     1
    ],
    "cascad": [
@@ -50016,17 +49035,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     2,
-    218,
-    1,
-    220,
+    216,
     1
    ],
    "cash": [
-    221,
+    217,
     1
    ],
    "cashflow": [
-    221,
+    217,
     1
    ],
    "cassenti": [
@@ -50044,17 +49061,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     184,
     1,
-    219,
+    215,
     1,
-    220,
+    216,
     6,
-    221,
+    217,
     1
    ],
    "catalytic": [
     28,
     3,
-    220,
+    216,
     2
    ],
    "catastrophic": [
@@ -50062,7 +49079,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "caus": [
-    222,
+    218,
     1
    ],
    "causal": [
@@ -50130,7 +49147,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     173,
     2,
-    221,
+    217,
     1
    ],
    "central": [
@@ -50145,8 +49162,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "centraliz": [
     88,
-    1,
-    218,
     1
    ],
    "centralization": [
@@ -50183,8 +49198,6 @@ globalThis.SUBTOPIC_CATALOG={
     0,
     1,
     46,
-    1,
-    216,
     1
    ],
    "certainly": [
@@ -50203,26 +49216,14 @@ globalThis.SUBTOPIC_CATALOG={
     36,
     1
    ],
-   "cfr": [
-    218,
-    1
-   ],
-   "ch": [
-    215,
-    1
-   ],
-   "ch4": [
-    215,
-    1
-   ],
    "chain": [
     91,
     1,
-    219,
+    215,
     1,
-    222,
+    218,
     2,
-    223,
+    219,
     2
    ],
    "chalcogenide": [
@@ -50237,8 +49238,6 @@ globalThis.SUBTOPIC_CATALOG={
     19,
     2,
     39,
-    1,
-    217,
     1
    ],
    "challenge": [
@@ -50294,11 +49293,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     95,
     1,
-    217,
-    1,
-    219,
+    215,
     2,
-    223,
+    219,
     1
    ],
    "chang": [
@@ -50346,7 +49343,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    224,
+    220,
     1
    ],
    "channel": [
@@ -50363,12 +49360,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "character": [
     12,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "characteristic": [
@@ -50393,10 +49384,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     2,
     90,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "characteriz": [
@@ -50412,9 +49399,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
-    2,
-    223,
+    219,
     1
    ],
    "characterization": [
@@ -50456,13 +49441,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     140,
     1,
-    216,
-    7,
-    218,
+    221,
     1,
-    225,
-    1,
-    226,
+    222,
     1
    ],
    "characterize": [
@@ -50558,19 +49539,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     196,
     1,
-    218,
-    1,
-    219,
+    215,
     3,
-    220,
+    216,
     7,
-    221,
+    217,
     5,
-    223,
+    219,
     1
    ],
    "chemical-management": [
-    223,
+    219,
     1
    ],
    "chemicalthe": [
@@ -50634,7 +49613,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "choke": [
-    223,
+    219,
     1
    ],
    "choose": [
@@ -50650,7 +49629,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "chronic": [
-    222,
+    218,
     1
    ],
    "circuit": [
@@ -50684,7 +49663,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "citizen": [
-    223,
+    219,
     1
    ],
    "civic-mind": [
@@ -50779,9 +49758,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     86,
-    1,
-    218,
-    6
+    1
    ],
    "climate": [
     3,
@@ -50822,15 +49799,13 @@ globalThis.SUBTOPIC_CATALOG={
    "closed-loop": [
     23,
     1,
-    223,
+    219,
     1
    ],
    "closely": [
     8,
     1,
     22,
-    1,
-    216,
     1
    ],
    "closure": [
@@ -50844,7 +49819,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     190,
     1,
-    223,
+    219,
     1
    ],
    "cloudlet": [
@@ -50853,8 +49828,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "cluster": [
     34,
-    1,
-    216,
     1
    ],
    "clutter": [
@@ -50868,15 +49841,13 @@ globalThis.SUBTOPIC_CATALOG={
    "cmm": [
     134,
     1,
-    224,
+    220,
     1,
-    225,
+    221,
     1
    ],
    "co": [
-    217,
-    3,
-    224,
+    220,
     1
    ],
    "co-crystal": [
@@ -50908,35 +49879,31 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "co-product": [
-    224,
+    220,
     1
    ],
    "co2": [
-    215,
-    2,
+    216,
+    1,
     217,
-    19,
+    1,
     220,
-    1,
-    221,
-    1,
-    224,
     3
    ],
    "coal": [
-    224,
+    220,
     3
    ],
    "coal-bas": [
-    224,
+    220,
     1
    ],
    "coal-fir": [
-    224,
+    220,
     1
    ],
    "coal-power": [
-    224,
+    220,
     1
    ],
    "coating": [
@@ -50944,11 +49911,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     3,
-    220,
+    216,
+    1,
+    218,
     1,
     222,
-    1,
-    226,
     1
    ],
    "cod": [
@@ -51062,7 +50029,7 @@ globalThis.SUBTOPIC_CATALOG={
    "collaboration": [
     0,
     1,
-    223,
+    219,
     1
    ],
    "collaborative": [
@@ -51105,14 +50072,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     215,
-    2,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2,
-    219,
     1
    ],
    "collection": [
@@ -51283,12 +50242,6 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1,
     90,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "combinatorial": [
@@ -51300,7 +50253,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "combustion": [
-    224,
+    220,
     1
    ],
    "come": [
@@ -51330,7 +50283,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "command-and-control": [
-    223,
+    219,
     1
    ],
    "commander": [
@@ -51352,59 +50305,29 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    215,
-    4,
-    216,
-    3,
     217,
-    4,
-    218,
-    5,
-    221,
     1,
-    223,
-    1
-   ],
-   "commercial-scale": [
-    216,
-    1,
-    218,
+    219,
     1
    ],
    "commercialization": [
-    220,
-    2,
-    221,
-    5,
-    222,
-    3,
-    223,
-    6
-   ],
-   "commercially": [
-    218,
-    1
-   ],
-   "commission": [
-    215,
-    1
-   ],
-   "commitment": [
-    215,
-    5,
     216,
-    5,
+    2,
     217,
     5,
     218,
     3,
-    221,
+    219,
+    6
+   ],
+   "commitment": [
+    217,
     1,
-    222,
+    218,
     1
    ],
    "commodity": [
-    222,
+    218,
     1
    ],
    "common": [
@@ -51417,12 +50340,6 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1,
     88,
-    1
-   ],
-   "commonly": [
-    215,
-    1,
-    217,
     1
    ],
    "communicate": [
@@ -51508,23 +50425,15 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "company": [
-    215,
+    217,
     1,
-    221,
-    1,
-    222,
+    218,
     1
    ],
    "compar": [
     92,
     1,
-    215,
-    1,
     216,
-    1,
-    217,
-    1,
-    220,
     2
    ],
    "comparison": [
@@ -51532,17 +50441,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    218,
+    216,
     1,
-    220,
-    1,
-    223,
+    219,
     1
    ],
    "compatibility": [
     56,
-    1,
-    217,
     1
    ],
    "compatible": [
@@ -51782,11 +50687,11 @@ globalThis.SUBTOPIC_CATALOG={
    "complementary": [
     5,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "complete": [
@@ -51800,24 +50705,16 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
+    216,
+    2,
     217,
-    1,
-    220,
     2,
-    221,
-    2,
-    222,
+    218,
     2
    ],
    "completion": [
     95,
-    1,
-    215,
-    2,
-    216,
-    4,
-    217,
-    2
+    1
    ],
    "complex": [
     0,
@@ -51901,8 +50798,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2,
     212,
-    1,
-    217,
     1
    ],
    "complexe": [
@@ -51946,14 +50841,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     189,
     1,
-    219,
+    215,
     1,
-    223,
+    219,
     1
-   ],
-   "compliance": [
-    218,
-    2
    ],
    "compliant": [
     70,
@@ -52016,17 +50907,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
+    216,
+    2,
+    217,
+    2,
     218,
-    3,
-    220,
     2,
-    221,
-    2,
-    222,
-    2,
-    223,
+    219,
     1,
-    225,
+    221,
     2
    ],
    "component-level": [
@@ -52064,9 +50953,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     78,
     3,
-    222,
+    218,
     1,
-    226,
+    222,
     1
    ],
    "composition": [
@@ -52082,7 +50971,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    219,
+    215,
     1
    ],
    "compositional": [
@@ -52112,18 +51001,14 @@ globalThis.SUBTOPIC_CATALOG={
    "compression": [
     20,
     2,
-    223,
+    219,
     2
    ],
    "compressor": [
-    222,
-    6,
-    223,
-    5
-   ],
-   "compris": [
     218,
-    1
+    6,
+    219,
+    5
    ],
    "compromise": [
     14,
@@ -52168,9 +51053,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     178,
     1,
-    216,
-    1,
-    223,
+    219,
     1
    ],
    "computation": [
@@ -52284,7 +51167,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     154,
     2,
-    220,
+    216,
     2
    ],
    "computationally": [
@@ -52404,7 +51287,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "concentration": [
-    219,
+    215,
     2
    ],
    "concept": [
@@ -52466,11 +51349,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    220,
+    216,
     2,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "conceptual": [
@@ -52499,14 +51382,10 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1
    ],
-   "conclud": [
-    215,
-    1
-   ],
    "conclude": [
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "concrete": [
@@ -52528,9 +51407,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "condensate": [
-    215,
-    1,
-    220,
+    216,
     1
    ],
    "condition": [
@@ -52580,9 +51457,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    221,
+    217,
     1,
-    223,
+    219,
     5
    ],
    "conduct": [
@@ -52603,8 +51480,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     94,
-    1,
-    215,
     1
    ],
    "conduction": [
@@ -52615,10 +51490,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1,
     78,
-    1,
-    215,
-    1,
-    216,
     1
    ],
    "confidence": [
@@ -52640,17 +51511,17 @@ globalThis.SUBTOPIC_CATALOG={
    "configurable": [
     76,
     1,
-    223,
+    219,
     1
    ],
    "configuration": [
     17,
     1,
-    220,
+    216,
     1,
-    223,
+    219,
     2,
-    225,
+    221,
     1
    ],
    "confin": [
@@ -52670,9 +51541,9 @@ globalThis.SUBTOPIC_CATALOG={
    "confirm": [
     20,
     1,
-    221,
+    217,
     2,
-    222,
+    218,
     1
    ],
    "conflict": [
@@ -52685,12 +51556,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "conformal": [
     67,
-    2
-   ],
-   "conformance": [
-    215,
-    2,
-    216,
     2
    ],
    "congest": [
@@ -52822,11 +51687,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     2,
-    215,
-    2,
-    217,
-    1,
-    223,
+    219,
     1
    ],
    "considerable": [
@@ -52852,13 +51713,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    215,
-    1,
     217,
-    1,
-    218,
-    1,
-    221,
     1
    ],
    "consist": [
@@ -52881,14 +51736,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "constituent": [
     5,
-    1,
-    218,
-    1
-   ],
-   "constitute": [
-    215,
-    1,
-    217,
     1
    ],
    "constrain": [
@@ -52940,9 +51787,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     137,
     1,
-    218,
-    1,
-    221,
+    217,
     1
    ],
    "consumption": [
@@ -52950,10 +51795,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     35,
     1
-   ],
-   "contact": [
-    216,
-    2
    ],
    "contagion": [
     29,
@@ -52963,16 +51804,8 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     215,
-    1,
-    219,
     3,
-    220,
-    1
-   ],
-   "contaminant": [
-    217,
-    1,
-    218,
+    216,
     1
    ],
    "contemplat": [
@@ -52990,11 +51823,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    216,
+    217,
     1,
-    221,
-    1,
-    222,
+    218,
     1
    ],
    "contest": [
@@ -53058,12 +51889,6 @@ globalThis.SUBTOPIC_CATALOG={
    "contextualiz": [
     56,
     1,
-    221,
-    1
-   ],
-   "contingent": [
-    216,
-    1,
     217,
     1
    ],
@@ -53076,11 +51901,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     76,
     1,
-    217,
-    1,
-    218,
-    1,
-    223,
+    219,
     1
    ],
    "continua": [
@@ -53116,7 +51937,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     5,
-    223,
+    219,
     1
    ],
    "continuously": [
@@ -53124,7 +51945,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     74,
     1,
-    223,
+    219,
     1
    ],
    "continuum": [
@@ -53138,9 +51959,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    221,
+    217,
     1,
-    223,
+    219,
     2
    ],
    "contraction": [
@@ -53155,10 +51976,6 @@ globalThis.SUBTOPIC_CATALOG={
     17,
     1,
     46,
-    1
-   ],
-   "contribut": [
-    216,
     1
    ],
    "contribute": [
@@ -53242,13 +52059,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     213,
     1,
-    216,
-    4,
-    218,
-    2,
-    221,
+    217,
     1,
-    223,
+    219,
     3
    ],
    "controll": [
@@ -53276,9 +52089,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    216,
-    1,
-    223,
+    219,
     1
    ],
    "controllable": [
@@ -53286,7 +52097,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "controlled10": [
-    223,
+    219,
     1
    ],
    "controller": [
@@ -53358,15 +52169,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     184,
     1,
-    219,
+    215,
     1,
-    220,
+    216,
     5,
+    217,
+    3,
+    220,
+    3,
     221,
-    3,
-    224,
-    3,
-    225,
     1
    ],
    "convert": [
@@ -53374,7 +52185,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     1,
-    220,
+    216,
     1
    ],
    "converter": [
@@ -53427,22 +52238,12 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     37,
-    2,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
+    2
    ],
    "cope": [
     0,
     1,
     34,
-    1
-   ],
-   "cor": [
-    216,
     1
    ],
    "core": [
@@ -53457,12 +52258,6 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1,
     95,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "corp": [
@@ -53516,25 +52311,25 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "corrosion": [
-    220,
+    216,
     2,
-    222,
+    218,
     3,
-    223,
+    219,
     1
    ],
    "corrosion-relat": [
-    222,
+    218,
     1
    ],
    "corrosion-resistant": [
-    220,
+    216,
     1
    ],
    "corrosive": [
     78,
     1,
-    221,
+    217,
     1
    ],
    "cosmic": [
@@ -53575,36 +52370,28 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     3,
     216,
-    5,
+    3,
     217,
-    6,
-    218,
-    8,
-    219,
-    3,
-    220,
-    3,
-    221,
     7,
-    222,
+    218,
     4,
-    223,
+    219,
     5,
-    226,
+    222,
     1
    ],
    "cost-effective": [
-    219,
+    215,
     1,
-    222,
+    218,
     1,
-    224,
+    220,
     1
    ],
    "costly": [
     46,
     2,
-    219,
+    215,
     1
    ],
    "cots": [
@@ -53645,14 +52432,8 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     215,
-    3,
-    216,
-    4,
-    217,
-    3,
-    219,
     2,
-    223,
+    219,
     6
    ],
    "count": [
@@ -53685,8 +52466,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "country": [
     86,
-    1,
-    218,
     1
    ],
    "coupl": [
@@ -53709,11 +52488,7 @@ globalThis.SUBTOPIC_CATALOG={
     70,
     1,
     93,
-    7,
-    215,
-    1,
-    217,
-    1
+    7
    ],
    "coupler": [
     81,
@@ -53780,11 +52555,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    215,
-    1,
-    216,
-    3,
-    223,
+    219,
     1
    ],
    "create": [
@@ -53818,9 +52589,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    223,
+    219,
     1,
-    226,
+    222,
     1
    ],
    "creation": [
@@ -53934,13 +52705,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    216,
-    1,
-    223,
+    219,
     2,
-    224,
+    220,
     1,
-    226,
+    222,
     2
    ],
    "critically": [
@@ -53998,9 +52767,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "crosse": [
-    221,
+    217,
     1,
-    223,
+    219,
     1
    ],
    "crowd": [
@@ -54024,13 +52793,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    222,
+    218,
     1
    ],
    "crude": [
-    221,
+    217,
     1,
-    223,
+    219,
     1
    ],
    "cruder": [
@@ -54068,10 +52837,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     69,
     4
-   ],
-   "crystallization": [
-    218,
-    1
    ],
    "cs": [
     46,
@@ -54302,13 +53067,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     216,
     1,
+    217,
+    1,
     218,
-    5,
-    220,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "currently": [
@@ -54326,13 +53087,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
+    215,
+    1,
     216,
     1,
     219,
-    1,
-    220,
-    1,
-    223,
     1
    ],
    "curriculum": [
@@ -54343,18 +53102,10 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1
    ],
-   "customizable": [
-    218,
-    1
-   ],
-   "cut": [
-    218,
-    1
-   ],
    "cutting-edge": [
     3,
     1,
-    223,
+    219,
     1
    ],
    "cyber": [
@@ -54452,7 +53203,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "cyberattack": [
-    223,
+    219,
     1
    ],
    "cybernetic": [
@@ -54470,7 +53221,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     211,
     1,
-    223,
+    219,
     1
    ],
    "cyberspace": [
@@ -54494,23 +53245,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     146,
     1,
-    215,
-    3,
-    217,
-    3,
-    226,
-    1
-   ],
-   "cyclic": [
-    215,
-    1
-   ],
-   "cyclical": [
-    217,
-    1
-   ],
-   "dakota": [
-    215,
+    222,
     1
    ],
    "damage": [
@@ -54677,24 +53412,16 @@ globalThis.SUBTOPIC_CATALOG={
     210,
     1,
     215,
-    8,
-    216,
-    11,
-    217,
-    8,
-    218,
-    8,
-    219,
     1,
-    221,
+    217,
     3,
-    222,
+    218,
     2,
-    223,
+    219,
     3
    ],
    "data-acquisition": [
-    223,
+    219,
     1
    ],
    "data-driven": [
@@ -54745,10 +53472,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "date": [
     92,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "david": [
@@ -54774,13 +53497,7 @@ globalThis.SUBTOPIC_CATALOG={
    "day": [
     11,
     1,
-    218,
-    3,
-    223,
-    1
-   ],
-   "days": [
-    218,
+    219,
     1
    ],
    "db": [
@@ -54798,7 +53515,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "de-risk": [
-    223,
+    219,
     1
    ],
    "deal": [
@@ -54823,13 +53540,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "decade": [
     0,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    2
+    1
    ],
    "decay": [
     61,
@@ -54842,9 +53553,9 @@ globalThis.SUBTOPIC_CATALOG={
    "decentraliz": [
     68,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     3
    ],
    "deception": [
@@ -54912,9 +53623,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    218,
-    1,
-    223,
+    219,
     2
    ],
    "decision-mak": [
@@ -54936,7 +53645,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    225,
+    221,
     2
    ],
    "decision-maker": [
@@ -54965,10 +53674,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "decisively": [
     16,
-    1
-   ],
-   "declin": [
-    216,
     1
    ],
    "decoherence": [
@@ -55011,8 +53716,6 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     2,
     83,
-    1,
-    218,
     1
    ],
    "deeper": [
@@ -55026,7 +53729,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    222,
+    218,
     1
    ],
    "defeat": [
@@ -55094,7 +53797,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "deferr": [
-    223,
+    219,
     1
    ],
    "deficiency": [
@@ -55110,41 +53813,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     1,
-    218,
-    1,
-    223,
+    219,
     1
    ],
    "define": [
     14,
     1,
-    215,
-    1,
     216,
     1,
     217,
-    1,
-    218,
-    2,
-    220,
-    1,
-    221,
     1
    ],
    "definition": [
     16,
     1,
     88,
-    1,
-    215,
-    1,
-    217,
-    1,
-    218,
-    1
-   ],
-   "definitively": [
-    217,
     1
    ],
    "deformation": [
@@ -55201,17 +53884,11 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     78,
-    1,
-    215,
     1
    ],
    "dehydrator": [
-    222,
+    218,
     2
-   ],
-   "delay": [
-    217,
-    1
    ],
    "delegation": [
     88,
@@ -55238,19 +53915,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     216,
     1,
-    220,
+    217,
     1,
-    221,
-    1,
-    222,
+    218,
     2
    ],
    "deliverability": [
-    220,
+    216,
     1,
-    222,
+    218,
     3,
-    223,
+    219,
     3
    ],
    "delivery": [
@@ -55276,9 +53951,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     149,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     2
    ],
    "demand": [
@@ -55291,8 +53966,6 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     90,
-    1,
-    218,
     1
    ],
    "demographic": [
@@ -55304,9 +53977,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    216,
-    2,
-    221,
+    217,
     2
    ],
    "demonstrate": [
@@ -55322,19 +53993,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     2,
-    215,
-    2,
     216,
     1,
     217,
-    2,
+    1,
     218,
-    3,
-    220,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "demonstration": [
@@ -55348,7 +54011,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    221,
+    217,
     1
    ],
    "deni": [
@@ -55379,14 +54042,6 @@ globalThis.SUBTOPIC_CATALOG={
     62,
     1,
     72,
-    1
-   ],
-   "department": [
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "depend": [
@@ -55423,13 +54078,7 @@ globalThis.SUBTOPIC_CATALOG={
     19,
     1,
     61,
-    12,
-    215,
-    1,
-    216,
-    6,
-    217,
-    1
+    12
    ],
    "deploy": [
     39,
@@ -55440,13 +54089,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    223,
+    219,
     3
    ],
    "deployable": [
@@ -55466,19 +54109,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    215,
-    2,
-    216,
-    4,
     217,
     2,
     218,
     1,
-    221,
-    2,
-    222,
-    1,
-    223,
+    219,
     1
    ],
    "depression": [
@@ -55503,10 +54138,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1
    ],
-   "desalinization": [
-    218,
-    1
-   ],
    "describ": [
     20,
     1,
@@ -55528,21 +54159,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    215,
-    2,
     216,
-    2,
-    217,
-    2,
-    218,
-    6,
-    220,
     5,
-    221,
+    217,
     4,
-    222,
+    218,
     4,
-    223,
+    219,
     3
    ],
    "description": [
@@ -55737,13 +54360,7 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     95,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    2
+    1
    ],
    "descriptive": [
     6,
@@ -55873,16 +54490,10 @@ globalThis.SUBTOPIC_CATALOG={
     213,
     1,
     216,
-    2,
-    217,
-    1,
-    218,
-    2,
-    220,
     3,
-    221,
+    217,
     2,
-    222,
+    218,
     3
    ],
    "designer": [
@@ -55916,9 +54527,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    220,
+    216,
     1,
-    222,
+    218,
     1
    ],
    "desirable": [
@@ -55935,8 +54546,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "desorption": [
     28,
-    1,
-    215,
     1
    ],
    "despite": [
@@ -55961,14 +54570,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     2,
     215,
-    8,
-    216,
-    5,
-    217,
-    10,
-    218,
-    13,
-    219,
     1
    ],
    "detect": [
@@ -56022,9 +54623,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     211,
     1,
-    223,
+    219,
     2,
-    225,
+    221,
     2
    ],
    "detectivity": [
@@ -56039,12 +54640,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "determin": [
     4,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "determination": [
@@ -56071,8 +54666,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     93,
-    1,
-    217,
     1
    ],
    "deterministic": [
@@ -56344,19 +54937,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    1,
     216,
-    1,
+    3,
     217,
     1,
     218,
-    2,
-    220,
-    3,
-    221,
-    1,
-    222,
     2
    ],
    "developer": [
@@ -56479,28 +55064,20 @@ globalThis.SUBTOPIC_CATALOG={
     205,
     1,
     215,
-    4,
+    1,
     216,
-    5,
+    3,
     217,
     2,
     218,
-    2,
+    5,
     219,
-    1,
+    5,
     220,
-    3,
+    2,
     221,
-    2,
-    222,
-    5,
-    223,
-    5,
-    224,
-    2,
-    225,
     4,
-    226,
+    222,
     4
    ],
    "developmental": [
@@ -56580,15 +55157,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     177,
     1,
-    216,
-    9,
-    217,
-    1,
-    223,
-    1
-   ],
-   "diagram": [
-    218,
+    219,
     1
    ],
    "diamond": [
@@ -56647,13 +55216,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     2,
     93,
-    1,
-    215,
-    1,
-    217,
-    1,
-    218,
-    2
+    1
    ],
    "differential": [
     4,
@@ -56714,15 +55277,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    216,
+    218,
     1,
-    222,
-    1,
-    223,
+    219,
     8,
-    224,
+    220,
     1,
-    225,
+    221,
     3
    ],
    "digitalization": [
@@ -56743,9 +55304,7 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     89,
-    3,
-    216,
-    2
+    3
    ],
    "dimensional": [
     6,
@@ -56778,11 +55337,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "dioxide": [
-    215,
-    1,
-    217,
-    1,
-    224,
+    220,
     1
    ],
    "direct": [
@@ -56805,12 +55360,10 @@ globalThis.SUBTOPIC_CATALOG={
     71,
     1,
     216,
-    1,
-    220,
     2,
-    221,
+    217,
     3,
-    226,
+    222,
     1
    ],
    "directed-energy": [
@@ -56844,13 +55397,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    2,
-    216,
-    2,
     217,
-    2,
-    221,
     1
    ],
    "directorate": [
@@ -56968,9 +55515,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "discharge": [
-    218,
-    6,
-    224,
+    220,
     1
    ],
    "discipline": [
@@ -57184,7 +55729,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     157,
     1,
-    220,
+    216,
     2
    ],
    "discovery": [
@@ -57285,15 +55830,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "discussion": [
     9,
-    1,
-    215,
-    5,
-    216,
-    1,
-    217,
-    4,
-    218,
-    2
+    1
    ],
    "diseas": [
     4,
@@ -57359,16 +55896,10 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1
    ],
-   "dispos": [
-    218,
-    2
-   ],
    "disposal": [
-    218,
-    5,
-    219,
+    215,
     1,
-    221,
+    217,
     2
    ],
    "disposition": [
@@ -57397,16 +55928,10 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     68,
-    1,
-    216,
     1
    ],
    "dissection": [
     19,
-    1
-   ],
-   "disseminate": [
-    218,
     1
    ],
    "dissemination": [
@@ -57439,19 +55964,9 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1
    ],
-   "dissolv": [
-    218,
-    2
-   ],
    "distance": [
     49,
-    2,
-    215,
-    1,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "distant": [
     0,
@@ -57469,12 +55984,6 @@ globalThis.SUBTOPIC_CATALOG={
     28,
     1,
     39,
-    1,
-    216,
-    1
-   ],
-   "distinguish": [
-    218,
     1
    ],
    "distortion": [
@@ -57518,9 +56027,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     3,
-    216,
-    1,
-    221,
+    217,
     2
    ],
    "distribute": [
@@ -57547,9 +56054,7 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     5,
     85,
-    1,
-    216,
-    4
+    1
    ],
    "disturbance": [
     22,
@@ -57631,9 +56136,7 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     1,
     83,
-    1,
-    216,
-    2
+    1
    ],
    "doctrinally": [
     83,
@@ -57826,19 +56329,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "doe": [
-    215,
-    2,
     216,
-    4,
+    1,
     217,
-    4,
-    220,
-    1,
-    221,
     2,
-    222,
+    218,
     1,
-    223,
+    219,
     3
    ],
    "does": [
@@ -57895,13 +56392,7 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     95,
-    1,
-    215,
-    2,
-    216,
-    4,
-    217,
-    2
+    1
    ],
    "domain-expert-elicit": [
     40,
@@ -57911,10 +56402,6 @@ globalThis.SUBTOPIC_CATALOG={
     139,
     1,
     215,
-    1,
-    217,
-    1,
-    219,
     3
    ],
    "dominance": [
@@ -57970,15 +56457,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     20,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     1
    ],
    "downhole": [
-    216,
-    1,
-    222,
+    218,
     1
    ],
    "downstream": [
@@ -57986,23 +56471,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     1
    ],
    "downtime": [
-    222,
+    218,
     1,
-    223,
+    219,
     3
    ],
    "dozen": [
     84,
-    1,
-    215,
     1
    ],
    "dr": [
@@ -58021,18 +56504,12 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1
    ],
-   "drainage": [
-    216,
-    2
-   ],
    "dramatically": [
     57,
     1,
     60,
     1,
     85,
-    1,
-    216,
     1
    ],
    "drastically": [
@@ -58048,19 +56525,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "drill": [
-    215,
-    4,
-    216,
-    3,
     217,
-    4,
-    221,
     1,
-    226,
-    1
-   ],
-   "drink": [
-    218,
+    222,
     1
    ],
    "drive": [
@@ -58110,7 +56577,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "drop": [
-    222,
+    218,
     1
    ],
    "drost": [
@@ -58177,14 +56644,8 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     215,
-    3,
-    216,
-    1,
-    217,
-    3,
-    219,
     2,
-    222,
+    218,
     2
    ],
    "dune": [
@@ -58210,32 +56671,22 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    3,
-    216,
-    4,
     217,
-    4,
-    218,
-    2,
-    221,
     1,
-    222,
+    218,
     2
    ],
    "durability": [
     213,
     1,
-    222,
+    218,
     1,
-    226,
+    222,
     1
    ],
    "duration": [
     0,
-    2,
-    218,
-    1
+    2
    ],
    "dust": [
     12,
@@ -58322,9 +56773,9 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     174,
     1,
-    220,
+    216,
     1,
-    225,
+    221,
     1
    ],
    "dynamical": [
@@ -58401,20 +56852,12 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     2,
     216,
-    3,
-    217,
-    2,
-    218,
-    2,
-    219,
-    2,
-    220,
     6,
+    218,
+    1,
+    221,
+    1,
     222,
-    1,
-    225,
-    1,
-    226,
     1
    ],
    "each": [
@@ -58425,20 +56868,10 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1,
     15,
-    1,
-    215,
-    1,
-    216,
     1
    ],
    "eache": [
     84,
-    1
-   ],
-   "eagle": [
-    215,
-    1,
-    217,
     1
    ],
    "early": [
@@ -58449,9 +56882,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     3,
     94,
-    2,
-    215,
-    1
+    2
    ],
    "earth": [
     3,
@@ -58472,7 +56903,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    224,
+    220,
     1
    ],
    "ease": [
@@ -58503,28 +56934,18 @@ globalThis.SUBTOPIC_CATALOG={
     130,
     1,
     215,
-    8,
+    3,
     216,
-    4,
+    3,
     217,
-    7,
+    6,
     218,
-    6,
-    219,
-    3,
-    220,
-    3,
-    221,
-    6,
-    222,
     4,
-    223,
+    219,
     1
    ],
    "economically": [
-    215,
-    1,
-    224,
+    220,
     1
    ],
    "economy": [
@@ -58552,7 +56973,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     5,
-    223,
+    219,
     4
    ],
    "edge-emitt": [
@@ -58560,7 +56981,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "edge-to-cloud": [
-    223,
+    219,
     1
    ],
    "education": [
@@ -58643,9 +57064,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     6,
     94,
-    3,
-    216,
-    1
+    3
    ],
    "effective": [
     0,
@@ -58682,9 +57101,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    216,
-    2,
-    219,
+    215,
     1
    ],
    "effectively": [
@@ -58711,9 +57128,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    1,
-    216,
-    2
+    1
    ],
    "effectiveness": [
     14,
@@ -58737,12 +57152,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     94,
-    2,
-    215,
-    1,
-    216,
-    5,
-    217,
     2
    ],
    "efficiency": [
@@ -58768,19 +57177,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     2,
-    215,
-    1,
     216,
-    7,
+    4,
     217,
     1,
-    220,
-    4,
-    221,
-    1,
-    222,
+    218,
     8,
-    223,
+    219,
     2
    ],
    "efficient": [
@@ -58818,17 +57221,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     142,
     1,
-    218,
+    215,
+    1,
+    216,
     1,
     219,
-    1,
+    2,
     220,
     1,
-    223,
-    2,
-    224,
-    1,
-    226,
+    222,
     1
    ],
    "efficiently": [
@@ -58848,10 +57249,6 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     92,
     1
-   ],
-   "effluent": [
-    218,
-    8
    ],
    "effort": [
     1,
@@ -58910,27 +57307,15 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    215,
-    1,
     216,
     1,
     217,
-    2,
+    1,
     218,
-    2,
-    220,
-    1,
-    221,
-    1,
-    222,
     1
    ],
-   "egr": [
-    217,
-    3
-   ],
    "egs": [
-    226,
+    222,
     2
    ],
    "einstein": [
@@ -58982,7 +57367,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    221,
+    217,
     2
    ],
    "electrically": [
@@ -59032,7 +57417,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     184,
     1,
-    224,
+    220,
     1
    ],
    "electrochemistry": [
@@ -59256,9 +57641,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    222,
+    218,
     1,
-    224,
+    220,
     1
    ],
    "elicit": [
@@ -59336,7 +57721,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "embedment": [
-    223,
+    219,
     1
    ],
    "embodi": [
@@ -59392,7 +57777,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    223,
+    219,
     1
    ],
    "emergence": [
@@ -59428,7 +57813,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    223,
+    219,
     1
    ],
    "emissivity": [
@@ -59532,11 +57917,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     76,
     1,
-    215,
-    2,
-    217,
-    2,
-    220,
+    216,
     1
    ],
    "emps": [
@@ -59590,7 +57971,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    223,
+    219,
     1
    ],
    "enable": [
@@ -59688,13 +58069,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     215,
     1,
-    219,
+    216,
+    1,
+    217,
     1,
     220,
-    1,
-    221,
-    1,
-    224,
     1
    ],
    "enabler": [
@@ -59749,8 +58128,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1,
     79,
-    1,
-    218,
     1
    ],
    "encourage": [
@@ -59765,16 +58142,12 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     216,
-    1,
+    4,
+    217,
+    5,
     218,
-    5,
-    220,
     4,
-    221,
-    5,
-    222,
-    4,
-    223,
+    219,
     3
    ],
    "end-to-end": [
@@ -59952,25 +58325,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    215,
-    1,
     216,
     1,
     217,
     1,
     218,
-    1,
-    220,
-    1,
-    221,
-    1,
-    222,
     2,
-    223,
+    219,
     1
    ],
    "energy-efficient": [
-    223,
+    219,
     1
    ],
    "energyg": [
@@ -60014,7 +58379,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    222,
+    218,
     5
    ],
    "engineer": [
@@ -60080,9 +58445,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     148,
     1,
-    225,
+    221,
     1,
-    226,
+    222,
     1
    ],
    "engineerable": [
@@ -60135,18 +58500,12 @@ globalThis.SUBTOPIC_CATALOG={
     186,
     1,
     215,
-    5,
-    216,
-    2,
-    217,
-    4,
+    1,
     219,
     1,
-    223,
-    1,
-    225,
+    221,
     2,
-    226,
+    222,
     2
    ],
    "enhance": [
@@ -60178,13 +58537,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    216,
-    1,
-    217,
-    2,
     218,
-    1,
-    222,
     1
    ],
    "enhanced-embedd": [
@@ -60196,9 +58549,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     67,
     1,
-    215,
-    1,
-    222,
+    218,
     2
    ],
    "enhancer": [
@@ -60251,9 +58602,7 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     2,
     92,
-    2,
-    216,
-    1
+    2
    ],
    "entail": [
     27,
@@ -60292,7 +58641,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "enter": [
-    222,
+    218,
     1
    ],
    "enterprise": [
@@ -60454,23 +58803,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     174,
     1,
-    215,
-    3,
     216,
-    3,
-    217,
-    3,
-    218,
-    2,
-    220,
     1,
-    221,
+    217,
     2,
-    222,
+    218,
     4,
-    223,
+    219,
     5,
-    226,
+    222,
     2
    ],
    "environment-task-technology": [
@@ -60521,12 +58862,6 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     4,
     93,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "environmentally": [
@@ -60556,14 +58891,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     3
-   ],
-   "eor": [
-    215,
-    7,
-    216,
-    1,
-    217,
-    8
    ],
    "epidemic": [
     4,
@@ -60614,17 +58941,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     3,
+    215,
+    1,
+    216,
+    1,
+    217,
+    1,
     218,
-    1,
-    219,
-    1,
-    220,
-    1,
-    221,
-    1,
-    222,
     12,
-    223,
+    219,
     2
    ],
    "equipp": [
@@ -60638,7 +58963,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "equivalent": [
-    223,
+    219,
     1
    ],
    "ergodicity": [
@@ -60654,7 +58979,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "erosion": [
-    223,
+    219,
     1
    ],
    "erp": [
@@ -60748,9 +59073,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     46,
     1,
-    218,
-    1,
-    223,
+    219,
     4
    ],
    "establishe": [
@@ -60772,17 +59095,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     2,
-    215,
-    2,
-    216,
-    2,
     217,
     1,
     218,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "estimate": [
@@ -60792,13 +59107,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     2,
-    216,
+    217,
     1,
     218,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "estimation": [
@@ -60810,15 +59121,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     1,
-    215,
-    2,
-    216,
-    1,
     217,
-    2,
-    218,
-    1,
-    221,
     1
    ],
    "etc": [
@@ -60846,17 +59149,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     4,
-    215,
-    2,
-    217,
-    2,
-    218,
-    2,
-    224,
+    220,
     1
    ],
    "ethane": [
-    219,
+    215,
     2
    ],
    "ethically": [
@@ -60864,7 +59161,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "ethylene": [
-    220,
+    216,
     1
    ],
    "eukaryote": [
@@ -60873,12 +59170,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "eukaryotic": [
     13,
-    1
-   ],
-   "eur": [
-    215,
-    1,
-    217,
     1
    ],
    "european": [
@@ -60901,8 +59192,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     218,
-    1,
-    222,
     1
    ],
    "evaluate": [
@@ -60916,7 +59205,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    223,
+    219,
     2
    ],
    "evaluation": [
@@ -60932,9 +59221,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    217,
-    1,
-    223,
+    219,
     4
    ],
    "evaluative": [
@@ -60967,8 +59254,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     84,
-    1,
-    216,
     1
    ],
    "event": [
@@ -60998,7 +59283,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    223,
+    219,
     2
    ],
    "eventually": [
@@ -61033,13 +59318,7 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     47,
-    1,
-    215,
-    2,
-    216,
-    2,
-    217,
-    2
+    1
    ],
    "evolution": [
     5,
@@ -61159,8 +59438,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "exce": [
     6,
-    1,
-    218,
     1
    ],
    "exceed": [
@@ -61198,7 +59475,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "excess": [
-    220,
+    216,
     2
    ],
    "exchang": [
@@ -61288,17 +59565,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "exhibit": [
-    215,
-    2,
     216,
-    2,
+    1,
     217,
-    2,
-    220,
     1,
-    221,
-    1,
-    222,
+    218,
     1
    ],
    "exist": [
@@ -61332,17 +59603,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     216,
     1,
-    217,
-    1,
     218,
     1,
-    220,
-    1,
-    222,
-    1,
-    223,
+    219,
     4,
-    224,
+    220,
     1
    ],
    "existence": [
@@ -61406,15 +59671,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
+    216,
+    1,
     217,
-    1,
-    218,
-    1,
-    220,
-    1,
-    221,
     2,
-    222,
+    218,
     1
    ],
    "expectation": [
@@ -61436,11 +59697,11 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "expenditure": [
-    222,
+    218,
     1
    ],
    "expense": [
-    223,
+    219,
     1
    ],
    "experienc": [
@@ -61479,8 +59740,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     94,
-    1,
-    216,
     1
    ],
    "experimental": [
@@ -61524,7 +59783,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     78,
     3,
-    220,
+    216,
     1
    ],
    "experimentally": [
@@ -61590,17 +59849,11 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "explainable": [
-    223,
+    219,
     1
    ],
    "explanation": [
-    215,
-    1,
-    216,
-    1,
     217,
-    1,
-    221,
     1
    ],
    "explicit": [
@@ -61696,9 +59949,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     2,
-    224,
+    220,
     1,
-    225,
+    221,
     1
    ],
    "exploratory": [
@@ -61726,7 +59979,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     2,
-    220,
+    216,
     1
    ],
    "explosion": [
@@ -61757,8 +60010,6 @@ globalThis.SUBTOPIC_CATALOG={
     0,
     1,
     46,
-    1,
-    216,
     1
    ],
    "expression": [
@@ -61786,11 +60037,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    215,
-    1,
-    217,
-    1,
-    223,
+    219,
     4
    ],
    "extension": [
@@ -61800,17 +60047,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    223,
+    219,
     1
    ],
    "extensive": [
     15,
     1,
     88,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "extensively": [
@@ -61821,8 +60064,6 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     1,
     20,
-    1,
-    218,
     1
    ],
    "external": [
@@ -61856,11 +60097,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     56,
     1,
-    218,
+    220,
     1,
-    224,
-    1,
-    225,
+    221,
     1
    ],
    "extraction": [
@@ -61868,13 +60107,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     215,
     1,
-    217,
-    1,
-    219,
-    1,
-    225,
+    221,
     2,
-    226,
+    222,
     2
    ],
    "extraordinary": [
@@ -61946,7 +60181,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     119,
     1,
-    226,
+    222,
     1
    ],
    "extreme-scale": [
@@ -61996,9 +60231,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    221,
+    217,
     1,
-    223,
+    219,
     1
    ],
    "face": [
@@ -62010,7 +60245,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     65,
     1,
-    222,
+    218,
     1
    ],
    "facebook": [
@@ -62043,8 +60278,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     85,
-    1,
-    218,
     1
    ],
    "facility": [
@@ -62058,28 +60291,22 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     185,
     1,
-    218,
-    4,
-    219,
+    215,
     1,
-    222,
+    218,
     2,
-    223,
+    219,
     20
    ],
    "facility-level": [
-    221,
+    217,
     1,
-    222,
+    218,
     3
    ],
    "fact": [
     4,
-    2,
-    215,
-    1,
-    217,
-    1
+    2
    ],
    "factor": [
     7,
@@ -62109,13 +60336,7 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     93,
-    3,
-    215,
-    4,
-    217,
-    4,
-    218,
-    2
+    3
    ],
    "fad": [
     34,
@@ -62140,11 +60361,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    222,
+    218,
     3,
-    223,
+    219,
     3,
-    225,
+    221,
     1
    ],
    "fall": [
@@ -62242,11 +60463,11 @@ globalThis.SUBTOPIC_CATALOG={
    "feasibility": [
     61,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "feasible": [
@@ -62274,15 +60495,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "federal": [
-    218,
+    217,
     1,
-    221,
-    1,
-    223,
+    219,
     2
    ],
    "feed": [
-    223,
+    219,
     1
    ],
    "feedback": [
@@ -62343,8 +60562,6 @@ globalThis.SUBTOPIC_CATALOG={
     27,
     1,
     46,
-    1,
-    217,
     1
    ],
    "fiber": [
@@ -62356,7 +60573,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "fiber-bas": [
-    223,
+    219,
     1
    ],
    "fiber-coupl": [
@@ -62427,38 +60644,26 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     2,
     215,
-    13,
-    216,
-    14,
-    217,
-    12,
-    218,
-    12,
-    219,
     1,
-    221,
+    217,
     10,
+    218,
+    8,
+    219,
+    8,
     222,
-    8,
-    223,
-    8,
-    226,
     1
    ],
    "field-bas": [
-    223,
+    219,
     2
    ],
    "field-generat": [
     49,
     1
    ],
-   "field-test": [
-    218,
-    2
-   ],
    "fieldscale": [
-    223,
+    219,
     1
    ],
    "fight": [
@@ -62467,10 +60672,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "figure": [
     90,
-    1
-   ],
-   "fill": [
-    218,
     1
    ],
    "film": [
@@ -62485,14 +60686,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1
    ],
-   "final": [
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
-   ],
    "finally": [
     16,
     1,
@@ -62502,9 +60695,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "financial": [
-    221,
+    217,
     1,
-    222,
+    218,
     2
    ],
    "find": [
@@ -62522,7 +60715,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "finish": [
-    221,
+    217,
     1
    ],
    "finite": [
@@ -62579,10 +60772,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1
    ],
-   "fit-for-purpose": [
-    218,
-    1
-   ],
    "fitt": [
     6,
     1
@@ -62590,7 +60779,7 @@ globalThis.SUBTOPIC_CATALOG={
    "fix": [
     49,
     1,
-    221,
+    217,
     1
    ],
    "fixed-w": [
@@ -62602,11 +60791,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "flar": [
-    219,
+    215,
     5
    ],
    "flare": [
-    221,
+    217,
     1
    ],
    "fleet": [
@@ -62638,7 +60827,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    219,
+    215,
     1
    ],
    "flight": [
@@ -62658,12 +60847,6 @@ globalThis.SUBTOPIC_CATALOG={
    "flock": [
     22,
     1
-   ],
-   "flood": [
-    215,
-    3,
-    217,
-    2
    ],
    "flow": [
     5,
@@ -62690,18 +60873,10 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    216,
-    4,
     217,
     1,
-    221,
-    1,
-    223,
+    219,
     4
-   ],
-   "flowback": [
-    215,
-    1
    ],
    "fluctuat": [
     6,
@@ -62738,17 +60913,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    215,
-    5,
     216,
-    6,
-    217,
-    2,
-    220,
     1,
-    225,
+    221,
     2,
-    226,
+    222,
     1
    ],
    "fluorine-contain": [
@@ -62799,10 +60968,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     95,
-    1,
-    216,
-    2,
-    218,
     1
    ],
    "focus": [
@@ -62836,17 +61001,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    215,
-    1,
     216,
     2,
-    220,
+    217,
     2,
-    221,
+    218,
     2,
-    222,
-    2,
-    223,
+    219,
     3
    ],
    "focuse": [
@@ -62943,14 +61104,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     2,
     92,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "footprint": [
@@ -62997,10 +61150,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "ford": [
     30,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "fordyce": [
@@ -63012,11 +61161,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     53,
     1,
-    216,
-    2,
-    217,
-    1,
-    223,
+    219,
     3
    ],
    "foremost": [
@@ -63107,18 +61252,14 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     83,
-    3,
-    215,
-    2,
-    217,
-    2
+    3
    ],
    "formic": [
-    224,
+    220,
     1
    ],
    "formulat": [
-    220,
+    216,
     1
    ],
    "formulation": [
@@ -63149,10 +61290,6 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     2
    ],
-   "foul": [
-    218,
-    1
-   ],
    "found": [
     4,
     1,
@@ -63162,9 +61299,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     47,
     1,
-    221,
+    217,
     1,
-    223,
+    219,
     2
    ],
    "foundation": [
@@ -63419,36 +61556,16 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2
    ],
-   "frac": [
-    216,
-    1
-   ],
-   "frack": [
-    216,
-    1
-   ],
-   "fraction": [
-    215,
-    1
-   ],
    "fractional": [
     7,
     4
    ],
    "fractionation": [
-    221,
+    217,
     1
    ],
    "fractur": [
-    215,
-    3,
-    216,
-    7,
-    217,
-    4,
-    218,
-    1,
-    225,
+    221,
     1
    ],
    "fracture": [
@@ -63456,21 +61573,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     198,
     1,
-    215,
-    2,
-    216,
-    23,
-    217,
+    219,
     1,
-    223,
-    1,
-    226,
+    222,
     1
    ],
    "fragment": [
     86,
     1,
-    223,
+    219,
     1
    ],
    "fragmentation": [
@@ -63504,21 +61615,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    220,
+    216,
     2,
-    221,
+    217,
     4,
-    222,
+    218,
     2,
-    223,
+    219,
     3
    ],
    "framework7": [
-    220,
+    216,
     1
    ],
    "framework9": [
-    222,
+    218,
     1
    ],
    "fraught": [
@@ -63568,9 +61679,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     75,
     1,
-    220,
+    216,
     1,
-    223,
+    219,
     2
    ],
    "frequency-control": [
@@ -63581,18 +61692,14 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1
    ],
-   "freshwater": [
-    218,
-    1
-   ],
    "friction": [
     28,
     1,
-    222,
+    218,
     1
    ],
    "frictional": [
-    222,
+    218,
     1
    ],
    "friendly": [
@@ -63636,7 +61743,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     146,
     1,
-    221,
+    217,
     1
    ],
    "fulda": [
@@ -63660,17 +61767,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     1,
+    215,
+    2,
+    217,
+    2,
     219,
-    2,
-    221,
-    2,
-    223,
     1
    ],
    "full-scale": [
-    216,
-    1,
-    223,
+    219,
     2
    ],
    "fully": [
@@ -63688,7 +61793,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    221,
+    217,
     1
    ],
    "function": [
@@ -63787,12 +61892,6 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     215,
-    2,
-    216,
-    2,
-    217,
-    3,
-    219,
     1
    ],
    "fundamental": [
@@ -63861,13 +61960,7 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     2,
     94,
-    1,
-    215,
-    2,
-    216,
-    2,
-    217,
-    2
+    1
    ],
    "fundamentally": [
     12,
@@ -63902,11 +61995,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "furthermore": [
@@ -63918,7 +62011,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     76,
     1,
-    222,
+    218,
     1
    ],
    "fus": [
@@ -64062,19 +62155,11 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     2,
-    215,
-    2,
     216,
-    2,
+    1,
     217,
-    2,
+    1,
     218,
-    5,
-    220,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "futurist": [
@@ -64082,7 +62167,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "fy22": [
-    222,
+    218,
     1
    ],
    "g-load": [
@@ -64112,11 +62197,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     89,
     3,
-    223,
-    1
-   ],
-   "gallon": [
-    218,
+    219,
     1
    ],
    "gamble": [
@@ -64154,9 +62235,7 @@ globalThis.SUBTOPIC_CATALOG={
    "gaps": [
     90,
     1,
-    218,
-    1,
-    219,
+    215,
     1
    ],
    "garcia": [
@@ -64175,31 +62254,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     2,
     215,
-    20,
-    216,
-    4,
-    217,
-    12,
-    218,
-    2,
-    219,
     17,
-    220,
+    216,
     18,
-    221,
-    24,
-    222,
-    5,
-    223,
-    8,
-    225,
-    4
-   ],
-   "gasbear": [
-    215,
-    1,
     217,
-    1
+    24,
+    218,
+    5,
+    219,
+    8,
+    221,
+    4
    ],
    "gase": [
     1,
@@ -64220,15 +62285,11 @@ globalThis.SUBTOPIC_CATALOG={
    "gather": [
     92,
     1,
-    216,
-    1,
     217,
     1,
-    221,
+    218,
     1,
-    222,
-    1,
-    223,
+    219,
     1
    ],
    "gauge": [
@@ -64468,9 +62529,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    221,
+    217,
     1,
-    223,
+    219,
     1
    ],
    "generate": [
@@ -64580,7 +62641,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     207,
     1,
-    221,
+    217,
     1
    ],
    "generic": [
@@ -64610,11 +62671,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geochemical": [
-    225,
-    1
-   ],
-   "geographical": [
-    218,
+    221,
     1
    ],
    "geographically": [
@@ -64623,21 +62680,9 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     1
    ],
-   "geologic": [
-    215,
-    1,
-    217,
-    1
-   ],
    "geological": [
     132,
-    1,
-    215,
-    2,
-    216,
-    1,
-    217,
-    2
+    1
    ],
    "geometric": [
     6,
@@ -64663,13 +62708,7 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     30,
-    1,
-    215,
-    3,
-    216,
-    6,
-    217,
-    3
+    1
    ],
    "geophysical": [
     9,
@@ -64694,7 +62733,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geothermal": [
-    226,
+    222,
     6
    ],
    "gerde": [
@@ -64719,10 +62758,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     94,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "glass": [
@@ -64769,12 +62804,6 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     16,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "goal": [
@@ -64853,8 +62882,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "going": [
     7,
-    1,
-    216,
     1
    ],
    "good": [
@@ -64873,25 +62900,11 @@ globalThis.SUBTOPIC_CATALOG={
     33,
     2,
     46,
-    1,
-    218,
-    1
-   ],
-   "governance": [
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "government": [
     41,
     2
-   ],
-   "gpm": [
-    218,
-    1
    ],
    "gps": [
     74,
@@ -64905,10 +62918,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "gps-level": [
     74,
-    1
-   ],
-   "grab": [
-    218,
     1
    ],
    "graceful": [
@@ -64941,10 +62950,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "gravimetry": [
     73,
-    1
-   ],
-   "grease": [
-    218,
     1
    ],
    "great": [
@@ -65008,7 +63013,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     195,
     1,
-    221,
+    217,
     1
    ],
    "ground": [
@@ -65044,7 +63049,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     95,
     1,
-    223,
+    219,
     1
    ],
    "ground-bas": [
@@ -65095,10 +63100,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1
    ],
-   "grown": [
-    216,
-    1
-   ],
    "growth": [
     1,
     1,
@@ -65146,9 +63147,7 @@ globalThis.SUBTOPIC_CATALOG={
    "guideline": [
     46,
     1,
-    218,
-    1,
-    223,
+    219,
     1
    ],
    "gunshot": [
@@ -65156,7 +63155,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "gypsum": [
-    224,
+    220,
     1
    ],
    "gyroscope": [
@@ -65164,23 +63163,15 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "h2s": [
-    219,
-    1,
-    220,
-    1,
-    221,
-    1
-   ],
-   "had": [
     215,
-    2
+    1,
+    216,
+    1,
+    217,
+    1
    ],
    "hadronic": [
     157,
-    1
-   ],
-   "half-length": [
-    216,
     1
    ],
    "half-live": [
@@ -65199,16 +63190,12 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1
    ],
-   "handful": [
-    215,
-    1
-   ],
    "handl": [
     15,
     1,
     177,
     1,
-    219,
+    215,
     1
    ],
    "handle": [
@@ -65220,7 +63207,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "handoff": [
-    222,
+    218,
     1
    ],
    "hao": [
@@ -65262,16 +63249,12 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     171,
     1,
-    223,
+    219,
     1
    ],
    "harikumar": [
     87,
     1
-   ],
-   "harmful": [
-    218,
-    2
    ],
    "harmonic": [
     49,
@@ -65288,9 +63271,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     167,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     1
    ],
    "harvest": [
@@ -65322,7 +63305,7 @@ globalThis.SUBTOPIC_CATALOG={
    "hazardou": [
     28,
     1,
-    221,
+    217,
     1
    ],
    "hci": [
@@ -65336,7 +63319,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     4,
-    223,
+    219,
     1
    ],
    "healthcare": [
@@ -65348,12 +63331,8 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     54,
     1,
-    222,
+    218,
     1
-   ],
-   "heavier": [
-    215,
-    2
    ],
    "heavily": [
     64,
@@ -65361,10 +63340,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "heavy": [
     37,
-    1
-   ],
-   "held": [
-    217,
     1
    ],
    "help": [
@@ -65381,8 +63356,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     92,
-    1,
-    218,
     1
    ],
    "hence": [
@@ -65460,9 +63433,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hfts": [
-    216,
-    2,
-    223,
+    219,
     1
    ],
    "hierarchical": [
@@ -65559,18 +63530,10 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     1,
     216,
-    1,
+    4,
     217,
     1,
     218,
-    3,
-    219,
-    1,
-    220,
-    4,
-    221,
-    1,
-    222,
     1
    ],
    "high-altitude": [
@@ -65582,7 +63545,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "high-density": [
-    223,
+    219,
     1
    ],
    "high-dimensional": [
@@ -65596,7 +63559,7 @@ globalThis.SUBTOPIC_CATALOG={
    "high-efficiency": [
     50,
     1,
-    222,
+    218,
     1
    ],
    "high-fidelity": [
@@ -65606,7 +63569,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     46,
     4,
-    223,
+    219,
     2
    ],
    "high-field": [
@@ -65638,7 +63601,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     72,
     1,
-    220,
+    216,
     1
    ],
    "high-power-density": [
@@ -65646,7 +63609,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "high-pressure": [
-    226,
+    222,
     1
    ],
    "high-priority": [
@@ -65690,7 +63653,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     71,
     1,
-    226,
+    222,
     1
    ],
    "high-throughput": [
@@ -65708,9 +63671,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     38,
     1,
-    215,
-    1,
-    220,
+    216,
     1
    ],
    "higher-ly": [
@@ -65722,7 +63683,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "higher-pressure": [
-    222,
+    218,
     1
    ],
    "higher-reliability": [
@@ -65733,8 +63694,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     218,
-    1,
-    222,
     1
    ],
    "highly": [
@@ -65784,13 +63743,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     2,
-    217,
+    216,
     1,
-    218,
-    1,
-    220,
-    1,
-    226,
+    222,
     1
    ],
    "highly-contextualiz": [
@@ -65823,25 +63778,9 @@ globalThis.SUBTOPIC_CATALOG={
     12,
     1
    ],
-   "history": [
-    215,
-    2,
-    216,
-    2,
-    217,
-    2
-   ],
    "hits": [
-    216,
-    1,
-    223,
+    219,
     7
-   ],
-   "hnp": [
-    215,
-    7,
-    217,
-    5
    ],
    "hoc": [
     34,
@@ -65863,20 +63802,14 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     1
    ],
-   "horizontal": [
-    215,
-    2,
-    217,
-    2
-   ],
    "horsepower": [
-    222,
+    218,
     1
    ],
    "host": [
     69,
     2,
-    223,
+    219,
     2
    ],
    "hostile": [
@@ -65951,15 +63884,7 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     2,
     93,
-    1,
-    215,
-    3,
-    216,
-    6,
-    217,
-    4,
-    218,
-    5
+    1
    ],
    "however": [
     0,
@@ -65983,8 +63908,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     64,
-    1,
-    215,
     1
    ],
    "hpc": [
@@ -66188,7 +64111,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "humanmachine": [
-    223,
+    219,
     1
    ],
    "humidity": [
@@ -66206,11 +64129,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hurdle": [
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "hv": [
@@ -66262,9 +64185,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     155,
     1,
-    218,
-    1,
-    220,
+    216,
     1
    ],
    "hybridiz": [
@@ -66276,37 +64197,23 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "hydraulic": [
-    215,
-    3,
-    216,
-    9,
-    217,
-    3,
-    218,
-    1,
-    223,
+    219,
     1
    ],
    "hydrocarbon": [
     215,
-    6,
+    1,
     216,
-    2,
-    217,
+    1,
+    218,
     3,
     219,
-    1,
-    220,
-    1,
-    222,
-    3,
-    223,
     8
    ],
    "hydrogen": [
-    219,
+    215,
     1,
-    220,
+    216,
     1
    ],
    "hydrologic": [
@@ -66369,10 +64276,6 @@ globalThis.SUBTOPIC_CATALOG={
     77,
     1,
     84,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "icme": [
@@ -66613,8 +64516,6 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     95,
-    1,
-    218,
     1
    ],
    "identification": [
@@ -66635,8 +64536,6 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     94,
-    1,
-    218,
     1
    ],
    "identify": [
@@ -66684,13 +64583,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    218,
-    1,
-    220,
+    216,
     3,
-    221,
+    217,
     2,
-    222,
+    218,
     2
    ],
    "ideological": [
@@ -66720,15 +64617,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     4,
-    215,
-    4,
-    216,
-    2,
     217,
-    4,
-    221,
     2,
-    222,
+    218,
     2
    ],
    "ignor": [
@@ -66853,8 +64744,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     160,
-    1,
-    216,
     1
    ],
    "image": [
@@ -66930,19 +64819,11 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     92,
     1,
-    215,
-    2,
     216,
-    4,
-    217,
-    2,
+    1,
     218,
-    1,
-    220,
-    1,
-    222,
     3,
-    223,
+    219,
     1
    ],
    "impair": [
@@ -66988,13 +64869,13 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     93,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     2
    ],
    "implementation": [
@@ -67006,13 +64887,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     150,
     1,
-    215,
-    2,
-    216,
-    1,
-    217,
-    2,
-    223,
+    219,
     1
    ],
    "implication": [
@@ -67065,12 +64940,6 @@ globalThis.SUBTOPIC_CATALOG={
     28,
     1,
     84,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "impossible": [
@@ -67128,11 +64997,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    215,
-    4,
-    216,
-    8,
-    222,
+    218,
     2
    ],
    "improve": [
@@ -67191,20 +65056,14 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     215,
-    1,
-    216,
-    3,
-    218,
-    1,
-    219,
     2,
-    221,
+    217,
     1,
-    222,
+    218,
     3,
-    223,
+    219,
     1,
-    225,
+    221,
     1
    ],
    "improvement": [
@@ -67224,21 +65083,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    215,
-    2,
     216,
     2,
     217,
-    2,
+    3,
     218,
-    1,
-    220,
-    2,
-    221,
     3,
-    222,
-    3,
-    223,
+    219,
     5
    ],
    "improvisation": [
@@ -67246,9 +65097,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "impurity": [
-    218,
-    1,
-    219,
+    215,
     1
    ],
    "in-field": [
@@ -67260,7 +65109,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "in-house": [
-    223,
+    219,
     1
    ],
    "in-situ": [
@@ -67269,12 +65118,6 @@ globalThis.SUBTOPIC_CATALOG={
     36,
     1,
     49,
-    1
-   ],
-   "inability": [
-    215,
-    1,
-    217,
     1
    ],
    "inactive": [
@@ -67294,7 +65137,7 @@ globalThis.SUBTOPIC_CATALOG={
    "incident": [
     62,
     1,
-    223,
+    219,
     2
    ],
    "incipient": [
@@ -67385,24 +65228,16 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2,
     215,
-    5,
-    216,
-    5,
-    217,
-    4,
-    218,
-    8,
-    219,
     1,
-    220,
+    216,
     3,
-    221,
+    217,
     9,
-    222,
+    218,
     2,
-    223,
+    219,
     4,
-    224,
+    220,
     1
    ],
    "include": [
@@ -67542,21 +65377,13 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     94,
     1,
-    215,
-    8,
     216,
-    12,
-    217,
-    9,
-    218,
-    6,
-    220,
     2,
-    221,
+    217,
     6,
-    222,
+    218,
     7,
-    223,
+    219,
     10
    ],
    "inclusion": [
@@ -67626,15 +65453,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    216,
+    215,
     1,
+    217,
+    2,
+    218,
+    2,
     219,
-    1,
-    221,
-    2,
-    222,
-    2,
-    223,
     1
    ],
    "increase": [
@@ -67667,20 +65492,12 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     1,
     216,
-    2,
+    1,
     217,
     1,
     218,
-    1,
-    219,
-    1,
-    220,
-    1,
-    221,
-    1,
-    222,
     4,
-    223,
+    219,
     6
    ],
    "increasingly": [
@@ -67708,7 +65525,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    223,
+    219,
     1
    ],
    "incredibly": [
@@ -67719,13 +65536,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "incremental": [
     64,
-    1,
-    215,
-    3,
-    216,
-    1,
-    217,
-    4
+    1
    ],
    "incurr": [
     34,
@@ -67763,12 +65574,6 @@ globalThis.SUBTOPIC_CATALOG={
     42,
     1,
     43,
-    1,
-    216,
-    1
-   ],
-   "indicator": [
-    216,
     1
    ],
    "indirectly": [
@@ -67804,7 +65609,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    222,
+    218,
     1
    ],
    "individually": [
@@ -67815,14 +65620,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "induc": [
     61,
-    3,
-    218,
-    1
+    3
    ],
    "induce": [
     26,
-    1,
-    215,
     1
    ],
    "inductor": [
@@ -67852,11 +65653,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     122,
     1,
-    218,
+    215,
     2,
-    219,
-    2,
-    220,
+    216,
     3
    ],
    "industry": [
@@ -67866,27 +65665,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     142,
     1,
-    215,
-    4,
-    216,
-    7,
     217,
-    6,
-    218,
-    7,
-    221,
     1,
-    222,
+    218,
     4,
-    223,
+    219,
     3
    ],
    "industry-standard": [
-    220,
+    216,
     1
    ],
    "inefficiency": [
-    219,
+    215,
     1
    ],
    "inelastic": [
@@ -67991,9 +65782,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     3,
     93,
-    1,
-    218,
-    2
+    1
    ],
    "informal": [
     16,
@@ -68163,15 +65952,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    215,
-    2,
-    216,
-    1,
-    217,
-    2,
-    218,
-    2
+    1
    ],
    "information-driven": [
     15,
@@ -68204,13 +65985,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     34,
     1,
-    219,
+    215,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     10,
-    223,
+    219,
     13
    ],
    "infrastructure-less": [
@@ -68218,7 +65999,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "infrastructure-wide": [
-    222,
+    218,
     1
    ],
    "inherent": [
@@ -68242,7 +66023,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "inhibitor": [
-    223,
+    219,
     1
    ],
    "initial": [
@@ -68250,21 +66031,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     62,
     1,
-    215,
-    3,
-    216,
-    3,
-    217,
-    3,
-    218,
-    1,
-    223,
-    1
-   ],
-   "initially": [
-    215,
-    1,
-    217,
+    219,
     1
    ],
    "initiate": [
@@ -68285,22 +66052,10 @@ globalThis.SUBTOPIC_CATALOG={
     26,
     1
    ],
-   "injectant": [
-    215,
-    8,
-    217,
-    8
-   ],
    "injection": [
     14,
     1,
-    215,
-    11,
     217,
-    6,
-    218,
-    1,
-    221,
     1
    ],
    "injury": [
@@ -68310,7 +66065,7 @@ globalThis.SUBTOPIC_CATALOG={
     7
    ],
    "inline": [
-    223,
+    219,
     1
    ],
    "innate": [
@@ -68382,11 +66137,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    216,
-    3,
-    221,
+    217,
     4,
-    223,
+    219,
     1
    ],
    "inorganic": [
@@ -68452,7 +66205,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "inspection": [
-    223,
+    219,
     2
    ],
    "instability": [
@@ -68464,7 +66217,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "installation": [
-    223,
+    219,
     1
    ],
    "instantaneou": [
@@ -68550,13 +66303,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
+    217,
+    1,
     218,
     1,
-    221,
-    1,
-    222,
-    1,
-    223,
+    219,
     4
    ],
    "integrate": [
@@ -68632,7 +66383,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     204,
     1,
-    223,
+    219,
     1
    ],
    "integrative": [
@@ -68652,7 +66403,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     210,
     1,
-    223,
+    219,
     1
    ],
    "intelligence": [
@@ -68718,13 +66469,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     2,
-    216,
-    2,
-    217,
-    1,
-    218,
-    1,
-    225,
+    221,
     1
    ],
    "intelligent": [
@@ -68752,7 +66497,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    225,
+    221,
     2
    ],
    "intelligently": [
@@ -68762,15 +66507,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "intend": [
-    218,
-    2,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "intensification": [
-    220,
+    216,
     1
    ],
    "intensity": [
@@ -68790,17 +66533,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     9,
-    215,
-    3,
-    216,
-    3,
     217,
-    3,
-    218,
-    2,
-    221,
     1,
-    222,
+    218,
     1
    ],
    "intention": [
@@ -68956,9 +66691,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     187,
     1,
-    218,
-    1,
-    225,
+    221,
     1
    ],
    "interactional": [
@@ -69122,21 +66855,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    2,
     216,
     1,
     217,
     1,
     218,
     1,
-    220,
-    1,
     221,
-    1,
-    222,
-    1,
-    225,
     1
    ],
    "interfac": [
@@ -69182,7 +66907,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    223,
+    219,
     1
    ],
    "interfacial": [
@@ -69206,9 +66931,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1
    ],
    "intermittent": [
@@ -69242,7 +66967,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    223,
+    219,
     1
    ],
    "interoperable": [
@@ -69294,7 +67019,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     56,
     1,
-    223,
+    219,
     1
    ],
    "into": [
@@ -69361,16 +67086,12 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     215,
-    3,
-    217,
     1,
+    216,
+    1,
+    218,
+    3,
     219,
-    1,
-    220,
-    1,
-    222,
-    3,
-    223,
     1
    ],
    "intra-cellular": [
@@ -69416,7 +67137,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    223,
+    219,
     1
    ],
    "introduce": [
@@ -69452,7 +67173,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "intuitive": [
-    223,
+    219,
     1
    ],
    "intuitively": [
@@ -69535,12 +67256,10 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     1,
     87,
-    1,
-    216,
     1
    ],
    "investment": [
-    222,
+    218,
     1
    ],
    "invincible": [
@@ -69569,12 +67288,6 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1,
     75,
-    1,
-    215,
-    2,
-    216,
-    1,
-    217,
     1
    ],
    "involve": [
@@ -69599,10 +67312,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1
    ],
-   "iodine": [
-    218,
-    2
-   ],
    "ion": [
     5,
     1,
@@ -69614,7 +67323,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "iot": [
-    223,
+    219,
     1
    ],
    "ir": [
@@ -69625,12 +67334,8 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     1
    ],
-   "irrigation": [
-    218,
-    1
-   ],
    "isentropic": [
-    222,
+    218,
     1
    ],
    "island": [
@@ -69678,15 +67383,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    215,
-    2,
-    216,
-    2,
-    217,
-    2,
     218,
-    2,
-    222,
     1
    ],
    "item": [
@@ -69694,7 +67391,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "iteration": [
-    223,
+    219,
     1
    ],
    "its": [
@@ -69716,11 +67413,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     1,
-    217,
+    215,
     1,
     219,
-    1,
-    223,
     1
    ],
    "itself": [
@@ -69758,10 +67453,6 @@ globalThis.SUBTOPIC_CATALOG={
    "ivhm": [
     92,
     4
-   ],
-   "ix": [
-    218,
-    2
    ],
    "jack": [
     12,
@@ -69976,11 +67667,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    216,
-    1,
-    218,
-    1,
-    221,
+    217,
     1
    ],
    "keyword": [
@@ -70215,10 +67902,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1
    ],
-   "know": [
-    216,
-    1
-   ],
    "knowledge": [
     0,
     3,
@@ -70266,11 +67949,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     216,
     1,
-    220,
+    217,
     1,
-    221,
-    1,
-    222,
+    218,
     1
    ],
    "kokoska": [
@@ -70291,10 +67972,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "lab": [
     87,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "label": [
@@ -70321,20 +67998,12 @@ globalThis.SUBTOPIC_CATALOG={
     178,
     1,
     215,
-    2,
-    216,
-    3,
-    217,
-    2,
-    218,
-    2,
-    219,
     1,
-    220,
+    216,
     2
    ],
    "laboratoryscale": [
-    220,
+    216,
     1
    ],
    "lack": [
@@ -70348,13 +68017,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     34,
     1,
-    216,
+    215,
     1,
-    217,
-    2,
     219,
-    1,
-    223,
     1
    ],
    "lambeth": [
@@ -70413,10 +68078,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     88,
-    1,
-    216,
-    2,
-    218,
     1
    ],
    "large-scale": [
@@ -70431,18 +68092,12 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     88,
-    1,
-    217,
     1
    ],
    "larger": [
     8,
     1,
     13,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "laser": [
@@ -70472,9 +68127,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    219,
+    215,
     1,
-    223,
+    219,
     1
    ],
    "latent": [
@@ -70487,16 +68142,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "lateral": [
     11,
-    1,
-    215,
-    1,
-    217,
-    1
-   ],
-   "laterally": [
-    215,
-    1,
-    217,
     1
    ],
    "latest": [
@@ -70537,9 +68182,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     1,
     31,
-    2,
-    218,
-    1
+    2
    ],
    "layer": [
     0,
@@ -70588,9 +68231,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    219,
+    215,
     2,
-    222,
+    218,
     1
    ],
    "leader": [
@@ -70612,13 +68255,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "leak": [
-    222,
+    218,
     2,
-    223,
+    219,
     1
    ],
    "leakage": [
-    222,
+    218,
     2
    ],
    "leap": [
@@ -70710,13 +68353,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    216,
-    2,
-    217,
-    1,
-    218,
-    1,
-    225,
+    221,
     1
    ],
    "learning-bas": [
@@ -70738,11 +68375,7 @@ globalThis.SUBTOPIC_CATALOG={
    "least": [
     84,
     1,
-    221,
-    1
-   ],
-   "leav": [
-    216,
+    217,
     1
    ],
    "left": [
@@ -70752,13 +68385,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    219,
+    215,
     1
    ],
    "legacy": [
     142,
     1,
-    222,
+    218,
     1
    ],
    "length": [
@@ -70784,19 +68417,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     84,
     1,
-    215,
-    2,
-    217,
-    2,
-    222,
+    218,
     1
    ],
    "less-local": [
     7,
-    1
-   ],
-   "less-than-10": [
-    216,
     1
    ],
    "less-than-lethal": [
@@ -70858,19 +68483,11 @@ globalThis.SUBTOPIC_CATALOG={
     6
    ],
    "letter": [
-    215,
-    5,
-    216,
-    5,
     217,
-    5,
+    2,
     218,
-    3,
-    221,
     2,
-    222,
-    2,
-    223,
+    219,
     2
    ],
    "levee": [
@@ -70930,21 +68547,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    215,
-    2,
     216,
     4,
     217,
-    2,
-    218,
-    2,
-    220,
-    4,
-    221,
     3,
-    222,
+    218,
     1,
-    223,
+    219,
     3
    ],
    "leverag": [
@@ -70962,9 +68571,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    222,
+    218,
     1,
-    223,
+    219,
     2
    ],
    "leverage": [
@@ -71034,13 +68643,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
-    1,
-    223,
+    219,
     5,
-    225,
+    221,
     1,
-    226,
+    222,
     1
    ],
    "lifecycle": [
@@ -71053,18 +68660,10 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "lifespan": [
-    223,
+    219,
     1
    ],
    "lifi": [
@@ -71165,8 +68764,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "lightweight": [
     68,
-    1,
-    216,
     1
    ],
    "like": [
@@ -71179,10 +68776,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1,
     85,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "likely": [
@@ -71197,8 +68790,6 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     86,
-    1,
-    215,
     1
    ],
    "likewise": [
@@ -71256,19 +68847,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    215,
-    3,
     216,
-    5,
+    1,
+    217,
+    1,
     218,
-    2,
-    220,
     1,
-    221,
-    1,
-    222,
-    1,
-    223,
+    219,
     2
    ],
    "limitation": [
@@ -71277,8 +68862,6 @@ globalThis.SUBTOPIC_CATALOG={
     27,
     1,
     90,
-    1,
-    218,
     1
    ],
    "line": [
@@ -71286,7 +68869,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     1,
-    219,
+    215,
     1
    ],
    "linear": [
@@ -71340,35 +68923,25 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     17,
     2,
-    219,
+    215,
     2
    ],
-   "liquid-rich": [
-    215,
-    1
-   ],
    "liquifi": [
-    223,
+    219,
     1
    ],
    "list": [
     34,
-    1,
-    216,
     1
    ],
    "literature": [
     16,
     1,
     61,
-    1,
-    218,
     1
    ],
    "lithium": [
-    218,
-    2,
-    226,
+    222,
     1
    ],
    "lithosphere": [
@@ -71379,8 +68952,6 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1,
     67,
-    1,
-    216,
     1
    ],
    "littoral": [
@@ -71398,11 +68969,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     82,
     1,
-    223,
-    1
-   ],
-   "livestock": [
-    218,
+    219,
     1
    ],
    "living-nonliv": [
@@ -71414,7 +68981,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "lng": [
-    223,
+    219,
     2
    ],
    "load": [
@@ -71451,9 +69018,7 @@ globalThis.SUBTOPIC_CATALOG={
     53,
     1,
     65,
-    1,
-    218,
-    2
+    1
    ],
    "localiz": [
     5,
@@ -71492,31 +69057,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    215,
-    2,
     217,
-    2,
-    221,
     1,
-    223,
+    219,
     1
    ],
    "locomotion": [
     6,
     2
    ],
-   "log": [
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
-   ],
    "logg": [
     88,
-    1,
-    217,
     1
    ],
    "logic": [
@@ -71535,9 +69086,7 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     1,
     92,
-    4,
-    218,
-    1
+    4
    ],
    "long": [
     0,
@@ -71565,13 +69114,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     86,
-    1,
-    215,
-    2,
-    216,
-    1,
-    217,
-    2
+    1
    ],
    "long-horizon": [
     0,
@@ -71595,17 +69138,13 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     94,
-    1,
-    218,
     1
    ],
    "longer": [
     61,
     1,
     83,
-    1,
-    218,
-    2
+    1
    ],
    "longstand": [
     91,
@@ -71621,8 +69160,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    1,
-    217,
     1
    ],
    "loop": [
@@ -71658,30 +69195,22 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     83,
     1,
-    215,
+    216,
     1,
     217,
     1,
-    220,
-    1,
-    221,
-    1,
-    223,
+    219,
     1
    ],
    "losse": [
     48,
     1,
-    222,
+    218,
     6
    ],
    "lost": [
-    219,
+    215,
     3
-   ],
-   "lot": [
-    216,
-    1
    ],
    "low": [
     15,
@@ -71710,13 +69239,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     68,
     2,
-    215,
-    1,
     217,
-    2,
-    218,
-    1,
-    221,
     1
    ],
    "low-bandwidth": [
@@ -71724,17 +69247,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "low-cost": [
-    217,
-    1,
-    220,
+    216,
     1
    ],
    "low-dimension": [
     6,
-    1
-   ],
-   "low-energy": [
-    218,
     1
    ],
    "low-level": [
@@ -71764,26 +69281,22 @@ globalThis.SUBTOPIC_CATALOG={
    "low-temperature": [
     170,
     1,
-    224,
+    220,
     1
    ],
    "lower": [
     20,
     1,
-    220,
+    216,
     2,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "lower-cost": [
-    219,
+    215,
     2
-   ],
-   "lowtemperature": [
-    218,
-    1
    ],
    "lpd": [
     34,
@@ -71876,13 +69389,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     4,
-    216,
-    2,
-    217,
-    1,
-    218,
-    1,
-    225,
+    221,
     1
    ],
    "machine-bas": [
@@ -72036,11 +69543,11 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     94,
     1,
-    222,
+    218,
     2,
-    223,
+    219,
     2,
-    225,
+    221,
     2
    ],
    "major": [
@@ -72057,14 +69564,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     92,
-    1,
-    215,
-    1,
-    217,
-    2
-   ],
-   "majority": [
-    216,
     1
    ],
    "mak": [
@@ -72109,10 +69608,6 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     2,
     90,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "make": [
@@ -72224,11 +69719,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     173,
     1,
-    218,
-    3,
-    223,
+    219,
     1,
-    224,
+    220,
     1
    ],
    "manager": [
@@ -72400,7 +69893,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     168,
     1,
-    221,
+    217,
     1
    ],
    "manufacture": [
@@ -72433,12 +69926,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     92,
-    1,
-    215,
-    3,
-    216,
-    1,
-    217,
     1
    ],
    "many-body": [
@@ -72447,11 +69934,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "mapp": [
     128,
-    1,
-    215,
-    3,
-    217,
-    3
+    1
    ],
    "maps": [
     20,
@@ -72496,13 +69979,13 @@ globalThis.SUBTOPIC_CATALOG={
    "market": [
     130,
     1,
-    221,
+    217,
     2
    ],
    "marketable": [
-    220,
+    216,
     1,
-    224,
+    220,
     1
    ],
    "markovian": [
@@ -72534,9 +70017,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     2,
-    220,
+    216,
     1,
-    221,
+    217,
     1
    ],
    "massive": [
@@ -72686,19 +70169,17 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     184,
     1,
+    215,
+    1,
+    216,
+    4,
+    217,
+    1,
     218,
-    2,
-    219,
     1,
     220,
-    4,
-    221,
-    1,
-    222,
-    1,
-    224,
     2,
-    226,
+    222,
     2
    ],
    "materials-by-design": [
@@ -72811,11 +70292,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "matrix": [
     78,
-    2,
-    215,
-    2,
-    217,
-    1
+    2
    ],
    "matter": [
     1,
@@ -72850,29 +70327,29 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    220,
+    216,
     2,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "mature": [
     94,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     2
    ],
    "maturity": [
-    221,
+    217,
     1,
-    223,
+    219,
     3
    ],
    "mav": [
@@ -72884,7 +70361,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     70,
     1,
-    221,
+    217,
     1
    ],
    "maximize": [
@@ -72896,9 +70373,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     91,
     1,
-    223,
+    219,
     1,
-    225,
+    221,
     1
    ],
    "maximum": [
@@ -72913,22 +70390,8 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     1
    ],
-   "mcf": [
-    215,
-    2,
-    216,
-    1,
-    217,
-    4
-   ],
    "mcwilliam": [
     36,
-    1
-   ],
-   "md": [
-    215,
-    1,
-    217,
     1
    ],
    "mdo": [
@@ -72954,7 +70417,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     83,
     1,
-    221,
+    217,
     1
    ],
    "meaningful": [
@@ -72971,14 +70434,10 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1
    ],
-   "measur": [
-    218,
-    1
-   ],
    "measurable": [
     14,
     1,
-    223,
+    219,
     1
    ],
    "measure": [
@@ -73000,7 +70459,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    222,
+    218,
     1
    ],
    "measurement": [
@@ -73018,9 +70477,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     88,
     1,
-    216,
-    2,
-    223,
+    219,
     1
    ],
    "mechanic": [
@@ -73108,7 +70565,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     79,
     1,
-    222,
+    218,
     1
    ],
    "mechanism": [
@@ -73165,8 +70622,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     215,
-    1,
-    219,
     1
    ],
    "mechanistic": [
@@ -73223,9 +70678,7 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     94,
-    1,
-    218,
-    2
+    1
    ],
    "melt": [
     86,
@@ -73240,11 +70693,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     19,
     1,
-    218,
-    1,
-    220,
+    216,
     3,
-    221,
+    217,
     1
    ],
    "memory": [
@@ -73337,9 +70788,7 @@ globalThis.SUBTOPIC_CATALOG={
     33,
     2,
     78,
-    2,
-    218,
-    1
+    2
    ],
    "metallic": [
     24,
@@ -73375,12 +70824,8 @@ globalThis.SUBTOPIC_CATALOG={
     43,
     1
    ],
-   "methane": [
-    215,
-    1
-   ],
    "methanol": [
-    219,
+    215,
     1
    ],
    "method": [
@@ -73484,23 +70929,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    215,
-    7,
     216,
-    6,
-    217,
-    7,
-    218,
-    3,
-    220,
     2,
+    217,
+    1,
+    218,
+    1,
+    220,
+    1,
     221,
-    1,
-    222,
-    1,
-    224,
-    1,
-    225,
     1
    ],
    "methodological": [
@@ -73554,15 +70991,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     94,
     3,
-    215,
-    1,
     216,
-    3,
-    217,
-    1,
-    218,
-    2,
-    220,
     1
    ],
    "metric": [
@@ -73578,19 +71007,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    215,
-    1,
     216,
     3,
     217,
-    2,
-    218,
-    3,
-    220,
-    3,
-    221,
     1,
-    222,
+    218,
     3
    ],
    "metrological": [
@@ -73730,7 +71151,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "microwave": [
-    220,
+    216,
     1
    ],
    "mid-range": [
@@ -73738,13 +71159,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "mid-size": [
-    223,
+    219,
     2
    ],
    "midstream": [
-    222,
+    218,
     1,
-    223,
+    219,
     3
    ],
    "might": [
@@ -73755,10 +71176,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     3
    ],
-   "migration": [
-    215,
-    1
-   ],
    "miguel": [
     55,
     1
@@ -73768,7 +71185,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "mile": [
-    223,
+    219,
     1
    ],
    "milestone": [
@@ -73845,10 +71262,6 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     1
    ],
-   "millidarcy": [
-    215,
-    1
-   ],
    "millimeter": [
     34,
     1
@@ -73861,10 +71274,8 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "million": [
     218,
-    1,
-    222,
     5,
-    223,
+    219,
     3
    ],
    "mimic": [
@@ -73872,7 +71283,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    223,
+    219,
     1
    ],
    "mimick": [
@@ -73882,7 +71293,7 @@ globalThis.SUBTOPIC_CATALOG={
    "min": [
     16,
     1,
-    224,
+    220,
     1
    ],
    "mindfulness": [
@@ -73914,9 +71325,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    224,
+    220,
     1,
-    226,
+    222,
     2
    ],
    "minima": [
@@ -73940,11 +71351,7 @@ globalThis.SUBTOPIC_CATALOG={
    "minimize": [
     15,
     1,
-    223,
-    1
-   ],
-   "minimum": [
-    215,
+    219,
     1
    ],
    "minute": [
@@ -73953,14 +71360,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "mis": [
     29,
-    1
-   ],
-   "miscibility": [
-    215,
-    1
-   ],
-   "miscible": [
-    217,
     1
    ],
    "miss": [
@@ -74092,9 +71491,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "mitigation": [
@@ -74190,13 +71589,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     142,
     1,
-    220,
+    216,
     1,
-    222,
+    218,
     2,
-    223,
+    219,
     5,
-    225,
+    221,
     4
    ],
    "ml-bas": [
@@ -74279,8 +71678,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1,
     82,
-    1,
-    215,
     1
    ],
    "mode-switche": [
@@ -74410,19 +71807,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     212,
     1,
-    215,
-    2,
-    216,
-    3,
-    217,
-    1,
-    218,
-    2,
-    223,
+    219,
     5,
-    225,
+    221,
     3,
-    226,
+    222,
     1
    ],
    "model-bas": [
@@ -74670,11 +72059,11 @@ globalThis.SUBTOPIC_CATALOG={
    "modular": [
     208,
     1,
+    215,
+    1,
+    217,
+    1,
     219,
-    1,
-    221,
-    1,
-    223,
     1
    ],
    "modularity": [
@@ -74746,7 +72135,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     62,
     1,
-    220,
+    216,
     1
    ],
    "molecular-scale": [
@@ -74774,11 +72163,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "monetary": [
-    219,
+    215,
     1
    ],
    "monetization": [
-    221,
+    217,
     1
    ],
    "money": [
@@ -74796,17 +72185,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    215,
+    219,
     2,
-    216,
-    4,
-    217,
-    2,
-    218,
-    2,
-    223,
-    2,
-    224,
+    220,
     1
    ],
    "mono": [
@@ -74840,7 +72221,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    223,
+    219,
     1
    ],
    "morphological": [
@@ -74897,11 +72278,7 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     2,
     92,
-    2,
-    215,
-    2,
-    216,
-    1
+    2
    ],
    "motion": [
     6,
@@ -74932,9 +72309,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    217,
-    1,
-    222,
+    218,
     1
    ],
    "movement": [
@@ -74959,8 +72334,6 @@ globalThis.SUBTOPIC_CATALOG={
     43,
     1,
     61,
-    1,
-    216,
     1
    ],
    "muge": [
@@ -74994,7 +72367,7 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "multi-asset": [
-    223,
+    219,
     1
    ],
    "multi-axi": [
@@ -75060,7 +72433,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     36,
     1,
-    220,
+    216,
     1
    ],
    "multi-functionality": [
@@ -75115,16 +72488,10 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     7,
     63,
-    1,
-    218,
-    2
+    1
    ],
    "multi-specy": [
     19,
-    1
-   ],
-   "multi-stage": [
-    218,
     1
    ],
    "multi-static": [
@@ -75159,8 +72526,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "multidisciplinary": [
     94,
-    1,
-    218,
     1
    ],
    "multiferroic": [
@@ -75196,7 +72561,7 @@ globalThis.SUBTOPIC_CATALOG={
     3
    ],
    "multiphase": [
-    223,
+    219,
     1
    ],
    "multiple": [
@@ -75236,15 +72601,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     82,
     1,
-    215,
-    3,
-    216,
-    2,
     217,
-    3,
-    218,
-    1,
-    221,
     1
    ],
    "multiscale": [
@@ -75285,10 +72642,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     2
    ],
-   "n2": [
-    215,
-    2
-   ],
    "nano": [
     26,
     1,
@@ -75298,7 +72651,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     1,
-    220,
+    216,
     1
    ],
    "nano-particle": [
@@ -75355,14 +72708,6 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1
    ],
-   "narrative": [
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
-   ],
    "narrow": [
     8,
     1
@@ -75372,9 +72717,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    219,
+    215,
     1,
-    223,
+    219,
     1
    ],
    "national": [
@@ -75419,22 +72764,14 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     215,
-    6,
-    216,
-    2,
-    217,
-    3,
-    218,
-    1,
-    219,
     11,
-    220,
+    216,
     3,
-    221,
+    217,
     7,
-    222,
+    218,
     5,
-    223,
+    219,
     7
    ],
    "natural-built": [
@@ -75540,17 +72877,13 @@ globalThis.SUBTOPIC_CATALOG={
    "nearly": [
     58,
     1,
-    215,
-    1,
-    222,
+    218,
     1
    ],
    "necessarily": [
     4,
     1,
     20,
-    1,
-    216,
     1
    ],
    "necessary": [
@@ -75585,14 +72918,10 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     216,
-    2,
+    1,
     217,
     1,
-    220,
-    1,
-    221,
-    1,
-    222,
+    218,
     1
    ],
    "necessitate": [
@@ -75685,31 +73014,21 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    2,
-    218,
-    3
+    2
    ],
    "negative": [
     25,
     1
    ],
    "negotiation": [
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "neither": [
     82,
     1
-   ],
-   "nepa": [
-    215,
-    2,
-    216,
-    2,
-    217,
-    2
    ],
    "nervou": [
     23,
@@ -75840,9 +73159,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     175,
     1,
-    223,
+    219,
     1,
-    226,
+    222,
     1
    ],
    "network-bas": [
@@ -75989,10 +73308,6 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     1
    ],
-   "neutrally": [
-    216,
-    1
-   ],
    "never": [
     6,
     1,
@@ -76074,7 +73389,7 @@ globalThis.SUBTOPIC_CATALOG={
    "next-gen": [
     53,
     1,
-    222,
+    218,
     1
    ],
    "next-generation": [
@@ -76084,7 +73399,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    226,
+    222,
     1
    ],
    "nfv": [
@@ -76092,27 +73407,23 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "ngl": [
-    219,
+    215,
     1,
-    220,
+    216,
     6,
-    221,
+    217,
     5,
-    223,
+    219,
     2
    ],
    "ngls": [
     215,
-    1,
-    217,
-    1,
-    219,
     3,
-    220,
+    216,
     4,
-    221,
+    217,
     2,
-    222,
+    218,
     1
    ],
    "night": [
@@ -76127,10 +73438,6 @@ globalThis.SUBTOPIC_CATALOG={
     25,
     1,
     81,
-    1
-   ],
-   "nitrogen": [
-    215,
     1
    ],
    "nlo": [
@@ -76171,14 +73478,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1
    ],
-   "no-go": [
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
-   ],
    "node": [
     15,
     1,
@@ -76192,15 +73491,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "nofo": [
-    215,
-    2,
     217,
-    2,
-    218,
-    3,
-    221,
     1,
-    223,
+    219,
     2
    ],
    "noise": [
@@ -76451,19 +73744,9 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     1
    ],
-   "north": [
-    215,
-    1
-   ],
    "note": [
     9,
-    1,
-    215,
-    2,
-    216,
-    2,
-    217,
-    2
+    1
    ],
    "noth": [
     84,
@@ -76588,21 +73871,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    2,
     216,
-    4,
+    2,
     218,
-    2,
+    1,
+    219,
+    1,
     220,
-    2,
+    1,
     222,
-    1,
-    223,
-    1,
-    224,
-    1,
-    226,
     1
    ],
    "novelty": [
@@ -76695,11 +73972,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     94,
-    1,
-    215,
-    2,
-    217,
-    2
+    1
    ],
    "numeric": [
     7,
@@ -76717,9 +73990,7 @@ globalThis.SUBTOPIC_CATALOG={
     38,
     1,
     46,
-    3,
-    215,
-    1
+    3
    ],
    "numerou": [
     26,
@@ -76792,21 +74063,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    215,
-    1,
     216,
     1,
     217,
     1,
     218,
     1,
-    220,
-    1,
-    221,
-    1,
-    222,
-    1,
-    223,
+    219,
     1
    ],
    "objectively": [
@@ -76827,8 +74090,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     3,
     46,
-    1,
-    216,
     1
    ],
    "observable": [
@@ -76843,10 +74104,6 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     20,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "obstacle": [
@@ -76869,12 +74126,6 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1,
     83,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "obtainable": [
@@ -76903,8 +74154,6 @@ globalThis.SUBTOPIC_CATALOG={
     30,
     1,
     92,
-    1,
-    216,
     1
    ],
    "occurrence": [
@@ -76926,7 +74175,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "off-grid": [
-    221,
+    217,
     1
    ],
    "off-platform": [
@@ -76944,7 +74193,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    221,
+    217,
     1
    ],
    "office": [
@@ -77135,18 +74384,6 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1
    ],
-   "offset": [
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
-   ],
-   "offtake": [
-    218,
-    1
-   ],
    "often": [
     0,
     1,
@@ -77169,46 +74406,24 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     215,
-    3,
-    217,
     1,
     219,
-    1,
-    223,
     1
    ],
    "oil": [
     215,
-    15,
-    216,
-    5,
+    2,
     217,
-    13,
+    3,
     218,
-    3,
+    2,
     219,
-    2,
-    221,
-    3,
-    222,
-    2,
-    223,
     7,
-    225,
+    221,
     4
    ],
-   "oil-bear": [
-    215,
-    1,
-    217,
-    1
-   ],
    "oilfield": [
-    225,
-    1
-   ],
-   "oklahoma": [
-    215,
+    221,
     1
    ],
    "oleophobicity": [
@@ -77236,7 +74451,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "on-site": [
-    221,
+    217,
     2
    ],
    "onadvanc": [
@@ -77277,9 +74492,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     92,
-    3,
-    218,
-    2
+    3
    ],
    "ones": [
     86,
@@ -77314,7 +74527,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "onsite": [
-    221,
+    217,
     1
    ],
    "open": [
@@ -77374,11 +74587,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    221,
+    217,
     2,
-    222,
+    218,
     2,
-    223,
+    219,
     10
    ],
    "operate": [
@@ -77477,26 +74690,18 @@ globalThis.SUBTOPIC_CATALOG={
     194,
     1,
     215,
-    6,
-    216,
-    1,
-    217,
-    4,
-    218,
-    4,
-    219,
     2,
-    220,
+    216,
     4,
-    221,
+    217,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     6,
-    224,
+    220,
     1,
-    225,
+    221,
     1
    ],
    "operational": [
@@ -77536,23 +74741,17 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     214,
     1,
-    216,
-    2,
+    215,
+    1,
     217,
-    1,
-    218,
-    5,
-    219,
-    1,
-    221,
     2,
-    222,
+    218,
     3,
-    223,
+    219,
     5,
-    224,
+    220,
     1,
-    226,
+    222,
     1
    ],
    "operationally": [
@@ -77566,19 +74765,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     6,
-    216,
+    215,
+    1,
+    217,
+    2,
+    218,
     1,
     219,
-    1,
-    221,
-    2,
-    222,
-    1,
-    223,
     5
    ],
    "opex": [
-    223,
+    219,
     4
    ],
    "opinion": [
@@ -77656,9 +74853,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    221,
+    217,
     1,
-    225,
+    221,
     1
    ],
    "optimality": [
@@ -77682,13 +74879,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     1,
-    220,
+    216,
+    1,
+    217,
+    1,
+    219,
     1,
     221,
-    1,
-    223,
-    1,
-    225,
     2
    ],
    "optimization": [
@@ -77714,11 +74911,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     199,
     1,
-    216,
-    1,
-    223,
+    219,
     6,
-    225,
+    221,
     1
    ],
    "optimize": [
@@ -77734,13 +74929,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    220,
+    216,
+    1,
+    218,
+    1,
+    219,
     1,
     222,
-    1,
-    223,
-    1,
-    226,
     1
    ],
    "optimum": [
@@ -77752,7 +74947,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    221,
+    217,
     1
    ],
    "opto-genetic": [
@@ -77797,10 +74992,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     2,
     92,
-    2,
-    217,
-    1,
-    218,
     2
    ],
    "orders-of-magnitude": [
@@ -77825,8 +75016,6 @@ globalThis.SUBTOPIC_CATALOG={
     36,
     1,
     62,
-    1,
-    218,
     1
    ],
    "organic-inorganic": [
@@ -77841,15 +75030,7 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     92,
-    3,
-    215,
-    2,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2
+    3
    ],
    "organizational": [
     29,
@@ -77865,26 +75046,12 @@ globalThis.SUBTOPIC_CATALOG={
     23,
     1
    ],
-   "orientation": [
-    216,
-    1
-   ],
-   "original": [
-    215,
-    1,
-    217,
-    1
-   ],
    "orlean": [
     7,
     1
    ],
    "orthogonal": [
     5,
-    1
-   ],
-   "osmosi": [
-    218,
     1
    ],
    "otherwise": [
@@ -77896,7 +75063,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    219,
+    215,
     1
    ],
    "our": [
@@ -77929,9 +75096,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     2,
     94,
-    2,
-    216,
-    1
+    2
    ],
    "out": [
     16,
@@ -77941,18 +75106,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     83,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    2,
-    218,
-    1
-   ],
-   "out-of-zone": [
-    216,
     1
    ],
    "outcome": [
@@ -77969,14 +75122,10 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     2
    ],
-   "outline": [
-    218,
-    1
-   ],
    "outpace": [
     74,
     1,
-    219,
+    215,
     1
    ],
    "output": [
@@ -77996,7 +75145,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    221,
+    217,
     1
    ],
    "outside": [
@@ -78049,16 +75198,8 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     3,
     219,
-    3,
-    223,
     2
    ],
    "overall": [
@@ -78078,17 +75219,11 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     93,
     1,
-    215,
-    3,
     216,
-    4,
+    1,
     217,
     3,
-    220,
-    1,
-    221,
-    3,
-    222,
+    218,
     2
    ],
    "overarch": [
@@ -78124,7 +75259,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    219,
+    215,
     1
    ],
    "overfit": [
@@ -78138,7 +75273,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "overload": [
-    223,
+    219,
     1
    ],
    "overlook": [
@@ -78216,11 +75351,11 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "pad": [
-    219,
+    215,
     1
    ],
    "pads": [
-    223,
+    219,
     2
    ],
    "page": [
@@ -78291,9 +75426,7 @@ globalThis.SUBTOPIC_CATALOG={
     62,
     1,
     91,
-    2,
-    218,
-    1
+    2
    ],
    "parameteriz": [
     20,
@@ -78317,28 +75450,14 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     92,
-    1,
-    215,
-    3,
-    216,
-    2,
-    217,
-    4,
-    218,
-    5
+    1
    ],
    "partial": [
     46,
-    1,
-    215,
-    2
+    1
    ],
    "partially-observ": [
     56,
-    1
-   ],
-   "participant": [
-    218,
     1
    ],
    "particle": [
@@ -78389,8 +75508,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     80,
-    1,
-    218,
     1
    ],
    "particularly": [
@@ -78418,7 +75535,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     1,
-    223,
+    219,
     1
    ],
    "partition": [
@@ -78434,17 +75551,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    215,
-    4,
-    216,
-    4,
     217,
-    4,
-    218,
-    2,
-    221,
     1,
-    222,
+    218,
     1
    ],
    "partnership": [
@@ -78493,10 +75602,6 @@ globalThis.SUBTOPIC_CATALOG={
     0,
     1,
     73,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "path": [
@@ -78516,19 +75621,11 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     134,
     1,
-    215,
-    1,
     216,
-    1,
+    2,
     217,
     1,
-    218,
-    1,
     220,
-    2,
-    221,
-    1,
-    224,
     1
    ],
    "pattern": [
@@ -78539,12 +75636,6 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     81,
-    1,
-    215,
-    2,
-    216,
-    1,
-    217,
     1
    ],
    "paucity": [
@@ -78562,7 +75653,7 @@ globalThis.SUBTOPIC_CATALOG={
    "pav": [
     11,
     1,
-    222,
+    218,
     1
    ],
    "pave": [
@@ -78580,7 +75671,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "peak": [
-    222,
+    218,
     1
    ],
    "penalty": [
@@ -78612,17 +75703,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     3,
-    215,
-    3,
-    216,
-    1,
-    217,
-    11,
     218,
-    7,
-    222,
     1,
-    223,
+    219,
     2
    ],
    "perceiv": [
@@ -78633,20 +75716,10 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1
    ],
-   "percent": [
-    215,
-    1,
-    217,
-    1
-   ],
    "percentage": [
     85,
     1,
-    215,
-    1,
-    217,
-    1,
-    220,
+    216,
     1
    ],
    "perception": [
@@ -78663,10 +75736,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "perennial": [
     12,
-    1
-   ],
-   "perforation": [
-    216,
     1
    ],
    "perform": [
@@ -78709,8 +75778,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    215,
     1
    ],
    "performance": [
@@ -78833,20 +75900,14 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     1,
     216,
-    5,
+    1,
+    217,
+    1,
     218,
-    5,
-    219,
-    1,
-    220,
-    1,
-    221,
-    1,
-    222,
     6,
-    223,
+    219,
     2,
-    226,
+    222,
     1
    ],
    "performance-driven": [
@@ -78865,34 +75926,18 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     218,
-    3,
-    222,
     1
    ],
    "permafrost": [
     3,
     1
    ],
-   "permanent": [
-    216,
-    1
-   ],
    "permeability": [
-    215,
-    1,
-    217,
-    2,
-    226,
+    222,
     1
    ],
    "permian": [
     215,
-    1,
-    217,
-    1,
-    218,
-    2,
-    219,
     1
    ],
    "permit": [
@@ -78901,24 +75946,14 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     82,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "permit-intensive": [
-    219,
+    215,
     1
    ],
    "permitt": [
-    215,
-    1,
-    218,
-    1,
-    221,
+    217,
     1
    ],
    "permutation": [
@@ -78955,9 +75990,7 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     94,
-    10,
-    216,
-    1
+    10
    ],
    "perspective": [
     6,
@@ -78982,7 +76015,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "pervasive": [
-    222,
+    218,
     1
    ],
    "petabyte-scale": [
@@ -79017,12 +76050,6 @@ globalThis.SUBTOPIC_CATALOG={
     33,
     6,
     49,
-    1,
-    215,
-    2,
-    216,
-    1,
-    217,
     1
    ],
    "phd": [
@@ -79350,7 +76377,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     189,
     1,
-    225,
+    221,
     1
    ],
    "physical": [
@@ -79408,7 +76435,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     178,
     1,
-    223,
+    219,
     4
    ],
    "physically": [
@@ -79428,7 +76455,7 @@ globalThis.SUBTOPIC_CATALOG={
    "physics-inform": [
     212,
     1,
-    223,
+    219,
     2
    ],
    "physiological": [
@@ -79465,36 +76492,16 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1
    ],
-   "pilot": [
-    215,
-    11,
-    216,
-    3,
-    217,
-    6,
-    218,
-    1
-   ],
-   "pilot-scale": [
-    218,
-    2
-   ],
-   "pilotscale": [
-    216,
-    1
-   ],
    "pip": [
-    222,
+    218,
     2
    ],
    "pipeline": [
-    218,
-    1,
-    221,
+    217,
     2,
-    222,
+    218,
     3,
-    223,
+    219,
     5
    ],
    "pl": [
@@ -79505,17 +76512,11 @@ globalThis.SUBTOPIC_CATALOG={
     30,
     1,
     84,
-    1,
-    215,
-    2,
-    217,
-    2
+    1
    ],
    "placement": [
     42,
-    1,
-    216,
-    5
+    1
    ],
    "plan": [
     58,
@@ -79530,19 +76531,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    8,
     216,
-    6,
+    1,
     217,
-    9,
+    1,
     218,
-    6,
-    220,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "planar": [
@@ -79574,11 +76567,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    5,
-    217,
-    3,
-    223,
+    219,
     1
    ],
    "plant": [
@@ -79590,9 +76579,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     148,
     1,
-    222,
+    218,
     1,
-    224,
+    220,
     2
    ],
    "plasma": [
@@ -79606,7 +76595,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     156,
     1,
-    220,
+    216,
     1
    ],
    "plasma-enabl": [
@@ -79686,7 +76675,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     3,
-    223,
+    219,
     3
    ],
    "platoon": [
@@ -79705,13 +76694,7 @@ globalThis.SUBTOPIC_CATALOG={
     17,
     2,
     22,
-    1,
-    215,
-    5,
-    216,
-    4,
-    217,
-    4
+    1
    ],
    "playback": [
     88,
@@ -79719,12 +76702,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "plethora": [
     89,
-    1
-   ],
-   "plus": [
-    215,
-    1,
-    217,
     1
    ],
    "pnt": [
@@ -79765,12 +76742,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     95,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "polariz": [
@@ -79787,8 +76758,6 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     58,
-    1,
-    218,
     1
    ],
    "political": [
@@ -79883,12 +76852,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "portion": [
     1,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "portray": [
@@ -79953,12 +76916,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1
    ],
-   "post": [
-    216,
-    1,
-    217,
-    1
-   ],
    "post-condition": [
     0,
     1
@@ -79982,11 +76939,9 @@ globalThis.SUBTOPIC_CATALOG={
    "post-project": [
     216,
     1,
-    220,
+    217,
     1,
-    221,
-    1,
-    222,
+    218,
     1
    ],
    "post-traumatic": [
@@ -80046,17 +77001,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    4,
     216,
-    1,
+    4,
     217,
-    4,
-    218,
-    2,
-    220,
-    4,
-    221,
     1
    ],
    "potentially": [
@@ -80077,10 +77024,6 @@ globalThis.SUBTOPIC_CATALOG={
     60,
     1,
     82,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "power": [
@@ -80146,11 +77089,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     195,
     1,
-    221,
+    217,
     2,
-    222,
+    218,
     1,
-    224,
+    220,
     2
    ],
    "powertrain": [
@@ -80158,7 +77101,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "ppm": [
-    219,
+    215,
     2
    ],
    "practical": [
@@ -80173,14 +77116,12 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     4,
     90,
-    1,
-    217,
     1
    ],
    "practicality": [
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "practically": [
@@ -80191,20 +77132,10 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     2,
     36,
-    1,
-    216,
-    2,
-    218,
-    2
+    1
    ],
    "practitioner": [
     90,
-    1
-   ],
-   "pre": [
-    216,
-    1,
-    217,
     1
    ],
    "pre-process": [
@@ -80217,10 +77148,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "precise": [
     28,
-    1
-   ],
-   "precisely": [
-    217,
     1
    ],
    "precision": [
@@ -80250,9 +77177,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "precommercial": [
-    221,
+    217,
     2,
-    223,
+    219,
     1
    ],
    "precondition": [
@@ -80308,7 +77235,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     192,
     1,
-    225,
+    221,
     1
    ],
    "predictable": [
@@ -80370,7 +77297,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     202,
     1,
-    223,
+    219,
     2
    ],
    "predictive": [
@@ -80392,9 +77319,9 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     125,
     1,
-    223,
+    219,
     4,
-    225,
+    221,
     4
    ],
    "predominately": [
@@ -80405,20 +77332,12 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1
    ],
-   "preferentially": [
-    215,
-    1
-   ],
    "preliminary": [
     32,
     1,
     45,
     2,
     79,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "premis": [
@@ -80437,8 +77356,6 @@ globalThis.SUBTOPIC_CATALOG={
     36,
     1,
     47,
-    1,
-    218,
     1
    ],
    "prepare": [
@@ -80492,15 +77409,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    7,
-    216,
-    2,
-    217,
+    218,
     1,
-    222,
-    1,
-    223,
+    219,
     3
    ],
    "presumably": [
@@ -80508,11 +77419,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "pretreat": [
-    219,
+    215,
     1
    ],
    "pretreatment": [
-    220,
+    216,
     1
    ],
    "prevalent": [
@@ -80521,8 +77432,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "prevent": [
     3,
-    1,
-    215,
     1
    ],
    "prevention": [
@@ -80530,7 +77439,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     47,
     1,
-    223,
+    219,
     1
    ],
    "previou": [
@@ -80550,11 +77459,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "price": [
-    219,
+    215,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "primarily": [
@@ -80579,10 +77488,6 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1,
     68,
-    1,
-    216,
-    1,
-    218,
     1
    ],
    "primitive": [
@@ -80644,17 +77549,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    5,
-    216,
-    3,
     217,
-    5,
-    218,
-    2,
-    221,
     1,
-    222,
+    218,
     1
    ],
    "prioritization": [
@@ -80924,9 +77821,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    215,
-    1,
-    222,
+    218,
     1
    ],
    "problem-to-code": [
@@ -81054,23 +77949,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     152,
     1,
+    215,
+    2,
     216,
-    1,
-    218,
-    1,
-    219,
-    2,
-    220,
     5,
-    221,
+    217,
     3,
-    222,
+    218,
     2,
-    223,
+    219,
     7,
-    224,
+    220,
     1,
-    225,
+    221,
     1
    ],
    "process-property": [
@@ -81124,11 +78015,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     120,
     1,
-    217,
-    1,
-    218,
-    4,
-    220,
+    216,
     1
    ],
    "processing-microstructure-property": [
@@ -81150,19 +78037,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     41,
     1,
-    215,
-    3,
-    216,
-    1,
     217,
-    4,
-    218,
-    25,
+    1,
+    219,
+    1,
     221,
-    1,
-    223,
-    1,
-    225,
     1
    ],
    "produce": [
@@ -81170,21 +78049,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     61,
     1,
-    218,
-    2,
-    219,
-    1
-   ],
-   "producer": [
     215,
-    1,
-    217,
-    1
-   ],
-   "producible": [
-    215,
-    1,
-    217,
     1
    ],
    "product": [
@@ -81198,15 +78063,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    220,
+    216,
     3,
-    221,
+    217,
     4,
-    222,
+    218,
     4,
-    223,
+    219,
     2,
-    224,
+    220,
     2
    ],
    "production": [
@@ -81215,26 +78080,18 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     215,
-    12,
+    4,
     216,
-    14,
+    2,
     217,
-    12,
+    3,
     218,
     2,
     219,
-    4,
-    220,
-    2,
-    221,
-    3,
-    222,
-    2,
-    223,
     13,
-    225,
+    221,
     1,
-    226,
+    222,
     1
    ],
    "productivity": [
@@ -81260,19 +78117,19 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "profit": [
-    220,
+    216,
     1
    ],
    "profitability": [
-    221,
+    217,
     1
    ],
    "profitable": [
-    221,
+    217,
     1
    ],
    "profitably": [
-    221,
+    217,
     1
    ],
    "prognostic": [
@@ -81309,16 +78166,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     3
    ],
-   "projection": [
-    215,
-    2,
-    216,
-    2,
-    217,
-    2,
-    218,
-    3
-   ],
    "prokaryote": [
     13,
     1
@@ -81345,10 +78192,6 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     1
    ],
-   "prompt": [
-    215,
-    1
-   ],
    "proof": [
     87,
     2
@@ -81356,7 +78199,7 @@ globalThis.SUBTOPIC_CATALOG={
    "proof-of-concept": [
     27,
     1,
-    223,
+    219,
     1
    ],
    "propagation": [
@@ -81375,16 +78218,10 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     3,
     81,
-    1,
-    216,
-    3
+    1
    ],
    "propane": [
     215,
-    1,
-    217,
-    1,
-    219,
     2
    ],
    "propellant": [
@@ -81400,7 +78237,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     22,
     1,
-    222,
+    218,
     1
    ],
    "property": [
@@ -81469,45 +78306,15 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     215,
-    16,
-    216,
-    18,
-    217,
-    17,
-    218,
-    23,
-    219,
     1,
-    220,
+    216,
     5,
-    221,
-    7,
-    222,
-    7,
-    223,
-    3
-   ],
-   "propose": [
-    215,
-    2,
-    216,
-    2,
     217,
-    2,
+    7,
     218,
-    1
-   ],
-   "propp": [
-    216,
-    2
-   ],
-   "proppant": [
-    216,
-    13
-   ],
-   "proprietary": [
-    217,
-    1
+    7,
+    219,
+    3
    ],
    "propulsion": [
     37,
@@ -81551,9 +78358,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     6,
     94,
-    2,
-    218,
-    1
+    2
    ],
    "protective": [
     93,
@@ -81583,12 +78388,6 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     1,
     87,
-    1,
-    215,
-    2,
-    216,
-    1,
-    217,
     1
    ],
    "proton": [
@@ -81610,24 +78409,16 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
+    215,
+    1,
     216,
     1,
     217,
-    1,
-    219,
-    1,
-    220,
-    1,
-    221,
     2,
-    222,
+    218,
     1
    ],
    "prototype-scale": [
-    220,
-    1
-   ],
-   "prototypical": [
     216,
     1
    ],
@@ -81642,7 +78433,7 @@ globalThis.SUBTOPIC_CATALOG={
    "prove": [
     88,
     1,
-    223,
+    219,
     1
    ],
    "proven": [
@@ -81682,19 +78473,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    2,
-    216,
-    2,
     217,
-    2,
+    1,
     218,
-    3,
-    221,
     1,
-    222,
-    1,
-    223,
+    219,
     2
    ],
    "provide": [
@@ -81788,9 +78571,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    218,
-    2,
-    219,
+    215,
     1
    ],
    "prudent": [
@@ -81815,12 +78596,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "publication": [
     61,
-    1,
-    215,
-    1
-   ],
-   "publicly": [
-    217,
     1
    ],
    "publish": [
@@ -81829,13 +78604,7 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     95,
-    2,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1
+    2
    ],
    "pulse": [
     21,
@@ -81858,7 +78627,7 @@ globalThis.SUBTOPIC_CATALOG={
    "pump": [
     81,
     2,
-    223,
+    219,
     2
    ],
    "pump-coupl": [
@@ -81872,9 +78641,7 @@ globalThis.SUBTOPIC_CATALOG={
    "purity": [
     1,
     1,
-    218,
-    1,
-    220,
+    216,
     1
    ],
    "purpose": [
@@ -81887,8 +78654,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     94,
-    1,
-    218,
     1
    ],
    "purposeful": [
@@ -81918,9 +78683,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     47,
     3,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "push": [
@@ -81939,18 +78704,8 @@ globalThis.SUBTOPIC_CATALOG={
     59,
     1
    ],
-   "qa": [
-    216,
-    1,
-    217,
-    1
-   ],
    "qc": [
     7,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "qed": [
@@ -82008,15 +78763,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    2,
-    218,
-    6,
-    221,
+    217,
     1
    ],
    "quantifi": [
-    223,
+    219,
     2
    ],
    "quantification": [
@@ -82052,11 +78803,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    216,
-    1,
-    218,
-    1,
-    223,
+    219,
     3
    ],
    "quantitative": [
@@ -82084,9 +78831,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     20,
     1,
-    218,
-    2,
-    219,
+    215,
     1
    ],
    "quantum": [
@@ -82170,7 +78915,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "quantum-scale": [
-    220,
+    216,
     1
    ],
    "quantum-to-classical": [
@@ -82185,10 +78930,6 @@ globalThis.SUBTOPIC_CATALOG={
     188,
     1,
     189,
-    1
-   ],
-   "quasi-distribut": [
-    216,
     1
    ],
    "quasi-static": [
@@ -82239,9 +78980,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     94,
-    2,
-    216,
-    1
+    2
    ],
    "quickly": [
     7,
@@ -82313,10 +79052,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "raghuveer.m.rao.civ": [
     64,
-    1
-   ],
-   "railroad": [
-    215,
     1
    ],
    "rain": [
@@ -82421,9 +79156,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    2,
-    218,
-    1
+    2
    ],
    "rao": [
     39,
@@ -82458,7 +79191,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    223,
+    219,
     1
    ],
    "rapidly": [
@@ -82478,9 +79211,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     3,
-    218,
-    1,
-    220,
+    216,
     1
    ],
    "rapidly-chang": [
@@ -82492,7 +79223,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rare": [
-    224,
+    220,
     1
    ],
    "rare-earth": [
@@ -82520,15 +79251,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     86,
     1,
-    215,
-    2,
-    217,
-    1,
+    216,
+    3,
     218,
-    3,
-    220,
-    3,
-    222,
     3
    ],
    "rather": [
@@ -82566,7 +79291,7 @@ globalThis.SUBTOPIC_CATALOG={
    "raw": [
     15,
     1,
-    221,
+    217,
     1
    ],
    "rays": [
@@ -82574,9 +79299,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rdd": [
-    221,
+    217,
     1,
-    223,
+    219,
     1
    ],
    "rdt": [
@@ -82592,13 +79317,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    215,
+    217,
     1,
-    218,
-    2,
-    221,
-    1,
-    223,
+    219,
     1
    ],
    "react": [
@@ -82622,7 +79343,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     127,
     1,
-    220,
+    216,
     4
    ],
    "reaction-diffusion": [
@@ -82648,9 +79369,9 @@ globalThis.SUBTOPIC_CATALOG={
     4
    ],
    "reactor": [
-    220,
+    216,
     2,
-    221,
+    217,
     1
    ],
    "readily": [
@@ -82670,13 +79391,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    220,
+    216,
     3,
-    221,
+    217,
     3,
-    222,
+    218,
     1,
-    223,
+    219,
     5
    ],
    "reading": [
@@ -82707,8 +79428,6 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     1,
     92,
-    1,
-    218,
     1
    ],
    "real-time": [
@@ -82730,13 +79449,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     218,
     1,
-    222,
-    1,
-    223,
+    219,
     5,
-    224,
+    220,
     1,
-    225,
+    221,
     2
    ],
    "real-world": [
@@ -82756,7 +79473,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     2,
-    223,
+    219,
     2
    ],
    "realistic": [
@@ -82764,7 +79481,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     64,
     1,
-    223,
+    219,
     1
    ],
    "realiz": [
@@ -82827,8 +79544,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "reasonable": [
     84,
-    1,
-    217,
     1
    ],
    "recall": [
@@ -82857,8 +79572,6 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     66,
-    1,
-    216,
     1
    ],
    "recenter": [
@@ -82887,8 +79600,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "recently": [
     92,
-    1,
-    215,
     1
    ],
    "reciprocal": [
@@ -82971,16 +79682,6 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     1,
     47,
-    1,
-    215,
-    3,
-    216,
-    1,
-    217,
-    5
-   ],
-   "recoverable": [
-    216,
     1
    ],
    "recovery": [
@@ -82991,16 +79692,10 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     215,
-    14,
-    216,
-    8,
-    217,
-    9,
-    219,
     1,
-    220,
+    216,
     4,
-    221,
+    217,
     1
    ],
    "recurrence": [
@@ -83040,11 +79735,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     83,
     1,
-    220,
+    216,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     2
    ],
    "reduce": [
@@ -83068,11 +79763,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    216,
+    218,
     2,
-    222,
-    2,
-    223,
+    219,
     5
    ],
    "reduced-order": [
@@ -83096,19 +79789,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    215,
-    2,
-    216,
-    2,
+    217,
+    1,
     218,
-    4,
-    221,
     1,
-    222,
-    1,
-    223,
+    219,
     5,
-    226,
+    222,
     1
    ],
    "reduction-oxidation": [
@@ -83120,9 +79807,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "ree": [
-    224,
+    220,
     1,
-    225,
+    221,
     1
    ],
    "reenvision": [
@@ -83149,34 +79836,16 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "reference": [
     86,
-    1,
-    218,
-    3
-   ],
-   "referr": [
-    215,
-    2,
-    217,
     1
    ],
    "refin": [
     90,
     1,
-    215,
-    1,
     217,
-    1,
-    218,
-    1,
-    221,
     1
    ],
    "refine": [
     20,
-    1,
-    216,
-    1,
-    218,
     1
    ],
    "refinement": [
@@ -83186,7 +79855,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "refinery": [
-    225,
+    221,
     2
    ],
    "reflect": [
@@ -83195,12 +79864,6 @@ globalThis.SUBTOPIC_CATALOG={
     62,
     1,
     83,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "reflection": [
@@ -83213,12 +79876,8 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1
    ],
-   "refractur": [
-    216,
-    1
-   ],
    "refrigeration": [
-    221,
+    217,
     1
    ],
    "regard": [
@@ -83231,9 +79890,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     85,
-    1,
-    218,
-    11
+    1
    ],
    "regime": [
     21,
@@ -83247,9 +79904,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "region": [
     24,
-    1,
-    218,
-    2
+    1
    ],
    "regularity": [
     20,
@@ -83273,10 +79928,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1
    ],
-   "regulatory": [
-    218,
-    3
-   ],
    "reimagine": [
     58,
     1
@@ -83294,7 +79945,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "reject": [
-    219,
+    215,
     1
    ],
    "relat": [
@@ -83330,17 +79981,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    215,
-    3,
-    216,
-    10,
     217,
-    3,
-    218,
-    2,
-    221,
     1,
-    222,
+    218,
     2
    ],
    "relate": [
@@ -83350,23 +79993,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     62,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "relation": [
     15,
     1,
     73,
-    1,
-    215,
-    2,
-    217,
-    2,
-    218,
     1
    ],
    "relationship": [
@@ -83405,9 +80042,7 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     2,
     88,
-    2,
-    215,
-    1
+    2
    ],
    "relative": [
     37,
@@ -83415,8 +80050,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     218,
-    1,
-    222,
     2
    ],
    "relatively": [
@@ -83433,8 +80066,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "releas": [
     61,
-    1,
-    215,
     1
    ],
    "release": [
@@ -83445,8 +80076,6 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     2,
     142,
-    1,
-    215,
     1
    ],
    "relevance": [
@@ -83498,19 +80127,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     90,
     1,
-    215,
-    4,
     216,
-    7,
+    3,
     217,
-    4,
+    3,
     218,
-    5,
-    220,
-    3,
-    221,
-    3,
-    222,
     4
    ],
    "reli": [
@@ -83530,9 +80151,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     91,
     2,
-    222,
+    218,
     1,
-    223,
+    219,
     1
    ],
    "reliable": [
@@ -83576,13 +80197,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    215,
-    2,
-    216,
-    2,
-    217,
-    3,
-    223,
+    219,
     2
    ],
    "remarkable": [
@@ -83602,13 +80217,13 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     177,
     1,
+    217,
+    1,
+    219,
+    1,
+    220,
+    1,
     221,
-    1,
-    223,
-    1,
-    224,
-    1,
-    225,
     1
    ],
    "remotely": [
@@ -83622,9 +80237,9 @@ globalThis.SUBTOPIC_CATALOG={
    "removal": [
     80,
     1,
-    219,
+    215,
     1,
-    220,
+    216,
     1
    ],
    "render": [
@@ -83644,7 +80259,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    223,
+    219,
     2
    ],
    "repeat": [
@@ -83672,7 +80287,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "replicate": [
-    223,
+    219,
     4
    ],
    "report": [
@@ -83707,8 +80322,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     93,
-    1,
-    218,
     1
    ],
    "representation": [
@@ -83732,15 +80345,9 @@ globalThis.SUBTOPIC_CATALOG={
    "representative": [
     85,
     2,
-    215,
-    2,
     216,
-    2,
-    217,
-    2,
-    220,
     1,
-    223,
+    219,
     2
    ],
    "reproduce": [
@@ -83797,18 +80404,14 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     215,
+    2,
+    216,
     3,
     217,
-    2,
+    4,
+    218,
+    4,
     219,
-    2,
-    220,
-    3,
-    221,
-    4,
-    222,
-    4,
-    223,
     3
    ],
    "require": [
@@ -83856,7 +80459,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     88,
     1,
-    219,
+    215,
     1
    ],
    "requirement": [
@@ -83886,9 +80489,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     90,
     4,
-    218,
-    6,
-    221,
+    217,
     1
    ],
    "researcher": [
@@ -83898,19 +80499,13 @@ globalThis.SUBTOPIC_CATALOG={
    "reservoir": [
     3,
     2,
-    215,
-    12,
-    216,
-    9,
-    217,
-    10,
-    225,
+    221,
     2,
-    226,
+    222,
     2
    ],
    "residual": [
-    224,
+    220,
     1
    ],
    "resilience": [
@@ -83954,21 +80549,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     65,
     1,
-    222,
-    2,
-    223,
-    1
-   ],
-   "resist": [
     218,
+    2,
+    219,
     1
    ],
    "resistant": [
     78,
     1,
-    220,
+    216,
     1,
-    222,
+    218,
     1
    ],
    "resolution": [
@@ -84019,20 +80610,12 @@ globalThis.SUBTOPIC_CATALOG={
     128,
     1,
     215,
-    6,
-    216,
-    3,
+    2,
     217,
-    6,
-    218,
     1,
     219,
-    2,
+    1,
     221,
-    1,
-    223,
-    1,
-    225,
     3
    ],
    "resource-efficient": [
@@ -84151,18 +80734,10 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     215,
-    3,
-    216,
-    2,
+    1,
     217,
-    5,
+    1,
     218,
-    2,
-    219,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "resultant": [
@@ -84184,29 +80759,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "retrofit": [
-    222,
+    218,
     2
    ],
    "retrofitt": [
-    223,
-    1
-   ],
-   "reus": [
-    218,
-    2
-   ],
-   "reuse": [
-    218,
-    5
-   ],
-   "reveal": [
-    215,
-    1
-   ],
-   "revenue": [
-    216,
-    1,
-    217,
+    219,
     1
    ],
    "reversible": [
@@ -84322,7 +80879,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rheology": [
-    225,
+    221,
     1
    ],
    "rich": [
@@ -84333,18 +80890,12 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     64,
-    1,
-    215,
-    2,
-    217,
-    2
+    1
    ],
    "right": [
     53,
     2,
     94,
-    1,
-    218,
     1
    ],
    "rigor": [
@@ -84358,7 +80909,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     29,
     1,
-    223,
+    219,
     1
    ],
    "rigorously": [
@@ -84392,13 +80943,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    220,
+    216,
     1,
-    221,
+    217,
     2,
-    222,
+    218,
     2,
-    223,
+    219,
     3
    ],
    "risk-aware": [
@@ -84508,7 +81059,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     178,
     1,
-    223,
+    219,
     2
    ],
    "robust": [
@@ -84538,9 +81089,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     1,
-    218,
-    1,
-    223,
+    219,
     1
    ],
    "robustly": [
@@ -84566,13 +81115,7 @@ globalThis.SUBTOPIC_CATALOG={
    "rock": [
     9,
     1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    2,
-    225,
+    221,
     1
    ],
    "role": [
@@ -84612,7 +81155,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     75,
     1,
-    221,
+    217,
     1
    ],
    "route": [
@@ -84638,7 +81181,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "ruggediz": [
-    223,
+    219,
     1
    ],
    "rule": [
@@ -84658,17 +81201,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "run-life": [
-    223,
+    219,
     1
    ],
    "run-time": [
     7,
     2,
     16,
-    1
-   ],
-   "runn": [
-    218,
     1
    ],
    "runnerstrom": [
@@ -84700,9 +81239,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "safe": [
-    221,
+    217,
     1,
-    223,
+    219,
     1
    ],
    "safely": [
@@ -84736,19 +81275,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     48,
     1,
-    216,
-    1,
-    223,
+    219,
     1
    ],
    "sale": [
-    219,
+    215,
     1,
-    221,
+    217,
     1
    ],
    "saleable": [
-    223,
+    219,
     2
    ],
    "salinity": [
@@ -84763,18 +81300,10 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1
    ],
-   "sampl": [
-    216,
-    1,
-    217,
-    1
-   ],
    "sample": [
     0,
     1,
     1,
-    1,
-    218,
     1
    ],
    "sand": [
@@ -84809,10 +81338,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "saturat": [
     12,
-    1
-   ],
-   "saturation": [
-    216,
     1
    ],
    "saving": [
@@ -84864,7 +81389,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     195,
     1,
-    221,
+    217,
     1
    ],
    "scalability": [
@@ -84872,11 +81397,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     39,
     1,
-    218,
+    215,
     1,
     219,
-    1,
-    223,
     1
    ],
    "scalable": [
@@ -84900,11 +81423,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    218,
-    2,
-    219,
+    215,
     1,
-    224,
+    220,
     1
    ],
    "scale": [
@@ -84950,17 +81471,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     184,
     1,
-    215,
-    3,
-    216,
-    1,
     217,
-    3,
-    218,
-    3,
-    221,
     2,
-    223,
+    219,
     4
    ],
    "scale-bridg": [
@@ -84991,10 +81504,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1
    ],
-   "scco2": [
-    217,
-    3
-   ],
    "scenario": [
     7,
     2,
@@ -85010,7 +81519,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    223,
+    219,
     1
    ],
    "scene": [
@@ -85027,10 +81536,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1
    ],
-   "schematic": [
-    218,
-    1
-   ],
    "scheme": [
     14,
     1,
@@ -85038,7 +81543,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     67,
     1,
-    221,
+    217,
     1
    ],
    "schofield": [
@@ -85313,16 +81818,12 @@ globalThis.SUBTOPIC_CATALOG={
     207,
     1,
     208,
-    1,
-    218,
     1
    ],
    "scientifically": [
     82,
     1,
     84,
-    1,
-    216,
     1
    ],
    "scientist": [
@@ -85341,12 +81842,6 @@ globalThis.SUBTOPIC_CATALOG={
     47,
     1,
     61,
-    2,
-    215,
-    2,
-    216,
-    2,
-    217,
     2
    ],
    "scott": [
@@ -85376,7 +81871,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "seal": [
-    226,
+    222,
     1
    ],
    "seamless": [
@@ -85414,17 +81909,15 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "section": [
-    218,
-    2,
-    221,
+    217,
     1,
-    223,
+    219,
     2
    ],
    "sector": [
-    222,
+    218,
     1,
-    223,
+    219,
     2
    ],
    "secur": [
@@ -85464,7 +81957,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     139,
     1,
-    223,
+    219,
     1
    ],
    "security": [
@@ -85492,7 +81985,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     87,
     1,
-    223,
+    219,
     1
    ],
    "sediment": [
@@ -85503,9 +81996,7 @@ globalThis.SUBTOPIC_CATALOG={
     8,
     1,
     61,
-    1,
-    215,
-    2
+    1
    ],
    "seek": [
     1,
@@ -85598,25 +82089,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    218,
-    1,
-    223,
+    219,
     2
-   ],
-   "seen": [
-    215,
-    2,
-    217,
-    1,
-    218,
-    1
    ],
    "seismic": [
     9,
-    1
-   ],
-   "seismicity": [
-    218,
     1
    ],
    "seldom": [
@@ -85632,21 +82109,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     1,
-    215,
-    2,
     216,
-    2,
+    3,
     217,
-    2,
-    220,
+    4,
+    218,
+    4,
+    219,
     3,
     221,
-    4,
-    222,
-    4,
-    223,
-    3,
-    225,
     1
    ],
    "selection": [
@@ -85664,7 +82135,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     1,
-    226,
+    222,
     1
    ],
    "selectively": [
@@ -85678,7 +82149,7 @@ globalThis.SUBTOPIC_CATALOG={
    "selectivity": [
     26,
     1,
-    220,
+    216,
     1
    ],
    "self": [
@@ -85728,7 +82199,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "self-optimiz": [
-    223,
+    219,
     1
    ],
    "self-organiz": [
@@ -85744,7 +82215,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "sellback": [
-    221,
+    217,
     1
    ],
    "semantic": [
@@ -85842,7 +82313,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     160,
     1,
-    223,
+    219,
     1
    ],
    "sense": [
@@ -85876,15 +82347,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     4,
-    215,
-    1,
-    216,
-    1,
     217,
-    1,
-    218,
-    1,
-    221,
     1
    ],
    "sensor": [
@@ -85938,13 +82401,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     170,
     1,
-    216,
-    1,
-    218,
-    1,
-    223,
+    219,
     3,
-    224,
+    220,
     1
    ],
    "sensor-selection": [
@@ -85960,7 +82419,7 @@ globalThis.SUBTOPIC_CATALOG={
    "separat": [
     12,
     2,
-    220,
+    216,
     1
    ],
    "separate": [
@@ -85974,11 +82433,11 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     26,
     1,
-    219,
+    215,
     2,
-    220,
+    216,
     4,
-    223,
+    219,
     1
    ],
    "sequenc": [
@@ -85997,10 +82456,6 @@ globalThis.SUBTOPIC_CATALOG={
     28,
     1
    ],
-   "seriou": [
-    215,
-    1
-   ],
    "serv": [
     34,
     1
@@ -86016,9 +82471,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "service": [
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "set": [
@@ -86038,7 +82493,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "setpoint": [
-    223,
+    219,
     1
    ],
    "sets": [
@@ -86092,11 +82547,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "shale": [
-    215,
-    5,
-    217,
-    1,
-    225,
+    221,
     1
    ],
    "shap": [
@@ -86143,8 +82594,6 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     1,
     95,
-    1,
-    217,
     1
    ],
    "share": [
@@ -86221,9 +82670,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     1,
     61,
-    1,
-    216,
-    2
+    1
    ],
    "shown": [
     22,
@@ -86246,7 +82693,7 @@ globalThis.SUBTOPIC_CATALOG={
    "side": [
     85,
     1,
-    221,
+    217,
     1
    ],
    "signal": [
@@ -86326,15 +82773,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     215,
     2,
-    216,
-    1,
-    217,
+    218,
     1,
     219,
-    2,
-    222,
-    1,
-    223,
     1
    ],
    "significantly": [
@@ -86367,15 +82808,7 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     93,
-    1,
-    215,
-    2,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2
+    1
    ],
    "similarly": [
     22,
@@ -86468,13 +82901,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     166,
     1,
-    215,
-    2,
     216,
-    1,
-    217,
-    1,
-    220,
     1
    ],
    "simulator": [
@@ -86494,7 +82921,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     83,
     2,
-    219,
+    215,
     1
    ],
    "since": [
@@ -86520,7 +82947,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    223,
+    219,
     1
    ],
    "singular": [
@@ -86536,19 +82963,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     140,
     1,
-    215,
-    10,
-    216,
-    10,
     217,
-    10,
-    218,
-    3,
-    221,
     5,
-    222,
+    218,
     1,
-    223,
+    219,
     13
    ],
    "situation": [
@@ -86569,11 +82988,7 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     89,
-    2,
-    215,
-    1,
-    217,
-    1
+    2
    ],
    "situational": [
     9,
@@ -86650,7 +83065,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "slip": [
-    220,
+    216,
     1
    ],
    "slow": [
@@ -86686,7 +83101,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    223,
+    219,
     2
    ],
    "small-scale": [
@@ -86698,7 +83113,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     24,
     1,
-    223,
+    219,
     1
    ],
    "smart": [
@@ -86706,9 +83121,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     121,
     1,
-    223,
+    219,
     1,
-    226,
+    222,
     1
    ],
    "smoothness": [
@@ -86730,12 +83145,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1
-   ],
-   "soak": [
-    215,
-    3,
-    217,
-    2
    ],
    "social": [
     4,
@@ -86832,7 +83241,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     203,
     1,
-    223,
+    219,
     1
    ],
    "soil": [
@@ -86921,8 +83330,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "solely": [
     6,
-    1,
-    215,
     1
    ],
    "solid": [
@@ -86937,9 +83344,7 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     69,
-    1,
-    218,
-    4
+    1
    ],
    "solid-state": [
     31,
@@ -86978,15 +83383,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     3,
-    219,
+    215,
     4,
-    220,
+    216,
     2,
-    221,
+    217,
     2,
-    222,
+    218,
     2,
-    223,
+    219,
     2
    ],
    "solv": [
@@ -87052,11 +83457,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     2,
-    215,
-    1,
-    216,
-    3,
-    222,
+    218,
     1
    ],
    "sometime": [
@@ -87074,7 +83475,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "sorbent": [
-    220,
+    216,
     1
    ],
    "sos": [
@@ -87116,11 +83517,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "sour": [
-    219,
+    215,
     4,
-    220,
+    216,
     2,
-    221,
+    217,
     6
    ],
    "source": [
@@ -87164,13 +83565,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     93,
     2,
-    215,
-    3,
     217,
-    4,
-    218,
-    1,
-    221,
     3
    ],
    "space": [
@@ -87236,7 +83631,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     68,
     1,
-    223,
+    219,
     1
    ],
    "sparse": [
@@ -87332,11 +83727,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     215,
     1,
-    217,
-    1,
-    219,
-    1,
-    222,
+    218,
     1
    ],
    "specialization": [
@@ -87414,15 +83805,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    216,
-    2,
+    217,
+    1,
     218,
     1,
-    221,
-    1,
-    222,
-    1,
-    223,
+    219,
     2
    ],
    "specifically": [
@@ -87438,13 +83825,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
+    215,
+    1,
     218,
     1,
     219,
-    1,
-    222,
-    1,
-    223,
     1
    ],
    "specification": [
@@ -87453,9 +83838,7 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     90,
-    3,
-    218,
-    1
+    3
    ],
    "specificity": [
     2,
@@ -87546,7 +83929,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "spend": [
-    223,
+    219,
     1
    ],
    "spent": [
@@ -87584,7 +83967,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "squander": [
-    222,
+    218,
     1
    ],
    "ssa": [
@@ -87620,7 +84003,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "stabilization": [
-    223,
+    219,
     2
    ],
    "stable": [
@@ -87632,7 +84015,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     69,
     1,
-    221,
+    217,
     1
    ],
    "stack": [
@@ -87645,9 +84028,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "stage": [
     45,
-    2,
-    216,
-    1
+    2
    ],
    "stake": [
     95,
@@ -87667,14 +84048,12 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     3,
     91,
-    1,
-    218,
-    3
+    1
    ],
    "standardiz": [
-    221,
+    217,
     1,
-    223,
+    219,
     2
    ],
    "standoff": [
@@ -87749,9 +84128,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     87,
-    1,
-    218,
-    4
+    1
    ],
    "state-of-the-art": [
     42,
@@ -87765,16 +84142,12 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1
    ],
-   "state-ofthe-art": [
-    218,
-    1
-   ],
    "static": [
     5,
     1
    ],
    "station": [
-    223,
+    219,
     1
    ],
    "stationarity": [
@@ -87897,26 +84270,18 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     2,
     73,
-    1,
-    215,
-    2,
-    216,
-    2
+    1
    ],
    "stimulat": [
     69,
-    1,
-    216,
-    3
+    1
    ],
    "stimulation": [
     5,
     1,
-    216,
-    2,
-    225,
+    221,
     1,
-    226,
+    222,
     1
    ],
    "stimuli": [
@@ -87965,8 +84330,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "stor": [
     0,
-    1,
-    217,
     1
    ],
    "storage": [
@@ -87980,11 +84343,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     54,
     1,
-    218,
-    2,
-    220,
+    216,
     1,
-    222,
+    218,
     2
    ],
    "store": [
@@ -88016,9 +84377,9 @@ globalThis.SUBTOPIC_CATALOG={
    "strand": [
     13,
     1,
-    219,
+    215,
     2,
-    221,
+    217,
     1
    ],
    "strategic": [
@@ -88080,29 +84441,21 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    225,
+    221,
     1,
-    226,
-    1
-   ],
-   "stratigraphy": [
-    216,
-    2,
-    217,
+    222,
     1
    ],
    "stream": [
     58,
     1,
-    217,
+    215,
     1,
-    219,
-    1,
-    220,
+    216,
     3,
-    221,
+    217,
     6,
-    225,
+    221,
     1
    ],
    "strength": [
@@ -88157,10 +84510,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "strik": [
     86,
-    1
-   ],
-   "stringent": [
-    218,
     1
    ],
    "strive": [
@@ -88330,7 +84679,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    220,
+    216,
     1
    ],
    "structure-function": [
@@ -88428,7 +84777,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "sub-topic": [
-    219,
+    215,
     1
    ],
    "subarea": [
@@ -88454,19 +84803,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    1,
-    222,
+    218,
     1
    ],
    "submission": [
     39,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "submitt": [
@@ -88524,11 +84871,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     198,
     2,
-    216,
-    3,
-    223,
+    219,
     1,
-    226,
+    222,
     1
    ],
    "subsystem": [
@@ -88536,19 +84881,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     77,
     2,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "subterranean": [
     3,
-    1
-   ],
-   "subtopic": [
-    216,
-    1,
-    217,
     1
    ],
    "subwavelength": [
@@ -88565,10 +84904,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     4,
     92,
-    1,
-    215,
-    3,
-    217,
     1
    ],
    "successful": [
@@ -88588,15 +84923,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
+    216,
+    1,
     217,
-    1,
-    220,
-    1,
-    221,
     2,
-    222,
+    218,
     1,
-    223,
+    219,
     3
    ],
    "successfully": [
@@ -88720,19 +85053,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    3,
+    216,
+    2,
     217,
-    2,
+    3,
     218,
-    3,
-    220,
-    2,
-    221,
-    3,
-    222,
     4,
-    223,
+    219,
     4
    ],
    "suffer": [
@@ -88757,9 +85084,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     93,
-    1,
-    217,
-    2
+    1
    ],
    "sufficiently": [
     9,
@@ -88769,10 +85094,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     215,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "suggest": [
@@ -88798,7 +85119,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    220,
+    216,
     1
    ],
    "suite": [
@@ -88810,17 +85131,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    223,
+    219,
     1
    ],
    "sulfide": [
-    219,
+    215,
     1,
-    220,
+    216,
     1
    ],
    "sulfur": [
-    220,
+    216,
     1
    ],
    "summary": [
@@ -88867,10 +85188,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "superconductivity": [
     11,
-    1
-   ],
-   "supercritical": [
-    217,
     1
    ],
    "superior": [
@@ -88920,11 +85237,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     139,
     1,
-    219,
+    215,
     1,
-    222,
+    218,
     2,
-    223,
+    219,
     1
    ],
    "supportive": [
@@ -88967,17 +85284,9 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     1,
     218,
-    2,
-    222,
     1,
-    223,
+    219,
     4
-   ],
-   "surfactant": [
-    215,
-    1,
-    217,
-    1
    ],
    "surge": [
     7,
@@ -89008,9 +85317,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
-    1,
-    221,
+    217,
     1
    ],
    "surrounding": [
@@ -89061,10 +85368,6 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     1
    ],
-   "suspend": [
-    218,
-    1
-   ],
    "sustain": [
     29,
     1,
@@ -89072,7 +85375,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    226,
+    222,
     1
    ],
    "sustainability": [
@@ -89166,9 +85469,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     74,
     1,
-    221,
+    217,
     1,
-    223,
+    219,
     1
    ],
    "synergistic": [
@@ -89212,7 +85515,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     78,
     1,
-    220,
+    216,
     1
    ],
    "synthesiz": [
@@ -89429,26 +85732,18 @@ globalThis.SUBTOPIC_CATALOG={
     214,
     1,
     215,
-    3,
+    2,
     216,
-    4,
-    217,
-    2,
-    218,
-    15,
-    219,
-    2,
-    220,
     1,
-    221,
+    217,
     9,
-    222,
+    218,
     2,
-    223,
+    219,
     13,
-    225,
+    221,
     2,
-    226,
+    222,
     1
    ],
    "system-level": [
@@ -89474,7 +85769,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    223,
+    219,
     1
    ],
    "systemic": [
@@ -89488,12 +85783,6 @@ globalThis.SUBTOPIC_CATALOG={
    "systems-of-system": [
     82,
     1
-   ],
-   "table": [
-    216,
-    1,
-    218,
-    3
    ],
    "tabular": [
     41,
@@ -89572,7 +85861,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    223,
+    219,
     1
    ],
    "tailorable": [
@@ -89587,10 +85876,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     84,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "take": [
@@ -89609,16 +85894,14 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     1,
     85,
-    1,
-    218,
-    2
+    1
    ],
    "take-off": [
-    221,
+    217,
     1
    ],
    "takeaway": [
-    221,
+    217,
     1
    ],
    "taken": [
@@ -89644,11 +85927,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     1,
-    222,
+    218,
     2
    ],
    "tank-level": [
-    223,
+    219,
     1
    ],
    "tap": [
@@ -89692,19 +85975,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     215,
     1,
-    216,
-    2,
     217,
-    1,
-    218,
-    3,
-    219,
-    1,
-    221,
     2,
-    222,
+    218,
     5,
-    223,
+    219,
     3
    ],
    "task": [
@@ -89811,16 +86086,12 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1
    ],
-   "tds": [
-    218,
-    1
-   ],
    "tea": [
-    220,
+    216,
     2,
-    221,
+    217,
     2,
-    222,
+    218,
     2
    ],
    "team": [
@@ -89854,15 +86125,9 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     90,
     2,
-    215,
-    2,
-    216,
-    2,
     217,
-    2,
-    221,
     1,
-    222,
+    218,
     1
    ],
    "team-level": [
@@ -89909,22 +86174,10 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     215,
-    2,
-    216,
-    2,
-    217,
-    1,
-    218,
-    1,
-    219,
     1
    ],
    "technically": [
     46,
-    1,
-    215,
-    1,
-    216,
     1
    ],
    "technique": [
@@ -90028,23 +86281,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    215,
-    2,
-    216,
-    3,
-    217,
-    1,
-    225,
+    221,
     1
    ],
    "techno-economic": [
-    217,
-    1,
-    220,
+    216,
     1
    ],
    "technoeconomic": [
-    224,
+    220,
     1
    ],
    "technological": [
@@ -90173,26 +86418,18 @@ globalThis.SUBTOPIC_CATALOG={
     214,
     1,
     215,
-    8,
-    216,
-    21,
-    217,
-    8,
-    218,
-    20,
-    219,
     5,
-    220,
+    216,
     18,
-    221,
+    217,
     20,
-    222,
+    218,
     19,
-    223,
+    219,
     26,
-    224,
+    220,
     1,
-    226,
+    222,
     1
    ],
    "technology-enhanc": [
@@ -90253,14 +86490,6 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1
    ],
-   "temporary": [
-    216,
-    1
-   ],
-   "ten": [
-    215,
-    1
-   ],
    "tend": [
     4,
     1,
@@ -90304,11 +86533,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     216,
     1,
-    217,
-    1,
-    220,
-    1,
-    223,
+    219,
     3
    ],
    "terminal": [
@@ -90334,10 +86559,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     86,
     3
-   ],
-   "terminat": [
-    215,
-    1
    ],
    "terminology": [
     83,
@@ -90377,34 +86598,22 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1,
     215,
-    12,
-    216,
-    10,
-    217,
-    14,
-    218,
-    5,
-    219,
     1,
-    220,
+    216,
     2,
-    221,
+    217,
     9,
-    222,
+    218,
     6,
-    223,
+    219,
     22,
-    226,
+    222,
     1
    ],
    "testbed": [
     87,
     1,
-    223,
-    1
-   ],
-   "texa": [
-    215,
+    219,
     1
    ],
    "text": [
@@ -90453,8 +86662,6 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1,
     84,
-    1,
-    218,
     1
    ],
    "theme": [
@@ -90613,10 +86820,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     92,
-    2,
-    215,
-    1,
-    216,
     2
    ],
    "thereby": [
@@ -90664,11 +86867,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     173,
     1,
+    217,
+    1,
     218,
-    1,
-    221,
-    1,
-    222,
     3
    ],
    "thermoconductive": [
@@ -90785,9 +86986,7 @@ globalThis.SUBTOPIC_CATALOG={
     53,
     1,
     82,
-    1,
-    218,
-    3
+    1
    ],
    "though": [
     92,
@@ -90849,15 +87048,11 @@ globalThis.SUBTOPIC_CATALOG={
     28,
     1,
     55,
-    1,
-    217,
     1
    ],
    "threshold": [
     29,
-    1,
-    218,
-    6
+    1
    ],
    "thrive": [
     19,
@@ -90867,14 +87062,6 @@ globalThis.SUBTOPIC_CATALOG={
     0,
     1,
     90,
-    1,
-    215,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     1
    ],
    "throughput": [
@@ -90884,11 +87071,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     84,
     1,
-    218,
-    2,
-    220,
+    216,
     1,
-    223,
+    219,
     4
    ],
    "thrust": [
@@ -90957,24 +87142,10 @@ globalThis.SUBTOPIC_CATALOG={
     77,
     1
    ],
-   "tied": [
-    216,
-    1
-   ],
    "tight": [
     16,
     1,
-    215,
-    1,
-    217,
-    1,
-    225,
-    1
-   ],
-   "tightly": [
-    215,
-    1,
-    217,
+    221,
     1
    ],
    "tim": [
@@ -91026,21 +87197,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    215,
-    3,
     216,
-    2,
+    1,
     217,
-    2,
+    1,
     218,
-    3,
-    220,
     1,
-    221,
-    1,
-    222,
-    1,
-    223,
+    219,
     2
    ],
    "time-dependent": [
@@ -91062,7 +87225,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     14,
     1,
-    224,
+    220,
     1
    ],
    "timescale": [
@@ -91136,13 +87299,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "tmp": [
-    220,
+    216,
     2,
-    221,
+    217,
     2,
-    222,
+    218,
     2,
-    223,
+    219,
     2
    ],
    "today": [
@@ -91178,10 +87341,6 @@ globalThis.SUBTOPIC_CATALOG={
    "tomography": [
     75,
     1
-   ],
-   "ton": [
-    217,
-    4
    ],
    "tool": [
     1,
@@ -91238,13 +87397,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     216,
     1,
-    220,
-    1,
-    221,
+    217,
     2,
-    222,
+    218,
     1,
-    223,
+    219,
     3
    ],
    "toopology": [
@@ -91429,22 +87586,14 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     3,
     215,
-    5,
-    216,
-    2,
-    217,
-    4,
-    218,
-    2,
-    219,
     3,
-    220,
+    216,
     5,
-    221,
+    217,
     7,
-    222,
+    218,
     7,
-    223,
+    219,
     7
    ],
    "topography": [
@@ -91486,11 +87635,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     49,
     1,
-    218,
-    4,
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "totally": [
@@ -91517,8 +87664,6 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     63,
-    1,
-    218,
     1
    ],
    "toxic": [
@@ -91857,9 +88002,7 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1,
     95,
-    1,
-    218,
-    2
+    1
    ],
    "trainable": [
     58,
@@ -91912,7 +88055,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     74,
     1,
-    220,
+    216,
     1
    ],
    "transferable": [
@@ -91946,9 +88089,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     171,
     1,
-    220,
+    216,
     1,
-    223,
+    219,
     1
    ],
    "transformation": [
@@ -91964,7 +88107,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     33,
     3,
-    223,
+    219,
     1
    ],
    "transformational": [
@@ -91979,8 +88122,6 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     95,
-    1,
-    216,
     1
    ],
    "transformative": [
@@ -92107,33 +88248,21 @@ globalThis.SUBTOPIC_CATALOG={
     196,
     1,
     216,
-    6,
-    218,
-    2,
-    220,
     1,
-    221,
+    217,
     4,
-    222,
+    218,
     3
    ],
    "transportation": [
-    217,
-    1,
     218,
-    3,
-    222,
     2,
-    223,
+    219,
     5
    ],
    "trapp": [
     75,
-    2,
-    215,
-    1,
-    217,
-    1
+    2
    ],
    "traumatic": [
     4,
@@ -92150,9 +88279,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     82,
     1,
-    218,
-    11,
-    220,
+    216,
     1
    ],
    "treatment": [
@@ -92163,34 +88290,14 @@ globalThis.SUBTOPIC_CATALOG={
     152,
     1,
     215,
-    2,
+    1,
     216,
-    2,
-    217,
-    1,
-    218,
-    26,
-    219,
-    1,
-    220,
     5,
-    221,
+    217,
     3
    ],
    "tremendou": [
     73,
-    1
-   ],
-   "trend": [
-    217,
-    1
-   ],
-   "tri": [
-    217,
-    1
-   ],
-   "tribal": [
-    218,
     1
    ],
    "trigger": [
@@ -92216,38 +88323,24 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "trl": [
-    215,
-    3,
     216,
-    3,
+    5,
     217,
-    3,
+    6,
     218,
     4,
-    220,
-    5,
-    221,
-    6,
-    222,
-    4,
-    223,
+    219,
     4
    ],
    "trl8": [
-    222,
+    218,
     1
    ],
    "trls": [
-    216,
+    217,
     1,
-    221,
-    1,
-    223,
+    219,
     3
-   ],
-   "truck": [
-    218,
-    1
    ],
    "truncation": [
     20,
@@ -92279,10 +88372,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "try": [
     0,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "ttdac": [
@@ -92294,7 +88383,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "tub": [
-    222,
+    218,
     1
    ],
    "tun": [
@@ -92338,7 +88427,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "turnover": [
-    220,
+    216,
     1
    ],
    "twin": [
@@ -92348,13 +88437,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    222,
+    218,
     1,
-    223,
+    219,
     5,
-    224,
+    220,
     1,
-    225,
+    221,
     2
    ],
    "twist": [
@@ -92398,9 +88487,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    216,
-    1,
-    219,
+    215,
     1
    ],
    "type": [
@@ -92437,8 +88524,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     85,
-    1,
-    215,
     1
    ],
    "typical": [
@@ -92457,10 +88542,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     93,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "typifi": [
@@ -92492,13 +88573,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     192,
     1,
+    215,
+    1,
     218,
-    1,
-    219,
-    1,
-    222,
     3,
-    223,
+    219,
     2
    ],
    "uas": [
@@ -92539,12 +88618,6 @@ globalThis.SUBTOPIC_CATALOG={
     27,
     1,
     92,
-    1,
-    215,
-    1,
-    216,
-    1,
-    218,
     1
    ],
    "ultimately": [
@@ -92558,7 +88631,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    223,
+    219,
     2
    ],
    "ultra-high": [
@@ -92597,10 +88670,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "ultrahigh": [
     18,
-    1
-   ],
-   "ultralightweight": [
-    216,
     1
    ],
    "ultrasonic": [
@@ -92659,10 +88728,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     195,
-    1,
-    216,
-    3,
-    217,
     1
    ],
    "uncertainty-aware": [
@@ -92682,13 +88747,7 @@ globalThis.SUBTOPIC_CATALOG={
    "unconventional": [
     68,
     1,
-    215,
-    12,
-    216,
-    5,
-    217,
-    12,
-    225,
+    221,
     1
    ],
    "uncover": [
@@ -92702,10 +88761,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     2
-   ],
-   "undefin": [
-    217,
-    1
    ],
    "under-specification": [
     16,
@@ -92721,8 +88776,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "underground": [
     49,
-    1,
-    218,
     1
    ],
    "underlie": [
@@ -92750,7 +88803,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    225,
+    221,
     1
    ],
    "underpin": [
@@ -92875,24 +88928,12 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     5,
     176,
-    1,
-    215,
-    2,
-    216,
-    6,
-    217,
-    3,
-    218,
     1
    ],
    "understandable": [
     0,
     1,
     7,
-    1
-   ],
-   "understanding": [
-    215,
     1
    ],
    "understood": [
@@ -92909,12 +88950,10 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1,
     86,
-    1,
-    216,
-    2
+    1
    ],
    "underutiliz": [
-    221,
+    217,
     3
    ],
    "underwater": [
@@ -92924,10 +88963,6 @@ globalThis.SUBTOPIC_CATALOG={
    "undetect": [
     94,
     3
-   ],
-   "undrain": [
-    216,
-    1
    ],
    "unexpect": [
     57,
@@ -92959,10 +88994,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "unification": [
     7,
-    1
-   ],
-   "uniformity": [
-    216,
     1
    ],
    "unify": [
@@ -93014,7 +89045,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    223,
+    219,
     1
    ],
    "uniquely": [
@@ -93041,14 +89072,8 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     215,
-    3,
-    216,
-    2,
-    217,
-    5,
-    219,
     1,
-    220,
+    216,
     1
    ],
    "universal": [
@@ -93120,9 +89145,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "unplann": [
-    222,
+    218,
     2,
-    223,
+    219,
     1
    ],
    "unprecedent": [
@@ -93146,7 +89171,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "unproduc": [
-    219,
+    215,
     1
    ],
    "unreliable": [
@@ -93167,18 +89192,10 @@ globalThis.SUBTOPIC_CATALOG={
     12,
     2
    ],
-   "unstimulat": [
-    216,
-    1
-   ],
    "unstructur": [
     23,
     2,
     41,
-    1
-   ],
-   "unsuccessful": [
-    215,
     1
    ],
    "unsuitable": [
@@ -93190,7 +89207,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "unus": [
-    221,
+    217,
     1
    ],
    "unveil": [
@@ -93210,37 +89227,17 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     184,
     1,
-    219,
+    215,
     2
    ],
    "updat": [
     90,
     2,
-    215,
-    2,
-    216,
-    1,
-    217,
-    2,
-    218,
-    2,
-    223,
+    219,
     2
-   ],
-   "update": [
-    216,
-    1,
-    218,
-    1
    ],
    "upgrad": [
     56,
-    1
-   ],
-   "uplift": [
-    215,
-    1,
-    217,
     1
    ],
    "upon": [
@@ -93260,13 +89257,13 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "upset": [
-    223,
+    219,
     1
    ],
    "upstream": [
-    219,
+    215,
     1,
-    223,
+    219,
     4
    ],
    "uq": [
@@ -93362,19 +89359,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    215,
-    4,
     216,
-    5,
+    1,
     217,
-    5,
-    218,
-    4,
-    220,
     1,
-    221,
-    1,
-    223,
+    219,
     3
    ],
    "useful": [
@@ -93390,7 +89379,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     83,
     1,
-    223,
+    219,
     2
    ],
    "usefully": [
@@ -93411,10 +89400,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2
    ],
-   "uses": [
-    218,
-    1
-   ],
    "uss": [
     95,
     1
@@ -93424,9 +89409,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     85,
     1,
-    220,
+    216,
     1,
-    221,
+    217,
     1
    ],
    "utiliz": [
@@ -93446,13 +89431,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    4,
-    223,
+    219,
     2
    ],
    "utilization": [
@@ -93464,13 +89443,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     142,
     1,
-    219,
+    215,
     4,
-    220,
+    216,
     4,
-    221,
+    217,
     6,
-    222,
+    218,
     1
    ],
    "utilize": [
@@ -93484,9 +89463,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     72,
     1,
-    219,
+    215,
     1,
-    221,
+    217,
     1
    ],
    "uv": [
@@ -93520,21 +89499,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     1,
-    215,
-    1,
     216,
     1,
     217,
     1,
     218,
     1,
-    220,
-    1,
-    221,
-    1,
-    222,
-    1,
-    223,
+    219,
     2
    ],
    "validate": [
@@ -93542,19 +89513,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     47,
     1,
-    215,
-    2,
     216,
-    2,
+    3,
     217,
     2,
-    220,
-    3,
-    221,
+    218,
     2,
-    222,
-    2,
-    223,
+    219,
     1
    ],
    "validation": [
@@ -93571,18 +89536,10 @@ globalThis.SUBTOPIC_CATALOG={
     216,
     3,
     217,
-    3,
-    218,
-    3,
-    219,
-    3,
-    220,
-    3,
-    221,
     6,
-    222,
+    218,
     4,
-    223,
+    219,
     7
    ],
    "validity": [
@@ -93592,11 +89549,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "valorization": [
-    221,
+    217,
     1
    ],
    "valorize": [
-    221,
+    217,
     1
    ],
    "valu": [
@@ -93608,11 +89565,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     7,
     1,
-    218,
-    1,
-    219,
+    215,
     2,
-    220,
+    216,
     1
    ],
    "value": [
@@ -93625,7 +89580,7 @@ globalThis.SUBTOPIC_CATALOG={
     23,
     1,
     215,
-    2,
+    1,
     216,
     1,
     217,
@@ -93633,18 +89588,10 @@ globalThis.SUBTOPIC_CATALOG={
     218,
     1,
     219,
-    1,
-    220,
-    1,
-    221,
-    1,
-    222,
-    1,
-    223,
     1
    ],
    "valve": [
-    222,
+    218,
     2
    ],
    "vanmil": [
@@ -93684,9 +89631,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    221,
+    217,
     3,
-    223,
+    219,
     1
    ],
    "variation": [
@@ -93711,13 +89658,7 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1,
     89,
-    1,
-    215,
-    2,
-    217,
-    1,
-    218,
-    2
+    1
    ],
    "variou": [
     8,
@@ -93743,9 +89684,7 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     2,
     83,
-    1,
-    218,
-    3
+    1
    ],
    "vary": [
     15,
@@ -93763,8 +89702,6 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     1,
     219,
-    1,
-    223,
     1
    ],
    "vast": [
@@ -93776,7 +89713,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "vastness": [
-    223,
+    219,
     1
    ],
    "vehicle": [
@@ -93864,9 +89801,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "vent": [
-    219,
+    215,
     2,
-    222,
+    218,
     1
    ],
    "verbal": [
@@ -93875,8 +89812,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "verifiable": [
     29,
-    1,
-    217,
     1
    ],
    "verification": [
@@ -93894,9 +89829,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "verify": [
-    221,
+    217,
     1,
-    222,
+    218,
     1
    ],
    "versa": [
@@ -93961,12 +89896,6 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     1
    ],
-   "vertically": [
-    215,
-    1,
-    217,
-    1
-   ],
    "very": [
     0,
     2,
@@ -93985,10 +89914,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     85,
-    1,
-    216,
-    1,
-    218,
     1
    ],
    "vessel": [
@@ -94018,33 +89943,19 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    2,
-    217,
-    1,
-    224,
+    220,
     1
    ],
    "viability": [
     215,
     1,
-    216,
-    1,
     217,
-    1,
-    218,
-    1,
-    219,
-    1,
-    221,
     1
    ],
    "viable": [
+    217,
+    1,
     218,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "vibration": [
@@ -94088,10 +89999,6 @@ globalThis.SUBTOPIC_CATALOG={
    "violent": [
     29,
     1
-   ],
-   "virgin": [
-    216,
-    2
    ],
    "virginia": [
     4,
@@ -94149,8 +90056,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     91,
-    1,
-    216,
     1
    ],
    "visualize": [
@@ -94162,7 +90067,7 @@ globalThis.SUBTOPIC_CATALOG={
    "vital": [
     0,
     1,
-    223,
+    219,
     1
    ],
    "vlf": [
@@ -94193,20 +90098,10 @@ globalThis.SUBTOPIC_CATALOG={
     25,
     1,
     215,
-    6,
-    216,
-    5,
-    217,
-    6,
-    219,
     1,
-    221,
-    2,
-    223,
-    1
-   ],
-   "volumetric": [
     217,
+    2,
+    219,
     1
    ],
    "von": [
@@ -94244,7 +90139,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "vulnerable": [
-    223,
+    219,
     1
    ],
    "w911nf-23-s-0001": [
@@ -94474,17 +90369,15 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "wast": [
-    219,
+    215,
     1
    ],
    "waste": [
-    218,
+    217,
     2,
-    221,
-    2,
-    224,
+    220,
     1,
-    225,
+    221,
     1
    ],
    "water": [
@@ -94500,27 +90393,17 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     192,
     1,
-    217,
+    220,
     1,
-    218,
-    41,
-    224,
-    1,
-    225,
-    1
-   ],
-   "water-alternating-ga": [
-    215,
-    1,
-    217,
+    221,
     1
    ],
    "water-handl": [
-    223,
+    219,
     1
    ],
    "water-system": [
-    223,
+    219,
     1
    ],
    "wave": [
@@ -94577,8 +90460,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     218,
-    1,
-    222,
     1
    ],
    "ways": [
@@ -94675,8 +90556,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     192,
-    1,
-    218,
     1
    ],
    "weight": [
@@ -94787,22 +90666,14 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     215,
-    16,
-    216,
-    24,
+    1,
     217,
-    16,
-    218,
-    2,
-    219,
-    1,
-    221,
     6,
-    222,
+    218,
     1,
-    223,
+    219,
     3,
-    226,
+    222,
     1
    ],
    "well-be": [
@@ -94827,12 +90698,8 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1
    ],
-   "wellbore": [
-    216,
-    1
-   ],
    "wellhead": [
-    221,
+    217,
     2
    ],
    "wellness": [
@@ -94843,8 +90710,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     85,
-    1,
-    215,
     1
    ],
    "wes": [
@@ -94860,17 +90725,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "wet": [
-    220,
+    216,
     1,
-    221,
-    1
-   ],
-   "wet-ga": [
-    215,
-    1
-   ],
-   "wett": [
-    218,
+    217,
     1
    ],
    "what": [
@@ -94905,14 +90762,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     91,
-    2,
-    215,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     2
    ],
    "what-we-do": [
@@ -94963,8 +90812,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     215,
-    1,
-    219,
     1
    ],
    "where": [
@@ -94998,17 +90845,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     94,
     1,
-    215,
-    1,
-    216,
-    4,
     217,
     1,
-    218,
-    3,
-    221,
-    1,
-    223,
+    219,
     1
    ],
    "wherea": [
@@ -95068,13 +90907,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     215,
     2,
-    216,
-    2,
-    217,
-    3,
-    219,
-    2,
-    222,
+    218,
     1
    ],
    "white": [
@@ -95092,7 +90925,7 @@ globalThis.SUBTOPIC_CATALOG={
     2
    ],
    "who": [
-    223,
+    219,
     1
    ],
    "whole": [
@@ -95135,8 +90968,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1,
     23,
-    1,
-    218,
     1
    ],
    "william": [
@@ -95149,10 +90980,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "williamson": [
     80,
-    1
-   ],
-   "williston": [
-    215,
     1
    ],
    "wilson": [
@@ -95264,17 +91091,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    3,
-    216,
-    5,
-    217,
-    3,
     218,
-    2,
-    222,
     1,
-    223,
+    219,
     3
    ],
    "without": [
@@ -95294,7 +91113,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    223,
+    219,
     1
    ],
    "word": [
@@ -95338,13 +91157,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
+    216,
+    1,
+    217,
+    1,
     218,
-    1,
-    220,
-    1,
-    221,
-    1,
-    222,
     1
    ],
    "worker": [
@@ -95385,12 +91202,10 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     58,
-    1,
-    218,
     1
    ],
    "worsen": [
-    222,
+    218,
     1
    ],
    "worst": [
@@ -95415,15 +91230,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     4,
     93,
-    4,
-    215,
-    2,
-    216,
-    1,
-    217,
-    2,
-    218,
-    2
+    4
    ],
    "written": [
     16,
@@ -95452,11 +91259,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     192,
     1,
-    218,
-    2,
-    219,
+    215,
     1,
-    223,
+    219,
     1
    ],
    "yet": [
@@ -95476,7 +91281,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     84,
     2,
-    220,
+    216,
     1
    ],
    "you": [
@@ -95492,13 +91297,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "zero-liquid": [
-    218,
-    1,
-    224,
-    1
-   ],
-   "zonal": [
-    216,
+    220,
     1
    ],
    "zone": [
@@ -95728,10 +91527,6 @@ globalThis.SUBTOPIC_CATALOG={
    "361526:a-21",
    "361526:b-21",
    "361526:c-21",
-   "363065:a-1",
-   "363065:b-1",
-   "363065:c-1",
-   "363065:2",
    "363302:1",
    "363302:a-1",
    "363302:b-1",
@@ -95742,5 +91537,5 @@ globalThis.SUBTOPIC_CATALOG={
    "363594:c-1"
   ]
  },
- "searchable_record_count": 227
+ "searchable_record_count": 223
 };
