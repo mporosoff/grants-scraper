@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-08T15:55:18Z</updated>
+  <updated>2026-09-09T13:59:52Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -272,6 +272,17 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-31 | STIs represent a serious public health and economic burden in the United States (U.S.), with approximately 2.2 million new infections occurring each year. As the nation's lead public health agency, the Centers for Disease Control and Prevention (CDC) has a unique responsibility to provide national leadership in STI prevention and control. To meet this challenge, CDC supports a comprehensive and in…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: John Lewis NIMHD Research Endowment Program (S21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363826"/>
+    <id>urn:funding-finder:grants-gov:363826</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | As authorized under section 464z-3(h) of the Public Health Service Act, the purpose of the John Lewis NIMHD Research Endowment Program is to strengthen the research infrastructure and training capacity at eligible institutions of higher education to facilitate health disparities research. Specific strategic objectives include: 1) improving the institutional physical infrastructure and acquisition …</summary>
   </entry>
   <entry>
     <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
@@ -939,16 +950,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
-  </entry>
-  <entry>
-    <title>Core State Injury Prevention Program (Core SIPP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363398"/>
-    <id>urn:funding-finder:grants-gov:363398</id>
-    <updated>2027-01-07T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCIPC</name></author>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
 </feed>
