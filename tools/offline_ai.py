@@ -23,6 +23,13 @@ class SchemaFailure(ValueError):
         self.diagnostic = diagnostic
 
 
+class SemanticFailure(ValueError):
+    """Application-owned rule metadata, never unrestricted provider text."""
+    def __init__(self, rule, path='$', **details):
+        super().__init__(rule)
+        self.diagnostic = {'validation_rule': rule, 'path': path, **details}
+
+
 def anthropic_schema(schema):
     """Project our finite schema vocabulary onto Anthropic's supported subset.
 
@@ -219,8 +226,13 @@ class Client:
             headers.update({"Authorization": "Bearer " + secret} if provider == "openai" else
                            {"x-api-key": secret, "anthropic-version": "2023-06-01"})
             retained = [row for row in self.ledger.read()['requests'] if row['key'] == key]
-            ignored = {row['id'] for row in retained} if not stage.get('durable_attempts') else set()
-            prior_attempts = len(retained) if stage.get('durable_attempts') else 0
+            # A known format failure always resumes its one correction, including
+            # production stages whose ordinary transport retries are per run.
+            durable = stage.get('durable_attempts') or any(
+                row.get('diagnostics', {}).get('category') == 'schema_failure'
+                or row['status'] in {'SchemaFailure', 'JSONDecodeError'} for row in retained)
+            ignored = {row['id'] for row in retained} if not durable else set()
+            prior_attempts = len(retained) if durable else 0
             if prior_attempts >= stage['max_attempts']:
                 raise Deferred('request_attempt_allowance_exhausted')
             for attempt in range(prior_attempts + 1, stage["max_attempts"] + 1):
@@ -295,7 +307,7 @@ class Client:
                     diagnostic = {"stage": stage_name, "input_hash": identity(data), "contract_hash": key,
                         "category": category, "shape": shape(parsed),
                         "provider_stop_reason": stop_reason(payload),
-                        **(error.diagnostic if isinstance(error, SchemaFailure) else {})}
+                        **(error.diagnostic if isinstance(error, (SchemaFailure, SemanticFailure)) else {})}
                     self.ledger.complete(token, status=type(error).__name__, diagnostics=diagnostic)
                     atomic_json(self.cache / "failures" / (token + ".json"), diagnostic)
                     # One authority owns retries. A malformed scientific answer is

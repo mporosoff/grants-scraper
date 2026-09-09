@@ -9,7 +9,7 @@ from unittest.mock import Mock, patch
 import zipfile
 
 from tools import generation_spend_checkpoint as checkpoint
-from tools.offline_ai import Ledger, error_diagnostics
+from tools.offline_ai import Ledger, error_diagnostics, request_body
 from tools.run_budgeted_documents import instrument
 from tools import run_budgeted_documents as wrapper
 from scripts import subtopic_cov4 as gate
@@ -76,7 +76,7 @@ class GenerationSpend(unittest.TestCase):
                 checkpoint.prepare('owner/repo', '123', '3', root / 'missing', root / 'reservation2.json', 'pilot')
 
     def test_cov4_wraps_the_same_prompt_and_reuses_only_valid_complete_decisions(self):
-        with tempfile.TemporaryDirectory() as directory:
+        with tempfile.TemporaryDirectory() as directory, patch.dict('os.environ', ANTHROPIC_API_KEY='synthetic'):
             root = Path(directory)
             ledger = Ledger(root / 'ledger.json', 'fixture', 2)
             payload = {'model': gate.MODEL, 'stop_reason': 'end_turn', 'usage': {'input_tokens': 100, 'output_tokens': 12},
@@ -89,15 +89,16 @@ class GenerationSpend(unittest.TestCase):
             self.assertEqual((first['fundability'], second['fundability']), (gate.ACCEPT, gate.ACCEPT))
             self.assertEqual(session.post.call_count, 1)
             body = session.post.call_args.kwargs['json']
-            self.assertEqual(body, {'model': gate.MODEL, 'max_tokens': gate.MAX_TOKENS,
-                'messages': [{'role': 'user', 'content': gate.render_prompt(candidate)}]})
+            active = gate.active_contract(candidate)
+            self.assertEqual(body, request_body(active['route'], active['stage'], active['prompt'], active['inputs'], active['schema']))
+            self.assertIn('output_config', body)
             self.assertFalse(second['api_request'])
             self.assertEqual(ledger.read()['requests'][0]['usage']['input_tokens'], 100)
 
     def test_cov4_configuration_and_safety_refusals_do_not_repeat_requests(self):
         for status, payload in [(400, {'error': {'type': 'invalid_request_error', 'message': 'Your credit balance is too low'}}),
                                 (200, {'model': gate.MODEL, 'stop_reason': 'refusal', 'content': [], 'usage': {'input_tokens': 10, 'output_tokens': 2}})]:
-            with tempfile.TemporaryDirectory() as directory:
+            with tempfile.TemporaryDirectory() as directory, patch.dict('os.environ', ANTHROPIC_API_KEY='synthetic'):
                 root = Path(directory); ledger = Ledger(root / 'ledger.json', 'fixture', 2)
                 session = Mock(post=Mock(return_value=Mock(status_code=status, json=lambda: payload)))
                 classify = instrument(ledger, root / 'cache', gate.classify_fundability)

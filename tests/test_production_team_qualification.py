@@ -61,7 +61,8 @@ class ProductionTeamQualification(unittest.TestCase):
             with patch.object(evaluation, 'evaluation_ledger', return_value=ledger), \
                     patch.object(evaluation, 'Client', return_value=NoProviderClient()):
                 first = evaluation.production_teams(state, 'regression')
-                retained = {path: path.read_bytes() for path in (state / 'sonnet-production-teams-1').rglob('*.json')}
+                version = evaluation.production_team_cases('regression')[0]['version']
+                retained = {path: path.read_bytes() for path in (state / version).rglob('*.json')}
                 self.assertTrue(first['execution_complete'])
                 self.assertFalse(first['quality_gate_passed'])
                 self.assertEqual(evaluation.production_teams(state, 'regression'), first)

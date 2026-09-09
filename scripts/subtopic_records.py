@@ -330,6 +330,7 @@ def build_records(
                 "title": subtopic.title,
                 "title_fingerprint": subtopic.title_fingerprint,
                 "summary": subtopic.summary,
+                **({'classifier_context': dict(subtopic.classifier_context)} if subtopic.classifier_context else {}),
                 "subtopic_terms": dict(subtopic.subtopic_terms),
                 "term_display": dict(
                     subtopic.term_display

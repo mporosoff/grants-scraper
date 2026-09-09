@@ -2,6 +2,34 @@
 
 ## Active production restoration authorization, September 9
 
+The first production-contract population run (`34345705095`) failed its gate:
+23/24 completed, 21/24 correct scope decisions, 15/18 legitimate scopes accepted.
+`evaluation/sonnet_production_review_20260909.json` records the consolidated
+source findings and accounting. The active verifier is now
+`sonnet-production-verification-2`; decomposition and adjudication retain
+`established-sonnet-repair-2`. The receipt directory advances to
+`sonnet-production-teams-2`, preserving version 1 and reusing only exact valid
+stage responses. Ordinary production stages also reconstruct a pending format
+correction from the retained ledger. Safe semantic rule/path diagnostics do not
+authorize format retries of scientific failures.
+
+The active Cov4 contract is `cov4-subject-context-1`, using the same bounded
+native-JSON Sonnet client as teams. Historical `PROMPT`, DEC11 text and measured
+labels are preserved. Retained enclosing/child headings distinguish an awarding
+office's mission from its scientific subject areas; the local body ends before
+the first child. No title prohibition is used. The ordinary document wrapper
+supplies the authoritative ledger. An unbounded invocation remains unresolved.
+
+After the exact implementation's `production-preflight`, dispatch
+`production-cov4-controls`, then `production-cov4-population` and
+`production-cov4-replay` through `offline-ai-evaluation.yml` on main. These cover
+the five contextual controls, original 43 rows and native/referenced bypasses,
+using the production record/gate path. Replay has no credential, no ledger
+mutation and exact response/result hashes. Source-confidence publication
+requirements still apply independently of Cov4; accepting an inferred topic
+does not promote its provenance or confidence. Numerical completion, source
+review, production enablement and publication remain separate outcomes.
+
 The user has funded Anthropic and authorized restoration of the established
 Sonnet team and Cov4 services. This supersedes the historical no-request and
 no-pause-clearing instructions below only for those services. It does not

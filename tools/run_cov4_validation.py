@@ -104,6 +104,7 @@ def _span(candidate, ordinal):
         program_area_labels=(),
         topic_areas=(),
         own_deadline=None,
+        classifier_context=candidate.get('classifier_context') or {},
     )
 
 

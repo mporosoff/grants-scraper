@@ -1,0 +1,23 @@
+{
+  "version": "production-source-review-1",
+  "status": "qualification_failed_followup_required",
+  "reviewed_head": "829e0f4cae3f55255a0f69ba49ad30b4f058745c",
+  "regression_run": "34345053311",
+  "population_run": "34345705095",
+  "regression": {"completed": 9, "total": 9, "scope_correct": 9, "legitimate_accepted": 6, "legitimate_scopes": 6, "proposed": 2},
+  "population": {"completed": 23, "total": 24, "scope_correct": 21, "legitimate_accepted": 15, "legitimate_scopes": 18, "proposed": 8},
+  "accounting": {"cumulative_requests": 355, "cumulative_estimated_usd": 5.840072, "task_additional_requests_used": 48, "task_additional_estimated_usd": 1.636848, "remaining_requests": 152, "remaining_estimated_usd": 8.363152},
+  "findings": [
+    {"scope": "363489", "stage": "adjudication", "kind": "incomplete_application_validation", "basis": "Native JSON shape passed; deterministic validation raised ValueError after end_turn, with 7337 input and 7600 output tokens counted. Historical sanitized diagnostics do not distinguish the exact failed application rule. The new bounded reproducer must retain safe rule/path metadata; do not call this a scientific false rejection or invent a missing field."},
+    {"scope": "356981", "stage": "verification", "kind": "legitimate_scope_rejected", "basis": "The original source explicitly supports device translation, safety/efficacy testing and a small clinical study. Missing researcher evidence must leave gaps without making the scope unsuitable. Retained verifier returned false and no edges, without a rationale field; its hidden reasoning cannot be reconstructed."},
+    {"scope": "344592:ab-0035", "stage": "decomposition", "kind": "legitimate_scope_rejected", "basis": "The source declares a Genetics research program with related molecular/genomic/system approaches and Army applications. It is not an enumeration of independently named programs. Keep the annotation unchanged and report this false rejection against the absolute quality floors."},
+    {"scope": "357308", "stage": "verification", "claim_id": "urh-000016-c002", "kind": "unsupported_capability", "evidence": "sensing in microphysiological systems", "basis": "The accepted engineering edge's reason asserts optical hardware design. The exact cited claim does not establish optical hardware design or building. Other claims or reputation cannot supply it."},
+    {"scope": "342475", "stage": "verification", "claim_id": "urh-000053-c001", "kind": "unsupported_complete_role", "evidence": "spectral recovery of damaged texts", "basis": "This supports text recovery/digitization, but not the supplied combined field-documentation and recording role. A partial contribution must remain adjacent; surviving computational/archival edges may still form a legitimate team."},
+    {"scope": "344592:ab-0019", "kind": "retained_negative_control_passed", "basis": "Silicon integrated nanophotonics was not accepted as fabrication/processing. The remaining growth evidence does not establish a complementary team."},
+    {"scope": "362218", "kind": "completed_with_honest_gap", "basis": "Valid hearing-delivery scope; only one person's targeted delivery and inner-ear pharmacokinetics evidence survived as direct. No complementary team. A reason contains extraneous JSON-like text within the valid string, retained unchanged; do not fabricate a cleaned scientific response."}
+  ],
+  "next_contract": "sonnet-production-verification-2",
+  "next_action": "One consolidated verifier correction, safe semantic diagnostics, exact-stage resumption and qualification replay. Keep successful decomposition/adjudication responses with identical inputs/contracts. The once-selected six confirmation cases remain untouched and unrun.",
+  "quality_gate_passed": false,
+  "production_enabled": false
+}

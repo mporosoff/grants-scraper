@@ -1,0 +1,69 @@
+{
+  "version": "sonnet-production-cov4-1",
+  "purpose": "Repair the organizational-container false positive without changing ownership, provenance or confidence ceilings. Original labels and historical prompt snapshots remain unchanged.",
+  "frozen_population_sha256": "7890b88642b7afc06d434f6e516d1355168ccbfa15431a67479ddf843157bb04",
+  "population_size": 43,
+  "controls": [
+    "360678:x-org-bes",
+    "360678:qcs",
+    "360678:x-org-office-of-science",
+    "own:360678-predecessor-citation",
+    "360678:nppp"
+  ],
+  "context_source": {
+    "retained_structure": "docs/CORPUS_CENSUS.md, What this changes",
+    "document_name": "DE-FOA-0003600.000001.pdf",
+    "url": "https://apply07.grants.gov/grantsws/rest/opportunity/att/download/349515",
+    "sha256": "60cffb3796f5ff5cbc7eabf76db8d425fac6ef18eae3c9014011ad3d0cafc3ea",
+    "basis": "The retained bookmark taxonomy identifies BES as parent of named subject programs. The original candidate excerpt is its mission paragraph. No sibling science is added to that local body; source-declared subject areas under the same enclosing office remain positives."
+  },
+  "context_overrides": {
+    "360678:x-org-bes": {
+      "version": "candidate-local-context-1",
+      "enclosing_headings": [
+        "III. Program Description",
+        "A. Purpose"
+      ],
+      "child_headings": [
+        "(a) Materials Chemistry",
+        "(b) Biomolecular Materials",
+        "(c) Synthesis and Processing Science",
+        "(d) Experimental Condensed Matter Physics"
+      ],
+      "local_text": "Basic Energy Sciences (BES) supports fundamental research to understand, predict, and ultimately control matter and energy at the electronic, atomic, and molecular levels.",
+      "char_start": null,
+      "char_end": null
+    },
+    "360678:qcs": {
+      "version": "candidate-local-context-1",
+      "enclosing_headings": [
+        "III. Program Description",
+        "A. Purpose",
+        "2. Basic Energy Sciences (BES)"
+      ],
+      "child_headings": [],
+      "local_text": "This program supports basic research pursuing novel catalyst design and molecular-level control of chemical transformations relevant to the conversion of energy resources. Emphasis is on the understanding of reaction mechanisms, enabling precise identification and manipulation of catalytic active sites, their environments, and reaction conditions for optimized efficiency and selectivity. Elucidation of catalytic reaction mechanisms in varied chemical environments and the structure-reactivity relationships of solid and molecular catalysts comprises a central component of the program.",
+      "char_start": null,
+      "char_end": null
+    }
+  },
+  "additional_subject_controls": {
+    "360678:nppp": {
+      "fundability": "reject",
+      "basis": "DEC11 identifies public-private partnerships as a participation mechanism, not a subject. The original unresolved MEAS3 truth label is preserved."
+    }
+  },
+  "acceptance": {
+    "genuine_children_lost": 0,
+    "contaminants_published": 0,
+    "cross_opportunity_fabrications_published": 0,
+    "bypass_classifier_calls": 0,
+    "required_bypasses": {
+      "native": 5,
+      "referenced": 14
+    },
+    "api_errors": {},
+    "execution_completion": 1,
+    "manual_source_review_required": true
+  }
+}

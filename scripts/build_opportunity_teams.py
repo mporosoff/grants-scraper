@@ -39,7 +39,7 @@ from scripts.currentness import parse_date, record_is_current
 from scripts.faculty_match import _load_catalog
 from scripts.researcher_registry import content_hash, load_registry, synchronize_opportunity_team_model
 from scripts.import_opportunity_team_model import write_outputs, update_version_target
-from tools.offline_ai import Deferred, ConfigurationFailure, Refusal, atomic_json, Ledger, config as ai_config
+from tools.offline_ai import Deferred, ConfigurationFailure, Refusal, SemanticFailure, atomic_json, Ledger, config as ai_config
 from tools.team_provider import routes, contract as provider_contract
 
 MODEL = routes()["decomposition"]["model"]
@@ -318,25 +318,31 @@ def validate_edges(value, roles, claims, allowed=None):
     role_ids = {role["id"] for role in roles}
     seen = set()
     per_role = {}
-    for edge in edges:
+    for index, edge in enumerate(edges):
         if not isinstance(edge, dict) or set(edge) != {"role_id", "claim_id", "coverage", "reason"}:
-            raise ValueError("invalid role edge")
+            raise SemanticFailure("invalid role edge", f'$.edges[{index}]')
         if not isinstance(edge.get("role_id"), str) or not isinstance(edge.get("claim_id"), str):
-            raise ValueError("invalid edge identity types")
+            raise SemanticFailure("invalid edge identity types", f'$.edges[{index}]')
         identity = (edge.get("role_id"), edge.get("claim_id"))
         if (identity in seen or identity[0] not in role_ids or identity[1] not in claims
                 or (allowed is not None and identity not in allowed)
                 or not isinstance(edge.get("coverage"), str)
                 or edge.get("coverage") not in {"direct", "method_transfer", "adjacent"}
                 or not isinstance(edge.get("reason"), str) or not 15 <= len(clean(edge["reason"])) <= 700):
-            raise ValueError("invalid or unsupported claim-to-role edge")
+            raise SemanticFailure("invalid or unsupported claim-to-role edge", f'$.edges[{index}]',
+                duplicate=identity in seen, supplied_role=identity[0] in role_ids,
+                supplied_claim=identity[1] in claims, supplied_edge=allowed is None or identity in allowed,
+                valid_coverage=isinstance(edge.get('coverage'), str) and edge['coverage'] in {'direct', 'method_transfer', 'adjacent'},
+                reason_type=type(edge.get('reason')).__name__,
+                reason_length=len(clean(edge['reason'])) if isinstance(edge.get('reason'), str) else None)
         per_role[identity[0]] = per_role.get(identity[0], 0) + 1
         if per_role[identity[0]] > 4:
-            raise ValueError("too many claims for one role")
+            raise SemanticFailure("too many claims for one role", f'$.edges[{index}]',
+                                  expected_maximum=4, actual_count=per_role[identity[0]])
         if isinstance(allowed, dict):
             strength = {"adjacent": 0, "method_transfer": 1, "direct": 2}
             if strength[edge["coverage"]] > strength[allowed[identity]]:
-                raise ValueError("verification cannot upgrade proposed coverage")
+                raise SemanticFailure("verification cannot upgrade proposed coverage", f'$.edges[{index}].coverage')
         seen.add(identity)
     return edges
 

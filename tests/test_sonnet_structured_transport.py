@@ -20,6 +20,72 @@ def sonnet_response(value, stop='end_turn'):
 
 
 class SonnetTransport(unittest.TestCase):
+    def test_scientific_identity_failure_has_safe_rule_diagnostics_without_format_retry(self):
+        from scripts import build_opportunity_teams as teams
+        from tools import team_provider
+        selected = team_provider.stage_contract('adjudication')
+        roles = [{'id': 'role-1'}]
+        claims = {'supplied': {}}
+        invalid = {'edges': [{'role_id': 'role-1', 'claim_id': 'not-supplied',
+                             'coverage': 'direct', 'reason': 'PRIVATE_SENTINEL valid-length reason.'}]}
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+            root = Path(tmp)
+            ledger = ai.Ledger(root / 'ledger.json', 'synthetic', 2)
+            with patch('requests.post', return_value=sonnet_response(invalid)) as post:
+                with self.assertRaises(ai.SemanticFailure):
+                    ai.Client(ledger, root / 'cache').json(selected['route'], 'adjudication', selected['prompt'],
+                        {'scope': 'Synthetic scope'}, selected['schema'],
+                        lambda value: teams.validate_edges(value, roles, claims), stage_config=selected['settings'])
+                self.assertEqual(post.call_count, 1)
+            row = ledger.read()['requests'][0]
+            diagnostic = row['diagnostics']
+            self.assertEqual(diagnostic['category'], 'semantic_validation_failure')
+            self.assertEqual(diagnostic['path'], '$.edges[0]')
+            self.assertFalse(diagnostic['supplied_claim'])
+            self.assertTrue(diagnostic['supplied_role'])
+            self.assertEqual(row['usage']['output_tokens'], 50)
+            self.assertGreater(row['charged_microusd'], 0)
+            self.assertNotIn('PRIVATE_SENTINEL', json.dumps(diagnostic))
+            self.assertNotIn('not-supplied', json.dumps(diagnostic))
+
+    def test_production_default_resumes_one_correction_without_changing_cache_identity(self):
+        from tools import team_provider
+        for corrected_valid in (True, False):
+            with self.subTest(corrected_valid=corrected_valid), tempfile.TemporaryDirectory() as tmp, \
+                    patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+                root = Path(tmp)
+                ledger = ai.Ledger(root / 'ledger.json', 'production', 2)
+                selected = team_provider.stage_contract('verification')
+                self.assertNotIn('durable_attempts', selected['settings'])
+                invalid = {'suitable_for_team': True, 'edges': [{}]}
+                corrected = {'suitable_for_team': True, 'edges': []} if corrected_valid else invalid
+                def invoke():
+                    return ai.Client(ledger, root / 'cache').json(selected['route'], 'verification',
+                        selected['prompt'], {'scope': 'Synthetic scope'}, selected['schema'], lambda value: value,
+                        stage_config=selected['settings'])
+                with patch('requests.post', side_effect=[sonnet_response(invalid), sonnet_response(corrected)]) as post:
+                    with patch.object(ai.time, 'sleep', side_effect=KeyboardInterrupt), self.assertRaises(KeyboardInterrupt):
+                        invoke()
+                    original = copy.deepcopy(ledger.read()['requests'][0])
+                    if corrected_valid:
+                        self.assertEqual(invoke(), corrected)
+                        self.assertEqual(invoke(), corrected)
+                    else:
+                        with self.assertRaises(ai.SchemaFailure):
+                            invoke()
+                        with self.assertRaises(ai.Deferred):
+                            invoke()
+                    self.assertEqual(post.call_count, 2)
+                    first, second = [call.kwargs['json'] for call in post.call_args_list]
+                    self.assertNotEqual(first, second)
+                    self.assertEqual(second['system'], first['system'] +
+                        '\nReturn a complete new decision conforming to the schema. Format diagnostic: ' +
+                        json.dumps(original['diagnostics'], sort_keys=True))
+                attempts = ledger.read()['requests']
+                self.assertEqual(attempts[0], original)
+                self.assertEqual([row['attempt'] for row in attempts], [1, 2])
+                self.assertEqual(attempts[0]['key'], attempts[1]['key'])
+
     def test_interrupted_preflight_reconstructs_exact_correction_and_accounts_once(self):
         from tools import evaluate_offline_ai as evaluation
         configuration = (ai.ROOT / 'config/offline_ai.json').read_bytes()
