@@ -1,5 +1,7 @@
 """Source-purpose contract, unchanged stage reuse, and replacement allowance."""
 import copy
+from contextlib import chdir, redirect_stdout
+import io
 import hashlib
 import json
 from pathlib import Path
@@ -65,6 +67,27 @@ class ScopeRepairContracts(unittest.TestCase):
         self.assertEqual(decide({'source':['document'],'teams':['prompt']},event='push',team_generation_ready=False),'generate')
         self.assertEqual(decide({},event='schedule',team_generation_ready=False),'generate')
         self.assertEqual(decide({'teams':['prompt']},event='workflow_dispatch',requested='teams',team_generation_ready=True),'teams')
+
+    def test_ordinary_entrypoint_accepts_legacy_string_attempts_without_dispatch(self):
+        from scripts import build_opportunity_teams as teams
+        scope={'id':'synthetic-old-scope','parent_id':'synthetic-parent','source_fingerprint':'source'}
+        model={'opportunities':[],'generation_attempts':{scope['id']:'legacy-fingerprint'}}
+        with tempfile.TemporaryDirectory() as directory, chdir(directory), redirect_stdout(io.StringIO()):
+            Path('config').mkdir()
+            atomic_json(Path('config/opportunity_team_model.json'),model)
+            with patch('sys.argv',['teams','--mode','replay','--report','report.json']), \
+                    patch.object(teams,'load_registry',return_value={'registry_generation':'fixture','researchers':[]}), \
+                    patch.object(teams,'eligible_claims',return_value={}), \
+                    patch.object(teams,'synchronize_opportunity_team_model',return_value=model), \
+                    patch.object(teams,'scopes',return_value=[scope]), \
+                    patch.object(teams,'source_fingerprints',return_value={scope['id']:'source'}), \
+                    patch('requests.post',side_effect=AssertionError('No provider in replay')) as post:
+                self.assertEqual(teams.main(),0)
+            report=json.loads(Path('report.json').read_bytes())
+            self.assertEqual(report['status'],'completed')
+            self.assertEqual(report['due_scopes'],0)
+            self.assertEqual(model['generation_attempts'][scope['id']],'legacy-fingerprint')
+            post.assert_not_called()
 
 
 class ReplacementAllowance(unittest.TestCase):

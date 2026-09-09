@@ -192,11 +192,18 @@ class ReleasePlanning(unittest.TestCase):
         old_key = teams.content_hash([legacy['pipeline_hash'], 'source', 'claims', None])
         model = {'opportunities': [], 'generation_attempts': {'supported': {'key': old_key, 'state': 'not_specific',
                  'response_contract': teams.RESPONSE_VERSION}}}
-        maintenance.migrate_legacy(model, [scope], 'claims', {'claim': 'revision1'})
-        attempt = model['generation_attempts']['supported']
-        self.assertEqual(attempt['legacy_provenance']['key'], old_key)
-        with patch('tools.team_provider.routes', return_value={'decomposition': {'model': 'different'}}):
-            self.assertEqual(attempt['key'], maintenance.decision_key(scope, attempt, {'unrelated': 'changed'}))
+        settings = copy.deepcopy(config())
+        # This fixture models a provider-only change with reviewed negative
+        # compatibility. A substantive research-purpose repair separately
+        # invalidates old scope rejections, as tested in test_team_scope_repair.
+        settings['team_decision_compatibility'].append({'active': maintenance.science_contract(),
+            'retained': legacy['science_contract']})
+        with patch.object(maintenance, 'config', return_value=settings):
+            maintenance.migrate_legacy(model, [scope], 'claims', {'claim': 'revision1'})
+            attempt = model['generation_attempts']['supported']
+            self.assertEqual(attempt['legacy_provenance']['key'], old_key)
+            with patch('tools.team_provider.routes', return_value={'decomposition': {'model': 'different'}}):
+                self.assertEqual(attempt['key'], maintenance.decision_key(scope, attempt, {'unrelated': 'changed'}))
         self.assertNotEqual(attempt['key'], maintenance.decision_key(scope | {'source_fingerprint': 'amended'}, attempt, {}))
 
     def test_unrelated_claim_revision_does_not_repeat_negative_assessment(self):

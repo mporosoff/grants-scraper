@@ -908,12 +908,16 @@ def main():
     recovery_results = maintenance.restore_proven_teams(model, candidates, registry)
     claim_updates = maintenance.reassemble_changed_claims(model, candidates, registry)
     attempts = model.setdefault("generation_attempts", {})
+    compatible_attempts = {}
     def attempt_key(scope, state=None):
         attempt = attempts.get(scope["id"])
         if state:
             attempt = (attempt if isinstance(attempt, dict) else {}) | {'state': state}
         retained_contract = attempt.get('decision_contract') if isinstance(attempt, dict) else None
-        compatible = maintenance.compatible_contracts((attempt or {}).get('state'))
+        attempt_state = attempt.get('state') if isinstance(attempt, dict) else None
+        if attempt_state not in compatible_attempts:
+            compatible_attempts[attempt_state] = maintenance.compatible_contracts(attempt_state)
+        compatible = compatible_attempts[attempt_state]
         scientific = retained_contract if not state and retained_contract in compatible else pipeline_hash
         return maintenance.decision_key(scope, attempt, current_snapshot['claims'], scientific)
     assembly_updates = refresh_assemblies(existing, candidates, claims, registry["registry_generation"])
