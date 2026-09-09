@@ -235,16 +235,23 @@ def evaluation_ledger(path):
     return restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], authorization)
 
 
+def production_preflight_configuration():
+    from tools.offline_ai import TRANSPORT_VERSION
+    settings = config()
+    return {'route': settings['routes']['sonnet'],
+            'stage': settings['stages']['preflight'] | {'max_attempts': 3, 'durable_attempts': True},
+            'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION}
+
+
 def production_preflight(state):
     """One bounded native Sonnet compatibility check under the retained allowance."""
     from tools.offline_spend import authorize_allowance
     from tools.offline_ai import TRANSPORT_VERSION
     protocol = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())
     ledger = authorize_allowance(state / 'ledger.json', TASK, protocol['authorization'])
-    settings = config()
-    stage = settings['stages']['preflight'] | {'max_attempts': 3, 'durable_attempts': True}
-    expected = identity({'route': settings['routes']['sonnet'], 'stage': stage,
-                         'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION})
+    configuration = production_preflight_configuration()
+    stage = configuration['stage']
+    expected = identity(configuration)
     marker = state / 'production-preflight-receipt.json'
     if marker.exists():
         receipt = json.loads(marker.read_bytes())
@@ -267,8 +274,8 @@ def production_preflight(state):
     receipt = {'contract': expected, 'complete': False, 'quality_gate_passed': False,
                'production_enabled': False, 'transport': TRANSPORT_VERSION}
     try:
-        result = client.json(settings['routes']['sonnet'], 'preflight',
-            'Return exactly the requested readiness object.', {'ready': True}, schemas()['preflight'],
+        result = client.json(configuration['route'], 'preflight',
+            'Return exactly the requested readiness object.', {'ready': True}, configuration['schema'],
             lambda value: value if value == {'ready': True} else valid_preflight_failure(), stage_config=stage)
         receipt.update(complete=True, result=result, status='native_structured_output_supported')
     except (ValueError, RuntimeError, requests.RequestException) as error:
@@ -307,11 +314,20 @@ def production_teams(state, population, *, replay=False):
     protocol, cases = production_team_cases(population)
     ledger = evaluation_ledger(state / 'ledger.json')
     preflight = json.loads((state / 'production-preflight-receipt.json').read_bytes())
-    if not preflight.get('complete') or preflight.get('transport') != ai.TRANSPORT_VERSION:
+    preflight_configuration = production_preflight_configuration()
+    if (not preflight.get('complete') or preflight.get('transport') != ai.TRANSPORT_VERSION
+            or preflight.get('contract') != identity(preflight_configuration)):
         raise ConfigurationFailure('Native production transport preflight required')
-    configuration = {'version': protocol['version'], 'stages': team_provider.contract(),
+    stages = team_provider.contract()
+    if any(stage['route'] != preflight_configuration['route'] for stage in stages.values()):
+        raise ConfigurationFailure('Team route differs from the qualified native preflight')
+    configuration = {'version': protocol['version'], 'protocol': protocol, 'stages': stages,
+        'preflight_contract': preflight['contract'],
+        'qualification': [function_hash(fn) for fn in (team_case, production_team_cases, production_teams, trial.metrics)],
         'transport': ai.TRANSPORT_VERSION, 'client': function_hash(ai.Client.json),
-        'validators': [function_hash(fn) for fn in (ai.validate_schema, teams.validate_response, teams.validate_roles, teams.validate_edges, teams.assemble)],
+        'request_response': [function_hash(fn) for fn in (ai.request_body, ai.response_value)],
+        'versions': [teams.VERSION, teams.RESPONSE_VERSION, teams.ASSEMBLY_VERSION],
+        'validators': [function_hash(fn) for fn in (ai.validate_schema, teams.clean, teams.validate_response, teams.validate_roles, teams.validate_edges, teams.assemble)],
         'population': {case['scope']['id']: identity(case) for case in cases}}
     expected = identity(configuration)
     destination = state / protocol['version'] / population

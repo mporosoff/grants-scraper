@@ -10,12 +10,83 @@ from unittest.mock import Mock, patch
 
 from scripts import build_opportunity_teams as teams, researcher_registry as registry
 from tools import evaluate_offline_ai as evaluation, team_provider, team_maintenance
-from tools.offline_ai import Client, Ledger
+from tools.offline_ai import Client, Ledger, ConfigurationFailure, identity, atomic_json
 from tests import test_build_opportunity_teams as fixtures
 from tests.test_sonnet_structured_transport import sonnet_response
 
 
 class ProductionTeamQualification(unittest.TestCase):
+    def test_changed_preflight_inputs_stop_before_team_dispatch(self):
+        original_settings = evaluation.config()
+        original_schemas = evaluation.schemas()
+        for changed in ('route', 'settings', 'schema', 'team_route'):
+            with self.subTest(changed=changed), tempfile.TemporaryDirectory() as tmp:
+                state = Path(tmp)
+                ledger = Ledger(state / 'ledger.json', 'synthetic', 2)
+                atomic_json(state / 'production-preflight-receipt.json', {
+                    'complete': True, 'transport': evaluation.production_preflight_configuration()['transport'],
+                    'contract': identity(evaluation.production_preflight_configuration())})
+                settings, contracts = copy.deepcopy(original_settings), copy.deepcopy(original_schemas)
+                stages = team_provider.contract()
+                if changed == 'route':
+                    settings['routes']['sonnet']['model'] += '-changed'
+                elif changed == 'settings':
+                    settings['stages']['preflight']['max_output_tokens'] += 1
+                elif changed == 'schema':
+                    contracts['preflight']['properties']['ready']['description'] = 'Changed contract'
+                else:
+                    stages['verification']['route'] = stages['verification']['route'] | {'model': 'different-model'}
+                before = ledger.read()
+                with patch.object(evaluation, 'evaluation_ledger', return_value=ledger), \
+                        patch.object(evaluation, 'config', return_value=settings), \
+                        patch.object(evaluation, 'schemas', return_value=contracts), \
+                        patch.object(team_provider, 'contract', return_value=stages), \
+                        patch('requests.post', side_effect=AssertionError('No dispatch before compatible preflight')) as post:
+                    with self.assertRaises(ConfigurationFailure):
+                        evaluation.production_teams(state, 'regression')
+                self.assertEqual(ledger.read(), before)
+                post.assert_not_called()
+
+    def test_retained_qualification_rejects_changed_protocol_and_adapter(self):
+        class NoProviderClient:
+            def json(self, route, stage, prompt, data, schema, validate, **kwargs):
+                return validate({'specific': False, 'objective': 'Synthetic negative control.', 'roles': []})
+        original_read, original_hash = Path.read_bytes, evaluation.function_hash
+        with tempfile.TemporaryDirectory() as tmp, patch('requests.post', side_effect=AssertionError('No provider calls')):
+            state = Path(tmp)
+            ledger = Ledger(state / 'ledger.json', 'synthetic', 2)
+            atomic_json(state / 'production-preflight-receipt.json', {
+                'complete': True, 'transport': evaluation.production_preflight_configuration()['transport'],
+                'contract': identity(evaluation.production_preflight_configuration())})
+            with patch.object(evaluation, 'evaluation_ledger', return_value=ledger), \
+                    patch.object(evaluation, 'Client', return_value=NoProviderClient()):
+                first = evaluation.production_teams(state, 'regression')
+                retained = {path: path.read_bytes() for path in (state / 'sonnet-production-teams-1').rglob('*.json')}
+                self.assertTrue(first['execution_complete'])
+                self.assertFalse(first['quality_gate_passed'])
+                self.assertEqual(evaluation.production_teams(state, 'regression'), first)
+                for change in ('threshold', 'source_checks', 'rule', 'adapter'):
+                    def changed_read(path):
+                        value = original_read(path)
+                        if path.name == 'sonnet_production_teams.json' and change != 'adapter':
+                            protocol = json.loads(value)
+                            if change == 'threshold':
+                                protocol['acceptance']['scope_decision_accuracy_min'] = .1
+                            else:
+                                protocol[change] = 'Materially changed qualification requirement'
+                            return json.dumps(protocol).encode()
+                        return value
+                    def changed_hash(function):
+                        if change == 'adapter' and function is evaluation.team_case:
+                            return 'changed-adapter-identity'
+                        return original_hash(function)
+                    with self.subTest(change=change), patch.object(Path, 'read_bytes', changed_read), \
+                            patch.object(evaluation, 'function_hash', side_effect=changed_hash):
+                        with self.assertRaisesRegex(ValueError, 'contract changed'):
+                            evaluation.production_teams(state, 'regression')
+                    self.assertEqual({path: path.read_bytes() for path in retained}, retained)
+                self.assertEqual(ledger.read()['requests'], [])
+
     def test_qualification_transmits_the_exact_production_stage_requests(self):
         fixtures.ProposedTeamTests.setUp(self)
         self.scope['source_fingerprint'] = 'exact-source'
