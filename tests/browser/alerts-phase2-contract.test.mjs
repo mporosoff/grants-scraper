@@ -241,6 +241,29 @@ test("catalog reactivation is not a new Strong match but an explicit status watc
   assert.equal(opening.result.matchedEventCount, 1);
 });
 
+test("a restoration cursor page cannot consume its same-generation amendment or deadline change", async () => {
+  const record = { opportunity_id: "347749", title: "Division of Chemistry", status: "posted" };
+  for (const type of ["amended", "deadline_changed"]) {
+    const restoration = { ...newAlertSourceEvent(record, "a-restoration"), type: "status_changed",
+      old_status: "archived", new_status: "posted", detail: "archived → posted" };
+    const substantive = { ...newAlertSourceEvent(record, "z-substantive"), type, detail: "Actual notice change" };
+    const options = { records: [record], changes: [restoration, substantive], changeLimit: 1 };
+    const first = await evaluateAlertFixture(options);
+    assert.equal(first.result.matchedEventCount, 0);
+    assert.equal(first.database.prepare("SELECT COUNT(*) n FROM subscription_qualifications").get().n, 0);
+    const second = await evaluateAlertFixture({ ...options, database: first.database });
+    assert.equal(second.result.matchedEventCount, 1);
+    assert.match(second.database.prepare("SELECT payload_json FROM notification_events").get().payload_json, /Actual notice change/);
+    const again = await evaluateAlertFixture({ ...options, database: first.database });
+    assert.equal(again.result.matchedEventCount, 0);
+  }
+  const correction = { ...newAlertSourceEvent(record, "z-correction"), type: "source_correction" };
+  const restoration = { ...newAlertSourceEvent(record, "a-restoration"), type: "status_changed", old_status: "archived", new_status: "posted" };
+  const quiet = await evaluateAlertFixture({ records: [record], changes: [restoration, correction], changeLimit: 1 });
+  assert.equal(quiet.result.matchedEventCount, 0);
+  assert.equal(quiet.database.prepare("SELECT qualified FROM subscription_qualifications").get().qualified, 1);
+});
+
 function overlappingImmediateEvents() {
   const database = databaseThrough();
   insertSubscriber(database);

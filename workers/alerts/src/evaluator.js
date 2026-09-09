@@ -284,7 +284,9 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
     const qualifies = Boolean(matchingId);
     const didQualify = ids.some(value => prior.get(value) === true);
     const events = changes.filter(event => identities.resolve(event.opportunity_id) === id);
-    const sourceEvent = events.find(event => !identities.isSourceAddition(event) && !isSavedSearchRestoration(event));
+    const isNotifiable = event => CHANGE_KINDS.has(event.type)
+      && !identities.isSourceAddition(event) && !isSavedSearchRestoration(event);
+    const sourceEvent = events.find(isNotifiable);
     if (qualifies && !didQualify && sourceEvent) {
       const record = identities.record(id) || sourceEvent.record;
       const inserted = await enqueue(store, subscription, {
@@ -295,12 +297,12 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
       }, now, evaluationContext);
       if (inserted) matched += 1;
     }
-    // If two genuinely new source records share a solicitation, let the
-    // canonical new event establish qualification when its cursor page arrives.
-    const awaitingCanonicalNew = !sourceEvent && events.every(event => identities.isSourceAddition(event))
-      && assets.changes.events.some(event => event.type === "new" && String(event.opportunity_id) === id
-        && events.some(alias => alias.changed_at === event.changed_at));
-    for (const member of awaitingCanonicalNew ? [] : ids) {
+    // A source addition or restoration must not consume a same-generation
+    // substantive change that arrives on another cursor page.
+    const awaitingSubstantiveChange = !sourceEvent && assets.changes.events.some(event =>
+      identities.resolve(event.opportunity_id) === id && isNotifiable(event)
+      && events.some(skipped => skipped.changed_at === event.changed_at));
+    for (const member of awaitingSubstantiveChange ? [] : ids) {
       if (qualifies === prior.get(member)) continue;
       await store.setQualification(subscription.id, member, qualifies, now.toISOString(), {
         verificationTokenHash: subscription.verification_token_hash,
