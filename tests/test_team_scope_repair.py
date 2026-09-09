@@ -27,8 +27,11 @@ class ScopeRepairContracts(unittest.TestCase):
             self.assertEqual(active[field], original[field])
         for population in ('regression', 'population', 'exposed', 'confirmation'):
             self.assertEqual(active['case_hashes'][population], original['case_hashes'][population])
-        for field in ('usd', 'requests', 'reserved_pilot_usd', 'reserved_pilot_requests'):
+        for field in ('usd', 'reserved_pilot_usd', 'reserved_pilot_requests'):
             self.assertEqual(active['qualification_budget'][field], original['qualification_budget'][field])
+        self.assertEqual(active['qualification_budget']['requests'],
+                         original['qualification_budget']['requests'] + active['request_extension']['new_requests'])
+        self.assertEqual(active['request_extension']['new_usd'], 0)
         self.assertEqual(active['qualification_budget']['ledger_id'], original['version'])
         self.assertIn('concise source-declared heading', team_provider.stage_prompt('decomposition'))
         self.assertEqual(team_provider.stage_prompt('adjudication'), original['final_prompts']['adjudication'])
@@ -180,6 +183,95 @@ class ScopeRepairContracts(unittest.TestCase):
 
 
 class ReplacementAllowance(unittest.TestCase):
+    def test_request_extension_resumes_both_ledgers_without_new_dollars_or_lost_history(self):
+        from tools.offline_spend import LinkedLedger
+        with tempfile.TemporaryDirectory() as directory, \
+                patch('requests.post', side_effect=AssertionError('No provider in authorization')) as post:
+            root = Path(directory)
+            parent = Ledger(root / 'ledger.json', evaluation.TASK, 4, 20)
+            child = Ledger(root / 'qualification' / 'ledger.json', 'qualification', 2, 15)
+            linked = LinkedLedger(child, parent)
+            completed = linked.reserve('anthropic', 'claude-sonnet-5', 'decomposition', 'completed', 300000, 1)
+            linked.complete(completed, status='valid', charged_microusd=100000)
+            linked.reserve('anthropic', 'claude-sonnet-5', 'verification', 'uncertain', 300000, 1)
+            linked.block('anthropic', 'account-denial-is-preserved')
+            parent = authorize_allowance(parent.path, evaluation.TASK, {
+                'id': 'old', 'additional_requests': 18, 'additional_usd': 3.6,
+                'cumulative_usd': 4, 'providers': ['anthropic']})
+            before = {ledger.path: ledger.path.read_bytes() for ledger in (parent, child)}
+            def extension(ledger, name):
+                prior = ledger.read()
+                return {'id': name, 'additional_requests': prior['max_requests'] - len(prior['requests']) + 5,
+                    'additional_usd': (prior['limit_microusd'] - sum(r['charged_microusd'] for r in prior['requests'])) / 1e6,
+                    'cumulative_usd': prior['limit_microusd'] / 1e6, 'providers': ['anthropic'],
+                    'replacement_checkpoint': {'run_id': 'fixture', 'ledger_identity': identity(prior),
+                        'ledger_sha256': hashlib.sha256(before[ledger.path]).hexdigest()}}
+            parent_auth, child_auth = extension(parent, 'extension'), extension(child, 'qualification-extension')
+            child_auth['parent_authorization_id'] = parent_auth['id']
+            protocol = {'version': 'qualification', 'qualification_budget': {
+                'usd': 2, 'requests': 20, 'authorization': child_auth}}
+            configuration = {'authorization': parent_auth, 'team_protocol': 'fixture-protocol.json'}
+            original_read, original_atomic = Path.read_bytes, evaluation.atomic_json
+            def configured(path):
+                if path.as_posix() == 'config/sonnet_production_qualification.json':
+                    return json.dumps(configuration).encode()
+                if path.as_posix() == configuration['team_protocol']:
+                    return json.dumps(protocol).encode()
+                return original_read(path)
+            def interrupted(path, value):
+                if Path(path) == child.path:
+                    raise KeyboardInterrupt()
+                original_atomic(path, value)
+            with patch.object(Path, 'read_bytes', configured):
+                with patch.object(evaluation, 'atomic_json', side_effect=interrupted):
+                    with self.assertRaises(KeyboardInterrupt):
+                        evaluation.replacement_authorization(root)
+                committed_parent = parent.path.read_bytes()
+                self.assertNotEqual(committed_parent, before[parent.path])
+                self.assertEqual(child.path.read_bytes(), before[child.path])
+                evaluation.replacement_authorization(root)
+                self.assertEqual(parent.path.read_bytes(), committed_parent)
+                after = {path: path.read_bytes() for path in before}
+                for path, old_bytes in before.items():
+                    old, new = json.loads(old_bytes), json.loads(after[path])
+                    self.assertEqual(new['requests'], old['requests'])
+                    self.assertEqual(new['blocked_providers'], old['blocked_providers'])
+                    self.assertEqual(new['events'][:len(old['events'])], old['events'])
+                    self.assertEqual(new['limit_microusd'], old['limit_microusd'])
+                    self.assertEqual(new['max_requests'], old['max_requests'] + 5)
+                    self.assertEqual(sum(e.get('kind') == 'task_allowance' and
+                        e['authorization']['id'] == new['active_allowance']['id'] for e in new['events']), 1)
+                evaluation.replacement_authorization(root)
+                self.assertEqual({path: path.read_bytes() for path in before}, after)
+                self.assertEqual(evaluation.evaluation_ledger(parent.path).max_requests, 25)
+            post.assert_not_called()
+
+    def test_qualification_requires_its_retained_grant_before_dispatch(self):
+        protocol, cases = evaluation.production_team_cases('focus')
+        authorization = protocol['qualification_budget']['authorization']
+        for missing_state in ('absent', 'old_cap', 'ungranted_new_cap', 'missing_grant_event'):
+            with self.subTest(missing_state=missing_state), tempfile.TemporaryDirectory() as directory, \
+                    patch('requests.post', side_effect=AssertionError('No provider calls')) as post:
+                state = Path(directory)
+                parent = Ledger(state / 'ledger.json', 'fixture', 4, 30)
+                atomic_json(state / 'production-preflight-receipt.json', {
+                    'complete': True, 'transport': evaluation.production_preflight_configuration()['transport'],
+                    'contract': identity(evaluation.production_preflight_configuration())})
+                budget = protocol['qualification_budget']
+                child_path = state / budget['ledger_id'] / 'ledger.json'
+                if missing_state != 'absent':
+                    child = Ledger(child_path, budget['ledger_id'], budget['usd'],
+                        budget['requests'] - 5 if missing_state == 'old_cap' else budget['requests'])
+                    if missing_state == 'missing_grant_event':
+                        atomic_json(child_path, child.read() | {'active_allowance': authorization})
+                before = {path: path.read_bytes() for path in state.rglob('*.json')}
+                with patch.object(evaluation, 'evaluation_ledger', return_value=parent), \
+                        patch.object(evaluation, 'Client', side_effect=AssertionError('No client before reservation restoration')):
+                    with self.assertRaises((ConfigurationFailure, ValueError)):
+                        evaluation.production_teams(state, 'focus')
+                self.assertEqual({path: path.read_bytes() for path in state.rglob('*.json')}, before)
+                post.assert_not_called()
+
     def exercise(self, *, fail_commit=False, changed_checkpoint=False):
         with tempfile.TemporaryDirectory() as directory:
             root=Path(directory); path=root/'ledger.json'

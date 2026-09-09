@@ -52,6 +52,11 @@ class ProductionTeamQualification(unittest.TestCase):
             def json(self, route, stage, prompt, data, schema, validate, **kwargs):
                 return validate({'specific': False, 'objective': 'Synthetic negative control.', 'roles': []})
         original_read, original_hash = Path.read_bytes, evaluation.function_hash
+        original_cases = evaluation.production_team_cases
+        def synthetic_cases(population):
+            protocol, cases = original_cases(population)
+            protocol['qualification_budget'].pop('authorization', None)
+            return protocol, cases
         with tempfile.TemporaryDirectory() as tmp, patch('requests.post', side_effect=AssertionError('No provider calls')):
             state = Path(tmp)
             ledger = Ledger(state / 'ledger.json', 'synthetic', 2)
@@ -59,6 +64,7 @@ class ProductionTeamQualification(unittest.TestCase):
                 'complete': True, 'transport': evaluation.production_preflight_configuration()['transport'],
                 'contract': identity(evaluation.production_preflight_configuration())})
             with patch.object(evaluation, 'evaluation_ledger', return_value=ledger), \
+                    patch.object(evaluation, 'production_team_cases', new=synthetic_cases), \
                     patch.object(evaluation, 'Client', return_value=NoProviderClient()):
                 first = evaluation.production_teams(state, 'regression')
                 version = evaluation.production_team_cases('regression')[0]['version']

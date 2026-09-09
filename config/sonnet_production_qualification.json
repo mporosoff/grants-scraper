@@ -1,18 +1,20 @@
 {
   "authorization": {
-    "id": "sonnet-team-scope-repair-20260909",
-    "additional_requests": 150,
-    "additional_usd": 10,
+    "id": "sonnet-team-scope-request-extension-20260909",
+    "additional_requests": 138,
+    "additional_usd": 7.669478,
     "cumulative_usd": 18.410234,
     "providers": [
       "anthropic"
     ],
     "replacement_checkpoint": {
-      "run_id": "34363866498",
-      "ledger_sha256": "950d2b3f624598e141d9974888a59ecf82401b7f3a48767fd60cdac710ebe626",
-      "ledger_identity": "2cfa6aaae462b248055f748f7e7ce7860881d9524f5f773979435e5a71d38f09"
+      "run_id": "34393056404",
+      "ledger_sha256": "1af64c47bc9e86d083c927a34853399ab3341d813c2807c0e2fd7ec313394a8d",
+      "ledger_identity": "103e1f2d7fc6915501818511619fe5263eeb3f269a5e5f5454a17ac07439acbe"
     },
-    "scope": "One replacement allowance measured from the immutable starting ledger; includes the old remainder, qualification, retries and linked five-scope/$2 pilot. No OpenAI/Luna calls or recurring-budget increase."
+    "new_requests_authorized": 50,
+    "new_usd_authorized": 0,
+    "scope": "Request-only extension explicitly approved in the current task. The replacement includes the prior unspent request and dollar balances; no monetary ceiling, recurring limit, historical request, uncertain charge or provider stop changes."
   },
   "historical_evaluation_run": "34300832276",
   "automatic_generation": "enabled",
@@ -34,6 +36,21 @@
         "anthropic"
       ],
       "scope": "Qualify and restore team generation and Cov4, including preflights, retries and linked production pilots. Production per-run limits remain unchanged."
+    },
+    {
+      "id": "sonnet-team-scope-repair-20260909",
+      "additional_requests": 150,
+      "additional_usd": 10,
+      "cumulative_usd": 18.410234,
+      "providers": [
+        "anthropic"
+      ],
+      "replacement_checkpoint": {
+        "run_id": "34363866498",
+        "ledger_sha256": "950d2b3f624598e141d9974888a59ecf82401b7f3a48767fd60cdac710ebe626",
+        "ledger_identity": "2cfa6aaae462b248055f748f7e7ce7860881d9524f5f773979435e5a71d38f09"
+      },
+      "scope": "One replacement allowance measured from the immutable starting ledger; includes the old remainder, qualification, retries and linked five-scope/$2 pilot. No OpenAI/Luna calls or recurring-budget increase."
     }
   ]
 }
