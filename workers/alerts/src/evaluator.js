@@ -2,6 +2,7 @@ import "../../../assets/award-links.js";
 import "../../../assets/submission-schedule.js";
 
 import { recordId } from "./contract.js";
+import { alertRecordIdentity, isSavedSearchRestoration } from "./event-identity.js";
 import {
   capabilityUrls, randomToken, sha256Hex, verificationToken as createVerificationToken,
 } from "./crypto.js";
@@ -269,29 +270,39 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
   const definition = JSON.parse(subscription.definition_json);
   if (!changes.length) return 0;
   const asOf = isoDate(evaluationContext.evaluationAsOf || now);
-  const changedIds = [...new Set(changes.map(event => String(event.opportunity_id || "")).filter(Boolean))];
+  const identities = evaluationContext.identities;
+  const changedIds = [...new Set(changes.map(event => identities.resolve(event.opportunity_id)).filter(Boolean))];
+  const matchingIds = [...new Set(changedIds.flatMap(id => identities.ids(id)))];
   const matchDetails = typeof assets.matcher.matchDetails === "function"
-    ? assets.matcher.matchDetails(definition, asOf, changedIds)
-    : new Map([...assets.matcher.matchIds(definition, asOf, changedIds)].map(id => [id, { reasons: [] }]));
-  const prior = await store.qualifications(subscription.id, changedIds);
-  const currentById = new Map(assets.catalog.opportunities.map(record => [recordId(record), record]));
+    ? assets.matcher.matchDetails(definition, asOf, matchingIds)
+    : new Map([...assets.matcher.matchIds(definition, asOf, matchingIds)].map(id => [id, { reasons: [] }]));
+  const prior = await store.qualifications(subscription.id, matchingIds);
   let matched = 0;
   for (const id of changedIds) {
-    const qualifies = matchDetails.has(id);
-    const didQualify = prior.get(id) === true;
-    if (qualifies && !didQualify) {
-      const sourceEvent = changes.find(event => String(event.opportunity_id) === id);
-      const record = currentById.get(id) || sourceEvent?.record;
+    const ids = identities.ids(id);
+    const matchingId = ids.find(value => matchDetails.has(value));
+    const qualifies = Boolean(matchingId);
+    const didQualify = ids.some(value => prior.get(value) === true);
+    const events = changes.filter(event => identities.resolve(event.opportunity_id) === id);
+    const sourceEvent = events.find(event => !identities.isSourceAddition(event) && !isSavedSearchRestoration(event));
+    if (qualifies && !didQualify && sourceEvent) {
+      const record = identities.record(id) || sourceEvent.record;
       const inserted = await enqueue(store, subscription, {
         eventKey: `strong:${id}:${sourceEvent?.id || assets.changes.generated_at}`,
         eventKind: "strong_match",
         opportunityId: id,
-        payload: payloadFor(record, sourceEvent?.detail || "", env, matchDetails.get(id)?.reasons, asOf),
+        payload: payloadFor(record, sourceEvent.detail || "", env, matchDetails.get(matchingId)?.reasons, asOf),
       }, now, evaluationContext);
       if (inserted) matched += 1;
     }
-    if (qualifies !== didQualify || !prior.has(id)) {
-      await store.setQualification(subscription.id, id, qualifies, now.toISOString(), {
+    // If two genuinely new source records share a solicitation, let the
+    // canonical new event establish qualification when its cursor page arrives.
+    const awaitingCanonicalNew = !sourceEvent && events.every(event => identities.isSourceAddition(event))
+      && assets.changes.events.some(event => event.type === "new" && String(event.opportunity_id) === id
+        && events.some(alias => alias.changed_at === event.changed_at));
+    for (const member of awaitingCanonicalNew ? [] : ids) {
+      if (qualifies === prior.get(member)) continue;
+      await store.setQualification(subscription.id, member, qualifies, now.toISOString(), {
         verificationTokenHash: subscription.verification_token_hash,
         baselineAt: subscription.baseline_at,
         claim: evaluationContext.schedulerClaim || null,
@@ -305,6 +316,7 @@ async function evaluateProgram(store, subscription, assets, env, now, changes, e
   const definition = JSON.parse(subscription.definition_json);
   let matched = 0;
   for (const event of changes) {
+    if (evaluationContext.identities.isSourceAddition(event)) continue;
     if (!LINKS_API.matchesProgramIdentity(definition.program_id, event.record)) continue;
     const eventKind = {
       new: "program_new_cycle",
@@ -357,9 +369,10 @@ export async function evaluateSubscriptions({
       evaluationWindowStartedAt, weeklyWindowAt,
     ),
   }));
+  const identities = alertRecordIdentity(assets.catalog?.opportunities);
   const matcherCandidates = [...new Set(batches.flatMap(batch => (
     batch.subscription.type === "saved_search"
-      ? batch.events.map(event => String(event.opportunity_id || "")).filter(Boolean)
+      ? batch.events.flatMap(event => identities.ids(event.opportunity_id)).filter(Boolean)
       : []
   )))];
   if (matcherCandidates.length && typeof assets.matcher?.prepare === "function") {
@@ -371,6 +384,7 @@ export async function evaluateSubscriptions({
     ? new Date(evaluationWindowStartedAt)
     : now;
   const evaluationContext = {
+    identities,
     evaluationWindowStartedAt, weeklyWindowAt,
     evaluationInputGeneratedAt: generatedAt,
     evaluationSourceGeneratedAt: sourceGeneratedAt,

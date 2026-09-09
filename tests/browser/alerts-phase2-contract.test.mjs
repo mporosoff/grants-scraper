@@ -22,6 +22,7 @@ import {
 } from "../../workers/alerts/src/strong-match.js";
 
 const root = new URL("../../", import.meta.url);
+import { alertRecordIdentity } from "../../workers/alerts/src/event-identity.js";
 const migrationNames = [
   "0001_phase3_alerts.sql", "0002_delivery_claim_lease.sql", "0003_phase2_alert_lifecycle.sql",
   "0004_phase4_alert_operations.sql", "0005_scheduler_progress.sql", "0006_scheduler_fencing.sql",
@@ -153,6 +154,164 @@ function insertEvent(database, {
 }
 
 function all(database, sql, ...values) { return database.prepare(sql).all(...values); }
+
+function nsfAlertFixtures() {
+  const original = { opportunity_id: "351715", opportunity_number: "PD-24-110Z", source: "Grants.gov",
+    agency: "U.S. National Science Foundation", agency_code: "NSF", title: "ECLIPSE", status: "posted" };
+  const url = "https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering/pd24-110z";
+  const alias = { ...original, opportunity_id: `nsf-funding:${url}`, source: "National Science Foundation",
+    agency: "National Science Foundation", agency_code: null, agency_authority: "source_default", detail_page: url };
+  return { original, alias };
+}
+
+async function evaluateAlertFixture({ records, changes, type = "saved_search", definition = { query: "plasma" },
+  qualificationIds = [], changeLimit = 25, database = null } = {}) {
+  database ||= databaseThrough();
+  if (!database.prepare("SELECT id FROM subscribers LIMIT 1").get()) {
+    insertSubscriber(database);
+    insertSubscription(database, { active: 1, cadence: "immediate", type, definition });
+    for (const id of qualificationIds) database.prepare(
+      "INSERT INTO subscription_qualifications(subscription_id,opportunity_id,qualified,updated_at) VALUES('watch-1',?,1,?)",
+    ).run(id, fixedNow.toISOString());
+  }
+  const store = new D1AlertStore(new SqliteD1(database));
+  const assets = { catalog: { opportunities: records }, changes: { generated_at: fixedNow.toISOString(), events: changes },
+    matcher: { prepare() {}, matchDetails: (_definition, _asOf, ids) => new Map(ids.filter(id => records.some(r => r.opportunity_id === id))
+      .map(id => [id, { reasons: ["Direct plasma research evidence"] }])) } };
+  const result = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit });
+  return { database, store, result };
+}
+
+function newAlertSourceEvent(record, id = "new-source") {
+  return { id, type: "new", opportunity_id: record.opportunity_id, record,
+    changed_at: "2026-08-28T13:00:00.000Z", detail: "First appeared in the public catalog" };
+}
+
+test("an official NSF source addition cannot announce the existing Grants.gov call as first appearance", async () => {
+  const { original, alias } = nsfAlertFixtures();
+  const { database, result } = await evaluateAlertFixture({ records: [original, alias], changes: [newAlertSourceEvent(alias)] });
+  assert.equal(result.matchedEventCount, 0);
+  assert.equal(database.prepare("SELECT COUNT(*) n FROM notification_events").get().n, 0);
+  assert.equal(database.prepare("SELECT qualified FROM subscription_qualifications WHERE opportunity_id=?").get(original.opportunity_id).qualified, 1);
+});
+
+test("a genuinely new solicitation sends once even if its alias arrives on an earlier cursor page", async () => {
+  const { original, alias } = nsfAlertFixtures();
+  const options = { records: [original, alias], changes: [newAlertSourceEvent(alias, "a-alias"), newAlertSourceEvent(original, "z-original")], changeLimit: 1 };
+  const first = await evaluateAlertFixture(options);
+  assert.equal(first.result.matchedEventCount, 0);
+  assert.equal(first.result.continuationRequired, true);
+  const second = await evaluateAlertFixture({ ...options, database: first.database });
+  assert.equal(second.result.matchedEventCount, 1);
+  assert.equal(second.database.prepare("SELECT opportunity_id FROM notification_events").get().opportunity_id, original.opportunity_id);
+});
+
+test("NSF identity requires complete matching numbers and authoritative nonconflicting sponsor evidence", async () => {
+  const { original, alias } = nsfAlertFixtures();
+  assert.equal(alertRecordIdentity([original, alias]).resolve(alias.opportunity_id), original.opportunity_id);
+  for (const changed of [
+    { ...alias, agency: "NASA", agency_code: "NASA" }, { ...alias, opportunity_number: "PD-24-8084" },
+    { ...alias, opportunity_id: "aggregator:plasma" }, { ...alias, agency_code: "NASA" },
+    { ...alias, detail_page: "https://unrelated.example.org/plasma" },
+    { ...alias, parent_opportunity_id: original.opportunity_id, record_type: "subtopic" },
+  ]) {
+    const { result } = await evaluateAlertFixture({ records: [original, changed], changes: [newAlertSourceEvent(changed)] });
+    assert.equal(result.matchedEventCount, 1, JSON.stringify(changed));
+  }
+});
+
+test("retained canonical aliases preserve a subscriber's earlier qualification", async () => {
+  const { original } = nsfAlertFixtures();
+  original.source_aliases = [{ opportunity_id: "retired-source-id" }];
+  const { result } = await evaluateAlertFixture({ records: [original], changes: [newAlertSourceEvent(original)], qualificationIds: ["retired-source-id"] });
+  assert.equal(result.matchedEventCount, 0);
+});
+
+test("catalog reactivation is not a new Strong match but an explicit status watch still receives it", async () => {
+  const original = { opportunity_id: "347749", title: "Division of Chemistry", status: "posted" };
+  const event = { ...newAlertSourceEvent(original), type: "status_changed", old_status: "archived", new_status: "posted", detail: "archived → posted" };
+  const search = await evaluateAlertFixture({ records: [original], changes: [event] });
+  assert.equal(search.result.matchedEventCount, 0);
+  assert.equal(search.database.prepare("SELECT qualified FROM subscription_qualifications").get().qualified, 1);
+  const watch = await evaluateAlertFixture({ records: [original], changes: [event], type: "opportunity",
+    definition: { opportunity_id: original.opportunity_id, triggers: ["status_changed"] } });
+  assert.equal(watch.result.matchedEventCount, 1);
+  assert.equal(watch.database.prepare("SELECT event_kind FROM notification_events").get().event_kind, "status_changed");
+  const opening = await evaluateAlertFixture({ records: [original], changes: [{ ...event, old_status: "forecasted" }] });
+  assert.equal(opening.result.matchedEventCount, 1);
+});
+
+function overlappingImmediateEvents() {
+  const database = databaseThrough();
+  insertSubscriber(database);
+  insertSubscription(database, { active: 1, cadence: "immediate" });
+  insertSubscription(database, { id: "watch-2", active: 1, cadence: "immediate", definitionHash: "other-query", definition: { query: "plasma" } });
+  insertEvent(database, { id: "event-one", kind: "strong_match" });
+  insertEvent(database, { id: "event-two", kind: "strong_match", subscriptionId: "watch-2" });
+  database.prepare("UPDATE notification_events SET event_key='strong:351715:one-change'").run();
+  return { database, store: new D1AlertStore(new SqliteD1(database)) };
+}
+
+test("overlapping immediate searches send one email and retain a suppression receipt per duplicate", async () => {
+  const { database, store } = overlappingImmediateEvents();
+  const provider = new ScriptedProvider();
+  const result = await dispatchNotifications({ store, provider, env, now: fixedNow });
+  assert.equal(result.deliveredCount, 1);
+  assert.equal(provider.messages.length, 1);
+  assert.deepEqual(all(database, "SELECT status,error_code FROM notification_events ORDER BY id").map(r => [r.status,r.error_code]),
+    [["sent",null],["suppressed","duplicate_recipient_event"]]);
+  insertSubscription(database, { id: "watch-3", active: 1, cadence: "immediate", definitionHash: "third-query" });
+  insertEvent(database, { id: "event-three", kind: "strong_match", subscriptionId: "watch-3" });
+  database.prepare("UPDATE notification_events SET event_key='strong:351715:one-change' WHERE id='event-three'").run();
+  await dispatchNotifications({ store, provider, env, now: fixedNow });
+  assert.equal(provider.messages.length, 1);
+});
+
+test("overlapping delivery claims serialize and reconcile with the original frozen provider message", async () => {
+  const { database, store } = overlappingImmediateEvents();
+  const [one, two] = await Promise.all([
+    store.claimEvents(["event-one"], fixedNow.toISOString()), store.claimEvents(["event-two"], fixedNow.toISOString()),
+  ]);
+  assert.equal(one.length + two.length, 1);
+  await store.releaseClaimedEvents([...one,...two], fixedNow.toISOString());
+  const provider = new ScriptedProvider([{ code: "provider_network_failure", providerFailureKind: "network", retryable: true }]);
+  const first = await dispatchNotifications({ store, provider, env, now: fixedNow });
+  assert.equal(first.attemptedCount, 1);
+  const unknown = database.prepare("SELECT provider_quota_key,provider_payload_json FROM notification_events WHERE error_code='provider_outcome_reconcile'").get();
+  assert.ok(unknown);
+  await dispatchNotifications({ store, provider, env, now: new Date(fixedNow.getTime()+60*60*1000) });
+  assert.equal(provider.messages.length, 1);
+  assert.equal(provider.attempts[1].idempotencyKey, unknown.provider_quota_key);
+  assert.deepEqual(provider.attempts[1].message, JSON.parse(unknown.provider_payload_json));
+  assert.equal(database.prepare("SELECT COUNT(*) n FROM notification_events WHERE status='sent'").get().n, 1);
+});
+
+test("deduplication does not combine recipients or cancel another independently active subscription", async () => {
+  const { database, store } = overlappingImmediateEvents();
+  await store.unsubscribeForSubscriber("person-1", "watch-1", fixedNow.toISOString());
+  insertSubscriber(database, { id: "person-2", email: "another@example.edu", manageToken: "n".repeat(43) });
+  insertSubscription(database, { id: "watch-other", subscriberId: "person-2", active: 1, cadence: "immediate" });
+  insertEvent(database, { id: "event-other", kind: "strong_match", subscriptionId: "watch-other" });
+  database.prepare("UPDATE notification_events SET event_key='strong:351715:one-change' WHERE id='event-other'").run();
+  const provider = new ScriptedProvider();
+  await dispatchNotifications({ store, provider, env, now: fixedNow });
+  assert.equal(provider.messages.length, 2);
+  assert.equal(new Set(provider.messages.map(m => m.to)).size, 2);
+});
+
+test("an already frozen multi-subscription message still reconciles together after cadence changes", async () => {
+  const { database, store } = overlappingImmediateEvents();
+  database.prepare("UPDATE subscriptions SET cadence='weekly'").run();
+  const provider = new ScriptedProvider([{ code: "provider_network_failure", retryable: true }]);
+  const first = await dispatchNotifications({ store, provider, env, now: fixedNow, weekly: true });
+  assert.equal(first.attemptedCount, 1);
+  const frozen = provider.attempts[0];
+  database.prepare("UPDATE subscriptions SET cadence='immediate'").run();
+  await dispatchNotifications({ store, provider, env, now: new Date(fixedNow.getTime()+60*60*1000) });
+  assert.equal(provider.messages.length, 1);
+  assert.deepEqual(provider.attempts[1], frozen);
+  assert.equal(database.prepare("SELECT COUNT(*) n FROM notification_events WHERE status='sent'").get().n, 2);
+});
 
 async function cycle(overrides = {}) {
   const nonce = overrides.verificationNonce || "v".repeat(43);
