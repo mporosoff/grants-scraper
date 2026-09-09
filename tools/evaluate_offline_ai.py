@@ -236,6 +236,43 @@ def evaluation_ledger(path):
     return restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], authorization)
 
 
+def replacement_authorization(state):
+    """Atomically replace a specifically authorized remainder, retaining history.
+
+    Use the existing shared grant implementation on a draft. Only the complete
+    grant replaces the authoritative file, so an interruption cannot leave a
+    raised ceiling without its grant or change the checkpoint used on retry.
+    This is evaluation authorization; ordinary document/run budgets are unchanged.
+    """
+    import tempfile
+    from decimal import Decimal
+    from tools.offline_spend import authorize_allowance, restore_ledger
+    path = Path(state) / 'ledger.json'
+    authorization = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())['authorization']
+    prior = json.loads(path.read_bytes())
+    if prior.get('active_allowance') == authorization:
+        return evaluation_ledger(path).summary()
+    checkpoint = authorization['replacement_checkpoint']
+    ledger = restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], prior.get('active_allowance'))
+    with ledger.locked():
+        prior = ledger.read()
+        import hashlib
+        if (identity(prior) != checkpoint['ledger_identity']
+                or hashlib.sha256(path.read_bytes()).hexdigest() != checkpoint['ledger_sha256']):
+            raise ConfigurationFailure('replacement_allowance_checkpoint_mismatch')
+        ceiling = int(Decimal(str(authorization['cumulative_usd'])) * 1_000_000)
+        draft = prior | {'limit_microusd': ceiling, 'events': prior['events'] + [{
+            'kind': 'authorized_remainder_replacement', 'authorization_id': authorization['id'],
+            'checkpoint': checkpoint, 'from_limit_microusd': prior['limit_microusd'],
+            'to_limit_microusd': ceiling, 'prior_active_allowance': prior.get('active_allowance')}]}
+        with tempfile.TemporaryDirectory(dir=path.parent) as directory:
+            draft_path = Path(directory) / 'ledger.json'
+            atomic_json(draft_path, draft)
+            granted = authorize_allowance(draft_path, TASK, authorization).read()
+        atomic_json(path, granted)
+    return evaluation_ledger(path).summary()
+
+
 def production_preflight_configuration():
     from tools.offline_ai import TRANSPORT_VERSION
     settings = config()
@@ -314,10 +351,11 @@ def valid_preflight_failure():
 
 def production_team_cases(population):
     """Existing annotated populations and the once-selected confirmation set."""
-    protocol = json.loads(Path('evaluation/sonnet_production_teams.json').read_bytes())
+    qualification = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())
+    protocol = json.loads(Path(qualification['team_protocol']).read_bytes())
     original = json.loads(Path('evaluation/offline_team_frozen.json').read_bytes())
     previous = json.loads(Path('evaluation/offline_team_prompt_repair_frozen.json').read_bytes())
-    cases = {case['scope']['id']: case for case in original['cases'] + previous['fresh_holdouts']}
+    cases = {case['scope']['id']: case for case in original['cases'] + previous['fresh_holdouts'] + protocol.get('exposed_cases', [])}
     selected = protocol['confirmation_cases'] if population == 'confirmation' else [cases[key] for key in protocol['populations'][population]]
     if {case['scope']['id']: identity(case) for case in selected} != protocol['case_hashes'][population]:
         raise ValueError('Qualification input identity changed')
@@ -351,7 +389,13 @@ def production_teams(state, population, *, replay=False):
     expected = identity(configuration)
     destination = state / protocol['version'] / population
     destination.mkdir(parents=True, exist_ok=True)
-    client = trial.ReplayClient(state / 'cache') if replay else Client(ledger, state / 'cache', deadline=time.monotonic() + 2400)
+    execution_ledger = ledger
+    if not replay and protocol.get('qualification_budget'):
+        from tools.offline_spend import LinkedLedger
+        budget = protocol['qualification_budget']
+        local = Ledger(state / protocol['version'] / 'ledger.json', protocol['version'], budget['usd'], budget['requests'])
+        execution_ledger = LinkedLedger(local, ledger)
+    client = trial.ReplayClient(state / 'cache') if replay else Client(execution_ledger, state / 'cache', deadline=time.monotonic() + 2400)
     before = len(ledger.read()['requests'])
     rows = []
     for case in cases:
@@ -474,9 +518,12 @@ def production_cov4(state, population, *, replay=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=["production-teams-focus", "production-preflight", "production-teams-regression", "production-teams-population", "production-teams-confirmation", "production-teams-replay", "production-cov4-controls", "production-cov4-population", "production-cov4-replay", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
+    parser.add_argument("phase", choices=["production-authorization", "production-teams-focus", "production-preflight", "production-teams-regression", "production-teams-population", "production-teams-exposed", "production-teams-confirmation", "production-teams-replay", "production-cov4-controls", "production-cov4-population", "production-cov4-replay", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
     parser.add_argument("--state", type=Path, required=True)
     args = parser.parse_args()
+    if args.phase == 'production-authorization':
+        print(json.dumps(replacement_authorization(args.state)))
+        return
     if args.phase.startswith('production-cov4-'):
         phase = args.phase.removeprefix('production-cov4-')
         populations = ['controls', 'population'] if phase == 'replay' else [phase]
@@ -487,13 +534,18 @@ def main():
         return
     if args.phase.startswith('production-teams-'):
         phase = args.phase.removeprefix('production-teams-')
-        populations = ['regression', 'population', 'confirmation'] if phase == 'replay' else [phase]
+        populations = ['regression', 'population', 'exposed', 'confirmation'] if phase == 'replay' else [phase]
         results = [production_teams(args.state, population, replay=phase == 'replay') for population in populations]
         print(json.dumps(results))
         if any(not row['numerical_gate_passed'] for row in results):
             raise SystemExit(1)
         return
     if args.phase == 'production-preflight':
+        authorization = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())['authorization']
+        if authorization.get('replacement_checkpoint'):
+            # Replacement is a separate no-credential phase. Do not let the old
+            # preflight grant path consume it against the previous ceiling.
+            evaluation_ledger(args.state / 'ledger.json')
         receipt = production_preflight(args.state)
         print(json.dumps(receipt))
         if not receipt['complete']:

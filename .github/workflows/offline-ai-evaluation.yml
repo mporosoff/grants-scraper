@@ -4,10 +4,10 @@ on:
   workflow_dispatch:
     inputs:
       phase:
-        description: One frozen phase within the shared $15 logical evaluation
+        description: One frozen phase within the retained authorized logical allowance
         required: true
         type: choice
-        options: [production-teams-focus, production-cov4-controls, production-cov4-population, production-cov4-replay, production-preflight, production-teams-regression, production-teams-population, production-teams-confirmation, production-teams-replay, preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay, recovery-sonnet, cov4-sonnet, recovery-replay, scope-repair-sonnet, scope-repair-replay, verification-sonnet, verification-replay]
+        options: [production-authorization, production-teams-exposed, production-teams-focus, production-cov4-controls, production-cov4-population, production-cov4-replay, production-preflight, production-teams-regression, production-teams-population, production-teams-confirmation, production-teams-replay, preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay, recovery-sonnet, cov4-sonnet, recovery-replay, scope-repair-sonnet, scope-repair-replay, verification-sonnet, verification-replay]
         default: preflight
       authorize_anthropic_baseline:
         description: Consume the user's one evaluation-only Sonnet baseline authorization; production pause stays intact
@@ -52,7 +52,7 @@ jobs:
         env:
           EVALUATION_PHASE: ${{ inputs.phase }}
           OPENAI_API_KEY: ${{ !startsWith(inputs.phase, 'production-') && inputs.phase != 'teams-sonnet' && inputs.phase != 'round2-sonnet' && inputs.phase != 'replay' && inputs.phase != 'round2-replay' && inputs.phase != 'recovery-sonnet' && inputs.phase != 'cov4-sonnet' && inputs.phase != 'recovery-replay' && inputs.phase != 'scope-repair-sonnet' && inputs.phase != 'scope-repair-replay' && inputs.phase != 'verification-sonnet' && inputs.phase != 'verification-replay' && secrets.OPENAI_API_KEY || '' }}
-          ANTHROPIC_API_KEY: ${{ ((startsWith(inputs.phase, 'production-') && !endsWith(inputs.phase, '-replay')) || inputs.phase == 'teams-sonnet' || inputs.phase == 'teams-luna-sonnet-verifier' || inputs.phase == 'stability' || inputs.phase == 'round2-sonnet' || inputs.phase == 'recovery-sonnet' || inputs.phase == 'cov4-sonnet' || inputs.phase == 'scope-repair-sonnet' || inputs.phase == 'verification-sonnet') && secrets.ANTHROPIC_API_KEY || '' }}
+          ANTHROPIC_API_KEY: ${{ ((startsWith(inputs.phase, 'production-') && inputs.phase != 'production-authorization' && !endsWith(inputs.phase, '-replay')) || inputs.phase == 'teams-sonnet' || inputs.phase == 'teams-luna-sonnet-verifier' || inputs.phase == 'stability' || inputs.phase == 'round2-sonnet' || inputs.phase == 'recovery-sonnet' || inputs.phase == 'cov4-sonnet' || inputs.phase == 'scope-repair-sonnet' || inputs.phase == 'verification-sonnet') && secrets.ANTHROPIC_API_KEY || '' }}
           AUTHORIZE_ANTHROPIC_BASELINE: ${{ inputs.authorize_anthropic_baseline && 'true' || 'false' }}
         run: |
           if [[ "$EVALUATION_PHASE" == verification-* ]]; then

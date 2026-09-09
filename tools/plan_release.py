@@ -10,7 +10,7 @@ from tools.release_dependencies import snapshot, candidate_groups, changed_group
 
 
 def decide(changes, *, event, requested='', verified=False, receipt_current=False, runtime_changed=False, published=False,
-           qualification_hold=False):
+           qualification_hold=False, team_generation_ready=True):
     if requested in ('generate', 'teams', 'backfill', 'reuse', 'validate', 'publish', 'verify'):
         return requested
     if qualification_hold and (event == 'schedule' or set(changes) & {'source', 'teams', 'semantic'}):
@@ -18,7 +18,7 @@ def decide(changes, *, event, requested='', verified=False, receipt_current=Fals
     if event == 'schedule' or set(changes) & {'source', 'semantic'}:
         return 'generate'
     if 'teams' in changes:
-        return 'teams'
+        return 'teams' if team_generation_ready else 'noop'
     if runtime_changed:
         return 'reuse'
     if published and not verified:
@@ -155,11 +155,15 @@ def plan(root, environment, *, receipt=None, live=None, publication=None, resume
     qualification_path = root / 'config/sonnet_production_qualification.json'
     qualification = c.read_json(qualification_path) if qualification_path.exists() else {}
     hold = qualification.get('automatic_generation') == 'hold'
+    settings_path = root / 'config/offline_ai.json'
+    settings = c.read_json(settings_path) if settings_path.exists() else {}
+    service = settings.get('production_services', {}).get('teams', {'enabled': True})
+    pilot = environment.get('QUALIFICATION_PILOT') == 'true'
+    team_ready = bool(service.get('enabled') and (not service.get('pilot_only') or pilot))
     stage = decide(changes, event=environment['GITHUB_EVENT_NAME'], requested=requested,
                    verified=verified, receipt_current=receipt_current, runtime_changed=bool(runtime), published=published,
-                   qualification_hold=hold)
+                   qualification_hold=hold, team_generation_ready=team_ready)
     model = c.read_json(root / 'config/opportunity_team_model.json')
-    pilot = environment.get('QUALIFICATION_PILOT') == 'true'
     if pilot and (environment['GITHUB_EVENT_NAME'] != 'workflow_dispatch' or stage not in ('generate', 'teams')):
         raise ValueError('Qualification pilot requires explicit manual team/source generation')
     mode = 'pilot' if pilot else 'backfill' if stage == 'backfill' else 'maintenance'
@@ -167,7 +171,7 @@ def plan(root, environment, *, receipt=None, live=None, publication=None, resume
             'team_mode': mode, 'changes': changes, 'runtime_changes': runtime, 'live_verified': verified,
             'publication_run': publication['run'] if published else '',
             'publication_attempt': publication['attempt'] if published else '',
-            'receipt_current': receipt_current, 'qualification_hold': hold,
+            'receipt_current': receipt_current, 'qualification_hold': hold, 'team_generation_ready': team_ready,
             'reason': 'Generation held for bounded service qualification' if hold and stage == 'noop' else
                       'Dependency fingerprints and retained release evidence'}
 

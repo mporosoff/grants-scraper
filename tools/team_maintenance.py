@@ -17,10 +17,11 @@ def science_contract():
                      [ast.dump(ast.parse(inspect.getsource(fn)), include_attributes=False) for fn in functions]])
 
 
-def compatible_contracts():
+def compatible_contracts(state=None):
     active = science_contract()
     return {active} | {row['retained'] for row in config().get('team_decision_compatibility', [])
-                      if row['active'] == active}
+                      if row['active'] == active and (state is None or state in row.get('states',
+                          ['proposed', 'insufficient_evidence', 'not_specific', 'unsuitable_scope', 'provider_refusal']))}
 
 
 def snapshot(candidates, claims):
@@ -38,7 +39,7 @@ def decision_key(scope, attempt, claims, scientific_identity=None):
             dependencies['@inventory'] = identity(sorted(claims))
     if scientific_identity is None:
         retained = attempt.get('decision_contract') if isinstance(attempt, dict) else None
-        scientific_identity = retained if retained in compatible_contracts() else science_contract()
+        scientific_identity = retained if retained in compatible_contracts(state) else science_contract()
     return identity([scientific_identity, scope['source_fingerprint'], dependencies])
 
 

@@ -1,6 +1,62 @@
 # Frozen offline AI evaluation, September 8, 2026
 
-## Current production status, September 9
+## Focused scope repair follow-on, September 9
+
+The user authorized the attached team-scope repair task after the partial
+restoration below. `362185` and the original six confirmations are now exposed
+regression evidence. Their annotations, outputs and failed verdict remain
+unchanged. `evaluation/sonnet_team_scope_repair_20260909.json` freezes a separate
+12-case confirmation set (eight research, four negative), exact public inputs,
+source-based annotations and the active production prompts before new results.
+No new confirmation sample may replace a failed fresh gate.
+
+The general correction is `sonnet-research-purpose-1` decomposition. Both known
+false rejections received complete retained input: the model confused a stated
+research purpose with missing application details, or related disciplines with
+unrelated programs. No source/context expansion is needed. Adjudication and the
+independent verifier, schemas, native transport and source/Cov4 configuration
+remain unchanged. Positive scientific decisions keep compatible original
+provenance; prior scope rejections require the new contract. Provider refusals
+remain terminal. Teams stay disabled pending qualification; the team-only
+planner hold does not stop source/Cov4 processing or schedule historical backfill.
+
+This follow-on replaces the old remainder with **150 new Anthropic requests and
+$10**, measured from the restored immutable ledger in run `34363866498` (452
+requests/$8.410234). It is not added to the old 55-request remainder. The named
+`sonnet-team-scope-repair-20260909` grant requires the exact starting checkpoint,
+retains historical requests/uncertain charges/stops, and commits once atomically.
+Its cumulative envelope is 602 requests/$18.410234 under the new authorization;
+the prior task's limits and receipt remain historical. Ordinary $2 maintenance,
+five-scope/$2 pilot and manual $5 backfill limits do not change. Qualification is
+additionally capped at 135 requests/$8, reserving 15 requests/$2 for the pilot.
+The source-only inventory estimates 107 initial qualification stage calls and
+$3.545113 using retained stage costs; actual bounded reservations govern.
+
+After protected merge, execute the existing entrypoints in this order:
+
+```sh
+# No provider credentials/calls; redispatch cannot grant again.
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-authorization
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-focus
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-regression
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-population
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-exposed
+# Run once after candidate instructions are frozen and source review passes.
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-confirmation
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-replay
+```
+
+Qualification executes `team_provider.stage_contract` and `request_inputs` as
+production does. Only exact unchanged downstream stage inputs can reuse a
+response after decomposition changes. Frozen claims measure scientific stages;
+the bounded production pilot must separately exercise actual Voyage retrieval.
+Keep source acceptance, legitimate acceptance, completion, useful proposals,
+unsupported edges, service enablement and live publication separate. Source
+annotations are never provider inputs. These provider-neutral inputs, final
+prompts/schemas and retained Sonnet stage measurements form the later comparison
+baseline; no paid Luna/OpenAI work is authorized here.
+
+## Prior partial-restoration receipt, September 9
 
 Cov4 is qualified and enabled. The preparatory automatic-generation hold is
 released after publication PR #207 and live run `34368363510`. Teams remain
