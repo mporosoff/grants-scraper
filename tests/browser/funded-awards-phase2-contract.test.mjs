@@ -292,7 +292,9 @@ test("the historical Phase 2 evidence remains authoritative while Phase 4 extend
 
 test("Award service delivery follows the protected main and rollback pattern", () => {
   assert.match(deployWorkflow, /push:\s*\n\s*branches:\s*\n\s*- main/);
-  assert.doesNotMatch(deployWorkflow, /workflow_dispatch|pull_request:/);
+  assert.doesNotMatch(deployWorkflow, /pull_request:/);
+  assert.match(deployWorkflow, /workflow_dispatch:/);
+  assert.match(deployWorkflow, /deploy:\s*\n\s+if: github\.ref == 'refs\/heads\/main'/);
   assert.match(deployWorkflow, /git ls-remote origin refs\/heads\/main/);
   assert.match(deployWorkflow, /Main changed while the Funded Awards release was being verified/);
   assert.match(deployWorkflow, /Capture the active Award Worker version for rollback/);
