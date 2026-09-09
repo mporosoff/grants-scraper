@@ -322,6 +322,34 @@ test("deduplication does not combine recipients or cancel another independently 
   assert.equal(new Set(provider.messages.map(m => m.to)).size, 2);
 });
 
+test("a paused expired claim without provider reservation cannot strand an active overlapping alert", async () => {
+  const { database, store } = overlappingImmediateEvents();
+  assert.deepEqual(await store.claimEvents(["event-one"], fixedNow.toISOString()), ["event-one"]);
+  await store.updateSubscriptionForSubscriber("person-1", "watch-1", { active: false }, fixedNow.toISOString());
+  // A live lease remains protected; only the expired, provably unreserved one is released.
+  assert.deepEqual(await store.claimEvents(["event-two"], fixedNow.toISOString()), []);
+  const later = new Date(fixedNow.getTime() + 16 * 60 * 1000);
+  const provider = new ScriptedProvider();
+  assert.equal((await dispatchNotifications({ store, provider, env, now: later })).deliveredCount, 1);
+  assert.equal(await store.reserveProviderMessage("event-one", ["event-one"], 100, 86400, later), false);
+  assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='event-one'").get().status, "queued");
+  await store.updateSubscriptionForSubscriber("person-1", "watch-1", { active: true }, later.toISOString());
+  await dispatchNotifications({ store, provider, env, now: later });
+  assert.equal(provider.messages.length, 1);
+  assert.equal(database.prepare("SELECT error_code FROM notification_events WHERE id='event-one'").get().error_code,
+    "duplicate_recipient_event");
+});
+
+test("pausing an expired reserved claim does not release its unknown provider outcome", async () => {
+  const { database, store } = overlappingImmediateEvents();
+  await store.claimEvents(["event-one"], fixedNow.toISOString());
+  assert.equal(await store.reserveProviderMessage("event-one", ["event-one"], 100, 86400, fixedNow), true);
+  await store.updateSubscriptionForSubscriber("person-1", "watch-1", { active: false }, fixedNow.toISOString());
+  const later = new Date(fixedNow.getTime() + 16 * 60 * 1000);
+  assert.deepEqual(await store.claimEvents(["event-two"], later.toISOString()), []);
+  assert.equal(database.prepare("SELECT status FROM notification_events WHERE id='event-one'").get().status, "sending");
+});
+
 test("an already frozen multi-subscription message still reconciles together after cadence changes", async () => {
   const { database, store } = overlappingImmediateEvents();
   database.prepare("UPDATE subscriptions SET cadence='weekly'").run();
