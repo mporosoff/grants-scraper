@@ -78,6 +78,14 @@ class ReleasePlanning(unittest.TestCase):
         self.assertEqual(planner.decide({}, published=True, **(base | {'verified': False, 'receipt_current': False})), 'verify')
         self.assertEqual(planner.decide({}, published=False, **(base | {'verified': False})), 'publish')
 
+    def test_qualification_preparation_does_not_launch_automatic_paid_production(self):
+        for event in ('push', 'schedule'):
+            for group in ('source', 'teams', 'semantic'):
+                self.assertEqual(planner.decide({group: ['changed']}, event=event, qualification_hold=True), 'noop')
+        self.assertEqual(planner.decide({'teams': ['changed']}, event='workflow_dispatch',
+                                       requested='teams', qualification_hold=True), 'teams')
+        self.assertEqual(planner.decide({}, event='push', runtime_changed=True, qualification_hold=True), 'reuse')
+
     def test_group_inventory_is_root_scoped_and_comments_are_not_semantics(self):
         self.assertTrue(dependencies.matches('scripts/sources/adapters/nasa.py', 'scripts/sources/**/*.py'))
         self.assertTrue(dependencies.matches('scripts/sources/merge.py', 'scripts/sources/**/*.py'))

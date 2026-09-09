@@ -18,7 +18,6 @@ def population():
     protocol = json.loads(PROTOCOL.read_bytes())
     prior, cases = previous.population()
     if (identity(prior) != protocol['prior_protocol_sha256']
-            or previous.contract(prior, 'teams') != protocol['prior_team_contract']
             or {c['scope']['id']: identity(c) for c in cases} != protocol['cases']
             or protocol['acceptance'] != prior['acceptance']):
         raise ValueError('Frozen verification repair dependencies changed')
@@ -102,6 +101,10 @@ def retained_rows(state, protocol, prior, cases):
 
 def run(state, *, replay=False):
     protocol, prior, cases = population()
+    # Population/history inspection remains possible after the shared transport
+    # evolves. Executing this historical harness still requires its exact code.
+    if previous.contract(prior, 'teams') != protocol['prior_team_contract']:
+        raise ValueError('Historical verification runtime changed; use the qualified active route')
     old = retained_rows(state, protocol, prior, cases)
     # All provenance is established before modifying accounting or contacting a provider.
     ledger = VerificationLedger(state / 'ledger.json', protocol, migrate=not replay)

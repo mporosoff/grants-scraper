@@ -43,7 +43,7 @@ class OfflineAIContracts(unittest.TestCase):
             self.assertFalse(post.call_args.kwargs["allow_redirects"])
             entry = ledger.read()["requests"][0]
             self.assertEqual(entry["usage"]["output_tokens"], 40)
-            self.assertEqual(entry["status"], "ValueError")
+            self.assertEqual(entry["status"], "SchemaFailure")
             self.assertLess(entry["charged_microusd"], entry["reserved_microusd"])
             self.assertNotIn("test-only", ledger.path.read_text())
 
@@ -160,7 +160,8 @@ class OfflineAIContracts(unittest.TestCase):
             self.assertEqual(after['requests'], before['requests'])
             self.assertEqual(after['limit_microusd'], before['limit_microusd'])
             self.assertEqual(after['blocked_providers'], {'anthropic': 'insufficient_credit'})
-            self.assertEqual(len(after['events']), 1)
+            self.assertEqual(after['events'][:-1], before['events'])
+            self.assertEqual(after['events'][-1]['kind'], 'actions_credential_available')
             post = Mock(return_value=response())
             self.assertEqual(e.preflight(a.Client(ledger, Path(tmp) / 'cache', post=post)), {'ready': True})
             self.assertEqual(post.call_count, 1)
