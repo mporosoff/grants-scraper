@@ -1,22 +1,39 @@
 {
   "authorization": {
-    "id": "sonnet-production-completion-20260909",
-    "additional_requests": 200,
+    "id": "sonnet-team-scope-repair-20260909",
+    "additional_requests": 150,
     "additional_usd": 10,
-    "cumulative_usd": 15,
+    "cumulative_usd": 18.410234,
     "providers": [
       "anthropic"
     ],
-    "scope": "Qualify and restore team generation and Cov4, including preflights, retries and linked production pilots. Production per-run limits remain unchanged."
+    "replacement_checkpoint": {
+      "run_id": "34363866498",
+      "ledger_sha256": "950d2b3f624598e141d9974888a59ecf82401b7f3a48767fd60cdac710ebe626",
+      "ledger_identity": "2cfa6aaae462b248055f748f7e7ce7860881d9524f5f773979435e5a71d38f09"
+    },
+    "scope": "One replacement allowance measured from the immutable starting ledger; includes the old remainder, qualification, retries and linked five-scope/$2 pilot. No OpenAI/Luna calls or recurring-budget increase."
   },
   "historical_evaluation_run": "34300832276",
   "automatic_generation": "enabled",
   "status": "partial_production_restored",
-  "teams": "confirmation_gate_failed",
+  "teams": "scope_repair_qualification_pending",
   "cov4": "qualified_enabled_entrypoint_exercised",
   "transport_evidence": "evaluation/sonnet_transport_preflight_20260909.json",
-  "team_protocol": "evaluation/sonnet_production_teams.json",
+  "team_protocol": "evaluation/sonnet_team_scope_repair_20260909.json",
   "cov4_protocol": "evaluation/sonnet_production_cov4.json",
   "cov4_evidence": "evaluation/sonnet_cov4_qualification_20260909.json",
-  "completion_evidence": "evaluation/sonnet_production_completion_20260909.json"
+  "completion_evidence": "evaluation/sonnet_production_completion_20260909.json",
+  "authorization_history": [
+    {
+      "id": "sonnet-production-completion-20260909",
+      "additional_requests": 200,
+      "additional_usd": 10,
+      "cumulative_usd": 15,
+      "providers": [
+        "anthropic"
+      ],
+      "scope": "Qualify and restore team generation and Cov4, including preflights, retries and linked production pilots. Production per-run limits remain unchanged."
+    }
+  ]
 }

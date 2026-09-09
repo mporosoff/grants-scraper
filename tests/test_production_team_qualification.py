@@ -69,7 +69,7 @@ class ProductionTeamQualification(unittest.TestCase):
                 for change in ('threshold', 'source_checks', 'rule', 'adapter', 'scientific_states'):
                     def changed_read(path):
                         value = original_read(path)
-                        if path.name == 'sonnet_production_teams.json' and change not in ('adapter', 'scientific_states'):
+                        if path.as_posix() == json.loads(original_read(Path('config/sonnet_production_qualification.json')))['team_protocol'] and change not in ('adapter', 'scientific_states'):
                             protocol = json.loads(value)
                             if change == 'threshold':
                                 protocol['acceptance']['scope_decision_accuracy_min'] = .1
@@ -173,9 +173,12 @@ class ProductionTeamQualification(unittest.TestCase):
             self.assertEqual(verifier_input['scope'], payload['scope'])
             self.assertTrue(all('reason' in edge for edge in self.edges))
         prior = json.loads(Path('evaluation/established_sonnet_repair_2_frozen.json').read_bytes())
-        for stage in ('decomposition', 'adjudication'):
+        for stage in ('adjudication',):
             self.assertEqual(team_provider.stage_prompt(stage), prior['prompts'][stage])
             self.assertEqual(team_provider.stage_settings(stage)['prompt_version'], prior['version'])
+        active = evaluation.production_team_cases('regression')[0]
+        self.assertEqual(team_provider.stage_prompt('decomposition'), active['final_prompts']['decomposition'])
+        self.assertEqual(team_provider.stage_settings('decomposition')['prompt_version'], 'sonnet-research-purpose-1')
 
     def test_ordinary_registry_outputs_reassemble_unpinned_dependents_only(self):
         fixture = json.loads(Path('tests/fixtures/claim_retirement_recovery.json').read_bytes())
@@ -234,9 +237,9 @@ class ProductionTeamQualification(unittest.TestCase):
         _, regression = evaluation.production_team_cases('regression')
         _, population = evaluation.production_team_cases('population')
         ids = lambda rows: {row['scope']['id'] for row in rows}
-        self.assertEqual(len(confirmed), 6)
+        self.assertEqual(len(confirmed), 12)
         self.assertFalse(ids(confirmed) & (ids(regression) | ids(population)))
-        self.assertEqual(sum(row['annotations']['expected_scope'] == 'reject' for row in confirmed), 2)
+        self.assertEqual(sum(row['annotations']['expected_scope'] == 'reject' for row in confirmed), 4)
 
 
 if __name__ == '__main__':

@@ -184,7 +184,7 @@ class SonnetTransport(unittest.TestCase):
             self.assertEqual(post.call_count, 2)
             restored = evaluation.evaluation_ledger(state / 'ledger.json')
             self.assertEqual(len(restored.read()['requests']), 2)
-            self.assertEqual(restored.max_requests, 200)
+            self.assertEqual(restored.max_requests, restored.read()['active_allowance']['additional_requests'])
         with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'), patch.object(ai.time, 'sleep'):
             state = Path(tmp)
             ai.Ledger(state / 'ledger.json', evaluation.TASK, 15)

@@ -54,7 +54,7 @@ def prepare(repository, destination, reservation):
             raise ValueError("missing_spend_ledger")
     reservation_value = {"task": TASK, "run_id": os.environ["GITHUB_RUN_ID"],
         "attempt": os.environ["GITHUB_RUN_ATTEMPT"], "sha": os.environ["GITHUB_SHA"],
-        "maximum_logical_spend_usd": config()["budgets_usd"]["evaluation"],
+        "maximum_logical_spend_usd": json.loads(Path('config/sonnet_production_qualification.json').read_bytes())['authorization']['cumulative_usd'],
         "prior_state_hash": identity(json.loads((destination / "ledger.json").read_bytes())) if (destination / "ledger.json").exists() else None}
     atomic_json(reservation, reservation_value)
 
