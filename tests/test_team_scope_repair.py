@@ -108,6 +108,40 @@ class ScopeRepairContracts(unittest.TestCase):
                     self.assertEqual(sum(r['charged_microusd'] for r in prior['requests']), 600000)
                 post.assert_not_called()
 
+    def test_verifier_only_repair_reuses_exact_completed_prior_stages(self):
+        historical = json.loads(Path('evaluation/sonnet_team_scope_repair_3_results_20260909.json').read_bytes())
+        active, cases = evaluation.production_team_cases('focus')
+        case = next(case for case in cases if case['scope']['id'] == '362185')
+        prior = next(row for row in historical['focus_results'] if row['scope_id'] == case['scope']['id'])
+        self.assertFalse(historical['quality_gate_passed'])
+        self.assertEqual(prior['state'], 'unsuitable_scope')
+        for stage in ('decomposition', 'adjudication'):
+            self.assertEqual(team_provider.stage_contract(stage), historical['focus']['configuration']['stages'][stage])
+        self.assertNotEqual(team_provider.stage_contract('verification'), historical['focus']['configuration']['stages']['verification'])
+        self.assertEqual(active['qualification_budget'], historical['focus']['configuration']['protocol']['qualification_budget'])
+        self.assertNotIn('663170468f111f36c46ef365b4784d86d199540a794d436e79d80664524692fc',
+                         team_maintenance.compatible_contracts('proposed'))
+        with tempfile.TemporaryDirectory() as directory, patch.dict('os.environ', ANTHROPIC_API_KEY='synthetic'):
+            root = Path(directory)
+            ledger = Ledger(root / 'ledger.json', 'synthetic-stage-reuse', 2)
+            cache = root / 'cache'
+            for stage, value in prior['stages'].items():
+                key = prior['request_contracts'][stage]
+                atomic_json(cache / (key + '.json'), {'key': key, 'returned_model': 'claude-sonnet-5', 'value': value})
+            before = {path: path.read_bytes() for path in cache.glob('*.json')}
+            # A synthetic response proves transport/cache behavior, not LLM quality.
+            with patch('requests.post', return_value=sonnet_response({'suitable_for_team': True, 'edges': []})) as post:
+                current = evaluation.team_case(Client(ledger, cache), 'sonnet', case, production=True)
+            self.assertEqual(post.call_count, 1)
+            self.assertEqual(post.call_args.kwargs['json']['system'], team_provider.stage_prompt('verification'))
+            self.assertEqual([row['stage'] for row in ledger.read()['requests']], ['verification'])
+            self.assertEqual(current['state'], 'insufficient_evidence')
+            for stage in ('decomposition', 'adjudication'):
+                self.assertEqual(current['stages'][stage], prior['stages'][stage])
+                self.assertEqual(current['request_contracts'][stage], prior['request_contracts'][stage])
+            self.assertNotEqual(current['request_contracts']['verification'], prior['request_contracts']['verification'])
+            self.assertEqual({path: path.read_bytes() for path in before}, before)
+
     def test_fresh_selection_preserves_exposed_cases_and_exact_input_contracts(self):
         prior = json.loads(Path('evaluation/sonnet_production_teams.json').read_bytes())
         protocol, fresh = evaluation.production_team_cases('confirmation')

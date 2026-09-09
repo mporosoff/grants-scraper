@@ -79,6 +79,32 @@ Qualification fails closed until its retained local grant and parent grant match
 Missing qualification history cannot create a fresh counter. This authorization
 does not clear a provider stop or enable production teams.
 
+PR #213 merged as `e995fb6701871304fdff050efeaf66b48a6eb1bc`; authorization run
+`34399198357` applied both extension grants once with zero provider calls.
+Version 3 focus run `34399389043` completed all 11 cases with 23 valid requests
+and $0.894764, but failed legitimate-scope acceptance (5/6, below 85%; scope
+accuracy 10/11). Decomposition correctly admitted vision-injury research;
+verification returned `suitable_for_team:false` after empty adjudication. Its
+contract does not provide a scope-rejection rationale, so the internal cause is
+unknown. Source review also found broad quotation context widening a genetics
+role and continued unsupported structure-guided design coverage. Preserve the
+failed results in `sonnet_team_scope_repair_3_results_20260909.json`.
+
+The active v4 protocol changes only the verifier to
+`sonnet-production-verification-5`. It puts the source-only purpose decision
+before capability assessment and consolidates exact role-operation coverage.
+Decomposition remains `sonnet-research-purpose-3`, adjudication remains
+`established-sonnet-repair-2`, and their 17 compatible focus responses are reused.
+Neither schemas, transport, scientific floors nor frozen confirmations change.
+This is the second focused attempt on the demonstrated structure-guidance defect;
+if the same defect remains, retain the failed gate and report nonconvergence.
+
+At this checkpoint qualification has **100 requests/$4.774714** left, with the
+15-request/$2 pilot reserve intact. The unchanged-stage inventory leaves 90
+initial qualification calls if annotated scopes are admitted, including six new
+focus verifier calls, and ten requests for bounded retries. No new grant is
+needed or permitted. Teams remain disabled; Cov4/source processing remains enabled.
+
 The first general correction was `sonnet-research-purpose-1` decomposition. Both known
 false rejections received complete retained input: the model confused a stated
 research purpose with missing application details, or related disciplines with
@@ -105,9 +131,7 @@ After protected merge and sufficient authorized request allowance, execute the
 existing entrypoints in this order:
 
 ```sh
-# Apply the request-only extension once after its protected merge.
-# If interrupted, this same phase safely completes the two retained grants.
-gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-authorization
+# The extension is applied; resume the newest retained state, without a new grant.
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-focus
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-regression
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-population
