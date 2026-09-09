@@ -1,0 +1,218 @@
+{
+  "version": 1,
+  "evaluation_sha": "45e1599ef854bcb766a5c7f2f8e8ba257bd266b4",
+  "run": "34300832276",
+  "protocol_sha256": "82aaef759c14020a2849ba800efa3bf69545c2b6a2267674ccedc9b4f0e61dad",
+  "evaluation_contract": "9c91c3aa3b7d155632229d9a37925506293f1663c4f2645d3b2a0fe826aa52b8",
+  "complete": false,
+  "metrics": {
+    "completed": 7,
+    "legitimate_acceptance": 0.6666666666666666,
+    "legitimate_accepted": 4,
+    "legitimate_scopes": 6,
+    "proposed": 2,
+    "scope_accuracy": 0.7777777777777778,
+    "scope_correct": 7,
+    "total": 9
+  },
+  "decision": "not_promoted_incomplete_verification",
+  "provider_access": "available; Anthropic returned HTTP 200 and claude-sonnet-5",
+  "requests_used": 307,
+  "request_ceiling": 307,
+  "additional_requests": 12,
+  "estimated_charged_usd": 4.203224,
+  "spending_ceiling_usd": 15,
+  "ledger_sha256": "feb5145493d58849fbfc455bfa91ecd0f4d2473ec09325af705d13667a5617cb",
+  "retained_result_hashes": {
+    "team-2235e77fdb434903c71ce27f8a28fc1dc86917f3d733057f091bcb8690f4af81.json": "e62a134f6f291f2e5a620b46d75b45cfa8a30642659b77d0700dc9fbbb013562",
+    "team-46e10950b2d3b876b3f118f47cb1ca5e78c4b9a49a352e71a138a234b2d45975.json": "5d2ac03d4199634dcbf424584ff779d10c22f5f4f129ce067b3540cde33de3f0",
+    "team-57baf3ceb8b21073fc78d07bba3812a01ce322b0c0a11f980ef62424de2cd146.json": "08444ef5da6753ae21e24d7ffde1e65b39a287d7081733385de48b2503551be4",
+    "team-5f11d7ba09da48f54e10269c27965d15accd02dc1b694b03daf35df9cad93e5f.json": "f1229395e39510342ada981d549a98150e92c7d30f2476aca750164387ba1b8d",
+    "team-62fd10e3aeb2e7627ef845fc50326efb1a60dad91218c1e0b8f4237d72551393.json": "e21922d2a2d43939fbaaf92cc7aafdc3d94e5199e8901dd80ccbcbc6a50db4a9",
+    "team-8ab31021bdee9fafdcc9ffd12db9507b2063ca92cff99dba600538dfb890fbe6.json": "747351586293182de59f5af2e51307a63a27818476f3b5ec4f37d36a2fb35266",
+    "team-966c956650548810f961ed22890512cbd71eaeab345f3088ab800b7bcfff5647.json": "154e768ee4e43b4d85f048c12483b726beda2d5ad9db26f87c8cae19e3948474",
+    "team-aac5b86894950b2e4b18aca2413a45f356bb5c131a38cfe2d97a6013c2d30b6e.json": "6482e0a0aa005e653ac633c065c532adefa452a4960b62218813491c2efab758",
+    "team-b3372cfe01fb479273df6bcf883ea4bc893522144726864009d12480a4b8dcc3.json": "69b087a3646f7b4854563380932ef86efb7e637f510af585b9603d77cf123b30"
+  },
+  "retained_diagnostics": {
+    "3430708eb51f9200dbdb6fe50711b3c652f4c89ca511cf0f58859abd591d2dab.json": {
+      "bounded_response_fields": {
+        "edges": [
+          {
+            "claim_id": "urh-000025-c001",
+            "coverage": "direct",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000025-c002",
+            "coverage": "direct",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000037-c003",
+            "coverage": "adjacent",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000079-c002",
+            "coverage": "adjacent",
+            "role_id": "role-1"
+          }
+        ],
+        "suitable_for_team": true
+      },
+      "error_type": "ValueError",
+      "input_hash": "87cb8040853dcd5215676267f6551fdce95ef034b5ae67b5cb4eb7310b69da7f",
+      "stage": "verification",
+      "validator_error": "invalid role edge"
+    },
+    "383f58b50a5a5922eb95ed500f4d7a03c7cf4d8cd6d77bd0e58742f9e2a7d543.json": {
+      "bounded_response_fields": {
+        "edges": [
+          {
+            "claim_id": "urh-000152-c001",
+            "coverage": "method_transfer",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000152-c002",
+            "coverage": "adjacent",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000008-c001",
+            "coverage": "method_transfer",
+            "role_id": "role-2"
+          },
+          {
+            "claim_id": "urh-000009-c001",
+            "coverage": "adjacent",
+            "role_id": "role-2"
+          },
+          {
+            "claim_id": "urh-000119-c001",
+            "coverage": "direct",
+            "role_id": "role-5"
+          },
+          {
+            "claim_id": "urh-000119-c002",
+            "coverage": "method_transfer",
+            "role_id": "role-5"
+          },
+          {
+            "claim_id": "urh-000041-c001",
+            "coverage": "method_transfer",
+            "role_id": "role-5"
+          },
+          {
+            "claim_id": "urh-000155-c001",
+            "coverage": "method_transfer",
+            "role_id": "role-5"
+          }
+        ],
+        "suitable_for_team": true
+      },
+      "error_type": "ValueError",
+      "input_hash": "f3d90b6e1cd82112f57e8c5f846535536c80f64c9175837ec017cfcf76c51658",
+      "stage": "verification",
+      "validator_error": "invalid role edge"
+    },
+    "5505fc01b9d9c23890984cb6085ceb229a3809a3dae8bd8396882f5476a4ce4f.json": {
+      "bounded_response_fields": {
+        "edges": [
+          {
+            "claim_id": "urh-000047-c002",
+            "coverage": "direct",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000108-c002",
+            "coverage": "adjacent",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000075-c001",
+            "coverage": "adjacent",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000136-c002",
+            "coverage": "adjacent",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000063-c001",
+            "coverage": "adjacent",
+            "role_id": "role-2"
+          },
+          {
+            "claim_id": "urh-000063-c002",
+            "coverage": "adjacent",
+            "role_id": "role-2"
+          },
+          {
+            "claim_id": "urh-000112-c001",
+            "coverage": "adjacent",
+            "role_id": "role-2"
+          },
+          {
+            "claim_id": "urh-000042-c001",
+            "coverage": "adjacent",
+            "role_id": "role-2"
+          }
+        ],
+        "suitable_for_team": true
+      },
+      "error_type": "ValueError",
+      "input_hash": "48f4bcd2db68dfb4ed72f664c8a0d2fcc451385a1ee7a799cf304f41885d4147",
+      "stage": "verification",
+      "validator_error": "invalid role edge"
+    },
+    "86d234a04d15156de5dc963c4f2bed48c4fdcbeaaa870bfe18b01f7b4fb39615.json": {
+      "bounded_response_fields": {
+        "edges": [
+          {
+            "claim_id": "urh-000025-c001",
+            "coverage": "direct",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000025-c002",
+            "coverage": "direct",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000037-c003",
+            "coverage": "method_transfer",
+            "role_id": "role-1"
+          },
+          {
+            "claim_id": "urh-000079-c002",
+            "coverage": "adjacent",
+            "role_id": "role-1"
+          }
+        ],
+        "suitable_for_team": true
+      },
+      "error_type": "ValueError",
+      "input_hash": "87cb8040853dcd5215676267f6551fdce95ef034b5ae67b5cb4eb7310b69da7f",
+      "stage": "verification",
+      "validator_error": "invalid role edge"
+    }
+  },
+  "incomplete_scopes": [
+    "344592:ab-0019",
+    "362218"
+  ],
+  "validator_failure": "invalid role edge: an edge was not an object with exactly role_id, claim_id, coverage and reason",
+  "diagnostic_limitation": "Historical diagnostics retained bounded edge identities and coverage but omitted the original field names/types. The exact missing or extra field cannot be reconstructed; rejected raw responses were not retained. Do not infer an exact field or waive the schema.",
+  "production_team_pause": "retained pending adequate verified behavior",
+  "new_route_promoted": false,
+  "cov4": {
+    "access": "available in run 34283278316",
+    "quality": "failed organizational-heading contamination gate",
+    "new_classifications": "unavailable; no unchecked topics published",
+    "additional_requests_in_this_run": 0
+  },
+  "next_step": "No additional paid requests are authorized. Preserve all completed stages, failed diagnostics, ledgers and pauses. A further provider attempt requires a new explicit request allowance; functional evidence-based team recovery proceeds independently."
+}

@@ -31,7 +31,7 @@
     "status": "rejected_frozen_contaminant_gate",
     "run": "34256646858",
     "production_changed": false,
-    "production_availability": "Anthropic insufficient_credit pause; no new classifications",
+    "production_availability": "Established Sonnet access works; quality gate failed, production pause retained; no new classifications",
     "candidates": 43,
     "genuine_children_retained": 28,
     "genuine_children_lost": 0,
@@ -130,13 +130,13 @@
       "reported_cost_usd": 0
     }
   },
-  "required_next_step": "Publish deterministically proven prior teams independently of optimization; minimally repair confirmed Sonnet coverage/evidence defects before authorizing targeted new production assessments. Separately check established Cov4 access/contract. Preserve the catalog/vector candidate and all budgets; do not expand model search.",
+  "required_next_step": "Publish the explicitly proven claim-retirement team reconstructions independently of optimization. Evaluation is incomplete at 307 authorized requests; preserve completed stages and all accounting. Do not issue another provider request without a new explicit allowance, promote a route, clear the production pause, or regenerate catalog/document/vector data.",
   "outcomes": {
     "credential_wiring": "complete; real protected preflight passed",
     "infrastructure_publication": "complete; exact candidate and Worker verified live",
     "provider_migration": "evaluated replacement rejected; no new route promoted",
     "team_recovery": "required independently of provider migration; deterministic restoration and bounded established-provider remediation in progress",
-    "cov4": "OpenAI replacement rejected; established Sonnet service check authorized separately, production pause retained pending that check"
+    "cov4": "Established Sonnet access confirmed; contaminant gate failed. New classifications unavailable; OpenAI replacement not promoted."
   },
   "historical_before_authorized_prompt_repair": {
     "evaluation_sha": "92f3856adf5c4b432a2ad4bc340c709dcd0b9038",
@@ -238,5 +238,16 @@
     "cov4_quality": "failed organizational-heading contamination gate",
     "cov4_new_classifications": "unavailable",
     "openai_credential_wiring": "working; no new OpenAI trial in this followup"
+  },
+  "verification_followup": {
+    "run": "34300832276",
+    "evaluation_sha": "45e1599ef854bcb766a5c7f2f8e8ba257bd266b4",
+    "complete": false,
+    "decision": "not_promoted_incomplete_verification",
+    "requests_used": 307,
+    "request_ceiling": 307,
+    "estimated_charged_usd": 4.203224,
+    "production_team_pause": "retained pending adequate verified behavior",
+    "evidence": "evaluation/sonnet_verification_repair_20260909.json"
   }
 }

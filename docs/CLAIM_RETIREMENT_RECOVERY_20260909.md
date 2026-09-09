@@ -1,0 +1,19 @@
+# Team recovery after the approved researcher correction
+
+The approved researcher correction retired six old claims. Publication correctly withheld eleven teams that referenced those claims; it did not retain unsupported evidence merely to preserve availability. The reviewed prior public model is commit `99d3b21495b0f372eea2e0a0e0de1a8bbab13451`. The corrected researcher generation is `59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a`.
+
+The claim-retirement proof in `config/offline_ai.json` binds each prior decision hash, unchanged source fingerprint, explicit removed claim IDs and reviewed deterministic output hash. Recovery requires actual retired status, exact current references for every remaining claim, the existing scientific contract, verbatim role quotations, and the unchanged complementary-team assembly and dependency validators. No new edge, scientific role or capability is generated. Original model/pipeline and generation provenance, including prior recovery evidence, remain recorded separately from the claim-retirement proof.
+
+Nine scopes remain supportable after removing retired edges: `344592:ab-0013`, `356530`, `361287`, `356935`, `360606`, `357430`, `357492`, `363095`, and `361399`. Some keep the same members; others select a different combination from their already verified graph. Missing capabilities remain explicit gaps. These nine reconstructions require zero provider requests.
+
+Two prior proposals, `357433` and `357490`, no longer establish complementary contributions after the approved evidence retirement and remain withheld. Three older scopes also remain pending: `332894:superconducting-qubits` lacks its current bounded child-declaration proof, `356953` lacks its specific phased-milestone proof, and `357493` lacks its specific coordination/regulatory proof. Generic trial language does not substitute for those requirements.
+
+The expected disposition of the original 96 available scopes is 91 available, two proposals legitimately withheld after evidence retirement, and three pending source revalidation. None has received a fresh paid reassessment in this recovery. Publication must still validate and serve the derived candidate before these counts are called live. Source collection, document extraction and semantic vectors are reused unchanged.
+
+## Independent release and evaluation outcomes
+
+The researcher update is published, including the trusted admin-console link in request/failure emails. The alert incident repair merged in `9c06df7271961161d97ec9ff991098ebc6b7bb54` and deployment `34302818123` passed. An earlier Awards deployment stopped before mutation while Pages was propagating; authenticated serving version `e91048c4-f180-42d0-a0b5-681f5893f16e` has unchanged protected inputs. The two standalone deployment workflows now permit a protected-main retry with their existing concurrency, provenance, compatibility and rollback gates. This never regenerates data.
+
+Evaluation run `34300832276` used the full additional twelve-request authorization: four valid verifier completions and eight rejected response attempts. Seven of nine cases completed, including three retained negative controls; two remain structurally invalid. Total accounting is 307 requests and an estimated $4.203224 against the unchanged $15 ceiling. The receipt in `evaluation/sonnet_verification_repair_20260909.json` records failure details and diagnostic limitations. Operational workflow success is not a quality pass. No replacement route is promoted and the production team pause remains.
+
+Cov4 is separate: established Sonnet access works, but its bounded check admitted an organizational heading and failed the existing contamination gate. New classifications remain unavailable; unchecked topics are not published. Functional recovery does not depend on promoting Luna or waiving these gates.

@@ -176,6 +176,79 @@ def restore_proven_teams(model, candidates, registry):
             row['recovery_proof']['source_revalidation'] = source_review
         row.pop('revalidation_reason', None)
         result.update(state='restored_from_retained_evidence', proof=row['recovery_proof'])
+    retirements = restore_after_claim_retirement(model, candidates, registry, proof)
+    return list({row['scope_id']: row for row in [*results, *retirements]}.values())
+
+
+def restore_after_claim_retirement(model, candidates, registry, recovery):
+    """Reassemble reviewed published graphs after removing explicitly retired evidence."""
+    from scripts import build_opportunity_teams as t
+    from scripts.researcher_registry import validate_opportunity_team_dependencies
+    proof = recovery.get('claim_retirement_recovery', {})
+    scopes = {scope['id']: scope for scope in candidates}
+    claims = t.eligible_claims(registry)
+    inventory = {claim['claim_id']: (person['researcher_id'], claim)
+                 for person in registry['researchers'] for claim in person['claims']}
+    scientific = science_contract()
+    results = []
+    for row in model['opportunities']:
+        reviewed = proof.get('decisions', {}).get(row['id'])
+        if not reviewed or row.get('review_state') != 'needs_revalidation':
+            continue
+        result = {'scope_id': row['id'], 'state': 'pending', 'provider_requests': 0,
+                  'reason': 'claim_retirement_proof_mismatch'}
+        results.append(result)
+        try:
+            scope = scopes[row['id']]
+            if (proof['registry_generation'] != registry['registry_generation']
+                    or recovery['scientific_contract'] != scientific
+                    or row.get('decision_contract') != scientific
+                    or row.get('pipeline_hash') not in recovery['compatible_pipeline_hashes']
+                    or not row.get('generator_version')
+                    or reviewed['retained_decision_hash'] != retained_decision_hash(row)
+                    or row['source_fingerprint'] != scope['source_fingerprint']
+                    or reviewed['source_fingerprint'] != scope['source_fingerprint']):
+                raise ValueError('Retained source/decision identity changed')
+            removed = set(reviewed['removed_claim_ids'])
+            seen_removed = set()
+            inspected = copy.deepcopy(row)
+            for role in inspected['roles']:
+                kept = []
+                for ref in role['claim_refs']:
+                    key = ref['claim_id']
+                    if key in removed:
+                        person, claim = inventory[key]
+                        if claim['status'] != 'retired' or person != ref['researcher_id']:
+                            raise ValueError('Only explicit claim retirement can remove an edge')
+                        seen_removed.add(key)
+                    else:
+                        if any(ref[name] != claims[key][name] for name in
+                               ('claim_id', 'revision', 'material_hash', 'researcher_id')):
+                            raise ValueError('Remaining claim evidence changed')
+                        kept.append(ref)
+                role['claim_refs'] = kept
+            if not removed or seen_removed != removed:
+                raise ValueError('Retirement review does not match the retained graph')
+            proposal = restored_generated_proposal(inspected, scope, claims)
+            if not proposal:
+                if reviewed['reassembled_decision_hash'] is not None:
+                    raise ValueError('Reviewed complementary team is no longer reproducible')
+                result.update(state='withheld_after_claim_retirement', reason='no_complementary_team')
+                continue
+            assembled = dict(row, **proposal)
+            if retained_decision_hash(assembled) != reviewed['reassembled_decision_hash']:
+                raise ValueError('Reassembly differs from the explicitly reviewed decision')
+            validate_opportunity_team_dependencies(registry,
+                {'faculty': model['faculty'], 'opportunities': [assembled]})
+        except (ValueError, KeyError, TypeError):
+            continue
+        row.update(proposal)
+        row.pop('revalidation_reason', None)
+        row['claim_retirement_proof'] = {'version': 1, 'published_sha': proof['published_sha'],
+            'registry_generation': registry['registry_generation'], 'scientific_contract': scientific,
+            **reviewed, 'provider_requests': 0}
+        result.update(state='restored_from_retained_evidence', reason='retired_claim_edges_removed',
+                      proof=row['claim_retirement_proof'])
     return results
 
 

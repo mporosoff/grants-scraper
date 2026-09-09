@@ -465,6 +465,103 @@
         "reviewed_decision_hash": "d8844081c8ad07f971fb43e6dfdde3bf4f9ad2b843d1baf5ef3bd0e2a9c57e51",
         "basis": "The current unchanged official description explicitly funds a secure compute environment. Replace the obsolete security-plan table-of-contents citation with that direct goal. Preserve the exact security contributions and their RAN-specific limitations, all members, and the commercialization gap."
       }
+    },
+    "claim_retirement_recovery": {
+      "version": 1,
+      "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+      "published_model_sha256": "d1b07358c7e6308a79d48d19ef023f11e29c5d65a8954803cb6a3e0742f4d604",
+      "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+      "decisions": {
+        "344592:ab-0013": {
+          "retained_decision_hash": "032bfaabaf1d7be2bc3594b2ab8bb97e7b2c4e9ccf280609be9d5e90c87d8331",
+          "source_fingerprint": "854833046122861be4ed4c8cd70cf4ff18a126a2055753ac98ac88e9e251943f",
+          "removed_claim_ids": [
+            "urh-000158-c006"
+          ],
+          "reassembled_decision_hash": "96e82b9a157488e73b184d573e4292e441b4e7cf8cd8b51a020569b23222e862"
+        },
+        "356530": {
+          "retained_decision_hash": "57c68516edea0a42d0cdc83cc18654c00957b8f405a6606e839fd2e1f80dd5cc",
+          "source_fingerprint": "d6f046671a5f409d52b4d8482c7b690c3a3a5191c6feaf3ed9a279d06293d362",
+          "removed_claim_ids": [
+            "urh-000158-c003"
+          ],
+          "reassembled_decision_hash": "d718c3c4624e620c25592bf5fe9731197388c087bcaff6f115938ad4e45f44f5"
+        },
+        "361287": {
+          "retained_decision_hash": "63458fe0f4b1ad479bdfe902df5e5ce668401dcfafe5619b2374b41cfb593717",
+          "source_fingerprint": "7dd428f8c090404a5910894350f765cddffb1760d6af24d3e09a3c7bbc8bae0c",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": "981f1a01be454723e810f85df7817182968f8410c40ebee22d0ab1c8b4b568ed"
+        },
+        "356935": {
+          "retained_decision_hash": "89a4faa6cbf6e0e6d593f330d5fde9ced7218d0f2851501f7b15e4dbc65992ee",
+          "source_fingerprint": "2cf69736b7f1309231081f770887e6abb8319db4cd2e13a9b775c8153bd41409",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": "cc8f8a0ea644719d6635694b3078e0b5e713606ef7084b10d449cba3590565c0"
+        },
+        "360606": {
+          "retained_decision_hash": "87d26c1be64e69a46203e84b275e5338ffdedf3de859d4036e1090ee2c5034e2",
+          "source_fingerprint": "46bba26f0b9c124cdac257c5299210fc8b9af5898b0a300d300ae82b1e74b566",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": "99956720b3f2a0322a713e9849dac52efc764bfc0953c7eba939ddebf60bd69c"
+        },
+        "357430": {
+          "retained_decision_hash": "51b5e98d44b57e54b72be7d76db6566da6b13a2e1c858507e5462f8585175e97",
+          "source_fingerprint": "a6fbd35be0d654e2bfcda4da16908d90d4907fe104f207de557e5f5497b5dc4d",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": "419fbbaac2050882a0f3712f63185a05d90e0aad6cac20beeed6284d10fd3a40"
+        },
+        "357492": {
+          "retained_decision_hash": "46b4e1ae85c82d63dc88e5372b738f5a7ee7057a8a925648a65e36f67c539ca2",
+          "source_fingerprint": "f550f9636d9e6c07ffb5304f553b1dc38ed8436916732810499572e742e79877",
+          "removed_claim_ids": [
+            "urh-000158-c003",
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": "90686c717b7a8c5b08261156e88014268711c6230ca4dae117556dbfb7d103fe"
+        },
+        "363095": {
+          "retained_decision_hash": "37a71ff3874f9bf2954e000322af5784cde4f3de610a06a8c0bfc1fdf2ec6eb2",
+          "source_fingerprint": "52882569a76d0c687e6490f37b9ed9d5bac342569f9670956fce8f42b562600b",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": "0e91e118ab9b548d72d0ccda3ac15c3c3a74b1c9630dfa7c0f30f1e1235ceab9"
+        },
+        "357433": {
+          "retained_decision_hash": "28a925c9f068faf4bf3a21542e89b177582d7d5d753e11cdb8902d7e40bec757",
+          "source_fingerprint": "e7fc47645c54fb7beb5acb9024590c0dbab3bbde8ab8f87bd84cd403fb18a828",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": null
+        },
+        "357490": {
+          "retained_decision_hash": "9606bdb133a2dc3ed9abf1080bcdeddc37a05d42addd6630f052ea8080915891",
+          "source_fingerprint": "7c8029d357a42f8e79706d7f8769920e06e776fcb1b3c4259a51aecde965e2b0",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": null
+        },
+        "361399": {
+          "retained_decision_hash": "e8b79be09ee065339e8657b2303fab666f103b1b6cea2bd289152f90ae84f415",
+          "source_fingerprint": "f3b62786ea4a692220b351e9c1a27c7e9ab6acc4e32fa5c39efcd5d8ca7693fe",
+          "removed_claim_ids": [
+            "urh-000158-c005"
+          ],
+          "reassembled_decision_hash": "462f6fea6ecf847f4bfe5ac9e1ad6ccb08fd42d651e0cc2718f0f8d8e34ccc37"
+        }
+      }
     }
   }
 }
