@@ -115,7 +115,7 @@
       "prompt_version": "established-sonnet-repair-2"
     },
     "verification": {
-      "max_output_tokens": 8000,
+      "max_output_tokens": 16000,
       "prompt_version": "sonnet-production-verification-3"
     }
   },

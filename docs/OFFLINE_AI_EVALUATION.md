@@ -8,7 +8,7 @@ The first production-contract population run (`34345705095`) failed its gate:
 source findings and accounting. The active verifier is now
 `sonnet-production-verification-3`; decomposition and adjudication retain
 `established-sonnet-repair-2`. The receipt directory advances to
-`sonnet-production-teams-3`, preserving versions 1 and 2 and reusing only exact valid
+`sonnet-production-teams-4`, preserving versions 1 through 3 and reusing only exact valid
 stage responses. Ordinary production stages also reconstruct a pending format
 correction from the retained ledger. Safe semantic rule/path diagnostics do not
 authorize format retries of scientific failures.
@@ -445,3 +445,7 @@ These two curated restorations are now live in candidate `3f7a93244cd6542a3d69a8
 Of the four remaining scopes, `363179` has an obsolete citation whose security role remains directly supported by the unchanged current official description: it can cite the explicit secure-compute goal instead of an old table-of-contents entry. No role, required flag, member, claim edge, variant, objective or gap changes. The explicit citation review binds original published graph/source identity, old/current document-projection hashes, exact old/new quotes and the complete reviewed resulting graph. The normal generated assembly and current claim checks remain mandatory. An unrelated amendment, claim change, missing quotation or changed result fails closed. Review rejected the initially proposed generic clinical-trial citation for `357493`: a study-type statement does not specifically support its coordination/regulatory role. That proposal was removed before candidate assembly; the row remains withheld.
 
 This citation-only repair proposes 93 of the prior 96 scopes: 15 retained and 78 restored using retained evidence, including 17 explicit source reviews. It makes zero new provider assessments and counts zero legitimate removals. Three remain pending: `332894:superconducting-qubits` lacks current bounded child-declaration proof; `356953` lacks the retained phased-milestone source evidence needed for its objective and required gap; `357493` lacks specific source support for its retained coordination/regulatory role. None is silently reclassified as a scientific rejection. New source/profile/claim changes invalidate the narrowly bound restoration proofs normally.
+
+The production verifier retains prompt version 3 with a 16,000-token output ceiling after run 34355444392 recorded a terminal 8,000-token truncation. This is an incomplete execution, not a scientific rejection. Decomposition/adjudication stay at 8,000 tokens; per-run and task spending limits remain unchanged.
+
+For the explicitly authorized final assembled-package validation, dispatch the existing refresh orchestrator with `final_integration=true`. Its validation job runs the configured Playwright/accessibility suite without provider credentials before publication and saves `final-integration.json` with exact candidate and test-input hashes. An unchanged successful receipt is reused on retries. Ordinary CI and automatic refreshes do not run E2E.

@@ -2,9 +2,41 @@
 import argparse
 import os
 from pathlib import Path
+import shutil
 import subprocess
 
 from tools import release_candidate as candidate
+
+
+def final_integration(root, bundle, reports, previous=None, *, execute=subprocess.run):
+    """Explicit manual browser validation of the already assembled candidate."""
+    root, bundle, reports = Path(root), Path(bundle), Path(reports)
+    manifest = candidate.verify_receipt(root, bundle, candidate.read_json(reports / 'validation.json'))
+    inputs = candidate.file_hashes(root, candidate.paths(root, [
+        'tests/e2e/**/*', 'tests/fixtures/**/*', 'playwright.config.*', 'package.json', 'pnpm-lock.yaml']))
+    identity = {'candidate_id': manifest['candidate_id'], 'candidate_hashes': manifest['files'], 'test_inputs': inputs}
+    if previous and Path(previous).exists():
+        prior = candidate.read_json(previous)
+        if prior.get('identity') == identity and prior.get('passed') is True:
+            candidate.write_json(reports / 'final-integration.json', prior)
+            return prior
+    candidate.materialize(root, bundle)
+    report = {'identity': identity, 'passed': False, 'new_generation_calls': 0,
+              'validation_sha': candidate.git(root, 'rev-parse', 'HEAD'), 'timestamp': candidate.timestamp()}
+    try:
+        execute(['pnpm', 'exec', 'playwright', 'install', '--with-deps', 'chromium'], cwd=root, timeout=600, check=True)
+        result = execute(['pnpm', 'test:e2e'], cwd=root, timeout=2100, check=False)
+        stats = candidate.read_json(root / 'test-results/playwright-results.json').get('stats', {})
+        report['stats'] = stats
+        candidate.verify_files(root, manifest['files'])
+        report['passed'] = result.returncode == 0 and stats.get('expected', 0) > 0 and stats.get('unexpected') == 0
+    finally:
+        if (root / 'test-results').exists():
+            shutil.copytree(root / 'test-results', reports / 'browser-results', dirs_exist_ok=True)
+        candidate.write_json(reports / 'final-integration.json', report)
+    if not report['passed']:
+        raise ValueError('Final browser integration failed; retain the exact candidate and test evidence')
+    return report
 
 
 def validate(root, bundle, reports, previous=None, *, execute=subprocess.run):
@@ -63,9 +95,13 @@ def main():
     parser.add_argument('--bundle', type=Path, required=True)
     parser.add_argument('--reports', type=Path, required=True)
     parser.add_argument('--previous', type=Path)
+    parser.add_argument('--final-integration', action='store_true', help='Explicit manual E2E/accessibility on the already validated package')
     args = parser.parse_args()
     try:
-        validate(candidate.ROOT, args.bundle, args.reports, args.previous)
+        if args.final_integration:
+            final_integration(candidate.ROOT, args.bundle, args.reports, args.previous)
+        else:
+            validate(candidate.ROOT, args.bundle, args.reports, args.previous)
     except Exception as error:
         # Dependency/provenance failures also need retained evidence even when
         # they precede the first gate. No provider credentials exist here.

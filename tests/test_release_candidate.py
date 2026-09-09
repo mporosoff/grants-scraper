@@ -9,7 +9,7 @@ import unittest
 from unittest.mock import patch
 
 from tools import release_candidate as c
-from tools.validate_release_candidate import validate
+from tools.validate_release_candidate import validate, final_integration
 from tools.verify_notice_publication import verify, bounded_public_value
 from tests import test_notice_publication
 
@@ -40,6 +40,7 @@ class CandidateLifecycleTests(unittest.TestCase):
             'index.html': '<main>current</main>', 'assets/app.css': 'main {}', '.nojekyll': '',
             'workers/search/src/index.js': 'export default {};', 'tools/validator.py': 'VERSION = 1\n',
             '.github/workflows/release.yml': 'version: 1', 'evaluation/frozen.json': '{}',
+            'package.json': '{"scripts":{"test:e2e":"playwright test"}}', 'pnpm-lock.yaml': 'lockfileVersion: 9',
             'tools/check.sh': 'true',
         }.items():
             path = self.root / name
@@ -83,6 +84,73 @@ class CandidateLifecycleTests(unittest.TestCase):
         self.assertTrue((self.reports / 'validation-report.json').exists())
         self.assertFalse((self.reports / 'validation.json').exists())
         self.assertEqual(len(commands), len(c.GATES))
+
+    def browser_result(self, commands, *, failed=False, mutate=False):
+        def run(command, **kwargs):
+            commands.append(command)
+            if command == ['pnpm', 'test:e2e']:
+                c.write_json(self.root / 'test-results/playwright-results.json', {
+                    'stats': {'expected': 3, 'unexpected': int(failed), 'skipped': 0}})
+                if mutate:
+                    (self.root / 'data/opportunities.js').write_text('invalid test mutation')
+            return subprocess.CompletedProcess(command, int(failed))
+        return run
+
+    def test_manual_browser_integration_reuses_exact_candidate_and_test_receipt(self):
+        manifest = self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        commands = []
+        first = final_integration(self.root, self.bundle, self.reports,
+                                  execute=self.browser_result(commands))
+        self.assertTrue(first['passed'])
+        self.assertEqual(first['identity']['candidate_hashes'], manifest['files'])
+        self.assertEqual(first['new_generation_calls'], 0)
+        self.assertEqual(len(commands), 2)
+        prior = self.reports / 'final-integration.json'
+        repeated = final_integration(self.root, self.bundle, self.reports, prior,
+            execute=lambda *args, **kwargs: self.fail('Unchanged E2E must not repeat'))
+        self.assertEqual(repeated, first)
+        c.verify_files(self.root, manifest['files'])
+        test = self.root / 'tests/e2e/current.spec.mjs'
+        test.parent.mkdir(parents=True)
+        test.write_text('changed browser contract')
+        current = final_integration(self.root, self.bundle, self.reports, prior,
+                                    execute=self.browser_result(commands))
+        self.assertNotEqual(current['identity'], first['identity'])
+        self.assertEqual(len(commands), 4)
+
+    def test_browser_failure_retains_candidate_and_ordinary_validation_for_retry(self):
+        manifest = self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        ordinary = (self.reports / 'validation.json').read_bytes()
+        for mutate in (False, True):
+            with self.subTest(mutate=mutate), self.assertRaises(ValueError):
+                final_integration(self.root, self.bundle, self.reports,
+                    execute=self.browser_result([], failed=not mutate, mutate=mutate))
+            self.assertFalse(c.read_json(self.reports / 'final-integration.json')['passed'])
+            self.assertEqual((self.reports / 'validation.json').read_bytes(), ordinary)
+            self.assertEqual(c.load(self.bundle), manifest)
+        # A failed test cannot poison the artifact used by the next validator.
+        c.git(self.root, 'checkout', 'HEAD', '--', 'data/opportunities.js')
+        c.materialize(self.root, self.bundle)
+        self.assertTrue(final_integration(self.root, self.bundle, self.reports,
+            self.reports / 'final-integration.json', execute=self.browser_result([]))['passed'])
+
+    def test_changed_candidate_never_reuses_old_browser_receipt(self):
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        old = Path(self.temp.name) / 'old-browser.json'
+        c.write_json(old, first)
+        (self.root / 'data/opportunities.js').write_text('next complete candidate')
+        self.bundle = Path(self.temp.name) / 'next-candidate'
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        commands = []
+        current = final_integration(self.root, self.bundle, self.reports, old,
+                                    execute=self.browser_result(commands))
+        self.assertNotEqual(first['identity']['candidate_id'], current['identity']['candidate_id'])
+        self.assertEqual(len(commands), 2)
 
     def test_expired_or_missing_candidate_recovers_only_exact_protected_bytes(self):
         from tools import fetch_release_artifact as artifacts

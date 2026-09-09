@@ -1,7 +1,7 @@
 {
-  "version": "sonnet-production-teams-3",
-  "prior_receipt_version": "sonnet-production-teams-1",
-  "receipt_revision_reason": "Bind qualification to durable format correction in ordinary production stages, explicit semantic diagnostics, and the consolidated verifier correction. Decomposition/adjudication prompts and frozen cases remain unchanged; reuse only exact compatible stage responses.",
+  "version": "sonnet-production-teams-4",
+  "prior_receipt_version": "sonnet-production-teams-3",
+  "receipt_revision_reason": "Run 34355444392 recorded an 8000-output-token max_tokens stop in verification for 361526:g-12. Increase only the production verifier output ceiling to 16000; preserve the scientific prompt, frozen cases, earlier failure/results and exact decomposition/adjudication caches. All prior request/accounting rows remain unchanged.",
   "authority": "User-authorized restoration of established Sonnet services; no model comparison",
   "populations": {
     "regression": [
