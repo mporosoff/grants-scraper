@@ -1,5 +1,49 @@
 # Frozen offline AI evaluation, September 8, 2026
 
+## Active production restoration authorization, September 9
+
+The user has funded Anthropic and authorized restoration of the established
+Sonnet team and Cov4 services. This supersedes the historical no-request and
+no-pause-clearing instructions below only for those services. It does not
+authorize another provider/model comparison. Historical artifacts remain evidence.
+
+`config/sonnet_production_qualification.json` records one additional allowance:
+200 Anthropic requests and $10, including retries and production pilots, within
+the original cumulative $15 ceiling. `authorize_allowance` extends the restored
+ledger once from its actual request count and conservatively charged usage,
+including uncertain reservations. Re-dispatch cannot grant another allowance.
+Production per-run limits remain five pilot scopes and $2; backfill stays manual.
+
+The first phase is one native structured-output compatibility preflight (at most
+three durably counted attempts, including transient retries):
+
+```sh
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-preflight
+```
+
+This uses the existing main-only Actions credential mapping and shared client,
+with Anthropic's `output_config.format` and a supported schema projection. The
+full original schema and scientific validators remain authoritative. Successful
+access is separate from team/Cov4 quality, enablement and publication. A failed
+preflight receipt is retained and does not silently repeat on dispatch. The
+preflight retires only obsolete evaluation scope stops; new account denials stay
+blocked. Production's credit pause remains until reviewed quality and access
+evidence authorize each service independently.
+
+While the qualification manifest says `automatic_generation: hold`, automatic
+source/team generation waits. This prevents a preparatory shared-client merge
+from starting a production batch before the approved pilot. Exact explicit
+validation, publication and live-verification retries remain available. The hold
+must be released as part of the qualified service rollout.
+
+The client retains failed-stage shape diagnostics and charges reported usage
+before validation. It permits at most one format-correction request with new
+diagnostics, and never repeatedly sends an identical schema-invalid request.
+Refusals, truncation, and semantic validation failures remain distinct outcomes;
+scientific decisions are never completed by filling missing fields locally.
+
+## Historical evaluation record
+
 This preparatory entrypoint evaluates public-derived evidence only. It does not
 change production team routing, Cov4, the catalog, browser features, or releases.
 Production remains on the established Sonnet route until a separately reviewed

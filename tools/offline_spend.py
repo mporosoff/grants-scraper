@@ -161,6 +161,9 @@ class Ledger:
     def reserve(self, provider, model, stage, key, amount, attempt):
         with self.locked():
             state = self.read()
+            allowance = state.get('active_allowance')
+            if allowance and provider not in allowance['providers']:
+                raise ConfigurationFailure('provider_outside_task_allowance')
             if provider in state["blocked_providers"]:
                 raise ConfigurationFailure(state["blocked_providers"][provider])
             spent = sum(r["charged_microusd"] for r in state["requests"])
@@ -183,6 +186,7 @@ class Ledger:
     def block(self, provider, reason):
         with self.locked():
             state = self.read()
+            state['events'].append({'kind': 'provider_stop', 'provider': provider, 'reason': reason})
             state["blocked_providers"][provider] = reason
             atomic_json(self.path, state)
 
@@ -230,3 +234,73 @@ class Ledger:
             "blocked_providers": state["blocked_providers"], "prices_verified_at": config()["prices_verified_at"]}
 
 
+def restore_ledger(path, logical_id, limit_usd, max_requests, authorization=None):
+    """Restore a reviewed dynamic allowance without granting it or clearing stops."""
+    path = Path(path)
+    if not path.exists():
+        return Ledger(path, logical_id, limit_usd, max_requests)
+    state = json.loads(path.read_bytes())
+    if not state.get('active_allowance'):
+        return Ledger(path, logical_id, limit_usd, max_requests)
+    if not authorization or state['active_allowance'] != authorization:
+        raise ConfigurationFailure('task_allowance_identity_mismatch')
+    grants = [event for event in state['events'] if event.get('kind') == 'task_allowance'
+              and event.get('authorization', {}).get('id') == authorization['id']]
+    if len(grants) != 1 or grants[0]['authorization'] != authorization:
+        raise ConfigurationFailure('task_allowance_identity_mismatch')
+    grant = grants[0]
+    prefix = state['requests'][:grant['prior_request_count']]
+    if (identity(prefix) != grant['prior_requests_sha256']
+            or state['max_requests'] != grant['to_max_requests']
+            or state['limit_microusd'] != grant['to_limit_microusd']
+            or state['max_requests'] != len(prefix) + authorization['additional_requests']
+            or state['limit_microusd'] != min(grant['from_limit_microusd'],
+                int(Decimal(str(authorization['cumulative_usd'])) * 1_000_000),
+                sum(row['charged_microusd'] for row in prefix) +
+                    int(Decimal(str(authorization['additional_usd'])) * 1_000_000))):
+        raise ConfigurationFailure('task_allowance_history_mismatch')
+    return Ledger(path, logical_id, Decimal(state['limit_microusd']) / 1_000_000, state['max_requests'])
+
+
+def authorize_allowance(path, logical_id, authorization):
+    """Extend retained accounting once, from usage rather than historical counts.
+
+    This never creates missing history and never clears an account denial.
+    Repeating a grant must present the identical authorization, including its ID.
+    All uncertain reservations are included in the monetary starting point.
+    """
+    path = Path(path)
+    initial = json.loads(path.read_bytes())
+    if initial.get('active_allowance', {}).get('id') == authorization['id']:
+        return restore_ledger(path, logical_id, 0, 0, authorization)
+    ledger = Ledger(path, logical_id, Decimal(initial['limit_microusd']) / 1_000_000,
+                    initial['max_requests'])
+    with ledger.locked():
+        state = ledger.read()
+        grants = [event for event in state['events'] if event.get('kind') == 'task_allowance'
+                  and event.get('authorization', {}).get('id') == authorization['id']]
+        if grants:
+            if len(grants) != 1 or grants[0]['authorization'] != authorization:
+                raise ConfigurationFailure('task_allowance_identity_mismatch')
+            return ledger
+        count = authorization['additional_requests']
+        dollars = authorization['additional_usd']
+        if type(count) is not int or count <= 0 or dollars <= 0:
+            raise ValueError('invalid_task_allowance')
+        spent = sum(row['charged_microusd'] for row in state['requests'])
+        new_limit = min(state['limit_microusd'],
+                        int(Decimal(str(authorization['cumulative_usd'])) * 1_000_000),
+                        spent + int(Decimal(str(dollars)) * 1_000_000))
+        if spent >= new_limit:
+            raise Deferred('logical_budget_exhausted')
+        grant = {'kind': 'task_allowance', 'authorization': authorization,
+                 'prior_ledger_sha256': identity(state), 'prior_request_count': len(state['requests']),
+                 'prior_requests_sha256': identity(state['requests']), 'prior_charged_microusd': spent,
+                 'from_max_requests': state['max_requests'], 'from_limit_microusd': state['limit_microusd'],
+                 'to_max_requests': len(state['requests']) + count, 'to_limit_microusd': new_limit}
+        state.update(max_requests=grant['to_max_requests'], limit_microusd=new_limit,
+                     active_allowance=authorization)
+        state['events'].append(grant)
+        atomic_json(path, state)
+        ledger.limit, ledger.max_requests = new_limit, grant['to_max_requests']
+    return ledger

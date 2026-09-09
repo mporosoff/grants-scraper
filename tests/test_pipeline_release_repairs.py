@@ -384,11 +384,11 @@ class NegativeResponseDiagnostics(unittest.TestCase):
             provider = teams.Provider(directory, ledger=Ledger(Path(directory) / "spend" / "ledger.json", "fixture", 2))
             with patch.object(teams.requests, 'post', return_value=Mock(status_code=200, json=lambda: response({'specific': False, 'objective': '', 'roles': []}))) as post:
                 result, proposal = teams.generate_scope(self.scope, provider, self.claims, [], 'registry', float('inf'))
-            self.assertEqual(post.call_count, 3)
+            self.assertEqual(post.call_count, 1)
             self.assertIsNone(proposal)
             self.assertTrue(result['retry_eligible'])
             self.assertEqual(result['validation_reason'], 'invalid_scientific_objective')
-            self.assertEqual([r['status'] for r in provider.ledger.read()['requests']], ['ValueError'] * 3)
+            self.assertEqual([r['status'] for r in provider.ledger.read()['requests']], ['ValueError'])
             self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
         self.assertEqual(teams.validation_reason(ValueError('sensitive provider body')), 'invalid_response_structure')
 

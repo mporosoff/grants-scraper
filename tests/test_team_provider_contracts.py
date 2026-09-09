@@ -84,7 +84,7 @@ class TeamProviderContracts(unittest.TestCase):
                     provider = self.provider(directory)
                     with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: response(value))) as post, self.assertRaises(ValueError):
                         provider.json(prompt, data)
-                    self.assertEqual(post.call_count, 3)
+                    self.assertEqual(post.call_count, 2 if any(isinstance(v, list) for v in altered.values()) else 1)
                     self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
         data["proposed_edges"] = [self.edges[0] | {"coverage": "adjacent"}]
         with tempfile.TemporaryDirectory() as directory, patch.object(teams.time, "sleep"):
@@ -112,16 +112,17 @@ class TeamProviderContracts(unittest.TestCase):
         data = {"scope": self.scope["text"], "record_type": self.scope["record_type"]}
         invalid_quote = copy.deepcopy(self.decomposition)
         invalid_quote["roles"][0]["quote"] = "Invented unsupported scientific requirement."
-        for payload in (response({}), response(invalid_quote), response({}) | {"stop_reason": "max_tokens"},
-                        response({}) | {"content": [{"type": "text", "text": "{"}]},
-                        response({}) | {"content": None}, []):
+        for payload, attempts in ((response({}), 2), (response(invalid_quote), 1),
+                        (response({}) | {"stop_reason": "max_tokens"}, 1),
+                        (response({}) | {"content": [{"type": "text", "text": "{"}]}, 2),
+                        (response({}) | {"content": None}, 1), ([], 1)):
             with tempfile.TemporaryDirectory() as directory, patch.object(teams.time, "sleep") as sleep, self.subTest(payload=payload):
                 provider = self.provider(directory)
                 with patch.object(teams.requests, "post", return_value=Mock(status_code=200, json=lambda: payload)) as post, self.assertRaises(ValueError):
                     provider.json(teams.DECOMPOSE, data)
-                self.assertEqual(post.call_count, 3)
-                self.assertEqual(self.llm_summary(provider)["failures"], 3)
-                self.assertEqual([call.args[0] for call in sleep.call_args_list], [1, 2])
+                self.assertEqual(post.call_count, attempts)
+                self.assertEqual(self.llm_summary(provider)["failures"], attempts)
+                self.assertEqual([call.args[0] for call in sleep.call_args_list], [1] if attempts == 2 else [])
                 self.assertEqual(list((Path(directory) / "spend" / "team-responses").glob("*.json")), [])
 
     def test_valid_scientific_negative_is_cached_and_revalidated(self):

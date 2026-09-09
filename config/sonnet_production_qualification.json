@@ -1,0 +1,15 @@
+{
+  "authorization": {
+    "id": "sonnet-production-completion-20260909",
+    "additional_requests": 200,
+    "additional_usd": 10,
+    "cumulative_usd": 15,
+    "providers": ["anthropic"],
+    "scope": "Qualify and restore team generation and Cov4, including preflights, retries and linked production pilots. Production per-run limits remain unchanged."
+  },
+  "historical_evaluation_run": "34300832276",
+  "automatic_generation": "hold",
+  "status": "transport_preflight_pending",
+  "teams": "quality_gate_pending",
+  "cov4": "quality_gate_pending"
+}

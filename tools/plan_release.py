@@ -9,9 +9,12 @@ from tools import release_candidate as c
 from tools.release_dependencies import snapshot, candidate_groups, changed_groups
 
 
-def decide(changes, *, event, requested='', verified=False, receipt_current=False, runtime_changed=False, published=False):
+def decide(changes, *, event, requested='', verified=False, receipt_current=False, runtime_changed=False, published=False,
+           qualification_hold=False):
     if requested in ('generate', 'teams', 'backfill', 'reuse', 'validate', 'publish', 'verify'):
         return requested
+    if qualification_hold and (event == 'schedule' or set(changes) & {'source', 'teams', 'semantic'}):
+        return 'noop'
     if event == 'schedule' or set(changes) & {'source', 'semantic'}:
         return 'generate'
     if 'teams' in changes:
@@ -136,15 +139,21 @@ def plan(root, environment, *, receipt=None, live=None, publication=None, resume
     verified = bool(live and live.get('verified') is True and live.get('candidate_id') == candidate)
     receipt_current = bool(receipt and receipt.get('identity') == c.validation_identity(root, manifest)
                            and receipt.get('gates') == {g: 'passed' for g in c.GATES})
+    qualification_path = root / 'config/sonnet_production_qualification.json'
+    qualification = c.read_json(qualification_path) if qualification_path.exists() else {}
+    hold = qualification.get('automatic_generation') == 'hold'
     stage = decide(changes, event=environment['GITHUB_EVENT_NAME'], requested=requested,
-                   verified=verified, receipt_current=receipt_current, runtime_changed=bool(runtime), published=published)
+                   verified=verified, receipt_current=receipt_current, runtime_changed=bool(runtime), published=published,
+                   qualification_hold=hold)
     model = c.read_json(root / 'config/opportunity_team_model.json')
     mode = 'backfill' if stage == 'backfill' else 'maintenance' if model.get('economical_pilot') else 'pilot'
     return {'stage': stage, 'release_sha': sha, 'candidate_id': candidate, 'candidate_run': run,
             'team_mode': mode, 'changes': changes, 'runtime_changes': runtime, 'live_verified': verified,
             'publication_run': publication['run'] if published else '',
             'publication_attempt': publication['attempt'] if published else '',
-            'receipt_current': receipt_current, 'reason': 'Dependency fingerprints and retained release evidence'}
+            'receipt_current': receipt_current, 'qualification_hold': hold,
+            'reason': 'Generation held for bounded service qualification' if hold and stage == 'noop' else
+                      'Dependency fingerprints and retained release evidence'}
 
 
 def main():

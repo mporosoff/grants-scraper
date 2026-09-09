@@ -92,7 +92,7 @@ class TeamPromptRepairContracts(unittest.TestCase):
             ledger.block('anthropic', 'anthropic_configuration_http_400')
             with self.assertRaises(ConfigurationFailure):
                 trial.authorize_baseline(ledger, protocol, True)
-            self.assertFalse(ledger.read()['events'])
+            self.assertFalse(any(e.get('kind') == trial.GRANT_EVENT for e in ledger.read()['events']))
 
     def test_real_entrypoint_retains_charges_reuses_completed_baseline_and_keeps_production_pause(self):
         protocol, cases = trial.population()

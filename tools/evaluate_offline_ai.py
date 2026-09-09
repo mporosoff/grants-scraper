@@ -220,13 +220,78 @@ def preflight(client):
                        {"ready": True}, schemas()["preflight"], validate)
 
 
+def evaluation_ledger(path):
+    from tools.offline_spend import restore_ledger
+    authorization = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())['authorization']
+    return restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], authorization)
+
+
+def production_preflight(state):
+    """One bounded native Sonnet compatibility check under the retained allowance."""
+    from tools.offline_spend import authorize_allowance
+    from tools.offline_ai import TRANSPORT_VERSION
+    protocol = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())
+    ledger = authorize_allowance(state / 'ledger.json', TASK, protocol['authorization'])
+    settings = config()
+    stage = settings['stages']['preflight'] | {'max_attempts': 3, 'durable_attempts': True}
+    expected = identity({'route': settings['routes']['sonnet'], 'stage': stage,
+                         'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION})
+    marker = state / 'production-preflight-receipt.json'
+    if marker.exists():
+        receipt = json.loads(marker.read_bytes())
+        if receipt['contract'] != expected:
+            raise ConfigurationFailure('preflight_contract_changed')
+        return receipt  # A failed compatibility probe does not get a silent repeat.
+    with ledger.locked():
+        retained = ledger.read()
+        prior = retained['blocked_providers'].get('anthropic')
+        # These are evaluation-only scope stops, not account denials. A new 4xx,
+        # billing or security stop must remain blocked even on workflow retries.
+        if prior not in (None, 'bounded_established_service_check_only', 'bounded_baseline_scope_only'):
+            raise ConfigurationFailure('unresolved_provider_stop')
+        if prior:
+            retained['events'].append({'kind': 'retire_evaluation_scope_stop', 'provider': 'anthropic',
+                'prior_reason': prior, 'authorization_id': protocol['authorization']['id']})
+            del retained['blocked_providers']['anthropic']
+            atomic_json(ledger.path, retained)
+    client = Client(ledger, state / 'cache', deadline=time.monotonic() + 180)
+    receipt = {'contract': expected, 'complete': False, 'quality_gate_passed': False,
+               'production_enabled': False, 'transport': TRANSPORT_VERSION}
+    try:
+        result = client.json(settings['routes']['sonnet'], 'preflight',
+            'Return exactly the requested readiness object.', {'ready': True}, schemas()['preflight'],
+            lambda value: value if value == {'ready': True} else valid_preflight_failure(), stage_config=stage)
+        receipt.update(complete=True, result=result, status='native_structured_output_supported')
+    except (ValueError, RuntimeError, requests.RequestException) as error:
+        receipt.update(status='unavailable_or_invalid', error_type=type(error).__name__)
+        if isinstance(error, Deferred) and str(error) in {'work_deadline_exhausted', 'retry_deadline_exhausted'}:
+            receipt['status'] = 'retryable_processing'
+    finally:
+        atomic_json(state / 'usage-summary.json', ledger.summary())
+    # An interrupted process has no terminal result. Its retained ledger drives
+    # the next invocation, including reconstruction of a pending correction.
+    if receipt['status'] != 'retryable_processing':
+        atomic_json(marker, receipt)
+    return receipt
+
+
+def valid_preflight_failure():
+    raise ValueError('preflight_schema_mismatch')
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=["preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
+    parser.add_argument("phase", choices=["production-preflight", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
     parser.add_argument("--state", type=Path, required=True)
     args = parser.parse_args()
+    if args.phase == 'production-preflight':
+        receipt = production_preflight(args.state)
+        print(json.dumps(receipt))
+        if not receipt['complete']:
+            raise SystemExit(1)
+        return
     args.state.mkdir(parents=True, exist_ok=True)
-    ledger = Ledger(args.state / "ledger.json", TASK, config()["budgets_usd"]["evaluation"], max_requests=config()["max_requests"])
+    ledger = evaluation_ledger(args.state / "ledger.json")
     if args.phase == 'preflight':
         resume_preflight_credential(ledger)
     client = Client(ledger, args.state / "cache", deadline=time.monotonic() + 2400)

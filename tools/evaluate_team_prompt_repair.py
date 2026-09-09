@@ -187,8 +187,7 @@ def main():
     parser.add_argument('--state', type=Path, required=True)
     args = parser.parse_args()
     protocol, cases = population()
-    ledger = Ledger(args.state / 'ledger.json', original.TASK, config()['budgets_usd']['evaluation'],
-                    max_requests=config()['max_requests'])
+    ledger = original.evaluation_ledger(args.state / 'ledger.json')
     directory = args.state / protocol['version']
     directory.mkdir(parents=True, exist_ok=True)
     phase = args.phase.removeprefix('round2-')
