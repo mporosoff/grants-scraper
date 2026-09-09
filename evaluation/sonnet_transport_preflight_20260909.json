@@ -1,0 +1,23 @@
+{
+  "complete": true,
+  "contract": "a88216cc239d47ff51403c1533d3ff41dfbc266a1a5aecb5371f168ce507938a",
+  "production_enabled": false,
+  "quality_gate_passed": false,
+  "result": {
+    "ready": true
+  },
+  "status": "native_structured_output_supported",
+  "transport": "anthropic-structured-json-1",
+  "pr": 199,
+  "reviewed_sha": "eff79680aa24117b62a4a940100c362c9ebbd871",
+  "merge_sha": "f787de2b7a2d143a26f23fd8e2be6dea070a4585",
+  "run": "34340584535",
+  "request_count": 308,
+  "new_requests": 1,
+  "new_estimated_usd": 0.00052,
+  "cumulative_estimated_usd": 4.203744,
+  "max_requests": 507,
+  "limit_usd": 14.203224,
+  "historical_requests_unchanged": true,
+  "authorization_events": 1
+}

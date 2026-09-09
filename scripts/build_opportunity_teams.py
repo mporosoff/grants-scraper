@@ -878,6 +878,7 @@ def main():
     claims = eligible_claims(registry)
     claims_generation = content_hash([{key: c[key] for key in ("claim_id", "revision", "material_hash", "researcher_id")} for c in claims.values()])
     pipeline_hash = maintenance.science_contract()
+    compatible_contracts = maintenance.compatible_contracts()
     eligibility = []
     candidates = scopes(diagnostics=eligibility)
     input_generation = content_hash([claims_generation, [scope['source_fingerprint'] for scope in candidates]])
@@ -896,12 +897,15 @@ def main():
                          model.get("accepted_scope_snapshot") or current_snapshot)
     affected_contracts = maintenance.migrate_legacy(model, candidates, claims_generation, current_snapshot['claims'])
     recovery_results = maintenance.restore_proven_teams(model, candidates, registry)
+    claim_updates = maintenance.reassemble_changed_claims(model, candidates, registry)
     attempts = model.setdefault("generation_attempts", {})
     def attempt_key(scope, state=None):
         attempt = attempts.get(scope["id"])
         if state:
             attempt = (attempt if isinstance(attempt, dict) else {}) | {'state': state}
-        return maintenance.decision_key(scope, attempt, current_snapshot['claims'], pipeline_hash)
+        retained_contract = attempt.get('decision_contract') if isinstance(attempt, dict) else None
+        scientific = retained_contract if not state and retained_contract in compatible_contracts else pipeline_hash
+        return maintenance.decision_key(scope, attempt, current_snapshot['claims'], scientific)
     assembly_updates = refresh_assemblies(existing, candidates, claims, registry["registry_generation"])
     by_id = {scope["id"]: scope for scope in candidates}
     for result in assembly_updates:
@@ -912,7 +916,7 @@ def main():
                 attempts[result["scope_id"]] = {"key": attempt_key(by_id[result["scope_id"]], result["state"]), "state": result["state"], "response_contract": RESPONSE_VERSION}
     pending = [s for s in candidates if (s["id"] not in existing or existing[s["id"]].get("review_state") == "needs_revalidation"
                or (existing[s["id"]].get("generator_version")
-                   and existing[s["id"]].get("decision_contract") != pipeline_hash))
+                   and existing[s["id"]].get("decision_contract") not in compatible_contracts))
                and not attempt_completed(attempts.get(s["id"]), attempt_key(s), existing.get(s["id"]))]
     maintenance_queue, backfill_queue, queue_reasons = maintenance.queues(
         pending, existing, attempts, previous_snapshot, current_snapshot,
@@ -939,6 +943,7 @@ def main():
               "eligibility": eligibility,
               "source_invalidations": affected_sources, "assessment_invalidations": affected_contracts,
               "assembly_updates": assembly_updates,
+              "claim_updates": claim_updates,
               "targeted_recovery": {"published_scope_count": len(recovery['published_decisions']),
                   "deterministic_results": recovery_results, "recovery_only": args.recovery_only,
                   "selected_pending_scopes": len(selected)} if recovery else None,

@@ -4,12 +4,16 @@
     "additional_requests": 200,
     "additional_usd": 10,
     "cumulative_usd": 15,
-    "providers": ["anthropic"],
+    "providers": [
+      "anthropic"
+    ],
     "scope": "Qualify and restore team generation and Cov4, including preflights, retries and linked production pilots. Production per-run limits remain unchanged."
   },
   "historical_evaluation_run": "34300832276",
   "automatic_generation": "hold",
-  "status": "transport_preflight_pending",
+  "status": "native_transport_verified",
   "teams": "quality_gate_pending",
-  "cov4": "quality_gate_pending"
+  "cov4": "quality_gate_pending",
+  "transport_evidence": "evaluation/sonnet_transport_preflight_20260909.json",
+  "team_protocol": "evaluation/sonnet_production_teams.json"
 }

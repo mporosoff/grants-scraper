@@ -91,7 +91,7 @@ def phase_complete(phase, result):
     return True
 
 
-def team_case(client, route_name, case):
+def team_case(client, route_name, case, *, production=False):
     from scripts import build_opportunity_teams as t
     settings = config()
     route = settings["routes"][route_name if route_name != "luna-sonnet-verifier" else "luna"]
@@ -104,9 +104,18 @@ def team_case(client, route_name, case):
         # The baseline preserves its prior 8k ceiling; it is a ceiling, not billed usage.
         if actual["provider"] == "anthropic":
             stage_config = stage_config | {"max_output_tokens": 8000}
-        value = client.json(actual, name, prompt, data, schemas()[name],
-                            lambda value: t.validate_response(prompt, data, value), stage_config=stage_config)
+        actual_prompt, schema = prompt, schemas()[name]
+        if production:
+            from tools.team_provider import stage_contract
+            selected = stage_contract(name)
+            actual, stage_config, actual_prompt, schema = (selected[key] for key in ('route', 'settings', 'prompt', 'schema'))
+        from tools.offline_ai import validate_schema
+        value = client.json(actual, name, actual_prompt, data, schema,
+                            lambda value: t.validate_response(prompt, data, validate_schema(value, schema)), stage_config=stage_config)
         output["stages"][name] = value
+        if production:
+            output.setdefault('request_contracts', {})[name] = identity({'route': actual, 'stage': name,
+                'config': stage_config, 'prompt': actual_prompt, 'schema': schema, 'inputs': data})
         return value
     try:
         decomposition = stage("decomposition", t.DECOMPOSE, {"scope": scope["text"],
@@ -226,24 +235,47 @@ def evaluation_ledger(path):
     return restore_ledger(path, TASK, config()['budgets_usd']['evaluation'], config()['max_requests'], authorization)
 
 
+def production_preflight_configuration():
+    from tools.offline_ai import TRANSPORT_VERSION
+    settings = config()
+    return {'route': settings['routes']['sonnet'],
+            'stage': settings['stages']['preflight'] | {'max_attempts': 3, 'durable_attempts': True},
+            'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION,
+            'implementation': {'transport_module': module_hash('tools/offline_ai.py'),
+                               'adapter': function_hash(production_preflight),
+                               'validator': function_hash(valid_preflight_failure)}}
+
+
 def production_preflight(state):
     """One bounded native Sonnet compatibility check under the retained allowance."""
     from tools.offline_spend import authorize_allowance
     from tools.offline_ai import TRANSPORT_VERSION
     protocol = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())
     ledger = authorize_allowance(state / 'ledger.json', TASK, protocol['authorization'])
-    settings = config()
-    stage = settings['stages']['preflight'] | {'max_attempts': 3, 'durable_attempts': True}
-    expected = identity({'route': settings['routes']['sonnet'], 'stage': stage,
-                         'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION})
+    configuration = production_preflight_configuration()
+    expected = identity(configuration)
+    # Bind cache/retry identity too: a changed transport must actually execute
+    # the probe, not reuse a response made by an unexercised implementation.
+    stage = configuration['stage'] | {'preflight_contract': expected}
+    prompt, inputs = 'Return exactly the requested readiness object.', {'ready': True}
+    request_key = identity({'route': configuration['route'], 'stage': 'preflight', 'config': stage,
+                           'prompt': prompt, 'schema': configuration['schema'], 'inputs': inputs})
     marker = state / 'production-preflight-receipt.json'
     if marker.exists():
         receipt = json.loads(marker.read_bytes())
         if receipt['contract'] != expected:
-            raise ConfigurationFailure('preflight_contract_changed')
-        return receipt  # A failed compatibility probe does not get a silent repeat.
+            if not receipt.get('complete'):
+                raise ConfigurationFailure('preflight_contract_changed_after_failure')
+            atomic_json(state / 'history' / ('production-preflight-' + identity(receipt) + '.json'), receipt)
+            marker.unlink()
+        else:
+            return receipt  # A failed compatibility probe does not get a silent repeat.
     with ledger.locked():
         retained = ledger.read()
+        prior_probes = [row for row in retained['requests'] if row['provider'] == 'anthropic' and row['stage'] == 'preflight']
+        if (prior_probes and prior_probes[-1]['key'] != request_key
+                and prior_probes[-1]['status'] != 'valid'):
+            raise ConfigurationFailure('preflight_contract_changed_after_incomplete_attempt')
         prior = retained['blocked_providers'].get('anthropic')
         # These are evaluation-only scope stops, not account denials. A new 4xx,
         # billing or security stop must remain blocked even on workflow retries.
@@ -258,8 +290,8 @@ def production_preflight(state):
     receipt = {'contract': expected, 'complete': False, 'quality_gate_passed': False,
                'production_enabled': False, 'transport': TRANSPORT_VERSION}
     try:
-        result = client.json(settings['routes']['sonnet'], 'preflight',
-            'Return exactly the requested readiness object.', {'ready': True}, schemas()['preflight'],
+        result = client.json(configuration['route'], 'preflight',
+            prompt, inputs, configuration['schema'],
             lambda value: value if value == {'ready': True} else valid_preflight_failure(), stage_config=stage)
         receipt.update(complete=True, result=result, status='native_structured_output_supported')
     except (ValueError, RuntimeError, requests.RequestException) as error:
@@ -279,11 +311,89 @@ def valid_preflight_failure():
     raise ValueError('preflight_schema_mismatch')
 
 
+def production_team_cases(population):
+    """Existing annotated populations and the once-selected confirmation set."""
+    protocol = json.loads(Path('evaluation/sonnet_production_teams.json').read_bytes())
+    original = json.loads(Path('evaluation/offline_team_frozen.json').read_bytes())
+    previous = json.loads(Path('evaluation/offline_team_prompt_repair_frozen.json').read_bytes())
+    cases = {case['scope']['id']: case for case in original['cases'] + previous['fresh_holdouts']}
+    selected = protocol['confirmation_cases'] if population == 'confirmation' else [cases[key] for key in protocol['populations'][population]]
+    if {case['scope']['id']: identity(case) for case in selected} != protocol['case_hashes'][population]:
+        raise ValueError('Qualification input identity changed')
+    return protocol, selected
+
+
+def production_teams(state, population, *, replay=False):
+    """Qualify the production stage contracts; keep historical trials untouched."""
+    from tools import offline_ai as ai, team_provider, evaluate_team_prompt_repair as trial
+    from scripts import build_opportunity_teams as teams
+    protocol, cases = production_team_cases(population)
+    ledger = evaluation_ledger(state / 'ledger.json')
+    preflight = json.loads((state / 'production-preflight-receipt.json').read_bytes())
+    preflight_configuration = production_preflight_configuration()
+    if (not preflight.get('complete') or preflight.get('transport') != ai.TRANSPORT_VERSION
+            or preflight.get('contract') != identity(preflight_configuration)):
+        raise ConfigurationFailure('Native production transport preflight required')
+    stages = team_provider.contract()
+    if any(stage['route'] != preflight_configuration['route'] for stage in stages.values()):
+        raise ConfigurationFailure('Team route differs from the qualified native preflight')
+    configuration = {'version': protocol['version'], 'protocol': protocol, 'stages': stages,
+        'preflight_contract': preflight['contract'],
+        'scientific_states': sorted(SCIENTIFIC_STATES),
+        'qualification': [function_hash(fn) for fn in (team_case, production_team_cases, production_teams, trial.metrics)],
+        'transport': ai.TRANSPORT_VERSION, 'client': function_hash(ai.Client.json),
+        'request_response': [function_hash(fn) for fn in (ai.request_body, ai.response_value)],
+        'versions': [teams.VERSION, teams.RESPONSE_VERSION, teams.ASSEMBLY_VERSION],
+        'validators': [function_hash(fn) for fn in (ai.validate_schema, teams.clean, teams.validate_response, teams.validate_roles, teams.validate_edges, teams.assemble)],
+        'population': {case['scope']['id']: identity(case) for case in cases}}
+    expected = identity(configuration)
+    destination = state / protocol['version'] / population
+    destination.mkdir(parents=True, exist_ok=True)
+    client = trial.ReplayClient(state / 'cache') if replay else Client(ledger, state / 'cache', deadline=time.monotonic() + 2400)
+    before = len(ledger.read()['requests'])
+    rows = []
+    for case in cases:
+        path = destination / ('team-' + identity(case) + '.json')
+        retained = json.loads(path.read_bytes()) if path.exists() else None
+        if retained and retained.get('evaluation_contract') != expected:
+            raise ValueError('Production qualification contract changed; preserve prior result')
+        if replay or not retained or retained['state'] not in SCIENTIFIC_STATES | {'provider_refusal'}:
+            row = team_case(client, 'sonnet', case, production=True) | {'case_hash': identity(case), 'evaluation_contract': expected}
+            if replay:
+                if row != retained or row['state'] not in SCIENTIFIC_STATES:
+                    raise ValueError('Production replay requires an identical complete scientific decision')
+            else:
+                atomic_json(path, row)
+            retained = row
+        rows.append(retained)
+    metrics = trial.metrics(cases, rows)
+    complete = metrics['completed'] == metrics['total']
+    floors = protocol['acceptance']
+    numerical = complete and metrics['scope_accuracy'] >= floors['scope_decision_accuracy_min'] and metrics['legitimate_acceptance'] >= floors['legitimate_scope_acceptance_min']
+    result = {'configuration': configuration, 'evaluation_contract': expected, 'population': population,
+        'execution_complete': complete, 'completion_rate': metrics['completed'] / metrics['total'],
+        'metrics': metrics, 'numerical_gate_passed': numerical, 'quality_gate_passed': False,
+        'source_review': 'required', 'new_provider_requests': len(ledger.read()['requests']) - before,
+        'replay': replay, 'production_enabled': False,
+        'result_hashes': {path.name: identity(json.loads(path.read_bytes())) for path in sorted(destination.glob('team-*.json'))}}
+    atomic_json(destination / ('replay-receipt.json' if replay else 'qualification-receipt.json'), result)
+    atomic_json(state / 'usage-summary.json', ledger.summary())
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=["production-preflight", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
+    parser.add_argument("phase", choices=["production-preflight", "production-teams-regression", "production-teams-population", "production-teams-confirmation", "production-teams-replay", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
     parser.add_argument("--state", type=Path, required=True)
     args = parser.parse_args()
+    if args.phase.startswith('production-teams-'):
+        phase = args.phase.removeprefix('production-teams-')
+        populations = ['regression', 'population', 'confirmation'] if phase == 'replay' else [phase]
+        results = [production_teams(args.state, population, replay=phase == 'replay') for population in populations]
+        print(json.dumps(results))
+        if any(not row['numerical_gate_passed'] for row in results):
+            raise SystemExit(1)
+        return
     if args.phase == 'production-preflight':
         receipt = production_preflight(args.state)
         print(json.dumps(receipt))

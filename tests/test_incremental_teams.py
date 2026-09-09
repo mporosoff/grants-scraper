@@ -13,6 +13,7 @@ from unittest.mock import Mock, patch
 
 from scripts import build_opportunity_teams as teams, researcher_registry as researchers
 from tests.fixtures import phase2_pipeline as fixture
+from tools import team_provider
 
 
 def provider_response(url, json, **kwargs):
@@ -26,7 +27,7 @@ def provider_response(url, json, **kwargs):
     else:
         data = __import__("json").loads(body["messages"][0]["content"])
         prompt = body["system"]
-        if prompt == teams.DECOMPOSE:
+        if prompt == team_provider.stage_prompt('decomposition'):
             specific = all(role["quote"] in data["scope"] for role in fixture.ROLES)
             value = {"specific": specific, "objective": "Investigate catalysts and reaction kinetics",
                      "roles": fixture.ROLES if specific else []}
@@ -36,7 +37,7 @@ def provider_response(url, json, **kwargs):
                      for role in data["roles"] for claim in data["claims"]
                      if role["quote"] in claim["evidence"] and role["label"] == claim["label"]]
             value = {"edges": edges}
-            if prompt == teams.VERIFY:
+            if prompt == team_provider.stage_prompt('verification'):
                 value["suitable_for_team"] = True
         payload = {"model": teams.MODEL, "usage": {"input_tokens": 100, "output_tokens": 100}, "stop_reason": "end_turn", "content": [{"type": "text", "text": __import__("json").dumps(value)}]}
     return Mock(status_code=200, json=lambda: payload)
@@ -124,7 +125,7 @@ class IncrementalTeams(unittest.TestCase):
         self.assertEqual(report['targeted_recovery']['selected_pending_scopes'], 1)
         self.assertEqual(report['limits']['max_scopes'], 1)
         self.assertEqual({row['scope_id'] for row in report['results']}, {previous})
-        self.assertEqual(sum(call.kwargs['json'].get('system') == teams.DECOMPOSE for call in calls), 1)
+        self.assertEqual(sum(call.kwargs['json'].get('system') == team_provider.stage_prompt('decomposition') for call in calls), 1)
         self.assertFalse(any(row['id'] == 'fixture-new-call' for row in updated['opportunities']))
 
     def test_material_amendment_and_expiration_invalidate_only_exact_source(self):
@@ -137,7 +138,7 @@ class IncrementalTeams(unittest.TestCase):
         code, report, after, calls = self.run_main()
         self.assertEqual(code, 0)
         self.assertEqual(report["source_invalidations"], ["fixture-new-call"])
-        self.assertEqual(sum(call.kwargs["json"].get("system") == teams.DECOMPOSE for call in calls), 1)
+        self.assertEqual(sum(call.kwargs["json"].get("system") == team_provider.stage_prompt('decomposition') for call in calls), 1)
         healthy = next(row for row in before["opportunities"] if row["id"].endswith(":research"))
         self.assertEqual(next(row for row in after["opportunities"] if row["id"] == healthy["id"]), healthy)
         self.model_path.write_text(json.dumps(self.empty), encoding="utf-8")
@@ -165,7 +166,7 @@ class IncrementalTeams(unittest.TestCase):
         code, report, incremental, calls = self.run_main()
         self.assertEqual(code, 0)
         self.assertEqual(report["counters"]["item_vector_misses"], 1)
-        self.assertFalse(any(call.kwargs["json"].get("system") == teams.DECOMPOSE for call in calls))
+        self.assertFalse(any(call.kwargs["json"].get("system") == team_provider.stage_prompt('decomposition') for call in calls))
         self.model_path.write_text(json.dumps(self.empty), encoding="utf-8")
         code, _, clean, _ = self.run_main(args=["--cache", ".cache/clean-teams"])
         self.assertEqual(code, 0)
@@ -300,7 +301,10 @@ class IncrementalTeams(unittest.TestCase):
 
     def test_assessment_contract_change_withholds_before_failed_regeneration(self):
         self.run_main()
-        with patch.object(teams, "VERIFY", teams.VERIFY + "\nSynthetic revised verification contract."), patch.object(teams.time, "sleep"):
+        active_prompt = team_provider.stage_prompt
+        def changed(stage, settings=None):
+            return active_prompt(stage, settings) + ('\nSynthetic revised verification contract.' if stage == 'verification' else '')
+        with patch.object(team_provider, 'stage_prompt', side_effect=changed), patch.object(teams.time, "sleep"):
             code, report, model, _ = self.run_main(response=lambda *a, **k: Mock(status_code=503))
         self.assertEqual(code, 1)
         self.assertEqual(report["assessment_invalidations"], ["maintained:science.example.gov:research"])

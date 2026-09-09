@@ -17,7 +17,7 @@ from scripts import build_opportunity_teams as teams
 from scripts.researcher_registry import content_hash, load_registry
 from tools.offline_ai import Ledger, Client, config, identity
 from tools.offline_team_contract import schemas
-from tools.team_provider import routes, stage_settings
+from tools.team_provider import routes, stage_settings, stage_prompt
 from tests import test_build_opportunity_teams as fixture_tests
 
 
@@ -38,7 +38,7 @@ class TeamProviderContracts(unittest.TestCase):
     def cache_path(self, provider, prompt, data):
         stage = {teams.DECOMPOSE: 'decomposition', teams.ADJUDICATE: 'adjudication', teams.VERIFY: 'verification'}[prompt]
         key = identity({'route': routes()[stage], 'stage': stage, 'config': stage_settings(stage),
-                        'prompt': prompt, 'schema': schemas()[stage], 'inputs': data})
+                        'prompt': stage_prompt(stage), 'schema': schemas()[stage], 'inputs': data})
         path = provider.ledger.path.parent / 'team-responses' / (key + '.json')
         path.parent.mkdir(exist_ok=True)
         return path
@@ -264,7 +264,7 @@ class TeamProviderContracts(unittest.TestCase):
                     provider.json(teams.ADJUDICATE, amended)
             self.assertEqual(post.call_count, 5)
 
-    def test_outage_persists_source_and_researcher_withholding_and_preserves_compatible_team(self):
+    def test_outage_withholds_changed_source_and_reassembles_remaining_current_claims(self):
         registry = load_registry()
         model = json.loads(Path("config/opportunity_team_model.json").read_text(encoding="utf-8"))
         baseline_scopes = teams.scopes()
@@ -293,7 +293,11 @@ class TeamProviderContracts(unittest.TestCase):
                 self.assertEqual(teams.main(), 1)
             published = {r["id"]: r for r in write.call_args.args[0]["opportunities"]}
             self.assertEqual(published[source["id"]]["review_state"], "needs_revalidation")
-            self.assertEqual(published[changed["id"]]["review_state"], "needs_revalidation")
+            repaired = published[changed['id']]
+            self.assertEqual(repaired['review_state'], 'proposed')
+            self.assertNotIn(person_id, {ref['researcher_id'] for role in repaired['roles'] for ref in role['claim_refs']})
+            self.assertNotIn(person_id, {member['faculty_id'] for member in repaired['members']})
+            self.assertEqual(repaired['claim_update_proof']['provider_requests'], 0)
             self.assertEqual(published[retained["id"]]["review_state"], originals[retained["id"]]["review_state"])
             self.assertEqual(published[retained["id"]]["members"], originals[retained["id"]]["members"])
             receipt = json.loads(Path("evaluation/opportunity_team_generation.json").read_text())
