@@ -185,7 +185,7 @@ class ProductionTeamQualification(unittest.TestCase):
         active = evaluation.production_team_cases('regression')[0]
         self.assertEqual(team_provider.stage_prompt('decomposition'), active['final_prompts']['decomposition'])
         self.assertEqual(team_provider.stage_settings('decomposition')['prompt_version'], 'sonnet-research-purpose-3')
-        self.assertEqual(team_provider.stage_settings('verification')['prompt_version'], 'sonnet-production-verification-4')
+        self.assertEqual(team_provider.stage_settings('verification')['prompt_version'], 'sonnet-production-verification-5')
 
     def test_ordinary_registry_outputs_reassemble_unpinned_dependents_only(self):
         fixture = json.loads(Path('tests/fixtures/claim_retirement_recovery.json').read_bytes())

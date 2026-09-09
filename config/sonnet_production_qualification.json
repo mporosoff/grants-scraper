@@ -22,7 +22,7 @@
   "teams": "scope_repair_qualification_pending",
   "cov4": "qualified_enabled_entrypoint_exercised",
   "transport_evidence": "evaluation/sonnet_transport_preflight_20260909.json",
-  "team_protocol": "evaluation/sonnet_team_scope_repair_3_20260909.json",
+  "team_protocol": "evaluation/sonnet_team_scope_repair_4_20260909.json",
   "cov4_protocol": "evaluation/sonnet_production_cov4.json",
   "cov4_evidence": "evaluation/sonnet_cov4_qualification_20260909.json",
   "completion_evidence": "evaluation/sonnet_production_completion_20260909.json",
