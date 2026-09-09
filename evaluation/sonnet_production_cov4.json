@@ -1,5 +1,5 @@
 {
-  "version": "sonnet-production-cov4-1",
+  "version": "sonnet-production-cov4-2",
   "purpose": "Repair the organizational-container false positive without changing ownership, provenance or confidence ceilings. Original labels and historical prompt snapshots remain unchanged.",
   "frozen_population_sha256": "7890b88642b7afc06d434f6e516d1355168ccbfa15431a67479ddf843157bb04",
   "population_size": 43,
@@ -65,5 +65,6 @@
     "api_errors": {},
     "execution_completion": 1,
     "manual_source_review_required": true
-  }
+  },
+  "processing_basis": "The active classifier request/prompt is unchanged from the paid 43-case qualification. The document entrypoint now retries unresolved provider processing through the existing bounded extraction route; exact cached decisions qualify this integration without new calls."
 }

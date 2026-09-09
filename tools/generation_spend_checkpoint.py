@@ -11,7 +11,7 @@ from tools.offline_ai import atomic_json, config, identity, Ledger
 from tools.release_candidate import checked_path
 
 
-def prepare(repository, run, attempt, destination, reservation, mode):
+def prepare(repository, run, attempt, destination, reservation, mode, *, qualification_pilot=False):
     meta = json.loads(api(repository, f'actions/runs/{run}'))
     if meta['path'] != '.github/workflows/refresh-opportunities.yml' or meta['head_branch'] != 'main':
         raise ValueError('Untrusted generation spend origin')
@@ -35,7 +35,21 @@ def prepare(repository, run, attempt, destination, reservation, mode):
             raise ValueError('Authoritative generation ledger missing')
     ledger = Ledger(destination / 'ledger.json', destination.name, config()['budgets_usd'][mode], config()['max_requests'])
     for provider, evidence in config().get('generation_provider_pauses', {}).items():
-        ledger.block(provider, evidence['reason'])
+        if provider not in ledger.read()['blocked_providers']:
+            ledger.block(provider, evidence['reason'])
+    if qualification_pilot:
+        if mode != 'pilot' or meta.get('event') != 'workflow_dispatch':
+            raise ValueError('Qualification pilots require an explicit manual pilot run')
+        from tools import offline_ai_checkpoint
+        # Restore the newest task checkpoint after the local run checkpoint;
+        # a rerun's older embedded task ledger must never roll back later work.
+        offline_ai_checkpoint.prepare(repository, destination / 'task', destination / 'task-reservation.json')
+        from tools.offline_spend import ROOT, restore_ledger
+        from tools.evaluate_offline_ai import TASK
+        authorization = json.loads((ROOT / 'config/sonnet_production_qualification.json').read_bytes())['authorization']
+        restore_ledger(destination / 'task/ledger.json', TASK, config()['budgets_usd']['evaluation'],
+                       config()['max_requests'], authorization)
+        atomic_json(destination / 'task-accounting.json', {'task': TASK, 'authorization_id': authorization['id']})
     atomic_json(reservation, {'run_id': str(run), 'attempt': str(attempt), 'mode': mode,
         'maximum_logical_spend_usd': config()['budgets_usd'][mode], 'prior_ledger_hash': identity(ledger.read())})
 
@@ -47,7 +61,7 @@ def main():
     parser.add_argument('--mode', choices=('pilot', 'maintenance', 'backfill'), required=True)
     args = parser.parse_args()
     prepare(os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_RUN_ID'], os.environ['GITHUB_RUN_ATTEMPT'],
-            args.state, args.reservation, args.mode)
+            args.state, args.reservation, args.mode, qualification_pilot=os.environ.get('QUALIFICATION_PILOT') == 'true')
 
 
 if __name__ == '__main__':

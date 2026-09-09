@@ -491,6 +491,7 @@ def refresh_assemblies(existing, candidates, claims, registry_generation):
 class Provider:
     def __init__(self, cache, deadline=float("inf"), max_requests=300, ledger=None):
         self.ledger = ledger
+        self.ledger_start = len(ledger.read()['requests']) if ledger else 0
         self.offline = None
         self.provenance = threading.local()
         self.cache = Path(cache)
@@ -516,6 +517,8 @@ class Provider:
             self.counters[name] = self.counters.get(name, 0) + amount
 
     def check_budget(self):
+        from tools.offline_spend import check_run_transport
+        check_run_transport(self.ledger, self.ledger_start)
         if self.configuration_failed:
             raise ProviderConfigurationError("provider configuration rejected")
         if time.monotonic() >= self.deadline or self.calls >= self.max_requests:
@@ -928,6 +931,16 @@ def main():
         pending, existing, attempts, previous_snapshot, current_snapshot,
         maintenance.retained_queue_reasons(retained_report, input_generation, RESPONSE_VERSION))
     selected = backfill_queue if args.mode == 'backfill' else maintenance_queue
+    pilot_ids = [value.strip() for value in os.environ.get('PILOT_TEAM_SCOPES', '').split(',') if value.strip()]
+    if pilot_ids:
+        if args.mode != 'pilot' or os.environ.get('QUALIFICATION_PILOT') != 'true':
+            parser.error('Explicit pilot scopes require the manual qualification pilot')
+        if len(set(pilot_ids)) != len(pilot_ids) or len(pilot_ids) > settings['pilot_max_scopes']:
+            parser.error('Pilot scopes must be unique and within the existing five-scope limit')
+        eligible = {scope['id']: scope for scope in pending}
+        if any(key not in eligible for key in pilot_ids):
+            parser.error('Pilot scope is not currently eligible for new or stale assessment')
+        selected = [eligible[key] for key in pilot_ids]
     recovery = settings.get('targeted_team_recovery')
     if args.recovery_only:
         if not recovery or args.mode not in ('maintenance', 'pilot'):
@@ -957,10 +970,11 @@ def main():
     provider = None
     if args.generate and claims and due:
         # Reserve time for canonical output synchronization and checkpoint writes.
-        ledger = Ledger(args.state / 'ledger.json', args.state.name,
-                        settings['budgets_usd'][args.mode], max_requests=settings['max_requests'])
+        from tools.offline_spend import production_ledger, require_production_service
+        ledger = production_ledger(args.state, args.mode)
         provider = Provider(args.cache, deadline=started + args.max_seconds - 5, ledger=ledger)
         try:
+            require_production_service('teams', ledger)
             blocked = ledger.read()['blocked_providers']
             for route in routes().values():
                 if route['provider'] in blocked:

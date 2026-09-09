@@ -11,8 +11,8 @@ from tools.offline_ai import atomic_json, config, identity
 
 def science_contract():
     from scripts import build_opportunity_teams as t
-    from tools.team_provider import stage_prompt
-    functions = [t.clean, t.validate_roles, t.validate_response, t.validate_edges]
+    from tools.team_provider import stage_prompt, request_inputs
+    functions = [t.clean, t.validate_roles, t.validate_response, t.validate_edges, request_inputs]
     return identity([t.VERSION, t.RESPONSE_VERSION, *[stage_prompt(stage) for stage in ('decomposition', 'adjudication', 'verification')],
                      [ast.dump(ast.parse(inspect.getsource(fn)), include_attributes=False) for fn in functions]])
 

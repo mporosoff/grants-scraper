@@ -13,6 +13,13 @@ on:
         options: [auto, generate, teams, backfill, reuse, validate, publish, verify]
         default: auto
         required: true
+      pilot_team_scopes:
+        description: Optional comma-separated current scope IDs for the manual qualification pilot (at most five)
+        type: string
+      qualification_pilot:
+        description: Use the existing five-scope/$2 pilot cap and link all LLM charges to the authorized repair task
+        type: boolean
+        default: false
       candidate_run:
         description: Artifact-owning run ID (required for validate, publish and verify)
         type: string
@@ -37,6 +44,10 @@ permissions:
   statuses: write
   pages: write
   id-token: write
+
+env:
+  PILOT_TEAM_SCOPES: ${{ inputs.pilot_team_scopes }}
+  QUALIFICATION_PILOT: ${{ inputs.qualification_pilot && 'true' || 'false' }}
 
 concurrency:
   group: funding-finder-coordinated-release
@@ -118,6 +129,14 @@ jobs:
         with:
           name: generation-spend-reservation-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/spend-reservation.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Reserve the linked qualification task before provider dispatch
+        if: inputs.qualification_pilot && steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-economical-ai-20260908-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/offline-${{ github.run_id }}/task-reservation.json
           if-no-files-found: error
           retention-days: 90
       - name: Pin the prior accepted scope snapshot before changes
@@ -314,6 +333,15 @@ jobs:
           include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
+      - name: Retain linked task accounting and exact completed responses
+        if: always() && inputs.qualification_pilot && steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-economical-ai-20260908-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/offline-${{ github.run_id }}/task
+          include-hidden-files: true
+          if-no-files-found: warn
+          retention-days: 90
       - name: Retain spend and completed safe stages after any outcome
         if: always() && steps.restore.outputs.candidate_id == ''
         uses: actions/upload-artifact@v4
@@ -465,6 +493,14 @@ jobs:
           path: ${{ runner.temp }}/spend-reservation.json
           if-no-files-found: error
           retention-days: 90
+      - name: Reserve the linked qualification task before provider dispatch
+        if: inputs.qualification_pilot && steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-economical-ai-20260908-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/offline-${{ github.run_id }}/task-reservation.json
+          if-no-files-found: error
+          retention-days: 90
       - name: Pin the prior accepted scope snapshot before changes
         if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
         run: |
@@ -487,12 +523,8 @@ jobs:
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
         run: |
-          recovery_args=()
-          if [[ "$TEAM_MODE" != backfill ]] && python -c "from tools.offline_ai import config; import sys; sys.exit(0 if config().get('targeted_team_recovery') else 1)"; then
-            recovery_args+=(--recovery-only)
-          fi
           python -m scripts.build_opportunity_teams --generate --write --mode "$TEAM_MODE" \
-            --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}" --baseline "$RUNNER_TEMP/accepted-scopes.json" "${recovery_args[@]}"
+            --state "$RUNNER_TEMP/offline-${GITHUB_RUN_ID}" --baseline "$RUNNER_TEMP/accepted-scopes.json"
       - name: Rebuild current researcher projections without provider work
         if: steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'
         run: python -m tools.team_maintenance --rebuild-projections
@@ -519,6 +551,15 @@ jobs:
           path: ${{ runner.temp }}/candidate
           include-hidden-files: true
           if-no-files-found: error
+          retention-days: 90
+      - name: Retain linked task accounting and exact completed responses
+        if: always() && inputs.qualification_pilot && steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: offline-ai-economical-ai-20260908-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/offline-${{ github.run_id }}/task
+          include-hidden-files: true
+          if-no-files-found: warn
           retention-days: 90
       - name: Retain spend and completed safe stages after any outcome
         if: always() && steps.restore.outputs.candidate_id == '' && needs.plan.outputs.stage != 'reuse'

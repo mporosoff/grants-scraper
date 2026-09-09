@@ -65,7 +65,8 @@ class IncrementalTeams(unittest.TestCase):
         with chdir(self.root), redirect_stdout(io.StringIO()), patch.dict(os.environ, {
             "ANTHROPIC_API_KEY": "synthetic", "VOYAGE_API_KEY": "synthetic"}), patch.object(
                 teams.requests, "post", side_effect=options.pop("response", provider_response)) as post, patch(
-                    "sys.argv", ["teams", "--generate", "--write", "--workers", "1", "--mode", mode, "--state", f".spend/run-{self.invocation}", *options.pop("args", [])]):
+                    "sys.argv", ["teams", "--generate", "--write", "--workers", "1", "--mode", mode, "--state", f".spend/run-{self.invocation}", *options.pop("args", [])]), \
+                patch('tools.offline_spend.config', side_effect=fixture.synthetic_offline_settings):
             code = teams.main()
         report = json.loads((self.root / "evaluation/opportunity_team_generation.json").read_text())
         model = json.loads(self.model_path.read_text())

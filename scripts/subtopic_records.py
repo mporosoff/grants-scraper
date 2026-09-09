@@ -253,6 +253,9 @@ def needs_subtopic_extraction(entry, *, enabled, extractor_version):
         return True                       # never attempted
     if entry.get("subtopic_extractor_version") != extractor_version:
         return True                       # toolchain or pattern set moved (§6.1)
+    if (entry.get('subtopic_cov4') or {}).get('classifier_errors') and any(
+            child.get('cov4_fundability') == 'unresolved' for child in entry['subtopics']):
+        return True                       # provider outage is retryable processing
     return False
 
 

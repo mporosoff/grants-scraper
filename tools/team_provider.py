@@ -38,10 +38,19 @@ def stage_settings(stage, settings=None):
     return settings['stages'][stage] | settings.get('production_stage_overrides', {}).get(stage, {})
 
 
+def request_inputs(stage, data):
+    """The independent verifier gets identities/coverage, never prior rationales."""
+    if stage != 'verification':
+        return data
+    return data | {'proposed_edges': [{key: edge[key] for key in ('role_id', 'claim_id', 'coverage')}
+                                      for edge in data['proposed_edges']]}
+
+
 def request(provider, prompt, data):
     from scripts import build_opportunity_teams as teams
     stages = {teams.DECOMPOSE: 'decomposition', teams.ADJUDICATE: 'adjudication', teams.VERIFY: 'verification'}
     stage = stages[prompt]
+    data = request_inputs(stage, data)
     with provider.lock:
         if provider.offline is None:
             if provider.ledger is None:

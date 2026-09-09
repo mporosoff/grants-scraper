@@ -146,7 +146,10 @@ def plan(root, environment, *, receipt=None, live=None, publication=None, resume
                    verified=verified, receipt_current=receipt_current, runtime_changed=bool(runtime), published=published,
                    qualification_hold=hold)
     model = c.read_json(root / 'config/opportunity_team_model.json')
-    mode = 'backfill' if stage == 'backfill' else 'maintenance' if model.get('economical_pilot') else 'pilot'
+    pilot = environment.get('QUALIFICATION_PILOT') == 'true'
+    if pilot and (environment['GITHUB_EVENT_NAME'] != 'workflow_dispatch' or stage not in ('generate', 'teams')):
+        raise ValueError('Qualification pilot requires explicit manual team/source generation')
+    mode = 'pilot' if pilot else 'backfill' if stage == 'backfill' else 'maintenance'
     return {'stage': stage, 'release_sha': sha, 'candidate_id': candidate, 'candidate_run': run,
             'team_mode': mode, 'changes': changes, 'runtime_changes': runtime, 'live_verified': verified,
             'publication_run': publication['run'] if published else '',

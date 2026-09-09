@@ -83,6 +83,19 @@ class NeedsSubtopicExtractionTests(unittest.TestCase):
         entry = {"subtopics": [], "subtopic_extractor_version": self.VERSION}
         self.assertFalse(self.call(entry))
 
+    def test_provider_unavailability_remains_retryable_without_reclassifying_accepted_children(self):
+        entry = {'subtopic_extractor_version': self.VERSION,
+                 'subtopic_cov4': {'classifier_errors': {'retryable_processing': 1}},
+                 'subtopics': [{'subtopic_id': 'parent:subject', 'cov4_fundability': 'unresolved'}]}
+        self.assertTrue(self.call(entry))
+        entry['subtopics'][0]['cov4_fundability'] = 'accept'
+        self.assertFalse(self.call(entry))
+        entry['subtopics'][0]['cov4_fundability'] = 'reject'
+        self.assertFalse(self.call(entry))
+        entry['subtopics'][0]['cov4_fundability'] = 'unresolved'
+        entry['subtopic_cov4']['classifier_errors'] = {}
+        self.assertFalse(self.call(entry))  # Scientific abstention is not a transport retry.
+
     def test_an_empty_result_still_counts_as_attempted(self):
         # Zero subtopics is a normal outcome; it must not re-run every night.
         entry = {

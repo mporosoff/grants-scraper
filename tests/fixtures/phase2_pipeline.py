@@ -28,6 +28,14 @@ ROLES = [
 SCOPE = " ".join(r["quote"] for r in ROLES) + " Investigate zirconia catalysts for carbon dioxide conversion with mechanistic measurements and reproducible experiments."
 
 
+def synthetic_offline_settings():
+    """Isolate mocked-provider science tests from the live service stop state."""
+    value = json.loads((ROOT / 'config/offline_ai.json').read_bytes())
+    value.pop('generation_provider_pauses', None)
+    value.pop('production_services', None)
+    return value
+
+
 class FixedDate(date):
     @classmethod
     def today(cls):
@@ -160,6 +168,7 @@ def run_pipeline(directory):
         stack.enter_context(patch.object(sys, "argv", ["faculty_match"]))
         faculty_match.main()
         stack.enter_context(patch.dict(os.environ, {"ANTHROPIC_API_KEY": "synthetic"}))
+        stack.enter_context(patch('tools.offline_spend.config', side_effect=synthetic_offline_settings))
         stack.enter_context(patch.object(teams.Provider, "json", provider_response))
         stack.enter_context(patch.object(teams.Provider, "embed", side_effect=lambda texts, kind: [[1.0, 0.0] for _ in texts]))
         stack.enter_context(patch.object(teams.Provider, "embed_reusable", side_effect=lambda texts, kind, dependencies=None: [[1.0, 0.0] for _ in texts]))
