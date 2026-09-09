@@ -115,7 +115,12 @@ test("scheduled publication consumes a persisted validated package before protec
   assert.match(workflow, /pull-requests: write/);
   assert.match(workflow, /statuses: write/);
   assert.match(workflow, /actions: write/);
-  assert.doesNotMatch(workflow, /playwright|test:e2e|-f context=e2e/i);
+  assert.doesNotMatch(workflow, /run:.*(?:playwright|test:e2e)|-f context=e2e/i);
+  const browserGate = workflow.split('      - name: Run explicitly authorized final browser integration')[1].split('      - name:')[0];
+  assert.match(browserGate, /if: github.event_name == 'workflow_dispatch' && inputs.final_integration/);
+  assert.match(browserGate, /tools.validate_release_candidate --final-integration/);
+  assert.match(workflow, /FINAL_INTEGRATION_REQUIRED:.*github.event_name == 'workflow_dispatch' && inputs.final_integration/);
+  assert.match(workflow, /final_integration:[\s\S]*?type: boolean\s+default: false/);
 });
 
 test("release package verification is a deterministic no-write gate", () => {

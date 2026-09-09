@@ -1,6 +1,7 @@
 """Executable checkpoint/retry contracts using isolated repositories, no providers."""
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -9,7 +10,7 @@ import unittest
 from unittest.mock import patch
 
 from tools import release_candidate as c
-from tools.validate_release_candidate import validate
+from tools.validate_release_candidate import validate, final_integration
 from tools.verify_notice_publication import verify, bounded_public_value
 from tests import test_notice_publication
 
@@ -40,6 +41,7 @@ class CandidateLifecycleTests(unittest.TestCase):
             'index.html': '<main>current</main>', 'assets/app.css': 'main {}', '.nojekyll': '',
             'workers/search/src/index.js': 'export default {};', 'tools/validator.py': 'VERSION = 1\n',
             '.github/workflows/release.yml': 'version: 1', 'evaluation/frozen.json': '{}',
+            'package.json': '{"scripts":{"test:e2e":"playwright test"}}', 'pnpm-lock.yaml': 'lockfileVersion: 9',
             'tools/check.sh': 'true',
         }.items():
             path = self.root / name
@@ -83,6 +85,168 @@ class CandidateLifecycleTests(unittest.TestCase):
         self.assertTrue((self.reports / 'validation-report.json').exists())
         self.assertFalse((self.reports / 'validation.json').exists())
         self.assertEqual(len(commands), len(c.GATES))
+
+    def browser_result(self, commands, *, failed=False, mutate=False):
+        def run(command, **kwargs):
+            commands.append(command)
+            if command == ['pnpm', 'test:e2e']:
+                c.write_json(self.root / 'test-results/playwright-results.json', {
+                    'stats': {'expected': 3, 'unexpected': int(failed), 'skipped': 0}})
+                if mutate:
+                    (self.root / 'data/opportunities.js').write_text('invalid test mutation')
+            return subprocess.CompletedProcess(command, int(failed))
+        return run
+
+    def test_manual_browser_integration_reuses_exact_candidate_and_test_receipt(self):
+        manifest = self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        commands = []
+        first = final_integration(self.root, self.bundle, self.reports,
+                                  execute=self.browser_result(commands))
+        self.assertTrue(first['passed'])
+        self.assertEqual(first['identity']['candidate_hashes'], manifest['files'])
+        self.assertEqual(first['new_generation_calls'], 0)
+        self.assertEqual(len(commands), 2)
+        prior = self.reports / 'final-integration.json'
+        repeated = final_integration(self.root, self.bundle, self.reports, prior,
+            execute=lambda *args, **kwargs: self.fail('Unchanged E2E must not repeat'))
+        self.assertEqual(repeated, first)
+        c.verify_files(self.root, manifest['files'])
+        test = self.root / 'tests/e2e/current.spec.mjs'
+        test.parent.mkdir(parents=True)
+        test.write_text('changed browser contract')
+        current = final_integration(self.root, self.bundle, self.reports, prior,
+                                    execute=self.browser_result(commands))
+        self.assertNotEqual(current['identity'], first['identity'])
+        self.assertEqual(len(commands), 4)
+
+    def test_browser_failure_retains_candidate_and_ordinary_validation_for_retry(self):
+        manifest = self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        ordinary = (self.reports / 'validation.json').read_bytes()
+        for mutate in (False, True):
+            with self.subTest(mutate=mutate), self.assertRaises(ValueError):
+                final_integration(self.root, self.bundle, self.reports,
+                    execute=self.browser_result([], failed=not mutate, mutate=mutate))
+            self.assertFalse(c.read_json(self.reports / 'final-integration.json')['passed'])
+            retained = c.read_json(self.reports / 'validation.json')
+            self.assertEqual({k: v for k, v in retained.items() if k != 'final_integration'}, json.loads(ordinary))
+            if mutate:
+                c.git(self.root, 'checkout', 'HEAD', '--', 'data/opportunities.js')
+                c.materialize(self.root, self.bundle)
+            with self.assertRaisesRegex(ValueError, 'final browser integration'):
+                c.verify_receipt(self.root, self.bundle, retained, require_final=True)
+            self.assertEqual(c.load(self.bundle), manifest)
+        # A failed test cannot poison the artifact used by the next validator.
+        c.git(self.root, 'checkout', 'HEAD', '--', 'data/opportunities.js')
+        c.materialize(self.root, self.bundle)
+        self.assertTrue(final_integration(self.root, self.bundle, self.reports,
+            self.reports / 'final-integration.json', execute=self.browser_result([]))['passed'])
+
+    def test_changed_candidate_never_reuses_old_browser_receipt(self):
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        old = Path(self.temp.name) / 'old-browser.json'
+        c.write_json(old, first)
+        (self.root / 'data/opportunities.js').write_text('next complete candidate')
+        self.bundle = Path(self.temp.name) / 'next-candidate'
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        commands = []
+        current = final_integration(self.root, self.bundle, self.reports, old,
+                                    execute=self.browser_result(commands))
+        self.assertNotEqual(first['identity']['candidate_id'], current['identity']['candidate_id'])
+        self.assertEqual(len(commands), 2)
+
+    def test_browser_imports_and_their_transitive_dependencies_invalidate_receipt(self):
+        for name, content in {
+            'tests/e2e/source.spec.mjs': 'import { normalize } from "../../workers/award-api/src/ror.js";',
+            'workers/award-api/src/ror.js': 'import { clean } from "./contract.js"; export const normalize = clean;',
+            'workers/award-api/src/contract.js': 'export const clean = value => value;',
+        }.items():
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding='utf-8')
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        self.assertIn('workers/award-api/src/ror.js', first['identity']['test_inputs'])
+        self.assertIn('workers/award-api/src/contract.js', first['identity']['test_inputs'])
+        for name in ('ror.js', 'contract.js'):
+            path = self.root / 'workers/award-api/src' / name
+            path.write_text(path.read_text() + '\n// changed behavior contract', encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'final browser integration'):
+                c.verify_receipt(self.root, self.bundle, c.read_json(self.reports / 'validation.json'))
+            commands = []
+            final_integration(self.root, self.bundle, self.reports, self.reports / 'final-integration.json',
+                              execute=self.browser_result(commands))
+            self.assertEqual(len(commands), 2)
+
+    def test_required_browser_gate_survives_interruption_and_ordinary_checkpoint_reuse(self):
+        self.create()
+        ordinary = validate(self.root, self.bundle, self.reports, execute=self.execute([]),
+                            require_final_integration=True)
+        # Interruption between ordinary validation and the browser step cannot
+        # leave an artifact that a publication-only retry will accept.
+        with self.assertRaisesRegex(ValueError, 'final browser integration'):
+            c.verify_receipt(self.root, self.bundle, ordinary)
+        prior = self.reports / 'validation.json'
+        reused = validate(self.root, self.bundle, self.reports, prior,
+                          execute=lambda *a, **k: self.fail('Ordinary gates must not repeat'))
+        self.assertEqual(reused, ordinary)
+        def interrupted(*args, **kwargs):
+            raise KeyboardInterrupt()
+        with self.assertRaises(KeyboardInterrupt):
+            final_integration(self.root, self.bundle, self.reports, execute=interrupted)
+        with self.assertRaisesRegex(ValueError, 'final browser integration'):
+            c.verify_receipt(self.root, self.bundle, c.read_json(prior))
+        final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        self.assertTrue(c.verify_receipt(self.root, self.bundle, c.read_json(prior)))
+
+    def test_explicit_publish_or_validate_recovers_latest_required_browser_gate(self):
+        from tools import plan_release as planner
+        manifest = self.create()
+        current = c.create(self.root, Path(self.temp.name) / 'other-current-candidate',
+                           generation_sha=self.source_sha, run_id='999', attempt='1')
+        c.write_json(self.root / 'release/candidate.json', current)
+        c.write_json(self.root / 'release/candidate-source.json', {
+            'candidate_id': current['candidate_id'], 'artifact_run': '999'})
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]), require_final_integration=True)
+        latest = c.read_json(self.reports / 'validation.json')
+        for stage in ('publish', 'validate'):
+            for selected_receipt in ('', '100'):
+                env = {'REQUESTED_STAGE': stage, 'CANDIDATE_ID': manifest['candidate_id'], 'CANDIDATE_RUN': '123',
+                    'RECEIPT_RUN': selected_receipt, 'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_EVENT_NAME': 'workflow_dispatch',
+                    'PUBLICATION_RUN': '', 'PUBLICATION_ATTEMPT': '',
+                    'RUNNER_TEMP': str(self.root), 'GITHUB_OUTPUT': str(self.root / 'outputs'),
+                    'GITHUB_STEP_SUMMARY': str(self.root / 'summary')}
+                with self.subTest(stage=stage, receipt=selected_receipt), patch.dict(os.environ, env), \
+                        patch.object(c, 'ROOT', self.root), patch.object(planner, 'latest_report', return_value=('200', latest)) as lookup:
+                    planner.main()
+                planned = c.read_json(self.root / 'release-plan.json')
+                self.assertEqual((planned['candidate_id'], planned['candidate_run']), (manifest['candidate_id'], '123'))
+                self.assertEqual(planned['receipt_run'], '200')
+                self.assertEqual(lookup.call_args.args[1:3], (manifest['candidate_id'], 'validation'))
+                # The workflow downloads this selected receipt even when the
+                # dispatch omits both optional receipt and browser flags.
+                reused = validate(self.root, self.bundle, self.reports, self.reports / 'validation.json',
+                    execute=lambda *a, **k: self.fail('A publish retry must reuse completed ordinary checks'))
+                with self.assertRaisesRegex(ValueError, 'final browser integration'):
+                    c.verify_receipt(self.root, self.bundle, reused)
+
+    def test_failed_ordinary_report_keeps_manual_browser_intent_on_named_retry(self):
+        self.create()
+        with self.assertRaises(ValueError):
+            validate(self.root, self.bundle, self.reports, execute=self.execute([], fail=lambda _: True),
+                     require_final_integration=True)
+        self.assertFalse((self.reports / 'validation.json').exists())
+        repaired = validate(self.root, self.bundle, self.reports, self.reports / 'validation.json',
+                            execute=self.execute([]))
+        with self.assertRaisesRegex(ValueError, 'final browser integration'):
+            c.verify_receipt(self.root, self.bundle, repaired)
+        final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        self.assertTrue(c.verify_receipt(self.root, self.bundle, c.read_json(self.reports / 'validation.json')))
 
     def test_expired_or_missing_candidate_recovers_only_exact_protected_bytes(self):
         from tools import fetch_release_artifact as artifacts

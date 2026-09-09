@@ -20,6 +20,10 @@ on:
         description: Use the existing five-scope/$2 pilot cap and link all LLM charges to the authorized repair task
         type: boolean
         default: false
+      final_integration:
+        description: Explicitly run the configured Playwright/accessibility suite on this assembled candidate before publication
+        type: boolean
+        default: false
       candidate_run:
         description: Artifact-owning run ID (required for validate, publish and verify)
         type: string
@@ -604,7 +608,7 @@ jobs:
     needs: [plan, candidate]
     if: ${{ !cancelled() && needs.candidate.result == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 75
     env:
       GH_TOKEN: ${{ github.token }}
       CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
@@ -630,9 +634,16 @@ jobs:
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$RECEIPT_RUN" --name "validation-$CANDIDATE_ID" --destination "$RUNNER_TEMP/previous-validation"
       - name: Validate a working copy of the persisted candidate or reuse its exact receipt
+        env:
+          FINAL_INTEGRATION_REQUIRED: ${{ github.event_name == 'workflow_dispatch' && inputs.final_integration && 'true' || 'false' }}
         run: >-
           python -m tools.validate_release_candidate --bundle "$RUNNER_TEMP/candidate"
           --reports "$RUNNER_TEMP/reports" --previous "$RUNNER_TEMP/previous-validation/validation.json"
+      - name: Run explicitly authorized final browser integration or reuse its exact receipt
+        if: github.event_name == 'workflow_dispatch' && inputs.final_integration
+        run: >-
+          python -m tools.validate_release_candidate --final-integration --bundle "$RUNNER_TEMP/candidate"
+          --reports "$RUNNER_TEMP/reports" --previous "$RUNNER_TEMP/previous-validation/final-integration.json"
       - name: Retain safe reports and receipt on success or failure
         if: always()
         uses: actions/upload-artifact@v4
