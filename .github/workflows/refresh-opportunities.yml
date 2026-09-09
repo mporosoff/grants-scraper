@@ -608,7 +608,7 @@ jobs:
     needs: [plan, candidate]
     if: ${{ !cancelled() && needs.candidate.result == 'success' }}
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 75
     env:
       GH_TOKEN: ${{ github.token }}
       CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
@@ -634,6 +634,8 @@ jobs:
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$RECEIPT_RUN" --name "validation-$CANDIDATE_ID" --destination "$RUNNER_TEMP/previous-validation"
       - name: Validate a working copy of the persisted candidate or reuse its exact receipt
+        env:
+          FINAL_INTEGRATION_REQUIRED: ${{ github.event_name == 'workflow_dispatch' && inputs.final_integration && 'true' || 'false' }}
         run: >-
           python -m tools.validate_release_candidate --bundle "$RUNNER_TEMP/candidate"
           --reports "$RUNNER_TEMP/reports" --previous "$RUNNER_TEMP/previous-validation/validation.json"

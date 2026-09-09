@@ -128,7 +128,13 @@ class CandidateLifecycleTests(unittest.TestCase):
                 final_integration(self.root, self.bundle, self.reports,
                     execute=self.browser_result([], failed=not mutate, mutate=mutate))
             self.assertFalse(c.read_json(self.reports / 'final-integration.json')['passed'])
-            self.assertEqual((self.reports / 'validation.json').read_bytes(), ordinary)
+            retained = c.read_json(self.reports / 'validation.json')
+            self.assertEqual({k: v for k, v in retained.items() if k != 'final_integration'}, json.loads(ordinary))
+            if mutate:
+                c.git(self.root, 'checkout', 'HEAD', '--', 'data/opportunities.js')
+                c.materialize(self.root, self.bundle)
+            with self.assertRaisesRegex(ValueError, 'final browser integration'):
+                c.verify_receipt(self.root, self.bundle, retained, require_final=True)
             self.assertEqual(c.load(self.bundle), manifest)
         # A failed test cannot poison the artifact used by the next validator.
         c.git(self.root, 'checkout', 'HEAD', '--', 'data/opportunities.js')
@@ -151,6 +157,51 @@ class CandidateLifecycleTests(unittest.TestCase):
                                     execute=self.browser_result(commands))
         self.assertNotEqual(first['identity']['candidate_id'], current['identity']['candidate_id'])
         self.assertEqual(len(commands), 2)
+
+    def test_browser_imports_and_their_transitive_dependencies_invalidate_receipt(self):
+        for name, content in {
+            'tests/e2e/source.spec.mjs': 'import { normalize } from "../../workers/award-api/src/ror.js";',
+            'workers/award-api/src/ror.js': 'import { clean } from "./contract.js"; export const normalize = clean;',
+            'workers/award-api/src/contract.js': 'export const clean = value => value;',
+        }.items():
+            path = self.root / name
+            path.parent.mkdir(parents=True, exist_ok=True)
+            path.write_text(content, encoding='utf-8')
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        self.assertIn('workers/award-api/src/ror.js', first['identity']['test_inputs'])
+        self.assertIn('workers/award-api/src/contract.js', first['identity']['test_inputs'])
+        for name in ('ror.js', 'contract.js'):
+            path = self.root / 'workers/award-api/src' / name
+            path.write_text(path.read_text() + '\n// changed behavior contract', encoding='utf-8')
+            with self.assertRaisesRegex(ValueError, 'final browser integration'):
+                c.verify_receipt(self.root, self.bundle, c.read_json(self.reports / 'validation.json'))
+            commands = []
+            final_integration(self.root, self.bundle, self.reports, self.reports / 'final-integration.json',
+                              execute=self.browser_result(commands))
+            self.assertEqual(len(commands), 2)
+
+    def test_required_browser_gate_survives_interruption_and_ordinary_checkpoint_reuse(self):
+        self.create()
+        ordinary = validate(self.root, self.bundle, self.reports, execute=self.execute([]),
+                            require_final_integration=True)
+        # Interruption between ordinary validation and the browser step cannot
+        # leave an artifact that a publication-only retry will accept.
+        with self.assertRaisesRegex(ValueError, 'final browser integration'):
+            c.verify_receipt(self.root, self.bundle, ordinary)
+        prior = self.reports / 'validation.json'
+        reused = validate(self.root, self.bundle, self.reports, prior,
+                          execute=lambda *a, **k: self.fail('Ordinary gates must not repeat'))
+        self.assertEqual(reused, ordinary)
+        def interrupted(*args, **kwargs):
+            raise KeyboardInterrupt()
+        with self.assertRaises(KeyboardInterrupt):
+            final_integration(self.root, self.bundle, self.reports, execute=interrupted)
+        with self.assertRaisesRegex(ValueError, 'final browser integration'):
+            c.verify_receipt(self.root, self.bundle, c.read_json(prior))
+        final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        self.assertTrue(c.verify_receipt(self.root, self.bundle, c.read_json(prior)))
 
     def test_expired_or_missing_candidate_recovers_only_exact_protected_bytes(self):
         from tools import fetch_release_artifact as artifacts

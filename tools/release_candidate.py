@@ -298,7 +298,30 @@ def validation_identity(root, manifest):
             "candidate_id": manifest["candidate_id"], "candidate_hashes": manifest["files"]}
 
 
-def verify_receipt(root, bundle, receipt):
+def final_integration_identity(root, manifest):
+    """Bind browser tests, fixtures, and their relative repository imports."""
+    root = Path(root).resolve()
+    names = set(paths(root, ['tests/e2e/**/*', 'tests/fixtures/**/*',
+                            'playwright.config.*', 'package.json', 'pnpm-lock.yaml']))
+    pending = list(names)
+    while pending:
+        name = pending.pop()
+        if Path(name).suffix not in ('.js', '.mjs', '.cjs'):
+            continue
+        source = checked_path(root, name)
+        for relative in re.findall(r'''\b(?:from\s*|import\s*(?:\(\s*)?)["'](\.{1,2}/[^"']+)["']''', source.read_text(encoding='utf-8')):
+            target = (source.parent / relative).resolve()
+            if not target.is_relative_to(root):
+                raise ValueError('Browser test import escapes repository')
+            dependency = target.relative_to(root).as_posix()
+            if dependency not in names:
+                names.add(dependency)
+                pending.append(dependency)
+    return {'candidate_id': manifest['candidate_id'], 'candidate_hashes': manifest['files'],
+            'test_inputs': file_hashes(root, names)}
+
+
+def verify_receipt(root, bundle, receipt, *, require_final=True):
     manifest = load(bundle)
     verify_dependencies(root, manifest)
     if worker_fingerprint(root, read_json(Path(root) / POLICY), Path(bundle) / 'files') != manifest['worker_fingerprint']:
@@ -307,6 +330,11 @@ def verify_receipt(root, bundle, receipt):
         raise ValueError("Validation receipt does not cover current validators and exact candidate")
     if receipt.get("gates") != {name: "passed" for name in GATES}:
         raise ValueError("Validation receipt lacks required passing gates")
+    if require_final and 'final_integration' in receipt:
+        final = receipt['final_integration']
+        if (not isinstance(final, dict) or final.get('passed') is not True
+                or final.get('identity') != final_integration_identity(root, manifest)):
+            raise ValueError('Required final browser integration is incomplete or stale; resume manual validation')
     return manifest
 
 

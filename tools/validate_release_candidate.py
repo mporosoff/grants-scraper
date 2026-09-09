@@ -11,14 +11,19 @@ from tools import release_candidate as candidate
 def final_integration(root, bundle, reports, previous=None, *, execute=subprocess.run):
     """Explicit manual browser validation of the already assembled candidate."""
     root, bundle, reports = Path(root), Path(bundle), Path(reports)
-    manifest = candidate.verify_receipt(root, bundle, candidate.read_json(reports / 'validation.json'))
-    inputs = candidate.file_hashes(root, candidate.paths(root, [
-        'tests/e2e/**/*', 'tests/fixtures/**/*', 'playwright.config.*', 'package.json', 'pnpm-lock.yaml']))
-    identity = {'candidate_id': manifest['candidate_id'], 'candidate_hashes': manifest['files'], 'test_inputs': inputs}
+    ordinary = candidate.read_json(reports / 'validation.json')
+    manifest = candidate.verify_receipt(root, bundle, ordinary, require_final=False)
+    identity = candidate.final_integration_identity(root, manifest)
+    # Persist the requested gate before any browser work. A failed/interrupted
+    # invocation must not leave a receipt accepted by publication on retry.
+    ordinary['final_integration'] = {'identity': identity, 'passed': False}
+    candidate.write_json(reports / 'validation.json', ordinary)
     if previous and Path(previous).exists():
         prior = candidate.read_json(previous)
         if prior.get('identity') == identity and prior.get('passed') is True:
             candidate.write_json(reports / 'final-integration.json', prior)
+            ordinary['final_integration']['passed'] = True
+            candidate.write_json(reports / 'validation.json', ordinary)
             return prior
     candidate.materialize(root, bundle)
     report = {'identity': identity, 'passed': False, 'new_generation_calls': 0,
@@ -36,20 +41,24 @@ def final_integration(root, bundle, reports, previous=None, *, execute=subproces
         candidate.write_json(reports / 'final-integration.json', report)
     if not report['passed']:
         raise ValueError('Final browser integration failed; retain the exact candidate and test evidence')
+    ordinary['final_integration']['passed'] = True
+    candidate.write_json(reports / 'validation.json', ordinary)
     return report
 
 
-def validate(root, bundle, reports, previous=None, *, execute=subprocess.run):
+def validate(root, bundle, reports, previous=None, *, execute=subprocess.run, require_final_integration=False):
     root, bundle, reports = Path(root), Path(bundle), Path(reports)
     manifest = candidate.load(bundle)
     candidate.verify_dependencies(root, manifest)
     if previous and Path(previous).exists():
         receipt = candidate.read_json(previous)
         try:
-            candidate.verify_receipt(root, bundle, receipt)
+            candidate.verify_receipt(root, bundle, receipt, require_final=False)
         except ValueError:
             pass
         else:
+            if require_final_integration:
+                receipt.setdefault('final_integration', {'passed': False})
             candidate.write_json(reports / 'validation.json', receipt)
             print('Reusing exact candidate validation receipt; no gates or generation repeated')
             return receipt
@@ -68,6 +77,10 @@ def validate(root, bundle, reports, previous=None, *, execute=subprocess.run):
     report = {'candidate_id': manifest['candidate_id'], 'generation_sha': manifest['generation_sha'],
               'validation_sha': candidate.git(root, 'rev-parse', 'HEAD'), 'timestamp': candidate.timestamp(),
               'identity': identity, 'gates': {}, 'production_mutated': False, 'next_retry_stage': 'validate'}
+    if require_final_integration or (previous and Path(previous).exists()
+            and candidate.read_json(previous).get('candidate_id') == manifest['candidate_id']
+            and 'final_integration' in candidate.read_json(previous)):
+        report['final_integration'] = {'passed': False}
     reports.mkdir(parents=True, exist_ok=True)
     # Run every deterministic gate once and retain all findings in one report.
     # No provider credentials are present in this job. Subprocess output remains
@@ -96,12 +109,15 @@ def main():
     parser.add_argument('--reports', type=Path, required=True)
     parser.add_argument('--previous', type=Path)
     parser.add_argument('--final-integration', action='store_true', help='Explicit manual E2E/accessibility on the already validated package')
+    parser.add_argument('--require-final-integration', action='store_true',
+                        default=os.environ.get('FINAL_INTEGRATION_REQUIRED') == 'true')
     args = parser.parse_args()
     try:
         if args.final_integration:
             final_integration(candidate.ROOT, args.bundle, args.reports, args.previous)
         else:
-            validate(candidate.ROOT, args.bundle, args.reports, args.previous)
+            validate(candidate.ROOT, args.bundle, args.reports, args.previous,
+                     require_final_integration=args.require_final_integration)
     except Exception as error:
         # Dependency/provenance failures also need retained evidence even when
         # they precede the first gate. No provider credentials exist here.
