@@ -193,6 +193,8 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
                 "generation_timestamp": timestamp(), "generation_dependencies": generation,
                 "generator_versions": declared_versions(root, generation['files']),
                 "generation_baseline": baseline, "generation_files": {n: files[n] for n in generation_files},
+                "documentation_baseline": {name: digest(subprocess.check_output(['git', '-C', str(root), 'show', f'{sha}:{name}']))
+                                           for name in ('README.md', 'PROJECT.md') if name in files},
                 "runtime_baseline": runtime_baseline,
                 "files": files, "worker_fingerprint": worker_fingerprint(root, policy),
                 "semantic_identity": {k: semantic.get(k) for k in ("schema_version", "model", "response_model", "dimension", "input_type", "source_output_dtype", "model_space_fingerprint", "corpus_sha256")},
@@ -278,7 +280,8 @@ def materialize(root, bundle):
         if digest(checked_path(root, name).read_bytes()) not in (baseline, manifest['files'][name]):
             raise ValueError(f'Release runtime changed: {name}; assemble a reuse candidate without generation')
     for name in manifest["files"]:
-        if name in ('README.md', 'PROJECT.md') and digest(checked_path(root, name).read_bytes()) != manifest['files'][name]:
+        if name in ('README.md', 'PROJECT.md') and digest(checked_path(root, name).read_bytes()) not in (
+                manifest['files'][name], manifest.get('documentation_baseline', {}).get(name)):
             raise ValueError('Authored documentation changed; assemble a derived candidate preserving current prose: ' + name)
         target = checked_path(root, name)
         target.parent.mkdir(parents=True, exist_ok=True)

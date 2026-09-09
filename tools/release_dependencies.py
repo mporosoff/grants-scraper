@@ -66,6 +66,10 @@ def snapshot(root, revision=None):
         selected = [name for name in inventory if not any(matches(name, p) for p in generated) and name not in rule['excluded']
                     and any(matches(name, pattern) for pattern in rule['patterns'])]
         files = {name: c.digest(semantic_bytes(name, read(name))) for name in sorted(set(selected))}
+        if group == 'runtime':
+            # Documentation combines generated statistics with authored prose.
+            # Prose changes need assembly, never source/provider regeneration.
+            files.update({name: c.digest(read(name)) for name in ('README.md', 'PROJECT.md') if name in inventory})
         if group in invocations:
             files['@generation_invocations'] = c.digest(c.encoded(invocations[group]))
             runtime_key = 'python' if group == 'source' else 'node'

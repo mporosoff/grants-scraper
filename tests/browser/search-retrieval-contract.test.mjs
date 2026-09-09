@@ -695,9 +695,9 @@ test("the live catalog supports exact-identifier retrieval without naming a muta
   const index = catalog.opportunities.indexOf(candidate);
   assert.ok(result.scores[index] > 0);
   assert.equal(
-    Math.max(...result.scores),
-    result.scores[index],
-    "the selected live opportunity number should receive top exact-match priority",
+    catalog.opportunities[result.scores.indexOf(Math.max(...result.scores))].opportunity_number,
+    candidate.opportunity_number,
+    "an exact solicitation-number match should receive top priority, including another source record for that same number",
   );
 });
 
