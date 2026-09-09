@@ -10,7 +10,28 @@ unchanged. `evaluation/sonnet_team_scope_repair_20260909.json` freezes a separat
 source-based annotations and the active production prompts before new results.
 No new confirmation sample may replace a failed fresh gate.
 
-The general correction is `sonnet-research-purpose-1` decomposition. Both known
+PR #210 merged as `16d7b83699cd25f98af62cf730d644833c896de7` after clean
+exact-head review. Authorization run `34387213583` applied the replacement once;
+preflight run `34387414406` reused the exact native contract with zero calls.
+Version 1 focus passed 7/7; regression run `34388134559` completed 9/9 but failed
+the unchanged scientific floors (8/9 scope accuracy, 5/6 legitimate acceptance).
+The retained catalyst-discovery-and-scale-up heading was rejected for lacking a
+separate research question or hypothesis, although the heading states the work.
+`evaluation/sonnet_team_scope_repair_1_results_20260909.json` preserves that failed
+gate and source review. This is not a change to the accepted CO2-selectivity
+capability judgment; the failure occurred before capability assessment.
+
+The active `sonnet-research-purpose-2` prompt judges the work a concise heading
+states, without requiring prose length or a separate purpose paragraph. Its
+versioned protocol is `evaluation/sonnet_team_scope_repair_2_20260909.json`.
+The original twelve confirmations, annotations, historical protocol and results
+remain unchanged. Version 2 retains the **same** `sonnet-team-scope-repair-1`
+qualification ledger: the 30 requests/$1.040148 already used count against the
+135-request/$8 qualification cap. At this checkpoint 105 qualification requests
+and $6.959852 remain; the separate 15-request/$2 pilot reservation stays held.
+Do not rerun authorization or start paid work until the repair is protected-merged.
+
+The first general correction was `sonnet-research-purpose-1` decomposition. Both known
 false rejections received complete retained input: the model confused a stated
 research purpose with missing application details, or related disciplines with
 unrelated programs. No source/context expansion is needed. Adjudication and the
@@ -35,8 +56,7 @@ $3.545113 using retained stage costs; actual bounded reservations govern.
 After protected merge, execute the existing entrypoints in this order:
 
 ```sh
-# No provider credentials/calls; redispatch cannot grant again.
-gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-authorization
+# Authorization is already applied; resume the existing state artifact.
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-focus
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-regression
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-population
