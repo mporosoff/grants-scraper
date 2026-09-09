@@ -8,6 +8,7 @@
   "vars": {
     "PUBLIC_APP_ORIGIN": "https://mporosoff.github.io",
     "PUBLIC_SITE_ROOT": "https://mporosoff.github.io/grants-scraper",
+    "ADMIN_CONSOLE_URL": "https://funding-finder-researchers.urochestercheme.workers.dev/admin",
     "REGISTRY_MANIFEST_URL": "https://mporosoff.github.io/grants-scraper/data/researcher_registry_manifest.json",
     "GITHUB_REPOSITORY": "mporosoff/grants-scraper",
     "REJECTED_RETENTION_DAYS": "90",

@@ -267,15 +267,16 @@ function materialEffect(directory, teamData, facultyMatches, detail) {
 async function notifyOwner(env, submission, fetchImpl, event = "pending") {
   if (!env.RESEND_API_KEY || !env.ADMIN_NOTIFICATION_EMAIL || !env.NOTIFICATION_FROM) return;
   const failed = event === "publication_failed";
+  const adminLink = `\n\nAdmin console: ${env.ADMIN_CONSOLE_URL}`;
   await fetchImpl("https://api.resend.com/emails", {
     method: "POST",
     headers: { Authorization: `Bearer ${env.RESEND_API_KEY}`, "Content-Type": "application/json" },
     body: JSON.stringify({
       from: env.NOTIFICATION_FROM, to: [env.ADMIN_NOTIFICATION_EMAIL],
       subject: failed ? "Funding Finder researcher publication failed" : "Funding Finder researcher request waiting",
-      text: failed
+      text: (failed
         ? `Submission ${submission.submission_id} entered publication_failed. Open the protected queue to inspect and retry it.`
-        : `Submission ${submission.submission_id} (${submission.submission_type}) is waiting in the protected researcher review queue.`,
+        : `Submission ${submission.submission_id} (${submission.submission_type}) is waiting in the protected researcher review queue.`) + adminLink,
     }),
   });
 }

@@ -431,6 +431,74 @@ test("public creation is rate bounded, idempotent, and returns the same private 
   assert.equal(store.rows.size, 1);
 });
 
+test("change and addition notifications link to the configured protected admin console", async () => {
+  const adminUrl = JSON.parse(wrangler).vars.ADMIN_CONSOLE_URL;
+  assert.equal(adminUrl, "https://funding-finder-researchers.urochestercheme.workers.dev/admin");
+  for (const submissionType of ["profile_correction", "new_researcher_nomination"]) {
+    const messages = [];
+    const pending = [];
+    const handler = createHandler({
+      storeFactory: () => new MemoryStore(),
+      fetchImpl: async (url, options) => {
+        assert.equal(url, "https://api.resend.com/emails");
+        messages.push(JSON.parse(options.body));
+        return new Response("{}", { status: 200 });
+      },
+    });
+    const response = await handler(new Request("https://untrusted-host.example/submissions", {
+      method: "POST", headers: { Origin: "https://mporosoff.github.io", "Content-Type": "application/json" },
+      body: JSON.stringify(submission({
+        submission_type: submissionType,
+        researcher_id: submissionType === "profile_correction" ? "urh-000001" : null,
+        submitter: { contact_email: "private@example.edu", note: "PRIVATE_NOTE" },
+      })),
+    }), {
+      ...environment(), ADMIN_CONSOLE_URL: adminUrl,
+      RESEND_API_KEY: "test-resend-key", ADMIN_NOTIFICATION_EMAIL: "admin@example.edu", NOTIFICATION_FROM: "notify@example.edu",
+    }, { waitUntil(promise) { pending.push(promise); } });
+    assert.equal(response.status, 201);
+    const receipt = await response.json();
+    await Promise.all(pending);
+    assert.equal(messages.length, 1);
+    assert.match(messages[0].text, new RegExp(`${receipt.submission_id} \\(${submissionType}\\)`));
+    assert.ok(messages[0].text.endsWith(`Admin console: ${adminUrl}`));
+    assert.doesNotMatch(messages[0].text, /untrusted-host|private@example|PRIVATE_NOTE|test-resend-key|token=/);
+  }
+});
+
+test("publication failure notifications include the same protected admin link", async () => {
+  const messages = [];
+  const pending = [];
+  const adminUrl = JSON.parse(wrangler).vars.ADMIN_CONSOLE_URL;
+  const id = "rs_aaaaaaaaaaaaaaaaaaaaaaaa";
+  const handler = createHandler({
+    storeFactory: () => ({
+      async markPublicationFailed(submissionId, input) {
+        assert.equal(submissionId, id);
+        assert.equal(input.expectedRevision, 4);
+        return { submission_id: id, state: "publication_failed", revision: 5 };
+      },
+    }),
+    fetchImpl: async (url, options) => {
+      assert.equal(url, "https://api.resend.com/emails");
+      messages.push(JSON.parse(options.body));
+      return new Response("{}", { status: 200 });
+    },
+  });
+  const response = await handler(new Request(`https://worker.example/internal/publications/${id}/fail`, {
+    method: "POST", headers: { Authorization: "Bearer workflow-test-secret", "Content-Type": "application/json" },
+    body: JSON.stringify({ expected_revision: 4, failure_code: "publication_workflow_failed" }),
+  }), {
+    ...environment(), ADMIN_CONSOLE_URL: adminUrl, REGISTRY_WORKFLOW_TOKEN: "workflow-test-secret",
+    RESEND_API_KEY: "test-resend-key", ADMIN_NOTIFICATION_EMAIL: "admin@example.edu", NOTIFICATION_FROM: "notify@example.edu",
+  }, { waitUntil(promise) { pending.push(promise); } });
+  assert.equal(response.status, 200);
+  await Promise.all(pending);
+  assert.equal(messages.length, 1);
+  assert.equal(messages[0].subject, "Funding Finder researcher publication failed");
+  assert.ok(messages[0].text.endsWith(`Admin console: ${adminUrl}`));
+});
+
 test("concurrent idempotent inserts recover the winning receipt and reject different content", async () => {
   class ConcurrentInsertStore extends MemoryStore {
     constructor(winningPayloadHash = null) { super(); this.winningPayloadHash = winningPayloadHash; }
