@@ -18292,7 +18292,7 @@
       "state": "deferred"
     }
   },
-  "generation_id": "908917089a74b0bd9bbc5abd3f34920256c27d471300cad8bde59c92287bc46e",
+  "generation_id": "21577b067f6362a5ae7769bd512025907e008668ec68a9aaa76f0e4e15a2dc92",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
@@ -37936,6 +37936,7 @@
       "assembly_version": "complementary-roles-1",
       "catalog_title": "Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN",
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
+      "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
       "gate_state": "conditional",
       "generator_version": "opportunity-teams-2",
@@ -37972,9 +37973,33 @@
       "parent_id": "363179",
       "pipeline_hash": "c0e228db8559cc7532fcea8156a3afb20415b2d3896f01317123074cf33a5dfa",
       "record_type": "specific_parent",
+      "recovery_proof": {
+        "provider_requests": 0,
+        "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+        "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+        "retained_decision_hash": "063566aa72a2875348740d7984b509b25f4f1137689b08a1ed4d9dca8660c133",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "de171add9cbf8c9c03420d057e54f8c56e167465994fab8840d0375a0e46a709",
+        "source_revalidation": {
+          "basis": "The current unchanged official description explicitly funds a secure compute environment. Replace the obsolete security-plan table-of-contents citation with that direct goal. Preserve the exact security contributions and their RAN-specific limitations, all members, and the commercialization gap.",
+          "prior_document_projection_hash": "eac8e4b046c4d60fc5f9c2056b42d0df413372c006039a9c2f8be613ab02b1c2",
+          "prior_source_fingerprint": "29f629367fe53b3b3ba2afc771cde8f91cf161c1085feafcac8c388b1e7491f4",
+          "review_kind": "source_quote_revalidation",
+          "reviewed_against_candidate": "3f7a93244cd6542a3d69a849608d2c96b347e58be6b07c1aeb96126719738de3",
+          "reviewed_decision_hash": "d8844081c8ad07f971fb43e6dfdde3bf4f9ad2b843d1baf5ef3bd0e2a9c57e51",
+          "reviewed_document_projection_hash": "71c1b2c52fbcb77e79f2e70f0d7f19c7bf8da5bf86e4d1dbe144e8a79cb063f0",
+          "reviewed_source_fingerprint": "de171add9cbf8c9c03420d057e54f8c56e167465994fab8840d0375a0e46a709",
+          "role_quote_updates": {
+            "role-2": {
+              "after": "support the development of a secure compute environment",
+              "before": "4.5 Security Plan .................................................................................................................... 23"
+            }
+          }
+        },
+        "version": "retained-team-recovery-1"
+      },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "The retained scientific decision contract cannot be established.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [
@@ -38080,7 +38105,7 @@
           "label": "Security Engineer",
           "rationale": "Secure mixed-signal hardware design experience is methodologically relevant to building a security plan for compute hardware, but not shown in RAN or telecom security contexts. Work on software-hardware security boundaries transfers to securing a compute environment, though not demonstrated for RAN systems specifically. GPU security architecture experience is transferable to hardening AI compute accelerators, but not validated for RAN network security requirements. Compiler-enforced systems security methods can inform secure compute environment design, but evidence does not extend to RAN or network security deployment.",
           "required": true,
-          "source_quote": "4.5 Security Plan .................................................................................................................... 23",
+          "source_quote": "support the development of a secure compute environment",
           "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846"
         },
         {
@@ -38124,7 +38149,7 @@
         }
       ],
       "scope_label": "Public Wireless Supply Chain Innovation Fund Grant Program – Solutions for AI-Native RAN",
-      "source_fingerprint": "29f629367fe53b3b3ba2afc771cde8f91cf161c1085feafcac8c388b1e7491f4",
+      "source_fingerprint": "de171add9cbf8c9c03420d057e54f8c56e167465994fab8840d0375a0e46a709",
       "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353846",
       "variants": [
         {
