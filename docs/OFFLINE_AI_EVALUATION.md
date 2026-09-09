@@ -42,6 +42,43 @@ diagnostics, and never repeatedly sends an identical schema-invalid request.
 Refusals, truncation, and semantic validation failures remain distinct outcomes;
 scientific decisions are never completed by filling missing fields locally.
 
+The native preflight passed in run `34340584535` on merge
+`f787de2b7a2d143a26f23fd8e2be6dea070a4585`: one request, $0.000520 estimated.
+The retained 307-request history is unchanged. The effective task ceiling is
+507 requests and $14.203224 cumulative, because the additional $10 is the lower
+monetary allowance. The evidence is `evaluation/sonnet_transport_preflight_20260909.json`.
+
+Team qualification now selects the same `tools.team_provider.stage_contract`
+used by production. The active prompts live in `config/offline_ai.json`.
+Decomposition and adjudication preserve the exact established repair requests;
+the independent verifier has one response contract and cannot create roles or
+edges. Historical prompt constants and all frozen case/result files are retained.
+
+Run the focused regression first, inspect its source-grounded findings, then
+the existing population and the once-selected confirmation set:
+
+```sh
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-regression
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-population
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-confirmation
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-replay
+```
+
+The nine regressions, original 24 cases and six annotated confirmation inputs
+are pinned by `evaluation/sonnet_production_teams.json`. Historical holdout flags
+describe their original provenance; exposed cases are regressions, not new
+holdouts. Do not tune against or relabel the six new confirmations. Numerical
+completion and accuracy gates do not replace manual source/claim/quote review.
+Every active qualification receipt explicitly keeps quality approval and
+production enablement separate. Replay requires identical complete decisions
+and performs no provider requests.
+
+Retained teams keep their original decision and provider provenance when the
+documented scientific contract is compatible and current source/claim proofs
+still pass. Ordinary registry updates can reassemble a remaining valid graph
+after dropping changed or retired references. They cannot invent replacement
+edges; an insufficient remaining graph stays eligible for bounded reassessment.
+
 ## Historical evaluation record
 
 This preparatory entrypoint evaluates public-derived evidence only. It does not

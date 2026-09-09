@@ -1,0 +1,1715 @@
+{
+  "version": "sonnet-production-teams-1",
+  "authority": "User-authorized restoration of established Sonnet services; no model comparison",
+  "populations": {
+    "regression": [
+      "344592:ab-0019",
+      "361050",
+      "361205",
+      "361526:g-12",
+      "356811",
+      "363616",
+      "360006",
+      "362218",
+      "363290"
+    ],
+    "population": [
+      "344592:ab-0019",
+      "344592:ab-0079",
+      "358021",
+      "361050",
+      "361205",
+      "361526:g-12",
+      "363489",
+      "356888",
+      "356981",
+      "357337",
+      "357137",
+      "357308",
+      "360398",
+      "342475",
+      "356811",
+      "363616",
+      "363618",
+      "360006",
+      "356617",
+      "363208",
+      "360368",
+      "344592:ab-0025",
+      "344592:ab-0034",
+      "344592:ab-0035"
+    ]
+  },
+  "acceptance": {
+    "critical_false_accepts": 0,
+    "fabricated_quotes_or_claims": 0,
+    "unsupported_upgrades": 0,
+    "cross_topic_leakage": 0,
+    "scope_decision_accuracy_min": 0.9,
+    "legitimate_scope_acceptance_min": 0.85,
+    "useful_proposals_noninferiority_absolute": 0.1,
+    "valid_schema_fraction_min": 0.95,
+    "manual_source_annotation_review_required": true
+  },
+  "confirmation_selection": {
+    "ids": [
+      "361526:c-8",
+      "361526:b-7",
+      "347026",
+      "362185",
+      "362823",
+      "360149"
+    ],
+    "basis": {
+      "347026": "Scientific analysis of the biomedical research enterprise is the funded research goal; supporting agency mission descriptions do not erase it. Biomedical domain reputation is not science-of-science methods evidence.",
+      "360149": "Umbrella lists eleven unrelated computing research programs without selecting a bounded goal. Do not invent a selected child.",
+      "362185": "Patient-oriented vision injury research is the funded goal despite mentorship mechanics. Generic imaging evidence does not establish clinical access, clinician status or injury trial capability.",
+      "362823": "Funding expands nutrition services and patient visits. Health interventions do not convert service delivery into a research project.",
+      "361526:c-8": "Source-declared AI for quantum imaging and sensing focus area; accept a coherent research approach without inventing prescribed experiments or hardware fabrication.",
+      "361526:b-7": "Source-declared computational tools for fault-tolerant quantum computational science; accept research while requiring explicit methods and preserving quantum-hardware gaps."
+    },
+    "selected_before_paid_scientific_results": true
+  },
+  "confirmation_cases": [
+    {
+      "scope": {
+        "id": "361526:c-8",
+        "parent_id": "361526",
+        "record_type": "publishable_child",
+        "text": "AI for Quantum Imaging and Sensing Challenge Area: Realizing Quantum Systems for Discovery. Focus Area: AI for Quantum Imaging and Sensing.",
+        "scope_label": "AI for Quantum Imaging and Sensing",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350589",
+        "catalog_title": "The Genesis Mission: Transforming Science and Energy with AI",
+        "agency": "Office of Science",
+        "opportunity_number": "DE-FOA-0003612",
+        "source_fingerprint": "056385f527334489e869d4378901509520e8d0e0927626e4c5251805da86acec"
+      },
+      "holdout": true,
+      "annotations": {
+        "expected_scope": "bounded_research",
+        "basis": "Source-declared AI for quantum imaging and sensing focus area; accept a coherent research approach without inventing prescribed experiments or hardware fabrication.",
+        "source_quote": "AI for Quantum Imaging and Sensing Challenge Area: Realizing Quantum Systems for Discovery. Focus Area: AI for Quantum Imaging and Sensing.",
+        "critical_safety": "No invented quote/claim, no sibling evidence, no unsupported capability upgrade. Adjacent evidence never closes a required role."
+      },
+      "claims": [
+        {
+          "claim_id": "urh-000010-c001",
+          "revision": 1,
+          "material_hash": "fb99d29bf43b62025d860fab0aeea8f55625978bd900215e875852bc51e799bb",
+          "researcher_id": "urh-000010",
+          "name": "Andrew N. Jordan",
+          "label": "Quantum sensing and metrology",
+          "evidence": "continuous and weak quantum measurement",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/jordan_andrew/index.html"
+        },
+        {
+          "claim_id": "urh-000016-c002",
+          "revision": 1,
+          "material_hash": "34af66add2fe5a787fe278a7676c9c40de3a4582e0ec53084e36d1e3d91f92c1",
+          "researcher_id": "urh-000016",
+          "name": "Benjamin L. Miller",
+          "label": "Organ-on-chip and microphysiological systems",
+          "evidence": "sensing in microphysiological systems",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html"
+        },
+        {
+          "claim_id": "urh-000045-c001",
+          "revision": 1,
+          "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225",
+          "researcher_id": "urh-000045",
+          "name": "Fatemeh Nargesian",
+          "label": "Search and information retrieval",
+          "evidence": "automated data-discovery systems",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html"
+        },
+        {
+          "claim_id": "urh-000060-c002",
+          "revision": 1,
+          "material_hash": "92c98fa5f118a189d9ae009ec6d24aa6225a975300bda777b17e4954ac2875e4",
+          "researcher_id": "urh-000060",
+          "name": "Ignacio Franco",
+          "label": "Open quantum systems and molecular quantum dynamics",
+          "evidence": "open-quantum-system dynamics",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html"
+        },
+        {
+          "claim_id": "urh-000091-c002",
+          "revision": 1,
+          "material_hash": "f56a3d0f57dad71ab3940f41f4ae5eb4e19c965700f5943ca34376fea4be452b",
+          "researcher_id": "urh-000091",
+          "name": "Machiel Blok",
+          "label": "Quantum sensing and metrology",
+          "evidence": "superconducting quantum sensing",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html"
+        },
+        {
+          "claim_id": "urh-000106-c002",
+          "revision": 1,
+          "material_hash": "cb7f51df4196eba49c9a8a79838d2aae3e843968288b1654a4a7095f2f387df0",
+          "researcher_id": "urh-000106",
+          "name": "Nicholas P. Bigelow",
+          "label": "Quantum sensing and metrology",
+          "evidence": "cold-atom quantum sensing",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/bigelow_nicholas/index.html"
+        },
+        {
+          "claim_id": "urh-000110-c003",
+          "revision": 1,
+          "material_hash": "3f045f3eabe282b83270cdef6d2ab002fefa7e9a2c5ca3437a7a82ddf2a1427a",
+          "researcher_id": "urh-000110",
+          "name": "Pengfei Huo",
+          "label": "Open quantum systems and molecular quantum dynamics",
+          "evidence": "nonadiabatic quantum dynamics",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html"
+        },
+        {
+          "claim_id": "urh-000120-c001",
+          "revision": 1,
+          "material_hash": "2f025fefe771b116632069f2e49312b6fbf84b430e808c2daeb623e43762ce21",
+          "researcher_id": "urh-000120",
+          "name": "Robert Boyd",
+          "label": "Quantum optics and photonics",
+          "evidence": "quantum ghost imaging",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html"
+        },
+        {
+          "claim_id": "urh-000006-c002",
+          "revision": 1,
+          "material_hash": "43f8cc5b8bcfcd3e5197758e1926fb59a0c19a67e5bbddc5c30febbeb3505a2a",
+          "researcher_id": "urh-000006",
+          "name": "Alice C. Quillen",
+          "label": "Planetary, astrophysical, and orbital dynamics",
+          "evidence": "N-body dynamics of exoplanet and debris-disk systems",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/quillen_alice/index.html"
+        },
+        {
+          "claim_id": "urh-000007-c006",
+          "revision": 1,
+          "material_hash": "7da5bb9b6c322594fa005093542fd91bb9fc46442963d76002496c09f95a30b1",
+          "researcher_id": "urh-000007",
+          "name": "Allison J. Lopatkin",
+          "label": "microbial systems biology",
+          "evidence": "microbial systems biology",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+        },
+        {
+          "claim_id": "urh-000017-c001",
+          "revision": 1,
+          "material_hash": "012c514b09c7b5e04174f8993a2c629e6e6aba518c9cbfe195eb2962b56e1cd6",
+          "researcher_id": "urh-000017",
+          "name": "Benjamin Storer",
+          "label": "Climate, ocean, and landscape systems",
+          "evidence": "multiscale ocean energy transfer",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        },
+        {
+          "claim_id": "urh-000020-c003",
+          "revision": 1,
+          "material_hash": "56c0358b6389d825f5888347d3cf1920116454b358a93af927f06008cd20a34b",
+          "researcher_id": "urh-000020",
+          "name": "Brandon R. Barnett",
+          "label": "Hydrogen, tritium, and isotope systems",
+          "evidence": "hydrogen binding in porous frameworks",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html"
+        },
+        {
+          "claim_id": "urh-000021-c001",
+          "revision": 1,
+          "material_hash": "d74a169de69095434721e01d2aba87a96476c750cd9d3943e660145bfc2683b7",
+          "researcher_id": "urh-000021",
+          "name": "Brian Kruschwitz",
+          "label": "High-power and high-energy laser systems",
+          "evidence": "high-power laser wavefront control",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html"
+        },
+        {
+          "claim_id": "urh-000022-c001",
+          "revision": 1,
+          "material_hash": "747c6035eeb02a479d55bf11fca7afd8ae664af40762fe1b2e91ba71aac85278",
+          "researcher_id": "urh-000022",
+          "name": "Chen Ding",
+          "label": "Compilers and runtime systems",
+          "evidence": "compiler locality optimization",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html"
+        },
+        {
+          "claim_id": "urh-000022-c002",
+          "revision": 1,
+          "material_hash": "e7ed1967b66ec0e869164913aace0a148eb7dd7c92d97d552302e36055baec24",
+          "researcher_id": "urh-000022",
+          "name": "Chen Ding",
+          "label": "Memory systems and data locality",
+          "evidence": "cache and memory locality analysis",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html"
+        },
+        {
+          "claim_id": "urh-000026-c001",
+          "revision": 1,
+          "material_hash": "1713aca320ef557346b87978f7347a3215c7d1edba2db4c58909f2dfc22fee1c",
+          "researcher_id": "urh-000026",
+          "name": "Christopher Kanan",
+          "label": "Computer vision",
+          "evidence": "computer vision for medical imaging",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/kanan_chris/index.html"
+        },
+        {
+          "claim_id": "urh-000033-c002",
+          "revision": 1,
+          "material_hash": "b3e73a228987d5e220b330d185d1439d6c94d75e9bcd98b98006c6b767574bbd",
+          "researcher_id": "urh-000033",
+          "name": "David R. Harding",
+          "label": "Hydrogen, tritium, and isotope systems",
+          "evidence": "cryogenic deuterium-tritium target layers",
+          "source_url": "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html"
+        },
+        {
+          "claim_id": "urh-000034-c001",
+          "revision": 1,
+          "material_hash": "1bce8e460e779e6fcc8c4c89723d5c1f5fa320691d3793e2eb88af9f61b667e3",
+          "researcher_id": "urh-000034",
+          "name": "David R. Williams",
+          "label": "Computational imaging",
+          "evidence": "phase-diverse retinal image reconstruction",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html"
+        },
+        {
+          "claim_id": "urh-000034-c003",
+          "revision": 1,
+          "material_hash": "5c27d6da64d45b5610ca84703065237419408c9792e6cdab4aa3d38a5fb32716",
+          "researcher_id": "urh-000034",
+          "name": "David R. Williams",
+          "label": "Ophthalmic and retinal optics",
+          "evidence": "adaptive-optics retinal imaging",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html"
+        },
+        {
+          "claim_id": "urh-000036-c003",
+          "revision": 1,
+          "material_hash": "c92002151cb65d7b51bdd5af54fd5f91706f4de9ea47d804032c801f065dc587",
+          "researcher_id": "urh-000036",
+          "name": "Diane Dalecki",
+          "label": "Acoustics and vibroacoustics",
+          "evidence": "physical acoustics of biological systems",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html"
+        },
+        {
+          "claim_id": "urh-000040-c001",
+          "revision": 1,
+          "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213",
+          "researcher_id": "urh-000040",
+          "name": "Edward Brown III",
+          "label": "High-resolution biomedical microscopy and histology imaging",
+          "evidence": "intravital multiphoton tumor imaging",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html"
+        },
+        {
+          "claim_id": "urh-000041-c001",
+          "revision": 1,
+          "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
+          "researcher_id": "urh-000041",
+          "name": "Ehsan Hoque",
+          "label": "Behavioral sensing and modeling",
+          "evidence": "multimodal behavioral-signal analysis",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html"
+        },
+        {
+          "claim_id": "urh-000053-c001",
+          "revision": 1,
+          "material_hash": "c9edfe6e4159e523e37aba40bee41c849ffceb560652c22aa77ab80efa8ce990",
+          "researcher_id": "urh-000053",
+          "name": "Gregory Heyworth",
+          "label": "Spectral and multispectral imaging",
+          "evidence": "spectral recovery of damaged texts",
+          "source_url": "https://www.sas.rochester.edu/eng/people/faculty/heyworth_gregory/index.html"
+        },
+        {
+          "claim_id": "urh-000058-c001",
+          "revision": 1,
+          "material_hash": "fc815aaec31ac8176cf8b71a43268aa12ab0c07b6758a1f24f06c79b5ed84bcc",
+          "researcher_id": "urh-000058",
+          "name": "Hussein Aluie",
+          "label": "Climate, ocean, and landscape systems",
+          "evidence": "geophysical fluid turbulence",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html"
+        }
+      ]
+    },
+    {
+      "scope": {
+        "id": "361526:b-7",
+        "parent_id": "361526",
+        "record_type": "publishable_child",
+        "text": "Computational Tools for Fault Tolerant Quantum Computational Science Challenge Area: Discovering Quantum Algorithms with AI. Focus Area: Computational Tools for Fault Tolerant Quantum Computational Science.",
+        "scope_label": "Computational Tools for Fault Tolerant Quantum Computational Science",
+        "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350589",
+        "catalog_title": "The Genesis Mission: Transforming Science and Energy with AI",
+        "agency": "Office of Science",
+        "opportunity_number": "DE-FOA-0003612",
+        "source_fingerprint": "bc38a537265e9a7179156c047c04509031dae821d9e9b66417c9ffe0512c72ba"
+      },
+      "holdout": true,
+      "annotations": {
+        "expected_scope": "bounded_research",
+        "basis": "Source-declared computational tools for fault-tolerant quantum computational science; accept research while requiring explicit methods and preserving quantum-hardware gaps.",
+        "source_quote": "Computational Tools for Fault Tolerant Quantum Computational Science Challenge Area: Discovering Quantum Algorithms with AI. Focus Area: Computational Tools for Fault Tolerant Quantum Computational Science.",
+        "critical_safety": "No invented quote/claim, no sibling evidence, no unsupported capability upgrade. Adjacent evidence never closes a required role."
+      },
+      "claims": [
+        {
+          "claim_id": "urh-000150-c003",
+          "revision": 1,
+          "material_hash": "c72c2911c92399bf50d96571a08ba426b105124e16679e26a3d8040cdde4f6bb",
+          "researcher_id": "urh-000150",
+          "name": "Yasemin Basdogan",
+          "label": "Theoretical and computational chemistry",
+          "evidence": "quantum-chemical solvation modeling",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html"
+        },
+        {
+          "claim_id": "urh-000007-c007",
+          "revision": 1,
+          "material_hash": "9a1893b6f7bed305843867442316aa2b3ebd6a87449cd74d204a5e99f363eb76",
+          "researcher_id": "urh-000007",
+          "name": "Allison J. Lopatkin",
+          "label": "computational models of bacterial resistance",
+          "evidence": "computational models of bacterial resistance",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+        },
+        {
+          "claim_id": "urh-000010-c001",
+          "revision": 1,
+          "material_hash": "fb99d29bf43b62025d860fab0aeea8f55625978bd900215e875852bc51e799bb",
+          "researcher_id": "urh-000010",
+          "name": "Andrew N. Jordan",
+          "label": "Quantum sensing and metrology",
+          "evidence": "continuous and weak quantum measurement",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/jordan_andrew/index.html"
+        },
+        {
+          "claim_id": "urh-000013-c002",
+          "revision": 1,
+          "material_hash": "fe929c7676883a09f2d630e7e94963952525d03a972b484fc7b370b8437cea9d",
+          "researcher_id": "urh-000013",
+          "name": "Anson Kahng",
+          "label": "Computational social choice",
+          "evidence": "computational social choice",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/kahng_anson/index.html"
+        },
+        {
+          "claim_id": "urh-000017-c003",
+          "revision": 1,
+          "material_hash": "dcc9ffb96406a1ef3b381a666ff5b570662277c7b22665e84ba71773043d855e",
+          "researcher_id": "urh-000017",
+          "name": "Benjamin Storer",
+          "label": "Geophysical and ocean fluid dynamics",
+          "evidence": "computational ocean fluid dynamics",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        },
+        {
+          "claim_id": "urh-000030-c001",
+          "revision": 1,
+          "material_hash": "1eb251aa2ba086d619d21405b90f445cec571c6d848eb9d366f8dae40376d013",
+          "researcher_id": "urh-000030",
+          "name": "Daniel Gildea",
+          "label": "Natural language processing",
+          "evidence": "decoding algorithms for natural language processing",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/gildea_daniel/index.html"
+        },
+        {
+          "claim_id": "urh-000031-c002",
+          "revision": 1,
+          "material_hash": "c025d77b285d9147fa06eb8267659bcab2b7e7bcef2a5858294171428d89c09c",
+          "researcher_id": "urh-000031",
+          "name": "Daniel Stefankovic",
+          "label": "Combinatorics and graph algorithms",
+          "evidence": "graph-polynomial algorithms",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html"
+        },
+        {
+          "claim_id": "urh-000031-c003",
+          "revision": 1,
+          "material_hash": "d482808316aac4c31ac5bd20e47b060689c19329007bfee498dccc13a3e50483",
+          "researcher_id": "urh-000031",
+          "name": "Daniel Stefankovic",
+          "label": "Pseudorandomness and discrete Fourier methods",
+          "evidence": "Fourier methods in theoretical computer science",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html"
+        },
+        {
+          "claim_id": "urh-000034-c001",
+          "revision": 1,
+          "material_hash": "1bce8e460e779e6fcc8c4c89723d5c1f5fa320691d3793e2eb88af9f61b667e3",
+          "researcher_id": "urh-000034",
+          "name": "David R. Williams",
+          "label": "Computational imaging",
+          "evidence": "phase-diverse retinal image reconstruction",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html"
+        },
+        {
+          "claim_id": "urh-000059-c002",
+          "revision": 1,
+          "material_hash": "e5b31e177bc5dab43c292307db2390e12a1909d24e2973ac70077b113ec4181b",
+          "researcher_id": "urh-000059",
+          "name": "Ibrahim Mohammad",
+          "label": "Magnetohydrodynamics",
+          "evidence": "computational magnetohydrodynamics",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html"
+        },
+        {
+          "claim_id": "urh-000060-c002",
+          "revision": 1,
+          "material_hash": "92c98fa5f118a189d9ae009ec6d24aa6225a975300bda777b17e4954ac2875e4",
+          "researcher_id": "urh-000060",
+          "name": "Ignacio Franco",
+          "label": "Open quantum systems and molecular quantum dynamics",
+          "evidence": "open-quantum-system dynamics",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html"
+        },
+        {
+          "claim_id": "urh-000067-c001",
+          "revision": 1,
+          "material_hash": "3967a6518a58a931d12fde8eef36e0d5eb292678350c0f8e706ddc8b2929a5c9",
+          "researcher_id": "urh-000067",
+          "name": "James R. Fienup",
+          "label": "Computational imaging",
+          "evidence": "computational imaging through aberrations",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html"
+        },
+        {
+          "claim_id": "urh-000071-c001",
+          "revision": 1,
+          "material_hash": "9f6942e54a6ad7b8e8c3bfa1e869ee3f313bd51539cb73b3d6e30c2ff11ffc2f",
+          "researcher_id": "urh-000071",
+          "name": "Jiaming Liang",
+          "label": "Stochastic optimization and sampling",
+          "evidence": "stochastic optimization algorithms",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/liang-jiaming/index.html"
+        },
+        {
+          "claim_id": "urh-000072-c001",
+          "revision": 1,
+          "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+          "researcher_id": "urh-000072",
+          "name": "Jiebo Luo",
+          "label": "Behavioral sensing and modeling",
+          "evidence": "computer vision for social and behavioral science",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html"
+        },
+        {
+          "claim_id": "urh-000075-c001",
+          "revision": 1,
+          "material_hash": "da9efae97831967639dcf83a05549353f062e4d6a8485da37a10584d2b327e10",
+          "researcher_id": "urh-000075",
+          "name": "John M. Nichol",
+          "label": "Semiconductor nanomaterials",
+          "evidence": "singlet-triplet quantum-dot qubits",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html"
+        },
+        {
+          "claim_id": "urh-000075-c002",
+          "revision": 1,
+          "material_hash": "b4365bfa995b012b2b19e583f703e1206eb58cbc2b4d2729c3f240063cd46731",
+          "researcher_id": "urh-000075",
+          "name": "John M. Nichol",
+          "label": "Spintronics and magnetic devices",
+          "evidence": "spin-valley coherence in quantum dots",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html"
+        },
+        {
+          "claim_id": "urh-000075-c003",
+          "revision": 1,
+          "material_hash": "38401c44bd108eac1c4580959633972e632fc41b07d1921e2f24f9a3c2192c4a",
+          "researcher_id": "urh-000075",
+          "name": "John M. Nichol",
+          "label": "Quantum information processing",
+          "evidence": "dynamically corrected qubit gates",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html"
+        },
+        {
+          "claim_id": "urh-000081-c001",
+          "revision": 1,
+          "material_hash": "5796a5bd2deae55877c97df8aa2998a6d6e6e524fec2232af144e3c1f3efb142",
+          "researcher_id": "urh-000081",
+          "name": "Kaave Hosseini",
+          "label": "Combinatorics and graph algorithms",
+          "evidence": "additive combinatorics",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/hosseini_s.kaave/index.html"
+        },
+        {
+          "claim_id": "urh-000085-c001",
+          "revision": 1,
+          "material_hash": "f5c30e22a1e37be77b14b292c4be41a6e355c96a05e4e4d9d940f98b219f5ceb",
+          "researcher_id": "urh-000085",
+          "name": "Lane A. Hemaspaandra",
+          "label": "Computational social choice",
+          "evidence": "computational social-choice bribery problems",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/hemaspaandra_lane/index.html"
+        },
+        {
+          "claim_id": "urh-000091-c001",
+          "revision": 1,
+          "material_hash": "7e55dd2c0a2faa843d113d90be05d3bef1dd87afd7b67879ade0fb501d643365",
+          "researcher_id": "urh-000091",
+          "name": "Machiel Blok",
+          "label": "RF and microwave electronics",
+          "evidence": "quantum simulation with microwave circuits",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html"
+        },
+        {
+          "claim_id": "urh-000091-c002",
+          "revision": 1,
+          "material_hash": "f56a3d0f57dad71ab3940f41f4ae5eb4e19c965700f5943ca34376fea4be452b",
+          "researcher_id": "urh-000091",
+          "name": "Machiel Blok",
+          "label": "Quantum sensing and metrology",
+          "evidence": "superconducting quantum sensing",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html"
+        },
+        {
+          "claim_id": "urh-000091-c003",
+          "revision": 1,
+          "material_hash": "fc2a7fa210632d6e2dad75690525f4a46c005830f31376f664526095a52ffe43",
+          "researcher_id": "urh-000091",
+          "name": "Machiel Blok",
+          "label": "Quantum information processing",
+          "evidence": "quantum simulation with microwave circuits",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html"
+        },
+        {
+          "claim_id": "urh-000094-c002",
+          "revision": 1,
+          "material_hash": "aeebb4167b502dfc6cef5519ede919de7ccbdf707a866986bc58ca4df19b4f6b",
+          "researcher_id": "urh-000094",
+          "name": "Mark Bocko",
+          "label": "Music information and performance technology",
+          "evidence": "computational analysis of musical performance",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html"
+        },
+        {
+          "claim_id": "urh-000100-c001",
+          "revision": 1,
+          "material_hash": "a25cda37c3979a3d9fb6d65c4c657ad19c6e3fcd4864f267391f94218ad3f6cf",
+          "researcher_id": "urh-000100",
+          "name": "Michael T. Ruggiero",
+          "label": "Terahertz science and imaging",
+          "evidence": "terahertz vibrational spectroscopy of molecular crystals",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html"
+        }
+      ]
+    },
+    {
+      "scope": {
+        "id": "347026",
+        "parent_id": "347026",
+        "record_type": "specific_parent",
+        "text": "A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise The National Science Foundation (NSF) and the National Institutes of Health (NIH) are interested in proposals that will propel our understanding of the biomedical research enterprise by drawing from the scientific expertise of the science of science policy research community. NSF promotes the progress of science by maintaining the general health of research and education across all fields of science and engineering. The Social, Behavioral and Economic Sciences (SBE) Directorate within NSF supports basic research on people and society. The SBE sciences focus on human behavior and social organizations; how social, economic, political, cultural and environmental forces affect the lives of people from birth to old age; and how people in turn shape those forces. SBE's Science of Science: Discovery, Communication and Impact Program (SoS: DCI) supports research designed to advance the scientific basis of science and innovation policy. The NIH is the U.S. federal agency charged with supporting biomedical research in the U.S.The National Institute of General Medical Sciences (NIGMS) within the NIH supports basic biomedical research that increases understanding of biological processes and lays the foundation for advances in disease diagnosis, treatment and prevention. Both NSF and NIH believe that there are opportunities and needs for building and supporting research projects with a focus on the scientific research enterprise. The two agencies also recognize that when programmatic goals are compatible, coordinated management and funding of a research program can have a positive synergistic effect on the level and scope of research and can leverage the investments of both agencies. Therefore, NIGMS and SBE are partnering to enable collaboration in research between theSoS: DCI program and NIGMS. This partnership will result in a portfolio of high-quality research to provide scientific analysis of important aspects of the biomedical research enterprise and efforts to foster a diverse, innovative, productive and efficient scientific workforce, from which future scientific leaders will emerge. Prospective investigators are strongly encouraged to discuss theirproposals with the program officers before submission to determine project relevance to the priorities of both SBE and NIGMS. Specific questions pertaining to this solicitation can also be directed to the SBE and NIGMS program officers. Cost sharing Voluntary committed cost sharing prohibited …ble on the Grants.gov website and on the NSF website at: https://www.nsf.gov/publications/pub_summ.jsp?ods_key=grantsgovguide). B. Budgetary Information Cost Sharing Requirements: Inclusion of voluntary committed cost sharing is prohibited. Indirect Cost (F&A) Limitations: Not Applicable Other Budgetary Limitations: Not Applicable C. Due Dates Full Proposa… Eligibility evidence The categories of proposers eligible to submit proposals to the National Science Foundation are identified in the NSF Proposal & Award Policies & Procedures Guide (PAPPG), Chapter I.E. Unaffiliated individuals are not el… Eligibility Information Who May Submit Proposals: The categories of proposers eligible to submit proposals to the National Science Foundation are identified in the NSF Proposal & Award Policies & Procedures Guide (PAPPG), Chapter I.E. Unaffiliated individuals are not eligible to submit proposals in response to this solicitation. Who May Serve as PI: There a… Review criteria The National Science Foundation strives to invest in a robust and diverse portfolio of projects that creates new knowledge and enables breakthroughs in understanding across all areas of science and engineering research a… A. Merit Review Principles and Criteria The National Science Foundation strives to invest in a robust and diverse portfolio of projects that creates new knowledge and enables breakthroughs in understanding across all areas of science and engineering research and education. To identify which projects to support, NSF relies on a merit review process that inco… Institutional submission rule No organization submission limit …ide (PAPPG), Chapter I.E. Unaffiliated individuals are not eligible to submit proposals in response to this solicitation. Who May Serve as PI: There are no restrictions or limits. Limit on Number of Proposals per Organization: There are no restrictions or limits. Limit on Number of Proposals per PI or co-PI: There are no restrictions or limits. PI/co-PI submission rule No investigator submission limit …als in response to this solicitation. Who May Serve as PI: There are no restrictions or limits. Limit on Number of Proposals per Organization: There are no restrictions or limits. Limit on Number of Proposals per PI or co-PI: There are no restrictions or limits.",
+        "scope_label": "A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise",
+        "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf23569",
+        "catalog_title": "A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise",
+        "agency": "U.S. National Science Foundation",
+        "opportunity_number": "23-569",
+        "source_document_hash": "5b98a91a8b05bb538dd1bd9e793115f60dd5d6da4bbf6dff2f0976ad4ee6671d",
+        "source_fingerprint": "dbd1fb5dadf4b57f677c25fbc303cec22d709869253285ac03875e55e05b5854"
+      },
+      "holdout": true,
+      "annotations": {
+        "expected_scope": "bounded_research",
+        "basis": "Scientific analysis of the biomedical research enterprise is the funded research goal; supporting agency mission descriptions do not erase it. Biomedical domain reputation is not science-of-science methods evidence.",
+        "source_quote": "A Science of Science Approach to Analyzing and Innovating the Biomedical Research Enterprise The National Science Foundation (NSF) and the National Institutes of Health (NIH) are interested in proposals that will propel our understanding of the biomedical research enterprise by drawing from the scientific expertise of the science of science policy research community. NSF promotes the progress of science by maintaining the general health of research and education across all fields of science and engineering. The Social, Behavioral and Economic Sciences (SBE) Directorate within NSF supports basic research on people and society. The SBE sciences focus on human behavior and social organizations; how social, economic, political, cultural and environmental forces affect the lives of people from ",
+        "critical_safety": "No invented quote/claim, no sibling evidence, no unsupported capability upgrade. Adjacent evidence never closes a required role."
+      },
+      "claims": [
+        {
+          "claim_id": "urh-000072-c001",
+          "revision": 1,
+          "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+          "researcher_id": "urh-000072",
+          "name": "Jiebo Luo",
+          "label": "Behavioral sensing and modeling",
+          "evidence": "computer vision for social and behavioral science",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html"
+        },
+        {
+          "claim_id": "urh-000029-c003",
+          "revision": 1,
+          "material_hash": "b8a716eda67a334b84ca806a5573cc5fef86fbf59df6cfb1b67b79e134825c13",
+          "researcher_id": "urh-000029",
+          "name": "Danae Polsin",
+          "label": "Shock compression and extreme-pressure materials",
+          "evidence": "diffraction-based high-pressure phase analysis",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html"
+        },
+        {
+          "claim_id": "urh-000040-c001",
+          "revision": 1,
+          "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213",
+          "researcher_id": "urh-000040",
+          "name": "Edward Brown III",
+          "label": "High-resolution biomedical microscopy and histology imaging",
+          "evidence": "intravital multiphoton tumor imaging",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html"
+        },
+        {
+          "claim_id": "urh-000041-c001",
+          "revision": 1,
+          "material_hash": "1d6b7e6e08fab1725f6438acba7bf33e518cb4b58887927f47373ba81624bcd3",
+          "researcher_id": "urh-000041",
+          "name": "Ehsan Hoque",
+          "label": "Behavioral sensing and modeling",
+          "evidence": "multimodal behavioral-signal analysis",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html"
+        },
+        {
+          "claim_id": "urh-000045-c001",
+          "revision": 1,
+          "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225",
+          "researcher_id": "urh-000045",
+          "name": "Fatemeh Nargesian",
+          "label": "Search and information retrieval",
+          "evidence": "automated data-discovery systems",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html"
+        },
+        {
+          "claim_id": "urh-000046-c001",
+          "revision": 1,
+          "material_hash": "b065d77b83391d3e8487dbe2f20dd12b0460363373f5b991d80923f12623f621",
+          "researcher_id": "urh-000046",
+          "name": "Gang Fan",
+          "label": "Water treatment and contaminant remediation",
+          "evidence": "synthetic-biology environmental remediation",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html"
+        },
+        {
+          "claim_id": "urh-000046-c008",
+          "revision": 1,
+          "material_hash": "55d1693c2ecff72deedfe5c6ce1e3f2f7bbdbcfdc9ee2d2f5beee2f12c9c608e",
+          "researcher_id": "urh-000046",
+          "name": "Gang Fan",
+          "label": "metabolic engineering for environmental remediation",
+          "evidence": "metabolic engineering for environmental remediation",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html"
+        },
+        {
+          "claim_id": "urh-000072-c002",
+          "revision": 1,
+          "material_hash": "db30275f96001e7090aff1d477102e6ea85d0607f391082f68c646a2dbb1b1a1",
+          "researcher_id": "urh-000072",
+          "name": "Jiebo Luo",
+          "label": "Affective and social computing",
+          "evidence": "multimodal social-media image analysis",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html"
+        },
+        {
+          "claim_id": "urh-000094-c002",
+          "revision": 1,
+          "material_hash": "aeebb4167b502dfc6cef5519ede919de7ccbdf707a866986bc58ca4df19b4f6b",
+          "researcher_id": "urh-000094",
+          "name": "Mark Bocko",
+          "label": "Music information and performance technology",
+          "evidence": "computational analysis of musical performance",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html"
+        },
+        {
+          "claim_id": "urh-000098-c002",
+          "revision": 1,
+          "material_hash": "98c18c7784a7f99bfacc3d700b422c783168bfa1796f18adb475afdf122fc5aa",
+          "researcher_id": "urh-000098",
+          "name": "Michael Giacomelli",
+          "label": "High-resolution biomedical microscopy and histology imaging",
+          "evidence": "multiphoton surgical microscopy",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/giacomelli-mike/index.html"
+        },
+        {
+          "claim_id": "urh-000111-c004",
+          "revision": 1,
+          "material_hash": "7740a9302bf71e54b32dda72a7c961c398654b481576b7e04130090880b46abb",
+          "researcher_id": "urh-000111",
+          "name": "Pooja Rajendra Bhalode",
+          "label": "process systems engineering",
+          "evidence": "process systems engineering",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html"
+        },
+        {
+          "claim_id": "urh-000115-c001",
+          "revision": 1,
+          "material_hash": "577fabe9425db35fccac1de3ae904b02c62b54de8c5ce37123f0f10a7f1637f6",
+          "researcher_id": "urh-000115",
+          "name": "Rebecca Irwin",
+          "label": "High-resolution biomedical microscopy and histology imaging",
+          "evidence": "intravital multiphoton tissue imaging",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html"
+        },
+        {
+          "claim_id": "urh-000155-c001",
+          "revision": 1,
+          "material_hash": "f04a3363012d655ffb3e71de9cfed2485bbb4dfa8af4b9d541332a654adba243",
+          "researcher_id": "urh-000155",
+          "name": "Zhen Bai",
+          "label": "Affective and social computing",
+          "evidence": "machine-learning models of human interaction",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html"
+        },
+        {
+          "claim_id": "urh-000003-c003",
+          "revision": 1,
+          "material_hash": "e054926892fe0aff8efcf751bd8396dc78fa31793f1d44585c97cc732d0fe677",
+          "researcher_id": "urh-000003",
+          "name": "Adam Sefkow",
+          "label": "High-energy-density and warm-dense matter",
+          "evidence": "high-energy-density plasma transport",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+        },
+        {
+          "claim_id": "urh-000007-c002",
+          "revision": 1,
+          "material_hash": "3118b37693a0fa197dab120824c5efa361a44118d95ca36c229ffd44cfd8734b",
+          "researcher_id": "urh-000007",
+          "name": "Allison J. Lopatkin",
+          "label": "Metabolic engineering",
+          "evidence": "metabolic control of antibiotic susceptibility",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+        },
+        {
+          "claim_id": "urh-000009-c001",
+          "revision": 1,
+          "material_hash": "a9c86b377e45dbf8294ba113889db2a72ccd9d84d14d11d68ea9cdfb71ef0b40",
+          "researcher_id": "urh-000009",
+          "name": "Andrew J. Berger",
+          "label": "Fluorescence and Raman optical methods",
+          "evidence": "Raman spectroscopy of bone quality",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html"
+        },
+        {
+          "claim_id": "urh-000009-c002",
+          "revision": 1,
+          "material_hash": "d84aeeaec19da68f0c9540ca0bf58f463c8351c89718df4e58eab4b01ed70678",
+          "researcher_id": "urh-000009",
+          "name": "Andrew J. Berger",
+          "label": "Biomedical optics and tissue spectroscopy",
+          "evidence": "diffuse biomedical tissue spectroscopy",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html"
+        },
+        {
+          "claim_id": "urh-000013-c002",
+          "revision": 1,
+          "material_hash": "fe929c7676883a09f2d630e7e94963952525d03a972b484fc7b370b8437cea9d",
+          "researcher_id": "urh-000013",
+          "name": "Anson Kahng",
+          "label": "Computational social choice",
+          "evidence": "computational social choice",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/kahng_anson/index.html"
+        },
+        {
+          "claim_id": "urh-000014-c001",
+          "revision": 1,
+          "material_hash": "ea53054382f60bf62a9736d140530aed008ce6c45c5e9bfde4ace757a15321ba",
+          "researcher_id": "urh-000014",
+          "name": "Astrid M. Müller",
+          "label": "Water treatment and contaminant remediation",
+          "evidence": "electrochemical PFAS defluorination",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html"
+        },
+        {
+          "claim_id": "urh-000015-c003",
+          "revision": 1,
+          "material_hash": "bd3280e34b63e0719c07de787edfdfc5b8162620435f9e66f683182d979a0013",
+          "researcher_id": "urh-000015",
+          "name": "Benjamin E. Partridge",
+          "label": "Protein and peptide engineering",
+          "evidence": "programmable peptide and protein materials",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html"
+        },
+        {
+          "claim_id": "urh-000019-c003",
+          "revision": 1,
+          "material_hash": "fd4528cb872bbcf38b39f4ac8ed57cd0c954b1c8ecd2f1c8803b3643ccc46c7b",
+          "researcher_id": "urh-000019",
+          "name": "Bradley L. Nilsson",
+          "label": "Protein and peptide engineering",
+          "evidence": "amyloid peptide self-assembly",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html"
+        },
+        {
+          "claim_id": "urh-000021-c001",
+          "revision": 1,
+          "material_hash": "d74a169de69095434721e01d2aba87a96476c750cd9d3943e660145bfc2683b7",
+          "researcher_id": "urh-000021",
+          "name": "Brian Kruschwitz",
+          "label": "High-power and high-energy laser systems",
+          "evidence": "high-power laser wavefront control",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html"
+        },
+        {
+          "claim_id": "urh-000021-c002",
+          "revision": 1,
+          "material_hash": "58d9ed39663d87bb8ce62f39fd8948ba62611f931148c37978facbc1fe417953",
+          "researcher_id": "urh-000021",
+          "name": "Brian Kruschwitz",
+          "label": "Adaptive optics",
+          "evidence": "adaptive optics for high-power lasers",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html"
+        },
+        {
+          "claim_id": "urh-000022-c002",
+          "revision": 1,
+          "material_hash": "e7ed1967b66ec0e869164913aace0a148eb7dd7c92d97d552302e36055baec24",
+          "researcher_id": "urh-000022",
+          "name": "Chen Ding",
+          "label": "Memory systems and data locality",
+          "evidence": "cache and memory locality analysis",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html"
+        }
+      ]
+    },
+    {
+      "scope": {
+        "id": "362185",
+        "parent_id": "362185",
+        "record_type": "specific_parent",
+        "text": "DoW Vision, Mentored Clinical Research Award Summary: The fiscal year 2026 (FY26) Vision Research Program (VRP) Mentored Clinical Research Award (MCRA) supports patient-oriented vision injury research conducted by highly motivated military or civilian clinicians in training. The MCRA may be used to support a standalone study of high impact to vision injury care or the generation of clinical research data in preparation for a more expansive study. Research must align with at least one of the FY26 VRP Focus Areas. The MCRA may not be used to support preclinical research or clinical trials. Distinctive Features: · Key personnel must include an established clinician or Ph. D. clinical scientist, who will serve as Principal Investigator (PI) and a clinician in training (e.g., a fellow, resident, junior clinician, clinician in a Ph. D. program), who will conduct the proposed research under mentorship of the PI, with support from supporting personnel as appropriate. · The clinician in training should have sufficient time remaining in their training program to complete the research proposed under the MCRA. · Scored peer review criteria include Research Idea/Rationale, Research Strategy and Feasibility, Impact and Personnel. · Programmatic review criteria include adherence to the intent of the MCRA, contribution to program portfolio, relative impact and relevance to military health. · Applicants must submit documentation of Institutional Review Board (IRB)/Ethics Committee (EC) approval or exemption by January 1, 2027, in order for the MCRA application to be considered for funding. https://cdmrp.health.mil/pubs/press/2026/vrppreann",
+        "scope_label": "DoW Vision, Mentored Clinical Research Award",
+        "source_url": "https://www.grants.gov/search-results-detail/362185",
+        "catalog_title": "DoW Vision, Mentored Clinical Research Award",
+        "agency": "Defense Health Agency Contracting Activity - DHACA",
+        "opportunity_number": "HT942526VRPMCRA",
+        "source_fingerprint": "5ed7363890af9c06e1337a05b7959f1a0abc278678fb1334553d2aaa84ac633f"
+      },
+      "holdout": true,
+      "annotations": {
+        "expected_scope": "bounded_research",
+        "basis": "Patient-oriented vision injury research is the funded goal despite mentorship mechanics. Generic imaging evidence does not establish clinical access, clinician status or injury trial capability. The retained notice explicitly excludes preclinical research and clinical trials; preserve those exclusions.",
+        "source_quote": "DoW Vision, Mentored Clinical Research Award Summary: The fiscal year 2026 (FY26) Vision Research Program (VRP) Mentored Clinical Research Award (MCRA) supports patient-oriented vision injury research conducted by highly motivated military or civilian clinicians in training. The MCRA may be used to support a standalone study of high impact to vision injury care or the generation of clinical research data in preparation for a more expansive study. Research must align with at least one of the FY26 VRP Focus Areas. The MCRA may not be used to support preclinical research or clinical trials. Distinctive Features: · Key personnel must include an established clinician or Ph. D. clinical scientist, who will serve as Principal Investigator (PI) and a clinician in training (e.g., a fellow, resident",
+        "critical_safety": "No invented quote/claim, no sibling evidence, no unsupported capability upgrade. Adjacent evidence never closes a required role."
+      },
+      "claims": [
+        {
+          "claim_id": "urh-000003-c003",
+          "revision": 1,
+          "material_hash": "e054926892fe0aff8efcf751bd8396dc78fa31793f1d44585c97cc732d0fe677",
+          "researcher_id": "urh-000003",
+          "name": "Adam Sefkow",
+          "label": "High-energy-density and warm-dense matter",
+          "evidence": "high-energy-density plasma transport",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+        },
+        {
+          "claim_id": "urh-000018-c001",
+          "revision": 1,
+          "material_hash": "4dc5416999f971562b384b077c78bcf012dbaf3272ef3ab463a8715ac0cac928",
+          "researcher_id": "urh-000018",
+          "name": "Benjamín Castañeda",
+          "label": "Diagnostic ultrasound and elastography",
+          "evidence": "point-of-care diagnostic ultrasound",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/castaneda-benjamin/index.html"
+        },
+        {
+          "claim_id": "urh-000021-c001",
+          "revision": 1,
+          "material_hash": "d74a169de69095434721e01d2aba87a96476c750cd9d3943e660145bfc2683b7",
+          "researcher_id": "urh-000021",
+          "name": "Brian Kruschwitz",
+          "label": "High-power and high-energy laser systems",
+          "evidence": "high-power laser wavefront control",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html"
+        },
+        {
+          "claim_id": "urh-000021-c002",
+          "revision": 1,
+          "material_hash": "58d9ed39663d87bb8ce62f39fd8948ba62611f931148c37978facbc1fe417953",
+          "researcher_id": "urh-000021",
+          "name": "Brian Kruschwitz",
+          "label": "Adaptive optics",
+          "evidence": "adaptive optics for high-power lasers",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html"
+        },
+        {
+          "claim_id": "urh-000022-c002",
+          "revision": 1,
+          "material_hash": "e7ed1967b66ec0e869164913aace0a148eb7dd7c92d97d552302e36055baec24",
+          "researcher_id": "urh-000022",
+          "name": "Chen Ding",
+          "label": "Memory systems and data locality",
+          "evidence": "cache and memory locality analysis",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html"
+        },
+        {
+          "claim_id": "urh-000023-c001",
+          "revision": 1,
+          "material_hash": "c819c3c09b9345cb57ddb661d1a202664fb688215ad2967b078a1b288db847ee",
+          "researcher_id": "urh-000023",
+          "name": "Chenliang Xu",
+          "label": "Computer vision",
+          "evidence": "temporal visual understanding",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/xu_chenliang/index.html"
+        },
+        {
+          "claim_id": "urh-000026-c001",
+          "revision": 1,
+          "material_hash": "1713aca320ef557346b87978f7347a3215c7d1edba2db4c58909f2dfc22fee1c",
+          "researcher_id": "urh-000026",
+          "name": "Christopher Kanan",
+          "label": "Computer vision",
+          "evidence": "computer vision for medical imaging",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/kanan_chris/index.html"
+        },
+        {
+          "claim_id": "urh-000029-c001",
+          "revision": 1,
+          "material_hash": "f109aa0f8bef3ab7a67f505bc1a48a76c61ab868aa5be2716427dc0894d74980",
+          "researcher_id": "urh-000029",
+          "name": "Danae Polsin",
+          "label": "X-ray diffraction and crystallography",
+          "evidence": "time-resolved X-ray diffraction under dynamic compression",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html"
+        },
+        {
+          "claim_id": "urh-000029-c002",
+          "revision": 1,
+          "material_hash": "87db1e48633ddac70c2c23965b97e5d82f002a99c9026a503209cdec1abad75e",
+          "researcher_id": "urh-000029",
+          "name": "Danae Polsin",
+          "label": "Ultrafast optics and spectroscopy",
+          "evidence": "time-resolved X-ray diffraction under dynamic compression",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html"
+        },
+        {
+          "claim_id": "urh-000029-c003",
+          "revision": 1,
+          "material_hash": "b8a716eda67a334b84ca806a5573cc5fef86fbf59df6cfb1b67b79e134825c13",
+          "researcher_id": "urh-000029",
+          "name": "Danae Polsin",
+          "label": "Shock compression and extreme-pressure materials",
+          "evidence": "diffraction-based high-pressure phase analysis",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html"
+        },
+        {
+          "claim_id": "urh-000035-c003",
+          "revision": 1,
+          "material_hash": "e26aec6c81b18d7a33ba011b7c9f4de7ce5bd4ca0888063ef62d42595a3edded",
+          "researcher_id": "urh-000035",
+          "name": "David W. McCamant",
+          "label": "Ultrafast optics and spectroscopy",
+          "evidence": "time-resolved spectroscopy of molecular chromophores",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html"
+        },
+        {
+          "claim_id": "urh-000040-c001",
+          "revision": 1,
+          "material_hash": "5536146ed3c2226e678e0d97a43ae93368c03745d32997f4afae2e305f444213",
+          "researcher_id": "urh-000040",
+          "name": "Edward Brown III",
+          "label": "High-resolution biomedical microscopy and histology imaging",
+          "evidence": "intravital multiphoton tumor imaging",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html"
+        },
+        {
+          "claim_id": "urh-000045-c001",
+          "revision": 1,
+          "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225",
+          "researcher_id": "urh-000045",
+          "name": "Fatemeh Nargesian",
+          "label": "Search and information retrieval",
+          "evidence": "automated data-discovery systems",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html"
+        },
+        {
+          "claim_id": "urh-000048-c001",
+          "revision": 1,
+          "material_hash": "fba0f9ad566b36343760c3740b29c3858535a7b665fefe1c4552da322a05aa4c",
+          "researcher_id": "urh-000048",
+          "name": "Gaurav Sharma",
+          "label": "Computer vision",
+          "evidence": "computer vision for image integrity",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/sharma_gaurav/index.html"
+        },
+        {
+          "claim_id": "urh-000049-c001",
+          "revision": 1,
+          "material_hash": "09a08be764f2a912ec12b5690fad1cf69585f147f0105033556c612286c76029",
+          "researcher_id": "urh-000049",
+          "name": "Gilbert 'Rip' Collins",
+          "label": "High-energy-density and warm-dense matter",
+          "evidence": "fusion-relevant high-energy-density materials",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+        },
+        {
+          "claim_id": "urh-000061-c002",
+          "revision": 1,
+          "material_hash": "68e4738fa2e56752a0b89f68ec6d3bd3888d3532a81100b836b51604d942a369",
+          "researcher_id": "urh-000061",
+          "name": "J. Ryan Rygg",
+          "label": "Shock compression and extreme-pressure materials",
+          "evidence": "high-pressure phase transformations",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html"
+        },
+        {
+          "claim_id": "urh-000061-c003",
+          "revision": 1,
+          "material_hash": "529be6053af37a4f806dae69e4c69f0641713d81c900c941bde729e123455444",
+          "researcher_id": "urh-000061",
+          "name": "J. Ryan Rygg",
+          "label": "High-energy-density and warm-dense matter",
+          "evidence": "fusion-relevant high-energy-density materials",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html"
+        },
+        {
+          "claim_id": "urh-000064-c001",
+          "revision": 1,
+          "material_hash": "0ab05d7069361fe615377114c6946eaf6ab08b04fef959d3e85a2a4428b6e1a3",
+          "researcher_id": "urh-000064",
+          "name": "Jake Bromage",
+          "label": "High-power and high-energy laser systems",
+          "evidence": "high-energy laser diagnostics",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/bromage_jake/index.html"
+        },
+        {
+          "claim_id": "urh-000070-c002",
+          "revision": 1,
+          "material_hash": "bb4d1b15824895c26b9257c87bb169bd78a1967130b75c7fe1516deeda75240b",
+          "researcher_id": "urh-000070",
+          "name": "Jessica Shang",
+          "label": "High-energy-density and warm-dense matter",
+          "evidence": "high-energy-density hydrodynamic mixing",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html"
+        },
+        {
+          "claim_id": "urh-000072-c001",
+          "revision": 1,
+          "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+          "researcher_id": "urh-000072",
+          "name": "Jiebo Luo",
+          "label": "Behavioral sensing and modeling",
+          "evidence": "computer vision for social and behavioral science",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html"
+        },
+        {
+          "claim_id": "urh-000072-c003",
+          "revision": 1,
+          "material_hash": "eb9584116982ea3cbc36f1af8fdc0b6cd040e6d859a6502d61b7badb6bde0de1",
+          "researcher_id": "urh-000072",
+          "name": "Jiebo Luo",
+          "label": "Computer vision",
+          "evidence": "large-scale visual content mining",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html"
+        },
+        {
+          "claim_id": "urh-000077-c001",
+          "revision": 1,
+          "material_hash": "9494963a5f4aa783a2d8cc6ff0e735836ba1b32c6d6f616547adf6aa38cd94de",
+          "researcher_id": "urh-000077",
+          "name": "Jonathan D. Zuegel",
+          "label": "High-power and high-energy laser systems",
+          "evidence": "high-energy laser diagnostics",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/zuegel_jonathan/index.html"
+        },
+        {
+          "claim_id": "urh-000077-c002",
+          "revision": 1,
+          "material_hash": "aeefd5eab21d952fecd5d1fa35f2d0bbd571ec1af9a70098485ac9c501611fc2",
+          "researcher_id": "urh-000077",
+          "name": "Jonathan D. Zuegel",
+          "label": "Nonlinear optics",
+          "evidence": "nonlinear frequency conversion for high-power lasers",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/zuegel_jonathan/index.html"
+        },
+        {
+          "claim_id": "urh-000078-c003",
+          "revision": 1,
+          "material_hash": "32ca8e759eafab53f3a05ca5a36e985c069acfbc6a587b6f0e7ca71b234587d6",
+          "researcher_id": "urh-000078",
+          "name": "Jonathan Davies",
+          "label": "High-energy-density and warm-dense matter",
+          "evidence": "magnetized high-energy-density plasma experiments",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html"
+        }
+      ]
+    },
+    {
+      "scope": {
+        "id": "362823",
+        "parent_id": "362823",
+        "record_type": "specific_parent",
+        "text": "Fiscal Year 2027 Expanding Nutrition Services The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits. Budget narrative Budget narrative (required) …tep 2: Get Ready to Apply Apply by the application due date Applications are due by 11:59 p.m. Eastern Time on 09/09/2026. All activities proposed in your application and budget narrative must align with applicable law, including but not limited to statutes, executive orders, federal regulations and applicable judicial holdings. Accordingly, discretionary… Project narrative Project narrative (required) …ition. We will not consider an application that: • Is from an organization that does not meet all eligibility criteria. • Is submitted after the deadline. • Does not include a Project Narrative. • Requests above the amount of $350,000 annually. Application limits You may submit only one application. If you submit more than one application, we will accept t… cybersecurity",
+        "scope_label": "Fiscal Year 2027 Expanding Nutrition Services",
+        "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/353720",
+        "catalog_title": "Fiscal Year 2027 Expanding Nutrition Services",
+        "agency": "Health Resources and Services Administration",
+        "opportunity_number": "HRSA-27-099",
+        "source_fingerprint": "84734e4f785bb2a8dc790e62783a2e6042258a0297ddd0ccde2e3087137b1f7b"
+      },
+      "holdout": true,
+      "annotations": {
+        "expected_scope": "reject",
+        "basis": "Funding expands nutrition services and patient visits. Health interventions do not convert service delivery into a research project.",
+        "source_quote": "Fiscal Year 2027 Expanding Nutrition Services The purpose of Fiscal Year (FY) 2027 Expanding Nutrition Services (ENS) funding is to increase access to nutrition services at HRSA-funded health centers. Nutrition services can help to prevent, manage, and treat diseases and conditions through nutritional and food-based interventions. Health centers will use ENS funding to increase the number of nutrition services patients or visits. Budget narrative Budget narrative (required) …tep 2: Get Ready to Apply Apply by the application due date Applications are due by 11:59 p.m. Eastern Time on 09/09/2026. All activities proposed in your application and budget narrative must align with applicable law, including but not limited to statutes, executive orders, federal regulations and applicable judicial",
+        "critical_safety": "No invented quote/claim, no sibling evidence, no unsupported capability upgrade. Adjacent evidence never closes a required role."
+      },
+      "claims": [
+        {
+          "claim_id": "urh-000007-c001",
+          "revision": 1,
+          "material_hash": "6ea9df9184427c3978eb3d6a46b2603943096048f2ebfab2610fa2e20e611ee2",
+          "researcher_id": "urh-000007",
+          "name": "Allison J. Lopatkin",
+          "label": "Synthetic biology",
+          "evidence": "synthetic-biology interventions against resistance",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+        },
+        {
+          "claim_id": "urh-000029-c001",
+          "revision": 1,
+          "material_hash": "f109aa0f8bef3ab7a67f505bc1a48a76c61ab868aa5be2716427dc0894d74980",
+          "researcher_id": "urh-000029",
+          "name": "Danae Polsin",
+          "label": "X-ray diffraction and crystallography",
+          "evidence": "time-resolved X-ray diffraction under dynamic compression",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html"
+        },
+        {
+          "claim_id": "urh-000029-c002",
+          "revision": 1,
+          "material_hash": "87db1e48633ddac70c2c23965b97e5d82f002a99c9026a503209cdec1abad75e",
+          "researcher_id": "urh-000029",
+          "name": "Danae Polsin",
+          "label": "Ultrafast optics and spectroscopy",
+          "evidence": "time-resolved X-ray diffraction under dynamic compression",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html"
+        },
+        {
+          "claim_id": "urh-000029-c003",
+          "revision": 1,
+          "material_hash": "b8a716eda67a334b84ca806a5573cc5fef86fbf59df6cfb1b67b79e134825c13",
+          "researcher_id": "urh-000029",
+          "name": "Danae Polsin",
+          "label": "Shock compression and extreme-pressure materials",
+          "evidence": "diffraction-based high-pressure phase analysis",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html"
+        },
+        {
+          "claim_id": "urh-000035-c003",
+          "revision": 1,
+          "material_hash": "e26aec6c81b18d7a33ba011b7c9f4de7ce5bd4ca0888063ef62d42595a3edded",
+          "researcher_id": "urh-000035",
+          "name": "David W. McCamant",
+          "label": "Ultrafast optics and spectroscopy",
+          "evidence": "time-resolved spectroscopy of molecular chromophores",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html"
+        },
+        {
+          "claim_id": "urh-000049-c003",
+          "revision": 1,
+          "material_hash": "daa22ec3434e9c71faffe07c6d682b8e494a34a3f4b94a4b699dfa5bac1a0ea4",
+          "researcher_id": "urh-000049",
+          "name": "Gilbert 'Rip' Collins",
+          "label": "Planetary, astrophysical, and orbital dynamics",
+          "evidence": "planetary-interior materials at extreme conditions",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+        },
+        {
+          "claim_id": "urh-000082-c003",
+          "revision": 1,
+          "material_hash": "84cbbc95dd884992324ab279c26173b506eefbef64f5e9f865e8f58edb516462",
+          "researcher_id": "urh-000082",
+          "name": "Kathryn Knowles",
+          "label": "Ultrafast optics and spectroscopy",
+          "evidence": "time-resolved optical spectroscopy of nanomaterials",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html"
+        },
+        {
+          "claim_id": "urh-000111-c009",
+          "revision": 1,
+          "material_hash": "4a6ad18d63ce87644cf42e23fd5a0d08c7d69ee918b6339c1293ef89e93251c6",
+          "researcher_id": "urh-000111",
+          "name": "Pooja Rajendra Bhalode",
+          "label": "solvent-based extraction",
+          "evidence": "solvent-based extraction",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html"
+        },
+        {
+          "claim_id": "urh-000122-c001",
+          "revision": 1,
+          "material_hash": "3af36e983ce8d42451cb7b73153e63209f8298153e9dec6ce4eeb9ade3be13ec",
+          "researcher_id": "urh-000122",
+          "name": "Roman Sobolewski",
+          "label": "Terahertz science and imaging",
+          "evidence": "terahertz time-domain spectroscopy and imaging",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html"
+        },
+        {
+          "claim_id": "urh-000140-c002",
+          "revision": 1,
+          "material_hash": "7fb3267aec8516fb2b3e0bb0b14f5be53758eecdac0ad8bfce33727ca98735ae",
+          "researcher_id": "urh-000140",
+          "name": "Wayne H. Knox",
+          "label": "Ophthalmic and retinal optics",
+          "evidence": "laser-based refractive vision correction",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html"
+        },
+        {
+          "claim_id": "urh-000147-c001",
+          "revision": 1,
+          "material_hash": "9f06cc209410c46615b656576fe40257ee5d5d240e04b6ef243937138cd0cf56",
+          "researcher_id": "urh-000147",
+          "name": "Xi-Cheng Zhang",
+          "label": "Terahertz science and imaging",
+          "evidence": "terahertz time-domain spectroscopy",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html"
+        },
+        {
+          "claim_id": "urh-000001-c001",
+          "revision": 1,
+          "material_hash": "021c69f835af98e7fbb49a443959b0fac28d37a240a94082dfb3e42b5625df83",
+          "researcher_id": "urh-000001",
+          "name": "Aaron Bauer",
+          "label": "Freeform and gradient-index optics",
+          "evidence": "freeform optical system design",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/bauer_aaron/index.html"
+        },
+        {
+          "claim_id": "urh-000001-c002",
+          "revision": 1,
+          "material_hash": "efc776b8702269b450367465cb6b665a334569da7bc642d99509f012ea7ab21f",
+          "researcher_id": "urh-000001",
+          "name": "Aaron Bauer",
+          "label": "Augmented and virtual reality",
+          "evidence": "augmented-reality display optics",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/bauer_aaron/index.html"
+        },
+        {
+          "claim_id": "urh-000002-c001",
+          "revision": 1,
+          "material_hash": "8f99e81139afa500a08492f454d93a25aa123368c8a19698f71ebb698d7fa2c5",
+          "researcher_id": "urh-000002",
+          "name": "Aaron White",
+          "label": "Natural language processing",
+          "evidence": "formal semantics for natural-language processing",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/white_aaron/index.html"
+        },
+        {
+          "claim_id": "urh-000003-c001",
+          "revision": 1,
+          "material_hash": "594381bcea67353a0a58202c7ab55eb72cdad05d89d8ee85e9759ea23ca25d31",
+          "researcher_id": "urh-000003",
+          "name": "Adam Sefkow",
+          "label": "Inertial confinement fusion",
+          "evidence": "magnetized inertial fusion",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+        },
+        {
+          "claim_id": "urh-000003-c002",
+          "revision": 1,
+          "material_hash": "bbb86c7800c817846cd632595a00dde32ef971ddf5730e7b953ad43741cff27d",
+          "researcher_id": "urh-000003",
+          "name": "Adam Sefkow",
+          "label": "Magnetohydrodynamics",
+          "evidence": "magnetohydrodynamic fusion modeling",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+        },
+        {
+          "claim_id": "urh-000003-c003",
+          "revision": 1,
+          "material_hash": "e054926892fe0aff8efcf751bd8396dc78fa31793f1d44585c97cc732d0fe677",
+          "researcher_id": "urh-000003",
+          "name": "Adam Sefkow",
+          "label": "High-energy-density and warm-dense matter",
+          "evidence": "high-energy-density plasma transport",
+          "source_url": "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+        },
+        {
+          "claim_id": "urh-000004-c001",
+          "revision": 1,
+          "material_hash": "ffa0d843fe4f788c67d517b2b4b8a358879b642cb515bff775140f476319629d",
+          "researcher_id": "urh-000004",
+          "name": "Agnes E. Thorarinsdottir",
+          "label": "Electrochemical interfaces and redox chemistry",
+          "evidence": "electrochemical interface microenvironments",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html"
+        },
+        {
+          "claim_id": "urh-000004-c002",
+          "revision": 1,
+          "material_hash": "895c82adc8dc102fb34a26898d7a06b1051a128c55fadb54b8cbc94c94e912b3",
+          "researcher_id": "urh-000004",
+          "name": "Agnes E. Thorarinsdottir",
+          "label": "Electrocatalysis",
+          "evidence": "oxygen-reduction and oxygen-evolution electrocatalysis",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html"
+        },
+        {
+          "claim_id": "urh-000004-c003",
+          "revision": 1,
+          "material_hash": "00e061215706a935711a66a103408913039d10fc94cb5cf6dd47cc0480188b04",
+          "researcher_id": "urh-000004",
+          "name": "Agnes E. Thorarinsdottir",
+          "label": "Porous and framework materials",
+          "evidence": "porous-framework-coated electrocatalysts",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html"
+        },
+        {
+          "claim_id": "urh-000005-c001",
+          "revision": 1,
+          "material_hash": "966b46476308c47802376440ac3bd10231e97417bbfc9abff55ae1f5ff456d4b",
+          "researcher_id": "urh-000005",
+          "name": "Alexander A. Shestopalov",
+          "label": "Surface and interface chemistry",
+          "evidence": "chemically selective surface modification",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html"
+        },
+        {
+          "claim_id": "urh-000005-c002",
+          "revision": 1,
+          "material_hash": "f35e54b2dd20ec8867862b7dc99219780dbbefc644026e7ebb5f4d9472d059b4",
+          "researcher_id": "urh-000005",
+          "name": "Alexander A. Shestopalov",
+          "label": "Surface functionalization and protective coatings",
+          "evidence": "covalent surface functionalization",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html"
+        },
+        {
+          "claim_id": "urh-000005-c003",
+          "revision": 1,
+          "material_hash": "1ca833af9b55c7ff8a78ae24dde4871136ef254268efcbe85193e3ca646a0a55",
+          "researcher_id": "urh-000005",
+          "name": "Alexander A. Shestopalov",
+          "label": "surface chemistry and molecular monolayers",
+          "evidence": "surface chemistry and molecular monolayers",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html"
+        },
+        {
+          "claim_id": "urh-000005-c004",
+          "revision": 1,
+          "material_hash": "6b123d290d3093166bcde03d13462ffd1ae97fc6ab169cae86f95624fa31f1f9",
+          "researcher_id": "urh-000005",
+          "name": "Alexander A. Shestopalov",
+          "label": "surface patterning and contact printing",
+          "evidence": "surface patterning and contact printing",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html"
+        }
+      ]
+    },
+    {
+      "scope": {
+        "id": "360149",
+        "parent_id": "360149",
+        "record_type": "specific_parent",
+        "text": "Computer and Information Science and Engineering (CISE): Future Computing Research The NSF CISE Directorate supports research and education projects that develop new knowledge in all aspects of computing, communications, and information science and engineering through the following Future Computing Research (Future CoRe) programs: Algorithmic Foundations (AF) program; Communications and Information Foundations (CIF) program; Computer Systems Research (CSR) program; Computing Education Research (CER) program; Cyber-Physical System Foundations and Connected Communities (CPS) program; Foundations of Emerging Technologies (FET) program; Human-Centered Computing (HCC) program; Information Integration and Informatics (III) program; Networking Technology and Systems (NeTS) program; Robust Intelligence (RI) program; and Software and Hardware Foundations (SHF) program; The CISE Future Computing Research program anticipates a portfolio of awards with a range of budgets and durations, including projects of smaller scope. Project durations and budgets must be commensurate with the scope of the proposed work up to the maximum limit of $1,000,000 with a duration up to 4 years. Typical projects are approximately $150,000 to $250,000 per year and are 3 to 4 years in duration. Projects are discouraged from exceeding $300,000 in any single year. Estimated program budget, number of awards, and average award size/duration are subject to the availability of funds. Data management plan Data management plan (optional) …etween academia, industry, and others; improved national security; increased economic competitiveness of the United States; and enhanced infrastructure for research and education. Proposers are reminded that reviewers will also be asked to review the Data Management and Sharing Plan, Mentoring Plan, and the optional Broadening Participation in Computing Pl… Cost sharing Voluntary committed cost sharing prohibited …ble on the Grants.gov website and on the NSF website at: https://www.nsf.gov/publications/pub_summ.jsp?ods_key=grantsgovguide). B. Budgetary Information Cost Sharing Requirements: Inclusion of voluntary committed cost sharing is prohibited. Indirect Cost (F&A) Limitations: Not Applicable Other Budgetary Limitations: Not Applicable C. Due Dates Full Proposa… Eligibility evidence Institutions of Higher Education (IHEs): Two- and four-year IHEs (including community colleges) accredited in, and having a campus located in the US, acting on behalf of their faculty members. Special Instructions for In… Eligibility Information Who May Submit Proposals: Proposals may only be submitted by the following: Institutions of Higher Education (IHEs): Two- and four-year IHEs (including community colleges) accredited in, and having a campus located in the US, acting on behalf of their faculty members. Special Instructions for International Branch Campuses of US IHEs:… Review criteria The National Science Foundation strives to invest in a robust and diverse portfolio of projects that creates new knowledge and enables breakthroughs in understanding across all areas of science and engineering research a… A. Merit Review Principles and Criteria The National Science Foundation strives to invest in a robust and diverse portfolio of projects that creates new knowledge and enables breakthroughs in understanding across all areas of science and engineering research and education. To identify which projects to support, NSF relies on a merit review process that inco… Institutional submission rule No organization submission limit …a federally recognized tribe pursuant to the Federally Recognized Indian Tribe List Act of 1994, 25 U.S.C. §§ 5130-5131. Who May Serve as PI: There are no restrictions or limits. Limit on Number of Proposals per Organization: There are no restrictions or limits. Limit on Number of Proposals per PI or co-PI: 2 For CISE Future CoRe Programs, an individual ma… PI/co-PI submission rule 2 per investigator …Act of 1994, 25 U.S.C. §§ 5130-5131. Who May Serve as PI: There are no restrictions or limits. Limit on Number of Proposals per Organization: There are no restrictions or limits. Limit on Number of Proposals per PI or co-PI: 2 For CISE Future CoRe Programs, an individual may not serve as a PI, co-PI, or Senior/Key Personnel on more than two proposals submi… quantum science artificial intelligence cybersecurity",
+        "scope_label": "Computer and Information Science and Engineering (CISE): Future Computing Research",
+        "source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf25543",
+        "catalog_title": "Computer and Information Science and Engineering (CISE): Future Computing Research",
+        "agency": "U.S. National Science Foundation",
+        "opportunity_number": "25-543",
+        "source_document_hash": "da5d29df1988cca3a0cb1553a7bb01fb0c5dc3bba1357f95327a753e0b22a5ba",
+        "source_fingerprint": "eccb6a1ca15981be6655f81ad622e9dab1c95cf31136f7b0cae1142102fedd14"
+      },
+      "holdout": true,
+      "annotations": {
+        "expected_scope": "reject",
+        "basis": "Umbrella lists eleven unrelated computing research programs without selecting a bounded goal. Do not invent a selected child.",
+        "source_quote": "Computer and Information Science and Engineering (CISE): Future Computing Research The NSF CISE Directorate supports research and education projects that develop new knowledge in all aspects of computing, communications, and information science and engineering through the following Future Computing Research (Future CoRe) programs: Algorithmic Foundations (AF) program; Communications and Information Foundations (CIF) program; Computer Systems Research (CSR) program; Computing Education Research (CER) program; Cyber-Physical System Foundations and Connected Communities (CPS) program; Foundations of Emerging Technologies (FET) program; Human-Centered Computing (HCC) program; Information Integration and Informatics (III) program; Networking Technology and Systems (NeTS) program; Robust Intelli",
+        "critical_safety": "No invented quote/claim, no sibling evidence, no unsupported capability upgrade. Adjacent evidence never closes a required role."
+      },
+      "claims": [
+        {
+          "claim_id": "urh-000149-c002",
+          "revision": 1,
+          "material_hash": "d3ba8a72af4cb6fcc4f6224137f9349a40371ad957ed959b1df648dde208e773",
+          "researcher_id": "urh-000149",
+          "name": "Yanan Guo",
+          "label": "Memory systems and data locality",
+          "evidence": "memory-system security",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html"
+        },
+        {
+          "claim_id": "urh-000045-c001",
+          "revision": 1,
+          "material_hash": "0e28674d77b71dc4019806d399ecaab338bcbf6f653c8ed1ee46a62dbd400225",
+          "researcher_id": "urh-000045",
+          "name": "Fatemeh Nargesian",
+          "label": "Search and information retrieval",
+          "evidence": "automated data-discovery systems",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html"
+        },
+        {
+          "claim_id": "urh-000060-c002",
+          "revision": 1,
+          "material_hash": "92c98fa5f118a189d9ae009ec6d24aa6225a975300bda777b17e4954ac2875e4",
+          "researcher_id": "urh-000060",
+          "name": "Ignacio Franco",
+          "label": "Open quantum systems and molecular quantum dynamics",
+          "evidence": "open-quantum-system dynamics",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html"
+        },
+        {
+          "claim_id": "urh-000099-c002",
+          "revision": 1,
+          "material_hash": "546cced7889989722f44d64f308461e1b12b2b3e634ab7564d6a6745bafca0a8",
+          "researcher_id": "urh-000099",
+          "name": "Michael Huang",
+          "label": "Memory systems and data locality",
+          "evidence": "memory-system architecture",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html"
+        },
+        {
+          "claim_id": "urh-000099-c003",
+          "revision": 1,
+          "material_hash": "b69b9566f285eedaf5f22316f8ea6a92d64ae28d1bb9750d0511d76a5a78abe9",
+          "researcher_id": "urh-000099",
+          "name": "Michael Huang",
+          "label": "Computer architecture",
+          "evidence": "architecture for emerging computing paradigms",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html"
+        },
+        {
+          "claim_id": "urh-000111-c004",
+          "revision": 1,
+          "material_hash": "7740a9302bf71e54b32dda72a7c961c398654b481576b7e04130090880b46abb",
+          "researcher_id": "urh-000111",
+          "name": "Pooja Rajendra Bhalode",
+          "label": "process systems engineering",
+          "evidence": "process systems engineering",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html"
+        },
+        {
+          "claim_id": "urh-000149-c003",
+          "revision": 1,
+          "material_hash": "d28058946a5496879e5a0873b7a3213c5f357354ec710d60e158dbf705e38783",
+          "researcher_id": "urh-000149",
+          "name": "Yanan Guo",
+          "label": "Hardware security",
+          "evidence": "software-hardware security boundaries",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html"
+        },
+        {
+          "claim_id": "urh-000022-c002",
+          "revision": 1,
+          "material_hash": "e7ed1967b66ec0e869164913aace0a148eb7dd7c92d97d552302e36055baec24",
+          "researcher_id": "urh-000022",
+          "name": "Chen Ding",
+          "label": "Memory systems and data locality",
+          "evidence": "cache and memory locality analysis",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html"
+        },
+        {
+          "claim_id": "urh-000023-c001",
+          "revision": 1,
+          "material_hash": "c819c3c09b9345cb57ddb661d1a202664fb688215ad2967b078a1b288db847ee",
+          "researcher_id": "urh-000023",
+          "name": "Chenliang Xu",
+          "label": "Computer vision",
+          "evidence": "temporal visual understanding",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/xu_chenliang/index.html"
+        },
+        {
+          "claim_id": "urh-000031-c003",
+          "revision": 1,
+          "material_hash": "d482808316aac4c31ac5bd20e47b060689c19329007bfee498dccc13a3e50483",
+          "researcher_id": "urh-000031",
+          "name": "Daniel Stefankovic",
+          "label": "Pseudorandomness and discrete Fourier methods",
+          "evidence": "Fourier methods in theoretical computer science",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html"
+        },
+        {
+          "claim_id": "urh-000036-c003",
+          "revision": 1,
+          "material_hash": "c92002151cb65d7b51bdd5af54fd5f91706f4de9ea47d804032c801f065dc587",
+          "researcher_id": "urh-000036",
+          "name": "Diane Dalecki",
+          "label": "Acoustics and vibroacoustics",
+          "evidence": "physical acoustics of biological systems",
+          "source_url": "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html"
+        },
+        {
+          "claim_id": "urh-000062-c001",
+          "revision": 1,
+          "material_hash": "8118682351ab24f1c31a0d4e7d33f449cf6824e86ab24a6b4699d86e300121ac",
+          "researcher_id": "urh-000062",
+          "name": "Jack G. Mottley",
+          "label": "Music information and performance technology",
+          "evidence": "performer-dependent organ acoustics",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/mottley_jack/index.html"
+        },
+        {
+          "claim_id": "urh-000072-c001",
+          "revision": 1,
+          "material_hash": "5fa17f84fa3d27551253c2c2cf9a246690717d3a87e6c1a9cf09c9d8d5191ac3",
+          "researcher_id": "urh-000072",
+          "name": "Jiebo Luo",
+          "label": "Behavioral sensing and modeling",
+          "evidence": "computer vision for social and behavioral science",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html"
+        },
+        {
+          "claim_id": "urh-000073-c001",
+          "revision": 1,
+          "material_hash": "1ca4684a8c9bc2ba7008218d5932f1f779f897933a9d8df7b5eaa4b8ac6f1d08",
+          "researcher_id": "urh-000073",
+          "name": "John Criswell",
+          "label": "Compilers and runtime systems",
+          "evidence": "compiler-enforced systems security",
+          "source_url": "https://www.cs.rochester.edu/people/faculty/criswell_john/index.html"
+        },
+        {
+          "claim_id": "urh-000075-c003",
+          "revision": 1,
+          "material_hash": "38401c44bd108eac1c4580959633972e632fc41b07d1921e2f24f9a3c2192c4a",
+          "researcher_id": "urh-000075",
+          "name": "John M. Nichol",
+          "label": "Quantum information processing",
+          "evidence": "dynamically corrected qubit gates",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html"
+        },
+        {
+          "claim_id": "urh-000091-c003",
+          "revision": 1,
+          "material_hash": "fc2a7fa210632d6e2dad75690525f4a46c005830f31376f664526095a52ffe43",
+          "researcher_id": "urh-000091",
+          "name": "Machiel Blok",
+          "label": "Quantum information processing",
+          "evidence": "quantum simulation with microwave circuits",
+          "source_url": "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html"
+        },
+        {
+          "claim_id": "urh-000094-c002",
+          "revision": 1,
+          "material_hash": "aeebb4167b502dfc6cef5519ede919de7ccbdf707a866986bc58ca4df19b4f6b",
+          "researcher_id": "urh-000094",
+          "name": "Mark Bocko",
+          "label": "Music information and performance technology",
+          "evidence": "computational analysis of musical performance",
+          "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html"
+        },
+        {
+          "claim_id": "urh-000101-c001",
+          "revision": 1,
+          "material_hash": "3f365d6cb0bb1711dc13e823e96cf8acaff280e49c6d8c4df3ecf3a6da9f642b",
+          "researcher_id": "urh-000101",
+          "name": "Michele Cotrufo",
+          "label": "Quantum emitters and single-photon sources",
+          "evidence": "single-photon embedded eigenstates",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/cotrufo-michele/index.html"
+        },
+        {
+          "claim_id": "urh-000107-c002",
+          "revision": 1,
+          "material_hash": "aae25c95f5fd84a79ec8ab6839e2a6221075e65753846e9a701275564f737dc1",
+          "researcher_id": "urh-000107",
+          "name": "Nickolas A. Vamivakas",
+          "label": "Quantum emitters and single-photon sources",
+          "evidence": "nanoscale quantum-emitter spectroscopy",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html"
+        },
+        {
+          "claim_id": "urh-000108-c001",
+          "revision": 1,
+          "material_hash": "587fc58e6307af57d9c5a79d9e3e1259745b59b8eb39b57efdd8bb60988896b1",
+          "researcher_id": "urh-000108",
+          "name": "Pablo A. Postigo",
+          "label": "Quantum emitters and single-photon sources",
+          "evidence": "quantum-dot single-photon emitters",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html"
+        },
+        {
+          "claim_id": "urh-000108-c002",
+          "revision": 1,
+          "material_hash": "6d503576b7462ef9f80d02db6ccd29ac1067dab97db9bd21fe90053156a0b007",
+          "researcher_id": "urh-000108",
+          "name": "Pablo A. Postigo",
+          "label": "Semiconductor nanomaterials",
+          "evidence": "quantum-dot single-photon emitters",
+          "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html"
+        },
+        {
+          "claim_id": "urh-000110-c003",
+          "revision": 1,
+          "material_hash": "3f045f3eabe282b83270cdef6d2ab002fefa7e9a2c5ca3437a7a82ddf2a1427a",
+          "researcher_id": "urh-000110",
+          "name": "Pengfei Huo",
+          "label": "Open quantum systems and molecular quantum dynamics",
+          "evidence": "nonadiabatic quantum dynamics",
+          "source_url": "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html"
+        },
+        {
+          "claim_id": "urh-000111-c001",
+          "revision": 1,
+          "material_hash": "c18707da525b77498692563c1d1ff0aeda899d060c3513fc04d4d4969927b5a8",
+          "researcher_id": "urh-000111",
+          "name": "Pooja Rajendra Bhalode",
+          "label": "Precision manufacturing and process optimization",
+          "evidence": "data-driven process monitoring",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html"
+        },
+        {
+          "claim_id": "urh-000111-c003",
+          "revision": 1,
+          "material_hash": "ceadf0867e9afd183f7040cef9287e4ad8c15c3f6dce7697cee5de0ef3879d2d",
+          "researcher_id": "urh-000111",
+          "name": "Pooja Rajendra Bhalode",
+          "label": "Data-driven surrogate modeling",
+          "evidence": "hybrid mechanistic and data-driven process models",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html"
+        }
+      ]
+    }
+  ],
+  "retrieval_contract": "Existing frozen pools remain byte-identical. Six confirmation cases use 24 current eligible public claims ranked once by distinct non-stopword token overlap of scope and claim label/evidence, ties by claim ID; production pilots separately exercise actual Voyage retrieval.",
+  "case_hashes": {
+    "regression": {
+      "344592:ab-0019": "b3372cfe01fb479273df6bcf883ea4bc893522144726864009d12480a4b8dcc3",
+      "361050": "aac5b86894950b2e4b18aca2413a45f356bb5c131a38cfe2d97a6013c2d30b6e",
+      "361205": "2235e77fdb434903c71ce27f8a28fc1dc86917f3d733057f091bcb8690f4af81",
+      "361526:g-12": "966c956650548810f961ed22890512cbd71eaeab345f3088ab800b7bcfff5647",
+      "356811": "8ab31021bdee9fafdcc9ffd12db9507b2063ca92cff99dba600538dfb890fbe6",
+      "363616": "5f11d7ba09da48f54e10269c27965d15accd02dc1b694b03daf35df9cad93e5f",
+      "360006": "62fd10e3aeb2e7627ef845fc50326efb1a60dad91218c1e0b8f4237d72551393",
+      "362218": "57baf3ceb8b21073fc78d07bba3812a01ce322b0c0a11f980ef62424de2cd146",
+      "363290": "46e10950b2d3b876b3f118f47cb1ca5e78c4b9a49a352e71a138a234b2d45975"
+    },
+    "population": {
+      "344592:ab-0019": "b3372cfe01fb479273df6bcf883ea4bc893522144726864009d12480a4b8dcc3",
+      "344592:ab-0079": "2a540d1ed45d6223f583294bcd572675d2790d6088a084bc8917bdc9c16c68ce",
+      "358021": "43d0a170fb8761cdecb516f1263ea21e1346cbf4e1222f5c00c14217ef5b9df6",
+      "361050": "aac5b86894950b2e4b18aca2413a45f356bb5c131a38cfe2d97a6013c2d30b6e",
+      "361205": "2235e77fdb434903c71ce27f8a28fc1dc86917f3d733057f091bcb8690f4af81",
+      "361526:g-12": "966c956650548810f961ed22890512cbd71eaeab345f3088ab800b7bcfff5647",
+      "363489": "5512e218ae3aa210cc07100986a24f5f7a4a72bb63379ef6d1cd18a27868cbfb",
+      "356888": "d2f47ba91da69869246bb4ee3d356a56ca081d5e3ae34a5e1bfa014a624d2a72",
+      "356981": "dc47ba06b4332d90daf55f574a5426afe0b86d158f361d5591daaddc4e48df4d",
+      "357337": "bad85f9a9c85a0472f7feb41a9dd9b5ff62dfb02b3fbc86fe95151b378cef975",
+      "357137": "421bcca4e733cc5e7d5e860f8c17f8debd1016122512d0dca936f54eeb41a263",
+      "357308": "080b4d0c520e0452b3f51daa66b555901112b5ac9495da8141ac680d6a9861c7",
+      "360398": "3997ec3648b6012f2e70b45163672431868932b8177d8393529b3ca4af381cb1",
+      "342475": "3472d137eb0f5be6923e50fb33d368e5207b902eee73335273cedc109dbf5e92",
+      "356811": "8ab31021bdee9fafdcc9ffd12db9507b2063ca92cff99dba600538dfb890fbe6",
+      "363616": "5f11d7ba09da48f54e10269c27965d15accd02dc1b694b03daf35df9cad93e5f",
+      "363618": "d7fcf628f622e7062500d848673702c186b749cc6593d610603010cac2d8add0",
+      "360006": "62fd10e3aeb2e7627ef845fc50326efb1a60dad91218c1e0b8f4237d72551393",
+      "356617": "0bab63a1fab57324222da76d356280860248517a39c13f374d626fa68b065964",
+      "363208": "f783362189b77b023ba1e8f3c22900a2f552a6507e1c335e5d078bcce7e8b259",
+      "360368": "b2508a2fead6fa0d914a1176eb8f4b1d9d87005b194f30dc5145de04fa4975b0",
+      "344592:ab-0025": "b8b259f80eb081a08f642229935b79a42aab63d04f6d59e01f44f1bfb92adca0",
+      "344592:ab-0034": "715999f4c8b86800dba868ebf0c343d3fb2c980eab820f8c6377c4c50c9b192d",
+      "344592:ab-0035": "03cb00083a89ca5df7a60a6664e24c794531c5b3d758aa11d37bab273710bec4"
+    },
+    "confirmation": {
+      "361526:c-8": "517837c047751f2422102dcdd4804c27e1fc63370817806de094bb524cf5d2c1",
+      "361526:b-7": "e5ecdb5344071722c72aa71f2d5fe18caadc9ce2c58d1460ae50a7aa9327bc3d",
+      "347026": "d504b3692a7a7f45ae751bb1fcb2c043c372288e1c32e63afbb9bddc6772b122",
+      "362185": "ace1244d664ca3df6bcabd103bb9efab784377f7d07d86846da8b4182bd158b4",
+      "362823": "a5da4818ef3a532b3849b489c84ae869d7326e91b0fb6296ead0b2ba2626cea2",
+      "360149": "4293db112545e7c98b5f9d5e0c03a07c215f1d3fc8c48ef7343c5bf8246e7d0a"
+    }
+  },
+  "required_source_checks": {
+    "361050": "Bounded structural-biology objective accepted; spectroscopy does not establish high-resolution biomolecular structure determination.",
+    "361526:g-12": "Named electrochemical catalyst discovery/scaleup child accepted without invented mandates.",
+    "362218": "Hearing-restoration therapeutic research accepted; no excluded clinical trial/tinnitus/vestibular objective.",
+    "361205": "Neural-activity measurement and peripheral-physiology synchronization remain required unfilled capabilities unless supplied claims explicitly establish them.",
+    "356811": "Neural encoding/neurobiology labels do not establish experimental neural recording; no unsupported covering edge or hidden recording gap.",
+    "344592:ab-0019": "Retain useful evidence-backed complementary optoelectronics coverage; credible method transfer remains permitted.",
+    "363616": "Reject broad multi-program umbrella.",
+    "360006": "Reject routine surveillance operations.",
+    "363290": "Reject conference support."
+  },
+  "qualification_rule": "All cases must complete; preserve numerical floors and zero critical unsupported capability, quote, claim, upgrade or cross-topic acceptance. Source review is required; execution success is not quality approval."
+}

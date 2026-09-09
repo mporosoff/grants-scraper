@@ -579,6 +579,10 @@ def build_outputs(
 ) -> dict:
     registry = load_registry(registry_path)
     team_model = synchronize_opportunity_team_model(registry, team_model_path)
+    from tools.team_maintenance import reassemble_changed_claims
+    from scripts.build_opportunity_teams import scopes
+    if reassemble_changed_claims(team_model, scopes(parent_path=catalog_path), registry):
+        team_model = synchronize_opportunity_team_model(registry, team_model_path, model=team_model)
     projection = directory_projection(registry)
     _write_javascript(directory_path, PUBLIC_DIRECTORY_GLOBAL, projection)
     _write_json(manifest_path, {
