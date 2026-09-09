@@ -151,7 +151,7 @@ class FrozenSpecificationTests(unittest.TestCase):
         (2026-08-20) is that a child represents what the funded work is *about*
         rather than merely something an applicant selects, and O1 asks a
         choosability question that cannot encode it. So the specification moved,
-        by an explicit product decision, and the test moves with it — but it
+        by an explicit product decision, and the test moves with it â€” but it
         pins the **delta** rather than dropping the constraint: `PROMPT` must be
         `O1_PROMPT` with `{dec11}` substituted at exactly one place, and
         `tools/cov4_ownership.py` keeps `O1_PROMPT` exactly as the experiment
@@ -482,7 +482,7 @@ class ProvenanceBoundaryTests(unittest.TestCase):
         )
 
     def test_an_inline_child_is_judged_exactly_like_an_inferred_one(self):
-        """§5.1 makes `inline` reachable only by override; Cov4 still gates it."""
+        """Â§5.1 makes `inline` reachable only by override; Cov4 still gates it."""
         classifier = CountingClassifier()
         built = build(parent(), [span()], attachment_document(),
                       provenance=records.INLINE)
@@ -526,7 +526,7 @@ class ProvenanceIsNeverUpgradedTests(unittest.TestCase):
         """`inferred` is capped at `medium`; a passing verdict does not change it."""
         built = build(parent(), [span()], attachment_document(),
                       confidence="high")
-        self.assertEqual(built[0]["confidence"], "medium")   # §5.1 ceiling
+        self.assertEqual(built[0]["confidence"], "medium")   # Â§5.1 ceiling
         kept, _d = cov4.apply_gate(
             parent(), built, attachment_document(), classifier=CountingClassifier())
         self.assertEqual(kept[0]["confidence"], "medium")
@@ -659,7 +659,7 @@ class FailClosedTests(unittest.TestCase):
 
         saved = os.environ.pop(cov4.API_KEY_ENV, None)
         try:
-            verdict = cov4.classify_fundability({}, session=Recorder())
+            verdict = cov4.historical_classify_fundability({}, session=Recorder())
         finally:
             if saved is not None:
                 os.environ[cov4.API_KEY_ENV] = saved
@@ -668,7 +668,7 @@ class FailClosedTests(unittest.TestCase):
         self.assertEqual(called, [])
 
     def test_a_timeout_is_unresolved(self):
-        verdict = cov4.classify_fundability(
+        verdict = cov4.historical_classify_fundability(
             {}, api_key="k", session=self.Boom(TimeoutError("timed out")))
         self.assertEqual(verdict["fundability"], cov4.UNRESOLVED)
         self.assertEqual(verdict["error"], "request_failed")
@@ -676,7 +676,7 @@ class FailClosedTests(unittest.TestCase):
 
     def test_a_non_2xx_response_is_unresolved(self):
         for status in (401, 429, 500, 503):
-            verdict = cov4.classify_fundability(
+            verdict = cov4.historical_classify_fundability(
                 {}, api_key="k",
                 session=self.session(self.Response(status_code=status)))
             self.assertEqual(verdict["fundability"], cov4.UNRESOLVED, status)
@@ -684,7 +684,7 @@ class FailClosedTests(unittest.TestCase):
             self.assertEqual(verdict["detail"], f"status_{status}")
 
     def test_malformed_json_is_unresolved(self):
-        verdict = cov4.classify_fundability(
+        verdict = cov4.historical_classify_fundability(
             {}, api_key="k",
             session=self.session(self.Response(raises=True)))
         self.assertEqual(verdict["fundability"], cov4.UNRESOLVED)
@@ -692,7 +692,7 @@ class FailClosedTests(unittest.TestCase):
 
     def test_an_unparseable_classifier_response_is_unresolved(self):
         for text in ("", "I cannot answer that.", "yes, definitely fundable"):
-            verdict = cov4.classify_fundability(
+            verdict = cov4.historical_classify_fundability(
                 {}, api_key="k", session=self.session(self.text_response(text)))
             self.assertEqual(verdict["fundability"], cov4.UNRESOLVED, text)
             self.assertEqual(verdict["error"], "unparseable_response", text)
@@ -701,14 +701,14 @@ class FailClosedTests(unittest.TestCase):
         for body in ('{"owned": "yes", "fundable": "maybe"}',
                      '{"owned": "yes"}',
                      '{"owned": "yes", "fundable": true}'):
-            verdict = cov4.classify_fundability(
+            verdict = cov4.historical_classify_fundability(
                 {}, api_key="k", session=self.session(self.text_response(body)))
             self.assertEqual(verdict["fundability"], cov4.UNRESOLVED, body)
             self.assertEqual(verdict["error"], "unexpected_enum", body)
 
     def test_a_well_formed_answer_still_parses(self):
         """The failure tests are only meaningful if the success path works."""
-        verdict = cov4.classify_fundability(
+        verdict = cov4.historical_classify_fundability(
             {}, api_key="k",
             session=self.session(self.text_response(
                 '{"owned": "yes", "fundable": "yes", "reason": "a programme"}')))
@@ -717,7 +717,7 @@ class FailClosedTests(unittest.TestCase):
         self.assertIsNone(verdict["error"])
 
     def test_success_records_anthropic_input_and_output_token_usage(self):
-        verdict = cov4.classify_fundability(
+        verdict = cov4.historical_classify_fundability(
             {},
             api_key="k",
             session=self.session(self.Response(payload={
@@ -787,7 +787,7 @@ class FailClosedTests(unittest.TestCase):
             self.assertEqual(kept[0]["confidence"], "medium")
 
     def test_a_classifier_outage_does_not_fail_the_catalog_build(self):
-        """An unreachable API costs recall, never the parent's facts (§9.3)."""
+        """An unreachable API costs recall, never the parent's facts (Â§9.3)."""
         from scripts import extract_document_evidence as ede
         from scripts import subtopic_sources
 
@@ -820,7 +820,7 @@ class FailClosedTests(unittest.TestCase):
         self.assertEqual(fields["subtopics"][0]["confidence"], "medium")
 
     def test_diagnostics_never_carry_a_credential_or_a_request_header(self):
-        verdict = cov4.classify_fundability(
+        verdict = cov4.historical_classify_fundability(
             {}, api_key="sk-ant-secret-value",
             session=self.Boom(RuntimeError("failed for url with sk-ant-secret-value")))
         serialized = json.dumps(verdict)

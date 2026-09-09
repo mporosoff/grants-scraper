@@ -77,6 +77,14 @@ def snapshot(root, revision=None):
             files['@document_spend_config'] = c.digest(c.encoded({key: settings[key] for key in
                 ('budgets_usd', 'max_requests', 'prices_per_million')} |
                 {'generation_provider_pauses': settings.get('generation_provider_pauses', {})}))
+            if 'production_cov4' in settings:
+                # The active document adapter now consumes the shared native
+                # client/schema and its own stage settings. Keep team-only
+                # prompt/routing changes out of this source projection.
+                files['@document_cov4_config'] = c.digest(c.encoded({
+                    'stage': settings['production_cov4'], 'route': settings['routes']['sonnet']}))
+                for name in ('tools/offline_ai.py', 'tools/offline_team_contract.py'):
+                    files['@document:' + name] = c.digest(semantic_bytes(name, read(name)))
         result[group] = {'files': files, 'fingerprint': c.digest(c.encoded(files))}
     return result
 

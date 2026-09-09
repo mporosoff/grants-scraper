@@ -381,11 +381,108 @@ def production_teams(state, population, *, replay=False):
     return result
 
 
+def production_cov4_cases(population):
+    from tools.run_cov4_ownership import load_candidates
+    protocol = json.loads(Path('evaluation/sonnet_production_cov4.json').read_bytes())
+    candidates = load_candidates()
+    if len(candidates) != protocol['population_size'] or identity(candidates) != protocol['frozen_population_sha256']:
+        raise ValueError('Frozen Cov4 population identity changed')
+    for candidate in candidates:
+        context = protocol['context_overrides'].get(candidate['candidate_id'])
+        if context:
+            candidate['classifier_context'] = context
+            candidate['source_document_sha256'] = protocol['context_source']['sha256']
+    if population == 'controls':
+        candidates = [candidate for candidate in candidates if candidate['candidate_id'] in protocol['controls']]
+        if len(candidates) != len(protocol['controls']):
+            raise ValueError('Incomplete Cov4 controls')
+    return protocol, candidates
+
+
+def production_cov4(state, population, *, replay=False):
+    """The active extraction-record/publication gate, under the shared allowance."""
+    from scripts import subtopic_cov4 as gate
+    from tools import run_cov4_validation as harness, run_budgeted_documents as documents
+    protocol, candidates = production_cov4_cases(population)
+    ledger = evaluation_ledger(state / 'ledger.json')
+    preflight = json.loads((state / 'production-preflight-receipt.json').read_bytes())
+    native = production_preflight_configuration()
+    if (not preflight.get('complete') or preflight.get('contract') != identity(native)
+            or gate.active_contract({})['route'] != native['route']):
+        raise ConfigurationFailure('Exact native production transport preflight required')
+    configuration = {'version': protocol['version'], 'protocol': protocol, 'population': candidates,
+        'preflight_contract': preflight['contract'],
+        'active_requests': [gate.active_contract(gate.candidate_from_record(parent, built[0], document))
+                            for _, parent, document, built in harness.generic_records(candidates)],
+        'generic_records': harness.generic_records(candidates), 'bypasses': harness.bypassed_records(),
+        'adapter': [function_hash(fn) for fn in (production_cov4_cases, production_cov4, documents.instrument)],
+        'modules': {path: module_hash(path) for path in ('scripts/subtopic_cov4.py', 'scripts/subtopic_records.py',
+            'scripts/subtopic_segmentation.py', 'tools/run_cov4_validation.py', 'tools/offline_ai.py')}}
+    expected = identity(configuration)
+    destination = state / protocol['version'] / population
+    destination.mkdir(parents=True, exist_ok=True)
+    receipt_path = destination / 'qualification-receipt.json'
+    retained = json.loads(receipt_path.read_bytes()) if receipt_path.exists() else None
+    if retained and retained['evaluation_contract'] != expected:
+        raise ValueError('Cov4 qualification contract changed; preserve retained evidence')
+    if replay and (not retained or not retained['execution_complete']):
+        raise ValueError('Cov4 replay requires complete retained results')
+    if retained and retained['execution_complete'] and not replay:
+        return retained
+    if retained and not replay:
+        history = destination / 'history' / identity(retained)
+        atomic_json(history / 'qualification-receipt.json', retained)
+        (history / 'results.jsonl').write_bytes((destination / 'results.jsonl').read_bytes())
+    output = destination / ('replay-results.jsonl' if replay else 'results.jsonl')
+    before = ledger.read()
+    classify = documents.instrument(ledger, state / 'cov4-production-cache', gate.classify_fundability, replay=replay)
+    with patch.object(gate, 'classify_fundability', classify):
+        metrics = harness.run(output, live=not replay, candidates=candidates)
+    rows = [json.loads(line) for line in output.read_text(encoding='utf-8').splitlines()]
+    metrics.pop('raw', None)
+    metrics.pop('live', None)
+    complete = len(rows) == len(candidates) and not metrics['api_errors']
+    extra = protocol['additional_subject_controls']
+    controls = all(row['cov4_fundability'] == extra[row['candidate_id']]['fundability']
+                   for row in rows if row['candidate_id'] in extra)
+    floors = protocol['acceptance']
+    numerical = complete and controls and all(metrics[key] == floors[key] for key in (
+        'genuine_children_lost', 'contaminants_published', 'cross_opportunity_fabrications_published', 'bypass_classifier_calls'))
+    numerical = numerical and metrics['candidates_bypassed_by_provenance'] == floors['required_bypasses']
+    response_hashes = {}
+    for selected in configuration['active_requests']:
+        key = identity({'route': selected['route'], 'stage': 'cov4', 'config': selected['stage'],
+            'prompt': selected['prompt'], 'schema': selected['schema'], 'inputs': selected['inputs']})
+        cached = state / 'cov4-production-cache' / (key + '.json')
+        if cached.exists():
+            response_hashes[key] = identity(json.loads(cached.read_bytes()))
+    result = {'configuration': configuration, 'evaluation_contract': expected, 'population': population,
+        'execution_complete': complete, 'metrics': metrics, 'numerical_gate_passed': numerical,
+        'quality_gate_passed': False, 'source_review': 'required', 'production_enabled': False,
+        'new_provider_requests': len(ledger.read()['requests']) - len(before['requests']),
+        'result_hash': identity(rows), 'response_hashes': response_hashes, 'replay': replay}
+    if replay:
+        if (ledger.read() != before or result['new_provider_requests'] or result['result_hash'] != retained['result_hash']
+                or metrics != retained['metrics'] or response_hashes != retained['response_hashes']):
+            raise ValueError('Cov4 replay changed retained evidence or accounting')
+    atomic_json(destination / ('replay-receipt.json' if replay else 'qualification-receipt.json'), result)
+    atomic_json(state / 'usage-summary.json', ledger.summary())
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=["production-preflight", "production-teams-regression", "production-teams-population", "production-teams-confirmation", "production-teams-replay", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
+    parser.add_argument("phase", choices=["production-preflight", "production-teams-regression", "production-teams-population", "production-teams-confirmation", "production-teams-replay", "production-cov4-controls", "production-cov4-population", "production-cov4-replay", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
     parser.add_argument("--state", type=Path, required=True)
     args = parser.parse_args()
+    if args.phase.startswith('production-cov4-'):
+        phase = args.phase.removeprefix('production-cov4-')
+        populations = ['controls', 'population'] if phase == 'replay' else [phase]
+        results = [production_cov4(args.state, population, replay=phase == 'replay') for population in populations]
+        print(json.dumps(results))
+        if any(not row['numerical_gate_passed'] for row in results):
+            raise SystemExit(1)
+        return
     if args.phase.startswith('production-teams-'):
         phase = args.phase.removeprefix('production-teams-')
         populations = ['regression', 'population', 'confirmation'] if phase == 'replay' else [phase]

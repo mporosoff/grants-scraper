@@ -135,6 +135,30 @@ class ReleasePlanning(unittest.TestCase):
             self.assertEqual(dependencies.changed_groups(baseline, dependencies.snapshot(root)), {})
             (root / '.github/workflows/refresh-opportunities.yml').write_text(files['.github/workflows/refresh-opportunities.yml'].replace('1000', '900'))
             self.assertEqual(set(dependencies.changed_groups(baseline, dependencies.snapshot(root))), {'source'})
+            (root / '.github/workflows/refresh-opportunities.yml').write_text(files['.github/workflows/refresh-opportunities.yml'])
+            # Once Cov4 uses the shared client, those inputs must invalidate the
+            # source generation contract as well as any team dependencies.
+            (root / 'tools/offline_team_contract.py').write_text('schema=1')
+            active_settings = settings | {'production_cov4': {'prompt_version': 'active', 'max_attempts': 3},
+                                          'routes': {'sonnet': {'provider': 'anthropic', 'model': 'claude-sonnet-5'}}}
+            (root / 'config/offline_ai.json').write_text(json.dumps(active_settings))
+            active = dependencies.snapshot(root)
+            for key in ('production_cov4', 'routes'):
+                changed = copy.deepcopy(active_settings)
+                if key == 'production_cov4':
+                    changed[key]['max_attempts'] = 2
+                else:
+                    changed[key]['sonnet']['model'] = 'other-model'
+                (root / 'config/offline_ai.json').write_text(json.dumps(changed))
+                self.assertEqual(set(dependencies.changed_groups(active, dependencies.snapshot(root))), {'source', 'teams'})
+            (root / 'config/offline_ai.json').write_text(json.dumps(active_settings | {'production_prompts': {'verification': 'team-only change'}}))
+            self.assertEqual(set(dependencies.changed_groups(active, dependencies.snapshot(root))), {'teams'})
+            (root / 'config/offline_ai.json').write_text(json.dumps(active_settings))
+            for name, groups in [('tools/offline_ai.py', {'source', 'teams'}), ('tools/offline_team_contract.py', {'source'})]:
+                original = (root / name).read_bytes()
+                (root / name).write_text('changed=2')
+                self.assertEqual(set(dependencies.changed_groups(active, dependencies.snapshot(root))), groups)
+                (root / name).write_bytes(original)
 
     def test_pages_checkpoint_is_bound_to_publication_artifact_attempt(self):
         candidate = 'a' * 64

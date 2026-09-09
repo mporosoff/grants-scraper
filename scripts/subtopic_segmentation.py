@@ -26,7 +26,7 @@ measured library behaviour this is written against.
 from __future__ import annotations
 
 from collections import Counter
-from dataclasses import dataclass, field
+from dataclasses import dataclass, field, replace
 from difflib import SequenceMatcher
 from functools import lru_cache
 import hashlib
@@ -162,6 +162,7 @@ class Subtopic:
     topic_areas: tuple
     own_deadline: str | None
     term_display: dict = field(default_factory=dict)
+    classifier_context: dict = field(default_factory=dict)
 
 
 @dataclass(frozen=True)
@@ -631,6 +632,9 @@ class _Candidate:
     offset: int
     page: int | None
     anchor: str | None
+    enclosing_headings: tuple = ()
+    child_headings: tuple = ()
+    local_end: int | None = None
 
 
 def acceptance_failures(candidates, flat, toc_pages=(), family_type="ordinal"):
@@ -816,6 +820,15 @@ def build_subtopics(candidates, flat, containers, parent_deadline=None):
                 topic_areas=topics,
                 own_deadline=own_deadline_for(cleaned, parent_deadline),
                 term_display=build_term_display(cleaned, subtopic_terms),
+                classifier_context={
+                    'version': 'candidate-local-context-1',
+                    'enclosing_headings': list(candidate.enclosing_headings[-6:]),
+                    'child_headings': list(candidate.child_headings[:6]),
+                    'char_start': start,
+                    'char_end': min(end, candidate.local_end) if candidate.local_end is not None else end,
+                    'local_text': strip_running_lines(flat.text[start:min(end, candidate.local_end)
+                        if candidate.local_end is not None else end], running)[:4000],
+                },
             )
         )
     return tuple(built)
@@ -967,6 +980,7 @@ def _layer_outline(content, containers, flat, deadline, toc_pages):
             continue
         pages = [node.page for node in siblings]
         candidates = _candidates_from(hits, flat, pages, [None] * len(pages))
+        candidates = [_outline_context(candidate, entries, flat) for candidate in candidates]
         failures = acceptance_failures(candidates, flat, toc_pages)
         if not failures:
             return ("outline", "high", family, candidates)
@@ -975,6 +989,22 @@ def _layer_outline(content, containers, flat, deadline, toc_pages):
     # label match is self-validating and a structural one is not, so the weaker
     # signal never pre-empts the stronger.
     return _structural_from_outline(entries, flat, toc_pages)
+
+
+def _outline_context(candidate, entries, flat):
+    """Retain hierarchy and direct local prose without borrowing child science."""
+    matches = [node for node in entries if node.page == candidate.page
+               and flat.locate(node.page, node.title, candidate.offset) == candidate.offset]
+    if len(matches) != 1:
+        return candidate
+    node = matches[0]
+    children = [child for child in entries if child.chain == node.chain + (node.title,)]
+    offsets = [flat.locate(child.page, child.title, candidate.offset + 1) for child in children]
+    # Missing a child boundary cannot authorize using its body as parent prose.
+    local_end = (min(offsets) if all(offset is not None and offset > candidate.offset for offset in offsets)
+                 else candidate.offset) if children else None
+    return replace(candidate, enclosing_headings=tuple(title[:200] for title in node.chain),
+                   child_headings=tuple(child.title[:200] for child in children), local_end=local_end)
 
 
 # --- §6.3a structural family ------------------------------------------------
@@ -1074,6 +1104,7 @@ def _structural_from_outline(entries, flat, toc_pages):
             )
             for index, (node, offset) in enumerate(located)
         ]
+        candidates = [_outline_context(candidate, entries, flat) for candidate in candidates]
         if len(candidates) < STRUCTURAL_MIN_SIBLINGS:
             continue
         candidates = _trim_to_dominant_form(candidates)

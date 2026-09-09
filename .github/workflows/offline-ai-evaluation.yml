@@ -7,7 +7,7 @@ on:
         description: One frozen phase within the shared $15 logical evaluation
         required: true
         type: choice
-        options: [production-preflight, production-teams-regression, production-teams-population, production-teams-confirmation, production-teams-replay, preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay, recovery-sonnet, cov4-sonnet, recovery-replay, scope-repair-sonnet, scope-repair-replay, verification-sonnet, verification-replay]
+        options: [production-cov4-controls, production-cov4-population, production-cov4-replay, production-preflight, production-teams-regression, production-teams-population, production-teams-confirmation, production-teams-replay, preflight, teams-sonnet, teams-luna, teams-luna-sonnet-verifier, teams-mini, cov4, stability, replay, round2-sonnet, round2-luna, round2-stability, round2-replay, recovery-sonnet, cov4-sonnet, recovery-replay, scope-repair-sonnet, scope-repair-replay, verification-sonnet, verification-replay]
         default: preflight
       authorize_anthropic_baseline:
         description: Consume the user's one evaluation-only Sonnet baseline authorization; production pause stays intact
