@@ -13,9 +13,10 @@ from tools.offline_ai import config
 class RetainedTeamRecovery(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
-        cls.model = json.loads(Path('config/opportunity_team_model.json').read_bytes())
-        cls.registry = teams.load_registry()
-        cls.candidates = teams.scopes()
+        fixture = json.loads(Path('tests/fixtures/retained_team_recovery.json').read_bytes())
+        cls.model = fixture['model']
+        cls.registry = fixture['registry']
+        cls.candidates = fixture['candidates']
         cls.key = '344592:ab-0013'
 
     def fixture(self):
@@ -48,17 +49,19 @@ class RetainedTeamRecovery(unittest.TestCase):
             self.assertEqual(model, before)
 
     def test_stale_source_claim_or_contract_never_clears_flags(self):
-        for change in ('source', 'claim', 'eligibility', 'contract', 'graph', 'missing_pipeline', 'never_published'):
+        for change in ('source', 'claim', 'retired_claim', 'eligibility', 'contract', 'graph', 'missing_pipeline', 'never_published'):
             with self.subTest(change=change):
                 model, candidates, registry, settings = self.fixture()
                 row = model['opportunities'][0]
                 if change == 'source':
                     next(c for c in candidates if c['id'] == self.key)['source_fingerprint'] = 'changed'
-                elif change in ('claim', 'eligibility'):
+                elif change in ('claim', 'retired_claim', 'eligibility'):
                     ref = next(ref for role in row['roles'] for ref in role['claim_refs'])
                     person = next(p for p in registry['researchers'] if p['researcher_id'] == ref['researcher_id'])
                     if change == 'claim':
                         next(c for c in person['claims'] if c['claim_id'] == ref['claim_id'])['revision'] += 1
+                    elif change == 'retired_claim':
+                        next(c for c in person['claims'] if c['claim_id'] == ref['claim_id'])['status'] = 'retired'
                     else:
                         person['auto_proposable'] = False
                 elif change == 'contract':

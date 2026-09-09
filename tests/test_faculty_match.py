@@ -15,7 +15,7 @@ from scripts.researcher_registry import load_registry, matching_profiles
 
 
 class FacultyMatchRelevanceTests(unittest.TestCase):
-    def _match(self, opportunities):
+    def _match(self, opportunities, profiles=None):
         with tempfile.TemporaryDirectory() as temp_dir:
             catalog_path = Path(temp_dir) / "catalog.js"
             output_path = Path(temp_dir) / "matches.js"
@@ -27,7 +27,7 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
             )
             registry = load_registry()
             return match_to_catalog(
-                matching_profiles(registry), str(catalog_path), str(output_path),
+                profiles if profiles is not None else matching_profiles(registry), str(catalog_path), str(output_path),
                 registry_generation=registry["registry_generation"],
             )
 
@@ -115,13 +115,34 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
 
     def test_profiles_publish_summaries_and_focused_concepts(self):
         result = self._match([])
+        profiles = {profile['name']: profile for profile in matching_profiles(load_registry())}
         generic = {"energy", "materials", "material science", "materials science"}
 
-        for metadata in result["faculty"].values():
-            self.assertGreater(len(metadata["research_summary"]), 40)
-            self.assertGreaterEqual(len(metadata["key_terms"]), 5)
-            self.assertLessEqual(len(metadata["key_terms"]), 10)
-            self.assertFalse(generic & {term.lower() for term in metadata["key_terms"]})
+        for name, metadata in result["faculty"].items():
+            with self.subTest(researcher=metadata['researcher_id']):
+                self.assertEqual(metadata['research_summary'], profiles[name]['research_summary'])
+                self.assertEqual(metadata['key_terms'], profiles[name]['key_terms'])
+                self.assertLessEqual(len(metadata["key_terms"]), 10)
+                self.assertFalse(generic & {term.lower() for term in metadata["key_terms"]})
+
+    def test_approved_short_profile_does_not_invent_summary_or_pad_research_interests(self):
+        profile = {'name': 'Teaching faculty fixture', 'researcher_id': 'urh-999999',
+                   'research_summary': '', 'key_terms': ['teaching labs'], 'domains': []}
+        result = self._match([], [profile])
+        metadata = result['faculty'][profile['name']]
+        self.assertEqual(metadata['research_summary'], '')
+        self.assertEqual(metadata['key_terms'], ['teaching labs'])
+        self.assertEqual(result['pi_matches'][profile['name']], [])
+
+    def test_full_reviewed_profile_keeps_its_summary_and_all_focused_interests(self):
+        profile = {'name': 'Research faculty fixture', 'researcher_id': 'urh-999998',
+                   'research_summary': 'Studies heterogeneous catalysts for carbon dioxide conversion and sustainable fuels.',
+                   'key_terms': ['heterogeneous catalysis', 'carbon dioxide conversion', 'catalyst synthesis',
+                                 'reaction kinetics', 'sustainable fuels', 'catalyst characterization']}
+        result = self._match([], [profile])
+        metadata = result['faculty'][profile['name']]
+        self.assertEqual(metadata['research_summary'], profile['research_summary'])
+        self.assertEqual(metadata['key_terms'], profile['key_terms'])
 
     def test_live_matcher_configuration_is_published_with_generated_metadata(self):
         result = self._match([])
