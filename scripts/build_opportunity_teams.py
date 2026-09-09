@@ -931,7 +931,7 @@ def main():
         pending, existing, attempts, previous_snapshot, current_snapshot,
         maintenance.retained_queue_reasons(retained_report, input_generation, RESPONSE_VERSION))
     selected = backfill_queue if args.mode == 'backfill' else maintenance_queue
-    pilot_ids = [value.strip() for value in os.environ.get('PILOT_TEAM_SCOPES', '').split(',') if value.strip()]
+    pilot_ids = [value.strip() for value in os.environ.get('PILOT_TEAM_SCOPES', '').split(',') if value.strip()] if args.generate else []
     if pilot_ids:
         if args.mode != 'pilot' or os.environ.get('QUALIFICATION_PILOT') != 'true':
             parser.error('Explicit pilot scopes require the manual qualification pilot')

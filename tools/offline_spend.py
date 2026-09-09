@@ -124,7 +124,12 @@ class LinkedLedger:
 
     def read(self):
         value = self.local.read()
-        value['blocked_providers'] |= self.task.read()['blocked_providers']
+        parent = self.task.read()
+        # Request resumption follows the logical task across workflow runs.
+        # Local counters alone would forget a known schema failure when a new
+        # run restores the task but starts a fresh per-run ledger.
+        value['requests'] = parent['requests']
+        value['blocked_providers'] |= parent['blocked_providers']
         return value
 
     def reserve(self, provider, model, stage, key, amount, attempt):
@@ -184,6 +189,13 @@ def production_ledger(state, mode):
     parent = restore_ledger(task_path, TASK, settings['budgets_usd']['evaluation'],
                             settings['max_requests'], authorization)
     return LinkedLedger(local, parent)
+
+
+def response_cache(ledger, service):
+    """Linked pilots retain every completed stage with authoritative task state."""
+    if isinstance(ledger, LinkedLedger):
+        return ledger.task.path.parent / {'teams': 'cache', 'cov4': 'cov4-production-cache'}[service]
+    return ledger.path.parent / {'teams': 'team-responses', 'cov4': 'cov4-cache'}[service]
 
 
 def require_production_service(service, ledger):

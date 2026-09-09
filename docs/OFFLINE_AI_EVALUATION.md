@@ -59,7 +59,12 @@ because the classifier prompt changed.
 The first production execution must be manual with `qualification_pilot=true` while
 the automatic-generation hold remains. Evaluation and release share the existing
 coordinated-release lock. The pilot restores the newest task ledger separately from
-its local run ledger and uploads both reservation/state pairs. Every LLM dispatch
+its local run ledger and uploads both reservation/state pairs. Completed team and
+Cov4 responses live beneath the authoritative task subtree, so a later workflow
+reuses them even if the earlier run failed before candidate publication. Pending
+format corrections also read the task request history across fresh per-run ledgers.
+Pilot inputs are absent from validation/publication jobs and non-provider selection.
+Every LLM dispatch
 reserves against both the task allowance and the unchanged five-scope/$2 run cap.
 No retry grants allowance. Optional comma-separated `pilot_team_scopes` may select
 current eligible new/stale scopes, at most five; this does not enable recurring

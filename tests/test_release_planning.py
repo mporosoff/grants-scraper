@@ -33,8 +33,14 @@ class ReleasePlanning(unittest.TestCase):
         import yaml
         workflow = yaml.safe_load((Path(__file__).resolve().parents[1] / '.github/workflows/refresh-opportunities.yml').read_text(encoding='utf-8'))
         jobs = workflow['jobs']
+        self.assertNotIn('QUALIFICATION_PILOT', workflow.get('env', {}))
+        self.assertNotIn('PILOT_TEAM_SCOPES', workflow.get('env', {}))
         for name, job in jobs.items():
+            if name not in ('plan', 'generate', 'assemble'):
+                self.assertNotIn('QUALIFICATION_PILOT', job.get('env', {}))
             for step in job.get('steps', []):
+                if 'PILOT_TEAM_SCOPES' in step.get('env', {}):
+                    self.assertIn('scripts.build_opportunity_teams --generate', step.get('run', ''))
                 if step.get('uses', '').startswith('actions/checkout') and name != 'plan':
                     self.assertEqual(step['with']['ref'], '${{ needs.plan.outputs.release_sha }}')
                 for key in ('OPENAI_API_KEY', 'ANTHROPIC_API_KEY'):

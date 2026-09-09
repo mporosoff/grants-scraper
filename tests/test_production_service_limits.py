@@ -2,16 +2,52 @@
 import copy
 import json
 import os
+import shutil
 from pathlib import Path
 import tempfile
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from tools import offline_ai as ai, offline_spend as spend, team_provider, team_maintenance
 from tests.test_sonnet_structured_transport import sonnet_response
 
 
 class ProductionLimits(unittest.TestCase):
+    def test_new_workflow_restores_both_completed_service_caches_with_task_accounting(self):
+        from scripts import build_opportunity_teams as teams, subtopic_cov4 as cov4
+        from tools.run_budgeted_documents import instrument
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+            root = Path(tmp)
+            local = spend.Ledger(root / 'first/ledger.json', 'first', 2)
+            task = spend.Ledger(root / 'first/task/ledger.json', 'task', 10, 200)
+            linked = spend.LinkedLedger(local, task)
+            scope = {'scope': 'Synthetic source without a research goal.', 'record_type': 'parent', 'source_fingerprint': 'synthetic-source'}
+            candidate = {'parent_id': 'synthetic-parent', 'title': 'Catalysis Science', 'excerpt': 'Fundamental catalytic reaction research.'}
+            decomp = {'specific': False, 'objective': 'Synthetic source without a research goal.', 'roles': []}
+            classified = {'owned': 'yes', 'fundable': 'yes', 'reason': 'Source-declared catalytic research subject.'}
+            post = Mock(side_effect=[sonnet_response(decomp), sonnet_response(classified)])
+            with patch('requests.post', post):
+                provider = teams.Provider(root / 'optional-first', ledger=linked)
+                self.assertEqual(provider.json(teams.DECOMPOSE, scope), decomp)
+                first = instrument(linked, spend.response_cache(linked, 'cov4'), cov4.classify_fundability)(candidate, session=Mock(post=post))
+            self.assertEqual(first['fundability'], cov4.ACCEPT)
+            self.assertEqual(post.call_count, 2)
+            prior = task.read()
+            # Only the authoritative uploaded task subtree survives this failed
+            # pre-publication run; no candidate or optional/local caches exist.
+            shutil.copytree(task.path.parent, root / 'second/task')
+            restored = spend.Ledger(root / 'second/task/ledger.json', 'task', 10, 200)
+            next_local = spend.Ledger(root / 'second/ledger.json', 'second', 2)
+            next_link = spend.LinkedLedger(next_local, restored)
+            with patch('requests.post', side_effect=AssertionError('Completed stage must not be charged again')) as no_post:
+                provider = teams.Provider(root / 'empty-optional-second', ledger=next_link)
+                self.assertEqual(provider.json(teams.DECOMPOSE, scope), decomp)
+                replay = instrument(next_link, spend.response_cache(next_link, 'cov4'), cov4.classify_fundability)(candidate, session=Mock(post=no_post))
+                self.assertEqual(replay['fundability'], cov4.ACCEPT)
+                no_post.assert_not_called()
+            self.assertEqual(next_local.read()['requests'], [])
+            self.assertEqual(restored.read(), prior)
+
     def test_transient_exhaustion_stops_only_this_invocation_and_schema_does_not(self):
         with tempfile.TemporaryDirectory() as tmp:
             ledger = spend.Ledger(Path(tmp) / 'ledger.json', 'run', 2)
@@ -112,6 +148,37 @@ class ProductionLimits(unittest.TestCase):
                     self.assertEqual([row['attempt'] for row in ledger.read()['requests']], [1, 2])
                     self.assertEqual([row['status'] for row in ledger.read()['requests']], ['SchemaFailure', 'valid'])
                 self.assertEqual(invoke(), valid)
+                self.assertEqual(post.call_count, 2)
+
+    def test_interrupted_correction_survives_a_new_workflow_local_ledger(self):
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+            root = Path(tmp)
+            task = spend.Ledger(root / 'first/task/ledger.json', 'task', 10, 200)
+            local = spend.Ledger(root / 'first/ledger.json', 'first', 2)
+            stage = team_provider.stage_contract('verification')
+            invalid = {'suitable_for_team': True, 'edges': [{}]}
+            def invoke(linked):
+                return ai.Client(linked, spend.response_cache(linked, 'teams')).json(
+                    stage['route'], 'verification', stage['prompt'], {'scope': 'Synthetic'},
+                    stage['schema'], lambda value: value, stage_config=stage['settings'])
+            with patch('requests.post', side_effect=[sonnet_response(invalid), sonnet_response(invalid)]) as post:
+                with patch.object(ai.time, 'sleep', side_effect=KeyboardInterrupt):
+                    with self.assertRaises(KeyboardInterrupt):
+                        invoke(spend.LinkedLedger(local, task))
+                first = copy.deepcopy(task.read()['requests'][0])
+                shutil.copytree(task.path.parent, root / 'second/task')
+                resumed_task = spend.Ledger(root / 'second/task/ledger.json', 'task', 10, 200)
+                resumed_local = spend.Ledger(root / 'second/ledger.json', 'second', 2)
+                linked = spend.LinkedLedger(resumed_local, resumed_task)
+                with self.assertRaises(ValueError):
+                    invoke(linked)
+                self.assertEqual(post.call_count, 2)
+                self.assertIn('Format diagnostic:', post.call_args_list[1].kwargs['json']['system'])
+                self.assertEqual(resumed_task.read()['requests'][0], first)
+                self.assertEqual([r['attempt'] for r in resumed_task.read()['requests']], [1, 2])
+                self.assertEqual([r['attempt'] for r in resumed_local.read()['requests']], [2])
+                with self.assertRaises((ValueError, spend.Deferred)):
+                    invoke(linked)
                 self.assertEqual(post.call_count, 2)
 
     def test_quality_stops_are_independent_and_account_denials_remain_global(self):

@@ -45,16 +45,14 @@ permissions:
   pages: write
   id-token: write
 
-env:
-  PILOT_TEAM_SCOPES: ${{ inputs.pilot_team_scopes }}
-  QUALIFICATION_PILOT: ${{ inputs.qualification_pilot && 'true' || 'false' }}
-
 concurrency:
   group: funding-finder-coordinated-release
   cancel-in-progress: false
 
 jobs:
   plan:
+    env:
+      QUALIFICATION_PILOT: ${{ inputs.qualification_pilot && 'true' || 'false' }}
     if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
     outputs:
@@ -96,6 +94,8 @@ jobs:
           retention-days: 90
 
   generate:
+    env:
+      QUALIFICATION_PILOT: ${{ inputs.qualification_pilot && 'true' || 'false' }}
     needs: plan
     if: needs.plan.outputs.stage == 'generate'
     runs-on: ubuntu-latest
@@ -239,6 +239,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ needs.plan.outputs.anthropic == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
           OPENAI_API_KEY: ${{ needs.plan.outputs.openai == 'true' && secrets.OPENAI_API_KEY || '' }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+          PILOT_TEAM_SCOPES: ${{ inputs.pilot_team_scopes }}
           TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
         run: >-
           python -m scripts.build_opportunity_teams --generate --max-scopes 60 --workers 3 --write
@@ -445,6 +446,8 @@ jobs:
             }
 
   assemble:
+    env:
+      QUALIFICATION_PILOT: ${{ inputs.qualification_pilot && 'true' || 'false' }}
     needs: plan
     if: contains(fromJSON('["reuse","teams","backfill"]'), needs.plan.outputs.stage)
     runs-on: ubuntu-latest
@@ -521,6 +524,7 @@ jobs:
           ANTHROPIC_API_KEY: ${{ needs.plan.outputs.anthropic == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
           OPENAI_API_KEY: ${{ needs.plan.outputs.openai == 'true' && secrets.OPENAI_API_KEY || '' }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+          PILOT_TEAM_SCOPES: ${{ inputs.pilot_team_scopes }}
           TEAM_MODE: ${{ needs.plan.outputs.team_mode }}
         run: |
           python -m scripts.build_opportunity_teams --generate --write --mode "$TEAM_MODE" \

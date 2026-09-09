@@ -6,7 +6,7 @@ import runpy
 import sys
 
 
-from tools.offline_spend import production_ledger, require_production_service, check_run_transport, atomic_json
+from tools.offline_spend import production_ledger, require_production_service, check_run_transport, response_cache, atomic_json
 
 
 def instrument(ledger, cache, classify, *, replay=False):
@@ -28,7 +28,7 @@ def main():
     state = Path(os.environ['OFFLINE_AI_STATE'])
     mode = os.environ['TEAM_MODE']
     ledger = production_ledger(state, mode)
-    classify = instrument(ledger, state / 'cov4-cache', gate.classify_fundability)
+    classify = instrument(ledger, response_cache(ledger, 'cov4'), gate.classify_fundability)
     start = len(ledger.read()['requests'])
     def qualified(candidate, **kwargs):
         try:

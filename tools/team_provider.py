@@ -61,7 +61,8 @@ def request(provider, prompt, data):
                     provider.calls += 1
                     provider.counters['assessment_requests'] = provider.counters.get('assessment_requests', 0) + 1
                 return requests.post(*args, **kwargs)
-            provider.offline = Client(provider.ledger, provider.ledger.path.parent / 'team-responses', deadline=provider.deadline, post=post)
+            from tools.offline_spend import response_cache
+            provider.offline = Client(provider.ledger, response_cache(provider.ledger, 'teams'), deadline=provider.deadline, post=post)
     selected = stage_contract(stage)
     route, stage_config, schema = selected['route'], selected['settings'], selected['schema']
     key = identity({'route': route, 'stage': stage, 'config': stage_config, 'prompt': selected['prompt'], 'schema': schema, 'inputs': data})
