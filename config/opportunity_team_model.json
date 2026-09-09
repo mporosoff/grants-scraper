@@ -18182,7 +18182,7 @@
       "state": "deferred"
     }
   },
-  "generation_id": "b2757e4eee5bae413de10118a94cf27fe2771b05d2b73e267fb8fe0eb05dd1da",
+  "generation_id": "10df8001b81cf88f78cb3270763141308232b5375b37f783add2b54a6a702524",
   "limitations": [
     "The directory may omit relevant researchers and does not imply availability or eligibility.",
     "Only bounded opportunity scopes receive proposals; broad parents require a specific child topic.",
@@ -19534,6 +19534,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "96e82b9a157488e73b184d573e4292e441b4e7cf8cd8b51a020569b23222e862",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c006"
+        ],
+        "retained_decision_hash": "032bfaabaf1d7be2bc3594b2ab8bb97e7b2c4e9ccf280609be9d5e90c87d8331",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "854833046122861be4ed4c8cd70cf4ff18a126a2055753ac98ac88e9e251943f",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -19591,8 +19604,7 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [
@@ -19756,14 +19768,12 @@
         {
           "accepted_terms": [
             "Multiscale materials modeling",
-            "machine learning for computational materials design",
-            "structure-property relationships"
+            "machine learning for computational materials design"
           ],
           "alternative_ids": [],
           "candidate_ids": [
             "urh-000109",
-            "urh-000150",
-            "urh-000158"
+            "urh-000150"
           ],
           "claim_refs": [
             {
@@ -19772,14 +19782,6 @@
               "material_hash": "6370e302dec63d41a7ab4e0aa607a0f681ed353af470a46eaba68f44ba2ec796",
               "reason": "Retained direct evidence: microstructure-property-processing relationships",
               "researcher_id": "urh-000109",
-              "revision": 1
-            },
-            {
-              "claim_id": "urh-000158-c006",
-              "coverage": "direct",
-              "material_hash": "20b090052f881d0f9f4a1d4b9667ace64469f11bca00b2a18a30f8b733ff855b",
-              "reason": "Retained direct evidence: structure-property relationships",
-              "researcher_id": "urh-000158",
               "revision": 1
             },
             {
@@ -19794,7 +19796,7 @@
           "coverage": "direct",
           "id": "role-4",
           "label": "Structure-Property Relationship Modeler",
-          "rationale": "Retained direct evidence: microstructure-property-processing relationships Retained direct evidence: structure-property relationships Retained method transfer evidence: machine learning for computational materials design",
+          "rationale": "Retained direct evidence: microstructure-property-processing relationships Retained method transfer evidence: machine learning for computational materials design",
           "required": false,
           "source_quote": "governing processing-microstructure-property relationships to enable optimal design",
           "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967"
@@ -30786,6 +30788,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "d718c3c4624e620c25592bf5fe9731197388c087bcaff6f115938ad4e45f44f5",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c003"
+        ],
+        "retained_decision_hash": "57c68516edea0a42d0cdc83cc18654c00957b8f405a6606e839fd2e1f80dd5cc",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "d6f046671a5f409d52b4d8482c7b690c3a3a5191c6feaf3ed9a279d06293d362",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -30847,18 +30862,14 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [
             "Biomanufacturing and engineered cells",
-            "Biomaterials and engineered living materials",
-            "biomaterials"
+            "Biomaterials and engineered living materials"
           ],
-          "alternative_ids": [
-            "urh-000158"
-          ],
+          "alternative_ids": [],
           "candidate_ids": [
             "urh-000012",
             "urh-000121"
@@ -30887,20 +30898,12 @@
               "reason": "Background in engineered living materials reflects materials production expertise, but is not tied to reagent manufacturing or scale-up processes needed for viral vector/nucleic acid production.",
               "researcher_id": "urh-000012",
               "revision": 1
-            },
-            {
-              "claim_id": "urh-000158-c003",
-              "coverage": "adjacent",
-              "material_hash": "06513f2f851a2234d5138e1c03b3869a689eca742e236bc0184fb89bb55a4ae3",
-              "reason": "General biomaterials expertise is tangential to the specific reagent production and distribution infrastructure sought, with no evidence of manufacturing-scale experience.",
-              "researcher_id": "urh-000158",
-              "revision": 1
             }
           ],
           "coverage": "direct",
           "id": "role-1",
           "label": "Reagent Production/Manufacturing Lead",
-          "rationale": "3D bioprinting of engineered bacteria demonstrates scaled biomanufacturing capability that could transfer to production workflows for reagent manufacturing, though not shown for viral vector or nucleic acid reagent production specifically. Experience in nanoscale biomanufacturing suggests transferable process-scaling skills relevant to establishing a reagent production facility, but does not demonstrate direct manufacturing of brain-targeting viral or nucleic acid reagents. Background in engineered living materials reflects materials production expertise, but is not tied to reagent manufacturing or scale-up processes needed for viral vector/nucleic acid production. General biomaterials expertise is tangential to the specific reagent production and distribution infrastructure sought, with no evidence of manufacturing-scale experience.",
+          "rationale": "3D bioprinting of engineered bacteria demonstrates scaled biomanufacturing capability that could transfer to production workflows for reagent manufacturing, though not shown for viral vector or nucleic acid reagent production specifically. Experience in nanoscale biomanufacturing suggests transferable process-scaling skills relevant to establishing a reagent production facility, but does not demonstrate direct manufacturing of brain-targeting viral or nucleic acid reagents. Background in engineered living materials reflects materials production expertise, but is not tied to reagent manufacturing or scale-up processes needed for viral vector/nucleic acid production.",
           "required": true,
           "source_quote": "scaled production and distribution of brain cell type-specific access and manipulation reagents",
           "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-MH-26-120.html"
@@ -32082,6 +32085,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "981f1a01be454723e810f85df7817182968f8410c40ebee22d0ab1c8b4b568ed",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c005"
+        ],
+        "retained_decision_hash": "63458fe0f4b1ad479bdfe902df5e5ce668401dcfafe5619b2374b41cfb593717",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "7dd428f8c090404a5910894350f765cddffb1760d6af24d3e09a3c7bbc8bae0c",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -32130,8 +32146,7 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [
@@ -32161,13 +32176,11 @@
         },
         {
           "accepted_terms": [
-            "biomedical transport modeling",
-            "controlled drug delivery"
+            "biomedical transport modeling"
           ],
           "alternative_ids": [],
           "candidate_ids": [
-            "urh-000157",
-            "urh-000158"
+            "urh-000157"
           ],
           "claim_refs": [
             {
@@ -32177,20 +32190,12 @@
               "reason": "Biomedical transport modeling provides a methodological basis for predicting biodistribution of therapeutic agents, but has not been shown applied to genomic or biologic ADRD candidates.",
               "researcher_id": "urh-000157",
               "revision": 1
-            },
-            {
-              "claim_id": "urh-000158-c005",
-              "coverage": "method_transfer",
-              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
-              "reason": "Controlled drug delivery expertise offers transferable insight into biodistribution and pharmacokinetic behavior relevant to preclinical evaluation, though not demonstrated for biologic or genomic therapeutics.",
-              "researcher_id": "urh-000158",
-              "revision": 1
             }
           ],
           "coverage": "direct",
           "id": "role-2",
           "label": "Preclinical Pharmacology/Toxicology/Biodistribution Studies",
-          "rationale": "Biomedical transport modeling provides a methodological basis for predicting biodistribution of therapeutic agents, but has not been shown applied to genomic or biologic ADRD candidates. Controlled drug delivery expertise offers transferable insight into biodistribution and pharmacokinetic behavior relevant to preclinical evaluation, though not demonstrated for biologic or genomic therapeutics.",
+          "rationale": "Biomedical transport modeling provides a methodological basis for predicting biodistribution of therapeutic agents, but has not been shown applied to genomic or biologic ADRD candidates.",
           "required": true,
           "source_quote": "establish pharmacology, toxicology, biodistribution, and in vivo efficacy",
           "source_url": "https://www.grants.gov/search-results-detail/361287"
@@ -32230,12 +32235,6 @@
           "member_ids": [
             "urh-000015",
             "urh-000157"
-          ]
-        },
-        {
-          "member_ids": [
-            "urh-000015",
-            "urh-000158"
           ]
         }
       ],
@@ -36024,6 +36023,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "CCRP Initiative: NIH Countermeasures Against Chemical Threats (CounterACT) Basic Research on Chemical Threats that Affect the Nervous System (R01 Clinical Trial Not Allowed)",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "cc8f8a0ea644719d6635694b3078e0b5e713606ef7084b10d449cba3590565c0",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c005"
+        ],
+        "retained_decision_hash": "89a4faa6cbf6e0e6d593f330d5fde9ced7218d0f2851501f7b15e4dbc65992ee",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "2cf69736b7f1309231081f770887e6abb8319db4cd2e13a9b775c8153bd41409",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -36073,8 +36085,7 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [],
@@ -36162,23 +36173,13 @@
         },
         {
           "accepted_terms": [
-            "Protein and peptide engineering",
-            "controlled drug delivery"
+            "Protein and peptide engineering"
           ],
           "alternative_ids": [],
           "candidate_ids": [
-            "urh-000015",
-            "urh-000158"
+            "urh-000015"
           ],
           "claim_refs": [
-            {
-              "claim_id": "urh-000158-c005",
-              "coverage": "method_transfer",
-              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
-              "reason": "Controlled drug delivery expertise could inform design of delivery systems for candidate therapeutics targeting chemical-induced neurotoxicity, but no direct evidence of target identification for these threats.",
-              "researcher_id": "urh-000158",
-              "revision": 1
-            },
             {
               "claim_id": "urh-000015-c003",
               "coverage": "method_transfer",
@@ -36191,7 +36192,7 @@
           "coverage": "direct",
           "id": "role-4",
           "label": "Therapeutic Target Discovery Scientist",
-          "rationale": "Controlled drug delivery expertise could inform design of delivery systems for candidate therapeutics targeting chemical-induced neurotoxicity, but no direct evidence of target identification for these threats. Protein and peptide engineering skills could be applied to design novel therapeutic agents or antidotes, but no direct evidence of application to chemical threat-related targets.",
+          "rationale": "Protein and peptide engineering skills could be applied to design novel therapeutic agents or antidotes, but no direct evidence of application to chemical threat-related targets.",
           "required": true,
           "source_quote": "potential new targets for therapeutic development",
           "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-077.html"
@@ -36211,12 +36212,6 @@
           "member_ids": [
             "urh-000015",
             "urh-000089"
-          ]
-        },
-        {
-          "member_ids": [
-            "urh-000036",
-            "urh-000158"
           ]
         }
       ],
@@ -36554,6 +36549,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "99956720b3f2a0322a713e9849dac52efc764bfc0953c7eba939ddebf60bd69c",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c005"
+        ],
+        "retained_decision_hash": "87d26c1be64e69a46203e84b275e5338ffdedf3de859d4036e1090ee2c5034e2",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "46bba26f0b9c124cdac257c5299210fc8b9af5898b0a300d300ae82b1e74b566",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -36582,20 +36590,10 @@
           "faculty_id": "urh-000089",
           "source_url": "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
           "why_person": "Toxicology modeling experience with cutaneous barrier systems provides transferable methodological grounding for designing IND-enabling toxicology studies, though the tissue context (skin vs. CNS) differs from GBM-specific requirements."
-        },
-        {
-          "claim_id": "urh-000158-c005",
-          "claim_revision": 1,
-          "contribution": "Preclinical Drug Development Lead",
-          "evidence_phrase": "controlled drug delivery",
-          "evidence_term": "controlled drug delivery",
-          "evidence_tier": "method_transfer",
-          "faculty_id": "urh-000158",
-          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/",
-          "why_person": "Expertise in controlled drug delivery systems can be transferred to formulating and optimizing therapeutic agents for preclinical GBM development, but does not demonstrate direct experience advancing an agent through IND-enabling studies."
         }
       ],
       "missing_skills": [
+        "Preclinical Drug Development Lead",
         "Early-Phase Clinical Trial Investigator"
       ],
       "objective": "Develop novel or repurposed therapeutic agents capable of crossing the blood brain barrier for adult glioblastoma, advancing them from late preclinical development through IND-enabling studies into early-phase (Phase 0/1) clinical trials.",
@@ -36613,32 +36611,20 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [
             "Biomaterials and engineered living materials",
-            "Synthetic biology",
-            "controlled drug delivery"
+            "Synthetic biology"
           ],
           "alternative_ids": [
             "urh-000007",
             "urh-000015",
             "urh-000019"
           ],
-          "candidate_ids": [
-            "urh-000158"
-          ],
+          "candidate_ids": [],
           "claim_refs": [
-            {
-              "claim_id": "urh-000158-c005",
-              "coverage": "method_transfer",
-              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
-              "reason": "Expertise in controlled drug delivery systems can be transferred to formulating and optimizing therapeutic agents for preclinical GBM development, but does not demonstrate direct experience advancing an agent through IND-enabling studies.",
-              "researcher_id": "urh-000158",
-              "revision": 1
-            },
             {
               "claim_id": "urh-000007-c001",
               "coverage": "adjacent",
@@ -36664,10 +36650,10 @@
               "revision": 1
             }
           ],
-          "coverage": "direct",
+          "coverage": "adjacent",
           "id": "role-1",
           "label": "Preclinical Drug Development Lead",
-          "rationale": "Expertise in controlled drug delivery systems can be transferred to formulating and optimizing therapeutic agents for preclinical GBM development, but does not demonstrate direct experience advancing an agent through IND-enabling studies. Synthetic-biology approaches to resistance are relevant to drug mechanism design but represent a distinct discipline from the hands-on preclinical-to-IND development pipeline required. Supramolecular biomaterial design offers potential delivery-platform know-how but is a materials-science specialty, not evidence of leading preclinical drug development toward IND. Amyloid-inspired biomaterial work is tangential materials expertise that could inform delivery vehicles but does not show direct preclinical drug-development leadership experience.",
+          "rationale": "Synthetic-biology approaches to resistance are relevant to drug mechanism design but represent a distinct discipline from the hands-on preclinical-to-IND development pipeline required. Supramolecular biomaterial design offers potential delivery-platform know-how but is a materials-science specialty, not evidence of leading preclinical drug development toward IND. Amyloid-inspired biomaterial work is tangential materials expertise that could inform delivery vehicles but does not show direct preclinical drug-development leadership experience.",
           "required": true,
           "source_quote": "driving therapeutic agent(s) from pre-clinical development, through investigational new drugs (IND) studies",
           "source_url": "https://www.grants.gov/search-results-detail/360606"
@@ -36787,26 +36773,23 @@
         {
           "member_ids": [
             "urh-000037",
-            "urh-000089",
-            "urh-000158"
+            "urh-000089"
           ]
         },
         {
           "member_ids": [
             "urh-000066",
-            "urh-000089",
-            "urh-000158"
+            "urh-000089"
           ]
         },
         {
           "member_ids": [
             "urh-000083",
-            "urh-000089",
-            "urh-000158"
+            "urh-000089"
           ]
         }
       ],
-      "why_team": "Douglas H. Kelley contributes blood brain barrier pharmacology specialist. Lisa A. DeLouise contributes ind-enabling toxicology/regulatory scientist. Melodie I. Lawton contributes preclinical drug development lead."
+      "why_team": "Douglas H. Kelley contributes blood brain barrier pharmacology specialist. Lisa A. DeLouise contributes ind-enabling toxicology/regulatory scientist."
     },
     {
       "agency": "National Institutes of Health",
@@ -38073,6 +38056,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "Early Stage Testing of Pharmacologic or Neuromodulatory Device-based Interventions for the Treatment of Mental Disorders (R33- Clinical Trial Required)",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "419fbbaac2050882a0f3712f63185a05d90e0aad6cac20beeed6284d10fd3a40",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c005"
+        ],
+        "retained_decision_hash": "51b5e98d44b57e54b72be7d76db6566da6b13a2e1c858507e5462f8585175e97",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "a6fbd35be0d654e2bfcda4da16908d90d4907fe104f207de557e5f5497b5dc4d",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -38134,8 +38130,7 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [],
@@ -38153,7 +38148,6 @@
         {
           "accepted_terms": [
             "Toxicology and biological-effects models",
-            "controlled drug delivery",
             "electrode microenvironments",
             "wearable bioelectronic interfaces"
           ],
@@ -38162,8 +38156,7 @@
           ],
           "candidate_ids": [
             "urh-000014",
-            "urh-000036",
-            "urh-000158"
+            "urh-000036"
           ],
           "claim_refs": [
             {
@@ -38183,14 +38176,6 @@
               "revision": 1
             },
             {
-              "claim_id": "urh-000158-c005",
-              "coverage": "method_transfer",
-              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
-              "reason": "Background in controlled drug delivery formulation is transferable to designing pharmacologic intervention delivery approaches, though the evidence is generic and not tied to CNS targets or novel mechanism-of-action agents.",
-              "researcher_id": "urh-000158",
-              "revision": 1
-            },
-            {
               "claim_id": "urh-000014-c007",
               "coverage": "method_transfer",
               "material_hash": "7f1c7f578c4b5aa0f162dce088dd85449b55a08a2bf0930ea1cd1c5a1b56f08a",
@@ -38202,7 +38187,7 @@
           "coverage": "direct",
           "id": "role-2",
           "label": "Pharmacologic or Device Intervention Specialist",
-          "rationale": "Experience characterizing bioeffects of therapeutic ultrasound offers transferable methodology for evaluating dose-dependent effects of ultrasound-based neuromodulatory devices, but is not specific to mental-disorder targets or clinical trial device deployment. Development of wearable bioelectronic interfaces reflects general device/interface engineering skill but the evidence does not clearly indicate neuromodulatory delivery or clinical device application, so it does not directly transfer to this role's intervention testing task. Background in controlled drug delivery formulation is transferable to designing pharmacologic intervention delivery approaches, though the evidence is generic and not tied to CNS targets or novel mechanism-of-action agents. Knowledge of electrode microenvironments provides transferable insight into electrode-tissue interface considerations relevant to neuromodulation device design, without direct evidence of building or testing a clinical neuromodulatory device.",
+          "rationale": "Experience characterizing bioeffects of therapeutic ultrasound offers transferable methodology for evaluating dose-dependent effects of ultrasound-based neuromodulatory devices, but is not specific to mental-disorder targets or clinical trial device deployment. Development of wearable bioelectronic interfaces reflects general device/interface engineering skill but the evidence does not clearly indicate neuromodulatory delivery or clinical device application, so it does not directly transfer to this role's intervention testing task. Knowledge of electrode microenvironments provides transferable insight into electrode-tissue interface considerations relevant to neuromodulation device design, without direct evidence of building or testing a clinical neuromodulatory device.",
           "required": true,
           "source_quote": "early stage testing of pharmacologic interventions with novel mechanisms of actions or device-based interventions",
           "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-183.html"
@@ -38300,6 +38285,20 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "NCCIH Natural Product Early Phase Clinical Trial Award (R33 Clinical Trial Required)",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "90686c717b7a8c5b08261156e88014268711c6230ca4dae117556dbfb7d103fe",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c003",
+          "urh-000158-c005"
+        ],
+        "retained_decision_hash": "46b4e1ae85c82d63dc88e5372b738f5a7ee7057a8a925648a65e36f67c539ca2",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "f550f9636d9e6c07ffb5304f553b1dc38ed8436916732810499572e742e79877",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -38349,8 +38348,7 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [],
@@ -38380,27 +38378,16 @@
         },
         {
           "accepted_terms": [
-            "biomaterials",
             "biomedical transport modeling",
-            "controlled drug delivery",
             "solvent-based extraction"
           ],
           "alternative_ids": [
             "urh-000157"
           ],
           "candidate_ids": [
-            "urh-000111",
-            "urh-000158"
+            "urh-000111"
           ],
           "claim_refs": [
-            {
-              "claim_id": "urh-000158-c005",
-              "coverage": "method_transfer",
-              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
-              "reason": "Experience engineering controlled drug delivery systems provides transferable formulation-science methodology applicable to optimizing dose/formulation of a natural product, though not demonstrated on botanicals or in clinical settings.",
-              "researcher_id": "urh-000158",
-              "revision": 1
-            },
             {
               "claim_id": "urh-000111-c009",
               "coverage": "method_transfer",
@@ -38416,20 +38403,12 @@
               "reason": "Biomedical transport modeling is a broad, unspecified technique with no explicit connection to natural-product formulation, dosing, or delivery-optimization work shown.",
               "researcher_id": "urh-000157",
               "revision": 1
-            },
-            {
-              "claim_id": "urh-000158-c003",
-              "coverage": "adjacent",
-              "material_hash": "06513f2f851a2234d5138e1c03b3869a689eca742e236bc0184fb89bb55a4ae3",
-              "reason": "General biomaterials background is tangential to formulation of natural products; no explicit link to dose, delivery, or supplement formulation work is shown.",
-              "researcher_id": "urh-000158",
-              "revision": 1
             }
           ],
           "coverage": "direct",
           "id": "role-3",
           "label": "Pharmacological/Formulation Specialist",
-          "rationale": "Experience engineering controlled drug delivery systems provides transferable formulation-science methodology applicable to optimizing dose/formulation of a natural product, though not demonstrated on botanicals or in clinical settings. Solvent-based extraction expertise supports producing standardized natural-product preparations needed for dose/formulation optimization, but lacks evidence of clinical formulation or regulatory-grade standardization work. Biomedical transport modeling is a broad, unspecified technique with no explicit connection to natural-product formulation, dosing, or delivery-optimization work shown. General biomaterials background is tangential to formulation of natural products; no explicit link to dose, delivery, or supplement formulation work is shown.",
+          "rationale": "Solvent-based extraction expertise supports producing standardized natural-product preparations needed for dose/formulation optimization, but lacks evidence of clinical formulation or regulatory-grade standardization work. Biomedical transport modeling is a broad, unspecified technique with no explicit connection to natural-product formulation, dosing, or delivery-optimization work shown.",
           "required": true,
           "source_quote": "optimize the impact of the natural product on target engagement by optimizing the delivery of the natural product through examination of different doses or formulations",
           "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-270.html"
@@ -38491,12 +38470,6 @@
             "urh-000046",
             "urh-000111"
           ]
-        },
-        {
-          "member_ids": [
-            "urh-000046",
-            "urh-000158"
-          ]
         }
       ],
       "why_team": "Gang Fan contributes target engagement biomarker specialist. Pooja Rajendra Bhalode contributes pharmacological/formulation specialist."
@@ -38506,6 +38479,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "0e91e118ab9b548d72d0ccda3ac15c3c3a74b1c9630dfa7c0f30f1e1235ceab9",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c005"
+        ],
+        "retained_decision_hash": "37a71ff3874f9bf2954e000322af5784cde4f3de610a06a8c0bfc1fdf2ec6eb2",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "52882569a76d0c687e6490f37b9ed9d5bac342569f9670956fce8f42b562600b",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -38525,15 +38511,15 @@
           "why_person": "Demonstrated inner-ear pharmacokinetic modeling shows transferable PK methodology applicable to general preclinical PK evaluation, though not evidenced in a systemic small-molecule drug context."
         },
         {
-          "claim_id": "urh-000158-c005",
+          "claim_id": "urh-000111-c009",
           "claim_revision": 1,
           "contribution": "Formulation and GMP Manufacturing Specialist",
-          "evidence_phrase": "controlled drug delivery",
-          "evidence_term": "controlled drug delivery",
-          "evidence_tier": "direct",
-          "faculty_id": "urh-000158",
-          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/",
-          "why_person": "Controlled drug delivery expertise directly supports the formulation development activities central to this role."
+          "evidence_phrase": "solvent-based extraction",
+          "evidence_term": "solvent-based extraction",
+          "evidence_tier": "method_transfer",
+          "faculty_id": "urh-000111",
+          "source_url": "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "why_person": "Solvent-based extraction techniques are methodologically transferable to purification steps relevant to GMP synthesis, but the evidence does not describe GMP manufacturing or regulatory compliance experience."
         }
       ],
       "missing_skills": [
@@ -38556,8 +38542,7 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [],
@@ -38620,23 +38605,13 @@
         },
         {
           "accepted_terms": [
-            "controlled drug delivery",
             "solvent-based extraction"
           ],
           "alternative_ids": [],
           "candidate_ids": [
-            "urh-000111",
-            "urh-000158"
+            "urh-000111"
           ],
           "claim_refs": [
-            {
-              "claim_id": "urh-000158-c005",
-              "coverage": "direct",
-              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
-              "reason": "Controlled drug delivery expertise directly supports the formulation development activities central to this role.",
-              "researcher_id": "urh-000158",
-              "revision": 1
-            },
             {
               "claim_id": "urh-000111-c009",
               "coverage": "method_transfer",
@@ -38649,7 +38624,7 @@
           "coverage": "direct",
           "id": "role-3",
           "label": "Formulation and GMP Manufacturing Specialist",
-          "rationale": "Controlled drug delivery expertise directly supports the formulation development activities central to this role. Solvent-based extraction techniques are methodologically transferable to purification steps relevant to GMP synthesis, but the evidence does not describe GMP manufacturing or regulatory compliance experience.",
+          "rationale": "Solvent-based extraction techniques are methodologically transferable to purification steps relevant to GMP synthesis, but the evidence does not describe GMP manufacturing or regulatory compliance experience.",
           "required": true,
           "source_quote": "formulation development, GMP synthesis, and Phase I clinical testing",
           "source_url": "https://www.grants.gov/search-results-detail/363095"
@@ -38688,23 +38663,23 @@
         {
           "member_ids": [
             "urh-000025",
-            "urh-000158"
+            "urh-000111"
           ]
         },
         {
           "member_ids": [
             "urh-000089",
-            "urh-000158"
+            "urh-000111"
           ]
         },
         {
           "member_ids": [
-            "urh-000157",
-            "urh-000158"
+            "urh-000111",
+            "urh-000157"
           ]
         }
       ],
-      "why_team": "Choongheon Lee contributes preclinical pharmacology/toxicology scientist. Melodie I. Lawton contributes formulation and gmp manufacturing specialist."
+      "why_team": "Choongheon Lee contributes preclinical pharmacology/toxicology scientist. Pooja Rajendra Bhalode contributes formulation and gmp manufacturing specialist."
     },
     {
       "agency": "Defense Advanced Research Projects Agency (DARPA)",
@@ -40759,6 +40734,19 @@
       "archetype": "Source-grounded research collaboration",
       "assembly_version": "complementary-roles-1",
       "catalog_title": "Precision Approaches in Radiation Synthetic Combinations (PAIRS, RP1 Clinical Trial Optional)",
+      "claim_retirement_proof": {
+        "provider_requests": 0,
+        "published_sha": "99d3b21495b0f372eea2e0a0e0de1a8bbab13451",
+        "reassembled_decision_hash": "462f6fea6ecf847f4bfe5ac9e1ad6ccb08fd42d651e0cc2718f0f8d8e34ccc37",
+        "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+        "removed_claim_ids": [
+          "urh-000158-c005"
+        ],
+        "retained_decision_hash": "e8b79be09ee065339e8657b2303fab666f103b1b6cea2bd289152f90ae84f415",
+        "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+        "source_fingerprint": "f3b62786ea4a692220b351e9c1a27c7e9ab6acc4e32fa5c39efcd5d8ca7693fe",
+        "version": 1
+      },
       "claims_generation_at_generation": "e39fe5497e8af99b373ce24e69d4116dbae2df061adaee122737e6ea4365460e",
       "decision_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
       "gate_label": "Proposed Team",
@@ -40816,8 +40804,7 @@
         "version": "retained-team-recovery-1"
       },
       "registry_generation_at_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-      "revalidation_reason": "Researcher eligibility or supporting claims changed.",
-      "review_state": "needs_revalidation",
+      "review_state": "proposed",
       "roles": [
         {
           "accepted_terms": [
@@ -40867,23 +40854,13 @@
         },
         {
           "accepted_terms": [
-            "biomedical transport modeling",
-            "controlled drug delivery"
+            "biomedical transport modeling"
           ],
           "alternative_ids": [],
           "candidate_ids": [
-            "urh-000157",
-            "urh-000158"
+            "urh-000157"
           ],
           "claim_refs": [
-            {
-              "claim_id": "urh-000158-c005",
-              "coverage": "method_transfer",
-              "material_hash": "df4ef504f2a608fe522f2c015a192b0258181d041074106118b4af624955b98a",
-              "reason": "Controlled drug delivery expertise offers a transferable platform for formulating and delivering targeted agents in combination regimens, but does not itself establish synthetic-lethality pharmacology or radiation-conditioned vulnerability targeting.",
-              "researcher_id": "urh-000158",
-              "revision": 1
-            },
             {
               "claim_id": "urh-000157-c005",
               "coverage": "method_transfer",
@@ -40896,7 +40873,7 @@
           "coverage": "direct",
           "id": "role-2",
           "label": "Synthetic Lethality/Targeted Therapy Pharmacologist",
-          "rationale": "Controlled drug delivery expertise offers a transferable platform for formulating and delivering targeted agents in combination regimens, but does not itself establish synthetic-lethality pharmacology or radiation-conditioned vulnerability targeting. Biomedical transport modeling provides quantitative methods transferable to predicting drug distribution/pharmacokinetics in combination therapy design, without direct evidence of synthetic-lethality or targeted-agent development.",
+          "rationale": "Biomedical transport modeling provides quantitative methods transferable to predicting drug distribution/pharmacokinetics in combination therapy design, without direct evidence of synthetic-lethality or targeted-agent development.",
           "required": true,
           "source_quote": "actionable synthetic vulnerabilities that can be conditionally paired with tumor responses to radiation therapy",
           "source_url": "https://www.grants.gov/search-results-detail/361399"
@@ -41013,14 +40990,6 @@
             "urh-000157",
             "urh-000089",
             "urh-000116"
-          ]
-        },
-        {
-          "member_ids": [
-            "urh-000036",
-            "urh-000040",
-            "urh-000116",
-            "urh-000158"
           ]
         }
       ],
