@@ -264,9 +264,14 @@ def production_preflight(state):
         receipt.update(complete=True, result=result, status='native_structured_output_supported')
     except (ValueError, RuntimeError, requests.RequestException) as error:
         receipt.update(status='unavailable_or_invalid', error_type=type(error).__name__)
+        if isinstance(error, Deferred) and str(error) in {'work_deadline_exhausted', 'retry_deadline_exhausted'}:
+            receipt['status'] = 'retryable_processing'
     finally:
-        atomic_json(marker, receipt)
         atomic_json(state / 'usage-summary.json', ledger.summary())
+    # An interrupted process has no terminal result. Its retained ledger drives
+    # the next invocation, including reconstruction of a pending correction.
+    if receipt['status'] != 'retryable_processing':
+        atomic_json(marker, receipt)
     return receipt
 
 

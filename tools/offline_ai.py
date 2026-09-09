@@ -148,6 +148,26 @@ def response_value(provider, payload):
     return json.loads(text)
 
 
+def correction_diagnostic(attempts):
+    """Recover one format correction from retained safe failure metadata.
+
+    Any reservation following the first schema failure consumes the correction,
+    including an uncertain dispatch. No provider body or extra state is needed.
+    """
+    for index, row in enumerate(attempts):
+        diagnostic = row.get('diagnostics', {})
+        category = diagnostic.get('category')
+        if category in {'semantic_validation_failure', 'truncation'} or row['status'] == 'Refusal':
+            raise Deferred('retained_terminal_request_failure')
+        if category == 'schema_failure':
+            if index != len(attempts) - 1:
+                raise Deferred('schema_correction_attempt_exhausted')
+            return diagnostic
+        if row['status'] in {'SchemaFailure', 'JSONDecodeError'}:
+            raise Deferred('schema_correction_diagnostic_missing')
+    return None
+
+
 class Client:
     def __init__(self, ledger, cache, deadline=float("inf"), post=None):
         self.ledger, self.cache, self.deadline = ledger, Path(cache), deadline
@@ -187,16 +207,7 @@ class Client:
                 self.ledger.event(provider=route["provider"], model=route["model"], stage=stage_name,
                                   event="cache_hit", key=key)
                 return value
-            body = request_body(route, stage, prompt, data, schema)
             price = settings["prices_per_million"][route["model"]]
-            # UTF-8 bytes are a conservative token ceiling; include serialization
-            # and schema plus a framing margin. No tools or >272K prompts allowed.
-            input_ceiling = len(encoded(body)) + 1024
-            if input_ceiling > 200_000:
-                raise Deferred("bounded_prompt_exceeded")
-            amount = cost_microusd({"input_tokens": input_ceiling, "cached_input_tokens": 0,
-                "cache_write_tokens": 0, "output_tokens": stage["max_output_tokens"]},
-                price | {"input": max(price["input"], price["cache_write"])})
             provider = route["provider"]
             key_name = "OPENAI_API_KEY" if provider == "openai" else "ANTHROPIC_API_KEY"
             secret = os.environ.get(key_name)
@@ -207,10 +218,27 @@ class Client:
             headers = {"Content-Type": "application/json", "User-Agent": "FundingFinder-OfflineEvaluation/1.0"}
             headers.update({"Authorization": "Bearer " + secret} if provider == "openai" else
                            {"x-api-key": secret, "anthropic-version": "2023-06-01"})
-            prior_attempts = sum(row['key'] == key for row in self.ledger.read()['requests']) if stage.get('durable_attempts') else 0
+            retained = [row for row in self.ledger.read()['requests'] if row['key'] == key]
+            ignored = {row['id'] for row in retained} if not stage.get('durable_attempts') else set()
+            prior_attempts = len(retained) if stage.get('durable_attempts') else 0
             if prior_attempts >= stage['max_attempts']:
                 raise Deferred('request_attempt_allowance_exhausted')
             for attempt in range(prior_attempts + 1, stage["max_attempts"] + 1):
+                attempts = [row for row in self.ledger.read()['requests']
+                            if row['key'] == key and row['id'] not in ignored]
+                correction = correction_diagnostic(attempts)
+                corrected_prompt = prompt if correction is None else prompt + (
+                    "\nReturn a complete new decision conforming to the schema. Format diagnostic: "
+                    + json.dumps(correction, sort_keys=True))
+                body = request_body(route, stage, corrected_prompt, data, schema)
+                # Recalculate the reservation for the exact original/corrected
+                # request, including serialization, schema and framing margin.
+                input_ceiling = len(encoded(body)) + 1024
+                if input_ceiling > 200_000:
+                    raise Deferred("bounded_prompt_exceeded")
+                amount = cost_microusd({"input_tokens": input_ceiling, "cached_input_tokens": 0,
+                    "cache_write_tokens": 0, "output_tokens": stage["max_output_tokens"]},
+                    price | {"input": max(price["input"], price["cache_write"])})
                 payload, parsed = None, None
                 remaining = self.deadline - time.monotonic()
                 if remaining <= 1:
@@ -272,19 +300,9 @@ class Client:
                     atomic_json(self.cache / "failures" / (token + ".json"), diagnostic)
                     # One authority owns retries. A malformed scientific answer is
                     # never patched locally, accepted partially or retried unchanged.
-                    if category in {"semantic_validation_failure", "truncation"} or attempt == stage["max_attempts"]:
+                    if (category in {"semantic_validation_failure", "truncation"}
+                            or correction is not None or attempt == stage["max_attempts"]):
                         raise
-                    if category == "schema_failure":
-                        if attempt > 1:
-                            raise
-                        correction = "\nReturn a complete new decision conforming to the schema. Format diagnostic: " + json.dumps(diagnostic)
-                        body = request_body(route, stage, prompt + correction, data, schema)
-                        input_ceiling = len(encoded(body)) + 1024
-                        if input_ceiling > 200_000:
-                            raise Deferred("bounded_prompt_exceeded")
-                        amount = cost_microusd({"input_tokens": input_ceiling, "cached_input_tokens": 0,
-                            "cache_write_tokens": 0, "output_tokens": stage["max_output_tokens"]},
-                            price | {"input": max(price["input"], price["cache_write"])})
                     delay = 2 ** (attempt - 1)
                     if time.monotonic() + delay >= self.deadline:
                         raise Deferred("retry_deadline_exhausted")

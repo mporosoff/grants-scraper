@@ -20,6 +20,94 @@ def sonnet_response(value, stop='end_turn'):
 
 
 class SonnetTransport(unittest.TestCase):
+    def test_interrupted_preflight_reconstructs_exact_correction_and_accounts_once(self):
+        from tools import evaluate_offline_ai as evaluation
+        configuration = (ai.ROOT / 'config/offline_ai.json').read_bytes()
+        for malformed_json in (False, True):
+            for corrected_valid in (False, True):
+                for interruption in ('sleep', 'diagnostic_write', 'deadline'):
+                    with self.subTest(json=malformed_json, valid=corrected_valid, interruption=interruption), tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+                        state = Path(tmp)
+                        ai.Ledger(state / 'ledger.json', evaluation.TASK, 15)
+                        first = sonnet_response({'ready': 'PRIVATE-RESPONSE'})
+                        if malformed_json:
+                            first.json.return_value['content'][0]['text'] = 'PRIVATE-RESPONSE malformed JSON'
+                        second = sonnet_response({'ready': True if corrected_valid else 'PRIVATE-RESPONSE'})
+                        write = ai.atomic_json
+                        def interrupt_write(path, value):
+                            if Path(path).parent.name == 'failures':
+                                raise KeyboardInterrupt
+                            return write(path, value)
+                        interruption_patch = (patch.object(ai, 'atomic_json', side_effect=interrupt_write)
+                            if interruption == 'diagnostic_write' else patch.object(ai.time, 'sleep',
+                                side_effect=ai.Deferred('retry_deadline_exhausted') if interruption == 'deadline' else KeyboardInterrupt))
+                        with patch('requests.post', side_effect=[first, second]) as post:
+                            with interruption_patch:
+                                if interruption == 'deadline':
+                                    self.assertEqual(evaluation.production_preflight(state)['status'], 'retryable_processing')
+                                else:
+                                    with self.assertRaises(KeyboardInterrupt):
+                                        evaluation.production_preflight(state)
+                            self.assertFalse((state / 'production-preflight-receipt.json').exists())
+                            retained = evaluation.evaluation_ledger(state / 'ledger.json').read()
+                            self.assertEqual(len(retained['requests']), 1)
+                            prior = retained['requests'][0]
+                            self.assertEqual(prior['diagnostics']['category'], 'schema_failure')
+                            original_body = copy.deepcopy(post.call_args_list[0].kwargs['json'])
+                            expected = copy.deepcopy(original_body)
+                            expected['system'] += ('\nReturn a complete new decision conforming to the schema. Format diagnostic: '
+                                + json.dumps(prior['diagnostics'], sort_keys=True))
+                            receipt = evaluation.production_preflight(state)
+                            self.assertEqual(receipt['complete'], corrected_valid)
+                            self.assertEqual(post.call_count, 2)
+                            self.assertEqual(post.call_args_list[1].kwargs['json'], expected)
+                            self.assertNotEqual(original_body, expected)
+                            saved = evaluation.evaluation_ledger(state / 'ledger.json').read()
+                            self.assertEqual(saved['requests'][0], prior)
+                            self.assertEqual([r['attempt'] for r in saved['requests']], [1, 2])
+                            self.assertEqual(saved['requests'][1]['key'], prior['key'])
+                            self.assertGreater(saved['requests'][1]['reserved_microusd'], prior['reserved_microusd'])
+                            self.assertEqual(sum(e.get('kind') == 'task_allowance' for e in saved['events']), 1)
+                            self.assertEqual(saved['blocked_providers'], {})
+                            # Model loss of the terminal receipt: a valid exact
+                            # cache replays, while an invalid correction stays terminal.
+                            (state / 'production-preflight-receipt.json').unlink()
+                            replay = evaluation.production_preflight(state)
+                            self.assertEqual(replay['complete'], corrected_valid)
+                            self.assertEqual(post.call_count, 2)
+                        for path in state.rglob('*.json'):
+                            text = path.read_text()
+                            self.assertNotIn('PRIVATE-RESPONSE', text)
+                            self.assertNotIn('synthetic', text)
+        self.assertEqual((ai.ROOT / 'config/offline_ai.json').read_bytes(), configuration)
+
+    def test_interrupted_transport_retry_can_precede_one_schema_correction(self):
+        from tools import evaluate_offline_ai as evaluation
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+            state = Path(tmp)
+            ai.Ledger(state / 'ledger.json', evaluation.TASK, 15)
+            with patch('requests.post', side_effect=[Mock(status_code=429), sonnet_response({'ready': 'yes'}), sonnet_response({'ready': True})]) as post:
+                with patch.object(ai.time, 'sleep', side_effect=KeyboardInterrupt), self.assertRaises(KeyboardInterrupt):
+                    evaluation.production_preflight(state)
+                self.assertFalse((state / 'production-preflight-receipt.json').exists())
+                with patch.object(ai.time, 'sleep'):
+                    self.assertTrue(evaluation.production_preflight(state)['complete'])
+                self.assertEqual(post.call_count, 3)
+                self.assertEqual(post.call_args_list[0].kwargs['json'], post.call_args_list[1].kwargs['json'])
+                self.assertIn('Format diagnostic:', post.call_args_list[2].kwargs['json']['system'])
+                self.assertEqual([r['attempt'] for r in evaluation.evaluation_ledger(state / 'ledger.json').read()['requests']], [1, 2, 3])
+
+    def test_resumed_semantic_failure_does_not_become_format_retry(self):
+        from tools import evaluate_offline_ai as evaluation
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+            state = Path(tmp)
+            ai.Ledger(state / 'ledger.json', evaluation.TASK, 15)
+            with patch('requests.post', return_value=sonnet_response({'ready': False})) as post:
+                self.assertFalse(evaluation.production_preflight(state)['complete'])
+                (state / 'production-preflight-receipt.json').unlink()
+                self.assertFalse(evaluation.production_preflight(state)['complete'])
+                self.assertEqual(post.call_count, 1)
+
     def test_preflight_transient_retry_and_durable_attempt_limit(self):
         from tools import evaluate_offline_ai as evaluation
         with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'), patch.object(ai.time, 'sleep'):
