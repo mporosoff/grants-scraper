@@ -1,0 +1,38 @@
+{
+  "version": "production-source-review-3",
+  "run": "34361480727",
+  "head": "05cec746d1c1f2e9c27ee32f34fcea7415bd7c8a",
+  "evaluation_contract": "0da09046e946a6af09286778e018db6975779221385d5e3bcc33c40ff7d5d3bf",
+  "metrics": {
+    "completed": 4,
+    "legitimate_acceptance": 1.0,
+    "legitimate_accepted": 4,
+    "legitimate_scopes": 4,
+    "proposed": 2,
+    "scope_accuracy": 1.0,
+    "scope_correct": 4,
+    "total": 4
+  },
+  "source_review_passed": true,
+  "user_scientific_correction": {
+    "scope": "361526:g-12",
+    "claim_id": "urh-000014-c006",
+    "evidence": "selective carbon dioxide reduction",
+    "instruction": "thats not a defect co2 reduction selectivity is close enough",
+    "interpretation": "The user accepts this as sufficiently relevant catalyst expertise for the proposed role. The prior source-review objection is not a release blocker. This correction does not authorize fabricated source quotations, unrelated facilities, or fabrication capability."
+  },
+  "controls": {
+    "363489": "Analog VLSI remains non-covering for MEMS fabrication; no fabricated processing ability.",
+    "357308": "No optical hardware ability inferred from biological sensing; retained imaging hardware/software co-design is a stated transferable method, with clinical/regulatory gaps.",
+    "342475": "No field recording inferred from damaged-text recovery; NLP and data-discovery methods remain transferable."
+  },
+  "transport": "All four complete with unchanged verifier-3 prompt and the 16000-token ceiling; no correction retry needed.",
+  "accounting": {
+    "new_requests": 4,
+    "new_estimated_usd": 0.220126,
+    "cumulative_requests": 426,
+    "cumulative_estimated_usd": 7.389962
+  },
+  "full_qualification_passed": false,
+  "next_action": "Complete the nine-case, representative 24-case and once-selected six confirmations without changing the tested configuration."
+}

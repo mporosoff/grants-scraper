@@ -10,12 +10,13 @@
     "scope": "Qualify and restore team generation and Cov4, including preflights, retries and linked production pilots. Production per-run limits remain unchanged."
   },
   "historical_evaluation_run": "34300832276",
-  "automatic_generation": "hold",
-  "status": "native_transport_verified",
-  "teams": "quality_gate_pending",
-  "cov4": "qualified_pilot_pending",
+  "automatic_generation": "enabled",
+  "status": "partial_production_restored",
+  "teams": "confirmation_gate_failed",
+  "cov4": "qualified_enabled_entrypoint_exercised",
   "transport_evidence": "evaluation/sonnet_transport_preflight_20260909.json",
   "team_protocol": "evaluation/sonnet_production_teams.json",
   "cov4_protocol": "evaluation/sonnet_production_cov4.json",
-  "cov4_evidence": "evaluation/sonnet_cov4_qualification_20260909.json"
+  "cov4_evidence": "evaluation/sonnet_cov4_qualification_20260909.json",
+  "completion_evidence": "evaluation/sonnet_production_completion_20260909.json"
 }

@@ -1,0 +1,256 @@
+{
+  "version": "sonnet-production-completion-1",
+  "status": "partial_cov4_enabled_teams_confirmation_failed",
+  "fully_complete": false,
+  "transport": {
+    "root_cause": "The shared Anthropic request omitted its supplied JSON schema; retries could repeat an unchanged schema-invalid body. Historical diagnostics cannot identify the missing/extra edge field.",
+    "remedy": "Native output_config.format with tested provider-schema projection and full deterministic application validation. Usage charged before validation. Safe correction state reconstructs the exact changed request across interruption, at most one correction; semantic failures are not format retries. Transient access probes and later-phase allowance use retain bounded resumption.",
+    "preflight_run": "34349999546",
+    "resumption_pr": 199,
+    "resumption_merge": "f787de2b7a2d143a26f23fd8e2be6dea070a4585"
+  },
+  "teams": {
+    "model": "claude-sonnet-5",
+    "protocol": "sonnet-production-teams-4",
+    "decomposition": "established-sonnet-repair-2",
+    "adjudication": "established-sonnet-repair-2",
+    "verification": "sonnet-production-verification-3",
+    "verification_max_output_tokens": 16000,
+    "execution_complete": true,
+    "quality_gate_passed": false,
+    "production_enabled": false,
+    "production_pilot_scopes": 0,
+    "metrics": {
+      "focus": {
+        "completed": 4,
+        "legitimate_acceptance": 1.0,
+        "legitimate_accepted": 4,
+        "legitimate_scopes": 4,
+        "proposed": 2,
+        "scope_accuracy": 1.0,
+        "scope_correct": 4,
+        "total": 4
+      },
+      "regression": {
+        "completed": 9,
+        "legitimate_acceptance": 1.0,
+        "legitimate_accepted": 6,
+        "legitimate_scopes": 6,
+        "proposed": 2,
+        "scope_accuracy": 1.0,
+        "scope_correct": 9,
+        "total": 9
+      },
+      "population": {
+        "completed": 24,
+        "legitimate_acceptance": 0.9444444444444444,
+        "legitimate_accepted": 17,
+        "legitimate_scopes": 18,
+        "proposed": 6,
+        "scope_accuracy": 0.9583333333333334,
+        "scope_correct": 23,
+        "total": 24
+      },
+      "confirmation": {
+        "completed": 6,
+        "legitimate_acceptance": 0.75,
+        "legitimate_accepted": 3,
+        "legitimate_scopes": 4,
+        "proposed": 2,
+        "scope_accuracy": 0.8333333333333334,
+        "scope_correct": 5,
+        "total": 6
+      }
+    },
+    "unsupported_edge_failures_accepted": 0,
+    "scientific_review": "Source review retains fabrication/processing, measurement-gap, neural-recording, exact claim ownership and quoted-source controls. The user accepts selective carbon dioxide reduction as relevant catalyst evidence; that earlier objection is withdrawn in the new focused review, without editing historical receipts.",
+    "confirmation_failure": {
+      "scope_id": "362185",
+      "stage": "decomposition",
+      "actual": "not_specific",
+      "expected": "legitimate patient-oriented vision injury research with honest clinical/mentorship gaps",
+      "case_hash": "ace1244d664ca3df6bcabd103bb9efab784377f7d07d86846da8b4182bd158b4",
+      "result_contract": "42014655640bf19ed0cbe181a1141d06296c3429118c54945f6c607838ab28d9",
+      "instruction": "Do not tune against or relabel these once-selected confirmation results. A further scientific repair needs a separate confirmation plan; the current result does not authorize production team generation."
+    },
+    "known_population_false_rejection": "344592:ab-0035",
+    "results": "evaluation/sonnet_production_results_20260909.json",
+    "focused_review": "evaluation/sonnet_production_focus_review_20260909.json"
+  },
+  "cov4": {
+    "model": "claude-sonnet-5",
+    "prompt": "cov4-subject-context-1",
+    "protocol": "sonnet-production-cov4-2",
+    "execution_complete": true,
+    "quality_gate_passed": true,
+    "production_enabled": true,
+    "population": {
+      "complete": 43,
+      "genuine_kept": 28,
+      "contaminants_rejected": 11,
+      "cross_parent_blocked": 2,
+      "ownership_unresolved": 1,
+      "native_referenced_zero_call_controls": 19
+    },
+    "evidence": "evaluation/sonnet_cov4_qualification_20260909.json",
+    "known_organizational_heading": "360678:x-org-bes",
+    "known_heading_outcome": "reject; challenge case is not a current production child",
+    "production_entrypoint": {
+      "run": "34360404301",
+      "status": "completed",
+      "document_limit": 45,
+      "subtopic_document_limit": 30,
+      "new_classifier_ready_candidates": 0,
+      "classifier_calls": 0,
+      "new_classification_pilot": "not exercised: no ready candidates in the bounded production pass",
+      "review_queue": "203 retained children require the separate source-confidence approval; they are not pending Cov4 calls."
+    }
+  },
+  "accounting": {
+    "authorization_id": "sonnet-production-completion-20260909",
+    "allowance_grants": 1,
+    "authoritative_state_run": "34363866498",
+    "ledger_sha256": "950d2b3f624598e141d9974888a59ecf82401b7f3a48767fd60cdac710ebe626",
+    "cumulative_requests": 452,
+    "cumulative_estimated_usd": 8.410234,
+    "task_requests": 145,
+    "task_estimated_usd": 4.20701,
+    "remaining_requests": 55,
+    "remaining_estimated_usd": 5.79299,
+    "cloud_stage_cache_hits_after_grant": 178,
+    "production_pilot_llm_calls": 0,
+    "production_pilot_ledger_unchanged": true,
+    "source_vector_build_estimated_usd": 0.00634,
+    "source_vector_build_calls": 8,
+    "note": "Embedding build: one canary and seven corpus calls, separate from LLM charges. Search Worker smoke uses the existing bounded search service. No recurring allowance or backfill budget increased."
+  },
+  "coverage": {
+    "before": {
+      "catalog": 1429,
+      "team_scopes": 91,
+      "team_parents": 61,
+      "team_combinations": 233,
+      "retained_children": 432,
+      "publishable_children": 227,
+      "review_children": 205
+    },
+    "after": {
+      "catalog": 1422,
+      "team_scopes": 91,
+      "team_parents": 61,
+      "team_combinations": 233,
+      "retained_children": 426,
+      "publishable_children": 223,
+      "review_children": 203
+    },
+    "team_provenance_and_evidence_unchanged": true,
+    "retained_child_records_unchanged": true,
+    "removed_children_reason": "Four children of 363065 and two of 363315; both parent calls closed 2026-09-08. No unsupported child retained merely to preserve counts.",
+    "documents": {
+      "with_evidence": 744,
+      "facts": 2096,
+      "request_failures": 3,
+      "queued": 814
+    }
+  },
+  "prior_unresolved": {
+    "332894:superconducting-qubits": "Current child declaration/identity proof requires source revalidation. Official attachment 350603 pages 7-8 declares a narrower voltage-controllable superconducting-qubit topic; do not force the old broader scope into it.",
+    "356953": "Current public projection omits the old milestone quotation, although it remains in official PAR-25-225 section IV Other Attachment 1; retired claim urh-000158-c005 also applies.",
+    "357493": "Current public projection omits the clinician-letter quotation, although it remains in official PAR-25-271 Letters of Support; retired claim urh-000158-c005 also applies.",
+    "357433": "Retired clinical claim urh-000158-c005; remaining validated graph has no complementary team.",
+    "357490": "Retired clinical claim urh-000158-c005; remaining validated graph has no complementary team."
+  },
+  "amendment_proof": {
+    "fixture": "tests.test_production_team_qualification.test_ordinary_registry_outputs_reassemble_unpinned_dependents_only",
+    "ordinary_entrypoint": "scripts.researcher_registry.build_outputs",
+    "display_only_preserves": true,
+    "actual_claim_dependents_only": true,
+    "unaffected_evidence_preserved": true,
+    "retired_claim_cannot_return": true,
+    "deterministic_reassembly_provider_calls": 0,
+    "new_or_stale_maintenance_eligible": true,
+    "real_profiles_edited_for_testing": false
+  },
+  "warm_replay": {
+    "mode": "replay",
+    "new_selection_enabled": false,
+    "provider_requests": 0,
+    "remaining_maintenance": 114,
+    "remaining_backfill": 1362,
+    "candidate_generation_hashes_unchanged": true,
+    "all_team_and_cov4_populations_zero_new_call_replayed": true,
+    "evaluation_replay_ledger_byte_identical": true,
+    "notification_generation_calls": 0,
+    "notice_projection_changed_records": 0,
+    "alert_pr_196_preserved": true,
+    "basis": "Exact generation bytes reused; notice projection idempotence passed. Existing recipient/event deduplication and restoration-only suppression contracts passed ordinary CI. No subscriber test messages were sent."
+  },
+  "publication": {
+    "candidate_id": "5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0",
+    "candidate_artifact_run": "34365766149",
+    "source_candidate_id": "982d97210d2b161398f9dd60df8e54449f08d90f462e48762804ef53a5a53207",
+    "generation_sha": "05cec746d1c1f2e9c27ee32f34fcea7415bd7c8a",
+    "generation_run": "34360404301",
+    "assembly_sha": "d8533c5f6391eda0a49c1963bdfbf71eb7651492",
+    "validation_sha": "d9a5a56d002a647ace5d2b084226b8bd0798d347",
+    "publication_pr": 207,
+    "publication_sha": "6e827c9d7b0ab81877ab6ed05f12176a9630780e",
+    "publication_run": "34368363510",
+    "live_verified": true,
+    "live_verified_at": "2026-09-09T15:30:53.568991+00:00",
+    "live_receipt_sha256": "4c9a9510e5b746009ec60df2431797f5a5bee25e3fb688389740a176ab1a3807",
+    "worker_version": "0c00d0eb-6454-476c-879c-5bc235572c26",
+    "worker_fingerprint": "646ca5d3c5de42a3c3de2db04e56ffb9c64ea2362bc7775e5b410b88df2a28bf",
+    "live_release_identity": {
+      "current_corpus_sha256": "d0e61393452e57f6b82e27e856af590167fa471feccb5aee72cbac5465f8d4ee",
+      "model_space_fingerprint": "8c080778811e5c47d012f0d5db1f0d9c8cac63ae604eb9a12e7892202095f06d",
+      "previous_corpus_sha256": "669dc7e810c5e058737dd3b7fa609a4d4d2310c55fbd7a827d29ec65e460cc5c",
+      "worker_allowlist_sha256": "0ca755ad269f0a1d604c5602dea6ad81f5301fa4f8c59d5906e9dee1790b6401"
+    },
+    "changed_services": [
+      "search-voyage-proxy",
+      "Pages"
+    ],
+    "unrelated_services_redeployed": false
+  },
+  "validation": {
+    "manual_browser": {
+      "duration": 497389.49,
+      "expected": 117,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-09-09T14:50:26.420Z",
+      "unexpected": 0
+    },
+    "manual_receipt_sha256": "a7b0ff20f3813d41348d4d94d9689ffc8a181c3d8eee1f33adbebf8af200ea9d",
+    "manual_receipt_reused_byte_identically": true,
+    "ordinary_gates": "python, browser, frozen-query, scoring, no-drift, notice-projection, package-integrity: passed",
+    "live_browser": {
+      "catalog_loaded": 1422,
+      "catalysis_strong": 15,
+      "catalysis_potential": 12,
+      "child_and_proposal": "344592:ab-0059; evidence, roles and Cooling Systems Application Specialist gap visible",
+      "saved_team_match_link": "Three proposed members restored after reload; this combination returns zero strict all-member matches and local-order fallback, not a positive-match claim.",
+      "csv_rows": 27,
+      "csv_sha256": "8f0ebb8f0c732214b0e6bc2dfb7fec38ff1a4751297493fb50577c19620094b5",
+      "real_researcher_or_subscriber_mutations": false
+    }
+  },
+  "active_stops": {
+    "automatic_generation": "enabled",
+    "anthropic_account_pauses": {},
+    "task_blocked_providers": {},
+    "teams_enabled": false,
+    "cov4_enabled": true,
+    "historical_stop_evidence_retained": true
+  },
+  "implementation_prs": {
+    "199": "f787de2b7a2d143a26f23fd8e2be6dea070a4585",
+    "200": "829e0f4cae3f55255a0f69ba49ad30b4f058745c",
+    "201": "a4fbca4824a9627d6d9788b55939697c45d80eca",
+    "202": "212a2f10fd745522ce3e53c46e9ecdd426e2963d",
+    "203": "05cec746d1c1f2e9c27ee32f34fcea7415bd7c8a",
+    "205": "d8533c5f6391eda0a49c1963bdfbf71eb7651492",
+    "206": "d9a5a56d002a647ace5d2b084226b8bd0798d347"
+  }
+}

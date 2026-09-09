@@ -1,6 +1,62 @@
 # Frozen offline AI evaluation, September 8, 2026
 
-## Active production restoration authorization, September 9
+## Current production status, September 9
+
+Cov4 is qualified and enabled. The preparatory automatic-generation hold is
+released after publication PR #207 and live run `34368363510`. Teams remain
+disabled by their independent service gate. This is a partial restoration:
+the final nine regressions completed and passed, and the 24-case population
+met its numerical floors, but the once-selected six confirmations failed
+(5/6 correct scopes; 3/4 legitimate scopes accepted). Scope `362185` was
+incorrectly rejected by decomposition. Do not tune against or relabel those
+confirmation results, or enable teams based on the aggregate population.
+
+The user's correction accepts CO2-reduction selectivity as relevant catalyst
+evidence for `361526:g-12`; that earlier objection is withdrawn. Historical
+review receipts remain unchanged. The active verifier remains
+`sonnet-production-verification-3` with a 16000-token ceiling.
+
+The engineering receipt is
+[`sonnet_production_completion_20260909.json`](../evaluation/sonnet_production_completion_20260909.json).
+Exact final team configurations and parsed results are retained in
+[`sonnet_production_results_20260909.json`](../evaluation/sonnet_production_results_20260909.json).
+Both services replay with zero new calls. The authoritative accounting/cache
+artifact is evaluation run `34363866498`: 452 cumulative requests and
+$8.410234 estimated, including this task's 145 requests/$4.207010. There is
+one task allowance grant; 55 requests/$5.792990 remain under the lower ceiling.
+Do not reset or grant the allowance again.
+
+Cov4's normal document entrypoint completed the bounded production pass in
+`34360404301`, with zero new classifier-ready candidates and zero classifier
+calls. That is entrypoint evidence, not a claim that a new live child was
+classified. The 203 retained confidence-review children are not pending Cov4
+requests. The next eligible inferred/inline child uses the qualified active
+contract through the ordinary bounded source workflow. No historical corpus
+backfill is scheduled. Account-wide denials still stop both services.
+
+Normal operation and exact recovery commands (from the repository):
+
+```sh
+# Cov4/source maintenance: existing daily schedule, or one bounded manual pass.
+gh workflow run refresh-opportunities.yml --ref main -f stage=generate
+# Unchanged automatic planner: no generation on an unchanged published package.
+gh workflow run refresh-opportunities.yml --ref main -f stage=auto
+# Exact publication/live recovery; reuse the candidate and completed browser suite.
+gh workflow run refresh-opportunities.yml --ref main -f stage=publish -f candidate_run=34365766149 -f candidate_id=5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0 -f receipt_run=34368363510
+gh workflow run refresh-opportunities.yml --ref main -f stage=verify -f candidate_run=34365766149 -f candidate_id=5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0 -f receipt_run=34368363510 -f publication_run=34368363510 -f publication_attempt=1
+# Exact scientific replay only; neither command qualifies a failed team gate.
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-replay
+gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-cov4-replay
+```
+
+`stage=teams` remains the normal bounded maintenance command **after** a newly
+qualified team contract is enabled. It is currently held; do not treat dispatch
+as proof of new team generation. Ordinary source/researcher updates still target
+their actual dependents and may deterministically reassemble compatible graphs;
+genuine new reasoning remains queued. Backfill is separate and manual, with its
+existing $5 limit. The five-scope/$2 pilot and ordinary $2 limits are unchanged.
+
+## Qualification progression and authorization, September 9
 
 The first production-contract population run (`34345705095`) failed its gate:
 23/24 completed, 21/24 correct scope decisions, 15/18 legitimate scopes accepted.
