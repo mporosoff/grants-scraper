@@ -38,7 +38,8 @@ class ScopeRepairContracts(unittest.TestCase):
         prior = json.loads(Path('evaluation/sonnet_team_scope_repair_2_results_20260909.json').read_bytes())
         active, _ = evaluation.production_team_cases('focus')
         snapshot = Path(active['historical_protocol'])
-        self.assertEqual(hashlib.sha256(snapshot.read_bytes()).hexdigest(),
+        # The receipt identifies immutable Git bytes, not platform checkout EOLs.
+        self.assertEqual(hashlib.sha256(snapshot.read_bytes().replace(b'\r\n', b'\n')).hexdigest(),
                          active['revision_checkpoint']['prior_protocol_sha256'])
         self.assertTrue(prior['regression']['execution_complete'])
         self.assertFalse(prior['regression']['numerical_gate_passed'])

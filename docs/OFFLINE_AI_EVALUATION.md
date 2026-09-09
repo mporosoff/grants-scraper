@@ -56,6 +56,15 @@ incomplete; neither a green implementation review nor an incomplete/failed
 scientific gate enables teams. No new allowance is available merely because the
 prompt version changes.
 
+Before v3 dispatch, `sonnet_team_scope_repair_3_budget_checkpoint_20260909.json`
+establishes an optimistic **80-call minimum**: 45 new decomposition calls, at least
+28 new verifier calls under the unchanged floors, and at least seven adjudication
+calls for never-exposed confirmations. This assumes every exposed adjudication
+can be reused and there are no retries. With 73 qualification requests left,
+complete qualification cannot fit. Preserve the unused balance and pilot reserve;
+an explicit request-limit extension is required before starting v3 qualification.
+The monetary allowance is not exhausted. No v3 provider request has been made.
+
 The first general correction was `sonnet-research-purpose-1` decomposition. Both known
 false rejections received complete retained input: the model confused a stated
 research purpose with missing application details, or related disciplines with
@@ -78,7 +87,8 @@ additionally capped at 135 requests/$8, reserving 15 requests/$2 for the pilot.
 The source-only inventory estimates 107 initial qualification stage calls and
 $3.545113 using retained stage costs; actual bounded reservations govern.
 
-After protected merge, execute the existing entrypoints in this order:
+After protected merge and sufficient authorized request allowance, execute the
+existing entrypoints in this order:
 
 ```sh
 # Authorization is already applied; resume the existing state artifact.

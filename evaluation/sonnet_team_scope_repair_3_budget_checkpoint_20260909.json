@@ -1,0 +1,62 @@
+{
+  "status": "insufficient_qualification_request_allowance_before_dispatch",
+  "scientific_contract": "663170468f111f36c46ef365b4784d86d199540a794d436e79d80664524692fc",
+  "authoritative_state_run": "34393056404",
+  "populations": {
+    "focus": {
+      "cases": 11,
+      "research": 6,
+      "maximum_false_rejections": 0
+    },
+    "regression": {
+      "cases": 9,
+      "research": 6,
+      "maximum_false_rejections": 0
+    },
+    "population": {
+      "cases": 24,
+      "research": 18,
+      "maximum_false_rejections": 2
+    },
+    "exposed": {
+      "cases": 6,
+      "research": 4,
+      "maximum_false_rejections": 0
+    },
+    "confirmation": {
+      "cases": 12,
+      "research": 8,
+      "maximum_false_rejections": 1
+    }
+  },
+  "unique_cases": 45,
+  "research_cases": 31,
+  "maximum_permitted_false_rejections": 3,
+  "minimum_calls": {
+    "decomposition_new_contract": 45,
+    "verification_new_contract": 28,
+    "fresh_adjudication_never_exposed": 7,
+    "total": 80
+  },
+  "assumptions": "Optimistically reuse every exposed adjudication response, incur zero retries, reject all negative controls before verification, and permit every false rejection allowed by the existing floors. Actual requirements can be higher.",
+  "exact_new_decomposition_cache_hits": [],
+  "fresh_confirmation_prior_case_outputs": [],
+  "qualification": {
+    "used_requests": 62,
+    "remaining_requests": 73,
+    "used_usd": 2.330522,
+    "remaining_usd": 5.669478
+  },
+  "task": {
+    "requests": 514,
+    "used_usd": 10.740756,
+    "remaining_requests": 88
+  },
+  "pilot_reservation": {
+    "requests": 15,
+    "usd": 2
+  },
+  "allowance_exhausted": false,
+  "v3_provider_calls": 0,
+  "production_enabled": false
+}

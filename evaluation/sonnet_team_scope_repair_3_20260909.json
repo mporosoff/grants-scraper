@@ -5084,7 +5084,8 @@
   "revision_checkpoint": {
     "protected_sha": "2e5a6d56ee4b5a8bbbd2b442e7685ad9129a09bb",
     "run_id": "34393056404",
-    "prior_protocol_sha256": "9023fe68b0eb6f1e552183cf3feae23d7b4cc741be4f41a36765a36f824e7650",
+    "prior_protocol_sha256": "6edeb60eab04e871e65561735892350e4b9f2371c553aefb285e513e1204acf3",
+    "prior_protocol_hash_representation": "Exact Git blob bytes (UTF-8, LF); normalize checkout CRLF to LF before comparing.",
     "cumulative_requests": 514,
     "cumulative_estimated_usd": 10.740756,
     "qualification_requests": 62,
