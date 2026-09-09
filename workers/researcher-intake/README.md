@@ -1,5 +1,7 @@
 # Funding Finder researcher intake
 
+Admin notifications for additions, corrections, and publication failures link to the protected `/admin` console using the public `ADMIN_CONSOLE_URL` deployment variable. The link contains no credentials or private receipt token and is independent of the submitter's request URL.
+
 This Worker is the single private queue for researcher corrections and broader-pool nominations submitted from the public Configure Faculty Interests page or Team Match. Public requests are schema-bounded, origin-restricted, rate-limited, idempotent, and stored in the existing private Funding Finder D1 database. Contact email and submitter notes never enter public projections.
 
 The admin console also includes **Manage researcher catalog**. Search for a person and select **Remove researcher**. No departure category or reason is required; an administrator note is optional. The request enters the existing review queue; **Start review**, then **Approve and start publication**, applies the change through the same validated registry publication. Removal sets registry status `inactive`, hides the profile, and disables automatic proposals.

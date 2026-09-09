@@ -687,6 +687,32 @@ test("presents one interactive full-team list with graded themes and broad-call 
   assert.doesNotMatch(teamPage, />specific<\/span>/);
 });
 
+function assertProfileMatchesBounded(engine, faculty) {
+  Object.entries(faculty).forEach(([name, metadata]) => {
+    const count = engine.matchProfile({ name, ...metadata }).length;
+    assert.ok(count <= 500, `researcher ${metadata.researcher_id || name}: per-PI match count ${count} should remain bounded`);
+  });
+}
+
+test("a researcher without relevant current calls can pass publication without fabricated matches", () => {
+  const { query, matcher } = loadApis();
+  const faculty = {
+    "Example Researcher": {
+      researcher_id: "urh-999999", resolved_name: "Example Researcher",
+      key_terms: ["Cryptographic protocols"], domains: ["Cryptography"],
+    },
+  };
+  const engine = matcher.create({ opportunities: [{
+    opportunity_id: "water-treatment", title: "Drinking water purification",
+    description: "Membrane filtration for water treatment.",
+    opportunity_status: "posted", close_date: "2026-12-01", topic_areas: ["Water"],
+  }] }, { faculty }, query, { now: new Date("2026-08-11T00:00:00Z") });
+  assert.equal(engine.records.length, 1);
+  assert.equal(engine.matchProfile({ name: "Example Researcher", ...faculty["Example Researcher"] }).length, 0);
+  // Publication accepts reviewed interests independently of current grant supply.
+  assertProfileMatchesBounded(engine, faculty);
+});
+
 test("production acceptance suite keeps broad and focused calls while excluding noise", () => {
   const { query, matcher } = loadApis();
   const catalog = assignmentJson(catalogSource);
@@ -733,10 +759,7 @@ test("production acceptance suite keeps broad and focused calls while excluding 
   const onr = four.find(item => /Navy and Marine Corps Science and Technology/i.test(item.title));
   if (onr) assert.equal(onr.broad, true);
 
-  Object.values(generated.faculty).forEach(metadata => {
-    const count = engine.matchProfile({ name: metadata.resolved_name, ...metadata }).length;
-    assert.ok(count >= 1 && count <= 500, `per-PI match count ${count} should remain bounded`);
-  });
+  assertProfileMatchesBounded(engine, generated.faculty);
 });
 
 test("uses the same PFAS and fuzzy retrieval for faculty and external profiles", () => {
