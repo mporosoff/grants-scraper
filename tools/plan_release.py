@@ -163,9 +163,17 @@ def main():
     environment = dict(os.environ)
     pointer = c.read_json(c.ROOT / 'release/candidate-source.json')
     requested = environment.get('REQUESTED_STAGE', '')
-    receipt = live = publication = resumed = None
+    receipt = live = publication = resumed = result = None
     receipt_run = environment.get('RECEIPT_RUN', '')
     with tempfile.TemporaryDirectory() as directory:
+        if requested in ('validate', 'publish'):
+            result = plan(c.ROOT, environment)  # Validate the exact named selector first.
+            latest_run, receipt = latest_report(environment['GITHUB_REPOSITORY'], result['candidate_id'],
+                                                'validation', Path(directory) / 'validation')
+            if latest_run:
+                # An omitted or older receipt selector cannot erase a required
+                # gate recorded by a later attempt for this same candidate.
+                receipt_run = latest_run
         if requested not in ('validate', 'publish', 'verify'):
             resumed = completed_attempt(c.ROOT, environment, Path(directory) / 'candidate')
         if requested not in ('generate', 'validate', 'publish', 'verify') or resumed:
@@ -173,7 +181,8 @@ def main():
             _, live = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'live', Path(directory) / 'live')
             receipt_run, receipt = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'validation', Path(directory) / 'validation')
             _, publication = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'publication', Path(directory) / 'publication')
-    result = plan(c.ROOT, environment, receipt=receipt, live=live, publication=publication, resumed=resumed)
+    if result is None:
+        result = plan(c.ROOT, environment, receipt=receipt, live=live, publication=publication, resumed=resumed)
     result['receipt_run'] = receipt_run
     from tools.team_provider import provider_names
     result['openai'] = str('openai' in provider_names()).lower()

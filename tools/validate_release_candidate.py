@@ -48,6 +48,8 @@ def final_integration(root, bundle, reports, previous=None, *, execute=subproces
 
 def validate(root, bundle, reports, previous=None, *, execute=subprocess.run, require_final_integration=False):
     root, bundle, reports = Path(root), Path(bundle), Path(reports)
+    if previous and not Path(previous).exists() and Path(previous).with_name('validation-report.json').exists():
+        previous = Path(previous).with_name('validation-report.json')
     manifest = candidate.load(bundle)
     candidate.verify_dependencies(root, manifest)
     if previous and Path(previous).exists():

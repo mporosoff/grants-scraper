@@ -1,6 +1,7 @@
 """Executable checkpoint/retry contracts using isolated repositories, no providers."""
 from copy import deepcopy
 import json
+import os
 from pathlib import Path
 import shutil
 import subprocess
@@ -202,6 +203,50 @@ class CandidateLifecycleTests(unittest.TestCase):
             c.verify_receipt(self.root, self.bundle, c.read_json(prior))
         final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
         self.assertTrue(c.verify_receipt(self.root, self.bundle, c.read_json(prior)))
+
+    def test_explicit_publish_or_validate_recovers_latest_required_browser_gate(self):
+        from tools import plan_release as planner
+        manifest = self.create()
+        current = c.create(self.root, Path(self.temp.name) / 'other-current-candidate',
+                           generation_sha=self.source_sha, run_id='999', attempt='1')
+        c.write_json(self.root / 'release/candidate.json', current)
+        c.write_json(self.root / 'release/candidate-source.json', {
+            'candidate_id': current['candidate_id'], 'artifact_run': '999'})
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]), require_final_integration=True)
+        latest = c.read_json(self.reports / 'validation.json')
+        for stage in ('publish', 'validate'):
+            for selected_receipt in ('', '100'):
+                env = {'REQUESTED_STAGE': stage, 'CANDIDATE_ID': manifest['candidate_id'], 'CANDIDATE_RUN': '123',
+                    'RECEIPT_RUN': selected_receipt, 'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_EVENT_NAME': 'workflow_dispatch',
+                    'PUBLICATION_RUN': '', 'PUBLICATION_ATTEMPT': '',
+                    'RUNNER_TEMP': str(self.root), 'GITHUB_OUTPUT': str(self.root / 'outputs'),
+                    'GITHUB_STEP_SUMMARY': str(self.root / 'summary')}
+                with self.subTest(stage=stage, receipt=selected_receipt), patch.dict(os.environ, env), \
+                        patch.object(c, 'ROOT', self.root), patch.object(planner, 'latest_report', return_value=('200', latest)) as lookup:
+                    planner.main()
+                planned = c.read_json(self.root / 'release-plan.json')
+                self.assertEqual((planned['candidate_id'], planned['candidate_run']), (manifest['candidate_id'], '123'))
+                self.assertEqual(planned['receipt_run'], '200')
+                self.assertEqual(lookup.call_args.args[1:3], (manifest['candidate_id'], 'validation'))
+                # The workflow downloads this selected receipt even when the
+                # dispatch omits both optional receipt and browser flags.
+                reused = validate(self.root, self.bundle, self.reports, self.reports / 'validation.json',
+                    execute=lambda *a, **k: self.fail('A publish retry must reuse completed ordinary checks'))
+                with self.assertRaisesRegex(ValueError, 'final browser integration'):
+                    c.verify_receipt(self.root, self.bundle, reused)
+
+    def test_failed_ordinary_report_keeps_manual_browser_intent_on_named_retry(self):
+        self.create()
+        with self.assertRaises(ValueError):
+            validate(self.root, self.bundle, self.reports, execute=self.execute([], fail=lambda _: True),
+                     require_final_integration=True)
+        self.assertFalse((self.reports / 'validation.json').exists())
+        repaired = validate(self.root, self.bundle, self.reports, self.reports / 'validation.json',
+                            execute=self.execute([]))
+        with self.assertRaisesRegex(ValueError, 'final browser integration'):
+            c.verify_receipt(self.root, self.bundle, repaired)
+        final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        self.assertTrue(c.verify_receipt(self.root, self.bundle, c.read_json(self.reports / 'validation.json')))
 
     def test_expired_or_missing_candidate_recovers_only_exact_protected_bytes(self):
         from tools import fetch_release_artifact as artifacts
