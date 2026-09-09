@@ -1,13 +1,13 @@
 {
-  "run_id": "34290241070",
+  "run_id": "34292914694",
   "run_attempt": "1",
   "generation_requested": true,
-  "started_at": "2026-09-08T23:22:28.188992+00:00",
+  "started_at": "2026-09-08T23:58:59.655351+00:00",
   "response_contract": "team-response-1",
   "input_generation": "28e5e86096720896315e35a8bc3be3682e32503b503f522ebc784e82cc618938",
   "mode": "maintenance",
   "queue_counts": {
-    "maintenance": 76,
+    "maintenance": 75,
     "backfill": 1409
   },
   "queue_reasons": {
@@ -38,7 +38,6 @@
     "363521": "historical_unassessed_backfill",
     "363798": "retryable_maintenance_failure",
     "360986": "historical_unassessed_backfill",
-    "363179": "stale_published_team",
     "360149": "retryable_maintenance_failure",
     "363540": "historical_unassessed_backfill",
     "362218": "historical_unassessed_backfill",
@@ -1692,8 +1691,8 @@
     "max_provider_requests": 300
   },
   "eligible_scopes": 1577,
-  "pending_scopes": 1485,
-  "due_scopes": 3,
+  "pending_scopes": 1484,
+  "due_scopes": 2,
   "eligibility": [
     {
       "scope_id": "vpr-email:25-543",
@@ -2282,8 +2281,6 @@
   ],
   "source_invalidations": [
     "332894:superconducting-qubits",
-    "363375",
-    "eere-exchange:DE-TA1-0003589",
     "357346",
     "356953",
     "357186",
@@ -2318,80 +2315,6 @@
         "reason": "declared_scope_requires_source_revalidation"
       },
       {
-        "scope_id": "363375",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "ecbac4afe86b9651834352dbefc06b4b722a5bd20268d8846888a21f3fd75ef1",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
-          "provider_requests": 0,
-          "validation_contract": "curated-source-and-profile-1",
-          "source_revalidation": {
-            "review_kind": "curated_source_revalidation",
-            "record_type": "specific_parent",
-            "prior_source_fingerprint": "662d5c63faf785a4d1ba1edcc27bccbdba6343a76afee86ccf7989e6250db5b3",
-            "reviewed_source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
-            "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
-            "role_source_quotes": {
-              "role-1": "treating impaired water for beneficial uses",
-              "role-2": "conduct innovative laboratory and pilot-scale water treatment research",
-              "role-3": "reducing the costs, energy requirements, and other barriers to adoption",
-              "role-4": "conduct innovative laboratory and pilot-scale water treatment research"
-            },
-            "reviewed_profile_hashes": {
-              "urh-000014": "c9e6d8ea9e1cf52764277c8f1225b24a33d3426a5e3571730dbc83f40e60ac30",
-              "urh-000017": "dc3ce9fcba9719fddd9219c45d41c41bbe49c5dfc3879e745fd9a518d42cde06",
-              "urh-000046": "c335387b56cef4d732132aff9b6275185a1ee296d0aeefc9062094f36eb7f475",
-              "urh-000146": "d88ef0691fa8d78fccdd7166e824f2e1819ed08bdcf5c28803414a0d5920e0fc",
-              "urh-000150": "3fc9a79f4e331b234ed12c8c066df6ac0ba14c94b8614df86cab37bddfb31a05"
-            },
-            "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment."
-          }
-        }
-      },
-      {
-        "scope_id": "eere-exchange:DE-TA1-0003589",
-        "state": "restored_from_retained_evidence",
-        "provider_requests": 0,
-        "proof": {
-          "version": "retained-team-recovery-1",
-          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
-          "retained_decision_hash": "c8d299e12a4dfad3c963a843b9c20aa1c8f4cb5a4f569175c59f25305d3ced60",
-          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
-          "source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
-          "provider_requests": 0,
-          "validation_contract": "curated-source-and-profile-1",
-          "source_revalidation": {
-            "review_kind": "curated_source_revalidation",
-            "record_type": "declared_branch",
-            "prior_source_fingerprint": "5708af92dc02febceb5e20a683917f88306815a17cf86d61477187b67d12e7cf",
-            "reviewed_source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c",
-            "reviewed_against_candidate": "6b64ce5a872f4ba7863e23c016eeb7f4957aa18bc749cb2e45886801f78213b2",
-            "role_source_quotes": {
-              "role-1": "Recovery and production from postconsumer scrap",
-              "role-2": "from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap",
-              "role-3": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
-              "role-4": "Recovery and production from postconsumer scrap"
-            },
-            "reviewed_profile_hashes": {
-              "urh-000029": "f69b7f2ba5ed796ee8ea81257c06f9d6d185337e3f19f96095a702758885c695",
-              "urh-000061": "515c8cf73fd000b887758b2f77b7bcbe95db870eb6991e442dd07c1826f892c1",
-              "urh-000082": "944a42732d8257e0a684391c612a2b6f008d66ab3512512240af9006823d2987",
-              "urh-000100": "2ff7fd263af0b217240aba53470ab83fd79300003664c80bee3719c7b9a8b721",
-              "urh-000103": "698555d868e1dfb0ea07761fd11419624845a8bce78024d692538940f1c10727",
-              "urh-000105": "ab513b7e0c96bd4130bffc3ac7290259beec632afc18a5c3234abed25644b7e3",
-              "urh-000109": "fc270291fe161b06829ef47f472fdb561881d1454b6d8c841982fc5593e2cca1",
-              "urh-000111": "a0aac6d0c35ec9da7b2eca0db11a24113c9094e59ee4d3cfbfa59121a245bcba",
-              "urh-000113": "c5bdc6cd74b7cfae1560ce638c2a90ab58bdd1b9a80572048d4078362939953e"
-            },
-            "basis": "The protected prior curated graph is unchanged. Its historical source fingerprint reproduces under the appropriate parent/declared-branch contract. Current complete referenced profiles and active member evidence match the historical publication; official descriptions/identity/URLs are unchanged. The bounded current source supports this retained planned research approach. Existing missing skills, adjacent evidence and contextual contributors remain explicitly qualified. This is a curated source review, not a generated response or new model assessment."
-          }
-        }
-      },
-      {
         "scope_id": "356953",
         "state": "pending",
         "provider_requests": 0,
@@ -2399,9 +2322,33 @@
       },
       {
         "scope_id": "363179",
-        "state": "pending",
+        "state": "restored_from_retained_evidence",
         "provider_requests": 0,
-        "reason": "source_changed"
+        "proof": {
+          "version": "retained-team-recovery-1",
+          "published_sha": "1730af28abd77cd38abf44f56c99bb1bb5231f60",
+          "retained_decision_hash": "063566aa72a2875348740d7984b509b25f4f1137689b08a1ed4d9dca8660c133",
+          "registry_generation": "e2bc3e384309d7a627f4e38dc9889ed04e8b008fee2c37db721e8f80a01f9b12",
+          "source_fingerprint": "de171add9cbf8c9c03420d057e54f8c56e167465994fab8840d0375a0e46a709",
+          "provider_requests": 0,
+          "scientific_contract": "63eb6d454f42697cadd5ebf65a5233a020474dac7b660ee4d37c2424add8fa53",
+          "source_revalidation": {
+            "review_kind": "source_quote_revalidation",
+            "prior_source_fingerprint": "29f629367fe53b3b3ba2afc771cde8f91cf161c1085feafcac8c388b1e7491f4",
+            "reviewed_source_fingerprint": "de171add9cbf8c9c03420d057e54f8c56e167465994fab8840d0375a0e46a709",
+            "reviewed_against_candidate": "3f7a93244cd6542a3d69a849608d2c96b347e58be6b07c1aeb96126719738de3",
+            "prior_document_projection_hash": "eac8e4b046c4d60fc5f9c2056b42d0df413372c006039a9c2f8be613ab02b1c2",
+            "reviewed_document_projection_hash": "71c1b2c52fbcb77e79f2e70f0d7f19c7bf8da5bf86e4d1dbe144e8a79cb063f0",
+            "role_quote_updates": {
+              "role-2": {
+                "before": "4.5 Security Plan .................................................................................................................... 23",
+                "after": "support the development of a secure compute environment"
+              }
+            },
+            "reviewed_decision_hash": "d8844081c8ad07f971fb43e6dfdde3bf4f9ad2b843d1baf5ef3bd0e2a9c57e51",
+            "basis": "The current unchanged official description explicitly funds a secure compute environment. Replace the obsolete security-plan table-of-contents citation with that direct goal. Preserve the exact security contributions and their RAN-specific limitations, all members, and the commercialization gap."
+          }
+        }
       },
       {
         "scope_id": "357493",
@@ -2411,12 +2358,12 @@
       }
     ],
     "recovery_only": true,
-    "selected_pending_scopes": 3
+    "selected_pending_scopes": 2
   },
   "coverage_before": {
-    "scopes": 92,
-    "parent_calls": 62,
-    "team_combinations": 237
+    "scopes": 93,
+    "parent_calls": 63,
+    "team_combinations": 240
   },
   "results": [],
   "processing_failure": {
@@ -2434,7 +2381,7 @@
   },
   "embedding_reuse_permitted": true,
   "llm_usage": {
-    "logical_id": "offline-34290241070",
+    "logical_id": "offline-34292914694",
     "limit_usd": 2.0,
     "charged_usd": 0.0,
     "by_provider_model_stage": {},
@@ -2449,11 +2396,11 @@
     "llm": 0
   },
   "coverage_after": {
-    "scopes": 92,
-    "parent_calls": 62,
-    "team_combinations": 237
+    "scopes": 93,
+    "parent_calls": 63,
+    "team_combinations": 240
   },
-  "pending_after": 1485,
+  "pending_after": 1484,
   "deferred": [
     {
       "scope_id": "363315",
@@ -2694,15 +2641,6 @@
       "parent_id": "360986",
       "stage": "queue",
       "input_fingerprint": "fdc1880845e41a50ea88d79975b3318401630c0ccbd857326911c832a952b73c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363179",
-      "parent_id": "363179",
-      "stage": "queue",
-      "input_fingerprint": "3dd52032c752ab85e9202205ee49127b3f68deae8e6d5f69b4a7aadf1c73f21c",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15823,6 +15761,6 @@
   ],
   "assessed_scopes": 0,
   "outcomes": {},
-  "elapsed_seconds": 2.288,
+  "elapsed_seconds": 2.007,
   "status": "completed"
 }
