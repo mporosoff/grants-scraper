@@ -393,7 +393,8 @@ def production_teams(state, population, *, replay=False):
     if not replay and protocol.get('qualification_budget'):
         from tools.offline_spend import LinkedLedger
         budget = protocol['qualification_budget']
-        local = Ledger(state / protocol['version'] / 'ledger.json', protocol['version'], budget['usd'], budget['requests'])
+        ledger_id = budget.get('ledger_id', protocol['version'])
+        local = Ledger(state / ledger_id / 'ledger.json', ledger_id, budget['usd'], budget['requests'])
         execution_ledger = LinkedLedger(local, ledger)
     client = trial.ReplayClient(state / 'cache') if replay else Client(execution_ledger, state / 'cache', deadline=time.monotonic() + 2400)
     before = len(ledger.read()['requests'])

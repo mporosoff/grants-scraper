@@ -16,6 +16,74 @@ from tests.test_sonnet_structured_transport import sonnet_response
 
 
 class ScopeRepairContracts(unittest.TestCase):
+    def test_heading_revision_preserves_frozen_science_and_spending_limits(self):
+        path = Path('evaluation/sonnet_team_scope_repair_20260909.json')
+        self.assertEqual(hashlib.sha256(path.read_bytes()).hexdigest(),
+                         'df3fc904c2e5f55b34ada061696c2aa57e6b19806f6b29af9af89986cab73a36')
+        original = json.loads(path.read_bytes())
+        active, _ = evaluation.production_team_cases('confirmation')
+        for field in ('confirmation_cases', 'confirmation_selection', 'fresh_input_hashes',
+                      'acceptance', 'exposed_cases', 'required_source_checks', 'useful_proposal_comparator'):
+            self.assertEqual(active[field], original[field])
+        for population in ('regression', 'population', 'exposed', 'confirmation'):
+            self.assertEqual(active['case_hashes'][population], original['case_hashes'][population])
+        for field in ('usd', 'requests', 'reserved_pilot_usd', 'reserved_pilot_requests'):
+            self.assertEqual(active['qualification_budget'][field], original['qualification_budget'][field])
+        self.assertEqual(active['qualification_budget']['ledger_id'], original['version'])
+        self.assertIn('concise source-declared heading', team_provider.stage_prompt('decomposition'))
+        for stage in ('adjudication', 'verification'):
+            self.assertEqual(team_provider.stage_prompt(stage), original['final_prompts'][stage])
+
+    def test_protocol_revision_cannot_reset_qualification_requests_or_spend(self):
+        # Exercise the production qualification entrypoint with real linked
+        # reservations and synthetic responses; no network/model invocation.
+        for limits in ({'usd': 2, 'requests': 1}, {'usd': 1, 'requests': 10}):
+            with self.subTest(limits=limits), tempfile.TemporaryDirectory() as directory, \
+                    patch('requests.post', side_effect=AssertionError('No provider calls')) as post:
+                state = Path(directory)
+                parent = Ledger(state / 'ledger.json', 'task-fixture', 4, 10)
+                atomic_json(state / 'production-preflight-receipt.json', {
+                    'complete': True, 'transport': evaluation.production_preflight_configuration()['transport'],
+                    'contract': identity(evaluation.production_preflight_configuration())})
+                protocol = {'version': 'qualification-1', 'qualification_budget': limits,
+                    'acceptance': {'scope_decision_accuracy_min': .9, 'legitimate_scope_acceptance_min': .85}}
+                case = {'scope': {'id': 'control', 'text': 'Investigate catalytic reaction mechanisms.',
+                    'record_type': 'specific_parent', 'source_fingerprint': 'first'}, 'claims': [],
+                    'holdout': False, 'annotations': {'expected_scope': 'bounded_research'}}
+                dispatches = []
+                class ReservedClient:
+                    def __init__(self, ledger, *args, **kwargs): self.ledger = ledger
+                    def json(self, route, stage, prompt, data, schema, validate, **kwargs):
+                        token = self.ledger.reserve(route['provider'], route['model'], stage, identity(data), 600000, 1)
+                        dispatches.append(token)
+                        self.ledger.complete(token, status='valid', charged_microusd=600000)
+                        return validate({'specific': False, 'objective': 'Only administrative operations are funded.', 'roles': []})
+                def cases(population):
+                    return protocol, [case]
+                with patch.object(evaluation, 'evaluation_ledger', return_value=parent), \
+                        patch.object(evaluation, 'Client', ReservedClient), \
+                        patch.object(evaluation, 'production_team_cases', new=cases):
+                    first = evaluation.production_teams(state, 'regression')
+                    self.assertTrue(first['execution_complete'])
+                    self.assertFalse(first['numerical_gate_passed'])  # A stub is not scientific qualification.
+                    local_path = state / 'qualification-1' / 'ledger.json'
+                    prior = json.loads(local_path.read_bytes())
+                    parent_prior = parent.read()
+                    protocol['version'] = 'qualification-2'
+                    protocol['qualification_budget'] = limits | {'ledger_id': 'qualification-1'}
+                    case['scope']['source_fingerprint'] = 'amended'
+                    second = evaluation.production_teams(state, 'regression')
+                    self.assertFalse(second['execution_complete'])
+                    self.assertEqual(second['new_provider_requests'], 0)
+                    self.assertEqual(len(dispatches), 1)
+                    self.assertEqual(json.loads(local_path.read_bytes()), prior)
+                    self.assertEqual(parent.read(), parent_prior)
+                    self.assertFalse((state / 'qualification-2' / 'ledger.json').exists())
+                    row = json.loads(next((state / 'qualification-2' / 'regression').glob('team-*.json')).read_bytes())
+                    self.assertEqual(row['state'], 'deferred')
+                    self.assertEqual(sum(r['charged_microusd'] for r in prior['requests']), 600000)
+                post.assert_not_called()
+
     def test_fresh_selection_preserves_exposed_cases_and_exact_input_contracts(self):
         prior = json.loads(Path('evaluation/sonnet_production_teams.json').read_bytes())
         protocol, fresh = evaluation.production_team_cases('confirmation')
