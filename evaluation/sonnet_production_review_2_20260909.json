@@ -1,0 +1,54 @@
+{
+  "version": "production-source-review-2",
+  "status": "numerical_gates_passed_source_repair_required",
+  "reviewed_head": "a4fbca4824a9627d6d9788b55939697c45d80eca",
+  "regression_run": "34350176208",
+  "population_run": "34350655624",
+  "regression": {
+    "completed": 9,
+    "total": 9,
+    "scope_correct": 9,
+    "legitimate_accepted": 6,
+    "legitimate_scopes": 6,
+    "proposed": 2
+  },
+  "population": {
+    "completed": 24,
+    "total": 24,
+    "scope_correct": 23,
+    "legitimate_accepted": 17,
+    "legitimate_scopes": 18,
+    "proposed": 8
+  },
+  "findings": [
+    {
+      "scope": "361526:g-12",
+      "claim_id": "urh-000014-c006",
+      "evidence": "selective carbon dioxide reduction",
+      "kind": "unsupported_mechanism",
+      "basis": "The accepted direct edge calls this a core electrochemical catalyst-design activity. This exact claim does not identify an electrochemical driver; reduction may use other mechanisms. Other claims by the researcher are not evidence for this edge."
+    },
+    {
+      "scope": "363489",
+      "claim_id": "urh-000154-c001",
+      "evidence": "analog VLSI for imaging",
+      "kind": "unsupported_reason_in_adjacent_edge",
+      "basis": "The non-covering reason asserts circuit-level fabrication skill although this exact evidence does not establish fabrication. A non-covering edge must also describe evidence accurately."
+    }
+  ],
+  "resolved_prior_findings": {
+    "363489": "Adjudication completed under the unchanged exact stage contract; historical failure rule remains unreconstructable.",
+    "356981": "Valid translational device scope accepted with no surviving edges; honest gaps.",
+    "357308": "No accepted urh-000016-c002 optical-hardware claim. Remaining hardware/software co-design and wavefront-control methodological transfers are explicit.",
+    "342475": "No field-recording edge inferred from damaged-text recovery; remaining computational and archival graph remains useful.",
+    "344592:ab-0019": "No fabrication/processing coverage from silicon integrated nanophotonics.",
+    "362218": "Complete hearing-restoration decision with legitimate scope and insufficient complementary coverage."
+  },
+  "unfixed_within_floors": {
+    "344592:ab-0035": "Genetics remains a false rejection at unchanged decomposition; report 23/24 rather than relabeling this source."
+  },
+  "next_contract": "sonnet-production-verification-3",
+  "next_action": "Withhold prior adjudication rationales at the shared production/evaluation verifier input boundary; require exact evidence before assigning a physical mechanism or fabrication capability. Run four focused cases before resuming the nine/24 qualification. Six confirmations remain untouched and unrun.",
+  "quality_gate_passed": false,
+  "production_enabled": false
+}

@@ -12,6 +12,7 @@ from tools.evaluate_offline_ai import TASK
 from tools.release_candidate import checked_path
 
 WORKFLOW = ".github/workflows/offline-ai-evaluation.yml"
+PILOT_WORKFLOW = ".github/workflows/refresh-opportunities.yml"
 PREFIX = "offline-ai-" + TASK
 
 
@@ -41,7 +42,7 @@ def prepare(repository, destination, reservation):
             raise ValueError("evaluation_spend_checkpoint_missing_or_expired; remaining budget is conservatively unavailable")
         selected = states[0]
         run = json.loads(api(repository, f"actions/runs/{selected['workflow_run']['id']}"))
-        if run["path"] != WORKFLOW or run["head_branch"] != "main" or run["event"] != "workflow_dispatch":
+        if run["path"] not in (WORKFLOW, PILOT_WORKFLOW) or run["head_branch"] != "main" or run["event"] != "workflow_dispatch":
             raise ValueError("untrusted_evaluation_checkpoint")
         with zipfile.ZipFile(io.BytesIO(api(repository, f"actions/artifacts/{selected['id']}/zip"))) as archive:
             for item in archive.infolist():

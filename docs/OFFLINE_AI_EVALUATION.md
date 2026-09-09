@@ -6,12 +6,21 @@ The first production-contract population run (`34345705095`) failed its gate:
 23/24 completed, 21/24 correct scope decisions, 15/18 legitimate scopes accepted.
 `evaluation/sonnet_production_review_20260909.json` records the consolidated
 source findings and accounting. The active verifier is now
-`sonnet-production-verification-2`; decomposition and adjudication retain
+`sonnet-production-verification-3`; decomposition and adjudication retain
 `established-sonnet-repair-2`. The receipt directory advances to
-`sonnet-production-teams-2`, preserving version 1 and reusing only exact valid
+`sonnet-production-teams-3`, preserving versions 1 and 2 and reusing only exact valid
 stage responses. Ordinary production stages also reconstruct a pending format
 correction from the retained ledger. Safe semantic rule/path diagnostics do not
 authorize format retries of scientific failures.
+
+The second population completed 24/24, with 23/24 correct scope decisions and
+17/18 legitimate scopes accepted. Source review still found a physical mechanism
+inferred from a reaction name and fabrication asserted from circuit-design evidence.
+`evaluation/sonnet_production_review_2_20260909.json` preserves those findings.
+The shared verifier input projection now withholds adjudicator rationales while
+retaining exact claim ownership/revisions, original scope and proposed edge identities
+and coverage. Run `production-teams-focus` before the nine/24 qualification; earlier
+valid decomposition/adjudication caches remain reusable. Do not tune confirmations.
 
 The active Cov4 contract is `cov4-subject-context-1`, using the same bounded
 native-JSON Sonnet client as teams. Historical `PROMPT`, DEC11 text and measured
@@ -29,6 +38,46 @@ mutation and exact response/result hashes. Source-confidence publication
 requirements still apply independently of Cov4; accepting an inferred topic
 does not promote its provenance or confidence. Numerical completion, source
 review, production enablement and publication remain separate outcomes.
+
+Cov4's 43-case paid run `34351974515` retains all 28 genuine children, rejects
+all 11 contaminants and prevents both cross-parent publications. The five controls
+were reused from `34351528204`; 19 native/referenced controls use zero calls.
+`evaluation/sonnet_cov4_qualification_20260909.json` records source review and a
+zero-call replay of the integrated `sonnet-production-cov4-2` processing contract
+with identical paid response hashes. The request remains `cov4-subject-context-1`.
+
+Production service gates in `config/offline_ai.json` are independent: Cov4 is
+qualified and enabled; teams remain held pending verifier qualification. The old
+insufficient-credit stop is retained in `generation_provider_pause_history` and
+retired using funded-account authorization and successful native preflight
+`34349999546`. A new account denial still blocks dispatch across both services.
+Three consecutive transient transport failures stop only the current invocation;
+a malformed scope does not disable subsequent scopes. Unresolved document provider
+failures return to existing bounded extraction; accepted children do not retry merely
+because the classifier prompt changed.
+
+The first production execution must be manual with `qualification_pilot=true` while
+the automatic-generation hold remains. Evaluation and release share the existing
+coordinated-release lock. The pilot restores the newest task ledger separately from
+its local run ledger and uploads both reservation/state pairs. Completed team and
+Cov4 responses live beneath the authoritative task subtree, so a later workflow
+reuses them even if the earlier run failed before candidate publication. Pending
+format corrections also read the task request history across fresh per-run ledgers.
+Pilot inputs are absent from validation/publication jobs and non-provider selection.
+Every LLM dispatch
+reserves against both the task allowance and the unchanged five-scope/$2 run cap.
+No retry grants allowance. Optional comma-separated `pilot_team_scopes` may select
+current eligible new/stale scopes, at most five; this does not enable recurring
+historical backfill. Ordinary maintenance no longer inherits `--recovery-only`.
+
+```sh
+gh workflow run refresh-opportunities.yml --ref main -f stage=generate -f qualification_pilot=true -f pilot_team_scopes=REVIEWED_CURRENT_IDS
+```
+
+After pilot publication, release the automatic-generation hold. Ordinary runs use
+maintenance; manual backfill remains a separate explicit `stage=backfill` action.
+Exact `stage=publish`/`verify` retries reuse the named candidate and never reserve a
+new generation allowance.
 
 The user has funded Anthropic and authorized restoration of the established
 Sonnet team and Cov4 services. This supersedes the historical no-request and
@@ -55,8 +104,8 @@ full original schema and scientific validators remain authoritative. Successful
 access is separate from team/Cov4 quality, enablement and publication. A failed
 preflight receipt is retained and does not silently repeat on dispatch. The
 preflight retires only obsolete evaluation scope stops; new account denials stay
-blocked. Production's credit pause remains until reviewed quality and access
-evidence authorize each service independently.
+blocked. The historical production credit stop is retired only with reviewed quality
+and access evidence; service-specific quality holds remain independent.
 
 While the qualification manifest says `automatic_generation: hold`, automatic
 source/team generation waits. This prevents a preparatory shared-client merge

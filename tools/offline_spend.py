@@ -114,6 +114,132 @@ def cost_microusd(usage, prices):
     return int(total.to_integral_value(rounding=ROUND_CEILING))
 
 
+class LinkedLedger:
+    """A production run and its task allowance both reserve before dispatch."""
+    def __init__(self, local, task):
+        self.local, self.task = local, task
+
+    def __getattr__(self, name):
+        return getattr(self.local, name)
+
+    def read(self):
+        value = self.local.read()
+        parent = self.task.read()
+        # Request resumption follows the logical task across workflow runs.
+        # Local counters alone would forget a known schema failure when a new
+        # run restores the task but starts a fresh per-run ledger.
+        value['requests'] = parent['requests']
+        value['blocked_providers'] |= parent['blocked_providers']
+        return value
+
+    def reserve(self, provider, model, stage, key, amount, attempt):
+        token = self.local.reserve(provider, model, stage, key, amount, attempt)
+        try:
+            parent = self.task.reserve(provider, model, stage, key, amount, attempt)
+        except (ConfigurationFailure, Deferred):
+            # This reservation provably precedes transport. Keep the row and
+            # attempt, but do not charge a request we could not dispatch.
+            self.local.complete(token, status='not_dispatched_task_limit', charged_microusd=0)
+            raise
+        # A crash before linkage leaves conservative unknown reservations, not
+        # permission to spend them again. Both links precede the caller's HTTP.
+        self.task.complete(parent, production_logical_id=self.local.logical_id, production_request_id=token)
+        self.local.complete(token, task_request_id=parent)
+        return token
+
+    def complete(self, token, **result):
+        row = next(row for row in self.local.read()['requests'] if row['id'] == token)
+        self.task.complete(row['task_request_id'], **result)
+        self.local.complete(token, **result)
+
+    def block(self, provider, reason):
+        self.task.block(provider, reason)
+        self.local.block(provider, reason)
+
+    def summary(self):
+        value = self.local.summary()
+        parent = self.task.read()
+        value['task_accounting'] = {'logical_id': self.task.logical_id,
+            'requests': len(parent['requests']),
+            'charged_usd': sum(row['charged_microusd'] for row in parent['requests']) / 1_000_000,
+            'ledger_sha256': identity(parent)}
+        return value
+
+
+def production_ledger(state, mode):
+    """Preserve ordinary run caps; a declared qualification pilot also uses its task cap."""
+    state = Path(state)
+    settings = config()
+    local = Ledger(state / 'ledger.json', state.name, settings['budgets_usd'][mode], settings['max_requests'])
+    for provider, evidence in settings.get('generation_provider_pauses', {}).items():
+        if provider not in local.read()['blocked_providers']:
+            local.block(provider, evidence['reason'])
+    marker = state / 'task-accounting.json'
+    if not marker.exists():
+        if os.environ.get('QUALIFICATION_PILOT') == 'true':
+            raise ConfigurationFailure('qualification_pilot_task_checkpoint_required')
+        return local
+    from tools.evaluate_offline_ai import TASK
+    authorization = json.loads((ROOT / 'config/sonnet_production_qualification.json').read_bytes())['authorization']
+    if json.loads(marker.read_bytes()) != {'task': TASK, 'authorization_id': authorization['id']}:
+        raise ConfigurationFailure('production_task_link_identity_mismatch')
+    task_path = state / 'task' / 'ledger.json'
+    if not task_path.exists() or json.loads(task_path.read_bytes()).get('active_allowance') != authorization:
+        raise ConfigurationFailure('authorized_task_history_required')
+    parent = restore_ledger(task_path, TASK, settings['budgets_usd']['evaluation'],
+                            settings['max_requests'], authorization)
+    return LinkedLedger(local, parent)
+
+
+def response_cache(ledger, service):
+    """Linked pilots retain every completed stage with authoritative task state."""
+    if isinstance(ledger, LinkedLedger):
+        return ledger.task.path.parent / {'teams': 'cache', 'cov4': 'cov4-production-cache'}[service]
+    return ledger.path.parent / {'teams': 'team-responses', 'cov4': 'cov4-cache'}[service]
+
+
+def require_production_service(service, ledger):
+    """Independent service quality holds do not become account-wide denials."""
+    settings = config()
+    selected = settings.get('production_services', {}).get(service)
+    if selected is not None:
+        if not selected.get('enabled'):
+            ledger.event(kind='service_stop', service=service, reason='quality_gate_pending')
+            raise ConfigurationFailure(service + '_quality_gate_pending')
+        if service == 'teams':
+            from tools.team_provider import contract
+            from tools.team_maintenance import science_contract
+            active = contract()
+            scientific = science_contract()
+        elif service == 'cov4':
+            from scripts.subtopic_cov4 import active_contract
+            from tools.evaluate_offline_ai import module_hash
+            active = active_contract({})
+            scientific = identity({path: module_hash(str(ROOT / path)) for path in (
+                'scripts/subtopic_cov4.py', 'scripts/subtopic_records.py', 'scripts/subtopic_segmentation.py')})
+        else:
+            raise ConfigurationFailure('unknown_production_service')
+        if selected.get('request_contract') != identity(active):
+            raise ConfigurationFailure(service + '_qualified_contract_changed')
+        if selected.get('scientific_contract') != scientific:
+            raise ConfigurationFailure(service + '_qualified_science_changed')
+    from tools.team_provider import routes
+    for provider in ({'anthropic'} if service == 'cov4' else {route['provider'] for route in routes().values()}):
+        if provider in ledger.read()['blocked_providers']:
+            raise ConfigurationFailure(ledger.read()['blocked_providers'][provider])
+
+
+def check_run_transport(ledger, start):
+    """Stop this invocation after exhausted transient retries; later runs may retry."""
+    if ledger is None:
+        return
+    rows = ledger.read()['requests'][start:]
+    for provider in {row['provider'] for row in rows}:
+        recent = [row for row in rows if row['provider'] == provider][-3:]
+        if len(recent) == 3 and all(row.get('diagnostics', {}).get('category') == 'transient_transport' for row in recent):
+            raise Deferred('provider_transient_run_stop')
+
+
 class Ledger:
     """Cross-thread/process atomic reservations; a stale lock fails closed.
 

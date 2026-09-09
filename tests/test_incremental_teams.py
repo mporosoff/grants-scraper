@@ -65,7 +65,8 @@ class IncrementalTeams(unittest.TestCase):
         with chdir(self.root), redirect_stdout(io.StringIO()), patch.dict(os.environ, {
             "ANTHROPIC_API_KEY": "synthetic", "VOYAGE_API_KEY": "synthetic"}), patch.object(
                 teams.requests, "post", side_effect=options.pop("response", provider_response)) as post, patch(
-                    "sys.argv", ["teams", "--generate", "--write", "--workers", "1", "--mode", mode, "--state", f".spend/run-{self.invocation}", *options.pop("args", [])]):
+                    "sys.argv", ["teams", "--generate", "--write", "--workers", "1", "--mode", mode, "--state", f".spend/run-{self.invocation}", *options.pop("args", [])]), \
+                patch('tools.offline_spend.config', side_effect=fixture.synthetic_offline_settings):
             code = teams.main()
         report = json.loads((self.root / "evaluation/opportunity_team_generation.json").read_text())
         model = json.loads(self.model_path.read_text())
@@ -73,6 +74,14 @@ class IncrementalTeams(unittest.TestCase):
         self.assertIn(model["generation_id"], (self.root / "data/opportunity_team_index.js").read_text())
         self.assertIn(model["generation_id"], (self.root / "data/opportunity_teams.js").read_text())
         return code, report, model, post.call_args_list
+
+    def test_pilot_selection_does_not_enter_nonprovider_invalidation_or_warm_replay(self):
+        for args in (['teams', '--write'], ['teams', '--mode', 'replay']):
+            with chdir(self.root), redirect_stdout(io.StringIO()), patch.dict(os.environ,
+                    QUALIFICATION_PILOT='true', PILOT_TEAM_SCOPES='future-pilot-scope'), \
+                    patch('sys.argv', args), patch('requests.post', side_effect=AssertionError('No provider work')) as post:
+                self.assertEqual(teams.main(), 0)
+                post.assert_not_called()
 
     def update_catalog(self, mutate):
         path = self.root / "data/opportunities.js"

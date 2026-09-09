@@ -80,6 +80,7 @@ class ParsingTeamIntegration(unittest.TestCase):
             sidecar = {'records': {'363302': {'subtopics': children}}}
             subtopic_records.write_cache(sidecar, root / 'data/subtopics.js')
             with chdir(root), ExitStack() as stack, redirect_stdout(io.StringIO()):
+                stack.enter_context(patch('tools.offline_spend.config', side_effect=fixture.synthetic_offline_settings))
                 stack.enter_context(patch('requests.sessions.Session.request', side_effect=AssertionError('Fixture attempted live network')))
                 stack.enter_context(patch('scripts.currentness.date', fixture.FixedDate))
                 stack.enter_context(patch.dict(os.environ, {'ANTHROPIC_API_KEY': 'synthetic'}))

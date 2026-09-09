@@ -6,7 +6,7 @@ import runpy
 import sys
 
 
-from tools.offline_spend import Ledger, config, atomic_json
+from tools.offline_spend import production_ledger, require_production_service, check_run_transport, response_cache, atomic_json
 
 
 def instrument(ledger, cache, classify, *, replay=False):
@@ -27,8 +27,17 @@ def main():
     from scripts import subtopic_cov4 as gate
     state = Path(os.environ['OFFLINE_AI_STATE'])
     mode = os.environ['TEAM_MODE']
-    ledger = Ledger(state / 'ledger.json', state.name, config()['budgets_usd'][mode], config()['max_requests'])
-    gate.classify_fundability = instrument(ledger, state / 'cov4-cache', gate.classify_fundability)
+    ledger = production_ledger(state, mode)
+    classify = instrument(ledger, response_cache(ledger, 'cov4'), gate.classify_fundability)
+    start = len(ledger.read()['requests'])
+    def qualified(candidate, **kwargs):
+        try:
+            require_production_service('cov4', ledger)
+            check_run_transport(ledger, start)
+        except RuntimeError as error:
+            return gate._unresolved('service_unavailable', detail=type(error).__name__)
+        return classify(candidate, **kwargs)
+    gate.classify_fundability = qualified
     # The classifier is shared with qualification; native/reference ownership
     # proofs and publication confidence remain separate deterministic gates.
     sys.argv[0] = 'scripts.extract_document_evidence'

@@ -38,10 +38,19 @@ def stage_settings(stage, settings=None):
     return settings['stages'][stage] | settings.get('production_stage_overrides', {}).get(stage, {})
 
 
+def request_inputs(stage, data):
+    """The independent verifier gets identities/coverage, never prior rationales."""
+    if stage != 'verification':
+        return data
+    return data | {'proposed_edges': [{key: edge[key] for key in ('role_id', 'claim_id', 'coverage')}
+                                      for edge in data['proposed_edges']]}
+
+
 def request(provider, prompt, data):
     from scripts import build_opportunity_teams as teams
     stages = {teams.DECOMPOSE: 'decomposition', teams.ADJUDICATE: 'adjudication', teams.VERIFY: 'verification'}
     stage = stages[prompt]
+    data = request_inputs(stage, data)
     with provider.lock:
         if provider.offline is None:
             if provider.ledger is None:
@@ -52,7 +61,8 @@ def request(provider, prompt, data):
                     provider.calls += 1
                     provider.counters['assessment_requests'] = provider.counters.get('assessment_requests', 0) + 1
                 return requests.post(*args, **kwargs)
-            provider.offline = Client(provider.ledger, provider.ledger.path.parent / 'team-responses', deadline=provider.deadline, post=post)
+            from tools.offline_spend import response_cache
+            provider.offline = Client(provider.ledger, response_cache(provider.ledger, 'teams'), deadline=provider.deadline, post=post)
     selected = stage_contract(stage)
     route, stage_config, schema = selected['route'], selected['settings'], selected['schema']
     key = identity({'route': route, 'stage': stage, 'config': stage_config, 'prompt': selected['prompt'], 'schema': schema, 'inputs': data})

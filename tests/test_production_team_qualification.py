@@ -165,6 +165,13 @@ class ProductionTeamQualification(unittest.TestCase):
             self.assertEqual(row['state'], 'proposed')
             self.assertEqual([call.kwargs['json'] for call in production.call_args_list], [call.kwargs['json'] for call in qualification.call_args_list])
             self.assertEqual(row['request_contracts'], {stage: proof['request_contract'] for stage, proof in provider.provenance.stages.items()})
+            verifier_body = qualification.call_args_list[-1].kwargs['json']
+            verifier_input = json.loads(verifier_body['messages'][0]['content'])
+            self.assertEqual(verifier_input['proposed_edges'], [
+                {key: edge[key] for key in ('role_id', 'claim_id', 'coverage')} for edge in self.edges])
+            self.assertEqual(verifier_input['claims'], payload['claims'])
+            self.assertEqual(verifier_input['scope'], payload['scope'])
+            self.assertTrue(all('reason' in edge for edge in self.edges))
         prior = json.loads(Path('evaluation/established_sonnet_repair_2_frozen.json').read_bytes())
         for stage in ('decomposition', 'adjudication'):
             self.assertEqual(team_provider.stage_prompt(stage), prior['prompts'][stage])

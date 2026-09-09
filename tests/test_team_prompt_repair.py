@@ -124,7 +124,7 @@ class TeamPromptRepairContracts(unittest.TestCase):
                 ledger.reserve('anthropic', 'claude-sonnet-5', 'verification', 'outside-baseline', 1, 1)
             self.assertNotIn('test-only', ledger.path.read_text())
         self.assertEqual(Path('config/offline_ai.json').read_bytes(), production_bytes)
-        self.assertEqual(config()['generation_provider_pauses']['anthropic']['reason'], 'insufficient_credit')
+        self.assertEqual(config()['generation_provider_pauses'], json.loads(production_bytes)['generation_provider_pauses'])
 
     def test_valid_decisions_and_refusals_are_reused_but_changed_contract_fails_closed(self):
         protocol, cases = trial.population()

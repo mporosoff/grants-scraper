@@ -106,8 +106,9 @@ def team_case(client, route_name, case, *, production=False):
             stage_config = stage_config | {"max_output_tokens": 8000}
         actual_prompt, schema = prompt, schemas()[name]
         if production:
-            from tools.team_provider import stage_contract
+            from tools.team_provider import stage_contract, request_inputs
             selected = stage_contract(name)
+            data = request_inputs(name, data)
             actual, stage_config, actual_prompt, schema = (selected[key] for key in ('route', 'settings', 'prompt', 'schema'))
         from tools.offline_ai import validate_schema
         value = client.json(actual, name, actual_prompt, data, schema,
@@ -345,6 +346,7 @@ def production_teams(state, population, *, replay=False):
         'request_response': [function_hash(fn) for fn in (ai.request_body, ai.response_value)],
         'versions': [teams.VERSION, teams.RESPONSE_VERSION, teams.ASSEMBLY_VERSION],
         'validators': [function_hash(fn) for fn in (ai.validate_schema, teams.clean, teams.validate_response, teams.validate_roles, teams.validate_edges, teams.assemble)],
+        'input_projection': function_hash(team_provider.request_inputs),
         'population': {case['scope']['id']: identity(case) for case in cases}}
     expected = identity(configuration)
     destination = state / protocol['version'] / population
@@ -472,7 +474,7 @@ def production_cov4(state, population, *, replay=False):
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("phase", choices=["production-preflight", "production-teams-regression", "production-teams-population", "production-teams-confirmation", "production-teams-replay", "production-cov4-controls", "production-cov4-population", "production-cov4-replay", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
+    parser.add_argument("phase", choices=["production-teams-focus", "production-preflight", "production-teams-regression", "production-teams-population", "production-teams-confirmation", "production-teams-replay", "production-cov4-controls", "production-cov4-population", "production-cov4-replay", "preflight", "teams-sonnet", "teams-luna", "teams-luna-sonnet-verifier", "teams-mini", "cov4", "stability", "replay"])
     parser.add_argument("--state", type=Path, required=True)
     args = parser.parse_args()
     if args.phase.startswith('production-cov4-'):
