@@ -42,7 +42,7 @@ gh workflow run refresh-opportunities.yml --ref main -f stage=generate
 # Unchanged automatic planner: no generation on an unchanged published package.
 gh workflow run refresh-opportunities.yml --ref main -f stage=auto
 # Exact publication/live recovery; reuse the candidate and completed browser suite.
-gh workflow run refresh-opportunities.yml --ref main -f stage=publish -f candidate_run=34365766149 -f candidate_id=5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0 -f receipt_run=34368363510
+gh workflow run refresh-opportunities.yml --ref main -f stage=publish -f candidate_run=34365766149 -f candidate_id=5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0 -f receipt_run=34368363510 -f final_integration=true
 gh workflow run refresh-opportunities.yml --ref main -f stage=verify -f candidate_run=34365766149 -f candidate_id=5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0 -f receipt_run=34368363510 -f publication_run=34368363510 -f publication_attempt=1
 # Exact scientific replay only; neither command qualifies a failed team gate.
 gh workflow run offline-ai-evaluation.yml --ref main -f phase=production-teams-replay

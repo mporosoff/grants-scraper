@@ -4,11 +4,26 @@ import os
 from pathlib import Path
 import shutil
 import subprocess
+import tempfile
 
 from tools import release_candidate as candidate
 
 
-def final_integration(root, bundle, reports, previous=None, *, execute=subprocess.run):
+def retain_browser_checkpoint(root, manifest, previous, reports):
+    if not previous:
+        return None
+    path = Path(previous).with_name('final-integration.json')
+    prior = (candidate.read_json(path) if path.exists() else
+             candidate.read_json(previous).get('final_integration') if Path(previous).exists() else None)
+    if isinstance(prior, dict) and prior.get('identity') == candidate.final_integration_identity(root, manifest):
+        # Keep failures too: a later ordinary run must not hide a failed browser
+        # attempt and let recovery fall back to an older passing result.
+        candidate.write_json(Path(reports) / 'final-integration.json', prior)
+        return prior
+    return None
+
+
+def final_integration(root, bundle, reports, previous=None, *, execute=subprocess.run, recover_history=False):
     """Explicit manual browser validation of the already assembled candidate."""
     root, bundle, reports = Path(root), Path(bundle), Path(reports)
     ordinary = candidate.read_json(reports / 'validation.json')
@@ -18,13 +33,20 @@ def final_integration(root, bundle, reports, previous=None, *, execute=subproces
     # invocation must not leave a receipt accepted by publication on retry.
     ordinary['final_integration'] = {'identity': identity, 'passed': False}
     candidate.write_json(reports / 'validation.json', ordinary)
-    if previous and Path(previous).exists():
-        prior = candidate.read_json(previous)
-        if prior.get('identity') == identity and prior.get('passed') is True:
-            candidate.write_json(reports / 'final-integration.json', prior)
-            ordinary['final_integration']['passed'] = True
-            candidate.write_json(reports / 'validation.json', ordinary)
-            return prior
+    prior = candidate.read_json(previous) if previous and Path(previous).exists() else None
+    if prior is None and recover_history:
+        from tools.plan_release import latest_report
+        # Older ordinary-only checkpoints omitted the standalone browser file.
+        # Recover the newest explicit result, including a failure, never the
+        # newest passing result. Exact candidate/test identity still governs.
+        with tempfile.TemporaryDirectory() as directory:
+            _, prior = latest_report(os.environ['GITHUB_REPOSITORY'], manifest['candidate_id'],
+                                     'browser', Path(directory))
+    if prior and prior.get('identity') == identity and prior.get('passed') is True:
+        candidate.write_json(reports / 'final-integration.json', prior)
+        ordinary['final_integration']['passed'] = True
+        candidate.write_json(reports / 'validation.json', ordinary)
+        return prior
     candidate.materialize(root, bundle)
     report = {'identity': identity, 'passed': False, 'new_generation_calls': 0,
               'validation_sha': candidate.git(root, 'rev-parse', 'HEAD'), 'timestamp': candidate.timestamp()}
@@ -59,6 +81,9 @@ def validate(root, bundle, reports, previous=None, *, execute=subprocess.run, re
         except ValueError:
             pass
         else:
+            browser = retain_browser_checkpoint(root, manifest, previous, reports)
+            if browser:
+                receipt['final_integration'] = {'identity': browser['identity'], 'passed': browser['passed']}
             if require_final_integration:
                 receipt.setdefault('final_integration', {'passed': False})
             candidate.write_json(reports / 'validation.json', receipt)
@@ -83,6 +108,9 @@ def validate(root, bundle, reports, previous=None, *, execute=subprocess.run, re
             and candidate.read_json(previous).get('candidate_id') == manifest['candidate_id']
             and 'final_integration' in candidate.read_json(previous)):
         report['final_integration'] = {'passed': False}
+    browser = retain_browser_checkpoint(root, manifest, previous, reports)
+    if browser:
+        report['final_integration'] = {'identity': browser['identity'], 'passed': browser['passed']}
     reports.mkdir(parents=True, exist_ok=True)
     # Run every deterministic gate once and retain all findings in one report.
     # No provider credentials are present in this job. Subprocess output remains
@@ -116,7 +144,7 @@ def main():
     args = parser.parse_args()
     try:
         if args.final_integration:
-            final_integration(candidate.ROOT, args.bundle, args.reports, args.previous)
+            final_integration(candidate.ROOT, args.bundle, args.reports, args.previous, recover_history=True)
         else:
             validate(candidate.ROOT, args.bundle, args.reports, args.previous,
                      require_final_integration=args.require_final_integration)

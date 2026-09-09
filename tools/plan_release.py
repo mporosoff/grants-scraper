@@ -33,12 +33,25 @@ def latest_report(repository, candidate, kind, destination):
     from tools.offline_ai_checkpoint import api
     for page in range(1, 101):
         rows = json.loads(api(repository, f'actions/artifacts?per_page=100&page={page}'))['artifacts']
-        matches = [a for a in rows if re.fullmatch(f'{kind}-{candidate}-[1-9][0-9]*', a['name']) and not a['expired']]
+        artifact_kind = 'validation' if kind == 'browser' else kind
+        matches = [a for a in rows if re.fullmatch(f'{artifact_kind}-{candidate}-[1-9][0-9]*', a['name']) and not a['expired']]
         for artifact in sorted(matches, key=lambda a: a['id'], reverse=True):
             run = str(artifact['workflow_run']['id'])
             target = Path(destination) / str(artifact['id'])
             fetch(repository, run, artifact['name'], target)
-            report = target / {'live': 'live-verification.json', 'validation': 'validation.json', 'publication': 'publication.json'}[kind]
+            report = target / {'live': 'live-verification.json', 'validation': 'validation.json',
+                              'publication': 'publication.json', 'browser': 'final-integration.json'}[kind]
+            if kind == 'browser' and not report.exists():
+                for receipt_name in ('validation.json', 'validation-report.json'):
+                    receipt_path = target / receipt_name
+                    if receipt_path.exists():
+                        nested = c.read_json(receipt_path).get('final_integration', {})
+                        if nested.get('identity'):
+                            # A killed explicit browser step may leave only its
+                            # pre-dispatch failed/unfinished marker. Do not skip
+                            # that marker in favor of an older passing run.
+                            return run, nested
+                continue  # Ordinary-only validation is not a newer browser result.
             if kind == 'publication':
                 if not report.exists():
                     return run, None  # Pre-publication failure is not a Pages checkpoint.

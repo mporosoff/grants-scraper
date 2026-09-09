@@ -143,6 +143,85 @@ class CandidateLifecycleTests(unittest.TestCase):
         self.assertTrue(final_integration(self.root, self.bundle, self.reports,
             self.reports / 'final-integration.json', execute=self.browser_result([]))['passed'])
 
+    def test_ordinary_refresh_carries_exact_browser_result_across_later_workflows(self):
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        prior = self.reports
+        (self.root / 'tools/validator.py').write_text('VERSION = 2\n')
+        self.commit()
+        for index in range(2):
+            next_reports = Path(self.temp.name) / f'ordinary-{index}'
+            updated = validate(self.root, self.bundle, next_reports, prior / 'validation.json',
+                               execute=self.execute([]))
+            self.assertTrue(updated['final_integration']['passed'])
+            self.assertEqual(c.read_json(next_reports / 'final-integration.json'), first)
+            prior = next_reports
+        repeated = final_integration(self.root, self.bundle, prior, prior / 'final-integration.json',
+                                    execute=lambda *a, **k: self.fail('Unchanged browser work repeated'))
+        self.assertEqual(repeated, first)
+
+    def test_ordinary_refresh_preserves_failed_browser_result(self):
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        with self.assertRaises(ValueError):
+            final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([], failed=True))
+        (self.root / 'tools/validator.py').write_text('VERSION = 2\n')
+        self.commit()
+        next_reports = Path(self.temp.name) / 'after-failure'
+        updated = validate(self.root, self.bundle, next_reports, self.reports / 'validation.json',
+                           execute=self.execute([]))
+        self.assertFalse(c.read_json(next_reports / 'final-integration.json')['passed'])
+        with self.assertRaisesRegex(ValueError, 'final browser integration'):
+            c.verify_receipt(self.root, self.bundle, updated)
+
+    def test_old_ordinary_only_checkpoint_recovers_exact_browser_history_without_execution(self):
+        from tools import plan_release as planner
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        # Reproduce the retained production receipt after an ordinary-only refresh.
+        ordinary = c.read_json(self.reports / 'validation.json')
+        ordinary['final_integration'] = {'passed': False}
+        c.write_json(self.reports / 'validation.json', ordinary)
+        missing = Path(self.temp.name) / 'ordinary-artifact/final-integration.json'
+        with patch.dict(os.environ, {'GITHUB_REPOSITORY': 'owner/repo'}), \
+                patch.object(planner, 'latest_report', return_value=('123', first)) as lookup:
+            recovered = final_integration(self.root, self.bundle, self.reports, missing, recover_history=True,
+                                         execute=lambda *a, **k: self.fail('Previously completed browser suite repeated'))
+        self.assertEqual(recovered, first)
+        self.assertEqual(lookup.call_args.args[1:3], (first['identity']['candidate_id'], 'browser'))
+        self.assertTrue(c.verify_receipt(self.root, self.bundle, c.read_json(self.reports / 'validation.json')))
+
+    def test_browser_history_never_skips_failed_or_interrupted_explicit_attempt(self):
+        from tools.plan_release import latest_report
+        from tools import offline_ai_checkpoint, fetch_release_artifact
+        self.create()
+        validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        first = final_integration(self.root, self.bundle, self.reports, execute=self.browser_result([]))
+        candidate_id = first['identity']['candidate_id']
+        rows = [{'id': n, 'workflow_run': {'id': n}, 'name': f'validation-{candidate_id}-1',
+                 'expired': False} for n in (3, 2, 1)]
+        for interrupted in (False, True):
+            fetched = []
+            def fetch(repository, run, name, target):
+                fetched.append(run)
+                if run == '3':
+                    c.write_json(target / 'validation.json', {'final_integration': {'passed': False}})
+                elif run == '2':
+                    failed = {**first, 'passed': False}
+                    c.write_json(target / ('validation.json' if interrupted else 'final-integration.json'),
+                                 {'final_integration': failed} if interrupted else failed)
+                else:
+                    c.write_json(target / 'final-integration.json', first)
+            with patch.object(offline_ai_checkpoint, 'api', return_value=json.dumps({'artifacts': rows})), \
+                    patch.object(fetch_release_artifact, 'fetch', side_effect=fetch):
+                run, found = latest_report('owner/repo', candidate_id, 'browser',
+                                           Path(self.temp.name) / str(interrupted))
+            self.assertEqual(run, '2')
+            self.assertFalse(found['passed'])
+            self.assertEqual(fetched, ['3', '2'])
+
     def test_changed_candidate_never_reuses_old_browser_receipt(self):
         self.create()
         validate(self.root, self.bundle, self.reports, execute=self.execute([]))
