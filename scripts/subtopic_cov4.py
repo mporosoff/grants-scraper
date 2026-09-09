@@ -658,7 +658,8 @@ def apply_gate(parent, records, document, *, classifier=None, api_key=None,
         if rung not in CLASSIFIED_PROVENANCE:
             diagnostics["bypassed"] += 1
             _counter(diagnostics["bypassed_provenance"], str(rung))
-            kept.append(record)
+            kept.append({key: value for key, value in record.items() if key != 'classifier_context'}
+                        if 'classifier_context' in record else record)
             continue
 
         diagnostics["offered"] += 1
@@ -686,6 +687,9 @@ def apply_gate(parent, records, document, *, classifier=None, api_key=None,
             _counter(diagnostics["classifier_errors"], verdict["error"])
 
         annotated = dict(record)
+        # This transient source context is only a classifier input. The public
+        # document cache and child sidecar retain the existing bounded summary.
+        annotated.pop('classifier_context', None)
         # Provenance is NOT touched here, ever. Cov4 answers semantic safety;
         # the rung records who asserted the parent->child relationship, and no
         # classifier verdict can change who asserted it (section 5.1).

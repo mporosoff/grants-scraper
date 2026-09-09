@@ -613,7 +613,7 @@ def sidecar_payload(cache, *, approvals=None):
             # duplication the sidecar decision was meant to remove.
             stored = {
                 key: value for key, value in child.items()
-                if key != "subtopic_terms"
+                if key not in {"subtopic_terms", "classifier_context"}
             }
             if not stored.get("term_display"):
                 stored["term_display"] = build_term_display(

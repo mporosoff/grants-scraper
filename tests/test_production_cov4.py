@@ -35,6 +35,7 @@ class ProductionCov4(unittest.TestCase):
                 fields = extraction.subtopic_fields(parent, content, containers_from(pages), document, '2026-09-09', True)
                 self.assertEqual(fields['subtopic_cov4']['classifier_calls'], 3)
                 self.assertEqual(len(fields['subtopics']), 3)
+                self.assertNotIn('classifier_context', json.dumps(fields))
                 for row in fields['subtopics']:
                     self.assertEqual(row['subtopic_source'], 'inferred')
                     self.assertEqual(row['confidence'], 'medium')
@@ -88,6 +89,14 @@ class ProductionCov4(unittest.TestCase):
             self.assertEqual(kept[0]['title'], 'Catalysis Science')
             self.assertEqual(kept[0]['subtopic_source'], 'inferred')
             self.assertEqual(kept[0]['cov4_prompt_version'], gate.ACTIVE_PROMPT_VERSION)
+            self.assertNotIn('classifier_context', json.dumps(kept))
+            # Even an accidentally ungated transient record cannot leak its
+            # longer local body into public/review storage.
+            transient = copy.deepcopy(built[0])
+            transient['classifier_context']['local_text'] = 'PRIVATE_CONTEXT_SENTINEL'
+            sidecar = records.sidecar_payload({'records': {'synthetic': {'subtopics': [transient]}}})
+            self.assertNotIn('PRIVATE_CONTEXT_SENTINEL', json.dumps(sidecar))
+            self.assertNotIn('classifier_context', json.dumps(sidecar))
             self.assertEqual(diagnostics['api_requests'], 2)
             self.assertEqual(diagnostics['dropped'], 1)
             self.assertTrue(all(call.kwargs['json']['output_config']['format']['type'] == 'json_schema' for call in post.call_args_list))
