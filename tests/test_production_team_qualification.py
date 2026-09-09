@@ -65,10 +65,10 @@ class ProductionTeamQualification(unittest.TestCase):
                 self.assertTrue(first['execution_complete'])
                 self.assertFalse(first['quality_gate_passed'])
                 self.assertEqual(evaluation.production_teams(state, 'regression'), first)
-                for change in ('threshold', 'source_checks', 'rule', 'adapter'):
+                for change in ('threshold', 'source_checks', 'rule', 'adapter', 'scientific_states'):
                     def changed_read(path):
                         value = original_read(path)
-                        if path.name == 'sonnet_production_teams.json' and change != 'adapter':
+                        if path.name == 'sonnet_production_teams.json' and change not in ('adapter', 'scientific_states'):
                             protocol = json.loads(value)
                             if change == 'threshold':
                                 protocol['acceptance']['scope_decision_accuracy_min'] = .1
@@ -81,11 +81,68 @@ class ProductionTeamQualification(unittest.TestCase):
                             return 'changed-adapter-identity'
                         return original_hash(function)
                     with self.subTest(change=change), patch.object(Path, 'read_bytes', changed_read), \
-                            patch.object(evaluation, 'function_hash', side_effect=changed_hash):
+                            patch.object(evaluation, 'function_hash', side_effect=changed_hash), \
+                            patch.object(evaluation, 'SCIENTIFIC_STATES', evaluation.SCIENTIFIC_STATES | ({'invalid'} if change == 'scientific_states' else set())):
                         with self.assertRaisesRegex(ValueError, 'contract changed'):
                             evaluation.production_teams(state, 'regression')
                     self.assertEqual({path: path.read_bytes() for path in retained}, retained)
                 self.assertEqual(ledger.read()['requests'], [])
+
+    def test_transport_change_requires_a_new_bounded_probe_and_preserves_history(self):
+        original_module_hash = evaluation.module_hash
+        for prior_success in (True, False):
+            with self.subTest(prior_success=prior_success), tempfile.TemporaryDirectory() as tmp, \
+                    patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+                state = Path(tmp)
+                Ledger(state / 'ledger.json', evaluation.TASK, 15)
+                with patch('requests.post', return_value=sonnet_response({'ready': prior_success})) as post:
+                    prior = evaluation.production_preflight(state)
+                    ledger_before = evaluation.evaluation_ledger(state / 'ledger.json').read()
+                    self.assertEqual(post.call_count, 1)
+                    def changed(path):
+                        return 'changed-native-transport' if path == 'tools/offline_ai.py' else original_module_hash(path)
+                    with patch.object(evaluation, 'module_hash', side_effect=changed):
+                        with self.assertRaises(ConfigurationFailure):
+                            evaluation.production_teams(state, 'regression')
+                        self.assertEqual(post.call_count, 1)
+                        if prior_success:
+                            current = evaluation.production_preflight(state)
+                            self.assertTrue(current['complete'])
+                            self.assertNotEqual(prior['contract'], current['contract'])
+                            self.assertEqual(post.call_count, 2)
+                            self.assertEqual(evaluation.production_preflight(state), current)
+                            self.assertEqual(post.call_count, 2)
+                            history = state / 'history' / ('production-preflight-' + identity(prior) + '.json')
+                            self.assertEqual(json.loads(history.read_bytes()), prior)
+                        else:
+                            with self.assertRaisesRegex(ConfigurationFailure, 'after_failure'):
+                                evaluation.production_preflight(state)
+                            self.assertEqual(post.call_count, 1)
+                    ledger = evaluation.evaluation_ledger(state / 'ledger.json').read()
+                    self.assertEqual(ledger['requests'][0], ledger_before['requests'][0])
+                    self.assertEqual(sum(row.get('kind') == 'task_allowance' for row in ledger['events']), 1)
+                    if prior_success:
+                        self.assertNotEqual(ledger['requests'][0]['key'], ledger['requests'][1]['key'])
+
+    def test_contract_change_cannot_reset_an_interrupted_correction(self):
+        from tools import offline_ai as ai
+        original_hash = evaluation.module_hash
+        with tempfile.TemporaryDirectory() as tmp, patch.dict(os.environ, ANTHROPIC_API_KEY='synthetic'):
+            state = Path(tmp)
+            Ledger(state / 'ledger.json', evaluation.TASK, 15)
+            with patch('requests.post', side_effect=[sonnet_response({'ready': 'yes'}), sonnet_response({'ready': True})]) as post:
+                with patch.object(ai.time, 'sleep', side_effect=KeyboardInterrupt):
+                    with self.assertRaises(KeyboardInterrupt):
+                        evaluation.production_preflight(state)
+                before = evaluation.evaluation_ledger(state / 'ledger.json').read()
+                with patch.object(evaluation, 'module_hash', side_effect=lambda path: 'changed' if path == 'tools/offline_ai.py' else original_hash(path)):
+                    with self.assertRaisesRegex(ConfigurationFailure, 'incomplete_attempt'):
+                        evaluation.production_preflight(state)
+                self.assertEqual(evaluation.evaluation_ledger(state / 'ledger.json').read(), before)
+                self.assertEqual(post.call_count, 1)
+                self.assertTrue(evaluation.production_preflight(state)['complete'])
+                self.assertEqual(post.call_count, 2)
+                self.assertIn('Format diagnostic:', post.call_args_list[1].kwargs['json']['system'])
 
     def test_qualification_transmits_the_exact_production_stage_requests(self):
         fixtures.ProposedTeamTests.setUp(self)

@@ -240,7 +240,10 @@ def production_preflight_configuration():
     settings = config()
     return {'route': settings['routes']['sonnet'],
             'stage': settings['stages']['preflight'] | {'max_attempts': 3, 'durable_attempts': True},
-            'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION}
+            'schema': schemas()['preflight'], 'transport': TRANSPORT_VERSION,
+            'implementation': {'transport_module': module_hash('tools/offline_ai.py'),
+                               'adapter': function_hash(production_preflight),
+                               'validator': function_hash(valid_preflight_failure)}}
 
 
 def production_preflight(state):
@@ -250,16 +253,29 @@ def production_preflight(state):
     protocol = json.loads(Path('config/sonnet_production_qualification.json').read_bytes())
     ledger = authorize_allowance(state / 'ledger.json', TASK, protocol['authorization'])
     configuration = production_preflight_configuration()
-    stage = configuration['stage']
     expected = identity(configuration)
+    # Bind cache/retry identity too: a changed transport must actually execute
+    # the probe, not reuse a response made by an unexercised implementation.
+    stage = configuration['stage'] | {'preflight_contract': expected}
+    prompt, inputs = 'Return exactly the requested readiness object.', {'ready': True}
+    request_key = identity({'route': configuration['route'], 'stage': 'preflight', 'config': stage,
+                           'prompt': prompt, 'schema': configuration['schema'], 'inputs': inputs})
     marker = state / 'production-preflight-receipt.json'
     if marker.exists():
         receipt = json.loads(marker.read_bytes())
         if receipt['contract'] != expected:
-            raise ConfigurationFailure('preflight_contract_changed')
-        return receipt  # A failed compatibility probe does not get a silent repeat.
+            if not receipt.get('complete'):
+                raise ConfigurationFailure('preflight_contract_changed_after_failure')
+            atomic_json(state / 'history' / ('production-preflight-' + identity(receipt) + '.json'), receipt)
+            marker.unlink()
+        else:
+            return receipt  # A failed compatibility probe does not get a silent repeat.
     with ledger.locked():
         retained = ledger.read()
+        prior_probes = [row for row in retained['requests'] if row['provider'] == 'anthropic' and row['stage'] == 'preflight']
+        if (prior_probes and prior_probes[-1]['key'] != request_key
+                and prior_probes[-1]['status'] != 'valid'):
+            raise ConfigurationFailure('preflight_contract_changed_after_incomplete_attempt')
         prior = retained['blocked_providers'].get('anthropic')
         # These are evaluation-only scope stops, not account denials. A new 4xx,
         # billing or security stop must remain blocked even on workflow retries.
@@ -275,7 +291,7 @@ def production_preflight(state):
                'production_enabled': False, 'transport': TRANSPORT_VERSION}
     try:
         result = client.json(configuration['route'], 'preflight',
-            'Return exactly the requested readiness object.', {'ready': True}, configuration['schema'],
+            prompt, inputs, configuration['schema'],
             lambda value: value if value == {'ready': True} else valid_preflight_failure(), stage_config=stage)
         receipt.update(complete=True, result=result, status='native_structured_output_supported')
     except (ValueError, RuntimeError, requests.RequestException) as error:
@@ -323,6 +339,7 @@ def production_teams(state, population, *, replay=False):
         raise ConfigurationFailure('Team route differs from the qualified native preflight')
     configuration = {'version': protocol['version'], 'protocol': protocol, 'stages': stages,
         'preflight_contract': preflight['contract'],
+        'scientific_states': sorted(SCIENTIFIC_STATES),
         'qualification': [function_hash(fn) for fn in (team_case, production_team_cases, production_teams, trial.metrics)],
         'transport': ai.TRANSPORT_VERSION, 'client': function_hash(ai.Client.json),
         'request_response': [function_hash(fn) for fn in (ai.request_body, ai.response_value)],
