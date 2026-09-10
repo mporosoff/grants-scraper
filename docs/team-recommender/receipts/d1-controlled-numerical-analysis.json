@@ -1,0 +1,1192 @@
+{
+  "scientific": 90,
+  "controls": 30,
+  "profiles": 155,
+  "variants": [
+    {
+      "variant": "C2-reproduction",
+      "prepared": 34,
+      "unprepared": 56,
+      "groups": 1,
+      "no_group": 33,
+      "A5": 166,
+      "B5": 98,
+      "B_empty_lists": 12,
+      "B_short_lists": 4,
+      "options": 8,
+      "groups_by_scope": [
+        {
+          "scope_id": "361207",
+          "ids": [
+            "urh-000009",
+            "urh-000079"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000009",
+              "value": 0.11175160576502063
+            },
+            {
+              "id": "urh-000079",
+              "value": 0.16086142870689596
+            }
+          ],
+          "A": [
+            "urh-000011",
+            "urh-000079"
+          ],
+          "A_coverage": 0.3873685765439668,
+          "B_coverage": 0.4991201823089874
+        }
+      ]
+    },
+    {
+      "variant": "source-only",
+      "prepared": 35,
+      "unprepared": 55,
+      "groups": 1,
+      "no_group": 34,
+      "A5": 169,
+      "B5": 107,
+      "B_empty_lists": 11,
+      "B_short_lists": 4,
+      "options": 8,
+      "groups_by_scope": [
+        {
+          "scope_id": "361207",
+          "ids": [
+            "urh-000079",
+            "urh-000121"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000079",
+              "value": 0.42258506347750596
+            },
+            {
+              "id": "urh-000121",
+              "value": 0.12234852945951313
+            }
+          ],
+          "A": [
+            "urh-000011",
+            "urh-000079"
+          ],
+          "A_coverage": 0.422585063477506,
+          "B_coverage": 0.5449335929370192
+        }
+      ]
+    },
+    {
+      "variant": "selection-only",
+      "prepared": 34,
+      "unprepared": 56,
+      "groups": 5,
+      "no_group": 29,
+      "A5": 166,
+      "B5": 98,
+      "B_empty_lists": 12,
+      "B_short_lists": 4,
+      "options": 36,
+      "groups_by_scope": [
+        {
+          "scope_id": "359696",
+          "ids": [
+            "urh-000016",
+            "urh-000098"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000016",
+              "value": 0.01605177690539239
+            },
+            {
+              "id": "urh-000098",
+              "value": 0.03991816514820751
+            }
+          ],
+          "A": [
+            "urh-000016",
+            "urh-000009"
+          ],
+          "A_coverage": 0.4248619833406293,
+          "B_coverage": 0.4569146207809198
+        },
+        {
+          "scope_id": "357002",
+          "ids": [
+            "urh-000040",
+            "urh-000115"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000040",
+              "value": 0.03009110599054088
+            },
+            {
+              "id": "urh-000115",
+              "value": 0
+            }
+          ],
+          "A": [
+            "urh-000040",
+            "urh-000115"
+          ],
+          "A_coverage": 0.4529157700533806,
+          "B_coverage": 0.4529157700533806
+        },
+        {
+          "scope_id": "361208",
+          "ids": [
+            "urh-000011",
+            "urh-000079"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000011",
+              "value": 0
+            },
+            {
+              "id": "urh-000079",
+              "value": 0.019985476765243648
+            }
+          ],
+          "A": [
+            "urh-000011",
+            "urh-000079"
+          ],
+          "A_coverage": 0.5279654639528681,
+          "B_coverage": 0.5279654639528681
+        },
+        {
+          "scope_id": "361207",
+          "ids": [
+            "urh-000009",
+            "urh-000079"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000009",
+              "value": 0.11175160576502063
+            },
+            {
+              "id": "urh-000079",
+              "value": 0.16086142870689596
+            }
+          ],
+          "A": [
+            "urh-000011",
+            "urh-000079"
+          ],
+          "A_coverage": 0.3873685765439668,
+          "B_coverage": 0.4991201823089874
+        },
+        {
+          "scope_id": "363622",
+          "ids": [
+            "urh-000017",
+            "urh-000102"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000017",
+              "value": 0.0208260194200926
+            },
+            {
+              "id": "urh-000102",
+              "value": 0
+            }
+          ],
+          "A": [
+            "urh-000017",
+            "urh-000099"
+          ],
+          "A_coverage": 0.4615505585611333,
+          "B_coverage": 0.4615505585611333
+        }
+      ]
+    },
+    {
+      "variant": "combined",
+      "prepared": 35,
+      "unprepared": 55,
+      "groups": 5,
+      "no_group": 30,
+      "A5": 169,
+      "B5": 107,
+      "B_empty_lists": 11,
+      "B_short_lists": 4,
+      "options": 40,
+      "groups_by_scope": [
+        {
+          "scope_id": "362218",
+          "ids": [
+            "urh-000011",
+            "urh-000025"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000011",
+              "value": 0
+            },
+            {
+              "id": "urh-000025",
+              "value": 0.029092995195180826
+            }
+          ],
+          "A": [
+            "urh-000025",
+            "urh-000011"
+          ],
+          "A_coverage": 0.5415000266227635,
+          "B_coverage": 0.5415000266227635
+        },
+        {
+          "scope_id": "357002",
+          "ids": [
+            "urh-000040",
+            "urh-000115"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000040",
+              "value": 0.031627034783286656
+            },
+            {
+              "id": "urh-000115",
+              "value": 0
+            }
+          ],
+          "A": [
+            "urh-000040",
+            "urh-000115"
+          ],
+          "A_coverage": 0.47491543462868496,
+          "B_coverage": 0.47491543462868496
+        },
+        {
+          "scope_id": "361208",
+          "ids": [
+            "urh-000025",
+            "urh-000079"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000025",
+              "value": 0
+            },
+            {
+              "id": "urh-000079",
+              "value": 0.03832345108664581
+            }
+          ],
+          "A": [
+            "urh-000011",
+            "urh-000079"
+          ],
+          "A_coverage": 0.573042922739435,
+          "B_coverage": 0.573042922739435
+        },
+        {
+          "scope_id": "361207",
+          "ids": [
+            "urh-000079",
+            "urh-000121"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000079",
+              "value": 0.42258506347750596
+            },
+            {
+              "id": "urh-000121",
+              "value": 0.12234852945951313
+            }
+          ],
+          "A": [
+            "urh-000011",
+            "urh-000079"
+          ],
+          "A_coverage": 0.422585063477506,
+          "B_coverage": 0.5449335929370192
+        },
+        {
+          "scope_id": "363622",
+          "ids": [
+            "urh-000017",
+            "urh-000157"
+          ],
+          "marginals": [
+            {
+              "id": "urh-000017",
+              "value": 0.023522100501725762
+            },
+            {
+              "id": "urh-000157",
+              "value": 0
+            }
+          ],
+          "A": [
+            "urh-000017",
+            "urh-000099"
+          ],
+          "A_coverage": 0.504949001809606,
+          "B_coverage": 0.504949001809606
+        }
+      ]
+    }
+  ],
+  "diagnostics": [
+    {
+      "scope_id": "359696",
+      "prepared": true,
+      "aspects": 2,
+      "action": {
+        "scope_id": "359696",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 64,
+        "matrix_ms": 15.806999999999903,
+        "group_ms": 96.62599999999998,
+        "group_size": 0,
+        "option_count": 0,
+        "coverage": 0,
+        "work": 18672,
+        "cold_build_view_options_ms": 100.19899999999996,
+        "cached_build_view_options_ms": 0.4695000000000391,
+        "reachable": 64,
+        "reachability_complete": true,
+        "edit_replacement_ms": 1.9204999999999472,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 64,
+        "possible_pairs": 2016,
+        "first_fail_anchor": 10,
+        "first_fail_group_floor": 2006,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0
+      },
+      "group": [],
+      "marginals": [],
+      "optimizer_work": 18672,
+      "score_correlations": [
+        {
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.34784196522912064,
+          "aspect_cosine": 0.658432019980807
+        }
+      ],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000067",
+              "score": 0.42987755057294125,
+              "claim": "urh-000067-c001"
+            },
+            {
+              "id": "urh-000016",
+              "score": 0.4260888101741462,
+              "claim": "urh-000016-c002"
+            },
+            {
+              "id": "urh-000115",
+              "score": 0.42054807057065563,
+              "claim": "urh-000115-c001"
+            }
+          ]
+        },
+        {
+          "aspect": "a1",
+          "top": [
+            {
+              "id": "urh-000041",
+              "score": 0.39958717608932964,
+              "claim": "urh-000041-c001"
+            },
+            {
+              "id": "urh-000016",
+              "score": 0.38566893882347997,
+              "claim": "urh-000016-c002"
+            },
+            {
+              "id": "urh-000046",
+              "score": 0.3829082567758163,
+              "claim": "urh-000046-c007"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "344592:ab-0009",
+      "prepared": true,
+      "aspects": 2,
+      "action": {
+        "scope_id": "344592:ab-0009",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 39,
+        "matrix_ms": 10.705600000000004,
+        "group_ms": 30,
+        "group_size": 0,
+        "option_count": 0,
+        "coverage": 0,
+        "work": 6608,
+        "cold_build_view_options_ms": 40.17790000000002,
+        "cached_build_view_options_ms": 0.3851999999999407,
+        "reachable": 39,
+        "reachability_complete": true,
+        "edit_replacement_ms": 0.9735000000000582,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 39,
+        "possible_pairs": 741,
+        "first_fail_anchor": 45,
+        "first_fail_group_floor": 696,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0
+      },
+      "group": [],
+      "marginals": [],
+      "optimizer_work": 6608,
+      "score_correlations": [
+        {
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.7184819134338181,
+          "aspect_cosine": 0.7666266682127494
+        }
+      ],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000106",
+              "score": 0.4266173708184863,
+              "claim": "urh-000106-c001"
+            },
+            {
+              "id": "urh-000088",
+              "score": 0.42414326263652513,
+              "claim": "urh-000088-c001"
+            },
+            {
+              "id": "urh-000140",
+              "score": 0.4216512327606131,
+              "claim": "urh-000140-c001"
+            }
+          ]
+        },
+        {
+          "aspect": "a1",
+          "top": [
+            {
+              "id": "urh-000088",
+              "score": 0.40946357098260705,
+              "claim": "urh-000088-c001"
+            },
+            {
+              "id": "urh-000107",
+              "score": 0.4005080918052038,
+              "claim": "urh-000107-c003"
+            },
+            {
+              "id": "urh-000021",
+              "score": 0.3930903870350693,
+              "claim": "urh-000021-c001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "prepared": true,
+      "aspects": 1,
+      "action": {
+        "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+        "prepared": true,
+        "action_allowed": false,
+        "action_reason": "unsupported_scope",
+        "scored_people": 155,
+        "admitted_people": 28,
+        "matrix_ms": 7.238900000000058,
+        "group_ms": 8.66410000000019,
+        "group_size": 0,
+        "option_count": 0,
+        "coverage": 0,
+        "work": 2370
+      },
+      "pair_waterfall": {
+        "admitted": 28,
+        "possible_pairs": 378,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 378,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0
+      },
+      "group": [],
+      "marginals": [],
+      "optimizer_work": 2370,
+      "score_correlations": [],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000132",
+              "score": 0.4079244565958948,
+              "claim": "urh-000132-c001"
+            },
+            {
+              "id": "urh-000052",
+              "score": 0.37932312616673003,
+              "claim": "urh-000052-c002"
+            },
+            {
+              "id": "urh-000064",
+              "score": 0.37454404334037367,
+              "claim": "urh-000064-c001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "362218",
+      "prepared": true,
+      "aspects": 1,
+      "action": {
+        "scope_id": "362218",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 20,
+        "matrix_ms": 5.433500000000095,
+        "group_ms": 6.846400000000131,
+        "group_size": 2,
+        "option_count": 8,
+        "coverage": 0.5415000266227635,
+        "work": 1258,
+        "cold_build_view_options_ms": 12.647100000000137,
+        "cached_build_view_options_ms": 0.3369999999999891,
+        "reachable": 20,
+        "reachability_complete": true,
+        "edit_replacement_ms": 5.2034000000001015,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 20,
+        "possible_pairs": 190,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 136,
+        "first_fail_redundancy": 0,
+        "passes": 54,
+        "passes_old_marginal": 0
+      },
+      "group": [
+        "urh-000011",
+        "urh-000025"
+      ],
+      "marginals": [
+        {
+          "id": "urh-000011",
+          "value": 0
+        },
+        {
+          "id": "urh-000025",
+          "value": 0.029092995195180826
+        }
+      ],
+      "optimizer_work": 1258,
+      "score_correlations": [],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000025",
+              "score": 0.5415000266227635,
+              "claim": "urh-000025-c001"
+            },
+            {
+              "id": "urh-000011",
+              "score": 0.5124070314275827,
+              "claim": "urh-000011-c001"
+            },
+            {
+              "id": "urh-000079",
+              "score": 0.47706884569767033,
+              "claim": "urh-000079-c002"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "363292",
+      "prepared": true,
+      "aspects": 2,
+      "action": {
+        "scope_id": "363292",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 0,
+        "matrix_ms": 10.838700000000017,
+        "group_ms": 0.0443000000000211,
+        "group_size": 0,
+        "option_count": 0,
+        "coverage": 0,
+        "work": 0,
+        "cold_build_view_options_ms": 11.758599999999888,
+        "cached_build_view_options_ms": 0.18910000000005311,
+        "reachable": 0,
+        "reachability_complete": true,
+        "edit_replacement_ms": 0.18869999999992615,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 0,
+        "possible_pairs": 0,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 0,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0
+      },
+      "group": [],
+      "marginals": [],
+      "optimizer_work": 0,
+      "score_correlations": [
+        {
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": null,
+          "aspect_cosine": 0.5315844044025824
+        }
+      ],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000001",
+              "score": 0,
+              "claim": "urh-000001-c001"
+            },
+            {
+              "id": "urh-000002",
+              "score": 0,
+              "claim": "urh-000002-c001"
+            },
+            {
+              "id": "urh-000003",
+              "score": 0,
+              "claim": "urh-000003-c001"
+            }
+          ]
+        },
+        {
+          "aspect": "a1",
+          "top": [
+            {
+              "id": "urh-000001",
+              "score": 0,
+              "claim": "urh-000001-c001"
+            },
+            {
+              "id": "urh-000002",
+              "score": 0,
+              "claim": "urh-000002-c001"
+            },
+            {
+              "id": "urh-000003",
+              "score": 0,
+              "claim": "urh-000003-c001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "243973",
+      "prepared": false,
+      "aspects": 0,
+      "action": {
+        "scope_id": "243973",
+        "status": "unprepared",
+        "action": "unsupported_scope"
+      }
+    },
+    {
+      "scope_id": "362868",
+      "prepared": false,
+      "aspects": 0,
+      "action": {
+        "scope_id": "362868",
+        "status": "unprepared",
+        "action": "unsupported_scope"
+      }
+    },
+    {
+      "scope_id": "357002",
+      "prepared": true,
+      "aspects": 2,
+      "action": {
+        "scope_id": "357002",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 40,
+        "matrix_ms": 12.031999999999925,
+        "group_ms": 19.267700000000104,
+        "group_size": 2,
+        "option_count": 8,
+        "coverage": 0.47491543462868496,
+        "work": 4548,
+        "cold_build_view_options_ms": 30.32140000000004,
+        "cached_build_view_options_ms": 0.3683000000000902,
+        "reachable": 40,
+        "reachability_complete": true,
+        "edit_replacement_ms": 31.85719999999992,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 40,
+        "possible_pairs": 780,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 740,
+        "first_fail_redundancy": 0,
+        "passes": 40,
+        "passes_old_marginal": 0
+      },
+      "group": [
+        "urh-000040",
+        "urh-000115"
+      ],
+      "marginals": [
+        {
+          "id": "urh-000040",
+          "value": 0.031627034783286656
+        },
+        {
+          "id": "urh-000115",
+          "value": 0
+        }
+      ],
+      "optimizer_work": 4548,
+      "score_correlations": [
+        {
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.4287468032588952,
+          "aspect_cosine": 0.7371069889769853
+        }
+      ],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000040",
+              "score": 0.5007271986956622,
+              "claim": "urh-000040-c001"
+            },
+            {
+              "id": "urh-000115",
+              "score": 0.4708770424748542,
+              "claim": "urh-000115-c001"
+            },
+            {
+              "id": "urh-000157",
+              "score": 0.45287885449093856,
+              "claim": "urh-000157-c003"
+            }
+          ]
+        },
+        {
+          "aspect": "a1",
+          "top": [
+            {
+              "id": "urh-000040",
+              "score": 0.41468798513907146,
+              "claim": "urh-000040-c001"
+            },
+            {
+              "id": "urh-000157",
+              "score": 0.40799606752186957,
+              "claim": "urh-000157-c003"
+            },
+            {
+              "id": "urh-000115",
+              "score": 0.3789149003766681,
+              "claim": "urh-000115-c001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "361208",
+      "prepared": true,
+      "aspects": 1,
+      "action": {
+        "scope_id": "361208",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 20,
+        "matrix_ms": 6.13130000000001,
+        "group_ms": 6.914400000000114,
+        "group_size": 2,
+        "option_count": 8,
+        "coverage": 0.573042922739435,
+        "work": 1258,
+        "cold_build_view_options_ms": 11.820999999999913,
+        "cached_build_view_options_ms": 0.15699999999992542,
+        "reachable": 20,
+        "reachability_complete": true,
+        "edit_replacement_ms": 4.016200000000026,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 20,
+        "possible_pairs": 190,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 120,
+        "first_fail_redundancy": 0,
+        "passes": 70,
+        "passes_old_marginal": 0
+      },
+      "group": [
+        "urh-000025",
+        "urh-000079"
+      ],
+      "marginals": [
+        {
+          "id": "urh-000025",
+          "value": 0
+        },
+        {
+          "id": "urh-000079",
+          "value": 0.03832345108664581
+        }
+      ],
+      "optimizer_work": 1258,
+      "score_correlations": [],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000079",
+              "score": 0.573042922739435,
+              "claim": "urh-000079-c002"
+            },
+            {
+              "id": "urh-000025",
+              "score": 0.5347194716527892,
+              "claim": "urh-000025-c002"
+            },
+            {
+              "id": "urh-000011",
+              "score": 0.5286037236411758,
+              "claim": "urh-000011-c001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "361207",
+      "prepared": true,
+      "aspects": 2,
+      "action": {
+        "scope_id": "361207",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 37,
+        "matrix_ms": 11.19340000000011,
+        "group_ms": 26.338700000000017,
+        "group_size": 2,
+        "option_count": 8,
+        "coverage": 0.5449335929370192,
+        "work": 6032,
+        "cold_build_view_options_ms": 31.923999999999978,
+        "cached_build_view_options_ms": 0.21649999999999636,
+        "reachable": 37,
+        "reachability_complete": true,
+        "edit_replacement_ms": 23.826999999999998,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 37,
+        "possible_pairs": 666,
+        "first_fail_anchor": 36,
+        "first_fail_group_floor": 553,
+        "first_fail_redundancy": 0,
+        "passes": 77,
+        "passes_old_marginal": 77
+      },
+      "group": [
+        "urh-000079",
+        "urh-000121"
+      ],
+      "marginals": [
+        {
+          "id": "urh-000079",
+          "value": 0.42258506347750596
+        },
+        {
+          "id": "urh-000121",
+          "value": 0.12234852945951313
+        }
+      ],
+      "optimizer_work": 6032,
+      "score_correlations": [
+        {
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.2956442264895069,
+          "aspect_cosine": 0.3399957427814287
+        }
+      ],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000079",
+              "score": 0.6036929478250086,
+              "claim": "urh-000079-c002"
+            },
+            {
+              "id": "urh-000025",
+              "score": 0.5682621023893607,
+              "claim": "urh-000025-c002"
+            },
+            {
+              "id": "urh-000037",
+              "score": 0.5552687878445861,
+              "claim": "urh-000037-c003"
+            }
+          ]
+        },
+        {
+          "aspect": "a1",
+          "top": [
+            {
+              "id": "urh-000121",
+              "score": 0.4078284315317106,
+              "claim": "urh-000121-c001"
+            },
+            {
+              "id": "urh-000115",
+              "score": 0.4050206972488048,
+              "claim": "urh-000115-c002"
+            },
+            {
+              "id": "urh-000009",
+              "score": 0.3957573524632804,
+              "claim": "urh-000009-c002"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "363622",
+      "prepared": true,
+      "aspects": 1,
+      "action": {
+        "scope_id": "363622",
+        "prepared": true,
+        "action_allowed": false,
+        "action_reason": "unsupported_scope",
+        "scored_people": 155,
+        "admitted_people": 27,
+        "matrix_ms": 4.411100000000033,
+        "group_ms": 9.447100000000091,
+        "group_size": 2,
+        "option_count": 8,
+        "coverage": 0.504949001809606,
+        "work": 2182
+      },
+      "pair_waterfall": {
+        "admitted": 27,
+        "possible_pairs": 351,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 300,
+        "first_fail_redundancy": 0,
+        "passes": 51,
+        "passes_old_marginal": 0
+      },
+      "group": [
+        "urh-000017",
+        "urh-000157"
+      ],
+      "marginals": [
+        {
+          "id": "urh-000017",
+          "value": 0.023522100501725762
+        },
+        {
+          "id": "urh-000157",
+          "value": 0
+        }
+      ],
+      "optimizer_work": 2182,
+      "score_correlations": [],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000017",
+              "score": 0.504949001809606,
+              "claim": "urh-000017-c003"
+            },
+            {
+              "id": "urh-000157",
+              "score": 0.48142690130788024,
+              "claim": "urh-000157-c002"
+            },
+            {
+              "id": "urh-000102",
+              "score": 0.43799874755928536,
+              "claim": "urh-000102-c001"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "363489",
+      "prepared": true,
+      "aspects": 2,
+      "action": {
+        "scope_id": "363489",
+        "prepared": true,
+        "action_allowed": true,
+        "action_reason": null,
+        "scored_people": 155,
+        "admitted_people": 16,
+        "matrix_ms": 9.52150000000006,
+        "group_ms": 3.7230999999999312,
+        "group_size": 0,
+        "option_count": 0,
+        "coverage": 0,
+        "work": 1352,
+        "cold_build_view_options_ms": 16.846599999999853,
+        "cached_build_view_options_ms": 0.3105000000000473,
+        "reachable": 16,
+        "reachability_complete": true,
+        "edit_replacement_ms": 0.5404999999998381,
+        "option_order_stable": true
+      },
+      "pair_waterfall": {
+        "admitted": 16,
+        "possible_pairs": 120,
+        "first_fail_anchor": 28,
+        "first_fail_group_floor": 92,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0
+      },
+      "group": [],
+      "marginals": [],
+      "optimizer_work": 1352,
+      "score_correlations": [
+        {
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.1730515293882222,
+          "aspect_cosine": 0.5618145887186651
+        }
+      ],
+      "dominant_people": [
+        {
+          "aspect": "a0",
+          "top": [
+            {
+              "id": "urh-000131",
+              "score": 0.37937741156632854,
+              "claim": "urh-000131-c002"
+            },
+            {
+              "id": "urh-000123",
+              "score": 0.3709999911830393,
+              "claim": "urh-000123-c002"
+            },
+            {
+              "id": "urh-000138",
+              "score": 0.35625750173573456,
+              "claim": "urh-000138-c002"
+            }
+          ]
+        },
+        {
+          "aspect": "a1",
+          "top": [
+            {
+              "id": "urh-000016",
+              "score": 0.3521855318747759,
+              "claim": "urh-000016-c002"
+            },
+            {
+              "id": "urh-000060",
+              "score": 0.34337133953014237,
+              "claim": "urh-000060-c002"
+            },
+            {
+              "id": "urh-000111",
+              "score": 0.3386045108630312,
+              "claim": "urh-000111-c006"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "method_audit": {
+    "all_passages": 402,
+    "aspects": 61,
+    "source_operations": 0,
+    "profile_operations": 0,
+    "high_aspect_low_core_edges": []
+  },
+  "provider_calls": 0,
+  "holdout_scored": false
+}

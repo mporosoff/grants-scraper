@@ -1,0 +1,5567 @@
+{
+  "D1_microusd": 1055784,
+  "D1_requests": [
+    {
+      "attempt": 1,
+      "body_sha256": "7b2959010265a01bbbeb66d87127125c8fc9e5ffaa0a51419b0594326920e2f4",
+      "charged_microusd": 12,
+      "code_sha": "4884d2b9ca4b6b8bdb6be613d92aef5a8c8e4435",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3ad478e763b04c1b812123dc9b50f135",
+      "key": "1014214092c0d52851060919e6a01b5f1dd752d12b040573907fc33730400a38",
+      "model": "voyage-4-lite",
+      "packet_sha256": "f4302af4481ebf74a085950abbb639f36bc599212d216f304b5dfe09c41d7049",
+      "provider": "voyage",
+      "purpose": "embedding",
+      "reserved_input_tokens": 4409,
+      "reserved_microusd": 89,
+      "reserved_output_tokens": 0,
+      "row_inputs": [
+        "query:ac6bdb671fa8860f6581ebc02e5b946ef518ff3bddcaae557abb6425589bed1d",
+        "query:51e2f8fbbd0da03fa94a962147045e6ecd011048277f525ecefad4fae279cfc8",
+        "query:5fe0b6fd2aaa8fa224c5b70fcc484f657030d0870fc95ce592333e0e049a32f2",
+        "query:f0088c84fbde0c308d9a1ca5a45d24aa3278c40a6528748b839149b181beeace"
+      ],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "total_tokens": 598
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6df1918ba4950df9851814c6e5954c527d3b2eca4f3cf780cdae0f0de3c36943",
+      "charged_microusd": 8014,
+      "code_sha": "4884d2b9ca4b6b8bdb6be613d92aef5a8c8e4435",
+      "dispatch_claim": "irreversible-v1",
+      "id": "6016aa6c3e124aecb60668d23da14a7f",
+      "key": "9318ad98fad19b790e3b35fe2ab14ef43fbd20ddf028f897eef8284cb99ff5a6",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "34eb5f18538c6120f6666b9a381783e404dc48456f6257174faba3b510fd299f",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 10526,
+      "reserved_microusd": 31435,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "failed",
+      "terminal": true,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3672,
+        "output_tokens": 67,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8a87237ccd7bf8cb3709f222b7dbbc76f1fa6dffb7d3ee1650eab1e48cdc2307",
+      "charged_microusd": 8104,
+      "code_sha": "4884d2b9ca4b6b8bdb6be613d92aef5a8c8e4435",
+      "dispatch_claim": "irreversible-v1",
+      "id": "ec3c86974867489abe07b68b91170f80",
+      "key": "3d65a5536f1ee02a993bd56e67f04bcd1237e5021225ba7721e6499d225c6963",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "db48fdfc97f6543923f0c3b5e456c65e16010930833d139c06e0a61e12a24799",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9177,
+      "reserved_microusd": 28063,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "failed",
+      "terminal": true,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3097,
+        "output_tokens": 191,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9de8c9e95652f0d3202034f561a19a87a007e29a9daa4dafebd64cce42d1ec6f",
+      "charged_microusd": 5586,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "17765742812b44aaac37859bd908b828",
+      "key": "84ef63716035e32cec7b94953ccef68449999b08f3e8a1f3c40912817035cf01",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "f0c1391d970329cc56f322247aec7b4b1aa3e5a1dc61dad77dd9bcb7bfe71f67",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 7659,
+      "reserved_microusd": 24268,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2543,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d5d4deab33b12e0abb6231265090e7ad3e10b7619c51746f72dc0dcd0c0cd109",
+      "charged_microusd": 7970,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4abe918a0c8847918588eb0b48f113e1",
+      "key": "a3b484fe4a00d60e618f686ba4aff48e33cdac36e407aee74cf55a42bd483c48",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "f0c1391d970329cc56f322247aec7b4b1aa3e5a1dc61dad77dd9bcb7bfe71f67",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9805,
+      "reserved_microusd": 29633,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3330,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "29e02e3f1c2d3441b0fcadf3625f4db9180e62aa12779619edcfc4f48f3c5463",
+      "charged_microusd": 8066,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "dbbfef5a69844206bc20070be95f5e1d",
+      "key": "3b92cca370958fc1beab8e834bccbbcb69bf085790b6dbb40ec38c2a2de40f04",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "f0c1391d970329cc56f322247aec7b4b1aa3e5a1dc61dad77dd9bcb7bfe71f67",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 9752,
+      "reserved_microusd": 29500,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3393,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e61c4dadd1528b40154369be7c94b422a855d979e641c223d6c0db4c9a386e4b",
+      "charged_microusd": 7620,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "dedf647062f74e7aaf835bf701be5f2f",
+      "key": "ab6e4a7d5860d18f21f35e2d71922e79812900e495aff3cdec12b8ca029b0419",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9279,
+      "reserved_microusd": 28318,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3170,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6a17a1464c28c4b777169f6820f49aadc2f7224a6bec328d5646f2e494554616",
+      "charged_microusd": 7794,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "922f2f389aae453a85b71bf46ca67058",
+      "key": "59e79d57e7fb33ed8a5e2163ac390d3f1fe8fda8659ccd2f9b0686af21f2ad11",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9475,
+      "reserved_microusd": 28808,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3252,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "27e8903778436995eafd02314efd5623a6105955d5652f9316e02f2158b2f7b5",
+      "charged_microusd": 7674,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "18c25b416d5742d2a3ea721aa9b448a8",
+      "key": "7fb7abc07c3d896861778f91caadf546fe310e83ff9a311d3f71a460bd1f3864",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9350,
+      "reserved_microusd": 28495,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3182,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "bd5f88f3a183eea09f529c7fc9f83a3ff502865020dcd63204811d2e871df3fe",
+      "charged_microusd": 6004,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f7b5602cdd3c4bbb883dfa09ce51544b",
+      "key": "0d4159684bec0aec67e192690951cc79953de4df3b7cbd9167f3c04d634f7f9b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 8213,
+      "reserved_microusd": 25653,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2752,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "690d27d02687dbea33759a4832c24ff75b522408ea184cd2e965d13543ddb0a1",
+      "charged_microusd": 7066,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "5cfee87d19a54c0d92d38c9328de6a0c",
+      "key": "0d7b217ec2e907787b55e4b86224a0df30a94081bad28a24222381b99b153f4a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8402,
+      "reserved_microusd": 26125,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2848,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9e893ec72cd6c7322d529f115f32bd4291477fcd974b37b101abd7374d167250",
+      "charged_microusd": 7414,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "1701b19b48ce4f04a6f6cce6c93f3843",
+      "key": "f8adaa002046461d375aac52a1fa26753089aa6576553ccf110cd58c5246ac72",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8956,
+      "reserved_microusd": 27510,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3022,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "524394d5893f913d3188f79c9510048b6e521fa98da5deb1601d4542c2fb6500",
+      "charged_microusd": 5272,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "37d54748e8784532873dedc02c116f0b",
+      "key": "d4acddb492f739ffd208d8744b71f760da79f1a6c16451c7c251b3cd4d4bfe2c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7132,
+      "reserved_microusd": 22950,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2371,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "55a2b51325ac2c68be473e51bc4529f7ea6cd629ca12f13b25a6b00b093df425",
+      "charged_microusd": 7626,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4f1582dad93f49e7bd14181757840d55",
+      "key": "daf4af8d6208b3bf2c95b28a797743863fa6f12121baf1c99be28824a71f59c1",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9306,
+      "reserved_microusd": 28385,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3128,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "124612cf05a552f8d90925ba275c9ececae82b507b8562df8d034b4bfe59f0d0",
+      "charged_microusd": 7442,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "13d393c89b7e4ee0a9dd41388d783cd7",
+      "key": "c2d847f7120e9909a99671ddb272e27844d0c0f261d76ee6876a314ccf0aa2ec",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9103,
+      "reserved_microusd": 27878,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3066,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "73e967f17d3732549617af9f07c230936219ce11725cbf2391014f87b5afa514",
+      "charged_microusd": 6830,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "67c68d9f68594c5abc409914d4ac5e0c",
+      "key": "a923e8676b113cd4d004062d91583d25795e21ebd00ea37db8fbcb31d894e909",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8137,
+      "reserved_microusd": 25463,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2760,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e72a66f6fa946a687255af2513c6d37bb491551c1158fa5cd605e0d20f5df811",
+      "charged_microusd": 5822,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3ad2b4c827f8486eb2a6df8e12b9463f",
+      "key": "32e33a595c26ee1b92adcbd7ebe6da100cad9ff251d68cfe88196de69f7c3377",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7227,
+      "reserved_microusd": 23188,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2441,
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "957d610d8de9be70a89281e79b3f430d3fea32705e60858883f7dc33fe88bdca",
+      "charged_microusd": 7716,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "50347b8fe11148448b48335f080d654f",
+      "key": "a8e88d624c5359c8600d5c35232c2b436242ea4bfa74903be1946720b7626d30",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9716,
+      "reserved_microusd": 29410,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3193,
+        "output_tokens": 133,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "114d6190435388cb8ab7488df89149e06a51a2ee14dd1f754b06ab01f4be2a2e",
+      "charged_microusd": 7030,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8ac722e08be9449ca6fe07bbdb8aa851",
+      "key": "b8d438d365a6ee63fffb6e155486f4b4e3252ec0e55f6f75a407e1db74871154",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9440,
+      "reserved_microusd": 28720,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3055,
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6a501c0edd545e9f13cabbcc3af19964e7231697102eabac2239aed3d46add9a",
+      "charged_microusd": 6966,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b72971a70d604e79a0fbe636c3f2743d",
+      "key": "2f67020ff418d090f0ee4aadc28888fbf4aeb4bd2e8c8f32839b3d345865203c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8249,
+      "reserved_microusd": 25743,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2798,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "c85203812f3424a9a61838d2b7800482dfbb0fdb158f57c921e4600f9210bc20",
+      "charged_microusd": 6142,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d735f460fcb44bd58dc472d976d80a00",
+      "key": "40186db897c5357fb4f0699218e9894268bd50a0695dc36514fced7b9010779c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7761,
+      "reserved_microusd": 24523,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2596,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3a3e8796e4f3c6aa81dcb37fd16b8db7c5109dfd96688d12e5c872b6cacd921e",
+      "charged_microusd": 3956,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "e4f460c4d630472cacb14facf6ebef3c",
+      "key": "99db600e841f99740f002b26699ded420415b7f8a7fbbb732eeccc3c4c90a3b3",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 5357,
+      "reserved_microusd": 18513,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1728,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "4f18555d0da9f8ebc52a4660c6f316fa3dd7ebd3b4cb5722dd8812bcdf96bb93",
+      "charged_microusd": 5998,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "e77d8d007f22461186ea314426adacb1",
+      "key": "b33dcc9f24c4d14e5ec4ad522645631a53c8803fe0a23ab8e41876379ba7779f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 6992,
+      "reserved_microusd": 22600,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2359,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9936cd82b68782c344678e8a25aa3c2266396db5cbe34cf90816f0f4a9b52ee6",
+      "charged_microusd": 6312,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "465b650639e74747a11bca17ea709f4b",
+      "key": "df9efd8c3633e9eddca9f20632d879027602f28b69ed2c6e1abae7857cb38e9a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7367,
+      "reserved_microusd": 23538,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2516,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "03a34246f9ffa77916554cc217d67449437fb4703065747dffcc4547d7f6ab22",
+      "charged_microusd": 6432,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "2b17472a9ea24b9f89f3fb49f9031cde",
+      "key": "96e4ed5465db59459138c4faf1551c53d2a1ab39bed6905e57a4bdb565972cfb",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7460,
+      "reserved_microusd": 23770,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2576,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5f908867eb7913a5378168c446e3c5740a6e5656dcd58d2e8f7551c5d635040b",
+      "charged_microusd": 4318,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "7f70b8836efc42af91b80e1ab6200d10",
+      "key": "a3c16a95a98b6432a424f38d1c9718e73e564d61dbfe30ca5ee0be46d0add9ea",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 5797,
+      "reserved_microusd": 19613,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1914,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e4f835898048fdc9cb111076820d0576dd53e00236bcb9878d633d08d8abdee5",
+      "charged_microusd": 4346,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "0a0393bf91bf4cc5b3244fccd63959c3",
+      "key": "52783a32722a60808e3e40c07971f32f482e5070f979825e3586d261bbbf835d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 5850,
+      "reserved_microusd": 19745,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1923,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f2d24f2ecc9510f72e640e6a4aa6f2c67b965bf60c064b29b130deefd8c7ca21",
+      "charged_microusd": 7324,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "166a2c9453144801be164314fa3271a1",
+      "key": "83a0d1ea35f279b456a3456ce1d0c1232130696d44bf39ff1bde3d1497df3eff",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8687,
+      "reserved_microusd": 26838,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2977,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3b77f291cf6d1a2e8f624ac77fa4e4303372faf361f35c1053283dca881b20ec",
+      "charged_microusd": 6370,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "2fcb3df4830a4155a0edaee4810fe68f",
+      "key": "b52b37a03b0cff3d9ce0a34d64e5d23d9dbc0f2e8e70575235b52b816ef8787f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8021,
+      "reserved_microusd": 25173,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2740,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "22e2f8bfd47627c8448a1e3ee7d29df4fd58785d7725e9c804ed0c30754f33e1",
+      "charged_microusd": 7660,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "815e50c99da04800812457453984e863",
+      "key": "3bbbb1a417316acd2a0755a1c6819503ca596d1ae500c023e74c3ead7d78e9e7",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9709,
+      "reserved_microusd": 29393,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3200,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "08a8943cf5a1c7f342a76b9a9070c8f9d89f75ef10988ba433365b2832c8df1f",
+      "charged_microusd": 7780,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "56a15b623d7540b69a52634d5c68b40e",
+      "key": "73d8ada2286d91a4bb37200958b55bea595cd2a4c04775f115e7119f4e554a52",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9852,
+      "reserved_microusd": 29750,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3260,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8a346bdfaef5b09237dcfcc15cc39ba2009d243f946194328ae46668194f5ade",
+      "charged_microusd": 7280,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "71c080f1afd749cc94369230e366e9c4",
+      "key": "8e3a6d851f5d144d29dda1764a42f792e1fd9b179f51c644481135c2631de7a7",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8809,
+      "reserved_microusd": 27143,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2990,
+        "output_tokens": 130,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7ac88c689201c636e2d5c2235e83b7edfd025571460e4118c8e10b6d31473fcd",
+      "charged_microusd": 6428,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "33fc1bd7904248b69323212e86a788f9",
+      "key": "19a52faa273305b005f65987239b2b7724f39829edb5ab4c3519f36bdf89391c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8244,
+      "reserved_microusd": 25730,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2759,
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "c646b155e59ca27abe1aa298e8a2ecebc4a0c98c7498f831873989f15b939425",
+      "charged_microusd": 9116,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "655a4117862245e084eefd71cb83f680",
+      "key": "bb2d1287dba30805b242cc84256d3ea4f3308e67d06aeb3b7e486f365a4daab0",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 11554,
+      "reserved_microusd": 34005,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4118,
+        "output_tokens": 88,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e21b31c7cf2cd019fb97f2e406ad3a212afaaec875c36c3b8dd4bea943f55708",
+      "charged_microusd": 8482,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "83dc105771324dbcaa51770aa04651bb",
+      "key": "c966e046c8bca21c9d21bb335114349b4c4eb50a4a05e32ec0c949a137ad3ee0",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 11255,
+      "reserved_microusd": 33258,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3991,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "924ac9b4e9a7ffc9e9035f7372d698af868b3fe7d1a1e2f877cd739d251946ae",
+      "charged_microusd": 8632,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "6a4f0aec0cdb4d1786bc357e5cf2daaa",
+      "key": "8c5cc2bd5133d3cb43a00b5677065337a8292dd7a5ae5333ad6d7af0b89101bc",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 11429,
+      "reserved_microusd": 33693,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4066,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "da39d382f348d58a263db683ec6ab9fc629bdc708e815e0710ce6dc4d47a16cd",
+      "charged_microusd": 9172,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d60849ae7a0a456eb7295f58a762b51b",
+      "key": "238b37c601bf44ddbc13e23b1e13f71dcd6cf5de09cbbdced386d7c79689233c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 11585,
+      "reserved_microusd": 34083,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4131,
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "80bd244db6e0cd0264d29fb5c616f7f98597c59ed98c1d19ba5ad12c3e1f4452",
+      "charged_microusd": 9048,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8a8f7a931e5844b790d3de7567f6c004",
+      "key": "567283033b2fb9a8888cf3f6bdae02f712c6ea9b6507732746f6244204c3c5e1",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 11458,
+      "reserved_microusd": 33765,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4079,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5516829e54ec7cbb0ed79f10dbe45b6be348c0e3dfb40521f06d3293d1966d81",
+      "charged_microusd": 8330,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f8ba98fba6864f84a57a307725a36cf2",
+      "key": "2334961571e78ac889a8e176ca1cfadef6039a038e0d9ebe1a967c30d83242ff",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 11015,
+      "reserved_microusd": 32658,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3915,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d08d3c5d7e8dbf78a594b8f0f44ce5e28418d127a327cfda0af6f7564eee9925",
+      "charged_microusd": 6996,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "acbfcab560954c2a955fdc26d1268a14",
+      "key": "ff8a8b0faa04a37ca148fef90a2a274a91991bd669b79ff6113bfcfb8922aef2",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8373,
+      "reserved_microusd": 26053,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2843,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0646712c40b7c9c014b0f5f8918fc323d43ac444f7a309c82dde574c3e241613",
+      "charged_microusd": 7070,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f9db4f5fcc3c4f95bba4c593727c863c",
+      "key": "aa45762bf5cc34bdce25c6758b082d6bede17a4dd33a01d2ac717519d1ed2b1d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8472,
+      "reserved_microusd": 26300,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2870,
+        "output_tokens": 133,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "827e945e728eee884fcaa2b9325fdf4943a93aeb12071598da91b62a57118490",
+      "charged_microusd": 6194,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d6ce409455c149c0b445e499ccbc7064",
+      "key": "714613b187c10855477fbbb53437c77675d8f45f1901e37a9371ddffc054943b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7889,
+      "reserved_microusd": 24843,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2637,
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "aa3cd74d43ac60ada1f6e99e3d9f28789c1de355f53984865d544cab34bab13c",
+      "charged_microusd": 7668,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b938908a52924258832ab2439dec65f6",
+      "key": "3d1eb639b97f69154ba3a60f9a180d26639cdb5e335fc7405c09f81cbccd324a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9876,
+      "reserved_microusd": 29810,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3149,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b667465a3d46be3fd10d2e37d0abc22b0b7961de6f4d5a55943cfb0e492598e4",
+      "charged_microusd": 6762,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "80dc076217fd42f0b857933c48632abb",
+      "key": "6482bd5dc29eeac098be6eccf0819fba2c747d61ace3f822226a2108870e487a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9188,
+      "reserved_microusd": 28090,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2911,
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a7ddac59ae7c5faccd828d4651bd90e83744d56718880a8c49c813ab3fa17ab9",
+      "charged_microusd": 6610,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "88bb3093738843198528dc14026b7800",
+      "key": "ecf4c2eb854a9c9a4f084a078fe8080ff603a8b6b7f9343abe558e727ab02089",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7892,
+      "reserved_microusd": 24850,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2650,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0679deee5244243a1a671f5910debe33b490079a99669cad29c24eb775a4530b",
+      "charged_microusd": 6548,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "699ac785282a42f8bf587e7baf9af416",
+      "key": "e1f1f39d14d9fc8724825f9a1de9bdb568571098710c4d79ae56d5581b645415",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7927,
+      "reserved_microusd": 24938,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2644,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "cb52c83b2ba73b872f003416dd0e177ac867595e2562003337f620b57655ebe3",
+      "charged_microusd": 7628,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d5bdb152a9d6474eadc6d6cd99a447a2",
+      "key": "0917b0b51d13534e3a600601fb3580b58353d2ea7201abd5dd937b754654e3fa",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9908,
+      "reserved_microusd": 29890,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3164,
+        "output_tokens": 130,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "ffdfe6373f08800c6d99e02536f4ed965e8499667da20a723584c1c12cdae8fa",
+      "charged_microusd": 7828,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f35c9ce602834afc8fbe0185eadcaf8d",
+      "key": "7563efe857265f561d66de067ddcd31c0ec25ca8cd686bab0c696ad3c604fa2b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 10281,
+      "reserved_microusd": 30823,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3244,
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e108e3eacb04312fde3ef2e2343632f424bdc5a924a4e0fce3b03d4bd7e3339e",
+      "charged_microusd": 4366,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8786a818ee7242c4be88ce160d33c8aa",
+      "key": "fb1c717ebcd06af30eaf0fdd902db6aa1ccbd2f8e7e59b29471746c3f5c7bd47",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 5898,
+      "reserved_microusd": 19865,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1933,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0cb6eb9b3a499b1c216e0b66135d574e60386554804a8efabf3f9599f1dda303",
+      "charged_microusd": 6528,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "eb6733942ca7498783dae3224a5aedf7",
+      "key": "43da0491ebb77c4d4b513bf3def373df689b03faba3eb0f34475bdadb8520005",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7696,
+      "reserved_microusd": 24360,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2614,
+        "output_tokens": 130,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8685b71bf9b4dad333466f4a1c52944de29b6a0d25ac1d552d4ef72ac1202f4f",
+      "charged_microusd": 6554,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f2ccc7169f1848cfb3182f32a65318e2",
+      "key": "8bcdc10f436ffb22346b22fd8c6193e8c4b673c1c98df75fb9b8a8b70294f819",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7780,
+      "reserved_microusd": 24570,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2637,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3f9dd98e9ee5e891c3c821b5dc2fc531a19855d051e33c64cd44ed694c5a8ac8",
+      "charged_microusd": 6524,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d456919708d04354bd18e09f02aed397",
+      "key": "50a26a94bee3d39797dcd9c5eaca6e98c14c2d8edd557a562d7a141e2006baa8",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7620,
+      "reserved_microusd": 24170,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2617,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d2c1aa546cbf870e6dd64dfbc4d2d8331d0a1a88adf94422c4fdc9837db61cbb",
+      "charged_microusd": 5672,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "0c796ce302dd44ec89826527ea8daa44",
+      "key": "aae8199e3abdb64a09b80e5e58450f3d177969284a6618c2dad5198d361ede07",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 7128,
+      "reserved_microusd": 22940,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2401,
+        "output_tokens": 87,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b94698448c5abc2618cf38388bcae21116e207d74958bb76b14e54738b77f555",
+      "charged_microusd": 7810,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8fe0f5b3538c438082c87e18f306f252",
+      "key": "0df9b1499ec7369cf9b80f4b92b2e5f7ee25c6789bebc533cbca0bc013f2c7b9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 9361,
+      "reserved_microusd": 28523,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3255,
+        "output_tokens": 130,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e93c1f206778e8a807a2203e1adebe7c64546fedd230a6285287240b304b90b9",
+      "charged_microusd": 7806,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "fcdd73b63e8d4880a9abe0b3f692cea2",
+      "key": "2df16f5701d22f49f0d712cc3223c5f1d19a7627ee606d553edf92011cba7952",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 9417,
+      "reserved_microusd": 28663,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3258,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2effb2d29b7826d5f11b9d71a1f13ec4c83af787b8a986af678499819eb3b8af",
+      "charged_microusd": 6550,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "ad206d7498db4c1a96c77ab5d213dc85",
+      "key": "4ed7e0227a22aef9c32724faa6f0cb796555156717e6f109889d28e39a474ac5",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 8273,
+      "reserved_microusd": 25803,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2830,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "4c6f9572a8652a660a072ed559228bf3d6c73b72d8ec456458c899be9d776e20",
+      "charged_microusd": 6094,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "01a94122eccb41809ecbe5195518acc3",
+      "key": "0b192f2c3f61a27b63a1fc2a51b906d6f91a8c680171fca81e88c8352706eae3",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 8608,
+      "reserved_microusd": 26640,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2797,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "be7316f90b491388955e37585fb6b6b9d767161a388516a71956f2cf7c119bfc",
+      "charged_microusd": 8250,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b9f12653c8994a6f8ced9341a2650924",
+      "key": "5f96ac75a90adf0398d9f955b50241cebdc3ca8f7c95ddc18a8a2501a954b380",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 10487,
+      "reserved_microusd": 31338,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3475,
+        "output_tokens": 130,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "45168ccac383797ce6d3239cd496c24bddfe038292ba4bc9c180385df14dd87e",
+      "charged_microusd": 7218,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "fbd2c9deb88e45ce9a23368931eb5f78",
+      "key": "1b63926dd5427139ed5b142f7f4a08d024265232f10090f7389c09c2a5e64a82",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9509,
+      "reserved_microusd": 28893,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3139,
+        "output_tokens": 94,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f76627edd9747d0281a659bf80f5d6883a5bace08787327666384dc61429a4aa",
+      "charged_microusd": 7368,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f87da50e0ed4416298cff0330d416424",
+      "key": "72f9239b4605a3a5bacebea484c05ad16678d87f43212b872548eea80f62270e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8878,
+      "reserved_microusd": 27315,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3044,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "53dcf7176537a569ed03698245bee1aef994fd600e6561f4b2ad5b076640609a",
+      "charged_microusd": 6516,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "28af3ea140ca4a9682ee96b6daca951d",
+      "key": "574b46fc9cfe4ef1f9ccde3576f50bcd709d26ea4f73740e726393ac02b38511",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7726,
+      "reserved_microusd": 24435,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2618,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f1be24e54c872677e28219ef9ced7ccb5f180a1e51953811a07fc2a3d2fd77b0",
+      "charged_microusd": 5706,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "941d66f6036e4fa2b600881f08525d08",
+      "key": "e1d910db8f63abf023b949a3592ef7e20e5eb6f39d91de27c18e76b0edbe209c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7162,
+      "reserved_microusd": 23025,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2408,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "aef8685462f95233caae563d6c0ca491f9d8dd4ce8a39565be7697692a44e492",
+      "charged_microusd": 6816,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "7bdb4ac6276344e88a935ba8e4279584",
+      "key": "5d03b8f4868fd12a52e0b364c3d30269427ca64ace7a194ab093f7a51d3975b6",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8047,
+      "reserved_microusd": 25238,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2738,
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a08ddbccdd63d849dd1402ddd8602bb3f0390e64c3e96d915397fffc7dd5a0ac",
+      "charged_microusd": 5910,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4fb2b9c91286489990e7da431c525ebe",
+      "key": "0b214b9783c2cb7deadba8997abbc14715160fa4fa60b13761af5e92e75cc9f0",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7401,
+      "reserved_microusd": 23623,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2490,
+        "output_tokens": 93,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "142a178d1b7d662ca0c951513eb4960592b2f39066e2ef0c5b92ce8eb0a71b31",
+      "charged_microusd": 7006,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3ae4335729414da886176c5578b7559c",
+      "key": "f9fec5ee3ec213267672cade2e04ed0a8a4b9b541f1b17568caee6c39034ec2c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8632,
+      "reserved_microusd": 26700,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2848,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d512a46a74ddea40fd3551485b072700f19f8e69ceb811d1b02670672ccfca6b",
+      "charged_microusd": 6064,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "989296759ee949048daa90c2e24009f1",
+      "key": "31caf9dcf17b680d65d9649e8134aa0ef32cccd1a6e1f1e0102cfe5151b90f4b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7936,
+      "reserved_microusd": 24960,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2572,
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "ef7f0bd649e953ebbc214c2aeb151a8dc5feb2406cc455fcde068a42c3ba5d32",
+      "charged_microusd": 3702,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "31479b2ac11f4381bba97bc6ba4d7c36",
+      "key": "9eb44e8b4b89ecf735b9c1bdcea99a5bf124d3ac2fce2201c7ff6e6b90e660f0",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 5002,
+      "reserved_microusd": 17625,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1591,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d5ac1f11a59df3b972743fe60d29eb2ce1d3f99548ed1ee167994ce683c35807",
+      "charged_microusd": 6496,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "de2ee5bffca346fc80fe98057c0f8d02",
+      "key": "41fb506c5c535a870c70abfb0d97ad29d31dae15630e21ed5cf8c28e79fc5656",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 8950,
+      "reserved_microusd": 27495,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2998,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a93761175fbc8700288ce81d9998ca149b809ca6522864b82ac6e1d4c453b99a",
+      "charged_microusd": 5316,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f3efbadce79241f7a6b66d96642c9f3f",
+      "key": "7648edcc4714a6337d60d81c26da19e7263ef1277ed40dc41a9447be993a5b49",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 7278,
+      "reserved_microusd": 23315,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2408,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "49335b220d8cdc18e8b8737d21fd48c9de34fb5c511a42c3d4773efc2319b0c3",
+      "charged_microusd": 7462,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "0e882b3966e54595bb66121fb1cce817",
+      "key": "a184cb5f037edd26eac1bdbc1c455421f930938f3bbdc842a084956d59f43789",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9058,
+      "reserved_microusd": 27765,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3086,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "97698e28d9e36068aa9e78394ef2036fa4852bc8b1214909079ac087b4acf36b",
+      "charged_microusd": 6638,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4ad8d6e0405b494289c8294d339ff398",
+      "key": "e81b0b2ec3ab1cfc6fedb84b28f4f8118468bf0ac2d045f90902b92ee1187f2a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 8512,
+      "reserved_microusd": 26400,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2884,
+        "output_tokens": 87,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "71067a68f02c88305204863f5ea7c9ecf42a43ac672dffa28f65486648261da0",
+      "charged_microusd": 8680,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "59f9421c76b4481b94b7cabdc1312703",
+      "key": "360fa95291e0ee7654298fdd6e01bc8331a491ada2d62644aad3c3ad4b04f87c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 10718,
+      "reserved_microusd": 31915,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3715,
+        "output_tokens": 125,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7449970962278490c8e946c43f301bf133de1fb17d61449077e853eb960cdb99",
+      "charged_microusd": 8996,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f7482354981048e08cbc7368f04ff81f",
+      "key": "62c142792161b44fd41ab2c9b559adfc8df09eae3c0288daf8bd980932e6c701",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 11117,
+      "reserved_microusd": 32913,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3868,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3a3ef40311fb2594b24b1858747823c802b01484fff388a1833f48eb6dce09c6",
+      "charged_microusd": 7542,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "ef29def6361a408e846cb4c8f6f05187",
+      "key": "1fd3abe666caf742b267efca2ec1b637c65f9485ae42b1fbc74cabebf34f180a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 9800,
+      "reserved_microusd": 29620,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3336,
+        "output_tokens": 87,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0e37fc781b97f7f63262d7d735eac6cf24018a777e766ef84579967180b55571",
+      "charged_microusd": 4712,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "08faae7eb5e54f2d919fe8bbb23db69f",
+      "key": "c89d90d48be84baa3649c151c99a748bc1026e804211037b4e8398cd1b063e6b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 6468,
+      "reserved_microusd": 21290,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2106,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "bfc1b502644e8a7dbd4c117fc352c79116a70af31cf7a266b1614020c44d13be",
+      "charged_microusd": 7222,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "252dcb3e09684664a8281f8b3a3a5c40",
+      "key": "adffdec381e84e3c874dec31e1354da78773cb33c9f39f2efdb0c4695212bc2f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8774,
+      "reserved_microusd": 27055,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2991,
+        "output_tokens": 124,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f24b2bab2b5d860291ed072fca740daeebbf87aa58e8a9c67a6f27e909d1872d",
+      "charged_microusd": 6914,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "931313b43f4f4f92a9d26bf655feb613",
+      "key": "4da5ecad645b3f507c85c497d43133a85ba003393af7b15f924a1d3d082f5740",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8325,
+      "reserved_microusd": 25933,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2817,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d6b373370854e6930ef7fba7c03ee0d05206d8fcce7a3bdf258a197323c8f6db",
+      "charged_microusd": 6858,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "9484b41ebb0a4453bf9f1c72ced3aa42",
+      "key": "984475b6dbb04773e7170a5f18afa9874e5153e07ae5b92a2ee57bd33470ebfb",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8272,
+      "reserved_microusd": 25800,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2799,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "11623687e1ce3bb6734a629475d81bc1c29108b90000e5c68ad4325c4c8dc931",
+      "charged_microusd": 6478,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d518258df494490eae358f3fdea5597b",
+      "key": "37ffc58bbca4c90e91ce3773412c495a839bf71b60b369d0efc57b3c47126163",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 8188,
+      "reserved_microusd": 25590,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2779,
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9e91da476544abd509f58c130fc9223f313cf90abc10d8ca447fb2aa652f3bd3",
+      "charged_microusd": 7934,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b9503e191de742febd70a11bca111e8f",
+      "key": "44626d3442271dc4646b730e8980d9801194e5f48ac378e87204dcd26e7f2d0e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 9650,
+      "reserved_microusd": 29245,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3342,
+        "output_tokens": 125,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "1ee680bb001949f85122b781888d5af906e95cfd8c955f0816e18c2af291e566",
+      "charged_microusd": 7248,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "aadd762790ac4bd7bfc847e794c4c952",
+      "key": "c8702e2781f140e33027470f398e8cd544cefaad32ba1532db99d7225a54b7fa",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 9203,
+      "reserved_microusd": 28128,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3179,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "164c33d7f56d954f134997e6d0af569499e5b2a89d274fac3beffbfeafa534b7",
+      "charged_microusd": 6910,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b216b09b8e7b48cabb8c6703a0dacefa",
+      "key": "3c53ce478dd985210b33d6916e2ce4c674d8c3b015bcd6c79fd4841303b30044",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8130,
+      "reserved_microusd": 25445,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2770,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "fbeb9d5bdbb4cf0834c3b294595d610cc08ad60817450ba3673235e2edc49f38",
+      "charged_microusd": 5128,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "544f3963ca4e4018ae5789e43bf67426",
+      "key": "8ca13cfa3384b1ed313a136b485e3cc45e98c17e102145d9f74223e3976b5428",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 6842,
+      "reserved_microusd": 22225,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2299,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "27f61f94f4083cf62dbe20a5f3de5b41741b4196b814f75b245d6172a7dc8109",
+      "charged_microusd": 4754,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8353d3778150432fb4513e7ab52e973b",
+      "key": "86d9223f77bde9963b56410c2d5d9d5904aaf4d54cb5b5e794542055a33de240",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 6526,
+      "reserved_microusd": 21435,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2127,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6a616d77e3945169fc8af91fd83378e1815f59db5f9109f4351a96ddb6405306",
+      "charged_microusd": 7442,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3411aca81c3a429f894909bf61dd6263",
+      "key": "93f5d977d7affeb0fab516ae2b9da7130ce706ad22d46455c7f9e8b3cc7fb7ac",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9018,
+      "reserved_microusd": 27665,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3076,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2aee14411686b040da242e18e3681327c1e959bd7d10f195bc53261ea4ba7e7c",
+      "charged_microusd": 7388,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4c43aec4459d492b9564a57420d5ddc2",
+      "key": "b76179f4c6a2b9eb6088ed87c4c7d53830d70593111f9729f620e6d59ec81524",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8917,
+      "reserved_microusd": 27413,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3039,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "52fa796eb1e65e9ff99c645aab03f34d897451f2988b658e9a7d2340624d512f",
+      "charged_microusd": 7484,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f6c785fbfd8d443397641c3de0be8813",
+      "key": "a1eae398ff65e74ddbeec0b0da017b403166258fc62b12632ecda0c683cb77a5",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9030,
+      "reserved_microusd": 27695,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3057,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "519e073bd91811f565950d3688ba93457eff82b9df5f9980470ab68351f35ef8",
+      "charged_microusd": 6832,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "a6130a413224427f87714406cfbeef34",
+      "key": "6000b632e0008ddbda64c849ce00af59e0648df875d8d5fb7083338c1987bc00",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8217,
+      "reserved_microusd": 25663,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2786,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8700c68255ee17540c8f5b3b27d936dd95a39edc72b4ece01103947a68acc15f",
+      "charged_microusd": 5124,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "e7d16d8b7895400e80497cfcb7dc5737",
+      "key": "1eaefd8d5ead6d56f8b6fd8921ca16ab679bfb97797ba686640e39f6d76a7d1f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 6978,
+      "reserved_microusd": 22565,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2312,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e6cae51125cd5c1915d20c9105eac7802eefc77b6a071c3718d0ec7996b4ba03",
+      "charged_microusd": 6088,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "5cb98f42389a4facb36a0ee4b9b0d2b4",
+      "key": "385980ffcd38a60ee9f87cc3f4ccd14b344aeb949fbd8d2dab231ab9dbf8cc0a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 7682,
+      "reserved_microusd": 24325,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2589,
+        "output_tokens": 91,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "38b596bed3675a06dc58984bee468bdf581723ea0631b9e520434d5df8e725cb",
+      "charged_microusd": 8514,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "2e6a163aca5146708e9e3bfdcefc8447",
+      "key": "97d7be6eafe3a93ac74582bac10d81cfd51136d538530d2efa3e3b2721d0f204",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 10336,
+      "reserved_microusd": 30960,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3617,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "ecf85f5f42aaf89a600da22dba88024b18fca243bbfd53851318389ae98b7db2",
+      "charged_microusd": 8008,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f27d24a8aa7042dbab7fc6625d619f3e",
+      "key": "f328fd320536883be9a724c189d7cc5f2434fcba9d9b7f600acea5ad82d9126a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 9683,
+      "reserved_microusd": 29328,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3369,
+        "output_tokens": 127,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "769eeaa2cc634b4b91a8e0d53ad9f5df0bcdf1450d3352d917d0643125446b24",
+      "charged_microusd": 8508,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "64eef47b59df41df8b83505ba12aad1b",
+      "key": "6f4fb43b08fe083ea9e821380c1e594a1ff2462324300ce6088d2b6e0224a7e6",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 10426,
+      "reserved_microusd": 31185,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3624,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6c1e4eff9b7ff651ca9590dbaa24739c6cf287be77197a9f720bd2b07346405a",
+      "charged_microusd": 7590,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "436e60f303364068812a9ef89fca9a72",
+      "key": "6111b051da188a26e7cb44a9f8d329214e985533ad36839eb0010f91d9114610",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9477,
+      "reserved_microusd": 28813,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3150,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0e50a8ddbc54505b46ddf7928e4704914f984aac8d8071c7d0769182af8708e8",
+      "charged_microusd": 7892,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "7c8112012b9a4760ae3f41e8480fe47c",
+      "key": "201b0a48b96458cea43a4bfa5d1f8d58e492921c25aaceda3ed03a37598054d4",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9905,
+      "reserved_microusd": 29883,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3261,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "508400e2e734049e750132a7709c2294a1f566490ba469e609b9bb6eef05d6d4",
+      "charged_microusd": 5652,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "feb0da11ca7e43c9ac6f1dd587009748",
+      "key": "c99f93bc0f7252f165eec2899b37a74998efb9a1500d1f4465b6cd06a330dafa",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7981,
+      "reserved_microusd": 25073,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2566,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2811524faa300b21d9a24b46c14ba9bcb40add41924502dd7e1c669e11d04b6e",
+      "charged_microusd": 6130,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "592a7ddd4cf042d6a5a92b7b4504cc5b",
+      "key": "0f00c59fe1acd224f5c1c512ca2eb9923643555a42f76ee49817619ad0891b49",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 8593,
+      "reserved_microusd": 26603,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2815,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7933a731f56d80cad703c8279293a106389d09a6ff7acee03f86a4ad524c61cf",
+      "charged_microusd": 8150,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8fd9180f92f742eda9d94901dda1f619",
+      "key": "85583de59dbe01cd9236249c549674e0e8fc323795d7fd93b2c1217343077eb1",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 10142,
+      "reserved_microusd": 30475,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3415,
+        "output_tokens": 132,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "db51574bf962671ed5eff77216364a1779c75a7b1827a871679d07d048a5ee5a",
+      "charged_microusd": 8548,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "6d4c0623eca0415a8168355a17f6e620",
+      "key": "665a00ba91b95485b6169d33af2aeebd63c6be403621223847aa4ede35a570e9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 10699,
+      "reserved_microusd": 31868,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3614,
+        "output_tokens": 132,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "10c4d1ed084769256a1358d4e4cace5df860ef1975bb29d19cfed30b217f0642",
+      "charged_microusd": 8202,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "5853e27a7fa949308e5d2f4d172af954",
+      "key": "58b4e52f7c3642478142bece267397385a29149f8c6c5a7f9fad9c138f51ffc6",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 10288,
+      "reserved_microusd": 30840,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3471,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "83550b8060cbac3e47dd5f22066ea7248a18a5d67c7eac2b0ebcba335743b071",
+      "charged_microusd": 6898,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8e8dba86575941948bb74bb692f43f7c",
+      "key": "99620bad419eaa3cd6a6e067b1e30554ffa0f9d93a42921ebbfc330f167e9a38",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9565,
+      "reserved_microusd": 29033,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3184,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "875b7bf3f35fd4a4612c808a85ebd3f0824eff7349ac6637c8cce7bc79cb528f",
+      "charged_microusd": 7378,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "7642607a386e41be9ab1d284db958142",
+      "key": "ddc20cd560d951bd0753fcde06b729c4130573ba37ae215541cbd4ad569dfd87",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 9642,
+      "reserved_microusd": 29225,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3214,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9e8196213964daf3668c80409f9619085133a0bc8baa431b113722c7bee22242",
+      "charged_microusd": 7964,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "88d5e7dafd494dbb87c1f8f9488a1c11",
+      "key": "b37ec5bdf7c97016a38872654ff3babc91bb28ade0b423ca9bdcf3a254b159d6",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 10446,
+      "reserved_microusd": 31235,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3532,
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5fd0c629a025481e55f7be273a66caf477b5bb416658bf3dd41fc75a64fa10df",
+      "charged_microusd": 8422,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b04044ad0d464bc5b5fd4b6aa9a328e6",
+      "key": "78c265e849856a6528dba089272d07bb53ac5baca715bf80e6f4be0b796e0625",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 11004,
+      "reserved_microusd": 32630,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3736,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "81ad2f4334409a6f472996ac930419bd43a3edfc4181848787cee351fc7d0b3c",
+      "charged_microusd": 8380,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "2ddb94e96a384db4855291be2f0411ea",
+      "key": "8a0c0fa3a397300d616252087ff50b628508bcefd9098753d207e176f6c595e8",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 10969,
+      "reserved_microusd": 32543,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3715,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "1b50a0a14647f1306d8b0b6397af81cba51ebd0e5093139ce92d6defaf662e28",
+      "charged_microusd": 9144,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "be6134f4c1d84fa1824b844debe08f8e",
+      "key": "8a7fd0a9e9ac2e56773edc69e7a2a43f267cec5dea3ea1261b8953691bde3592",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-group",
+      "reserved_input_tokens": 11532,
+      "reserved_microusd": 33950,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3932,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "be4e0f7658b65291723cff215267c36305aab2ac7218a696a8fed175309a336a",
+      "charged_microusd": 8692,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "358abb9b358c497d90bb72a307ed8f55",
+      "key": "47c7446b90cbe0f9eb3957f7e2cdc6afe08e18e30951c4373031fec9997414ff",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 10910,
+      "reserved_microusd": 32395,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3686,
+        "output_tokens": 132,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5167dc626e48e2540a7397f10b8e19dd62f8190f30b3c6dd90d3524fc7c42992",
+      "charged_microusd": 7950,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "dd6bac1b7cf74a4e816dc2e72a24c5b9",
+      "key": "d7c48f8a8a837911a23b1de5350cbaa93015cc34b0aee3e78cb14bbe3dc25d65",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 10390,
+      "reserved_microusd": 31095,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3500,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "87e6ea4288e9161a23b28eea4502cc0fbfc24aea6ad07515e1cea88a1ec284bd",
+      "charged_microusd": 6654,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f7987610b85b4a39b2df2bba7626952d",
+      "key": "c2938e3dc4796b8cdac809a24fbc5c47ad92ac5415e5457effdd0883a979dc2c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7707,
+      "reserved_microusd": 24388,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2662,
+        "output_tokens": 133,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8dfc6463e5a6d083131523bc268530c36d71898a593c72fca040aa8c7ff7600a",
+      "charged_microusd": 5812,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "7472d30faa484748ab3ac0be8fb2fba4",
+      "key": "17e9d216b8fd82a28b3b7a5420f72e12db0a9ba321d6b8549b62c2e5b16d4c63",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7218,
+      "reserved_microusd": 23165,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2471,
+        "output_tokens": 87,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2c6d1af4f0d40be5731a52f3934cdfc221903fd58e5935c2c648d88e930a4cbc",
+      "charged_microusd": 6570,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4ac2570413b342a4b0c7360073fd75cc",
+      "key": "4152e7fb0328ae3f2f1c4a31c606f3ce1b124291ca4cdf7c1669992cae9da80d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7932,
+      "reserved_microusd": 24950,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2650,
+        "output_tokens": 127,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "c58f66fc70992e7425c071a3324a0181e7457b8523d5ebafcee977df1f38c5a8",
+      "charged_microusd": 5592,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d83f524c927842bd83b8fde2d6a0c3c4",
+      "key": "619cd006dea423b2e29983cb4f6f182a575051b4f1e5e320505223392eda8de1",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 7104,
+      "reserved_microusd": 22880,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2351,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "43f355bbb44e1f07299f4deeb3113ba7fda80580bfe4e4797633b6aa2552d5ac",
+      "charged_microusd": 6800,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3805a3988a9b42059c5574997a0b384c",
+      "key": "236b8e561d7b3430f98554499b002ab08f5a79c21310d305b52560fb9a75cbb5",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8275,
+      "reserved_microusd": 25808,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2780,
+        "output_tokens": 124,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5726cdbcab2c80d3c8d2c157268f3dced198535ec42d8f88b46770e78b930608",
+      "charged_microusd": 6804,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d6dc8d4c38094fa889402b2c3c4d384e",
+      "key": "779874a9cd56775881b1049adf76f0760003a6118c6857c37e9a3a4605803fb4",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8228,
+      "reserved_microusd": 25690,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2757,
+        "output_tokens": 129,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "60c5637c7269c838ae583d3b8943fd683608168203d0cac071aee0392932a567",
+      "charged_microusd": 5880,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b2ee77cfc0ae459b9e321b3f5a9ef0f3",
+      "key": "e4085e1e49bcedde5e4fcf234b33d3b8d2e77e26c4f610540751226cadec6d4f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 6660,
+      "reserved_microusd": 21770,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2300,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5a60e5e193640d7a8f39c81021facf5e934400c131dd5a7a78182b32ce16242d",
+      "charged_microusd": 4962,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "c91332ce81044d00b2a1e25c3583e29f",
+      "key": "fe1aba068bd86e9251ebea4964bd743e8a2cae0009817688e674b5f774325cfa",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 5924,
+      "reserved_microusd": 19930,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2036,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "948107d4065c02b391cef70e9cb848830d16f7bade7e532f7b51a746cf81fd7f",
+      "charged_microusd": 7934,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "8ea235a32aef4340aecf0bdffe9ea9f3",
+      "key": "d4b0921820c704b36371853a5666a1d7bf124ad1e42430f38677d2ec01dd9900",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9842,
+      "reserved_microusd": 29725,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3297,
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "38b1206e0301ee4ae3ea1834627d432eed65bf2009c030ebd6e74cb0315aa9d2",
+      "charged_microusd": 7044,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "babe066974ed4eb29671642b9dc77e74",
+      "key": "1ca9e425fb0ebf73dec0b23cc98f325f52f779ddd0dfe4c57e5ca4e20bfc9f0c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 9110,
+      "reserved_microusd": 27895,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3047,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "71ca13b9c22f89ae8a8a3a69222e01e77ed53a661ef75cbf3b959c61407ff2fc",
+      "charged_microusd": 4910,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d3036141cba54cf3921999111808dbe3",
+      "key": "c196a7cae8ea40e9ab8362a86ffc7019e95917c9ae29334c099a3c70d631162b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-source",
+      "reserved_input_tokens": 6702,
+      "reserved_microusd": 21875,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2205,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f974bc9330feea4102125e4782ed7cc0d267d7b70926dd3905e911a076561a35",
+      "charged_microusd": 7080,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "6a32dbd3471a4f3ebdf85496569eed08",
+      "key": "3086b76c89832ccd65f0a430e989a8494dbebc01ed709e5295e12095aacf0bcd",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8397,
+      "reserved_microusd": 26113,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2870,
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9f9ff9daaed52010709ac04e0bd96221612c4f9a9d826c1e8d99766b0f8cd75e",
+      "charged_microusd": 7320,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "357f8353547440c88a1f3cf1665d4877",
+      "key": "038e8c098ae9a4a637f940909538c17742a1c5607860a5c41e192862cf462106",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8607,
+      "reserved_microusd": 26638,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2975,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "cc557220151d2afc8148c3ad9f3296702cb5bb96265523745367b1b3cd172ede",
+      "charged_microusd": 5450,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "117e91797acf419d9df662e1f6087c3c",
+      "key": "0bdc1636a54f8b468dda79b6949c1f5dfd5576e814a0e3cdce6f59535d4bf102",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-aspect",
+      "reserved_input_tokens": 7307,
+      "reserved_microusd": 23388,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2460,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "37e900ec8245e3772995a83a848d1e2668a7f4f11533524a88c14a0d8138fec3",
+      "charged_microusd": 7164,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b1c0e47a8e494f6192dffeee6739a5f7",
+      "key": "26bab2bbbbd2560d8afdb2af99271338bfb208d90ef599451e3cac7b82614b6d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8529,
+      "reserved_microusd": 26443,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2952,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "ad5220a89d98153824c59577ca3ef5bf4496200bfd56774768aeca79513b62b8",
+      "charged_microusd": 6820,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "bc625720ab4a441dad808922803f9dc1",
+      "key": "a5c2866241660cfc902c034b81ad7fa1174557a4300f438d2bdeec241390e47c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8085,
+      "reserved_microusd": 25333,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2790,
+        "output_tokens": 124,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b7bc89d77d998f088cdc2526e9920a236a045e75176e86113727adbaf2505694",
+      "charged_microusd": 6792,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "88f5c228343f485989e7f81074de26d3",
+      "key": "eee3e65e86741c3f50bded991fdcf22062b1e7161a8ca1c789cf2877f5821e3d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 8132,
+      "reserved_microusd": 25450,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2766,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5bbf85fc4810776ce8f4621632b95478f2b44053d5ecb16a7755ab940cc27f14",
+      "charged_microusd": 5048,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "ee15a86474c94b61a67434ead2e1107c",
+      "key": "059943721c152116258641d27e925555ca24bf97293020812c5b3b2859d07209",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-call",
+      "reserved_input_tokens": 6740,
+      "reserved_microusd": 21970,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2274,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0e7109993c83b605740e6b0191abb7e1c1ee3e4431ab82c60e1dcad44768932e",
+      "charged_microusd": 4002,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "9335a15a90d743278de91e9c3e458334",
+      "key": "1365ea3a434cf0279736c2812a6875b63c36b1391196ad920abdf4a3efd23daa",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5416,
+      "reserved_microusd": 18660,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1741,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f03c21acdd2c62f2481b29077ddf9f69b66529c3072e57d70f648ee42e4c94f9",
+      "charged_microusd": 3794,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "a9cb202859b14e669cfd3d90957cee43",
+      "key": "f21374f9476b0571252a16cb093bbda5a8caab89cc6fe87abcb12d27c9a2d12f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5148,
+      "reserved_microusd": 17990,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1637,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5704137432d5ecc511e418c14202d16f11fad23cf0250e78d48f444dfe965393",
+      "charged_microusd": 4830,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "ac7d1a1218bc4f37949261d3f5d543f1",
+      "key": "14dee5f635fdaac3cd95a6bf7dada2563c8fb47b9ff4ddfd2ba67e03febdacbc",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6619,
+      "reserved_microusd": 21668,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2165,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "da46c3075bbe55996ef374ef63cdd7c16f65b7393814b3a1518e38135b279ed8",
+      "charged_microusd": 5346,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3fadcc3f71c945e4a0db6961a6b56c48",
+      "key": "b9c9558cd93ee331943e3c568d19d3b9e42f1ed250f950023fd94425b510d934",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 7413,
+      "reserved_microusd": 23653,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2423,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b0fe3741e18b1f254cec4be3b1e399d0e073493acd7c84f3993a72636b71a78d",
+      "charged_microusd": 4650,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "2d8732b2f621480296314dbaaacda1c7",
+      "key": "3b4e2c80cbdaf7a4f6661a9e9bf170930e26d89c9f219d3276bd50c538418110",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6279,
+      "reserved_microusd": 20818,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2075,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "cc9807949eee07f89d87d548773b62b0eed1a7c8fd83f86376d1d644f73dd6f3",
+      "charged_microusd": 3784,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b654b429b70e4f70a91402fdba58d436",
+      "key": "40fda6cc31bf46e6e7e6ce6db04890b2d0d7a386d0e5d311580655e1ee4aeaa8",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5233,
+      "reserved_microusd": 18203,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1632,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2636477bd8ea9c1ccd231cf1c9a7bf312ab7cfa1284d48e0f7bd1f60d205287e",
+      "charged_microusd": 4252,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "e51dda12583f40fc84341946d5b91b38",
+      "key": "2bedbe5e5be94ceb94b9ebf41fdd880933193a9c7dc616bd7d00f0d5723738ae",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6009,
+      "reserved_microusd": 20143,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1876,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b0188f28ebe8a385763947ec5412cc404dbd0add68ae812c15ae2adb64ee33f6",
+      "charged_microusd": 3540,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4cb670d7a64a4c0396b45d8e59dae4f2",
+      "key": "2b7be57cef0bafcb871fb41f2fca363173dbd5ce1e22bd8f4598c55e404dbf7c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 4756,
+      "reserved_microusd": 17010,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1510,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8c5b61175e7d5e05ffc8936c6f37dce5d96ef344c84b4b06bd5a7b5bcfa5f51d",
+      "charged_microusd": 6228,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f8ed445f8e0d472883eb284625c92e44",
+      "key": "4ea3260fee66f156bf69907502197d111c7bc5fc0053f755715aef7e31a9598d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 8768,
+      "reserved_microusd": 27040,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2864,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f6df3ae1c51cf82cb0314c2e2f9daeed1d9dcb75751013d027bd367a9de0c9a3",
+      "charged_microusd": 3940,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "6aef7c56e38f4aed857668ac16e42300",
+      "key": "0de9c3a53f7003ce0ccaa73e79e4c153df605e50b6d587ee1577306d1301b512",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5365,
+      "reserved_microusd": 18533,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1720,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3255aae9c9bf7d583a93b8676abea8eff33e46bf38d54aac1d46dd19199bf6fa",
+      "charged_microusd": 5734,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "efdbf656d78f47da9ede2f92e9b7d3aa",
+      "key": "046b2bbc4c6c7c23093e38d9e1fd2f7e24722c07f3823656549d75058588c477",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 8244,
+      "reserved_microusd": 25730,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2617,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "38d7c1f72391c7fdc905fe19699f50f359838a000075cdd861a96f0da2a9cf67",
+      "charged_microusd": 4788,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "7787a30f7f7743828867877badecfc96",
+      "key": "da4a6f6ad44f8c7261458b623061613ad7c310024f1b9fc99e7274e3fade3c8d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6527,
+      "reserved_microusd": 21438,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2144,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0f138b2622f06edf4c60f8c5cfdcc192cffb359d30d5082aa07b278359c28732",
+      "charged_microusd": 3572,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "5f15a11676bd4be2972e5b675669bbcc",
+      "key": "03932a0f97419721977e081cdbaebe7096d341184c2abbf3b1b970f705365d82",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 4898,
+      "reserved_microusd": 17365,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1526,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9b2180b68a2c02df3e9931a207750000c1c514d6232540f21bf650f1f2e89c17",
+      "charged_microusd": 4482,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "289412721c414417867b688ff6ea44b0",
+      "key": "9d4671a6ff1e398ae8cf48d21df8dab516fba176415aa9d21a50cdadb579529f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6458,
+      "reserved_microusd": 21265,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1981,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "049e73434064fd43928d209e4ba382965fc5da69f5803924bd659e64daa0ce5f",
+      "charged_microusd": 4418,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "34b827edcf9c44319086a31233244abf",
+      "key": "29947153790999b22dda1355357beaffddf437164740207eb8b47557fdeca97c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6324,
+      "reserved_microusd": 20930,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1949,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "078cc210afefe49b2309448cac92f950f5b9d6ef8084b0d4e6a58bb6270fe2e6",
+      "charged_microusd": 3826,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "dfbc818ecdb3470e9fa9383f18e2cbf5",
+      "key": "cdc978f51481a8c8c8e81d0a823eeccd4f33b40756ce0819557190f603152a66",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5263,
+      "reserved_microusd": 18278,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1663,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7f92e2c794572f08a950aad38d8930ada2ffa45f2bfc6e639fcc2cd68bfeb056",
+      "charged_microusd": 5544,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "718f638573b14ccfb28424681fab7b88",
+      "key": "1b8a04e0b5f65b366d0b15ad832edc9347c5909b7b877adcf8d8160abf0e8361",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 7791,
+      "reserved_microusd": 24598,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2512,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5348a6c0f50be24d810236f7a0111a35b6adca0fcc553cd9b7e2ade6d7057b55",
+      "charged_microusd": 4568,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "210a2069d7784d5183c50340bb2ebb1c",
+      "key": "7a17952843651e4c41996636e950ef3c5587e06ea6b6a0653165fe826a4ca72f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6048,
+      "reserved_microusd": 20240,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2034,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "1e8500b898fbd7ca5af9efc5adec4b49daefe2bf5f7b8b95b85fd76f01395512",
+      "charged_microusd": 5104,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "46d092c1572c43ba9fcd948969284e0f",
+      "key": "b572e1dab763a51c21a01bce5d2f57d90bb2ab4ef3f4cf989479fd99b0e38a24",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 6831,
+      "reserved_microusd": 22198,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2302,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "731f273bccd14d16a11737c7493f848957b46a6dd56f8a4b11232da396f8d0d1",
+      "charged_microusd": 3804,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "cb3bcd9d5a794dc0a88f84e8cb8a9f2c",
+      "key": "91ccbe9c6a7b3a55b46c413c6360c8ebef0d40a23be5e4c27b96227510d023af",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5157,
+      "reserved_microusd": 18013,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1632,
+        "output_tokens": 54,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "de6735bef57ae28220ea58f27bccdf56065449d32f7e5c3a33d01a407d23e930",
+      "charged_microusd": 5730,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "7b23c078fa9344459ab75facbc42c85a",
+      "key": "12ef24385af18dcdbeab3c147c6ade57e8921939929ba1d0d29f183692a8bf06",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 8187,
+      "reserved_microusd": 25588,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2615,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a4b4c19fd65fdd49c47ff5ae3a872bdd29acb1fca9c694eea237543d1201e1cf",
+      "charged_microusd": 5194,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3028f1bda0a8467aaf0d43033f3ae532",
+      "key": "2e81712b496d5f5ca117b1872388e9845e151b7fb0b6b6016b6af362ceaa146d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 7243,
+      "reserved_microusd": 23228,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2347,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3ec9e9f36ab1ec1ad865e0d405e764da916dfe28d2b0885c8c717ffa361aed52",
+      "charged_microusd": 3750,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "e1ec9af247654f5696fc3f9650e00da5",
+      "key": "25792b10a814f5914d549c121ba60841a1e7c849355bcecddf52fefd93cde0fe",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5040,
+      "reserved_microusd": 17720,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1615,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "bca0c1b9eec7f8572b3ccbcb095904b141f5498522c49c12f8f306158274c97b",
+      "charged_microusd": 4046,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "ba7ef95c0d7d45ceaa12ff4bd7124a9d",
+      "key": "af6d15ad0d0a5430bbd11b456a0972da2af7c6489ea63db6ff89329ba5aab7e3",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 5559,
+      "reserved_microusd": 19018,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1763,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8a3ddaff9b68ee88741d519ec0e3aa4fa1af3c5af7dd66cbb2513bbce9ca977c",
+      "charged_microusd": 3658,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "9973b9480753401086fc61f07b727be7",
+      "key": "e6bff13a831c9025c4e37781d8a95555e507a597e4e93b134f894d685dcf3bbe",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 4997,
+      "reserved_microusd": 17613,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1559,
+        "output_tokens": 54,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d22a78d5fd2bcf18b6366e15466a5d25eb226e1183d60ae636229098edd59e36",
+      "charged_microusd": 5154,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "2f25b2ddcfc840ac95f4a01207a4a73c",
+      "key": "1968d6a3cdd41fc977c1214c8a87b0a4e8ab5969c0a6b3fc6b10670f079ad5fa",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-control",
+      "reserved_input_tokens": 7069,
+      "reserved_microusd": 22793,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2327,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "782a23bec0534d088c66821cee02c752b30f60661485d968883722797b2cfb83",
+      "charged_microusd": 6332,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "f5af1a23f31847809d0f689e1c00b0b9",
+      "key": "f469758f5a44d0fd6e25224808e215b00894b08e3148e6d32010abf4384c0e99",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-comparison",
+      "reserved_input_tokens": 8549,
+      "reserved_microusd": 26493,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2921,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "1203cba93188948ac19f65f4662ac5a4b2196bfc6e6a74b1a47e01b924b9d1fb",
+      "charged_microusd": 5942,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "634f6c1133464de69e8282a8e41840cf",
+      "key": "a9907631f61dafcdc50b7939946a565acd95bb8c80751cdb1bc79b611951b50d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-comparison",
+      "reserved_input_tokens": 8043,
+      "reserved_microusd": 25228,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2731,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d2495964b079bed7ce69d4042478e06fb1c6f36749a581f8f187d81c18d633d0",
+      "charged_microusd": 7544,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "554c8bbd6c0a483c9ad4f8230758ffdf",
+      "key": "79ca17123aa822ceda8b86ba1175684b24474ca61e8d7d4b4a68b119cb888a8b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-comparison",
+      "reserved_input_tokens": 10497,
+      "reserved_microusd": 31363,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3537,
+        "output_tokens": 47,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "fd5ce6d8e99821b74deba8d522a2501137420d2aa25db07f85424ac1cedfad29",
+      "charged_microusd": 7544,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "3f308f40058e4a35afd93d74766b2f3a",
+      "key": "7e3c89d3dd621d033c0a10514ca000405d031f37861ea483ea7c6a8e3452e312",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-swap",
+      "reserved_input_tokens": 10497,
+      "reserved_microusd": 31363,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3537,
+        "output_tokens": 47,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0f482aadfb3adbe4c81848219fcc194e7dc0a16fba063a7b8796013a7c1c0d1d",
+      "charged_microusd": 6322,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "16748f75e7c24bc98b2e151ebc0b1a9b",
+      "key": "dd06ca818a19128c92e672ad47a50af6bc686949fb37666561cb388178772014",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-swap",
+      "reserved_input_tokens": 8549,
+      "reserved_microusd": 26493,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2921,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "ccbc5e671d6fbdde8a9702ea034cff55040a58435acf6c2b4536f70948760bc3",
+      "charged_microusd": 5942,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "6d15c602f8064cd6b14502211642e116",
+      "key": "2d7b507867d6eac8da1febeb9153e0f1742650411ed3cda6467b8dd4ecdd8fc2",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-swap",
+      "reserved_input_tokens": 8043,
+      "reserved_microusd": 25228,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2731,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "69cc7410a10665d481cf2cbdb3bcd9c9741d1f991a29fdcaace37ba44ec0f926",
+      "charged_microusd": 5500,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "b53be4e7bdc04a6d85d35176b7269969",
+      "key": "6cc77b815d37f2c3869bdc9a3002628fc96e030c7a740d593d9a77725e7b12f9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-explanation",
+      "reserved_input_tokens": 7567,
+      "reserved_microusd": 24038,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2500,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "31d15e647e5bc543cd386c99f935b65087c4b4a466f7d2051d10aaff3f799b3d",
+      "charged_microusd": 6492,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "d57ff0c8811e42e5a980b255350484ba",
+      "key": "1d7b9e470f79b7c89adeda1c8c6df914c078f0d24e616abffa632e84cd0a8a72",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-explanation",
+      "reserved_input_tokens": 8982,
+      "reserved_microusd": 27575,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2996,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "13fce5f1db570fc3b31ffa2a9f9cc0d89383e1f0051e24adaa73cc1c30b7bfe4",
+      "charged_microusd": 6274,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "4fe438357af942f9b37bf4d616b22d27",
+      "key": "5eae2a3c6774f3cca331fe708e5c11d0057913c5fae84f26a6e76c9dba96fc7c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-explanation",
+      "reserved_input_tokens": 8622,
+      "reserved_microusd": 26675,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2887,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "666c686148dc008aa920b044568e3bd39f851b300a16a61724905b87a8401a8a",
+      "charged_microusd": 5874,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "6cf504e7c3454df281d5d38bb2e71fb9",
+      "key": "ceac558ba0abd8069d194d117a84b571eaf0a9903ec37ef8a0a61fbe0333cf21",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-explanation",
+      "reserved_input_tokens": 8106,
+      "reserved_microusd": 25385,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2687,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6bf2aab7b32003e0526323c2d55b693762ea9ebc887aede487015f2fcd8e57e3",
+      "charged_microusd": 7058,
+      "code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "dispatch_claim": "irreversible-v1",
+      "id": "87013fb9b7324e179027140b95a738be",
+      "key": "a080f7063359e80cdc2d3c556f66972e493804c32dc191db3039f5e6171137f0",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+      "provider": "anthropic",
+      "purpose": "d1-explanation",
+      "reserved_input_tokens": 9969,
+      "reserved_microusd": 30043,
+      "reserved_output_tokens": 512,
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3279,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    }
+  ],
+  "authorization": "on-demand-team-offline-v2-20260909",
+  "cloud_checkpoint_sha256": "614ebbfe51d596536d76736a31761fb97ad736abec86fcd194e282393dfb1eac",
+  "cloud_ledger_sha256": "23ea6c322f9d555212dec88cebaf0a1f5dd438be27a502c17b5f7acca87f537d",
+  "cloud_owner_run": 34497056168,
+  "cumulative_microusd": 2138302,
+  "exact_cache_hit_events_total": 5,
+  "exact_cache_hits_D1": 3,
+  "historical_other_task_credit_usd": 0,
+  "historical_other_task_requests": 543,
+  "historical_other_task_spend_usd": 11.971342,
+  "local_mirror_read_only": true,
+  "no_replay": true,
+  "outstanding_reservations_microusd": 0,
+  "overall_ceiling_usd": 10,
+  "price_urls": [
+    "https://docs.voyageai.com/docs/pricing",
+    "https://platform.claude.com/docs/en/about-claude/pricing"
+  ],
+  "prices_checked": "2026-09-10",
+  "prior_experiment_microusd": 1082518,
+  "remaining_microusd": 7861698,
+  "requests_total": 310,
+  "reused_paid_experiment_assets": "489 exact compatible vector rows including all 398 researcher document rows; prior cost remains in cumulative total",
+  "stage2_cumulative_ceiling_usd": 6,
+  "stage2_remaining_microusd": 3861698
+}

@@ -1,0 +1,220 @@
+{
+  "cases": [
+    {
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "aspect_count": 1,
+      "missing_model_items": 1,
+      "pair_waterfall": {
+        "admitted": 28,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 378,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0,
+        "possible_pairs": 378
+      },
+      "prepared": true,
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "source_model_grade": "missing",
+      "valid_model_items": 9
+    },
+    {
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "aspect_count": 0,
+      "missing_model_items": 0,
+      "pair_waterfall": null,
+      "prepared": false,
+      "scope_id": "243973",
+      "source_model_grade": "broad-unselected",
+      "valid_model_items": 1
+    },
+    {
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "aspect_count": 0,
+      "missing_model_items": 0,
+      "pair_waterfall": null,
+      "prepared": false,
+      "scope_id": "362868",
+      "source_model_grade": "coherent",
+      "valid_model_items": 1
+    },
+    {
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "aspect_count": 1,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 27,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 300,
+        "first_fail_redundancy": 0,
+        "passes": 51,
+        "passes_old_marginal": 0,
+        "possible_pairs": 351
+      },
+      "prepared": true,
+      "scope_id": "363622",
+      "source_model_grade": "coherent",
+      "valid_model_items": 25
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 1,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 20,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 120,
+        "first_fail_redundancy": 0,
+        "passes": 70,
+        "passes_old_marginal": 0,
+        "possible_pairs": 190
+      },
+      "prepared": true,
+      "scope_id": "361208",
+      "source_model_grade": "coherent",
+      "valid_model_items": 23
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 2,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 39,
+        "first_fail_anchor": 45,
+        "first_fail_group_floor": 696,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0,
+        "possible_pairs": 741
+      },
+      "prepared": true,
+      "scope_id": "344592:ab-0009",
+      "source_model_grade": "coherent",
+      "valid_model_items": 12
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 1,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 20,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 136,
+        "first_fail_redundancy": 0,
+        "passes": 54,
+        "passes_old_marginal": 0,
+        "possible_pairs": 190
+      },
+      "prepared": true,
+      "scope_id": "362218",
+      "source_model_grade": "coherent",
+      "valid_model_items": 21
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 2,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 64,
+        "first_fail_anchor": 10,
+        "first_fail_group_floor": 2006,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0,
+        "possible_pairs": 2016
+      },
+      "prepared": true,
+      "scope_id": "359696",
+      "source_model_grade": "coherent",
+      "valid_model_items": 11
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 2,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 37,
+        "first_fail_anchor": 36,
+        "first_fail_group_floor": 553,
+        "first_fail_redundancy": 0,
+        "passes": 77,
+        "passes_old_marginal": 77,
+        "possible_pairs": 666
+      },
+      "prepared": true,
+      "scope_id": "361207",
+      "source_model_grade": "coherent",
+      "valid_model_items": 28
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 2,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 0,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 0,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0,
+        "possible_pairs": 0
+      },
+      "prepared": true,
+      "scope_id": "363292",
+      "source_model_grade": "coherent",
+      "valid_model_items": 6
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 2,
+      "missing_model_items": 3,
+      "pair_waterfall": {
+        "admitted": 40,
+        "first_fail_anchor": 0,
+        "first_fail_group_floor": 740,
+        "first_fail_redundancy": 0,
+        "passes": 40,
+        "passes_old_marginal": 0,
+        "possible_pairs": 780
+      },
+      "prepared": true,
+      "scope_id": "357002",
+      "source_model_grade": "coherent",
+      "valid_model_items": 18
+    },
+    {
+      "action_allowed": true,
+      "action_reason": null,
+      "aspect_count": 2,
+      "missing_model_items": 0,
+      "pair_waterfall": {
+        "admitted": 16,
+        "first_fail_anchor": 28,
+        "first_fail_group_floor": 92,
+        "first_fail_redundancy": 0,
+        "passes": 0,
+        "passes_old_marginal": 0,
+        "possible_pairs": 120
+      },
+      "prepared": true,
+      "scope_id": "363489",
+      "source_model_grade": "coherent",
+      "valid_model_items": 8
+    }
+  ],
+  "holdout_scored": false,
+  "private_trace_path": "outputs/team-recommender-d1/diagnostic-traces-after.json",
+  "separate_boundaries": true,
+  "trace_sha256": "58de96bda186cf71d84318e20c0a33029f6f805ebaf564b3282c56aabafba65d"
+}

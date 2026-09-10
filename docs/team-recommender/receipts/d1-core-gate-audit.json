@@ -1,0 +1,1082 @@
+{
+  "minimum_aspect_cosine": 0.4,
+  "maximum_core_exclusive": 0.3,
+  "rows": [
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000015",
+      "claim": "urh-000015-c003",
+      "cosine": 0.4923120817232278,
+      "core": 0.29493723728414073,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "programmable peptide and protein materials",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000046",
+      "claim": "urh-000046-c007",
+      "cosine": 0.4737956139535574,
+      "core": 0.2763806867497596,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "biosensors",
+      "shared": []
+    },
+    {
+      "scope": "363292",
+      "aspect": "a1",
+      "person": "urh-000138",
+      "claim": "urh-000138-c001",
+      "cosine": 0.46375648992173074,
+      "core": 0.2869467945486186,
+      "source": "sensors, data fusion, AI, and systems improving machine and operator situational awareness",
+      "profile": "machine-learning surrogate models for fusion",
+      "shared": [
+        "fusion",
+        "machine"
+      ]
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000116",
+      "claim": "urh-000116-c001",
+      "cosine": 0.46143893166237826,
+      "core": 0.2895624590019555,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "near-infrared tissue spectroscopy",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000109",
+      "claim": "urh-000109-c001",
+      "cosine": 0.4540767523626948,
+      "core": 0.2652300112379648,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "materials-process optimization",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000092",
+      "claim": "urh-000092-c005",
+      "cosine": 0.45267119618695667,
+      "core": 0.2900115448866567,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "catalyst structure-property relationships",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000089",
+      "claim": "urh-000089-c001",
+      "cosine": 0.4468080550997294,
+      "core": 0.2926965032836063,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "cutaneous barrier toxicology models",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000140",
+      "claim": "urh-000140-c003",
+      "cosine": 0.43938500851098683,
+      "core": 0.24255338291299383,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "ultrafast laser material modification",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000014",
+      "claim": "urh-000014-c009",
+      "cosine": 0.43923787277481635,
+      "core": 0.2864877713381874,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "nanocatalyst structure-function",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000015",
+      "claim": "urh-000015-c003",
+      "cosine": 0.4363364327086661,
+      "core": 0.29649369700130057,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "programmable peptide and protein materials",
+      "shared": []
+    },
+    {
+      "scope": "362196",
+      "aspect": "a1",
+      "person": "urh-000111",
+      "claim": "urh-000111-c005",
+      "cosine": 0.4353326201977019,
+      "core": 0.29816444394332736,
+      "source": "target engagement and pharmacodynamic biomarker development",
+      "profile": "multiscale molecules-to-systems modeling",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000079",
+      "claim": "urh-000079-c001",
+      "cosine": 0.43529057311507025,
+      "core": 0.27420593061261406,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "organ-of-Corti micromechanics",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000111",
+      "claim": "urh-000111-c009",
+      "cosine": 0.43514299625510655,
+      "core": 0.21574742545723097,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "solvent-based extraction",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000097",
+      "claim": "urh-000097-c007",
+      "cosine": 0.4338986777244746,
+      "core": 0.28518186346956986,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "open-source electrochemistry hardware",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000046",
+      "claim": "urh-000046-c006",
+      "cosine": 0.43310522232279863,
+      "core": 0.2739703114676584,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "bioelectrochemistry",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000125",
+      "claim": "urh-000125-c009",
+      "cosine": 0.43223633984782245,
+      "core": 0.28284829781561693,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "battery interface modeling",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000046",
+      "claim": "urh-000046-c007",
+      "cosine": 0.43172681871212587,
+      "core": 0.2835366684933638,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "biosensors",
+      "shared": []
+    },
+    {
+      "scope": "334971",
+      "aspect": "a1",
+      "person": "urh-000111",
+      "claim": "urh-000111-c004",
+      "cosine": 0.43062012225943747,
+      "core": 0.2690302153820607,
+      "source": "development of new protective equipment and engineering control technology to reduce work-related injuries and fatalities",
+      "profile": "process systems engineering",
+      "shared": [
+        "engineering"
+      ]
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000142",
+      "claim": "urh-000142-c002",
+      "cosine": 0.4279722668143552,
+      "core": 0.2831169103716263,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "nanoscale heterogeneous catalyst structure",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000097",
+      "claim": "urh-000097-c002",
+      "cosine": 0.42585996019765193,
+      "core": 0.2875996800248945,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "functional surfaces and coatings",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000092",
+      "claim": "urh-000092-c002",
+      "cosine": 0.42424796340184057,
+      "core": 0.2801072520923332,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "language-model representations of catalysts",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000119",
+      "claim": "urh-000119-c001",
+      "cosine": 0.4239675684045555,
+      "core": 0.2836605433681408,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "visual working-memory modeling",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000125",
+      "claim": "urh-000125-c007",
+      "cosine": 0.4230158359632949,
+      "core": 0.25494563132135295,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "heterogeneous catalysis",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000032",
+      "claim": "urh-000032-c008",
+      "cosine": 0.4227265725391126,
+      "core": 0.25250670590742164,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "wearable bioelectronic interfaces",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000014",
+      "claim": "urh-000014-c007",
+      "cosine": 0.4224937719063331,
+      "core": 0.28738000815528825,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "electrode microenvironments",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000005",
+      "claim": "urh-000005-c001",
+      "cosine": 0.4223627506437527,
+      "core": 0.26869372751402143,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "chemically selective surface modification",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000092",
+      "claim": "urh-000092-c001",
+      "cosine": 0.42230139637932407,
+      "core": 0.2858976175514503,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "heterogeneous catalyst design for carbon conversion",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000146",
+      "claim": "urh-000146-c002",
+      "cosine": 0.4221610779276757,
+      "core": 0.2820396507520375,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "solid-state battery interfaces",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000142",
+      "claim": "urh-000142-c001",
+      "cosine": 0.42124035114440816,
+      "core": 0.2646979726711146,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "energy-storage material characterization",
+      "shared": []
+    },
+    {
+      "scope": "344592:ab-0009",
+      "aspect": "a1",
+      "person": "urh-000057",
+      "claim": "urh-000057-c001",
+      "cosine": 0.42098302710879026,
+      "core": 0.28648887569641757,
+      "source": "dynamic control of light for remote sensing, information routing, and energy transmission",
+      "profile": "ultra-wideband transceivers",
+      "shared": []
+    },
+    {
+      "scope": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "aspect": "a1",
+      "person": "urh-000125",
+      "claim": "urh-000125-c003",
+      "cosine": 0.4208399273471002,
+      "core": 0.29418051379873844,
+      "source": "research at the interface between mathematical and life sciences",
+      "profile": "electrocatalytic interface modeling",
+      "shared": [
+        "interface"
+      ]
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000032",
+      "claim": "urh-000032-c003",
+      "cosine": 0.4197232759416426,
+      "core": 0.2995728010286051,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "organic and flexible electronics",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000046",
+      "claim": "urh-000046-c001",
+      "cosine": 0.41929755180317096,
+      "core": 0.28365383116027576,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "synthetic-biology environmental remediation",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000111",
+      "claim": "urh-000111-c008",
+      "cosine": 0.4192574988354473,
+      "core": 0.21918372268777228,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "sustainable process design",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000103",
+      "claim": "urh-000103-c006",
+      "cosine": 0.41735063717235077,
+      "core": 0.2826246353470729,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "nanostructured polymer materials",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000014",
+      "claim": "urh-000014-c007",
+      "cosine": 0.4173463875901504,
+      "core": 0.29644327210934884,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "electrode microenvironments",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000007",
+      "claim": "urh-000007-c003",
+      "cosine": 0.41732707138013037,
+      "core": 0.2866901364153075,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "antibiotic resistance",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000007",
+      "claim": "urh-000007-c003",
+      "cosine": 0.4170601057529349,
+      "core": 0.28074074755760364,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "antibiotic resistance",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000005",
+      "claim": "urh-000005-c001",
+      "cosine": 0.41653939668654444,
+      "core": 0.2984398775924198,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "chemically selective surface modification",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000158",
+      "claim": "urh-000158-c007",
+      "cosine": 0.41645589289523444,
+      "core": 0.19099588018572725,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "teaching labs",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000046",
+      "claim": "urh-000046-c003",
+      "cosine": 0.41534641839149794,
+      "core": 0.2693273277082853,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "microbial metabolic engineering",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000103",
+      "claim": "urh-000103-c005",
+      "cosine": 0.4148446660324539,
+      "core": 0.2648320319950873,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "associative and functional polymers",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000007",
+      "claim": "urh-000007-c005",
+      "cosine": 0.4139335021153805,
+      "core": 0.25434762782989395,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "engineered microbial communities",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000032",
+      "claim": "urh-000032-c003",
+      "cosine": 0.4138914771172559,
+      "core": 0.26025638786164734,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "organic and flexible electronics",
+      "shared": []
+    },
+    {
+      "scope": "344592:ab-0009",
+      "aspect": "a1",
+      "person": "urh-000038",
+      "claim": "urh-000038-c001",
+      "cosine": 0.41347528031656244,
+      "core": 0.1710937848939272,
+      "source": "dynamic control of light for remote sensing, information routing, and energy transmission",
+      "profile": "integrated-circuit power-delivery networks",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000007",
+      "claim": "urh-000007-c002",
+      "cosine": 0.4134168042672357,
+      "core": 0.2689464613522703,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "metabolic control of antibiotic susceptibility",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000130",
+      "claim": "urh-000130-c002",
+      "cosine": 0.4131437521525024,
+      "core": 0.24801186244670445,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "customized intraocular-lens selection",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000150",
+      "claim": "urh-000150-c007",
+      "cosine": 0.41189627389732003,
+      "core": 0.28194166959092154,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "polymer solution modeling",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000011",
+      "claim": "urh-000011-c001",
+      "cosine": 0.41189246644084954,
+      "core": 0.2767316835788409,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "peripheral auditory neurobiology",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000125",
+      "claim": "urh-000125-c003",
+      "cosine": 0.41182871611910143,
+      "core": 0.2611525622962931,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "electrocatalytic interface modeling",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000146",
+      "claim": "urh-000146-c007",
+      "cosine": 0.411640349962462,
+      "core": 0.2906290776867188,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "battery interfacial engineering",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000034",
+      "claim": "urh-000034-c003",
+      "cosine": 0.41157870059687723,
+      "core": 0.28946281883360964,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "adaptive-optics retinal imaging",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000025",
+      "claim": "urh-000025-c001",
+      "cosine": 0.4115282455040537,
+      "core": 0.2954414724370956,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "targeted cochlear and vestibular drug delivery",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000036",
+      "claim": "urh-000036-c001",
+      "cosine": 0.4114765387449425,
+      "core": 0.296896182233714,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "therapeutic ultrasound bioeffects",
+      "shared": []
+    },
+    {
+      "scope": "362196",
+      "aspect": "a1",
+      "person": "urh-000070",
+      "claim": "urh-000070-c003",
+      "cosine": 0.41124938024346713,
+      "core": 0.27425277957194305,
+      "source": "target engagement and pharmacodynamic biomarker development",
+      "profile": "fluid-structure interaction in biological systems",
+      "shared": []
+    },
+    {
+      "scope": "363292",
+      "aspect": "a1",
+      "person": "urh-000151",
+      "claim": "urh-000151-c003",
+      "cosine": 0.41119133138862124,
+      "core": 0.26676710241475776,
+      "source": "sensors, data fusion, AI, and systems improving machine and operator situational awareness",
+      "profile": "perceptually aware computer architecture",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000016",
+      "claim": "urh-000016-c001",
+      "cosine": 0.4110643517341601,
+      "core": 0.23626155643733404,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "silicon-photonic ring-resonator biosensors",
+      "shared": []
+    },
+    {
+      "scope": "362196",
+      "aspect": "a1",
+      "person": "urh-000138",
+      "claim": "urh-000138-c001",
+      "cosine": 0.41098956624836214,
+      "core": 0.2974711718613176,
+      "source": "target engagement and pharmacodynamic biomarker development",
+      "profile": "machine-learning surrogate models for fusion",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000135",
+      "claim": "urh-000135-c001",
+      "cosine": 0.4104651403253751,
+      "core": 0.29610858496813436,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "antimicrobial photodynamic therapy",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000127",
+      "claim": "urh-000127-c001",
+      "cosine": 0.4103142871820035,
+      "core": 0.2544683025383331,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "program transformation for heterogeneous architectures",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000065",
+      "claim": "urh-000065-c002",
+      "cosine": 0.40996245256464225,
+      "core": 0.2830310067445775,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "optical coherence modeling for microscopy",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000004",
+      "claim": "urh-000004-c001",
+      "cosine": 0.40970629660443836,
+      "core": 0.27450085229038146,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "electrochemical interface microenvironments",
+      "shared": []
+    },
+    {
+      "scope": "363292",
+      "aspect": "a1",
+      "person": "urh-000016",
+      "claim": "urh-000016-c002",
+      "cosine": 0.40955740894112735,
+      "core": 0.27813512276637253,
+      "source": "sensors, data fusion, AI, and systems improving machine and operator situational awareness",
+      "profile": "sensing in microphysiological systems",
+      "shared": [
+        "systems"
+      ]
+    },
+    {
+      "scope": "362196",
+      "aspect": "a1",
+      "person": "urh-000131",
+      "claim": "urh-000131-c002",
+      "cosine": 0.40938131803550226,
+      "core": 0.2981650792749562,
+      "source": "target engagement and pharmacodynamic biomarker development",
+      "profile": "inertial-confinement-fusion target physics",
+      "shared": [
+        "target"
+      ]
+    },
+    {
+      "scope": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "aspect": "a1",
+      "person": "urh-000004",
+      "claim": "urh-000004-c001",
+      "cosine": 0.408806796392457,
+      "core": 0.28238315759218396,
+      "source": "research at the interface between mathematical and life sciences",
+      "profile": "electrochemical interface microenvironments",
+      "shared": [
+        "interface"
+      ]
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000025",
+      "claim": "urh-000025-c002",
+      "cosine": 0.4083316224255659,
+      "core": 0.28051119817523024,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "inner-ear pharmacokinetics",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000007",
+      "claim": "urh-000007-c001",
+      "cosine": 0.4081654702333417,
+      "core": 0.2701814827242609,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "synthetic-biology interventions against resistance",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000158",
+      "claim": "urh-000158-c007",
+      "cosine": 0.40713557526068334,
+      "core": 0.27760781467413087,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "teaching labs",
+      "shared": []
+    },
+    {
+      "scope": "363292",
+      "aspect": "a1",
+      "person": "urh-000123",
+      "claim": "urh-000123-c002",
+      "cosine": 0.4068614622782172,
+      "core": 0.2912866291712698,
+      "source": "sensors, data fusion, AI, and systems improving machine and operator situational awareness",
+      "profile": "3D imaging diagnostics for inertial fusion",
+      "shared": [
+        "fusion"
+      ]
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000150",
+      "claim": "urh-000150-c003",
+      "cosine": 0.4068061885460668,
+      "core": 0.2560854789045318,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "quantum-chemical solvation modeling",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000026",
+      "claim": "urh-000026-c001",
+      "cosine": 0.40670541000961213,
+      "core": 0.2965092189070984,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "computer vision for medical imaging",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000092",
+      "claim": "urh-000092-c006",
+      "cosine": 0.405863312220763,
+      "core": 0.27993986865129133,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "reactive separations",
+      "shared": []
+    },
+    {
+      "scope": "362196",
+      "aspect": "a1",
+      "person": "urh-000035",
+      "claim": "urh-000035-c003",
+      "cosine": 0.4058537223199564,
+      "core": 0.26850386392578535,
+      "source": "target engagement and pharmacodynamic biomarker development",
+      "profile": "time-resolved spectroscopy of molecular chromophores",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000046",
+      "claim": "urh-000046-c001",
+      "cosine": 0.4057360431829978,
+      "core": 0.2789386798929187,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "synthetic-biology environmental remediation",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000111",
+      "claim": "urh-000111-c006",
+      "cosine": 0.40559673527256057,
+      "core": 0.2549150467210994,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "physics and data-driven hybrid modeling",
+      "shared": []
+    },
+    {
+      "scope": "363292",
+      "aspect": "a1",
+      "person": "urh-000152",
+      "claim": "urh-000152-c001",
+      "cosine": 0.405294960551353,
+      "core": 0.28249584176471665,
+      "source": "sensors, data fusion, AI, and systems improving machine and operator situational awareness",
+      "profile": "multimodal user-state sensing",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000019",
+      "claim": "urh-000019-c002",
+      "cosine": 0.4049100631714593,
+      "core": 0.2727829092072314,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "amyloid peptide self-assembly",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000046",
+      "claim": "urh-000046-c006",
+      "cosine": 0.40466508062296075,
+      "core": 0.26212631556667004,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "bioelectrochemistry",
+      "shared": []
+    },
+    {
+      "scope": "363281",
+      "aspect": "a1",
+      "person": "urh-000015",
+      "claim": "urh-000015-c003",
+      "cosine": 0.40456153688623253,
+      "core": 0.2684938123948367,
+      "source": "genomic, transcriptomic, and proteomic data",
+      "profile": "programmable peptide and protein materials",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000014",
+      "claim": "urh-000014-c002",
+      "cosine": 0.404491526155457,
+      "core": 0.27136779388679455,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "electrode microenvironment control",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000035",
+      "claim": "urh-000035-c002",
+      "cosine": 0.4040085206571809,
+      "core": 0.2839311727097026,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "excited-state molecular dynamics",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000078",
+      "claim": "urh-000078-c001",
+      "cosine": 0.40389533810953393,
+      "core": 0.2812688603119442,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "inertial-fusion plasma diagnostics",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000049",
+      "claim": "urh-000049-c002",
+      "cosine": 0.40260692398069875,
+      "core": 0.27095745294306517,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "laboratory astrophysics at extreme pressure",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000036",
+      "claim": "urh-000036-c003",
+      "cosine": 0.40242257825456296,
+      "core": 0.28324947246516446,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "physical acoustics of biological systems",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000092",
+      "claim": "urh-000092-c006",
+      "cosine": 0.40231124582012306,
+      "core": 0.2436674167494568,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "reactive separations",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000041",
+      "claim": "urh-000041-c001",
+      "cosine": 0.402207380265599,
+      "core": 0.2649987258043262,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "multimodal behavioral-signal analysis",
+      "shared": [
+        "behavioral"
+      ]
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000125",
+      "claim": "urh-000125-c003",
+      "cosine": 0.4018814440156898,
+      "core": 0.2795743165195495,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "electrocatalytic interface modeling",
+      "shared": []
+    },
+    {
+      "scope": "362855",
+      "aspect": "a1",
+      "person": "urh-000018",
+      "claim": "urh-000018-c001",
+      "cosine": 0.40167139055369533,
+      "core": 0.2700577126308893,
+      "source": "Investigator-Initiated Research Award (IIRA) applications may involve translational and clinical research including studies in preclinical models, research with human data and/or anatomical substances, and research with human subjects, as well as correlative studies associated with a clinical trial(s); however, this award mechanism does not support clinical trials.",
+      "profile": "point-of-care diagnostic ultrasound",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000007",
+      "claim": "urh-000007-c006",
+      "cosine": 0.40161472209762233,
+      "core": 0.24485794783670037,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "microbial systems biology",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000066",
+      "claim": "urh-000066-c002",
+      "cosine": 0.4015198496505794,
+      "core": 0.2872116861467968,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "microfluidic barrier microphysiology",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000097",
+      "claim": "urh-000097-c001",
+      "cosine": 0.40144062224579186,
+      "core": 0.26792461968060416,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "electrochemical interface characterization",
+      "shared": []
+    },
+    {
+      "scope": "344592:ab-0009",
+      "aspect": "a1",
+      "person": "urh-000014",
+      "claim": "urh-000014-c002",
+      "cosine": 0.40109426043336105,
+      "core": 0.24097913910131624,
+      "source": "dynamic control of light for remote sensing, information routing, and energy transmission",
+      "profile": "electrode microenvironment control",
+      "shared": [
+        "control"
+      ]
+    },
+    {
+      "scope": "344592:ab-0009",
+      "aspect": "a1",
+      "person": "urh-000124",
+      "claim": "urh-000124-c001",
+      "cosine": 0.40095467721289846,
+      "core": 0.21831991408424087,
+      "source": "dynamic control of light for remote sensing, information routing, and energy transmission",
+      "profile": "3D integrated-circuit power delivery",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000153",
+      "claim": "urh-000153-c003",
+      "cosine": 0.4007482526114435,
+      "core": 0.27960716573001554,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "fusion fuel-cycle materials",
+      "shared": []
+    },
+    {
+      "scope": "362520",
+      "aspect": "a1",
+      "person": "urh-000111",
+      "claim": "urh-000111-c009",
+      "cosine": 0.4005752954061455,
+      "core": 0.2368679558128154,
+      "source": "Distinctive Features: • Applied research is defined as work that refines concepts and ideas into potential solutions with a view toward evaluating technical feasibility of promising new knowledge products, pharmacologic agents, behavioral and rehabilitation interventions, diagnostic and therapeutic techniques, clinical guidance and/or emerging approaches and technologies.• Preliminary data is required.• Military relevance: the ORP expects that research findings benefit Service Members, their families, Veterans and the general public.• Clinical research is not allowed.",
+      "profile": "solvent-based extraction",
+      "shared": []
+    },
+    {
+      "scope": "361207",
+      "aspect": "a1",
+      "person": "urh-000097",
+      "claim": "urh-000097-c006",
+      "cosine": 0.40008343723594514,
+      "core": 0.2785547733912786,
+      "source": "developing and disseminating techniques for improved tissue preservation and processing",
+      "profile": "electrochemical surface modification",
+      "shared": []
+    }
+  ],
+  "provider_calls": 0
+}

@@ -1,0 +1,209 @@
+{
+  "final_reserved": 20,
+  "items": [
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "apparently-strong",
+      "item": 1,
+      "key": "22a09c804cd016028e343fe7a32189cc70bee8c3dd610a67afa19b757d395d12",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "359696",
+      "source_aspects_changed": true
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "apparently-strong",
+      "item": 2,
+      "key": "10e691edbccc3b3b1f9e9ffac805a7728a68b1e0b41118311fba8725b3817a9d",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "357002",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "apparently-strong",
+      "item": 3,
+      "key": "0e64445e2fabbf341d85a694102cbc89c8124be5862d6a3daf87cc24f9cf9d34",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "344592:ab-0009",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "method-transfer",
+      "item": 4,
+      "key": "71e34643c7116476bbf93d78205d422358bfbe186e8138202b7f021f3364fdfe",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "345241:tdac-baa-004",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "method-transfer",
+      "item": 5,
+      "key": "95b03dfb570b09942f8db0b590cdc7d6017b170d899b445c038a05c76b17b942",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "363489",
+      "source_aspects_changed": true
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "borderline",
+      "item": 6,
+      "key": "7a5f9b2ac151648fade9e57e762be85962359dc775b03eeb9005d0988a5b81cd",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "45810",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "source-hash representative/control",
+      "item": 7,
+      "key": "417e23648ec4a323b64483b24bbc0f5804e50c18ffb680bed4d7a40700851f83",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "361208",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "source-hash representative/control",
+      "item": 8,
+      "key": "7472bdbc5a4d8f057e0d7478fd99d3586e962bd5b4d6213263816c173ef9ec56",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "112354",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "source-hash representative/control",
+      "item": 9,
+      "key": "b664343988614775be428965c075c255f632429c83bbcd57a3acad6963a17d4b",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "362196",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "source-hash representative/control",
+      "item": 10,
+      "key": "3be6472ebfff22f75464102bb0be9aa700a3d0c71db1ea653f1a5cb026d895cc",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "363292",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "source-hash representative/control",
+      "item": 11,
+      "key": "baaf6cfddd84e452e286d47c89912f06db155514c3875490b0b16d23ce69ac55",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "363141",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "source-hash representative/control",
+      "item": 12,
+      "key": "22068b691bf5c6d7cde0f3a297a87651612c2994d27eeb9989b686880adfbc9a",
+      "legacy_task_type": "individual",
+      "same_researcher_records": true,
+      "scope_id": "356978",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 13,
+      "key": "7d7d66751154d79f3b10ff903ed9e43500671c049dfdfbdcc93fcf548e814eee",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 14,
+      "key": "527ab3cb3ea06e7083fcc4a845ca680e4c56766017b10cc67eea8245b1e73686",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 15,
+      "key": "358a692109202461607a5d61702c14a2b000aeef6e822d472b6c1e079384fcdf",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 16,
+      "key": "d63583862d250bc646767e86eeb342345c159bddae5a47a2d265522f05f5459b",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 17,
+      "key": "bbf1c093ded16fc3ba18b89d85d486ad24ca34255fa0cbe7d650a12e41fa4405",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 18,
+      "key": "b4554f8afcf4bee8dfbd260593d040038c6629db079b86118759c9240c737674",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 19,
+      "key": "b0557911317a87d31bb239eb709c766c26a7c06ee0be99701b239c6edb8077a1",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    },
+    {
+      "applies": "historical frozen item remains reviewable; not exact D1 judge validation because question/profile projection changed",
+      "category": "complete-team or alternative comparison",
+      "item": 20,
+      "key": "641173cf6d232f05ac2173a127c280945ef2edf91c69ec756dc29a11f8647d45",
+      "legacy_task_type": "comparison",
+      "same_researcher_records": true,
+      "scope_id": "361207",
+      "source_aspects_changed": false
+    }
+  ],
+  "new_requested": 0,
+  "packet_sha256": "13ff8b3e715c12ea910f5f02c1701b145861d7226f7129953c8172abd794aabd",
+  "requested": 20,
+  "returned": 0
+}

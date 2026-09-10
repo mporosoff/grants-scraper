@@ -1,0 +1,53 @@
+{
+  "captured_at": "2026-09-10T15:41:03.262496+00:00",
+  "cold_static_fetches": 3,
+  "control_count": 30,
+  "control_perturbations": 12,
+  "control_unprepared_origins": 18,
+  "engine_tests": {
+    "focused_node_with_real_d1": 53,
+    "focused_python_before_helper220": 58,
+    "frozen_files": 36,
+    "frozen_functions": 9,
+    "helper220_after_correction": 40,
+    "independent_small_pool_cases": 32,
+    "real_DOM_cases": 4
+  },
+  "full_E2E": "not run; Stage3 only",
+  "implementation": "coverage-v2.3 / ingredients-v2.3",
+  "lazy_scripts": 2,
+  "metered_provider_calls_for_fixture_tests": 0,
+  "paid_runtime_requests": 0,
+  "paths": [
+    "ordinary search loads no ingredients",
+    "cold build",
+    "warm build",
+    "option switch",
+    "remove",
+    "add",
+    "four full slots",
+    "cache miss",
+    "corrupt retry",
+    "expired selection",
+    "mixed generation",
+    "late response/closed panel"
+  ],
+  "physical_browser": "not measured; Node VM/custom DOM observations",
+  "real_ingredient_generation": "233ef3b5cc7d977324106f92f9bfeb3efa55e75a6fddd23f4c01ba7a710d5840",
+  "source_registry_vectors_mutation_tests": "passed: missing/retired/revised claims, sibling ownership, mixed input roles, changed source span, private surplus, corrupt bytes",
+  "tested_python_dependencies": {
+    "tools/team_recommender_budget.py": "3c204c1f15cc6012450283a57b85604058de421b3085a3ed29952332e9e3cc1e",
+    "tools/team_recommender_executor.py": "673584029e30a3448be48717b062bc00b3b9e2e605e0a5d4f1a7c12852fa9107",
+    "tools/team_recommender_judge_d1.py": "dce1af83ca2bf52c6efa7aa1184940a5bed9503ac8959ef46fee4c4b50472de8",
+    "tools/team_recommender_reference.py": "5edea42ad8d1b2ae4d6eb054205245b66eee97da4ac83d55b86fb85a6a854681",
+    "tools/team_recommender_source.py": "02bd4afb583f46dfa0404ef185e008a24369a2b2987bb991f13aab93985f632e"
+  },
+  "tested_runtime_dependencies": {
+    "assets/opportunity-team-panel.js": "38bd591cd461f87786a180be2e589e7f7fe5b6d9e4d80589e736be7e8cd4ca99",
+    "assets/opportunity-team.js": "62e8983f0693536afddb1cc896f79621f59ca88de2b0e18fa0462f686de33dfd",
+    "assets/search-retrieval.js": "e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+    "assets/submission-schedule.js": "2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+    "assets/team-ingredients.js": "6b782bc6f443993cab19ec55ba33381a2ec5a233c4948bc33efb4c10153eb5de",
+    "assets/team-recommender.js": "4db90706d6ce347877dd77dd99d453b8cb7bca9d30a2b6730d828603fde6c1ce"
+  }
+}

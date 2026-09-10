@@ -1,0 +1,33 @@
+{
+  "claims_after": "e91568362019ecbb68026ddc86d1136259424529ee93f27368296a46b64abe89",
+  "claims_before": "e91568362019ecbb68026ddc86d1136259424529ee93f27368296a46b64abe89",
+  "complete_researcher_records_after": "08054e3393fa4e3606876ccc0cbebd31d1c7c34c7822d261cb6f4b882b4badc3",
+  "complete_researcher_records_before": "08054e3393fa4e3606876ccc0cbebd31d1c7c34c7822d261cb6f4b882b4badc3",
+  "historical_files_verified": {
+    "data/researcher_directory.js": true,
+    "data/researcher_registry_manifest.json": true,
+    "docs/team-recommender/human-review/development-packet-c2.md": true,
+    "docs/team-recommender/manifests/development.json": true,
+    "docs/team-recommender/manifests/holdout.json": true,
+    "docs/team-recommender/manifests/source-group-amendment-c2-f92fc5995a0a1ac0.json": true,
+    "docs/team-recommender/prepared/c2/bundle.json": true,
+    "docs/team-recommender/prepared/c2/directory.json": true,
+    "docs/team-recommender/prepared/c2/vectors.f32": true,
+    "docs/team-recommender/reports/stage-2-final-report.md": true
+  },
+  "names_eligibility_claims_evidence_URLs_unchanged": true,
+  "new_researcher_vectors": 0,
+  "original_directory_sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+  "original_snapshot_start_hashes": {
+    "complete_registry_fields": "08054e3393fa4e3606876ccc0cbebd31d1c7c34c7822d261cb6f4b882b4badc3",
+    "people_projection": "6a6b8d0b80bb17699559245581c219360b01c8d3a3855d0800791a5652152712"
+  },
+  "profile_edits": 0,
+  "profile_scrapes": 0,
+  "projection_correction": "Hydrated rows retain existing claim labels/types/research summaries; judge sees uniformly selected unchanged relevant passages, their claim labels/types and full unchanged research summaries. No inferred capability or new researcher field.",
+  "publications_ORCID_fetches": 0,
+  "recertifications": 0,
+  "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+  "reused_exact_researcher_vectors": 398,
+  "revised_directory_sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+}

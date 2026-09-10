@@ -1,0 +1,242 @@
+{
+  "additional_admitted_scope_person_occurrences": 38,
+  "changed_primary_groups": 0,
+  "changes": [],
+  "groups": 5,
+  "holdout_scored": false,
+  "known_judgments_changed_admission": {},
+  "limitations": "Previously selected model labels only. New/changed groups and newly admitted unjudged people have no semantic labels; this is not a qualified alternative or a new paid campaign. Lowering a gate does not establish applicable technique/context.",
+  "prepared": 35,
+  "primary_comparison_changed": false,
+  "provider_calls": 0,
+  "question": "Single post-judgment contributor-core sensitivity .30 -> .25; same aspect .4 and group anchor .4, same frozen profiles and vectors",
+  "retained": false,
+  "rows": [
+    {
+      "admitted": 64,
+      "group": [],
+      "options": 0,
+      "scope_id": "359696"
+    },
+    {
+      "admitted": 49,
+      "group": [],
+      "options": 0,
+      "scope_id": "362178"
+    },
+    {
+      "admitted": 3,
+      "group": [],
+      "options": 0,
+      "scope_id": "363281"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "363141"
+    },
+    {
+      "admitted": 2,
+      "group": [],
+      "options": 0,
+      "scope_id": "334971"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "362315"
+    },
+    {
+      "admitted": 39,
+      "group": [],
+      "options": 0,
+      "scope_id": "344592:ab-0009"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "360644"
+    },
+    {
+      "admitted": 16,
+      "group": [],
+      "options": 0,
+      "scope_id": "345241:tdac-baa-004"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "363055"
+    },
+    {
+      "admitted": 2,
+      "group": [],
+      "options": 0,
+      "scope_id": "356978"
+    },
+    {
+      "admitted": 28,
+      "group": [],
+      "options": 0,
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f"
+    },
+    {
+      "admitted": 23,
+      "group": [],
+      "options": 0,
+      "scope_id": "362196"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "112354"
+    },
+    {
+      "admitted": 40,
+      "group": [],
+      "options": 0,
+      "scope_id": "362254"
+    },
+    {
+      "admitted": 9,
+      "group": [],
+      "options": 0,
+      "scope_id": "45810"
+    },
+    {
+      "admitted": 20,
+      "group": [
+        "urh-000011",
+        "urh-000025"
+      ],
+      "options": 8,
+      "scope_id": "362218"
+    },
+    {
+      "admitted": 5,
+      "group": [],
+      "options": 0,
+      "scope_id": "363292"
+    },
+    {
+      "admitted": 29,
+      "group": [],
+      "options": 0,
+      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "362207"
+    },
+    {
+      "admitted": 52,
+      "group": [],
+      "options": 0,
+      "scope_id": "362855"
+    },
+    {
+      "admitted": 40,
+      "group": [
+        "urh-000040",
+        "urh-000115"
+      ],
+      "options": 8,
+      "scope_id": "357002"
+    },
+    {
+      "admitted": 20,
+      "group": [
+        "urh-000025",
+        "urh-000079"
+      ],
+      "options": 8,
+      "scope_id": "361208"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "363069"
+    },
+    {
+      "admitted": 38,
+      "group": [
+        "urh-000079",
+        "urh-000121"
+      ],
+      "options": 8,
+      "scope_id": "361207"
+    },
+    {
+      "admitted": 8,
+      "group": [],
+      "options": 0,
+      "scope_id": "351947"
+    },
+    {
+      "admitted": 27,
+      "group": [
+        "urh-000017",
+        "urh-000157"
+      ],
+      "options": 8,
+      "scope_id": "363622"
+    },
+    {
+      "admitted": 2,
+      "group": [],
+      "options": 0,
+      "scope_id": "363544"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "359091"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "362244"
+    },
+    {
+      "admitted": 50,
+      "group": [],
+      "options": 0,
+      "scope_id": "362520"
+    },
+    {
+      "admitted": 7,
+      "group": [],
+      "options": 0,
+      "scope_id": "361526:f-18"
+    },
+    {
+      "admitted": 0,
+      "group": [],
+      "options": 0,
+      "scope_id": "358938"
+    },
+    {
+      "admitted": 16,
+      "group": [],
+      "options": 0,
+      "scope_id": "363489"
+    },
+    {
+      "admitted": 41,
+      "group": [],
+      "options": 0,
+      "scope_id": "361380"
+    }
+  ],
+  "scientific_reservations": 90
+}

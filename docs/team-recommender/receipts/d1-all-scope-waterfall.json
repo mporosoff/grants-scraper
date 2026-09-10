@@ -1,0 +1,331 @@
+{
+  "scientific": 90,
+  "unprepared": 55,
+  "prepared": 35,
+  "counts": {
+    "absolute-floor-impossible-for-any-size": 17,
+    "fewer-than-two-admitted": 12,
+    "no-anchor": 1,
+    "group-found": 5
+  },
+  "rows": [
+    {
+      "scope_id": "359696",
+      "status": "no-group",
+      "admitted": 64,
+      "any_size_coverage_upper_bound": 0.4207904382278578,
+      "maximum_found": 0,
+      "work": 18672,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "362178",
+      "status": "no-group",
+      "admitted": 49,
+      "any_size_coverage_upper_bound": 0.4065138161654994,
+      "maximum_found": 0,
+      "work": 6738,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "363281",
+      "status": "no-group",
+      "admitted": 2,
+      "any_size_coverage_upper_bound": 0.31528854051248006,
+      "maximum_found": 0,
+      "work": 1,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "363141",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "334971",
+      "status": "no-group",
+      "admitted": 1,
+      "any_size_coverage_upper_bound": 0.09379770132554684,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "362315",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "344592:ab-0009",
+      "status": "no-group",
+      "admitted": 39,
+      "any_size_coverage_upper_bound": 0.4214712308677225,
+      "maximum_found": 0,
+      "work": 6608,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "360644",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "345241:tdac-baa-004",
+      "status": "no-group",
+      "admitted": 16,
+      "any_size_coverage_upper_bound": 0.39605529393021827,
+      "maximum_found": 0,
+      "work": 834,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "363055",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "356978",
+      "status": "no-group",
+      "admitted": 2,
+      "any_size_coverage_upper_bound": 0.28150876602487257,
+      "maximum_found": 0,
+      "work": 1,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "status": "no-group",
+      "admitted": 28,
+      "any_size_coverage_upper_bound": 0.4079244565958948,
+      "maximum_found": 0,
+      "work": 2370,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "362196",
+      "status": "no-group",
+      "admitted": 18,
+      "any_size_coverage_upper_bound": 0.102004748737836,
+      "maximum_found": 0,
+      "work": 153,
+      "first_numerical_boundary": "no-anchor"
+    },
+    {
+      "scope_id": "112354",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "362254",
+      "status": "no-group",
+      "admitted": 40,
+      "any_size_coverage_upper_bound": 0.2690251470951266,
+      "maximum_found": 0,
+      "work": 4596,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "45810",
+      "status": "no-group",
+      "admitted": 9,
+      "any_size_coverage_upper_bound": 0.29136396763638006,
+      "maximum_found": 0,
+      "work": 246,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "362218",
+      "status": "group",
+      "admitted": 20,
+      "any_size_coverage_upper_bound": 0.5415000266227635,
+      "maximum_found": 0.5415000266227635,
+      "work": 1258,
+      "first_numerical_boundary": "group-found"
+    },
+    {
+      "scope_id": "363292",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "status": "no-group",
+      "admitted": 28,
+      "any_size_coverage_upper_bound": 0.3997566058384041,
+      "maximum_found": 0,
+      "work": 3634,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "362207",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "362855",
+      "status": "no-group",
+      "admitted": 35,
+      "any_size_coverage_upper_bound": 0.34138533529933685,
+      "maximum_found": 0,
+      "work": 4390,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "357002",
+      "status": "group",
+      "admitted": 40,
+      "any_size_coverage_upper_bound": 0.47491543462868496,
+      "maximum_found": 0.47491543462868496,
+      "work": 4548,
+      "first_numerical_boundary": "group-found"
+    },
+    {
+      "scope_id": "361208",
+      "status": "group",
+      "admitted": 20,
+      "any_size_coverage_upper_bound": 0.573042922739435,
+      "maximum_found": 0.573042922739435,
+      "work": 1258,
+      "first_numerical_boundary": "group-found"
+    },
+    {
+      "scope_id": "363069",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "361207",
+      "status": "group",
+      "admitted": 37,
+      "any_size_coverage_upper_bound": 0.5449335929370192,
+      "maximum_found": 0.5449335929370192,
+      "work": 6032,
+      "first_numerical_boundary": "group-found"
+    },
+    {
+      "scope_id": "351947",
+      "status": "no-group",
+      "admitted": 8,
+      "any_size_coverage_upper_bound": 0.2725570496525831,
+      "maximum_found": 0,
+      "work": 154,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "363622",
+      "status": "group",
+      "admitted": 27,
+      "any_size_coverage_upper_bound": 0.504949001809606,
+      "maximum_found": 0.504949001809606,
+      "work": 2182,
+      "first_numerical_boundary": "group-found"
+    },
+    {
+      "scope_id": "363544",
+      "status": "no-group",
+      "admitted": 2,
+      "any_size_coverage_upper_bound": 0.257413381682589,
+      "maximum_found": 0,
+      "work": 1,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "359091",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "362244",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "362520",
+      "status": "no-group",
+      "admitted": 43,
+      "any_size_coverage_upper_bound": 0.4030649120485184,
+      "maximum_found": 0,
+      "work": 3859,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "361526:f-18",
+      "status": "no-group",
+      "admitted": 7,
+      "any_size_coverage_upper_bound": 0.3798886951251714,
+      "maximum_found": 0,
+      "work": 91,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "358938",
+      "status": "no-group",
+      "admitted": 0,
+      "any_size_coverage_upper_bound": 0,
+      "maximum_found": 0,
+      "work": 0,
+      "first_numerical_boundary": "fewer-than-two-admitted"
+    },
+    {
+      "scope_id": "363489",
+      "status": "no-group",
+      "admitted": 16,
+      "any_size_coverage_upper_bound": 0.37121984765886273,
+      "maximum_found": 0,
+      "work": 1352,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    },
+    {
+      "scope_id": "361380",
+      "status": "no-group",
+      "admitted": 41,
+      "any_size_coverage_upper_bound": 0.3790577050897464,
+      "maximum_found": 0,
+      "work": 8579,
+      "first_numerical_boundary": "absolute-floor-impossible-for-any-size"
+    }
+  ],
+  "judgment_availability": "separate actual model receipt",
+  "independent_feasibility": "unknown",
+  "provider_calls": 0
+}
