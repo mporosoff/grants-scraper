@@ -163,12 +163,33 @@ def judge_contract(request, settings):
         raise ValueError("separate_explanation_packet_required")
     prompt = (CONFIG / "judge-prompt.md").read_text(encoding="utf-8")
     schema = json.loads((CONFIG / "judge-output-schema.json").read_bytes())
+    # Bind response IDs before generation; retain the independent response checks.
+    props = schema["properties"]["verdicts"]["items"]["properties"]
+    props["item_id"]["enum"] = sorted(aliases)
+    props["evidence_ref"]["enum"] = sorted(set().union(*refs_by_item.values()))
+    labels = set()
+    for kind in aliases.values():
+        labels.update({"A", "B", "tie", "unresolved"} if kind == "comparison" else (
+            {"faithful", "unsupported", "insufficient-information"} if kind == "explanation_audit" else SCIENCE_LABELS))
+    props["verdict"]["enum"] = sorted(labels)
+    schema["properties"]["verdicts"].update(minItems=len(items), maxItems=len(items))
     data = {"source_evidence": request["source_evidence"], "items": items}
     body = request_body({"provider": "anthropic", "model": settings["judge_model"]}, {"max_output_tokens": 512}, prompt, data, schema)
+    # Sonnet 5 otherwise spends the compact answer allowance on adaptive thinking.
+    body["thinking"] = {"type": "disabled"}
     bound = len(encoded(body)) + 1024
     if bound > 12000:
         raise Deferred("complete_evidence_exceeds_packet_bound")
     return body, bound, aliases, refs_by_item, schema
+
+
+def legacy_judge_key(request, settings):
+    """Recognize paid pre-fix requests, never turn them into another attempt."""
+    body = request_body({"provider": "anthropic", "model": settings["judge_model"]}, {"max_output_tokens": 512},
+        (CONFIG / "judge-prompt.md").read_text(encoding="utf-8"),
+        {"source_evidence": request["source_evidence"], "items": request["items"]},
+        json.loads((CONFIG / "judge-output-schema.json").read_bytes()))
+    return identity([AUTHORIZATION_ID, "development-judge", body])
 
 
 def embedding_contract(request, settings):
@@ -360,6 +381,10 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
         contract = (embedding_contract if provider == "voyage" else judge_contract)(request, settings)
         body, bound = contract[:2]
         key = identity([AUTHORIZATION_ID, operation, body])
+        if operation == "development-judge":
+            previous_key = legacy_judge_key(request, settings)
+            if any(r["key"] == previous_key for r in ledger.read()["requests"]):
+                raise Deferred("prior_judge_protocol_request_requires_recovery_not_replay")
         cache = destination / "cache" / (key + ".json")
         if cache.exists():
             retained = json.loads(cache.read_bytes())
