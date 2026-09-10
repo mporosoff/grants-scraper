@@ -5,7 +5,6 @@
     "continuation_C1": true,
     "continuation_C2": true,
     "diagnostic_revision_D1": true,
-    "embedding_revision_D3": true,
     "evaluation_amendment_E1": true,
     "paid_preparation_or_judging": true,
     "production_release": false,
@@ -22,8 +21,8 @@
     "budget_amendment_sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27",
     "continuation_path": "docs/team-recommender/CONTINUATION_C2.md",
     "current_amendment": {
-      "path": "docs/team-recommender/STAGE_2_D3_RICHER_EMBEDDINGS_PLAN.md",
-      "sha256": "0247f9ad3be01c1ad58acccca3af51256d89aaf88118181b712d0865dd5c36bc"
+      "path": "docs/team-recommender/RANKING_REVISION_D2.md",
+      "sha256": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc"
     },
     "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
     "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
@@ -269,15 +268,6 @@
     "stage2_cumulative_ceiling_usd": 6,
     "status": "automated-revision-complete-REVISE-stop-user-review",
     "valid_model_items": 328
-  },
-  "embedding_revision_D3": {
-    "cloud_owner_run": 34510982749,
-    "holdout_scored": false,
-    "new_spend_usd": 0,
-    "prior_spend_usd": 2.27911,
-    "profile_enrichment": false,
-    "source_head": "6b74ea43f9b402c93be323335cc0bbbb50b2cbe1",
-    "status": "zero-provider-input-and-contract-planning"
   },
   "experiment": "on-demand-team-recommender",
   "historical_D1_closeout": {
@@ -682,7 +672,7 @@
     "primary_judge": "claude-sonnet-5",
     "primary_numerical_candidate": "B-D2-R0-fixed-call-person-weighted-coverage"
   },
-  "next_allowed_stage": 2,
+  "next_allowed_stage": null,
   "next_stage_requires": "STOP FOR USER REVIEW. No further revision, holdout,Stage3 or deployment authorized.",
   "pinned_data": {
     "complete_claims_sha256": "e91568362019ecbb68026ddc86d1136259424529ee93f27368296a46b64abe89",
@@ -2109,8 +2099,8 @@
       "Full physical-browser/E2E/Playwright/accessibility and held-out quality gates unrun; Stage 3 unauthorized"
     ]
   },
-  "stage2_complete": false,
-  "stage2_complete_meaning": "D2 completed; separately authorized D3 in progress",
+  "stage2_complete": true,
+  "stage2_complete_meaning": "The user-authorized bounded D2 automated sequence is complete; quality qualification failed independently of missing human answers; no Stage3 authorization.",
   "stage2_completion_receipt_index_history": {
     "path": "docs/team-recommender/stage2-continuation-receipt-index.json",
     "sha256": "5ad92c03679c59a04641ad673280d0df28949131f133f94ac420ba112cd574aa"
@@ -2132,7 +2122,7 @@
     "path": "docs/team-recommender/reports/stage-2-report.md",
     "sha256": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351"
   },
-  "stage_status": "stage2-D3-active",
+  "stage_status": "stage2-D2-automated-complete-REVISE",
   "stop": "STOP FOR USER REVIEW. Do not inspect holdout recommendations, begin Stage 3 or deploy.",
   "unresolved": [
     "55/90 scientific reservations remain unprepared;D2 source expansion was prohibited.18/150 source-selected rollout ingredients prepared.",
