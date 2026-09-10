@@ -32,7 +32,8 @@ class ExperimentLedger(Ledger):
         super().__init__(path, AUTHORIZATION_ID, 10, MAX_REQUESTS)
 
     def reserve_experiment(self, provider, model, stage, key, amount, attempt,
-                           *, approved_stage=2, trusted_route=False, input_tokens=0, output_tokens=0):
+                           *, approved_stage=2, trusted_route=False, input_tokens=0, output_tokens=0,
+                           execution_metadata=None, purpose_limit=None):
         import uuid
         if not trusted_route:
             raise ConfigurationFailure("task_specific_trusted_route_unavailable")
@@ -44,6 +45,23 @@ class ExperimentLedger(Ledger):
             raise ValueError('invalid_token_reservation')
         with self.locked():
             state = self.read()
+            # Reservation is the irreversible dispatch claim. A caller cannot
+            # prove non-dispatch from a missing cache, receipt or terminal flag.
+            # Check under the same lock as insertion, including legacy rows.
+            if any(r["key"] == key for r in state["requests"]):
+                raise Deferred("logical_request_already_claimed_requires_recovery")
+            if attempt != 1:
+                raise Deferred("automatic_paid_retry_not_authorized")
+            metadata = execution_metadata or {}
+            if set(metadata) - {"packet_sha256", "body_sha256", "purpose", "code_sha", "row_inputs"}:
+                raise ValueError("invalid_execution_metadata")
+            if provider == "voyage" and execution_metadata is not None:
+                purchased = {item for r in state["requests"] for item in r.get("row_inputs", [])}
+                if len(purchased | set(metadata["row_inputs"])) > 3840:
+                    raise Deferred("unique_embedding_inventory_exhausted")
+            if purpose_limit is not None:
+                if sum(r.get("purpose") == metadata["purpose"] for r in state["requests"]) >= purpose_limit:
+                    raise Deferred("finite_purpose_inventory_exhausted")
             if provider in state["blocked_providers"]:
                 raise ConfigurationFailure(state["blocked_providers"][provider])
             if state.get("reservation_overrun"):
@@ -66,18 +84,14 @@ class ExperimentLedger(Ledger):
                 dollar_cap = 5_376_000 if stage==2 else 3_993_600
                 if sum(r['reserved_microusd'] for r in judge)+amount>dollar_cap:
                     raise Deferred('finite_judge_dollar_envelope_exhausted')
-                if attempt==2 and sum(r['attempt']==2 for r in judge)>=10:
-                    raise Deferred('finite_judge_retry_envelope_exhausted')
             if spent + amount > min(self.limit, STAGE_CEILINGS[stage]) or len(state["requests"]) >= self.max_requests:
                 raise Deferred("experiment_stage_or_total_budget_exhausted")
-            matching = [r for r in state["requests"] if r["key"] == key]
-            if len(matching) >= 2 or attempt != len(matching) + 1:
-                raise Deferred("retained_attempt_limit")
             token = uuid.uuid4().hex
             state["requests"].append({"id": token, "provider": provider, "model": model,
                 "stage": stage, "key": key, "attempt": attempt, "reserved_microusd": amount,
                 "charged_microusd": amount, "status": "reserved_unknown", "usage": None,
-                "reserved_input_tokens":input_tokens,"reserved_output_tokens":output_tokens})
+                "reserved_input_tokens":input_tokens,"reserved_output_tokens":output_tokens,
+                "dispatch_claim": "irreversible-v1", **metadata})
             atomic_json(self.path, state)
             return token
 

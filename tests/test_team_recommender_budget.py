@@ -33,12 +33,38 @@ class BudgetContract(unittest.TestCase):
 
     def test_uncertain_retries_reconcile_once(self):
         token = self.reserve(100_000)
-        self.reserve(100_000, attempt=2)
+        with self.assertRaises(Deferred): self.reserve(100_000, attempt=2)
         with self.assertRaises(Deferred): self.reserve(1, attempt=2)
         self.ledger.reconcile(token, cost_usd=.01, usage={'input_tokens': 50}, status='valid')
         self.ledger.reconcile(token, cost_usd=.01, usage={'input_tokens': 50}, status='valid')
         with self.assertRaises(ValueError): self.ledger.reconcile(token, cost_usd=0, usage={}, status='valid')
-        self.assertEqual(sum(r['charged_microusd'] for r in self.ledger.read()['requests']), 110_000)
+        self.assertEqual(sum(r['charged_microusd'] for r in self.ledger.read()['requests']), 10_000)
+
+    def test_logical_claim_is_atomic_across_concurrent_ledger_instances(self):
+        def request(_):
+            try:
+                ledger = ExperimentLedger(self.path)
+                return ledger.reserve_experiment('voyage', 'voyage-4-lite', 2, 'same', 100, 1,
+                    trusted_route=True, input_tokens=10)
+            except Deferred:
+                return None
+        with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:
+            results = list(pool.map(request, range(24)))
+        self.assertEqual(sum(r is not None for r in results), 1)
+        self.assertEqual(len(self.ledger.read()['requests']), 1)
+
+    def test_all_retained_lifecycle_states_permanently_claim_the_key(self):
+        for status in ('reserved_unknown', 'valid', 'failed', 'not_dispatched_unproven'):
+            with self.subTest(status=status):
+                token = self.reserve(100, key=status)
+                state = self.ledger.read()
+                next(r for r in state['requests'] if r['id'] == token)['status'] = status
+                # Legacy rows also claim the key without new metadata/markers.
+                next(r for r in state['requests'] if r['id'] == token).pop('dispatch_claim')
+                self.path.write_text(json.dumps(state))
+                for attempt in (1, 2):
+                    with self.assertRaisesRegex(Deferred, 'already_claimed'):
+                        self.reserve(100, key=status, attempt=attempt)
 
     def test_concurrent_reservations_are_atomic(self):
         def request(i):
@@ -62,12 +88,9 @@ class BudgetContract(unittest.TestCase):
             self.reserve(10, 'next')
 
     def test_finite_retry_and_later_stage_limits(self):
-        for i in range(10):
-            self.reserve(10_000, str(i), 'anthropic', 'claude-sonnet-5')
-            self.reserve(10_000, str(i), 'anthropic', 'claude-sonnet-5', attempt=2)
-        self.reserve(10_000, 'eleven', 'anthropic', 'claude-sonnet-5')
+        self.reserve(10_000, 'one', 'anthropic', 'claude-sonnet-5')
         with self.assertRaisesRegex(Deferred, 'retry'):
-            self.reserve(10_000, 'eleven', 'anthropic', 'claude-sonnet-5', attempt=2)
+            self.reserve(10_000, 'never-dispatched', 'anthropic', 'claude-sonnet-5', attempt=2)
         with self.assertRaises(ConfigurationFailure):
             self.ledger.reserve_experiment('anthropic','claude-sonnet-5',4,'four',10_000,1,
                 trusted_route=True,approved_stage=4,input_tokens=10,output_tokens=512)

@@ -363,34 +363,40 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
         cache = destination / "cache" / (key + ".json")
         if cache.exists():
             retained = json.loads(cache.read_bytes())
+            exact_keys(retained, ["key", "body_sha256", "model", "value", "request_id"])
             if retained["key"] != key or retained["body_sha256"] != identity(body) or retained["model"] != model:
                 raise ValueError("exact_cache_identity_mismatch")
+            prior = [r for r in ledger.read()["requests"] if r["key"] == key]
+            if len(prior) != 1 or prior[0]["id"] != retained["request_id"] or prior[0]["status"] != "valid":
+                raise Deferred("cache_without_exact_valid_reconciliation_requires_recovery")
+            value = retained["value"]
+            if operation == "embeddings":
+                exact_keys(value, ["input_role", "rows"])
+                if value["input_role"] != request["input_role"] or len(value["rows"]) != len(request["rows"]):
+                    raise ValueError("cached_embedding_contract_mismatch")
+                data = []
+                for index, row in enumerate(value["rows"]):
+                    exact_keys(row, ["id", "embedding"])
+                    if row["id"] != request["rows"][index]["id"]:
+                        raise ValueError("cached_embedding_identity_mismatch")
+                    data.append({"index": index, "embedding": row["embedding"]})
+                payload = {"model": model, "data": data}
+            else:
+                payload = {"model": model, "stop_reason": "end_turn", "content": [{"type": "text", "text": json.dumps(value)}]}
+            result_value(operation, payload, request, contract, settings)
             ledger.event(kind="exact_cache_hit", key=key)
             continue
         prior = [r for r in ledger.read()["requests"] if r["key"] == key]
-        if prior and (prior[-1]["status"] in {"reserved_unknown", "valid"} or prior[-1].get("terminal")):
-            # A usage receipt can commit before its cache write. Lost output does
-            # not undo purchased work or authorize another identical request.
-            raise Deferred("uncertain_terminal_or_cacheless_completed_request_requires_recovery")
-        attempt = len(prior) + 1
+        if prior:
+            raise Deferred("cacheless_completed_or_uncertain_request_requires_recovery")
+        attempt = 1
         row_inputs = [request["input_role"] + ":" + r["id"] for r in request["rows"]] if provider == "voyage" else []
-        if provider == "voyage":
-            purchased = {item for r in ledger.read()["requests"] for item in r.get("row_inputs", [])}
-            if len(purchased | set(row_inputs)) > 3840:
-                raise Deferred("unique_embedding_inventory_exhausted")
-        if provider == "anthropic" and not prior:
-            purpose = request["purpose"]
-            count = sum(r.get("purpose") == purpose and r["attempt"] == 1 for r in ledger.read()["requests"])
-            if count >= PURPOSES[purpose]:
-                raise Deferred("finite_purpose_inventory_exhausted")
         amount = (bound + 49)//50 if provider == "voyage" else (bound*5+1)//2 + 5120
         token = ledger.reserve_experiment(provider, model, 2, key, amount, attempt, trusted_route=True,
-                    input_tokens=bound, output_tokens=0 if provider == "voyage" else 512)
-        with ledger.locked():
-            state = ledger.read(); row = next(r for r in state["requests"] if r["id"] == token)
-            row.update(packet_sha256=packet_hash, body_sha256=identity(body), purpose=request.get("purpose", "embedding"),
-                       code_sha=os.environ["GITHUB_SHA"], row_inputs=row_inputs)
-            atomic_json(ledger.path, state)
+                    input_tokens=bound, output_tokens=0 if provider == "voyage" else 512,
+                    execution_metadata={"packet_sha256": packet_hash, "body_sha256": identity(body),
+                        "purpose": request.get("purpose", "embedding"), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs},
+                    purpose_limit=PURPOSES[request["purpose"]] if provider == "anthropic" else None)
         receipt = {"request_id": token, "key": key, "model": model, "reserved_microusd": amount,
                    "packet_sha256": packet_hash, "attempt": attempt, "code_sha": os.environ["GITHUB_SHA"]}
         try:
