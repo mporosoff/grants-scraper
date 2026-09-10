@@ -53,12 +53,20 @@ class ExperimentLedger(Ledger):
             if attempt != 1:
                 raise Deferred("automatic_paid_retry_not_authorized")
             metadata = execution_metadata or {}
-            if set(metadata) - {"packet_sha256", "body_sha256", "purpose", "code_sha", "row_inputs"}:
+            if set(metadata) - {"packet_sha256", "body_sha256", "purpose", "code_sha", "row_inputs", "judge_items"}:
                 raise ValueError("invalid_execution_metadata")
             if provider == "voyage" and execution_metadata is not None:
                 purchased = {item for r in state["requests"] for item in r.get("row_inputs", [])}
+                if purchased.intersection(metadata["row_inputs"]):
+                    raise Deferred("paid_embedding_row_already_claimed_no_rebatch")
                 if len(purchased | set(metadata["row_inputs"])) > 3840:
                     raise Deferred("unique_embedding_inventory_exhausted")
+            if metadata.get('judge_items'):
+                from tools.team_recommender_items import claimed_judge_items, historical_index
+                historical = historical_index()
+                purchased = {item for r in state['requests'] for item in claimed_judge_items(r,historical)}
+                if purchased.intersection(metadata['judge_items']):
+                    raise Deferred('paid_judge_item_already_claimed_no_rebatch')
             if purpose_limit is not None:
                 if sum(r.get("purpose") == metadata["purpose"] for r in state["requests"]) >= purpose_limit:
                     raise Deferred("finite_purpose_inventory_exhausted")

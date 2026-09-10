@@ -414,6 +414,8 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
             raise Deferred("prior_judge_protocol_request_requires_recovery_not_replay")
     if not secret:
         raise ConfigurationFailure("missing_provider_step_credential")
+    from tools.team_recommender_items import preflight, judge_items
+    preflight(packet, settings, ledger)
     deadline = time.monotonic() + 2700
     for request in packet["requests"]:
         if time.monotonic() >= deadline:
@@ -460,7 +462,8 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
         token = ledger.reserve_experiment(provider, model, 2, key, amount, attempt, trusted_route=True,
                     input_tokens=bound, output_tokens=0 if provider == "voyage" else 512,
                     execution_metadata={"packet_sha256": packet_hash, "body_sha256": identity(body),
-                        "purpose": request.get("purpose", "d2-context" if request.get("representation") == "D2-context-v1" else "embedding"), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs},
+                        "purpose": request.get("purpose", "d2-context" if request.get("representation") == "D2-context-v1" else "embedding"), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs,
+                        "judge_items": judge_items(request) if provider == "anthropic" else []},
                     purpose_limit=PURPOSES[request["purpose"]] if provider == "anthropic" else None)
         receipt = {"request_id": token, "key": key, "model": model, "reserved_microusd": amount,
                    "packet_sha256": packet_hash, "attempt": attempt, "code_sha": os.environ["GITHUB_SHA"]}

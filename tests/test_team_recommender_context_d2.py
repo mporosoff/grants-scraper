@@ -1,6 +1,8 @@
 import copy
 import json
 import unittest
+from unittest.mock import patch
+from tools.team_recommender_items import judge_items, claimed_judge_items, historical_index
 from tests import test_team_recommender_executor as base
 from tests import test_team_recommender_judge_d1 as d1
 from tools import team_recommender_executor as e
@@ -15,6 +17,118 @@ class D2Contract(unittest.TestCase):
     packet=base.ExecutorContract.packet
     response=base.ExecutorContract.response
     revised=d1.D1Contract.revised
+
+    def test_judgment_identity_ignores_batch_and_evidence_aliases(self):
+        r=self.revised();r['protocol']='D1F';keys=judge_items(r)
+        altered=copy.deepcopy(r);altered['purpose']='d2-call';item=altered['items'][0]
+        item['item_id']='i03';item['profile_evidence'][0]['id']='p9'
+        altered['source_evidence']['passages'][0]['id']='s9'
+        altered['aspects'][0]['source_ref']='s9';altered['aspects'][0]['id']='renamed'
+        self.assertEqual(judge_items(altered),keys)
+        item['profile_evidence'][0]['text']+=' materially changed evidence'
+        self.assertNotEqual(judge_items(altered),keys)
+
+    def test_rebatch_after_each_dispatch_persistence_boundary_never_repays(self):
+        for operation in ('development-judge','embeddings'):
+            for boundary in ('success','invalid','transport','ledger','cache','receipt','checkpoint'):
+                with self.subTest(operation=operation,boundary=boundary):
+                    # Separate fixture state, preserving every attempt within this case.
+                    self.state=self.root/(operation+'-'+boundary);self.state.mkdir()
+                    (self.state/'ledger.json').write_bytes((e.CONFIG/'initial-ledger.json').read_bytes())
+                    path,_,packet=self.packet(operation);r=self.revised() if operation=='development-judge' else self.contextual()
+                    if operation=='development-judge':r['protocol']='D1F'
+                    packet['requests']=[r];raw=json.dumps(packet).encode();path.write_bytes(raw);calls=[]
+                    def post(*a,**kw):
+                        calls.append(1)
+                        if boundary=='transport':raise e.requests.Timeout('fixture')
+                        if operation=='embeddings':
+                            return self.response({'model':self.settings['embedding_model'],'usage':{'total_tokens':100},
+                                'data':[] if boundary=='invalid' else [{'index':0,'embedding':[1.]+[0.]*1023}]})
+                        value={'verdicts':[] if boundary=='invalid' else [{'item_id':'i01','verdict':'plausible','evidence_ref':'p1','reason':'interest'}]}
+                        return self.response({'model':self.settings['judge_model'],'usage':{'input_tokens':100,'output_tokens':50},'stop_reason':'end_turn','content':[{'type':'text','text':json.dumps(value)}]})
+                    original=e.atomic_json
+                    def write(target,value):
+                        if (boundary=='cache' and target.parent.name=='cache' or boundary=='receipt' and target.parent.name=='receipts' or boundary=='checkpoint' and target.name=='checkpoint.json'):
+                            raise OSError('fixture interruption')
+                        return original(target,value)
+                    ledger_class=e.ExperimentLedger;reconcile=ledger_class.reconcile
+                    def reconcile_then_crash(obj,*a,**kw):
+                        reconcile(obj,*a,**kw)
+                        if boundary=='ledger':raise OSError('after reconciled ledger persisted')
+                    with patch.object(e,'atomic_json',write),patch.object(ledger_class,'reconcile',reconcile_then_crash):
+                        try:e.execute(self.state,path,e.sha(raw),post)
+                        except (OSError,ValueError,e.requests.RequestException):pass
+                    self.assertEqual(len(calls),1)
+                    if operation=='embeddings':
+                        inventory=context_inventory(self.settings)
+                        second=next({'id':k,'owner':p,'text':t} for p,rows in inventory.items() for k,t in rows.items() if k!=r['rows'][0]['id'])
+                        r['rows'].append(second)
+                    else:
+                        r['purpose']='d2-call';second=copy.deepcopy(r['items'][0]);second['item_id']='i02'
+                        # A different valid question, with the already purchased first item.
+                        second['profile_evidence'][0]['id']='p2';second['task_type']='call_person'
+                        r['items'][0]['item_id']='i03'
+                        # Use different existing evidence for a second real candidate.
+                        other=next(p for p in self.settings['profile_claims'] if p!=self.person)
+                        claim=self.settings['profile_claims'][other][0];fields=self.settings['d1_profile_fields'][other]
+                        meta=next(c for c in fields['claims'] if c['id']==claim['claim_id'])
+                        second['candidates']=[other];second['profile_evidence']=[{'id':'p2','person_id':other,'claim_id':claim['claim_id'],'revision':claim['revision'],'text':claim['text'],'source_url':claim['source_urls'][0],'label':meta['label'],'claim_type':meta['claim_type'],'research_summary':fields['research_summary']}]
+                        r['items'].append(second)
+                    raw=json.dumps(packet).encode();path.write_bytes(raw)
+                    before=e.ExperimentLedger(self.state/'ledger.json').read()
+                    for _ in range(3):
+                        with self.assertRaisesRegex(Deferred,'no_rebatch'):e.execute(self.state,path,e.sha(raw),post)
+                    self.assertEqual(len(calls),1);self.assertEqual(e.ExperimentLedger(self.state/'ledger.json').read(),before)
+
+    def test_historical_index_covers_paid_failures_without_changing_old_rows(self):
+        index=historical_index();self.assertEqual(len(index),162)
+        self.assertEqual(e.sha((e.CONFIG/'prior-items-d2.json').read_bytes()),'7de6cee13e6321f7e3a8ea1ab38af8d5d1a5b4548ea46364c157760acc8059ca')
+        key,old=next(iter(index.items()));row={'key':key,'purpose':'d1-call',**old};row.pop('judge_items')
+        before=copy.deepcopy(row)
+        self.assertEqual(claimed_judge_items(row),old['judge_items']);self.assertEqual(row,before)
+        row['body_sha256']='f'*64
+        with self.assertRaises(Deferred):claimed_judge_items(row)
+
+    def test_overlapping_reservations_are_atomic_across_ledger_instances(self):
+        import concurrent.futures
+        for provider in ('anthropic','voyage'):
+            path=self.root/(provider+'-atomic.json');ledger=e.ExperimentLedger(path,initialize=True)
+            def reserve(i):
+                metadata={'purpose':'d2-call','judge_items':['same-item']} if provider=='anthropic' else {'purpose':'d2-context','row_inputs':['document:same']}
+                try:
+                    return e.ExperimentLedger(path).reserve_experiment(provider,self.settings['judge_model' if provider=='anthropic' else 'embedding_model'],2,str(i),10000 if provider=='anthropic' else 100,1,trusted_route=True,input_tokens=100,output_tokens=512 if provider=='anthropic' else 0,execution_metadata=metadata)
+                except Deferred:return None
+            with concurrent.futures.ThreadPoolExecutor(max_workers=8) as pool:results=list(pool.map(reserve,range(16)))
+            self.assertEqual(sum(r is not None for r in results),1)
+
+    def test_whole_packet_overlap_is_rejected_before_any_dispatch(self):
+        for operation in ('embeddings','development-judge'):
+            path,_,packet=self.packet(operation)
+            first=self.contextual() if operation=='embeddings' else self.revised()
+            if operation=='development-judge':first.update(protocol='D1F',purpose='d2-call')
+            second=copy.deepcopy(first)
+            if operation=='embeddings':
+                inventory=context_inventory(self.settings)
+                second['rows'].append(next({'id':k,'owner':p,'text':t} for p,rows in inventory.items() for k,t in rows.items() if k!=first['rows'][0]['id']))
+            else:second['items'][0]['item_id']='i02'
+            packet['requests']=[first,second];raw=json.dumps(packet).encode();path.write_bytes(raw)
+            for _ in range(3):
+                with self.assertRaisesRegex(Deferred,'overlapping_paid_packet'):
+                    e.execute(self.state,path,e.sha(raw),lambda *a,**k:self.fail('partial packet dispatched'))
+            self.assertEqual(e.ExperimentLedger(self.state/'ledger.json').read()['requests'],[])
+
+    def test_restored_historical_failed_claim_blocks_rebatch_without_cache(self):
+        from tools.team_recommender_items import preflight
+        r=self.revised();r.update(protocol='D1F',purpose='d2-call')
+        path,_,packet=self.packet('development-judge');packet['requests']=[r]
+        key='a'*64;historical={key:{'body_sha256':'b'*64,'packet_sha256':'c'*64,'judge_items':judge_items(r)}}
+        for status in ('valid','failed','reserved_unknown'):
+            ledger=e.ExperimentLedger(self.state/'ledger.json');state=ledger.read()
+            state['requests']=[{'key':key,'purpose':'d1-call','status':status,'body_sha256':'b'*64,'packet_sha256':'c'*64}]
+            e.atomic_json(ledger.path,state)
+            with patch('tools.team_recommender_items.historical_index',return_value=historical):
+                for _ in range(3):
+                    with self.assertRaisesRegex(Deferred,'no_rebatch'):preflight(packet,self.settings,e.ExperimentLedger(ledger.path))
 
     def contextual(self):
         inventory=context_inventory(self.settings);key,text=next(iter(inventory[self.person].items()))
