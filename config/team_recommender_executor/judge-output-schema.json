@@ -1,0 +1,50 @@
+{
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "verdicts": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "item_id": {
+            "type": "string"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "strong",
+              "plausible",
+              "unrelated",
+              "insufficient-information",
+              "A",
+              "B",
+              "tie",
+              "unresolved",
+              "faithful",
+              "unsupported"
+            ]
+          },
+          "evidence_ref": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "item_id",
+          "verdict",
+          "evidence_ref"
+        ]
+      }
+    },
+    "note": {
+      "type": "string",
+      "maxLength": 250
+    }
+  },
+  "required": [
+    "verdicts",
+    "note"
+  ]
+}

@@ -1,0 +1,80 @@
+name: Manual on-demand team experiment preparation
+
+on:
+  workflow_dispatch:
+    inputs:
+      packet_commit:
+        description: Exact commit containing public data only; never checked out
+        required: true
+        type: string
+      packet_sha256:
+        description: SHA256 of docs/team-recommender/packets/HASH.json
+        required: true
+        type: string
+
+permissions:
+  contents: read
+  actions: read
+
+concurrency:
+  group: on-demand-team-offline-v2-20260909
+  cancel-in-progress: false
+
+jobs:
+  prepare-evaluate:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 55
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ github.sha }}
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - run: python -m pip install -r requirements.txt
+      - name: Validate public packet and restore the single authoritative ledger
+        id: prepare
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PACKET_COMMIT: ${{ inputs.packet_commit }}
+          PACKET_HASH: ${{ inputs.packet_sha256 }}
+        run: >-
+          python -m tools.team_recommender_executor prepare
+          --state "$RUNNER_TEMP/team-experiment" --packet "$RUNNER_TEMP/team-packet.json"
+          --packet-commit "$PACKET_COMMIT" --packet-sha256 "$PACKET_HASH"
+          --reservation "$RUNNER_TEMP/team-reservation.json"
+      - name: Persist crash protection before any metered request
+        uses: actions/upload-artifact@v4
+        with:
+          name: on-demand-team-offline-v2-20260909-reservation-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/team-reservation.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Embed only bounded missing public inputs
+        if: steps.prepare.outputs.operation == 'embeddings'
+        env:
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+          PACKET_HASH: ${{ inputs.packet_sha256 }}
+        run: >-
+          python -m tools.team_recommender_executor execute
+          --state "$RUNNER_TEMP/team-experiment" --packet "$RUNNER_TEMP/team-packet.json"
+          --packet-sha256 "$PACKET_HASH"
+      - name: Judge only bounded blinded development packets
+        if: steps.prepare.outputs.operation == 'development-judge'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          PACKET_HASH: ${{ inputs.packet_sha256 }}
+        run: >-
+          python -m tools.team_recommender_executor execute
+          --state "$RUNNER_TEMP/team-experiment" --packet "$RUNNER_TEMP/team-packet.json"
+          --packet-sha256 "$PACKET_HASH"
+      - name: Retain exact accounting and bounded results after success or failure
+        if: always() && steps.prepare.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: on-demand-team-offline-v2-20260909-state-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/team-experiment
+          if-no-files-found: error
+          retention-days: 90

@@ -1,0 +1,5164 @@
+{
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "approved_stage": 2,
+  "total_usd": 10,
+  "stage2_cumulative_usd": 6,
+  "later_reserved_usd": 4,
+  "initial_ledger_sha256": "0835f7b7017d6655d3de13395c3d5ee8a94342a3ba1ac9115e652bfab4c73f9a",
+  "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
+  "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+  "development_ids": [
+    "112354",
+    "243973",
+    "295449",
+    "324456",
+    "328902",
+    "332894",
+    "334971",
+    "339594",
+    "339728",
+    "342747",
+    "343980",
+    "344592:ab-0009",
+    "344715",
+    "345241:tdac-baa-004",
+    "348258",
+    "349655",
+    "349724",
+    "351923",
+    "351947",
+    "355100",
+    "355196",
+    "356978",
+    "357002",
+    "357498",
+    "357554",
+    "358114",
+    "358830",
+    "358938",
+    "359091",
+    "359236",
+    "359669",
+    "359696",
+    "359862",
+    "360012",
+    "360205",
+    "360258",
+    "360633",
+    "360644",
+    "360660",
+    "360698",
+    "360954",
+    "361207",
+    "361208",
+    "361322",
+    "361380",
+    "361526:f-18",
+    "361876",
+    "362178",
+    "362196",
+    "362207",
+    "362218",
+    "362244",
+    "362254",
+    "362315",
+    "362393",
+    "362520",
+    "362575",
+    "362855",
+    "362857",
+    "362868",
+    "362871",
+    "363015",
+    "363055",
+    "363069",
+    "363102",
+    "363141",
+    "363281",
+    "363292",
+    "363391",
+    "363479",
+    "363489",
+    "363514",
+    "363525",
+    "363526",
+    "363544",
+    "363569",
+    "363612",
+    "363622",
+    "363636",
+    "363699",
+    "363724",
+    "363736",
+    "363747",
+    "363760",
+    "363765",
+    "363783",
+    "39841",
+    "45810",
+    "nasa-roses:25-D.9-d22059cf9f",
+    "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600"
+  ],
+  "preparation_ids": [
+    "112354",
+    "243973",
+    "295449",
+    "302273",
+    "320087",
+    "324369",
+    "324456",
+    "325932",
+    "328573",
+    "328902",
+    "329325",
+    "329432",
+    "332894",
+    "334971",
+    "334972",
+    "339594",
+    "339728",
+    "340828",
+    "341244",
+    "342747",
+    "343166",
+    "343980",
+    "344592:ab-0002",
+    "344592:ab-0005",
+    "344592:ab-0006",
+    "344592:ab-0009",
+    "344592:ab-0010",
+    "344592:ab-0011",
+    "344592:ab-0015",
+    "344592:ab-0016",
+    "344592:ab-0017",
+    "344592:ab-0019",
+    "344592:ab-0020",
+    "344592:ab-0021",
+    "344592:ab-0023",
+    "344592:ab-0025",
+    "344592:ab-0026",
+    "344592:ab-0027",
+    "344592:ab-0029",
+    "344592:ab-0034",
+    "344592:ab-0035",
+    "344592:ab-0037",
+    "344592:ab-0038",
+    "344592:ab-0041",
+    "344592:ab-0045",
+    "344592:ab-0048",
+    "344592:ab-0051",
+    "344592:ab-0053",
+    "344592:ab-0058",
+    "344592:ab-0060",
+    "344592:ab-0065",
+    "344592:ab-0067",
+    "344592:ab-0070",
+    "344592:ab-0071",
+    "344592:ab-0076",
+    "344592:ab-0078",
+    "344592:ab-0083",
+    "344592:ab-0097",
+    "344592:ab-0101",
+    "344715",
+    "345241:tdac-baa-001",
+    "345241:tdac-baa-002",
+    "345241:tdac-baa-003",
+    "345241:tdac-baa-004",
+    "345241:tdac-baa-005",
+    "345241:tdac-baa-012",
+    "345241:tdac-baa-017",
+    "345241:tdac-baa-020",
+    "345241:tdac-baa-026",
+    "348164",
+    "348258",
+    "348830",
+    "349655",
+    "349724",
+    "349804",
+    "350018",
+    "350943",
+    "351923",
+    "351947",
+    "352339",
+    "352810",
+    "353413",
+    "354269",
+    "354573",
+    "355100",
+    "355150",
+    "355196",
+    "356309",
+    "356612",
+    "356978",
+    "357002",
+    "357018",
+    "357498",
+    "357554",
+    "357609",
+    "358114",
+    "358403",
+    "358830",
+    "358882",
+    "358938",
+    "359091",
+    "359236",
+    "359651",
+    "359659",
+    "359669",
+    "359696",
+    "359862",
+    "359946",
+    "360012",
+    "360182",
+    "360205",
+    "360258",
+    "360261",
+    "360380",
+    "360387",
+    "360633",
+    "360644",
+    "360660",
+    "360664",
+    "360698",
+    "360946",
+    "360954",
+    "361207",
+    "361208",
+    "361251",
+    "361271",
+    "361322",
+    "361380",
+    "361526:c-18",
+    "361526:e-18",
+    "361526:f-18",
+    "361526:g-18",
+    "361876",
+    "362025",
+    "362098",
+    "362178",
+    "362179",
+    "362180",
+    "362184",
+    "362186",
+    "362196",
+    "362197",
+    "362207",
+    "362209",
+    "362218",
+    "362222",
+    "362240",
+    "362244",
+    "362254",
+    "362313",
+    "362315",
+    "362393",
+    "362489",
+    "362520",
+    "362529",
+    "362551",
+    "362575",
+    "362597",
+    "362607",
+    "362666",
+    "362672",
+    "362848",
+    "362855",
+    "362857",
+    "362866",
+    "362868",
+    "362871",
+    "363015",
+    "363055",
+    "363069",
+    "363070",
+    "363102",
+    "363141",
+    "363240",
+    "363241",
+    "363272",
+    "363281",
+    "363287",
+    "363289",
+    "363292",
+    "363297",
+    "363359",
+    "363372",
+    "363374",
+    "363391",
+    "363455",
+    "363478",
+    "363479",
+    "363489",
+    "363514",
+    "363525",
+    "363526",
+    "363544",
+    "363559",
+    "363569",
+    "363570",
+    "363571",
+    "363590",
+    "363612",
+    "363613",
+    "363617",
+    "363622",
+    "363634",
+    "363636",
+    "363655",
+    "363679",
+    "363699",
+    "363724",
+    "363736",
+    "363747",
+    "363760",
+    "363765",
+    "363783",
+    "363788",
+    "363796",
+    "363818",
+    "39841",
+    "45810",
+    "darpa-iarpa:darpa-darpapa250704",
+    "darpa-iarpa:darpa-darpapa260201",
+    "darpa-iarpa:darpa-darpapa260202",
+    "nasa-roses:25-D.3E-1c60503f9d",
+    "nasa-roses:25-D.9-d22059cf9f",
+    "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+    "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590",
+    "nyserda:PON5437",
+    "nyserda:RFQL5937"
+  ],
+  "judge_model": "claude-sonnet-5",
+  "embedding_model": "voyage-4-lite",
+  "dimension": 1024,
+  "judge_prompt_sha256": "792b6d4e21889b408dc6262a7437122b57cc6babd3fa75fb6482d8a84158745a",
+  "judge_schema_sha256": "a600c084cfe4b5d8bd70c235db3a636b5a24d9e11ddfed14401a8f473abea7ca",
+  "prices_checked_date": "2026-09-09",
+  "price_usd_per_million": {
+    "anthropic_input": 2,
+    "anthropic_cache_read": 0.2,
+    "anthropic_cache_write": 2.5,
+    "anthropic_output": 10,
+    "voyage_input": 0.02
+  },
+  "profile_claims": {
+    "urh-000105": [
+      {
+        "claim_id": "urh-000105-c001",
+        "revision": 1,
+        "text": "machine-learning classification of X-ray diffraction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/abdolrahim_niaz/index.html",
+          "https://www.hajim.rochester.edu/me/sites/abdolrahim/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/sites/abdolrahim/publications/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000105-c002",
+        "revision": 1,
+        "text": "nanoporous membrane mechanical design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/abdolrahim_niaz/index.html",
+          "https://www.hajim.rochester.edu/me/sites/abdolrahim/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/sites/abdolrahim/publications/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000105-c003",
+        "revision": 1,
+        "text": "thin-film dewetting and phase separation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/abdolrahim_niaz/index.html",
+          "https://www.hajim.rochester.edu/me/sites/abdolrahim/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/sites/abdolrahim/publications/index.html"
+        ]
+      }
+    ],
+    "urh-000102": [
+      {
+        "claim_id": "urh-000102-c001",
+        "revision": 1,
+        "text": "nonparaxial structured-wave propagation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/alonso_miguel/index.html",
+          "https://miguel.alonso.perso.centrale-med.fr",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://cv.hal.science/miguel-a-alonso"
+        ]
+      }
+    ],
+    "urh-000058": [
+      {
+        "claim_id": "urh-000058-c001",
+        "revision": 1,
+        "text": "geophysical fluid turbulence",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html",
+          "https://www.complexflowgroup.com/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://journals.aps.org/prfluids/abstract/10.1103/PhysRevFluids.8.114601"
+        ]
+      },
+      {
+        "claim_id": "urh-000058-c002",
+        "revision": 1,
+        "text": "spatial coarse-graining of turbulent flows",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html",
+          "https://www.complexflowgroup.com/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://journals.aps.org/prfluids/abstract/10.1103/PhysRevFluids.8.114601"
+        ]
+      },
+      {
+        "claim_id": "urh-000058-c003",
+        "revision": 1,
+        "text": "compressible magnetohydrodynamic turbulence",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/aluie_hussein/index.html",
+          "https://www.complexflowgroup.com/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://journals.aps.org/prfluids/abstract/10.1103/PhysRevFluids.8.114601"
+        ]
+      }
+    ],
+    "urh-000103": [
+      {
+        "claim_id": "urh-000103-c001",
+        "revision": 1,
+        "text": "interfacial thermodynamics of polymeric materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c002",
+        "revision": 1,
+        "text": "self-assembly of functional polymers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c003",
+        "revision": 1,
+        "text": "vapor-deposited polymer coatings",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c004",
+        "revision": 1,
+        "text": "macromolecular self-assembly",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c005",
+        "revision": 1,
+        "text": "associative and functional polymers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c006",
+        "revision": 1,
+        "text": "nanostructured polymer materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c007",
+        "revision": 1,
+        "text": "polymer interfacial phenomena",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c008",
+        "revision": 1,
+        "text": "optoelectronic polymer materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      },
+      {
+        "claim_id": "urh-000103-c009",
+        "revision": 1,
+        "text": "vapor deposition polymerization",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC12519446/"
+        ]
+      }
+    ],
+    "urh-000056": [
+      {
+        "claim_id": "urh-000056-c001",
+        "revision": 1,
+        "text": "mechanics of architected lattice materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/askari_hesam/index.html",
+          "https://www.hajim.rochester.edu/me/sites/askari/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/sites/askari/publications/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000056-c002",
+        "revision": 1,
+        "text": "granular intrusion and rheology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/askari_hesam/index.html",
+          "https://www.hajim.rochester.edu/me/sites/askari/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/sites/askari/publications/index.html"
+        ]
+      }
+    ],
+    "urh-000155": [
+      {
+        "claim_id": "urh-000155-c001",
+        "revision": 1,
+        "text": "machine-learning models of human interaction",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
+          "https://www.cs.rochester.edu/u/zbai7",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000155-c002",
+        "revision": 1,
+        "text": "embodied conversational agents for learning",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
+          "https://www.cs.rochester.edu/u/zbai7",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000155-c003",
+        "revision": 1,
+        "text": "tangible and augmented-reality learning interfaces",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/bai-zhen/index.html",
+          "https://www.cs.rochester.edu/u/zbai7",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000135": [
+      {
+        "claim_id": "urh-000135-c001",
+        "revision": 1,
+        "text": "antimicrobial photodynamic therapy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/baran-timothy/index.html",
+          "https://www.urmc.rochester.edu/labs/baran.aspx",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112359996-timothy-m-baran"
+        ]
+      }
+    ],
+    "urh-000020": [
+      {
+        "claim_id": "urh-000020-c001",
+        "revision": 1,
+        "text": "organometallic synthesis of porous materials",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html",
+          "https://sas.rochester.edu/chm/groups/barnett",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.sas.rochester.edu/chm/people/faculty/"
+        ]
+      },
+      {
+        "claim_id": "urh-000020-c002",
+        "revision": 1,
+        "text": "porous-material adsorption thermodynamics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html",
+          "https://sas.rochester.edu/chm/groups/barnett",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.sas.rochester.edu/chm/people/faculty/"
+        ]
+      },
+      {
+        "claim_id": "urh-000020-c003",
+        "revision": 1,
+        "text": "hydrogen binding in porous frameworks",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/barnett-brandon/index.html",
+          "https://sas.rochester.edu/chm/groups/barnett",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.sas.rochester.edu/chm/people/faculty/"
+        ]
+      }
+    ],
+    "urh-000150": [
+      {
+        "claim_id": "urh-000150-c001",
+        "revision": 1,
+        "text": "machine-learning-guided polymer membrane discovery",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c002",
+        "revision": 1,
+        "text": "molecular dynamics of polymer and solution systems",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c003",
+        "revision": 1,
+        "text": "quantum-chemical solvation modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c004",
+        "revision": 1,
+        "text": "machine learning for computational materials design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c005",
+        "revision": 1,
+        "text": "molecular dynamics simulation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c006",
+        "revision": 1,
+        "text": "quantum chemistry",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c007",
+        "revision": 1,
+        "text": "polymer solution modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c008",
+        "revision": 1,
+        "text": "computational catalysis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000150-c009",
+        "revision": 1,
+        "text": "CO2 separation membranes",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html",
+          "https://www.basdoganlab.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.basdoganlab.com"
+        ]
+      }
+    ],
+    "urh-000001": [
+      {
+        "claim_id": "urh-000001-c001",
+        "revision": 1,
+        "text": "freeform optical system design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/bauer_aaron/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000001-c002",
+        "revision": 1,
+        "text": "augmented-reality display optics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/bauer_aaron/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000080": [
+      {
+        "claim_id": "urh-000080-c001",
+        "revision": 1,
+        "text": "gradient-index optical system design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/bentley_julie/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=15875"
+        ]
+      },
+      {
+        "claim_id": "urh-000080-c002",
+        "revision": 1,
+        "text": "optical tolerancing for manufacturability",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/bentley_julie/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=15875"
+        ]
+      },
+      {
+        "claim_id": "urh-000080-c003",
+        "revision": 1,
+        "text": "optical tolerancing for manufacturability",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/bentley_julie/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=15875"
+        ]
+      }
+    ],
+    "urh-000009": [
+      {
+        "claim_id": "urh-000009-c001",
+        "revision": 1,
+        "text": "Raman spectroscopy of bone quality",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html",
+          "https://blogs.rochester.edu/bslrochester ",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/"
+        ]
+      },
+      {
+        "claim_id": "urh-000009-c002",
+        "revision": 1,
+        "text": "diffuse biomedical tissue spectroscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/index.html",
+          "https://blogs.rochester.edu/bslrochester ",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/berger_andrew/"
+        ]
+      }
+    ],
+    "urh-000118": [
+      {
+        "claim_id": "urh-000118-c001",
+        "revision": 1,
+        "text": "direct-drive inertial confinement fusion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/"
+        ]
+      },
+      {
+        "claim_id": "urh-000118-c002",
+        "revision": 1,
+        "text": "thermonuclear burn physics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/"
+        ]
+      },
+      {
+        "claim_id": "urh-000118-c003",
+        "revision": 1,
+        "text": "high-energy-density plasma stability",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/betti_riccardo/"
+        ]
+      }
+    ],
+    "urh-000111": [
+      {
+        "claim_id": "urh-000111-c001",
+        "revision": 1,
+        "text": "data-driven process monitoring",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c002",
+        "revision": 1,
+        "text": "multiscale powder-flow modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c003",
+        "revision": 1,
+        "text": "hybrid mechanistic and data-driven process models",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c004",
+        "revision": 1,
+        "text": "process systems engineering",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c005",
+        "revision": 1,
+        "text": "multiscale molecules-to-systems modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c006",
+        "revision": 1,
+        "text": "physics and data-driven hybrid modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c007",
+        "revision": 1,
+        "text": "powder flow modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c008",
+        "revision": 1,
+        "text": "sustainable process design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000111-c009",
+        "revision": 1,
+        "text": "solvent-based extraction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/bhalode-pooja/index.html",
+          "https://sites.google.com/view/pooja-bhalode/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000106": [
+      {
+        "claim_id": "urh-000106-c001",
+        "revision": 1,
+        "text": "atom-light Raman transitions",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/bigelow_nicholas/index.html",
+          "https://www.pas.rochester.edu/~catgroup/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.rochester.edu/newscenter/nicholas-bigelow-michael-scott-aaas-fellows-508742/"
+        ]
+      },
+      {
+        "claim_id": "urh-000106-c002",
+        "revision": 1,
+        "text": "cold-atom quantum sensing",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/bigelow_nicholas/index.html",
+          "https://www.pas.rochester.edu/~catgroup/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.rochester.edu/newscenter/nicholas-bigelow-michael-scott-aaas-fellows-508742/"
+        ]
+      }
+    ],
+    "urh-000091": [
+      {
+        "claim_id": "urh-000091-c001",
+        "revision": 1,
+        "text": "quantum simulation with microwave circuits",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
+          "https://labsites.rochester.edu/bloklab/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.pas.rochester.edu/people/faculty/blok_machiel/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000091-c002",
+        "revision": 1,
+        "text": "superconducting quantum sensing",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
+          "https://labsites.rochester.edu/bloklab/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.pas.rochester.edu/people/faculty/blok_machiel/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000091-c003",
+        "revision": 1,
+        "text": "quantum simulation with microwave circuits",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
+          "https://labsites.rochester.edu/bloklab/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.pas.rochester.edu/people/faculty/blok_machiel/index.html"
+        ]
+      }
+    ],
+    "urh-000094": [
+      {
+        "claim_id": "urh-000094-c001",
+        "revision": 1,
+        "text": "acoustic wavefield reconstruction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=4165"
+        ]
+      },
+      {
+        "claim_id": "urh-000094-c002",
+        "revision": 1,
+        "text": "computational analysis of musical performance",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/bocko_mark/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=4165"
+        ]
+      }
+    ],
+    "urh-000083": [
+      {
+        "claim_id": "urh-000083-c001",
+        "revision": 1,
+        "text": "network modeling of glymphatic transport",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
+          "https://hajim.rochester.edu/me/sites/kelley/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000083-c002",
+        "revision": 1,
+        "text": "AI velocimetry of cerebral fluid flow",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
+          "https://hajim.rochester.edu/me/sites/kelley/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000083-c003",
+        "revision": 1,
+        "text": "phase-change heat transfer",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/boster_kimberly/index.html",
+          "https://hajim.rochester.edu/me/sites/kelley/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000120": [
+      {
+        "claim_id": "urh-000120-c001",
+        "revision": 1,
+        "text": "quantum ghost imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html",
+          "https://www.hajim.rochester.edu/optics/sites/boyd/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.boydnlo.ca/publications/"
+        ]
+      },
+      {
+        "claim_id": "urh-000120-c002",
+        "revision": 1,
+        "text": "optical phase conjugation through turbulence",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html",
+          "https://www.hajim.rochester.edu/optics/sites/boyd/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.boydnlo.ca/publications/"
+        ]
+      },
+      {
+        "claim_id": "urh-000120-c003",
+        "revision": 1,
+        "text": "high-gain parametric down-conversion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/boyd_robert/index.html",
+          "https://www.hajim.rochester.edu/optics/sites/boyd/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.boydnlo.ca/publications/"
+        ]
+      }
+    ],
+    "urh-000064": [
+      {
+        "claim_id": "urh-000064-c001",
+        "revision": 1,
+        "text": "high-energy laser diagnostics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/bromage_jake/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000040": [
+      {
+        "claim_id": "urh-000040-c001",
+        "revision": 1,
+        "text": "intravital multiphoton tumor imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/brown_edward/index.html",
+          "https://www.urmc.rochester.edu/labs/brown.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000133": [
+      {
+        "claim_id": "urh-000133-c001",
+        "revision": 1,
+        "text": "freeform optical surface metrology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/brown_thomas/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000133-c002",
+        "revision": 1,
+        "text": "photonic integrated-circuit characterization",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/brown_thomas/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000133-c003",
+        "revision": 1,
+        "text": "freeform optical surface metrology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/brown_thomas/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000095": [
+      {
+        "claim_id": "urh-000095-c001",
+        "revision": 1,
+        "text": "surgical soft-tissue biomechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/buckley_mark/index.html",
+          "https://www.urmc.rochester.edu/labs/buckley.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000095-c002",
+        "revision": 1,
+        "text": "mechanical-property imaging of musculoskeletal tissue",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/buckley_mark/index.html",
+          "https://www.urmc.rochester.edu/labs/buckley.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000063": [
+      {
+        "claim_id": "urh-000063-c001",
+        "revision": 1,
+        "text": "nonlinear integrated photonics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/cardenas_jaime/index.html",
+          "https://www.hajim.rochester.edu/optics/cardenas/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000063-c002",
+        "revision": 1,
+        "text": "silicon integrated nanophotonics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/cardenas_jaime/index.html",
+          "https://www.hajim.rochester.edu/optics/cardenas/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000063-c003",
+        "revision": 1,
+        "text": "silicon integrated nanophotonics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/cardenas_jaime/index.html",
+          "https://www.hajim.rochester.edu/optics/cardenas/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000087": [
+      {
+        "claim_id": "urh-000087-c001",
+        "revision": 1,
+        "text": "neural encoding of speech in noise",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/carney_laurel/index.html",
+          "https://www.urmc.rochester.edu/labs/carney.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000018": [
+      {
+        "claim_id": "urh-000018-c001",
+        "revision": 1,
+        "text": "point-of-care diagnostic ultrasound",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/castaneda-benjamin/index.html",
+          "https://www.urmc.rochester.edu/labs/global-health-medical-devices-lab",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000104": [
+      {
+        "claim_id": "urh-000104-c001",
+        "revision": 1,
+        "text": "inverse problems in computational imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/cetin_mujdat/index.html",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000104-c002",
+        "revision": 1,
+        "text": "Bayesian image reconstruction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/cetin_mujdat/index.html",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000104-c003",
+        "revision": 1,
+        "text": "radar image formation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/cetin_mujdat/index.html",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000090": [
+      {
+        "claim_id": "urh-000090-c001",
+        "revision": 1,
+        "text": "multi-objective automatic-speech-recognition training",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/chen_lisha/index.html",
+          "https://lisha-chen.github.io/www/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://lisha-chen.github.io",
+          "https://hajim.rochester.edu/ece/people/faculty/chen_lisha/index.html",
+          "https://lisha-chen.github.io/www/publication.html"
+        ]
+      }
+    ],
+    "urh-000116": [
+      {
+        "claim_id": "urh-000116-c001",
+        "revision": 1,
+        "text": "near-infrared tissue spectroscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/choe_regine/index.html",
+          "https://www.urmc.rochester.edu/labs/choe.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000116-c002",
+        "revision": 1,
+        "text": "optical monitoring of breast-cancer therapy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/choe_regine/index.html",
+          "https://www.urmc.rochester.edu/labs/choe.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000121": [
+      {
+        "claim_id": "urh-000121-c001",
+        "revision": 1,
+        "text": "tissue-engineering scaffold fabrication",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/clark_robert/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000121-c002",
+        "revision": 1,
+        "text": "tissue-engineering scaffold fabrication",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/clark_robert/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000121-c003",
+        "revision": 1,
+        "text": "nanoscale biomanufacturing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/clark_robert/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000049": [
+      {
+        "claim_id": "urh-000049-c001",
+        "revision": 1,
+        "text": "fusion-relevant high-energy-density materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000049-c002",
+        "revision": 1,
+        "text": "laboratory astrophysics at extreme pressure",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000049-c003",
+        "revision": 1,
+        "text": "planetary-interior materials at extreme conditions",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000101": [
+      {
+        "claim_id": "urh-000101-c001",
+        "revision": 1,
+        "text": "single-photon embedded eigenstates",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/cotrufo-michele/index.html",
+          "https://cotruforesearchlab.github.io/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000101-c002",
+        "revision": 1,
+        "text": "quasi-BIC nonlinear optical nonreciprocity",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/cotrufo-michele/index.html",
+          "https://cotruforesearchlab.github.io/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000073": [
+      {
+        "claim_id": "urh-000073-c001",
+        "revision": 1,
+        "text": "compiler-enforced systems security",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/criswell_john/index.html",
+          "https://www.cs.rochester.edu/u/criswell/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000036": [
+      {
+        "claim_id": "urh-000036-c001",
+        "revision": 1,
+        "text": "therapeutic ultrasound bioeffects",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
+          "https://www.urmc.rochester.edu/labs/dalecki.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000036-c002",
+        "revision": 1,
+        "text": "ultrasound for regenerative medicine",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
+          "https://www.urmc.rochester.edu/labs/dalecki.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000036-c003",
+        "revision": 1,
+        "text": "physical acoustics of biological systems",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/dalecki_diane/index.html",
+          "https://www.urmc.rochester.edu/labs/dalecki.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000078": [
+      {
+        "claim_id": "urh-000078-c001",
+        "revision": 1,
+        "text": "inertial-fusion plasma diagnostics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000078-c002",
+        "revision": 1,
+        "text": "laser-plasma interaction measurements",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000078-c003",
+        "revision": 1,
+        "text": "magnetized high-energy-density plasma experiments",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000089": [
+      {
+        "claim_id": "urh-000089-c001",
+        "revision": 1,
+        "text": "cutaneous barrier toxicology models",
+        "source_urls": [
+          "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
+          "https://www.urmc.rochester.edu/labs/delouise.aspx",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000089-c002",
+        "revision": 1,
+        "text": "tissue-chip microphysiological systems",
+        "source_urls": [
+          "https://www.urmc.rochester.edu/people/23532465-lisa-a-delouise",
+          "https://www.urmc.rochester.edu/labs/delouise.aspx",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000054": [
+      {
+        "claim_id": "urh-000054-c001",
+        "revision": 1,
+        "text": "exciton complexes in monolayer transition-metal dichalcogenides",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=14832"
+        ]
+      },
+      {
+        "claim_id": "urh-000054-c002",
+        "revision": 1,
+        "text": "spin-polarized carrier transport",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=14832"
+        ]
+      },
+      {
+        "claim_id": "urh-000054-c003",
+        "revision": 1,
+        "text": "exciton complexes in monolayer transition-metal dichalcogenides",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://hajim.rochester.edu/ece/people/faculty/dery_hanan/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=14832"
+        ]
+      }
+    ],
+    "urh-000125": [
+      {
+        "claim_id": "urh-000125-c001",
+        "revision": 1,
+        "text": "battery electrode-electrolyte interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c002",
+        "revision": 1,
+        "text": "battery electrode-electrolyte interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c003",
+        "revision": 1,
+        "text": "electrocatalytic interface modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c004",
+        "revision": 1,
+        "text": "atomic modeling of solid-liquid interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c005",
+        "revision": 1,
+        "text": "atomic modeling of solid-gas interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c006",
+        "revision": 1,
+        "text": "machine learning for catalyst discovery",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c007",
+        "revision": 1,
+        "text": "heterogeneous catalysis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c008",
+        "revision": 1,
+        "text": "electrocatalysis at interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000125-c009",
+        "revision": 1,
+        "text": "battery interface modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/deshpande-siddharth/index.html",
+          "https://www.atomicinterfaces.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000022": [
+      {
+        "claim_id": "urh-000022-c001",
+        "revision": 1,
+        "text": "compiler locality optimization",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html",
+          "https://www.cs.rochester.edu/u/cding/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000022-c002",
+        "revision": 1,
+        "text": "cache and memory locality analysis",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/ding_chen/index.html",
+          "https://www.cs.rochester.edu/u/cding/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000096": [
+      {
+        "claim_id": "urh-000096-c001",
+        "revision": 1,
+        "text": "ultrasound elastography",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/affiliated-faculty/doyley_marvin/index.html",
+          "https://www.ece.rochester.edu/projects/doyley_lab/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000156": [
+      {
+        "claim_id": "urh-000156-c001",
+        "revision": 1,
+        "text": "music information retrieval",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
+          "https://www.ece.rochester.edu/~zduan/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000156-c002",
+        "revision": 1,
+        "text": "audio representation learning",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
+          "https://www.ece.rochester.edu/~zduan/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000156-c003",
+        "revision": 1,
+        "text": "music information retrieval",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/duan_zhiyao/index.html",
+          "https://www.ece.rochester.edu/~zduan/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000046": [
+      {
+        "claim_id": "urh-000046-c001",
+        "revision": 1,
+        "text": "synthetic-biology environmental remediation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000046-c002",
+        "revision": 1,
+        "text": "synthetic-biology environmental remediation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000046-c003",
+        "revision": 1,
+        "text": "microbial metabolic engineering",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000046-c004",
+        "revision": 1,
+        "text": "bio-inspired catalysis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000046-c005",
+        "revision": 1,
+        "text": "polymer chemistry and plastic upcycling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000046-c006",
+        "revision": 1,
+        "text": "bioelectrochemistry",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000046-c007",
+        "revision": 1,
+        "text": "biosensors",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000046-c008",
+        "revision": 1,
+        "text": "metabolic engineering for environmental remediation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/fan-gang/index.html",
+          "https://www.gangfanclub.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.gangfanclub.com"
+        ]
+      }
+    ],
+    "urh-000067": [
+      {
+        "claim_id": "urh-000067-c001",
+        "revision": 1,
+        "text": "computational imaging through aberrations",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html",
+          "https://labsites.rochester.edu/fienup/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000067-c002",
+        "revision": 1,
+        "text": "phase-diverse image reconstruction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html",
+          "https://labsites.rochester.edu/fienup/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000067-c003",
+        "revision": 1,
+        "text": "synthetic-aperture radar image reconstruction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/fienup_james/index.html",
+          "https://labsites.rochester.edu/fienup/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000157": [
+      {
+        "claim_id": "urh-000157-c001",
+        "revision": 1,
+        "text": "transport phenomena",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/"
+        ]
+      },
+      {
+        "claim_id": "urh-000157-c002",
+        "revision": 1,
+        "text": "computational fluid dynamics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/"
+        ]
+      },
+      {
+        "claim_id": "urh-000157-c003",
+        "revision": 1,
+        "text": "microfluidic cancer cell capture",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/"
+        ]
+      },
+      {
+        "claim_id": "urh-000157-c004",
+        "revision": 1,
+        "text": "nanoparticle capture coatings",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/"
+        ]
+      },
+      {
+        "claim_id": "urh-000157-c005",
+        "revision": 1,
+        "text": "biomedical transport modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/"
+        ]
+      },
+      {
+        "claim_id": "urh-000157-c006",
+        "revision": 1,
+        "text": "fluid mechanics education",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/"
+        ]
+      }
+    ],
+    "urh-000060": [
+      {
+        "claim_id": "urh-000060-c001",
+        "revision": 1,
+        "text": "dissipative exciton dynamics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html",
+          "https://sas.rochester.edu/chm/groups/franco/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000060-c002",
+        "revision": 1,
+        "text": "open-quantum-system dynamics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/franco-ignacio/index.html",
+          "https://sas.rochester.edu/chm/groups/franco/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000038": [
+      {
+        "claim_id": "urh-000038-c001",
+        "revision": 1,
+        "text": "integrated-circuit power-delivery networks",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/friedman_eby/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000038-c002",
+        "revision": 1,
+        "text": "3D integrated-circuit design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/friedman_eby/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000109": [
+      {
+        "claim_id": "urh-000109-c001",
+        "revision": 1,
+        "text": "materials-process optimization",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/funkenbusch_paul/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000109-c002",
+        "revision": 1,
+        "text": "biomaterial mechanical variability",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/funkenbusch_paul/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000109-c003",
+        "revision": 1,
+        "text": "microstructure-property-processing relationships",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/funkenbusch_paul/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000139": [
+      {
+        "claim_id": "urh-000139-c001",
+        "revision": 1,
+        "text": "optomechanical finite-element analysis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/genberg_victor/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000051": [
+      {
+        "claim_id": "urh-000051-c001",
+        "revision": 1,
+        "text": "complex-network statistical physics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/ghoshal_gourab/index.html",
+          "https://gghoshal.pas.rochester.edu/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.pas.rochester.edu/people/faculty/ghoshal_gourab/"
+        ]
+      }
+    ],
+    "urh-000098": [
+      {
+        "claim_id": "urh-000098-c001",
+        "revision": 1,
+        "text": "fluorescence-lifetime imaging microscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/giacomelli-mike/index.html",
+          "https://www.urmc.rochester.edu/labs/giacomelli.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000098-c002",
+        "revision": 1,
+        "text": "multiphoton surgical microscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/giacomelli-mike/index.html",
+          "https://www.urmc.rochester.edu/labs/giacomelli.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000030": [
+      {
+        "claim_id": "urh-000030-c001",
+        "revision": 1,
+        "text": "decoding algorithms for natural language processing",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/gildea_daniel/index.html",
+          "https://www.cs.rochester.edu/~gildea/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000113": [
+      {
+        "claim_id": "urh-000113-c001",
+        "revision": 1,
+        "text": "sediment transport mechanics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/ees/people/faculty/glade-rachel/index.html",
+          "https://www.rachelglade.com/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.rachelglade.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000113-c002",
+        "revision": 1,
+        "text": "granular-flow pattern formation",
+        "source_urls": [
+          "https://www.sas.rochester.edu/ees/people/faculty/glade-rachel/index.html",
+          "https://www.rachelglade.com/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.rachelglade.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000113-c003",
+        "revision": 1,
+        "text": "granular river and landscape processes",
+        "source_urls": [
+          "https://www.sas.rochester.edu/ees/people/faculty/glade-rachel/index.html",
+          "https://www.rachelglade.com/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.rachelglade.com"
+        ]
+      }
+    ],
+    "urh-000137": [
+      {
+        "claim_id": "urh-000137-c001",
+        "revision": 1,
+        "text": "hydrodynamic-instability theory for inertial fusion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000137-c002",
+        "revision": 1,
+        "text": "radiation-hydrodynamic modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000138": [
+      {
+        "claim_id": "urh-000138-c001",
+        "revision": 1,
+        "text": "machine-learning surrogate models for fusion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000138-c002",
+        "revision": 1,
+        "text": "inertial-fusion implosion design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000138-c003",
+        "revision": 1,
+        "text": "thermonuclear burn modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000028": [
+      {
+        "claim_id": "urh-000028-c001",
+        "revision": 1,
+        "text": "ultrafast laser-metal interaction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/guo_chunlei/index.html",
+          "https://hajim.rochester.edu/optics/sites/guo",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000028-c002",
+        "revision": 1,
+        "text": "ultrafast laser-metal interaction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/guo_chunlei/index.html",
+          "https://hajim.rochester.edu/optics/sites/guo",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000028-c003",
+        "revision": 1,
+        "text": "femtosecond-laser surface functionalization",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/guo_chunlei/index.html",
+          "https://hajim.rochester.edu/optics/sites/guo",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000149": [
+      {
+        "claim_id": "urh-000149-c001",
+        "revision": 1,
+        "text": "GPU security architecture",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html",
+          "https://yananguo.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://yananguo.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000149-c002",
+        "revision": 1,
+        "text": "memory-system security",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html",
+          "https://yananguo.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://yananguo.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000149-c003",
+        "revision": 1,
+        "text": "software-hardware security boundaries",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/guo_yanan/index.html",
+          "https://yananguo.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://yananguo.com"
+        ]
+      }
+    ],
+    "urh-000114": [
+      {
+        "claim_id": "urh-000114-c001",
+        "revision": 1,
+        "text": "neural population coding and decoding",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/haefner_ralf/index.html",
+          "https://www2.bcs.rochester.edu/sites/haefnerlab/index.html",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000033": [
+      {
+        "claim_id": "urh-000033-c001",
+        "revision": 1,
+        "text": "inertial-fusion target thin-film deposition",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000033-c002",
+        "revision": 1,
+        "text": "cryogenic deuterium-tritium target layers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000033-c003",
+        "revision": 1,
+        "text": "inertial-fusion target thin-film deposition",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000055": [
+      {
+        "claim_id": "urh-000055-c001",
+        "revision": 1,
+        "text": "evaluation of language-model reasoning",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/hangfeng_he/index.html",
+          "https://hornhehhf.github.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://hornhehhf.github.io",
+          "https://www.cs.rochester.edu/u/www/people/faculty/hangfeng_he/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000055-c002",
+        "revision": 1,
+        "text": "reasoning in large language models",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/hangfeng_he/index.html",
+          "https://hornhehhf.github.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://hornhehhf.github.io",
+          "https://www.cs.rochester.edu/u/www/people/faculty/hangfeng_he/index.html"
+        ]
+      }
+    ],
+    "urh-000085": [
+      {
+        "claim_id": "urh-000085-c001",
+        "revision": 1,
+        "text": "computational social-choice bribery problems",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/hemaspaandra_lane/index.html",
+          "https://www.cs.rochester.edu/u/lane/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000093": [
+      {
+        "claim_id": "urh-000093-c001",
+        "revision": 1,
+        "text": "mechanochemical control of morphogenesis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/herrera-perez_marisol/index.html",
+          "https://herreralab.org",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000053": [
+      {
+        "claim_id": "urh-000053-c001",
+        "revision": 1,
+        "text": "spectral recovery of damaged texts",
+        "source_urls": [
+          "https://www.sas.rochester.edu/eng/people/faculty/heyworth_gregory/index.html",
+          "https://lazarusprojectimaging.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://lazarusprojectimaging.com",
+          "https://sas.rochester.edu/eng/people/faculty/heyworth_gregory/index.html"
+        ]
+      }
+    ],
+    "urh-000024": [
+      {
+        "claim_id": "urh-000024-c001",
+        "revision": 1,
+        "text": "temporomandibular-joint biomechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/hill_cherice/index.html",
+          "https://www.urmc.rochester.edu/labs/cherice-hill-lab.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/labs/cherice-hill-lab"
+        ]
+      }
+    ],
+    "urh-000041": [
+      {
+        "claim_id": "urh-000041-c001",
+        "revision": 1,
+        "text": "multimodal behavioral-signal analysis",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
+          "https://hoques.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://hoques.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000041-c002",
+        "revision": 1,
+        "text": "affective and social computing",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/hoque_m.ehsan/index.html",
+          "https://hoques.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://hoques.com"
+        ]
+      }
+    ],
+    "urh-000081": [
+      {
+        "claim_id": "urh-000081-c001",
+        "revision": 1,
+        "text": "additive combinatorics",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/hosseini_s.kaave/index.html",
+          "https://www.cs.rochester.edu/u/shossei2/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000081-c002",
+        "revision": 1,
+        "text": "discrete Fourier analysis of combinatorial structures",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/hosseini_s.kaave/index.html",
+          "https://www.cs.rochester.edu/u/shossei2/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000131": [
+      {
+        "claim_id": "urh-000131-c001",
+        "revision": 1,
+        "text": "attosecond electron dynamics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/hu_suxing/index.html",
+          "https://www.lle.rochester.edu/index.php/education/research-areas/high-energy-density-physics-hedp-theory-group/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000131-c002",
+        "revision": 1,
+        "text": "inertial-confinement-fusion target physics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/hu_suxing/index.html",
+          "https://www.lle.rochester.edu/index.php/education/research-areas/high-energy-density-physics-hedp-theory-group/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000131-c003",
+        "revision": 1,
+        "text": "inertial-confinement-fusion target physics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/hu_suxing/index.html",
+          "https://www.lle.rochester.edu/index.php/education/research-areas/high-energy-density-physics-hedp-theory-group/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000099": [
+      {
+        "claim_id": "urh-000099-c001",
+        "revision": 1,
+        "text": "non-von-Neumann computing accelerators",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+          "https://www.hajim.rochester.edu/ece/sites/michaelhuang/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000099-c002",
+        "revision": 1,
+        "text": "memory-system architecture",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+          "https://www.hajim.rochester.edu/ece/sites/michaelhuang/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000099-c003",
+        "revision": 1,
+        "text": "architecture for emerging computing paradigms",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+          "https://www.hajim.rochester.edu/ece/sites/michaelhuang/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000110": [
+      {
+        "claim_id": "urh-000110-c001",
+        "revision": 1,
+        "text": "cavity-QED molecular dynamics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html",
+          "https://huogroup.github.io/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://huogroup.github.io"
+        ]
+      },
+      {
+        "claim_id": "urh-000110-c002",
+        "revision": 1,
+        "text": "cavity-QED molecular dynamics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html",
+          "https://huogroup.github.io/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://huogroup.github.io"
+        ]
+      },
+      {
+        "claim_id": "urh-000110-c003",
+        "revision": 1,
+        "text": "nonadiabatic quantum dynamics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/huo-pengfei/index.html",
+          "https://huogroup.github.io/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://huogroup.github.io"
+        ]
+      }
+    ],
+    "urh-000084": [
+      {
+        "claim_id": "urh-000084-c001",
+        "revision": 1,
+        "text": "visual neuroscience of damaged cortex",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/huxlin-krystel/index.html",
+          "https://www.urmc.rochester.edu/people/23346062-krystel-huxlin",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000084-c002",
+        "revision": 1,
+        "text": "adaptive-optics measurement of visual function",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/huxlin-krystel/index.html",
+          "https://www.urmc.rochester.edu/people/23346062-krystel-huxlin",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000084-c003",
+        "revision": 1,
+        "text": "laser-vision-correction outcomes",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/huxlin-krystel/index.html",
+          "https://www.urmc.rochester.edu/people/23346062-krystel-huxlin",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000154": [
+      {
+        "claim_id": "urh-000154-c001",
+        "revision": 1,
+        "text": "analog VLSI for imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/ignjatovic_zeljko/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000154-c002",
+        "revision": 1,
+        "text": "analog VLSI for imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/ignjatovic_zeljko/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000115": [
+      {
+        "claim_id": "urh-000115-c001",
+        "revision": 1,
+        "text": "intravital multiphoton tissue imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html",
+          "https://www.urmc.rochester.edu/labs/irwin-lab",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000115-c002",
+        "revision": 1,
+        "text": "regenerative therapies for soft tissue",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html",
+          "https://www.urmc.rochester.edu/labs/irwin-lab",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000115-c003",
+        "revision": 1,
+        "text": "soft-tissue mechanobiology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/irwin-rebecca/index.html",
+          "https://www.urmc.rochester.edu/labs/irwin-lab",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000119": [
+      {
+        "claim_id": "urh-000119-c001",
+        "revision": 1,
+        "text": "visual working-memory modeling",
+        "source_urls": [
+          "https://www.sas.rochester.edu/bcs/people/faculty/jacobs_robert/index.html",
+          "https://www2.bcs.rochester.edu/sites/jacobslab/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000119-c002",
+        "revision": 1,
+        "text": "Bayesian models of perceptual learning",
+        "source_urls": [
+          "https://www.sas.rochester.edu/bcs/people/faculty/jacobs_robert/index.html",
+          "https://www2.bcs.rochester.edu/sites/jacobslab/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000010": [
+      {
+        "claim_id": "urh-000010-c001",
+        "revision": 1,
+        "text": "continuous and weak quantum measurement",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/jordan_andrew/index.html",
+          "https://sites.google.com/view/andrewnjordan/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000013": [
+      {
+        "claim_id": "urh-000013-c001",
+        "revision": 1,
+        "text": "algorithmic game theory",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/kahng_anson/index.html",
+          "https://ansonkahng.com",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000013-c002",
+        "revision": 1,
+        "text": "computational social choice",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/kahng_anson/index.html",
+          "https://ansonkahng.com",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000026": [
+      {
+        "claim_id": "urh-000026-c001",
+        "revision": 1,
+        "text": "computer vision for medical imaging",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/kanan_chris/index.html",
+          "https://chriskanan.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://chriskanan.com"
+        ]
+      }
+    ],
+    "urh-000037": [
+      {
+        "claim_id": "urh-000037-c001",
+        "revision": 1,
+        "text": "liquid-metal battery convection",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
+          "https://hajim.rochester.edu/me/sites/kelley/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000037-c002",
+        "revision": 1,
+        "text": "glymphatic and perivascular fluid transport",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
+          "https://hajim.rochester.edu/me/sites/kelley/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000037-c003",
+        "revision": 1,
+        "text": "inner-ear fluid mixing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/kelley_doug/index.html",
+          "https://hajim.rochester.edu/me/sites/kelley/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000082": [
+      {
+        "claim_id": "urh-000082-c001",
+        "revision": 1,
+        "text": "transition-metal-oxide nanocrystals",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
+          "https://www.sas.rochester.edu/chm/groups/knowles/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000082-c002",
+        "revision": 1,
+        "text": "VO2 nanocrystal synthesis and phase behavior",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
+          "https://www.sas.rochester.edu/chm/groups/knowles/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000082-c003",
+        "revision": 1,
+        "text": "time-resolved optical spectroscopy of nanomaterials",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/knowles-kathryn/index.html",
+          "https://www.sas.rochester.edu/chm/groups/knowles/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000140": [
+      {
+        "claim_id": "urh-000140-c001",
+        "revision": 1,
+        "text": "ultrafast nonlinear optical interactions",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/news-events/colloquia/archives/2025/2025-01-27-wayne-knox.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000140-c002",
+        "revision": 1,
+        "text": "laser-based refractive vision correction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/news-events/colloquia/archives/2025/2025-01-27-wayne-knox.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000140-c003",
+        "revision": 1,
+        "text": "ultrafast laser material modification",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/knox_wayne/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/news-events/colloquia/archives/2025/2025-01-27-wayne-knox.html"
+        ]
+      }
+    ],
+    "urh-000124": [
+      {
+        "claim_id": "urh-000124-c001",
+        "revision": 1,
+        "text": "3D integrated-circuit power delivery",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/kose_selcuk/index.html",
+          "https://selcukkose.com/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000124-c002",
+        "revision": 1,
+        "text": "secure mixed-signal hardware",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/kose_selcuk/index.html",
+          "https://selcukkose.com/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000124-c003",
+        "revision": 1,
+        "text": "secure mixed-signal hardware",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/kose_selcuk/index.html",
+          "https://selcukkose.com/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000136": [
+      {
+        "claim_id": "urh-000136-c001",
+        "revision": 1,
+        "text": "exciton physics in semiconductor nanocrystals",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/krauss_todd/index.html",
+          "https://www.krausslab.com",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000136-c002",
+        "revision": 1,
+        "text": "quantum emitters from semiconductor nanomaterials",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/krauss_todd/index.html",
+          "https://www.krausslab.com",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000021": [
+      {
+        "claim_id": "urh-000021-c001",
+        "revision": 1,
+        "text": "high-power laser wavefront control",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000021-c002",
+        "revision": 1,
+        "text": "adaptive optics for high-power lasers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_brian/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000069": [
+      {
+        "claim_id": "urh-000069-c001",
+        "revision": 1,
+        "text": "colorimetric spectral-reflectance reconstruction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/kruschwitz_jen/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://opg.optica.org/ao/abstract.cfm?uri=ao-65-5-A12"
+        ]
+      }
+    ],
+    "urh-000039": [
+      {
+        "claim_id": "urh-000039-c001",
+        "revision": 1,
+        "text": "auditory cortical encoding of natural sounds",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/lalor_edmund/index.html",
+          "https://www.urmc.rochester.edu/labs/lalor.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000074": [
+      {
+        "claim_id": "urh-000074-c001",
+        "revision": 1,
+        "text": "subsurface damage in optical fabrication",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/lambropoulos_john/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000158": [
+      {
+        "claim_id": "urh-000158-c007",
+        "revision": 1,
+        "text": "teaching labs",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/"
+        ]
+      }
+    ],
+    "urh-000025": [
+      {
+        "claim_id": "urh-000025-c001",
+        "revision": 1,
+        "text": "targeted cochlear and vestibular drug delivery",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/lee-choongheon/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000025-c002",
+        "revision": 1,
+        "text": "inner-ear pharmacokinetics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/lee-choongheon/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000143": [
+      {
+        "claim_id": "urh-000143-c001",
+        "revision": 1,
+        "text": "cellular force sensing in joint tissues",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/lee-whasil/index.html",
+          "https://www.urmc.rochester.edu/labs/whasil-lee.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000143-c002",
+        "revision": 1,
+        "text": "chondrocyte and cartilage mechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/lee-whasil/index.html",
+          "https://www.urmc.rochester.edu/labs/whasil-lee.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000143-c003",
+        "revision": 1,
+        "text": "mechanosensitive ion channels in musculoskeletal cells",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/lee-whasil/index.html",
+          "https://www.urmc.rochester.edu/labs/whasil-lee.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000071": [
+      {
+        "claim_id": "urh-000071-c001",
+        "revision": 1,
+        "text": "stochastic optimization algorithms",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/liang-jiaming/index.html",
+          "https://jiaming-liang.github.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000071-c002",
+        "revision": 1,
+        "text": "optimization in games",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/liang-jiaming/index.html",
+          "https://jiaming-liang.github.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000112": [
+      {
+        "claim_id": "urh-000112-c001",
+        "revision": 1,
+        "text": "chip-scale photonic signal processing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/lin_qiang/index.html",
+          "https://photonlab.hajim.rochester.edu/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://photonlab.hajim.rochester.edu"
+        ]
+      },
+      {
+        "claim_id": "urh-000112-c002",
+        "revision": 1,
+        "text": "on-chip quantum photonics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/lin_qiang/index.html",
+          "https://photonlab.hajim.rochester.edu/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://photonlab.hajim.rochester.edu"
+        ]
+      },
+      {
+        "claim_id": "urh-000112-c003",
+        "revision": 1,
+        "text": "photon-phonon interactions",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/lin_qiang/index.html",
+          "https://photonlab.hajim.rochester.edu/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://photonlab.hajim.rochester.edu"
+        ]
+      }
+    ],
+    "urh-000032": [
+      {
+        "claim_id": "urh-000032-c001",
+        "revision": 1,
+        "text": "electrotactile haptic interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      },
+      {
+        "claim_id": "urh-000032-c002",
+        "revision": 1,
+        "text": "mixed ionic-electronic conducting polymers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      },
+      {
+        "claim_id": "urh-000032-c003",
+        "revision": 1,
+        "text": "organic and flexible electronics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      },
+      {
+        "claim_id": "urh-000032-c004",
+        "revision": 1,
+        "text": "conducting polymers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      },
+      {
+        "claim_id": "urh-000032-c005",
+        "revision": 1,
+        "text": "stretchable semiconductors",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      },
+      {
+        "claim_id": "urh-000032-c006",
+        "revision": 1,
+        "text": "mechanical properties of organic electronics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      },
+      {
+        "claim_id": "urh-000032-c007",
+        "revision": 1,
+        "text": "electrotactile haptics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      },
+      {
+        "claim_id": "urh-000032-c008",
+        "revision": 1,
+        "text": "wearable bioelectronic interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/index.html",
+          "https://www.lipomigroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/lipomi-darren/",
+          "https://www.lipomigroup.org/pubs",
+          "https://www.lipomigroup.org/"
+        ]
+      }
+    ],
+    "urh-000043": [
+      {
+        "claim_id": "urh-000043-c001",
+        "revision": 1,
+        "text": "single-cell mechanical measurements",
+        "source_urls": [
+          "https://www.urmc.rochester.edu/people/23097780-elena-lomakina",
+          "https://www.urmc.rochester.edu/labs/waugh.aspx",
+          "https://hajim.rochester.edu/bme/people/research_faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000007": [
+      {
+        "claim_id": "urh-000007-c001",
+        "revision": 1,
+        "text": "synthetic-biology interventions against resistance",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "https://lopatkinlab.com/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://lopatkinlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000007-c002",
+        "revision": 1,
+        "text": "metabolic control of antibiotic susceptibility",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "https://lopatkinlab.com/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://lopatkinlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000007-c003",
+        "revision": 1,
+        "text": "antibiotic resistance",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "https://lopatkinlab.com/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://lopatkinlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000007-c004",
+        "revision": 1,
+        "text": "plasmid dynamics and horizontal gene transfer",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "https://lopatkinlab.com/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://lopatkinlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000007-c005",
+        "revision": 1,
+        "text": "engineered microbial communities",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "https://lopatkinlab.com/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://lopatkinlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000007-c006",
+        "revision": 1,
+        "text": "microbial systems biology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "https://lopatkinlab.com/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://lopatkinlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000007-c007",
+        "revision": 1,
+        "text": "computational models of bacterial resistance",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html",
+          "https://lopatkinlab.com/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://lopatkinlab.com"
+        ]
+      }
+    ],
+    "urh-000011": [
+      {
+        "claim_id": "urh-000011-c001",
+        "revision": 1,
+        "text": "peripheral auditory neurobiology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/luebke_anne/index.html",
+          "https://www.urmc.rochester.edu/labs/luebke.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000132": [
+      {
+        "claim_id": "urh-000132-c001",
+        "revision": 1,
+        "text": "quantum-optics teaching instrumentation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/lukishova_svetlana/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000132-c002",
+        "revision": 1,
+        "text": "single-photon nanophotonics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/lukishova_svetlana/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000132-c003",
+        "revision": 1,
+        "text": "nonlinear optics in liquid crystals",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/lukishova_svetlana/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000072": [
+      {
+        "claim_id": "urh-000072-c001",
+        "revision": 1,
+        "text": "computer vision for social and behavioral science",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html",
+          "https://www.cs.rochester.edu/u/jluo/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=85"
+        ]
+      },
+      {
+        "claim_id": "urh-000072-c002",
+        "revision": 1,
+        "text": "multimodal social-media image analysis",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html",
+          "https://www.cs.rochester.edu/u/jluo/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=85"
+        ]
+      },
+      {
+        "claim_id": "urh-000072-c003",
+        "revision": 1,
+        "text": "large-scale visual content mining",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/luo_jiebo/index.html",
+          "https://www.cs.rochester.edu/u/jluo/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=85"
+        ]
+      }
+    ],
+    "urh-000130": [
+      {
+        "claim_id": "urh-000130-c001",
+        "revision": 1,
+        "text": "ocular aberration measurement",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/marcos-susana/index.html",
+          "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab.aspx",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112362803-susana-marcos",
+          "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab"
+        ]
+      },
+      {
+        "claim_id": "urh-000130-c002",
+        "revision": 1,
+        "text": "customized intraocular-lens selection",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/marcos-susana/index.html",
+          "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab.aspx",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112362803-susana-marcos",
+          "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab"
+        ]
+      },
+      {
+        "claim_id": "urh-000130-c003",
+        "revision": 1,
+        "text": "adaptive-optics vision simulation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/marcos-susana/index.html",
+          "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab.aspx",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112362803-susana-marcos",
+          "https://www.urmc.rochester.edu/eye-institute/research/labs/marcos-lab"
+        ]
+      }
+    ],
+    "urh-000050": [
+      {
+        "claim_id": "urh-000050-c001",
+        "revision": 1,
+        "text": "graph signal processing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/mateos_gonzalo/index.html",
+          "https://www.ece.rochester.edu/~gmateosb/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000044": [
+      {
+        "claim_id": "urh-000044-c001",
+        "revision": 1,
+        "text": "metal-oxide cluster catalysis",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/matson-ellen/index.html",
+          "https://www.ellenmatsonlab.com/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.ellenmatsonlab.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000044-c002",
+        "revision": 1,
+        "text": "proton-coupled electron transfer",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/matson-ellen/index.html",
+          "https://www.ellenmatsonlab.com/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.ellenmatsonlab.com"
+        ]
+      }
+    ],
+    "urh-000128": [
+      {
+        "claim_id": "urh-000128-c001",
+        "revision": 1,
+        "text": "ultrasound elastography",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/mcaleavey_stephen/index.html",
+          "https://www.urmc.rochester.edu/labs/mcaleavey.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000035": [
+      {
+        "claim_id": "urh-000035-c001",
+        "revision": 1,
+        "text": "femtosecond stimulated Raman spectroscopy",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html",
+          "https://www.sas.rochester.edu/chm/groups/mccamant/index.php",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000035-c002",
+        "revision": 1,
+        "text": "excited-state molecular dynamics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html",
+          "https://www.sas.rochester.edu/chm/groups/mccamant/index.php",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000035-c003",
+        "revision": 1,
+        "text": "time-resolved spectroscopy of molecular chromophores",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/mccamant-david/index.html",
+          "https://www.sas.rochester.edu/chm/groups/mccamant/index.php",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000066": [
+      {
+        "claim_id": "urh-000066-c001",
+        "revision": 1,
+        "text": "organ-on-chip barrier models",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/mcgrath_james/index.html",
+          "https://www.urmc.rochester.edu/labs/mcgrath.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000066-c002",
+        "revision": 1,
+        "text": "microfluidic barrier microphysiology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/bme/people/faculty/mcgrath_james/index.html",
+          "https://www.urmc.rochester.edu/labs/mcgrath.aspx",
+          "https://www.hajim.rochester.edu/bme/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000012": [
+      {
+        "claim_id": "urh-000012-c001",
+        "revision": 1,
+        "text": "engineered living materials",
+        "source_urls": [
+          "https://www.sas.rochester.edu/bio/people/faculty/meyer_anne/index.html",
+          "https://sites.google.com/site/annemeyerlab/home",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000012-c002",
+        "revision": 1,
+        "text": "synthetic-biology control of biomaterial production",
+        "source_urls": [
+          "https://www.sas.rochester.edu/bio/people/faculty/meyer_anne/index.html",
+          "https://sites.google.com/site/annemeyerlab/home",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000012-c003",
+        "revision": 1,
+        "text": "3D bioprinting of bacteria",
+        "source_urls": [
+          "https://www.sas.rochester.edu/bio/people/faculty/meyer_anne/index.html",
+          "https://sites.google.com/site/annemeyerlab/home",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000016": [
+      {
+        "claim_id": "urh-000016-c001",
+        "revision": 1,
+        "text": "silicon-photonic ring-resonator biosensors",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html",
+          "https://www.urmc.rochester.edu/labs/Miller-Lab/",
+          "https://www.urmc.rochester.edu/people/21977435-benjamin-l-miller",
+          "https://www.urmc.rochester.edu/labs/benjamin-miller.aspx",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000016-c002",
+        "revision": 1,
+        "text": "sensing in microphysiological systems",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html",
+          "https://www.urmc.rochester.edu/labs/Miller-Lab/",
+          "https://www.urmc.rochester.edu/people/21977435-benjamin-l-miller",
+          "https://www.urmc.rochester.edu/labs/benjamin-miller.aspx",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000016-c003",
+        "revision": 1,
+        "text": "silicon-photonic ring-resonator biosensors",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/miller_ben/index.html",
+          "https://www.urmc.rochester.edu/labs/Miller-Lab/",
+          "https://www.urmc.rochester.edu/people/21977435-benjamin-l-miller",
+          "https://www.urmc.rochester.edu/labs/benjamin-miller.aspx",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000059": [
+      {
+        "claim_id": "urh-000059-c001",
+        "revision": 1,
+        "text": "liquid-metal battery fluid dynamics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/about/faculty/new2425.html",
+          "https://hajim.rochester.edu/me/sites/kelley/papers/MohammadDissertation.pdf"
+        ]
+      },
+      {
+        "claim_id": "urh-000059-c002",
+        "revision": 1,
+        "text": "computational magnetohydrodynamics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/about/faculty/new2425.html",
+          "https://hajim.rochester.edu/me/sites/kelley/papers/MohammadDissertation.pdf"
+        ]
+      },
+      {
+        "claim_id": "urh-000059-c003",
+        "revision": 1,
+        "text": "liquid-metal battery fluid dynamics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/mohammad-ibrahim/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/about/faculty/new2425.html",
+          "https://hajim.rochester.edu/me/sites/kelley/papers/MohammadDissertation.pdf"
+        ]
+      }
+    ],
+    "urh-000062": [
+      {
+        "claim_id": "urh-000062-c001",
+        "revision": 1,
+        "text": "performer-dependent organ acoustics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/mottley_jack/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000062-c002",
+        "revision": 1,
+        "text": "nonlinear organ-pipe acoustics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/mottley_jack/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000014": [
+      {
+        "claim_id": "urh-000014-c001",
+        "revision": 1,
+        "text": "electrochemical PFAS defluorination",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c002",
+        "revision": 1,
+        "text": "electrode microenvironment control",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c003",
+        "revision": 1,
+        "text": "mechanistic electrocatalysis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c004",
+        "revision": 1,
+        "text": "electrocatalytic aqueous PFAS defluorination",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c005",
+        "revision": 1,
+        "text": "organic electrooxidation through water activation",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c006",
+        "revision": 1,
+        "text": "selective carbon dioxide reduction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c007",
+        "revision": 1,
+        "text": "electrode microenvironments",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c008",
+        "revision": 1,
+        "text": "pulsed-laser nanoparticle synthesis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000014-c009",
+        "revision": 1,
+        "text": "nanocatalyst structure-function",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html",
+          "https://astridmuellergroup.org",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000079": [
+      {
+        "claim_id": "urh-000079-c001",
+        "revision": 1,
+        "text": "organ-of-Corti micromechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/nam_jong-hoon/index.html",
+          "https://www.urmc.rochester.edu/labs/nam.aspx",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000079-c002",
+        "revision": 1,
+        "text": "inner-ear sensory-cell biophysics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/nam_jong-hoon/index.html",
+          "https://www.urmc.rochester.edu/labs/nam.aspx",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000079-c003",
+        "revision": 1,
+        "text": "cochlear hair-cell mechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/nam_jong-hoon/index.html",
+          "https://www.urmc.rochester.edu/labs/nam.aspx",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000045": [
+      {
+        "claim_id": "urh-000045-c001",
+        "revision": 1,
+        "text": "automated data-discovery systems",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/nargesian-fatemeh/index.html",
+          "https://fnargesian.com/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://fnargesian.com"
+        ]
+      }
+    ],
+    "urh-000075": [
+      {
+        "claim_id": "urh-000075-c001",
+        "revision": 1,
+        "text": "singlet-triplet quantum-dot qubits",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
+          "https://labsites.rochester.edu/nicholgroup",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://labsites.rochester.edu/nicholgroup/publications/"
+        ]
+      },
+      {
+        "claim_id": "urh-000075-c002",
+        "revision": 1,
+        "text": "spin-valley coherence in quantum dots",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
+          "https://labsites.rochester.edu/nicholgroup",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://labsites.rochester.edu/nicholgroup/publications/"
+        ]
+      },
+      {
+        "claim_id": "urh-000075-c003",
+        "revision": 1,
+        "text": "dynamically corrected qubit gates",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
+          "https://labsites.rochester.edu/nicholgroup",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://labsites.rochester.edu/nicholgroup/publications/"
+        ]
+      }
+    ],
+    "urh-000019": [
+      {
+        "claim_id": "urh-000019-c001",
+        "revision": 1,
+        "text": "amyloid-inspired biomaterials",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html",
+          "https://www.sas.rochester.edu/chm/groups/nilsson/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000019-c002",
+        "revision": 1,
+        "text": "amyloid peptide self-assembly",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html",
+          "https://www.sas.rochester.edu/chm/groups/nilsson/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000019-c003",
+        "revision": 1,
+        "text": "amyloid peptide self-assembly",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/nilsson-bradley/index.html",
+          "https://www.sas.rochester.edu/chm/groups/nilsson/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000042": [
+      {
+        "claim_id": "urh-000042-c001",
+        "revision": 1,
+        "text": "metasurface control of structured optical fields",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/otte-eileen/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000127": [
+      {
+        "claim_id": "urh-000127-c001",
+        "revision": 1,
+        "text": "program transformation for heterogeneous architectures",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/pai_sreepathi/index.html",
+          "https://www.cs.rochester.edu/u/sree/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000127-c002",
+        "revision": 1,
+        "text": "GPU compiler optimization",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/pai_sreepathi/index.html",
+          "https://www.cs.rochester.edu/u/sree/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000076": [
+      {
+        "claim_id": "urh-000076-c001",
+        "revision": 1,
+        "text": "intense laser-plasma interaction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/palastro_john/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000015": [
+      {
+        "claim_id": "urh-000015-c001",
+        "revision": 1,
+        "text": "supramolecular biomaterial design",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html",
+          "https://sas.rochester.edu/chm/groups/partridge/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000015-c002",
+        "revision": 1,
+        "text": "aqueous supramolecular self-assembly",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html",
+          "https://sas.rochester.edu/chm/groups/partridge/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000015-c003",
+        "revision": 1,
+        "text": "programmable peptide and protein materials",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/partridge-benjamin/index.html",
+          "https://sas.rochester.edu/chm/groups/partridge/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000117": [
+      {
+        "claim_id": "urh-000117-c001",
+        "revision": 1,
+        "text": "finite-element structural mechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/perucchio_renato/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000008": [
+      {
+        "claim_id": "urh-000008-c001",
+        "revision": 1,
+        "text": "super-resolution temperature mapping",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/pickel_andrea/index.html",
+          "https://labsites.rochester.edu/pickel/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000029": [
+      {
+        "claim_id": "urh-000029-c001",
+        "revision": 1,
+        "text": "time-resolved X-ray diffraction under dynamic compression",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000029-c002",
+        "revision": 1,
+        "text": "time-resolved X-ray diffraction under dynamic compression",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000029-c003",
+        "revision": 1,
+        "text": "diffraction-based high-pressure phase analysis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/polsin_danae/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000092": [
+      {
+        "claim_id": "urh-000092-c001",
+        "revision": 1,
+        "text": "heterogeneous catalyst design for carbon conversion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000092-c002",
+        "revision": 1,
+        "text": "language-model representations of catalysts",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000092-c003",
+        "revision": 1,
+        "text": "carbon-dioxide hydrogenation catalysts",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000092-c004",
+        "revision": 1,
+        "text": "heterogeneous thermal catalysis",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000092-c005",
+        "revision": 1,
+        "text": "catalyst structure-property relationships",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000092-c006",
+        "revision": 1,
+        "text": "reactive separations",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000092-c007",
+        "revision": 1,
+        "text": "C1 chemistry and light alkane upgrading",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000092-c008",
+        "revision": 1,
+        "text": "catalyst representation with large language models",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+          "https://www.porosoffresearchgroup.com",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000108": [
+      {
+        "claim_id": "urh-000108-c001",
+        "revision": 1,
+        "text": "quantum-dot single-photon emitters",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html",
+          "https://www.postigolab.com",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://hajim.rochester.edu/about/faculty/new2122.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000108-c002",
+        "revision": 1,
+        "text": "quantum-dot single-photon emitters",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html",
+          "https://www.postigolab.com",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://hajim.rochester.edu/about/faculty/new2122.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000108-c003",
+        "revision": 1,
+        "text": "photonic-crystal nanostructures",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/postigo-pablo/index.html",
+          "https://www.postigolab.com",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://hajim.rochester.edu/about/faculty/new2122.html"
+        ]
+      }
+    ],
+    "urh-000006": [
+      {
+        "claim_id": "urh-000006-c001",
+        "revision": 1,
+        "text": "rubble-pile asteroid granular mechanics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/quillen_alice/index.html",
+          "https://astro.pas.rochester.edu/~aquillen/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=4118",
+          "https://www.sciencedirect.com/author/7005482444/alice-c-quillen"
+        ]
+      },
+      {
+        "claim_id": "urh-000006-c002",
+        "revision": 1,
+        "text": "N-body dynamics of exoplanet and debris-disk systems",
+        "source_urls": [
+          "https://www.sas.rochester.edu/pas/people/faculty/quillen_alice/index.html",
+          "https://astro.pas.rochester.edu/~aquillen/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=4118",
+          "https://www.sciencedirect.com/author/7005482444/alice-c-quillen"
+        ]
+      }
+    ],
+    "urh-000123": [
+      {
+        "claim_id": "urh-000123-c001",
+        "revision": 1,
+        "text": "X-ray spectroscopy of high-energy-density plasmas",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/regan_sean/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000123-c002",
+        "revision": 1,
+        "text": "3D imaging diagnostics for inertial fusion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/regan_sean/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000027": [
+      {
+        "claim_id": "urh-000027-c001",
+        "revision": 1,
+        "text": "laser-plasma interaction in inertial fusion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000027-c002",
+        "revision": 1,
+        "text": "laser-plasma interaction in inertial fusion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000027-c003",
+        "revision": 1,
+        "text": "particle-in-cell modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000144": [
+      {
+        "claim_id": "urh-000144-c001",
+        "revision": 1,
+        "text": "optomechanical microwave-photonic signal processing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/renninger_william/index.html",
+          "https://labsites.rochester.edu/renninger/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000144-c002",
+        "revision": 1,
+        "text": "ultrafast pulsed nonlinear optics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/renninger_william/index.html",
+          "https://labsites.rochester.edu/renninger/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000144-c003",
+        "revision": 1,
+        "text": "Brillouin photon-phonon interactions",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/renninger_william/index.html",
+          "https://labsites.rochester.edu/renninger/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000153": [
+      {
+        "claim_id": "urh-000153-c001",
+        "revision": 1,
+        "text": "atomic layer deposition on complex geometries",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://events.uvm.edu/event/physics-colloquium-with-zachary-robinson",
+          "https://avssymposium.org/ALD2026/Sessions/Schedule/88476",
+          "https://avs72.avs.org/committee/"
+        ]
+      },
+      {
+        "claim_id": "urh-000153-c002",
+        "revision": 1,
+        "text": "hydrogen-isotope permeation control",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://events.uvm.edu/event/physics-colloquium-with-zachary-robinson",
+          "https://avssymposium.org/ALD2026/Sessions/Schedule/88476",
+          "https://avs72.avs.org/committee/"
+        ]
+      },
+      {
+        "claim_id": "urh-000153-c003",
+        "revision": 1,
+        "text": "fusion fuel-cycle materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://events.uvm.edu/event/physics-colloquium-with-zachary-robinson",
+          "https://avssymposium.org/ALD2026/Sessions/Schedule/88476",
+          "https://avs72.avs.org/committee/"
+        ]
+      }
+    ],
+    "urh-000068": [
+      {
+        "claim_id": "urh-000068-c001",
+        "revision": 1,
+        "text": "freeform optical metrology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/rolland_jannick/index.html",
+          "https://odalab-spectrum.org/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000068-c002",
+        "revision": 1,
+        "text": "freeform optical system design",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/rolland_jannick/index.html",
+          "https://odalab-spectrum.org/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000068-c003",
+        "revision": 1,
+        "text": "augmented- and virtual-reality display optics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/rolland_jannick/index.html",
+          "https://odalab-spectrum.org/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000088": [
+      {
+        "claim_id": "urh-000088-c001",
+        "revision": 1,
+        "text": "organic light-emitting diode physics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/rothberg-lewis/index.html",
+          "https://www.sas.rochester.edu/chm/groups/rothberg/index.htm",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000088-c002",
+        "revision": 1,
+        "text": "semiconducting polymer electronics",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/rothberg-lewis/index.html",
+          "https://www.sas.rochester.edu/chm/groups/rothberg/index.htm",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000088-c003",
+        "revision": 1,
+        "text": "organic thin-film transistors",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/rothberg-lewis/index.html",
+          "https://www.sas.rochester.edu/chm/groups/rothberg/index.htm",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000100": [
+      {
+        "claim_id": "urh-000100-c001",
+        "revision": 1,
+        "text": "terahertz vibrational spectroscopy of molecular crystals",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html",
+          "https://ruggedthz.com/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://ruggedthz.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000100-c002",
+        "revision": 1,
+        "text": "diffraction-spectroscopy correlation",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html",
+          "https://ruggedthz.com/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://ruggedthz.com"
+        ]
+      },
+      {
+        "claim_id": "urh-000100-c003",
+        "revision": 1,
+        "text": "crystal polymorphism and solid-state structure",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/ruggiero-michael/index.html",
+          "https://ruggedthz.com/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://ruggedthz.com"
+        ]
+      }
+    ],
+    "urh-000061": [
+      {
+        "claim_id": "urh-000061-c001",
+        "revision": 1,
+        "text": "dynamic X-ray diffraction at extreme pressure",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000061-c002",
+        "revision": 1,
+        "text": "high-pressure phase transformations",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000061-c003",
+        "revision": 1,
+        "text": "fusion-relevant high-energy-density materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000052": [
+      {
+        "claim_id": "urh-000052-c001",
+        "revision": 1,
+        "text": "freeform gradient-index optics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/schmidt_greg/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000052-c002",
+        "revision": 1,
+        "text": "gradient-index optical metrology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/schmidt_greg/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000003": [
+      {
+        "claim_id": "urh-000003-c001",
+        "revision": 1,
+        "text": "magnetized inertial fusion",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html",
+          "https://hajim.rochester.edu/me/sites/sefkow/index.html",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000003-c002",
+        "revision": 1,
+        "text": "magnetohydrodynamic fusion modeling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html",
+          "https://hajim.rochester.edu/me/sites/sefkow/index.html",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000003-c003",
+        "revision": 1,
+        "text": "high-energy-density plasma transport",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html",
+          "https://hajim.rochester.edu/me/sites/sefkow/index.html",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000070": [
+      {
+        "claim_id": "urh-000070-c001",
+        "revision": 1,
+        "text": "coherent vortex structures",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html",
+          "https://labsites.rochester.edu/shanglab/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000070-c002",
+        "revision": 1,
+        "text": "high-energy-density hydrodynamic mixing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html",
+          "https://labsites.rochester.edu/shanglab/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000070-c003",
+        "revision": 1,
+        "text": "fluid-structure interaction in biological systems",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/shang_jessica/index.html",
+          "https://labsites.rochester.edu/shanglab/",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000048": [
+      {
+        "claim_id": "urh-000048-c001",
+        "revision": 1,
+        "text": "computer vision for image integrity",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/sharma_gaurav/index.html",
+          "https://www.ece.rochester.edu/~gsharma/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000005": [
+      {
+        "claim_id": "urh-000005-c001",
+        "revision": 1,
+        "text": "chemically selective surface modification",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000005-c002",
+        "revision": 1,
+        "text": "covalent surface functionalization",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000005-c003",
+        "revision": 1,
+        "text": "surface chemistry and molecular monolayers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000005-c004",
+        "revision": 1,
+        "text": "surface patterning and contact printing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000005-c005",
+        "revision": 1,
+        "text": "nanostructured materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000005-c006",
+        "revision": 1,
+        "text": "interfacial thermodynamics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000005-c007",
+        "revision": 1,
+        "text": "organic thin-film coatings",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000005-c008",
+        "revision": 1,
+        "text": "self-assembled monolayers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/shestopalov_alexander/index.html",
+          "https://www.che.rochester.edu/Projects/shestopalovgroup/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000126": [
+      {
+        "claim_id": "urh-000126-c001",
+        "revision": 1,
+        "text": "first-principles density-functional theory",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/singh_sobhit/index.html",
+          "https://sites.google.com/view/sobhit-singh",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000126-c002",
+        "revision": 1,
+        "text": "topological quantum phases",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/singh_sobhit/index.html",
+          "https://sites.google.com/view/sobhit-singh",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000086": [
+      {
+        "claim_id": "urh-000086-c001",
+        "revision": 1,
+        "text": "musculoskeletal soft-tissue mechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000086-c002",
+        "revision": 1,
+        "text": "rehabilitation biomechanics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000086-c003",
+        "revision": 1,
+        "text": "quantitative ultrasound of tendon and ligament",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/slane_laura/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000122": [
+      {
+        "claim_id": "urh-000122-c001",
+        "revision": 1,
+        "text": "terahertz time-domain spectroscopy and imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.sas.rochester.edu/pas/people/faculty/sobolewski_roman/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000122-c002",
+        "revision": 1,
+        "text": "superconducting single-photon detectors",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.sas.rochester.edu/pas/people/faculty/sobolewski_roman/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000122-c003",
+        "revision": 1,
+        "text": "ultrafast optoelectronic transducers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/sobolewski_roman/index.html",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://www.sas.rochester.edu/pas/people/faculty/sobolewski_roman/index.html"
+        ]
+      }
+    ],
+    "urh-000031": [
+      {
+        "claim_id": "urh-000031-c001",
+        "revision": 1,
+        "text": "Markov-chain Monte Carlo theory",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html",
+          "https://www.cs.rochester.edu/u/stefanko/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000031-c002",
+        "revision": 1,
+        "text": "graph-polynomial algorithms",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html",
+          "https://www.cs.rochester.edu/u/stefanko/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000031-c003",
+        "revision": 1,
+        "text": "Fourier methods in theoretical computer science",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/stefankovic_daniel/index.html",
+          "https://www.cs.rochester.edu/u/stefanko/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000017": [
+      {
+        "claim_id": "urh-000017-c001",
+        "revision": 1,
+        "text": "multiscale ocean energy transfer",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://bastorer.github.io/",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10732517/"
+        ]
+      },
+      {
+        "claim_id": "urh-000017-c002",
+        "revision": 1,
+        "text": "coarse-graining of ocean flows",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://bastorer.github.io/",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10732517/"
+        ]
+      },
+      {
+        "claim_id": "urh-000017-c003",
+        "revision": 1,
+        "text": "computational ocean fluid dynamics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://bastorer.github.io/",
+          "https://pmc.ncbi.nlm.nih.gov/articles/PMC10732517/"
+        ]
+      }
+    ],
+    "urh-000146": [
+      {
+        "claim_id": "urh-000146-c001",
+        "revision": 1,
+        "text": "vacuum-deposited battery films",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c002",
+        "revision": 1,
+        "text": "solid-state battery interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c003",
+        "revision": 1,
+        "text": "polymer electrolyte thin-film interfaces",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c004",
+        "revision": 1,
+        "text": "lithium metal batteries",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c005",
+        "revision": 1,
+        "text": "solid electrolyte interphase",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c006",
+        "revision": 1,
+        "text": "solid-state battery electrolytes",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c007",
+        "revision": 1,
+        "text": "battery interfacial engineering",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c008",
+        "revision": 1,
+        "text": "polymer thin-film electrolytes",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000146-c009",
+        "revision": 1,
+        "text": "vacuum deposition processing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/tenhaeff_wyatt/index.html",
+          "https://tenhaeff.weebly.com/",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000145": [
+      {
+        "claim_id": "urh-000145-c001",
+        "revision": 1,
+        "text": "petawatt laser experiments",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000145-c002",
+        "revision": 1,
+        "text": "short-pulse laser-plasma interaction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000145-c003",
+        "revision": 1,
+        "text": "short-pulse laser-plasma interaction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000004": [
+      {
+        "claim_id": "urh-000004-c001",
+        "revision": 1,
+        "text": "electrochemical interface microenvironments",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html",
+          "https://sas.rochester.edu/chm/groups/thorarinsdottir/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://sas.rochester.edu/chm/groups/thorarinsdottir/index.php/research/"
+        ]
+      },
+      {
+        "claim_id": "urh-000004-c002",
+        "revision": 1,
+        "text": "oxygen-reduction and oxygen-evolution electrocatalysis",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html",
+          "https://sas.rochester.edu/chm/groups/thorarinsdottir/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://sas.rochester.edu/chm/groups/thorarinsdottir/index.php/research/"
+        ]
+      },
+      {
+        "claim_id": "urh-000004-c003",
+        "revision": 1,
+        "text": "porous-framework-coated electrocatalysts",
+        "source_urls": [
+          "https://www.sas.rochester.edu/chm/people/faculty/thorarinsdottir-agnes/index.html",
+          "https://sas.rochester.edu/chm/groups/thorarinsdottir/",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://sas.rochester.edu/chm/groups/thorarinsdottir/index.php/research/"
+        ]
+      }
+    ],
+    "urh-000107": [
+      {
+        "claim_id": "urh-000107-c001",
+        "revision": 1,
+        "text": "solid-state quantum photonics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html",
+          "https://labsites.rochester.edu/vamivakaslab/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000107-c002",
+        "revision": 1,
+        "text": "nanoscale quantum-emitter spectroscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html",
+          "https://labsites.rochester.edu/vamivakaslab/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000107-c003",
+        "revision": 1,
+        "text": "nanoscale light-matter coupling",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/vamivakas_nick/index.html",
+          "https://labsites.rochester.edu/vamivakaslab/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000002": [
+      {
+        "claim_id": "urh-000002-c001",
+        "revision": 1,
+        "text": "formal semantics for natural-language processing",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/white_aaron/index.html",
+          "https://aaronstevenwhite.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://www.sas.rochester.edu/lin/news/2026-03-18-white.html"
+        ]
+      }
+    ],
+    "urh-000047": [
+      {
+        "claim_id": "urh-000047-c001",
+        "revision": 1,
+        "text": "III-V molecular-beam epitaxy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/wicks_gary/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=6914"
+        ]
+      },
+      {
+        "claim_id": "urh-000047-c002",
+        "revision": 1,
+        "text": "III-V molecular-beam epitaxy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/wicks_gary/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html",
+          "https://urresearch.rochester.edu/viewContributorPage.action?personNameId=6914"
+        ]
+      }
+    ],
+    "urh-000034": [
+      {
+        "claim_id": "urh-000034-c001",
+        "revision": 1,
+        "text": "phase-diverse retinal image reconstruction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html",
+          "https://aria.cvs.rochester.edu/#&amp;panel1-1",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112358817-david-r-williams",
+          "https://aria.cvs.rochester.edu/team/williams/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000034-c002",
+        "revision": 1,
+        "text": "phase-diverse retinal image reconstruction",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html",
+          "https://aria.cvs.rochester.edu/#&amp;panel1-1",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112358817-david-r-williams",
+          "https://aria.cvs.rochester.edu/team/williams/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000034-c003",
+        "revision": 1,
+        "text": "adaptive-optics retinal imaging",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/williams_david/index.html",
+          "https://aria.cvs.rochester.edu/#&amp;panel1-1",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112358817-david-r-williams",
+          "https://aria.cvs.rochester.edu/team/williams/index.html"
+        ]
+      }
+    ],
+    "urh-000057": [
+      {
+        "claim_id": "urh-000057-c001",
+        "revision": 1,
+        "text": "ultra-wideband transceivers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
+          "https://www.hajim.rochester.edu/ece/sites/laics/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000057-c002",
+        "revision": 1,
+        "text": "silicon photonic-electronic co-integration",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
+          "https://www.hajim.rochester.edu/ece/sites/laics/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000057-c003",
+        "revision": 1,
+        "text": "silicon photonic-electronic co-integration",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/wu_hui/index.html",
+          "https://www.hajim.rochester.edu/ece/sites/laics/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000129": [
+      {
+        "claim_id": "urh-000129-c001",
+        "revision": 1,
+        "text": "quantum-material electronics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/wu_stephen/index.html",
+          "https://labsites.rochester.edu/swulab/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000129-c002",
+        "revision": 1,
+        "text": "spin transport in two-dimensional materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/wu_stephen/index.html",
+          "https://labsites.rochester.edu/swulab/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000129-c003",
+        "revision": 1,
+        "text": "van der Waals quantum materials",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/ece/people/faculty/wu_stephen/index.html",
+          "https://labsites.rochester.edu/swulab/",
+          "https://www.hajim.rochester.edu/ece/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000023": [
+      {
+        "claim_id": "urh-000023-c001",
+        "revision": 1,
+        "text": "temporal visual understanding",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/xu_chenliang/index.html",
+          "https://www.cs.rochester.edu/u/cxu22/",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000152": [
+      {
+        "claim_id": "urh-000152-c001",
+        "revision": 1,
+        "text": "multimodal user-state sensing",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/yan_yukang/index.html",
+          "https://rochester-bear-lab.github.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://rochester-bear-lab.github.io"
+        ]
+      },
+      {
+        "claim_id": "urh-000152-c002",
+        "revision": 1,
+        "text": "embodied interaction in virtual environments",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/yan_yukang/index.html",
+          "https://rochester-bear-lab.github.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://rochester-bear-lab.github.io"
+        ]
+      },
+      {
+        "claim_id": "urh-000152-c003",
+        "revision": 1,
+        "text": "virtual- and augmented-reality interaction techniques",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/yan_yukang/index.html",
+          "https://rochester-bear-lab.github.io/",
+          "https://www.cs.rochester.edu/people/faculty/index.html",
+          "https://rochester-bear-lab.github.io"
+        ]
+      }
+    ],
+    "urh-000097": [
+      {
+        "claim_id": "urh-000097-c001",
+        "revision": 1,
+        "text": "electrochemical interface characterization",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000097-c002",
+        "revision": 1,
+        "text": "functional surfaces and coatings",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000097-c003",
+        "revision": 1,
+        "text": "sorbent polymers for chemical sensing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000097-c004",
+        "revision": 1,
+        "text": "waveguide-enhanced Raman sensing",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000097-c005",
+        "revision": 1,
+        "text": "electrochemical sensors",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000097-c006",
+        "revision": 1,
+        "text": "electrochemical surface modification",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000097-c007",
+        "revision": 1,
+        "text": "open-source electrochemistry hardware",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+          "https://www.hajim.rochester.edu/che/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000142": [
+      {
+        "claim_id": "urh-000142-c001",
+        "revision": 1,
+        "text": "energy-storage material characterization",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/zang-wenjie/index.html",
+          "https://www.zang-research.com",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000142-c002",
+        "revision": 1,
+        "text": "nanoscale heterogeneous catalyst structure",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/me/people/faculty/zang-wenjie/index.html",
+          "https://www.zang-research.com",
+          "https://www.hajim.rochester.edu/me/people/faculty/index.html",
+          "https://www.hajim.rochester.edu/matsci/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000065": [
+      {
+        "claim_id": "urh-000065-c001",
+        "revision": 1,
+        "text": "ocular and tear-film optical metrology",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zavislan_james/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112359210-james-m-zavislan"
+        ]
+      },
+      {
+        "claim_id": "urh-000065-c002",
+        "revision": 1,
+        "text": "optical coherence modeling for microscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zavislan_james/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112359210-james-m-zavislan"
+        ]
+      },
+      {
+        "claim_id": "urh-000065-c003",
+        "revision": 1,
+        "text": "optical-system tolerancing for manufacture",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zavislan_james/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html",
+          "https://www.urmc.rochester.edu/people/112359210-james-m-zavislan"
+        ]
+      }
+    ],
+    "urh-000147": [
+      {
+        "claim_id": "urh-000147-c001",
+        "revision": 1,
+        "text": "terahertz time-domain spectroscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html",
+          "https://labsites.rochester.edu/zhang/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000147-c002",
+        "revision": 1,
+        "text": "ultrafast terahertz generation and detection",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html",
+          "https://labsites.rochester.edu/zhang/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000147-c003",
+        "revision": 1,
+        "text": "femtosecond laser-matter spectroscopy",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zhang_xi-cheng/index.html",
+          "https://labsites.rochester.edu/zhang/",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000151": [
+      {
+        "claim_id": "urh-000151-c001",
+        "revision": 1,
+        "text": "computational imaging hardware-software co-design",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/zhu_yuhao/index.html",
+          "https://yuhaozhu.com",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000151-c002",
+        "revision": 1,
+        "text": "augmented- and virtual-reality systems architecture",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/zhu_yuhao/index.html",
+          "https://yuhaozhu.com",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000151-c003",
+        "revision": 1,
+        "text": "perceptually aware computer architecture",
+        "source_urls": [
+          "https://www.cs.rochester.edu/people/faculty/zhu_yuhao/index.html",
+          "https://yuhaozhu.com",
+          "https://www.cs.rochester.edu/people/faculty/index.html"
+        ]
+      }
+    ],
+    "urh-000077": [
+      {
+        "claim_id": "urh-000077-c001",
+        "revision": 1,
+        "text": "high-energy laser diagnostics",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zuegel_jonathan/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      },
+      {
+        "claim_id": "urh-000077-c002",
+        "revision": 1,
+        "text": "nonlinear frequency conversion for high-power lasers",
+        "source_urls": [
+          "https://www.hajim.rochester.edu/optics/people/faculty/zuegel_jonathan/index.html",
+          "https://www.hajim.rochester.edu/optics/people/faculty/index.html"
+        ]
+      }
+    ]
+  }
+}
