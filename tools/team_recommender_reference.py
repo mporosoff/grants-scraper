@@ -12,7 +12,10 @@ def evaluate(case):
         for ids in itertools.combinations(range(len(rows)),size):
             value=score(ids)
             if math.floor(value*1e6+.5)<round(case.get('group_threshold',.55)*1e6) or not any(rows[j]['anchor'] for j in ids):continue
-            if any(math.floor((value-score([k for k in ids if k!=j]))*1e6+.5)<30000 for j in ids):continue
+            # D1 individual admission is independent of removal marginal.
+            # These finite numerical cases have no duplicate evidence strings;
+            # the separate source-passage contracts exercise nonredundancy.
+            if any(max(rows[j]['scores'],default=0)<=0 for j in ids):continue
             feasible.append({'ids':[rows[j]['id'] for j in ids],'score':value})
     return {'maximum':max((x['score'] for x in feasible),default=0),'count':len(feasible)}
 

@@ -1,9 +1,9 @@
 /* Pure requested-scope arithmetic. No transport, storage, or provider clients. */
 (function (global) {
   "use strict";
-  const VERSION = "coverage-v2.2";
+  const VERSION = "coverage-v2.3";
   const PARAMETERS = Object.freeze({ topic: .4, core: .3, method: .5, context: .5,
-    anchor: .4, group: .45, marginal: .03, envelope: .95, maxOptions: 8,
+    anchor: .4, group: .45, redundancy: .9, envelope: .95, maxOptions: 8,
     maxPeople: 200, maxAspects: 8, maxPassages: 16, workLimit: 300000, exactPool: 12, swapStartsPerSize: 8,
     aspectWeight: .5, coreWeight: .3, lexicalWeight: .2, mmr: 0 });
   const cmp = (a, b) => a < b ? -1 : a > b ? 1 : 0;
@@ -74,6 +74,18 @@
     }
     return value;
   }
+  function scopedEvidence(row) {
+    return [...new Set(row.edges.filter(e => e.admitted && e.score > 0 && e.passage?.text)
+      .map(e => [...tokens(e.passage.text)].sort(cmp).join(" ")))].filter(Boolean);
+  }
+  function redundantEvidence(left, right) {
+    const a = scopedEvidence(left), b = scopedEvidence(right);
+    const same = (x, y) => { const p = new Set(x.split(" ")), q = new Set(y.split(" "));
+      const intersection = [...p].filter(t => q.has(t)).length;
+      return intersection / (p.size + q.size - intersection) >= PARAMETERS.redundancy; };
+    // Scoped retained passages only. No whole-person or disciplinary distance.
+    return Boolean(a.length && b.length) && a.every(x => b.some(y => same(x, y))) && b.every(y => a.some(x => same(x, y)));
+  }
   function optimize(input, excludedIds = [], settings = {}) {
     const m = {...input, byId: new Map(input.rows.map(r => [r.id, r]))};
     const excluded = new Set(excludedIds);
@@ -82,10 +94,15 @@
     let work = 0;
     const score = ids => { if (++work > PARAMETERS.workLimit) throw new Error("Recommendation work limit exceeded."); return coverage(m, ids); };
     const anchor = ids => ids.some(id => m.byId.get(id).edges.some(e => e.admitted && e.core >= PARAMETERS.anchor));
+    const strength = id => Math.max(0, ...m.byId.get(id).edges.filter(e => e.admitted).map(e => e.score));
+    const quality = ids => { const values = ids.map(strength); return [Math.min(...values), values.reduce((a,b) => a+b,0)/values.length]; };
+    const compare = (a,b) => { const x = quality(a.ids), y = quality(b.ids);
+      return quantize(b.score)-quantize(a.score) || quantize(y[0])-quantize(x[0]) || quantize(y[1])-quantize(x[1]) || cmp(a.key,b.key); };
     const candidates = new Map();
     function feasible(ids, value) {
       return ids.length >= 2 && ids.length <= 4 && anchor(ids) && quantize(value) >= quantize(PARAMETERS.group)
-        && ids.every(id => quantize(value - score(ids.filter(j => j !== id))) >= quantize(PARAMETERS.marginal));
+        && ids.every(id => strength(id) > 0)
+        && ids.every((id,i) => ids.slice(i+1).every(other => !redundantEvidence(m.byId.get(id),m.byId.get(other))));
     }
     function offer(ids) {
       const key = signature(ids);
@@ -112,7 +129,7 @@
         let ids = [seed];
         while (ids.length < 4) {
           const choices = people.filter(id => !ids.includes(id) && (anchor(ids) || anchor([id])))
-            .map(id => ({id, value: score(ids.concat(id))})).sort((a, b) => quantize(b.value) - quantize(a.value) || cmp(a.id, b.id));
+            .map(id => ({id, value: score(ids.concat(id))})).sort((a, b) => quantize(b.value) - quantize(a.value) || quantize(strength(b.id))-quantize(strength(a.id)) || cmp(a.id, b.id));
           if (!choices.length) break;
           if (ids.length >= 2 && quantize(choices[0].value) <= quantize(score(ids))) break;
           ids = ids.concat(choices[0].id);
@@ -138,19 +155,25 @@
         }
       }
     }
-    const all = [...candidates.values()].sort((a, b) => quantize(b.score) - quantize(a.score) || cmp(a.key, b.key));
+    const all = [...candidates.values()].sort(compare);
     const maximum = all[0]?.score || 0;
     const size = [2, 3, 4].find(k => all.some(t => t.ids.length === k && quantize(t.score) >= quantize(PARAMETERS.envelope * maximum)));
     const first = all.find(t => t.ids.length === size && quantize(t.score) >= quantize(PARAMETERS.envelope * maximum));
     const bySize = new Map([2, 3, 4].map(k => [k, all.find(t => t.ids.length === k)?.score || 0]));
-    const near = all.filter(t => quantize(t.score) >= quantize(PARAMETERS.envelope * bySize.get(t.ids.length)));
+    // Do not use extra slots when a smaller feasible subset is already adequate.
+    // Marginal coverage prefers useful additions; it is not universal admission.
+    const minimal = t => t.ids.length === 2 || !t.ids.some(id => {
+      const ids=t.ids.filter(j=>j!==id), value=score(ids);
+      return quantize(value)>=quantize(PARAMETERS.envelope*t.score) && feasible(ids,value);
+    });
+    const near = all.filter(t => quantize(t.score) >= quantize(PARAMETERS.envelope * bySize.get(t.ids.length)) && minimal(t));
     const options = first ? [first] : [];
     const lambda = settings.mmr === .1 ? .1 : 0;
     while (options.length < PARAMETERS.maxOptions) {
       const remaining = near.filter(t => !options.includes(t)).map(t => ({team: t, value: t.score - lambda * Math.max(0, ...options.map(s => {
         const intersection = s.ids.filter(id => t.ids.includes(id)).length;
         return intersection / (s.ids.length + t.ids.length - intersection);
-      }))})).sort((a, b) => quantize(b.value) - quantize(a.value) || cmp(a.team.key, b.team.key));
+      }))})).sort((a, b) => quantize(b.value) - quantize(a.value) || compare(a.team,b.team));
       if (!remaining.length) break;
       options.push(remaining[0].team);
     }
@@ -162,5 +185,5 @@
       && (r.core ?? Math.max(0, ...r.edges.map(e => e.core))) >= floors.core)
       .slice().sort((a, b) => quantize(b.baseline) - quantize(a.baseline) || cmp(a.id, b.id)).slice(0, size).map(r => r.id);
   }
-  global.TeamRecommender = Object.freeze({VERSION, PARAMETERS, cmp, quantize, signature, tokens, overlap, dot, LRU, edge, matrix, coverage, optimize, baseline});
+  global.TeamRecommender = Object.freeze({VERSION, PARAMETERS, cmp, quantize, signature, tokens, overlap, dot, LRU, edge, matrix, coverage, scopedEvidence, redundantEvidence, optimize, baseline});
 })(globalThis);

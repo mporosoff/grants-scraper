@@ -105,7 +105,7 @@ test('poor pools, redundant members and near-best size selection match exhaustiv
    const m=make(scores);m.admitted=m.rows.filter(r=>r.edges.some(e=>e.admitted));const got=n.optimize(m);let best=0,count=0;
    for(let mask=1;mask<(1<<scores.length);mask++){const ids=scores.map((_,i)=>i).filter(i=>mask&(1<<i));if(ids.length<2||ids.length>4)continue;
      const f=members=>[.7,.3].reduce((s,w,a)=>s+w*Math.max(0,...members.map(i=>scores[i][a])),0),val=f(ids);
-     if(val<.55||!ids.some(i=>scores[i].some(s=>s>=.5))||ids.some(i=>val-f(ids.filter(j=>j!==i))<.03))continue;
+     if(val<.45||!ids.some(i=>scores[i].some(s=>s>=.4))||ids.some(i=>Math.max(...scores[i])<=0))continue;
      count++;best=Math.max(best,val);
    }
    assert.equal(got.feasibleCount,count);assert.equal(got.maximum,best);

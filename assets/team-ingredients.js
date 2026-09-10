@@ -2,7 +2,7 @@
 (function (global) {
   "use strict";
   const N = global.TeamRecommender;
-  const VERSION = "ingredients-v2.2";
+  const VERSION = "ingredients-v2.3";
   const HASH = /^[a-f0-9]{64}$/;
   const ID = /^[A-Za-z0-9][A-Za-z0-9:_.-]{0,127}$/;
   // Canonical NSF feed IDs are source identities, never fetch destinations.
@@ -128,10 +128,17 @@
           retained.add(ref.claim_id);
         }
         for (const key of ["operation", "context"]) requireValue(!passage[key] || string(passage[key], 200) && passage.text.includes(passage[key]), "Unsupported profile descriptor.");
+        // Expose existing registry context without embedding taxonomy labels or
+        // manufacturing new evidence. The exact evidence/vector stays unchanged.
+        passage.retained_claims = passage.claim_refs.map(ref => {
+          const c = profile.claims.find(c => c.claim_id === ref.claim_id);
+          return {claim_id:c.claim_id, revision:c.revision, label:c.label, type:c.type};
+        });
         await vectorRecord(passage, "document");
       }
       requireValue(profile.claims.filter(c => c.status === "active").every(c => retained.has(c.claim_id)), "Prepared profile drops active evidence.");
-      person.semantic_key = await sha256(canonical([fingerprint, person.id, person.passages]));
+      person.research_summary = profile.research_summary || "";
+      person.semantic_key = await sha256(canonical([fingerprint, person.id, person.passages, person.research_summary]));
     }
     const sources = new Map(), scopeIds = new Set();
     for (const source of bundle.sources) {
