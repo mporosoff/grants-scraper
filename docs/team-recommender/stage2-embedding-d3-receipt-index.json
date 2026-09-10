@@ -1,0 +1,113 @@
+{
+  "candidate": {
+    "path": "docs/team-recommender/stage2-embedding-d3-candidate.json",
+    "sha256": "bc1c87ad79a4eea555a38f3dca9a743148ff1971b19f33ebce51140d7e03d990"
+  },
+  "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
+  "files": [
+    {
+      "path": "docs/team-recommender/receipts/d3-assembled-E1.json",
+      "sha256": "8ec96eee3e05dd109b699b54a1a6a6f8505ccd3306fc636cecd2878daad5ea0d"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-assembled-E2.json",
+      "sha256": "89c165153cfb5dc20f898de4106fdba667e0f2e03b2187c23b0b15735258fb0e"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-assembled-E3.json",
+      "sha256": "ccab950a867e1dfa5b85d7bd81d91336eff0dc725bfdc1a737c66404889e20b2"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-calibration.json",
+      "sha256": "d9d20b6e043fc529be7bc2c07716b79cc390d749aab43543a15886317a4f1c99"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-development-results-34538646232.json",
+      "sha256": "29c63e4293cb8bfaa266e0f7eb9650361911259371b1304c25ea7dc6cda237a2"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-explanation-evidence-audit.json",
+      "sha256": "9efe8d7472506cfdc34d4c5331d9fd37d4840c8c8568f38878743e8caa37f2e2"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-final-preservation.json",
+      "sha256": "835a642f7603d1da9267326ead89b5dcde045d760a727dc7c792a781e6f90987"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-input-plan.json",
+      "sha256": "373a2ae2fd3f16cb4737e79bb130223d9ddd1f821896ef085a99dbb6cd738273"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-judge-plan-v2.json",
+      "sha256": "b77ccf645a3a696bae7daf0e012a0031025a07d789cac94f28a1d2c76c19eefe"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-judge-plan.json",
+      "sha256": "4d55ca0b7484471af8e074f72f4b9517c5db616dc87b73214454b892aeba6cbc"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-local-prejudge-validation.json",
+      "sha256": "6cfdca4f200b1a5ea79c8dde39bc879e97dfa3ed026c5f7400482f532b16b9b0"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-natural-profile-diagnostics.json",
+      "sha256": "7dc980e0b3569bf09564726a072b93cc27ae181202c439438ee0d3bea48a70bd"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-prejudge-outputs.json",
+      "sha256": "42a6786184d0ad30f90c04407817dac431c1421445e6042abdc90c9b5dec49d3"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-preserved-surface.json",
+      "sha256": "6f37951f486be2fe7e657b34d76f0a17d1002f00fef6075effb62b16d233a750"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-real-exact-reference.json",
+      "sha256": "ff0ada57d0cad975224012afdd52a346aed0f5730f2b98784cbe3261a9774293"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-resources-E0.json",
+      "sha256": "781d5f019de8dab87eabeb01b1b17b7a65f107db6aedeceff055578e2612aa54"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-resources-E1.json",
+      "sha256": "1ffd07fdd38c832ec61f3a9085257ed510b85cb63cb1980cf32ff03ecf8da8f3"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-resources-E2.json",
+      "sha256": "f666796f5f5b26e810863d02ca5d7bd4f8dfc01be1b53f2f8dd9cfcaccdeaf05"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-resources-E3.json",
+      "sha256": "84ca203bdff74fbf48cd8f44fba649b121d76b67f78848de8e85fa7f2d9cfd7f"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-sealed-split-preservation.json",
+      "sha256": "ac1ef620c3cc3c7154fbc21f877c8b9890cffa4327be180c3e8bbbd92cb54c40"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-trusted-helper.json",
+      "sha256": "df45d53cb78a4133f43a705418977e332395d6058397871d5b74f84e39574ad6"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-validation-closeout.json",
+      "sha256": "d43dc3d68e40e1957b72adb53dfb8da237965f127cc8c09ce5247399a93c41c6"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-vectors-34537699670.json",
+      "sha256": "f583f0c6943983b72448b7ac4b057bef9060aca3211774d2475260b6ebce8496"
+    },
+    {
+      "path": "docs/team-recommender/receipts/d3-wiring-result.json",
+      "sha256": "50fa2bbffd414d0dd656ce90ff3fb5d8842adb8b22b2d2927e9c72eabc8b176e"
+    }
+  ],
+  "generated_at": "2026-09-10T23:28:50.983699+00:00",
+  "holdout_scored": false,
+  "raw_provider_caches_in_public_assets": false,
+  "schema_version": 1,
+  "stage3_proposal": {
+    "path": "docs/team-recommender/stage3-analysis-protocol-d3.md",
+    "sha256": "c672a2384bfe8da0b4f65a742ba47f44854b356a7516247299a2f783e0e0f190"
+  }
+}

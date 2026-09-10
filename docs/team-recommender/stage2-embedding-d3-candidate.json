@@ -1,0 +1,244 @@
+{
+  "E0_v2_5_compatibility_observation": {
+    "generation": "b57ae91282b2ad5c6a0d0ef21226ac4f88e935950c28725c284ffd7cb7b0951e",
+    "runtime_version_differs_from_historical_fallback": true,
+    "same_D2_numerical_scopes": 35
+  },
+  "adapter_version": "ingredients-v2.5",
+  "cache_limits": {
+    "matrices": 8,
+    "option_contexts": 32,
+    "rows": 1600,
+    "snapshot": 1
+  },
+  "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
+  "code_sha256": {
+    "assets/team-ingredients.js": "01240ca79e2804c8daccc385aecce5c643a7c8d45864ede9e7337bddb4e9c09a",
+    "assets/team-recommender.js": "c4a24b159f314f075b89a6b22ae17d8b5605d3bc5277cc06ce371b3a0389cd59"
+  },
+  "code_tree": "5e32c12aafe07c677b434ee5b6d0eb5b9667dfc3",
+  "decision": "REVISE",
+  "dependencies": {
+    "calibration": {
+      "path": "docs/team-recommender/receipts/d3-calibration.json",
+      "sha256": "d9d20b6e043fc529be7bc2c07716b79cc390d749aab43543a15886317a4f1c99"
+    },
+    "input_manifest": {
+      "path": "docs/team-recommender/manifests/d3-inputs.json",
+      "sha256": "50fa9dccc71de199fd3a8277a0bad6b3603863d725f21cd961f58907b315400a"
+    },
+    "prejudge_outputs": {
+      "path": "docs/team-recommender/receipts/d3-prejudge-outputs.json",
+      "sha256": "42a6786184d0ad30f90c04407817dac431c1421445e6042abdc90c9b5dec49d3"
+    },
+    "source_preservation": {
+      "path": "docs/team-recommender/receipts/d3-final-preservation.json",
+      "sha256": "835a642f7603d1da9267326ead89b5dcde045d760a727dc7c792a781e6f90987"
+    },
+    "source_query_table": {
+      "path": "config/team_recommender_executor/queries-d3.json",
+      "sha256": "f19b8b0ed8b233e2b259632270f915e7b0156219bbc02c3c247a9ce23d31d703"
+    },
+    "split_preservation": {
+      "path": "docs/team-recommender/receipts/d3-sealed-split-preservation.json",
+      "sha256": "ac1ef620c3cc3c7154fbc21f877c8b9890cffa4327be180c3e8bbbd92cb54c40"
+    }
+  },
+  "determinism": {
+    "fixed_inputs_same_output": true,
+    "id_order": "ASCII",
+    "threshold_and_tie_quantization": 1000000
+  },
+  "engine_version": "coverage-v2.5",
+  "evidence_mapping": "all current real person/aspect links unconfirmed; registry evidence does not auto-clear roles; retired/mismatched claims invalidate; numerical score cannot certify expertise",
+  "fallback": {
+    "adapter": "ingredients-v2.4",
+    "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+    "engine": "coverage-v2.4",
+    "generation": "d4d2d28f66d769fc70938e8cf11df2694c285eff681bcc6b1ad43cb36a591958",
+    "historical_candidate": {
+      "path": "docs/team-recommender/stage2-ranking-d2-candidate.json",
+      "sha256": "0c6b012b3a5f53dd469406573b61a05ea98a69843a7cc9858063876144434591"
+    },
+    "identity": "B-D2-R0-fixed-call-person-weighted-coverage",
+    "meaning": "Retained exact D2 unqualified baseline; not a newly selected or deployment-qualified D3 winner.",
+    "quality_qualified": false
+  },
+  "features": {
+    "aspect_edge": ".5 aspect cosine + .3 central-purpose cosine + .2 original-passage lexical overlap",
+    "generic_evidence": "original passage scientific-token admission; no department/novelty feature",
+    "probability": false,
+    "quality": ".7 max scientific-aspect cosine + .3 max whole-call cosine",
+    "source_weights": "unchanged source weights/group budgets"
+  },
+  "holdout_recommendations_exposed": false,
+  "judge": {
+    "allocation_addendum": {
+      "path": "docs/team-recommender/D3_PACKET_ALLOCATION_ADDENDUM.md",
+      "sha256": "900ca4f0f51a41940c14706a8a6340f3a4769162c472aebd1d6215c937826d39"
+    },
+    "compiled_system_prompt_sha256": "9a4277ab381b6cdb8609a3a080793512b282f65a449f75a05a1aae48ced2e963",
+    "declaration": {
+      "path": "docs/team-recommender/EVALUATION_PROTOCOL_D3.md",
+      "sha256": "e4cfd5b71772bcbc099f46ac3f3b8fc86060ff80dc372f62154f38874234cf59"
+    },
+    "evidence_projection_limit": {
+      "path": "docs/team-recommender/receipts/d3-explanation-evidence-audit.json",
+      "sha256": "9efe8d7472506cfdc34d4c5331d9fd37d4840c8c8568f38878743e8caa37f2e2"
+    },
+    "human_judgments": 0,
+    "model": "claude-sonnet-5",
+    "new_valid_items": 259,
+    "packet_sha256": "a4ab4cbddf9d261773a18d476994a905dc47a819494e70f8c5f2038175ff3cb0",
+    "protocol": "D1F",
+    "rubric": {
+      "path": "config/team_recommender_executor/judge-d1.md",
+      "sha256": "713055f257e51c500d931f83eacb380593b99ad4f94f1924f79f6a097fad01f8"
+    },
+    "run": 34538646232
+  },
+  "objective": "F(T)=sum_i w_i max_j r_ij",
+  "optimizer": {
+    "MMR": 0,
+    "coverage_envelope": 0.95,
+    "exact_pool": 12,
+    "max_options": 8,
+    "member_rule": "independent absolute member quality and admitted scientific edge; group scientific anchor",
+    "minimum_quality_ratio": 0.9,
+    "order": "minimum member quality, mean member quality, coverage, stable IDs within envelope",
+    "padding": false,
+    "removal_marginal": "measured, no universal positive-marginal admission condition",
+    "scoped_redundancy_jaccard": 0.9,
+    "size_rule": "smallest feasible size within .95 of best feasible coverage; no redundant larger option",
+    "sizes": [
+      2,
+      3,
+      4
+    ],
+    "swap_starts_per_size": 8,
+    "work_limit": 300000
+  },
+  "optional_components": {
+    "Bayesian": "not elected in frozen D3 protocol; not evaluated or rejected on D3 labels",
+    "MMR": "off throughout D3; no new semantic MMR comparison",
+    "global_context_blend": "not elected",
+    "query_format": "not elected; all original D2 scientific strings retained",
+    "regularized": "not elected in D3; earlier D2 analysis preserved separately"
+  },
+  "pre_judgment_output_commit": "cd8558b53261691280d8f7876c15d35331f641ba",
+  "primary": null,
+  "production_activation": false,
+  "profile_enrichment": 0,
+  "quality_qualified": false,
+  "remaining_work": "User review of no-winner result and existing bounded Marc packet; no automatic reranker, judge campaign, new representation or Stage 3.",
+  "schema_version": 1,
+  "source_checkpoint_before_revision": "6b74ea43f9b402c93be323335cc0bbbb50b2cbe1",
+  "stage3_authorized": false,
+  "stage3_candidate": null,
+  "stage3_protocol": {
+    "path": "docs/team-recommender/stage3-analysis-protocol-d3.md",
+    "sha256": "c672a2384bfe8da0b4f65a742ba47f44854b356a7516247299a2f783e0e0f190"
+  },
+  "status": "D3-bounded-comparison-complete-no-demonstrated-winner",
+  "tested_representations": {
+    "E1": {
+      "active": false,
+      "arm": "E1",
+      "bundle_bytes": 882406,
+      "bundle_gzip_bytes": 152279,
+      "bundle_sha256": "c3791f037a57a11f7cfc030bd7dc2237768d6204f200698b04535aa09e1b484b",
+      "directory_sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+      "generation": "a24ebb049c0fba7f192cb194fc374ae7c985ff80e937325302d9e91f28fca98c",
+      "holdout_scored": false,
+      "hydration": "not established by assembly; requires native loader validation",
+      "model": "voyage-4-large",
+      "provider_calls": 0,
+      "representation": "D3-phrases-v1",
+      "researcher_changes": 0,
+      "resource_receipt": {
+        "path": "docs/team-recommender/receipts/d3-resources-E1.json",
+        "sha256": "1ffd07fdd38c832ec61f3a9085257ed510b85cb63cb1980cf32ff03ecf8da8f3"
+      },
+      "rows": 493,
+      "scorer": {
+        "anchor": 0.1895593734498573,
+        "aspect": 0.17868302636269215,
+        "broad": 0.22220204465797744,
+        "member": 0.3589698867199642,
+        "version": "D3-fixed-v1"
+      },
+      "source_changes": 0,
+      "space": "6f23bb2807315916ed32756e4aa0947172e56c34142d7f52771c7508e6d84e89",
+      "vector_bytes": 2019328,
+      "vector_gzip_bytes": 1873070,
+      "vector_sha256": "0f9dc4c76db3833b359572fd0f95ab85b1e5ea128f10284522d4416bbf26d778",
+      "whole_call_member_floor": 0.4065602803622641
+    },
+    "E2": {
+      "active": false,
+      "arm": "E2",
+      "bundle_bytes": 917055,
+      "bundle_gzip_bytes": 153918,
+      "bundle_sha256": "0adbfc1cc6e2880db69d95ae630388cb331513b54dbf1a5c67b92802924a1191",
+      "directory_sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+      "generation": "42b9af6d68f171f5ee47f004b4f0529af11e174a8bec35f2cb34bb01cb2f6e8a",
+      "holdout_scored": false,
+      "hydration": "not established by assembly; requires native loader validation",
+      "model": "voyage-4-large",
+      "provider_calls": 0,
+      "representation": "D3-combined-v1",
+      "researcher_changes": 0,
+      "resource_receipt": {
+        "path": "docs/team-recommender/receipts/d3-resources-E2.json",
+        "sha256": "f666796f5f5b26e810863d02ca5d7bd4f8dfc01be1b53f2f8dd9cfcaccdeaf05"
+      },
+      "rows": 250,
+      "scorer": {
+        "anchor": 0.18028352214383453,
+        "aspect": 0.16674866598339408,
+        "broad": 0.20041000430757816,
+        "member": 0.3323758552463654,
+        "version": "D3-fixed-v1"
+      },
+      "source_changes": 0,
+      "space": "711956c56ce736f771123f32a3232de9100706f622f8a45ddf45e1281db1b959",
+      "vector_bytes": 1024000,
+      "vector_gzip_bytes": 951498,
+      "vector_sha256": "62c52fc471ded6cf4b328563d0402f28fd7359b6f7f444591b633dfba3388b16",
+      "whole_call_member_floor": 0.3838516941125678
+    },
+    "E3": {
+      "active": false,
+      "arm": "E3",
+      "bundle_bytes": 971590,
+      "bundle_gzip_bytes": 165885,
+      "bundle_sha256": "d9c68970fce37b98a7d22cca9b8e340d5d5348e5c7262584dfa62b2500ab70e8",
+      "directory_sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+      "generation": "336fa3190d15b50d40ff6fd9645b9adffac168c1cf83a5e21ce6e424b9f58e0f",
+      "holdout_scored": false,
+      "hydration": "not established by assembly; requires native loader validation",
+      "model": "voyage-context-4",
+      "provider_calls": 0,
+      "representation": "D3-context-v1",
+      "researcher_changes": 0,
+      "resource_receipt": {
+        "path": "docs/team-recommender/receipts/d3-resources-E3.json",
+        "sha256": "84ca203bdff74fbf48cd8f44fba649b121d76b67f78848de8e85fa7f2d9cfd7f"
+      },
+      "rows": 497,
+      "scorer": {
+        "anchor": 0.17402425349290512,
+        "aspect": 0.17296739773505992,
+        "broad": 0.18811155184181633,
+        "member": 0.28380939961884,
+        "version": "D3-fixed-v1"
+      },
+      "source_changes": 0,
+      "space": "5fc0aa1b883f35211af716cc44576b3661e4a1f18f585bd8a594d3f93bf15543",
+      "vector_bytes": 2035712,
+      "vector_gzip_bytes": 1890613,
+      "vector_sha256": "acaf86f5b8281d87e9d0ef93bb79e5d861954ce6b55742356a30a98fe01e2b61",
+      "whole_call_member_floor": 0.2927194691665991
+    }
+  }
+}
