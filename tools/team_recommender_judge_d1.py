@@ -11,6 +11,8 @@ PURPOSE_KINDS = {
     "d1-aspect": {"aspect_person"}, "d1-call": {"call_person"}, "d1-group": {"group_usefulness"},
     "d1-comparison": {"comparison"}, "d1-swap": {"comparison"}, "d1-explanation": {"explanation_audit"},
 }
+PURPOSE_KINDS.update({"d2-call": {"call_person"}, "d2-group": {"group_usefulness"},
+    "d2-comparison": {"comparison"}, "d2-swap": {"comparison"}, "d2-explanation": {"explanation_audit"}})
 
 
 def labels(kind):
@@ -28,6 +30,8 @@ def contract(request, settings, *, enforce_dispatch_bound=True):
     e.exact_keys(request, ["protocol", "scope_id", "purpose", "source_evidence", "aspects", "items"])
     if request["protocol"] not in {"D1", "D1F"} or request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSE_KINDS:
         raise ValueError("d1_outside_development_authority")
+    if request["purpose"].startswith("d2-") and request["protocol"] != "D1F" and enforce_dispatch_bound:
+        raise ValueError("d2_uses_existing_finite_D1F_format")
     source = request["source_evidence"]
     if source["scope_id"] != request["scope_id"]:
         raise ValueError("source_scope_mismatch")
