@@ -1,0 +1,238 @@
+{
+  "code_commit": "08838e91ab6ff72c051ced53477ba6b3332a7788",
+  "files": {
+    "docs/team-recommender/BUDGET_AMENDMENT_B1.md": {
+      "bytes": 4519,
+      "sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27"
+    },
+    "docs/team-recommender/EVALUATION_AMENDMENT.md": {
+      "bytes": 4959,
+      "sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0"
+    },
+    "docs/team-recommender/HANDOFF.md": {
+      "bytes": 14030,
+      "sha256": "623f5c1acac7d3f0a38ed3431d7c6c961bcc345944946f4cf86842a00cefa144"
+    },
+    "docs/team-recommender/PLAN.md": {
+      "bytes": 71135,
+      "sha256": "977c3cb704a0ef15d95239bc24778b4d266bafd2b020388b6ade816be0a742be"
+    },
+    "docs/team-recommender/budget-ledger.json": {
+      "bytes": 167748,
+      "sha256": "a3849be51e794d8dea102f04c1f852cc8f15a085bef28d79081d457de5a745a6"
+    },
+    "docs/team-recommender/evaluation-C2-execution.md": {
+      "bytes": 8610,
+      "sha256": "d535823b0a8a57e4d2f28dc92ad73837a91cb712c9e55f27d7bc26e541bd4b03"
+    },
+    "docs/team-recommender/evaluation-protocol.md": {
+      "bytes": 15009,
+      "sha256": "204ffaba4b629b3721ad7ac82ae9e65505540e9614ab16137d0eb17d70dc468f"
+    },
+    "docs/team-recommender/human-review/development-packet-c2.md": {
+      "bytes": 53421,
+      "sha256": "13ff8b3e715c12ea910f5f02c1701b145861d7226f7129953c8172abd794aabd"
+    },
+    "docs/team-recommender/manifests/human-development-c2-selection.json": {
+      "bytes": 3085,
+      "sha256": "9d74132477df1752be5f9c3a620151d033d3cb719851bbd050ff2d6e17e78943"
+    },
+    "docs/team-recommender/manifests/human-final-source-overlay-c2.json": {
+      "bytes": 8379,
+      "sha256": "376f5b29d97de20efb4bbe2473ecd43fdcc3ebfba8abf81a6a9343a9aac2999a"
+    },
+    "docs/team-recommender/manifests/source-group-amendment-c2-f92fc5995a0a1ac0.json": {
+      "bytes": 234295,
+      "sha256": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359"
+    },
+    "docs/team-recommender/preparation-budget.json": {
+      "bytes": 5366,
+      "sha256": "7cb1daa5df52f22abe40b58de90c1414b3aa62e684565059f49c8601095bcf65"
+    },
+    "docs/team-recommender/prepared/c2/bundle.json": {
+      "bytes": 860463,
+      "sha256": "80e9e97a7e17a9fec6c1a247ddd31ac3f68b54bb9b78c1d77f13d62a337fef26"
+    },
+    "docs/team-recommender/prepared/c2/context.json": {
+      "bytes": 2035029,
+      "sha256": "23f1ebb3c6a6ed4a2e0f3c045adfda13041940c9f53541ee675f0501eadcf4a8"
+    },
+    "docs/team-recommender/prepared/c2/directory.json": {
+      "bytes": 388727,
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+    },
+    "docs/team-recommender/prepared/c2/validations.json": {
+      "bytes": 45021,
+      "sha256": "c18641aef8102b8ad4d5ac94cbb706973c1c1c88c628a6d20041111d227818be"
+    },
+    "docs/team-recommender/prepared/c2/vectors.f32": {
+      "bytes": 2154496,
+      "sha256": "6d23a2a5f817f8723802765220e718f0a0d2a751a3b3e4435d36e36604b71422"
+    },
+    "docs/team-recommender/prepared/release-116e87cb320bfe1e/data/opportunity_team_index.js": {
+      "bytes": 10906,
+      "sha256": "6f3714cdfff33504b1efd6cf115e09e5086b4695253914e115efb5f0ebc6dfbf"
+    },
+    "docs/team-recommender/prepared/release-116e87cb320bfe1e/data/team-recommender/6d23a2a5f817f8723802765220e718f0a0d2a751a3b3e4435d36e36604b71422.f32": {
+      "bytes": 2154496,
+      "sha256": "6d23a2a5f817f8723802765220e718f0a0d2a751a3b3e4435d36e36604b71422"
+    },
+    "docs/team-recommender/prepared/release-116e87cb320bfe1e/data/team-recommender/80e9e97a7e17a9fec6c1a247ddd31ac3f68b54bb9b78c1d77f13d62a337fef26.json": {
+      "bytes": 860463,
+      "sha256": "80e9e97a7e17a9fec6c1a247ddd31ac3f68b54bb9b78c1d77f13d62a337fef26"
+    },
+    "docs/team-recommender/prepared/release-116e87cb320bfe1e/data/team-recommender/bd347c392e276ecdb79ffa14275a9e8e05463c7b25f13153131b07b7b87e7932.json": {
+      "bytes": 45826,
+      "sha256": "bd347c392e276ecdb79ffa14275a9e8e05463c7b25f13153131b07b7b87e7932"
+    },
+    "docs/team-recommender/receipts/c2-automatic-member-audit-plan.json": {
+      "bytes": 809,
+      "sha256": "1fdb5eebf2412589806d4ee93f13f4a3a3dff30b110ecbbfbefe84fc3fa17311"
+    },
+    "docs/team-recommender/receipts/c2-canary-input-plan.json": {
+      "bytes": 841,
+      "sha256": "2c29c8e568cc0f63bbc9b9905720d676f6a7af58da95a69d870ace656ab41b6f"
+    },
+    "docs/team-recommender/receipts/c2-canary-run.json": {
+      "bytes": 615,
+      "sha256": "5ed3668837a358f88a1e20dff128f8f004d56efd91036f20d8080173a2b03cb0"
+    },
+    "docs/team-recommender/receipts/c2-development-judge-plan.json": {
+      "bytes": 3919,
+      "sha256": "2b628f3832f7f9ad4c66eeaadad784280b55008720c8832340037b29e20e1a49"
+    },
+    "docs/team-recommender/receipts/c2-development-numerical-summary.json": {
+      "bytes": 682192,
+      "sha256": "aff0175bcefa977b14c8762580e36f2cb4c3605cb1fd36f42398f0a994c9e3fb"
+    },
+    "docs/team-recommender/receipts/c2-final-analysis.json": {
+      "bytes": 42251,
+      "sha256": "371f1983b3bb11dd8882ec32e2f952763df8fb73b36a7e40ca4781e3210bca0b"
+    },
+    "docs/team-recommender/receipts/c2-final-budget.json": {
+      "bytes": 1393,
+      "sha256": "1748fb996dce2c9ad113b75c89d624d27834b59738741941fc70ea1c2bb4ac61"
+    },
+    "docs/team-recommender/receipts/c2-final-validation.json": {
+      "bytes": 1896,
+      "sha256": "49d1d6d44604c6768a688c5f714944c5e40a9a8ca24384da05d0a3e2bf8e2be4"
+    },
+    "docs/team-recommender/receipts/c2-full-input-packet-v2.json": {
+      "bytes": 451,
+      "sha256": "5c5a7bb79d69131059d877f5ec33f0b554486ccb0512e5ad5f8be21f1217c54e"
+    },
+    "docs/team-recommender/receipts/c2-full-input-packet.json": {
+      "bytes": 451,
+      "sha256": "67b5551e5725aa055af52b69ee1cadd13358e3d8f49d92fa129b41d6decd8374"
+    },
+    "docs/team-recommender/receipts/c2-judge-undispatched-contracts.json": {
+      "bytes": 464,
+      "sha256": "5eb422b284a687545130ee7ba1965cc3f4eddfcdb2859bd7150dfc11f62891ac"
+    },
+    "docs/team-recommender/receipts/c2-judge-wiring-packet.json": {
+      "bytes": 396,
+      "sha256": "ea674b81a72232fe092c2162d06f0a8caa7b6ce134786c4f4ab2db6a81e1c0d3"
+    },
+    "docs/team-recommender/receipts/c2-live-metadata-observation.json": {
+      "bytes": 5027,
+      "sha256": "ba5407df84a6a0cd6cf6931096e767f7266539b85147b8ca841acba66b0c5575"
+    },
+    "docs/team-recommender/receipts/c2-member-remaining-34472613079.json": {
+      "bytes": 432,
+      "sha256": "406426298a8b2cf30b38b22646d060fdaf767f010e9821cf0c23b0d4750cc448"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34468680830.json": {
+      "bytes": 1044,
+      "sha256": "755f7537e18a07e6f81a3970d789557aac6b9d862305cb1f01cbec0fc6ba0f95"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34469157819.json": {
+      "bytes": 1023,
+      "sha256": "7287d3830963a0ad75c089246dc686c88a96cb157ef6ee55f612a3f06891a3f4"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34469570701.json": {
+      "bytes": 999,
+      "sha256": "4b7f5161253ffbcb0ee695b81cb7008a9347fa5cfee2dcc689752f8648fd65ea"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34469935016.json": {
+      "bytes": 944,
+      "sha256": "a3fda60c6689a7de1acdd234ec3b46bd9ac48e454351f78be160900d0a311460"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34470160464.json": {
+      "bytes": 923,
+      "sha256": "23160e60d9bc33be1556243343550e95bce0b2830f05c472f2cc229b1db7dbe0"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34470362766.json": {
+      "bytes": 884,
+      "sha256": "fd23102a186f1df9100bf0e3c918c1bad1c8817e949e97b99c31f7581c2dde2e"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34470606288.json": {
+      "bytes": 869,
+      "sha256": "de11fcebf2ff8439edfbb65f54a8706448086a352b3474696b798a7a37c16857"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34470895878.json": {
+      "bytes": 805,
+      "sha256": "4bdbaada1a5e9273c3cae2f4158a7b9c092601c9e8df873127f2a0ba416915b6"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34471166200.json": {
+      "bytes": 663,
+      "sha256": "3047a42f084eeb50777371c5dbfaf882782c0cc8e3b7feecae2d920fe8e46d31"
+    },
+    "docs/team-recommender/receipts/c2-pending-after-34471544496.json": {
+      "bytes": 652,
+      "sha256": "851e79f314b545f2b913f1d47f3f696c8d609952db3f69b4e0d5591bc16d4d70"
+    },
+    "docs/team-recommender/receipts/c2-prerequisite-merge.json": {
+      "bytes": 1160,
+      "sha256": "5873ae6b10c02c29099923dcf7216ea78099fe492a40eaf9087f8e0215319201"
+    },
+    "docs/team-recommender/receipts/c2-real-controls.json": {
+      "bytes": 19373,
+      "sha256": "fa7f5842541501c2b47bc021cede14c2d2a73a7dc6b5ecc56c5bed21060c99b4"
+    },
+    "docs/team-recommender/receipts/c2-real-measurements-final.json": {
+      "bytes": 28905,
+      "sha256": "38872e048a61633218a5fcd1466bf138db606e0ae9a61b3cf9b7d8d7988f9116"
+    },
+    "docs/team-recommender/receipts/c2-remaining-judge-plan-v2.json": {
+      "bytes": 6807,
+      "sha256": "3dce63176cee1b57c987b01a33493ca4c05f4a20805cc589288fcccdb1b8cf90"
+    },
+    "docs/team-recommender/receipts/c2-remaining-judge-wiring-v2.json": {
+      "bytes": 291,
+      "sha256": "8415ecb8d9e830148b75b81b490f67eaee78cd9627a696a6fccc46432d988ed1"
+    },
+    "docs/team-recommender/receipts/c2-source-input-inventory-v2.json": {
+      "bytes": 55327,
+      "sha256": "404ee6d790719a2eb5ee81e2878d85ae46cc543d8389165d55178903bd68bfd3"
+    },
+    "docs/team-recommender/receipts/c2-source-input-inventory.json": {
+      "bytes": 55140,
+      "sha256": "59efd76bbb5940f029afb178d6082266fb51ff6ad711d9c87f4fbd910d03af0a"
+    },
+    "docs/team-recommender/receipts/c2-trusted-final.json": {
+      "bytes": 1715,
+      "sha256": "251c56c767074740fee2f37f73dece94ba7056e13998d11737c4363f213ab676"
+    },
+    "docs/team-recommender/receipts/c2-vector-adoption.json": {
+      "bytes": 998,
+      "sha256": "9f3b1392c7999b6f424a8dbe4c85213299ec6d54f069d45c80bdd0529f245172"
+    },
+    "docs/team-recommender/reports/stage-2-final-report.md": {
+      "bytes": 43303,
+      "sha256": "a4a13ee2bea5d151a987271f7adcb179cf1c05a0f339e33d9d7c2fc16848d7a4"
+    },
+    "docs/team-recommender/stage2-final-candidate.json": {
+      "bytes": 16229,
+      "sha256": "45fc3072e5efc86680f081e7b70731df0719de03730eeb2b535565e00c3d6a18"
+    },
+    "docs/team-recommender/stage3-analysis-protocol-c2.md": {
+      "bytes": 7537,
+      "sha256": "5276474277baefd58df98103ec405e60dcba6b9c24fda4ddbec67293e9010c34"
+    }
+  },
+  "provider_cache_public": false,
+  "schema_version": 1,
+  "source_labels": "aggregates public; exact item-level judgments private",
+  "stage": 2,
+  "status": "closed-REVISE"
+}
