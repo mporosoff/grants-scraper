@@ -1,0 +1,4273 @@
+{
+  "protocol_sha256": "e4cfd5b71772bcbc099f46ac3f3b8fc86060ff80dc372f62154f38874234cf59",
+  "outputs_sha256": "e0e8ed17b13713a4c54b260e347d12a400ab3e58720324e62f1cb8d965e0362f",
+  "arms": {
+    "E0": {
+      "parameters": "exact D2",
+      "scopes": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362178",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0,
+          "top5": 2,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0,
+          "top5": 1,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0,
+          "top5": 2,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362254",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362855",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 4,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 5,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 7,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0,
+          "top5": 2,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362520",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363489",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361380",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        }
+      ],
+      "timings": null
+    },
+    "E0-C": {
+      "parameters": {
+        "anchor": 0.3184852674408055,
+        "aspect": 0.2915088489965322,
+        "broad": 0.3406650826682623,
+        "choice": {
+          "log_loss": 0,
+          "operating": {
+            "n": 83,
+            "positive": 66,
+            "recall_of_sampled_positives": 0.5038167938931297,
+            "source_groups": 17,
+            "threshold": 0.47410033718660516,
+            "unrelated": 17,
+            "unrelated_fraction": 0.20481927710843373
+          },
+          "quantile": 0.5,
+          "selection_target_met": false
+        },
+        "member": 0.47410033718660516,
+        "settings": [
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 171,
+              "positive": 118,
+              "recall_of_sampled_positives": 0.9007633587786259,
+              "source_groups": 27,
+              "threshold": 0.37685984038037057,
+              "unrelated": 53,
+              "unrelated_fraction": 0.30994152046783624
+            },
+            "quantile": 0.1
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 133,
+              "positive": 98,
+              "recall_of_sampled_positives": 0.7480916030534351,
+              "source_groups": 20,
+              "threshold": 0.4441892031706889,
+              "unrelated": 35,
+              "unrelated_fraction": 0.2631578947368421
+            },
+            "quantile": 0.25
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 83,
+              "positive": 66,
+              "recall_of_sampled_positives": 0.5038167938931297,
+              "source_groups": 17,
+              "threshold": 0.47410033718660516,
+              "unrelated": 17,
+              "unrelated_fraction": 0.20481927710843373
+            },
+            "quantile": 0.5
+          }
+        ]
+      },
+      "scopes": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362178",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0,
+          "top5": 1,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0,
+          "top5": 1,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "group",
+          "options": 7,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "group",
+          "options": 5,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362254",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "group",
+          "options": 5,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362855",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 4,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 7,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0,
+          "top5": 3,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0,
+          "top5": 3,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362520",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363489",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361380",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        }
+      ],
+      "timings": [
+        {
+          "scope_id": "359696",
+          "matrix_from_adopted_scores_ms": 6.421499999999995,
+          "group_ms": 25.738500000000016,
+          "edited_optimization_ms": 9.13560000000001
+        },
+        {
+          "scope_id": "362178",
+          "matrix_from_adopted_scores_ms": 17.598100000000017,
+          "group_ms": 0.20069999999998345,
+          "edited_optimization_ms": 0.026399999999995316
+        },
+        {
+          "scope_id": "363281",
+          "matrix_from_adopted_scores_ms": 4.333499999999987,
+          "group_ms": 0.03370000000001028,
+          "edited_optimization_ms": 0.02349999999998431
+        },
+        {
+          "scope_id": "363141",
+          "matrix_from_adopted_scores_ms": 5.236700000000013,
+          "group_ms": 0.026299999999991996,
+          "edited_optimization_ms": 0.016999999999995907
+        },
+        {
+          "scope_id": "334971",
+          "matrix_from_adopted_scores_ms": 3.755899999999997,
+          "group_ms": 0.02800000000002001,
+          "edited_optimization_ms": 0.016799999999989268
+        },
+        {
+          "scope_id": "362315",
+          "matrix_from_adopted_scores_ms": 4.210499999999996,
+          "group_ms": 0.020999999999986585,
+          "edited_optimization_ms": 0.015999999999991132
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "matrix_from_adopted_scores_ms": 3.885600000000011,
+          "group_ms": 12.836599999999976,
+          "edited_optimization_ms": 10.476399999999984
+        },
+        {
+          "scope_id": "360644",
+          "matrix_from_adopted_scores_ms": 1.4679999999999893,
+          "group_ms": 0.02950000000001296,
+          "edited_optimization_ms": 0.016199999999997772
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "matrix_from_adopted_scores_ms": 4.019800000000004,
+          "group_ms": 0.9241000000000099,
+          "edited_optimization_ms": 0.3206000000000131
+        },
+        {
+          "scope_id": "363055",
+          "matrix_from_adopted_scores_ms": 3.3980000000000246,
+          "group_ms": 0.026099999999985357,
+          "edited_optimization_ms": 0.017899999999997362
+        },
+        {
+          "scope_id": "356978",
+          "matrix_from_adopted_scores_ms": 3.803699999999992,
+          "group_ms": 0.019099999999980355,
+          "edited_optimization_ms": 0.016600000000039472
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "matrix_from_adopted_scores_ms": 3.7474000000000274,
+          "group_ms": 2.047300000000007,
+          "edited_optimization_ms": 0.3673999999999751
+        },
+        {
+          "scope_id": "362196",
+          "matrix_from_adopted_scores_ms": 4.102900000000034,
+          "group_ms": 0.0333999999999719,
+          "edited_optimization_ms": 0.019200000000012096
+        },
+        {
+          "scope_id": "112354",
+          "matrix_from_adopted_scores_ms": 3.9098000000000184,
+          "group_ms": 0.0252999999999588,
+          "edited_optimization_ms": 0.017299999999977445
+        },
+        {
+          "scope_id": "362254",
+          "matrix_from_adopted_scores_ms": 6.287000000000035,
+          "group_ms": 0.031799999999975626,
+          "edited_optimization_ms": 0.01710000000002765
+        },
+        {
+          "scope_id": "45810",
+          "matrix_from_adopted_scores_ms": 4.3414000000000215,
+          "group_ms": 0.17739999999997735,
+          "edited_optimization_ms": 0.019200000000012096
+        },
+        {
+          "scope_id": "362218",
+          "matrix_from_adopted_scores_ms": 1.899000000000001,
+          "group_ms": 5.33280000000002,
+          "edited_optimization_ms": 2.5822000000000003
+        },
+        {
+          "scope_id": "363292",
+          "matrix_from_adopted_scores_ms": 3.897199999999998,
+          "group_ms": 0.02369999999996253,
+          "edited_optimization_ms": 0.016000000000019554
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "matrix_from_adopted_scores_ms": 3.6295000000000073,
+          "group_ms": 0.37170000000003256,
+          "edited_optimization_ms": 0.09039999999998827
+        },
+        {
+          "scope_id": "362207",
+          "matrix_from_adopted_scores_ms": 1.8432999999999993,
+          "group_ms": 0.023099999999999454,
+          "edited_optimization_ms": 0.017099999999970805
+        },
+        {
+          "scope_id": "362855",
+          "matrix_from_adopted_scores_ms": 6.205699999999979,
+          "group_ms": 7.8303000000000225,
+          "edited_optimization_ms": 5.6901000000000295
+        },
+        {
+          "scope_id": "357002",
+          "matrix_from_adopted_scores_ms": 5.091800000000035,
+          "group_ms": 33.5215,
+          "edited_optimization_ms": 17.760100000000023
+        },
+        {
+          "scope_id": "361208",
+          "matrix_from_adopted_scores_ms": 2.0027999999999793,
+          "group_ms": 1.3079999999999927,
+          "edited_optimization_ms": 0.5897999999999683
+        },
+        {
+          "scope_id": "363069",
+          "matrix_from_adopted_scores_ms": 8.216499999999996,
+          "group_ms": 0.03840000000002419,
+          "edited_optimization_ms": 0.039499999999975444
+        },
+        {
+          "scope_id": "361207",
+          "matrix_from_adopted_scores_ms": 3.81940000000003,
+          "group_ms": 38.5034,
+          "edited_optimization_ms": 26.255499999999984
+        },
+        {
+          "scope_id": "351947",
+          "matrix_from_adopted_scores_ms": 3.394300000000044,
+          "group_ms": 0.029399999999895954,
+          "edited_optimization_ms": 0.016100000000051296
+        },
+        {
+          "scope_id": "363622",
+          "matrix_from_adopted_scores_ms": 1.620999999999981,
+          "group_ms": 1.6125000000000682,
+          "edited_optimization_ms": 27.792800000000057
+        },
+        {
+          "scope_id": "363544",
+          "matrix_from_adopted_scores_ms": 3.3822999999999865,
+          "group_ms": 0.03880000000003747,
+          "edited_optimization_ms": 0.020100000000070395
+        },
+        {
+          "scope_id": "359091",
+          "matrix_from_adopted_scores_ms": 3.8372000000000526,
+          "group_ms": 0.024999999999977263,
+          "edited_optimization_ms": 0.015899999999987813
+        },
+        {
+          "scope_id": "362244",
+          "matrix_from_adopted_scores_ms": 1.4972000000000207,
+          "group_ms": 0.015700000000038017,
+          "edited_optimization_ms": 0.014099999999984902
+        },
+        {
+          "scope_id": "362520",
+          "matrix_from_adopted_scores_ms": 18.82650000000001,
+          "group_ms": 0.12409999999999854,
+          "edited_optimization_ms": 0.028900000000021464
+        },
+        {
+          "scope_id": "361526:f-18",
+          "matrix_from_adopted_scores_ms": 1.4895999999999958,
+          "group_ms": 0.03330000000005384,
+          "edited_optimization_ms": 0.017200000000002547
+        },
+        {
+          "scope_id": "358938",
+          "matrix_from_adopted_scores_ms": 3.2875999999999976,
+          "group_ms": 0.02800000000002001,
+          "edited_optimization_ms": 0.018799999999941974
+        },
+        {
+          "scope_id": "363489",
+          "matrix_from_adopted_scores_ms": 5.3530000000000655,
+          "group_ms": 0.03459999999995489,
+          "edited_optimization_ms": 0.017500000000040927
+        },
+        {
+          "scope_id": "361380",
+          "matrix_from_adopted_scores_ms": 3.674600000000055,
+          "group_ms": 0.023199999999974352,
+          "edited_optimization_ms": 0.03129999999998745
+        }
+      ]
+    },
+    "E1": {
+      "parameters": {
+        "anchor": 0.1895593734498573,
+        "aspect": 0.17868302636269215,
+        "broad": 0.22220204465797744,
+        "choice": {
+          "log_loss": 0,
+          "operating": {
+            "n": 79,
+            "positive": 66,
+            "recall_of_sampled_positives": 0.5038167938931297,
+            "source_groups": 15,
+            "threshold": 0.3589698867199642,
+            "unrelated": 13,
+            "unrelated_fraction": 0.16455696202531644
+          },
+          "quantile": 0.5,
+          "selection_target_met": false
+        },
+        "member": 0.3589698867199642,
+        "settings": [
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 169,
+              "positive": 118,
+              "recall_of_sampled_positives": 0.9007633587786259,
+              "source_groups": 30,
+              "threshold": 0.24884537724481576,
+              "unrelated": 51,
+              "unrelated_fraction": 0.30177514792899407
+            },
+            "quantile": 0.1
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 134,
+              "positive": 98,
+              "recall_of_sampled_positives": 0.7480916030534351,
+              "source_groups": 20,
+              "threshold": 0.2991629188777783,
+              "unrelated": 36,
+              "unrelated_fraction": 0.26865671641791045
+            },
+            "quantile": 0.25
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 79,
+              "positive": 66,
+              "recall_of_sampled_positives": 0.5038167938931297,
+              "source_groups": 15,
+              "threshold": 0.3589698867199642,
+              "unrelated": 13,
+              "unrelated_fraction": 0.16455696202531644
+            },
+            "quantile": 0.5
+          }
+        ]
+      },
+      "scopes": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362178",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0,
+          "top5": 2,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0,
+          "top5": 1,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362254",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "group",
+          "options": 7,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362855",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 1,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 6,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0,
+          "top5": 3,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362520",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0,
+          "top5": 1,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363489",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361380",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        }
+      ],
+      "timings": [
+        {
+          "scope_id": "359696",
+          "matrix_from_adopted_scores_ms": 5.5861999999999625,
+          "group_ms": 12.398199999999974,
+          "edited_optimization_ms": 8.841599999999971
+        },
+        {
+          "scope_id": "362178",
+          "matrix_from_adopted_scores_ms": 16.2038,
+          "group_ms": 2.4832999999999856,
+          "edited_optimization_ms": 5.108899999999949
+        },
+        {
+          "scope_id": "363281",
+          "matrix_from_adopted_scores_ms": 5.0919999999999845,
+          "group_ms": 0.1229000000000724,
+          "edited_optimization_ms": 0.01599999999996271
+        },
+        {
+          "scope_id": "363141",
+          "matrix_from_adopted_scores_ms": 3.776800000000094,
+          "group_ms": 0.023399999999924148,
+          "edited_optimization_ms": 0.015199999999936153
+        },
+        {
+          "scope_id": "334971",
+          "matrix_from_adopted_scores_ms": 4.280799999999999,
+          "group_ms": 0.035499999999956344,
+          "edited_optimization_ms": 0.019499999999993634
+        },
+        {
+          "scope_id": "362315",
+          "matrix_from_adopted_scores_ms": 4.600999999999999,
+          "group_ms": 0.027000000000043656,
+          "edited_optimization_ms": 0.015300000000024738
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "matrix_from_adopted_scores_ms": 3.7379000000000815,
+          "group_ms": 7.70189999999991,
+          "edited_optimization_ms": 6.9254000000000815
+        },
+        {
+          "scope_id": "360644",
+          "matrix_from_adopted_scores_ms": 3.395599999999945,
+          "group_ms": 0.026700000000005275,
+          "edited_optimization_ms": 0.014099999999984902
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "matrix_from_adopted_scores_ms": 5.542500000000018,
+          "group_ms": 4.1691999999999325,
+          "edited_optimization_ms": 2.4077000000000908
+        },
+        {
+          "scope_id": "363055",
+          "matrix_from_adopted_scores_ms": 3.326599999999985,
+          "group_ms": 0.03330000000005384,
+          "edited_optimization_ms": 0.01630000000000109
+        },
+        {
+          "scope_id": "356978",
+          "matrix_from_adopted_scores_ms": 3.68769999999995,
+          "group_ms": 0.02070000000003347,
+          "edited_optimization_ms": 0.015099999999961256
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "matrix_from_adopted_scores_ms": 2.54970000000003,
+          "group_ms": 21.007099999999923,
+          "edited_optimization_ms": 16.538800000000037
+        },
+        {
+          "scope_id": "362196",
+          "matrix_from_adopted_scores_ms": 4.0978000000000065,
+          "group_ms": 0.033999999999991815,
+          "edited_optimization_ms": 0.017600000000015825
+        },
+        {
+          "scope_id": "112354",
+          "matrix_from_adopted_scores_ms": 3.8596000000000004,
+          "group_ms": 0.021600000000034925,
+          "edited_optimization_ms": 0.014999999999986358
+        },
+        {
+          "scope_id": "362254",
+          "matrix_from_adopted_scores_ms": 6.7654999999999745,
+          "group_ms": 25.711900000000014,
+          "edited_optimization_ms": 24.73860000000002
+        },
+        {
+          "scope_id": "45810",
+          "matrix_from_adopted_scores_ms": 4.607500000000073,
+          "group_ms": 0.0443000000000211,
+          "edited_optimization_ms": 0.02119999999990796
+        },
+        {
+          "scope_id": "362218",
+          "matrix_from_adopted_scores_ms": 2.144700000000057,
+          "group_ms": 2.6766000000000076,
+          "edited_optimization_ms": 1.331299999999942
+        },
+        {
+          "scope_id": "363292",
+          "matrix_from_adopted_scores_ms": 3.933499999999981,
+          "group_ms": 0.024200000000064392,
+          "edited_optimization_ms": 0.01770000000010441
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "matrix_from_adopted_scores_ms": 6.117900000000077,
+          "group_ms": 17.495399999999904,
+          "edited_optimization_ms": 10.834799999999973
+        },
+        {
+          "scope_id": "362207",
+          "matrix_from_adopted_scores_ms": 1.9582000000000335,
+          "group_ms": 0.024200000000064392,
+          "edited_optimization_ms": 0.016100000000051296
+        },
+        {
+          "scope_id": "362855",
+          "matrix_from_adopted_scores_ms": 7.094699999999989,
+          "group_ms": 0.03489999999999327,
+          "edited_optimization_ms": 0.018100000000004002
+        },
+        {
+          "scope_id": "357002",
+          "matrix_from_adopted_scores_ms": 4.164099999999962,
+          "group_ms": 0.7961999999999989,
+          "edited_optimization_ms": 0.33819999999991524
+        },
+        {
+          "scope_id": "361208",
+          "matrix_from_adopted_scores_ms": 2.384700000000066,
+          "group_ms": 2.669499999999971,
+          "edited_optimization_ms": 1.9630999999999403
+        },
+        {
+          "scope_id": "363069",
+          "matrix_from_adopted_scores_ms": 7.960100000000011,
+          "group_ms": 0.03690000000005966,
+          "edited_optimization_ms": 0.018000000000029104
+        },
+        {
+          "scope_id": "361207",
+          "matrix_from_adopted_scores_ms": 3.74980000000005,
+          "group_ms": 18.60329999999999,
+          "edited_optimization_ms": 11.936599999999999
+        },
+        {
+          "scope_id": "351947",
+          "matrix_from_adopted_scores_ms": 3.2769999999998163,
+          "group_ms": 0.026900000000068758,
+          "edited_optimization_ms": 0.016000000000076398
+        },
+        {
+          "scope_id": "363622",
+          "matrix_from_adopted_scores_ms": 1.6702000000000226,
+          "group_ms": 2.4651000000001204,
+          "edited_optimization_ms": 1.3468000000000302
+        },
+        {
+          "scope_id": "363544",
+          "matrix_from_adopted_scores_ms": 4.143000000000029,
+          "group_ms": 0.02539999999999054,
+          "edited_optimization_ms": 0.015399999999999636
+        },
+        {
+          "scope_id": "359091",
+          "matrix_from_adopted_scores_ms": 3.9732000000001335,
+          "group_ms": 0.01939999999990505,
+          "edited_optimization_ms": 0.015399999999999636
+        },
+        {
+          "scope_id": "362244",
+          "matrix_from_adopted_scores_ms": 1.5859000000000378,
+          "group_ms": 0.02299999999991087,
+          "edited_optimization_ms": 0.017400000000179716
+        },
+        {
+          "scope_id": "362520",
+          "matrix_from_adopted_scores_ms": 20.25759999999991,
+          "group_ms": 3.2640000000001237,
+          "edited_optimization_ms": 3.7368999999998778
+        },
+        {
+          "scope_id": "361526:f-18",
+          "matrix_from_adopted_scores_ms": 1.6329000000000633,
+          "group_ms": 10.496800000000121,
+          "edited_optimization_ms": 4.852399999999989
+        },
+        {
+          "scope_id": "358938",
+          "matrix_from_adopted_scores_ms": 3.4618000000000393,
+          "group_ms": 0.023300000000062937,
+          "edited_optimization_ms": 0.01520000000004984
+        },
+        {
+          "scope_id": "363489",
+          "matrix_from_adopted_scores_ms": 4.565299999999979,
+          "group_ms": 11.334999999999809,
+          "edited_optimization_ms": 7.185799999999972
+        },
+        {
+          "scope_id": "361380",
+          "matrix_from_adopted_scores_ms": 3.664800000000014,
+          "group_ms": 1.7364999999999782,
+          "edited_optimization_ms": 0.7844000000000051
+        }
+      ]
+    },
+    "E2": {
+      "parameters": {
+        "anchor": 0.18028352214383453,
+        "aspect": 0.16674866598339408,
+        "broad": 0.20041000430757816,
+        "choice": {
+          "log_loss": 0,
+          "operating": {
+            "n": 77,
+            "positive": 66,
+            "recall_of_sampled_positives": 0.5038167938931297,
+            "source_groups": 17,
+            "threshold": 0.3323758552463654,
+            "unrelated": 11,
+            "unrelated_fraction": 0.14285714285714285
+          },
+          "quantile": 0.5,
+          "selection_target_met": false
+        },
+        "member": 0.3323758552463654,
+        "settings": [
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 163,
+              "positive": 118,
+              "recall_of_sampled_positives": 0.9007633587786259,
+              "source_groups": 30,
+              "threshold": 0.24526941231605587,
+              "unrelated": 45,
+              "unrelated_fraction": 0.27607361963190186
+            },
+            "quantile": 0.1
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 127,
+              "positive": 98,
+              "recall_of_sampled_positives": 0.7480916030534351,
+              "source_groups": 23,
+              "threshold": 0.28088834107472016,
+              "unrelated": 29,
+              "unrelated_fraction": 0.2283464566929134
+            },
+            "quantile": 0.25
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 77,
+              "positive": 66,
+              "recall_of_sampled_positives": 0.5038167938931297,
+              "source_groups": 17,
+              "threshold": 0.3323758552463654,
+              "unrelated": 11,
+              "unrelated_fraction": 0.14285714285714285
+            },
+            "quantile": 0.5
+          }
+        ]
+      },
+      "scopes": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362178",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362254",
+          "status": "group",
+          "options": 5,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "group",
+          "options": 7,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362855",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 4,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0,
+          "top5": 1,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362520",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "group",
+          "options": 1,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0,
+          "top5": 2,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363489",
+          "status": "group",
+          "options": 1,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361380",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        }
+      ],
+      "timings": [
+        {
+          "scope_id": "359696",
+          "matrix_from_adopted_scores_ms": 8.811999999999898,
+          "group_ms": 9.704999999999927,
+          "edited_optimization_ms": 7.210699999999861
+        },
+        {
+          "scope_id": "362178",
+          "matrix_from_adopted_scores_ms": 16.14449999999988,
+          "group_ms": 10.979200000000219,
+          "edited_optimization_ms": 8.107700000000023
+        },
+        {
+          "scope_id": "363281",
+          "matrix_from_adopted_scores_ms": 3.5715999999999894,
+          "group_ms": 0.1874000000000251,
+          "edited_optimization_ms": 0.018100000000004002
+        },
+        {
+          "scope_id": "363141",
+          "matrix_from_adopted_scores_ms": 3.9375,
+          "group_ms": 0.02130000000011023,
+          "edited_optimization_ms": 0.018000000000029104
+        },
+        {
+          "scope_id": "334971",
+          "matrix_from_adopted_scores_ms": 3.953800000000001,
+          "group_ms": 0.022399999999834108,
+          "edited_optimization_ms": 0.017399999999952342
+        },
+        {
+          "scope_id": "362315",
+          "matrix_from_adopted_scores_ms": 4.930799999999863,
+          "group_ms": 0.030300000000124783,
+          "edited_optimization_ms": 0.016200000000026193
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "matrix_from_adopted_scores_ms": 3.5634000000000015,
+          "group_ms": 12.660599999999931,
+          "edited_optimization_ms": 10.47460000000001
+        },
+        {
+          "scope_id": "360644",
+          "matrix_from_adopted_scores_ms": 1.7010999999999967,
+          "group_ms": 0.034300000000030195,
+          "edited_optimization_ms": 0.017500000000154614
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "matrix_from_adopted_scores_ms": 5.171699999999873,
+          "group_ms": 2.1130000000000564,
+          "edited_optimization_ms": 0.7965999999998985
+        },
+        {
+          "scope_id": "363055",
+          "matrix_from_adopted_scores_ms": 3.559199999999919,
+          "group_ms": 0.036800000000084765,
+          "edited_optimization_ms": 0.023400000000037835
+        },
+        {
+          "scope_id": "356978",
+          "matrix_from_adopted_scores_ms": 3.718599999999924,
+          "group_ms": 0.022300000000086584,
+          "edited_optimization_ms": 0.0159000000001015
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "matrix_from_adopted_scores_ms": 3.4156000000000404,
+          "group_ms": 6.1163000000001375,
+          "edited_optimization_ms": 3.4710000000000036
+        },
+        {
+          "scope_id": "362196",
+          "matrix_from_adopted_scores_ms": 5.199800000000096,
+          "group_ms": 0.05289999999990869,
+          "edited_optimization_ms": 0.027100000000018554
+        },
+        {
+          "scope_id": "112354",
+          "matrix_from_adopted_scores_ms": 3.988800000000083,
+          "group_ms": 0.02719999999999345,
+          "edited_optimization_ms": 0.01639999999997599
+        },
+        {
+          "scope_id": "362254",
+          "matrix_from_adopted_scores_ms": 6.993600000000015,
+          "group_ms": 43.20920000000001,
+          "edited_optimization_ms": 29.66560000000004
+        },
+        {
+          "scope_id": "45810",
+          "matrix_from_adopted_scores_ms": 4.102000000000089,
+          "group_ms": 0.03260000000000218,
+          "edited_optimization_ms": 0.016999999999825377
+        },
+        {
+          "scope_id": "362218",
+          "matrix_from_adopted_scores_ms": 2.1392000000000735,
+          "group_ms": 2.474499999999807,
+          "edited_optimization_ms": 1.2525000000000546
+        },
+        {
+          "scope_id": "363292",
+          "matrix_from_adopted_scores_ms": 3.677099999999882,
+          "group_ms": 0.04079999999999018,
+          "edited_optimization_ms": 0.02359999999998763
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "matrix_from_adopted_scores_ms": 4.898099999999886,
+          "group_ms": 3.452199999999948,
+          "edited_optimization_ms": 4.601899999999887
+        },
+        {
+          "scope_id": "362207",
+          "matrix_from_adopted_scores_ms": 1.9595999999999094,
+          "group_ms": 0.023999999999887223,
+          "edited_optimization_ms": 0.017200000000002547
+        },
+        {
+          "scope_id": "362855",
+          "matrix_from_adopted_scores_ms": 6.179000000000087,
+          "group_ms": 0.1335999999998876,
+          "edited_optimization_ms": 0.030399999999872307
+        },
+        {
+          "scope_id": "357002",
+          "matrix_from_adopted_scores_ms": 4.212699999999813,
+          "group_ms": 6.879500000000007,
+          "edited_optimization_ms": 3.794700000000148
+        },
+        {
+          "scope_id": "361208",
+          "matrix_from_adopted_scores_ms": 2.3863000000001193,
+          "group_ms": 1.3416999999999462,
+          "edited_optimization_ms": 0.5352000000000317
+        },
+        {
+          "scope_id": "363069",
+          "matrix_from_adopted_scores_ms": 8.043299999999817,
+          "group_ms": 0.028999999999996362,
+          "edited_optimization_ms": 0.5154999999999745
+        },
+        {
+          "scope_id": "361207",
+          "matrix_from_adopted_scores_ms": 3.832800000000134,
+          "group_ms": 7.852499999999964,
+          "edited_optimization_ms": 3.3070999999999913
+        },
+        {
+          "scope_id": "351947",
+          "matrix_from_adopted_scores_ms": 3.3395000000000437,
+          "group_ms": 0.02250000000003638,
+          "edited_optimization_ms": 0.016599999999925785
+        },
+        {
+          "scope_id": "363622",
+          "matrix_from_adopted_scores_ms": 2.223499999999831,
+          "group_ms": 0.22430000000008476,
+          "edited_optimization_ms": 0.06639999999993051
+        },
+        {
+          "scope_id": "363544",
+          "matrix_from_adopted_scores_ms": 3.621699999999919,
+          "group_ms": 0.019700000000057116,
+          "edited_optimization_ms": 0.014400000000023283
+        },
+        {
+          "scope_id": "359091",
+          "matrix_from_adopted_scores_ms": 3.5458000000000993,
+          "group_ms": 0.017299999999977445,
+          "edited_optimization_ms": 0.013799999999946522
+        },
+        {
+          "scope_id": "362244",
+          "matrix_from_adopted_scores_ms": 1.4983999999999469,
+          "group_ms": 0.01630000000000109,
+          "edited_optimization_ms": 0.013599999999996726
+        },
+        {
+          "scope_id": "362520",
+          "matrix_from_adopted_scores_ms": 18.582599999999957,
+          "group_ms": 27.607200000000148,
+          "edited_optimization_ms": 28.785900000000083
+        },
+        {
+          "scope_id": "361526:f-18",
+          "matrix_from_adopted_scores_ms": 1.655999999999949,
+          "group_ms": 29.920500000000175,
+          "edited_optimization_ms": 19.539299999999912
+        },
+        {
+          "scope_id": "358938",
+          "matrix_from_adopted_scores_ms": 3.3476000000000568,
+          "group_ms": 0.03209999999990032,
+          "edited_optimization_ms": 0.01700000000005275
+        },
+        {
+          "scope_id": "363489",
+          "matrix_from_adopted_scores_ms": 4.324399999999969,
+          "group_ms": 0.0603000000000975,
+          "edited_optimization_ms": 0.018399999999928696
+        },
+        {
+          "scope_id": "361380",
+          "matrix_from_adopted_scores_ms": 3.6059000000000196,
+          "group_ms": 4.317600000000084,
+          "edited_optimization_ms": 3.595299999999952
+        }
+      ]
+    },
+    "E3": {
+      "parameters": {
+        "anchor": 0.17402425349290512,
+        "aspect": 0.17296739773505992,
+        "broad": 0.18811155184181633,
+        "choice": {
+          "log_loss": 0,
+          "operating": {
+            "n": 74,
+            "positive": 66,
+            "recall_of_sampled_positives": 0.5038167938931297,
+            "source_groups": 17,
+            "threshold": 0.28380939961884,
+            "unrelated": 8,
+            "unrelated_fraction": 0.10810810810810811
+          },
+          "quantile": 0.5,
+          "selection_target_met": false
+        },
+        "member": 0.28380939961884,
+        "settings": [
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 167,
+              "positive": 117,
+              "recall_of_sampled_positives": 0.8931297709923665,
+              "source_groups": 31,
+              "threshold": 0.20203452693703944,
+              "unrelated": 50,
+              "unrelated_fraction": 0.2994011976047904
+            },
+            "quantile": 0.1
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 129,
+              "positive": 98,
+              "recall_of_sampled_positives": 0.7480916030534351,
+              "source_groups": 26,
+              "threshold": 0.2357930994642803,
+              "unrelated": 31,
+              "unrelated_fraction": 0.24031007751937986
+            },
+            "quantile": 0.25
+          },
+          {
+            "log_loss": 0,
+            "operating": {
+              "n": 74,
+              "positive": 66,
+              "recall_of_sampled_positives": 0.5038167938931297,
+              "source_groups": 17,
+              "threshold": 0.28380939961884,
+              "unrelated": 8,
+              "unrelated_fraction": 0.10810810810810811
+            },
+            "quantile": 0.5
+          }
+        ]
+      },
+      "scopes": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362178",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 4,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362254",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 3,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "group",
+          "options": 8,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362855",
+          "status": "group",
+          "options": 1,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 5,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "362520",
+          "status": "group",
+          "options": 6,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "group",
+          "options": 2,
+          "top5": 5,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363489",
+          "status": "group",
+          "options": 1,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        },
+        {
+          "scope_id": "361380",
+          "status": "group",
+          "options": 5,
+          "top5": 5,
+          "action_allowed": true
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0,
+          "top5": 0,
+          "action_allowed": false
+        }
+      ],
+      "timings": [
+        {
+          "scope_id": "359696",
+          "matrix_from_adopted_scores_ms": 8.133299999999963,
+          "group_ms": 8.849099999999908,
+          "edited_optimization_ms": 5.145899999999983
+        },
+        {
+          "scope_id": "362178",
+          "matrix_from_adopted_scores_ms": 17.429300000000012,
+          "group_ms": 0.876399999999876,
+          "edited_optimization_ms": 0.2423999999998614
+        },
+        {
+          "scope_id": "363281",
+          "matrix_from_adopted_scores_ms": 4.306299999999965,
+          "group_ms": 0.03870000000006257,
+          "edited_optimization_ms": 0.01710000000002765
+        },
+        {
+          "scope_id": "363141",
+          "matrix_from_adopted_scores_ms": 4.061000000000149,
+          "group_ms": 0.024899999999888678,
+          "edited_optimization_ms": 0.014799999999922875
+        },
+        {
+          "scope_id": "334971",
+          "matrix_from_adopted_scores_ms": 3.983199999999897,
+          "group_ms": 0.020999999999958163,
+          "edited_optimization_ms": 0.01520000000004984
+        },
+        {
+          "scope_id": "362315",
+          "matrix_from_adopted_scores_ms": 4.234200000000101,
+          "group_ms": 0.019099999999980355,
+          "edited_optimization_ms": 0.013900000000148793
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "matrix_from_adopted_scores_ms": 3.8260999999999967,
+          "group_ms": 22.898999999999887,
+          "edited_optimization_ms": 13.24109999999996
+        },
+        {
+          "scope_id": "360644",
+          "matrix_from_adopted_scores_ms": 1.6410000000000764,
+          "group_ms": 0.02779999999984284,
+          "edited_optimization_ms": 0.015300000000024738
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "matrix_from_adopted_scores_ms": 4.142900000000054,
+          "group_ms": 1.8234999999999673,
+          "edited_optimization_ms": 39.72610000000009
+        },
+        {
+          "scope_id": "363055",
+          "matrix_from_adopted_scores_ms": 3.2474999999999454,
+          "group_ms": 0.026500000000169166,
+          "edited_optimization_ms": 0.014099999999871216
+        },
+        {
+          "scope_id": "356978",
+          "matrix_from_adopted_scores_ms": 3.6319999999998345,
+          "group_ms": 0.018299999999953798,
+          "edited_optimization_ms": 0.01389999999992142
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "matrix_from_adopted_scores_ms": 2.520300000000134,
+          "group_ms": 1.683999999999969,
+          "edited_optimization_ms": 0.7199000000000524
+        },
+        {
+          "scope_id": "362196",
+          "matrix_from_adopted_scores_ms": 3.8417000000001735,
+          "group_ms": 0.027299999999740976,
+          "edited_optimization_ms": 0.015499999999974534
+        },
+        {
+          "scope_id": "112354",
+          "matrix_from_adopted_scores_ms": 3.8719999999998436,
+          "group_ms": 0.03040000000009968,
+          "edited_optimization_ms": 0.018700000000080763
+        },
+        {
+          "scope_id": "362254",
+          "matrix_from_adopted_scores_ms": 8.740099999999984,
+          "group_ms": 6.9547999999999774,
+          "edited_optimization_ms": 2.0736000000001695
+        },
+        {
+          "scope_id": "45810",
+          "matrix_from_adopted_scores_ms": 4.35109999999986,
+          "group_ms": 0.03190000000040527,
+          "edited_optimization_ms": 0.01749999999992724
+        },
+        {
+          "scope_id": "362218",
+          "matrix_from_adopted_scores_ms": 2.0284999999998945,
+          "group_ms": 2.550799999999981,
+          "edited_optimization_ms": 1.3110000000001492
+        },
+        {
+          "scope_id": "363292",
+          "matrix_from_adopted_scores_ms": 3.6957000000002154,
+          "group_ms": 0.020599999999831198,
+          "edited_optimization_ms": 0.014900000000125146
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "matrix_from_adopted_scores_ms": 6.688000000000102,
+          "group_ms": 43.939800000000105,
+          "edited_optimization_ms": 25.477699999999913
+        },
+        {
+          "scope_id": "362207",
+          "matrix_from_adopted_scores_ms": 1.9511999999999716,
+          "group_ms": 0.02709999999979118,
+          "edited_optimization_ms": 0.01499999999987267
+        },
+        {
+          "scope_id": "362855",
+          "matrix_from_adopted_scores_ms": 6.609100000000126,
+          "group_ms": 0.05670000000009168,
+          "edited_optimization_ms": 0.016999999999825377
+        },
+        {
+          "scope_id": "357002",
+          "matrix_from_adopted_scores_ms": 4.147199999999884,
+          "group_ms": 5.976900000000114,
+          "edited_optimization_ms": 3.5914999999999964
+        },
+        {
+          "scope_id": "361208",
+          "matrix_from_adopted_scores_ms": 2.175799999999981,
+          "group_ms": 1.7100000000000364,
+          "edited_optimization_ms": 0.5397000000002663
+        },
+        {
+          "scope_id": "363069",
+          "matrix_from_adopted_scores_ms": 9.22629999999981,
+          "group_ms": 0.031300000000101136,
+          "edited_optimization_ms": 0.052299999999831925
+        },
+        {
+          "scope_id": "361207",
+          "matrix_from_adopted_scores_ms": 3.7348000000001775,
+          "group_ms": 9.969700000000103,
+          "edited_optimization_ms": 5.611100000000079
+        },
+        {
+          "scope_id": "351947",
+          "matrix_from_adopted_scores_ms": 3.384200000000419,
+          "group_ms": 0.031899999999950523,
+          "edited_optimization_ms": 0.0158000000001266
+        },
+        {
+          "scope_id": "363622",
+          "matrix_from_adopted_scores_ms": 1.5928000000003522,
+          "group_ms": 18.485299999999825,
+          "edited_optimization_ms": 12.016399999999976
+        },
+        {
+          "scope_id": "363544",
+          "matrix_from_adopted_scores_ms": 3.929200000000037,
+          "group_ms": 0.0261000000000422,
+          "edited_optimization_ms": 0.016000000000076398
+        },
+        {
+          "scope_id": "359091",
+          "matrix_from_adopted_scores_ms": 3.8148999999998523,
+          "group_ms": 0.02359999999998763,
+          "edited_optimization_ms": 0.015000000000327418
+        },
+        {
+          "scope_id": "362244",
+          "matrix_from_adopted_scores_ms": 1.4829999999997199,
+          "group_ms": 0.015600000000176806,
+          "edited_optimization_ms": 0.014899999999670399
+        },
+        {
+          "scope_id": "362520",
+          "matrix_from_adopted_scores_ms": 19.78859999999986,
+          "group_ms": 9.454400000000078,
+          "edited_optimization_ms": 6.229699999999866
+        },
+        {
+          "scope_id": "361526:f-18",
+          "matrix_from_adopted_scores_ms": 3.0778000000000247,
+          "group_ms": 0.10500000000001819,
+          "edited_optimization_ms": 0.02529999999978827
+        },
+        {
+          "scope_id": "358938",
+          "matrix_from_adopted_scores_ms": 3.1280000000001564,
+          "group_ms": 0.023299999999835563,
+          "edited_optimization_ms": 0.015499999999974534
+        },
+        {
+          "scope_id": "363489",
+          "matrix_from_adopted_scores_ms": 4.648599999999988,
+          "group_ms": 0.056999999999789,
+          "edited_optimization_ms": 0.034500000000207365
+        },
+        {
+          "scope_id": "361380",
+          "matrix_from_adopted_scores_ms": 4.13570000000027,
+          "group_ms": 8.20889999999963,
+          "edited_optimization_ms": 9.993800000000192
+        }
+      ]
+    }
+  },
+  "provider_calls": 0,
+  "holdout_scored": false,
+  "new_human_items": 0
+}
