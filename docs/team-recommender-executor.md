@@ -2,7 +2,7 @@
 
 ## Compact judge output contract (C2 follow-up)
 
-Real runs 34465625293 and 34465998056 exposed two output failures: an invalid verdict/reference and a 512-token response consumed entirely by adaptive thinking. Their reconciled charges and terminal requests must remain unresolved; never replay them after changing the output contract. The executor recognizes the old exact request identity before any new reservation. Preserve failed-item denominators and submit only previously undispatched logical requests.
+Real runs 34465625293 and 34465998056 exposed two output failures: an invalid verdict/reference and a 512-token response consumed entirely by adaptive thinking. Their reconciled charges and terminal requests must remain unresolved; never replay them after changing the output contract. The executor preflights every request against the restored legacy identities before any new reservation, including when an unresolved item follows a new item in the packet. Preserve failed-item denominators and submit only previously undispatched logical requests.
 
 Sonnet 5 runs this fixed rubric with `thinking: {type: "disabled"}` and the same 512-token cap. Its output schema enumerates the supplied item IDs, allowed verdicts and evidence IDs. Post-response per-item checks remain mandatory. This is one fixed compact judge configuration, not a model sweep, a relaxed validator or an increase in budget. [Official Sonnet 5 behavior documentation](https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5), checked September 10, 2026, documents default adaptive thinking and the supported disabled setting. No sampling controls are added. Future data packets cannot select these settings.
 
