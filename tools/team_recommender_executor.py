@@ -372,6 +372,12 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
     model = settings["embedding_model" if provider == "voyage" else "judge_model"]
     secret = os.environ.get("VOYAGE_API_KEY" if provider == "voyage" else "ANTHROPIC_API_KEY")
     ledger = ExperimentLedger(destination / "ledger.json")
+    # Inspect the whole restored packet before any new reservation. A legacy
+    # recovery item at the end must not permit earlier new paid dispatches.
+    if operation == "development-judge":
+        restored_keys = {row["key"] for row in ledger.read()["requests"]}
+        if any(legacy_judge_key(request, settings) in restored_keys for request in packet["requests"]):
+            raise Deferred("prior_judge_protocol_request_requires_recovery_not_replay")
     if not secret:
         raise ConfigurationFailure("missing_provider_step_credential")
     deadline = time.monotonic() + 2700
