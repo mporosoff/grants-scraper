@@ -1,5 +1,11 @@
 # Manual public preparation/evaluation executor
 
+## Compact judge output contract (C2 follow-up)
+
+Real runs 34465625293 and 34465998056 exposed two output failures: an invalid verdict/reference and a 512-token response consumed entirely by adaptive thinking. Their reconciled charges and terminal requests must remain unresolved; never replay them after changing the output contract. The executor preflights every request against the restored legacy identities before any new reservation, including when an unresolved item follows a new item in the packet. Preserve failed-item denominators and submit only previously undispatched logical requests.
+
+Sonnet 5 runs this fixed rubric with `thinking: {type: "disabled"}` and the same 512-token cap. Its output schema enumerates the supplied item IDs, allowed verdicts and evidence IDs. Post-response per-item checks remain mandatory. This is one fixed compact judge configuration, not a model sweep, a relaxed validator or an increase in budget. [Official Sonnet 5 behavior documentation](https://platform.claude.com/docs/en/models/sonnet-5/whats-new-sonnet-5), checked September 10, 2026, documents default adaptive thinking and the supported disabled setting. No sampling controls are added. Future data packets cannot select these settings.
+
 This narrowly authorized Stage 2 prerequisite does not contain the recommender runtime, activate teams, publish a catalog, deploy, enable old Sonnet work or add a schedule. It uses only protected-main code and existing Anthropic/Voyage credentials. User authority: Stage 2 continuation C1 after experimental checkpoint 7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b.
 
 The sole ledger identity is on-demand-team-offline-v2-20260909: $10 maximum through all four stages, cumulative $6 through Stage 2 and at least $4 reserved for later stages. The exact existing zero-request ledger is pinned as the initial handoff. This is a transfer of execution ownership, not a second allowance. Before first dispatch mark the experimental local ledger read-only for spending; all paid work thereafter uses this workflow and its restored checkpoint. Local copies/results are mirrors only. Do not dispatch any independent local/cloud executor.

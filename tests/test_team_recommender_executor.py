@@ -117,6 +117,60 @@ class ExecutorContract(unittest.TestCase):
         self.assertNotIn("fixture-secret", (self.state/"ledger.json").read_text())
         self.assertTrue((self.state/"checkpoint.json").exists())
 
+    def test_compact_judge_disables_default_thinking_and_binds_output_ids(self):
+        body, _, _, _, schema = e.judge_contract(self.judge(), self.settings)
+        self.assertEqual(body["thinking"], {"type": "disabled"})
+        self.assertEqual(body["max_tokens"], 512)
+        props=schema["properties"]["verdicts"]["items"]["properties"]
+        self.assertEqual(props["item_id"]["enum"], ["i01"])
+        self.assertEqual(props["evidence_ref"]["enum"], ["p1", "s1"])
+        self.assertEqual(set(props["verdict"]["enum"]), e.SCIENCE_LABELS)
+        self.assertEqual(schema["properties"]["verdicts"]["minItems"], 1)
+
+    def test_judge_contract_change_never_replays_old_reconciled_or_uncertain_request(self):
+        path,digest,packet=self.packet("development-judge")
+        key=e.legacy_judge_key(packet["requests"][0],self.settings)
+        for status in ("valid", "failed", "reserved_unknown"):
+            with self.subTest(status=status):
+                (self.state/"ledger.json").write_bytes((e.CONFIG/"initial-ledger.json").read_bytes())
+                ledger=e.ExperimentLedger(self.state/"ledger.json")
+                token=ledger.reserve_experiment("anthropic",self.settings["judge_model"],2,key,10000,1,trusted_route=True,input_tokens=1000,output_tokens=512)
+                if status!="reserved_unknown":ledger.reconcile(token,cost_usd="0.001",usage={"input_tokens":100,"output_tokens":80},status=status)
+                for _ in range(3):
+                    with self.assertRaisesRegex(Deferred,"requires_recovery_not_replay"):
+                        e.execute(self.state,path,digest,lambda *a,**k:self.fail("old logical request replayed"))
+                self.assertEqual(len(ledger.read()["requests"]),1)
+
+    def test_compact_judge_exact_success_cache_survives_restoration(self):
+        path,digest,_=self.packet("development-judge");calls=[]
+        def post(url,**kwargs):
+            calls.append(url)
+            self.assertEqual(kwargs["json"]["thinking"],{"type":"disabled"})
+            return self.response({"model":self.settings["judge_model"],"stop_reason":"end_turn",
+                "usage":{"input_tokens":100,"output_tokens":40},"content":[{"type":"text","text":json.dumps({
+                    "verdicts":[{"item_id":"i01","verdict":"plausible","evidence_ref":"p1"}],"note":"Fixture only."})}]})
+        e.execute(self.state,path,digest,post)
+        for _ in range(3):e.execute(self.state,path,digest,lambda *a,**k:self.fail("successful judge cache redispatched"))
+        self.assertEqual(len(calls),1)
+        self.assertEqual(len(e.ExperimentLedger(self.state/"ledger.json").read()["requests"]),1)
+
+    def test_legacy_recovery_preflights_entire_mixed_packet_before_new_spend(self):
+        path,_,packet=self.packet("development-judge")
+        old=packet["requests"][0];fresh=copy.deepcopy(old)
+        fresh["source_evidence"]["limitations"]="Distinct never-dispatched fixture request."
+        for status in ("valid","failed","reserved_unknown"):
+            for requests in ([fresh,old],[old,fresh]):
+                with self.subTest(status=status,legacy_first=requests[0]==old):
+                    (self.state/"ledger.json").write_bytes((e.CONFIG/"initial-ledger.json").read_bytes())
+                    ledger=e.ExperimentLedger(self.state/"ledger.json")
+                    token=ledger.reserve_experiment("anthropic",self.settings["judge_model"],2,e.legacy_judge_key(old,self.settings),10000,1,trusted_route=True,input_tokens=1000,output_tokens=512)
+                    if status!="reserved_unknown":ledger.reconcile(token,cost_usd="0.001",usage={"input_tokens":100,"output_tokens":80},status=status)
+                    packet["requests"]=requests;raw=json.dumps(packet).encode();path.write_bytes(raw);before=ledger.read()
+                    for _ in range(3):
+                        with self.assertRaisesRegex(Deferred,"requires_recovery_not_replay"):
+                            e.execute(self.state,path,e.sha(raw),lambda *a,**k:self.fail("fresh request dispatched before recovery preflight"))
+                    self.assertEqual(ledger.read(),before)
+
     def test_unknown_request_remains_reserved_and_is_not_redispatched(self):
         path, digest, _ = self.packet()
         def timeout(*a, **k): raise e.requests.Timeout("fixture")
