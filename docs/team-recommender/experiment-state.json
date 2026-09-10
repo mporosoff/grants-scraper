@@ -62,16 +62,16 @@
     "id": "on-demand-team-offline-v2-20260909",
     "authorized_usd": 10,
     "stage2_cumulative_ceiling_usd": 6,
-    "actual_usd": 0.008692,
+    "actual_usd": 0.022444,
     "reserved_usd": 0,
     "ledger": "docs/team-recommender/budget-ledger.json",
-    "remaining_total_usd": 9.991308,
+    "remaining_total_usd": 9.977556,
     "later_stage_minimum_preserved_usd": 4,
-    "requests": 12,
-    "input_tokens": 15161,
-    "output_tokens": 399,
+    "requests": 13,
+    "input_tokens": 19477,
+    "output_tokens": 911,
     "authoritative_owner": "GitHub main-only executor paired reservation/state artifacts",
-    "latest_run_id": 34465625293,
+    "latest_run_id": 34465998056,
     "local_copy_role": "read-only mirror; cannot authorize dispatch"
   },
   "human_review": {
@@ -210,7 +210,15 @@
       "prerequisite_head": "4c9df150d015c8458eb5ea485bfd79f7e5c655d6",
       "merge_sha": "829eada2a08d55bede43d0828b2a5684e49ac0c9",
       "review_comment_id": 5616499331,
-      "required_ci_run": 34461455254
+      "required_ci_run": 34461455254,
+      "trusted_followup": {
+        "pr": 217,
+        "head": "d079a734ad80f82e363a0748282e232eab79ae9f",
+        "merge": "8e5101931222bc6b1f7cd00971441b8a2c55db5d",
+        "review_comment": 5617383016,
+        "ci_run": 34467285880,
+        "reason": "fixed compact output and whole-packet legacy recovery preflight"
+      }
     }
   },
   "stage2_complete": false,
