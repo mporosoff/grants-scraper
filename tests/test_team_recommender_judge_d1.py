@@ -90,3 +90,46 @@ class D1Contract(unittest.TestCase):
             ledger.reserve_experiment('anthropic',self.settings['judge_model'],2,identity(body),(bound*5+1)//2+5120,1,
                 trusted_route=True,input_tokens=bound,output_tokens=512,execution_metadata={'purpose':'d1-call'})
         self.assertEqual(ledger.read()['requests'],state['requests'])
+
+    def test_d1f_enum_reasons_survive_provider_projection_and_fit(self):
+        from tools.team_recommender_judge_d1 import REASONS
+        r=self.revised();r['protocol']='D1F'
+        r['items']=[dict(copy.deepcopy(r['items'][0]),item_id=f'i{i:02}') for i in range(1,4)]
+        body,bound,aliases,refs,schema=e.judge_contract(r,self.settings)
+        wire=body['output_config']['format']['schema']['properties']['verdicts']['items']['properties']['reason']
+        self.assertEqual(wire['enum'],REASONS)
+        value={'verdicts':[{'item_id':a,'verdict':'insufficient-information','evidence_ref':'s1','reason':'unsupported'} for a in aliases]}
+        self.assertLess(len(json.dumps(value,separators=(',',':'))),512)
+        payload={'model':self.settings['judge_model'],'stop_reason':'end_turn','content':[{'type':'text','text':json.dumps(value)}]}
+        self.assertEqual(e.result_value('development-judge',payload,r,(body,bound,aliases,refs,schema),self.settings),value)
+        value['verdicts'][0]['reason']='a sentence outside the declared codes'
+        payload['content'][0]['text']=json.dumps(value)
+        with self.assertRaises(ValueError):e.result_value('development-judge',payload,r,(body,bound,aliases,refs,schema),self.settings)
+
+    def test_d1f_cannot_replay_paid_d1_after_format_change(self):
+        path,_,packet=self.packet('development-judge');r=self.revised();packet['requests']=[r]
+        raw=json.dumps(packet).encode();path.write_bytes(raw);calls=[]
+        value={'verdicts':[{'item_id':'i01','verdict':'plausible','evidence_ref':'p1','reason':'x'*61}]}
+        def post(*a,**k):
+            calls.append(1)
+            return self.response({'model':self.settings['judge_model'],'usage':{'input_tokens':100,'output_tokens':50},'stop_reason':'end_turn','content':[{'type':'text','text':json.dumps(value)}]})
+        with self.assertRaises(ValueError):e.execute(self.state,path,e.sha(raw),post)
+        r['protocol']='D1F';raw=json.dumps(packet).encode();path.write_bytes(raw)
+        for _ in range(3):
+            with self.assertRaises(Deferred):e.execute(self.state,path,e.sha(raw),post)
+        self.assertEqual(len(calls),1)
+        ledger=e.ExperimentLedger(self.state/'ledger.json').read()
+        self.assertEqual(len(ledger['requests']),1);self.assertEqual(ledger['requests'][0]['charged_microusd'],700)
+
+    def test_d1f_success_reuses_exact_cache_and_blocks_reverse_format_replay(self):
+        path,_,packet=self.packet('development-judge');r=self.revised();r['protocol']='D1F';packet['requests']=[r]
+        raw=json.dumps(packet).encode();path.write_bytes(raw);calls=[]
+        value={'verdicts':[{'item_id':'i01','verdict':'plausible','evidence_ref':'p1','reason':'interest'}]}
+        def post(*a,**k):
+            calls.append(1)
+            return self.response({'model':self.settings['judge_model'],'usage':{'input_tokens':100,'output_tokens':50},'stop_reason':'end_turn','content':[{'type':'text','text':json.dumps(value)}]})
+        for _ in range(3):e.execute(self.state,path,e.sha(raw),post)
+        r['protocol']='D1';raw=json.dumps(packet).encode();path.write_bytes(raw)
+        for _ in range(3):
+            with self.assertRaises(Deferred):e.execute(self.state,path,e.sha(raw),post)
+        self.assertEqual(len(calls),1)

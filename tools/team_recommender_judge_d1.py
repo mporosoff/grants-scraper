@@ -5,6 +5,7 @@ from tools.offline_ai import request_body
 from tools.offline_spend import encoded, Deferred
 
 KINDS = {"source_suitability", "aspect_person", "call_person", "group_usefulness", "comparison", "explanation_audit"}
+REASONS = ["specific", "transfer", "interest", "generic", "missing", "irrelevant", "coherent", "broad", "nonresearch", "overlap", "unsupported", "tie"]
 PURPOSE_KINDS = {
     "d1-source": {"source_suitability"}, "d1-control": {"source_suitability", "call_person"},
     "d1-aspect": {"aspect_person"}, "d1-call": {"call_person"}, "d1-group": {"group_usefulness"},
@@ -25,7 +26,7 @@ def labels(kind):
 def contract(request, settings):
     from tools import team_recommender_executor as e
     e.exact_keys(request, ["protocol", "scope_id", "purpose", "source_evidence", "aspects", "items"])
-    if request["protocol"] != "D1" or request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSE_KINDS:
+    if request["protocol"] not in {"D1", "D1F"} or request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSE_KINDS:
         raise ValueError("d1_outside_development_authority")
     source = request["source_evidence"]
     if source["scope_id"] != request["scope_id"]:
@@ -104,8 +105,14 @@ def contract(request, settings):
                 "evidence_ref":{"type":"string","enum":sorted(set().union(*refs_by_item.values()))},
                 "reason":{"type":"string","minLength":1,"maxLength":60,"description":"Use printable ASCII characters only."}}}}}}
     data = {"source_evidence":source,"aspects":aspects,"items":items}
+    prompt = (e.CONFIG/"judge-d1.md").read_text(encoding="utf-8")
+    if request["protocol"] == "D1F":
+        # Constrained enums survive the provider's schema projection. D1's
+        # original free-text contract remains reconstructible for replay guards.
+        schema["properties"]["verdicts"]["items"]["properties"]["reason"] = {"type":"string", "enum":REASONS}
+        prompt = prompt[:prompt.index("Return exactly one verdict")] + "Return one verdict, one evidence reference and the most specific allowed reason code per item."
     body = request_body({"provider":"anthropic","model":settings["judge_model"]}, {"max_output_tokens":512},
-        (e.CONFIG/"judge-d1.md").read_text(encoding="utf-8"), data, schema)
+        prompt, data, schema)
     body["thinking"] = {"type":"disabled"}
     bound = len(encoded(body)) + 1024
     if bound > 12000:
