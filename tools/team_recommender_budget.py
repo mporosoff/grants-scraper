@@ -76,12 +76,20 @@ class ExperimentLedger(Ledger):
                     raise Deferred('finite_preparation_dollar_envelope_exhausted')
                 if amount < (input_tokens+49)//50:raise ValueError('underreserved_embedding_request')
             if provider=='anthropic':
-                count_cap, input_cap, output_cap = ((350, 1_433_600, 179_200) if stage==2 else (260, 1_064_960, 133_120))
+                d1 = metadata.get('purpose', '').startswith('d1-')
+                if d1 and stage != 2:
+                    raise ConfigurationFailure('d1_is_development_only')
+                # A finite amended question inventory, never a fresh dollar
+                # allowance. Historical charges/uncertainty remain in spent.
+                # Preserve the original B1 inventory and its consumed bounds.
+                judge = [r for r in judge if r.get('purpose','').startswith('d1-') == d1]
+                count_cap, input_cap, output_cap = ((200, 1_360_000, 102_400) if d1 else
+                    ((350, 1_433_600, 179_200) if stage==2 else (260, 1_064_960, 133_120)))
                 if input_tokens > 12_000 or output_tokens > 512 or len(judge)>=count_cap or sum(r.get('reserved_input_tokens',0) for r in judge)+input_tokens>input_cap or sum(r.get('reserved_output_tokens',0) for r in judge)+output_tokens>output_cap:
                     raise Deferred('finite_judge_phase_envelope_exhausted')
                 if amount < (input_tokens*5+1)//2 + output_tokens*10:
                     raise ValueError('underreserved_judge_request')
-                dollar_cap = 5_376_000 if stage==2 else 3_993_600
+                dollar_cap = 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
                 if sum(r['reserved_microusd'] for r in judge)+amount>dollar_cap:
                     raise Deferred('finite_judge_dollar_envelope_exhausted')
             if spent + amount > min(self.limit, STAGE_CEILINGS[stage]) or len(state["requests"]) >= self.max_requests:

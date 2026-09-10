@@ -30,6 +30,8 @@ PREFIX = AUTHORIZATION_ID
 PACKET_LIMIT = 8 * 1024 * 1024
 STATE_LIMIT = 128 * 1024 * 1024
 PURPOSES = {"source": 90, "individual": 90, "group": 90, "control": 30, "explanation": 30, "order-swap": 10}
+PURPOSES.update({"d1-source":12,"d1-call":130,"d1-aspect":20,"d1-group":40,
+                 "d1-comparison":40,"d1-explanation":12,"d1-control":30,"d1-swap":4})
 KINDS = {"individual", "group", "comparison", "source_control", "explanation_audit"}
 SCIENCE_LABELS = {"strong", "plausible", "unrelated", "insufficient-information"}
 
@@ -41,11 +43,16 @@ def sha(value):
 def policy():
     value = json.loads((CONFIG / "policy.json").read_bytes())
     for name, key in (("judge-prompt.md", "judge_prompt_sha256"), ("judge-output-schema.json", "judge_schema_sha256"),
-                      ("initial-ledger.json", "initial_ledger_sha256")):
+                      ("initial-ledger.json", "initial_ledger_sha256"), ("judge-d1.md", "judge_d1_sha256"),
+                      ("profile-fields-d1.json", "profile_fields_d1_sha256")):
         if sha((CONFIG / name).read_bytes()) != value[key]:
             raise ValueError("trusted_configuration_hash_mismatch")
     if value["authorization_id"] != AUTHORIZATION_ID or value["approved_stage"] != 2:
         raise ValueError("unapproved_experiment_stage")
+    fields = json.loads((CONFIG / "profile-fields-d1.json").read_bytes())
+    if fields["registry_generation"] != value["registry_generation"]:
+        raise ValueError("d1_registry_generation_mismatch")
+    value["d1_profile_fields"] = fields["people"]
     return value
 
 
@@ -125,8 +132,11 @@ def profile_evidence(rows, settings):
 
 
 def judge_contract(request, settings):
+    if request.get("protocol") == "D1":
+        from tools.team_recommender_judge_d1 import contract
+        return contract(request, settings)
     exact_keys(request, ["scope_id", "purpose", "source_evidence", "items"])
-    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES:
+    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES or request["purpose"].startswith("d1-"):
         raise ValueError("judge_outside_development_authority")
     if request["source_evidence"]["scope_id"] != request["scope_id"]:
         raise ValueError("source_scope_mismatch")
@@ -185,6 +195,10 @@ def judge_contract(request, settings):
 
 def legacy_judge_key(request, settings):
     """Recognize paid pre-fix requests, never turn them into another attempt."""
+    # D1 has substantively different trusted questions, fields and schema.
+    # Its body identity is still irreversible in the SAME durable ledger.
+    if request.get("protocol") == "D1":
+        return None
     body = request_body({"provider": "anthropic", "model": settings["judge_model"]}, {"max_output_tokens": 512},
         (CONFIG / "judge-prompt.md").read_text(encoding="utf-8"),
         {"source_evidence": request["source_evidence"], "items": request["items"]},
@@ -324,8 +338,14 @@ def result_value(operation, payload, request, contract, settings):
             raise ValueError("incomplete_or_duplicate_verdicts")
         for verdict in value["verdicts"]:
             kind = aliases[verdict["item_id"]]
-            labels = {"A", "B", "tie", "unresolved"} if kind == "comparison" else (
-                {"faithful", "unsupported", "insufficient-information"} if kind == "explanation_audit" else SCIENCE_LABELS)
+            if request.get("protocol") == "D1":
+                from tools.team_recommender_judge_d1 import labels as d1_labels
+                labels = d1_labels(kind)
+                if not re.fullmatch(r"[ -~]{1,60}", verdict["reason"]):
+                    raise ValueError("d1_reason_outside_compact_contract")
+            else:
+                labels = {"A", "B", "tie", "unresolved"} if kind == "comparison" else (
+                    {"faithful", "unsupported", "insufficient-information"} if kind == "explanation_audit" else SCIENCE_LABELS)
             if verdict["verdict"] not in labels or verdict["evidence_ref"] not in refs[verdict["item_id"]]:
                 raise ValueError("verdict_or_evidence_ref_mismatch")
         return value
