@@ -133,3 +133,24 @@ class D1Contract(unittest.TestCase):
         for _ in range(3):
             with self.assertRaises(Deferred):e.execute(self.state,path,e.sha(raw),post)
         self.assertEqual(len(calls),1)
+
+    def test_d1f_near_limit_hashes_larger_counterpart_without_dispatching_it(self):
+        from tools.team_recommender_judge_d1 import contract
+        r=self.revised();r['protocol']='D1F'
+        bound=e.judge_contract(r,self.settings)[1];p=r['source_evidence']['passages'][0]
+        p['text']+='x'*(11980-bound);p['sha256']=e.sha(p['text'].encode())
+        self.assertEqual(e.judge_contract(r,self.settings)[1],11980)
+        old=dict(r,protocol='D1')
+        with self.assertRaises(Deferred):e.judge_contract(old,self.settings)
+        expected=identity([e.AUTHORIZATION_ID,'development-judge',contract(old,self.settings,enforce_dispatch_bound=False)[0]])
+        self.assertEqual(e.legacy_judge_key(r,self.settings),expected)
+        path,_,packet=self.packet('development-judge');packet['requests']=[r]
+        raw=json.dumps(packet).encode();path.write_bytes(raw);calls=[]
+        value={'verdicts':[{'item_id':'i01','verdict':'plausible','evidence_ref':'p1','reason':'interest'}]}
+        def post(*a,**k):
+            calls.append(1)
+            return self.response({'model':self.settings['judge_model'],'usage':{'input_tokens':100,'output_tokens':50},'stop_reason':'end_turn','content':[{'type':'text','text':json.dumps(value)}]})
+        e.execute(self.state,path,e.sha(raw),post)
+        self.assertEqual(len(calls),1)
+        p['text']+='x'*21;p['sha256']=e.sha(p['text'].encode())
+        with self.assertRaises(Deferred):e.judge_contract(r,self.settings)
