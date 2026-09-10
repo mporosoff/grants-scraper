@@ -62,7 +62,7 @@ def rebuild_historical_index(ledger_bytes, packet_directory):
 
 
 def claimed_judge_items(row, historical=None):
-    if not row.get('purpose','').startswith(('d1-','d2-')):
+    if not row.get('purpose','').startswith(('d1-','d2-','d3-')):
         return []
     if 'judge_items' in row:
         return row['judge_items']
@@ -79,7 +79,7 @@ def preflight(packet, settings, ledger):
     for request in packet['requests']:
         contract = (e.embedding_contract if operation == 'embeddings' else e.judge_contract)(request,settings)
         key = identity([e.AUTHORIZATION_ID,operation,contract[0]])
-        items = ([request['input_role']+':'+r['id'] for r in request['rows']] if operation == 'embeddings' else judge_items(request))
+        items = (e.embedding_items(request) if operation == 'embeddings' else judge_items(request))
         # Compare the entire packet before dispatch, including a conflict at its end.
         for prior in rows:
             old = prior.get('row_inputs',[]) if operation == 'embeddings' else claimed_judge_items(prior,historical)
