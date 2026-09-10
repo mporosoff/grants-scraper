@@ -1,0 +1,924 @@
+{
+  "decision_clock": "2026-09-10T01:34:58.943Z",
+  "kind": "real-input-authoritative-policy-observation",
+  "scope_count": 90,
+  "counts": {
+    "open": 69,
+    "rolling": 6,
+    "invitation_required": 1,
+    "not_listed": 7,
+    "verify_prerequisite": 7
+  },
+  "action_admitted": 81,
+  "files": {
+    "assets/submission-schedule.js": "2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+    "assets/search-retrieval.js": "e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7"
+  },
+  "provider_calls": 0,
+  "recommendations_computed": 0,
+  "prepared_scope_interaction_test": false,
+  "rows": [
+    {
+      "scope_id": "359696",
+      "parent_id": "359696",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363612",
+      "parent_id": "363612",
+      "current": true,
+      "parent_current": true,
+      "access": "rolling",
+      "parent_access": "rolling",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360205",
+      "parent_id": "360205",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362178",
+      "parent_id": "362178",
+      "current": true,
+      "parent_current": true,
+      "access": "invitation_required",
+      "parent_access": "invitation_required",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "363281",
+      "parent_id": "363281",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363141",
+      "parent_id": "363141",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "342747",
+      "parent_id": "342747",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363736",
+      "parent_id": "363736",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360698",
+      "parent_id": "360698",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "355196",
+      "parent_id": "355196",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363102",
+      "parent_id": "363102",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "334971",
+      "parent_id": "334971",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362315",
+      "parent_id": "362315",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "361322",
+      "parent_id": "361322",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "359236",
+      "parent_id": "359236",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "339594",
+      "parent_id": "339594",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "361876",
+      "parent_id": "361876",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "351923",
+      "parent_id": "351923",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "344592:ab-0009",
+      "parent_id": "344592",
+      "current": true,
+      "parent_current": true,
+      "access": "not_listed",
+      "parent_access": "open",
+      "publication_state": "publishable",
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362393",
+      "parent_id": "362393",
+      "current": true,
+      "parent_current": true,
+      "access": "not_listed",
+      "parent_access": "not_listed",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360644",
+      "parent_id": "360644",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363636",
+      "parent_id": "363636",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "345241:tdac-baa-004",
+      "parent_id": "345241",
+      "current": true,
+      "parent_current": true,
+      "access": "not_listed",
+      "parent_access": "open",
+      "publication_state": "publishable",
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363055",
+      "parent_id": "363055",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363525",
+      "parent_id": "363525",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363514",
+      "parent_id": "363514",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "349724",
+      "parent_id": "349724",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363569",
+      "parent_id": "363569",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "356978",
+      "parent_id": "356978",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "parent_id": "nasa-roses:25-D.9-d22059cf9f",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "332894",
+      "parent_id": "332894",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363015",
+      "parent_id": "363015",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362196",
+      "parent_id": "362196",
+      "current": true,
+      "parent_current": true,
+      "access": "verify_prerequisite",
+      "parent_access": "verify_prerequisite",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "112354",
+      "parent_id": "112354",
+      "current": true,
+      "parent_current": true,
+      "access": "rolling",
+      "parent_access": "rolling",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "358830",
+      "parent_id": "358830",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360258",
+      "parent_id": "360258",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360633",
+      "parent_id": "360633",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362254",
+      "parent_id": "362254",
+      "current": true,
+      "parent_current": true,
+      "access": "verify_prerequisite",
+      "parent_access": "verify_prerequisite",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "355100",
+      "parent_id": "355100",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362575",
+      "parent_id": "362575",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "344715",
+      "parent_id": "344715",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "45810",
+      "parent_id": "45810",
+      "current": true,
+      "parent_current": true,
+      "access": "rolling",
+      "parent_access": "rolling",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360954",
+      "parent_id": "360954",
+      "current": true,
+      "parent_current": true,
+      "access": "not_listed",
+      "parent_access": "not_listed",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "359669",
+      "parent_id": "359669",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362218",
+      "parent_id": "362218",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "39841",
+      "parent_id": "39841",
+      "current": true,
+      "parent_current": true,
+      "access": "not_listed",
+      "parent_access": "not_listed",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363292",
+      "parent_id": "363292",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363765",
+      "parent_id": "363765",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363699",
+      "parent_id": "363699",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362207",
+      "parent_id": "362207",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362855",
+      "parent_id": "362855",
+      "current": true,
+      "parent_current": true,
+      "access": "verify_prerequisite",
+      "parent_access": "verify_prerequisite",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "363526",
+      "parent_id": "363526",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363479",
+      "parent_id": "363479",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "295449",
+      "parent_id": "295449",
+      "current": true,
+      "parent_current": true,
+      "access": "rolling",
+      "parent_access": "rolling",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "243973",
+      "parent_id": "243973",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360660",
+      "parent_id": "360660",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362868",
+      "parent_id": "362868",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "343980",
+      "parent_id": "343980",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "357498",
+      "parent_id": "357498",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363724",
+      "parent_id": "363724",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "357554",
+      "parent_id": "357554",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "357002",
+      "parent_id": "357002",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363760",
+      "parent_id": "363760",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363783",
+      "parent_id": "363783",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362857",
+      "parent_id": "362857",
+      "current": true,
+      "parent_current": true,
+      "access": "verify_prerequisite",
+      "parent_access": "verify_prerequisite",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "328902",
+      "parent_id": "328902",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363747",
+      "parent_id": "363747",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "348258",
+      "parent_id": "348258",
+      "current": true,
+      "parent_current": true,
+      "access": "rolling",
+      "parent_access": "rolling",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "361208",
+      "parent_id": "361208",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363069",
+      "parent_id": "363069",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "349655",
+      "parent_id": "349655",
+      "current": true,
+      "parent_current": true,
+      "access": "rolling",
+      "parent_access": "rolling",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "339728",
+      "parent_id": "339728",
+      "current": true,
+      "parent_current": true,
+      "access": "not_listed",
+      "parent_access": "not_listed",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "359862",
+      "parent_id": "359862",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "361207",
+      "parent_id": "361207",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "351947",
+      "parent_id": "351947",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363622",
+      "parent_id": "363622",
+      "current": true,
+      "parent_current": true,
+      "access": "verify_prerequisite",
+      "parent_access": "verify_prerequisite",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "363544",
+      "parent_id": "363544",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "359091",
+      "parent_id": "359091",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362244",
+      "parent_id": "362244",
+      "current": true,
+      "parent_current": true,
+      "access": "verify_prerequisite",
+      "parent_access": "verify_prerequisite",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "362520",
+      "parent_id": "362520",
+      "current": true,
+      "parent_current": true,
+      "access": "verify_prerequisite",
+      "parent_access": "verify_prerequisite",
+      "publication_state": null,
+      "action_admitted": false
+    },
+    {
+      "scope_id": "358114",
+      "parent_id": "358114",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "361526:f-18",
+      "parent_id": "361526",
+      "current": true,
+      "parent_current": true,
+      "access": "not_listed",
+      "parent_access": "verify_prerequisite",
+      "publication_state": "publishable",
+      "action_admitted": false
+    },
+    {
+      "scope_id": "358938",
+      "parent_id": "358938",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363489",
+      "parent_id": "363489",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "362871",
+      "parent_id": "362871",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "324456",
+      "parent_id": "324456",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "360012",
+      "parent_id": "360012",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "361380",
+      "parent_id": "361380",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    },
+    {
+      "scope_id": "363391",
+      "parent_id": "363391",
+      "current": true,
+      "parent_current": true,
+      "access": "open",
+      "parent_access": "open",
+      "publication_state": null,
+      "action_admitted": true
+    }
+  ]
+}

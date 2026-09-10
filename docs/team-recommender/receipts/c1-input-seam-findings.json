@@ -1,0 +1,17 @@
+{
+  "source_inventory": "c1-real-source-inventory-f4d8898adcff802f.json",
+  "source_inventory_sha256": "f4d8898adcff802f83479129d316b3fbc5cb8d271f5390a206430567ad8d6299",
+  "unsupported_existing_scope_id": {
+    "id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+    "current_regex": "^[A-Za-z0-9][A-Za-z0-9:_.-]{0,127}$",
+    "matches": false,
+    "affected_path": "assets/team-ingredients.js hydrate source/scope identity validation",
+    "corrected": false
+  },
+  "source_translation_required": {
+    "existing_v2_validator_requires_original_bytes": true,
+    "older_native_cached_records_and_document_hashes_available": true,
+    "translated_as_new_retrieval": false,
+    "implementation_changed": false
+  }
+}

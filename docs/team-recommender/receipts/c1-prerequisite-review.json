@@ -1,0 +1,146 @@
+{
+  "captured_at": "2026-09-10T01:32:07.744633+00:00",
+  "pr": {
+    "baseRefOid": "6adca6a795d4ab52e216e2ff7032d0e393db76b1",
+    "comments": [
+      {
+        "id": "IC_kwDOTjSVMs8AAAABTnMo4A",
+        "author": {
+          "login": "chatgpt-codex-connector"
+        },
+        "authorAssociation": "NONE",
+        "body": "<!-- codex-pull-request-review-summary -->\n\n## Codex Review Summary\n\nThis comment shows the latest Codex review activity on this pull request.\n\n| Review | Status | Commit | Review trigger |\n| --- | --- | --- | --- |\n| 📝 **Code Review** | ✅ **Completed** <relative-time datetime=\"2026-09-10T01:29:47.441551Z\">2026-09-10T01:29:47.441551Z</relative-time> | `8972595` | Manual request |\n\n\n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\" or \"@codex security review\".\n\nCodex reacts with 👀 while any review is running, comments if it has suggestions, and reacts with 👍 once all reviews finish with no findings.\n\n</details>",
+        "createdAt": "2026-09-10T01:09:42Z",
+        "includesCreatedEdit": true,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/mporosoff/grants-scraper/pull/215#issuecomment-5611137248",
+        "viewerDidAuthor": false
+      },
+      {
+        "id": "IC_kwDOTjSVMs8AAAABTnPvYA",
+        "author": {
+          "login": "mporosoff"
+        },
+        "authorAssociation": "OWNER",
+        "body": "@codex review\n\nThe automatic review of commit 4e6739bdcba6bec8712df886d3566a18951a6763 reported terminal Failed without findings. Please retry one exact-head independent review of this unchanged prerequisite executor. Required Python and browser checks have passed. Scope: bounded manual execution, data-only packet validation, credential isolation, authoritative cumulative budget and checkpoint recovery, and absence of production side effects.",
+        "createdAt": "2026-09-10T01:16:14Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/mporosoff/grants-scraper/pull/215#issuecomment-5611188064",
+        "viewerDidAuthor": true
+      },
+      {
+        "id": "IC_kwDOTjSVMs8AAAABTnUOdg",
+        "author": {
+          "login": "mporosoff"
+        },
+        "authorAssociation": "OWNER",
+        "body": "@codex review\n\nPlease perform the one exact-head verification review of 8972595625f0d3b9fb4ea44794c65bc03ac3fe7b. The completed review finding about valid accounting without cached output is corrected in one batch. The executor now refuses redispatch of any cacheless completed request. A regression interrupts persistence after valid usage reconciliation and verifies that resumption makes zero provider calls and preserves accounting. All 21 focused executor/accounting checks pass. Verify this repair and the affected accounting/checkpoint release-safety interfaces; no new broad review is requested.",
+        "createdAt": "2026-09-10T01:25:39Z",
+        "includesCreatedEdit": false,
+        "isMinimized": false,
+        "minimizedReason": "",
+        "reactionGroups": [],
+        "url": "https://github.com/mporosoff/grants-scraper/pull/215#issuecomment-5611261558",
+        "viewerDidAuthor": true
+      }
+    ],
+    "headRefOid": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+    "mergeStateStatus": "BLOCKED",
+    "reviews": [
+      {
+        "id": "PRR_kwDOTjSVMs8AAAABM6kl1Q",
+        "author": {
+          "login": "chatgpt-codex-connector"
+        },
+        "authorAssociation": "NONE",
+        "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `4e6739bdcb`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+        "submittedAt": "2026-09-10T01:22:43Z",
+        "includesCreatedEdit": false,
+        "reactionGroups": [],
+        "state": "COMMENTED",
+        "commit": {
+          "oid": "4e6739bdcba6bec8712df886d3566a18951a6763"
+        }
+      },
+      {
+        "id": "PRR_kwDOTjSVMs8AAAABM6metw",
+        "author": {
+          "login": "chatgpt-codex-connector"
+        },
+        "authorAssociation": "NONE",
+        "body": "\n### 💡 Codex Review\n\nHere are some automated review suggestions for this pull request.\n\n**Reviewed commit:** `8972595625`\n    \n\n<details> <summary>ℹ️ About Codex in GitHub</summary>\n<br/>\n\n[Your team has set up Codex to review pull requests in this repo](https://chatgpt.com/codex/cloud/settings/general). Reviews are triggered when you\n- Open a pull request for review\n- Mark a draft as ready\n- Comment \"@codex review\".\n\nIf Codex has suggestions, it will comment; otherwise it will react with 👍.\n\n\n\n\nCodex can also answer questions or update the PR. Try commenting \"@codex address that feedback\".\n            \n</details>",
+        "submittedAt": "2026-09-10T01:29:45Z",
+        "includesCreatedEdit": false,
+        "reactionGroups": [],
+        "state": "COMMENTED",
+        "commit": {
+          "oid": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b"
+        }
+      }
+    ],
+    "state": "OPEN",
+    "statusCheckRollup": [
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-10T01:26:24Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mporosoff/grants-scraper/actions/runs/34425407003/job/102709464902",
+        "name": "python",
+        "startedAt": "2026-09-10T01:25:24Z",
+        "status": "COMPLETED",
+        "workflowName": "Tests"
+      },
+      {
+        "__typename": "CheckRun",
+        "completedAt": "2026-09-10T01:27:14Z",
+        "conclusion": "SUCCESS",
+        "detailsUrl": "https://github.com/mporosoff/grants-scraper/actions/runs/34425407003/job/102709464782",
+        "name": "browser",
+        "startedAt": "2026-09-10T01:25:24Z",
+        "status": "COMPLETED",
+        "workflowName": "Tests"
+      }
+    ],
+    "url": "https://github.com/mporosoff/grants-scraper/pull/215"
+  },
+  "findings": [
+    {
+      "id": 3974627455,
+      "node_id": "PRRC_kwDOTjSVMs7s6AB_",
+      "body": "**<sub><sub>![P2 Badge](https://img.shields.io/badge/P2-yellow?style=flat)</sub></sub>  Refuse cacheless completed requests**\n\nIf execution raises after `reconcile(..., status=\"valid\")` commits but before `atomic_json(cache, ...)` completes, the `finally` block can checkpoint a valid ledger row without its result cache. After restoration, this condition does not stop that row, so execution assigns attempt 2 and sends the identical paid request again, consuming the fixed experiment budget and replacing the lost result with a duplicate; treat any prior valid row without an exact cache as recovery-required rather than redispatchable.\n\nAGENTS.md reference: [AGENTS.md:L38-L38](https://github.com/mporosoff/grants-scraper/blob/4e6739bdcba6bec8712df886d3566a18951a6763/AGENTS.md#L38-L38)\n\nUseful? React with 👍 / 👎.",
+      "path": "tools/team_recommender_executor.py",
+      "line": null,
+      "original_line": 373,
+      "commit_id": "4e6739bdcba6bec8712df886d3566a18951a6763",
+      "original_commit_id": "4e6739bdcba6bec8712df886d3566a18951a6763",
+      "html_url": "https://github.com/mporosoff/grants-scraper/pull/215#discussion_r3974627455"
+    },
+    {
+      "id": 3974656336,
+      "node_id": "PRRC_kwDOTjSVMs7s6HFQ",
+      "body": "**<sub><sub>![P2 Badge](https://img.shields.io/badge/P2-yellow?style=flat)</sub></sub>  Block reconciled failed rows before redispatch**\n\nWhen response validation fails after usage is measured and persistence is interrupted between `ledger.reconcile(..., status=\"failed\")` and writing the `terminal` marker, the restored row has status `failed` without `terminal`. This guard excludes that state, so resuming the exact workflow sends attempt 2 for the same paid request; I reproduced this with a zero-vector response and an `OSError` during terminal persistence, after which resumption made another provider call. This is fresh evidence from the adjacent failed-reconciliation path: all reconciled cacheless rows, including `failed`, must be treated as non-redispatchable to preserve measured usage and the durable logical budget.\n\nAGENTS.md reference: [AGENTS.md:L38-L38](https://github.com/mporosoff/grants-scraper/blob/8972595625f0d3b9fb4ea44794c65bc03ac3fe7b/AGENTS.md#L38-L38)\n\nUseful? React with 👍 / 👎.",
+      "path": "tools/team_recommender_executor.py",
+      "line": 371,
+      "original_line": 371,
+      "commit_id": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+      "original_commit_id": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+      "html_url": "https://github.com/mporosoff/grants-scraper/pull/215#discussion_r3974656336"
+    }
+  ],
+  "automatic_first_review_failure": {
+    "head": "4e6739bdcba6bec8712df886d3566a18951a6763",
+    "status": "Failed",
+    "reported_at": "2026-09-10T01:10:29.103346Z",
+    "finding_count": 0
+  },
+  "retry_count_after_terminal_service_failure": 1,
+  "repair_batches": 1,
+  "verification_findings_remaining": 1,
+  "merge_performed": false,
+  "manual_dispatch_performed": false
+}

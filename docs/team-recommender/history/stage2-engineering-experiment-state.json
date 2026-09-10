@@ -1,0 +1,152 @@
+{
+  "schema_version": 1,
+  "experiment": "on-demand-team-recommender",
+  "repository": "mporosoff/grants-scraper",
+  "branch": "codex/on-demand-team-recommender",
+  "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
+  "active_stage": 2,
+  "stage_status": "local-implementation-complete-paid-preparation-and-development-evaluation-blocked",
+  "recommendation": "defer",
+  "approvals": {
+    "stage1": true,
+    "evaluation_amendment_E1": true,
+    "stage2": true,
+    "paid_preparation_or_judging": true,
+    "trusted_main_prerequisite": false,
+    "production_release": false,
+    "budget_amendment_B1": true,
+    "stage3": false,
+    "stage4": false
+  },
+  "source_head_at_evidence_capture": "6adca6a795d4ab52e216e2ff7032d0e393db76b1",
+  "source_tree_at_evidence_capture": "9a2011915aac09437a1d5a2215474a4e68091224",
+  "report": {
+    "path": "docs/team-recommender/reports/stage-2-report.md",
+    "sha256": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351"
+  },
+  "receipt_index": {
+    "path": "docs/team-recommender/stage2-receipt-index.json",
+    "sha256": "13ad3b60b1fba8d9db0b4b19d5458171e4fb1a19564026e500c3a22bfed95e61"
+  },
+  "authority": {
+    "plan_version": "2.0 + user amendments E1/B1",
+    "plan_sha256": "4c162d636444f4f15009bb6a97382e4ab5110afbf5e414fa8ca7a7c9fee2fa14",
+    "amendment_path": "docs/team-recommender/EVALUATION_AMENDMENT.md",
+    "budget_amendment_path": "docs/team-recommender/BUDGET_AMENDMENT_B1.md"
+  },
+  "pinned_data": {
+    "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+    "legacy_team_generation": "07f1b0b86c534b64ddd8e3dc4305c1e36d1f6652604581e48edfb5b6fdab8453",
+    "source_manifest_sha256": "2d96fe2bc5653c370c4d578b1cb9f12672f822ae7104139f902e21bdb689ab80",
+    "development_sha256": "833cbb454369285b381e3083426553d9b836b90ad16d3b62b65f60d2e19cb9c6",
+    "holdout_sha256": "6c08baadefcf2bab3da03684a7cc402228a0592ddf53a011816a0542229ccdd0",
+    "v2_ingredient_package": null
+  },
+  "model": {
+    "embedding_proposed": "voyage-4-lite",
+    "embedding_dimension": 1024,
+    "new_embedding_space_identity": null,
+    "primary_judge_proposed": "claude-sonnet-5",
+    "judge_prompt_sha256": "792b6d4e21889b408dc6262a7437122b57cc6babd3fa75fb6482d8a84158745a",
+    "judge_schema_sha256": "a600c084cfe4b5d8bd70c235db3a636b5a24d9e11ddfed14401a8f473abea7ca",
+    "judge_protocol_sha256": "d270d85d44e279ce74cffcaa1fd69a8b0ffe299db256b0b2433e92aec129b901",
+    "fitted_recommender": null,
+    "model_requests_executed": 0,
+    "primary_numerical_candidate": "B-fixed-aspect-weighted-coverage"
+  },
+  "budget_record": {
+    "path": "docs/team-recommender/preparation-budget.json",
+    "id": "on-demand-team-offline-v2-20260909",
+    "authorized_usd": 10,
+    "stage2_cumulative_ceiling_usd": 6,
+    "actual_usd": 0.0,
+    "reserved_usd": 0.0,
+    "ledger": "docs/team-recommender/budget-ledger.json",
+    "remaining_total_usd": 10.0,
+    "later_stage_minimum_preserved_usd": 4,
+    "requests": 0,
+    "input_tokens": 0,
+    "output_tokens": 0
+  },
+  "human_review": {
+    "sole_confirmed_reviewer": "Marc Porosoff",
+    "cap": 40,
+    "development_cap": 20,
+    "final_cap": 20,
+    "requested": 0,
+    "completed": 0,
+    "skipped": 0,
+    "manifest_sha256": "6fb5a428d34fa66cb2063e20fcc8019902f083e55d58f9a113d2a68b253c03bf"
+  },
+  "holdout": {
+    "source_metadata_reserved": true,
+    "recommendation_outputs_generated": false,
+    "recommendation_results_inspected": false,
+    "human_final_audit_exposed": false,
+    "seal_status": "provisional source-group audit pending; no recommendation exposure",
+    "rollout_overlap_scopes_do_not_score_in_stage2": 50
+  },
+  "checks": {
+    "focused_node_passed": 74,
+    "focused_python_passed": 49,
+    "total_focused_tests": 123,
+    "independent_small_pool_cases": 32,
+    "presentation_frozen_unchanged_files": 36,
+    "presentation_frozen_functions": 9,
+    "html_deltas": "version hashes and directory loading only",
+    "local_package_check": "passed",
+    "full_e2e": "not-run-not-authorized",
+    "playwright": "not-run-not-authorized",
+    "real_browser": "not-run",
+    "human_semantic_judgments": 0,
+    "model_semantic_judgments": 0,
+    "paid_prepared_scope_fixture_requests": 0
+  },
+  "production": {
+    "mutations": [],
+    "new_route_live_scopes": 0,
+    "live_candidate_id": "5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0",
+    "push_performed": false,
+    "review_requested": false
+  },
+  "unresolved": [
+    "Task-specific trusted preparation/evaluation entrypoint unavailable; no prerequisite main change authorized",
+    "Original source coherence/conditions/successor grouping and validation receipts unfinished",
+    "No compatible new query/claim vectors or real prepared rollout scopes",
+    "Real development A/B semantic and judge/human agreement evidence absent",
+    "Actual 150-scope transfer/browser heap/latency and dedicated full browser gates unrun"
+  ],
+  "next_allowed_stage": null,
+  "recommended_next_stage": null,
+  "next_stage_requires": "Explicit user review and Stage 3 approval plus genuine preparation/development readiness; retain same $10 ledger, max $6 through Stage 2; no holdout access while development remains incomplete",
+  "stop": "STOP FOR USER REVIEW",
+  "source_checkpoint": "b6f71ae0396bd2670043291bc676ee8af0d222b2",
+  "stage1_report": {
+    "path": "docs/team-recommender/reports/stage-1-report.md",
+    "sha256": "cee7bf5159d6978bc80439d9289a743517766ab5a9e01f30f07ffa0ca75d4713"
+  },
+  "candidate": {
+    "path": "docs/team-recommender/stage2-candidate.json",
+    "sha256": "bebc5184763ef5185f6741c4ac7ae677eeb307a81fb21fb3bc137f7621d370be",
+    "dependency_digest_sha256": "a631cf5026400d1aba0e9af28f732f7ae8d3629110c52fdc3218870f6c62944c"
+  },
+  "readiness_findings": {
+    "currentness": "implemented-focused-regressions-pass",
+    "source_validation": "validator-implemented-real-receipts-and-group-audit-missing",
+    "trusted_paid_route": "unavailable-no-policy-change-authorized"
+  },
+  "results": {
+    "real_prepared_rollout_scopes": 0,
+    "planned_rollout_scopes": 150,
+    "real_development_evaluated_scopes": 0,
+    "holdout_evaluated_scopes": 0,
+    "source_inventory": "docs/team-recommender/receipts/stage2-source-inventory.json",
+    "reuse_inventory": "docs/team-recommender/receipts/stage2-reuse-metadata.json",
+    "resource_measurements": "docs/team-recommender/receipts/stage2-resource-measurements.json"
+  },
+  "proposed_next_stage": 3,
+  "stage1_receipt_index": {
+    "path": "docs/team-recommender/receipt-index.json",
+    "sha256": "d32ae60b40120a437b9d42c61759711a0d263a9b13f7662759ae46b1f104f0d8"
+  }
+}

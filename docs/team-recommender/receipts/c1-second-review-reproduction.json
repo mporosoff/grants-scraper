@@ -1,0 +1,13 @@
+{
+  "reviewed_sha": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+  "finding_id": 3974656336,
+  "reproduced": true,
+  "first_restorable_status": "failed",
+  "first_terminal_marker": false,
+  "fixture_dispatch_count": 2,
+  "fixture_requests": 2,
+  "actual_provider_calls": 0,
+  "actual_experiment_ledger_modified": false,
+  "code_modified": false,
+  "required_correction": "Treat every prior reconciled cacheless request, including failed, as recovery-required; no autonomous second repair was applied."
+}

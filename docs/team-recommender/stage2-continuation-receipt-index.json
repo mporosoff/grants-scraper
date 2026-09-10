@@ -1,0 +1,28 @@
+{
+  "schema_version": 1,
+  "version": "C1-continuation-checkpoint-1",
+  "status": "incomplete-review-convergence-stop",
+  "source_code_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
+  "prerequisite_head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+  "candidate_sha256": "075a3222b4de7a19fedea5b4f5739d3a17c0a612291929ed8cdddfbae0b96c16",
+  "report_path": "docs/team-recommender/reports/stage-2-completion-report.md",
+  "report_sha256": "df766ed0194d60b460c4a3a6125ce63c17398ca27974ee1a2fb631d4ead13973",
+  "receipts": {
+    "docs/team-recommender/receipts/c1-budget-reconciliation.json": "38742ebb3dc871a349981489c1cd94a5eba63b902807deffdc098b482d3052c4",
+    "docs/team-recommender/receipts/c1-input-seam-findings.json": "5d302a88dd83dd74abc6d25407d04bb3bd60b42e989106246ae6c8940d2d0216",
+    "docs/team-recommender/receipts/c1-prerequisite-review.json": "6d5850034b1d05aa063f23f4da009dee1d1c0f9eb8af49754b12979dfb8221d4",
+    "docs/team-recommender/receipts/c1-preservation-check.json": "056c18686abeae4ad0b2352ac8a162ab92f6ffceada9d00d5e38930238e210ad",
+    "docs/team-recommender/receipts/c1-real-currentness.json": "1f0393673acbdbfd9074a861b1676e2add77a575efe7aff3e09dfab20a265367",
+    "docs/team-recommender/receipts/c1-real-source-inventory-1b115a953851a5ff.json": "1b115a953851a5ff5b93c2f865e29931b2ae1392bcf85b4c9df94d5d1e305eef",
+    "docs/team-recommender/receipts/c1-real-source-inventory-f4d8898adcff802f.json": "f4d8898adcff802f83479129d316b3fbc5cb8d271f5390a206430567ad8d6299",
+    "docs/team-recommender/receipts/c1-second-review-reproduction.json": "47f0f80344c637c1b0ccb41a20e23016afc37eea97cdaa7014562c05f8aabca2",
+    "docs/team-recommender/receipts/c1-workflow-trigger-audit.json": "0bf50c15ec2a273c196dcd55537497a2b30b8ae04e88072a63cef76ccbf09758",
+    "docs/team-recommender/manifests/source-group-amendment-c1.json": "54b041dc861f62e0fdf31264bc159218e8459ffa3d954a02ec0a5a0a136562d8",
+    "docs/team-recommender/CONTINUATION_C1.md": "1dd74b0626de20c9c424592fac2bb80ca63f8d5fae25e00e5b155e805b4f067d",
+    "docs/team-recommender/stage2-continuation-candidate.json": "075a3222b4de7a19fedea5b4f5739d3a17c0a612291929ed8cdddfbae0b96c16"
+  },
+  "ledger_sha256": "0835f7b7017d6655d3de13395c3d5ee8a94342a3ba1ac9115e652bfab4c73f9a",
+  "actual_provider_calls": 0,
+  "actual_provider_tokens": 0,
+  "actual_experiment_spend_usd": 0
+}

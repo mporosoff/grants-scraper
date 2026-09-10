@@ -1,5 +1,8 @@
 # Funding Finder: on-demand team recommender — revised implementation plan
 
+> C1 checkpoint, September 9 EDT / September 10 UTC: Stage 2 remains incomplete. The narrowly authorized prerequisite PR #215 is unmerged at `8972595625f0d3b9fb4ea44794c65bc03ac3fe7b`; exact-head verification found a second consequential accounting/recovery defect after one repair round. The stricter user-supplied review-convergence instruction requires a stop before a second autonomous repair. See [the completion checkpoint report](reports/stage-2-completion-report.md). Existing $10/$6 authority remains; spend/reservations are $0/$0. Real preparation/evaluation is not complete; Stage 3 is not approved.
+
+
 **Version:** 2.0 + user evaluation amendment E1 · **Date:** September 9, 2026  
 **Repository:** `mporosoff/grants-scraper`  
 **Experimental branch:** `codex/on-demand-team-recommender`  
@@ -11,6 +14,8 @@
 **Budget amendment B1:** Stage 2 is explicitly authorized from checkpoint `b6f71ae0396bd2670043291bc676ee8af0d222b2`, including bounded readiness repairs. The single all-stage ceiling is $10; Stage 2 cumulative maximum is $6 with at least $4 reserved for separately approved later stages. The $69 proposal is rejected and preserved as history. Dollar authority does not authorize a protected-main prerequisite or a new provider. Read `BUDGET_AMENDMENT_B1.md` and the itemized `preparation-budget.json`.
 
 ## 0. Authority, scope, and the decision
+
+**Continuation C1:** The user now authorizes the narrow trusted-executor prerequisite PR/review/CI/protected-merge/manual-dispatch sequence and real Stage 2 preparation/evaluation. This supersedes only the prior unapproved-prerequisite restriction in B1 and the historical reports. Read `CONTINUATION_C1.md`. The single $10/$6 limits, four stages, presentation and holdout boundary remain unchanged. Synthetic engineering evidence alone does not complete Stage 2.
 
 This document replaces `Funding_Finder_On_Demand_Team_Recommender_Plan.md` for the proposed experimental recommender. It preserves its architecture, interface freeze, mathematical baseline, meaningful evaluation, and 150-scope rollout. It is not an instruction to resume the failed Sonnet team-qualification trials or implement the earlier competency-certification overhaul. Historical results and ledgers remain evidence, not production authorization for this engine.
 

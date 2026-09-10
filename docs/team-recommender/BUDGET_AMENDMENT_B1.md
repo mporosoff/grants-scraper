@@ -1,5 +1,8 @@
 # B1 — Stage 2 authority and single experiment budget
 
+C1 continuation note: the user subsequently authorized the narrowly reviewed protected-main executor prerequisite; the original route restriction below is preserved as history. PR #215 remains unmerged after a review-convergence checkpoint. No provider request or cloud ledger initialization occurred. The same $10 total / $6 Stage 2 / at least $4 later limits and existing authorization identity remain unchanged.
+
+
 Authority: the user's explicit Stage 2 instruction, received September 9, 2026. Continue the existing experiment from `b6f71ae0396bd2670043291bc676ee8af0d222b2`. Stage 2 implementation and bounded repair of the three readiness findings are approved. Stage 3, production publication, permissions changes and a protected-main prerequisite are not approved.
 
 The rejected $69 proposal is preserved in `history/preparation-budget-stage1-rejected.json`, and the original Stage 1 report is unchanged. The sole authorization identity remains `on-demand-team-offline-v2-20260909`. Its **$10 total across Stages 1–4** includes every metered extraction, embedding, judge, reranking, probe, retry, validation and smoke request caused by this experiment. Stage 2 cumulative spend plus outstanding/uncertain reservations may not exceed **$6**, preserving at least **$4** for separately approved Stages 3–4. These amounts are portions of one ceiling. Prepaid credit is not free usage. Old Sonnet allowances are excluded; compatible historical work can be reused without becoming budget credit.

@@ -1,0 +1,74 @@
+{
+  "schema_version": 1,
+  "version": "stage2-continuation-C1-checkpoint-1",
+  "status": "incomplete-review-convergence-stop",
+  "stage2_complete": false,
+  "source_code_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
+  "experimental_branch": "codex/on-demand-team-recommender",
+  "prerequisite": {
+    "pr": 215,
+    "head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+    "merged": false,
+    "dispatch_runs": [],
+    "unresolved_finding_id": 3974656336
+  },
+  "preserved_engineering_candidate": {
+    "path": "docs/team-recommender/stage2-candidate.json",
+    "sha256": "bebc5184763ef5185f6741c4ac7ae677eeb307a81fb21fb3bc137f7621d370be",
+    "dependency_digest_sha256": "a631cf5026400d1aba0e9af28f732f7ae8d3629110c52fdc3218870f6c62944c"
+  },
+  "engineering_candidate": "B-fixed-aspect-weighted-coverage",
+  "engine_version": "coverage-v2.1",
+  "adapter_version": "ingredients-v2.1",
+  "parameters": {
+    "topic": 0.4,
+    "core": 0.3,
+    "method": 0.5,
+    "context": 0.5,
+    "anchor": 0.5,
+    "group": 0.55,
+    "marginal": 0.03,
+    "envelope": 0.95,
+    "maxOptions": 8,
+    "maxPeople": 200,
+    "maxAspects": 8,
+    "maxPassages": 16,
+    "workLimit": 300000,
+    "exactPool": 12,
+    "swapStartsPerSize": 8,
+    "aspectWeight": 0.5,
+    "coreWeight": 0.3,
+    "lexicalWeight": 0.2,
+    "mmr": 0
+  },
+  "actual_development_finalist": null,
+  "simpler_fallback": null,
+  "source_registry_vector_dependencies": {
+    "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+    "source_inventory_path": "docs/team-recommender/receipts/c1-real-source-inventory-f4d8898adcff802f.json",
+    "source_inventory_sha256": "f4d8898adcff802f83479129d316b3fbc5cb8d271f5390a206430567ad8d6299",
+    "source_group_overlay_sha256": "54b041dc861f62e0fdf31264bc159218e8459ffa3d954a02ec0a5a0a136562d8",
+    "embedding_space": null,
+    "vector_asset": null,
+    "prepared_ingredient_package": null
+  },
+  "judge": {
+    "model": "claude-sonnet-5",
+    "prompt_sha256": "792b6d4e21889b408dc6262a7437122b57cc6babd3fa75fb6482d8a84158745a",
+    "schema_sha256": "a600c084cfe4b5d8bd70c235db3a636b5a24d9e11ddfed14401a8f473abea7ca",
+    "protocol_sha256": "e2965348dfe3ce3edc0b5f1830da51d0b9dc88eddc4ba3eb3cd44cc4529f6074",
+    "metered_judgments": 0
+  },
+  "optional_components": {
+    "MMR": "not-evaluated-on-real-development",
+    "regularized": "not-evaluated-no-new-labels",
+    "Bayesian": "not-evaluated-no-new-labels"
+  },
+  "human": {
+    "requested": 0,
+    "returned": 0,
+    "remaining_development": 20,
+    "reserved_final": 20
+  },
+  "stage3_decision_rule": "Do not advance before real Stage 2 preparation, grouped full development comparison and exact dependency/protocol/finalist freeze; retain original acceptance targets and all missing denominators, including the known shared-source holdout reservation."
+}

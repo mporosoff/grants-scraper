@@ -1,0 +1,45 @@
+{
+  "protected_main_sha": "6adca6a795d4ab52e216e2ff7032d0e393db76b1",
+  "prerequisite_head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+  "changed_files": [
+    ".github/workflows/team-recommender-offline.yml",
+    "config/team_recommender_executor/initial-ledger.json",
+    "config/team_recommender_executor/judge-output-schema.json",
+    "config/team_recommender_executor/judge-prompt.md",
+    "config/team_recommender_executor/policy.json",
+    "docs/team-recommender-executor.md",
+    "tests/test_team_recommender_budget.py",
+    "tests/test_team_recommender_executor.py",
+    "tools/team_recommender_budget.py",
+    "tools/team_recommender_executor.py"
+  ],
+  "new_workflow": ".github/workflows/team-recommender-offline.yml",
+  "new_triggers": [
+    "workflow_dispatch on protected main only"
+  ],
+  "existing_production_workflows_changed": [],
+  "dependency_groups_added": [
+    "validation"
+  ],
+  "new_experiment_runtime_files_merged": [],
+  "pushes": [
+    "4e6739bdcba6bec8712df886d3566a18951a6763",
+    "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b"
+  ],
+  "required_ci_runs": [
+    34424331894,
+    34425407003
+  ],
+  "main_merge_performed": false,
+  "manual_executor_dispatches": [],
+  "production_mutations": [],
+  "existing_release_plan_run": 34402341838,
+  "existing_release_plan_stage": "noop",
+  "existing_team_generation_ready": false,
+  "review_policy_conflict": {
+    "supplied_user_rule": "Stop on another consequential same-subsystem verification finding after one remediation round.",
+    "repository_rule": "Allows new bounded rounds for newly confirmed consequential defects.",
+    "repository_AGENTS_sha256": "ff7239d8a1ab8a3e2e5c5b8a87163b03bc20d02c07605967f4e8315e43861a40",
+    "applied": "stricter explicit user-supplied rule; checkpoint without another repair"
+  }
+}

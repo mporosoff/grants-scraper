@@ -1,0 +1,52 @@
+{
+  "version": "C1-source-group-overlay-1",
+  "authority": "C1 permits source-based grouping corrections before recommendation exposure",
+  "original_manifests_preserved": {
+    "development.json": "833cbb454369285b381e3083426553d9b836b90ad16d3b62b65f60d2e19cb9c6",
+    "holdout.json": "6c08baadefcf2bab3da03684a7cc402228a0592ddf53a011816a0542229ccdd0",
+    "source-groups.json": "2d96fe2bc5653c370c4d578b1cb9f12672f822ae7104139f902e21bdb689ab80",
+    "rollout.json": "71b6feef1d4bb8e5c617b23ffc4eafd2b14a104ce1d92e2eccdb625cdbcf35a5",
+    "human-audit.json": "6fb5a428d34fa66cb2063e20fcc8019902f083e55d58f9a113d2a68b253c03bf"
+  },
+  "recommendation_results_inspected": false,
+  "links": [
+    {
+      "development_scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "holdout_scope_id": "340828",
+      "canonical_source_group": "NSF-22-600",
+      "reason": "Same NSF solicitation 22-600 and canonical official funding page; title differs only by acronym suffix.",
+      "holdout_disposition": "withheld-as-shared-development-source; preserve reservation and missing denominator; no replacement selected"
+    }
+  ],
+  "reserved_development_scopes": 90,
+  "reserved_holdout_scopes": 90,
+  "maximum_independent_holdout_scopes_after_known_collision": 89,
+  "full_successor_audit_complete": false,
+  "remaining_title_candidates": [
+    {
+      "development": "362178",
+      "holdout": "362180"
+    },
+    {
+      "development": "362196",
+      "holdout": "362197"
+    },
+    {
+      "development": "362868",
+      "holdout": "362866"
+    },
+    {
+      "development": "362178",
+      "holdout": "362179"
+    },
+    {
+      "development": "357498",
+      "holdout": "363818"
+    },
+    {
+      "development": "362868",
+      "holdout": "362184"
+    }
+  ],
+  "remaining_title_candidates_are_confirmed_duplicates": false
+}

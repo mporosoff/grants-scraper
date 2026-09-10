@@ -1,0 +1,15 @@
+{
+  "base_sha": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
+  "checked_files": 87,
+  "changed_files": [],
+  "presentation_and_runtime_unchanged_this_continuation": true,
+  "prior_history_hashes": {
+    "reports/stage-1-report.md": "cee7bf5159d6978bc80439d9289a743517766ab5a9e01f30f07ffa0ca75d4713",
+    "reports/stage-2-report.md": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351",
+    "stage2-candidate.json": "bebc5184763ef5185f6741c4ac7ae677eeb307a81fb21fb3bc137f7621d370be",
+    "stage2-receipt-index.json": "13ad3b60b1fba8d9db0b4b19d5458171e4fb1a19564026e500c3a22bfed95e61",
+    "budget-ledger.json": "0835f7b7017d6655d3de13395c3d5ee8a94342a3ba1ac9115e652bfab4c73f9a"
+  },
+  "full_e2e_playwright_accessibility_run": false,
+  "prerequisite_code_in_experiment_runtime": false
+}

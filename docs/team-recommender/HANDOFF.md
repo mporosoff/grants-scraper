@@ -1,5 +1,8 @@
 # How to give this plan to Codex
 
+> C1 checkpoint, September 9 EDT / September 10 UTC: Stage 2 remains incomplete. The narrowly authorized prerequisite PR #215 is unmerged at `8972595625f0d3b9fb4ea44794c65bc03ac3fe7b`; exact-head verification found a second consequential accounting/recovery defect after one repair round. The stricter user-supplied review-convergence instruction requires a stop before a second autonomous repair. See [the completion checkpoint report](reports/stage-2-completion-report.md). Existing $10/$6 authority remains; spend/reservations are $0/$0. Real preparation/evaluation is not complete; Stage 3 is not approved.
+
+
 **Version 2.0 + user evaluation amendment E1 · September 9, 2026**
 
 Read `EVALUATION_AMENDMENT.md` and the amended PLAN evaluation provisions. Original handoff preserved in `history/HANDOFF-v2.0-original.md`. The amendment changes evaluation only; it does not authorize spending or another stage. The originally listed prompt/template/checksum files were not supplied; `prompts/EVALUATION_AMENDMENT.md` is a new limited supplement, not a recreated original authorization prompt.
@@ -7,6 +10,8 @@ Read `EVALUATION_AMENDMENT.md` and the amended PLAN evaluation provisions. Origi
 **Budget amendment B1:** Continue the existing worktree and Stage 1 checkpoint. Stage 2 and its bounded readiness repairs are approved. A single $10 experiment ceiling, cumulative $6 through Stage 2 and at least $4 for later stages supersedes the rejected $69 proposal. Do not request dollar approval again. The existing paid route remains unavailable; no prerequisite main change or Stage 3 is approved. Read `BUDGET_AMENDMENT_B1.md`. The generic budget example below is historical handoff guidance and does not override B1.
 
 ## Start here
+
+Current continuation authority is `CONTINUATION_C1.md`: the narrow trusted-main executor prerequisite is now explicitly approved. Resume the actual `7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b` engineering checkpoint, complete real Stage 2 preparation/development evidence, preserve the original report and ledger, and write the completion report. Do not treat the earlier prerequisite restriction below as current, duplicate the experiment, or open Stage 3.
 
 For this existing experiment, resume from `reports/stage-2-report.md`, `stage2-candidate.json`, `stage2-receipt-index.json` and the current state. Local Stage 2 code is implemented and tested; real preparation/development judging is blocked by the missing trusted route and validated ingredients. Do not recreate the checkout, reset the ledger, start Stage 3, or mistake synthetic contracts for completed semantic validation. The original new-task guidance below is retained for provenance.
 
