@@ -1,0 +1,23 @@
+{
+  "checkpoint": "f2b047e3ebe283b09b46f12c8a3189ddce984292",
+  "main": "8e5101931222bc6b1f7cd00971441b8a2c55db5d",
+  "active_PRs": [],
+  "cloud_ledger_owner_run": 34472949357,
+  "files": {
+    "data/researcher_directory.js": "93b95b1f5e0656fa527c313f3ae40ccfc244e73b92f20e5e870cbe570f82da69",
+    "data/researcher_registry_manifest.json": "a2ecbb71de8e6afe20d5ae466d0842cb4a682a63f724dab91ac48b2075f837e3",
+    "docs/team-recommender/prepared/c2/directory.json": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+    "docs/team-recommender/prepared/c2/vectors.f32": "6d23a2a5f817f8723802765220e718f0a0d2a751a3b3e4435d36e36604b71422",
+    "docs/team-recommender/prepared/c2/bundle.json": "80e9e97a7e17a9fec6c1a247ddd31ac3f68b54bb9b78c1d77f13d62a337fef26",
+    "docs/team-recommender/reports/stage-2-final-report.md": "a4a13ee2bea5d151a987271f7adcb179cf1c05a0f339e33d9d7c2fc16848d7a4",
+    "docs/team-recommender/manifests/development.json": "833cbb454369285b381e3083426553d9b836b90ad16d3b62b65f60d2e19cb9c6",
+    "docs/team-recommender/manifests/holdout.json": "6c08baadefcf2bab3da03684a7cc402228a0592ddf53a011816a0542229ccdd0",
+    "docs/team-recommender/manifests/source-group-amendment-c2-f92fc5995a0a1ac0.json": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359",
+    "docs/team-recommender/human-review/development-packet-c2.md": "13ff8b3e715c12ea910f5f02c1701b145861d7226f7129953c8172abd794aabd"
+  },
+  "people_projection_sha256": "6a6b8d0b80bb17699559245581c219360b01c8d3a3855d0800791a5652152712",
+  "complete_registry_fields_sha256": "08054e3393fa4e3606876ccc0cbebd31d1c7c34c7822d261cb6f4b882b4badc3",
+  "human_requested": 20,
+  "human_returned": 0,
+  "human_final_reserved": 20
+}

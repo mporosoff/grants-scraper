@@ -1,0 +1,863 @@
+{
+  "cases": [
+    {
+      "action_allowed": false,
+      "admitted": null,
+      "aspect_correlations": null,
+      "aspects": 0,
+      "descriptor_counts": null,
+      "dominant_people": null,
+      "group_size": 0,
+      "historical_action_reason": "unsupported_scope",
+      "judge_missing": 1,
+      "judge_valid": 0,
+      "optimizer_work": null,
+      "pair_waterfall": null,
+      "prepared": false,
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "source_disposition": "New NASA program text readable via web, but bounded file retrieval failed; cached catalog synopsis is generic. Full current source/ownership exclusions not yet in a reproducible ingredient receipt.",
+      "stratum": "specific-looking-unprepared: bounded source gap"
+    },
+    {
+      "action_allowed": false,
+      "admitted": null,
+      "aspect_correlations": null,
+      "aspects": 0,
+      "descriptor_counts": null,
+      "dominant_people": null,
+      "group_size": 0,
+      "historical_action_reason": "unsupported_scope",
+      "judge_missing": 1,
+      "judge_valid": 0,
+      "optimizer_work": null,
+      "pair_waterfall": null,
+      "prepared": false,
+      "scope_id": "243973",
+      "source_disposition": "Source describes a general career/funding/equipment/service mechanism without a selected coherent scientific research contribution for this interface.",
+      "stratum": "specific-looking-unprepared: mechanism versus coherent science"
+    },
+    {
+      "action_allowed": false,
+      "admitted": null,
+      "aspect_correlations": null,
+      "aspects": 0,
+      "descriptor_counts": null,
+      "dominant_people": null,
+      "group_size": 0,
+      "historical_action_reason": "unsupported_scope",
+      "judge_missing": 1,
+      "judge_valid": 0,
+      "optimizer_work": null,
+      "pair_waterfall": null,
+      "prepared": false,
+      "scope_id": "362868",
+      "source_disposition": "Required four Parkinson focus areas absent; synopsis otherwise generic disease research, no specific scientific contribution beyond disease title.",
+      "stratum": "specific-looking-unprepared: linked focus areas"
+    },
+    {
+      "action_allowed": false,
+      "admitted": 27,
+      "aspect_correlations": [],
+      "aspects": 1,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 1,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000017-c003",
+              "id": "urh-000017",
+              "score": 0.4615505585611333
+            },
+            {
+              "claim_id": "urh-000102-c001",
+              "id": "urh-000102",
+              "score": 0.4407245391410407
+            },
+            {
+              "claim_id": "urh-000157-c002",
+              "id": "urh-000157",
+              "score": 0.4399184966491402
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": "unsupported_scope",
+      "judge_missing": 0,
+      "judge_valid": 10,
+      "optimizer_work": 2359,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 27,
+          "first_fail_group_floor": 325,
+          "first_fail_universal_marginal": 26,
+          "passed_anchor": 351,
+          "passed_group_floor": 26,
+          "possible_pairs": 351
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.4615505585611333
+      },
+      "prepared": true,
+      "scope_id": "363622",
+      "source_disposition": "Wave-computing science only; administrative EAGER/multidisciplinary tracks do not become invented scientific requirements. Existing submission prerequisites remain enforced.",
+      "stratum": "one-aspect no-group"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 20,
+      "aspect_correlations": [],
+      "aspects": 1,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 1,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000079-c002",
+              "id": "urh-000079",
+              "score": 0.5279654639528681
+            },
+            {
+              "claim_id": "urh-000011-c001",
+              "id": "urh-000011",
+              "score": 0.5079799871876245
+            },
+            {
+              "claim_id": "urh-000025-c002",
+              "id": "urh-000025",
+              "score": 0.49441481097918905
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": null,
+      "judge_missing": 0,
+      "judge_valid": 7,
+      "optimizer_work": 1373,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 20,
+          "first_fail_anchor": 55,
+          "first_fail_group_floor": 65,
+          "first_fail_universal_marginal": 70,
+          "passed_anchor": 135,
+          "passed_group_floor": 70,
+          "possible_pairs": 190
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.5279654639528681
+      },
+      "prepared": true,
+      "scope_id": "361208",
+      "source_disposition": "Bounded coherent scientific contribution in original synopsis. Planning aspects do not certify all notice requirements or researcher expertise.",
+      "stratum": "one-aspect no-group"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 39,
+      "aspect_correlations": [
+        {
+          "aspect_cosine": 0.7640046655077115,
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.7100590640274665
+        }
+      ],
+      "aspects": 2,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 2,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000065-c002",
+              "id": "urh-000065",
+              "score": 0.4097190682840312
+            },
+            {
+              "claim_id": "urh-000080-c001",
+              "id": "urh-000080",
+              "score": 0.40953188983146016
+            },
+            {
+              "claim_id": "urh-000088-c001",
+              "id": "urh-000088",
+              "score": 0.4039142125537446
+            }
+          ]
+        },
+        {
+          "aspect_id": "a1",
+          "top": [
+            {
+              "claim_id": "urh-000021-c001",
+              "id": "urh-000021",
+              "score": 0.4061375642549974
+            },
+            {
+              "claim_id": "urh-000042-c001",
+              "id": "urh-000042",
+              "score": 0.39626286877617095
+            },
+            {
+              "claim_id": "urh-000088-c001",
+              "id": "urh-000088",
+              "score": 0.3892345208998264
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": null,
+      "judge_missing": 4,
+      "judge_valid": 6,
+      "optimizer_work": 7474,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 39,
+          "first_fail_anchor": 210,
+          "first_fail_group_floor": 531,
+          "passed_anchor": 531,
+          "possible_pairs": 741
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.40864461707532107
+      },
+      "prepared": true,
+      "scope_id": "344592:ab-0009",
+      "source_disposition": "Retained deterministic native source segment/cell and original document hash. Raw historic document is not retained; last_verified is an existing catalog observation, not a new retrieval. No sibling scope or complete-notice certification.",
+      "stratum": "few-aspect no-group: native child"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 16,
+      "aspect_correlations": [
+        {
+          "aspect_cosine": 0.33066616455206643,
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.4798569778120019
+        }
+      ],
+      "aspects": 2,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 2,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000025-c001",
+              "id": "urh-000025",
+              "score": 0.46165448393988084
+            },
+            {
+              "claim_id": "urh-000011-c001",
+              "id": "urh-000011",
+              "score": 0.44881158359003315
+            },
+            {
+              "claim_id": "urh-000079-c002",
+              "id": "urh-000079",
+              "score": 0.4116446937740936
+            }
+          ]
+        },
+        {
+          "aspect_id": "a1",
+          "top": [
+            {
+              "claim_id": "urh-000115-c002",
+              "id": "urh-000115",
+              "score": 0.3195876834247604
+            },
+            {
+              "claim_id": "urh-000025-c001",
+              "id": "urh-000025",
+              "score": 0.3187656496704445
+            },
+            {
+              "claim_id": "urh-000019-c001",
+              "id": "urh-000019",
+              "score": 0.3140304046997697
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": null,
+      "judge_missing": 0,
+      "judge_valid": 9,
+      "optimizer_work": 1674,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 16,
+          "first_fail_anchor": 91,
+          "first_fail_group_floor": 29,
+          "passed_anchor": 29,
+          "possible_pairs": 120
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.4187878336590499
+      },
+      "prepared": true,
+      "scope_id": "362218",
+      "source_disposition": "Missing detailed focus-area list does not invalidate the explicit hearing-restoration contribution. Clinical trials, tinnitus and vestibular research excluded; exact focus-area responsiveness remains unknown.",
+      "stratum": "few-aspect no-group: hearing"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 109,
+      "aspect_correlations": [
+        {
+          "aspect_cosine": 0.49386455052904316,
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.3103874738781132
+        },
+        {
+          "aspect_cosine": 0.5551183697313028,
+          "aspects": [
+            "a0",
+            "a2"
+          ],
+          "fixed_score": 0.41944733567700415
+        },
+        {
+          "aspect_cosine": 0.5558033364613495,
+          "aspects": [
+            "a0",
+            "a3"
+          ],
+          "fixed_score": 0.47682443471414276
+        },
+        {
+          "aspect_cosine": 0.4662089651125263,
+          "aspects": [
+            "a1",
+            "a2"
+          ],
+          "fixed_score": 0.16707991067334316
+        },
+        {
+          "aspect_cosine": 0.12880444202449545,
+          "aspects": [
+            "a1",
+            "a3"
+          ],
+          "fixed_score": -0.014846803318650795
+        },
+        {
+          "aspect_cosine": 0.7283861890342243,
+          "aspects": [
+            "a2",
+            "a3"
+          ],
+          "fixed_score": 0.6741956161456106
+        }
+      ],
+      "aspects": 4,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 4,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000016-c002",
+              "id": "urh-000016",
+              "score": 0.4277924701031277
+            },
+            {
+              "claim_id": "urh-000067-c001",
+              "id": "urh-000067",
+              "score": 0.42230763526378695
+            },
+            {
+              "claim_id": "urh-000034-c003",
+              "id": "urh-000034",
+              "score": 0.41876772311154303
+            }
+          ]
+        },
+        {
+          "aspect_id": "a1",
+          "top": [
+            {
+              "claim_id": "urh-000157-c003",
+              "id": "urh-000157",
+              "score": 0.45490539834253685
+            },
+            {
+              "claim_id": "urh-000043-c001",
+              "id": "urh-000043",
+              "score": 0.45046392845278604
+            },
+            {
+              "claim_id": "urh-000079-c002",
+              "id": "urh-000079",
+              "score": 0.44450553479751714
+            }
+          ]
+        },
+        {
+          "aspect_id": "a2",
+          "top": [
+            {
+              "claim_id": "urh-000098-c001",
+              "id": "urh-000098",
+              "score": 0.7089334434399017
+            },
+            {
+              "claim_id": "urh-000115-c001",
+              "id": "urh-000115",
+              "score": 0.5414242808293752
+            },
+            {
+              "claim_id": "urh-000034-c003",
+              "id": "urh-000034",
+              "score": 0.5185298936070813
+            }
+          ]
+        },
+        {
+          "aspect_id": "a3",
+          "top": [
+            {
+              "claim_id": "urh-000065-c002",
+              "id": "urh-000065",
+              "score": 0.507242531413911
+            },
+            {
+              "claim_id": "urh-000094-c001",
+              "id": "urh-000094",
+              "score": 0.49836127046772627
+            },
+            {
+              "claim_id": "urh-000154-c001",
+              "id": "urh-000154",
+              "score": 0.4975373701529564
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": null,
+      "judge_missing": 7,
+      "judge_valid": 5,
+      "optimizer_work": 48104,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 109,
+          "first_fail_anchor": 820,
+          "first_fail_group_floor": 5062,
+          "first_fail_universal_marginal": 4,
+          "passed_anchor": 5066,
+          "passed_group_floor": 4,
+          "possible_pairs": 5886
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.4569146207809198
+      },
+      "prepared": true,
+      "scope_id": "359696",
+      "source_disposition": "Multimodal imaging is explicit. Listed modalities are planning contributions, not independently mandatory sponsor requirements; one central olfactory-imaging purpose anchors them.",
+      "stratum": "large admitted pool with no-group"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 29,
+      "aspect_correlations": [
+        {
+          "aspect_cosine": 0.35013419921543576,
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.32890187380407154
+        }
+      ],
+      "aspects": 2,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 2,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000079-c002",
+              "id": "urh-000079",
+              "score": 0.5533836807770954
+            },
+            {
+              "claim_id": "urh-000011-c001",
+              "id": "urh-000011",
+              "score": 0.5311652009768675
+            },
+            {
+              "claim_id": "urh-000025-c002",
+              "id": "urh-000025",
+              "score": 0.5229298992164509
+            }
+          ]
+        },
+        {
+          "aspect_id": "a1",
+          "top": [
+            {
+              "claim_id": "urh-000009-c002",
+              "id": "urh-000009",
+              "score": 0.3725053525500688
+            },
+            {
+              "claim_id": "urh-000089-c002",
+              "id": "urh-000089",
+              "score": 0.3648667717922692
+            },
+            {
+              "claim_id": "urh-000036-c002",
+              "id": "urh-000036",
+              "score": 0.34437665482714364
+            }
+          ]
+        }
+      ],
+      "group_size": 2,
+      "historical_action_reason": null,
+      "judge_missing": 7,
+      "judge_valid": 46,
+      "optimizer_work": 3760,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 29,
+          "first_fail_anchor": 171,
+          "first_fail_group_floor": 198,
+          "passed_all_old_pair_rules": 37,
+          "passed_anchor": 235,
+          "passed_group_floor": 37,
+          "possible_pairs": 406
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.4991201823089874
+      },
+      "prepared": true,
+      "scope_id": "361207",
+      "source_disposition": "Bounded coherent scientific contribution in original synopsis. Planning aspects do not certify all notice requirements or researcher expertise.",
+      "stratum": "existing group-producing source"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 5,
+      "aspect_correlations": [
+        {
+          "aspect_cosine": 0.4674934620832895,
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": null
+        }
+      ],
+      "aspects": 2,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 2,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000001-c001",
+              "id": "urh-000001",
+              "score": 0
+            },
+            {
+              "claim_id": "urh-000002-c001",
+              "id": "urh-000002",
+              "score": 0
+            },
+            {
+              "claim_id": "urh-000003-c001",
+              "id": "urh-000003",
+              "score": 0
+            }
+          ]
+        },
+        {
+          "aspect_id": "a1",
+          "top": [
+            {
+              "claim_id": "urh-000138-c001",
+              "id": "urh-000138",
+              "score": 0.3813344368841523
+            },
+            {
+              "claim_id": "urh-000123-c002",
+              "id": "urh-000123",
+              "score": 0.3328455278281003
+            },
+            {
+              "claim_id": "urh-000016-c002",
+              "id": "urh-000016",
+              "score": 0.3321293445800705
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": null,
+      "judge_missing": 0,
+      "judge_valid": 14,
+      "optimizer_work": 25,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 5,
+          "first_fail_anchor": 10,
+          "possible_pairs": 10
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0
+      },
+      "prepared": true,
+      "scope_id": "363292",
+      "source_disposition": "ABET/mining-program institutional requirement retained in source, not certified for directory members.",
+      "stratum": "historical unrelated admission"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 40,
+      "aspect_correlations": [
+        {
+          "aspect_cosine": 0.7371069889769857,
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.43027484839187835
+        }
+      ],
+      "aspects": 2,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 2,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000040-c001",
+              "id": "urh-000040",
+              "score": 0.47872753412035784
+            },
+            {
+              "claim_id": "urh-000115-c001",
+              "id": "urh-000115",
+              "score": 0.4504133066922955
+            },
+            {
+              "claim_id": "urh-000157-c003",
+              "id": "urh-000157",
+              "score": 0.4297226400046746
+            }
+          ]
+        },
+        {
+          "aspect_id": "a1",
+          "top": [
+            {
+              "claim_id": "urh-000040-c001",
+              "id": "urh-000040",
+              "score": 0.392688320563767
+            },
+            {
+              "claim_id": "urh-000157-c003",
+              "id": "urh-000157",
+              "score": 0.38483985303560564
+            },
+            {
+              "claim_id": "urh-000115-c001",
+              "id": "urh-000115",
+              "score": 0.3584511645941095
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": null,
+      "judge_missing": 0,
+      "judge_valid": 7,
+      "optimizer_work": 3779,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 40,
+          "first_fail_anchor": 496,
+          "first_fail_group_floor": 245,
+          "first_fail_universal_marginal": 39,
+          "passed_anchor": 284,
+          "passed_group_floor": 39,
+          "possible_pairs": 780
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.4529157700533806
+      },
+      "prepared": true,
+      "scope_id": "357002",
+      "source_disposition": "Bounded coherent scientific contribution in original synopsis. Planning aspects do not certify all notice requirements or researcher expertise.",
+      "stratum": "plausible imaging method transfer"
+    },
+    {
+      "action_allowed": true,
+      "admitted": 11,
+      "aspect_correlations": [
+        {
+          "aspect_cosine": 0.5800181194445382,
+          "aspects": [
+            "a0",
+            "a1"
+          ],
+          "fixed_score": 0.2769672114887831
+        }
+      ],
+      "aspects": 2,
+      "descriptor_counts": {
+        "profile_context": 0,
+        "profile_operation": 0,
+        "profile_passages": 402,
+        "source_aspects": 2,
+        "source_context": 0,
+        "source_operation": 0
+      },
+      "dominant_people": [
+        {
+          "aspect_id": "a0",
+          "top": [
+            {
+              "claim_id": "urh-000131-c002",
+              "id": "urh-000131",
+              "score": 0.39475286927155573
+            },
+            {
+              "claim_id": "urh-000123-c002",
+              "id": "urh-000123",
+              "score": 0.3845171143169681
+            },
+            {
+              "claim_id": "urh-000138-c002",
+              "id": "urh-000138",
+              "score": 0.37405300767474714
+            }
+          ]
+        },
+        {
+          "aspect_id": "a1",
+          "top": [
+            {
+              "claim_id": "urh-000060-c002",
+              "id": "urh-000060",
+              "score": 0.37178195155842503
+            },
+            {
+              "claim_id": "urh-000110-c003",
+              "id": "urh-000110",
+              "score": 0.3469128481259501
+            },
+            {
+              "claim_id": "urh-000130-c003",
+              "id": "urh-000130",
+              "score": 0.3435541608005215
+            }
+          ]
+        }
+      ],
+      "group_size": 0,
+      "historical_action_reason": null,
+      "judge_missing": 5,
+      "judge_valid": 4,
+      "optimizer_work": 550,
+      "pair_waterfall": {
+        "counts": {
+          "admitted_people": 11,
+          "first_fail_group_floor": 55,
+          "passed_anchor": 55,
+          "possible_pairs": 55
+        },
+        "limits": "Exact pairs, not all size-three/four combinations. Existing optimizer output/work is separately retained.",
+        "maximum_anchor_pair_coverage": 0.38786159395761655
+      },
+      "prepared": true,
+      "scope_id": "363489",
+      "source_disposition": "Bounded coherent scientific contribution in original synopsis. Planning aspects do not certify all notice requirements or researcher expertise.",
+      "stratum": "method transfer versus generic sensor similarity"
+    }
+  ],
+  "hypotheses_before_correction": [
+    "Few correlated aspects and repeated core scoring suppress useful overlap",
+    "Coarse title-only source aspects may drive unrelated similarity",
+    "Missing optional method/context disables the explicit method branch",
+    "Existing labels and research summaries omitted from judge may alter scientific interpretation"
+  ],
+  "known_mathematical_limit": "With one aspect and max coverage, at least one member of any size>=2 team has zero removal marginal. A universal positive marginal makes every such group impossible.",
+  "not_claimed": "Pair waterfall is not all-size feasibility; no-group does not establish directory incapability.",
+  "provider_calls": 0,
+  "selection_sha256": "3bd86fcfee895ac178cbbccbdad27fca30c76c90e2007ee3d3fd7fb5211f16b4",
+  "trace_sha256": "9b155ee7cc0f2ad7b1e899715e0a8c9c223e52055a5c2b84287b64101ad0c6be",
+  "trace_storage": "outputs/team-recommender-d1/diagnostic-traces-before.json, includes private judge mapping; not public release"
+}

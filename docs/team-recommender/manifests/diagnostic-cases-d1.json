@@ -1,0 +1,60 @@
+{
+  "broader_denominator": {
+    "derived_controls": 30,
+    "scientific": 90
+  },
+  "cases": [
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "stratum": "specific-looking-unprepared: bounded source gap"
+    },
+    {
+      "scope_id": "243973",
+      "stratum": "specific-looking-unprepared: mechanism versus coherent science"
+    },
+    {
+      "scope_id": "362868",
+      "stratum": "specific-looking-unprepared: linked focus areas"
+    },
+    {
+      "scope_id": "363622",
+      "stratum": "one-aspect no-group"
+    },
+    {
+      "scope_id": "361208",
+      "stratum": "one-aspect no-group"
+    },
+    {
+      "scope_id": "344592:ab-0009",
+      "stratum": "few-aspect no-group: native child"
+    },
+    {
+      "scope_id": "362218",
+      "stratum": "few-aspect no-group: hearing"
+    },
+    {
+      "scope_id": "359696",
+      "stratum": "large admitted pool with no-group"
+    },
+    {
+      "scope_id": "361207",
+      "stratum": "existing group-producing source"
+    },
+    {
+      "scope_id": "363292",
+      "stratum": "historical unrelated admission"
+    },
+    {
+      "scope_id": "357002",
+      "stratum": "plausible imaging method transfer"
+    },
+    {
+      "scope_id": "363489",
+      "stratum": "method transfer versus generic sensor similarity"
+    }
+  ],
+  "replacement_benchmark": false,
+  "rule": "Twelve explicit existing source/failure strata from C2 records, selected before D1 changes or new judgments. Historical failures are exposed development, never holdout. No score-based replacement.",
+  "source_checkpoint": "f2b047e3ebe283b09b46f12c8a3189ddce984292",
+  "version": "D1-diagnostic-selection-1"
+}
