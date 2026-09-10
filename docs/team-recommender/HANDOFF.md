@@ -4,7 +4,11 @@
 
 Read `EVALUATION_AMENDMENT.md` and the amended PLAN evaluation provisions. Original handoff preserved in `history/HANDOFF-v2.0-original.md`. The amendment changes evaluation only; it does not authorize spending or another stage. The originally listed prompt/template/checksum files were not supplied; `prompts/EVALUATION_AMENDMENT.md` is a new limited supplement, not a recreated original authorization prompt.
 
+**Budget amendment B1:** Continue the existing worktree and Stage 1 checkpoint. Stage 2 and its bounded readiness repairs are approved. A single $10 experiment ceiling, cumulative $6 through Stage 2 and at least $4 for later stages supersedes the rejected $69 proposal. Do not request dollar approval again. The existing paid route remains unavailable; no prerequisite main change or Stage 3 is approved. Read `BUDGET_AMENDMENT_B1.md`. The generic budget example below is historical handoff guidance and does not override B1.
+
 ## Start here
+
+For this existing experiment, resume from `reports/stage-2-report.md`, `stage2-candidate.json`, `stage2-receipt-index.json` and the current state. Local Stage 2 code is implemented and tested; real preparation/development judging is blocked by the missing trusted route and validated ingredients. Do not recreate the checkout, reset the ledger, start Stage 3, or mistake synthetic contracts for completed semantic validation. The original new-task guidance below is retained for provenance.
 
 Use a new Codex task for the on-demand recommender, rather than continuing the old prompt-only team-restoration task. Keep the existing repository and operating rules. The work belongs on `codex/on-demand-team-recommender`, isolated from main and other tasks.
 

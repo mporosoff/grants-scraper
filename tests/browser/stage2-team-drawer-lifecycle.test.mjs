@@ -4,7 +4,7 @@ import test from "node:test";
 import vm from "node:vm";
 import { shellDom } from "../helpers/shell-dom.mjs";
 
-const paths = ["match_explorer.html", "assets/site-shell.js", "data/opportunity_team_index.js", "assets/search-retrieval.js", "data/opportunity_teams.js", "data/researcher_directory.js", "assets/opportunity-team.js", "assets/opportunity-team-panel.js"];
+const paths = ["match_explorer.html", "assets/site-shell.js", "data/opportunity_team_index.js", "assets/search-retrieval.js", "assets/submission-schedule.js", "data/opportunity_teams.js", "data/researcher_directory.js", "assets/opportunity-team.js", "assets/opportunity-team-panel.js"];
 const [page, shell, ...sources] = await Promise.all(paths.map(path => readFile(new URL(`../../${path}`, import.meta.url), "utf8")));
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 function fixture({ delayed = false } = {}) {

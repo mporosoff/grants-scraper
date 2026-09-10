@@ -4,6 +4,8 @@
   var SCHEMA_VERSION = 1;
   var MAX_DIRECTORY_RESULTS = 12;
   var dataPromise = null;
+  var loadingGeneration = null;
+  var legacyBySnapshot = new WeakMap();
 
   function normalize(value) {
     return String(value == null ? "" : value)
@@ -31,7 +33,7 @@
   }
 
   function validateIndex(index, expectedGenerationId) {
-    if (!index || index.schema_version !== SCHEMA_VERSION ||
+    if (!index || ![SCHEMA_VERSION, 2].includes(index.schema_version) ||
         !/^[a-f0-9]{64}$/.test(index.generation_id || "") ||
         (expectedGenerationId && index.generation_id !== expectedGenerationId) ||
         !Array.isArray(index.scopes) || index.scopes.length > 2000 ||
@@ -45,6 +47,9 @@
         throw new Error("The opportunity-team availability index is invalid.");
       }
       identifiers.add(scope.id);
+      if (index.schema_version === 2 && !["legacy-v1", "ingredients-v2"].includes(scope.engine)) {
+        throw new Error("Every scope must have one declared engine owner.");
+      }
     });
     return index;
   }
@@ -59,6 +64,7 @@
     var scopeId = String(options.scopeId || "");
     return availabilityIndex().scopes.filter(function (scope) {
       if (scope.review_state === "needs_revalidation") return false;
+      if (scope.engine === "ingredients-v2" && scope.prepared !== true) return false;
       if (scopeId && scope.id !== scopeId) return false;
       return !parentId || scope.parent_id === parentId;
     });
@@ -68,7 +74,7 @@
     return availableScopes(options).length > 0;
   }
 
-  function validateData(data, expectedGenerationId) {
+  function validateData(data, expectedGenerationId, indexOverride) {
     var source = data && data.source_roster_counts;
     var pools = data && data.pool_counts;
     var directory = global.RESEARCHER_DIRECTORY;
@@ -140,7 +146,7 @@
       }
     });
     var indexedScopes = validateIndex(
-      global.OPPORTUNITY_TEAM_INDEX,
+      indexOverride || global.OPPORTUNITY_TEAM_INDEX,
       expectedGenerationId || data.generation_id,
     ).scopes;
     var projectedScopes = data.opportunities.map(function (opportunity) {
@@ -215,15 +221,20 @@
 
   function loadData(expectedGenerationId) {
     var generationId = expectedGenerationId || pageGenerationId();
-    if (!dataPromise) {
-      dataPromise = Promise.resolve(global.OPPORTUNITY_TEAM_DATA || null)
+    if (!dataPromise || loadingGeneration !== generationId) {
+      loadingGeneration = generationId;
+      var index = validateIndex(global.OPPORTUNITY_TEAM_INDEX, generationId);
+      var pending = index.schema_version === 2 ? loadIngredients(index) : Promise.resolve(global.OPPORTUNITY_TEAM_DATA || null)
         .then(function (value) {
           return value || injectData(versionedAssetUrl(generationId));
         })
-        .then(function (value) { return validateData(value, generationId); })
+        .then(function (value) { return validateData(value, generationId); });
+      dataPromise = pending.then(function (value) {
+        if (loadingGeneration !== generationId || pageGenerationId() !== generationId) throw new Error("Superseded team-data response.");
+        return value;
+      })
         .catch(function (error) {
-          discardData();
-          dataPromise = null;
+          if (loadingGeneration === generationId) { discardData(); dataPromise = null; }
           throw error;
         });
     }
@@ -232,6 +243,53 @@
 
   function resetLoadForTest() {
     dataPromise = null;
+    loadingGeneration = null;
+  }
+
+  function injectRuntime(name, hash) {
+    if (!/^[a-f0-9]{64}$/.test(hash || "")) return Promise.reject(new Error("Invalid numerical runtime identity."));
+    return new Promise(function (resolve, reject) {
+      var bounded = global.FUNDING_FINDER_APP?.boundedScripts?.sidecar;
+      if (!bounded) { reject(new Error("Bounded runtime loader unavailable.")); return; }
+      var script = document.createElement("script"), settled = false;
+      script.src = "assets/" + name + ".js?v=" + hash;
+      script.integrity = "sha256-" + btoa(hash.match(/../g).map(function (byte) { return String.fromCharCode(parseInt(byte, 16)); }).join(""));
+      script.crossOrigin = "anonymous";
+      var timer = bounded.setTimeout(function () { finish(new Error("Numerical runtime load timed out.")); });
+      function finish(error) { if (settled) return; settled = true; bounded.clearTimeout(timer); script.remove(); if (error) reject(error); else resolve(); }
+      script.addEventListener("load", function () { finish(); }, {once: true});
+      script.addEventListener("error", function () { finish(new Error("Numerical runtime integrity/load failure.")); }, {once: true});
+      document.head.appendChild(script);
+    });
+  }
+
+  async function loadIngredients(index) {
+    // New code and ingredients are lazy. Ordinary search and the v1 route do not load them.
+    await injectRuntime("team-recommender", index.runtime?.recommender);
+    await injectRuntime("team-ingredients", index.runtime?.ingredients);
+    if (!global.TeamIngredients) throw new Error("Ingredient runtime unavailable.");
+    var result = await global.TeamIngredients.loadData(index, global.RESEARCHER_DIRECTORY);
+    var legacyScopes = index.scopes.filter(function (s) { return s.engine === "legacy-v1"; });
+    if (legacyScopes.length) {
+      var old = await injectData(versionedAssetUrl(index.legacy_generation));
+      var oldIndex = validateIndex(index.legacy_index, index.legacy_generation);
+      if (oldIndex.schema_version !== 1 || legacyScopes.some(function (s) { return !oldIndex.scopes.some(function (oldScope) {
+        return oldScope.id === s.id && oldScope.parent_id === s.parent_id && oldScope.record_type === s.record_type && oldScope.review_state === s.review_state;
+      }); })) throw new Error("Legacy routing differs from the retained index.");
+      validateData(old, index.legacy_generation, oldIndex);
+      var engine = create(old, oldIndex);
+      var routed = new Set(legacyScopes.map(function (s) { return s.id; }));
+      legacyBySnapshot.set(result, Object.assign({}, engine, {opportunityById: new Map(Array.from(engine.opportunityById).filter(function (entry) { return routed.has(entry[0]); }))}));
+    }
+    return result;
+  }
+
+  function loadDirectory() {
+    var directory = global.RESEARCHER_DIRECTORY;
+    if (!directory || directory.schema_version !== 1 || !Array.isArray(directory.researchers)) return Promise.reject(new Error("Researcher directory unavailable."));
+    return Promise.resolve({faculty: directory.researchers.map(function (p) { return Object.assign({}, p, {terms: (p.claims || []).filter(function (c) {
+      return c.status === "active";
+    }).map(function (c) { return {claim_id: c.claim_id, claim_revision: c.revision, label: c.label, evidence: c.evidence, source_urls: c.source_urls || []}; })}); })});
   }
 
   function poolRank(value) {
@@ -282,8 +340,9 @@
       !["hidden", "reference_only"].includes(profile.pool_visibility));
   }
 
-  function create(data) {
-    validateData(data);
+  function create(data, indexOverride) {
+    if (data?.schema_version === 2) return global.TeamIngredients.create(data, legacyBySnapshot.get(data));
+    validateData(data, undefined, indexOverride);
     var facultyById = new Map();
     data.faculty.forEach(function (profile) {
       facultyById.set(profile.id, profile);
@@ -336,6 +395,12 @@
       if (!currentness(record, now)) {
         return { ok: false, reason: "not_current", scopes: scopes };
       }
+      var schedule = global.FUNDING_SUBMISSION_SCHEDULE;
+      if (!schedule?.nextSubmission) return {ok: false, reason: "currentness_unavailable", scopes: scopes};
+      function submissionAllowed(value) {
+        return ["open", "rolling", "not_listed"].includes(schedule.nextSubmission(value, now.toISOString().slice(0, 10)).access);
+      }
+      if (!submissionAllowed(record)) return {ok: false, reason: "unsupported_scope", scopes: scopes};
       if (opportunity.record_type === "specific_parent" && options.isBroad === true) {
         return { ok: false, reason: "broad_parent_rejected", scopes: scopes };
       }
@@ -345,6 +410,9 @@
           return childId(child) === opportunity.id && String(child.parent_id || "") === parentId;
         });
         if (!eligible) return { ok: false, reason: "child_not_publication_eligible", scopes: scopes };
+        var child = children.find(function (entry) { return childId(entry) === opportunity.id && String(entry.parent_id) === parentId; });
+        if (!currentness(child, now)) return {ok: false, reason: "not_current", scopes: scopes};
+        if (!submissionAllowed(child)) return {ok: false, reason: "unsupported_scope", scopes: scopes};
       }
       return { ok: true, opportunity: opportunity, scopes: scopes };
     }
@@ -583,6 +651,7 @@
     hasAvailableScope: hasAvailableScope,
     validateData: validateData,
     loadData: loadData,
+    loadDirectory: loadDirectory,
     resetLoadForTest: resetLoadForTest,
     searchFaculty: searchFaculty,
     create: create,

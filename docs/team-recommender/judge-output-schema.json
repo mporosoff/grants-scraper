@@ -2,13 +2,49 @@
   "type": "object",
   "additionalProperties": false,
   "properties": {
-    "item_id": {"type": "string"},
-    "task_type": {"type": "string", "enum": ["individual", "group", "comparison", "source_control", "explanation_audit"]},
-    "label": {"type": "string", "enum": ["strong", "plausible", "unrelated", "insufficient-information", "not-applicable"]},
-    "preference": {"type": "string", "enum": ["A", "B", "tie", "unresolved", "not-applicable"]},
-    "faithfulness": {"type": "string", "enum": ["faithful", "unsupported", "insufficient-information", "not-applicable"]},
-    "evidence_refs": {"type": "array", "maxItems": 2, "items": {"type": "string"}},
-    "rationale": {"type": "string", "maxLength": 600}
+    "verdicts": {
+      "type": "array",
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "item_id": {
+            "type": "string"
+          },
+          "verdict": {
+            "type": "string",
+            "enum": [
+              "strong",
+              "plausible",
+              "unrelated",
+              "insufficient-information",
+              "A",
+              "B",
+              "tie",
+              "unresolved",
+              "faithful",
+              "unsupported"
+            ]
+          },
+          "evidence_ref": {
+            "type": "string"
+          }
+        },
+        "required": [
+          "item_id",
+          "verdict",
+          "evidence_ref"
+        ]
+      }
+    },
+    "note": {
+      "type": "string",
+      "maxLength": 250
+    }
   },
-  "required": ["item_id", "task_type", "label", "preference", "faithfulness", "evidence_refs", "rationale"]
+  "required": [
+    "verdicts",
+    "note"
+  ]
 }

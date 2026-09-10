@@ -1,6 +1,6 @@
 # Stage 1 experiment specification
 
-Status: proposed for user review; no Stage 2 authority. Evaluation provisions follow user amendment E1 and evaluation-protocol.md; Marc is the sole confirmed reviewer with a 40-item total cap. PLAN.md v2.0 is authoritative. This document makes its choices concrete without claiming evaluated quality.
+Status: historical Stage 1 specification, preserved below. User amendment B1 subsequently authorized Stage 2 and its nonvisual readiness repairs with one $10 ceiling. Current implementation, fixed parameters and limits are in stage2-candidate.json and reports/stage-2-report.md. No Stage 3 is authorized. Evaluation follows E1/B1 and evaluation-protocol.md; Marc remains the sole confirmed reviewer with a 40-item cap. Stage 1 proposals below are not claims that real ingredients or semantic evaluations now exist.
 
 ## Presentation freeze and implementation seam
 

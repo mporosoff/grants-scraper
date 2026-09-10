@@ -257,6 +257,8 @@ async function run() {
     "assets/team-researchers.js",
     "assets/opportunity-team.js",
     "assets/opportunity-team-panel.js",
+    "assets/team-recommender.js",
+    "assets/team-ingredients.js",
     "data/faculty_matches.js",
     "data/opportunity_team_index.js",
     "data/opportunity_teams.js",

@@ -37,6 +37,7 @@ function loadApi(fixture = null) {
     vm.runInNewContext(directorySource, context);
   }
   vm.runInNewContext(retrievalSource, context);
+  vm.runInNewContext(submissionSource, context);
   vm.runInNewContext(teamSource, context);
   return {
     api: context.globalThis.OpportunityTeam,
@@ -51,6 +52,8 @@ function loadIndex() {
   vm.runInNewContext(indexSource, context);
   return context.globalThis.OPPORTUNITY_TEAM_INDEX;
 }
+
+const submissionSource = await readFile(new URL("../../assets/submission-schedule.js", import.meta.url), "utf8");
 
 function record(id, overrides = {}) {
   return {
@@ -91,7 +94,7 @@ test("scope availability grows without a fixed pilot count and rejects mismatche
 test("every current advertised parent reaches a usable scope in the actual catalog", async () => {
   const context = { console };
   vm.createContext(context);
-  for (const source of [retrievalSource, indexSource, dataSource, directorySource, teamSource]) vm.runInContext(source, context);
+  for (const source of [retrievalSource, submissionSource, indexSource, dataSource, directorySource, teamSource]) vm.runInContext(source, context);
   vm.runInContext(await readFile(new URL("../../data/opportunities.js", import.meta.url), "utf8"), context);
   vm.runInContext(await readFile(new URL("../../data/subtopics.js", import.meta.url), "utf8"), context);
   context.document = { querySelector: () => ({ getAttribute: () => context.OPPORTUNITY_TEAM_INDEX.generation_id }) };
@@ -114,11 +117,20 @@ test("every current advertised parent reaches a usable scope in the actual catal
     const scopeId = context.opportunityTeamScopeId({ index }, record);
     const options = { record, parentId, scopeId, childCatalog, isBroad: context.isBroadOpportunity(record) };
     const resolved = engine.resolveScope(options);
-    if (scopeId) assert.equal(resolved.ok, true, `${parentId}: ${resolved.reason}`);
+    const submission = context.FUNDING_SUBMISSION_SCHEDULE.nextSubmission(record);
+    const submissionAllowed = ["open", "rolling", "not_listed"].includes(submission.access);
+    if (scopeId) {
+      if (submissionAllowed) assert.equal(resolved.ok, true, `${parentId}: ${resolved.reason}`);
+      else assert.equal(resolved.reason, "unsupported_scope", `${parentId}: ${submission.access}`);
+    }
     else {
       assert.equal(resolved.reason, "specific_scope_required", parentId);
       assert.ok(resolved.scopes.length, parentId);
-      for (const scope of resolved.scopes) assert.equal(engine.resolveScope({ ...options, scopeId: scope.id }).ok, true, scope.id);
+      for (const scope of resolved.scopes) {
+        const childOutcome = engine.resolveScope({ ...options, scopeId: scope.id });
+        if (submissionAllowed) assert.equal(childOutcome.ok, true, scope.id);
+        else assert.equal(childOutcome.reason, "unsupported_scope", `${scope.id}: ${submission.access}`);
+      }
     }
   }
 });
@@ -450,6 +462,7 @@ test("a stale or stalled lazy projection is discarded and retryable", async () =
   };
   const staleScript = { remove() { removed.push("stale"); } };
   const document = {
+    querySelector() { return {getAttribute: () => scope.OPPORTUNITY_TEAM_INDEX.generation_id}; },
     querySelectorAll() { return [staleScript]; },
   };
   vm.runInNewContext(teamSource, { globalThis: scope, document });
@@ -478,6 +491,7 @@ test("a stale or stalled lazy projection is discarded and retryable", async () =
     },
   };
   const timeoutDocument = {
+    querySelector() { return {getAttribute: () => timeoutScope.OPPORTUNITY_TEAM_INDEX.generation_id}; },
     querySelectorAll() { return []; },
     createElement() {
       const listeners = {};

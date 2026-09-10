@@ -1,0 +1,18 @@
+{
+  "observed_utc": "2026-09-10T00:30:30.166949+00:00",
+  "repository": "mporosoff/grants-scraper",
+  "preserved_stage1_head": "b6f71ae0396bd2670043291bc676ee8af0d222b2",
+  "preserved_stage1_tree": "094156f98f12645ffc4c77015f2b92737c67819d",
+  "protected_main_read_sha": "6adca6a795d4ab52e216e2ff7032d0e393db76b1",
+  "protected_main_read_protected": true,
+  "open_prs_at_final_read": 0,
+  "branch_owner_count": 1,
+  "matching_worktree": [
+    "worktree C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
+    "HEAD b6f71ae0396bd2670043291bc676ee8af0d222b2",
+    "branch refs/heads/codex/on-demand-team-recommender"
+  ],
+  "registered_worktrees": 56,
+  "starting_checkout_head": "dabaed933b71fd2572403371ae6c94090ed7cbe9",
+  "push_performed": false
+}

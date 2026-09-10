@@ -4,9 +4,11 @@
 **Repository:** `mporosoff/grants-scraper`  
 **Experimental branch:** `codex/on-demand-team-recommender`  
 **Execution:** Four stages. Each ends with a complete report and STOP for user review.  
-**Status:** Design and handoff only. Creating this plan did not create a branch, change the repository, start paid work, or deploy anything.
+**Status:** Stage 2 local implementation checkpoint; see reports/stage-2-report.md and experiment-state.json. The original design and Stage 1 report remain historical evidence. No Stage 3 or deployment authority is implied.
 
 **Evaluation amendment E1:** The user replaced conflicting human-annotation requirements during Stage 1. See `EVALUATION_AMENDMENT.md`, `evaluation-protocol.md`, and `annotation-packet.md`. The original v2.0 text is preserved in `history/PLAN-v2.0-original.md`. Architecture, presentation, stages, grouping, holdout and rollout constraints are unchanged. No paid execution is authorized by this amendment.
+
+**Budget amendment B1:** Stage 2 is explicitly authorized from checkpoint `b6f71ae0396bd2670043291bc676ee8af0d222b2`, including bounded readiness repairs. The single all-stage ceiling is $10; Stage 2 cumulative maximum is $6 with at least $4 reserved for separately approved later stages. The $69 proposal is rejected and preserved as history. Dollar authority does not authorize a protected-main prerequisite or a new provider. Read `BUDGET_AMENDMENT_B1.md` and the itemized `preparation-budget.json`.
 
 ## 0. Authority, scope, and the decision
 
@@ -135,7 +137,7 @@ A baseline can combine fixed nonnegative feature weights and bounded monotone si
 
 Use the same gate and features for component comparisons. The event being modeled is: **a knowledgeable evaluator would regard this as a reasonable person to discuss this particular scientific contribution with, based on the available profile**. It is not competence, possession of equipment, willingness, grant success, or verified role completion.
 
-Compare a simple fixed scorer, regularized logistic regression, and Bayesian logistic regression:
+Start with the fixed scorer. Regularized logistic and Bayesian logistic comparisons are optional when suitable development labels and the B1 budget permit:
 
 \[
 Y_{ip}\sim\mathrm{Bernoulli}(\sigma(\theta_0+\theta^T x_{ip})),\qquad
@@ -326,7 +328,7 @@ Use one primary judge, cached exact judgments, deduplicated evaluation items wit
 
 ### 8.3 Development comparison and frozen model choice
 
-Compare four declared arms on identical snapshots:
+Compare A and B on identical snapshots; C and D remain optional under B1:
 
 A. Whole-call embedding relevance with top-k people at matched size.
 B. Aspect-level gate plus weighted coverage and deterministic alternatives.
@@ -393,7 +395,7 @@ Do not change source catalogs, trigger new-opportunity alerts, re-embed search c
 
 ### 9.3 Budget and trusted execution
 
-Stage 1 is zero-paid-provider. Inventory usable source/aspect/vector data, unique missing items, explicit extraction batches, estimated tokens, embedding calls, retries, and caches. Present one stage-spanning preparation/evaluation ceiling with provider/models, unique evaluation item bounds, cumulative dollars, input/output tokens, request bounds, and existing trusted execution route or its concrete limitation. Explicit user approval is required before spending. Old Anthropic team-qualification allowance is not automatically repurposed.
+Stage 1 is zero-paid-provider. Inventory usable source/aspect/vector data, unique missing items, explicit extraction batches, estimated tokens, embedding calls, retries, and caches. Present one stage-spanning preparation/evaluation ceiling with provider/models, unique evaluation item bounds, cumulative dollars, input/output tokens, request bounds, and existing trusted execution route or its concrete limitation. B1 supplies the dollar authorization: $10 across all stages, cumulative $6 through Stage 2; later stages and a missing trusted route remain separately gated. Old Anthropic team-qualification allowance is not automatically repurposed.
 
 All usage/reservations are durable across retries; completed valid ingredients are reused. Model fitting and team arithmetic are local compute, not LLM calls. Count them separately from provider spend. Exhaustion defers paid preparation while preserving completed work; it does not authorize a new allowance or convert missing inputs into fake ready data.
 

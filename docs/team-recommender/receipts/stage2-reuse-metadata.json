@@ -1,0 +1,315 @@
+{
+  "observed_at": "2026-09-09T23:49:48.699797+00:00",
+  "read_only": true,
+  "inspection_roots": [
+    "economical-release/.offline-evaluation/*/ledger.json",
+    "economical-release/.offline-evaluation/34402343578/cache",
+    "economical-release/.cache"
+  ],
+  "ledger_snapshots": [
+    {
+      "snapshot": "34234658950",
+      "logical_id": "economical-ai-20260908",
+      "requests": 0,
+      "charged_microusd": 0,
+      "sha256": "9a7a238c5025931eb0ae22ba2320ecb59bdca90b31c72b8fb40ff39f684af17d"
+    },
+    {
+      "snapshot": "34234760078",
+      "logical_id": "economical-ai-20260908",
+      "requests": 1,
+      "charged_microusd": 88875,
+      "sha256": "2a65205a353b0b5af935573000e8baf8283864ae67d9595d8bbc71b71a1b9bfd"
+    },
+    {
+      "snapshot": "34255768570",
+      "logical_id": "economical-ai-20260908",
+      "requests": 2,
+      "charged_microusd": 88901,
+      "sha256": "ac8e715e3e3c7c64038c2317d367a097adbc589912e059b87798202b6d5c428a"
+    },
+    {
+      "snapshot": "34255888466",
+      "logical_id": "economical-ai-20260908",
+      "requests": 48,
+      "charged_microusd": 139366,
+      "sha256": "0d92fb975991259124b8be397dd3191fec768055be34da809f338af42290e976"
+    },
+    {
+      "snapshot": "34256488126",
+      "logical_id": "economical-ai-20260908",
+      "requests": 96,
+      "charged_microusd": 342499,
+      "sha256": "40b75f6d73b576e34e02a760fcbc05f7a0093b5d4d32b61bed2ec16ecaa447c1"
+    },
+    {
+      "snapshot": "34256646858",
+      "logical_id": "economical-ai-20260908",
+      "requests": 139,
+      "charged_microusd": 351718,
+      "sha256": "a8ba993bac1cc0cdcf077795da19ff6b68e0e0e524deac93051bc2d2b79a8183"
+    },
+    {
+      "snapshot": "34265194226",
+      "logical_id": "economical-ai-20260908",
+      "requests": 198,
+      "charged_microusd": 2098236,
+      "sha256": "d5bc5132d508ece41158621ffde8a611e13ee45987638d15f8b47b06e0c270d4"
+    },
+    {
+      "snapshot": "34267226821",
+      "logical_id": "economical-ai-20260908",
+      "requests": 250,
+      "charged_microusd": 2160280,
+      "sha256": "c0407c0d8eceb6727bb84038c3db2aec943048f935895e98d4ab86f61b1f7a32"
+    },
+    {
+      "snapshot": "34268178167",
+      "logical_id": "economical-ai-20260908",
+      "requests": 250,
+      "charged_microusd": 2160280,
+      "sha256": "c0407c0d8eceb6727bb84038c3db2aec943048f935895e98d4ab86f61b1f7a32"
+    },
+    {
+      "snapshot": "34282884790",
+      "logical_id": "economical-ai-20260908",
+      "requests": 271,
+      "charged_microusd": 2767866,
+      "sha256": "ab21e46457928cf12b8bcc43b8ee10c0acd5382f1d373a6f862ab58d663e9751"
+    },
+    {
+      "snapshot": "34283278316",
+      "logical_id": "economical-ai-20260908",
+      "requests": 273,
+      "charged_microusd": 2772630,
+      "sha256": "547a8d6a00001b6bfb3e8277e3218b958cf3ca0ff57586341113df4d6294a7f9"
+    },
+    {
+      "snapshot": "34283892954",
+      "logical_id": "economical-ai-20260908",
+      "requests": 273,
+      "charged_microusd": 2772630,
+      "sha256": "547a8d6a00001b6bfb3e8277e3218b958cf3ca0ff57586341113df4d6294a7f9"
+    },
+    {
+      "snapshot": "34284732993",
+      "logical_id": "economical-ai-20260908",
+      "requests": 295,
+      "charged_microusd": 3577096,
+      "sha256": "d91def0abf14ab5eac59aef96cafc619fc689fd111b46fa910e782773d285e15"
+    },
+    {
+      "snapshot": "34285066778",
+      "logical_id": "economical-ai-20260908",
+      "requests": 295,
+      "charged_microusd": 3577096,
+      "sha256": "d91def0abf14ab5eac59aef96cafc619fc689fd111b46fa910e782773d285e15"
+    },
+    {
+      "snapshot": "34300832276",
+      "logical_id": "economical-ai-20260908",
+      "requests": 307,
+      "charged_microusd": 4203224,
+      "sha256": "feb5145493d58849fbfc455bfa91ecd0f4d2473ec09325af705d13667a5617cb"
+    },
+    {
+      "snapshot": "34340584535",
+      "logical_id": "economical-ai-20260908",
+      "requests": 308,
+      "charged_microusd": 4203744,
+      "sha256": "d4cbd0a64fafa8a28c1a91d7cc392325918cadeb9f72481464b351b17be1e090"
+    },
+    {
+      "snapshot": "34344936486",
+      "logical_id": "economical-ai-20260908",
+      "requests": 309,
+      "charged_microusd": 4204264,
+      "sha256": "e87967bbf9402729a3b5e4419c469037c98a3ecb8c930e42663a64f265d5cecf"
+    },
+    {
+      "snapshot": "34345053311",
+      "logical_id": "economical-ai-20260908",
+      "requests": 315,
+      "charged_microusd": 4517004,
+      "sha256": "bf8b5bac9e823a6f0593a091097e84ef42e57ff8a18399f0b4d624d78483bf51"
+    },
+    {
+      "snapshot": "34345705095",
+      "logical_id": "economical-ai-20260908",
+      "requests": 355,
+      "charged_microusd": 5840072,
+      "sha256": "e7c53364e33409130272ab7aedde7b4b75689db78a4134ae65df8807d92b14d3"
+    },
+    {
+      "snapshot": "34349999546",
+      "logical_id": "economical-ai-20260908",
+      "requests": 356,
+      "charged_microusd": 5840592,
+      "sha256": "c70cf7abe9493a832f31f3a83022cb480d35a7f9a3906057d07e70345338fa2a"
+    },
+    {
+      "snapshot": "34350176208",
+      "logical_id": "economical-ai-20260908",
+      "requests": 362,
+      "charged_microusd": 6141752,
+      "sha256": "47e80237527ad02da075c77c10d8437730bcb205e4342034b957e7cc389160ea"
+    },
+    {
+      "snapshot": "34350655624",
+      "logical_id": "economical-ai-20260908",
+      "requests": 375,
+      "charged_microusd": 6771116,
+      "sha256": "f9ebc47fb611b39f0f38e9e87c54f2ceda36b90851a14ed6e894013afeb6effb"
+    },
+    {
+      "snapshot": "34351528204",
+      "logical_id": "economical-ai-20260908",
+      "requests": 380,
+      "charged_microusd": 6791422,
+      "sha256": "e07f93ae10ca65c12defdc4958ef4394b1f5f4d170f55e5d5862eefd206317b9"
+    },
+    {
+      "snapshot": "34351974515",
+      "logical_id": "economical-ai-20260908",
+      "requests": 418,
+      "charged_microusd": 6932930,
+      "sha256": "f5e91f123377ca0f16de272bf49a3aa72bb98efe4f1a041429a79ce0cc58f80d"
+    },
+    {
+      "snapshot": "34355444392",
+      "logical_id": "economical-ai-20260908",
+      "requests": 422,
+      "charged_microusd": 7169836,
+      "sha256": "60fc43ee2176d89d81904ceda56935e8463f8bf7536a62e5c88312d96c705977"
+    },
+    {
+      "snapshot": "34360404301",
+      "logical_id": "economical-ai-20260908",
+      "requests": 422,
+      "charged_microusd": 7169836,
+      "sha256": "60fc43ee2176d89d81904ceda56935e8463f8bf7536a62e5c88312d96c705977"
+    },
+    {
+      "snapshot": "34361480727",
+      "logical_id": "economical-ai-20260908",
+      "requests": 426,
+      "charged_microusd": 7389962,
+      "sha256": "2b5fb396833ad9b140affa162dba693f872e73a572d51ab1a0537e1ee7457753"
+    },
+    {
+      "snapshot": "34362339295",
+      "logical_id": "economical-ai-20260908",
+      "requests": 431,
+      "charged_microusd": 7664040,
+      "sha256": "8f021cdb70b0db39fef04faaee45a679a806ce3f3f6d27e2383cd76d43da90b0"
+    },
+    {
+      "snapshot": "34363212157",
+      "logical_id": "economical-ai-20260908",
+      "requests": 440,
+      "charged_microusd": 8071538,
+      "sha256": "0cc25d8d2592976f505518761a62e4022a8980533d61b36d355e770217b0bab6"
+    },
+    {
+      "snapshot": "34363866498",
+      "logical_id": "economical-ai-20260908",
+      "requests": 452,
+      "charged_microusd": 8410234,
+      "sha256": "950d2b3f624598e141d9974888a59ecf82401b7f3a48767fd60cdac710ebe626"
+    },
+    {
+      "snapshot": "34387213583",
+      "logical_id": "economical-ai-20260908",
+      "requests": 452,
+      "charged_microusd": 8410234,
+      "sha256": "ac692323ebd0d151186a4c5e9830c46fa669b7111b2a996e071c34d572cb5bc3"
+    },
+    {
+      "snapshot": "34387414406",
+      "logical_id": "economical-ai-20260908",
+      "requests": 452,
+      "charged_microusd": 8410234,
+      "sha256": "ac692323ebd0d151186a4c5e9830c46fa669b7111b2a996e071c34d572cb5bc3"
+    },
+    {
+      "snapshot": "34387510435",
+      "logical_id": "economical-ai-20260908",
+      "requests": 465,
+      "charged_microusd": 8696054,
+      "sha256": "7fb716eddedf348e602029c6faa14fa16e677248a1151e80f1fc034574a9f64d"
+    },
+    {
+      "snapshot": "34388134559",
+      "logical_id": "economical-ai-20260908",
+      "requests": 482,
+      "charged_microusd": 9450382,
+      "sha256": "67b17e5ecee3989b08991063206ddc59e21d0a413e134f8ae428ab39f87f26ab"
+    },
+    {
+      "snapshot": "34392138448",
+      "logical_id": "economical-ai-20260908",
+      "requests": 498,
+      "charged_microusd": 9962248,
+      "sha256": "abbe4f7dad12707515730400003f491ac0edf138399ffd2cdd02946380fb4cad"
+    },
+    {
+      "snapshot": "34393056404",
+      "logical_id": "economical-ai-20260908",
+      "requests": 514,
+      "charged_microusd": 10740756,
+      "sha256": "1af64c47bc9e86d083c927a34853399ab3341d813c2807c0e2fd7ec313394a8d"
+    },
+    {
+      "snapshot": "34399198357",
+      "logical_id": "economical-ai-20260908",
+      "requests": 514,
+      "charged_microusd": 10740756,
+      "sha256": "97e83c2bba967d3fd33dc06c6296db8aa9a64db63abcf2aa664d1486388653bf"
+    },
+    {
+      "snapshot": "34399389043",
+      "logical_id": "economical-ai-20260908",
+      "requests": 537,
+      "charged_microusd": 11635520,
+      "sha256": "67939192fd719135182fdba71272a38952ae17b9dc20c4163fc2c96d5330b77c"
+    },
+    {
+      "snapshot": "34402343578",
+      "logical_id": "economical-ai-20260908",
+      "requests": 543,
+      "charged_microusd": 11971342,
+      "sha256": "2b6d98f247794b3a52f511f0a49a270c8e1b51198451c440336b40cececda8f9"
+    },
+    {
+      "snapshot": "luna-warm-replay",
+      "logical_id": "economical-ai-20260908",
+      "requests": 48,
+      "charged_microusd": 139366,
+      "sha256": "12777a852b28a9dd9a2f5e93528f2b675de400e0939e7ed291385edb943b14aa"
+    },
+    {
+      "snapshot": "round2-replay-old-head-reproducer",
+      "logical_id": "economical-ai-20260908",
+      "requests": 0,
+      "charged_microusd": 0,
+      "sha256": "8f32a7d4f893d0750e691e2c97be9c4501373ff6314b26b651801f152e41db14"
+    }
+  ],
+  "snapshots_are_overlapping_not_additive": true,
+  "existing_experiment_ledger_matches": [],
+  "historical_reused_spending_credit_usd": 0,
+  "latest_historical_cache_files": 481,
+  "unique_exact_cache_keys": 481,
+  "returned_model_counts": {
+    "claude-sonnet-5": 291,
+    "gpt-5.6-luna": 142,
+    "gpt-5.4-mini-2026-03-17": 48
+  },
+  "v2_source_receipts": 0,
+  "compatible_claim_aspect_vector_cache_files": 0,
+  "cache_values_reused_for_judging_or_publication": 0,
+  "old_judgment_compatibility": "Different prompt/schema/scientific event; retained model results are exposed historical development evidence, not E1 labels or source-validation receipts. No result values exported or used.",
+  "raw_provider_responses_exported": false,
+  "actual_experiment_spend_reconciled_usd": 0,
+  "limitations": "No provider account-wide invoice read; no provider requests by this experiment. Local historical snapshots overlap and are never summed or credited. Absence at inspected authorized roots is not proof about remote private stores."
+}

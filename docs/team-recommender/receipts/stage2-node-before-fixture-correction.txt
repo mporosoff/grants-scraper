@@ -1,0 +1,108 @@
+✔ validates the registry-identified staged directory without fixed counts (58.1215ms)
+✔ scope availability grows without a fixed pilot count and rejects mismatched counts (4.6615ms)
+✔ every current advertised parent reaches a usable scope in the actual catalog (520.8765ms)
+✔ directory search omits inactive, departed, and hidden researchers while preserving identities (13.8698ms)
+✔ stale teams are withheld without blocking the directory or unaffected scopes (3.2302ms)
+✔ proposed variants are distinct and never reintroduce an excluded researcher (6.5362ms)
+✔ generated team alternatives keep complementary contributions after exclusions (3315.6026ms)
+✔ an unsupported matched child falls back to the parent's topic selector (1.4888ms)
+✔ published child teams stay reachable without an umbrella phrase in the parent description (1.1119ms)
+✔ equal-coverage options start with direct experience and expose method transfer (4.49ms)
+✔ a generated alternative retains its exact claim evidence instead of generic profile terms (2.5169ms)
+✔ admits only current specific parents, eligible children, and declared branches (1.8094ms)
+✔ runtime catalog state overrides a generated proposal at one immutable clock (1.564ms)
+✔ removal exposes missing roles and replacements cannot silently claim unaudited coverage (3.4041ms)
+✔ Funding Finder team proposals are lazy, rerender-safe and use the shared drawer (1.3799ms)
+✔ the eager availability index is exact, bounded, and omits the full team graph (8.9769ms)
+✔ a stale or stalled lazy projection is discarded and retryable (15.2389ms)
+✔ Team Match exposes directory and governed missing-researcher paths (0.9168ms)
+✔ existing researcher, legacy and claim mappings survive mutable registry publication (12.3958ms)
+✔ protected PR and push gates fetch the pre-change registry while refresh and publication use their current checkout (7.6748ms)
+✔ consistent regeneration cannot hide reassigned or removed historical identities (12.4627ms)
+✔ one generated registry generation owns every public researcher projection (6.9973ms)
+✔ stable researcher and claim identities preserve every legacy browser ID (9.4415ms)
+✔ runtime validates generated manifest counts instead of a frozen roster (0.5528ms)
+✔ Team Builder consumes the existing proposal/removal/replacement API and retains exact Team Match links (467.2897ms)
+✔ closed and rerendered team contexts cannot be repopulated by a late shared data load (48.1183ms)
+✔ Team Match currentness uses posted age only for undated non-rolling opportunities (12.6578ms)
+✔ child evidence can help only runtime-current parents and final rows stay eligible (8.0546ms)
+✔ Team Match cache and release identities cover the changed page (12.549ms)
+✔ Funding Finder and Team Match delegate to one shared currentness contract (0.8831ms)
+✔ actual lazy loader and renderer: cold eight options, unconfirmed evidence, add/remove and zero provider requests (208.4103ms)
+✔ expiry between open and edit withdraws cached recommendations at a refreshed action clock (75.948ms)
+✔ prepared no-group preserves individual and manual/Team Match paths without a fabricated team (42.227ms)
+✔ corrupt cold assets and retry fail safely while the directory remains available (41.5929ms)
+✔ package generation changes reject actions and late loads; closure keeps late results out (113.1167ms)
+✔ a new atomic package changes identity; corrupt package cannot replace a good snapshot (40.8267ms)
+✔ weighted coverage improves complementarity at matched size; exact small-pool result (68.6121ms)
+✔ all admitted people reachable with supported or unconfirmed roles; restore and full slots (33.9978ms)
+✔ single researcher yields a valid prepared no-group with individual suggestions (11.1278ms)
+✔ one source-backed direct link never confirms a different contribution (25.6303ms)
+✔ matching words, direct registry evidence and cached model approval cannot create proof (50.4128ms)
+✔ source change and receipt expiry are different from valid no-group (29.6251ms)
+✔ deadline expiration, rolling, forecast and closed prerequisite reuse authoritative policy (29.3697ms)
+✔ child identity, parent policy, sibling isolation and child publication/currentness (29.5459ms)
+✔ rejects retired claim (21.7186ms)
+✔ rejects claim revision (17.3715ms)
+✔ rejects profile omitted (13.8975ms)
+✔ rejects source sibling (21.5462ms)
+✔ rejects source span truncation (17.15ms)
+✔ rejects source descriptor fabrication (17.1792ms)
+✔ rejects method composed from another claim (11.632ms)
+✔ rejects mixed space (9.4133ms)
+✔ rejects same dimension different role (15.1855ms)
+✔ rejects private surplus field (10.7167ms)
+✔ rejects unsafe evidence URL (13.9365ms)
+✔ rejects changed query text (22.3716ms)
+✔ rejects weight inflation (20.1322ms)
+✔ rejects mixed registry (5.6176ms)
+✖ rejects unknown source state (9.5199ms)
+✔ corrupt vector bytes and nonfinite/norm values fail closed (31.3922ms)
+✔ snapshot is immutable, state generation fails closed and cached reads do not recompute (22.3382ms)
+✔ topic and evidenced method gates reject generic and unrelated passages; no metadata diversity reward (4.2583ms)
+✔ poor pools, redundant members and near-best size selection match exhaustive reference (4.3939ms)
+✔ asset loader is bounded same-origin static only; cold, repeat and corruption never reach providers (60.9043ms)
+✔ exact unchanged row computations survive a cosmetic profile update; changed vectors cannot reuse them (3.4549ms)
+✔ duplicate/verbose profiles and generic extra passages do not gain arbitrary credit (14.8068ms)
+✔ oversized, repeated-group, private source-span and mixed-vector contracts fail before ranking (31.5072ms)
+✔ all frozen presentation functions and fixed output strings are unchanged (174.8851ms)
+✔ HTML changes are content hash references and the declared directory-loading seam only (316.1499ms)
+✔ remaining frozen files, Stage 1 report, old services and policies retain exact bytes (519.279ms)
+✔ 32 deterministic small-pool cases agree with independent Python exact optimization (257.5246ms)
+✔ deliberate 2/3/4 size selection and every final marginal contribution (5.1577ms)
+✔ duplicate evidence and aspect splitting do not buy utility; matched-size A/B and MMR comparison (13.2954ms)
+✔ 155-person full-directory scoring stays within work budget and reaches everyone (295.4139ms)
+ℹ tests 74
+ℹ suites 0
+ℹ pass 73
+ℹ fail 1
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 4176.5415
+
+✖ failing tests:
+
+test at tests\browser\team-recommender-contract.test.mjs:82:4
+✖ rejects unknown source state (9.5199ms)
+  AssertionError [ERR_ASSERTION]: The input did not match the regular expression /Unprepared/. Input:
+
+  'Error: Original-source validation inventory mismatch.'
+
+      at async TestContext.<anonymous> (file:///C:/Users/Marc%20Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender/tests/browser/team-recommender-contract.test.mjs:82:69)
+      at async Test.run (node:internal/test_runner/test:1389:7)
+      at async Test.processPendingSubtests (node:internal/test_runner/test:960:7) {
+    generatedMessage: true,
+    code: 'ERR_ASSERTION',
+    actual: Error: Original-source validation inventory mismatch.
+        at requireValue (evalmachine.<anonymous>:21:55)
+        at Object.hydrate (evalmachine.<anonymous>:84:5)
+        at async waitForActual (node:assert:646:5)
+        at async strict.rejects (node:assert:769:25)
+        at async TestContext.<anonymous> (file:///C:/Users/Marc%20Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender/tests/browser/team-recommender-contract.test.mjs:82:69)
+        at async Test.run (node:internal/test_runner/test:1389:7)
+        at async Test.processPendingSubtests (node:internal/test_runner/test:960:7),
+    expected: /Unprepared/,
+    operator: 'rejects',
+    diff: 'simple'
+  }

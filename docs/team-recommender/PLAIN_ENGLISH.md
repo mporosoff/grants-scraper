@@ -1,5 +1,7 @@
 > Evaluation amended by the user during Stage 1: see EVALUATION_AMENDMENT.md. The original summary is preserved in history/PLAIN_ENGLISH-v2.0-original.md.
 
+> Stage 2 and the single $10 experiment ceiling are now authorized by B1, with cumulative Stage 2 spending limited to $6. See BUDGET_AMENDMENT_B1.md and reports/stage-2-report.md for the actual implementation checkpoint and remaining limitations. Stage 3 and publication remain unapproved.
+
 # The revised plan in plain English
 
 **Version 2.0 · September 9, 2026**  

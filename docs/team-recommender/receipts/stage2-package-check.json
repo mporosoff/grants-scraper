@@ -1,0 +1,10 @@
+{
+  "command": "node tools/build_search_release_package.mjs --check",
+  "status": "verified",
+  "source_release_sha256": "38d204aedfd658cc779d8c1157dd14a9d071079f0e12244761604e14ceda278e",
+  "current_corpus_sha256": "d0e61393452e57f6b82e27e856af590167fa471feccb5aee72cbac5465f8d4ee",
+  "vector_sha256": "4888ab1d0c6d7bc044f4d1e8725838b0d533dddeda0f672905274f5a94403522",
+  "worker_allowlist_sha256": "0ca755ad269f0a1d604c5602dea6ad81f5301fa4f8c59d5906e9dee1790b6401",
+  "passage_count": 1629,
+  "provider_calls": 0
+}

@@ -1,0 +1,73 @@
+{
+  "reference": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "arch": "x64",
+    "cpu": "Intel(R) Core(TM) Ultra 7 165U",
+    "logical_processors": 14
+  },
+  "fixture_only": true,
+  "real_semantic_measurements": false,
+  "provider_calls": 0,
+  "real_browser": false,
+  "hydrated_fixture": {
+    "people": 155,
+    "passages": 155,
+    "scopes": 1,
+    "raw_package_bytes": 725207,
+    "local_gzip_bytes": 6397,
+    "cold_hydrate_matrix_and_group_ms": 138.9866,
+    "warm_view_options_p95_ms": 0.6695000000000277,
+    "warm_samples": 50,
+    "heap_delta_bytes": 20935104,
+    "byte_delta_includes_later_harness": true
+  },
+  "full_shape": {
+    "people": 155,
+    "passages": 402,
+    "aspects": 8,
+    "dimensions": 1024,
+    "samples": 30,
+    "warmups": 5,
+    "matrix_p95_ms": 32.391599999999926,
+    "group_p95_ms": 187.47300000000018,
+    "maximum_coverage_work": 84185,
+    "declared_work_limit": 300000,
+    "options": 8,
+    "typed_vector_bytes": 1683456
+  },
+  "candidate_parameters": {
+    "topic": 0.4,
+    "core": 0.3,
+    "method": 0.5,
+    "context": 0.5,
+    "anchor": 0.5,
+    "group": 0.55,
+    "marginal": 0.03,
+    "envelope": 0.95,
+    "maxOptions": 8,
+    "maxPeople": 200,
+    "maxAspects": 8,
+    "maxPassages": 16,
+    "workLimit": 300000,
+    "exactPool": 12,
+    "swapStartsPerSize": 8,
+    "aspectWeight": 0.5,
+    "coreWeight": 0.3,
+    "lexicalWeight": 0.2,
+    "mmr": 0
+  },
+  "measured_assets": {
+    "assets/team-recommender.js": 10321,
+    "assets/team-ingredients.js": 32909,
+    "assets/opportunity-team.js": 33202,
+    "assets/opportunity-team-panel.js": 22969
+  },
+  "unmeasured": [
+    "real 150-scope ingredient payload",
+    "real browser wire transfer/decode/heap/long tasks",
+    "physical device timings",
+    "real recommendation quality",
+    "semantic threshold calibration"
+  ]
+}

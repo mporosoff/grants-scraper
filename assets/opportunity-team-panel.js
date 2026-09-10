@@ -274,7 +274,7 @@
     return childCatalogPromise;
   }
 
-  function resolveCurrent(current) {
+  function resolveCurrent(current, preserveState) {
     if (!current || !panelOwned(current) || !current.engine) return;
     var sequence = ++current.scopeSequence;
     var tentative = current.engine.opportunityById.get(current.scopeId);
@@ -284,21 +284,23 @@
     var childReady = needChildren ? loadChildCatalog() : Promise.resolve(null);
     childReady.then(function (childCatalog) {
       if (!reconcile(current) || current.scopeSequence !== sequence) return;
+      if (API.pageGenerationId() !== current.generationId) throw new Error("Team package changed; reopen the panel.");
       current.childCatalog = childCatalog;
+      current.record = catalogRecord(current.parentId);
       var outcome = current.engine.resolveScope({
         parentId: current.parentId,
         scopeId: current.scopeId,
         record: current.record,
         childCatalog: childCatalog,
         isBroad: current.isBroad,
-        now: current.now,
+        now: new Date(),
       });
       if (!outcome.ok) {
         renderUnavailable(current, outcome.reason, outcome.scopes);
         return;
       }
       current.scopeId = outcome.opportunity.id;
-      current.state = current.engine.proposal(outcome.opportunity);
+      if (!preserveState || !current.state || current.state.opportunityId !== outcome.opportunity.id) current.state = current.engine.proposal(outcome.opportunity);
       renderProposal(current);
     }).catch(function (error) {
       if (reconcile(current) && current.scopeSequence === sequence) renderFailure(current, error);
@@ -315,13 +317,30 @@
       renderFailure(current, error);
       return;
     }
+    var sequence = ++current.scopeSequence;
+    current.generationId = generationId;
     API.loadData(generationId).then(function (data) {
-      if (!reconcile(current)) return;
+      if (!reconcile(current) || current.scopeSequence !== sequence) return;
+      if (API.pageGenerationId() !== generationId) throw new Error("Superseded team package.");
       current.engine = API.create(data);
-      resolveCurrent(current);
+      resolveCurrent(current, true);
     }).catch(function (error) {
-      if (reconcile(current)) renderFailure(current, error);
+      if (reconcile(current) && current.scopeSequence === sequence) renderFailure(current, error);
     });
+  }
+
+  function actCurrent(current, mutation) {
+    if (!reconcile(current) || !current.state || !current.engine) return;
+    try {
+      if (API.pageGenerationId() !== current.generationId) throw new Error("Team package changed; reopen the panel.");
+      // One decision clock for validation, mutation, options and rendering of this action.
+      current.record = catalogRecord(current.parentId);
+      var outcome = current.engine.resolveScope({parentId: current.parentId, scopeId: current.scopeId,
+        record: current.record, childCatalog: current.childCatalog, isBroad: current.isBroad, now: new Date()});
+      if (!outcome.ok) { renderUnavailable(current, outcome.reason, outcome.scopes); return; }
+      mutation();
+      renderProposal(current);
+    } catch (error) { renderFailure(current, error); }
   }
 
   document.addEventListener("click", function (event) {
@@ -353,21 +372,22 @@
     var remove = event.target.closest("[data-opportunity-team-remove]");
     var variant = event.target.closest("[data-opportunity-team-variant]");
     if (variant && reconcile(current) && current.state) {
-      var option = current.engine.proposalOptions(current.state)[Number(variant.getAttribute("data-opportunity-team-variant"))];
-      if (option) { current.state = option.state; renderProposal(current); }
+      actCurrent(current, function () {
+        var option = current.engine.proposalOptions(current.state)[Number(variant.getAttribute("data-opportunity-team-variant"))];
+        if (option) current.state = option.state;
+      });
       return;
     }
     if (remove && reconcile(current) && current.state) {
-      current.state = current.engine.removeMember(current.state, remove.getAttribute("data-opportunity-team-remove"));
-      renderProposal(current);
+      actCurrent(current, function () { current.state = current.engine.removeMember(current.state, remove.getAttribute("data-opportunity-team-remove")); });
       return;
     }
     var add = event.target.closest("[data-opportunity-team-add-replacement]");
     if (add && reconcile(current) && current.state) {
       var select = current.panel.querySelector("[data-opportunity-team-replacement]");
       if (select && select.value) {
-        current.state = current.engine.addReplacement(current.state, select.value);
-        renderProposal(current);
+        var selectedValue = select.value;
+        actCurrent(current, function () { current.state = current.engine.addReplacement(current.state, selectedValue); });
       }
     }
   });

@@ -164,7 +164,7 @@
 <script src="assets/team-matcher.js?v=40ba71f054623a718d5ecb9d0b5897884cba3c716295276b6c281d734b9d49e6"></script>
 <script src="data/researcher_directory.js?v=07f1b0b86c534b64ddd8e3dc4305c1e36d1f6652604581e48edfb5b6fdab8453"></script>
 <script src="data/opportunity_team_index.js?v=07f1b0b86c534b64ddd8e3dc4305c1e36d1f6652604581e48edfb5b6fdab8453"></script>
-<script src="assets/opportunity-team.js?v=62a8c2b388a475ca490316a5cf40ea037c6e40522786b94a23ba78ef2636af8e"></script>
+<script src="assets/opportunity-team.js?v=62e8983f0693536afddb1cc896f79621f59ca88de2b0e18fa0462f686de33dfd"></script>
 <script src="assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"></script>
 <script src="assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"></script>
 <script>
@@ -1038,7 +1038,7 @@
     if (teamDirectoryPromise) return teamDirectoryPromise;
     if (!OPPORTUNITY_TEAM_API) return Promise.reject(new Error("The faculty directory helper is unavailable."));
     $("faculty-search-status").textContent = "Loading the Hajim faculty directory…";
-    teamDirectoryPromise = OPPORTUNITY_TEAM_API.loadData(OPPORTUNITY_TEAM_API.pageGenerationId()).then(function (data) {
+    teamDirectoryPromise = OPPORTUNITY_TEAM_API.loadDirectory().then(function (data) {
       TEAM_DIRECTORY_DATA = data;
       data.faculty.forEach(function (profile) {
         if (profile.pool_state !== "unadmitted") directoryFacultyKey(profile);

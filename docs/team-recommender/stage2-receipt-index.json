@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "source_checkpoint": "b6f71ae0396bd2670043291bc676ee8af0d222b2",
+  "candidate_sha256": "bebc5184763ef5185f6741c4ac7ae677eeb307a81fb21fb3bc137f7621d370be",
+  "dependency_digest_sha256": "a631cf5026400d1aba0e9af28f732f7ae8d3629110c52fdc3218870f6c62944c",
+  "report_sha256": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351",
+  "receipts": {
+    "docs/team-recommender/receipts/stage2-checkpoint-read.json": "dc9775088d57062e4371006da3900d7efbfeafd0e2946ab8fbc2152bd1ca465f",
+    "docs/team-recommender/receipts/stage2-live-read.json": "601b45a1f3cbb1bd6e5d549e45676c5d9e2ca3c1b02dbde063cfa6bf43554d42",
+    "docs/team-recommender/receipts/stage2-node-before-fixture-correction.txt": "fd880034377978e121f877d068bccdeb76cc02cf14a4fd4ba0f7556416d70351",
+    "docs/team-recommender/receipts/stage2-node.txt": "4b2d36ddd10c707da5aca07274886db3b889aa6b740bcb546d984a96f9e1c6fb",
+    "docs/team-recommender/receipts/stage2-package-check.json": "246f5d676ae5e23b88f1efd41ce69057c1dce4d0ef6a522962caa74c33d42405",
+    "docs/team-recommender/receipts/stage2-python.txt": "b05e7e782c9270a3274fb2920f1aa87c256f2a0a70e916649e24257948b4d8cc",
+    "docs/team-recommender/receipts/stage2-resource-measurements.json": "b411517c4f2f95b6ce4320688fb0032fab491f7d5e5a247a519ff4b300d70972",
+    "docs/team-recommender/receipts/stage2-reuse-metadata.json": "d17edea69316dcce662fe5120a857ac1cdb2ed9230bb28cba4267aa95b62df6d",
+    "docs/team-recommender/receipts/stage2-source-inventory.json": "9055df8b009a81e1398d9673658d7865fa71264cd559caba1bba531128170090"
+  },
+  "checks": {
+    "focused_node_passed": 74,
+    "focused_python_passed": 49,
+    "total_focused_tests": 123,
+    "independent_small_pool_cases": 32,
+    "presentation_frozen_unchanged_files": 36,
+    "presentation_frozen_functions": 9,
+    "html_deltas": "version hashes and directory loading only",
+    "local_package_check": "passed",
+    "full_e2e": "not-run-not-authorized",
+    "playwright": "not-run-not-authorized",
+    "real_browser": "not-run",
+    "human_semantic_judgments": 0,
+    "model_semantic_judgments": 0,
+    "paid_prepared_scope_fixture_requests": 0
+  },
+  "commands": {
+    "node": "node --test tests/browser/opportunity-team-contract.test.mjs tests/browser/stage2-team-drawer-lifecycle.test.mjs tests/browser/team-currentness-contract.test.mjs tests/browser/researcher-registry-contract.test.mjs tests/browser/team-recommender-contract.test.mjs tests/browser/team-recommender-reference.test.mjs tests/browser/team-ingredients-panel-contract.test.mjs tests/browser/team-recommender-freeze.test.mjs",
+    "python": "python -m unittest tests.test_currentness tests.test_researcher_registry tests.test_opportunity_team_model tests.test_team_recommender_budget tests.test_team_recommender_source tests.test_team_recommender_evaluation",
+    "package": "node tools/build_search_release_package.mjs --check"
+  },
+  "test_scope": "Focused Node DOM and Python contracts; no full E2E, Playwright, actual browser or external review.",
+  "text_receipt_encoding": "UTF-8 LF; trailing whitespace removed from retained failed test output without changing test results."
+}
