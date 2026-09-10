@@ -1,3 +1,5 @@
+> Current C2 execution: trusted executor merged; real vectors and development outputs now exist. See evaluation-C2-execution.md and receipts/c2-development-judge-plan.json. Prior zero-run/unavailable-route and optional-comparison omissions below are historical, superseded by C2. Stage 3 remains unauthorized.
+
 # How to give this plan to Codex
 
 > Current authority: September 10 continuation C2 explicitly resumes the C1 checkpoint and authorizes two additional persistence repair/re-review iterations on PR #215, protected merge if clean, and completion of real Stage 2 under the same $10/$6 limits. Read [CONTINUATION_C2.md](CONTINUATION_C2.md). Prior checkpoint statements below are preserved as history. No Stage 3 or holdout recommendations are authorized.

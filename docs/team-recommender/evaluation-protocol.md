@@ -1,3 +1,5 @@
+> Current C2 execution: trusted executor merged; real vectors and development outputs now exist. See evaluation-C2-execution.md and receipts/c2-development-judge-plan.json. Prior zero-run/unavailable-route and optional-comparison omissions below are historical, superseded by C2. Stage 3 remains unauthorized.
+
 # Fixed offline judge protocol — E1/B1 v2, not executed
 
 Authority: PLAN v2.0 + explicit user amendments E1, B1 and C1. Stage 2 is approved; model/human judgments completed: **0/0**. Marc Porosoff is the sole confirmed human reviewer. One $10 ceiling covers all stages, cumulative $6 through Stage 2 with at least $4 for later stages. C1 authorizes the narrow task-specific trusted prerequisite. Proposed PR #215 remains unmerged at a review-convergence checkpoint; operational execution is still unavailable. Prior protocol/prompt/schema and the rejected $69 budget are preserved in history. B1 batching replaces the former one-request-per-item cost plan, without changing the semantic rubric, grouped cases or acceptance targets.

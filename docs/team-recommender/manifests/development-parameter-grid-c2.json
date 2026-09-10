@@ -1,0 +1,16 @@
+{
+  "version":"C2-small-grid-1",
+  "frozen_before_first_real_recommendation_calculation":true,
+  "source_recipe":"05345510d4f718d1fc8070e8d5296d08b93d72dadd08798f967a7e484fbb36e9",
+  "candidates":[
+    {"id":"engineering-v2.1","overrides":{}},
+    {"id":"bounded-low","overrides":{"topic":0.3,"core":0.25,"anchor":0.4,"group":0.45}},
+    {"id":"bounded-middle","overrides":{"topic":0.4,"core":0.3,"anchor":0.4,"group":0.45}},
+    {"id":"bounded-high","overrides":{"topic":0.5,"core":0.35,"anchor":0.5,"group":0.55}},
+    {"id":"bounded-low-semantic","overrides":{"topic":0.3,"core":0.25,"anchor":0.4,"group":0.45,"aspectWeight":0.6,"lexicalWeight":0.1}}
+  ],
+  "shared":{"marginal":0.03,"envelope":0.95,"team_sizes":[2,3,4],"max_options":8,"method":0.5,"context":0.5,"coreWeight":0.3},
+  "MMR":[0,0.1],
+  "learning":{"features":8,"event":"Worth discussing for this scientific contribution based on available public evidence","labels":"same noisy model-judge development labels; insufficient excluded with denominator","folds":5,"grouping":"source-group-amendment-c2-f92fc5995a0a1ac0.json","regularized_C":[0.1,1,10],"bayesian_prior_sd":[0.5,1,2],"inference":"deterministic Laplace approximation"},
+  "rule":"Compare all initial outcomes. Prefer the simplest fixed candidate if optional components do not show a clear grouped development benefit without unrelated-rate harm. No threshold additions after judging. Acceptance targets remain unchanged; a selected engineering candidate that misses quality targets is REVISE, not a qualified winner."
+}

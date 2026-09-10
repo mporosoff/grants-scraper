@@ -102,6 +102,10 @@
       }
       visit([], 0);
     } else {
+      // Greedy starts can miss a feasible pair when their best single addition
+      // makes the seed redundant. Enumerate bounded pairs before larger starts;
+      // admission of another reasonable candidate must not hide existing pairs.
+      for (let i = 0; i < people.length; i++) for (let j = i + 1; j < people.length; j++) offer([people[i], people[j]]);
       const starts = new Map();
       // Every admitted person gets a start; nonanchors first receive their best anchor.
       for (const seed of people) {
@@ -152,8 +156,11 @@
     }
     return {options, feasibleCount: all.length, examinedCoverage: work, maximum, defaultIds: first?.ids || []};
   }
-  function baseline(m, size, excluded = []) {
-    return m.admitted.filter(r => !excluded.includes(r.id)).slice().sort((a, b) => quantize(b.baseline) - quantize(a.baseline) || cmp(a.id, b.id)).slice(0, size).map(r => r.id);
+  function baseline(m, size, excluded = [], floors = {topic: .3, core: .25}) {
+    // The comparison arm must not inherit the coverage arm's aspect admission.
+    return m.rows.filter(r => !excluded.includes(r.id) && r.baseline >= floors.topic
+      && (r.core ?? Math.max(0, ...r.edges.map(e => e.core))) >= floors.core)
+      .slice().sort((a, b) => quantize(b.baseline) - quantize(a.baseline) || cmp(a.id, b.id)).slice(0, size).map(r => r.id);
   }
   global.TeamRecommender = Object.freeze({VERSION, PARAMETERS, cmp, quantize, signature, tokens, overlap, dot, LRU, edge, matrix, coverage, optimize, baseline});
 })(globalThis);
