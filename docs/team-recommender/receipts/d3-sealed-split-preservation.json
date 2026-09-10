@@ -1,0 +1,13 @@
+{
+  "baseline_head": "6b74ea43f9b402c93be323335cc0bbbb50b2cbe1",
+  "holdout_scored": false,
+  "method": "Exact Git blob/current file byte comparison only; no holdout recommendation outputs inspected or computed",
+  "new_human_requests": 0,
+  "unchanged": {
+    "docs/team-recommender/human-review/development-packet-c2.md": "13ff8b3e715c12ea910f5f02c1701b145861d7226f7129953c8172abd794aabd",
+    "docs/team-recommender/manifests/development.json": "833cbb454369285b381e3083426553d9b836b90ad16d3b62b65f60d2e19cb9c6",
+    "docs/team-recommender/manifests/holdout.json": "6c08baadefcf2bab3da03684a7cc402228a0592ddf53a011816a0542229ccdd0",
+    "docs/team-recommender/manifests/rollout.json": "71b6feef1d4bb8e5c617b23ffc4eafd2b14a104ce1d92e2eccdb625cdbcf35a5",
+    "docs/team-recommender/manifests/source-group-amendment-c2-f92fc5995a0a1ac0.json": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359"
+  }
+}

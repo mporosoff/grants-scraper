@@ -1,0 +1,92 @@
+{
+  "arm": "E2",
+  "engine": "coverage-v2.5",
+  "adapter": "ingredients-v2.5",
+  "generation": "42b9af6d68f171f5ee47f004b4f0529af11e174a8bec35f2cb34bb01cb2f6e8a",
+  "files": [
+    {
+      "path": "data/team-recommender/0adbfc1cc6e2880db69d95ae630388cb331513b54dbf1a5c67b92802924a1191.json",
+      "sha256": "0adbfc1cc6e2880db69d95ae630388cb331513b54dbf1a5c67b92802924a1191",
+      "bytes": 917055,
+      "gzip_bytes": 153516
+    },
+    {
+      "path": "data/team-recommender/62c52fc471ded6cf4b328563d0402f28fd7359b6f7f444591b633dfba3388b16.f32",
+      "sha256": "62c52fc471ded6cf4b328563d0402f28fd7359b6f7f444591b633dfba3388b16",
+      "bytes": 1024000,
+      "gzip_bytes": 950922
+    },
+    {
+      "path": "data/team-recommender/32372dec7d2b500da6d48fe395a83b897411db8394f7285981c17430a35e9628.json",
+      "sha256": "32372dec7d2b500da6d48fe395a83b897411db8394f7285981c17430a35e9628",
+      "bytes": 46814,
+      "gzip_bytes": 6746
+    },
+    {
+      "path": "data/opportunity_team_index.js",
+      "sha256": "44c9e5ddff7dbd52448334825c434574c04ff78c8c5adb0af0ada5bfe39efc9d",
+      "bytes": 10905,
+      "gzip_bytes": 1302
+    }
+  ],
+  "total_asset_bytes": 1998774,
+  "total_gzip_bytes": 1112486,
+  "hydration": {
+    "n": 5,
+    "p50_ms": 130.00570000000005,
+    "p95_ms": 132.79540000000003,
+    "max_ms": 132.79540000000003
+  },
+  "full_directory_matrix": {
+    "n": 105,
+    "p50_ms": 11.7183,
+    "p95_ms": 42.071000000000026,
+    "max_ms": 50.723399999999856
+  },
+  "group": {
+    "n": 105,
+    "p50_ms": 0.10590000000001965,
+    "p95_ms": 42.10539999999992,
+    "max_ms": 59.63709999999992
+  },
+  "matrix_plus_group": {
+    "n": 105,
+    "p50_ms": 13.386199999999917,
+    "p95_ms": 65.25540000000001,
+    "max_ms": 90.23019999999997
+  },
+  "cached_build_view": {
+    "n": 26,
+    "p50_ms": 0.41800000000012005,
+    "p95_ms": 1.471900000000005,
+    "max_ms": 2.4271999999999707
+  },
+  "remove_replacement_add_view": {
+    "n": 10,
+    "p50_ms": 6.590400000000045,
+    "p95_ms": 21.55489999999986,
+    "max_ms": 21.55489999999986
+  },
+  "Node_memory_before": {
+    "rss": 45682688,
+    "heapTotal": 8380416,
+    "heapUsed": 5336352,
+    "external": 2517686,
+    "arrayBuffers": 145627
+  },
+  "Node_memory_after": {
+    "rss": 162643968,
+    "heapTotal": 102227968,
+    "heapUsed": 15572176,
+    "external": 13768243,
+    "arrayBuffers": 9477624
+  },
+  "Node_heap_delta": 10235824,
+  "Node_arraybuffer_delta": 9331997,
+  "provider_calls": 0,
+  "scope_count": 35,
+  "people": 155,
+  "holdout_scored": false,
+  "physical_browser": false,
+  "limitation": "Node v24 reference in a separate process, five hydrations and three requested-scope calculations per scope. VM/custom DOM are not device or throttled-browser measurements. Memory includes local source objects and package construction; it is not the browser heap gate."
+}

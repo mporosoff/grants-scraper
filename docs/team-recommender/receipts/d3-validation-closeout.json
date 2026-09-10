@@ -1,0 +1,56 @@
+{
+  "E0_exact_D2_scopes": 35,
+  "Playwright": false,
+  "accessibility_suite": false,
+  "additional_D3_DOM_passed": 9,
+  "additional_D3_DOM_tests_per_arm": 3,
+  "code_file_sha256": {
+    "assets/team-ingredients.js": "01240ca79e2804c8daccc385aecce5c643a7c8d45864ede9e7337bddb4e9c09a",
+    "assets/team-recommender.js": "c4a24b159f314f075b89a6b22ae17d8b5605d3bc5277cc06ce371b3a0389cd59",
+    "tests/browser/team-recommender-d3.test.mjs": "2efbef9f6cd98ae2d640b2697f7651c7c6c85a6c6a41f4c1389342267ef2c086",
+    "tools/team_recommender_embeddings_d3.py": "ceaaa0bafb99da0f4788481699f712a575b3501511f76e908f12d716a60636b0",
+    "tools/team_recommender_embeddings_d3_analyze.py": "4a4f9876c04dfea2da6bb1e0d4cc15df02096dfdda73a834468b1d2da5dbf103",
+    "tools/team_recommender_embeddings_d3_assemble.py": "7009c3c95a3aee35acd343d45076be72de8f87e23b907c0065b6382c30e2e85c",
+    "tools/team_recommender_embeddings_d3_judge.py": "349e018bae7dcf2440d02bf0ec928bd1505c1dc059b24b2696df5971fdc28b8a",
+    "tools/team_recommender_embeddings_d3_measure.mjs": "86031e7f1dfea2b018d413dcd1e5a9659abd2aa216fabea8859e316fdde84608",
+    "tools/team_recommender_embeddings_d3_prepare.py": "ddf7a5bdbed3793224e08dccd879bab734ca5289a35e693c50c754ca1007c699",
+    "tools/team_recommender_embeddings_d3_results.py": "453231f00ec601ba21e25ff97c44b34783b0319dd29e59f9b43a281d35b01bdf",
+    "tools/team_recommender_embeddings_d3_run.mjs": "ed5d47ee204bfd4f4487139a201e3e9baa0be4674dffea27130e271e9f9e3c52"
+  },
+  "focused_Node_failed": 0,
+  "focused_Node_passed": 137,
+  "focused_Python_failed": 0,
+  "focused_Python_passed": 87,
+  "full_E2E": false,
+  "full_directory_people": 155,
+  "holdout_scored": false,
+  "log_files_private": {
+    "DOM-E1.txt": {
+      "bytes": 427,
+      "sha256": "c73d26d95f58f168a928b2d7fa87ead9bed5926eafab59efcd9bff1f1a0ac8ea"
+    },
+    "DOM-E2.txt": {
+      "bytes": 428,
+      "sha256": "cf473e8ab99bfe4bbd641ac17414601b721312694a38543bdb1abaf476e89c8c"
+    },
+    "DOM-E3.txt": {
+      "bytes": 429,
+      "sha256": "feaf86338209eb5e66f6dd64fbd8fb777563b22edbc2881f5485d95c3697de41"
+    },
+    "focused-node.txt": {
+      "bytes": 12532,
+      "sha256": "e6018136dad7056cf8aec44833322e82b34e37ba645267d16cb028a88b72b8a3"
+    },
+    "focused-python.txt": {
+      "bytes": 4085,
+      "sha256": "3f2a9c0d9f65bf52930b0fac92f6e8a59c367d516c474ff1438e8b62582bd1fc"
+    }
+  },
+  "method": "Focused Node VM/custom DOM, Python contracts, native loader with real source/profile/vector snapshots and small-pool independent exact enumeration; not physical-browser validation.",
+  "native_D3_offline_parity_scopes": 105,
+  "physical_browser": false,
+  "real_reference_cases": 105,
+  "real_reference_nonempty_cases": 50,
+  "scalar_dot_products": 42,
+  "zero_paid_prepared_interactions": true
+}

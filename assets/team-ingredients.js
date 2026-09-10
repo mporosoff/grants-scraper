@@ -2,7 +2,7 @@
 (function (global) {
   "use strict";
   const N = global.TeamRecommender;
-  const VERSION = "ingredients-v2.4";
+  const VERSION = "ingredients-v2.5";
   const HASH = /^[a-f0-9]{64}$/;
   const ID = /^[A-Za-z0-9][A-Za-z0-9:_.-]{0,127}$/;
   // Canonical NSF feed IDs are source identities, never fetch destinations.
@@ -71,13 +71,24 @@
       "Ingredient engine/schema mismatch.");
     requireValue(manifest.generation_id === index.generation_id && HASH.test(manifest.generation_id)
       && manifest.registry_generation === directory.registry_generation, "Mixed registry/ingredient snapshot.");
-    exactKeys(bundle, ["schema_version", "registry_generation", "sources", "people", "scopes", "vector_rows", "space"], "ingredient bundle");
+    exactKeys(bundle, ["schema_version", "registry_generation", "sources", "people", "scopes", "vector_rows", "space", "representation", "scorer"], "ingredient bundle");
     requireValue(bundle.schema_version === 2 && bundle.registry_generation === directory.registry_generation, "Mixed public bundle identity.");
+    const richer = bundle.representation !== undefined;
+    if (richer) {
+      requireValue(["D3-phrases-v1","D3-combined-v1","D3-context-v1"].includes(bundle.representation), "Unknown representation.");
+      exactKeys(bundle.scorer,["version","member","broad","aspect","anchor"],"scorer");
+      requireValue(bundle.scorer.version === "D3-fixed-v1" && ["member","broad","aspect","anchor"].every(k => Number.isFinite(bundle.scorer[k]) && bundle.scorer[k] > 0 && bundle.scorer[k] < 1)
+        && bundle.scorer.member >= bundle.scorer.broad, "Invalid absolute scorer thresholds.");
+    } else requireValue(bundle.scorer === undefined, "Scorer requires its representation.");
     const space = bundle.space;
-    exactKeys(space, ["provider", "model", "dimension", "preprocessing", "normalization", "serialization", "truncation", "roles", "canaries", "fingerprint", "source_output_dtype", "chunking", "input_encoding"], "embedding-space");
-    requireValue(space.provider === "voyage" && space.model === "voyage-4-lite" && space.dimension === 1024
-      && space.preprocessing === "exact-utf8-text-v1" && space.normalization === "l2-v1" && space.serialization === "f32le-v1"
-      && space.source_output_dtype === "float" && space.chunking === "one-input-per-item" && space.input_encoding === "utf8"
+    exactKeys(space, ["provider", "model", "dimension", "preprocessing", "normalization", "serialization", "truncation", "roles", "canaries", "fingerprint", "source_output_dtype", "chunking", "input_encoding", "endpoint"], "embedding-space");
+    const contextual = bundle.representation === "D3-context-v1";
+    requireValue(richer ? space.model === (contextual ? "voyage-context-4" : "voyage-4-large") && space.preprocessing === "exact-utf8-D3-v1"
+      && space.chunking === bundle.representation && space.endpoint === (contextual ? "https://api.voyageai.com/v1/contextualizedembeddings" : "https://api.voyageai.com/v1/embeddings")
+      : space.model === "voyage-4-lite" && space.preprocessing === "exact-utf8-text-v1" && space.chunking === "one-input-per-item" && space.endpoint === undefined, "Representation/space mismatch.");
+    requireValue(space.provider === "voyage" && space.dimension === 1024
+      && space.normalization === "l2-v1" && space.serialization === "f32le-v1"
+      && space.source_output_dtype === "float" && space.input_encoding === "utf8"
       && space.truncation === false && canonical(space.roles) === canonical({scope: "query", passage: "document"})
       && HASH.test(space.canaries?.query) && HASH.test(space.canaries?.document), "Embedding-space contract is incomplete.");
     const {fingerprint, ...spaceContract} = space;
@@ -113,11 +124,24 @@
     const expectedPeople = directory.researchers.filter(eligible).map(p => p.id).sort(N.cmp);
     requireValue(canonical(bundle.people.map(p => p.id).sort(N.cmp)) === canonical(expectedPeople), "Prepared directory omits or adds eligible researchers.");
     for (const person of bundle.people) {
-      exactKeys(person, ["id", "passages"], "person");
+      exactKeys(person, ["id", "passages", "document"], "person");
       const profile = directoryById.get(person.id), seen = new Set(), retained = new Set();
+      let chunks = null, interests = null;
+      if (richer && bundle.representation !== "D3-phrases-v1") {
+        const byText = new Map();
+        for (const c of profile.claims.filter(c => c.status === "active")) {
+          if (!byText.has(c.evidence)) byText.set(c.evidence,new Set());
+          byText.get(c.evidence).add(c.type + ": " + c.label);
+        }
+        interests = [...byText.keys()].sort(N.cmp);
+        chunks = profile.research_summary ? ["Research summary:\n" + profile.research_summary] : [];
+        chunks.push(...interests.map(text => "Research interest:\n" + text + "\nExisting claim context:\n" + [...byText.get(text)].sort(N.cmp).join("\n")));
+        exactKeys(person.document,["chunks"],"researcher document");
+        requireValue(canonical(person.document.chunks) === canonical(chunks), "Changed or cross-person document context.");
+      } else requireValue(person.document === undefined, "Unexpected profile context.");
       requireValue(Array.isArray(person.passages) && person.passages.length <= 16, "Public passage bound exceeded.");
       for (const passage of person.passages) {
-        exactKeys(passage, ["id", "text", "claim_refs", "source_urls", "operation", "context", "vector"], "passage");
+        exactKeys(passage, ["id", "text", "claim_refs", "source_urls", "operation", "context", "vector", "chunk_index"], "passage");
         requireValue(ID.test(passage.id) && string(passage.text) && !seen.has(passage.text.normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim()), "Duplicate or over-bound passage.");
         seen.add(passage.text.normalize("NFKC").toLowerCase().replace(/\s+/g, " ").trim());
         requireValue(Array.isArray(passage.claim_refs) && passage.claim_refs.length > 0 && Array.isArray(passage.source_urls) && passage.source_urls.length > 0 && passage.source_urls.every(safeUrl), "Missing public passage provenance.");
@@ -134,11 +158,27 @@
           const c = profile.claims.find(c => c.claim_id === ref.claim_id);
           return {claim_id:c.claim_id, revision:c.revision, label:c.label, type:c.type};
         });
-        await vectorRecord(passage, "document");
+        if (chunks) {
+          const row = bundle.vector_rows[passage.vector];
+          let inputKey;
+          if (contextual) {
+            const position = interests.indexOf(passage.text) + Number(Boolean(profile.research_summary));
+            requireValue(passage.chunk_index === position, "Contextual chunk/claim ownership mismatch.");
+            inputKey = await sha256(canonical([await sha256(canonical(chunks)),position,chunks[position]]));
+          } else {
+            requireValue(passage.chunk_index === undefined, "Unexpected contextual index.");
+            inputKey = await sha256(chunks.join("\n\n"));
+          }
+          requireValue(Number.isInteger(passage.vector) && row?.input_role === "document" && row.text_sha256 === inputKey, "Complete document/vector identity mismatch.");
+          usedRows.add(passage.vector);passage.vector_identity = rowHashes[passage.vector];
+        } else {
+          requireValue(passage.chunk_index === undefined, "Unexpected contextual index.");
+          await vectorRecord(passage, "document");
+        }
       }
       requireValue(profile.claims.filter(c => c.status === "active").every(c => retained.has(c.claim_id)), "Prepared profile drops active evidence.");
       person.research_summary = profile.research_summary || "";
-      person.semantic_key = await sha256(canonical([fingerprint, person.id, person.passages, person.research_summary]));
+      person.semantic_key = await sha256(canonical([fingerprint, person.id, person.passages, person.research_summary,person.document || null]));
     }
     const sources = new Map(), scopeIds = new Set();
     for (const source of bundle.sources) {
@@ -238,7 +278,8 @@
         // The publisher must supply an independently retained relation receipt in the manifest.
         requireValue((manifest.reviewed_relations || []).some(r => canonical(r) === canonical({...link, scope_id: scope.id, document_sha256: source.document_sha256})), "Missing independently retained evidence receipt.");
       }
-      scope.semantic_key = await sha256(canonical([fingerprint, scope.id, scope.approach_id, scope.core, scope.whole_call, scope.aspects, scope.group_budgets]));
+      if (richer) scope.scorer = bundle.scorer;
+      scope.semantic_key = await sha256(canonical([fingerprint, scope.id, scope.approach_id, scope.core, scope.whole_call, scope.aspects, scope.group_budgets,bundle.scorer || null]));
     }
     requireValue(usedRows.size === bundle.vector_rows.length, "Unowned vectors in public bundle.");
     requireValue(Array.isArray(manifest.reviewed_relations) && manifest.reviewed_relations.every(r => bundle.scopes.some(s =>
@@ -359,8 +400,9 @@
         roles: roles.filter((_, i) => row.edges[i].admitted && row.edges[i].score > 0),
         reviewed: false, previouslySelected: state.excludedIds.includes(row.id), marginal: N.coverage(m, [...selected, row.id]) - baseScore}))
         .sort((a, b) => N.quantize(b.marginal) - N.quantize(a.marginal) || N.cmp(a.profile.id, b.profile.id));
-      const viable = selected.size >= 2 && [...selected].every(id => rows.get(id).automatic_quality >= N.PARAMETERS.memberQuality)
-        && [...selected].some(id => rows.get(id).edges.some(e => e.admitted && e.core >= N.PARAMETERS.anchor));
+      const thresholds = m.parameters || N.PARAMETERS;
+      const viable = selected.size >= 2 && [...selected].every(id => rows.get(id).automatic_quality >= thresholds.memberQuality)
+        && [...selected].some(id => rows.get(id).edges.some(e => e.admitted && e.core >= thresholds.anchor));
       const opportunity = {id: scope.id, parent_id: scope.parent_id, record_type: scope.record_type, scope_label: scope.scope_label, objective: scope.core.text,
         gate_state: complete ? "pass" : viable ? "conditional" : "fail", roles, members: members.map(m => ({faculty_id: m.profile.id, ...m.evidence})),
         why_team: members.map(m => m.evidence?.why_person || "No current scoped contribution is attributed.").join(" ") || "No adequate complementary group was found in the prepared directory.", missing_skills: unfilled.map(r => r.label)};

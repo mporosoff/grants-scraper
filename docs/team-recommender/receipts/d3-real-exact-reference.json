@@ -1,0 +1,10 @@
+{
+  "real_small_pool_cases": 105,
+  "nonempty_feasible_cases": 50,
+  "maximum_people": 8,
+  "independent_python_reference": true,
+  "coverage_maxima_and_feasible_counts_agree": true,
+  "case_sha256": "c58375320f81e4de2d83e38c26459a449d3e858a45af6b2c8c1859616453c502",
+  "provider_calls": 0,
+  "holdout_scored": false
+}

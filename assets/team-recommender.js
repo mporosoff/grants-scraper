@@ -1,7 +1,7 @@
 /* Pure requested-scope arithmetic. No transport, storage, or provider clients. */
 (function (global) {
   "use strict";
-  const VERSION = "coverage-v2.4";
+  const VERSION = "coverage-v2.5";
   const PARAMETERS = Object.freeze({ topic: .4, core: .3, method: .5, context: .5,
     anchor: .4, memberQuality: .5, alternativeQuality: .9, redundancy: .9, envelope: .95, maxOptions: 8,
     maxPeople: 200, maxAspects: 8, maxPassages: 16, workLimit: 300000, exactPool: 12, swapStartsPerSize: 8,
@@ -47,6 +47,7 @@
         Number(!aspect.operation || !passage.operation), Number(!aspect.context || !passage.context), Number(!specific)] };
   }
   function matrix(scope, people, vectors, rowCache) {
+    if (scope.scorer?.version === "D3-fixed-v1") return richerMatrix(scope, people, vectors, rowCache);
     const aspects = scope.aspects.slice().sort((a, b) => cmp(a.id, b.id));
     const rows = people.slice().sort((a, b) => cmp(a.id, b.id)).map(person => {
       const key = JSON.stringify([VERSION, scope.semantic_key, person.semantic_key]);
@@ -68,6 +69,34 @@
     });
     return { aspects, rows, admitted: rows.filter(row => row.edges.some(e => e.admitted && e.score > 0)),
       weights: aspects.map(a => a.weight), key: JSON.stringify([VERSION, scope.semantic_key, people.map(p => p.semantic_key).sort(cmp)]) };
+  }
+  function richerMatrix(scope, people, vectors, rowCache) {
+    const aspects = scope.aspects.slice().sort((a,b) => cmp(a.id,b.id)), s = scope.scorer;
+    const rows = people.slice().sort((a,b) => cmp(a.id,b.id)).map(person => {
+      const key = JSON.stringify([VERSION, scope.semantic_key, person.semantic_key]);
+      let row = rowCache?.get(key);
+      if (!row) {
+        const passages = person.passages.slice().sort((a,b) => cmp(a.id,b.id));
+        const core = passages.map(p => dot(vectors[scope.core.vector], vectors[p.vector]));
+        const whole = passages.map(p => dot(vectors[scope.whole_call.vector], vectors[p.vector]));
+        const scores = aspects.map(a => passages.map(p => dot(vectors[a.vector], vectors[p.vector])));
+        const scientific = passages.map(p => tokens(p.text).size > 0);
+        const quality = .7 * Math.max(0, ...scores.flatMap((values,i) => tokens(aspects[i].text).size ? values.filter((_,j) => scientific[j]) : []))
+          + .3 * Math.max(0, ...whole.filter((_,j) => scientific[j]));
+        const edges = aspects.map((a,i) => passages.map((p,j) => {
+          const admitted = scientific[j] && tokens(a.text).size > 0 && quality >= s.broad && scores[i][j] >= s.aspect;
+          const lexical = overlap(a.text,p.text);
+          return {admitted,score:admitted ? .5*scores[i][j]+.3*core[j]+.2*lexical : 0,core:core[j],passage:p,
+            route:admitted ? "suggested-scientific-applicability" : "unrelated-or-insufficient",
+            features:[scores[i][j],core[j],0,0,lexical,1,1,Number(!scientific[j] || !tokens(a.text).size)]};
+        }).sort((a,b) => quantize(b.score)-quantize(a.score) || cmp(a.passage.id,b.passage.id))[0] || {score:0,admitted:false,core:0});
+        row = {id:person.id,edges,core:Math.max(0,...core),baseline:Math.max(0,...whole),automatic_quality:quality};
+        rowCache?.set(key,row);
+      }
+      return row;
+    });
+    return {aspects,rows,admitted:rows.filter(r => r.edges.some(e => e.admitted && e.score > 0)),weights:aspects.map(a => a.weight),
+      parameters:{...PARAMETERS,anchor:s.anchor,memberQuality:s.member},key:JSON.stringify([VERSION,scope.semantic_key,people.map(p => p.semantic_key).sort(cmp)])};
   }
   function coverage(matrix, ids) {
     const selected = ids.map(id => matrix.byId ? matrix.byId.get(id) : matrix.rows.find(r => r.id === id)).filter(Boolean);
@@ -92,13 +121,14 @@
     return Boolean(a.length && b.length) && a.every(x => b.some(y => same(x, y))) && b.every(y => a.some(x => same(x, y)));
   }
   function optimize(input, excludedIds = [], settings = {}) {
+    const parameters = input.parameters || PARAMETERS;
     const m = {...input, byId: new Map(input.rows.map(r => [r.id, r]))};
     const excluded = new Set(excludedIds);
-    const people = m.admitted.filter(r => !excluded.has(r.id) && r.automatic_quality >= PARAMETERS.memberQuality).map(r => r.id).sort(cmp);
-    if (people.length > PARAMETERS.maxPeople || m.weights.length > PARAMETERS.maxAspects) throw new Error("Recommendation resource limit exceeded.");
+    const people = m.admitted.filter(r => !excluded.has(r.id) && r.automatic_quality >= parameters.memberQuality).map(r => r.id).sort(cmp);
+    if (people.length > parameters.maxPeople || m.weights.length > parameters.maxAspects) throw new Error("Recommendation resource limit exceeded.");
     let work = 0;
-    const score = ids => { if (++work > PARAMETERS.workLimit) throw new Error("Recommendation work limit exceeded."); return coverage(m, ids); };
-    const anchor = ids => ids.some(id => m.byId.get(id).edges.some(e => e.admitted && e.core >= PARAMETERS.anchor));
+    const score = ids => { if (++work > parameters.workLimit) throw new Error("Recommendation work limit exceeded."); return coverage(m, ids); };
+    const anchor = ids => ids.some(id => m.byId.get(id).edges.some(e => e.admitted && e.core >= parameters.anchor));
     const strength = id => m.byId.get(id).automatic_quality;
     const quality = ids => { const values = ids.map(strength); return [Math.min(...values), values.reduce((a,b) => a+b,0)/values.length]; };
     const compare = (a,b) => { const x = quality(a.ids), y = quality(b.ids);
@@ -117,8 +147,8 @@
       const value = score(ids);
       if (feasible(ids, value)) candidates.set(key, {ids: ids.slice().sort(cmp), score: value, key});
     }
-    if (people.length <= PARAMETERS.exactPool || settings.exact === true) {
-      if (people.length > PARAMETERS.exactPool) throw new Error("Exact enumeration is bounded to small pools.");
+    if (people.length <= parameters.exactPool || settings.exact === true) {
+      if (people.length > parameters.exactPool) throw new Error("Exact enumeration is bounded to small pools.");
       function visit(ids, start) {
         if (ids.length >= 2) offer(ids);
         if (ids.length === 4) return;
@@ -148,7 +178,7 @@
       // Every admitted person remains reachable, including those absent from these starts.
       for (const size of [2, 3, 4]) {
         const bestStarts = [...starts.values()].filter(s => s.ids.length === size)
-          .sort((a, b) => quantize(b.value) - quantize(a.value) || cmp(a.key, b.key)).slice(0, PARAMETERS.swapStartsPerSize);
+          .sort((a, b) => quantize(b.value) - quantize(a.value) || cmp(a.key, b.key)).slice(0, parameters.swapStartsPerSize);
         for (const start of bestStarts) {
           let improved = start;
           for (const removed of start.ids) for (const added of people) {
@@ -164,20 +194,20 @@
     }
     const all = [...candidates.values()].sort(compare);
     const maximum = all[0]?.score || 0;
-    const size = [2, 3, 4].find(k => all.some(t => t.ids.length === k && quantize(t.score) >= quantize(PARAMETERS.envelope * maximum)));
-    const first = all.filter(t => t.ids.length === size && quantize(t.score) >= quantize(PARAMETERS.envelope * maximum)).sort(qualityCompare)[0];
+    const size = [2, 3, 4].find(k => all.some(t => t.ids.length === k && quantize(t.score) >= quantize(parameters.envelope * maximum)));
+    const first = all.filter(t => t.ids.length === size && quantize(t.score) >= quantize(parameters.envelope * maximum)).sort(qualityCompare)[0];
     const bySize = new Map([2, 3, 4].map(k => [k, all.find(t => t.ids.length === k)?.score || 0]));
     // Do not use extra slots when a smaller feasible subset is already adequate.
     // Marginal coverage prefers useful additions; it is not universal admission.
     const minimal = t => t.ids.length === 2 || !t.ids.some(id => {
       const ids=t.ids.filter(j=>j!==id), value=score(ids);
-      return quantize(value)>=quantize(PARAMETERS.envelope*t.score) && feasible(ids,value);
+      return quantize(value)>=quantize(parameters.envelope*t.score) && feasible(ids,value);
     });
-    const nearCoverage = all.filter(t => quantize(t.score) >= quantize(PARAMETERS.envelope * bySize.get(t.ids.length)) && minimal(t));
+    const nearCoverage = all.filter(t => quantize(t.score) >= quantize(parameters.envelope * bySize.get(t.ids.length)) && minimal(t));
     const bestMinimum = new Map([2,3,4].map(k=>[k,Math.max(0,...nearCoverage.filter(t=>t.ids.length===k).map(t=>quality(t.ids)[0]))]));
-    const near = nearCoverage.filter(t=>quantize(quality(t.ids)[0])>=quantize(PARAMETERS.alternativeQuality*bestMinimum.get(t.ids.length)));
+    const near = nearCoverage.filter(t=>quantize(quality(t.ids)[0])>=quantize(parameters.alternativeQuality*bestMinimum.get(t.ids.length)));
     const options = first ? [first] : [];
-    while (options.length < PARAMETERS.maxOptions) {
+    while (options.length < parameters.maxOptions) {
       const remaining = near.filter(t => !options.includes(t)).map(t => ({team: t})).sort((a, b) => qualityCompare(a.team,b.team));
       if (!remaining.length) break;
       options.push(remaining[0].team);
