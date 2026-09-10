@@ -32,6 +32,7 @@ STATE_LIMIT = 128 * 1024 * 1024
 PURPOSES = {"source": 90, "individual": 90, "group": 90, "control": 30, "explanation": 30, "order-swap": 10}
 PURPOSES.update({"d1-source":12,"d1-call":130,"d1-aspect":20,"d1-group":40,
                  "d1-comparison":40,"d1-explanation":12,"d1-control":30,"d1-swap":4})
+PURPOSES.update({"d2-call":80,"d2-group":70,"d2-comparison":20,"d2-explanation":6,"d2-swap":4})
 KINDS = {"individual", "group", "comparison", "source_control", "explanation_audit"}
 SCIENCE_LABELS = {"strong", "plausible", "unrelated", "insufficient-information"}
 
@@ -136,7 +137,7 @@ def judge_contract(request, settings):
         from tools.team_recommender_judge_d1 import contract
         return contract(request, settings)
     exact_keys(request, ["scope_id", "purpose", "source_evidence", "items"])
-    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES or request["purpose"].startswith("d1-"):
+    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES or request["purpose"].startswith(("d1-", "d2-")):
         raise ValueError("judge_outside_development_authority")
     if request["source_evidence"]["scope_id"] != request["scope_id"]:
         raise ValueError("source_scope_mismatch")
@@ -212,10 +213,16 @@ def legacy_judge_key(request, settings):
 
 
 def embedding_contract(request, settings):
-    exact_keys(request, ["input_role", "rows"])
+    exact_keys(request, ["input_role", "rows"], ["representation"])
     role, rows = request["input_role"], request["rows"]
     if role not in ("query", "document") or not isinstance(rows, list) or not 1 <= len(rows) <= 128:
         raise ValueError("bounded_embedding_batch_required")
+    contextual = "representation" in request
+    if contextual:
+        from tools.team_recommender_context_d2 import VERSION, context_inventory
+        if request["representation"] != VERSION or role != "document":
+            raise ValueError("unapproved_context_representation")
+        allowed_context = context_inventory(settings)
     ids = set()
     for row in rows:
         exact_keys(row, ["id", "owner", "text"])
@@ -224,7 +231,9 @@ def embedding_contract(request, settings):
         ids.add(row["id"])
         if role == "query" and row["owner"] not in settings["preparation_ids"]:
             raise ValueError("source_outside_preparation_scope")
-        if role == "document" and not any(c["text"] == row["text"] for c in settings["profile_claims"].get(row["owner"], [])):
+        if contextual and allowed_context.get(row["owner"], {}).get(row["id"]) != row["text"]:
+            raise ValueError("context_not_constructed_from_trusted_frozen_registry")
+        if role == "document" and not contextual and not any(c["text"] == row["text"] for c in settings["profile_claims"].get(row["owner"], [])):
             raise ValueError("embedding_not_public_claim")
     body = {"model": settings["embedding_model"], "input": [r["text"] for r in rows],
             "input_type": role, "output_dimension": settings["dimension"], "output_dtype": "float", "truncation": False}
@@ -405,6 +414,8 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
             raise Deferred("prior_judge_protocol_request_requires_recovery_not_replay")
     if not secret:
         raise ConfigurationFailure("missing_provider_step_credential")
+    from tools.team_recommender_items import preflight, judge_items
+    preflight(packet, settings, ledger)
     deadline = time.monotonic() + 2700
     for request in packet["requests"]:
         if time.monotonic() >= deadline:
@@ -451,7 +462,8 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
         token = ledger.reserve_experiment(provider, model, 2, key, amount, attempt, trusted_route=True,
                     input_tokens=bound, output_tokens=0 if provider == "voyage" else 512,
                     execution_metadata={"packet_sha256": packet_hash, "body_sha256": identity(body),
-                        "purpose": request.get("purpose", "embedding"), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs},
+                        "purpose": request.get("purpose", "d2-context" if request.get("representation") == "D2-context-v1" else "embedding"), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs,
+                        "judge_items": judge_items(request) if provider == "anthropic" else []},
                     purpose_limit=PURPOSES[request["purpose"]] if provider == "anthropic" else None)
         receipt = {"request_id": token, "key": key, "model": model, "reserved_microusd": amount,
                    "packet_sha256": packet_hash, "attempt": attempt, "code_sha": os.environ["GITHUB_SHA"]}
