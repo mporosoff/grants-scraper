@@ -61,6 +61,13 @@
 .awards-ai-drawer .ii-results-note { margin: 0 18px 18px; }
 .awards-ai-drawer .ii-question-answer { overflow-wrap: anywhere; }
 .public-results-header .eyebrow { color: #52647a; }
+@media (min-width: 801px) {
+  .team-workspace { grid-template-columns: minmax(0, 1fr); }
+  .team-sidebar { position: static; max-height: none; overflow: visible; scrollbar-gutter: auto; }
+  .team-sidebar .researcher-paths { grid-template-columns: minmax(0, 1.55fr) minmax(220px, .75fr); }
+  .team-sidebar .selected-terms { grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); }
+  .team-sidebar .pi-entry { flex-basis: 260px; }
+}
 @media (max-height: 520px) { .team-sidebar { position: static; max-height: none; } }
 @media (max-width: 800px) {
   .public-main { width: calc(100% - 24px); padding-top: 14px; }
