@@ -1,0 +1,1226 @@
+{
+  "D1_exact_reproduction": true,
+  "alternative_member_distributions": {
+    "insufficient-information": {
+      "member_score": {
+        "maximum": 0.43304940269555214,
+        "median": 0.43304940269555214,
+        "minimum": 0.43304940269555214,
+        "n": 1,
+        "p25": 0.43304940269555214,
+        "p75": 0.43304940269555214
+      },
+      "zero_marginal": 1
+    },
+    "missing": {
+      "member_score": {
+        "maximum": 0.413011713994625,
+        "median": 0.40457531725197765,
+        "minimum": 0.39573151425934305,
+        "n": 3,
+        "p25": 0.39573151425934305,
+        "p75": 0.40457531725197765
+      },
+      "zero_marginal": 3
+    },
+    "plausible": {
+      "member_score": {
+        "maximum": 0.6036929478250086,
+        "median": 0.4238205982230381,
+        "minimum": 0.3598076233246894,
+        "n": 27,
+        "p25": 0.391883049472756,
+        "p75": 0.6036929478250086
+      },
+      "zero_marginal": 15
+    },
+    "strong": {
+      "member_score": {
+        "maximum": 0.573042922739435,
+        "median": 0.5415000266227635,
+        "minimum": 0.40098397746686953,
+        "n": 29,
+        "p25": 0.5007271986956622,
+        "p75": 0.573042922739435
+      },
+      "zero_marginal": 5
+    },
+    "unrelated": {
+      "member_score": {
+        "maximum": 0.504949001809606,
+        "median": 0.45287885449093856,
+        "minimum": 0.3562597268215759,
+        "n": 20,
+        "p25": 0.3976086025662344,
+        "p75": 0.504949001809606
+      },
+      "zero_marginal": 8
+    }
+  },
+  "alternative_member_occurrences": 80,
+  "controls": 30,
+  "cutoff_only_scopes": [
+    {
+      "admitted": 64,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.4207904382278578,
+      "judged_admitted": {
+        "plausible": 6,
+        "strong": 1,
+        "unrelated": 2
+      },
+      "scope_id": "359696",
+      "top_people": [
+        {
+          "aspect_cosine": 0.5095691604383988,
+          "core_cosine": 0.5095691604383988,
+          "label": "plausible",
+          "lexical": 0.1111111111111111,
+          "person_id": "urh-000067",
+          "score": 0.42987755057294125
+        },
+        {
+          "aspect_cosine": 0.5326110127176827,
+          "core_cosine": 0.5326110127176827,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000016",
+          "score": 0.4260888101741462
+        },
+        {
+          "aspect_cosine": 0.49790731043554176,
+          "core_cosine": 0.49790731043554176,
+          "label": "plausible",
+          "lexical": 0.1111111111111111,
+          "person_id": "urh-000115",
+          "score": 0.42054807057065563
+        },
+        {
+          "aspect_cosine": 0.4939371852286141,
+          "core_cosine": 0.4939371852286141,
+          "label": "plausible",
+          "lexical": 0.1111111111111111,
+          "person_id": "urh-000034",
+          "score": 0.4173719704051135
+        },
+        {
+          "aspect_cosine": 0.4929388922394802,
+          "core_cosine": 0.4929388922394802,
+          "label": "strong",
+          "lexical": 0.1111111111111111,
+          "person_id": "urh-000098",
+          "score": 0.41657333601380636
+        }
+      ]
+    },
+    {
+      "admitted": 49,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.4065138161654994,
+      "judged_admitted": {
+        "unrelated": 7
+      },
+      "scope_id": "362178",
+      "top_people": [
+        {
+          "aspect_cosine": 0.5081422702068743,
+          "core_cosine": 0.5081422702068743,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000019",
+          "score": 0.4065138161654994
+        },
+        {
+          "aspect_cosine": 0.47302712918761525,
+          "core_cosine": 0.47302712918761525,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000025",
+          "score": 0.3784217033500922
+        },
+        {
+          "aspect_cosine": 0.4679932119338946,
+          "core_cosine": 0.4679932119338946,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000119",
+          "score": 0.3743945695471157
+        },
+        {
+          "aspect_cosine": 0.4560242338947672,
+          "core_cosine": 0.4560242338947672,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000157",
+          "score": 0.36481938711581374
+        },
+        {
+          "aspect_cosine": 0.4534130517985751,
+          "core_cosine": 0.4534130517985751,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000092",
+          "score": 0.3627304414388601
+        }
+      ]
+    },
+    {
+      "admitted": 2,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.31528854051248006,
+      "judged_admitted": {
+        "plausible": 1,
+        "unrelated": 1
+      },
+      "scope_id": "363281",
+      "top_people": [
+        {
+          "aspect_cosine": 0.4045039190225772,
+          "core_cosine": 0.4045039190225772,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000157",
+          "score": 0.3236031352180618
+        },
+        {
+          "aspect_cosine": 0.4107331777685591,
+          "core_cosine": 0.3017374354950331,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000007",
+          "score": 0.2958878195327895
+        },
+        {
+          "aspect_cosine": 0.20026775727900215,
+          "core_cosine": 0.20026775727900215,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000001",
+          "score": 0
+        },
+        {
+          "aspect_cosine": 0.1602893272570664,
+          "core_cosine": 0.1602893272570664,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000002",
+          "score": 0
+        },
+        {
+          "aspect_cosine": 0.1854037576633552,
+          "core_cosine": 0.1854037576633552,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000003",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "admitted": 39,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.4214712308677225,
+      "judged_admitted": {
+        "plausible": 10
+      },
+      "scope_id": "344592:ab-0009",
+      "top_people": [
+        {
+          "aspect_cosine": 0.49160504685644124,
+          "core_cosine": 0.49160504685644124,
+          "label": "plausible",
+          "lexical": 0.16666666666666666,
+          "person_id": "urh-000106",
+          "score": 0.4266173708184863
+        },
+        {
+          "aspect_cosine": 0.4885124116289898,
+          "core_cosine": 0.4885124116289898,
+          "label": "plausible",
+          "lexical": 0.16666666666666666,
+          "person_id": "urh-000088",
+          "score": 0.42414326263652513
+        },
+        {
+          "aspect_cosine": 0.4853973742840998,
+          "core_cosine": 0.4853973742840998,
+          "label": "plausible",
+          "lexical": 0.16666666666666666,
+          "person_id": "urh-000140",
+          "score": 0.4216512327606131
+        },
+        {
+          "aspect_cosine": 0.47606216127759876,
+          "core_cosine": 0.47606216127759876,
+          "label": "plausible",
+          "lexical": 0.16666666666666666,
+          "person_id": "urh-000120",
+          "score": 0.41418306235541236
+        },
+        {
+          "aspect_cosine": 0.4734652648830686,
+          "core_cosine": 0.4734652648830686,
+          "label": "plausible",
+          "lexical": 0.16666666666666666,
+          "person_id": "urh-000101",
+          "score": 0.4121055452397882
+        }
+      ]
+    },
+    {
+      "admitted": 16,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.39605529393021827,
+      "judged_admitted": {
+        "plausible": 4,
+        "strong": 2
+      },
+      "scope_id": "345241:tdac-baa-004",
+      "top_people": [
+        {
+          "aspect_cosine": 0.5043730173794037,
+          "core_cosine": 0.46215283280508884,
+          "label": "strong",
+          "lexical": 0.1,
+          "person_id": "urh-000091",
+          "score": 0.41083235853122846
+        },
+        {
+          "aspect_cosine": 0.4925740075071496,
+          "core_cosine": 0.45888457709999825,
+          "label": "plausible",
+          "lexical": 0.1,
+          "person_id": "urh-000132",
+          "score": 0.40395237688357427
+        },
+        {
+          "aspect_cosine": 0.5018132043393755,
+          "core_cosine": 0.41090346941074335,
+          "label": "plausible",
+          "lexical": 0.1,
+          "person_id": "urh-000060",
+          "score": 0.39417764299291075
+        },
+        {
+          "aspect_cosine": 0.44616664369704473,
+          "core_cosine": 0.4096789447050144,
+          "label": "plausible",
+          "lexical": 0.1,
+          "person_id": "urh-000129",
+          "score": 0.3659870052600267
+        },
+        {
+          "aspect_cosine": 0.4319418612377078,
+          "core_cosine": 0.4319418612377078,
+          "label": "strong",
+          "lexical": 0.1,
+          "person_id": "urh-000010",
+          "score": 0.36555348899016626
+        }
+      ]
+    },
+    {
+      "admitted": 2,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.28150876602487257,
+      "judged_admitted": {
+        "plausible": 2
+      },
+      "scope_id": "356978",
+      "top_people": [
+        {
+          "aspect_cosine": 0.46697993933012966,
+          "core_cosine": 0.46697993933012966,
+          "label": "plausible",
+          "lexical": 0.14285714285714285,
+          "person_id": "urh-000116",
+          "score": 0.4021553800355323
+        },
+        {
+          "aspect_cosine": 0.4091672586150491,
+          "core_cosine": 0.4091672586150491,
+          "label": "plausible",
+          "lexical": 0.14285714285714285,
+          "person_id": "urh-000157",
+          "score": 0.35590523546346786
+        },
+        {
+          "aspect_cosine": 0.22972317003767848,
+          "core_cosine": 0.22972317003767848,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000001",
+          "score": 0
+        },
+        {
+          "aspect_cosine": 0.2338350457010507,
+          "core_cosine": 0.2338350457010507,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000002",
+          "score": 0
+        },
+        {
+          "aspect_cosine": 0.19522143580660398,
+          "core_cosine": 0.19522143580660398,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000003",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "admitted": 28,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.4079244565958948,
+      "judged_admitted": {
+        "insufficient-information": 1,
+        "plausible": 7
+      },
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "top_people": [
+        {
+          "aspect_cosine": 0.5099055707448685,
+          "core_cosine": 0.5099055707448685,
+          "label": "insufficient-information",
+          "lexical": 0,
+          "person_id": "urh-000132",
+          "score": 0.4079244565958948
+        },
+        {
+          "aspect_cosine": 0.47415390770841254,
+          "core_cosine": 0.47415390770841254,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000052",
+          "score": 0.37932312616673003
+        },
+        {
+          "aspect_cosine": 0.4681800541754671,
+          "core_cosine": 0.4681800541754671,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000064",
+          "score": 0.37454404334037367
+        },
+        {
+          "aspect_cosine": 0.4681800541754671,
+          "core_cosine": 0.4681800541754671,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000077",
+          "score": 0.37454404334037367
+        },
+        {
+          "aspect_cosine": 0.4604210890316405,
+          "core_cosine": 0.4604210890316405,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000068",
+          "score": 0.36833687122531233
+        }
+      ]
+    },
+    {
+      "admitted": 40,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.2690251470951266,
+      "judged_admitted": {
+        "plausible": 4,
+        "strong": 1,
+        "unrelated": 1
+      },
+      "scope_id": "362254",
+      "top_people": [
+        {
+          "aspect_cosine": 0.4804020483841547,
+          "core_cosine": 0.4804020483841547,
+          "label": "strong",
+          "lexical": 0,
+          "person_id": "urh-000089",
+          "score": 0.3843216387073237
+        },
+        {
+          "aspect_cosine": 0.46654367615479914,
+          "core_cosine": 0.46654367615479914,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000135",
+          "score": 0.3732349409238393
+        },
+        {
+          "aspect_cosine": 0.46472127999663176,
+          "core_cosine": 0.46472127999663176,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000115",
+          "score": 0.3717770239973054
+        },
+        {
+          "aspect_cosine": 0.4600186057265748,
+          "core_cosine": 0.4600186057265748,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000009",
+          "score": 0.36801488458125986
+        },
+        {
+          "aspect_cosine": 0.4588962706556425,
+          "core_cosine": 0.4588962706556425,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000046",
+          "score": 0.367117016524514
+        }
+      ]
+    },
+    {
+      "admitted": 9,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.29136396763638006,
+      "judged_admitted": {
+        "insufficient-information": 1,
+        "plausible": 3,
+        "unrelated": 2
+      },
+      "scope_id": "45810",
+      "top_people": [
+        {
+          "aspect_cosine": 0.4952927993506787,
+          "core_cosine": 0.4952927993506787,
+          "label": "insufficient-information",
+          "lexical": 0.1,
+          "person_id": "urh-000013",
+          "score": 0.41623423948054294
+        },
+        {
+          "aspect_cosine": 0.46797855477446976,
+          "core_cosine": 0.46797855477446976,
+          "label": "plausible",
+          "lexical": 0.1,
+          "person_id": "urh-000085",
+          "score": 0.3943828438195758
+        },
+        {
+          "aspect_cosine": 0.43958676406509084,
+          "core_cosine": 0.43958676406509084,
+          "label": "plausible",
+          "lexical": 0.1,
+          "person_id": "urh-000072",
+          "score": 0.37166941125207265
+        },
+        {
+          "aspect_cosine": 0.4639949812429749,
+          "core_cosine": 0.4639949812429749,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000051",
+          "score": 0.3711959849943799
+        },
+        {
+          "aspect_cosine": 0.42174752936966087,
+          "core_cosine": 0.42174752936966087,
+          "label": "unrelated",
+          "lexical": 0.1,
+          "person_id": "urh-000041",
+          "score": 0.3573980234957287
+        }
+      ]
+    },
+    {
+      "admitted": 28,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.3997566058384041,
+      "judged_admitted": {
+        "plausible": 6,
+        "strong": 1,
+        "unrelated": 1
+      },
+      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "top_people": [
+        {
+          "aspect_cosine": 0.47360079688709955,
+          "core_cosine": 0.47360079688709955,
+          "label": "plausible",
+          "lexical": 0.1111111111111111,
+          "person_id": "urh-000157",
+          "score": 0.4011028597319018
+        },
+        {
+          "aspect_cosine": 0.5040120915064782,
+          "core_cosine": 0.4820310033344568,
+          "label": "strong",
+          "lexical": 0,
+          "person_id": "urh-000007",
+          "score": 0.3966153467535761
+        },
+        {
+          "aspect_cosine": 0.5088377096879751,
+          "core_cosine": 0.4274064613884567,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000070",
+          "score": 0.3826407932605246
+        },
+        {
+          "aspect_cosine": 0.47496860419790565,
+          "core_cosine": 0.45701159691386517,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000051",
+          "score": 0.37458778117311237
+        },
+        {
+          "aspect_cosine": 0.43098593905787497,
+          "core_cosine": 0.43098593905787497,
+          "label": "plausible",
+          "lexical": 0.1111111111111111,
+          "person_id": "urh-000036",
+          "score": 0.36701097346852213
+        }
+      ]
+    },
+    {
+      "admitted": 35,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.34138533529933685,
+      "judged_admitted": {
+        "plausible": 3,
+        "unrelated": 2
+      },
+      "scope_id": "362855",
+      "top_people": [
+        {
+          "aspect_cosine": 0.4981156750434346,
+          "core_cosine": 0.3955854772568515,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000157",
+          "score": 0.36773348069877276
+        },
+        {
+          "aspect_cosine": 0.499535004818634,
+          "core_cosine": 0.3826585867193993,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000121",
+          "score": 0.36456507842513675
+        },
+        {
+          "aspect_cosine": 0.47723753403207936,
+          "core_cosine": 0.4126165912316161,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000115",
+          "score": 0.3624037443855245
+        },
+        {
+          "aspect_cosine": 0.4929397027481695,
+          "core_cosine": 0.38437845609265386,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000019",
+          "score": 0.36178338820188094
+        },
+        {
+          "aspect_cosine": 0.507236310241514,
+          "core_cosine": 0.3545424291935519,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000046",
+          "score": 0.3599808838788226
+        }
+      ]
+    },
+    {
+      "admitted": 8,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.2725570496525831,
+      "judged_admitted": {
+        "insufficient-information": 1,
+        "plausible": 1,
+        "strong": 1,
+        "unrelated": 3
+      },
+      "scope_id": "351947",
+      "top_people": [
+        {
+          "aspect_cosine": 0.4450423505700889,
+          "core_cosine": 0.4450423505700889,
+          "label": "unrelated",
+          "lexical": 0.16666666666666666,
+          "person_id": "urh-000157",
+          "score": 0.3893672137894044
+        },
+        {
+          "aspect_cosine": 0.46245130967287323,
+          "core_cosine": 0.46245130967287323,
+          "label": "insufficient-information",
+          "lexical": 0,
+          "person_id": "urh-000158",
+          "score": 0.3699610477382986
+        },
+        {
+          "aspect_cosine": 0.427083563376961,
+          "core_cosine": 0.427083563376961,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000155",
+          "score": 0.34166685070156877
+        },
+        {
+          "aspect_cosine": 0.42665842235176926,
+          "core_cosine": 0.42665842235176926,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000127",
+          "score": 0.34132673788141543
+        },
+        {
+          "aspect_cosine": 0.41800625642643036,
+          "core_cosine": 0.41800625642643036,
+          "label": "strong",
+          "lexical": 0,
+          "person_id": "urh-000132",
+          "score": 0.33440500514114424
+        }
+      ]
+    },
+    {
+      "admitted": 2,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.257413381682589,
+      "judged_admitted": {
+        "insufficient-information": 1,
+        "unrelated": 1
+      },
+      "scope_id": "363544",
+      "top_people": [
+        {
+          "aspect_cosine": 0.45966675300462323,
+          "core_cosine": 0.45966675300462323,
+          "label": "insufficient-information",
+          "lexical": 0,
+          "person_id": "urh-000113",
+          "score": 0.36773340240369856
+        },
+        {
+          "aspect_cosine": 0.4024136404759424,
+          "core_cosine": 0.4024136404759424,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000008",
+          "score": 0.32193091238075394
+        },
+        {
+          "aspect_cosine": 0.2719798384905425,
+          "core_cosine": 0.2719798384905425,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000001",
+          "score": 0
+        },
+        {
+          "aspect_cosine": 0.28402802471957467,
+          "core_cosine": 0.28402802471957467,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000002",
+          "score": 0
+        },
+        {
+          "aspect_cosine": 0.21141632172849525,
+          "core_cosine": 0.21141632172849525,
+          "label": "missing",
+          "lexical": 0,
+          "person_id": "urh-000003",
+          "score": 0
+        }
+      ]
+    },
+    {
+      "admitted": 43,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.4030649120485184,
+      "judged_admitted": {
+        "plausible": 3,
+        "strong": 2,
+        "unrelated": 1
+      },
+      "scope_id": "362520",
+      "top_people": [
+        {
+          "aspect_cosine": 0.5089735899480557,
+          "core_cosine": 0.5089735899480557,
+          "label": "strong",
+          "lexical": 0,
+          "person_id": "urh-000086",
+          "score": 0.4071788719584446
+        },
+        {
+          "aspect_cosine": 0.4617974662779209,
+          "core_cosine": 0.4525113351614724,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000115",
+          "score": 0.3666521336874021
+        },
+        {
+          "aspect_cosine": 0.4557244373324594,
+          "core_cosine": 0.4557244373324594,
+          "label": "strong",
+          "lexical": 0,
+          "person_id": "urh-000095",
+          "score": 0.3645795498659675
+        },
+        {
+          "aspect_cosine": 0.4752091609962939,
+          "core_cosine": 0.37221385459669853,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000157",
+          "score": 0.34926873687715654
+        },
+        {
+          "aspect_cosine": 0.43596480393410253,
+          "core_cosine": 0.43596480393410253,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000143",
+          "score": 0.34877184314728205
+        }
+      ]
+    },
+    {
+      "admitted": 7,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.3798886951251714,
+      "judged_admitted": {
+        "plausible": 3,
+        "strong": 1,
+        "unrelated": 1
+      },
+      "scope_id": "361526:f-18",
+      "top_people": [
+        {
+          "aspect_cosine": 0.4748608689064643,
+          "core_cosine": 0.4748608689064643,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000041",
+          "score": 0.3798886951251714
+        },
+        {
+          "aspect_cosine": 0.46758430307221277,
+          "core_cosine": 0.46758430307221277,
+          "label": "strong",
+          "lexical": 0,
+          "person_id": "urh-000072",
+          "score": 0.37406744245777024
+        },
+        {
+          "aspect_cosine": 0.45037418867899104,
+          "core_cosine": 0.45037418867899104,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000152",
+          "score": 0.3602993509431928
+        },
+        {
+          "aspect_cosine": 0.44952274297662914,
+          "core_cosine": 0.44952274297662914,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000151",
+          "score": 0.35961819438130327
+        },
+        {
+          "aspect_cosine": 0.41856618982404087,
+          "core_cosine": 0.41856618982404087,
+          "label": "unrelated",
+          "lexical": 0,
+          "person_id": "urh-000111",
+          "score": 0.3348529518592327
+        }
+      ]
+    },
+    {
+      "admitted": 16,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.37121984765886273,
+      "judged_admitted": {
+        "plausible": 1,
+        "unrelated": 5
+      },
+      "scope_id": "363489",
+      "top_people": [
+        {
+          "aspect_cosine": 0.42876721900336523,
+          "core_cosine": 0.42876721900336523,
+          "label": "unrelated",
+          "lexical": 0.18181818181818182,
+          "person_id": "urh-000131",
+          "score": 0.37937741156632854
+        },
+        {
+          "aspect_cosine": 0.4410227162515264,
+          "core_cosine": 0.4410227162515264,
+          "label": "unrelated",
+          "lexical": 0.09090909090909091,
+          "person_id": "urh-000123",
+          "score": 0.3709999911830393
+        },
+        {
+          "aspect_cosine": 0.4225946044423955,
+          "core_cosine": 0.4225946044423955,
+          "label": "unrelated",
+          "lexical": 0.09090909090909091,
+          "person_id": "urh-000138",
+          "score": 0.35625750173573456
+        },
+        {
+          "aspect_cosine": 0.4647515332075948,
+          "core_cosine": 0.36015019796208525,
+          "label": "unrelated",
+          "lexical": 0.058823529411764705,
+          "person_id": "urh-000016",
+          "score": 0.3521855318747759
+        },
+        {
+          "aspect_cosine": 0.41294901530183853,
+          "core_cosine": 0.41294901530183853,
+          "label": "plausible",
+          "lexical": 0.09090909090909091,
+          "person_id": "urh-000063",
+          "score": 0.348541030423289
+        }
+      ]
+    },
+    {
+      "admitted": 41,
+      "confirmed": "Universal .45 floor alone excludes all group sizes after pool/anchor checks; does not establish member usefulness.",
+      "coverage_upper_bound": 0.3790577050897464,
+      "judged_admitted": {
+        "plausible": 6,
+        "strong": 4
+      },
+      "scope_id": "361380",
+      "top_people": [
+        {
+          "aspect_cosine": 0.4768363436496699,
+          "core_cosine": 0.4768363436496699,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000009",
+          "score": 0.3814690749197359
+        },
+        {
+          "aspect_cosine": 0.47622555799398025,
+          "core_cosine": 0.47622555799398025,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000026",
+          "score": 0.3809804463951842
+        },
+        {
+          "aspect_cosine": 0.47069507100871977,
+          "core_cosine": 0.47069507100871977,
+          "label": "strong",
+          "lexical": 0,
+          "person_id": "urh-000036",
+          "score": 0.3765560568069758
+        },
+        {
+          "aspect_cosine": 0.4677970610166917,
+          "core_cosine": 0.4677970610166917,
+          "label": "plausible",
+          "lexical": 0,
+          "person_id": "urh-000157",
+          "score": 0.37423764881335336
+        },
+        {
+          "aspect_cosine": 0.46239527845016815,
+          "core_cosine": 0.3407784542045115,
+          "label": "plausible",
+          "lexical": 0.2,
+          "person_id": "urh-000109",
+          "score": 0.37343117548643756
+        }
+      ]
+    }
+  ],
+  "cutoff_scope_count": 17,
+  "cutoff_scopes_with_judged_reasonable_admitted": 15,
+  "disagreement_counts": {
+    "group judgment plausibly driven by one strong member": 1,
+    "unresolved semantic disagreement on comparable evidence": 8
+  },
+  "existing_context": {
+    "adapter_path": "assets/team-ingredients.js: existing labels/types/research_summary retained in hydrated context and identity but not used by D1 edge scoring",
+    "adapter_sha256": "6b782bc6f443993cab19ec55ba33381a2ec5a233c4948bc33efb4c10153eb5de",
+    "engine_path": "assets/team-recommender.js: edge reads passage.text/vector, optional operation/context; matrix uses evidence vectors only",
+    "engine_sha256": "4db90706d6ce347877dd77dd99d453b8cb7bca9d30a2b6730d828603fde6c1ce",
+    "finding": "confirmed numerical/evaluator context mismatch; not an identity mismatch or enrichment requirement",
+    "judge_path": "tools/team_recommender_revision_judge_packets.py: strongest whole-call passage plus admitted-aspect passages, exact associated label/type and full unchanged summary for every supplied claim",
+    "packet_builder_sha256": "b8f15ede6baf9fa1f6516f95d350deafd9032c9a2239c07ada2bbd446f7e7afe"
+  },
+  "holdout_scored": false,
+  "human_judgments": 0,
+  "judge_rubric_change_required": false,
+  "mapped_submitted_items": 332,
+  "mapping_defects_found": 0,
+  "nine_disagreements": [
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.47491543462868496,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p2",
+      "group_item_key": "2b71299a5fba763c1a6d8c901e0ddbe5718886c443610b07112dd9ff183a15c3",
+      "group_label": "plausible",
+      "group_reason": "coherent",
+      "group_referenced_person": "urh-000157",
+      "individual_labels": {
+        "urh-000040": "strong",
+        "urh-000157": "unrelated"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000040": 0.03550141622846714,
+        "urh-000157": 0
+      },
+      "mean_member": 0.47680302659330037,
+      "rank": 2,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "357002",
+      "weakest_member": 0.45287885449093856
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.47491543462868496,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p2",
+      "group_item_key": "db07e637f2983a28fcd64d9679ef6f8e9b96f7a0e1bee928d4d67c68e5b83b14",
+      "group_label": "plausible",
+      "group_reason": "broad",
+      "group_referenced_person": "urh-000104",
+      "individual_labels": {
+        "urh-000040": "strong",
+        "urh-000104": "unrelated"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000040": 0.1964912102934852,
+        "urh-000104": 0
+      },
+      "mean_member": 0.4492380453015452,
+      "rank": 6,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "357002",
+      "weakest_member": 0.39774889190742824
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.5440912726521474,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p1",
+      "group_item_key": "60338e34c3dd542c1ab2b36bea8e220d376333d144b29b7b6469f4f7b6d6f952",
+      "group_label": "plausible",
+      "group_reason": "overlap",
+      "group_referenced_person": "urh-000079",
+      "individual_labels": {
+        "urh-000079": "plausible",
+        "urh-000115": "unrelated"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000079": 0.1860786888585893,
+        "urh-000115": 0.12150620917464139
+      },
+      "mean_member": 0.5043568225369067,
+      "rank": 2,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "361207",
+      "weakest_member": 0.4050206972488048
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.5328485418338768,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p3",
+      "group_item_key": "beba2526d9b665384962c6974c0adaa1afa022fd457bcfeb86905426b9c5f8db",
+      "group_label": "plausible",
+      "group_reason": "coherent",
+      "group_referenced_person": "urh-000079",
+      "individual_labels": {
+        "urh-000036": "unrelated",
+        "urh-000079": "plausible"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000036": 0.11026347835637074,
+        "urh-000079": 0.12970623694814754
+      },
+      "mean_member": 0.511045635719189,
+      "rank": 6,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "361207",
+      "weakest_member": 0.41839832361336937
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.5296724129891327,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p1",
+      "group_item_key": "a1c621f2bf015f21852012b4bc148d8c428fe683d5937c04829b90ba35422f71",
+      "group_label": "plausible",
+      "group_reason": "overlap",
+      "group_referenced_person": "urh-000079",
+      "individual_labels": {
+        "urh-000079": "plausible",
+        "urh-000116": "unrelated"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000079": 0.19396345438297097,
+        "urh-000116": 0.10708734951162668
+      },
+      "mean_member": 0.48032538976521544,
+      "rank": 7,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "361207",
+      "weakest_member": 0.35695783170542233
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.5294629815239787,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p2",
+      "group_item_key": "a8af1d998b15bdd54fb1d6530ab7bf233b036801b1bf12caf6512f6d7b59c44c",
+      "group_label": "plausible",
+      "group_reason": "broad",
+      "group_referenced_person": "urh-000109",
+      "individual_labels": {
+        "urh-000079": "plausible",
+        "urh-000109": "unrelated"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000079": 0.42258506347750596,
+        "urh-000109": 0.10687791804647273
+      },
+      "mean_member": 0.47997633732329226,
+      "rank": 8,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "361207",
+      "weakest_member": 0.3562597268215759
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.504949001809606,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "group judgment plausibly driven by one strong member",
+      "group_evidence_ref": "p2",
+      "group_item_key": "4f374caf70a132788f89aff8c0e2c0e3a8c90241987e2629bd6b0c77f8764883",
+      "group_label": "plausible",
+      "group_reason": "broad",
+      "group_referenced_person": "urh-000102",
+      "individual_labels": {
+        "urh-000017": "unrelated",
+        "urh-000102": "strong"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000017": 0.06695025425032064,
+        "urh-000102": 0
+      },
+      "mean_member": 0.4714738746844457,
+      "rank": 2,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "363622",
+      "weakest_member": 0.43799874755928536
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.504949001809606,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p2",
+      "group_item_key": "cd1238b29cf505ccfce4d54e9aa57018902795aab8b2afc5f9000f0611663f11",
+      "group_label": "plausible",
+      "group_reason": "coherent",
+      "group_referenced_person": "urh-000059",
+      "individual_labels": {
+        "urh-000017": "unrelated",
+        "urh-000059": "unrelated"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000017": 0.10282736344371379,
+        "urh-000059": 0
+      },
+      "mean_member": 0.4535353200877491,
+      "rank": 4,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "363622",
+      "weakest_member": 0.4021216383658922
+    },
+    {
+      "certainty": "Plausible mechanism only; private model reasoning unavailable. Unrelated individual grade remains unrelated.",
+      "coverage": 0.504949001809606,
+      "different_question": "group usefulness vs call-person relevance, both exploratory; no explicit target aspect",
+      "disposition": "unresolved semantic disagreement on comparable evidence",
+      "group_evidence_ref": "p2",
+      "group_item_key": "b3c9c0dae33f6365958722ca933afc9bf0f54595c830e42452404dd05a97d92e",
+      "group_label": "plausible",
+      "group_reason": "broad",
+      "group_referenced_person": "urh-000031",
+      "individual_labels": {
+        "urh-000017": "unrelated",
+        "urh-000031": "plausible"
+      },
+      "mapping_defect": false,
+      "marginals": {
+        "urh-000017": 0.11540112186104101,
+        "urh-000031": 0
+      },
+      "mean_member": 0.4472484408790855,
+      "rank": 8,
+      "same_call_source_aspects": true,
+      "same_per_person_passages_labels_summary": true,
+      "same_person_claim_source_identity": true,
+      "scope_id": "363622",
+      "weakest_member": 0.389547879948565
+    }
+  ],
+  "prepared": 35,
+  "protocol": "D2 diagnosis before editing",
+  "provider_calls": 0,
+  "reproduction_sha256": "abda07d0a64a85955c885953dc315268f353eec73c1d630d19139b8eb00faf86",
+  "scientific": 90,
+  "strong_member_carrying": "confirmed numerical degeneracy: F ignores below-max contributors; quality only breaks 1e-6 ties. A semantic cause remains inferential, not every zero marginal is bad.",
+  "unrelated_positive_marginal_occurrences": 12,
+  "unrelated_zero_marginal_occurrences": 8
+}

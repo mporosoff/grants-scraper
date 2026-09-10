@@ -8,7 +8,6 @@
     "evaluation_amendment_E1": true,
     "paid_preparation_or_judging": true,
     "production_release": false,
-    "ranking_revision_D2": true,
     "stage1": true,
     "stage2": true,
     "stage3": false,
@@ -27,13 +26,9 @@
     "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
     "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
     "evaluation_amendment_sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0",
-    "handoff_sha256": "bddad3ca73addbce7189e26d859ef942060665ee8e80c10aeffbcaae299ed8b2",
-    "plan_sha256": "664d04d8868e9cfb90aba62ee82f9a8fc08b02808bb81f2a201e18688ccdfff7",
-    "plan_version": "2.0 + E1/B1/C1/C2/D1",
-    "ranking_revision_D2": {
-      "path": "docs/team-recommender/RANKING_REVISION_D2.md",
-      "sha256": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc"
-    }
+    "handoff_sha256": "3f283ea56332768bfd2a9615843807bc3a493699980f88a984b218b4557cfba2",
+    "plan_sha256": "cab4959a6ae740c573e284c5309fdd0db86057d60810c49844e23ed8a725516a",
+    "plan_version": "2.0 + E1/B1/C1/C2/D1"
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -383,8 +378,8 @@
     "primary_judge": "claude-sonnet-5",
     "primary_numerical_candidate": "B-D1-fixed-weighted-coverage"
   },
-  "next_allowed_stage": 2,
-  "next_stage_requires": "Complete bounded D2 then STOP; no Stage3, enrichment, source expansion or new human items.",
+  "next_allowed_stage": null,
+  "next_stage_requires": "STOP for user review. Relevance/alternative-quality failures and evaluator inconsistencies require a user decision; existing human audit outstanding. No enrichment prerequisite. Stage3/holdout remains unauthorized.",
   "pinned_data": {
     "complete_claims_sha256": "e91568362019ecbb68026ddc86d1136259424529ee93f27368296a46b64abe89",
     "complete_registry_records_sha256": "08054e3393fa4e3606876ccc0cbebd31d1c7c34c7822d261cb6f4b882b4badc3",
@@ -461,19 +456,6 @@
     "stage": 3,
     "stage4_contingency_usd": 0.1,
     "trusted_policy_limitation": "Current executor Stage2-only; separate stage approval and narrowly reviewed stage purpose/allowlist required, same ledger."
-  },
-  "ranking_revision_D2": {
-    "MMR": false,
-    "cloud_owner_run": 34497056168,
-    "controls": 30,
-    "new_spend_usd": 0,
-    "prior_spend_usd": 2.138302,
-    "profile_enrichment": false,
-    "scientific_reservations": 90,
-    "scope_count": 35,
-    "source_head": "ec9c717cf1943ac68be4b1a4ba453bbb29dbd931",
-    "source_preparation_expansion": false,
-    "status": "zero-provider-diagnosis"
   },
   "readiness_findings": {
     "currentness": "Resolved integration; 26/35 prepared action-allowed, 9 separately blocked at 2026-09-10T12:00:00Z. Focused successive-action/cached/stale contracts passed.",
@@ -782,7 +764,7 @@
       "Full physical-browser/E2E/Playwright/accessibility and held-out quality gates unrun; Stage 3 unauthorized"
     ]
   },
-  "stage2_complete": false,
+  "stage2_complete": true,
   "stage2_complete_meaning": "Authorized automated D1 revision complete; quality qualification not achieved; no Stage3 approval",
   "stage2_completion_receipt_index_history": {
     "path": "docs/team-recommender/stage2-continuation-receipt-index.json",
@@ -805,7 +787,7 @@
     "path": "docs/team-recommender/reports/stage-2-report.md",
     "sha256": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351"
   },
-  "stage_status": "stage2-ranking-revision-D2-active",
+  "stage_status": "stage2-diagnostic-revision-complete-REVISE-stop-user-review",
   "stop": "STOP FOR USER REVIEW. Do not inspect holdout recommendations, begin Stage 3 or deploy.",
   "unresolved": [
     "55/90 scientific reservations remain unprepared for stated source/selection/context gaps; 18/150 source-selected rollout ingredients prepared.",

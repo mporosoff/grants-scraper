@@ -1,0 +1,47 @@
+{
+  "at": "2026-09-10T16:51:26.298869+00:00",
+  "checkpoint_sha256": "614ebbfe51d596536d76736a31761fb97ad736abec86fcd194e282393dfb1eac",
+  "cloud_owner_run": 34497056168,
+  "frozen_files": {
+    "docs/team-recommender/human-review/development-packet-c2.md": "13ff8b3e715c12ea910f5f02c1701b145861d7226f7129953c8172abd794aabd",
+    "docs/team-recommender/manifests/development.json": "833cbb454369285b381e3083426553d9b836b90ad16d3b62b65f60d2e19cb9c6",
+    "docs/team-recommender/manifests/holdout.json": "6c08baadefcf2bab3da03684a7cc402228a0592ddf53a011816a0542229ccdd0",
+    "docs/team-recommender/manifests/source-group-amendment-c2-f92fc5995a0a1ac0.json": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359",
+    "docs/team-recommender/prepared/d1/bundle.json": "6587df3faca43c5a2710ca671c532a893971d3569732a9e1ac4a9c3e0396a9a7",
+    "docs/team-recommender/prepared/d1/context.json": "698ecd0e0f1199506beaee88d819a76ddf2fea47f4553f68b67c28b1627dc3a1",
+    "docs/team-recommender/prepared/d1/directory.json": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+    "docs/team-recommender/prepared/d1/validations.json": "3db12b3b59606691f95dd3a6cf5d8a4c93c25a59d6117c6b682affd27a43403e",
+    "docs/team-recommender/prepared/d1/vectors.f32": "cbc5788875e257e3a64030826623a1ec743e37b4667dfd1f0afe2863fb6c9d90",
+    "docs/team-recommender/reports/stage-2-diagnostic-revision-report.md": "a3a46a4c555cb4c1b99dce9090d3bbdce770b0154c29f18df0cfcbf38e078829",
+    "docs/team-recommender/stage2-diagnostic-candidate.json": "edcc53c06212fbd9d96b52a8e59b1591a19b596d56e5e828c70de2a1ad7ca6bc"
+  },
+  "head": "ec9c717cf1943ac68be4b1a4ba453bbb29dbd931",
+  "latest_cloud_run_verified_no_later": true,
+  "ledger_sha256": "23ea6c322f9d555212dec88cebaf0a1f5dd438be27a502c17b5f7acca87f537d",
+  "outstanding_microusd": 0,
+  "prior_finite_consumption": {
+    "d1-judge": {
+      "charged_microusd": 1055772,
+      "input_bounds": 1347679,
+      "output_bounds": 82944,
+      "requests": 162,
+      "reserved_microusd_sum": 4198676
+    },
+    "embedding": {
+      "charged_microusd": 276,
+      "input_bounds": 94941,
+      "output_bounds": 0,
+      "requests": 12,
+      "reserved_microusd_sum": 1907
+    },
+    "legacy-judge": {
+      "charged_microusd": 1082254,
+      "input_bounds": 1226561,
+      "output_bounds": 69632,
+      "requests": 136,
+      "reserved_microusd_sum": 3762759
+    }
+  },
+  "provider_calls": 0,
+  "starting_charge_microusd": 2138302
+}
