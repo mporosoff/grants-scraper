@@ -132,7 +132,7 @@ def profile_evidence(rows, settings):
 
 
 def judge_contract(request, settings):
-    if request.get("protocol") == "D1":
+    if request.get("protocol") in {"D1", "D1F"}:
         from tools.team_recommender_judge_d1 import contract
         return contract(request, settings)
     exact_keys(request, ["scope_id", "purpose", "source_evidence", "items"])
@@ -197,8 +197,13 @@ def legacy_judge_key(request, settings):
     """Recognize paid pre-fix requests, never turn them into another attempt."""
     # D1 has substantively different trusted questions, fields and schema.
     # Its body identity is still irreversible in the SAME durable ledger.
-    if request.get("protocol") == "D1":
-        return None
+    if request.get("protocol") in {"D1", "D1F"}:
+        from tools.team_recommender_judge_d1 import contract
+        counterpart = "D1" if request["protocol"] == "D1F" else "D1F"
+        # This body is hashed for recovery detection, never dispatched. Only
+        # the active format's contract decides whether its request fits.
+        body = contract(dict(request, protocol=counterpart), settings, enforce_dispatch_bound=False)[0]
+        return identity([AUTHORIZATION_ID, "development-judge", body])
     body = request_body({"provider": "anthropic", "model": settings["judge_model"]}, {"max_output_tokens": 512},
         (CONFIG / "judge-prompt.md").read_text(encoding="utf-8"),
         {"source_evidence": request["source_evidence"], "items": request["items"]},
@@ -338,7 +343,7 @@ def result_value(operation, payload, request, contract, settings):
             raise ValueError("incomplete_or_duplicate_verdicts")
         for verdict in value["verdicts"]:
             kind = aliases[verdict["item_id"]]
-            if request.get("protocol") == "D1":
+            if request.get("protocol") in {"D1", "D1F"}:
                 from tools.team_recommender_judge_d1 import labels as d1_labels
                 labels = d1_labels(kind)
                 if not re.fullmatch(r"[ -~]{1,60}", verdict["reason"]):
