@@ -5,6 +5,10 @@
   const VERSION = "ingredients-v2.1";
   const HASH = /^[a-f0-9]{64}$/;
   const ID = /^[A-Za-z0-9][A-Za-z0-9:_.-]{0,127}$/;
+  // Canonical NSF feed IDs are source identities, never fetch destinations.
+  // Preserve exact catalog bytes; reject aliases, query strings and URL tricks.
+  const NSF_ID = /^nsf-funding:https:\/\/www\.nsf\.gov\/funding\/opportunities\/[a-z0-9]+(?:-[a-z0-9]+)*\/(?:nsf[0-9]{2}-[0-9]{3}|pd[0-9]{2}-[0-9]{3}[0-9a-z])$/;
+  function sourceId(value) { return typeof value === "string" && (ID.test(value) || value.length <= 256 && NSF_ID.test(value)); }
   const MAX_BYTES = 8 * 1024 * 1024;
   const prepared = new WeakMap();
   const rowCache = new N.LRU(1600);
@@ -131,7 +135,7 @@
     const sources = new Map(), scopeIds = new Set();
     for (const source of bundle.sources) {
       exactKeys(source, ["id", "parent_id", "record_key", "source_url", "document_sha256", "receipt", "excerpts"], "source");
-      requireValue(ID.test(source.id) && ID.test(source.parent_id) && !sources.has(source.id) && safeUrl(source.source_url) && HASH.test(source.document_sha256) && string(source.record_key, 32000), "Invalid source identity.");
+      requireValue(sourceId(source.id) && sourceId(source.parent_id) && !sources.has(source.id) && safeUrl(source.source_url) && HASH.test(source.document_sha256) && string(source.record_key, 32000), "Invalid source identity.");
       requireValue(Array.isArray(source.excerpts) && source.excerpts.length <= 16, "Over-bound source excerpts.");
       const ids = new Set();
       for (const e of source.excerpts) {
@@ -155,7 +159,7 @@
     }
     for (const scope of bundle.scopes) {
       exactKeys(scope, ["id", "parent_id", "record_type", "scope_label", "approach_id", "prepared", "readiness", "core", "whole_call", "aspects", "group_budgets", "evidence_links"], "scope");
-      requireValue(ID.test(scope.id) && ID.test(scope.parent_id) && !scopeIds.has(scope.id) && ["specific_parent", "publishable_child", "declared_branch"].includes(scope.record_type)
+      requireValue(sourceId(scope.id) && sourceId(scope.parent_id) && !scopeIds.has(scope.id) && ["specific_parent", "publishable_child", "declared_branch"].includes(scope.record_type)
         && (scope.record_type !== "specific_parent" || scope.id === scope.parent_id) && string(scope.scope_label, 1000), "Invalid scope identity.");
       scopeIds.add(scope.id);
       const source = sources.get(scope.id);

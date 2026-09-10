@@ -1,5 +1,7 @@
 # How to give this plan to Codex
 
+> Current authority: September 10 continuation C2 explicitly resumes the C1 checkpoint and authorizes two additional persistence repair/re-review iterations on PR #215, protected merge if clean, and completion of real Stage 2 under the same $10/$6 limits. Read [CONTINUATION_C2.md](CONTINUATION_C2.md). Prior checkpoint statements below are preserved as history. No Stage 3 or holdout recommendations are authorized.
+
 > C1 checkpoint, September 9 EDT / September 10 UTC: Stage 2 remains incomplete. The narrowly authorized prerequisite PR #215 is unmerged at `8972595625f0d3b9fb4ea44794c65bc03ac3fe7b`; exact-head verification found a second consequential accounting/recovery defect after one repair round. The stricter user-supplied review-convergence instruction requires a stop before a second autonomous repair. See [the completion checkpoint report](reports/stage-2-completion-report.md). Existing $10/$6 authority remains; spend/reservations are $0/$0. Real preparation/evaluation is not complete; Stage 3 is not approved.
 
 

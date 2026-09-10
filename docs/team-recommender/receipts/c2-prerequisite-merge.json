@@ -1,0 +1,31 @@
+{
+  "captured_at": "2026-09-10T09:42:28.835518+00:00",
+  "experiment_checkpoint": "1561fe2e8cc000de6a3442784c5afd0272d60355",
+  "pr": 215,
+  "source_checkpoint": "1561fe2e8cc000de6a3442784c5afd0272d60355",
+  "initial_prerequisite_head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+  "additional_repair_rounds_authorized": 2,
+  "additional_review_rounds_requested": 1,
+  "status": "trusted-prerequisite-merged-real-preparation-next",
+  "ledger_actual_usd_verified": 0,
+  "cloud_authority_initialized": false,
+  "prerequisite_head": "4c9df150d015c8458eb5ea485bfd79f7e5c655d6",
+  "merge_sha": "829eada2a08d55bede43d0828b2a5684e49ac0c9",
+  "review_comment_id": 5616499331,
+  "required_ci_run": 34461455254,
+  "focused_tests": 26,
+  "crash_scenarios": 24,
+  "restoration_repetitions_per_scenario": 3,
+  "duplicate_fixture_dispatches": 0,
+  "actual_provider_calls": 0,
+  "ledger_sha256": "0835f7b7017d6655d3de13395c3d5ee8a94342a3ba1ac9115e652bfab4c73f9a",
+  "required_ci": {
+    "python": "passed",
+    "browser": "passed"
+  },
+  "review": "clean terminal exact-head comment",
+  "production_dependency_delta": [
+    "validation"
+  ],
+  "recommender_merged": false
+}

@@ -5,7 +5,7 @@
   "branch": "codex/on-demand-team-recommender",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "active_stage": 2,
-  "stage_status": "stage2-active-C2-persistence-and-real-development",
+  "stage_status": "stage2-incomplete-review-convergence-checkpoint",
   "recommendation": "defer",
   "approvals": {
     "stage1": true,
@@ -17,8 +17,7 @@
     "budget_amendment_B1": true,
     "stage3": false,
     "stage4": false,
-    "continuation_C1": true,
-    "continuation_C2": true
+    "continuation_C1": true
   },
   "source_head_at_evidence_capture": "6adca6a795d4ab52e216e2ff7032d0e393db76b1",
   "source_tree_at_evidence_capture": "9a2011915aac09437a1d5a2215474a4e68091224",
@@ -31,11 +30,11 @@
     "sha256": "5ad92c03679c59a04641ad673280d0df28949131f133f94ac420ba112cd574aa"
   },
   "authority": {
-    "plan_version": "2.0 + E1/B1/C1/C2",
-    "plan_sha256": "5e749cdfb3b6a4bdfec9bb6fbbe9e69bdaeb6018fa74c750f4e25ff9826eb31c",
+    "plan_version": "2.0 + E1/B1/C1",
+    "plan_sha256": "43f2cce920597ebf0414df256250fec802bef7990f2b01b8e39feea8bd47086e",
     "amendment_path": "docs/team-recommender/EVALUATION_AMENDMENT.md",
     "budget_amendment_path": "docs/team-recommender/BUDGET_AMENDMENT_B1.md",
-    "continuation_path": "docs/team-recommender/CONTINUATION_C2.md"
+    "continuation_path": "docs/team-recommender/CONTINUATION_C1.md"
   },
   "pinned_data": {
     "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
@@ -118,7 +117,7 @@
     "review_requested": false,
     "prerequisite_branch_push_performed": true,
     "prerequisite_review_requested": true,
-    "prerequisite_merged": true,
+    "prerequisite_merged": false,
     "executor_dispatched": false
   },
   "unresolved": [
@@ -131,8 +130,8 @@
   ],
   "next_allowed_stage": 2,
   "recommended_next_stage": 2,
-  "next_stage_requires": "Complete authorized Stage 2; Stage 3 requires separate user review and approval.",
-  "stop": "Stop after Stage 2 final report; human packet reply not required during execution.",
+  "next_stage_requires": "Explicitly resume the recorded review-convergence checkpoint, then finish the already-authorized Stage 2 sequence; no Stage 3 approval.",
+  "stop": "STOP FOR USER REVIEW",
   "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
   "stage1_report": {
     "path": "docs/team-recommender/reports/stage-1-report.md",
@@ -146,7 +145,7 @@
   "readiness_findings": {
     "currentness": "prior-engine-integration-preserved; real-policy-observation-81-of-90-action-admitted; prepared-panel-integration-unrun",
     "source_validation": "native-provenance-inventoried; zero-translated-v2-receipts; group-collision-and-ID-seam-recorded; coherence-audit-unfinished",
-    "trusted_paid_route": "C2-PR215-protected-merged-clean-exact-head-review; no paid dispatch yet"
+    "trusted_paid_route": "C1-authorized-PR215-unmerged; consequential-second-verification-finding; review-convergence-stop"
   },
   "results": {
     "real_prepared_rollout_scopes": 0,
@@ -175,30 +174,16 @@
     "ledger_execution_owner": "local-no-provider-executor-active",
     "prerequisite": {
       "pr": 215,
-      "head": "4c9df150d015c8458eb5ea485bfd79f7e5c655d6",
-      "merged": true,
+      "head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+      "merged": false,
       "dispatch_runs": [],
-      "unresolved_finding_id": null,
-      "merge_sha": "829eada2a08d55bede43d0828b2a5684e49ac0c9"
+      "unresolved_finding_id": 3974656336
     },
     "repair_batches": 1,
     "required_verification_remaining_findings": 1,
-    "review_convergence_resume_required": false,
+    "review_convergence_resume_required": true,
     "cloud_authority_initialized": false,
-    "completed_at_checkpoint": "2026-09-10T01:41:39.075419+00:00",
-    "C2": {
-      "source_checkpoint": "1561fe2e8cc000de6a3442784c5afd0272d60355",
-      "initial_prerequisite_head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
-      "additional_repair_rounds_authorized": 2,
-      "additional_review_rounds_requested": 1,
-      "status": "trusted-prerequisite-merged-real-preparation-next",
-      "ledger_actual_usd_verified": 0,
-      "cloud_authority_initialized": false,
-      "prerequisite_head": "4c9df150d015c8458eb5ea485bfd79f7e5c655d6",
-      "merge_sha": "829eada2a08d55bede43d0828b2a5684e49ac0c9",
-      "review_comment_id": 5616499331,
-      "required_ci_run": 34461455254
-    }
+    "completed_at_checkpoint": "2026-09-10T01:41:39.075419+00:00"
   },
   "stage2_complete": false,
   "stage2_engineering_report": {
