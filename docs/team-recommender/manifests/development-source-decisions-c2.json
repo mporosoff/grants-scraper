@@ -1,0 +1,205 @@
+{
+  "version": "C2-source-decisions-1",
+  "selection_before_recommendation_outputs": true,
+  "criterion": "An explicit coherent scientific contribution in the original source can support exploratory matching. Unselected umbrella topics and generic funding mechanisms do not create scientific aspects. Existing prerequisites are preserved independently of numerical preparation. A short official synopsis can support its stated contribution without certifying an entire notice.",
+  "aspect_quotes": {
+    "359696": [
+      "transformative in vivo high-resolution/high specificity imaging of the human olfactory system",
+      "cell specific biomarkers",
+      "fluorescence imaging",
+      "optical and acoustic imaging"
+    ],
+    "363281": [
+      "biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data",
+      "genomic, transcriptomic, and proteomic data"
+    ],
+    "363141": [
+      "evaluate primary prevention-focused approaches to reduce suicide and interpersonal violence among youth and young adults (ages 10 to 24 years)",
+      "evaluation of existing primary prevention approaches"
+    ],
+    "334971": [
+      "improving the occupational safety of workers in the commercial fishing industry",
+      "development of new protective equipment and engineering control technology to reduce work-related injuries and fatalities"
+    ],
+    "362315": [
+      "identify and rigorously test solutions to reduce morbidity and mortality in Native populations",
+      "dissemination and implementation of strategies to overcome barriers to adopting, integrating, scaling up, and sustaining effective interventions"
+    ],
+    "360644": [
+      "Autism Centers of Excellence (ACE)"
+    ],
+    "363055": [
+      "prevention of violence among youth aged 10 to 24 years",
+      "rigorous evaluation of at least two distinct violence prevention approaches"
+    ],
+    "356978": [
+      "clinical trials across the cancer prevention and control spectrum",
+      "study population, accrual challenges, intervention, outcome/ endpoints, data/statistical challenges or operational risks"
+    ],
+    "362196": [
+      "preclinical validation of therapeutic leads through U.S. Food and Drug Administration (FDA) Investigational New Drug (IND)-enabling studies",
+      "target engagement and pharmacodynamic biomarker development"
+    ],
+    "112354": [
+      "fundamental understanding of how organizations develop, form and operate",
+      "scientific methods to develop and refine theories, to empirically test theories and frameworks, and to develop new measures and methods"
+    ],
+    "362254": [],
+    "362218": [
+      "drug discovery and therapeutic development for hearing restoration after military-relevant auditory system injury",
+      "preclinical studies and/or clinical research"
+    ],
+    "363292": [
+      "automation, robotics, and intelligent mining systems that improve safety and health in U.S. mining operations",
+      "sensors, data fusion, AI, and systems improving machine and operator situational awareness"
+    ],
+    "362207": [
+      "clinical trial research to produce effective treatments and cures for ovarian cancer"
+    ],
+    "362855": [],
+    "357002": [
+      "development and use of current and emerging molecular imaging methods to gain fundamental insights into cancer inflammation in vivo",
+      "identification and characterization of in vivo inflammatory cellular physiology in cancers and of molecular changes in response to treatment"
+    ],
+    "361208": [
+      "auditory and vestibular researchers who use human inner and middle ear tissues for a range of basic and clinical studies"
+    ],
+    "363069": [
+      "conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries",
+      "producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries"
+    ],
+    "361207": [
+      "human inner and middle ear tissues for basic and clinical studies focused on understanding human auditory and vestibular disorders",
+      "developing and disseminating techniques for improved tissue preservation and processing"
+    ],
+    "351947": [
+      "potentially transformative approaches to STEM graduate education training",
+      "piloting, testing, and validating novel models or activities and examining systemic innovations"
+    ],
+    "363622": [
+      "computing approaches that harness the principles of wave dynamics"
+    ],
+    "363544": [
+      "gridded ecological drought forecasts to help rangeland managers target restoration investments in places and times where plant establishment is likely",
+      "synthesize establishment requirements for critical restoration species"
+    ],
+    "359091": [
+      "research in cancer epidemiology cohort studies that address specific knowledge gaps in cancer etiology and survivorship",
+      "continued follow-up, and sharing of data and biospecimen resources as appropriate"
+    ],
+    "362244": [
+      "an overarching question relevant to rare melanomas"
+    ],
+    "362520": [],
+    "358938": [
+      "data management, and biostatistical support for the clinical trial proposed in the collaborating CCC application",
+      "clinical trial community engagement plan"
+    ],
+    "363489": [
+      "physics and nonlinear control of inertial measurement units (IMUs) appropriate for tactical and unmanned missions",
+      "advanced, real-time adaptive control systems necessary to stabilize and harness these complex dynamics"
+    ],
+    "361380": [
+      "development and translation of next-generation technologies to prevent, monitor, diagnose, and treat disorders",
+      "technology development and optimization, and studies to prepare for approvals for human use"
+    ],
+    "362178": []
+  },
+  "sentence_selection": {
+    "362254": [
+      0,
+      1
+    ],
+    "362855": [
+      0,
+      1
+    ],
+    "362520": [
+      0,
+      1
+    ],
+    "362178": [
+      0
+    ]
+  },
+  "coherence_limits": {
+    "359696": "Multimodal imaging is explicit. Listed modalities are planning contributions, not independently mandatory sponsor requirements; one central olfactory-imaging purpose anchors them.",
+    "363141": "Common primary prevention/evaluation purpose only. Online and community interventions remain alternatives, not cumulative requirements.",
+    "360644": "Forecast supports discussion of autism research only. No invented new methods or detailed requirements; one aspect, so optimizer may return no complementary group.",
+    "363055": "Priority research areas are not enumerated in retained synopsis; bounded prevention/evaluation contributions only, complete responsiveness unknown.",
+    "362218": "Missing detailed focus-area list does not invalidate the explicit hearing-restoration contribution. Clinical trials, tinnitus and vestibular research excluded; exact focus-area responsiveness remains unknown.",
+    "363292": "ABET/mining-program institutional requirement retained in source, not certified for directory members.",
+    "362244": "Rare-melanoma scientific contribution only, not invented projects within the multi-project program. Existing invitation/prerequisite policy still blocks automatic action.",
+    "363622": "Wave-computing science only; administrative EAGER/multidisciplinary tracks do not become invented scientific requirements. Existing submission prerequisites remain enforced."
+  },
+  "nonresearch_or_mechanism": [
+    "342747",
+    "363736",
+    "361322",
+    "359236",
+    "339594",
+    "351923",
+    "362393",
+    "363636",
+    "363525",
+    "363569",
+    "363015",
+    "358830",
+    "360633",
+    "355100",
+    "362575",
+    "344715",
+    "359669",
+    "363765",
+    "363699",
+    "363526",
+    "363479",
+    "243973",
+    "343980",
+    "357498",
+    "363724",
+    "363760",
+    "363783",
+    "359862",
+    "358114",
+    "362871",
+    "363391"
+  ],
+  "unselected_umbrella": [
+    "363612",
+    "360205",
+    "360698",
+    "355196",
+    "363102",
+    "361876",
+    "363514",
+    "349724",
+    "332894",
+    "360258",
+    "360954",
+    "39841",
+    "295449",
+    "360660",
+    "357554",
+    "328902",
+    "348258",
+    "349655",
+    "324456",
+    "360012"
+  ],
+  "specific_context_gaps": {
+    "362868": "Required four Parkinson focus areas absent; synopsis otherwise generic disease research, no specific scientific contribution beyond disease title.",
+    "339728": "Retained text contains old closed TBAM cycle dates inconsistent with current structured record; current cycle scientific/ownership reconciliation required.",
+    "362857": "Prior DoD-funded late-stage program; required scientific focus areas not present in synopsis.",
+    "45810": "Official NSF synopsis representation requires its separate retained source receipt; category A, not absence of evidence."
+  },
+  "special_sources": [
+    "344592:ab-0009",
+    "345241:tdac-baa-004",
+    "361526:f-18",
+    "nasa-roses:25-D.9-d22059cf9f",
+    "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+    "363747"
+  ],
+  "feasibility": "Not inferred from returned groups. Full-directory feasibility remains unknown unless independently supported by original source and profile evidence; all-reservation yield remains primary descriptive denominator."
+}

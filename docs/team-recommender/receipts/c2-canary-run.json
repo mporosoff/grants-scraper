@@ -1,0 +1,18 @@
+{
+  "run_id": 34463512164,
+  "trusted_main_sha": "829eada2a08d55bede43d0828b2a5684e49ac0c9",
+  "packet_sha256": "41b27912edd06b626ac248ee77898ecc378ad174acddf6df59b8f914a5e6a46c",
+  "ledger_sha256": "d038a8e15aa97c142b4fd5c29277ae01bd2f815d473ce3fe7918ae09e67adf10",
+  "checkpoint_sha256": "c62817f044f9b56cc7cc11f41112bbceab7110ba717f748788f501befd0ba013",
+  "requests": 2,
+  "vectors": 6,
+  "actual_tokens": 153,
+  "charged_microusd": 4,
+  "outstanding_reservations_microusd": 0,
+  "production_merge_run": {
+    "id": 34462054392,
+    "generate": "skipped",
+    "publish": "skipped",
+    "pages": "skipped"
+  }
+}

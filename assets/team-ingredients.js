@@ -13,7 +13,8 @@
   const prepared = new WeakMap();
   const rowCache = new N.LRU(1600);
   const materialFields = ["opportunity_id", "subtopic_id", "parent_id", "title", "description", "summary", "source", "source_url",
-    "documents", "publication_state", "child_type", "scope", "source_hash", "content_hash", "source_updated_date"];
+    "documents", "publication_state", "child_type", "scope", "source_hash", "content_hash", "source_updated_date",
+    "source_document_hash", "source_document_url", "source_version", "parent_subtopic_id", "source_role"];
   function canonical(value) {
     if (Array.isArray(value)) return "[" + value.map(canonical).join(",") + "]";
     if (value && typeof value === "object") return "{" + Object.keys(value).sort(N.cmp).map(k => JSON.stringify(k) + ":" + canonical(value[k])).join(",") + "}";
@@ -167,10 +168,36 @@
       if (!scope.prepared) { requireValue(["missing", "stale", "ambiguous", "unvalidated", "unsupported"].includes(scope.readiness) && !scope.aspects?.length, "Unprepared source carries recommendations."); continue; }
       requireValue(source.receipt?.kind === "source-span-validation-v1" && source.receipt.validation_state === "source-backed" && source.receipt.approach_id === scope.approach_id, "Prepared source lacks validation receipt.");
       const originalValidation = (manifest.source_validations || []).find(r => r.scope_id === scope.id);
-      exactKeys(originalValidation, ["validation", "scope_id", "parent_id", "document_sha256", "text_sha256", "retrieved_at", "new_retrieval", "excerpt_count", "excerpt_hashes", "semantic_judgment"], "original-source validation");
-      requireValue(originalValidation?.validation === "original-source-spans-verified" && originalValidation.parent_id === scope.parent_id
+      exactKeys(originalValidation, ["validation", "scope_id", "parent_id", "document_sha256", "text_sha256", "retrieved_at", "observed_at", "new_retrieval", "excerpt_count", "excerpt_hashes", "semantic_judgment", "provenance", "limitations"], "original-source validation");
+      const retained = ["retained-official-fields-verified", "retained-native-spans-verified"].includes(originalValidation.validation);
+      if (originalValidation.validation === "retained-official-fields-verified") {
+        const p = originalValidation.provenance;
+        exactKeys(p, ["kind", "artifact_sha256", "export_identity", "source_url", "fields"], "retained provenance");
+        requireValue(p.kind === "official-export-fields-v1" && p.artifact_sha256 === source.document_sha256
+          && /^GrantsDBExtract[0-9]{8}v[0-9]+\.zip$/.test(p.export_identity) && p.source_url === source.source_url
+          && ["www.grants.gov", "grants.gov"].includes(new URL(p.source_url).hostname)
+          && originalValidation.retrieved_at === null && string(originalValidation.limitations, 2000)
+          && canonical(p.fields) === canonical(source.excerpts.map(e => ({field: e.locator, sha256: e.sha256})))
+          && p.fields.every(f => ["title", "description", "eligibility_text"].includes(f.field)), "Invalid retained official field provenance.");
+      }
+      if (originalValidation.validation === "retained-native-spans-verified") {
+        const p = originalValidation.provenance;
+        exactKeys(p, ["kind", "artifact_sha256", "source_url", "parent_id", "scope_id", "document_sha256", "locator"], "retained native provenance");
+        requireValue(p.kind === "native-catalog-scope-v1" && HASH.test(p.artifact_sha256) && p.source_url === source.source_url
+          && p.scope_id === scope.id && p.parent_id === scope.parent_id && p.document_sha256 === source.document_sha256
+          && string(p.locator, 500) && originalValidation.retrieved_at === null && string(originalValidation.limitations, 2000), "Invalid retained native provenance.");
+      }
+      const nsfPage = originalValidation.validation === "retained-nsf-page-verified";
+      if (nsfPage) {
+        const p = originalValidation.provenance;
+        exactKeys(p, ["kind", "artifact_sha256", "source_url", "parser_version", "original_text_sha256"], "retained NSF provenance");
+        requireValue(p.kind === "official-nsf-page-v1" && p.artifact_sha256 === source.document_sha256
+          && /^https:\/\/www\.nsf\.gov\/funding\/opportunities\/[a-z0-9-]+$/.test(p.source_url) && p.source_url === source.source_url
+          && Number.isInteger(p.parser_version) && HASH.test(p.original_text_sha256) && string(originalValidation.limitations, 2000), "Invalid retained NSF page provenance.");
+      }
+      requireValue((retained || nsfPage || originalValidation?.validation === "original-source-spans-verified") && originalValidation.parent_id === scope.parent_id
         && originalValidation.document_sha256 === source.document_sha256 && HASH.test(originalValidation.text_sha256)
-        && originalValidation.retrieved_at === source.receipt.checked_at && originalValidation.new_retrieval === false
+        && (retained ? originalValidation.observed_at : originalValidation.retrieved_at) === source.receipt.checked_at && originalValidation.new_retrieval === false
         && canonical(originalValidation.excerpt_hashes) === canonical(source.excerpts.map(e => e.sha256)), "Missing original-source validation record.");
       requireValue(Array.isArray(scope.aspects) && scope.aspects.length >= 1 && scope.aspects.length <= 8 && ID.test(scope.approach_id), "Unsupported scientific aspect count.");
       const aspectIds = new Set(), budgets = {}, grouped = {}, optional = {weight: 0};

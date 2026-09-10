@@ -62,14 +62,17 @@
     "id": "on-demand-team-offline-v2-20260909",
     "authorized_usd": 10,
     "stage2_cumulative_ceiling_usd": 6,
-    "actual_usd": 0.0,
-    "reserved_usd": 0.0,
+    "actual_usd": 4e-06,
+    "reserved_usd": 0,
     "ledger": "docs/team-recommender/budget-ledger.json",
-    "remaining_total_usd": 10.0,
+    "remaining_total_usd": 9.999996,
     "later_stage_minimum_preserved_usd": 4,
-    "requests": 0,
-    "input_tokens": 0,
-    "output_tokens": 0
+    "requests": 2,
+    "input_tokens": 153,
+    "output_tokens": 0,
+    "authoritative_owner": "GitHub main-only executor paired reservation/state artifacts",
+    "latest_run_id": 34463512164,
+    "local_copy_role": "read-only mirror; cannot authorize dispatch"
   },
   "human_review": {
     "sole_confirmed_reviewer": "Marc Porosoff",
