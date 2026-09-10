@@ -368,8 +368,10 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
             ledger.event(kind="exact_cache_hit", key=key)
             continue
         prior = [r for r in ledger.read()["requests"] if r["key"] == key]
-        if prior and (prior[-1]["status"] == "reserved_unknown" or prior[-1].get("terminal")):
-            raise Deferred("uncertain_or_terminal_request_not_repeated")
+        if prior and (prior[-1]["status"] in {"reserved_unknown", "valid"} or prior[-1].get("terminal")):
+            # A usage receipt can commit before its cache write. Lost output does
+            # not undo purchased work or authorize another identical request.
+            raise Deferred("uncertain_terminal_or_cacheless_completed_request_requires_recovery")
         attempt = len(prior) + 1
         row_inputs = [request["input_role"] + ":" + r["id"] for r in request["rows"]] if provider == "voyage" else []
         if provider == "voyage":

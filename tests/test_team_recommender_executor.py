@@ -123,6 +123,25 @@ class ExecutorContract(unittest.TestCase):
         self.assertEqual(row["charged_microusd"], row["reserved_microusd"])
         with self.assertRaises(Deferred): e.execute(self.state, path, digest, lambda *a, **k: self.fail("uncertain redispatch"))
 
+    def test_completed_usage_without_cache_never_repeats_paid_work(self):
+        path, digest, _ = self.packet()
+        original_write = e.atomic_json
+        def interrupted_cache_write(target, value):
+            if target.parent.name == "cache":
+                raise OSError("simulated interrupted cache persistence")
+            return original_write(target, value)
+        payload = {"model": "voyage-4-lite", "usage": {"total_tokens": 10},
+                   "data": [{"index": 0, "embedding": [1.0]+[0.0]*1023}]}
+        with patch.object(e, "atomic_json", interrupted_cache_write), self.assertRaises(OSError):
+            e.execute(self.state, path, digest, lambda *a, **k: self.response(payload))
+        before = e.ExperimentLedger(self.state/"ledger.json").read()
+        self.assertEqual(before["requests"][0]["status"], "valid")
+        self.assertFalse((self.state/"cache").exists())
+        self.assertTrue((self.state/"checkpoint.json").exists())
+        with self.assertRaisesRegex(Deferred, "cacheless_completed"):
+            e.execute(self.state, path, digest, lambda *a, **k: self.fail("completed request redispatched"))
+        self.assertEqual(e.ExperimentLedger(self.state/"ledger.json").read(), before)
+
     def test_unique_embedding_inventory_has_one_durable_limit(self):
         ledger = e.ExperimentLedger(self.state/"ledger.json")
         state = ledger.read()
