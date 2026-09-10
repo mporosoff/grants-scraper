@@ -1,0 +1,45 @@
+{
+  "cumulative_microusd": 1090544,
+  "failed_request": {
+    "attempt": 1,
+    "body_sha256": "6df1918ba4950df9851814c6e5954c527d3b2eca4f3cf780cdae0f0de3c36943",
+    "charged_microusd": 8014,
+    "code_sha": "4884d2b9ca4b6b8bdb6be613d92aef5a8c8e4435",
+    "dispatch_claim": "irreversible-v1",
+    "id": "6016aa6c3e124aecb60668d23da14a7f",
+    "key": "9318ad98fad19b790e3b35fe2ab14ef43fbd20ddf028f897eef8284cb99ff5a6",
+    "model": "claude-sonnet-5",
+    "packet_sha256": "34eb5f18538c6120f6666b9a381783e404dc48456f6257174faba3b510fd299f",
+    "provider": "anthropic",
+    "purpose": "d1-source",
+    "reserved_input_tokens": 10526,
+    "reserved_microusd": 31435,
+    "reserved_output_tokens": 512,
+    "row_inputs": [],
+    "stage": 2,
+    "status": "failed",
+    "terminal": true,
+    "usage": {
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "inference_geo": "global",
+      "input_tokens": 3672,
+      "output_tokens": 67,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard"
+    }
+  },
+  "ledger_sha256": "ee2859563fa9fccb8928f56a3bd7a4b29791f677f3913763a7cde9a02f63db1a",
+  "next_packet": "db48fdfc97f6543923f0c3b5e456c65e16010930833d139c06e0a61e12a24799",
+  "outstanding_reservations": 0,
+  "prior_run": 34492338069,
+  "run": 34494191625,
+  "same_task_retry": false,
+  "status": "first sanity response rejected by string-length validation; two requests unattempted"
+}
