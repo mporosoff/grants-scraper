@@ -37,7 +37,10 @@ class ExperimentLedger(Ledger):
         import uuid
         if not trusted_route:
             raise ConfigurationFailure("task_specific_trusted_route_unavailable")
-        if stage not in (2, 3) or stage > approved_stage or ROUTES.get(provider) != model:
+        metadata = execution_metadata or {}
+        d3_embedding = provider == 'voyage' and metadata.get('purpose') in {'d3-embedding','d3-query-format'}
+        allowed_model = model in {'voyage-4-large','voyage-context-4'} if d3_embedding else ROUTES.get(provider) == model
+        if stage not in (2, 3) or stage > approved_stage or not allowed_model:
             raise ConfigurationFailure("outside_experiment_authority")
         if type(amount) is not int or amount <= 0 or attempt not in (1, 2):
             raise ValueError("invalid_conservative_reservation")
@@ -82,28 +85,38 @@ class ExperimentLedger(Ledger):
                     contextual=[r for r in embedding if r.get('purpose')=='d2-context']
                     if len(contextual)>=5 or sum(r['reserved_microusd'] for r in contextual)+amount>20_000:
                         raise Deferred('finite_d2_context_envelope_exhausted')
+                if d3_embedding:
+                    d3 = [r for r in embedding if r.get('purpose') in {'d3-embedding','d3-query-format'}]
+                    if len(d3)>=28 or sum(r['reserved_microusd'] for r in d3)+amount>180_000:
+                        raise Deferred('finite_d3_embedding_envelope_exhausted')
+                    if metadata['purpose']=='d3-query-format':
+                        formats=[r for r in d3 if r.get('purpose')=='d3-query-format']
+                        if len(formats)>=3 or any(r['model']!=model for r in formats):
+                            raise Deferred('one_D3_leading_query_format_only')
                 if stage!=2 or output_tokens or len(embedding)>=80 or sum(r.get('reserved_input_tokens',0) for r in embedding)+input_tokens>10_000_000:
                     raise Deferred('finite_embedding_envelope_exhausted')
                 if sum(r['reserved_microusd'] for r in embedding)+amount>200_000:
                     raise Deferred('finite_preparation_dollar_envelope_exhausted')
-                if amount < (input_tokens+49)//50:raise ValueError('underreserved_embedding_request')
+                minimum=(input_tokens*3+24)//25 if d3_embedding else (input_tokens+49)//50
+                if amount < minimum:raise ValueError('underreserved_embedding_request')
             if provider=='anthropic':
                 d1 = metadata.get('purpose', '').startswith('d1-')
                 d2 = metadata.get('purpose', '').startswith('d2-')
-                if (d1 or d2) and stage != 2:
+                d3 = metadata.get('purpose', '').startswith('d3-')
+                if (d1 or d2 or d3) and stage != 2:
                     raise ConfigurationFailure('d1_is_development_only')
                 # A finite amended question inventory, never a fresh dollar
                 # allowance. Historical charges/uncertainty remain in spent.
                 # Preserve the original B1 inventory and its consumed bounds.
-                family = 'd2-' if d2 else 'd1-' if d1 else None
-                judge = [r for r in judge if (r.get('purpose','').startswith(family) if family else not r.get('purpose','').startswith(('d1-','d2-')))]
-                count_cap, input_cap, output_cap = ((120, 1_100_000, 61_440) if d2 else (200, 1_360_000, 102_400) if d1 else
+                family = 'd3-' if d3 else 'd2-' if d2 else 'd1-' if d1 else None
+                judge = [r for r in judge if (r.get('purpose','').startswith(family) if family else not r.get('purpose','').startswith(('d1-','d2-','d3-')))]
+                count_cap, input_cap, output_cap = ((120, 1_100_000, 61_440) if d2 or d3 else (200, 1_360_000, 102_400) if d1 else
                     ((350, 1_433_600, 179_200) if stage==2 else (260, 1_064_960, 133_120)))
                 if input_tokens > 12_000 or output_tokens > 512 or len(judge)>=count_cap or sum(r.get('reserved_input_tokens',0) for r in judge)+input_tokens>input_cap or sum(r.get('reserved_output_tokens',0) for r in judge)+output_tokens>output_cap:
                     raise Deferred('finite_judge_phase_envelope_exhausted')
                 if amount < (input_tokens*5+1)//2 + output_tokens*10:
                     raise ValueError('underreserved_judge_request')
-                dollar_cap = 3_364_400 if d2 else 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
+                dollar_cap = 3_364_400 if d2 or d3 else 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
                 if sum(r['reserved_microusd'] for r in judge)+amount>dollar_cap:
                     raise Deferred('finite_judge_dollar_envelope_exhausted')
             if spent + amount > min(self.limit, STAGE_CEILINGS[stage]) or len(state["requests"]) >= self.max_requests:

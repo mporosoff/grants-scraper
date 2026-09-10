@@ -33,6 +33,7 @@ PURPOSES = {"source": 90, "individual": 90, "group": 90, "control": 30, "explana
 PURPOSES.update({"d1-source":12,"d1-call":130,"d1-aspect":20,"d1-group":40,
                  "d1-comparison":40,"d1-explanation":12,"d1-control":30,"d1-swap":4})
 PURPOSES.update({"d2-call":80,"d2-group":70,"d2-comparison":20,"d2-explanation":6,"d2-swap":4})
+PURPOSES.update({"d3-call":100,"d3-group":70,"d3-comparison":25,"d3-explanation":8,"d3-swap":4})
 KINDS = {"individual", "group", "comparison", "source_control", "explanation_audit"}
 SCIENCE_LABELS = {"strong", "plausible", "unrelated", "insufficient-information"}
 
@@ -137,7 +138,7 @@ def judge_contract(request, settings):
         from tools.team_recommender_judge_d1 import contract
         return contract(request, settings)
     exact_keys(request, ["scope_id", "purpose", "source_evidence", "items"])
-    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES or request["purpose"].startswith(("d1-", "d2-")):
+    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES or request["purpose"].startswith(("d1-", "d2-", "d3-")):
         raise ValueError("judge_outside_development_authority")
     if request["source_evidence"]["scope_id"] != request["scope_id"]:
         raise ValueError("source_scope_mismatch")
@@ -213,6 +214,9 @@ def legacy_judge_key(request, settings):
 
 
 def embedding_contract(request, settings):
+    from tools.team_recommender_embeddings_d3 import is_d3, contract
+    if is_d3(request):
+        return contract(request, settings)
     exact_keys(request, ["input_role", "rows"], ["representation"])
     role, rows = request["input_role"], request["rows"]
     if role not in ("query", "document") or not isinstance(rows, list) or not 1 <= len(rows) <= 128:
@@ -238,6 +242,13 @@ def embedding_contract(request, settings):
     body = {"model": settings["embedding_model"], "input": [r["text"] for r in rows],
             "input_type": role, "output_dimension": settings["dimension"], "output_dtype": "float", "truncation": False}
     return body, len(encoded(body)) + 1024
+
+
+def embedding_items(request):
+    from tools.team_recommender_embeddings_d3 import is_d3, paid_items
+    if is_d3(request):
+        return paid_items(request)
+    return [request['input_role'] + ':' + row['id'] for row in request['rows']]
 
 
 def validate_packet(packet, settings):
@@ -343,8 +354,11 @@ def prepare(destination, packet_path, reservation, commit, packet_hash):
 
 
 def result_value(operation, payload, request, contract, settings):
-    if payload.get("model") != settings["embedding_model" if operation == "embeddings" else "judge_model"]:
+    if payload.get("model") != contract[0]["model"]:
         raise ConfigurationFailure("unexpected_returned_model")
+    from tools.team_recommender_embeddings_d3 import is_d3, result
+    if operation == 'embeddings' and is_d3(request):
+        return result(payload, request)
     if operation == "development-judge":
         _, _, aliases, refs, schema = contract
         value = validate_schema(response_value("anthropic", payload), schema)
@@ -379,7 +393,7 @@ def result_value(operation, payload, request, contract, settings):
     return {"input_role": request["input_role"], "rows": output}
 
 
-def usage_cost(operation, payload):
+def usage_cost(operation, payload, model='voyage-4-lite'):
     usage = payload.get("usage")
     if not isinstance(usage, dict):
         raise ValueError("missing_usage_receipt")
@@ -387,7 +401,10 @@ def usage_cost(operation, payload):
     if any(type(usage.get(k)) is not int or usage[k] < 0 for k in fields):
         raise ValueError("invalid_usage_receipt")
     if operation == "embeddings":
-        charge = Decimal(usage["total_tokens"]) * Decimal(".02")
+        rate = {"voyage-4-lite": ".02", "voyage-4-large": ".12", "voyage-context-4": ".12"}.get(model)
+        if rate is None:
+            raise ConfigurationFailure('unpriced_embedding_model')
+        charge = Decimal(usage["total_tokens"]) * Decimal(rate)
     else:
         optional = [usage.get("cache_read_input_tokens", 0), usage.get("cache_creation_input_tokens", 0)]
         if any(type(n) is not int or n < 0 for n in optional):
@@ -422,6 +439,7 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
             raise Deferred("bounded_run_deadline")
         contract = (embedding_contract if provider == "voyage" else judge_contract)(request, settings)
         body, bound = contract[:2]
+        model = body['model']
         key = identity([AUTHORIZATION_ID, operation, body])
         if operation == "development-judge":
             previous_key = legacy_judge_key(request, settings)
@@ -438,6 +456,11 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
                 raise Deferred("cache_without_exact_valid_reconciliation_requires_recovery")
             value = retained["value"]
             if operation == "embeddings":
+                from tools.team_recommender_embeddings_d3 import is_d3, validate_value
+                if is_d3(request):
+                    validate_value(value, request)
+                    ledger.event(kind="exact_cache_hit", key=key)
+                    continue
                 exact_keys(value, ["input_role", "rows"])
                 if value["input_role"] != request["input_role"] or len(value["rows"]) != len(request["rows"]):
                     raise ValueError("cached_embedding_contract_mismatch")
@@ -457,24 +480,28 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
         if prior:
             raise Deferred("cacheless_completed_or_uncertain_request_requires_recovery")
         attempt = 1
-        row_inputs = [request["input_role"] + ":" + r["id"] for r in request["rows"]] if provider == "voyage" else []
-        amount = (bound + 49)//50 if provider == "voyage" else (bound*5+1)//2 + 5120
+        row_inputs = embedding_items(request) if provider == "voyage" else []
+        amount = ((bound*3+24)//25 if model in {'voyage-4-large','voyage-context-4'} else (bound+49)//50) if provider == "voyage" else (bound*5+1)//2 + 5120
+        from tools.team_recommender_embeddings_d3 import is_d3, endpoint
+        embedding_purpose = ('d3-query-format' if 'query_format' in request else 'd3-embedding') if is_d3(request) else ('d2-context' if request.get('representation') == 'D2-context-v1' else 'embedding')
         token = ledger.reserve_experiment(provider, model, 2, key, amount, attempt, trusted_route=True,
                     input_tokens=bound, output_tokens=0 if provider == "voyage" else 512,
                     execution_metadata={"packet_sha256": packet_hash, "body_sha256": identity(body),
-                        "purpose": request.get("purpose", "d2-context" if request.get("representation") == "D2-context-v1" else "embedding"), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs,
+                        "purpose": request.get("purpose", embedding_purpose), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs,
                         "judge_items": judge_items(request) if provider == "anthropic" else []},
                     purpose_limit=PURPOSES[request["purpose"]] if provider == "anthropic" else None)
         receipt = {"request_id": token, "key": key, "model": model, "reserved_microusd": amount,
                    "packet_sha256": packet_hash, "attempt": attempt, "code_sha": os.environ["GITHUB_SHA"]}
         try:
             url = "https://api.voyageai.com/v1/embeddings" if provider == "voyage" else "https://api.anthropic.com/v1/messages"
+            if provider == 'voyage' and is_d3(request):
+                url = endpoint(request)
             headers = {"Content-Type": "application/json", "User-Agent": "FundingFinder-TeamExperiment/1.0"}
             headers.update({"Authorization": "Bearer " + secret} if provider == "voyage" else {"x-api-key": secret, "anthropic-version": "2023-06-01"})
             response = post(url, headers=headers, json=body, timeout=120, allow_redirects=False, stream=True)
             receipt["http_status"] = response.status_code
             payload = json.loads(bounded_response(response, PACKET_LIMIT))
-            usage, charge = usage_cost(operation, payload)
+            usage, charge = usage_cost(operation, payload, model)
             receipt.update(usage=usage, charged_microusd=charge, returned_model=payload.get("model"))
             value = result_value(operation, payload, request, contract, settings)
             ledger.reconcile(token, cost_usd=Decimal(charge)/1000000, usage=usage, status="valid")
