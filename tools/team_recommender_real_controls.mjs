@@ -39,6 +39,6 @@ const report={scientific_reservations:90,derived_controls:30,attempted:results.l
  objective_perturbations:results.filter(r=>r.result==='objective-perturbation-rejected').length,
  unprepared_origins:results.filter(r=>r.result==='unprepared-origin').length,
  semantic_control_judgments:0,provider_calls:0,results};
-const dest='docs/team-recommender/receipts/c2-real-controls.json',raw=JSON.stringify(report,null,2)+'\n';
+const dest='docs/team-recommender/receipts/'+(process.env.TEAM_RECEIPT_PREFIX||'c2')+'-real-controls.json',raw=JSON.stringify(report,null,2)+'\n';
 if(fs.existsSync(dest)&&fs.readFileSync(dest,'utf8')!==raw)throw Error('Existing immutable control receipt differs');
 fs.writeFileSync(dest,raw);console.log(JSON.stringify({...report,results:undefined}));

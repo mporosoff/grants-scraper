@@ -1,14 +1,14 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import {realInputs,engine,action,runtime,NOW} from '../helpers/team-real-inputs.mjs';
+import {realInputs,engine,action,runtime,NOW,ROOT} from '../helpers/team-real-inputs.mjs';
 import {buildPackage} from '../../tools/build_team_ingredients.mjs';
 
 const inputs=await realInputs();
 const build=f=>buildPackage({bundle:f.bundle,vectors:f.bytes,directory:f.directory,sourceValidations:f.validations});
-test('real 90-source snapshot, 155 people and 526 exact vectors hydrate without startup calculation',async()=>{
+test('real 90-source snapshot, 155 people and exact versioned vectors hydrate without startup calculation',async()=>{
  const {e}=await engine(inputs);assert.equal(inputs.bundle.people.length,155);assert.equal(e.data.faculty.length,158);
- assert.equal(inputs.bundle.vector_rows.length,526);assert.equal(inputs.bundle.scopes.length,90);
- assert.equal(inputs.bundle.scopes.filter(s=>s.prepared).length,34);
+ assert.equal(inputs.bundle.vector_rows.length,ROOT.endsWith('/d1')?493:526);assert.equal(inputs.bundle.scopes.length,90);
+ assert.equal(inputs.bundle.scopes.filter(s=>s.prepared).length,ROOT.endsWith('/d1')?35:34);
  assert.equal(e.statistics().matrices,0);assert.equal(e.statistics().optimizations,0);
 });
 test('every real actionable prepared scope preserves reachability, unconfirmed evidence and stable options',async()=>{
@@ -24,7 +24,7 @@ test('every real actionable prepared scope preserves reachability, unconfirmed e
   for(const m of v.selected)assert.ok(m.evidence?.evidence_phrase&&m.evidence?.source_url);
   if(v.replacements.length){const added=e.addReplacement(state,v.replacements[0].profile.id);assert.ok(added.selectedIds.includes(v.replacements[0].profile.id));}
  }
- assert.equal(prepared+blocked,90);assert.ok(prepared>=20);assert.ok(blocked>=56);
+ assert.equal(prepared+blocked,90);assert.ok(prepared>=20);assert.ok(blocked>=inputs.bundle.scopes.filter(s=>!s.prepared).length);
  assert.ok(e.statistics().matricesCached<=8&&e.statistics().optionsCached<=32&&e.statistics().rowsCached<=1600);
 });
 test('real forecast, rolling, child ownership and successive action clocks use the authoritative policy',async()=>{
@@ -63,7 +63,7 @@ test('real best-pair regression uses independent pair enumeration over the full 
  const feasible=[];for(let i=0;i<m.admitted.length;i++)for(let j=i+1;j<m.admitted.length;j++){
   const rows=[m.admitted[i],m.admitted[j]],scores=m.weights.map((w,k)=>w*Math.max(rows[0].edges[k].score,rows[1].edges[k].score));
   const value=scores.reduce((a,b)=>a+b,0),single=rows.map(r=>m.weights.reduce((v,w,k)=>v+w*r.edges[k].score,0));
-  if(rows.some(r=>r.edges.some(e=>e.admitted&&e.core>=n.PARAMETERS.anchor))&&n.quantize(value)>=n.quantize(n.PARAMETERS.group)&&single.every(v=>n.quantize(value-v)>=n.quantize(n.PARAMETERS.marginal)))feasible.push(value);
+  if(rows.some(r=>r.edges.some(e=>e.admitted&&e.core>=n.PARAMETERS.anchor))&&n.quantize(value)>=n.quantize(n.PARAMETERS.group)&&rows.every(r=>r.edges.some(e=>e.admitted&&e.score>0))&&!n.redundantEvidence(...rows))feasible.push(value);
  }
  if(feasible.length)assert.ok(got.maximum>=Math.max(...feasible)-1e-12);
  assert.ok(got.examinedCoverage<=n.PARAMETERS.workLimit);

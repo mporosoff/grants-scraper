@@ -42,8 +42,8 @@ const report={kind:'Node/VM observation, not physical browser/device validation'
  first_click_note:'Directory/catalog and lightweight routing index already belong to the existing loading contract. First interaction transfers the manifest, metadata, numerical vectors and two nonvisual runtime scripts. No all-scope team calculation occurs on startup.',
  hydration_ms:hydration,hydration_observations:1,gc_available:Boolean(global.gc),memory_before_hydration:before,memory_after_hydration:after,memory_after_all_requested_actions:end,
  memory_limits:'Incremental Node process observations with raw inputs already resident. RSS includes allocator effects; not a phone heap cap or browser peak-memory measurement.',
- initial_statistics:initial,final_statistics:e.statistics(),scientific_scopes:90,prepared:34,unprepared:56,action_admitted:rows.filter(r=>r.action_allowed).length,
+ initial_statistics:initial,final_statistics:e.statistics(),scientific_scopes:f.bundle.scopes.length,prepared:f.bundle.scopes.filter(s=>s.prepared).length,unprepared:f.bundle.scopes.filter(s=>!s.prepared).length,action_admitted:rows.filter(r=>r.action_allowed).length,
  no_group_numerical:rows.filter(r=>r.prepared&&!r.group_size).length,with_group_numerical:rows.filter(r=>r.group_size).length,
  measurements:Object.fromEntries(['matrix_ms','group_ms','cold_build_view_options_ms','cached_build_view_options_ms','edit_replacement_ms'].map(k=>[k,stats(k)])),provider_requests:forbidden,rows};
-const path='docs/team-recommender/receipts/c2-real-measurements-'+label+'.json';if(fs.existsSync(path))throw Error('Preserve previous measurements; select a new receipt version');
+const path='docs/team-recommender/receipts/'+(process.env.TEAM_RECEIPT_PREFIX||'c2')+'-real-measurements-'+label+'.json';if(fs.existsSync(path))throw Error('Preserve previous measurements; select a new receipt version');
 fs.writeFileSync(path,JSON.stringify(report,null,2)+'\n');console.log(JSON.stringify({...report,assets:undefined,rows:undefined,lazy_runtime:undefined}));

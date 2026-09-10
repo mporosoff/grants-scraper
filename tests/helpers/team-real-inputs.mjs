@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import {webcrypto} from 'node:crypto';
 import {buildPackage} from '../../tools/build_team_ingredients.mjs';
-export const ROOT='docs/team-recommender/prepared/c2';
+export const ROOT=process.env.TEAM_REAL_INPUT_ROOT||'docs/team-recommender/prepared/c2';
 export const read=p=>fs.readFileSync(p,'utf8');
 export const json=p=>JSON.parse(read(p));
 export const NOW='2026-09-10T12:00:00Z';
