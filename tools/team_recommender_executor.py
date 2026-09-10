@@ -200,7 +200,9 @@ def legacy_judge_key(request, settings):
     if request.get("protocol") in {"D1", "D1F"}:
         from tools.team_recommender_judge_d1 import contract
         counterpart = "D1" if request["protocol"] == "D1F" else "D1F"
-        body = contract(dict(request, protocol=counterpart), settings)[0]
+        # This body is hashed for recovery detection, never dispatched. Only
+        # the active format's contract decides whether its request fits.
+        body = contract(dict(request, protocol=counterpart), settings, enforce_dispatch_bound=False)[0]
         return identity([AUTHORIZATION_ID, "development-judge", body])
     body = request_body({"provider": "anthropic", "model": settings["judge_model"]}, {"max_output_tokens": 512},
         (CONFIG / "judge-prompt.md").read_text(encoding="utf-8"),

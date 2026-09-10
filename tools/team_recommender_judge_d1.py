@@ -23,7 +23,7 @@ def labels(kind):
     return {"strong", "plausible", "unrelated", "insufficient-information"}
 
 
-def contract(request, settings):
+def contract(request, settings, *, enforce_dispatch_bound=True):
     from tools import team_recommender_executor as e
     e.exact_keys(request, ["protocol", "scope_id", "purpose", "source_evidence", "aspects", "items"])
     if request["protocol"] not in {"D1", "D1F"} or request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSE_KINDS:
@@ -115,6 +115,6 @@ def contract(request, settings):
         prompt, data, schema)
     body["thinking"] = {"type":"disabled"}
     bound = len(encoded(body)) + 1024
-    if bound > 12000:
+    if enforce_dispatch_bound and bound > 12000:
         raise Deferred("complete_evidence_exceeds_packet_bound")
     return body, bound, aliases, refs_by_item, schema
