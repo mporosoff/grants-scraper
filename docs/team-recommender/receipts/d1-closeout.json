@@ -1,0 +1,103 @@
+{
+  "D1_unattempted_items": 0,
+  "all_310_logical_request_keys_unique": true,
+  "attempt_2_count": 0,
+  "authoritative_run": 34497056168,
+  "candidate": {
+    "path": "docs/team-recommender/stage2-diagnostic-candidate.json",
+    "sha256": "edcc53c06212fbd9d96b52a8e59b1591a19b596d56e5e828c70de2a1ad7ca6bc"
+  },
+  "captured_at": "2026-09-10T16:11:47.463806+00:00",
+  "code_evidence_head": "f148325cc456e8d26d8d71c0541a2b3aad470a5c",
+  "code_evidence_tree": "dcced93ed1d67173bbaedd512b84a843a4b049fe",
+  "final_push_audit": {
+    "all_push_workflows_main_only": true,
+    "experimental_open_PRs": 0,
+    "experimental_push_triggers_production": false,
+    "helper220_exact_CI_browser": "SUCCESS",
+    "helper220_exact_CI_python": "SUCCESS",
+    "helper220_merge_verified": true,
+    "remote_experiment_before_push": "bf3807363514160e504e83daadfd814528c740c4",
+    "remote_main": "29737536fa82716dcafdbfa98ffb11121591df5c"
+  },
+  "helper_prs": [
+    {
+      "ci": 34490287076,
+      "head": "d37096ef2a8814a06530350f936714d91d1d0bf9",
+      "merge": "4884d2b9ca4b6b8bdb6be613d92aef5a8c8e4435",
+      "pr": 219,
+      "remediation_batches": 0,
+      "review": "clean terminal unchanged-head completion with configured positive reaction",
+      "review_comment": 5620442369
+    },
+    {
+      "accepted_finding": 3980702961,
+      "ci": 34495955823,
+      "head": "ae265d5400d4c79e09b26e6814ff91636e3a2fa9",
+      "initial_ci": 34495191232,
+      "initial_head": "ac822858e4b0346123d54f5dadb6bd0eb3cadd60",
+      "initial_review": 5169049374,
+      "merge": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "positive_reaction_at": "2026-09-10T15:32:39Z",
+      "pr": 220,
+      "remediation_batches": 1,
+      "review": "clean terminal exact-head verification; accepted thread resolved afterward",
+      "review_comment": 5621086053,
+      "review_completed_at": "2026-09-10T15:32:36.863352Z",
+      "verification_request": 5621192506
+    }
+  ],
+  "history_copies": [
+    {
+      "path": "docs/team-recommender/history/D1-before-closeout-experiment-state.json",
+      "sha256": "b25ea2f435689bb399f7c846eff071a0ac948a72f545fe74cbbb1e9183db0c89"
+    },
+    {
+      "path": "docs/team-recommender/history/D1-before-closeout-PLAN.md",
+      "sha256": "1e1a5e1eb2fd0033496d73897d7a7136e191b7754c561364d14ca1871979f76d"
+    },
+    {
+      "path": "docs/team-recommender/history/D1-before-closeout-HANDOFF.md",
+      "sha256": "cb6da17411b102e2126f9b87bc1020fb475a9704bb30ad361067155ff441d118"
+    },
+    {
+      "path": "docs/team-recommender/history/D1-before-closeout-preparation-budget.json",
+      "sha256": "7cb1daa5df52f22abe40b58de90c1414b3aa62e684565059f49c8601095bcf65"
+    },
+    {
+      "path": "docs/team-recommender/history/D1-before-closeout-budget-ledger.json",
+      "sha256": "a3849be51e794d8dea102f04c1f852cc8f15a085bef28d79081d457de5a745a6"
+    }
+  ],
+  "holdout_opened": false,
+  "ledger_mirror_read_only": true,
+  "ledger_sha256": "23ea6c322f9d555212dec88cebaf0a1f5dd438be27a502c17b5f7acca87f537d",
+  "new_human_requests": 0,
+  "new_provider_work_during_closeout": 0,
+  "note": "This receipt seals completed evidence; no new test run or provider dispatch is implied. Earlier exact-head tests remain bound to their tested dependencies.",
+  "paid_failed_D1_items": 4,
+  "post_merge_planners": [
+    {
+      "publication_and_generation": "skipped",
+      "run": 34491379372
+    },
+    {
+      "publication_and_generation": "skipped",
+      "run": 34496503097
+    }
+  ],
+  "pre_dispatch_missing_D1_items": 1,
+  "prior_ledger_prefix_preserved": true,
+  "provider_runs": [
+    34492338069,
+    34494191625,
+    34494473553,
+    34496756730,
+    34497056168
+  ],
+  "reservations_microusd": 0,
+  "stage3_started": false,
+  "trusted_packet_commit": "bf3807363514160e504e83daadfd814528c740c4",
+  "trusted_packet_sha256": "ac2639862c7ed66bd185ba665b39553c8035d6eaaa0c8de0534ea1da829fe948",
+  "valid_D1_items": 328
+}

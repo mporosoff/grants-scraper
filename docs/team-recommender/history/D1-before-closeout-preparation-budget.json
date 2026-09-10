@@ -1,73 +1,18 @@
 {
-  "D1_finite_execution": {
-    "actual_reconciliation": {
-      "path": "docs/team-recommender/receipts/d1-budget-reconciliation.json",
-      "sha256": "bd96ed9a8d8601d76cc49d7562d8b37d3a00c69e993dbc6c3cc1c8e7304b68d9"
-    },
-    "embedding_requests": 1,
-    "failed_paid_items": 4,
-    "input_reservation_bound_ceiling": 1360000,
-    "input_reservation_bounds_consumed": 1347679,
-    "judge_requests_including_two_failed": 162,
-    "max_items_per_request": 3,
-    "max_output_tokens": 512,
-    "new_human_items": 0,
-    "new_query_rows": 4,
-    "new_researcher_rows": 0,
-    "pre_dispatch_missing_items": 1,
-    "preflight": {
-      "path": "docs/team-recommender/receipts/d1-budget-preflight.json",
-      "sha256": "8aa13d8864843e80d8a9f7818ab9cbd62265f939e65b6c8519d474ee93345c73"
-    },
-    "protocol": {
-      "path": "docs/team-recommender/EVALUATION_PROTOCOL_D1.md",
-      "sha256": "d0580df5c780e9f2fbcc5d62c87db7042d178b53359e83ec9da7e4e0407dc53f"
-    },
-    "reused_rows": 489,
-    "schema": "D1F enumerated finite reason codes; counterpart replay guard",
-    "semantic_retries": 0,
-    "source_interpreter_calls": 0,
-    "valid_judge_items": 328,
-    "worst_case_cumulative_usd_before_corrected_full_run": 5.237826
-  },
   "actual": {
-    "D1_cache_hits": 3,
-    "D1_new_usd": 1.055784,
-    "authoritative_run": 34497056168,
-    "balance_usd": 7.861698,
-    "cache_hits": 5,
-    "checkpoint_sha256": "614ebbfe51d596536d76736a31761fb97ad736abec86fcd194e282393dfb1eac",
-    "cost_usd": 2.138302,
-    "input_tokens": 893083,
-    "ledger_sha256": "23ea6c322f9d555212dec88cebaf0a1f5dd438be27a502c17b5f7acca87f537d",
-    "local_ledger_role": "Read-only mirror; restore current authoritative paired cloud checkpoint before any separately authorized future dispatch.",
-    "output_tokens": 37894,
+    "authoritative_run": 34472949357,
+    "cache_hits": 2,
+    "cost_usd": 1.082518,
+    "input_tokens": 439834,
+    "ledger_sha256": "a3849be51e794d8dea102f04c1f852cc8f15a085bef28d79081d457de5a745a6",
+    "output_tokens": 22847,
     "outstanding_reservations_usd": 0,
-    "prior_D1_usd": 1.082518,
-    "provider_requests": 310,
-    "providers": {
-      "anthropic": {
-        "charged_microusd": 2138026,
-        "input_tokens": 879543,
-        "output_tokens": 37894,
-        "requests": 298
-      },
-      "voyage": {
-        "charged_microusd": 276,
-        "input_tokens": 13540,
-        "output_tokens": 0,
-        "requests": 12
-      }
-    }
+    "provider_requests": 147
   },
-  "amendment": "B1/C1/C2/D1",
-  "authority": "Same B1 dollar authority plus C1/C2/D1 stage authority; no repeated allowance",
+  "amendment": "B1",
+  "authority": "Explicit user Stage 2 instruction; BUDGET_AMENDMENT_B1.md",
   "budget_id": "on-demand-team-offline-v2-20260909",
-  "future_budget_proposal": "stage3-analysis-protocol-d1.md: at most $4 from existing balance ($0.10 Stage3 embeddings, $3.80 Stage3 judging, $0.10 Stage4 contingency), separate stage approval required",
-  "historical_execution_plan": {
-    "path": "docs/team-recommender/history/D1-before-closeout-preparation-budget.json",
-    "sha256": "7cb1daa5df52f22abe40b58de90c1414b3aa62e684565059f49c8601095bcf65"
-  },
+  "future_budget_proposal": "stage3-analysis-protocol-c2.md; at most $4 from the existing balance, subject to separate stage approval",
   "historical_spend_is_not_credit": true,
   "human": {
     "completed": 0,
@@ -132,9 +77,8 @@
     "variable_packet_rule": "Allow up to 12000 input tokens/bytes including framing per packet, within fixed aggregate phase tokens and dollars. Larger evidence packets use more of the same envelope; never increase overall allowance or crop evidence."
   },
   "ledger": "docs/team-recommender/budget-ledger.json",
-  "legacy_plan_fields_status": "The retained original judge/preparation aggregate estimates below are historical, not renewed request quotas. D1_finite_execution and actual bind completed D1 work. Future work requires its own stage approval within the original $10 ceiling.",
   "maximum_planned_reservation_usd": 9.5696,
-  "observed_item_plan": "receipts/d1-final-analysis.json",
+  "observed_item_plan": "receipts/c2-final-analysis.json",
   "old_qualification_allowance_reused": false,
   "preparation": {
     "canary_requests_included": 4,
@@ -171,13 +115,13 @@
   },
   "prices_checked_date": "2026-09-10",
   "prior_experiment_usd": 0,
-  "route_status": "Reviewed main-only helpers PR215/217/219/220; cloud run 34497056168 owns the same ledger; no further D1 dispatch",
+  "route_status": "Protected-main trusted executor PR215 plus PR217; cloud checkpoint run 34472949357 owns the one ledger",
   "smallest_prerequisite": "No Stage 2 route prerequisite remains. Stage 3 needs its own approval and reviewed stage policy before dispatch.",
   "stage2_cumulative_ceiling_usd": 6,
   "stage2_maximum_planned_reservation_usd": 5.576,
   "stage2_unused_space_not_extra_allowance_usd": 0.424,
   "stages3_4_minimum_reserved_usd": 4,
-  "status": "D1-automated-revision-complete-under-ceiling-stop-user-review",
+  "status": "stage2-closed-under-ceiling",
   "total_ceiling_usd": 10,
   "unallocated_contingency_inside_10_usd": 0.4304
 }
