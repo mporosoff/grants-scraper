@@ -1,0 +1,47 @@
+{
+  "D2_module_final_tests": 14,
+  "context_run": 34508950140,
+  "context_run_main_sha": "c9491b8ffb225a49d8fadb9d2f735ab96cd1e0f8",
+  "experimental_cherry_picks": [
+    "05827a4",
+    "2bbc586c944c917d8868749bb5e29eb09a3cb96a"
+  ],
+  "findings": [
+    3981676214,
+    3981676219
+  ],
+  "fixture_tests_before_final_two": 52,
+  "helper_changed_dependency_groups": [
+    "validation"
+  ],
+  "helper_pr": 221,
+  "historical_items_reproduced": 332,
+  "historical_requests_reproduced": 162,
+  "initial_head": "cd8b195c02a8a7ec07be7e28ee297cbd25bfa55e",
+  "initial_review": 5170175615,
+  "merge_sha": "c9491b8ffb225a49d8fadb9d2f735ab96cd1e0f8",
+  "merge_time": "2026-09-10T17:32:38Z",
+  "metered_duplicate_fixture_dispatches": 0,
+  "old_findings_resolved": true,
+  "post_adoption_focused_python": 76,
+  "production_push_planner": {
+    "assembly": "skipped",
+    "generation": "skipped",
+    "pages": "skipped",
+    "publish": "skipped",
+    "run": 34508859600,
+    "validation": "skipped",
+    "verify": "skipped"
+  },
+  "repair_attempts": 1,
+  "repair_head": "c93ecdf4cdfb84388a32fe51de76778cdc37e4ec",
+  "required_checks": {
+    "browser": "passed",
+    "python": "passed"
+  },
+  "required_ci_run": 34508020881,
+  "semantic_rubric_changed": false,
+  "terminal_clean_comment": 5622793234,
+  "verification_reviews": 1,
+  "workflow_permission_changes": false
+}

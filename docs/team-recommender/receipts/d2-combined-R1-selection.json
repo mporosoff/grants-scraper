@@ -1,0 +1,1872 @@
+{
+  "private_output_sha256": "a0d2411e62b692f490db4faee1a1a0d5e3357a607e2f297a732f8e39490f730f",
+  "results": [
+    {
+      "family": "fixed",
+      "rho": 0.9,
+      "threshold": 0.5,
+      "learned_score_provenance": null,
+      "groups": 8,
+      "options": 25,
+      "member_labels": {
+        "plausible": 23,
+        "unrelated": 10,
+        "missing": 2,
+        "strong": 15
+      },
+      "scope_dispositions": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362178",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "group",
+          "options": 1
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362254",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362855",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362520",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363489",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361380",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0
+        }
+      ]
+    },
+    {
+      "family": "fixed",
+      "rho": 0.95,
+      "threshold": 0.5,
+      "learned_score_provenance": null,
+      "groups": 8,
+      "options": 23,
+      "member_labels": {
+        "plausible": 21,
+        "unrelated": 10,
+        "missing": 2,
+        "strong": 13
+      },
+      "scope_dispositions": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362178",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "group",
+          "options": 1
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362254",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362855",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362520",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363489",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361380",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0
+        }
+      ]
+    },
+    {
+      "family": "regularized",
+      "rho": 0.9,
+      "threshold": 0.8,
+      "learned_score_provenance": "outer fold prediction, global OOF operating threshold; exploratory selection ablation, not nested independent estimate",
+      "groups": 8,
+      "options": 32,
+      "member_labels": {
+        "plausible": 28,
+        "unrelated": 10,
+        "missing": 8,
+        "strong": 18
+      },
+      "scope_dispositions": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362178",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 8
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362254",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362855",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 4
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362520",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363489",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361380",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0
+        }
+      ]
+    },
+    {
+      "family": "regularized",
+      "rho": 0.95,
+      "threshold": 0.8,
+      "learned_score_provenance": "outer fold prediction, global OOF operating threshold; exploratory selection ablation, not nested independent estimate",
+      "groups": 8,
+      "options": 29,
+      "member_labels": {
+        "plausible": 25,
+        "unrelated": 10,
+        "missing": 8,
+        "strong": 15
+      },
+      "scope_dispositions": [
+        {
+          "scope_id": "359696",
+          "status": "group",
+          "options": 8
+        },
+        {
+          "scope_id": "363612",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360205",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362178",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363281",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363141",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "342747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363736",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360698",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "355196",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363102",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "334971",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362315",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "361322",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359236",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339594",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361876",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "351923",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344592:ab-0009",
+          "status": "group",
+          "options": 8
+        },
+        {
+          "scope_id": "362393",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360644",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363636",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "345241:tdac-baa-004",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363055",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363525",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363514",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "349724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363569",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "356978",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "332894",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363015",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362196",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "112354",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358830",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360633",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362254",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "355100",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362575",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "344715",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "45810",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "360954",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359669",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362218",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "39841",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363292",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363765",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363699",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362207",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362855",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363526",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363479",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "295449",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "243973",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360660",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362868",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "343980",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357498",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363724",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357554",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "357002",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "363760",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363783",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "362857",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "328902",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "363747",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "348258",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361208",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "363069",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "349655",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "339728",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "359862",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361207",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "351947",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363622",
+          "status": "group",
+          "options": 3
+        },
+        {
+          "scope_id": "363544",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "359091",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362244",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362520",
+          "status": "group",
+          "options": 2
+        },
+        {
+          "scope_id": "358114",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361526:f-18",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "358938",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363489",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "362871",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "324456",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "360012",
+          "status": "unprepared",
+          "options": 0
+        },
+        {
+          "scope_id": "361380",
+          "status": "no-group",
+          "options": 0
+        },
+        {
+          "scope_id": "363391",
+          "status": "unprepared",
+          "options": 0
+        }
+      ]
+    }
+  ],
+  "all_admitted_candidates_preserved": true,
+  "provider_calls": 0,
+  "holdout_scored": false
+}

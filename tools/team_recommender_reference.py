@@ -11,7 +11,8 @@ def evaluate(case):
     for size in range(2,min(4,len(rows))+1):
         for ids in itertools.combinations(range(len(rows)),size):
             value=score(ids)
-            if math.floor(value*1e6+.5)<round(case.get('group_threshold',.55)*1e6) or not any(rows[j]['anchor'] for j in ids):continue
+            if not any(rows[j]['anchor'] for j in ids):continue
+            if any(rows[j]['automatic_quality'] < case['member_quality_floor'] for j in ids):continue
             # D1 individual admission is independent of removal marginal.
             # These finite numerical cases have no duplicate evidence strings;
             # the separate source-passage contracts exercise nonredundancy.

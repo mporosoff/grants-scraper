@@ -62,9 +62,9 @@ test('real best-pair regression uses independent pair enumeration over the full 
  // Use the shipped candidate's fixed thresholds, not a presumed winning team.
  const feasible=[];for(let i=0;i<m.admitted.length;i++)for(let j=i+1;j<m.admitted.length;j++){
   const rows=[m.admitted[i],m.admitted[j]],scores=m.weights.map((w,k)=>w*Math.max(rows[0].edges[k].score,rows[1].edges[k].score));
-  const value=scores.reduce((a,b)=>a+b,0),single=rows.map(r=>m.weights.reduce((v,w,k)=>v+w*r.edges[k].score,0));
-  if(rows.some(r=>r.edges.some(e=>e.admitted&&e.core>=n.PARAMETERS.anchor))&&n.quantize(value)>=n.quantize(n.PARAMETERS.group)&&rows.every(r=>r.edges.some(e=>e.admitted&&e.score>0))&&!n.redundantEvidence(...rows))feasible.push(value);
+  const value=scores.reduce((a,b)=>a+b,0);
+  if(rows.some(r=>r.edges.some(e=>e.admitted&&e.core>=n.PARAMETERS.anchor))&&rows.every(r=>r.automatic_quality>=n.PARAMETERS.memberQuality&&r.edges.some(e=>e.admitted&&e.score>0))&&!n.redundantEvidence(...rows))feasible.push(value);
  }
- if(feasible.length)assert.ok(got.maximum>=Math.max(...feasible)-1e-12);
+ assert.ok(feasible.length>0);assert.ok(got.maximum>=Math.max(...feasible)-1e-12);
  assert.ok(got.examinedCoverage<=n.PARAMETERS.workLimit);
 });

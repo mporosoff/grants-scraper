@@ -2,8 +2,9 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {createHash} from 'node:crypto';
 import {ruleEngine} from './team_recommender_ranking_d2_rules.mjs';
+import {representationCode} from './team_recommender_ranking_d2_representation.mjs';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8')),n=ruleEngine(),root='outputs/team-recommender-d2';
-const input=read(root+'/D1-reproduction.json'),fit=read(root+'/fit-R0.json');
+const R1=process.argv.includes('--R1'),input=read(root+(R1?'/R1-D1-selection.json':'/D1-reproduction.json')),fit=read(root+(R1?'/fit-R1.json':'/fit-R0.json'));
 const known=read(root+'/D1-judgment-audit.json').call_person_keys,labels=new Map(known.map(r=>[r.scope_id+'|'+r.person_id,r.label]));
 const scored=new Map(fit.all_rows.map(r=>[r.scope_id+'|'+r.person_id,r]));
 const results=[];
@@ -23,5 +24,5 @@ for(const family of ['fixed','regularized'])for(const rho of [.90,.95]){
   groups:scopes.filter(s=>s.status==='group').length,options:scopes.reduce((s,r)=>s+(r.options?.length||0),0),member_labels:counts,scopes});
  console.log(JSON.stringify({family,rho,threshold,groups:results.at(-1).groups,options:results.at(-1).options,member_labels:counts,group_ids:scopes.filter(s=>s.status==='group').map(s=>s.id)}));
 }
-const filename=root+'/fixed-D1-selection.json';assert(!fs.existsSync(filename));fs.writeFileSync(filename,JSON.stringify({protocol:'D2-fixed-D1-matrix-selection',provider_calls:0,holdout_scored:false,results})+'\n');
-fs.writeFileSync('docs/team-recommender/receipts/d2-fixed-matrix-selection.json',JSON.stringify({private_output_sha256:createHash('sha256').update(fs.readFileSync(filename)).digest('hex'),results:results.map(({scopes,...r})=>({...r,scope_dispositions:scopes.map(s=>({scope_id:s.id,status:s.status,options:s.options?.length||0}))})),all_admitted_candidates_preserved:true,provider_calls:0,holdout_scored:false},null,2)+'\n');
+const filename=root+(R1?'/combined-R1-selection.json':'/fixed-D1-selection.json');assert(!fs.existsSync(filename));fs.writeFileSync(filename,JSON.stringify({protocol:R1?'D2-combined-R1-selection':'D2-fixed-D1-matrix-selection',provider_calls:0,holdout_scored:false,results})+'\n');
+fs.writeFileSync('docs/team-recommender/receipts/'+(R1?'d2-combined-R1-selection':'d2-fixed-matrix-selection')+'.json',JSON.stringify({private_output_sha256:createHash('sha256').update(fs.readFileSync(filename)).digest('hex'),results:results.map(({scopes,...r})=>({...r,scope_dispositions:scopes.map(s=>({scope_id:s.id,status:s.status,options:s.options?.length||0}))})),all_admitted_candidates_preserved:true,provider_calls:0,holdout_scored:false},null,2)+'\n');

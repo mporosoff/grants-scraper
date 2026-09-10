@@ -100,12 +100,12 @@ test('topic and evidenced method gates reject generic and unrelated passages; no
 });
 test('poor pools, redundant members and near-best size selection match exhaustive reference',()=>{
  const n=runtime().TeamRecommender;
- const make=(scores)=>({weights:[.7,.3],rows:scores.map((r,i)=>({id:String(i),edges:r.map(score=>({score,admitted:score>0,core:score})),baseline:r[0]}))});
+ const make=(scores)=>({weights:[.7,.3],rows:scores.map((r,i)=>({id:String(i),automatic_quality:Math.max(...r),edges:r.map(score=>({score,admitted:score>0,core:score})),baseline:r[0]}))});
  for(const scores of [[[.95,0],[0,.9],[.95,0],[.5,.5]],[[.1,.1],[.2,.2]],[[.9,.7],[.8,.8],[.1,.1]]]){
    const m=make(scores);m.admitted=m.rows.filter(r=>r.edges.some(e=>e.admitted));const got=n.optimize(m);let best=0,count=0;
    for(let mask=1;mask<(1<<scores.length);mask++){const ids=scores.map((_,i)=>i).filter(i=>mask&(1<<i));if(ids.length<2||ids.length>4)continue;
      const f=members=>[.7,.3].reduce((s,w,a)=>s+w*Math.max(0,...members.map(i=>scores[i][a])),0),val=f(ids);
-     if(val<.45||!ids.some(i=>scores[i].some(s=>s>=.4))||ids.some(i=>Math.max(...scores[i])<=0))continue;
+     if(!ids.some(i=>scores[i].some(s=>s>=.4))||ids.some(i=>Math.max(...scores[i])<.5))continue;
      count++;best=Math.max(best,val);
    }
    assert.equal(got.feasibleCount,count);assert.equal(got.maximum,best);

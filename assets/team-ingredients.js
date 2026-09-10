@@ -2,7 +2,7 @@
 (function (global) {
   "use strict";
   const N = global.TeamRecommender;
-  const VERSION = "ingredients-v2.3";
+  const VERSION = "ingredients-v2.4";
   const HASH = /^[a-f0-9]{64}$/;
   const ID = /^[A-Za-z0-9][A-Za-z0-9:_.-]{0,127}$/;
   // Canonical NSF feed IDs are source identities, never fetch destinations.
@@ -359,7 +359,8 @@
         roles: roles.filter((_, i) => row.edges[i].admitted && row.edges[i].score > 0),
         reviewed: false, previouslySelected: state.excludedIds.includes(row.id), marginal: N.coverage(m, [...selected, row.id]) - baseScore}))
         .sort((a, b) => N.quantize(b.marginal) - N.quantize(a.marginal) || N.cmp(a.profile.id, b.profile.id));
-      const viable = selected.size >= 2 && baseScore >= N.PARAMETERS.group && [...selected].some(id => rows.get(id).edges.some(e => e.admitted && e.core >= N.PARAMETERS.anchor));
+      const viable = selected.size >= 2 && [...selected].every(id => rows.get(id).automatic_quality >= N.PARAMETERS.memberQuality)
+        && [...selected].some(id => rows.get(id).edges.some(e => e.admitted && e.core >= N.PARAMETERS.anchor));
       const opportunity = {id: scope.id, parent_id: scope.parent_id, record_type: scope.record_type, scope_label: scope.scope_label, objective: scope.core.text,
         gate_state: complete ? "pass" : viable ? "conditional" : "fail", roles, members: members.map(m => ({faculty_id: m.profile.id, ...m.evidence})),
         why_team: members.map(m => m.evidence?.why_person || "No current scoped contribution is attributed.").join(" ") || "No adequate complementary group was found in the prepared directory.", missing_skills: unfilled.map(r => r.label)};

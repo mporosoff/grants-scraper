@@ -49,11 +49,17 @@ test('real deadline passes between open and editing; cached selection is withdra
  assert.match(p.drawer.textContent,/no longer current/);assert.equal(p.requests.length,5);assert.equal(p.networkViolations(),0);
 });
 test('real prepared no-group retains candidate/manual path; corrupt retry never contacts providers',async()=>{
- const p=await panel({sid:'359696'});p.open();await p.ready();assert.match(p.drawer.textContent,/Insufficient internal role coverage/);
+ const p=await panel({sid:'363489'});p.open();await p.ready();assert.match(p.drawer.textContent,/Insufficient internal role coverage/);
  assert.equal(p.drawer.querySelectorAll('.opportunity-team-member').length,0);assert.ok(p.drawer.querySelector('[data-opportunity-team-replacement]'));
  const bad=await panel({corrupt:true});bad.open();await bad.ready();bad.dom.dispatch('click',bad.drawer.querySelector('[data-opportunity-team-retry]'));await bad.ready();
  assert.match(bad.drawer.textContent,/temporarily unavailable/);assert.equal(bad.networkViolations(),0);
  assert.equal((await bad.c.OpportunityTeam.loadDirectory()).faculty.length,158);
+});
+test('real olfactory source now has groups below the removed universal coverage cutoff',async()=>{
+ const p=await panel({sid:'359696'});p.open();await p.ready();
+ assert.equal(p.drawer.querySelectorAll('[data-opportunity-team-remove]').length,2);
+ assert.match(p.drawer.textContent,/Benjamin L. Miller/);assert.match(p.drawer.textContent,/James M. Zavislan/);
+ assert.match(p.drawer.textContent,/Coverage unconfirmed/);assert.equal(p.networkViolations(),0);
 });
 test('real stale generation and late responses cannot restore closed panels',async()=>{
  const p=await panel();p.open();await p.ready();p.dom.document.querySelector('meta[name="opportunity-team-generation"]').setAttribute('content','c'.repeat(64));

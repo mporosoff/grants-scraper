@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {runtime,fixture} from '../fixtures/team-ingredients.mjs';
 
-const row=(id,score,text,core=.7)=>({id,edges:[{score,admitted:score>0,core,passage:{text,id:id+'-claim'}}]});
+const row=(id,score,text,core=.7)=>({id,automatic_quality:score,edges:[{score,admitted:score>0,core,passage:{text,id:id+'-claim'}}]});
 test('one max-covered aspect proves the old universal positive removal rule impossible',()=>{
  const n=runtime().TeamRecommender,rows=[row('a',.8,'peripheral auditory neurobiology'),row('b',.7,'inner ear sensory cell biophysics'),row('c',.6,'cochlear mechanics')];
  const m={weights:[1],rows,admitted:rows};
@@ -11,7 +11,7 @@ test('one max-covered aspect proves the old universal positive removal rule impo
   assert.ok(marginals.some(x=>x===0));assert.equal(marginals.every(x=>x>=.03),false);
  }
  const out=n.optimize(m);assert.deepEqual(Array.from(out.defaultIds),['a','b']);
- assert.ok(out.options.every(o=>o.ids.length===2));assert.equal(out.options.length,2);
+ assert.ok(out.options.every(o=>o.ids.length===2));assert.equal(out.options.length,1);
  assert.equal(n.coverage(m,out.defaultIds)-n.coverage(m,['a']),0);
 });
 test('scoped duplicate evidence is rejected while unrelated and low-anchor pools stay empty',()=>{
