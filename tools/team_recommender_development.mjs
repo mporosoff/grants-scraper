@@ -6,6 +6,9 @@ import {createHash} from 'node:crypto';
 const root='outputs/team-recommender-c2',read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const bundle=read(root+'/assembled-v2/bundle.json'),inp=read(root+'/real-inputs-v2.json');
 const dev=read('docs/team-recommender/manifests/development.json'),grid=read('docs/team-recommender/manifests/development-parameter-grid-c2.json');
+const originalParameters=read('docs/team-recommender/stage2-candidate.json').parameters;
+const outputPath=root+'/'+(process.argv[2]||'development-corrected-v2.json');
+if(!/^outputs\/team-recommender-c2\/development-[a-z0-9-]+\.json$/.test(outputPath)||fs.existsSync(outputPath))throw Error('Use a new explicit development outcome version; preserve previous results');
 const permitted=new Set(dev.scopes.map(s=>s.id));
 if(bundle.scopes.some(s=>!permitted.has(s.id)))throw Error('Only reserved development may be scored');
 const bytes=fs.readFileSync(root+'/assembled-v2/vectors.f32'),vectors=bundle.vector_rows.map((_,i)=>Float32Array.from({length:1024},(_,k)=>bytes.readFloatLE((i*1024+k)*4)));
@@ -13,7 +16,7 @@ const original=fs.readFileSync('assets/team-recommender.js','utf8');
 const results=[];
 for(const candidate of grid.candidates){
  const c={};vm.createContext(c);
- const code=original.replace('const PARAMETERS = Object.freeze({','const PARAMETERS = Object.freeze({...{').replace('lexicalWeight: .2, mmr: 0 });','lexicalWeight: .2, mmr: 0 },...'+JSON.stringify(candidate.overrides)+' });');
+ const code=original.replace('const PARAMETERS = Object.freeze({','const PARAMETERS = Object.freeze({...{').replace('lexicalWeight: .2, mmr: 0 });','lexicalWeight: .2, mmr: 0 },...'+JSON.stringify({...originalParameters,...candidate.overrides})+' });');
  vm.runInContext(code,c);const n=c.TeamRecommender;
  const out={id:candidate.id,parameters:n.PARAMETERS,code_sha256:createHash('sha256').update(code).digest('hex'),scopes:[]};
  for(const s of bundle.scopes){
@@ -31,7 +34,7 @@ for(const candidate of grid.candidates){
  results.push(out);console.log(JSON.stringify({candidate:out.id,prepared:out.scopes.filter(s=>s.status!='unprepared').length,groups:out.scopes.filter(s=>s.status=='group').length,options:out.scopes.reduce((a,s)=>a+(s.B?.options.length||0),0),top5:out.scopes.reduce((a,s)=>a+(s.B5?.length||0),0)}));
 }
 const output={source_recipe:grid.source_recipe,scopes:90,controls_reserved:30,provider_calls:0,baseline:'Full 155-person directory, fixed whole-call floor .3 and core floor .25, top-k at each B size. Two-person descriptive baseline for B-empty cases is not a matched-size team comparison.',results};
-const raw=JSON.stringify(output)+'\n',path=root+'/development-corrected-v2.json';
+const raw=JSON.stringify(output)+'\n',path=outputPath;
 if(fs.existsSync(path))throw Error('Preserve existing outcomes; use an explicit version after a justified correction');
 fs.writeFileSync(path,raw);
 console.log(JSON.stringify({path,sha256:createHash('sha256').update(raw).digest('hex')}));

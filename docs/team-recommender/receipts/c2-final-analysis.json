@@ -1,0 +1,1310 @@
+{
+  "budget": {
+    "attempts_above_one": 0,
+    "authoritative_run": 34472949357,
+    "authorization_id": "on-demand-team-offline-v2-20260909",
+    "checkpoint_sha256": "3bd14be28ec0d3b6bafd3354bca27d58299d132fd5908f551222db881c646125",
+    "cumulative_actual_microusd": 1082518,
+    "duplicate_keys": 0,
+    "exact_cache_hit_events": 2,
+    "failed_requests_are_terminal_not_replayed": 13,
+    "historical_other_task_requests": 543,
+    "historical_other_task_spend_usd": 11.971342,
+    "historical_spend_budget_credit": 0,
+    "later_stages_minimum_preserved_microusd": 4000000,
+    "ledger_sha256": "a3849be51e794d8dea102f04c1f852cc8f15a085bef28d79081d457de5a745a6",
+    "local_copy_role": "read-only mirror; never a second dispatch owner",
+    "outstanding_reserved_microusd": 0,
+    "prior_stage1_spend_microusd": 0,
+    "providers": [
+      {
+        "actual_microusd": 264,
+        "input_tokens": 12942,
+        "output_tokens": 0,
+        "provider": "voyage",
+        "requests": 11,
+        "statuses": {
+          "valid": 11
+        }
+      },
+      {
+        "actual_microusd": 1082254,
+        "input_tokens": 426892,
+        "output_tokens": 22847,
+        "provider": "anthropic",
+        "requests": 136,
+        "statuses": {
+          "failed": 13,
+          "valid": 123
+        }
+      }
+    ],
+    "remaining_total_microusd": 8917482,
+    "stage2_actual_microusd": 1082518,
+    "stage2_ceiling_microusd": 6000000,
+    "total_requests": 147,
+    "unknown_dispatches": 0
+  },
+  "candidates": [
+    {
+      "MMR_comparison": {},
+      "arms": {
+        "coverage": {
+          "empty_lists": 12,
+          "labels": {
+            "insufficient-information": 10,
+            "plausible": 37,
+            "strong": 9,
+            "unrelated": 25
+          },
+          "macro_missing_label_bounds": [
+            0.4840909090909091,
+            0.6386363636363637
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.5568181818181818,
+            "percentile_95": [
+              0.3825396825396825,
+              0.7320512820512821
+            ],
+            "replicates": 2000,
+            "scopes": 22,
+            "seed": 20260910,
+            "source_groups": 21
+          },
+          "missing": 17,
+          "nonempty_lists": 22,
+          "occurrences": 98,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.5679012345679012,
+          "reasonable_observed": 46,
+          "short_nonempty_lists": 4,
+          "unique_items": 98,
+          "unrelated_fraction_observed": 0.30864197530864196,
+          "valid_judgments": 81
+        },
+        "whole-call": {
+          "empty_lists": 0,
+          "labels": {
+            "insufficient-information": 17,
+            "plausible": 45,
+            "strong": 12,
+            "unrelated": 68
+          },
+          "macro_missing_label_bounds": [
+            0.33529411764705885,
+            0.4764705882352941
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.39166666666666666,
+            "percentile_95": [
+              0.24705882352941178,
+              0.5347222222222222
+            ],
+            "replicates": 2000,
+            "scopes": 34,
+            "seed": 20260910,
+            "source_groups": 33
+          },
+          "missing": 24,
+          "nonempty_lists": 34,
+          "occurrences": 166,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.4014084507042254,
+          "reasonable_observed": 57,
+          "short_nonempty_lists": 1,
+          "unique_items": 166,
+          "unrelated_fraction_observed": 0.4788732394366197,
+          "valid_judgments": 142
+        }
+      },
+      "automatic_member_B": {
+        "labels": {},
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 0,
+        "unique_people": 0
+      },
+      "automatic_member_MMR": {
+        "labels": {},
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 0,
+        "unique_people": 0
+      },
+      "candidate": "engineering-v2.1",
+      "groups": 0,
+      "matched_AB": {},
+      "no_group_prepared": 34,
+      "paired_macro_B_minus_A": {
+        "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+        "mean": 0.015151515151515148,
+        "percentile_95": [
+          -0.08333333333333334,
+          0.1265151515151515
+        ],
+        "replicates": 2000,
+        "scopes": 22,
+        "seed": 20260910,
+        "source_groups": 21
+      },
+      "prepared": 34,
+      "scientific_reservations": 90,
+      "unprepared": 56
+    },
+    {
+      "MMR_comparison": {
+        "identical-no-paid-comparison": 5
+      },
+      "arms": {
+        "coverage": {
+          "empty_lists": 2,
+          "labels": {
+            "insufficient-information": 15,
+            "plausible": 39,
+            "strong": 10,
+            "unrelated": 58
+          },
+          "macro_missing_label_bounds": [
+            0.315625,
+            0.471875
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.3697916666666667,
+            "percentile_95": [
+              0.22365591397849463,
+              0.5083333333333333
+            ],
+            "replicates": 2000,
+            "scopes": 32,
+            "seed": 20260910,
+            "source_groups": 31
+          },
+          "missing": 25,
+          "nonempty_lists": 32,
+          "occurrences": 147,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.4016393442622951,
+          "reasonable_observed": 49,
+          "short_nonempty_lists": 4,
+          "unique_items": 147,
+          "unrelated_fraction_observed": 0.47540983606557374,
+          "valid_judgments": 122
+        },
+        "whole-call": {
+          "empty_lists": 0,
+          "labels": {
+            "insufficient-information": 17,
+            "plausible": 45,
+            "strong": 12,
+            "unrelated": 68
+          },
+          "macro_missing_label_bounds": [
+            0.33529411764705885,
+            0.4764705882352941
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.39166666666666666,
+            "percentile_95": [
+              0.24705882352941178,
+              0.5347222222222222
+            ],
+            "replicates": 2000,
+            "scopes": 34,
+            "seed": 20260910,
+            "source_groups": 33
+          },
+          "missing": 24,
+          "nonempty_lists": 34,
+          "occurrences": 166,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.4014084507042254,
+          "reasonable_observed": 57,
+          "short_nonempty_lists": 1,
+          "unique_items": 166,
+          "unrelated_fraction_observed": 0.4788732394366197,
+          "valid_judgments": 142
+        }
+      },
+      "automatic_member_B": {
+        "labels": {
+          "insufficient-information": 2,
+          "missing": 3,
+          "plausible": 5
+        },
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 10,
+        "unique_people": 6
+      },
+      "automatic_member_MMR": {
+        "labels": {
+          "insufficient-information": 2,
+          "missing": 3,
+          "plausible": 5
+        },
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 10,
+        "unique_people": 6
+      },
+      "candidate": "bounded-low",
+      "groups": 1,
+      "matched_AB": {
+        "whole-call": 1
+      },
+      "no_group_prepared": 33,
+      "paired_macro_B_minus_A": {
+        "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+        "mean": -0.04635416666666667,
+        "percentile_95": [
+          -0.10208333333333335,
+          0.004301075268817205
+        ],
+        "replicates": 2000,
+        "scopes": 32,
+        "seed": 20260910,
+        "source_groups": 31
+      },
+      "prepared": 34,
+      "scientific_reservations": 90,
+      "unprepared": 56
+    },
+    {
+      "MMR_comparison": {
+        "identical-no-paid-comparison": 1,
+        "missing": 1,
+        "mmr": 2,
+        "no-mmr": 2,
+        "order-conflict-unresolved": 1,
+        "unresolved": 1
+      },
+      "arms": {
+        "coverage": {
+          "empty_lists": 12,
+          "labels": {
+            "insufficient-information": 10,
+            "plausible": 37,
+            "strong": 9,
+            "unrelated": 25
+          },
+          "macro_missing_label_bounds": [
+            0.4840909090909091,
+            0.6386363636363637
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.5568181818181818,
+            "percentile_95": [
+              0.3825396825396825,
+              0.7320512820512821
+            ],
+            "replicates": 2000,
+            "scopes": 22,
+            "seed": 20260910,
+            "source_groups": 21
+          },
+          "missing": 17,
+          "nonempty_lists": 22,
+          "occurrences": 98,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.5679012345679012,
+          "reasonable_observed": 46,
+          "short_nonempty_lists": 4,
+          "unique_items": 98,
+          "unrelated_fraction_observed": 0.30864197530864196,
+          "valid_judgments": 81
+        },
+        "whole-call": {
+          "empty_lists": 0,
+          "labels": {
+            "insufficient-information": 17,
+            "plausible": 45,
+            "strong": 12,
+            "unrelated": 68
+          },
+          "macro_missing_label_bounds": [
+            0.33529411764705885,
+            0.4764705882352941
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.39166666666666666,
+            "percentile_95": [
+              0.24705882352941178,
+              0.5347222222222222
+            ],
+            "replicates": 2000,
+            "scopes": 34,
+            "seed": 20260910,
+            "source_groups": 33
+          },
+          "missing": 24,
+          "nonempty_lists": 34,
+          "occurrences": 166,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.4014084507042254,
+          "reasonable_observed": 57,
+          "short_nonempty_lists": 1,
+          "unique_items": 166,
+          "unrelated_fraction_observed": 0.4788732394366197,
+          "valid_judgments": 142
+        }
+      },
+      "automatic_member_B": {
+        "labels": {
+          "missing": 5,
+          "plausible": 9,
+          "unrelated": 2
+        },
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 16,
+        "unique_people": 9
+      },
+      "automatic_member_MMR": {
+        "labels": {
+          "missing": 5,
+          "plausible": 9,
+          "unrelated": 2
+        },
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 16,
+        "unique_people": 9
+      },
+      "candidate": "bounded-middle",
+      "groups": 1,
+      "matched_AB": {
+        "order-conflict-unresolved": 1
+      },
+      "no_group_prepared": 33,
+      "paired_macro_B_minus_A": {
+        "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+        "mean": 0.015151515151515148,
+        "percentile_95": [
+          -0.08333333333333334,
+          0.1265151515151515
+        ],
+        "replicates": 2000,
+        "scopes": 22,
+        "seed": 20260910,
+        "source_groups": 21
+      },
+      "prepared": 34,
+      "scientific_reservations": 90,
+      "unprepared": 56
+    },
+    {
+      "MMR_comparison": {},
+      "arms": {
+        "coverage": {
+          "empty_lists": 23,
+          "labels": {
+            "insufficient-information": 1,
+            "plausible": 21,
+            "strong": 8,
+            "unrelated": 2
+          },
+          "macro_missing_label_bounds": [
+            0.8272727272727273,
+            0.9454545454545454
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.9454545454545454,
+            "percentile_95": [
+              0.82,
+              1.0
+            ],
+            "replicates": 2000,
+            "scopes": 11,
+            "seed": 20260910,
+            "source_groups": 10
+          },
+          "missing": 5,
+          "nonempty_lists": 11,
+          "occurrences": 37,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.90625,
+          "reasonable_observed": 29,
+          "short_nonempty_lists": 6,
+          "unique_items": 37,
+          "unrelated_fraction_observed": 0.0625,
+          "valid_judgments": 32
+        },
+        "whole-call": {
+          "empty_lists": 0,
+          "labels": {
+            "insufficient-information": 17,
+            "plausible": 45,
+            "strong": 12,
+            "unrelated": 68
+          },
+          "macro_missing_label_bounds": [
+            0.33529411764705885,
+            0.4764705882352941
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.39166666666666666,
+            "percentile_95": [
+              0.24705882352941178,
+              0.5347222222222222
+            ],
+            "replicates": 2000,
+            "scopes": 34,
+            "seed": 20260910,
+            "source_groups": 33
+          },
+          "missing": 24,
+          "nonempty_lists": 34,
+          "occurrences": 166,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.4014084507042254,
+          "reasonable_observed": 57,
+          "short_nonempty_lists": 1,
+          "unique_items": 166,
+          "unrelated_fraction_observed": 0.4788732394366197,
+          "valid_judgments": 142
+        }
+      },
+      "automatic_member_B": {
+        "labels": {},
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 0,
+        "unique_people": 0
+      },
+      "automatic_member_MMR": {
+        "labels": {},
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 0,
+        "unique_people": 0
+      },
+      "candidate": "bounded-high",
+      "groups": 0,
+      "matched_AB": {},
+      "no_group_prepared": 34,
+      "paired_macro_B_minus_A": {
+        "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+        "mean": 0.10303030303030303,
+        "percentile_95": [
+          -0.07272727272727274,
+          0.30909090909090914
+        ],
+        "replicates": 2000,
+        "scopes": 11,
+        "seed": 20260910,
+        "source_groups": 10
+      },
+      "prepared": 34,
+      "scientific_reservations": 90,
+      "unprepared": 56
+    },
+    {
+      "MMR_comparison": {
+        "identical-no-paid-comparison": 6
+      },
+      "arms": {
+        "coverage": {
+          "empty_lists": 2,
+          "labels": {
+            "insufficient-information": 14,
+            "plausible": 38,
+            "strong": 10,
+            "unrelated": 60
+          },
+          "macro_missing_label_bounds": [
+            0.309375,
+            0.465625
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.359375,
+            "percentile_95": [
+              0.21935483870967742,
+              0.5
+            ],
+            "replicates": 2000,
+            "scopes": 32,
+            "seed": 20260910,
+            "source_groups": 31
+          },
+          "missing": 25,
+          "nonempty_lists": 32,
+          "occurrences": 147,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.39344262295081966,
+          "reasonable_observed": 48,
+          "short_nonempty_lists": 4,
+          "unique_items": 147,
+          "unrelated_fraction_observed": 0.4918032786885246,
+          "valid_judgments": 122
+        },
+        "whole-call": {
+          "empty_lists": 0,
+          "labels": {
+            "insufficient-information": 17,
+            "plausible": 45,
+            "strong": 12,
+            "unrelated": 68
+          },
+          "macro_missing_label_bounds": [
+            0.33529411764705885,
+            0.4764705882352941
+          ],
+          "macro_observed": {
+            "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+            "mean": 0.39166666666666666,
+            "percentile_95": [
+              0.24705882352941178,
+              0.5347222222222222
+            ],
+            "replicates": 2000,
+            "scopes": 34,
+            "seed": 20260910,
+            "source_groups": 33
+          },
+          "missing": 24,
+          "nonempty_lists": 34,
+          "occurrences": 166,
+          "possible_top5_slots_all_prepared": 170,
+          "reasonable_fraction_observed": 0.4014084507042254,
+          "reasonable_observed": 57,
+          "short_nonempty_lists": 1,
+          "unique_items": 166,
+          "unrelated_fraction_observed": 0.4788732394366197,
+          "valid_judgments": 142
+        }
+      },
+      "automatic_member_B": {
+        "labels": {
+          "insufficient-information": 2,
+          "missing": 4,
+          "plausible": 6
+        },
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 12,
+        "unique_people": 7
+      },
+      "automatic_member_MMR": {
+        "labels": {
+          "insufficient-information": 2,
+          "missing": 4,
+          "plausible": 6
+        },
+        "limits": "Repeated option occurrences from one scientific source; not independent trials.",
+        "occurrences": 12,
+        "unique_people": 7
+      },
+      "candidate": "bounded-low-semantic",
+      "groups": 1,
+      "matched_AB": {
+        "whole-call": 1
+      },
+      "no_group_prepared": 33,
+      "paired_macro_B_minus_A": {
+        "limits": "Conditional on observed selected machine judgments; excludes missing scopes. Not independent validation.",
+        "mean": -0.05677083333333334,
+        "percentile_95": [
+          -0.10376344086021506,
+          -0.01666666666666667
+        ],
+        "replicates": 2000,
+        "scopes": 32,
+        "seed": 20260910,
+        "source_groups": 31
+      },
+      "prepared": 34,
+      "scientific_reservations": 90,
+      "unprepared": 56
+    }
+  ],
+  "decision": "REVISE; automated Stage 2 evidence collection complete, quality readiness not established",
+  "distinct_order_pairs": 9,
+  "final_human_reserved": 20,
+  "human_blinding_limit": "Packet contains no judge answers. Some task tool diagnostics printed selected-item labels; if inspected by the reviewer, those items are potentially exposed. Do not replace them or claim guaranteed independent blinding.",
+  "human_requested_at_delivery": 20,
+  "human_returned": 0,
+  "individual_human_packet_verdicts_in_this_receipt": false,
+  "labels_by_task": {
+    "comparison": {
+      "A": 6,
+      "B": 9,
+      "unresolved": 2
+    },
+    "explanation_audit": {
+      "faithful": 1,
+      "unsupported": 1
+    },
+    "group": {
+      "insufficient-information": 3,
+      "plausible": 5,
+      "strong": 4,
+      "unrelated": 3
+    },
+    "individual": {
+      "insufficient-information": 31,
+      "plausible": 55,
+      "strong": 12,
+      "unrelated": 135
+    },
+    "source_control": {
+      "insufficient-information": 33
+    }
+  },
+  "learned_groups": {
+    "decision": "No new paid group-label campaign. New group yield is numerical only; unknown member/group grades are not successes.",
+    "limits": "Same absolute admission/core gates and frozen B-middle group parameters. Fold predictions never train on that source group. These machine-label scores are not proven expertise probabilities; novel groups lack semantic judgments.",
+    "provider_calls": 0,
+    "results": [
+      {
+        "cached_group_grades": 1,
+        "groups": 8,
+        "kind": "regularized",
+        "no_group": 26,
+        "prepared": 34,
+        "primary_member_grade_occurrences": {
+          "insufficient-information": 1,
+          "plausible": 5,
+          "unjudged": 9,
+          "unrelated": 1
+        },
+        "scientific_scopes": 90,
+        "seconds": 0.15075919999999995,
+        "unprepared": 56,
+        "value": 0.1
+      },
+      {
+        "cached_group_grades": 0,
+        "groups": 9,
+        "kind": "regularized",
+        "no_group": 25,
+        "prepared": 34,
+        "primary_member_grade_occurrences": {
+          "plausible": 4,
+          "unjudged": 12,
+          "unrelated": 2
+        },
+        "scientific_scopes": 90,
+        "seconds": 0.1198048,
+        "unprepared": 56,
+        "value": 1
+      },
+      {
+        "cached_group_grades": 0,
+        "groups": 9,
+        "kind": "regularized",
+        "no_group": 25,
+        "prepared": 34,
+        "primary_member_grade_occurrences": {
+          "plausible": 6,
+          "unjudged": 10,
+          "unrelated": 2
+        },
+        "scientific_scopes": 90,
+        "seconds": 0.11287439999999999,
+        "unprepared": 56,
+        "value": 10
+      },
+      {
+        "cached_group_grades": 0,
+        "groups": 9,
+        "kind": "bayesian",
+        "no_group": 25,
+        "prepared": 34,
+        "primary_member_grade_occurrences": {
+          "insufficient-information": 1,
+          "plausible": 4,
+          "unjudged": 11,
+          "unrelated": 2
+        },
+        "scientific_scopes": 90,
+        "seconds": 0.11254719999999997,
+        "unprepared": 56,
+        "value": 0.5
+      },
+      {
+        "cached_group_grades": 0,
+        "groups": 9,
+        "kind": "bayesian",
+        "no_group": 25,
+        "prepared": 34,
+        "primary_member_grade_occurrences": {
+          "plausible": 4,
+          "unjudged": 12,
+          "unrelated": 2
+        },
+        "scientific_scopes": 90,
+        "seconds": 0.12229499999999996,
+        "unprepared": 56,
+        "value": 1
+      },
+      {
+        "cached_group_grades": 0,
+        "groups": 9,
+        "kind": "bayesian",
+        "no_group": 25,
+        "prepared": 34,
+        "primary_member_grade_occurrences": {
+          "plausible": 6,
+          "unjudged": 10,
+          "unrelated": 2
+        },
+        "scientific_scopes": 90,
+        "seconds": 0.11485860000000002,
+        "unprepared": 56,
+        "value": 2
+      }
+    ]
+  },
+  "learning": {
+    "all_individual_labels": 233,
+    "binary_usable": 202,
+    "constant_prevalence_description": 0.3316831683168317,
+    "decision": "Machine-label Brier improves but ranking does not; new group usefulness mostly unjudged and unrelated known members occur. Complexity not earned.",
+    "event": "Worth discussing for this scoped contribution using the available public evidence",
+    "feature_order": [
+      "aspect_cosine",
+      "core_cosine",
+      "operation_overlap",
+      "context_overlap",
+      "lexical_overlap",
+      "missing_operation",
+      "missing_context",
+      "generic_profile"
+    ],
+    "fixed_score_metrics": {
+      "auc": 0.8807075732448867,
+      "brier": 0.16356252158617604,
+      "log_loss": 1.0648240619427591,
+      "n": 202,
+      "negative": 135,
+      "p_ge_half_denominator": 7,
+      "positive": 67,
+      "unrelated_among_p_ge_half": 0
+    },
+    "groups": 33,
+    "human_calibration": "unmeasured",
+    "insufficient_information": 31,
+    "label_provenance": "claude-sonnet-5 noisy development judgments; not human or capability probabilities",
+    "limits": "Items were selected by the frozen initial algorithms and controls. The label concerns the bounded source/profile conversation, while features summarize the best fixed aspect. Calibration is against selected machine labels only. The same grouped folds compare the compact grid; grid selection is development analysis, not independent validation. No new group-coherence judgments are inferred from person-label fitting.",
+    "models": [
+      {
+        "C": 0.1,
+        "folds": [
+          {
+            "fold": 0,
+            "gradient_max": 2.061427417654471e-12,
+            "hessian_min_cholesky_pivot": 3.1622776601683795,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 45,
+            "test": 59,
+            "train": 143
+          },
+          {
+            "fold": 1,
+            "gradient_max": 7.949196856316121e-13,
+            "hessian_min_cholesky_pivot": 3.1622776601683795,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 63,
+            "test": 33,
+            "train": 169
+          },
+          {
+            "fold": 2,
+            "gradient_max": 1.4489743432877233e-10,
+            "hessian_min_cholesky_pivot": 3.1622776601683795,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 52,
+            "test": 40,
+            "train": 162
+          },
+          {
+            "fold": 3,
+            "gradient_max": 3.5200733855544897e-09,
+            "hessian_min_cholesky_pivot": 3.1622776601683795,
+            "inverse_residual_max": 3.3306690738754696e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 53,
+            "test": 29,
+            "train": 173
+          },
+          {
+            "fold": 4,
+            "gradient_max": 4.929390229335695e-13,
+            "hessian_min_cholesky_pivot": 3.1622776601683795,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 55,
+            "test": 41,
+            "train": 161
+          }
+        ],
+        "kind": "regularized",
+        "metrics": {
+          "auc": 0.8769485903814263,
+          "brier": 0.1290647291041183,
+          "log_loss": 0.42132527241904466,
+          "n": 202,
+          "negative": 135,
+          "p_ge_half_denominator": 56,
+          "positive": 67,
+          "unrelated_among_p_ge_half": 10
+        },
+        "seconds": 0.03488130000187084
+      },
+      {
+        "C": 1,
+        "folds": [
+          {
+            "fold": 0,
+            "gradient_max": 9.629413300071832e-08,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 4.440892098500626e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 45,
+            "test": 59,
+            "train": 143
+          },
+          {
+            "fold": 1,
+            "gradient_max": 4.960972521672602e-08,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 63,
+            "test": 33,
+            "train": 169
+          },
+          {
+            "fold": 2,
+            "gradient_max": 4.96269692007445e-12,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 5.551115123125783e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 52,
+            "test": 40,
+            "train": 162
+          },
+          {
+            "fold": 3,
+            "gradient_max": 1.5055279245501652e-09,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 2.498001805406602e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 53,
+            "test": 29,
+            "train": 173
+          },
+          {
+            "fold": 4,
+            "gradient_max": 1.0552665352658863e-08,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 55,
+            "test": 41,
+            "train": 161
+          }
+        ],
+        "kind": "regularized",
+        "metrics": {
+          "auc": 0.8683250414593698,
+          "brier": 0.12994098808337615,
+          "log_loss": 0.42999128549074556,
+          "n": 202,
+          "negative": 135,
+          "p_ge_half_denominator": 60,
+          "positive": 67,
+          "unrelated_among_p_ge_half": 14
+        },
+        "seconds": 0.0414730999909807
+      },
+      {
+        "C": 10,
+        "folds": [
+          {
+            "fold": 0,
+            "gradient_max": 2.2440382885235977e-14,
+            "hessian_min_cholesky_pivot": 0.31622776601683794,
+            "inverse_residual_max": 4.440892098500626e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 45,
+            "test": 59,
+            "train": 143
+          },
+          {
+            "fold": 1,
+            "gradient_max": 6.564193633096238e-15,
+            "hessian_min_cholesky_pivot": 0.31622776601683794,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 63,
+            "test": 33,
+            "train": 169
+          },
+          {
+            "fold": 2,
+            "gradient_max": 3.829246641995354e-10,
+            "hessian_min_cholesky_pivot": 0.31622776601683794,
+            "inverse_residual_max": 5.551115123125783e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 52,
+            "test": 40,
+            "train": 162
+          },
+          {
+            "fold": 3,
+            "gradient_max": 9.055841754257443e-08,
+            "hessian_min_cholesky_pivot": 0.31622776601683794,
+            "inverse_residual_max": 5.551115123125783e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 53,
+            "test": 29,
+            "train": 173
+          },
+          {
+            "fold": 4,
+            "gradient_max": 4.06014790017839e-08,
+            "hessian_min_cholesky_pivot": 0.31622776601683794,
+            "inverse_residual_max": 4.996003610813204e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 55,
+            "test": 41,
+            "train": 161
+          }
+        ],
+        "kind": "regularized",
+        "metrics": {
+          "auc": 0.8625760088446656,
+          "brier": 0.13226824763597325,
+          "log_loss": 0.4398805140500585,
+          "n": 202,
+          "negative": 135,
+          "p_ge_half_denominator": 58,
+          "positive": 67,
+          "unrelated_among_p_ge_half": 14
+        },
+        "seconds": 0.026936900001601316
+      },
+      {
+        "folds": [
+          {
+            "fold": 0,
+            "gradient_max": 1.1623987952735781e-09,
+            "hessian_min_cholesky_pivot": 2.0,
+            "inverse_residual_max": 4.440892098500626e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 45,
+            "test": 59,
+            "train": 143
+          },
+          {
+            "fold": 1,
+            "gradient_max": 5.708060690778893e-10,
+            "hessian_min_cholesky_pivot": 2.0,
+            "inverse_residual_max": 3.469446951953614e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 63,
+            "test": 33,
+            "train": 169
+          },
+          {
+            "fold": 2,
+            "gradient_max": 7.30108322757883e-08,
+            "hessian_min_cholesky_pivot": 2.0,
+            "inverse_residual_max": 4.440892098500626e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 52,
+            "test": 40,
+            "train": 162
+          },
+          {
+            "fold": 3,
+            "gradient_max": 1.1823875212257917e-13,
+            "hessian_min_cholesky_pivot": 2.0,
+            "inverse_residual_max": 4.440892098500626e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 53,
+            "test": 29,
+            "train": 173
+          },
+          {
+            "fold": 4,
+            "gradient_max": 2.1418267159845072e-10,
+            "hessian_min_cholesky_pivot": 2.0,
+            "inverse_residual_max": 2.2898349882893854e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 55,
+            "test": 41,
+            "train": 161
+          }
+        ],
+        "kind": "bayesian",
+        "metrics": {
+          "auc": 0.8740740740740741,
+          "brier": 0.12768866034102347,
+          "log_loss": 0.41835715706709176,
+          "n": 202,
+          "negative": 135,
+          "p_ge_half_denominator": 61,
+          "positive": 67,
+          "unrelated_among_p_ge_half": 13
+        },
+        "prior_sd": 0.5,
+        "seconds": 0.03408359999593813
+      },
+      {
+        "folds": [
+          {
+            "fold": 0,
+            "gradient_max": 9.629413300071832e-08,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 4.440892098500626e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 45,
+            "test": 59,
+            "train": 143
+          },
+          {
+            "fold": 1,
+            "gradient_max": 4.960972521672602e-08,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 63,
+            "test": 33,
+            "train": 169
+          },
+          {
+            "fold": 2,
+            "gradient_max": 4.96269692007445e-12,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 5.551115123125783e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 52,
+            "test": 40,
+            "train": 162
+          },
+          {
+            "fold": 3,
+            "gradient_max": 1.5055279245501652e-09,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 2.498001805406602e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 53,
+            "test": 29,
+            "train": 173
+          },
+          {
+            "fold": 4,
+            "gradient_max": 1.0552665352658863e-08,
+            "hessian_min_cholesky_pivot": 1.0,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 55,
+            "test": 41,
+            "train": 161
+          }
+        ],
+        "kind": "bayesian",
+        "metrics": {
+          "auc": 0.8684355997788834,
+          "brier": 0.1296317160598483,
+          "log_loss": 0.4263921459925165,
+          "n": 202,
+          "negative": 135,
+          "p_ge_half_denominator": 60,
+          "positive": 67,
+          "unrelated_among_p_ge_half": 14
+        },
+        "prior_sd": 1,
+        "seconds": 0.03210880000551697
+      },
+      {
+        "folds": [
+          {
+            "fold": 0,
+            "gradient_max": 1.0796918914479647e-14,
+            "hessian_min_cholesky_pivot": 0.5,
+            "inverse_residual_max": 3.3306690738754696e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 45,
+            "test": 59,
+            "train": 143
+          },
+          {
+            "fold": 1,
+            "gradient_max": 1.3877787807814457e-15,
+            "hessian_min_cholesky_pivot": 0.5,
+            "inverse_residual_max": 2.220446049250313e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 63,
+            "test": 33,
+            "train": 169
+          },
+          {
+            "fold": 2,
+            "gradient_max": 1.6984008643916582e-10,
+            "hessian_min_cholesky_pivot": 0.5,
+            "inverse_residual_max": 4.440892098500626e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 52,
+            "test": 40,
+            "train": 162
+          },
+          {
+            "fold": 3,
+            "gradient_max": 4.200886311034324e-08,
+            "hessian_min_cholesky_pivot": 0.5,
+            "inverse_residual_max": 3.3306690738754696e-16,
+            "iterations": 7,
+            "optimizer_success": true,
+            "positive_train": 53,
+            "test": 29,
+            "train": 173
+          },
+          {
+            "fold": 4,
+            "gradient_max": 3.212928229023859e-08,
+            "hessian_min_cholesky_pivot": 0.5,
+            "inverse_residual_max": 9.71445146547012e-16,
+            "iterations": 6,
+            "optimizer_success": true,
+            "positive_train": 55,
+            "test": 41,
+            "train": 161
+          }
+        ],
+        "kind": "bayesian",
+        "metrics": {
+          "auc": 0.8643449419568823,
+          "brier": 0.13126533127566156,
+          "log_loss": 0.4325544789805339,
+          "n": 202,
+          "negative": 135,
+          "p_ge_half_denominator": 59,
+          "positive": 67,
+          "unrelated_among_p_ge_half": 14
+        },
+        "prior_sd": 2,
+        "seconds": 0.0378777000005357
+      }
+    ],
+    "production_model_asset": null,
+    "retained": false,
+    "status": "evaluated-grouped-development-only",
+    "whole_call_metrics": {
+      "auc": 0.8232172470978442,
+      "brier": 0.20344417372805879,
+      "log_loss": 0.5978687606523471,
+      "n": 202,
+      "negative": 135,
+      "p_ge_half_denominator": 47,
+      "positive": 67,
+      "unrelated_among_p_ge_half": 10
+    }
+  },
+  "missing_original_source_items": 3,
+  "optional_source_only_omitted_items": 53,
+  "order_pair_results": {
+    "conflict-unresolved": 2,
+    "consistent": 4,
+    "missing": 1,
+    "unresolved": 2
+  },
+  "order_swap_occurrences": 10,
+  "original_occurrences": 1665,
+  "original_unique_items": 408,
+  "paid_failed_unresolved_items": 52,
+  "profile_evidence_limit": "Actual inputs are retained registry claim evidence strings and URLs. Verbatim correspondence to original faculty-page passages was not established; do not describe these as newly verified original quotations.",
+  "retained_private_analyses": [
+    {
+      "bytes": 167929,
+      "name": "c2-component-groups-34472949357.json",
+      "sha256": "c63ec8f4554594ee17a9ba4ac65d6fa841c6cae322715352292c81a2e0b18ad6",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 81167,
+      "name": "c2-judge-results-34469935016.json",
+      "sha256": "6f44d68868dd2936c00f31ac3e866a75556b2a458dbe732ab62373a56e4c4c61",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 173229,
+      "name": "c2-judge-results-34471166200.json",
+      "sha256": "2f0e930ae2a009ffe4b2e22e50f07bf7e13a8fc139a70322fafe0ec2e651a20e",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 179046,
+      "name": "c2-judge-results-34471762013.json",
+      "sha256": "c7544ab7176805ea0df52e833811a31a74b91680b308b7680669a596e57804e0",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 182776,
+      "name": "c2-judge-results-34472949357.json",
+      "sha256": "d4f23967f0599872fbd7778533b84b7b9bdfa5a7de1b6127b46677acce3cf584",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 66973,
+      "name": "c2-learning-34469935016.json",
+      "sha256": "45bc4077b6897146c8e094be1ea6813a2e0c00a19622637b50e06339aac64d1a",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 153326,
+      "name": "c2-learning-34471166200.json",
+      "sha256": "0fafe2e4d46bef30eec5f5fbd3fd673261067c09a66c7c622be32097cb4b13ca",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 160622,
+      "name": "c2-learning-34471762013.json",
+      "sha256": "ecac924bb85140f111801197985efab1bc6c9b0c28ee277d346f930faf2446a6",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    },
+    {
+      "bytes": 181775,
+      "name": "c2-learning-34472949357.json",
+      "sha256": "a20bcaea6dbe933a98ed171cd384f028945b137d5d15949f1c5338a71ad49344",
+      "storage": "local private analysis and trusted cloud receipts; not public release inputs"
+    }
+  ],
+  "run": 34472949357,
+  "unattempted_remaining_eligible_requests": 0,
+  "valid_unique_items": 300
+}

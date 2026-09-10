@@ -1,5 +1,3 @@
-> C2 closeout, September 10, 2026: automated Stage 2 work is complete with **REVISE**. Read [the final report](reports/stage-2-final-report.md), `stage2-final-candidate.json`, and `receipts/c2-final-analysis.json`. PRs #215/#217 are protected-merged; 34/90 development scopes are prepared; 300 actual model judgments and zero returned human judgments exist. The single ledger spent $1.082518 with $8.917482 remaining and no reservations. The 20-item development packet is ready. Source/profile evidence gaps and quality/protocol failures prevent a readiness claim. No holdout outputs, Stage 3, or recommender deployment occurred. Earlier zero-run/route-unavailable statements below are historical; their exact pre-closeout files are preserved under `history/C2-before-final-*`.
-
 > Current C2 execution: trusted executor merged; real vectors and development outputs now exist. See evaluation-C2-execution.md and receipts/c2-development-judge-plan.json. Prior zero-run/unavailable-route and optional-comparison omissions below are historical, superseded by C2. Stage 3 remains unauthorized.
 
 # Funding Finder: on-demand team recommender — revised implementation plan

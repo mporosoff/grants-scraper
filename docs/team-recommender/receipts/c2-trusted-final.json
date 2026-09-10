@@ -1,0 +1,39 @@
+{
+  "PR215": {
+    "additional_C2_repair_reviews_authorized": 2,
+    "additional_C2_repair_reviews_used": 1,
+    "browser": "passed",
+    "crash_boundaries": 24,
+    "duplicate_fixture_dispatches": 0,
+    "focused_tests": 26,
+    "head": "4c9df150d015c8458eb5ea485bfd79f7e5c655d6",
+    "merge": "829eada2a08d55bede43d0828b2a5684e49ac0c9",
+    "python": "passed",
+    "required_ci": 34461455254,
+    "restorations_per_boundary": 3,
+    "review": "terminal-clean-exact-head",
+    "review_comment": 5616499331
+  },
+  "PR217": {
+    "browser": "passed",
+    "duplicate_fixture_dispatches": 0,
+    "focused_tests": 30,
+    "head": "d079a734ad80f82e363a0748282e232eab79ae9f",
+    "legacy_preflight_cases": 6,
+    "merge": "8e5101931222bc6b1f7cd00971441b8a2c55db5d",
+    "python": "passed",
+    "required_ci": 34467285880,
+    "restorations_per_case": 3,
+    "review": "terminal-clean-exact-head",
+    "review_comment": 5617383016
+  },
+  "automatic_review_rejection": "Unattended multi-dispatch shell loop rejected before execution; replaced with individual exact packet/hash/ledger/worst-cost checks and approved bounded dispatches. No denial bypass.",
+  "cloud_conclusion": "success",
+  "cloud_owner_run": 34472949357,
+  "ledger_sha256": "a3849be51e794d8dea102f04c1f852cc8f15a085bef28d79081d457de5a745a6",
+  "observed_main": "8e5101931222bc6b1f7cd00971441b8a2c55db5d",
+  "production_changes": "Only manual bounded executor, trusted helpers/tests/instructions. No team activation, schedule, mail, deployment or old Sonnet enablement. Unrelated concurrent main work is not attributed to this experiment.",
+  "recommender_merged": false,
+  "repository": "mporosoff/grants-scraper",
+  "unrelated_PR216_UI_imported": false
+}

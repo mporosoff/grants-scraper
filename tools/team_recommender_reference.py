@@ -11,7 +11,7 @@ def evaluate(case):
     for size in range(2,min(4,len(rows))+1):
         for ids in itertools.combinations(range(len(rows)),size):
             value=score(ids)
-            if math.floor(value*1e6+.5)<550000 or not any(rows[j]['anchor'] for j in ids):continue
+            if math.floor(value*1e6+.5)<round(case.get('group_threshold',.55)*1e6) or not any(rows[j]['anchor'] for j in ids):continue
             if any(math.floor((value-score([k for k in ids if k!=j]))*1e6+.5)<30000 for j in ids):continue
             feasible.append({'ids':[rows[j]['id'] for j in ids],'score':value})
     return {'maximum':max((x['score'] for x in feasible),default=0),'count':len(feasible)}

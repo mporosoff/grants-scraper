@@ -2,7 +2,7 @@
 (function (global) {
   "use strict";
   const N = global.TeamRecommender;
-  const VERSION = "ingredients-v2.1";
+  const VERSION = "ingredients-v2.2";
   const HASH = /^[a-f0-9]{64}$/;
   const ID = /^[A-Za-z0-9][A-Za-z0-9:_.-]{0,127}$/;
   // Canonical NSF feed IDs are source identities, never fetch destinations.

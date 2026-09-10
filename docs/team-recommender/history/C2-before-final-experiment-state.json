@@ -1,0 +1,255 @@
+{
+  "schema_version": 1,
+  "experiment": "on-demand-team-recommender",
+  "repository": "mporosoff/grants-scraper",
+  "branch": "codex/on-demand-team-recommender",
+  "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
+  "active_stage": 2,
+  "stage_status": "stage2-active-C2-persistence-and-real-development",
+  "recommendation": "defer",
+  "approvals": {
+    "stage1": true,
+    "evaluation_amendment_E1": true,
+    "stage2": true,
+    "paid_preparation_or_judging": true,
+    "trusted_main_prerequisite": true,
+    "production_release": false,
+    "budget_amendment_B1": true,
+    "stage3": false,
+    "stage4": false,
+    "continuation_C1": true,
+    "continuation_C2": true
+  },
+  "source_head_at_evidence_capture": "6adca6a795d4ab52e216e2ff7032d0e393db76b1",
+  "source_tree_at_evidence_capture": "9a2011915aac09437a1d5a2215474a4e68091224",
+  "report": {
+    "path": "docs/team-recommender/reports/stage-2-completion-report.md",
+    "sha256": "df766ed0194d60b460c4a3a6125ce63c17398ca27974ee1a2fb631d4ead13973"
+  },
+  "receipt_index": {
+    "path": "docs/team-recommender/stage2-continuation-receipt-index.json",
+    "sha256": "5ad92c03679c59a04641ad673280d0df28949131f133f94ac420ba112cd574aa"
+  },
+  "authority": {
+    "plan_version": "2.0 + E1/B1/C1/C2",
+    "plan_sha256": "5e749cdfb3b6a4bdfec9bb6fbbe9e69bdaeb6018fa74c750f4e25ff9826eb31c",
+    "amendment_path": "docs/team-recommender/EVALUATION_AMENDMENT.md",
+    "budget_amendment_path": "docs/team-recommender/BUDGET_AMENDMENT_B1.md",
+    "continuation_path": "docs/team-recommender/CONTINUATION_C2.md"
+  },
+  "pinned_data": {
+    "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+    "legacy_team_generation": "07f1b0b86c534b64ddd8e3dc4305c1e36d1f6652604581e48edfb5b6fdab8453",
+    "source_manifest_sha256": "2d96fe2bc5653c370c4d578b1cb9f12672f822ae7104139f902e21bdb689ab80",
+    "development_sha256": "833cbb454369285b381e3083426553d9b836b90ad16d3b62b65f60d2e19cb9c6",
+    "holdout_sha256": "6c08baadefcf2bab3da03684a7cc402228a0592ddf53a011816a0542229ccdd0",
+    "v2_ingredient_package": null
+  },
+  "model": {
+    "embedding_proposed": "voyage-4-lite",
+    "embedding_dimension": 1024,
+    "new_embedding_space_identity": null,
+    "primary_judge_proposed": "claude-sonnet-5",
+    "judge_prompt_sha256": "792b6d4e21889b408dc6262a7437122b57cc6babd3fa75fb6482d8a84158745a",
+    "judge_schema_sha256": "a600c084cfe4b5d8bd70c235db3a636b5a24d9e11ddfed14401a8f473abea7ca",
+    "judge_protocol_sha256": "e2965348dfe3ce3edc0b5f1830da51d0b9dc88eddc4ba3eb3cd44cc4529f6074",
+    "fitted_recommender": null,
+    "model_requests_executed": 0,
+    "primary_numerical_candidate": "B-fixed-aspect-weighted-coverage"
+  },
+  "budget_record": {
+    "path": "docs/team-recommender/preparation-budget.json",
+    "id": "on-demand-team-offline-v2-20260909",
+    "authorized_usd": 10,
+    "stage2_cumulative_ceiling_usd": 6,
+    "actual_usd": 0.022444,
+    "reserved_usd": 0,
+    "ledger": "docs/team-recommender/budget-ledger.json",
+    "remaining_total_usd": 9.977556,
+    "later_stage_minimum_preserved_usd": 4,
+    "requests": 13,
+    "input_tokens": 19477,
+    "output_tokens": 911,
+    "authoritative_owner": "GitHub main-only executor paired reservation/state artifacts",
+    "latest_run_id": 34465998056,
+    "local_copy_role": "read-only mirror; cannot authorize dispatch"
+  },
+  "human_review": {
+    "sole_confirmed_reviewer": "Marc Porosoff",
+    "cap": 40,
+    "development_cap": 20,
+    "final_cap": 20,
+    "requested": 0,
+    "completed": 0,
+    "skipped": 0,
+    "manifest_sha256": "6fb5a428d34fa66cb2063e20fcc8019902f083e55d58f9a113d2a68b253c03bf"
+  },
+  "holdout": {
+    "source_metadata_reserved": true,
+    "recommendation_outputs_generated": false,
+    "recommendation_results_inspected": false,
+    "human_final_audit_exposed": false,
+    "seal_status": "source-only duplicate overlay; shared-source reservation withheld; full audit pending; no recommendation exposure",
+    "rollout_overlap_scopes_do_not_score_in_stage2": 50,
+    "known_shared_development_source_reservations": 1,
+    "maximum_independent_reserved_source_scopes": 89,
+    "group_overlay_sha256": "54b041dc861f62e0fdf31264bc159218e8459ffa3d954a02ec0a5a0a136562d8"
+  },
+  "checks": {
+    "prerequisite_head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+    "focused_prerequisite_passed": 21,
+    "required_prerequisite_python": "passed",
+    "required_prerequisite_browser": "passed",
+    "required_ci_run": 34425407003,
+    "independent_review": "completed-with-consequential-finding",
+    "negative_reproduction": "confirmed-2-fixture-dispatches-zero-real-provider-calls",
+    "presentation_runtime_AGENTS_files_compared": 87,
+    "changed_compared_files": 0,
+    "real_currentness_scopes": 90,
+    "parent_and_child_action_admitted": 81,
+    "real_prepared_interaction_validation": "not-run-no-real-package",
+    "full_e2e": "not-run-not-authorized",
+    "playwright": "not-run-not-authorized",
+    "model_semantic_judgments": 0,
+    "human_semantic_judgments": 0
+  },
+  "production": {
+    "mutations": [],
+    "new_route_live_scopes": 0,
+    "live_candidate_id": "5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0",
+    "push_performed": false,
+    "review_requested": false,
+    "prerequisite_branch_push_performed": true,
+    "prerequisite_review_requested": true,
+    "prerequisite_merged": true,
+    "executor_dispatched": false
+  },
+  "unresolved": [
+    "PR215 failed-reconciliation cacheless redispatch defect after one repair round; stricter user-supplied convergence rule requires checkpoint",
+    "Source coherence/conditions and translated receipts unfinished; actual NSF ID rejected by current ingredient validator",
+    "Source-only duplicate NSF 22-600 spans development and holdout; quarantine overlay recorded, broader audit unfinished",
+    "No compatible vector package or real prepared development/rollout inputs",
+    "No real development A/B/MMR/learned-scoring outputs or model/human semantic judgments; 90+30 denominator unrun",
+    "Real package compression/compute/browser resources and prepared interaction zero-call tests unrun"
+  ],
+  "next_allowed_stage": 2,
+  "recommended_next_stage": 2,
+  "next_stage_requires": "Complete authorized Stage 2; Stage 3 requires separate user review and approval.",
+  "stop": "Stop after Stage 2 final report; human packet reply not required during execution.",
+  "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
+  "stage1_report": {
+    "path": "docs/team-recommender/reports/stage-1-report.md",
+    "sha256": "cee7bf5159d6978bc80439d9289a743517766ab5a9e01f30f07ffa0ca75d4713"
+  },
+  "candidate": {
+    "path": "docs/team-recommender/stage2-continuation-candidate.json",
+    "sha256": "075a3222b4de7a19fedea5b4f5739d3a17c0a612291929ed8cdddfbae0b96c16",
+    "actual_development_finalist": null
+  },
+  "readiness_findings": {
+    "currentness": "prior-engine-integration-preserved; real-policy-observation-81-of-90-action-admitted; prepared-panel-integration-unrun",
+    "source_validation": "native-provenance-inventoried; zero-translated-v2-receipts; group-collision-and-ID-seam-recorded; coherence-audit-unfinished",
+    "trusted_paid_route": "C2-PR215-protected-merged-clean-exact-head-review; no paid dispatch yet"
+  },
+  "results": {
+    "real_prepared_rollout_scopes": 0,
+    "planned_rollout_scopes": 150,
+    "real_development_evaluated_scopes": 0,
+    "holdout_evaluated_scopes": 0,
+    "source_inventory": "docs/team-recommender/receipts/c1-real-source-inventory-f4d8898adcff802f.json",
+    "reuse_inventory": "docs/team-recommender/receipts/stage2-reuse-metadata.json",
+    "resource_measurements": "only source/profile text encoding and real currentness observation this continuation; real vector package unmeasured",
+    "source_group_amendment": "docs/team-recommender/manifests/source-group-amendment-c1.json",
+    "real_prepared_development_scopes": 0,
+    "real_development_controls_executed": 0,
+    "compatible_vector_cache_hits": 0,
+    "new_embedding_rows": 0,
+    "real_inputs_C2": {
+      "scientific_attempted": 90,
+      "numerically_prepared": 34,
+      "unprepared": 56,
+      "controls_reserved": 30,
+      "eligible_people": 155,
+      "real_vectors": 526,
+      "paid_embedding_requests": 11
+    },
+    "real_initial_comparison": "All five declared development settings scored; unqualified group yield 0 or 1/34. Initial failure and corrected search results preserved."
+  },
+  "proposed_next_stage": null,
+  "stage1_receipt_index": {
+    "path": "docs/team-recommender/receipt-index.json",
+    "sha256": "d32ae60b40120a437b9d42c61759711a0d263a9b13f7662759ae46b1f104f0d8"
+  },
+  "continuation": {
+    "authority": "docs/team-recommender/CONTINUATION_C1.md",
+    "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
+    "initial_ledger_sha256": "0835f7b7017d6655d3de13395c3d5ee8a94342a3ba1ac9115e652bfab4c73f9a",
+    "initial_charged_usd": 0,
+    "ledger_execution_owner": "local-no-provider-executor-active",
+    "prerequisite": {
+      "pr": 215,
+      "head": "4c9df150d015c8458eb5ea485bfd79f7e5c655d6",
+      "merged": true,
+      "dispatch_runs": [],
+      "unresolved_finding_id": null,
+      "merge_sha": "829eada2a08d55bede43d0828b2a5684e49ac0c9"
+    },
+    "repair_batches": 1,
+    "required_verification_remaining_findings": 1,
+    "review_convergence_resume_required": false,
+    "cloud_authority_initialized": false,
+    "completed_at_checkpoint": "2026-09-10T01:41:39.075419+00:00",
+    "C2": {
+      "source_checkpoint": "1561fe2e8cc000de6a3442784c5afd0272d60355",
+      "initial_prerequisite_head": "8972595625f0d3b9fb4ea44794c65bc03ac3fe7b",
+      "additional_repair_rounds_authorized": 2,
+      "additional_review_rounds_requested": 1,
+      "status": "trusted-prerequisite-merged-real-preparation-next",
+      "ledger_actual_usd_verified": 0,
+      "cloud_authority_initialized": false,
+      "prerequisite_head": "4c9df150d015c8458eb5ea485bfd79f7e5c655d6",
+      "merge_sha": "829eada2a08d55bede43d0828b2a5684e49ac0c9",
+      "review_comment_id": 5616499331,
+      "required_ci_run": 34461455254,
+      "trusted_followup": {
+        "pr": 217,
+        "head": "d079a734ad80f82e363a0748282e232eab79ae9f",
+        "merge": "8e5101931222bc6b1f7cd00971441b8a2c55db5d",
+        "review_comment": 5617383016,
+        "ci_run": 34467285880,
+        "reason": "fixed compact output and whole-packet legacy recovery preflight"
+      }
+    }
+  },
+  "stage2_complete": false,
+  "stage2_engineering_report": {
+    "path": "docs/team-recommender/reports/stage-2-report.md",
+    "sha256": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351"
+  },
+  "stage2_engineering_receipt_index": {
+    "path": "docs/team-recommender/stage2-receipt-index.json",
+    "sha256": "13ad3b60b1fba8d9db0b4b19d5458171e4fb1a19564026e500c3a22bfed95e61"
+  },
+  "stage2_engineering_candidate": {
+    "path": "docs/team-recommender/stage2-candidate.json",
+    "sha256": "bebc5184763ef5185f6741c4ac7ae677eeb307a81fb21fb3bc137f7621d370be",
+    "dependency_digest_sha256": "a631cf5026400d1aba0e9af28f732f7ae8d3629110c52fdc3218870f6c62944c"
+  },
+  "historical_engineering_checks": {
+    "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
+    "focused_node_passed": 74,
+    "focused_python_passed": 49,
+    "total_focused_tests": 123,
+    "independent_small_pool_cases": 32,
+    "presentation_frozen_unchanged_files": 36,
+    "presentation_frozen_functions": 9,
+    "html_deltas": "version hashes and directory loading only",
+    "local_package_check": "passed",
+    "full_e2e": "not-run-not-authorized",
+    "playwright": "not-run-not-authorized",
+    "real_browser": "not-run",
+    "human_semantic_judgments": 0,
+    "model_semantic_judgments": 0,
+    "paid_prepared_scope_fixture_requests": 0
+  }
+}

@@ -1,0 +1,1048 @@
+{
+  "kind": "Node/VM observation, not physical browser/device validation",
+  "node": "v24.19.0",
+  "platform": "win32",
+  "decision_clock": "2026-09-10T12:00:00Z",
+  "generation": "116e87cb320bfe1e82fb86876e317ae56dae91d841689039c03c8733538f8313",
+  "assets": [
+    {
+      "path": "data/team-recommender/80e9e97a7e17a9fec6c1a247ddd31ac3f68b54bb9b78c1d77f13d62a337fef26.json",
+      "bytes": 860463,
+      "gzip_bytes": 143852,
+      "brotli_bytes": 89989,
+      "sha256": "80e9e97a7e17a9fec6c1a247ddd31ac3f68b54bb9b78c1d77f13d62a337fef26"
+    },
+    {
+      "path": "data/team-recommender/6d23a2a5f817f8723802765220e718f0a0d2a751a3b3e4435d36e36604b71422.f32",
+      "bytes": 2154496,
+      "gzip_bytes": 2000100,
+      "brotli_bytes": 1975569,
+      "sha256": "6d23a2a5f817f8723802765220e718f0a0d2a751a3b3e4435d36e36604b71422"
+    },
+    {
+      "path": "data/team-recommender/bd347c392e276ecdb79ffa14275a9e8e05463c7b25f13153131b07b7b87e7932.json",
+      "bytes": 45826,
+      "gzip_bytes": 6266,
+      "brotli_bytes": 5185,
+      "sha256": "bd347c392e276ecdb79ffa14275a9e8e05463c7b25f13153131b07b7b87e7932"
+    },
+    {
+      "path": "data/opportunity_team_index.js",
+      "bytes": 10906,
+      "gzip_bytes": 1300,
+      "brotli_bytes": 958,
+      "sha256": "6f3714cdfff33504b1efd6cf115e09e5086b4695253914e115efb5f0ebc6dfbf"
+    }
+  ],
+  "lazy_runtime": [
+    {
+      "path": "assets/team-recommender.js",
+      "bytes": 10907,
+      "gzip_bytes": 3664,
+      "sha256": "0ecdb1dcab1ef77eece146508b599a5efd07ddb636f635a659217c867638c04d"
+    },
+    {
+      "path": "assets/team-ingredients.js",
+      "bytes": 36063,
+      "gzip_bytes": 10289,
+      "sha256": "7ddaca5319caf5455d8aa19f2b2e091bec1b743723644f60fdfc88ce663af443"
+    }
+  ],
+  "package_bytes": 3071691,
+  "package_gzip_bytes": 2151518,
+  "package_brotli_bytes": 2071701,
+  "lazy_first_interaction_gzip_bytes": 2164171,
+  "first_click_note": "Directory/catalog and lightweight routing index already belong to the existing loading contract. First interaction transfers the manifest, metadata, numerical vectors and two nonvisual runtime scripts. No all-scope team calculation occurs on startup.",
+  "hydration_ms": 136.88060000000002,
+  "hydration_observations": 1,
+  "gc_available": true,
+  "memory_before_hydration": {
+    "rss": 81006592,
+    "heapTotal": 30400512,
+    "heapUsed": 11033080,
+    "external": 12098309,
+    "arrayBuffers": 9757132
+  },
+  "memory_after_hydration": {
+    "rss": 81051648,
+    "heapTotal": 30924800,
+    "heapUsed": 13260456,
+    "external": 12306071,
+    "arrayBuffers": 9903870
+  },
+  "memory_after_all_requested_actions": {
+    "rss": 114528256,
+    "heapTotal": 50585600,
+    "heapUsed": 15538976,
+    "external": 16022857,
+    "arrayBuffers": 13516624
+  },
+  "memory_limits": "Incremental Node process observations with raw inputs already resident. RSS includes allocator effects; not a phone heap cap or browser peak-memory measurement.",
+  "initial_statistics": {
+    "matrices": 0,
+    "optimizations": 0,
+    "matricesCached": 0,
+    "optionsCached": 0,
+    "rowsCached": 0
+  },
+  "final_statistics": {
+    "matrices": 26,
+    "optimizations": 27,
+    "matricesCached": 8,
+    "optionsCached": 27,
+    "rowsCached": 1600
+  },
+  "scientific_scopes": 90,
+  "prepared": 34,
+  "unprepared": 56,
+  "action_admitted": 26,
+  "no_group_numerical": 33,
+  "with_group_numerical": 1,
+  "measurements": {
+    "matrix_ms": {
+      "n": 34,
+      "median_ms": 9.992799999999988,
+      "p95_ms": 22.333799999999997,
+      "max_ms": 33.07899999999995
+    },
+    "group_ms": {
+      "n": 34,
+      "median_ms": 0.12619999999992615,
+      "p95_ms": 14.396299999999997,
+      "max_ms": 89.78779999999995
+    },
+    "cold_build_view_options_ms": {
+      "n": 26,
+      "median_ms": 11.096300000000042,
+      "p95_ms": 23.164699999999925,
+      "max_ms": 115.76780000000008
+    },
+    "cached_build_view_options_ms": {
+      "n": 26,
+      "median_ms": 0.23830000000009477,
+      "p95_ms": 0.5151999999998225,
+      "max_ms": 1.3834000000000515
+    },
+    "edit_replacement_ms": {
+      "n": 26,
+      "median_ms": 0.407100000000014,
+      "p95_ms": 2.3391000000000304,
+      "max_ms": 6.932300000000168
+    }
+  },
+  "provider_requests": 0,
+  "rows": [
+    {
+      "scope_id": "359696",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 109,
+      "matrix_ms": 17.805200000000013,
+      "group_ms": 89.78779999999995,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 48104,
+      "cold_build_view_options_ms": 115.76780000000008,
+      "cached_build_view_options_ms": 1.3834000000000515,
+      "reachable": 109,
+      "reachability_complete": true,
+      "edit_replacement_ms": 2.3391000000000304,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363612",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "360205",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362178",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 8,
+      "matrix_ms": 22.333799999999997,
+      "group_ms": 0.3750999999999749,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 154
+    },
+    {
+      "scope_id": "363281",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 1,
+      "matrix_ms": 9.548199999999952,
+      "group_ms": 0.07079999999996289,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 9.89569999999992,
+      "cached_build_view_options_ms": 0.20619999999996708,
+      "reachable": 1,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.4196000000000595,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363141",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 9.992799999999988,
+      "group_ms": 0.0543999999999869,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 9.84820000000002,
+      "cached_build_view_options_ms": 0.16899999999998272,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.16989999999998417,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "342747",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363736",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "360698",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "355196",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363102",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "334971",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 9.360900000000015,
+      "group_ms": 0.030799999999999272,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 10.310299999999984,
+      "cached_build_view_options_ms": 0.20049999999991996,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.23720000000002983,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "362315",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 9.94220000000007,
+      "group_ms": 0.02980000000002292,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 11.096300000000042,
+      "cached_build_view_options_ms": 0.15880000000004202,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.15899999999999181,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "361322",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "359236",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "339594",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "361876",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "351923",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "344592:ab-0009",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 39,
+      "matrix_ms": 8.822599999999966,
+      "group_ms": 14.396299999999997,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 7474,
+      "cold_build_view_options_ms": 23.164699999999925,
+      "cached_build_view_options_ms": 0.3428000000000111,
+      "reachable": 39,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.802599999999984,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "362393",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "360644",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 6.324600000000032,
+      "group_ms": 0.02729999999996835,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 5.072499999999991,
+      "cached_build_view_options_ms": 0.1715000000000373,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.17179999999996198,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363636",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "345241:tdac-baa-004",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 16,
+      "matrix_ms": 10.36239999999998,
+      "group_ms": 0.9958999999998923,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 834,
+      "cold_build_view_options_ms": 11.22950000000003,
+      "cached_build_view_options_ms": 0.25100000000009004,
+      "reachable": 16,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.533800000000042,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363055",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 9.325600000000009,
+      "group_ms": 0.028599999999983083,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 10.24490000000003,
+      "cached_build_view_options_ms": 0.2576999999999998,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.19219999999995707,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363525",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363514",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "349724",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363569",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "356978",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 2,
+      "matrix_ms": 9.158699999999953,
+      "group_ms": 0.04500000000007276,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 1,
+      "cold_build_view_options_ms": 10.512200000000007,
+      "cached_build_view_options_ms": 0.15899999999999181,
+      "reachable": 2,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.28369999999995343,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "332894",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363015",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362196",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 22,
+      "matrix_ms": 8.727199999999925,
+      "group_ms": 3.1153000000000475,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 2029
+    },
+    {
+      "scope_id": "112354",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 11.179199999999923,
+      "group_ms": 0.029899999999997817,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 9.604600000000005,
+      "cached_build_view_options_ms": 0.17589999999995598,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.16809999999998126,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "358830",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "360258",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "360633",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362254",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 1,
+      "matrix_ms": 12.908300000000054,
+      "group_ms": 0.038000000000010914,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0
+    },
+    {
+      "scope_id": "355100",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362575",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "344715",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "45810",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 9,
+      "matrix_ms": 10.085199999999986,
+      "group_ms": 0.3770000000000664,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 246,
+      "cold_build_view_options_ms": 10.721300000000042,
+      "cached_build_view_options_ms": 0.17380000000002838,
+      "reachable": 9,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.35940000000005057,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "360954",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "359669",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362218",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 16,
+      "matrix_ms": 8.991499999999974,
+      "group_ms": 2.3822999999999865,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 1674,
+      "cold_build_view_options_ms": 12.678899999999999,
+      "cached_build_view_options_ms": 0.20650000000000546,
+      "reachable": 16,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.46039999999993597,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "39841",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363292",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 5,
+      "matrix_ms": 10.806699999999978,
+      "group_ms": 0.11170000000004165,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 25,
+      "cold_build_view_options_ms": 10.276299999999992,
+      "cached_build_view_options_ms": 0.23830000000009477,
+      "reachable": 5,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.407100000000014,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 29,
+      "matrix_ms": 9.40020000000004,
+      "group_ms": 5.947499999999991,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 3887,
+      "cold_build_view_options_ms": 16.090299999999957,
+      "cached_build_view_options_ms": 0.2884000000000242,
+      "reachable": 29,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.6924999999999955,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363765",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363699",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362207",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 6.6088000000000875,
+      "group_ms": 0.04330000000004475,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 6.9465999999999894,
+      "cached_build_view_options_ms": 0.23689999999987776,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.292299999999841,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "362855",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 5,
+      "matrix_ms": 15.337100000000191,
+      "group_ms": 0.106899999999996,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 25
+    },
+    {
+      "scope_id": "363526",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363479",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "295449",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "243973",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "360660",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362868",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "343980",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "357498",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363724",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "357554",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "357002",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 40,
+      "matrix_ms": 10.70399999999995,
+      "group_ms": 4.842200000000048,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 3779,
+      "cold_build_view_options_ms": 18.74459999999999,
+      "cached_build_view_options_ms": 0.3162999999999556,
+      "reachable": 40,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.6500999999998385,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363760",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363783",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "362857",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "328902",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "363747",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "348258",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "361208",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 20,
+      "matrix_ms": 6.432099999999991,
+      "group_ms": 1.695699999999988,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 1373,
+      "cold_build_view_options_ms": 9.926999999999907,
+      "cached_build_view_options_ms": 0.165000000000191,
+      "reachable": 20,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.5729000000001179,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363069",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 15.554400000000214,
+      "group_ms": 0.0319000000001779,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 15.475799999999936,
+      "cached_build_view_options_ms": 0.2586999999998625,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.24500000000011823,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "349655",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "339728",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "359862",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "361207",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 29,
+      "matrix_ms": 10.940500000000156,
+      "group_ms": 7.779099999999971,
+      "group_size": 2,
+      "option_count": 8,
+      "coverage": 0.4991201823089874,
+      "work": 3760,
+      "cold_build_view_options_ms": 17.573200000000043,
+      "cached_build_view_options_ms": 0.5151999999998225,
+      "reachable": 29,
+      "reachability_complete": true,
+      "edit_replacement_ms": 6.932300000000168,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "351947",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 4,
+      "matrix_ms": 11.172900000000027,
+      "group_ms": 0.12619999999992615,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 11,
+      "cold_build_view_options_ms": 11.0779,
+      "cached_build_view_options_ms": 0.25919999999996435,
+      "reachable": 4,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.4462999999998374,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363622",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 27,
+      "matrix_ms": 5.962700000000041,
+      "group_ms": 3.6340999999999894,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 2359
+    },
+    {
+      "scope_id": "363544",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 9.481700000000046,
+      "group_ms": 0.042300000000068394,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 12.901200000000017,
+      "cached_build_view_options_ms": 0.24559999999996762,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.23659999999995307,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "359091",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 11.162000000000035,
+      "group_ms": 0.033699999999953434,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 11.535300000000007,
+      "cached_build_view_options_ms": 0.21509999999989304,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.15829999999982647,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "362244",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 6.088199999999915,
+      "group_ms": 0.048800000000028376,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0
+    },
+    {
+      "scope_id": "362520",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 29,
+      "matrix_ms": 33.07899999999995,
+      "group_ms": 1.8354000000001633,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 1878
+    },
+    {
+      "scope_id": "358114",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "361526:f-18",
+      "prepared": true,
+      "action_allowed": false,
+      "action_reason": "unsupported_scope",
+      "scored_people": 155,
+      "admitted_people": 7,
+      "matrix_ms": 4.867600000000039,
+      "group_ms": 0.2035000000000764,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 91
+    },
+    {
+      "scope_id": "358938",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 0,
+      "matrix_ms": 9.765300000000025,
+      "group_ms": 0.0340000000001055,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 0,
+      "cold_build_view_options_ms": 10.360400000000027,
+      "cached_build_view_options_ms": 0.18820000000005166,
+      "reachable": 0,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.18219999999996617,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363489",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 11,
+      "matrix_ms": 10.305799999999863,
+      "group_ms": 0.7521999999999025,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 550,
+      "cold_build_view_options_ms": 12.967100000000073,
+      "cached_build_view_options_ms": 0.3125,
+      "reachable": 11,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.5330999999998767,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "362871",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "324456",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "360012",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    },
+    {
+      "scope_id": "361380",
+      "prepared": true,
+      "action_allowed": true,
+      "action_reason": null,
+      "scored_people": 155,
+      "admitted_people": 41,
+      "matrix_ms": 12.080600000000004,
+      "group_ms": 11.06820000000016,
+      "group_size": 0,
+      "option_count": 0,
+      "coverage": 0,
+      "work": 8143,
+      "cold_build_view_options_ms": 18.544599999999946,
+      "cached_build_view_options_ms": 0.3956999999998061,
+      "reachable": 41,
+      "reachability_complete": true,
+      "edit_replacement_ms": 0.7386999999998807,
+      "option_order_stable": true
+    },
+    {
+      "scope_id": "363391",
+      "status": "unprepared",
+      "action": "unsupported_scope"
+    }
+  ]
+}

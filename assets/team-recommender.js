@@ -1,9 +1,9 @@
 /* Pure requested-scope arithmetic. No transport, storage, or provider clients. */
 (function (global) {
   "use strict";
-  const VERSION = "coverage-v2.1";
+  const VERSION = "coverage-v2.2";
   const PARAMETERS = Object.freeze({ topic: .4, core: .3, method: .5, context: .5,
-    anchor: .5, group: .55, marginal: .03, envelope: .95, maxOptions: 8,
+    anchor: .4, group: .45, marginal: .03, envelope: .95, maxOptions: 8,
     maxPeople: 200, maxAspects: 8, maxPassages: 16, workLimit: 300000, exactPool: 12, swapStartsPerSize: 8,
     aspectWeight: .5, coreWeight: .3, lexicalWeight: .2, mmr: 0 });
   const cmp = (a, b) => a < b ? -1 : a > b ? 1 : 0;

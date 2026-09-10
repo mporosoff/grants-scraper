@@ -4,7 +4,7 @@ import {spawnSync} from 'node:child_process';
 import {runtime,fixture} from '../fixtures/team-ingredients.mjs';
 test('32 deterministic small-pool cases agree with independent Python exact optimization',()=>{
  const n=runtime().TeamRecommender;let seed=21341;const next=()=>{seed=(Math.imul(seed,1664525)+1013904223)>>>0;return (seed%1000)/1000;};
- const cases=Array.from({length:32},()=>({weights:[.7,.1,.1,.1],rows:Array.from({length:8},(_,i)=>({id:String(i),anchor:i%3===0,scores:Array.from({length:4},()=>next())}))}));
+ const cases=Array.from({length:32},()=>({group_threshold:n.PARAMETERS.group,weights:[.7,.1,.1,.1],rows:Array.from({length:8},(_,i)=>({id:String(i),anchor:i%3===0,scores:Array.from({length:4},()=>next())}))}));
  const child=spawnSync('python',['tools/team_recommender_reference.py'],{input:JSON.stringify(cases),encoding:'utf8'});assert.equal(child.status,0,child.stderr);
  const expected=JSON.parse(child.stdout);
  cases.forEach((c,i)=>{const rows=c.rows.map(r=>({id:r.id,edges:r.scores.map(score=>({score,admitted:true,core:r.anchor?.7:.1}))}));

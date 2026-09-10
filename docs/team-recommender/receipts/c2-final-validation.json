@@ -1,0 +1,52 @@
+{
+  "P9_score_snapshot": {
+    "byte_identical": true,
+    "cases": 50
+  },
+  "Playwright": "not-run-not-authorized",
+  "candidate_dependency_digest": "b2ec9de0a6e18a86bd468a05f790c39d60723cf5f07c79e658e03c9da8a490c5",
+  "captured_at": "2026-09-10T12:23:26.093278+00:00",
+  "fixture_provider_calls_are_not_real_provider_calls": true,
+  "focused_node_dom": {
+    "log_sha256": "6283ba953a5de08ff082c808b5b8c90c75b723dae28320e144ea98089db43f46",
+    "passed": 85
+  },
+  "focused_python": {
+    "log_sha256": "df307186186b3d6ae1b27edbb3d8a80f2a2629f43364a84c7d741470e3391785",
+    "passed": 48
+  },
+  "frozen_files_unchanged": 36,
+  "frozen_functions_unchanged": 9,
+  "full_E2E": "not-run-not-authorized",
+  "historical_report_hashes": {
+    "reports/stage-1-report.md": "cee7bf5159d6978bc80439d9289a743517766ab5a9e01f30f07ffa0ca75d4713",
+    "reports/stage-2-completion-report.md": "df766ed0194d60b460c4a3a6125ce63c17398ca27974ee1a2fb631d4ead13973",
+    "reports/stage-2-report.md": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351"
+  },
+  "ordinary_search_team_asset_loads_before_interaction": 0,
+  "original_final_grid_reproduction": "all five complete numeric row/group/option results equal corrected-v2; timing and runtime source hash excluded from comparison",
+  "package_check": "passed",
+  "paid_prepared_interactions": 0,
+  "physical_browser_accessibility": "not-run-stage3",
+  "query_baseline": {
+    "cases": 37,
+    "churn": 0
+  },
+  "real_DOM_paths": [
+    "cold build",
+    "warm build",
+    "option switch",
+    "remove",
+    "add",
+    "four full slots",
+    "cache miss",
+    "corrupt input",
+    "retry",
+    "stale generation",
+    "late response after close",
+    "expiration between actions",
+    "no-group candidate/manual reachability"
+  ],
+  "small_pool_reference_cases": 32,
+  "source_checkpoint_before_freeze": "9fc057a551f73b1f9bbd6ecaa3a52020cadc0f6c"
+}

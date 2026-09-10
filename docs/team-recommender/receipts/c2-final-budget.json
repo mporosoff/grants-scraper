@@ -1,0 +1,46 @@
+{
+  "attempts_above_one": 0,
+  "authoritative_run": 34472949357,
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "checkpoint_sha256": "3bd14be28ec0d3b6bafd3354bca27d58299d132fd5908f551222db881c646125",
+  "cumulative_actual_microusd": 1082518,
+  "duplicate_keys": 0,
+  "exact_cache_hit_events": 2,
+  "failed_requests_are_terminal_not_replayed": 13,
+  "historical_other_task_requests": 543,
+  "historical_other_task_spend_usd": 11.971342,
+  "historical_spend_budget_credit": 0,
+  "later_stages_minimum_preserved_microusd": 4000000,
+  "ledger_sha256": "a3849be51e794d8dea102f04c1f852cc8f15a085bef28d79081d457de5a745a6",
+  "local_copy_role": "read-only mirror; never a second dispatch owner",
+  "outstanding_reserved_microusd": 0,
+  "prior_stage1_spend_microusd": 0,
+  "providers": [
+    {
+      "actual_microusd": 264,
+      "input_tokens": 12942,
+      "output_tokens": 0,
+      "provider": "voyage",
+      "requests": 11,
+      "statuses": {
+        "valid": 11
+      }
+    },
+    {
+      "actual_microusd": 1082254,
+      "input_tokens": 426892,
+      "output_tokens": 22847,
+      "provider": "anthropic",
+      "requests": 136,
+      "statuses": {
+        "failed": 13,
+        "valid": 123
+      }
+    }
+  ],
+  "remaining_total_microusd": 8917482,
+  "stage2_actual_microusd": 1082518,
+  "stage2_ceiling_microusd": 6000000,
+  "total_requests": 147,
+  "unknown_dispatches": 0
+}
