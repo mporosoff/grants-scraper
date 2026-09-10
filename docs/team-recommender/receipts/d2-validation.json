@@ -1,0 +1,58 @@
+{
+  "R1_measurements": {
+    "path": "docs/team-recommender/receipts/d2-r1-resource-measurements.json",
+    "sha256": "3fd7f202585c70f5078ae94a97d2c56204916d4d0dc892149ebf0e6bb82ff3b7"
+  },
+  "accessibility": "not-run-stage3",
+  "actual_lifetime_requests_unique_attempt1": 336,
+  "all_prepared_scopes_checked": 35,
+  "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+  "focused_node_passed": 57,
+  "focused_python_passed": 76,
+  "frozen_files": 36,
+  "frozen_functions": 9,
+  "full_E2E": "not-run-not-authorized",
+  "full_directory_rows_checked": 5425,
+  "independent_small_pool_cases": 32,
+  "ledger_prefix_unchanged": 315,
+  "limitation": "Focused Node VM/custom DOM and Python checks, not real-browser or independent scientific validation.",
+  "logs": {
+    "focused-node.txt": "70df7dbb9eeb7c4a1d6216f915c70609ec7148ce3bbf4ba18c1c2902fe66ee2f",
+    "focused-python.txt": "82dbf23110330204ab1c102deafe40a4ac1f85ab3eda49f8667b0de478821155"
+  },
+  "new_grades_do_not_replace_old": true,
+  "new_result_analysis_independent_count_checks": true,
+  "no_researcher_changes": true,
+  "no_source_split_human_packet_changes": true,
+  "order_conflicts_preserved": 1,
+  "ordinary_search_before_interaction": {
+    "matrices": 0,
+    "optimizations": 0,
+    "team_ingredient_loads": 0
+  },
+  "paid_prepared_scope_requests": 0,
+  "physical_browser": "not-run",
+  "playwright": "not-run-not-authorized",
+  "provider_free_paths": [
+    "cold build",
+    "warm build",
+    "option switch",
+    "remove",
+    "add",
+    "full slots",
+    "retry",
+    "cache miss",
+    "stale response",
+    "failure"
+  ],
+  "real_DOM_cases": 5,
+  "real_controls": {
+    "path": "docs/team-recommender/receipts/d2-real-controls.json",
+    "sha256": "47b35a7a96475bdae8bd14d77c27e0cf44b28a867aedc446aba3414a1864e0aa"
+  },
+  "runtime_measurements": {
+    "path": "docs/team-recommender/receipts/d2-real-measurements-uncontended.json",
+    "sha256": "a9256f2be65fd6f5a4ada0780f2cee732f050c1b087eb7cdb2287c924bc1a468"
+  },
+  "version": "D2-closeout"
+}

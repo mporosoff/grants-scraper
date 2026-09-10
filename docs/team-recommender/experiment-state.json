@@ -21,15 +21,15 @@
     "budget_amendment_sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27",
     "continuation_path": "docs/team-recommender/CONTINUATION_C2.md",
     "current_amendment": {
-      "path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
-      "sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52"
+      "path": "docs/team-recommender/RANKING_REVISION_D2.md",
+      "sha256": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc"
     },
     "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
     "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
     "evaluation_amendment_sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0",
-    "handoff_sha256": "bddad3ca73addbce7189e26d859ef942060665ee8e80c10aeffbcaae299ed8b2",
-    "plan_sha256": "664d04d8868e9cfb90aba62ee82f9a8fc08b02808bb81f2a201e18688ccdfff7",
-    "plan_version": "2.0 + E1/B1/C1/C2/D1",
+    "handoff_sha256": "b5fa4683fe787a0dd092954bb3d149d091c0887976d379da5e1aab8ac6cd25d8",
+    "plan_sha256": "9a5ec880149c583f583e71d08c75b25cf8253859b5efd13b6ac846202f636b32",
+    "plan_version": "2.0 + E1/B1/C1/C2/D1/D2",
     "ranking_revision_D2": {
       "path": "docs/team-recommender/RANKING_REVISION_D2.md",
       "sha256": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc"
@@ -39,63 +39,108 @@
   "budget_record": {
     "D1_new_usd": 1.055784,
     "D1_prior_usd": 1.082518,
-    "actual_usd": 2.138302,
+    "D2_new_usd": 0.140808,
+    "D2_prior_usd": 2.138302,
+    "actual_usd": 2.27911,
     "authoritative_owner": "GitHub main-only executor paired reservation/state artifacts",
     "authorized_usd": 10,
     "historical_other_task_credit_usd": 0,
     "id": "on-demand-team-offline-v2-20260909",
-    "input_tokens": 893083,
+    "input_tokens": 972283,
     "later_stage_minimum_preserved_usd": 4,
-    "latest_checkpoint_sha256": "614ebbfe51d596536d76736a31761fb97ad736abec86fcd194e282393dfb1eac",
-    "latest_run_id": 34497056168,
+    "latest_checkpoint_sha256": "7119bbaa839c7feeae0e1af92032fc8ed2ec48aaa7c81612a90c4c70c7d44b71",
+    "latest_run_id": 34510982749,
     "ledger": "docs/team-recommender/budget-ledger.json",
-    "ledger_sha256": "23ea6c322f9d555212dec88cebaf0a1f5dd438be27a502c17b5f7acca87f537d",
+    "ledger_sha256": "590e761abeefde54343e83f09341cca931b8149e0ab01d268c7acfd8c109413e",
     "local_copy_role": "read-only mirror; cannot authorize dispatch",
-    "output_tokens": 37894,
+    "output_tokens": 39249,
     "path": "docs/team-recommender/preparation-budget.json",
     "reconciliation": {
-      "path": "docs/team-recommender/receipts/d1-budget-reconciliation.json",
-      "sha256": "bd96ed9a8d8601d76cc49d7562d8b37d3a00c69e993dbc6c3cc1c8e7304b68d9"
+      "path": "docs/team-recommender/receipts/d2-budget-reconciliation.json",
+      "sha256": "3ea128411d7f20c5fcf58a0aa3f959e545911c84c1c717efaab6c89eef8a511c"
     },
-    "remaining_total_usd": 7.861698,
-    "requests": 310,
+    "remaining_stage2_usd": 3.72089,
+    "remaining_total_usd": 7.72089,
+    "requests": 336,
     "reserved_usd": 0,
     "stage2_cumulative_ceiling_usd": 6
   },
   "candidate": {
-    "actual_development_candidate": "B-D1-fixed-weighted-coverage",
-    "code_commit": "f148325cc456e8d26d8d71c0541a2b3aad470a5c",
-    "dependency_digest_sha256": "0feee38b4415e5b0e64589ac7dee7e6b7805ea68beb0f66ab628ce12f681a5a5",
+    "actual_development_candidate": "B-D2-R0-fixed-call-person-weighted-coverage",
+    "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+    "dependency_digest_sha256": "1b18d75beb6743ea66268f485a21ca7aedee5c3d9e5cf6ad1d0a3d465707c938",
     "fallback": null,
-    "path": "docs/team-recommender/stage2-diagnostic-candidate.json",
+    "path": "docs/team-recommender/stage2-ranking-d2-candidate.json",
     "quality_qualified": false,
-    "sha256": "edcc53c06212fbd9d96b52a8e59b1591a19b596d56e5e828c70de2a1ad7ca6bc",
-    "status": "frozen-diagnostic-candidate-quality-not-qualified"
+    "sha256": "0c6b012b3a5f53dd469406573b61a05ea98a69843a7cc9858063876144434591",
+    "status": "frozen-development-candidate-quality-not-qualified"
   },
   "checks": {
+    "R1_measurements": {
+      "path": "docs/team-recommender/receipts/d2-r1-resource-measurements.json",
+      "sha256": "3fd7f202585c70f5078ae94a97d2c56204916d4d0dc892149ebf0e6bb82ff3b7"
+    },
     "accessibility": "not-run-stage3",
-    "focused_node_with_real_d1": 53,
-    "focused_python_before_helper220": 58,
+    "actual_lifetime_requests_unique_attempt1": 336,
+    "all_prepared_scopes_checked": 35,
+    "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+    "focused_node_passed": 57,
+    "focused_python_passed": 76,
     "frozen_files": 36,
     "frozen_functions": 9,
-    "full_e2e": "not-run-not-authorized",
-    "helper220_after_correction": 40,
-    "helper220_post_cherrypick_mapping_D1_checks": 14,
+    "full_E2E": "not-run-not-authorized",
+    "full_directory_rows_checked": 5425,
     "human_semantic_judgments": 0,
     "independent_small_pool_cases": 32,
-    "model_D1_valid_judgments": 328,
+    "ledger_prefix_unchanged": 315,
+    "limitation": "Focused Node VM/custom DOM and Python checks, not real-browser or independent scientific validation.",
+    "logs": {
+      "focused-node.txt": "70df7dbb9eeb7c4a1d6216f915c70609ec7148ce3bbf4ba18c1c2902fe66ee2f",
+      "focused-python.txt": "82dbf23110330204ab1c102deafe40a4ac1f85ab3eda49f8667b0de478821155"
+    },
+    "model_D2_valid_judgments": 29,
+    "new_grades_do_not_replace_old": true,
+    "new_result_analysis_independent_count_checks": true,
+    "no_researcher_changes": true,
+    "no_source_split_human_packet_changes": true,
+    "order_conflicts_preserved": 1,
+    "ordinary_search_before_interaction": {
+      "matrices": 0,
+      "optimizations": 0,
+      "team_ingredient_loads": 0
+    },
+    "paid_prepared_scope_requests": 0,
+    "physical_browser": "not-run",
     "playwright": "not-run-not-authorized",
-    "real_DOM_cases": 4,
-    "real_prepared_interaction_validation": "Focused Node VM/custom DOM contracts with real ingredients; no physical-browser claim",
-    "real_prepared_paid_interactions": 0,
+    "provider_free_paths": [
+      "cold build",
+      "warm build",
+      "option switch",
+      "remove",
+      "add",
+      "full slots",
+      "retry",
+      "cache miss",
+      "stale response",
+      "failure"
+    ],
+    "real_DOM_cases": 5,
+    "real_controls": {
+      "path": "docs/team-recommender/receipts/d2-real-controls.json",
+      "sha256": "47b35a7a96475bdae8bd14d77c27e0cf44b28a867aedc446aba3414a1864e0aa"
+    },
     "receipt": {
-      "path": "docs/team-recommender/receipts/d1-validation.json",
-      "sha256": "d202135adae17e7045bad5b7103453a1c728b93abc1f1bad56b4aef369da055f"
+      "path": "docs/team-recommender/receipts/d2-validation.json",
+      "sha256": "fb8a119bcaa017fa21d73f125162fe1548853e6c6bbe83287fb2c367c2b250df"
     },
     "required_exact_head_helper_ci": [
-      34490287076,
-      34495955823
-    ]
+      34508020881
+    ],
+    "runtime_measurements": {
+      "path": "docs/team-recommender/receipts/d2-real-measurements-uncontended.json",
+      "sha256": "a9256f2be65fd6f5a4ada0780f2cee732f050c1b087eb7cdb2287c924bc1a468"
+    },
+    "version": "D2-closeout"
   },
   "containing_commit": "Resolve git log -1 --format=%H -- docs/team-recommender/experiment-state.json",
   "continuation": {
@@ -127,7 +172,7 @@
     "completed_at_checkpoint": "2026-09-10T12:34:29.390098+00:00",
     "initial_charged_usd": 0,
     "initial_ledger_sha256": "0835f7b7017d6655d3de13395c3d5ee8a94342a3ba1ac9115e652bfab4c73f9a",
-    "ledger_execution_owner": "exclusive cloud paired reservation/state checkpoint run 34497056168; local mirrors read-only",
+    "ledger_execution_owner": "exclusive cloud paired checkpoint run34510982749;local mirrors read-only",
     "prerequisite": {
       "dispatch_runs": [
         34463512164,
@@ -225,6 +270,235 @@
     "valid_model_items": 328
   },
   "experiment": "on-demand-team-recommender",
+  "historical_D1_closeout": {
+    "budget_record": {
+      "D1_new_usd": 1.055784,
+      "D1_prior_usd": 1.082518,
+      "D2_new_usd": 0.140808,
+      "D2_prior_usd": 2.138302,
+      "actual_usd": 2.27911,
+      "authoritative_owner": "GitHub main-only executor paired reservation/state artifacts",
+      "authorized_usd": 10,
+      "historical_other_task_credit_usd": 0,
+      "id": "on-demand-team-offline-v2-20260909",
+      "input_tokens": 972283,
+      "later_stage_minimum_preserved_usd": 4,
+      "latest_checkpoint_sha256": "7119bbaa839c7feeae0e1af92032fc8ed2ec48aaa7c81612a90c4c70c7d44b71",
+      "latest_run_id": 34510982749,
+      "ledger": "docs/team-recommender/budget-ledger.json",
+      "ledger_sha256": "590e761abeefde54343e83f09341cca931b8149e0ab01d268c7acfd8c109413e",
+      "local_copy_role": "read-only mirror; cannot authorize dispatch",
+      "output_tokens": 39249,
+      "path": "docs/team-recommender/preparation-budget.json",
+      "reconciliation": {
+        "path": "docs/team-recommender/receipts/d2-budget-reconciliation.json",
+        "sha256": "3ea128411d7f20c5fcf58a0aa3f959e545911c84c1c717efaab6c89eef8a511c"
+      },
+      "remaining_stage2_usd": 3.72089,
+      "remaining_total_usd": 7.72089,
+      "requests": 336,
+      "reserved_usd": 0,
+      "stage2_cumulative_ceiling_usd": 6
+    },
+    "candidate": {
+      "actual_development_candidate": "B-D1-fixed-weighted-coverage",
+      "code_commit": "f148325cc456e8d26d8d71c0541a2b3aad470a5c",
+      "dependency_digest_sha256": "0feee38b4415e5b0e64589ac7dee7e6b7805ea68beb0f66ab628ce12f681a5a5",
+      "fallback": null,
+      "path": "docs/team-recommender/stage2-diagnostic-candidate.json",
+      "quality_qualified": false,
+      "sha256": "edcc53c06212fbd9d96b52a8e59b1591a19b596d56e5e828c70de2a1ad7ca6bc",
+      "status": "frozen-diagnostic-candidate-quality-not-qualified"
+    },
+    "checks": {
+      "accessibility": "not-run-stage3",
+      "focused_node_with_real_d1": 53,
+      "focused_python_before_helper220": 58,
+      "frozen_files": 36,
+      "frozen_functions": 9,
+      "full_e2e": "not-run-not-authorized",
+      "helper220_after_correction": 40,
+      "helper220_post_cherrypick_mapping_D1_checks": 14,
+      "human_semantic_judgments": 0,
+      "independent_small_pool_cases": 32,
+      "model_D1_valid_judgments": 328,
+      "playwright": "not-run-not-authorized",
+      "real_DOM_cases": 4,
+      "real_prepared_interaction_validation": "Focused Node VM/custom DOM contracts with real ingredients; no physical-browser claim",
+      "real_prepared_paid_interactions": 0,
+      "receipt": {
+        "path": "docs/team-recommender/receipts/d1-validation.json",
+        "sha256": "d202135adae17e7045bad5b7103453a1c728b93abc1f1bad56b4aef369da055f"
+      },
+      "required_exact_head_helper_ci": [
+        34490287076,
+        34495955823
+      ]
+    },
+    "proposed_next_stage": {
+      "authorized": false,
+      "embedding_portion_usd": 0.1,
+      "judge_portion_usd": 3.8,
+      "maximum_cumulative_if_proposal_used_usd": 6.138302,
+      "maximum_new_metered_usd": 4,
+      "protocol": "docs/team-recommender/stage3-analysis-protocol-d1.md",
+      "protocol_sha256": "f7a5b22f0a60e1fdb316d92b875512455203ad9b748a14ffdaaab1ba7be21c3c",
+      "recommendation": "REVISE before advancement",
+      "stage": 3,
+      "stage4_contingency_usd": 0.1,
+      "trusted_policy_limitation": "Current executor Stage2-only; separate stage approval and narrowly reviewed stage purpose/allowlist required, same ledger."
+    },
+    "receipt_index": {
+      "path": "docs/team-recommender/stage2-diagnostic-receipt-index.json",
+      "sha256": "100d3bb13dd7595c8edd413f2f4e160c0e22778fdd4e4d7d4cb65853497d424d"
+    },
+    "report": {
+      "path": "docs/team-recommender/reports/stage-2-diagnostic-revision-report.md",
+      "sha256": "a3a46a4c555cb4c1b99dce9090d3bbdce770b0154c29f18df0cfcbf38e078829"
+    },
+    "results": {
+      "A_B_top5": {
+        "A": {
+          "empty_lists": 1,
+          "labels": {
+            "insufficient-information": 13,
+            "plausible": 71,
+            "strong": 21,
+            "unrelated": 63
+          },
+          "macro_scope_reasonable": 0.5455882352941177,
+          "missing": 1,
+          "observed": 168,
+          "observed_scope_denominator": 34,
+          "occurrences": 169,
+          "possible_top5_slots": 175,
+          "prepared_scopes": 35,
+          "reasonable_fraction": 0.5476190476190477,
+          "reasonable_observed": 92,
+          "short_nonempty_lists": 1,
+          "unique_items": 169,
+          "unrelated_fraction": 0.375
+        },
+        "B": {
+          "empty_lists": 11,
+          "labels": {
+            "insufficient-information": 5,
+            "plausible": 56,
+            "strong": 19,
+            "unrelated": 26
+          },
+          "macro_scope_reasonable": 0.7020833333333334,
+          "missing": 1,
+          "observed": 106,
+          "observed_scope_denominator": 24,
+          "occurrences": 107,
+          "possible_top5_slots": 175,
+          "prepared_scopes": 35,
+          "reasonable_fraction": 0.7075471698113207,
+          "reasonable_observed": 75,
+          "short_nonempty_lists": 4,
+          "unique_items": 107,
+          "unrelated_fraction": 0.24528301886792453
+        }
+      },
+      "B_action_allowed_option_member_unrelated": {
+        "missing": 3,
+        "observed": 61,
+        "rate": 0.13114754098360656,
+        "unrelated": 8
+      },
+      "B_option_member_unrelated": {
+        "missing": 3,
+        "observed": 77,
+        "rate": 0.2597402597402597,
+        "unrelated": 20
+      },
+      "B_useful_group_unrelated_member_disagreements": 9,
+      "action_allowed_no_groups": 22,
+      "action_allowed_primary_groups": 4,
+      "action_allowed_scopes": 26,
+      "action_blocked_scopes": 9,
+      "aspects": 61,
+      "common_case_difference": {
+        "cluster_bootstrap_95_percentile": [
+          -0.017391304347826087,
+          0.15217391304347827
+        ],
+        "draws": 5000,
+        "limitations": "Observed-label macro rates only. Missing and insufficient remain visible; no independent human calibration.",
+        "mean_difference": 0.0625,
+        "scopes": 24,
+        "seed": 20260910,
+        "source_groups": 23
+      },
+      "derived_controls_accounted": 30,
+      "eligible_directory": 155,
+      "exact_vector_rows": 493,
+      "explanations": {
+        "faithful": 5,
+        "missing": 0,
+        "unsupported": 0
+      },
+      "holdout_evaluated_scopes": 0,
+      "human_judgments": 0,
+      "independent_feasibility": "unknown for all 90; never defined by output",
+      "model_D1_judgments": 328,
+      "new_query_rows": 4,
+      "new_researcher_rows": 0,
+      "optional": {
+        "D1_Bayesian": "not fitted in D1; optional precondition not met; C2 whole-call labels are not aspect labels",
+        "D1_MMR": "not evaluated: four useful sources did not meet predeclared five-source condition",
+        "D1_regularized": "not meaningfully fitted: condition not met; only 13 usable aspect-person events (10 positive, 3 unrelated) plus one insufficient-information",
+        "extra_paid_labels": 0,
+        "model_useful_primary_sources": 4,
+        "predeclared_required": 5,
+        "retained": "fixed numerical model; MMR off; no learned asset"
+      },
+      "paid_failed_items": 4,
+      "planned_rollout_scopes": 150,
+      "pre_dispatch_missing_items": 1,
+      "prepared_children": 3,
+      "prepared_no_groups": 30,
+      "prepared_parents": 35,
+      "primary_groups": 5,
+      "primary_groups_model_useful": 4,
+      "profile_freeze": {
+        "path": "docs/team-recommender/receipts/d1-profile-freeze-proof.json",
+        "sha256": "2ca0139d9a902ac87fa30887529884856a96040bb94ded17b32649bb140828d9"
+      },
+      "real_comparison_receipt": {
+        "path": "docs/team-recommender/receipts/d1-final-analysis.json",
+        "sha256": "03af691e66d385406c56c4cf140bf36e1648a1c5f53d6245f5e0a11892f3b64d"
+      },
+      "real_development_controls_executed": 12,
+      "real_prepared_development_scopes": 35,
+      "real_prepared_rollout_scopes": 18,
+      "resource_measurements": {
+        "path": "docs/team-recommender/receipts/d1-real-measurements-v1.json",
+        "sha256": "d96552d80dc167151c00d714df687e33e747820ce00f0eb4eba7a675c991c3fc"
+      },
+      "reused_exact_rows": 489,
+      "rollout_50_prepared": 8,
+      "scientific_reservations_attempted": 90,
+      "unattempted_items": 0,
+      "unprepared_control_origins": 18,
+      "unprepared_scopes": 55,
+      "waterfall": {
+        "path": "docs/team-recommender/receipts/d1-all-scope-waterfall.json",
+        "sha256": "264c415f867639b93de4c44f0fbc91945f47c90ec67be6cce72f958efb863614"
+      }
+    },
+    "unresolved": [
+      "55/90 scientific reservations remain unprepared for stated source/selection/context gaps; 18/150 source-selected rollout ingredients prepared.",
+      "B model-estimated macro top-five reasonable precision 70.21% below 80%; paired gain +6.25pp has source-cluster interval crossing zero; eleven empty lists.",
+      "B option-member unrelated rate 20/77 observed (3 missing), above 5%; action-allowed subset also fails at 8/61.",
+      "Only four model-useful primary source scopes; nine useful-group/unrelated-member judge disagreements remain unresolved. Independent feasible-scope denominator unknown.",
+      "Four D1 paid-failed items remain charged and unresolved without replay; one complete source packet too large to dispatch. Historical C2 failures remain preserved separately.",
+      "Optional D1 MMR/fitted scoring precondition not met; only 13 binary aspect-level examples. No claim fixed scoring won an unrun comparison.",
+      "Zero returned human judgments; existing 20-item development packet preserved, 20 final items reserved. Old possible exposure and changed-item applicability disclosed.",
+      "Physical-browser/E2E/Playwright/accessibility and held-out gates unrun; no Stage3 or deployment approval. Researcher enrichment is outside scope and is not a completion prerequisite."
+    ]
+  },
   "historical_engineering_checks": {
     "focused_node_passed": 74,
     "focused_python_passed": 49,
@@ -244,6 +518,7 @@
   },
   "holdout": {
     "D1_source_group_changes": 0,
+    "D2_source_group_changes": 0,
     "development_groups": 87,
     "development_reservations": 90,
     "group_overlay_sha256": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359",
@@ -272,11 +547,13 @@
       "path": "docs/team-recommender/receipts/d1-existing-human-packet-applicability.json",
       "sha256": "c3cf150f2dede8a442f91f1677bc5b8f07db0408db4b726cda7433a7251b0fc6"
     },
+    "existing_packet_unchanged_D2": true,
     "final_cap": 20,
     "final_reserved": 20,
     "manifest_sha256": "9d74132477df1752be5f9c3a620151d033d3cb719851bbd050ff2d6e17e78943",
     "new_D1_requests": 0,
-    "old_items_status": "Preserved historical packet; changed source/aspect or judge-question packets are not validated by old reviews. No answers returned.",
+    "new_D2_requests": 0,
+    "old_items_status": "Original packet preserved;0 answers returned. D1 changed context in items1,5 and possible earlier exposure remain disclosed. Changed D2 groups are not validated by historical items.",
     "packet_answers_hidden": true,
     "packet_path": "docs/team-recommender/human-review/development-packet-c2.md",
     "packet_sha256": "13ff8b3e715c12ea910f5f02c1701b145861d7226f7129953c8172abd794aabd",
@@ -291,15 +568,26 @@
   "model": {
     "D1_judge_requests": 162,
     "D1_valid_unique_judgments": 328,
+    "D2_judge_requests": 21,
+    "D2_valid_unique_judgments": 29,
     "MMR_lambda": 0,
     "embedding_dimension": 1024,
     "embedding_model": "voyage-4-lite",
-    "embedding_requests_executed_cumulative": 12,
+    "embedding_requests_executed_cumulative": 17,
     "fitted_recommender": null,
     "historical_C2_valid_unique_judgments": 300,
     "historical_and_D1_not_independent_or_automatically_compatible": true,
     "judge_protocol": {
+      "D2_packet": {
+        "path": "docs/team-recommender/packets/89bebf9ee1007b0759e0390cda211e32474a8cb33f91d80e13976c36c3488990.json",
+        "sha256": "89bebf9ee1007b0759e0390cda211e32474a8cb33f91d80e13976c36c3488990"
+      },
+      "D2_protocol": {
+        "path": "docs/team-recommender/EVALUATION_PROTOCOL_D2.md",
+        "sha256": "56ed72df3a32ec06bebfac9e4e9edb44cbc94e93684a1a9eeb7401fcb151a893"
+      },
       "actual_D1_requests": 162,
+      "actual_D2_requests": 21,
       "compiled_system_prompt_sha256": "9a4277ab381b6cdb8609a3a080793512b282f65a449f75a05a1aae48ced2e963",
       "failed_item_replay_allowed": false,
       "full_packet": {
@@ -312,8 +600,9 @@
       "max_items": 3,
       "max_output_tokens": 512,
       "model": "claude-sonnet-5",
-      "order_conflicts": 0,
-      "order_swap_audits": 3,
+      "new_D2_valid_items": 29,
+      "order_conflicts": 1,
+      "order_swap_audits": 4,
       "protocol": "D1F",
       "protocol_file": {
         "path": "docs/team-recommender/EVALUATION_PROTOCOL_D1.md",
@@ -375,16 +664,16 @@
         ]
       },
       "thinking": "disabled",
-      "trusted_code_sha": "29737536fa82716dcafdbfa98ffb11121591df5c",
+      "trusted_code_sha": "c9491b8ffb225a49d8fadb9d2f735ab96cd1e0f8",
       "valid_unique_items": 328
     },
-    "model_requests_executed_cumulative": 298,
+    "model_requests_executed_cumulative": 319,
     "new_embedding_space_identity": "22ca480cf1d3511b4a766bed6e7ec763d121681a3b936877d71b728a36116954",
     "primary_judge": "claude-sonnet-5",
-    "primary_numerical_candidate": "B-D1-fixed-weighted-coverage"
+    "primary_numerical_candidate": "B-D2-R0-fixed-call-person-weighted-coverage"
   },
-  "next_allowed_stage": 2,
-  "next_stage_requires": "Complete bounded D2 then STOP; no Stage3, enrichment, source expansion or new human items.",
+  "next_allowed_stage": null,
+  "next_stage_requires": "STOP FOR USER REVIEW. No further revision, holdout,Stage3 or deployment authorized.",
   "pinned_data": {
     "complete_claims_sha256": "e91568362019ecbb68026ddc86d1136259424529ee93f27368296a46b64abe89",
     "complete_registry_records_sha256": "08054e3393fa4e3606876ccc0cbebd31d1c7c34c7822d261cb6f4b882b4badc3",
@@ -394,8 +683,8 @@
     "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
     "source_group_overlay_sha256": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359",
     "source_manifest_sha256": "2d96fe2bc5653c370c4d578b1cb9f12672f822ae7104139f902e21bdb689ab80",
-    "v2_ingredient_package": "233ef3b5cc7d977324106f92f9bfeb3efa55e75a6fddd23f4c01ba7a710d5840",
-    "v2_manifest_sha256": "0233452dc889ad2fee85177338e172fe79ea8ccad2eba7916b9ec1348616f8c8",
+    "v2_ingredient_package": "d4d2d28f66d769fc70938e8cf11df2694c285eff681bcc6b1ad43cb36a591958",
+    "v2_manifest_sha256": "35420e07e0f867261f3757e3c7f98d309848c326e774e84677d4f912912e6847",
     "v2_vector_sha256": "cbc5788875e257e3a64030826623a1ec743e37b4667dfd1f0afe2863fb6c9d90"
   },
   "production": {
@@ -430,6 +719,53 @@
       34491379372,
       34496503097
     ],
+    "D2_helper": {
+      "D2_module_final_tests": 14,
+      "context_run": 34508950140,
+      "context_run_main_sha": "c9491b8ffb225a49d8fadb9d2f735ab96cd1e0f8",
+      "experimental_cherry_picks": [
+        "05827a4",
+        "2bbc586c944c917d8868749bb5e29eb09a3cb96a"
+      ],
+      "findings": [
+        3981676214,
+        3981676219
+      ],
+      "fixture_tests_before_final_two": 52,
+      "helper_changed_dependency_groups": [
+        "validation"
+      ],
+      "helper_pr": 221,
+      "historical_items_reproduced": 332,
+      "historical_requests_reproduced": 162,
+      "initial_head": "cd8b195c02a8a7ec07be7e28ee297cbd25bfa55e",
+      "initial_review": 5170175615,
+      "merge_sha": "c9491b8ffb225a49d8fadb9d2f735ab96cd1e0f8",
+      "merge_time": "2026-09-10T17:32:38Z",
+      "metered_duplicate_fixture_dispatches": 0,
+      "old_findings_resolved": true,
+      "post_adoption_focused_python": 76,
+      "production_push_planner": {
+        "assembly": "skipped",
+        "generation": "skipped",
+        "pages": "skipped",
+        "publish": "skipped",
+        "run": 34508859600,
+        "validation": "skipped",
+        "verify": "skipped"
+      },
+      "repair_attempts": 1,
+      "repair_head": "c93ecdf4cdfb84388a32fe51de76778cdc37e4ec",
+      "required_checks": {
+        "browser": "passed",
+        "python": "passed"
+      },
+      "required_ci_run": 34508020881,
+      "semantic_rubric_changed": false,
+      "terminal_clean_comment": 5622793234,
+      "verification_reviews": 1,
+      "workflow_permission_changes": false
+    },
     "current_live_metadata_receipt": "docs/team-recommender/receipts/d1-live-metadata-observation.json",
     "current_main": "29737536fa82716dcafdbfa98ffb11121591df5c",
     "executor_dispatched": true,
@@ -451,49 +787,131 @@
   },
   "proposed_next_stage": {
     "authorized": false,
-    "embedding_portion_usd": 0.1,
-    "judge_portion_usd": 3.8,
-    "maximum_cumulative_if_proposal_used_usd": 6.138302,
+    "maximum_cumulative_if_proposal_used_usd": 6.27911,
     "maximum_new_metered_usd": 4,
-    "protocol": "docs/team-recommender/stage3-analysis-protocol-d1.md",
-    "protocol_sha256": "f7a5b22f0a60e1fdb316d92b875512455203ad9b748a14ffdaaab1ba7be21c3c",
+    "protocol": "docs/team-recommender/stage3-analysis-protocol-d2.md",
+    "protocol_sha256": "6f0f4c9dd57dc1ccf35febf548d393f0626554a08fd07685dcb4a90f327a496f",
     "recommendation": "REVISE before advancement",
     "stage": 3,
+    "stage3_maximum_usd": 3.9,
     "stage4_contingency_usd": 0.1,
-    "trusted_policy_limitation": "Current executor Stage2-only; separate stage approval and narrowly reviewed stage purpose/allowlist required, same ledger."
+    "trusted_policy_limitation": "Current Stage2-only executor;separate stage authority and narrowly reviewed purpose update required, not authorized here."
   },
   "ranking_revision_D2": {
     "MMR": false,
-    "cloud_owner_run": 34497056168,
+    "cloud_owner_run": 34510982749,
+    "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+    "completed_at": "2026-09-10T18:15:12.790757+00:00",
     "controls": 30,
-    "new_spend_usd": 0,
+    "diagnosis": {
+      "path": "docs/team-recommender/receipts/d2-before-edit-diagnosis.json",
+      "sha256": "e0a5676c8f27faa5c5c10523b36643de02f73046a79e74f0922c4d79e55d36cc"
+    },
+    "final_cumulative_usd": 2.27911,
+    "helper": {
+      "D2_module_final_tests": 14,
+      "context_run": 34508950140,
+      "context_run_main_sha": "c9491b8ffb225a49d8fadb9d2f735ab96cd1e0f8",
+      "experimental_cherry_picks": [
+        "05827a4",
+        "2bbc586c944c917d8868749bb5e29eb09a3cb96a"
+      ],
+      "findings": [
+        3981676214,
+        3981676219
+      ],
+      "fixture_tests_before_final_two": 52,
+      "helper_changed_dependency_groups": [
+        "validation"
+      ],
+      "helper_pr": 221,
+      "historical_items_reproduced": 332,
+      "historical_requests_reproduced": 162,
+      "initial_head": "cd8b195c02a8a7ec07be7e28ee297cbd25bfa55e",
+      "initial_review": 5170175615,
+      "merge_sha": "c9491b8ffb225a49d8fadb9d2f735ab96cd1e0f8",
+      "merge_time": "2026-09-10T17:32:38Z",
+      "metered_duplicate_fixture_dispatches": 0,
+      "old_findings_resolved": true,
+      "post_adoption_focused_python": 76,
+      "production_push_planner": {
+        "assembly": "skipped",
+        "generation": "skipped",
+        "pages": "skipped",
+        "publish": "skipped",
+        "run": 34508859600,
+        "validation": "skipped",
+        "verify": "skipped"
+      },
+      "repair_attempts": 1,
+      "repair_head": "c93ecdf4cdfb84388a32fe51de76778cdc37e4ec",
+      "required_checks": {
+        "browser": "passed",
+        "python": "passed"
+      },
+      "required_ci_run": 34508020881,
+      "semantic_rubric_changed": false,
+      "terminal_clean_comment": 5622793234,
+      "verification_reviews": 1,
+      "workflow_permission_changes": false
+    },
+    "new_context_rows": 542,
+    "new_human_items": 0,
+    "new_judge_run": 34510982749,
+    "new_model_items": 29,
+    "new_spend_usd": 0.140808,
     "prior_spend_usd": 2.138302,
     "profile_enrichment": false,
+    "protocol": {
+      "path": "docs/team-recommender/EVALUATION_PROTOCOL_D2.md",
+      "sha256": "56ed72df3a32ec06bebfac9e4e9edb44cbc94e93684a1a9eeb7401fcb151a893"
+    },
     "scientific_reservations": 90,
     "scope_count": 35,
     "source_head": "ec9c717cf1943ac68be4b1a4ba453bbb29dbd931",
     "source_preparation_expansion": false,
-    "status": "zero-provider-diagnosis"
+    "status": "bounded-automated-revision-complete-REVISE-stop-user-review"
   },
   "readiness_findings": {
     "currentness": "Resolved integration; 26/35 prepared action-allowed, 9 separately blocked at 2026-09-10T12:00:00Z. Focused successive-action/cached/stale contracts passed.",
-    "source_validation": "33 reused provenance translations + one C2 official retrieval + one newly prepared NASA source =35 prepared, 55 explicit gaps; exact spans/identity/date limitations retained. Existing registry evidence is sufficient exploratory input under D1; no faculty recertification/enrichment required.",
-    "trusted_paid_route": "Reviewed main-only PR215/217/219/220; same irreversible ledger, 310 cumulative requests, no replay or outstanding reservation. Current work complete."
+    "source_validation": "Unchanged D1 35 prepared/55 unprepared; existing provenance retained with original dates. D2 adds zero source retrievals/translations or researcher enrichment. 493 old vectors reused;542 context-only rows prepared for unselected R1.",
+    "trusted_paid_route": "PR221 exact-head corrected review and CI clean; main-only context and judging completed. One cloud owner run34510982749;336 cumulative requests,$2.279110,zero reservations."
   },
   "receipt_index": {
-    "path": "docs/team-recommender/stage2-diagnostic-receipt-index.json",
-    "sha256": "100d3bb13dd7595c8edd413f2f4e160c0e22778fdd4e4d7d4cb65853497d424d"
+    "path": "docs/team-recommender/stage2-ranking-d2-receipt-index.json",
+    "sha256": "ec71279751561e76dc5538e12f6288912c06d123659f5842b53814158b8b3665"
   },
-  "recommendation": "revise",
-  "recommended_next_stage": null,
+  "recommendation": "REVISE",
+  "recommended_next_stage": "No advancement recommended; user review of D2 quality failures",
   "report": {
-    "path": "docs/team-recommender/reports/stage-2-diagnostic-revision-report.md",
-    "sha256": "a3a46a4c555cb4c1b99dce9090d3bbdce770b0154c29f18df0cfcbf38e078829"
+    "path": "docs/team-recommender/reports/stage-2-ranking-revision-d2-report.md",
+    "sha256": "190b3b6ca9c6cc755173519b3c6aae397a1fd8d95f94c5fcca914f09207b1cd8"
   },
   "repository": "mporosoff/grants-scraper",
   "results": {
-    "A_B_top5": {
+    "D2_action_groups": 7,
+    "D2_action_no_group": 19,
+    "D2_groups": 8,
+    "D2_no_group": 27,
+    "action_admitted": 26,
+    "action_blocked_prepared": 9,
+    "arms": {
       "A": {
+        "action_admitted": {
+          "labels": {
+            "insufficient-information": 12,
+            "plausible": 47,
+            "strong": 14,
+            "unrelated": 50
+          },
+          "missing": 1,
+          "observed": 123,
+          "occurrences": 124,
+          "reasonable_fraction": 0.4959349593495935,
+          "reasonable_observed": 61,
+          "unique_items": 124,
+          "unrelated_fraction": 0.4065040650406504
+        },
         "empty_lists": 1,
         "labels": {
           "insufficient-information": 13,
@@ -501,12 +919,12 @@
           "strong": 21,
           "unrelated": 63
         },
-        "macro_scope_reasonable": 0.5455882352941177,
+        "macro_reasonable": 0.5455882352941177,
         "missing": 1,
         "observed": 168,
-        "observed_scope_denominator": 34,
+        "observed_scopes": 34,
         "occurrences": 169,
-        "possible_top5_slots": 175,
+        "possible_slots": 175,
         "prepared_scopes": 35,
         "reasonable_fraction": 0.5476190476190477,
         "reasonable_observed": 92,
@@ -514,7 +932,22 @@
         "unique_items": 169,
         "unrelated_fraction": 0.375
       },
-      "B": {
+      "D1": {
+        "action_admitted": {
+          "labels": {
+            "insufficient-information": 4,
+            "plausible": 37,
+            "strong": 14,
+            "unrelated": 11
+          },
+          "missing": 1,
+          "observed": 66,
+          "occurrences": 67,
+          "reasonable_fraction": 0.7727272727272727,
+          "reasonable_observed": 51,
+          "unique_items": 67,
+          "unrelated_fraction": 0.16666666666666666
+        },
         "empty_lists": 11,
         "labels": {
           "insufficient-information": 5,
@@ -522,111 +955,995 @@
           "strong": 19,
           "unrelated": 26
         },
-        "macro_scope_reasonable": 0.7020833333333334,
+        "macro_reasonable": 0.7020833333333334,
         "missing": 1,
         "observed": 106,
-        "observed_scope_denominator": 24,
+        "observed_scopes": 24,
         "occurrences": 107,
-        "possible_top5_slots": 175,
+        "possible_slots": 175,
         "prepared_scopes": 35,
         "reasonable_fraction": 0.7075471698113207,
         "reasonable_observed": 75,
         "short_nonempty_lists": 4,
         "unique_items": 107,
         "unrelated_fraction": 0.24528301886792453
+      },
+      "D2": {
+        "action_admitted": {
+          "labels": {
+            "insufficient-information": 4,
+            "plausible": 37,
+            "strong": 14,
+            "unrelated": 11
+          },
+          "missing": 1,
+          "observed": 66,
+          "occurrences": 67,
+          "reasonable_fraction": 0.7727272727272727,
+          "reasonable_observed": 51,
+          "unique_items": 67,
+          "unrelated_fraction": 0.16666666666666666
+        },
+        "empty_lists": 11,
+        "labels": {
+          "insufficient-information": 5,
+          "plausible": 56,
+          "strong": 19,
+          "unrelated": 26
+        },
+        "macro_reasonable": 0.7020833333333334,
+        "missing": 1,
+        "observed": 106,
+        "observed_scopes": 24,
+        "occurrences": 107,
+        "possible_slots": 175,
+        "prepared_scopes": 35,
+        "reasonable_fraction": 0.7075471698113207,
+        "reasonable_observed": 75,
+        "short_nonempty_lists": 4,
+        "unique_items": 107,
+        "unrelated_fraction": 0.24528301886792453
+      },
+      "R1-isolated": {
+        "action_admitted": {
+          "labels": {
+            "insufficient-information": 4,
+            "plausible": 36,
+            "strong": 14,
+            "unrelated": 11
+          },
+          "missing": 2,
+          "observed": 65,
+          "occurrences": 67,
+          "reasonable_fraction": 0.7692307692307693,
+          "reasonable_observed": 50,
+          "unique_items": 67,
+          "unrelated_fraction": 0.16923076923076924
+        },
+        "empty_lists": 11,
+        "labels": {
+          "insufficient-information": 5,
+          "plausible": 54,
+          "strong": 20,
+          "unrelated": 20
+        },
+        "macro_reasonable": 0.7312500000000001,
+        "missing": 8,
+        "observed": 99,
+        "observed_scopes": 24,
+        "occurrences": 107,
+        "possible_slots": 175,
+        "prepared_scopes": 35,
+        "reasonable_fraction": 0.7474747474747475,
+        "reasonable_observed": 74,
+        "short_nonempty_lists": 4,
+        "unique_items": 107,
+        "unrelated_fraction": 0.20202020202020202
       }
     },
-    "B_action_allowed_option_member_unrelated": {
-      "missing": 3,
-      "observed": 61,
-      "rate": 0.13114754098360656,
-      "unrelated": 8
-    },
-    "B_option_member_unrelated": {
-      "missing": 3,
-      "observed": 77,
-      "rate": 0.2597402597402597,
-      "unrelated": 20
-    },
-    "B_useful_group_unrelated_member_disagreements": 9,
-    "action_allowed_no_groups": 22,
-    "action_allowed_primary_groups": 4,
-    "action_allowed_scopes": 26,
-    "action_blocked_scopes": 9,
     "aspects": 61,
-    "common_case_difference": {
-      "cluster_bootstrap_95_percentile": [
-        -0.017391304347826087,
-        0.15217391304347827
-      ],
-      "draws": 5000,
-      "limitations": "Observed-label macro rates only. Missing and insufficient remain visible; no independent human calibration.",
-      "mean_difference": 0.0625,
-      "scopes": 24,
-      "seed": 20260910,
-      "source_groups": 23
-    },
-    "derived_controls_accounted": 30,
+    "controls": 30,
     "eligible_directory": 155,
-    "exact_vector_rows": 493,
-    "explanations": {
-      "faithful": 5,
-      "missing": 0,
-      "unsupported": 0
-    },
-    "holdout_evaluated_scopes": 0,
+    "group_member_disagreements": 7,
+    "holdout_scored": false,
     "human_judgments": 0,
-    "independent_feasibility": "unknown for all 90; never defined by output",
-    "model_D1_judgments": 328,
-    "new_query_rows": 4,
-    "new_researcher_rows": 0,
-    "optional": {
-      "D1_Bayesian": "not fitted in D1; optional precondition not met; C2 whole-call labels are not aspect labels",
-      "D1_MMR": "not evaluated: four useful sources did not meet predeclared five-source condition",
-      "D1_regularized": "not meaningfully fitted: condition not met; only 13 usable aspect-person events (10 positive, 3 unrelated) plus one insufficient-information",
-      "extra_paid_labels": 0,
-      "model_useful_primary_sources": 4,
-      "predeclared_required": 5,
-      "retained": "fixed numerical model; MMR off; no learned asset"
+    "independent_feasibility": "unknown",
+    "matched_preferences": [
+      {
+        "label": "tie",
+        "result": "tie",
+        "scope_id": "359696"
+      },
+      {
+        "label": "B",
+        "result": "whole-call",
+        "scope_id": "361207"
+      },
+      {
+        "label": "tie",
+        "result": "tie",
+        "scope_id": "345241:tdac-baa-004"
+      },
+      {
+        "label": "A",
+        "result": "order-conflict-unresolved",
+        "scope_id": "344592:ab-0009"
+      },
+      {
+        "label": "A",
+        "result": "whole-call",
+        "scope_id": "363622"
+      }
+    ],
+    "model_cached_unique_items": 269,
+    "new_context_vectors": 542,
+    "new_human_items": 0,
+    "new_model_items": 29,
+    "option_groups": 40,
+    "order_audits": [
+      {
+        "original": "B",
+        "original_key": "2c5b49049b6eedbfa10de63a9a6b4242f4a813bb647c6ed78b0c38c36dc3cf0d",
+        "scope_id": "361207",
+        "status": "consistent",
+        "swapped": "A",
+        "swapped_key": "bee389e29c5bb6877766e8ae063e5ed0521c19876b97801885709d1a0d6b8f4e"
+      },
+      {
+        "original": "tie",
+        "original_key": "9ab622394ee4478451be08773c98572c88a8bdfa2d84acb7506523cdc7f2e8d8",
+        "scope_id": "345241:tdac-baa-004",
+        "status": "consistent",
+        "swapped": "tie",
+        "swapped_key": "ba8871d6b578cb4f67085e5b913e5b853eca692e75e2ca045c9897132494b3d1"
+      },
+      {
+        "original": "tie",
+        "original_key": "cc789515f1053216f794844f8e364e9a1ad332ed32bb91389de857af73788044",
+        "scope_id": "359696",
+        "status": "consistent",
+        "swapped": "tie",
+        "swapped_key": "62c0017732e1573d4bce01f9a9da100c3661e043a08f61e030028289531d74a0"
+      },
+      {
+        "original": "A",
+        "original_key": "278119761bfe5213f863496784d4dc7fc32e4a0d4aba82b6b67bf4dd37bcc706",
+        "scope_id": "344592:ab-0009",
+        "status": "conflict-unresolved",
+        "swapped": "A",
+        "swapped_key": "b0f38664ab90eca61fdae11e93988e81983e6703500dc448aa8d6f652d4fe9c6"
+      }
+    ],
+    "paired": {
+      "A->D1": {
+        "cluster_bootstrap_95_percentile": [
+          -0.017391304347826087,
+          0.15217391304347827
+        ],
+        "draws": 5000,
+        "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+        "mean_difference": 0.0625,
+        "scopes": 24,
+        "seed": 20260910,
+        "source_groups": 23
+      },
+      "A->D2": {
+        "cluster_bootstrap_95_percentile": [
+          -0.017391304347826087,
+          0.15217391304347827
+        ],
+        "draws": 5000,
+        "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+        "mean_difference": 0.0625,
+        "scopes": 24,
+        "seed": 20260910,
+        "source_groups": 23
+      },
+      "D1->R1-isolated": {
+        "cluster_bootstrap_95_percentile": [
+          0.003999999999999995,
+          0.06041666666666665
+        ],
+        "draws": 5000,
+        "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+        "mean_difference": 0.02916666666666666,
+        "scopes": 24,
+        "seed": 20260910,
+        "source_groups": 23
+      }
     },
-    "paid_failed_items": 4,
     "planned_rollout_scopes": 150,
-    "pre_dispatch_missing_items": 1,
+    "prepared": 35,
     "prepared_children": 3,
-    "prepared_no_groups": 30,
     "prepared_parents": 35,
-    "primary_groups": 5,
-    "primary_groups_model_useful": 4,
-    "profile_freeze": {
-      "path": "docs/team-recommender/receipts/d1-profile-freeze-proof.json",
-      "sha256": "2ca0139d9a902ac87fa30887529884856a96040bb94ded17b32649bb140828d9"
-    },
     "real_comparison_receipt": {
-      "path": "docs/team-recommender/receipts/d1-final-analysis.json",
-      "sha256": "03af691e66d385406c56c4cf140bf36e1648a1c5f53d6245f5e0a11892f3b64d"
+      "path": "docs/team-recommender/receipts/d2-development-results-34510982749.json",
+      "sha256": "ae807df565fc404136e193478d9f809f3ffbcc4c44526583ccdf77c73da1c467"
     },
-    "real_development_controls_executed": 12,
-    "real_prepared_development_scopes": 35,
     "real_prepared_rollout_scopes": 18,
     "resource_measurements": {
-      "path": "docs/team-recommender/receipts/d1-real-measurements-v1.json",
-      "sha256": "d96552d80dc167151c00d714df687e33e747820ce00f0eb4eba7a675c991c3fc"
+      "path": "docs/team-recommender/receipts/d2-real-measurements-uncontended.json",
+      "sha256": "a9256f2be65fd6f5a4ada0780f2cee732f050c1b087eb7cdb2287c924bc1a468"
     },
-    "reused_exact_rows": 489,
+    "reused_selected_vectors": 493,
     "rollout_50_prepared": 8,
-    "scientific_reservations_attempted": 90,
-    "unattempted_items": 0,
-    "unprepared_control_origins": 18,
-    "unprepared_scopes": 55,
-    "waterfall": {
-      "path": "docs/team-recommender/receipts/d1-all-scope-waterfall.json",
-      "sha256": "264c415f867639b93de4c44f0fbc91945f47c90ec67be6cce72f958efb863614"
-    }
+    "scientific": 90,
+    "summaries": {
+      "D1": {
+        "all_option_groups": {
+          "action_admitted": {
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 24,
+              "strong": 6,
+              "unrelated": 1
+            },
+            "missing": 0,
+            "observed": 32,
+            "occurrences": 32,
+            "reasonable_fraction": 0.9375,
+            "reasonable_observed": 30,
+            "unique_items": 32,
+            "unrelated_fraction": 0.03125
+          },
+          "labels": {
+            "insufficient-information": 2,
+            "plausible": 27,
+            "strong": 6,
+            "unrelated": 5
+          },
+          "missing": 0,
+          "observed": 40,
+          "occurrences": 40,
+          "reasonable_fraction": 0.825,
+          "reasonable_observed": 33,
+          "unique_items": 40,
+          "unrelated_fraction": 0.125
+        },
+        "all_option_members": {
+          "action_admitted": {
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 25,
+              "strong": 27,
+              "unrelated": 8
+            },
+            "missing": 3,
+            "observed": 61,
+            "occurrences": 64,
+            "reasonable_fraction": 0.8524590163934426,
+            "reasonable_observed": 52,
+            "unique_items": 36,
+            "unrelated_fraction": 0.13114754098360656
+          },
+          "labels": {
+            "insufficient-information": 1,
+            "plausible": 27,
+            "strong": 29,
+            "unrelated": 20
+          },
+          "missing": 3,
+          "observed": 77,
+          "occurrences": 80,
+          "reasonable_fraction": 0.7272727272727273,
+          "reasonable_observed": 56,
+          "unique_items": 45,
+          "unrelated_fraction": 0.2597402597402597
+        },
+        "distinct_call_persons": {
+          "labels": {
+            "insufficient-information": 1,
+            "plausible": 20,
+            "strong": 8,
+            "unrelated": 13
+          },
+          "missing": 3,
+          "observed": 42,
+          "occurrences": 45,
+          "reasonable_fraction": 0.6666666666666666,
+          "reasonable_observed": 28,
+          "unique_items": 45,
+          "unrelated_fraction": 0.30952380952380953
+        },
+        "per_option_rank": {
+          "1": {
+            "option-group": {
+              "labels": {
+                "plausible": 2,
+                "strong": 2,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 0.8,
+              "reasonable_observed": 4,
+              "unique_items": 5,
+              "unrelated_fraction": 0.2
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 4,
+                "strong": 4,
+                "unrelated": 2
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.8,
+              "reasonable_observed": 8,
+              "unique_items": 10,
+              "unrelated_fraction": 0.2
+            }
+          },
+          "2": {
+            "option-group": {
+              "labels": {
+                "plausible": 4,
+                "strong": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 5,
+              "unique_items": 5,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 1,
+                "strong": 6,
+                "unrelated": 3
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.7,
+              "reasonable_observed": 7,
+              "unique_items": 10,
+              "unrelated_fraction": 0.3
+            }
+          },
+          "3": {
+            "option-group": {
+              "labels": {
+                "plausible": 3,
+                "strong": 1,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 0.8,
+              "reasonable_observed": 4,
+              "unique_items": 5,
+              "unrelated_fraction": 0.2
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 6,
+                "strong": 3,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.9,
+              "reasonable_observed": 9,
+              "unique_items": 10,
+              "unrelated_fraction": 0.1
+            }
+          },
+          "4": {
+            "option-group": {
+              "labels": {
+                "plausible": 4,
+                "strong": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 5,
+              "unique_items": 5,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "insufficient-information": 1,
+                "plausible": 3,
+                "strong": 3,
+                "unrelated": 2
+              },
+              "missing": 1,
+              "observed": 9,
+              "occurrences": 10,
+              "reasonable_fraction": 0.6666666666666666,
+              "reasonable_observed": 6,
+              "unique_items": 10,
+              "unrelated_fraction": 0.2222222222222222
+            }
+          },
+          "5": {
+            "option-group": {
+              "labels": {
+                "insufficient-information": 1,
+                "plausible": 3,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 0.6,
+              "reasonable_observed": 3,
+              "unique_items": 5,
+              "unrelated_fraction": 0.2
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 3,
+                "strong": 4,
+                "unrelated": 2
+              },
+              "missing": 1,
+              "observed": 9,
+              "occurrences": 10,
+              "reasonable_fraction": 0.7777777777777778,
+              "reasonable_observed": 7,
+              "unique_items": 10,
+              "unrelated_fraction": 0.2222222222222222
+            }
+          },
+          "6": {
+            "option-group": {
+              "labels": {
+                "plausible": 4,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 0.8,
+              "reasonable_observed": 4,
+              "unique_items": 5,
+              "unrelated_fraction": 0.2
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 3,
+                "strong": 3,
+                "unrelated": 4
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.6,
+              "reasonable_observed": 6,
+              "unique_items": 10,
+              "unrelated_fraction": 0.4
+            }
+          },
+          "7": {
+            "option-group": {
+              "labels": {
+                "insufficient-information": 1,
+                "plausible": 3,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 0.6,
+              "reasonable_observed": 3,
+              "unique_items": 5,
+              "unrelated_fraction": 0.2
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 2,
+                "strong": 3,
+                "unrelated": 4
+              },
+              "missing": 1,
+              "observed": 9,
+              "occurrences": 10,
+              "reasonable_fraction": 0.5555555555555556,
+              "reasonable_observed": 5,
+              "unique_items": 10,
+              "unrelated_fraction": 0.4444444444444444
+            }
+          },
+          "8": {
+            "option-group": {
+              "labels": {
+                "plausible": 4,
+                "strong": 1
+              },
+              "missing": 0,
+              "observed": 5,
+              "occurrences": 5,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 5,
+              "unique_items": 5,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 5,
+                "strong": 3,
+                "unrelated": 2
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.8,
+              "reasonable_observed": 8,
+              "unique_items": 10,
+              "unrelated_fraction": 0.2
+            }
+          }
+        },
+        "primary_groups": {
+          "action_admitted": {
+            "labels": {
+              "plausible": 2,
+              "strong": 2
+            },
+            "missing": 0,
+            "observed": 4,
+            "occurrences": 4,
+            "reasonable_fraction": 1.0,
+            "reasonable_observed": 4,
+            "unique_items": 4,
+            "unrelated_fraction": 0.0
+          },
+          "labels": {
+            "plausible": 2,
+            "strong": 2,
+            "unrelated": 1
+          },
+          "missing": 0,
+          "observed": 5,
+          "occurrences": 5,
+          "reasonable_fraction": 0.8,
+          "reasonable_observed": 4,
+          "unique_items": 5,
+          "unrelated_fraction": 0.2
+        },
+        "primary_members": {
+          "action_admitted": {
+            "labels": {
+              "plausible": 4,
+              "strong": 4
+            },
+            "missing": 0,
+            "observed": 8,
+            "occurrences": 8,
+            "reasonable_fraction": 1.0,
+            "reasonable_observed": 8,
+            "unique_items": 8,
+            "unrelated_fraction": 0.0
+          },
+          "labels": {
+            "plausible": 4,
+            "strong": 4,
+            "unrelated": 2
+          },
+          "missing": 0,
+          "observed": 10,
+          "occurrences": 10,
+          "reasonable_fraction": 0.8,
+          "reasonable_observed": 8,
+          "unique_items": 10,
+          "unrelated_fraction": 0.2
+        }
+      },
+      "D2": {
+        "all_option_groups": {
+          "action_admitted": {
+            "labels": {
+              "plausible": 18,
+              "strong": 4,
+              "unrelated": 1
+            },
+            "missing": 10,
+            "observed": 23,
+            "occurrences": 33,
+            "reasonable_fraction": 0.9565217391304348,
+            "reasonable_observed": 22,
+            "unique_items": 33,
+            "unrelated_fraction": 0.043478260869565216
+          },
+          "labels": {
+            "insufficient-information": 1,
+            "plausible": 20,
+            "strong": 4,
+            "unrelated": 3
+          },
+          "missing": 12,
+          "observed": 28,
+          "occurrences": 40,
+          "reasonable_fraction": 0.8571428571428571,
+          "reasonable_observed": 24,
+          "unique_items": 40,
+          "unrelated_fraction": 0.10714285714285714
+        },
+        "all_option_members": {
+          "action_admitted": {
+            "labels": {
+              "plausible": 42,
+              "strong": 15,
+              "unrelated": 8
+            },
+            "missing": 1,
+            "observed": 65,
+            "occurrences": 66,
+            "reasonable_fraction": 0.8769230769230769,
+            "reasonable_observed": 57,
+            "unique_items": 32,
+            "unrelated_fraction": 0.12307692307692308
+          },
+          "labels": {
+            "plausible": 44,
+            "strong": 19,
+            "unrelated": 16
+          },
+          "missing": 1,
+          "observed": 79,
+          "occurrences": 80,
+          "reasonable_fraction": 0.7974683544303798,
+          "reasonable_observed": 63,
+          "unique_items": 37,
+          "unrelated_fraction": 0.20253164556962025
+        },
+        "distinct_call_persons": {
+          "labels": {
+            "plausible": 20,
+            "strong": 10,
+            "unrelated": 6
+          },
+          "missing": 1,
+          "observed": 36,
+          "occurrences": 37,
+          "reasonable_fraction": 0.8333333333333334,
+          "reasonable_observed": 30,
+          "unique_items": 37,
+          "unrelated_fraction": 0.16666666666666666
+        },
+        "per_option_rank": {
+          "1": {
+            "option-group": {
+              "labels": {
+                "plausible": 4,
+                "strong": 3,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 8,
+              "occurrences": 8,
+              "reasonable_fraction": 0.875,
+              "reasonable_observed": 7,
+              "unique_items": 8,
+              "unrelated_fraction": 0.125
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 8,
+                "strong": 5,
+                "unrelated": 3
+              },
+              "missing": 0,
+              "observed": 16,
+              "occurrences": 16,
+              "reasonable_fraction": 0.8125,
+              "reasonable_observed": 13,
+              "unique_items": 16,
+              "unrelated_fraction": 0.1875
+            }
+          },
+          "2": {
+            "option-group": {
+              "labels": {
+                "plausible": 7,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 8,
+              "occurrences": 8,
+              "reasonable_fraction": 0.875,
+              "reasonable_observed": 7,
+              "unique_items": 8,
+              "unrelated_fraction": 0.125
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 6,
+                "strong": 7,
+                "unrelated": 3
+              },
+              "missing": 0,
+              "observed": 16,
+              "occurrences": 16,
+              "reasonable_fraction": 0.8125,
+              "reasonable_observed": 13,
+              "unique_items": 16,
+              "unrelated_fraction": 0.1875
+            }
+          },
+          "3": {
+            "option-group": {
+              "labels": {
+                "plausible": 3
+              },
+              "missing": 4,
+              "observed": 3,
+              "occurrences": 7,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 3,
+              "unique_items": 7,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 9,
+                "strong": 3,
+                "unrelated": 2
+              },
+              "missing": 0,
+              "observed": 14,
+              "occurrences": 14,
+              "reasonable_fraction": 0.8571428571428571,
+              "reasonable_observed": 12,
+              "unique_items": 14,
+              "unrelated_fraction": 0.14285714285714285
+            }
+          },
+          "4": {
+            "option-group": {
+              "labels": {
+                "insufficient-information": 1,
+                "plausible": 1,
+                "strong": 1
+              },
+              "missing": 2,
+              "observed": 3,
+              "occurrences": 5,
+              "reasonable_fraction": 0.6666666666666666,
+              "reasonable_observed": 2,
+              "unique_items": 5,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 5,
+                "strong": 2,
+                "unrelated": 2
+              },
+              "missing": 1,
+              "observed": 9,
+              "occurrences": 10,
+              "reasonable_fraction": 0.7777777777777778,
+              "reasonable_observed": 7,
+              "unique_items": 10,
+              "unrelated_fraction": 0.2222222222222222
+            }
+          },
+          "5": {
+            "option-group": {
+              "labels": {
+                "plausible": 1
+              },
+              "missing": 3,
+              "observed": 1,
+              "occurrences": 4,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 1,
+              "unique_items": 4,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 3,
+                "strong": 2,
+                "unrelated": 3
+              },
+              "missing": 0,
+              "observed": 8,
+              "occurrences": 8,
+              "reasonable_fraction": 0.625,
+              "reasonable_observed": 5,
+              "unique_items": 8,
+              "unrelated_fraction": 0.375
+            }
+          },
+          "6": {
+            "option-group": {
+              "labels": {
+                "plausible": 2
+              },
+              "missing": 1,
+              "observed": 2,
+              "occurrences": 3,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 2,
+              "unique_items": 3,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 5,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 6,
+              "occurrences": 6,
+              "reasonable_fraction": 0.8333333333333334,
+              "reasonable_observed": 5,
+              "unique_items": 6,
+              "unrelated_fraction": 0.16666666666666666
+            }
+          },
+          "7": {
+            "option-group": {
+              "labels": {
+                "unrelated": 1
+              },
+              "missing": 2,
+              "observed": 1,
+              "occurrences": 3,
+              "reasonable_fraction": 0.0,
+              "reasonable_observed": 0,
+              "unique_items": 3,
+              "unrelated_fraction": 1.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 5,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 6,
+              "occurrences": 6,
+              "reasonable_fraction": 0.8333333333333334,
+              "reasonable_observed": 5,
+              "unique_items": 6,
+              "unrelated_fraction": 0.16666666666666666
+            }
+          },
+          "8": {
+            "option-group": {
+              "labels": {
+                "plausible": 2
+              },
+              "missing": 0,
+              "observed": 2,
+              "occurrences": 2,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 2,
+              "unique_items": 2,
+              "unrelated_fraction": 0.0
+            },
+            "option-member": {
+              "labels": {
+                "plausible": 3,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 4,
+              "occurrences": 4,
+              "reasonable_fraction": 0.75,
+              "reasonable_observed": 3,
+              "unique_items": 4,
+              "unrelated_fraction": 0.25
+            }
+          }
+        },
+        "primary_groups": {
+          "action_admitted": {
+            "labels": {
+              "plausible": 4,
+              "strong": 3
+            },
+            "missing": 0,
+            "observed": 7,
+            "occurrences": 7,
+            "reasonable_fraction": 1.0,
+            "reasonable_observed": 7,
+            "unique_items": 7,
+            "unrelated_fraction": 0.0
+          },
+          "labels": {
+            "plausible": 4,
+            "strong": 3,
+            "unrelated": 1
+          },
+          "missing": 0,
+          "observed": 8,
+          "occurrences": 8,
+          "reasonable_fraction": 0.875,
+          "reasonable_observed": 7,
+          "unique_items": 8,
+          "unrelated_fraction": 0.125
+        },
+        "primary_members": {
+          "action_admitted": {
+            "labels": {
+              "plausible": 8,
+              "strong": 5,
+              "unrelated": 1
+            },
+            "missing": 0,
+            "observed": 14,
+            "occurrences": 14,
+            "reasonable_fraction": 0.9285714285714286,
+            "reasonable_observed": 13,
+            "unique_items": 14,
+            "unrelated_fraction": 0.07142857142857142
+          },
+          "labels": {
+            "plausible": 8,
+            "strong": 5,
+            "unrelated": 3
+          },
+          "missing": 0,
+          "observed": 16,
+          "occurrences": 16,
+          "reasonable_fraction": 0.8125,
+          "reasonable_observed": 13,
+          "unique_items": 16,
+          "unrelated_fraction": 0.1875
+        }
+      },
+      "explanations": {
+        "labels": {
+          "faithful": 5,
+          "unsupported": 1
+        },
+        "missing": 0,
+        "observed": 6,
+        "occurrences": 6,
+        "reasonable_fraction": 0.0,
+        "reasonable_observed": 0,
+        "unique_items": 6,
+        "unrelated_fraction": 0.0
+      },
+      "matched_A_groups": {
+        "labels": {
+          "plausible": 2,
+          "strong": 5,
+          "unrelated": 1
+        },
+        "missing": 0,
+        "observed": 8,
+        "occurrences": 8,
+        "reasonable_fraction": 0.875,
+        "reasonable_observed": 7,
+        "unique_items": 8,
+        "unrelated_fraction": 0.125
+      },
+      "matched_A_members": {
+        "labels": {
+          "plausible": 7,
+          "strong": 8,
+          "unrelated": 1
+        },
+        "missing": 0,
+        "observed": 16,
+        "occurrences": 16,
+        "reasonable_fraction": 0.9375,
+        "reasonable_observed": 15,
+        "unique_items": 16,
+        "unrelated_fraction": 0.0625
+      }
+    },
+    "unjudged_unique_items": 23,
+    "unprepared": 55
   },
   "schema_version": 1,
   "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
-  "source_head_at_evidence_capture": "f148325cc456e8d26d8d71c0541a2b3aad470a5c",
-  "source_tree_at_evidence_capture": "dcced93ed1d67173bbaedd512b84a843a4b049fe",
+  "source_head_at_evidence_capture": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+  "source_tree_at_evidence_capture": "101052a9f4192fdbb02bc28c3331825b0d085013",
   "stage1_receipt_index": {
     "path": "docs/team-recommender/receipt-index.json",
     "sha256": "d32ae60b40120a437b9d42c61759711a0d263a9b13f7662759ae46b1f104f0d8"
@@ -782,8 +2099,8 @@
       "Full physical-browser/E2E/Playwright/accessibility and held-out quality gates unrun; Stage 3 unauthorized"
     ]
   },
-  "stage2_complete": false,
-  "stage2_complete_meaning": "Authorized automated D1 revision complete; quality qualification not achieved; no Stage3 approval",
+  "stage2_complete": true,
+  "stage2_complete_meaning": "The user-authorized bounded D2 automated sequence is complete; quality qualification failed independently of missing human answers; no Stage3 authorization.",
   "stage2_completion_receipt_index_history": {
     "path": "docs/team-recommender/stage2-continuation-receipt-index.json",
     "sha256": "5ad92c03679c59a04641ad673280d0df28949131f133f94ac420ba112cd574aa"
@@ -805,18 +2122,18 @@
     "path": "docs/team-recommender/reports/stage-2-report.md",
     "sha256": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351"
   },
-  "stage_status": "stage2-ranking-revision-D2-active",
+  "stage_status": "stage2-D2-automated-complete-REVISE",
   "stop": "STOP FOR USER REVIEW. Do not inspect holdout recommendations, begin Stage 3 or deploy.",
   "unresolved": [
-    "55/90 scientific reservations remain unprepared for stated source/selection/context gaps; 18/150 source-selected rollout ingredients prepared.",
-    "B model-estimated macro top-five reasonable precision 70.21% below 80%; paired gain +6.25pp has source-cluster interval crossing zero; eleven empty lists.",
-    "B option-member unrelated rate 20/77 observed (3 missing), above 5%; action-allowed subset also fails at 8/61.",
-    "Only four model-useful primary source scopes; nine useful-group/unrelated-member judge disagreements remain unresolved. Independent feasible-scope denominator unknown.",
-    "Four D1 paid-failed items remain charged and unresolved without replay; one complete source packet too large to dispatch. Historical C2 failures remain preserved separately.",
-    "Optional D1 MMR/fitted scoring precondition not met; only 13 binary aspect-level examples. No claim fixed scoring won an unrun comparison.",
-    "Zero returned human judgments; existing 20-item development packet preserved, 20 final items reserved. Old possible exposure and changed-item applicability disclosed.",
-    "Physical-browser/E2E/Playwright/accessibility and held-out gates unrun; no Stage3 or deployment approval. Researcher enrichment is outside scope and is not a completion prerequisite."
+    "55/90 scientific reservations remain unprepared;D2 source expansion was prohibited.18/150 source-selected rollout ingredients prepared.",
+    "D2 macro reasonable top5 remains70.21% below80%,with11 empty lists;common-sourceA difference+6.25pp interval crosseszero.",
+    "D2 primary unrelated3/16;action-admitted1/14;all-option unrelated16/79 andaction8/65 exceed5%.12of40 option groups unjudged.",
+    "Matched A preference:2A wins,2ties,1orderconflict,3identical;no resolved distinctD2 win.Independent feasible-scope denominator unknown.",
+    "Oneof6 explanations unsupported;7useful-group/unrelated-member disagreements.Original9D1 disagreements preserved;no mapping defect established.",
+    "R1 incomplete diagnostic labels and worsecombined primaries do not justify adoption.Regularized nested rule fails;Bayesian optionalunrun;MMR prohibitedD2.",
+    "Zero returned human judgments;existing20itempacket unchanged,no newrequests,20finalreserved.Changed-item andpossibleexposure limitations retained.",
+    "Historicalpaid failures retained,notrerun;no newD2failure.No fullE2E/Playwright/accessibility/physical-browser/holdout gates run.NoStage3/deployment authorized."
   ],
-  "updated_at": "2026-09-10T16:11:47.463806+00:00",
+  "updated_at": "2026-09-10T18:15:12.885599+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender"
 }

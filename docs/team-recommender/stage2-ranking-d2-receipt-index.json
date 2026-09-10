@@ -1,0 +1,32 @@
+{
+  "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+  "files": {
+    "docs/team-recommender/EVALUATION_PROTOCOL_D2.md": "56ed72df3a32ec06bebfac9e4e9edb44cbc94e93684a1a9eeb7401fcb151a893",
+    "docs/team-recommender/RANKING_REVISION_D2.md": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc",
+    "docs/team-recommender/budget-ledger.json": "590e761abeefde54343e83f09341cca931b8149e0ab01d268c7acfd8c109413e",
+    "docs/team-recommender/receipts/d2-before-edit-diagnosis.json": "e0a5676c8f27faa5c5c10523b36643de02f73046a79e74f0922c4d79e55d36cc",
+    "docs/team-recommender/receipts/d2-budget-reconciliation.json": "3ea128411d7f20c5fcf58a0aa3f959e545911c84c1c717efaab6c89eef8a511c",
+    "docs/team-recommender/receipts/d2-combined-R1-selection.json": "decd23c418f5aec7d21a41d93b0c53f1afe517db094e507443a6b8f2e49cdc3f",
+    "docs/team-recommender/receipts/d2-context-input-plan.json": "2bb7b9bdde8a8d012a3f14db0988f620f9409c03e968901e967ecacb829b929b",
+    "docs/team-recommender/receipts/d2-context-vector-adoption.json": "c19155c54dfc596674f9aa9e683cfddbae5fac8ee7a06ec1b5836947fda32f45",
+    "docs/team-recommender/receipts/d2-development-results-34510982749.json": "ae807df565fc404136e193478d9f809f3ffbcc4c44526583ccdf77c73da1c467",
+    "docs/team-recommender/receipts/d2-fit-R0.json": "0779e45714a41c4d1aef208bf3fafc7ab763803a6c64786f45565cac60e1ab4a",
+    "docs/team-recommender/receipts/d2-fit-R1.json": "b931efaa4de9b3d168e7b40bf066b342fbeeea67c34bb79db327bf23a307bc70",
+    "docs/team-recommender/receipts/d2-fixed-matrix-selection.json": "0f930ec5ed5796469557b8031ed5b142bf957e7447e005028525c9d323545a0c",
+    "docs/team-recommender/receipts/d2-judge-plan.json": "5a95bb19f4adce1cf8c1f2451c00d3bd73e179dc9372e115e3f6835efb8f7394",
+    "docs/team-recommender/receipts/d2-prejudge-candidate.json": "bb412bba1407e99a7636807575c7afc5a4ce025e59546f4ac07d36e9f9078722",
+    "docs/team-recommender/receipts/d2-r1-resource-measurements.json": "3fd7f202585c70f5078ae94a97d2c56204916d4d0dc892149ebf0e6bb82ff3b7",
+    "docs/team-recommender/receipts/d2-real-controls.json": "47b35a7a96475bdae8bd14d77c27e0cf44b28a867aedc446aba3414a1864e0aa",
+    "docs/team-recommender/receipts/d2-real-measurements-selected.json": "4471777c0080ca16e8a8df4d91ff14a76b9b1065176712fe2a72f09e6cbaaae6",
+    "docs/team-recommender/receipts/d2-real-measurements-uncontended.json": "a9256f2be65fd6f5a4ada0780f2cee732f050c1b087eb7cdb2287c924bc1a468",
+    "docs/team-recommender/receipts/d2-resume.json": "43ed8293679e5c4189cef4ea0fe74a4aee1c1d5382dbc96af9562c97d0ce0216",
+    "docs/team-recommender/receipts/d2-trusted-helper.json": "ec859ee0a2605e2beb58d8f8b3cdae52ada8334d9e0805311179a15ee6c4e20b",
+    "docs/team-recommender/receipts/d2-validation.json": "fb8a119bcaa017fa21d73f125162fe1548853e6c6bbe83287fb2c367c2b250df",
+    "docs/team-recommender/reports/stage-2-ranking-revision-d2-report.md": "190b3b6ca9c6cc755173519b3c6aae397a1fd8d95f94c5fcca914f09207b1cd8",
+    "docs/team-recommender/stage2-ranking-d2-candidate.json": "0c6b012b3a5f53dd469406573b61a05ea98a69843a7cc9858063876144434591",
+    "docs/team-recommender/stage3-analysis-protocol-d2.md": "6f0f4c9dd57dc1ccf35febf548d393f0626554a08fd07685dcb4a90f327a496f"
+  },
+  "holdout_scored": false,
+  "raw_private_caches_included": false,
+  "status": "D2 completed REVISE"
+}

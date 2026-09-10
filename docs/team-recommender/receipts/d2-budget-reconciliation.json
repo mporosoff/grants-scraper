@@ -1,0 +1,210 @@
+{
+  "D2_embedding_charged_microusd": 318,
+  "D2_embedding_requests": 5,
+  "D2_embedding_rows": 542,
+  "D2_embedding_tokens": 15730,
+  "D2_judge_charged_microusd": 140490,
+  "D2_judge_input_tokens": 63470,
+  "D2_judge_output_tokens": 1355,
+  "D2_judge_requests": 21,
+  "D2_judge_reserved_input_bounds": 187373,
+  "D2_judge_reserved_output_bounds": 10752,
+  "D2_total_microusd": 140808,
+  "all_new_actual_requests_attempt1": true,
+  "authorization": "on-demand-team-offline-v2-20260909",
+  "cache_reused_unique_items": 269,
+  "cached_occurrences": 712,
+  "checkpoint_sha256": "7119bbaa839c7feeae0e1af92032fc8ed2ec48aaa7c81612a90c4c70c7d44b71",
+  "context_packet_sha256": "78c8502060cd478752dd526aa4477a7d5d1c94eefb9ad64e8c616ec9f01a7248",
+  "context_run": 34508950140,
+  "cumulative_microusd": 2279110,
+  "embedding_new_unique_rows": 542,
+  "embedding_rows_reused": 493,
+  "historical_other_task_credit_microusd": 0,
+  "historical_paid_failures_preserved": true,
+  "judge_packet_sha256": "89bebf9ee1007b0759e0390cda211e32474a8cb33f91d80e13976c36c3488990",
+  "later_stage_minimum_preserved_microusd": 4000000,
+  "ledger_sha256": "590e761abeefde54343e83f09341cca931b8149e0ab01d268c7acfd8c109413e",
+  "lifetime_request_cap": 690,
+  "lifetime_requests": 336,
+  "local_mirror_dispatch_authority": false,
+  "new_judgment_unique_items": 29,
+  "new_paid_failures": 0,
+  "new_valid_items": 29,
+  "no_new_spending_requested": true,
+  "no_runtime_dispatch": true,
+  "outstanding_reserved_microusd": 0,
+  "owner_run": 34510982749,
+  "prefix_preserved_rows": 315,
+  "prior_D1_cumulative_microusd": 2138302,
+  "purpose_usage": {
+    "d1-aspect": {
+      "actual_input_tokens": 24917,
+      "actual_output_tokens": 655,
+      "charged_microusd": 56384,
+      "requests": 9,
+      "reserved_input_tokens_consumed": 73537,
+      "reserved_output_tokens_consumed": 4608
+    },
+    "d1-call": {
+      "actual_input_tokens": 258154,
+      "actual_output_tokens": 10091,
+      "charged_microusd": 617218,
+      "requests": 88,
+      "reserved_input_tokens_consumed": 764822,
+      "reserved_output_tokens_consumed": 45056
+    },
+    "d1-comparison": {
+      "actual_input_tokens": 9189,
+      "actual_output_tokens": 144,
+      "charged_microusd": 19818,
+      "requests": 3,
+      "reserved_input_tokens_consumed": 27089,
+      "reserved_output_tokens_consumed": 1536
+    },
+    "d1-control": {
+      "actual_input_tokens": 52229,
+      "actual_output_tokens": 1328,
+      "charged_microusd": 117738,
+      "requests": 26,
+      "reserved_input_tokens_consumed": 162642,
+      "reserved_output_tokens_consumed": 13312
+    },
+    "d1-explanation": {
+      "actual_input_tokens": 14349,
+      "actual_output_tokens": 250,
+      "charged_microusd": 31198,
+      "requests": 5,
+      "reserved_input_tokens_consumed": 43246,
+      "reserved_output_tokens_consumed": 2560
+    },
+    "d1-group": {
+      "actual_input_tokens": 55701,
+      "actual_output_tokens": 1817,
+      "charged_microusd": 129572,
+      "requests": 16,
+      "reserved_input_tokens_consumed": 161687,
+      "reserved_output_tokens_consumed": 8192
+    },
+    "d1-source": {
+      "actual_input_tokens": 28923,
+      "actual_output_tokens": 619,
+      "charged_microusd": 64036,
+      "requests": 12,
+      "reserved_input_tokens_consumed": 87567,
+      "reserved_output_tokens_consumed": 6144
+    },
+    "d1-swap": {
+      "actual_input_tokens": 9189,
+      "actual_output_tokens": 143,
+      "charged_microusd": 19808,
+      "requests": 3,
+      "reserved_input_tokens_consumed": 27089,
+      "reserved_output_tokens_consumed": 1536
+    },
+    "d2-call": {
+      "actual_input_tokens": 2095,
+      "actual_output_tokens": 50,
+      "charged_microusd": 4690,
+      "requests": 1,
+      "reserved_input_tokens_consumed": 6319,
+      "reserved_output_tokens_consumed": 512
+    },
+    "d2-comparison": {
+      "actual_input_tokens": 12145,
+      "actual_output_tokens": 193,
+      "charged_microusd": 26220,
+      "requests": 4,
+      "reserved_input_tokens_consumed": 35653,
+      "reserved_output_tokens_consumed": 2048
+    },
+    "d2-context": {
+      "actual_input_tokens": 15730,
+      "actual_output_tokens": 0,
+      "charged_microusd": 318,
+      "requests": 5,
+      "reserved_input_tokens_consumed": 92538,
+      "reserved_output_tokens_consumed": 0
+    },
+    "d2-explanation": {
+      "actual_input_tokens": 11094,
+      "actual_output_tokens": 202,
+      "charged_microusd": 24208,
+      "requests": 4,
+      "reserved_input_tokens_consumed": 33363,
+      "reserved_output_tokens_consumed": 2048
+    },
+    "d2-group": {
+      "actual_input_tokens": 25991,
+      "actual_output_tokens": 719,
+      "charged_microusd": 59172,
+      "requests": 8,
+      "reserved_input_tokens_consumed": 76385,
+      "reserved_output_tokens_consumed": 4096
+    },
+    "d2-swap": {
+      "actual_input_tokens": 12145,
+      "actual_output_tokens": 191,
+      "charged_microusd": 26200,
+      "requests": 4,
+      "reserved_input_tokens_consumed": 35653,
+      "reserved_output_tokens_consumed": 2048
+    },
+    "embedding": {
+      "actual_input_tokens": 13540,
+      "actual_output_tokens": 0,
+      "charged_microusd": 276,
+      "requests": 12,
+      "reserved_input_tokens_consumed": 94941,
+      "reserved_output_tokens_consumed": 0
+    },
+    "explanation": {
+      "actual_input_tokens": 2683,
+      "actual_output_tokens": 156,
+      "charged_microusd": 6926,
+      "requests": 1,
+      "reserved_input_tokens_consumed": 7983,
+      "reserved_output_tokens_consumed": 512
+    },
+    "group": {
+      "actual_input_tokens": 35897,
+      "actual_output_tokens": 1685,
+      "charged_microusd": 88644,
+      "requests": 9,
+      "reserved_input_tokens_consumed": 96796,
+      "reserved_output_tokens_consumed": 4608
+    },
+    "individual": {
+      "actual_input_tokens": 301434,
+      "actual_output_tokens": 17135,
+      "charged_microusd": 774218,
+      "requests": 87,
+      "reserved_input_tokens_consumed": 853909,
+      "reserved_output_tokens_consumed": 44544
+    },
+    "order-swap": {
+      "actual_input_tokens": 20204,
+      "actual_output_tokens": 752,
+      "charged_microusd": 47928,
+      "requests": 5,
+      "reserved_input_tokens_consumed": 54301,
+      "reserved_output_tokens_consumed": 2560
+    },
+    "source": {
+      "actual_input_tokens": 66674,
+      "actual_output_tokens": 3119,
+      "charged_microusd": 164538,
+      "requests": 34,
+      "reserved_input_tokens_consumed": 213572,
+      "reserved_output_tokens_consumed": 17408
+    }
+  },
+  "raw_provider_caches_public": false,
+  "remaining_stage2_microusd": 3720890,
+  "remaining_total_microusd": 7720890,
+  "reported_unique_items": 321,
+  "reporting_occurrences": 772,
+  "reporting_ungraded_unique_items": 23,
+  "stage2_cumulative_ceiling_microusd": 6000000,
+  "total_ceiling_microusd": 10000000
+}

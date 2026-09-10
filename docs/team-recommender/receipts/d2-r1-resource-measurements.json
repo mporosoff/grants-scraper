@@ -1,0 +1,90 @@
+{
+  "environment": {
+    "node": "v24.19.0",
+    "platform": "win32"
+  },
+  "representation": "R1 diagnostic only; not selected",
+  "files": [
+    {
+      "name": "bundle.json",
+      "sha256": "1a3946f1a7a93c4288ee1a0e7d6c5fced918e59b93aa8a1af58232913ab96707",
+      "raw": 999106,
+      "gzip": 175643,
+      "brotli": 114827
+    },
+    {
+      "name": "vectors.f32",
+      "sha256": "6458d0b49bb4cc98c829ca3663888e34d2e4c988a1bdc7f4ed981ae570cd3b0e",
+      "raw": 4239360,
+      "gzip": 3936467,
+      "brotli": 3887466
+    },
+    {
+      "name": "directory.json",
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+      "raw": 388727,
+      "gzip": 38654,
+      "brotli": 27310
+    },
+    {
+      "name": "context.json",
+      "sha256": "698ecd0e0f1199506beaee88d819a76ddf2fea47f4553f68b67c28b1627dc3a1",
+      "raw": 2035480,
+      "gzip": 311078,
+      "brotli": 105330
+    },
+    {
+      "name": "validations.json",
+      "sha256": "3db12b3b59606691f95dd3a6cf5d8a4c93c25a59d6117c6b682affd27a43403e",
+      "raw": 46009,
+      "gzip": 6366,
+      "brotli": 5255
+    }
+  ],
+  "total": {
+    "raw": 7708682,
+    "gzip": 4468208,
+    "brotli": 4140188
+  },
+  "decode_ms": 122.3914999999979,
+  "full_directory_matrix_ms": {
+    "n": 35,
+    "median": 76.72620000000097,
+    "p95": 96.72230000000127,
+    "max": 116.24820000000182
+  },
+  "group_ms": {
+    "n": 35,
+    "median": 0.7943000000013853,
+    "p95": 49.07179999999789,
+    "max": 147.33170000000246
+  },
+  "memory_before": {
+    "rss": 48861184,
+    "heapTotal": 7856128,
+    "heapUsed": 5736928,
+    "external": 5642011,
+    "arrayBuffers": 3167880
+  },
+  "memory_after_decode": {
+    "rss": 65998848,
+    "heapTotal": 16769024,
+    "heapUsed": 7530672,
+    "external": 11098554,
+    "arrayBuffers": 8624383
+  },
+  "memory_after_calculation": {
+    "rss": 108138496,
+    "heapTotal": 56614912,
+    "heapUsed": 35057168,
+    "external": 11098554,
+    "arrayBuffers": 8624383
+  },
+  "unchanged_isolated_outputs": true,
+  "prepared_scopes": 35,
+  "people": 155,
+  "rows": 1035,
+  "provider_calls": 0,
+  "holdout_scored": false,
+  "limitation": "Node prototype decode/calculation only. Includes input file reads; not adapter hydration, first-click transfer, physical-browser memory or validation of R1 adoption."
+}
