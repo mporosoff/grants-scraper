@@ -1,0 +1,205 @@
+{
+  "authority": {
+    "path": "docs/team-recommender/STAGE_3_VALIDATION_AUTHORITY.md",
+    "sha256": "b80c314578f7e3085961118760750e23a8c9b434cb9023a1e997e6f1d63206d1"
+  },
+  "candidate": {
+    "path": "docs/team-recommender/stage3-validation-candidate.json",
+    "sha256": "1293647acbf073963609557fb300a9322a2d5e92d29844b9e3130fd3314e4159"
+  },
+  "code_and_test_files": [
+    {
+      "path": "tools/team_recommender_stage3_analysis.py",
+      "sha256": "d09ec970224ee4f47bad6a521d36f47cf43b8780737fa2ac16fa24903ad37b99"
+    },
+    {
+      "path": "tools/team_recommender_stage3_assemble.py",
+      "sha256": "86564cddc04625b9cb2896305c3a7188c55c8b21792dcaa2637c24ed3620e8be"
+    },
+    {
+      "path": "tools/team_recommender_stage3_browser_resources.mjs",
+      "sha256": "00d256e3aa5a0f3422f9069a446e5999852410322590d3c038ce92a7febbb3b0"
+    },
+    {
+      "path": "tools/team_recommender_stage3_browser_server.mjs",
+      "sha256": "8f7cafb5b171448690d82fad85d97b3c7374499196715b0037c6a024e19a99cd"
+    },
+    {
+      "path": "tools/team_recommender_stage3_child_projection.mjs",
+      "sha256": "bc9a886a927036705b2b747ecbc44cd5d97ced5bad75f6d4d4f0b75ddf205492"
+    },
+    {
+      "path": "tools/team_recommender_stage3_executor.py",
+      "sha256": "df80e8b192f66c0bcfc96f3ba9b0da2e47155c062fe566c1d1efaed3e3a77ed4"
+    },
+    {
+      "path": "tools/team_recommender_stage3_human.py",
+      "sha256": "e5407bdc3666b30ae12be82983113c959372c7082d172346b40d125a354661b5"
+    },
+    {
+      "path": "tools/team_recommender_stage3_identity.mjs",
+      "sha256": "a2d607106e6196cf2110902bb6f0ed2635a6ccc28ca224326bb1e7ce206559b4"
+    },
+    {
+      "path": "tools/team_recommender_stage3_judge_plan.py",
+      "sha256": "5cf9eb3b3d9a8e5d35c2ffa615e2244e25433dede19bbee0f94dbe191082914c"
+    },
+    {
+      "path": "tools/team_recommender_stage3_lock.py",
+      "sha256": "6af056de943c49b66d15b21d467e7e57ce75db29b9bdf864fd6403518a25d0c8"
+    },
+    {
+      "path": "tools/team_recommender_stage3_prepare.py",
+      "sha256": "3197da124b5d899cb7eac0344f116c9f61321c6c7c18a77e93326444f94a6cc1"
+    },
+    {
+      "path": "tools/team_recommender_stage3_remaining.py",
+      "sha256": "2395eaf1ca6f97a76ff1b78cf2c6a0fb294345bfa71d8a2b4959ac618e36997a"
+    },
+    {
+      "path": "tools/team_recommender_stage3_source_fetch.py",
+      "sha256": "eff12ef9c067ec0c2b847cd592835a04f9abad8b961f530f98f4b53726f75e2b"
+    },
+    {
+      "path": "tools/team_recommender_stage3_sources.py",
+      "sha256": "ddf14ae7ac952330b9f6f2a18d97e6eb02f531c6ac11943133860ab733a1e279"
+    },
+    {
+      "path": "tools/team_recommender_stage3_validate.mjs",
+      "sha256": "56deb8ee6857d422dd7fe9c0d1ec38060ff1e30c063d861823b0ef976393a807"
+    },
+    {
+      "path": "tests/stage3/team-recommender.spec.mjs",
+      "sha256": "1b6ce74f8e1f63f4e359186b992992af6f807e216c299d256c61fff69c3b9478"
+    },
+    {
+      "path": "tests/browser/team-recommender-stage3.test.mjs",
+      "sha256": "40dab680aae590413615face96af57f6e615bbdce95085a4253f24f88b5837bd"
+    },
+    {
+      "path": "playwright.stage3.config.mjs",
+      "sha256": "61a8116aede9aa8fb2c7cdeb0f1a42fd72aad383d0320fafe0fb157d7d473a86"
+    }
+  ],
+  "human_packet": {
+    "path": "docs/team-recommender/human-review/final-audit-stage3.md",
+    "sha256": "46554e7c9be08acf96008cd001204726bc71a94bb1a52703481636b37b13a89a"
+  },
+  "manifests": [
+    {
+      "path": "docs/team-recommender/manifests/stage3-judgment-allocation-v1.json",
+      "sha256": "c8722633176062dcb7d3a1dbc1db782b9587574dca66f9f4de5f0c4d9f808391"
+    },
+    {
+      "path": "docs/team-recommender/manifests/stage3-source-decisions-v1.json",
+      "sha256": "9cccc92bb33ed8b8d662a8cc0238e1070d3070efabc7ff86e7ea038e1826623f"
+    },
+    {
+      "path": "docs/team-recommender/manifests/stage3-validation-lock-v1.json",
+      "sha256": "e196003bcab280db582e8ce72e4c92399d641b73414514460609b7ae559f5b00"
+    },
+    {
+      "path": "docs/team-recommender/manifests/stage3-validation-lock-v2.json",
+      "sha256": "390ad2b018806b684aae5724e8a5dd5a8e4ba328b192c9650748491cda8f783a"
+    }
+  ],
+  "private_results_committed": false,
+  "production_activation": false,
+  "receipts": [
+    {
+      "path": "docs/team-recommender/receipts/stage3-browser-resources-v1.json",
+      "sha256": "07c1bbfd91b2b67c6971e34c24c1f5745cbe56bc02cbba7d3768be6a3f70491b"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-browser-resources-v2.json",
+      "sha256": "e49c8312ecb48b802092b803f9c3fe01c547ddd3ddab041b1ca62331e714b470"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-derived-controls-v1.json",
+      "sha256": "638b0746107bb9d4fd7a01451e80978d59f5b9260866aa8d053230b0e1396fb4"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-E2-identity-check.json",
+      "sha256": "a170457d8e0d620df58333b5654a265128eb5570ffabfd4399506d73f06221d3"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-final-ledger-v1.json",
+      "sha256": "e23a23625727acfb5e66cb700d09181647bee2fa012705e3a8505b5b2aab9e44"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-final-source-inventory-v1.json",
+      "sha256": "e4c029cd1f65fc8c40e48b3138a51eab48939ae7d533bba3ae1d67686bada11f"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-heldout-analysis-v1.json",
+      "sha256": "ac1c869ff5d522c94603858fbe0f2d19d9b8caad20f9790cdf9c60338360196f"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-heldout-analysis-v2.json",
+      "sha256": "3361d60d3986fed9167a3218c66b13fb24753c60d7f653dee1b320a56d844adc"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-human-final-packet-v1.json",
+      "sha256": "e4b45639e9731b21a2a081c20b3c880cee7ced457514faaae2d1eea0499f15be"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-paired-source-supplement-v1.json",
+      "sha256": "b4d2e2767cf8109d5712a523a202529de0ffe783e5a38ff6545b830d4d3eef0d"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-pre-scoring-packages-v1.json",
+      "sha256": "a227d0ff70adbe3563e4420e9fc6e2f8367499586599db1f3468b96582e1e7c0"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-private-artifact-index-v1.json",
+      "sha256": "80b30ebb25e5f66212ec85c718c12d95a647ca8f0fe6d7436866fdcda9c5cc66"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-remaining-after-34554324977.json",
+      "sha256": "4f29c0ea556d31e523baf115a426387d065c1b28e8a87f6c4ee90fdd3e10237a"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-routing-packages-v3.json",
+      "sha256": "c43c3f6c2ef215b9c33f6af6813dcd0f3dc7b9295420d28378de9aaa1a6a6e96"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-scope-outcomes-v1.json",
+      "sha256": "c30b3b71518b9200a0be4ee87fd64a4851899aa9d7233f336bab38841c5621e7"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-serialization-audit-v1.json",
+      "sha256": "e071e5336ff1ef26e107f05fefbbf2900bec83dc0169a951c88965f71bb50156"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-source-preparation-v1.json",
+      "sha256": "c9b7a0b40a486c9a7b26900d43185ca894e7cb409bbb8a8904bd0f985d631c0f"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-starting-ledger.json",
+      "sha256": "3c5daf3b8d4ee2008c59bfee9320e64b92093b5e8361bf748908b471b8ddf02a"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-test-validation-v1.json",
+      "sha256": "51e2585c20ac0fc286c8d32a813fcaa3929ff9963c3b4b479ed30e44f9575f88"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-trusted-prerequisite-v1.json",
+      "sha256": "496d02ff2f045a79fdd876de15780a0b7782d371ab88fb3a45a5731cd5d62ec8"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-unique-input-plan-v1.json",
+      "sha256": "50e973186b8d29860b86a489c46e9835dca509d47565ba9b4075e0650c4e0574"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-unique-input-plan-v2.json",
+      "sha256": "1e73b4260dfd9295c791b26e1c9a53b254101981bfad9a58e143fd0d1045adc5"
+    },
+    {
+      "path": "docs/team-recommender/receipts/stage3-vector-adoption-v1.json",
+      "sha256": "a4585aaaec1d282111174497e69002d93443dd58b75d03addb485dd8d7d0c84f"
+    }
+  ],
+  "tested_artifact_commit": "1068cc04b826fa38ada1c2259b96c88b9fe5d5cb",
+  "tested_artifact_tree": "c2fe1f504ed516b001a4c06e1aa812ef719dc545",
+  "version": "S3-validation-receipt-index-v1"
+}
