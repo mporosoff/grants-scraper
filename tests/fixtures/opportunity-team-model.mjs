@@ -17,6 +17,8 @@ export function opportunityTeamFixture() {
   const directory = { schema_version: 1, registry_generation: digest(researchers), researchers, counts };
   function scope(id, parentId, type) {
     return { id, parent_id: parentId, record_type: type, scope_label: id, gate_state: "pass",
+      objective: "A synthetic research objective for browser contracts.",
+      why_team: "Each fixture researcher contributes a distinct scientific role.", missing_skills: [],
       members: ids.slice(0, 4).map((faculty_id, i) => ({ faculty_id, contribution: `Fixture role ${i + 1}` })),
       roles: ids.slice(0, 4).map((person, i) => ({ id: `role-${i + 1}`, label: `Fixture role ${i + 1}`,
         required: true, coverage: "direct", candidate_ids: [person], alternative_ids: [ids[4]],

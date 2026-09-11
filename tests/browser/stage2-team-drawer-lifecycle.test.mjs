@@ -3,23 +3,28 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 import { shellDom } from "../helpers/shell-dom.mjs";
+import { opportunityTeamFixture } from "../fixtures/opportunity-team-model.mjs";
 
-const paths = ["match_explorer.html", "assets/site-shell.js", "data/opportunity_team_index.js", "assets/search-retrieval.js", "data/opportunity_teams.js", "data/researcher_directory.js", "assets/opportunity-team.js", "assets/opportunity-team-panel.js"];
+const paths = ["match_explorer.html", "assets/site-shell.js", "assets/search-retrieval.js", "assets/opportunity-team.js", "assets/opportunity-team-panel.js"];
 const [page, shell, ...sources] = await Promise.all(paths.map(path => readFile(new URL(`../../${path}`, import.meta.url), "utf8")));
 const tick = () => new Promise(resolve => setTimeout(resolve, 0));
 function fixture({ delayed = false } = {}) {
   const dom = shellDom(page, { deferredClose: true });
   const $ = id => dom.document.getElementById(id);
-  $("results").innerHTML = '<article class="result-card"><button id="first" data-opportunity-team="358021" data-opportunity-team-scope="358021">Build team</button></article><article class="result-card"><button id="second" data-opportunity-team="344592" data-opportunity-team-scope="" data-opportunity-team-broad="true">Build team</button></article>';
-  Object.assign(dom.context, { URL, location: { href: "https://example.org/match_explorer.html" } });
+  const teams = opportunityTeamFixture();
+  dom.document.querySelector('meta[name="opportunity-team-generation"]').setAttribute("content", teams.index.generation_id);
+  $("results").innerHTML = '<article class="result-card"><button id="first" data-opportunity-team="fixture-specific" data-opportunity-team-scope="fixture-specific">Build team</button></article><article class="result-card"><button id="second" data-opportunity-team="fixture-broad" data-opportunity-team-scope="" data-opportunity-team-broad="true">Build team</button></article>';
+  Object.assign(dom.context, { URL, location: { href: "https://example.org/match_explorer.html" },
+    OPPORTUNITY_TEAM_INDEX: teams.index, OPPORTUNITY_TEAM_DATA: teams.data, RESEARCHER_DIRECTORY: teams.directory });
   vm.createContext(dom.context);
   vm.runInContext(shell, dom.context);
   for (const source of sources.slice(0, -1)) vm.runInContext(source, dom.context);
-  // Explicitly published child fixture; the real team engine still applies
-  // its own currentness and publication-eligibility checks after lazy loading.
-  dom.context.FUNDING_SUBTOPICS = { loadSidecar: async () => ({ opportunities: ["344592:ab-0019", "344592:ab-0079"].map(subtopic_id => ({ subtopic_id, parent_id: "344592", publication_state: "publishable" })) }) };
+  // Fixed proposal inputs keep drawer lifecycle coverage independent of grant
+  // expiration and refreshed team decisions. The production engine still owns
+  // proposal selection, currentness, publication eligibility, and link creation.
+  dom.context.FUNDING_SUBTOPICS = { loadSidecar: async () => ({ opportunities: ["fixture-broad:first", "fixture-broad:second"].map(subtopic_id => ({ subtopic_id, parent_id: "fixture-broad", publication_state: "publishable" })) }) };
   dom.context.FUNDING_RETRIEVAL = { ...dom.context.FUNDING_RETRIEVAL, createChildCatalog: value => value };
-  dom.context.GRANT_CATALOG = { opportunities: ["358021", "344592"].map(opportunity_id => ({ opportunity_id, status: "posted", title: "Public fixture", posted_date: "2026-08-01", close_date: "2030-12-31" })) };
+  dom.context.GRANT_CATALOG = { opportunities: ["fixture-specific", "fixture-broad"].map(opportunity_id => ({ opportunity_id, status: "posted", title: "Public fixture", posted_date: "2026-08-01", close_date: "2030-12-31" })) };
   let resolve;
   if (delayed) {
     const api = dom.context.OpportunityTeam;
@@ -39,9 +44,10 @@ test("Team Builder consumes the existing proposal/removal/replacement API and re
   assert.equal(dom.$("results").querySelectorAll(".opportunity-team-panel").length, 0);
   assert.equal(drawer.querySelectorAll(".opportunity-team-panel").length, 1);
   const link = () => drawer.querySelector('.opportunity-team-next a');
+  assert.ok(link(), drawer.textContent);
   const original = new URL(link().getAttribute("href"), "https://example.org");
   assert.equal(original.pathname, "/team_match.html");
-  assert.equal(original.searchParams.get("opportunity"), "358021");
+  assert.equal(original.searchParams.get("opportunity"), "fixture-specific");
   const remove = drawer.querySelector("[data-opportunity-team-remove]");
   const removedId = remove.getAttribute("data-opportunity-team-remove");
   dom.dispatch("click", remove);
