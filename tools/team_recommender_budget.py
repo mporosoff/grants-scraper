@@ -117,6 +117,7 @@ class ExperimentLedger(Ledger):
                 minimum=(input_tokens*3+24)//25 if d3_embedding or s3_embedding else (input_tokens+49)//50
                 if amount < minimum:raise ValueError('underreserved_embedding_request')
             if provider=='anthropic':
+                post = metadata.get('purpose') == 'post-audit'
                 d1 = metadata.get('purpose', '').startswith('d1-')
                 d2 = metadata.get('purpose', '').startswith('d2-')
                 d3 = metadata.get('purpose', '').startswith('d3-')
@@ -125,15 +126,15 @@ class ExperimentLedger(Ledger):
                 # A finite amended question inventory, never a fresh dollar
                 # allowance. Historical charges/uncertainty remain in spent.
                 # Preserve the original B1 inventory and its consumed bounds.
-                family = 'd3-' if d3 else 'd2-' if d2 else 'd1-' if d1 else None
-                judge = [r for r in judge if (r.get('purpose','').startswith(family) if family else not r.get('purpose','').startswith(('d1-','d2-','d3-')))]
-                count_cap, input_cap, output_cap = ((120, 1_100_000, 61_440) if d2 or d3 else (200, 1_360_000, 102_400) if d1 else
+                family = 'post-audit' if post else 'd3-' if d3 else 'd2-' if d2 else 'd1-' if d1 else None
+                judge = [r for r in judge if (r.get('purpose','').startswith(family) if family else not r.get('purpose','').startswith(('d1-','d2-','d3-','post-audit')))]
+                count_cap, input_cap, output_cap = ((60, 1_440_000, 30_720) if post else (120, 1_100_000, 61_440) if d2 or d3 else (200, 1_360_000, 102_400) if d1 else
                     ((350, 1_433_600, 179_200) if stage==2 else (164, 1_064_960, 83_968)))
-                if input_tokens > 12_000 or output_tokens > 512 or len(judge)>=count_cap or sum(r.get('reserved_input_tokens',0) for r in judge)+input_tokens>input_cap or sum(r.get('reserved_output_tokens',0) for r in judge)+output_tokens>output_cap:
+                if input_tokens > (24_000 if post else 12_000) or output_tokens > 512 or len(judge)>=count_cap or sum(r.get('reserved_input_tokens',0) for r in judge)+input_tokens>input_cap or sum(r.get('reserved_output_tokens',0) for r in judge)+output_tokens>output_cap:
                     raise Deferred('finite_judge_phase_envelope_exhausted')
                 if amount < (input_tokens*5+1)//2 + output_tokens*10:
                     raise ValueError('underreserved_judge_request')
-                dollar_cap = 3_364_400 if d2 or d3 else 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
+                dollar_cap = 2_000_000 if post else 3_364_400 if d2 or d3 else 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
                 if sum(r['reserved_microusd'] for r in judge)+amount>dollar_cap:
                     raise Deferred('finite_judge_dollar_envelope_exhausted')
             if spent + amount > min(self.limit, STAGE_CEILINGS[stage]) or len(state["requests"]) >= self.max_requests:
