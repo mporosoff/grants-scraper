@@ -28,9 +28,32 @@
     "trusted_main_prerequisite": true
   },
   "authority": {
-    "work_order": "Team recommender: shared matching and full researcher-profile repair",
-    "record": "docs/team-recommender/profile-repair/SOURCE_POLICY.md",
-    "scope": "Corrective implementation and all-record public-source audit; no deployment or extra paid work"
+    "D3_closeout_report": {
+      "path": "docs/team-recommender/reports/stage-2-embedding-revision-d3-report.md",
+      "sha256": "0987ab7ac57cd171c6ccdde6b23c66f65f648fed42df100806f9bb91df28c00a"
+    },
+    "amendment_path": "docs/team-recommender/EVALUATION_AMENDMENT.md",
+    "budget_amendment_path": "docs/team-recommender/BUDGET_AMENDMENT_B1.md",
+    "budget_amendment_sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27",
+    "continuation_path": "docs/team-recommender/CONTINUATION_C2.md",
+    "current_amendment": "Stage 3 finite frozen E2 validation completed; owner tradeoff required, no Stage 4",
+    "current_handoff_sha256": "5a8c4e4525789a6fbeb924fcec15b4aa854022899c27e3fc2e50e1cc2409cb1c",
+    "current_plan_sha256": "7e1c36ed7444b647515b24b9950c9aea0ffc899e8d3a62f8b91700f31e413f44",
+    "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
+    "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
+    "evaluation_amendment_sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0",
+    "handoff_sha256": "b5fa4683fe787a0dd092954bb3d149d091c0887976d379da5e1aab8ac6cd25d8",
+    "plan_sha256": "9a5ec880149c583f583e71d08c75b25cf8253859b5efd13b6ac846202f636b32",
+    "plan_version": "2.0 + E1/B1/C1/C2/D1/D2",
+    "ranking_revision_D2": {
+      "path": "docs/team-recommender/RANKING_REVISION_D2.md",
+      "sha256": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc"
+    },
+    "stage2_closing_instruction": {
+      "path": "docs/team-recommender/STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md",
+      "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
+    },
+    "stage3_path": "docs/team-recommender/STAGE_3_VALIDATION_AUTHORITY.md"
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -78,41 +101,54 @@
     "stage3_new_usd": 0.817654,
     "stage3_recorded_ceiling_new_requests": 184,
     "stage4_minimum_preserved_requests": 25,
-    "stage4_minimum_preserved_usd": 2.864667,
-    "profile_repair_new_usd": 0,
-    "profile_repair_new_requests": 0
+    "stage4_minimum_preserved_usd": 2.864667
   },
   "candidate": {
-    "path": "docs/team-recommender/profile-repair/candidate.json",
-    "sha256": "ad0e8a5dac83cde1a37c179cb283172ed6e6e76437a9f427c0e969d684d38891",
-    "primary": "shared-team-v1-profile-repair",
-    "code_commit": "5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
+    "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
+    "comparator": "A-E2",
+    "fallback": null,
+    "path": "docs/team-recommender/stage2-validation-candidate.json",
+    "primary": "E2-D3-combined-v1-frozen",
     "quality_qualified": false,
-    "status": "Corrective implementation; not scientifically accepted or deployed",
-    "fallback": null
-  },
-  "checks": {
-    "required_python_passed": 1372,
-    "required_Node_browser_passed": 853,
-    "final_affected_cache_passed": 14,
-    "final_release_dependency_passed": 6,
-    "fit_identity_comparisons": 15965,
-    "fit_disagreements": 0,
-    "query_baseline_cases": 37,
-    "scoring_probe_cases": 50,
-    "hermetic_no_drift": true,
-    "zero_paid_prepared_interactions": true,
-    "full_E2E": "NOT RUN for corrected candidate",
-    "Playwright": "NOT RUN for corrected candidate",
-    "accessibility_suite": "NOT RUN for corrected candidate",
-    "physical_browser": "NOT RUN for corrected candidate",
-    "new_semantic_validation": "NOT RUN",
-    "receipt": {
-      "path": "docs/team-recommender/profile-repair/validation-receipt.json",
-      "sha256": "d0bb7e262a8ea37fd54c49dce22f02623286d463bd12498405843e1cdf96befc"
+    "sha256": "9078885a374b8df21bff92cb86cb5089e0df319f026ea917ab706272e71622c1",
+    "status": "Validation completed; required quality criteria not met",
+    "validation": {
+      "path": "docs/team-recommender/stage3-validation-candidate.json",
+      "sha256": "1293647acbf073963609557fb300a9322a2d5e92d29844b9e3130fd3314e4159"
     }
   },
-  "containing_commit": "Documentation commit containing this state; implementation and tested artifacts at 5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
+  "checks": {
+    "Playwright": true,
+    "accessibility_suite": true,
+    "affected_E2E_recheck_passed": 1,
+    "cold_p95": "UNMEASURED; one cold sample per package",
+    "configured_E2E_first": {
+      "failed": 1,
+      "passed": 116,
+      "tests": 117
+    },
+    "focused_Python_passed": 67,
+    "full_E2E": true,
+    "full_Node_first": {
+      "failed": 4,
+      "passed": 840,
+      "tests": 844
+    },
+    "holdout_scored": true,
+    "one_full_845_run_claimed": false,
+    "original_Node_failures_closed": 4,
+    "peak_heap": "NOT MEASURED",
+    "physical_browser": true,
+    "physical_mobile_device": "NOT RUN",
+    "real_browser_current_cases_passed": 7,
+    "receipt": {
+      "path": "docs/team-recommender/receipts/stage3-test-validation-v1.json",
+      "sha256": "51e2585c20ac0fc286c8d32a813fcaa3929ff9963c3b4b479ed30e44f9575f88"
+    },
+    "unique_Node_with_passing_applicable_evidence": 845,
+    "zero_paid_prepared_interactions": true
+  },
+  "containing_commit": "Resolve git log -1 --format=%H -- docs/team-recommender/reports/stage-3-validation-report.md; report/state-only closeout follows tested artifact commit",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -6712,16 +6748,47 @@
     "source_changed_item_numbers": [
       1,
       5
-    ],
-    "profile_repair_new_requests": 0
+    ]
   },
-  "model": "Existing shared Team Match numerical fit; no model used by corrected runtime",
+  "model": {
+    "D3_valid_unique_judgments": 259,
+    "dimension": 1024,
+    "embedding_models": [
+      "voyage-4-lite",
+      "voyage-4-large",
+      "voyage-context-4"
+    ],
+    "fitted_recommender": null,
+    "historical_unqualified_fallback": "B-D2-R0-fixed-call-person-weighted-coverage",
+    "judge": "claude-sonnet-5",
+    "judge_protocol": "D1F",
+    "nomination_is_not_a_D3_win": true,
+    "optional_components": {
+      "Bayesian": "not elected in frozen D3 protocol; not evaluated or rejected on D3 labels",
+      "MMR": "off throughout D3; no new semantic MMR comparison",
+      "global_context_blend": "not elected",
+      "query_format": "not elected; all original D2 scientific strings retained",
+      "regularized": "not elected in D3; earlier D2 analysis preserved separately"
+    },
+    "primary_numerical_candidate": "E2-D3-combined-v1-frozen"
+  },
   "next_allowed_stage": null,
-  "next_stage_requires": "Owner review of this corrective implementation and remaining source/performance/acceptance limitations. Explicit appropriate release authorization is still required; failed E2 must not be deployed.",
+  "next_stage_requires": "Explicit owner decision on failed/inconclusive quality and coverage/audit evidence, then separate Stage 4 authority if release is chosen. Existing sources must still be current; no claim that deployment itself resolves limitations.",
   "pinned_data": {
-    "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
-    "shared_package": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab",
-    "candidate": "docs/team-recommender/profile-repair/candidate.json"
+    "current_stage3_candidate": {
+      "path": "docs/team-recommender/stage3-validation-candidate.json",
+      "sha256": "1293647acbf073963609557fb300a9322a2d5e92d29844b9e3130fd3314e4159"
+    },
+    "historical_values": "Preserved in historical_stage2_nomination_index.pinned_data",
+    "original_group_overlay_sha256": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359",
+    "packages": {
+      "path": "docs/team-recommender/receipts/stage3-routing-packages-v3.json",
+      "sha256": "c43c3f6c2ef215b9c33f6af6813dcd0f3dc7b9295420d28378de9aaa1a6a6e96"
+    },
+    "source_inventory": {
+      "path": "docs/team-recommender/receipts/stage3-final-source-inventory-v1.json",
+      "sha256": "e4c029cd1f65fc8c40e48b3138a51eab48939ae7d533bba3ae1d67686bada11f"
+    }
   },
   "production": {
     "D1_helper_prs": [
@@ -6855,16 +6922,7 @@
     "protected_main_at_D3_execution": "2071a0b850e79af037490dc0a34483c6e4844fde",
     "push_performed": true,
     "recommender_merged": false,
-    "review_requested": true,
-    "profile_repair": {
-      "pushes": 0,
-      "review_requests": 0,
-      "merges": 0,
-      "deployments": 0,
-      "activation": false,
-      "permissions_changed": false,
-      "services_changed": false
-    }
+    "review_requested": true
   },
   "proposed_next_stage": "No automatic execution. Only an owner-approved release decision can authorize Stage 4; no candidate retuning or new scientific campaign.",
   "ranking_revision_D2": {
@@ -6952,88 +7010,51 @@
     "path": "docs/team-recommender/stage3-receipt-index.json",
     "sha256": "80132ec2291e55a8ff2e7c2c605e770add2b790267b89442a12b3eec3a1348cf"
   },
-  "recommendation": "CORRECTIVE IMPLEMENTATION COMPLETE; SOURCE AND RELEASE LIMITATIONS REMAIN",
+  "recommendation": "B. ENGINEERING VALIDATED; OWNER TRADEOFF REQUIRED",
   "recommended_next_stage": "Owner decision: explicitly accept the documented exploratory-release quality/coverage/audit limitations in separate Stage 4 authority, or do not release.",
   "report": {
-    "path": "docs/team-recommender/reports/shared-matching-profile-repair-report.md",
-    "sha256": "3905fe7a463def623956688c3ae1b664ee6939ecc8912df78552d68aa0a899fb"
+    "path": "docs/team-recommender/reports/stage-3-validation-report.md",
+    "sha256": "d4ac45773ebedb8cb34cabfb0d12f0b7078ab9f7b67fffe2bdb0cbd2a4c154d1"
   },
   "repository": "mporosoff/grants-scraper",
   "results": {
-    "profile_audit": {
-      "after_counts": {
-        "auto_proposable": 155,
-        "pool_counts": {
-          "main": 120,
-          "standby": 35,
-          "unadmitted": 3
-        },
-        "rankable": 158,
-        "relationship_counts": {
-          "hajim_core_faculty": 117,
-          "internal_affiliated_researcher": 41
-        },
-        "status_counts": {
-          "active": 158
-        },
-        "total": 158,
-        "unrankable": 0,
-        "visibility_counts": {
-          "department": 14,
-          "institution": 141,
-          "reference_only": 3
-        }
-      },
-      "after_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
-      "before_counts": {
-        "auto_proposable": 155,
-        "pool_counts": {
-          "main": 120,
-          "standby": 35,
-          "unadmitted": 3
-        },
-        "rankable": 155,
-        "relationship_counts": {
-          "hajim_core_faculty": 117,
-          "internal_affiliated_researcher": 41
-        },
-        "status_counts": {
-          "active": 158
-        },
-        "total": 158,
-        "unrankable": 3,
-        "visibility_counts": {
-          "department": 14,
-          "institution": 141,
-          "reference_only": 3
-        }
-      },
-      "claim_actions": {
-        "added": 126,
-        "reactivated": 2,
-        "retired": 68,
-        "revised": 359
-      },
-      "cost_usd": 0,
-      "dispositions": {
-        "corrected": 154,
-        "unresolved": 4
-      },
-      "paid_calls": 0,
-      "population": 158,
-      "read_source_urls": 230,
-      "successful_retrievals": 344,
-      "unique_cached_source_attempts": 359
+    "action_eligible_groups": 14,
+    "action_eligible_prepared": 35,
+    "analysis": {
+      "path": "docs/team-recommender/receipts/stage3-heldout-analysis-v2.json",
+      "sha256": "3361d60d3986fed9167a3218c66b13fb24753c60d7f653dee1b320a56d844adc"
     },
-    "shared_fit_comparisons": 15965,
-    "disagreements": 0,
-    "new_semantic_validation": false,
-    "source": "docs/team-recommender/profile-repair/real-input-check.json"
+    "groups": 15,
+    "human_returned": 0,
+    "independent_feasibility": "UNMEASURED",
+    "model_unique_actual": 214,
+    "model_unique_allocated": 217,
+    "model_unique_planned": 229,
+    "outcomes": {
+      "path": "docs/team-recommender/receipts/stage3-scope-outcomes-v1.json",
+      "sha256": "c30b3b71518b9200a0be4ee87fd64a4851899aa9d7233f336bab38841c5621e7"
+    },
+    "paired": {
+      "path": "docs/team-recommender/receipts/stage3-paired-source-supplement-v1.json",
+      "sha256": "b4d2e2767cf8109d5712a523a202529de0ffe783e5a38ff6545b830d4d3eef0d"
+    },
+    "prepared": 39,
+    "prepared_no_group": 24,
+    "primary_member_occurrences": 30,
+    "rollout150_action_eligible": 68,
+    "rollout150_prepared": 81,
+    "rollout50_action_eligible": 25,
+    "rollout50_prepared": 30,
+    "scientific_reservations": 90,
+    "top5_reasonable_source_mean": 0.4578947368421053,
+    "unprepared": 51,
+    "unrelated_primary_member_occurrences": 7,
+    "useful_primary_groups": 9
   },
   "schema_version": 1,
   "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
-  "source_head_at_evidence_capture": "5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
-  "source_tree_at_evidence_capture": "91d20fce5823e88333efa23e5067dabb29159d01",
+  "source_head_at_evidence_capture": "1068cc04b826fa38ada1c2259b96c88b9fe5d5cb",
+  "source_tree_at_evidence_capture": "c2fe1f504ed516b001a4c06e1aa812ef719dc545",
   "stage1_receipt_index": {
     "path": "docs/team-recommender/receipt-index.json",
     "sha256": "d32ae60b40120a437b9d42c61759711a0d263a9b13f7662759ae46b1f104f0d8"
@@ -7282,66 +7303,9 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "post-stage3-corrective-work-order-complete-with-explicit-source-gaps",
-  "stop": "STOP FOR USER REVIEW. No deployment, Stage 4, new provider allowance, human-review request or automatic model/tuning campaign.",
+  "stage_status": "stage3-finite-validation-complete-owner-tradeoff-required",
+  "stop": "STOP FOR USER REVIEW. No Stage 4, deployment, enrichment, new allowance or automatic model/tuning campaign.",
   "unresolved": [
-    "Four source gaps: Lawton, Lomakina, Rygg, Slane",
-    "Warm snapshot-validation latency and physical-browser measurements",
-    "Scientific acceptance of the changed shared composition has not been established",
-    "105 canonical availability identities; no claim of full 150-scope rollout readiness"
-  ],
-  "updated_at": "2026-09-11T11:57:15.801263+00:00",
-  "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
-  "historical_stage3_pre_repair_state": {
-    "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
-    "sha256": "43db92ed96573ae094a1d80c06fe870d21bbb2c53780ed4d6cc1c90e6b0fbe70"
-  },
-  "historical_stage3_candidate": {
-    "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
-    "comparator": "A-E2",
-    "fallback": null,
-    "path": "docs/team-recommender/stage2-validation-candidate.json",
-    "primary": "E2-D3-combined-v1-frozen",
-    "quality_qualified": false,
-    "sha256": "9078885a374b8df21bff92cb86cb5089e0df319f026ea917ab706272e71622c1",
-    "status": "Validation completed; required quality criteria not met",
-    "validation": {
-      "path": "docs/team-recommender/stage3-validation-candidate.json",
-      "sha256": "1293647acbf073963609557fb300a9322a2d5e92d29844b9e3130fd3314e4159"
-    }
-  },
-  "historical_stage3_checks": {
-    "Playwright": true,
-    "accessibility_suite": true,
-    "affected_E2E_recheck_passed": 1,
-    "cold_p95": "UNMEASURED; one cold sample per package",
-    "configured_E2E_first": {
-      "failed": 1,
-      "passed": 116,
-      "tests": 117
-    },
-    "focused_Python_passed": 67,
-    "full_E2E": true,
-    "full_Node_first": {
-      "failed": 4,
-      "passed": 840,
-      "tests": 844
-    },
-    "holdout_scored": true,
-    "one_full_845_run_claimed": false,
-    "original_Node_failures_closed": 4,
-    "peak_heap": "NOT MEASURED",
-    "physical_browser": true,
-    "physical_mobile_device": "NOT RUN",
-    "real_browser_current_cases_passed": 7,
-    "receipt": {
-      "path": "docs/team-recommender/receipts/stage3-test-validation-v1.json",
-      "sha256": "51e2585c20ac0fc286c8d32a813fcaa3929ff9963c3b4b479ed30e44f9575f88"
-    },
-    "unique_Node_with_passing_applicable_evidence": 845,
-    "zero_paid_prepared_interactions": true
-  },
-  "historical_stage3_unresolved": [
     "Top-five reasonable source mean 45.79% misses 80%; seven unrelated primary members of 30 misses 5%.",
     "Independent feasible-scope useful-group/yield targets UNMEASURED; produced-group useful diagnostic 9/15 with optimistic bound 11/15.",
     "Paired complementarity superiority inconclusive; eight of eleven matched group memberships identical. No fallback selection.",
@@ -7351,199 +7315,6 @@
     "Rollout50 has 30 prepared/25 action-eligible; rollout150 81 prepared/68 action-eligible. No substitutions. Source receipt expiry 2026-09-17T00:00:00Z.",
     "Physical mobile hardware and peak memory not measured; cold network timings are one observation per package, not p95."
   ],
-  "historical_stage3_report": {
-    "path": "docs/team-recommender/reports/stage-3-validation-report.md",
-    "sha256": "d4ac45773ebedb8cb34cabfb0d12f0b7078ab9f7b67fffe2bdb0cbd2a4c154d1"
-  },
-  "historical_stage3_recommendation": "B. ENGINEERING VALIDATED; OWNER TRADEOFF REQUIRED",
-  "corrective_profile_repair": {
-    "authority": "User work order: Team recommender: shared matching and full researcher-profile repair",
-    "started_from": "16ed8ff1ca6e7e57199d3d4fafabeebb07f7cdb2",
-    "code_commit": "5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
-    "status": "Implementation and complete roster audit finished; four explicit unresolved source gaps",
-    "audit_summary": {
-      "after_counts": {
-        "auto_proposable": 155,
-        "pool_counts": {
-          "main": 120,
-          "standby": 35,
-          "unadmitted": 3
-        },
-        "rankable": 158,
-        "relationship_counts": {
-          "hajim_core_faculty": 117,
-          "internal_affiliated_researcher": 41
-        },
-        "status_counts": {
-          "active": 158
-        },
-        "total": 158,
-        "unrankable": 0,
-        "visibility_counts": {
-          "department": 14,
-          "institution": 141,
-          "reference_only": 3
-        }
-      },
-      "after_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
-      "before_counts": {
-        "auto_proposable": 155,
-        "pool_counts": {
-          "main": 120,
-          "standby": 35,
-          "unadmitted": 3
-        },
-        "rankable": 155,
-        "relationship_counts": {
-          "hajim_core_faculty": 117,
-          "internal_affiliated_researcher": 41
-        },
-        "status_counts": {
-          "active": 158
-        },
-        "total": 158,
-        "unrankable": 3,
-        "visibility_counts": {
-          "department": 14,
-          "institution": 141,
-          "reference_only": 3
-        }
-      },
-      "claim_actions": {
-        "added": 126,
-        "reactivated": 2,
-        "retired": 68,
-        "revised": 359
-      },
-      "cost_usd": 0,
-      "dispositions": {
-        "corrected": 154,
-        "unresolved": 4
-      },
-      "paid_calls": 0,
-      "population": 158,
-      "read_source_urls": 230,
-      "successful_retrievals": 344,
-      "unique_cached_source_attempts": 359
-    },
-    "report": {
-      "path": "docs/team-recommender/reports/shared-matching-profile-repair-report.md",
-      "sha256": "3905fe7a463def623956688c3ae1b664ee6939ecc8912df78552d68aa0a899fb"
-    },
-    "candidate": {
-      "path": "docs/team-recommender/profile-repair/candidate.json",
-      "sha256": "ad0e8a5dac83cde1a37c179cb283172ed6e6e76437a9f427c0e969d684d38891"
-    },
-    "paid_calls": 0,
-    "cost_usd": 0,
-    "new_human_items": 0,
-    "new_stage": false,
-    "old_validation_status": "Failed results preserved; exposed outputs are diagnostic, not untouched confirmation",
-    "remaining": [
-      "Four source gaps: Lawton, Lomakina, Rygg, Slane",
-      "Warm snapshot-validation latency and physical-browser measurements",
-      "Scientific acceptance of the changed shared composition has not been established",
-      "105 canonical availability identities; no claim of full 150-scope rollout readiness"
-    ]
-  },
-  "historical_stage3_results": {
-    "action_eligible_groups": 14,
-    "action_eligible_prepared": 35,
-    "analysis": {
-      "path": "docs/team-recommender/receipts/stage3-heldout-analysis-v2.json",
-      "sha256": "3361d60d3986fed9167a3218c66b13fb24753c60d7f653dee1b320a56d844adc"
-    },
-    "groups": 15,
-    "human_returned": 0,
-    "independent_feasibility": "UNMEASURED",
-    "model_unique_actual": 214,
-    "model_unique_allocated": 217,
-    "model_unique_planned": 229,
-    "outcomes": {
-      "path": "docs/team-recommender/receipts/stage3-scope-outcomes-v1.json",
-      "sha256": "c30b3b71518b9200a0be4ee87fd64a4851899aa9d7233f336bab38841c5621e7"
-    },
-    "paired": {
-      "path": "docs/team-recommender/receipts/stage3-paired-source-supplement-v1.json",
-      "sha256": "b4d2e2767cf8109d5712a523a202529de0ffe783e5a38ff6545b830d4d3eef0d"
-    },
-    "prepared": 39,
-    "prepared_no_group": 24,
-    "primary_member_occurrences": 30,
-    "rollout150_action_eligible": 68,
-    "rollout150_prepared": 81,
-    "rollout50_action_eligible": 25,
-    "rollout50_prepared": 30,
-    "scientific_reservations": 90,
-    "top5_reasonable_source_mean": 0.4578947368421053,
-    "unprepared": 51,
-    "unrelated_primary_member_occurrences": 7,
-    "useful_primary_groups": 9
-  },
-  "historical_stage3_model": {
-    "D3_valid_unique_judgments": 259,
-    "dimension": 1024,
-    "embedding_models": [
-      "voyage-4-lite",
-      "voyage-4-large",
-      "voyage-context-4"
-    ],
-    "fitted_recommender": null,
-    "historical_unqualified_fallback": "B-D2-R0-fixed-call-person-weighted-coverage",
-    "judge": "claude-sonnet-5",
-    "judge_protocol": "D1F",
-    "nomination_is_not_a_D3_win": true,
-    "optional_components": {
-      "Bayesian": "not elected in frozen D3 protocol; not evaluated or rejected on D3 labels",
-      "MMR": "off throughout D3; no new semantic MMR comparison",
-      "global_context_blend": "not elected",
-      "query_format": "not elected; all original D2 scientific strings retained",
-      "regularized": "not elected in D3; earlier D2 analysis preserved separately"
-    },
-    "primary_numerical_candidate": "E2-D3-combined-v1-frozen"
-  },
-  "historical_stage3_pinned_data": {
-    "current_stage3_candidate": {
-      "path": "docs/team-recommender/stage3-validation-candidate.json",
-      "sha256": "1293647acbf073963609557fb300a9322a2d5e92d29844b9e3130fd3314e4159"
-    },
-    "historical_values": "Preserved in historical_stage2_nomination_index.pinned_data",
-    "original_group_overlay_sha256": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359",
-    "packages": {
-      "path": "docs/team-recommender/receipts/stage3-routing-packages-v3.json",
-      "sha256": "c43c3f6c2ef215b9c33f6af6813dcd0f3dc7b9295420d28378de9aaa1a6a6e96"
-    },
-    "source_inventory": {
-      "path": "docs/team-recommender/receipts/stage3-final-source-inventory-v1.json",
-      "sha256": "e4c029cd1f65fc8c40e48b3138a51eab48939ae7d533bba3ae1d67686bada11f"
-    }
-  },
-  "historical_stage3_authority": {
-    "D3_closeout_report": {
-      "path": "docs/team-recommender/reports/stage-2-embedding-revision-d3-report.md",
-      "sha256": "0987ab7ac57cd171c6ccdde6b23c66f65f648fed42df100806f9bb91df28c00a"
-    },
-    "amendment_path": "docs/team-recommender/EVALUATION_AMENDMENT.md",
-    "budget_amendment_path": "docs/team-recommender/BUDGET_AMENDMENT_B1.md",
-    "budget_amendment_sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27",
-    "continuation_path": "docs/team-recommender/CONTINUATION_C2.md",
-    "current_amendment": "Stage 3 finite frozen E2 validation completed; owner tradeoff required, no Stage 4",
-    "current_handoff_sha256": "5a8c4e4525789a6fbeb924fcec15b4aa854022899c27e3fc2e50e1cc2409cb1c",
-    "current_plan_sha256": "7e1c36ed7444b647515b24b9950c9aea0ffc899e8d3a62f8b91700f31e413f44",
-    "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
-    "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
-    "evaluation_amendment_sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0",
-    "handoff_sha256": "b5fa4683fe787a0dd092954bb3d149d091c0887976d379da5e1aab8ac6cd25d8",
-    "plan_sha256": "9a5ec880149c583f583e71d08c75b25cf8253859b5efd13b6ac846202f636b32",
-    "plan_version": "2.0 + E1/B1/C1/C2/D1/D2",
-    "ranking_revision_D2": {
-      "path": "docs/team-recommender/RANKING_REVISION_D2.md",
-      "sha256": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc"
-    },
-    "stage2_closing_instruction": {
-      "path": "docs/team-recommender/STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md",
-      "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
-    },
-    "stage3_path": "docs/team-recommender/STAGE_3_VALIDATION_AUTHORITY.md"
-  }
+  "updated_at": "2026-09-11T03:30:55.431930+00:00",
+  "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender"
 }

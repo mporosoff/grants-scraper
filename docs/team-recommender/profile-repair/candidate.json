@@ -1,0 +1,149 @@
+{
+  "version": 1,
+  "id": "shared-team-v1-profile-repair",
+  "code_commit": "5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
+  "status": "Corrective implementation; not scientifically accepted or deployed",
+  "quality_qualified": false,
+  "activation": false,
+  "model": null,
+  "paid_interactions": 0,
+  "fit_authority": "FUNDING_TEAM_MATCHER.create(...).scoreProfile, unchanged admission formula/settings; same canonical full catalog or selected child catalog and normalized profile",
+  "composition": {
+    "objective": "Weighted maximum of scientific token evidence returned by the shared matcher",
+    "size": [
+      2,
+      4
+    ],
+    "anchor": "Existing shared fit.strong",
+    "final_member_marginal": "Strictly positive, numerical epsilon 1e-9",
+    "alternatives": 8,
+    "mmr": false,
+    "bayesian": false,
+    "regularized": false,
+    "tie_breaking": "Coverage, smaller membership, shared scientific score, stable canonical IDs; no recency boost",
+    "cached_scopes": 8,
+    "cached_exclusion_options_per_scope": 32
+  },
+  "evidence_state": "All contributions unconfirmed; shared lead is never a certified role",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "population": {
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 120,
+      "standby": 35,
+      "unadmitted": 3
+    },
+    "rankable": 158,
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "status_counts": {
+      "active": 158
+    },
+    "total": 158,
+    "unrankable": 0,
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    }
+  },
+  "package": {
+    "path": "docs/team-recommender/profile-repair/shared-package-receipt.json",
+    "sha256": "fc9083449265cd1dd7d4edd08cde06f32abb3ed1d488c8dfabd2bb0e8a40141a"
+  },
+  "index": {
+    "path": "docs/team-recommender/profile-repair/shared-candidate-index.json",
+    "sha256": "fb3d3f5916bc31518ea6807c978b12bc3571f16382c4d5ddae2e43c08b10c9a0"
+  },
+  "audit": {
+    "path": "docs/team-recommender/profile-repair/person-audit.json",
+    "sha256": "4baa5728c88fbeb92637c36503479e69dcd15066f1d78abe407daefaf4476766"
+  },
+  "validation": {
+    "path": "docs/team-recommender/profile-repair/validation-receipt.json",
+    "sha256": "d0bb7e262a8ea37fd54c49dce22f02623286d463bd12498405843e1cdf96befc"
+  },
+  "real_input_observations": {
+    "path": "docs/team-recommender/profile-repair/real-input-check.json",
+    "sha256": "9eaf9eabe24ae710bc93ae7ed3a5b5fa7be58faeccee02633ec251727ea775c0"
+  },
+  "dependencies": [
+    {
+      "path": "assets/team-matcher.js",
+      "sha256": "8f88a47a2d49d3e799b3af5678f346be2097d27a06b7641e3532de4fda452baf",
+      "bytes": 27356
+    },
+    {
+      "path": "assets/shared-team-engine.js",
+      "sha256": "b38400527fabea5f7ad6d89abcdc364c26a9053d9d128d2bc4df2a688034a4cd",
+      "bytes": 17135
+    },
+    {
+      "path": "assets/opportunity-team.js",
+      "sha256": "0125e46a8f827abb17f819d80ada4bf46b7bbdcbd8a69995ff983dc1cfb4f84f",
+      "bytes": 32510
+    },
+    {
+      "path": "scripts/researcher_registry.py",
+      "sha256": "0ad18a7106c7b1d9c5b46f013f0c08fb1f415edd6a06a96340b702ca30e911a1",
+      "bytes": 54285
+    },
+    {
+      "path": "scripts/faculty_match.py",
+      "sha256": "e0c77a7dd4e1913b990589291eedd2aec6c54987de55363c8cc126896f867d2a",
+      "bytes": 25725
+    },
+    {
+      "path": "tools/team_maintenance.py",
+      "sha256": "9208bcbfb90da2b94ac44d21412ade1e06b7c56cc61373bf2ea2f6cc7d4ba69f",
+      "bytes": 23746
+    },
+    {
+      "path": "team_match.html",
+      "sha256": "ca35823029b54da372f453551f9d3cc9cec6dd9c8a0c56c5ca397dc6159db275",
+      "bytes": 78091
+    },
+    {
+      "path": "config/researcher_registry.json",
+      "sha256": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+      "bytes": 1739867
+    },
+    {
+      "path": "data/researcher_directory.js",
+      "sha256": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+      "bytes": 818871
+    },
+    {
+      "path": "data/faculty_matches.js",
+      "sha256": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+      "bytes": 114209
+    },
+    {
+      "path": "data/search-v2-release.json",
+      "sha256": "992319b55a685e69242f97cf8fa538009bc916a643b07b34facb05696b1f7686",
+      "bytes": 4886
+    },
+    {
+      "path": "docs/team-recommender/profile-repair/shared-candidate-index.json",
+      "sha256": "fb3d3f5916bc31518ea6807c978b12bc3571f16382c4d5ddae2e43c08b10c9a0",
+      "bytes": 27902
+    }
+  ],
+  "historical_failed_candidate": {
+    "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
+    "comparator": "A-E2",
+    "fallback": null,
+    "path": "docs/team-recommender/stage2-validation-candidate.json",
+    "primary": "E2-D3-combined-v1-frozen",
+    "quality_qualified": false,
+    "sha256": "9078885a374b8df21bff92cb86cb5089e0df319f026ea917ab706272e71622c1",
+    "status": "Validation completed; required quality criteria not met",
+    "validation": {
+      "path": "docs/team-recommender/stage3-validation-candidate.json",
+      "sha256": "1293647acbf073963609557fb300a9322a2d5e92d29844b9e3130fd3314e4159"
+    }
+  },
+  "next_action": "Owner review of source gaps and performance/acceptance limitations; no automatic release or paid campaign"
+}
