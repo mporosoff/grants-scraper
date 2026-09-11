@@ -1,0 +1,178 @@
+{
+  "projection_version": "complete-retained-registry-v1",
+  "semantic_protocol": "unchanged D1F",
+  "trusted_route_enabled": false,
+  "unique_items": 462,
+  "packets": 192,
+  "items_in_packets": 438,
+  "oversized_indivisible_items": [
+    {
+      "scope_id": "361380",
+      "key": "81d97e32eb6b05a4e558344b899ac38a488798f74b576d5e3ecd8076148d446d",
+      "input_bound": 12189
+    },
+    {
+      "scope_id": "363489",
+      "key": "2a239aa457383969b78a6bdaf3f382e1e2d963526455b8032d88aff75f686659",
+      "input_bound": 12420
+    },
+    {
+      "scope_id": "363544",
+      "key": "aaebc7f55919c2e5b871998dbd52fd45a1bc52d4b7a8630c8f7d654800bb3eef",
+      "input_bound": 12075
+    },
+    {
+      "scope_id": "363544",
+      "key": "c121b76f069c8ad2ff5f0d45ce568004398945a0cc66f113c59d43cadd22062a",
+      "input_bound": 12185
+    },
+    {
+      "scope_id": "363622",
+      "key": "64bc285921af0ccaeb2892d0ebef8808f9f17d96eb85fc601c898399bf9fbf42",
+      "input_bound": 12598
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "01e5c1d236f35e1c697ab1ac298fe43cfd3b85d4f57f484b3a3026f84319c25d",
+      "input_bound": 12622
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "07b5bdb80579a23b938ad36c6249ea8b030da9cc43562d1f30acd26df98b6fc6",
+      "input_bound": 12229
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "2a5bfc5ffbf1782f339e8594805638b4904bd4b442d79f5a18a53cbbbf1a13ef",
+      "input_bound": 12363
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "2b4b14ed7519363ff14a5c4fd55908218a11ea0444e1dc29eed2563eca676884",
+      "input_bound": 12338
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "2c6388d4fd2966fa6783148a496da35dcfb65651bc9e724fdf3575088b960088",
+      "input_bound": 12519
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "4e6ba6d70db7bb27dbc7585c020de3a80f297720e46393969381f85e8a3b8b04",
+      "input_bound": 12629
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "8613254bd99f0e629e827fcbae074a3d50017ceb0738dd59bbdb0946fa1fac33",
+      "input_bound": 12365
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "8cb5ed61cb3b449f898dcbbe0d07756c035b76dc29f8ee7169d131e462f40496",
+      "input_bound": 12222
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "8ef19ea0fa555351804221eda30c84cd1f51e2eb8b4029f1385e40315bd5dd42",
+      "input_bound": 12504
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "9f3600ba8370d590d208b9fd05b0b380e794f78271b7b7037f686de779c0f5cb",
+      "input_bound": 12071
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "a0b3664c15b4618fdc77c44dd334d83c47504d9768b640ade35b581a80f9dc00",
+      "input_bound": 12709
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "a434d8f29013ff8fe4c1077f863295d504297ed0f361d7bf2a08af865ad9b5ab",
+      "input_bound": 12237
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "aec90c01c04a7c419bc09c19166285450266e0db9d44affd79e1b0d02d536fdd",
+      "input_bound": 12264
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "b9eb48c845f3d4e434d90a67ec5f088c0a0241089988c083e2da32c86b6efd2e",
+      "input_bound": 12332
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "cbd98a48d7fd446d7703cd7b1c9ea6d2be4d12f2046a57947476ebd520b45cd9",
+      "input_bound": 12477
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "f2b485dba7c16022e3903a5680f6d26f0c8c9c833006dcad4e342815487eced8",
+      "input_bound": 12295
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "f58a7864369077d521abf7e4df203b73aeb0ff9dfefbdd7b1bae11f1c432b84b",
+      "input_bound": 12302
+    },
+    {
+      "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+      "key": "fb11ce36ca0c8be1bfc078161691976e371fce8a9e8819b54fc2ce18d7503450",
+      "input_bound": 14152
+    },
+    {
+      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "key": "1f3c21d497b3f302d98ddc76f50c31d1ae3b96c75f17300ffc61c396efdb34c3",
+      "input_bound": 12248
+    }
+  ],
+  "input_bound": {
+    "min": 6813,
+    "median": 10625,
+    "p95": 11839,
+    "max": 11993,
+    "sum": 2003096
+  },
+  "request_limit": 12000,
+  "output_limit": 512,
+  "private_dry_run_sha256": "9272869e43c0820f73a0f6276a46e94fa8932847761cadd9b2bd498419926d97",
+  "E2_A_E2_primary_top5_comparison": {
+    "unique_items": 213,
+    "packets": 88,
+    "oversized": [
+      {
+        "scope_id": "363544",
+        "key": "aaebc7f55919c2e5b871998dbd52fd45a1bc52d4b7a8630c8f7d654800bb3eef",
+        "input_bound": 12075
+      },
+      {
+        "scope_id": "363544",
+        "key": "c121b76f069c8ad2ff5f0d45ce568004398945a0cc66f113c59d43cadd22062a",
+        "input_bound": 12185
+      },
+      {
+        "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+        "key": "2a5bfc5ffbf1782f339e8594805638b4904bd4b442d79f5a18a53cbbbf1a13ef",
+        "input_bound": 12363
+      },
+      {
+        "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+        "key": "2c6388d4fd2966fa6783148a496da35dcfb65651bc9e724fdf3575088b960088",
+        "input_bound": 12519
+      },
+      {
+        "scope_id": "nasa-roses:25-D.9-d22059cf9f",
+        "key": "fb11ce36ca0c8be1bfc078161691976e371fce8a9e8819b54fc2ce18d7503450",
+        "input_bound": 14152
+      }
+    ],
+    "source_denominator": 35,
+    "prepared_only": true,
+    "summed_input_bound": 869415,
+    "conservative_usd": 2.6240975
+  },
+  "provider_calls": 0,
+  "no_evidence_cropped": true,
+  "no_development_rejudging": true
+}

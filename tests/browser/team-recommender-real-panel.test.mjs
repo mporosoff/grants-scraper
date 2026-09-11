@@ -49,7 +49,9 @@ test('real deadline passes between open and editing; cached selection is withdra
  assert.match(p.drawer.textContent,/no longer current/);assert.equal(p.requests.length,5);assert.equal(p.networkViolations(),0);
 });
 test('real prepared no-group retains candidate/manual path; corrupt retry never contacts providers',async()=>{
- const p=await panel({sid:'363489'});p.open();await p.ready();assert.match(p.drawer.textContent,/Insufficient internal role coverage/);
+ // The exact D3 E2 snapshot returns a group for the historical PINPOINT
+ // fixture. Closeout supplies its frozen mesothelioma no-group scope instead.
+ const p=await panel({sid:process.env.TEAM_REAL_NO_GROUP_SCOPE||'363489'});p.open();await p.ready();assert.match(p.drawer.textContent,/Insufficient internal role coverage/);
  assert.equal(p.drawer.querySelectorAll('.opportunity-team-member').length,0);assert.ok(p.drawer.querySelector('[data-opportunity-team-replacement]'));
  const bad=await panel({corrupt:true});bad.open();await bad.ready();bad.dom.dispatch('click',bad.drawer.querySelector('[data-opportunity-team-retry]'));await bad.ready();
  assert.match(bad.drawer.textContent,/temporarily unavailable/);assert.equal(bad.networkViolations(),0);

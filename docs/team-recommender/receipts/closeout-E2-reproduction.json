@@ -1,0 +1,814 @@
+{
+  "version": "closeout-E2-exact-native-reproduction",
+  "generation": "42b9af6d68f171f5ee47f004b4f0529af11e174a8bec35f2cb34bb01cb2f6e8a",
+  "representation": "D3-combined-v1",
+  "engine": "coverage-v2.5",
+  "adapter": "ingredients-v2.5",
+  "original_runtime_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
+  "code_hashes": {
+    "assets/team-recommender.js": "c4a24b159f314f075b89a6b22ae17d8b5605d3bc5277cc06ce371b3a0389cd59",
+    "assets/team-ingredients.js": "01240ca79e2804c8daccc385aecce5c643a7c8d45864ede9e7337bddb4e9c09a"
+  },
+  "source_input_hashes": {
+    "bundle.json": "0adbfc1cc6e2880db69d95ae630388cb331513b54dbf1a5c67b92802924a1191",
+    "directory.json": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+    "validations.json": "3db12b3b59606691f95dd3a6cf5d8a4c93c25a59d6117c6b682affd27a43403e",
+    "context.json": "698ecd0e0f1199506beaee88d819a76ddf2fea47f4553f68b67c28b1627dc3a1",
+    "vectors.f32": "62c52fc471ded6cf4b328563d0402f28fd7359b6f7f444591b633dfba3388b16"
+  },
+  "assets": [
+    {
+      "path": "data/team-recommender/0adbfc1cc6e2880db69d95ae630388cb331513b54dbf1a5c67b92802924a1191.json",
+      "sha256": "0adbfc1cc6e2880db69d95ae630388cb331513b54dbf1a5c67b92802924a1191",
+      "bytes": 917055,
+      "gzip_bytes": 153516
+    },
+    {
+      "path": "data/team-recommender/62c52fc471ded6cf4b328563d0402f28fd7359b6f7f444591b633dfba3388b16.f32",
+      "sha256": "62c52fc471ded6cf4b328563d0402f28fd7359b6f7f444591b633dfba3388b16",
+      "bytes": 1024000,
+      "gzip_bytes": 950922
+    },
+    {
+      "path": "data/team-recommender/32372dec7d2b500da6d48fe395a83b897411db8394f7285981c17430a35e9628.json",
+      "sha256": "32372dec7d2b500da6d48fe395a83b897411db8394f7285981c17430a35e9628",
+      "bytes": 46814,
+      "gzip_bytes": 6746
+    },
+    {
+      "path": "data/opportunity_team_index.js",
+      "sha256": "44c9e5ddff7dbd52448334825c434574c04ff78c8c5adb0af0ada5bfe39efc9d",
+      "bytes": 10905,
+      "gzip_bytes": 1302
+    }
+  ],
+  "total_asset_bytes": 1998774,
+  "total_gzip_bytes": 1112486,
+  "hydration_ms": 115.7928,
+  "hydration_observations": 1,
+  "matrix": {
+    "n": 35,
+    "p50_ms": 8.643000000000029,
+    "p95_ms": 35.21219999999994
+  },
+  "group": {
+    "n": 35,
+    "p50_ms": 0.07449999999994361,
+    "p95_ms": 30.400300000000016
+  },
+  "combined": {
+    "n": 35,
+    "p50_ms": 10.576999999999998,
+    "p95_ms": 61.4294000000001
+  },
+  "cached": {
+    "n": 26,
+    "p50_ms": 0.28379999999992833,
+    "p95_ms": 0.5457999999999856
+  },
+  "edit": {
+    "n": 10,
+    "p50_ms": 3.540200000000141,
+    "p95_ms": 13.08910000000003
+  },
+  "memory_before": {
+    "rss": 174649344,
+    "heapTotal": 159375360,
+    "heapUsed": 21829752,
+    "external": 36359610,
+    "arrayBuffers": 3157496
+  },
+  "memory_after": {
+    "rss": 225394688,
+    "heapTotal": 166191104,
+    "heapUsed": 26043496,
+    "external": 12147437,
+    "arrayBuffers": 9722251
+  },
+  "scope_clock": "2026-09-10T12:00:00Z",
+  "scientific": 90,
+  "prepared": 35,
+  "unprepared": 55,
+  "groups": 17,
+  "no_group": 18,
+  "action_allowed": 26,
+  "action_groups": 10,
+  "rows": [
+    {
+      "id": "359696",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 119,
+      "groups": 8,
+      "membership_order_hash": "6f90f8196ccbb5d902b8d20deb0574f289559e53e8a7c1f4fe878641635cecfe",
+      "matrix_ms": 14.64549999999997,
+      "group_ms": 7.308300000000031,
+      "combined_ms": 21.9538,
+      "cached_ms": 0.8957999999998947,
+      "edit_ms": 8.606599999999958
+    },
+    {
+      "id": "363612",
+      "status": "unprepared"
+    },
+    {
+      "id": "360205",
+      "status": "unprepared"
+    },
+    {
+      "id": "362178",
+      "status": "group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 155,
+      "groups": 8,
+      "membership_order_hash": "ad7502b48ce72ab975d046176e5bdc6cf12853f76f92dca38d293ffb68e289da",
+      "matrix_ms": 35.21219999999994,
+      "group_ms": 10.528099999999995,
+      "combined_ms": 45.740299999999934,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "363281",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 51,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 11.138199999999983,
+      "group_ms": 0.18799999999998818,
+      "combined_ms": 11.326199999999972,
+      "cached_ms": 0.3977999999999611,
+      "edit_ms": null
+    },
+    {
+      "id": "363141",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 6,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 9.069399999999973,
+      "group_ms": 0.03559999999993124,
+      "combined_ms": 9.104999999999905,
+      "cached_ms": 0.2175999999999476,
+      "edit_ms": null
+    },
+    {
+      "id": "342747",
+      "status": "unprepared"
+    },
+    {
+      "id": "363736",
+      "status": "unprepared"
+    },
+    {
+      "id": "360698",
+      "status": "unprepared"
+    },
+    {
+      "id": "355196",
+      "status": "unprepared"
+    },
+    {
+      "id": "363102",
+      "status": "unprepared"
+    },
+    {
+      "id": "334971",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 44,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 8.910999999999945,
+      "group_ms": 0.031100000000037653,
+      "combined_ms": 8.942099999999982,
+      "cached_ms": 0.3642000000000962,
+      "edit_ms": null
+    },
+    {
+      "id": "362315",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 10,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 9.585500000000025,
+      "group_ms": 0.029199999999946158,
+      "combined_ms": 9.61469999999997,
+      "cached_ms": 0.19859999999994216,
+      "edit_ms": null
+    },
+    {
+      "id": "361322",
+      "status": "unprepared"
+    },
+    {
+      "id": "359236",
+      "status": "unprepared"
+    },
+    {
+      "id": "339594",
+      "status": "unprepared"
+    },
+    {
+      "id": "361876",
+      "status": "unprepared"
+    },
+    {
+      "id": "351923",
+      "status": "unprepared"
+    },
+    {
+      "id": "344592:ab-0009",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 109,
+      "groups": 8,
+      "membership_order_hash": "e6171f0284bc2c68910a6a93beebca54958db15c159e1036fac6f33ee06a6dac",
+      "matrix_ms": 7.925099999999929,
+      "group_ms": 15.088399999999979,
+      "combined_ms": 23.013499999999908,
+      "cached_ms": 0.5457999999999856,
+      "edit_ms": 13.08910000000003
+    },
+    {
+      "id": "362393",
+      "status": "unprepared"
+    },
+    {
+      "id": "360644",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 23,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 5.6551999999999225,
+      "group_ms": 0.034700000000043474,
+      "combined_ms": 5.689899999999966,
+      "cached_ms": 0.43200000000001637,
+      "edit_ms": null
+    },
+    {
+      "id": "363636",
+      "status": "unprepared"
+    },
+    {
+      "id": "345241:tdac-baa-004",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 107,
+      "groups": 3,
+      "membership_order_hash": "783e74934571ee0db8069061b62d0a6fe7f0f3700a7b0a7323c8ac2805ea3043",
+      "matrix_ms": 8.475999999999999,
+      "group_ms": 2.568899999999985,
+      "combined_ms": 11.044899999999984,
+      "cached_ms": 0.43029999999998836,
+      "edit_ms": 1.6619000000000597
+    },
+    {
+      "id": "363055",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 0,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 8.596000000000004,
+      "group_ms": 0.0404999999999518,
+      "combined_ms": 8.636499999999955,
+      "cached_ms": 0.16489999999998872,
+      "edit_ms": null
+    },
+    {
+      "id": "363525",
+      "status": "unprepared"
+    },
+    {
+      "id": "363514",
+      "status": "unprepared"
+    },
+    {
+      "id": "349724",
+      "status": "unprepared"
+    },
+    {
+      "id": "363569",
+      "status": "unprepared"
+    },
+    {
+      "id": "356978",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 8,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 7.7514999999999645,
+      "group_ms": 0.025100000000065847,
+      "combined_ms": 7.77660000000003,
+      "cached_ms": 0.25099999999997635,
+      "edit_ms": null
+    },
+    {
+      "id": "nasa-roses:25-D.9-d22059cf9f",
+      "status": "group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 141,
+      "groups": 8,
+      "membership_order_hash": "f0455a52eeb7e4a7f64ea493abea650c0c5c6575b8ac070f2eb2f1fe701761c3",
+      "matrix_ms": 6.072000000000003,
+      "group_ms": 7.056799999999953,
+      "combined_ms": 13.128799999999956,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "332894",
+      "status": "unprepared"
+    },
+    {
+      "id": "363015",
+      "status": "unprepared"
+    },
+    {
+      "id": "362196",
+      "status": "no-group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 84,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 9.214399999999955,
+      "group_ms": 0.026399999999966894,
+      "combined_ms": 9.240799999999922,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "112354",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 61,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 11.139700000000062,
+      "group_ms": 0.033299999999940155,
+      "combined_ms": 11.173000000000002,
+      "cached_ms": 0.32950000000005275,
+      "edit_ms": null
+    },
+    {
+      "id": "358830",
+      "status": "unprepared"
+    },
+    {
+      "id": "360258",
+      "status": "unprepared"
+    },
+    {
+      "id": "360633",
+      "status": "unprepared"
+    },
+    {
+      "id": "362254",
+      "status": "group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 154,
+      "groups": 5,
+      "membership_order_hash": "d5f4b89be305a75fb54c96f3681fe0a1f4d387003db633b8a1f4e7f40766d5a9",
+      "matrix_ms": 11.825199999999995,
+      "group_ms": 49.604200000000105,
+      "combined_ms": 61.4294000000001,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "355100",
+      "status": "unprepared"
+    },
+    {
+      "id": "362575",
+      "status": "unprepared"
+    },
+    {
+      "id": "344715",
+      "status": "unprepared"
+    },
+    {
+      "id": "45810",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 30,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 9.14390000000003,
+      "group_ms": 0.06149999999990996,
+      "combined_ms": 9.20539999999994,
+      "cached_ms": 0.26109999999994216,
+      "edit_ms": null
+    },
+    {
+      "id": "360954",
+      "status": "unprepared"
+    },
+    {
+      "id": "359669",
+      "status": "unprepared"
+    },
+    {
+      "id": "362218",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 64,
+      "groups": 2,
+      "membership_order_hash": "e5516aac127ce86c4b3cc5b5e95cb7532e81960ce30decc80475b25b83f917d5",
+      "matrix_ms": 5.596900000000005,
+      "group_ms": 2.522100000000023,
+      "combined_ms": 8.119000000000028,
+      "cached_ms": 0.28379999999992833,
+      "edit_ms": 1.946700000000078
+    },
+    {
+      "id": "39841",
+      "status": "unprepared"
+    },
+    {
+      "id": "363292",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 38,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 11.44889999999998,
+      "group_ms": 0.022699999999986176,
+      "combined_ms": 11.471599999999967,
+      "cached_ms": 0.41380000000003747,
+      "edit_ms": null
+    },
+    {
+      "id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 149,
+      "groups": 7,
+      "membership_order_hash": "5d5f1b7c59b56f843d5b66d4de8f62cf604e57acd1139b338e60e0044d27725f",
+      "matrix_ms": 9.260599999999954,
+      "group_ms": 3.566100000000006,
+      "combined_ms": 12.82669999999996,
+      "cached_ms": 0.47450000000003456,
+      "edit_ms": 5.751699999999914
+    },
+    {
+      "id": "363765",
+      "status": "unprepared"
+    },
+    {
+      "id": "363699",
+      "status": "unprepared"
+    },
+    {
+      "id": "362207",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 74,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 5.225999999999999,
+      "group_ms": 0.02070000000003347,
+      "combined_ms": 5.246700000000033,
+      "cached_ms": 0.3106000000000222,
+      "edit_ms": null
+    },
+    {
+      "id": "362855",
+      "status": "group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 112,
+      "groups": 2,
+      "membership_order_hash": "3e85e23fab1e64cf879812261039df705ae07affc1af6a6e7c691ee6a9a15ae1",
+      "matrix_ms": 13.207400000000007,
+      "group_ms": 0.11459999999988213,
+      "combined_ms": 13.321999999999889,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "363526",
+      "status": "unprepared"
+    },
+    {
+      "id": "363479",
+      "status": "unprepared"
+    },
+    {
+      "id": "295449",
+      "status": "unprepared"
+    },
+    {
+      "id": "243973",
+      "status": "unprepared"
+    },
+    {
+      "id": "360660",
+      "status": "unprepared"
+    },
+    {
+      "id": "362868",
+      "status": "unprepared"
+    },
+    {
+      "id": "343980",
+      "status": "unprepared"
+    },
+    {
+      "id": "357498",
+      "status": "unprepared"
+    },
+    {
+      "id": "363724",
+      "status": "unprepared"
+    },
+    {
+      "id": "357554",
+      "status": "unprepared"
+    },
+    {
+      "id": "357002",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 116,
+      "groups": 4,
+      "membership_order_hash": "ecd80dffd05e4c70d5a1e3d10ebfe8e8cf17d69c782d81ef908b90f653d956b1",
+      "matrix_ms": 8.970000000000027,
+      "group_ms": 6.167899999999918,
+      "combined_ms": 15.137899999999945,
+      "cached_ms": 0.37740000000007967,
+      "edit_ms": 6.027299999999968
+    },
+    {
+      "id": "363760",
+      "status": "unprepared"
+    },
+    {
+      "id": "363783",
+      "status": "unprepared"
+    },
+    {
+      "id": "362857",
+      "status": "unprepared"
+    },
+    {
+      "id": "328902",
+      "status": "unprepared"
+    },
+    {
+      "id": "363747",
+      "status": "unprepared"
+    },
+    {
+      "id": "348258",
+      "status": "unprepared"
+    },
+    {
+      "id": "361208",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 59,
+      "groups": 3,
+      "membership_order_hash": "31bdebd66d02d2163d62ffe8fc116ded09c85bb915028164100f1226a406d25f",
+      "matrix_ms": 7.573599999999942,
+      "group_ms": 1.9365999999999985,
+      "combined_ms": 9.51019999999994,
+      "cached_ms": 0.2423999999998614,
+      "edit_ms": 1.031099999999924
+    },
+    {
+      "id": "363069",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 1,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 17.083900000000085,
+      "group_ms": 0.022400000000061482,
+      "combined_ms": 17.106300000000147,
+      "cached_ms": 0.16069999999990614,
+      "edit_ms": null
+    },
+    {
+      "id": "349655",
+      "status": "unprepared"
+    },
+    {
+      "id": "339728",
+      "status": "unprepared"
+    },
+    {
+      "id": "359862",
+      "status": "unprepared"
+    },
+    {
+      "id": "361207",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 62,
+      "groups": 3,
+      "membership_order_hash": "31bdebd66d02d2163d62ffe8fc116ded09c85bb915028164100f1226a406d25f",
+      "matrix_ms": 8.643000000000029,
+      "group_ms": 6.977999999999838,
+      "combined_ms": 15.620999999999867,
+      "cached_ms": 0.27080000000000837,
+      "edit_ms": 3.540200000000141
+    },
+    {
+      "id": "351947",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 71,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 8.486300000000028,
+      "group_ms": 0.07449999999994361,
+      "combined_ms": 8.560799999999972,
+      "cached_ms": 0.27919999999994616,
+      "edit_ms": null
+    },
+    {
+      "id": "363622",
+      "status": "group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 105,
+      "groups": 3,
+      "membership_order_hash": "a5cfd709f9673185e31b8fd66341c92c7d220161140fff79265f903cfd1b5e1a",
+      "matrix_ms": 6.4447999999999865,
+      "group_ms": 0.2807000000000244,
+      "combined_ms": 6.725500000000011,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "363544",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 36,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 8.145399999999881,
+      "group_ms": 0.03220000000010259,
+      "combined_ms": 8.177599999999984,
+      "cached_ms": 0.23479999999995016,
+      "edit_ms": null
+    },
+    {
+      "id": "359091",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 5,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 8.046899999999823,
+      "group_ms": 0.03050000000007458,
+      "combined_ms": 8.077399999999898,
+      "cached_ms": 0.21929999999997563,
+      "edit_ms": null
+    },
+    {
+      "id": "362244",
+      "status": "no-group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 20,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 4.459599999999909,
+      "group_ms": 0.022699999999986176,
+      "combined_ms": 4.482299999999896,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "362520",
+      "status": "group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 155,
+      "groups": 8,
+      "membership_order_hash": "1780e93f2b09274e7058c9388fda274553d227df38e4d923fea8c1d823e4aa43",
+      "matrix_ms": 35.99700000000007,
+      "group_ms": 30.400300000000016,
+      "combined_ms": 66.39730000000009,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "358114",
+      "status": "unprepared"
+    },
+    {
+      "id": "361526:f-18",
+      "status": "group",
+      "action_allowed": false,
+      "people": 155,
+      "admitted": 139,
+      "groups": 1,
+      "membership_order_hash": "2caeaf42c12c67e250f472ed59de9a88be155077b188f09aa2294c00f3b01ed4",
+      "matrix_ms": 4.496700000000146,
+      "group_ms": 30.39930000000004,
+      "combined_ms": 34.896000000000186,
+      "cached_ms": null,
+      "edit_ms": null
+    },
+    {
+      "id": "358938",
+      "status": "no-group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 2,
+      "groups": 0,
+      "membership_order_hash": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+      "matrix_ms": 7.522699999999986,
+      "group_ms": 0.022400000000061482,
+      "combined_ms": 7.545100000000048,
+      "cached_ms": 0.17640000000005784,
+      "edit_ms": null
+    },
+    {
+      "id": "363489",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 119,
+      "groups": 1,
+      "membership_order_hash": "7b3e3fa1d570a44f3010e230d2eeae6d98ac9964ddeed30ceb43fea36e89eb5d",
+      "matrix_ms": 10.514300000000048,
+      "group_ms": 0.0626999999999498,
+      "combined_ms": 10.576999999999998,
+      "cached_ms": 0.44519999999988613,
+      "edit_ms": 0.8235000000001946
+    },
+    {
+      "id": "362871",
+      "status": "unprepared"
+    },
+    {
+      "id": "324456",
+      "status": "unprepared"
+    },
+    {
+      "id": "360012",
+      "status": "unprepared"
+    },
+    {
+      "id": "361380",
+      "status": "group",
+      "action_allowed": true,
+      "people": 155,
+      "admitted": 142,
+      "groups": 8,
+      "membership_order_hash": "d77f064e579bce73020305139654474caf1dcbd52162d64aa04a75df20d147e3",
+      "matrix_ms": 8.128799999999956,
+      "group_ms": 4.7608000000000175,
+      "combined_ms": 12.889599999999973,
+      "cached_ms": 0.43200000000001637,
+      "edit_ms": 6.0452999999999975
+    },
+    {
+      "id": "363391",
+      "status": "unprepared"
+    }
+  ],
+  "serving_VM_has_no_experiment_outputs_or_filesystem": true,
+  "hydration_matrix_and_group_count": 0,
+  "zero_paid_requests": 0,
+  "holdout_scored": false,
+  "physical_browser": false,
+  "limitation": "One Node/isolated-VM local reproduction per prepared development scope; timings are observations, not device gates. Historical D3 five-hydration/105-scope measurements remain separate."
+}

@@ -1,0 +1,16 @@
+{
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "ledger_sha256": "a7065a2d4422a0006808343ac1dc54155bb7810096c4544d0e0d0b266555ee6c",
+  "cloud_checkpoint_sha256": "65391f2f25c75a60d7fb02d789940b15e534fb16c0583cf9d9dd472a044bf6c7",
+  "authority": "Last restored main-only cloud checkpoint 34538646232; identical local read-only mirror. No new cloud dispatch or second spending copy.",
+  "charged_microusd": 3135333,
+  "reserved_microusd": 0,
+  "used_requests": 475,
+  "remaining_requests": 215,
+  "remaining_microusd": 6864667,
+  "new_closeout_requests": 0,
+  "new_closeout_spend_microusd": 0,
+  "old_other_task_spend_credit": 0,
+  "historical_other_task_reused_spend_usd": 11.971342,
+  "exact_ledger_cache_hit_events": 5
+}

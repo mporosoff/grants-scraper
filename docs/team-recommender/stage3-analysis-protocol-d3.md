@@ -1,3 +1,5 @@
+> Historical D3 proposal below. The current owner-directed nomination and finite Stage 3 decision contract are in [stage-2-decision-closeout.md](reports/stage-2-decision-closeout.md), under [the closing instruction](STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md). E2 is now nominated; Stage 3 remains unauthorized. The original no-nominee and provisional-budget text below is preserved as history, not current instructions.
+
 # Stage 3 proposal after D3 — conditional and not authorized
 
 D3 completed its bounded automated comparison with **REVISE / no demonstrated winner**. No Stage 3 candidate is nominated. The exact tested arms and historical unqualified D2 fallback are frozen in `stage2-embedding-d3-candidate.json`; this document neither selects a new winner nor permits tuning against sealed outcomes.

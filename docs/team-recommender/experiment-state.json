@@ -14,7 +14,17 @@
     "stage2": true,
     "stage3": false,
     "stage4": false,
-    "trusted_main_prerequisite": true
+    "trusted_main_prerequisite": true,
+    "stage2_decision_closeout": {
+      "authorized": true,
+      "scope": "Local consolidation, complete projection, exact E2 nomination and validation handoff only",
+      "new_paid_requests": 0,
+      "stage3": false,
+      "instruction": {
+        "path": "docs/team-recommender/STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md",
+        "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
+      }
+    }
   },
   "authority": {
     "D3_closeout_report": {
@@ -25,12 +35,9 @@
     "budget_amendment_path": "docs/team-recommender/BUDGET_AMENDMENT_B1.md",
     "budget_amendment_sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27",
     "continuation_path": "docs/team-recommender/CONTINUATION_C2.md",
-    "current_amendment": {
-      "path": "docs/team-recommender/STAGE_2_D3_RICHER_EMBEDDINGS_PLAN.md",
-      "sha256": "0247f9ad3be01c1ad58acccca3af51256d89aaf88118181b712d0865dd5c36bc"
-    },
-    "current_handoff_sha256": "bb72c3f746751b036167edd8668e697c92063a61b0b19fd1ee9dbb166456733d",
-    "current_plan_sha256": "a4bd73698255c53c49ea5fa59e9d38bd4788162b888e2295315cc66af202e3aa",
+    "current_amendment": "Stage 2 owner-directed E2 nomination/zero-paid decision closeout",
+    "current_handoff_sha256": "d7d43bfbc6321915eda951aade6fccc0126cbb7b26bccd28d1787ececdb26a96",
+    "current_plan_sha256": "cdd84e8bc789541b51ac184c9e48bcd9fcd20cf99b8de13aa769a2ab7e3e1f2c",
     "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
     "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
     "evaluation_amendment_sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0",
@@ -40,6 +47,10 @@
     "ranking_revision_D2": {
       "path": "docs/team-recommender/RANKING_REVISION_D2.md",
       "sha256": "84b91c501dd55e9301b7e0aae63b94a1b411e190fcb9ad67ebb724b8e390b6dc"
+    },
+    "stage2_closing_instruction": {
+      "path": "docs/team-recommender/STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md",
+      "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
     }
   },
   "branch": "codex/on-demand-team-recommender",
@@ -79,27 +90,18 @@
     "remaining_total_usd": 6.864667,
     "requests": 475,
     "reserved_usd": 0,
-    "stage2_cumulative_ceiling_usd": 6
+    "stage2_cumulative_ceiling_usd": 6,
+    "closeout_new_usd": 0,
+    "closeout_new_requests": 0
   },
   "candidate": {
-    "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
-    "fallback": {
-      "adapter": "ingredients-v2.4",
-      "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
-      "engine": "coverage-v2.4",
-      "generation": "d4d2d28f66d769fc70938e8cf11df2694c285eff681bcc6b1ad43cb36a591958",
-      "historical_candidate": {
-        "path": "docs/team-recommender/stage2-ranking-d2-candidate.json",
-        "sha256": "0c6b012b3a5f53dd469406573b61a05ea98a69843a7cc9858063876144434591"
-      },
-      "identity": "B-D2-R0-fixed-call-person-weighted-coverage",
-      "meaning": "Retained exact D2 unqualified baseline; not a newly selected or deployment-qualified D3 winner.",
-      "quality_qualified": false
-    },
-    "path": "docs/team-recommender/stage2-embedding-d3-candidate.json",
-    "primary": null,
+    "path": "docs/team-recommender/stage2-validation-candidate.json",
+    "sha256": "9078885a374b8df21bff92cb86cb5089e0df319f026ea917ab706272e71622c1",
+    "primary": "E2-D3-combined-v1-frozen",
+    "fallback": null,
+    "comparator": "A-E2",
     "quality_qualified": false,
-    "sha256": "bc1c87ad79a4eea555a38f3dca9a743148ff1971b19f33ebce51140d7e03d990"
+    "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5"
   },
   "checks": {
     "E0_exact_D2_scopes": 35,
@@ -155,7 +157,21 @@
     "real_reference_cases": 105,
     "real_reference_nonempty_cases": 50,
     "scalar_dot_products": 42,
-    "zero_paid_prepared_interactions": true
+    "zero_paid_prepared_interactions": true,
+    "closeout": {
+      "python_projection_passed": 10,
+      "E2_native_action_and_integrity_contracts_passed": 2,
+      "complete_person_update_contract_passed": 1,
+      "presentation_freeze_passed": 3,
+      "E2_DOM_passed": 4,
+      "E2_native_scopes_reproduced": 35,
+      "unprepared_checked": 55,
+      "paid_requests": 0,
+      "initial_DOM_fixture_failure": "Historical PINPOINT no-group expectation incompatible with frozen E2 group; fixture-only scope parameter; four affected DOM cases rerun and passed.",
+      "physical_browser": false,
+      "E2E": false,
+      "holdout_scored": false
+    }
   },
   "containing_commit": "Resolve git log -1 --format=%H -- docs/team-recommender/experiment-state.json; state/report-only closeout follows tested code commit",
   "continuation": {
@@ -1966,7 +1982,9 @@
     "source_changed_item_numbers": [
       1,
       5
-    ]
+    ],
+    "new_closeout_requests": 0,
+    "remaining_final_items": 20
   },
   "model": {
     "D3_valid_unique_judgments": 259,
@@ -1987,10 +2005,11 @@
       "query_format": "not elected; all original D2 scientific strings retained",
       "regularized": "not elected in D3; earlier D2 analysis preserved separately"
     },
-    "primary_numerical_candidate": null
+    "primary_numerical_candidate": "E2-D3-combined-v1-frozen",
+    "nomination_is_not_a_D3_win": true
   },
   "next_allowed_stage": null,
-  "next_stage_requires": "User review and explicit Stage 3 approval with an accepted candidate; no automatic new model/tuning campaign",
+  "next_stage_requires": "Explicit Stage 3 approval including fixed bounded semantic sampling, source-policy shortfall decision and narrow main-only evidence-shape/purpose authorization. No automatic revision.",
   "pinned_data": {
     "complete_claims_sha256": "e91568362019ecbb68026ddc86d1136259424529ee93f27368296a46b64abe89",
     "complete_registry_records_sha256": "08054e3393fa4e3606876ccc0cbebd31d1c7c34c7822d261cb6f4b882b4badc3",
@@ -2139,20 +2158,22 @@
     "review_requested": true
   },
   "proposed_next_stage": {
-    "authorized": false,
-    "candidate": null,
-    "condition": "User approval with explicit candidate/quality decision and complete pre-output packet inventory; provisional ceiling does not prove unknown full work fits.",
-    "maximum_embedding_requests": 20,
-    "maximum_judge_requests": 170,
-    "maximum_new_metered_usd": 3.2204,
-    "maximum_requests": 190,
-    "protocol": {
-      "path": "docs/team-recommender/stage3-analysis-protocol-d3.md",
-      "sha256": "c672a2384bfe8da0b4f65a742ba47f44854b356a7516247299a2f783e0e0f190"
-    },
     "stage": 3,
-    "stage4_balance_if_used_usd": 3.644267,
-    "stage4_request_slots_if_used": 25
+    "authorized": false,
+    "candidate": "E2-D3-combined-v1-frozen",
+    "comparator": "A-E2",
+    "protocol": {
+      "path": "docs/team-recommender/reports/stage-2-decision-closeout.md",
+      "sha256": "5e973fa27cb6c20a82c752b4202623c26c946a6d181aa8be4739101037356c73"
+    },
+    "maximum_new_metered_usd": 5.80768,
+    "maximum_requests": 184,
+    "maximum_embedding_requests": 20,
+    "maximum_judge_requests": 164,
+    "stage4_balance_if_used_usd": 1.056987,
+    "stage4_request_slots_if_used": 31,
+    "full_semantic_denominator_fits": false,
+    "condition": "Owner must accept explicit finite missingness/sampling; complete packet and source-preparation preflight before paid requests; no enlarged limits."
   },
   "ranking_revision_D2": {
     "MMR": false,
@@ -2235,14 +2256,14 @@
     "trusted_paid_route": "Resolved and executed via reviewed PR222 main-only extension; one ledger, 139 D3 paid requests; no duplicate/recovery replay"
   },
   "receipt_index": {
-    "path": "docs/team-recommender/stage2-embedding-d3-receipt-index.json",
-    "sha256": "77a2f25114c2c387941ef8f0cf194e8d63821b3fbb51a7301956f3bd2415380d"
+    "path": "docs/team-recommender/stage2-closeout-receipt-index.json",
+    "sha256": "73a46def2c53ab43c1e4021c25ce1c08ed88ee23a9f27e9a5a49cbd0e646b3ba"
   },
-  "recommendation": "REVISE",
-  "recommended_next_stage": "User review only; no Stage 3 nomination",
+  "recommendation": "E2 NOMINATED FOR VALIDATION — NOT QUALITY-QUALIFIED OR DEPLOYED",
+  "recommended_next_stage": "User decision on separately approved Stage 3, bounded semantic sample and explicit source shortfalls",
   "report": {
-    "path": "docs/team-recommender/reports/stage-2-embedding-revision-d3-report.md",
-    "sha256": "0987ab7ac57cd171c6ccdde6b23c66f65f648fed42df100806f9bb91df28c00a"
+    "path": "docs/team-recommender/reports/stage-2-decision-closeout.md",
+    "sha256": "5e973fa27cb6c20a82c752b4202623c26c946a6d181aa8be4739101037356c73"
   },
   "repository": "mporosoff/grants-scraper",
   "results": {
@@ -4588,7 +4609,7 @@
     ]
   },
   "stage2_complete": true,
-  "stage2_complete_meaning": "Authorized bounded automated D3 comparison is complete, with no demonstrated new winner; this does not mean quality gates passed or Stage 3 is approved.",
+  "stage2_complete_meaning": "Owner-directed local evidence consolidation and exact E2 nomination complete; no independent validation, quality qualification or deployment.",
   "stage2_completion_receipt_index_history": {
     "path": "docs/team-recommender/stage2-continuation-receipt-index.json",
     "sha256": "5ad92c03679c59a04641ad673280d0df28949131f133f94ac420ba112cd574aa"
@@ -4610,17 +4631,2376 @@
     "path": "docs/team-recommender/reports/stage-2-report.md",
     "sha256": "82ddbe9b698044291aa8e442dd62aa34c0b9d6c4445330b7b6aa8e2ca808b351"
   },
-  "stage_status": "stage2-D3-complete-REVISE",
-  "stop": "STOP FOR USER REVIEW. No Stage 3, holdout recommendations, deployment, enrichment or automatic additional campaign.",
+  "stage_status": "stage2-decision-closeout-complete",
+  "stop": "STOP FOR USER REVIEW. No Stage 3, holdout recommendations, deployment, enrichment or automatic model/tuning campaign.",
   "unresolved": [
-    "No new representation meets the predeclared >=5 pp paired relevance gain; all primary/full automatic unrelated-member rates remain above the full 5% target.",
-    "Top-five reasonable precision remains below 80%; missing alternative group judgments and unknown independent feasibility limit usefulness/yield claims.",
-    "Two of eight explanation audit occurrences have unresolved missing-quote projection gaps; two additional complete-quote audits are model-unsupported. Raw results remain preserved.",
-    "55/90 scientific reservations remain unprepared, 18/30 control origins unprepared, 18/150 rollout ingredients ready; D3 source expansion was prohibited.",
-    "One of four order swaps conflicted; 93 selected wanted items were not submitted (90 envelope, two complete-evidence bounds, one historical paid-failed item).",
-    "No returned human judgments; existing 20-item development packet unchanged with historical exposure/context limitations; 20 final items reserved.",
-    "No full E2E/Playwright/accessibility, physical browser, sealed-holdout quality or production gates run. No Stage 3 candidate or authority."
+    "Original quality targets remain missed; no independent feasible yield denominator.",
+    "Historical E1/E2 judge projection incomplete; 259 graded and 132 missing unique items audited, no rejudging.",
+    "Original rollout150:18 prepared,45 bounded-context normal-preparation candidates,16 gaps,49 unsuitable/unselected/inactive,22 unknown. Source-based replacements require approval.",
+    "Effective holdout90:0 prepared,7 bounded-context preparation candidates,4 gaps,9 unsuitable mechanisms,70 unresolved metadata records; recommendations sealed.",
+    "Complete full semantic denominator not shown to fit remaining dollars/request/token limits; proposed fixed bounded sample requires owner decision.",
+    "Stage3 trusted helper needs narrow approved purpose/complete-evidence shape update; currently disabled.",
+    "Physical-browser/E2E/accessibility and 150-scope resource gates unrun; Marc20 development items unreturned,20 final items untouched."
   ],
-  "updated_at": "2026-09-10T23:28:51.018493+00:00",
-  "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender"
+  "updated_at": "2026-09-11T00:48:46.957153+00:00",
+  "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
+  "historical_D3_closeout": {
+    "candidate": {
+      "code_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
+      "fallback": {
+        "adapter": "ingredients-v2.4",
+        "code_commit": "ed303ab367ccb2f0bec3f0e62acf3ed45e9809a6",
+        "engine": "coverage-v2.4",
+        "generation": "d4d2d28f66d769fc70938e8cf11df2694c285eff681bcc6b1ad43cb36a591958",
+        "historical_candidate": {
+          "path": "docs/team-recommender/stage2-ranking-d2-candidate.json",
+          "sha256": "0c6b012b3a5f53dd469406573b61a05ea98a69843a7cc9858063876144434591"
+        },
+        "identity": "B-D2-R0-fixed-call-person-weighted-coverage",
+        "meaning": "Retained exact D2 unqualified baseline; not a newly selected or deployment-qualified D3 winner.",
+        "quality_qualified": false
+      },
+      "path": "docs/team-recommender/stage2-embedding-d3-candidate.json",
+      "primary": null,
+      "quality_qualified": false,
+      "sha256": "bc1c87ad79a4eea555a38f3dca9a743148ff1971b19f33ebce51140d7e03d990"
+    },
+    "checks": {
+      "E0_exact_D2_scopes": 35,
+      "Playwright": false,
+      "accessibility_suite": false,
+      "additional_D3_DOM_passed": 9,
+      "additional_D3_DOM_tests_per_arm": 3,
+      "code_file_sha256": {
+        "assets/team-ingredients.js": "01240ca79e2804c8daccc385aecce5c643a7c8d45864ede9e7337bddb4e9c09a",
+        "assets/team-recommender.js": "c4a24b159f314f075b89a6b22ae17d8b5605d3bc5277cc06ce371b3a0389cd59",
+        "tests/browser/team-recommender-d3.test.mjs": "2efbef9f6cd98ae2d640b2697f7651c7c6c85a6c6a41f4c1389342267ef2c086",
+        "tools/team_recommender_embeddings_d3.py": "ceaaa0bafb99da0f4788481699f712a575b3501511f76e908f12d716a60636b0",
+        "tools/team_recommender_embeddings_d3_analyze.py": "4a4f9876c04dfea2da6bb1e0d4cc15df02096dfdda73a834468b1d2da5dbf103",
+        "tools/team_recommender_embeddings_d3_assemble.py": "7009c3c95a3aee35acd343d45076be72de8f87e23b907c0065b6382c30e2e85c",
+        "tools/team_recommender_embeddings_d3_judge.py": "349e018bae7dcf2440d02bf0ec928bd1505c1dc059b24b2696df5971fdc28b8a",
+        "tools/team_recommender_embeddings_d3_measure.mjs": "86031e7f1dfea2b018d413dcd1e5a9659abd2aa216fabea8859e316fdde84608",
+        "tools/team_recommender_embeddings_d3_prepare.py": "ddf7a5bdbed3793224e08dccd879bab734ca5289a35e693c50c754ca1007c699",
+        "tools/team_recommender_embeddings_d3_results.py": "453231f00ec601ba21e25ff97c44b34783b0319dd29e59f9b43a281d35b01bdf",
+        "tools/team_recommender_embeddings_d3_run.mjs": "ed5d47ee204bfd4f4487139a201e3e9baa0be4674dffea27130e271e9f9e3c52"
+      },
+      "focused_Node_failed": 0,
+      "focused_Node_passed": 137,
+      "focused_Python_failed": 0,
+      "focused_Python_passed": 87,
+      "full_E2E": false,
+      "full_directory_people": 155,
+      "holdout_scored": false,
+      "log_files_private": {
+        "DOM-E1.txt": {
+          "bytes": 427,
+          "sha256": "c73d26d95f58f168a928b2d7fa87ead9bed5926eafab59efcd9bff1f1a0ac8ea"
+        },
+        "DOM-E2.txt": {
+          "bytes": 428,
+          "sha256": "cf473e8ab99bfe4bbd641ac17414601b721312694a38543bdb1abaf476e89c8c"
+        },
+        "DOM-E3.txt": {
+          "bytes": 429,
+          "sha256": "feaf86338209eb5e66f6dd64fbd8fb777563b22edbc2881f5485d95c3697de41"
+        },
+        "focused-node.txt": {
+          "bytes": 12532,
+          "sha256": "e6018136dad7056cf8aec44833322e82b34e37ba645267d16cb028a88b72b8a3"
+        },
+        "focused-python.txt": {
+          "bytes": 4085,
+          "sha256": "3f2a9c0d9f65bf52930b0fac92f6e8a59c367d516c474ff1438e8b62582bd1fc"
+        }
+      },
+      "method": "Focused Node VM/custom DOM, Python contracts, native loader with real source/profile/vector snapshots and small-pool independent exact enumeration; not physical-browser validation.",
+      "native_D3_offline_parity_scopes": 105,
+      "physical_browser": false,
+      "real_reference_cases": 105,
+      "real_reference_nonempty_cases": 50,
+      "scalar_dot_products": 42,
+      "zero_paid_prepared_interactions": true
+    },
+    "model": {
+      "D3_valid_unique_judgments": 259,
+      "dimension": 1024,
+      "embedding_models": [
+        "voyage-4-lite",
+        "voyage-4-large",
+        "voyage-context-4"
+      ],
+      "fitted_recommender": null,
+      "historical_unqualified_fallback": "B-D2-R0-fixed-call-person-weighted-coverage",
+      "judge": "claude-sonnet-5",
+      "judge_protocol": "D1F",
+      "optional_components": {
+        "Bayesian": "not elected in frozen D3 protocol; not evaluated or rejected on D3 labels",
+        "MMR": "off throughout D3; no new semantic MMR comparison",
+        "global_context_blend": "not elected",
+        "query_format": "not elected; all original D2 scientific strings retained",
+        "regularized": "not elected in D3; earlier D2 analysis preserved separately"
+      },
+      "primary_numerical_candidate": null
+    },
+    "proposed_next_stage": {
+      "authorized": false,
+      "candidate": null,
+      "condition": "User approval with explicit candidate/quality decision and complete pre-output packet inventory; provisional ceiling does not prove unknown full work fits.",
+      "maximum_embedding_requests": 20,
+      "maximum_judge_requests": 170,
+      "maximum_new_metered_usd": 3.2204,
+      "maximum_requests": 190,
+      "protocol": {
+        "path": "docs/team-recommender/stage3-analysis-protocol-d3.md",
+        "sha256": "c672a2384bfe8da0b4f65a742ba47f44854b356a7516247299a2f783e0e0f190"
+      },
+      "stage": 3,
+      "stage4_balance_if_used_usd": 3.644267,
+      "stage4_request_slots_if_used": 25
+    },
+    "receipt_index": {
+      "path": "docs/team-recommender/stage2-embedding-d3-receipt-index.json",
+      "sha256": "77a2f25114c2c387941ef8f0cf194e8d63821b3fbb51a7301956f3bd2415380d"
+    },
+    "recommendation": "REVISE",
+    "recommended_next_stage": "User review only; no Stage 3 nomination",
+    "report": {
+      "path": "docs/team-recommender/reports/stage-2-embedding-revision-d3-report.md",
+      "sha256": "0987ab7ac57cd171c6ccdde6b23c66f65f648fed42df100806f9bb91df28c00a"
+    },
+    "results": {
+      "D3_exact_cached_unique_items": 250,
+      "D3_new_embedding_rows": 1299,
+      "D3_new_model_judgments": 259,
+      "D3_researcher_enrichment": 0,
+      "D3_source_retrievals": 0,
+      "D3_source_translations": 0,
+      "E0_reused_rows": 493,
+      "E2_shared_E1_query_rows": 95,
+      "action_admitted_prepared_scopes": 26,
+      "action_blocked_prepared_scopes": 9,
+      "actual_result_receipt": {
+        "path": "docs/team-recommender/receipts/d3-development-results-34538646232.json",
+        "sha256": "29c63e4293cb8bfaa266e0f7eb9650361911259371b1304c25ea7dc6cda237a2"
+      },
+      "comparison": {
+        "E0": {
+          "all_option_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 18,
+                "strong": 4,
+                "unrelated": 1
+              },
+              "missing": 10,
+              "observed": 23,
+              "occurrences": 33,
+              "reasonable_fraction": 0.9565217391304348,
+              "reasonable_observed": 22,
+              "unique_items": 33,
+              "unrelated_fraction": 0.043478260869565216
+            },
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 20,
+              "strong": 4,
+              "unrelated": 3
+            },
+            "missing": 12,
+            "observed": 28,
+            "occurrences": 40,
+            "reasonable_fraction": 0.8571428571428571,
+            "reasonable_observed": 24,
+            "unique_items": 40,
+            "unrelated_fraction": 0.10714285714285714
+          },
+          "all_option_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 42,
+                "strong": 16,
+                "unrelated": 8
+              },
+              "missing": 0,
+              "observed": 66,
+              "occurrences": 66,
+              "reasonable_fraction": 0.8787878787878788,
+              "reasonable_observed": 58,
+              "unique_items": 32,
+              "unrelated_fraction": 0.12121212121212122
+            },
+            "labels": {
+              "plausible": 44,
+              "strong": 20,
+              "unrelated": 16
+            },
+            "missing": 0,
+            "observed": 80,
+            "occurrences": 80,
+            "reasonable_fraction": 0.8,
+            "reasonable_observed": 64,
+            "unique_items": 37,
+            "unrelated_fraction": 0.2
+          },
+          "explanations": {
+            "labels": {},
+            "missing": 0,
+            "observed": 0,
+            "occurrences": 0,
+            "reasonable_fraction": null,
+            "reasonable_observed": 0,
+            "unique_items": 0,
+            "unrelated_fraction": null
+          },
+          "matched_A_groups": {
+            "labels": {
+              "plausible": 2,
+              "strong": 5,
+              "unrelated": 1
+            },
+            "missing": 0,
+            "observed": 8,
+            "occurrences": 8,
+            "reasonable_fraction": 0.875,
+            "reasonable_observed": 7,
+            "unique_items": 8,
+            "unrelated_fraction": 0.125
+          },
+          "matched_A_members": {
+            "labels": {
+              "plausible": 7,
+              "strong": 8,
+              "unrelated": 1
+            },
+            "missing": 0,
+            "observed": 16,
+            "occurrences": 16,
+            "reasonable_fraction": 0.9375,
+            "reasonable_observed": 15,
+            "unique_items": 16,
+            "unrelated_fraction": 0.0625
+          },
+          "per_option_rank": {
+            "1": {
+              "option-group": {
+                "labels": {
+                  "plausible": 4,
+                  "strong": 3,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 8,
+                "occurrences": 8,
+                "reasonable_fraction": 0.875,
+                "reasonable_observed": 7,
+                "unique_items": 8,
+                "unrelated_fraction": 0.125
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 8,
+                  "strong": 5,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 16,
+                "occurrences": 16,
+                "reasonable_fraction": 0.8125,
+                "reasonable_observed": 13,
+                "unique_items": 16,
+                "unrelated_fraction": 0.1875
+              }
+            },
+            "2": {
+              "option-group": {
+                "labels": {
+                  "plausible": 7,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 8,
+                "occurrences": 8,
+                "reasonable_fraction": 0.875,
+                "reasonable_observed": 7,
+                "unique_items": 8,
+                "unrelated_fraction": 0.125
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 6,
+                  "strong": 7,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 16,
+                "occurrences": 16,
+                "reasonable_fraction": 0.8125,
+                "reasonable_observed": 13,
+                "unique_items": 16,
+                "unrelated_fraction": 0.1875
+              }
+            },
+            "3": {
+              "option-group": {
+                "labels": {
+                  "plausible": 3
+                },
+                "missing": 4,
+                "observed": 3,
+                "occurrences": 7,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 3,
+                "unique_items": 7,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 9,
+                  "strong": 3,
+                  "unrelated": 2
+                },
+                "missing": 0,
+                "observed": 14,
+                "occurrences": 14,
+                "reasonable_fraction": 0.8571428571428571,
+                "reasonable_observed": 12,
+                "unique_items": 14,
+                "unrelated_fraction": 0.14285714285714285
+              }
+            },
+            "4": {
+              "option-group": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 1,
+                  "strong": 1
+                },
+                "missing": 2,
+                "observed": 3,
+                "occurrences": 5,
+                "reasonable_fraction": 0.6666666666666666,
+                "reasonable_observed": 2,
+                "unique_items": 5,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 5,
+                  "strong": 3,
+                  "unrelated": 2
+                },
+                "missing": 0,
+                "observed": 10,
+                "occurrences": 10,
+                "reasonable_fraction": 0.8,
+                "reasonable_observed": 8,
+                "unique_items": 10,
+                "unrelated_fraction": 0.2
+              }
+            },
+            "5": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1
+                },
+                "missing": 3,
+                "observed": 1,
+                "occurrences": 4,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 4,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 3,
+                  "strong": 2,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 8,
+                "occurrences": 8,
+                "reasonable_fraction": 0.625,
+                "reasonable_observed": 5,
+                "unique_items": 8,
+                "unrelated_fraction": 0.375
+              }
+            },
+            "6": {
+              "option-group": {
+                "labels": {
+                  "plausible": 2
+                },
+                "missing": 1,
+                "observed": 2,
+                "occurrences": 3,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 2,
+                "unique_items": 3,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 5,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 6,
+                "occurrences": 6,
+                "reasonable_fraction": 0.8333333333333334,
+                "reasonable_observed": 5,
+                "unique_items": 6,
+                "unrelated_fraction": 0.16666666666666666
+              }
+            },
+            "7": {
+              "option-group": {
+                "labels": {
+                  "unrelated": 1
+                },
+                "missing": 2,
+                "observed": 1,
+                "occurrences": 3,
+                "reasonable_fraction": 0.0,
+                "reasonable_observed": 0,
+                "unique_items": 3,
+                "unrelated_fraction": 1.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 5,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 6,
+                "occurrences": 6,
+                "reasonable_fraction": 0.8333333333333334,
+                "reasonable_observed": 5,
+                "unique_items": 6,
+                "unrelated_fraction": 0.16666666666666666
+              }
+            },
+            "8": {
+              "option-group": {
+                "labels": {
+                  "plausible": 2
+                },
+                "missing": 0,
+                "observed": 2,
+                "occurrences": 2,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 2,
+                "unique_items": 2,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 3,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 4,
+                "occurrences": 4,
+                "reasonable_fraction": 0.75,
+                "reasonable_observed": 3,
+                "unique_items": 4,
+                "unrelated_fraction": 0.25
+              }
+            }
+          },
+          "primary_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 4,
+                "strong": 3
+              },
+              "missing": 0,
+              "observed": 7,
+              "occurrences": 7,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 7,
+              "unique_items": 7,
+              "unrelated_fraction": 0.0
+            },
+            "labels": {
+              "plausible": 4,
+              "strong": 3,
+              "unrelated": 1
+            },
+            "missing": 0,
+            "observed": 8,
+            "occurrences": 8,
+            "reasonable_fraction": 0.875,
+            "reasonable_observed": 7,
+            "unique_items": 8,
+            "unrelated_fraction": 0.125
+          },
+          "primary_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 8,
+                "strong": 5,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 14,
+              "occurrences": 14,
+              "reasonable_fraction": 0.9285714285714286,
+              "reasonable_observed": 13,
+              "unique_items": 14,
+              "unrelated_fraction": 0.07142857142857142
+            },
+            "labels": {
+              "plausible": 8,
+              "strong": 5,
+              "unrelated": 3
+            },
+            "missing": 0,
+            "observed": 16,
+            "occurrences": 16,
+            "reasonable_fraction": 0.8125,
+            "reasonable_observed": 13,
+            "unique_items": 16,
+            "unrelated_fraction": 0.1875
+          },
+          "yield": {
+            "action_groups": 7,
+            "action_prepared": 26,
+            "groups": 8,
+            "independent_feasibility": "unknown",
+            "no_group": 27,
+            "prepared": 35,
+            "unprepared": 55
+          }
+        },
+        "E0-C": {
+          "all_option_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 19,
+                "strong": 5,
+                "unrelated": 2
+              },
+              "missing": 14,
+              "observed": 26,
+              "occurrences": 40,
+              "reasonable_fraction": 0.9230769230769231,
+              "reasonable_observed": 24,
+              "unique_items": 40,
+              "unrelated_fraction": 0.07692307692307693
+            },
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 22,
+              "strong": 6,
+              "unrelated": 4
+            },
+            "missing": 29,
+            "observed": 33,
+            "occurrences": 62,
+            "reasonable_fraction": 0.8484848484848485,
+            "reasonable_observed": 28,
+            "unique_items": 62,
+            "unrelated_fraction": 0.12121212121212122
+          },
+          "all_option_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 50,
+                "strong": 23,
+                "unrelated": 7
+              },
+              "missing": 0,
+              "observed": 80,
+              "occurrences": 80,
+              "reasonable_fraction": 0.9125,
+              "reasonable_observed": 73,
+              "unique_items": 37,
+              "unrelated_fraction": 0.0875
+            },
+            "labels": {
+              "insufficient-information": 5,
+              "plausible": 68,
+              "strong": 30,
+              "unrelated": 20
+            },
+            "missing": 1,
+            "observed": 123,
+            "occurrences": 124,
+            "reasonable_fraction": 0.7967479674796748,
+            "reasonable_observed": 98,
+            "unique_items": 59,
+            "unrelated_fraction": 0.16260162601626016
+          },
+          "explanations": {
+            "labels": {},
+            "missing": 0,
+            "observed": 0,
+            "occurrences": 0,
+            "reasonable_fraction": null,
+            "reasonable_observed": 0,
+            "unique_items": 0,
+            "unrelated_fraction": null
+          },
+          "matched_A_groups": {
+            "labels": {
+              "plausible": 2,
+              "strong": 5,
+              "unrelated": 1
+            },
+            "missing": 1,
+            "observed": 8,
+            "occurrences": 9,
+            "reasonable_fraction": 0.875,
+            "reasonable_observed": 7,
+            "unique_items": 9,
+            "unrelated_fraction": 0.125
+          },
+          "matched_A_members": {
+            "labels": {
+              "plausible": 9,
+              "strong": 8,
+              "unrelated": 1
+            },
+            "missing": 0,
+            "observed": 18,
+            "occurrences": 18,
+            "reasonable_fraction": 0.9444444444444444,
+            "reasonable_observed": 17,
+            "unique_items": 18,
+            "unrelated_fraction": 0.05555555555555555
+          },
+          "per_option_rank": {
+            "1": {
+              "option-group": {
+                "labels": {
+                  "plausible": 3,
+                  "strong": 5,
+                  "unrelated": 1
+                },
+                "missing": 3,
+                "observed": 9,
+                "occurrences": 12,
+                "reasonable_fraction": 0.8888888888888888,
+                "reasonable_observed": 8,
+                "unique_items": 12,
+                "unrelated_fraction": 0.1111111111111111
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 11,
+                  "strong": 9,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 24,
+                "occurrences": 24,
+                "reasonable_fraction": 0.8333333333333334,
+                "reasonable_observed": 20,
+                "unique_items": 24,
+                "unrelated_fraction": 0.125
+              }
+            },
+            "2": {
+              "option-group": {
+                "labels": {
+                  "plausible": 8,
+                  "unrelated": 1
+                },
+                "missing": 3,
+                "observed": 9,
+                "occurrences": 12,
+                "reasonable_fraction": 0.8888888888888888,
+                "reasonable_observed": 8,
+                "unique_items": 12,
+                "unrelated_fraction": 0.1111111111111111
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 11,
+                  "strong": 9,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 24,
+                "occurrences": 24,
+                "reasonable_fraction": 0.8333333333333334,
+                "reasonable_observed": 20,
+                "unique_items": 24,
+                "unrelated_fraction": 0.125
+              }
+            },
+            "3": {
+              "option-group": {
+                "labels": {
+                  "plausible": 4
+                },
+                "missing": 6,
+                "observed": 4,
+                "occurrences": 10,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 4,
+                "unique_items": 10,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 14,
+                  "strong": 3,
+                  "unrelated": 2
+                },
+                "missing": 0,
+                "observed": 20,
+                "occurrences": 20,
+                "reasonable_fraction": 0.85,
+                "reasonable_observed": 17,
+                "unique_items": 20,
+                "unrelated_fraction": 0.1
+              }
+            },
+            "4": {
+              "option-group": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 1,
+                  "strong": 1
+                },
+                "missing": 5,
+                "observed": 3,
+                "occurrences": 8,
+                "reasonable_fraction": 0.6666666666666666,
+                "reasonable_observed": 2,
+                "unique_items": 8,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 7,
+                  "strong": 5,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 16,
+                "occurrences": 16,
+                "reasonable_fraction": 0.75,
+                "reasonable_observed": 12,
+                "unique_items": 16,
+                "unrelated_fraction": 0.1875
+              }
+            },
+            "5": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1,
+                  "unrelated": 1
+                },
+                "missing": 5,
+                "observed": 2,
+                "occurrences": 7,
+                "reasonable_fraction": 0.5,
+                "reasonable_observed": 1,
+                "unique_items": 7,
+                "unrelated_fraction": 0.5
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 6,
+                  "strong": 3,
+                  "unrelated": 4
+                },
+                "missing": 0,
+                "observed": 14,
+                "occurrences": 14,
+                "reasonable_fraction": 0.6428571428571429,
+                "reasonable_observed": 9,
+                "unique_items": 14,
+                "unrelated_fraction": 0.2857142857142857
+              }
+            },
+            "6": {
+              "option-group": {
+                "labels": {
+                  "plausible": 3
+                },
+                "missing": 2,
+                "observed": 3,
+                "occurrences": 5,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 3,
+                "unique_items": 5,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 7,
+                  "strong": 1,
+                  "unrelated": 2
+                },
+                "missing": 0,
+                "observed": 10,
+                "occurrences": 10,
+                "reasonable_fraction": 0.8,
+                "reasonable_observed": 8,
+                "unique_items": 10,
+                "unrelated_fraction": 0.2
+              }
+            },
+            "7": {
+              "option-group": {
+                "labels": {
+                  "unrelated": 1
+                },
+                "missing": 4,
+                "observed": 1,
+                "occurrences": 5,
+                "reasonable_fraction": 0.0,
+                "reasonable_observed": 0,
+                "unique_items": 5,
+                "unrelated_fraction": 1.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 8,
+                  "unrelated": 1
+                },
+                "missing": 1,
+                "observed": 9,
+                "occurrences": 10,
+                "reasonable_fraction": 0.8888888888888888,
+                "reasonable_observed": 8,
+                "unique_items": 10,
+                "unrelated_fraction": 0.1111111111111111
+              }
+            },
+            "8": {
+              "option-group": {
+                "labels": {
+                  "plausible": 2
+                },
+                "missing": 1,
+                "observed": 2,
+                "occurrences": 3,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 2,
+                "unique_items": 3,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 4,
+                  "unrelated": 2
+                },
+                "missing": 0,
+                "observed": 6,
+                "occurrences": 6,
+                "reasonable_fraction": 0.6666666666666666,
+                "reasonable_observed": 4,
+                "unique_items": 6,
+                "unrelated_fraction": 0.3333333333333333
+              }
+            }
+          },
+          "primary_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 3,
+                "strong": 4
+              },
+              "missing": 1,
+              "observed": 7,
+              "occurrences": 8,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 7,
+              "unique_items": 8,
+              "unrelated_fraction": 0.0
+            },
+            "labels": {
+              "plausible": 3,
+              "strong": 5,
+              "unrelated": 1
+            },
+            "missing": 3,
+            "observed": 9,
+            "occurrences": 12,
+            "reasonable_fraction": 0.8888888888888888,
+            "reasonable_observed": 8,
+            "unique_items": 12,
+            "unrelated_fraction": 0.1111111111111111
+          },
+          "primary_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 9,
+                "strong": 7
+              },
+              "missing": 0,
+              "observed": 16,
+              "occurrences": 16,
+              "reasonable_fraction": 1.0,
+              "reasonable_observed": 16,
+              "unique_items": 16,
+              "unrelated_fraction": 0.0
+            },
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 11,
+              "strong": 9,
+              "unrelated": 3
+            },
+            "missing": 0,
+            "observed": 24,
+            "occurrences": 24,
+            "reasonable_fraction": 0.8333333333333334,
+            "reasonable_observed": 20,
+            "unique_items": 24,
+            "unrelated_fraction": 0.125
+          },
+          "yield": {
+            "action_groups": 8,
+            "action_prepared": 26,
+            "groups": 12,
+            "independent_feasibility": "unknown",
+            "no_group": 23,
+            "prepared": 35,
+            "unprepared": 55
+          }
+        },
+        "E1": {
+          "all_option_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 13,
+                "strong": 5,
+                "unrelated": 2
+              },
+              "missing": 36,
+              "observed": 20,
+              "occurrences": 56,
+              "reasonable_fraction": 0.9,
+              "reasonable_observed": 18,
+              "unique_items": 56,
+              "unrelated_fraction": 0.1
+            },
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 20,
+              "strong": 5,
+              "unrelated": 3
+            },
+            "missing": 63,
+            "observed": 29,
+            "occurrences": 92,
+            "reasonable_fraction": 0.8620689655172413,
+            "reasonable_observed": 25,
+            "unique_items": 92,
+            "unrelated_fraction": 0.10344827586206896
+          },
+          "all_option_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 61,
+                "strong": 34,
+                "unrelated": 12
+              },
+              "missing": 5,
+              "observed": 107,
+              "occurrences": 112,
+              "reasonable_fraction": 0.8878504672897196,
+              "reasonable_observed": 95,
+              "unique_items": 51,
+              "unrelated_fraction": 0.11214953271028037
+            },
+            "labels": {
+              "plausible": 94,
+              "strong": 45,
+              "unrelated": 35
+            },
+            "missing": 10,
+            "observed": 174,
+            "occurrences": 184,
+            "reasonable_fraction": 0.7988505747126436,
+            "reasonable_observed": 139,
+            "unique_items": 84,
+            "unrelated_fraction": 0.20114942528735633
+          },
+          "explanations": {
+            "labels": {
+              "faithful": 2,
+              "unsupported": 1
+            },
+            "missing": 0,
+            "observed": 3,
+            "occurrences": 3,
+            "reasonable_fraction": 0.0,
+            "reasonable_observed": 0,
+            "unique_items": 3,
+            "unrelated_fraction": 0.0
+          },
+          "matched_A_groups": {
+            "labels": {
+              "plausible": 8,
+              "strong": 3,
+              "unrelated": 3
+            },
+            "missing": 0,
+            "observed": 14,
+            "occurrences": 14,
+            "reasonable_fraction": 0.7857142857142857,
+            "reasonable_observed": 11,
+            "unique_items": 14,
+            "unrelated_fraction": 0.21428571428571427
+          },
+          "matched_A_members": {
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 15,
+              "strong": 9,
+              "unrelated": 3
+            },
+            "missing": 0,
+            "observed": 28,
+            "occurrences": 28,
+            "reasonable_fraction": 0.8571428571428571,
+            "reasonable_observed": 24,
+            "unique_items": 28,
+            "unrelated_fraction": 0.10714285714285714
+          },
+          "per_option_rank": {
+            "1": {
+              "option-group": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 9,
+                  "strong": 4,
+                  "unrelated": 2
+                },
+                "missing": 0,
+                "observed": 16,
+                "occurrences": 16,
+                "reasonable_fraction": 0.8125,
+                "reasonable_observed": 13,
+                "unique_items": 16,
+                "unrelated_fraction": 0.125
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 17,
+                  "strong": 11,
+                  "unrelated": 4
+                },
+                "missing": 0,
+                "observed": 32,
+                "occurrences": 32,
+                "reasonable_fraction": 0.875,
+                "reasonable_observed": 28,
+                "unique_items": 32,
+                "unrelated_fraction": 0.125
+              }
+            },
+            "2": {
+              "option-group": {
+                "labels": {
+                  "plausible": 4
+                },
+                "missing": 11,
+                "observed": 4,
+                "occurrences": 15,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 4,
+                "unique_items": 15,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 11,
+                  "strong": 12,
+                  "unrelated": 6
+                },
+                "missing": 1,
+                "observed": 29,
+                "occurrences": 30,
+                "reasonable_fraction": 0.7931034482758621,
+                "reasonable_observed": 23,
+                "unique_items": 30,
+                "unrelated_fraction": 0.20689655172413793
+              }
+            },
+            "3": {
+              "option-group": {
+                "labels": {
+                  "plausible": 4
+                },
+                "missing": 10,
+                "observed": 4,
+                "occurrences": 14,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 4,
+                "unique_items": 14,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 14,
+                  "strong": 8,
+                  "unrelated": 4
+                },
+                "missing": 2,
+                "observed": 26,
+                "occurrences": 28,
+                "reasonable_fraction": 0.8461538461538461,
+                "reasonable_observed": 22,
+                "unique_items": 28,
+                "unrelated_fraction": 0.15384615384615385
+              }
+            },
+            "4": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1,
+                  "unrelated": 1
+                },
+                "missing": 8,
+                "observed": 2,
+                "occurrences": 10,
+                "reasonable_fraction": 0.5,
+                "reasonable_observed": 1,
+                "unique_items": 10,
+                "unrelated_fraction": 0.5
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 11,
+                  "strong": 3,
+                  "unrelated": 6
+                },
+                "missing": 0,
+                "observed": 20,
+                "occurrences": 20,
+                "reasonable_fraction": 0.7,
+                "reasonable_observed": 14,
+                "unique_items": 20,
+                "unrelated_fraction": 0.3
+              }
+            },
+            "5": {
+              "option-group": {
+                "labels": {},
+                "missing": 10,
+                "observed": 0,
+                "occurrences": 10,
+                "reasonable_fraction": null,
+                "reasonable_observed": 0,
+                "unique_items": 10,
+                "unrelated_fraction": null
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 15,
+                  "strong": 1,
+                  "unrelated": 4
+                },
+                "missing": 0,
+                "observed": 20,
+                "occurrences": 20,
+                "reasonable_fraction": 0.8,
+                "reasonable_observed": 16,
+                "unique_items": 20,
+                "unrelated_fraction": 0.2
+              }
+            },
+            "6": {
+              "option-group": {
+                "labels": {
+                  "plausible": 2
+                },
+                "missing": 8,
+                "observed": 2,
+                "occurrences": 10,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 2,
+                "unique_items": 10,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 9,
+                  "strong": 4,
+                  "unrelated": 4
+                },
+                "missing": 3,
+                "observed": 17,
+                "occurrences": 20,
+                "reasonable_fraction": 0.7647058823529411,
+                "reasonable_observed": 13,
+                "unique_items": 20,
+                "unrelated_fraction": 0.23529411764705882
+              }
+            },
+            "7": {
+              "option-group": {
+                "labels": {},
+                "missing": 9,
+                "observed": 0,
+                "occurrences": 9,
+                "reasonable_fraction": null,
+                "reasonable_observed": 0,
+                "unique_items": 9,
+                "unrelated_fraction": null
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 12,
+                  "strong": 1,
+                  "unrelated": 3
+                },
+                "missing": 2,
+                "observed": 16,
+                "occurrences": 18,
+                "reasonable_fraction": 0.8125,
+                "reasonable_observed": 13,
+                "unique_items": 18,
+                "unrelated_fraction": 0.1875
+              }
+            },
+            "8": {
+              "option-group": {
+                "labels": {
+                  "strong": 1
+                },
+                "missing": 7,
+                "observed": 1,
+                "occurrences": 8,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 8,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 5,
+                  "strong": 5,
+                  "unrelated": 4
+                },
+                "missing": 2,
+                "observed": 14,
+                "occurrences": 16,
+                "reasonable_fraction": 0.7142857142857143,
+                "reasonable_observed": 10,
+                "unique_items": 16,
+                "unrelated_fraction": 0.2857142857142857
+              }
+            }
+          },
+          "primary_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 5,
+                "strong": 4,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.9,
+              "reasonable_observed": 9,
+              "unique_items": 10,
+              "unrelated_fraction": 0.1
+            },
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 9,
+              "strong": 4,
+              "unrelated": 2
+            },
+            "missing": 0,
+            "observed": 16,
+            "occurrences": 16,
+            "reasonable_fraction": 0.8125,
+            "reasonable_observed": 13,
+            "unique_items": 16,
+            "unrelated_fraction": 0.125
+          },
+          "primary_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 11,
+                "strong": 8,
+                "unrelated": 1
+              },
+              "missing": 0,
+              "observed": 20,
+              "occurrences": 20,
+              "reasonable_fraction": 0.95,
+              "reasonable_observed": 19,
+              "unique_items": 20,
+              "unrelated_fraction": 0.05
+            },
+            "labels": {
+              "plausible": 17,
+              "strong": 11,
+              "unrelated": 4
+            },
+            "missing": 0,
+            "observed": 32,
+            "occurrences": 32,
+            "reasonable_fraction": 0.875,
+            "reasonable_observed": 28,
+            "unique_items": 32,
+            "unrelated_fraction": 0.125
+          },
+          "yield": {
+            "action_groups": 10,
+            "action_prepared": 26,
+            "groups": 16,
+            "independent_feasibility": "unknown",
+            "no_group": 19,
+            "prepared": 35,
+            "unprepared": 55
+          }
+        },
+        "E2": {
+          "all_option_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 12,
+                "strong": 7,
+                "unrelated": 3
+              },
+              "missing": 25,
+              "observed": 22,
+              "occurrences": 47,
+              "reasonable_fraction": 0.8636363636363636,
+              "reasonable_observed": 19,
+              "unique_items": 47,
+              "unrelated_fraction": 0.13636363636363635
+            },
+            "labels": {
+              "plausible": 18,
+              "strong": 9,
+              "unrelated": 5
+            },
+            "missing": 50,
+            "observed": 32,
+            "occurrences": 82,
+            "reasonable_fraction": 0.84375,
+            "reasonable_observed": 27,
+            "unique_items": 82,
+            "unrelated_fraction": 0.15625
+          },
+          "all_option_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 38,
+                "strong": 48,
+                "unrelated": 5
+              },
+              "missing": 3,
+              "observed": 91,
+              "occurrences": 94,
+              "reasonable_fraction": 0.945054945054945,
+              "reasonable_observed": 86,
+              "unique_items": 49,
+              "unrelated_fraction": 0.054945054945054944
+            },
+            "labels": {
+              "plausible": 80,
+              "strong": 63,
+              "unrelated": 18
+            },
+            "missing": 3,
+            "observed": 161,
+            "occurrences": 164,
+            "reasonable_fraction": 0.8881987577639752,
+            "reasonable_observed": 143,
+            "unique_items": 77,
+            "unrelated_fraction": 0.11180124223602485
+          },
+          "explanations": {
+            "labels": {
+              "faithful": 1,
+              "unsupported": 2
+            },
+            "missing": 0,
+            "observed": 3,
+            "occurrences": 3,
+            "reasonable_fraction": 0.0,
+            "reasonable_observed": 0,
+            "unique_items": 3,
+            "unrelated_fraction": 0.0
+          },
+          "matched_A_groups": {
+            "labels": {
+              "plausible": 7,
+              "strong": 5,
+              "unrelated": 3
+            },
+            "missing": 0,
+            "observed": 15,
+            "occurrences": 15,
+            "reasonable_fraction": 0.8,
+            "reasonable_observed": 12,
+            "unique_items": 15,
+            "unrelated_fraction": 0.2
+          },
+          "matched_A_members": {
+            "labels": {
+              "plausible": 14,
+              "strong": 12,
+              "unrelated": 4
+            },
+            "missing": 0,
+            "observed": 30,
+            "occurrences": 30,
+            "reasonable_fraction": 0.8666666666666667,
+            "reasonable_observed": 26,
+            "unique_items": 30,
+            "unrelated_fraction": 0.13333333333333333
+          },
+          "per_option_rank": {
+            "1": {
+              "option-group": {
+                "labels": {
+                  "plausible": 9,
+                  "strong": 4,
+                  "unrelated": 4
+                },
+                "missing": 0,
+                "observed": 17,
+                "occurrences": 17,
+                "reasonable_fraction": 0.7647058823529411,
+                "reasonable_observed": 13,
+                "unique_items": 17,
+                "unrelated_fraction": 0.23529411764705882
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 15,
+                  "strong": 15,
+                  "unrelated": 4
+                },
+                "missing": 0,
+                "observed": 34,
+                "occurrences": 34,
+                "reasonable_fraction": 0.8823529411764706,
+                "reasonable_observed": 30,
+                "unique_items": 34,
+                "unrelated_fraction": 0.11764705882352941
+              }
+            },
+            "2": {
+              "option-group": {
+                "labels": {
+                  "plausible": 5,
+                  "strong": 4
+                },
+                "missing": 6,
+                "observed": 9,
+                "occurrences": 15,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 9,
+                "unique_items": 15,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 12,
+                  "strong": 14,
+                  "unrelated": 3
+                },
+                "missing": 1,
+                "observed": 29,
+                "occurrences": 30,
+                "reasonable_fraction": 0.896551724137931,
+                "reasonable_observed": 26,
+                "unique_items": 30,
+                "unrelated_fraction": 0.10344827586206896
+              }
+            },
+            "3": {
+              "option-group": {
+                "labels": {
+                  "strong": 1
+                },
+                "missing": 12,
+                "observed": 1,
+                "occurrences": 13,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 13,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 11,
+                  "strong": 12,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 26,
+                "occurrences": 26,
+                "reasonable_fraction": 0.8846153846153846,
+                "reasonable_observed": 23,
+                "unique_items": 26,
+                "unrelated_fraction": 0.11538461538461539
+              }
+            },
+            "4": {
+              "option-group": {
+                "labels": {
+                  "plausible": 2
+                },
+                "missing": 7,
+                "observed": 2,
+                "occurrences": 9,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 2,
+                "unique_items": 9,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 10,
+                  "strong": 5,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 18,
+                "occurrences": 18,
+                "reasonable_fraction": 0.8333333333333334,
+                "reasonable_observed": 15,
+                "unique_items": 18,
+                "unrelated_fraction": 0.16666666666666666
+              }
+            },
+            "5": {
+              "option-group": {
+                "labels": {
+                  "unrelated": 1
+                },
+                "missing": 7,
+                "observed": 1,
+                "occurrences": 8,
+                "reasonable_fraction": 0.0,
+                "reasonable_observed": 0,
+                "unique_items": 8,
+                "unrelated_fraction": 1.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 11,
+                  "strong": 4,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 16,
+                "occurrences": 16,
+                "reasonable_fraction": 0.9375,
+                "reasonable_observed": 15,
+                "unique_items": 16,
+                "unrelated_fraction": 0.0625
+              }
+            },
+            "6": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1
+                },
+                "missing": 6,
+                "observed": 1,
+                "occurrences": 7,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 7,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 6,
+                  "strong": 5,
+                  "unrelated": 2
+                },
+                "missing": 1,
+                "observed": 13,
+                "occurrences": 14,
+                "reasonable_fraction": 0.8461538461538461,
+                "reasonable_observed": 11,
+                "unique_items": 14,
+                "unrelated_fraction": 0.15384615384615385
+              }
+            },
+            "7": {
+              "option-group": {
+                "labels": {},
+                "missing": 7,
+                "observed": 0,
+                "occurrences": 7,
+                "reasonable_fraction": null,
+                "reasonable_observed": 0,
+                "unique_items": 7,
+                "unrelated_fraction": null
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 6,
+                  "strong": 6,
+                  "unrelated": 1
+                },
+                "missing": 1,
+                "observed": 13,
+                "occurrences": 14,
+                "reasonable_fraction": 0.9230769230769231,
+                "reasonable_observed": 12,
+                "unique_items": 14,
+                "unrelated_fraction": 0.07692307692307693
+              }
+            },
+            "8": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1
+                },
+                "missing": 5,
+                "observed": 1,
+                "occurrences": 6,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 6,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 9,
+                  "strong": 2,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 12,
+                "occurrences": 12,
+                "reasonable_fraction": 0.9166666666666666,
+                "reasonable_observed": 11,
+                "unique_items": 12,
+                "unrelated_fraction": 0.08333333333333333
+              }
+            }
+          },
+          "primary_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 5,
+                "strong": 3,
+                "unrelated": 2
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.8,
+              "reasonable_observed": 8,
+              "unique_items": 10,
+              "unrelated_fraction": 0.2
+            },
+            "labels": {
+              "plausible": 9,
+              "strong": 4,
+              "unrelated": 4
+            },
+            "missing": 0,
+            "observed": 17,
+            "occurrences": 17,
+            "reasonable_fraction": 0.7647058823529411,
+            "reasonable_observed": 13,
+            "unique_items": 17,
+            "unrelated_fraction": 0.23529411764705882
+          },
+          "primary_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 8,
+                "strong": 10,
+                "unrelated": 2
+              },
+              "missing": 0,
+              "observed": 20,
+              "occurrences": 20,
+              "reasonable_fraction": 0.9,
+              "reasonable_observed": 18,
+              "unique_items": 20,
+              "unrelated_fraction": 0.1
+            },
+            "labels": {
+              "plausible": 15,
+              "strong": 15,
+              "unrelated": 4
+            },
+            "missing": 0,
+            "observed": 34,
+            "occurrences": 34,
+            "reasonable_fraction": 0.8823529411764706,
+            "reasonable_observed": 30,
+            "unique_items": 34,
+            "unrelated_fraction": 0.11764705882352941
+          },
+          "yield": {
+            "action_groups": 10,
+            "action_prepared": 26,
+            "groups": 17,
+            "independent_feasibility": "unknown",
+            "no_group": 18,
+            "prepared": 35,
+            "unprepared": 55
+          }
+        },
+        "E3": {
+          "all_option_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 14,
+                "strong": 5,
+                "unrelated": 3
+              },
+              "missing": 24,
+              "observed": 22,
+              "occurrences": 46,
+              "reasonable_fraction": 0.8636363636363636,
+              "reasonable_observed": 19,
+              "unique_items": 46,
+              "unrelated_fraction": 0.13636363636363635
+            },
+            "labels": {
+              "plausible": 19,
+              "strong": 7,
+              "unrelated": 8
+            },
+            "missing": 42,
+            "observed": 34,
+            "occurrences": 76,
+            "reasonable_fraction": 0.7647058823529411,
+            "reasonable_observed": 26,
+            "unique_items": 76,
+            "unrelated_fraction": 0.23529411764705882
+          },
+          "all_option_members": {
+            "action_admitted": {
+              "labels": {
+                "insufficient-information": 1,
+                "plausible": 42,
+                "strong": 37,
+                "unrelated": 8
+              },
+              "missing": 4,
+              "observed": 88,
+              "occurrences": 92,
+              "reasonable_fraction": 0.8977272727272727,
+              "reasonable_observed": 79,
+              "unique_items": 50,
+              "unrelated_fraction": 0.09090909090909091
+            },
+            "labels": {
+              "insufficient-information": 4,
+              "plausible": 69,
+              "strong": 50,
+              "unrelated": 25
+            },
+            "missing": 4,
+            "observed": 148,
+            "occurrences": 152,
+            "reasonable_fraction": 0.8040540540540541,
+            "reasonable_observed": 119,
+            "unique_items": 75,
+            "unrelated_fraction": 0.16891891891891891
+          },
+          "explanations": {
+            "labels": {
+              "faithful": 1,
+              "unsupported": 1
+            },
+            "missing": 0,
+            "observed": 2,
+            "occurrences": 2,
+            "reasonable_fraction": 0.0,
+            "reasonable_observed": 0,
+            "unique_items": 2,
+            "unrelated_fraction": 0.0
+          },
+          "matched_A_groups": {
+            "labels": {
+              "plausible": 10,
+              "strong": 2,
+              "unrelated": 4
+            },
+            "missing": 0,
+            "observed": 16,
+            "occurrences": 16,
+            "reasonable_fraction": 0.75,
+            "reasonable_observed": 12,
+            "unique_items": 16,
+            "unrelated_fraction": 0.25
+          },
+          "matched_A_members": {
+            "labels": {
+              "insufficient-information": 1,
+              "plausible": 12,
+              "strong": 15,
+              "unrelated": 3
+            },
+            "missing": 1,
+            "observed": 31,
+            "occurrences": 32,
+            "reasonable_fraction": 0.8709677419354839,
+            "reasonable_observed": 27,
+            "unique_items": 32,
+            "unrelated_fraction": 0.0967741935483871
+          },
+          "per_option_rank": {
+            "1": {
+              "option-group": {
+                "labels": {
+                  "plausible": 9,
+                  "strong": 3,
+                  "unrelated": 5
+                },
+                "missing": 0,
+                "observed": 17,
+                "occurrences": 17,
+                "reasonable_fraction": 0.7058823529411765,
+                "reasonable_observed": 12,
+                "unique_items": 17,
+                "unrelated_fraction": 0.29411764705882354
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 15,
+                  "strong": 14,
+                  "unrelated": 5
+                },
+                "missing": 0,
+                "observed": 34,
+                "occurrences": 34,
+                "reasonable_fraction": 0.8529411764705882,
+                "reasonable_observed": 29,
+                "unique_items": 34,
+                "unrelated_fraction": 0.14705882352941177
+              }
+            },
+            "2": {
+              "option-group": {
+                "labels": {
+                  "plausible": 6,
+                  "strong": 2,
+                  "unrelated": 1
+                },
+                "missing": 6,
+                "observed": 9,
+                "occurrences": 15,
+                "reasonable_fraction": 0.8888888888888888,
+                "reasonable_observed": 8,
+                "unique_items": 15,
+                "unrelated_fraction": 0.1111111111111111
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 11,
+                  "strong": 13,
+                  "unrelated": 4
+                },
+                "missing": 1,
+                "observed": 29,
+                "occurrences": 30,
+                "reasonable_fraction": 0.8275862068965517,
+                "reasonable_observed": 24,
+                "unique_items": 30,
+                "unrelated_fraction": 0.13793103448275862
+              }
+            },
+            "3": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1,
+                  "strong": 1,
+                  "unrelated": 1
+                },
+                "missing": 8,
+                "observed": 3,
+                "occurrences": 11,
+                "reasonable_fraction": 0.6666666666666666,
+                "reasonable_observed": 2,
+                "unique_items": 11,
+                "unrelated_fraction": 0.3333333333333333
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 2,
+                  "plausible": 10,
+                  "strong": 7,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 22,
+                "occurrences": 22,
+                "reasonable_fraction": 0.7727272727272727,
+                "reasonable_observed": 17,
+                "unique_items": 22,
+                "unrelated_fraction": 0.13636363636363635
+              }
+            },
+            "4": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1,
+                  "unrelated": 1
+                },
+                "missing": 7,
+                "observed": 2,
+                "occurrences": 9,
+                "reasonable_fraction": 0.5,
+                "reasonable_observed": 1,
+                "unique_items": 9,
+                "unrelated_fraction": 0.5
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 7,
+                  "strong": 6,
+                  "unrelated": 5
+                },
+                "missing": 0,
+                "observed": 18,
+                "occurrences": 18,
+                "reasonable_fraction": 0.7222222222222222,
+                "reasonable_observed": 13,
+                "unique_items": 18,
+                "unrelated_fraction": 0.2777777777777778
+              }
+            },
+            "5": {
+              "option-group": {
+                "labels": {
+                  "strong": 1
+                },
+                "missing": 7,
+                "observed": 1,
+                "occurrences": 8,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 8,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 7,
+                  "strong": 6,
+                  "unrelated": 3
+                },
+                "missing": 0,
+                "observed": 16,
+                "occurrences": 16,
+                "reasonable_fraction": 0.8125,
+                "reasonable_observed": 13,
+                "unique_items": 16,
+                "unrelated_fraction": 0.1875
+              }
+            },
+            "6": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1
+                },
+                "missing": 5,
+                "observed": 1,
+                "occurrences": 6,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 6,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "insufficient-information": 1,
+                  "plausible": 4,
+                  "strong": 2,
+                  "unrelated": 4
+                },
+                "missing": 1,
+                "observed": 11,
+                "occurrences": 12,
+                "reasonable_fraction": 0.5454545454545454,
+                "reasonable_observed": 6,
+                "unique_items": 12,
+                "unrelated_fraction": 0.36363636363636365
+              }
+            },
+            "7": {
+              "option-group": {
+                "labels": {
+                  "plausible": 1
+                },
+                "missing": 4,
+                "observed": 1,
+                "occurrences": 5,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 1,
+                "unique_items": 5,
+                "unrelated_fraction": 0.0
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 8,
+                  "strong": 1,
+                  "unrelated": 1
+                },
+                "missing": 0,
+                "observed": 10,
+                "occurrences": 10,
+                "reasonable_fraction": 0.9,
+                "reasonable_observed": 9,
+                "unique_items": 10,
+                "unrelated_fraction": 0.1
+              }
+            },
+            "8": {
+              "option-group": {
+                "labels": {},
+                "missing": 5,
+                "observed": 0,
+                "occurrences": 5,
+                "reasonable_fraction": null,
+                "reasonable_observed": 0,
+                "unique_items": 5,
+                "unrelated_fraction": null
+              },
+              "option-member": {
+                "labels": {
+                  "plausible": 7,
+                  "strong": 1
+                },
+                "missing": 2,
+                "observed": 8,
+                "occurrences": 10,
+                "reasonable_fraction": 1.0,
+                "reasonable_observed": 8,
+                "unique_items": 10,
+                "unrelated_fraction": 0.0
+              }
+            }
+          },
+          "primary_groups": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 6,
+                "strong": 2,
+                "unrelated": 2
+              },
+              "missing": 0,
+              "observed": 10,
+              "occurrences": 10,
+              "reasonable_fraction": 0.8,
+              "reasonable_observed": 8,
+              "unique_items": 10,
+              "unrelated_fraction": 0.2
+            },
+            "labels": {
+              "plausible": 9,
+              "strong": 3,
+              "unrelated": 5
+            },
+            "missing": 0,
+            "observed": 17,
+            "occurrences": 17,
+            "reasonable_fraction": 0.7058823529411765,
+            "reasonable_observed": 12,
+            "unique_items": 17,
+            "unrelated_fraction": 0.29411764705882354
+          },
+          "primary_members": {
+            "action_admitted": {
+              "labels": {
+                "plausible": 8,
+                "strong": 9,
+                "unrelated": 3
+              },
+              "missing": 0,
+              "observed": 20,
+              "occurrences": 20,
+              "reasonable_fraction": 0.85,
+              "reasonable_observed": 17,
+              "unique_items": 20,
+              "unrelated_fraction": 0.15
+            },
+            "labels": {
+              "plausible": 15,
+              "strong": 14,
+              "unrelated": 5
+            },
+            "missing": 0,
+            "observed": 34,
+            "occurrences": 34,
+            "reasonable_fraction": 0.8529411764705882,
+            "reasonable_observed": 29,
+            "unique_items": 34,
+            "unrelated_fraction": 0.14705882352941177
+          },
+          "yield": {
+            "action_groups": 10,
+            "action_prepared": 26,
+            "groups": 17,
+            "independent_feasibility": "unknown",
+            "no_group": 18,
+            "prepared": 35,
+            "unprepared": 55
+          }
+        }
+      },
+      "controls": {
+        "deterministic_source_controls": 12,
+        "new_semantic_control_grades": 0,
+        "reserved": 30,
+        "unprepared_origins": 18
+      },
+      "eligible_people": 155,
+      "explanation_audit": {
+        "path": "docs/team-recommender/receipts/d3-explanation-evidence-audit.json",
+        "sha256": "9efe8d7472506cfdc34d4c5331d9fd37d4840c8c8568f38878743e8caa37f2e2"
+      },
+      "holdout_evaluated_scopes": 0,
+      "human_judgments": 0,
+      "paired": {
+        "A-E0->E0": {
+          "cluster_bootstrap_95_percentile": [
+            -0.017391304347826087,
+            0.15217391304347827
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": 0.0625,
+          "scopes": 24,
+          "seed": 20260910,
+          "source_groups": 23
+        },
+        "A-E0-C->E0-C": {
+          "cluster_bootstrap_95_percentile": [
+            -0.10789473684210525,
+            0.0738095238095238
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": -0.01583333333333333,
+          "scopes": 20,
+          "seed": 20260910,
+          "source_groups": 19
+        },
+        "A-E1->E1": {
+          "cluster_bootstrap_95_percentile": [
+            -0.06999999999999999,
+            0.14166666666666666
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": 0.043650793650793655,
+          "scopes": 21,
+          "seed": 20260910,
+          "source_groups": 20
+        },
+        "A-E2->E2": {
+          "cluster_bootstrap_95_percentile": [
+            -0.031818181818181815,
+            0.17272727272727273
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": 0.06666666666666667,
+          "scopes": 22,
+          "seed": 20260910,
+          "source_groups": 22
+        },
+        "A-E3->E3": {
+          "cluster_bootstrap_95_percentile": [
+            -0.20384615384615384,
+            0.04285714285714286
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": -0.08,
+          "scopes": 25,
+          "seed": 20260910,
+          "source_groups": 24
+        },
+        "E0->E0-C": {
+          "cluster_bootstrap_95_percentile": [
+            -0.075,
+            0.048
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": -0.014583333333333335,
+          "scopes": 24,
+          "seed": 20260910,
+          "source_groups": 23
+        },
+        "E0->E1": {
+          "cluster_bootstrap_95_percentile": [
+            -0.07291666666666667,
+            0.07916666666666666
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": 0.006250000000000001,
+          "scopes": 24,
+          "seed": 20260910,
+          "source_groups": 23
+        },
+        "E0->E2": {
+          "cluster_bootstrap_95_percentile": [
+            -0.07600000000000001,
+            0.14166666666666666
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": 0.035416666666666666,
+          "scopes": 24,
+          "seed": 20260910,
+          "source_groups": 23
+        },
+        "E0->E3": {
+          "cluster_bootstrap_95_percentile": [
+            -0.1625,
+            0.032608695652173905
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": -0.0625,
+          "scopes": 24,
+          "seed": 20260910,
+          "source_groups": 23
+        },
+        "E0-C->E1": {
+          "cluster_bootstrap_95_percentile": [
+            -0.07419354838709678,
+            0.09531250000000001
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": 0.012500000000000002,
+          "scopes": 32,
+          "seed": 20260910,
+          "source_groups": 31
+        },
+        "E1->E2": {
+          "cluster_bootstrap_95_percentile": [
+            -0.03428571428571429,
+            0.1284313725490196
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": 0.048484848484848485,
+          "scopes": 33,
+          "seed": 20260910,
+          "source_groups": 32
+        },
+        "E2->E3": {
+          "cluster_bootstrap_95_percentile": [
+            -0.1590909090909091,
+            -0.02604166666666668
+          ],
+          "draws": 5000,
+          "limitation": "Observed-label development estimate; missing labels and abstentions reported separately; no independent or human validation.",
+          "mean_difference": -0.0893939393939394,
+          "scopes": 33,
+          "seed": 20260910,
+          "source_groups": 32
+        }
+      },
+      "planned_rollout_scopes": 150,
+      "prepared_child_scopes": 3,
+      "prepared_parent_count": 35,
+      "real_prepared_development_scopes": 35,
+      "real_prepared_rollout_scopes": 18,
+      "rollout_50_ready": 8,
+      "scientific_reservations": 90,
+      "selected_representation": null,
+      "selection_checks": {
+        "E1": {
+          "paired_relevance_gain_at_least_5pp": false,
+          "primary_grade_coverage": true,
+          "reasonable_primary_yield_preserved": true,
+          "top5_grade_coverage": true,
+          "unrelated_no_worse": true,
+          "useful_group_yield_preserved": true
+        },
+        "E2": {
+          "paired_relevance_gain_at_least_5pp": false,
+          "primary_grade_coverage": true,
+          "reasonable_primary_yield_preserved": true,
+          "top5_grade_coverage": true,
+          "unrelated_no_worse": true,
+          "useful_group_yield_preserved": true
+        },
+        "E3": {
+          "paired_relevance_gain_at_least_5pp": false,
+          "primary_grade_coverage": true,
+          "reasonable_primary_yield_preserved": true,
+          "top5_grade_coverage": true,
+          "unrelated_no_worse": true,
+          "useful_group_yield_preserved": true
+        }
+      },
+      "source_aspects": 61,
+      "unprepared_scopes": 55
+    },
+    "stage_status": "stage2-D3-complete-REVISE",
+    "unresolved": [
+      "No new representation meets the predeclared >=5 pp paired relevance gain; all primary/full automatic unrelated-member rates remain above the full 5% target.",
+      "Top-five reasonable precision remains below 80%; missing alternative group judgments and unknown independent feasibility limit usefulness/yield claims.",
+      "Two of eight explanation audit occurrences have unresolved missing-quote projection gaps; two additional complete-quote audits are model-unsupported. Raw results remain preserved.",
+      "55/90 scientific reservations remain unprepared, 18/30 control origins unprepared, 18/150 rollout ingredients ready; D3 source expansion was prohibited.",
+      "One of four order swaps conflicted; 93 selected wanted items were not submitted (90 envelope, two complete-evidence bounds, one historical paid-failed item).",
+      "No returned human judgments; existing 20-item development packet unchanged with historical exposure/context limitations; 20 final items reserved.",
+      "No full E2E/Playwright/accessibility, physical browser, sealed-holdout quality or production gates run. No Stage 3 candidate or authority."
+    ],
+    "stage2_complete_meaning": "Authorized bounded automated D3 comparison is complete, with no demonstrated new winner; this does not mean quality gates passed or Stage 3 is approved.",
+    "next_stage_requires": "User review and explicit Stage 3 approval with an accepted candidate; no automatic new model/tuning campaign"
+  },
+  "decision_closeout": {
+    "source_head": "b27304a4c13d8d558f67e7d829461c822df5507f",
+    "nominee_reproduction": {
+      "path": "docs/team-recommender/receipts/closeout-E2-reproduction.json",
+      "sha256": "ac07f1cdc32bf2700b61b7a0fe48a43517463f72c73ff2ee878879468344f36b"
+    },
+    "evidence_audit": {
+      "path": "docs/team-recommender/receipts/closeout-evidence-coverage.json",
+      "sha256": "847fde99e1235a40a835d0707810cf9af5965f2641a2bde469e5ae7686fdaa78"
+    },
+    "projection_dry_run": {
+      "path": "docs/team-recommender/receipts/closeout-projection-dry-run.json",
+      "sha256": "87e94176d4fd8c91922b6b4ff2a41f7ce1f86c1e983940fa1872f8606f3f4b10"
+    },
+    "source_inventory": {
+      "path": "docs/team-recommender/receipts/closeout-source-accounting.json",
+      "sha256": "c817b269973ab68a372bbc0a183d7f5c622c4b0d3304abafde83403bdbcee3db"
+    },
+    "ledger": {
+      "path": "docs/team-recommender/receipts/closeout-ledger-reconciliation.json",
+      "sha256": "e3d25ad23aef99ed986d9e77b8d2c9f5ef54bc2ff97439132b25a803eda0499a"
+    },
+    "new_paid_calls": 0,
+    "new_judgments": 0,
+    "new_fits": 0,
+    "source_retrievals": 0,
+    "new_human_items": 0,
+    "production_mutations": 0,
+    "explanation_changes": 0,
+    "complete_actual_judge_items": 71,
+    "incomplete_actual_judge_items": 259,
+    "missing_judge_items": 132,
+    "new_source_scope_preparations": 0,
+    "groups_and_rankings_unchanged": true,
+    "preservation": {
+      "path": "docs/team-recommender/receipts/closeout-preservation.json",
+      "sha256": "954d28e51cd59a4215d366278cb932ea79fcf47cea3c54087c8748de73e58543"
+    }
+  }
 }
