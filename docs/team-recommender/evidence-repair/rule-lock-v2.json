@@ -1,0 +1,18 @@
+{
+  "version": 2,
+  "previous_lock": "docs/team-recommender/evidence-repair/rule-lock-v1.json",
+  "scientific_rule_commit": "88731a08d67d1950c8c7026f98c7e864dae89af6",
+  "reason": "The first fixed-rule run exposed an implementation violation of its existing facet-only exclusion: Search called controlled extracted program_area_labels/document_program_areas authoritative passages. The parser stores canonical discovery labels without contextual quotations. This correction classifies both fields as derived in all shared source/admission paths. No threshold, concept, profile or source text changes. First outputs/failure remain preserved; subsequent observations are diagnostic, never independent confirmation.",
+  "initial_semantic_groups": 0,
+  "initial_rollout150_groups": 4,
+  "original_rule_unchanged": true,
+  "operational_change": "Memoize identical group-to-source predicates and prefix lookups; preserve every returned evidence field.",
+  "files": {
+    "assets/search-retrieval.js": "f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a",
+    "assets/team-matcher.js": "63b71195cc2b53168c2bec9646aed1c7d3c46ef1d4e8be8da0e572890c8b53d9",
+    "assets/shared-team-engine.js": "9d2841cef749a686d43d1790160ca2955e4ac2f91547e3840d82c99ea14e7a1d",
+    "assets/opportunity-team.js": "55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+  },
+  "further_scientific_tuning_authorized": false,
+  "tests": 65
+}

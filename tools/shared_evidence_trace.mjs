@@ -4,6 +4,7 @@ import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const root='outputs/team-recommender-post-audit/';
+const prefix=process.argv.includes('--repaired')?'repaired':'baseline';
 const c=vm.createContext({Date});
 for(const p of ['assets/submission-schedule.js','assets/search-query.js','assets/search-retrieval.js','assets/team-matcher.js','data/opportunities.js','data/subtopics.js','data/researcher_directory.js','data/faculty_matches.js']) {
  let text=fs.readFileSync(p,'utf8');
@@ -27,7 +28,7 @@ for(const j of judgments.filter(x=>x.kind==='call_person')) {
  rows.push({key:j.key,scope_id:j.scope_id,person_id:pid,name:person.name,verdict:j.verdict,trace,group_decision:outcome});
 }
 const result={baseline:'adedd242dc727d85bc2db42776abce5132c882b8',clock:saved.clock,unique_pairs:rows.length,provider_calls:0,rows};
-fs.writeFileSync('outputs/team-recommender-evidence-repair/baseline-traces.json',JSON.stringify(result,null,2)+'\n');
-const compact=rows.map(r=>({scope:r.scope_id,id:r.person_id,name:r.name,verdict:r.verdict,score:r.trace.fit?.score,strong:r.trace.fit?.strong,connections:r.trace.phrases.filter(x=>x.evidence).map(x=>({phrase:x.phrase,...x.evidence,fields:[...new Set(x.locations.flatMap(l=>l.fields.map(f=>f.field)))]}))}));
-fs.writeFileSync('outputs/team-recommender-evidence-repair/baseline-compact.json',JSON.stringify(compact,null,2)+'\n');
-console.log(JSON.stringify({pairs:rows.length,sha256:createHash('sha256').update(fs.readFileSync('outputs/team-recommender-evidence-repair/baseline-traces.json')).digest('hex')}));
+fs.writeFileSync(`outputs/team-recommender-evidence-repair/${prefix}-traces.json`,JSON.stringify(result,null,2)+'\n',{flag:'wx'});
+const compact=rows.map(r=>({scope:r.scope_id,id:r.person_id,name:r.name,verdict:r.verdict,score:r.trace.fit?.score,strong:r.trace.fit?.strong,automatic:r.trace.fit?.automaticEligible,supported:r.trace.fit?.supportedConnections,connections:r.trace.phrases.filter(x=>x.evidence).map(x=>({phrase:x.phrase,...x.evidence,fields:[...new Set(x.locations.flatMap(l=>l.fields.map(f=>f.field)))]}))}));
+fs.writeFileSync(`outputs/team-recommender-evidence-repair/${prefix}-compact.json`,JSON.stringify(compact,null,2)+'\n');
+console.log(JSON.stringify({pairs:rows.length,sha256:createHash('sha256').update(fs.readFileSync(`outputs/team-recommender-evidence-repair/${prefix}-traces.json`)).digest('hex')}));

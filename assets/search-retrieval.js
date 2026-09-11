@@ -47,17 +47,17 @@
         ? [
             ["child_title", record.title || "", true],
             ["child_summary", record.description || record.summary || "", true],
-            ["authoritative_program_area", (
+            ["derived_program_area", (
               record.program_area_labels || record.document_program_areas || []
-            ).join(" "), true],
+            ).join(" "), false],
             ["child_topic", (record.topic_areas || []).join(" "), false],
           ]
         : [
             ["parent_title", record.title || "", true],
             ["parent_description", record.description || "", true],
-            ["authoritative_program_area", (
+            ["derived_program_area", (
               record.program_area_labels || record.document_program_areas || []
-            ).join(" "), true],
+            ).join(" "), false],
             ["authoritative_document_scope", authoritativeDocumentScopeText, true],
             ["citation_source_evidence", record.document_search_text || "", !searchV2],
             ["topic_area", (record.topic_areas || []).join(" "), false],
@@ -296,6 +296,7 @@
 
   // Shared source evidence, independent of Search's posting lists and network
   // orchestration. Only the requested record is prepared by reverse matching.
+  const scientificGroupKeys = new WeakMap();
   function createScientificContext(record, queryApi) {
     const tokenize = value => sharedScopeTokens(value, queryApi);
     const fields = fieldsForRecord(record, authoritativeDocumentScopeFacts(record), true);
@@ -323,13 +324,20 @@
       protected_hypersonic: 'protectedHypersonicEvidence', technical_separation: 'technicalSeparationEvidence',
       controlled_compound: 'controlledCompoundEvidence',
     };
-    function matchGroup(group, clause) {
+    const vocabulary = [...new Set(clauses.flatMap(clause => [...clause.positions.keys()]))];
+    const relatedCache = new Map(), groupCache = new Map();
+    const relatedTerms = requirement => {
+      if (!relatedCache.has(requirement)) relatedCache.set(requirement, vocabulary.filter(term=>scopeTermsRelated(requirement,term)));
+      return relatedCache.get(requirement);
+    };
+    const fieldMatch = (clause, requirements, options={}) => fieldScopeMatch(clause,requirements,{...options,relatedTerms});
+    function matchGroupUncached(group, clause) {
       if (clause.blocked || group.role === 'program_or_agency_qualifier') return null;
       if (group.conceptId && !group.conceptId.startsWith('literal:') && !clause.conceptIds.has(group.conceptId)) return null;
       const policy = policyFunctions[group.evidencePolicy];
       if (policy && !clause.policies[policy](0, policy === 'controlledCompoundEvidence' ? group.evidencePhrases : group)) return null;
       const requirements = tokenize(group.source || '');
-      const direct = requirements.length ? fieldScopeMatch(clause, requirements, {exactShort: group.exactIndexedAcronym === true}) : null;
+      const direct = requirements.length ? fieldMatch(clause, requirements, {exactShort: group.exactIndexedAcronym === true}) : null;
       if (group.exactIndexedAcronym && group.expansion?.kind !== 'contextual_acronym'
         && !new RegExp('\\b' + String(group.source).toUpperCase() + '\\b').test(clause.value)) return null;
       let hit = direct;
@@ -339,13 +347,20 @@
           : group.expansion?.kind === 'contextual_acronym' ? [tokenize(group.expansion.phrase)]
           : Number(group.minimumEvidence || 0) <= 1 ? (group.terms || []).map(t => [t.term]) : [];
         for (const alternative of alternatives) {
-          hit = fieldScopeMatch(clause, alternative.flatMap(tokenize)); if (hit) break;
+          hit = fieldMatch(clause, alternative.flatMap(tokenize)); if (hit) break;
         }
       }
       if (!hit) return null;
       return {...hit, conceptId: group.conceptId || 'literal:' + group.source, role: group.role || 'substantive',
         source: group.source, evidencePolicy: group.evidencePolicy || 'literal',
         token_positions: hit.matchedTerms.map(term => ({term, positions: clause.positions.get(term) || []}))};
+    }
+    function matchGroup(group, clause) {
+      let key=scientificGroupKeys.get(group);
+      if (!key) {key=JSON.stringify(group);scientificGroupKeys.set(group,key);}
+      let matches=groupCache.get(key);
+      if (!matches) {matches=new Map();for(const c of clauses){const hit=matchGroupUncached(group,c);if(hit)matches.set(c,hit);}groupCache.set(key,matches);}
+      return matches.get(clause)||null;
     }
     function connections(groups) {
       const result = [];
@@ -1129,16 +1144,8 @@
           title,
         }));
       });
-      (record.program_area_labels || record.document_program_areas || []).forEach((value, index) => {
-        passages.push(atomicFieldedPassage({
-          documentId,
-          field: "authoritative_program_area",
-          value,
-          unit: `entry:${index + 1}`,
-          fields: [titleField, "authoritative_program_area"],
-          title,
-        }));
-      });
+      // Derived program labels remain in retrieval postings, not affirmative
+      // passages. Original scientific title/description/cited facts remain here.
       if (!child) authoritativeDocumentScopeByDocument[documentId].forEach((fact, factIndex) => {
         boundedPassageWindows(fact.value).forEach(passage => {
           passages.push(atomicFieldedPassage({
@@ -1248,7 +1255,6 @@
     const documentNarrativeSentences = records.map((record, documentId) => shouldPrepareDocument(documentId) ? [
       record.title || "",
       record.description || record.summary || "",
-      ...(record.program_area_labels || []),
       ...authoritativeDocumentScopeByDocument[documentId].map(fact => fact.value),
     ].join(". ").split(/(?<=[.!?])\s+|…+|[\n\r]+/).map(value => (
       new Set(scopeTokens(value))
@@ -1256,7 +1262,6 @@
     const documentNarrativeTokens = records.map((record, documentId) => shouldPrepareDocument(documentId) ? queryApi.tokenize([
       record.title || "",
       record.description || record.summary || "",
-      ...(record.program_area_labels || []),
       ...authoritativeDocumentScopeByDocument[documentId].map(fact => fact.value),
     ].join(". ")) : []);
     const topicDocuments = new Map();

@@ -253,7 +253,7 @@ test("fielded scoring rewards title phrases and compact proximity", () => {
   assert.equal(result.evidence[0].highestContributingPassage.field, "parent_title");
 });
 
-test("fielded scoring treats authoritative parent program areas as a distinct field", () => {
+test("derived program labels cannot establish affirmative scientific scope without a source passage", () => {
   const apis = loadApis();
   const scoped = record("scope", "General research program", "Supports scientific research.");
   scoped.document_program_areas = ["Seasonal thermal storage commercialization"];
@@ -268,12 +268,8 @@ test("fielded scoring treats authoritative parent program areas as a distinct fi
   });
   const result = engine.score("seasonal thermal storage commercialization", { evidence: true });
 
-  assert.ok(result.scores[0] > 0);
+  assert.equal(result.scores[0], 0, "controlled extracted labels are discovery terms, not contextual source evidence");
   assert.equal(result.scores[1], 0, "partial parent prose must not satisfy complete intent");
-  assert.equal(
-    result.evidence[0].highestContributingPassage.field,
-    "authoritative_program_area",
-  );
 });
 
 test("fielded Strong admission cannot combine separate parent program tracks", () => {

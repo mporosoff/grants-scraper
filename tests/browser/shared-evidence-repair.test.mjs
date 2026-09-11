@@ -10,8 +10,10 @@ function fit(source, claims, summary='') {
 }
 test('derived facets and excluded scope statements never supply scientific membership',()=>{
  const claims=[['Artificial intelligence','Develops machine learning methods for materials.']];
- for(const source of [
-  {description:'Marine biological collections.',topic_areas:['Artificial intelligence and machine learning']},
+  for(const source of [
+    {description:'Marine biological collections.',topic_areas:['Artificial intelligence and machine learning']},
+    {description:'Marine biological collections.',document_program_areas:['artificial intelligence']},
+    {description:'Marine biological collections.',program_area_labels:['artificial intelligence']},
   {description:'We do not support artificial intelligence research.'},
   {description:'This program aligns with artificial intelligence administration priorities.'},
  ]) assert(!fit(source,claims)?.automaticEligible);
