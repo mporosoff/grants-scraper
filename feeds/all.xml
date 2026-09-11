@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-09T13:59:52Z</updated>
+  <updated>2026-09-11T14:29:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -26,6 +26,15 @@
     <summary>Indian Health Service | Estimated Application 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
   </entry>
   <entry>
+    <title>Native Public Health Resilience</title>
+    <link href="https://www.grants.gov/search-results-detail/363844"/>
+    <id>urn:funding-finder:grants-gov:363844</id>
+    <updated>2028-04-28T00:00:00Z</updated>
+    <author><name>Indian Health Service</name></author>
+    <category term="Public health"/>
+    <summary>Indian Health Service | Estimated Application 2028-06-30 | New cohort of NPHR awards designed to fund Tribes and Tribal Orgs to provide Essential Public Health Services</summary>
+  </entry>
+  <entry>
     <title>Public Health Nursing</title>
     <link href="https://www.grants.gov/search-results-detail/363495"/>
     <id>urn:funding-finder:grants-gov:363495</id>
@@ -36,6 +45,24 @@
     <summary>Indian Health Service | Estimated Application 2028-05-01 | The goal of this cooperative agreement is to improve the overall health and wellness of American Indian and Alaska Native men through a culturally responsive Public Health Nursing (PHN) case management and care navigation model. PHNs will engage men in preventive health and wellness services, increase access to care, promote early identification and management of health conditions, and support hea…</summary>
   </entry>
   <entry>
+    <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363841"/>
+    <id>urn:funding-finder:grants-gov:363841</id>
+    <updated>2027-12-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2028-01-25 | The National Institute of Neurological Disorders and Stroke (NINDS) at the National Institutes of Health (NIH) seeks to continue support for the infrastructure of the NIH Stroke Clinical Trials Network (NIH StrokeNet). The NIH StrokeNet conducts clinical trials focused on advancing acute stroke treatment, stroke prevention, and stroke recovery and rehabilitation across the lifespan. Its mission is…</summary>
+  </entry>
+  <entry>
+    <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - Regional Coordinating Stroke Centers (RCCs)</title>
+    <link href="https://www.grants.gov/search-results-detail/363838"/>
+    <id>urn:funding-finder:grants-gov:363838</id>
+    <updated>2027-12-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2028-01-25 | The National Institute of Neurological Disorders and Stroke (NINDS) at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the NIH Stroke Clinical Trials Network (NIH StrokeNet). The program will encourage applications for network regional clinical enrollment coordinating centers (RCC's) to support the NIH StrokeNet clinical trial network. The NIH StrokeNet c…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
     <link href="https://www.grants.gov/search-results-detail/362562"/>
     <id>urn:funding-finder:grants-gov:362562</id>
@@ -43,6 +70,26 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2028-01-27 | The Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program supports resource-limited institutions to develop and strengthen their capacity to conduct rigorous and reproducible biomedical research. Eligible organizations are expected to propose plans based on identified needs in one or more of the following areas: biomedical research environment, sponsore…</summary>
+  </entry>
+  <entry>
+    <title>Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT) Infrastructure - Clinical Coordinating Center (CCC) &amp; Data Coordinating Center (DCC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363839"/>
+    <id>urn:funding-finder:grants-gov:363839</id>
+    <updated>2027-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-11-01 | The National Institute of Neurological Disorders and Stroke (NINDS), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT). NeuroNEXT conducts clinical trials and biomarker validation studies for neurological disorders in adult and pediatric populations. By offering infrastructure, exper…</summary>
+  </entry>
+  <entry>
+    <title>Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT) Infrastructure - Clinical Research Sites (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363835"/>
+    <id>urn:funding-finder:grants-gov:363835</id>
+    <updated>2027-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-11-01 | The National Institute of Neurological Disorders and Stroke (NINDS), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT). NeuroNEXT conducts clinical trials and biomarker validation studies for neurological disorders in adult and pediatric populations. By offering infrastructure, exper…</summary>
   </entry>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -292,6 +339,38 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the…</summary>
+  </entry>
+  <entry>
+    <title>Undiagnosed Diseases Network (UDN) Clinical and Data Coordinating Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363836"/>
+    <id>urn:funding-finder:grants-gov:363836</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a new phase of the Undiagnosed Diseases Network (UDN) to advance diagnosis for individuals with previously undiagnosed diseases and undiagnosed diseases research. This phase would emphasize participant and family engagement, provider engagement, use of NIH and non-NIH resources, education, community engagement, research innovation and discovery, and broader implementation …</summary>
+  </entry>
+  <entry>
+    <title>Undiagnosed Diseases Network (UDN) Clinical Networks of Diagnostic Excellence</title>
+    <link href="https://www.grants.gov/search-results-detail/363834"/>
+    <id>urn:funding-finder:grants-gov:363834</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support multiple clinical Networks of Diagnostic Excellence (NODEs) as part of the next phase of the Undiagnosed Diseases Network (UDN). Unlike prior phases, clinical NODEs are expected to function as geographically distributed regional clinical networks rather than single-site centers. Each clinical NODE would establish and lead a regional network built on existing partnerships w…</summary>
+  </entry>
+  <entry>
+    <title>Undiagnosed Diseases Network (UDN) Diagnostic Research Innovation Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363837"/>
+    <id>urn:funding-finder:grants-gov:363837</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a Diagnostic Research Innovation Center (DRIC) for the next phase of the Undiagnosed Diseases Network (UDN). The new Network is expected to include a Clinical and Data Coordinating Center (CDCC), geographically distributed clinical Networks of Diagnostic Excellence (NODEs), the NIH Undiagnosed Diseases Program (UDP), a DRIC, the UDN Foundation, patient advocacy organizatio…</summary>
   </entry>
   <entry>
     <title>Strengthening Services to Prevent the Infectious Disease Consequences of Drug Use</title>
@@ -659,6 +738,18 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
   </entry>
   <entry>
+    <title>NIDA Avenir Program: Fundamental Mechanistic Research in Addiction Science</title>
+    <link href="https://www.grants.gov/search-results-detail/363842"/>
+    <id>urn:funding-finder:grants-gov:363842</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-26 | Avenir, the French word for "future," reflects NIDA's commitment to developing the next generation of leaders in addiction science. Since 2015, the Avenir Program has supported exceptionally creative early stage investigators (ESIs) in launching innovative research programs. NIDA is now expanding this program to support bold mechanistic research across a broader range of addiction science, includi…</summary>
+  </entry>
+  <entry>
     <title>BRAIN Initiative: Data Archives for the BRAIN Initiative</title>
     <link href="https://www.grants.gov/search-results-detail/361448"/>
     <id>urn:funding-finder:grants-gov:361448</id>
@@ -688,6 +779,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
+  </entry>
+  <entry>
+    <title>Homeless Veterans’ Reintegration Program (HVRP), Incarcerated Veterans’ Transition Program (IVTP), and the Homeless Women Veterans' and Homeless Veterans' with Children Reintegration Grant Program (HWVHVWC) (referred to collectively</title>
+    <link href="https://www.grants.gov/search-results-detail/363845"/>
+    <id>urn:funding-finder:grants-gov:363845</id>
+    <updated>2027-01-29T00:00:00Z</updated>
+    <author><name>Veterans Employment and Training Service</name></author>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Veterans Employment and Training Service | Estimated Application 2027-03-17 | HVRP is an employment-focused, competitive federal grant program intended to enable veterans experiencing or at risk of homelessness to reach their full employment potential and obtain high-quality career outcomes. HVRP is aligned with the priorities set forth by the President's Executive Orders to deliver comprehensive employment services to eligible veterans to assist these veterans in transitio…</summary>
   </entry>
   <entry>
     <title>Surveillance and Case Control Study of Stillbirth and Birth Defects (SUCCSSBD)</title>
@@ -848,107 +949,5 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Technology development"/>
     <summary>Health Resources and Services Administration | Estimated Application 2027-03-17 | The purpose of the AIM Capacity program is to strengthen state, jurisdiction, and Tribal capacity to implement, expand, and sustain AIM PSBs and associated resources across the United States. AIM PSBs promote evidence-informed maternal safety practices to improve the quality and safety of maternity care and reduce preventable maternal mortality and severe maternal morbidity.</summary>
-  </entry>
-  <entry>
-    <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363168"/>
-    <id>urn:funding-finder:grants-gov:363168</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
-  </entry>
-  <entry>
-    <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363169"/>
-    <id>urn:funding-finder:grants-gov:363169</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
-  </entry>
-  <entry>
-    <title>Demonstration Projects for Whole-Person Health Models for Women Living with HIV in the South</title>
-    <link href="https://www.grants.gov/search-results-detail/363389"/>
-    <id>urn:funding-finder:grants-gov:363389</id>
-    <updated>2027-01-14T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <category term="Arts and culture"/>
-    <category term="Cancer"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-03-15 | The purpose of this demonstration project is to support coordinated Clinic and Community Collaboratives (CCCs) to integrate HIV care with broader women's health services in jurisdictions with disproportionately high HIV disease burden to improve HIV-related outcomes, overall health, and quality of life among WWH. Organizations will be funded to implement 4 strategies: (1) Integrate HIV care with b…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part B States/Territories Supplemental Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363163"/>
-    <id>urn:funding-finder:grants-gov:363163</id>
-    <updated>2027-01-14T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-15 | The purpose of this program is to supplement formula-based funding provided through the HIV Care Grant Program - RWHAP Part B States/Territories Formula and AIDS Drug Assistance Program (ADAP) Formula and ADAP Supplemental Awards Notice of Funding Opportunity.</summary>
-  </entry>
-  <entry>
-    <title>Rural Health Network Development Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363580"/>
-    <id>urn:funding-finder:grants-gov:363580</id>
-    <updated>2027-01-14T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-16 | The Rural Health Network Development program supports integrated health care networks that address health care needs of targeted rural communities. Applicants may choose between two funding tracts. The Network Advancement Tract supports networks comprised of independent rural hospitals and clinics in integrated network collaboration. It bridges support to offset small scale structural barriers tha…</summary>
-  </entry>
-  <entry>
-    <title>Rural Communities Opioid Response Program - Overdose Response</title>
-    <link href="https://www.grants.gov/search-results-detail/363686"/>
-    <id>urn:funding-finder:grants-gov:363686</id>
-    <updated>2027-01-11T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-10 | The purpose of the Rural Communities Opioid Response Program (RCORP) - Overdose Response is to support improving health care in rural areas by addressing their immediate and short-term needs related to the provision of substance use disorder services. RCORP Overdose Response aims to reduce and prevent the risk of overdoses in rural areas.</summary>
-  </entry>
-  <entry>
-    <title>Partnership with Common Fund Data Ecosystem Resources</title>
-    <link href="https://www.grants.gov/search-results-detail/363488"/>
-    <id>urn:funding-finder:grants-gov:363488</id>
-    <updated>2027-01-11T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Cancer"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
-  </entry>
-  <entry>
-    <title>Human Trafficking Youth Prevention Education (HTYPE) Demonstration Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363751"/>
-    <id>urn:funding-finder:grants-gov:363751</id>
-    <updated>2027-01-09T00:00:00Z</updated>
-    <author><name>Administration for Children and Families-IOAS-OTIP</name></author>
-    <category term="Education and workforce"/>
-    <summary>Administration for Children and Families-IOAS-OTIP | Estimated Application 2027-03-10 | The purpose of the HTYPE Demonstration Program is to fund local education agencies (LEAs) to establish, expand, and support programs to educate school staff to recognize and respond to signs of human trafficking and to provide age-appropriate information to students on how to avoid becoming victims of human trafficking. LEAs, with the support of a nonprofit or nongovernmental organization (NGO) pa…</summary>
-  </entry>
-  <entry>
-    <title>Health Workforce Research Center (HWRC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363112"/>
-    <id>urn:funding-finder:grants-gov:363112</id>
-    <updated>2027-01-08T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-09 | The Health Workforce Research Centers support research that helps decision-makers at the federal, state, and local levels understand health workforce needs.</summary>
-  </entry>
-  <entry>
-    <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
-    <link href="https://www.grants.gov/search-results-detail/362950"/>
-    <id>urn:funding-finder:grants-gov:362950</id>
-    <updated>2027-01-08T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
   </entry>
 </feed>
