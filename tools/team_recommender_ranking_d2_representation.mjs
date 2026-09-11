@@ -1,8 +1,12 @@
 /* One predeclared R1 ablation of D1 arithmetic; no provider or source access. */
 import vm from 'node:vm';
-import {execFileSync} from 'node:child_process';
+import fs from 'node:fs';
+import {createHash} from 'node:crypto';
 export function representationCode(){
- let code=execFileSync('git',['show','ec9c717cf1943ac68be4b1a4ba453bbb29dbd931:assets/team-recommender.js'],{encoding:'utf8'});
+ // Exact historical D1 bytes, available in shallow CI without fetching history.
+ const raw=fs.readFileSync(new URL('../tests/fixtures/frozen/d1-team-recommender.js',import.meta.url));
+ if(createHash('sha256').update(raw).digest('hex')!=='4db90706d6ce347877dd77dd99d453b8cb7bca9d30a2b6730d828603fde6c1ce')throw Error('Frozen D1 representation hash mismatch');
+ let code=raw.toString('utf8');
  const replace=(a,b)=>{if(code.split(a).length!==2)throw Error('D1 representation seam changed');code=code.replace(a,b);};
  replace('function edge(aspect, core, passage, vectors) {',`function contextualDot(query, passage, vectors, summaryVector) {
     const evidence=dot(vectors[query.vector],vectors[passage.vector]);

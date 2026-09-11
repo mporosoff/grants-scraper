@@ -381,7 +381,7 @@ class GitHubPagesEntrypointTests(unittest.TestCase):
             explorer_html,
         )
         self.assertIn(
-            f'<script src="./assets/search-query.js?v={search_v2_version}"></script>',
+            f'<script src="./assets/search-query.js?v={hashlib.sha256((REPOSITORY_ROOT / "assets/search-query.js").read_bytes()).hexdigest()}"></script>',
             explorer_html,
         )
         self.assertIn(

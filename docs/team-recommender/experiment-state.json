@@ -115,8 +115,8 @@
     },
     "unique_integrated_browser_cases_passing": 122,
     "prepared_browser_cases_passing": 5,
-    "independent_review": "PENDING",
-    "required_CI": "PENDING",
+    "independent_review": "Initial exact-head review completed with accepted P1; coherent remediation prepared, verification pending",
+    "required_CI": "Initial failure preserved; 18 affected portability checks pass locally; new exact-head gates pending",
     "scientific_acceptance": "FAIL",
     "physical_mobile": "NOT RUN",
     "peak_browser_memory": "NOT MEASURED",
@@ -125,6 +125,10 @@
     "resources": {
       "path": "docs/team-recommender/post-audit/resource-summary-v1.json",
       "sha256": "4a5c6ca7fb13c439489d0926acf1e0ced56abec421aa9a846adf92fbe28bd591"
+    },
+    "review_remediation": {
+      "path": "docs/team-recommender/post-audit/review-remediation-v1.json",
+      "sha256": "0b2c67b2b3724c4b7f4660f65175e8805c5d09a1456fa2dc9ef755e78a1ef2ba"
     }
   },
   "containing_commit": "Resolve commit containing this state; scientific and assembly SHAs are pinned separately",
@@ -4458,7 +4462,7 @@
       "path": "docs/team-recommender/stage2-closeout-receipt-index.json",
       "sha256": "73a46def2c53ab43c1e4021c25ce1c08ed88ee23a9f27e9a5a49cbd0e646b3ba"
     },
-    "recommendation": "E2 NOMINATED FOR VALIDATION — NOT QUALITY-QUALIFIED OR DEPLOYED",
+    "recommendation": "E2 NOMINATED FOR VALIDATION \u2014 NOT QUALITY-QUALIFIED OR DEPLOYED",
     "report": {
       "path": "docs/team-recommender/reports/stage-2-decision-closeout.md",
       "sha256": "5e973fa27cb6c20a82c752b4202623c26c946a6d181aa8be4739101037356c73"
@@ -6991,7 +6995,7 @@
   "recommended_next_stage": "Owner decision: explicitly accept the documented exploratory-release quality/coverage/audit limitations in separate Stage 4 authority, or do not release.",
   "report": {
     "path": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md",
-    "sha256": "00042f6c9031ef455587d338620f2b0e4dda463bdb843fd647288e13f41f1a12"
+    "sha256": "16b3c9a497f781f01b6f76556b319e2cede98f6d07a914093f61411677c19921"
   },
   "repository": "mporosoff/grants-scraper",
   "results": {

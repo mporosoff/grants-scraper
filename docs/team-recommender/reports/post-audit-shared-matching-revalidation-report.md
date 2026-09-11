@@ -140,6 +140,12 @@ Rollback preserves the complete previously published candidate `5927df0f5835c5a0
 
 Execution-time main also contains an unrelated unpublished desktop Team Match stylesheet change. This experimental branch preserves its own accepted presentation baseline; a future release must reconcile that main work explicitly rather than overwrite it. Registry-only publication would invalidate all affected old proposals and is not a safe mixed intermediate release.
 
+## Integrated review and preserved gate corrections
+
+The first integrated review of PR #225 completed on `bced135cb3cf4ff31b7d133606b047fafe60a3d8` (review 5180409357) with one accepted P1 finding: the old generic judge request format could claim a later paid purpose, bypassing the post-audit exact-body contract. The actual 34 completed requests used the approved hashes; this finding does not imply an unapproved dispatch occurred. The complete protocol/dispatch-purpose family was audited read-only before the coherent remediation. The repair restricts generic requests to their original six-purpose allowlist, preserving dedicated versioned contracts, exact packet/cache identities and irreversible accounting. It passes 53 focused tests, including rejection before ledger mutation or dispatch. The narrow protected-main correction and integrated verification remain pending at this checkpoint.
+
+Initial exact-head CI run 34615447025 also preserved one Python failure (among 1,379 tests, three skipped) and four browser-contract failures (843 passed, 12 skipped). A test still expected the old query version label, and historical presentation/D1 checks depended on Git objects absent in CI's shallow checkout. Exact original bytes and hash-only assertions are now committed as frozen fixtures, with their source commits preserved; the script test checks its current content hash. Nine affected Python and nine Node tests pass locally. These are test-portability changes, not workflow changes, scientific repairs or another E2E run. [Consolidated review/remediation record](../post-audit/review-remediation-v1.json).
+
 ## Human audit and release decision
 
 Marc remains the sole confirmed reviewer. All 40 earlier slots are accounted for: 20 development and 20 final requested, **zero answers returned**, zero remaining allowance. No new packet was issued. Sixteen earlier final items were unavailable and four assessable; unavailability is not a completed review. Those historical packets do not independently validate changed corrected-profile groups.
