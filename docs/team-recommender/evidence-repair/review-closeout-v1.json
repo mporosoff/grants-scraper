@@ -1,0 +1,41 @@
+{
+  "PR": 225,
+  "reviewed_head": "517736dddd11591b47650c0341ca54152588c0c3",
+  "base": "codex/post-audit-review-base",
+  "request_comment": 5639024582,
+  "terminal_comment": 5639094296,
+  "terminal_created_at": "2026-09-11T18:40:35Z",
+  "summary_completed_at": "2026-09-11T18:40:37.748663Z",
+  "result": "Clean terminal exact-head comment: no major issues",
+  "rounds": 1,
+  "new_findings": 0,
+  "consequential_unresolved_threads": 0,
+  "old_thread_preserved": 3990676263,
+  "required_CI": {
+    "run": 34633928379,
+    "head": "517736dddd11591b47650c0341ca54152588c0c3",
+    "status": "SUCCESS",
+    "python": {
+      "cases": 1380,
+      "skipped": 3,
+      "failures": 0
+    },
+    "browser": {
+      "cases": 867,
+      "passed": 855,
+      "skipped": 12,
+      "failed": 0
+    },
+    "frozen_queries": 37,
+    "query_top10_churn": 0,
+    "p9_cases": 50,
+    "no_drift_artifacts": 23
+  },
+  "CI_log_sha256": "dfdb69e7521108d08554bf036e88727db56b9a28e86e1dfa11f969b5258563cf",
+  "runtime_assembly_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+  "documentation_closeout": "Subsequent local documentation-only commit; PR head remains exactly reviewed, with no new code or package change. No claim that the later documentation commit received code review.",
+  "production_changes": 0,
+  "merged": false,
+  "paid_requests": 0,
+  "disposition": "C: parent extra heap/post-input limits and repeatable full Team Match workflow timeout remain; scientific usefulness not qualified"
+}

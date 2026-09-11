@@ -567,3 +567,5 @@ The owner explicitly authorizes one bounded implementation and memory repair plu
 ### Shared evidence repair decision checkpoint (2026-09-11)
 
 The single repaired rule is `shared-team-v3-evidence-repair`, integrated code `9e4cfee0ef5c551c779d0d71752a7a60aaa843d9`. See `reports/shared-evidence-mechanism-repair-report.md` and `evidence-repair/candidate-v1.json`. All old findings remain history. No source/profile edits or paid calls occurred. The parent still exceeds the unchanged memory/post-input limits; scientific usefulness is not qualified. Complete the authorized engineering/review closeout and STOP. No automatic next revision, paid check, new human items, deployment or Stage4 is authorized.
+
+Closeout: PR225 received a clean exact-head review at `517736dddd11591b47650c0341ca54152588c0c3`; CI34633928379 passed. `evidence-repair/candidate-v2.json` and `evidence-repair/review-closeout-v1.json` preserve those identities. The finite browser assessment is 121/122 with one repeatable timeout, and parent resource limits remain failed. Disposition C; STOP FOR USER REVIEW. Nothing is deployed and no automatic continuation is authorized.

@@ -105,22 +105,23 @@
     "shared_evidence_repair_new_requests": 0
   },
   "candidate": {
-    "path": "docs/team-recommender/evidence-repair/candidate-v1.json",
-    "sha256": "9c99b9785c1d49c48d091e0047f61936a3b2b99e69f80a34cfdd5e03b343440c",
+    "path": "docs/team-recommender/evidence-repair/candidate-v2.json",
+    "sha256": "b2fb51fb42a170683f75f7625dff4450479424a743be2045acefe703159b5dc4",
     "primary": "shared-team-v3-evidence-repair",
     "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
     "quality_qualified": false,
     "resource_qualified": false,
     "fallback": null,
-    "status": "Bounded repair and finite validation complete; 121/122 browser checks pass; resource/performance barriers remain; exact-head review/CI pending"
+    "status": "C: bounded repair/verification closed; no release",
+    "validated_code_commit": "517736dddd11591b47650c0341ca54152588c0c3"
   },
   "checks": {
     "receipt": {
-      "path": "docs/team-recommender/evidence-repair/engineering-receipt-v1.json",
-      "sha256": "08184a21a8fd0c73cce1da6b11c98e0d77719acae5604a5d696065b0dd27f78d"
+      "path": "docs/team-recommender/evidence-repair/engineering-receipt-v2.json",
+      "sha256": "2f29a811700445f36469e4abdfab372af8f228d990aff697d83ec4597d255741"
     },
-    "independent_review": "PENDING exact-head PR225",
-    "required_CI": "PENDING current exact head",
+    "independent_review": "PASS: clean terminal exact-head PR225 comment5639094296 at 517736dddd11591b47650c0341ca54152588c0c3",
+    "required_CI": "PASS: run34633928379, Python1380/3skips, Node867/855pass/12skips,37queries/50P9/23no-drift",
     "scientific_acceptance": "NOT QUALIFIED; exposed diagnostics only",
     "physical_mobile": "NOT RUN",
     "additional_heap_48MiB": "FAIL: observed parent 49.09–52.44 MiB",
@@ -132,7 +133,8 @@
     "unique_integrated_browser_cases_passing": 121,
     "unique_integrated_browser_cases_failed": 1,
     "prepared_browser_cases_passing": 5,
-    "all_member_Team_Match_workflow": "FAIL: 90-second timeout twice; not waived"
+    "all_member_Team_Match_workflow": "FAIL: 90-second timeout twice; not waived",
+    "peak_browser_memory": "Continuous peak NOT MEASURED; sampled failures sufficient to fail limit"
   },
   "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA",
   "continuation": {
@@ -7841,7 +7843,7 @@
   "shared_evidence_repair": {
     "authority": "docs/team-recommender/evidence-repair/AUTHORITY.md",
     "starting_head": "adedd242dc727d85bc2db42776abce5132c882b8",
-    "status": "bounded implementation and finite validation complete; exact-head review/CI pending",
+    "status": "complete bounded phase; C; STOP FOR USER REVIEW",
     "new_paid_authorization_usd": 0,
     "new_provider_attempts": 0,
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
@@ -7852,7 +7854,11 @@
     "new_paid_usd": 0,
     "new_human_items": 0,
     "resource_qualified": false,
-    "scientific_qualified": false
+    "scientific_qualified": false,
+    "completed": true,
+    "independent_review_pending": false,
+    "reviewed_head": "517736dddd11591b47650c0341ca54152588c0c3",
+    "review_receipt": "docs/team-recommender/evidence-repair/review-closeout-v1.json"
   },
   "historical_pre_evidence_repair_checkpoint": {
     "authority": {
