@@ -1,0 +1,729 @@
+{
+  "kind": "corrective-implementation-consistency-check",
+  "clock": "2026-09-11T12:00:00Z",
+  "generation": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "scope_inventory": 105,
+  "directory_population": 158,
+  "eligible_population": 155,
+  "exact_profile_scope_fit_comparisons": 15965,
+  "disagreements": 0,
+  "rows": [
+    {
+      "id": "344592:ab-0019",
+      "state": "same-shared-fit",
+      "admitted": 13
+    },
+    {
+      "id": "344592:ab-0079",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "358021",
+      "state": "same-shared-fit",
+      "admitted": 5
+    },
+    {
+      "id": "361050",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "361205",
+      "state": "same-shared-fit",
+      "admitted": 5
+    },
+    {
+      "id": "361526:g-12",
+      "state": "same-shared-fit",
+      "admitted": 12
+    },
+    {
+      "id": "363375",
+      "state": "same-shared-fit",
+      "admitted": 7
+    },
+    {
+      "id": "363489",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "344592:ab-0013",
+      "state": "same-shared-fit",
+      "admitted": 7
+    },
+    {
+      "id": "360006",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "344592:ab-0015",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0029",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0032",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0036",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0038",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "344592:ab-0039",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "344592:ab-0040",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0043",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0047",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0050",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0052",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0053",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "344592:ab-0054",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "344592:ab-0056",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0057",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0059",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0062",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0065",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0066",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0075",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "344592:ab-0076",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0078",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0080",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "344592:ab-0081",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "344592:ab-0082",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "344592:ab-0096",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "345241:tdac-baa-001",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "345241:tdac-baa-004",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "345241:tdac-baa-020",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "345241:tdac-baa-022",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "358022",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "344592:ab-0042",
+      "state": "same-shared-fit",
+      "admitted": 4
+    },
+    {
+      "id": "361304",
+      "state": "same-shared-fit",
+      "admitted": 4
+    },
+    {
+      "id": "361520",
+      "state": "same-shared-fit",
+      "admitted": 6
+    },
+    {
+      "id": "359666",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "361186",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "356888",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357002",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "359068",
+      "state": "same-shared-fit",
+      "admitted": 11
+    },
+    {
+      "id": "363538",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "356981",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "357337",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "357137",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "357748",
+      "state": "same-shared-fit",
+      "admitted": 4
+    },
+    {
+      "id": "359649",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "356530",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "363678",
+      "state": "same-shared-fit",
+      "admitted": 7
+    },
+    {
+      "id": "357334",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "361831",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "356879",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357308",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "361287",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "362954",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "360398",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "360534",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357346",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "356903",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "356874",
+      "state": "same-shared-fit",
+      "admitted": 4
+    },
+    {
+      "id": "357340",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357003",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "356953",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "360893",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "360894",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "359269",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "342475",
+      "state": "same-shared-fit",
+      "admitted": 4
+    },
+    {
+      "id": "357345",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357015",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "363210",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "362948",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "356802",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "356935",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357186",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "356680",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "360606",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "356811",
+      "state": "same-shared-fit",
+      "admitted": 7
+    },
+    {
+      "id": "359696",
+      "state": "same-shared-fit",
+      "admitted": 6
+    },
+    {
+      "id": "363622",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "361008",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "363179",
+      "state": "not_current"
+    },
+    {
+      "id": "357430",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357492",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "363095",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "darpa-iarpa:darpa-darpapa250704",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "352947",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "357433",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357493",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357273",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "361447",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "357490",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "357424",
+      "state": "same-shared-fit",
+      "admitted": 1
+    },
+    {
+      "id": "359199",
+      "state": "not_current"
+    },
+    {
+      "id": "361399",
+      "state": "same-shared-fit",
+      "admitted": 2
+    },
+    {
+      "id": "361451",
+      "state": "same-shared-fit",
+      "admitted": 3
+    },
+    {
+      "id": "363748",
+      "state": "same-shared-fit",
+      "admitted": 0
+    },
+    {
+      "id": "362454",
+      "state": "same-shared-fit",
+      "admitted": 7
+    }
+  ],
+  "examples": [
+    {
+      "id": "344592:ab-0019",
+      "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "selected": [
+        {
+          "id": "urh-000075",
+          "name": "John M. Nichol",
+          "evidence": {
+            "faculty_id": "urh-000075",
+            "contribution": "Semiconductor quantum-dot spin qubits",
+            "evidence_term": "Semiconductor quantum-dot spin qubits",
+            "evidence_phrase": "Investigates individual electrons in semiconductor quantum dots for experimental quantum information processing.",
+            "source_url": "https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html",
+            "why_person": "The retained profile statement \u201cInvestigates individual electrons in semiconductor quantum dots for experimental quantum information processing.\u201d connects to the call through \u201cdots, process, quantum, semiconductor\u201d. The contribution remains unconfirmed."
+          }
+        },
+        {
+          "id": "urh-000097",
+          "name": "Matthew Z. Yates",
+          "evidence": {
+            "faculty_id": "urh-000097",
+            "contribution": "Functional coatings for optical components and biosensors",
+            "evidence_term": "Functional coatings for optical components and biosensors",
+            "evidence_phrase": "Develops surface engineering for optical biosensor performance and optical-component smoothing in collaborative projects.",
+            "source_url": "https://www.hajim.rochester.edu/che/people/faculty/yates_matthew/index.html",
+            "why_person": "The retained profile statement \u201cDevelops surface engineering for optical biosensor performance and optical-component smoothing in collaborative projects.\u201d connects to the call through \u201ccomponent, optical\u201d. The contribution remains unconfirmed."
+          }
+        },
+        {
+          "id": "urh-000101",
+          "name": "Michele Cotrufo",
+          "evidence": {
+            "faculty_id": "urh-000101",
+            "contribution": "Metasurfaces for reconfigurable optical image processing",
+            "evidence_term": "Metasurfaces for reconfigurable optical image processing",
+            "evidence_phrase": "His research includes phase-change and dispersion-engineered optical processing structures.",
+            "source_url": "https://www.hajim.rochester.edu/optics/people/faculty/cotrufo-michele/index.html",
+            "why_person": "The retained profile statement \u201cHis research includes phase-change and dispersion-engineered optical processing structures.\u201d connects to the call through \u201cinclude, optical, process, structure\u201d. The contribution remains unconfirmed."
+          }
+        },
+        {
+          "id": "urh-000103",
+          "name": "Mitchell Anthamatten",
+          "evidence": {
+            "faculty_id": "urh-000103",
+            "contribution": "Optoelectronic polymer materials",
+            "evidence_term": "Optoelectronic polymer materials",
+            "evidence_phrase": "Develops functional polymer architectures with optical and optoelectronic applications.",
+            "source_url": "https://www.hajim.rochester.edu/che/people/faculty/anthamatten_mitchell/index.html",
+            "why_person": "The retained profile statement \u201cDevelops functional polymer architectures with optical and optoelectronic applications.\u201d connects to the call through \u201cmaterial, optoelectronic\u201d. The contribution remains unconfirmed."
+          }
+        }
+      ],
+      "admitted": 13
+    },
+    {
+      "id": "344592:ab-0079",
+      "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "selected": [],
+      "admitted": 2
+    },
+    {
+      "id": "358021",
+      "title": "Cooperative Agreement for In Vivo High-Resolution Imaging for Inner Ear Visualization (U01 Clinical Trial Required)",
+      "selected": [],
+      "admitted": 5
+    },
+    {
+      "id": "361050",
+      "title": "Centers for Structural Biology of HIV and other Infectious Diseases",
+      "selected": [],
+      "admitted": 2
+    },
+    {
+      "id": "361205",
+      "title": "BRAIN Initiative: Brain-Behavior Quantification and Synchronization \u2013 Transformative Research on Behavior at the Organismal Level",
+      "selected": [],
+      "admitted": 5
+    },
+    {
+      "id": "361526:g-12",
+      "title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "selected": [],
+      "admitted": 12
+    }
+  ],
+  "measurements": {
+    "environment": "Node v24.19.0 win32/x64; not a browser or physical-device observation",
+    "hydration_ms": 573.5271,
+    "elapsed_ms": 106462.6226,
+    "heap_delta_bytes": 333868816,
+    "sample": [
+      {
+        "id": "344592:ab-0019",
+        "fit_ms": 755.7281999999999,
+        "group_ms": 879.8885999999998,
+        "warm_ms": 1794.2577999999999,
+        "edit_ms": 1890.0967,
+        "options": 8
+      },
+      {
+        "id": "344592:ab-0079",
+        "fit_ms": 630.9996000000001,
+        "group_ms": 1309.6883000000007,
+        "warm_ms": 1836.5714000000007,
+        "edit_ms": null,
+        "options": 0
+      },
+      {
+        "id": "358021",
+        "fit_ms": 3940.4372999999996,
+        "group_ms": 1203.9691999999995,
+        "warm_ms": 1669.9625000000015,
+        "edit_ms": null,
+        "options": 0
+      },
+      {
+        "id": "361050",
+        "fit_ms": 762.4896999999983,
+        "group_ms": 1245.9256000000023,
+        "warm_ms": 1698.6235000000015,
+        "edit_ms": null,
+        "options": 0
+      },
+      {
+        "id": "361205",
+        "fit_ms": 861.2968000000001,
+        "group_ms": 1338.9148999999998,
+        "warm_ms": 1947.4285000000018,
+        "edit_ms": null,
+        "options": 0
+      },
+      {
+        "id": "361526:g-12",
+        "fit_ms": 648.1491999999998,
+        "group_ms": 1047.299799999997,
+        "warm_ms": 1748.9202000000005,
+        "edit_ms": null,
+        "options": 0
+      }
+    ],
+    "assets": [
+      {
+        "path": "data/team_ingredients/shared-ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab.json",
+        "bytes": 29303,
+        "gzip_bytes": 7002,
+        "sha256": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab"
+      },
+      {
+        "path": "data/researcher_directory.js",
+        "bytes": 818871,
+        "gzip_bytes": 104312,
+        "sha256": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490"
+      },
+      {
+        "path": "data/faculty_matches.js",
+        "bytes": 114209,
+        "gzip_bytes": 17484,
+        "sha256": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a"
+      },
+      {
+        "path": "assets/team-matcher.js",
+        "bytes": 27356,
+        "gzip_bytes": 7684,
+        "sha256": "8f88a47a2d49d3e799b3af5678f346be2097d27a06b7641e3532de4fda452baf"
+      },
+      {
+        "path": "assets/shared-team-engine.js",
+        "bytes": 17135,
+        "gzip_bytes": 5526,
+        "sha256": "b38400527fabea5f7ad6d89abcdc364c26a9053d9d128d2bc4df2a688034a4cd"
+      },
+      {
+        "path": "data/subtopics.js",
+        "bytes": 1894538,
+        "gzip_bytes": 212777,
+        "sha256": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7"
+      }
+    ],
+    "cold_interaction_dependencies": [
+      "data/team_ingredients/shared-ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab.json",
+      "assets/team-matcher.js",
+      "assets/shared-team-engine.js",
+      "data/subtopics.js"
+    ],
+    "transfer_note": "Encoded bytes and local gzip sizes, not observed HTTP transfer. Directory and catalog are existing page inputs; the topic sidecar is needed only if not already loaded. Sidecar byte accounting was added after the timed run without rerunning recommendation calculations.",
+    "memory_note": "Heap delta for the entire 105-scope consistency process, including separate reference matchers, repeated serialization and unreclaimed allocation. This is not peak browser memory or retained production-engine memory."
+  },
+  "provider_calls": 0,
+  "human_judgments": 0,
+  "quality_acceptance_claimed": false,
+  "activated": false
+}

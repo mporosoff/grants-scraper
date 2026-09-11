@@ -1,0 +1,25 @@
+# Shared matching and full registry correction
+
+Authority: the user's September 11, 2026 work order replaces independent team-recommender scientific admission with existing Search/Team Match functions and explicitly authorizes source-backed correction/enrichment of every canonical researcher. It does not authorize deployment, new human-review items, a model/threshold campaign or reserved paid judging. Stage 3 remains failed scientific validation; its exposed observations are diagnostic history.
+
+Starting experiment: `16ed8ff1ca6e7e57199d3d4fafabeebb07f7cdb2`, existing `codex/on-demand-team-recommender` worktree. Execution-time protected main: `8682aadce8c3a0e6881e3636dc30c3d69b10b11a`. Canonical registry bytes agree between these commits. Population is read from `config/researcher_registry.json`, not fixed to a rankable-count constant. All records, including reference-only and standby, receive an audit disposition.
+
+## Uniform public-source standard
+
+Read the complete attributable official faculty profile, including biography, research overview, substantive research descriptions, listed interests and relevant publication context. An HTTP success or populated URL is not a completed review. Navigation, contact details and unrelated site-wide content are not research evidence.
+
+Where the faculty page is incomplete or claims need clarification, follow researcher/group pages actually linked by that official page, existing attributable research pages, or official institutional biographies. Record the link/identity basis. A group page supports stated research directions, not personal possession of every facility. Publication records can corroborate a specifically attributable activity; isolated coauthorship, author-name-only matches and OpenAlex topics cannot establish personal expertise. Publication-derived interpretation must remain a paraphrase tagged as corroboration, never an official-interest quotation. No private CV, credentialed source or sensitive inference is permitted.
+
+This work order extends the former profile freeze, not source credibility: official pages and identity-verified researcher/group evidence are uniformly permitted for all departments. No new source type is admitted without recording its policy here. New evidence metadata records source URL, fetched-at timestamp, response/text hash, page section/paragraph locator, evidence form (quotation or paraphrase), and review date. Retrieval and substantive review are separate events. Historical unsupported claims are revised or retired with their prior material retained; missing source access is unresolved, not certified adequate.
+
+Uniform source-type clarification during this audit: an official institutional research report may corroborate a bounded activity when it explicitly attributes that activity to the named researcher (for example, their own explanation of a method). It is stored as `institutional_research_report`, not an official-interest quotation. General institutional capabilities, group photographs, grant membership or another researcher's statements do not independently establish personal expertise. This rule applies equally across departments; it is used to clarify interests-only profiles without inferring every topic in an article.
+
+Summaries synthesize documented problems, methods, systems and applications within the existing 1,200-character limit. Claims retain meaningful scientific relationships within existing field bounds, with distinct labels and supporting evidence. No word/claim quota defines adequacy. Existing official-interest labels remain distinguishable from new source-backed paraphrases. Relationships, visibility, automatic-proposal eligibility, identity and aliases do not change merely because more text is available.
+
+All reading and drafting in this correction is ordinary in-task analysis, not an independently executed judge or human audit. Public receipts identify actual reviewed pages and limitations. Complete downloaded pages remain local provenance caches; public assets contain bounded summaries/evidence, not unrestricted page copies.
+
+## Execution boundaries
+
+Use the current canonical registry and existing generation/dependency machinery. Preserve old reports, claim histories, paid caches and ledgers. Correct summary/claim projection and invalidate all ranking results dependent on a changed pool; do not reuse old vectors with new text. Shared numerical admission must call existing Team Match functions on the same canonical scope, catalog, profile and action clock. Do not borrow unrelated hosted search orchestration or send private profile text on a team click.
+
+No new metered work is planned. Existing authoritative cloud ledger remains `on-demand-team-offline-v2-20260909`; its last verified state is $3.952987 / 595 requests, $0 outstanding, with $6.047013 / 95 slots remaining. These remaining balances do not authorize spending reserved requests. No full E2E run is implied by this corrective implementation; focused required Python/Node/browser checks apply.

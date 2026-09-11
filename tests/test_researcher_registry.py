@@ -164,9 +164,22 @@ class ResearcherRegistryTests(unittest.TestCase):
             if selected_id in {member["faculty_id"] for member in opportunity["members"]}
             or any(selected_id in role["candidate_ids"] + role["alternative_ids"] for role in opportunity["roles"])
         }
-        self.assertEqual({row["scope_id"] for row in report["affected_team_scopes"]}, expected)
+        self.assertEqual({row["scope_id"] for row in report["affected_team_scopes"]}, {row["id"] for row in self.team_model["opportunities"]})
+
+    def current_dependency_fixture(self, *, exact=False):
+        """Dependencies must not rely on a real historical team remaining valid."""
+        person = next(p for p in self.registry['researchers'] if p['auto_proposable'] and any(c['status'] == 'active' for c in p['claims']))
+        claim = next(c for c in person['claims'] if c['status'] == 'active')
+        ref = {k: claim[k] for k in ('claim_id', 'revision', 'material_hash')}
+        ref['researcher_id'] = person['researcher_id']
+        role = {'candidate_ids': [person['researcher_id']], 'alternative_ids': []}
+        if exact: role['claim_refs'] = [ref]
+        self.team_model = {'faculty': legacy_faculty_projection(self.registry), 'researcher_registry_generation': self.registry['registry_generation'], 'opportunities': [{
+            'id': 'dependency-fixture', 'review_state': 'reviewed', 'generator_version': 'fixture' if exact else '',
+            'members': [{'faculty_id': person['researcher_id'], 'claim_id': claim['claim_id'], 'evidence_term': claim['label'], 'evidence_phrase': claim['evidence'], 'source_url': claim['source_urls'][0]}], 'roles': [role]}]}
 
     def test_team_calibrations_reject_referenced_evidence_changes(self):
+        self.current_dependency_fixture()
         validate_opportunity_team_dependencies(self.registry, self.team_model)
         selected = self.team_model["opportunities"][0]["members"][0]
         changed = copy.deepcopy(self.registry)
@@ -234,6 +247,7 @@ class ResearcherRegistryTests(unittest.TestCase):
             validate_opportunity_team_dependencies(ineligible, self.team_model)
 
     def test_admin_removal_preserves_identity_and_evidence_and_withholds_affected_teams(self):
+        self.current_dependency_fixture()
         scope = next(row for row in self.team_model["opportunities"]
                      if row.get("review_state") != "needs_revalidation")
         identity = scope["members"][0]["faculty_id"]
@@ -267,6 +281,7 @@ class ResearcherRegistryTests(unittest.TestCase):
                     self.assertTrue((stale & valid_before).issubset(affected))
 
     def test_generated_teams_depend_on_exact_claims_not_every_interest_of_a_person(self):
+        self.current_dependency_fixture(exact=True)
         generated = next(row for row in self.team_model["opportunities"] if row.get("generator_version") and row.get("review_state") != "needs_revalidation")
         model = {"faculty": self.team_model["faculty"], "opportunities": [generated]}
         changed = copy.deepcopy(self.registry)

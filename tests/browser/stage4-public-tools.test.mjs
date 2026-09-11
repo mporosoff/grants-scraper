@@ -259,6 +259,8 @@ test("Search, CSV, saves, alerts, AI payloads, team and researcher identity owne
   // and reviewed registry publication must be able to replace them. Their exact
   // current bindings are checked by the release, registry and team contracts.
   const generatedSources = new Set([
+    // Authorized shared-matcher/profile repair, separately contract tested.
+    "assets/team-matcher.js", "assets/opportunity-team.js",
     "data/faculty_matches.js", "data/researcher_directory.js",
     "data/researcher_registry_manifest.json", "data/opportunity_team_index.js",
     "data/opportunity_teams.js", "config/researcher_registry.json",
@@ -278,7 +280,7 @@ test("The release schema and model contract stay fixed while generated content i
 });
 
 test("All Team Match and award controller functions outside the bounded presentation hooks remain identical", () => {
-  const allowed = { "team_match.html": ["renderTeam", "updateToggles"], "assets/institutional-intelligence-snapshots.js": ["applyFormState", "renderPage", "runSearch", "focusAwardEvidence", "resetResultState", "bindEvents"] };
+  const allowed = { "team_match.html": ["renderTeam", "updateToggles", "directoryFacultyKey", "memberProfile"], "assets/institutional-intelligence-snapshots.js": ["applyFormState", "renderPage", "runSearch", "focusAwardEvidence", "resetResultState", "bindEvents"] };
   for (const [path, source] of Object.entries({ "team_match.html": team, "assets/institutional-intelligence-snapshots.js": snapshots })) {
     const matches = [...source.matchAll(/^  (?:async )?function (\w+)\(/gm)];
     for (let i = 0; i < matches.length; i += 1) {

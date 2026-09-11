@@ -107,7 +107,8 @@ def restore_proven_teams(model, candidates, registry):
     current_sources = t.source_fingerprints(model, candidates)
     results = []
     for row in model['opportunities']:
-        if row['id'] not in proof['published_decisions'] or row.get('review_state') != 'needs_revalidation':
+        if (row.get('revalidation_reason_code') == 'candidate_pool_changed'
+                or row['id'] not in proof['published_decisions'] or row.get('review_state') != 'needs_revalidation'):
             continue
         result = {'scope_id': row['id'], 'state': 'pending', 'provider_requests': 0}
         results.append(result)
@@ -205,7 +206,8 @@ def restore_after_claim_retirement(model, candidates, registry, recovery):
     results = []
     for row in model['opportunities']:
         reviewed = proof.get('decisions', {}).get(row['id'])
-        if not reviewed or row.get('review_state') != 'needs_revalidation':
+        if (row.get('revalidation_reason_code') == 'candidate_pool_changed'
+                or not reviewed or row.get('review_state') != 'needs_revalidation'):
             continue
         result = {'scope_id': row['id'], 'state': 'pending', 'provider_requests': 0,
                   'reason': 'claim_retirement_proof_mismatch'}
@@ -286,7 +288,8 @@ def reassemble_changed_claims(model, candidates, registry):
     results = []
     for row in model['opportunities']:
         scope = scopes.get(row['id'])
-        if (row.get('review_state') != 'needs_revalidation' or not row.get('generator_version')
+        if (row.get('revalidation_reason_code') == 'candidate_pool_changed'
+                or row.get('review_state') != 'needs_revalidation' or not row.get('generator_version')
                 or row.get('decision_contract') not in compatible or not scope
                 or row.get('source_fingerprint') != scope['source_fingerprint']):
             continue

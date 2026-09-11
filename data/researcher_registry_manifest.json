@@ -6,7 +6,7 @@
       "standby": 35,
       "unadmitted": 3
     },
-    "rankable": 155,
+    "rankable": 158,
     "relationship_counts": {
       "hajim_core_faculty": 117,
       "internal_affiliated_researcher": 41
@@ -15,14 +15,14 @@
       "active": 158
     },
     "total": 158,
-    "unrankable": 3,
+    "unrankable": 0,
     "visibility_counts": {
       "department": 14,
       "institution": 141,
       "reference_only": 3
     }
   },
-  "registry_generation": "59ccfbe8999eeb4c78441e16daca468c694fc5798b03587c72468390939dc96a",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
   "researcher_ids": [
     "urh-000105",
     "urh-000102",

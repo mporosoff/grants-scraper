@@ -55,6 +55,8 @@ def material_claim_hash(claim: dict) -> str:
         key: claim.get(key)
         for key in ("status", "label", "category", "categories", "type", "evidence", "source_urls", "evidence_level")
     }
+    if "evidence_records" in claim:
+        material["evidence_records"] = claim["evidence_records"]
     return content_hash(material)
 
 
@@ -120,6 +122,25 @@ def _valid_date(value: str) -> bool:
         return False
 
 
+def _validate_evidence_records(records: object, label: str) -> None:
+    if not isinstance(records, list) or not records:
+        raise ValueError(f"{label} must contain source observations")
+    for record in records:
+        if not isinstance(record, dict) or record.get("form") not in {"quotation", "paraphrase"}:
+            raise ValueError(f"{label} must distinguish quotation from paraphrase")
+        _validate_urls([record.get("url")], label)
+        if record.get("source_type") not in {"official_profile", "researcher_group", "attributed_publication", "institutional_research_report"}:
+            raise ValueError(f"{label} has an unsupported source type")
+        for key in ("response_sha256", "text_sha256"):
+            if not re.fullmatch(r"[a-f0-9]{64}", str(record.get(key) or "")):
+                raise ValueError(f"{label} has an invalid source identity")
+        _require_text(record.get("locator"), label, 500)
+        if not _valid_date(str(record.get("reviewed_on") or "")):
+            raise ValueError(f"{label} has an invalid review date")
+        if not re.match(r"^\d{4}-\d{2}-\d{2}T", str(record.get("retrieved_at") or "")):
+            raise ValueError(f"{label} has an invalid retrieval timestamp")
+
+
 def validate_registry(registry: dict, *, require_generation: bool = True) -> dict:
     if not isinstance(registry, dict) or registry.get("schema_version") != SCHEMA_VERSION:
         raise ValueError(f"researcher registry schema_version must be {SCHEMA_VERSION}")
@@ -141,6 +162,8 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
         _require_text(researcher.get("display_name"), f"{researcher_id}.display_name", 120)
         _require_text(researcher.get("sort_name"), f"{researcher_id}.sort_name", 140)
         _require_text(researcher.get("home_unit"), f"{researcher_id}.home_unit", 180)
+        if "pool_assignment" in researcher and researcher["pool_assignment"] not in {"main", "standby"}:
+            raise ValueError(f"{researcher_id}.pool_assignment is invalid")
         if "institution" in researcher:
             institution = researcher["institution"]
             if not isinstance(institution, dict) or set(institution) != {"name", "ror_id"}:
@@ -153,6 +176,8 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
         summary = str(researcher.get("research_summary") or "")
         if len(summary) > 1200:
             raise ValueError(f"{researcher_id}.research_summary is too long")
+        if "summary_evidence" in researcher:
+            _validate_evidence_records(researcher["summary_evidence"], f"{researcher_id}.summary_evidence")
         relationship = researcher.get("relationship")
         visibility = researcher.get("pool_visibility")
         status = researcher.get("status")
@@ -213,6 +238,8 @@ def validate_registry(registry: dict, *, require_generation: bool = True) -> dic
             _validate_urls(claim.get("source_urls"), f"{claim_id}.source_urls")
             if claim.get("evidence_level") not in EVIDENCE_LEVELS:
                 raise ValueError(f"{claim_id} has an invalid evidence_level")
+            if "evidence_records" in claim:
+                _validate_evidence_records(claim["evidence_records"], f"{claim_id}.evidence_records")
             if not _valid_date(str(claim.get("verified_on") or "")):
                 raise ValueError(f"{claim_id}.verified_on must be YYYY-MM-DD")
             legacy_ids = claim.get("legacy_claim_ids")
@@ -245,6 +272,8 @@ def pool_state(researcher: dict) -> str:
     if researcher["status"] != "active" or researcher["pool_visibility"] in {"reference_only", "hidden"}:
         return "unadmitted"
     active_claims = [claim for claim in researcher["claims"] if claim["status"] == "active"]
+    if active_claims and researcher.get("pool_assignment") == "standby":
+        return "standby"
     if researcher["auto_proposable"] and len(active_claims) >= 2:
         return "main"
     if active_claims:
@@ -291,6 +320,8 @@ def directory_projection(registry: dict) -> dict:
             "pool_state": pool_state(row),
             "orcid_id": row["orcid_id"],
             "research_summary": row["research_summary"],
+            "matching_domains": matching_domains(row),
+            **({"summary_evidence": copy.deepcopy(row["summary_evidence"])} if "summary_evidence" in row else {}),
             "source_urls": row["source_urls"],
             "source_url": row["source_urls"][0],
             "source_checked_date": row["source_checked_date"],
@@ -305,6 +336,8 @@ def directory_projection(registry: dict) -> dict:
                 "evidence": claim["evidence"],
                 "source_urls": claim["source_urls"],
                 "evidence_level": claim["evidence_level"],
+                "verified_on": claim["verified_on"],
+                **({"evidence_records": copy.deepcopy(claim["evidence_records"])} if "evidence_records" in claim else {}),
                 "legacy_claim_ids": claim.get("legacy_claim_ids", []),
             } for claim in row["claims"]],
         } for row in registry["researchers"]],
@@ -324,6 +357,9 @@ def legacy_faculty_projection(registry: dict) -> list[dict]:
         "status": row["status"],
         "pool_state": row["pool_state"],
         "claim_status": "registry-reviewed",
+        "research_summary": row["research_summary"],
+        "matching_domains": row["matching_domains"],
+        **({"summary_evidence": copy.deepcopy(row["summary_evidence"])} if "summary_evidence" in row else {}),
         "official_interests": next(
             source.get("official_interests", [])
             for source in registry["researchers"] if source["researcher_id"] == row["id"]
@@ -339,10 +375,26 @@ def legacy_faculty_projection(registry: dict) -> list[dict]:
             "evidence": claim["evidence"],
             "evidence_tier": claim["evidence_level"],
             "source_urls": claim["source_urls"],
+            "verified_on": claim["verified_on"],
+            **({"evidence_records": copy.deepcopy(claim["evidence_records"])} if "evidence_records" in claim else {}),
         } for claim in row["claims"] if claim["status"] == "active"],
         "source_urls": row["source_urls"],
         "source_checked_date": row["source_checked_date"],
     } for row in projection["researchers"]]
+
+
+def matching_domains(row: dict) -> list[str]:
+    """Reuse the existing forward-matcher vocabulary for public profile facets.
+
+    These are ordering/scope facets, not new expertise claims. The browser's
+    unchanged per-person fit still requires its ordinary scientific evidence.
+    Keep canonical category labels as well; those labels need not be catalog
+    topic keys. This projection is identical for every department/visibility.
+    """
+    from scripts.faculty_match import _pi_domains
+    claims = [c for c in row["claims"] if c["status"] == "active"]
+    categories = {v for c in claims for v in (c.get("categories") or [c["category"]]) if v}
+    return sorted(categories | set(_pi_domains({"key_terms": [v for c in claims for v in (c["label"], c["evidence"])]})))
 
 
 def matching_profiles(registry: dict, *, visibility: str = "department") -> list[dict]:
@@ -362,14 +414,11 @@ def matching_profiles(registry: dict, *, visibility: str = "department") -> list
             "name": matching_name,
             "resolved_name": row["display_name"],
             "research_summary": row["research_summary"],
+            "summary_evidence": copy.deepcopy(row.get("summary_evidence", [])),
+            "claims": [{k: copy.deepcopy(v) for k, v in c.items() if k != "history"} for c in claims],
             "key_terms": [claim["label"] for claim in claims],
             "capability_phrases": list(dict.fromkeys(claim["evidence"] for claim in claims)),
-            "domains": sorted({
-                category
-                for claim in claims
-                for category in (claim.get("categories") or [claim["category"]])
-                if category
-            }),
+            "domains": matching_domains(row),
             "claim_refs": [{"claim_id": claim["claim_id"], "revision": claim["revision"]} for claim in claims],
             "openalex_id": (row.get("external_ids") or {}).get("openalex", ""),
             "works_count": (row.get("metrics") or {}).get("openalex_works_count"),
@@ -419,9 +468,15 @@ def _team_profile_changed(previous: dict, current: dict) -> bool:
     )
     if any(previous.get(field) != current.get(field) for field in fields):
         return True
+    # A legacy projection may lack the newer representation fields entirely.
+    # This is not proof that an unchanged canonical summary was edited. Current
+    # packages bind the complete pool and retain these fields on every rebuild.
+    if any(field in previous and previous[field] != current.get(field)
+           for field in ("research_summary", "summary_evidence", "matching_domains")):
+        return True
     term_fields = (
         "claim_id", "claim_revision", "label", "category", "categories", "type",
-        "evidence", "evidence_tier",
+        "evidence", "evidence_tier", "evidence_records",
     )
     previous_terms = [
         {field: term.get(field) for field in term_fields}
@@ -456,6 +511,12 @@ def validate_opportunity_team_dependencies(registry: dict, model: dict) -> None:
                 previous_profiles[str(identity)] = row
 
     affected: dict[str, set[str]] = {}
+    pool_fields = ("id", "status", "auto_proposable", "pool_state", "pool_visibility", "research_summary", "summary_evidence", "matching_domains", "terms")
+    current_pool = content_hash([{k: p.get(k) for k in pool_fields} for p in projection.values()])
+    if model.get("candidate_pool_fingerprint") and model["candidate_pool_fingerprint"] != current_pool:
+        for opportunity in model.get("opportunities", []):
+            if opportunity.get("review_state") != "needs_revalidation":
+                affected.setdefault(str(opportunity.get("id")), set()).add("candidate-pool")
     for opportunity in model.get("opportunities", []):
         if opportunity.get("review_state") == "needs_revalidation":
             continue
@@ -526,6 +587,18 @@ def validate_opportunity_team_dependencies(registry: dict, model: dict) -> None:
 
 def synchronize_opportunity_team_model(registry: dict, path: Path, *, model: dict | None = None, write: bool = True) -> dict:
     model = model if model is not None else json.loads(path.read_text(encoding="utf-8"))
+    projection = legacy_faculty_projection(registry)
+    pool_fields = ("id", "status", "auto_proposable", "pool_state", "pool_visibility", "research_summary", "summary_evidence", "matching_domains", "terms")
+    pool_fingerprint = content_hash([{k: p.get(k) for k in pool_fields} for p in projection])
+    prior_pool = model.get("candidate_pool_fingerprint")
+    pool_changed = (prior_pool != pool_fingerprint if prior_pool else
+                    model.get("researcher_registry_generation") != registry["registry_generation"])
+    if pool_changed:
+        for opportunity in model.get("opportunities", []):
+            opportunity["review_state"] = "needs_revalidation"
+            opportunity["revalidation_reason"] = "The candidate pool or its scientific representation changed."
+            opportunity["revalidation_reason_code"] = "candidate_pool_changed"
+    model["candidate_pool_fingerprint"] = pool_fingerprint
     # An approved profile correction must be publishable even when an existing
     # team depended on the old evidence. Withhold only those stale proposals.
     # This state persists across subsequent rebuilds until explicit revalidation.
@@ -560,7 +633,7 @@ def synchronize_opportunity_team_model(registry: dict, path: Path, *, model: dic
     }
     model["pool_counts"] = counts["pool_counts"]
     model["researcher_registry_generation"] = registry["registry_generation"]
-    model["faculty"] = legacy_faculty_projection(registry)
+    model["faculty"] = projection
     model.pop("generation_id", None)
     model["generation_id"] = content_hash(model)
     if write:
@@ -599,7 +672,7 @@ def build_outputs(
         update_version_target(target, team_model["generation_id"])
     interests_page = Path("faculty_interests.html")
     if interests_page.exists():
-        _update_directory_version_target(interests_page, registry["registry_generation"])
+        _update_directory_version_target(interests_page, hashlib.sha256(directory_path.read_bytes()).hexdigest())
     return {"registry": registry, "directory": projection, "team_model": team_model}
 
 
@@ -618,7 +691,7 @@ def dependency_report(before: dict, after: dict, team_model: dict) -> dict:
         old_claims = {claim["claim_id"]: claim["material_hash"] for claim in (old or {}).get("claims", [])}
         new_claims = {claim["claim_id"]: claim["material_hash"] for claim in (new or {}).get("claims", [])}
         changed_claims = sorted(claim_id for claim_id in set(old_claims) | set(new_claims) if old_claims.get(claim_id) != new_claims.get(claim_id))
-        if changed_claims or not old or not new or any((old or {}).get(key) != (new or {}).get(key) for key in ("status", "auto_proposable", "relationship", "pool_visibility")):
+        if changed_claims or not old or not new or any((old or {}).get(key) != (new or {}).get(key) for key in ("status", "auto_proposable", "relationship", "pool_visibility", "pool_assignment", "research_summary", "summary_evidence")):
             scientific_researchers.add(researcher_id)
         changes.append({"researcher_id": researcher_id, "changed_claim_ids": changed_claims})
     affected_scopes = []
@@ -627,7 +700,12 @@ def dependency_report(before: dict, after: dict, team_model: dict) -> dict:
         for role in opportunity.get("roles", []):
             references.update(role.get("candidate_ids", []))
             references.update(role.get("alternative_ids", []))
-        touched = sorted(scientific_researchers.intersection(references))
+        # Every optimizer depends on its candidate pool, including people it did
+        # not select before the correction. Summary-only changes count too.
+        pool_changes = {rid for rid in scientific_researchers if any(
+            p and p.get("auto_proposable") and p.get("pool_visibility") not in {"hidden", "reference_only"}
+            for p in (before_by_id.get(rid), after_by_id.get(rid)))}
+        touched = sorted(pool_changes | scientific_researchers.intersection(references))
         if touched:
             affected_scopes.append({"scope_id": opportunity["id"], "researcher_ids": touched})
     return {
@@ -680,6 +758,7 @@ def apply_approved_submission(
         }
         output["researchers"].append(target)
     previous_claims = {claim["claim_id"]: copy.deepcopy(claim) for claim in target.get("claims", [])}
+    previous_summary = target.get("research_summary", "")
     permitted = {
         "display_name", "sort_name", "aliases", "orcid_id", "home_unit", "relationship",
         "pool_visibility", "auto_proposable", "status", "research_summary", "source_urls",
@@ -691,6 +770,11 @@ def apply_approved_submission(
     for key in permitted:
         if key in proposed:
             target[key] = copy.deepcopy(proposed[key])
+    if target.get("research_summary", "") != previous_summary:
+        target["summary_history"] = [*target.get("summary_history", []), {
+            "research_summary": previous_summary, "summary_evidence": target.get("summary_evidence", [])}]
+        target.pop("summary_evidence", None)
+        target.pop("source_audit", None)
     target["orcid_id"] = _normalize_orcid(target.get("orcid_id")) if target.get("orcid_id") else ""
     target["source_checked_date"] = target.get("source_checked_date") or approved.get("approved_at", "")[:10]
     submitted_claim_ids = {
@@ -733,6 +817,10 @@ def apply_approved_submission(
         value["categories"] = list(dict.fromkeys(value.get("categories") or [value.get("category")]))
         old = previous_claims.get(value["claim_id"])
         if old:
+            # An old locator is not an audit of newly edited wording. Preserve
+            # that evidence in history instead of attaching it to a new claim.
+            if any(value.get(k) != old.get(k) for k in ("label", "evidence", "source_urls")) and value.get("evidence_records") == old.get("evidence_records"):
+                value.pop("evidence_records", None)
             if value.get("legacy_claim_ids") != old.get("legacy_claim_ids", []):
                 raise ValueError("existing legacy claim IDs must remain attached to their original claim")
             value["revision"] = (
@@ -740,6 +828,11 @@ def apply_approved_submission(
                 if material_claim_hash(value) != old["material_hash"]
                 else old["revision"]
             )
+            if value["revision"] != old["revision"]:
+                value["history"] = [*old.get("history", []), {k: copy.deepcopy(v) for k, v in old.items() if k != "history"}]
+                target.pop("source_audit", None)
+            elif old.get("history"):
+                value["history"] = copy.deepcopy(old["history"])
         else:
             if value.get("legacy_claim_ids"):
                 raise ValueError("new claims cannot assign legacy claim IDs")

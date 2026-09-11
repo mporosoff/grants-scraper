@@ -1,0 +1,65 @@
+{
+  "after_counts": {
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 120,
+      "standby": 35,
+      "unadmitted": 3
+    },
+    "rankable": 158,
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "status_counts": {
+      "active": 158
+    },
+    "total": 158,
+    "unrankable": 0,
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    }
+  },
+  "after_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "before_counts": {
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 120,
+      "standby": 35,
+      "unadmitted": 3
+    },
+    "rankable": 155,
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "status_counts": {
+      "active": 158
+    },
+    "total": 158,
+    "unrankable": 3,
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    }
+  },
+  "claim_actions": {
+    "added": 126,
+    "reactivated": 2,
+    "retired": 68,
+    "revised": 359
+  },
+  "cost_usd": 0,
+  "dispositions": {
+    "corrected": 154,
+    "unresolved": 4
+  },
+  "paid_calls": 0,
+  "population": 158,
+  "read_source_urls": 230,
+  "successful_retrievals": 344,
+  "unique_cached_source_attempts": 359
+}

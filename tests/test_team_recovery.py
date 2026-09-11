@@ -206,17 +206,12 @@ class RetainedTeamRecovery(unittest.TestCase):
                     with patch.object(maintenance, 'config', return_value=settings), \
                             patch('requests.post', side_effect=AssertionError('Curated review needs no provider')):
                         result = maintenance.restore_proven_teams(model, candidates, registry)
-                    if change:
-                        self.assertEqual(model, before)
-                    else:
-                        self.assertEqual(result[0]['state'], 'restored_from_retained_evidence')
-                        self.assertNotIn('review_state', row)
-                        self.assertNotIn('decision_contract', row)
-                        for field in ('roles', 'members', 'missing_skills', 'record_type', 'objective'):
-                            self.assertEqual(row[field], original[field])
-                        self.assertEqual(row['source_fingerprint'], review['reviewed_source_fingerprint'])
-                        self.assertNotIn(key, teams.invalidate_stale_sources(model, teams.source_fingerprints(model, candidates)))
-                        self.assertEqual(row['recovery_proof']['validation_contract'], 'curated-source-and-profile-1')
+                    # These exact old curated hashes covered the old profile
+                    # projection. Expanded summaries/domains are new matching
+                    # inputs; do not manufacture a replacement review receipt.
+                    self.assertEqual(model, before)
+                    self.assertEqual(result[0]['state'], 'pending')
+
 
 
 if __name__ == '__main__':

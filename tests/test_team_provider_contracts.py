@@ -264,46 +264,20 @@ class TeamProviderContracts(unittest.TestCase):
                     provider.json(teams.ADJUDICATE, amended)
             self.assertEqual(post.call_count, 5)
 
-    def test_outage_withholds_changed_source_and_reassembles_remaining_current_claims(self):
+    def test_outage_cannot_restore_whole_pool_invalidated_teams(self):
+        from tools import team_maintenance
         registry = load_registry()
         model = json.loads(Path("config/opportunity_team_model.json").read_text(encoding="utf-8"))
-        baseline_scopes = teams.scopes()
-        baseline = teams.source_fingerprints(model, baseline_scopes)
-        healthy = [r for r in model["opportunities"] if r.get("review_state") != "needs_revalidation" and r.get("generator_version") and r["id"] in baseline]
-        source = healthy[0]
-        changed = next(r for r in healthy[1:] if r["members"][0]["faculty_id"] not in {m["faculty_id"] for m in source["members"]})
-        person_id = changed["members"][0]["faculty_id"]
-        retained = next(r for r in healthy[1:] if r["id"] != changed["id"] and person_id not in
-                        {ref["researcher_id"] for role in r["roles"] for ref in role["claim_refs"]})
-        originals = {r["id"]: copy.deepcopy(r) for r in (source, changed, retained)}
-        # This contract isolates source/researcher invalidation. Its synthetic
-        # prior generation must use the current prompt contract, independent of
-        # when the checked-in production model was last assessed.
-        for row in originals.values():
-            row["pipeline_hash"] = teams.content_hash([teams.VERSION, teams.MODEL, teams.DECOMPOSE, teams.ADJUDICATE, teams.VERIFY])
-        model["opportunities"] = list(originals.values())
-        person = next(p for p in registry["researchers"] if p["researcher_id"] == person_id)
-        person["status"] = "inactive"
-        baseline[source["id"]] = "amended-source"
-        candidates = [s for s in baseline_scopes if s["id"] in originals]
-        with tempfile.TemporaryDirectory() as directory, chdir(directory), redirect_stdout(io.StringIO()):
-            Path("config").mkdir()
-            Path("config/opportunity_team_model.json").write_text(json.dumps(model), encoding="utf-8")
-            with patch("sys.argv", ["teams", "--generate", "--state", ".spend/fixture", "--write"]), patch.object(teams, "load_registry", return_value=registry), patch.object(teams, "scopes", return_value=candidates), patch.object(teams, "source_fingerprints", return_value=baseline), patch.object(teams.Provider, "embed", side_effect=teams.ProviderUnavailable("synthetic outage")), patch.object(teams, "update_version_target"), patch.object(teams, "write_outputs") as write:
-                self.assertEqual(teams.main(), 1)
-            published = {r["id"]: r for r in write.call_args.args[0]["opportunities"]}
-            self.assertEqual(published[source["id"]]["review_state"], "needs_revalidation")
-            repaired = published[changed['id']]
-            self.assertEqual(repaired['review_state'], 'proposed')
-            self.assertNotIn(person_id, {ref['researcher_id'] for role in repaired['roles'] for ref in role['claim_refs']})
-            self.assertNotIn(person_id, {member['faculty_id'] for member in repaired['members']})
-            self.assertEqual(repaired['claim_update_proof']['provider_requests'], 0)
-            self.assertEqual(published[retained["id"]]["review_state"], originals[retained["id"]]["review_state"])
-            self.assertEqual(published[retained["id"]]["members"], originals[retained["id"]]["members"])
-            receipt = json.loads(Path("evaluation/opportunity_team_generation.json").read_text())
-            self.assertEqual(receipt["processing_failure"]["reason_code"], "provider_unavailable")
-            self.assertGreater(receipt["pending_after"], 0)
-            self.assertEqual(receipt["assessed_scopes"], 0)
+        self.assertTrue(model['opportunities'])
+        for row in model['opportunities']:
+            row['review_state'] = 'needs_revalidation'
+            row['revalidation_reason_code'] = 'candidate_pool_changed'
+        original = copy.deepcopy(model)
+        with patch('requests.post', side_effect=AssertionError('No provider recovery')) as post:
+            self.assertEqual(team_maintenance.restore_proven_teams(model, teams.scopes(), registry), [])
+            self.assertEqual(team_maintenance.reassemble_changed_claims(model, teams.scopes(), registry), [])
+            post.assert_not_called()
+        self.assertEqual(model, original)
 
 
 if __name__ == "__main__":

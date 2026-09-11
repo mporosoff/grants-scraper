@@ -254,6 +254,7 @@ async function run() {
     "assets/subtopic-runtime.js",
     "assets/team-hybrid.js",
     "assets/team-matcher.js",
+    "assets/shared-team-engine.js",
     "assets/team-researchers.js",
     "assets/opportunity-team.js",
     "assets/opportunity-team-panel.js",

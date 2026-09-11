@@ -1,0 +1,196 @@
+{
+  "version": 1,
+  "starting_commit": "16ed8ff1ca6e7e57199d3d4fafabeebb07f7cdb2",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "shared_package_generation": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab",
+  "checks": [
+    {
+      "command": "python -X utf8 -m tools.run_refresh_validation",
+      "passed": 1372,
+      "failed": 0,
+      "log": {
+        "path": "outputs/researcher-profile-repair/python-required-final.log",
+        "sha256": "d8b4a7e8de978300e186d2347a28f9f06bb9d219ea3aa1f679aa197ccbc486fb",
+        "bytes": 291519
+      },
+      "scope": "Required full suite"
+    },
+    {
+      "command": "node --test tests/browser/*.test.mjs",
+      "passed": 853,
+      "failed": 0,
+      "log": {
+        "path": "outputs/researcher-profile-repair/browser-required-final.log",
+        "sha256": "5924c46c5e93758a4061e888c216e91ff4666c4a60dbfbe59f84b554310f00cd",
+        "bytes": 82468
+      },
+      "scope": "Required full suite"
+    },
+    {
+      "command": "node --test tests/browser/shared-team-contract.test.mjs tests/browser/shared-team-panel.test.mjs tests/browser/researcher-shared-adapters.test.mjs tests/browser/search-release-package-contract.test.mjs",
+      "passed": 14,
+      "failed": 0,
+      "log": {
+        "path": "outputs/researcher-profile-repair/shared-cache-final.log",
+        "sha256": "46627df93578da4376b9099089aa8061b14888c572ab4c4c6cd67ef06221f58d",
+        "bytes": 1571
+      },
+      "scope": "Affected checks after the final cache/dependency changes"
+    },
+    {
+      "command": "node --test tests/browser/search-release-package-contract.test.mjs",
+      "passed": 6,
+      "failed": 0,
+      "log": {
+        "path": "outputs/researcher-profile-repair/release-tests-corrected.log",
+        "sha256": "92bbabe2a41e175d025a36716923bb9f45d4c8fd57ba246b096b71fee275ec43",
+        "bytes": 692
+      },
+      "scope": "Affected checks after the final cache/dependency changes"
+    },
+    {
+      "command": "node tools/query_baseline.mjs --check",
+      "queries": 37,
+      "result": "PASS; zero top-10 churn",
+      "log": {
+        "path": "outputs/researcher-profile-repair/query-baseline.log",
+        "sha256": "fa9ee0261ee9f4a18e58effc7f885ca4bae3517d89c2c200917094429f33ada5",
+        "bytes": 52
+      }
+    },
+    {
+      "command": "node tools/p9_scoring_probe.mjs --check",
+      "cases": 50,
+      "result": "PASS; byte-identical frozen scoring observations",
+      "log": {
+        "path": "outputs/researcher-profile-repair/scoring-probe.log",
+        "sha256": "6f6b4ac05b1acf8bd411b3f930241a6056974c17ae2109321d9a2be41a635d8c",
+        "bytes": 66
+      }
+    },
+    {
+      "command": "Hermetic no-drift pipeline using Python subprocess argument lists",
+      "result": "PASS; exact frozen artifact fingerprints, source fetch limits zero",
+      "log": {
+        "path": "outputs/researcher-profile-repair/no-drift.log",
+        "sha256": "348458f33b6cec0ff0d2e2ebef460ee8273b42de25673e7906cf54903ede1473",
+        "bytes": 2183
+      }
+    },
+    {
+      "command": "node tools/build_search_release_package.mjs --check",
+      "result": "PASS",
+      "log": {
+        "path": "outputs/researcher-profile-repair/release-check-final.log",
+        "sha256": "97d69dd9b033e69926bbd88d28aca75eff736479e8c231e939c4ec74a2defc6b",
+        "bytes": 435
+      }
+    }
+  ],
+  "real_inputs": {
+    "path": "docs/team-recommender/profile-repair/real-input-check.json",
+    "sha256": "9eaf9eabe24ae710bc93ae7ed3a5b5fa7be58faeccee02633ec251727ea775c0",
+    "bytes": 18292
+  },
+  "earlier_attempt_logs_preserved_locally": [
+    {
+      "path": "outputs/researcher-profile-repair/python-required.log",
+      "sha256": "40c7bff1f27e5a7b58c7b2dff8a85cce8583165751ce0ab943504fbd39bfe9e4",
+      "bytes": 410231
+    },
+    {
+      "path": "outputs/researcher-profile-repair/browser-required.log",
+      "sha256": "6dda2e65921f9282d15f6c2ea7889dfb7fa4fd44a4d807c4ac724bd611288e52",
+      "bytes": 92071
+    },
+    {
+      "path": "outputs/researcher-profile-repair/python-affected-2.log",
+      "sha256": "04e7f1a079d59619391183531dd81bcf99d47e676b149b1742ea9e47685218b8",
+      "bytes": 143
+    },
+    {
+      "path": "outputs/researcher-profile-repair/release-tests-final.log",
+      "sha256": "e55cd36e7a381c64bfc74758d3bf7c93411382cbc48101903ad433c3101fa43e",
+      "bytes": 64
+    }
+  ],
+  "resolved_failures": [
+    "Obsolete tests assumed unchanged ChemE labels or a valid old generated team after whole-pool changes. Explicit fixtures now isolate those behavior contracts.",
+    "Whole-pool invalidation was not honored by every legacy restoration path; all three paths now withhold affected teams.",
+    "Claim-count-derived pool assignment would have promoted 34 standby records; explicit retained pool assignments preserve eligibility.",
+    "New source claim categories were not always catalog topic keys; both canonical projections now reuse the existing faculty_match domain extraction.",
+    "Release dependency hashes and historical v2 fixture bindings were refreshed or bound to the exact archived historical adapter/directory.",
+    "A mistyped targeted release-test filename ran no tests; the correct six-test module passed. Git Bash no-drift launch/path attempts failed; the equivalent hermetic pipeline subsequently passed."
+  ],
+  "not_run": [
+    "Full Playwright/E2E/accessibility for this correction",
+    "Physical browser/mobile timing or peak memory",
+    "New semantic model judge or human expert review",
+    "CI/PR review/push/merge/deployment"
+  ],
+  "provider_calls": 0,
+  "new_human_requests": 0,
+  "presentation": "Existing renderer markup, fixed strings, styles and control/focus behavior retained; only declared nonvisual profile/loading/engine seams and generated asset version references changed. Covered by the frozen-function and custom-DOM contracts.",
+  "input_dependencies": [
+    {
+      "path": "assets/team-matcher.js",
+      "sha256": "8f88a47a2d49d3e799b3af5678f346be2097d27a06b7641e3532de4fda452baf",
+      "bytes": 27356
+    },
+    {
+      "path": "assets/shared-team-engine.js",
+      "sha256": "b38400527fabea5f7ad6d89abcdc364c26a9053d9d128d2bc4df2a688034a4cd",
+      "bytes": 17135
+    },
+    {
+      "path": "assets/opportunity-team.js",
+      "sha256": "0125e46a8f827abb17f819d80ada4bf46b7bbdcbd8a69995ff983dc1cfb4f84f",
+      "bytes": 32510
+    },
+    {
+      "path": "scripts/researcher_registry.py",
+      "sha256": "0ad18a7106c7b1d9c5b46f013f0c08fb1f415edd6a06a96340b702ca30e911a1",
+      "bytes": 54285
+    },
+    {
+      "path": "scripts/faculty_match.py",
+      "sha256": "e0c77a7dd4e1913b990589291eedd2aec6c54987de55363c8cc126896f867d2a",
+      "bytes": 25725
+    },
+    {
+      "path": "tools/team_maintenance.py",
+      "sha256": "9208bcbfb90da2b94ac44d21412ade1e06b7c56cc61373bf2ea2f6cc7d4ba69f",
+      "bytes": 23746
+    },
+    {
+      "path": "team_match.html",
+      "sha256": "ca35823029b54da372f453551f9d3cc9cec6dd9c8a0c56c5ca397dc6159db275",
+      "bytes": 78091
+    },
+    {
+      "path": "config/researcher_registry.json",
+      "sha256": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+      "bytes": 1739867
+    },
+    {
+      "path": "data/researcher_directory.js",
+      "sha256": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+      "bytes": 818871
+    },
+    {
+      "path": "data/faculty_matches.js",
+      "sha256": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+      "bytes": 114209
+    },
+    {
+      "path": "data/search-v2-release.json",
+      "sha256": "992319b55a685e69242f97cf8fa538009bc916a643b07b34facb05696b1f7686",
+      "bytes": 4886
+    },
+    {
+      "path": "docs/team-recommender/profile-repair/shared-candidate-index.json",
+      "sha256": "fb3d3f5916bc31518ea6807c978b12bc3571f16382c4d5ddae2e43c08b10c9a0",
+      "bytes": 27902
+    }
+  ]
+}

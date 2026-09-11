@@ -1,0 +1,678 @@
+{
+  "baseline_unresolved_not_previously_audited": true,
+  "departments": {
+    "Biology": {
+      "after": {
+        "active_claims": {
+          "max": 4,
+          "median": 4,
+          "min": 4
+        },
+        "legacy_template_summaries": 0,
+        "population": 1,
+        "summary_characters": {
+          "max": 460,
+          "median": 460,
+          "min": 460
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 1,
+        "population": 1,
+        "summary_characters": {
+          "max": 183,
+          "median": 183,
+          "min": 183
+        },
+        "supporting_sources": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "unresolved": 0
+      }
+    },
+    "Biomedical Engineering": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 1
+        },
+        "legacy_template_summaries": 0,
+        "population": 17,
+        "summary_characters": {
+          "max": 512,
+          "median": 355,
+          "min": 294
+        },
+        "supporting_sources": {
+          "max": 2,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 1
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 1,
+          "min": 1
+        },
+        "legacy_template_summaries": 17,
+        "population": 17,
+        "summary_characters": {
+          "max": 214,
+          "median": 164,
+          "min": 93
+        },
+        "supporting_sources": {
+          "max": 4,
+          "median": 3,
+          "min": 3
+        },
+        "unresolved": 0
+      }
+    },
+    "Brain & Cognitive Sciences": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3.0,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 2,
+        "summary_characters": {
+          "max": 340,
+          "median": 330.5,
+          "min": 321
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1.0,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 2,
+          "median": 1.5,
+          "min": 1
+        },
+        "legacy_template_summaries": 2,
+        "population": 2,
+        "summary_characters": {
+          "max": 221,
+          "median": 151.0,
+          "min": 81
+        },
+        "supporting_sources": {
+          "max": 3,
+          "median": 3.0,
+          "min": 3
+        },
+        "unresolved": 0
+      }
+    },
+    "Chemical & Sustainability Engineering": {
+      "after": {
+        "active_claims": {
+          "max": 6,
+          "median": 4.0,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 14,
+        "summary_characters": {
+          "max": 563,
+          "median": 449.0,
+          "min": 281
+        },
+        "supporting_sources": {
+          "max": 2,
+          "median": 1.0,
+          "min": 1
+        },
+        "unresolved": 1
+      },
+      "before": {
+        "active_claims": {
+          "max": 9,
+          "median": 8.0,
+          "min": 1
+        },
+        "legacy_template_summaries": 0,
+        "population": 14,
+        "summary_characters": {
+          "max": 217,
+          "median": 151.5,
+          "min": 0
+        },
+        "supporting_sources": {
+          "max": 7,
+          "median": 4.0,
+          "min": 1
+        },
+        "unresolved": 0
+      }
+    },
+    "Chemistry": {
+      "after": {
+        "active_claims": {
+          "max": 4,
+          "median": 3.0,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 12,
+        "summary_characters": {
+          "max": 478,
+          "median": 384.0,
+          "min": 331
+        },
+        "supporting_sources": {
+          "max": 2,
+          "median": 1.0,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 3.0,
+          "min": 2
+        },
+        "legacy_template_summaries": 12,
+        "population": 12,
+        "summary_characters": {
+          "max": 174,
+          "median": 135.5,
+          "min": 57
+        },
+        "supporting_sources": {
+          "max": 5,
+          "median": 4.0,
+          "min": 3
+        },
+        "unresolved": 0
+      }
+    },
+    "Computer Science": {
+      "after": {
+        "active_claims": {
+          "max": 4,
+          "median": 3.0,
+          "min": 2
+        },
+        "legacy_template_summaries": 0,
+        "population": 20,
+        "summary_characters": {
+          "max": 406,
+          "median": 331.0,
+          "min": 251
+        },
+        "supporting_sources": {
+          "max": 2,
+          "median": 1.0,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 2.0,
+          "min": 0
+        },
+        "legacy_template_summaries": 20,
+        "population": 20,
+        "summary_characters": {
+          "max": 421,
+          "median": 139.0,
+          "min": 84
+        },
+        "supporting_sources": {
+          "max": 5,
+          "median": 3.0,
+          "min": 0
+        },
+        "unresolved": 0
+      }
+    },
+    "Dermatology": {
+      "after": {
+        "active_claims": {
+          "max": 4,
+          "median": 3.5,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 2,
+        "summary_characters": {
+          "max": 472,
+          "median": 414.0,
+          "min": 356
+        },
+        "supporting_sources": {
+          "max": 2,
+          "median": 1.5,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 2.5,
+          "min": 2
+        },
+        "legacy_template_summaries": 2,
+        "population": 2,
+        "summary_characters": {
+          "max": 218,
+          "median": 171.5,
+          "min": 125
+        },
+        "supporting_sources": {
+          "max": 6,
+          "median": 4.5,
+          "min": 3
+        },
+        "unresolved": 0
+      }
+    },
+    "Earth & Environmental Sciences": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 1,
+        "summary_characters": {
+          "max": 330,
+          "median": 330,
+          "min": 330
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 1,
+        "population": 1,
+        "summary_characters": {
+          "max": 137,
+          "median": 137,
+          "min": 137
+        },
+        "supporting_sources": {
+          "max": 4,
+          "median": 4,
+          "min": 4
+        },
+        "unresolved": 0
+      }
+    },
+    "Electrical & Computer Engineering": {
+      "after": {
+        "active_claims": {
+          "max": 5,
+          "median": 3,
+          "min": 2
+        },
+        "legacy_template_summaries": 0,
+        "population": 19,
+        "summary_characters": {
+          "max": 534,
+          "median": 338,
+          "min": 215
+        },
+        "supporting_sources": {
+          "max": 5,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 2,
+          "min": 0
+        },
+        "legacy_template_summaries": 19,
+        "population": 19,
+        "summary_characters": {
+          "max": 437,
+          "median": 121,
+          "min": 49
+        },
+        "supporting_sources": {
+          "max": 6,
+          "median": 4,
+          "min": 0
+        },
+        "unresolved": 0
+      }
+    },
+    "English": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 1,
+        "summary_characters": {
+          "max": 345,
+          "median": 345,
+          "min": 345
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "legacy_template_summaries": 1,
+        "population": 1,
+        "summary_characters": {
+          "max": 49,
+          "median": 49,
+          "min": 49
+        },
+        "supporting_sources": {
+          "max": 5,
+          "median": 5,
+          "min": 5
+        },
+        "unresolved": 0
+      }
+    },
+    "Laboratory for Laser Energetics": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 1,
+        "summary_characters": {
+          "max": 299,
+          "median": 299,
+          "min": 299
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 1,
+        "population": 1,
+        "summary_characters": {
+          "max": 125,
+          "median": 125,
+          "min": 125
+        },
+        "supporting_sources": {
+          "max": 2,
+          "median": 2,
+          "min": 2
+        },
+        "unresolved": 0
+      }
+    },
+    "Linguistics": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 1,
+        "summary_characters": {
+          "max": 362,
+          "median": 362,
+          "min": 362
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "legacy_template_summaries": 1,
+        "population": 1,
+        "summary_characters": {
+          "max": 81,
+          "median": 81,
+          "min": 81
+        },
+        "supporting_sources": {
+          "max": 4,
+          "median": 4,
+          "min": 4
+        },
+        "unresolved": 0
+      }
+    },
+    "Mechanical Engineering": {
+      "after": {
+        "active_claims": {
+          "max": 5,
+          "median": 3,
+          "min": 2
+        },
+        "legacy_template_summaries": 0,
+        "population": 33,
+        "summary_characters": {
+          "max": 529,
+          "median": 374,
+          "min": 254
+        },
+        "supporting_sources": {
+          "max": 3,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 2
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 1
+        },
+        "legacy_template_summaries": 33,
+        "population": 33,
+        "summary_characters": {
+          "max": 223,
+          "median": 153,
+          "min": 49
+        },
+        "supporting_sources": {
+          "max": 6,
+          "median": 3,
+          "min": 2
+        },
+        "unresolved": 0
+      }
+    },
+    "Ophthalmology": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 1,
+        "summary_characters": {
+          "max": 360,
+          "median": 360,
+          "min": 360
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "legacy_template_summaries": 1,
+        "population": 1,
+        "summary_characters": {
+          "max": 132,
+          "median": 132,
+          "min": 132
+        },
+        "supporting_sources": {
+          "max": 3,
+          "median": 3,
+          "min": 3
+        },
+        "unresolved": 0
+      }
+    },
+    "Physics & Astronomy": {
+      "after": {
+        "active_claims": {
+          "max": 3,
+          "median": 3.0,
+          "min": 3
+        },
+        "legacy_template_summaries": 0,
+        "population": 6,
+        "summary_characters": {
+          "max": 449,
+          "median": 331.5,
+          "min": 272
+        },
+        "supporting_sources": {
+          "max": 1,
+          "median": 1.0,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 2.0,
+          "min": 1
+        },
+        "legacy_template_summaries": 6,
+        "population": 6,
+        "summary_characters": {
+          "max": 111,
+          "median": 93.5,
+          "min": 64
+        },
+        "supporting_sources": {
+          "max": 5,
+          "median": 4.0,
+          "min": 3
+        },
+        "unresolved": 0
+      }
+    },
+    "The Institute of Optics": {
+      "after": {
+        "active_claims": {
+          "max": 4,
+          "median": 3,
+          "min": 2
+        },
+        "legacy_template_summaries": 0,
+        "population": 27,
+        "summary_characters": {
+          "max": 512,
+          "median": 360,
+          "min": 255
+        },
+        "supporting_sources": {
+          "max": 2,
+          "median": 1,
+          "min": 1
+        },
+        "unresolved": 0
+      },
+      "before": {
+        "active_claims": {
+          "max": 3,
+          "median": 3,
+          "min": 1
+        },
+        "legacy_template_summaries": 27,
+        "population": 27,
+        "summary_characters": {
+          "max": 175,
+          "median": 81,
+          "min": 44
+        },
+        "supporting_sources": {
+          "max": 5,
+          "median": 3,
+          "min": 2
+        },
+        "unresolved": 0
+      }
+    }
+  },
+  "indicators_are_not_quality_scores": true
+}

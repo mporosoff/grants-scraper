@@ -1,0 +1,38 @@
+{
+  "generation": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "catalog_sha256": "44fd0f42b5bc2c1cb72326b2bef13f8b717ea2f4758e510dad3fe6a38b84ffc4",
+  "sidecar_sha256": "bc6281c2c2295329895436b00052ac116c8556bebd944dc530e94609d6b85943",
+  "directory_sha256": "0a1ed91311320d52a9c9c5617f10fa21a016b212dc45c7b085c6b4516a2aef82",
+  "historical_scope_inventory": 107,
+  "canonical_scopes": 105,
+  "inventory_source": "Existing public availability IDs only; no saved team or judge file is read",
+  "omitted": [
+    {
+      "id": "332894:superconducting-qubits",
+      "reason": "No identical canonical parent or publishable child projection"
+    },
+    {
+      "id": "eere-exchange:DE-TA1-0003589",
+      "reason": "No identical canonical parent or publishable child projection"
+    }
+  ],
+  "catalog_records": 1422,
+  "directory_records": 158,
+  "eligible_directory": 155,
+  "new_vectors": 0,
+  "reused_vectors": 0,
+  "old_vector_assets": "Preserved historical inputs; incompatible corrected summaries/claims are never paired with old vectors.",
+  "calculated_scopes_at_build": 0,
+  "paid_calls": 0,
+  "activated": false,
+  "shared_asset": {
+    "path": "data/team_ingredients/shared-ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab.json",
+    "bytes": 29303,
+    "sha256": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab"
+  },
+  "runtime": {
+    "matcher": "8f88a47a2d49d3e799b3af5678f346be2097d27a06b7641e3532de4fda452baf",
+    "shared": "b38400527fabea5f7ad6d89abcdc364c26a9053d9d128d2bc4df2a688034a4cd"
+  }
+}

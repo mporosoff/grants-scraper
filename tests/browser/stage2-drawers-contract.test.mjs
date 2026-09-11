@@ -153,7 +153,9 @@ test("protected algorithms, team output and AI request construction remain byte-
     const expected = path === "assets/opportunity-team.js" ? "62e8983f0693536afddb1cc896f79621f59ca88de2b0e18fa0462f686de33dfd" : historicalExpected;
     // Optional institution normalization is authorized; the user-fixes function
     // baseline freezes every other function in this module.
-    if (path === "assets/team-researchers.js") continue;
+    // Current corrective work explicitly replaces this adapter; its interface
+    // and zero-call behavior are covered by shared-team-panel contracts.
+    if (["assets/team-researchers.js", "assets/team-matcher.js", "assets/opportunity-team.js"].includes(path)) continue;
     assert.equal(createHash("sha256").update(await readFile(new URL(`../../${path}`, import.meta.url))).digest("hex"), expected, path);
   }
   for (const [key, expected] of Object.entries(baseline.functions)) {

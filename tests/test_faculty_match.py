@@ -75,7 +75,7 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
                 "topic_areas": ["Catalysis and reaction engineering"],
                 "posted_date": "2025-12-01",
             },
-        ])
+        ], profiles=[{'name': 'Marc D. Porosoff', 'key_terms': ['heterogeneous thermal catalysis', 'carbon dioxide capture and conversion'], 'domains': ['Carbon management', 'Catalysis and reaction engineering']}])
 
         porosoff = result["pi_matches"]["Marc D. Porosoff"]
         self.assertEqual(
@@ -103,7 +103,7 @@ class FacultyMatchRelevanceTests(unittest.TestCase):
                 "posted_date": "2026-04-02",
                 "status": "posted",
             },
-        ])
+        ], profiles=[{'name': 'Currentness fixture', 'key_terms': ['heterogeneous thermal catalysis'], 'domains': ['Catalysis and reaction engineering']}])
 
         ids = {
             match["id"]

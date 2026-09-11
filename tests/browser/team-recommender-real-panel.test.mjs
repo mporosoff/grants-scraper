@@ -21,7 +21,7 @@ async function panel({sid='361207',corrupt=false,delay=false}={}){
   requests.push(script.src);const name=script.src.split('?')[0];assert.ok(['assets/team-recommender.js','assets/team-ingredients.js'].includes(name));
   const bytes=fs.readFileSync(name);assert.equal(script.integrity,'sha256-'+createHash('sha256').update(bytes).digest('base64'));
   vm.runInContext(bytes.toString(),c);queueMicrotask(()=>dom.dispatch('load',script));};
- vm.createContext(c);for(const p of ['assets/site-shell.js','assets/submission-schedule.js','assets/search-retrieval.js','assets/opportunity-team.js','assets/opportunity-team-panel.js'])vm.runInContext(read(p),c);
+ vm.createContext(c);for(const p of ['assets/site-shell.js','assets/submission-schedule.js','assets/search-retrieval.js','docs/team-recommender/history/stage3-runtime/opportunity-team.js','assets/opportunity-team-panel.js'])vm.runInContext(read(p),c);
  const drawer=dom.document.getElementById('team-builder');
  return {dom,c,clock,requests,pending,drawer,networkViolations:()=>rejectedNetwork,open:()=>dom.dispatch('click',dom.document.getElementById('open-real')),
   async ready(){const deadline=performance.now()+5000;while(performance.now()<deadline){await tick();if(drawer.querySelector('.opportunity-team-next')||drawer.querySelector('[data-opportunity-team-retry]'))return;}throw Error('Real panel did not settle: '+drawer.textContent.slice(0,300));}};

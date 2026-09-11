@@ -187,7 +187,7 @@ class ProductionTeamQualification(unittest.TestCase):
         self.assertEqual(team_provider.stage_settings('decomposition')['prompt_version'], 'sonnet-research-purpose-3')
         self.assertEqual(team_provider.stage_settings('verification')['prompt_version'], 'sonnet-production-verification-5')
 
-    def test_ordinary_registry_outputs_reassemble_unpinned_dependents_only(self):
+    def test_registry_pool_change_withholds_all_old_teams_without_reassembling_partial_graphs(self):
         fixture = json.loads(Path('tests/fixtures/claim_retirement_recovery.json').read_bytes())
         model, candidates, current = fixture['model'], fixture['candidates'], fixture['registry']
         # These IDs cannot use the historical restoration allowlist.
@@ -205,39 +205,19 @@ class ProductionTeamQualification(unittest.TestCase):
                 with patch.object(registry, 'load_registry', return_value=current), patch.object(teams, 'scopes', return_value=candidates), patch('scripts.import_opportunity_team_model.write_outputs'), patch('scripts.faculty_match.match_to_catalog'):
                     return registry.build_outputs(Path('config/registry.json'), team_model_path=path)['team_model']
             restored = rebuild()
-            active = [row for row in restored['opportunities'] if row['review_state'] == 'proposed']
-            self.assertEqual(len(active), 3)
-            retired = {claim['claim_id'] for person in current['researchers'] for claim in person['claims'] if claim['status'] == 'retired'}
-            for row in active:
+            self.assertTrue(restored['opportunities'])
+            self.assertTrue(all(row['review_state'] == 'needs_revalidation' and row['revalidation_reason_code'] == 'candidate_pool_changed' for row in restored['opportunities']))
+            for row in restored['opportunities']:
                 original = next(r for r in before['opportunities'] if r['id'] == row['id'])
-                self.assertEqual(row['decision_contract'], original['decision_contract'])
-                self.assertEqual(row['pipeline_hash'], original['pipeline_hash'])
-                self.assertFalse(retired & {ref['claim_id'] for role in row['roles'] for ref in role['claim_refs']})
+                self.assertEqual(row['members'], original['members'])
+                self.assertEqual(row['roles'], original['roles'])
             self.assertEqual(rebuild()['opportunities'], restored['opportunities'])
-            # Display metadata changes no scientific evidence or team identity.
             current['researchers'][0]['display_name'] += ' Display correction'
             current['registry_generation'] = registry.registry_generation(current)
             self.assertEqual(rebuild()['opportunities'], restored['opportunities'])
-            # A changed claim affects its actual references, not every team of
-            # that researcher or unrelated records in the registry.
-            ref = active[0]['roles'][0]['claim_refs'][0]
-            changed_id = ref['claim_id']
-            affected = {row['id'] for row in active if any(r['claim_id'] == changed_id for role in row['roles'] for r in role['claim_refs'])}
-            claim = next(claim for person in current['researchers'] for claim in person['claims'] if claim['claim_id'] == changed_id)
-            claim['revision'] += 1
-            claim['evidence'] += ' Reviewed synthetic correction.'
-            claim['material_hash'] = registry.material_claim_hash(claim)
+            current['researchers'][0]['research_summary'] += ' A fixture-only correction.'
             current['registry_generation'] = registry.registry_generation(current)
-            amended = rebuild()
-            for row in amended['opportunities']:
-                original = next(r for r in restored['opportunities'] if r['id'] == row['id'])
-                if row['id'] not in affected:
-                    self.assertEqual(row, original)
-                elif row['review_state'] == 'proposed':
-                    self.assertNotIn(changed_id, {r['claim_id'] for role in row['roles'] for r in role['claim_refs']})
-                else:
-                    self.assertEqual(row['review_state'], 'needs_revalidation')
-            self.assertEqual(rebuild()['opportunities'], amended['opportunities'])
+            self.assertTrue(all(row['review_state'] == 'needs_revalidation' for row in rebuild()['opportunities']))
 
     def test_confirmation_selection_is_disjoint_and_input_hashes_are_pinned(self):
         _, confirmed = evaluation.production_team_cases('confirmation')

@@ -76,7 +76,9 @@ class OpportunityTeamModelTests(unittest.TestCase):
             if profile["pool_state"] == "main":
                 self.assertGreaterEqual(len(profile["terms"]), 2)
             if profile["pool_state"] == "standby":
-                self.assertEqual(len(profile["terms"]), 1)
+                # Source enrichment must not automatically promote a retained
+                # standby assignment merely because its claim count increased.
+                self.assertGreaterEqual(len(profile["terms"]), 1)
         self.assertEqual(states, self.config["pool_counts"])
 
     def test_oversized_projection_fails_before_overwriting_any_output(self):
@@ -183,9 +185,11 @@ class OpportunityTeamModelTests(unittest.TestCase):
         for key in ("faculty_model", "team_gate_model", "benchmark_lock", "faculty_expansion_lock", "team_gate_lock"):
             self.assertRegex(hashes[key], r"^[a-f0-9]{64}$")
         curated = (ROOT / "data" / "faculty_matches.js").read_text(encoding="utf-8")
-        self.assertIn("heterogeneous thermal catalysis", curated)
-        self.assertIn("electrocatalytic aqueous PFAS defluorination", curated)
-        self.assertIn("solid-state battery electrolytes", curated)
+        # Curated ChemE wording is now subject to the same source audit as all
+        # other profiles; historical keyword inventories are not immutable truth.
+        self.assertIn("Heterogeneous catalyst synthesis and reaction pathways", curated)
+        self.assertIn('"evidence_records"', curated)
+        self.assertIn('"summary_evidence"', curated)
 
 
 if __name__ == "__main__":

@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import vm from "node:vm";
 import { shellDom } from "../helpers/shell-dom.mjs";
+import { opportunityTeamFixture } from "../fixtures/opportunity-team-model.mjs";
 
 const paths = ["match_explorer.html", "assets/site-shell.js", "data/opportunity_team_index.js", "assets/search-retrieval.js", "assets/submission-schedule.js", "data/opportunity_teams.js", "data/researcher_directory.js", "assets/opportunity-team.js", "assets/opportunity-team-panel.js"];
 const [page, shell, ...sources] = await Promise.all(paths.map(path => readFile(new URL(`../../${path}`, import.meta.url), "utf8")));
@@ -15,6 +16,15 @@ function fixture({ delayed = false } = {}) {
   vm.createContext(dom.context);
   vm.runInContext(shell, dom.context);
   for (const source of sources.slice(0, -1)) vm.runInContext(source, dom.context);
+  // The corrected registry deliberately invalidates the real saved teams.
+  // Lifecycle checks need an explicit, valid graph rather than stale people.
+  const f = opportunityTeamFixture();
+  const ids = ['358021', '344592:ab-0019', '344592:ab-0079'];
+  f.data.opportunities = [f.data.opportunities[0], f.data.opportunities[2], f.data.opportunities[3]].map((s, i) => ({...s, id: ids[i], parent_id: i ? '344592' : ids[i], objective: 'Synthetic scientific fixture', why_team: 'Independent fixture contributions.', missing_skills: []}));
+  f.data.scope_count = 3; f.index.scope_count = 3;
+  f.index.scopes = f.data.opportunities.map(({id, parent_id, record_type}) => ({id, parent_id, record_type}));
+  Object.assign(dom.context, {OPPORTUNITY_TEAM_DATA: f.data, OPPORTUNITY_TEAM_INDEX: f.index, RESEARCHER_DIRECTORY: f.directory});
+  dom.document.querySelector('meta[name="opportunity-team-generation"]').setAttribute('content', f.index.generation_id);
   // Explicitly published child fixture; the real team engine still applies
   // its own currentness and publication-eligibility checks after lazy loading.
   dom.context.FUNDING_SUBTOPICS = { loadSidecar: async () => ({ opportunities: ["344592:ab-0019", "344592:ab-0079"].map(subtopic_id => ({ subtopic_id, parent_id: "344592", publication_state: "publishable" })) }) };

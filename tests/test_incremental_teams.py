@@ -184,7 +184,7 @@ class IncrementalTeams(unittest.TestCase):
         self.assertEqual(refs[0]["revision"], claim["revision"])
         self.assertEqual(refs[0]["material_hash"], claim["material_hash"])
 
-    def test_new_claim_preserves_source_only_negatives_and_compatible_team(self):
+    def test_new_claim_requeues_its_team_but_preserves_source_only_negatives(self):
         _, _, before, _ = self.run_main()
         path = self.root / "config/researcher_registry.json"
         registry = json.loads(path.read_text())
@@ -195,8 +195,8 @@ class IncrementalTeams(unittest.TestCase):
         path.write_text(json.dumps(registry), encoding="utf-8")
         code, report, after, _ = self.run_main()
         self.assertEqual(code, 0)
-        self.assertEqual(report["due_scopes"], 0, "A new claim does not make a broad source scientifically specific")
-        self.assertEqual(report["provider_requests"], 0)
+        self.assertEqual(report["due_scopes"], 1, "The changed pool invalidates its team; the broad source-only negative stays reusable")
+        self.assertGreater(report["provider_requests"], 0, "This isolated legacy-provider fixture recomputes the invalidated team")
         self.assertEqual(before["opportunities"][0]["members"], after["opportunities"][0]["members"])
 
     def test_removed_claim_withholds_before_failed_provider_and_budget_is_resumable(self):

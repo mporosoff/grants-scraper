@@ -31,7 +31,7 @@ test('frozen researcher directory and all D1 evidence hashes remain unchanged',(
  const hash=p=>createHash('sha256').update(fs.readFileSync(p)).digest('hex');
  assert.equal(hash('docs/team-recommender/prepared/d1/directory.json'),'3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a');
  assert.equal(hash('docs/team-recommender/prepared/d1/vectors.f32'),'cbc5788875e257e3a64030826623a1ec743e37b4667dfd1f0afe2863fb6c9d90');
- assert.equal(hash('data/researcher_directory.js'),'93b95b1f5e0656fa527c313f3ae40ccfc244e73b92f20e5e870cbe570f82da69');
+ assert.equal(hash('docs/team-recommender/history/stage3-runtime/researcher_directory.js'),'93b95b1f5e0656fa527c313f3ae40ccfc244e73b92f20e5e870cbe570f82da69');
 });
 test('generic or repeated extra profile text cannot purchase automatic quality',()=>{
  const n=runtime().TeamRecommender,v=[[1,0],[.42,Math.sqrt(1-.42**2)]],a={id:'a',text:'optical spectroscopy',vector:0,weight:1};

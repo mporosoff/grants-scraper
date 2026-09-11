@@ -173,10 +173,12 @@ test("proposed variants are distinct and never reintroduce an excluded researche
 });
 
 test("generated team alternatives keep complementary contributions after exclusions", () => {
-  const { api, data } = loadApi();
+  // The real old teams are correctly withheld after a complete pool repair.
+  // Exercise this retained legacy contract using its explicit graph fixture.
+  const { api, data } = loadApi(opportunityTeamFixture());
   const engine = api.create(data);
   const scopes = data.opportunities.filter(scope => scope.assembly_version && scope.review_state !== "needs_revalidation");
-  assert.ok(scopes.length, "the published catalog must enforce the complementary-role policy");
+  assert.ok(scopes.length, "the fixture must exercise the complementary-role policy");
   for (const scope of scopes) {
     const initial = engine.proposal(scope);
     for (const state of [initial, ...initial.selectedIds.map(id => engine.removeMember(initial, id))]) {

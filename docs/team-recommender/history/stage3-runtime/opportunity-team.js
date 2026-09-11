@@ -33,7 +33,7 @@
   }
 
   function validateIndex(index, expectedGenerationId) {
-    if (!index || ![SCHEMA_VERSION, 3].includes(index.schema_version) ||
+    if (!index || ![SCHEMA_VERSION, 2].includes(index.schema_version) ||
         !/^[a-f0-9]{64}$/.test(index.generation_id || "") ||
         (expectedGenerationId && index.generation_id !== expectedGenerationId) ||
         !Array.isArray(index.scopes) || index.scopes.length > 2000 ||
@@ -47,7 +47,7 @@
         throw new Error("The opportunity-team availability index is invalid.");
       }
       identifiers.add(scope.id);
-      if (index.schema_version === 3 && scope.engine !== "shared-team-v1") {
+      if (index.schema_version === 2 && !["legacy-v1", "ingredients-v2"].includes(scope.engine)) {
         throw new Error("Every scope must have one declared engine owner.");
       }
     });
@@ -99,10 +99,6 @@
         id: researcher.id,
         legacy_ids: researcher.legacy_ids || [],
         name: researcher.name,
-        research_summary: researcher.research_summary || "",
-        matching_domains: researcher.matching_domains || [],
-        summary_evidence: researcher.summary_evidence || [],
-        claims: researcher.claims || [],
         home_unit: researcher.home_unit,
         relationship: researcher.relationship,
         pool_visibility: researcher.pool_visibility,
@@ -119,11 +115,6 @@
             label: claim.label,
             evidence: claim.evidence,
             evidence_tier: claim.evidence_level,
-            evidence_records: claim.evidence_records || [],
-            verified_on: claim.verified_on,
-            category: claim.category,
-            categories: claim.categories,
-            type: claim.type,
             source_urls: claim.source_urls || [],
           };
         }),
@@ -233,7 +224,7 @@
     if (!dataPromise || loadingGeneration !== generationId) {
       loadingGeneration = generationId;
       var index = validateIndex(global.OPPORTUNITY_TEAM_INDEX, generationId);
-      var pending = index.schema_version === 3 ? loadShared(index) : Promise.resolve(global.OPPORTUNITY_TEAM_DATA || null)
+      var pending = index.schema_version === 2 ? loadIngredients(index) : Promise.resolve(global.OPPORTUNITY_TEAM_DATA || null)
         .then(function (value) {
           return value || injectData(versionedAssetUrl(generationId));
         })
@@ -272,13 +263,25 @@
     });
   }
 
-  async function loadShared(index) {
-    // Load matching code only at the existing team interaction boundary.
-    // v2 isolated-aspect packages are historical and cannot be activated here.
-    await injectRuntime("team-matcher", index.runtime?.matcher);
-    await injectRuntime("shared-team-engine", index.runtime?.shared);
-    if (!global.SharedTeamEngine) throw new Error("Shared matching runtime unavailable.");
-    return global.SharedTeamEngine.loadData(index, global.RESEARCHER_DIRECTORY);
+  async function loadIngredients(index) {
+    // New code and ingredients are lazy. Ordinary search and the v1 route do not load them.
+    await injectRuntime("team-recommender", index.runtime?.recommender);
+    await injectRuntime("team-ingredients", index.runtime?.ingredients);
+    if (!global.TeamIngredients) throw new Error("Ingredient runtime unavailable.");
+    var result = await global.TeamIngredients.loadData(index, global.RESEARCHER_DIRECTORY);
+    var legacyScopes = index.scopes.filter(function (s) { return s.engine === "legacy-v1"; });
+    if (legacyScopes.length) {
+      var old = await injectData(versionedAssetUrl(index.legacy_generation));
+      var oldIndex = validateIndex(index.legacy_index, index.legacy_generation);
+      if (oldIndex.schema_version !== 1 || legacyScopes.some(function (s) { return !oldIndex.scopes.some(function (oldScope) {
+        return oldScope.id === s.id && oldScope.parent_id === s.parent_id && oldScope.record_type === s.record_type && oldScope.review_state === s.review_state;
+      }); })) throw new Error("Legacy routing differs from the retained index.");
+      validateData(old, index.legacy_generation, oldIndex);
+      var engine = create(old, oldIndex);
+      var routed = new Set(legacyScopes.map(function (s) { return s.id; }));
+      legacyBySnapshot.set(result, Object.assign({}, engine, {opportunityById: new Map(Array.from(engine.opportunityById).filter(function (entry) { return routed.has(entry[0]); }))}));
+    }
+    return result;
   }
 
   function loadDirectory() {
@@ -286,7 +289,7 @@
     if (!directory || directory.schema_version !== 1 || !Array.isArray(directory.researchers)) return Promise.reject(new Error("Researcher directory unavailable."));
     return Promise.resolve({faculty: directory.researchers.map(function (p) { return Object.assign({}, p, {terms: (p.claims || []).filter(function (c) {
       return c.status === "active";
-    }).map(function (c) { return Object.assign({}, c, {claim_revision: c.revision}); })}); })});
+    }).map(function (c) { return {claim_id: c.claim_id, claim_revision: c.revision, label: c.label, evidence: c.evidence, source_urls: c.source_urls || []}; })}); })});
   }
 
   function poolRank(value) {
@@ -338,7 +341,7 @@
   }
 
   function create(data, indexOverride) {
-    if (data?.schema_version === 3) return global.SharedTeamEngine.create(data);
+    if (data?.schema_version === 2) return global.TeamIngredients.create(data, legacyBySnapshot.get(data));
     validateData(data, undefined, indexOverride);
     var facultyById = new Map();
     data.faculty.forEach(function (profile) {

@@ -102,6 +102,22 @@
     return uniq([...(profile.key_terms || []), ...(profile.keywords || []), ...(profile.capability_phrases || [])]);
   }
 
+  // One canonical projection for directory profiles in both directions of matching.
+  // External/manual profiles retain their existing separate normalization.
+  function normalizeProfile(profile) {
+    const claims = (profile.claims || profile.terms || []).filter(c => !c.status || c.status === "active");
+    return {
+      name: profile.name || profile.display_name,
+      researcher_id: profile.id || profile.researcher_id,
+      research_summary: profile.research_summary || "",
+      summary_evidence: profile.summary_evidence || [],
+      key_terms: uniq(claims.map(c => c.label)),
+      capability_phrases: uniq(claims.map(c => c.evidence)),
+      domains: profile.matching_domains || uniq(claims.flatMap(c => c.categories || [c.category]).filter(Boolean)).sort(),
+      claims,
+    };
+  }
+
   function create(catalogData, config = {}, searchApi = null, options = {}) {
     const rawRecords = Array.isArray(catalogData?.opportunities)
       ? catalogData.opportunities
@@ -284,6 +300,7 @@
       let directGroups = 0;
       let specificityTotal = 0;
       let contextualAlias = false;
+      const matchedTerms = new Set();
       groups.forEach((group, groupIndex) => {
         const direct = prepared.tokenSet.has(group.source);
         const aliasHits = group.terms.filter(item =>
@@ -301,6 +318,8 @@
           && alternativesSatisfied;
         const alias = !direct && minimumAliasEvidence === 1 && !contextual && aliasHits.length > 0;
         if ((!direct && !contextual && !alias) || !alternativesSatisfied) return;
+        if (direct) matchedTerms.add(group.source);
+        else aliasHits.forEach(item => matchedTerms.add(item.term));
         matchedGroups += 1;
         if (direct) directGroups += 1;
         if (contextual) contextualAlias = true;
@@ -339,7 +358,7 @@
         strong = score >= 1.2;
       }
       if (score < .18) return null;
-      return { score, strong, coverage, label: phrase };
+      return { score, strong, coverage, label: phrase, matchedTerms: [...matchedTerms].sort() };
     }
 
     function vocabularyEvidence(domain, prepared, profileTerms = null) {
@@ -381,6 +400,7 @@
 
     function scoreProfile(profile, prepared) {
       const reasons = [];
+      const connections = [];
       const matchedDomains = new Set();
       let phraseScore = 0;
       let vocabularyScore = 0;
@@ -397,6 +417,8 @@
         strong = strong || evidence.strong;
         signalCount += 1;
         reasons.push({ label: evidence.label, score: evidence.score, type: "interest" });
+        const claims = (profile.claims || []).filter(c => c.label === phrase || c.evidence === phrase);
+        connections.push({...evidence, claims});
       }
       phraseScore = Math.min(7.5, phraseScore);
 
@@ -453,6 +475,7 @@
         scopeLabel: scope?.label || "",
         matchedDomains: [...matchedDomains],
         researchReasons,
+        connections,
         reasons: uniq(reasons.map(reason => reason.label)).slice(0, 4),
       };
     }
@@ -623,5 +646,5 @@
     });
   }
 
-  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({ create, recordIsCurrent });
+  globalThis.FUNDING_TEAM_MATCHER = Object.freeze({ create, recordIsCurrent, normalizeProfile });
 })();
