@@ -50,8 +50,13 @@ def http_diagnostic(response, body):
     return result
 
 
+# Existing public browser imports used by assets/dod-awards-browser.mjs.
+# Keep this exact closure bounded; other Worker code/configuration stays private.
+PUBLIC_BROWSER_IMPORTS = frozenset(['workers/award-api/src/adapters/dod.js', 'workers/award-api/src/institutions.js', 'workers/award-api/src/ror.js', 'workers/award-api/src/snapshot.js', 'workers/award-api/src/http.js', 'workers/award-api/src/contract.js', 'workers/award-api/src/year-filter.js', 'config/award_institutions.json'])
+
+
 def public_path(name):
-    return name.endswith('.html') or name.startswith(('assets/', 'data/', 'feeds/'))
+    return name in PUBLIC_BROWSER_IMPORTS or name.endswith('.html') or name.startswith(('assets/', 'data/', 'feeds/'))
 
 
 def pages_path(name):
