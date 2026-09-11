@@ -7006,7 +7006,7 @@
     }
   },
   "stage3_validation": {
-    "status": "locked; trusted prerequisite review pending; no holdout output yet",
+    "status": "prepared; heldout numerical observations sealed; complete-evidence judge allocation frozen before dispatch",
     "starting_commit": "f4f38b32294c8e922c25a7c67d518be27f5f8e33",
     "starting_tree": "d3074cfc54ce196999e5fd1274b4f3005b347437",
     "lock": {
@@ -7014,11 +7014,11 @@
       "sha256": "390ad2b018806b684aae5724e8a5dd5a8e4ba328b192c9650748491cda8f783a"
     },
     "trusted_candidate": "7c42154733904b04cb261b5b3bf58884b3c9f72b",
-    "cloud_owner": "34538646232",
+    "cloud_owner": "34553719331",
     "starting_spend_usd": 3.135333,
     "starting_requests": 475,
-    "new_spend_usd": 0,
-    "new_requests": 0,
+    "new_spend_usd": 0.002136,
+    "new_requests": 6,
     "outstanding_usd": 0,
     "max_new_spend_usd": 4,
     "max_new_requests": 184,
@@ -7027,9 +7027,9 @@
     "source_prepared_holdout": 39,
     "source_prepared_rollout50": 30,
     "source_prepared_rollout150": 81,
-    "query_rows_missing": 190,
+    "query_rows_missing": 0,
     "embedding_requests_planned": 6,
-    "holdout_outputs_generated": false,
+    "holdout_outputs_generated": true,
     "production_activation": false,
     "final_human_requested": 0,
     "final_human_returned": 0,
@@ -7037,6 +7037,9 @@
     "pre_exposure_corrections": [
       "Full evidence projection removed ordinary in-task source disposition text before judging; v1 retained.",
       "v1 validation lock retained; source-decision file reference corrected for Git LF normalization in v2, same semantic inputs."
-    ]
+    ],
+    "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
+    "trusted_pr": 223,
+    "judge_allocation": "manifests/stage3-judgment-allocation-v1.json"
   }
 }

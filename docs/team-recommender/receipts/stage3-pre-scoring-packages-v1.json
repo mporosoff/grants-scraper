@@ -1,0 +1,108 @@
+{
+  "lock_sha256": "390ad2b018806b684aae5724e8a5dd5a8e4ba328b192c9650748491cda8f783a",
+  "packages": {
+    "holdout_effective": {
+      "generation": "4c0fb99bdb511671e16bcbffc5691f616180568cf92af6d00a4ffb46ad4a8a67",
+      "assets": [
+        {
+          "path": "data/team-recommender/477d74610db42fc5b941cbc5e46ca8fb2fcd9cb0ebbc34b2b94831c3309656b8.json",
+          "sha256": "477d74610db42fc5b941cbc5e46ca8fb2fcd9cb0ebbc34b2b94831c3309656b8",
+          "bytes": 940885,
+          "gzip_bytes": 148994
+        },
+        {
+          "path": "data/team-recommender/7e3bce2359aaf0dbcf8dbf1d9c684935c975a8caf94118b98efa959d29828495.f32",
+          "sha256": "7e3bce2359aaf0dbcf8dbf1d9c684935c975a8caf94118b98efa959d29828495",
+          "bytes": 1044480,
+          "gzip_bytes": 969988
+        },
+        {
+          "path": "data/team-recommender/d40625d373c3e87e742946c1c12af3b351e6d48ff3388f6851a18275ac034bc9.json",
+          "sha256": "d40625d373c3e87e742946c1c12af3b351e6d48ff3388f6851a18275ac034bc9",
+          "bytes": 51409,
+          "gzip_bytes": 6582
+        },
+        {
+          "path": "data/opportunity_team_index.js",
+          "sha256": "0246a283cd46d397a0776bf4d94fae1dd07610169c83db813b16c882ae092de9",
+          "bytes": 10965,
+          "gzip_bytes": 1211
+        }
+      ],
+      "total_bytes": 2047739,
+      "gzip_bytes": 1126775,
+      "scopes": 90,
+      "prepared": 39,
+      "profile_rows": 155
+    },
+    "rollout50": {
+      "generation": "4b199038c34c5e56ba7b19978a2dbad5b002ac7575bc3ff2e29b69fd50a5ec6b",
+      "assets": [
+        {
+          "path": "data/team-recommender/100433bc25996fb953b0277fed8d805088a545092d314bf68d935edb7d69cc8d.json",
+          "sha256": "100433bc25996fb953b0277fed8d805088a545092d314bf68d935edb7d69cc8d",
+          "bytes": 635861,
+          "gzip_bytes": 103992
+        },
+        {
+          "path": "data/team-recommender/04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532.f32",
+          "sha256": "04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532",
+          "bytes": 917504,
+          "gzip_bytes": 851913
+        },
+        {
+          "path": "data/team-recommender/619c052ac0e00f48a581666aa192dcbbb54c770e9dd47d952d3b73b4a47f7143.json",
+          "sha256": "619c052ac0e00f48a581666aa192dcbbb54c770e9dd47d952d3b73b4a47f7143",
+          "bytes": 35206,
+          "gzip_bytes": 5371
+        },
+        {
+          "path": "data/opportunity_team_index.js",
+          "sha256": "2d21f7527d5a94ce3b4e14eaac778502308793615155f4a28c2d7737a714c7ec",
+          "bytes": 6408,
+          "gzip_bytes": 841
+        }
+      ],
+      "total_bytes": 1594979,
+      "gzip_bytes": 962117,
+      "scopes": 50,
+      "prepared": 30,
+      "profile_rows": 155
+    },
+    "rollout150": {
+      "generation": "98b906222da5966ea8ead55ad68411ea117953953dc5d47936a9da98b214d9a5",
+      "assets": [
+        {
+          "path": "data/team-recommender/7b9259e37c40ed79988a87ffaf06c64c0cfd10447a4fc2a12888ba038c148b7f.json",
+          "sha256": "7b9259e37c40ed79988a87ffaf06c64c0cfd10447a4fc2a12888ba038c148b7f",
+          "bytes": 1313690,
+          "gzip_bytes": 214544
+        },
+        {
+          "path": "data/team-recommender/a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee.f32",
+          "sha256": "a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee",
+          "bytes": 1376256,
+          "gzip_bytes": 1277927
+        },
+        {
+          "path": "data/team-recommender/165f9556d2152114a75531cdc3d7ab67c5059e2b5b04929a26650a39a8851188.json",
+          "sha256": "165f9556d2152114a75531cdc3d7ab67c5059e2b5b04929a26650a39a8851188",
+          "bytes": 96855,
+          "gzip_bytes": 12448
+        },
+        {
+          "path": "data/opportunity_team_index.js",
+          "sha256": "5191d6fc3690fff9b641e805380fd1eb9ae2770d98eba5867d19111451bd6a31",
+          "bytes": 18465,
+          "gzip_bytes": 1602
+        }
+      ],
+      "total_bytes": 2805266,
+      "gzip_bytes": 1506521,
+      "scopes": 150,
+      "prepared": 81,
+      "profile_rows": 155
+    }
+  },
+  "holdout_scored": false
+}
