@@ -4,7 +4,7 @@ import vm from 'node:vm';
 import {createHash} from 'node:crypto';
 const read=p=>JSON.parse(fs.readFileSync(p,'utf8'));
 const root='outputs/team-recommender-post-audit/';
-const prefix=process.argv.includes('--repaired')?'repaired':'baseline';
+const prefix=process.argv.includes('--corrected')?'corrected':process.argv.includes('--repaired')?'repaired':'baseline';
 const c=vm.createContext({Date});
 for(const p of ['assets/submission-schedule.js','assets/search-query.js','assets/search-retrieval.js','assets/team-matcher.js','data/opportunities.js','data/subtopics.js','data/researcher_directory.js','data/faculty_matches.js']) {
  let text=fs.readFileSync(p,'utf8');

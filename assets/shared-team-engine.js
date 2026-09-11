@@ -129,11 +129,11 @@
         freeze(input.childCatalog); checkedChildren.add(input.childCatalog);
       }
       if (preparedAt !== now.toISOString().slice(0, 10)) {
-        parentMatcher = g.FUNDING_TEAM_MATCHER.create(snap.catalog, snap.packet.config, g.FUNDING_SEARCH_QUERY, {now});
+        parentMatcher = g.FUNDING_TEAM_MATCHER.create(snap.catalog, snap.packet.config, g.FUNDING_SEARCH_QUERY, {now, sourceCacheLimit: 8});
         childMatcher = null; preparedAt = now.toISOString().slice(0, 10); fitCache.clear();
       }
       let matcher = parentMatcher;
-      if (scope.record_type === "publishable_child") matcher = childMatcher ||= g.FUNDING_TEAM_MATCHER.create(snap.children, snap.packet.config, g.FUNDING_SEARCH_QUERY, {now});
+      if (scope.record_type === "publishable_child") matcher = childMatcher ||= g.FUNDING_TEAM_MATCHER.create(snap.children, snap.packet.config, g.FUNDING_SEARCH_QUERY, {now, sourceCacheLimit: 8});
       const prepared = matcher.records.find(r => r.id === scope.id);
       if (!prepared || !g.FUNDING_RETRIEVAL.recordIsCurrent(prepared.record, now)) return {ok: false, reason: "not_current", scopes};
       if (scope.record_type === "specific_parent" && prepared.isBroad) return {ok: false, reason: "broad_parent_rejected", scopes};

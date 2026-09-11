@@ -154,6 +154,18 @@
     };
 
     const records = [];
+    const sourceCacheLimit = Number.isInteger(options.sourceCacheLimit) && options.sourceCacheLimit > 0 ? options.sourceCacheLimit : 0;
+    const sourceCache = new Map();
+    const recordSourceText = record => [record.title || '', record.description || '',
+      String(record.document_search_text || '').slice(0, 16000), ...(record.topic_areas || []), ...(record.disciplines || [])].join(' ');
+    function sourceFor(prepared) {
+      let value=sourceCache.get(prepared);
+      if(value) sourceCache.delete(prepared);
+      else { const text=recordSourceText(prepared.record), tokens=tokenize(text);value={sourceLower:text.toLowerCase(),tokens,tokenSet:new Set(tokens)}; }
+      sourceCache.set(prepared,value);
+      if(sourceCache.size>sourceCacheLimit) sourceCache.delete(sourceCache.keys().next().value);
+      return value;
+    }
     const wordFrequency = new Map();
     const topicFrequency = new Map();
     const profileVocabularyCache = new WeakMap();
@@ -163,14 +175,8 @@
       if (!recordIsCurrent(record, now) || recordIsTestOpportunity(record)) return;
       const identityText = `${record.agency || ""} ${record.title || ""}`;
       if (OUT_OF_SCOPE_RE.some(pattern => pattern.test(identityText))) return;
-      const sourceText = [
-        record.title || "",
-        record.description || "",
-        String(record.document_search_text || "").slice(0, 16_000),
-        ...(record.topic_areas || []),
-        ...(record.disciplines || []),
-      ].join(" ");
-      const sourceLower = sourceText.toLowerCase();
+      const sourceText = recordSourceText(record);
+      const sourceLower = sourceCacheLimit ? null : sourceText.toLowerCase();
       const tokens = tokenize(sourceText);
       const tokenSet = new Set(tokens);
       const topics = new Set(record.topic_areas || []);
@@ -204,6 +210,11 @@
         freshAge,
         closeIn,
       };
+      if (sourceCacheLimit) {
+        // Frequency context still traverses the entire eligible catalog. Only
+        // requested source token arrays are retained by the reverse matcher.
+        for(const field of ['sourceLower','tokens','tokenSet']) Object.defineProperty(prepared,field,{enumerable:true,configurable:false,get:()=>sourceFor(prepared)[field]});
+      }
       records.push(prepared);
       tokenSet.forEach(token => wordFrequency.set(token, (wordFrequency.get(token) || 0) + 1));
       topics.forEach(topic => topicFrequency.set(topic, (topicFrequency.get(topic) || 0) + 1));
