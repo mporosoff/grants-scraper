@@ -1,0 +1,264 @@
+{
+  "version": "stage3-source-only-decisions-v1",
+  "based_on": "closeout source metadata; ordinary in-task reading, before any held-out output",
+  "source_policy": "Coherent exploratory scientific contribution, exact original quotes, conditions retained. Multiple source alternatives are not mandatory roles. Adequacy does not establish full notice, current personal eligibility or directory feasibility.",
+  "adequate_quotes": {
+    "302273": [
+      "research on discrete structures"
+    ],
+    "320087": [
+      "basic scientific research that advances knowledge and understanding of issues broadly related to global and national security",
+      "theoretically motivated, conceptually precise, methodologically rigorous, and empirically oriented"
+    ],
+    "324369": [
+      "research on robotic systems that exhibit significant levels of both computational capability and physical complexity",
+      "inextricably interwoven questions of intelligence, computation, and embodiment"
+    ],
+    "329325": [
+      "research in algebra, algebraic and arithmetic geometry, number theory, and representation theory"
+    ],
+    "329432": [
+      "scientific theory and understanding of the connections between human behavior and law, legal institutions, or legal processes"
+    ],
+    "340828": [
+      "fundamental research in mathematics and statistics necessary to answer questions in the biological and biomedical sciences",
+      "research at the interface between mathematical and life sciences"
+    ],
+    "343166": [
+      "development of new technologies and instrumentation for use in ground-based astronomy and astrophysics"
+    ],
+    "349804": [
+      "Evidence-, theory, and data-building activities that contribute to the body of knowledge on security cooperation or irregular warfare"
+    ],
+    "350018": [
+      "fundamental principles governing the physical behavior of a plasma via collective interactions of large ensembles of free charged particles"
+    ],
+    "354573": [
+      "qualified safety and effectiveness testing that could be used to satisfy the requirements for FDA approval of MUMS-designated drugs"
+    ],
+    "357018": [
+      "translation of scientific discoveries and engineering developments in imaging, data science and/or spectroscopic technologies into methods or tools that address contemporary problems in understanding the fundamental biology, potential risk of development, diagnosis, treatment, and/or disease status for cancer or other disease"
+    ],
+    "357579": [
+      "research on the Earth’s near-surface environment and how that environment responds to change",
+      "complex interplay amongst and between hydrologic, geomorphic, and geochemical processes"
+    ],
+    "357609": [
+      "origin and evolution of our home planet including its core, mantle, and continental crust",
+      "high-temperature igneous and metamorphic geochemical and petrologic processes that shape the Earth"
+    ],
+    "358684": [
+      "understanding of the full scope, potential, challenges, and nature of the research on research security field through scholarly evidence",
+      "Use rigorous empirical methods to advance understanding of the factors that influence research security"
+    ],
+    "358882": [
+      "advance theory and knowledge about increasing the public value of scientific activity",
+      "rigorous empirical research methods"
+    ],
+    "360182": [
+      "reduce the occurrence of food-borne illness risk factors",
+      "conducting research, implementing intervention strategies"
+    ],
+    "360387": [
+      "test anti-obesity medication (AOM) treatment strategies for youth with obesity that maximize benefits and minimize risks of AOM use",
+      "potential predictors of response/ nonresponse to various treatment strategies under evaluation"
+    ],
+    "360946": [
+      "validation of molecular/cellular/imaging markers (referred to as \"markers\" or \"biomarkers\") and assays for cancer detection, diagnosis, prognosis, monitoring, and prediction of response or resistance to treatment",
+      "optimizing an existing assay(s) using human specimens in a clinical laboratory"
+    ],
+    "361035": [
+      "better understand cardiovascular disease (CVD) in type 1 diabetes, highlight differences compared to type 2 diabetes",
+      "expand the CaRe-T1D biorepository of human CV tissue, further develop the data commons for data sharing and for artificial intelligence (AI) tools"
+    ],
+    "362025": [
+      "foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach",
+      "how these products influence pain through coordinated biological pathways across the multiple organ systems",
+      "dose optimization based on the principle of hormesis"
+    ],
+    "362179": [
+      "reduces or overcomes important barriers to obtaining a diagnosis, meaningful disease monitoring and accurate prognosis"
+    ],
+    "362197": [
+      "amyotrophic lateral sclerosis (ALS) drug or therapy discovery"
+    ],
+    "362209": [
+      "exploring innovative concepts or theories in ovarian cancer"
+    ],
+    "362222": [
+      "translational research that will accelerate the movement of promising ideas in spinal cord injury (SCI) research into clinical applications"
+    ],
+    "362240": [
+      "Melanoma Research Program"
+    ],
+    "362313": [
+      "development, optimization, validation, and application of germline and somatic transgenic and gene-editing approaches in experimental systems modeling key features of human brain anatomy, circuitry, cognition, behavior, and lifespan",
+      "integrating New Approach Methodologies (NAMs) with other models"
+    ],
+    "362529": [
+      "conduct innovative, high-impact ideas or early-phase, proof-of-principle clinical trials with the potential to have a major impact on autism"
+    ],
+    "362666": [
+      "identify, examine, and address the impact of genomics on individuals, institutions, and society"
+    ],
+    "362672": [
+      "accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice",
+      "replicable and scalable approaches for accelerating the routine use of effective, evidence-based prevention, treatment and recovery interventions and services"
+    ],
+    "362848": [
+      "critical discoveries or major advancements that will accelerate progress in improving outcomes for individuals with Duchenne muscular dystrophy (DMD) in the near term"
+    ],
+    "362849": [
+      "high potential impact on rare cancers and the patient community"
+    ],
+    "363287": [
+      "advance tangible improvements in invasive species prevention by utilizing existing research knowledge on invasive species risks and pathways to produce actionable outcomes that protect American agriculture from invasive species"
+    ],
+    "363289": [
+      "improve understanding of the risks and conditions associated with occupational diseases and injuries",
+      "identify and evaluate methods to reduce risks and prevent or minimize exposure to hazardous workplace conditions"
+    ],
+    "363297": [
+      "how international parental child abduction (IPCA) affects abducted children and their left-behind parents",
+      "identify gaps in support for children and left-behind parents impacted by IPCA in the United States"
+    ],
+    "363299": [
+      "understanding of the risks and conditions associated with occupational diseases and injuries",
+      "methods for reducing risks and preventing or minimizing exposure to hazardous conditions in the workplace"
+    ],
+    "363359": [
+      "research to quantify the CADI portfolio’s direct economic impact on American farmers"
+    ],
+    "363372": [
+      "develop and prototype innovative and widely deployable concepts that are intended to make existing and new buses safer for their operators and vulnerable road users, and safer and more accessible for their passengers"
+    ],
+    "363574": [
+      "converting state- and federal-specific fields in criminal history records into research datasets with standardized codes that support statistical analysis",
+      "identifying and documenting differences in the composition of the arrest, prosecution, court, and supervision information within and across jurisdictions"
+    ],
+    "363634": [
+      "implement and evaluate comprehensive primary prevention strategies that prevent multiple forms of violence and promote healthy development among adolescents and young adults",
+      "Improving data-driven decision-making, including surveillance, data linkage, and use of real-time data for prevention, evaluation and implementation science"
+    ],
+    "363679": [
+      "improve safe and effective precision therapeutics during pregnancy, lactation, and across childhood"
+    ],
+    "363788": [
+      "key impediments or challenges that Tribal communities face related to their capacity to identify emerging drug threats",
+      "conduct a pilot project to help these communities improve their capacity to detect and respond to emerging drug threats"
+    ],
+    "darpa-iarpa:darpa-darpapa260202": [
+      "Describe a utility-scale quantum computer concept that has a plausible path to realization in the near term"
+    ],
+    "darpa-iarpa:darpa-darpapa260201": [
+      "independent verification and validation",
+      "whether any quantum computing approach can achieve utility-scale operation"
+    ],
+    "darpa-iarpa:darpa-darpapa250704": [
+      "forecasting the long-term durability of concrete infrastructure through the closed-loop co-development of advanced modeling and physical testing",
+      "characterize fundamental degradation mechanics and predict how micro-scale damage translates into macro-scale structural failure over time"
+    ]
+  },
+  "unselected": [
+    "348164",
+    "363613",
+    "363617",
+    "325932",
+    "362364",
+    "351889",
+    "363614",
+    "362098",
+    "363070",
+    "355150",
+    "361099",
+    "360261",
+    "341244",
+    "359659"
+  ],
+  "mechanisms": [
+    "360380",
+    "353413",
+    "363570",
+    "362489",
+    "354269",
+    "352339",
+    "359966",
+    "361271",
+    "363412",
+    "363677",
+    "361251",
+    "363590",
+    "360664",
+    "350943",
+    "nyserda:PON5437",
+    "363571",
+    "363272",
+    "nyserda:RFQL5937",
+    "356309",
+    "359651",
+    "363478",
+    "352810",
+    "348830",
+    "362597"
+  ],
+  "missing_context": {
+    "362184": "Required FY26 vision focus areas are absent.",
+    "362866": "Required FY26 Parkinson's focus areas are absent.",
+    "362974": "Required FY26 NFRP Areas of Emphasis are not in the synopsis.",
+    "363240": "ROSES A.14 science is absent from the generic amendment wrapper; obtain the official program element, retaining NOI prerequisite."
+  },
+  "holdout_recommendations_examined": false,
+  "whole_science_spans": {
+    "350018": {
+      "start": "Plasma Physics is a study",
+      "end": "Principal Investigators (PIs)"
+    },
+    "363359": {
+      "start": "The CADI, funded",
+      "end": "DELIVERABLES"
+    }
+  },
+  "whole_science_policy": "Use the entire retained synopsis when <=4000 UTF-16 units. For longer sources use the explicitly selected contiguous scientific-purpose section, as in D1, retaining complete material conditions/exclusions as separate source evidence. No decisive judging evidence is truncated. These choices precede recommendations.",
+  "retrieved_dispositions": {
+    "363455": {
+      "category": "out-of-scope-unselected",
+      "reason": "Retrieved FY26 Concept Award pp.4,6-7 establishes required selection among four VCA focus areas with sub-bullets; no project/focus selected in this parent. Clinical trials prohibited; preliminary-data prohibition and human-study exemptions retained. Not a fabricated conjunctive team.",
+      "source_url": "https://cdmrp.health.mil/funding/pa/HT942526RTRPCA_GG2.pdf",
+      "document_sha256": "3ccb70fdba9eb2b714c42e411cc1bddec8925302a144f0e91ac5a3bc91751536",
+      "retrieved_at": "2026-09-11T01:35:22.940420+00:00",
+      "receipt_path": "outputs/team-recommender-stage3/source-retrieval/rtrp-concept.json"
+    },
+    "362607": {
+      "category": "bounded-context-gap",
+      "reason": "Retrieved FY26 Concept Award establishes shared program VCA scope, but does not establish the separate Investigator-Initiated award conditions. Original IIRA reservation stays unresolved; no cross-award receipt substitution.",
+      "source_url": "https://cdmrp.health.mil/funding/pa/HT942526RTRPCA_GG2.pdf",
+      "document_sha256": "3ccb70fdba9eb2b714c42e411cc1bddec8925302a144f0e91ac5a3bc91751536",
+      "retrieved_at": "2026-09-11T01:35:22.940420+00:00",
+      "receipt_path": "outputs/team-recommender-stage3/source-retrieval/rtrp-concept.json"
+    },
+    "362184": {
+      "category": "out-of-scope-unselected",
+      "reason": "Retrieved FY26 IIRA pp.4,6 establishes three alternative focus areas in military eye injury/visual dysfunction. No selected investigation; clinical trials prohibited and July preproposal/invitation prerequisite retained.",
+      "source_url": "https://cdmrp.health.mil/funding/pa/HT942526VRPIIRA_GG.pdf",
+      "document_sha256": "ba9d826e470ea84782bbc09250125a17826585ae51a6430ab51fcb638c719d00",
+      "retrieved_at": "2026-09-11T01:35:25.273946+00:00",
+      "receipt_path": "outputs/team-recommender-stage3/source-retrieval/vision-investigator.json"
+    },
+    "362186": {
+      "category": "out-of-scope-unselected",
+      "reason": "Retrieved FY26 TRA pp.4,6 establishes three alternative focus areas and required translational stage. Pilot trials require an additional non-pilot translational component; full-scale trials prohibited. Conditional regulatory expertise is not a universal role; July preproposal/invitation prerequisite retained.",
+      "source_url": "https://cdmrp.health.mil/funding/pa/HT942526VRPTRA_GG.pdf",
+      "document_sha256": "519278005edc569935f637736ccd998291ffa9bf1fd2c48b7e148c878531cd94",
+      "retrieved_at": "2026-09-11T01:35:28.165022+00:00",
+      "receipt_path": "outputs/team-recommender-stage3/source-retrieval/vision-translational.json"
+    },
+    "363240": {
+      "category": "out-of-scope-unselected",
+      "reason": "Official Amendment 63 requires choosing one of five sub-elements and using NASA airborne-campaign data. No sub-element selected in this broad parent. Mandatory August 20 NOI remains distinct from October full deadline; science questions in the linked program element not newly verified.",
+      "source_url": "https://science.nasa.gov/researchers/solicitations/roses-2025/amendment-63-new-opportunity-a-14-atmosphere/",
+      "document_sha256": "a909c0e3327facbc1808cbef859c023550e4055f17c5e022b32ea74662c1610b",
+      "retrieved_at": "2026-09-11T01:35:31.043706+00:00",
+      "receipt_path": "outputs/team-recommender-stage3/source-retrieval/nasa-atmosphere.json"
+    }
+  }
+}

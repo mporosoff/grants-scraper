@@ -1,5 +1,5 @@
 {
-  "active_stage": 2,
+  "active_stage": 3,
   "approvals": {
     "budget_amendment_B1": true,
     "continuation_C1": true,
@@ -12,7 +12,7 @@
     "ranking_revision_D2": true,
     "stage1": true,
     "stage2": true,
-    "stage3": false,
+    "stage3": true,
     "stage4": false,
     "trusted_main_prerequisite": true,
     "stage2_decision_closeout": {
@@ -24,7 +24,8 @@
         "path": "docs/team-recommender/STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md",
         "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
       }
-    }
+    },
+    "stage3_full_browser_validation": true
   },
   "authority": {
     "D3_closeout_report": {
@@ -35,9 +36,9 @@
     "budget_amendment_path": "docs/team-recommender/BUDGET_AMENDMENT_B1.md",
     "budget_amendment_sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27",
     "continuation_path": "docs/team-recommender/CONTINUATION_C2.md",
-    "current_amendment": "Stage 2 owner-directed E2 nomination/zero-paid decision closeout",
-    "current_handoff_sha256": "d7d43bfbc6321915eda951aade6fccc0126cbb7b26bccd28d1787ececdb26a96",
-    "current_plan_sha256": "cdd84e8bc789541b51ac184c9e48bcd9fcd20cf99b8de13aa769a2ab7e3e1f2c",
+    "current_amendment": "Stage 3 frozen E2 validation only; accepted Stage 2 nomination, no Stage 4",
+    "current_handoff_sha256": "af910d8633f10d5e47e3b1d6fcbc4ecd3c91ec0b4fa6261a395c1bcbdd7ae1ff",
+    "current_plan_sha256": "479216949f0cbdc6bced93acc1d38196c6f1739dfb570b16a10448b9d3052b4a",
     "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
     "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
     "evaluation_amendment_sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0",
@@ -51,7 +52,8 @@
     "stage2_closing_instruction": {
       "path": "docs/team-recommender/STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md",
       "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
-    }
+    },
+    "stage3_path": "docs/team-recommender/STAGE_3_VALIDATION_AUTHORITY.md"
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -7002,5 +7004,35 @@
       "path": "docs/team-recommender/receipts/closeout-preservation.json",
       "sha256": "954d28e51cd59a4215d366278cb932ea79fcf47cea3c54087c8748de73e58543"
     }
+  },
+  "stage3_validation": {
+    "status": "locked; trusted prerequisite review pending; no holdout output yet",
+    "starting_commit": "f4f38b32294c8e922c25a7c67d518be27f5f8e33",
+    "starting_tree": "d3074cfc54ce196999e5fd1274b4f3005b347437",
+    "lock": {
+      "path": "docs/team-recommender/manifests/stage3-validation-lock-v1.json",
+      "sha256": "e196003bcab280db582e8ce72e4c92399d641b73414514460609b7ae559f5b00"
+    },
+    "trusted_candidate": "7c42154733904b04cb261b5b3bf58884b3c9f72b",
+    "cloud_owner": "34538646232",
+    "starting_spend_usd": 3.135333,
+    "starting_requests": 475,
+    "new_spend_usd": 0,
+    "new_requests": 0,
+    "outstanding_usd": 0,
+    "max_new_spend_usd": 4,
+    "max_new_requests": 184,
+    "scientific_reservations": 90,
+    "controls": 30,
+    "source_prepared_holdout": 39,
+    "source_prepared_rollout50": 30,
+    "source_prepared_rollout150": 81,
+    "query_rows_missing": 190,
+    "embedding_requests_planned": 6,
+    "holdout_outputs_generated": false,
+    "production_activation": false,
+    "final_human_requested": 0,
+    "final_human_returned": 0,
+    "history_preserved": true
   }
 }

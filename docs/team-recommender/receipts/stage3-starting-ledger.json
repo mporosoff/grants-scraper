@@ -1,0 +1,15 @@
+{
+  "version": "stage3-starting-ledger-verified-v1",
+  "authoritative_cloud_run": "34538646232",
+  "attempt": "1",
+  "code_sha": "2071a0b850e79af037490dc0a34483c6e4844fde",
+  "ledger_sha256": "a7065a2d4422a0006808343ac1dc54155bb7810096c4544d0e0d0b266555ee6c",
+  "checkpoint_sha256": "65391f2f25c75a60d7fb02d789940b15e534fb16c0583cf9d9dd472a044bf6c7",
+  "checked_files": 936,
+  "public_mirror_byte_identical": true,
+  "charged_microusd": 3135333,
+  "requests": 475,
+  "uncertain_requests": 0,
+  "new_stage3_requests": 0,
+  "restoration_did_not_create_spending_authority": true
+}
