@@ -30,11 +30,14 @@ PREFIX = AUTHORIZATION_ID
 PACKET_LIMIT = 8 * 1024 * 1024
 STATE_LIMIT = 128 * 1024 * 1024
 PURPOSES = {"source": 90, "individual": 90, "group": 90, "control": 30, "explanation": 30, "order-swap": 10}
+# A later paid envelope never grants the legacy packet format new authority.
+GENERIC_JUDGE_PURPOSES = frozenset(PURPOSES)
 PURPOSES.update({"d1-source":12,"d1-call":130,"d1-aspect":20,"d1-group":40,
                  "d1-comparison":40,"d1-explanation":12,"d1-control":30,"d1-swap":4})
 PURPOSES.update({"d2-call":80,"d2-group":70,"d2-comparison":20,"d2-explanation":6,"d2-swap":4})
 PURPOSES.update({"d3-call":100,"d3-group":70,"d3-comparison":25,"d3-explanation":8,"d3-swap":4})
 PURPOSES.update({"s3-primary":134,"s3-alternative":12,"s3-explanation":6,"s3-swap":6,"s3-control":6})
+PURPOSES["post-audit"] = 34
 KINDS = {"individual", "group", "comparison", "source_control", "explanation_audit"}
 SCIENCE_LABELS = {"strong", "plausible", "unrelated", "insufficient-information"}
 
@@ -138,6 +141,9 @@ def profile_evidence(rows, settings):
 
 
 def judge_contract(request, settings):
+    from tools.team_recommender_post_audit_executor import PROTOCOL as POST, contract as post_contract
+    if request.get("protocol") == POST:
+        return post_contract(request, settings)
     from tools.team_recommender_stage3_executor import PROTOCOL, judge_contract as stage3_contract
     if request.get('protocol') == PROTOCOL:
         return stage3_contract(request, settings)
@@ -145,7 +151,7 @@ def judge_contract(request, settings):
         from tools.team_recommender_judge_d1 import contract
         return contract(request, settings)
     exact_keys(request, ["scope_id", "purpose", "source_evidence", "items"])
-    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES or request["purpose"].startswith(("d1-", "d2-", "d3-")):
+    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in GENERIC_JUDGE_PURPOSES:
         raise ValueError("judge_outside_development_authority")
     if request["source_evidence"]["scope_id"] != request["scope_id"]:
         raise ValueError("source_scope_mismatch")
@@ -205,7 +211,7 @@ def judge_contract(request, settings):
 def legacy_judge_key(request, settings):
     """Recognize paid pre-fix requests, never turn them into another attempt."""
     from tools.team_recommender_stage3_executor import PROTOCOL
-    if request.get('protocol') == PROTOCOL:
+    if request.get('protocol') in {PROTOCOL, 'post-audit-complete-v1'}:
         return None  # Complete held-out evidence is a distinct, fixed question.
     # D1 has substantively different trusted questions, fields and schema.
     # Its body identity is still irreversible in the SAME durable ledger.
@@ -266,7 +272,10 @@ def embedding_items(request):
 
 def validate_packet(packet, settings):
     exact_keys(packet, ["schema_version", "authorization_id", "registry_generation", "operation", "requests"])
-    if packet["schema_version"] != 1 or packet["authorization_id"] != AUTHORIZATION_ID or packet["registry_generation"] != settings["registry_generation"]:
+    from tools.team_recommender_post_audit_executor import PROTOCOL as POST, REGISTRY
+    post = packet['operation'] == 'development-judge' and isinstance(packet['requests'], list) and bool(packet['requests']) and all(isinstance(r, dict) and r.get('protocol') == POST for r in packet['requests'])
+    registry = REGISTRY if post else settings['registry_generation']
+    if packet["schema_version"] != 1 or packet["authorization_id"] != AUTHORIZATION_ID or packet["registry_generation"] != registry:
         raise ValueError("packet_authorization_or_registry_mismatch")
     if packet["operation"] not in ("embeddings", "development-judge") or not isinstance(packet["requests"], list):
         raise ValueError("unapproved_operation")
@@ -379,7 +388,7 @@ def result_value(operation, payload, request, contract, settings):
             raise ValueError("incomplete_or_duplicate_verdicts")
         for verdict in value["verdicts"]:
             kind = aliases[verdict["item_id"]]
-            if request.get("protocol") in {"D1", "D1F", "S3-E2-complete-v1"}:
+            if request.get("protocol") in {"D1", "D1F", "S3-E2-complete-v1", "post-audit-complete-v1"}:
                 from tools.team_recommender_judge_d1 import labels as d1_labels
                 labels = d1_labels(kind)
                 if not re.fullmatch(r"[ -~]{1,60}", verdict["reason"]):

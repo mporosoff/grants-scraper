@@ -1,0 +1,290 @@
+{
+  "sampling": "CDP pure JS/backing/embedder observations after adoption and actions, plus precise combined JS+backing observations around digest and synchronous action boundaries. These samples can miss internal peaks; no continuous peak claim.",
+  "baseline": "Catalog, directory and topic sidecar resident; no team runtime or calculation. One collection before baseline, no collection during/after measured actions.",
+  "browser": "151.0.7922.34",
+  "os": "10.0.26200",
+  "cpu": "Intel(R) Core(TM) Ultra 7 165U",
+  "network": "20Mbps/150ms local gzip for team input phase; no CPU throttle",
+  "groups": [
+    {
+      "case": "rollout50 345241:tdac-baa-001",
+      "metrics": {
+        "load_ms": {
+          "n": 3,
+          "min": 819.7999999821186,
+          "median": 848.5999999940395,
+          "max": 896.0999999940395,
+          "p95_nearest_rank": 896.0999999940395
+        },
+        "full_directory_fit_ms": {
+          "n": 3,
+          "min": 352.60000002384186,
+          "median": 413.80000001192093,
+          "max": 469.2999999821186,
+          "p95_nearest_rank": 469.2999999821186
+        },
+        "cold_to_view_ms": {
+          "n": 3,
+          "min": 1204.5999999940395,
+          "median": 1238.9000000059605,
+          "max": 1369.2999999821186,
+          "p95_nearest_rank": 1369.2999999821186
+        },
+        "post_last_input_ms": {
+          "n": 3,
+          "min": 674.8999999761581,
+          "median": 708.3000000119209,
+          "max": 856.5999999940395,
+          "p95_nearest_rank": 856.5999999940395
+        },
+        "sampled_combined_extra_MiB": {
+          "n": 3,
+          "min": 30.66458511352539,
+          "median": 31.554485321044922,
+          "max": 32.79481887817383,
+          "p95_nearest_rank": 32.79481887817383
+        },
+        "after_actions_pure_JS_extra_MiB": {
+          "n": 3,
+          "min": 15.47311019897461,
+          "median": 16.522602081298828,
+          "max": 17.481781005859375,
+          "p95_nearest_rank": 17.481781005859375
+        },
+        "after_actions_backing_extra_MiB": {
+          "n": 3,
+          "min": 15.021598815917969,
+          "median": 15.021598815917969,
+          "max": 15.021598815917969,
+          "p95_nearest_rank": 15.021598815917969
+        },
+        "warm_ms": {
+          "n": 30,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "max": 0.30000001192092896,
+          "p95_nearest_rank": 0.29999998211860657
+        },
+        "edit_ms": {
+          "n": 15,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "max": 0.19999998807907104,
+          "p95_nearest_rank": 0.19999998807907104
+        }
+      },
+      "network_assets": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 170.59999999403954,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2185.5
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 172.40000000596046,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2359.7000000178814
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json",
+          "duration": 173.09999999403954,
+          "encoded": 4466,
+          "decoded": 15984,
+          "transfer": 4766,
+          "responseEnd": 2535.300000011921
+        }
+      ]
+    },
+    {
+      "case": "rollout150 344592:ab-0025",
+      "metrics": {
+        "load_ms": {
+          "n": 3,
+          "min": 838.5,
+          "median": 843.0999999940395,
+          "max": 926.7000000178814,
+          "p95_nearest_rank": 926.7000000178814
+        },
+        "full_directory_fit_ms": {
+          "n": 3,
+          "min": 336,
+          "median": 372.5,
+          "max": 421.30000001192093,
+          "p95_nearest_rank": 421.30000001192093
+        },
+        "cold_to_view_ms": {
+          "n": 3,
+          "min": 1178.4000000059605,
+          "median": 1218.9000000059605,
+          "max": 1351.800000011921,
+          "p95_nearest_rank": 1351.800000011921
+        },
+        "post_last_input_ms": {
+          "n": 3,
+          "min": 658.5,
+          "median": 695.5,
+          "max": 824.0999999940395,
+          "p95_nearest_rank": 824.0999999940395
+        },
+        "sampled_combined_extra_MiB": {
+          "n": 3,
+          "min": 31.337450981140137,
+          "median": 32.77490520477295,
+          "max": 34.75965404510498,
+          "p95_nearest_rank": 34.75965404510498
+        },
+        "after_actions_pure_JS_extra_MiB": {
+          "n": 3,
+          "min": 13.394229888916016,
+          "median": 16.38187026977539,
+          "max": 17.819297790527344,
+          "p95_nearest_rank": 17.819297790527344
+        },
+        "after_actions_backing_extra_MiB": {
+          "n": 3,
+          "min": 15.038783073425293,
+          "median": 15.038783073425293,
+          "max": 15.038783073425293,
+          "p95_nearest_rank": 15.038783073425293
+        },
+        "warm_ms": {
+          "n": 30,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "max": 1.5,
+          "p95_nearest_rank": 0.30000001192092896
+        },
+        "edit_ms": {
+          "n": 15,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "max": 0.20000001788139343,
+          "p95_nearest_rank": 0.20000001788139343
+        }
+      },
+      "network_assets": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 176.19999998807907,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2148.7999999821186
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 171.30000001192093,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2322.0999999940395
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 172.69999998807907,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2496.7999999821186
+        }
+      ]
+    },
+    {
+      "case": "rollout150 359696",
+      "metrics": {
+        "load_ms": {
+          "n": 3,
+          "min": 857.9000000059605,
+          "median": 877.3999999761581,
+          "max": 878.8000000119209,
+          "p95_nearest_rank": 878.8000000119209
+        },
+        "full_directory_fit_ms": {
+          "n": 3,
+          "min": 668.8000000119209,
+          "median": 700.5,
+          "max": 709.7000000178814,
+          "p95_nearest_rank": 709.7000000178814
+        },
+        "cold_to_view_ms": {
+          "n": 3,
+          "min": 1529.300000011921,
+          "median": 1580.699999988079,
+          "max": 1593.2000000178814,
+          "p95_nearest_rank": 1593.2000000178814
+        },
+        "post_last_input_ms": {
+          "n": 3,
+          "min": 1000.4000000059605,
+          "median": 1057.5,
+          "max": 1060.0,
+          "p95_nearest_rank": 1060.0
+        },
+        "sampled_combined_extra_MiB": {
+          "n": 3,
+          "min": 49.08896541595459,
+          "median": 50.36808681488037,
+          "max": 52.4422492980957,
+          "p95_nearest_rank": 52.4422492980957
+        },
+        "after_actions_pure_JS_extra_MiB": {
+          "n": 3,
+          "min": 24.08193588256836,
+          "median": 33.84040069580078,
+          "max": 35.40016174316406,
+          "p95_nearest_rank": 35.40016174316406
+        },
+        "after_actions_backing_extra_MiB": {
+          "n": 3,
+          "min": 15.006355285644531,
+          "median": 15.038783073425293,
+          "max": 15.038783073425293,
+          "p95_nearest_rank": 15.038783073425293
+        },
+        "warm_ms": {
+          "n": 30,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "max": 0.4000000059604645,
+          "p95_nearest_rank": 0.4000000059604645
+        },
+        "edit_ms": null
+      },
+      "network_assets": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 177.5,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2266
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 186,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2454.2999999821186
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 172.5,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2629.2999999821186
+        }
+      ]
+    }
+  ],
+  "memory_limit_MiB": 48,
+  "memory_status": "FAIL",
+  "physical_mobile": "NOT RUN",
+  "provider_requests": 0
+}

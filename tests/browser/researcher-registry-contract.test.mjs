@@ -28,7 +28,7 @@ const identityBaseline = JSON.parse(await readFile(new URL("tests/fixtures/resea
 const protectedRef = process.env.RESEARCHER_IDENTITY_BASE_SHA || "HEAD";
 if (protectedRef !== "HEAD") assert.match(protectedRef, /^[a-f0-9]{40}$/);
 const publishedSource = spawnSync("git", ["show", `${protectedRef}:config/researcher_registry.json`], {
-  cwd: fileURLToPath(root), encoding: "utf8",
+  cwd: fileURLToPath(root), encoding: "utf8", maxBuffer: 32 * 1024 * 1024,
 });
 assert.equal(publishedSource.status, 0, `Cannot load protected registry identity baseline: ${publishedSource.stderr}`);
 const publishedRegistry = JSON.parse(publishedSource.stdout);

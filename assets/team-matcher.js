@@ -154,22 +154,29 @@
     };
 
     const records = [];
+    const sourceCacheLimit = Number.isInteger(options.sourceCacheLimit) && options.sourceCacheLimit > 0 ? options.sourceCacheLimit : 0;
+    const sourceCache = new Map();
+    const recordSourceText = record => [record.title || '', record.description || '',
+      String(record.document_search_text || '').slice(0, 16000), ...(record.topic_areas || []), ...(record.disciplines || [])].join(' ');
+    function sourceFor(prepared) {
+      let value=sourceCache.get(prepared);
+      if(value) sourceCache.delete(prepared);
+      else { const text=recordSourceText(prepared.record), tokens=tokenize(text);value={sourceLower:text.toLowerCase(),tokens,tokenSet:new Set(tokens)}; }
+      sourceCache.set(prepared,value);
+      if(sourceCache.size>sourceCacheLimit) sourceCache.delete(sourceCache.keys().next().value);
+      return value;
+    }
     const wordFrequency = new Map();
     const topicFrequency = new Map();
     const profileVocabularyCache = new WeakMap();
     const groupDefinitionCache = new Map();
+    const scientificProfileCache = new WeakMap(), scientificSourceCache = new Map();
     rawRecords.forEach(record => {
       if (!recordIsCurrent(record, now) || recordIsTestOpportunity(record)) return;
       const identityText = `${record.agency || ""} ${record.title || ""}`;
       if (OUT_OF_SCOPE_RE.some(pattern => pattern.test(identityText))) return;
-      const sourceText = [
-        record.title || "",
-        record.description || "",
-        String(record.document_search_text || "").slice(0, 16_000),
-        ...(record.topic_areas || []),
-        ...(record.disciplines || []),
-      ].join(" ");
-      const sourceLower = sourceText.toLowerCase();
+      const sourceText = recordSourceText(record);
+      const sourceLower = sourceCacheLimit ? null : sourceText.toLowerCase();
       const tokens = tokenize(sourceText);
       const tokenSet = new Set(tokens);
       const topics = new Set(record.topic_areas || []);
@@ -203,6 +210,11 @@
         freshAge,
         closeIn,
       };
+      if (sourceCacheLimit) {
+        // Frequency context still traverses the entire eligible catalog. Only
+        // requested source token arrays are retained by the reverse matcher.
+        for(const field of ['sourceLower','tokens','tokenSet']) Object.defineProperty(prepared,field,{enumerable:true,configurable:false,get:()=>sourceFor(prepared)[field]});
+      }
       records.push(prepared);
       tokenSet.forEach(token => wordFrequency.set(token, (wordFrequency.get(token) || 0) + 1));
       topics.forEach(topic => topicFrequency.set(topic, (topicFrequency.get(topic) || 0) + 1));
@@ -250,6 +262,7 @@
           term => wordFrequency.has(term),
           { acronymResolver, context },
         ).map(group => ({
+          ...group,
           source: group.source,
           terms: group.terms || [],
           minimumEvidence: Number(group.minimumEvidence || 0),
@@ -336,7 +349,9 @@
       const needed = groups.length <= 3 ? groups.length : Math.max(3, Math.ceil(groups.length * .7));
       let proximity = groups.length === 1;
       const windowSize = groups.length + 6;
-      for (let start = 0; !proximity && start < prepared.tokens.length; start += 1) {
+      // Proximity is consulted only by the matchedGroups >= needed branch.
+      // Skip an otherwise expensive document scan when that branch is impossible.
+      for (let start = 0; matchedGroups >= needed && !proximity && start < prepared.tokens.length; start += 1) {
         const nearby = new Set();
         prepared.tokens.slice(start, start + windowSize).forEach(token => {
           groupTermSets.forEach((terms, groupIndex) => {
@@ -359,6 +374,50 @@
       }
       if (score < .18) return null;
       return { score, strong, coverage, label: phrase, matchedTerms: [...matchedTerms].sort() };
+    }
+
+    function scientificEvidence(profile, prepared) {
+      const sourceApi = globalThis.FUNDING_RETRIEVAL?.sourceEvidence;
+      if (!sourceApi || !searchApi?.expandGroups) return [];
+      let source = scientificSourceCache.get(prepared);
+      if (!source) {
+        source = sourceApi.createScientificContext(prepared.record, searchApi);
+        scientificSourceCache.set(prepared, source);
+        if (scientificSourceCache.size > 8) scientificSourceCache.delete(scientificSourceCache.keys().next().value);
+      }
+      const signature = JSON.stringify([profileContext(profile), profile.claims || [], profile.summary_evidence || [], profile.researcher_id || null]);
+      const cachedUnits = scientificProfileCache.get(profile);
+      let units = cachedUnits?.signature === signature ? cachedUnits.units : null;
+      if (!units) {
+        const claims = profile.claims || [], context = profileContext(profile), seen = new Set();
+        const raw = claims.length ? claims.map(c => ({key: c.claim_id, claims: [c], values: [c.label, c.evidence]}))
+          : profilePhrases(profile).map(value => ({key: value, claims: [], values: [value]}));
+        if (profile.research_summary && (profile.summary_evidence?.length || !profile.researcher_id)) raw.push({key: 'summary', claims: [], values: [profile.research_summary], summary: true});
+        units = [];
+        for (const unit of raw) for (const value of unit.values) {
+          for (const passage of sourceApi.boundedPassageWindows(value, 1)) {
+            if (sourceApi.nonAffirmativeClause(passage.value)) continue;
+            const fingerprint = tokenize(passage.value).join(' ');
+            if (!fingerprint || seen.has(fingerprint)) continue; seen.add(fingerprint);
+            // Reuse the rich query concepts, including their source evidence
+            // policies; never strip them down to an unordered term vocabulary.
+            const groups = searchApi.expandGroups(passage.value, term => wordFrequency.has(term), {acronymResolver, context, searchV2: true})
+              .filter(group => !STOP_WORDS.has(group.source) && group.role !== 'program_or_agency_qualifier');
+            units.push({...unit, value: passage.value, groups});
+          }
+        }
+        scientificProfileCache.set(profile, {signature, units});
+      }
+      const connections = new Map();
+      for (const unit of units) for (const support of source.connections(unit.groups)) {
+        const key = support.relationship_id;
+        const next = {...support, claims: unit.claims, claim_key: unit.key, profile_excerpt: unit.claims[0]?.evidence || unit.value, profile_match_excerpt: unit.value,
+          summary: unit.summary === true, label: unit.claims[0]?.label || unit.value,
+          strong: support.anchor, score: support.anchor ? 3 : 2.5};
+        const old = connections.get(key);
+        if (!old || next.score > old.score || (next.score === old.score && next.claim_key < old.claim_key)) connections.set(key, next);
+      }
+      return [...connections.values()].sort((a,b) => b.score-a.score || a.relationship_id.localeCompare(b.relationship_id));
     }
 
     function vocabularyEvidence(domain, prepared, profileTerms = null) {
@@ -410,17 +469,24 @@
       let signalCount = 0;
       const context = profileContext(profile);
 
+      const discoveryUnits = new Map();
       for (const phrase of profilePhrases(profile)) {
         const evidence = phraseEvidence(phrase, prepared, context);
         if (!evidence) continue;
-        phraseScore += evidence.score;
-        strong = strong || evidence.strong;
+        const owner = (profile.claims || []).find(c => c.label === phrase || c.evidence === phrase);
+        const unit = owner?.claim_id || tokenize(phrase).join(" ");
+        discoveryUnits.set(unit, Math.max(discoveryUnits.get(unit) || 0, evidence.score));
         signalCount += 1;
         reasons.push({ label: evidence.label, score: evidence.score, type: "interest" });
         const claims = (profile.claims || []).filter(c => c.label === phrase || c.evidence === phrase);
         connections.push({...evidence, claims});
       }
-      phraseScore = Math.min(7.5, phraseScore);
+      // Duplicate IDs/text cannot add a second confirmation. These remain
+      // discovery signals, even when several independent weak hits accumulate.
+      phraseScore = Math.min(7.5, [...discoveryUnits.values()].reduce((a, b) => a + b, 0));
+      const supportedConnections = scientificEvidence(profile, prepared);
+      const automaticEligible = supportedConnections.length > 0;
+      strong = supportedConnections.some(c => c.anchor);
 
       const profileTerms = profileVocabulary(profile);
       for (const domain of profile.domains || []) {
@@ -450,14 +516,15 @@
         reasons.push({ label: scope.label, score: scope.score, type: "scope" });
       }
 
-      const score = phraseScore + vocabularyScore + tagScore + scopeScore;
+      const scientificScore = automaticEligible ? Math.max(...supportedConnections.map(c => c.score)) : 0;
+      const score = Math.max(scientificScore, phraseScore + vocabularyScore + tagScore + scopeScore);
       // Agency scope is intentionally a modest exception for genuinely broad,
       // otherwise unsearchable solicitations. Ordinary records need a higher
       // accumulation of textual/topic evidence so one generic vocabulary hit
       // cannot establish researcher fit by itself.
       const minimumScore = scopeScore > 0 ? 1.0 : MIN_MEMBER_SCORE;
       const hasResearcherLink = phraseScore >= .18 || linkedVocabularyScore >= .3 || scopeScore > 0;
-      if (score < minimumScore || !signalCount || !hasResearcherLink) return null;
+      if (!automaticEligible && (score < minimumScore || !signalCount || !hasResearcherLink)) return null;
       reasons.sort((left, right) => right.score - left.score || left.label.localeCompare(right.label));
       const researchReasons = uniq(reasons
         .filter(reason => reason.type !== "scope")
@@ -465,7 +532,11 @@
       return {
         name: profile.name,
         score,
-        strong: strong || phraseScore >= 2.25 || linkedVocabularyScore >= 1.45,
+        strong,
+        automaticEligible,
+        evidenceVersion: "shared-context-v1",
+        supportedConnections,
+        discovery: {phraseScore, vocabularyScore, linkedVocabularyScore, tagScore, scopeScore},
         textEvidence: phraseScore + vocabularyScore,
         phraseScore,
         vocabularyScore,

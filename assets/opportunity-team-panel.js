@@ -287,21 +287,22 @@
       if (API.pageGenerationId() !== current.generationId) throw new Error("Team package changed; reopen the panel.");
       current.childCatalog = childCatalog;
       current.record = catalogRecord(current.parentId);
-      var outcome = current.engine.resolveScope({
+      var action = {
         parentId: current.parentId,
         scopeId: current.scopeId,
         record: current.record,
         childCatalog: childCatalog,
         isBroad: current.isBroad,
         now: new Date(),
-      });
-      if (!outcome.ok) {
-        renderUnavailable(current, outcome.reason, outcome.scopes);
-        return;
-      }
-      current.scopeId = outcome.opportunity.id;
-      if (!preserveState || !current.state || current.state.opportunityId !== outcome.opportunity.id) current.state = current.engine.proposal(outcome.opportunity);
-      renderProposal(current);
+      };
+      var finish = function (outcome) {
+        if (!outcome.ok) { renderUnavailable(current, outcome.reason, outcome.scopes); return; }
+        current.scopeId = outcome.opportunity.id;
+        if (!preserveState || !current.state || current.state.opportunityId !== outcome.opportunity.id) current.state = current.engine.proposal(outcome.opportunity);
+        renderProposal(current);
+      };
+      if (current.engine.runAction) current.engine.runAction(action, finish);
+      else finish(current.engine.resolveScope(action));
     }).catch(function (error) {
       if (reconcile(current) && current.scopeSequence === sequence) renderFailure(current, error);
     });
@@ -335,11 +336,15 @@
       if (API.pageGenerationId() !== current.generationId) throw new Error("Team package changed; reopen the panel.");
       // One decision clock for validation, mutation, options and rendering of this action.
       current.record = catalogRecord(current.parentId);
-      var outcome = current.engine.resolveScope({parentId: current.parentId, scopeId: current.scopeId,
-        record: current.record, childCatalog: current.childCatalog, isBroad: current.isBroad, now: new Date()});
-      if (!outcome.ok) { renderUnavailable(current, outcome.reason, outcome.scopes); return; }
-      mutation();
-      renderProposal(current);
+      var action = {parentId: current.parentId, scopeId: current.scopeId,
+        record: current.record, childCatalog: current.childCatalog, isBroad: current.isBroad, now: new Date()};
+      var finish = function (outcome) {
+        if (!outcome.ok) { renderUnavailable(current, outcome.reason, outcome.scopes); return; }
+        mutation();
+        renderProposal(current);
+      };
+      if (current.engine.runAction) current.engine.runAction(action, finish);
+      else finish(current.engine.resolveScope(action));
     } catch (error) { renderFailure(current, error); }
   }
 

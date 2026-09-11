@@ -1,0 +1,198 @@
+{
+  "schema_version": 3,
+  "generation_id": "99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2",
+  "scope_count": 26,
+  "scopes": [
+    {
+      "id": "347679",
+      "parent_id": "347679",
+      "record_type": "specific_parent",
+      "scope_label": "Infrastructure Capacity for Biological Research",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "356536",
+      "parent_id": "356536",
+      "record_type": "specific_parent",
+      "scope_label": "Geospace Cluster",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "361522",
+      "parent_id": "361522",
+      "record_type": "specific_parent",
+      "scope_label": "Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363585",
+      "parent_id": "363585",
+      "record_type": "specific_parent",
+      "scope_label": "BJA FY26 Body-Worn Camera Policy and Implementation Program to Support Law Enforcement Agencies",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344610",
+      "parent_id": "344610",
+      "record_type": "specific_parent",
+      "scope_label": "Major Research Instrumentation Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363147",
+      "parent_id": "363147",
+      "record_type": "specific_parent",
+      "scope_label": "Rigorously Evaluating Approaches to Prevent Child Sexual Abuse and Problematic Sexual Behavior among Youth",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "nyserda:PON3982",
+      "parent_id": "nyserda:PON3982",
+      "record_type": "specific_parent",
+      "scope_label": "On-the-Job Training for Energy Efficiency and Clean Technology",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "357545",
+      "parent_id": "357545",
+      "record_type": "specific_parent",
+      "scope_label": "Accelerating the Pace of Substance Use Research Using Existing Data (R21 Clinical Trial Not Allowed)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363584",
+      "parent_id": "363584",
+      "record_type": "specific_parent",
+      "scope_label": "BJA FY26 Investigating and Prosecuting Sexual Assaults in Confinement Facilities Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
+      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
+      "record_type": "specific_parent",
+      "scope_label": "EDU Core Research (ECR: Core)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "349109",
+      "parent_id": "349109",
+      "record_type": "specific_parent",
+      "scope_label": "Facility and Instrumentation Request Process",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363523",
+      "parent_id": "363523",
+      "record_type": "specific_parent",
+      "scope_label": "The Home Visiting Research, Improvement, Sustainability and Evaluation Center (HV-RISE)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360532",
+      "parent_id": "360532",
+      "record_type": "specific_parent",
+      "scope_label": "Shared Instrumentation Grant (SIG) Program (S10 Clinical Trial Not Allowed)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "arpa-h:sbir",
+      "parent_id": "arpa-h:sbir",
+      "record_type": "specific_parent",
+      "scope_label": "2026 SBIR/STTR topics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362827",
+      "parent_id": "362827",
+      "record_type": "specific_parent",
+      "scope_label": "FAIR HOUSING INITIATIVES PROGRAM PRIVATE ENFORCEMENT INITIATIVE",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "355219",
+      "parent_id": "355219",
+      "record_type": "specific_parent",
+      "scope_label": "Research on the Science and Technology Enterprise: Indicators, Statistics, and Methods (NCSES S&T)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "357580",
+      "parent_id": "357580",
+      "record_type": "specific_parent",
+      "scope_label": "Life and Environments Through Time",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "353756",
+      "parent_id": "353756",
+      "record_type": "specific_parent",
+      "scope_label": "Independent Scientist Award (Parent K02 - Independent Clinical Trial Required)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362177",
+      "parent_id": "362177",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Arthritis Translational Research Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "348985",
+      "parent_id": "348985",
+      "record_type": "specific_parent",
+      "scope_label": "Research Experiences for Undergraduates (REU)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "350469",
+      "parent_id": "350469",
+      "record_type": "specific_parent",
+      "scope_label": "Research Infrastructure in the Social and Behavioral Sciences",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "357724",
+      "parent_id": "357724",
+      "record_type": "specific_parent",
+      "scope_label": "EPSCoR Research Infrastructure Improvement Program: EPSCoR Research Incubators for STEM Excellence (E-RISE)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "355297",
+      "parent_id": "355297",
+      "record_type": "specific_parent",
+      "scope_label": "National Cancer Institute Youth Enjoy Science Research Education Program (R25 Clinical Trial Not Allowed)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363594:a-1",
+      "parent_id": "363594",
+      "record_type": "publishable_child",
+      "scope_label": "Coal",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363594:b-1",
+      "parent_id": "363594",
+      "record_type": "publishable_child",
+      "scope_label": "Oil & Gas",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363594:c-1",
+      "parent_id": "363594",
+      "record_type": "publishable_child",
+      "scope_label": "Geothermal",
+      "engine": "shared-team-v3"
+    }
+  ],
+  "shared": {
+    "path": "data/team_ingredients/shared-99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2.json",
+    "bytes": 11944,
+    "sha256": "99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2"
+  },
+  "runtime": {
+    "matcher": "6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+    "shared": "8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+  }
+}

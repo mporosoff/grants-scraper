@@ -1,0 +1,26 @@
+{
+  "semantic": {
+    "scopes": 26,
+    "all_decisions_and_evidence_equal": true,
+    "output_sha256": "0950e40d978f030f155586135585e9b70316fb08ddcf3675756f4af83f3f66d9",
+    "engine_sha256": "8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+  },
+  "rollout50": {
+    "scopes": 50,
+    "all_decisions_and_evidence_equal": true,
+    "output_sha256": "ba92784534dd6c8a75d9b935abe96f02dcec318ec75dd9b7c1a94d104eb61376",
+    "engine_sha256": "8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+  },
+  "rollout150": {
+    "scopes": 150,
+    "all_decisions_and_evidence_equal": true,
+    "output_sha256": "1e0aad22a7259f26083c3b9af4106d8b64334d864f5b9c038fc562d745de4b49",
+    "engine_sha256": "8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+  },
+  "legacy": {
+    "scopes": 106,
+    "all_decisions_and_evidence_equal": true,
+    "output_sha256": "8696c7da20a261240a8ad5832d3e6ed54b0ce2b7daa851f39ebf2174d826d470",
+    "engine_sha256": "8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+  }
+}

@@ -1,0 +1,1219 @@
+{
+  "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+  "packages": "docs/team-recommender/evidence-repair/release-packages-v3.json",
+  "full_configured_suite_runs": 1,
+  "affected_rerun_cases": 5,
+  "full_suite": {
+    "full": {
+      "path": "outputs/team-recommender-post-audit/evidence-repair-full/results.json",
+      "sha256": "f19904b6d78e6b73e78918213c77a68aa38ef669f3c6585e9c9aa037d613e632",
+      "stats": {
+        "startTime": "2026-09-11T18:12:06.691Z",
+        "duration": 832789.485,
+        "expected": 117,
+        "skipped": 0,
+        "unexpected": 5,
+        "flaky": 0
+      }
+    },
+    "affected": {
+      "path": "outputs/team-recommender-post-audit/evidence-repair-affected/results.json",
+      "sha256": "14bd335b9b76a9e85e218c398f1fb52c6ba7c347b5be0c426f0411370d11d84c",
+      "stats": {
+        "startTime": "2026-09-11T18:26:58.901Z",
+        "duration": 216979.313,
+        "expected": 4,
+        "skipped": 0,
+        "unexpected": 1,
+        "flaky": 0
+      }
+    }
+  },
+  "unique_browser_cases": 122,
+  "latest_status": {
+    "passed": 121,
+    "timedOut": 1
+  },
+  "cases": [
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "title": "Funding Finder has no serious or critical violations across critical states",
+      "status": "passed",
+      "duration_ms": 12258,
+      "run": "full"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "title": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "status": "passed",
+      "duration_ms": 24415,
+      "run": "full"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "title": "shared Help remains visible and current across every desktop and mobile surface",
+      "status": "passed",
+      "duration_ms": 8620,
+      "run": "full"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "title": "shared navigation and primary content geometry stay aligned across all three pages",
+      "status": "passed",
+      "duration_ms": 1384,
+      "run": "full"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "title": "Team Match has no serious or critical violations across picker, results, and fallback states",
+      "status": "passed",
+      "duration_ms": 31201,
+      "run": "full"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "title": "Funded Awards has no serious or critical violations and fits narrow mobile layouts",
+      "status": "passed",
+      "duration_ms": 4750,
+      "run": "affected"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "delayed catalog cannot block the interactive shell, Help, navigation, or mobile accessibility",
+      "status": "passed",
+      "duration_ms": 2898,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "Save-Data and slow connections deterministically skip background catalog prefetch",
+      "status": "passed",
+      "duration_ms": 4955,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "a hidden document postpones prefetch and resumes it when visible without execution",
+      "status": "passed",
+      "duration_ms": 1582,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "two rapid searches share one catalog execution and initialization, then preserve normal ordered results",
+      "status": "passed",
+      "duration_ms": 4759,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "catalog failure preserves entered and saved state and retry completes the original search",
+      "status": "passed",
+      "duration_ms": 4348,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "timed-out catalog ownership quarantines stale execution across failed and successful retries",
+      "status": "passed",
+      "duration_ms": 5412,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "a stalled topic sidecar fails initialization cleanly and a fresh bounded retry succeeds",
+      "status": "passed",
+      "duration_ms": 7965,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "a healthy catalog may complete after 15 seconds and both asset timers still clean up",
+      "status": "passed",
+      "duration_ms": 3828,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "shell dependency failures do not offer a catalog retry that cannot run",
+      "status": "passed",
+      "duration_ms": 749,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "retry refreshes stale startup metadata after a catalog generation changes",
+      "status": "passed",
+      "duration_ms": 4897,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "catalog validation derives its release version from loaded pipeline timestamps",
+      "status": "passed",
+      "duration_ms": 6127,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "catalog validation preserves same-second pipeline timestamp precision",
+      "status": "passed",
+      "duration_ms": 6448,
+      "run": "full"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "title": "Back and Forward restore catalog-dependent URLs before and after readiness without eager clean-page execution",
+      "status": "passed",
+      "duration_ms": 3854,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "title": "standalone paging and investigator handoff retain the submitted year range",
+      "status": "passed",
+      "duration_ms": 1427,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "title": "the Funded Awards status badge remains complete inside a narrow mobile header",
+      "status": "passed",
+      "duration_ms": 1533,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "title": "the frozen NIH example opens its exact opportunity mapping",
+      "status": "passed",
+      "duration_ms": 2245,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "title": "a scroll queued before a card menu opens cannot dismiss its exact award action",
+      "status": "passed",
+      "duration_ms": 1410,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "title": "the frozen DOE example opens its exact PAMS FOA without a program-equivalence claim",
+      "status": "passed",
+      "duration_ms": 2116,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "title": "the frozen NSF CBET example opens its reviewed current and predecessor program group",
+      "status": "passed",
+      "duration_ms": 2362,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder-live.spec.mjs",
+      "title": "the daily Funding Finder catalog loads as a usable application package",
+      "status": "passed",
+      "duration_ms": 8481,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "watchlist pursuit state stays local and saved-search alerts send only typed public criteria",
+      "status": "passed",
+      "duration_ms": 2753,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "Unit C alert dialog locks the page, traps focus, scrolls internally, and restores state on mobile",
+      "status": "passed",
+      "duration_ms": 2610,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "Unit C alert dialog preserves its recovery state and restores focus after a failed submission",
+      "status": "passed",
+      "duration_ms": 1985,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "saved-item write rejection restores durable UI state across every mutation",
+      "status": "passed",
+      "duration_ms": 3017,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "alert dialog gives bounded recovery guidance for 429 rate_limited JSON response",
+      "status": "passed",
+      "duration_ms": 1817,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "alert dialog gives bounded recovery guidance for 429 non-JSON response",
+      "status": "passed",
+      "duration_ms": 1691,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "alert dialog gives bounded recovery guidance for 400 invalid_request JSON response",
+      "status": "passed",
+      "duration_ms": 1765,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "alert dialog gives bounded recovery guidance for 403 origin_not_allowed JSON response",
+      "status": "passed",
+      "duration_ms": 1784,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "alert dialog gives bounded recovery guidance for 503 alerts_unavailable JSON response",
+      "status": "passed",
+      "duration_ms": 1731,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "alert dialog gives bounded recovery guidance for 503 non-JSON response",
+      "status": "passed",
+      "duration_ms": 1681,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "alert dialog gives bounded recovery guidance for 202 malformed accepted response",
+      "status": "passed",
+      "duration_ms": 1824,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "primary search submits with Enter and exposes gated AI refinement in Refine Search",
+      "status": "passed",
+      "duration_ms": 2108,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "primary search and Refine Search controls fit from tablet through 320 px",
+      "status": "passed",
+      "duration_ms": 1581,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "provider failure preserves the search, filters, results, key, and retry control",
+      "status": "passed",
+      "duration_ms": 2308,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "an alert focus link starts a result search and reveals its exact opportunity",
+      "status": "passed",
+      "duration_ms": 846,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "Strong and Potential membership survives sorting, filters trigger one semantic cycle, and core actions work",
+      "status": "passed",
+      "duration_ms": 5871,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "sidecar failure preserves parent search, browsing, and filters with a visible warning",
+      "status": "passed",
+      "duration_ms": 1957,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "Retry-After keeps Strong results visible and disables retry until the interval expires",
+      "status": "passed",
+      "duration_ms": 11418,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "refinement awaits the one pending Potential request before capturing its ordinary baseline",
+      "status": "passed",
+      "duration_ms": 5899,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "generic-only and stale AI responses leave the ordinary baseline untouched",
+      "status": "passed",
+      "duration_ms": 2916,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "refinement sends only enabled profile context and honors the explicit CV-for-AI control",
+      "status": "passed",
+      "duration_ms": 2252,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "refinement keeps both calls and provenance bound to its starting provider",
+      "status": "passed",
+      "duration_ms": 2581,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "editing an imported ORCID clears stale refinement and restores ordinary results",
+      "status": "passed",
+      "duration_ms": 2635,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "uploaded notice focus blocks refinement until the PDF is removed",
+      "status": "passed",
+      "duration_ms": 1413,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "rerunning changed criteria clears stale chat focus while preserving the conversation",
+      "status": "passed",
+      "duration_ms": 2268,
+      "run": "full"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "title": "AI refinement adds locally Strong records and exact restoration preserves the ordinary baseline",
+      "status": "passed",
+      "duration_ms": 4913,
+      "run": "full"
+    },
+    {
+      "file": "e2e/institutional-intelligence.spec.mjs",
+      "title": "legacy Institutional Intelligence bookmarks remain compatible with Funded Awards",
+      "status": "passed",
+      "duration_ms": 2000,
+      "run": "full"
+    },
+    {
+      "file": "e2e/minor-ui-fixes.spec.mjs",
+      "title": "search lands on compact results with utilities reachable through More",
+      "status": "passed",
+      "duration_ms": 8511,
+      "run": "full"
+    },
+    {
+      "file": "e2e/minor-ui-fixes.spec.mjs",
+      "title": "Team Builder replaces the closed context without reusing the prior proposal",
+      "status": "passed",
+      "duration_ms": 10740,
+      "run": "full"
+    },
+    {
+      "file": "e2e/minor-ui-fixes.spec.mjs",
+      "title": "Funded Awards opens directly on the working search without the redundant banner",
+      "status": "passed",
+      "duration_ms": 1821,
+      "run": "full"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "title": "Funding Finder retains its hero and Team Builder contains text at phone widths and enlarged text",
+      "status": "passed",
+      "duration_ms": 13951,
+      "run": "affected"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "title": "Researcher institution supports keyboard ROR selection, draft isolation and browser-local retention",
+      "status": "passed",
+      "duration_ms": 1826,
+      "run": "full"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "title": "Researcher review sends only optional institution metadata and clears a ROR identity when edited",
+      "status": "passed",
+      "duration_ms": 1075,
+      "run": "full"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "title": "Late ROR responses and lookup failures cannot overwrite a different researcher draft",
+      "status": "passed",
+      "duration_ms": 2607,
+      "run": "full"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "title": "ROR suggestions distinguish identical names using the actual API city and country fields",
+      "status": "passed",
+      "duration_ms": 850,
+      "run": "full"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "title": "Ask AI bounds requests, keeps follow-up scope, and supports card menus at 1280px",
+      "status": "passed",
+      "duration_ms": 4336,
+      "run": "full"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "title": "Ask AI bounds requests, keeps follow-up scope, and supports card menus at 390px",
+      "status": "passed",
+      "duration_ms": 4402,
+      "run": "full"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "title": "Ask AI bounds requests, keeps follow-up scope, and supports card menus at 320px",
+      "status": "passed",
+      "duration_ms": 4105,
+      "run": "full"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "title": "a non-default filter enables Ask AI and restoring default browsing disables it",
+      "status": "passed",
+      "duration_ms": 1366,
+      "run": "full"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "title": "saved opportunity alerts work before searching and enforce the selected public-ID boundary",
+      "status": "passed",
+      "duration_ms": 2877,
+      "run": "full"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "title": "specific team topics support alternatives, explicit replacement, and Team Match handoff",
+      "status": "passed",
+      "duration_ms": 2770,
+      "run": "full"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "title": "award sorting spans the full snapshot and survives paging, shared reload, and history",
+      "status": "passed",
+      "duration_ms": 11799,
+      "run": "full"
+    },
+    {
+      "file": "e2e/shared-links.spec.mjs",
+      "title": "bare and parameterized Funding Finder links keep encoded state, fragments, and preview metadata",
+      "status": "passed",
+      "duration_ms": 4292,
+      "run": "full"
+    },
+    {
+      "file": "e2e/shared-links.spec.mjs",
+      "title": "Funded Awards and Team Match extension routes retain shared state and the common preview",
+      "status": "passed",
+      "duration_ms": 5224,
+      "run": "full"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "title": "Team Match supports directory, browser-only, team-size, history, and mobile workflows",
+      "status": "timedOut",
+      "duration_ms": 91891,
+      "run": "affected"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "title": "a deferred four-person team cannot lose a member through Configure",
+      "status": "passed",
+      "duration_ms": 41601,
+      "run": "full"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "title": "enhanced ordering can reorder only locally eligible every-member-fit results",
+      "status": "passed",
+      "duration_ms": 13513,
+      "run": "full"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "title": "Team Match sidecar failure keeps parent-level matching and disables enhanced ordering",
+      "status": "passed",
+      "duration_ms": 7056,
+      "run": "full"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "title": "enhanced-ordering failure leaves local team-fit results usable with a nontechnical message",
+      "status": "passed",
+      "duration_ms": 12242,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 0 matching awards",
+      "status": "passed",
+      "duration_ms": 1728,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 1 matching awards",
+      "status": "passed",
+      "duration_ms": 1868,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 9 matching awards",
+      "status": "passed",
+      "duration_ms": 1820,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 10 matching awards",
+      "status": "passed",
+      "duration_ms": 1856,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 11 matching awards",
+      "status": "passed",
+      "duration_ms": 2354,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 25 matching awards",
+      "status": "passed",
+      "duration_ms": 2505,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 26 matching awards",
+      "status": "passed",
+      "duration_ms": 2327,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 50 matching awards",
+      "status": "passed",
+      "duration_ms": 2320,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot pagination handles exactly 51 matching awards",
+      "status": "passed",
+      "duration_ms": 2317,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "topic and program-officer filters create one immutable snapshot request",
+      "status": "passed",
+      "duration_ms": 1862,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "program filtering requires one source before a snapshot is created",
+      "status": "passed",
+      "duration_ms": 1661,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "each agency respects its source-specific 25-record hydration boundary",
+      "status": "passed",
+      "duration_ms": 3044,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "numbered navigation, page size, and history keep one stable view",
+      "status": "passed",
+      "duration_ms": 5667,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "Back and Forward restore the scroll and focus owned by each snapshot page",
+      "status": "passed",
+      "duration_ms": 3739,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "snapshot navigation controls stay locked until one requested view is committed",
+      "status": "passed",
+      "duration_ms": 3077,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "failed facet and page-size requests restore the committed view controls",
+      "status": "passed",
+      "duration_ms": 4945,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "a failed facet preserves its evidence answer and a committed facet clears it",
+      "status": "passed",
+      "duration_ms": 3467,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "provider synthesis retains the evidence signature captured before later hydration",
+      "status": "passed",
+      "duration_ms": 4039,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "draft filters never relabel an active snapshot during page, size, facet, share, or reload navigation",
+      "status": "passed",
+      "duration_ms": 7992,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "replacement search commits only after its initial snapshot bundle succeeds",
+      "status": "passed",
+      "duration_ms": 5843,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "failed creation and initial-page replacements retain one coherent owner before success and history restoration",
+      "status": "passed",
+      "duration_ms": 5573,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "an expired snapshot is rebuilt before the requested page is restored",
+      "status": "passed",
+      "duration_ms": 7620,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "an expired snapshot is rebuilt before source hydration resumes at the requested offset",
+      "status": "passed",
+      "duration_ms": 4211,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "a fallback source-batch controller and ownership guard prevent late hydration after Back",
+      "status": "passed",
+      "duration_ms": 4769,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "history restoration cannot mix a newer snapshot question into an older snapshot",
+      "status": "passed",
+      "duration_ms": 2935,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "an in-flight newer-snapshot narrative cannot repopulate restored history",
+      "status": "passed",
+      "duration_ms": 3399,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "investigator and program drill-downs filter the same snapshot and clear in one action",
+      "status": "passed",
+      "duration_ms": 6052,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "failed-source retry creates a successor without discarding successful cards",
+      "status": "passed",
+      "duration_ms": 4122,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "an expired snapshot is rebuilt before a failed source retry creates its successor",
+      "status": "passed",
+      "duration_ms": 2766,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "a new snapshot replaces full-result facets instead of retaining the prior search",
+      "status": "passed",
+      "duration_ms": 4689,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "source-listed Program Officer actions create locked, navigable snapshots with immutable year presets",
+      "status": "passed",
+      "duration_ms": 3891,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "Program Officer AI Q&A is hosted by default, provider-planned, deterministic, bounded, and cited",
+      "status": "passed",
+      "duration_ms": 4096,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "an expired Program Officer page rebuild preserves exact contact, preset, years, and requested view",
+      "status": "passed",
+      "duration_ms": 4542,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "expired Program Officer evidence rebuilds the exact scope and restores the requested page",
+      "status": "passed",
+      "duration_ms": 7247,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "a rate-limited Program Officer source retries into an exact-scope successor",
+      "status": "passed",
+      "duration_ms": 3208,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "an incomplete Program Officer snapshot never turns a deterministic topical miss into a negative finding",
+      "status": "passed",
+      "duration_ms": 3811,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "ROR keyboard selection puts canonical identity in snapshot criteria",
+      "status": "passed",
+      "duration_ms": 2392,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "questions use full server aggregates and bounded hydrated evidence",
+      "status": "passed",
+      "duration_ms": 3526,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "optional provider translation remains strict and feeds the snapshot request",
+      "status": "passed",
+      "duration_ms": 2352,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "question translation locks newer searches until its owned snapshot is committed",
+      "status": "passed",
+      "duration_ms": 3526,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "Funded Award Intelligence is keyboard-operable and contained at 390 px",
+      "status": "passed",
+      "duration_ms": 2514,
+      "run": "full"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "title": "legacy Institutional Intelligence links redirect to Funded Awards",
+      "status": "passed",
+      "duration_ms": 2160,
+      "run": "full"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "title": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "status": "passed",
+      "duration_ms": 39859,
+      "run": "affected"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "title": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "status": "passed",
+      "duration_ms": 62610,
+      "run": "affected"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "title": "actual full slots/eight alternatives and no-group preserve admitted candidate reachability",
+      "status": "passed",
+      "duration_ms": 20250,
+      "run": "full"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "title": "corrupt/unavailable cache miss and retry do not call a provider; late loads stay closed",
+      "status": "passed",
+      "duration_ms": 30436,
+      "run": "full"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "title": "expiry, mixed generation and changed unselected profile invalidate cached actions",
+      "status": "passed",
+      "duration_ms": 30342,
+      "run": "full"
+    }
+  ],
+  "accessibility": [
+    {
+      "test": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "label": "actual-rollout50",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 2
+    },
+    {
+      "test": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "label": "mobile-rollout50",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 2
+    },
+    {
+      "test": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "label": "actual-rollout150",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 2
+    },
+    {
+      "test": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "label": "mobile-rollout150",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 2
+    },
+    {
+      "test": "Funding Finder has no serious or critical violations across critical states",
+      "label": "funding-initial",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Funding Finder has no serious or critical violations across critical states",
+      "label": "funding-ai-setup-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 0
+    },
+    {
+      "test": "Funding Finder has no serious or critical violations across critical states",
+      "label": "funding-help-open",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "Funding Finder has no serious or critical violations across critical states",
+      "label": "funding-strong-potential",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Funding Finder has no serious or critical violations across critical states",
+      "label": "funding-saved-storage-error-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Funding Finder has no serious or critical violations across critical states",
+      "label": "funding-alert-dialog",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 0
+    },
+    {
+      "test": "Funding Finder has no serious or critical violations across critical states",
+      "label": "funding-potential-fallback",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "label": "funded-awards-institutional-intelligence",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "label": "funded-awards-evidence-answer",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "label": "funded-awards-evidence-answer-390",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "label": "funded-awards-institutional-intelligence-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "label": "funded-awards-program-officer-snapshot",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "label": "funded-awards-program-officer-answer",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "Funded Awards Institutional Intelligence has no serious or critical violations",
+      "label": "funded-awards-program-officer-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "shared Help remains visible and current across every desktop and mobile surface",
+      "label": "funding-finder-help-desktop",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "shared Help remains visible and current across every desktop and mobile surface",
+      "label": "funding-finder-help-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "shared Help remains visible and current across every desktop and mobile surface",
+      "label": "team-match-help-desktop",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "shared Help remains visible and current across every desktop and mobile surface",
+      "label": "team-match-help-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "shared Help remains visible and current across every desktop and mobile surface",
+      "label": "funded-awards-help-desktop",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "shared Help remains visible and current across every desktop and mobile surface",
+      "label": "funded-awards-help-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 1
+    },
+    {
+      "test": "Team Match has no serious or critical violations across picker, results, and fallback states",
+      "label": "team-picker-open",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 2
+    },
+    {
+      "test": "Team Match has no serious or critical violations across picker, results, and fallback states",
+      "label": "team-two-person-results",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Team Match has no serious or critical violations across picker, results, and fallback states",
+      "label": "team-enhanced-fallback",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    },
+    {
+      "test": "Funded Awards has no serious or critical violations and fits narrow mobile layouts",
+      "label": "awards-initial-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 2
+    },
+    {
+      "test": "Funded Awards has no serious or critical violations and fits narrow mobile layouts",
+      "label": "awards-results-mobile",
+      "violations": 0,
+      "serious_critical": 0,
+      "incomplete": 3
+    }
+  ],
+  "prepared_network_receipts": [
+    {
+      "test": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "requests": 112,
+      "prepared_requests": 3,
+      "prepared_nonlocal_requests": 0,
+      "ordinary_optional_handoff_nonlocal_attempts_blocked": 2
+    },
+    {
+      "test": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "requests": 112,
+      "prepared_requests": 3,
+      "prepared_nonlocal_requests": 0,
+      "ordinary_optional_handoff_nonlocal_attempts_blocked": 2
+    },
+    {
+      "test": "actual full slots/eight alternatives and no-group preserve admitted candidate reachability",
+      "requests": 52,
+      "prepared_requests": 3,
+      "prepared_nonlocal_requests": 0,
+      "ordinary_optional_handoff_nonlocal_attempts_blocked": 0
+    },
+    {
+      "test": "corrupt/unavailable cache miss and retry do not call a provider; late loads stay closed",
+      "requests": 148,
+      "prepared_requests": 9,
+      "prepared_nonlocal_requests": 0,
+      "ordinary_optional_handoff_nonlocal_attempts_blocked": 0
+    },
+    {
+      "test": "expiry, mixed generation and changed unselected profile invalidate cached actions",
+      "requests": 145,
+      "prepared_requests": 6,
+      "prepared_nonlocal_requests": 0,
+      "ordinary_optional_handoff_nonlocal_attempts_blocked": 0
+    }
+  ],
+  "all_prepared_nonlocal_requests": 0,
+  "runtime_changes_during_browser_validation": 0,
+  "fixture_corrections": [
+    "DOE source_rate_limited maps to existing temporarily limited wording; no product copy change.",
+    "Populated layout test uses actual repaired ab-0025 instead of now-empty ab-0019.",
+    "Handoff checks use the existing 30-second Team Match initialization wait; no scientific or per-click limit raised."
+  ],
+  "remaining_browser_failure": "Team Match multi-action history workflow exceeds unchanged 90 seconds twice; not waived",
+  "node_contracts": {
+    "initial_total": 867,
+    "initial_pass": 864,
+    "initial_fail": 3,
+    "affected_rerun_pass": 62,
+    "scope": "Shared evidence, scientific canaries, drawer contracts and Team Match mutable-profile behavior",
+    "failures_preserved": true
+  },
+  "python_contracts": {
+    "total": 1380,
+    "initial_pass": 1379,
+    "initial_error": 1,
+    "cause": "Windows default cp1252 decode in pre-existing test_pipeline_phase2; no product failure",
+    "UTF8_affected_module_rerun_pass": 21
+  },
+  "query_baseline": {
+    "queries": 37,
+    "top10_churn": 0
+  },
+  "p9": {
+    "cases": 50,
+    "byte_identical": true
+  },
+  "parity": {
+    "scopes": 269,
+    "profiles": 155,
+    "comparisons": 40920,
+    "disagreements": 0
+  },
+  "resources": "docs/team-recommender/evidence-repair/resource-summary-v1.json",
+  "rollback": "docs/team-recommender/evidence-repair/rollback-browser-v1.json",
+  "physical_mobile": "NOT RUN",
+  "provider_requests": 0,
+  "logs": {
+    "outputs/team-recommender-evidence-repair/affected-e2e.log": "71c110def27a3989dda0c087c8c8a14005bc7ff2947030637b1b89aac2b60a3a",
+    "outputs/team-recommender-evidence-repair/assembly-v2-retry.log": "ea318e68253cf0051177c902ce47092c26590776aab2affea53b39d76d877e8d",
+    "outputs/team-recommender-evidence-repair/assembly-v2.log": "ee6ceb67e76fe7dc4eac902c0e85ef547c2ddbf8d2e33d45b9f6bbe476fe8da9",
+    "outputs/team-recommender-evidence-repair/assembly-v3.log": "6f23a8dcc2cb78a26b56526de55e99e59ed1c58567cb62b65c159d8d92c95c70",
+    "outputs/team-recommender-evidence-repair/bounded-source-contracts.log": "819f76c71b8402d9307333159b585e149f140bedffde8f544503da14cf6643ea",
+    "outputs/team-recommender-evidence-repair/browser-contracts.log": "36f6b534c474b0ec8f7ae63faf9c9dbfdba639fecf170ad75cf5c19f9e137bbe",
+    "outputs/team-recommender-evidence-repair/classification-correction.log": "b76dffa9a41448db09b18bb3e2526db8fe3a2ef98aebfb89dd0c6b88c8fb188b",
+    "outputs/team-recommender-evidence-repair/correction-contracts.log": "085d6e5806846575441d71f7c6171dedf1de386ab4cd03abbfff98182ec2f9d2",
+    "outputs/team-recommender-evidence-repair/dependencies-final.log": "9393cceefbe1b6a626465cb0f826cd581b87c82b4609ec7eac104550566ec394",
+    "outputs/team-recommender-evidence-repair/final-legacy.log": "cca683c1ff5d061d60306ac752fc4e6e2ff8504030b24e21bcd707ff6f34ac6e",
+    "outputs/team-recommender-evidence-repair/final-rollout150.log": "e74be04dfc0462c34bba1bde83de49b11ed9f186a713c0aae309e111c91781f4",
+    "outputs/team-recommender-evidence-repair/final-rollout50.log": "d471ffa1da52d67076ab9f11d4f66d5d034130ae897ccd4ebb6770197d75bc0c",
+    "outputs/team-recommender-evidence-repair/final-semantic.log": "3970609715b0d0c4c25f71ed68acfe89225d538325305880d088fe30bb30998a",
+    "outputs/team-recommender-evidence-repair/first-focused.log": "1c4b6f24a478824f6a7957fe17dc66c08bd628eba08df02e3bb8f95a6b1270ae",
+    "outputs/team-recommender-evidence-repair/focused-fifth.log": "361c5dfdbf6c5de2fa5ef0ea4667be171166ddb580f375a78c8ea588555b60f7",
+    "outputs/team-recommender-evidence-repair/focused-fourth.log": "f6911ea2589b956dd301d6b5e72608121b17e9b2e3a4113d3d0d722a5982d18e",
+    "outputs/team-recommender-evidence-repair/focused-second.log": "a6d233423a85e42de4e8b150bdda67186daa131e6698fa701f888b8f2d7e4483",
+    "outputs/team-recommender-evidence-repair/focused-third.log": "3a28253d17bebff876f4a8e05df6512f3963224bdc6fad94cba69f55bf1d98a1",
+    "outputs/team-recommender-evidence-repair/freeze-contracts.log": "018a13d714e3f070e78875864022b7a56833375659159efe983f66b9cc5a8751",
+    "outputs/team-recommender-evidence-repair/freeze-final-focused.log": "20bfb281306cc6ec40dc394afc233c6ad75a7fc840ed4b5df54fabec24e683c0",
+    "outputs/team-recommender-evidence-repair/freeze-focused.log": "7fc987c0353439bc0f4b6455423b4c8bc7a070b6ce76b697a08e847be73896bc",
+    "outputs/team-recommender-evidence-repair/full-e2e.log": "bc779f1e109e479642a228ff22a5f0a93d0995d4fc48dc5fb9abeb087b864764",
+    "outputs/team-recommender-evidence-repair/integration-correction.log": "9cdd790e828d418ad966e8ac7815df8cf7bd11fa8e9d701202e8e2df2fbc6554",
+    "outputs/team-recommender-evidence-repair/mechanism-first.log": "e6b12c52785c9d2406d165fd389f61d4d250b80dc45beda7e1624ab38ff6c1d1",
+    "outputs/team-recommender-evidence-repair/p9-final.log": "6f6b4ac05b1acf8bd411b3f930241a6056974c17ae2109321d9a2be41a635d8c",
+    "outputs/team-recommender-evidence-repair/parity-final.log": "b9cfbd736103de4e4c2ffa7e95b73c513da0679bdeb719301a167b77d4344954",
+    "outputs/team-recommender-evidence-repair/preparation-final.log": "379ca8f70b2e6d0b4e0cad0cc3427429bdcd32c00c49263f6976005481629a9f",
+    "outputs/team-recommender-evidence-repair/preparation.log": "379ca8f70b2e6d0b4e0cad0cc3427429bdcd32c00c49263f6976005481629a9f",
+    "outputs/team-recommender-evidence-repair/python-contracts.log": "a47fc94b7436721a191f6fe35d8f219e8f9b1dc624cc7a3234575e094ad3f32f",
+    "outputs/team-recommender-evidence-repair/python-encoding-rerun.log": "0028b7642e786d76ef6b109a83a293afc4835ffa9cee06c27c4e744917262930",
+    "outputs/team-recommender-evidence-repair/query-baseline.log": "fa9ee0261ee9f4a18e58effc7f885ca4bae3517d89c2c200917094429f33ada5",
+    "outputs/team-recommender-evidence-repair/query-final.log": "fa9ee0261ee9f4a18e58effc7f885ca4bae3517d89c2c200917094429f33ada5",
+    "outputs/team-recommender-evidence-repair/release-dependencies.log": "9393cceefbe1b6a626465cb0f826cd581b87c82b4609ec7eac104550566ec394",
+    "outputs/team-recommender-evidence-repair/resources-v2.log": "2278c5aff2f248f03b8ca94816fb7231b5df88225d78f253dfdde7c0f7ca3167",
+    "outputs/team-recommender-evidence-repair/restored-baseline-legacy.log": "54134fb796c6013dc74142891e5b8a12470f72414d5ab0bdd97e85fbc3ee6981",
+    "outputs/team-recommender-evidence-repair/restored-baseline-rollout50.log": "88a3e483b4cd65539a11f177fce7e4e69b7eb9c9ea98467b7a3e3c35434b1e27",
+    "outputs/team-recommender-evidence-repair/restored-baseline-semantic.log": "a484d2a96ff3429fac8bb3a456327f3540bc424eecdbc07b44cba5b6e693fadb",
+    "outputs/team-recommender-evidence-repair/rollback.log": "5f916beb487d244826575cbaa47125075e18fc5a52cdc5b6d2f1d2d589c1e765",
+    "outputs/team-recommender-evidence-repair/ui-resources.log": "d67b455421fbdd9fdf508703728faf70a705d465f0df57f9fbc0112a2fb6b8d5"
+  },
+  "required_CI": "PENDING current PR head",
+  "independent_review": "PENDING current PR head"
+}

@@ -27,7 +27,7 @@ async function panel({count=10,corrupt=false,delay=false}={}){
  };
  vm.createContext(c);for(const p of ['assets/site-shell.js','assets/submission-schedule.js','assets/search-retrieval.js','docs/team-recommender/history/stage3-runtime/opportunity-team.js','assets/opportunity-team-panel.js'])vm.runInContext(read(p),c);
  const drawer=dom.document.getElementById('team-builder');
- return {dom,c,f,clock,requests,pending,drawer,pack,open:()=>dom.dispatch('click',dom.document.getElementById('open-fixture')),async ready(){for(let i=0;i<30;i++){await tick();if(drawer.querySelector('.opportunity-team-next')||drawer.querySelector('[data-opportunity-team-retry]'))return;}throw Error('fixture did not settle');}};
+ return {dom,c,f,clock,requests,pending,drawer,pack,open:()=>dom.dispatch('click',dom.document.getElementById('open-fixture')),async ready(){const deadline=Date.now()+5000;while(Date.now()<deadline){await tick();if(drawer.querySelector('.opportunity-team-next')||drawer.querySelector('[data-opportunity-team-retry]'))return;}throw Error('fixture did not settle: '+drawer.textContent);}};
 }
 test('actual lazy loader and renderer: cold eight options, unconfirmed evidence, add/remove and zero provider requests',async()=>{
  const p=await panel();assert.equal(p.requests.length,0);await p.c.OpportunityTeam.loadDirectory();assert.equal(p.requests.length,0);

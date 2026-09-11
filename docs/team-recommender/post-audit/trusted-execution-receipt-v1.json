@@ -1,0 +1,52 @@
+{
+  "version": 1,
+  "pr": 224,
+  "head": "18641abc2fd6fab1c79395b5ad210a8800d3a33d",
+  "merge": "48e4e15673d2b2e41fb15cab45a928972e0c9977",
+  "CI": [
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-11T13:38:47Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/mporosoff/grants-scraper/actions/runs/34605399979/job/103282473910",
+      "name": "python",
+      "startedAt": "2026-09-11T13:37:49Z",
+      "status": "COMPLETED",
+      "workflowName": "Tests"
+    },
+    {
+      "__typename": "CheckRun",
+      "completedAt": "2026-09-11T13:39:41Z",
+      "conclusion": "SUCCESS",
+      "detailsUrl": "https://github.com/mporosoff/grants-scraper/actions/runs/34605399979/job/103282474231",
+      "name": "browser",
+      "startedAt": "2026-09-11T13:37:49Z",
+      "status": "COMPLETED",
+      "workflowName": "Tests"
+    }
+  ],
+  "review_completed_at": "2026-09-11T13:42:40Z",
+  "review_comment": "https://github.com/mporosoff/grants-scraper/pull/224#issuecomment-5635248316",
+  "terminal_no_findings_reaction": [
+    {
+      "content": "+1",
+      "created_at": "2026-09-11T13:42:42Z"
+    }
+  ],
+  "submitted_reviews": [],
+  "inline_findings": [],
+  "head_unchanged_through_review": true,
+  "manual_run": 34606280661,
+  "immutable_release_planner_run": 34606083072,
+  "plan": "noop",
+  "production_runtime_change": false,
+  "new_schedules": false,
+  "packet_executes_code": false,
+  "raw_review_receipt_hashes": {
+    "post-audit-exact-head-ci.json": "f690fb8878805277ba4189c8bbc1d6439aae7fe393b5f6ee213358c7c1a65bf8",
+    "post-audit-review-comments.json": "5db70327ce3548a5f16ffd0313186de8a7c96737174b84ed833b7dd779caebc1",
+    "post-audit-review-inline.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945",
+    "post-audit-review-reactions.json": "9f42163a2f7ca06b41d063a77e2568728dee1f000bec87c3c82fcd649c35c91a",
+    "post-audit-reviews.json": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+  }
+}

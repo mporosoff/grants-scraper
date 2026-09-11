@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "candidate": "shared-team-v2-post-audit",
+  "starting_sha": "272124fc7d981cf3f438de7e9d133ca00600bee8",
+  "code_reviewed_and_CI_tested_sha": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+  "runtime_assembly_sha": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
+  "containing_commit_policy": "A following local documentation-only commit records this closeout; it is not falsely described as the reviewed code SHA. No runtime/test/fixture change follows this reviewed SHA.",
+  "experimental_PR": {
+    "number": 225,
+    "url": "https://github.com/mporosoff/grants-scraper/pull/225",
+    "base": "272124fc7d981cf3f438de7e9d133ca00600bee8",
+    "head": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+    "merged": false,
+    "initial_review": 5180409357,
+    "initial_finding": 3990676263,
+    "remediation_batches": 1,
+    "verification_requests": 1,
+    "request_comment": 5636837879,
+    "terminal_comment": 5636888973,
+    "terminal_time": "2026-09-11T15:38:42.583701Z",
+    "result": "No major issues; unchanged exact head",
+    "finding_thread": "PRRT_kwDOTjSVMs6hh3QL",
+    "finding_resolved_after_clean_review": true,
+    "duplicate_reviews": 0
+  },
+  "required_CI": {
+    "run": 34616881475,
+    "head": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+    "python": "SUCCESS",
+    "python_cases": 1380,
+    "python_skipped": 3,
+    "python_failed": 0,
+    "browser": "SUCCESS",
+    "browser_cases": 859,
+    "browser_pass": 847,
+    "browser_skipped": 12,
+    "browser_failed": 0,
+    "frozen_queries": 37,
+    "query_top10_churn": 0,
+    "scoring_cases": 50,
+    "scoring_identical": true,
+    "hermetic_no_drift": "PASS",
+    "skip_reason": "12 existing historical real-asset Node tests lack private retained packages in cloud CI; three optional offline learned-model Python tests lack optional libraries. They are not counted as passes or current shared-engine prerequisites.",
+    "python_pass": 1377
+  },
+  "trusted_guard_PR": {
+    "number": 226,
+    "head": "fae3fca40a2941fc9e4207839df8dbf35ad6a543",
+    "merge": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+    "merged_at": "2026-09-11T15:40:20Z",
+    "review_summary": 5636833260,
+    "review_completed_at": "2026-09-11T15:38:24.730277Z",
+    "positive_reaction_at": "2026-09-11T15:38:29Z",
+    "result": "Terminal clean configured reaction on unchanged head; no inline or submitted findings",
+    "CI": 34616890667,
+    "python_cases": 1341,
+    "browser_pass": 767,
+    "CI_skips": 0,
+    "focused_tests": 53,
+    "experimental_exact_cherry_pick": "1644eb5eb58f3d7662f2095be9d93407cc7c645a",
+    "post_merge_CI": 34617513611,
+    "post_merge_CI_result": "SUCCESS",
+    "ledger_or_packet_changes": 0,
+    "purpose": "Restrict generic packet authority to original six purposes; dedicated versioned/exact hash contracts cannot be bypassed"
+  },
+  "release_planner": {
+    "run": 34617514411,
+    "head": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+    "decision": "noop",
+    "conclusion": "success",
+    "jobs": {
+      "plan": "success",
+      "assemble": "skipped",
+      "candidate": "skipped",
+      "generate": "skipped",
+      "validate": "skipped",
+      "closeout": "success",
+      "publish": "skipped",
+      "pages": "skipped",
+      "verify-live": "skipped"
+    },
+    "production_publications": 0
+  },
+  "runtime_and_science_unchanged_during_review_repair": true,
+  "packages": {
+    "path": "docs/team-recommender/post-audit/release-packages-v4.json",
+    "sha256": "0938a53f2122f7d251656a1717171bf88d8ade11d3a706d4d328329e2b69526c"
+  },
+  "engineering": {
+    "path": "docs/team-recommender/post-audit/engineering-receipt-v2.json",
+    "sha256": "bad737844e589709fa7a30b8db1fa0d12cc956effd2c2ffb07803bc5a27e4719"
+  },
+  "resources": {
+    "path": "docs/team-recommender/post-audit/resource-summary-v1.json",
+    "sha256": "4a5c6ca7fb13c439489d0926acf1e0ced56abec421aa9a846adf92fbe28bd591"
+  },
+  "rollback": {
+    "path": "docs/team-recommender/post-audit/rollback-browser-v3.json",
+    "sha256": "75579a3b43b828bb529e0ae1a653c9a9e654db6bb0a0072ff3e12ec4a74f3467"
+  },
+  "functional_browser_cases_passing": 122,
+  "affected_latest_browser_rechecks": 14,
+  "prepared_network_cases": 5,
+  "external_prepared_requests": 0,
+  "new_E2E_after_review_repair": 0,
+  "quality_qualified": false,
+  "resource_qualified": false,
+  "disposition": "2: named additional-heap failure blocks release; scientific usefulness/coverage also fail. No deployment or automatic further work.",
+  "ledger": {
+    "authorization_id": "on-demand-team-offline-v2-20260909",
+    "authoritative_cloud_run": 34606280661,
+    "sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+    "new_check_usd": 0.337668,
+    "new_check_requests": 34,
+    "new_input_tokens": 152954,
+    "new_output_tokens": 3176,
+    "cumulative_usd": 4.290655,
+    "requests": 629,
+    "outstanding_usd": 0,
+    "remaining_usd": 5.709345,
+    "remaining_request_slots": 61,
+    "requests_after_completed_check": 0,
+    "historical_other_task_usd": 11.971342,
+    "historical_credit_usd": 0
+  },
+  "human": {
+    "requested": 40,
+    "returned": 0,
+    "new_items": 0,
+    "remaining": 0
+  },
+  "private_receipt_hashes": {
+    "pr225-terminal.json": "69edd547a933f3febf153081ae25d7931c9883275c072d336d733807af4916fd",
+    "pr226-terminal.json": "d6c0afbce997092e6a956d874db98dfeca5e2e4e7979987d7fa1b98f959e6483",
+    "ci-34616881475.json": "e2ad9a0bca017be4357879e96a872cb3a120e26c0d0de5c413846db0fbf18f53",
+    "ci-34616881475.log": "2b9b44a58b30b537aadf4ff965a67a68bea88296752f370821ccd3b1df1b1514",
+    "ci-34616890667.json": "b618ee7eead24ddbb07a6d3fd76ee9a42f8182a28195761fe596a3a7dc552f87",
+    "ci-34616890667.log": "e32e4db3c0ccfd0fbf12276b9f360e52e542e1d274806296a03edd0ea715f4d6",
+    "purpose-guard-release-planner.json": "aa42c40a69507c673644f45c925d9425816d8f173803cd5e58c8143e51dc536b",
+    "purpose-guard-release-planner.log": "78d5c3438d14f1a61f7bf70b37459ca1b82de1e128f932a6360458c61c439abf"
+  },
+  "local_validation_server": "Stopped after the completed authorized browser validation; no new provider work queued"
+}

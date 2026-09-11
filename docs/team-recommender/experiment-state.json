@@ -25,12 +25,28 @@
     "stage3": true,
     "stage3_full_browser_validation": true,
     "stage4": false,
-    "trusted_main_prerequisite": true
+    "trusted_main_prerequisite": true,
+    "post_audit_corrective_revalidation": true,
+    "post_audit_paid_check": {
+      "maximum_new_usd": 2,
+      "maximum_new_attempts": 60,
+      "existing_ledger": true,
+      "approved": true
+    },
+    "post_audit_full_browser_validation": true,
+    "shared_evidence_repair": {
+      "authorized": true,
+      "new_usd": 0,
+      "provider_requests": 0,
+      "full_browser_validation": true,
+      "automatic_next_revision": false,
+      "deployment": false
+    }
   },
   "authority": {
-    "work_order": "Team recommender: shared matching and full researcher-profile repair",
-    "record": "docs/team-recommender/profile-repair/SOURCE_POLICY.md",
-    "scope": "Corrective implementation and all-record public-source audit; no deployment or extra paid work"
+    "work_order": "Shared scientific evidence mechanism and bounded resource repair",
+    "record": "docs/team-recommender/evidence-repair/AUTHORITY.md",
+    "scope": "One zero-paid repair, exposed diagnostic comparisons, full configured browser validation and exact-head PR225 review; no profile enrichment, new human packet, deployment or automatic next revision"
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -45,8 +61,8 @@
     "D3_judge_requests": 120,
     "D3_prior_usd": 2.27911,
     "D3_spend_usd": 0.856223,
-    "actual_usd": 3.952987,
-    "authoritative_owner": "Exclusive GitHub protected-main executor paired checkpoint, latest run 34554567315",
+    "actual_usd": 4.290655,
+    "authoritative_owner": "Exclusive protected-main cloud executor; latest paired checkpoint run 34606280661",
     "authorized_usd": 10,
     "closeout_new_requests": 0,
     "closeout_new_usd": 0,
@@ -55,22 +71,22 @@
     "historical_other_task_usd": 11.971342,
     "historical_stage2_minimum_later_reserve_usd": 4,
     "id": "on-demand-team-offline-v2-20260909",
-    "input_tokens": 1666850,
-    "latest_checkpoint_sha256": "43f986a7e08412ebff594907ea57bebf4d460767254884fe32285a240ee3e982",
-    "latest_run_id": 34554567315,
+    "input_tokens": 1819804,
+    "latest_checkpoint_sha256": "c6e59fe149baf5792e36be37d601fb87ab1763eafc50253b68ad861b99e4be9b",
+    "latest_run_id": 34606280661,
     "ledger": "docs/team-recommender/budget-ledger.json",
-    "ledger_sha256": "2cad83d4b02f8ca7e210fb720f62f184da179fb67e222767ad9540968dfdf4df",
+    "ledger_sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
     "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
     "no_new_allowance_at_closeout": true,
-    "output_tokens": 61041,
+    "output_tokens": 64217,
     "path": "docs/team-recommender/preparation-budget.json",
     "reconciliation": {
-      "path": "docs/team-recommender/receipts/stage3-final-ledger-v1.json",
-      "sha256": "e23a23625727acfb5e66cb700d09181647bee2fa012705e3a8505b5b2aab9e44"
+      "path": "docs/team-recommender/post-audit/ledger-reconciliation-v1.json",
+      "sha256": "1b4a563615459d12cd3175cd8fd173a006fa55d4f04e14028bcb297e53fe0822"
     },
-    "remaining_request_slots": 95,
-    "remaining_total_usd": 6.047013,
-    "requests": 595,
+    "remaining_request_slots": 61,
+    "remaining_total_usd": 5.709345,
+    "requests": 629,
     "reserved_usd": 0,
     "stage2_cumulative_ceiling_usd": 6,
     "stage3_ceiling_new_usd": 4,
@@ -80,39 +96,45 @@
     "stage4_minimum_preserved_requests": 25,
     "stage4_minimum_preserved_usd": 2.864667,
     "profile_repair_new_usd": 0,
-    "profile_repair_new_requests": 0
+    "profile_repair_new_requests": 0,
+    "post_audit_new_usd": 0.337668,
+    "post_audit_new_requests": 34,
+    "post_audit_new_input_tokens": 152954,
+    "post_audit_new_output_tokens": 3176,
+    "shared_evidence_repair_new_usd": 0,
+    "shared_evidence_repair_new_requests": 0
   },
   "candidate": {
-    "path": "docs/team-recommender/profile-repair/candidate.json",
-    "sha256": "ad0e8a5dac83cde1a37c179cb283172ed6e6e76437a9f427c0e969d684d38891",
-    "primary": "shared-team-v1-profile-repair",
-    "code_commit": "5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
+    "path": "docs/team-recommender/evidence-repair/candidate-v1.json",
+    "sha256": "9c99b9785c1d49c48d091e0047f61936a3b2b99e69f80a34cfdd5e03b343440c",
+    "primary": "shared-team-v3-evidence-repair",
+    "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
     "quality_qualified": false,
-    "status": "Corrective implementation; not scientifically accepted or deployed",
-    "fallback": null
+    "resource_qualified": false,
+    "fallback": null,
+    "status": "Bounded repair and finite validation complete; 121/122 browser checks pass; resource/performance barriers remain; exact-head review/CI pending"
   },
   "checks": {
-    "required_python_passed": 1372,
-    "required_Node_browser_passed": 853,
-    "final_affected_cache_passed": 14,
-    "final_release_dependency_passed": 6,
-    "fit_identity_comparisons": 15965,
-    "fit_disagreements": 0,
-    "query_baseline_cases": 37,
-    "scoring_probe_cases": 50,
-    "hermetic_no_drift": true,
-    "zero_paid_prepared_interactions": true,
-    "full_E2E": "NOT RUN for corrected candidate",
-    "Playwright": "NOT RUN for corrected candidate",
-    "accessibility_suite": "NOT RUN for corrected candidate",
-    "physical_browser": "NOT RUN for corrected candidate",
-    "new_semantic_validation": "NOT RUN",
     "receipt": {
-      "path": "docs/team-recommender/profile-repair/validation-receipt.json",
-      "sha256": "d0bb7e262a8ea37fd54c49dce22f02623286d463bd12498405843e1cdf96befc"
-    }
+      "path": "docs/team-recommender/evidence-repair/engineering-receipt-v1.json",
+      "sha256": "08184a21a8fd0c73cce1da6b11c98e0d77719acae5604a5d696065b0dd27f78d"
+    },
+    "independent_review": "PENDING exact-head PR225",
+    "required_CI": "PENDING current exact head",
+    "scientific_acceptance": "NOT QUALIFIED; exposed diagnostics only",
+    "physical_mobile": "NOT RUN",
+    "additional_heap_48MiB": "FAIL: observed parent 49.09–52.44 MiB",
+    "post_input_1000ms": "FAIL: observed parent up to1060ms",
+    "resources": {
+      "path": "docs/team-recommender/evidence-repair/resource-summary-v1.json",
+      "sha256": "e4a6c1295c4b39ec2f395ddc6d738b6305afd88435e9c79fca3be86de4a84ff9"
+    },
+    "unique_integrated_browser_cases_passing": 121,
+    "unique_integrated_browser_cases_failed": 1,
+    "prepared_browser_cases_passing": 5,
+    "all_member_Team_Match_workflow": "FAIL: 90-second timeout twice; not waived"
   },
-  "containing_commit": "Documentation commit containing this state; implementation and tested artifacts at 5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
+  "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -6713,15 +6735,24 @@
       1,
       5
     ],
-    "profile_repair_new_requests": 0
+    "profile_repair_new_requests": 0,
+    "post_audit_new_requests": 0,
+    "post_audit_returned": 0,
+    "post_audit_applicability": "No returned human observations for corrected profiles/groups. Forty historical requests remain accounted for; no replacement packet."
   },
   "model": "Existing shared Team Match numerical fit; no model used by corrected runtime",
   "next_allowed_stage": null,
-  "next_stage_requires": "Owner review of this corrective implementation and remaining source/performance/acceptance limitations. Explicit appropriate release authorization is still required; failed E2 must not be deployed.",
+  "next_stage_requires": "STOP FOR USER REVIEW. Remaining full-parent allocation/post-input resource barrier and inadequate/unknown scientific usefulness require owner disposition. No automatic tuning, paid confirmation, extra human items, Stage4 or deployment.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
-    "shared_package": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab",
-    "candidate": "docs/team-recommender/profile-repair/candidate.json"
+    "release_packages": {
+      "path": "docs/team-recommender/post-audit/release-packages-v4.json",
+      "sha256": "0938a53f2122f7d251656a1717171bf88d8ade11d3a706d4d328329e2b69526c"
+    },
+    "candidate": {
+      "path": "docs/team-recommender/post-audit/candidate-v4.json",
+      "sha256": "2cb43bcfd7d416b1ef75e92569ccd666286a287a1c51a159a0cde40988ea023d"
+    }
   },
   "production": {
     "D1_helper_prs": [
@@ -6864,6 +6895,55 @@
       "activation": false,
       "permissions_changed": false,
       "services_changed": false
+    },
+    "post_audit_helper": {
+      "pr": 224,
+      "head": "18641abc2fd6fab1c79395b5ad210a8800d3a33d",
+      "merge": "48e4e15673d2b2e41fb15cab45a928972e0c9977",
+      "review": "Terminal clean configured reaction; exact head unchanged",
+      "required_CI": "PASS",
+      "run": 34606280661,
+      "release_planner": 34606083072,
+      "release_plan": "noop",
+      "runtime_deployment": false
+    },
+    "post_audit_guard": {
+      "number": 226,
+      "head": "fae3fca40a2941fc9e4207839df8dbf35ad6a543",
+      "merge": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+      "merged_at": "2026-09-11T15:40:20Z",
+      "review_summary": 5636833260,
+      "review_completed_at": "2026-09-11T15:38:24.730277Z",
+      "positive_reaction_at": "2026-09-11T15:38:29Z",
+      "result": "Terminal clean configured reaction on unchanged head; no inline or submitted findings",
+      "CI": 34616890667,
+      "python_cases": 1341,
+      "browser_pass": 767,
+      "CI_skips": 0,
+      "focused_tests": 53,
+      "experimental_exact_cherry_pick": "1644eb5eb58f3d7662f2095be9d93407cc7c645a",
+      "post_merge_CI": 34617513611,
+      "post_merge_CI_result": "SUCCESS",
+      "ledger_or_packet_changes": 0,
+      "purpose": "Restrict generic packet authority to original six purposes; dedicated versioned/exact hash contracts cannot be bypassed"
+    },
+    "post_audit_guard_release_planner": {
+      "run": 34617514411,
+      "head": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+      "decision": "noop",
+      "conclusion": "success",
+      "jobs": {
+        "plan": "success",
+        "assemble": "skipped",
+        "candidate": "skipped",
+        "generate": "skipped",
+        "validate": "skipped",
+        "closeout": "success",
+        "publish": "skipped",
+        "pages": "skipped",
+        "verify-live": "skipped"
+      },
+      "production_publications": 0
     }
   },
   "proposed_next_stage": "No automatic execution. Only an owner-approved release decision can authorize Stage 4; no candidate retuning or new scientific campaign.",
@@ -6952,15 +7032,15 @@
     "path": "docs/team-recommender/stage3-receipt-index.json",
     "sha256": "80132ec2291e55a8ff2e7c2c605e770add2b790267b89442a12b3eec3a1348cf"
   },
-  "recommendation": "CORRECTIVE IMPLEMENTATION COMPLETE; SOURCE AND RELEASE LIMITATIONS REMAIN",
+  "recommendation": "Disposition 2: DO NOT RELEASE; additional heap exceeds 48 MiB. Scientific usefulness/coverage also fail and require an explicit owner decision; no automatic tuning or deployment.",
   "recommended_next_stage": "Owner decision: explicitly accept the documented exploratory-release quality/coverage/audit limitations in separate Stage 4 authority, or do not release.",
   "report": {
-    "path": "docs/team-recommender/reports/shared-matching-profile-repair-report.md",
-    "sha256": "3905fe7a463def623956688c3ae1b664ee6939ecc8912df78552d68aa0a899fb"
+    "path": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md",
+    "sha256": "5d99d7475c76b8bca746f6b37306061fc37995253c49b03a5fa60ca4ee6a6c50"
   },
   "repository": "mporosoff/grants-scraper",
   "results": {
-    "profile_audit": {
+    "preserved_profile_audit": {
       "after_counts": {
         "auto_proposable": 155,
         "pool_counts": {
@@ -7025,10 +7105,22 @@
       "successful_retrievals": 344,
       "unique_cached_source_attempts": 359
     },
-    "shared_fit_comparisons": 15965,
-    "disagreements": 0,
-    "new_semantic_validation": false,
-    "source": "docs/team-recommender/profile-repair/real-input-check.json"
+    "semantic_check": {
+      "path": "docs/team-recommender/post-audit/semantic-results-v1.json",
+      "sha256": "4e8906ae66df91d5cfc9bffc1ffb18c654331864b7fba2a47c6f9abecda0f83f"
+    },
+    "coverage": {
+      "path": "docs/team-recommender/post-audit/coverage-inventory-v1.json",
+      "sha256": "9b112479d781a6c35471299736fbb15a5dbcb6ff74f0893c348fd81933555b4b"
+    },
+    "fit_parity": {
+      "path": "docs/team-recommender/post-audit/fit-parity.json",
+      "sha256": "704858ce7654e45c96fe54978c223c4e59673e1a25811a077e41c384c29766a2"
+    },
+    "query_cache_parity": {
+      "path": "docs/team-recommender/post-audit/query-cache-parity-v4.json",
+      "sha256": "635b4dab546b3991083663b101eaa1507444c1a68dc2e64028599549e387ce92"
+    }
   },
   "schema_version": 1,
   "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
@@ -7282,15 +7374,18 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "post-stage3-corrective-work-order-complete-with-explicit-source-gaps",
+  "stage_status": "post-audit-corrective-revalidation-complete-DO-NOT-RELEASE-scientific-and-memory-fail",
   "stop": "STOP FOR USER REVIEW. No deployment, Stage 4, new provider allowance, human-review request or automatic model/tuning campaign.",
   "unresolved": [
-    "Four source gaps: Lawton, Lomakina, Rygg, Slane",
-    "Warm snapshot-validation latency and physical-browser measurements",
-    "Scientific acceptance of the changed shared composition has not been established",
-    "105 canonical availability identities; no claim of full 150-scope rollout readiness"
+    "Additional heap ceiling FAIL: observed increase 68.94-80.04 MiB before GC; retained 10.82-19.34 MiB does not establish peak compliance",
+    "Scientific top-five/member/group targets failed; sampled explanation unsupported",
+    "Only 1/50 and 11/150 original rollout reservations produce groups; independent feasibility unknown",
+    "Four preserved researcher source gaps; one missing canonical legacy child identity",
+    "No returned human judgments or remaining new item allowance",
+    "Physical mobile and peak memory unmeasured; historical rollback preserves old Funded Awards import omission",
+    "Unrelated unpublished main stylesheet change must be preserved in any future integration"
   ],
-  "updated_at": "2026-09-11T11:57:15.801263+00:00",
+  "updated_at": "2026-09-11",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -7545,5 +7640,268 @@
       "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
     },
     "stage3_path": "docs/team-recommender/STAGE_3_VALIDATION_AUTHORITY.md"
+  },
+  "historical_pre_post_audit_state": {
+    "candidate": {
+      "path": "docs/team-recommender/profile-repair/candidate.json",
+      "sha256": "ad0e8a5dac83cde1a37c179cb283172ed6e6e76437a9f427c0e969d684d38891",
+      "primary": "shared-team-v1-profile-repair",
+      "code_commit": "5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
+      "quality_qualified": false,
+      "status": "Corrective implementation; not scientifically accepted or deployed",
+      "fallback": null
+    },
+    "checks": {
+      "required_python_passed": 1372,
+      "required_Node_browser_passed": 853,
+      "final_affected_cache_passed": 14,
+      "final_release_dependency_passed": 6,
+      "fit_identity_comparisons": 15965,
+      "fit_disagreements": 0,
+      "query_baseline_cases": 37,
+      "scoring_probe_cases": 50,
+      "hermetic_no_drift": true,
+      "zero_paid_prepared_interactions": true,
+      "full_E2E": "NOT RUN for corrected candidate",
+      "Playwright": "NOT RUN for corrected candidate",
+      "accessibility_suite": "NOT RUN for corrected candidate",
+      "physical_browser": "NOT RUN for corrected candidate",
+      "new_semantic_validation": "NOT RUN",
+      "receipt": {
+        "path": "docs/team-recommender/profile-repair/validation-receipt.json",
+        "sha256": "d0bb7e262a8ea37fd54c49dce22f02623286d463bd12498405843e1cdf96befc"
+      }
+    },
+    "budget_record": {
+      "D1_new_usd": 1.055784,
+      "D1_prior_usd": 1.082518,
+      "D2_new_usd": 0.140808,
+      "D2_prior_usd": 2.138302,
+      "D3_embedding_requests": 19,
+      "D3_embedding_tokens": 51153,
+      "D3_judge_input_tokens": 366538,
+      "D3_judge_output_tokens": 11700,
+      "D3_judge_requests": 120,
+      "D3_prior_usd": 2.27911,
+      "D3_spend_usd": 0.856223,
+      "actual_usd": 4.290655,
+      "authoritative_owner": "Exclusive protected-main cloud executor; latest paired checkpoint run 34606280661",
+      "authorized_usd": 10,
+      "closeout_new_requests": 0,
+      "closeout_new_usd": 0,
+      "embedding_tokens": 98216,
+      "historical_other_task_credit_usd": 0,
+      "historical_other_task_usd": 11.971342,
+      "historical_stage2_minimum_later_reserve_usd": 4,
+      "id": "on-demand-team-offline-v2-20260909",
+      "input_tokens": 1819804,
+      "latest_checkpoint_sha256": "c6e59fe149baf5792e36be37d601fb87ab1763eafc50253b68ad861b99e4be9b",
+      "latest_run_id": 34606280661,
+      "ledger": "docs/team-recommender/budget-ledger.json",
+      "ledger_sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+      "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
+      "no_new_allowance_at_closeout": true,
+      "output_tokens": 64217,
+      "path": "docs/team-recommender/preparation-budget.json",
+      "reconciliation": {
+        "path": "docs/team-recommender/post-audit/ledger-reconciliation-v1.json",
+        "sha256": "1b4a563615459d12cd3175cd8fd173a006fa55d4f04e14028bcb297e53fe0822"
+      },
+      "remaining_request_slots": 61,
+      "remaining_total_usd": 5.709345,
+      "requests": 629,
+      "reserved_usd": 0,
+      "stage2_cumulative_ceiling_usd": 6,
+      "stage3_ceiling_new_usd": 4,
+      "stage3_new_requests": 120,
+      "stage3_new_usd": 0.817654,
+      "stage3_recorded_ceiling_new_requests": 184,
+      "stage4_minimum_preserved_requests": 25,
+      "stage4_minimum_preserved_usd": 2.864667,
+      "profile_repair_new_usd": 0,
+      "profile_repair_new_requests": 0,
+      "post_audit_new_usd": 0.337668,
+      "post_audit_new_requests": 34,
+      "post_audit_new_input_tokens": 152954,
+      "post_audit_new_output_tokens": 3176
+    },
+    "pinned_data": {
+      "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+      "shared_package": "ea0272df707196811843e8520fcc90a75765f5c178a935240c3ecd9762e2d4ab",
+      "candidate": "docs/team-recommender/profile-repair/candidate.json"
+    },
+    "authority": {
+      "work_order": "Team recommender: shared matching and full researcher-profile repair",
+      "record": "docs/team-recommender/profile-repair/SOURCE_POLICY.md",
+      "scope": "Corrective implementation and all-record public-source audit; no deployment or extra paid work"
+    },
+    "recommendation": "CORRECTIVE IMPLEMENTATION COMPLETE; SOURCE AND RELEASE LIMITATIONS REMAIN",
+    "unresolved": [
+      "Four source gaps: Lawton, Lomakina, Rygg, Slane",
+      "Warm snapshot-validation latency and physical-browser measurements",
+      "Scientific acceptance of the changed shared composition has not been established",
+      "105 canonical availability identities; no claim of full 150-scope rollout readiness"
+    ],
+    "report": {
+      "path": "docs/team-recommender/reports/shared-matching-profile-repair-report.md",
+      "sha256": "3905fe7a463def623956688c3ae1b664ee6939ecc8912df78552d68aa0a899fb"
+    },
+    "stage_status": "post-stage3-corrective-work-order-complete-with-explicit-source-gaps"
+  },
+  "historical_profile_repair_results": {
+    "profile_audit": {
+      "after_counts": {
+        "auto_proposable": 155,
+        "pool_counts": {
+          "main": 120,
+          "standby": 35,
+          "unadmitted": 3
+        },
+        "rankable": 158,
+        "relationship_counts": {
+          "hajim_core_faculty": 117,
+          "internal_affiliated_researcher": 41
+        },
+        "status_counts": {
+          "active": 158
+        },
+        "total": 158,
+        "unrankable": 0,
+        "visibility_counts": {
+          "department": 14,
+          "institution": 141,
+          "reference_only": 3
+        }
+      },
+      "after_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+      "before_counts": {
+        "auto_proposable": 155,
+        "pool_counts": {
+          "main": 120,
+          "standby": 35,
+          "unadmitted": 3
+        },
+        "rankable": 155,
+        "relationship_counts": {
+          "hajim_core_faculty": 117,
+          "internal_affiliated_researcher": 41
+        },
+        "status_counts": {
+          "active": 158
+        },
+        "total": 158,
+        "unrankable": 3,
+        "visibility_counts": {
+          "department": 14,
+          "institution": 141,
+          "reference_only": 3
+        }
+      },
+      "claim_actions": {
+        "added": 126,
+        "reactivated": 2,
+        "retired": 68,
+        "revised": 359
+      },
+      "cost_usd": 0,
+      "dispositions": {
+        "corrected": 154,
+        "unresolved": 4
+      },
+      "paid_calls": 0,
+      "population": 158,
+      "read_source_urls": 230,
+      "successful_retrievals": 344,
+      "unique_cached_source_attempts": 359
+    },
+    "shared_fit_comparisons": 15965,
+    "disagreements": 0,
+    "new_semantic_validation": false,
+    "source": "docs/team-recommender/profile-repair/real-input-check.json"
+  },
+  "historical_profile_repair_containing_commit": "Documentation commit containing this state; implementation and tested artifacts at 5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
+  "corrective_revalidation": {
+    "starting_sha": "272124fc7d981cf3f438de7e9d133ca00600bee8",
+    "scientific_sha": "6e2f60708b41b94049eabf005a0190b268222738",
+    "assembly_sha": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
+    "implementation_and_bounded_semantic_execution_complete": true,
+    "independent_review_pending": false,
+    "no_new_scientific_phase": true,
+    "stop_after_owner_report": true,
+    "resource_qualified": false,
+    "ending_reviewed_code_sha": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+    "review_PR": 225,
+    "completion": {
+      "path": "docs/team-recommender/post-audit/completion-receipt-v1.json",
+      "sha256": "dbdc9797c422c4616dff68ce08a92bc0dbd801ad3ba1e1ff335e6a93e3caa95f"
+    },
+    "trusted_guard_PR": 226,
+    "complete": true
+  },
+  "shared_evidence_repair": {
+    "authority": "docs/team-recommender/evidence-repair/AUTHORITY.md",
+    "starting_head": "adedd242dc727d85bc2db42776abce5132c882b8",
+    "status": "bounded implementation and finite validation complete; exact-head review/CI pending",
+    "new_paid_authorization_usd": 0,
+    "new_provider_attempts": 0,
+    "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+    "historical_report_preserved": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md",
+    "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+    "report": "docs/team-recommender/reports/shared-evidence-mechanism-repair-report.md",
+    "disposition": "C",
+    "new_paid_usd": 0,
+    "new_human_items": 0,
+    "resource_qualified": false,
+    "scientific_qualified": false
+  },
+  "historical_pre_evidence_repair_checkpoint": {
+    "authority": {
+      "work_order": "Post-audit implementation and revalidation plan",
+      "record": "docs/team-recommender/post-audit/AUTHORITY.md",
+      "execution_approval": {
+        "path": "docs/team-recommender/post-audit/execution-approval-v1.json",
+        "sha256": "a1db0152e9d452379d5fcc3530ded00e1878ca48287a09c8f66b524b7774b182"
+      },
+      "scope": "One corrective implementation, full engineering validation and <=$2/60 single semantic check within existing ledger; no deployment or new human packet"
+    },
+    "candidate": {
+      "path": "docs/team-recommender/post-audit/candidate-v4.json",
+      "sha256": "2cb43bcfd7d416b1ef75e92569ccd666286a287a1c51a159a0cde40988ea023d",
+      "primary": "shared-team-v2-post-audit",
+      "code_commit": "6e2f60708b41b94049eabf005a0190b268222738",
+      "quality_qualified": false,
+      "fallback": null,
+      "status": "Corrective implementation and finite check complete; exact-head code review and CI clean; scientific and memory criteria FAIL; no release",
+      "runtime_commit": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
+      "validated_code_commit": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28"
+    },
+    "checks": {
+      "receipt": {
+        "path": "docs/team-recommender/post-audit/engineering-receipt-v2.json",
+        "sha256": "bad737844e589709fa7a30b8db1fa0d12cc956effd2c2ffb07803bc5a27e4719"
+      },
+      "unique_integrated_browser_cases_passing": 122,
+      "prepared_browser_cases_passing": 5,
+      "independent_review": "PASS: clean exact-head verification PR225 at 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+      "required_CI": "PASS: run34616881475, Python1380/3skips; Node859/12skips; 37queries/50scoring/no-drift",
+      "scientific_acceptance": "FAIL",
+      "physical_mobile": "NOT RUN",
+      "peak_browser_memory": "NOT MEASURED",
+      "affected_canonical_browser_rechecks": 14,
+      "additional_heap_48MiB": "FAIL: sampled 68.94-80.04 MiB before collection",
+      "resources": {
+        "path": "docs/team-recommender/post-audit/resource-summary-v1.json",
+        "sha256": "4a5c6ca7fb13c439489d0926acf1e0ced56abec421aa9a846adf92fbe28bd591"
+      },
+      "review_remediation": {
+        "path": "docs/team-recommender/post-audit/review-remediation-v1.json",
+        "sha256": "0b2c67b2b3724c4b7f4660f65175e8805c5d09a1456fa2dc9ef755e78a1ef2ba"
+      },
+      "completion": {
+        "path": "docs/team-recommender/post-audit/completion-receipt-v1.json",
+        "sha256": "dbdc9797c422c4616dff68ce08a92bc0dbd801ad3ba1e1ff335e6a93e3caa95f"
+      }
+    },
+    "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
   }
 }

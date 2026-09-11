@@ -1,0 +1,63 @@
+{
+  "version": 4,
+  "reference_query_sha256": "43ddabcf52c78008f1862fb3a62ab5913f1a5de29b4bf5657f6196adfb3b5376",
+  "query_sha256": "f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e",
+  "engine_sha256": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+  "scientific_scopes": 269,
+  "comparisons": 39835,
+  "score_and_evidence_disagreements": 0,
+  "prior_primary_and_all_option_lists_compared": 257,
+  "group_disagreements": 0,
+  "skipped": [
+    {
+      "id": "363179",
+      "reason": "not_current"
+    },
+    {
+      "id": "359199",
+      "reason": "not_current"
+    },
+    {
+      "id": "363736",
+      "reason": "not_current"
+    },
+    {
+      "id": "nasa-roses:25-D.3E-1c60503f9d",
+      "reason": "broad_parent_rejected"
+    },
+    {
+      "id": "362393",
+      "reason": "broad_parent_rejected"
+    },
+    {
+      "id": "356612",
+      "reason": "broad_parent_rejected"
+    },
+    {
+      "id": "363525",
+      "reason": "not_current"
+    },
+    {
+      "id": "360954",
+      "reason": "broad_parent_rejected"
+    },
+    {
+      "id": "nasa-roses:25-D.9-d22059cf9f",
+      "reason": "broad_parent_rejected"
+    },
+    {
+      "id": "363241",
+      "reason": "broad_parent_rejected"
+    },
+    {
+      "id": "362489",
+      "reason": "not_current"
+    },
+    {
+      "id": "325932",
+      "reason": "broad_parent_rejected"
+    }
+  ],
+  "clock": "2026-09-11T12:00:00Z",
+  "new_provider_calls": 0
+}

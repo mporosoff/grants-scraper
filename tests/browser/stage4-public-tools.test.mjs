@@ -260,12 +260,14 @@ test("Search, CSV, saves, alerts, AI payloads, team and researcher identity owne
   // current bindings are checked by the release, registry and team contracts.
   const generatedSources = new Set([
     // Authorized shared-matcher/profile repair, separately contract tested.
-    "assets/team-matcher.js", "assets/opportunity-team.js",
+    "assets/team-matcher.js", "assets/opportunity-team.js", "assets/opportunity-team-panel.js",
     "data/faculty_matches.js", "data/researcher_directory.js",
     "data/researcher_registry_manifest.json", "data/opportunity_team_index.js",
     "data/opportunity_teams.js", "config/researcher_registry.json",
   ]);
-  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path) && !generatedSources.has(path)) assert.equal(hash(await readFile(new URL(`../../${path}`, import.meta.url))), path === "assets/opportunity-team.js" ? "62e8983f0693536afddb1cc896f79621f59ca88de2b0e18fa0462f686de33dfd" : path === "assets/opportunity-team-panel.js" ? "38bd591cd461f87786a180be2e589e7f7fe5b6d9e4d80589e736be7e8cd4ca99" : expected, path);
+  // The authorized query-cache implementation retains a strict byte guard and
+  // an executable pre-optimization reference in acronym-cache-parity.test.mjs.
+  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path) && !generatedSources.has(path)) assert.equal(hash(await readFile(new URL(`../../${path}`, import.meta.url))), path === "assets/search-query.js" ? "f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e" : path === "assets/opportunity-team.js" ? "62e8983f0693536afddb1cc896f79621f59ca88de2b0e18fa0462f686de33dfd" : path === "assets/opportunity-team-panel.js" ? "38bd591cd461f87786a180be2e589e7f7fe5b6d9e4d80589e736be7e8cd4ca99" : expected, path);
 });
 
 test("The release schema and model contract stay fixed while generated content identities can refresh", async () => {

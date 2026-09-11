@@ -1,0 +1,54 @@
+{
+  "version": 1,
+  "pr": 225,
+  "reviewed_head": "bced135cb3cf4ff31b7d133606b047fafe60a3d8",
+  "review_id": 5180409357,
+  "completed_at": "2026-09-11T15:26:00.740678Z",
+  "finding": {
+    "id": 3990676263,
+    "path": "tools/team_recommender_executor.py",
+    "priority": "P1",
+    "invariant": "A later paid purpose must require its dedicated packet/protocol authority, never fall through the legacy generic request route",
+    "audit": "All generic/D1/D1F/Stage3/post-audit dispatch contracts, packet registry selection, judge-item claims and budget purpose routing inspected before editing",
+    "disposition": "Accepted; generic packet now uses its original six-purpose immutable allowlist. New/future paid envelopes do not extend it."
+  },
+  "remediation_batch": 1,
+  "trusted_helper_head": "fae3fca40a2941fc9e4207839df8dbf35ad6a543",
+  "trusted_helper_focused_tests": 53,
+  "new_provider_calls": 0,
+  "actual_prior_dispatches": "All 34 completed post-audit requests used approved exact hashes, unchanged. No generic packet dispatch occurred in this task.",
+  "initial_CI": {
+    "run": 34615447025,
+    "python": {
+      "cases": 1379,
+      "failed": 1,
+      "skipped": 3,
+      "reason": "outdated search-query app-version assertion"
+    },
+    "browser": {
+      "passed": 843,
+      "failed": 4,
+      "skipped": 12,
+      "reason": "historical Git objects missing in shallow checkout; one query version normalization needed after restoring the reference"
+    }
+  },
+  "portable_fixture_repair": {
+    "presentation_source": "16ed8ff1ca6e7e57199d3d4fafabeebb07f7cdb2",
+    "presentation_fixture_sha256": "a126dfdf2ddcca981e4d35c8dd344c3c162a1b90872550febfc7703ecc33c15b",
+    "D1_source": "ec9c717cf1943ac68be4b1a4ba453bbb29dbd931",
+    "D1_fixture_sha256": "4db90706d6ce347877dd77dd99d453b8cb7bca9d30a2b6730d828603fde6c1ce",
+    "focused_Node_pass": 9,
+    "focused_Python_pass": 9,
+    "runtime_changes": 0,
+    "workflow_changes": 0,
+    "purpose": "Preserve exact historical assertions without requiring network or Git history in CI; verify current script content hash"
+  },
+  "private_receipts": {
+    "pr225-round1.json": "a2969df78d641f5abd5bb41ca51d24345872e74abe2afde99bffcb69cbf1f296",
+    "pr225-python-initial.log": "f5660364d0f993230dc6956f67b87ae11d0d7340e98c730dacd83f39ae1f32d2",
+    "pr225-browser-initial.log": "6279f2b4b84cd978076f3494abcca23bff7b92fbfba4aecb20e3730690c68d28",
+    "portable-gate-node.log": "6b512ddf0f6786d91217a3f511ba91c59c6baec56dce8d581e7cda4977292ca7",
+    "portable-gate-python.log": "b7a746dd44e7c8925fbf79dd8e53c4b7e7f9edf07636d32c5e93f626c733fe8d"
+  },
+  "status": "Consolidated repair prepared; exact-head verification and required CI pending"
+}

@@ -1,6 +1,6 @@
 import { expect, test } from "@playwright/test";
 import { normalizeRorOrganization } from "../../workers/award-api/src/ror.js";
-import { mockAwards, mockHybrid, openFundingFinder, runFundingSearch } from "./helpers.mjs";
+import { mockAwards, mockHybrid, openFundingFinder, runFundingSearch, waitForHybridSettled } from "./helpers.mjs";
 
 test("Funding Finder retains its hero and Team Builder contains text at phone widths and enlarged text", async ({ page }) => {
   mockHybrid(page);
@@ -29,7 +29,10 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
   await page.locator("#browse-all").click();
   await expect(page.locator("#filter-team-ready")).toBeVisible();
   await page.locator("#filter-team-ready").click();
-  await page.locator("[data-opportunity-team]").first().click();
+  await runFundingSearch(page, "W911NF-23-S-0001");
+  await waitForHybridSettled(page);
+  await page.locator('[data-opportunity-team="344592"]').click();
+  await page.locator('#team-builder [data-opportunity-team-scope="344592:ab-0025"]').click();
   await expect(page.locator("#team-builder")).toBeVisible();
   await expect(page.locator("#team-builder .opportunity-team-member").first()).toBeVisible({ timeout: 30_000 });
   for (const width of [320, 390]) for (const size of [16, 24]) {

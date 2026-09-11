@@ -1,0 +1,98 @@
+{
+  "id": "shared-team-v3-evidence-repair",
+  "version": 1,
+  "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+  "previous_candidate": {
+    "path": "docs/team-recommender/post-audit/candidate-v4.json",
+    "sha256": "2cb43bcfd7d416b1ef75e92569ccd666286a287a1c51a159a0cde40988ea023d"
+  },
+  "quality_qualified": false,
+  "resource_qualified": false,
+  "activation": false,
+  "model": null,
+  "fallback": null,
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "population": {
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 120,
+      "standby": 35,
+      "unadmitted": 3
+    },
+    "rankable": 158,
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "status_counts": {
+      "active": 158
+    },
+    "total": 158,
+    "unrankable": 0,
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    }
+  },
+  "files": {
+    "assets/opportunity-team-panel.js": "f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+    "assets/opportunity-team.js": "55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5",
+    "assets/search-query.js": "f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e",
+    "assets/search-retrieval.js": "f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a",
+    "assets/shared-team-engine.js": "8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+    "assets/submission-schedule.js": "2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+    "assets/subtopic-runtime.js": "a6c36190f9ef26de960125aea58b9415b4b951dc9ec2f26998bbebecbc8b5d1c",
+    "assets/team-hybrid.js": "00a14620c5288c0793939cd69f1b9f43314b2855eb071b5b0d7afca1c06f9e8d",
+    "assets/team-matcher.js": "6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+    "assets/team-researchers.js": "9af008d5547a3553b6ef590ab6c0d22762b751438d6f4199ce1a6846ea1cd98e",
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/search-v2-release.json": "7abab9667358b20ce2abace6c0b27675a840c80e88adc7c237bcd18430510d57",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+    "docs/team-recommender/post-audit/semantic-index.json": "e0f478a39111e57d8ef5c7c7380ba554ecd53b12043d663a8c96ed25369d014d",
+    "docs/team-recommender/post-audit/semantic-selection-v2.json": "cf1dd138fe9cfac1e4c829f4f6ccc4f94cb54f1ee5b5a02224cd315391f3daaa",
+    "match_explorer.html": "1a88995dca81b40ba872c4620b29bf7b8811cbf55760a0cbbf6f389dc15f4070",
+    "team_match.html": "1d373ad06dc8c8017c079deb0d155987d6510f3307b9758b956f6dff73cc4b56"
+  },
+  "rules": {
+    "path": "docs/team-recommender/evidence-repair/RULE.md",
+    "sha256": "6617bea36c306126d8fc31558419d4fb8a57b23f2912e7fe93a4b53bc5e30eb1"
+  },
+  "scientific_lock": "88731a08d67d1950c8c7026f98c7e864dae89af6",
+  "provenance_correction": "869d6d44e116df3ce2df2e30edc012bf92dd4ec2",
+  "operational_parity": "docs/team-recommender/evidence-repair/operational-parity.json",
+  "fit": "Actual shared scoreProfile, sourceEvidence and query functions; discovery versus automatic eligibility explicitly separate",
+  "team_size": [
+    2,
+    4
+  ],
+  "alternative_limit": 8,
+  "near_best_coverage_fraction": 0.95,
+  "coverage": "max evidence per source-owned relationship; anchor=3, support=2.5",
+  "marginal": "Minimum two independently supported members may overlap; additions beyond two require positive gain; exact evidence duplicates cannot pad",
+  "anchor": "Actual supported title or first scientific description sentence; syntactic proxy, not proof",
+  "MMR": false,
+  "regularized": false,
+  "Bayesian": false,
+  "evidence_state": "unconfirmed",
+  "cache_scopes": 8,
+  "cache_edits": 32,
+  "source_cache": 8,
+  "packages": {
+    "path": "docs/team-recommender/evidence-repair/release-packages-v3.json",
+    "sha256": "f817afdeae700b00fe14f8eeee0a3d537340287ca7681d8dae5bc15fd230c1dc"
+  },
+  "diagnostic_results": {
+    "path": "docs/team-recommender/evidence-repair/diagnostic-results-v1.json",
+    "sha256": "812b4eeec1a33d72e01ebc32a76edf5ed6ed650ad7034e9e07d70de5f8872fca"
+  },
+  "review": "pending exact-head PR225",
+  "disposition": "C: parent memory and post-input barriers remain; scientific usefulness not qualified",
+  "engineering": {
+    "path": "docs/team-recommender/evidence-repair/engineering-receipt-v1.json",
+    "sha256": "08184a21a8fd0c73cce1da6b11c98e0d77719acae5604a5d696065b0dd27f78d"
+  }
+}

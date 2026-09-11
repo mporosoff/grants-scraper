@@ -1,0 +1,613 @@
+{
+  "version": "post-audit-complete-evidence-proposal-v1",
+  "dispatch_approved": false,
+  "trusted_route": "Existing protected-main executor pins the old registry and Stage 3 IDs. Corrected profiles/new questions are rejected; a narrow exact-input policy/helper prerequisite needs explicit authority.",
+  "selection_sha256": "cf1dd138fe9cfac1e4c829f4f6ccc4f94cb54f1ee5b5a02224cd315391f3daaa",
+  "scope_groups": 24,
+  "scopes": 26,
+  "unique_items": 69,
+  "requests": 28,
+  "accepted_items": 40,
+  "missing": [
+    {
+      "scope_id": "356536",
+      "key": "a50d38d66d19e440fbb93bf67e05fcfdd0aee7cbe90bc85fd74318fd83ff5d0d",
+      "input_bound": 15280,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "bd87791b577619c25f02018f1f44b0ec53aa32acd5ceb3f7e6cda756ea78dde2",
+      "input_bound": 16724,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "ed0366e71be2fe8032833fdf9a65e4529e63d3f316d66c027dce914d642a500d",
+      "input_bound": 17313,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "8e2e3b29291b2eb9c536643fdb780574a3914e47b401ff6deb07640fc3f261e4",
+      "input_bound": 16517,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "a22b84fd7ad0c83fa81ff1ce6145efbc33df5c5c14904dc14bf99779121609b3",
+      "input_bound": 16651,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "11643939abe666b5b4f86603b79e5303d6dfff2171bd3a5b33dcfd41bf6302e2",
+      "input_bound": 16812,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "18088ea4c542d56415b14c16990e0d000c6dca2941edc6afb2699067f9f80f1a",
+      "input_bound": 16616,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "768e843cfdfef3ee1fd7ae1ea3447a62c9b7458589cd55088d0c5ecb7897244f",
+      "input_bound": 17007,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "09b6cda0b1008c78e988b648bad5729cb6a0c106d892411455d23c4fda8202be",
+      "input_bound": 21196,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "56a0cd8025e312adde3e328f51a6a8a72d5a899a631c3af72753765fe8a7cc14",
+      "input_bound": 21062,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "d4dbfc292630694a73665b7426d2afc67c1ee51a4e886109aec4081e799a01cf",
+      "input_bound": 22504,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "e532d50955d769955b8cc8bcf524e95d66eee800295aac734b15c97cda95fd47",
+      "input_bound": 22504,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "356536",
+      "key": "2b1e6d481e21d0f400585f5770883a535bc0bb0711ba9b9e44aa4971290bb527",
+      "input_bound": 22125,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "344610",
+      "key": "234222a00b7441cafcf9ed5ec0d2e28a95300985a1b36e5b7ab8e8e72240383b",
+      "input_bound": 13925,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "344610",
+      "key": "bab4faa3f4e7c731fa5717692be7ed4a7685681dc91a7ddc2c4fe9ea907a212e",
+      "input_bound": 15465,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "344610",
+      "key": "933d82a3bd0553f6172a84e0a37e9fc3c1b7a2857674c57b6926ebe5cc914aae",
+      "input_bound": 15609,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "arpa-h:sbir",
+      "key": "8f70406bfd55709c1c4aa0ea77a3b30e5f3f836bc78d96774e3822526c94a216",
+      "input_bound": 13899,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "362827",
+      "key": "9c1fd8ed40aa4b470cdb601daab34a3c2ddcb07245d59df9f6007f0f845e65ad",
+      "input_bound": 12514,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "355219",
+      "key": "85abc796a8c7bd7ca8edb38b3769d52caadceb7370bebca6b863cca37e9053cf",
+      "input_bound": 12126,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "355219",
+      "key": "fa7e7337eb51c934b2451ae969b256268acb9c682dc5e74dc9cacdb1656377ca",
+      "input_bound": 13817,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "355219",
+      "key": "53411f9cea7deb28a0299f6d60e9513522f7a7bd9f874556f4613b3506ba093a",
+      "input_bound": 14159,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "355219",
+      "key": "4ffd1fc93c5831f35b766b10a8f2f1bbb7d387e0d2dcf450b463cb336cfd4697",
+      "input_bound": 13658,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "355219",
+      "key": "cd0adafd9ff5184bf233babaf7e078f5e60eb35478a89b6176bff0c34ff1d0b7",
+      "input_bound": 13263,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "355219",
+      "key": "7c25fbcde4b4892b774b05f9d795c1f3ff2513fccc43adc9428343f4230f0510",
+      "input_bound": 13570,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "362177",
+      "key": "4d2abefa377143ecb5185eed380fd56465052ca49b2051691d86c7a0ff61ce17",
+      "input_bound": 13358,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "362177",
+      "key": "fdf26405682b7d75b8aa7d36efea3d5d0b982f39836468500ed8ee55bd8866b9",
+      "input_bound": 15074,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "357724",
+      "key": "ef675c81d1e44cee02e02a7150761d2c67dc890112d6000be70f6933aeb57720",
+      "input_bound": 12647,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "357724",
+      "key": "c34f75b8571a7f5b956863973c6a3d9b8e903fbd6d2acc70b0d35eec927bf139",
+      "input_bound": 14222,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    },
+    {
+      "scope_id": "355297",
+      "key": "b9e8422a8d7765aaea82513fe070682a6d921b323681fa165ceb8be7b8d92f53",
+      "input_bound": 18575,
+      "reason": "Complete packet exceeds existing 12000-byte input bound; no evidence trimmed"
+    }
+  ],
+  "occurrences": [
+    {
+      "scope_id": "347679",
+      "key": "b07123b1deaaf0e9a6a40182d2bc43e208c2cbe4189fffa085ea7d351bfeb95a",
+      "role": "source"
+    },
+    {
+      "scope_id": "347679",
+      "key": "d66ccd5ee010403cfa740d336ee769250a786185d5e9f0da4e51efb2499f6b48",
+      "role": "top1"
+    },
+    {
+      "scope_id": "347679",
+      "key": "4a711a9344e4070ddb485e8f3c5115ac8ab541db6a28b67ab70a36cfd6fb9a36",
+      "role": "top2"
+    },
+    {
+      "scope_id": "356536",
+      "key": "a50d38d66d19e440fbb93bf67e05fcfdd0aee7cbe90bc85fd74318fd83ff5d0d",
+      "role": "source"
+    },
+    {
+      "scope_id": "356536",
+      "key": "bd87791b577619c25f02018f1f44b0ec53aa32acd5ceb3f7e6cda756ea78dde2",
+      "role": "top1"
+    },
+    {
+      "scope_id": "356536",
+      "key": "ed0366e71be2fe8032833fdf9a65e4529e63d3f316d66c027dce914d642a500d",
+      "role": "top2"
+    },
+    {
+      "scope_id": "356536",
+      "key": "8e2e3b29291b2eb9c536643fdb780574a3914e47b401ff6deb07640fc3f261e4",
+      "role": "top3"
+    },
+    {
+      "scope_id": "356536",
+      "key": "a22b84fd7ad0c83fa81ff1ce6145efbc33df5c5c14904dc14bf99779121609b3",
+      "role": "top4"
+    },
+    {
+      "scope_id": "356536",
+      "key": "11643939abe666b5b4f86603b79e5303d6dfff2171bd3a5b33dcfd41bf6302e2",
+      "role": "top5"
+    },
+    {
+      "scope_id": "356536",
+      "key": "18088ea4c542d56415b14c16990e0d000c6dca2941edc6afb2699067f9f80f1a",
+      "role": "primary-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "768e843cfdfef3ee1fd7ae1ea3447a62c9b7458589cd55088d0c5ecb7897244f",
+      "role": "primary-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "a22b84fd7ad0c83fa81ff1ce6145efbc33df5c5c14904dc14bf99779121609b3",
+      "role": "primary-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "bd87791b577619c25f02018f1f44b0ec53aa32acd5ceb3f7e6cda756ea78dde2",
+      "role": "primary-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "09b6cda0b1008c78e988b648bad5729cb6a0c106d892411455d23c4fda8202be",
+      "role": "primary-group"
+    },
+    {
+      "scope_id": "356536",
+      "key": "56a0cd8025e312adde3e328f51a6a8a72d5a899a631c3af72753765fe8a7cc14",
+      "role": "rank2-alternative"
+    },
+    {
+      "scope_id": "356536",
+      "key": "18088ea4c542d56415b14c16990e0d000c6dca2941edc6afb2699067f9f80f1a",
+      "role": "rank2-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "8e2e3b29291b2eb9c536643fdb780574a3914e47b401ff6deb07640fc3f261e4",
+      "role": "rank2-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "768e843cfdfef3ee1fd7ae1ea3447a62c9b7458589cd55088d0c5ecb7897244f",
+      "role": "rank2-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "bd87791b577619c25f02018f1f44b0ec53aa32acd5ceb3f7e6cda756ea78dde2",
+      "role": "rank2-member"
+    },
+    {
+      "scope_id": "356536",
+      "key": "d4dbfc292630694a73665b7426d2afc67c1ee51a4e886109aec4081e799a01cf",
+      "role": "alternative-comparison"
+    },
+    {
+      "scope_id": "356536",
+      "key": "e532d50955d769955b8cc8bcf524e95d66eee800295aac734b15c97cda95fd47",
+      "role": "order-swap"
+    },
+    {
+      "scope_id": "356536",
+      "key": "2b1e6d481e21d0f400585f5770883a535bc0bb0711ba9b9e44aa4971290bb527",
+      "role": "explanation"
+    },
+    {
+      "scope_id": "361522",
+      "key": "36bfef59dc9ce0cf71c2e7d1269f3dae98d52125eb0339c69b1af4e9cfed7927",
+      "role": "source"
+    },
+    {
+      "scope_id": "363585",
+      "key": "fba119c17accdc5fec3a6d020710f5da03888c20d5f2edc97dc2b6df576f555f",
+      "role": "source"
+    },
+    {
+      "scope_id": "344610",
+      "key": "234222a00b7441cafcf9ed5ec0d2e28a95300985a1b36e5b7ab8e8e72240383b",
+      "role": "source"
+    },
+    {
+      "scope_id": "344610",
+      "key": "bab4faa3f4e7c731fa5717692be7ed4a7685681dc91a7ddc2c4fe9ea907a212e",
+      "role": "top1"
+    },
+    {
+      "scope_id": "344610",
+      "key": "933d82a3bd0553f6172a84e0a37e9fc3c1b7a2857674c57b6926ebe5cc914aae",
+      "role": "top2"
+    },
+    {
+      "scope_id": "363147",
+      "key": "557cb3f42334dfec68658d050fcd788622c88734b6b7e5a292846ece67bd08a0",
+      "role": "source"
+    },
+    {
+      "scope_id": "nyserda:PON3982",
+      "key": "23751ac04f9c8fcf2ce9ba991a1c7ee55ce6bbc80a4c3f4fce38c7aa2686a91b",
+      "role": "source"
+    },
+    {
+      "scope_id": "357545",
+      "key": "2ef0390db333e8f0b6d99788c062b7d99fbc2f6b43e921b5f1df86bc8514cd07",
+      "role": "source"
+    },
+    {
+      "scope_id": "357545",
+      "key": "01507ad7e1de39d57d211b2753ae59373b0cf37d6049a39287a1e359a973a410",
+      "role": "top1"
+    },
+    {
+      "scope_id": "357545",
+      "key": "10408c449c29311ed84bb5f20734f375512df76048aa8cfbdc83c7f416b13232",
+      "role": "top2"
+    },
+    {
+      "scope_id": "363584",
+      "key": "4504c3d1b40f3b5c0421828a86616351775d734d5df1ff1900e491b0c05e66df",
+      "role": "source"
+    },
+    {
+      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
+      "key": "f71a16c2a31551304d702b70c463207b1662b972ed99c9d033426e3987a83b72",
+      "role": "source"
+    },
+    {
+      "scope_id": "349109",
+      "key": "93fee62a40c3cf43a1fbea0eee77503461d061e5c28120de4e73052835c884ee",
+      "role": "source"
+    },
+    {
+      "scope_id": "349109",
+      "key": "d061af06b8b9354ce6cb1cea0726be2b01d1fc5932de2aefb5b5a4d64a4e9f99",
+      "role": "top1"
+    },
+    {
+      "scope_id": "363523",
+      "key": "a6ae22cc0d3cf3b0677b8687afb68bfcdb319e0bf15b883131f8402c3eedd015",
+      "role": "source"
+    },
+    {
+      "scope_id": "360532",
+      "key": "eb55776a5abb6761ba87c756e5d44a12ea2b61afbe442b6bd0dfe0037aa794ba",
+      "role": "source"
+    },
+    {
+      "scope_id": "arpa-h:sbir",
+      "key": "8f70406bfd55709c1c4aa0ea77a3b30e5f3f836bc78d96774e3822526c94a216",
+      "role": "source"
+    },
+    {
+      "scope_id": "362827",
+      "key": "9c1fd8ed40aa4b470cdb601daab34a3c2ddcb07245d59df9f6007f0f845e65ad",
+      "role": "source"
+    },
+    {
+      "scope_id": "355219",
+      "key": "85abc796a8c7bd7ca8edb38b3769d52caadceb7370bebca6b863cca37e9053cf",
+      "role": "source"
+    },
+    {
+      "scope_id": "355219",
+      "key": "fa7e7337eb51c934b2451ae969b256268acb9c682dc5e74dc9cacdb1656377ca",
+      "role": "top1"
+    },
+    {
+      "scope_id": "355219",
+      "key": "53411f9cea7deb28a0299f6d60e9513522f7a7bd9f874556f4613b3506ba093a",
+      "role": "top2"
+    },
+    {
+      "scope_id": "355219",
+      "key": "4ffd1fc93c5831f35b766b10a8f2f1bbb7d387e0d2dcf450b463cb336cfd4697",
+      "role": "top3"
+    },
+    {
+      "scope_id": "355219",
+      "key": "cd0adafd9ff5184bf233babaf7e078f5e60eb35478a89b6176bff0c34ff1d0b7",
+      "role": "top4"
+    },
+    {
+      "scope_id": "355219",
+      "key": "7c25fbcde4b4892b774b05f9d795c1f3ff2513fccc43adc9428343f4230f0510",
+      "role": "top5"
+    },
+    {
+      "scope_id": "357580",
+      "key": "3145dac49f6fe9c486c07385fade8c540a7716e434aa817bfa706bd7111c1edb",
+      "role": "source"
+    },
+    {
+      "scope_id": "357580",
+      "key": "e16aafc369fe46395faad674848a1421dfe7d05ab8d865557ff0fc2a1db33884",
+      "role": "top1"
+    },
+    {
+      "scope_id": "357580",
+      "key": "1d786973910927949e8d00c2491a7f8c9fa0a9e765dc3cf8c2e680b733b22606",
+      "role": "top2"
+    },
+    {
+      "scope_id": "353756",
+      "key": "eb6f70d0ae299bc57e8b39f93dc9b206b0601ccfa60c81f4c5d171cc3d5fb020",
+      "role": "source"
+    },
+    {
+      "scope_id": "362177",
+      "key": "4d2abefa377143ecb5185eed380fd56465052ca49b2051691d86c7a0ff61ce17",
+      "role": "source"
+    },
+    {
+      "scope_id": "362177",
+      "key": "fdf26405682b7d75b8aa7d36efea3d5d0b982f39836468500ed8ee55bd8866b9",
+      "role": "top1"
+    },
+    {
+      "scope_id": "348985",
+      "key": "e5c631f7846f5eb011afd8f7c5831886d3f32633541d632ed1689e231f524ba1",
+      "role": "source"
+    },
+    {
+      "scope_id": "350469",
+      "key": "dcc836dd0743a3628483708aa3175cc98f2dec8c6b198f787679a09f451c165b",
+      "role": "source"
+    },
+    {
+      "scope_id": "350469",
+      "key": "0eb91cc90f556734569a9213fb52f9338cfd504e033e5ead4c0388abd91637c9",
+      "role": "top1"
+    },
+    {
+      "scope_id": "350469",
+      "key": "005c9a6deac354178241b8355b26221eb62530950e3f68aac422ab90e1e5dd68",
+      "role": "top2"
+    },
+    {
+      "scope_id": "350469",
+      "key": "4c062591b51f587a9a23bfc6781d69eedfb8a16b332b27cb7c59c07ae1f79f35",
+      "role": "top3"
+    },
+    {
+      "scope_id": "350469",
+      "key": "6052626d98501ad2c4ed3a26cef547ec782f521f8c57dfddab2fdd5b175bcbe5",
+      "role": "top4"
+    },
+    {
+      "scope_id": "357724",
+      "key": "ef675c81d1e44cee02e02a7150761d2c67dc890112d6000be70f6933aeb57720",
+      "role": "source"
+    },
+    {
+      "scope_id": "357724",
+      "key": "c34f75b8571a7f5b956863973c6a3d9b8e903fbd6d2acc70b0d35eec927bf139",
+      "role": "top1"
+    },
+    {
+      "scope_id": "355297",
+      "key": "b9e8422a8d7765aaea82513fe070682a6d921b323681fa165ceb8be7b8d92f53",
+      "role": "source"
+    },
+    {
+      "scope_id": "363594:a-1",
+      "key": "799fe287740871ddbcf1810782a3d30d9cd745c092fb4bc6db9ddb9800baaa1e",
+      "role": "source"
+    },
+    {
+      "scope_id": "363594:a-1",
+      "key": "bd025bc56c9f95ef31faa307c24d6679c201dd8b130f16bb42013a24303a836f",
+      "role": "top1"
+    },
+    {
+      "scope_id": "363594:a-1",
+      "key": "2d45d56d94dc1f5ba31c046d7c4617eaf2c0c45a98a409f92b9f60da39b333a6",
+      "role": "top2"
+    },
+    {
+      "scope_id": "363594:a-1",
+      "key": "84bfa83b566e4af181b52e1234668190e1a0c8f7c3c06d241b23d274358e50f8",
+      "role": "top3"
+    },
+    {
+      "scope_id": "363594:a-1",
+      "key": "92e247cefb483e941356c172f5db47c8b5357c51360d63812866d07b8357c70f",
+      "role": "top4"
+    },
+    {
+      "scope_id": "363594:a-1",
+      "key": "f5cc0139b9d1b42bc7a1bb8c3b7e5b434d9fe845840ba6deb76e0671acc8d269",
+      "role": "top5"
+    },
+    {
+      "scope_id": "363594:b-1",
+      "key": "4cb2bc67159a673087831ebedd91ab96ea3cc2e837960911e8385691204e8e5a",
+      "role": "source"
+    },
+    {
+      "scope_id": "363594:b-1",
+      "key": "3cc004e2e8d7e6c05be9ee3783f72cd9ff92f92adee44b5c160e6c610ab03d9f",
+      "role": "top1"
+    },
+    {
+      "scope_id": "363594:c-1",
+      "key": "a6db6b7affb03dfd3f04ac4a99833397a60f8a094528ff8fe67b60fac9cd1ff1",
+      "role": "source"
+    },
+    {
+      "scope_id": "363594:c-1",
+      "key": "289bcc36b6aeadffc063390897baf45aaae23459978c92c3d9bd6d6078dde082",
+      "role": "top1"
+    },
+    {
+      "scope_id": "363594:c-1",
+      "key": "07deb30e9692b62269f11a73e5d010db67786fe2efba4d7445883cceba76077b",
+      "role": "top2"
+    },
+    {
+      "scope_id": "363594:c-1",
+      "key": "56f836ddf440c54d0ae1c91e86cb717667827bd9251720d9b06546ec41abb0c7",
+      "role": "top3"
+    },
+    {
+      "scope_id": "363594:c-1",
+      "key": "27b83125986da3c6258df03ade3362ca36ab48fbe27e3a29d944405756f608f7",
+      "role": "top4"
+    },
+    {
+      "scope_id": "363594:c-1",
+      "key": "fa24b1389d9e580937603325fe8a5953f7a23da5033b7a4c795a8dbb6a446235",
+      "role": "top5"
+    }
+  ],
+  "roles": {
+    "source": 26,
+    "top1": 13,
+    "top2": 9,
+    "top3": 5,
+    "top4": 5,
+    "top5": 4,
+    "primary-member": 4,
+    "primary-group": 1,
+    "rank2-alternative": 1,
+    "rank2-member": 4,
+    "alternative-comparison": 1,
+    "order-swap": 1,
+    "explanation": 1
+  },
+  "optional_selection": {
+    "alternatives": [
+      "356536"
+    ],
+    "explanations": [
+      "356536"
+    ],
+    "order_swaps": [
+      "356536"
+    ]
+  },
+  "input_token_bound": 278334,
+  "output_token_bound": 14336,
+  "conservative_usd": 0.839201,
+  "proposed_ceiling_usd": 2,
+  "proposed_attempt_ceiling": 60,
+  "actual_new_spend": 0,
+  "actual_new_requests": 0,
+  "prior_charged_usd": 3.952987,
+  "prior_requests": 595,
+  "remaining_after_proposed_actual_bound_usd": 5.207812,
+  "remaining_after_proposed_requests": 67,
+  "price_checked_on": "2026-09-11",
+  "price_source": "https://platform.claude.com/docs/en/about-claude/pricing",
+  "model": "claude-sonnet-5",
+  "standard_input_usd_per_million": 2,
+  "conservative_input_usd_per_million": 2.5,
+  "output_usd_per_million": 10,
+  "no_paid_retries_planned": true,
+  "complete_evidence": true,
+  "algorithm_scores_sent": false,
+  "historical_label_reuse": 0,
+  "human_requests": 0,
+  "packet_bodies_sha256": "5a8249414440838c98ab1576b5635df66d39caa502f06152b55a1f7f48e05a42"
+}

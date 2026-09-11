@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {fixture} from '../helpers/shared-team-inputs.mjs';
-import {buildSharedPackage} from '../../tools/build_shared_team_package.mjs';
+import {buildSharedPackage,resolveSharedScopes} from '../../tools/build_shared_team_package.mjs';
 const plain = x => JSON.parse(JSON.stringify(x));
 test('same shared per-person admission and full-member team intersection; no copied fit', async () => {
   const f = await fixture(); assert(f.e.resolveScope(f.action).ok);
@@ -76,4 +76,50 @@ test('canonical selected child has identical parent ownership/currentness and ne
   assert.equal(e.proposal(e.opportunityById.get('child-b')).selectedIds.length, 0);
   const wrong = plain(childCatalog); wrong.opportunities[0].parent_id = 'other';
   assert.equal(e.resolveScope({...f.action, scopeId: 'child-a', childCatalog: wrong}).ok, false);
+});
+
+test('independent shared strong evidence can justify overlap; identical claims do not pad a group', async () => {
+  const f = await fixture();
+  async function build(duplicate) {
+    const directory = plain(f.directory); directory.researchers = directory.researchers.slice(0, 2);
+    for (const [i,p] of directory.researchers.entries()) {
+      p.claims[0].label = 'heterogeneous catalysis';
+      p.claims[0].evidence = duplicate || i === 0 ? 'Studies heterogeneous catalysis for reactive systems.' : 'Studies heterogeneous catalysis in porous solids.';
+    }
+    const pack = await buildSharedPackage({catalog:f.catalog,sidecar:f.sidecar,directory,config:{},scopes:f.pack.packet.scopes});
+    const data = await f.c.SharedTeamEngine.hydrate(pack.packet,pack.index,directory,f.catalog,f.sidecar);
+    const e = f.c.SharedTeamEngine.create(data,{clock:()=>f.clock.now}); e.resolveScope(f.action); return e;
+  }
+  const distinct = await build(false), state = distinct.proposal(distinct.opportunityById.get('call'));
+  assert.equal(state.selectedIds.length,2); assert(distinct.diagnoseScope().primary.some(r=>r.removal_marginal===0 && r.independent_strong_evidence));
+  const duplicate = await build(true); assert.equal(duplicate.proposal(duplicate.opportunityById.get('call')).selectedIds.length,0);
+});
+
+test('adoption freezes science and any replacement of an unselected profile invalidates the whole pool', async () => {
+  const f = await fixture(); Object.assign(f.c,{GRANT_CATALOG:f.catalog,RESEARCHER_DIRECTORY:f.directory,SUBTOPIC_CATALOG:f.sidecar});
+  f.e.resolveScope(f.action);const state=f.e.proposal(f.e.opportunityById.get('call'));
+  assert(Object.isFrozen(f.directory.researchers[0].claims[0]));
+  assert.throws(()=>{f.directory.researchers[0].claims[0].evidence='changed';},TypeError);
+  const replacement=plain(f.directory), unselected=replacement.researchers.find(p=>!state.selectedIds.includes(p.id));unselected.research_summary='Changed evidence';
+  f.c.RESEARCHER_DIRECTORY=replacement;assert.throws(()=>f.e.proposalView(state),/pool changed/);
+  f.c.RESEARCHER_DIRECTORY=f.directory;f.c.SUBTOPIC_CATALOG=plain(f.sidecar);assert.throws(()=>f.e.resolveScope(f.action),/Child source changed/);
+});
+
+test('legacy declared-branch labels cannot hide an exact canonical parent or invent a missing child', () => {
+  const id='eere-exchange:DE-TA1-0003589';
+  const catalog={opportunities:[{opportunity_id:id,title:'Exact topic-area record'},{opportunity_id:'332894',title:'Parent'}]},children={opportunities:[]};
+  const result=resolveSharedScopes(catalog,children,[{id,parent_id:id,record_type:'declared_branch'},{id:'332894:superconducting-qubits',parent_id:'332894',record_type:'declared_branch'}]);
+  assert.equal(result.length,1);assert.equal(result[0].id,id);assert.equal(result[0].record_type,'specific_parent');
+  assert.equal(resolveSharedScopes(catalog,children,[{id:'same-title-new-id',parent_id:'same-title-new-id'}]).length,0);
+});
+
+test('one decision clock covers a complete action and refreshes on the next action',async()=>{
+  const f=await fixture();let state;
+  f.e.runAction(f.action,outcome=>{
+    state=f.e.proposal(outcome.opportunity);f.clock.now='2026-09-13T00:00:00Z';
+    assert(f.e.proposalView(state).selected.length>=2);
+    assert(f.e.proposalOptions(state).length);
+  });
+  assert.throws(()=>f.e.proposalView(state),/expired/);
+  f.e.runAction({...f.action,now:f.clock.now},outcome=>assert.equal(outcome.ok,false));
 });

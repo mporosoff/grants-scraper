@@ -1,0 +1,135 @@
+{
+  "version": 4,
+  "id": "shared-team-v2-post-audit",
+  "scientific_lock_commit": "6e2f60708b41b94049eabf005a0190b268222738",
+  "assembly_sha": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
+  "model": null,
+  "quality_qualified": false,
+  "activation": false,
+  "paid_interactions": 0,
+  "fit_authority": "Existing FUNDING_TEAM_MATCHER.create(...).scoreProfile with full canonical catalog/selected child context and shared normalization; no recency expertise boost",
+  "composition": {
+    "size": [
+      2,
+      4
+    ],
+    "anchor": "Existing fit.strong",
+    "contribution": "Positive removal marginal >1e-9 OR independent existing strong-fit claim evidence not duplicated among other members; additions beyond the minimum require positive coverage",
+    "alternatives": 8,
+    "tie_breaking": [
+      "coverage descending",
+      "group size ascending",
+      "shared scientific score descending",
+      "stable canonical IDs ascending"
+    ],
+    "MMR": false,
+    "Bayesian": false,
+    "regularized": false,
+    "cached_scopes": 8,
+    "cached_exclusion_variants": 32
+  },
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "population": {
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 120,
+      "standby": 35,
+      "unadmitted": 3
+    },
+    "rankable": 158,
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "status_counts": {
+      "active": 158
+    },
+    "total": 158,
+    "unrankable": 0,
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    }
+  },
+  "evidence_state": "All contributions unconfirmed; exact retained passages do not certify role coverage",
+  "files": {
+    "assets/shared-team-engine.js": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+    "assets/team-matcher.js": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+    "assets/opportunity-team.js": "76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+    "assets/opportunity-team-panel.js": "f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+    "docs/team-recommender/post-audit/semantic-selection-v2.json": "cf1dd138fe9cfac1e4c829f4f6ccc4f94cb54f1ee5b5a02224cd315391f3daaa",
+    "docs/team-recommender/post-audit/semantic-index.json": "e0f478a39111e57d8ef5c7c7380ba554ecd53b12043d663a8c96ed25369d014d",
+    "assets/search-query.js": "f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+  },
+  "protocol": {
+    "path": "docs/team-recommender/post-audit/PROTOCOL.md",
+    "sha256": "a4d5931b9917290678e1807e4560f9b0271df3fc51cd5f845d6f61717be34058"
+  },
+  "authorization": {
+    "path": "docs/team-recommender/post-audit/execution-approval-v1.json",
+    "sha256": "a1db0152e9d452379d5fcc3530ded00e1878ca48287a09c8f66b524b7774b182"
+  },
+  "packages": {
+    "path": "docs/team-recommender/post-audit/release-packages-v4.json",
+    "sha256": "0938a53f2122f7d251656a1717171bf88d8ade11d3a706d4d328329e2b69526c"
+  },
+  "scientific_results": {
+    "path": "docs/team-recommender/post-audit/semantic-results-v1.json",
+    "sha256": "4e8906ae66df91d5cfc9bffc1ffb18c654331864b7fba2a47c6f9abecda0f83f"
+  },
+  "engineering": {
+    "path": "docs/team-recommender/post-audit/engineering-receipt-v2.json",
+    "sha256": "bad737844e589709fa7a30b8db1fa0d12cc956effd2c2ffb07803bc5a27e4719"
+  },
+  "rollback": {
+    "path": "docs/team-recommender/post-audit/rollback-browser-v3.json",
+    "sha256": "75579a3b43b828bb529e0ae1a653c9a9e654db6bb0a0072ff3e12ec4a74f3467"
+  },
+  "fallback": null,
+  "status": "Corrective implementation and finite check complete; exact-head code review and CI clean; scientific and memory criteria FAIL; no release",
+  "previous_receipt": {
+    "path": "docs/team-recommender/post-audit/candidate-v3.json",
+    "sha256": "8316b32e3e12377905c220a0f1e854d2da3604739c05f7223940a0af5734902a"
+  },
+  "query_cache_parity": {
+    "path": "docs/team-recommender/post-audit/query-cache-parity-v4.json",
+    "sha256": "635b4dab546b3991083663b101eaa1507444c1a68dc2e64028599549e387ce92"
+  },
+  "resources": {
+    "path": "docs/team-recommender/post-audit/resource-summary-v1.json",
+    "sha256": "4a5c6ca7fb13c439489d0926acf1e0ced56abec421aa9a846adf92fbe28bd591"
+  },
+  "resource_qualified": false,
+  "completion": {
+    "path": "docs/team-recommender/post-audit/completion-receipt-v1.json",
+    "sha256": "dbdc9797c422c4616dff68ce08a92bc0dbd801ad3ba1e1ff335e6a93e3caa95f"
+  },
+  "validated_code_sha": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+  "independent_review": "PR225 clean exact-head verification after one consolidated remediation",
+  "trusted_guard": {
+    "number": 226,
+    "head": "fae3fca40a2941fc9e4207839df8dbf35ad6a543",
+    "merge": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+    "merged_at": "2026-09-11T15:40:20Z",
+    "review_summary": 5636833260,
+    "review_completed_at": "2026-09-11T15:38:24.730277Z",
+    "positive_reaction_at": "2026-09-11T15:38:29Z",
+    "result": "Terminal clean configured reaction on unchanged head; no inline or submitted findings",
+    "CI": 34616890667,
+    "python_cases": 1341,
+    "browser_pass": 767,
+    "CI_skips": 0,
+    "focused_tests": 53,
+    "experimental_exact_cherry_pick": "1644eb5eb58f3d7662f2095be9d93407cc7c645a",
+    "post_merge_CI": 34617513611,
+    "post_merge_CI_result": "SUCCESS",
+    "ledger_or_packet_changes": 0,
+    "purpose": "Restrict generic packet authority to original six purposes; dedicated versioned/exact hash contracts cannot be bypassed"
+  }
+}

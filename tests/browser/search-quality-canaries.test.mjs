@@ -72,7 +72,9 @@ test("permanent REE and NASA canaries do not recreate configured entailments", (
 
 test("permanent scientific-term canaries enforce complete indexed intent", () => {
   const catalysis = ranked("catalysis").map(row => row.id);
-  assert.ok(["fixture-cps", "fixture-bes"].includes(catalysis[0]));
+  // Derived document_program_areas no longer upgrade BES over actual source
+  // passages. All four surviving records state catalysis in source text.
+  assert.deepEqual(new Set(catalysis), new Set(["fixture-chemistry", "fixture-army-baa", "fixture-cps", "fixture-bes"]));
   assert.ok(catalysis.includes("fixture-cps"));
   assert.ok(catalysis.includes("fixture-army-baa"));
   assert.deepEqual(ranked("AI catalyst design"), []);

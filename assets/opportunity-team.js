@@ -47,7 +47,7 @@
         throw new Error("The opportunity-team availability index is invalid.");
       }
       identifiers.add(scope.id);
-      if (index.schema_version === 3 && scope.engine !== "shared-team-v1") {
+      if (index.schema_version === 3 && scope.engine !== "shared-team-v3") {
         throw new Error("Every scope must have one declared engine owner.");
       }
     });

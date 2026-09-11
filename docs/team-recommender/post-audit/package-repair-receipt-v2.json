@@ -1,0 +1,65 @@
+{
+  "version": 2,
+  "packages": [
+    {
+      "cohort": "legacy",
+      "candidate_id": "112ada2c4721bdbc95a350e364263ae80048dcbf6b21dada141b59c4908be5b1",
+      "files_verified": 130,
+      "prior_candidate": "29f0bd77206367177a2ed4e9c2ff247c69332a2e618674273a6dd9b9714a5529",
+      "prior_files_unchanged": true,
+      "additional_files": [
+        "config/award_institutions.json",
+        "workers/award-api/src/adapters/dod.js",
+        "workers/award-api/src/contract.js",
+        "workers/award-api/src/http.js",
+        "workers/award-api/src/institutions.js",
+        "workers/award-api/src/ror.js",
+        "workers/award-api/src/snapshot.js",
+        "workers/award-api/src/year-filter.js"
+      ],
+      "additional_public_bytes": 90302,
+      "additional_gzip_bytes": 24948
+    },
+    {
+      "cohort": "rollout150",
+      "candidate_id": "45e0a4f390f85d4d68a6ea5945e6afe2a9891e3737c30152d9db48e242c4605d",
+      "files_verified": 130,
+      "prior_candidate": "cf2c1d68cf5f3afb92bce288a8504ad8510886e65ebaf842c16efa819623db0f",
+      "prior_files_unchanged": true,
+      "additional_files": [
+        "config/award_institutions.json",
+        "workers/award-api/src/adapters/dod.js",
+        "workers/award-api/src/contract.js",
+        "workers/award-api/src/http.js",
+        "workers/award-api/src/institutions.js",
+        "workers/award-api/src/ror.js",
+        "workers/award-api/src/snapshot.js",
+        "workers/award-api/src/year-filter.js"
+      ],
+      "additional_public_bytes": 90302,
+      "additional_gzip_bytes": 24948
+    },
+    {
+      "cohort": "rollout50",
+      "candidate_id": "813a188de9fd042a83d22d563f2e5236db670504b829d0c1b1ae40b34d66e8f3",
+      "files_verified": 130,
+      "prior_candidate": "031473c8dc212f36dcdde7d718feba00301485fcd3dadd768272a6f45896f696",
+      "prior_files_unchanged": true,
+      "additional_files": [
+        "config/award_institutions.json",
+        "workers/award-api/src/adapters/dod.js",
+        "workers/award-api/src/contract.js",
+        "workers/award-api/src/http.js",
+        "workers/award-api/src/institutions.js",
+        "workers/award-api/src/ror.js",
+        "workers/award-api/src/snapshot.js",
+        "workers/award-api/src/year-filter.js"
+      ],
+      "additional_public_bytes": 90302,
+      "additional_gzip_bytes": 24948
+    }
+  ],
+  "scientific_dependencies_unchanged": true,
+  "new_generation_calls": 0,
+  "published": false
+}

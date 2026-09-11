@@ -1,0 +1,16 @@
+{
+  "version": "post-audit-execution-approval-v1",
+  "approved_on": "2026-09-11",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "user_answer": "Approve this bounded check and trusted prerequisite",
+  "maximum_new_usd": 2,
+  "maximum_attempts": 60,
+  "prepared_requests": 34,
+  "prepared_questions": 69,
+  "conservative_usd": 1.293612,
+  "maximum_input_bytes": 24000,
+  "new_allowance": false,
+  "deployment_authorized": false,
+  "prior_proposal": "judge-proposal-v2.json",
+  "trusted_input_sha256": "5c97d02a88834328aaf00ebe4d1cf6b3a1ab6246928205351d797e9a8d40c612"
+}

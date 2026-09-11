@@ -1,0 +1,44 @@
+{
+  "version": 4,
+  "packages": [
+    {
+      "cohort": "legacy",
+      "candidate_id": "167bae5a57f350bb8edbc30a38aad5d3e960f52a4e222f9e64b7506927ff80a8",
+      "prior_candidate": "6067d1b7f69f2cfe54c2fdfdc78ddcd0658df9b4c51b081fe8457d7a62d1d81f",
+      "files_verified": 130,
+      "changed_files": [
+        "data/search-v2-release.json",
+        "match_explorer.html",
+        "team_match.html"
+      ],
+      "all_JavaScript_ingredient_profile_catalog_vector_bytes_identical": true
+    },
+    {
+      "cohort": "rollout150",
+      "candidate_id": "9a8b832b61e19e79dde2422ac140ea7d2336369e09a7fd703b741003cd59fb7d",
+      "prior_candidate": "7efb0dfa5efe500622b07bf962e0ed4d044a1a2cc4ef7be89123fae364d97f81",
+      "files_verified": 130,
+      "changed_files": [
+        "data/search-v2-release.json",
+        "match_explorer.html",
+        "team_match.html"
+      ],
+      "all_JavaScript_ingredient_profile_catalog_vector_bytes_identical": true
+    },
+    {
+      "cohort": "rollout50",
+      "candidate_id": "b2e36ddcda4440921a4ad0bffb9384f0117d842e28ab77d198c84fdb9852fa8f",
+      "prior_candidate": "5bbaeb1ee10405a978305af25cc62815b02f636b68d30a1c6c255bd8d8f9ff03",
+      "files_verified": 130,
+      "changed_files": [
+        "data/search-v2-release.json",
+        "match_explorer.html",
+        "team_match.html"
+      ],
+      "all_JavaScript_ingredient_profile_catalog_vector_bytes_identical": true
+    }
+  ],
+  "reason": "Canonical LF asset hash references; prior measured JavaScript bodies already identical in Git archive",
+  "no_new_generation": true,
+  "published": false
+}

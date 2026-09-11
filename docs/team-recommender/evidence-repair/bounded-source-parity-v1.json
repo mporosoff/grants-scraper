@@ -1,0 +1,17 @@
+{
+  "clock": "2026-09-11T12:00:00Z",
+  "scopes": 269,
+  "profiles": 155,
+  "comparisons": 40920,
+  "disagreements": 0,
+  "skipped": [
+    "363179",
+    "359199",
+    "363736",
+    "363525",
+    "362489"
+  ],
+  "meaning": "Full score/evidence identity between the default full-catalog preparation and bounded source retention; not scientific quality.",
+  "provider_calls": 0,
+  "matcher_sha256": "75097ece390b8748d17106a1a4129ac7060de4c21dec08d5cdffcc9fdc4a3856"
+}

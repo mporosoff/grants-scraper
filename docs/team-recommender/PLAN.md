@@ -547,3 +547,23 @@ Repository references describe inspected contracts, not an instruction to restor
 - **R9 — Original MMR paper, Carbonell and Goldstein, CMU repository:** https://kilthub.cmu.edu/articles/journal_contribution/The_Use_of_MMR_and_Diversity-Based_Reranking_in_Document_Reranking_and_Summarization/6610814
 - **R10 — Official Codex project instructions:** https://developers.openai.com/codex/guides/agents-md
 - **R11 — Official Codex worktree documentation:** https://developers.openai.com/codex/app/worktrees
+
+
+## Post-audit corrective revalidation — September 11, 2026
+
+The owner authorized the attached post-audit plan and subsequently its single <=$2/60-attempt check within the same $10 ledger. See `post-audit/AUTHORITY.md`, `post-audit/execution-approval-v1.json` and `reports/post-audit-shared-matching-revalidation-report.md`. The complete 158-person audit is preserved, without a new audit or model campaign. Shared-team-v2 retains actual shared admission and adds bounded composition/performance corrections. The one new semantic check failed the original relevance, unrelated-member and useful-group targets; these failures must not be tuned away or described as acceptance. All 122 configured browser cases have passing evidence across the preserved initial run and focused corrections; independent review/CI status is in the completion receipt.
+
+The trusted PR224 and its narrowly reviewed purpose-guard correction PR226 are the only protected-main changes; both release planners selected no-op and caused no publication. Actual new cost is $0.337668/34 attempts; total $4.290655/629, zero outstanding, $5.709345/61 remain. No further calls or human items are authorized here. Original 50/150 ingredient bindings are assembled experimentally, yielding 1/11 groups respectively, without qualification or activation. Stop for the owner report; no Stage 4, deployment or automatic scientific development. Historical plan, audit and failure records remain intact.
+
+The canonical runtime checkpoint is `1d3cbf81963479d1fca2767ed532d155ffa56b21`; candidate-v3 and release-packages-v4 supersede the earlier engineering manifests without erasing them. All 14 affected canonical-browser rechecks pass and 39,835 score/evidence comparisons plus 257 complete option lists preserve shared-query semantics. Timing targets pass the declared finite desktop samples, but sampled additional heap reaches 80.04 MiB and FAILS the unchanged 48 MiB ceiling. Disposition 2: no release; functional passing checks do not override this resource failure or the scientific failures. No further paid check, retuning, new audit or automatic allocation-repair cycle begins at this boundary.
+
+Closeout: PR225 received clean exact-head verification at `67a34ef1706fbd72698e2cfcf4351a81fc0b2f28` after one consolidated remediation; required CI34616881475 passed. Its initial P1 generic-purpose authority finding was also corrected on protected main through PR226, merge `0611be2d1f29ab56ef71a9b13d98c57bd41176d1`, with clean exact-head review and CI. No new paid dispatch followed the completed 34-request check. `post-audit/completion-receipt-v1.json` and `post-audit/candidate-v4.json` are the current closeout identities. The experiment remains unmerged/unpublished. The task is complete with Disposition 2 (memory failure), plus failed scientific criteria; STOP FOR USER REVIEW.
+
+
+## Shared evidence mechanism repair — September 11, 2026
+
+The owner explicitly authorizes one bounded implementation and memory repair plus full final integrated browser validation under [evidence-repair/AUTHORITY.md](evidence-repair/AUTHORITY.md). This supersedes the prior stop only for this named work: zero paid requests, no profile/source enrichment, no new human items, no deployment or Stage 4. Preserve all prior failures; freeze the repaired rule before one diagnostic before/after comparison. Use the existing PR225 review process, without merging experimental runtime or data. Finish the report and stop; no automatic subsequent tuning.
+
+### Shared evidence repair decision checkpoint (2026-09-11)
+
+The single repaired rule is `shared-team-v3-evidence-repair`, integrated code `9e4cfee0ef5c551c779d0d71752a7a60aaa843d9`. See `reports/shared-evidence-mechanism-repair-report.md` and `evidence-repair/candidate-v1.json`. All old findings remain history. No source/profile edits or paid calls occurred. The parent still exceeds the unchanged memory/post-input limits; scientific usefulness is not qualified. Complete the authorized engineering/review closeout and STOP. No automatic next revision, paid check, new human items, deployment or Stage4 is authorized.

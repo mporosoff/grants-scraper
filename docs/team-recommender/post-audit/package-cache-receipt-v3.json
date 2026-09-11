@@ -1,0 +1,48 @@
+{
+  "version": 3,
+  "packages": [
+    {
+      "cohort": "legacy",
+      "candidate_id": "6067d1b7f69f2cfe54c2fdfdc78ddcd0658df9b4c51b081fe8457d7a62d1d81f",
+      "prior_candidate": "112ada2c4721bdbc95a350e364263ae80048dcbf6b21dada141b59c4908be5b1",
+      "changed_files": [
+        "assets/search-query.js",
+        "data/search-v2-release.json",
+        "match_explorer.html",
+        "team_match.html"
+      ],
+      "all_ingredient_profile_catalog_vector_bytes_identical": true,
+      "files_verified": 130
+    },
+    {
+      "cohort": "rollout150",
+      "candidate_id": "7efb0dfa5efe500622b07bf962e0ed4d044a1a2cc4ef7be89123fae364d97f81",
+      "prior_candidate": "45e0a4f390f85d4d68a6ea5945e6afe2a9891e3737c30152d9db48e242c4605d",
+      "changed_files": [
+        "assets/search-query.js",
+        "data/search-v2-release.json",
+        "match_explorer.html",
+        "team_match.html"
+      ],
+      "all_ingredient_profile_catalog_vector_bytes_identical": true,
+      "files_verified": 130
+    },
+    {
+      "cohort": "rollout50",
+      "candidate_id": "5bbaeb1ee10405a978305af25cc62815b02f636b68d30a1c6c255bd8d8f9ff03",
+      "prior_candidate": "813a188de9fd042a83d22d563f2e5236db670504b829d0c1b1ae40b34d66e8f3",
+      "changed_files": [
+        "assets/search-query.js",
+        "data/search-v2-release.json",
+        "match_explorer.html",
+        "team_match.html"
+      ],
+      "all_ingredient_profile_catalog_vector_bytes_identical": true,
+      "files_verified": 130
+    }
+  ],
+  "parity": "query-cache-parity-v3.json",
+  "source_or_provider_regeneration": false,
+  "scientific_rules_changed": false,
+  "published": false
+}

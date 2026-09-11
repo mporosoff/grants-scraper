@@ -1,0 +1,56 @@
+{
+  "packages": {
+    "legacy": {
+      "index_path": "docs/team-recommender/evidence-repair/legacy-index.json",
+      "generation": "742cdf4035e03b7b7db2ebe827162789ebe0da21e3461bdae50a861916c8cc94",
+      "packet": {
+        "path": "data/team_ingredients/shared-742cdf4035e03b7b7db2ebe827162789ebe0da21e3461bdae50a861916c8cc94.json",
+        "bytes": 29522,
+        "sha256": "742cdf4035e03b7b7db2ebe827162789ebe0da21e3461bdae50a861916c8cc94"
+      },
+      "scopes": 106,
+      "previous_generation": "123c37c199fb0dd91377cd687d2c2e481242dc56b3791eb2c1e59bc89e8b4869",
+      "scope_changes": 0
+    },
+    "rollout50": {
+      "index_path": "docs/team-recommender/evidence-repair/rollout50-index.json",
+      "generation": "79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92",
+      "packet": {
+        "path": "data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json",
+        "bytes": 15984,
+        "sha256": "79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92"
+      },
+      "scopes": 50,
+      "previous_generation": "170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+      "scope_changes": 0
+    },
+    "rollout150": {
+      "index_path": "docs/team-recommender/evidence-repair/rollout150-index.json",
+      "generation": "54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6",
+      "packet": {
+        "path": "data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+        "bytes": 34003,
+        "sha256": "54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+      },
+      "scopes": 150,
+      "previous_generation": "7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+      "scope_changes": 0
+    },
+    "semantic": {
+      "index_path": "docs/team-recommender/evidence-repair/semantic-index.json",
+      "generation": "99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2",
+      "packet": {
+        "path": "data/team_ingredients/shared-99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2.json",
+        "bytes": 11944,
+        "sha256": "99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2"
+      },
+      "scopes": 26,
+      "previous_generation": "85dd6b5ecdb17a3ba5af0f2cab637f1ec5805aac020cd84b51a4d064f9ea406a",
+      "scope_changes": 0
+    }
+  },
+  "source_reservation_changes": 0,
+  "profile_changes": 0,
+  "provider_calls": 0,
+  "teams_calculated": 0
+}

@@ -57,14 +57,23 @@
   ],
   "package": [
     "data/search-v2-release.json",
-    "workers/search-voyage-proxy/generated/corpus-allowlist.json"
+    "workers/search-voyage-proxy/generated/corpus-allowlist.json",
+    "data/team_ingredients/shared-*.json"
   ],
   "runtime": [
     "*.html",
     ".nojekyll",
     "assets/**/*",
     "workers/search-voyage-proxy/src/**/*",
-    "workers/search-voyage-proxy/wrangler.jsonc"
+    "workers/search-voyage-proxy/wrangler.jsonc",
+    "workers/award-api/src/adapters/dod.js",
+    "workers/award-api/src/institutions.js",
+    "workers/award-api/src/ror.js",
+    "workers/award-api/src/snapshot.js",
+    "workers/award-api/src/http.js",
+    "workers/award-api/src/contract.js",
+    "workers/award-api/src/year-filter.js",
+    "config/award_institutions.json"
   ],
   "worker": [
     "workers/search-voyage-proxy/src/**/*",
@@ -168,7 +177,15 @@
         "assets/**/*",
         "workers/search-voyage-proxy/src/**/*",
         "workers/search-voyage-proxy/wrangler.jsonc",
-        "tools/build_search_release_package.mjs"
+        "tools/build_search_release_package.mjs",
+        "workers/award-api/src/adapters/dod.js",
+        "workers/award-api/src/institutions.js",
+        "workers/award-api/src/ror.js",
+        "workers/award-api/src/snapshot.js",
+        "workers/award-api/src/http.js",
+        "workers/award-api/src/contract.js",
+        "workers/award-api/src/year-filter.js",
+        "config/award_institutions.json"
       ],
       "excluded": []
     },
