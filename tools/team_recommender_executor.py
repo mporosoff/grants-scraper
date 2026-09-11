@@ -30,6 +30,8 @@ PREFIX = AUTHORIZATION_ID
 PACKET_LIMIT = 8 * 1024 * 1024
 STATE_LIMIT = 128 * 1024 * 1024
 PURPOSES = {"source": 90, "individual": 90, "group": 90, "control": 30, "explanation": 30, "order-swap": 10}
+# A later paid envelope never grants the legacy packet format new authority.
+GENERIC_JUDGE_PURPOSES = frozenset(PURPOSES)
 PURPOSES.update({"d1-source":12,"d1-call":130,"d1-aspect":20,"d1-group":40,
                  "d1-comparison":40,"d1-explanation":12,"d1-control":30,"d1-swap":4})
 PURPOSES.update({"d2-call":80,"d2-group":70,"d2-comparison":20,"d2-explanation":6,"d2-swap":4})
@@ -149,7 +151,7 @@ def judge_contract(request, settings):
         from tools.team_recommender_judge_d1 import contract
         return contract(request, settings)
     exact_keys(request, ["scope_id", "purpose", "source_evidence", "items"])
-    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in PURPOSES or request["purpose"].startswith(("d1-", "d2-", "d3-")):
+    if request["scope_id"] not in settings["development_ids"] or request["purpose"] not in GENERIC_JUDGE_PURPOSES:
         raise ValueError("judge_outside_development_authority")
     if request["source_evidence"]["scope_id"] != request["scope_id"]:
         raise ValueError("source_scope_mismatch")

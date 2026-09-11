@@ -70,6 +70,25 @@ class PostAuditContract(unittest.TestCase):
             with self.assertRaises(Deferred):e.execute(self.state,path,h,post)
         self.assertEqual(len(calls),1)
 
+    def test_generic_packets_cannot_claim_versioned_or_future_paid_purposes(self):
+        original = (self.state/'ledger.json').read_bytes()
+        with patch.dict(e.PURPOSES, {'future-approved-envelope': 1}):
+            for purpose in sorted(set(e.PURPOSES) - e.GENERIC_JUDGE_PURPOSES):
+                with self.subTest(purpose=purpose):
+                    request = fixtures.ExecutorContract.judge(self)
+                    request['purpose'] = purpose
+                    packet = {'schema_version':1, 'authorization_id':e.AUTHORIZATION_ID,
+                        'registry_generation':self.settings['registry_generation'],
+                        'operation':'development-judge', 'requests':[request]}
+                    raw = json.dumps(packet).encode()
+                    path = self.root/'generic-purpose.json'; path.write_bytes(raw)
+                    with self.assertRaisesRegex(ValueError, 'judge_outside_development_authority'):
+                        e.execute(self.state,path,e.sha(raw),lambda *a,**k:self.fail('rejected purpose dispatched'))
+                    self.assertEqual((self.state/'ledger.json').read_bytes(),original)
+        # Legacy questions keep their original contract and exact cache identity.
+        request = fixtures.ExecutorContract.judge(self)
+        self.assertEqual(e.judge_contract(request,self.settings)[0]['model'],'claude-sonnet-5')
+
     def test_atomic_post_budget_preserves_global_history_and_bounds(self):
         ledger=b.ExperimentLedger(self.state/'ledger.json');original=ledger.read()
         def reserve():return ledger.reserve_experiment('anthropic','claude-sonnet-5',2,'new',65120,1,
