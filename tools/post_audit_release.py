@@ -37,6 +37,6 @@ def main():
     else:os.environ[k]=v
   assert selected['packet']['path'] in built['files']
   result[cohort]={'candidate_id':built['candidate_id'],'assembly_sha':sha,'bundle':str(bundle).replace('\\','/'),'files':len(built['files']),'scope_generation':index['generation_id'],'scopes':len(index['scopes']),'activated':False,'new_generation_calls':0}
- c.write_json(ROOT/f'docs/team-recommender/post-audit/release-packages-v{args.version}.json',{'version':'post-audit-local-assembly-v1','assembly_sha':sha,'packages':result,'provenance':'No new source/profile/embedding generation. Exact committed corrected registry and retained source/vector bytes; cohort index and HTML dependency metadata assembled locally. No branch is checked out in the validation copies.','published':False})
+ c.write_json(ROOT/f'docs/team-recommender/post-audit/release-packages-v{args.version}.json',{'version':f'post-audit-local-assembly-v{args.version}','assembly_sha':sha,'packages':result,'provenance':'No new source/profile/embedding generation. Exact committed corrected registry and retained source/vector bytes; cohort index and HTML dependency metadata assembled locally. No branch is checked out in the validation copies.','published':False})
  print(json.dumps(result,indent=2))
 if __name__=='__main__':main()

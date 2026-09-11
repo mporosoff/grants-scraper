@@ -280,37 +280,26 @@
       .filter(word => word.length > 1 && !STOP_WORDS.has(word));
   }
 
-  function acronymSentences(value) {
-    return normalizeText(value).slice(0, MAX_ACRONYM_SOURCE_CHARS)
-      .split(/[.!?;:\n\r]+/).map(sentence => {
-        const words = acronymWords(sentence);
-        return { words, initials: words.map(word => word[0]).join("") };
-      });
-  }
-
-  function scanAcronymSentences(sentences, acronym) {
-    const letters = String(acronym || "").toLowerCase().replace(/[^a-z]/g, "");
-    if (letters.length < 3 || letters.length > MAX_ACRONYM_LENGTH) return [];
-    const phrases = new Map();
-    for (const {words, initials} of sentences) {
-      // Identical consecutive initials are the old window predicate. Searching
-      // that string avoids allocating/testing every nonmatching word window.
-      for (let start = initials.indexOf(letters); start >= 0; start = initials.indexOf(letters, start + 1)) {
-        const window = words.slice(start, start + letters.length);
-        if (window.filter(word => word.length >= 4).length < 2) continue;
-        const phrase = window.join(" ");
-        const entry = phrases.get(phrase) || { phrase, words: window, occurrences: 0 };
-        entry.occurrences += 1;
-        phrases.set(phrase, entry);
-      }
-    }
-    return [...phrases.values()];
-  }
-
   function scanAcronymPhrases(value, acronym) {
     const letters = String(acronym || "").toLowerCase().replace(/[^a-z]/g, "");
     if (letters.length < 3 || letters.length > MAX_ACRONYM_LENGTH) return [];
-    return scanAcronymSentences(acronymSentences(value), acronym);
+    const phrases = new Map();
+    normalizeText(value).slice(0, MAX_ACRONYM_SOURCE_CHARS)
+      .split(/[.!?;:\n\r]+/)
+      .forEach(sentence => {
+        const words = acronymWords(sentence);
+        if (words.length < letters.length) return;
+        for (let start = 0; start + letters.length <= words.length; start += 1) {
+          const window = words.slice(start, start + letters.length);
+          if (window.some((word, index) => word[0] !== letters[index])) continue;
+          if (window.filter(word => word.length >= 4).length < 2) continue;
+          const phrase = window.join(" ");
+          const entry = phrases.get(phrase) || { phrase, words: window, occurrences: 0 };
+          entry.occurrences += 1;
+          phrases.set(phrase, entry);
+        }
+      });
+    return [...phrases.values()];
   }
 
   function acronymSourceText(record) {
@@ -326,7 +315,6 @@
   function createAcronymResolver(records = []) {
     const catalog = Array.isArray(records) ? records : [];
     const candidateCache = new Map();
-    const sourceCache = [];
 
     function catalogCandidates(acronym) {
       if (candidateCache.has(acronym)) return candidateCache.get(acronym);
@@ -335,14 +323,7 @@
       catalog.forEach((record, documentId) => {
         const source = acronymSourceText(record);
         const perDocument = new Set();
-        // Reuse only identical source text within this resolver. New catalog
-        // representations get a new resolver; changed rows replace this entry.
-        let prepared = sourceCache[documentId];
-        if (!prepared || prepared.source !== source) {
-          prepared = {source, sentences: acronymSentences(source)};
-          sourceCache[documentId] = prepared;
-        }
-        scanAcronymSentences(prepared.sentences, acronym).forEach(item => {
+        scanAcronymPhrases(source, acronym).forEach(item => {
           const entry = candidates.get(item.phrase) || {
             phrase: item.phrase,
             words: item.words,

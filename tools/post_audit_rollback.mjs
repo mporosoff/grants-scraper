@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from '@playwright/test';
-const current=JSON.parse(fs.readFileSync('docs/team-recommender/post-audit/release-packages-v2.json')).packages.rollout50;
+const current=JSON.parse(fs.readFileSync('docs/team-recommender/post-audit/release-packages-v3.json')).packages.rollout50;
 const browser=await chromium.launch({headless:true});
 const context=await browser.newContext(),page=await context.newPage(),network=[],observations=[];
 let phase='';
@@ -28,7 +28,7 @@ assert.notEqual(observations[0].registry_generation,observations[1].registry_gen
 assert.equal(observations[1].shared_runtime,'undefined');
 assert.equal(network.filter(r=>!r.url.startsWith('http://127.0.0.1:8771/')).length,0);
 await browser.close();
-fs.writeFileSync('docs/team-recommender/post-audit/rollback-browser-v1.json',JSON.stringify({
+fs.writeFileSync('docs/team-recommender/post-audit/rollback-browser-v2.json',JSON.stringify({
  version:'post-audit-whole-package-rollback-v1',old_candidate:'5927df0f5835c5a06df60d6bedea9667c9aec76994174452e01fa15a2e1642f0',
  new_candidate:current.candidate_id,
  production_mutated:false,new_provider_requests:0,observations,network,

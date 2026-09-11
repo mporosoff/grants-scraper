@@ -46,8 +46,8 @@
     "data/opportunity_teams.js": "633f6fac27edc9b07f80404761d5ed0b934c04b055a8d280d1d73854b0bbfd9c",
     "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
     "data/researcher_registry_manifest.json": "9ad4638c5a9114c8331db47a672b217427c8a488d66155137c638ae132f218d3",
-    "match_explorer.html": "889da9b6c8ecc297c60fda10763b9feaea673f8e69034efdbbe6b1a2f2e6dff3",
-    "team_match.html": "d6ecaaf451fd1c68dbceb8376da4bf52c75d748e74b880a5e10ec9d5474162d1",
+    "match_explorer.html": "3d03f99682f4c4912b10befb0c29e20f000e3a2b227a862dd0bced7d6a589a4b",
+    "team_match.html": "00b7af42068aa895dcd3ab8fd02aca7c6e531bb0b55b60f31699564afa3288c3",
     "workers/search-voyage-proxy/src/index.js": "bad06e8dd15e58355b274d7b35844097dd8c19fb9517905418c631fd2e56cf2e",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },
