@@ -29,7 +29,8 @@ def digest(value):
 
 
 def is_d3(request):
-    return str(request.get('representation', '')).startswith('D3-')
+    # Stage 3 retains the exact standard E2 endpoint/role/preprocessing space.
+    return str(request.get('representation', '')).startswith('D3-') or request.get('representation') == 'S3-E2-query-v1'
 
 
 def profiles(settings):

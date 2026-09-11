@@ -5162,5 +5162,6 @@
     ]
   },
   "judge_d1_sha256": "713055f257e51c500d931f83eacb380593b99ad4f94f1924f79f6a097fad01f8",
-  "profile_fields_d1_sha256": "52a45de259acfb6fb89243e2bef11674d2c394afd35923f748458988181d0ffa"
+  "profile_fields_d1_sha256": "52a45de259acfb6fb89243e2bef11674d2c394afd35923f748458988181d0ffa",
+  "stage3_inputs_sha256": "baefc5461e1a50354ec9fc2bfe34ec12e8d00d591715f0845ae2ddffc2b11472"
 }
