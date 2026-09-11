@@ -1,0 +1,1066 @@
+{
+  "schema_version": 3,
+  "generation_id": "54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6",
+  "scope_count": 150,
+  "scopes": [
+    {
+      "id": "359696",
+      "parent_id": "359696",
+      "record_type": "specific_parent",
+      "scope_label": "Transformative Non-Invasive/Minimally Invasive Technologies for Imaging the Olfactory System Across Scales (R01 CT Optional)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362551",
+      "parent_id": "362551",
+      "record_type": "specific_parent",
+      "scope_label": "NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360205",
+      "parent_id": "360205",
+      "record_type": "specific_parent",
+      "scope_label": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362178",
+      "parent_id": "362178",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Alzheimer’s Transforming Care Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360946",
+      "parent_id": "360946",
+      "record_type": "specific_parent",
+      "scope_label": "Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363141",
+      "parent_id": "363141",
+      "record_type": "specific_parent",
+      "scope_label": "Preventing Suicide and Interpersonal Violence Among Youth and Young Adults",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "342747",
+      "parent_id": "342747",
+      "record_type": "specific_parent",
+      "scope_label": "NSF Astronomy and Astrophysics Postdoctoral Fellowships",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363736",
+      "parent_id": "363736",
+      "record_type": "specific_parent",
+      "scope_label": "Countering CCP Influence in Panama's Unviersities",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363818",
+      "parent_id": "363818",
+      "record_type": "specific_parent",
+      "scope_label": "Science, Technology, Engineering, and Mathematics Fields",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "357609",
+      "parent_id": "357609",
+      "record_type": "specific_parent",
+      "scope_label": "Chemical Evolution of the Solid Earth and Volcanology",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363102",
+      "parent_id": "363102",
+      "record_type": "specific_parent",
+      "scope_label": "U.S Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP) Regional Fire Science Exchange Announcement",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362529",
+      "parent_id": "362529",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Autism Career Development Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363281",
+      "parent_id": "363281",
+      "record_type": "specific_parent",
+      "scope_label": "Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362197",
+      "parent_id": "362197",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Idea Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "359236",
+      "parent_id": "359236",
+      "record_type": "specific_parent",
+      "scope_label": "Staff Research Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "339594",
+      "parent_id": "339594",
+      "record_type": "specific_parent",
+      "scope_label": "Faculty Early Career Development Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363455",
+      "parent_id": "363455",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Reconstructive Transplant, Investigator-Initiated Research Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "328573",
+      "parent_id": "328573",
+      "record_type": "specific_parent",
+      "scope_label": "Mathematical Sciences Infrastructure Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "348164",
+      "parent_id": "348164",
+      "record_type": "specific_parent",
+      "scope_label": "Economics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362848",
+      "parent_id": "362848",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Duchenne Muscular Dystrophy, Idea Development Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362315",
+      "parent_id": "362315",
+      "record_type": "specific_parent",
+      "scope_label": "Intervention Research to Improve Native American Health",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "nasa-roses:25-D.3E-1c60503f9d",
+      "parent_id": "nasa-roses:25-D.3E-1c60503f9d",
+      "record_type": "specific_parent",
+      "scope_label": "ROSES25: D.3E IXPE Cycle 4 and NICER Cycle 9 General Observer",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "332894",
+      "parent_id": "332894",
+      "record_type": "specific_parent",
+      "scope_label": "LPS Qubit Collaboratory (LQC)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363055",
+      "parent_id": "363055",
+      "record_type": "specific_parent",
+      "scope_label": "CDC National Centers of Excellence in Youth Violence Prevention (YVPCs): Rigorous Evaluation of Prevention Approaches to Prevent and Reduce Youth Violence",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360698",
+      "parent_id": "360698",
+      "record_type": "specific_parent",
+      "scope_label": "Biological Technologies",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363612",
+      "parent_id": "363612",
+      "record_type": "specific_parent",
+      "scope_label": "MPS Mathematical Sciences Research Programs (MPS MathSci)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362180",
+      "parent_id": "362180",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Alzheimer’s Transforming Research Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362186",
+      "parent_id": "362186",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Vision, Translational Research Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362209",
+      "parent_id": "362209",
+      "record_type": "specific_parent",
+      "scope_label": "DoW, Ovarian Cancer, Pilot Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "361322",
+      "parent_id": "361322",
+      "record_type": "specific_parent",
+      "scope_label": "Collaborative Program Grant for Multidisciplinary Teams",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "darpa-iarpa:darpa-darpapa260202",
+      "parent_id": "darpa-iarpa:darpa-darpapa260202",
+      "record_type": "specific_parent",
+      "scope_label": "QBIT Stage A",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "334972",
+      "parent_id": "334972",
+      "record_type": "specific_parent",
+      "scope_label": "Commercial Fishing Occupational Safety Training Project Grants (T03)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "361876",
+      "parent_id": "361876",
+      "record_type": "specific_parent",
+      "scope_label": "Specialty Crop Multi-State Grant Program 2026",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363796",
+      "parent_id": "363796",
+      "record_type": "specific_parent",
+      "scope_label": "1890 Institution Teaching, Research, and Extension Capacity Building Grants Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363613",
+      "parent_id": "363613",
+      "record_type": "specific_parent",
+      "scope_label": "Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "334971",
+      "parent_id": "334971",
+      "record_type": "specific_parent",
+      "scope_label": "Commercial Fishing Occupational Safety Research Cooperative Agreement (U01)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "357018",
+      "parent_id": "357018",
+      "record_type": "specific_parent",
+      "scope_label": "Academic-Industrial Partnerships (AIP) to Translate and Validate In Vivo Imaging Systems (R01 Clinical Trial Optional)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363636",
+      "parent_id": "363636",
+      "record_type": "specific_parent",
+      "scope_label": "BJA FY 2026 Comprehensive Opioid, Stimulant, and Substance Use Site-Based Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "darpa-iarpa:darpa-darpapa260201",
+      "parent_id": "darpa-iarpa:darpa-darpapa260201",
+      "record_type": "specific_parent",
+      "scope_label": "QBI Topic: Independent Verification and Validation",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363374",
+      "parent_id": "363374",
+      "record_type": "specific_parent",
+      "scope_label": "Fiscal Year 2027 Defense University Research Instrumentation Program (DURIP)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363559",
+      "parent_id": "363559",
+      "record_type": "specific_parent",
+      "scope_label": "Food and Agricultural Sciences National Needs Graduate and Postgraduate Fellowships",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "340828",
+      "parent_id": "340828",
+      "record_type": "specific_parent",
+      "scope_label": "Joint DMS/NIGMS Initiative to Support Research at the Interface of the Biological and Mathematical Sciences",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "349724",
+      "parent_id": "349724",
+      "record_type": "specific_parent",
+      "scope_label": "Arctic Research Opportunities",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362393",
+      "parent_id": "362393",
+      "record_type": "specific_parent",
+      "scope_label": "NASA Innovative Advanced Concepts (NIAC) Phase II",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360644",
+      "parent_id": "360644",
+      "record_type": "specific_parent",
+      "scope_label": "Autism Centers of Excellence P50",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "356612",
+      "parent_id": "356612",
+      "record_type": "specific_parent",
+      "scope_label": "Fundamental Research to Counter Weapons of Mass Destruction",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "355100",
+      "parent_id": "355100",
+      "record_type": "specific_parent",
+      "scope_label": "Advanced Technological Education",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363015",
+      "parent_id": "363015",
+      "record_type": "specific_parent",
+      "scope_label": "Diaper Distribution Demonstration Research Pilot (DDDRP)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363525",
+      "parent_id": "363525",
+      "record_type": "specific_parent",
+      "scope_label": "Scholarships for Students at 1890 Institutions (1890 Scholarships)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "358403",
+      "parent_id": "358403",
+      "record_type": "specific_parent",
+      "scope_label": "Facilitating Research at Predominantly Undergraduate Institutions:",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "358830",
+      "parent_id": "358830",
+      "record_type": "specific_parent",
+      "scope_label": "Ruth L. Kirschstein National Research Service Award (NRSA) Individual Postdoctoral Fellowship (Parent F32)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590",
+      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590",
+      "record_type": "specific_parent",
+      "scope_label": "Engineering Research Initiation (ERI)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "356978",
+      "parent_id": "356978",
+      "record_type": "specific_parent",
+      "scope_label": "Cancer Prevention and Control Clinical Trials Planning Grant Program (U34 Clinical Trials Optional)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363655",
+      "parent_id": "363655",
+      "record_type": "specific_parent",
+      "scope_label": "OVC FY 2026 Enhanced Collaborative Model (ECM) Task Force to Combat Human Trafficking",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "darpa-iarpa:darpa-darpapa250704",
+      "parent_id": "darpa-iarpa:darpa-darpapa250704",
+      "record_type": "specific_parent",
+      "scope_label": "Resilient",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362575",
+      "parent_id": "362575",
+      "record_type": "specific_parent",
+      "scope_label": "Single Source: Resource Center for the Support for Research Excellence (SuRE) Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362607",
+      "parent_id": "362607",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Reconstructive Transplant, Concept Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "355196",
+      "parent_id": "355196",
+      "record_type": "specific_parent",
+      "scope_label": "NSF National Quantum Virtual Laboratory - Quantum Testbeds",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363287",
+      "parent_id": "363287",
+      "record_type": "specific_parent",
+      "scope_label": "International Programs & Trade, Invasive Species Program Funding Opportunity",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363569",
+      "parent_id": "363569",
+      "record_type": "specific_parent",
+      "scope_label": "Mentored Career Transition Award (KT1/R00)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360633",
+      "parent_id": "360633",
+      "record_type": "specific_parent",
+      "scope_label": "IDeA Networks of Biomedical Research Excellence (INBRE)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362240",
+      "parent_id": "362240",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Melanoma Research Program Idea Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "39841",
+      "parent_id": "39841",
+      "record_type": "specific_parent",
+      "scope_label": "Joint Center of Excellence for Advanced Materials Research",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363292",
+      "parent_id": "363292",
+      "record_type": "specific_parent",
+      "scope_label": "NIOSH Robotics and Intelligent Mining Technology and Workplace Safety Research (U60)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "354573",
+      "parent_id": "354573",
+      "record_type": "specific_parent",
+      "scope_label": "Minor Use Minor Species Development of Drugs (R01)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "351923",
+      "parent_id": "351923",
+      "record_type": "specific_parent",
+      "scope_label": "EPSCoR Research Infrastructure Improvement (RII): EPSCoR Research Fellows",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360954",
+      "parent_id": "360954",
+      "record_type": "specific_parent",
+      "scope_label": "Space Technology Research, Development, Demonstration, and Infusion (SpaceTech REDDI-2026)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360258",
+      "parent_id": "360258",
+      "record_type": "specific_parent",
+      "scope_label": "Continuing Human Enabling Enhancing Restoring and Sustaining",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "359946",
+      "parent_id": "359946",
+      "record_type": "specific_parent",
+      "scope_label": "NIDCR Prospective Observational or Biomarker Validation Study Cooperative Agreement (U01 Clinical Trial Not Allowed)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "nasa-roses:25-D.9-d22059cf9f",
+      "parent_id": "nasa-roses:25-D.9-d22059cf9f",
+      "record_type": "specific_parent",
+      "scope_label": "ROSES25: D.9 Habitable Worlds Observatory Instrument Concept Assessments",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363526",
+      "parent_id": "363526",
+      "record_type": "specific_parent",
+      "scope_label": "FY26 DEFENSE ESTABLISHED PROGRAM TO STIMULATE COMPETITIVE RESEARCH (DEPSCoR) – RESEARCH COLLABORATION (RC)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360182",
+      "parent_id": "360182",
+      "record_type": "specific_parent",
+      "scope_label": "Retail Food Safety Regulatory Association Collaboration",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363514",
+      "parent_id": "363514",
+      "record_type": "specific_parent",
+      "scope_label": "Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363241",
+      "parent_id": "363241",
+      "record_type": "specific_parent",
+      "scope_label": "ROSES25: A.15 Biosphere",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363372",
+      "parent_id": "363372",
+      "record_type": "specific_parent",
+      "scope_label": "FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "360380",
+      "parent_id": "360380",
+      "record_type": "specific_parent",
+      "scope_label": "Establishing a Center for the Advancement of Substance Use Disorder (SUD) Pharmacotherapeutics through Training and Preclinical Support (U54 Clinical Trial Not Allowed)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363679",
+      "parent_id": "363679",
+      "record_type": "specific_parent",
+      "scope_label": "Translational Research in Maternal and Pediatric Pharmacology and Therapeutics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "343980",
+      "parent_id": "343980",
+      "record_type": "specific_parent",
+      "scope_label": "SBE Postdoctoral Research Fellowships",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362196",
+      "parent_id": "362196",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Development Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "353413",
+      "parent_id": "353413",
+      "record_type": "specific_parent",
+      "scope_label": "IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363699",
+      "parent_id": "363699",
+      "record_type": "specific_parent",
+      "scope_label": "F26AS00105 National Fish Passage Program",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362179",
+      "parent_id": "362179",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Alzheimer’s Transforming Diagnosis Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "359669",
+      "parent_id": "359669",
+      "record_type": "specific_parent",
+      "scope_label": "SBIR/STTR Commercialization Readiness Pilot (CRP) Program (Parent SB1 Clinical Trial Optional)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362254",
+      "parent_id": "362254",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Military Burn, Discovery Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363783",
+      "parent_id": "363783",
+      "record_type": "specific_parent",
+      "scope_label": "NIOSH Mentored Research Scientist Development Award (K01)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344715",
+      "parent_id": "344715",
+      "record_type": "specific_parent",
+      "scope_label": "Oceanographic Facilities and Equipment Support",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363617",
+      "parent_id": "363617",
+      "record_type": "specific_parent",
+      "scope_label": "MPS Chemistry Research Programs (MPS Chem)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "243973",
+      "parent_id": "243973",
+      "record_type": "specific_parent",
+      "scope_label": "Center of Excellence for Alternative Jet Fuels and Environment",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362207",
+      "parent_id": "362207",
+      "record_type": "specific_parent",
+      "scope_label": "DoW, Ovarian Cancer, Ovarian Cancer Clinical Trial Academy – Early-Career Investigator Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "363570",
+      "parent_id": "363570",
+      "record_type": "specific_parent",
+      "scope_label": "Mentored Research Scientist Career Development Award (KR1)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362489",
+      "parent_id": "362489",
+      "record_type": "specific_parent",
+      "scope_label": "Austrian-American Partnership Fund (AAPF)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362025",
+      "parent_id": "362025",
+      "record_type": "specific_parent",
+      "scope_label": "A Holistic Approach to Study Non-Addictive Natural Products for Pain Management",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "358882",
+      "parent_id": "358882",
+      "record_type": "specific_parent",
+      "scope_label": "Science of Science: Discovery, Communication and Impact",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "357554",
+      "parent_id": "357554",
+      "record_type": "specific_parent",
+      "scope_label": "Security, Privacy, and Trust in Cyberspace",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362313",
+      "parent_id": "362313",
+      "record_type": "specific_parent",
+      "scope_label": "NIH Blueprint Initiative: Tools for Germline Gene Editing in the Nervous System",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "362222",
+      "parent_id": "362222",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Spinal Cord Injury, Translational Research Award",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "354269",
+      "parent_id": "354269",
+      "record_type": "specific_parent",
+      "scope_label": "EPSCoR Research Infrastructure Improvement Program: Focused EPSCoR Collaborations Program (FEC)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+      "record_type": "specific_parent",
+      "scope_label": "Joint DMS/NIGMS Initiative to Support Research at the Interface of the Biological and Mathematical Sciences (DMS/NIGMS)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "352339",
+      "parent_id": "352339",
+      "record_type": "specific_parent",
+      "scope_label": "Established Program to Stimulate Competitive Research (EPSCoR): Workshop Opportunities",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "325932",
+      "parent_id": "325932",
+      "record_type": "specific_parent",
+      "scope_label": "UNITED STATES MILITARY ACADEMY Broad Agency Announcement",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-001",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Methodologies and Techniques to Analyze Assistive Automation (AA) & Artificial Intelligence (AI) enabled systems",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0009",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Modern Optics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0048",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Neuroscience and Neurotechnology",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-004",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Analytical Methodology for Future Army Systems Enabled by Quantum Technology (Quantum)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-026",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Support to TDAC Research Competencies",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0060",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "High Voltage/High Frequency Power Switching Devices",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0016",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Neurophysiology of Cognition",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-003",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "The Science and Analysis of Systems of Systems (SOS)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0005",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Biogeochemistry",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "361526:c-18",
+      "parent_id": "361526",
+      "record_type": "publishable_child",
+      "scope_label": "Neuro-Symbolic Agents for Code Development",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-002",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Scientific Understanding and Analytical Methodology for Multi-Domain Operations (MDO)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0035",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Genetics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-017",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Sustainment Performance and Mission Success Impacts",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0015",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Wireless Communications Networks",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-005",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Artillery - Hypersonics Data and Analysis",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0020",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Modeling of Complex Systems",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-020",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Using Machine Learning and Open Source Big Data Platforms to Enable Prognostics and Predictive Maintenance",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0011",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Solid Mechanics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "345241:tdac-baa-012",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Human Systems Integration (HSI) Modeling and Analysis",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0017",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Biochemistry",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0045",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Networking Structure, Dynamics, and Protocols",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0026",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Social and Cognitive Networks",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0076",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Electric- and Magnetic-Field Sensor Technology",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "361526:f-18",
+      "parent_id": "361526",
+      "record_type": "publishable_child",
+      "scope_label": "Multi-Modal Data Integration for Code Intelligence",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0006",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Microbiology",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0034",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Computational Mathematics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0041",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Computational Modeling of Complex Physical Systems",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0083",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Tactical Heterogeneous Sensing in Complex Environments, Aerosols, and Impacts",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0029",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Solid State Physics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0078",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Invisible Materials Research in support of the Sciences of Extreme Materials Competency",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0097",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Ballistic Science Research",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0065",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Platform Design and Control",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0010",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Information Assurance",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0025",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Electrochemistry",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "361526:e-18",
+      "parent_id": "361526",
+      "record_type": "publishable_child",
+      "scope_label": "Trustworthy AI for Scientific Software",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0101",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Computational Modeling of Aviation Systems",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0038",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Artificial Intelligence and Machine Learning with Extremely Sparse Data",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "361526:g-18",
+      "parent_id": "361526",
+      "record_type": "publishable_child",
+      "scope_label": "Partnerships for HPC AI Advancement",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0058",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Electromechanical and magnetomechanical power conversion (INACTIVE)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0070",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Support to ARL Foundation Research Competencies",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0053",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Novel Solid State Lasers and Laser Materials",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0027",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Electronic Sensing",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0021",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Biomathematics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0037",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Artificial Intelligence and Machine Learning-Enabling Technologies for Expeditionary Maneuver and Air/Ground Reconnaissance",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0051",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Quantum Information Science and Positioning, Navigation, and Timing (QIS-PNT)",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0071",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Support to ARL Foundation Research Competencies",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0002",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Polymer Chemistry",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0019",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Optoelectronics",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0067",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Reactive Chemical Systems",
+      "engine": "shared-team-v3"
+    },
+    {
+      "id": "344592:ab-0023",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Quantum Information Science",
+      "engine": "shared-team-v3"
+    }
+  ],
+  "shared": {
+    "path": "data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+    "bytes": 34003,
+    "sha256": "54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+  },
+  "runtime": {
+    "matcher": "63b71195cc2b53168c2bec9646aed1c7d3c46ef1d4e8be8da0e572890c8b53d9",
+    "shared": "9d2841cef749a686d43d1790160ca2955e4ac2f91547e3840d82c99ea14e7a1d"
+  }
+}

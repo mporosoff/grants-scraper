@@ -25,6 +25,357 @@
   const SEPARATION_NON_RESEARCH_RE = /\b(?:workshops?|training|advocacy|policy recommendations?|public diplomacy|commercial diplomacy|participants?|investment forums?)\b/i;
   const INCIDENTAL_ALIGNMENT_RE = /\b(?:aligns? with|consistent with|administration priorit(?:y|ies)|executive orders?|\bEO\s+\d)/i;
 
+    function authoritativeDocumentScopeFacts(record) {
+      const facts = record?.document_evidence?.facts || [];
+      return facts.filter(fact => fact?.type === "review_criteria").map(fact => ({
+        id: String(fact.id || ""),
+        type: String(fact.type || ""),
+        value: [
+          typeof fact.value === "string" ? fact.value : "",
+          fact.citation?.quote || "",
+        ].filter(Boolean).join(" "),
+        citationUrl: String(fact.citation?.citation_url || fact.citation?.document_url || ""),
+        documentName: String(fact.citation?.document_name || ""),
+        location: String(fact.citation?.location || ""),
+      })).filter(fact => fact.value);
+    }
+    function fieldsForRecord(record, authoritativeDocumentScope, searchV2 = false) {
+      const child = Boolean(record.subtopic_id);
+      const authoritativeDocumentScopeText = authoritativeDocumentScope
+        .map(fact => fact.value).join(" ");
+      return child
+        ? [
+            ["child_title", record.title || "", true],
+            ["child_summary", record.description || record.summary || "", true],
+            ["authoritative_program_area", (
+              record.program_area_labels || record.document_program_areas || []
+            ).join(" "), true],
+            ["child_topic", (record.topic_areas || []).join(" "), false],
+          ]
+        : [
+            ["parent_title", record.title || "", true],
+            ["parent_description", record.description || "", true],
+            ["authoritative_program_area", (
+              record.program_area_labels || record.document_program_areas || []
+            ).join(" "), true],
+            ["authoritative_document_scope", authoritativeDocumentScopeText, true],
+            ["citation_source_evidence", record.document_search_text || "", !searchV2],
+            ["topic_area", (record.topic_areas || []).join(" "), false],
+            ["discipline", (record.disciplines || []).join(" "), false],
+            ["agency", record.agency || "", false],
+            ["funding_category", (record.funding_categories || []).join(" "), false],
+          ];
+    }
+    function boundedPassageWindows(value, maximumSentences = 3) {
+      let sentenceOffset = 0;
+      return String(value || "").split(/[\n\r]+/).flatMap(paragraph => {
+        const sentences = paragraph.split(/(?<=[.!?])\s+|…+/)
+          .map(part => part.trim()).filter(Boolean);
+        const windows = sentences.map((_sentence, index) => {
+          const end = Math.min(sentences.length, index + maximumSentences);
+          return {
+            value: sentences.slice(index, end).join(" "),
+            unit: `sentences:${sentenceOffset + index + 1}-${sentenceOffset + end}`,
+          };
+        });
+        sentenceOffset += sentences.length;
+        return windows;
+      });
+    }
+    function createEvidencePolicies(documentFields, queryApi) {
+    function protectedRareEarthEvidence(documentId) {
+      const eligibleFields = documentFields[documentId]
+        .filter(([_field, _value, admissionEligible]) => admissionEligible);
+      const matchingFields = [];
+      eligibleFields.forEach(([field, value]) => {
+        const text = String(value || "");
+        const namedTarget = /\brare[\s-]+earth(?:[\s-]+elements?)?\b|\blanthanides?\b|\b(?:scandium|yttrium|cerium|dysprosium|erbium|europium|gadolinium|holmium|lanthanum|lutetium|neodymium|praseodymium|promethium|samarium|terbium|thulium|ytterbium)\b/i.test(text);
+        const acronym = /\bREEs?\b|\bR\s*\.\s*E\s*\.\s*E(?:\s*\.)?s?(?![A-Za-z0-9])/.test(text);
+        const acronymContext = /\bcritical[\s-]+minerals?\b|\bseparat(?:e|ion|ions)\b|\bextract(?:ion)?\b|\brecover(?:y)?\b|\bhydrometallurgy\b|\brefin(?:e|ing)\b/i.test(text);
+        if (namedTarget || (acronym && acronymContext)) matchingFields.push(field);
+      });
+      if (!matchingFields.length) return null;
+      const substantiveText = eligibleFields.map(([_field, value]) => String(value || "")).join(" ");
+      if (!PROTECTED_TECHNICAL_SCOPE_RE.test(substantiveText)) return null;
+      if (
+        PROTECTED_NON_RESEARCH_SCOPE_RE.test(substantiveText)
+        && !PROTECTED_STRONG_RESEARCH_RE.test(substantiveText)
+      ) return null;
+      return {
+        policy: "protected_rare_earth",
+        fields: [...new Set(matchingFields)],
+      };
+    }
+
+    function protectedAiEvidence(documentId) {
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible) return [];
+        const text = String(value || "");
+        const longForm = /\bartificial[\s-]+intelligence\b|\bmachine[\s-]+learning\b/i.test(text);
+        const acronym = /\bAI\b(?!\s*\/\s*AN\b)/.test(text);
+        const technicalContext = /\b(?:AI[\s-]+(?:enabled|ready|driven|based|science|models?)|algorithms?|comput(?:e|ing|ational)|data|models?)\b/i.test(text);
+        return longForm || (acronym && technicalContext) ? [field] : [];
+      });
+      return matchingFields.length ? {
+        policy: "protected_ai",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
+    function protectedPfasEvidence(documentId) {
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible) return [];
+        const text = String(value || "");
+        return /\b(?:PFAS|PFOA|PFOS|PFHxS|PFNA|PFBS|AFFF)\b|\b(?:per|poly)fluoroalkyl\b|\bforever[\s-]+chemicals?\b/i.test(text)
+          ? [field]
+          : [];
+      });
+      return matchingFields.length ? {
+        policy: "protected_pfas",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
+    function protectedAiSecurityEvidence(documentId, group) {
+      const pattern = group?.evidenceClass === "security"
+        ? /\b(?:secure|security|cybersecurity|adversarial|attack|mitigation)\b/i
+        : /\b(?:secure|security|cybersecurity|adversarial|robustness|robust|resilience|resilient|attack|mitigation|trustworthy)\b/i;
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
+        return pattern.test(String(value || ""))
+          ? [field]
+          : [];
+      });
+      return matchingFields.length ? {
+        policy: "protected_ai_security",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
+    function protectedHighTemperatureCompositeEvidence(documentId) {
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
+        return /\bcomposites?\b/i.test(String(value || "")) ? [field] : [];
+      });
+      return matchingFields.length ? {
+        policy: "protected_high_temperature_composites",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
+    function protectedHypersonicEvidence(documentId) {
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
+        return /\bhypersonics?\b/i.test(String(value || "")) ? [field] : [];
+      });
+      return matchingFields.length ? {
+        policy: "protected_hypersonic",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
+    function technicalSeparationEvidence(documentId) {
+      const eligibleFields = documentFields[documentId]
+        .filter(([_field, _value, admissionEligible]) => admissionEligible);
+      const narrativeFields = eligibleFields
+        .filter(([field]) => /title|description|summary|program_area/.test(field));
+      const matchingFields = eligibleFields.flatMap(([field, value]) => {
+        const text = String(value || "");
+        const sentences = text.split(/(?<=[.!?])\s+|…+|[\n\r]+/);
+        const primarySentence = sentences.some(sentence => {
+          const materialContext = SEPARATION_MATERIAL_CONTEXT_RE.test(sentence);
+          const intrinsic = SEPARATION_INTRINSIC_METHOD_RE.test(sentence)
+            && (materialContext || SEPARATION_PRIMARY_SCOPE_RE.test(sentence));
+          const contextual = SEPARATION_CONTEXTUAL_METHOD_RE.test(sentence)
+            && materialContext;
+          return (intrinsic || contextual) && !INCIDENTAL_ALIGNMENT_RE.test(sentence);
+        });
+        return primarySentence ? [field] : [];
+      });
+      const narrativeText = narrativeFields
+        .map(([_field, value]) => String(value || ""))
+        .join(" ");
+      if (!matchingFields.length) {
+        const combinedMethod = SEPARATION_INTRINSIC_METHOD_RE.test(narrativeText)
+          || SEPARATION_CONTEXTUAL_METHOD_RE.test(narrativeText);
+        if (
+          combinedMethod
+          && SEPARATION_MATERIAL_CONTEXT_RE.test(narrativeText)
+          && !INCIDENTAL_ALIGNMENT_RE.test(narrativeText)
+        ) matchingFields.push(...narrativeFields.map(([field]) => field));
+      }
+      if (!matchingFields.length) return null;
+      if (!SEPARATION_PRIMARY_SCOPE_RE.test(narrativeText)) return null;
+      if (
+        SEPARATION_NON_RESEARCH_RE.test(narrativeText)
+        && !PROTECTED_STRONG_RESEARCH_RE.test(narrativeText)
+      ) return null;
+      return {
+        policy: "technical_separation",
+        fields: [...new Set(matchingFields)],
+      };
+    }
+
+    function controlledCompoundEvidence(documentId, phrases) {
+      const phraseTokens = (phrases || [])
+        .map(value => queryApi.tokenize(value).join(" "))
+        .filter(Boolean);
+      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
+        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
+        const fieldText = queryApi.tokenize(value).join(" ");
+        return phraseTokens.some(phrase => (` ${fieldText} `).includes(` ${phrase} `))
+          ? [field]
+          : [];
+      });
+      return matchingFields.length ? {
+        policy: "controlled_compound",
+        fields: [...new Set(matchingFields)],
+      } : null;
+    }
+
+      return {protectedRareEarthEvidence, protectedAiEvidence, protectedPfasEvidence,
+        protectedAiSecurityEvidence, protectedHighTemperatureCompositeEvidence,
+        protectedHypersonicEvidence, technicalSeparationEvidence, controlledCompoundEvidence};
+    }
+
+    function scopeTermsRelated(queryTerm, sourceTerm) {
+      if (queryTerm === sourceTerm) return true;
+      if (!queryTerm || !sourceTerm) return false;
+      const minimum = Math.min(queryTerm.length, sourceTerm.length);
+      return minimum >= 5
+        && (queryTerm.startsWith(sourceTerm) || sourceTerm.startsWith(queryTerm));
+    }
+
+    function fieldScopeMatch(field, requirements, { exactShort = false, relatedTerms = requirement => [...field.positions.keys()].filter(term => scopeTermsRelated(requirement, term)) } = {}) {
+      const matches = requirements.map(requirement => {
+        const exact = field.positions.get(requirement) || [];
+        if (exact.length || (exactShort && requirement.length <= 4)) {
+          return exact.map(position => ({ position, term: requirement }));
+        }
+        return relatedTerms(requirement).flatMap(term => (
+          (field.positions.get(term) || []).map(position => ({ position, term }))
+        ));
+      });
+      if (matches.some(items => !items.length)) return null;
+      if (matches.length === 1) {
+        return { field: field.field, matchedTerms: [matches[0][0].term] };
+      }
+      const maximumSpan = 11;
+      for (const anchor of matches[0]) {
+        const selected = [anchor];
+        for (const items of matches.slice(1)) {
+          const item = items.find(candidate => Math.abs(candidate.position - anchor.position) <= maximumSpan);
+          if (!item) break;
+          selected.push(item);
+        }
+        if (
+          selected.length === matches.length
+          && Math.max(...selected.map(item => item.position))
+            - Math.min(...selected.map(item => item.position)) <= maximumSpan
+        ) {
+          return {
+            field: field.field,
+            matchedTerms: [...new Set(selected.map(item => item.term))],
+          };
+        }
+      }
+      return null;
+    }
+
+    function sharedScopeTokens(value, queryApi) {
+      return queryApi.tokenize(value).flatMap(term => (
+        term.includes("-")
+          ? [term, ...term.split("-").filter(part => part.length > 1)]
+          : [term]
+      ));
+    }
+  function nonAffirmativeClause(value) {
+    return INCIDENTAL_ALIGNMENT_RE.test(value)
+      || /\b(?:not (?:support(?:ed)?|includ(?:e|ed)|allow(?:ed)?|eligible|appropriate)|do(?:es)? not|excluding|excluded|out of scope)\b/i.test(value);
+  }
+
+  // Shared source evidence, independent of Search's posting lists and network
+  // orchestration. Only the requested record is prepared by reverse matching.
+  function createScientificContext(record, queryApi) {
+    const tokenize = value => sharedScopeTokens(value, queryApi);
+    const fields = fieldsForRecord(record, authoritativeDocumentScopeFacts(record), true);
+    const clauses = fields.filter(([, , eligible]) => eligible).flatMap(([field, text]) => {
+      let cursor = 0;
+      return boundedPassageWindows(text, 1).flatMap(passage => {
+        const offset = String(text).indexOf(passage.value, cursor); cursor = Math.max(cursor, offset + passage.value.length);
+        // Keep negative conditions visible but never use them as affirmative
+        // support. These are grammatical boundaries, not person/topic exceptions.
+        const blocked = nonAffirmativeClause(passage.value);
+        const tokens = tokenize(passage.value), positions = new Map();
+        tokens.forEach((term, index) => { if (!positions.has(term)) positions.set(term, []); positions.get(term).push(index); });
+        const policies = createEvidencePolicies([[[field, passage.value, true]]], queryApi);
+        const conceptIds = new Set(queryApi.expandGroups(passage.value, term => positions.has(term), {searchV2:true, context:passage.value}).map(group => group.conceptId));
+        return [{field, value: passage.value, unit: passage.unit, offset, tokens, positions, blocked, policies, conceptIds,
+          // A title or opening purpose statement is eligible to anchor; a later
+          // method example is support, without inventing a central requirement.
+          anchor: /title$/.test(field) || (/description|summary/.test(field) && passage.unit === 'sentences:1-1')}];
+      });
+    });
+    const policyFunctions = {
+      protected_rare_earth: 'protectedRareEarthEvidence', protected_ai: 'protectedAiEvidence',
+      protected_pfas: 'protectedPfasEvidence', protected_ai_security: 'protectedAiSecurityEvidence',
+      protected_high_temperature_composites: 'protectedHighTemperatureCompositeEvidence',
+      protected_hypersonic: 'protectedHypersonicEvidence', technical_separation: 'technicalSeparationEvidence',
+      controlled_compound: 'controlledCompoundEvidence',
+    };
+    function matchGroup(group, clause) {
+      if (clause.blocked || group.role === 'program_or_agency_qualifier') return null;
+      if (group.conceptId && !group.conceptId.startsWith('literal:') && !clause.conceptIds.has(group.conceptId)) return null;
+      const policy = policyFunctions[group.evidencePolicy];
+      if (policy && !clause.policies[policy](0, policy === 'controlledCompoundEvidence' ? group.evidencePhrases : group)) return null;
+      const requirements = tokenize(group.source || '');
+      const direct = requirements.length ? fieldScopeMatch(clause, requirements, {exactShort: group.exactIndexedAcronym === true}) : null;
+      if (group.exactIndexedAcronym && group.expansion?.kind !== 'contextual_acronym'
+        && !new RegExp('\\b' + String(group.source).toUpperCase() + '\\b').test(clause.value)) return null;
+      let hit = direct;
+      if (!hit && group.evidencePolicy !== 'source_grounded_only') {
+        const alternatives = group.evidencePhrases?.length ? group.evidencePhrases.map(tokenize)
+          : group.evidenceAlternatives?.length ? group.evidenceAlternatives
+          : group.expansion?.kind === 'contextual_acronym' ? [tokenize(group.expansion.phrase)]
+          : Number(group.minimumEvidence || 0) <= 1 ? (group.terms || []).map(t => [t.term]) : [];
+        for (const alternative of alternatives) {
+          hit = fieldScopeMatch(clause, alternative.flatMap(tokenize)); if (hit) break;
+        }
+      }
+      if (!hit) return null;
+      return {...hit, conceptId: group.conceptId || 'literal:' + group.source, role: group.role || 'substantive',
+        source: group.source, evidencePolicy: group.evidencePolicy || 'literal',
+        token_positions: hit.matchedTerms.map(term => ({term, positions: clause.positions.get(term) || []}))};
+    }
+    function connections(groups) {
+      const result = [];
+      for (const clause of clauses) {
+        const hits = groups.map(group => matchGroup(group, clause));
+        const complete = hits.every(Boolean) && groups.length >= 2
+          && fieldScopeMatch(clause, [...new Set(hits.flatMap(hit => hit.matchedTerms))]);
+        // A registered compound method/target is a relationship in its own
+        // right. A lone literal word or property is only a discovery signal.
+        const compounds = hits.filter((hit, i) => hit && !hit.conceptId.startsWith('literal:')
+          && /^(method|target|target_and_method)$/.test(hit.role)
+          );
+        const selected = complete ? hits : compounds;
+        if (!selected.length) continue;
+        const ids = [...new Set(selected.map(hit => hit.conceptId))].sort();
+        const registered = ids.filter(id => !id.startsWith('literal:'));
+        // Source-owned units are stable across label/evidence representations.
+        // Registered concepts saturate across clauses. Otherwise this is one
+        // bounded source clause, not one unit per matching word or profile claim.
+        const units = registered.length ? registered : ['clause:' + [...clause.conceptIds].filter(Boolean).sort().join('&')];
+        for (const relationship_id of units) result.push({relationship_id, concept_ids: ids, matches: selected,
+          support: complete ? 'complete_clause' : 'complete_concept', field: clause.field,
+          source_excerpt: clause.value, source_offset: clause.offset, source_unit: clause.unit,
+          anchor: clause.anchor, matchedTerms: [...new Set(selected.flatMap(hit => hit.matchedTerms))].sort()});
+      }
+      return result;
+    }
+    return {clauses, connections, matchGroup};
+  }
+
   function compareIds(left, right) {
     return String(left).localeCompare(String(right), undefined, {
       numeric: true,
@@ -615,65 +966,18 @@
     const acronymResolver = queryApi.createAcronymResolver
       ? queryApi.createAcronymResolver(records)
       : null;
-    function authoritativeDocumentScopeFacts(record) {
-      const facts = record?.document_evidence?.facts || [];
-      return facts.filter(fact => fact?.type === "review_criteria").map(fact => ({
-        id: String(fact.id || ""),
-        type: String(fact.type || ""),
-        value: [
-          typeof fact.value === "string" ? fact.value : "",
-          fact.citation?.quote || "",
-        ].filter(Boolean).join(" "),
-        citationUrl: String(fact.citation?.citation_url || fact.citation?.document_url || ""),
-        documentName: String(fact.citation?.document_name || ""),
-        location: String(fact.citation?.location || ""),
-      })).filter(fact => fact.value);
-    }
     const authoritativeDocumentScopeByDocument = records.map((record, documentId) => (
       shouldPrepareDocument(documentId) ? authoritativeDocumentScopeFacts(record) : []
     ));
-    function fieldsForRecord(record, authoritativeDocumentScope) {
-      const child = Boolean(record.subtopic_id);
-      const authoritativeDocumentScopeText = authoritativeDocumentScope
-        .map(fact => fact.value).join(" ");
-      return child
-        ? [
-            ["child_title", record.title || "", true],
-            ["child_summary", record.description || record.summary || "", true],
-            ["authoritative_program_area", (
-              record.program_area_labels || record.document_program_areas || []
-            ).join(" "), true],
-            ["child_topic", (record.topic_areas || []).join(" "), false],
-          ]
-        : [
-            ["parent_title", record.title || "", true],
-            ["parent_description", record.description || "", true],
-            ["authoritative_program_area", (
-              record.program_area_labels || record.document_program_areas || []
-            ).join(" "), true],
-            ["authoritative_document_scope", authoritativeDocumentScopeText, true],
-            ["citation_source_evidence", record.document_search_text || "", !searchV2],
-            ["topic_area", (record.topic_areas || []).join(" "), false],
-            ["discipline", (record.disciplines || []).join(" "), false],
-            ["agency", record.agency || "", false],
-            ["funding_category", (record.funding_categories || []).join(" "), false],
-          ];
-    }
     const documentFields = records.map((record, documentId) => (
       shouldPrepareDocument(documentId)
-        ? fieldsForRecord(record, authoritativeDocumentScopeByDocument[documentId])
+        ? fieldsForRecord(record, authoritativeDocumentScopeByDocument[documentId], searchV2)
         : []
     ));
     const documentFieldTokens = documentFields.map(fields => new Map(
       fields.map(([name, value]) => [name, new Set(queryApi.tokenize(value))]),
     ));
-    function scopeTokens(value) {
-      return queryApi.tokenize(value).flatMap(term => (
-        term.includes("-")
-          ? [term, ...term.split("-").filter(part => part.length > 1)]
-          : [term]
-      ));
-    }
+    const scopeTokens = value => sharedScopeTokens(value, queryApi);
     const documentScopeFields = documentFields.map((fields, documentId) => fields
       .filter(([_name, _value, admissionEligible]) => admissionEligible)
       .map(([field, value]) => {
@@ -755,7 +1059,7 @@
       const lengthCounts = Object.fromEntries(fieldedFieldNames.map(fieldName => [fieldName, 0]));
       records.forEach(record => {
         const documentTerms = new Set();
-        fieldsForRecord(record, authoritativeDocumentScopeFacts(record))
+        fieldsForRecord(record, authoritativeDocumentScopeFacts(record), searchV2)
           .filter(([_name, _value, admissionEligible]) => admissionEligible)
           .forEach(([fieldName, value]) => {
             const tokens = scopeTokens(value);
@@ -779,22 +1083,6 @@
         fieldName,
         lengthCounts[fieldName] ? lengthTotals[fieldName] / lengthCounts[fieldName] : 1,
       ]));
-    }
-    function boundedPassageWindows(value) {
-      let sentenceOffset = 0;
-      return String(value || "").split(/[\n\r]+/).flatMap(paragraph => {
-        const sentences = paragraph.split(/(?<=[.!?])\s+|…+/)
-          .map(part => part.trim()).filter(Boolean);
-        const windows = sentences.map((_sentence, index) => {
-          const end = Math.min(sentences.length, index + 3);
-          return {
-            value: sentences.slice(index, end).join(" "),
-            unit: `sentences:${sentenceOffset + index + 1}-${sentenceOffset + end}`,
-          };
-        });
-        sentenceOffset += sentences.length;
-        return windows;
-      });
     }
     function atomicFieldedPassage({
       documentId,
@@ -877,14 +1165,6 @@
       sourceScopeRelationships.get(conceptId).push(relationship);
     });
 
-    function scopeTermsRelated(queryTerm, sourceTerm) {
-      if (queryTerm === sourceTerm) return true;
-      if (!queryTerm || !sourceTerm) return false;
-      const minimum = Math.min(queryTerm.length, sourceTerm.length);
-      return minimum >= 5
-        && (queryTerm.startsWith(sourceTerm) || sourceTerm.startsWith(queryTerm));
-    }
-
     function sourceScopeRelatedTerms(requirement) {
       if (!sourceScopeRelatedTermCache.has(requirement)) {
         sourceScopeRelatedTermCache.set(requirement, sourceScopeVocabulary.filter(term => (
@@ -892,42 +1172,6 @@
         )));
       }
       return sourceScopeRelatedTermCache.get(requirement);
-    }
-
-    function fieldScopeMatch(field, requirements, { exactShort = false } = {}) {
-      const matches = requirements.map(requirement => {
-        const exact = field.positions.get(requirement) || [];
-        if (exact.length || (exactShort && requirement.length <= 4)) {
-          return exact.map(position => ({ position, term: requirement }));
-        }
-        return sourceScopeRelatedTerms(requirement).flatMap(term => (
-          (field.positions.get(term) || []).map(position => ({ position, term }))
-        ));
-      });
-      if (matches.some(items => !items.length)) return null;
-      if (matches.length === 1) {
-        return { field: field.field, matchedTerms: [matches[0][0].term] };
-      }
-      const maximumSpan = 11;
-      for (const anchor of matches[0]) {
-        const selected = [anchor];
-        for (const items of matches.slice(1)) {
-          const item = items.find(candidate => Math.abs(candidate.position - anchor.position) <= maximumSpan);
-          if (!item) break;
-          selected.push(item);
-        }
-        if (
-          selected.length === matches.length
-          && Math.max(...selected.map(item => item.position))
-            - Math.min(...selected.map(item => item.position)) <= maximumSpan
-        ) {
-          return {
-            field: field.field,
-            matchedTerms: [...new Set(selected.map(item => item.term))],
-          };
-        }
-      }
-      return null;
     }
 
     function sourceGroundedRoleEvidence(documentId, group, { allowAdjacent = false } = {}) {
@@ -940,7 +1184,7 @@
       ) return null;
       const directRequirements = scopeTokens(group.source || "");
       for (const field of fields) {
-        const direct = fieldScopeMatch(field, directRequirements, { exactShort });
+        const direct = fieldScopeMatch(field, directRequirements, { exactShort, relatedTerms: sourceScopeRelatedTerms });
         if (direct && directRequirements.length) {
           return {
             ...direct,
@@ -963,7 +1207,7 @@
           ) continue;
           const requirements = scopeTokens((alternative || []).join(" "));
           for (const field of fields) {
-            const related = fieldScopeMatch(field, requirements);
+            const related = fieldScopeMatch(field, requirements, {relatedTerms: sourceScopeRelatedTerms});
             if (!related || !requirements.length) continue;
             return {
               ...related,
@@ -1026,155 +1270,10 @@
       });
     }
 
-    function protectedRareEarthEvidence(documentId) {
-      const eligibleFields = documentFields[documentId]
-        .filter(([_field, _value, admissionEligible]) => admissionEligible);
-      const matchingFields = [];
-      eligibleFields.forEach(([field, value]) => {
-        const text = String(value || "");
-        const namedTarget = /\brare[\s-]+earth(?:[\s-]+elements?)?\b|\blanthanides?\b|\b(?:scandium|yttrium|cerium|dysprosium|erbium|europium|gadolinium|holmium|lanthanum|lutetium|neodymium|praseodymium|promethium|samarium|terbium|thulium|ytterbium)\b/i.test(text);
-        const acronym = /\bREEs?\b|\bR\s*\.\s*E\s*\.\s*E(?:\s*\.)?s?(?![A-Za-z0-9])/.test(text);
-        const acronymContext = /\bcritical[\s-]+minerals?\b|\bseparat(?:e|ion|ions)\b|\bextract(?:ion)?\b|\brecover(?:y)?\b|\bhydrometallurgy\b|\brefin(?:e|ing)\b/i.test(text);
-        if (namedTarget || (acronym && acronymContext)) matchingFields.push(field);
-      });
-      if (!matchingFields.length) return null;
-      const substantiveText = eligibleFields.map(([_field, value]) => String(value || "")).join(" ");
-      if (!PROTECTED_TECHNICAL_SCOPE_RE.test(substantiveText)) return null;
-      if (
-        PROTECTED_NON_RESEARCH_SCOPE_RE.test(substantiveText)
-        && !PROTECTED_STRONG_RESEARCH_RE.test(substantiveText)
-      ) return null;
-      return {
-        policy: "protected_rare_earth",
-        fields: [...new Set(matchingFields)],
-      };
-    }
-
-    function protectedAiEvidence(documentId) {
-      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
-        if (!admissionEligible) return [];
-        const text = String(value || "");
-        const longForm = /\bartificial[\s-]+intelligence\b|\bmachine[\s-]+learning\b/i.test(text);
-        const acronym = /\bAI\b(?!\s*\/\s*AN\b)/.test(text);
-        const technicalContext = /\b(?:AI[\s-]+(?:enabled|ready|driven|based|science|models?)|algorithms?|comput(?:e|ing|ational)|data|models?)\b/i.test(text);
-        return longForm || (acronym && technicalContext) ? [field] : [];
-      });
-      return matchingFields.length ? {
-        policy: "protected_ai",
-        fields: [...new Set(matchingFields)],
-      } : null;
-    }
-
-    function protectedPfasEvidence(documentId) {
-      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
-        if (!admissionEligible) return [];
-        const text = String(value || "");
-        return /\b(?:PFAS|PFOA|PFOS|PFHxS|PFNA|PFBS|AFFF)\b|\b(?:per|poly)fluoroalkyl\b|\bforever[\s-]+chemicals?\b/i.test(text)
-          ? [field]
-          : [];
-      });
-      return matchingFields.length ? {
-        policy: "protected_pfas",
-        fields: [...new Set(matchingFields)],
-      } : null;
-    }
-
-    function protectedAiSecurityEvidence(documentId, group) {
-      const pattern = group?.evidenceClass === "security"
-        ? /\b(?:secure|security|cybersecurity|adversarial|attack|mitigation)\b/i
-        : /\b(?:secure|security|cybersecurity|adversarial|robustness|robust|resilience|resilient|attack|mitigation|trustworthy)\b/i;
-      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
-        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
-        return pattern.test(String(value || ""))
-          ? [field]
-          : [];
-      });
-      return matchingFields.length ? {
-        policy: "protected_ai_security",
-        fields: [...new Set(matchingFields)],
-      } : null;
-    }
-
-    function protectedHighTemperatureCompositeEvidence(documentId) {
-      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
-        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
-        return /\bcomposites?\b/i.test(String(value || "")) ? [field] : [];
-      });
-      return matchingFields.length ? {
-        policy: "protected_high_temperature_composites",
-        fields: [...new Set(matchingFields)],
-      } : null;
-    }
-
-    function protectedHypersonicEvidence(documentId) {
-      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
-        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
-        return /\bhypersonics?\b/i.test(String(value || "")) ? [field] : [];
-      });
-      return matchingFields.length ? {
-        policy: "protected_hypersonic",
-        fields: [...new Set(matchingFields)],
-      } : null;
-    }
-
-    function technicalSeparationEvidence(documentId) {
-      const eligibleFields = documentFields[documentId]
-        .filter(([_field, _value, admissionEligible]) => admissionEligible);
-      const narrativeFields = eligibleFields
-        .filter(([field]) => /title|description|summary|program_area/.test(field));
-      const matchingFields = eligibleFields.flatMap(([field, value]) => {
-        const text = String(value || "");
-        const sentences = text.split(/(?<=[.!?])\s+|…+|[\n\r]+/);
-        const primarySentence = sentences.some(sentence => {
-          const materialContext = SEPARATION_MATERIAL_CONTEXT_RE.test(sentence);
-          const intrinsic = SEPARATION_INTRINSIC_METHOD_RE.test(sentence)
-            && (materialContext || SEPARATION_PRIMARY_SCOPE_RE.test(sentence));
-          const contextual = SEPARATION_CONTEXTUAL_METHOD_RE.test(sentence)
-            && materialContext;
-          return (intrinsic || contextual) && !INCIDENTAL_ALIGNMENT_RE.test(sentence);
-        });
-        return primarySentence ? [field] : [];
-      });
-      const narrativeText = narrativeFields
-        .map(([_field, value]) => String(value || ""))
-        .join(" ");
-      if (!matchingFields.length) {
-        const combinedMethod = SEPARATION_INTRINSIC_METHOD_RE.test(narrativeText)
-          || SEPARATION_CONTEXTUAL_METHOD_RE.test(narrativeText);
-        if (
-          combinedMethod
-          && SEPARATION_MATERIAL_CONTEXT_RE.test(narrativeText)
-          && !INCIDENTAL_ALIGNMENT_RE.test(narrativeText)
-        ) matchingFields.push(...narrativeFields.map(([field]) => field));
-      }
-      if (!matchingFields.length) return null;
-      if (!SEPARATION_PRIMARY_SCOPE_RE.test(narrativeText)) return null;
-      if (
-        SEPARATION_NON_RESEARCH_RE.test(narrativeText)
-        && !PROTECTED_STRONG_RESEARCH_RE.test(narrativeText)
-      ) return null;
-      return {
-        policy: "technical_separation",
-        fields: [...new Set(matchingFields)],
-      };
-    }
-
-    function controlledCompoundEvidence(documentId, phrases) {
-      const phraseTokens = (phrases || [])
-        .map(value => queryApi.tokenize(value).join(" "))
-        .filter(Boolean);
-      const matchingFields = documentFields[documentId].flatMap(([field, value, admissionEligible]) => {
-        if (!admissionEligible || !/title|description|summary|program_area/.test(field)) return [];
-        const fieldText = queryApi.tokenize(value).join(" ");
-        return phraseTokens.some(phrase => (` ${fieldText} `).includes(` ${phrase} `))
-          ? [field]
-          : [];
-      });
-      return matchingFields.length ? {
-        policy: "controlled_compound",
-        fields: [...new Set(matchingFields)],
-      } : null;
-    }
+    const {protectedRareEarthEvidence, protectedAiEvidence, protectedPfasEvidence,
+      protectedAiSecurityEvidence, protectedHighTemperatureCompositeEvidence,
+      protectedHypersonicEvidence, technicalSeparationEvidence, controlledCompoundEvidence}
+      = createEvidencePolicies(documentFields, queryApi);
 
     indexTerms.forEach(term => {
       if (!termsByLength.has(term.length)) termsByLength.set(term.length, []);
@@ -2841,6 +2940,7 @@
   }
 
   globalThis.FUNDING_RETRIEVAL = Object.freeze({
+    sourceEvidence: Object.freeze({authoritativeDocumentScopeFacts, fieldsForRecord, boundedPassageWindows, createEvidencePolicies, fieldScopeMatch, scopeTermsRelated, createScientificContext, nonAffirmativeClause}),
     contractVersion: RETRIEVAL_API_CONTRACT_VERSION,
     boundedDamerauLevenshtein,
     create,

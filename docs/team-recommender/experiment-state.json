@@ -7839,5 +7839,14 @@
     },
     "trusted_guard_PR": 226,
     "complete": true
+  },
+  "shared_evidence_repair": {
+    "authority": "docs/team-recommender/evidence-repair/AUTHORITY.md",
+    "starting_head": "adedd242dc727d85bc2db42776abce5132c882b8",
+    "status": "executing bounded zero-paid mechanism and resource repair",
+    "new_paid_authorization_usd": 0,
+    "new_provider_attempts": 0,
+    "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+    "historical_report_preserved": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md"
   }
 }

@@ -1,15 +1,50 @@
 /* On-demand composition over the existing Team Match admission contract. */
 (function (g) {
   "use strict";
-  const VERSION = "shared-team-v2", snapshots = new WeakMap();
+  const VERSION = "shared-team-v3", snapshots = new WeakMap();
   const cmp = (a, b) => a < b ? -1 : a > b ? 1 : 0;
   const canonical = v => Array.isArray(v) ? "[" + v.map(canonical).join(",") + "]" : v && typeof v === "object"
     ? "{" + Object.keys(v).sort(cmp).map(k => JSON.stringify(k) + ":" + canonical(v[k])).join(",") + "}" : JSON.stringify(v);
   const clone = v => JSON.parse(JSON.stringify(v));
-  const freeze = v => { if (v && typeof v === "object") { Object.values(v).forEach(freeze); Object.freeze(v); } return v; };
+  const frozen = new WeakSet();
+  const freeze = v => {
+    if (v && typeof v === "object" && !frozen.has(v)) {
+      if (Array.isArray(v)) { for (const item of v) freeze(item); }
+      else { for (const key of Object.keys(v)) freeze(v[key]); }
+      Object.freeze(v); frozen.add(v);
+    }
+    return v;
+  };
+  // Two bounded walks write exactly the previous canonical JSON bytes. Avoid
+  // recursive map/join strings (and their large intermediate arrays) for the
+  // already-resident catalog. No integrity field is omitted or moved upstream.
+  function canonicalBytes(value) {
+    function walk(v, write) {
+      if (Array.isArray(v)) { write('['); for (let i=0;i<v.length;i++) { if(i)write(','); walk(v[i],write); } write(']'); }
+      else if(v && typeof v === 'object') { write('{'); let first=true; for(const k of Object.keys(v).sort(cmp)) { if(!first)write(','); first=false;write(JSON.stringify(k));write(':');walk(v[k],write); } write('}'); }
+      else write(JSON.stringify(v));
+    }
+    function utf8Length(text) {
+      let size=0;for(let i=0;i<text.length;i++) { const c=text.charCodeAt(i);size+=c<128?1:c<2048?2:3;
+        if(c>=0xd800&&c<=0xdbff&&i+1<text.length&&text.charCodeAt(i+1)>=0xdc00&&text.charCodeAt(i+1)<=0xdfff){size++;i++;} }
+      return size;
+    }
+    let length=0;walk(value,text=>{length+=utf8Length(text);});
+    const bytes=new Uint8Array(length);let offset=0;
+    walk(value,text=>{for(let i=0;i<text.length;i++) {
+      let c=text.charCodeAt(i);
+      if(c<128) bytes[offset++]=c;
+      else if(c<2048) {bytes[offset++]=192|(c>>6);bytes[offset++]=128|(c&63);}
+      else if(c>=0xd800&&c<=0xdbff&&i+1<text.length&&text.charCodeAt(i+1)>=0xdc00&&text.charCodeAt(i+1)<=0xdfff) {
+        c=0x10000+((c-0xd800)<<10)+(text.charCodeAt(++i)-0xdc00);
+        bytes[offset++]=240|(c>>18);bytes[offset++]=128|((c>>12)&63);bytes[offset++]=128|((c>>6)&63);bytes[offset++]=128|(c&63);
+      } else {bytes[offset++]=224|(c>>12);bytes[offset++]=128|((c>>6)&63);bytes[offset++]=128|(c&63);}
+    }});
+    check(offset===length,'Canonical encoding length mismatch.');return bytes;
+  }
   function check(ok, message) { if (!ok) throw new Error(message); }
   async function hash(value) {
-    return [...new Uint8Array(await g.crypto.subtle.digest("SHA-256", new TextEncoder().encode(canonical(value))))].map(b => b.toString(16).padStart(2, "0")).join("");
+    return [...new Uint8Array(await g.crypto.subtle.digest("SHA-256", canonicalBytes(value)))].map(b => b.toString(16).padStart(2, "0")).join("");
   }
   const eligible = p => p.status === "active" && p.auto_proposable === true && ["main", "standby"].includes(p.pool_state) && !["hidden", "reference_only"].includes(p.pool_visibility);
   const idOf = r => String(r?.opportunity_id || r?.opportunity_number || r?.title || "");
@@ -124,12 +159,12 @@
       check(state.selectedIds.every(id => decision.rows.some(r => r.id === id)), "Cached member no longer passes shared fit.");
       return decision;
     }
-    // Contributions are existing matched scientific tokens, not invented sponsor roles.
+    // Coverage units are complete shared scientific relationships, not tokens or claim counts.
     const contributionCache = new WeakMap();
     function contributions(row) {
       if (contributionCache.has(row)) return contributionCache.get(row);
       const values = new Map();
-      for (const c of row.fit.connections) for (const term of c.matchedTerms) values.set(term, Math.max(values.get(term) || 0, c.score));
+      for (const c of row.fit.supportedConnections || []) values.set(c.relationship_id, Math.max(values.get(c.relationship_id) || 0, c.score));
       contributionCache.set(row, values); return values;
     }
     function combined(rows) { const values = new Map(); rows.forEach(r => contributions(r).forEach((v, k) => values.set(k, Math.max(values.get(k) || 0, v)))); return values; }
@@ -137,21 +172,24 @@
     function gain(values, row) { let sum = 0; contributions(row).forEach((v, k) => { sum += Math.max(0, v - (values.get(k) || 0)); }); return sum; }
     const evidenceCache = new WeakMap();
     function claimEvidence(row) {
-      if (!evidenceCache.has(row)) evidenceCache.set(row, new Set(row.fit.connections.filter(c => row.fit.strong && c.claims.length)
-        .flatMap(c => c.claims.map(claim => g.FUNDING_SEARCH_QUERY.tokenize(claim.label + " " + claim.evidence).join(" ")))));
+      if (!evidenceCache.has(row)) evidenceCache.set(row, new Set((row.fit.supportedConnections || []).map(c => c.relationship_id)));
       return evidenceCache.get(row);
     }
     function independentEvidence(row, others) {
-      const duplicated = new Set(others.flatMap(r => [...claimEvidence(r)]));
-      return [...claimEvidence(row)].some(key => !duplicated.has(key));
+      // Two people can independently support the same relationship. This does
+      // not earn extra coverage or a claim of distinct scientific strategy.
+      // Exact duplicated profile evidence cannot manufacture a second member.
+      const evidence = r => (r.fit.supportedConnections || []).map(c => g.FUNDING_SEARCH_QUERY.tokenize(c.profile_excerpt).join(' ')).sort(cmp).join('|');
+      return row.fit.automaticEligible && claimEvidence(row).size > 0
+        && !others.some(r => evidence(r) === evidence(row));
     }
     function justified(row, team) {
       const others = team.filter(r => r !== row);
-      return coverage(team) - coverage(others) > 1e-9 || independentEvidence(row, others);
+      return row.fit.automaticEligible && (coverage(team) - coverage(others) > 1e-9 || independentEvidence(row, others));
     }
     function optimize(d, excluded) {
       const key = [...excluded].sort(cmp).join("|"); if (d.options.has(key)) return d.options.get(key);
-      const pool = d.rows.filter(r => !excluded.includes(r.id)).sort((a, b) => b.fit.score - a.fit.score || cmp(a.id, b.id)), teams = new Map();
+      const pool = d.rows.filter(r => r.fit.automaticEligible && !excluded.includes(r.id)).sort((a, b) => b.fit.score - a.fit.score || cmp(a.id, b.id)), teams = new Map();
       for (const seed of pool) {
         let team = [seed];
         while (team.length < 4) {
@@ -174,7 +212,8 @@
           if (team.length < 2) break;
         }
       }
-      const result = [...teams.values()].sort((a, b) => b.coverage - a.coverage || a.ids.length - b.ids.length || b.relevance - a.relevance || cmp(a.key, b.key)).slice(0, 8);
+      const candidates = [...teams.values()], best = Math.max(0,...candidates.map(t=>t.coverage));
+      const result = candidates.filter(t=>t.coverage>=best*.95).sort((a, b) => a.ids.length-b.ids.length || b.coverage-a.coverage || b.relevance-a.relevance || cmp(a.key,b.key)).slice(0,8);
       counts.optimizations++; d.options.set(key, result); if (d.options.size > 32) d.options.delete(d.options.keys().next().value); return result;
     }
     const stateFor = (scope, ids, excluded = []) => freeze({opportunityId: scope.id, generation: data.generation_id, selectedIds: [...ids], excludedIds: [...excluded]});
@@ -183,11 +222,12 @@
     function proposalView(state) {
       const d = checked(state), rows = state.selectedIds.map(id => d.rows.find(r => r.id === id));
       const selected = rows.map(row => {
-        const connection = row.fit.connections.filter(c => c.claims.length).sort((a, b) => b.score - a.score || cmp(a.label, b.label))[0];
+        const connection = (row.fit.supportedConnections || []).filter(c => c.claims.length || c.summary).sort((a, b) => b.score - a.score || cmp(a.label, b.label))[0];
         const claim = connection?.claims[0], profile = facultyById.get(row.id);
-        const evidence = claim ? {faculty_id: row.id, contribution: claim.label, evidence_term: claim.label,
-          evidence_phrase: claim.evidence, source_url: claim.source_urls?.[0] || profile.source_url,
-          why_person: "The retained profile statement “" + claim.evidence + "” connects to the call through “" + connection.matchedTerms.join(", ") + "”. The contribution remains unconfirmed."}
+        const excerpt = connection?.profile_excerpt;
+        const evidence = connection ? {faculty_id: row.id, contribution: connection.label, evidence_term: connection.label,
+          evidence_phrase: excerpt, source_url: claim?.source_urls?.[0] || profile.summary_evidence?.[0]?.url || profile.source_url,
+          why_person: "The retained profile statement “" + excerpt + "” suggests a connection to “" + connection.source_excerpt + "” (" + connection.field + ", " + connection.source_unit + "). The contribution remains unconfirmed."}
           : {faculty_id: row.id, contribution: row.fit.scopeLabel || row.fit.researchReasons.join(", "), evidence_term: "", evidence_phrase: "", source_url: profile.source_url,
             why_person: row.fit.scopeLabel ? "Broad sponsor-scope lead: " + row.fit.scopeLabel + ". Specific scientific coverage remains unconfirmed." : "Shared theme match: " + row.fit.researchReasons.join(", ") + ". Specific contribution remains unconfirmed."};
         return {profile, evidence, roles: [], relevantTerms: claim ? [claim] : []};
@@ -210,10 +250,11 @@
     function addReplacement(state, id) { const d = checked(state), canonicalId = facultyById.get(id)?.id; check(state.selectedIds.length < 4 && !state.selectedIds.includes(canonicalId) && d.rows.some(r => r.id === canonicalId), "Replacement does not pass shared fit."); return stateFor(d.scope, [...state.selectedIds, canonicalId], state.excludedIds.filter(x => x !== canonicalId)); }
     function diagnoseScope() {
       check(decision, "Scope not resolved.");
-      const teams = optimize(decision, []), pool = decision.rows;
+      const teams = optimize(decision, []), pool = decision.rows, automatic = pool.filter(r=>r.fit.automaticEligible);
       return {admitted: pool.length, strong: pool.filter(r => r.fit.strong).length,
+        automatic: automatic.length,
         independent_strong_evidence: pool.filter(r => claimEvidence(r).size).length,
-        boundary: teams.length ? "group_produced" : !pool.length ? "no_admitted_person" : pool.length === 1 ? "only_one_admitted_person"
+        boundary: teams.length ? "group_produced" : !pool.length ? "no_admitted_person" : !automatic.length ? "no_supported_member" : automatic.length === 1 ? "only_one_supported_member"
           : !pool.some(r => r.fit.strong) ? "absent_scientific_anchor" : "redundancy_contribution_restriction",
         primary: (teams[0]?.ids || []).map(id => { const team = teams[0].ids.map(id => pool.find(r => r.id === id)), row = pool.find(r => r.id === id);
           return {id, removal_marginal: coverage(team) - coverage(team.filter(r => r.id !== id)), independent_strong_evidence: independentEvidence(row, team.filter(r => r.id !== id))}; })};
@@ -227,5 +268,5 @@
     return Object.freeze({data, facultyById: new Map(facultyById), opportunityById: new Map(opportunityById), scopesFor, resolveScope, proposal, proposalOptions, proposalView, removeMember, addReplacement,
       runAction, diagnoseScope, statistics: () => ({...counts, cachedScopes: fitCache.size}), admittedFits: () => decision?.rows.map(r => ({id: r.id, fit: clone(r.fit)})) || []});
   }
-  g.SharedTeamEngine = Object.freeze({VERSION, canonical, hash, hydrate, loadData, create, eligible});
+  g.SharedTeamEngine = Object.freeze({VERSION, canonical, canonicalBytes, hash, hydrate, loadData, create, eligible});
 })(globalThis);

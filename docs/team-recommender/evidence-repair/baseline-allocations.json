@@ -1,0 +1,563 @@
+{
+  "before": {
+    "usedSize": 62193580,
+    "totalSize": 64032768,
+    "embedderHeapUsedSize": 1850408,
+    "backingStorageSize": 17819138
+  },
+  "high": {
+    "usedSize": 161493288,
+    "totalSize": 214102016,
+    "embedderHeapUsedSize": 1849776,
+    "backingStorageSize": 33580531
+  },
+  "points": [
+    {
+      "label": "resident catalog/directory/sidecar",
+      "t": 2148.5,
+      "used": 80026914
+    },
+    {
+      "label": "hydrated",
+      "t": 2448.199999988079,
+      "used": 174793668
+    },
+    {
+      "label": "normalized profiles",
+      "t": 2450.5,
+      "used": 175348219
+    },
+    {
+      "label": "fit 359696",
+      "t": 2893.5999999940395,
+      "used": 205948859
+    },
+    {
+      "label": "group 359696",
+      "t": 2894.9000000059605,
+      "used": 206167935
+    },
+    {
+      "label": "fit 344592:ab-0035",
+      "t": 2942.199999988079,
+      "used": 195002455
+    },
+    {
+      "label": "group 344592:ab-0035",
+      "t": 2942.5999999940395,
+      "used": 195025563
+    }
+  ],
+  "allocations": [
+    [
+      "join :-1",
+      256361148
+    ],
+    [
+      " http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:6",
+      38292104
+    ],
+    [
+      "canonical http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:5",
+      34042392
+    ],
+    [
+      "match :-1",
+      28284924
+    ],
+    [
+      "normalizeToken http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:260",
+      20847500
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:278",
+      15832336
+    ],
+    [
+      "filter :-1",
+      11346852
+    ],
+    [
+      "toLowerCase :-1",
+      10187032
+    ],
+    [
+      "map :-1",
+      8543984
+    ],
+    [
+      "acronymSourceText http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:315",
+      7838508
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:625",
+      6491736
+    ],
+    [
+      "Set :-1",
+      6101016
+    ],
+    [
+      "Map :-1",
+      5642324
+    ],
+    [
+      "next :-1",
+      5605480
+    ],
+    [
+      "values :-1",
+      4938260
+    ],
+    [
+      "add :-1",
+      4684140
+    ],
+    [
+      "scanAcronymSentences http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:290",
+      4392304
+    ],
+    [
+      "test :-1",
+      3528144
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:284",
+      3179800
+    ],
+    [
+      "tokenize http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:269",
+      3020044
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:334",
+      2990568
+    ],
+    [
+      "sort :-1",
+      2569348
+    ],
+    [
+      "keys :-1",
+      1955832
+    ],
+    [
+      "acronymWords http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:276",
+      1507996
+    ],
+    [
+      "normalizeText http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:254",
+      1129572
+    ],
+    [
+      "split :-1",
+      1115488
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:160",
+      1016492
+    ],
+    [
+      "expandGroups http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:490",
+      984420
+    ],
+    [
+      "nextSubmission http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:32",
+      885208
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:1470",
+      786716
+    ],
+    [
+      "set :-1",
+      714360
+    ],
+    [
+      "validDate http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:12",
+      688460
+    ],
+    [
+      "daysBetween http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:45",
+      622860
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:251",
+      524600
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:303",
+      491724
+    ],
+    [
+      "profilePhrases http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:100",
+      426428
+    ],
+    [
+      "recordIsCurrent http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:78",
+      360616
+    ],
+    [
+      "variants http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:441",
+      360604
+    ],
+    [
+      "events http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:17",
+      360584
+    ],
+    [
+      "entries :-1",
+      360560
+    ],
+    [
+      "freeze http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:8",
+      330376
+    ],
+    [
+      "phraseEvidence http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:294",
+      327848
+    ],
+    [
+      "slice :-1",
+      327784
+    ],
+    [
+      "profileVocabulary http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:270",
+      295276
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:1484",
+      295044
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:297",
+      295036
+    ],
+    [
+      "clone http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:7",
+      252736
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:276",
+      229488
+    ],
+    [
+      " http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:19",
+      196788
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:184",
+      196752
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:342",
+      196692
+    ],
+    [
+      "runtimeDateIso http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:65",
+      163948
+    ],
+    [
+      "recordIsTestOpportunity http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:61",
+      163892
+    ],
+    [
+      "get :-1",
+      132088
+    ],
+    [
+      " http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:31",
+      131220
+    ],
+    [
+      "compatible http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:25",
+      131144
+    ],
+    [
+      "nonFundingReason http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:43",
+      131132
+    ],
+    [
+      "flatMap :-1",
+      104996
+    ],
+    [
+      "RegExp :-1",
+      102648
+    ],
+    [
+      "vocabularyEvidence http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:365",
+      98368
+    ],
+    [
+      "loadData http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:43",
+      98352
+    ],
+    [
+      "scoreProfile http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:402",
+      98328
+    ],
+    [
+      "cmp http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:4",
+      73472
+    ],
+    [
+      "resolve http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:368",
+      65724
+    ],
+    [
+      "profileContext http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:229",
+      65676
+    ],
+    [
+      "conceptGroup http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:445",
+      65632
+    ],
+    [
+      "uniq http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:96",
+      65600
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:149",
+      65600
+    ],
+    [
+      " http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:55",
+      65588
+    ],
+    [
+      "tokenize http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:149",
+      65576
+    ],
+    [
+      "groupDefinitions http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:237",
+      65576
+    ],
+    [
+      " http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:67",
+      65568
+    ],
+    [
+      "replace :-1",
+      65564
+    ],
+    [
+      "hydrate http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:15",
+      53556
+    ],
+    [
+      "innerSerialize :185",
+      33000
+    ],
+    [
+      "isArray :-1",
+      32828
+    ],
+    [
+      "normalizeProfile http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:106",
+      32812
+    ],
+    [
+      "runtimeDate http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:60",
+      32812
+    ],
+    [
+      " :0",
+      32800
+    ],
+    [
+      " http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:35",
+      32800
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:391",
+      32800
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:279",
+      32788
+    ],
+    [
+      "coverage http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:135",
+      32788
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:141",
+      32788
+    ],
+    [
+      "create http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72:339",
+      32784
+    ],
+    [
+      "eligible http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:13",
+      32784
+    ],
+    [
+      "cleanDate http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:40",
+      32784
+    ],
+    [
+      "acronymSentences http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:282",
+      32784
+    ],
+    [
+      "has :-1",
+      32784
+    ],
+    [
+      " http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:106",
+      32780
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:344",
+      32780
+    ],
+    [
+      "staleUndatedOpportunity http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:34",
+      32772
+    ],
+    [
+      "getTime :-1",
+      32772
+    ],
+    [
+      "(root) :-1",
+      0
+    ],
+    [
+      "hash http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:10",
+      0
+    ],
+    [
+      " :-1",
+      0
+    ],
+    [
+      " :335",
+      0
+    ],
+    [
+      "safeJson :327",
+      0
+    ],
+    [
+      "jsonValue :321",
+      0
+    ],
+    [
+      "serializeAsCallArgument :171",
+      0
+    ],
+    [
+      "serialize :174",
+      0
+    ],
+    [
+      "create http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:61",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:65",
+      0
+    ],
+    [
+      "resolveScope http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:79",
+      0
+    ],
+    [
+      "create http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:120",
+      0
+    ],
+    [
+      "forEach :-1",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:48",
+      0
+    ],
+    [
+      "recordIsArchived http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:69",
+      0
+    ],
+    [
+      "recordIsCurrent http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:53",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f:37",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:206",
+      0
+    ],
+    [
+      "some :-1",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:163",
+      0
+    ],
+    [
+      "scanAcronymPhrases http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:309",
+      0
+    ],
+    [
+      "catalogCandidates http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e:330",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:377",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:378",
+      0
+    ],
+    [
+      "relatedTerm http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16:288",
+      0
+    ],
+    [
+      "proposal http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:180",
+      0
+    ],
+    [
+      "optimize http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:151",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:168",
+      0
+    ],
+    [
+      "justified http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:147",
+      0
+    ],
+    [
+      "combined http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:134",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:134",
+      0
+    ],
+    [
+      "stateFor http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c:179",
+      0
+    ],
+    [
+      "createChildCatalog http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:137",
+      0
+    ],
+    [
+      " http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d:142",
+      0
+    ]
+  ],
+  "limits": "Statistical allocations include collected objects, not simultaneous peak. Step samples can miss synchronous peaks.",
+  "provider_calls": 0
+}
