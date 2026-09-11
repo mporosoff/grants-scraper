@@ -39,9 +39,12 @@ class ExperimentLedger(Ledger):
             raise ConfigurationFailure("task_specific_trusted_route_unavailable")
         metadata = execution_metadata or {}
         d3_embedding = provider == 'voyage' and metadata.get('purpose') in {'d3-embedding','d3-query-format'}
-        allowed_model = model in {'voyage-4-large','voyage-context-4'} if d3_embedding else ROUTES.get(provider) == model
+        s3_embedding = provider == 'voyage' and metadata.get('purpose') == 's3-embedding'
+        allowed_model = model == 'voyage-4-large' if s3_embedding else model in {'voyage-4-large','voyage-context-4'} if d3_embedding else ROUTES.get(provider) == model
         if stage not in (2, 3) or stage > approved_stage or not allowed_model:
             raise ConfigurationFailure("outside_experiment_authority")
+        if (stage == 3) != metadata.get('purpose','').startswith('s3-'):
+            raise ConfigurationFailure('stage3_exact_purpose_required')
         if type(amount) is not int or amount <= 0 or attempt not in (1, 2):
             raise ValueError("invalid_conservative_reservation")
         if type(input_tokens) is not int or type(output_tokens) is not int or input_tokens <= 0 or output_tokens < 0 or provider=='anthropic' and output_tokens==0:
@@ -78,6 +81,20 @@ class ExperimentLedger(Ledger):
             if state.get("reservation_overrun"):
                 raise Deferred("recorded_reservation_overrun_requires_review")
             spent = sum(r["charged_microusd"] for r in state["requests"])
+            if stage == 3:
+                validation = [r for r in state['requests'] if r['stage']==3]
+                if (len(validation)>=184 or len(state['requests'])>=665
+                        or sum(r['charged_microusd'] for r in validation)+amount>4_000_000
+                        or spent+amount>7_135_333):
+                    raise Deferred('stage3_or_stage4_reserve_exhausted')
+                if provider=='voyage':
+                    preparation=[r for r in validation if r['provider']=='voyage']
+                    if (not s3_embedding or input_tokens>20_000 or len(preparation)>=20
+                            or sum(r.get('reserved_input_tokens',0) for r in preparation)+input_tokens>400_000
+                            or sum(r['reserved_microusd'] for r in preparation)+amount>48_000):
+                        raise Deferred('stage3_query_envelope_exhausted')
+                elif metadata.get('purpose') not in {'s3-primary','s3-alternative','s3-explanation','s3-swap','s3-control'}:
+                    raise ConfigurationFailure('stage3_unapproved_judge_purpose')
             judge = [r for r in state['requests'] if r['provider']=='anthropic' and r['stage']==stage]
             if provider=='voyage':
                 embedding=[r for r in state['requests'] if r['provider']=='voyage']
@@ -93,11 +110,11 @@ class ExperimentLedger(Ledger):
                         formats=[r for r in d3 if r.get('purpose')=='d3-query-format']
                         if len(formats)>=3 or any(r['model']!=model for r in formats):
                             raise Deferred('one_D3_leading_query_format_only')
-                if stage!=2 or output_tokens or len(embedding)>=80 or sum(r.get('reserved_input_tokens',0) for r in embedding)+input_tokens>10_000_000:
+                if output_tokens or len(embedding)>=80 or sum(r.get('reserved_input_tokens',0) for r in embedding)+input_tokens>10_000_000:
                     raise Deferred('finite_embedding_envelope_exhausted')
                 if sum(r['reserved_microusd'] for r in embedding)+amount>200_000:
                     raise Deferred('finite_preparation_dollar_envelope_exhausted')
-                minimum=(input_tokens*3+24)//25 if d3_embedding else (input_tokens+49)//50
+                minimum=(input_tokens*3+24)//25 if d3_embedding or s3_embedding else (input_tokens+49)//50
                 if amount < minimum:raise ValueError('underreserved_embedding_request')
             if provider=='anthropic':
                 d1 = metadata.get('purpose', '').startswith('d1-')
@@ -111,7 +128,7 @@ class ExperimentLedger(Ledger):
                 family = 'd3-' if d3 else 'd2-' if d2 else 'd1-' if d1 else None
                 judge = [r for r in judge if (r.get('purpose','').startswith(family) if family else not r.get('purpose','').startswith(('d1-','d2-','d3-')))]
                 count_cap, input_cap, output_cap = ((120, 1_100_000, 61_440) if d2 or d3 else (200, 1_360_000, 102_400) if d1 else
-                    ((350, 1_433_600, 179_200) if stage==2 else (260, 1_064_960, 133_120)))
+                    ((350, 1_433_600, 179_200) if stage==2 else (164, 1_064_960, 83_968)))
                 if input_tokens > 12_000 or output_tokens > 512 or len(judge)>=count_cap or sum(r.get('reserved_input_tokens',0) for r in judge)+input_tokens>input_cap or sum(r.get('reserved_output_tokens',0) for r in judge)+output_tokens>output_cap:
                     raise Deferred('finite_judge_phase_envelope_exhausted')
                 if amount < (input_tokens*5+1)//2 + output_tokens*10:

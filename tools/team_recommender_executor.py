@@ -34,6 +34,7 @@ PURPOSES.update({"d1-source":12,"d1-call":130,"d1-aspect":20,"d1-group":40,
                  "d1-comparison":40,"d1-explanation":12,"d1-control":30,"d1-swap":4})
 PURPOSES.update({"d2-call":80,"d2-group":70,"d2-comparison":20,"d2-explanation":6,"d2-swap":4})
 PURPOSES.update({"d3-call":100,"d3-group":70,"d3-comparison":25,"d3-explanation":8,"d3-swap":4})
+PURPOSES.update({"s3-primary":134,"s3-alternative":12,"s3-explanation":6,"s3-swap":6,"s3-control":6})
 KINDS = {"individual", "group", "comparison", "source_control", "explanation_audit"}
 SCIENCE_LABELS = {"strong", "plausible", "unrelated", "insufficient-information"}
 
@@ -55,6 +56,9 @@ def policy():
     if fields["registry_generation"] != value["registry_generation"]:
         raise ValueError("d1_registry_generation_mismatch")
     value["d1_profile_fields"] = fields["people"]
+    if 'stage3_inputs_sha256' in value:
+        from tools.team_recommender_stage3_executor import inputs
+        inputs(value)
     return value
 
 
@@ -134,6 +138,9 @@ def profile_evidence(rows, settings):
 
 
 def judge_contract(request, settings):
+    from tools.team_recommender_stage3_executor import PROTOCOL, judge_contract as stage3_contract
+    if request.get('protocol') == PROTOCOL:
+        return stage3_contract(request, settings)
     if request.get("protocol") in {"D1", "D1F"}:
         from tools.team_recommender_judge_d1 import contract
         return contract(request, settings)
@@ -197,6 +204,9 @@ def judge_contract(request, settings):
 
 def legacy_judge_key(request, settings):
     """Recognize paid pre-fix requests, never turn them into another attempt."""
+    from tools.team_recommender_stage3_executor import PROTOCOL
+    if request.get('protocol') == PROTOCOL:
+        return None  # Complete held-out evidence is a distinct, fixed question.
     # D1 has substantively different trusted questions, fields and schema.
     # Its body identity is still irreversible in the SAME durable ledger.
     if request.get("protocol") in {"D1", "D1F"}:
@@ -214,6 +224,9 @@ def legacy_judge_key(request, settings):
 
 
 def embedding_contract(request, settings):
+    from tools.team_recommender_stage3_executor import REPRESENTATION, embedding_contract as stage3_contract
+    if request.get('representation') == REPRESENTATION:
+        return stage3_contract(request,settings)
     from tools.team_recommender_embeddings_d3 import is_d3, contract
     if is_d3(request):
         return contract(request, settings)
@@ -366,7 +379,7 @@ def result_value(operation, payload, request, contract, settings):
             raise ValueError("incomplete_or_duplicate_verdicts")
         for verdict in value["verdicts"]:
             kind = aliases[verdict["item_id"]]
-            if request.get("protocol") in {"D1", "D1F"}:
+            if request.get("protocol") in {"D1", "D1F", "S3-E2-complete-v1"}:
                 from tools.team_recommender_judge_d1 import labels as d1_labels
                 labels = d1_labels(kind)
                 if not re.fullmatch(r"[ -~]{1,60}", verdict["reason"]):
@@ -484,7 +497,10 @@ def execute(destination, packet_path, packet_hash, post=requests.post):
         amount = ((bound*3+24)//25 if model in {'voyage-4-large','voyage-context-4'} else (bound+49)//50) if provider == "voyage" else (bound*5+1)//2 + 5120
         from tools.team_recommender_embeddings_d3 import is_d3, endpoint
         embedding_purpose = ('d3-query-format' if 'query_format' in request else 'd3-embedding') if is_d3(request) else ('d2-context' if request.get('representation') == 'D2-context-v1' else 'embedding')
-        token = ledger.reserve_experiment(provider, model, 2, key, amount, attempt, trusted_route=True,
+        from tools.team_recommender_stage3_executor import is_stage3
+        stage = 3 if is_stage3(request) else 2
+        if stage == 3 and provider == 'voyage': embedding_purpose = 's3-embedding'
+        token = ledger.reserve_experiment(provider, model, stage, key, amount, attempt, trusted_route=True, approved_stage=stage,
                     input_tokens=bound, output_tokens=0 if provider == "voyage" else 512,
                     execution_metadata={"packet_sha256": packet_hash, "body_sha256": identity(body),
                         "purpose": request.get("purpose", embedding_purpose), "code_sha": os.environ["GITHUB_SHA"], "row_inputs": row_inputs,

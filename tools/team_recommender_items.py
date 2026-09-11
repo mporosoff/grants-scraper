@@ -5,6 +5,9 @@ from tools.offline_spend import identity, Deferred
 
 
 def judge_items(request):
+    if request.get('protocol') == 'S3-E2-complete-v1':
+        from tools.team_recommender_stage3_executor import judge_items as stage3_items
+        return stage3_items(request)
     if request.get('protocol') not in {'D1', 'D1F'}:
         return []  # Older C2 scientific questions are deliberately incompatible.
     source = request['source_evidence']
@@ -62,7 +65,7 @@ def rebuild_historical_index(ledger_bytes, packet_directory):
 
 
 def claimed_judge_items(row, historical=None):
-    if not row.get('purpose','').startswith(('d1-','d2-','d3-')):
+    if not row.get('purpose','').startswith(('d1-','d2-','d3-','s3-')):
         return []
     if 'judge_items' in row:
         return row['judge_items']
