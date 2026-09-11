@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "operation": "development-judge",
+  "requests": [
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "87e7f88685d91b00079d9f2236670f8c7735690327b03ab7a294eed983a24e03"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "3657f89c719ea7820be9996a899d6bd5a6263c34d133db4a07c1eaf83762f576"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "d2bf4e56ed10dec630bb049417521edc8446328434aaaa4d528942f108ea88f5"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "91bf70651a30d1c9e0845e203129b25ada5c9bb286261a8b6afb08b510fe35b8"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "05db2db85675e084ac25e8c3993c78d0b1f0c668f943094369da850d8acdae1c"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "fad2d9fe6cb52249f4c28b7f575b4c7005f8983babd692ac46d9a415793c8315"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "1f605dcc0715281d8059e865adbc14a4710270bf47ba2a29011ec77212ed9de7"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "6e5696cde4e8ba188500eec93e17875c09f47aee13c02473ede44e2d322a2146"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "2e80b8bf596a482e2f9833266003d9c2da2b92540b2864290217ce910a0b04ce"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "35a46484621dc37aca314dfb28eb04ee69bf353f5ea20e3e182c5ef16c651234"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "9cdbb24da7d348de69f0cc350b2a4797545451a8fd1f9c28404350f182922975"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "d2eded51a6fb46573c76a75a51897a8f040e4e7c9185bd34778abb0039718a60"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "93d3332e1763375950536ef17880105936adffe80285cbfdc98ec99731fc4688"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "0f93539629ca633dc68ef5cf63e26e042a132b673e8024d1958b873254ab721a"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "6ae76d16a6e7625282c78b7b8bd5d4030daaae8c1647fbdf69776522628c53ce"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "62d9e14ec12615c2c509a99eb85ba5c74f1e9db08527dcb62c62e86f46a3e22b"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "55ade61b20cb2a84dd0f80db4bc5d3432f5fbaf33a1aede8e3428b5ee0051f0d"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "00c10cd8f25a48c3a2a223ee3ff6a97291ee7f8d35d67e93d4e7b737e8e10af9"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "bd6f7a7ae29f8daa000bd5902778cdb2c89a4ccdbe1f5f2739d21949fef1070e"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "ec85ad620dd22f4c5603e32c25b704751316ef1e64b05919cf1961534e8ee7f3"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "bc57f47013c0c1cb7f4b59ca96abd2941f20807718f1d982d94e770acd6a8c53"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "1ac488de09813c6575a85a0ceb94605d43e7d8c17ca72b05bbec79a87e6c23d9"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "df66b8b8179549251d215b946279fe1fe89588d6c440a9dccf0ff8099c8141ac"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "b681e6c459443eefa789665cbffc5e76a5a7b7cd8072581084220d591866f6dd"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "17c126a07d28f7aaeedf2add359c926a0a71a0577401988e4094541c7c1b92df"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "9506f898e5098347773bf90db14fa6d51a223994463a85cbdbb8a7e570983e45"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "d0a2d4e70f9371ce476d5f97e75dcc0794010a063ff508a504e03405b5c71ac4"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "87ba32b333a29d68aea53cf3fd48895efc634ab4a6b71fc06f5a6418452e87dc"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "4946614641f135a346789c4a7d1703060befce4918414ee9347dc6420c568835"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "35f14870111093a4954ce193cb781be4fc3616b5311805b660a4b44c7f65f523"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "932efa695ef90c8c8552574d2c41ef9544a1211138c877f5121d8de3b8814234"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "a8b301c836feaff35a8ffcacb33887c5cc9e89d77e50f2722e51c1e538008377"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "0990f3400191b0bcb957d0097fd4dbefe16a5b0efc6706bedfec40e16b1947b2"
+    },
+    {
+      "protocol": "post-audit-complete-v1",
+      "purpose": "post-audit",
+      "body_sha256": "a7fc5686fc793f6f73a19af12178bfb763457019239148459f1fd45f394a83fa"
+    }
+  ]
+}
