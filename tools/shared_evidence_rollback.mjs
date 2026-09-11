@@ -2,7 +2,7 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
 import {chromium} from '@playwright/test';
-const current=JSON.parse(fs.readFileSync('docs/team-recommender/evidence-repair/release-packages-v2.json')).packages.rollout50;
+const current=JSON.parse(fs.readFileSync('docs/team-recommender/evidence-repair/release-packages-v3.json')).packages.rollout50;
 const browser=await chromium.launch({headless:true});
 const context=await browser.newContext(),page=await context.newPage(),network=[],observations=[];
 let phase='';

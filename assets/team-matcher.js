@@ -385,7 +385,9 @@
         scientificSourceCache.set(prepared, source);
         if (scientificSourceCache.size > 8) scientificSourceCache.delete(scientificSourceCache.keys().next().value);
       }
-      let units = scientificProfileCache.get(profile);
+      const signature = JSON.stringify([profileContext(profile), profile.claims || [], profile.summary_evidence || [], profile.researcher_id || null]);
+      const cachedUnits = scientificProfileCache.get(profile);
+      let units = cachedUnits?.signature === signature ? cachedUnits.units : null;
       if (!units) {
         const claims = profile.claims || [], context = profileContext(profile), seen = new Set();
         const raw = claims.length ? claims.map(c => ({key: c.claim_id, claims: [c], values: [c.label, c.evidence]}))
@@ -404,7 +406,7 @@
             units.push({...unit, value: passage.value, groups});
           }
         }
-        scientificProfileCache.set(profile, units);
+        scientificProfileCache.set(profile, {signature, units});
       }
       const connections = new Map();
       for (const unit of units) for (const support of source.connections(unit.groups)) {
