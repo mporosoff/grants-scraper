@@ -144,7 +144,8 @@ test("a deferred four-person team cannot lose a member through Configure", async
     }, "");
   }, selectedIdentities);
 
-  await page.route("**/data/opportunity_teams.js*", route => route.fulfill({
+  // Team Match now loads the directory independently of team ingredients.
+  await page.route("**/data/researcher_directory.js*", route => route.fulfill({
     status: 503,
     contentType: "text/javascript",
     body: "",

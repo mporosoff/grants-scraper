@@ -1,0 +1,3236 @@
+{
+  "authoritative_cloud_state": {
+    "bytes": 153215,
+    "path": "outputs/team-recommender-stage3/cloud-judge-complete/checkpoint.json",
+    "sha256": "43f986a7e08412ebff594907ea57bebf4d460767254884fe32285a240ee3e982"
+  },
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "automatic_retries": 0,
+  "checkpoint_sha256": "43f986a7e08412ebff594907ea57bebf4d460767254884fe32285a240ee3e982",
+  "cloud_run": "34554567315",
+  "cumulative_microusd": 3952987,
+  "cumulative_requests": 595,
+  "duplicate_paid_logical_requests": 0,
+  "embedding_microusd": 2136,
+  "embedding_tokens": 17793,
+  "historical_other_task_usd": 11.971342,
+  "historical_spend_credit": 0,
+  "judge_failed_requests": 1,
+  "judge_input_tokens": 357299,
+  "judge_microusd": 815518,
+  "judge_output_tokens": 10092,
+  "judge_requests": 114,
+  "judge_valid_requests": 113,
+  "ledger_sha256": "2cad83d4b02f8ca7e210fb720f62f184da179fb67e222767ad9540968dfdf4df",
+  "local_mirror_is_dispatch_authority": false,
+  "new_requests": 120,
+  "outstanding_microusd": 0,
+  "overall_max_requests": 690,
+  "overall_max_usd": 10,
+  "prior_microusd": 3135333,
+  "prior_requests": 475,
+  "remaining_microusd": 6047013,
+  "remaining_slots": 95,
+  "stage3_exact_cache_events": 0,
+  "stage3_max_new_usd": 4,
+  "stage3_microusd": 817654,
+  "stage3_recorded_max_new_requests": 184,
+  "stage3_request_receipts": [
+    {
+      "attempt": 1,
+      "body_sha256": "7a78de5abf9b6281b67b3908de0093de6ec0b03fe69f92363966a93e736655b0",
+      "charged_microusd": 387,
+      "id": "1b8178ac57ad4f78ab15836c77912872",
+      "key": "512e306aa40306cea4b9e94a931d3fe56e968c1cae44df03292157034e063e9e",
+      "model": "voyage-4-large",
+      "packet_sha256": "fdaf75eea333d49ed54db581973158f15e02fd8b0f27155d281dd80bb3861dd0",
+      "provider": "voyage",
+      "purpose": "s3-embedding",
+      "status": "valid",
+      "usage": {
+        "total_tokens": 3223
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "460158c86daf5d753654c6914bacf50f53e4a75245784cb10703093cf9c84050",
+      "charged_microusd": 376,
+      "id": "71c89d57f4a844b2b4f50e5133b0297d",
+      "key": "12416239690b03e6bf29ad5d1c1a43253171a4c5172a5d3e80a4ef3c13fc54d4",
+      "model": "voyage-4-large",
+      "packet_sha256": "fdaf75eea333d49ed54db581973158f15e02fd8b0f27155d281dd80bb3861dd0",
+      "provider": "voyage",
+      "purpose": "s3-embedding",
+      "status": "valid",
+      "usage": {
+        "total_tokens": 3133
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9dcf2b6a3045e975484606bfae1948ad3aa3fa170a06db0f0e0f8dd928ea51c1",
+      "charged_microusd": 387,
+      "id": "21294721d3d94a2987c1d4f91176ae1e",
+      "key": "1c9391053f4f0de1d814869ec981f7f3af978c25e75fa556fc0880ca301a2b5e",
+      "model": "voyage-4-large",
+      "packet_sha256": "fdaf75eea333d49ed54db581973158f15e02fd8b0f27155d281dd80bb3861dd0",
+      "provider": "voyage",
+      "purpose": "s3-embedding",
+      "status": "valid",
+      "usage": {
+        "total_tokens": 3225
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a05b6af7ed584eb474d0ba1a54c01e83e0d2ee312039cfea2612b913e48ded07",
+      "charged_microusd": 320,
+      "id": "0daabca848644c129e9128c7d42333ee",
+      "key": "173c88a21e05d8c1255089139c13f746ce37e0373c6031dfaf193bf68d0e5488",
+      "model": "voyage-4-large",
+      "packet_sha256": "fdaf75eea333d49ed54db581973158f15e02fd8b0f27155d281dd80bb3861dd0",
+      "provider": "voyage",
+      "purpose": "s3-embedding",
+      "status": "valid",
+      "usage": {
+        "total_tokens": 2666
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a805c18857b4a365cceb593123c064885ebca56f714b4ecdad058099b8db1261",
+      "charged_microusd": 382,
+      "id": "c1de17254795429fb18af70f2a9a1d02",
+      "key": "e57ff44f58706ba7d411d7c4a1f00332b5de42fbce0569eedbbf0e71bcb05bb1",
+      "model": "voyage-4-large",
+      "packet_sha256": "fdaf75eea333d49ed54db581973158f15e02fd8b0f27155d281dd80bb3861dd0",
+      "provider": "voyage",
+      "purpose": "s3-embedding",
+      "status": "valid",
+      "usage": {
+        "total_tokens": 3180
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5f55304c5ec2faa46f2fdce72b84a778d511482ec582747da4548f7fe5f6567b",
+      "charged_microusd": 284,
+      "id": "56732b5e44334089a98edf6ca97868cb",
+      "key": "b1462ce5c9872fd3ef1af91056e184ba0088ffd3628a33b359c6a2bf23815895",
+      "model": "voyage-4-large",
+      "packet_sha256": "fdaf75eea333d49ed54db581973158f15e02fd8b0f27155d281dd80bb3861dd0",
+      "provider": "voyage",
+      "purpose": "s3-embedding",
+      "status": "valid",
+      "usage": {
+        "total_tokens": 2366
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "40f7ca685cb365ad0d1d2a16ca2ca70db2902e59b7e5ca1fe3e3acd4d6af8ec9",
+      "charged_microusd": 6922,
+      "id": "54efcf230cf34b53925ef518046b2ef2",
+      "key": "b5a90c4282399d11c2c130e5daa2818eb423652982d24393f89334dd09dea43a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3196,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5b3148cacfa97351f45b1131250c46c340dc250c1960843bef82321f4fa9ace9",
+      "charged_microusd": 6140,
+      "id": "8cd7b91961ed4b8d92bf7e44e16c77f8",
+      "key": "908654d4d9ff4b08917dcffea09373213a76b0396dc712a206d84f23d46ebfb1",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2800,
+        "output_tokens": 54,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "398d62980f85a1e9f480559ac026da5e0cb14abb31e003daf32542d19c48d122",
+      "charged_microusd": 5080,
+      "id": "61855557819640d898b65b6a4d82980b",
+      "key": "0fadad85f12ef7284b230ac42997e211cf7cc458a543afeca9e5963e82a0ae03",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2285,
+        "output_tokens": 51,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "06e8b43b1545cd5dc167ff062a862e4a784446e1d0e1ae9f66eac3f7171d5ba1",
+      "charged_microusd": 6310,
+      "id": "48deadb56b354680a20f310f6c18ef12",
+      "key": "348409de7b4af3363aaf5e5e435efda6287a61b3e567809d556c123a66000f28",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2890,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "370e06a39b6fb3320b71bf0e0d9ac03e754d8041e54af6064eeb3a1c99e2cec2",
+      "charged_microusd": 6114,
+      "id": "49a22d9047f74f528384077fb51540fe",
+      "key": "73e1bc85278bbcb8f45134a5c4e6a375f76151b401c88a27cdc25c5c93966dd3",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2807,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "97c473ceffbd87603587da4cabd9bd2109c7efbf9d23282b71c68da368168283",
+      "charged_microusd": 7954,
+      "id": "5def5ad71d124400aa557c3a2694bf73",
+      "key": "22d92eed58f72f42b11e26a1ca10bf1da29475f6ca2b43368d2a24e4fcdde803",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3292,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "47018b2b56f9fb11dfaa1c1b1d860f350e3ad0e47202e890dc33ca9e5aa096aa",
+      "charged_microusd": 6470,
+      "id": "eb368eb2a4ea4428b102adf4840fbdf5",
+      "key": "9efa529fb2b6334d374aec209dffb97a4ab56a7b872fa1c8650069beadcbf832",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2970,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b12fb03e8a1fa2594c8e75285eb78ee1e3464dbf6ac4cfc38903ca0433746fb7",
+      "charged_microusd": 7776,
+      "id": "49783f58a61c44a587681006b0c530b8",
+      "key": "362c21ad297e9aa6a12dc922ef63e5cc092e817d02eb88623444945d82e9d6da",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3248,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f97e0b020061be57bb828b1632c07a87bda376688609a311bbce3bca9347b022",
+      "charged_microusd": 5118,
+      "id": "e00a0a2e02ef4650bbbdbf9bf0248700",
+      "key": "67d36553bbfe82aedaa22e9a3b864e14dc3a3ba15b3cf75940d60cfcaa482813",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2299,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "efeac4c72ab90938453bb7a0aae30841860cd5d1c1f9039164102fddd3da99c2",
+      "charged_microusd": 8424,
+      "id": "6dfa4f323e214d7a8a90faf3ddc9d29c",
+      "key": "5c68f5681b670da2d653c15c57a02da2b28d6357c03be317a453c1fb8e3764bc",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3497,
+        "output_tokens": 143,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "c162867d13b012310ce0726d097ccc5ceed66d5e759366a25079ab432ea159e2",
+      "charged_microusd": 7564,
+      "id": "b1f1168578e942bd8f038f07f4a28281",
+      "key": "4f84b7f53bca89cd05047debcd602c1ea7b10eb280b28d04ff0716774147860d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3132,
+        "output_tokens": 130,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3da24838544cdf197ed54985fcc35ca99ec3fbea8b4f5c69dc430a96ff1c5392",
+      "charged_microusd": 7574,
+      "id": "20e33b3c4ffe430491c3c313fffee675",
+      "key": "2dc2780c858d4b930e22b502906b65b2f068d909efccf85968043f69e6564f8b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3072,
+        "output_tokens": 143,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "54e295db12c1cc6b11db9bd872a6493cbb07a44f9b25d887511c8c2283621c0c",
+      "charged_microusd": 7222,
+      "id": "cc1ab4b1654b40288c2c31d42ac63d93",
+      "key": "581ac33615e325c9fbd7d7c9a73e9ad3f0fcdfa6324b2eef09cd16215cd1d927",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2926,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e433016bac18dfb31919159b460df2741c03a743fa3132c64a80901d11a93962",
+      "charged_microusd": 5720,
+      "id": "1bf876a51f964854a3612d1d87a97adb",
+      "key": "54330c89beb67861155a56b0ed558ed900884c9589780deeda4411a20fa98773",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2595,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "165fd09f117e7c6621db5957df1beb7ac473332bdd36dab6a19e2787b2707a9c",
+      "charged_microusd": 5928,
+      "id": "bc613373c16242a6a0975aba06a65b8c",
+      "key": "d61597081379a99be8e30ef5d0dfceb7753c1fb80d6eb2818c3dcd1beb7337a3",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2699,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "ecabe12fb946325b3ecd845c9c77ad23f9cce0530c3a570340acaf2ca802e5ea",
+      "charged_microusd": 6840,
+      "id": "6b2c797396ac4e37a81fa63c5af78e3a",
+      "key": "7005332f8cad6eee0d7932e6127a3d3d7b4d386613bf26ffe17e304ca6ab85dd",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3175,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "78903aa489251b9c2aa3fe412413cf02646faff4a1f5fefea6c229feff7f5e2a",
+      "charged_microusd": 6792,
+      "id": "d60fde6c7ba6462f8a5154f883a1dbdc",
+      "key": "c6df3df77763dc0aa69e27ec9a90d4fb76b9798e81019a878b523ac40344cfcf",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2766,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "0a2544172e0556032727ddbd9a47536e545ed233fa8252998adff661d9a96859",
+      "charged_microusd": 6422,
+      "id": "d319620e777e4ab7badf92b4dbb6a195",
+      "key": "d6d63e121e0db22ab8810d00e50df043191eca5ca36385d1183cba1745ff5825",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2946,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e84441dbf3001d86a765a496b0626fddd5b87de2c0ab0a66b616f4485cc7d88b",
+      "charged_microusd": 5992,
+      "id": "9750035d50c44bbeb505a022f380ecc7",
+      "key": "d3fa993e4e6308afee776eb50975e6677739d0e9814bebc39a888cf5a8c35b0d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2731,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "efb305ead7c41c1d0e9ec1bb8fca4f4c5df3ab81f10c4f6834d2e10711ee7f7a",
+      "charged_microusd": 8434,
+      "id": "ec8545a4e9c34374a2ed2d482b02c428",
+      "key": "c0a483731f06399d1a4ad450aff3d10bc7b287786571aeb311358aefcbf036fc",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3512,
+        "output_tokens": 141,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "fe16f9b504d2f33b055ef762d4bc6ec7c241fab9ab33bac2a5745b435ea65f51",
+      "charged_microusd": 7748,
+      "id": "7c6890e829784680b4981ce1021cf8d1",
+      "key": "b316f3c338c845ebd4b88469be17578bcb9d2e9c2c23f813b5a4410f84d86bdc",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3634,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "c6aac533281d677610c40970d11303c2312ad29b02a2f0a0b14b6f20dea64099",
+      "charged_microusd": 5318,
+      "id": "8504e3be6e3f461593f1413d23ddb48b",
+      "key": "16c9fdc622dda0f9c10c220ccc42a480f2d81112793579cd4266530b5436c0f8",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2404,
+        "output_tokens": 51,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5dab5dddd174a5b565569fac8bf1f8e76f36701d4213680ba77bd48679085412",
+      "charged_microusd": 6594,
+      "id": "ac7302cfcb814540b435e13847b8270a",
+      "key": "b833d4e2eb0ded0f6bec43597682d09678eeb71da7316d76ce359859cf4ba54e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3032,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "702e69379b5e3eb4038f88c38ceaccf4482c2f2ad033f69362a751a6beca96d5",
+      "charged_microusd": 6728,
+      "id": "2b3b823b756546649e7a64ae37e9e9ef",
+      "key": "c2365e7afe6810be1c017ca2ea92162d3ea70bf758c854f65dd6a1edb43de054",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3099,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "92a62fdc58b701a07e0456e5bf7e6591228b835353dd33ed09e4a0c1613816bc",
+      "charged_microusd": 7666,
+      "id": "92a44f49912143c98247050711123b8c",
+      "key": "b94e623a32e65e6df9d6c3bcbe7e87c8ac8b75e47e00674686332ae0a3837577",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3133,
+        "output_tokens": 140,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "47d4f28ea41d243b6afde8e655f3f328f387cbd63f5773ef0812d1bc23818153",
+      "charged_microusd": 6834,
+      "id": "fdfc771761754cf8a88c387bec64dfec",
+      "key": "2be968f39ac48f6535d016bd47a17f136ae34514b7c44f54a9417332e6c76b5b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3152,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d49e702c8904aee67704729975ac8ce174ca5236bce8b0eb4370afceb5a0478b",
+      "charged_microusd": 7158,
+      "id": "63daff22a5cc448eb180bc0f2c5ca226",
+      "key": "a8a2ea7af6068aff5a589dbfee6870f05d6c2e377a6d4cc40e0e9e251ed9b345",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2939,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "4af9234fc388c26767bc1d9c3b2882ee96c78c6d0c92854ec5d96e594a822307",
+      "charged_microusd": 6904,
+      "id": "cc8839a8e5544b328cd9e5a2bd21fcc4",
+      "key": "24c3441479d19aa68ee30f2cd7435365fcd290beca987c4aac3be699de0d6dc7",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2817,
+        "output_tokens": 127,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "c36ce23a2435c493d6594793ebf08f056ff23f32d6104703d7f51628531b8270",
+      "charged_microusd": 5750,
+      "id": "1271a38b42b94013aceb3ac7152b2414",
+      "key": "7eef6f4c97b0ea6b68840e677e43e825399b66d892248523ba9bce4fc17b9ea2",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2625,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "fe7f5abc6a70d44f5d671a5f7e8ce382a8fe2e50572dbe356be8d745e6e269ed",
+      "charged_microusd": 5900,
+      "id": "16c4a474f399497b8e251fb2404dda6c",
+      "key": "d10a4163ab8a784d99f5625e9a302cd195c952357a21913cb30ce62b194f3227",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "failed",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2855,
+        "output_tokens": 19,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d1d7d5febefaba8ba074e96387d99553b7763403f697d11e2b96152dc2cb4ee5",
+      "charged_microusd": 5906,
+      "id": "a8b323d2b0d4430fb1bcc69b87b74493",
+      "key": "0b985a499c4949265d886b22f8e890378ebf5b2a3c299ba796cf33361de82326",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2688,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6770c624c0905cf7cec311452a40f06b627b508782b07ed152414ca40192e48f",
+      "charged_microusd": 7190,
+      "id": "c1d1f54cdeaa4a73a55a9edb4f3fc9fd",
+      "key": "49daa6acbbefa0a0292cc55d0251753a3fa45ace8b2424b0724d9fd3ad511d18",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3330,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "27f1c8776ee9d6cad25a1573670ef4e15f3600a62b7ca8bb105dc09959d63e78",
+      "charged_microusd": 6846,
+      "id": "dd7bf6ee5cd742d4aed8a71fe9553b1c",
+      "key": "a21cfc1801d00bb7c7bb3b0083cbf1239f5312592c90955cef9b241a48ba3569",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3158,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8ac9bc1f450c1192b81eb15959de55d4f5ed7c13763a3991852f34e2bab94e03",
+      "charged_microusd": 7828,
+      "id": "7ccccd4e3e294600ad1c3e1770a661c0",
+      "key": "0e36043fbb6f2e6f4fb67eb4b3ac2f2895b0228408a66316e48d06569405e32e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3284,
+        "output_tokens": 126,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "4aca869936f816a37cb69f5c9c6b0cdc8189b8318a12f23d841a26ac132d47e2",
+      "charged_microusd": 5768,
+      "id": "b43151e68f374e0298fbde82fdb496d1",
+      "key": "68ecfe34600c17fc4e2d85d60efbeb34dbca31a640616a38251aae721f9a2229",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2634,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "63bd58cf631ce1e6aa8ce10f031713fe6fde944e95cb18e9fa6ca03fc08a331d",
+      "charged_microusd": 8116,
+      "id": "00c9a9325928474ab32c81fa586ab7a0",
+      "key": "056819cf3e5c026c67a1ab0fe8bf80ce4477f1f9954848d62e2f7a26e6a38d1e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3398,
+        "output_tokens": 132,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5ef87fdae297462829fb9ff5fe26b53ff5915191fd47dc59aa107d549379aa8c",
+      "charged_microusd": 6980,
+      "id": "939fc41df3cf4acea286e475089ba634",
+      "key": "aa9025f9e113a9fdb939bab36844542491ae3fc5e3662a9b13dd9c56b10df198",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3235,
+        "output_tokens": 51,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6f690f40aa45b8db54ebfb91ee17ab2221e5dd829c56dc3e151f49e69bc93676",
+      "charged_microusd": 7866,
+      "id": "21aa348c49a44a999ead3b7996bc296b",
+      "key": "dc382599c4b27d46a2a5634ef80f30afe621d0f2d4b98e71db883923ac707a45",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3683,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f917f7fa87f643da30ccb2f8cb0470b50c233c51f9670cdd4ec2d8f66cfcb902",
+      "charged_microusd": 7010,
+      "id": "716f99ff18d24005869db0feb5039bd3",
+      "key": "a172006c47c5ed8388963dfad57abc52614726adb2c139b2b5dd626cf32b550d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3055,
+        "output_tokens": 90,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "9c7156eac31d08a3169f0d401fd695729f3f9ac5a398560492a1306d78b05a63",
+      "charged_microusd": 6056,
+      "id": "757d2a8cd646423ab59c91343893f6c7",
+      "key": "c6c2451cf5e4c029a81add68edf01e25a038a720b888bc4305aedb7ae957ba4b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2538,
+        "output_tokens": 98,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "066603e8c9c49835b3a2b3a3deee53ee6e87adc1aeba8e8b729db46ec50d315e",
+      "charged_microusd": 7464,
+      "id": "2184fa7759d74a00890b04f2689b9345",
+      "key": "009036fef41b4c7d461899f76578c23c308b9286d8b657a0adfd6c897b5bdb2a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3252,
+        "output_tokens": 96,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "22526d83c571c0907da7f9667b2a4d125baf5bc0330f25c5f699dafd1d4c8fbd",
+      "charged_microusd": 6940,
+      "id": "cf9d234d240f4681ba83adbfc12c5d6c",
+      "key": "f90b6355e7f91fa0d935727ae3acae6d9330ab1da84f1f7cabe46785b632a95f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3230,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "610fd2c572bc0556d339a3e45f4d1b9c326fe9cea664c9ead255a6c8b15311fd",
+      "charged_microusd": 6852,
+      "id": "85714b64bd9f4da0aff2f4902fbc11f1",
+      "key": "2096a34866180b5afe35af9b39fdb51c69241f59053843828405ffbeffa030a0",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3186,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "754dbcff93c8680b526cce82f0c6a8783c82de5d4a944aa2d534503ee53615fc",
+      "charged_microusd": 5970,
+      "id": "a4e31aa04cb749da841ae6d0f6610b80",
+      "key": "0459eec30ba08ae5acab36e48bc2e0deb919ace35267d9264e221fe77ae32aff",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2490,
+        "output_tokens": 99,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "311318ec79418beffe673adf09afced2d9fc7631f56e061f1e0339892b1148f2",
+      "charged_microusd": 8218,
+      "id": "29ff90ec70494f6eb1ace2a09be12246",
+      "key": "ad64ca877f4bebb411f6a6ac30de5809b712ef3879c9b0660090f112e7980ee0",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3369,
+        "output_tokens": 148,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "fd24347a1f045d02166b3d3b98b7de73caa627d1a13db78ae5730920561a9f44",
+      "charged_microusd": 6500,
+      "id": "a1c0ae080bed4e739c7b1bec82d4419d",
+      "key": "f2e45fdb6caf6cb7b89521eb4dc302d3980a1b6a1960eeffb09b412398b76ec4",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3010,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8120417f2e3bfe4479e64f5e00866d37baea0d40a6f04c54669da05b75e86f2a",
+      "charged_microusd": 8192,
+      "id": "9df10d4801b54816b1f348deb2c040ef",
+      "key": "70e55a42c9268e22335986b0fafc9633615753eea6eb863c2daed18d9814229a",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3656,
+        "output_tokens": 88,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "90069bba77d717a2084b0c942ec982dd6cb7354f267f96ee3dadcc8bd19f7c5c",
+      "charged_microusd": 5888,
+      "id": "fac58c3a37f34b22b83b4d8010e65385",
+      "key": "921d2b7476d8fc8003e48f02899ab45b630a27dd9215f859f26caf957bed5752",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2704,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f2f859018e4805e0cb95b28fe1a2a0642d77d5e6d1f74cf3a7c3d3f31e16a37c",
+      "charged_microusd": 7380,
+      "id": "a501bf5aa19a4734a2df86ad2e01cb2b",
+      "key": "a5ab5e00a002e5b1032f4a95c9d783e49584f786d47b58dcfa1f4e33f0366570",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3450,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6160f291b2455adc4256dc4e3bed3431bb9a38c09fab7f44ff95b038308605a8",
+      "charged_microusd": 7878,
+      "id": "3c7495c080584e2da87c98854cbb93bb",
+      "key": "c0bd7812851b917d00e87951b431fba7c4ce2de8a7c3046bbe66ad944ed4a65f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3699,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e97b6f2eced6b4025aab418bf6170c37d08ab4267116991f5a130e295b152f59",
+      "charged_microusd": 8036,
+      "id": "bc36a0baafb340e5bb7560fd39c23e0a",
+      "key": "c8346708a234c4f7ff72a872ae84a9b32496d6eea936df7ea641cb2fd595d803",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3368,
+        "output_tokens": 130,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7498ed03e4abdb644556a3cf447689013b0f6251fe25ce368e41193d4ff4c87d",
+      "charged_microusd": 6254,
+      "id": "8a3743ff1f0a447eb54c7105e0422332",
+      "key": "136ff6ba4415018cea3f64c8b4521cbcd6af567ebe1dc55afc3ee8c82ffc0739",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2877,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3c340101addb3151ac82300d65500264f4cf035c32a2b3d7d6743f62003520a4",
+      "charged_microusd": 5990,
+      "id": "a2cb1dd1595546a2bc331cdb2f530e18",
+      "key": "b903fabfb0d8807204b264410817527fd1f43581feac810a902e48e9ebfeebf9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2755,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "e239d199100a771a6c1718be3dbb42368f40a809bcca674154a409ea8304fddf",
+      "charged_microusd": 7592,
+      "id": "aaa6a26e72024365aa90d1de3b9d9a09",
+      "key": "dcdb5e5faeff007df4e7b6052d65ed55c0d9c308be2452ea2da1680180a08109",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3121,
+        "output_tokens": 135,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "f17c45f8f1bf966d4da1e5a96ec2b8c544da46465c8c3242e83f19392dfa22bf",
+      "charged_microusd": 6924,
+      "id": "95de5b74d7a74fb797fe65c2f75477df",
+      "key": "a2ce85b7e900bd7b7894fd360d14abc5263353eaf8d6e944694e494b558ba899",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3222,
+        "output_tokens": 48,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8c72259395d34277bae33996f70c59ea7f2a55ff19016d2d15ae4fc43da124c8",
+      "charged_microusd": 6826,
+      "id": "bd90a02c812d4fd487f3691b4a499ef1",
+      "key": "d52a435cb371776ae61b45e5fff3c569826f4edb763a9fbb1626fd2be2eb5022",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2938,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "c754ebdcbe469a9b8293389494133b7149b2f237576dc565cbe1c83447ba729d",
+      "charged_microusd": 7894,
+      "id": "3226ff8c14d24c02abeef2054f849777",
+      "key": "73c4e140d9fcac758795a752123663bf5142b6df0bb8a3ef2330934c255fc604",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3292,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "245c25a558429e4d241ece6825273122f9839852c4e957269991ac456d47267b",
+      "charged_microusd": 5248,
+      "id": "de637199744147ea872733faea75618c",
+      "key": "a2361db1868a9d08ed5f7674fecb0f11a01d8141ef4f867b822ddfa00eb12b86",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2359,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2d23f64659d29b1bd1395284e357701cc1c4de86bc325ecfdf5fc6a2620a45ff",
+      "charged_microusd": 8312,
+      "id": "eb9f11970f8c4be08e83dad31b99440b",
+      "key": "cad2007376a61081e79aeb1b47473991543f2f3d14d6986a1a96e7f898e1f7f9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3501,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a7a51c4a01e0218f26f6be5118f16689979dad1af3581f13c798b50a37751dce",
+      "charged_microusd": 9648,
+      "id": "ed147720bee84550ad6468e218ab2956",
+      "key": "e39c1cbf8091efdd4b108e895116ed4b4dbad5ce543855d25fb3cb3c78babea3",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4094,
+        "output_tokens": 146,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "85a9acbd3fd1aac8ccdab66ff69cee15f3f4556413f32f980f9dbb2e98f5142e",
+      "charged_microusd": 7314,
+      "id": "d49d388a07334ae88fea8f1c667ebb70",
+      "key": "c88ce92d70a478d362f4dfae1f78c23fe46e720bfbe094b4f891255024220b71",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3182,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "fa80a29aff01cd5d83ae7533b2cb8331180bf4aa4b29b8b55b33ec689e47f7e2",
+      "charged_microusd": 8366,
+      "id": "1e97c98fe823469e90027075bc4f63f2",
+      "key": "92ce63e94ba33b34b3577cd6ceecd051aea6f7e37f8e3f81e10b8c544774a597",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3473,
+        "output_tokens": 142,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a3f67d41f50f40dad682d14ece213c801662c0f2e591f6f27abcca5598990845",
+      "charged_microusd": 7802,
+      "id": "76de78dc06b6459ab75d4d2d9a5b3726",
+      "key": "8deaf1223d2c0a47b3ae4e89a3946300fc48b7f0db74bf4029f4c059c9457c3b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3216,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5d049f5552033cb2095cff1e333283effd0c23dde0613dac4192ae10edfc7a3f",
+      "charged_microusd": 9228,
+      "id": "9baea0ddc06443b383050f59335d40b9",
+      "key": "8eafc3f04e557d0533329ab0d753af03817906d5be82eef9d11c12309fa0c113",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3949,
+        "output_tokens": 133,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d35f2bd1896b8d4cb87ef8757f69110dc9a343f54b9108b7350a1bf947ceea2c",
+      "charged_microusd": 7606,
+      "id": "5eb46e516d5541ad8f2b56000d5dacf3",
+      "key": "25b0454f2ed96fca458abf99418d1b94d114f0415695b4219feb61716c6ae92d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3163,
+        "output_tokens": 128,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "ba40defd5d6ea34acd4b353485c924a45347c9c969ae27a17fc19f48b42a0c7d",
+      "charged_microusd": 8320,
+      "id": "903a698945d94bd898c985b408f76a24",
+      "key": "d2402230a42b16950d73dafd639f6d57ae1188908a4e771702276cfb425236db",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3680,
+        "output_tokens": 96,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "49beeabd743762de0cb0f5f665c023d8206b5b78c7ff941fe36d1c59ad4edb7f",
+      "charged_microusd": 7880,
+      "id": "7b667f153b1c42aea5cc0caf6c6633cc",
+      "key": "39071dd137c7508aa6656bea43f985f313a7e9aad9571ab979b58f62ee606011",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3240,
+        "output_tokens": 140,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8cec332f14adb2fbcc1d4cb8023d7c3c8d238ef5a2cc0bc1904532df59255738",
+      "charged_microusd": 7434,
+      "id": "9d14565b4d8b4c61ad156f9726114a7a",
+      "key": "86d86f2a9cce6ad517c115465cbffa0fe5b933fcce26ba0d5354aef72ca4187c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3017,
+        "output_tokens": 140,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8cb35c5bb28cb8fa27d36c281f98319617a55ca0a5bd238274d8883aa1ffd54a",
+      "charged_microusd": 9572,
+      "id": "ca398d58a0fe407fb8a73627be53bb9d",
+      "key": "753047100f0b61e0b699a4a5edb3d92eb1cdf91284310f29f50a0d1895442dfd",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4101,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "05f6d1bd5c5883ef5c0455c6ea76e91b92ed3ca18ed36253e99338696336ddb5",
+      "charged_microusd": 8878,
+      "id": "9d64c47a1ed449e7b6571cba946db25e",
+      "key": "5f4f19708f4143f60582857b5845c54e672b817882058281a935e355430633d6",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3784,
+        "output_tokens": 131,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "704d1a984121e786282d80319e3b3b7f515baa53f63437a0dee14f0b666031b6",
+      "charged_microusd": 7068,
+      "id": "a18e88eae2504ff99cb4b91c2b949ef5",
+      "key": "0ccd358568b70795a083eadb47df55664119290d81bbb490dade31c3ec048bac",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2859,
+        "output_tokens": 135,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7930dfc31bb8cc137e5ef86bfbc38bdb19c224597a8e2e09c842b7b84788ecd1",
+      "charged_microusd": 9862,
+      "id": "23d33be04cd44c08b8383d3f0ff287b6",
+      "key": "4e5516635d952d42c8346d887070a3368cd54ac20b7478a24183ff7de8d05dc9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4251,
+        "output_tokens": 136,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "54639ca7c09fedd7c4411b9e6424f778339b57d1f5d6bd580a8c2291ec0d4546",
+      "charged_microusd": 8912,
+      "id": "0205a9ddb778461d9c40ab1f862d231b",
+      "key": "05c721b5f992303282bf6d7bea6f32dbc74ee047b1fa2d4ea30a962512bd4304",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3756,
+        "output_tokens": 140,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "58b4c4cef5deb80476074b07c0fb584d193a33fa9436c867949148e849ed8639",
+      "charged_microusd": 8506,
+      "id": "5119eaf1934a4c19b6473c8531091191",
+      "key": "30d969d4c40ecc3490c500a70ad353dee7ed875eefa2c98a1f20df93b9b2eb26",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3828,
+        "output_tokens": 85,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b89e9bf0430bc6ec94f241d01e75ed08aaea4f17746cce80e80caad095dd1996",
+      "charged_microusd": 6640,
+      "id": "9ff2c133c80848cfbfa52cc6d08e0b88",
+      "key": "334e31adc58ba349992dad5ac9ea5863aaf78def57bd92a07bd9208cf772d8bd",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2845,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "44e5e15fde156a2e76a3ae072d46566c531c5fe4bb1bcccb0ee512f4bf191ec1",
+      "charged_microusd": 8004,
+      "id": "a799bb44d0494313843104c9bf75bd5a",
+      "key": "9d59d04b153ae76c05b6df333bcde81eb6e5906164c501eb9f7e388a82d5ad97",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3527,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "24888e7dda3e985439d2c64c504182bca0dbb27b4603a4d3aca8fcdebee653d6",
+      "charged_microusd": 8052,
+      "id": "0ad897d95e1243f69929416a0fcfaecb",
+      "key": "75ac396d3e660f8333cdf7e8ae3c8ec28ff4e0891e1e103e497ec23d6d4f52f9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3581,
+        "output_tokens": 89,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "558ace2447a8d81066ca2fc0b7193809fba1c39ea7fa068b0fc07e8d55d5fad4",
+      "charged_microusd": 8896,
+      "id": "d1c67a17844d4956847bb1efbc1e06f5",
+      "key": "dba980a7e5c995fd79932ccc92207eaf000a9c78be4accb9c566b7b86f0a0d0e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3763,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d9481483190c7318d96bfddaecc89fcd09c84e8eb334de6f2aeff391ad856cbe",
+      "charged_microusd": 8074,
+      "id": "5672f66140a24d09b6825040f4ae464b",
+      "key": "74c02fdc50c6b1bf6ec21ed79cc42eb0d19c0c3074cbe7f89e5374b1539e3618",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3417,
+        "output_tokens": 124,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "cbbc2f070393b13539401abaff7bcf2755492722dedfd6eb1c65dc51dbf85fcd",
+      "charged_microusd": 7872,
+      "id": "079c956b77ab4278a57d06ffa8722de7",
+      "key": "c9f2c5d9aeb825a4b4d003855929758077cc055ff1f602e8824d093e701ab0de",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3261,
+        "output_tokens": 135,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "1e0c3f43d069378b14af027ea29fb0e89f5fe8b9f87404657f569f9d8dc85488",
+      "charged_microusd": 8378,
+      "id": "d0ad76031de641c9a05e14cd4b2a66d3",
+      "key": "46f40c828c7a17a5788c32ee32cf519872d54ed025466a92f6fab2c26fb378bc",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3459,
+        "output_tokens": 146,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "67d61f79fdb52ecab0b8ea51998634637bdfb15223328dd50e91b609a8d09227",
+      "charged_microusd": 7406,
+      "id": "3a9eb96c88ed4b03873f15657e7f6fb1",
+      "key": "efdde3a02518967ff2fd86eac98aa1466ac9a15408cdefcc36e37b22991e990d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2963,
+        "output_tokens": 148,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7e42fb9b6338e2ca15ac814c018378801964532293abb08a90369c56edc6a637",
+      "charged_microusd": 7996,
+      "id": "ffae16124c05467fbfa7da0fe1b65d11",
+      "key": "9bc6d07bc64b43baf8154878cb5ffb0dc76d6c9da61dd76f661614a24d75bc44",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3323,
+        "output_tokens": 135,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "71bf70474dab2dc6b0c8929d52e1bab74dd35b6c2a38525384de3f3d9eac4954",
+      "charged_microusd": 7452,
+      "id": "c9457f63cd19484580f981f07d4b7c46",
+      "key": "d1a8ac5bf933dc24b4d160c1fa6ba68a869a695789dc6ed553cc0e657a2b918e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3461,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "3b025b19ba4c635a55c8c3a435ccbd78323dbfbad4985ef048cb98834c38320f",
+      "charged_microusd": 9110,
+      "id": "9e4b1cf3227d43abab433c74cd1eb9c0",
+      "key": "a780426ac8dabbbfdaa29536367eed0f4ba8b38eef319749ae4f89740f2aabc9",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4025,
+        "output_tokens": 106,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6161c438a3af3514a02a3d5879dee99600ffddb4938babd355769bd215ad2448",
+      "charged_microusd": 8430,
+      "id": "8765af9c90684c9c8663437e3dc5de75",
+      "key": "239a116bbee96999824f007f54d277b208dc6503ba0da9531ef7bb10adb7907c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3750,
+        "output_tokens": 93,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "47b2a7a253d0ab4f2916e0bf4ab7b171976a32877aaa22b4b93b556e2b624f11",
+      "charged_microusd": 8392,
+      "id": "68795721a08c49508714d406cbfc4ae0",
+      "key": "6b4a7ea764d0114ea1c09bb4590f98b4b2b59f67fd359352e270efabf8e6a5c6",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3481,
+        "output_tokens": 143,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2d1da631526e33d42f045cb9de67df3b1c796207a1482c764a63255d6ded20ba",
+      "charged_microusd": 8750,
+      "id": "5c7087660a0b4b10a3532b7441344323",
+      "key": "2fec1529b1946c6ee9bab4e9ff75629f5ef3b0b6e0904a11219fafefe9172cec",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3705,
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7655093c04f1564c499c323070ac4e9126604ca38099d648748f9353172ef483",
+      "charged_microusd": 9252,
+      "id": "41cf2fb0083f49908d06f1dceb3fe8f8",
+      "key": "abcd9abf8af5682898e8ab6ded3df38615de1cf0f2a7fcf087ef88e476669088",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3956,
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "956cbe95c3e5f034b12bbda7371dfb352ca0db73424e70f6ca51a1ec5e2506b4",
+      "charged_microusd": 5336,
+      "id": "f5dc293465ff403f8dec1ae9ca63abdd",
+      "key": "8458a8e93f5ecddb1adc2f7b30b87609d075f7369945fad91fa5c300c0a29b98",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2403,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "494778648b3e2aa98cf78be75dc05dd89fb7d20029f82b94459c32c75ef75bb3",
+      "charged_microusd": 7348,
+      "id": "6dff0b338cab49419302a0047b6da38c",
+      "key": "fedba261f7fcc756315e8b64e82c83a7d4ada5253f503094cb0b1295069eb7c8",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3199,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "effaa1c4d3ea4e3df12aa2bd57474db908591db322381f2706d74f527d7f5f41",
+      "charged_microusd": 8086,
+      "id": "7ee743b2d2d341c392505d8d522693a9",
+      "key": "db2e1bc8e7ebd163b82d06058df32acf30a6f0ff60088b9570ae1e47b10286f1",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3778,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "b73228a658461da52b485a71c7bf23592f9cbeae06f1b12bab6ad8e64a4be45b",
+      "charged_microusd": 6344,
+      "id": "f759cbf72a59402d9756d953a0d043b4",
+      "key": "85a9d28dc050ac8ba9492038527f9d11e2da9dad4498d6b01eda18731a1b287b",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2697,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2ff7a2c2dc2cd26b3d35f5addbd63f2d02eaaf16c97246daf95b69adee616563",
+      "charged_microusd": 9782,
+      "id": "0d37213277924e13b69f1b79701b7705",
+      "key": "e1b2cd16c979c4277a183c469060bcb23e46d16ce0007bffe654beeaf0b5f838",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4221,
+        "output_tokens": 134,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "dc5d558949de57ff55524637f9b3f51aa2261d04b9463f55751afab146a8270c",
+      "charged_microusd": 4790,
+      "id": "3380f3342bf44f1c833f8a00d85faa1d",
+      "key": "3ddb0e6aeb327f68a4e5c5dbdfd84b22aa4a38f3a7b461688e497222c4668891",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2135,
+        "output_tokens": 52,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "a71a1e2f258662ab99f8b1fb35f2693f7be40b4767911ea645fe8bec4b58846c",
+      "charged_microusd": 5336,
+      "id": "caa3bc3a1c664483aaea42d155490810",
+      "key": "ff2bd0025ba8b3e1219a88fa65e9ae4bbc902e973e2e86ff91808bc73a74eb52",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2403,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "8d013fd417b2515658fa5e4693344fe8ace2fed9946042869e8228d1b74f7591",
+      "charged_microusd": 5914,
+      "id": "5aa8c8138be7484c9987c05b378015ee",
+      "key": "cd55a4f59222e1b5178010ea937c31304e92d1469a6001840b5aececf0a3ec39",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2692,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "d65b92f97f4e0144d6f309280517e2cc2d6f87431a1f204dd32cf290c83d8cf5",
+      "charged_microusd": 6816,
+      "id": "7e3fe95a407a40388d50bf854a3cb67e",
+      "key": "917046c8c300d1e8d39859fa8f54a9c46d75bb0ffa3028c8f935ae07b4f4e73c",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3143,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "6ad11eaf318a0f09ba45f25ba2c25618643babdf43fdc9803fbb8012b0b1b1a0",
+      "charged_microusd": 6360,
+      "id": "dcdc39aa58914d54b13e75149c14c38b",
+      "key": "248e6a40717eb75f3ae972b0d4fb76bc8e1764c733895f3c8172ba77b33538cf",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2915,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "db4903dea2854a9a2cd7730df7b1a43b1e7f48ecd450e712b85913a27b9f8e04",
+      "charged_microusd": 6554,
+      "id": "7404e7965aa44003a1db44245d95960e",
+      "key": "4808a9ea8ccca492e61480b1518fbcfc654016e47550dc305fcf96d740e9302e",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3002,
+        "output_tokens": 55,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "08f8c404d316f412f76f89505436baea09f22f28d7bef9023e0221ecbf10a7c3",
+      "charged_microusd": 7948,
+      "id": "8e0eac0631b24d03ae8e630b0cec0126",
+      "key": "a53257717646a61a96f39fd94013a78db1550cec58427a3e70f4beda4539fe6d",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3729,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "159f3d3322877664308ece03decf1ff0a768be2e3fa732f697225f77464e5017",
+      "charged_microusd": 7994,
+      "id": "54ddac0b60384cd88760199113a11e99",
+      "key": "bd595a9739abd8434090f797e1eb5a865d3fa4bed2e970b39a3aff20b11f05ca",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3522,
+        "output_tokens": 95,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "573c9a4aa4e57cc96460dac8bb5092ef1e6f55a68959743e6d36f5caf213053e",
+      "charged_microusd": 6864,
+      "id": "584dc36c5b3b405db90286cb0d7ffeee",
+      "key": "de4801e792b604b762b7e83e892d34fd4deee7fd077aa2751e3b5227ca1a3a8f",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3167,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "1b3a804830e135a45216e0f835fd0c8294df79bac6a1b5a2265dd12cfe455285",
+      "charged_microusd": 5534,
+      "id": "581cc37004dd48f3bda325b1e6438eb7",
+      "key": "e864eb765060caf322ef75737e312f25a48f31547cbc35dbe3cc88f2367b2365",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2517,
+        "output_tokens": 50,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "23ba672f52d2e3960b9cd2c773024b997a9a74223abca29212550ee48115c625",
+      "charged_microusd": 6442,
+      "id": "48ed3106a0a3444095f770c83dcae2d2",
+      "key": "8a8bd6cdb45dac834b46a3825f3aa58f506fe920324286d0486f394794e367a2",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2761,
+        "output_tokens": 92,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "48e33e1fbc2016a79e450105112a29fafb0a2daf26dd9534f4f6ed17564e8911",
+      "charged_microusd": 5542,
+      "id": "615827ffb95040239e4ded7b619a31a5",
+      "key": "ca227a61802f749733523713501b73ad6213b2c8660f77399ce3fbc605123eb7",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2506,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "84c59318f8a8614a06469505d3066970c82de1d14d6037b12e9bdbe037e13c08",
+      "charged_microusd": 6606,
+      "id": "667d68609ab1400e98c5b7b2f0e18ef1",
+      "key": "7e7b9fca77dc09529bd9bef46e5a2aad12b7123d2c6f7210f83d055214a8ce11",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2813,
+        "output_tokens": 98,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "7b40842d036db809ab353f0c1540547fc950c87a72dd8368311912dfb2ed75e5",
+      "charged_microusd": 9578,
+      "id": "b67511cddd324421a99a5d78c9cbdff1",
+      "key": "7190c73736b49a7065877b99de4248ed0ddce350eaf638832b26fce1b4146dbc",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-primary",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 4104,
+        "output_tokens": 137,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "67dd02684ccf2d5d7b4827c7778b59c657231cd212807ec1c3480a2cd2a374cf",
+      "charged_microusd": 6748,
+      "id": "ac514e8ca3ca4bb49b14ed376a077d97",
+      "key": "0db73c3093f39d248ad770ad24d40feb7e669c20700a1066503ee0270ef96fec",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-alternative",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 3109,
+        "output_tokens": 53,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2a1a5c47c0a77d58f7753af5685f79bfef2d09c36428050fd7736408bbac665c",
+      "charged_microusd": 5224,
+      "id": "8b1dd75b02ab4ec8beeb7baf4aeece86",
+      "key": "d67e0123f8c948a4fa9d6d1a2e522d44f0dc3ae3c3045cc4cb557ade001b9d92",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-control",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2367,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "acf6273133f01d829c06aa64c32d83a1b9f075f4de24962c65ddfd863f639083",
+      "charged_microusd": 4430,
+      "id": "9c8c4b263e914ae0863f29e9f4987d87",
+      "key": "05860144cd6a6f26ee1472704fae730bea772f70835896fb7de3efe50999a1aa",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-control",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1970,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "28ecb3c275072d1cf3a82dd3b2300af8e22e432d388e02a2fb6ec74068bb3425",
+      "charged_microusd": 5446,
+      "id": "7dafb9d35cc347af818dd4d4da89d7db",
+      "key": "5b4edab15a628dcf2bdd3708e8dd4d2faeef5e0731c482b28d5ade318253a4ce",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-control",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2478,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "5ef62742bbf7d688262d144e294bb7286b9b4dd7eb713b5ad1ebf9108905fb6a",
+      "charged_microusd": 4006,
+      "id": "0a3f955581b64c3a80b9dd2750f0695a",
+      "key": "bb956c2a83122dc04867cd6c84c5ccc7445433962d5692ad6b2f3c7602757559",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-control",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 1758,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "52419ace363bee1f74e0fb598319100e9250af81f5f0e8ae2d5ff4e4d5451c8e",
+      "charged_microusd": 6070,
+      "id": "7750308b761f4616ae48ea6a6c53b036",
+      "key": "a1bb52ff8ae8afee0d7680f95490f43c974ee9e91ad69329f92042c91535bc35",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "2281c53f1f441161f525380b4f696c64a1cc3e9c0ad030f173c92eb9caa9a900",
+      "provider": "anthropic",
+      "purpose": "s3-control",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 2790,
+        "output_tokens": 49,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    }
+  ],
+  "stage4_minimum_preserved_requests": 25,
+  "stage4_minimum_preserved_usd": 2.864667,
+  "trusted_code": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
+  "usage_totals_by_provider": {
+    "anthropic": {
+      "charged_microusd": 3944110,
+      "requests": 553,
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 1666850,
+        "output_tokens": 61041,
+        "total_tokens": 0
+      }
+    },
+    "voyage": {
+      "charged_microusd": 8877,
+      "requests": 42,
+      "usage": {
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "input_tokens": 0,
+        "output_tokens": 0,
+        "total_tokens": 98216
+      }
+    }
+  },
+  "version": "S3-final-ledger-reconciliation-v1"
+}

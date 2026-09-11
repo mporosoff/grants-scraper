@@ -1,0 +1,527 @@
+{
+  "accessibility": "Configured full-suite and real E2 desktop/mobile-viewport axe checks passed; zero serious/critical findings; not physical-device or manual certification.",
+  "configured_cases_all_passed_after_bounded_fixture_correction": 117,
+  "configured_playwright_affected_recheck": {
+    "artifact": {
+      "bytes": 45,
+      "path": "outputs/team-recommender-stage3/browser/directory-seam-recheck/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    "failure": "outage fixture intercepted legacy team asset instead of accepted directory loading seam",
+    "passed": 1,
+    "tests": 1
+  },
+  "configured_playwright_first": {
+    "artifact": {
+      "bytes": 1462231,
+      "path": "outputs/team-recommender-stage3/browser/configured-first-results.json",
+      "sha256": "80fc067c55b04a5597c5093921c66351fd12e0dda1524f3628377d981d033329"
+    },
+    "stats": {
+      "duration": 495175.954,
+      "expected": 116,
+      "flaky": 0,
+      "skipped": 0,
+      "startTime": "2026-09-11T02:22:07.978Z",
+      "unexpected": 1
+    }
+  },
+  "full_suite_repeated": false,
+  "logs": [
+    {
+      "bytes": 1594,
+      "path": "outputs/team-recommender-stage3/affected-contracts-second.txt",
+      "sha256": "5356dcd0b20635f335c4509a95ad8d556692f1869558e866ed984ff76a9f8449"
+    },
+    {
+      "bytes": 4853,
+      "path": "outputs/team-recommender-stage3/affected-contracts.txt",
+      "sha256": "de513118189ce78bb9bdfa2df7b32b240a414a19d0c992d5c24b28fcf83b38a6"
+    },
+    {
+      "bytes": 13523,
+      "path": "outputs/team-recommender-stage3/analysis-console-v2.txt",
+      "sha256": "b74c4fc4bd54af4560f75e4407720e770f42f226e2d72edc8c0635e942506c84"
+    },
+    {
+      "bytes": 12417,
+      "path": "outputs/team-recommender-stage3/analysis-console.txt",
+      "sha256": "2b4d7364a20eeec149d0d58b7e7a046205f9e471b876d8b43683d37936b17ed0"
+    },
+    {
+      "bytes": 243,
+      "path": "outputs/team-recommender-stage3/browser/artifacts/.last-run.json",
+      "sha256": "ce05c496a37a8dbe391f9ed0f04db67c60d2096ed4db9c45b03190f2a231c469"
+    },
+    {
+      "bytes": 1462231,
+      "path": "outputs/team-recommender-stage3/browser/configured-first-results.json",
+      "sha256": "80fc067c55b04a5597c5093921c66351fd12e0dda1524f3628377d981d033329"
+    },
+    {
+      "bytes": 45,
+      "path": "outputs/team-recommender-stage3/browser/directory-seam-recheck/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "bytes": 30527,
+      "path": "outputs/team-recommender-stage3/browser/results.json",
+      "sha256": "4dc9ce2f66deb328789a821e5b94eaefc3d48003250d3e9dc2e958cb9f421e1b"
+    },
+    {
+      "bytes": 145,
+      "path": "outputs/team-recommender-stage3/browser/run2/artifacts/.last-run.json",
+      "sha256": "a3ee7cc5cc94d64e2801e727311e26b05f83310d19e3524a65224a8df13ce925"
+    },
+    {
+      "bytes": 40786497,
+      "path": "outputs/team-recommender-stage3/browser/run2/results.json",
+      "sha256": "7fc9b6399ba9d0b6836c30cd95e6bcdccc99ee69558887e581258a2410d1dbd8"
+    },
+    {
+      "bytes": 96,
+      "path": "outputs/team-recommender-stage3/browser/run3/artifacts/.last-run.json",
+      "sha256": "908440bff8b8cb126ac20038160ef2269690e98170a4f92ed86f7236abb34373"
+    },
+    {
+      "bytes": 19135,
+      "path": "outputs/team-recommender-stage3/browser/run3/results.json",
+      "sha256": "f1aa500e9cbfd3ea36394162971a4a7db5b00c6d26b49f2d9a2fa51586682f28"
+    },
+    {
+      "bytes": 145,
+      "path": "outputs/team-recommender-stage3/browser/run4/artifacts/.last-run.json",
+      "sha256": "8bdf75dedfb34db3fb56b49b9a37da3106ec92c02cc4873699665f6cabce5797"
+    },
+    {
+      "bytes": 29148,
+      "path": "outputs/team-recommender-stage3/browser/run4/results.json",
+      "sha256": "ed235b7742cde040e5e738c5d33d0073d4ce7b4c1311511d77142fedb5a5c9d9"
+    },
+    {
+      "bytes": 96,
+      "path": "outputs/team-recommender-stage3/browser/run5/artifacts/.last-run.json",
+      "sha256": "1f04c7d64a3ebbd565fd9cd5adb16fa77cdf2b304cab1871869420d1f4846ed1"
+    },
+    {
+      "bytes": 26740,
+      "path": "outputs/team-recommender-stage3/browser/run5/results.json",
+      "sha256": "abad24e171cef44e2567e425869e0601b25af6b5369e0179c0e5666ab1f7c107"
+    },
+    {
+      "bytes": 45,
+      "path": "outputs/team-recommender-stage3/browser/run6/artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "bytes": 40834817,
+      "path": "outputs/team-recommender-stage3/browser/run6/results.json",
+      "sha256": "e50ca09b505008b602807391b6e77e7f4dec19b558721800c88a95c3d8052cef"
+    },
+    {
+      "bytes": 45,
+      "path": "outputs/team-recommender-stage3/browser/run7/artifacts/.last-run.json",
+      "sha256": "91d1c43004802cd49950d78eb11c8fa7d05da8ffffe219a8b13b2f561bc00903"
+    },
+    {
+      "bytes": 12607,
+      "path": "outputs/team-recommender-stage3/browser/run7/results.json",
+      "sha256": "dfcd112f1a69089e8a20e9f73c3998a5eaffe06bc945fd901fa9ba819f9d235b"
+    },
+    {
+      "bytes": 85422,
+      "path": "outputs/team-recommender-stage3/browser-contracts.txt",
+      "sha256": "41acb84229d47284eaab13158285f962bfdf9fe1d95422d69dff315eb632e550"
+    },
+    {
+      "bytes": 603,
+      "path": "outputs/team-recommender-stage3/final-real-contracts-second.txt",
+      "sha256": "bf772805b5cce8304f6f8a02894f98d8629fd420ece6fc6eae647cfd5efd6d73"
+    },
+    {
+      "bytes": 1400,
+      "path": "outputs/team-recommender-stage3/final-real-contracts.txt",
+      "sha256": "74d8d61d6bd66a4a199a33eea79583da69721fdae0b7d14518cead81e781503a"
+    },
+    {
+      "bytes": 3523,
+      "path": "outputs/team-recommender-stage3/focused-python.txt",
+      "sha256": "47b8287318cecc77ea6b904d1b7b689e7aedce497d72c618fd36d9f836cb7b43"
+    }
+  ],
+  "node_affected_reruns": {
+    "all_four_original_failures_closed": true,
+    "first": {
+      "failed": 1,
+      "passed": 33,
+      "tests": 34
+    },
+    "second": {
+      "failed": 0,
+      "passed": 13,
+      "tests": 13
+    }
+  },
+  "node_full_first": {
+    "failed": 4,
+    "failure_family": "stale historical expected hashes and experimental release metadata for accepted E2 loading seams",
+    "log": {
+      "bytes": 85422,
+      "path": "outputs/team-recommender-stage3/browser-contracts.txt",
+      "sha256": "41acb84229d47284eaab13158285f962bfdf9fe1d95422d69dff315eb632e550"
+    },
+    "passed": 840,
+    "tests": 844
+  },
+  "node_unique_cases": 845,
+  "one_full_845_case_run_claimed": false,
+  "ordinary_search_embed_query_is_separate": "Existing hosted query requests in ordinary search/Team Match were intercepted as fixtures and excluded from Build/edit phase counts; no actual paid browser traffic.",
+  "peak_heap": "NOT MEASURED",
+  "physical_mobile_device": "NOT RUN",
+  "presentation_changes": 0,
+  "python": {
+    "failed": 0,
+    "log": {
+      "bytes": 3523,
+      "path": "outputs/team-recommender-stage3/focused-python.txt",
+      "sha256": "47b8287318cecc77ea6b904d1b7b689e7aedce497d72c618fd36d9f836cb7b43"
+    },
+    "passed": 67,
+    "tests": 67
+  },
+  "real_browser_latest_cases": [
+    {
+      "result_statuses": [
+        "passed"
+      ],
+      "status": "expected",
+      "title": "real rollout50 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+    },
+    {
+      "result_statuses": [
+        "passed"
+      ],
+      "status": "expected",
+      "title": "real rollout150 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+    },
+    {
+      "result_statuses": [
+        "passed"
+      ],
+      "status": "expected",
+      "title": "real complete app distinguishes no-group and unprepared; no calls on retry or corrupt cache miss"
+    },
+    {
+      "result_statuses": [
+        "passed"
+      ],
+      "status": "expected",
+      "title": "closed panels and changed generation reject delayed responses, fresh actions expire cached choices"
+    },
+    {
+      "result_statuses": [
+        "passed"
+      ],
+      "status": "expected",
+      "title": "native child chooser and all-member handoff preserve real source ownership"
+    },
+    {
+      "result_statuses": [
+        "passed"
+      ],
+      "status": "expected",
+      "title": "unavailable and mixed-generation assets fail without provider fallback and recover the preserved package"
+    },
+    {
+      "result_statuses": [
+        "passed"
+      ],
+      "status": "expected",
+      "title": "real heldout rendering uses zero, one and eight useful options without padding"
+    }
+  ],
+  "real_browser_runs": [
+    {
+      "artifact": {
+        "bytes": 30527,
+        "path": "outputs/team-recommender-stage3/browser/results.json",
+        "sha256": "4dc9ce2f66deb328789a821e5b94eaefc3d48003250d3e9dc2e958cb9f421e1b"
+      },
+      "cases": [
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "real rollout50 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+        },
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "real rollout150 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+        },
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "real complete app distinguishes no-group and unprepared; no calls on retry or corrupt cache miss"
+        },
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "closed panels and changed generation reject delayed responses, fresh actions expire cached choices"
+        }
+      ],
+      "stats": {
+        "duration": 54686.079,
+        "expected": 0,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T02:27:39.619Z",
+        "unexpected": 4
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 40786497,
+        "path": "outputs/team-recommender-stage3/browser/run2/results.json",
+        "sha256": "7fc9b6399ba9d0b6836c30cd95e6bcdccc99ee69558887e581258a2410d1dbd8"
+      },
+      "cases": [
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "real rollout50 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+        },
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "real rollout150 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+        },
+        {
+          "result_statuses": [
+            "timedOut"
+          ],
+          "status": "unexpected",
+          "title": "real complete app distinguishes no-group and unprepared; no calls on retry or corrupt cache miss"
+        },
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "closed panels and changed generation reject delayed responses, fresh actions expire cached choices"
+        }
+      ],
+      "stats": {
+        "duration": 139255.65800000002,
+        "expected": 2,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T02:29:08.336Z",
+        "unexpected": 2
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 19135,
+        "path": "outputs/team-recommender-stage3/browser/run3/results.json",
+        "sha256": "f1aa500e9cbfd3ea36394162971a4a7db5b00c6d26b49f2d9a2fa51586682f28"
+      },
+      "cases": [
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "real complete app distinguishes no-group and unprepared; no calls on retry or corrupt cache miss"
+        },
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "closed panels and changed generation reject delayed responses, fresh actions expire cached choices"
+        }
+      ],
+      "stats": {
+        "duration": 31956.01,
+        "expected": 1,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T02:33:29.966Z",
+        "unexpected": 1
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 29148,
+        "path": "outputs/team-recommender-stage3/browser/run4/results.json",
+        "sha256": "ed235b7742cde040e5e738c5d33d0073d4ce7b4c1311511d77142fedb5a5c9d9"
+      },
+      "cases": [
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "native child chooser and all-member handoff preserve real source ownership"
+        },
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "unavailable and mixed-generation assets fail without provider fallback and recover the preserved package"
+        },
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "real complete app distinguishes no-group and unprepared; no calls on retry or corrupt cache miss"
+        }
+      ],
+      "stats": {
+        "duration": 38904.839,
+        "expected": 1,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T02:37:57.317Z",
+        "unexpected": 2
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 26740,
+        "path": "outputs/team-recommender-stage3/browser/run5/results.json",
+        "sha256": "abad24e171cef44e2567e425869e0601b25af6b5369e0179c0e5666ab1f7c107"
+      },
+      "cases": [
+        {
+          "result_statuses": [
+            "failed"
+          ],
+          "status": "unexpected",
+          "title": "native child chooser and all-member handoff preserve real source ownership"
+        },
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "unavailable and mixed-generation assets fail without provider fallback and recover the preserved package"
+        }
+      ],
+      "stats": {
+        "duration": 25952.012000000002,
+        "expected": 1,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T02:46:08.574Z",
+        "unexpected": 1
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 40834817,
+        "path": "outputs/team-recommender-stage3/browser/run6/results.json",
+        "sha256": "e50ca09b505008b602807391b6e77e7f4dec19b558721800c88a95c3d8052cef"
+      },
+      "cases": [
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "real rollout50 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+        },
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "real rollout150 routing: lazy cold/warm build, all candidates, options, edits, focus and accessibility"
+        },
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "native child chooser and all-member handoff preserve real source ownership"
+        }
+      ],
+      "stats": {
+        "duration": 28826.539,
+        "expected": 3,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T02:47:59.217Z",
+        "unexpected": 0
+      }
+    },
+    {
+      "artifact": {
+        "bytes": 12607,
+        "path": "outputs/team-recommender-stage3/browser/run7/results.json",
+        "sha256": "dfcd112f1a69089e8a20e9f73c3998a5eaffe06bc945fd901fa9ba819f9d235b"
+      },
+      "cases": [
+        {
+          "result_statuses": [
+            "passed"
+          ],
+          "status": "expected",
+          "title": "real heldout rendering uses zero, one and eight useful options without padding"
+        }
+      ],
+      "stats": {
+        "duration": 11735.918,
+        "expected": 1,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T02:52:37.396Z",
+        "unexpected": 0
+      }
+    }
+  ],
+  "real_input_node_final": {
+    "failed": 0,
+    "log": {
+      "bytes": 603,
+      "path": "outputs/team-recommender-stage3/final-real-contracts-second.txt",
+      "sha256": "bf772805b5cce8304f6f8a02894f98d8629fd420ece6fc6eae647cfd5efd6d73"
+    },
+    "passed": 4,
+    "tests": 4
+  },
+  "release_metadata_changed_fields": [
+    "/source_hashes/assets/team-ingredients.js",
+    "/source_hashes/assets/team-recommender.js"
+  ],
+  "rollout_child_receipt_fix": {
+    "bytes": 39542,
+    "path": "docs/team-recommender/receipts/stage3-routing-packages-v3.json",
+    "sha256": "c43c3f6c2ef215b9c33f6af6813dcd0f3dc7b9295420d28378de9aaa1a6a6e96"
+  },
+  "runtime_changes_from_nominee": 0,
+  "runtime_sha256": {
+    "assets/opportunity-team-panel.js": "38bd591cd461f87786a180be2e589e7f7fe5b6d9e4d80589e736be7e8cd4ca99",
+    "assets/opportunity-team.js": "62e8983f0693536afddb1cc896f79621f59ca88de2b0e18fa0462f686de33dfd",
+    "assets/team-ingredients.js": "01240ca79e2804c8daccc385aecce5c643a7c8d45864ede9e7337bddb4e9c09a",
+    "assets/team-recommender.js": "c4a24b159f314f075b89a6b22ae17d8b5605d3bc5277cc06ce371b3a0389cd59"
+  },
+  "scientific_selection_changes": 0,
+  "search_corpus_or_search_model_changes": 0,
+  "version": "S3-final-validation-evidence-v1",
+  "zero_paid_prepared_interactions": true
+}

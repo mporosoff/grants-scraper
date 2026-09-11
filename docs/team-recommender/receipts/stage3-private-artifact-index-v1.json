@@ -1,0 +1,291 @@
+{
+  "artifacts": [
+    {
+      "bytes": 16473113,
+      "path": "outputs/team-recommender-stage3/source-inputs-v1.json",
+      "sha256": "4f2bae70fa83a43e7bd6dce76585c622cea87b52cea1a2deb5e8c977cf469b0f"
+    },
+    {
+      "bytes": 2255733,
+      "path": "outputs/team-recommender-stage3/heldout-outputs-v1.json",
+      "sha256": "4cbfe1028cf256b520f89c5cb80d80a3d5338d5783fd51d1b363623bc9833cef"
+    },
+    {
+      "bytes": 142226,
+      "path": "outputs/team-recommender-stage3/judged-occurrences-v1.json",
+      "sha256": "476fe95a70c890506b06fbe4a26527bb40612568b01687cadf36f828f99cf152"
+    },
+    {
+      "bytes": 116509,
+      "path": "outputs/team-recommender-stage3/judge-adoption-v1.json",
+      "sha256": "a278170469cec855f543f343c35b80020076a68aa36f18f893af4f26ba361644"
+    },
+    {
+      "bytes": 422689,
+      "path": "outputs/team-recommender-stage3/judge-unique-items-v1.json",
+      "sha256": "2db6c5ab3cc2edf0527427e950fa157f3a4e1f2ab1f8ed4d5b6a75f753a12746"
+    },
+    {
+      "bytes": 266,
+      "path": "outputs/team-recommender-stage3/human-audit-blind-map.json",
+      "sha256": "4202b6f0e7f4b00e8962e8b3b528b40b777ce5728aedf99f539aa2c15fb5847f"
+    },
+    {
+      "bytes": 742876,
+      "path": "outputs/team-recommender-stage3/judge-packet-v1.json",
+      "sha256": "51b65b4b9eadb38b42e6ec3ef840feb8859360fcc6a13711fdd1daebe2982628"
+    },
+    {
+      "bytes": 940885,
+      "path": "outputs/team-recommender-stage3/assembled-holdout_effective/bundle.json",
+      "sha256": "477d74610db42fc5b941cbc5e46ca8fb2fcd9cb0ebbc34b2b94831c3309656b8"
+    },
+    {
+      "bytes": 14822972,
+      "path": "outputs/team-recommender-stage3/assembled-holdout_effective/context.json",
+      "sha256": "ca9af836f925fe1d143eb61f9eba4996203abf2d5466200f86dc056c31815db7"
+    },
+    {
+      "bytes": 388727,
+      "path": "outputs/team-recommender-stage3/assembled-holdout_effective/directory.json",
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+    },
+    {
+      "bytes": 50604,
+      "path": "outputs/team-recommender-stage3/assembled-holdout_effective/validations.json",
+      "sha256": "8d2e848869fc4845a2c2d4e181ba5190ad1a2bf98301c3d23dd43b4f41683e0f"
+    },
+    {
+      "bytes": 1044480,
+      "path": "outputs/team-recommender-stage3/assembled-holdout_effective/vectors.f32",
+      "sha256": "7e3bce2359aaf0dbcf8dbf1d9c684935c975a8caf94118b98efa959d29828495"
+    },
+    {
+      "bytes": 1313690,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150/bundle.json",
+      "sha256": "7b9259e37c40ed79988a87ffaf06c64c0cfd10447a4fc2a12888ba038c148b7f"
+    },
+    {
+      "bytes": 14822972,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150/context.json",
+      "sha256": "ca9af836f925fe1d143eb61f9eba4996203abf2d5466200f86dc056c31815db7"
+    },
+    {
+      "bytes": 388727,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150/directory.json",
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+    },
+    {
+      "bytes": 96049,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150/validations.json",
+      "sha256": "308e12a9bd6da8cacee92dd816648dcb669747277d64f513b49deeabe155cc61"
+    },
+    {
+      "bytes": 1376256,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150/vectors.f32",
+      "sha256": "a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee"
+    },
+    {
+      "bytes": 1357225,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150-v3/bundle.json",
+      "sha256": "d5a40d2480c7fa1f7ca07c97ee52662dfabc219d357f6786435eea5182f0fbe3"
+    },
+    {
+      "bytes": 14849432,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150-v3/context.json",
+      "sha256": "750b0d09191e0f8f93ef8df192f71f864bb6bf6987914955e4cee8b2a50c89ca"
+    },
+    {
+      "bytes": 388727,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150-v3/directory.json",
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+    },
+    {
+      "bytes": 96049,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150-v3/validations.json",
+      "sha256": "308e12a9bd6da8cacee92dd816648dcb669747277d64f513b49deeabe155cc61"
+    },
+    {
+      "bytes": 1376256,
+      "path": "outputs/team-recommender-stage3/assembled-rollout150-v3/vectors.f32",
+      "sha256": "a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee"
+    },
+    {
+      "bytes": 635861,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50/bundle.json",
+      "sha256": "100433bc25996fb953b0277fed8d805088a545092d314bf68d935edb7d69cc8d"
+    },
+    {
+      "bytes": 14822972,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50/context.json",
+      "sha256": "ca9af836f925fe1d143eb61f9eba4996203abf2d5466200f86dc056c31815db7"
+    },
+    {
+      "bytes": 388727,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50/directory.json",
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+    },
+    {
+      "bytes": 34402,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50/validations.json",
+      "sha256": "4d058d67bbcae83949fec86ad72a53a7ab5921c0e709cec574c46d07a9da39c9"
+    },
+    {
+      "bytes": 917504,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50/vectors.f32",
+      "sha256": "04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532"
+    },
+    {
+      "bytes": 653759,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v2/bundle.json",
+      "sha256": "bee64d3c71c8eaa5ea1ec06ece4f1abefbd53b72e789af3eb7cd83545afe29a8"
+    },
+    {
+      "bytes": 14833826,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v2/context.json",
+      "sha256": "4e046a905faed8fe09ffa78bd59d70ae6109efbf4113a9ad0a68f5dab087e4d4"
+    },
+    {
+      "bytes": 388727,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v2/directory.json",
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+    },
+    {
+      "bytes": 64774,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v2/validations.json",
+      "sha256": "8086d87dd166f49bc833a2e6246371040fb47aaa5b2b7846d6a8e754736c1358"
+    },
+    {
+      "bytes": 917504,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v2/vectors.f32",
+      "sha256": "04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532"
+    },
+    {
+      "bytes": 653759,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v3/bundle.json",
+      "sha256": "bee64d3c71c8eaa5ea1ec06ece4f1abefbd53b72e789af3eb7cd83545afe29a8"
+    },
+    {
+      "bytes": 14833826,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v3/context.json",
+      "sha256": "4e046a905faed8fe09ffa78bd59d70ae6109efbf4113a9ad0a68f5dab087e4d4"
+    },
+    {
+      "bytes": 388727,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v3/directory.json",
+      "sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a"
+    },
+    {
+      "bytes": 34402,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v3/validations.json",
+      "sha256": "4d058d67bbcae83949fec86ad72a53a7ab5921c0e709cec574c46d07a9da39c9"
+    },
+    {
+      "bytes": 917504,
+      "path": "outputs/team-recommender-stage3/assembled-rollout50-v3/vectors.f32",
+      "sha256": "04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532"
+    },
+    {
+      "bytes": 10965,
+      "path": "outputs/team-recommender-stage3/package-holdout_effective/data/opportunity_team_index.js",
+      "sha256": "0246a283cd46d397a0776bf4d94fae1dd07610169c83db813b16c882ae092de9"
+    },
+    {
+      "bytes": 940885,
+      "path": "outputs/team-recommender-stage3/package-holdout_effective/data/team-recommender/477d74610db42fc5b941cbc5e46ca8fb2fcd9cb0ebbc34b2b94831c3309656b8.json",
+      "sha256": "477d74610db42fc5b941cbc5e46ca8fb2fcd9cb0ebbc34b2b94831c3309656b8"
+    },
+    {
+      "bytes": 1044480,
+      "path": "outputs/team-recommender-stage3/package-holdout_effective/data/team-recommender/7e3bce2359aaf0dbcf8dbf1d9c684935c975a8caf94118b98efa959d29828495.f32",
+      "sha256": "7e3bce2359aaf0dbcf8dbf1d9c684935c975a8caf94118b98efa959d29828495"
+    },
+    {
+      "bytes": 51409,
+      "path": "outputs/team-recommender-stage3/package-holdout_effective/data/team-recommender/d40625d373c3e87e742946c1c12af3b351e6d48ff3388f6851a18275ac034bc9.json",
+      "sha256": "d40625d373c3e87e742946c1c12af3b351e6d48ff3388f6851a18275ac034bc9"
+    },
+    {
+      "bytes": 18465,
+      "path": "outputs/team-recommender-stage3/package-rollout150/data/opportunity_team_index.js",
+      "sha256": "5191d6fc3690fff9b641e805380fd1eb9ae2770d98eba5867d19111451bd6a31"
+    },
+    {
+      "bytes": 96855,
+      "path": "outputs/team-recommender-stage3/package-rollout150/data/team-recommender/165f9556d2152114a75531cdc3d7ab67c5059e2b5b04929a26650a39a8851188.json",
+      "sha256": "165f9556d2152114a75531cdc3d7ab67c5059e2b5b04929a26650a39a8851188"
+    },
+    {
+      "bytes": 1313690,
+      "path": "outputs/team-recommender-stage3/package-rollout150/data/team-recommender/7b9259e37c40ed79988a87ffaf06c64c0cfd10447a4fc2a12888ba038c148b7f.json",
+      "sha256": "7b9259e37c40ed79988a87ffaf06c64c0cfd10447a4fc2a12888ba038c148b7f"
+    },
+    {
+      "bytes": 1376256,
+      "path": "outputs/team-recommender-stage3/package-rollout150/data/team-recommender/a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee.f32",
+      "sha256": "a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee"
+    },
+    {
+      "bytes": 18465,
+      "path": "outputs/team-recommender-stage3/package-rollout150-v3/data/opportunity_team_index.js",
+      "sha256": "870595232fc728172b1c1fd57248300462c91269f4232dd3a175c012036724e7"
+    },
+    {
+      "bytes": 1376256,
+      "path": "outputs/team-recommender-stage3/package-rollout150-v3/data/team-recommender/a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee.f32",
+      "sha256": "a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee"
+    },
+    {
+      "bytes": 96855,
+      "path": "outputs/team-recommender-stage3/package-rollout150-v3/data/team-recommender/b9d501ab5c8357dd6d938635f5bad08795b64608f45f2a759a5fcd7e789934f7.json",
+      "sha256": "b9d501ab5c8357dd6d938635f5bad08795b64608f45f2a759a5fcd7e789934f7"
+    },
+    {
+      "bytes": 1357225,
+      "path": "outputs/team-recommender-stage3/package-rollout150-v3/data/team-recommender/d5a40d2480c7fa1f7ca07c97ee52662dfabc219d357f6786435eea5182f0fbe3.json",
+      "sha256": "d5a40d2480c7fa1f7ca07c97ee52662dfabc219d357f6786435eea5182f0fbe3"
+    },
+    {
+      "bytes": 6408,
+      "path": "outputs/team-recommender-stage3/package-rollout50/data/opportunity_team_index.js",
+      "sha256": "2d21f7527d5a94ce3b4e14eaac778502308793615155f4a28c2d7737a714c7ec"
+    },
+    {
+      "bytes": 917504,
+      "path": "outputs/team-recommender-stage3/package-rollout50/data/team-recommender/04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532.f32",
+      "sha256": "04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532"
+    },
+    {
+      "bytes": 635861,
+      "path": "outputs/team-recommender-stage3/package-rollout50/data/team-recommender/100433bc25996fb953b0277fed8d805088a545092d314bf68d935edb7d69cc8d.json",
+      "sha256": "100433bc25996fb953b0277fed8d805088a545092d314bf68d935edb7d69cc8d"
+    },
+    {
+      "bytes": 35206,
+      "path": "outputs/team-recommender-stage3/package-rollout50/data/team-recommender/619c052ac0e00f48a581666aa192dcbbb54c770e9dd47d952d3b73b4a47f7143.json",
+      "sha256": "619c052ac0e00f48a581666aa192dcbbb54c770e9dd47d952d3b73b4a47f7143"
+    },
+    {
+      "bytes": 6408,
+      "path": "outputs/team-recommender-stage3/package-rollout50-v3/data/opportunity_team_index.js",
+      "sha256": "42acc41424c078d334af5432e9ca5766e2512d60a0f9bf73d931ff667663b8f8"
+    },
+    {
+      "bytes": 917504,
+      "path": "outputs/team-recommender-stage3/package-rollout50-v3/data/team-recommender/04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532.f32",
+      "sha256": "04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532"
+    },
+    {
+      "bytes": 653759,
+      "path": "outputs/team-recommender-stage3/package-rollout50-v3/data/team-recommender/bee64d3c71c8eaa5ea1ec06ece4f1abefbd53b72e789af3eb7cd83545afe29a8.json",
+      "sha256": "bee64d3c71c8eaa5ea1ec06ece4f1abefbd53b72e789af3eb7cd83545afe29a8"
+    },
+    {
+      "bytes": 35206,
+      "path": "outputs/team-recommender-stage3/package-rollout50-v3/data/team-recommender/eb06331be24c005c0342e60c35a47f8c145021c6485f270fdaaeb55bfdcf7e3f.json",
+      "sha256": "eb06331be24c005c0342e60c35a47f8c145021c6485f270fdaaeb55bfdcf7e3f"
+    }
+  ],
+  "public_only_hashes_and_paths": true,
+  "version": "S3-private-artifact-index-v1"
+}

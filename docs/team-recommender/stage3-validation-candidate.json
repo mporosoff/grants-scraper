@@ -1,0 +1,308 @@
+{
+  "accounting": {
+    "bytes": 111268,
+    "path": "docs/team-recommender/receipts/stage3-final-ledger-v1.json",
+    "sha256": "e23a23625727acfb5e66cb700d09181647bee2fa012705e3a8505b5b2aab9e44"
+  },
+  "analysis": {
+    "bytes": 8596,
+    "path": "docs/team-recommender/receipts/stage3-heldout-analysis-v2.json",
+    "sha256": "3361d60d3986fed9167a3218c66b13fb24753c60d7f653dee1b320a56d844adc"
+  },
+  "comparator": "A-E2",
+  "comparison_clock": "2026-09-10T12:00:00Z",
+  "ending_artifact_commit": "Resolve git log -1 --format=%H -- docs/team-recommender/stage3-validation-candidate.json",
+  "fallback": null,
+  "frozen_candidate": {
+    "MMR": 0,
+    "adapter_version": "ingredients-v2.5",
+    "cache_limits": {
+      "matrices": 8,
+      "option_contexts": 32,
+      "rows": 1600,
+      "snapshot": 1
+    },
+    "determinism": {
+      "fixed_inputs_same_output": true,
+      "id_order": "ASCII",
+      "threshold_and_tie_quantization": 1000000
+    },
+    "engine_version": "coverage-v2.5",
+    "evidence_mapping": "all current real person/aspect links unconfirmed; registry evidence does not auto-clear roles; retired/mismatched claims invalidate; numerical score cannot certify expertise",
+    "explanation_version": "Unchanged ingredients-v2.5 suggested scientific conversation wording. Two recorded E2 unsupported audits remain; one incomplete quoted-evidence input and one complete-evidence negative.",
+    "fallback": null,
+    "features": {
+      "aspect_edge": ".5 aspect cosine + .3 central-purpose cosine + .2 original-passage lexical overlap",
+      "generic_evidence": "original passage scientific-token admission; no department/novelty feature",
+      "probability": false,
+      "quality": ".7 max scientific-aspect cosine + .3 max whole-call cosine",
+      "source_weights": "unchanged source weights/group budgets"
+    },
+    "fitted_scorer": null,
+    "historical_D3_candidate": {
+      "path": "docs/team-recommender/stage2-embedding-d3-candidate.json",
+      "sha256": "bc1c87ad79a4eea555a38f3dca9a743148ff1971b19f33ebce51140d7e03d990"
+    },
+    "historical_D3_five_point_rule": "unmet; owner waived only as prerequisite to nomination, not release quality",
+    "historical_alternative": "E1 competitive, better actionable primary results; no automatic fallback or additional validation arm.",
+    "holdout_scored": false,
+    "judge": {
+      "historical_grades_validate_new_projection": false,
+      "model": "claude-sonnet-5",
+      "projection": {
+        "path": "tools/team_recommender_evidence_projection.py",
+        "sha256": "1b74d1fd677a533c780532b31fd568d44fa019172a77dd8a19523bd5b71b2120"
+      },
+      "projection_version": "complete-retained-registry-v1",
+      "rubric": {
+        "path": "config/team_recommender_executor/judge-d1.md",
+        "sha256": "713055f257e51c500d931f83eacb380593b99ad4f94f1924f79f6a097fad01f8"
+      },
+      "semantic_protocol": "D1F",
+      "trusted_helper_enabled": false
+    },
+    "nomination_basis": "Explicit Stage 2 closeout owner instruction; product/engineering choice, not a D3 superiority finding.",
+    "nominee_reproduction": {
+      "path": "docs/team-recommender/receipts/closeout-E2-reproduction.json",
+      "sha256": "ac07f1cdc32bf2700b61b7a0fe48a43517463f72c73ff2ee878879468344f36b"
+    },
+    "optimizer": {
+      "MMR": 0,
+      "coverage_envelope": 0.95,
+      "exact_pool": 12,
+      "max_options": 8,
+      "member_rule": "independent absolute member quality and admitted scientific edge; group scientific anchor",
+      "minimum_quality_ratio": 0.9,
+      "order": "minimum member quality, mean member quality, coverage, stable IDs within envelope",
+      "padding": false,
+      "removal_marginal": "measured, no universal positive-marginal admission condition",
+      "scoped_redundancy_jaccard": 0.9,
+      "size_rule": "smallest feasible size within .95 of best feasible coverage; no redundant larger option",
+      "sizes": [
+        2,
+        3,
+        4
+      ],
+      "swap_starts_per_size": 8,
+      "work_limit": 300000
+    },
+    "primary": {
+      "context_sha256": "698ecd0e0f1199506beaee88d819a76ddf2fea47f4553f68b67c28b1627dc3a1",
+      "identity": "E2-D3-combined-v1-frozen",
+      "inputs": {
+        "active": false,
+        "arm": "E2",
+        "bundle_bytes": 917055,
+        "bundle_gzip_bytes": 153918,
+        "bundle_sha256": "0adbfc1cc6e2880db69d95ae630388cb331513b54dbf1a5c67b92802924a1191",
+        "directory_sha256": "3803171442db49e888bed3a4b8c42385e4015aa4c569b92cd9c79615fd54e53a",
+        "generation": "42b9af6d68f171f5ee47f004b4f0529af11e174a8bec35f2cb34bb01cb2f6e8a",
+        "holdout_scored": false,
+        "hydration": "Exact native package reproduced in closeout-E2-reproduction.json; original D3 asset bytes unchanged.",
+        "model": "voyage-4-large",
+        "provider_calls": 0,
+        "representation": "D3-combined-v1",
+        "researcher_changes": 0,
+        "resource_receipt": {
+          "path": "docs/team-recommender/receipts/d3-resources-E2.json",
+          "sha256": "f666796f5f5b26e810863d02ca5d7bd4f8dfc01be1b53f2f8dd9cfcaccdeaf05"
+        },
+        "rows": 250,
+        "scorer": {
+          "anchor": 0.18028352214383453,
+          "aspect": 0.16674866598339408,
+          "broad": 0.20041000430757816,
+          "member": 0.3323758552463654,
+          "version": "D3-fixed-v1"
+        },
+        "source_changes": 0,
+        "space": "711956c56ce736f771123f32a3232de9100706f622f8a45ddf45e1281db1b959",
+        "vector_bytes": 1024000,
+        "vector_gzip_bytes": 951498,
+        "vector_sha256": "62c52fc471ded6cf4b328563d0402f28fd7359b6f7f444591b633dfba3388b16",
+        "whole_call_member_floor": 0.3838516941125678
+      },
+      "local_input_directory": "outputs/team-recommender-d3/assembled-E2",
+      "source_validations_sha256": "3db12b3b59606691f95dd3a6cf5d8a4c93c25a59d6117c6b682affd27a43403e"
+    },
+    "production_activation": false,
+    "quality_qualified": false,
+    "runtime_commit": "3c13291a052da298f45db77e974ea3624141cdd5",
+    "runtime_hashes": {
+      "assets/team-ingredients.js": "01240ca79e2804c8daccc385aecce5c643a7c8d45864ede9e7337bddb4e9c09a",
+      "assets/team-recommender.js": "c4a24b159f314f075b89a6b22ae17d8b5605d3bc5277cc06ce371b3a0389cd59"
+    },
+    "runtime_tree": "5e32c12aafe07c677b434ee5b6d0eb5b9667dfc3",
+    "schema_version": 1,
+    "simple_comparator": {
+      "identity": "A-E2",
+      "model": "voyage-4-large",
+      "rule": "Rank whole-call cosine with stable ASCII/quantized ties, take matched B size (2 when B abstains), require enough floor-admitted people; no aspect optimizer.",
+      "space": "711956c56ce736f771123f32a3232de9100706f622f8a45ddf45e1281db1b959",
+      "whole_call_member_floor": 0.3838516941125678
+    },
+    "source_accounting": {
+      "path": "docs/team-recommender/receipts/closeout-source-accounting.json",
+      "sha256": "c817b269973ab68a372bbc0a183d7f5c622c4b0d3304abafde83403bdbcee3db"
+    },
+    "source_checkpoint": "b27304a4c13d8d558f67e7d829461c822df5507f",
+    "stage3_analysis": {
+      "path": "docs/team-recommender/reports/stage-2-decision-closeout.md",
+      "sha256": "5e973fa27cb6c20a82c752b4202623c26c946a6d181aa8be4739101037356c73"
+    },
+    "stage3_authorized": false,
+    "status": "E2 NOMINATED FOR VALIDATION — NOT QUALITY-QUALIFIED OR DEPLOYED"
+  },
+  "human_audit": {
+    "bytes": 7593,
+    "path": "docs/team-recommender/receipts/stage3-human-final-packet-v1.json",
+    "sha256": "e4b45639e9731b21a2a081c20b3c880cee7ced457514faaae2d1eea0499f15be"
+  },
+  "input_packages": {
+    "holdout_effective": {
+      "assets": [
+        {
+          "bytes": 940885,
+          "gzip_bytes": 148994,
+          "path": "data/team-recommender/477d74610db42fc5b941cbc5e46ca8fb2fcd9cb0ebbc34b2b94831c3309656b8.json",
+          "sha256": "477d74610db42fc5b941cbc5e46ca8fb2fcd9cb0ebbc34b2b94831c3309656b8"
+        },
+        {
+          "bytes": 1044480,
+          "gzip_bytes": 969988,
+          "path": "data/team-recommender/7e3bce2359aaf0dbcf8dbf1d9c684935c975a8caf94118b98efa959d29828495.f32",
+          "sha256": "7e3bce2359aaf0dbcf8dbf1d9c684935c975a8caf94118b98efa959d29828495"
+        },
+        {
+          "bytes": 51409,
+          "gzip_bytes": 6582,
+          "path": "data/team-recommender/d40625d373c3e87e742946c1c12af3b351e6d48ff3388f6851a18275ac034bc9.json",
+          "sha256": "d40625d373c3e87e742946c1c12af3b351e6d48ff3388f6851a18275ac034bc9"
+        },
+        {
+          "bytes": 10965,
+          "gzip_bytes": 1211,
+          "path": "data/opportunity_team_index.js",
+          "sha256": "0246a283cd46d397a0776bf4d94fae1dd07610169c83db813b16c882ae092de9"
+        }
+      ],
+      "generation": "4c0fb99bdb511671e16bcbffc5691f616180568cf92af6d00a4ffb46ad4a8a67",
+      "gzip_bytes": 1126775,
+      "prepared": 39,
+      "profile_rows": 155,
+      "scopes": 90,
+      "total_bytes": 2047739
+    },
+    "rollout150": {
+      "assets": [
+        {
+          "bytes": 1357225,
+          "gzip_bytes": 215670,
+          "path": "data/team-recommender/d5a40d2480c7fa1f7ca07c97ee52662dfabc219d357f6786435eea5182f0fbe3.json",
+          "sha256": "d5a40d2480c7fa1f7ca07c97ee52662dfabc219d357f6786435eea5182f0fbe3"
+        },
+        {
+          "bytes": 1376256,
+          "gzip_bytes": 1277927,
+          "path": "data/team-recommender/a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee.f32",
+          "sha256": "a747d89d9d27f9cfaf391c412af76ea435803c23099df505350a2e9a32fa75ee"
+        },
+        {
+          "bytes": 96855,
+          "gzip_bytes": 12450,
+          "path": "data/team-recommender/b9d501ab5c8357dd6d938635f5bad08795b64608f45f2a759a5fcd7e789934f7.json",
+          "sha256": "b9d501ab5c8357dd6d938635f5bad08795b64608f45f2a759a5fcd7e789934f7"
+        },
+        {
+          "bytes": 18465,
+          "gzip_bytes": 1603,
+          "path": "data/opportunity_team_index.js",
+          "sha256": "870595232fc728172b1c1fd57248300462c91269f4232dd3a175c012036724e7"
+        }
+      ],
+      "generation": "cf83e0e69a96e8c7156f276f6752eb8ec4fd65e0803cb4b8682592b19ce741c8",
+      "gzip_bytes": 1507650,
+      "input_directory": "outputs/team-recommender-stage3/assembled-rollout150-v3",
+      "package_directory": "outputs/team-recommender-stage3/package-rollout150-v3",
+      "prepared": 81,
+      "profile_rows": 155,
+      "scopes": 150,
+      "total_bytes": 2848801
+    },
+    "rollout50": {
+      "assets": [
+        {
+          "bytes": 653759,
+          "gzip_bytes": 104456,
+          "path": "data/team-recommender/bee64d3c71c8eaa5ea1ec06ece4f1abefbd53b72e789af3eb7cd83545afe29a8.json",
+          "sha256": "bee64d3c71c8eaa5ea1ec06ece4f1abefbd53b72e789af3eb7cd83545afe29a8"
+        },
+        {
+          "bytes": 917504,
+          "gzip_bytes": 851913,
+          "path": "data/team-recommender/04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532.f32",
+          "sha256": "04a640df3a17c38a07263833adc94762ba7c5cea389efbe137b8073e036cd532"
+        },
+        {
+          "bytes": 35206,
+          "gzip_bytes": 5374,
+          "path": "data/team-recommender/eb06331be24c005c0342e60c35a47f8c145021c6485f270fdaaeb55bfdcf7e3f.json",
+          "sha256": "eb06331be24c005c0342e60c35a47f8c145021c6485f270fdaaeb55bfdcf7e3f"
+        },
+        {
+          "bytes": 6408,
+          "gzip_bytes": 844,
+          "path": "data/opportunity_team_index.js",
+          "sha256": "42acc41424c078d334af5432e9ca5766e2512d60a0f9bf73d931ff667663b8f8"
+        }
+      ],
+      "generation": "e2ff98159706b6a02ceaeff7abb27557e628d4589afa53477c7c79a6880f593b",
+      "gzip_bytes": 962587,
+      "input_directory": "outputs/team-recommender-stage3/assembled-rollout50-v3",
+      "package_directory": "outputs/team-recommender-stage3/package-rollout50-v3",
+      "prepared": 30,
+      "profile_rows": 155,
+      "scopes": 50,
+      "total_bytes": 1612877
+    }
+  },
+  "lock": {
+    "bytes": 28205,
+    "path": "docs/team-recommender/manifests/stage3-validation-lock-v2.json",
+    "sha256": "390ad2b018806b684aae5724e8a5dd5a8e4ba328b192c9650748491cda8f783a"
+  },
+  "no_retuning": true,
+  "nomination": {
+    "bytes": 6399,
+    "path": "docs/team-recommender/stage2-validation-candidate.json",
+    "sha256": "9078885a374b8df21bff92cb86cb5089e0df319f026ea917ab706272e71622c1"
+  },
+  "paired_analysis": {
+    "bytes": 3796,
+    "path": "docs/team-recommender/receipts/stage3-paired-source-supplement-v1.json",
+    "sha256": "b4d2e2767cf8109d5712a523a202529de0ffe783e5a38ff6545b830d4d3eef0d"
+  },
+  "primary": "E2-D3-combined-v1-frozen",
+  "production_activation": false,
+  "quality_qualified": false,
+  "runtime_sha256": {
+    "assets/opportunity-team-panel.js": "38bd591cd461f87786a180be2e589e7f7fe5b6d9e4d80589e736be7e8cd4ca99",
+    "assets/opportunity-team.js": "62e8983f0693536afddb1cc896f79621f59ca88de2b0e18fa0462f686de33dfd",
+    "assets/team-ingredients.js": "01240ca79e2804c8daccc385aecce5c643a7c8d45864ede9e7337bddb4e9c09a",
+    "assets/team-recommender.js": "c4a24b159f314f075b89a6b22ae17d8b5605d3bc5277cc06ce371b3a0389cd59"
+  },
+  "source_inventory": {
+    "bytes": 79200,
+    "path": "docs/team-recommender/receipts/stage3-final-source-inventory-v1.json",
+    "sha256": "e4c029cd1f65fc8c40e48b3138a51eab48939ae7d533bba3ae1d67686bada11f"
+  },
+  "source_snapshot_valid_until": "2026-09-17T00:00:00Z",
+  "stage4_authorized": false,
+  "status": "B. ENGINEERING VALIDATED; OWNER TRADEOFF REQUIRED",
+  "test_receipt": {
+    "bytes": 17560,
+    "path": "docs/team-recommender/receipts/stage3-test-validation-v1.json",
+    "sha256": "51e2585c20ac0fc286c8d32a813fcaa3929ff9963c3b4b479ed30e44f9575f88"
+  },
+  "version": "S3-E2-validation-completed-v1"
+}
