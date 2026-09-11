@@ -27,7 +27,7 @@ def main():
     missing=[p for p in files if not (DOC/p).exists()]
     if missing:raise ValueError('actual_manifest_path_required:'+str(missing))
     inputs=read(DOC/'receipts/stage3-unique-input-plan-v2.json')
-    lock={'version':'S3-E2-validation-lock-v1','stage':3,'authorized':True,'starting_closeout':'f4f38b32294c8e922c25a7c67d518be27f5f8e33',
+    lock={'version':'S3-E2-validation-lock-v2','supersedes':'v1 retained; one source-decision file hash corrected for Git LF normalization before any held-out output or metered request. Scientific inputs and decisions unchanged.', 'stage':3,'authorized':True,'starting_closeout':'f4f38b32294c8e922c25a7c67d518be27f5f8e33',
         'candidate':nomination,'sole_comparator':'A-E2','fallback':None,'comparison_clock':'2026-09-10T12:00:00Z',
         'live_like_clock':'fresh authoritative clock for every separate action; fixed within each action',
         'references':[ref(DOC/p) for p in files],
@@ -85,6 +85,6 @@ def main():
             'final_policy':'exact preserved 12 individual/8 team scope/rank overlay; evidence first, hidden model verdicts, unable-to-assess permitted, no skip replacement'},
         'exposure':{'heldout_recommendations_generated':False,'heldout_judgments':0,'paid_stage3_requests':0},
         'stop_rule':'After finite validation: A ready to request Stage 4; B engineering validated/owner tradeoff for quality, coverage or audit; C integrity/security/access/budget/evidence failure. No deployment or Stage 4.'}
-    print(write(DOC/'manifests/stage3-validation-lock-v1.json',lock))
+    print(write(DOC/'manifests/stage3-validation-lock-v2.json',lock))
 
 if __name__=='__main__':main()

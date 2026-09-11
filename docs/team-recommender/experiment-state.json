@@ -37,8 +37,8 @@
     "budget_amendment_sha256": "814a6b3f1cc11bdbd13f1e1927809dc6d3c82d2659eee874a92d01f2da513c27",
     "continuation_path": "docs/team-recommender/CONTINUATION_C2.md",
     "current_amendment": "Stage 3 frozen E2 validation only; accepted Stage 2 nomination, no Stage 4",
-    "current_handoff_sha256": "af910d8633f10d5e47e3b1d6fcbc4ecd3c91ec0b4fa6261a395c1bcbdd7ae1ff",
-    "current_plan_sha256": "479216949f0cbdc6bced93acc1d38196c6f1739dfb570b16a10448b9d3052b4a",
+    "current_handoff_sha256": "2cfe513c339f415c6b5f751165e803c7d57a3abfb23996f4b09ef425ee988751",
+    "current_plan_sha256": "230a8d69e459b35c29a1a8e874ec20462e1062ffd652e75c9c6acf5f35d754c9",
     "diagnostic_revision_path": "docs/team-recommender/DIAGNOSTIC_REVISION_D1.md",
     "diagnostic_revision_sha256": "c9f85ea488ac9cacbe05083ac39b897cca740a8da7215e280b72b3f06dd8ca52",
     "evaluation_amendment_sha256": "1176ca730d9d74507571149bbe7b788bee69bed58589ab581b3a64f31e1271f0",
@@ -7010,8 +7010,8 @@
     "starting_commit": "f4f38b32294c8e922c25a7c67d518be27f5f8e33",
     "starting_tree": "d3074cfc54ce196999e5fd1274b4f3005b347437",
     "lock": {
-      "path": "docs/team-recommender/manifests/stage3-validation-lock-v1.json",
-      "sha256": "e196003bcab280db582e8ce72e4c92399d641b73414514460609b7ae559f5b00"
+      "path": "docs/team-recommender/manifests/stage3-validation-lock-v2.json",
+      "sha256": "390ad2b018806b684aae5724e8a5dd5a8e4ba328b192c9650748491cda8f783a"
     },
     "trusted_candidate": "7c42154733904b04cb261b5b3bf58884b3c9f72b",
     "cloud_owner": "34538646232",
@@ -7033,6 +7033,10 @@
     "production_activation": false,
     "final_human_requested": 0,
     "final_human_returned": 0,
-    "history_preserved": true
+    "history_preserved": true,
+    "pre_exposure_corrections": [
+      "Full evidence projection removed ordinary in-task source disposition text before judging; v1 retained.",
+      "v1 validation lock retained; source-decision file reference corrected for Git LF normalization in v2, same semantic inputs."
+    ]
   }
 }
