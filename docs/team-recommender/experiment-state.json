@@ -99,14 +99,15 @@
     "post_audit_new_output_tokens": 3176
   },
   "candidate": {
-    "path": "docs/team-recommender/post-audit/candidate-v3.json",
-    "sha256": "8316b32e3e12377905c220a0f1e854d2da3604739c05f7223940a0af5734902a",
+    "path": "docs/team-recommender/post-audit/candidate-v4.json",
+    "sha256": "2cb43bcfd7d416b1ef75e92569ccd666286a287a1c51a159a0cde40988ea023d",
     "primary": "shared-team-v2-post-audit",
     "code_commit": "6e2f60708b41b94049eabf005a0190b268222738",
     "quality_qualified": false,
     "fallback": null,
-    "status": "Scientific criteria and additional-heap ceiling FAIL; functional checks completed; integrated exact-head review/CI pending; no release",
-    "runtime_commit": "1d3cbf81963479d1fca2767ed532d155ffa56b21"
+    "status": "Corrective implementation and finite check complete; exact-head code review and CI clean; scientific and memory criteria FAIL; no release",
+    "runtime_commit": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
+    "validated_code_commit": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28"
   },
   "checks": {
     "receipt": {
@@ -115,8 +116,8 @@
     },
     "unique_integrated_browser_cases_passing": 122,
     "prepared_browser_cases_passing": 5,
-    "independent_review": "Initial exact-head review completed with accepted P1; coherent remediation prepared, verification pending",
-    "required_CI": "Initial failure preserved; 18 affected portability checks pass locally; new exact-head gates pending",
+    "independent_review": "PASS: clean exact-head verification PR225 at 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+    "required_CI": "PASS: run34616881475, Python1380/3skips; Node859/12skips; 37queries/50scoring/no-drift",
     "scientific_acceptance": "FAIL",
     "physical_mobile": "NOT RUN",
     "peak_browser_memory": "NOT MEASURED",
@@ -129,9 +130,13 @@
     "review_remediation": {
       "path": "docs/team-recommender/post-audit/review-remediation-v1.json",
       "sha256": "0b2c67b2b3724c4b7f4660f65175e8805c5d09a1456fa2dc9ef755e78a1ef2ba"
+    },
+    "completion": {
+      "path": "docs/team-recommender/post-audit/completion-receipt-v1.json",
+      "sha256": "dbdc9797c422c4616dff68ce08a92bc0dbd801ad3ba1e1ff335e6a93e3caa95f"
     }
   },
-  "containing_commit": "Resolve commit containing this state; scientific and assembly SHAs are pinned separately",
+  "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -4462,7 +4467,7 @@
       "path": "docs/team-recommender/stage2-closeout-receipt-index.json",
       "sha256": "73a46def2c53ab43c1e4021c25ce1c08ed88ee23a9f27e9a5a49cbd0e646b3ba"
     },
-    "recommendation": "E2 NOMINATED FOR VALIDATION \u2014 NOT QUALITY-QUALIFIED OR DEPLOYED",
+    "recommendation": "E2 NOMINATED FOR VALIDATION — NOT QUALITY-QUALIFIED OR DEPLOYED",
     "report": {
       "path": "docs/team-recommender/reports/stage-2-decision-closeout.md",
       "sha256": "5e973fa27cb6c20a82c752b4202623c26c946a6d181aa8be4739101037356c73"
@@ -6747,8 +6752,8 @@
       "sha256": "0938a53f2122f7d251656a1717171bf88d8ade11d3a706d4d328329e2b69526c"
     },
     "candidate": {
-      "path": "docs/team-recommender/post-audit/candidate-v3.json",
-      "sha256": "8316b32e3e12377905c220a0f1e854d2da3604739c05f7223940a0af5734902a"
+      "path": "docs/team-recommender/post-audit/candidate-v4.json",
+      "sha256": "2cb43bcfd7d416b1ef75e92569ccd666286a287a1c51a159a0cde40988ea023d"
     }
   },
   "production": {
@@ -6903,6 +6908,44 @@
       "release_planner": 34606083072,
       "release_plan": "noop",
       "runtime_deployment": false
+    },
+    "post_audit_guard": {
+      "number": 226,
+      "head": "fae3fca40a2941fc9e4207839df8dbf35ad6a543",
+      "merge": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+      "merged_at": "2026-09-11T15:40:20Z",
+      "review_summary": 5636833260,
+      "review_completed_at": "2026-09-11T15:38:24.730277Z",
+      "positive_reaction_at": "2026-09-11T15:38:29Z",
+      "result": "Terminal clean configured reaction on unchanged head; no inline or submitted findings",
+      "CI": 34616890667,
+      "python_cases": 1341,
+      "browser_pass": 767,
+      "CI_skips": 0,
+      "focused_tests": 53,
+      "experimental_exact_cherry_pick": "1644eb5eb58f3d7662f2095be9d93407cc7c645a",
+      "post_merge_CI": 34617513611,
+      "post_merge_CI_result": "SUCCESS",
+      "ledger_or_packet_changes": 0,
+      "purpose": "Restrict generic packet authority to original six purposes; dedicated versioned/exact hash contracts cannot be bypassed"
+    },
+    "post_audit_guard_release_planner": {
+      "run": 34617514411,
+      "head": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+      "decision": "noop",
+      "conclusion": "success",
+      "jobs": {
+        "plan": "success",
+        "assemble": "skipped",
+        "candidate": "skipped",
+        "generate": "skipped",
+        "validate": "skipped",
+        "closeout": "success",
+        "publish": "skipped",
+        "pages": "skipped",
+        "verify-live": "skipped"
+      },
+      "production_publications": 0
     }
   },
   "proposed_next_stage": "No automatic execution. Only an owner-approved release decision can authorize Stage 4; no candidate retuning or new scientific campaign.",
@@ -6995,7 +7038,7 @@
   "recommended_next_stage": "Owner decision: explicitly accept the documented exploratory-release quality/coverage/audit limitations in separate Stage 4 authority, or do not release.",
   "report": {
     "path": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md",
-    "sha256": "16b3c9a497f781f01b6f76556b319e2cede98f6d07a914093f61411677c19921"
+    "sha256": "5d99d7475c76b8bca746f6b37306061fc37995253c49b03a5fa60ca4ee6a6c50"
   },
   "repository": "mporosoff/grants-scraper",
   "results": {
@@ -7333,7 +7376,7 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "post-audit-revalidation-scientific-and-memory-fail-review-pending",
+  "stage_status": "post-audit-corrective-revalidation-complete-DO-NOT-RELEASE-scientific-and-memory-fail",
   "stop": "STOP FOR USER REVIEW. No deployment, Stage 4, new provider allowance, human-review request or automatic model/tuning campaign.",
   "unresolved": [
     "Additional heap ceiling FAIL: observed increase 68.94-80.04 MiB before GC; retained 10.82-19.34 MiB does not establish peak compliance",
@@ -7341,7 +7384,6 @@
     "Only 1/50 and 11/150 original rollout reservations produce groups; independent feasibility unknown",
     "Four preserved researcher source gaps; one missing canonical legacy child identity",
     "No returned human judgments or remaining new item allowance",
-    "Integrated exact-head review/CI pending",
     "Physical mobile and peak memory unmeasured; historical rollback preserves old Funded Awards import omission",
     "Unrelated unpublished main stylesheet change must be preserved in any future integration"
   ],
@@ -7785,9 +7827,17 @@
     "scientific_sha": "6e2f60708b41b94049eabf005a0190b268222738",
     "assembly_sha": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
     "implementation_and_bounded_semantic_execution_complete": true,
-    "independent_review_pending": true,
+    "independent_review_pending": false,
     "no_new_scientific_phase": true,
     "stop_after_owner_report": true,
-    "resource_qualified": false
+    "resource_qualified": false,
+    "ending_reviewed_code_sha": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+    "review_PR": 225,
+    "completion": {
+      "path": "docs/team-recommender/post-audit/completion-receipt-v1.json",
+      "sha256": "dbdc9797c422c4616dff68ce08a92bc0dbd801ad3ba1e1ff335e6a93e3caa95f"
+    },
+    "trusted_guard_PR": 226,
+    "complete": true
   }
 }
