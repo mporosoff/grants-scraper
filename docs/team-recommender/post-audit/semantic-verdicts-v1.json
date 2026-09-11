@@ -1,0 +1,623 @@
+[
+  {
+    "key": "b07123b1deaaf0e9a6a40182d2bc43e208c2cbe4189fffa085ea7d351bfeb95a",
+    "scope_id": "347679",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "d66ccd5ee010403cfa740d336ee769250a786185d5e9f0da4e51efb2499f6b48",
+    "scope_id": "347679",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "4a711a9344e4070ddb485e8f3c5115ac8ab541db6a28b67ab70a36cfd6fb9a36",
+    "scope_id": "347679",
+    "kind": "call_person",
+    "evidence_ref": "p1c2",
+    "item_id": "i03",
+    "reason": "specific",
+    "verdict": "plausible"
+  },
+  {
+    "key": "a50d38d66d19e440fbb93bf67e05fcfdd0aee7cbe90bc85fd74318fd83ff5d0d",
+    "scope_id": "356536",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "bd87791b577619c25f02018f1f44b0ec53aa32acd5ceb3f7e6cda756ea78dde2",
+    "scope_id": "356536",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "ed0366e71be2fe8032833fdf9a65e4529e63d3f316d66c027dce914d642a500d",
+    "scope_id": "356536",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "8e2e3b29291b2eb9c536643fdb780574a3914e47b401ff6deb07640fc3f261e4",
+    "scope_id": "356536",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i01",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "a22b84fd7ad0c83fa81ff1ce6145efbc33df5c5c14904dc14bf99779121609b3",
+    "scope_id": "356536",
+    "kind": "call_person",
+    "evidence_ref": "p3",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "11643939abe666b5b4f86603b79e5303d6dfff2171bd3a5b33dcfd41bf6302e2",
+    "scope_id": "356536",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "18088ea4c542d56415b14c16990e0d000c6dca2941edc6afb2699067f9f80f1a",
+    "scope_id": "356536",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i01",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "768e843cfdfef3ee1fd7ae1ea3447a62c9b7458589cd55088d0c5ecb7897244f",
+    "scope_id": "356536",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "09b6cda0b1008c78e988b648bad5729cb6a0c106d892411455d23c4fda8202be",
+    "scope_id": "356536",
+    "kind": "group_usefulness",
+    "evidence_ref": "s1",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "56a0cd8025e312adde3e328f51a6a8a72d5a899a631c3af72753765fe8a7cc14",
+    "scope_id": "356536",
+    "kind": "group_usefulness",
+    "evidence_ref": "p1",
+    "item_id": "i01",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "d4dbfc292630694a73665b7426d2afc67c1ee51a4e886109aec4081e799a01cf",
+    "scope_id": "356536",
+    "kind": "comparison",
+    "evidence_ref": "p1",
+    "item_id": "i02",
+    "reason": "tie",
+    "verdict": "tie"
+  },
+  {
+    "key": "e532d50955d769955b8cc8bcf524e95d66eee800295aac734b15c97cda95fd47",
+    "scope_id": "356536",
+    "kind": "comparison",
+    "evidence_ref": "p1",
+    "item_id": "i03",
+    "reason": "tie",
+    "verdict": "tie"
+  },
+  {
+    "key": "2b1e6d481e21d0f400585f5770883a535bc0bb0711ba9b9e44aa4971290bb527",
+    "scope_id": "356536",
+    "kind": "explanation_audit",
+    "evidence_ref": "s2",
+    "item_id": "i01",
+    "reason": "unsupported",
+    "verdict": "unsupported"
+  },
+  {
+    "key": "36bfef59dc9ce0cf71c2e7d1269f3dae98d52125eb0339c69b1af4e9cfed7927",
+    "scope_id": "361522",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "fba119c17accdc5fec3a6d020710f5da03888c20d5f2edc97dc2b6df576f555f",
+    "scope_id": "363585",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "234222a00b7441cafcf9ed5ec0d2e28a95300985a1b36e5b7ab8e8e72240383b",
+    "scope_id": "344610",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "bab4faa3f4e7c731fa5717692be7ed4a7685681dc91a7ddc2c4fe9ea907a212e",
+    "scope_id": "344610",
+    "kind": "call_person",
+    "evidence_ref": "p1c2",
+    "item_id": "i02",
+    "reason": "specific",
+    "verdict": "plausible"
+  },
+  {
+    "key": "933d82a3bd0553f6172a84e0a37e9fc3c1b7a2857674c57b6926ebe5cc914aae",
+    "scope_id": "344610",
+    "kind": "call_person",
+    "evidence_ref": "p2c3",
+    "item_id": "i03",
+    "reason": "specific",
+    "verdict": "plausible"
+  },
+  {
+    "key": "557cb3f42334dfec68658d050fcd788622c88734b6b7e5a292846ece67bd08a0",
+    "scope_id": "363147",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "23751ac04f9c8fcf2ce9ba991a1c7ee55ce6bbc80a4c3f4fce38c7aa2686a91b",
+    "scope_id": "nyserda:PON3982",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "nonresearch",
+    "verdict": "nonresearch"
+  },
+  {
+    "key": "2ef0390db333e8f0b6d99788c062b7d99fbc2f6b43e921b5f1df86bc8514cd07",
+    "scope_id": "357545",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "coherent"
+  },
+  {
+    "key": "01507ad7e1de39d57d211b2753ae59373b0cf37d6049a39287a1e359a973a410",
+    "scope_id": "357545",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "10408c449c29311ed84bb5f20734f375512df76048aa8cfbdc83c7f416b13232",
+    "scope_id": "357545",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "4504c3d1b40f3b5c0421828a86616351775d734d5df1ff1900e491b0c05e66df",
+    "scope_id": "363584",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "f71a16c2a31551304d702b70c463207b1662b972ed99c9d033426e3987a83b72",
+    "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "93fee62a40c3cf43a1fbea0eee77503461d061e5c28120de4e73052835c884ee",
+    "scope_id": "349109",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "d061af06b8b9354ce6cb1cea0726be2b01d1fc5932de2aefb5b5a4d64a4e9f99",
+    "scope_id": "349109",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "a6ae22cc0d3cf3b0677b8687afb68bfcdb319e0bf15b883131f8402c3eedd015",
+    "scope_id": "363523",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "eb55776a5abb6761ba87c756e5d44a12ea2b61afbe442b6bd0dfe0037aa794ba",
+    "scope_id": "360532",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "8f70406bfd55709c1c4aa0ea77a3b30e5f3f836bc78d96774e3822526c94a216",
+    "scope_id": "arpa-h:sbir",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "broad",
+    "verdict": "broad-unselected"
+  },
+  {
+    "key": "9c1fd8ed40aa4b470cdb601daab34a3c2ddcb07245d59df9f6007f0f845e65ad",
+    "scope_id": "362827",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "85abc796a8c7bd7ca8edb38b3769d52caadceb7370bebca6b863cca37e9053cf",
+    "scope_id": "355219",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "fa7e7337eb51c934b2451ae969b256268acb9c682dc5e74dc9cacdb1656377ca",
+    "scope_id": "355219",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "53411f9cea7deb28a0299f6d60e9513522f7a7bd9f874556f4613b3506ba093a",
+    "scope_id": "355219",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "4ffd1fc93c5831f35b766b10a8f2f1bbb7d387e0d2dcf450b463cb336cfd4697",
+    "scope_id": "355219",
+    "kind": "call_person",
+    "evidence_ref": "p1c3",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "plausible"
+  },
+  {
+    "key": "cd0adafd9ff5184bf233babaf7e078f5e60eb35478a89b6176bff0c34ff1d0b7",
+    "scope_id": "355219",
+    "kind": "call_person",
+    "evidence_ref": "p2c1",
+    "item_id": "i02",
+    "reason": "specific",
+    "verdict": "plausible"
+  },
+  {
+    "key": "7c25fbcde4b4892b774b05f9d795c1f3ff2513fccc43adc9428343f4230f0510",
+    "scope_id": "355219",
+    "kind": "call_person",
+    "evidence_ref": "p3",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "3145dac49f6fe9c486c07385fade8c540a7716e434aa817bfa706bd7111c1edb",
+    "scope_id": "357580",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "e16aafc369fe46395faad674848a1421dfe7d05ab8d865557ff0fc2a1db33884",
+    "scope_id": "357580",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "1d786973910927949e8d00c2491a7f8c9fa0a9e765dc3cf8c2e680b733b22606",
+    "scope_id": "357580",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "eb6f70d0ae299bc57e8b39f93dc9b206b0601ccfa60c81f4c5d171cc3d5fb020",
+    "scope_id": "353756",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "coherent"
+  },
+  {
+    "key": "4d2abefa377143ecb5185eed380fd56465052ca49b2051691d86c7a0ff61ce17",
+    "scope_id": "362177",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "coherent"
+  },
+  {
+    "key": "fdf26405682b7d75b8aa7d36efea3d5d0b982f39836468500ed8ee55bd8866b9",
+    "scope_id": "362177",
+    "kind": "call_person",
+    "evidence_ref": "p1c3",
+    "item_id": "i02",
+    "reason": "transfer",
+    "verdict": "plausible"
+  },
+  {
+    "key": "e5c631f7846f5eb011afd8f7c5831886d3f32633541d632ed1689e231f524ba1",
+    "scope_id": "348985",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "broad",
+    "verdict": "broad-unselected"
+  },
+  {
+    "key": "dcc836dd0743a3628483708aa3175cc98f2dec8c6b198f787679a09f451c165b",
+    "scope_id": "350469",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "broad",
+    "verdict": "coherent"
+  },
+  {
+    "key": "0eb91cc90f556734569a9213fb52f9338cfd504e033e5ead4c0388abd91637c9",
+    "scope_id": "350469",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "005c9a6deac354178241b8355b26221eb62530950e3f68aac422ab90e1e5dd68",
+    "scope_id": "350469",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "4c062591b51f587a9a23bfc6781d69eedfb8a16b332b27cb7c59c07ae1f79f35",
+    "scope_id": "350469",
+    "kind": "call_person",
+    "evidence_ref": "p2c1",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "plausible"
+  },
+  {
+    "key": "6052626d98501ad2c4ed3a26cef547ec782f521f8c57dfddab2fdd5b175bcbe5",
+    "scope_id": "350469",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "ef675c81d1e44cee02e02a7150761d2c67dc890112d6000be70f6933aeb57720",
+    "scope_id": "357724",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "c34f75b8571a7f5b956863973c6a3d9b8e903fbd6d2acc70b0d35eec927bf139",
+    "scope_id": "357724",
+    "kind": "call_person",
+    "evidence_ref": "p1c1",
+    "item_id": "i02",
+    "reason": "specific",
+    "verdict": "plausible"
+  },
+  {
+    "key": "b9e8422a8d7765aaea82513fe070682a6d921b323681fa165ceb8be7b8d92f53",
+    "scope_id": "355297",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "coherent",
+    "verdict": "coherent"
+  },
+  {
+    "key": "799fe287740871ddbcf1810782a3d30d9cd745c092fb4bc6db9ddb9800baaa1e",
+    "scope_id": "363594:a-1",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "coherent"
+  },
+  {
+    "key": "bd025bc56c9f95ef31faa307c24d6679c201dd8b130f16bb42013a24303a836f",
+    "scope_id": "363594:a-1",
+    "kind": "call_person",
+    "evidence_ref": "p2c2",
+    "item_id": "i02",
+    "reason": "specific",
+    "verdict": "strong"
+  },
+  {
+    "key": "2d45d56d94dc1f5ba31c046d7c4617eaf2c0c45a98a409f92b9f60da39b333a6",
+    "scope_id": "363594:a-1",
+    "kind": "call_person",
+    "evidence_ref": "p1c1",
+    "item_id": "i03",
+    "reason": "transfer",
+    "verdict": "plausible"
+  },
+  {
+    "key": "84bfa83b566e4af181b52e1234668190e1a0c8f7c3c06d241b23d274358e50f8",
+    "scope_id": "363594:a-1",
+    "kind": "call_person",
+    "evidence_ref": "p3c2",
+    "item_id": "i01",
+    "reason": "interest",
+    "verdict": "plausible"
+  },
+  {
+    "key": "92e247cefb483e941356c172f5db47c8b5357c51360d63812866d07b8357c70f",
+    "scope_id": "363594:a-1",
+    "kind": "call_person",
+    "evidence_ref": "p1c1",
+    "item_id": "i02",
+    "reason": "interest",
+    "verdict": "plausible"
+  },
+  {
+    "key": "f5cc0139b9d1b42bc7a1bb8c3b7e5b434d9fe845840ba6deb76e0671acc8d269",
+    "scope_id": "363594:a-1",
+    "kind": "call_person",
+    "evidence_ref": "p2c2",
+    "item_id": "i03",
+    "reason": "interest",
+    "verdict": "plausible"
+  },
+  {
+    "key": "4cb2bc67159a673087831ebedd91ab96ea3cc2e837960911e8385691204e8e5a",
+    "scope_id": "363594:b-1",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "coherent"
+  },
+  {
+    "key": "3cc004e2e8d7e6c05be9ee3783f72cd9ff92f92adee44b5c160e6c610ab03d9f",
+    "scope_id": "363594:b-1",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "a6db6b7affb03dfd3f04ac4a99833397a60f8a094528ff8fe67b60fac9cd1ff1",
+    "scope_id": "363594:c-1",
+    "kind": "source_suitability",
+    "evidence_ref": "s1",
+    "item_id": "i01",
+    "reason": "specific",
+    "verdict": "coherent"
+  },
+  {
+    "key": "289bcc36b6aeadffc063390897baf45aaae23459978c92c3d9bd6d6078dde082",
+    "scope_id": "363594:c-1",
+    "kind": "call_person",
+    "evidence_ref": "p2",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "07deb30e9692b62269f11a73e5d010db67786fe2efba4d7445883cceba76077b",
+    "scope_id": "363594:c-1",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i03",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "56f836ddf440c54d0ae1c91e86cb717667827bd9251720d9b06546ec41abb0c7",
+    "scope_id": "363594:c-1",
+    "kind": "call_person",
+    "evidence_ref": "p3",
+    "item_id": "i01",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "27b83125986da3c6258df03ade3362ca36ab48fbe27e3a29d944405756f608f7",
+    "scope_id": "363594:c-1",
+    "kind": "call_person",
+    "evidence_ref": "p1",
+    "item_id": "i02",
+    "reason": "irrelevant",
+    "verdict": "unrelated"
+  },
+  {
+    "key": "fa24b1389d9e580937603325fe8a5953f7a23da5033b7a4c795a8dbb6a446235",
+    "scope_id": "363594:c-1",
+    "kind": "call_person",
+    "evidence_ref": "p2c3",
+    "item_id": "i03",
+    "reason": "transfer",
+    "verdict": "plausible"
+  }
+]

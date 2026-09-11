@@ -1,0 +1,28 @@
+"""Summarize the one exact offline check; no tuning, dispatch or human labels."""
+import json,hashlib,random
+from pathlib import Path
+from collections import Counter,defaultdict
+ROOT=Path(__file__).resolve().parents[1];D=ROOT/'docs/team-recommender/post-audit';O=ROOT/'outputs/team-recommender-post-audit'
+def read(p):return json.loads(p.read_bytes())
+def write(p,v):p.write_bytes((json.dumps(v,indent=2,ensure_ascii=False)+'\n').encode())
+def main():
+ proposal=read(D/'judge-proposal-v2.json');selection=read(D/'semantic-selection-v2.json');observations=read(O/'semantic-outputs-v2.json');judgments=read(O/'judgments-v1.json');bykey={r['key']:r for r in judgments};groups={r['id']:r['group_id'] for r in selection['scopes']}
+ def metric(roles,good):
+  occurrences=[x for x in proposal['occurrences'] if roles(x['role'])];values=defaultdict(list);counts=Counter();missing=0
+  for x in occurrences:
+   v=bykey.get(x['key'])
+   if not v:missing+=1;continue
+   counts[v['verdict']]+=1;values[groups[x['scope_id']]].append(int(v['verdict'] in good))
+  means=[sum(v)/len(v) for v in values.values()];rng=random.Random(20260911)
+  boot=sorted(sum(rng.choice(means) for _ in means)/len(means) for _ in range(2000)) if len(means)>1 else []
+  return {'occurrences':len(occurrences),'unique_questions':len({x['key'] for x in occurrences}),'source_groups':len(means),'labels':dict(counts),'missing':missing,'pooled_rate':sum(counts[k] for k in good)/len(occurrences) if occurrences else None,'source_group_mean':sum(means)/len(means) if means else None,'group_bootstrap_95': [boot[49],boot[1949]] if boot else None,'missing_label_bounds':[sum(counts[k] for k in good)/len(occurrences),(sum(counts[k] for k in good)+missing)/len(occurrences)] if occurrences else None}
+ metrics={'reasonable_top_five':metric(lambda r:r.startswith('top'),{'strong','plausible'}),'unrelated_primary_members':metric(lambda r:r=='primary-member',{'unrelated'}),'useful_primary_groups':metric(lambda r:r=='primary-group',{'strong','plausible'}),'reasonable_alternative_members':metric(lambda r:r=='rank2-member',{'strong','plausible'}),'useful_sampled_alternatives':metric(lambda r:r=='rank2-alternative',{'strong','plausible'}),'faithful_explanations':metric(lambda r:r=='explanation',{'faithful'})}
+ ledger=read(O/'cloud-complete/ledger.json');new=[r for r in ledger['requests'] if r.get('purpose')=='post-audit'];prior=read(O/'cloud-start/ledger.json');assert ledger['requests'][:len(prior['requests'])]==prior['requests'];charged=sum(r['charged_microusd'] for r in ledger['requests']);newcharge=sum(r['charged_microusd'] for r in new)
+ people={r['researcher_id']:r for r in read(ROOT/'config/researcher_registry.json')['researchers']};items=read(O/'judge-proposed-items-v2.json');examples=[]
+ for grade in ['strong','plausible','unrelated']:
+  for j in [r for r in judgments if r['kind']=='call_person' and r['verdict']==grade][:2]:
+   item=items[j['key']]['item'];pid=item['candidates'][0];examples.append({'scope_id':j['scope_id'],'researcher_id':pid,'name':people[pid]['display_name'],'machine_grade':grade,'reason':j['reason'],'summary':people[pid]['research_summary'],'claims':item['profile_documents'][0]['statements']})
+ report={'version':'post-audit-one-check-results-v1','protocol':'post-audit-complete-v1','trusted_pr':224,'reviewed_sha':'18641abc2fd6fab1c79395b5ad210a8800d3a33d','merge_sha':'48e4e15673d2b2e41fb15cab45a928972e0c9977','run_id':'34606280661','prior_experiment_usd':sum(r['charged_microusd'] for r in prior['requests'])/1e6,'new_requests':len(new),'new_usd':newcharge/1e6,'total_requests':len(ledger['requests']),'total_usd':charged/1e6,'remaining_requests':690-len(ledger['requests']),'remaining_usd':(10000000-charged)/1e6,'outstanding_requests':sum(r['status']=='reserved_unknown' for r in ledger['requests']),'input_tokens':sum(r['usage']['input_tokens'] for r in new),'output_tokens':sum(r['usage']['output_tokens'] for r in new),'cache_read_tokens':sum(r['usage'].get('cache_read_input_tokens',0) for r in new),'exact_prior_judgments_reused':0,'prior_history_preserved':True,'ledger_sha256':hashlib.sha256((O/'cloud-complete/ledger.json').read_bytes()).hexdigest(),'unique_judgments':len(judgments),'source_groups':24,'scopes':26,'children':3,'independent_child_parents':1,'all_source_outcomes':dict(Counter(j['verdict'] for j in judgments if j['kind']=='source_suitability')),'numerical_yield':observations['counts'],'primary_group_yield':1/26,'feasible_scope_yield':'UNMEASURED: no independent directory-feasibility labels exist','metrics':metrics,'order_swaps':[j for j in judgments if j['kind']=='comparison'],'examples':examples,'human_requested_previously':40,'human_returned':0,'new_human_requests':0,'remaining_human_slots':0,'acceptance':{'reasonable_top_five_80':'FAIL','unrelated_primary_members_5':'FAIL','useful_primary_groups_80':'FAIL','independently_feasible_yield_85':'UNMEASURED'},'limitations':['Machine judgments are not human observations.','Only one primary group and one alternative exist; group uncertainty cannot be estimated.','Twenty-four selected source groups; three child observations share one group, not six independent children.','Existing source grouping cannot establish all unknown successor relationships.','Original stored source fields and retained profile evidence are complete for this snapshot; not a new full-notice verification.','No parameter, source or profile correction follows these results.']}
+ write(D/'semantic-results-v1.json',report);write(D/'semantic-verdicts-v1.json',judgments)
+ print(json.dumps({k:report[k] for k in ['new_usd','remaining_usd','metrics','all_source_outcomes']},indent=2))
+if __name__=='__main__':main()

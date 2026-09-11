@@ -1,0 +1,41 @@
+import {test,expect} from '@playwright/test';import AxeBuilder from '@axe-core/playwright';
+import {openFundingFinder,runFundingSearch} from '../e2e/helpers.mjs';
+async function setup(page,cohort='rollout150'){
+ await page.setExtraHTTPHeaders({'x-post-audit-cohort':cohort});await page.clock.setFixedTime(new Date('2026-09-11T12:00:00Z'));
+ const requests=[],errors=[];page.testPhase='startup';page.on('request',r=>requests.push({url:r.url(),method:r.method(),phase:page.testPhase}));page.on('pageerror',e=>errors.push(e.message));
+ await page.route('**/*',route=>new URL(route.request().url()).hostname==='127.0.0.1'?route.continue():route.abort('blockedbyclient'));
+ await openFundingFinder(page);return{requests,errors,team:()=>requests.filter(r=>/shared-team-engine|team_ingredients|\/assets\/team-matcher/.test(r.url)),paid:()=>requests.filter(r=>r.phase==='prepared'&&/api\.(anthropic|openai|voyage)|embed-query|rerank/.test(r.url))};
+}
+const drawer=p=>p.locator('#team-builder');
+async function openParent(page,id,query){page.testPhase='search';await runFundingSearch(page,query);await page.waitForFunction(()=>document.getElementById("find-funding")?.disabled===false);await page.waitForTimeout(1800);const trigger=page.locator(`[data-opportunity-team="${id}"]:is([data-opportunity-team-scope=""],[data-opportunity-team-scope="${id}"])`).first();await expect(trigger).toBeVisible();page.testPhase='prepared';await trigger.click();return trigger;}
+async function openChild(page,id='344592:ab-0035'){const trigger=await openParent(page,'344592','W911NF-23-S-0001');await expect(drawer(page)).toContainText('Choose a specific opportunity topic');await drawer(page).locator(`[data-opportunity-team-scope="${id}"]`).click();await expect(drawer(page).locator('.opportunity-team-next')).toBeVisible();return trigger;}
+async function audit(page,info,label){const a=await new AxeBuilder({page}).withTags(['wcag2a','wcag2aa','wcag21a','wcag21aa']).analyze();await info.attach(label,{body:Buffer.from(JSON.stringify(a)),contentType:'application/json'});expect(a.violations.filter(v=>['critical','serious'].includes(v.impact))).toEqual([]);}
+for(const cohort of ['rollout50','rollout150'])test(`actual ${cohort}: lazy child build, editing, evidence, focus, saved handoff and accessibility`,async({page},info)=>{
+ const p=await setup(page,cohort);expect(p.team()).toHaveLength(0);expect(await page.evaluate(()=>typeof SharedTeamEngine)).toBe('undefined');
+ const trigger=await openChild(page),d=drawer(page);await expect(d.locator('[data-opportunity-team-remove]')).toHaveCount(2);await expect(d).toContainText('Coverage unconfirmed');await expect(d).not.toContainText('Direct evidence');
+ const before=p.paid().length,id=await d.locator('[data-opportunity-team-remove]').first().getAttribute('data-opportunity-team-remove');
+ await d.locator('[data-opportunity-team-remove]').first().click();const select=d.locator('[data-opportunity-team-replacement]');await expect(select.locator(`option[value="${id}"]`)).toContainText('Previously selected');await select.selectOption(id);await d.locator('[data-opportunity-team-add-replacement]').click();
+ await audit(page,info,'actual-'+cohort);await page.setViewportSize({width:390,height:844});await audit(page,info,'mobile-'+cohort);expect(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth)).toBe(true);
+ const names=await d.locator('[data-opportunity-team-remove]').evaluateAll(ns=>ns.map(n=>n.getAttribute('aria-label').replace(/^Remove /,'').replace(/ from this proposed team$/,'')));
+ const href=await d.getByRole('link',{name:'Continue in Team Match',exact:true}).getAttribute('href');expect(new URL(href,'http://local').searchParams.get('opportunity')).toBe('344592:ab-0035');
+ await page.keyboard.press('Escape');await expect(trigger).toBeFocused();await trigger.click();await expect(d).toContainText('Choose a specific opportunity topic');await d.locator('[data-opportunity-team-scope="344592:ab-0035"]').click();await expect(d.locator('.opportunity-team-next')).toBeVisible();expect(p.paid().length).toBe(before);
+ await d.getByRole('link',{name:'Continue in Team Match',exact:true}).click();await page.getByRole('button',{name:'Edit team',exact:true}).click();for(const name of names)await expect(page.getByRole('button',{name:`Remove ${name} from team`,exact:true})).toBeVisible();await page.reload();await page.getByRole('button',{name:'Edit team',exact:true}).click();for(const name of names)await expect(page.getByRole('button',{name:`Remove ${name} from team`,exact:true})).toBeVisible();
+ await info.attach('network.json',{body:Buffer.from(JSON.stringify(p.requests)),contentType:'application/json'});expect(p.errors).toEqual([]);
+});
+test('actual full slots/eight alternatives and no-group preserve admitted candidate reachability',async({page},info)=>{
+ const p=await setup(page);await openChild(page,'344592:ab-0019');const d=drawer(page);await expect(d.locator('[data-opportunity-team-variant]')).toHaveCount(8);await expect(d.locator('[data-opportunity-team-remove]')).toHaveCount(4);await expect(d).toContainText('4 of 4 team slots used');
+ const first=await d.locator('[data-opportunity-team-variant]').first().textContent();await d.locator('[data-opportunity-team-variant]').last().click();await d.locator('[data-opportunity-team-variant]').first().click();expect(await d.locator('[data-opportunity-team-variant]').first().textContent()).toBe(first);
+ await d.locator('[data-opportunity-team-remove]').first().click();const available=await d.locator('[data-opportunity-team-replacement] option').count();expect(available).toBeGreaterThan(1);const paid=p.paid().length;
+ await page.keyboard.press('Escape');await openParent(page,'359696','olfactory');await expect(d.locator('.opportunity-team-next')).toBeVisible();await expect(d.locator('[data-opportunity-team-remove]')).toHaveCount(0);await expect(d).toContainText('Insufficient internal role coverage');expect(p.paid().length).toBe(paid);await info.attach('network.json',{body:Buffer.from(JSON.stringify(p.requests)),contentType:'application/json'});
+});
+test('corrupt/unavailable cache miss and retry do not call a provider; late loads stay closed',async({page},info)=>{
+ const p=await setup(page);let broken=true;await page.route('**/data/team_ingredients/*',async route=>broken?route.fulfill({status:503,body:'Unavailable'}):route.fallback());
+ await openParent(page,'344592','W911NF-23-S-0001');await expect(drawer(page).locator('[data-opportunity-team-retry]')).toBeVisible();const count=p.paid().length;broken=false;await drawer(page).locator('[data-opportunity-team-retry]').click();await expect(drawer(page)).toContainText('Choose a specific opportunity topic');expect(p.paid().length).toBe(count);
+ await page.keyboard.press('Escape');await page.reload();await openFundingFinder(page);await page.route('**/data/team_ingredients/*',async route=>{await new Promise(r=>setTimeout(r,350));return route.fallback();});await openParent(page,'344592','W911NF-23-S-0001');await page.keyboard.press('Escape');await page.waitForTimeout(900);await expect(drawer(page)).not.toBeVisible();await info.attach('network.json',{body:Buffer.from(JSON.stringify(p.requests)),contentType:'application/json'});
+});
+test('expiry, mixed generation and changed unselected profile invalidate cached actions',async({page},info)=>{
+ const p=await setup(page);await openChild(page);await page.clock.setFixedTime(new Date('2035-09-30T12:00:00Z'));await drawer(page).locator('[data-opportunity-team-remove]').first().click();await expect(drawer(page)).toContainText(/no longer current|temporarily unavailable/);
+ await page.clock.setFixedTime(new Date('2026-09-11T12:00:00Z'));await page.reload();await openFundingFinder(page);await openChild(page);const count=p.paid().length;
+ await page.evaluate(()=>{const d=JSON.parse(JSON.stringify(RESEARCHER_DIRECTORY));d.researchers[d.researchers.length-1].research_summary+=' Changed isolated fixture';globalThis.RESEARCHER_DIRECTORY=d;});await drawer(page).locator('[data-opportunity-team-remove]').first().click();await expect(drawer(page).locator('[data-opportunity-team-retry]')).toBeVisible();expect(p.paid().length).toBe(count);
+ await info.attach('network.json',{body:Buffer.from(JSON.stringify(p.requests)),contentType:'application/json'});
+});

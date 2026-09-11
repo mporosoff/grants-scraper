@@ -57,7 +57,8 @@
   ],
   "package": [
     "data/search-v2-release.json",
-    "workers/search-voyage-proxy/generated/corpus-allowlist.json"
+    "workers/search-voyage-proxy/generated/corpus-allowlist.json",
+    "data/team_ingredients/shared-*.json"
   ],
   "runtime": [
     "*.html",

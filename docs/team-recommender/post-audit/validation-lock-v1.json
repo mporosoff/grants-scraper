@@ -1,0 +1,25 @@
+{
+  "version": "post-audit-validation-lock-v1",
+  "starting_commit": "272124fc7d981cf3f438de7e9d133ca00600bee8",
+  "candidate": "shared-team-v2",
+  "clock": "2026-09-11T12:00:00Z",
+  "provider_dispatch_approved": false,
+  "full_E2E_authorized_by": "User: execute attached plan, section 2A",
+  "files": {
+    "assets/shared-team-engine.js": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+    "assets/team-matcher.js": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+    "assets/opportunity-team.js": "76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+    "assets/opportunity-team-panel.js": "f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+    "docs/team-recommender/post-audit/PROTOCOL.md": "8aad6e1098532a6afd2b0b3e1fffb18ea990f9fa607f0c7ede08e189ea861c66",
+    "docs/team-recommender/post-audit/semantic-selection-v2.json": "cf1dd138fe9cfac1e4c829f4f6ccc4f94cb54f1ee5b5a02224cd315391f3daaa",
+    "docs/team-recommender/post-audit/semantic-index.json": "e0f478a39111e57d8ef5c7c7380ba554ecd53b12043d663a8c96ed25369d014d"
+  },
+  "semantic_outputs_seen": false,
+  "semantic_labels_seen": false,
+  "new_human_requests": 0
+}

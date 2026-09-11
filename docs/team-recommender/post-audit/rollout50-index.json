@@ -1,0 +1,366 @@
+{
+  "schema_version": 3,
+  "generation_id": "170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+  "scope_count": 50,
+  "scopes": [
+    {
+      "id": "359696",
+      "parent_id": "359696",
+      "record_type": "specific_parent",
+      "scope_label": "Transformative Non-Invasive/Minimally Invasive Technologies for Imaging the Olfactory System Across Scales (R01 CT Optional)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362551",
+      "parent_id": "362551",
+      "record_type": "specific_parent",
+      "scope_label": "NSF Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs: A Pilot Emphasis on Scientific Instrumentation",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "360205",
+      "parent_id": "360205",
+      "record_type": "specific_parent",
+      "scope_label": "Agriculture and Food Research Initiative Competitive Grants Program Foundational and Applied Science Program",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362178",
+      "parent_id": "362178",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Alzheimer’s Transforming Care Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "360946",
+      "parent_id": "360946",
+      "record_type": "specific_parent",
+      "scope_label": "Assay Validation of High Quality Markers for Clinical Studies in Cancer (UH2/UH3 Clinical Trial Not Allowed)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363141",
+      "parent_id": "363141",
+      "record_type": "specific_parent",
+      "scope_label": "Preventing Suicide and Interpersonal Violence Among Youth and Young Adults",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "342747",
+      "parent_id": "342747",
+      "record_type": "specific_parent",
+      "scope_label": "NSF Astronomy and Astrophysics Postdoctoral Fellowships",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363736",
+      "parent_id": "363736",
+      "record_type": "specific_parent",
+      "scope_label": "Countering CCP Influence in Panama's Unviersities",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363818",
+      "parent_id": "363818",
+      "record_type": "specific_parent",
+      "scope_label": "Science, Technology, Engineering, and Mathematics Fields",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "357609",
+      "parent_id": "357609",
+      "record_type": "specific_parent",
+      "scope_label": "Chemical Evolution of the Solid Earth and Volcanology",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363102",
+      "parent_id": "363102",
+      "record_type": "specific_parent",
+      "scope_label": "U.S Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP) Regional Fire Science Exchange Announcement",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362529",
+      "parent_id": "362529",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Autism Career Development Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363281",
+      "parent_id": "363281",
+      "record_type": "specific_parent",
+      "scope_label": "Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362197",
+      "parent_id": "362197",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Amyotrophic Lateral Sclerosis Research Program, Therapeutic Idea Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "359236",
+      "parent_id": "359236",
+      "record_type": "specific_parent",
+      "scope_label": "Staff Research Program",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "339594",
+      "parent_id": "339594",
+      "record_type": "specific_parent",
+      "scope_label": "Faculty Early Career Development Program",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363455",
+      "parent_id": "363455",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Reconstructive Transplant, Investigator-Initiated Research Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "328573",
+      "parent_id": "328573",
+      "record_type": "specific_parent",
+      "scope_label": "Mathematical Sciences Infrastructure Program",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "348164",
+      "parent_id": "348164",
+      "record_type": "specific_parent",
+      "scope_label": "Economics",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362848",
+      "parent_id": "362848",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Duchenne Muscular Dystrophy, Idea Development Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362315",
+      "parent_id": "362315",
+      "record_type": "specific_parent",
+      "scope_label": "Intervention Research to Improve Native American Health",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "nasa-roses:25-D.3E-1c60503f9d",
+      "parent_id": "nasa-roses:25-D.3E-1c60503f9d",
+      "record_type": "specific_parent",
+      "scope_label": "ROSES25: D.3E IXPE Cycle 4 and NICER Cycle 9 General Observer",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "332894",
+      "parent_id": "332894",
+      "record_type": "specific_parent",
+      "scope_label": "LPS Qubit Collaboratory (LQC)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363055",
+      "parent_id": "363055",
+      "record_type": "specific_parent",
+      "scope_label": "CDC National Centers of Excellence in Youth Violence Prevention (YVPCs): Rigorous Evaluation of Prevention Approaches to Prevent and Reduce Youth Violence",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "360698",
+      "parent_id": "360698",
+      "record_type": "specific_parent",
+      "scope_label": "Biological Technologies",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "363612",
+      "parent_id": "363612",
+      "record_type": "specific_parent",
+      "scope_label": "MPS Mathematical Sciences Research Programs (MPS MathSci)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362180",
+      "parent_id": "362180",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Alzheimer’s Transforming Research Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362186",
+      "parent_id": "362186",
+      "record_type": "specific_parent",
+      "scope_label": "DoW Vision, Translational Research Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "362209",
+      "parent_id": "362209",
+      "record_type": "specific_parent",
+      "scope_label": "DoW, Ovarian Cancer, Pilot Award",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "361322",
+      "parent_id": "361322",
+      "record_type": "specific_parent",
+      "scope_label": "Collaborative Program Grant for Multidisciplinary Teams",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-001",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Methodologies and Techniques to Analyze Assistive Automation (AA) & Artificial Intelligence (AI) enabled systems",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0009",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Modern Optics",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0048",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Neuroscience and Neurotechnology",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-004",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Analytical Methodology for Future Army Systems Enabled by Quantum Technology (Quantum)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-026",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Support to TDAC Research Competencies",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0060",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "High Voltage/High Frequency Power Switching Devices",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0016",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Neurophysiology of Cognition",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-003",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "The Science and Analysis of Systems of Systems (SOS)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0005",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Biogeochemistry",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "361526:c-18",
+      "parent_id": "361526",
+      "record_type": "publishable_child",
+      "scope_label": "Neuro-Symbolic Agents for Code Development",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-002",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Scientific Understanding and Analytical Methodology for Multi-Domain Operations (MDO)",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0035",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Genetics",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-017",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Sustainment Performance and Mission Success Impacts",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0015",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Wireless Communications Networks",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-005",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Artillery - Hypersonics Data and Analysis",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0020",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Modeling of Complex Systems",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-020",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Using Machine Learning and Open Source Big Data Platforms to Enable Prognostics and Predictive Maintenance",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0011",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Solid Mechanics",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "345241:tdac-baa-012",
+      "parent_id": "345241",
+      "record_type": "publishable_child",
+      "scope_label": "Human Systems Integration (HSI) Modeling and Analysis",
+      "engine": "shared-team-v2"
+    },
+    {
+      "id": "344592:ab-0017",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Biochemistry",
+      "engine": "shared-team-v2"
+    }
+  ],
+  "shared": {
+    "path": "data/team_ingredients/shared-170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d.json",
+    "bytes": 15984,
+    "sha256": "170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d"
+  },
+  "runtime": {
+    "matcher": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+    "shared": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c"
+  }
+}

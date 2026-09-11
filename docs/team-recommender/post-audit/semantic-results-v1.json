@@ -1,0 +1,535 @@
+{
+  "version": "post-audit-one-check-results-v1",
+  "protocol": "post-audit-complete-v1",
+  "trusted_pr": 224,
+  "reviewed_sha": "18641abc2fd6fab1c79395b5ad210a8800d3a33d",
+  "merge_sha": "48e4e15673d2b2e41fb15cab45a928972e0c9977",
+  "run_id": "34606280661",
+  "prior_experiment_usd": 3.952987,
+  "new_requests": 34,
+  "new_usd": 0.337668,
+  "total_requests": 629,
+  "total_usd": 4.290655,
+  "remaining_requests": 61,
+  "remaining_usd": 5.709345,
+  "outstanding_requests": 0,
+  "input_tokens": 152954,
+  "output_tokens": 3176,
+  "cache_read_tokens": 0,
+  "exact_prior_judgments_reused": 0,
+  "prior_history_preserved": true,
+  "ledger_sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+  "unique_judgments": 69,
+  "source_groups": 24,
+  "scopes": 26,
+  "children": 3,
+  "independent_child_parents": 1,
+  "all_source_outcomes": {
+    "coherent": 23,
+    "nonresearch": 1,
+    "broad-unselected": 2
+  },
+  "numerical_yield": {
+    "absent_scientific_anchor": 8,
+    "group_produced": 1,
+    "no_admitted_person": 13,
+    "only_one_admitted_person": 4
+  },
+  "primary_group_yield": 0.038461538461538464,
+  "feasible_scope_yield": "UNMEASURED: no independent directory-feasibility labels exist",
+  "metrics": {
+    "reasonable_top_five": {
+      "occurrences": 36,
+      "unique_questions": 36,
+      "source_groups": 11,
+      "labels": {
+        "unrelated": 22,
+        "plausible": 13,
+        "strong": 1
+      },
+      "missing": 0,
+      "pooled_rate": 0.3888888888888889,
+      "source_group_mean": 0.4268595041322314,
+      "group_bootstrap_95": [
+        0.18636363636363634,
+        0.6673553719008264
+      ],
+      "missing_label_bounds": [
+        0.3888888888888889,
+        0.3888888888888889
+      ]
+    },
+    "unrelated_primary_members": {
+      "occurrences": 4,
+      "unique_questions": 4,
+      "source_groups": 1,
+      "labels": {
+        "unrelated": 4
+      },
+      "missing": 0,
+      "pooled_rate": 1.0,
+      "source_group_mean": 1.0,
+      "group_bootstrap_95": null,
+      "missing_label_bounds": [
+        1.0,
+        1.0
+      ]
+    },
+    "useful_primary_groups": {
+      "occurrences": 1,
+      "unique_questions": 1,
+      "source_groups": 1,
+      "labels": {
+        "unrelated": 1
+      },
+      "missing": 0,
+      "pooled_rate": 0.0,
+      "source_group_mean": 0.0,
+      "group_bootstrap_95": null,
+      "missing_label_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    "reasonable_alternative_members": {
+      "occurrences": 4,
+      "unique_questions": 4,
+      "source_groups": 1,
+      "labels": {
+        "unrelated": 4
+      },
+      "missing": 0,
+      "pooled_rate": 0.0,
+      "source_group_mean": 0.0,
+      "group_bootstrap_95": null,
+      "missing_label_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    "useful_sampled_alternatives": {
+      "occurrences": 1,
+      "unique_questions": 1,
+      "source_groups": 1,
+      "labels": {
+        "unrelated": 1
+      },
+      "missing": 0,
+      "pooled_rate": 0.0,
+      "source_group_mean": 0.0,
+      "group_bootstrap_95": null,
+      "missing_label_bounds": [
+        0.0,
+        0.0
+      ]
+    },
+    "faithful_explanations": {
+      "occurrences": 1,
+      "unique_questions": 1,
+      "source_groups": 1,
+      "labels": {
+        "unsupported": 1
+      },
+      "missing": 0,
+      "pooled_rate": 0.0,
+      "source_group_mean": 0.0,
+      "group_bootstrap_95": null,
+      "missing_label_bounds": [
+        0.0,
+        0.0
+      ]
+    }
+  },
+  "order_swaps": [
+    {
+      "key": "d4dbfc292630694a73665b7426d2afc67c1ee51a4e886109aec4081e799a01cf",
+      "scope_id": "356536",
+      "kind": "comparison",
+      "evidence_ref": "p1",
+      "item_id": "i02",
+      "reason": "tie",
+      "verdict": "tie"
+    },
+    {
+      "key": "e532d50955d769955b8cc8bcf524e95d66eee800295aac734b15c97cda95fd47",
+      "scope_id": "356536",
+      "kind": "comparison",
+      "evidence_ref": "p1",
+      "item_id": "i03",
+      "reason": "tie",
+      "verdict": "tie"
+    }
+  ],
+  "examples": [
+    {
+      "scope_id": "363594:a-1",
+      "researcher_id": "urh-000092",
+      "name": "Marc D. Porosoff",
+      "machine_grade": "strong",
+      "reason": "specific",
+      "summary": "Develops heterogeneous catalysts for converting C1 and C2 resources into fuels, chemicals and materials. His group connects controlled synthesis and in situ characterization with catalyst phase, surface temperature and reaction-pathway control. Research includes CO2 hydrogenation, reactive separations, pulsed Joule heating and thermal coupling of reactions. Language-model representations of synthesis and reaction conditions, together with Bayesian optimization, support catalyst discovery.",
+      "claims": [
+        {
+          "text": "Develops catalysts for C1/C2 upgrading using controlled synthesis and in situ characterization to connect material properties with reactivity.",
+          "claims": [
+            {
+              "claim_id": "urh-000092-c001",
+              "revision": 2,
+              "label": "Heterogeneous catalyst synthesis and reaction pathways",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.porosoffresearchgroup.com"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Studies CO2 capture/conversion and reactive separations, including catalytic hydrogenation and CO/CO2 processing.",
+          "claims": [
+            {
+              "claim_id": "urh-000092-c003",
+              "revision": 2,
+              "label": "CO2 conversion and reactive separations",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Uses pulsed Joule heating to explore catalyst phases and reaction electrification, and measures catalyst surface temperatures for tandem-reaction efficiency.",
+          "claims": [
+            {
+              "claim_id": "urh-000092-c007",
+              "revision": 2,
+              "label": "Pulsed heating and thermal coupling of catalytic reactions",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.porosoffresearchgroup.com"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Uses synthesis and reaction-condition text as catalyst representations and applies language models and Bayesian optimization to catalyst discovery.",
+          "claims": [
+            {
+              "claim_id": "urh-000092-c002",
+              "revision": 2,
+              "label": "Language-model representations for catalyst discovery",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/porosoff_marc/index.html",
+                "https://www.porosoffresearchgroup.com"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "347679",
+      "researcher_id": "urh-000007",
+      "name": "Allison J. Lopatkin",
+      "machine_grade": "plausible",
+      "reason": "specific",
+      "summary": "Investigates and engineers genetic communication and population dynamics in microbial communities. Her lab combines systems and synthetic biology, molecular microbiology, biochemical engineering and computational modeling to understand horizontal gene transfer and build predictive tools for controlling it. Applications include antibiotic resistance, functional microbiomes in human and agricultural systems, and environmental remediation. Work on bacterial metabolism and plasmid dynamics connects genetic exchange with microbial fitness and treatment response.",
+      "claims": [
+        {
+          "text": "Develops predictive principles and tools for horizontal gene transfer and genetic communication in clinical and environmental microbial systems.",
+          "claims": [
+            {
+              "claim_id": "urh-000007-c004",
+              "revision": 2,
+              "label": "Plasmid dynamics and horizontal gene transfer",
+              "claim_type": "Phenomenon",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Integrates experimental and computational methods to design stable microbial systems and functional microbiomes for human, agricultural and environmental applications.",
+          "claims": [
+            {
+              "claim_id": "urh-000007-c001",
+              "revision": 2,
+              "label": "Systems and synthetic biology of microbial communities",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Investigates antibiotic resistance as part of controlling microbial dynamics and genetic communication.",
+          "claims": [
+            {
+              "claim_id": "urh-000007-c003",
+              "revision": 2,
+              "label": "Antibiotic resistance in microbial populations",
+              "claim_type": "Application",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Metabolic engineering is a stated interest; her selected research connects bacterial metabolic genes and pathways with antibiotic resistance and treatment response.",
+          "claims": [
+            {
+              "claim_id": "urh-000007-c002",
+              "revision": 2,
+              "label": "Bacterial metabolism and antibiotic response",
+              "claim_type": "Phenomenon",
+              "evidence_level": "corroborated",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Uses mathematical modeling, bioinformatics and data-driven tools together with experiments to predict and control bacterial communities and genetic exchange.",
+          "claims": [
+            {
+              "claim_id": "urh-000007-c007",
+              "revision": 2,
+              "label": "Computational models of microbial dynamics",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://lopatkinlab.com/index.html",
+                "https://www.hajim.rochester.edu/che/people/faculty/lopatkin-allison/index.html"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "344610",
+      "researcher_id": "urh-000052",
+      "name": "Greg Schmidt",
+      "machine_grade": "plausible",
+      "reason": "specific",
+      "summary": "Studies gradient-index optical materials, connecting modeling and optical design with fabrication and metrology. His official 2022 research biography describes freeform GRIN structures, bioinspired compound lens arrays and tapered polymer lenses, as well as light-field optics, illumination design and concentrating optics for solar thermal and photovoltaic systems.",
+      "claims": [
+        {
+          "text": "His research biography identifies light-field optics, illumination design and optics for solar thermal and photovoltaic concentration.",
+          "claims": [
+            {
+              "claim_id": "urh-000052-c003",
+              "revision": 1,
+              "label": "Non-imaging and solar concentrating optics",
+              "claim_type": "Method",
+              "evidence_level": "corroborated",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/optics/assets/pdf/industrial-associates/2022-spring-ia-program-guide.pdf."
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Models, designs and fabricates GRIN materials and optics, including freeform profiles and bioinspired polymer lens arrays.",
+          "claims": [
+            {
+              "claim_id": "urh-000052-c001",
+              "revision": 2,
+              "label": "Gradient-index optical design and fabrication",
+              "claim_type": "Method",
+              "evidence_level": "corroborated",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/optics/assets/pdf/industrial-associates/2022-spring-ia-program-guide.pdf."
+              ]
+            }
+          ]
+        },
+        {
+          "text": "The official research biography identifies optimization and metrology of GRIN optics among his primary projects.",
+          "claims": [
+            {
+              "claim_id": "urh-000052-c002",
+              "revision": 2,
+              "label": "Gradient-index optical metrology",
+              "claim_type": "Method",
+              "evidence_level": "corroborated",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/optics/assets/pdf/industrial-associates/2022-spring-ia-program-guide.pdf."
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "347679",
+      "researcher_id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_grade": "unrelated",
+      "reason": "irrelevant",
+      "summary": "Combines molecular dynamics, quantum chemistry and machine learning to design materials for carbon management. Her laboratory studies polymer membranes for CO2 separation, solvents for CO2 capture and transport, and catalysts for converting CO2 into other chemicals, linking molecular calculations to material design.",
+      "claims": [
+        {
+          "text": "Calculates solvated molecular processes to inform material and catalyst design.",
+          "claims": [
+            {
+              "claim_id": "urh-000150-c003",
+              "revision": 2,
+              "label": "Quantum-chemical modeling of solvation and reactions",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Combines simulation-derived data and AI for sustainability applications.",
+          "claims": [
+            {
+              "claim_id": "urh-000150-c004",
+              "revision": 2,
+              "label": "Machine learning for molecular material design",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Designs catalysts for CO2 conversion and solvents for its capture and transfer.",
+          "claims": [
+            {
+              "claim_id": "urh-000150-c008",
+              "revision": 2,
+              "label": "Computational CO2 conversion and solvent design",
+              "claim_type": "Application",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Uses molecular calculations and learning methods to design gas-separating polymer materials.",
+          "claims": [
+            {
+              "claim_id": "urh-000150-c001",
+              "revision": 2,
+              "label": "Computational design of CO2-separation membranes",
+              "claim_type": "Material / system",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Uses molecular dynamics to generate data connecting molecular structure and material behavior.",
+          "claims": [
+            {
+              "claim_id": "urh-000150-c002",
+              "revision": 2,
+              "label": "Molecular simulation of polymers and solutions",
+              "claim_type": "Method",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/basdogan-yasemin/index.html"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "scope_id": "356536",
+      "researcher_id": "urh-000138",
+      "name": "Varchas Gopalaswamy",
+      "machine_grade": "unrelated",
+      "reason": "irrelevant",
+      "summary": "Studies thermonuclear plasmas and inertial-confinement fusion, using statistical and machine-learning methods to connect simulations with experimental observations. His documented work examines discrepancies between predicted and measured implosions to test physical hypotheses and improve experimental design under limited-data conditions.",
+      "claims": [
+        {
+          "text": "Analyzes prediction-experiment gaps to improve models and test physical hypotheses.",
+          "claims": [
+            {
+              "claim_id": "urh-000138-c001",
+              "revision": 2,
+              "label": "Machine-learning reconciliation of fusion simulations and data",
+              "claim_type": "Method",
+              "evidence_level": "corroborated",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/artificial-intelligence-ai-laser-fusion-energy-research-622682/"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Lists thermonuclear plasma and inertial-confinement fusion among his scientific interests.",
+          "claims": [
+            {
+              "claim_id": "urh-000138-c003",
+              "revision": 2,
+              "label": "Thermonuclear plasma and high-energy-density physics",
+              "claim_type": "Phenomenon",
+              "evidence_level": "direct",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html"
+              ]
+            }
+          ]
+        },
+        {
+          "text": "Uses empirical and theoretical information to guide fusion experiments.",
+          "claims": [
+            {
+              "claim_id": "urh-000138-c002",
+              "revision": 2,
+              "label": "Statistical analysis and design of inertial-fusion implosions",
+              "claim_type": "Method",
+              "evidence_level": "corroborated",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/artificial-intelligence-ai-laser-fusion-energy-research-622682/"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "human_requested_previously": 40,
+  "human_returned": 0,
+  "new_human_requests": 0,
+  "remaining_human_slots": 0,
+  "acceptance": {
+    "reasonable_top_five_80": "FAIL",
+    "unrelated_primary_members_5": "FAIL",
+    "useful_primary_groups_80": "FAIL",
+    "independently_feasible_yield_85": "UNMEASURED"
+  },
+  "limitations": [
+    "Machine judgments are not human observations.",
+    "Only one primary group and one alternative exist; group uncertainty cannot be estimated.",
+    "Twenty-four selected source groups; three child observations share one group, not six independent children.",
+    "Existing source grouping cannot establish all unknown successor relationships.",
+    "Original stored source fields and retained profile evidence are complete for this snapshot; not a new full-notice verification.",
+    "No parameter, source or profile correction follows these results."
+  ]
+}

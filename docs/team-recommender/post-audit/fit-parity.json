@@ -1,0 +1,20 @@
+{
+  "comparisons": 16120,
+  "disagreements": 0,
+  "skipped": [
+    {
+      "id": "363179",
+      "reason": "not_current"
+    },
+    {
+      "id": "359199",
+      "reason": "not_current"
+    }
+  ],
+  "clock": "2026-09-11T12:00:00Z",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "runtime_sha256": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+  "matcher_sha256": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+  "reference_commit": "272124fc7d981cf3f438de7e9d133ca00600bee8",
+  "provider_calls": 0
+}

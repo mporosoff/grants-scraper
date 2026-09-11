@@ -260,7 +260,7 @@ test("Search, CSV, saves, alerts, AI payloads, team and researcher identity owne
   // current bindings are checked by the release, registry and team contracts.
   const generatedSources = new Set([
     // Authorized shared-matcher/profile repair, separately contract tested.
-    "assets/team-matcher.js", "assets/opportunity-team.js",
+    "assets/team-matcher.js", "assets/opportunity-team.js", "assets/opportunity-team-panel.js",
     "data/faculty_matches.js", "data/researcher_directory.js",
     "data/researcher_registry_manifest.json", "data/opportunity_team_index.js",
     "data/opportunity_teams.js", "config/researcher_registry.json",

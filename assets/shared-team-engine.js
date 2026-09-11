@@ -1,7 +1,7 @@
 /* On-demand composition over the existing Team Match admission contract. */
 (function (g) {
   "use strict";
-  const VERSION = "shared-team-v1", snapshots = new WeakMap();
+  const VERSION = "shared-team-v2", snapshots = new WeakMap();
   const cmp = (a, b) => a < b ? -1 : a > b ? 1 : 0;
   const canonical = v => Array.isArray(v) ? "[" + v.map(canonical).join(",") + "]" : v && typeof v === "object"
     ? "{" + Object.keys(v).sort(cmp).map(k => JSON.stringify(k) + ":" + canonical(v[k])).join(",") + "}" : JSON.stringify(v);
@@ -33,7 +33,12 @@
     const data = freeze({schema_version: 3, generation_id: index.generation_id, faculty, opportunities: clone(packet.scopes)});
     // Search indexes are already owned by Search and are not matcher inputs.
     // Bind their original package above, but do not duplicate them in team memory.
-    snapshots.set(data, freeze({packet: clone(packet), directory: clone(directory), catalog: {opportunities: clone(catalog.opportunities)}, children: {opportunities: clone(children.opportunities)}}));
+    // Adopt immutable source objects once. A source refresh replaces its object;
+    // in-place edits cannot silently change adopted scientific evidence.
+    freeze(directory); freeze(catalog.opportunities); freeze(sidecar); freeze(children);
+    snapshots.set(data, {packet: freeze(clone(packet)), directory, catalog: {opportunities: catalog.opportunities}, children,
+      handles: {catalog, directory, sidecar}, boundGlobals: {
+        catalog: g.GRANT_CATALOG === catalog, directory: g.RESEARCHER_DIRECTORY === directory, sidecar: g.SUBTOPIC_CATALOG === sidecar}});
     return data;
   }
   async function loadData(index, directory) {
@@ -58,27 +63,36 @@
     const snap = snapshots.get(data); check(snap, "Shared inputs were not validated.");
     const facultyById = new Map(data.faculty.map(p => [p.id, p]));
     data.faculty.forEach(p => (p.legacy_ids || []).forEach(id => facultyById.set(id, p)));
-    const profiles = data.faculty.filter(eligible).map(p => ({id: p.id, profile: g.FUNDING_TEAM_MATCHER.normalizeProfile(p)}));
+    const profiles = data.faculty.filter(eligible).map(p => ({id: p.id, profile: freeze(g.FUNDING_TEAM_MATCHER.normalizeProfile(p))}));
     const opportunityById = new Map(data.opportunities.map(s => [s.id, s]));
     const parents = new Map(snap.catalog.opportunities.map(r => [idOf(r), r]));
-    let decision = null, preparedAt = "", parentMatcher, childMatcher;
+    let decision = null, preparedAt = "", parentMatcher, childMatcher, actionClock = null;
     const fitCache = new Map();
+    const checkedChildren = new WeakSet();
     const counts = {actions: 0, fits: 0, optimizations: 0};
     const scopesFor = parent => data.opportunities.filter(s => s.parent_id === String(parent));
+    function assertSnapshot() {
+      check((!snap.boundGlobals.directory && !g.RESEARCHER_DIRECTORY || g.RESEARCHER_DIRECTORY === snap.handles.directory), "Researcher pool changed; reopen the panel.");
+      check((!snap.boundGlobals.catalog && !g.GRANT_CATALOG || g.GRANT_CATALOG === snap.handles.catalog)
+        && snap.handles.catalog.opportunities === snap.catalog.opportunities, "Catalog changed; reopen the panel.");
+      check(!snap.boundGlobals.sidecar && !g.SUBTOPIC_CATALOG || g.SUBTOPIC_CATALOG === snap.handles.sidecar, "Child source changed; reopen the panel.");
+    }
     function resolveScope(input = {}) {
       decision = null;
-      const now = new Date(input.now ?? (settings.clock ? settings.clock() : Date.now()));
+      const now = new Date(actionClock ?? input.now ?? (settings.clock ? settings.clock() : Date.now()));
       check(Number.isFinite(+now), "Invalid comparison clock.");
-      if (g.RESEARCHER_DIRECTORY) check(canonical(g.RESEARCHER_DIRECTORY) === canonical(snap.directory), "Researcher pool changed; reopen the panel.");
-      if (g.GRANT_CATALOG) check(canonical(g.GRANT_CATALOG.opportunities) === canonical(snap.catalog.opportunities), "Catalog changed; reopen the panel.");
+      assertSnapshot();
       const parent = String(input.parentId || idOf(input.record)), scopes = scopesFor(parent), parentRecord = parents.get(parent);
       if (!parentRecord || !g.FUNDING_RETRIEVAL.recordIsCurrent(parentRecord, now)) return {ok: false, reason: "not_current", scopes};
       // Caller records may have renderer-only decorations; science is always taken from the canonical catalog.
-      if (input.record && (idOf(input.record) !== parent || Object.keys(parentRecord).some(k => canonical(input.record[k]) !== canonical(parentRecord[k])))) return {ok: false, reason: "unsupported_scope", scopes};
+      if (input.record && input.record !== parentRecord && (idOf(input.record) !== parent || Object.keys(parentRecord).some(k => canonical(input.record[k]) !== canonical(parentRecord[k])))) return {ok: false, reason: "unsupported_scope", scopes};
       const scope = input.scopeId ? opportunityById.get(input.scopeId) : (scopes.length === 1 && scopes[0].record_type === "specific_parent" ? scopes[0] : null);
       if (!scope || scope.parent_id !== parent) return {ok: false, reason: scopes.length ? "specific_scope_required" : "unsupported_scope", scopes};
       if (scope.record_type === "specific_parent" && input.isBroad) return {ok: false, reason: "broad_parent_rejected", scopes};
-      if (input.childCatalog && canonical(input.childCatalog.opportunities) !== canonical(snap.children.opportunities)) return {ok: false, reason: "child_not_publication_eligible", scopes};
+      if (input.childCatalog && !checkedChildren.has(input.childCatalog)) {
+        if (canonical(input.childCatalog.opportunities) !== canonical(snap.children.opportunities)) return {ok: false, reason: "child_not_publication_eligible", scopes};
+        freeze(input.childCatalog); checkedChildren.add(input.childCatalog);
+      }
       if (preparedAt !== now.toISOString().slice(0, 10)) {
         parentMatcher = g.FUNDING_TEAM_MATCHER.create(snap.catalog, snap.packet.config, g.FUNDING_SEARCH_QUERY, {now});
         childMatcher = null; preparedAt = now.toISOString().slice(0, 10); fitCache.clear();
@@ -100,11 +114,10 @@
     }
     function checked(state) {
       check(decision && decision.scope.id === state.opportunityId && state.generation === data.generation_id, "Stale or unresolved selection.");
-      const now = new Date(settings.clock ? settings.clock() : Date.now());
+      const now = new Date(actionClock ?? (settings.clock ? settings.clock() : Date.now()));
       check(g.FUNDING_RETRIEVAL.recordIsCurrent(parents.get(decision.scope.parent_id), now)
         && g.FUNDING_RETRIEVAL.recordIsCurrent(decision.prepared.record, now), "Opportunity expired between actions.");
-      if (g.RESEARCHER_DIRECTORY) check(canonical(g.RESEARCHER_DIRECTORY) === canonical(snap.directory), "Researcher pool changed; reopen the panel.");
-      if (g.GRANT_CATALOG) check(canonical(g.GRANT_CATALOG.opportunities) === canonical(snap.catalog.opportunities), "Catalog changed; reopen the panel.");
+      assertSnapshot();
       if (preparedAt !== now.toISOString().slice(0, 10)) check(resolveScope({...decision.input, now}).ok, "Opportunity changed between actions.");
       check(Array.isArray(state.selectedIds) && state.selectedIds.length <= 4 && new Set(state.selectedIds).size === state.selectedIds.length
         && Array.isArray(state.excludedIds) && state.excludedIds.length <= profiles.length && state.excludedIds.every(id => facultyById.has(id)), "Invalid selection.");
@@ -122,6 +135,20 @@
     function combined(rows) { const values = new Map(); rows.forEach(r => contributions(r).forEach((v, k) => values.set(k, Math.max(values.get(k) || 0, v)))); return values; }
     function coverage(rows) { return [...combined(rows).values()].reduce((a, b) => a + b, 0); }
     function gain(values, row) { let sum = 0; contributions(row).forEach((v, k) => { sum += Math.max(0, v - (values.get(k) || 0)); }); return sum; }
+    const evidenceCache = new WeakMap();
+    function claimEvidence(row) {
+      if (!evidenceCache.has(row)) evidenceCache.set(row, new Set(row.fit.connections.filter(c => row.fit.strong && c.claims.length)
+        .flatMap(c => c.claims.map(claim => g.FUNDING_SEARCH_QUERY.tokenize(claim.label + " " + claim.evidence).join(" ")))));
+      return evidenceCache.get(row);
+    }
+    function independentEvidence(row, others) {
+      const duplicated = new Set(others.flatMap(r => [...claimEvidence(r)]));
+      return [...claimEvidence(row)].some(key => !duplicated.has(key));
+    }
+    function justified(row, team) {
+      const others = team.filter(r => r !== row);
+      return coverage(team) - coverage(others) > 1e-9 || independentEvidence(row, others);
+    }
     function optimize(d, excluded) {
       const key = [...excluded].sort(cmp).join("|"); if (d.options.has(key)) return d.options.get(key);
       const pool = d.rows.filter(r => !excluded.includes(r.id)).sort((a, b) => b.fit.score - a.fit.score || cmp(a.id, b.id)), teams = new Map();
@@ -131,10 +158,15 @@
           const base = combined(team);
           const next = pool.filter(r => !team.includes(r)).map(r => ({r, gain: gain(base, r)}))
             .sort((a, b) => b.gain - a.gain || b.r.fit.score - a.r.fit.score || cmp(a.r.id, b.r.id))[0];
-          if (!next || next.gain <= 1e-9) break;
-          team.push(next.r);
-          // A new member can supersede the seed. Every retained member must contribute.
-          team = team.filter(r => coverage(team) - coverage(team.filter(x => x !== r)) > 1e-9);
+          if (!next) break;
+          // A minimum group may contain independently evidenced overlapping
+          // contributions. Zero removal marginal is not proof of irrelevance.
+          // Beyond that minimum, another person must add coverage; no slot padding.
+          const choice = next.gain > 1e-9 ? next.r : team.length === 1
+            ? pool.find(r => !team.includes(r) && independentEvidence(r, team) && independentEvidence(team[0], [r])) : null;
+          if (!choice) break;
+          team.push(choice);
+          team = team.filter(r => justified(r, team));
           if (team.length >= 2 && team.some(r => r.fit.strong)) {
             const ids = team.map(r => r.id).sort(cmp), id = ids.join("+");
             teams.set(id, {ids, key: id, coverage: coverage(team), relevance: team.reduce((s, r) => s + r.fit.score, 0)});
@@ -176,8 +208,24 @@
     }
     function removeMember(state, id) { const d = checked(state), canonicalId = facultyById.get(id)?.id; check(canonicalId, "Unknown member."); return stateFor(d.scope, state.selectedIds.filter(x => x !== canonicalId), [...new Set([...state.excludedIds, canonicalId])]); }
     function addReplacement(state, id) { const d = checked(state), canonicalId = facultyById.get(id)?.id; check(state.selectedIds.length < 4 && !state.selectedIds.includes(canonicalId) && d.rows.some(r => r.id === canonicalId), "Replacement does not pass shared fit."); return stateFor(d.scope, [...state.selectedIds, canonicalId], state.excludedIds.filter(x => x !== canonicalId)); }
+    function diagnoseScope() {
+      check(decision, "Scope not resolved.");
+      const teams = optimize(decision, []), pool = decision.rows;
+      return {admitted: pool.length, strong: pool.filter(r => r.fit.strong).length,
+        independent_strong_evidence: pool.filter(r => claimEvidence(r).size).length,
+        boundary: teams.length ? "group_produced" : !pool.length ? "no_admitted_person" : pool.length === 1 ? "only_one_admitted_person"
+          : !pool.some(r => r.fit.strong) ? "absent_scientific_anchor" : "redundancy_contribution_restriction",
+        primary: (teams[0]?.ids || []).map(id => { const team = teams[0].ids.map(id => pool.find(r => r.id === id)), row = pool.find(r => r.id === id);
+          return {id, removal_marginal: coverage(team) - coverage(team.filter(r => r.id !== id)), independent_strong_evidence: independentEvidence(row, team.filter(r => r.id !== id))}; })};
+    }
+    function runAction(input, callback) {
+      check(actionClock === null, "Nested team action.");
+      actionClock = new Date(input.now ?? (settings.clock ? settings.clock() : Date.now()));
+      try { return callback(resolveScope({...input, now: actionClock})); }
+      finally { actionClock = null; }
+    }
     return Object.freeze({data, facultyById: new Map(facultyById), opportunityById: new Map(opportunityById), scopesFor, resolveScope, proposal, proposalOptions, proposalView, removeMember, addReplacement,
-      statistics: () => ({...counts, cachedScopes: fitCache.size}), admittedFits: () => decision?.rows.map(r => ({id: r.id, fit: clone(r.fit)})) || []});
+      runAction, diagnoseScope, statistics: () => ({...counts, cachedScopes: fitCache.size}), admittedFits: () => decision?.rows.map(r => ({id: r.id, fit: clone(r.fit)})) || []});
   }
   g.SharedTeamEngine = Object.freeze({VERSION, canonical, hash, hydrate, loadData, create, eligible});
 })(globalThis);
