@@ -1,0 +1,289 @@
+{
+  "version": 1,
+  "runtime_package": "release-packages-v4.json",
+  "runtime_measurements": "v5/v6 measured identical JavaScript bodies in preceding v3 bundle; canonical v4 change is hash references/metadata only, independently verified by package-canonical-receipt-v4.json",
+  "native_compute_samples": 16,
+  "rendered_samples": 6,
+  "groups": [
+    {
+      "case": "rollout50 344592:ab-0035",
+      "metrics": {
+        "load_ms": {
+          "n": 5,
+          "min": 919.1999999880791,
+          "median": 935.7000000178814,
+          "p95_nearest_rank": 979.4000000059605,
+          "max": 979.4000000059605
+        },
+        "fit_ms": {
+          "n": 5,
+          "min": 218.30000001192093,
+          "median": 241.19999998807907,
+          "p95_nearest_rank": 258.89999997615814,
+          "max": 258.89999997615814
+        },
+        "post_last_input_ms": {
+          "n": 5,
+          "min": 585.0,
+          "median": 625.4000000059605,
+          "p95_nearest_rank": 668.6999999880791,
+          "max": 668.6999999880791
+        },
+        "cold_to_view_object_ms": {
+          "n": 5,
+          "min": 1149.2999999821186,
+          "median": 1187.5999999940395,
+          "p95_nearest_rank": 1223.5999999940395,
+          "max": 1223.5999999940395
+        },
+        "retained_MiB": {
+          "n": 5,
+          "min": 10.824371337890625,
+          "median": 10.826702117919922,
+          "p95_nearest_rank": 10.83176040649414,
+          "max": 10.83176040649414
+        },
+        "sampled_extra_heap_MiB": {
+          "n": 5,
+          "min": 71.25393295288086,
+          "median": 73.89816665649414,
+          "p95_nearest_rank": 77.20917129516602,
+          "max": 77.20917129516602
+        },
+        "warm_ms": {
+          "n": 50,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "p95_nearest_rank": 0.20000001788139343,
+          "max": 0.29999998211860657
+        },
+        "edit_ms": {
+          "n": 25,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "p95_nearest_rank": 0.29999998211860657,
+          "max": 0.30000001192092896
+        }
+      }
+    },
+    {
+      "case": "rollout150 344592:ab-0035",
+      "metrics": {
+        "load_ms": {
+          "n": 5,
+          "min": 888.8999999761581,
+          "median": 901.0999999940395,
+          "p95_nearest_rank": 982,
+          "max": 982
+        },
+        "fit_ms": {
+          "n": 5,
+          "min": 226.80000001192093,
+          "median": 234.7999999821186,
+          "p95_nearest_rank": 284,
+          "max": 284
+        },
+        "post_last_input_ms": {
+          "n": 5,
+          "min": 571.7000000178814,
+          "median": 647.5999999940395,
+          "p95_nearest_rank": 720.1000000238419,
+          "max": 720.1000000238419
+        },
+        "cold_to_view_object_ms": {
+          "n": 5,
+          "min": 1119.5,
+          "median": 1186.9000000059605,
+          "p95_nearest_rank": 1264.4000000059605,
+          "max": 1264.4000000059605
+        },
+        "retained_MiB": {
+          "n": 5,
+          "min": 10.86920166015625,
+          "median": 10.874931335449219,
+          "p95_nearest_rank": 10.878547668457031,
+          "max": 10.878547668457031
+        },
+        "sampled_extra_heap_MiB": {
+          "n": 5,
+          "min": 71.99942779541016,
+          "median": 74.08223342895508,
+          "p95_nearest_rank": 77.30667877197266,
+          "max": 77.30667877197266
+        },
+        "warm_ms": {
+          "n": 50,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "p95_nearest_rank": 0.20000001788139343,
+          "max": 0.20000001788139343
+        },
+        "edit_ms": {
+          "n": 25,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "p95_nearest_rank": 0.20000001788139343,
+          "max": 0.20000001788139343
+        }
+      }
+    },
+    {
+      "case": "rollout150 344592:ab-0019",
+      "metrics": {
+        "load_ms": {
+          "n": 3,
+          "min": 953.5,
+          "median": 962.7000000178814,
+          "p95_nearest_rank": 1000.2999999821186,
+          "max": 1000.2999999821186
+        },
+        "fit_ms": {
+          "n": 3,
+          "min": 277.40000000596046,
+          "median": 288.90000000596046,
+          "p95_nearest_rank": 293.2000000178814,
+          "max": 293.2000000178814
+        },
+        "post_last_input_ms": {
+          "n": 3,
+          "min": 695.7000000178814,
+          "median": 699.1000000238419,
+          "p95_nearest_rank": 745.3000000119209,
+          "max": 745.3000000119209
+        },
+        "cold_to_view_object_ms": {
+          "n": 3,
+          "min": 1244.7000000178814,
+          "median": 1251.2000000178814,
+          "p95_nearest_rank": 1293.4000000059605,
+          "max": 1293.4000000059605
+        },
+        "retained_MiB": {
+          "n": 3,
+          "min": 10.9146728515625,
+          "median": 10.9149169921875,
+          "p95_nearest_rank": 10.916034698486328,
+          "max": 10.916034698486328
+        },
+        "sampled_extra_heap_MiB": {
+          "n": 3,
+          "min": 68.94184875488281,
+          "median": 75.68574142456055,
+          "p95_nearest_rank": 80.04092407226562,
+          "max": 80.04092407226562
+        },
+        "warm_ms": {
+          "n": 30,
+          "min": 0,
+          "median": 0.09999999403953552,
+          "p95_nearest_rank": 0.29999998211860657,
+          "max": 0.30000001192092896
+        },
+        "edit_ms": {
+          "n": 15,
+          "min": 0,
+          "median": 0.5,
+          "p95_nearest_rank": 0.9000000059604645,
+          "max": 0.9000000059604645
+        }
+      }
+    },
+    {
+      "case": "rollout150 359696",
+      "metrics": {
+        "load_ms": {
+          "n": 3,
+          "min": 868.0999999940395,
+          "median": 901.5,
+          "p95_nearest_rank": 979.1999999880791,
+          "max": 979.1999999880791
+        },
+        "fit_ms": {
+          "n": 3,
+          "min": 505.59999999403954,
+          "median": 520.7000000178814,
+          "p95_nearest_rank": 529.5,
+          "max": 529.5
+        },
+        "post_last_input_ms": {
+          "n": 3,
+          "min": 855.6999999880791,
+          "median": 856.1999999880791,
+          "p95_nearest_rank": 957.2000000178814,
+          "max": 957.2000000178814
+        },
+        "cold_to_view_object_ms": {
+          "n": 3,
+          "min": 1402.199999988079,
+          "median": 1411.5,
+          "p95_nearest_rank": 1504.800000011921,
+          "max": 1504.800000011921
+        },
+        "retained_MiB": {
+          "n": 3,
+          "min": 19.337955474853516,
+          "median": 19.342266082763672,
+          "p95_nearest_rank": 19.343204498291016,
+          "max": 19.343204498291016
+        },
+        "sampled_extra_heap_MiB": {
+          "n": 3,
+          "min": 76.75637817382812,
+          "median": 77.49457931518555,
+          "p95_nearest_rank": 80.03487777709961,
+          "max": 80.03487777709961
+        },
+        "warm_ms": {
+          "n": 30,
+          "min": 0,
+          "median": 0.10000000894069672,
+          "p95_nearest_rank": 0.5,
+          "max": 0.7000000178813934
+        },
+        "edit_ms": {
+          "n": 0
+        }
+      }
+    }
+  ],
+  "rendered": {
+    "cold_ms": {
+      "n": 6,
+      "min": 1247.291000000001,
+      "median": 1294.662699999998,
+      "p95_nearest_rank": 1323.7721999999922,
+      "max": 1323.7721999999922
+    },
+    "option_ms": {
+      "n": 15,
+      "min": 31.69999998807907,
+      "median": 33.099999994039536,
+      "p95_nearest_rank": 34.19999998807907,
+      "max": 34.19999998807907
+    },
+    "remove_ms": {
+      "n": 6,
+      "min": 29.599999994039536,
+      "median": 32.45000000298023,
+      "p95_nearest_rank": 56.80000001192093,
+      "max": 56.80000001192093
+    },
+    "add_ms": {
+      "n": 6,
+      "min": 25.19999998807907,
+      "median": 33.650000005960464,
+      "p95_nearest_rank": 34.79999998211861,
+      "max": 34.79999998211861
+    }
+  },
+  "targets": {
+    "post_input_p95_1000ms": "PASS in declared finite desktop samples",
+    "cached_p95_200ms": "PASS in declared compute and rendered samples",
+    "cold_click_p95_5000ms": "PASS in six declared rendered samples; programmed child choice excludes human deliberation",
+    "incremental_team_transfer_8MiB": "PASS; reused general Search catalog/directory/sidecar reported separately",
+    "additional_heap_48MiB": "FAIL: sampled increase before GC reaches 80.04 MiB. Retained after GC 10.82\u201319.34 MiB is not a substitute.",
+    "true_peak_heap": "UNMEASURED; at least the sampled maximum",
+    "physical_mobile": "NOT RUN"
+  },
+  "new_provider_calls": 0
+}

@@ -1,0 +1,1031 @@
+{
+  "actual_candidate_axe": [
+    {
+      "case": "actual-rollout50",
+      "incomplete": 1,
+      "violations": 0
+    },
+    {
+      "case": "mobile-rollout50",
+      "incomplete": 1,
+      "violations": 0
+    },
+    {
+      "case": "actual-rollout150",
+      "incomplete": 1,
+      "violations": 0
+    },
+    {
+      "case": "mobile-rollout150",
+      "incomplete": 1,
+      "violations": 0
+    }
+  ],
+  "case_results": [
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Funding Finder has no serious or critical violations across critical states"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "receipt": "failed-recheck-v1",
+      "status": "expected",
+      "title": "Funded Awards Institutional Intelligence has no serious or critical violations"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "shared Help remains visible and current across every desktop and mobile surface"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "shared navigation and primary content geometry stay aligned across all three pages"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Team Match has no serious or critical violations across picker, results, and fallback states"
+    },
+    {
+      "file": "e2e/accessibility.spec.mjs",
+      "receipt": "failed-recheck-v1",
+      "status": "expected",
+      "title": "Funded Awards has no serious or critical violations and fits narrow mobile layouts"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "delayed catalog cannot block the interactive shell, Help, navigation, or mobile accessibility"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Save-Data and slow connections deterministically skip background catalog prefetch"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a hidden document postpones prefetch and resumes it when visible without execution"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "two rapid searches share one catalog execution and initialization, then preserve normal ordered results"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "catalog failure preserves entered and saved state and retry completes the original search"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "timed-out catalog ownership quarantines stale execution across failed and successful retries"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a stalled topic sidecar fails initialization cleanly and a fresh bounded retry succeeds"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a healthy catalog may complete after 15 seconds and both asset timers still clean up"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "shell dependency failures do not offer a catalog retry that cannot run"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "retry refreshes stale startup metadata after a catalog generation changes"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "catalog validation derives its release version from loaded pipeline timestamps"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "catalog validation preserves same-second pipeline timestamp precision"
+    },
+    {
+      "file": "e2e/catalog-startup.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Back and Forward restore catalog-dependent URLs before and after readiness without eager clean-page execution"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "standalone paging and investigator handoff retain the submitted year range"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "the Funded Awards status badge remains complete inside a narrow mobile header"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "the frozen NIH example opens its exact opportunity mapping"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a scroll queued before a card menu opens cannot dismiss its exact award action"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "the frozen DOE example opens its exact PAMS FOA without a program-equivalence claim"
+    },
+    {
+      "file": "e2e/funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "the frozen NSF CBET example opens its reviewed current and predecessor program group"
+    },
+    {
+      "file": "e2e/funding-finder-live.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "the daily Funding Finder catalog loads as a usable application package"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "watchlist pursuit state stays local and saved-search alerts send only typed public criteria"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Unit C alert dialog locks the page, traps focus, scrolls internally, and restores state on mobile"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Unit C alert dialog preserves its recovery state and restores focus after a failed submission"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "saved-item write rejection restores durable UI state across every mutation"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "alert dialog gives bounded recovery guidance for 429 rate_limited JSON response"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "alert dialog gives bounded recovery guidance for 429 non-JSON response"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "alert dialog gives bounded recovery guidance for 400 invalid_request JSON response"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "alert dialog gives bounded recovery guidance for 403 origin_not_allowed JSON response"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "alert dialog gives bounded recovery guidance for 503 alerts_unavailable JSON response"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "alert dialog gives bounded recovery guidance for 503 non-JSON response"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "alert dialog gives bounded recovery guidance for 202 malformed accepted response"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "primary search submits with Enter and exposes gated AI refinement in Refine Search"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "primary search and Refine Search controls fit from tablet through 320 px"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "provider failure preserves the search, filters, results, key, and retry control"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "an alert focus link starts a result search and reveals its exact opportunity"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "Strong and Potential membership survives sorting, filters trigger one semantic cycle, and core actions work"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "sidecar failure preserves parent search, browsing, and filters with a visible warning"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Retry-After keeps Strong results visible and disables retry until the interval expires"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "refinement awaits the one pending Potential request before capturing its ordinary baseline"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "generic-only and stale AI responses leave the ordinary baseline untouched"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "refinement sends only enabled profile context and honors the explicit CV-for-AI control"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "refinement keeps both calls and provenance bound to its starting provider"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "editing an imported ORCID clears stale refinement and restores ordinary results"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "uploaded notice focus blocks refinement until the PDF is removed"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "rerunning changed criteria clears stale chat focus while preserving the conversation"
+    },
+    {
+      "file": "e2e/funding-finder.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "AI refinement adds locally Strong records and exact restoration preserves the ordinary baseline"
+    },
+    {
+      "file": "e2e/institutional-intelligence.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "legacy Institutional Intelligence bookmarks remain compatible with Funded Awards"
+    },
+    {
+      "file": "e2e/minor-ui-fixes.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "search lands on compact results with utilities reachable through More"
+    },
+    {
+      "file": "e2e/minor-ui-fixes.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Team Builder replaces the closed context without reusing the prior proposal"
+    },
+    {
+      "file": "e2e/minor-ui-fixes.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Funded Awards opens directly on the working search without the redundant banner"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Funding Finder retains its hero and Team Builder contains text at phone widths and enlarged text"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Researcher institution supports keyboard ROR selection, draft isolation and browser-local retention"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Researcher review sends only optional institution metadata and clears a ROR identity when edited"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Late ROR responses and lookup failures cannot overwrite a different researcher draft"
+    },
+    {
+      "file": "e2e/public-polish.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "ROR suggestions distinguish identical names using the actual API city and country fields"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Ask AI bounds requests, keeps follow-up scope, and supports card menus at 1280px"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Ask AI bounds requests, keeps follow-up scope, and supports card menus at 390px"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Ask AI bounds requests, keeps follow-up scope, and supports card menus at 320px"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a non-default filter enables Ask AI and restoring default browsing disables it"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "saved opportunity alerts work before searching and enforce the selected public-ID boundary"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "receipt": "failed-recheck-v1",
+      "status": "expected",
+      "title": "specific team topics support alternatives, explicit replacement, and Team Match handoff"
+    },
+    {
+      "file": "e2e/recent-updates.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "award sorting spans the full snapshot and survives paging, shared reload, and history"
+    },
+    {
+      "file": "e2e/shared-links.spec.mjs",
+      "receipt": "failed-recheck-v1",
+      "status": "expected",
+      "title": "bare and parameterized Funding Finder links keep encoded state, fragments, and preview metadata"
+    },
+    {
+      "file": "e2e/shared-links.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Funded Awards and Team Match extension routes retain shared state and the common preview"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "Team Match supports directory, browser-only, team-size, history, and mobile workflows"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "a deferred four-person team cannot lose a member through Configure"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "enhanced ordering can reorder only locally eligible every-member-fit results"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "Team Match sidecar failure keeps parent-level matching and disables enhanced ordering"
+    },
+    {
+      "file": "e2e/team-match.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "enhanced-ordering failure leaves local team-fit results usable with a nontechnical message"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 0 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 1 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 9 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 10 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 11 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 25 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 26 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 50 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot pagination handles exactly 51 matching awards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "topic and program-officer filters create one immutable snapshot request"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "program filtering requires one source before a snapshot is created"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "each agency respects its source-specific 25-record hydration boundary"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "numbered navigation, page size, and history keep one stable view"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Back and Forward restore the scroll and focus owned by each snapshot page"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "snapshot navigation controls stay locked until one requested view is committed"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "failed facet and page-size requests restore the committed view controls"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a failed facet preserves its evidence answer and a committed facet clears it"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "provider synthesis retains the evidence signature captured before later hydration"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "draft filters never relabel an active snapshot during page, size, facet, share, or reload navigation"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "replacement search commits only after its initial snapshot bundle succeeds"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "failed creation and initial-page replacements retain one coherent owner before success and history restoration"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "an expired snapshot is rebuilt before the requested page is restored"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "an expired snapshot is rebuilt before source hydration resumes at the requested offset"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a fallback source-batch controller and ownership guard prevent late hydration after Back"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "history restoration cannot mix a newer snapshot question into an older snapshot"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "an in-flight newer-snapshot narrative cannot repopulate restored history"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "investigator and program drill-downs filter the same snapshot and clear in one action"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "failed-source retry creates a successor without discarding successful cards"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "an expired snapshot is rebuilt before a failed source retry creates its successor"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "a new snapshot replaces full-result facets instead of retaining the prior search"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "source-listed Program Officer actions create locked, navigable snapshots with immutable year presets"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Program Officer AI Q&A is hosted by default, provider-planned, deterministic, bounded, and cited"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "an expired Program Officer page rebuild preserves exact contact, preset, years, and requested view"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "expired Program Officer evidence rebuilds the exact scope and restores the requested page"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "a rate-limited Program Officer source retries into an exact-scope successor"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "an incomplete Program Officer snapshot never turns a deterministic topical miss into a negative finding"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "failed-recheck-v1",
+      "status": "expected",
+      "title": "ROR keyboard selection puts canonical identity in snapshot criteria"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "package-recheck-v2",
+      "status": "expected",
+      "title": "questions use full server aggregates and bounded hydrated evidence"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "optional provider translation remains strict and feeds the snapshot request"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "question translation locks newer searches until its owned snapshot is committed"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "Funded Award Intelligence is keyboard-operable and contained at 390 px"
+    },
+    {
+      "file": "e2e/unit-b-funded-awards.spec.mjs",
+      "receipt": "complete-v1",
+      "status": "expected",
+      "title": "legacy Institutional Intelligence links redirect to Funded Awards"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "actual full slots/eight alternatives and no-group preserve admitted candidate reachability"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "corrupt/unavailable cache miss and retry do not call a provider; late loads stay closed"
+    },
+    {
+      "file": "post-audit/shared-candidate.spec.mjs",
+      "receipt": "optimized-affected-v3",
+      "status": "expected",
+      "title": "expiry, mixed generation and changed unselected profile invalidate cached actions"
+    }
+  ],
+  "cases_with_passing_receipt": 122,
+  "full_run_and_focused_rechecks": [
+    {
+      "name": "complete-v1",
+      "private_result_path": "outputs/team-recommender-post-audit/complete-v1/results.json",
+      "sha256": "a9acb57a0782805fe83933916eb7c28e808ca3e597b44a20c4b16eba51fbdab1",
+      "stats": {
+        "duration": 1045179.228,
+        "expected": 108,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T14:01:54.276Z",
+        "unexpected": 14
+      }
+    },
+    {
+      "name": "failed-recheck-v1",
+      "private_result_path": "outputs/team-recommender-post-audit/failed-recheck-v1/results.json",
+      "sha256": "a4eb4285c67d2f829063c5724bfd35b66df5c659a88ced3b371b7c2532780e05",
+      "stats": {
+        "duration": 353545.787,
+        "expected": 5,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T14:20:25.123Z",
+        "unexpected": 9
+      }
+    },
+    {
+      "name": "package-recheck-v2",
+      "private_result_path": "outputs/team-recommender-post-audit/package-recheck-v2/results.json",
+      "sha256": "5aa109540eaada997d4c0336e4e3c37f8ba97e66c1c8d3177fef5521bb399f67",
+      "stats": {
+        "duration": 41188.968,
+        "expected": 9,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T14:31:20.182Z",
+        "unexpected": 0
+      }
+    },
+    {
+      "name": "prepared-network-v2",
+      "private_result_path": "outputs/team-recommender-post-audit/prepared-network-v2/results.json",
+      "sha256": "26f3d4f5a8355ec20f245a7a0283de4833ba4071a597e578ed658ba0a5198100",
+      "stats": {
+        "duration": 122702.432,
+        "expected": 5,
+        "flaky": 0,
+        "skipped": 0,
+        "startTime": "2026-09-11T14:34:26.465Z",
+        "unexpected": 0
+      }
+    },
+    {
+      "name": "optimized-affected-v3",
+      "private_result_path": "outputs/team-recommender-post-audit/optimized-affected-v3/results.json",
+      "sha256": "2b63f3e6526344b8d634c1c21d1ee1ee457e51a8d6f72c3914f3ad6784d864f4",
+      "stats": {
+        "startTime": "2026-09-11T15:06:49.694Z",
+        "duration": 195235.278,
+        "expected": 14,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      }
+    }
+  ],
+  "limitations": [
+    "All 122 cases have a passing receipt across the original full run and focused corrections, not a second falsely clean full-suite run.",
+    "Initial custom transport missed MJS types/root redirect; instrumentation initially mislabeled hosted Search/Team Match phases. Preserved failures and corrected exact phases are separate.",
+    "Eight pre-existing public imports omitted by the old package boundary were added; all original bundle file bytes remain unchanged.",
+    "The 14 affected browser cases passed on canonical assembly v4 after the query cache optimization; other evidence is reused only for unchanged bodies. Full functional passing coverage does not override memory/scientific failures.",
+    "Axe has zero automated violations in the four latest scans, with incomplete rules retained explicitly; no physical device or exhaustive manual accessibility certification."
+  ],
+  "new_paid_click_requests": 0,
+  "other_validation": {
+    "Node_browser_passed": 857,
+    "Python_affected_UTF8_recheck_pass": 21,
+    "Python_full_cases": 1372,
+    "Python_initial_environment_errors": 1,
+    "Python_initial_pass": 1371,
+    "fit_disagreements": 0,
+    "fit_parity": 16120,
+    "hermetic_no_drift": true,
+    "public_import_and_http_passed": 8,
+    "query_cases": 37,
+    "query_top10_churn": 0,
+    "release_lifecycle_passed": 35,
+    "scoring_cases": 50,
+    "query_reference_affected_tests": 21,
+    "query_cache_score_evidence_comparisons": 39835,
+    "query_cache_scope_primary_and_all_options_comparisons": 257
+  },
+  "packages": "release-packages-v4.json",
+  "physical_mobile": "NOT RUN",
+  "prepared_network": [
+    {
+      "case": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "requests": 112,
+      "phase_counts": {
+        "startup": 43,
+        "search": 4,
+        "prepared": 3,
+        "handoff": 62
+      },
+      "prepared_requests": 3,
+      "external_prepared_requests": 0,
+      "raw_receipt_sha256": "c15d9dbe9906c334e965492a5dfabdda65422d5d8a7f98a1237b8b3bb2d44a82"
+    },
+    {
+      "case": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "requests": 112,
+      "phase_counts": {
+        "startup": 43,
+        "search": 4,
+        "prepared": 3,
+        "handoff": 62
+      },
+      "prepared_requests": 3,
+      "external_prepared_requests": 0,
+      "raw_receipt_sha256": "6def977cea966c770127f246dce3379178c5398921f0f718c9e9c5800ffb5d57"
+    },
+    {
+      "case": "actual full slots/eight alternatives and no-group preserve admitted candidate reachability",
+      "requests": 52,
+      "phase_counts": {
+        "startup": 43,
+        "search": 6,
+        "prepared": 3
+      },
+      "prepared_requests": 3,
+      "external_prepared_requests": 0,
+      "raw_receipt_sha256": "07150d52498d26a4b8c492862fc71e29f697db0fe124822d998d4e9768dd5a5e"
+    },
+    {
+      "case": "corrupt/unavailable cache miss and retry do not call a provider; late loads stay closed",
+      "requests": 148,
+      "phase_counts": {
+        "startup": 131,
+        "search": 8,
+        "prepared": 9
+      },
+      "prepared_requests": 9,
+      "external_prepared_requests": 0,
+      "raw_receipt_sha256": "6c9e42fe01db61a08d0a95864bdd1d14d6cc23bbe5c19e44f1a14f338963143b"
+    },
+    {
+      "case": "expiry, mixed generation and changed unselected profile invalidate cached actions",
+      "requests": 145,
+      "phase_counts": {
+        "startup": 131,
+        "search": 8,
+        "prepared": 6
+      },
+      "prepared_requests": 6,
+      "external_prepared_requests": 0,
+      "raw_receipt_sha256": "2ef6d9aa033cf09c966e5f35a6a4c80f674bddb0a174f04daf3eabec846a7104"
+    }
+  ],
+  "presentation": {
+    "css_unchanged": {
+      "assets/alerts.css": "93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+      "assets/app.css": "1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+      "assets/brand.css": "5ac520e15299aec8472b98fd29570da72a4b6d2393bce845596059a2b9608241",
+      "assets/faculty-interests.css": "24183955a1c0a7f93705f3998fdc3dcdc7cee850b63708cb3cc04ac28e81fc08",
+      "assets/funded-awards.css": "e01f7b607ab49f028401ef3c05537dd2d9a3b2b2d69f18e262cc45e9c108d19d",
+      "assets/institutional-intelligence.css": "0c394a8c1b612870195a78ccf97a2c6421be8a735a1e9198e5def64771a8c204",
+      "assets/public-tools.css": "bd38620a4641cb5797c6ee30ed1ad011bdd442fc411df746d654018878e17f39",
+      "assets/site-nav.css": "c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+      "assets/site-shell.css": "16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+      "assets/team-match.css": "98d36cb84c41b9377e9165ef9bb71c42d54990d1bbb47402349a7f3cd0824563"
+    },
+    "html": {
+      "match_explorer.html": {
+        "dependency_references_only": true,
+        "sha256": "889da9b6c8ecc297c60fda10763b9feaea673f8e69034efdbbe6b1a2f2e6dff3"
+      },
+      "team_match.html": {
+        "dependency_references_only": true,
+        "sha256": "d6ecaaf451fd1c68dbceb8376da4bf52c75d748e74b880a5e10ec9d5474162d1"
+      }
+    },
+    "panel": "Only existing action-resolution and mutation callbacks wrapped in one clock transaction; renderer fixtures and full actual browser cases pass",
+    "reference_sha": "272124fc7d981cf3f438de7e9d133ca00600bee8"
+  },
+  "private_log_hashes": {
+    "fingerprints.txt": "ddd9f5c58b0a2f25d5bd7a4a7f6c8379080a2b36c244b0b461ee09447467f1ac",
+    "frozen-query-final.log": "fa9ee0261ee9f4a18e58effc7f885ca4bae3517d89c2c200917094429f33ada5",
+    "public-dependency-tests.log": "62afd1c54b8c2e19f7d024545ece63bed22fdcc3583ab3861bb0426da8521a82",
+    "python-encoding-recheck.log": "df0f86fd145f9a4aefe89eb179a704fd06fa15249685d7f6267ec281246a2d45",
+    "release-contract.log": "41c583a227d83e764013ae84ffa58965fd1d99fdc03d4150b42e0633b7436a7f",
+    "required-browser-v2.log": "6a9c25b50aefeca72848cd04e0e6e56122e221e9a80c45bd4610993a24d299cd",
+    "required-python.log": "13284273b8260ea6105d242dc4bcfca24ffe381cd1806ced143471ae0a252759",
+    "scoring-final.log": "6f6b4ac05b1acf8bd411b3f930241a6056974c17ae2109321d9a2be41a635d8c"
+  },
+  "repair_proof": "package-repair-receipt-v2.json",
+  "review_status": "PENDING integrated exact-head review/required CI; no publication",
+  "rollback": "rollback-browser-v3.json",
+  "scientific_code_unchanged_after_judging": {
+    "assets/opportunity-team-panel.js": "f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+    "assets/opportunity-team.js": "76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+    "assets/shared-team-engine.js": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+    "assets/team-matcher.js": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+    "docs/team-recommender/post-audit/semantic-index.json": "e0f478a39111e57d8ef5c7c7380ba554ecd53b12043d663a8c96ed25369d014d",
+    "docs/team-recommender/post-audit/semantic-selection-v2.json": "cf1dd138fe9cfac1e4c829f4f6ccc4f94cb54f1ee5b5a02224cd315391f3daaa"
+  },
+  "unique_cases": 122,
+  "version": "post-audit-engineering-v2",
+  "previous_receipt": {
+    "path": "docs/team-recommender/post-audit/engineering-receipt-v1.json",
+    "sha256": "e7614e9a045ca6c28451737e0564b95279c304628d845f438c70a995b40e4fb4"
+  },
+  "accessibility_latest": [
+    {
+      "case": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "attachment": "actual-rollout50",
+      "violations": 0,
+      "incomplete": 1,
+      "incomplete_rules": [
+        "color-contrast"
+      ],
+      "raw_receipt_sha256": "aa7b054ee69192fdf261a5e5b1dd80d84720d6a866bc5d0d0955c9378405ab42"
+    },
+    {
+      "case": "actual rollout50: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "attachment": "mobile-rollout50",
+      "violations": 0,
+      "incomplete": 1,
+      "incomplete_rules": [
+        "color-contrast"
+      ],
+      "raw_receipt_sha256": "d5c418e0cabc79a131510e039b6a7acfb3a3d284c9bb7521f3efdf0c32c43d1c"
+    },
+    {
+      "case": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "attachment": "actual-rollout150",
+      "violations": 0,
+      "incomplete": 1,
+      "incomplete_rules": [
+        "color-contrast"
+      ],
+      "raw_receipt_sha256": "aa7b054ee69192fdf261a5e5b1dd80d84720d6a866bc5d0d0955c9378405ab42"
+    },
+    {
+      "case": "actual rollout150: lazy child build, editing, evidence, focus, saved handoff and accessibility",
+      "attachment": "mobile-rollout150",
+      "violations": 0,
+      "incomplete": 1,
+      "incomplete_rules": [
+        "color-contrast"
+      ],
+      "raw_receipt_sha256": "d5c418e0cabc79a131510e039b6a7acfb3a3d284c9bb7521f3efdf0c32c43d1c"
+    }
+  ],
+  "package_identity_proof": "package-canonical-receipt-v4.json",
+  "query_cache_parity": {
+    "path": "docs/team-recommender/post-audit/query-cache-parity-v4.json",
+    "sha256": "635b4dab546b3991083663b101eaa1507444c1a68dc2e64028599549e387ce92"
+  },
+  "resource_receipt": {
+    "path": "docs/team-recommender/post-audit/resource-summary-v1.json",
+    "sha256": "4a5c6ca7fb13c439489d0926acf1e0ced56abec421aa9a846adf92fbe28bd591"
+  },
+  "resource_acceptance": "FAIL: sampled additional JS heap reaches 80.04 MiB, exceeding the 48 MiB ceiling; true peak unmeasured",
+  "latest_runtime_sha": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
+  "scientific_outputs_identical_after_operational_query_change": true,
+  "query_runtime_sha256": "f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+}

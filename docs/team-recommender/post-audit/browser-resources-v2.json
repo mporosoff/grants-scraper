@@ -1,0 +1,2814 @@
+{
+  "version": "post-audit-real-browser-resources-v2",
+  "clock": "Native Date and performance APIs; prior v1 used Playwright clock which omits Resource Timing entries",
+  "browser": "151.0.7922.34",
+  "os": "10.0.26200",
+  "cpu": "Intel(R) Core(TM) Ultra 7 165U",
+  "logical_cpus": 14,
+  "memory_bytes": 68141805568,
+  "network": "Local gzip HTTP; cold ingredient phase at CDP 20Mbps/150ms; no CPU throttle",
+  "physical_mobile": "NOT RUN",
+  "peak_memory": "NOT MEASURED; only sampled post-action and retained after explicit GC",
+  "observations": [
+    {
+      "cohort": "rollout50",
+      "sample": 0,
+      "cold": {
+        "start": 6454.0999999940395,
+        "load_ms": 928,
+        "create_ms": 2.5,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 45.900000005960464,
+            "responseEnd": 1775.5,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 186.89999997615814,
+            "responseEnd": 6642.0999999940395,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 170.89999997615814,
+            "responseEnd": 6817.5999999940395,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 330.5,
+        "composition_ms": 1,
+        "post_input_ms": 331.5,
+        "warm_ms": [
+          0.20000001788139343,
+          0,
+          0.19999998807907104,
+          0.09999999403953552,
+          0,
+          0.10000002384185791,
+          0,
+          0.09999999403953552,
+          0.09999999403953552,
+          0
+        ],
+        "edit_ms": [
+          0.30000001192092896,
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0.09999999403953552
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62276216,
+        "totalSize": 63770624,
+        "embedderHeapUsedSize": 1643656,
+        "backingStorageSize": 17795153
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 140485080,
+        "totalSize": 202215424,
+        "embedderHeapUsedSize": 1844848,
+        "backingStorageSize": 33539259
+      },
+      "heap_retained": {
+        "usedSize": 73333888,
+        "totalSize": 75800576,
+        "embedderHeapUsedSize": 1647408,
+        "backingStorageSize": 17843335
+      },
+      "retained_delta_bytes": 11057672,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout50",
+      "sample": 1,
+      "cold": {
+        "start": 6556.699999988079,
+        "load_ms": 932.2000000178814,
+        "create_ms": 1.699999988079071,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 57.70000001788139,
+            "responseEnd": 1833.4000000059605,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 177.2999999821186,
+            "responseEnd": 6735.299999982119,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 188,
+            "responseEnd": 6927.9000000059605,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 314.40000000596046,
+        "composition_ms": 0.9000000059604645,
+        "post_input_ms": 315.30000001192093,
+        "warm_ms": [
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.20000001788139343,
+          0.09999999403953552,
+          0,
+          0.09999999403953552,
+          0,
+          0.09999999403953552,
+          0.10000002384185791
+        ],
+        "edit_ms": [
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0.10000002384185791
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62274968,
+        "totalSize": 63508480,
+        "embedderHeapUsedSize": 1642832,
+        "backingStorageSize": 17795153
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 137516896,
+        "totalSize": 199069696,
+        "embedderHeapUsedSize": 1822432,
+        "backingStorageSize": 33539259
+      },
+      "heap_retained": {
+        "usedSize": 73336568,
+        "totalSize": 75800576,
+        "embedderHeapUsedSize": 1646584,
+        "backingStorageSize": 17843335
+      },
+      "retained_delta_bytes": 11061600,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout50",
+      "sample": 2,
+      "cold": {
+        "start": 6406,
+        "load_ms": 919.9000000059605,
+        "create_ms": 2.199999988079071,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 60.599999994039536,
+            "responseEnd": 1783.800000011921,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 184.90000000596046,
+            "responseEnd": 6592,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 186.10000002384186,
+            "responseEnd": 6782.700000017881,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 318.59999999403954,
+        "composition_ms": 1.2000000178813934,
+        "post_input_ms": 319.80000001192093,
+        "warm_ms": [
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.10000002384185791,
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0,
+          0.19999998807907104,
+          0
+        ],
+        "edit_ms": [
+          0.4000000059604645,
+          0.09999999403953552,
+          0,
+          0,
+          0.20000001788139343
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62268952,
+        "totalSize": 63508480,
+        "embedderHeapUsedSize": 1643088,
+        "backingStorageSize": 17795153
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 137898208,
+        "totalSize": 199593984,
+        "embedderHeapUsedSize": 1732120,
+        "backingStorageSize": 33539259
+      },
+      "heap_retained": {
+        "usedSize": 73332844,
+        "totalSize": 75538432,
+        "embedderHeapUsedSize": 1646840,
+        "backingStorageSize": 17843335
+      },
+      "retained_delta_bytes": 11063892,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout50",
+      "sample": 3,
+      "cold": {
+        "start": 6597.5,
+        "load_ms": 917.4000000059605,
+        "create_ms": 2.0999999940395355,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 41.099999994039536,
+            "responseEnd": 2056.5,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 175.7999999821186,
+            "responseEnd": 6774.4000000059605,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 172.40000000596046,
+            "responseEnd": 6950.100000023842,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 333.5,
+        "composition_ms": 1.600000023841858,
+        "post_input_ms": 335.10000002384186,
+        "warm_ms": [
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.10000002384185791,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0.09999999403953552,
+          0.10000002384185791
+        ],
+        "edit_ms": [
+          0.29999998211860657,
+          0.09999999403953552,
+          0,
+          0,
+          0.10000002384185791
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62280440,
+        "totalSize": 62984192,
+        "embedderHeapUsedSize": 1643640,
+        "backingStorageSize": 17795153
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 143661192,
+        "totalSize": 202829824,
+        "embedderHeapUsedSize": 1813488,
+        "backingStorageSize": 33539259
+      },
+      "heap_retained": {
+        "usedSize": 73343860,
+        "totalSize": 75800576,
+        "embedderHeapUsedSize": 1647392,
+        "backingStorageSize": 17843335
+      },
+      "retained_delta_bytes": 11063420,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout50",
+      "sample": 4,
+      "cold": {
+        "start": 8059.0999999940395,
+        "load_ms": 907.4000000059605,
+        "create_ms": 1.699999988079071,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 51,
+            "responseEnd": 3090.9000000059605,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 173.69999998807907,
+            "responseEnd": 8233.699999988079,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 174.19999998807907,
+            "responseEnd": 8410,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 303.5,
+        "composition_ms": 0.9000000059604645,
+        "post_input_ms": 304.40000000596046,
+        "warm_ms": [
+          0.20000001788139343,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0.09999999403953552,
+          0.10000002384185791,
+          0,
+          0.19999998807907104,
+          0
+        ],
+        "edit_ms": [
+          0.30000001192092896,
+          0,
+          0.09999999403953552,
+          0,
+          0.09999999403953552
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62273364,
+        "totalSize": 64032768,
+        "embedderHeapUsedSize": 1642832,
+        "backingStorageSize": 17795153
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 138790724,
+        "totalSize": 200380416,
+        "embedderHeapUsedSize": 1835536,
+        "backingStorageSize": 33539259
+      },
+      "heap_retained": {
+        "usedSize": 73336828,
+        "totalSize": 75538432,
+        "embedderHeapUsedSize": 1646584,
+        "backingStorageSize": 17843335
+      },
+      "retained_delta_bytes": 11063464,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "sample": 0,
+      "cold": {
+        "start": 6309.699999988079,
+        "load_ms": 939.3000000119209,
+        "create_ms": 1.0999999940395355,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 50.69999998807907,
+            "responseEnd": 1830.3999999761581,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 178.59999999403954,
+            "responseEnd": 6489.299999982119,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 171.2999999821186,
+            "responseEnd": 6663.799999982119,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 325.2000000178814,
+        "composition_ms": 1.2999999821186066,
+        "post_input_ms": 326.5,
+        "warm_ms": [
+          0.30000001192092896,
+          0,
+          0.19999998807907104,
+          0.10000002384185791,
+          0.19999998807907104,
+          0,
+          0.09999999403953552,
+          0,
+          0.09999999403953552,
+          0
+        ],
+        "edit_ms": [
+          0.5,
+          0.10000002384185791,
+          0.09999999403953552,
+          0,
+          0.09999999403953552
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62284672,
+        "totalSize": 63246336,
+        "embedderHeapUsedSize": 1642832,
+        "backingStorageSize": 17818167
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 143651736,
+        "totalSize": 204201984,
+        "embedderHeapUsedSize": 1738056,
+        "backingStorageSize": 33580292
+      },
+      "heap_retained": {
+        "usedSize": 73392380,
+        "totalSize": 76324864,
+        "embedderHeapUsedSize": 1646584,
+        "backingStorageSize": 17866349
+      },
+      "retained_delta_bytes": 11107708,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "sample": 1,
+      "cold": {
+        "start": 6427.700000017881,
+        "load_ms": 875.0999999940395,
+        "create_ms": 2.0999999940395355,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 39.29999998211861,
+            "responseEnd": 1878.9000000059605,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 173.90000000596046,
+            "responseEnd": 6602.700000017881,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 187.09999999403954,
+            "responseEnd": 6792.4000000059605,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 359.19999998807907,
+        "composition_ms": 1,
+        "post_input_ms": 360.19999998807907,
+        "warm_ms": [
+          0.20000001788139343,
+          0,
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.10000002384185791,
+          0,
+          0.09999999403953552,
+          0.09999999403953552,
+          0
+        ],
+        "edit_ms": [
+          0.30000001192092896,
+          0,
+          0.09999999403953552,
+          0.09999999403953552,
+          0
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62272664,
+        "totalSize": 63770624,
+        "embedderHeapUsedSize": 1642832,
+        "backingStorageSize": 17818167
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 139332020,
+        "totalSize": 200380416,
+        "embedderHeapUsedSize": 1731912,
+        "backingStorageSize": 33580292
+      },
+      "heap_retained": {
+        "usedSize": 73382248,
+        "totalSize": 76062720,
+        "embedderHeapUsedSize": 1646584,
+        "backingStorageSize": 17866349
+      },
+      "retained_delta_bytes": 11109584,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "sample": 2,
+      "cold": {
+        "start": 6586.199999988079,
+        "load_ms": 936.7000000178814,
+        "create_ms": 2.5,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 55.30000001192093,
+            "responseEnd": 1842,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 175,
+            "responseEnd": 6762.199999988079,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 186.2000000178814,
+            "responseEnd": 6952.4000000059605,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 338.90000000596046,
+        "composition_ms": 2.0999999940395355,
+        "post_input_ms": 341,
+        "warm_ms": [
+          0.5,
+          0.09999999403953552,
+          0.30000001192092896,
+          0.19999998807907104,
+          0.20000001788139343,
+          0.09999999403953552,
+          0,
+          0.30000001192092896,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "edit_ms": [
+          0.4000000059604645,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.10000002384185791
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62274112,
+        "totalSize": 63508480,
+        "embedderHeapUsedSize": 1642832,
+        "backingStorageSize": 17818167
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 141332732,
+        "totalSize": 201953280,
+        "embedderHeapUsedSize": 1731976,
+        "backingStorageSize": 33580292
+      },
+      "heap_retained": {
+        "usedSize": 73383972,
+        "totalSize": 75538432,
+        "embedderHeapUsedSize": 1646584,
+        "backingStorageSize": 17866349
+      },
+      "retained_delta_bytes": 11109860,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "sample": 3,
+      "cold": {
+        "start": 6459.9000000059605,
+        "load_ms": 895.9000000059605,
+        "create_ms": 4.5,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 39.10000002384186,
+            "responseEnd": 1847.6000000238419,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 175.60000002384186,
+            "responseEnd": 6636.600000023842,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 173,
+            "responseEnd": 6811.800000011921,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 318.30000001192093,
+        "composition_ms": 1,
+        "post_input_ms": 319.30000001192093,
+        "warm_ms": [
+          0.19999998807907104,
+          0.10000002384185791,
+          0.09999999403953552,
+          0.19999998807907104,
+          0,
+          0.09999999403953552,
+          0,
+          0.10000002384185791,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "edit_ms": [
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0.20000001788139343,
+          0
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62283476,
+        "totalSize": 63770624,
+        "embedderHeapUsedSize": 1642832,
+        "backingStorageSize": 17818167
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 139308876,
+        "totalSize": 200118272,
+        "embedderHeapUsedSize": 1737896,
+        "backingStorageSize": 33580292
+      },
+      "heap_retained": {
+        "usedSize": 73393232,
+        "totalSize": 75538432,
+        "embedderHeapUsedSize": 1646584,
+        "backingStorageSize": 17866349
+      },
+      "retained_delta_bytes": 11109756,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd.json",
+          "phase": "cold"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "sample": 4,
+      "cold": {
+        "start": 6302.0999999940395,
+        "load_ms": 851.8000000119209,
+        "create_ms": 2.2999999821186066,
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        },
+        "resources": [
+          {
+            "name": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+            "duration": 35.79999998211861,
+            "responseEnd": 1847.5999999940395,
+            "encoded": 224077,
+            "decoded": 1894538,
+            "transfer": 224377
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+            "duration": 176.7000000178814,
+            "responseEnd": 6479.9000000059605,
+            "encoded": 7759,
+            "decoded": 27542,
+            "transfer": 8059
+          },
+          {
+            "name": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+            "duration": 170.7999999821186,
+            "responseEnd": 6653.199999988079,
+            "encoded": 6405,
+            "decoded": 20128,
+            "transfer": 6705
+          }
+        ]
+      },
+      "timing": {
+        "scope": "344592:ab-0035",
+        "fit_ms": 312.30000001192093,
+        "composition_ms": 1.5999999940395355,
+        "post_input_ms": 313.90000000596046,
+        "warm_ms": [
+          0.29999998211860657,
+          0.20000001788139343,
+          0.19999998807907104,
+          0.20000001788139343,
+          0,
+          0.09999999403953552,
+          0,
+          0.19999998807907104,
+          0.09999999403953552,
+          0
+        ],
+        "edit_ms": [
+          0.4000000059604645,
+          0.09999999403953552,
+          0,
+          0.20000001788139343,
+          0.09999999403953552
+        ],
+        "members": 2,
+        "options": 1,
+        "view_members": 2,
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 3,
+          "cachedScopes": 1
+        }
+      },
+      "heap_before": {
+        "usedSize": 62281008,
+        "totalSize": 63770624,
+        "embedderHeapUsedSize": 1642832,
+        "backingStorageSize": 17818167
+      },
+      "heap_sampled_after_actions": {
+        "usedSize": 139926732,
+        "totalSize": 200904704,
+        "embedderHeapUsedSize": 1759776,
+        "backingStorageSize": 33580292
+      },
+      "heap_retained": {
+        "usedSize": 73389256,
+        "totalSize": 76324864,
+        "embedderHeapUsedSize": 1646584,
+        "backingStorageSize": 17866349
+      },
+      "retained_delta_bytes": 11108248,
+      "network": [
+        {
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z",
+          "phase": "startup"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+          "phase": "cold"
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd.json",
+          "phase": "cold"
+        }
+      ]
+    }
+  ]
+}

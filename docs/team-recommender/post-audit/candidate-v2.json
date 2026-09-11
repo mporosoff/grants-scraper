@@ -1,0 +1,95 @@
+{
+  "version": 2,
+  "id": "shared-team-v2-post-audit",
+  "scientific_lock_commit": "6e2f60708b41b94049eabf005a0190b268222738",
+  "assembly_sha": "1673a0d517f25e80f6ab4efb6389a4e485bd6d12",
+  "model": null,
+  "quality_qualified": false,
+  "activation": false,
+  "paid_interactions": 0,
+  "fit_authority": "Existing FUNDING_TEAM_MATCHER.create(...).scoreProfile with full canonical catalog/selected child context and shared normalization; no recency expertise boost",
+  "composition": {
+    "size": [
+      2,
+      4
+    ],
+    "anchor": "Existing fit.strong",
+    "contribution": "Positive removal marginal >1e-9 OR independent existing strong-fit claim evidence not duplicated among other members; additions beyond the minimum require positive coverage",
+    "alternatives": 8,
+    "tie_breaking": [
+      "coverage descending",
+      "group size ascending",
+      "shared scientific score descending",
+      "stable canonical IDs ascending"
+    ],
+    "MMR": false,
+    "Bayesian": false,
+    "regularized": false,
+    "cached_scopes": 8,
+    "cached_exclusion_variants": 32
+  },
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "population": {
+    "auto_proposable": 155,
+    "pool_counts": {
+      "main": 120,
+      "standby": 35,
+      "unadmitted": 3
+    },
+    "rankable": 158,
+    "relationship_counts": {
+      "hajim_core_faculty": 117,
+      "internal_affiliated_researcher": 41
+    },
+    "status_counts": {
+      "active": 158
+    },
+    "total": 158,
+    "unrankable": 0,
+    "visibility_counts": {
+      "department": 14,
+      "institution": 141,
+      "reference_only": 3
+    }
+  },
+  "evidence_state": "All contributions unconfirmed; exact retained passages do not certify role coverage",
+  "files": {
+    "assets/shared-team-engine.js": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c",
+    "assets/team-matcher.js": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16",
+    "assets/opportunity-team.js": "76edb6ef984db064f869c17e437b0b63a36b3ce195b613cd569cc162c4053e72",
+    "assets/opportunity-team-panel.js": "f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+    "docs/team-recommender/post-audit/semantic-selection-v2.json": "cf1dd138fe9cfac1e4c829f4f6ccc4f94cb54f1ee5b5a02224cd315391f3daaa",
+    "docs/team-recommender/post-audit/semantic-index.json": "e0f478a39111e57d8ef5c7c7380ba554ecd53b12043d663a8c96ed25369d014d"
+  },
+  "protocol": {
+    "path": "docs/team-recommender/post-audit/PROTOCOL.md",
+    "sha256": "a4d5931b9917290678e1807e4560f9b0271df3fc51cd5f845d6f61717be34058"
+  },
+  "authorization": {
+    "path": "docs/team-recommender/post-audit/execution-approval-v1.json",
+    "sha256": "a1db0152e9d452379d5fcc3530ded00e1878ca48287a09c8f66b524b7774b182"
+  },
+  "packages": {
+    "path": "docs/team-recommender/post-audit/release-packages-v2.json",
+    "sha256": "998f2fb5f3f018cff6dcf9728e96f3df9cea8e6d6932262ae18fdcb7096aa27d"
+  },
+  "scientific_results": {
+    "path": "docs/team-recommender/post-audit/semantic-results-v1.json",
+    "sha256": "4e8906ae66df91d5cfc9bffc1ffb18c654331864b7fba2a47c6f9abecda0f83f"
+  },
+  "engineering": {
+    "path": "docs/team-recommender/post-audit/engineering-receipt-v1.json",
+    "sha256": "ee2ef88c3546b8e8c2b737554ca7dfecab721031d2daa2fd09c3af10937d9d74"
+  },
+  "rollback": {
+    "path": "docs/team-recommender/post-audit/rollback-browser-v1.json",
+    "sha256": "8d88fb79b4fe0d464268591a4976b42a82c5daacb7c522d1e05b71f3aa5d2833"
+  },
+  "fallback": null,
+  "status": "Scientific check failed; engineering completed with focused repair/rechecks; independent integrated review pending"
+}

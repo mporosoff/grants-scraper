@@ -1,0 +1,149 @@
+[
+  {
+    "cohort": "legacy",
+    "candidate_id": "29f0bd77206367177a2ed4e9c2ff247c69332a2e618674273a6dd9b9714a5529",
+    "verified_manifest_files": 122,
+    "resources": [
+      {
+        "path": "data/opportunity_team_index.js",
+        "bytes": 28208,
+        "gzip_bytes": 5188,
+        "sha256": "fa2b2d4090d095841c8a17c3bd9ce2929dfa5d6fb02389c2add19872f33f9c2a"
+      },
+      {
+        "path": "data/team_ingredients/shared-123c37c199fb0dd91377cd687d2c2e481242dc56b3791eb2c1e59bc89e8b4869.json",
+        "bytes": 29522,
+        "gzip_bytes": 7039,
+        "sha256": "123c37c199fb0dd91377cd687d2c2e481242dc56b3791eb2c1e59bc89e8b4869"
+      },
+      {
+        "path": "assets/shared-team-engine.js",
+        "bytes": 20128,
+        "gzip_bytes": 6401,
+        "sha256": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c"
+      },
+      {
+        "path": "assets/team-matcher.js",
+        "bytes": 27542,
+        "gzip_bytes": 7724,
+        "sha256": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16"
+      },
+      {
+        "path": "data/researcher_directory.js",
+        "bytes": 818871,
+        "gzip_bytes": 103823,
+        "sha256": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490"
+      },
+      {
+        "path": "data/opportunities.js",
+        "bytes": 14304071,
+        "gzip_bytes": 2122686,
+        "sha256": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c"
+      },
+      {
+        "path": "data/subtopics.js",
+        "bytes": 1894538,
+        "gzip_bytes": 212777,
+        "sha256": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7"
+      }
+    ]
+  },
+  {
+    "cohort": "rollout150",
+    "candidate_id": "cf2c1d68cf5f3afb92bce288a8504ad8510886e65ebaf842c16efa819623db0f",
+    "verified_manifest_files": 122,
+    "resources": [
+      {
+        "path": "data/opportunity_team_index.js",
+        "bytes": 34889,
+        "gzip_bytes": 5899,
+        "sha256": "943798665c9d47fc999f8ce5ad0054b17e534d25b7b4b69a435a79b456a46c86"
+      },
+      {
+        "path": "data/team_ingredients/shared-7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd.json",
+        "bytes": 34003,
+        "gzip_bytes": 7745,
+        "sha256": "7909e8c60af4d4c10863d7d0a14a2a51f7998d82f48db443ad5f36d121ba79bd"
+      },
+      {
+        "path": "assets/shared-team-engine.js",
+        "bytes": 20128,
+        "gzip_bytes": 6401,
+        "sha256": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c"
+      },
+      {
+        "path": "assets/team-matcher.js",
+        "bytes": 27542,
+        "gzip_bytes": 7724,
+        "sha256": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16"
+      },
+      {
+        "path": "data/researcher_directory.js",
+        "bytes": 818871,
+        "gzip_bytes": 103823,
+        "sha256": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490"
+      },
+      {
+        "path": "data/opportunities.js",
+        "bytes": 14304071,
+        "gzip_bytes": 2122686,
+        "sha256": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c"
+      },
+      {
+        "path": "data/subtopics.js",
+        "bytes": 1894538,
+        "gzip_bytes": 212777,
+        "sha256": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7"
+      }
+    ]
+  },
+  {
+    "cohort": "rollout50",
+    "candidate_id": "031473c8dc212f36dcdde7d718feba00301485fcd3dadd768272a6f45896f696",
+    "verified_manifest_files": 122,
+    "resources": [
+      {
+        "path": "data/opportunity_team_index.js",
+        "bytes": 11869,
+        "gzip_bytes": 2468,
+        "sha256": "23c2dcb8185e1f6a269fd5cb9fde2e7724351bfbf339c4bff015a08bd0ad36c0"
+      },
+      {
+        "path": "data/team_ingredients/shared-170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d.json",
+        "bytes": 15984,
+        "gzip_bytes": 4448,
+        "sha256": "170a81e9e7819ff1bac07670347036a9389ef751dd1f8c5c84c411442849df9d"
+      },
+      {
+        "path": "assets/shared-team-engine.js",
+        "bytes": 20128,
+        "gzip_bytes": 6401,
+        "sha256": "55e1b5619f1fdd1955a54959388f3bd5c6059da1bb8847503a1c2a48449c128c"
+      },
+      {
+        "path": "assets/team-matcher.js",
+        "bytes": 27542,
+        "gzip_bytes": 7724,
+        "sha256": "004daea0df98c7e807e8b70c19fc1f4ba776cda6902a8991e47ddfc9e9494f16"
+      },
+      {
+        "path": "data/researcher_directory.js",
+        "bytes": 818871,
+        "gzip_bytes": 103823,
+        "sha256": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490"
+      },
+      {
+        "path": "data/opportunities.js",
+        "bytes": 14304071,
+        "gzip_bytes": 2122686,
+        "sha256": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c"
+      },
+      {
+        "path": "data/subtopics.js",
+        "bytes": 1894538,
+        "gzip_bytes": 212777,
+        "sha256": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7"
+      }
+    ]
+  }
+]

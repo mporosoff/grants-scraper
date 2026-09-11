@@ -164,3 +164,12 @@ If a test finds a real scoped defect, fix it in a consolidated batch and validat
 - **C2 — AGENTS instruction discovery:** https://developers.openai.com/codex/guides/agents-md
 
 These references describe Codex behavior, not a guarantee that every local/remote environment has the same access or file-transfer configuration. Verify the actual execution context.
+
+
+## Post-audit corrective revalidation — September 11, 2026
+
+The owner authorized the attached post-audit plan and subsequently its single <=$2/60-attempt check within the same $10 ledger. See `post-audit/AUTHORITY.md`, `post-audit/execution-approval-v1.json` and `reports/post-audit-shared-matching-revalidation-report.md`. The complete 158-person audit is preserved, without a new audit or model campaign. Shared-team-v2 retains actual shared admission and adds bounded composition/performance corrections. The one new semantic check failed the original relevance, unrelated-member and useful-group targets; these failures must not be tuned away or described as acceptance. All 122 configured browser cases have passing evidence across the preserved initial run and focused corrections; independent review/CI status is in the completion receipt.
+
+The trusted PR224 is the only protected-main change and caused no publication. Actual new cost is $0.337668/34 attempts; total $4.290655/629, zero outstanding, $5.709345/61 remain. No further calls or human items are authorized here. Original 50/150 ingredient bindings are assembled experimentally, yielding 1/11 groups respectively, without qualification or activation. Stop for the owner report; no Stage 4, deployment or automatic scientific development. Historical plan, audit and failure records remain intact.
+
+The canonical runtime checkpoint is `1d3cbf81963479d1fca2767ed532d155ffa56b21`; candidate-v3 and release-packages-v4 supersede the earlier engineering manifests without erasing them. All 14 affected canonical-browser rechecks pass and 39,835 score/evidence comparisons plus 257 complete option lists preserve shared-query semantics. Timing targets pass the declared finite desktop samples, but sampled additional heap reaches 80.04 MiB and FAILS the unchanged 48 MiB ceiling. Disposition 2: no release; functional passing checks do not override this resource failure or the scientific failures. No further paid check, retuning, new audit or automatic allocation-repair cycle begins at this boundary.
