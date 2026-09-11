@@ -1,0 +1,4055 @@
+{
+  "baseline": "adedd242dc727d85bc2db42776abce5132c882b8",
+  "clock": "2026-09-11T12:00:00Z",
+  "known_pairs": [
+    {
+      "scope": "347679",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "347679",
+      "id": "urh-000007",
+      "name": "Allison J. Lopatkin",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "356536",
+      "id": "urh-000138",
+      "name": "Varchas Gopalaswamy",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": true,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "356536",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": true,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "356536",
+      "id": "urh-000078",
+      "name": "Jonathan Davies",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": true,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "356536",
+      "id": "urh-000118",
+      "name": "Riccardo Betti",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": true,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "356536",
+      "id": "urh-000045",
+      "name": "Fatemeh Nargesian",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "356536",
+      "id": "urh-000041",
+      "name": "Ehsan Hoque",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "356536",
+      "id": "urh-000110",
+      "name": "Pengfei Huo",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": true,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "344610",
+      "id": "urh-000052",
+      "name": "Greg Schmidt",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "344610",
+      "id": "urh-000121",
+      "name": "Robert Clark",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "357545",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "357545",
+      "id": "urh-000072",
+      "name": "Jiebo Luo",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "349109",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "355219",
+      "id": "urh-000156",
+      "name": "Zhiyao Duan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "355219",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "355219",
+      "id": "urh-000045",
+      "name": "Fatemeh Nargesian",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "355219",
+      "id": "urh-000050",
+      "name": "Gonzalo Mateos",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "355219",
+      "id": "urh-000138",
+      "name": "Varchas Gopalaswamy",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "357580",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "357580",
+      "id": "urh-000026",
+      "name": "Christopher Kanan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "362177",
+      "id": "urh-000158",
+      "name": "Melodie I. Lawton",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "350469",
+      "id": "urh-000026",
+      "name": "Christopher Kanan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "350469",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "350469",
+      "id": "urh-000072",
+      "name": "Jiebo Luo",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "350469",
+      "id": "urh-000007",
+      "name": "Allison J. Lopatkin",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "357724",
+      "id": "urh-000111",
+      "name": "Pooja Rajendra Bhalode",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:a-1",
+      "id": "urh-000092",
+      "name": "Marc D. Porosoff",
+      "machine_verdict": "strong",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:a-1",
+      "id": "urh-000008",
+      "name": "Andrea Pickel",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:a-1",
+      "id": "urh-000125",
+      "name": "Siddharth Deshpande",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:a-1",
+      "id": "urh-000004",
+      "name": "Agnes E. Thorarinsdottir",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:a-1",
+      "id": "urh-000014",
+      "name": "Astrid M. Müller",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:b-1",
+      "id": "urh-000150",
+      "name": "Yasemin Basdogan",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": false,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:c-1",
+      "id": "urh-000122",
+      "name": "Roman Sobolewski",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:c-1",
+      "id": "urh-000062",
+      "name": "Jack G. Mottley",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:c-1",
+      "id": "urh-000126",
+      "name": "Sobhit Singh",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:c-1",
+      "id": "urh-000012",
+      "name": "Anne S. Meyer",
+      "machine_verdict": "unrelated",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    },
+    {
+      "scope": "363594:c-1",
+      "id": "urh-000056",
+      "name": "Hesam Askari",
+      "machine_verdict": "plausible",
+      "previous_discovery": true,
+      "repaired_discovery": true,
+      "previous_anchor": false,
+      "repaired_automatic": false,
+      "repaired_anchor": false
+    }
+  ],
+  "unique_known_grades": {
+    "unrelated": 24,
+    "plausible": 13,
+    "strong": 1
+  },
+  "inventories": {
+    "semantic": {
+      "reservations": 26,
+      "before": {
+        "absent_scientific_anchor": 8,
+        "group_produced": 1,
+        "no_admitted_person": 13,
+        "only_one_admitted_person": 4
+      },
+      "after": {
+        "no_supported_member": 10,
+        "no_admitted_person": 15,
+        "only_one_supported_member": 1
+      },
+      "roles": {
+        "admitted_ids": {
+          "old_pairs": 61,
+          "new_pairs": 42,
+          "retained": 41,
+          "removed": 20,
+          "new": 1,
+          "current_known_grades": {
+            "unrelated": 13,
+            "plausible": 10,
+            "strong": 1
+          },
+          "current_unjudged": 18
+        },
+        "top5": {
+          "old_pairs": 36,
+          "new_pairs": 24,
+          "retained": 21,
+          "removed": 15,
+          "new": 3,
+          "current_known_grades": {
+            "plausible": 10,
+            "unrelated": 10,
+            "strong": 1
+          },
+          "current_unjudged": 3
+        },
+        "primary": {
+          "old_pairs": 4,
+          "new_pairs": 0,
+          "retained": 0,
+          "removed": 4,
+          "new": 0,
+          "current_known_grades": {},
+          "current_unjudged": 0
+        }
+      },
+      "option_groups": 0,
+      "option_member_occurrences": 0,
+      "unique_option_person_pairs": 0,
+      "unknown_option_person_pairs": 0,
+      "all_options_newly_unjudged_groups": true,
+      "records": [
+        {
+          "scope": "347679",
+          "parent": "347679",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356536",
+          "parent": "356536",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 16,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361522",
+          "parent": "361522",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363585",
+          "parent": "363585",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344610",
+          "parent": "344610",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363147",
+          "parent": "363147",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "nyserda:PON3982",
+          "parent": "nyserda:PON3982",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357545",
+          "parent": "357545",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363584",
+          "parent": "363584",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
+          "parent": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "349109",
+          "parent": "349109",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363523",
+          "parent": "363523",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360532",
+          "parent": "360532",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "arpa-h:sbir",
+          "parent": "arpa-h:sbir",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362827",
+          "parent": "362827",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "355219",
+          "parent": "355219",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357580",
+          "parent": "357580",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "353756",
+          "parent": "353756",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362177",
+          "parent": "362177",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "348985",
+          "parent": "348985",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "350469",
+          "parent": "350469",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357724",
+          "parent": "357724",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "355297",
+          "parent": "355297",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363594:a-1",
+          "parent": "363594",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 12,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363594:b-1",
+          "parent": "363594",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363594:c-1",
+          "parent": "363594",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 5,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        }
+      ]
+    },
+    "rollout150": {
+      "reservations": 150,
+      "before": {
+        "absent_scientific_anchor": 22,
+        "no_admitted_person": 87,
+        "only_one_admitted_person": 19,
+        "not_current": 3,
+        "broad_parent_rejected": 7,
+        "group_produced": 11,
+        "redundancy_contribution_restriction": 1
+      },
+      "after": {
+        "no_supported_member": 35,
+        "no_admitted_person": 92,
+        "not_current": 3,
+        "broad_parent_rejected": 7,
+        "only_one_supported_member": 7,
+        "absent_scientific_anchor": 2,
+        "group_produced": 4
+      },
+      "roles": {
+        "admitted_ids": {
+          "old_pairs": 294,
+          "new_pairs": 300,
+          "retained": 266,
+          "removed": 28,
+          "new": 34,
+          "current_known_grades": {},
+          "current_unjudged": 300
+        },
+        "top5": {
+          "old_pairs": 147,
+          "new_pairs": 148,
+          "retained": 117,
+          "removed": 30,
+          "new": 31,
+          "current_known_grades": {},
+          "current_unjudged": 148
+        },
+        "primary": {
+          "old_pairs": 38,
+          "new_pairs": 8,
+          "retained": 1,
+          "removed": 37,
+          "new": 7,
+          "current_known_grades": {},
+          "current_unjudged": 8
+        }
+      },
+      "option_groups": 29,
+      "option_member_occurrences": 58,
+      "unique_option_person_pairs": 33,
+      "unknown_option_person_pairs": 33,
+      "all_options_newly_unjudged_groups": true,
+      "records": [
+        {
+          "scope": "359696",
+          "parent": "359696",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362551",
+          "parent": "362551",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360205",
+          "parent": "360205",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 5,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362178",
+          "parent": "362178",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360946",
+          "parent": "360946",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363141",
+          "parent": "363141",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "342747",
+          "parent": "342747",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363736",
+          "parent": "363736",
+          "kind": "specific_parent",
+          "boundary": "not_current",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363818",
+          "parent": "363818",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357609",
+          "parent": "357609",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363102",
+          "parent": "363102",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362529",
+          "parent": "362529",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363281",
+          "parent": "363281",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362197",
+          "parent": "362197",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359236",
+          "parent": "359236",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "339594",
+          "parent": "339594",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363455",
+          "parent": "363455",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "328573",
+          "parent": "328573",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "348164",
+          "parent": "348164",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362848",
+          "parent": "362848",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362315",
+          "parent": "362315",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "nasa-roses:25-D.3E-1c60503f9d",
+          "parent": "nasa-roses:25-D.3E-1c60503f9d",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "332894",
+          "parent": "332894",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 27,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363055",
+          "parent": "363055",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360698",
+          "parent": "360698",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363612",
+          "parent": "363612",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362180",
+          "parent": "362180",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362186",
+          "parent": "362186",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362209",
+          "parent": "362209",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361322",
+          "parent": "361322",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "darpa-iarpa:darpa-darpapa260202",
+          "parent": "darpa-iarpa:darpa-darpapa260202",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "334972",
+          "parent": "334972",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361876",
+          "parent": "361876",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363796",
+          "parent": "363796",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363613",
+          "parent": "363613",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 15,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "334971",
+          "parent": "334971",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357018",
+          "parent": "357018",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363636",
+          "parent": "363636",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "darpa-iarpa:darpa-darpapa260201",
+          "parent": "darpa-iarpa:darpa-darpapa260201",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363374",
+          "parent": "363374",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363559",
+          "parent": "363559",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "340828",
+          "parent": "340828",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "349724",
+          "parent": "349724",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362393",
+          "parent": "362393",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360644",
+          "parent": "360644",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356612",
+          "parent": "356612",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "355100",
+          "parent": "355100",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363015",
+          "parent": "363015",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363525",
+          "parent": "363525",
+          "kind": "specific_parent",
+          "boundary": "not_current",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "358403",
+          "parent": "358403",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "358830",
+          "parent": "358830",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590",
+          "parent": "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356978",
+          "parent": "356978",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363655",
+          "parent": "363655",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "darpa-iarpa:darpa-darpapa250704",
+          "parent": "darpa-iarpa:darpa-darpapa250704",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362575",
+          "parent": "362575",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362607",
+          "parent": "362607",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "355196",
+          "parent": "355196",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 9,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363287",
+          "parent": "363287",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363569",
+          "parent": "363569",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360633",
+          "parent": "360633",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362240",
+          "parent": "362240",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "39841",
+          "parent": "39841",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 7,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363292",
+          "parent": "363292",
+          "kind": "specific_parent",
+          "boundary": "absent_scientific_anchor",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "354573",
+          "parent": "354573",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "351923",
+          "parent": "351923",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360954",
+          "parent": "360954",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360258",
+          "parent": "360258",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359946",
+          "parent": "359946",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "nasa-roses:25-D.9-d22059cf9f",
+          "parent": "nasa-roses:25-D.9-d22059cf9f",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363526",
+          "parent": "363526",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360182",
+          "parent": "360182",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363514",
+          "parent": "363514",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 11,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363241",
+          "parent": "363241",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363372",
+          "parent": "363372",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360380",
+          "parent": "360380",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363679",
+          "parent": "363679",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "343980",
+          "parent": "343980",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362196",
+          "parent": "362196",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "353413",
+          "parent": "353413",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 26,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363699",
+          "parent": "363699",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362179",
+          "parent": "362179",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359669",
+          "parent": "359669",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362254",
+          "parent": "362254",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363783",
+          "parent": "363783",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344715",
+          "parent": "344715",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363617",
+          "parent": "363617",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 13,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "243973",
+          "parent": "243973",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362207",
+          "parent": "362207",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363570",
+          "parent": "363570",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362489",
+          "parent": "362489",
+          "kind": "specific_parent",
+          "boundary": "not_current",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362025",
+          "parent": "362025",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "358882",
+          "parent": "358882",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 6,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357554",
+          "parent": "357554",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 17,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362313",
+          "parent": "362313",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362222",
+          "parent": "362222",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "354269",
+          "parent": "354269",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "parent": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "352339",
+          "parent": "352339",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "325932",
+          "parent": "325932",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-001",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "344592:ab-0009",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 4,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0048",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-004",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-026",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0060",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 7,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0016",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-003",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0005",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361526:c-18",
+          "parent": "361526",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-002",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0035",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-017",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0015",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-005",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0020",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-020",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0011",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-012",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0017",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0045",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0026",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0076",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361526:f-18",
+          "parent": "361526",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0006",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0034",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0041",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0083",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0029",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0078",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0097",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0065",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0010",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0025",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 24,
+          "automatic_count": 10,
+          "options": 8,
+          "primary": [
+            "urh-000004",
+            "urh-000092"
+          ]
+        },
+        {
+          "scope": "361526:e-18",
+          "parent": "361526",
+          "kind": "publishable_child",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0101",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0038",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "361526:g-18",
+          "parent": "361526",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0058",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0070",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0053",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0027",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0021",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0037",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "344592:ab-0051",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0071",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0002",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 18,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0019",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 13,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0067",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "absent_scientific_anchor",
+          "discovery_count": 17,
+          "automatic_count": 10,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0023",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        }
+      ]
+    },
+    "rollout50": {
+      "reservations": 50,
+      "before": {
+        "absent_scientific_anchor": 11,
+        "no_admitted_person": 31,
+        "only_one_admitted_person": 5,
+        "not_current": 1,
+        "broad_parent_rejected": 1,
+        "group_produced": 1
+      },
+      "after": {
+        "no_supported_member": 12,
+        "no_admitted_person": 33,
+        "not_current": 1,
+        "broad_parent_rejected": 1,
+        "only_one_supported_member": 2,
+        "group_produced": 1
+      },
+      "roles": {
+        "admitted_ids": {
+          "old_pairs": 72,
+          "new_pairs": 71,
+          "retained": 62,
+          "removed": 10,
+          "new": 9,
+          "current_known_grades": {},
+          "current_unjudged": 71
+        },
+        "top5": {
+          "old_pairs": 47,
+          "new_pairs": 44,
+          "retained": 38,
+          "removed": 9,
+          "new": 6,
+          "current_known_grades": {},
+          "current_unjudged": 44
+        },
+        "primary": {
+          "old_pairs": 2,
+          "new_pairs": 2,
+          "retained": 0,
+          "removed": 2,
+          "new": 2,
+          "current_known_grades": {},
+          "current_unjudged": 2
+        }
+      },
+      "option_groups": 7,
+      "option_member_occurrences": 14,
+      "unique_option_person_pairs": 8,
+      "unknown_option_person_pairs": 8,
+      "all_options_newly_unjudged_groups": true,
+      "records": [
+        {
+          "scope": "359696",
+          "parent": "359696",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362551",
+          "parent": "362551",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360205",
+          "parent": "360205",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 5,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362178",
+          "parent": "362178",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360946",
+          "parent": "360946",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363141",
+          "parent": "363141",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "342747",
+          "parent": "342747",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363736",
+          "parent": "363736",
+          "kind": "specific_parent",
+          "boundary": "not_current",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363818",
+          "parent": "363818",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357609",
+          "parent": "357609",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363102",
+          "parent": "363102",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362529",
+          "parent": "362529",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363281",
+          "parent": "363281",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362197",
+          "parent": "362197",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359236",
+          "parent": "359236",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "339594",
+          "parent": "339594",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363455",
+          "parent": "363455",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "328573",
+          "parent": "328573",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "348164",
+          "parent": "348164",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362848",
+          "parent": "362848",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362315",
+          "parent": "362315",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "nasa-roses:25-D.3E-1c60503f9d",
+          "parent": "nasa-roses:25-D.3E-1c60503f9d",
+          "kind": "specific_parent",
+          "boundary": "broad_parent_rejected",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "332894",
+          "parent": "332894",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 27,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363055",
+          "parent": "363055",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360698",
+          "parent": "360698",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363612",
+          "parent": "363612",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362180",
+          "parent": "362180",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362186",
+          "parent": "362186",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362209",
+          "parent": "362209",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361322",
+          "parent": "361322",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-001",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "344592:ab-0009",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 4,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0048",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-004",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-026",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0060",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 7,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0016",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-003",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0005",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361526:c-18",
+          "parent": "361526",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-002",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0035",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-017",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0015",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-005",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0020",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-020",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0011",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-012",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0017",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        }
+      ]
+    },
+    "legacy": {
+      "reservations": 106,
+      "before": {
+        "group_produced": 4,
+        "absent_scientific_anchor": 46,
+        "redundancy_contribution_restriction": 2,
+        "no_admitted_person": 39,
+        "only_one_admitted_person": 13,
+        "not_current": 2
+      },
+      "after": {
+        "no_supported_member": 45,
+        "only_one_supported_member": 5,
+        "group_produced": 9,
+        "no_admitted_person": 44,
+        "absent_scientific_anchor": 1,
+        "not_current": 2
+      },
+      "roles": {
+        "admitted_ids": {
+          "old_pairs": 208,
+          "new_pairs": 229,
+          "retained": 164,
+          "removed": 44,
+          "new": 65,
+          "current_known_grades": {},
+          "current_unjudged": 229
+        },
+        "top5": {
+          "old_pairs": 175,
+          "new_pairs": 171,
+          "retained": 123,
+          "removed": 52,
+          "new": 48,
+          "current_known_grades": {},
+          "current_unjudged": 171
+        },
+        "primary": {
+          "old_pairs": 15,
+          "new_pairs": 18,
+          "retained": 0,
+          "removed": 15,
+          "new": 18,
+          "current_known_grades": {},
+          "current_unjudged": 18
+        }
+      },
+      "option_groups": 58,
+      "option_member_occurrences": 116,
+      "unique_option_person_pairs": 67,
+      "unknown_option_person_pairs": 67,
+      "all_options_newly_unjudged_groups": true,
+      "records": [
+        {
+          "scope": "344592:ab-0019",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 13,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0079",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "358021",
+          "parent": "358021",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 5,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361050",
+          "parent": "361050",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361205",
+          "parent": "361205",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361526:g-12",
+          "parent": "361526",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 12,
+          "automatic_count": 2,
+          "options": 1,
+          "primary": [
+            "urh-000092",
+            "urh-000150"
+          ]
+        },
+        {
+          "scope": "363375",
+          "parent": "363375",
+          "kind": "specific_parent",
+          "boundary": "group_produced",
+          "discovery_count": 12,
+          "automatic_count": 9,
+          "options": 8,
+          "primary": [
+            "urh-000020",
+            "urh-000053"
+          ]
+        },
+        {
+          "scope": "363489",
+          "parent": "363489",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "eere-exchange:DE-TA1-0003589",
+          "parent": "eere-exchange:DE-TA1-0003589",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0013",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 7,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360006",
+          "parent": "360006",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0015",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0029",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0032",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0036",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0038",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "344592:ab-0039",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0040",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0043",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 9,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "344592:ab-0047",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 9,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "344592:ab-0050",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0052",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0053",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0054",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0056",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0057",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0059",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0062",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0065",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0066",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0075",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0076",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0078",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0080",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0081",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0082",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0096",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-001",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "group_produced",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "345241:tdac-baa-004",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-020",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "345241:tdac-baa-022",
+          "parent": "345241",
+          "kind": "publishable_child",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "358022",
+          "parent": "358022",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "344592:ab-0042",
+          "parent": "344592",
+          "kind": "publishable_child",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361304",
+          "parent": "361304",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361520",
+          "parent": "361520",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 5,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359666",
+          "parent": "359666",
+          "kind": "specific_parent",
+          "boundary": "group_produced",
+          "discovery_count": 9,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "361186",
+          "parent": "361186",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356888",
+          "parent": "356888",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357002",
+          "parent": "357002",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359068",
+          "parent": "359068",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 6,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363538",
+          "parent": "363538",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356981",
+          "parent": "356981",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357337",
+          "parent": "357337",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357137",
+          "parent": "357137",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357748",
+          "parent": "357748",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 4,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359649",
+          "parent": "359649",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356530",
+          "parent": "356530",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363678",
+          "parent": "363678",
+          "kind": "specific_parent",
+          "boundary": "absent_scientific_anchor",
+          "discovery_count": 12,
+          "automatic_count": 8,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357334",
+          "parent": "357334",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361831",
+          "parent": "361831",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356879",
+          "parent": "356879",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357308",
+          "parent": "357308",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361287",
+          "parent": "361287",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362954",
+          "parent": "362954",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360398",
+          "parent": "360398",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360534",
+          "parent": "360534",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357346",
+          "parent": "357346",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356903",
+          "parent": "356903",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356874",
+          "parent": "356874",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357340",
+          "parent": "357340",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357003",
+          "parent": "357003",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356953",
+          "parent": "356953",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360893",
+          "parent": "360893",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360894",
+          "parent": "360894",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359269",
+          "parent": "359269",
+          "kind": "specific_parent",
+          "boundary": "group_produced",
+          "discovery_count": 8,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "342475",
+          "parent": "342475",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357345",
+          "parent": "357345",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357015",
+          "parent": "357015",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363210",
+          "parent": "363210",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362948",
+          "parent": "362948",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356802",
+          "parent": "356802",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356935",
+          "parent": "356935",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357186",
+          "parent": "357186",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356680",
+          "parent": "356680",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "360606",
+          "parent": "360606",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "356811",
+          "parent": "356811",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 6,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359696",
+          "parent": "359696",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363622",
+          "parent": "363622",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361008",
+          "parent": "361008",
+          "kind": "specific_parent",
+          "boundary": "group_produced",
+          "discovery_count": 9,
+          "automatic_count": 8,
+          "options": 7,
+          "primary": [
+            "urh-000013",
+            "urh-000018"
+          ]
+        },
+        {
+          "scope": "363179",
+          "parent": "363179",
+          "kind": "specific_parent",
+          "boundary": "not_current",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357430",
+          "parent": "357430",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357492",
+          "parent": "357492",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363095",
+          "parent": "363095",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "darpa-iarpa:darpa-darpapa250704",
+          "parent": "darpa-iarpa:darpa-darpapa250704",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "352947",
+          "parent": "352947",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357433",
+          "parent": "357433",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357493",
+          "parent": "357493",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357273",
+          "parent": "357273",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361447",
+          "parent": "361447",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357490",
+          "parent": "357490",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "357424",
+          "parent": "357424",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 1,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "359199",
+          "parent": "359199",
+          "kind": "specific_parent",
+          "boundary": "not_current",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361399",
+          "parent": "361399",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 2,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "361451",
+          "parent": "361451",
+          "kind": "specific_parent",
+          "boundary": "no_supported_member",
+          "discovery_count": 3,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "363748",
+          "parent": "363748",
+          "kind": "specific_parent",
+          "boundary": "no_admitted_person",
+          "discovery_count": 0,
+          "automatic_count": 0,
+          "options": 0,
+          "primary": []
+        },
+        {
+          "scope": "362454",
+          "parent": "362454",
+          "kind": "specific_parent",
+          "boundary": "only_one_supported_member",
+          "discovery_count": 5,
+          "automatic_count": 1,
+          "options": 0,
+          "primary": []
+        }
+      ]
+    }
+  },
+  "provider_calls": 0,
+  "new_human_items": 0,
+  "fresh_scientific_validation": false,
+  "ledger": {
+    "sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+    "logical_id": "on-demand-team-offline-v2-20260909",
+    "charged_usd": 4.290655,
+    "requests": 629,
+    "outstanding_requests": 0,
+    "remaining_usd": 5.709345,
+    "remaining_slots": 61,
+    "phase_spend": 0,
+    "phase_attempts": 0
+  },
+  "private_receipts": {
+    "outputs\\team-recommender-evidence-repair\\baseline-allocation-profile.json": "d06074fbc3dc5d9e24a18530afe199b328aab058fb59379c163134136c1335df",
+    "outputs\\team-recommender-evidence-repair\\baseline-compact.json": "929fdca2a811a7d6d37bd226b29c07e88bc5a3edcec47e3653b7017401e98aaf",
+    "outputs\\team-recommender-evidence-repair\\baseline-rollout150.json": "b378b509d6df8dc48b9d689f4ae7cf66d8c82fb3b07c0e7b75c03293b7a3dd67",
+    "outputs\\team-recommender-evidence-repair\\baseline-semantic.json": "a5e5e1408245cd2ab002b2f1f216675b6dbf70ccc7ac470ca849bb6db9106ca1",
+    "outputs\\team-recommender-evidence-repair\\baseline-traces.json": "c2dd5b143e03c689fcb8ecf000784b080d80746664b0bdf87e2e093bc783a56a",
+    "outputs\\team-recommender-evidence-repair\\corrected-compact.json": "d1424d3c5710ffe2be36e4561bea60b5bc0ffc805a7ee76c785373377526b2aa",
+    "outputs\\team-recommender-evidence-repair\\corrected-legacy.json": "39d0d977b2d43ad487bba827e7e4143a84023527d508958ea07fcf6ea35e22b5",
+    "outputs\\team-recommender-evidence-repair\\corrected-rollout150.json": "f82e82b2eb3353ed29b8e9d46570df62375105f29d3900b855739523737e2bb7",
+    "outputs\\team-recommender-evidence-repair\\corrected-rollout50.json": "7ad8b7b7e9e0f22224d6906e5bd6d2481f2aded6ae5ee87efe625b53616fef18",
+    "outputs\\team-recommender-evidence-repair\\corrected-semantic.json": "815e9c479d96d4629138ca0610a93325a077e25d5efbad7b81aa1236a18f999e",
+    "outputs\\team-recommender-evidence-repair\\corrected-traces.json": "882d519a0ae8e9e835da4fba572df54c093b6af857f044da2c347bc2628271f1",
+    "outputs\\team-recommender-evidence-repair\\repaired-traces.json": "561ca58cbd068eb07431a3492263acfda56eb1687b053eba19600bdcce060793",
+    "outputs\\team-recommender-evidence-repair\\restored-baseline-semantic.json": "b76222938f7af381ba0e564f9c1b3a5b599eb653cca9d862268b4af219eccbc5",
+    "outputs\\team-recommender-evidence-repair\\restored-baseline-rollout50.json": "90b670525c3c75a1d1f6ba607b8ba10de360ba4dd1f01a6aa3bdf89dd4c04f4d",
+    "outputs\\team-recommender-evidence-repair\\restored-baseline-legacy.json": "cb6f5aed1996d86a20b435cd13eda4dbec92a2661783e017ce366df275682158"
+  },
+  "limitations": [
+    "Previously retrieved pairs are not a recall denominator.",
+    "Changed groups, options and explanations inherit no historical grade.",
+    "All output sources are exposed diagnostics, not untouched confirmation.",
+    "Prepared/actionable and independently feasible are distinct; feasibility remains unknown."
+  ]
+}

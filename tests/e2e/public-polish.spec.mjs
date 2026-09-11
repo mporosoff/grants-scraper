@@ -32,7 +32,7 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
   await runFundingSearch(page, "W911NF-23-S-0001");
   await waitForHybridSettled(page);
   await page.locator('[data-opportunity-team="344592"]').click();
-  await page.locator('#team-builder [data-opportunity-team-scope="344592:ab-0019"]').click();
+  await page.locator('#team-builder [data-opportunity-team-scope="344592:ab-0025"]').click();
   await expect(page.locator("#team-builder")).toBeVisible();
   await expect(page.locator("#team-builder .opportunity-team-member").first()).toBeVisible({ timeout: 30_000 });
   for (const width of [320, 390]) for (const size of [16, 24]) {

@@ -33,16 +33,20 @@
       "existing_ledger": true,
       "approved": true
     },
-    "post_audit_full_browser_validation": true
+    "post_audit_full_browser_validation": true,
+    "shared_evidence_repair": {
+      "authorized": true,
+      "new_usd": 0,
+      "provider_requests": 0,
+      "full_browser_validation": true,
+      "automatic_next_revision": false,
+      "deployment": false
+    }
   },
   "authority": {
-    "work_order": "Post-audit implementation and revalidation plan",
-    "record": "docs/team-recommender/post-audit/AUTHORITY.md",
-    "execution_approval": {
-      "path": "docs/team-recommender/post-audit/execution-approval-v1.json",
-      "sha256": "a1db0152e9d452379d5fcc3530ded00e1878ca48287a09c8f66b524b7774b182"
-    },
-    "scope": "One corrective implementation, full engineering validation and <=$2/60 single semantic check within existing ledger; no deployment or new human packet"
+    "work_order": "Shared scientific evidence mechanism and bounded resource repair",
+    "record": "docs/team-recommender/evidence-repair/AUTHORITY.md",
+    "scope": "One zero-paid repair, exposed diagnostic comparisons, full configured browser validation and exact-head PR225 review; no profile enrichment, new human packet, deployment or automatic next revision"
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -96,45 +100,39 @@
     "post_audit_new_usd": 0.337668,
     "post_audit_new_requests": 34,
     "post_audit_new_input_tokens": 152954,
-    "post_audit_new_output_tokens": 3176
+    "post_audit_new_output_tokens": 3176,
+    "shared_evidence_repair_new_usd": 0,
+    "shared_evidence_repair_new_requests": 0
   },
   "candidate": {
-    "path": "docs/team-recommender/post-audit/candidate-v4.json",
-    "sha256": "2cb43bcfd7d416b1ef75e92569ccd666286a287a1c51a159a0cde40988ea023d",
-    "primary": "shared-team-v2-post-audit",
-    "code_commit": "6e2f60708b41b94049eabf005a0190b268222738",
+    "path": "docs/team-recommender/evidence-repair/candidate-v1.json",
+    "sha256": "9c99b9785c1d49c48d091e0047f61936a3b2b99e69f80a34cfdd5e03b343440c",
+    "primary": "shared-team-v3-evidence-repair",
+    "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
     "quality_qualified": false,
+    "resource_qualified": false,
     "fallback": null,
-    "status": "Corrective implementation and finite check complete; exact-head code review and CI clean; scientific and memory criteria FAIL; no release",
-    "runtime_commit": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
-    "validated_code_commit": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28"
+    "status": "Bounded repair and finite validation complete; 121/122 browser checks pass; resource/performance barriers remain; exact-head review/CI pending"
   },
   "checks": {
     "receipt": {
-      "path": "docs/team-recommender/post-audit/engineering-receipt-v2.json",
-      "sha256": "bad737844e589709fa7a30b8db1fa0d12cc956effd2c2ffb07803bc5a27e4719"
+      "path": "docs/team-recommender/evidence-repair/engineering-receipt-v1.json",
+      "sha256": "08184a21a8fd0c73cce1da6b11c98e0d77719acae5604a5d696065b0dd27f78d"
     },
-    "unique_integrated_browser_cases_passing": 122,
-    "prepared_browser_cases_passing": 5,
-    "independent_review": "PASS: clean exact-head verification PR225 at 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
-    "required_CI": "PASS: run34616881475, Python1380/3skips; Node859/12skips; 37queries/50scoring/no-drift",
-    "scientific_acceptance": "FAIL",
+    "independent_review": "PENDING exact-head PR225",
+    "required_CI": "PENDING current exact head",
+    "scientific_acceptance": "NOT QUALIFIED; exposed diagnostics only",
     "physical_mobile": "NOT RUN",
-    "peak_browser_memory": "NOT MEASURED",
-    "affected_canonical_browser_rechecks": 14,
-    "additional_heap_48MiB": "FAIL: sampled 68.94-80.04 MiB before collection",
+    "additional_heap_48MiB": "FAIL: observed parent 49.09–52.44 MiB",
+    "post_input_1000ms": "FAIL: observed parent up to1060ms",
     "resources": {
-      "path": "docs/team-recommender/post-audit/resource-summary-v1.json",
-      "sha256": "4a5c6ca7fb13c439489d0926acf1e0ced56abec421aa9a846adf92fbe28bd591"
+      "path": "docs/team-recommender/evidence-repair/resource-summary-v1.json",
+      "sha256": "e4a6c1295c4b39ec2f395ddc6d738b6305afd88435e9c79fca3be86de4a84ff9"
     },
-    "review_remediation": {
-      "path": "docs/team-recommender/post-audit/review-remediation-v1.json",
-      "sha256": "0b2c67b2b3724c4b7f4660f65175e8805c5d09a1456fa2dc9ef755e78a1ef2ba"
-    },
-    "completion": {
-      "path": "docs/team-recommender/post-audit/completion-receipt-v1.json",
-      "sha256": "dbdc9797c422c4616dff68ce08a92bc0dbd801ad3ba1e1ff335e6a93e3caa95f"
-    }
+    "unique_integrated_browser_cases_passing": 121,
+    "unique_integrated_browser_cases_failed": 1,
+    "prepared_browser_cases_passing": 5,
+    "all_member_Team_Match_workflow": "FAIL: 90-second timeout twice; not waived"
   },
   "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA",
   "continuation": {
@@ -6744,7 +6742,7 @@
   },
   "model": "Existing shared Team Match numerical fit; no model used by corrected runtime",
   "next_allowed_stage": null,
-  "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work.",
+  "next_stage_requires": "STOP FOR USER REVIEW. Remaining full-parent allocation/post-input resource barrier and inadequate/unknown scientific usefulness require owner disposition. No automatic tuning, paid confirmation, extra human items, Stage4 or deployment.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "release_packages": {
@@ -7843,10 +7841,67 @@
   "shared_evidence_repair": {
     "authority": "docs/team-recommender/evidence-repair/AUTHORITY.md",
     "starting_head": "adedd242dc727d85bc2db42776abce5132c882b8",
-    "status": "executing bounded zero-paid mechanism and resource repair",
+    "status": "bounded implementation and finite validation complete; exact-head review/CI pending",
     "new_paid_authorization_usd": 0,
     "new_provider_attempts": 0,
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
-    "historical_report_preserved": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md"
+    "historical_report_preserved": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md",
+    "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+    "report": "docs/team-recommender/reports/shared-evidence-mechanism-repair-report.md",
+    "disposition": "C",
+    "new_paid_usd": 0,
+    "new_human_items": 0,
+    "resource_qualified": false,
+    "scientific_qualified": false
+  },
+  "historical_pre_evidence_repair_checkpoint": {
+    "authority": {
+      "work_order": "Post-audit implementation and revalidation plan",
+      "record": "docs/team-recommender/post-audit/AUTHORITY.md",
+      "execution_approval": {
+        "path": "docs/team-recommender/post-audit/execution-approval-v1.json",
+        "sha256": "a1db0152e9d452379d5fcc3530ded00e1878ca48287a09c8f66b524b7774b182"
+      },
+      "scope": "One corrective implementation, full engineering validation and <=$2/60 single semantic check within existing ledger; no deployment or new human packet"
+    },
+    "candidate": {
+      "path": "docs/team-recommender/post-audit/candidate-v4.json",
+      "sha256": "2cb43bcfd7d416b1ef75e92569ccd666286a287a1c51a159a0cde40988ea023d",
+      "primary": "shared-team-v2-post-audit",
+      "code_commit": "6e2f60708b41b94049eabf005a0190b268222738",
+      "quality_qualified": false,
+      "fallback": null,
+      "status": "Corrective implementation and finite check complete; exact-head code review and CI clean; scientific and memory criteria FAIL; no release",
+      "runtime_commit": "1d3cbf81963479d1fca2767ed532d155ffa56b21",
+      "validated_code_commit": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28"
+    },
+    "checks": {
+      "receipt": {
+        "path": "docs/team-recommender/post-audit/engineering-receipt-v2.json",
+        "sha256": "bad737844e589709fa7a30b8db1fa0d12cc956effd2c2ffb07803bc5a27e4719"
+      },
+      "unique_integrated_browser_cases_passing": 122,
+      "prepared_browser_cases_passing": 5,
+      "independent_review": "PASS: clean exact-head verification PR225 at 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+      "required_CI": "PASS: run34616881475, Python1380/3skips; Node859/12skips; 37queries/50scoring/no-drift",
+      "scientific_acceptance": "FAIL",
+      "physical_mobile": "NOT RUN",
+      "peak_browser_memory": "NOT MEASURED",
+      "affected_canonical_browser_rechecks": 14,
+      "additional_heap_48MiB": "FAIL: sampled 68.94-80.04 MiB before collection",
+      "resources": {
+        "path": "docs/team-recommender/post-audit/resource-summary-v1.json",
+        "sha256": "4a5c6ca7fb13c439489d0926acf1e0ced56abec421aa9a846adf92fbe28bd591"
+      },
+      "review_remediation": {
+        "path": "docs/team-recommender/post-audit/review-remediation-v1.json",
+        "sha256": "0b2c67b2b3724c4b7f4660f65175e8805c5d09a1456fa2dc9ef755e78a1ef2ba"
+      },
+      "completion": {
+        "path": "docs/team-recommender/post-audit/completion-receipt-v1.json",
+        "sha256": "dbdc9797c422c4616dff68ce08a92bc0dbd801ad3ba1e1ff335e6a93e3caa95f"
+      }
+    },
+    "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
   }
 }

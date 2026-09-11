@@ -1,0 +1,114 @@
+{
+  "code_commit": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+  "identities": {
+    "assets/opportunity-team-panel.js": "f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b",
+    "assets/opportunity-team.js": "55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5",
+    "assets/search-query.js": "f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e",
+    "assets/search-retrieval.js": "f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a",
+    "assets/shared-team-engine.js": "8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+    "assets/submission-schedule.js": "2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+    "assets/subtopic-runtime.js": "a6c36190f9ef26de960125aea58b9415b4b951dc9ec2f26998bbebecbc8b5d1c",
+    "assets/team-hybrid.js": "00a14620c5288c0793939cd69f1b9f43314b2855eb071b5b0d7afca1c06f9e8d",
+    "assets/team-matcher.js": "6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+    "assets/team-researchers.js": "9af008d5547a3553b6ef590ab6c0d22762b751438d6f4199ce1a6846ea1cd98e",
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/search-v2-release.json": "7abab9667358b20ce2abace6c0b27675a840c80e88adc7c237bcd18430510d57",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+    "docs/team-recommender/post-audit/semantic-index.json": "e0f478a39111e57d8ef5c7c7380ba554ecd53b12043d663a8c96ed25369d014d",
+    "docs/team-recommender/post-audit/semantic-selection-v2.json": "cf1dd138fe9cfac1e4c829f4f6ccc4f94cb54f1ee5b5a02224cd315391f3daaa",
+    "match_explorer.html": "1a88995dca81b40ba872c4620b29bf7b8811cbf55760a0cbbf6f389dc15f4070",
+    "team_match.html": "1d373ad06dc8c8017c079deb0d155987d6510f3307b9758b956f6dff73cc4b56"
+  },
+  "unchanged_or_permitted_presentation": {
+    "assets/opportunity-team-panel.js": "byte-identical",
+    "assets/app.js": "byte-identical",
+    "assets/team-researchers.js": "byte-identical",
+    "assets/team-hybrid.js": "byte-identical",
+    "assets/search-query.js": "byte-identical",
+    "config/researcher_registry.json": "byte-identical",
+    "data/researcher_directory.js": "byte-identical",
+    "data/faculty_matches.js": "byte-identical",
+    "data/opportunities.js": "byte-identical",
+    "data/subtopics.js": "byte-identical",
+    "match_explorer.html": "only content-hash query references changed",
+    "team_match.html": "only content-hash query references changed"
+  },
+  "scope_assets": [
+    {
+      "cohort": "legacy",
+      "path": "data/team_ingredients/shared-742cdf4035e03b7b7db2ebe827162789ebe0da21e3461bdae50a861916c8cc94.json",
+      "bytes": 29522,
+      "gzip_bytes": 7039,
+      "sha256": "742cdf4035e03b7b7db2ebe827162789ebe0da21e3461bdae50a861916c8cc94",
+      "scopes": 106
+    },
+    {
+      "cohort": "rollout50",
+      "path": "data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json",
+      "bytes": 15984,
+      "gzip_bytes": 4448,
+      "sha256": "79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92",
+      "scopes": 50
+    },
+    {
+      "cohort": "rollout150",
+      "path": "data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+      "bytes": 34003,
+      "gzip_bytes": 7745,
+      "sha256": "54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6",
+      "scopes": 150
+    },
+    {
+      "cohort": "semantic",
+      "path": "data/team_ingredients/shared-99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2.json",
+      "bytes": 11944,
+      "gzip_bytes": 3673,
+      "sha256": "99d20ad9b25b5934eb996d09e044427ff5fa3d1913f8fb51b539abfa2c6dd9f2",
+      "scopes": 26
+    }
+  ],
+  "immutable_local_packages": {
+    "legacy": {
+      "activated": false,
+      "assembly_sha": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+      "bundle": "C:/Users/Marc Porosoff/projects/grants-scraper/outputs/evidence-repair-9e4cfee0ef5c/legacy/candidate",
+      "candidate_id": "2368bbfdbd9639442968ea03ec5129ae24d1cb08239ef027e613a615888a8e54",
+      "files": 130,
+      "new_generation_calls": 0,
+      "scope_generation": "742cdf4035e03b7b7db2ebe827162789ebe0da21e3461bdae50a861916c8cc94",
+      "scopes": 106
+    },
+    "rollout150": {
+      "activated": false,
+      "assembly_sha": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+      "bundle": "C:/Users/Marc Porosoff/projects/grants-scraper/outputs/evidence-repair-9e4cfee0ef5c/rollout150/candidate",
+      "candidate_id": "816e4f52c5f418304eedfc9ce5c17efd6c08bd96cc4dc27a8fb7b692bf51a830",
+      "files": 130,
+      "new_generation_calls": 0,
+      "scope_generation": "54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6",
+      "scopes": 150
+    },
+    "rollout50": {
+      "activated": false,
+      "assembly_sha": "9e4cfee0ef5c551c779d0d71752a7a60aaa843d9",
+      "bundle": "C:/Users/Marc Porosoff/projects/grants-scraper/outputs/evidence-repair-9e4cfee0ef5c/rollout50/candidate",
+      "candidate_id": "11e6350174dca5fcad3037d5227a00e9163a674b1a31e37b53484e9a882bfd35",
+      "files": 130,
+      "new_generation_calls": 0,
+      "scope_generation": "79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92",
+      "scopes": 50
+    }
+  },
+  "rollback_receipt": {
+    "path": "docs/team-recommender/evidence-repair/rollback-browser-v1.json",
+    "sha256": "b2f2d1207190f94ca27819a441a562e97098736e58aab7a4a6ab8bf4371fa75b"
+  },
+  "source_changes": 0,
+  "profile_changes": 0,
+  "paid_requests": 0,
+  "new_embeddings": 0,
+  "note": "Serving bundles bind all runtime/source/profile inputs together. No deployment. Default publication routing is not activated or substituted."
+}

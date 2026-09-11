@@ -180,3 +180,7 @@ Closeout: PR225 received clean exact-head verification at `67a34ef1706fbd72698e2
 ## Shared evidence mechanism repair — September 11, 2026
 
 The owner explicitly authorizes one bounded implementation and memory repair plus full final integrated browser validation under [evidence-repair/AUTHORITY.md](evidence-repair/AUTHORITY.md). This supersedes the prior stop only for this named work: zero paid requests, no profile/source enrichment, no new human items, no deployment or Stage 4. Preserve all prior failures; freeze the repaired rule before one diagnostic before/after comparison. Use the existing PR225 review process, without merging experimental runtime or data. Finish the report and stop; no automatic subsequent tuning.
+
+### Shared evidence repair decision checkpoint (2026-09-11)
+
+The single repaired rule is `shared-team-v3-evidence-repair`, integrated code `9e4cfee0ef5c551c779d0d71752a7a60aaa843d9`. See `reports/shared-evidence-mechanism-repair-report.md` and `evidence-repair/candidate-v1.json`. All old findings remain history. No source/profile edits or paid calls occurred. The parent still exceeds the unchanged memory/post-input limits; scientific usefulness is not qualified. Complete the authorized engineering/review closeout and STOP. No automatic next revision, paid check, new human items, deployment or Stage4 is authorized.

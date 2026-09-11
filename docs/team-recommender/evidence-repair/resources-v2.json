@@ -1,0 +1,3799 @@
+{
+  "version": "2",
+  "browser": "151.0.7922.34",
+  "os": "10.0.26200",
+  "cpu": "Intel(R) Core(TM) Ultra 7 165U",
+  "network": "20Mbps/150ms local gzip for team input phase; no CPU throttle",
+  "baseline": "Catalog, directory and topic sidecar resident; no team runtime or calculation. One collection before baseline, no collection during/after measured actions.",
+  "sampling": "CDP pure JS/backing/embedder observations after adoption and actions, plus precise combined JS+backing observations around digest and synchronous action boundaries. These samples can miss internal peaks; no continuous peak claim.",
+  "physical_mobile": "NOT RUN",
+  "provider_calls": 0,
+  "rows": [
+    {
+      "cohort": "rollout50",
+      "scope": "345241:tdac-baa-001",
+      "sample": 0,
+      "before": {
+        "usedSize": 61229828,
+        "totalSize": 62197760,
+        "embedderHeapUsedSize": 1794328,
+        "backingStorageSize": 17804055
+      },
+      "adopted": {
+        "usedSize": 64158908,
+        "totalSize": 69021696,
+        "embedderHeapUsedSize": 1864176,
+        "backingStorageSize": 33555343
+      },
+      "after": {
+        "usedSize": 78555032,
+        "totalSize": 91185152,
+        "embedderHeapUsedSize": 1864176,
+        "backingStorageSize": 33555343
+      },
+      "cold": {
+        "load_ms": 896.0999999940395,
+        "create_ms": 2.5999999940395355,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 2013.7000000178814,
+            "combined_js_and_backing_bytes": 79047535
+          },
+          {
+            "label": "before digest 15984",
+            "time": 2537,
+            "combined_js_and_backing_bytes": 79206256
+          },
+          {
+            "label": "after digest",
+            "time": 2537.300000011921,
+            "combined_js_and_backing_bytes": 79206627
+          },
+          {
+            "label": "before digest 15984",
+            "time": 2538.7000000178814,
+            "combined_js_and_backing_bytes": 79394714
+          },
+          {
+            "label": "after digest",
+            "time": 2538.800000011921,
+            "combined_js_and_backing_bytes": 79395238
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2552.9000000059605,
+            "combined_js_and_backing_bytes": 80922835
+          },
+          {
+            "label": "after digest",
+            "time": 2554.0999999940395,
+            "combined_js_and_backing_bytes": 80923259
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2835.9000000059605,
+            "combined_js_and_backing_bytes": 94956892
+          },
+          {
+            "label": "after digest",
+            "time": 2849.4000000059605,
+            "combined_js_and_backing_bytes": 94957428
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2881.4000000059605,
+            "combined_js_and_backing_bytes": 96103249
+          },
+          {
+            "label": "after digest",
+            "time": 2882.800000011921,
+            "combined_js_and_backing_bytes": 96104077
+          },
+          {
+            "label": "hydrated",
+            "time": 2909.800000011921,
+            "combined_js_and_backing_bytes": 98703113
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2912.5,
+            "combined_js_and_backing_bytes": 99144347
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 469.2999999821186,
+        "group_view_ms": 1.300000011920929,
+        "post_input_compute_ms": 470.59999999403954,
+        "options": 7,
+        "members": 2,
+        "warm": [
+          0.30000001192092896,
+          0,
+          0,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.19999998807907104,
+          0,
+          0.10000002384185791
+        ],
+        "edit": [
+          0.19999998807907104,
+          0,
+          0.09999999403953552,
+          0.10000002384185791,
+          0.09999999403953552
+        ],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3390.4000000059605,
+            "combined_js_and_backing_bytes": 111420915
+          },
+          {
+            "label": "group and view",
+            "time": 3391.9000000059605,
+            "combined_js_and_backing_bytes": 111714503
+          },
+          {
+            "label": "warm 0",
+            "time": 3392.2000000178814,
+            "combined_js_and_backing_bytes": 111734407
+          },
+          {
+            "label": "warm 1",
+            "time": 3392.2000000178814,
+            "combined_js_and_backing_bytes": 111760915
+          },
+          {
+            "label": "warm 2",
+            "time": 3392.300000011921,
+            "combined_js_and_backing_bytes": 111779879
+          },
+          {
+            "label": "warm 3",
+            "time": 3392.4000000059605,
+            "combined_js_and_backing_bytes": 112134811
+          },
+          {
+            "label": "warm 4",
+            "time": 3392.5,
+            "combined_js_and_backing_bytes": 111827739
+          },
+          {
+            "label": "warm 5",
+            "time": 3392.5999999940395,
+            "combined_js_and_backing_bytes": 111846363
+          },
+          {
+            "label": "warm 6",
+            "time": 3392.9000000059605,
+            "combined_js_and_backing_bytes": 111866075
+          },
+          {
+            "label": "warm 7",
+            "time": 3393.0999999940395,
+            "combined_js_and_backing_bytes": 111898251
+          },
+          {
+            "label": "warm 8",
+            "time": 3393.0999999940395,
+            "combined_js_and_backing_bytes": 111923331
+          },
+          {
+            "label": "warm 9",
+            "time": 3393.2000000178814,
+            "combined_js_and_backing_bytes": 111944059
+          },
+          {
+            "label": "edit 0",
+            "time": 3393.4000000059605,
+            "combined_js_and_backing_bytes": 111963883
+          },
+          {
+            "label": "edit 1",
+            "time": 3393.5,
+            "combined_js_and_backing_bytes": 111981459
+          },
+          {
+            "label": "edit 2",
+            "time": 3393.5999999940395,
+            "combined_js_and_backing_bytes": 111999071
+          },
+          {
+            "label": "edit 3",
+            "time": 3393.7000000178814,
+            "combined_js_and_backing_bytes": 112016647
+          },
+          {
+            "label": "edit 4",
+            "time": 3393.800000011921,
+            "combined_js_and_backing_bytes": 112035615
+          }
+        ],
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 170.59999999403954,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2185.5
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 172.40000000596046,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2359.7000000178814
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json",
+          "duration": 173.09999999403954,
+          "encoded": 4466,
+          "decoded": 15984,
+          "transfer": 4766,
+          "responseEnd": 2535.300000011921
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout50",
+      "scope": "345241:tdac-baa-001",
+      "sample": 1,
+      "before": {
+        "usedSize": 61229456,
+        "totalSize": 62459904,
+        "embedderHeapUsedSize": 2024264,
+        "backingStorageSize": 17804055
+      },
+      "adopted": {
+        "usedSize": 64549420,
+        "totalSize": 70209536,
+        "embedderHeapUsedSize": 1745040,
+        "backingStorageSize": 33555343
+      },
+      "after": {
+        "usedSize": 77454188,
+        "totalSize": 92078080,
+        "embedderHeapUsedSize": 1745040,
+        "backingStorageSize": 33555343
+      },
+      "cold": {
+        "load_ms": 848.5999999940395,
+        "create_ms": 1.5,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 1959.7000000178814,
+            "combined_js_and_backing_bytes": 79047163
+          },
+          {
+            "label": "before digest 15984",
+            "time": 2495.600000023842,
+            "combined_js_and_backing_bytes": 79205896
+          },
+          {
+            "label": "after digest",
+            "time": 2495.800000011921,
+            "combined_js_and_backing_bytes": 79206267
+          },
+          {
+            "label": "before digest 15984",
+            "time": 2497.100000023842,
+            "combined_js_and_backing_bytes": 79386506
+          },
+          {
+            "label": "after digest",
+            "time": 2497.2000000178814,
+            "combined_js_and_backing_bytes": 79387030
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2510.800000011921,
+            "combined_js_and_backing_bytes": 80885311
+          },
+          {
+            "label": "after digest",
+            "time": 2512.100000023842,
+            "combined_js_and_backing_bytes": 80893543
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2752.5,
+            "combined_js_and_backing_bytes": 94623328
+          },
+          {
+            "label": "after digest",
+            "time": 2765,
+            "combined_js_and_backing_bytes": 94623852
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2789.2000000178814,
+            "combined_js_and_backing_bytes": 95776893
+          },
+          {
+            "label": "after digest",
+            "time": 2790.600000023842,
+            "combined_js_and_backing_bytes": 95777721
+          },
+          {
+            "label": "hydrated",
+            "time": 2808.4000000059605,
+            "combined_js_and_backing_bytes": 99134537
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2809.800000011921,
+            "combined_js_and_backing_bytes": 99574315
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 352.60000002384186,
+        "group_view_ms": 1.899999976158142,
+        "post_input_compute_ms": 354.5,
+        "options": 7,
+        "members": 2,
+        "warm": [
+          0.20000001788139343,
+          0.09999999403953552,
+          0,
+          0.19999998807907104,
+          0.20000001788139343,
+          0,
+          0,
+          0.09999999403953552,
+          0,
+          0.09999999403953552
+        ],
+        "edit": [
+          0.19999998807907104,
+          0,
+          0,
+          0.10000002384185791,
+          0.09999999403953552
+        ],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3167.100000023842,
+            "combined_js_and_backing_bytes": 110321255
+          },
+          {
+            "label": "group and view",
+            "time": 3169,
+            "combined_js_and_backing_bytes": 110614819
+          },
+          {
+            "label": "warm 0",
+            "time": 3169.2000000178814,
+            "combined_js_and_backing_bytes": 110634711
+          },
+          {
+            "label": "warm 1",
+            "time": 3169.300000011921,
+            "combined_js_and_backing_bytes": 110976263
+          },
+          {
+            "label": "warm 2",
+            "time": 3169.300000011921,
+            "combined_js_and_backing_bytes": 110680223
+          },
+          {
+            "label": "warm 3",
+            "time": 3169.5,
+            "combined_js_and_backing_bytes": 111015115
+          },
+          {
+            "label": "warm 4",
+            "time": 3169.7000000178814,
+            "combined_js_and_backing_bytes": 110728083
+          },
+          {
+            "label": "warm 5",
+            "time": 3169.7000000178814,
+            "combined_js_and_backing_bytes": 110746707
+          },
+          {
+            "label": "warm 6",
+            "time": 3169.800000011921,
+            "combined_js_and_backing_bytes": 110766419
+          },
+          {
+            "label": "warm 7",
+            "time": 3170,
+            "combined_js_and_backing_bytes": 110798571
+          },
+          {
+            "label": "warm 8",
+            "time": 3170.100000023842,
+            "combined_js_and_backing_bytes": 110823651
+          },
+          {
+            "label": "warm 9",
+            "time": 3170.2000000178814,
+            "combined_js_and_backing_bytes": 110842431
+          },
+          {
+            "label": "edit 0",
+            "time": 3170.4000000059605,
+            "combined_js_and_backing_bytes": 110863039
+          },
+          {
+            "label": "edit 1",
+            "time": 3170.4000000059605,
+            "combined_js_and_backing_bytes": 110880615
+          },
+          {
+            "label": "edit 2",
+            "time": 3170.5,
+            "combined_js_and_backing_bytes": 110898227
+          },
+          {
+            "label": "edit 3",
+            "time": 3170.600000023842,
+            "combined_js_and_backing_bytes": 111201311
+          },
+          {
+            "label": "edit 4",
+            "time": 3170.7000000178814,
+            "combined_js_and_backing_bytes": 110936015
+          }
+        ],
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 183.30000001192093,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2144.300000011921
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 171.59999999403954,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2318.4000000059605
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json",
+          "duration": 173.10000002384186,
+          "encoded": 4466,
+          "decoded": 15984,
+          "transfer": 4766,
+          "responseEnd": 2494.100000023842
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout50",
+      "scope": "345241:tdac-baa-001",
+      "sample": 2,
+      "before": {
+        "usedSize": 61229980,
+        "totalSize": 62459904,
+        "embedderHeapUsedSize": 2113320,
+        "backingStorageSize": 17804055
+      },
+      "adopted": {
+        "usedSize": 65338884,
+        "totalSize": 70209536,
+        "embedderHeapUsedSize": 1832128,
+        "backingStorageSize": 33555343
+      },
+      "after": {
+        "usedSize": 79560956,
+        "totalSize": 91815936,
+        "embedderHeapUsedSize": 1832128,
+        "backingStorageSize": 33555343
+      },
+      "cold": {
+        "load_ms": 819.7999999821186,
+        "create_ms": 1.5,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 2048.0999999940395,
+            "combined_js_and_backing_bytes": 79047687
+          },
+          {
+            "label": "before digest 15984",
+            "time": 2584.4000000059605,
+            "combined_js_and_backing_bytes": 79206420
+          },
+          {
+            "label": "after digest",
+            "time": 2584.5999999940395,
+            "combined_js_and_backing_bytes": 79206791
+          },
+          {
+            "label": "before digest 15984",
+            "time": 2586.4000000059605,
+            "combined_js_and_backing_bytes": 79394746
+          },
+          {
+            "label": "after digest",
+            "time": 2586.4000000059605,
+            "combined_js_and_backing_bytes": 79395270
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2597.5,
+            "combined_js_and_backing_bytes": 80861939
+          },
+          {
+            "label": "after digest",
+            "time": 2598.2999999821186,
+            "combined_js_and_backing_bytes": 80870171
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2812.5999999940395,
+            "combined_js_and_backing_bytes": 94036020
+          },
+          {
+            "label": "after digest",
+            "time": 2823.0999999940395,
+            "combined_js_and_backing_bytes": 94036556
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2848.0999999940395,
+            "combined_js_and_backing_bytes": 97249813
+          },
+          {
+            "label": "after digest",
+            "time": 2849.4000000059605,
+            "combined_js_and_backing_bytes": 97250641
+          },
+          {
+            "label": "hydrated",
+            "time": 2868.199999988079,
+            "combined_js_and_backing_bytes": 98371985
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2869.5999999940395,
+            "combined_js_and_backing_bytes": 98804391
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 413.80000001192093,
+        "group_view_ms": 3.800000011920929,
+        "post_input_compute_ms": 417.60000002384186,
+        "options": 7,
+        "members": 2,
+        "warm": [
+          0.29999998211860657,
+          0.10000002384185791,
+          0,
+          0.19999998807907104,
+          0.10000002384185791,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.20000001788139343
+        ],
+        "edit": [
+          0.19999998807907104,
+          0.10000002384185791,
+          0.09999999403953552,
+          0.19999998807907104,
+          0
+        ],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3287,
+            "combined_js_and_backing_bytes": 112428003
+          },
+          {
+            "label": "group and view",
+            "time": 3290.9000000059605,
+            "combined_js_and_backing_bytes": 112721583
+          },
+          {
+            "label": "warm 0",
+            "time": 3291.2999999821186,
+            "combined_js_and_backing_bytes": 112741491
+          },
+          {
+            "label": "warm 1",
+            "time": 3291.4000000059605,
+            "combined_js_and_backing_bytes": 112767999
+          },
+          {
+            "label": "warm 2",
+            "time": 3291.5,
+            "combined_js_and_backing_bytes": 112786963
+          },
+          {
+            "label": "warm 3",
+            "time": 3291.699999988079,
+            "combined_js_and_backing_bytes": 113231783
+          },
+          {
+            "label": "warm 4",
+            "time": 3291.9000000059605,
+            "combined_js_and_backing_bytes": 112834823
+          },
+          {
+            "label": "warm 5",
+            "time": 3292,
+            "combined_js_and_backing_bytes": 112853423
+          },
+          {
+            "label": "warm 6",
+            "time": 3292.0999999940395,
+            "combined_js_and_backing_bytes": 112873123
+          },
+          {
+            "label": "warm 7",
+            "time": 3292.199999988079,
+            "combined_js_and_backing_bytes": 112905299
+          },
+          {
+            "label": "warm 8",
+            "time": 3292.2999999821186,
+            "combined_js_and_backing_bytes": 112930379
+          },
+          {
+            "label": "warm 9",
+            "time": 3292.5,
+            "combined_js_and_backing_bytes": 112949159
+          },
+          {
+            "label": "edit 0",
+            "time": 3292.699999988079,
+            "combined_js_and_backing_bytes": 112969767
+          },
+          {
+            "label": "edit 1",
+            "time": 3292.9000000059605,
+            "combined_js_and_backing_bytes": 112987343
+          },
+          {
+            "label": "edit 2",
+            "time": 3293.0999999940395,
+            "combined_js_and_backing_bytes": 113004943
+          },
+          {
+            "label": "edit 3",
+            "time": 3293.2999999821186,
+            "combined_js_and_backing_bytes": 113023103
+          },
+          {
+            "label": "edit 4",
+            "time": 3293.2999999821186,
+            "combined_js_and_backing_bytes": 113435547
+          }
+        ],
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 182.30000001192093,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2231.5
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 171.09999999403954,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2406.0999999940395
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json",
+          "duration": 173.80000001192093,
+          "encoded": 4466,
+          "decoded": 15984,
+          "transfer": 4766,
+          "responseEnd": 2582.5999999940395
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-79952b39403518ff934467464c4dd2ec9888b27db07deff2b1d45255bd00ec92.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "scope": "344592:ab-0025",
+      "sample": 0,
+      "before": {
+        "usedSize": 61231104,
+        "totalSize": 62459904,
+        "embedderHeapUsedSize": 2031992,
+        "backingStorageSize": 17827069
+      },
+      "adopted": {
+        "usedSize": 65753172,
+        "totalSize": 70209536,
+        "embedderHeapUsedSize": 1745360,
+        "backingStorageSize": 33596376
+      },
+      "after": {
+        "usedSize": 75275972,
+        "totalSize": 92602368,
+        "embedderHeapUsedSize": 1745360,
+        "backingStorageSize": 33596376
+      },
+      "cold": {
+        "load_ms": 838.5,
+        "create_ms": 1.9000000059604645,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 1971.3999999761581,
+            "combined_js_and_backing_bytes": 79071825
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2498.399999976158,
+            "combined_js_and_backing_bytes": 79272876
+          },
+          {
+            "label": "after digest",
+            "time": 2498.5999999940395,
+            "combined_js_and_backing_bytes": 79273247
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2501.199999988079,
+            "combined_js_and_backing_bytes": 79625974
+          },
+          {
+            "label": "after digest",
+            "time": 2501.5,
+            "combined_js_and_backing_bytes": 79735490
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2519.199999988079,
+            "combined_js_and_backing_bytes": 81153151
+          },
+          {
+            "label": "after digest",
+            "time": 2520.2999999821186,
+            "combined_js_and_backing_bytes": 81161383
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2744.199999988079,
+            "combined_js_and_backing_bytes": 96014665
+          },
+          {
+            "label": "after digest",
+            "time": 2755.5,
+            "combined_js_and_backing_bytes": 96015201
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2787.5,
+            "combined_js_and_backing_bytes": 97170910
+          },
+          {
+            "label": "after digest",
+            "time": 2788.699999988079,
+            "combined_js_and_backing_bytes": 97171738
+          },
+          {
+            "label": "hydrated",
+            "time": 2809.899999976158,
+            "combined_js_and_backing_bytes": 98809966
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2811.899999976158,
+            "combined_js_and_backing_bytes": 99270528
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 336,
+        "group_view_ms": 2,
+        "post_input_compute_ms": 338,
+        "options": 8,
+        "members": 2,
+        "warm": [
+          0.20000001788139343,
+          0.09999999403953552,
+          1.5,
+          0.30000001192092896,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.20000001788139343,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.19999998807907104
+        ],
+        "edit": [
+          0.20000001788139343,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.10000002384185791,
+          0
+        ],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3153.199999988079,
+            "combined_js_and_backing_bytes": 115120064
+          },
+          {
+            "label": "group and view",
+            "time": 3155.2999999821186,
+            "combined_js_and_backing_bytes": 115446704
+          },
+          {
+            "label": "warm 0",
+            "time": 3155.5,
+            "combined_js_and_backing_bytes": 115487056
+          },
+          {
+            "label": "warm 1",
+            "time": 3155.699999988079,
+            "combined_js_and_backing_bytes": 115519964
+          },
+          {
+            "label": "warm 2",
+            "time": 3157.199999988079,
+            "combined_js_and_backing_bytes": 108951912
+          },
+          {
+            "label": "warm 3",
+            "time": 3157.5,
+            "combined_js_and_backing_bytes": 108407952
+          },
+          {
+            "label": "warm 4",
+            "time": 3157.699999988079,
+            "combined_js_and_backing_bytes": 108440696
+          },
+          {
+            "label": "warm 5",
+            "time": 3157.7999999821186,
+            "combined_js_and_backing_bytes": 108482216
+          },
+          {
+            "label": "warm 6",
+            "time": 3158,
+            "combined_js_and_backing_bytes": 108515720
+          },
+          {
+            "label": "warm 7",
+            "time": 3158.0999999940395,
+            "combined_js_and_backing_bytes": 108823480
+          },
+          {
+            "label": "warm 8",
+            "time": 3158.199999988079,
+            "combined_js_and_backing_bytes": 108603132
+          },
+          {
+            "label": "warm 9",
+            "time": 3158.399999976158,
+            "combined_js_and_backing_bytes": 108635968
+          },
+          {
+            "label": "edit 0",
+            "time": 3158.5999999940395,
+            "combined_js_and_backing_bytes": 108669260
+          },
+          {
+            "label": "edit 1",
+            "time": 3158.699999988079,
+            "combined_js_and_backing_bytes": 108703136
+          },
+          {
+            "label": "edit 2",
+            "time": 3158.7999999821186,
+            "combined_js_and_backing_bytes": 108736032
+          },
+          {
+            "label": "edit 3",
+            "time": 3159,
+            "combined_js_and_backing_bytes": 108767692
+          },
+          {
+            "label": "edit 4",
+            "time": 3159,
+            "combined_js_and_backing_bytes": 108798760
+          }
+        ],
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 176.19999998807907,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2148.7999999821186
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 171.30000001192093,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2322.0999999940395
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 172.69999998807907,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2496.7999999821186
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "scope": "344592:ab-0025",
+      "sample": 1,
+      "before": {
+        "usedSize": 61234384,
+        "totalSize": 62459904,
+        "embedderHeapUsedSize": 2125672,
+        "backingStorageSize": 17827069
+      },
+      "adopted": {
+        "usedSize": 66577620,
+        "totalSize": 71782400,
+        "embedderHeapUsedSize": 1833664,
+        "backingStorageSize": 33596376
+      },
+      "after": {
+        "usedSize": 79919272,
+        "totalSize": 93126656,
+        "embedderHeapUsedSize": 1833664,
+        "backingStorageSize": 33596376
+      },
+      "cold": {
+        "load_ms": 843.0999999940395,
+        "create_ms": 1.4000000059604645,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 2009.800000011921,
+            "combined_js_and_backing_bytes": 79075105
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2538.5999999940395,
+            "combined_js_and_backing_bytes": 79276156
+          },
+          {
+            "label": "after digest",
+            "time": 2538.800000011921,
+            "combined_js_and_backing_bytes": 79276527
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2540.7000000178814,
+            "combined_js_and_backing_bytes": 79637870
+          },
+          {
+            "label": "after digest",
+            "time": 2540.800000011921,
+            "combined_js_and_backing_bytes": 79638394
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2555.5999999940395,
+            "combined_js_and_backing_bytes": 81184291
+          },
+          {
+            "label": "after digest",
+            "time": 2556.4000000059605,
+            "combined_js_and_backing_bytes": 81184715
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2796.0999999940395,
+            "combined_js_and_backing_bytes": 96809141
+          },
+          {
+            "label": "after digest",
+            "time": 2809.7000000178814,
+            "combined_js_and_backing_bytes": 96809677
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2834,
+            "combined_js_and_backing_bytes": 97971154
+          },
+          {
+            "label": "after digest",
+            "time": 2835.7000000178814,
+            "combined_js_and_backing_bytes": 97971982
+          },
+          {
+            "label": "hydrated",
+            "time": 2853,
+            "combined_js_and_backing_bytes": 99632650
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2854.4000000059605,
+            "combined_js_and_backing_bytes": 100094964
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 372.5,
+        "group_view_ms": 1.9000000059604645,
+        "post_input_compute_ms": 374.40000000596046,
+        "options": 8,
+        "members": 2,
+        "warm": [
+          0.30000001192092896,
+          0.09999999403953552,
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0.20000001788139343,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "edit": [
+          0.20000001788139343,
+          0.09999999403953552,
+          0.19999998807907104,
+          0.09999999403953552,
+          0
+        ],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3230.300000011921,
+            "combined_js_and_backing_bytes": 112578588
+          },
+          {
+            "label": "group and view",
+            "time": 3232.300000011921,
+            "combined_js_and_backing_bytes": 112905260
+          },
+          {
+            "label": "warm 0",
+            "time": 3232.800000011921,
+            "combined_js_and_backing_bytes": 112945612
+          },
+          {
+            "label": "warm 1",
+            "time": 3232.9000000059605,
+            "combined_js_and_backing_bytes": 112978520
+          },
+          {
+            "label": "warm 2",
+            "time": 3233.0999999940395,
+            "combined_js_and_backing_bytes": 113018532
+          },
+          {
+            "label": "warm 3",
+            "time": 3233.300000011921,
+            "combined_js_and_backing_bytes": 113058868
+          },
+          {
+            "label": "warm 4",
+            "time": 3233.4000000059605,
+            "combined_js_and_backing_bytes": 113092856
+          },
+          {
+            "label": "warm 5",
+            "time": 3233.5,
+            "combined_js_and_backing_bytes": 113125536
+          },
+          {
+            "label": "warm 6",
+            "time": 3233.5999999940395,
+            "combined_js_and_backing_bytes": 113159060
+          },
+          {
+            "label": "warm 7",
+            "time": 3233.800000011921,
+            "combined_js_and_backing_bytes": 113207348
+          },
+          {
+            "label": "warm 8",
+            "time": 3233.9000000059605,
+            "combined_js_and_backing_bytes": 113246484
+          },
+          {
+            "label": "warm 9",
+            "time": 3234,
+            "combined_js_and_backing_bytes": 113279296
+          },
+          {
+            "label": "edit 0",
+            "time": 3234.2000000178814,
+            "combined_js_and_backing_bytes": 113317348
+          },
+          {
+            "label": "edit 1",
+            "time": 3234.300000011921,
+            "combined_js_and_backing_bytes": 113348356
+          },
+          {
+            "label": "edit 2",
+            "time": 3234.5,
+            "combined_js_and_backing_bytes": 113379364
+          },
+          {
+            "label": "edit 3",
+            "time": 3234.5999999940395,
+            "combined_js_and_backing_bytes": 113411048
+          },
+          {
+            "label": "edit 4",
+            "time": 3234.5999999940395,
+            "combined_js_and_backing_bytes": 113442084
+          }
+        ],
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 173,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2183.9000000059605
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 172.80000001192093,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2359.2000000178814
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 174.80000001192093,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2536.800000011921
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "scope": "344592:ab-0025",
+      "sample": 2,
+      "before": {
+        "usedSize": 61233036,
+        "totalSize": 64294912,
+        "embedderHeapUsedSize": 2125328,
+        "backingStorageSize": 17829472
+      },
+      "adopted": {
+        "usedSize": 66339408,
+        "totalSize": 72044544,
+        "embedderHeapUsedSize": 1831568,
+        "backingStorageSize": 33598779
+      },
+      "after": {
+        "usedSize": 78410672,
+        "totalSize": 92602368,
+        "embedderHeapUsedSize": 1831568,
+        "backingStorageSize": 33598779
+      },
+      "cold": {
+        "load_ms": 926.7000000178814,
+        "create_ms": 2.0999999940395355,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 2063.199999988079,
+            "combined_js_and_backing_bytes": 79076160
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2598.0999999940395,
+            "combined_js_and_backing_bytes": 79277211
+          },
+          {
+            "label": "after digest",
+            "time": 2598.199999988079,
+            "combined_js_and_backing_bytes": 79277582
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2600.7999999821186,
+            "combined_js_and_backing_bytes": 79638925
+          },
+          {
+            "label": "after digest",
+            "time": 2601,
+            "combined_js_and_backing_bytes": 79639437
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2617.7999999821186,
+            "combined_js_and_backing_bytes": 81204806
+          },
+          {
+            "label": "after digest",
+            "time": 2618.7999999821186,
+            "combined_js_and_backing_bytes": 81205230
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2925.199999988079,
+            "combined_js_and_backing_bytes": 96734712
+          },
+          {
+            "label": "after digest",
+            "time": 2935.2999999821186,
+            "combined_js_and_backing_bytes": 96735248
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2963.5999999940395,
+            "combined_js_and_backing_bytes": 97890577
+          },
+          {
+            "label": "after digest",
+            "time": 2965.399999976158,
+            "combined_js_and_backing_bytes": 97891405
+          },
+          {
+            "label": "hydrated",
+            "time": 2990,
+            "combined_js_and_backing_bytes": 99402073
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2992,
+            "combined_js_and_backing_bytes": 99859027
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 421.30000001192093,
+        "group_view_ms": 1.699999988079071,
+        "post_input_compute_ms": 423,
+        "options": 8,
+        "members": 2,
+        "warm": [
+          0.09999999403953552,
+          0.10000002384185791,
+          0.09999999403953552,
+          0.30000001192092896,
+          0.19999998807907104,
+          0.19999998807907104,
+          0.09999999403953552,
+          0,
+          0.30000001192092896,
+          0.19999998807907104
+        ],
+        "edit": [
+          0.20000001788139343,
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3418.399999976158,
+            "combined_js_and_backing_bytes": 111068423
+          },
+          {
+            "label": "group and view",
+            "time": 3420.199999988079,
+            "combined_js_and_backing_bytes": 111395047
+          },
+          {
+            "label": "warm 0",
+            "time": 3420.399999976158,
+            "combined_js_and_backing_bytes": 111437491
+          },
+          {
+            "label": "warm 1",
+            "time": 3420.5,
+            "combined_js_and_backing_bytes": 111470399
+          },
+          {
+            "label": "warm 2",
+            "time": 3420.5999999940395,
+            "combined_js_and_backing_bytes": 111691995
+          },
+          {
+            "label": "warm 3",
+            "time": 3421,
+            "combined_js_and_backing_bytes": 111552659
+          },
+          {
+            "label": "warm 4",
+            "time": 3421.199999988079,
+            "combined_js_and_backing_bytes": 111586635
+          },
+          {
+            "label": "warm 5",
+            "time": 3421.399999976158,
+            "combined_js_and_backing_bytes": 111619315
+          },
+          {
+            "label": "warm 6",
+            "time": 3421.5999999940395,
+            "combined_js_and_backing_bytes": 111652839
+          },
+          {
+            "label": "warm 7",
+            "time": 3421.699999988079,
+            "combined_js_and_backing_bytes": 111700519
+          },
+          {
+            "label": "warm 8",
+            "time": 3422,
+            "combined_js_and_backing_bytes": 111740263
+          },
+          {
+            "label": "warm 9",
+            "time": 3422.199999988079,
+            "combined_js_and_backing_bytes": 111773087
+          },
+          {
+            "label": "edit 0",
+            "time": 3422.5,
+            "combined_js_and_backing_bytes": 111811135
+          },
+          {
+            "label": "edit 1",
+            "time": 3422.699999988079,
+            "combined_js_and_backing_bytes": 111842143
+          },
+          {
+            "label": "edit 2",
+            "time": 3422.7999999821186,
+            "combined_js_and_backing_bytes": 111873151
+          },
+          {
+            "label": "edit 3",
+            "time": 3422.899999976158,
+            "combined_js_and_backing_bytes": 111904835
+          },
+          {
+            "label": "edit 4",
+            "time": 3423.0999999940395,
+            "combined_js_and_backing_bytes": 111935859
+          }
+        ],
+        "statistics": {
+          "actions": 16,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 184.5,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2249.199999988079
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 171.80000001192093,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2423
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 170.5,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2596.0999999940395
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "scope": "359696",
+      "sample": 0,
+      "before": {
+        "usedSize": 61232968,
+        "totalSize": 62459904,
+        "embedderHeapUsedSize": 2121800,
+        "backingStorageSize": 17827069
+      },
+      "adopted": {
+        "usedSize": 64276632,
+        "totalSize": 69545984,
+        "embedderHeapUsedSize": 1829568,
+        "backingStorageSize": 33596376
+      },
+      "after": {
+        "usedSize": 96717200,
+        "totalSize": 120807424,
+        "embedderHeapUsedSize": 1829568,
+        "backingStorageSize": 33596376
+      },
+      "cold": {
+        "load_ms": 878.8000000119209,
+        "create_ms": 4,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 2087.0999999940395,
+            "combined_js_and_backing_bytes": 79073689
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2630.5999999940395,
+            "combined_js_and_backing_bytes": 79274740
+          },
+          {
+            "label": "after digest",
+            "time": 2630.7999999821186,
+            "combined_js_and_backing_bytes": 79275111
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2632.5999999940395,
+            "combined_js_and_backing_bytes": 79636334
+          },
+          {
+            "label": "after digest",
+            "time": 2632.699999988079,
+            "combined_js_and_backing_bytes": 79636858
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2648.199999988079,
+            "combined_js_and_backing_bytes": 81168387
+          },
+          {
+            "label": "after digest",
+            "time": 2649.0999999940395,
+            "combined_js_and_backing_bytes": 81168811
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2888.199999988079,
+            "combined_js_and_backing_bytes": 94423173
+          },
+          {
+            "label": "after digest",
+            "time": 2899.5,
+            "combined_js_and_backing_bytes": 94423709
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2928.5999999940395,
+            "combined_js_and_backing_bytes": 95605426
+          },
+          {
+            "label": "after digest",
+            "time": 2929.7999999821186,
+            "combined_js_and_backing_bytes": 95606254
+          },
+          {
+            "label": "hydrated",
+            "time": 2966,
+            "combined_js_and_backing_bytes": 98631178
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2969.7999999821186,
+            "combined_js_and_backing_bytes": 99093108
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 709.7000000178814,
+        "group_view_ms": 0.699999988079071,
+        "post_input_compute_ms": 710.4000000059605,
+        "options": 0,
+        "members": 0,
+        "warm": [
+          0.30000001192092896,
+          0.19999998807907104,
+          0.20000001788139343,
+          0.19999998807907104,
+          0,
+          0.20000001788139343,
+          0,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "edit": [],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3686,
+            "combined_js_and_backing_bytes": 130104620
+          },
+          {
+            "label": "group and view",
+            "time": 3686.7999999821186,
+            "combined_js_and_backing_bytes": 130137300
+          },
+          {
+            "label": "warm 0",
+            "time": 3687.199999988079,
+            "combined_js_and_backing_bytes": 130146200
+          },
+          {
+            "label": "warm 1",
+            "time": 3687.399999976158,
+            "combined_js_and_backing_bytes": 130153824
+          },
+          {
+            "label": "warm 2",
+            "time": 3687.5999999940395,
+            "combined_js_and_backing_bytes": 130162168
+          },
+          {
+            "label": "warm 3",
+            "time": 3687.7999999821186,
+            "combined_js_and_backing_bytes": 130185052
+          },
+          {
+            "label": "warm 4",
+            "time": 3687.7999999821186,
+            "combined_js_and_backing_bytes": 130192880
+          },
+          {
+            "label": "warm 5",
+            "time": 3688,
+            "combined_js_and_backing_bytes": 130200060
+          },
+          {
+            "label": "warm 6",
+            "time": 3688,
+            "combined_js_and_backing_bytes": 130207328
+          },
+          {
+            "label": "warm 7",
+            "time": 3688.0999999940395,
+            "combined_js_and_backing_bytes": 130547200
+          },
+          {
+            "label": "warm 8",
+            "time": 3688.199999988079,
+            "combined_js_and_backing_bytes": 130245520
+          },
+          {
+            "label": "warm 9",
+            "time": 3688.2999999821186,
+            "combined_js_and_backing_bytes": 130252880
+          }
+        ],
+        "statistics": {
+          "actions": 11,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 177.5,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2266
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 186,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2454.2999999821186
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 172.5,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2629.2999999821186
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "scope": "359696",
+      "sample": 1,
+      "before": {
+        "usedSize": 61225488,
+        "totalSize": 62722048,
+        "embedderHeapUsedSize": 2135824,
+        "backingStorageSize": 17827069
+      },
+      "adopted": {
+        "usedSize": 64592528,
+        "totalSize": 69812224,
+        "embedderHeapUsedSize": 1852328,
+        "backingStorageSize": 33596376
+      },
+      "after": {
+        "usedSize": 98345248,
+        "totalSize": 120516608,
+        "embedderHeapUsedSize": 1852328,
+        "backingStorageSize": 33596376
+      },
+      "cold": {
+        "load_ms": 857.9000000059605,
+        "create_ms": 2,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 1938.7000000178814,
+            "combined_js_and_backing_bytes": 79066209
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2474.800000011921,
+            "combined_js_and_backing_bytes": 79267260
+          },
+          {
+            "label": "after digest",
+            "time": 2474.9000000059605,
+            "combined_js_and_backing_bytes": 79267631
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2476.600000023842,
+            "combined_js_and_backing_bytes": 79628974
+          },
+          {
+            "label": "after digest",
+            "time": 2476.800000011921,
+            "combined_js_and_backing_bytes": 79629498
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2494.7000000178814,
+            "combined_js_and_backing_bytes": 81167479
+          },
+          {
+            "label": "after digest",
+            "time": 2495.600000023842,
+            "combined_js_and_backing_bytes": 81167903
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2740.100000023842,
+            "combined_js_and_backing_bytes": 94756277
+          },
+          {
+            "label": "after digest",
+            "time": 2750.9000000059605,
+            "combined_js_and_backing_bytes": 94756813
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2776.600000023842,
+            "combined_js_and_backing_bytes": 95912838
+          },
+          {
+            "label": "after digest",
+            "time": 2778,
+            "combined_js_and_backing_bytes": 95913654
+          },
+          {
+            "label": "hydrated",
+            "time": 2796.7000000178814,
+            "combined_js_and_backing_bytes": 99345674
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2798.600000023842,
+            "combined_js_and_backing_bytes": 98109872
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 668.8000000119209,
+        "group_view_ms": 0.5999999940395355,
+        "post_input_compute_ms": 669.4000000059605,
+        "options": 0,
+        "members": 0,
+        "warm": [
+          0.4000000059604645,
+          0,
+          0.19999998807907104,
+          0.09999999403953552,
+          0.09999999403953552,
+          0,
+          0,
+          0,
+          0.09999999403953552,
+          0.10000002384185791
+        ],
+        "edit": [],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3473,
+            "combined_js_and_backing_bytes": 131732988
+          },
+          {
+            "label": "group and view",
+            "time": 3473.7000000178814,
+            "combined_js_and_backing_bytes": 131765336
+          },
+          {
+            "label": "warm 0",
+            "time": 3474.2000000178814,
+            "combined_js_and_backing_bytes": 131774248
+          },
+          {
+            "label": "warm 1",
+            "time": 3474.2000000178814,
+            "combined_js_and_backing_bytes": 131781872
+          },
+          {
+            "label": "warm 2",
+            "time": 3474.4000000059605,
+            "combined_js_and_backing_bytes": 131790216
+          },
+          {
+            "label": "warm 3",
+            "time": 3474.600000023842,
+            "combined_js_and_backing_bytes": 131813100
+          },
+          {
+            "label": "warm 4",
+            "time": 3474.7000000178814,
+            "combined_js_and_backing_bytes": 131820928
+          },
+          {
+            "label": "warm 5",
+            "time": 3474.7000000178814,
+            "combined_js_and_backing_bytes": 131828132
+          },
+          {
+            "label": "warm 6",
+            "time": 3474.800000011921,
+            "combined_js_and_backing_bytes": 131835448
+          },
+          {
+            "label": "warm 7",
+            "time": 3474.800000011921,
+            "combined_js_and_backing_bytes": 131844372
+          },
+          {
+            "label": "warm 8",
+            "time": 3475,
+            "combined_js_and_backing_bytes": 131873628
+          },
+          {
+            "label": "warm 9",
+            "time": 3475.100000023842,
+            "combined_js_and_backing_bytes": 131880976
+          }
+        ],
+        "statistics": {
+          "actions": 11,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 185.30000001192093,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2125.100000023842
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 171.69999998807907,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2299.5
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 172,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2473.300000011921
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json"
+        }
+      ]
+    },
+    {
+      "cohort": "rollout150",
+      "scope": "359696",
+      "sample": 2,
+      "before": {
+        "usedSize": 61244340,
+        "totalSize": 62722048,
+        "embedderHeapUsedSize": 2122024,
+        "backingStorageSize": 17827069
+      },
+      "adopted": {
+        "usedSize": 67372508,
+        "totalSize": 72695808,
+        "embedderHeapUsedSize": 1815952,
+        "backingStorageSize": 33562373
+      },
+      "after": {
+        "usedSize": 86496080,
+        "totalSize": 121565184,
+        "embedderHeapUsedSize": 1815952,
+        "backingStorageSize": 33562373
+      },
+      "cold": {
+        "load_ms": 877.3999999761581,
+        "create_ms": 2,
+        "points": [
+          {
+            "label": "resident inputs",
+            "time": 2065.5999999940395,
+            "combined_js_and_backing_bytes": 79085061
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2593.0999999940395,
+            "combined_js_and_backing_bytes": 79286116
+          },
+          {
+            "label": "after digest",
+            "time": 2593.300000011921,
+            "combined_js_and_backing_bytes": 79286487
+          },
+          {
+            "label": "before digest 34003",
+            "time": 2594.9000000059605,
+            "combined_js_and_backing_bytes": 79647678
+          },
+          {
+            "label": "after digest",
+            "time": 2595,
+            "combined_js_and_backing_bytes": 79648190
+          },
+          {
+            "label": "before digest 818773",
+            "time": 2612.9000000059605,
+            "combined_js_and_backing_bytes": 81123839
+          },
+          {
+            "label": "after digest",
+            "time": 2614,
+            "combined_js_and_backing_bytes": 81124251
+          },
+          {
+            "label": "before digest 14303807",
+            "time": 2873.800000011921,
+            "combined_js_and_backing_bytes": 95868686
+          },
+          {
+            "label": "after digest",
+            "time": 2885.300000011921,
+            "combined_js_and_backing_bytes": 95869222
+          },
+          {
+            "label": "before digest 1375349",
+            "time": 2915,
+            "combined_js_and_backing_bytes": 97054671
+          },
+          {
+            "label": "after digest",
+            "time": 2916.199999988079,
+            "combined_js_and_backing_bytes": 97055499
+          },
+          {
+            "label": "hydrated",
+            "time": 2943.199999988079,
+            "combined_js_and_backing_bytes": 100397407
+          },
+          {
+            "label": "profiles normalized",
+            "time": 2945.0999999940395,
+            "combined_js_and_backing_bytes": 100855841
+          }
+        ],
+        "statistics": {
+          "actions": 0,
+          "fits": 0,
+          "optimizations": 0,
+          "cachedScopes": 0
+        }
+      },
+      "timing": {
+        "fit_ms": 700.5,
+        "group_view_ms": 0.800000011920929,
+        "post_input_compute_ms": 701.3000000119209,
+        "options": 0,
+        "members": 0,
+        "warm": [
+          0.4000000059604645,
+          0.19999998807907104,
+          0.30000001192092896,
+          0.30000001192092896,
+          0,
+          0.09999999403953552,
+          0.09999999403953552,
+          0.20000001788139343,
+          0.09999999403953552,
+          0.09999999403953552
+        ],
+        "edit": [],
+        "points": [
+          {
+            "label": "first full-directory fit",
+            "time": 3650.5,
+            "combined_js_and_backing_bytes": 133706289
+          },
+          {
+            "label": "group and view",
+            "time": 3651.4000000059605,
+            "combined_js_and_backing_bytes": 133739209
+          },
+          {
+            "label": "warm 0",
+            "time": 3651.800000011921,
+            "combined_js_and_backing_bytes": 133748109
+          },
+          {
+            "label": "warm 1",
+            "time": 3652.199999988079,
+            "combined_js_and_backing_bytes": 133755721
+          },
+          {
+            "label": "warm 2",
+            "time": 3652.5,
+            "combined_js_and_backing_bytes": 134074745
+          },
+          {
+            "label": "warm 3",
+            "time": 3652.800000011921,
+            "combined_js_and_backing_bytes": 133786949
+          },
+          {
+            "label": "warm 4",
+            "time": 3652.800000011921,
+            "combined_js_and_backing_bytes": 133794777
+          },
+          {
+            "label": "warm 5",
+            "time": 3652.9000000059605,
+            "combined_js_and_backing_bytes": 133801997
+          },
+          {
+            "label": "warm 6",
+            "time": 3653.0999999940395,
+            "combined_js_and_backing_bytes": 133809301
+          },
+          {
+            "label": "warm 7",
+            "time": 3653.300000011921,
+            "combined_js_and_backing_bytes": 133833313
+          },
+          {
+            "label": "warm 8",
+            "time": 3653.4000000059605,
+            "combined_js_and_backing_bytes": 133847505
+          },
+          {
+            "label": "warm 9",
+            "time": 3653.5,
+            "combined_js_and_backing_bytes": 133854865
+          }
+        ],
+        "statistics": {
+          "actions": 11,
+          "fits": 155,
+          "optimizations": 1,
+          "cachedScopes": 1
+        }
+      },
+      "resources": [
+        {
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+          "duration": 175.09999999403954,
+          "encoded": 9235,
+          "decoded": 32695,
+          "transfer": 9535,
+          "responseEnd": 2242.199999988079
+        },
+        {
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa",
+          "duration": 172,
+          "encoded": 7271,
+          "decoded": 22883,
+          "transfer": 7571,
+          "responseEnd": 2416.199999988079
+        },
+        {
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json",
+          "duration": 172.7000000178814,
+          "encoded": 7790,
+          "decoded": 34003,
+          "transfer": 8090,
+          "responseEnd": 2591.4000000059605
+        }
+      ],
+      "network": [
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/match_explorer.html?gate4-e2e=1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/brand.css?v=20260812"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.css?v=1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.css?v=c3d13add4fb97ddf8975587851600c5dc8a249f64a02c336d57d71f91513e35c"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.css?v=93fa94bd0489f4649cb2244b247cf054f1a2ce7ad512ff8a28fd74684045b031"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.css?v=16f22a918ec9f84db254fa654a7c7ddaab14e540c23f9953fc743ecb27871da7"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-shell.js?v=cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app-config.js?v=app-1.3.0-updated-20260905"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-v2-config.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/catalog-metadata.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/fonts/InterVariable.woff2?v=4.1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/catalog-loader.js?v=lazy-catalog-ownership-20260826"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/orcid.js?v=orcid-format-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile.js?v=ai-boundaries-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/profile-ranking.js?v=relevance-2026-08-15-v6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/nofo.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/review.js?v=filters-2026-08-13"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/credentials.js?v=chat-output-fixes-20260830"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-gateway-config.js?v=hosted-ai-20260831"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/ai-provider.js?v=6017ca57df6bcb29e04ad36c6cfc0deccdeac28475179c8d17a22575d2bea666"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/chat-ui.js?v=4e0b01a8ef2164ab6eef1dee7a98cb20d1cc3d5a96d9868f902aa864a0805b46"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/result-workflow.js?v=ai-feedback-20260901"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/award-links.js?v=dod-awards-20260903"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts-config.js?v=phase3-alerts"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/alerts.js?v=075f44be701bf9e075c8306973d7362e6a54ee6b8e2899990bfacdbd46e56339"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/submission-schedule.js?v=2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/saved.js?v=87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-query.js?v=f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-retrieval.js?v=f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/subtopic-runtime.js?v=app-1.3.0-sidecar-timeout2"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/search-hybrid.js?v=app-1.3.0-explanation1"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/match-explain.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/researcher_directory.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunity_team_index.js?v=54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team.js?v=55355afccdec8a25abfa114d281b90c4477e6a7b0c30735a12e416aa1c5718d5"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/opportunity-team-panel.js?v=f1b52a6c10ddac129a605ce79703da4989346fbd453357987f17c90f44f4581b"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-help.js?v=98ceee890732504753be3b35300a211e3264a4f5e0b65163f2f2ab5a4783fe07"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/site-nav.js?v=6ef9006bb5b373706b7b12703ff8069963ec2f5c05473e055eb60ada62eb2614"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/app.js?v=a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/assets/analytics.js?v=app-1.3.0"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/opportunities.js?v=catalog-20260909T140245727163Z"
+        },
+        {
+          "phase": "startup",
+          "url": "http://127.0.0.1:8771/data/subtopics.js?v=2026-09-09T13%3A58%3A17.257546Z"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/team-matcher.js?v=6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/assets/shared-team-engine.js?v=8baaadabe1993b79abe6ef814e785f3b05f670bd7cf34bf5e9ca1f10ac6ca8fa"
+        },
+        {
+          "phase": "prepared",
+          "url": "http://127.0.0.1:8771/data/team_ingredients/shared-54d49ccd8e5f62117d1d7251fd74bbd95443b4778c691990523aa2706a0bf6f6.json"
+        }
+      ]
+    }
+  ]
+}

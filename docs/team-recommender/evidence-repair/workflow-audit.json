@@ -1,0 +1,35 @@
+{
+  "repository": "mporosoff/grants-scraper",
+  "PR": 225,
+  "target": "codex/post-audit-review-base",
+  "production_mutations": 0,
+  "workflow_mutations": 0,
+  "push_route": "codex/on-demand-team-recommender only",
+  "findings": [
+    "Tests runs on pull_request; read-only permission; no automatic E2E.",
+    "Refresh and deploy workflows require main pushes or explicit dispatch; none is dispatched.",
+    "Registry publication requires repository_dispatch/manual; Pages is workflow_call.",
+    "Paid executor is manual protected-main-only; no dispatch or ledger mutation occurs.",
+    "PR review base is isolated; experiment is not merged."
+  ],
+  "workflows": {
+    ".github/workflows/deploy-ai-gateway.yml": "194b821e39d48c2769024674f526be53c99738f0992b2f4239886043f84d8075",
+    ".github/workflows/deploy-alerts.yml": "f6c3375190db6cbcfecac3aea07cc8071968d06d575961a730c01be15b8851ed",
+    ".github/workflows/deploy-award-api.yml": "88899d6ceacb31f5ae8b877de9290d4e73f6ce8dce22f02e23de0637791368c3",
+    ".github/workflows/deploy-researcher-intake.yml": "d6d76ad6f3180a5ca0068ddf799cef317d1d9d321fadb8702e3e71698388d7c8",
+    ".github/workflows/e2e-manual.yml": "aa7ebae658fca6c4916ba2c3ce07c93b39ede33814b9630bcdb1fb4764838994",
+    ".github/workflows/offline-ai-evaluation.yml": "33dbaa77a094e766cd76c19f7e6ec31b0707d8feb09b7f254e128bde97821639",
+    ".github/workflows/pages.yml": "7ad34faa15f25b5f0b0fa946a8f3ee14a01208b115d5007c59ee43184043bee3",
+    ".github/workflows/publish-researcher-registry.yml": "b402b50f32bf634a3361d5d6ff3ad1e1cc408dca9118d21f2382a58f7dff9203",
+    ".github/workflows/refresh-opportunities.yml": "55442d2cdd8b06ca0f2922642b9ff8c05c342caabe4fd26a37b35688c5811648",
+    ".github/workflows/team-recommender-offline.yml": "68baa47e046d0decf1d689c7c6a270ddca91160dde8c923b877926f2ac7a3aa7",
+    ".github/workflows/tests.yml": "eda72903f0a5590043e9521f6d7f516b3f3eba63d76fda57ed773920944222e6"
+  },
+  "review_before_update": {
+    "head": "67a34ef1706fbd72698e2cfcf4351a81fc0b2f28",
+    "terminal_comment": 5636888973,
+    "CI": 34616881475,
+    "open_new_review": false
+  },
+  "main_read": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1"
+}
