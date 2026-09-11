@@ -1,0 +1,14 @@
+{
+  "starting_main": "0611be2d1f29ab56ef71a9b13d98c57bd41176d1",
+  "ending_observed_main": "8ab2d205159ec3a997bd00888ea2220caf454abe",
+  "independent_main_merge": 227,
+  "main_commit_time": "2026-09-11T18:36:07Z",
+  "incorporated_into_experiment": false,
+  "reviewed_experiment_head": "517736dddd11591b47650c0341ca54152588c0c3",
+  "local_documentation_closeout": "a6e54b88a461388941ff8fb49e58b7791fc19130",
+  "additional_receipt_commit": "Documentation-only commit containing this observation; no runtime or package changes",
+  "experimental_PR_state": "OPEN; not merged",
+  "validation_server": "Stopped after local checks",
+  "tracked_worktree_clean_before_this_receipt": true,
+  "private_outputs_preserved": true
+}

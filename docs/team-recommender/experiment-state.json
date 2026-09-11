@@ -7858,7 +7858,8 @@
     "completed": true,
     "independent_review_pending": false,
     "reviewed_head": "517736dddd11591b47650c0341ca54152588c0c3",
-    "review_receipt": "docs/team-recommender/evidence-repair/review-closeout-v1.json"
+    "review_receipt": "docs/team-recommender/evidence-repair/review-closeout-v1.json",
+    "ending_repository_receipt": "docs/team-recommender/evidence-repair/ending-repository-receipt-v1.json"
   },
   "historical_pre_evidence_repair_checkpoint": {
     "authority": {
