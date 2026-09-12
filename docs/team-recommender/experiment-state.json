@@ -136,7 +136,7 @@
     "all_member_Team_Match_workflow": "FAIL: 90-second timeout twice; not waived",
     "peak_browser_memory": "Continuous peak NOT MEASURED; sampled failures sufficient to fail limit"
   },
-  "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA",
+  "containing_commit": "Resolve local HEAD for this contextual Stage B blocked checkpoint; reviewed historical heads do not validate these new files.",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -6742,9 +6742,9 @@
     "post_audit_returned": 0,
     "post_audit_applicability": "No returned human observations for corrected profiles/groups. Forty historical requests remain accounted for; no replacement packet."
   },
-  "model": "Existing shared Team Match numerical fit; no model used by corrected runtime",
+  "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
   "next_allowed_stage": null,
-  "next_stage_requires": "STOP FOR USER REVIEW. Remaining full-parent allocation/post-input resource barrier and inadequate/unknown scientific usefulness require owner disposition. No automatic tuning, paid confirmation, extra human items, Stage4 or deployment.",
+  "next_stage_requires": "Resolve the same task preflight within existing authority; no new allowance is requested. Hosted implementation and finite real validation remain outstanding.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "release_packages": {
@@ -6948,7 +6948,7 @@
       "production_publications": 0
     }
   },
-  "proposed_next_stage": "No automatic execution. Only an owner-approved release decision can authorize Stage 4; no candidate retuning or new scientific campaign.",
+  "proposed_next_stage": "No Stage 4 or public activation. Contextual Stage B is authorized but incomplete.",
   "ranking_revision_D2": {
     "MMR": false,
     "cloud_owner_run": 34510982749,
@@ -7034,8 +7034,8 @@
     "path": "docs/team-recommender/stage3-receipt-index.json",
     "sha256": "80132ec2291e55a8ff2e7c2c605e770add2b790267b89442a12b3eec3a1348cf"
   },
-  "recommendation": "Disposition 2: DO NOT RELEASE; additional heap exceeds 48 MiB. Scientific usefulness/coverage also fail and require an explicit owner decision; no automatic tuning or deployment.",
-  "recommended_next_stage": "Owner decision: explicitly accept the documented exploratory-release quality/coverage/audit limitations in separate Stage 4 authority, or do not release.",
+  "recommendation": "BLOCKED BY A NAMED PREREQUISITE: complete safe packet/reservation envelope within the existing $3/40 task limits. No release.",
+  "recommended_next_stage": "Owner review of the precise pre-dispatch limitation and partial implementation.",
   "report": {
     "path": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md",
     "sha256": "5d99d7475c76b8bca746f6b37306061fc37995253c49b03a5fa60ca4ee6a6c50"
@@ -7376,8 +7376,8 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "post-audit-corrective-revalidation-complete-DO-NOT-RELEASE-scientific-and-memory-fail",
-  "stop": "STOP FOR USER REVIEW. No deployment, Stage 4, new provider allowance, human-review request or automatic model/tuning campaign.",
+  "stage_status": "contextual-stage-b-BLOCKED-pre-dispatch-budget-envelope",
+  "stop": "STOP FOR USER REVIEW. No paid dispatch, push, merge, deployment or new human packet occurred.",
   "unresolved": [
     "Additional heap ceiling FAIL: observed increase 68.94-80.04 MiB before GC; retained 10.82-19.34 MiB does not establish peak compliance",
     "Scientific top-five/member/group targets failed; sampled explanation unsupported",
@@ -7387,7 +7387,7 @@
     "Physical mobile and peak memory unmeasured; historical rollback preserves old Funded Awards import omission",
     "Unrelated unpublished main stylesheet change must be preserved in any future integration"
   ],
-  "updated_at": "2026-09-11",
+  "updated_at": "2026-09-12",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -7910,5 +7910,56 @@
       }
     },
     "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
-  }
+  },
+  "contextual_stage_b": {
+    "status": "blocked_before_metered_dispatch",
+    "authority": "docs/team-recommender/contextual-stage-b/AUTHORITY.md",
+    "product_start": "1018d6faac2f08a6a2e828c0b72612437114d9bc",
+    "analytical_start": "58a59143ef5446b05223f52982a547903f53e24d",
+    "protected_main_start": "fd37d5983405a04e650cb9d0a12aa34098ca2a76",
+    "budget": {
+      "authorization_id": "on-demand-team-offline-v2-20260909",
+      "run_id": 34606280661,
+      "artifact_id": 10266946843,
+      "checkpoint_sha256": "c6e59fe149baf5792e36be37d601fb87ab1763eafc50253b68ad861b99e4be9b",
+      "ledger_sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+      "files_verified": 1243,
+      "charged_microusd": 4290655,
+      "attempts": 629,
+      "outstanding": 0,
+      "new_task_limit_microusd": 3000000,
+      "new_task_attempt_limit": 40,
+      "new_paid_requests": 0,
+      "local_copy_read_only": true
+    },
+    "public_activation": false,
+    "new_human_items": 0,
+    "numerical_task_B_and_D_G": "remain stopped",
+    "paid_execution_owner": "existing protected-main workflow and authoritative ledger; no independent hosted allowance",
+    "previous_top_level_status": {
+      "stage_status": "post-audit-corrective-revalidation-complete-DO-NOT-RELEASE-scientific-and-memory-fail",
+      "model": "Existing shared Team Match numerical fit; no model used by corrected runtime",
+      "next_stage_requires": "STOP FOR USER REVIEW. Remaining full-parent allocation/post-input resource barrier and inadequate/unknown scientific usefulness require owner disposition. No automatic tuning, paid confirmation, extra human items, Stage4 or deployment.",
+      "proposed_next_stage": "No automatic execution. Only an owner-approved release decision can authorize Stage 4; no candidate retuning or new scientific campaign.",
+      "recommendation": "Disposition 2: DO NOT RELEASE; additional heap exceeds 48 MiB. Scientific usefulness/coverage also fail and require an explicit owner decision; no automatic tuning or deployment.",
+      "recommended_next_stage": "Owner decision: explicitly accept the documented exploratory-release quality/coverage/audit limitations in separate Stage 4 authority, or do not release.",
+      "stop": "STOP FOR USER REVIEW. No deployment, Stage 4, new provider allowance, human-review request or automatic model/tuning campaign.",
+      "updated_at": "2026-09-11",
+      "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA"
+    },
+    "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
+    "blocker": "Complete conservative reservation envelope does not fit the authorized $3 task cap; no metered dispatch.",
+    "input_lock": "docs/team-recommender/contextual-stage-b/input-lock-v1.json",
+    "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+    "budget_preflight": "docs/team-recommender/contextual-stage-b/preflight-budget-v1.json",
+    "work_packages": {
+      "1": "partial: audited inputs and local contracts/composer; hosted service unimplemented",
+      "2": "not executed: no real demand/cache/extension integration",
+      "3": "not executed: no final contextual browser or semantic validation"
+    },
+    "new_provider_calls": 0,
+    "new_cost_microusd": 0,
+    "review": "No new PR or independent review requested; local prototype only."
+  },
+  "active_work": "contextual-stage-b-demand-implementation"
 }

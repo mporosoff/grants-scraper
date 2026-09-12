@@ -1,0 +1,15 @@
+{
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "run_id": 34606280661,
+  "artifact_id": 10266946843,
+  "checkpoint_sha256": "c6e59fe149baf5792e36be37d601fb87ab1763eafc50253b68ad861b99e4be9b",
+  "ledger_sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+  "files_verified": 1243,
+  "charged_microusd": 4290655,
+  "attempts": 629,
+  "outstanding": 0,
+  "new_task_limit_microusd": 3000000,
+  "new_task_attempt_limit": 40,
+  "new_paid_requests": 0,
+  "local_copy_read_only": true
+}

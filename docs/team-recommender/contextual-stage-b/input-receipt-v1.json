@@ -1,0 +1,1373 @@
+{
+  "version": 1,
+  "clock": "2026-09-12T16:00:00Z",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "directory_records": 158,
+  "eligible_people": 155,
+  "active_claims": 481,
+  "source_gaps": [
+    "urh-000158",
+    "urh-000043",
+    "urh-000061",
+    "urh-000086"
+  ],
+  "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+  "snapshot_bytes": 947090,
+  "gzip_bytes": 125945,
+  "space": {
+    "model": "voyage-4-large",
+    "dimensions": 1024,
+    "document_role": "document",
+    "query_role": "query",
+    "preprocessing": "audited-summary-active-claims-v1",
+    "output_dtype": "float"
+  },
+  "people": [
+    {
+      "id": "urh-000001",
+      "input_id": "e8e96abcdfec14a0c503882a55c27e6cdf5449ab3d87544e77c5a0cdfb0ef5f6",
+      "evidence_id": "91e72da0747343848fa980a2981dbfe484ad57600e5c70cbf6d4d67ccf890034",
+      "text_bytes": 469,
+      "assessment_bytes": 1007,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000002",
+      "input_id": "ddaba4a4572c0aba101ecfa538b04e29bab09fa4f6079f6981ade4b0516bb58a",
+      "evidence_id": "f723ed239d0ac5b25199428386572c6d6d5bf5e1e922a6ced8939ae58a83c024",
+      "text_bytes": 838,
+      "assessment_bytes": 1453,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000003",
+      "input_id": "59d28bfe150b34fc1adf0ec06e3569be7d0f467e2aa163f9603d53869ec9ed74",
+      "evidence_id": "87a485f2d565f35199c1540dd3669af64d2213a298542bc5f0caf26a3c02248b",
+      "text_bytes": 890,
+      "assessment_bytes": 1686,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000004",
+      "input_id": "40df8b81dccd742feb5fa3d8714593b718e0dcef2e2e21561dae356f422afd34",
+      "evidence_id": "c9b20e2c50748f65314b5fa47f720080704c012ff14e7090528df281ffe29234",
+      "text_bytes": 1044,
+      "assessment_bytes": 2033,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000005",
+      "input_id": "85f043119951ca9c1ff41bfef53b8eb8661cd92026121a2df5c6827e0965c0ca",
+      "evidence_id": "8ba2738aa99c7bbfdc563c48faec06ceaed97373a09e752a587822dbf5686759",
+      "text_bytes": 1186,
+      "assessment_bytes": 2210,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000006",
+      "input_id": "804648a6faca5195fba51a62cb494e594cbbabd7a8ce19796e4377b8b875e622",
+      "evidence_id": "bb66b15bb52920cc8a22901a21cb0d293ca349f1a22c87f09a84ec2a5ce1d3f1",
+      "text_bytes": 894,
+      "assessment_bytes": 1555,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000007",
+      "input_id": "39002834e6eea0e813d7197d5bf637f3561e15224bdc9d80efc59da29f569080",
+      "evidence_id": "eb2ab595cdc36c85296d3e42acbeb1af9a523ea421830d0a36b955b0a20517ec",
+      "text_bytes": 1544,
+      "assessment_bytes": 2821,
+      "active_claims": 5
+    },
+    {
+      "id": "urh-000008",
+      "input_id": "607bbb7b906908f47bf691b9d5aa419a305fc31052afb4bba19503fe5f56c372",
+      "evidence_id": "b6cd20018722cc7b13e7393d09330efdf7a9db86fad2da1c06ee2d20a4254bde",
+      "text_bytes": 762,
+      "assessment_bytes": 1291,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000009",
+      "input_id": "440e26d5112b96c60ea869849361c0819e1e9d7875b226da9efc103f91b247eb",
+      "evidence_id": "34b727af6203f943f807970c314d854018d47056b5597fc2874fa49a79dd230d",
+      "text_bytes": 800,
+      "assessment_bytes": 1798,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000010",
+      "input_id": "b367ad7b6cf2253cef04b02beeb76bd505c5969b988952d322a15ae7ca60d462",
+      "evidence_id": "e4d1e5fa72143a3528a115d16efd64ba3e985c209eb67b866dd83bf5e15058b8",
+      "text_bytes": 652,
+      "assessment_bytes": 1406,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000011",
+      "input_id": "a93880cdcc74443cb340e6c2b8f832a576a9ba568a2905a2826b0437c19c889d",
+      "evidence_id": "f86e48b7f15eff5b5bb07a2af076fc6901665532d35b6ef3f66df5059d231d79",
+      "text_bytes": 1104,
+      "assessment_bytes": 1858,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000012",
+      "input_id": "45ec9ec416840a5bc2b44a02277a2569d36f84460422f1ddd9f2d6ec1fee6497",
+      "evidence_id": "aaf75a57610fd73dc1f4e2a7f1ee01139958af6cafe83fdf08fb573cfd1e33cb",
+      "text_bytes": 1222,
+      "assessment_bytes": 2203,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000013",
+      "input_id": "d771756d55303a6b27af1f18b9dbd721b2f391eceffb19dd3aa3518976ac12b5",
+      "evidence_id": "badb3152ccd368b4a08978cacea769645e01067dd55f8ba7e1a142d3ebe3c08b",
+      "text_bytes": 605,
+      "assessment_bytes": 1173,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000014",
+      "input_id": "d089bc3f2318c3ee2f26a81a2ea0c13f5cfd932f8fa855b1c9b746543876a5db",
+      "evidence_id": "d04f16275868a7b43826060d9c499956f45fe84579b1908cd67b4ab14cb76f65",
+      "text_bytes": 1066,
+      "assessment_bytes": 2060,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000015",
+      "input_id": "f37d6529f66b83a05e9618c636951e3a52df13982aaeafba3cbfaaf3bbc6aebb",
+      "evidence_id": "18e07ffd426f5809d24c834ee470b8142b17910ecc9734fdb6ff5def8aae3aeb",
+      "text_bytes": 923,
+      "assessment_bytes": 1699,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000016",
+      "input_id": "736d2429650f0a9756abc4dbcc5284cc8fd2b1886067fa0ca13a7bcbe35893f3",
+      "evidence_id": "96707667c665a31c3861312b55e9090fbe1fe9f07298b038e49c7041cb27f5b0",
+      "text_bytes": 981,
+      "assessment_bytes": 1711,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000017",
+      "input_id": "80444783400f0c67c5e7bc49ed64e314195c6124e9fc68af40762a5ae0d7f63d",
+      "evidence_id": "784b237c175a0598df0119f6b740af2924b5eb70878fa87bdb2dcc552026dc8c",
+      "text_bytes": 749,
+      "assessment_bytes": 1365,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000018",
+      "input_id": "d66e257e8b5bba545275afdd8487e9ab48eb710c8d5aca4c98eb6a95ecbc994f",
+      "evidence_id": "380531deca477f1266f1202bd17c10b0374d30e1871ae21b06b2603d8033a936",
+      "text_bytes": 790,
+      "assessment_bytes": 1566,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000019",
+      "input_id": "74e4c21c043d147de3ff579b21215d57fbed40ee2def5b5df6e6d634f6f30cd2",
+      "evidence_id": "36b311f052b4e760e5249f50742b82fd90e464d58920b94f2278bbf6a5dc7318",
+      "text_bytes": 860,
+      "assessment_bytes": 1631,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000020",
+      "input_id": "738ccb88cd14182806e707a37ce1d8c060565454208ec3bd1f5c53a483dd8f8f",
+      "evidence_id": "640f67c8b86cd6a7a796b26ad6e58c4a72cf07f004c88dc5a01394024fd1b177",
+      "text_bytes": 691,
+      "assessment_bytes": 1474,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000021",
+      "input_id": "bb304d3ab592a6efc1cb062dfc9c6c1b0d51bdfb8ba390ad84235c23d1876fe2",
+      "evidence_id": "c4e5d6eab9228b4dfecfb3fe15f8cddc19a58e2f784d2c32e7ee1595399a5d48",
+      "text_bytes": 557,
+      "assessment_bytes": 1102,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000022",
+      "input_id": "b5a2a590a969fca8b4e6598458cbf9b8dbd678ce8a7511f9f502fb4ab7c966ad",
+      "evidence_id": "6647513d300cf613a75fcdfd9b00892e4fe04fd37b5a0adfc81a30614ca62cef",
+      "text_bytes": 707,
+      "assessment_bytes": 1430,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000023",
+      "input_id": "451bcd8ba469e9a5bef6c27e82369af19a7610a10cb983484a3f74e4563de00a",
+      "evidence_id": "897166405c03dd2efe521c9faddb42dba291304f2a41022af9c1245226914b3d",
+      "text_bytes": 677,
+      "assessment_bytes": 1192,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000024",
+      "input_id": "6aff2e66676f934bbb9ed754ca4adc34ba25c5503b58ea58549b6dfd1023602c",
+      "evidence_id": "111ebc6a69bda83decd5245fee5c634876e5132d66ed32b60455ca4a31e8777e",
+      "text_bytes": 726,
+      "assessment_bytes": 1488,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000025",
+      "input_id": "d9c472d2d1f161db6e2a1a0be3487b153cb40c6513b05af40e7b5311079324b0",
+      "evidence_id": "c750844e71b47084240828a15187ad42a2d7ff1c93db17759aba7608a8f708e7",
+      "text_bytes": 876,
+      "assessment_bytes": 1522,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000026",
+      "input_id": "74c8681b0f11c1d7f4bc18200ffa71f1788d379bc6818dca10e3b41656cfde92",
+      "evidence_id": "85ebbbbf0f1df5cad484aa1dcd33af4801f625aa0a73ba02f2d35e91f7e66bd6",
+      "text_bytes": 783,
+      "assessment_bytes": 1733,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000027",
+      "input_id": "5c85a6375e1ae01f9c44fd133debdbd7f195f2b23c36bd0c9b0766cf4051a4b4",
+      "evidence_id": "ca40bcaa65bc16af27aca7970d8168d40b6b2de14198ad193e251a979586e644",
+      "text_bytes": 887,
+      "assessment_bytes": 1641,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000028",
+      "input_id": "bd7689cb9120bb8ab8e2f1d1ad9424aff16239fc11bde641a347d252d0a8fc32",
+      "evidence_id": "d1d91704331feabab5923ae8718fb57a5f6036089ffbac5748f66bff3fff6a88",
+      "text_bytes": 636,
+      "assessment_bytes": 1410,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000029",
+      "input_id": "c64c9bc59b244c2aba4dbdb9ad93a3f048b12e2864c508cb56ffc77af189aa25",
+      "evidence_id": "3b08a07b63c482c0acdfaeba9f77cfee74cd2770487c7126dd748d50a152d1c2",
+      "text_bytes": 823,
+      "assessment_bytes": 1430,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000030",
+      "input_id": "a07add158d8a958bb518554729b36807a299926ada8e4c2a3fea18d6f48d730a",
+      "evidence_id": "663af2968c8ac7c540730632380797ca525cee07a235de7a6dfaf2eb4cc08aa6",
+      "text_bytes": 605,
+      "assessment_bytes": 1391,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000031",
+      "input_id": "bc913345a9e09712309f3778017c80434e556f1fd16001a66eba61944d82a2c8",
+      "evidence_id": "89b22b64896fd3f79a38ef9e67f62c5b4c1505b10c56fb0ffd7bd24d1bcf2183",
+      "text_bytes": 818,
+      "assessment_bytes": 1795,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000032",
+      "input_id": "c3fdcfebffcb2aa5c6090e15c522b7543c850269170874b03d11a42b33b176e9",
+      "evidence_id": "95d1c435ddb44785096c8278d4ac52cc4d451c22af011d4a4de26931d24f391d",
+      "text_bytes": 1209,
+      "assessment_bytes": 2169,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000033",
+      "input_id": "570f60606ba86a54478be6c35fd4f83986900560c5cef8f1c83293b31cd80264",
+      "evidence_id": "32a1083257888880fb35dcdacb89e8bffc3b2d980706f5462ae1f36ed8ba81b8",
+      "text_bytes": 661,
+      "assessment_bytes": 1458,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000034",
+      "input_id": "d2434fef1110b2c1de5fb26b95f2b81b5979c44514046999bae5f0639febe487",
+      "evidence_id": "28ae515e20566831a5c1dd2c524d1cd012b333b1be588816d4b19dc1e6f71200",
+      "text_bytes": 903,
+      "assessment_bytes": 1653,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000035",
+      "input_id": "8238bc29c098ff1708e9fbd406ee1917148f51e5ab89108f82bd5a09c47c92a3",
+      "evidence_id": "f1b22f1f2953b947a3c0ee585ce1c2ee0598ada65ce7627499fea0d5c88e2fde",
+      "text_bytes": 850,
+      "assessment_bytes": 1607,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000036",
+      "input_id": "24fb4ea6cdd29a9524a9a03dd1d4a4a2d222c0ff4c7863e6234b50b2ab57cc29",
+      "evidence_id": "71194aa3d645fb8490201d2cbabd3bf9e4bf28e2cedc9008aa1e576ccbc9ecf7",
+      "text_bytes": 785,
+      "assessment_bytes": 1545,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000037",
+      "input_id": "b9df9241d25ff359c8bb36d1f59daf25b015acdb02e6dc1f77482adacd407c86",
+      "evidence_id": "ec5f2046c87db8b6273460620e3f6089dfed861f070a9e264ab9161b22a20db2",
+      "text_bytes": 835,
+      "assessment_bytes": 1907,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000038",
+      "input_id": "5e3c21acfcac7b1c0794aab6a2c7d32b1547c1540f829b1aa0501c0cb7926546",
+      "evidence_id": "add462725b0a4a9e0d72d741df45a3ececbea6c33cbed64ac7c3533d6fc60d50",
+      "text_bytes": 679,
+      "assessment_bytes": 1434,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000039",
+      "input_id": "1b32183374b2ed00bc25d4303582a790adafb2059bf7c0072785dbb4479c06c8",
+      "evidence_id": "bf64ee1b41dd8598dc3f1b09c6a1a4deaad81f9431a72a9805d7135f32cbdaba",
+      "text_bytes": 1003,
+      "assessment_bytes": 1760,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000040",
+      "input_id": "75f52f62dab7888f128363304cf97ad5408a2d0875d9d2a0954d6316bdc9bf1f",
+      "evidence_id": "5b7b8a724e164d65fc28b1c573ea0c6d3c350273cb34d272c74cec605d48ccea",
+      "text_bytes": 783,
+      "assessment_bytes": 1540,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000041",
+      "input_id": "f4ad8c37269712dc6ec589aff58455b78d6a5a2c2bd9b4175245b0da67987536",
+      "evidence_id": "2d6f6805fe18ce9fd2bee84b65a02ac46a10c468983ef0d4b10edee56a61733a",
+      "text_bytes": 666,
+      "assessment_bytes": 1411,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000042",
+      "input_id": "abf496e7bb24a2224791e269d5e20b9cab6ad0666597482145034dc0608dd1b3",
+      "evidence_id": "b6c9cccc0eb9b92bbc084e61966d5fae64c1e07875dad0b3d066d9bf9ffe04d2",
+      "text_bytes": 707,
+      "assessment_bytes": 1240,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000043",
+      "input_id": "d5a38d240b5181e481b505fd142e1733e2ca29e809b30826ebb5c4b797765491",
+      "evidence_id": "0db7c2727529be9f073fc8e68e9787ec941d3bbf310d47ed1481e613d6c435c8",
+      "text_bytes": 732,
+      "assessment_bytes": 1094,
+      "active_claims": 1
+    },
+    {
+      "id": "urh-000044",
+      "input_id": "acb15cfa7e2a7caf158713f5b0185934cdd6b402108c08aa7d5f12faaead5f57",
+      "evidence_id": "6d261127a16742f34109331db129249c67689e41baacb0182fb1b55ed652a51f",
+      "text_bytes": 1025,
+      "assessment_bytes": 1787,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000045",
+      "input_id": "2edc606d682c3792f02e925c224b76f0c2ff407a3061b6c5b40257f987d7bb2c",
+      "evidence_id": "e6ad9267dce7bb52c3c2ca6042af6464d85172f824e6dabc80262b7118d3f90f",
+      "text_bytes": 867,
+      "assessment_bytes": 1619,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000046",
+      "input_id": "d14e9a5e3dd1cf7b476c629a6e4eae2c1c1502e070162ac52804642540083739",
+      "evidence_id": "5647e6c4a05e9bfee8438406b8ad4297325d4f15356d113cf357a105c2a5dfd6",
+      "text_bytes": 1082,
+      "assessment_bytes": 2541,
+      "active_claims": 6
+    },
+    {
+      "id": "urh-000047",
+      "input_id": "9cac46a1f97a8b28e01e05a67ada145964c8b696bce2bedc490a93969274a5b9",
+      "evidence_id": "35bf0b601c65fd43cb5212c703e38da12008188b76822f98c799a66be1a621f6",
+      "text_bytes": 810,
+      "assessment_bytes": 1341,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000048",
+      "input_id": "e00f98f24542631104bf78c94183356fae2f58cc1e3ebd6e1d916abebe651394",
+      "evidence_id": "341e0d1b719afe33bf8717376fbd28c0bd15ec4c374e86a1969b628d876bb769",
+      "text_bytes": 1342,
+      "assessment_bytes": 2543,
+      "active_claims": 5
+    },
+    {
+      "id": "urh-000049",
+      "input_id": "9765b6852867d1b9ff0c4caf86939b311307a40ed8f1e5e61dc95fdb39ac19bb",
+      "evidence_id": "82b7ed250cc4caf628b11ef33df5d430789c82438e826ea464c357e4379583f2",
+      "text_bytes": 773,
+      "assessment_bytes": 1536,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000050",
+      "input_id": "20b4c01b8a9fe119796b9317791af4eea92e511559a22ddc62b3b62f5c255de6",
+      "evidence_id": "c77f309f27861133c22558971baaf06cda9acb26b7c1203e693c09a0131825d8",
+      "text_bytes": 662,
+      "assessment_bytes": 1195,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000051",
+      "input_id": "99366f4834b45d2d7703958e2b08a6fb5ad7c05bc8fb1a16be513129fa8617ed",
+      "evidence_id": "45434141e314f10ba9cf910e790d634acd9aee6e7747a41425d3aa2895bd973b",
+      "text_bytes": 733,
+      "assessment_bytes": 1374,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000052",
+      "input_id": "681b5041a73a6f73a8f8d204b5f43da89756a0fb15ba9bdd7333aa0e4e928785",
+      "evidence_id": "a9b2d02a4f17d82585f330e3fb63599cc4a42afc1ade2a3b2149fca8b4e62076",
+      "text_bytes": 862,
+      "assessment_bytes": 1726,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000053",
+      "input_id": "f15a782fd0de51223ee9f9c739827e195ae3ec1b14eb1ddbbc09e36c9b439a0f",
+      "evidence_id": "316306d7ce0250ab84b62f75807c381adaf07cce5dce15252c9776c1a8f329de",
+      "text_bytes": 805,
+      "assessment_bytes": 1569,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000054",
+      "input_id": "533faf3ae0096a57f4abf7ef1adac603ee072a63d8096b0b1b61696d8134f313",
+      "evidence_id": "5e7398f06440b60c8dcc0b1e58e70b1698592b903bf867f406ec07d33c9f8903",
+      "text_bytes": 770,
+      "assessment_bytes": 1532,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000055",
+      "input_id": "7bdb1151fa78bc3e747bcf301aa925bc79ace2850d7dff4eed02d84266f8d784",
+      "evidence_id": "365ac1613396d4aa1b20433c2fe1b9789117d400fc09ef7cea1af813dc018315",
+      "text_bytes": 624,
+      "assessment_bytes": 1346,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000056",
+      "input_id": "26026ed946a77a5e76906976ba5c3ba8417160b62c0e129e9ff268ab137b284f",
+      "evidence_id": "8ab09e52c7c9e343301cd93331e28910a47fc21115ffd541a2e6ea21a10728be",
+      "text_bytes": 783,
+      "assessment_bytes": 1839,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000057",
+      "input_id": "28a8b39323ad56afab7a618209ce8d1a3ca673f2c7194f979afeab00358c928a",
+      "evidence_id": "7d2ff2eccd811511b61f314251676ee3f2cd2e7590b4cd72421e8c4df5b6e2af",
+      "text_bytes": 857,
+      "assessment_bytes": 1592,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000058",
+      "input_id": "b4842a90a91d9a82c48ed72d8856e384139414dc6646ee12cab5fb8ebf6ebfcd",
+      "evidence_id": "a901c85076be82187bcf2ef763efd905af3d8ab59980909f19ba42b801239e0b",
+      "text_bytes": 1036,
+      "assessment_bytes": 2087,
+      "active_claims": 5
+    },
+    {
+      "id": "urh-000059",
+      "input_id": "1352247bdbc839357a82f34f5be2c12beecf6d5badf3c3882255d51e0485fc12",
+      "evidence_id": "f86ec5c3a71aefa49dc971a97ed35028280ada8ae4c61731408a7fc52fabbd8d",
+      "text_bytes": 744,
+      "assessment_bytes": 1246,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000060",
+      "input_id": "63aae5454b878064fd7df81395b97beb42e5bd806540136ae196fafef3240a0a",
+      "evidence_id": "1068b1ae30b8647cdb2f1c16fdad92e7f974c5b491fe1dfa1c75be7f51b960d0",
+      "text_bytes": 740,
+      "assessment_bytes": 1511,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000061",
+      "input_id": "31a87dbe12792aa233d15a19922861175ac7c35703d70d262bafc8a73bc0efdb",
+      "evidence_id": "723f4d2951965ae1650ce270e394427e057661fcc6034c718f45e21573c6478d",
+      "text_bytes": 669,
+      "assessment_bytes": 1193,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000062",
+      "input_id": "db0d92cedf62c3fb620c6b0de1a6f8a1e11f7515c21afb84d9caa8f415ea9388",
+      "evidence_id": "0e4566be01897a8d8e9c6e37dc3679d2b9292a1ef2ec3afc17becd87705f1c27",
+      "text_bytes": 903,
+      "assessment_bytes": 1656,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000063",
+      "input_id": "8ff926dc1b2f1ead2ca8cb7412f4bfdbbdfad52b07cf370fbc325912c1288fe4",
+      "evidence_id": "fecbd7de41e9b831faecdba11fa752df3ef3dabac2b33c4a5f718a8fb781bbab",
+      "text_bytes": 678,
+      "assessment_bytes": 1479,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000064",
+      "input_id": "bf33e0299d80b6cc19ffa07aba6276c4eed3ac952474a3019a9a9aabea61a88f",
+      "evidence_id": "2312c0bd762b11bebcf0cfa9ebc2f8894e5c5a6219e5863fa59efc27e9111585",
+      "text_bytes": 528,
+      "assessment_bytes": 1065,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000065",
+      "input_id": "38dbb0dd9a2cf57c94f4ecc7452d53696acf97ebd18c364ac7cf979bc0a5d8a4",
+      "evidence_id": "d757a665564c6eab04ed19f364f8156a959629c0deb80814d88b71fcbbe69049",
+      "text_bytes": 696,
+      "assessment_bytes": 1235,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000066",
+      "input_id": "33a05d24ea7f1430e23ab8e35112e50ee26ed7dbe467441988c5da909d3d18df",
+      "evidence_id": "b0e3797f0adfa9f2745f419d942996cb618ba1856da7c36d9dd9da8a49891633",
+      "text_bytes": 960,
+      "assessment_bytes": 1720,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000067",
+      "input_id": "3b880034d86fff7387f179ac940f2900e07bc983bf476d726a105b49629e49a6",
+      "evidence_id": "df3fb24e489d9a40c32352718ecac12858bfdcf092d5d4380e9006859c23681b",
+      "text_bytes": 681,
+      "assessment_bytes": 1443,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000068",
+      "input_id": "db386b20fd5eda4715fd5af4bd6ac1162fc881ef3ec99ec268c13a21e0c1ae18",
+      "evidence_id": "9581fff81ff3e43c60560b0af499f0451166ec9d27037359224a16d3dccc5576",
+      "text_bytes": 902,
+      "assessment_bytes": 1673,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000069",
+      "input_id": "29814e47fa6b17ad61aae424cffc501eda7953f039ec0d13507a2318a36304c4",
+      "evidence_id": "2ff2d347109e36d0e3c93937668114c8286b38d47887930b76777bacbb3dfd8c",
+      "text_bytes": 825,
+      "assessment_bytes": 1364,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000070",
+      "input_id": "deb025b3505712088e43e2c0d73810d8b8f4b145727c6fc2cf1969c8f53ddfc3",
+      "evidence_id": "ad1ee34dbe313ca6a392ec3252ccb1341651c6e59880164dc52072b33e2cc5fe",
+      "text_bytes": 824,
+      "assessment_bytes": 1586,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000071",
+      "input_id": "cfc17645c424bb68e4b594e60f1b17049653df5379b7210e445e22f578bb24cc",
+      "evidence_id": "cc4ea62de6de894fa016238c8ca9a9cf58694a269a4a76d082d095ac0ec0904e",
+      "text_bytes": 770,
+      "assessment_bytes": 1287,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000072",
+      "input_id": "5e62e58e5657744c0a4f31b28bd1b2b2af7120194be5ae73976396917a55f1d7",
+      "evidence_id": "f1a62332d76afa244707cad6adb5c03f7eccef68e00d3d80137e9e0b8c93a438",
+      "text_bytes": 906,
+      "assessment_bytes": 1629,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000073",
+      "input_id": "a558b8123e3b255f541ae1c5d5a28fd1ede6b565ab91e752f34cc3e0eef23012",
+      "evidence_id": "cd867d66366ecb2fcda31e49610eac732868902229b9b5ab3389eeba1b986cfb",
+      "text_bytes": 714,
+      "assessment_bytes": 1395,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000074",
+      "input_id": "97ffc8a2f617b46fba78604ba75e9b4f1910794e40d3acc4b83a31aa6117ed3d",
+      "evidence_id": "667d58b5f53032e5541488f1a9d682706e359f9773859b5743a8a9cf3fd1bd55",
+      "text_bytes": 1159,
+      "assessment_bytes": 1924,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000075",
+      "input_id": "0c5b8f23b8c1ade944a5e70eaa1576057f9c4b1d6936c7fd9747ae1476b9c6f6",
+      "evidence_id": "a30cccb369a470027c51351724e2f55fcbcdc64d7fcd13152c05410849fe3555",
+      "text_bytes": 836,
+      "assessment_bytes": 1586,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000076",
+      "input_id": "98a885ecc40f779af7ee64e37a605d11963d85965e4dc492ceb47903c2f7e3ce",
+      "evidence_id": "f334bf3955a2e608150a9697db849f848c6d408e27305ad60667428d2b628911",
+      "text_bytes": 700,
+      "assessment_bytes": 1251,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000077",
+      "input_id": "341a4a2f926f9bee328e146900103fe2495cff7f604b036d35b85b8fbe98b30b",
+      "evidence_id": "c397eaa11400f5cbbf71ce29f0d06ecb72729976d9d004b643711bbf9a512ab8",
+      "text_bytes": 694,
+      "assessment_bytes": 1235,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000078",
+      "input_id": "d06c42b649bc6a1dc0a2b3553e5dae480705dbd12b84046b9666d55b8d7b859b",
+      "evidence_id": "4f40bc493ffc0aeb361f327bb3726d118c991e85cbce903b7ddc0fb1d753b435",
+      "text_bytes": 569,
+      "assessment_bytes": 1336,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000079",
+      "input_id": "1fa8466bfe523f17dfa57b73e897b3dda7ac7c80592f08a2fe5de0c0b17107e5",
+      "evidence_id": "546f04c90255a090c7e16f921b90659e60610efcb709502d9baf69a4204b31ca",
+      "text_bytes": 968,
+      "assessment_bytes": 1725,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000080",
+      "input_id": "658c83ea9cb063e1da872b69682336fca6b351ad2534a7a94c413d7326fbac02",
+      "evidence_id": "33f471bd5af8acc72246f5dd6f18f60f20a9ec99395aaf475574349ce2774dfb",
+      "text_bytes": 713,
+      "assessment_bytes": 1483,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000081",
+      "input_id": "5b08f5218f71057b762093ab2f0ced6cbed1decdb01d950481ee062ae4598ed1",
+      "evidence_id": "fcdaa8db8eee691f3234143766f385125461f618e6c688edb544ae895a0b9a77",
+      "text_bytes": 700,
+      "assessment_bytes": 1444,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000082",
+      "input_id": "8243aafeb2b0d638f2dc4a859658b96d266c4d7f1c9920fb51752d0286c44230",
+      "evidence_id": "c116912c064655c31032f91ed498ad7f2b39f2c071f42c05c4b0214f93901c95",
+      "text_bytes": 950,
+      "assessment_bytes": 1940,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000083",
+      "input_id": "a81ceeb6483836983a47f7cd50d0dd9fd897cc300932e3848fc284d4e9e1ffe7",
+      "evidence_id": "2c9208c2abde2d477896420d8aaa93a168b6ce7eb0f2f45e96ff38653d44299e",
+      "text_bytes": 750,
+      "assessment_bytes": 1519,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000084",
+      "input_id": "d989b97a826f23df40d8a10bedeeebfb53f3f47e66099d0ea589952cb5bfd25e",
+      "evidence_id": "aac703e421345ae118acf30c354eeb5fdbdd472ec7bea67a751f08769665d6e5",
+      "text_bytes": 831,
+      "assessment_bytes": 1554,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000085",
+      "input_id": "65ae356476312b1d1431b7d2c78fb8ecad0bafe88a6cddfbba78d5663e46ce5c",
+      "evidence_id": "05ae72a9072e0dc6ca6d80808386539ee36b574044a46a3d5744b89959f22dea",
+      "text_bytes": 777,
+      "assessment_bytes": 1524,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000086",
+      "input_id": "111a63223a340318ab33cd550af837da58be3c60e4062f50c0afb3177ee368f3",
+      "evidence_id": "3da25bd4873c432163e3eb4521f9a848bccbc4b4b31e3a414c6d4c9a1e54e2dc",
+      "text_bytes": 794,
+      "assessment_bytes": 1568,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000087",
+      "input_id": "e337af4def73b7af2c50b2475f2b0c0de5c4f639794089bdce8857d2fc35d2f8",
+      "evidence_id": "e1d58defd67b7a09d82185f1dc894ce8620e6f28638eaae3a75859974390137f",
+      "text_bytes": 772,
+      "assessment_bytes": 1537,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000088",
+      "input_id": "274a3de8cdc15e7f12426a6b97172175ac0d89328a034b75e30258f9992eccca",
+      "evidence_id": "5646842044cd5bd33e1a37e1de85d4f0cb2201cb427ecbf957a89067e1313e9c",
+      "text_bytes": 1022,
+      "assessment_bytes": 1790,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000089",
+      "input_id": "4b5ee451fa5a8ccae3704d417e957e02cd22472fc57c9513a6d301bf7a6b37dc",
+      "evidence_id": "24b6d6d032b216828f71b7a06f0a894926584dbd4abeae038fbd870b90f81c5f",
+      "text_bytes": 913,
+      "assessment_bytes": 1850,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000090",
+      "input_id": "f2f2c28b34578a3f9c4b807289ad0f8204d9c733e7b6cc4aeb57fd9376847e2b",
+      "evidence_id": "4bb1478e15905808ae69db337abd5bd812f0172d534fd6ca6443b072d1920b65",
+      "text_bytes": 728,
+      "assessment_bytes": 1399,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000091",
+      "input_id": "822adcfa55a4b4bf2c033a9344cd06c971ba9d69cc8d48588433371cfe35d2e3",
+      "evidence_id": "d2890e3ae4c626df7a0bfbe8c9354e9706296e869da47abae7b6aadcd26eb604",
+      "text_bytes": 717,
+      "assessment_bytes": 1471,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000092",
+      "input_id": "7e1bcbf3a8d7a46aa5bdd7c71964be81607818a4d5fe18f92237a1feab4e0a40",
+      "evidence_id": "4bf9b3ecef32f6e8d906663b2cc74548427ff0b7f5680c01b897efc9d1c58748",
+      "text_bytes": 1268,
+      "assessment_bytes": 2213,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000093",
+      "input_id": "df1b1d50909891a99860175f7109d626c2e4a8694a39914f97b448e90792a6da",
+      "evidence_id": "b84bd2f6cdd7edb39984b02702c4cb0f409a56a55c357c7d1dc80ab3555f6104",
+      "text_bytes": 754,
+      "assessment_bytes": 1543,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000094",
+      "input_id": "24e462eb296f3b6891fdc1f3c58df299b32e933e243d256cd91dbdfd0afd025a",
+      "evidence_id": "e3742501391037c0b28eda174f3b68113ac5d0ac11bfcecac217a51886c55242",
+      "text_bytes": 847,
+      "assessment_bytes": 1820,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000095",
+      "input_id": "b080d31146ae76d0c5b69ee4909dfb63863ab107bd74b2226f6d6125cc196e69",
+      "evidence_id": "229961138c685f1d96f6f4e43f22a84ea991c715ce7c49a80ffd6ef84ad8ea05",
+      "text_bytes": 809,
+      "assessment_bytes": 1571,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000096",
+      "input_id": "2e0560a1c40ff21be46934937c21c7f813a1cc23bc2f2ffc68937e6ce34c5966",
+      "evidence_id": "c61bf0438b651d423b7e7c71cbe2e9b27761346ab066780e9962420ab3823ebd",
+      "text_bytes": 767,
+      "assessment_bytes": 1488,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000097",
+      "input_id": "ea8cb17228e046a54865c83f5bbe8ed55717147d8bdb5c7cb00efafd97783161",
+      "evidence_id": "90f214aa565776cd57ebb554b73569aa53025adb3cc8874a8c5a0d18a497f5a0",
+      "text_bytes": 1154,
+      "assessment_bytes": 2152,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000098",
+      "input_id": "f7a56371b68a22ec7377cd85719a6c946c1c8722caea197bc71a2a951d640077",
+      "evidence_id": "c4f64d6f0f871c135475ee6f666d7fca03e2852ad798f4471047920fe0401df2",
+      "text_bytes": 663,
+      "assessment_bytes": 1427,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000099",
+      "input_id": "6591e63878926aa496209eb5b28c3cfcc317edfcbc69d7c8c7c206ce672d4e52",
+      "evidence_id": "3debe276d96be3cdfa4c50a32e537e8821d11cf08cf1951489c88f2cf7472b11",
+      "text_bytes": 653,
+      "assessment_bytes": 1411,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000100",
+      "input_id": "399dc6b6516b67452b057e2255ff1c7190191e338fe86e39e2c845652212714d",
+      "evidence_id": "a121677ae0ad28ee0770b34f30ba7c9f3ad143ceba957cd54d5a44f22706be2c",
+      "text_bytes": 978,
+      "assessment_bytes": 1737,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000101",
+      "input_id": "be0f0a694ba9369939ed4a69f27044afd0df11d6ac8e229a63442dc827116968",
+      "evidence_id": "bb0b78f320e6c262bf263256aae0892ad8a195a9ce94f179e680f797d999acdf",
+      "text_bytes": 696,
+      "assessment_bytes": 1485,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000102",
+      "input_id": "e9046a273d7148e5e4d8cceb1ae8528a3413bf34d62b9914b438155177965258",
+      "evidence_id": "edcac14e488ee972fa371cd81f71f4140841c65e90d76af2f86a4fa38f26054a",
+      "text_bytes": 654,
+      "assessment_bytes": 1423,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000103",
+      "input_id": "33ec9922890c254d2d77ccbe0b83e253dabe2afb93f9718e8fe32506054e3bfc",
+      "evidence_id": "4bf73fca98b7ceacfe2923562d26edbdd07a4e96054fc441dea4ffad64324563",
+      "text_bytes": 1236,
+      "assessment_bytes": 2740,
+      "active_claims": 6
+    },
+    {
+      "id": "urh-000104",
+      "input_id": "a2b340ae891974ab64462f31e4804ed53da49f12b449bfb673f2c015571b95bf",
+      "evidence_id": "1c4df43ab15f7a47da9f87492dd212c83f8778b1eccb8edee04f437a4ba7a776",
+      "text_bytes": 837,
+      "assessment_bytes": 1819,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000105",
+      "input_id": "21712c92e5039dc382f72256bc97b8925fdb01b274ccff24e5d5f2d7102bbb28",
+      "evidence_id": "afc7c30b215b6ff2391a5aee02a89cb97d2ae3715b6f27395830997626a639fc",
+      "text_bytes": 958,
+      "assessment_bytes": 2241,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000106",
+      "input_id": "cd57e076b399f04487c9e1ed086babd226acb13aa1baa03f0e0daba7e2fa343e",
+      "evidence_id": "fcbe7bbcb22fa6370c77cfa934b3f04517a2f77080dedb920b281ac87042e216",
+      "text_bytes": 661,
+      "assessment_bytes": 1435,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000107",
+      "input_id": "363212cbfd94bfb2319578aa3d7235c4d4773e3244fa137200ed4d7af9ef26b7",
+      "evidence_id": "233ff25cd72866f113c4804edee2cf641d8a061ddfe83473a45bbf29e86446e3",
+      "text_bytes": 902,
+      "assessment_bytes": 1688,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000108",
+      "input_id": "d3b3887434e159b3d9216b0d8255850652528914619d58d09b38a041893dae50",
+      "evidence_id": "bf993ecc9bd9495372b59ccfd84d0c4cab9d7edfea9ce60d29b60b4e1089f779",
+      "text_bytes": 791,
+      "assessment_bytes": 1280,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000109",
+      "input_id": "7d5b0afdfa40f88a258927a3770fbf21b00a1f0c68261576ac8b938de5fef395",
+      "evidence_id": "4505f1b6e07d9decc8da8e2e8e73273a3bacf8fb7962d8d0237d466a49a5e984",
+      "text_bytes": 716,
+      "assessment_bytes": 1482,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000110",
+      "input_id": "f82f7b338d4142b99c0f67b47034b46346081022ff2f25593f559c997cf100f0",
+      "evidence_id": "84e121f372ebd13f974c44f41e407a900ec7f2531fcd9ccf674b5c72f34ee4f1",
+      "text_bytes": 877,
+      "assessment_bytes": 1847,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000111",
+      "input_id": "a4099b15770133856cea933f4751c5497765fb28f9d3a983474885d494fbe565",
+      "evidence_id": "8704337e3656b3cf1286d326032d13c350680c757629314a32d24ba8f77ab302",
+      "text_bytes": 725,
+      "assessment_bytes": 1696,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000112",
+      "input_id": "22cb9f156f51dcaf660d486b546ee357f5a81e773a437ad8ae6af83dad9ed0ce",
+      "evidence_id": "944a0d0a522371cde42d21592a21dac4a5151bf0e6a02043a2c2dec1c74eed9b",
+      "text_bytes": 780,
+      "assessment_bytes": 1530,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000113",
+      "input_id": "c85a7b889ed87d1fe1b3ae0f707e128e1a86ab40734ec96a99795829741bd431",
+      "evidence_id": "d6e8a7a0025025c55f42ff8e3d856a33247fd964eed59a694d5a982612730c9a",
+      "text_bytes": 712,
+      "assessment_bytes": 1467,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000114",
+      "input_id": "c33816ad0e2dd9b996efde3159539adef463a335b500e9690b297072ddb2c22b",
+      "evidence_id": "afc13f684945d44262179d383e39016ab462459e92822bd936837b87d082ef23",
+      "text_bytes": 751,
+      "assessment_bytes": 1460,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000115",
+      "input_id": "91ed8eb7cd335b99e67623ab9b7d143c15f92735b97f0467d619bcc1468b60cf",
+      "evidence_id": "a8d75bd4c14b94b775b4ef3dd563dbc1d63b481225959a091d185571dd97fb95",
+      "text_bytes": 713,
+      "assessment_bytes": 1478,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000116",
+      "input_id": "7afc1a24a928129c57c7fbf593cb71a7f90160341c731c4a494e95809a47131d",
+      "evidence_id": "7d0d76ad504d6ae71acef4801b526b714e872971d165e02270a98733e72ae13a",
+      "text_bytes": 787,
+      "assessment_bytes": 1542,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000117",
+      "input_id": "0274b9849d1fdbb56e5b137f834152b970f63e9b0dcef12f0d87636c94e173cd",
+      "evidence_id": "6adc03a81e1d1b73583dc6e2595c34c7ea5956aeebe40e13d4cedb1ba3c46e7f",
+      "text_bytes": 929,
+      "assessment_bytes": 1696,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000118",
+      "input_id": "890aef598197fecb933e0b2c7416cbd1df55ad045ab07653f79a4935579acadb",
+      "evidence_id": "ce310ee4a6461c443e081b2f1819e8df746f3c9ae10c0c0becc18c6f54d7827c",
+      "text_bytes": 707,
+      "assessment_bytes": 1467,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000119",
+      "input_id": "1b3baa24505a78a9e30a03af6ff6898b3b8a31c06e45a7b71df688688a1b7b22",
+      "evidence_id": "38340f05277e963d30d428f1d0e350a46b2dafad0939556febd34ce65f694697",
+      "text_bytes": 714,
+      "assessment_bytes": 1468,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000120",
+      "input_id": "a9089110bcc257a3a8dbae5b6af5a20360867b6cae26459fcf4c3062fa4295e2",
+      "evidence_id": "fc7bef1df24484f1c2a9061f015ebad3c65f9b7500b08e9d725dc18c1717d82a",
+      "text_bytes": 548,
+      "assessment_bytes": 1090,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000121",
+      "input_id": "3bc39feb12a5afb8147f1274929835392842148baebadbec02672b2852f184cd",
+      "evidence_id": "a1183c538a51177fc37ace30cf6fc112d87679a14b5ae61c786f77dbb32ef733",
+      "text_bytes": 839,
+      "assessment_bytes": 1812,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000122",
+      "input_id": "0a7133611e92a58d84435bf66135639a4b7309bf87e8c35f1782bc29e2b04778",
+      "evidence_id": "25dc74d9c3bbf492963f9365f629a86b7a20edbae2ab0df113f8dc629dfd6b5d",
+      "text_bytes": 1086,
+      "assessment_bytes": 2083,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000123",
+      "input_id": "9ec0e8ed9aed2ec40c4b828272ce1e9935ddad936d445e006ec1122dc9194a69",
+      "evidence_id": "f9c6342f63d6c5a5a77423de6af11e437289e7abd4e690977bc31ce9193e8c1d",
+      "text_bytes": 731,
+      "assessment_bytes": 1263,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000124",
+      "input_id": "eb05d2b349515678fa85d7ed173d337924efa3b13adb6190dcb8645352b3e292",
+      "evidence_id": "20f6d3227652544b2e1c56ed84d0caefcc267bf45a63bc2272545d374cffacfc",
+      "text_bytes": 694,
+      "assessment_bytes": 1446,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000125",
+      "input_id": "23103a46eaebb2e789e83e1895070b3d5cb2826f7c8cc7be5acfe57a347acf5c",
+      "evidence_id": "6728cd21dcbab43dc7b4b5ef89433c24627b299f6dc1bb16c24a3da67f49d5d0",
+      "text_bytes": 868,
+      "assessment_bytes": 1978,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000126",
+      "input_id": "f30d56a410d416bd46a224076e37f679101469d9e53be748d17f8751013cf038",
+      "evidence_id": "cd1e046ed4231fd67483e7ce84aa5f9abef271829c5207e2ce352ca893d0739b",
+      "text_bytes": 1016,
+      "assessment_bytes": 1783,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000127",
+      "input_id": "1fff982aa75403ceb3cdc74a0d49f0e8c5a743f6bc3f789efbf07a6fb66c75cb",
+      "evidence_id": "79f88444a495baed72986c0a3228147456e44e2b52a0f13cb0b6226c36a4d910",
+      "text_bytes": 591,
+      "assessment_bytes": 1108,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000128",
+      "input_id": "900487d2d95c88a2bb60956c567b485dc0009a656db8e9644dfe4fd190d1d98b",
+      "evidence_id": "255806a003cb5780b7f9c82f9bfc93e86d8e4c98c4e9f2f6030ba3a17f66863a",
+      "text_bytes": 998,
+      "assessment_bytes": 1766,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000129",
+      "input_id": "852a70e0578f2b83f3ac011054566e3fb9a07d71336be0679c53eda7ee81a44c",
+      "evidence_id": "379155ca3b5c64e8a0c380a0c6e0f84429d2a536b20a2d6fe7c91639967d79aa",
+      "text_bytes": 802,
+      "assessment_bytes": 1562,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000130",
+      "input_id": "a76dcbe65bf14d3bddb776d5f4e6097626bfd7ce32fe13390dc519a92f108084",
+      "evidence_id": "e29f4ad030e2478a6a8c3e21e6f8768f6dff8fbf6a5795064ade6a06576752c0",
+      "text_bytes": 992,
+      "assessment_bytes": 1745,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000131",
+      "input_id": "53b62438d048e8b545dd85e806126ae93341d3f52535cbfb18cbd1fb8631ccca",
+      "evidence_id": "d9da6f07c73fcce5b4976996bbe93fa86f39782841dacbe4f960ddd10fee2c5f",
+      "text_bytes": 948,
+      "assessment_bytes": 1909,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000132",
+      "input_id": "527bc4aef230b2dbeede436a0ed433e5b4f8a5c37b521543a3a7a406858982f8",
+      "evidence_id": "22372446aff9733c2aed03b1253e827155d9ca252daa37a6505f520511b266a5",
+      "text_bytes": 1079,
+      "assessment_bytes": 1867,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000133",
+      "input_id": "59b8487801c3fe1e3a2f8049ff3cd0825140c787075bb4d7a3407da7d3b9dfb3",
+      "evidence_id": "c88b510e7cfe437f93c2f63e6194beec4f3a945a309cbf41137876cb44f19133",
+      "text_bytes": 755,
+      "assessment_bytes": 1519,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000135",
+      "input_id": "05b586c5e14372cd05798a7f79d1f0b571ad4f9b2bda2acf7ab373dd1d3d6813",
+      "evidence_id": "a7da9ed8e403ea414a1910a961be06547f182f7c8bdbfa7c6a963247379646d7",
+      "text_bytes": 779,
+      "assessment_bytes": 1453,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000136",
+      "input_id": "d696370c92003af211e7fd7cadb36e369562319d3e283395de18796a20f2a757",
+      "evidence_id": "750622dcee2c67dc33392936d726e8eb53595387d53b266575803ea15cafee23",
+      "text_bytes": 921,
+      "assessment_bytes": 1895,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000137",
+      "input_id": "27eed262759d552fc9d92f768ed9def785d060bfb32433fe949d33b5f6d9e0b4",
+      "evidence_id": "97cb1c8844dd6971d3ad279e4aa2414388fe532cbd44c3efe45f6ba974d77139",
+      "text_bytes": 695,
+      "assessment_bytes": 1473,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000138",
+      "input_id": "3ba9c96a551ef62f6d097d92fb6b92ec2789e5f1be80098314d0f397fbf7411f",
+      "evidence_id": "1478502631037799c26624f438df3990cec8d9ff1f59f4b061ea418ca7f415a2",
+      "text_bytes": 768,
+      "assessment_bytes": 1595,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000139",
+      "input_id": "d73e62e52d0ba27eaffc93efba27ca08d97292bcf27f4c5e93c0f41b8876c09d",
+      "evidence_id": "a2d44bbb9d0eaa24ffe28a6a842b7adb3ac2c7b08f66b1fc58a7d18c04f3e13a",
+      "text_bytes": 645,
+      "assessment_bytes": 1407,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000140",
+      "input_id": "e2f91b0c8383f19d52f185fd2e8f38e0a10cbe1803b0ecf025e6c24086a446fc",
+      "evidence_id": "e44057b716dfd2a4c3bfa081f02225e46b75dad57d11a645f43bd56760b65e4f",
+      "text_bytes": 867,
+      "assessment_bytes": 2059,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000142",
+      "input_id": "270537d9a42024a59234119748058b9f9f6d958a850734b0d30e8380175cf46c",
+      "evidence_id": "1907d3f9107ffd02b21e4a81e910576e00c136d80c993dbeb8b89f7718e562ba",
+      "text_bytes": 919,
+      "assessment_bytes": 1670,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000143",
+      "input_id": "4eb4f28cf5e27de21afb8eaab0be9318416dc2970bdb2bb7e63f40edadb72d82",
+      "evidence_id": "b239198e9b46706b70d60a61b20d65765f59e85832f9a3fbe6cc3ea63289bb1a",
+      "text_bytes": 1091,
+      "assessment_bytes": 1853,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000144",
+      "input_id": "f45d82b715984009f2df232be84c8ea4aaeb6956734665dba1865de0a953ba3a",
+      "evidence_id": "35b5a0034f21198ec79323913323e90a996c9e1c65f83193df3f6522fc4c0061",
+      "text_bytes": 904,
+      "assessment_bytes": 1796,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000145",
+      "input_id": "064dc5e0385ed67dfd8fa581f5170d42af7b4d8804848b1a4f1281d00105956b",
+      "evidence_id": "c0a84a59c5323df0ca50ffab137655e4d3f99ef8a31383ecde8a287029aa8094",
+      "text_bytes": 674,
+      "assessment_bytes": 1240,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000146",
+      "input_id": "2ca0aad911bea8e5b578337634240857c2732784c192d9f4346d92104782fa53",
+      "evidence_id": "f29aceaf1a851cf4ef4336a56278f17012bf55bcf5a9b56ffdd0e4aff4061ae7",
+      "text_bytes": 1190,
+      "assessment_bytes": 2187,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000147",
+      "input_id": "2d9b3826d123f221e8b9c110a949a2e479494e6afdebe3ade245b4d896dcdd39",
+      "evidence_id": "b2a5aa839b22a4b3144208361b8eef077e4672cd60ddff8527e1aabbaa71e674",
+      "text_bytes": 509,
+      "assessment_bytes": 1010,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000149",
+      "input_id": "282faaea8935390b6e6c7ec97bfc14ce8f30c1020500916d4349926e2aeaaadf",
+      "evidence_id": "4bb4502cc22c07a0dd26f7399a2be036568a2b75b4da3092316ba628e41b3519",
+      "text_bytes": 797,
+      "assessment_bytes": 1741,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000150",
+      "input_id": "cf1adcc4e265d8334a7425ae7029a0b98500137c811937f7a0bf1e58d7e6b023",
+      "evidence_id": "d2a3c8ff9be3395c753123214682689aa50882d362f4b4509d342d43996bacda",
+      "text_bytes": 987,
+      "assessment_bytes": 2224,
+      "active_claims": 5
+    },
+    {
+      "id": "urh-000151",
+      "input_id": "6daa821bb328d88ade940585e615bfcc6109aa0a427adc781da9ce3dfc8ff06a",
+      "evidence_id": "648ae3bea88a114456ef1285b65427b56e538fdf752fe7e45785b8afdb83abed",
+      "text_bytes": 834,
+      "assessment_bytes": 1425,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000152",
+      "input_id": "9efcaac2798a57b4d37f5255525978b691557c17c20ade481832b3eb3a9b0489",
+      "evidence_id": "ca1648f1afe200fa679d4cec863e03be01e7d0733c9688933ef2bcb6f9a34e42",
+      "text_bytes": 918,
+      "assessment_bytes": 1648,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000153",
+      "input_id": "bcfab719842f0f48449f4b73fcc489b9799218f810e2b12b15b61eda330758d3",
+      "evidence_id": "d2b15b527fdff1e8f0332b40620f3bb2954e34fbcf6a599c9db97d2cf3ca7e52",
+      "text_bytes": 903,
+      "assessment_bytes": 1669,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000154",
+      "input_id": "b25576dd11cd0cb458f9c0ce738967d814b576594fea23f64498ddd4189f2c98",
+      "evidence_id": "9ae7dfc35c79794ec685804cae528c5608430a0e65c71fe5db6049b260cc2a07",
+      "text_bytes": 580,
+      "assessment_bytes": 1121,
+      "active_claims": 2
+    },
+    {
+      "id": "urh-000155",
+      "input_id": "adb1fbf1ce3d051288028c2e7523d07f9e15d206d44afb6247a21e35aec85291",
+      "evidence_id": "112ff5a5a9fe6efeda7e9c8d900c9452bdafe181ed4ef856caa35cb1fc9c5d24",
+      "text_bytes": 915,
+      "assessment_bytes": 1860,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000156",
+      "input_id": "3d0735be7991614d7e79dd473e3ca409af3b51a94aa0f62ab76741ad87fd3bac",
+      "evidence_id": "5986a3eb26446ede7061c67b7be41c4464b863c5173bb850ce0a94826d8ebc9c",
+      "text_bytes": 836,
+      "assessment_bytes": 1675,
+      "active_claims": 4
+    },
+    {
+      "id": "urh-000157",
+      "input_id": "d4efdcbd9a544733df2ab81edff061cb463287223feb110590d811f693ad09b6",
+      "evidence_id": "ee92c69bff59532f61f0967484c795aaeb8ca09c3b2e3e1c90c287774c3d53a6",
+      "text_bytes": 736,
+      "assessment_bytes": 1494,
+      "active_claims": 3
+    },
+    {
+      "id": "urh-000158",
+      "input_id": "07bc55e295a9c1b12c40728513ec0ce99b37e58c2cf1ec1661cefab0c9abb5e4",
+      "evidence_id": "842408fce95d52834011b9ee14cb03c4f41d88f31bd2f5957a6f7a177d38e905",
+      "text_bytes": 1036,
+      "assessment_bytes": 1815,
+      "active_claims": 3
+    }
+  ],
+  "scopes": [
+    {
+      "id": "361207",
+      "parent_id": "361207",
+      "title": "National Resource Network for the Study of Human Auditory and Vestibular Disorders",
+      "state": "unassessed",
+      "source_id": "178a5c40173d4bd405e347e0871ba771d999d0fef6371e5a8920daf934710773",
+      "scientific_bytes": 3197,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified."
+      ]
+    },
+    {
+      "id": "361208",
+      "parent_id": "361208",
+      "title": "Coordinating Center for National Resource Network for the Study of Human Auditory and Vestibular Disorders",
+      "state": "unassessed",
+      "source_id": "b2c90a9786bff4b10f47b062bdd58e3e4c2b29c1cac52d40265f788e0f0a1eb4",
+      "scientific_bytes": 3294,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified."
+      ]
+    },
+    {
+      "id": "332894",
+      "parent_id": "332894",
+      "title": "LPS Qubit Collaboratory (LQC)",
+      "state": "unassessed",
+      "source_id": "b898f42c6b93f3450da1169b595281fc578bb2c9c48173448d07d67d06a5b2f3",
+      "scientific_bytes": 10216,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified."
+      ]
+    },
+    {
+      "id": "344592:ab-0025",
+      "parent_id": "344592",
+      "title": "Electrochemistry",
+      "state": "unassessed",
+      "source_id": "ff0cc9af2adf1d122bd67819f19a2782e569b5743a71fc30342b66e504a35ad4",
+      "scientific_bytes": 3304,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified.",
+        "Parent structured conditions accompany child science; sibling science is excluded."
+      ]
+    },
+    {
+      "id": "345241:tdac-baa-004",
+      "parent_id": "345241",
+      "title": "Analytical Methodology for Future Army Systems Enabled by Quantum Technology (Quantum)",
+      "state": "unassessed",
+      "source_id": "c0a7ba68ad1ce54b7aefc421f9ba8f9262055297cc453bf584c0cb434aa1309e",
+      "scientific_bytes": 3486,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified.",
+        "Parent structured conditions accompany child science; sibling science is excluded."
+      ]
+    },
+    {
+      "id": "362856",
+      "parent_id": "362856",
+      "title": "DoW Bone Marrow Failure, Resource Development Award",
+      "state": "unassessed",
+      "source_id": "b79ea5e29e1c8e702486e6c9224896ddca5bec17ba0d07070198eb8c49d81f6c",
+      "scientific_bytes": 20103,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified."
+      ]
+    },
+    {
+      "id": "363069",
+      "parent_id": "363069",
+      "title": "Veterans Legacy Grants Program",
+      "state": "unassessed",
+      "source_id": "1834afce29858e54e5ef6b60f219eae2b59f38d949b2a9a58a78661df7560edf",
+      "scientific_bytes": 2647,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified."
+      ]
+    },
+    {
+      "id": "344592",
+      "parent_id": "344592",
+      "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "state": "needs_scope_selection",
+      "source_id": "b984d1a9363f237879f89b2f5c928f0b8f49addaae0a3afbbf4c2465aac63c72",
+      "scientific_bytes": 5964,
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified."
+      ]
+    }
+  ],
+  "input_files": {
+    "assets/submission-schedule.js": "2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+    "assets/search-query.js": "f06fc2b0bbbe4c88d43086486b21366a6a190ccb396b68434574e8b60f7d496e",
+    "assets/search-retrieval.js": "f7481427d27d0a5d058e33b5dc1508e053c1b1f2017ba1d8b60165d318e5de4a",
+    "assets/team-matcher.js": "6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+    "data/opportunities.js": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+    "data/subtopics.js": "4daa6d58971a6d5124bb40acd078c47c501395401ec57a94d318b7c1c2df1cf7",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17"
+  },
+  "computed_recommendations": 0,
+  "new_provider_calls": 0,
+  "public_activation": false
+}

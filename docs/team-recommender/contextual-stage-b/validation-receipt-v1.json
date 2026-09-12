@@ -1,0 +1,58 @@
+{
+  "version": 1,
+  "new_contextual_node_contracts": {
+    "passed": 11,
+    "failed": 0,
+    "command": "node --test tests/browser/contextual-team.test.mjs"
+  },
+  "existing_node_regressions": {
+    "passed": 29,
+    "failed": 0,
+    "files": [
+      "tests/browser/shared-team-contract.test.mjs",
+      "tests/browser/shared-team-panel.test.mjs",
+      "tests/browser/opportunity-team-contract.test.mjs"
+    ],
+    "scope": "Unchanged serving adapters; does not validate a contextual hosted integration"
+  },
+  "python_contracts": {
+    "passed": 54,
+    "failed": 0,
+    "command": "python -m unittest tests.test_contextual_team_contract tests.test_team_recommender_budget tests.test_team_recommender_executor tests.test_researcher_registry",
+    "includes_new_contextual": 8
+  },
+  "initial_failure": {
+    "new_node_fixture": "3 options instead of 2; a larger group duplicated coverage available from a smaller group",
+    "disposition": "Corrected local composer to keep minimum-size groups among maximum contribution coverage; affected tests rerun"
+  },
+  "fixture_accounting": "Executor test output contains simulated microdollar charges in isolated fixtures. No provider dispatch or change to the real ledger occurred.",
+  "existing_input_byte_parity": {
+    "assets/opportunity-team-panel.js": true,
+    "assets/opportunity-team.js": true,
+    "assets/search-query.js": true,
+    "assets/search-retrieval.js": true,
+    "assets/shared-team-engine.js": true,
+    "assets/submission-schedule.js": true,
+    "assets/subtopic-runtime.js": true,
+    "assets/team-hybrid.js": true,
+    "assets/team-matcher.js": true,
+    "assets/team-researchers.js": true,
+    "config/researcher_registry.json": true,
+    "data/faculty_matches.js": true,
+    "data/opportunities.js": true,
+    "data/researcher_directory.js": true,
+    "data/search-v2-release.json": true,
+    "data/subtopics.js": true,
+    "docs/team-recommender/post-audit/semantic-index.json": true,
+    "docs/team-recommender/post-audit/semantic-selection-v2.json": true,
+    "match_explorer.html": true,
+    "team_match.html": true
+  },
+  "runtime_wiring_changed": false,
+  "new_module_network_operations": 0,
+  "new_contextual_hosted_endpoint": "NOT IMPLEMENTED",
+  "full_e2e": "NOT RUN - no final integrated contextual candidate",
+  "real_browser_memory_latency": "NOT RUN",
+  "model_quality": "NOT RUN",
+  "new_provider_calls": 0
+}

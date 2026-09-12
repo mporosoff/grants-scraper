@@ -1,0 +1,55 @@
+{
+  "version": "contextual-eight-scopes-v1",
+  "clock": "2026-09-12T16:00:00Z",
+  "selection": [
+    {
+      "id": "361207",
+      "reason": "Auditory tissue-resource provision; known topic-versus-task diagnostic"
+    },
+    {
+      "id": "361208",
+      "reason": "Auditory network coordination; distinct requested activity"
+    },
+    {
+      "id": "332894",
+      "reason": "Qubit research parent; prior quantum/technology discussion diagnostic"
+    },
+    {
+      "id": "344592:ab-0025",
+      "reason": "Native electrochemistry child; catalysis and method-transfer possibilities"
+    },
+    {
+      "id": "345241:tdac-baa-004",
+      "reason": "Second-parent quantum-analysis child; inspect known limited context"
+    },
+    {
+      "id": "362856",
+      "reason": "Bone-marrow multiomic resource; clinical/research resource distinction"
+    },
+    {
+      "id": "363069",
+      "reason": "Cemetery-history investigation; directory/no-supported-group diagnostic"
+    },
+    {
+      "id": "344592",
+      "reason": "Unselected broad parent; no inference should choose a child"
+    }
+  ],
+  "rule": "Named canonical source/activity strata locked before new retrieval/assessment outputs; historical cases are diagnostics, not untouched confirmation.",
+  "shortlist": {
+    "per_contribution": 12,
+    "maximum": 12,
+    "allocation": "Contribution-order round robin by rank; deduplicate people; canonical-ID ties; no lexical gate or historical threshold."
+  },
+  "independent_check": {
+    "maximum_requests": 4,
+    "rule": "First two coherent graph-producing source groups by fixed selection order: one compact group/every-member applicability packet and one explanation packet per group. If fewer output groups exist, report the unexecuted denominator. No replacement after grades.",
+    "model": "claude-sonnet-5",
+    "independence": "Separate call, same family; correlated errors remain possible.",
+    "human_items": 0
+  },
+  "recommendation_outputs_observed": 0,
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "roster_id": "1c6a29538ff8911ca01f7b4d1483f4251bbb4ab237a54f134f4872d0ae27fe60",
+  "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1"
+}
