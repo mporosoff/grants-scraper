@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-11T14:29:18Z</updated>
+  <updated>2026-09-12T13:39:25Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -194,6 +194,31 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
+  </entry>
+  <entry>
+    <title>R3PEATS Grassroots Rigor Projects: Individual Metascience and Individual Laboratory Capacity-Building (RP1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363849"/>
+    <id>urn:funding-finder:grants-gov:363849</id>
+    <updated>2027-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | R3PEATS Grassroots Rigor Projects supports two project types that generate practical tools and shared knowledge to strengthen research practices. Metascience projects develop and evaluate tools, metrics, guidelines, or infrastructure to promote high-quality research practices. Laboratory Capacity-Building projects support labs in adopting new rigor- and replicability-related techniques or processe…</summary>
+  </entry>
+  <entry>
+    <title>R3PEATS Multi-Team Triangulation: Collaborative Cross-Method Approaches to Scientific Discovery (RM1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363850"/>
+    <id>urn:funding-finder:grants-gov:363850</id>
+    <updated>2027-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | R3PEATS Multi-Team Triangulation supports coordinated teams to investigate a central biomedical research question through complementary methods, model systems, or populations. Projects must identify signal robustness and sources of biological variability while building replication into the research design. This effort is a part of the NIH Common Fund's Rigor, Replicability, &amp; Reproducibility to Pr…</summary>
+  </entry>
+  <entry>
+    <title>R3PEATS Rigor Scholar Cohort Awards (K12)</title>
+    <link href="https://www.grants.gov/search-results-detail/363851"/>
+    <id>urn:funding-finder:grants-gov:363851</id>
+    <updated>2027-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | Rigor Scholar Cohort Awards support early-career researchers to advance expertise in rigorous scientific practices, such as preregistration, blinding, randomization, and transparent dissemination, through multi-institutional collaboration. Working within local and national cohorts, scholars will co-develop procedures and share lessons, building the vital skills needed to champion good scientific p…</summary>
   </entry>
   <entry>
     <title>Clinical Trials in Organ Transplantation in Children and Adults</title>
@@ -923,31 +948,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
-  </entry>
-  <entry>
-    <title>Rural Health Value Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363509"/>
-    <id>urn:funding-finder:grants-gov:363509</id>
-    <updated>2027-01-19T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-20 | The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363166"/>
-    <id>urn:funding-finder:grants-gov:363166</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
-  </entry>
-  <entry>
-    <title>Alliance for Innovation on Maternal Health (AIM) Capacity Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363407"/>
-    <id>urn:funding-finder:grants-gov:363407</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-17 | The purpose of the AIM Capacity program is to strengthen state, jurisdiction, and Tribal capacity to implement, expand, and sustain AIM PSBs and associated resources across the United States. AIM PSBs promote evidence-informed maternal safety practices to improve the quality and safety of maternity care and reduce preventable maternal mortality and severe maternal morbidity.</summary>
   </entry>
 </feed>
