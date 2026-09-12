@@ -7959,7 +7959,14 @@
     },
     "new_provider_calls": 0,
     "new_cost_microusd": 0,
-    "review": "No new PR or independent review requested; local prototype only."
+    "review": "No new PR or independent review requested; local prototype only.",
+    "implementation_commit": "ce517372e9b2f32de454864935e4c1303e9083ae",
+    "implementation_tree": "23aa5fcbb9a18ff12eb57394714d187434d78746",
+    "report_sha256": "e7fe6f0fa6cd5fd5fc5f16fe6436c47692627fee11a982132ff7f69e3c496e84",
+    "validation_receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v1.json",
+    "disposition": "BLOCKED BY A NAMED PREREQUISITE",
+    "authoritative_ledger_unchanged_at_closeout": true,
+    "protected_main_at_closeout": "fd37d5983405a04e650cb9d0a12aa34098ca2a76"
   },
   "active_work": "contextual-stage-b-demand-implementation"
 }
