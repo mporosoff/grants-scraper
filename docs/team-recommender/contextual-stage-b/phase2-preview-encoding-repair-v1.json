@@ -1,0 +1,65 @@
+{
+  "version": "phase2-preview-encoding-repair-v1",
+  "recorded_at": "2026-09-13T23:50:40.384557+00:00",
+  "failed_live_version": "58993ad6-da09-4876-9b17-63a0e71e620d",
+  "failed_deployment_run": 34790511921,
+  "first_boundary": "Restricted application HTML delivery before any Build or paid call.",
+  "cause": "Pre-gzipped assets were compressed a second time by Workers automatic Response encoding.",
+  "reference": "https://developers.cloudflare.com/workers/runtime-apis/response/",
+  "correction": "Use the documented encodeBody manual option for existing precompressed bytes.",
+  "helper_head": "f6b5ab08c023fbac3a6ff2d5dd3a6801846144b0",
+  "preview_bundle_unchanged": "f5986a177d6d9f5af076a3e087a78293c369719edb5b8b95a7a6b4b0c37618c2",
+  "scientific_changes": false,
+  "new_metered_calls": 0,
+  "focused_contracts_pass": 20,
+  "local_runtime_before": {
+    "status": 200,
+    "content_type": "text/html; charset=utf-8",
+    "content_encoding": "gzip",
+    "decoded_once_bytes": 10828,
+    "decoded_once_prefix_hex": "1f8b080000000000020acd7d",
+    "is_html": false,
+    "second_gunzip_bytes": 43186
+  },
+  "local_runtime_after": {
+    "runtime": "wrangler 4.125.0 local workerd HTTP",
+    "rows": [
+      {
+        "asset": "match_explorer.html",
+        "status": 200,
+        "decoded_once_bytes": 43186,
+        "decoded_once_sha256": "8691e79ffeefcd270693d908459135732ac981f758ea2d10fa8101b0ce1fc5a9",
+        "expected_sha256": "8691e79ffeefcd270693d908459135732ac981f758ea2d10fa8101b0ce1fc5a9",
+        "matches": true
+      },
+      {
+        "asset": "team_match.html",
+        "status": 200,
+        "decoded_once_bytes": 78146,
+        "decoded_once_sha256": "9d8991e995938806f1e098d4087774d7a26eccc87d78e669aa78a1fefbea76f2",
+        "expected_sha256": "9d8991e995938806f1e098d4087774d7a26eccc87d78e669aa78a1fefbea76f2",
+        "matches": true
+      },
+      {
+        "asset": "assets/contextual-team-client.js",
+        "status": 200,
+        "decoded_once_bytes": 8991,
+        "decoded_once_sha256": "5a1fea73cbedfacccbb47b8cc881f04907d1e884afb445c7504a357d752fe938",
+        "expected_sha256": "5a1fea73cbedfacccbb47b8cc881f04907d1e884afb445c7504a357d752fe938",
+        "matches": true
+      },
+      {
+        "asset": "data/opportunities.js",
+        "status": 200,
+        "decoded_once_bytes": 14304071,
+        "decoded_once_sha256": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+        "expected_sha256": "924778f83c49672421afbbd4c5b95a9685171cc20ce62afe79ada6697205525c",
+        "matches": true
+      }
+    ],
+    "paid_calls": 0
+  },
+  "prior_execution_lock_sha256": "006f082d62e84b6e466235499e45b483375946b60389e23ee2f902cadf49e8e1",
+  "restricted_review_and_deploy": "required before retrying application navigation",
+  "paid_corrective_reexecution_used": false
+}
