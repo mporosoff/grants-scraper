@@ -1,0 +1,46 @@
+{
+  "version": "option1-receipt-index-v1",
+  "code_sha": "1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+  "report": {
+    "path": "docs/team-recommender/reports/contextual-stage-b-option1-integration-repair-report.md",
+    "sha256": "b077c4df8ac219008409d486bcd61a0df0eff675fc7822278e48096d489d1490"
+  },
+  "receipts": [
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-accounting-v1.json",
+      "sha256": "1088d0da26bb46c5eec21e8f6f87f93cfc85c3eb068cc9c99f85b0d4aab0a748"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-check-failure-v1.json",
+      "sha256": "8df5e1bf730b7f06afd097ba4c6345ed6efdb5d38dbdd64d8660a00508a34743"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-execution-lock-v1.json",
+      "sha256": "9594f39b30a0503c329997efddf9514d3a4fb0331cf4d269a6608b615b307fd3"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-live-browser-v1.json",
+      "sha256": "f205d9c97b44d6c52f71843a21e9f97d8e26b01d1a651d82033a96aabe83edea"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-original-failures-v1.json",
+      "sha256": "ecdc2f1b0c9c7b9c42130ad3b93ab1411b087b953e88f3a5bc84540556069885"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-pre-dispatch-v1.json",
+      "sha256": "c36f20cc1e11a11eff2718b9ee3c7bdb2b320933b6e0c555c1586fb4093ec6d1"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-real-graphs-v1.json",
+      "sha256": "34a78cd823ca154766276097c4646a4340b1f49bf61d6480e8b223fa80178f0c"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-serving-v1.json",
+      "sha256": "b97da3b4f5fe528dc7c251b5f40864a3e0e010a3253f28c9aa7d2fc318a3f53d"
+    },
+    {
+      "path": "docs/team-recommender/contextual-stage-b/option1-validation-v1.json",
+      "sha256": "8f7721e9df5f8666e525f18d9c963daa2c8dc514d068dd656de6cebb413e87fe"
+    }
+  ]
+}

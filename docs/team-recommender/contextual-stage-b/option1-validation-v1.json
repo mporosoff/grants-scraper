@@ -1,0 +1,41 @@
+{
+  "version": "option1-validation-v1",
+  "product_code_sha": "1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+  "helper_pr": 238,
+  "helper_head": "9344e46478d287f72547fb859443bcd423e6772c",
+  "helper_merge": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+  "required_ci_run": 34768863329,
+  "python": {
+    "passed": 1421,
+    "seconds": 291.226,
+    "log_sha256": "5a8b3bb0e86f3ac4c5991d0737679087205f866d800eb069da3f48950dd29f10"
+  },
+  "browser_contracts": {
+    "passed": 901,
+    "seconds": 79.387,
+    "log_sha256": "faa76f856d19aaee31e980a599aa70a7d6c86dd41b4cee70b3bd348c4205a371"
+  },
+  "full_e2e": {
+    "startTime": "2026-09-13T16:50:02.877Z",
+    "duration": 943534.7710000001,
+    "expected": 117,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "errors": [],
+    "result_sha256": "f1c8c5fe2b5cc90784369476d75451bc9c43c26f3d59255fbd847b12aeacf7a0",
+    "configured_cases": 117,
+    "a11y_scans": 25,
+    "serious_or_critical_findings": 0,
+    "manual_or_incomplete_a11y_checks_remain": true,
+    "teardown": "All test workers exited; owned localhost8765 server hung. Its verified PID34784 was stopped; the original runner then exited0 and wrote117passed. No repeated full suite."
+  },
+  "focused_helper_python": 24,
+  "focused_helper_node": 17,
+  "focused_product_node": 17,
+  "crash_fixture_boundaries": 8,
+  "restorations_per_boundary": 3,
+  "duplicate_fixture_dispatches": 0,
+  "no_public_presentation_changes_from_start": true,
+  "physical_mobile": "not_run"
+}

@@ -1,0 +1,542 @@
+{
+  "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "roster_id": "1c6a29538ff8911ca01f7b4d1483f4251bbb4ab237a54f134f4872d0ae27fe60",
+  "input_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+  "failures": [
+    {
+      "scope_id": "361207",
+      "title": "National Resource Network for the Study of Human Auditory and Vestibular Disorders",
+      "source_id": "178a5c40173d4bd405e347e0871ba771d999d0fef6371e5a8920daf934710773",
+      "request": {
+        "attempt": 1,
+        "body_sha256": "0c482bbf023ca1c7b6cdbc8d74e48a04fed000e7f28eff88dcc46c22abe4a223",
+        "charged_microusd": 100918,
+        "code_sha": "dc48d7da8077d52773e89db76e9e772bfd0af469",
+        "dispatch_claim": "irreversible-v1",
+        "id": "c094386dbce248099ec5935feb8fc1ba",
+        "judge_items": [],
+        "key": "8010b706f74cd01974619011a88d6b3ed766191f4bfad12ceb2d82463008204e",
+        "model": "claude-sonnet-5",
+        "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+        "provider": "anthropic",
+        "purpose": "cb-assess",
+        "reserved_input_tokens": 34995,
+        "reserved_microusd": 149990,
+        "reserved_output_tokens": 8000,
+        "row_inputs": [],
+        "stage": 2,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 12394,
+          "output_tokens": 7613,
+          "output_tokens_details": {
+            "thinking_tokens": 6858
+          },
+          "service_tier": "standard"
+        }
+      },
+      "receipt": {
+        "body_sha256": "0c482bbf023ca1c7b6cdbc8d74e48a04fed000e7f28eff88dcc46c22abe4a223",
+        "charged_microusd": 100918,
+        "code_sha": "dc48d7da8077d52773e89db76e9e772bfd0af469",
+        "disposition": "failed",
+        "error": "SchemaFailure",
+        "http_status": 200,
+        "key": "8010b706f74cd01974619011a88d6b3ed766191f4bfad12ceb2d82463008204e",
+        "purpose": "cb-assess",
+        "request_id": "c094386dbce248099ec5935feb8fc1ba",
+        "reserved_microusd": 149990,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 12394,
+          "output_tokens": 7613,
+          "output_tokens_details": {
+            "thinking_tokens": 6858
+          },
+          "service_tier": "standard"
+        }
+      }
+    },
+    {
+      "scope_id": "361208",
+      "title": "Coordinating Center for National Resource Network for the Study of Human Auditory and Vestibular Disorders",
+      "source_id": "b2c90a9786bff4b10f47b062bdd58e3e4c2b29c1cac52d40265f788e0f0a1eb4",
+      "request": {
+        "attempt": 1,
+        "body_sha256": "ec9f53507c424c19f1cd5046267a727ac2a30a9f953f6ff61296bedea78fde43",
+        "charged_microusd": 104880,
+        "code_sha": "ae2878a6a292f17b46241ff36b117ecf154745db",
+        "dispatch_claim": "irreversible-v1",
+        "id": "702d2da6519c4d9da584ea1f3d921736",
+        "judge_items": [],
+        "key": "61b7135cbfc746159357ee29196fac9a6b2205da4d3202bce45c492237a3de42",
+        "model": "claude-sonnet-5",
+        "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+        "provider": "anthropic",
+        "purpose": "cb-assess",
+        "reserved_input_tokens": 35263,
+        "reserved_microusd": 150526,
+        "reserved_output_tokens": 8000,
+        "row_inputs": [],
+        "stage": 2,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 12440,
+          "output_tokens": 8000,
+          "output_tokens_details": {
+            "thinking_tokens": 8000
+          },
+          "service_tier": "standard"
+        }
+      },
+      "receipt": {
+        "body_sha256": "ec9f53507c424c19f1cd5046267a727ac2a30a9f953f6ff61296bedea78fde43",
+        "charged_microusd": 104880,
+        "code_sha": "ae2878a6a292f17b46241ff36b117ecf154745db",
+        "disposition": "failed",
+        "error": "Incomplete",
+        "http_status": 200,
+        "key": "61b7135cbfc746159357ee29196fac9a6b2205da4d3202bce45c492237a3de42",
+        "provider_stop_reason": "max_tokens",
+        "purpose": "cb-assess",
+        "request_id": "702d2da6519c4d9da584ea1f3d921736",
+        "reserved_microusd": 150526,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 12440,
+          "output_tokens": 8000,
+          "output_tokens_details": {
+            "thinking_tokens": 8000
+          },
+          "service_tier": "standard"
+        }
+      }
+    },
+    {
+      "scope_id": "332894",
+      "title": "LPS Qubit Collaboratory (LQC)",
+      "source_id": "b898f42c6b93f3450da1169b595281fc578bb2c9c48173448d07d67d06a5b2f3",
+      "request": {
+        "attempt": 1,
+        "body_sha256": "4e2ff408319c50517522a90f3b2743759f52e83889472448b1527ed4cf3b60ff",
+        "charged_microusd": 192404,
+        "code_sha": "c14f4fec7a742948af2682a2371686d5986d128e",
+        "dispatch_claim": "irreversible-v1",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "id": "a97083b5dbd14afebd5e17166d068a3e",
+        "judge_items": [],
+        "key": "65cfdffab23161f218f51ecb1f951f7988676d1d40ca329c5884a659a23d9b5e",
+        "model": "claude-sonnet-5",
+        "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+        "provider": "anthropic",
+        "purpose": "cb-verify",
+        "reserved_input_tokens": 46770,
+        "reserved_microusd": 253540,
+        "reserved_output_tokens": 16000,
+        "row_inputs": [],
+        "stage": 2,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 16202,
+          "output_tokens": 16000,
+          "output_tokens_details": {
+            "thinking_tokens": 15008
+          },
+          "service_tier": "standard"
+        }
+      },
+      "receipt": {
+        "body_sha256": "4e2ff408319c50517522a90f3b2743759f52e83889472448b1527ed4cf3b60ff",
+        "charged_microusd": 192404,
+        "code_sha": "c14f4fec7a742948af2682a2371686d5986d128e",
+        "disposition": "failed",
+        "error": "Incomplete",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "http_status": 200,
+        "key": "65cfdffab23161f218f51ecb1f951f7988676d1d40ca329c5884a659a23d9b5e",
+        "output_token_ceiling": 16000,
+        "provider_stop_reason": "max_tokens",
+        "purpose": "cb-verify",
+        "request_id": "a97083b5dbd14afebd5e17166d068a3e",
+        "reserved_microusd": 253540,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 16202,
+          "output_tokens": 16000,
+          "output_tokens_details": {
+            "thinking_tokens": 15008
+          },
+          "service_tier": "standard"
+        }
+      }
+    },
+    {
+      "scope_id": "344592:ab-0025",
+      "title": "Electrochemistry",
+      "source_id": "ff0cc9af2adf1d122bd67819f19a2782e569b5743a71fc30342b66e504a35ad4",
+      "request": {
+        "attempt": 1,
+        "body_sha256": "af13e7e99af26d1b7e872f2cbe571fce72c0b7510fda8c874991fafb8c72eb84",
+        "charged_microusd": 20746,
+        "code_sha": "c14f4fec7a742948af2682a2371686d5986d128e",
+        "dispatch_claim": "irreversible-v1",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "id": "d8b779b41d8e4158b8be1375da31a8a3",
+        "judge_items": [],
+        "key": "d1dccd9b3675753316d0b74798a60f2d537d3ce4abcbf058c1d5313f8accec59",
+        "model": "claude-sonnet-5",
+        "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+        "provider": "anthropic",
+        "purpose": "cb-interpret",
+        "reserved_input_tokens": 12223,
+        "reserved_microusd": 104446,
+        "reserved_output_tokens": 8000,
+        "row_inputs": [],
+        "stage": 2,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 3838,
+          "output_tokens": 1307,
+          "output_tokens_details": {
+            "thinking_tokens": 645
+          },
+          "service_tier": "standard"
+        }
+      },
+      "receipt": {
+        "body_sha256": "af13e7e99af26d1b7e872f2cbe571fce72c0b7510fda8c874991fafb8c72eb84",
+        "charged_microusd": 20746,
+        "code_sha": "c14f4fec7a742948af2682a2371686d5986d128e",
+        "disposition": "failed",
+        "error": "ValueError",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "http_status": 200,
+        "key": "d1dccd9b3675753316d0b74798a60f2d537d3ce4abcbf058c1d5313f8accec59",
+        "output_token_ceiling": 8000,
+        "provider_stop_reason": "end_turn",
+        "purpose": "cb-interpret",
+        "request_id": "d8b779b41d8e4158b8be1375da31a8a3",
+        "reserved_microusd": 104446,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 3838,
+          "output_tokens": 1307,
+          "output_tokens_details": {
+            "thinking_tokens": 645
+          },
+          "service_tier": "standard"
+        }
+      }
+    },
+    {
+      "scope_id": "362856",
+      "title": "DoW Bone Marrow Failure, Resource Development Award",
+      "source_id": "b79ea5e29e1c8e702486e6c9224896ddca5bec17ba0d07070198eb8c49d81f6c",
+      "request": {
+        "attempt": 1,
+        "body_sha256": "e7e7213037aa79610ad8b5e120c964dbc10755b8aea1d37a2dfce8f23abd8698",
+        "charged_microusd": 109498,
+        "code_sha": "683870dc774eadb9f7d335895267854f9b9a65dd",
+        "dispatch_claim": "irreversible-v1",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "id": "c0bbe1d6ff6c496f8dc0d2b152678644",
+        "judge_items": [],
+        "key": "a607ef849fad7ef94a3f4521032bddcc79e78fd432b22c01741ac7d33314ab95",
+        "model": "claude-sonnet-5",
+        "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+        "provider": "anthropic",
+        "purpose": "cb-assess",
+        "reserved_input_tokens": 51963,
+        "reserved_microusd": 263926,
+        "reserved_output_tokens": 16000,
+        "row_inputs": [],
+        "stage": 2,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 18799,
+          "output_tokens": 7190,
+          "output_tokens_details": {
+            "thinking_tokens": 6165
+          },
+          "service_tier": "standard"
+        }
+      },
+      "receipt": {
+        "body_sha256": "e7e7213037aa79610ad8b5e120c964dbc10755b8aea1d37a2dfce8f23abd8698",
+        "charged_microusd": 109498,
+        "code_sha": "683870dc774eadb9f7d335895267854f9b9a65dd",
+        "disposition": "failed",
+        "error": "SchemaFailure",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "http_status": 200,
+        "key": "a607ef849fad7ef94a3f4521032bddcc79e78fd432b22c01741ac7d33314ab95",
+        "output_token_ceiling": 16000,
+        "provider_stop_reason": "end_turn",
+        "purpose": "cb-assess",
+        "request_id": "c0bbe1d6ff6c496f8dc0d2b152678644",
+        "reserved_microusd": 263926,
+        "schema_diagnostic": {
+          "actual_type": "str",
+          "expected_type": "string",
+          "missing_keys": [],
+          "path": "$.edges[0].reason",
+          "rule": "string_length",
+          "shape": {
+            "length": 224,
+            "type": "str"
+          },
+          "unexpected_keys": []
+        },
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 18799,
+          "output_tokens": 7190,
+          "output_tokens_details": {
+            "thinking_tokens": 6165
+          },
+          "service_tier": "standard"
+        }
+      }
+    },
+    {
+      "scope_id": "363069",
+      "title": "Veterans Legacy Grants Program",
+      "source_id": "1834afce29858e54e5ef6b60f219eae2b59f38d949b2a9a58a78661df7560edf",
+      "request": {
+        "attempt": 1,
+        "body_sha256": "183f177691a0b60752c8840f425aa2a92edded01a49f736b7a1c364139971a84",
+        "charged_microusd": 65362,
+        "code_sha": "683870dc774eadb9f7d335895267854f9b9a65dd",
+        "dispatch_claim": "irreversible-v1",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "id": "4dc560a939794801bb774d671a88b6e4",
+        "judge_items": [],
+        "key": "91ca71437e9ee423193643c5d41f05015526ae49c6748e521a7c58dfe6dbc816",
+        "model": "claude-sonnet-5",
+        "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+        "provider": "anthropic",
+        "purpose": "cb-assess",
+        "reserved_input_tokens": 34476,
+        "reserved_microusd": 228952,
+        "reserved_output_tokens": 16000,
+        "row_inputs": [],
+        "stage": 2,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 12216,
+          "output_tokens": 4093,
+          "output_tokens_details": {
+            "thinking_tokens": 3344
+          },
+          "service_tier": "standard"
+        }
+      },
+      "receipt": {
+        "body_sha256": "183f177691a0b60752c8840f425aa2a92edded01a49f736b7a1c364139971a84",
+        "charged_microusd": 65362,
+        "code_sha": "683870dc774eadb9f7d335895267854f9b9a65dd",
+        "disposition": "failed",
+        "error": "SchemaFailure",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "http_status": 200,
+        "key": "91ca71437e9ee423193643c5d41f05015526ae49c6748e521a7c58dfe6dbc816",
+        "output_token_ceiling": 16000,
+        "provider_stop_reason": "end_turn",
+        "purpose": "cb-assess",
+        "request_id": "4dc560a939794801bb774d671a88b6e4",
+        "reserved_microusd": 228952,
+        "schema_diagnostic": {
+          "actual_type": "str",
+          "expected_type": "string",
+          "missing_keys": [],
+          "path": "$.edges[0].reason",
+          "rule": "string_length",
+          "shape": {
+            "length": 260,
+            "type": "str"
+          },
+          "unexpected_keys": []
+        },
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 12216,
+          "output_tokens": 4093,
+          "output_tokens_details": {
+            "thinking_tokens": 3344
+          },
+          "service_tier": "standard"
+        }
+      }
+    },
+    {
+      "scope_id": "345241:tdac-baa-004:extension",
+      "title": "Analytical Methodology for Future Army Systems Enabled by Quantum Technology (Quantum)",
+      "source_id": "c0a7ba68ad1ce54b7aefc421f9ba8f9262055297cc453bf584c0cb434aa1309e",
+      "request": {
+        "attempt": 1,
+        "body_sha256": "1984cebb81e6db7f90cb66b0cbcfa0d76848c73297691ab85a9a35b2c5e27a0b",
+        "charged_microusd": 21202,
+        "code_sha": "683870dc774eadb9f7d335895267854f9b9a65dd",
+        "dispatch_claim": "irreversible-v1",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "id": "8609e912e8284af4846abee9afd52672",
+        "judge_items": [],
+        "key": "5766704e1d43910b291454b8a8c2c77103eb08680274be156986ac84a0c212bb",
+        "model": "claude-sonnet-5",
+        "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+        "provider": "anthropic",
+        "purpose": "cb-extend-assess",
+        "reserved_input_tokens": 13561,
+        "reserved_microusd": 187122,
+        "reserved_output_tokens": 16000,
+        "row_inputs": [],
+        "stage": 2,
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 4621,
+          "output_tokens": 1196,
+          "output_tokens_details": {
+            "thinking_tokens": 529
+          },
+          "service_tier": "standard"
+        }
+      },
+      "receipt": {
+        "body_sha256": "1984cebb81e6db7f90cb66b0cbcfa0d76848c73297691ab85a9a35b2c5e27a0b",
+        "charged_microusd": 21202,
+        "code_sha": "683870dc774eadb9f7d335895267854f9b9a65dd",
+        "disposition": "failed",
+        "error": "SchemaFailure",
+        "execution_capacity": "contextual-output-capacity-v2",
+        "http_status": 200,
+        "key": "5766704e1d43910b291454b8a8c2c77103eb08680274be156986ac84a0c212bb",
+        "output_token_ceiling": 16000,
+        "provider_stop_reason": "end_turn",
+        "purpose": "cb-extend-assess",
+        "request_id": "8609e912e8284af4846abee9afd52672",
+        "reserved_microusd": 187122,
+        "schema_diagnostic": {
+          "actual_type": "str",
+          "expected_type": "string",
+          "missing_keys": [],
+          "path": "$.edges[0].reason",
+          "rule": "string_length",
+          "shape": {
+            "length": 260,
+            "type": "str"
+          },
+          "unexpected_keys": []
+        },
+        "status": "failed",
+        "usage": {
+          "cache_creation": {
+            "ephemeral_1h_input_tokens": 0,
+            "ephemeral_5m_input_tokens": 0
+          },
+          "cache_creation_input_tokens": 0,
+          "cache_read_input_tokens": 0,
+          "inference_geo": "global",
+          "input_tokens": 4621,
+          "output_tokens": 1196,
+          "output_tokens_details": {
+            "thinking_tokens": 529
+          },
+          "service_tier": "standard"
+        }
+      }
+    }
+  ],
+  "raw_failed_bodies_retained": false
+}

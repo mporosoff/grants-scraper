@@ -61,8 +61,8 @@
     "D3_judge_requests": 120,
     "D3_prior_usd": 2.27911,
     "D3_spend_usd": 0.856223,
-    "actual_usd": 5.495902,
-    "authoritative_owner": "Exclusive protected-main cloud executor; latest paired checkpoint run34758252589",
+    "actual_usd": 5.758414,
+    "authoritative_owner": "Exclusive protected-main cloud executor; paired checkpoint run34770252997",
     "authorized_usd": 10,
     "closeout_new_requests": 24,
     "closeout_new_usd": 1.205247,
@@ -71,22 +71,22 @@
     "historical_other_task_usd": 11.971342,
     "historical_stage2_minimum_later_reserve_usd": 4,
     "id": "on-demand-team-offline-v2-20260909",
-    "input_tokens": 1972193,
-    "latest_checkpoint_sha256": "83ff044fd91f64bb16b5949f49b665c50c533f119f3a3fa5c6475f92ef2e961f",
-    "latest_run_id": 34758252589,
-    "ledger": "Cloud artifact10317188749, run34758252589; raw ledger remains private. Prior docs/team-recommender/budget-ledger.json is historical.",
-    "ledger_sha256": "bd55da4cc6b2483b06d9ecffbb104a0ea221335b2fd17d4de7f0bde12460b82a",
+    "input_tokens": 2035984,
+    "latest_checkpoint_sha256": "211f59362518c169cb6f3e44a77f43b3439a7fb41a738b7eebf2fb868d63dbf7",
+    "latest_run_id": 34770252997,
+    "ledger": "Cloud state artifact10321363226, run34770252997; local mirrors read-only.",
+    "ledger_sha256": "281938a7be619dcbef286c50f262b92e7c31c312caeb8e1221d1de5c4dac5e7b",
     "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
     "no_new_allowance_at_closeout": true,
-    "output_tokens": 153979,
+    "output_tokens": 167472,
     "path": "docs/team-recommender/preparation-budget.json",
     "reconciliation": {
-      "path": "docs/team-recommender/contextual-stage-b/real-execution-receipt-v1.json",
-      "sha256": "8f36cedbaf42abf9d8353356dfff7a76c0423a4a172f00d7763112edc815138a"
+      "path": "docs/team-recommender/contextual-stage-b/option1-accounting-v1.json",
+      "sha256": "1088d0da26bb46c5eec21e8f6f87f93cfc85c3eb068cc9c99f85b0d4aab0a748"
     },
-    "remaining_request_slots": 37,
-    "remaining_total_usd": 4.504098,
-    "requests": 653,
+    "remaining_request_slots": 31,
+    "remaining_total_usd": 4.241586,
+    "requests": 659,
     "reserved_usd": 0,
     "stage2_cumulative_ceiling_usd": 6,
     "stage3_ceiling_new_usd": 4,
@@ -105,9 +105,11 @@
     "shared_evidence_repair_new_requests": 0,
     "contextual_new_usd": 1.205247,
     "contextual_new_requests": 24,
-    "current_task_reserve_usd": 0.709345,
+    "current_task_reserve_usd": 3.004098,
     "current_task_reserve_requests": 21,
-    "historical_reserve_fields": "stage2/stage3/stage4 fields above retain historical authorization; current contextual amendment is authoritative."
+    "historical_reserve_fields": "stage2/stage3/stage4 fields above retain historical authorization; current contextual amendment is authoritative.",
+    "option1_new_usd": 0.262512,
+    "option1_new_requests": 6
   },
   "candidate": {
     "primary": "contextual-audited-graph-v1 implementation",
@@ -120,19 +122,47 @@
     "fallback": null
   },
   "checks": {
-    "receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v5.json",
-    "original_four_browser_failures": "Corrected with focused passing evidence; original full117-case run remains113pass/4fail historical",
-    "changed_engine_client_tests": "15 pass",
-    "presentation_contracts": "15 pass",
-    "real_graph_reference": "pass empty/no-group/manual paths",
-    "live_admin": "pass",
-    "live_application_cross_origin": "fail unreadable response; unresolved cause",
-    "independent_quality_check": "not run: zero eligible primary groups",
-    "physical_mobile": "NOT RUN",
-    "incremental_heap": "One actual no-group result+10.04MiB observed; broader48MiB target UNMEASURED",
-    "full_suites": "Preserved earlier runs and focused corrections; not reexecuted at current head"
+    "version": "option1-validation-v1",
+    "product_code_sha": "1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+    "helper_pr": 238,
+    "helper_head": "9344e46478d287f72547fb859443bcd423e6772c",
+    "helper_merge": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+    "required_ci_run": 34768863329,
+    "python": {
+      "passed": 1421,
+      "seconds": 291.226,
+      "log_sha256": "5a8b3bb0e86f3ac4c5991d0737679087205f866d800eb069da3f48950dd29f10"
+    },
+    "browser_contracts": {
+      "passed": 901,
+      "seconds": 79.387,
+      "log_sha256": "faa76f856d19aaee31e980a599aa70a7d6c86dd41b4cee70b3bd348c4205a371"
+    },
+    "full_e2e": {
+      "startTime": "2026-09-13T16:50:02.877Z",
+      "duration": 943534.7710000001,
+      "expected": 117,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0,
+      "errors": [],
+      "result_sha256": "f1c8c5fe2b5cc90784369476d75451bc9c43c26f3d59255fbd847b12aeacf7a0",
+      "configured_cases": 117,
+      "a11y_scans": 25,
+      "serious_or_critical_findings": 0,
+      "manual_or_incomplete_a11y_checks_remain": true,
+      "teardown": "All test workers exited; owned localhost8765 server hung. Its verified PID34784 was stopped; the original runner then exited0 and wrote117passed. No repeated full suite."
+    },
+    "focused_helper_python": 24,
+    "focused_helper_node": 17,
+    "focused_product_node": 17,
+    "crash_fixture_boundaries": 8,
+    "restorations_per_boundary": 3,
+    "duplicate_fixture_dispatches": 0,
+    "no_public_presentation_changes_from_start": true,
+    "physical_mobile": "not_run"
   },
-  "containing_commit": "Documentation closeout after tested local runtime bc931dcd03b3a2bbff573431e39cbafa72615a36; resolve report-containing commit from file history",
+  "containing_commit": "Documentation commit containing contextual-stage-b-option1-integration-repair-report.md; tested code1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -7018,7 +7048,7 @@
     "contextual_manual_executor_main": "683870dc774eadb9f7d335895267854f9b9a65dd",
     "contextual_public_activation": false
   },
-  "proposed_next_stage": "No public release. Owner review of this finite pass and its exact execution/access failures.",
+  "proposed_next_stage": "No next stage authorized.",
   "ranking_revision_D2": {
     "MMR": false,
     "cloud_owner_run": 34510982749,
@@ -7101,12 +7131,12 @@
     "trusted_execution": "PR223 exact-head reviewed/CI passed and protected-merged; three manual runs completed finite embedding/judging; one terminal failed request charged without replay."
   },
   "receipt_index": {
-    "path": "docs/team-recommender/stage3-receipt-index.json",
-    "sha256": "80132ec2291e55a8ff2e7c2c605e770add2b790267b89442a12b3eec3a1348cf"
+    "path": "docs/team-recommender/contextual-stage-b/option1-receipt-index-v1.json",
+    "sha256": "95db1213b32a1e93299e6ee34ee766ab29efc02dc21e1731db1a89427f244c0c"
   },
-  "recommendation": "IMPLEMENTED BUT USEFULNESS INSUFFICIENT/INCONCLUSIVE",
-  "recommended_next_stage": "STOP FOR USER REVIEW; no automatic scientific or paid continuation or Stage4",
-  "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
+  "recommendation": "BLOCKED BY A SPECIFIC CONTRACT, ACCESS, BUDGET, OR RESOURCE FAILURE.",
+  "recommended_next_stage": "Owner review of the completed application path and failed bounded independent check. No automatic paid retry, campaign, public activation or Stage4.",
+  "report": "docs/team-recommender/reports/contextual-stage-b-option1-integration-repair-report.md",
   "repository": "mporosoff/grants-scraper",
   "results": {
     "contextual_counts": {
@@ -7447,17 +7477,15 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "contextual-stage-B-finite-validation-executed-NOT-QUALIFIED",
-  "stop": "STOP FOR USER REVIEW; no activation, paid retry/rekey, new campaign or Stage4",
+  "stage_status": "finite_option1_integration_demonstrated_independent_check_contract_blocked",
+  "stop": "STOP FOR USER REVIEW; independent check reason72>60; no automatic replay, public activation or Stage4",
   "unresolved": [
-    "Six initial scope workflows failed; no valid graph for them",
-    "Single extension failed its schema; original graph preserved",
-    "Zero eligible primary groups for independent output/faithfulness check",
-    "Local application cross-origin protected-service request fails; same-origin admin works",
-    "Four documented researcher source gaps remain",
-    "No real useful-options benchmark, physical mobile evidence or general48MiB incremental-memory qualification"
+    "Independent group/person check0/4accepted; rationale72>60; complete failed body not retained.",
+    "Explanation check0/3unrun after first check failure; no scientific-quality acceptance.",
+    "Two scopes are integration evidence, not universal precision/yield;142/143per-scope people remain unassessed.",
+    "General peak memory and physical-device evidence unmeasured; no waiver."
   ],
-  "updated_at": "2026-09-13T13:18:14.632671+00:00",
+  "updated_at": "2026-09-13T17:17:46.626007+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -7982,28 +8010,28 @@
     "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
   },
   "contextual_stage_b": {
-    "status": "finite_validation_executed_execution_failures_usefulness_unmeasured",
+    "status": "integration_repaired_positive_path_demonstrated_check_contract_blocked",
     "authority": "docs/team-recommender/contextual-stage-b/AUTHORITY.md",
     "product_start": "1018d6faac2f08a6a2e828c0b72612437114d9bc",
     "analytical_start": "58a59143ef5446b05223f52982a547903f53e24d",
     "protected_main_start": "fd37d5983405a04e650cb9d0a12aa34098ca2a76",
     "budget": {
       "authorization_id": "on-demand-team-offline-v2-20260909",
-      "owner_run": 34758252589,
-      "state_artifact_id": 10317188749,
-      "reservation_artifact_id": 10318043788,
-      "ledger_sha256": "bd55da4cc6b2483b06d9ecffbb104a0ea221335b2fd17d4de7f0bde12460b82a",
-      "checkpoint_sha256": "83ff044fd91f64bb16b5949f49b665c50c533f119f3a3fa5c6475f92ef2e961f",
-      "checkpoint_files_verified": 1285,
+      "owner_run": 34770252997,
+      "state_artifact_id": 10321363226,
+      "reservation_artifact_id": 10321487873,
+      "ledger_sha256": "281938a7be619dcbef286c50f262b92e7c31c312caeb8e1221d1de5c4dac5e7b",
+      "checkpoint_sha256": "211f59362518c169cb6f3e44a77f43b3439a7fb41a738b7eebf2fb868d63dbf7",
+      "checkpoint_files_verified": 1299,
       "prior_charged_microusd": 4290655,
       "prior_attempts": 629,
       "task_charged_microusd": 1205247,
       "task_attempts": 24,
-      "total_charged_microusd": 5495902,
-      "total_attempts": 653,
+      "total_charged_microusd": 5758414,
+      "total_attempts": 659,
       "reserved_unknown": 0,
-      "remaining_microusd": 4504098,
-      "remaining_attempts": 37,
+      "remaining_microusd": 4241586,
+      "remaining_attempts": 31,
       "task_limit_microusd": 5000000,
       "task_attempt_limit": 40,
       "task_remaining_microusd": 3794753,
@@ -8016,7 +8044,9 @@
       "text_output_tokens": 89762,
       "embedding_tokens": 23728,
       "local_mirror_read_only": true,
-      "no_duplicate_request_ids_or_keys": true
+      "no_duplicate_request_ids_or_keys": true,
+      "option1_receipt": "contextual-stage-b/option1-accounting-v1.json",
+      "legacy_task_fields_are_historical": true
     },
     "public_activation": false,
     "new_human_items": 0,
@@ -8033,8 +8063,8 @@
       "updated_at": "2026-09-11",
       "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA"
     },
-    "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
-    "blocker": "Six initial scientific workflows and the single extension failed immutable paid-output checks; no useful primary groups for independent evaluation. Local application cross-origin protected-service transport remains unresolved.",
+    "report": "docs/team-recommender/reports/contextual-stage-b-option1-integration-repair-report.md",
+    "blocker": "Independent-check complete reason72 exceeds60; failed request retained, no replay/rekey; explanation unrun.",
     "input_lock": "docs/team-recommender/contextual-stage-b/input-lock-v1.json",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
     "budget_preflight": "docs/team-recommender/contextual-stage-b/preflight-budget-v2.json",
@@ -8067,7 +8097,7 @@
     },
     "implementation_commit": "bc931dcd03b3a2bbff573431e39cbafa72615a36",
     "implementation_tree": "6d7306c6da93052bea024a853b85a1f80c9b4c11",
-    "report_sha256": "7e5ddfe0aff2b7076d87fe5a8ad763671d182ab403d058eb50182fe38ad0b639",
+    "report_sha256": "b077c4df8ac219008409d486bcd61a0df0eff675fc7822278e48096d489d1490",
     "validation_receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v5.json",
     "disposition": "IMPLEMENTED BUT USEFULNESS INSUFFICIENT/INCONCLUSIVE",
     "authoritative_ledger_unchanged_at_closeout": true,
@@ -8332,6 +8362,59 @@
         },
         "real_validation_lock": "docs/team-recommender/contextual-stage-b/real-validation-lock-v1.json",
         "preserved_report": "docs/team-recommender/reports/contextual-stage-b-access-checkpoint-20260913.md"
+      },
+      {
+        "kind": "before_option1_closeout",
+        "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
+        "status": "finite_validation_executed_execution_failures_usefulness_unmeasured",
+        "budget": {
+          "authorization_id": "on-demand-team-offline-v2-20260909",
+          "owner_run": 34758252589,
+          "state_artifact_id": 10317188749,
+          "reservation_artifact_id": 10318043788,
+          "ledger_sha256": "bd55da4cc6b2483b06d9ecffbb104a0ea221335b2fd17d4de7f0bde12460b82a",
+          "checkpoint_sha256": "83ff044fd91f64bb16b5949f49b665c50c533f119f3a3fa5c6475f92ef2e961f",
+          "checkpoint_files_verified": 1285,
+          "prior_charged_microusd": 4290655,
+          "prior_attempts": 629,
+          "task_charged_microusd": 1205247,
+          "task_attempts": 24,
+          "total_charged_microusd": 5495902,
+          "total_attempts": 653,
+          "reserved_unknown": 0,
+          "remaining_microusd": 4504098,
+          "remaining_attempts": 37,
+          "task_limit_microusd": 5000000,
+          "task_attempt_limit": 40,
+          "task_remaining_microusd": 3794753,
+          "task_remaining_attempts": 16,
+          "overall_limit_microusd": 10000000,
+          "overall_attempt_limit": 690,
+          "minimum_remaining_microusd": 709345,
+          "minimum_remaining_attempts": 21,
+          "text_input_tokens": 152389,
+          "text_output_tokens": 89762,
+          "embedding_tokens": 23728,
+          "local_mirror_read_only": true,
+          "no_duplicate_request_ids_or_keys": true
+        },
+        "scientific_result": "UNMEASURED: no eligible primary group for independent check; provider failures not scientific negatives",
+        "option1_prior_state": {
+          "status": "implementation_in_progress_zero_paid",
+          "starting_head": "3e9377736c22f8aa7796fc1d84087245837fdd6c",
+          "starting_tested_runtime": "bc931dcd03b3a2bbff573431e39cbafa72615a36",
+          "authority": "contextual-stage-b/OPTION1-AUTHORITY.md",
+          "execution_lock": "contextual-stage-b/option1-execution-lock-v1.json",
+          "release_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+          "starting_charged_microusd": 5495902,
+          "starting_attempts": 653,
+          "new_spend_microusd": 0,
+          "new_attempts": 0,
+          "planned_maximum_microusd": 1418340,
+          "planned_attempts": 7,
+          "public_activation": false,
+          "report": "reports/contextual-stage-b-option1-integration-repair-report.md"
+        }
       }
     ],
     "administrator_access": "User confirmed and actual restricted browser interactions completed",
@@ -8491,9 +8574,9 @@
     "real_browser_receipt": "docs/team-recommender/contextual-stage-b/real-browser-receipt-v1.json",
     "routing_observation": "docs/team-recommender/contextual-stage-b/routing-observation-v2.json",
     "four_tasks_all_passed": false,
-    "stop": "STOP FOR USER REVIEW; no activation, paid retry/rekey, new campaign or Stage4",
+    "stop": true,
     "option1": {
-      "status": "implementation_in_progress_zero_paid",
+      "status": "finite_execution_stopped_independent_check_contract_failure",
       "starting_head": "3e9377736c22f8aa7796fc1d84087245837fdd6c",
       "starting_tested_runtime": "bc931dcd03b3a2bbff573431e39cbafa72615a36",
       "authority": "contextual-stage-b/OPTION1-AUTHORITY.md",
@@ -8501,15 +8584,517 @@
       "release_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
       "starting_charged_microusd": 5495902,
       "starting_attempts": 653,
-      "new_spend_microusd": 0,
-      "new_attempts": 0,
+      "new_spend_microusd": 262512,
+      "new_attempts": 6,
       "planned_maximum_microusd": 1418340,
       "planned_attempts": 7,
       "public_activation": false,
-      "report": "reports/contextual-stage-b-option1-integration-repair-report.md"
+      "report": "reports/contextual-stage-b-option1-integration-repair-report.md",
+      "code_sha": "1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+      "report_sha256": "b077c4df8ac219008409d486bcd61a0df0eff675fc7822278e48096d489d1490",
+      "accounting": {
+        "version": "option1-accounting-v1",
+        "authorization_id": "on-demand-team-offline-v2-20260909",
+        "owner_run": 34770252997,
+        "ledger_sha256": "281938a7be619dcbef286c50f262b92e7c31c312caeb8e1221d1de5c4dac5e7b",
+        "checkpoint_sha256": "211f59362518c169cb6f3e44a77f43b3439a7fb41a738b7eebf2fb868d63dbf7",
+        "starting_charged_microusd": 5495902,
+        "starting_attempts": 653,
+        "new_charged_microusd": 262512,
+        "new_attempts": 6,
+        "cumulative_charged_microusd": 5758414,
+        "lifetime_attempts": 659,
+        "outstanding_microusd": 0,
+        "remaining_microusd": 4241586,
+        "remaining_attempts": 31,
+        "minimum_preserved_microusd": 3004098,
+        "minimum_preserved_attempts": 21,
+        "new_embedding_rows": 0,
+        "input_tokens": 63791,
+        "output_tokens": 13493,
+        "thinking_tokens": 9579,
+        "requests": [
+          {
+            "attempt": 1,
+            "body_sha256": "e707861a9800c97ab7eb47c02f980bb2dc3ca7683f3c65b113403c0cc34a6444",
+            "charged_microusd": 114970,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "dispatch_claim": "irreversible-v1",
+            "execution_capacity": "contextual-output-capacity-v2",
+            "id": "4135145be924421f8be7c203322e5e4e",
+            "judge_items": [],
+            "key": "a6c975678bb77265971c55bdffc7cc413f4125c1674bf04d0f4184ac26a8e817",
+            "model": "claude-sonnet-5",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+            "provider": "anthropic",
+            "purpose": "cb-o1-lps-verify",
+            "repair_of": "a97083b5dbd14afebd5e17166d068a3e",
+            "reserved_input_tokens": 47029,
+            "reserved_microusd": 334058,
+            "reserved_output_tokens": 24000,
+            "row_inputs": [],
+            "stage": 2,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 16255,
+              "output_tokens": 8246,
+              "output_tokens_details": {
+                "thinking_tokens": 6022
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "attempt": 1,
+            "body_sha256": "b0a0b4a20ba135aab66f73e5fb42cca2bb41c2f7dd11de0c6b3e623139aeaf45",
+            "charged_microusd": 34922,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "dispatch_claim": "irreversible-v1",
+            "execution_capacity": "contextual-output-capacity-v2",
+            "id": "fbe05b97f63d45b1bd4c4abf20772005",
+            "judge_items": [],
+            "key": "1bf9cf4ff0e98c4358ac026690244e62c5c33959b08e31086192f123d62e11f3",
+            "model": "claude-sonnet-5",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+            "provider": "anthropic",
+            "purpose": "cb-o1-veterans-assess",
+            "repair_of": "4dc560a939794801bb774d671a88b6e4",
+            "reserved_input_tokens": 34669,
+            "reserved_microusd": 229338,
+            "reserved_output_tokens": 16000,
+            "row_inputs": [],
+            "stage": 2,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 12261,
+              "output_tokens": 1040,
+              "output_tokens_details": {
+                "thinking_tokens": 712
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "attempt": 1,
+            "body_sha256": "097add7099b9bd2ec2ddf9a282096c19455051b688f5b7e61f218a26a3d4ac50",
+            "charged_microusd": 34114,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "dispatch_claim": "irreversible-v1",
+            "execution_capacity": "contextual-output-capacity-v2",
+            "id": "66b9313adac3434c82ec1ec04caaa480",
+            "judge_items": [],
+            "key": "c74ad8aac498faef08d1fe36b728fb7df0d2bf47c4c2cffffdd5a46793fcbfd9",
+            "model": "claude-sonnet-5",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+            "provider": "anthropic",
+            "purpose": "cb-o1-veterans-verify",
+            "repair_of": "",
+            "reserved_input_tokens": 37847,
+            "reserved_microusd": 315694,
+            "reserved_output_tokens": 24000,
+            "row_inputs": [],
+            "stage": 2,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 13212,
+              "output_tokens": 769,
+              "output_tokens_details": {
+                "thinking_tokens": 434
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "attempt": 1,
+            "body_sha256": "0a596d931ce08b9e0402e7b91e5370a065fe4ee1944325064d64de66a73f153b",
+            "charged_microusd": 21730,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "dispatch_claim": "irreversible-v1",
+            "execution_capacity": "contextual-output-capacity-v2",
+            "id": "b89408e5d2c645cab6d87888300244a5",
+            "judge_items": [],
+            "key": "de8a313efc535ef0f0fe32229bdfe61069d206b3322a3002df4e133782b1603e",
+            "model": "claude-sonnet-5",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+            "provider": "anthropic",
+            "purpose": "cb-o1-extension-assess",
+            "repair_of": "",
+            "reserved_input_tokens": 21543,
+            "reserved_microusd": 123086,
+            "reserved_output_tokens": 8000,
+            "row_inputs": [],
+            "stage": 2,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 7050,
+              "output_tokens": 763,
+              "output_tokens_details": {
+                "thinking_tokens": 385
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "attempt": 1,
+            "body_sha256": "2cb564900a92fd3aa9035e0a52035b2ce1751d8b1decc7f75d9da178f24ff4d2",
+            "charged_microusd": 40248,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "dispatch_claim": "irreversible-v1",
+            "execution_capacity": "contextual-output-capacity-v2",
+            "id": "cf93c29ffc87486aadf2a62b35d47aa5",
+            "judge_items": [],
+            "key": "67fe2884ec81a536dca01a956b41e0f0aa213c90077413e608c90eef06a36e27",
+            "model": "claude-sonnet-5",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+            "provider": "anthropic",
+            "purpose": "cb-o1-extension-verify",
+            "repair_of": "",
+            "reserved_input_tokens": 25047,
+            "reserved_microusd": 210094,
+            "reserved_output_tokens": 16000,
+            "row_inputs": [],
+            "stage": 2,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 8134,
+              "output_tokens": 2398,
+              "output_tokens_details": {
+                "thinking_tokens": 2026
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "attempt": 1,
+            "body_sha256": "70e2b40465c7c81881954e5633d1a1b3360c28d3a6473246ea6ae756ffc8ceb0",
+            "charged_microusd": 16528,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "dispatch_claim": "irreversible-v1",
+            "execution_capacity": "contextual-output-capacity-v2",
+            "id": "b12fa7fbde6e45069d14358b6c73ee79",
+            "judge_items": [],
+            "key": "04ba4da30ae3bbe7d006b88f95b43e37729bb80f9f5495f9f080dca5cb74bd4d",
+            "model": "claude-sonnet-5",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+            "provider": "anthropic",
+            "purpose": "cb-o1-check-group",
+            "repair_of": "",
+            "reserved_input_tokens": 20727,
+            "reserved_microusd": 46574,
+            "reserved_output_tokens": 512,
+            "row_inputs": [],
+            "stage": 2,
+            "status": "failed",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 6879,
+              "output_tokens": 277,
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "service_tier": "standard"
+            }
+          }
+        ],
+        "receipts": [
+          {
+            "body_sha256": "e707861a9800c97ab7eb47c02f980bb2dc3ca7683f3c65b113403c0cc34a6444",
+            "charged_microusd": 114970,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "elapsed_seconds": 72.610956,
+            "execution_capacity": "contextual-output-capacity-v2",
+            "http_status": 200,
+            "key": "a6c975678bb77265971c55bdffc7cc413f4125c1674bf04d0f4184ac26a8e817",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "output_token_ceiling": 24000,
+            "provider_stop_reason": "end_turn",
+            "purpose": "cb-o1-lps-verify",
+            "repair_of": "a97083b5dbd14afebd5e17166d068a3e",
+            "request_id": "4135145be924421f8be7c203322e5e4e",
+            "reserved_microusd": 334058,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 16255,
+              "output_tokens": 8246,
+              "output_tokens_details": {
+                "thinking_tokens": 6022
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "body_sha256": "b0a0b4a20ba135aab66f73e5fb42cca2bb41c2f7dd11de0c6b3e623139aeaf45",
+            "charged_microusd": 34922,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "elapsed_seconds": 12.806557,
+            "execution_capacity": "contextual-output-capacity-v2",
+            "http_status": 200,
+            "key": "1bf9cf4ff0e98c4358ac026690244e62c5c33959b08e31086192f123d62e11f3",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "output_token_ceiling": 16000,
+            "provider_stop_reason": "end_turn",
+            "purpose": "cb-o1-veterans-assess",
+            "repair_of": "4dc560a939794801bb774d671a88b6e4",
+            "request_id": "fbe05b97f63d45b1bd4c4abf20772005",
+            "reserved_microusd": 229338,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 12261,
+              "output_tokens": 1040,
+              "output_tokens_details": {
+                "thinking_tokens": 712
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "body_sha256": "097add7099b9bd2ec2ddf9a282096c19455051b688f5b7e61f218a26a3d4ac50",
+            "charged_microusd": 34114,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "elapsed_seconds": 8.433323,
+            "execution_capacity": "contextual-output-capacity-v2",
+            "http_status": 200,
+            "key": "c74ad8aac498faef08d1fe36b728fb7df0d2bf47c4c2cffffdd5a46793fcbfd9",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "output_token_ceiling": 24000,
+            "provider_stop_reason": "end_turn",
+            "purpose": "cb-o1-veterans-verify",
+            "repair_of": "",
+            "request_id": "66b9313adac3434c82ec1ec04caaa480",
+            "reserved_microusd": 315694,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 13212,
+              "output_tokens": 769,
+              "output_tokens_details": {
+                "thinking_tokens": 434
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "body_sha256": "0a596d931ce08b9e0402e7b91e5370a065fe4ee1944325064d64de66a73f153b",
+            "charged_microusd": 21730,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "elapsed_seconds": 9.441753,
+            "execution_capacity": "contextual-output-capacity-v2",
+            "http_status": 200,
+            "key": "de8a313efc535ef0f0fe32229bdfe61069d206b3322a3002df4e133782b1603e",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "output_token_ceiling": 8000,
+            "provider_stop_reason": "end_turn",
+            "purpose": "cb-o1-extension-assess",
+            "repair_of": "",
+            "request_id": "b89408e5d2c645cab6d87888300244a5",
+            "reserved_microusd": 123086,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 7050,
+              "output_tokens": 763,
+              "output_tokens_details": {
+                "thinking_tokens": 385
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "body_sha256": "2cb564900a92fd3aa9035e0a52035b2ce1751d8b1decc7f75d9da178f24ff4d2",
+            "charged_microusd": 40248,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "elapsed_seconds": 26.947512,
+            "execution_capacity": "contextual-output-capacity-v2",
+            "http_status": 200,
+            "key": "67fe2884ec81a536dca01a956b41e0f0aa213c90077413e608c90eef06a36e27",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "output_token_ceiling": 16000,
+            "provider_stop_reason": "end_turn",
+            "purpose": "cb-o1-extension-verify",
+            "repair_of": "",
+            "request_id": "cf93c29ffc87486aadf2a62b35d47aa5",
+            "reserved_microusd": 210094,
+            "status": "valid",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 8134,
+              "output_tokens": 2398,
+              "output_tokens_details": {
+                "thinking_tokens": 2026
+              },
+              "service_tier": "standard"
+            }
+          },
+          {
+            "body_sha256": "70e2b40465c7c81881954e5633d1a1b3360c28d3a6473246ea6ae756ffc8ceb0",
+            "charged_microusd": 16528,
+            "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+            "disposition": "failed",
+            "elapsed_seconds": 5.081245,
+            "error": "SchemaFailure",
+            "execution_capacity": "contextual-output-capacity-v2",
+            "http_status": 200,
+            "key": "04ba4da30ae3bbe7d006b88f95b43e37729bb80f9f5495f9f080dca5cb74bd4d",
+            "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+            "output_token_ceiling": 512,
+            "provider_stop_reason": "end_turn",
+            "purpose": "cb-o1-check-group",
+            "repair_of": "",
+            "request_id": "b12fa7fbde6e45069d14358b6c73ee79",
+            "reserved_microusd": 46574,
+            "schema_diagnostic": {
+              "actual_type": "str",
+              "expected_type": "string",
+              "missing_keys": [],
+              "path": "$.verdicts[0].reason",
+              "rule": "string_length",
+              "shape": {
+                "length": 72,
+                "type": "str"
+              },
+              "unexpected_keys": []
+            },
+            "status": "failed",
+            "usage": {
+              "cache_creation": {
+                "ephemeral_1h_input_tokens": 0,
+                "ephemeral_5m_input_tokens": 0
+              },
+              "cache_creation_input_tokens": 0,
+              "cache_read_input_tokens": 0,
+              "inference_geo": "global",
+              "input_tokens": 6879,
+              "output_tokens": 277,
+              "output_tokens_details": {
+                "thinking_tokens": 0
+              },
+              "service_tier": "standard"
+            }
+          }
+        ],
+        "checkpoint_files_verified": 1299,
+        "state_artifact_id": 10321363226,
+        "reservation_artifact_id": 10321487873,
+        "check_artifact_id": 10322390802
+      },
+      "serving": {
+        "version": "option1-serving-v1",
+        "pr": 238,
+        "reviewed_head": "9344e46478d287f72547fb859443bcd423e6772c",
+        "review": "terminal clean configured no-findings reaction on unchanged exact head; all review surfaces inspected",
+        "review_summary_comment": 5654551748,
+        "ci_run": 34768863329,
+        "merge_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+        "deployment_run": 34769173566,
+        "serving_version": "a9d58683-a3b2-441a-b1eb-6771d7b439c2",
+        "deployment_id": "608c1e4a-bc26-4fac-9172-102e6968dbc1",
+        "module_sha256": "f6a5fad86827b30ac02722d8bb5f938ec5622165b8531f6bc767341c68c8ad35",
+        "configuration_sha256": "d8f72f9c25350c3010759da4d9efd59702bcd51e9cc3de71e5b7c2515eda2ad0",
+        "rollback_version": "960b224f-9f4c-48b4-9e7f-b507fb7b794f",
+        "public_activation": false,
+        "recommender_merged": false,
+        "configuration_changed": false,
+        "rollback_executed": false,
+        "main_release_run": 34769173702,
+        "publication_stages": "skipped"
+      },
+      "scope_workflows_completed": 2,
+      "positive_scopes": 1,
+      "negative_scopes": 1,
+      "extension_completed": true,
+      "extension_outcome": "adjacent",
+      "group_check_accepted_verdicts": 0,
+      "group_check_missing_questions": 4,
+      "explanation_not_run_questions": 3,
+      "full_e2e_passed": 117,
+      "stop": true,
+      "receipt_index": {
+        "path": "contextual-stage-b/option1-receipt-index-v1.json",
+        "sha256": "95db1213b32a1e93299e6ee34ee766ab29efc02dc21e1731db1a89427f244c0c"
+      },
+      "exact_cached_occurrences": 15
     }
   },
-  "active_work": "contextual-stage-b-demand-implementation",
+  "active_work": "contextual-stage-b-option1-integration-repair",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -8706,5 +9291,98 @@
     "proposed_next_stage": "No Stage 4 or public activation. Contextual Stage B is authorized but incomplete.",
     "containing_commit": "Documentation after real-validation lock7d4f7b1; resolve report-containing commit locally."
   },
-  "active_stage_meaning": "Historical four-stage experiment number retained; current authorized work is contextual Stage B corrective implementation, not an automatic Stage4"
+  "active_stage_meaning": "Historical four-stage experiment number retained; current authorized work is contextual Stage B corrective implementation, not an automatic Stage4",
+  "historical_pre_option1_closeout": {
+    "budget_record": {
+      "D1_new_usd": 1.055784,
+      "D1_prior_usd": 1.082518,
+      "D2_new_usd": 0.140808,
+      "D2_prior_usd": 2.138302,
+      "D3_embedding_requests": 19,
+      "D3_embedding_tokens": 51153,
+      "D3_judge_input_tokens": 366538,
+      "D3_judge_output_tokens": 11700,
+      "D3_judge_requests": 120,
+      "D3_prior_usd": 2.27911,
+      "D3_spend_usd": 0.856223,
+      "actual_usd": 5.495902,
+      "authoritative_owner": "Exclusive protected-main cloud executor; latest paired checkpoint run34758252589",
+      "authorized_usd": 10,
+      "closeout_new_requests": 24,
+      "closeout_new_usd": 1.205247,
+      "embedding_tokens": 121944,
+      "historical_other_task_credit_usd": 0,
+      "historical_other_task_usd": 11.971342,
+      "historical_stage2_minimum_later_reserve_usd": 4,
+      "id": "on-demand-team-offline-v2-20260909",
+      "input_tokens": 1972193,
+      "latest_checkpoint_sha256": "83ff044fd91f64bb16b5949f49b665c50c533f119f3a3fa5c6475f92ef2e961f",
+      "latest_run_id": 34758252589,
+      "ledger": "Cloud artifact10317188749, run34758252589; raw ledger remains private. Prior docs/team-recommender/budget-ledger.json is historical.",
+      "ledger_sha256": "bd55da4cc6b2483b06d9ecffbb104a0ea221335b2fd17d4de7f0bde12460b82a",
+      "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
+      "no_new_allowance_at_closeout": true,
+      "output_tokens": 153979,
+      "path": "docs/team-recommender/preparation-budget.json",
+      "reconciliation": {
+        "path": "docs/team-recommender/contextual-stage-b/real-execution-receipt-v1.json",
+        "sha256": "8f36cedbaf42abf9d8353356dfff7a76c0423a4a172f00d7763112edc815138a"
+      },
+      "remaining_request_slots": 37,
+      "remaining_total_usd": 4.504098,
+      "requests": 653,
+      "reserved_usd": 0,
+      "stage2_cumulative_ceiling_usd": 6,
+      "stage3_ceiling_new_usd": 4,
+      "stage3_new_requests": 120,
+      "stage3_new_usd": 0.817654,
+      "stage3_recorded_ceiling_new_requests": 184,
+      "stage4_minimum_preserved_requests": 25,
+      "stage4_minimum_preserved_usd": 2.864667,
+      "profile_repair_new_usd": 0,
+      "profile_repair_new_requests": 0,
+      "post_audit_new_usd": 0.337668,
+      "post_audit_new_requests": 34,
+      "post_audit_new_input_tokens": 152954,
+      "post_audit_new_output_tokens": 3176,
+      "shared_evidence_repair_new_usd": 0,
+      "shared_evidence_repair_new_requests": 0,
+      "contextual_new_usd": 1.205247,
+      "contextual_new_requests": 24,
+      "current_task_reserve_usd": 0.709345,
+      "current_task_reserve_requests": 21,
+      "historical_reserve_fields": "stage2/stage3/stage4 fields above retain historical authorization; current contextual amendment is authoritative."
+    },
+    "active_work": "contextual-stage-b-demand-implementation",
+    "stage_status": "contextual-stage-B-finite-validation-executed-NOT-QUALIFIED",
+    "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
+    "recommendation": "IMPLEMENTED BUT USEFULNESS INSUFFICIENT/INCONCLUSIVE",
+    "recommended_next_stage": "STOP FOR USER REVIEW; no automatic scientific or paid continuation or Stage4",
+    "proposed_next_stage": "No public release. Owner review of this finite pass and its exact execution/access failures.",
+    "unresolved": [
+      "Six initial scope workflows failed; no valid graph for them",
+      "Single extension failed its schema; original graph preserved",
+      "Zero eligible primary groups for independent output/faithfulness check",
+      "Local application cross-origin protected-service request fails; same-origin admin works",
+      "Four documented researcher source gaps remain",
+      "No real useful-options benchmark, physical mobile evidence or general48MiB incremental-memory qualification"
+    ],
+    "receipt_index": {
+      "path": "docs/team-recommender/stage3-receipt-index.json",
+      "sha256": "80132ec2291e55a8ff2e7c2c605e770add2b790267b89442a12b3eec3a1348cf"
+    },
+    "checks": {
+      "receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v5.json",
+      "original_four_browser_failures": "Corrected with focused passing evidence; original full117-case run remains113pass/4fail historical",
+      "changed_engine_client_tests": "15 pass",
+      "presentation_contracts": "15 pass",
+      "real_graph_reference": "pass empty/no-group/manual paths",
+      "live_admin": "pass",
+      "live_application_cross_origin": "fail unreadable response; unresolved cause",
+      "independent_quality_check": "not run: zero eligible primary groups",
+      "physical_mobile": "NOT RUN",
+      "incremental_heap": "One actual no-group result+10.04MiB observed; broader48MiB target UNMEASURED",
+      "full_suites": "Preserved earlier runs and focused corrections; not reexecuted at current head"
+    }
+  }
 }

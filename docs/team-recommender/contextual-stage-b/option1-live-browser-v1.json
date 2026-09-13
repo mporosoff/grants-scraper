@@ -1,0 +1,82 @@
+{
+  "version": "option1-live-browser-v1",
+  "observed_date": "2026-09-13",
+  "browser": "Codex IAB Chromium on local Windows; not a physical mobile device",
+  "origin": "http://127.0.0.1:8876",
+  "release_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+  "index_generation": "5518c1378707da1b8f7b24e84f5183fc82b6ca6ceb4354115d600a713136157f",
+  "code_sha": "1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+  "access": {
+    "provider_free_fixture_authenticated": true,
+    "retained_negative_http_status": 200,
+    "retained_negative_graph_id": "0694edca5862bab36235bca711d892acca563b2ee6eb7735162a8e5dbca96615",
+    "negative_read_ms": 148.2,
+    "invalid_identity_status": 400,
+    "invalid_identity_ms": 43.4,
+    "invalid_identity_created_job": false
+  },
+  "concurrent_pages": {
+    "same_authenticated_owner": true,
+    "independent_page_contexts": 2,
+    "provider_workflows": 1,
+    "page_A_posts": 1,
+    "page_B_posts": 0,
+    "same_primary": [
+      "urh-000091",
+      "urh-000099",
+      "urh-000126"
+    ],
+    "run": 34769725479
+  },
+  "measurements": {
+    "first_lps_post_ack_ms": 355.5,
+    "first_lps_status_reads": 21,
+    "second_scope_post_ack_ms": 562.3,
+    "second_scope_status_reads": 12,
+    "extension_post_ack_ms": 437.7,
+    "later_visitor_status_ms": 93.9,
+    "later_visitor_posts": 0,
+    "instrumented_new_page_full_cache_build_ms": 2220.1,
+    "instrumented_new_page_status_ms": 166.8,
+    "new_page_heap_before": 129140936,
+    "new_page_heap_after": 117783881,
+    "warm_reopen_ms": 621.2,
+    "warm_reopen_status_ms": 516.5,
+    "warm_reopen_heap_before": 99867645,
+    "warm_reopen_heap_after": 102340276,
+    "option_switch_ms": 22.8,
+    "remove_ms": 20.5,
+    "readd_ms": 20,
+    "edit_service_requests": 0
+  },
+  "actual_extension": {
+    "person_id": "urh-000120",
+    "name": "Robert Boyd",
+    "outcome": "adjacent",
+    "assess_button_after_completion": "disabled",
+    "manual_add_allowed": true,
+    "manual_add_coverage_remained_unconfirmed": true,
+    "manual_full_slots": 4,
+    "manual_remove_preserved_others": true
+  },
+  "mobile_emulation": {
+    "viewport": [
+      390,
+      844
+    ],
+    "panel_client_width": 375,
+    "panel_scroll_width": 375,
+    "actual_options": 2,
+    "horizontal_overflow": 0,
+    "focus_on_panel_heading": true,
+    "escape_returned_focus_to_build": true,
+    "viewport_restored": true
+  },
+  "limitations": [
+    "No universal peak-memory or physical-device claim; heap measurements without forced GC fluctuate.",
+    "Private observer used role=checkbox for option count, yielding0; actual renderer uses aria-pressed buttons. Actual DOM inspection and engine both confirm2, preserved as instrumentation limitation.",
+    "Browser boundary blocked unrelated existing hosted Search query traffic so it did not borrow provider budget; ordinary Search behavior itself was not changed.",
+    "Elapsed provider timing is retained; separate queue/source-cache/retrieval/persistence subspans were not all retained by the result transport.",
+    "No live paid retry/error was commissioned; hostile-response/stale/cache-miss cases are focused zero-provider fixtures."
+  ]
+}

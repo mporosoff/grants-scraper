@@ -1,0 +1,371 @@
+{
+  "graphs": [
+    {
+      "scope_id": "345241:tdac-baa-004",
+      "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+      "graph_id": "0694edca5862bab36235bca711d892acca563b2ee6eb7735162a8e5dbca96615",
+      "source_id": "c0a7ba68ad1ce54b7aefc421f9ba8f9262055297cc453bf584c0cb434aa1309e",
+      "state": "no_supported_group_in_assessed_set",
+      "roles": 2,
+      "assessed": 12,
+      "unassessed": 143,
+      "edges": 8,
+      "people_outcomes": {
+        "adjacent": 8,
+        "insufficient_information": 4
+      },
+      "edge_categories": {
+        "adjacent": 8
+      },
+      "cache_file": "a9fa9c27a151905e42d5d453874387b45759f845f733dadf38019fe3a83bf859.json"
+    },
+    {
+      "scope_id": "363069",
+      "snapshot_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+      "graph_id": "fab6efae6aef3a893c1e008527bf2f04249c06d437307b506cb0005c83005aee",
+      "source_id": "1834afce29858e54e5ef6b60f219eae2b59f38d949b2a9a58a78661df7560edf",
+      "state": "no_supported_group_in_assessed_set",
+      "roles": 3,
+      "assessed": 12,
+      "unassessed": 143,
+      "edges": 0,
+      "people_outcomes": {
+        "insufficient_information": 12
+      },
+      "edge_categories": {},
+      "cache_file": "b3dff5f891cfafa3d2a532f5dcdb8577db2f96c0d8197c1c15bcb75a7fa756ab.json"
+    },
+    {
+      "scope_id": "332894",
+      "snapshot_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+      "graph_id": "1241059bce88414c24d3b1847597c758cea82a56889a4f7a7a0805c2c928f13f",
+      "source_id": "b898f42c6b93f3450da1169b595281fc578bb2c9c48173448d07d67d06a5b2f3",
+      "state": "ready",
+      "roles": 5,
+      "assessed": 13,
+      "unassessed": 142,
+      "edges": 16,
+      "people_outcomes": {
+        "supported": 3,
+        "adjacent": 5,
+        "credible_transfer": 3,
+        "insufficient_information": 2
+      },
+      "edge_categories": {
+        "direct": 6,
+        "adjacent": 7,
+        "method_transfer": 3
+      },
+      "cache_file": "ee34e1066d7e7ec0e8c56dd2e8b633a32d1479aa5eb21ff9b827b6aa797555aa.json"
+    },
+    {
+      "scope_id": "332894",
+      "snapshot_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+      "graph_id": "a9ce47f194e303b6d4173bf4a8d28685e597df2e31144f45d1d9ce44acbbeb64",
+      "source_id": "b898f42c6b93f3450da1169b595281fc578bb2c9c48173448d07d67d06a5b2f3",
+      "state": "ready",
+      "roles": 5,
+      "assessed": 12,
+      "unassessed": 143,
+      "edges": 14,
+      "people_outcomes": {
+        "supported": 3,
+        "adjacent": 4,
+        "credible_transfer": 3,
+        "insufficient_information": 2
+      },
+      "edge_categories": {
+        "direct": 6,
+        "adjacent": 5,
+        "method_transfer": 3
+      },
+      "cache_file": "ef97f8e66e7c520a2ab17a0351714fd795c3f87c7e0783bf48389e0054a004aa.json"
+    }
+  ],
+  "node_checks": {
+    "clock": "2026-09-13T17:00:59.587Z",
+    "graphs": [
+      {
+        "scope_id": "345241:tdac-baa-004",
+        "graph_id": "0694edca5862bab36235bca711d892acca563b2ee6eb7735162a8e5dbca96615",
+        "state": "no_supported_group_in_assessed_set",
+        "clock": "2026-09-13T17:00:59.587Z",
+        "raw_bytes": 9463,
+        "heap_after_hydration": {
+          "rss": 188923904,
+          "heapTotal": 152965120,
+          "heapUsed": 92161624,
+          "external": 24112706,
+          "arrayBuffers": 211163
+        },
+        "gzip_bytes": 3003,
+        "hydrate_ms": 25.105000000000018,
+        "cold_compose_view_ms": 1.9384999999999764,
+        "warm_options_mean_ms": 0.04628500000000031,
+        "edit_ms": null,
+        "assessed": 12,
+        "edges": 8,
+        "roles": 2,
+        "matched_people": 0,
+        "unassessed": 143,
+        "options": [],
+        "primary_members": [],
+        "primary_names": [],
+        "primary_evidence": [],
+        "missing_contributions": [
+          "Analytical methodology development for quantum-enabled Army systems",
+          "Mission effectiveness analysis of quantum technology applications"
+        ],
+        "candidate_reachability": true,
+        "stable_options": true,
+        "whole_pool_invalidation": true,
+        "currentness_expiry_test": "pass",
+        "gate_state": "fail",
+        "manual_full_slots_remove_readd": "pass unconfirmed",
+        "provider_calls": 0,
+        "statistics": {
+          "optimizations": 1,
+          "cache_hits": 24,
+          "provider_calls": 0,
+          "cached_options": 1
+        },
+        "measurement_environment": "Local Node, not physical-device/browser evidence"
+      },
+      {
+        "scope_id": "363069",
+        "graph_id": "fab6efae6aef3a893c1e008527bf2f04249c06d437307b506cb0005c83005aee",
+        "state": "no_supported_group_in_assessed_set",
+        "clock": "2026-09-13T17:00:59.587Z",
+        "raw_bytes": 5499,
+        "heap_after_hydration": {
+          "rss": 214429696,
+          "heapTotal": 159981568,
+          "heapUsed": 122257872,
+          "external": 25308227,
+          "arrayBuffers": 2513938
+        },
+        "gzip_bytes": 2159,
+        "hydrate_ms": 21.308000000000106,
+        "cold_compose_view_ms": 0.5778999999999996,
+        "warm_options_mean_ms": 0.011429999999995744,
+        "edit_ms": null,
+        "assessed": 12,
+        "edges": 0,
+        "roles": 3,
+        "matched_people": 0,
+        "unassessed": 143,
+        "options": [],
+        "primary_members": [],
+        "primary_names": [],
+        "primary_evidence": [],
+        "missing_contributions": [
+          "Historical/Archival Research on Interred Veterans",
+          "Educational Materials Development from Research Findings",
+          "Community Engagement with Cemetery Histories"
+        ],
+        "candidate_reachability": true,
+        "stable_options": true,
+        "whole_pool_invalidation": true,
+        "currentness_expiry_test": "pass",
+        "gate_state": "fail",
+        "manual_full_slots_remove_readd": "pass unconfirmed",
+        "provider_calls": 0,
+        "statistics": {
+          "optimizations": 1,
+          "cache_hits": 24,
+          "provider_calls": 0,
+          "cached_options": 1
+        },
+        "measurement_environment": "Local Node, not physical-device/browser evidence"
+      },
+      {
+        "scope_id": "332894",
+        "graph_id": "1241059bce88414c24d3b1847597c758cea82a56889a4f7a7a0805c2c928f13f",
+        "state": "ready",
+        "clock": "2026-09-13T17:00:59.587Z",
+        "raw_bytes": 15082,
+        "heap_after_hydration": {
+          "rss": 235741184,
+          "heapTotal": 161181696,
+          "heapUsed": 121132552,
+          "external": 30297293,
+          "arrayBuffers": 5866058
+        },
+        "gzip_bytes": 4699,
+        "hydrate_ms": 20.646299999999997,
+        "cold_compose_view_ms": 1.7338999999999487,
+        "warm_options_mean_ms": 0.04133000000000493,
+        "edit_ms": 0.6597000000000435,
+        "assessed": 13,
+        "edges": 16,
+        "roles": 5,
+        "matched_people": 6,
+        "unassessed": 142,
+        "options": [
+          {
+            "id": "1241059bce88414c24d3b1847597c758cea82a56889a4f7a7a0805c2c928f13f:urh-000091+urh-000099+urh-000126",
+            "members": [
+              "urh-000091",
+              "urh-000099",
+              "urh-000126"
+            ]
+          },
+          {
+            "id": "1241059bce88414c24d3b1847597c758cea82a56889a4f7a7a0805c2c928f13f:urh-000091+urh-000126+urh-000144",
+            "members": [
+              "urh-000091",
+              "urh-000126",
+              "urh-000144"
+            ]
+          }
+        ],
+        "primary_members": [
+          "urh-000091",
+          "urh-000099",
+          "urh-000126"
+        ],
+        "primary_names": [
+          "Machiel Blok",
+          "Michael Huang",
+          "Sobhit Singh"
+        ],
+        "primary_evidence": [
+          {
+            "faculty_id": "urh-000091",
+            "contribution": "Uses lithographically defined superconducting circuits to manipulate microwave quantum states, directly addressing qubit device design and control.",
+            "evidence_term": "Microwave circuit QED with Josephson junctions",
+            "evidence_phrase": "Uses lithographically defined superconducting circuits to manipulate microwave quantum states.",
+            "source_url": "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
+            "why_person": "Model-assessed contribution: Uses lithographically defined superconducting circuits to manipulate microwave quantum states, directly addressing qubit device design and control. Retained profile evidence: “Uses lithographically defined superconducting circuits to manipulate microwave quantum states.”. This is not a capability certificate."
+          },
+          {
+            "faculty_id": "urh-000099",
+            "contribution": "Develops energy-efficient, reliable microarchitecture solutions informed by device/circuit behavior, a classical-computing optimization method transferable to reducing classical overhead in quantum systems.",
+            "evidence_term": "Energy-efficient and reliable microarchitecture",
+            "evidence_phrase": "Develops practical architecture solutions informed by device and circuit behavior.",
+            "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+            "why_person": "Model-assessed possible transfer: Develops energy-efficient, reliable microarchitecture solutions informed by device/circuit behavior, a classical-computing optimization method transferable to reducing classical overhead in quantum systems. Retained profile evidence: “Develops practical architecture solutions informed by device and circuit behavior.”. Limitation: No evidence this architecture work has been applied to quantum information hardware specifically. This is not a capability certificate."
+          },
+          {
+            "faculty_id": "urh-000126",
+            "contribution": "First-principles DFT modeling of material structure-property relationships is a transferable computational method applicable to predicting gate-fidelity-relevant materials.",
+            "evidence_term": "First-principles modeling of quantum materials",
+            "evidence_phrase": "Uses density-functional theory and theoretical analysis to predict material structure-property relationships and interpret experiments.",
+            "source_url": "https://www.hajim.rochester.edu/me/people/faculty/singh_sobhit/index.html",
+            "why_person": "Model-assessed possible transfer: First-principles DFT modeling of material structure-property relationships is a transferable computational method applicable to predicting gate-fidelity-relevant materials. Retained profile evidence: “Uses density-functional theory and theoretical analysis to predict material structure-property relationships and interpret experiments.”. Limitation: No direct application of this modeling to qubit gate fidelity is evidenced; would require transfer. This is not a capability certificate."
+          }
+        ],
+        "missing_contributions": [],
+        "candidate_reachability": true,
+        "stable_options": true,
+        "whole_pool_invalidation": true,
+        "currentness_expiry_test": "pass",
+        "gate_state": "conditional",
+        "manual_full_slots_remove_readd": "pass unconfirmed",
+        "provider_calls": 0,
+        "statistics": {
+          "optimizations": 2,
+          "cache_hits": 24,
+          "provider_calls": 0,
+          "cached_options": 2
+        },
+        "measurement_environment": "Local Node, not physical-device/browser evidence"
+      },
+      {
+        "scope_id": "332894",
+        "graph_id": "a9ce47f194e303b6d4173bf4a8d28685e597df2e31144f45d1d9ce44acbbeb64",
+        "state": "ready",
+        "clock": "2026-09-13T17:00:59.587Z",
+        "raw_bytes": 13431,
+        "heap_after_hydration": {
+          "rss": 234082304,
+          "heapTotal": 160796672,
+          "heapUsed": 114265016,
+          "external": 30362837,
+          "arrayBuffers": 342259
+        },
+        "gzip_bytes": 4263,
+        "hydrate_ms": 19.236799999999903,
+        "cold_compose_view_ms": 0.9991999999999734,
+        "warm_options_mean_ms": 0.026535000000001217,
+        "edit_ms": 0.5964999999999918,
+        "assessed": 12,
+        "edges": 14,
+        "roles": 5,
+        "matched_people": 6,
+        "unassessed": 143,
+        "options": [
+          {
+            "id": "a9ce47f194e303b6d4173bf4a8d28685e597df2e31144f45d1d9ce44acbbeb64:urh-000091+urh-000099+urh-000126",
+            "members": [
+              "urh-000091",
+              "urh-000099",
+              "urh-000126"
+            ]
+          },
+          {
+            "id": "a9ce47f194e303b6d4173bf4a8d28685e597df2e31144f45d1d9ce44acbbeb64:urh-000091+urh-000126+urh-000144",
+            "members": [
+              "urh-000091",
+              "urh-000126",
+              "urh-000144"
+            ]
+          }
+        ],
+        "primary_members": [
+          "urh-000091",
+          "urh-000099",
+          "urh-000126"
+        ],
+        "primary_names": [
+          "Machiel Blok",
+          "Michael Huang",
+          "Sobhit Singh"
+        ],
+        "primary_evidence": [
+          {
+            "faculty_id": "urh-000091",
+            "contribution": "Uses lithographically defined superconducting circuits to manipulate microwave quantum states, directly addressing qubit device design and control.",
+            "evidence_term": "Microwave circuit QED with Josephson junctions",
+            "evidence_phrase": "Uses lithographically defined superconducting circuits to manipulate microwave quantum states.",
+            "source_url": "https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html",
+            "why_person": "Model-assessed contribution: Uses lithographically defined superconducting circuits to manipulate microwave quantum states, directly addressing qubit device design and control. Retained profile evidence: “Uses lithographically defined superconducting circuits to manipulate microwave quantum states.”. This is not a capability certificate."
+          },
+          {
+            "faculty_id": "urh-000099",
+            "contribution": "Develops energy-efficient, reliable microarchitecture solutions informed by device/circuit behavior, a classical-computing optimization method transferable to reducing classical overhead in quantum systems.",
+            "evidence_term": "Energy-efficient and reliable microarchitecture",
+            "evidence_phrase": "Develops practical architecture solutions informed by device and circuit behavior.",
+            "source_url": "https://www.hajim.rochester.edu/ece/people/faculty/huang_michael/index.html",
+            "why_person": "Model-assessed possible transfer: Develops energy-efficient, reliable microarchitecture solutions informed by device/circuit behavior, a classical-computing optimization method transferable to reducing classical overhead in quantum systems. Retained profile evidence: “Develops practical architecture solutions informed by device and circuit behavior.”. Limitation: No evidence this architecture work has been applied to quantum information hardware specifically. This is not a capability certificate."
+          },
+          {
+            "faculty_id": "urh-000126",
+            "contribution": "First-principles DFT modeling of material structure-property relationships is a transferable computational method applicable to predicting gate-fidelity-relevant materials.",
+            "evidence_term": "First-principles modeling of quantum materials",
+            "evidence_phrase": "Uses density-functional theory and theoretical analysis to predict material structure-property relationships and interpret experiments.",
+            "source_url": "https://www.hajim.rochester.edu/me/people/faculty/singh_sobhit/index.html",
+            "why_person": "Model-assessed possible transfer: First-principles DFT modeling of material structure-property relationships is a transferable computational method applicable to predicting gate-fidelity-relevant materials. Retained profile evidence: “Uses density-functional theory and theoretical analysis to predict material structure-property relationships and interpret experiments.”. Limitation: No direct application of this modeling to qubit gate fidelity is evidenced; would require transfer. This is not a capability certificate."
+          }
+        ],
+        "missing_contributions": [],
+        "candidate_reachability": true,
+        "stable_options": true,
+        "whole_pool_invalidation": true,
+        "currentness_expiry_test": "pass",
+        "gate_state": "conditional",
+        "manual_full_slots_remove_readd": "pass unconfirmed",
+        "provider_calls": 0,
+        "statistics": {
+          "optimizations": 2,
+          "cache_hits": 24,
+          "provider_calls": 0,
+          "cached_options": 2
+        },
+        "measurement_environment": "Local Node, not physical-device/browser evidence"
+      }
+    ]
+  },
+  "no_new_embeddings": true,
+  "human_judgments": 0
+}

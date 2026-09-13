@@ -1,0 +1,62 @@
+{
+  "provider_request": "b12fa7fbde6e45069d14358b6c73ee79",
+  "actual_receipt": {
+    "body_sha256": "70e2b40465c7c81881954e5633d1a1b3360c28d3a6473246ea6ae756ffc8ceb0",
+    "charged_microusd": 16528,
+    "code_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+    "disposition": "failed",
+    "elapsed_seconds": 5.081245,
+    "error": "SchemaFailure",
+    "execution_capacity": "contextual-output-capacity-v2",
+    "http_status": 200,
+    "key": "04ba4da30ae3bbe7d006b88f95b43e37729bb80f9f5495f9f080dca5cb74bd4d",
+    "option1_release": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+    "output_token_ceiling": 512,
+    "provider_stop_reason": "end_turn",
+    "purpose": "cb-o1-check-group",
+    "repair_of": "",
+    "request_id": "b12fa7fbde6e45069d14358b6c73ee79",
+    "reserved_microusd": 46574,
+    "schema_diagnostic": {
+      "actual_type": "str",
+      "expected_type": "string",
+      "missing_keys": [],
+      "path": "$.verdicts[0].reason",
+      "rule": "string_length",
+      "shape": {
+        "length": 72,
+        "type": "str"
+      },
+      "unexpected_keys": []
+    },
+    "status": "failed",
+    "usage": {
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "inference_geo": "global",
+      "input_tokens": 6879,
+      "output_tokens": 277,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard"
+    }
+  },
+  "raw_failed_body_retained": false,
+  "accepted_verdicts": 0,
+  "group_and_person_questions_unresolved": 4,
+  "explanation_questions_not_run": 3,
+  "remaining_explanation_request_dispatched": false,
+  "offline_fixture": {
+    "reason_60_accepted": true,
+    "reason_72_rejected": true,
+    "fixture_labels_are_not_judgments": true,
+    "provider_dispatches": 0
+  },
+  "reexecution": false,
+  "reason": "Confirmed terminal request; immutable operation cannot be automatically rekeyed or replayed. No accepted scientific negative can be inferred from its schema failure."
+}

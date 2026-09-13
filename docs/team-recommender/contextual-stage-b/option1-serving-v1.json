@@ -1,0 +1,21 @@
+{
+  "version": "option1-serving-v1",
+  "pr": 238,
+  "reviewed_head": "9344e46478d287f72547fb859443bcd423e6772c",
+  "review": "terminal clean configured no-findings reaction on unchanged exact head; all review surfaces inspected",
+  "review_summary_comment": 5654551748,
+  "ci_run": 34768863329,
+  "merge_sha": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+  "deployment_run": 34769173566,
+  "serving_version": "a9d58683-a3b2-441a-b1eb-6771d7b439c2",
+  "deployment_id": "608c1e4a-bc26-4fac-9172-102e6968dbc1",
+  "module_sha256": "f6a5fad86827b30ac02722d8bb5f938ec5622165b8531f6bc767341c68c8ad35",
+  "configuration_sha256": "d8f72f9c25350c3010759da4d9efd59702bcd51e9cc3de71e5b7c2515eda2ad0",
+  "rollback_version": "960b224f-9f4c-48b4-9e7f-b507fb7b794f",
+  "public_activation": false,
+  "recommender_merged": false,
+  "configuration_changed": false,
+  "rollback_executed": false,
+  "main_release_run": 34769173702,
+  "publication_stages": "skipped"
+}

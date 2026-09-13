@@ -1,0 +1,18 @@
+{
+  "version": "option1-pre-dispatch-v1",
+  "clock": "2026-09-13",
+  "ledger_owner": 34758252589,
+  "ledger_sha256": "bd55da4cc6b2483b06d9ecffbb104a0ea221335b2fd17d4de7f0bde12460b82a",
+  "cumulative_microusd": 5495902,
+  "attempts": 653,
+  "outstanding": 0,
+  "planned_maximum_microusd": 1418340,
+  "planned_attempts": 7,
+  "preserved_minimum_microusd": 3004098,
+  "preserved_minimum_attempts": 21,
+  "model": "claude-sonnet-5",
+  "price_source": "https://platform.claude.com/docs/en/about-claude/pricing",
+  "input_usd_per_million": 2,
+  "output_usd_per_million": 10,
+  "public_activation": false
+}
