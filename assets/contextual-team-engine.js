@@ -51,7 +51,8 @@
     const assessed=new Set(graph.people.map(p=>p.person_id));
     const byPerson=new Map([...assessed].map(id=>[id,graph.edges.filter(e=>e.person_id===id&&useful(e)&&eligibleIds.has(id))]));
     const pool=[...byPerson].filter(([,edges])=>edges.length).map(([id])=>id).sort(cmp);
-    const scope=freeze({...graph.scope,engine:VERSION}),optionCache=new Map();
+    const scope=freeze({...graph.scope,scope_label:graph.scope.title,
+      record_type:graph.scope.id===graph.scope.parent_id?'specific_parent':'publishable_child',engine:VERSION}),optionCache=new Map();
     let actionClock=null;
     const counts={optimizations:0,cache_hits:0,provider_calls:0};
     const roleSet=ids=>new Set(ids.flatMap(id=>(byPerson.get(id)||[]).map(e=>e.role_id)));

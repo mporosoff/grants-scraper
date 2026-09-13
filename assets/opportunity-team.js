@@ -33,7 +33,7 @@
   }
 
   function validateIndex(index, expectedGenerationId) {
-    if (!index || ![SCHEMA_VERSION, 3].includes(index.schema_version) ||
+    if (!index || ![SCHEMA_VERSION, 3, 4].includes(index.schema_version) ||
         !/^[a-f0-9]{64}$/.test(index.generation_id || "") ||
         (expectedGenerationId && index.generation_id !== expectedGenerationId) ||
         !Array.isArray(index.scopes) || index.scopes.length > 2000 ||
@@ -50,6 +50,7 @@
       if (index.schema_version === 3 && scope.engine !== "shared-team-v3") {
         throw new Error("Every scope must have one declared engine owner.");
       }
+      if(index.schema_version===4&&scope.engine!=="contextual-v1")throw new Error("Contextual engine ownership is invalid.");
     });
     return index;
   }
@@ -228,8 +229,13 @@
     });
   }
 
-  function loadData(expectedGenerationId) {
+  function loadData(expectedGenerationId, options) {
     var generationId = expectedGenerationId || pageGenerationId();
+    var requestedIndex=validateIndex(global.OPPORTUNITY_TEAM_INDEX,generationId);
+    if(requestedIndex.schema_version===4){
+      if(!options)return Promise.reject(new Error("An explicit contextual scope action is required."));
+      return loadContextual(requestedIndex,options);
+    }
     if (!dataPromise || loadingGeneration !== generationId) {
       loadingGeneration = generationId;
       var index = validateIndex(global.OPPORTUNITY_TEAM_INDEX, generationId);
@@ -279,6 +285,12 @@
     await injectRuntime("shared-team-engine", index.runtime?.shared);
     if (!global.SharedTeamEngine) throw new Error("Shared matching runtime unavailable.");
     return global.SharedTeamEngine.loadData(index, global.RESEARCHER_DIRECTORY);
+  }
+
+  async function loadContextual(index,options){
+    await injectRuntime("contextual-team-engine",index.runtime?.contextual_engine);
+    await injectRuntime("contextual-team-client",index.runtime?.contextual_client);
+    return global.ContextualTeamClient.load(index,global.RESEARCHER_DIRECTORY,options);
   }
 
   function loadDirectory() {
@@ -338,6 +350,7 @@
   }
 
   function create(data, indexOverride) {
+    if(data?.schema_version===4&&data.engine)return data.engine;
     if (data?.schema_version === 3) return global.SharedTeamEngine.create(data);
     validateData(data, undefined, indexOverride);
     var facultyById = new Map();

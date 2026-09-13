@@ -70,11 +70,11 @@ export function loadCanonicalInputs(root='.') {
 }
 
 // These are existing structured governing fields, not a second scientific synopsis.
-const CONDITION_FIELDS=['eligibility_text','applicant_types','eligibility_codes','submission_requirements',
+export const CONDITION_FIELDS=['eligibility_text','applicant_types','eligibility_codes','submission_requirements',
   'limited_submission','limited_submission_source','limited_submission_review','career_stage_signal',
   'cost_share_required','deadlines','deadline_source','close_date','close_date_note','status',
   'rolling','actionability_status','document_status_signals','has_preliminary_stage','preliminary_required','preliminary_stage_type'];
-const SOURCE_FIELDS=['title','description','document_search_text','topic_areas','disciplines',
+export const SOURCE_FIELDS=['title','description','document_search_text','topic_areas','disciplines',
   'source','source_type','detail_page','funding_opportunity_url','primary_document_url','document_urls',
   'document_evidence_status','document_evidence','source_url','source_locator','evidence','summary',
   'parent_id','subtopic_id','validation','publication','verification','source_evidence',

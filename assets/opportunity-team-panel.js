@@ -36,6 +36,7 @@
   function closePanel(current, options) {
     options = options || {};
     if (!current) return;
+    current.contextualAbort?.abort();
     var trigger = current.trigger;
     if (trigger) {
       trigger.setAttribute("aria-expanded", "false");
@@ -216,6 +217,8 @@
       view.roles.map(function (role) { return roleRow(role, current.engine); }).join("") + '</ul></section>' +
       (missingSkills.length ? '<section class="opportunity-team-gaps"><h5>Missing skills to recruit</h5><ul>' + missingSkills.map(function (skill) { return '<li>' + escapeHtml(skill) + '</li>'; }).join("") + '</ul></section>' : '') +
       replacement +
+      (current.engine.contextual&&view.replacements.some(function(item){return item.assessment_state==='unassessed';})
+        ? '<button type="button" class="button secondary" data-contextual-assess disabled>Assess this person’s contribution</button>' : '') +
       '<div class="opportunity-team-next"><a class="button secondary" href="' + escapeHtml(teamMatchHref(view)) + '">Continue in Team Match</a>' +
       '<a class="source-action" href="faculty_interests.html?mode=add&return=team_match&opportunity=' + encodeURIComponent(view.opportunity.id) + '">Add a missing researcher</a></div>' +
       '<p class="opportunity-team-caveat">This is an evidence-calibrated planning aid, not a statement of eligibility, availability, willingness, or sponsor fit. Verify the official notice and contact each proposed investigator.</p>';
@@ -244,6 +247,13 @@
       needs_revalidation: "Researcher interests or eligibility changed. This team is awaiting revalidation; current profiles remain available in Team Match.",
       child_not_publication_eligible: "The selected child topic is not currently publication-eligible, so it cannot support a team proposal.",
       currentness_unavailable: "The authoritative opportunity-currentness check is unavailable.",
+      contextual_unassessed: "This scope has not been contextually assessed. Use Build a team to request an assessment.",
+      contextual_insufficient_source: "The retained source does not provide enough context for this assessment. This is not a judgment about the researchers.",
+      contextual_budget_limited: "The bounded assessment allowance or request capacity is unavailable. Current profiles remain available for manual selection.",
+      contextual_recovery_required: "A prior assessment request needs recovery. It will not be sent again automatically.",
+      contextual_unsuitable: "The source assessment did not establish a coherent supported scope for this team workflow.",
+      contextual_action_blocked: "This opportunity is no longer current. Its assessment is not displayed.",
+      contextual_failed: "The assessment could not be completed. This is an execution failure, not a scientific rejection.",
     };
     var body = current.panel.querySelector(".opportunity-team-body");
     body.removeAttribute("role");
@@ -308,7 +318,7 @@
     });
   }
 
-  function loadCurrent(current) {
+  function loadCurrent(current, contextualOptions) {
     if (!current || !panelOwned(current) || !API || !current.record) {
       if (current) renderFailure(current, new Error("Team helper or catalog record unavailable."));
       return;
@@ -320,10 +330,25 @@
     }
     var sequence = ++current.scopeSequence;
     current.generationId = generationId;
-    API.loadData(generationId).then(function (data) {
+    var contextual=global.OPPORTUNITY_TEAM_INDEX?.schema_version===4;
+    current.contextualAbort?.abort();
+    current.contextualAbort=contextual?new AbortController():null;
+    var options=contextualOptions||{};
+    var childReady=contextual?loadChildCatalog():Promise.resolve(null);
+    childReady.then(function(childCatalog){
+      if(!reconcile(current)||current.scopeSequence!==sequence)throw new Error("Superseded team request.");
+      return API.loadData(generationId,contextual?{parentId:current.parentId,scopeId:current.scopeId,
+        record:catalogRecord(current.parentId),childCatalog:childCatalog,now:new Date(),personId:options.personId||"",
+        deliberate:options.deliberate===true,signal:current.contextualAbort.signal,
+        onStatus:function(){if(reconcile(current))current.panel.querySelector('.opportunity-team-body').innerHTML='<p>Assessing the call and relevant researcher evidence. This may take a few minutes…</p>';}}:undefined);
+    }).then(function (data) {
       if (!reconcile(current) || current.scopeSequence !== sequence) return;
       if (API.pageGenerationId() !== generationId) throw new Error("Superseded team package.");
       current.engine = API.create(data);
+      if(contextual&&options.personId&&current.state&&current.engine.proposal){
+        var refreshed=current.engine.proposal();
+        current.state=Object.assign({},refreshed,{selectedIds:current.state.selectedIds.slice(),excludedIds:current.state.excludedIds.slice()});
+      }
       resolveCurrent(current, true);
     }).catch(function (error) {
       if (reconcile(current) && current.scopeSequence === sequence) renderFailure(current, error);
@@ -359,7 +384,7 @@
         return;
       }
       var created = panelShell(trigger, parentId, scopeId);
-      if (created) loadCurrent(created);
+      if (created) loadCurrent(created,{deliberate:true});
       return;
     }
     var current = currentForElement(event.target);
@@ -371,7 +396,14 @@
     if (scope && reconcile(current)) {
       current.scopeId = scope.getAttribute("data-opportunity-team-scope");
       current.panel.querySelector(".opportunity-team-body").innerHTML = "<p>Checking the selected topic and its current publication eligibility…</p>";
-      resolveCurrent(current);
+      if(global.OPPORTUNITY_TEAM_INDEX?.schema_version===4)loadCurrent(current,{deliberate:true});
+      else resolveCurrent(current);
+      return;
+    }
+    if(event.target.closest('[data-contextual-assess]')&&reconcile(current)&&current.engine?.contextual){
+      var contextualSelect=current.panel.querySelector('[data-opportunity-team-replacement]');
+      var personId=contextualSelect?.value;
+      if(personId&&current.engine.unassessedIds?.().includes(personId))loadCurrent(current,{deliberate:true,personId:personId});
       return;
     }
     var remove = event.target.closest("[data-opportunity-team-remove]");
@@ -402,6 +434,8 @@
     if (!reconcile(current) || !event.target.matches("[data-opportunity-team-replacement]")) return;
     var button = current.panel.querySelector("[data-opportunity-team-add-replacement]");
     if (button) button.disabled = !event.target.value;
+    var assess=current.panel.querySelector('[data-contextual-assess]');
+    if(assess)assess.disabled=!current.engine.unassessedIds?.().includes(event.target.value);
   });
 
   document.addEventListener("funding-finder:before-results-render", function () {

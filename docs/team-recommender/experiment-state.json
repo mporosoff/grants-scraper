@@ -6744,7 +6744,7 @@
   },
   "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
   "next_allowed_stage": null,
-  "next_stage_requires": "Resolve the same task preflight within existing authority; no new allowance is requested. Hosted implementation and finite real validation remain outstanding.",
+  "next_stage_requires": "Current contextual Stage B is authorized up to $5/40 within $10/690. Stage 4 remains unapproved.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "release_packages": {
@@ -7034,7 +7034,7 @@
     "path": "docs/team-recommender/stage3-receipt-index.json",
     "sha256": "80132ec2291e55a8ff2e7c2c605e770add2b790267b89442a12b3eec3a1348cf"
   },
-  "recommendation": "BLOCKED BY A NAMED PREREQUISITE: complete safe packet/reservation envelope within the existing $3/40 task limits. No release.",
+  "recommendation": "Complete the authorized contextual implementation and finite validation; no public activation.",
   "recommended_next_stage": "Owner review of the precise pre-dispatch limitation and partial implementation.",
   "report": {
     "path": "docs/team-recommender/reports/post-audit-shared-matching-revalidation-report.md",
@@ -7376,8 +7376,8 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "contextual-stage-b-BLOCKED-pre-dispatch-budget-envelope",
-  "stop": "STOP FOR USER REVIEW. No paid dispatch, push, merge, deployment or new human packet occurred.",
+  "stage_status": "contextual-stage-b-resumed-5USD-task-ceiling",
+  "stop": "No current user checkpoint requested; stop before public activation after the authorized finite implementation, or at a genuine boundary.",
   "unresolved": [
     "Additional heap ceiling FAIL: observed increase 68.94-80.04 MiB before GC; retained 10.82-19.34 MiB does not establish peak compliance",
     "Scientific top-five/member/group targets failed; sampled explanation unsupported",
@@ -7912,7 +7912,7 @@
     "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
   },
   "contextual_stage_b": {
-    "status": "blocked_before_metered_dispatch",
+    "status": "resumed_complete_preflight_and_trusted_implementation",
     "authority": "docs/team-recommender/contextual-stage-b/AUTHORITY.md",
     "product_start": "1018d6faac2f08a6a2e828c0b72612437114d9bc",
     "analytical_start": "58a59143ef5446b05223f52982a547903f53e24d",
@@ -7927,10 +7927,14 @@
       "charged_microusd": 4290655,
       "attempts": 629,
       "outstanding": 0,
-      "new_task_limit_microusd": 3000000,
+      "new_task_limit_microusd": 5000000,
       "new_task_attempt_limit": 40,
       "new_paid_requests": 0,
-      "local_copy_read_only": true
+      "local_copy_read_only": true,
+      "original_task_limit_microusd": 3000000,
+      "minimum_remaining_if_fully_spent_microusd": 709345,
+      "minimum_remaining_attempts": 21,
+      "amendment": "docs/team-recommender/contextual-stage-b/BUDGET-AMENDMENT-5USD.md"
     },
     "public_activation": false,
     "new_human_items": 0,
@@ -7948,7 +7952,7 @@
       "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA"
     },
     "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
-    "blocker": "Complete conservative reservation envelope does not fit the authorized $3 task cap; no metered dispatch.",
+    "blocker": "Previous $3 ceiling superseded; complete $5 packet bound and reviewed trusted execution remain to be established.",
     "input_lock": "docs/team-recommender/contextual-stage-b/input-lock-v1.json",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
     "budget_preflight": "docs/team-recommender/contextual-stage-b/preflight-budget-v1.json",
@@ -7964,9 +7968,22 @@
     "implementation_tree": "23aa5fcbb9a18ff12eb57394714d187434d78746",
     "report_sha256": "e7fe6f0fa6cd5fd5fc5f16fe6436c47692627fee11a982132ff7f69e3c496e84",
     "validation_receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v1.json",
-    "disposition": "BLOCKED BY A NAMED PREREQUISITE",
+    "disposition": "IN PROGRESS; no paid dispatch or activation",
     "authoritative_ledger_unchanged_at_closeout": true,
-    "protected_main_at_closeout": "fd37d5983405a04e650cb9d0a12aa34098ca2a76"
+    "protected_main_at_closeout": "fd37d5983405a04e650cb9d0a12aa34098ca2a76",
+    "checkpoint_history": [
+      {
+        "status": "blocked_before_metered_dispatch",
+        "blocker": "Complete conservative reservation envelope does not fit the authorized $3 task cap; no metered dispatch.",
+        "budget_preflight": "docs/team-recommender/contextual-stage-b/preflight-budget-v1.json",
+        "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
+        "report_sha256": "e7fe6f0fa6cd5fd5fc5f16fe6436c47692627fee11a982132ff7f69e3c496e84",
+        "implementation_commit": "ce517372e9b2f32de454864935e4c1303e9083ae",
+        "implementation_tree": "23aa5fcbb9a18ff12eb57394714d187434d78746",
+        "disposition": "BLOCKED BY A NAMED PREREQUISITE",
+        "containing_commit": "1859ef471afafce5ac8412bfd07e27824b75b7f8"
+      }
+    ]
   },
   "active_work": "contextual-stage-b-demand-implementation"
 }

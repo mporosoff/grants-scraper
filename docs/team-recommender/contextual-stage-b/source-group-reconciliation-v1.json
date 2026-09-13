@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "source_group_provenance": {
+    "original_sha256": "2d96fe2bc5653c370c4d578b1cb9f12672f822ae7104139f902e21bdb689ab80",
+    "overlay_sha256": "f92fc5995a0a1ac01fce18e8366236dd06f45cd01dcec9b0953dbc7bd4558359",
+    "overlay_name": "source-group-amendment-c2-f92fc5995a0a1ac0.json",
+    "recommendation_outputs_used": false
+  },
+  "scopes": [
+    {
+      "id": "361207",
+      "group_id": "361207"
+    },
+    {
+      "id": "361208",
+      "group_id": "361207"
+    },
+    {
+      "id": "332894",
+      "group_id": "332894"
+    },
+    {
+      "id": "344592:ab-0025",
+      "group_id": "344592"
+    },
+    {
+      "id": "345241:tdac-baa-004",
+      "group_id": "345241"
+    },
+    {
+      "id": "362856",
+      "group_id": "362856"
+    },
+    {
+      "id": "363069",
+      "group_id": "363069"
+    },
+    {
+      "id": "344592",
+      "group_id": "344592"
+    }
+  ],
+  "correction": "Use the existing C2 overlay, so 361207 and 361208 count as one source group. Independent checks choose the first graph-producing scope per distinct existing group, then the next distinct group in locked order. No new outcomes exist or influenced this correction."
+}
