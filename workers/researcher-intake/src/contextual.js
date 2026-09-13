@@ -26,9 +26,10 @@ function current(scope,now){
 }
 function publicJob(row,scope,now){
   const result=row?.result_json?JSON.parse(row.result_json):null;
+  const recovery=row?.state==='recovery_required'||result?.result?.state==='recovery_required';
   return {release_id:RELEASE,scope_id:scope.id,job_id:row?.job_id||null,
-    state:!current(scope,now)?'action_blocked':result?.result?.state||row?.state||scope.state,
-    ...(result&&current(scope,now)?{result:result.result,run_id:row.run_id,code_sha:row.code_sha}:{}),
+    state:recovery?'recovery_required':!current(scope,now)?'action_blocked':result?.result?.state||row?.state||scope.state,
+    ...(result&&(recovery||current(scope,now))?{result:result.result,run_id:row.run_id,code_sha:row.code_sha}:{}),
     public_activation:false};
 }
 
@@ -57,9 +58,12 @@ export class ContextualStore {
       .bind(now,id).run();
   }
   async finish(id,run,sha,value,now){
-    await this.db.prepare(`UPDATE contextual_validation_jobs SET state='complete',active_slot=NULL,result_json=?,updated_at=?
+    const recovery=JSON.parse(value).result.state==='recovery_required';
+    // A checkpointed uncertain request still owns the sole spending slot.
+    // Preserve its immutable receipt; no expiry/repeated callback clears it.
+    await this.db.prepare(`UPDATE contextual_validation_jobs SET state=?,active_slot=?,result_json=?,updated_at=?
       WHERE job_id=? AND run_id=? AND code_sha=? AND result_json IS NULL`)
-      .bind(value,now,id,run,sha).run();return this.byId(id);
+      .bind(recovery?'recovery_required':'complete',recovery?1:null,value,now,id,run,sha).run();return this.byId(id);
   }
 }
 

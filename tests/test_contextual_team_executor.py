@@ -5,8 +5,10 @@ from pathlib import Path
 import shutil
 import tempfile
 import unittest
+import requests
 from unittest.mock import patch
-from tools.contextual_team_executor import Runner, scope_inputs
+from tools.contextual_team_executor import Runner, RecoveryRequired, scope_inputs, main
+from tools.offline_spend import identity
 from tools.contextual_team_policy import inputs
 from tools.contextual_team_contract import contract
 from tools.contextual_team_cost import text_reservation
@@ -66,6 +68,75 @@ class ContextualExecutor(unittest.TestCase):
         self.scope=next(s for s in self.configuration['scopes'] if s['id']=='344592:ab-0025')
 
     def runner(self,state=None,crash=lambda name:None):return Runner(state or self.state,self.configuration,post=self.provider,crash=crash)
+
+    def execute_job(self,runner):
+        job={'release_id':self.configuration['snapshot_id'],'scope_id':self.scope['id'],'person_id':''}
+        job['job_id']=identity([job['release_id'],job['scope_id'],''])
+        job_path=Path(self.tmp.name)/'job.json';job_path.write_text(json.dumps(job))
+        result_path=Path(self.tmp.name)/'result.json'
+        with patch('tools.contextual_team_executor.existing.trusted_environment'), \
+             patch('tools.contextual_team_executor.Runner',return_value=runner), \
+             patch.dict(os.environ,{'CONTEXTUAL_ACTION_CURRENT':'true'}), \
+             patch('sys.argv',['executor','execute','--state',str(runner.state),'--job',str(job_path),'--result',str(result_path)]):
+            main()
+        return json.loads(result_path.read_bytes())
+
+    def test_actual_job_handler_preserves_unknown_usage_and_blocks_other_requests(self):
+        for failure in ['timeout','http503','missing_usage','malformed_response','receipt_write_failure']:
+            with self.subTest(failure=failure):
+                state=Path(self.tmp.name)/failure;state.mkdir();ExperimentLedger(state/'ledger.json',initialize=True)
+                calls=[]
+                def provider(*args,**kwargs):
+                    calls.append(True)
+                    if failure in ('timeout','receipt_write_failure'):raise requests.Timeout('fixture only')
+                    response=Response({})
+                    if failure=='http503':response.status_code=503
+                    if failure=='malformed_response':response.iter_content=lambda size:iter([b'{'])
+                    return response
+                runner=Runner(state,self.configuration,post=provider)
+                from tools.offline_spend import atomic_json
+                def write(path,value):
+                    if failure=='receipt_write_failure' and Path(path).parent.name=='receipts':raise OSError('fixture persistence failure')
+                    return atomic_json(path,value)
+                with patch('tools.contextual_team_executor.atomic_json',side_effect=write):result=self.execute_job(runner)
+                self.assertEqual(result['result']['state'],'recovery_required')
+                row=runner.ledger.read()['requests'][0]
+                self.assertEqual(row['status'],'reserved_unknown')
+                self.assertEqual(row['charged_microusd'],row['reserved_microusd'])
+                for i in range(3):
+                    restored=Path(self.tmp.name)/(failure+'-restored-'+str(i));shutil.copytree(state,restored)
+                    resumed=Runner(restored,self.configuration,post=provider)
+                    self.assertEqual(self.execute_job(resumed)['result']['state'],'recovery_required')
+                    different=next(s for s in self.configuration['scopes'] if s['id']=='361207')
+                    with self.assertRaises(RecoveryRequired):resumed.scientific('decomposition',scope_inputs(different),different)
+                self.assertEqual(len(calls),1)
+
+    def test_reconciled_invalid_response_keeps_charge_and_never_retries(self):
+        self.provider.invalid=True
+        result=self.execute_job(self.runner())
+        self.assertEqual(result['result']['state'],'failed')
+        row=self.runner().ledger.read()['requests'][0]
+        self.assertEqual(row['status'],'failed');self.assertEqual(row['charged_microusd'],220)
+        for _ in range(3):self.assertEqual(self.execute_job(self.runner())['result']['state'],'recovery_required')
+        self.assertEqual(len(self.provider.calls),1)
+
+    def test_valid_response_without_cache_requires_recovery_not_another_dispatch(self):
+        from tools.offline_spend import atomic_json
+        def write(path,value):
+            if Path(path).parent.name=='cache':raise OSError('fixture cache write interrupted')
+            return atomic_json(path,value)
+        with patch('tools.contextual_team_executor.atomic_json',side_effect=write):result=self.execute_job(self.runner())
+        self.assertEqual(result['result']['state'],'recovery_required')
+        self.assertEqual(self.runner().ledger.read()['requests'][0]['status'],'valid')
+        for _ in range(3):self.assertEqual(self.execute_job(self.runner())['result']['state'],'recovery_required')
+        self.assertEqual(len(self.provider.calls),1)
+
+    def test_failure_disposition_uses_typed_state_not_error_wording(self):
+        runner=self.runner()
+        self.assertEqual(runner.failure_state(ValueError('recovery appears in arbitrary text')),'failed')
+        self.assertEqual(runner.failure_state(Deferred('pre-dispatch complete packet bound')),'budget_limited')
+        self.assertEqual(runner.failure_state(RecoveryRequired('no magic substring needed')),'recovery_required')
+        self.assertEqual(len(runner.ledger.read()['requests']),0)
 
     def test_full_directory_pipeline_exact_cache_and_explicit_extension(self):
         first=self.runner().run_scope(self.scope)

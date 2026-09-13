@@ -23,6 +23,10 @@ from tools.team_recommender_budget import ExperimentLedger, AUTHORIZATION_ID
 HOST='https://funding-finder-researchers.urochestercheme.workers.dev'
 
 
+class RecoveryRequired(Deferred):
+    """A durable paid claim/result needs inspection; never an automatic retry."""
+
+
 def scope_inputs(scope):
     incidental={'detail_checked_at','checked_at','retrieved_at','verified_on','reviewed_on',
                 'last_verified','first_seen','last_seen','updated_at'}
@@ -61,6 +65,16 @@ class Runner:
         self.ledger=ExperimentLedger(self.state/'ledger.json');self.post=post;self.crash=crash
         self.deadline=time.monotonic()+2400;self.used=[]
 
+    def has_unknown_request(self):
+        return any(r.get('purpose','').startswith('cb-') and r['status']=='reserved_unknown'
+                   for r in self.ledger.read()['requests'])
+
+    def failure_state(self,error):
+        # Exception text is not a dispatch receipt. Persisted uncertainty wins
+        # even if a later cache/checkpoint failure obscures the first exception.
+        if self.has_unknown_request() or isinstance(error,RecoveryRequired):return 'recovery_required'
+        return 'budget_limited' if isinstance(error,Deferred) else 'failed'
+
     def request(self,purpose,logical,body,check,*,row_inputs=(),ceiling=None):
         if time.monotonic()>self.deadline:raise Deferred('contextual_finite_job_deadline')
         provider='voyage' if purpose in ('cb-documents','cb-query') else 'anthropic'
@@ -74,16 +88,20 @@ class Runner:
         if rows:
             if (len(rows)!=1 or rows[0]['status']!='valid' or not cache.exists()
                 or rows[0].get('body_sha256')!=body_id):
-                raise Deferred('contextual_claimed_request_requires_recovery')
-            retained=json.loads(cache.read_bytes())
-            if (set(retained)!={'key','body_sha256','model','value','request_id'} or retained['key']!=key
-                or retained['body_sha256']!=body_id or retained['request_id']!=rows[0]['id']
-                or retained['model']!=body['model']):raise Deferred('contextual_cache_identity_requires_recovery')
-            value=check(retained['value'],cached=True)
+                raise RecoveryRequired('contextual_claimed_request_requires_recovery')
+            try:
+                retained=json.loads(cache.read_bytes())
+                if (set(retained)!={'key','body_sha256','model','value','request_id'} or retained['key']!=key
+                    or retained['body_sha256']!=body_id or retained['request_id']!=rows[0]['id']
+                    or retained['model']!=body['model']):raise ValueError('cache_identity')
+                value=check(retained['value'],cached=True)
+            except (ValueError,KeyError,TypeError,OSError) as error:
+                raise RecoveryRequired('contextual_cache_identity_requires_recovery') from error
             self.ledger.event(kind='exact_contextual_cache_hit',key=key)
             self.used.append({'key':key,'request_id':rows[0]['id'],'cache_hit':True})
             return value
-        if cache.exists():raise Deferred('contextual_orphan_result_requires_recovery')
+        if cache.exists():raise RecoveryRequired('contextual_orphan_result_requires_recovery')
+        if self.has_unknown_request():raise RecoveryRequired('contextual_outstanding_request_requires_recovery')
         secret=os.environ.get('VOYAGE_API_KEY' if provider=='voyage' else 'ANTHROPIC_API_KEY')
         if not secret:raise ConfigurationFailure('contextual_provider_credential_missing')
         token=self.ledger.reserve_experiment(provider,body['model'],2,key,amount,1,trusted_route=True,
@@ -115,14 +133,18 @@ class Runner:
             atomic_json(cache,{'key':key,'body_sha256':body_id,'model':body['model'],'value':value,'request_id':token})
             self.crash('after_cache')
             receipt['status']='valid'
-        except (ValueError,KeyError,TypeError,requests.RequestException,Deferred) as error:
+        except (ValueError,KeyError,TypeError,OSError,requests.RequestException,Deferred) as error:
             row=next(r for r in self.ledger.read()['requests'] if r['id']==token)
             if 'charged_microusd' in receipt and row['status']=='reserved_unknown':
                 self.ledger.reconcile(token,cost_usd=Decimal(receipt['charged_microusd'])/1000000,usage=receipt['usage'],status='failed')
-            receipt.update(status='failed',error=type(error).__name__)
+            row=next(r for r in self.ledger.read()['requests'] if r['id']==token)
+            recovery=row['status']=='reserved_unknown' or (row['status']=='valid' and not cache.exists())
+            receipt.update(status=row['status'],error=type(error).__name__,
+                           disposition='recovery_required' if recovery else 'failed')
             # The irreversible ledger claim is authoritative even if this marker
             # or the receipt is lost. There is no attempt 2 or body re-key fallback.
             self.crash('after_failed_reconcile')
+            if recovery:raise RecoveryRequired('contextual_paid_request_requires_recovery') from error
             raise
         finally:
             atomic_json(self.state/'receipts'/(token+'.json'),receipt)
@@ -156,13 +178,16 @@ class Runner:
             claimed={x[len(prefix):] for x in row.get('row_inputs',[]) if x.startswith(prefix)}
             if not claimed.intersection(requested):continue
             cache=self.state/'cache'/(row['key']+'.json')
-            if row['status']!='valid' or not cache.exists():raise Deferred('claimed_embedding_row_requires_recovery')
-            saved=json.loads(cache.read_bytes())
-            if (saved.get('key')!=row['key'] or saved.get('request_id')!=row['id']
-                or saved.get('body_sha256')!=row['body_sha256'] or saved.get('model')!='voyage-4-large'
-                or {r['id'] for r in saved['value']}!=claimed):raise Deferred('embedding_cache_row_provenance_requires_recovery')
-            records=saved['value']
-            checked=embedding_value({'model':'voyage-4-large','data':[{'index':i,'embedding':r['embedding']} for i,r in enumerate(records)]},[r['id'] for r in records],'voyage-4-large')
+            if row['status']!='valid' or not cache.exists():raise RecoveryRequired('claimed_embedding_row_requires_recovery')
+            try:
+                saved=json.loads(cache.read_bytes())
+                if (saved.get('key')!=row['key'] or saved.get('request_id')!=row['id']
+                    or saved.get('body_sha256')!=row['body_sha256'] or saved.get('model')!='voyage-4-large'
+                    or {r['id'] for r in saved['value']}!=claimed):raise ValueError('embedding_cache_identity')
+                records=saved['value']
+                checked=embedding_value({'model':'voyage-4-large','data':[{'index':i,'embedding':r['embedding']} for i,r in enumerate(records)]},[r['id'] for r in records],'voyage-4-large')
+            except (ValueError,KeyError,TypeError,OSError) as error:
+                raise RecoveryRequired('embedding_cache_row_provenance_requires_recovery') from error
             available.update({r['id']:r for r in checked})
             self.used.append({'key':row['key'],'request_id':row['id'],'cache_hit':True,'reused_vector_rows':len(claimed.intersection(requested))})
         missing=[d for d in documents if d['input_id'] not in available]
@@ -268,9 +293,8 @@ def main():
     runner=Runner(args.state,config)
     try:
         result=runner.run_scope(scope,job['person_id'] or None) if os.environ.get('CONTEXTUAL_ACTION_CURRENT')=='true' else {'state':'action_blocked','scope_id':scope['id']}
-    except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,requests.RequestException) as error:
-        result={'state':'recovery_required' if isinstance(error,Deferred) and 'recovery' in str(error) else
-                'budget_limited' if isinstance(error,Deferred) else 'failed','reason':str(error)[:160],
+    except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,OSError,requests.RequestException) as error:
+        result={'state':runner.failure_state(error),'reason':str(error)[:160],
                 'scope_id':scope['id']}
     finally:existing.checkpoint(args.state)
     atomic_json(args.result,{'job_id':job['job_id'],'release_id':job['release_id'],'result':result,

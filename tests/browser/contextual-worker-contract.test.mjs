@@ -125,3 +125,41 @@ test('extension claim is transactional and never becomes an unrestricted second 
   assert.equal(await f.store.insert(second,'later'),false);
   assert.equal(f.db.prepare('SELECT count(*) n FROM contextual_validation_jobs').get().n,1);
 });
+
+test('checkpointed provider uncertainty remains visible and owns the sole slot across callbacks, expiry and resumption',async()=>{
+  const f=fixture();await f.handler(f.request('/admin/api/contextual/jobs',f.value),f.env);
+  const stamp={release_id:f.value.release_id,job_id:hash([f.value.release_id,f.value.scope_id,'']),run_id:'123',code_sha:'a'.repeat(40)};
+  await f.handler(f.request('/internal/contextual/start',stamp,true),f.env);
+  const value={...stamp,result:{scope_id:f.value.scope_id,state:'recovery_required',reason:'uncertain provider request'},charged_microusd:20000,attempts:1};
+  for(let i=0;i<3;i++){
+    assert.equal((await f.handler(f.request('/internal/contextual/result',value,true),f.env)).status,200);
+    const row=await f.store.byId(stamp.job_id);assert.equal(row.state,'recovery_required');assert.equal(row.active_slot,1);
+    assert.deepEqual(JSON.parse(row.result_json),value);
+    const before=f.calls.length;
+    for(const request of [f.request('/admin/api/contextual/jobs',f.value),f.request('/admin/api/contextual/jobs?'+new URLSearchParams(f.value))])
+      assert.equal((await (await f.handler(request,f.env)).json()).state,'recovery_required');
+    assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'361207'}),f.env)).status,429);
+    assert.equal(f.calls.length,before);
+  }
+  assert.equal((await f.handler(f.request('/internal/contextual/result',{...value,result:{state:'failed'}},true),f.env)).status,409);
+  assert.equal((await f.handler(f.request('/internal/contextual/start',{...stamp,run_id:'124'},true),f.env)).status,409);
+  f.clock.value=new Date('2100-01-01T00:00:00Z');
+  const expired=await (await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(f.value)),f.env)).json();
+  assert.equal(expired.state,'recovery_required');assert.equal(expired.result.reason,value.result.reason);
+  assert.equal((await f.store.byId(stamp.job_id)).active_slot,1);
+});
+
+test('reconciled failure and pre-dispatch budget deferral release their slot without reopening the logical job',async()=>{
+  for(const state of ['failed','budget_limited']){
+    const f=fixture();await f.handler(f.request('/admin/api/contextual/jobs',f.value),f.env);
+    const stamp={release_id:f.value.release_id,job_id:hash([f.value.release_id,f.value.scope_id,'']),run_id:'123',code_sha:'a'.repeat(40)};
+    await f.handler(f.request('/internal/contextual/start',stamp,true),f.env);
+    const value={...stamp,result:{scope_id:f.value.scope_id,state},charged_microusd:220,attempts:1};
+    await f.handler(f.request('/internal/contextual/result',value,true),f.env);
+    assert.equal((await f.store.byId(stamp.job_id)).active_slot,null);
+    const before=f.calls.length;
+    for(let i=0;i<3;i++)assert.equal((await (await f.handler(f.request('/admin/api/contextual/jobs',f.value),f.env)).json()).state,state);
+    assert.equal(f.calls.length,before);
+    assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'361207'}),f.env)).status,202);
+  }
+});
