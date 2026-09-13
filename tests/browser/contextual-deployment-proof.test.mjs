@@ -35,6 +35,11 @@ test('restricted serving proof rejects changed bindings, mixed traffic and chang
     const proof=JSON.parse(fs.readFileSync(receipt.replace('.json','-verified.json')));assert.equal(proof.public_recommender_activation,false);
     for(const mode of ['bindings','database','runtime','mixed','bytes','route','preview','cron','zone','domain'])assert.notEqual(run('verify',mode).status,0,mode);
     assert.notEqual(run('capture','bindings').status,0,'already-drifted bindings must fail before deployment');
+    const mismatch=run('capture','bindings');
+    assert.match(mismatch.stderr,/bindings\.PUBLIC_APP_ORIGIN\.text/);
+    assert.match(mismatch.stderr,/expected_sha256/);
+    assert.doesNotMatch(mismatch.stderr,/"drift"|https:\/\/mporosoff\.github\.io|fixture-not-a-secret/);
+    assert.match(run('capture','runtime').stderr,/runtime\.compatibility_date/);
     assert.doesNotMatch(fs.readFileSync(receipt,'utf8'),/fixture-not-a-secret/);
   }finally{
     assert.equal(path.dirname(path.resolve(dir)),path.resolve(os.tmpdir()));
