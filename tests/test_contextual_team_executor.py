@@ -14,7 +14,7 @@ from tools.contextual_team_contract import contract
 from tools.contextual_team_cost import text_reservation
 from tools.contextual_team_check import packet
 from tools.offline_ai import request_body
-from tools.offline_spend import Deferred
+from tools.offline_spend import Deferred, ConfigurationFailure
 from tools.team_recommender_budget import ExperimentLedger
 
 
@@ -124,6 +124,58 @@ class ContextualExecutor(unittest.TestCase):
         self.assertNotIn('Fixture purpose',json.dumps(receipt))
         for _ in range(3):self.assertEqual(self.execute_job(self.runner())['result']['state'],'recovery_required')
         self.assertEqual(len(self.provider.calls),1)
+
+    def test_capacity_changes_only_output_limit_and_accounts_complete_wire_bytes(self):
+        from tools.contextual_team_cost import output_capacity, CAPACITY_VERSION
+        from tools.contextual_team_policy import check_reservation
+        for stage in ['decomposition','adjudication','verification']:
+            c=contract(stage)
+            body=request_body(c['route'],c['settings'],c['prompt'],scope_inputs(self.scope),c['schema'])
+            revised,extra=output_capacity(body,stage)
+            if stage=='adjudication':
+                self.assertEqual(revised,body|{'max_tokens':16000});self.assertEqual(extra,1)
+                self.assertEqual(text_reservation(revised)[1]-text_reservation(body)[1],80002)
+            else:self.assertEqual(revised,body);self.assertEqual(extra,0)
+        metadata={'purpose':'cb-assess','execution_capacity':CAPACITY_VERSION}
+        check_reservation({'requests':[]},'anthropic',metadata,162000,1000,16000)
+        for changed in [metadata|{'execution_capacity':'unknown'}, {'purpose':'cb-assess'}]:
+            with self.assertRaises(ConfigurationFailure):check_reservation({'requests':[]},'anthropic',changed,162000,1000,16000)
+        with self.assertRaises(Deferred):
+            check_reservation({'requests':[{'charged_microusd':9200000,'purpose':'old'}]},'anthropic',metadata,162000,1000,16000)
+
+    def test_pre_correction_failed_assessment_cannot_rekey_into_a_larger_request(self):
+        from tools.contextual_team_cost import output_capacity
+        data=scope_inputs(self.scope)|{'interpretation':{'state':'coherent','objective':'Fixture original purpose',
+            'roles':[{'id':'role-1'}],'limitations':[]},'people':self.configuration['people'][:2]}
+        self.provider.invalid=True
+        previous=self.runner();reserve=previous.ledger.reserve_experiment
+        def old_metadata(*args,**kwargs):
+            kwargs['execution_metadata'].pop('execution_capacity',None)
+            return reserve(*args,**kwargs)
+        with patch('tools.contextual_team_executor.output_capacity',side_effect=lambda body,stage:(body,0)), \
+             patch.object(previous.ledger,'reserve_experiment',side_effect=old_metadata):
+            with self.assertRaises(ValueError):previous.scientific('adjudication',data,self.scope)
+        old=self.runner().ledger.read()['requests'][0]
+        self.assertEqual(old['reserved_output_tokens'],8000)
+        for i in range(3):
+            with self.assertRaises(RecoveryRequired):self.runner().scientific('adjudication',data,self.scope)
+        self.assertEqual(len(self.provider.calls),1)
+        self.assertEqual(self.runner().ledger.read()['requests'][0],old)
+
+    def test_complete_remaining_capacity_plan_is_bounded_against_frozen_inputs(self):
+        from tools.contextual_team_policy import ROOT
+        plan=json.loads((ROOT/'config/contextual_team/output-capacity-v2.json').read_bytes())
+        budget=self.configuration['budget']
+        rows=[r for r in budget['scope_rows'] if r['scope_id'] in plan['remaining_scopes'] and r['stages']]
+        self.assertEqual(len(rows),5)
+        future={'five_cold_text_workflows':sum(s['microusd'] for r in rows for s in r['stages'])+5*80002,
+            'five_query_batches':15000,'one_extension':budget['costs_microusd']['one_person_extension']+80002,
+            'four_checks':budget['costs_microusd']['four_independent_checks']}
+        self.assertEqual(plan['remaining_conservative_microusd'],future)
+        total=sum(future.values())+plan['prior_task_microusd']
+        self.assertEqual(total,plan['complete_task_conservative_microusd'])
+        self.assertLessEqual(total,5000000)
+        self.assertLessEqual(plan['prior_task_attempts']+len(rows)*4+6,40)
 
     def test_valid_response_without_cache_requires_recovery_not_another_dispatch(self):
         from tools.offline_spend import atomic_json
