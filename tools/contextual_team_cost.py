@@ -12,6 +12,18 @@ INTERPRETATION_WIRE_BYTES = 12_000
 PROPOSED_EDGES_WIRE_BYTES = 4_096
 JUDGE_BODY_BYTES = 44_000
 QUERY_TOKEN_BOUND = 25_000
+# One operational capacity correction after an observed 8,000-token reasoning
+# exhaustion. Scientific contracts and logical request keys remain unchanged.
+CAPACITY_VERSION = 'contextual-output-capacity-v2'
+ASSESSMENT_OUTPUT_TOKENS = 16_000
+
+
+def output_capacity(body, stage):
+    if stage != 'adjudication':
+        return body, 0
+    original = len(encoded(body))
+    revised = body | {'max_tokens': ASSESSMENT_OUTPUT_TOKENS}
+    return revised, len(encoded(revised)) - original
 
 
 def wire_bytes(value):

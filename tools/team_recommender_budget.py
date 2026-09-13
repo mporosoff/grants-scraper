@@ -60,7 +60,9 @@ class ExperimentLedger(Ledger):
             if attempt != 1:
                 raise Deferred("automatic_paid_retry_not_authorized")
             metadata = execution_metadata or {}
-            if set(metadata) - {"packet_sha256", "body_sha256", "purpose", "code_sha", "row_inputs", "judge_items"}:
+            allowed_metadata={"packet_sha256", "body_sha256", "purpose", "code_sha", "row_inputs", "judge_items"}
+            if is_contextual:allowed_metadata.add('execution_capacity')
+            if set(metadata) - allowed_metadata:
                 raise ValueError("invalid_execution_metadata")
             if provider == "voyage" and execution_metadata is not None:
                 purchased = {item for r in state["requests"] for item in r.get("row_inputs", [])}

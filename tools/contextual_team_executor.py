@@ -14,7 +14,7 @@ import requests
 from tools import team_recommender_executor as existing
 from tools.contextual_team_contract import contract, validate, verification_inputs, VERSION
 from tools.contextual_team_cost import (text_reservation, generated_input_bounds, wire_bytes,
-    QUERY_TOKEN_BOUND, JUDGE_BODY_BYTES)
+    QUERY_TOKEN_BOUND, JUDGE_BODY_BYTES, output_capacity, CAPACITY_VERSION)
 from tools.contextual_team_policy import inputs as approved_inputs, INPUT_SHA
 from tools.offline_ai import request_body, response_value, SchemaFailure, stop_reason
 from tools.offline_spend import identity, encoded, atomic_json, Deferred, ConfigurationFailure
@@ -107,9 +107,11 @@ class Runner:
         token=self.ledger.reserve_experiment(provider,body['model'],2,key,amount,1,trusted_route=True,
             input_tokens=bound,output_tokens=body.get('max_tokens',0),
             execution_metadata={'packet_sha256':INPUT_SHA,'body_sha256':body_id,'purpose':purpose,
-                'code_sha':os.environ['GITHUB_SHA'],'row_inputs':list(row_inputs),'judge_items':[]})
+                'code_sha':os.environ['GITHUB_SHA'],'row_inputs':list(row_inputs),'judge_items':[],
+                'execution_capacity':CAPACITY_VERSION})
         receipt={'key':key,'request_id':token,'purpose':purpose,'body_sha256':body_id,
-                 'reserved_microusd':amount,'status':'reserved_unknown','code_sha':os.environ['GITHUB_SHA']}
+                 'reserved_microusd':amount,'status':'reserved_unknown','code_sha':os.environ['GITHUB_SHA'],
+                 'execution_capacity':CAPACITY_VERSION,'output_token_ceiling':body.get('max_tokens',0)}
         self.crash('after_reserve')
         try:
             existing.checkpoint(self.state);self.crash('after_reservation_checkpoint')
@@ -117,7 +119,10 @@ class Runner:
             url='https://api.voyageai.com/v1/embeddings' if provider=='voyage' else 'https://api.anthropic.com/v1/messages'
             headers.update({'Authorization':'Bearer '+secret} if provider=='voyage' else
                            {'x-api-key':secret,'anthropic-version':'2023-06-01'})
-            response=self.post(url,headers=headers,json=body,timeout=120,allow_redirects=False,stream=True)
+            # Permit completion of the fixed larger output without an unbounded
+            # request or a transport timeout that could conceal metered usage.
+            read_timeout=240 if provider=='anthropic' and body['max_tokens']>=16000 else 120
+            response=self.post(url,headers=headers,json=body,timeout=(10,read_timeout),allow_redirects=False,stream=True)
             self.crash('after_dispatch')
             receipt['http_status']=response.status_code
             payload=json.loads(existing.bounded_response(response,existing.PACKET_LIMIT))
@@ -163,8 +168,9 @@ class Runner:
         # A cache round trip sorts object keys. Keep the actual wire content
         # stable as well as its logical input identity on both sides of that trip.
         body=request_body(c['route'],c['settings'],c['prompt'],json.loads(encoded(data)),c['schema'])
+        body,capacity_bytes=output_capacity(body,stage)
         record=next(r for r in self.configuration['budget']['scope_rows'] if r['scope_id']==scope['id'])
-        ceiling=next(r['input_token_reservation'] for r in record['stages'] if r['stage']==stage)
+        ceiling=next(r['input_token_reservation'] for r in record['stages'] if r['stage']==stage)+capacity_bytes
         purpose={'decomposition':'cb-interpret','adjudication':'cb-assess','verification':'cb-verify'}[stage]
         if extension:
             purpose='cb-extend-'+('assess' if stage=='adjudication' else 'verify')
@@ -255,7 +261,9 @@ class Runner:
             'limitations':interpretation['limitations']+scope['limitations'],
             'retrieval':{'eligible':len(documents),'shortlist':shortlist,'per_contribution':rankings,
                 'unassessed':len(documents)-len(verified['people']),'maximum_shortlist':12},
-            'contracts':self.configuration['budget']['contract_ids'],'requests':self.used}
+            'contracts':self.configuration['budget']['contract_ids'],
+            'execution_capacity':{'version':CAPACITY_VERSION,'adjudication_output_tokens':16000,
+                'logical_keys':'unchanged-scientific-event; failed requests remain terminal'},'requests':self.used}
         # Cache-hit bookkeeping cannot change the substantive graph identity.
         supported={e['person_id'] for e in verified['edges'] if e['coverage'] in ('direct','method_transfer')}
         if len(supported)<2 or not any(e['central'] and e['coverage'] in ('direct','method_transfer') for e in verified['edges']):
