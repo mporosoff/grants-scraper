@@ -1,0 +1,17 @@
+{
+  "version": "checkpoint-order-recovery-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "required_after": "2026-09-13T12:18:30Z",
+  "source_run": 34756717927,
+  "source_attempt": "1",
+  "source_code_sha": "c14f4fec7a742948af2682a2371686d5986d128e",
+  "source_state_artifact": 10317612853,
+  "source_checkpoint_sha256": "278ecb5d093eeb0789872608e7de2943ac1acc2200d61e029d8b15a4ffadc855",
+  "source_ledger_sha256": "f78cbaf40242e2232d323240ce473d3d93f2f944f13c8e119e73b0d33491af96",
+  "request_id": "d8b779b41d8e4158b8be1375da31a8a3",
+  "request_key": "d1dccd9b3675753316d0b74798a60f2d537d3ce4abcbf058c1d5313f8accec59",
+  "request_sha256": "826dbf67d959643b3466390b27d43752ad7a591e609526ab14dc763df1f137ff",
+  "receipt_sha256": "858c0e769f06fa468dc7516df5218c2b2aafbcc94f8ddebc7517731b65299f43",
+  "charged_microusd": 20746,
+  "reason": "Run 34756867052 restored run 34756354731 because reservation artifact IDs were nonchronological, omitting the intervening failed interpretation. Recover only the exact original charged request and receipt; never replay it. No allowance or charge is reset."
+}
