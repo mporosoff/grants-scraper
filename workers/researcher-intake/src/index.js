@@ -1,6 +1,7 @@
 import { enforceClaimContinuity, enforceSubmittedRelationship, fail, validateAdminProfile, validateSubmission } from "./contract.js";
 import { ResearcherSubmissionStore } from "./store.js";
 import { catalogRemovalProfile, catalogRemovalProposal, validateCatalogRemoval, validateCatalogRemovalApproval } from "./catalog.js";
+import { createContextualHandler } from "./contextual.js";
 
 const MAX_REQUEST_BYTES = 32_768;
 const JSON_HEADERS = { "Content-Type": "application/json; charset=utf-8", "Cache-Control": "no-store" };
@@ -917,11 +918,14 @@ const ADMIN_JS = `(() => {
 export { ADMIN_CSS, ADMIN_HTML, ADMIN_JS };
 
 export function createHandler({ storeFactory = env => new ResearcherSubmissionStore(env.SUBMISSIONS_DB), fetchImpl = (...args) => fetch(...args), now = () => new Date() } = {}) {
+  const contextual=createContextualHandler({fetchImpl,now,authenticateAdmin:adminActor,authenticateInternal:requireInternal});
   return async function handle(request, env, context = { waitUntil() {} }) {
     const url = new URL(request.url);
     const path = url.pathname.replace(/\/$/, "") || "/";
     const origin = request.headers.get("origin") || "";
     try {
+      const contextualResponse=await contextual(request,env);
+      if(contextualResponse)return contextualResponse;
       if (request.method === "OPTIONS") {
         requirePublicOrigin(request, env);
         return new Response(null, { status: 204, headers: corsHeaders(origin, env) });

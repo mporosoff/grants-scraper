@@ -38,9 +38,10 @@ class ExperimentLedger(Ledger):
         if not trusted_route:
             raise ConfigurationFailure("task_specific_trusted_route_unavailable")
         metadata = execution_metadata or {}
+        is_contextual = metadata.get('purpose', '').startswith('cb-')
         d3_embedding = provider == 'voyage' and metadata.get('purpose') in {'d3-embedding','d3-query-format'}
         s3_embedding = provider == 'voyage' and metadata.get('purpose') == 's3-embedding'
-        allowed_model = model == 'voyage-4-large' if s3_embedding else model in {'voyage-4-large','voyage-context-4'} if d3_embedding else ROUTES.get(provider) == model
+        allowed_model = (model == ('voyage-4-large' if provider == 'voyage' else 'claude-sonnet-5')) if is_contextual else model == 'voyage-4-large' if s3_embedding else model in {'voyage-4-large','voyage-context-4'} if d3_embedding else ROUTES.get(provider) == model
         if stage not in (2, 3) or stage > approved_stage or not allowed_model:
             raise ConfigurationFailure("outside_experiment_authority")
         if (stage == 3) != metadata.get('purpose','').startswith('s3-'):
@@ -81,6 +82,9 @@ class ExperimentLedger(Ledger):
             if state.get("reservation_overrun"):
                 raise Deferred("recorded_reservation_overrun_requires_review")
             spent = sum(r["charged_microusd"] for r in state["requests"])
+            if is_contextual:
+                from tools.contextual_team_policy import check_reservation
+                check_reservation(state, provider, metadata, amount, input_tokens, output_tokens)
             if stage == 3:
                 validation = [r for r in state['requests'] if r['stage']==3]
                 if (len(validation)>=184 or len(state['requests'])>=665
@@ -96,7 +100,7 @@ class ExperimentLedger(Ledger):
                 elif metadata.get('purpose') not in {'s3-primary','s3-alternative','s3-explanation','s3-swap','s3-control'}:
                     raise ConfigurationFailure('stage3_unapproved_judge_purpose')
             judge = [r for r in state['requests'] if r['provider']=='anthropic' and r['stage']==stage]
-            if provider=='voyage':
+            if provider=='voyage' and not is_contextual:
                 embedding=[r for r in state['requests'] if r['provider']=='voyage']
                 if metadata.get('purpose') == 'd2-context':
                     contextual=[r for r in embedding if r.get('purpose')=='d2-context']
@@ -116,7 +120,7 @@ class ExperimentLedger(Ledger):
                     raise Deferred('finite_preparation_dollar_envelope_exhausted')
                 minimum=(input_tokens*3+24)//25 if d3_embedding or s3_embedding else (input_tokens+49)//50
                 if amount < minimum:raise ValueError('underreserved_embedding_request')
-            if provider=='anthropic':
+            if provider=='anthropic' and not is_contextual:
                 post = metadata.get('purpose') == 'post-audit'
                 d1 = metadata.get('purpose', '').startswith('d1-')
                 d2 = metadata.get('purpose', '').startswith('d2-')
@@ -137,7 +141,7 @@ class ExperimentLedger(Ledger):
                 dollar_cap = 2_000_000 if post else 3_364_400 if d2 or d3 else 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
                 if sum(r['reserved_microusd'] for r in judge)+amount>dollar_cap:
                     raise Deferred('finite_judge_dollar_envelope_exhausted')
-            if spent + amount > min(self.limit, STAGE_CEILINGS[stage]) or len(state["requests"]) >= self.max_requests:
+            if spent + amount > min(self.limit, 9_290_655 if is_contextual else STAGE_CEILINGS[stage]) or len(state["requests"]) >= self.max_requests:
                 raise Deferred("experiment_stage_or_total_budget_exhausted")
             token = uuid.uuid4().hex
             state["requests"].append({"id": token, "provider": provider, "model": model,
