@@ -55,7 +55,9 @@
           let value=await read(ENDPOINT+'/jobs?'+new URLSearchParams(ids),{},fetcher);
           if(value.state==='unassessed'&&options.deliberate===true){
             still(options);
-            value=await read(ENDPOINT+'/jobs',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify(ids)},fetcher);
+            // A simple request keeps the existing Access login in charge; no
+            // unauthenticated preflight bypass or credential export is needed.
+            value=await read(ENDPOINT+'/jobs',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(ids)},fetcher);
           }
           for(let count=0;['dispatch_claimed','in_progress'].includes(value.state)&&count<120;count++){
             // Polls are reads only. A closed panel abandons display, not the

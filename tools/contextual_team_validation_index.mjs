@@ -16,4 +16,26 @@ const body={schema_version:4,release_id:snapshot.snapshot_id,registry_generation
 const index={...body,generation_id:hash(body)};
 const target='outputs/contextual-stage-b/validation-index-'+index.generation_id+'.json';
 fs.writeFileSync(target,JSON.stringify(index,null,2)+'\n');
-console.log(JSON.stringify({index:target,generation_id:index.generation_id,release_id:index.release_id,scopes:index.scopes.length,public_activation:false}));
+const script=target.replace(/\.json$/,'.js');
+fs.writeFileSync(script,'globalThis.OPPORTUNITY_TEAM_INDEX='+JSON.stringify(index)+';\n');
+const preview='outputs/contextual-stage-b/validation-app.html';
+const original=fs.readFileSync('match_explorer.html','utf8');
+let html=original.replace('<head>','<head>\n  <base href="/">\n  <script src="/outputs/contextual-stage-b/validation-boundary.js"></script>');
+html=html.replace(/(<meta name="opportunity-team-generation" content=")[a-f0-9]{64}("\s*\/?>)/,'$1'+index.generation_id+'$2');
+html=html.replace(/\.\/data\/opportunity_team_index\.js\?v=[a-f0-9]{64}/,'/'+script);
+fs.writeFileSync(preview,html);
+// Instrument this private preview only. Other hosted services are blocked so
+// the validation cannot borrow an unrelated provider allowance or send mail.
+fs.writeFileSync('outputs/contextual-stage-b/validation-boundary.js',`(()=>{
+  const original=globalThis.fetch.bind(globalThis),calls=[];let initial=null;
+  const output=()=>{if(!document.body)return;let node=document.getElementById('contextual-validation-boundary');if(!node){node=document.createElement('output');node.id='contextual-validation-boundary';node.hidden=true;document.body.appendChild(node);}
+    node.textContent=JSON.stringify({calls,initial,heap:performance.memory?.usedJSHeapSize??null});};
+  globalThis.fetch=async(input,options={})=>{const url=new URL(typeof input==='string'?input:input.url,location.href),method=options.method||'GET';
+    const allowed=url.origin===location.origin||(url.origin==='https://funding-finder-researchers.urochestercheme.workers.dev'&&url.pathname.startsWith('/admin/api/contextual/'));
+    const row={origin:url.origin,path:url.pathname,method,allowed,started:performance.now()};calls.push(row);
+    if(!allowed){output();throw Error('Private validation blocks unrelated service traffic.');}
+    try{const response=await original(input,options);row.status=response.status;return response;}finally{row.duration=performance.now()-row.started;output();}};
+  document.addEventListener('click',event=>{if(event.target.closest('[data-opportunity-team]')&&!initial){initial={time:performance.now(),heap:performance.memory?.usedJSHeapSize??null};output();}},true);
+  addEventListener('DOMContentLoaded',output);
+})();\n`);
+console.log(JSON.stringify({index:target,preview,generation_id:index.generation_id,release_id:index.release_id,scopes:index.scopes.length,public_activation:false}));
