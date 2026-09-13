@@ -26,6 +26,11 @@ RESPONSE_CONTRACT = {
 }
 LEGACY_FORMAT = 'Return exactly one verdict per item, one supplied evidence reference and a concise reason of at most 60 ASCII characters. No shared verdict, extra commentary or request for reruns.'
 REVISED_FORMAT = 'Return exactly one verdict per item, one supplied evidence reference and a short explanation. Preserve the complete reason. No shared verdict, extra commentary or request for reruns.'
+OWNED_FORMAT = 'Return a verdicts object keyed by the exact question IDs. For each question, select evidence_ref verbatim from its schema enum: one exact scope, person or claim identifier, never a field path, combined citation or another person\'s claim. Give a short complete explanation; never truncate it. No extra commentary or request for reruns.'
+OWNED_RESPONSE_CONTRACT = RESPONSE_CONTRACT | {
+    'version': 'contextual-check-response-v3',
+    'references': 'provider-enforced per-question enum; exact keyed questions; canonical array cache',
+}
 
 
 def graphs(state,config):
@@ -46,7 +51,8 @@ def graphs(state,config):
     return selected
 
 
-def packet(scope,graph,members,kind,config,*,revised=False):
+def packet(scope,graph,members,kind,config,*,revised=False,owned_references=False):
+    revised = revised or owned_references
     if kind not in ('group','explanation'):raise ValueError('contextual_check_kind')
     useful=[e for e in graph['edges'] if e['coverage'] in ('direct','method_transfer')]
     if not 2<=len(members)<=4 or len(set(members))!=len(members):raise ValueError('contextual_check_member_count')
@@ -66,6 +72,8 @@ def packet(scope,graph,members,kind,config,*,revised=False):
                   'coverage':'Model-assessed possible transfer' if edge['coverage']=='method_transfer' else 'Model-assessed contribution',
                   'qualification':'This is not a capability certificate.'}})
     evidence['items']=questions
+    owned={q['item_id']:{'scope.science'}|set(q['people'])|
+        {c['claim_id'] for p in people if p['person_id'] in q['people'] for c in p['claims']} for q in questions}
     schema=obj(verdicts=array(obj(item_id=enum(*(q['item_id'] for q in questions)),
         verdict=enum(*(['faithful','unsupported','insufficient-information'] if kind=='explanation' else ['strong','plausible','unrelated','insufficient-information'])),
         evidence_ref=string(100),reason=string(60)),len(questions)))
@@ -74,19 +82,35 @@ def packet(scope,graph,members,kind,config,*,revised=False):
         if prompt.count(LEGACY_FORMAT)!=1:raise ValueError('contextual_check_original_format_changed')
         prompt=prompt.replace(LEGACY_FORMAT,REVISED_FORMAT)
         schema['properties']['verdicts']['items']['properties']['reason']={'type':'string','minLength':1}
+    if owned_references:
+        prompt=prompt.replace(REVISED_FORMAT,OWNED_FORMAT)
+        fields=schema['properties']['verdicts']['items']['properties']
+        schema=obj(verdicts=obj(**{q['item_id']:obj(verdict=fields['verdict'],
+            evidence_ref=enum(*sorted(owned[q['item_id']])),reason=fields['reason']) for q in questions}))
+    response_contract=OWNED_RESPONSE_CONTRACT if owned_references else RESPONSE_CONTRACT
     body=request_body({'provider':'anthropic','model':'claude-sonnet-5'},
-        {'schema_version':RESPONSE_CONTRACT['version'] if revised else 'contextual-check-v1',
+        {'schema_version':response_contract['version'] if revised else 'contextual-check-v1',
          'max_output_tokens':RESPONSE_CONTRACT['max_output_tokens'] if revised else 512},prompt,evidence,schema)
     # Match the established compact judge transport: output capacity belongs to
     # the explicit verdicts, not an implicit adaptive-thinking allocation.
     body['thinking']={'type':'disabled'}
     if len(existing.encoded(body))>JUDGE_BODY_BYTES:raise ValueError('contextual_check_full_evidence_exceeds_bound')
     refs={'scope.science'}|{p['person_id'] for p in people}|{c['claim_id'] for p in people for c in p['claims']}
-    owned={q['item_id']:{'scope.science'}|set(q['people'])|
-        {c['claim_id'] for p in people if p['person_id'] in q['people'] for c in p['claims']} for q in questions}
     def check(value,cached):
         if revised and len(existing.encoded(value))>RESPONSE_CONTRACT['max_response_bytes']:
             raise ValueError('contextual_check_complete_response_byte_bound')
+        if owned_references:
+            if cached:
+                rows=value.get('verdicts') if isinstance(value,dict) else None
+                if (not isinstance(rows,list) or len(rows)!=len(questions)
+                    or any(not isinstance(row,dict) or 'item_id' not in row for row in rows)
+                    or len({row['item_id'] for row in rows})!=len(rows) or set(value)!={'verdicts'}):
+                    raise ValueError('contextual_check_invalid_canonical_cache')
+                value={'verdicts':{row['item_id']:{k:v for k,v in row.items() if k!='item_id'} for row in rows}}
+            else:
+                value=response_value('anthropic',value)
+            value=validate_schema(value,schema)
+            return {'verdicts':[{'item_id':q['item_id'],**value['verdicts'][q['item_id']]} for q in questions]}
         value=validate_schema(value if cached else response_value('anthropic',value),schema)
         if len(value['verdicts'])!=len(questions) or {v['item_id'] for v in value['verdicts']}!={q['item_id'] for q in questions}:
             raise ValueError('contextual_check_missing_verdict')

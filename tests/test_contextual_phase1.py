@@ -35,7 +35,7 @@ def envelope(value,stop='end_turn'):
 
 class CheckContract(unittest.TestCase):
     def setUp(self):
-        self.p=plan();self.config=configuration_for_job({'release_id':self.p['release_id'],'scope_id':'332894','person_id':''})
+        self.p=plan(1);self.config=configuration_for_job({'release_id':self.p['release_id'],'scope_id':'332894','person_id':''})
         self.scope=next(s for s in self.config['scopes'] if s['id']=='332894')
         self.graph={'edges':[{'person_id':p['person_id'],'coverage':'method_transfer','central':True,
             'role_id':'fixture-role','claim_id':p['claims'][0]['claim_id'],'reason':'Fixture assertion, not science.',
