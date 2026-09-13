@@ -48,7 +48,8 @@
     let graph=cache.get(key);
     if(!graph){
       if(!pending.has(key)){
-        const fetcher=options.fetcher||g.fetch.bind(g);
+        const fetcher=options.fetcher||(index.transport==='access-window-v1'?g.ContextualTeamAccess?.fetch:g.fetch.bind(g));
+        assert(typeof fetcher==='function','contextual_access_transport_unavailable');
         // The shared finite server job survives a detached panel. No AbortSignal
         // is placed on the cross-user workflow or on another panel's promise.
         const task=(async()=>{

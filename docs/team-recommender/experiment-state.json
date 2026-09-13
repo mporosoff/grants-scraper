@@ -8491,7 +8491,23 @@
     "real_browser_receipt": "docs/team-recommender/contextual-stage-b/real-browser-receipt-v1.json",
     "routing_observation": "docs/team-recommender/contextual-stage-b/routing-observation-v2.json",
     "four_tasks_all_passed": false,
-    "stop": "STOP FOR USER REVIEW; no activation, paid retry/rekey, new campaign or Stage4"
+    "stop": "STOP FOR USER REVIEW; no activation, paid retry/rekey, new campaign or Stage4",
+    "option1": {
+      "status": "implementation_in_progress_zero_paid",
+      "starting_head": "3e9377736c22f8aa7796fc1d84087245837fdd6c",
+      "starting_tested_runtime": "bc931dcd03b3a2bbff573431e39cbafa72615a36",
+      "authority": "contextual-stage-b/OPTION1-AUTHORITY.md",
+      "execution_lock": "contextual-stage-b/option1-execution-lock-v1.json",
+      "release_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+      "starting_charged_microusd": 5495902,
+      "starting_attempts": 653,
+      "new_spend_microusd": 0,
+      "new_attempts": 0,
+      "planned_maximum_microusd": 1418340,
+      "planned_attempts": 7,
+      "public_activation": false,
+      "report": "reports/contextual-stage-b-option1-integration-repair-report.md"
+    }
   },
   "active_work": "contextual-stage-b-demand-implementation",
   "historical_pre_contextual_live_pass": {
