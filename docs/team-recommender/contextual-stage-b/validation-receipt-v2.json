@@ -1,0 +1,48 @@
+{
+  "version": "contextual-stage-b-checkpoint-v2",
+  "captured_at": "2026-09-13T02:15:49.131835+00:00",
+  "product_code_sha": "b7eb2e2ed01d71eae709306400309d9d8aaaaacd",
+  "trusted_candidate_sha": "61d2829b4553adbc7f944ee8b50b411b352ad0c9",
+  "pr": 231,
+  "exact_head_ci": 34731851200,
+  "review_id": 5189029706,
+  "unresolved_finding": 3998349238,
+  "merged": false,
+  "deployed": false,
+  "actual_provider_requests": 0,
+  "actual_provider_tokens": 0,
+  "actual_cost_microusd": 0,
+  "focused_python": {
+    "passed": 38
+  },
+  "focused_worker_node": {
+    "passed": 34
+  },
+  "product_client_fixtures": {
+    "passed": 4,
+    "scientific_output": "fictional fixture"
+  },
+  "full_browser": {
+    "sha": "2a62f6c072a9fcfe37a5b8857acee11f4b9b1a65",
+    "passed": 113,
+    "failed": 4,
+    "total": 117,
+    "real_contextual_service": false,
+    "private_report_sha256": "58ec643a5013157884c97bf57c3b96369ae7ad406ba127059f07ed507eaa7e03"
+  },
+  "validation_index": "298678680cd96705d24a18e9ebc0cc87952092f67aec1d03176766d0bc579d3e",
+  "scope_count": 8,
+  "real_workflows_completed": 0,
+  "actual_graphs": 0,
+  "independent_judgments": 0,
+  "inputs": {
+    "assets/contextual-team-engine.js": "94cb2d32ee4bef6f131f511a164a2226636c86ac7d118e62b51facc66c0933c4",
+    "assets/contextual-team-client.js": "44abfb75d94ff8658f130d3ddea92574f7f966506ccfd08e6afb6aa466382690",
+    "assets/opportunity-team.js": "d33c0266c2d5bedc0811df53811401a0b372fc6f104235aa7e5dace934dcb1bb",
+    "assets/opportunity-team-panel.js": "6e7bf40f9f4b747096af44423864ad0fe40851c9127785bc10d5c5cb8bf90ead",
+    "tools/contextual_team_validation_index.mjs": "f6d6b5253678444c55edef4aaf9c3c2e6f81cdadd19da652a5986a3e2dbf6fff",
+    "docs/team-recommender/contextual-stage-b/input-lock-v1.json": "8aa7c4652fe4618019c5faf12f1a83ea6b48d1dc12def9605157077b2518e752",
+    "docs/team-recommender/contextual-stage-b/preflight-budget-v2.json": "104ae92e8219ffdf2ea76a53cd4073bed584fba2e771c97295658d07101ab9a8",
+    "docs/team-recommender/contextual-stage-b/review-reproduction-v1.json": "71a34e5a43fafad067e83b62450a29df779f93db4cab59a553acb20928da9b2d"
+  }
+}

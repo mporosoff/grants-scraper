@@ -1,0 +1,42 @@
+{
+  "version": "contextual-review-reproduction-v1",
+  "candidate": "61d2829b4553adbc7f944ee8b50b411b352ad0c9",
+  "finding": 3998349238,
+  "actual_provider_calls": 0,
+  "observations": [
+    {
+      "case": "transport_timeout",
+      "observations": [
+        {
+          "iteration": 1,
+          "job_state": "failed",
+          "ledger_state": "reserved_unknown",
+          "fixture_provider_dispatches": 1
+        },
+        {
+          "iteration": 2,
+          "job_state": "recovery_required",
+          "ledger_state": "reserved_unknown",
+          "fixture_provider_dispatches": 1
+        }
+      ]
+    },
+    {
+      "case": "http_503",
+      "observations": [
+        {
+          "iteration": 1,
+          "job_state": "budget_limited",
+          "ledger_state": "reserved_unknown",
+          "fixture_provider_dispatches": 1
+        },
+        {
+          "iteration": 2,
+          "job_state": "recovery_required",
+          "ledger_state": "reserved_unknown",
+          "fixture_provider_dispatches": 1
+        }
+      ]
+    }
+  ]
+}

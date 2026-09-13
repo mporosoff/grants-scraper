@@ -1,211 +1,157 @@
-# Contextual Stage B — implementation checkpoint and pre-dispatch block
+# Contextual Stage B — implementation and review-convergence checkpoint
 
-Date: September 12, 2026. **Stage B is authorized but incomplete. No hosted contextual assessment, new embedding, judge request or public activation occurred.**
+September 13, 2026 UTC / September 12 EDT. **BLOCKED BY A NAMED PREREQUISITE: PR #231 has a confirmed consequential recovery-state finding after one consolidated remediation and exact-head re-review.** The service is implemented but unmerged and undeployed. The eight real assessments, explicit extension and independent output check have not run. New provider expenditure: **$0**.
 
-The first failing boundary is the complete-run spending preflight. Under the existing conservative input-reservation rule and the effective legacy output capacities, an **incomplete** reservation envelope already reaches **$4.398903**, exceeding this task's **$3** ceiling. This is a reservation-policy result, **not a measurement of actual Sonnet token usage, a forecast that charges necessarily exceed $3, or a request for more money**. Lower actual token consumption and early negative outcomes cannot be assumed to finance the rest of the locked run.
-
-Safe local work was preserved: audited input preparation, a contextual contract adapter, deterministic composition, eight source-selected diagnostic reservations, source/representation accounting, and focused checks. The hosted endpoint and real validation remain outstanding. This report does not describe those local components as a completed service.
+The $5 amendment resolved the earlier complete-run budget preflight. The earlier $3-blocked report is preserved byte-for-byte as [the original budget checkpoint](contextual-stage-b-budget-checkpoint-20260912.md), SHA-256 `e7fe6f0fa6cd5fd5fc5f16fe6436c47692627fee11a982132ff7f69e3c496e84`. Synthetic tests are not scientific results.
 
 ## 1. Identity and authority
 
-| Item | Verified identity/status |
+| Item | Actual identity / disposition |
 |---|---|
 | Repository | `mporosoff/grants-scraper` |
-| Product worktree | `C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender` |
-| Product branch | `codex/on-demand-team-recommender` |
-| Starting product head | `1018d6faac2f08a6a2e828c0b72612437114d9bc` |
-| Preserved integrated repair | `9e4cfee0ef5c551c779d0d71752a7a60aaa843d9` |
-| New local code/checkpoint commit | `ce517372e9b2f32de454864935e4c1303e9083ae` |
-| Code/checkpoint tree | `23aa5fcbb9a18ff12eb57394714d187434d78746` |
-| Report-containing commit | The subsequent documentation commit containing this file; resolve with `git log -1 --format=%H -- docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md`. It does not represent additional tested code. |
-| Analytical head, unchanged | `58a59143ef5446b05223f52982a547903f53e24d` |
-| Protected main, start and final read | `fd37d5983405a04e650cb9d0a12aa34098ca2a76`; protected |
-| Existing PR225 | OPEN; head `517736dddd11591b47650c0341ca54152588c0c3`; base **`codex/post-audit-review-base`**, not main |
-| PR225 historical review | Clean exact-head completion comment `5639094296`; required CI `34633928379` succeeded. These receipts do **not** review the new local prototypes. |
-| New trusted prerequisite / dispatch / deployment | None |
+| Product branch/worktree | `codex/on-demand-team-recommender`; `C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender` |
+| Preserved prototype / original report | `ce517372e9b2f32de454864935e4c1303e9083ae` / `1859ef471afafce5ac8412bfd07e27824b75b7f8` |
+| Integrated product checkpoint | `2a62f6c072a9fcfe37a5b8857acee11f4b9b1a65` |
+| Latest product code | `b7eb2e2ed01d71eae709306400309d9d8aaaaacd`; tree `3ff94d0b676ee6a5c3b537d01ed3e1703c07f4a4` |
+| Analytical checkpoint, unchanged | `58a59143ef5446b05223f52982a547903f53e24d` |
+| Protected main, unchanged | `fd37d5983405a04e650cb9d0a12aa34098ca2a76` |
+| Narrow prerequisite | [PR #231](https://github.com/mporosoff/grants-scraper/pull/231), `codex/contextual-team-demand-service`, matching `.worktrees/contextual-team-demand-service` |
+| First prerequisite head | `c2b09de1a7d64430cc869356a4a6a2335ac7f5f8` |
+| Current prerequisite head | `61d2829b4553adbc7f944ee8b50b411b352ad0c9`; tree `7c75b979fd79d5be11af167795a638ae28610e7f` |
+| Merge / restricted deployment / real dispatch | **None** |
+| Existing PR #225 | OPEN, base `codex/post-audit-review-base`, not main; not merged |
 
-The current work order is preserved verbatim in [AUTHORITY.md](../contextual-stage-b/AUTHORITY.md). It supplies contextual Stage B authority, up to $3 and 40 additional attempts within the existing experiment, and narrowly reviewed trusted prerequisites. It does not authorize numerical reformulation Task B, Tasks D–G, a new scorer/input tournament, researcher enrichment, additional human packets, public activation or Stage 4.
+This report is a subsequent documentation checkpoint; its containing commit is resolved from the file history and is not a replacement for tested-code identities.
 
-Applicable repository instructions were read. No AGENTS, permissions, workflows, schedules, production-service settings or real researcher records were edited. Existing worktree ownership and local changes were inspected. The pre-existing untracked `outputs/` directory was retained, and new private restoration/preparation files were placed beneath it. The analytical worktree and its untracked history summary were not changed or merged.
+The [current authority](../contextual-stage-b/AUTHORITY.md) and [explicit $5 amendment](../contextual-stage-b/BUDGET-AMENDMENT-5USD.md) authorize contextual Stage B, not numerical Task B/D–G, a scorer tournament, new enrichment, additional human packets or public activation. Existing reports, source groups, ledgers, private caches, worktrees and unrelated changes remain preserved. No AGENTS, permissions or real researcher records changed.
 
-The accepted historical conclusions remain: Stage A is **INCONCLUSIVE** on formula versus representation because its input was starved; the designated E3 review was **AMBIGUOUS**; no historical operating point was adopted. The accepted 40 responses remain model-assisted owner feedback, not independent blind validation of the audited registry. Historical Stage 3 and later scientific/resource failures remain failures.
+The user confirmed the existing application admin page works, and the actual admin console was independently visible in the browser. The earlier automated destination misclassification is resolved. **Application access is not the current blocker.**
 
-## 2. Work completed and implementation seam
+## 2. Implemented, but not hosted-validated
 
-### Implemented locally
+The existing asynchronous Team Builder boundary now loads a versioned contextual client and deterministic graph composer. The client submits canonical scope/person/release IDs, validates source/directory/graph identities, refreshes shared currentness between actions, shares pending work and rejects stale responses. Only deliberate cold Build or an explicit unassessed-person action may initiate paid work. Ordinary assessed edits, status reads and retries cannot silently dispatch providers.
 
-| Component | Actual work |
-|---|---|
-| Audited person documents | `tools/contextual_team_inputs.mjs` retains the full substantive summary and every distinct active label/evidence statement. Names, department and administrative fields are excluded from embedding text. Claim identities, revisions, source links, evidence forms and original provenance remain separately available. |
-| Canonical projection checks | Checks registry content generation, directory population, summary/active-claim content, provenance fields and ownership. Uses the existing `FUNDING_RETRIEVAL.createChildCatalog`, authoritative `recordIsCurrent`, and shared matcher's existing broad-scope presentation decision. It does not call the shared profile-admission gate or copy its scoring formula. |
-| Retrieval policy | Fixed Voyage 4 large, 1,024 dimensions, query/document roles; top 12 per contribution, then deterministic contribution-order/rank round robin to at most 12 unique people. All eligible people are intended to be scored. No real vector scoring occurred. |
-| Scientific contract adaptation | `tools/contextual_team_contract.py` resolves effective legacy prompts/settings/routes through `tools/team_provider.py`. It preserves Sonnet 5 and the effective 8,000 / 8,000 / 16,000 output allowances. It permits one contribution, complete audited-person context, explicit incomplete-source states and relationship graphs. Automatic attempts are limited to one. |
-| Verification contract | Receives complete original scope/person evidence and proposed IDs/categories, with prior reason/gap prose stripped. Local validation rejects new/upgraded relationships, changed claims/revisions, invented source/evidence spans and missing person dispositions. |
-| Local composition prototype | `assets/contextual-team-engine.js` composes supported/credible-transfer graph relationships into 2–4-person groups, requires a contextual central-purpose connection, retains overlapping useful pairs, rejects duplicate-evidence padding, and returns up to eight stable options. No MMR, fitted weights or historical threshold is used. |
-| Editing prototype | Assessed edits, exclusions, re-add and manual/unassessed directory paths are local. Model categories never set `directEvidence` or `complete`. Immutable source/directory replacement invalidates a selection, including changes outside the selected members. |
-| Source/representation inventory | Eight reservations and the original 50/150 routing IDs were examined without calculating recommendations. Exact historical embedding-text reuse was checked. |
+The composer selects two to four useful members from verified contextual relationships, requires central-purpose support, permits useful overlap, and produces up to eight stable alternatives without padding. Manual/unassessed people remain reachable. Model-assessed contributions/transfers never set independently confirmed capability flags. No historical E2/E3 threshold, lexical admission veto, MMR or fitted score is used.
 
-The new composer is **not wired into `opportunity-team.js` or the current panel**. It is a local component, not an alternative production owner. The old serving code was not removed before a replacement consumer existed. No new endpoint, job store, cross-user cache, explicit-assessment control or hosted callback was deployed or claimed to be working.
+The narrow prerequisite implements:
 
-### Existing trusted facilities inspected
+- Fixed hashed audited inputs, full-directory Voyage 4 large retrieval, per-contribution top 12 and contribution-order round-robin union capped at 12 people.
+- Pinned legacy Sonnet 5 interpretation, applicability and separate verification. Full bounded evidence is retained; persuasive first-assessor prose is excluded from the verifier's proposed-edge evidence.
+- Existing cloud ledger/transport/caches, conservative pre-dispatch reservations, irreversible logical requests and exact successful cache reuse. No second ledger or automatic paid replay.
+- Existing administrator Access protection, transactional finite job claims, one active job, eight initial scopes plus one extension, and existing protected-main manual workflow ownership of provider credentials.
+- A protected operator page and one fixed localhost validation origin for the contextual namespace only, with administrator identity still mandatory. No unauthenticated preflight exception or Access-policy changes.
+- At most four independent checks on the first two graph-producing **distinct existing source groups**, plus serving-module/runtime/binding/route/trigger proof and rollback.
 
-The AI gateway has server-owned operations, rate limits and a Durable Object daily usage counter. That weighted daily counter is not this experiment's durable monetary ledger and must not be substituted for it. Researcher intake has independently verified Access JWT administrator protection, authenticated workflow callbacks and existing GitHub dispatch transport. Their credentials were not read or exported; only configured secret names were inspected.
+These are code paths, not claims that the deployed route or real graph integration passed. Public registry/application/recommender release remains off. The existing release planner at the first prerequisite head selected **validation only**, with no runtime/source/semantic/team generation or publication. Main did not change, so no production trigger ran.
 
-The existing manual `team-recommender-offline.yml` route checks protected-main code, serializes this authorization and restores/persists the authoritative ledger and exact caches. Keeping provider execution in that same owner would avoid a second hosted spending allocation. Its presently accepted operations do not implement the requested contextual demand service. This integration direction was inspected, **not implemented or independently reviewed**.
+## 3. Inputs, reuse and complete missing denominator
 
-Trigger inspection also established that changes under `workers/ai-gateway/**` can automatically deploy that gateway on a main push. No such change, push or merge was made. A future prerequisite must preserve public serving/new-paid-work OFF and use a restricted validated route; the existing PR225 base does not supply main-release authority.
+Audited registry: `60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126`. Actual population: **158 canonical, 155 automatically eligible, three reference-only**; eligible people have 481 active claims. Four source gaps—Lawton, Lomakina, Rygg and Slane—remain unresolved. No new profile scraping, promotion or paraphrase-to-quotation conversion occurred.
 
-## 3. Exact inputs and eight-scope dispositions
+Snapshot: `b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1`.
+Roster: `1c6a29538ff8911ca01f7b4d1483f4251bbb4ab237a54f134f4872d0ae27fe60`.
+Trusted input packet SHA: `d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9`.
 
-Audited registry generation:
+Actual input-only encoding: **947,090 bytes / 125,945 gzip bytes**, before vectors or graphs.
 
-`60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126`
+| Locked scope | Retained source/activity state | Real outcome |
+|---|---|---|
+| `361207` | Auditory tissue-resource network, official retained forecast/context | NOT RUN |
+| `361208` | Network coordinating center; distinct activity, same existing source group as 361207 | NOT RUN |
+| `332894` | LPS Qubit Collaboratory canonical context | NOT RUN |
+| `344592:ab-0025` | Electrochemistry child, exact parent/document/page provenance | NOT RUN |
+| `345241:tdac-baa-004` | Exact second-parent child; stored introduction may omit decisive analytical context | NOT RUN; not declared sufficient |
+| `362856` | Bone Marrow Failure Resource Development Award | NOT RUN |
+| `363069` | Veterans cemetery-history research, directory-boundary diagnostic | NOT RUN; not a no-group result |
+| `344592` | Unselected umbrella, needs scope selection | No inference before deliberate child choice |
 
-There are **158 canonical records**, **155 automatically eligible people**, and three reference-only records. The eligible documents contain **481 active claims**; the whole registry's historical audit counts include the reference-only records too. These counts were derived from the actual files, not used as a fixed population assumption.
+**8 reservations, 7 mechanically unassessed, 1 unselected umbrella; 0 real cold workflows, shortlists, assessed people, verified relationships, graphs/groups, extensions or independent-check judgments.** These zeros mean unexecuted work, not scientific rejection. No new real source → person → contribution → team example exists.
 
-The four source gaps are preserved: Melodie I. Lawton (`urh-000158`), Elena Lomakina (`urh-000043`), J. Ryan Rygg (`urh-000061`) and Laura Slane (`urh-000086`). No new source reading, enrichment, status promotion or paraphrase-to-quotation conversion occurred.
+The source-only reconciliation retains the original C2 overlay grouping 361207/361208 together, so they cannot fill both independent-check slots. It predates new outputs; no split was redrawn.
 
-The real, private **input-only** snapshot is:
+Reuse inspection covered eight embedding packets, 51 requests and 2,677 rows, including 2,043 document rows. **0 exact compatible audited combined-profile vectors found; 0 generated.** Missing: 155 document rows in two batches, plus only requested contribution-query rows. Historical assets were preserved and no search corpus was rebuilt.
 
-`outputs/contextual-stage-b/snapshot-b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1.json`
-
-Identity: `b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1`.
-
-Its encoding is **947,090 bytes**, or **125,945 gzip bytes**. These are real source/profile text measurements. They are **not** a serving-package transfer measurement: no new vectors or assessment graphs are included, and no browser loaded it.
-
-[The source-only lock](../contextual-stage-b/input-lock-v1.json) predates all new recommendation outputs; there are still no such outputs. The comparison clock is `2026-09-12T16:00:00Z`. Live-like action tests use refreshed clocks separately.
-
-| Scope | Source/activity stratum | Mechanical input disposition | New contextual workflow / result |
-|---|---|---|---|
-| `361207` | Human auditory/vestibular tissue-resource network | Canonical forecast synopsis and structured conditions retained; current by shared policy | NOT RUN; no assessed people or graph |
-| `361208` | Coordinating center for that resource network | Distinct canonical coordinating activity retained | NOT RUN |
-| `332894` | LPS Qubit Collaboratory | Canonical purpose/context retained; interpreter still must assess coherence | NOT RUN |
-| `344592:ab-0025` | Native Electrochemistry child | Exact parent `344592`, original document hash, page anchor, full stored child summary and governing fields retained | NOT RUN |
-| `345241:tdac-baa-004` | Quantum-enabled Army-systems analytical methodology child | Exact second parent retained; **source-context concern**: stored description stops at introductory context | NOT RUN; no claim that the short projection establishes the missing analytical work |
-| `362856` | Bone Marrow Failure Resource Development Award | Full retained multiomic-resource synopsis, document-search evidence and conditions included | NOT RUN |
-| `363069` | Veterans cemetery-history research | Deliberate different-objective/directory-boundary diagnostic | NOT RUN; not labeled a true no-group case |
-| `344592` | Unselected foundational-research umbrella | `needs_scope_selection` under the existing native-child/broad-scope policy | No provider work planned before a child is deliberately selected |
-
-These are historical diagnostics across several activities, not a pristine holdout. Two publishable child IDs from different parents are represented, but **a second fully sufficient child scientific input has not been established**. The TDAC context concern is not hidden by its publishable ID or schema validity. The mechanical `unassessed` state in the input receipt is not a completed source-suitability judgment. No unsupported replacement scope was chosen.
-
-Denominators: **8 reservations inspected; 7 mechanically unassessed and 1 unselected umbrella; 0 cold contextual workflows executed; 0 retrieved real shortlists; 0 assessed people; 0 verified relationships; 0 generated groups; 0 model judgments.** Zero generated groups here means unexecuted work, **not** eight no-group outcomes.
-
-### Representation reuse
-
-[Reuse audit](../contextual-stage-b/vector-reuse-audit-v1.json): 8 retained embedding packet files, 51 requests, 2,677 rows examined, including 2,043 document-role rows. The 155 contextual-chunk rows use a different representation contract. None of the independent rows has exact text equal to a newly constructed audited combined-profile document.
-
-**Compatible vectors reused: 0. New vectors generated: 0. Missing combined-profile rows: 155.** Contribution query rows remain unknown until interpretation, bounded by six per assessable scope. No unrelated search embeddings were modified, normalized into a different space or repurchased. Historical acquired work and caches remain preserved; no historical cost was treated as a credit.
-
-## 4. Contracts, composition and limits of the evidence
-
-| Scientific stage | Exact local candidate contract ID | Effective output allowance |
+| Scientific contract | ID | Output tokens |
 |---|---|---:|
-| Interpretation | `7673267090e63761490b910a6cf6cdaa81a481eaaa7e0d09a7dbe3f9b2b2df2d` | 8,000 tokens |
-| Assessment | `7b84c54025eb2ab7d27b846ab8e0f3f9bef6ae2af430d8b52a65ba636c3162da` | 8,000 tokens |
-| Verification | `5bf5d07af9054864306b15f613eb3e5398746944c122666971b46b1882feedcd` | 16,000 tokens |
+| Interpretation | `7673267090e63761490b910a6cf6cdaa81a481eaaa7e0d09a7dbe3f9b2b2df2d` | 8,000 |
+| Applicability | `7b84c54025eb2ab7d27b846ab8e0f3f9bef6ae2af430d8b52a65ba636c3162da` | 8,000 |
+| Verification | `5bf5d07af9054864306b15f613eb3e5398746944c122666971b46b1882feedcd` | 16,000 |
 
-[The retained contracts](../contextual-stage-b/scientific-contracts-v1.json) are **local, undispatched and unreviewed**, not a nominated serving candidate. An early local draft reduced output allowances; that draft was rejected during preflight and the final local adapter preserves the actual effective legacy allowances. No provider was tested on the draft.
+## 4. Review convergence and first failing boundary
 
-The composer uses distinct verified contribution coverage, contextual central-purpose support and minimum useful size. It does not turn an embedding rank into admission. Its proof is limited to constructed fixtures: useful overlapping pairs, additional distinct contributions, unrelated/adjacent evidence that remains nonautomatic, stable alternatives, manual people and truthful unconfirmed labels. No fixture establishes scientific usefulness of this candidate on real opportunities.
+The automatic first review of `c2b09de…` found two accepted P1 issues: serving configuration must match protected inputs, not merely its own before/after state; compact independent-check requests must disable thinking. Both were corrected in one batch. The audit is retained in the prerequisite's `config/contextual_team/review-round-1.md`; original threads remain preserved and resolved.
 
-The initial option fixture found a larger group with no extra coverage relative to available two-person options. The local composer was corrected to retain the smallest groups attaining its best contribution coverage; the affected checks pass. No model output or grade informed that correction.
+The initial verification launch failed to load the Git ref. Authoritative GitHub commit and branch APIs confirmed it existed. One bounded retry of the same unchanged candidate completed at **2026-09-13 02:06:53 UTC**, review **5189029706**. This was not a concurrent duplicate review or scientific evaluation.
 
-There are **no real source → retrieved person → assessed contribution → verified relationship → team examples to report**. Presenting the real source inputs above as successful recommendation examples would fabricate the missing stages.
+The completed verification reported [P1 finding 3998349238](https://github.com/mporosoff/grants-scraper/pull/231#discussion_r3998349238). A provider timeout or non-200 response without usage leaves an irreversible `reserved_unknown` ledger row, but the outer exception mapping reports `failed` or `budget_limited`. The Worker stores that callback immutably and releases its active slot, hiding the recovery requirement.
 
-## 5. Budget and first failing boundary
+A zero-provider reproduction ran the actual main exception handler and ledger, replacing only transport/trust-entry/checkpoint transport with fixtures:
 
-Authoritative owner: `on-demand-team-offline-v2-20260909`, trusted run **34606280661**, state artifact **10266946843**. All **1,243 checkpoint-listed files** were hash-verified after restoration. A final workflow-history read showed no later run.
+| Fixture | First displayed job state | Durable request | Second local execution | Total fixture dispatches |
+|---|---|---|---|---:|
+| Timeout after possible dispatch | failed | reserved_unknown | recovery_required | 1 |
+| HTTP 503 before usage | budget_limited | reserved_unknown | recovery_required | 1 |
 
-Checkpoint hash: `c6e59fe149baf5792e36be37d601fb87ab1763eafc50253b68ad861b99e4be9b`.
+**No duplicate dispatch was reproduced.** The remaining defect is accurate uncertain-state propagation and immutable job completion/recovery. The later local result cannot replace an already stored different terminal callback. Charges remain preserved; no lost result was claimed recovered.
 
-Ledger hash: `5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f`.
+The stricter repository instructions supplied by the user say: “If a completed exact-head re-review finds another consequential issue in the same subsystem after one remediation round, do not begin another autonomous fix/review loop. Stop and report the convergence failure…” This applies despite the more permissive checked-in text. **No second repair/review loop, merge or dispatch was attempted.** The new P1 thread is unresolved.
 
-| Accounting item | Actual amount |
-|---|---:|
-| Prior cumulative experiment charge | $4.290655 |
-| New task charge | **$0** |
-| New provider attempts / input tokens / output tokens | **0 / 0 / 0** |
-| Outstanding reservations | $0 |
-| Lifetime attempts used | 629 / 690 |
-| Remaining experiment balance / attempts | **$5.709345 / 61** |
-| Authorized task ceilings | At most $3 / 40 additional attempts |
-| Protected later reserve | At least $2.709345 / 21 attempts; fully preserved |
+Smallest next step: an explicitly resumed bounded correction covering unknown dispatch, pre-dispatch failure, known-usage failure, cacheless recovery and immutable callbacks, followed by exact-head checks/review. No higher budget, new provider or broader infrastructure project is needed. After a clean result, restricted deployment and all eight assessments plus extension/check remain required.
 
-No task suballocation was created, no local ledger was made spend-authoritative, and no old qualification allowance was accessed. The restored local copy remains read-only. The small charges printed by executor unit fixtures are simulated test accounting and are not experiment usage.
+## 5. Tests, presentation and resources
 
-Official prices checked September 12: Sonnet 5 is $2 per million uncached input tokens, $10 per million output tokens and $2.50 per million five-minute cache-write tokens; its introductory $2/$10 pricing became standard. [Anthropic pricing](https://platform.claude.com/docs/en/about-claude/pricing). Voyage 4 large is $0.12 per million tokens. [Voyage pricing](https://docs.voyageai.com/docs/pricing). No credit/free-token assumption is used to create extra authority.
-
-The existing scientific transport reserves input using serialized request bytes plus 1,024, and conservatively prices at the larger input/cache-write rate. The preflight retains the complete real source evidence and the twelve largest complete candidate documents permitted by the frozen shortlist bound. It does **not** pretend those twelve are the actual retrieved people.
-
-| Preflight component | Conservative reservation amount |
-|---|---:|
-| Seven potentially full cold workflows: known source/profile bodies plus effective output limits | **$4.138423** |
-| One extension: assessment/verification **output only** | $0.240000 |
-| Up to four independent-check requests: **output only** | $0.020480 |
-| Subtotal, still incomplete | **$4.398903** |
-| Task ceiling | **$3.000000** |
-
-The subtotal still omits future interpretation/proposed-edge input bytes, embeddings, extension input and independent-check input. Even pricing the cold-scope input reservation at uncached $2 rather than $2.50 yields **$3.758734 for those cold scopes alone**. Thus removing the cache-write premium alone does not close this preflight.
-
-The request inventory fits numerically: at most 2 profile batches + 7 query batches + 21 scientific stages + 2 extension stages + 4 independent checks = **36 attempts**, without automatic retries. The failing dimension is the complete conservative dollar envelope. Negative/incomplete scopes may stop early, and actual token usage may be much lower; neither outcome has been measured or banked in advance.
-
-The missing prerequisite is a **reviewed complete-packet token/reservation plan that fits the same $3/40 limits** while retaining adequate legacy output capacity, complete evidence and all eight reservations. No higher budget is requested. No unreviewed ratio was substituted for the conservative reservation rule, and the task was not silently reduced to a favorable example. See [the exact preflight receipt](../contextual-stage-b/preflight-budget-v1.json).
-
-## 6. Validation, interface, privacy and resource status
-
-[Validation receipt](../contextual-stage-b/validation-receipt-v1.json):
-
-- **11 new Node contracts pass**, including real audited projection/child identity, complete document serialization, balanced retrieval fixtures, overlap, duplicate evidence, eight alternatives, manual reachability, full slots, exclusions, currentness and whole-pool replacement.
-- **29 existing Node/browser contracts pass** for the unchanged shared engine, panel and opportunity-team route. These are regression evidence for existing behavior, not a contextual hosted-browser test.
-- **54 Python checks pass**, including eight new contextual-schema/verification checks and existing registry, ledger and executor crash-recovery tests. No accounting code changed.
-- The earlier combined Node run passed 38 cases; after adding two focused contextual cases and tightening adoption checks, the affected contextual file passed all 11. The 29 unchanged regression cases were not unnecessarily rerun.
-- All **20 tracked product/runtime/input hashes** listed in the preceding dependency receipt remain identical. Presentation, registry, source catalog, sidecar and existing adapters were not edited.
-- `git diff --check` passed. No full protected CI or independent exact-head review was requested for these unpushed local prototypes.
-
-| Required validation | Status |
+| Evidence | Actual outcome / limits |
 |---|---|
-| Local composition and assessed-member edit arithmetic | PASS in fixtures |
-| Exact source/claim/revision and no-upgrade output validation | PASS in fixtures |
-| Existing irreversible paid-lifecycle regressions | PASS; existing code, isolated fixture providers |
-| New contextual cross-user cache, durable concurrency and restart behavior | **NOT IMPLEMENTED / NOT RUN** |
-| Real protected cold request and explicit unassessed-person extension | **NOT RUN** |
-| New contextual browser-boundary zero-paid cold/warm/error receipts | **NOT RUN**; local composer has no network/provider implementation |
-| Ordinary Search behavior | Existing files unchanged; existing focused regression checks pass |
-| Complete integrated E2E / Playwright / accessibility | **NOT RUN**; no final integrated contextual candidate |
-| Historical 90-second Team Match bottleneck repair | **NOT DONE**; historical failure remains unresolved |
-| Real browser extra heap / cold and warm latency | **NOT MEASURED**; the 48 MiB target remains in force |
-| Physical-device performance | **NOT RUN** |
-| Contextual deployment/rollback equivalence | **NOT RUN**; old release packages preserved, no production flip |
+| Focused executor/accounting Python | **38 passed** at `61d2829…`, fixture provider only |
+| Focused Worker/provenance/operator Node | **34 passed**; drift, Access, job concurrency, immutable callbacks, cache reuse and read-only startup |
+| Exact-head required CI | **34731851200: Python PASS, browser PASS** at `61d2829…`; does not override reproduced review finding |
+| Product focused contracts | 31 contextual/renderer/opportunity contracts passed; four client/drawer fixtures passed after transport adjustment. Real audited shapes, fictional graphs. |
+| Full configured Playwright | **113/117 passed; four failed**, 18.7 min, `2a62f6c…`, ordinary retained schema-3 package. Not live contextual validation. |
+| Awards accessibility diagnosis | Failure reproduced: fixture snapshot expired August 24. Five preceding scans had zero serious/critical violations; later answer scans NOT RUN. Preserve product expiry behavior. |
+| Team Match browser profile | Opening 2.73 s, first person 0.41 s, second-person results 5.38 s. Repeated source/group tokenization dominates substantial CPU time. Original 90-second history workflow timeout remains **unfixed**. |
+| Node/reference observation | Correct shared query API, fixed real catalog/profiles/clock: 2/3/4-person calculations 8.06/12.67/14.82 s; results 20/19/18. No performance repair committed. |
+| Private in-app startup | Funding Finder visible, no contextual engine script, zero intercepted fetches before interaction. Startup heap approximately 13.49 MB is not extra team memory. |
+| Restricted Worker isolated dry build | Approximately 815.90 KiB / 181.93 KiB gzip during remediation; serving-byte/config proof NOT RUN |
+| Real contextual cold/warm/edit latency and incremental heap | **NOT RUN**; retained 48 MiB extra-memory target unmeasured for this candidate |
 
-Raw restored caches and the full private input snapshot remain under uncommitted `outputs/`. Public checkpoint documents contain input identities, counts, source metadata, contracts and limitations—not unrestricted provider responses, private CVs, reviewer keys or secrets.
+The other full-suite failures were a legacy proposal-only filter hidden/disabled by the current package, phone quick-action vertical spacing 116.75 px versus the <=1 assertion, and Team Match's 90-second overall timeout at history restoration. None is waived. The first needs a compatible team-state fixture; spacing needs inspection against the presentation contract; the delay needs a behavior-preserving repair and affected reruns. No cosmetic change or increased timeout manufactured a pass.
 
-## 7. Original 50/150 routing and release boundary
+Existing renderer/styles/child chooser/slots/manual and all-member Team Match workflows remain, with permitted truthful loading/status and explicit-assessment actions. The private preview is unactivated and blocks unrelated service traffic. Its hosted connection is still unverified. Focused fixtures establish no hidden provider dispatch on exercised cached/options/remove/add/retry/cache-miss/error/stale paths; **real hosted zero-paid-edit proof is NOT RUN**.
 
-[Routing inventory](../contextual-stage-b/routing-inventory-v1.json), at the fixed comparison clock, preserves the original requested IDs without substitutions or paid prewarming:
+Private artifacts remain under `outputs/contextual-stage-b/`: full browser results/traces, focused failure trace and `team-match-before.cpuprofile`. A preliminary Node probe omitted the shared query API and was discarded; the reported timings use `FUNDING_SEARCH_QUERY`. A pytest invocation found no pytest; the project unittest runner then executed the 38 cases successfully. These diagnostic failures caused no metered work.
 
-| Original configuration | Canonically mapped | Mechanically current/unassessed | Broad/unselected | Action-blocked | Compatible contextual graphs |
-|---|---:|---:|---:|---:|---:|
-| 50 | 50 | 49 | 1 | 0 | 0 |
-| 150 | 150 | 142 | 7 | 1 | 0 |
+## 6. The single ledger and complete cost plan
 
-These are canonical mapping/currentness counts. They **do not** establish source sufficiency, a configured contextual service route, 150 complete contextual ingredient packages, 150 cached graphs or 150 useful teams. The broad/incomplete distinctions still require the implemented source/interpreter path. No held-out recommendation output was generated or inspected in this task.
+Authorization: `on-demand-team-offline-v2-20260909`. Latest cloud run **34606280661**, artifact **10266946843**; no later paid run found. Read-only mirror rechecked: ledger SHA `5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f`, 629 requests (613 valid, 16 failed), **$4.290655 charged; $0 outstanding**. No reset or independent spending copy.
 
-No contextual package can yet be nominated for deployment. An eventual coherent release must bind the audited directory, representations, source inputs, graph contracts, browser adapter and restricted backend identity, and invalidate old proposals without presenting them as revalidated. Those release and rollback checks remain outstanding.
+| Accounting | Dollars / attempts |
+|---|---:|
+| Overall ceiling | $10 / 690 |
+| Prior experiment usage | $4.290655 / 629 |
+| This resumed task actual usage | **$0 / 0** |
+| Outstanding reservations | **$0 / 0** |
+| Actual remaining balance | **$5.709345 / 61** |
+| Task ceiling inside overall allowance | $5 / 40 |
+| Minimum residual if task ceiling consumed | $0.709345 / 21 |
 
-## 8. Human and semantic evidence
+The [complete v2 preflight](../contextual-stage-b/preflight-budget-v2.json) bounds **36 attempts / $4.995414**, not an expected cost or spending target:
 
-No new human packet, model grade or returned answer was requested. The accepted packet remains **17 yes, 11 maybe, 10 no and 2 can't tell**, with model-assisted owner provenance. Its designated E3 component remains **15 positives / 20, no unresolved items, AMBIGUOUS** under its original rule. These historical answers are not grades of the current audited representation or the unexecuted contextual service.
+| Unique remaining work | Conservative dollars |
+|---|---:|
+| Up to 21 cold scientific text stages | $4.154766 |
+| 155 document rows, two batches | $0.015942 |
+| Up to seven query batches | $0.021000 |
+| One person extension, two stages | $0.423034 |
+| Four independent output checks | $0.380672 |
 
-The locked independent output check would use at most four requests: group/every-member applicability and explanation questions from the first two coherent graph-producing source groups in fixed selection order. No outcome groups exist yet, so **0 questions were dispatched and no missing slots were relabeled as negative outcomes**. The same Sonnet family would generate, verify and judge; the correlated-error limitation remains. No new human validation is implied.
+Official prices checked September 12: Sonnet 5 $2/M input and $10/M output; Voyage 4 large $0.12/M. Wire bytes +1,024 conservatively bound input tokens; prompt-cache directives are rejected, no discount assumed, unexpected cache charges accounted. Checks have 512 output tokens with thinking disabled; scientific stages retain 8,000/8,000/16,000. No automatic retries. Every complete generated packet must meet locked bounds before reservation; decisive evidence cannot be clipped. Historical purchased work is reuse, not a budget credit. New provider tokens: **0**.
 
-The original quality goals—at least 80% reasonable top-five relevance, no more than 5% unrelated automatic members, at least 80% useful primary groups, and at least 85% yield on independently feasible scopes—remain visible and **UNMEASURED for this candidate**. Eight diagnostic scopes would not establish population-level error rates or independently feasible-scope yield even if completed.
+## 7. Routing, historical evidence and decision
 
-## 9. Disposition and remaining work
+Metadata-only audit of original routing IDs: **50 mapped = 49 current mechanically unassessed + one broad/unselected**; **150 mapped = 142 current mechanically unassessed + seven broad/unselected + one action-blocked**. These are not 50/150 scientifically prepared calls or cached/qualified teams. Only the locked eight are trial-allowlisted. No paid prewarming.
 
-**BLOCKED BY A NAMED PREREQUISITE: a complete, safe execution-reservation envelope within the existing $3/40 task limits.**
+Coherent release/rollback still requires matching audited registry, directory, source, backend and graph identities. Old public profiles/proposals cannot be mixed with new inputs. The restricted helper is the only proposed main change; no public package is qualified for deployment here.
 
-This is a partial implementation checkpoint, not completed contextual Stage B and not a scientific rejection of contextual assessment. Work package 1 has local audited-input, contract and composition components but no hosted service. Work packages 2 and 3 have not executed. The remaining denominator is all eight cold requests, the real missing-profile/query preparation, the explicit extension, the finite semantic check and final integrated browser validation.
+No new human packet or judgments were requested or returned. The accepted 40 responses remain model-assisted owner feedback. Stage A remains INCONCLUSIVE; the E3 decision remains AMBIGUOUS; historical Stage 3 quality/resource failures remain failures. There are no new model grades or usefulness/error-rate claims. The planned separate-call, same-family check retains correlated-error limitations.
 
-Once a fitting same-budget execution plan is established, the already-authorized narrow trusted prerequisite, restricted demand/cache/extension integration and full finite validation remain necessary. Their authority is recorded; this report does not request the $3 again or propose a new allowance, model, scorer or scientific phase. Existing source gaps, the historical resource failure and unreviewed new implementation must remain explicit.
-
-**STOP FOR USER REVIEW. No public activation or Stage 4.**
+**Disposition: BLOCKED BY A NAMED PREREQUISITE.** The blocker is PR #231's confirmed request-recovery/job-state invariant and required convergence checkpoint, not administrator access or a request for more money. Preserve `61d2829…` and this report. **STOP FOR USER REVIEW. No public activation, Stage 4, new human packet or automatic further repair/review campaign.**
