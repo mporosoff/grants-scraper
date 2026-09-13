@@ -124,7 +124,7 @@
     "required_CI": "PASS: run34633928379, Python1380/3skips, Node867/855pass/12skips,37queries/50P9/23no-drift",
     "scientific_acceptance": "NOT QUALIFIED; exposed diagnostics only",
     "physical_mobile": "NOT RUN",
-    "additional_heap_48MiB": "FAIL: observed parent 49.09–52.44 MiB",
+    "additional_heap_48MiB": "FAIL: observed parent 49.09â€“52.44 MiB",
     "post_input_1000ms": "FAIL: observed parent up to1060ms",
     "resources": {
       "path": "docs/team-recommender/evidence-repair/resource-summary-v1.json",
@@ -4467,7 +4467,7 @@
       "path": "docs/team-recommender/stage2-closeout-receipt-index.json",
       "sha256": "73a46def2c53ab43c1e4021c25ce1c08ed88ee23a9f27e9a5a49cbd0e646b3ba"
     },
-    "recommendation": "E2 NOMINATED FOR VALIDATION — NOT QUALITY-QUALIFIED OR DEPLOYED",
+    "recommendation": "E2 NOMINATED FOR VALIDATION â€” NOT QUALITY-QUALIFIED OR DEPLOYED",
     "report": {
       "path": "docs/team-recommender/reports/stage-2-decision-closeout.md",
       "sha256": "5e973fa27cb6c20a82c752b4202623c26c946a6d181aa8be4739101037356c73"
@@ -7909,7 +7909,7 @@
     "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
   },
   "contextual_stage_b": {
-    "status": "blocked_exact_head_review_convergence",
+    "status": "owner_authorized_recovery_repair_in_progress",
     "authority": "docs/team-recommender/contextual-stage-b/AUTHORITY.md",
     "product_start": "1018d6faac2f08a6a2e828c0b72612437114d9bc",
     "analytical_start": "58a59143ef5446b05223f52982a547903f53e24d",
@@ -7954,7 +7954,7 @@
       "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA"
     },
     "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
-    "blocker": "PR #231 finding 3998349238: reserved_unknown provider requests are reported as failed/budget_limited and immutably completed; owner-supplied convergence rule requires stop after one remediation/re-review.",
+    "blocker": "Previous recovery finding under authorized repair; exact-head verification required before merge.",
     "input_lock": "docs/team-recommender/contextual-stage-b/input-lock-v1.json",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
     "budget_preflight": "docs/team-recommender/contextual-stage-b/preflight-budget-v2.json",
@@ -8002,9 +8002,41 @@
         "status": "resumed_complete_preflight_and_trusted_implementation",
         "product_code_sha": "2a62f6c072a9fcfe37a5b8857acee11f4b9b1a65",
         "meaning": "Interim implementation state before terminal PR #231 re-review; not a completed hosted validation."
+      },
+      {
+        "status": "blocked_exact_head_review_convergence",
+        "blocker": "PR #231 finding 3998349238: reserved_unknown provider requests are reported as failed/budget_limited and immutably completed; owner-supplied convergence rule requires stop after one remediation/re-review.",
+        "review": {
+          "pr": 231,
+          "head": "61d2829b4553adbc7f944ee8b50b411b352ad0c9",
+          "ci_run": 34731851200,
+          "python": "passed",
+          "browser": "passed",
+          "terminal_review": 5189029706,
+          "finding": 3998349238,
+          "consequential_unresolved": true,
+          "merged": false,
+          "deployed": false,
+          "reproduction": "docs/team-recommender/contextual-stage-b/review-reproduction-v1.json"
+        },
+        "preserved_report": "docs/team-recommender/reports/contextual-stage-b-review-checkpoint-20260913.md",
+        "report_sha256": "93a4675c9d6e95a62f6a35f565c248badabb9b5e3323079edbe798769a5df874",
+        "containing_commit": "d70af4572b22174436aa9bc6a1feb8446e6e725f"
       }
     ],
-    "administrator_access": "Confirmed by user and actual application browser; previous destination classification resolved."
+    "administrator_access": "Confirmed by user and actual application browser; previous destination classification resolved.",
+    "resumption": {
+      "instruction": "Ok go ahead and execute the four indicated tasks and then we will check in again",
+      "recorded_at": "2026-09-13",
+      "scope": [
+        "One focused PR 231 recovery/job-state repair and exact-head review",
+        "Clean protected prerequisite merge and restricted validation deployment",
+        "Eight real scopes, one explicit extension, bounded independent check",
+        "Remaining browser corrections and completion report before public activation"
+      ],
+      "new_spending_authority": false,
+      "prior_product_checkpoint": "d70af4572b22174436aa9bc6a1feb8446e6e725f"
+    }
   },
   "active_work": "contextual-stage-b-demand-implementation"
 }

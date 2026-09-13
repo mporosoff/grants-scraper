@@ -647,3 +647,6 @@ operating-point campaign without a new decision.
 
 Finish this bounded implementation and evidence, then STOP FOR USER REVIEW
 before public activation.
+## Owner resumption after the recovery checkpoint
+
+Recorded September 13, 2026: “Ok go ahead and execute the four indicated tasks and then we will check in again.” This authorizes one bounded PR #231 recovery/job-state correction and exact-head review, then (if clean) protected merge of that restricted prerequisite, restricted deployment, eight real assessments plus one extension and the finite output check, and the remaining browser corrections. The prior d70af4572b22174436aa9bc6a1feb8446e6e725f report is preserved as contextual-stage-b-review-checkpoint-20260913.md. The same $5 task ceiling within $10/690 applies; no new allowance or public activation. Report and stop after the four tasks, or at a genuine security/access/convergence barrier.
