@@ -1,4 +1,6 @@
 import copy
+import io
+import zipfile
 import json
 import os
 from pathlib import Path
@@ -46,6 +48,33 @@ class TokenSizing(unittest.TestCase):
             for _ in range(3):
                 with self.assertRaises(RecoveryRequired):sizing.Counter(d,post).count(item)
             self.assertEqual(len(calls),1)
+
+    def test_complete_and_interrupted_counts_survive_actual_archive_restore(self):
+        e=sizing.existing
+        for interrupted in (False,True):
+            with tempfile.TemporaryDirectory() as d,patch.dict(os.environ,{'ANTHROPIC_API_KEY':'fixture','GITHUB_RUN_ID':'1','GITHUB_RUN_ATTEMPT':'1','GITHUB_SHA':'a'*40}):
+                root=Path(d);state=root/'state';state.mkdir()
+                (state/'ledger.json').write_bytes((e.CONFIG/'initial-ledger.json').read_bytes())
+                before=(state/'ledger.json').read_bytes();calls=[]
+                def post(*a,**k):
+                    calls.append(1)
+                    if interrupted:raise TimeoutError('fixture crash')
+                    return Response({'input_tokens':123})
+                item={'id':'fixture','body':sizing.count_body('fixture')}
+                try:sizing.Counter(state,post).count(item)
+                except TimeoutError:pass
+                e.checkpoint(state)
+                buffer=io.BytesIO()
+                with zipfile.ZipFile(buffer,'w') as archive:
+                    for p in state.rglob('*.json'):archive.writestr(p.relative_to(state).as_posix(),p.read_bytes())
+                for n in range(3):
+                    target=root/str(n);e.unpack_state(buffer.getvalue(),target)
+                    self.assertEqual((target/'ledger.json').read_bytes(),before)
+                    counter=sizing.Counter(target,post)
+                    if interrupted:
+                        with self.assertRaises(RecoveryRequired):counter.count(item)
+                    else:self.assertEqual(counter.count(item),123)
+                self.assertEqual(len(calls),1)
 
     def test_rejects_wrong_model_tools_or_executable_network_configuration(self):
         for field,value in [('model','claude-opus-5'),('tools',[{}]),('endpoint','https://elsewhere.invalid'),('cache_control',{})]:

@@ -67,7 +67,7 @@ def inventory():
 
 class Counter:
     def __init__(self,state,post=requests.post):
-        self.path=Path(state)/'measurements'/('phase2-token-counts.json');self.post=post
+        self.path=Path(state)/'cache'/(identity([VERSION,SOURCE_SHA,'aggregate-token-counts'])+'.json');self.post=post
 
     def count(self,item):
         body=count_projection(item['body']);key=identity(body)
