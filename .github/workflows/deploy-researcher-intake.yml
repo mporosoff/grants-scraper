@@ -34,7 +34,16 @@ jobs:
           node --check workers/researcher-intake/src/catalog.js
           node --check workers/researcher-intake/src/store.js
           node --check workers/researcher-intake/src/index.js
+          node --test tests/browser/contextual-worker-contract.test.mjs
           node --test tests/browser/researcher-intake-worker-contract.test.mjs
+      - name: Capture the prior serving intake version and build exact protected modules
+        id: previous
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          node tools/contextual_worker_checkpoint.mjs capture "$RUNNER_TEMP/intake-before.json"
+          npx --yes wrangler@4.125.0 deploy --dry-run --config workers/researcher-intake/wrangler.jsonc --outdir "$RUNNER_TEMP/intake-built"
       - name: Validate required deployment configuration
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -102,10 +111,11 @@ jobs:
             > /tmp/researcher-intake-secrets.json
           npx --yes wrangler@4.125.0 secret bulk /tmp/researcher-intake-secrets.json --config workers/researcher-intake/wrangler.jsonc
       - name: Deploy the intake Worker
+        id: deploy
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-        run: npx --yes wrangler@4.125.0 deploy --config workers/researcher-intake/wrangler.jsonc
+        run: npx --yes wrangler@4.125.0 deploy --config workers/researcher-intake/wrangler.jsonc --message "protected-main:${GITHUB_SHA}; restricted contextual validation"
       - name: Verify the public health route
         run: |
           for attempt in $(seq 1 12); do
@@ -117,3 +127,23 @@ jobs:
           done
           echo "::error::The researcher intake Worker did not become healthy."
           exit 1
+      - name: Verify actual serving module bytes and unchanged existing bindings
+        id: provenance
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: node tools/contextual_worker_checkpoint.mjs verify "$RUNNER_TEMP/intake-before.json" "$RUNNER_TEMP/intake-built"
+      - name: Retain restricted validation deployment evidence
+        if: always() && steps.previous.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: contextual-intake-deployment-${{ github.run_id }}
+          path: ${{ runner.temp }}/intake-before*.json
+          retention-days: 90
+      - name: Restore the previous intake version after unsuccessful validation
+        if: failure() && steps.deploy.outcome == 'success' && steps.previous.outputs.version_id != ''
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          PREVIOUS_VERSION: ${{ steps.previous.outputs.version_id }}
+        run: npx --yes wrangler@4.125.0 rollback "$PREVIOUS_VERSION" --config workers/researcher-intake/wrangler.jsonc --message "restricted contextual validation failed; restore prior serving version"

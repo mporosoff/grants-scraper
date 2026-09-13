@@ -1,0 +1,8 @@
+{
+  "version": "contextual-audited-graph-v1",
+  "inputs_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+  "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "public_activation": false,
+  "public_paid_work": false
+}

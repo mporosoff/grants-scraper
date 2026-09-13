@@ -5,11 +5,21 @@ on:
     inputs:
       packet_commit:
         description: Exact commit containing public data only; never checked out
-        required: true
+        required: false
         type: string
       packet_sha256:
         description: SHA256 of docs/team-recommender/packets/HASH.json
-        required: true
+        required: false
+        type: string
+
+      contextual_job:
+        description: Fixed Access-authorized contextual job; canonical IDs only
+        required: false
+        type: string
+
+      contextual_check:
+        description: One bounded offline check; actual graph and member IDs only
+        required: false
         type: string
 
 permissions:
@@ -36,6 +46,7 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - name: Validate public packet and restore the single authoritative ledger
         id: prepare
+        if: inputs.contextual_job == '' && inputs.contextual_check == ''
         env:
           GH_TOKEN: ${{ github.token }}
           PACKET_COMMIT: ${{ inputs.packet_commit }}
@@ -45,6 +56,36 @@ jobs:
           --state "$RUNNER_TEMP/team-experiment" --packet "$RUNNER_TEMP/team-packet.json"
           --packet-commit "$PACKET_COMMIT" --packet-sha256 "$PACKET_HASH"
           --reservation "$RUNNER_TEMP/team-reservation.json"
+      - name: Claim the existing Access-authorized contextual job
+        id: contextual
+        if: inputs.contextual_job != '' && inputs.contextual_check == ''
+        env:
+          REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
+          CONTEXTUAL_JOB: ${{ inputs.contextual_job }}
+          PACKET_COMMIT: ${{ inputs.packet_commit }}
+          PACKET_HASH: ${{ inputs.packet_sha256 }}
+        run: python -m tools.contextual_team_workflow start --job "$RUNNER_TEMP/contextual-job.json"
+      - name: Restore the same authoritative ledger for contextual execution
+        id: contextual_prepare
+        if: steps.contextual.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: >-
+          python -m tools.contextual_team_executor prepare
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+          --reservation "$RUNNER_TEMP/team-reservation.json"
+      - name: Validate the finite independent check and restore its existing ledger
+        id: contextual_check_prepare
+        if: inputs.contextual_check != ''
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
+          CONTEXTUAL_JOB: ${{ inputs.contextual_job }}
+          PACKET_HASH: ${{ inputs.packet_sha256 }}
+          PACKET_COMMIT: ${{ inputs.packet_commit }}
+        run: >-
+          python -m tools.contextual_team_check prepare
+          --state "$RUNNER_TEMP/team-experiment" --reservation "$RUNNER_TEMP/team-reservation.json"
       - name: Persist crash protection before any metered request
         uses: actions/upload-artifact@v4
         with:
@@ -70,11 +111,46 @@ jobs:
           python -m tools.team_recommender_executor execute
           --state "$RUNNER_TEMP/team-experiment" --packet "$RUNNER_TEMP/team-packet.json"
           --packet-sha256 "$PACKET_HASH"
+      - name: Execute the bounded contextual scientific job
+        if: steps.contextual_prepare.outcome == 'success'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+          CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
+        run: >-
+          python -m tools.contextual_team_executor execute
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+          --result "$RUNNER_TEMP/contextual-result.json"
+      - name: Execute the single bounded independent check
+        if: steps.contextual_check_prepare.outcome == 'success'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
+        run: >-
+          python -m tools.contextual_team_check execute
+          --state "$RUNNER_TEMP/team-experiment" --result "$RUNNER_TEMP/contextual-check-result.json"
       - name: Retain exact accounting and bounded results after success or failure
-        if: always() && steps.prepare.outcome == 'success'
+        id: persist_state
+        if: always() && (steps.prepare.outcome == 'success' || steps.contextual_prepare.outcome == 'success' || steps.contextual_check_prepare.outcome == 'success')
         uses: actions/upload-artifact@v4
         with:
           name: on-demand-team-offline-v2-20260909-state-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/team-experiment
+          if-no-files-found: error
+          retention-days: 90
+      - name: Return the graph only after its authoritative checkpoint is durable
+        if: always() && steps.contextual_prepare.outcome == 'success' && steps.persist_state.outcome == 'success'
+        env:
+          REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
+        run: >-
+          python -m tools.contextual_team_workflow finish
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+          --result "$RUNNER_TEMP/contextual-result.json"
+      - name: Retain private contextual check results
+        if: always() && steps.contextual_check_prepare.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: contextual-check-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/contextual-check-result.json
           if-no-files-found: error
           retention-days: 90

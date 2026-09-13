@@ -1,0 +1,35 @@
+# Restricted contextual validation service
+
+This is a finite prerequisite for the contextual Stage B experiment. It does not activate the public recommender, publish the audited registry, enable the old team generator, or create a recurring allowance.
+
+The reviewed input package contains the unchanged audited combined-profile documents for 155 eligible researchers (from the 158-record registry), complete bounded evidence, and eight previously locked canonical scopes. Source receipts retain their original limitations/dates. One native child has limited substantive context and may correctly stop as insufficient source. No outcome has been fabricated to make that child usable.
+
+## Authority and accounting
+
+Authorization remains `on-demand-team-offline-v2-20260909`, $10 / 690 lifetime attempts. The September 12 owner amendment raises this task to $5 / 40 additional attempts. The verified starting checkpoint was $4.290655 / 629 attempts, no outstanding reservations, run 34606280661. The contextual guard preserves at least $0.709345 and 21 slots from that starting balance and enforces cumulative/attributable ceilings together. Later usage reduces what can be spent; no allowance or ledger is recreated.
+
+The complete conservative sequence is $4.995414 / 36 attempts: two document batches, up to seven query batches and 21 scientific stages, two extension stages, four independent-check requests. The eighth scope is an unselected umbrella and requires the existing child selection before inference. Exact full packets are checked before every reservation; oversize generated context stops without clipping evidence or buying formatting retries. Sonnet 5 retains 8,000/8,000/16,000 output capacities. Provider prompt caching is disabled; the $2/M input bound is valid only under that enforced contract. Voyage 4 large document/query roles and 1,024 dimensions are fixed. The entire detailed plan is embedded in the hashed input package.
+
+## Endpoint and trust boundary
+
+The existing Access-protected administrator identity controls `/admin/api/contextual/manifest` and `/admin/api/contextual/jobs`. A POST accepts exactly `release_id`, `scope_id` and `person_id` (empty for initial Build). An extension is one explicitly requested previously unassessed eligible person. GET/status/cached Build never dispatch providers. No public route accepts these operations. The client must use the audited generation identified by the manifest; old public profiles are incompatible.
+
+One transactional D1 row claims each logical job before the awaited GitHub dispatch. One active job globally, at most nine finite job rows, one extension, and the existing limiter under a separate contextual key bound this trial. Uncertain dispatch keeps its claim and active slot; reads and repeated POSTs cannot retransmit it. An interruption between claim and remote acknowledgment requires recovery. It is not a lease that expires into another paid attempt.
+
+The existing `team-recommender-offline.yml` workflow keeps its main-only checkout, manual trigger, read-only GitHub permissions and shared experiment concurrency group. The Worker holds no model credential or separate monetary allowance. `contextual_job` contains canonical IDs only. Trusted main checks the authenticated job owner, restores the existing cloud ledger and uploads the crash reservation before the provider step. Every provider request is an irreversible ledger claim; exact successful caches are reusable, but charged/failed/uncertain cacheless results are recovery-required. Provider code never runs inside D1 transactions.
+
+The callback authenticates with the existing internal workflow token, verifies the actual main workflow/run/SHA, and persists an immutable result only after the cloud checkpoint artifact is uploaded. An absent checkpoint or failed callback cannot be repaired by creating a second spending copy. The current service has no automatic recovery endpoint that clears an uncertain claim. Inspect the job, corresponding run and authoritative artifact first; any recovery that cannot prove non-dispatch must retain the paid claim and mark unresolved.
+
+The result is a versioned assessment graph, not a serving inventory of teams. It binds original scope/currentness, whole roster, evidence revisions, contracts, retrieval boundaries and usage. The experimental composer and public application are outside this prerequisite. Shared currentness is imported unchanged and refreshed on actions; the scientific input excludes incidental receipt timestamps while preserving those dates in the immutable package.
+
+## One independent check
+
+After the actual scope jobs, `contextual_check` accepts at most two entries containing scope ID, graph ID and the actual 2–4 selected canonical member IDs. It restores private graph receipts and requires the first two graph-producing distinct source groups in the original locked order. The existing C2 source overlay already groups 361207 and 361208 together; they cannot occupy both slots. This source-only correction precedes all contextual outputs and preserves the historical reservations. The experimental task supplies its actual deterministic primary groups; it must not pick favorable groups after grades. Trusted code creates all original source/full person evidence and fixed questions itself. One group/every-member packet and one explanation packet per source, at most four requests, use the retained rubric and 512-token output capacity. Same-family correlated errors remain possible. No historical or human labels are replaced. Changing a checked group's membership cannot re-key that scope's paid check into another attempt.
+
+## Triggers, validation and rollback
+
+Feature-branch pushes do not deploy or generate. PRs run the existing Python/browser contracts. Merging this narrow prerequisite runs ordinary main validation and the existing intake deployment workflow; it changes no source/team/search/runtime release dependency group. The public release planner remains unchanged. Confirm the current published candidate is verified before protected merge so the validation-only change cannot become publication of unrelated pending work.
+
+The intake deployment captures the prior active version, builds protected modules, preserves all existing bindings, verifies actual serving module bytes/configuration, and retains a receipt. Failed deployment validation restores that exact prior Worker version. Its additive namespaced table does not change researcher, alert or publication records; existing public routes remain unchanged. The model service and ordinary Search budgets remain untouched. Public recommender activation stays off.
+
+Focused tests exercise the real source/registry shapes with a fixture provider, crash snapshots at every paid persistence boundary, loss of row caches, individual-row reuse, complete evidence, same-job concurrency, terminal result immutability and unchanged Access enforcement. These tests are engineering evidence, not real semantic grades or a substitute for the separately authorized final integrated browser run.
