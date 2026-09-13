@@ -6,7 +6,7 @@ from pathlib import Path
 import subprocess
 import requests
 from tools.contextual_team_executor import HOST, resolve_job
-from tools.contextual_team_policy import inputs
+from tools.contextual_team_option1 import configuration_for_job
 from tools.team_recommender_executor import trusted_environment, bounded_response
 from tools.offline_spend import atomic_json, ConfigurationFailure
 
@@ -24,7 +24,7 @@ def main():
     p.add_argument('--job',type=Path,required=True);p.add_argument('--result',type=Path);p.add_argument('--state',type=Path)
     args=p.parse_args()
     job=json.loads(os.environ['CONTEXTUAL_JOB']) if args.action=='start' else json.loads(args.job.read_bytes())
-    resolve_job(inputs(),job)
+    resolve_job(configuration_for_job(job),job)
     trusted_environment(contextual_job=job)
     stamp={k:job[k] for k in ('job_id','release_id')}|{'run_id':os.environ['GITHUB_RUN_ID'],'code_sha':os.environ['GITHUB_SHA']}
     if args.action=='start':

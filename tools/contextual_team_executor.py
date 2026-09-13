@@ -17,7 +17,7 @@ from tools.contextual_team_cost import (text_reservation, generated_input_bounds
     QUERY_TOKEN_BOUND, JUDGE_BODY_BYTES, output_capacity, CAPACITY_VERSION)
 from tools.contextual_team_policy import inputs as approved_inputs, INPUT_SHA
 from tools.offline_ai import request_body, response_value, SchemaFailure, stop_reason
-from tools.offline_spend import identity, encoded, atomic_json, Deferred, ConfigurationFailure
+from tools.offline_spend import identity, encoded, atomic_json, Deferred, ConfigurationFailure, Refusal
 from tools.team_recommender_budget import ExperimentLedger, AUTHORIZATION_ID
 
 HOST='https://funding-finder-researchers.urochestercheme.workers.dev'
@@ -69,13 +69,16 @@ class Runner:
         return any(r.get('purpose','').startswith('cb-') and r['status']=='reserved_unknown'
                    for r in self.ledger.read()['requests'])
 
+    def graph_metadata(self,graph):
+        return graph
+
     def failure_state(self,error):
         # Exception text is not a dispatch receipt. Persisted uncertainty wins
         # even if a later cache/checkpoint failure obscures the first exception.
         if self.has_unknown_request() or isinstance(error,RecoveryRequired):return 'recovery_required'
         return 'budget_limited' if isinstance(error,Deferred) else 'failed'
 
-    def request(self,purpose,logical,body,check,*,row_inputs=(),ceiling=None):
+    def request(self,purpose,logical,body,check,*,row_inputs=(),ceiling=None,repair_metadata=None):
         if time.monotonic()>self.deadline:raise Deferred('contextual_finite_job_deadline')
         provider='voyage' if purpose in ('cb-documents','cb-query') else 'anthropic'
         if provider=='anthropic':bound,amount=text_reservation(body)
@@ -108,10 +111,12 @@ class Runner:
             input_tokens=bound,output_tokens=body.get('max_tokens',0),
             execution_metadata={'packet_sha256':INPUT_SHA,'body_sha256':body_id,'purpose':purpose,
                 'code_sha':os.environ['GITHUB_SHA'],'row_inputs':list(row_inputs),'judge_items':[],
-                'execution_capacity':CAPACITY_VERSION})
+                'execution_capacity':CAPACITY_VERSION,**(repair_metadata or {})})
         receipt={'key':key,'request_id':token,'purpose':purpose,'body_sha256':body_id,
                  'reserved_microusd':amount,'status':'reserved_unknown','code_sha':os.environ['GITHUB_SHA'],
-                 'execution_capacity':CAPACITY_VERSION,'output_token_ceiling':body.get('max_tokens',0)}
+                 'execution_capacity':CAPACITY_VERSION,'output_token_ceiling':body.get('max_tokens',0),
+                 **(repair_metadata or {})}
+        started=time.monotonic()
         self.crash('after_reserve')
         try:
             existing.checkpoint(self.state);self.crash('after_reservation_checkpoint')
@@ -139,7 +144,7 @@ class Runner:
             atomic_json(cache,{'key':key,'body_sha256':body_id,'model':body['model'],'value':value,'request_id':token})
             self.crash('after_cache')
             receipt['status']='valid'
-        except (ValueError,KeyError,TypeError,OSError,requests.RequestException,Deferred) as error:
+        except (ValueError,KeyError,TypeError,OSError,requests.RequestException,Deferred,Refusal) as error:
             row=next(r for r in self.ledger.read()['requests'] if r['id']==token)
             if 'charged_microusd' in receipt and row['status']=='reserved_unknown':
                 self.ledger.reconcile(token,cost_usd=Decimal(receipt['charged_microusd'])/1000000,usage=receipt['usage'],status='failed')
@@ -157,6 +162,7 @@ class Runner:
             if recovery:raise RecoveryRequired('contextual_paid_request_requires_recovery') from error
             raise
         finally:
+            receipt['elapsed_seconds']=round(time.monotonic()-started,6)
             atomic_json(self.state/'receipts'/(token+'.json'),receipt)
             self.crash('after_receipt');existing.checkpoint(self.state)
         self.used.append({'key':key,'request_id':token,'cache_hit':False})
@@ -268,6 +274,7 @@ class Runner:
         supported={e['person_id'] for e in verified['edges'] if e['coverage'] in ('direct','method_transfer')}
         if len(supported)<2 or not any(e['central'] and e['coverage'] in ('direct','method_transfer') for e in verified['edges']):
             graph['state']='no_supported_group_in_assessed_set'
+        graph=self.graph_metadata(graph)
         graph['graph_id']=identity({k:v for k,v in graph.items() if k!='requests'})
         graph_key=identity(['contextual-graph',self.configuration['snapshot_id'],scope['id'],extension_person or ''])
         atomic_json(self.state/'cache'/(graph_key+'.json'),{'kind':'contextual_graph','value':graph})
@@ -286,14 +293,22 @@ def resolve_job(configuration,job):
 
 
 def prepare(state,reservation,job_path):
-    configuration=approved_inputs();job=json.loads(job_path.read_bytes())
+    job=json.loads(job_path.read_bytes())
+    from tools.contextual_team_option1 import configuration_for_job
+    configuration=configuration_for_job(job)
     resolve_job(configuration,job)
     existing.trusted_environment(contextual_job=job)
     ledger=existing.restore(state,existing.policy());existing.checkpoint(state)
+    if configuration.get('option1'):
+        from tools.contextual_team_option1 import ensure_remaining_plan_fits
+        ensure_remaining_plan_fits(ledger.read(),configuration['option1'])
     atomic_json(reservation,{'authorization_id':AUTHORIZATION_ID,'run_id':os.environ['GITHUB_RUN_ID'],
         'attempt':os.environ['GITHUB_RUN_ATTEMPT'],'code_sha':os.environ['GITHUB_SHA'],
         'job_id':job['job_id'],'input_sha256':INPUT_SHA,'prior_ledger_sha256':existing.sha(ledger.path.read_bytes()),
-        'maximum_logical_spend_usd':10,'contextual_task_maximum_usd':5,'contextual_attempts_maximum':40})
+        'maximum_logical_spend_usd':10,
+        **({'option1_release':configuration['option1']['release_id'],'option1_task_maximum_usd':1.5,'option1_attempts_maximum':16,
+            'preserved_microusd':3004098,'preserved_attempts':21} if configuration.get('option1') else
+           {'contextual_task_maximum_usd':5,'contextual_attempts_maximum':40})})
 
 
 def main():
@@ -302,21 +317,23 @@ def main():
     parser.add_argument('--job',type=Path,required=True);parser.add_argument('--reservation',type=Path)
     parser.add_argument('--result',type=Path)
     args=parser.parse_args()
-    job=json.loads(args.job.read_bytes());resolve_job(approved_inputs(),job)
+    from tools.contextual_team_option1 import configuration_for_job, Option1Runner
+    job=json.loads(args.job.read_bytes());config=configuration_for_job(job);resolve_job(config,job)
     existing.trusted_environment(contextual_job=job)
     if args.action=='prepare':prepare(args.state,args.reservation,args.job);return
-    config=approved_inputs();job=json.loads(args.job.read_bytes());scope=resolve_job(config,job)
-    runner=Runner(args.state,config)
+    scope=resolve_job(config,job)
+    runner=(Option1Runner if config.get('option1') else Runner)(args.state,config)
     try:
         result=runner.run_scope(scope,job['person_id'] or None) if os.environ.get('CONTEXTUAL_ACTION_CURRENT')=='true' else {'state':'action_blocked','scope_id':scope['id']}
-    except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,OSError,requests.RequestException) as error:
+    except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,OSError,requests.RequestException,Refusal) as error:
         result={'state':runner.failure_state(error),'reason':str(error)[:160],
                 'scope_id':scope['id']}
     finally:existing.checkpoint(args.state)
     atomic_json(args.result,{'job_id':job['job_id'],'release_id':job['release_id'],'result':result,
         'run_id':os.environ['GITHUB_RUN_ID'],'code_sha':os.environ['GITHUB_SHA'],
         'charged_microusd':sum(r['charged_microusd'] for r in runner.ledger.read()['requests']),
-        'attempts':len(runner.ledger.read()['requests'])})
+        'attempts':len(runner.ledger.read()['requests']),
+        **({'stage_timings':runner.timings} if hasattr(runner,'timings') else {})})
 
 
 if __name__=='__main__':main()

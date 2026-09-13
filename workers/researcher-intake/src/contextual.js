@@ -1,12 +1,15 @@
 // Access-protected finite job coordination. Provider credentials and budget stay
 // in the existing serialized protected-main workflow, never in this Worker.
 import inputs from '../../../config/contextual_team/inputs-v1.json' with {type:'json'};
+import option1 from '../../../config/contextual_team/option1-v1.json' with {type:'json'};
 import {CONSOLE_HTML,CONSOLE_JS} from './contextual-console.js';
+import {ACCESS_HTML,ACCESS_JS} from './contextual-access.js';
 import '../../../assets/submission-schedule.js';
 import '../../../assets/search-query.js';
 import '../../../assets/search-retrieval.js';
 
-const RELEASE=inputs.snapshot_id;
+const RELEASE=option1.release_id;
+const allowedRelease=id=>id===RELEASE||id===inputs.snapshot_id;
 const VALIDATION_ORIGIN='http://127.0.0.1:8876';
 const WORKFLOW='.github/workflows/team-recommender-offline.yml';
 const states=new Set(['ready','ready_with_gaps','no_supported_group_in_assessed_set','needs_scope_selection',
@@ -24,10 +27,10 @@ function current(scope,now){
   const check=globalThis.FUNDING_RETRIEVAL.recordIsCurrent;
   return check(scope.currentness.record,now)&&check(scope.currentness.parent,now);
 }
-function publicJob(row,scope,now){
+function publicJob(row,scope,now,release=RELEASE){
   const result=row?.result_json?JSON.parse(row.result_json):null;
   const recovery=row?.state==='recovery_required'||result?.result?.state==='recovery_required';
-  return {release_id:RELEASE,scope_id:scope.id,job_id:row?.job_id||null,
+  return {release_id:release,scope_id:scope.id,job_id:row?.job_id||null,
     state:recovery?'recovery_required':!current(scope,now)?'action_blocked':result?.result?.state||row?.state||scope.state,
     ...(result&&(recovery||current(scope,now))?{result:result.result,run_id:row.run_id,code_sha:row.code_sha}:{}),
     public_activation:false};
@@ -41,9 +44,9 @@ export class ContextualStore {
       (job_id,release_id,scope_id,person_id,state,active_slot,created_at,updated_at)
       SELECT ?,?,?,?,'dispatch_claimed',1,?,? WHERE NOT EXISTS
       (SELECT 1 FROM contextual_validation_jobs WHERE active_slot=1)
-      AND (SELECT count(*) FROM contextual_validation_jobs)<9
-      AND (?='' OR NOT EXISTS (SELECT 1 FROM contextual_validation_jobs WHERE person_id<>''))
-      ON CONFLICT(job_id) DO NOTHING`).bind(job.job_id,job.release_id,job.scope_id,job.person_id,now,now,job.person_id).run();
+      AND (SELECT count(*) FROM contextual_validation_jobs WHERE release_id=?)<3
+      AND (?='' OR NOT EXISTS (SELECT 1 FROM contextual_validation_jobs WHERE release_id=? AND person_id<>''))
+      ON CONFLICT(job_id) DO NOTHING`).bind(job.job_id,job.release_id,job.scope_id,job.person_id,now,now,job.release_id,job.person_id,job.release_id).run();
     return Number(result.meta?.changes||0)===1;
   }
   async start(id,run,sha,now){
@@ -84,20 +87,25 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
     try{
       const internal=path.startsWith('/internal/');
       const actor=internal?await authenticateInternal(request,env):await authenticateAdmin(request,env,fetchImpl);
+      if(request.method==='GET'&&['/admin/contextual/access','/admin/contextual/access.js'].includes(path))return new Response(path.endsWith('.js')?ACCESS_JS:ACCESS_HTML,
+        {headers:{...headers,'Content-Type':path.endsWith('.js')?'text/javascript; charset=utf-8':'text/html; charset=utf-8',
+          'Content-Security-Policy':"default-src 'none'; script-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}});
       if(request.method==='GET'&&['/admin/contextual','/admin/contextual/app.js'].includes(path))return new Response(path.endsWith('.js')?CONSOLE_JS:CONSOLE_HTML,
         {headers:{...headers,'Content-Type':path.endsWith('.js')?'text/javascript; charset=utf-8':'text/html; charset=utf-8',
           'Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}});
       if(request.method==='POST'&&!internal&&origin&&origin!==url.origin&&!(path.startsWith('/admin/api/contextual')&&origin===VALIDATION_ORIGIN))
         fail('contextual_admin_origin_required',403);
+      if(path==='/admin/api/contextual/fixture'&&request.method==='GET')
+        return json(200,{fixture:true,purpose:'routing_only',scientific_graph:false,provider_work:false,release_id:RELEASE});
       if(path==='/admin/api/contextual/manifest'&&request.method==='GET')
         return json(200,{release_id:RELEASE,registry_generation:inputs.registry_generation,public_activation:false,
-          scopes:inputs.scopes.map(s=>({id:s.id,parent_id:s.parent_id,title:s.science.title,state:current(s,now())?s.state:'action_blocked'}))});
+          scopes:inputs.scopes.filter(s=>option1.scopes.some(v=>v.id===s.id)).map(s=>({id:s.id,parent_id:s.parent_id,title:s.science.title,state:current(s,now())?s.state:'action_blocked'}))});
       const store=storeFactory(env);
       if(internal){
         if(request.method!=='POST'||!['/internal/contextual/start','/internal/contextual/result'].includes(path))fail('contextual_not_found',404);
         const value=await body(request,200000);
         const {job_id,release_id,run_id,code_sha}=value;
-        if(!/^[a-f0-9]{64}$/.test(job_id||'')||release_id!==RELEASE||!/^\d+$/.test(run_id||'')||!/^[a-f0-9]{40}$/.test(code_sha||''))fail('contextual_callback_identity');
+        if(!/^[a-f0-9]{64}$/.test(job_id||'')||!allowedRelease(release_id)||!/^\d+$/.test(run_id||'')||!/^[a-f0-9]{40}$/.test(code_sha||''))fail('contextual_callback_identity');
         const row=await store.byId(job_id);if(!row||row.release_id!==release_id)fail('contextual_job_not_found',404);
         const response=await fetchImpl(`https://api.github.com/repos/${env.GITHUB_REPOSITORY}/actions/runs/${run_id}`,{headers:{
           Authorization:`Bearer ${env.GITHUB_DISPATCH_TOKEN}`,Accept:'application/vnd.github+json','User-Agent':'FundingFinder-ContextualValidation/1.0'}});
@@ -113,7 +121,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
         if(row.run_id!==run_id||row.code_sha!==code_sha)fail('contextual_wrong_result_owner',409);
         if(!states.has(value.result?.state))fail('contextual_invalid_result_state');
         if(value.result.scope_id&&value.result.scope_id!==row.scope_id)fail('contextual_result_scope_conflict');
-        if(value.result.graph_id&&(value.result.snapshot_id!==RELEASE||value.result.registry_generation!==inputs.registry_generation||value.result.scope?.id!==row.scope_id))fail('contextual_result_generation_conflict');
+        if(value.result.graph_id&&(value.result.snapshot_id!==release_id||value.result.registry_generation!==inputs.registry_generation||value.result.scope?.id!==row.scope_id))fail('contextual_result_generation_conflict');
         const serialized=JSON.stringify(value);
         if(row.result_json&&row.result_json!==serialized)fail('contextual_terminal_result_conflict',409);
         const done=await store.finish(job_id,run_id,code_sha,serialized,now().toISOString());
@@ -122,18 +130,26 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       }
       if(path!=='/admin/api/contextual/jobs'||!['GET','POST'].includes(request.method))fail('contextual_not_found',404);
       const value=request.method==='POST'?await body(request):Object.fromEntries(url.searchParams);
-      if(Object.keys(value).sort().join(',')!=='person_id,release_id,scope_id'||value.release_id!==RELEASE)fail('contextual_version_conflict',409);
+      if(Object.keys(value).sort().join(',')!=='person_id,release_id,scope_id'||!allowedRelease(value.release_id))fail('contextual_version_conflict',409);
       const scope=inputs.scopes.find(s=>s.id===value.scope_id);
       if(!scope||typeof value.person_id!=='string'||value.person_id&&!inputs.people.some(p=>p.person_id===value.person_id))fail('contextual_unapproved_identity');
       const job={...value,job_id:await hash([value.release_id,value.scope_id,value.person_id])};
       let row=await store.byId(job.job_id);
-      if(request.method==='GET'||row)return json(200,publicJob(row,scope,now()));
-      if(!current(scope,now())||scope.state!=='unassessed')return json(200,publicJob(null,scope,now()));
+      if(request.method==='GET'||row)return json(200,publicJob(row,scope,now(),value.release_id));
+      if(!current(scope,now())||scope.state!=='unassessed')return json(200,publicJob(null,scope,now(),value.release_id));
+      if(value.release_id!==RELEASE||!option1.scopes.some(s=>s.id===scope.id)||
+        (value.person_id&&(scope.id!=='332894'||value.person_id!==option1.extension.person_id)))fail('outside_option1_paid_inventory',403);
+      if(scope.id!==option1.scopes[0].id||value.person_id){
+        const first=await store.byId(await hash([RELEASE,option1.scopes[0].id,'']));
+        const completed=first?.result_json?JSON.parse(first.result_json).result:null;
+        if(!completed||!['ready','ready_with_gaps','no_supported_group_in_assessed_set','unsuitable','insufficient_source','needs_scope_selection'].includes(completed.state))
+          fail('option1_first_scope_must_complete_before_more_work',409);
+      }
       if(value.person_id){
         const initial=await store.byId(await hash([value.release_id,value.scope_id,'']));
         const graph=initial?.result_json?JSON.parse(initial.result_json).result:null;
         if(!graph?.graph_id||graph.people.some(p=>p.person_id===value.person_id))fail('contextual_extension_requires_unassessed_person',409);
-        const prior=await store.db.prepare("SELECT count(*) AS n FROM contextual_validation_jobs WHERE person_id<>''").first();
+        const prior=await store.db.prepare("SELECT count(*) AS n FROM contextual_validation_jobs WHERE release_id=? AND person_id<>''").bind(RELEASE).first();
         if(prior.n)fail('contextual_trial_extension_already_claimed',409);
       }
       if(!env.GITHUB_DISPATCH_TOKEN)fail('contextual_dispatch_not_configured',503);

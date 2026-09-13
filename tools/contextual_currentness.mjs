@@ -3,8 +3,10 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 const inputs=JSON.parse(fs.readFileSync('config/contextual_team/inputs-v1.json','utf8'));
 const job=JSON.parse(fs.readFileSync(process.argv[2],'utf8'));
+const option1=JSON.parse(fs.readFileSync('config/contextual_team/option1-v1.json','utf8'));
 const scope=inputs.scopes.find(s=>s.id===job.scope_id);
-if(!scope||job.release_id!==inputs.snapshot_id)throw Error('contextual_job_not_in_snapshot');
+if(!scope||![inputs.snapshot_id,option1.release_id].includes(job.release_id))throw Error('contextual_job_not_in_snapshot');
+if(job.release_id===option1.release_id&&(!option1.scopes.some(s=>s.id===job.scope_id)||job.person_id&&(job.scope_id!=='332894'||job.person_id!==option1.extension.person_id)))throw Error('outside_option1_inventory');
 const c=vm.createContext({Date});
 for(const p of ['assets/submission-schedule.js','assets/search-query.js','assets/search-retrieval.js'])
   vm.runInContext(fs.readFileSync(p,'utf8'),c,{filename:p});

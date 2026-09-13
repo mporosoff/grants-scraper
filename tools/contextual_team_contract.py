@@ -110,6 +110,10 @@ def verification_inputs(inputs,assessment):
 
 def validate(stage,value,inputs):
     validate_schema(value,SCHEMAS[stage])
+    return validate_semantics(stage,value,inputs)
+
+def validate_semantics(stage,value,inputs):
+    """Shared identity/scientific-state invariants after version-specific decoding."""
     if stage=='decomposition':
         roles=value['roles'];coherent=value['state']=='coherent'
         if coherent!=(len(roles)>0) or coherent and not any(r['central'] for r in roles):raise ValueError('invalid_purpose_roles')
