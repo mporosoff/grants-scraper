@@ -1,9 +1,11 @@
 import { expect, test } from "@playwright/test";
+import { installRecentUpdatesFixture } from './recent-updates-fixture.mjs';
 import { normalizeRorOrganization } from "../../workers/award-api/src/ror.js";
 import { mockAwards, mockHybrid, openFundingFinder, runFundingSearch, waitForHybridSettled } from "./helpers.mjs";
 
 test("Funding Finder retains its hero and Team Builder contains text at phone widths and enlarged text", async ({ page }) => {
   mockHybrid(page);
+  await installRecentUpdatesFixture(page);
   await page.setViewportSize({ width: 320, height: 780 });
   await openFundingFinder(page);
   await expect(page.locator("#open-results-chat")).toBeDisabled();
@@ -12,10 +14,13 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
     const spacing = await page.locator("#browse-all").evaluate(button => {
       const box = button.getBoundingClientRect();
       const panel = button.closest(".results-column").getBoundingClientRect();
-      return { horizontal: Math.abs((box.left - panel.left) - (panel.right - box.right)), vertical: Math.abs((box.top - panel.top) - (panel.bottom - box.bottom)), height: box.height };
+      return { horizontal: Math.abs((box.left - panel.left) - (panel.right - box.right)),
+        contained:box.top>=panel.top && box.bottom<=panel.bottom, height:box.height };
     });
     expect(spacing.horizontal).toBeLessThanOrEqual(1);
-    expect(spacing.vertical).toBeLessThanOrEqual(1);
+    // The current frozen layout includes working controls above the empty
+    // result. It is not a vertically symmetric placeholder panel.
+    expect(spacing.contained).toBe(true);
     expect(spacing.height).toBeGreaterThanOrEqual(44);
   }
   const title = await page.locator("#page-title").textContent();
@@ -29,10 +34,10 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
   await page.locator("#browse-all").click();
   await expect(page.locator("#filter-team-ready")).toBeVisible();
   await page.locator("#filter-team-ready").click();
-  await runFundingSearch(page, "W911NF-23-S-0001");
+  await runFundingSearch(page, "DE-FOA-0003612");
   await waitForHybridSettled(page);
-  await page.locator('[data-opportunity-team="344592"]').click();
-  await page.locator('#team-builder [data-opportunity-team-scope="344592:ab-0025"]').click();
+  await page.locator('[data-opportunity-team="361526"]').click();
+  await page.locator('#team-builder [data-opportunity-team-scope="361526:workflow-branch"]').click();
   await expect(page.locator("#team-builder")).toBeVisible();
   await expect(page.locator("#team-builder .opportunity-team-member").first()).toBeVisible({ timeout: 30_000 });
   for (const width of [320, 390]) for (const size of [16, 24]) {

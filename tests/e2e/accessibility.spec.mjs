@@ -122,6 +122,9 @@ test("Funding Finder has no serious or critical violations across critical state
 });
 
 test("Funded Awards Institutional Intelligence has no serious or critical violations", async ({ page }, testInfo) => {
+  // The retained award snapshot expires at 21:00 on this date. Keep the clock
+  // inside its evidence window; the application must still reject real expiry.
+  await page.clock.setFixedTime(new Date('2026-08-24T16:00:00Z'));
   await page.emulateMedia({ reducedMotion: "reduce" });
   await page.addInitScript(() => localStorage.setItem("funding-finder.credentials.v1", JSON.stringify({ keys: { openai: "sk-shared-test" } })));
   await page.route("https://api.openai.com/v1/responses", route => {
@@ -176,6 +179,8 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await expect(page.locator("#ii-institution")).toBeDisabled();
   await scan(page, "funded-awards-program-officer-snapshot", testInfo);
   await openAwardAi(page);
+  // Exercise the explicitly mocked provider, not the separate hosted default.
+  await page.locator('#ii-provider').selectOption('openai');
   await page.locator("#ii-question").fill("How many awards are in this snapshot?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible();

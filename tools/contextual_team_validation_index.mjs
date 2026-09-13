@@ -21,6 +21,8 @@ fs.writeFileSync(script,'globalThis.OPPORTUNITY_TEAM_INDEX='+JSON.stringify(inde
 const preview='outputs/contextual-stage-b/validation-app.html';
 const original=fs.readFileSync('match_explorer.html','utf8');
 let html=original.replace('<head>','<head>\n  <base href="/">\n  <script src="/outputs/contextual-stage-b/validation-boundary.js"></script>');
+// Only this unactivated preview can contact the Access-protected trial route.
+html=html.replace(/connect-src ([^;]*);/,"connect-src $1 https://funding-finder-researchers.urochestercheme.workers.dev;");
 html=html.replace(/(<meta name="opportunity-team-generation" content=")[a-f0-9]{64}("\s*\/?>)/,'$1'+index.generation_id+'$2');
 html=html.replace(/\.\/data\/opportunity_team_index\.js\?v=[a-f0-9]{64}/,'/'+script);
 fs.writeFileSync(preview,html);

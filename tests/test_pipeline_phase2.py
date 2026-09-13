@@ -74,8 +74,8 @@ class PipelineAcceptance(unittest.TestCase):
         self.assertEqual(len(model["opportunities"][0]["members"]), 2)
         self.assertEqual(model["opportunities"][0]["gate_state"], "pass")
         self.assertIn(model["generation_id"], (self.root / "data/opportunity_team_index.js").read_text())
-        self.assertIn(model["generation_id"], (self.root / "match_explorer.html").read_text())
-        self.assertIn(model["generation_id"], (self.root / "team_match.html").read_text())
+        self.assertIn(model["generation_id"], (self.root / "match_explorer.html").read_text(encoding="utf-8"))
+        self.assertIn(model["generation_id"], (self.root / "team_match.html").read_text(encoding="utf-8"))
         self.assertTrue((self.root / "data/faculty_matches.js").exists())
         self.assertTrue((self.root / "feeds/all.xml").exists())
         for event in self.result["events"]:

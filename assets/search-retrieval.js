@@ -297,6 +297,24 @@
   // Shared source evidence, independent of Search's posting lists and network
   // orchestration. Only the requested record is prepared by reverse matching.
   const scientificGroupKeys = new WeakMap();
+  const scientificPreparedGroups = new WeakMap();
+  function prepareScientificGroup(group, queryApi) {
+    let byApi = scientificPreparedGroups.get(group);
+    if (!byApi) { byApi = new WeakMap(); scientificPreparedGroups.set(group, byApi); }
+    let prepared = byApi.get(queryApi);
+    if (!prepared) {
+      const tokenize = value => sharedScopeTokens(value, queryApi);
+      const alternatives = group.evidencePhrases?.length ? group.evidencePhrases.map(tokenize)
+        : group.evidenceAlternatives?.length ? group.evidenceAlternatives
+        : group.expansion?.kind === 'contextual_acronym' ? [tokenize(group.expansion.phrase)]
+        : Number(group.minimumEvidence || 0) <= 1 ? (group.terms || []).map(t => [t.term]) : [];
+      // The query groups are immutable prepared profile units. Cache only their
+      // unchanged token preparation, never a scope's fit/currentness decision.
+      prepared = {requirements: tokenize(group.source || ''), alternatives: alternatives.map(a => a.flatMap(tokenize))};
+      byApi.set(queryApi, prepared);
+    }
+    return prepared;
+  }
   function createScientificContext(record, queryApi) {
     const tokenize = value => sharedScopeTokens(value, queryApi);
     const fields = fieldsForRecord(record, authoritativeDocumentScopeFacts(record), true);
@@ -336,18 +354,14 @@
       if (group.conceptId && !group.conceptId.startsWith('literal:') && !clause.conceptIds.has(group.conceptId)) return null;
       const policy = policyFunctions[group.evidencePolicy];
       if (policy && !clause.policies[policy](0, policy === 'controlledCompoundEvidence' ? group.evidencePhrases : group)) return null;
-      const requirements = tokenize(group.source || '');
+      const {requirements, alternatives} = prepareScientificGroup(group, queryApi);
       const direct = requirements.length ? fieldMatch(clause, requirements, {exactShort: group.exactIndexedAcronym === true}) : null;
       if (group.exactIndexedAcronym && group.expansion?.kind !== 'contextual_acronym'
         && !new RegExp('\\b' + String(group.source).toUpperCase() + '\\b').test(clause.value)) return null;
       let hit = direct;
       if (!hit && group.evidencePolicy !== 'source_grounded_only') {
-        const alternatives = group.evidencePhrases?.length ? group.evidencePhrases.map(tokenize)
-          : group.evidenceAlternatives?.length ? group.evidenceAlternatives
-          : group.expansion?.kind === 'contextual_acronym' ? [tokenize(group.expansion.phrase)]
-          : Number(group.minimumEvidence || 0) <= 1 ? (group.terms || []).map(t => [t.term]) : [];
         for (const alternative of alternatives) {
-          hit = fieldMatch(clause, alternative.flatMap(tokenize)); if (hit) break;
+          hit = fieldMatch(clause, alternative); if (hit) break;
         }
       }
       if (!hit) return null;

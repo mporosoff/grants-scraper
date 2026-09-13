@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import {preservedPresentation} from '../helpers/contextual-presentation-contract.mjs';
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import test from "node:test";
@@ -162,7 +163,10 @@ test("protected algorithms, team output and AI request construction remain byte-
   }
   for (const [key, expected] of Object.entries(baseline.functions)) {
     const [path, name] = key.split("#");
-    assert.equal(createHash("sha256").update(fn(await read(path), name)).digest("hex"), expected, key);
+    const current = fn(await read(path), name);
+    const preserved = path === 'assets/opportunity-team-panel.js'
+      ? preservedPresentation(current,name) : current;
+    assert.equal(createHash("sha256").update(preserved).digest("hex"), expected, key);
   }
   for (const [name, expected] of Object.entries(baseline.requests)) {
     const source = fn(app, name);

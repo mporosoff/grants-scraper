@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {createHash} from 'node:crypto';
+import {preservedPresentation} from '../helpers/contextual-presentation-contract.mjs';
 // The corrective work order expands profile/adapter changes at this inspected
 // snapshot. Keep the original interface-freeze manifest and reports as history.
 const frozen=JSON.parse(fs.readFileSync(new URL('../fixtures/frozen/post-audit-presentation.json',import.meta.url),'utf8'));
@@ -9,10 +10,12 @@ const hash=s=>createHash('sha256').update(s).digest('hex');
 const old=p=>{const row=frozen.files[p];assert.equal(hash(row.text),row.sha256,p);return row.text;};
 const read=p=>fs.readFileSync(p,'utf8');
 const normal=s=>s.replace(/(assets\/search-query\.js\?v=)(?:app-1\.3\.0|[a-f0-9]{64})/g,'$1QUERY_HASH').replace(/(\?v=)[a-f0-9]{64}/g,'$1HASH').replace(/(name="opportunity-team-generation" content=")[a-f0-9]{64}/g,'$1HASH');
-test('all frozen presentation functions and fixed output strings are unchanged',()=>{
+test('frozen presentation remains unchanged except the exact authorized contextual action and status messages',()=>{
  const before=old('assets/opportunity-team-panel.js'),after=read('assets/opportunity-team-panel.js');
  for(const name of ['panelShell','memberCard','roleRow','stateLabel','renderProposal','renderScopeChoice','renderUnavailable','renderFailure','teamMatchHref']){
-  const regex=new RegExp('  function '+name+'\\([^]*?\\n  }');assert.equal(after.match(regex)?.[0],before.match(regex)?.[0],name);
+  const regex=new RegExp('  function '+name+'\\([^]*?\\n  }');
+  const current=after.match(regex)?.[0];
+  assert.equal(preservedPresentation(current,name),before.match(regex)?.[0],name);
  }
 });
 test('HTML changes are content hashes and the authorized nonvisual profile normalization only',()=>{

@@ -63,12 +63,17 @@ const matches = {
   pi_matches: Object.fromEntries(researchers.map(profile => [profile.name, []])),
 };
 
-export async function installRecentUpdatesFixture(page) {
+export async function installRecentUpdatesFixture(page, { secondTeamScope = false } = {}) {
   await page.clock.setFixedTime(new Date('2026-09-06T12:00:00Z'));
   await mockFrozenFundingSearchPackage(page, { catalogSource });
+  const opportunities = secondTeamScope ? [opportunity, {...opportunity, id:'fixture-hydrogen-catalysis',
+    parent_id:'fixture-hydrogen-catalysis',record_type:'specific_parent',scope_label:'Second synthetic workflow scope'}] : [opportunity];
+  const fixtureTeam = {...team, scope_count:opportunities.length, opportunities};
+  const fixtureIndex = {...index, scope_count:opportunities.length,
+    scopes:opportunities.map(({id,parent_id,record_type})=>({id,parent_id,record_type}))};
   for (const [path, globalName, value] of [
-    ['opportunity_team_index.js', 'OPPORTUNITY_TEAM_INDEX', index],
-    ['opportunity_teams.js', 'OPPORTUNITY_TEAM_DATA', team],
+    ['opportunity_team_index.js', 'OPPORTUNITY_TEAM_INDEX', fixtureIndex],
+    ['opportunity_teams.js', 'OPPORTUNITY_TEAM_DATA', fixtureTeam],
     ['researcher_directory.js', 'RESEARCHER_DIRECTORY', directory],
     ['faculty_matches.js', 'FACULTY_MATCHES', matches],
   ]) await page.route(`**/data/${path}*`, route => route.fulfill({

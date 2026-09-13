@@ -1,4 +1,5 @@
 import { expect, test } from "@playwright/test";
+import { installRecentUpdatesFixture } from './recent-updates-fixture.mjs';
 import {
   mockHybrid,
   openFundingFinder,
@@ -22,6 +23,7 @@ test("search lands on compact results with utilities reachable through More", as
 });
 
 test("Team Builder replaces the closed context without reusing the prior proposal", async ({ page }) => {
+  await installRecentUpdatesFixture(page, {secondTeamScope:true});
   await openFundingFinder(page);
   await page.locator("#browse-all").click();
   await page.locator("#filter-team-ready").click();
