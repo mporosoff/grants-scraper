@@ -125,7 +125,7 @@
           assessment_state:assessed.has(profile.id)?byPerson.get(profile.id)?.length?'assessed_useful':'assessed_uncertain':'unassessed',
           marginal:roleSet([...state.selectedIds,profile.id]).size-covered.size}))
         .sort((a,b)=>Number(pool.includes(b.profile.id))-Number(pool.includes(a.profile.id))||b.marginal-a.marginal||cmp(a.profile.id,b.profile.id));
-      return {opportunity:{...scope,objective:graph.objective,roles,members:selected.map(m=>m.evidence),gate_state:'conditional',
+      return {opportunity:{...scope,objective:graph.objective,roles,members:selected.map(m=>m.evidence),gate_state:validAutomatic(state.selectedIds)?'conditional':'fail',
           why_team:selected.map(m=>m.evidence.why_person).join(' '),missing_skills:graph.roles.filter(r=>!covered.has(r.id)).map(r=>r.label)},
         selected,selectedIds:state.selectedIds.slice(),excludedIds:state.excludedIds.slice(),roles,
         unfilledRoles:roles.filter(r=>!covered.has(r.id)),complete:false,replacements,prepared:true,

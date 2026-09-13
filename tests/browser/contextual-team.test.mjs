@@ -49,11 +49,13 @@ test('two independently useful overlapping contributors allowed; third needs con
 test('adjacency cannot become automatic coverage; all people remain manually reachable',()=>{
  const f=fixture();f.graph.edges.forEach(e=>{e.coverage='adjacent';e.central=false;});const e=f.engine();let state=e.proposal();
  assert.equal(state.selectedIds.length,0);assert.equal(e.proposalView(state).replacements.length,4);
+ assert.equal(e.proposalView(state).opportunity.gate_state,'fail');
  state=e.addReplacement(state,'p3');assert.match(e.proposalView(state).selected[0].evidence.why_person,/not been contextually assessed/);
- assert.equal(e.statistics().provider_calls,0);
+ assert.equal(e.proposalView(state).opportunity.gate_state,'fail');assert.equal(e.statistics().provider_calls,0);
 });
 test('edits, exclusions, full slots and re-add use no transport',()=>{
- const f=fixture(5),e=f.engine();let state=e.proposal();const id=state.selectedIds[0];state=e.removeMember(state,id);
+ const f=fixture(5),e=f.engine();let state=e.proposal();assert.equal(e.proposalView(state).opportunity.gate_state,'conditional');
+ const id=state.selectedIds[0];state=e.removeMember(state,id);assert.equal(e.proposalView(state).opportunity.gate_state,'fail');
  assert.ok(e.proposalOptions(state).every(o=>!o.state.selectedIds.includes(id)));state=e.addReplacement(state,id);
  for(const p of ['p3','p4'])state=e.addReplacement(state,p);assert.equal(state.selectedIds.length,4);
  assert.throws(()=>e.addReplacement(state,'p2'),/invalid_addition/);assert.equal(e.proposalView(state).complete,false);
