@@ -33,6 +33,15 @@ OWNED_RESPONSE_CONTRACT = RESPONSE_CONTRACT | {
 }
 
 
+def judge_prompt(*,revised=False,owned_references=False):
+    prompt=(existing.CONFIG/'judge-d1.md').read_text(encoding='utf8')+'\nThe source object contains the full retained scope and governing conditions. Read the requested activity; do not substitute a different research project. Each person document contains the unchanged audited summary and all active labels/evidence. Cite scope.science or a supplied person/claim ID. Assess every person separately from group usefulness.'
+    if revised or owned_references:
+        if prompt.count(LEGACY_FORMAT)!=1:raise ValueError('contextual_check_original_format_changed')
+        prompt=prompt.replace(LEGACY_FORMAT,REVISED_FORMAT)
+    if owned_references:prompt=prompt.replace(REVISED_FORMAT,OWNED_FORMAT)
+    return prompt
+
+
 def graphs(state,config):
     selected=[];seen=set()
     for scope in config['scopes']:
@@ -77,13 +86,10 @@ def packet(scope,graph,members,kind,config,*,revised=False,owned_references=Fals
     schema=obj(verdicts=array(obj(item_id=enum(*(q['item_id'] for q in questions)),
         verdict=enum(*(['faithful','unsupported','insufficient-information'] if kind=='explanation' else ['strong','plausible','unrelated','insufficient-information'])),
         evidence_ref=string(100),reason=string(60)),len(questions)))
-    prompt=(existing.CONFIG/'judge-d1.md').read_text(encoding='utf8')+'\nThe source object contains the full retained scope and governing conditions. Read the requested activity; do not substitute a different research project. Each person document contains the unchanged audited summary and all active labels/evidence. Cite scope.science or a supplied person/claim ID. Assess every person separately from group usefulness.'
+    prompt=judge_prompt(revised=revised,owned_references=owned_references)
     if revised:
-        if prompt.count(LEGACY_FORMAT)!=1:raise ValueError('contextual_check_original_format_changed')
-        prompt=prompt.replace(LEGACY_FORMAT,REVISED_FORMAT)
         schema['properties']['verdicts']['items']['properties']['reason']={'type':'string','minLength':1}
     if owned_references:
-        prompt=prompt.replace(REVISED_FORMAT,OWNED_FORMAT)
         fields=schema['properties']['verdicts']['items']['properties']
         schema=obj(verdicts=obj(**{q['item_id']:obj(verdict=fields['verdict'],
             evidence_ref=enum(*sorted(owned[q['item_id']])),reason=fields['reason']) for q in questions}))
