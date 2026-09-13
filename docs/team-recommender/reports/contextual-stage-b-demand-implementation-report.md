@@ -1,153 +1,143 @@
-# Contextual Stage B — verified restricted deployment and browser-access checkpoint
+# Contextual Stage B — completed finite run, failed execution gates
 
-September 13, 2026 UTC. **BLOCKED BY A NAMED PREREQUISITE: restricted-page browser navigation.** The paid-request recovery defect and four original browser failures are corrected. Restricted deployment now succeeds with authenticated serving-code/configuration proof. The existing application administrator console opens, but navigation to its new `/admin/contextual` page twice returns `net::ERR_BLOCKED_BY_CLIENT`; user-assisted page access is pending. No contextual provider request ran; real assessments remain 0/8, extension 0/1 and checks 0/4 maximum. Public recommender activation remains off.
+September 13, 2026 UTC. **IMPLEMENTED BUT USEFULNESS INSUFFICIENT/INCONCLUSIVE.** The restricted service works and the eight locked scope interactions have all been exercised. Six of seven scientific workflows failed before a verified graph; one returned a valid graph with no supported group. The eighth, unselected umbrella correctly required child selection without a job. The one extension failed its schema check. No useful primary groups existed for the predeclared independent check: **0/4 maximum check requests ran**. This is a completed finite diagnostic pass, **not four successful acceptance gates or scientific qualification**. Public activation remains off.
 
-The preceding reports remain unchanged in `contextual-stage-b-review-checkpoint-20260913.md` (original report SHA-256 `93a4675c9d6e95a62f6a35f565c248badabb9b5e3323079edbe798769a5df874`) and `contextual-stage-b-budget-checkpoint-20260912.md` (original $3 checkpoint). All prior scientific failures, review findings and private caches remain history.
+The owner’s “yes it opens” resolved the earlier restricted-page navigation checkpoint. The autonomous retry/diagnosis authority was used for focused operational corrections and the original finite sequence. It did not authorize favorable paid reruns, a prompt/model campaign, numerical Task B/D–G, another human packet or public release.
 
-## 1. Four authorized tasks and actual disposition
+The previous report is preserved byte-for-byte as [the access checkpoint](contextual-stage-b-access-checkpoint-20260913.md), SHA-256 `2ae0ddb9f5f58733f32addf18b1e6511b6cca18070b1cc291cc4b9a5e01c0ddf`. Earlier budget, review, deployment and scientific failures remain unchanged.
 
-| Task | Disposition |
+## 1. Four tasks and actual completion
+
+| Authorized task | Result |
 |---|---|
-| Repair PR #231 recovery/job state and obtain exact-head review | COMPLETE. 42 focused Python and 36 Worker/browser contracts pass; independent review clean; protected merge completed. |
-| Restricted validation deployment | COMPLETE. Exact API representation mismatch diagnosed, PR233 independently reviewed and merged, deployment34747922885 passed full serving-module/configuration/routing verification. |
-| Eight real opportunity assessments, one unassessed-person extension, bounded independent check | NOT RUN: 0/8 scopes, 0/1 extension, 0/4 maximum check requests. The route is deployed, but its operator page is blocked by the browser. No sample substitutes for this denominator. |
-| Correct remaining browser failures, including Team Match performance | COMPLETE for the four reported failures. All four affected paths pass, with an unchanged 90-second workflow timeout. Broader contracts and their focused corrections are recorded below. Real contextual-service browser validation remains dependent on restricted-page access and actual graphs. |
+| PR231 recovery repair and exact-head review | COMPLETE. Clean review, required CI, protected merge; previous crash and unknown-dispatch findings preserved. |
+| Restricted trusted deployment | COMPLETE. PR233 fixed authenticated configuration representation; PR234 fixed the manual dispatch handoff. Deployment and serving-code/configuration proof succeeded. PR235/236 subsequently corrected executor capacity and checkpoint restoration. |
+| Eight real scopes, one extension, at most four checks | Finite pass EXECUTED; functional acceptance FAILED. Eight dispositions recorded, one failed extension, no eligible groups for the independent check. Remaining successful-result denominator: six scope graphs, one extension, and the dependent check—not a claim that these passed. |
+| Four original browser failures | COMPLETE for the original four failures. Additional actual-graph tests passed after a nonvisual empty-result status correction. Live cross-origin application access remains unresolved; saved-real-response rendering is explicitly distinguished below. |
 
-The latest owner instruction, “Ok go ahead and execute the four indicated tasks and then we will check in again,” is recorded in the existing authority/state. It did not create another spending allowance or authorize public recommender activation.
+A successful GitHub workflow means it persisted/callbacked the result, including a terminal failure. It does **not** mean scientific assessment succeeded.
 
-## 2. Exact identities and preserved work
+## 2. Exact checkpoints and trusted changes
 
-| Item | Identity |
+Existing worktree: `C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender`; branch `codex/on-demand-team-recommender`. Starting access-report checkpoint: `58f5fc00ad509a0f042bad9ad79ee7419cca7923`. Resumed dispatch checkpoint: `2a35e39fabc1d4f771ff5663ae4c937f8fdbebe8`. Final tested local runtime: **`bc931dcd03b3a2bbff573431e39cbafa72615a36`**, following lock `4621c08c6e9b74cdba95a29d81d22cc3c9344874`. The containing documentation commit is resolved from this file’s history; it is not substituted for the tested runtime SHA.
+
+The analytical worktree remains at `58a59143ef5446b05223f52982a547903f53e24d`. Helper worktree remains `contextual-team-demand-service`, now branch `codex/contextual-checkpoint-order`, head `53bafe3819311db51214826bbd08a07d190da1c8`. Protected main is `683870dc774eadb9f7d335895267854f9b9a65dd`. No reset, duplicate checkout, bulk main merge, unrelated overwrite, AGENTS edit or experimental recommender merge occurred. Private outputs, paid caches and failed artifacts remain local/uncommitted.
+
+| Narrow prerequisite | Reviewed exact head | Required CI / terminal review | Protected merge |
+|---|---|---|---|
+| [PR234](https://github.com/mporosoff/grants-scraper/pull/234): fixed repository-dispatch handoff; bounded failure diagnostics | `7aff9d774053a4fc5c238bf99cd4116582566d1d` | [34755018851](https://github.com/mporosoff/grants-scraper/actions/runs/34755018851), clean [5653030097](https://github.com/mporosoff/grants-scraper/pull/234#issuecomment-5653030097) | `ae2878a6a292f17b46241ff36b117ecf154745db` |
+| [PR235](https://github.com/mporosoff/grants-scraper/pull/235): adequate bounded response capacity | `66e66e3731e417b49c364515ba3cbc7347409094` | [34755839444](https://github.com/mporosoff/grants-scraper/actions/runs/34755839444), clean [5653120697](https://github.com/mporosoff/grants-scraper/pull/235#issuecomment-5653120697) | `c14f4fec7a742948af2682a2371686d5986d128e` |
+| [PR236](https://github.com/mporosoff/grants-scraper/pull/236): latest checkpoint by time; exact lost-charge restoration | `53bafe3819311db51214826bbd08a07d190da1c8` | [34757606091](https://github.com/mporosoff/grants-scraper/actions/runs/34757606091), clean [5653307681](https://github.com/mporosoff/grants-scraper/pull/236#issuecomment-5653307681) | `683870dc774eadb9f7d335895267854f9b9a65dd` |
+
+All named CI Python/browser jobs passed on their exact review heads; terminal reviews were clean with no consequential unresolved threads. Automatic reviews were used without duplicates, and no code changed while a review was pending. Focused totals: PR234 44 Python +14 Node; PR235 47 Python +13 Node; PR236 50 unique Python tests. An initial PR236 run counted inherited duplicate tests; the final 50-test count excludes them.
+
+PR234 now submits only the fixed `contextual-team-validation` repository event and exact job identity with the existing dispatch credential. The original workflow-dispatch upstream failure’s precise cause remains unknown; no new token/permission was created. Protected-main event/payload validation and exclusive job claim remain enforced.
+
+PR235 enlarged assessment/extension output from 8,000 to 16,000 tokens and allowed the bounded longer response timeout. Interpretation remains 8,000, verification 16,000. The fixed model, provider-default reasoning, prompts, schemas, person/source evidence and logical-request identities were unchanged. The revised complete remaining envelope was locked before further results; old failed requests could not replay. A later 16,000-token verification still failed. No further capacity or prompt campaign followed.
+
+## 3. Accounting incident, repair and serving effects
+
+The fifth workflow restored the third workflow’s older ledger rather than the fourth’s latest one. Sorting reservation **artifact ID** was not chronological. This omitted the fourth scope’s **$0.020746** failed request from the fifth checkpoint. Work paused immediately; the original paid receipt remained available. A read-only inventory of 37 reservation and 37 state artifacts found one ordering inversion, no expired artifacts and exactly one missing charged request. No duplicate paid dispatch was observed.
+
+PR236 uses validated UTC `created_at` ordering and a unique newest reservation. Ambiguous/malformed times, missing or expired newest state fail closed; there is no fallback to an older spending copy. The narrowly pinned recovery restores the exact original charge/receipt only after source hashes and every other historical ledger row match. Conflicts fail; it is not a generic ledger union or a new allowance.
+
+Zero-provider recovery run [34757854792](https://github.com/mporosoff/grants-scraper/actions/runs/34757854792) restored the one original request `d8b779b41d8e4158b8be1375da31a8a3`. It made **zero provider calls and zero semantic checks**. Six before/after-write crash subcases, repeated restoration and conflicting-source tests preserve irreversible charges and produce zero duplicate fixture dispatches. The final cloud checkpoint includes every original fourth-run row unchanged; all **1,285** files verify against their manifest. All 653 request IDs and logical keys are unique. See [recovery receipt](../contextual-stage-b/checkpoint-recovery-receipt-v1.json).
+
+Restricted deployment [34755220527](https://github.com/mporosoff/grants-scraper/actions/runs/34755220527), artifact `10317241079`, succeeded with authenticated serving proof:
+
+- Serving version `960b224f-9f4c-48b4-9e7f-b507fb7b794f`; deployment `1f941e2a-1da9-43e9-b79d-3f5db966df37`.
+- Serving code `ae2878a6a292f17b46241ff36b117ecf154745db`; module SHA-256 `cd06d9fc24df0bd495251a52c8db4ccfe23a05c2b13de27431f1334cf18c2e8e`.
+- Configuration SHA-256 `d8f72f9c25350c3010759da4d9efd59702bcd51e9cc3de71e5b7c2515eda2ad0`; previous version `b7498b72-e854-4d27-8385-57c72c566dd7` retained for rollback.
+
+The live application Worker was updated only for the authorized restricted service. The existing nine secret bindings, routing and `17 7 * * *` cron were verified unchanged. The earlier namespaced validation-job migration remains in place. No researcher, subscription or public recommendation data changed. PR235/236 needed no Worker redeployment. Main release runs34755220596,34756295472 and34757839388 performed validation only: generation, assembly, publication, Pages and live-publication verification were skipped. No public recommender, audited registry or cohort was released. [Deployment receipt v2](../contextual-stage-b/restricted-deployment-receipt-v2.json) supersedes v1 as serving evidence while retaining history.
+
+## 4. Actual inputs and all eight outcomes
+
+Exact snapshot **`b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1`**; input-file SHA-256 **`d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9`**. Registry generation **`60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126`** contains 158 canonical records, 155 automatically eligible and three reference-only. Stable roster `1c6a29538ff8911ca01f7b4d1483f4251bbb4ab237a54f134f4872d0ae27fe60`. Four documented source gaps remain: Lawton, Lomakina, Rygg and Slane. No enrichment, eligibility promotion, new researcher retrieval or new funding-source retrieval occurred.
+
+Canonical enriched catalog/selected-child passages and governing conditions were reused, preserving original retrieval dates and limitations. This is not new full-notice verification. Eight reservations span six source groups: auditory network/coordination share one; the electrochemistry child and unselected parent share another. They comprise five selected parents, two selected children, and one unselected umbrella. No replacement or favorable selection occurred.
+
+Voyage 4 large, 1,024 dimensions, exact query/document role and combined audited profile serialization remain fixed. **155 new compatible document rows** were purchased in two batches, then reused by later scopes and the extension. **20 new query rows** were purchased in six batches. No compatible current-profile vectors were reused from historical search spaces; those purchased assets remain unchanged and confer no spending credit. All 155 eligible documents were ranked for each of the six interpreted scopes reaching retrieval. The locked contribution-order round-robin union admitted at most 12 people, not 12 per role after union; all omitted candidates remain explicitly unassessed.
+
+| Scope / actual requested activity | Run | First terminal boundary | New attempts | Cost |
+|---|---|---|---:|---:|
+|361207: human auditory tissue-resource network|34754425917|Assessment schema failure; exact rejected field unavailable in original diagnostics|5|$0.127745|
+|361208: network coordinating centre|34755301031|Assessment exhausted 8,000 output tokens, all reported as thinking; no completed response|3|$0.141150|
+|332894: LPS Qubit Collaboratory|34756354731|Assessment valid; separate verification exhausted 16,000 output tokens|4|$0.431938|
+|344592:ab-0025: Electrochemistry|34756717927|Interpretation quotation was not an exact source span|1|$0.020746|
+|345241:tdac-baa-004: quantum-enabled Army analytical methodology|34756867052|VALID graph; no supported group in assessed set|4|$0.229703|
+|362856: Bone Marrow Failure Resource Development|34758107405|Assessment reason 224 characters exceeded fixed 220-character schema bound|3|$0.146347|
+|363069: Veterans Legacy Grants|34758252589|Assessment reason 260 characters exceeded fixed 220-character schema bound|3|$0.086416|
+|344592: unselected umbrella|No job|Actual admin response `needs_scope_selection`; no interpretation allowed|0|$0|
+
+Interpretation: six valid outputs with 20 planning contributions, one failed output, one umbrella early exit. Assessment: two valid outputs, four failed outputs. Verification: one valid output, one failed output; the remaining scopes never reached verification. Valid assessment outputs contain 24 person-scope occurrences; only the 12 in the quantum-analysis graph reached complete verification. These occurrences are not independent labels or full-directory judgments.
+
+Graph **`0694edca5862bab36235bca711d892acca563b2ee6eb7735162a8e5dbca96615`**, scope345241:tdac-baa-004, retains 12 assessed people, eight adjacent non-covering edges, four insufficient-information people, two planning contributions and **143 unassessed** eligible people. It produces zero automatic members/options. It does not prove that the full directory lacks a reasonable collaborator. Its retained child description is limited context, not a complete Army notice.
+
+See [real execution receipt](../contextual-stage-b/real-execution-receipt-v1.json) for exact per-request identities, successful cache counts, usage, diagnostics and hashes. Provider formatting failures remain execution failures, never negative scientific labels. The exact rejected electrochemistry quotation and first failed assessment body were not retained; their content cannot be reconstructed honestly.
+
+## 5. Real connections, limits, extension and independent check
+
+The valid quantum-analysis graph distinguishes device physics from the requested analytical/mission-effectiveness activity. John M. Nichol’s retained claim `urh-000075-c001`, revision2, describes individual electrons in semiconductor quantum dots for experimental quantum information processing. Machiel Blok’s `urh-000091-c001`, revision2, describes lithographically defined superconducting circuits manipulating microwave quantum states. Both were judged **adjacent** to this particular system-analysis purpose, with the missing analytical/mission-effectiveness connection explicit. These are exact excerpts of retained audited registry evidence, not newly verified faculty quotations. Attribution remains linked to the [Nichol official profile](https://www.sas.rochester.edu/pas/people/faculty/nichol_john/index.html) and [Blok official profile](https://www.sas.rochester.edu/pas/people/faculty/blok_machiel/index.html); those pages were not fetched again here.
+
+For the LPS Qubit Collaboratory, the valid **intermediate** assessment proposed Nichol’s quantum-dot work as direct/central and Sobhit Singh’s density-functional structure/property modeling as a credible method transfer for qubit materials. Its separate verifier failed, so these are **unverified intermediate suggestions**, not serving results or evidence that scientific quality passed. No verified credible-transfer/team example emerged from the finite pass.
+
+The predeclared extension selected **Jaime Cardenas, `urh-000063`**, from 143 unassessed people for the first valid graph, using the existing maximum contribution cosine and canonical-ID tie rule. Selection was committed in execution overlayv3 before dispatch; no additional embedding was used. Run34757985954 reused the objective, base stages and vectors, then made exactly one extension-assessment request: **$0.021202**, 4,621 input/1,196 output tokens. Its first reason was 260 characters against the 220 limit. No extension verification or extended graph exists. A later same-origin admin read confirms the original graph and run34756867052 remain intact. No other person was substituted or retried.
+
+The independent-check rule selects primary groups from the first two ready graph-producing source groups, with up to one every-member/group and one explanation request each. **Zero such groups exist.** Therefore 0/4 maximum requests, zero independently checked people/groups/explanations and zero order-comparison grades. The zero-provider accounting-recovery dispatch with an empty check list is not a scientific check. The model generating/verifying these outputs was Sonnet 5; using that family for the unexecuted check would still have correlated errors. No new human items or labels were requested, returned or invented. Historical 40-item model-assisted owner feedback remains historical.
+
+Reasonable relevance, unrelated automatic-member rate, useful-primary-group precision, explanation faithfulness and independently feasible-scope yield are **UNMEASURED** here. Overall displayed team yield is 0/8 reservations, with execution failures and the umbrella separately shown; among complete graphs it is 0/1. Neither denominator estimates scientific population precision. There is no aggregate quality pass and no comparison against historical E2/E3 quality figures.
+
+## 6. Browser integration, unchanged presentation and resources
+
+The four original browser failures retain their complete earlier receipts: corrected Awards accessibility (seven scans, zero serious/critical findings; manual/incomplete checks remain), closed-context Team Builder, phone/enlarged text, and Team Match. The Team Match correction reuses immutable token preparation instead of increasing the 90-second timeout. Its real directory/manual/history workflow passed in58.269 seconds. Two/three/four-person complete result JSON remained byte-identical in the Node comparison, with before/after times8.151→5.351s,12.815→6.702s and14.673→8.043s.
+
+The full original Playwright run remains113/117 at its recorded code; all four failed paths have focused passing correction evidence. It was not duplicated or relabeled a new117-case pass at the ending SHA. Likewise Python1399/1400 plus the corrected21-test encoding module and Node892/894 plus the15 corrected freeze contracts remain distinct historical evidence. Prior37 frozen queries had zero top-ten churn;50 P9 cases were byte-identical. Nothing in this last change modifies search/scientific scoring.
+
+Real-graph testing found an empty/manual-unsupported draft incorrectly inherited “Credible internal core with missing skills.” Local commit `bc931dcd03b3a2bbff573431e39cbafa72615a36` maps an invalid automatic selection to the renderer’s existing **“Insufficient internal role coverage”** state. No new wording, markup, style, scientific admission or graph data was introduced. Fifteen changed engine/client contracts and15 presentation contracts pass; actual-graph Node checks pass. The private validation index was regenerated to `bcb8407fb8382432a13884311fbedad281a41f512920c618b5c242d03cf81e75`. Graph scientific caches remain valid because only local view-state mapping changed.
+
+**Live versus fixture boundary:** the same-origin restricted admin page successfully exercised all eight scope selections, status reads and the extension. The local application’s cross-origin GET to that protected service failed without an accessible response; the first error was correctly shown with Retry and no paid fallback. The cause is unresolved—possible Access/cookie/redirect behavior was not proven. No cookie export, security change or proxy bypass was used. Actual cross-user simultaneous-browser reuse is not established; transactional/concurrency fixtures pass.
+
+A separately identified **SAVED_REAL_RESPONSE_FIXTURE** served the exact trusted graph through the real application loader/renderer. It verifies real data rendering, not live transport. Ordinary search/child chooser generated no team request. Initial child build fetched the graph; manual add/remove/re-add and four slots made no assessment requests. John Nichol, Machiel Blok, Qiang Lin and Marc Porosoff were added solely as isolated manual interaction tests, not scientific recommendations. The fifth addition was disabled; all contributions remained unconfirmed. Team Match handoff encoded those exact IDs and selected child. Closing/reopening returned through the chooser to a fresh draft and another cached-result GET, not retained manual draft state. No paid POST occurred. One unrelated hosted Potential-search request was blocked by the private harness; this is not a claim that ordinary Search never uses its established separate service.
+
+| Actual measurement | Observation and limit |
 |---|---|
-| Repository | `mporosoff/grants-scraper` |
-| Existing product branch | `codex/on-demand-team-recommender` |
-| Product worktree | `C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender` |
-| Starting report checkpoint | `d70af4572b22174436aa9bc6a1feb8446e6e725f` |
-| Prior integrated code | `b7eb2e2ed01d71eae709306400309d9d8aaaaacd` |
-| Owner-resumption record | `53efde9` |
-| Exact prerequisite reconciliation | `c819677` copies PR #231; `802ee83` copies PR #232. No bulk main merge, reset or duplicate experimental checkout. |
-| Current local code | `870737f6a13b625cb88952951ade7f2b525bfff8`, including exact PR233 correction. Browser runtime remains the tested `732a8d80a9dae0e45925fe931dd9311762d37b6e` bytes. Validation lock committed at `7d4f7b19d69864fb0a40d44e59851bc847df736f`. |
-| Unchanged analytical branch | `58a59143ef5446b05223f52982a547903f53e24d` |
-| Protected main before this continuation | `fd37d5983405a04e650cb9d0a12aa34098ca2a76` |
-| Protected main after three narrow prerequisites | `dc48d7da8077d52773e89db76e9e772bfd0af469` (PR233 merge) |
-| Experimental recommender publication | NONE. Product corrections committed locally only. PR #225 remains outside protected-main release. |
+| Entire locked public-scientific input packet |947,090 bytes;125,945 gzip. Input package, not a serving team inventory.|
+|155 real 1,024-dimensional document rows|1,980,261 compact bytes;761,598 gzip. Server-side representations; they are not downloaded to the team drawer. Exact reuse/validation74.73ms in local Python, zero provider calls.|
+|Real completed graph|9,463 compact bytes;3,003 Node gzip /3,007 Python gzip. Encoding implementation differs; no synthetic compression claim.|
+|Node hydration / compose+view|20.605ms /1.671ms, at2026-09-13T13:04:33.870Z. One actual empty graph, not a broad performance distribution.|
+|Node repeated option lookup|0.0469ms mean of20; empty stable option list. Does not measure eight useful alternatives.|
+|Browser saved-result GET|Observed3–15.3ms local transfer; not hosted inference time.|
+|Completed browser render/edit|Chooser94.7ms; selected-child result105.8ms; manual add24.3ms/remove23.3ms. Click to completed state plus second animation frame, using local saved-real-response transport.|
+|Incremental browser heap for that child result|77,893,767→88,417,569 bytes: +10,523,802 bytes (10.04MiB), with no forced GC. Below48MiB for this one empty graph; not a universal/group/physical-device pass.|
+|Actual cold hosted completion|The one graph-producing workflow ran approximately three minutes including restore/dispatch/validation; another failed verifier workflow took approximately six minutes. No one-second cold inference claim.|
 
-This report and its machine receipt are a documentation checkpoint after the named code commit; the containing report commit is resolved from file history. Untracked `outputs/` and `debug.log`, unrelated worktrees and branches were preserved. No AGENTS, permissions, real profiles or old service settings were changed.
+Whole-pool invalidation, changed/retired claim and mixed-version rejection, expiry across actions, stable empty options, all-person reachability and full-slot manual removal/re-add passed focused tests. Real graph checks use the authoritative currentness function and a refreshed action clock; no new date parser. Client/cache miss/error/retry/concurrency fixtures remain zero-provider, and the observed saved-result browser edit paths add no paid traffic. Useful-option switching cannot be exercised with a real option because none exists; synthetic fewer/eight-option tests remain explicitly fixtures. Physical mobile device evidence and a universal48MiB incremental-memory pass remain unavailable. [Real browser receipt](../contextual-stage-b/real-browser-receipt-v1.json) records exact dependencies and measurement limitations.
 
-## 3. Request recovery and exact-head review
+## 7. One ledger, actual spend and reserves
 
-PR #231 previously stopped on P1 discussion 3998349238 at `61d2829b4553adbc7f944ee8b50b411b352ad0c9`: transport failures retained an irreversible `reserved_unknown` charge but were presented as an ordinary terminal failure, releasing the active Worker slot. The accepted correction covers the entire disposition path:
+Authoritative owner: run **34758252589**, state artifact **10317188749**, reservation artifact10318043788. Ledger SHA-256 **`bd55da4cc6b2483b06d9ecffbb104a0ea221335b2fd17d4de7f0bde12460b82a`**; checkpoint **`83ff044fd91f64bb16b5949f49b665c50c533f119f3a3fa5c6475f92ef2e961f`**. Local mirrors are read-only analysis copies and do not authorize local spending.
 
-- Durable unknown usage or a typed missing/corrupt paid-result condition yields `recovery_required`; exception wording is not a dispatch receipt.
-- Unknown contextual usage blocks a new paid request. Exact successful trusted caches remain reusable.
-- Recovery callbacks keep the single active slot and immutable result. Repeated callbacks, another visitor, another scope/run, and later expiration do not clear or hide recovery.
-- Reconciled invalid responses retain their measured charge. Ordinary failures and pre-dispatch budget limits remain distinct. A lost result does not create another paid attempt.
-
-Fresh actual-main fixtures cover timeouts, HTTP 503, malformed response, missing usage, receipt-write failure, valid reconciliation with a missing cache and three independent restorations per uncertain case. Eight earlier crash boundaries still pass. Repeated restoration produces ZERO duplicate fixture-provider dispatches. Actual SQLite contracts cover slot retention and callback immutability. These are local fixture results, not metered calls or scientific judgments.
-
-Reviewed head: `079e06b9f2c61ea15a40bca62cd9f0fa0daceeb8`. Required CI [34733583966](https://github.com/mporosoff/grants-scraper/actions/runs/34733583966) passed both Python and browser jobs. Clean terminal [review comment 5650343009](https://github.com/mporosoff/grants-scraper/pull/231#issuecomment-5650343009) completed at 02:43:38 UTC. All three historical consequential threads remain preserved and resolved. Protected merge [PR #231](https://github.com/mporosoff/grants-scraper/pull/231): `311246fe48c643bd3efa375fbe4b2b624bcb6ef6` at 02:44:26 UTC.
-
-No code edits, commits, pushes or review-thread resolutions occurred while either review was pending.
-
-## 4. Restricted deployment completed; application page navigation unresolved
-
-The previous failure and approval denials remain in `contextual-stage-b-deployment-checkpoint-20260913.md` and immutable receipt v3. The owner then explicitly instructed: “Yes retry and diagnose. You can continue working and retrying until the four tasks are all complete.” This approves the exact restricted Worker retry and autonomous completion, without another allowance or public activation.
-
-Authorized retry [34747576700](https://github.com/mporosoff/grants-scraper/actions/runs/34747576700) failed before mutation, but identified two exact representations: absent empty `script_runtime.exports`, and an additional D1 `database_id` alias. The observed alias SHA-256 `293d4693f1403df9749cb759cb5c808e59589389ece0c545da4937252acad5b6` equals the protected declared database ID; the original `id` also already matched. [Cloudflare’s version API](https://developers.cloudflare.com/api/resources/workers/subresources/scripts/subresources/versions/methods/get/) documents exports as optional. This was a verifier representation defect, not evidence of actual configuration drift.
-
-[PR233](https://github.com/mporosoff/grants-scraper/pull/233) normalizes only the missing empty map and an exactly equal string D1 alias. Conflicting/missing/null identifiers, nonempty/null exports, additional fields, duplicate bindings, runtime/route changes, mixed traffic and module-byte differences still fail. Raw observed configuration is retained separately. No permissions, workflow triggers, scientific contracts or other service provenance code changed.
-
-Exact head `acc5e8d14b99aafc2492e99a26bd86943171e60e`: 35 focused checks pass; required Python/Node CI [34747735047](https://github.com/mporosoff/grants-scraper/actions/runs/34747735047) passed. Automatic review [5652213850](https://github.com/mporosoff/grants-scraper/pull/233#issuecomment-5652213850) completed clean at 08:30:03.771276 UTC with its configured no-findings reaction and zero unresolved threads. No duplicate review or pending-review edit occurred. Protected merge `dc48d7da8077d52773e89db76e9e772bfd0af469` at 08:31:51 UTC; reconciled into the experiment as `870737f`.
-
-Deployment [34747922885](https://github.com/mporosoff/grants-scraper/actions/runs/34747922885) **SUCCEEDED**. It applied only the namespaced `0005_contextual_validation_jobs.sql` migration and its active-job uniqueness index, ran the existing secret-binding operation, and deployed the restricted intake service. All nine existing secret bindings, declared runtime, routes and the existing cron were verified unchanged. The workflow also idempotently removed the already-excluded legacy publication-token binding. No new credentials or privileges were added. No researcher/alert/publication records were edited, subscriber mail sent or public recommender activated.
-
-- Serving version: `b7498b72-e854-4d27-8385-57c72c566dd7`; deployment `aa706067-77be-45bb-bbbd-0f445ed164c9`.
-- Protected code: `dc48d7da8077d52773e89db76e9e772bfd0af469`; exact module SHA-256 `1fa8e5bcd368fc8076a903e60e16c4f0e758afc491bf9b417b76be479de1c321`.
-- Preserved previous version: `833875af-206a-4818-9668-bf57f892c1da`; rollback was not needed.
-- Artifact10314602459 and `contextual-stage-b/restricted-deployment-receipt-v1.json` retain proof.
-- Main release workflow34747921215 performed validation only; generation, assembly, publication and Pages were skipped. Public application/recommender/registry release remains unauthorized.
-
-The first browser attempt to the existing application `/admin` was automatically rejected as broader Cloudflare dashboard access. A no-cookie/no-content redirect check proved it targets the existing application Access login. The same action then succeeded, displaying the normal administrator console with no profile mutation. That classification issue is resolved. However, navigation from it to `/admin/contextual` twice failed with `net::ERR_BLOCKED_BY_CLIENT`; the page remained `/admin`, and browser error logs were empty. No alternate browser, credential extraction, dashboard route or security-policy bypass was attempted. The user was asked to open this exact restricted page, without pressing Build or changing settings. Their response remains pending. This is a browser-access limitation, not evidence that the deployed scientific executor failed.
-
-An automatic CI-status rejection also incorrectly classified the required job named `browser` as E2E. Read-only inspection of `.github/workflows/tests.yml` established it runs Node contracts/query/scoring checks, with no Playwright suite; the justified retry succeeded. No unauthorized E2E job was polled.
-
-## 5. Audited inputs and missing real outcomes
-
-Input snapshot `b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1`; approved executor packet SHA-256 `d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9`. Audited registry `60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126`: 158 canonical records, 155 automatically eligible, three reference-only. No population was promoted or enriched. The four documented source gaps remain. Original provenance dates and limitations remain unchanged.
-
-Combined profile serialization, Voyage 4 large query/document roles and 1,024 dimensions are unchanged. The effective legacy Sonnet 5 interpretation/applicability/separate-verification contracts remain pinned. The 155 missing compatible document rows remain missing: zero purchased in this continuation and zero exact compatible rows discovered. Historical purchased caches were not treated as extra budget credit or as current-profile representations.
-
-| Locked scope | Intended diagnostic | Actual contextual outcome |
-|---|---|---|
-| 361207 | Auditory tissue-resource provision | NOT RUN |
-| 361208 | Auditory network coordination; same existing source group as 361207 | NOT RUN |
-| 332894 | Qubit research parent | NOT RUN |
-| 344592:ab-0025 | Native electrochemistry child | NOT RUN |
-| 345241:tdac-baa-004 | Second-parent quantum-analysis child; limited decisive context remains | NOT RUN |
-| 362856 | Bone-marrow multiomic resource | NOT RUN |
-| 363069 | Cemetery-history research | NOT RUN |
-| 344592 | Unselected umbrella | Locked `needs_scope_selection`; no model inference allowed; hosted interaction NOT RUN |
-
-No real source → retrieved person → verified contribution → team example exists yet. Real retrieved/assessed people, verified relationships, useful groups, transfers, unrelated members and explanation-faithfulness denominators are all unmeasured. Synthetic graph tests do not fill them. No new model or human labels were created; historical model-assisted owner feedback remains separate.
-
-The source-selected routing audit remains metadata only: 50 reservations = 49 current and one broad/unselected; 150 = 142 current, seven broad/unselected and one blocked. No cohort is activated; there are zero current contextual assessment graphs for either configuration. Full real-resource and scientific-readiness claims remain unavailable.
-
-## 6. Browser, presentation and performance corrections
-
-The Team Match bottleneck repeatedly tokenized the same immutable profile concept across source clauses and catalog records. Token preparation is now reused by group and query API through weak references. Scope-specific matches and authoritative currentness decisions are not cached by this new helper. No relevance formula, threshold, source meaning or profile was changed.
-
-Full real-catalog reference comparisons at the same `2026-09-12T16:00:00Z` clock used the same four audited department profiles. Complete result JSON hashes are identical before and after for every tested team size:
-
-| People | Results | Before Node time | After Node time |
-|---|---:|---:|---:|
-| 2 | 20 | 8.151 s | 5.351 s |
-| 3 | 19 | 12.815 s | 6.702 s |
-| 4 | 18 | 14.673 s | 8.043 s |
-
-These are local Node observations, not physical-device benchmarks or a controlled latency distribution. The full browser directory/manual-profile/history workflow passed in **58.269 s** with the original 90-second timeout. The source and output hashes are retained in `browser-repair-receipt-v1.json`.
-
-All four prior browser failures were corrected:
-
-1. Awards accessibility: pin the clock inside the immutable fixture's validity window and explicitly choose its mocked provider. All seven scans pass with zero serious/critical findings; axe still reports manual/incomplete checks (1–3 per scan), not an assertion of universal accessibility.
-2. Closed-context Team Builder: use a coherent isolated two-scope fixture instead of relying on incompatible historical production proposals. Drawer replacement and focus pass.
-3. Phone/enlarged-text Team Builder: use the existing frozen fixture and verify button containment, horizontal alignment, touch height and text overflow. The obsolete vertical symmetry assertion was removed because the frozen current layout contains controls above the result; no production styles/layout were changed.
-4. Team Match: eliminate repeated token preparation; workflow passes without a timeout increase.
-
-The initial focused correction run passed three of four; it exposed the Awards test's additional hosted-provider selection mismatch. The next targeted Awards run passed. Both failed and passing evidence remain in private outputs.
-
-Broader checks:
-
-- Python required validation: 1,400 tests, 1,399 passed and one Windows default-encoding error. Explicit UTF-8 reading corrected that fixture; its 21-test module then passed. The entire unchanged suite was not rerun merely to duplicate evidence.
-- Node/browser contracts: 894 tests, 892 passed and two historical freeze failures. Both concerned already-authorized contextual additions: one deliberate assessment button and seven status messages. The immutable historical baselines remain unchanged; a strict exact-text exception now isolates only these additions, with all other renderer/HTML bytes still compared. All 15 affected contracts pass after correction.
-- 21 shared-evidence/currentness contracts pass. Search frozen-query check: 37 queries, zero top-ten churn. P9: 50 cases, byte-identical. Search package validation passes using unchanged purchased corpus/vector identities.
-- The original full Playwright run remains 113/117 at `2a62f6c`; all four failed paths now pass on repaired sources. This is focused corrective evidence, not a newly executed all-117 suite on the ending SHA.
-
-HTML changes are dependency hashes only. Public styles, ordinary workflows, saved/manual behavior and source links remain unchanged. The explicit contextual action/status wording predates this continuation and was authorized by its work order. Content hashes and local package metadata were regenerated using existing tooling; no search vectors or source records were regenerated.
-
-Prepared-graph cold/warm/edit/retry/error fixtures remain zero-provider tests. They do not prove a real hosted cache hit, cross-user graph reuse or extension. The private preview's CSP now allows only the exact protected contextual endpoint in addition to its existing sources; public CSP is unchanged. The 48 MiB extra-memory target remains **UNMEASURED for real contextual graphs**, as do real cold hosted latency and real graph hydration. Earlier scientific/memory failures were not relabeled.
-
-## 7. Single ledger and price verification
-
-Authorization: `on-demand-team-offline-v2-20260909`. Fresh run listing still identifies 34606280661 as the latest metered executor run, artifact 10266946843. The restored read-only mirror has SHA-256 `5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f`: 629 requests, 613 valid, 16 failed, no unknown reservations and zero contextual-purpose requests.
-
-| Accounting | Actual |
+| Single authorization `on-demand-team-offline-v2-20260909` | Actual |
 |---|---:|
-| Prior cumulative experiment charge | $4.290655 |
-| New contextual/continuation charge | $0.000000 |
-| New paid requests / tokens | 0 / 0 |
-| Outstanding / uncertain reservations | $0 / 0 |
-| Overall remaining dollars / lifetime requests | $5.709345 / 61 |
-| Existing contextual task ceiling, not another allowance | $5 and 40 additional attempts |
-| Preserved minimum after full authorized task ceiling | $0.709345 and 21 requests |
+|Before this contextual pass|$4.290655;629 attempts|
+|This pass, including every failure and extension|**$1.205247;24 attempts**|
+|Cumulative experiment|**$5.495902;653/690 attempts**|
+|Outstanding/uncertain reservations|**$0;0**|
+|Remaining overall|**$4.504098;37 attempts**|
+|Unused portion of current $5/40 task ceiling|$3.794753;16 attempts; not automatically spent|
+|Protected minimum reserve under the authorized ceiling|$0.709345;21 attempts—both preserved|
 
-The complete prior conservative plan remains $4.995414 / 36 maximum requests; this is a ceiling, not a quota or actual charge. [Anthropic's current official pricing](https://platform.claude.com/docs/en/about-claude/pricing) confirms Sonnet 5 at $2/M input and $10/M output; [Voyage's official pricing](https://docs.voyageai.com/docs/pricing) confirms Voyage 4 large at $0.12/M. Both were rechecked September 13 UTC. Prompt caching remains disabled and conservative complete-packet reservations remain mandatory. Historical reuse is not a refund. Before any later real dispatch, restore the latest authoritative cloud checkpoint again; this local mirror never authorizes independent local spending.
+Actual contextual usage:152,389 text input tokens,89,762 text output tokens (including reported thinking),23,728 embedding tokens. Costs: interpretation$0.223670, document embeddings$0.002573, query embeddings$0.000276, assessment$0.669620, verification$0.287906, extension$0.021202. No independent-judge charge. Seven of24 requests failed; their charges remain counted. The recovered$0.020746 is included once, not new spending or a refund.
 
-## 8. Remaining work and decision
+Prices were rechecked September13 before dispatch: Sonnet5$2/M input and$10/M output; Voyage4large$0.12/M. Original complete envelope$4.995414/36 and reviewed capacity overlay$4.578905/34 were reservation ceilings, not quotas. Source/registry reuse and exact cache reuse do not create credits. Neither old Sonnet authorization nor prepaid balances were repurposed.
 
-**BLOCKED BY A NAMED PREREQUISITE: repeated client-side denial of the restricted operator-page navigation.** Recovery, restricted deployment and the original four browser corrections are complete. The real semantic/integration portion remains unexecuted, not unfavorable or passed.
+## 8. Routing, release boundary and decision
 
-`contextual-stage-b/real-validation-lock-v1.json` was committed before any new provider call or recommendation output. The complete $4.995414 / 36-attempt bound reproduced exactly from current inputs; current official prices were rechecked September 13. The source/shortlist/judge rules are unchanged. The single extension uses the first current locked-order scope returning a validated graph, regardless of group yield; its unassessed person is selected by the highest maximum cosine to the already-cached contribution queries, with canonical-ID ties. No extra embedding or model selects the extension. All 155 current document inputs and the eight scopes remain bound to the original snapshot.
+Fresh source-only [routing observation](../contextual-stage-b/routing-observation-v2.json), without assessment/prewarming:50 reservations contain49 unassessed scientific scopes and one unselected umbrella; all50 satisfy current action-date policy. The150 inventory contains142 unassessed scientific scopes, seven unselected umbrellas and one action-blocked record;149 satisfy the date policy. Readiness and dates are separate. Each inventory now contains the one compatible **no-group** graph; neither contains a qualified team inventory. The restricted service allowlists only the original eight trial scopes (two intersect the50 inventory, three the150), not an activated150-scope endpoint. No routing substitution occurred.
 
-After page access is restored, continue the already-authorized eight scopes, one extension and maximum four separate output-check requests through trusted protected-main code and the same latest-restored ledger. Execute real cache/concurrency/edit/extension/currentness/resource browser checks against those graphs. Do not redraw the sample, retry a charged or uncertain logical request, invent labels, or replace the complete denominator with the first successful example.
+The public application/current valid package remains unchanged. Restricted Worker rollback identity is preserved; no rollback/production flip was performed. A future release would need coherent audited registry, input, loader, graph and routing identities, verified application transport and actual usability evidence; deploying alone cannot fix missing verified outputs or establish relevance/faithfulness.
 
-The user’s autonomous-completion authorization remains active for these four tasks. No further deployment or dollar approval is requested. This checkpoint identifies the actual unresolved browser-access dependency, while preserving all completed work. No public activation, Stage4, extra human packet or scientific retuning.
+**IMPLEMENTED BUT USEFULNESS INSUFFICIENT/INCONCLUSIVE.** The first failed boundaries are recorded per scope above. The fixed response schema/capacity failures prevent six complete scientific graphs and the extension; no eligible groups exist for the separate output check. The live application-to-admin transport also remains unresolved. Consequently this is not ready for activation, and the four tasks cannot honestly be called four successful acceptance results.
+
+The finite locked pass is exhausted. Do not re-key failed paid requests, truncate rejected explanations, relax scientific checks, invent recovered provider bodies or commission a second campaign to turn it green. Preserve the unused balance and all evidence. **STOP FOR USER REVIEW. No public activation, Stage4, new human items or automatic follow-on experiment.**

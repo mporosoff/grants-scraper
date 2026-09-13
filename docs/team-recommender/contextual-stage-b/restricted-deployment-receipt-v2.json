@@ -1,0 +1,31 @@
+{
+  "version_id": "960b224f-9f4c-48b4-9e7f-b507fb7b794f",
+  "deployment_id": "1f941e2a-1da9-43e9-b79d-3f5db966df37",
+  "protected_sha": "ae2878a6a292f17b46241ff36b117ecf154745db",
+  "module_hashes": {
+    "index.js": "cd06d9fc24df0bd495251a52c8db4ccfe23a05c2b13de27431f1334cf18c2e8e"
+  },
+  "configuration_sha256": "d8f72f9c25350c3010759da4d9efd59702bcd51e9cc3de71e5b7c2515eda2ad0",
+  "routing": {
+    "workers_dev": true,
+    "previews_enabled": true,
+    "crons": [
+      "17 7 * * *"
+    ],
+    "routes": [],
+    "domains": []
+  },
+  "observed_configuration_sha256": "9c1c3fc07547bde0d1fb677ca5272b9aa6090c57fff90eaa1b85075b7d0555a9",
+  "configuration_normalization": "intake-empty-exports-equal-d1-alias-v1",
+  "declared_configuration_sha256": "ab0153cfbacd55658b9e5e87f36a6f5302176cf9c685e7254ba7f64667c32fc1",
+  "previous_version_id": "b7498b72-e854-4d27-8385-57c72c566dd7",
+  "method": "authenticated-active-modules-runtime-bindings-routes-and-triggers-vs-protected-inputs",
+  "public_recommender_activation": false,
+  "version": "contextual-restricted-deployment-v2",
+  "workflow_run": 34755220527,
+  "artifact_id": 10317241079,
+  "proof_sha256": "843576bb2c253b4a5c6952d3de214a54ac32dea7c3658fc5c256344aca486be3",
+  "recorded_at": "2026-09-13T13:10:16.603787+00:00",
+  "previous_receipt": "restricted-deployment-receipt-v1.json",
+  "pr": 234
+}

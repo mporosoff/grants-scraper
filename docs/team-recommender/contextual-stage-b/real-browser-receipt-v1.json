@@ -1,0 +1,146 @@
+{
+  "version": "contextual-real-browser-receipt-v1",
+  "recorded_at": "2026-09-13T13:12:51.476596+00:00",
+  "product_code_commit": "bc931dcd03b3a2bbff573431e39cbafa72615a36",
+  "actual_hardware": "Local Windows Codex in-app browser; no physical mobile device or controlled hardware comparison",
+  "input_graph_id": "0694edca5862bab36235bca711d892acca563b2ee6eb7735162a8e5dbca96615",
+  "live_admin": "PASS same-origin restricted operator, all eight selections and immutable cached graph read",
+  "live_application_cross_origin": "FAIL GET could not return a readable response; actual cause unresolved; no paid fallback",
+  "live_error_receipt_sha256": "69f470f1347a7935fbf77cb8f7c7e41ed4f1c5d6a0a5b11b28b90025f3870825",
+  "saved_response_transport": "Explicit local saved-real-response fixture from run34756867052, unchanged content-addressed graph; NOT proof of live application access",
+  "saved_response_actions": [
+    "child chooser without a team request",
+    "real empty graph shows existing insufficient coverage wording",
+    "add John M. Nichol manually",
+    "remove/re-add same person",
+    "add Machiel Blok, Qiang Lin and Marc D. Porosoff manually to four slots",
+    "fifth addition disabled",
+    "handoff encodes exact four canonical IDs and selected child",
+    "close/reopen through chooser returns fresh empty draft and another GET; no POST"
+  ],
+  "manual_evidence": "unconfirmed; never auto-certified; model-assessed role gaps remain visible",
+  "saved_response_team_GETs_after_reopen": 2,
+  "saved_response_paid_POSTs": 0,
+  "unrelated_hosted_search_POST_attempts_blocked_by_fixture": 1,
+  "ordinary_search_team_requests_before_Build": 0,
+  "warm_status_transfer_ms": [
+    4.3,
+    4.8
+  ],
+  "first_recorded_local_graph_GET_ms": 15.3,
+  "measurement_limit": "GET duration is local saved-response transfer, not cold hosted inference. Initial heap samples were page-wide and at response return, not complete render; no universal 48MiB assertion.",
+  "raw_heap_observation": {
+    "before_Build": 175844397,
+    "at_response_return": 196102843,
+    "after_later_reopen_response": 85141239,
+    "forced_gc": false
+  },
+  "node_real_graph": {
+    "clock": "2026-09-13T13:04:33.870Z",
+    "graphs": [
+      {
+        "scope_id": "345241:tdac-baa-004",
+        "graph_id": "0694edca5862bab36235bca711d892acca563b2ee6eb7735162a8e5dbca96615",
+        "state": "no_supported_group_in_assessed_set",
+        "clock": "2026-09-13T13:04:33.870Z",
+        "raw_bytes": 9463,
+        "gzip_bytes": 3003,
+        "hydrate_ms": 20.605000000000018,
+        "cold_compose_view_ms": 1.6707000000001244,
+        "warm_options_mean_ms": 0.04693499999998494,
+        "edit_ms": null,
+        "assessed": 12,
+        "edges": 8,
+        "roles": 2,
+        "matched_people": 0,
+        "unassessed": 143,
+        "options": [],
+        "primary_members": [],
+        "primary_names": [],
+        "primary_evidence": [],
+        "missing_contributions": [
+          "Analytical methodology development for quantum-enabled Army systems",
+          "Mission effectiveness analysis of quantum technology applications"
+        ],
+        "candidate_reachability": true,
+        "stable_options": true,
+        "whole_pool_invalidation": true,
+        "currentness_expiry_test": "pass",
+        "gate_state": "fail",
+        "manual_full_slots_remove_readd": "pass unconfirmed",
+        "provider_calls": 0,
+        "statistics": {
+          "optimizations": 1,
+          "cache_hits": 24,
+          "provider_calls": 0,
+          "cached_options": 1
+        },
+        "measurement_environment": "Local Node, not physical-device/browser evidence"
+      }
+    ]
+  },
+  "tests": {
+    "changed_engine_and_client_contracts": {
+      "pass": 15,
+      "fail": 0,
+      "log_sha256": "265dece0301cb51f58f4a11bd949ba1deb9794d77ed0f655f8d8ea51352b6caa"
+    },
+    "presentation_contracts": {
+      "pass": 15,
+      "fail": 0,
+      "log_sha256": "b71659d401070307774db8be8370672b5cfe4a56d2e358a83393c10d3bd2c903"
+    }
+  },
+  "unchanged_presentation_files": {
+    "assets/opportunity-team-panel.js": "6e7bf40f9f4b747096af44423864ad0fe40851c9127785bc10d5c5cb8bf90ead",
+    "assets/opportunity-team.js": "d33c0266c2d5bedc0811df53811401a0b372fc6f104235aa7e5dace934dcb1bb",
+    "team_match.html": "16e8ca79151c5a957d0eca6b6517dd09e75cae2ddc0c1fc59c721fbc7e23413b",
+    "match_explorer.html": "8d1926c0a6f01bd0d90dddf5d7bbf6cafda8206df4efa2c1655f6c8a7c2bf386"
+  },
+  "runtime_hashes": {
+    "assets/contextual-team-engine.js": "2c4f81633fd8a7fe1eb39331767c254933c04a367945f70b5573bce14d47768b",
+    "assets/contextual-team-client.js": "44abfb75d94ff8658f130d3ddea92574f7f966506ccfd08e6afb6aa466382690",
+    "assets/search-retrieval.js": "e73aeb0d31bfa97a778a32b97891d4e3b10fcba47b6ed35df5c8221e3b5852a4"
+  },
+  "private_index_generation": "bcb8407fb8382432a13884311fbedad281a41f512920c618b5c242d03cf81e75",
+  "physical_device": "NOT RUN",
+  "full_suite_rerun": "Not duplicated. Prior117-case run and four focused repairs retain original dependency identities.",
+  "new_human_items": 0,
+  "public_activation": false,
+  "completed_render_observations": {
+    "method": "Private DOM mutation observer, from click until the completed state and second animation frame; real graph, local saved-response GET; page-wide performance.memory, no forced GC",
+    "chooser": {
+      "elapsed_ms": 94.7,
+      "before_heap": 98407632,
+      "after_heap": 103422219
+    },
+    "selected_child_graph": {
+      "elapsed_ms": 105.8,
+      "before_heap": 77893767,
+      "after_heap": 88417569,
+      "heap_delta_bytes": 10523802,
+      "heap_delta_mib": 10.036279678344727
+    },
+    "manual_add": {
+      "elapsed_ms": 24.3,
+      "before_heap": 80459524,
+      "after_heap": 80459524
+    },
+    "manual_remove": {
+      "elapsed_ms": 23.3,
+      "before_heap": 81347499,
+      "after_heap": 81347499
+    },
+    "scope": "One empty real graph and manual edits; no automatic group/options or physical-device/memory distribution claim",
+    "observed_under_48mib": true,
+    "universal_memory_acceptance": "UNMEASURED"
+  },
+  "live_completed_cache_reuse": {
+    "scope": "345241:tdac-baa-004",
+    "job_id": "5ae55cef8d52b3e675aa803d477b9efea492165422ff65d708a5bd670869c0c8",
+    "run_id": 34756867052,
+    "graph_id": "0694edca5862bab36235bca711d892acca563b2ee6eb7735162a8e5dbca96615",
+    "after_failed_extension": "Original graph retained",
+    "explicit_repeat_build": "same original completed job/graph; no new workflow"
+  }
+}
