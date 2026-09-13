@@ -39,9 +39,16 @@
     assert(original&&record,'contextual_canonical_scope_missing');
     const source={id:scope.id,parent_id:parent,kind:child?'publishable_child':'parent',
       science:pick(record,index.source_fields),conditions:pick(original,index.condition_fields)};
-    assert(await hash(substantive(source))===scope.source_id,'contextual_source_version_conflict');
+    // A reviewed official-source supplement has its own scientific identity.
+    // Still bind the unchanged catalog bytes so later source edits invalidate it.
+    assert(await hash(substantive(source))===(scope.catalog_source_id||scope.source_id),'contextual_source_version_conflict');
     const decisionClock=new Date(options.now||Date.now()),current=g.FUNDING_RETRIEVAL?.recordIsCurrent;
-    assert(current&&current(record,decisionClock)&&current(original,decisionClock),'not_current');
+    const actionCurrent=(value,now)=>scope.currentness
+      ? value===original&&!child
+        ? current(scope.currentness.record,now)&&current(scope.currentness.parent,now)
+        : current(value===original?scope.currentness.parent:scope.currentness.record,now)
+      : current(value,now);
+    assert(current&&actionCurrent(record,decisionClock)&&actionCurrent(original,decisionClock),'not_current');
     still(options);
     const person=options.personId||'',key=index.release_id+':'+scope.id+':'+person;
     const ids={release_id:index.release_id,scope_id:scope.id,person_id:person};
@@ -88,7 +95,7 @@
     const engine=g.ContextualTeamEngine.create(graph,directory,{graph_id:graph.graph_id,snapshot_id:index.release_id,
       registry_generation:index.registry_generation,source_id:scope.source_id,roster_id:index.roster_id,
       scope_id:scope.id,parent_id:parent,directory_content:canonical(directory.researchers)},
-      {record,parentRecord:original,currentness:current,currentSnapshot:()=>({directory:g.RESEARCHER_DIRECTORY,
+      {record,parentRecord:original,currentness:actionCurrent,currentSnapshot:()=>({directory:g.RESEARCHER_DIRECTORY,
         parentRecord:(g.GRANT_CATALOG?.opportunities||[]).find(r=>String(r.opportunity_id)===parent),
         record:child?options.childCatalog?.opportunities.find(r=>String(r.opportunity_id)===scope.id):
           (g.GRANT_CATALOG?.opportunities||[]).find(r=>String(r.opportunity_id)===scope.id)})});

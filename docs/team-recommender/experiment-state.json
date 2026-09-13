@@ -62,7 +62,7 @@
     "D3_prior_usd": 2.27911,
     "D3_spend_usd": 0.856223,
     "actual_usd": 5.82198,
-    "authoritative_owner": "Exclusive protected-main cloud executor; paired checkpoint run34775743077",
+    "authoritative_owner": "Exclusive protected-main cloud executor; paired checkpoint run34785915676; local mirrors read-only.",
     "authorized_usd": 10,
     "closeout_new_requests": 24,
     "closeout_new_usd": 1.205247,
@@ -73,8 +73,8 @@
     "id": "on-demand-team-offline-v2-20260909",
     "input_tokens": 2058527,
     "latest_checkpoint_sha256": "7ff91ac743a74d28de323ec59dd14956059b74b3b2e22601dfd83f7df4a62981",
-    "latest_run_id": 34775743077,
-    "ledger": "Cloud state artifact10323207152, run34775743077; local mirrors read-only.",
+    "latest_run_id": 34785915676,
+    "ledger": "Cloud state artifact10326481917, run34785915676; $5.821980 / 662, zero outstanding. Free counts changed no metered ledger bytes.",
     "ledger_sha256": "03b81d8af0369617f1f87b0cf573c22d34dd1f30d6795869648fe7e1bf201b74",
     "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
     "no_new_allowance_at_closeout": true,
@@ -4497,7 +4497,7 @@
       "path": "docs/team-recommender/stage2-closeout-receipt-index.json",
       "sha256": "73a46def2c53ab43c1e4021c25ce1c08ed88ee23a9f27e9a5a49cbd0e646b3ba"
     },
-    "recommendation": "E2 NOMINATED FOR VALIDATION â€” NOT QUALITY-QUALIFIED OR DEPLOYED",
+    "recommendation": "E2 NOMINATED FOR VALIDATION \u00e2\u20ac\u201d NOT QUALITY-QUALIFIED OR DEPLOYED",
     "report": {
       "path": "docs/team-recommender/reports/stage-2-decision-closeout.md",
       "sha256": "5e973fa27cb6c20a82c752b4202623c26c946a6d181aa8be4739101037356c73"
@@ -7138,7 +7138,7 @@
     "path": "docs/team-recommender/contextual-stage-b/option1-receipt-index-v1.json",
     "sha256": "95db1213b32a1e93299e6ee34ee766ab29efc02dc21e1731db1a89427f244c0c"
   },
-  "recommendation": "BLOCKED AT A NAMED EXECUTION/ACCESS/BUDGET/RESOURCE BOUNDARY",
+  "recommendation": "Continue exact-head prerequisite review, restricted deployment, three locked cold workflows and fixed checks; no public activation.",
   "recommended_next_stage": "Continue Phase2 only after its explicit review-convergence checkpoint; do not reopen Phase1.",
   "report": "docs/team-recommender/reports/phase-2-cold-demand-and-release-readiness.md",
   "repository": "mporosoff/grants-scraper",
@@ -7481,8 +7481,8 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "phase2_blocked_trusted_checkpoint_review_convergence",
-  "stop": "STOP FOR USER REVIEW. Phase 2 incomplete; PR241 interrupted-write persistence requires explicit bounded resumption under supplied repository instructions.",
+  "stage_status": "phase2_authorized_resumption_in_progress",
+  "stop": false,
   "unresolved": [
     "PR241 exact-head review5192269500 found interrupted count-cache writes can make the authoritative checkpoint unrestorable; six fixture restorations reproduce the failure. Explicit supplied review-convergence checkpoint applies.",
     "Phase2 ordinary fresh-serving runner/integration incomplete; three workflows and their output checks have not run. Complete finite cost fit is not yet established.",
@@ -9324,7 +9324,7 @@
       "four_tasks_all_passed": false
     },
     "phase2": {
-      "status": "blocked_review_convergence",
+      "status": "cold_demand_implemented_exact_head_review_next",
       "authority": "contextual-stage-b/PHASE2-COLD-DEMAND-AUTHORITY.md",
       "starting_product_sha": "c5d01706ebc8eea22afc25e83cc0b643e3b7c5f7",
       "starting_main_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
@@ -9340,18 +9340,18 @@
       "public_activation": false,
       "phase1_reopened": false,
       "packages": {
-        "A": "partial_blocked_at_trusted_checkpoint_persistence",
+        "A": "persistence_repaired_merged_cold_path_implemented_focused_pass_pending_review",
         "B": "0_of_3_workflows_0_of_6_maximum_checks",
         "C": "initial_original50_original150_routing_join_only"
       },
       "report": "docs/team-recommender/reports/phase-2-cold-demand-and-release-readiness.md",
-      "helper_head": "3f3db97540ce734923367ff1fb775638d8a48b65",
-      "helper_pr": 241,
+      "helper_head": "a815adc84ccf796e1e38f04686878f7439771a08",
+      "helper_pr": null,
       "review_checkpoint": {
         "path": "docs/team-recommender/contextual-stage-b/phase2-review-checkpoint-v1.json",
         "sha256": "1ea59ce7ba755fe701ff219a277fc45074c13b2f53d1a69aa7ca9cdb7b97518b"
       },
-      "new_native_count_http_requests": 0,
+      "new_native_count_http_requests": 167,
       "fresh_scopes_completed": 0,
       "output_check_requests": 0,
       "remaining_microusd": 4178020,
@@ -9362,7 +9362,38 @@
         "341997",
         "351715"
       ],
-      "paid_execution_lock_complete": false
+      "paid_execution_lock_complete": true,
+      "resumptions": [
+        {
+          "date": "2026-09-13",
+          "owner_instruction": "Okay continue with the persistence repair and head review and continuing phase 2 work",
+          "starting_product_sha": "6b70f971e77eed3dc166d4f32139fa2b5c15d7be",
+          "starting_helper_sha": "3f3db97540ce734923367ff1fb775638d8a48b65",
+          "new_budget_authorization": false
+        }
+      ],
+      "native_count_cache_reuse": 164,
+      "latest_owner_run": 34785915676,
+      "execution_lock": "contextual-stage-b/phase2-execution-lock-v1.json",
+      "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "preview_bundle_id": "e8a6fd71ccf3997a63f61224bdb3f2fc6e849a3c5fbf2599fd4f3434fd26188e",
+      "currentness_precision": "existing calendar-date policy",
+      "resolved_prerequisites": [
+        {
+          "pr": 241,
+          "head": "091bc921c7a89e893d19f0dfc6132a06835e3270",
+          "review_comment": 5656383867,
+          "ci_run": 34784759229,
+          "merge": "74a3285292c5e44930745750331d6df1f23420c8"
+        },
+        {
+          "pr": 242,
+          "head": "9776df790984ad980e93e10a91ae269dbfa5959a",
+          "review_comment": 5656468475,
+          "ci_run": 34785667885,
+          "merge": "276de145ee082daa6b245c003e333c49c99d8488"
+        }
+      ]
     }
   },
   "active_work": "phase2_cold_demand_and_restricted_release_readiness",
@@ -9454,7 +9485,7 @@
       "required_CI": "PASS: run34633928379, Python1380/3skips, Node867/855pass/12skips,37queries/50P9/23no-drift",
       "scientific_acceptance": "NOT QUALIFIED; exposed diagnostics only",
       "physical_mobile": "NOT RUN",
-      "additional_heap_48MiB": "FAIL: observed parent 49.09â€“52.44 MiB",
+      "additional_heap_48MiB": "FAIL: observed parent 49.09\u00e2\u20ac\u201c52.44 MiB",
       "post_input_1000ms": "FAIL: observed parent up to1060ms",
       "resources": {
         "path": "docs/team-recommender/evidence-repair/resource-summary-v1.json",

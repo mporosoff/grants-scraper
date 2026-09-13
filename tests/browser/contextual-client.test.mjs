@@ -94,3 +94,23 @@ test('existing drawer uses contextual lazy adapter with real audited profiles, t
   dom.dispatch('click',drawer.querySelector('[data-opportunity-team-add-replacement]'));assert.equal(requests.length,before);
   assert.equal(requests.filter(r=>r==='POST').length,1);assert(drawer.querySelector('.opportunity-team-next a'));
 });
+
+test('reviewed source supplement keeps raw-catalog invalidation and refreshed authoritative clocks',async()=>{
+  const f=fixture(),s=f.index.scopes[0];
+  s.catalog_source_id=s.source_id;s.source_id=hash({fixture:'official supplement'});
+  s.currentness={record:{status:'posted',close_date:'2026-09-13'},parent:{status:'posted',close_date:'2026-09-13'}};
+  const {generation_id,...body}=f.index;f.index={...body,generation_id:hash(body)};
+  const {graph_id,...raw}=f.graph;raw.source_id=s.source_id;f.graph={...raw,graph_id:hash(raw)};
+  const c=context(f);let count=0;
+  const fetcher=async()=>{count++;return response({release_id:f.index.release_id,scope_id:f.scope.id,state:'ready',result:f.graph});};
+  const loaded=await c.ContextualTeamClient.load(f.index,f.directory,options(f,{fetcher}));
+  const first=loaded.engine.runAction({parentId:f.scope.id,now:'2026-09-13T12:00:00Z'},()=>loaded.engine.proposal());
+  assert.equal(first.selectedIds.length,2);
+  assert.throws(()=>loaded.engine.runAction({parentId:f.scope.id,now:'2026-09-14T12:00:00Z'},()=>loaded.engine.removeMember(first,first.selectedIds[0])),/not_current/);
+  assert.equal(count,1);
+  const replacement={...options(f).record,description:'Source changed after preparation'};
+  c.GRANT_CATALOG={...f.inputs.catalog,opportunities:f.inputs.catalog.opportunities.map(r=>r.opportunity_id===f.scope.id?replacement:r)};
+  assert.throws(()=>loaded.engine.runAction({parentId:f.scope.id,now:'2026-09-13T12:00:00Z'},()=>loaded.engine.proposal()),/source_or_profile_pool_changed/);
+  await assert.rejects(c.ContextualTeamClient.load(f.index,f.directory,options(f,{record:replacement,fetcher,deliberate:true})),/source_version_conflict/);
+  assert.equal(count,1);
+});

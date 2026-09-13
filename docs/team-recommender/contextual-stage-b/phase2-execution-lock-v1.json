@@ -1,0 +1,313 @@
+{
+  "version": "phase2-three-cold-scopes-execution-lock-v1",
+  "created_at": "2026-09-13T23:11:26.053044+00:00",
+  "authority": "PHASE2-COLD-DEMAND-AUTHORITY.md",
+  "phase1_closed": true,
+  "helper_candidate_sha": "a815adc84ccf796e1e38f04686878f7439771a08",
+  "prior_product_sha": "5fdfc00f8fb25ad13468105b0c92b1d009834b8c",
+  "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+  "dependencies": {
+    "config/contextual_team/phase2-v1.json": "44acf909c2e02904217a498975a0671ddfacaa246c3a2f9b6e80f7354342b6b6",
+    "config/contextual_team/phase2-source-inputs-v2.json": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+    "tools/contextual_team_demand_contract.py": "54b55896ae1820eb5de41b7bdb7ba2e1bc4611f56dfda2583fcb25f224c15c9c",
+    "tools/contextual_team_references.py": "a5229f61579307b5024c0d1d76b661e1d42f7aa950c7685fb7910ad077a004fa",
+    "tools/contextual_team_phase2.py": "7327eda74066d3a022861c7a915f2198de9d23184b7b5dbadc9ce2b303e86bcd",
+    "tools/contextual_team_phase2_check.py": "9b2844a0445e2ca5bfc091a8ea1c816357a8c4fc9b7f45d68bfd7f1acb8e6fb8",
+    "tools/contextual_phase2_selection.mjs": "9a87ec5a8a3ca53a0260b46c6fa5855fd6efd12d8dba8e58a54bb732cf68c31f",
+    "tools/contextual_team_check.py": "55c7ce0dd6a76feeb5180669cc90189cb68e6060e8d6f75d44da6aba5a1d090c",
+    "config/team_recommender_executor/judge-d1.md": "713055f257e51c500d931f83eacb380593b99ad4f94f1924f79f6a097fad01f8"
+  },
+  "input_reuse_receipt_sha256": "9a6f5fc46e69ee01410134f8e57888b65cfbcb30d390d220002b14de1f5d2de9",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "preview_bundle_id": "e8a6fd71ccf3997a63f61224bdb3f2fc6e849a3c5fbf2599fd4f3434fd26188e",
+  "composer_sha256": "2c4f81633fd8a7fe1eb39331767c254933c04a367945f70b5573bce14d47768b",
+  "client_sha256": "fe54e1f6af32873b653650de988da210850f3fee41207d9209a12706fb194fba",
+  "selection": {
+    "alternative": "existing composer option index 1 when present",
+    "explanations": "primary members only; actual contribution and gap; exact cited claim in full profile document",
+    "individuals": "unique union of the two groups",
+    "negative": "actual negative/gap reasoning within the assessed set; never directory-wide infeasibility",
+    "primary": "existing composer option index 0"
+  },
+  "source_selection": [
+    {
+      "id": "363302:a-1",
+      "parent_id": "363302",
+      "source_id": "de697a2c3dc2aaca3bdca10672f320f7ab5a1836f9055144a6e3fa8671b3bbdb",
+      "catalog_source_id": "7794d39d4cf45e2e9b7de7ac4e66ef1945924557f3a4dad12c59c04c94d5ab52",
+      "interpretation_body_sha256": "84f737f8381091692274aec9c58a5b11fb7fd9f0dddd655df371f72a92df16c1",
+      "interpretation_wire_bytes": 35410,
+      "compatible_successful_interpretations": 0,
+      "existing_phase2_operations": 0
+    },
+    {
+      "id": "341997",
+      "parent_id": "341997",
+      "source_id": "f1d99a76191c7fe8037a362eabd327722219ded1ec91223495ba85b06340f7e7",
+      "catalog_source_id": "86ef83729fb15cb0f0ce0987a13ac6f65f35a6e78096a432c20f48337f4df0bf",
+      "interpretation_body_sha256": "cbf00fab15b9a62350f003c7f3c922d2cc02315eff9e7bdd10c1c8c631ad10d0",
+      "interpretation_wire_bytes": 20504,
+      "compatible_successful_interpretations": 0,
+      "existing_phase2_operations": 0
+    },
+    {
+      "id": "351715",
+      "parent_id": "351715",
+      "source_id": "313563f65edeab3a5c463a9f6a4f072967b871a6d021c609633581854a5dab7d",
+      "catalog_source_id": "55d22a22f080e15f60080516c0a2d9693404a0798406d0e43220822e4c3ad324",
+      "interpretation_body_sha256": "8efb786919478e881d8ffab5bfcf6d7b98eac69e8d260c23b086f95427ec6716",
+      "interpretation_wire_bytes": 35142,
+      "compatible_successful_interpretations": 0,
+      "existing_phase2_operations": 0
+    }
+  ],
+  "scope_order": [
+    "363302:a-1",
+    "341997",
+    "351715"
+  ],
+  "rationale": [
+    "Official DOE laboratory-science child with exact parent ownership and full applicable conditions.",
+    "Official mathematical-biology research purpose, rolling submission and target date.",
+    "Official plasma-science purpose and complete participating-program conditions; no branch selected implicitly."
+  ],
+  "prior_exposure": "Additional uncached stages; source families and audited profiles may have prior diagnostic exposure. Not untouched population validation.",
+  "source_policy": "Canonical context and bounded official supplements for concrete gaps; source-only selection before new outputs. No researcher enrichment, scientific retuning or replacement after outcomes.",
+  "currentness": "Existing authoritative calendar-date policy refreshed per action; official times retained as source evidence, not claimed as minute-level enforcement.",
+  "scientific_selection": "Unchanged Sonnet 5, Voyage 4 large 1024-role contract, full 155 eligible directory retrieval, existing per-contribution round robin max12, applicability/verification and exact deterministic composer.",
+  "budget": {
+    "authorization_id": "on-demand-team-offline-v2-20260909",
+    "base_inputs_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+    "count_cushion": "ceil(native_complete_packet_tokens*1.2)+1024; exact native count is cached before the paid claim",
+    "count_http_lifetime_maximum": 190,
+    "first_scope_id": "363302:a-1",
+    "maximum_graph_bytes": 200000,
+    "maximum_inventory_microusd": 2497240,
+    "maximum_new_attempts": 18,
+    "maximum_new_microusd": 2500000,
+    "maximum_wire_bytes": 128000,
+    "new_extensions": false,
+    "operations": [
+      {
+        "id": "363302:a-1:interpret",
+        "input_token_ceiling": 18000,
+        "maximum_microusd": 116000,
+        "output_token_ceiling": 8000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-interpret",
+        "scope_id": "363302:a-1",
+        "stage": "interpret"
+      },
+      {
+        "id": "363302:a-1:query",
+        "input_token_ceiling": 25000,
+        "maximum_microusd": 3000,
+        "output_token_ceiling": 0,
+        "provider": "voyage",
+        "purpose": "cb-p2-query",
+        "scope_id": "363302:a-1",
+        "stage": "query"
+      },
+      {
+        "id": "363302:a-1:assess",
+        "input_token_ceiling": 50000,
+        "maximum_microusd": 260000,
+        "output_token_ceiling": 16000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-assess",
+        "scope_id": "363302:a-1",
+        "stage": "assess"
+      },
+      {
+        "id": "363302:a-1:verify",
+        "input_token_ceiling": 42000,
+        "maximum_microusd": 324000,
+        "output_token_ceiling": 24000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-verify",
+        "scope_id": "363302:a-1",
+        "stage": "verify"
+      },
+      {
+        "id": "363302:a-1:check-group",
+        "input_token_ceiling": 24000,
+        "maximum_microusd": 78720,
+        "output_token_ceiling": 3072,
+        "provider": "anthropic",
+        "purpose": "cb-p2-check-group",
+        "scope_id": "363302:a-1",
+        "stage": "check-group"
+      },
+      {
+        "id": "363302:a-1:check-explanation",
+        "input_token_ceiling": 20000,
+        "maximum_microusd": 55360,
+        "output_token_ceiling": 1536,
+        "provider": "anthropic",
+        "purpose": "cb-p2-check-explanation",
+        "scope_id": "363302:a-1",
+        "stage": "check-explanation"
+      },
+      {
+        "id": "341997:interpret",
+        "input_token_ceiling": 11000,
+        "maximum_microusd": 102000,
+        "output_token_ceiling": 8000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-interpret",
+        "scope_id": "341997",
+        "stage": "interpret"
+      },
+      {
+        "id": "341997:query",
+        "input_token_ceiling": 25000,
+        "maximum_microusd": 3000,
+        "output_token_ceiling": 0,
+        "provider": "voyage",
+        "purpose": "cb-p2-query",
+        "scope_id": "341997",
+        "stage": "query"
+      },
+      {
+        "id": "341997:assess",
+        "input_token_ceiling": 50000,
+        "maximum_microusd": 260000,
+        "output_token_ceiling": 16000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-assess",
+        "scope_id": "341997",
+        "stage": "assess"
+      },
+      {
+        "id": "341997:verify",
+        "input_token_ceiling": 42000,
+        "maximum_microusd": 324000,
+        "output_token_ceiling": 24000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-verify",
+        "scope_id": "341997",
+        "stage": "verify"
+      },
+      {
+        "id": "341997:check-group",
+        "input_token_ceiling": 24000,
+        "maximum_microusd": 78720,
+        "output_token_ceiling": 3072,
+        "provider": "anthropic",
+        "purpose": "cb-p2-check-group",
+        "scope_id": "341997",
+        "stage": "check-group"
+      },
+      {
+        "id": "341997:check-explanation",
+        "input_token_ceiling": 20000,
+        "maximum_microusd": 55360,
+        "output_token_ceiling": 1536,
+        "provider": "anthropic",
+        "purpose": "cb-p2-check-explanation",
+        "scope_id": "341997",
+        "stage": "check-explanation"
+      },
+      {
+        "id": "351715:interpret",
+        "input_token_ceiling": 18000,
+        "maximum_microusd": 116000,
+        "output_token_ceiling": 8000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-interpret",
+        "scope_id": "351715",
+        "stage": "interpret"
+      },
+      {
+        "id": "351715:query",
+        "input_token_ceiling": 25000,
+        "maximum_microusd": 3000,
+        "output_token_ceiling": 0,
+        "provider": "voyage",
+        "purpose": "cb-p2-query",
+        "scope_id": "351715",
+        "stage": "query"
+      },
+      {
+        "id": "351715:assess",
+        "input_token_ceiling": 50000,
+        "maximum_microusd": 260000,
+        "output_token_ceiling": 16000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-assess",
+        "scope_id": "351715",
+        "stage": "assess"
+      },
+      {
+        "id": "351715:verify",
+        "input_token_ceiling": 42000,
+        "maximum_microusd": 324000,
+        "output_token_ceiling": 24000,
+        "provider": "anthropic",
+        "purpose": "cb-p2-verify",
+        "scope_id": "351715",
+        "stage": "verify"
+      },
+      {
+        "id": "351715:check-group",
+        "input_token_ceiling": 24000,
+        "maximum_microusd": 78720,
+        "output_token_ceiling": 3072,
+        "provider": "anthropic",
+        "purpose": "cb-p2-check-group",
+        "scope_id": "351715",
+        "stage": "check-group"
+      },
+      {
+        "id": "351715:check-explanation",
+        "input_token_ceiling": 20000,
+        "maximum_microusd": 55360,
+        "output_token_ceiling": 1536,
+        "provider": "anthropic",
+        "purpose": "cb-p2-check-explanation",
+        "scope_id": "351715",
+        "stage": "check-explanation"
+      }
+    ],
+    "preserved_attempts": 10,
+    "preserved_microusd": 1678020,
+    "prices_per_million": {
+      "anthropic": {
+        "input": 2,
+        "model": "claude-sonnet-5",
+        "output": 10
+      },
+      "voyage": {
+        "input": 0.12,
+        "model": "voyage-4-large"
+      }
+    },
+    "pricing_checked_on": "2026-09-13",
+    "prior_attempts": 662,
+    "prior_charge_microusd": 5821980,
+    "prior_request_rows_sha256": "640f79d9ac3f17be5b0026b96fd550126fb3db20247dabe81a8b49e91c6ba703",
+    "public_activation": false,
+    "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+    "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+    "scientific_contract": "contextual-cold-demand-references-v1",
+    "scientific_retuning": false,
+    "selection": {
+      "alternative": "existing composer option index 1 when present",
+      "explanations": "primary members only; actual contribution and gap; exact cited claim in full profile document",
+      "individuals": "unique union of the two groups",
+      "negative": "actual negative/gap reasoning within the assessed set; never directory-wide infeasibility",
+      "primary": "existing composer option index 0"
+    },
+    "sizing_owner_run": 34785915676,
+    "source_inputs_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+    "version": "contextual-phase2-cold-v1"
+  },
+  "authoritative_owner_run": 34785915676,
+  "checkpoint_sha256": "1b4015a51c4648edeecfd4e9872964aad93c2d86d1b2cce858f287d7eb9673f1",
+  "remaining_native_count_http_capacity": 23,
+  "expected_additional_native_counts_max": 15,
+  "paid_calls_before_lock": 0,
+  "new_assessments_or_grades_before_lock": 0,
+  "validation": "Focused contracts now; exact-head CI/review before trusted deployment. Normal browser Build, concurrent/repeated visitors, fixed output checks and local edits; full configured E2E/accessibility/resource/rollback once at combined candidate.",
+  "release_boundary": "Restricted Access preview only; no public app/registry publication, activation, recurring allowance, Stage4 or new human packet."
+}

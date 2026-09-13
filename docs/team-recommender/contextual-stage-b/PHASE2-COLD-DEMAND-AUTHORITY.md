@@ -27,3 +27,8 @@ Narrow trusted-helper/service changes may receive required CI and independent ex
 No public application/registry release, Stage 4, subscriber activity, account change, recurring allowance, new provider/model or profile audit is authorized. Source-only bounded official retrieval may close concrete gaps; it does not authorize rewriting profiles or selecting cases by favorable outcomes.
 
 Final deliverable: `reports/phase-2-cold-demand-and-release-readiness.md`, plus updates to the existing PLAN, HANDOFF and state. Report every executed, reused, missing and failed denominator, actual charges and the remaining reserve. Stop for owner review after Phase 2.
+
+
+## Explicit checkpoint resumption — September 13, 2026
+
+The owner instructed: “Okay continue with the persistence repair and head review and continuing phase 2 work.” This resumes the named PR241 checkpoint at product `6b70f971e77eed3dc166d4f32139fa2b5c15d7be` and helper `3f3db97540ce734923367ff1fb775638d8a48b65`. Repair the complete interrupted-write invariant, validate/review the exact head, and continue the existing Phase 2 packages after the prerequisite clears. The prior blocked report and findings remain history. This does not add spending authority, permit public activation, or reopen Phase 1.

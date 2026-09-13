@@ -1,0 +1,63 @@
+{
+  "version": "phase2-readonly-input-preflight-v2",
+  "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+  "owner_run": 34785915676,
+  "ledger_sha256": "03b81d8af0369617f1f87b0cf573c22d34dd1f30d6795869648fe7e1bf201b74",
+  "rows_sha256": "640f79d9ac3f17be5b0026b96fd550126fb3db20247dabe81a8b49e91c6ba703",
+  "charged_microusd": 5821980,
+  "attempts": 662,
+  "outstanding": 0,
+  "profile_vector_rows_reused": 155,
+  "profile_vector_receipts": [
+    {
+      "key": "dbd6479995980a27c9c16c82ce2892a3c44358436e62e46128d55f428bc07785",
+      "request_id": "44165fe0070943aeba8ffd86e190f1ad",
+      "cache_hit": true,
+      "reused_vector_rows": 80
+    },
+    {
+      "key": "3176cfa136714b3b8d51f0ec2fe2ab9f0f4b3c60a7974d532c2f25ad008189d9",
+      "request_id": "277a66186eaa4a15bf63d0a0b884b18b",
+      "cache_hit": true,
+      "reused_vector_rows": 75
+    }
+  ],
+  "missing_document_rows": 0,
+  "scopes": [
+    {
+      "id": "363302:a-1",
+      "parent_id": "363302",
+      "source_id": "de697a2c3dc2aaca3bdca10672f320f7ab5a1836f9055144a6e3fa8671b3bbdb",
+      "catalog_source_id": "7794d39d4cf45e2e9b7de7ac4e66ef1945924557f3a4dad12c59c04c94d5ab52",
+      "interpretation_body_sha256": "84f737f8381091692274aec9c58a5b11fb7fd9f0dddd655df371f72a92df16c1",
+      "interpretation_wire_bytes": 35410,
+      "compatible_successful_interpretations": 0,
+      "existing_phase2_operations": 0
+    },
+    {
+      "id": "341997",
+      "parent_id": "341997",
+      "source_id": "f1d99a76191c7fe8037a362eabd327722219ded1ec91223495ba85b06340f7e7",
+      "catalog_source_id": "86ef83729fb15cb0f0ce0987a13ac6f65f35a6e78096a432c20f48337f4df0bf",
+      "interpretation_body_sha256": "cbf00fab15b9a62350f003c7f3c922d2cc02315eff9e7bdd10c1c8c631ad10d0",
+      "interpretation_wire_bytes": 20504,
+      "compatible_successful_interpretations": 0,
+      "existing_phase2_operations": 0
+    },
+    {
+      "id": "351715",
+      "parent_id": "351715",
+      "source_id": "313563f65edeab3a5c463a9f6a4f072967b871a6d021c609633581854a5dab7d",
+      "catalog_source_id": "55d22a22f080e15f60080516c0a2d9693404a0798406d0e43220822e4c3ad324",
+      "interpretation_body_sha256": "8efb786919478e881d8ffab5bfcf6d7b98eac69e8d260c23b086f95427ec6716",
+      "interpretation_wire_bytes": 35142,
+      "compatible_successful_interpretations": 0,
+      "existing_phase2_operations": 0
+    }
+  ],
+  "paid_calls": 0,
+  "native_count_http_calls": 0,
+  "computed_recommendations": 0,
+  "historical_sizing_release_id": "3d15781cc4c919bfe844a674f0354f5241cf5dafc03f6ef11c27f84c15f7de60",
+  "prior_receipt_sha256": "09892ab37af05dba4184f18f4739f8e36b98c6095774dc0ebebefeeb012d2a04"
+}
