@@ -1,0 +1,58 @@
+{
+  "version": "contextual-real-validation-lock-v1",
+  "locked_at": "2026-09-13T08:37:11.955965+00:00",
+  "product_code_commit": "870737f6a13b625cb88952951ade7f2b525bfff8",
+  "trusted_code_commit": "dc48d7da8077d52773e89db76e9e772bfd0af469",
+  "deployment_run": 34747922885,
+  "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+  "input_package_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+  "input_lock_sha256": "8aa7c4652fe4618019c5faf12f1a83ea6b48d1dc12def9605157077b2518e752",
+  "ledger_owner_run": 34606280661,
+  "ledger_sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+  "prior_charged_microusd": 4290655,
+  "prior_attempts": 629,
+  "outstanding": 0,
+  "maximum_new_microusd": 5000000,
+  "maximum_new_attempts": 40,
+  "complete_sequence_microusd": 4995414,
+  "complete_sequence_attempts": 36,
+  "exact_preflight_reproduced": true,
+  "new_provider_calls": 0,
+  "new_outputs_observed": 0,
+  "prices_rechecked_date": "2026-09-13",
+  "price_sources": [
+    "https://platform.claude.com/docs/en/about-claude/pricing",
+    "https://docs.voyageai.com/docs/pricing"
+  ],
+  "fixed_scope_order": [
+    "361207",
+    "361208",
+    "332894",
+    "344592:ab-0025",
+    "345241:tdac-baa-004",
+    "362856",
+    "363069",
+    "344592"
+  ],
+  "extension_rule": {
+    "scope": "First action-current scope in the original locked order that returns a validated graph with at least one eligible unassessed person, regardless of whether it yields an automatic group.",
+    "person": "Among eligible unassessed people, highest maximum cosine to that initial scope interpretation contribution query, using its existing exact document/query vectors; tie by canonical person ID ascending. No extra query or model to select the person.",
+    "count": 1,
+    "already_assessed": "Excluded; extension reuses unchanged cached stages."
+  },
+  "check_rule": "Unchanged input-lock-v1: deterministic primary groups for first two ready graph-producing distinct source groups in original order, at most one group/every-member and one explanation request per group. Never substitute after grades.",
+  "human_items": 0,
+  "no_favorable_retries": true,
+  "currentness": "Fresh authoritative action clock for each interaction and executor start. Historical fixed comparison clock does not authorize an expired live request.",
+  "public_activation": false,
+  "runtime_checks": [
+    "ordinary startup has no team request",
+    "initial build and same-job contention",
+    "status/reload and completed cache reuse",
+    "option switch and ordinary edits: zero provider requests",
+    "one explicit unassessed-person extension",
+    "stale/currentness/error and source/profile invalidation fixtures",
+    "actual graph package/heap/cold-warm timings without forced garbage collection"
+  ],
+  "prior_full_browser_evidence": "Preserved 117-case run plus four focused corrections; repeat only affected integration checks."
+}
