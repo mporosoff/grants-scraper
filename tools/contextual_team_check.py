@@ -134,6 +134,8 @@ def main():
     requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
     if isinstance(requested,dict) and 'phase2_token_preflight' in requested:
         from tools.contextual_team_token_preflight import run
+    elif isinstance(requested,dict) and 'phase2_output_check' in requested:
+        from tools.contextual_team_phase2_check import run
     else:
         from tools.contextual_team_phase1 import run
     run(args)

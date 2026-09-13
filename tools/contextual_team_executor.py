@@ -72,6 +72,13 @@ class Runner:
     def graph_metadata(self,graph):
         return graph
 
+    def reservation_cost(self,purpose,body,metadata):
+        if purpose in ('cb-documents','cb-query'):
+            bound=len(encoded(body))+1024
+            return bound,(bound*3+24)//25,{}
+        bound,amount=text_reservation(body)
+        return bound,amount,{}
+
     def failure_state(self,error):
         # Exception text is not a dispatch receipt. Persisted uncertainty wins
         # even if a later cache/checkpoint failure obscures the first exception.
@@ -80,11 +87,7 @@ class Runner:
 
     def request(self,purpose,logical,body,check,*,row_inputs=(),ceiling=None,repair_metadata=None):
         if time.monotonic()>self.deadline:raise Deferred('contextual_finite_job_deadline')
-        provider='voyage' if purpose in ('cb-documents','cb-query') else 'anthropic'
-        if provider=='anthropic':bound,amount=text_reservation(body)
-        else:
-            bound=len(encoded(body))+1024;amount=(bound*3+24)//25
-        if ceiling is not None and bound>ceiling:raise Deferred('contextual_complete_packet_bound_no_truncation')
+        provider='voyage' if purpose in ('cb-documents','cb-query','cb-p2-query') else 'anthropic'
         key=identity([AUTHORIZATION_ID,'contextual-v1',logical])
         body_id=identity(body);cache=self.state/'cache'/(key+'.json')
         rows=[r for r in self.ledger.read()['requests'] if r['key']==key]
@@ -107,15 +110,17 @@ class Runner:
         if self.has_unknown_request():raise RecoveryRequired('contextual_outstanding_request_requires_recovery')
         secret=os.environ.get('VOYAGE_API_KEY' if provider=='voyage' else 'ANTHROPIC_API_KEY')
         if not secret:raise ConfigurationFailure('contextual_provider_credential_missing')
+        bound,amount,sizing_metadata=self.reservation_cost(purpose,body,repair_metadata or {})
+        if ceiling is not None and bound>ceiling:raise Deferred('contextual_complete_packet_bound_no_truncation')
         token=self.ledger.reserve_experiment(provider,body['model'],2,key,amount,1,trusted_route=True,
             input_tokens=bound,output_tokens=body.get('max_tokens',0),
             execution_metadata={'packet_sha256':INPUT_SHA,'body_sha256':body_id,'purpose':purpose,
                 'code_sha':os.environ['GITHUB_SHA'],'row_inputs':list(row_inputs),'judge_items':[],
-                'execution_capacity':CAPACITY_VERSION,**(repair_metadata or {})})
+                'execution_capacity':CAPACITY_VERSION,**(repair_metadata or {}),**sizing_metadata})
         receipt={'key':key,'request_id':token,'purpose':purpose,'body_sha256':body_id,
                  'reserved_microusd':amount,'status':'reserved_unknown','code_sha':os.environ['GITHUB_SHA'],
                  'execution_capacity':CAPACITY_VERSION,'output_token_ceiling':body.get('max_tokens',0),
-                 **(repair_metadata or {})}
+                 **(repair_metadata or {}),**sizing_metadata}
         started=time.monotonic()
         self.crash('after_reserve')
         try:
@@ -302,11 +307,16 @@ def prepare(state,reservation,job_path):
     if configuration.get('option1'):
         from tools.contextual_team_option1 import ensure_remaining_plan_fits
         ensure_remaining_plan_fits(ledger.read(),configuration['option1'])
+    if configuration.get('phase2'):
+        from tools.contextual_team_phase2 import ensure_remaining_plan_fits
+        ensure_remaining_plan_fits(ledger.read())
     atomic_json(reservation,{'authorization_id':AUTHORIZATION_ID,'run_id':os.environ['GITHUB_RUN_ID'],
         'attempt':os.environ['GITHUB_RUN_ATTEMPT'],'code_sha':os.environ['GITHUB_SHA'],
         'job_id':job['job_id'],'input_sha256':INPUT_SHA,'prior_ledger_sha256':existing.sha(ledger.path.read_bytes()),
         'maximum_logical_spend_usd':10,
-        **({'option1_release':configuration['option1']['release_id'],'option1_task_maximum_usd':1.5,'option1_attempts_maximum':16,
+        **({'phase2_release':configuration['phase2']['release_id'],'phase2_maximum_new_microusd':2_500_000,
+            'phase2_maximum_new_attempts':18,'preserved_microusd':1_678_020,'preserved_attempts':10} if configuration.get('phase2') else
+           {'option1_release':configuration['option1']['release_id'],'option1_task_maximum_usd':1.5,'option1_attempts_maximum':16,
             'preserved_microusd':3004098,'preserved_attempts':21} if configuration.get('option1') else
            {'contextual_task_maximum_usd':5,'contextual_attempts_maximum':40})})
 
@@ -322,7 +332,8 @@ def main():
     existing.trusted_environment(contextual_job=job)
     if args.action=='prepare':prepare(args.state,args.reservation,args.job);return
     scope=resolve_job(config,job)
-    runner=(Option1Runner if config.get('option1') else Runner)(args.state,config)
+    from tools.contextual_team_phase2 import Phase2Runner
+    runner=(Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
     try:
         result=runner.run_scope(scope,job['person_id'] or None) if os.environ.get('CONTEXTUAL_ACTION_CURRENT')=='true' else {'state':'action_blocked','scope_id':scope['id']}
     except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,OSError,requests.RequestException,Refusal) as error:
