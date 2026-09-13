@@ -1,0 +1,179 @@
+{
+  "version": "phase1-reference-accounting-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "run_id": 34775743077,
+  "state_artifact_id": 10323207152,
+  "reservation_artifact_id": 10323406505,
+  "result_artifact_id": 10323187316,
+  "code_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
+  "lock_id": "9a01c939f01d7e70a108e0110a7650f14909bde99f40a2487d7f1dde4cc894b0",
+  "ledger_sha256": "03b81d8af0369617f1f87b0cf573c22d34dd1f30d6795869648fe7e1bf201b74",
+  "checkpoint_sha256": "7ff91ac743a74d28de323ec59dd14956059b74b3b2e22601dfd83f7df4a62981",
+  "verified_checkpoint_file_count": 1304,
+  "original_660_rows_unchanged": true,
+  "all_prior_caches_and_receipts_byte_identical": true,
+  "duplicate_request_ids": 0,
+  "duplicate_logical_keys": 0,
+  "prior_charge_microusd": 5779176,
+  "new_charge_microusd": 42804,
+  "new_attempts": 2,
+  "cumulative_charge_microusd": 5821980,
+  "attempts_used": 662,
+  "outstanding_microusd": 0,
+  "remaining_microusd": 4178020,
+  "remaining_attempts": 28,
+  "phase1_total_charge_microusd": 63566,
+  "phase1_total_attempts": 3,
+  "phase1_ceiling_microusd": 250000,
+  "prior_original_option1_failure_microusd": 16528,
+  "human_judgments": 0,
+  "exact_cached_result_read_revalidations": 6,
+  "new_requests": [
+    {
+      "attempt": 1,
+      "body_sha256": "868474ab21bb7c87388a695197cc94d0b835cb23fec0b28315a4dedf9b00455d",
+      "charged_microusd": 22558,
+      "code_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
+      "dispatch_claim": "irreversible-v1",
+      "execution_capacity": "contextual-output-capacity-v2",
+      "id": "21259d12a5554cb3a9aed1aab8fad080",
+      "judge_items": [],
+      "key": "2891d4a8ee79131c21ccda4d2c3094f5a71ee02f7d024eaf28dddf165996f621",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+      "phase1_lock": "9a01c939f01d7e70a108e0110a7650f14909bde99f40a2487d7f1dde4cc894b0",
+      "provider": "anthropic",
+      "purpose": "cb-p1-reference-group",
+      "repair_of": "53020ccfc01749f3b7971c2ca442102f",
+      "reserved_input_tokens": 22248,
+      "reserved_microusd": 64976,
+      "reserved_output_tokens": 2048,
+      "response_contract_sha256": "ab527b12572c1a5e031316bbd7e8ae741ea1256f26418977a2857900ec23509e",
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 7784,
+        "output_tokens": 699,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "attempt": 1,
+      "body_sha256": "2c00e41aa7679c6b17737691a3b49c64b563569ff691e3ba7b39c37b1c882203",
+      "charged_microusd": 20246,
+      "code_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
+      "dispatch_claim": "irreversible-v1",
+      "execution_capacity": "contextual-output-capacity-v2",
+      "id": "0895738a761d44fab93ddcf0658725d3",
+      "judge_items": [],
+      "key": "653e930b7b874cbf143429853f54203c8695a9a81efe2617e5db0f24b5c0b469",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+      "phase1_lock": "9a01c939f01d7e70a108e0110a7650f14909bde99f40a2487d7f1dde4cc894b0",
+      "provider": "anthropic",
+      "purpose": "cb-p1-reference-explanation",
+      "repair_of": "",
+      "reserved_input_tokens": 23263,
+      "reserved_microusd": 67006,
+      "reserved_output_tokens": 2048,
+      "response_contract_sha256": "ab527b12572c1a5e031316bbd7e8ae741ea1256f26418977a2857900ec23509e",
+      "row_inputs": [],
+      "stage": 2,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 7893,
+        "output_tokens": 446,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "body_sha256": "868474ab21bb7c87388a695197cc94d0b835cb23fec0b28315a4dedf9b00455d",
+      "charged_microusd": 22558,
+      "code_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
+      "elapsed_seconds": 10.007078,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "2891d4a8ee79131c21ccda4d2c3094f5a71ee02f7d024eaf28dddf165996f621",
+      "output_token_ceiling": 2048,
+      "phase1_lock": "9a01c939f01d7e70a108e0110a7650f14909bde99f40a2487d7f1dde4cc894b0",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p1-reference-group",
+      "repair_of": "53020ccfc01749f3b7971c2ca442102f",
+      "request_id": "21259d12a5554cb3a9aed1aab8fad080",
+      "reserved_microusd": 64976,
+      "response_contract_sha256": "ab527b12572c1a5e031316bbd7e8ae741ea1256f26418977a2857900ec23509e",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 7784,
+        "output_tokens": 699,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "body_sha256": "2c00e41aa7679c6b17737691a3b49c64b563569ff691e3ba7b39c37b1c882203",
+      "charged_microusd": 20246,
+      "code_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
+      "elapsed_seconds": 6.14019,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "653e930b7b874cbf143429853f54203c8695a9a81efe2617e5db0f24b5c0b469",
+      "output_token_ceiling": 2048,
+      "phase1_lock": "9a01c939f01d7e70a108e0110a7650f14909bde99f40a2487d7f1dde4cc894b0",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p1-reference-explanation",
+      "repair_of": "",
+      "request_id": "0895738a761d44fab93ddcf0658725d3",
+      "reserved_microusd": 67006,
+      "response_contract_sha256": "ab527b12572c1a5e031316bbd7e8ae741ea1256f26418977a2857900ec23509e",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 7893,
+        "output_tokens": 446,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    }
+  ]
+}

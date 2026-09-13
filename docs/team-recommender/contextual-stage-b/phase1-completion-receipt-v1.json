@@ -1,0 +1,62 @@
+{
+  "version": "phase1-completion-receipt-v1",
+  "created_at": "2026-09-13T18:55:36.954852+00:00",
+  "disposition": "PHASE 1 CLOSED",
+  "starting_product_sha": "ea11efdc975c41f31a874090c62cb52b54060e6d",
+  "reviewed_helper_sha": "0fd6ca232dd8c582fc90764caafc1747707cc704",
+  "helper_pr": 240,
+  "review_summary_comment": 5655289536,
+  "clean_review_reaction": 503597275,
+  "review_completed_at": "2026-09-13T18:45:16Z",
+  "required_ci": 34775421829,
+  "helper_merge_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
+  "product_reconciliation_sha": "1528d18ca1e22f65196823aa8b93387cf686fb20",
+  "pre_dispatch_commit": "197c038aa9039017535980753fa9e00a65903c3f",
+  "run_id": 34775743077,
+  "run_result": "success",
+  "accepted_individuals": {
+    "strong": 1,
+    "plausible": 2,
+    "unrelated": 0,
+    "insufficient-information": 0
+  },
+  "accepted_groups": {
+    "plausible": 1
+  },
+  "accepted_explanations": {
+    "faithful": 3
+  },
+  "missing_question_ids": [],
+  "human_judgments": 0,
+  "new_human_items": 0,
+  "focused_checks_helper": 78,
+  "focused_checks_product": 78,
+  "required_python_tests": 1407,
+  "required_node_tests": 784,
+  "duplicate_fixture_dispatches": 0,
+  "original_graphs_reproduced": 4,
+  "original_application_bytes_unchanged": true,
+  "reused_e2e_count": 117,
+  "new_e2e_run": false,
+  "application_deployment": false,
+  "main_release_run": 34775652211,
+  "main_release_result": "success; generation, assembly, publication, Pages and verify-live skipped",
+  "public_activation": false,
+  "remaining_microusd": 4178020,
+  "remaining_attempts": 28,
+  "new_charge_microusd": 42804,
+  "new_attempts": 2,
+  "phase1_total_charge_microusd": 63566,
+  "phase1_total_attempts": 3,
+  "source_and_graph_regeneration": false,
+  "report": "docs/team-recommender/reports/phase-1-contextual-assessment-completion.md",
+  "report_sha256": "2e6d3d1d773844bea9091870847992da1feb1ba0e744871ce2bc3c3df07d4410",
+  "files": {
+    "contextual-stage-b/PHASE1-REFERENCE-REPAIR-AUTHORITY.md": "bb35776e6489aefb348fe6ac60bed1e2a8773dd55f1061c720e860ef6a5bdd0c",
+    "contextual-stage-b/phase1-check-execution-lock-v2.json": "b8100bcee4a5ca22f4cfc55de1ce13d169af0103d6d962739868b9b0991a57c0",
+    "contextual-stage-b/phase1-reference-pre-dispatch-v1.json": "86427e54c18d3c75db65b70b7838db98edfec1d37cefc9495941ff6bb46da67f",
+    "contextual-stage-b/phase1-reference-accounting-v1.json": "55c7501b7e1d7e7ea5d99b0a4521b110571e579b4c7b17adf13c7b2d29ba7f80",
+    "contextual-stage-b/phase1-reference-verdicts-v1.json": "09eab3b7cdf6c8f8de87e841e8832dbff0b6533537a05c470aff61506b7b2c44",
+    "reports/phase-1-contextual-assessment-completion.md": "2e6d3d1d773844bea9091870847992da1feb1ba0e744871ce2bc3c3df07d4410"
+  }
+}

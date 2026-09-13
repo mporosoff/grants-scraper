@@ -1,0 +1,69 @@
+{
+  "version": "phase1-reference-verdicts-v1",
+  "run_id": 34775743077,
+  "lock_id": "9a01c939f01d7e70a108e0110a7650f14909bde99f40a2487d7f1dde4cc894b0",
+  "model_sourced": true,
+  "human_judgments": 0,
+  "results": [
+    {
+      "body_sha256": "868474ab21bb7c87388a695197cc94d0b835cb23fec0b28315a4dedf9b00455d",
+      "kind": "group",
+      "scope_id": "332894",
+      "value": {
+        "verdicts": [
+          {
+            "evidence_ref": "urh-000091",
+            "item_id": "group",
+            "reason": "Person-1 (superconducting circuit QED, qubit encoding, quantum sensing) is a strong fit for LQC qubit development thrusts; person-2 contributes non-von-Neumann/Ising-machine architectures and classical-overhead reduction relevant to associated quantum information technology; person-3 contributes first-principles modeling of topological and superconducting materials relevant to qubit material design. Each has a plausible-or-better individual link to the call, and the trio could plausibly be discussed together as covering qubit devices, materials, and supporting classical architecture, though no direct evidence shows they have worked together or that architecture/materials work was aimed specifically at qubits.",
+            "verdict": "plausible"
+          },
+          {
+            "evidence_ref": "urh-000091-c001",
+            "item_id": "person-1",
+            "reason": "Direct, specific match: superconducting circuit QED with Josephson junctions and encoding quantum information in nonlinear oscillators is precisely the qubit development/quantum computing focus the LQC BAA solicits, with additional quantum-sensing relevance (a named secondary interest).",
+            "verdict": "strong"
+          },
+          {
+            "evidence_ref": "urh-000099-c001",
+            "item_id": "person-2",
+            "reason": "Non-von-Neumann optical/mixed-signal computing (including Ising machines) and reducing classical-component overhead are reasonable topics adjacent to the BAA's interest in 'reducing the overhead of classical components in quantum information technology,' though the person's work is not shown to be about qubits or QIS specifically, making this plausible rather than strong.",
+            "verdict": "plausible"
+          },
+          {
+            "evidence_ref": "urh-000126-c002",
+            "item_id": "person-3",
+            "reason": "Study of topological phases, superconductivity and polar/ferroelectric materials via first-principles methods is a reasonable contribution to material selection questions named in the BAA (e.g., 'material selection' as a limiting factor for qubit performance), but no direct link to qubit devices or QIST research is demonstrated, so this is plausible rather than strong.",
+            "verdict": "plausible"
+          }
+        ]
+      }
+    },
+    {
+      "body_sha256": "2c00e41aa7679c6b17737691a3b49c64b563569ff691e3ba7b39c37b1c882203",
+      "kind": "explanation",
+      "scope_id": "332894",
+      "value": {
+        "verdicts": [
+          {
+            "evidence_ref": "urh-000091-c001",
+            "item_id": "explanation-1",
+            "reason": "The claim directly states use of lithographically defined superconducting circuits to manipulate microwave quantum states, and the assertion faithfully paraphrases this as addressing qubit device design and control, which is consistent with the LQC's stated interest in device design/control limits. The qualification that this is not a capability certificate is preserved.",
+            "verdict": "faithful"
+          },
+          {
+            "evidence_ref": "urh-000099-c003",
+            "item_id": "explanation-2",
+            "reason": "The claim supports 'develops practical architecture solutions informed by device and circuit behavior' verbatim as cited, and the assertion accurately frames this as a classical-computing optimization method with an explicit limitation noting no evidenced application to quantum systems specifically, which matches the retained evidence and avoids overclaiming.",
+            "verdict": "faithful"
+          },
+          {
+            "evidence_ref": "urh-000126-c001",
+            "item_id": "explanation-3",
+            "reason": "The claim supports the description of DFT and theoretical analysis for structure-property prediction, and the assertion appropriately labels this as a transferable method while explicitly noting the lack of direct application to qubit gate fidelity, consistent with the retained evidence and without asserting demonstrated capability in that specific domain.",
+            "verdict": "faithful"
+          }
+        ]
+      }
+    }
+  ]
+}
