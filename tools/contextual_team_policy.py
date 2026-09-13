@@ -23,6 +23,9 @@ def inputs():
 
 
 def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens):
+    if metadata.get('purpose','').startswith('cb-p2-'):
+        from tools.contextual_team_phase2 import check_reservation as phase2_check
+        return phase2_check(state,provider,metadata,amount,input_tokens,output_tokens)
     if metadata.get('purpose') in {'cb-o1-check-group','cb-o1-check-explanation'}:
         raise Deferred('legacy_option1_checks_closed_use_exact_phase1_authority')
     if metadata.get('purpose','').startswith('cb-p1-'):

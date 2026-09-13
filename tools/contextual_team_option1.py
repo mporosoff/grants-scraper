@@ -25,6 +25,12 @@ def plan():
 
 
 def configuration_for_job(job):
+    from tools.contextual_team_phase2 import RELEASE as phase2_release, configuration as phase2_configuration
+    if job['release_id']==phase2_release:
+        config=phase2_configuration()
+        if job.get('person_id') or job['scope_id'] not in {s['id'] for s in config['scopes']}:
+            raise ValueError('outside_locked_phase2_jobs')
+        return config
     config=inputs();p=plan()
     if job['release_id']==config['snapshot_id']:return config
     if job['release_id']!=p['release_id']:raise ValueError('unapproved_option1_release')

@@ -2,6 +2,9 @@
 // in the existing serialized protected-main workflow, never in this Worker.
 import inputs from '../../../config/contextual_team/inputs-v1.json' with {type:'json'};
 import option1 from '../../../config/contextual_team/option1-v1.json' with {type:'json'};
+import phase2 from '../../../config/contextual_team/phase2-v1.json' with {type:'json'};
+import phase2Sources from '../../../config/contextual_team/phase2-source-inputs-v2.json' with {type:'json'};
+import {previewResponse} from './contextual-preview.js';
 import {CONSOLE_HTML,CONSOLE_JS} from './contextual-console.js';
 import {ACCESS_HTML,ACCESS_JS} from './contextual-access.js';
 import '../../../assets/submission-schedule.js';
@@ -9,7 +12,8 @@ import '../../../assets/search-query.js';
 import '../../../assets/search-retrieval.js';
 
 const RELEASE=option1.release_id;
-const allowedRelease=id=>id===RELEASE||id===inputs.snapshot_id;
+const allowedRelease=id=>id===RELEASE||id===inputs.snapshot_id||id===phase2.release_id;
+const releaseScopes=id=>id===phase2.release_id?phase2Sources.scopes:inputs.scopes;
 const VALIDATION_ORIGIN='http://127.0.0.1:8876';
 const WORKFLOW='.github/workflows/team-recommender-offline.yml';
 const states=new Set(['ready','ready_with_gaps','no_supported_group_in_assessed_set','needs_scope_selection',
@@ -32,12 +36,23 @@ function publicJob(row,scope,now,release=RELEASE){
   const recovery=row?.state==='recovery_required'||result?.result?.state==='recovery_required';
   return {release_id:release,scope_id:scope.id,job_id:row?.job_id||null,
     state:recovery?'recovery_required':!current(scope,now)?'action_blocked':result?.result?.state||row?.state||scope.state,
-    ...(result&&(recovery||current(scope,now))?{result:result.result,run_id:row.run_id,code_sha:row.code_sha}:{}),
+    ...(result&&(recovery||current(scope,now))?{result:result.result,run_id:row.run_id,code_sha:row.code_sha,
+      stage_timings:result.stage_timings||[],created_at:row.created_at,updated_at:row.updated_at}:{}),
     public_activation:false};
 }
 
 export class ContextualStore {
   constructor(db){this.db=db;}
+  async controls(release){
+    return await this.db.prepare('SELECT * FROM contextual_trial_controls WHERE release_id=?').bind(release).first()
+      ||{cached_enabled:1,new_paid_enabled:1};
+  }
+  async setControls(release,value,now){
+    await this.db.prepare(`INSERT INTO contextual_trial_controls(release_id,cached_enabled,new_paid_enabled,updated_at)
+      VALUES(?,?,?,?) ON CONFLICT(release_id) DO UPDATE SET cached_enabled=excluded.cached_enabled,
+      new_paid_enabled=excluded.new_paid_enabled,updated_at=excluded.updated_at`)
+      .bind(release,+value.cached_enabled,+value.new_paid_enabled,now).run();
+  }
   byId(id){return this.db.prepare('SELECT * FROM contextual_validation_jobs WHERE job_id=?').bind(id).first();}
   async insert(job,now){
     const result=await this.db.prepare(`INSERT INTO contextual_validation_jobs
@@ -87,6 +102,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
     try{
       const internal=path.startsWith('/internal/');
       const actor=internal?await authenticateInternal(request,env):await authenticateAdmin(request,env,fetchImpl);
+      if(request.method==='GET'&&path.startsWith('/admin/contextual/preview/'))return previewResponse(path);
       if(request.method==='GET'&&['/admin/contextual/access','/admin/contextual/access.js'].includes(path))return new Response(path.endsWith('.js')?ACCESS_JS:ACCESS_HTML,
         {headers:{...headers,'Content-Type':path.endsWith('.js')?'text/javascript; charset=utf-8':'text/html; charset=utf-8',
           'Content-Security-Policy':"default-src 'none'; script-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}});
@@ -101,6 +117,17 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
         return json(200,{release_id:RELEASE,registry_generation:inputs.registry_generation,public_activation:false,
           scopes:inputs.scopes.filter(s=>option1.scopes.some(v=>v.id===s.id)).map(s=>({id:s.id,parent_id:s.parent_id,title:s.science.title,state:current(s,now())?s.state:'action_blocked'}))});
       const store=storeFactory(env);
+      if(path==='/admin/api/contextual/controls'&&['GET','POST'].includes(request.method)){
+        if(request.method==='POST'){
+          const value=await body(request);
+          if(Object.keys(value).sort().join(',')!=='cached_enabled,new_paid_enabled'||
+            typeof value.cached_enabled!=='boolean'||typeof value.new_paid_enabled!=='boolean')fail('contextual_invalid_control');
+          await store.setControls(phase2.release_id,value,now().toISOString());
+        }
+        return json(200,{release_id:phase2.release_id,...await store.controls(phase2.release_id),
+          maximum_workflows:3,maximum_daily_workflows:3,maximum_concurrency:1,expansion_enabled:false,
+          maximum_phase_microusd:phase2.maximum_new_microusd,maximum_phase_attempts:phase2.maximum_new_attempts,public_activation:false});
+      }
       if(internal){
         if(request.method!=='POST'||!['/internal/contextual/start','/internal/contextual/result'].includes(path))fail('contextual_not_found',404);
         const value=await body(request,200000);
@@ -131,19 +158,23 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if(path!=='/admin/api/contextual/jobs'||!['GET','POST'].includes(request.method))fail('contextual_not_found',404);
       const value=request.method==='POST'?await body(request):Object.fromEntries(url.searchParams);
       if(Object.keys(value).sort().join(',')!=='person_id,release_id,scope_id'||!allowedRelease(value.release_id))fail('contextual_version_conflict',409);
-      const scope=inputs.scopes.find(s=>s.id===value.scope_id);
+      const scope=releaseScopes(value.release_id).find(s=>s.id===value.scope_id),p2=value.release_id===phase2.release_id;
       if(!scope||typeof value.person_id!=='string'||value.person_id&&!inputs.people.some(p=>p.person_id===value.person_id))fail('contextual_unapproved_identity');
       const job={...value,job_id:await hash([value.release_id,value.scope_id,value.person_id])};
       let row=await store.byId(job.job_id);
+      const controls=p2?await store.controls(value.release_id):null;
+      if(controls&&!controls.cached_enabled)return json(503,{state:'failed',error:'contextual_cached_serving_disabled'});
       if(request.method==='GET'||row)return json(200,publicJob(row,scope,now(),value.release_id));
       if(!current(scope,now())||scope.state!=='unassessed')return json(200,publicJob(null,scope,now(),value.release_id));
-      if(value.release_id!==RELEASE||!option1.scopes.some(s=>s.id===scope.id)||
-        (value.person_id&&(scope.id!=='332894'||value.person_id!==option1.extension.person_id)))fail('outside_option1_paid_inventory',403);
-      if(scope.id!==option1.scopes[0].id||value.person_id){
-        const first=await store.byId(await hash([RELEASE,option1.scopes[0].id,'']));
+      if(p2&&(value.person_id||!controls.new_paid_enabled))fail(value.person_id?'phase2_expansion_not_authorized':'contextual_new_paid_work_disabled',403);
+      if(!p2&&(value.release_id!==RELEASE||!option1.scopes.some(s=>s.id===scope.id)||
+        (value.person_id&&(scope.id!=='332894'||value.person_id!==option1.extension.person_id))))fail('outside_option1_paid_inventory',403);
+      const firstScope=p2?phase2.first_scope_id:option1.scopes[0].id;
+      if(scope.id!==firstScope||value.person_id){
+        const first=await store.byId(await hash([value.release_id,firstScope,'']));
         const completed=first?.result_json?JSON.parse(first.result_json).result:null;
         if(!completed||!['ready','ready_with_gaps','no_supported_group_in_assessed_set','unsuitable','insufficient_source','needs_scope_selection'].includes(completed.state))
-          fail('option1_first_scope_must_complete_before_more_work',409);
+          fail(p2?'phase2_first_scope_must_complete_before_more_work':'option1_first_scope_must_complete_before_more_work',409);
       }
       if(value.person_id){
         const initial=await store.byId(await hash([value.release_id,value.scope_id,'']));
@@ -155,7 +186,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if(!env.GITHUB_DISPATCH_TOKEN)fail('contextual_dispatch_not_configured',503);
       if(env.SUBMISSION_RATE_LIMITER&&!(await env.SUBMISSION_RATE_LIMITER.limit({key:'contextual:'+await hash(actor)})).success)fail('contextual_rate_limited',429);
       const inserted=await store.insert(job,now().toISOString());
-      if(!inserted){row=await store.byId(job.job_id);if(row)return json(200,publicJob(row,scope,now()));fail('contextual_busy_or_finite_job_limit',429);}
+      if(!inserted){row=await store.byId(job.job_id);if(row)return json(200,publicJob(row,scope,now(),value.release_id));fail('contextual_busy_or_finite_job_limit',429);}
       let dispatchStatus=null;
       try{
         const response=await fetchImpl(`https://api.github.com/repos/${env.GITHUB_REPOSITORY}/dispatches`,{
@@ -166,10 +197,10 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
         if(!response.ok)throw Error('remote_dispatch_not_confirmed');
       }catch{
         await store.uncertain(job.job_id,now().toISOString());
-        return json(503,{state:'recovery_required',job_id:job.job_id,release_id:RELEASE,
+        return json(503,{state:'recovery_required',job_id:job.job_id,release_id:value.release_id,
           dispatch_diagnostic:{http_status:dispatchStatus,category:dispatchStatus===null?'transport_unconfirmed':'remote_rejected'}});
       }
-      return json(202,publicJob(await store.byId(job.job_id),scope,now()));
+      return json(202,publicJob(await store.byId(job.job_id),scope,now(),value.release_id));
     }catch(error){return json(error.status||500,{state:'failed',error:error.code||'contextual_internal_failure'});}
   };
 }

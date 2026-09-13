@@ -64,3 +64,74 @@ Artifact IDs are opaque. Restore selects the unique newest reservation by its va
 Run 34756867052 restored run 34756354731 rather than the intervening run 34756717927. The latter's one failed interpretation charge ($0.020746, request d8b779b41d8e4158b8be1375da31a8a3) and original receipt remain intact. The reviewed `config/team_recommender_executor/checkpoint-recovery-v1.json` pins their source artifact/run, checkpoint/ledger/row/receipt hashes. Restoration adds that exact missing row and receipt once, requires every other source-ledger row already to match, and blocks conflicts. It is not a general merge, new allowance, or retry. All original artifacts remain unchanged.
 
 After protected merge, first run the existing manual executor with `contextual_check: []`. With no ready group-producing source yet, this performs zero checks and zero provider requests, but persists the repaired ledger through the existing reservation/checkpoint transport. Verify 646 lifetime attempts and $5.241937 cumulative (17 attempts and $0.951282 contextual), no unknown reservations, before resuming the locked remaining scope/extension workflow. This empty operation is an accounting recovery receipt, never semantic evaluation evidence. Do not replay the failed electrochemistry interpretation. If another charge or incompatible checkpoint is found, stop spending and preserve its exact identity.
+
+## Phase 2 normal cold demand — effective September 13 continuation
+
+Phase 1 is closed. Preserve its completed LPS/Boyd/Veterans graphs and accepted
+seven LPS answers. Historical instructions above are retained as history, not
+permission to repeat those purchases or their earlier failed requests.
+
+The current reviewed-data candidate is `phase2-v1.json`, bound to
+`phase2-source-inputs-v2.json`, the unchanged audited directory representation,
+and the original authorization `on-demand-team-offline-v2-20260909`.
+The starting 662 rows are bound by their canonical SHA256, not just a reported
+balance. Cloud run 34785915676 owns the current checkpoint: $5.821980 charged,
+zero outstanding, 662/690 metered attempts. Its 167 exact native token counts
+are free tokenization, not judgments or scientific execution.
+
+The entire Phase 2 ceiling is $2.50 and 18 new metered attempts. The complete
+18-operation conservative envelope is $2.497240, including both output checks
+for each of three scopes, preserving at least $1.678020 and ten attempts.
+Actual complete Anthropic packets receive exact cached native counts, then a
+20% + 1,024-token reserve cushion before the irreversible paid claim. Hard
+input/output/wire caps reject an oversized packet without clipping evidence.
+All six output-check envelopes remain reserved while earlier stages execute.
+These are maxima, not quotas. Current official prices checked September 13:
+Sonnet 5 $2/M input and $10/M output; Voyage 4 large $0.12/M tokens. No new
+provider, directory embedding purchase, automatic retry, or new allowance.
+Native tokenization has the existing separate 190 HTTP-request lifetime cap.
+The approved 167 cached sizing calls plus 9 scientific and 6 output packet
+counts would use at most 182 of those free calls.
+
+The normal Build now selects `Phase2Runner` through the existing coordinator
+and trusted workflow. It completes missing decomposition, compatible query
+vectors, applicability and verification. All 155 audited document vectors must
+be reused exactly. A missing purchased document vector fails closed. Counter
+and paid ledger claims survive interruption; no cacheless paid request is
+re-keyed. The specialized Option1Runner remains historical recovery machinery.
+
+The source-only order is 363302:a-1 (DOE native child), 341997 (Mathematical
+Biology), 351715 (ECLIPSE). Full official context and relevant conditions are
+retained. Older catalog currentness remains explicitly preserved alongside
+new official facts. DOE's 20% cost share and September 22 17:00 Eastern deadline
+are recorded; NSF Mathematical Biology accepts proposals anytime with an
+October 13 target. Existing Search currentness uses calendar dates, not a new
+minute-level date parser. First-scope completion gates the remaining two.
+Negative and unresolved scientific results cannot be replaced with easier cases.
+
+The restricted preview at `/admin/contextual/preview/match_explorer.html` uses
+actual application bytes and the existing Access session on the same host.
+There is no localhost/popup dependency, wildcard CORS, credential export,
+provider-key browser path, public paid endpoint, or new hosting binding.
+`preview-source/` contains readable changed application code corresponding to
+the compressed bundle; it is not the public app asset directory. No top-level
+application or registry package is published by this prerequisite. A local
+Wrangler build measured 2,932.02 KiB gzip; existing bindings and schedules are
+unchanged. Full browser/resource qualification is still pending real execution.
+
+GET status and repeat Build return the persisted graph. Two boolean switches at
+the existing Access-protected `/admin/api/contextual/controls` separately stop
+cached delivery or new paid work; they cannot increase budgets or enable
+expansion/public serving. Three total jobs also bound the daily maximum to three,
+one global active job, and the existing five/minute client limiter remain.
+The fixed finite experiment is the spend owner; no recurring daily allowance.
+
+Output checks take only the approved release/scope/result identity, resolve
+original source and full audited profiles locally, and use the exact preview
+composer in a child process without credentials. Primary option 0, alternative
+option 1 if present, their unique people, and primary explanations are selected
+before any grades. Question-specific citation enums exist in the native schema.
+A negative case is checked within the actual assessed set, not as proof of
+whole-directory infeasibility. Exact failed or uncertain check operations cannot
+be rebudgeted or replayed. Results are model-led, same-family evidence; no new
+human packet. Public activation and a Stage 4 decision remain unauthorized.

@@ -1,0 +1,763 @@
+{
+  "comparison_clock": "2026-09-13T20:52:17.810Z",
+  "previous_source_packet_sha256": "56a102550e8a231ad893bfe97dc94810c66fe2a6a20c433b4a75be00d0a24e9d",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "roster_id": "1c6a29538ff8911ca01f7b4d1483f4251bbb4ab237a54f134f4872d0ae27fe60",
+  "scopes": [
+    {
+      "action_current": true,
+      "catalog_source_id": "7794d39d4cf45e2e9b7de7ac4e66ef1945924557f3a4dad12c59c04c94d5ab52",
+      "conditions": {
+        "actionability_status": "current_by_structured_date",
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "career_stage_signal": null,
+        "close_date": "2026-09-22",
+        "close_date_note": null,
+        "cost_share_required": true,
+        "deadline_source": "Grants.gov XML extract",
+        "deadlines": [
+          {
+            "confidence": "official_structured",
+            "date": "2026-09-22",
+            "detail_checked_at": "2026-09-13T20:48:11.638234+00:00",
+            "estimated": false,
+            "kind": "application",
+            "note": null,
+            "source": "DOE DE-FOA-0003634 Part1 p5",
+            "source_field": "Part1 p5",
+            "source_url": "https://apply07.grants.gov/grantsws/rest/opportunity/att/download/354119",
+            "time": "17:00",
+            "timezone": "America/New_York"
+          }
+        ],
+        "document_status_signals": [],
+        "eligibility_codes": [
+          "99"
+        ],
+        "eligibility_text": "See Section II of the Notice of Funding Opportunity, Part 1 for a full description of the eligibility requirements.",
+        "has_preliminary_stage": false,
+        "limited_submission": false,
+        "limited_submission_source": "synopsis_heuristic",
+        "official_governing_context": "Version 4.0 Page 10 of 52 Notice of Funding Opportunity, Part 1 II. Eligibility To be considered, your submission must meet the criteria set forth below. If your application does not meet these eligibility requirements, it will be removed from consideration for any award. DOE will not determine eligibility for potential applicants before the application due date. The information in this document is specific to this NOFO. You can find the eligibility requirements that apply to all NOFOs in NOFO Part 2, Eligibility. A. Eligible Applicants 1. Domestic Entities The following types of domestic entities are eligible to participate as a recipient or subrecipient of this NOFO: • Institutions of higher education (as defined in Title 20 U.S.C. § 1001) • For-profit organizations • Nonprofit organizations • State and local government entities • Indian Tribes (as defined in section 4 of the Indian Self-Determination and Education Assistance Act, 25 U.S.C. § 5304) To qualify as a domestic entity, the entity must be: • Organized, chartered, or incorporated (or otherwise formed) under the laws of a state or territory of the U.S. or under the laws of the U.S. • Have majority domestic ownership and control • Have a physical place of business in the U.S. Participant Limitations Participation of the following entities is limited as follows: • Provided there is no conflict, DOE FFRDCs are eligible to apply for funding as a subrecipient but are not eligible to apply as a recipient • Non-DOE FFRDCs are eligible to participate as a subrecipient but are not eligible to apply as a recipient • Federal agencies and instrumentalities (other than DOE) are eligible to participate as a subrecipient but are not eligible to apply as a recipient • The National Energy Technology Laboratory (NETL) is not eligible for award under this announcement and may not be proposed as a subrecipient on another entity’s application. An application that includes NETL as a recipient or subrecipient will be considered non-responsive. 2. Foreign Entity Participation In general, foreign entities are not eligible to apply as either a recipient or subrecipient. In limited circumstances, we may approve a waiver to allow a foreign entity to participate as a recipient or subrecipient. Version 4.0 Page 11 of 52 Notice of Funding Opportunity, Part 1 A foreign entity may apply to this NOFO, but the application must be accompanied by an explicit written waiver request. Likewise, if you want to include a foreign entity as a subrecipient, you must submit a separate explicit written waiver request in your application for each proposed foreign subrecipient. NOFO Part 2, Application Content Requirements, explains the requirements for submitting a foreign entity waiver request. DOE’s determination of a waiver request is final and you cannot appeal an adverse decision on a waiver request. 3. Performance of Work in the United States All work for the awards under this NOFO must be performed in the United States. To request a waiver of this requirement, you must submit an explicit waiver request in the application. Without an approved waiver, such costs will not be allowed under the award. NOFO Part 2, Application Content Requirements, lists the requirements for submitting a foreign work waiver request. 4. Ineligible Participants The following entities are ineligible for this NOFO as a recipient, subrecipient, or subcontractor: • In accordance with 2 C.F.R. § 200.214, Entities banned from doing business with the U.S. government, such as entities debarred, suspended, or otherwise excluded from or ineligible for participating in Federal programs (2 C.F.R. § 200.214) • Entities identified on the Department of the Treasury Office of Foreign Assets Control Treasury’s Sanctions Program Specially Designated Nationals list. (OFAC – Sanctions List Service [treas.gov]) • Nonprofit organizations described in section 501(c)(4) of the Internal Revenue Code of 1986 that engaged in lobbying activities after December 31, 1995 Entity of Concern Prohibition Entities of Concern are prohibited from participating in projects under this NOFO. You can find details and definitions in NOFO Part 2, Eligibility, Other Eligibility Information, Entity of Concern Prohibition. B. Limitation on Number of Applications Eligible for Review You can submit more than one application to this NOFO, provided that each application describes a unique, scientifically distinct project as determined by DOE. C. Cost Sharing You must follow through on the estimated cost share commitments you proposed in your application if selected for award negotiations. You can find more information on cost sharing in NOFO Part 2, Eligibility. Version 4.0 Page 12 of 52 Notice of Funding Opportunity, Part 1 1. Cost Share Requirements The cost share must be at least 20% of the total project costs3 for research and development.4 Applications that do not meet the minimum required cost share will be deemed ineligible during the initial compliance review. The cost share must come from nonfederal sources unless otherwise allowed by law. The cost share percentage is calculated by dividing the cost share by the total allowable project costs for the award. Total allowable project costs include the government share (including FFRDC costs, if applicable) and cost share. You can find a cost share information sheet and sample cost share calculation in NOFO Part 2, Eligibility—Cost Sharing, Cost Share Calculation Examples. 2. Unallowable Cost Share Sources The recipient or subrecipients may not use the following sources to meet cost share obligations including but not limited to: • Cost share derived from Federal sources (unless otherwise authorized by law). • Cost share that does not meet: o Requirements set forth in 2 C.F.R. § 200.306 and 910.130 o Cost principles set forth in 2 C.F.R. § 200.400–476 and 2 C.F.R. § 910.352 o For State Energy Programs, requirements set forth in 10 C.F.R. § 420 • Cost share derived from the DOE loan program • Revenues or royalties from the prospective operation of an activity beyond the project period • Proceeds from the prospective sale of an asset of an activity • Federal funding or property (e.g., Federal grants, equipment owned by the Federal Government) • Expenditures that were reimbursed under a separate Federal program • Cash or in-kind contributions used to meet cost share requirements for another Federal project or program • Existing data as an in-kind contribution (e.g., data owned by an entity that is not routinely sold commercially but is instead donated to the project and assigned a value)",
+        "preliminary_required": null,
+        "preliminary_stage_type": null,
+        "rolling": false,
+        "status": "posted",
+        "submission_requirements": []
+      },
+      "currentness": {
+        "parent": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-22",
+          "close_date_note": null,
+          "cost_share_required": true,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-22",
+              "detail_checked_at": "2026-09-13T20:48:11.638234+00:00",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "DOE DE-FOA-0003634 Part1 p5",
+              "source_field": "Part1 p5",
+              "source_url": "https://apply07.grants.gov/grantsws/rest/opportunity/att/download/354119",
+              "time": "17:00",
+              "timezone": "America/New_York"
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": "See Section II of the Notice of Funding Opportunity, Part 1 for a full description of the eligibility requirements.",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "record": {
+          "status": "posted"
+        }
+      },
+      "group_id": "363302",
+      "historical_catalog_currentness": {
+        "parent": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-22",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-22",
+              "detail_checked_at": "2026-08-02T11:34:50.877871Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/363302",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": "See Section II of the Notice of Funding Opportunity, Part 1 for a full description of the eligibility requirements.",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "record": {
+          "status": "posted"
+        }
+      },
+      "id": "363302:a-1",
+      "kind": "publishable_child",
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified.",
+        "Parent structured conditions accompany child science; sibling science is excluded.",
+        "Source-level applicant restrictions do not certify any proposed institution, person, facilities, readiness level, cost share, or access. DOE Part 2 is required for an application and is not universally verified here. No sibling Topic 1b/2/3 science is included."
+      ],
+      "parent_id": "363302",
+      "science": {
+        "description": "Topic Area 1a: Laboratory Validation of Catalysts and Unit Operations The objective of Topic Area 1a is to apply computational approaches (e.g., AI/ML, computational fluid dynamics) and process intensification R&D approaches to rapidly develop and validate new catalysts, reactor systems, and separation technologies—at the laboratory through prototype-scale—to increase the production and deliverability efficiency of hydrocarbons containing high sulfur and/or excess NGLs. Research efforts of interest may include but are not limited to: Natural Gas Product Loss • Employ AI and quantum-scale simulation technologies to design and optimize new catalysts and high-performance support structures (e.g., catalytic Version 4.0 Page 17 of 52 Notice of Funding Opportunity, Part 1 membranes), identify new molecular configurations, and discover new reaction pathways to convert associated natural gas and/or NGLs into valuable products. • High throughput synthesis and experimental testing of catalysts (e.g., nano-, multi-functional), hybrid reactors (e.g., membranes, microwave plasma), and new chemical pathways (e.g., direct conversion) that will enable decentralized associated gas and/or NGL utilization. Sour Gas Treatment Solutions • Develop and test new materials and separation technologies with the potential for highly efficient and low-cost treatment of sour gas streams (including H2S and CO2), including novel membranes, advanced sorbents, and new separation operations. • Design and prototype pretreatment equipment and corrosion resistant materials suitable for gas streams with high levels of hydrogen sulfide. Optimizing NGL Utility • Discover and validate novel gas separation materials and methodologies supporting lower cost NGL recovery. • Explore potential new chemical intermediates and processes capable of lowering the cost of storage, transport, and utilization of excess NGLs from wet natural gas streams. • Validate potential new chemical conversion concepts and marketable products that transform separated NGLs and/or other gas condensates to high value chemicals (e.g., ethylene) Applications must describe the impact of the proposed project based on laboratory- scale validation of the catalytic reaction, gas treatment process, or NGL recovery and utilization operation. For catalyst development and chemical conversion, this includes direct comparison to a representative industrial catalyst or process as a base case using relevant metrics such as turnover frequency, reaction rate, conversion, percentage yield, and selectivity. Corrosion rates for new material developments for acid gas should be compared to industry-standard corrosion-resistant alloys and coatings currently used for acid gas treatment. For new gas processing methods for acid gas and NGL recovery, relevant metrics such as removal efficiency, mass transfer efficiency, treated gas purity, acid gas slip, and NGL component recovery rates should be compared to existing industrial methods. A 15% or higher improvement in performance metrics is desired for new technologies. • Applications should describe the anticipated level of improvement in overall energy efficiency for chemical conversion reactions or gas processing operations. • Applications should define the potential economic benefits for the new technologies in terms of anticipated profit from industrial chemical production or reduced gas treatment costs. Version 4.0 Page 18 of 52 Notice of Funding Opportunity, Part 1 Technologies proposed for research under Topic Area 1a should exhibit a beginning Technology Readiness Level (TRL)6 of 3 (technology concept and/or applications formulated) at the time of application submission and the proposed research should support delivering an ending TRL of 5 (component and/or breadboard validation in relevant environment) by the end of the project. All projects selected under Topic Area 1a will be required to complete a technology maturation plan (TMP) that describes the current TRL of the proposed technology/technologies, relates the proposed work to maturation of the technology, describes the expected TRL at the end of the project, and describes any known post-project R&D necessary to further mature the technology. Projects selected under Topic Area 1a will also be required to complete a techno-economic analysis (TEA) by the end of the project that demonstrates the economic feasibility of the technology/technologies and identifies economic and design hurdles that can be addressed with future research development. To augment the TMP and TEA, projects selected under Topic Area 1a will be required to implement the DOE developed Adoption Readiness Level (ARL) framework7 focused on technology commercialization, including the utilization of the Adoption Readiness Assessment tool for all technology solutions to be validated in the project. The ARL Framework is complementary to the TRL framework and is focused on identifying risks and opportunities to support the successful commercialization of new technologies.",
+        "document_search_text": "",
+        "evidence_anchor": "p16",
+        "own_deadline": null,
+        "own_deadline_is_advisory": true,
+        "page_end": 18,
+        "page_start": 16,
+        "parent_id": "363302",
+        "publication_reason": "high_confidence",
+        "publication_state": "publishable",
+        "source_document_hash": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
+        "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
+        "source_role": "authoritative_announcement",
+        "subtopic_id": "363302:a-1",
+        "summary": "The objective of Topic Area 1a is to apply computational approaches (e.g., AI/ML, computational fluid dynamics) and process intensification R&D approaches to rapidly develop and validate new catalysts, reactor systems, and separation technologies—at the laboratory through prototype-scale—to increase the production and deliverability efficiency of hydrocarbons containing high sulfur and/or excess NGLs.",
+        "title": "Laboratory Validation of Catalysts and Unit Operations",
+        "topic_areas": [
+          "Catalysis and reaction engineering",
+          "Separations and membranes",
+          "Manufacturing"
+        ]
+      },
+      "source_id": "de697a2c3dc2aaca3bdca10672f320f7ab5a1836f9055144a6e3fa8671b3bbdb",
+      "source_receipt": {
+        "bytes": 1374969,
+        "final_url": "https://apply07.grants.gov/grantsws/rest/opportunity/att/download/354119",
+        "http_status": 200,
+        "locator": "PDF pp16–18, Topic Area 1a up to the Topic Area 1b heading; eligibility pp10–12; deadline p5",
+        "requested_url": "https://apply07.grants.gov/grantsws/rest/opportunity/att/download/354119",
+        "retrieved_at": "2026-09-13T20:48:11.638234+00:00",
+        "sha256": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6"
+      },
+      "state": "unassessed"
+    },
+    {
+      "action_current": true,
+      "catalog_source_id": "86ef83729fb15cb0f0ce0987a13ac6f65f35a6e78096a432c20f48337f4df0bf",
+      "conditions": {
+        "actionability_status": "current_by_structured_date",
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "career_stage_signal": null,
+        "close_date": null,
+        "close_date_note": "Proposals accepted anytime; October 13, 2026 is a target, not a closing date.",
+        "cost_share_required": false,
+        "deadline_source": "https://www.nsf.gov/funding/opportunities/mathematical-biology",
+        "deadlines": [
+          {
+            "date": null,
+            "detail_checked_at": "2026-09-13T20:48:14.107351+00:00",
+            "kind": "application",
+            "rolling": true,
+            "source": "Official NSF program page",
+            "source_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology"
+          },
+          {
+            "date": "2026-10-13",
+            "date_qualifier": "recommended",
+            "detail_checked_at": "2026-09-13T20:48:14.107351+00:00",
+            "kind": "application",
+            "note": "Second Tuesday in October target; proposals accepted anytime.",
+            "source": "Official NSF program page",
+            "source_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology"
+          }
+        ],
+        "document_status_signals": [],
+        "eligibility_codes": [
+          "99"
+        ],
+        "eligibility_text": null,
+        "has_preliminary_stage": false,
+        "limited_submission": false,
+        "limited_submission_source": "synopsis_heuristic",
+        "official_governing_context": "",
+        "preliminary_required": null,
+        "preliminary_stage_type": null,
+        "rolling": true,
+        "status": "posted",
+        "submission_requirements": []
+      },
+      "currentness": {
+        "parent": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": null,
+          "close_date_note": "Proposals accepted anytime; October 13, 2026 is a target, not a closing date.",
+          "cost_share_required": false,
+          "deadline_source": "https://www.nsf.gov/funding/opportunities/mathematical-biology",
+          "deadlines": [
+            {
+              "date": null,
+              "detail_checked_at": "2026-09-13T20:48:14.107351+00:00",
+              "kind": "application",
+              "rolling": true,
+              "source": "Official NSF program page",
+              "source_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology"
+            },
+            {
+              "date": "2026-10-13",
+              "date_qualifier": "recommended",
+              "detail_checked_at": "2026-09-13T20:48:14.107351+00:00",
+              "kind": "application",
+              "note": "Second Tuesday in October target; proposals accepted anytime.",
+              "source": "Official NSF program page",
+              "source_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology"
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": true,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "record": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": null,
+          "close_date_note": "Proposals accepted anytime; October 13, 2026 is a target, not a closing date.",
+          "cost_share_required": false,
+          "deadline_source": "https://www.nsf.gov/funding/opportunities/mathematical-biology",
+          "deadlines": [
+            {
+              "date": null,
+              "detail_checked_at": "2026-09-13T20:48:14.107351+00:00",
+              "kind": "application",
+              "rolling": true,
+              "source": "Official NSF program page",
+              "source_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology"
+            },
+            {
+              "date": "2026-10-13",
+              "date_qualifier": "recommended",
+              "detail_checked_at": "2026-09-13T20:48:14.107351+00:00",
+              "kind": "application",
+              "note": "Second Tuesday in October target; proposals accepted anytime.",
+              "source": "Official NSF program page",
+              "source_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology"
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": true,
+          "status": "posted",
+          "submission_requirements": []
+        }
+      },
+      "group_id": "341997",
+      "historical_catalog_currentness": {
+        "parent": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-10-14",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-10-14",
+              "detail_checked_at": "2026-08-02T11:34:50.877871Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/341997",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "record": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-10-14",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-10-14",
+              "detail_checked_at": "2026-08-02T11:34:50.877871Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/341997",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        }
+      },
+      "id": "341997",
+      "kind": "parent",
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified.",
+        "Current source context supersedes conflicting older catalog prose; no individual applicant eligibility or proposal readiness is certified."
+      ],
+      "parent_id": "341997",
+      "science": {
+        "description": "The Mathematical Biology program supports research in all areas of mathematical sciences with relevance to the biological sciences. Successful proposals must demonstrate mathematical innovation, biological relevance and significance, and strong integration between mathematics and biology (including mathematical cognizance of biological issues and the applicability/feasibility of the new mathematical results or modeling tools to real biological systems). Projects of interest to the Mathematical Biology program include development of mathematical theories, methodologies, and tools traditionally seen in other disciplinary mathematical sciences programs within the NSF Directorate for Mathematical and Physical Sciences. In addition to the program’s inherent interests in foundational mathematics and classical topics in mathematical biology, the Mathematical Biology program encourages the development of innovative mathematical approaches by interdisciplinary teams to investigate challenging questions of great interest to biologists and public health policymakers.The Mathematical Biology program regularly seeks joint reviews of proposals with programs in the NSF Directorate for Biological Sciences and other relevant NSF programs. Investigators are encouraged to discuss their project with program officers in relevant areas to determine whether it could be considered by more than one program. If a proposal is appropriate for review by more than one NSF program, contact the program officers to determine when and where the proposal should be submitted. Target submission date: Proposals should be submitted to MPS Mathematical Sciences Research Programs solicitation. Target date for submissions is the Second Tuesday in October. While proposals are accepted anytime, proposers are highly encouraged to submit by the target date to ensure consideration during the corresponding panel review cycle.Conferences Proposals for Mathematical Biology conferences, workshops, summer/winter schools, and similar activities must be submitted to the MPS Mathematical Sciences Research Programs solicitation using the \"conference\" or “travel” proposal type in research.gov. Proposers should select Mathematical Biology as the program of interest. For proposals seeking no more than $50,000, submit at least six months in advance of the conference or workshop date. For proposals seeking more than $50,000, submit at least nine months in advance of the conference or workshop date.",
+        "detail_page": "https://www.grants.gov/search-results-detail/341997",
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "document_evidence": {
+          "document": {
+            "changed_since_previous": true,
+            "content_type": "text/html; charset=UTF-8",
+            "first_seen_at": "2026-08-27T09:58:08.083433Z",
+            "last_seen_at": "2026-08-27T09:58:08.083433Z",
+            "name": null,
+            "sha256": "a22fe9937c996bfe6bca3895d1af6ae59861ba6ae01e56fbb9cc4a537e819734",
+            "source_kind": "agency_notice",
+            "url": "https://www.nsf.gov/funding/opportunities/mathematical-biology",
+            "version": 2
+          },
+          "extraction": {
+            "content_kind": "html",
+            "method": "html",
+            "page_count": null,
+            "pages_read": null,
+            "pages_with_text": 15,
+            "text_characters": 5740,
+            "truncated": false
+          },
+          "facts": [],
+          "review_queue": [
+            {
+              "evidence_ids": [],
+              "label": "The official document changed; verify decisive facts",
+              "status": "needs_review",
+              "type": "amendment"
+            },
+            {
+              "label": "Verify current official notice details",
+              "message": "Some cached interpretations need the original source structure; retained excerpts do not establish complete coverage.",
+              "status": "needs_review",
+              "type": "parser_revalidation_pending"
+            }
+          ],
+          "schema_version": 1
+        },
+        "document_evidence_status": "current",
+        "document_search_text": "",
+        "document_urls": [],
+        "funding_opportunity_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=5690",
+        "primary_document_url": null,
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "title": "Mathematical Biology",
+        "topic_areas": [
+          "Biology and biotechnology",
+          "Technology development",
+          "Artificial intelligence and machine learning",
+          "Data science"
+        ]
+      },
+      "source_id": "f1d99a76191c7fe8037a362eabd327722219ded1ec91223495ba85b06340f7e7",
+      "source_receipt": {
+        "bytes": 72444,
+        "final_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology",
+        "http_status": 200,
+        "locator": "Official page complete Synopsis, including target-date and conference provisions",
+        "requested_url": "https://www.nsf.gov/funding/opportunities/mathematical-biology",
+        "retrieved_at": "2026-09-13T20:48:14.107351+00:00",
+        "sha256": "c246ef74c6de362b627280a14d1b629297b3563fe0dc7eba32947e9dd3f0823e"
+      },
+      "state": "unassessed"
+    },
+    {
+      "action_current": true,
+      "catalog_source_id": "55d22a22f080e15f60080516c0a2d9693404a0798406d0e43220822e4c3ad324",
+      "conditions": {
+        "actionability_status": "current_by_structured_date",
+        "applicant_types": [
+          "Unrestricted"
+        ],
+        "career_stage_signal": null,
+        "close_date": "2026-09-29",
+        "close_date_note": null,
+        "cost_share_required": false,
+        "deadline_source": "Grants.gov XML extract",
+        "deadlines": [
+          {
+            "confidence": "official_structured",
+            "date": "2026-09-29",
+            "detail_checked_at": "2026-08-15T10:39:21.428821Z",
+            "estimated": false,
+            "kind": "application",
+            "note": "The following Divisions accept proposals during this window: AGS; CBET; CMMI; ECCS",
+            "source": "Grants.gov XML extract",
+            "source_field": "CloseDate",
+            "source_url": "https://www.grants.gov/search-results-detail/351715",
+            "time": null,
+            "timezone": null
+          }
+        ],
+        "document_status_signals": [],
+        "eligibility_codes": [
+          "99"
+        ],
+        "eligibility_text": null,
+        "has_preliminary_stage": false,
+        "limited_submission": false,
+        "limited_submission_source": "synopsis_heuristic",
+        "official_governing_context": "Full proposal 2026 September 30 2025 - September 29, 2026 - Window September 30 - September 29, Annually Thereafter The following Divisions accept proposals during this window: AGS; CBET; CMMI; ECCS September 1 2026 - September 30, 2026 - Window September 1 - September 30, Annually Thereafter Proposal deadline specified above for: CHE - Chemical Structure, Dynamics and Mechanisms-B October 6 2026 - Deadline date First Tuesday in October, Annually Thereafter Proposal deadline specified above for: EES - Historically Black Colleges and Universities - Undergraduate Program/Research Initiation Awards October 20 2026 - Deadline date Third Tuesday in October, Annually Thereafter Proposal deadline specified above for: OIA - Historically Black Colleges and Universities - Excellence in Research October 1 2026 - November 2, 2026 - Window October 1 - October 31, Annually Thereafter Proposal deadline specified above for: CHE - Chemical Measurement and Imaging November 16 2026 - Deadline date Third Monday in November, Annually Thereafter Proposal deadline specified above for: PHY - Plasma Physics Due by 5pm submitting organization's local time Proposals should be submitted to one of the participating programs as described in the Synopsis. Links to more information about these programs, including descriptions of the programs and specific instructions for proposal submission, are provided at the end of this document under \"Related Programs\" and \"Related URL\". Proposals submitted to programs in the participating Divisions that are not listed as \"Related Programs\" may also be considered based on the relevance of proposed scope of research to the goals of this program. Proposers are strongly encouraged to check with the cognizant Program Officer(s) if they are unsure how to apply or have questions regarding programmatic relevance. Where the scientific scope of a proposal overlaps multiple programs, the proposal should be submitted to the program most closely aligned to the proposal goals and by this primary program’s submission due date. Secondary programs may be indicated. All listings will appear as Research.gov or Grants.gov options. The due date for any proposal is the due date (if any) for submission to the relevant program. Some of the participating programs may require submission of a Letter of Intent or a preliminary proposal prior to full proposal submission. Proposals must comply with the specific submission instructions and be submitted by the due dates listed for the relevant program. Proposals that are submitted to a specific Division outside the proposal window, target date, or deadline for the program in that Division may be returned without review as non-compliant. Program guidelines Apply to PD 24-110Z as follows:Full proposals submitted via Research.gov: NSF Proposal & Award Policies & Procedures Guide proposal preparation guidelines apply.Full proposals submitted via Grants.gov: NSF Grants.gov Application Guide guidelines apply. See Grants.gov Proposal Processing in Research.gov for more information.",
+        "preliminary_required": null,
+        "preliminary_stage_type": null,
+        "rolling": false,
+        "status": "posted",
+        "submission_requirements": []
+      },
+      "currentness": {
+        "parent": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-29",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-29",
+              "detail_checked_at": "2026-08-15T10:39:21.428821Z",
+              "estimated": false,
+              "kind": "application",
+              "note": "The following Divisions accept proposals during this window: AGS; CBET; CMMI; ECCS",
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/351715",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "record": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-29",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-29",
+              "detail_checked_at": "2026-08-15T10:39:21.428821Z",
+              "estimated": false,
+              "kind": "application",
+              "note": "The following Divisions accept proposals during this window: AGS; CBET; CMMI; ECCS",
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/351715",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        }
+      },
+      "group_id": "351715",
+      "historical_catalog_currentness": {
+        "parent": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-29",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-29",
+              "detail_checked_at": "2026-08-15T10:39:21.428821Z",
+              "estimated": false,
+              "kind": "application",
+              "note": "The following Divisions accept proposals during this window: AGS; CBET; CMMI; ECCS",
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/351715",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "record": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-29",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-29",
+              "detail_checked_at": "2026-08-15T10:39:21.428821Z",
+              "estimated": false,
+              "kind": "application",
+              "note": "The following Divisions accept proposals during this window: AGS; CBET; CMMI; ECCS",
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/351715",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        }
+      },
+      "id": "351715",
+      "kind": "parent",
+      "limitations": [
+        "Retained canonical catalog/child evidence; not newly retrieved or universally full-notice verified.",
+        "Current source context supersedes conflicting older catalog prose; no individual applicant eligibility or proposal readiness is certified."
+      ],
+      "parent_id": "351715",
+      "science": {
+        "description": "Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitalize on opportunities for bringing fundamental plasma science investigations to bear on problems of societal and technological need within the scope of science and engineering supported by the participating NSF programs. The ECLIPSE meta-program has been created to foster an inclusive community of scientists and engineers, an ecosystem spanning multiple NSF Directorates, in the pursuit of translational research at the interface of fundamental plasma science and technological innovation. The ECLIPSE program builds on the long history of NSF leadership in supporting multi-disciplinary research in plasma science and engineering, and is intended to enhance organizational unity within NSF, and potentially with other funding agencies, in considering proposals and supporting projects that may otherwise struggle to find a natural home within the existing hierarchy of Directorates, Divisions, and programs within the Foundation. Examples of topical areas within the scope of the ECLIPSE program include but are not limited to: Plasma surface interactions, with applications to, e.g., advanced manufacturing, materials processing, and catalysis. Atmospheric pressure plasmas and microplasmas with applications to, e.g., microelectronics, plasma agriculture, environmental remediation, and other clean and decarbonized energy goals enabled by electrification of the chemical industry. Dusty plasmas with applications to, e.g., development of nanomaterials, aerosols, and functionalized surface coatings. Novel sensor development for highly non-equilibrium plasmas with applications to, e.g., cubesat-based geospace measurements and industrial plasma diagnostics. Novel computational modeling for multi-component and/or multi-phase plasma systems with applications to, e.g., space weather prediction and plasma reactor design. Novel studies of plasmons in nano-photonics and nano-optics with applications to, e.g., sub-THz wireless communication and photocatalytic chemical processes. New chemical measurement science for characterizing processes occurring in plasmas and using plasmas as part of measurement systems with applications to, e.g., analysis of environmental contaminants or identification of forensic evidence. Study of fundamental chemical reactions and mechanisms in plasmas with applications to, e.g., novel chemical synthesis. Proposals submitted for consideration by this program should address societal or technological needs within the scope of science and engineering supported by the National Science Foundation. Proposals addressing technology development primarily supported by other US government funding agencies are not eligible for consideration and may be returned without review. Proposers are strongly encouraged to contact the cognizant Program Officers if they are unsure of the suitability of a project to this program. Proposals submitted for consideration by the ECLIPSE program should satisfy the following criteria: (1) clearly articulate the fundamental scientific and/or engineering challenge in plasma science and engineering that may be relevant to more than one NSF program; and (2) provide a substantive discussion of how a resolution of the stated scientific and/or engineering challenge will address specific societal and/or technological needs identified as priorities by the research communities, policymakers and/or other stakeholders. Depending on the nature of the proposal, the latter may be described as the Intellectual Merit or the Broader Impact of the proposed activity. The program encourages inclusion of specific efforts to increase the diversity of the ECLIPSE community and to broaden participation of under-represented groups in Science, Technology, Engineering, and Mathematics (STEM) as Broader Impacts of proposed work. The program welcomes proposals from Historically Black Colleges and Universities (HBCUs), other Minority Serving Institutions (MSIs), and institutions in EPSCoR-eligible jurisdictions, along with collaborations between these institutions. Proposers are also encouraged to address how the proposed efforts may enhance workforce development towards STEM careers associated with the field of plasma science and engineering. The ECLIPSE program is not intended to replace existing programs. A proposal that is requesting consideration within the context of ECLIPSE should begin the title with the identifying acronym \"ECLIPSE:\" and should be submitted to one of the \"Related Programs\" listed below. In choosing the most relevant program, proposers are advised to read program descriptions and solicitations carefully and to consult with cognizant Program Officers in advance of proposal preparation. Proposal submissions outside of the scientific scope of the receiving program may be transferred to a different program or may be returned without review. Proposers should ask for consideration and review as an ECLIPSE proposal only if the proposal addresses both of the criteria listed above. Proposals marked for consideration by the ECLIPSE program that do not address both of these criteria may be returned without review or reviewed within the context of an individual program. Supplement requests to existing awards within a program that address both of the above criteria may also be considered. Information Sharing with other Funding Agencies When permitted under an MOU between NSF and another funding agency, NSF may share information from proposals for consideration of joint funding and may invite employees of such organizations to attend merit review panels as observers.",
+        "detail_page": "https://www.grants.gov/search-results-detail/351715",
+        "disciplines": [
+          "Engineering and Physical Sciences"
+        ],
+        "document_evidence": {
+          "document": {
+            "changed_since_previous": true,
+            "content_type": "text/html; charset=UTF-8",
+            "first_seen_at": "2026-08-27T09:01:59.872946Z",
+            "last_seen_at": "2026-08-27T09:01:59.872946Z",
+            "name": null,
+            "sha256": "3590714a2ed3faf942edf0cb6e8abe7ce6704fefd3bf907efe6c9219f08cc501",
+            "source_kind": "agency_notice",
+            "url": "https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering",
+            "version": 5
+          },
+          "extraction": {
+            "content_kind": "html",
+            "method": "html",
+            "page_count": null,
+            "pages_read": null,
+            "pages_with_text": 15,
+            "text_characters": 14299,
+            "truncated": false
+          },
+          "facts": [],
+          "review_queue": [
+            {
+              "label": "Verify current official notice details",
+              "message": "Some cached interpretations need the original source structure; retained excerpts do not establish complete coverage.",
+              "status": "needs_review",
+              "type": "parser_revalidation_pending"
+            }
+          ],
+          "schema_version": 1
+        },
+        "document_evidence_status": "current",
+        "document_search_text": "",
+        "document_urls": [],
+        "funding_opportunity_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=24110Z",
+        "primary_document_url": null,
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)",
+        "topic_areas": [
+          "Agriculture and food",
+          "Catalysis and reaction engineering",
+          "Climate change",
+          "Education and workforce",
+          "Energy",
+          "Environmental science",
+          "Manufacturing",
+          "Materials science",
+          "Space and aeronautics",
+          "Technology development",
+          "Artificial intelligence and machine learning",
+          "Data science",
+          "Carbon management"
+        ]
+      },
+      "source_id": "313563f65edeab3a5c463a9f6a4f072967b871a6d021c609633581854a5dab7d",
+      "source_receipt": {
+        "bytes": 95461,
+        "final_url": "https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering",
+        "http_status": 200,
+        "locator": "Official page complete Synopsis; Upcoming due dates and Program guidelines",
+        "requested_url": "https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering",
+        "retrieved_at": "2026-09-13T20:50:27.572960+00:00",
+        "sha256": "a39fe3cd8ddb9afaba227da28c6cbb9f2716e03fe9480b9cd6510816fc670074"
+      },
+      "state": "unassessed"
+    }
+  ],
+  "version": "contextual-phase2-sources-v2"
+}
