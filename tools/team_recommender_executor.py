@@ -16,6 +16,7 @@ import stat
 import subprocess
 import time
 import zipfile
+import sys
 
 import requests
 from tools.offline_ai import request_body, response_value, validate_schema
@@ -341,9 +342,10 @@ def restore(destination, settings, api_call=api):
             break
     else:
         raise Deferred("checkpoint_history_bound")
-    reservations = sorted((a for a in artifacts if "-reservation-" in a["name"]), key=lambda a: a["id"])
+    from tools.team_recommender_checkpoint import latest_reservation, recover_known_charge
+    reservations = [a for a in artifacts if "-reservation-" in a["name"]]
     if reservations:
-        latest = reservations[-1]
+        latest = latest_reservation(reservations)
         states = [a for a in artifacts if a["name"] == latest["name"].replace("-reservation-", "-state-")]
         if len(states) != 1 or states[0]["expired"]:
             raise Deferred("latest_authoritative_checkpoint_missing")
@@ -355,6 +357,7 @@ def restore(destination, settings, api_call=api):
         if len(raw) > STATE_LIMIT:
             raise ValueError("checkpoint_archive_too_large")
         unpack_state(raw, destination)
+        recover_known_charge(destination, latest, artifacts, api_call, sys.modules[__name__])
     else:
         runs = json.loads(api_call("actions/workflows/team-recommender-offline.yml/runs?branch=main&per_page=100"))["workflow_runs"]
         if any(str(run["id"]) != os.environ["GITHUB_RUN_ID"] for run in runs):
