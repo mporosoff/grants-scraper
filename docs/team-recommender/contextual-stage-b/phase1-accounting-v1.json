@@ -1,0 +1,116 @@
+{
+  "version": "phase1-accounting-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "owner_run": 34774192296,
+  "head_sha": "6e054ac57308a72d3e4efb99bbe66571418ea4e8",
+  "state_artifact_id": 10322902689,
+  "reservation_artifact_id": 10322484125,
+  "check_artifact_id": 10322573643,
+  "prior_charged_microusd": 5758414,
+  "prior_attempts": 659,
+  "new_charged_microusd": 20762,
+  "new_attempts": 1,
+  "total_charged_microusd": 5779176,
+  "total_attempts": 660,
+  "outstanding_reservations": 0,
+  "remaining_microusd": 4220824,
+  "remaining_attempts": 30,
+  "task_maximum_microusd": 250000,
+  "task_maximum_attempts": 2,
+  "task_unspent_microusd": 229238,
+  "unexecuted_authorized_question_sets": [
+    "explanation"
+  ],
+  "minimum_remaining_microusd": 3991586,
+  "minimum_remaining_attempts": 29,
+  "input_tokens": 6866,
+  "output_tokens": 703,
+  "thinking_tokens": 0,
+  "new_embeddings": 0,
+  "new_source_retrievals": 0,
+  "new_human_items": 0,
+  "ledger_sha256": "c8af959ba9c6e0c8936f4abc5c04453546e2be13c1dd0dffb8b5278214e0067b",
+  "checkpoint_sha256": "29376e054ff32762d383f5b2cb6ad808b03016e2ca0840fcc8ea509698d006c3",
+  "checkpoint_files_verified": 1300,
+  "all_original_requests_and_cache_bytes_preserved": true,
+  "no_duplicate_request_ids_or_keys": true,
+  "local_mirror_read_only": true,
+  "requests": [
+    {
+      "attempt": 1,
+      "body_sha256": "54b67b0d73e64bcb60f39a5199c8d5a25a3a03f167e71eb88fc613bf9d008932",
+      "charged_microusd": 20762,
+      "code_sha": "6e054ac57308a72d3e4efb99bbe66571418ea4e8",
+      "dispatch_claim": "irreversible-v1",
+      "execution_capacity": "contextual-output-capacity-v2",
+      "id": "53020ccfc01749f3b7971c2ca442102f",
+      "judge_items": [],
+      "key": "3bc48c0da42bfb33c02b1136be2b8915a569754121371cf6de51d76aa7608171",
+      "model": "claude-sonnet-5",
+      "packet_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+      "phase1_lock": "53dda92b8de125c925f4ccd1ce9b035517d33d759165bc67f14610ca22a7db1f",
+      "provider": "anthropic",
+      "purpose": "cb-p1-check-group",
+      "repair_of": "b12fa7fbde6e45069d14358b6c73ee79",
+      "reserved_input_tokens": 20711,
+      "reserved_microusd": 61902,
+      "reserved_output_tokens": 2048,
+      "response_contract_sha256": "45ccb3d959d2b3d633ada7a23fd5525a71aa58059476cb7dbc90d0d6d6afaea4",
+      "row_inputs": [],
+      "stage": 2,
+      "status": "failed",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 6866,
+        "output_tokens": 703,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    }
+  ],
+  "receipts": [
+    {
+      "body_sha256": "54b67b0d73e64bcb60f39a5199c8d5a25a3a03f167e71eb88fc613bf9d008932",
+      "charged_microusd": 20762,
+      "code_sha": "6e054ac57308a72d3e4efb99bbe66571418ea4e8",
+      "disposition": "failed",
+      "elapsed_seconds": 9.609562,
+      "error": "ValueError",
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "3bc48c0da42bfb33c02b1136be2b8915a569754121371cf6de51d76aa7608171",
+      "output_token_ceiling": 2048,
+      "phase1_lock": "53dda92b8de125c925f4ccd1ce9b035517d33d759165bc67f14610ca22a7db1f",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p1-check-group",
+      "repair_of": "b12fa7fbde6e45069d14358b6c73ee79",
+      "request_id": "53020ccfc01749f3b7971c2ca442102f",
+      "reserved_microusd": 61902,
+      "response_contract_sha256": "45ccb3d959d2b3d633ada7a23fd5525a71aa58059476cb7dbc90d0d6d6afaea4",
+      "status": "failed",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 6866,
+        "output_tokens": 703,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      }
+    }
+  ]
+}

@@ -1,0 +1,45 @@
+{
+  "version": "phase1-check-failure-v1",
+  "run_id": 34774192296,
+  "request_id": "53020ccfc01749f3b7971c2ca442102f",
+  "logical_key": "3bc48c0da42bfb33c02b1136be2b8915a569754121371cf6de51d76aa7608171",
+  "body_sha256": "54b67b0d73e64bcb60f39a5199c8d5a25a3a03f167e71eb88fc613bf9d008932",
+  "repair_of": "b12fa7fbde6e45069d14358b6c73ee79",
+  "response_contract_sha256": "45ccb3d959d2b3d633ada7a23fd5525a71aa58059476cb7dbc90d0d6d6afaea4",
+  "http_status": 200,
+  "provider_stop_reason": "end_turn",
+  "output_tokens": 703,
+  "output_token_ceiling": 2048,
+  "thinking_tokens": 0,
+  "elapsed_seconds": 9.609562,
+  "first_failing_boundary": "per-question evidence-reference allowlist/ownership validation",
+  "error": "contextual_check_invalid_reference",
+  "code_path": "tools/contextual_team_check.py:95",
+  "preceding_checks_passed": [
+    "whole-response byte bound",
+    "complete end_turn JSON parsing",
+    "strict four-verdict schema/types/enums",
+    "exact four unique expected question IDs"
+  ],
+  "rejected_reference_value": null,
+  "affected_question_id": null,
+  "precise_unknown_vs_wrong_owner_cause": "not retained; cannot distinguish",
+  "accepted_verdicts": 0,
+  "rejected_raw_body_retained": false,
+  "accepted_result_cache_present": false,
+  "group_questions_unresolved": [
+    "group",
+    "person-1",
+    "person-2",
+    "person-3"
+  ],
+  "explanation_questions_not_run": [
+    "explanation-1",
+    "explanation-2",
+    "explanation-3"
+  ],
+  "explanation_not_run_reason": "same reference-validation path failed; retained diagnostics cannot isolate a batch-specific fault, so the conservative shared-boundary stop preserved the second attempt",
+  "technical_failure_is_not_a_scientific_verdict": true,
+  "paid_retry_performed": false,
+  "human_judgments": 0
+}

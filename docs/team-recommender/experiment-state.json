@@ -162,7 +162,7 @@
     "no_public_presentation_changes_from_start": true,
     "physical_mobile": "not_run"
   },
-  "containing_commit": "Documentation commit containing contextual-stage-b-option1-integration-repair-report.md; tested code1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+  "containing_commit": "Local documentation commit containing phase-1-contextual-assessment-closeout.md after ba22d1a8facb3b50273bbb52fac2b80266544ca3; reviewed helper87d2c989, reconciled product coded8a42d94245f9e9d82b19669352622bf7f67fe40",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -6768,9 +6768,9 @@
     "post_audit_returned": 0,
     "post_audit_applicability": "No returned human observations for corrected profiles/groups. Forty historical requests remain accounted for; no replacement packet."
   },
-  "model": "Pinned claude-sonnet-5 contextual interpretation/applicability/verification and voyage-4-large retrieval; real finite pass executed; no independent quality check eligible",
+  "model": "Unchanged contextual candidate; Sonnet5 thinking-disabled retrospective checker returned an unaccepted evidence reference",
   "next_allowed_stage": null,
-  "next_stage_requires": "Owner review of failed scope/extension schema and capacity gates plus live application access. No automatic second campaign or public activation.",
+  "next_stage_requires": "Owner review of the named evidence-reference failure and three unrun explanation questions. No automatic repaired-group replay or new paid campaign.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
@@ -7134,9 +7134,9 @@
     "path": "docs/team-recommender/contextual-stage-b/option1-receipt-index-v1.json",
     "sha256": "95db1213b32a1e93299e6ee34ee766ab29efc02dc21e1731db1a89427f244c0c"
   },
-  "recommendation": "BLOCKED BY A SPECIFIC CONTRACT, ACCESS, BUDGET, OR RESOURCE FAILURE.",
-  "recommended_next_stage": "Owner review of the completed application path and failed bounded independent check. No automatic paid retry, campaign, public activation or Stage4.",
-  "report": "docs/team-recommender/reports/contextual-stage-b-option1-integration-repair-report.md",
+  "recommendation": "PHASE 1 AUDIT INCOMPLETE",
+  "recommended_next_stage": "No next stage authorized; preserve all graphs and the new terminal paid failure.",
+  "report": "docs/team-recommender/reports/phase-1-contextual-assessment-closeout.md",
   "repository": "mporosoff/grants-scraper",
   "results": {
     "contextual_counts": {
@@ -7477,15 +7477,15 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "finite_option1_integration_demonstrated_independent_check_contract_blocked",
-  "stop": "STOP FOR USER REVIEW; independent check reason72>60; no automatic replay, public activation or Stage4",
+  "stage_status": "phase1_audit_incomplete_evidence_reference_failure",
+  "stop": "STOP FOR USER REVIEW. No further paid retry, scientific revision, public activation or Stage4.",
   "unresolved": [
     "Independent group/person check0/4accepted; rationale72>60; complete failed body not retained.",
     "Explanation check0/3unrun after first check failure; no scientific-quality acceptance.",
     "Two scopes are integration evidence, not universal precision/yield;142/143per-scope people remain unassessed.",
     "General peak memory and physical-device evidence unmeasured; no waiver."
   ],
-  "updated_at": "2026-09-13T17:17:46.626007+00:00",
+  "updated_at": "2026-09-13T18:26:31.786444+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -8010,28 +8010,28 @@
     "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
   },
   "contextual_stage_b": {
-    "status": "integration_repaired_positive_path_demonstrated_check_contract_blocked",
+    "status": "phase1_audit_incomplete_evidence_reference_failure",
     "authority": "docs/team-recommender/contextual-stage-b/AUTHORITY.md",
     "product_start": "1018d6faac2f08a6a2e828c0b72612437114d9bc",
     "analytical_start": "58a59143ef5446b05223f52982a547903f53e24d",
     "protected_main_start": "fd37d5983405a04e650cb9d0a12aa34098ca2a76",
     "budget": {
       "authorization_id": "on-demand-team-offline-v2-20260909",
-      "owner_run": 34770252997,
-      "state_artifact_id": 10321363226,
-      "reservation_artifact_id": 10321487873,
-      "ledger_sha256": "281938a7be619dcbef286c50f262b92e7c31c312caeb8e1221d1de5c4dac5e7b",
-      "checkpoint_sha256": "211f59362518c169cb6f3e44a77f43b3439a7fb41a738b7eebf2fb868d63dbf7",
-      "checkpoint_files_verified": 1299,
+      "owner_run": 34774192296,
+      "state_artifact_id": 10322902689,
+      "reservation_artifact_id": 10322484125,
+      "ledger_sha256": "c8af959ba9c6e0c8936f4abc5c04453546e2be13c1dd0dffb8b5278214e0067b",
+      "checkpoint_sha256": "29376e054ff32762d383f5b2cb6ad808b03016e2ca0840fcc8ea509698d006c3",
+      "checkpoint_files_verified": 1300,
       "prior_charged_microusd": 4290655,
       "prior_attempts": 629,
       "task_charged_microusd": 1205247,
       "task_attempts": 24,
-      "total_charged_microusd": 5758414,
-      "total_attempts": 659,
+      "total_charged_microusd": 5779176,
+      "total_attempts": 660,
       "reserved_unknown": 0,
-      "remaining_microusd": 4241586,
-      "remaining_attempts": 31,
+      "remaining_microusd": 4220824,
+      "remaining_attempts": 30,
       "task_limit_microusd": 5000000,
       "task_attempt_limit": 40,
       "task_remaining_microusd": 3794753,
@@ -8046,7 +8046,12 @@
       "local_mirror_read_only": true,
       "no_duplicate_request_ids_or_keys": true,
       "option1_receipt": "contextual-stage-b/option1-accounting-v1.json",
-      "legacy_task_fields_are_historical": true
+      "legacy_task_fields_are_historical": true,
+      "phase1_receipt": "contextual-stage-b/phase1-accounting-v1.json",
+      "phase1_charged_microusd": 20762,
+      "phase1_attempts": 1,
+      "phase1_maximum_microusd": 250000,
+      "phase1_maximum_attempts": 2
     },
     "public_activation": false,
     "new_human_items": 0,
@@ -8063,8 +8068,8 @@
       "updated_at": "2026-09-11",
       "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA"
     },
-    "report": "docs/team-recommender/reports/contextual-stage-b-option1-integration-repair-report.md",
-    "blocker": "Independent-check complete reason72 exceeds60; failed request retained, no replay/rekey; explanation unrun.",
+    "report": "docs/team-recommender/reports/phase-1-contextual-assessment-closeout.md",
+    "blocker": "Completed repaired group/person response rejected an unknown or wrongly owned evidence reference; discarded raw body prevents exact isolation; explanation not dispatched.",
     "input_lock": "docs/team-recommender/contextual-stage-b/input-lock-v1.json",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
     "budget_preflight": "docs/team-recommender/contextual-stage-b/preflight-budget-v2.json",
@@ -8097,9 +8102,9 @@
     },
     "implementation_commit": "bc931dcd03b3a2bbff573431e39cbafa72615a36",
     "implementation_tree": "6d7306c6da93052bea024a853b85a1f80c9b4c11",
-    "report_sha256": "b077c4df8ac219008409d486bcd61a0df0eff675fc7822278e48096d489d1490",
+    "report_sha256": "da7a64de00d212481e89e64a33b857df7e8a7513febe99f9a01dcb1421bc6b21",
     "validation_receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v5.json",
-    "disposition": "IMPLEMENTED BUT USEFULNESS INSUFFICIENT/INCONCLUSIVE",
+    "disposition": "PHASE 1 AUDIT INCOMPLETE",
     "authoritative_ledger_unchanged_at_closeout": true,
     "protected_main_at_closeout": "683870dc774eadb9f7d335895267854f9b9a65dd",
     "checkpoint_history": [
@@ -9094,20 +9099,102 @@
       "exact_cached_occurrences": 15
     },
     "phase1_closeout": {
-      "status": "zero_provider_contract_repair_in_progress",
-      "authority": "contextual-stage-b/PHASE1-CLOSEOUT-AUTHORITY.md",
-      "execution_lock": "contextual-stage-b/phase1-check-execution-lock-v1.json",
+      "version": "phase1-closeout-receipt-v1",
+      "created_at": "2026-09-13T18:26:31.705034+00:00",
+      "disposition": "PHASE 1 AUDIT INCOMPLETE",
       "product_start": "0ebf52046c48a6f04797f34bf28646bb49643c3c",
-      "maximum_new_attempts": 2,
-      "maximum_new_microusd": 250000,
-      "complete_envelope_microusd": 126956,
-      "new_attempts": 0,
-      "new_microusd": 0,
-      "no_public_activation": true,
-      "no_app_deployment": true
+      "product_code_sha": "d8a42d94245f9e9d82b19669352622bf7f67fe40",
+      "pre_dispatch_commit": "ba22d1a8facb3b50273bbb52fac2b80266544ca3",
+      "helper_pr": 239,
+      "reviewed_head": "87d2c989aa17233dfa60c5c2fd4ebba2d5d2ae1e",
+      "review_result": "completed clean configured no-findings reaction; unchanged head; no inline/submitted findings",
+      "review_summary_comment": 5655110377,
+      "review_clean_reaction": 503573052,
+      "required_ci": 34773802919,
+      "merge_sha": "6e054ac57308a72d3e4efb99bbe66571418ea4e8",
+      "run_id": 34774192296,
+      "run_attempt": 1,
+      "run_result": "failure at evidence-reference validation after complete provider response",
+      "application_changed": false,
+      "app_deployment": false,
+      "public_activation": false,
+      "main_release_run": 34774082748,
+      "main_release_result": "success; assemble/generate/publish/pages/verify-live skipped",
+      "zero_provider_checks": {
+        "helper_focused": 62,
+        "product_focused": 62,
+        "helper_required_python": 1391,
+        "helper_required_node": 784,
+        "duplicate_fixture_dispatches": 0,
+        "real_graphs_reproduced": 4,
+        "prior117_e2e_reused_only_unchanged_bytes": true,
+        "new_e2e_run": false
+      },
+      "accepted_individual_grades": 0,
+      "accepted_group_grades": 0,
+      "accepted_explanation_grades": 0,
+      "missing_question_ids": [
+        "group",
+        "person-1",
+        "person-2",
+        "person-3",
+        "explanation-1",
+        "explanation-2",
+        "explanation-3"
+      ],
+      "new_human_items": 0,
+      "files": {
+        "reports/phase-1-contextual-assessment-closeout.md": "da7a64de00d212481e89e64a33b857df7e8a7513febe99f9a01dcb1421bc6b21",
+        "contextual-stage-b/PHASE1-CLOSEOUT-AUTHORITY.md": "1a9471060743bea3325fc0650fb401e44b7ea1fb7f3ebeeecd314b5396f15275",
+        "contextual-stage-b/phase1-check-execution-lock-v1.json": "fc9eccb46a7015aede85325f4be06e9232869af373cfba268b23188b85bb7c61",
+        "contextual-stage-b/phase1-pre-dispatch-v1.json": "2ea01c4453e09317b041355fbfe1fd5ccddf0ae753682e6ec17e0eabf7f9a136",
+        "contextual-stage-b/phase1-accounting-v1.json": "efd16495564007debb60faa53d2fee357c0a7a908ffc1ca802c2721c4221be61",
+        "contextual-stage-b/phase1-check-failure-v1.json": "92264dc71b9ea94fb69de0b0fb88695094231f3108ae14a48379cdb0ff83766c"
+      },
+      "remaining_microusd": 4220824,
+      "remaining_attempts": 30,
+      "stop_for_user_review": true,
+      "authority": "contextual-stage-b/PHASE1-CLOSEOUT-AUTHORITY.md",
+      "accounting": "contextual-stage-b/phase1-accounting-v1.json",
+      "receipt": "contextual-stage-b/phase1-closeout-receipt-v1.json",
+      "report": "docs/team-recommender/reports/phase-1-contextual-assessment-closeout.md",
+      "report_sha256": "da7a64de00d212481e89e64a33b857df7e8a7513febe99f9a01dcb1421bc6b21"
+    },
+    "historical_pre_phase1_budget": {
+      "authorization_id": "on-demand-team-offline-v2-20260909",
+      "owner_run": 34770252997,
+      "state_artifact_id": 10321363226,
+      "reservation_artifact_id": 10321487873,
+      "ledger_sha256": "281938a7be619dcbef286c50f262b92e7c31c312caeb8e1221d1de5c4dac5e7b",
+      "checkpoint_sha256": "211f59362518c169cb6f3e44a77f43b3439a7fb41a738b7eebf2fb868d63dbf7",
+      "checkpoint_files_verified": 1299,
+      "prior_charged_microusd": 4290655,
+      "prior_attempts": 629,
+      "task_charged_microusd": 1205247,
+      "task_attempts": 24,
+      "total_charged_microusd": 5758414,
+      "total_attempts": 659,
+      "reserved_unknown": 0,
+      "remaining_microusd": 4241586,
+      "remaining_attempts": 31,
+      "task_limit_microusd": 5000000,
+      "task_attempt_limit": 40,
+      "task_remaining_microusd": 3794753,
+      "task_remaining_attempts": 16,
+      "overall_limit_microusd": 10000000,
+      "overall_attempt_limit": 690,
+      "minimum_remaining_microusd": 709345,
+      "minimum_remaining_attempts": 21,
+      "text_input_tokens": 152389,
+      "text_output_tokens": 89762,
+      "embedding_tokens": 23728,
+      "local_mirror_read_only": true,
+      "no_duplicate_request_ids_or_keys": true,
+      "option1_receipt": "contextual-stage-b/option1-accounting-v1.json",
+      "legacy_task_fields_are_historical": true
     }
   },
-  "active_work": "Phase 1 Option 1 retrospective output-check closeout; frozen scientific candidate",
+  "active_work": "Phase 1 Option 1 closeout reported; output audit incomplete at evidence-reference validation",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -9304,7 +9391,7 @@
     "proposed_next_stage": "No Stage 4 or public activation. Contextual Stage B is authorized but incomplete.",
     "containing_commit": "Documentation after real-validation lock7d4f7b1; resolve report-containing commit locally."
   },
-  "active_stage_meaning": "Historical four-stage experiment number retained; current authorized work is contextual Stage B corrective implementation, not an automatic Stage4",
+  "active_stage_meaning": "Historical four-stage numbering retained; Phase1 means current contextual Option1 output-check closeout only",
   "historical_pre_option1_closeout": {
     "budget_record": {
       "D1_new_usd": 1.055784,
@@ -9397,5 +9484,18 @@
       "incremental_heap": "One actual no-group result+10.04MiB observed; broader48MiB target UNMEASURED",
       "full_suites": "Preserved earlier runs and focused corrections; not reexecuted at current head"
     }
+  },
+  "historical_pre_phase1_closeout": {
+    "containing_commit": "Documentation commit containing contextual-stage-b-option1-integration-repair-report.md; tested code1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+    "model": "Pinned claude-sonnet-5 contextual interpretation/applicability/verification and voyage-4-large retrieval; real finite pass executed; no independent quality check eligible",
+    "next_stage_requires": "Owner review of failed scope/extension schema and capacity gates plus live application access. No automatic second campaign or public activation.",
+    "recommendation": "BLOCKED BY A SPECIFIC CONTRACT, ACCESS, BUDGET, OR RESOURCE FAILURE.",
+    "recommended_next_stage": "Owner review of the completed application path and failed bounded independent check. No automatic paid retry, campaign, public activation or Stage4.",
+    "report": "docs/team-recommender/reports/contextual-stage-b-option1-integration-repair-report.md",
+    "stage_status": "finite_option1_integration_demonstrated_independent_check_contract_blocked",
+    "stop": "STOP FOR USER REVIEW; independent check reason72>60; no automatic replay, public activation or Stage4",
+    "updated_at": "2026-09-13T17:17:46.626007+00:00",
+    "active_work": "Phase 1 Option 1 retrospective output-check closeout; frozen scientific candidate",
+    "active_stage_meaning": "Historical four-stage experiment number retained; current authorized work is contextual Stage B corrective implementation, not an automatic Stage4"
   }
 }
