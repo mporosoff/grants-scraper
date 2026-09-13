@@ -22,9 +22,10 @@ def send(path,value):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['start','finish'])
     p.add_argument('--job',type=Path,required=True);p.add_argument('--result',type=Path);p.add_argument('--state',type=Path)
-    args=p.parse_args();trusted_environment()
+    args=p.parse_args()
     job=json.loads(os.environ['CONTEXTUAL_JOB']) if args.action=='start' else json.loads(args.job.read_bytes())
     resolve_job(inputs(),job)
+    trusted_environment(contextual_job=job)
     stamp={k:job[k] for k in ('job_id','release_id')}|{'run_id':os.environ['GITHUB_RUN_ID'],'code_sha':os.environ['GITHUB_SHA']}
     if args.action=='start':
         if os.environ.get('PACKET_COMMIT') or os.environ.get('PACKET_HASH'):

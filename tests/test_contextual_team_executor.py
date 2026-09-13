@@ -117,6 +117,11 @@ class ContextualExecutor(unittest.TestCase):
         self.assertEqual(result['result']['state'],'failed')
         row=self.runner().ledger.read()['requests'][0]
         self.assertEqual(row['status'],'failed');self.assertEqual(row['charged_microusd'],220)
+        receipt=json.loads((self.state/'receipts'/(row['id']+'.json')).read_bytes())
+        self.assertEqual(receipt['schema_diagnostic']['rule'],'object_keys')
+        self.assertEqual(receipt['schema_diagnostic']['path'],'$')
+        self.assertEqual(receipt['provider_stop_reason'],'end_turn')
+        self.assertNotIn('Fixture purpose',json.dumps(receipt))
         for _ in range(3):self.assertEqual(self.execute_job(self.runner())['result']['state'],'recovery_required')
         self.assertEqual(len(self.provider.calls),1)
 

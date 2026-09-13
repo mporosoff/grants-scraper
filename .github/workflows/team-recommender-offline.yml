@@ -1,6 +1,8 @@
 name: Manual on-demand team experiment preparation
 
 on:
+  repository_dispatch:
+    types: [contextual-team-validation]
   workflow_dispatch:
     inputs:
       packet_commit:
@@ -32,9 +34,11 @@ concurrency:
 
 jobs:
   prepare-evaluate:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    if: github.ref == 'refs/heads/main' && (github.event_name == 'workflow_dispatch' || (github.event_name == 'repository_dispatch' && github.event.action == 'contextual-team-validation'))
     runs-on: ubuntu-latest
     timeout-minutes: 55
+    env:
+      CONTEXTUAL_JOB: ${{ inputs.contextual_job || github.event.client_payload.contextual_job || '' }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -46,7 +50,7 @@ jobs:
       - run: python -m pip install -r requirements.txt
       - name: Validate public packet and restore the single authoritative ledger
         id: prepare
-        if: inputs.contextual_job == '' && inputs.contextual_check == ''
+        if: env.CONTEXTUAL_JOB == '' && inputs.contextual_check == ''
         env:
           GH_TOKEN: ${{ github.token }}
           PACKET_COMMIT: ${{ inputs.packet_commit }}
@@ -58,10 +62,9 @@ jobs:
           --reservation "$RUNNER_TEMP/team-reservation.json"
       - name: Claim the existing Access-authorized contextual job
         id: contextual
-        if: inputs.contextual_job != '' && inputs.contextual_check == ''
+        if: env.CONTEXTUAL_JOB != '' && inputs.contextual_check == ''
         env:
           REGISTRY_WORKFLOW_TOKEN: ${{ secrets.RESEARCHER_REGISTRY_WORKFLOW_TOKEN }}
-          CONTEXTUAL_JOB: ${{ inputs.contextual_job }}
           PACKET_COMMIT: ${{ inputs.packet_commit }}
           PACKET_HASH: ${{ inputs.packet_sha256 }}
         run: python -m tools.contextual_team_workflow start --job "$RUNNER_TEMP/contextual-job.json"
@@ -80,7 +83,6 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
           CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
-          CONTEXTUAL_JOB: ${{ inputs.contextual_job }}
           PACKET_HASH: ${{ inputs.packet_sha256 }}
           PACKET_COMMIT: ${{ inputs.packet_commit }}
         run: >-

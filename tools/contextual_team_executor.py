@@ -16,7 +16,7 @@ from tools.contextual_team_contract import contract, validate, verification_inpu
 from tools.contextual_team_cost import (text_reservation, generated_input_bounds, wire_bytes,
     QUERY_TOKEN_BOUND, JUDGE_BODY_BYTES)
 from tools.contextual_team_policy import inputs as approved_inputs, INPUT_SHA
-from tools.offline_ai import request_body, response_value
+from tools.offline_ai import request_body, response_value, SchemaFailure, stop_reason
 from tools.offline_spend import identity, encoded, atomic_json, Deferred, ConfigurationFailure
 from tools.team_recommender_budget import ExperimentLedger, AUTHORIZATION_ID
 
@@ -121,6 +121,7 @@ class Runner:
             self.crash('after_dispatch')
             receipt['http_status']=response.status_code
             payload=json.loads(existing.bounded_response(response,existing.PACKET_LIMIT))
+            if provider=='anthropic':receipt['provider_stop_reason']=stop_reason(payload)
             usage,charge=existing.usage_cost('embeddings' if provider=='voyage' else 'development-judge',payload,body['model'])
             receipt.update(usage=usage,charged_microusd=charge)
             if provider=='anthropic' and usage.get('cache_creation_input_tokens',0):
@@ -141,6 +142,10 @@ class Runner:
             recovery=row['status']=='reserved_unknown' or (row['status']=='valid' and not cache.exists())
             receipt.update(status=row['status'],error=type(error).__name__,
                            disposition='recovery_required' if recovery else 'failed')
+            if isinstance(error,SchemaFailure):
+                # Existing validator metadata contains bounded types/counts and
+                # schema paths, never the rejected scientific text or reasoning.
+                receipt['schema_diagnostic']=error.diagnostic
             # The irreversible ledger claim is authoritative even if this marker
             # or the receipt is lost. There is no attempt 2 or body re-key fallback.
             self.crash('after_failed_reconcile')
@@ -273,8 +278,9 @@ def resolve_job(configuration,job):
 
 
 def prepare(state,reservation,job_path):
-    existing.trusted_environment();configuration=approved_inputs();job=json.loads(job_path.read_bytes())
+    configuration=approved_inputs();job=json.loads(job_path.read_bytes())
     resolve_job(configuration,job)
+    existing.trusted_environment(contextual_job=job)
     ledger=existing.restore(state,existing.policy());existing.checkpoint(state)
     atomic_json(reservation,{'authorization_id':AUTHORIZATION_ID,'run_id':os.environ['GITHUB_RUN_ID'],
         'attempt':os.environ['GITHUB_RUN_ATTEMPT'],'code_sha':os.environ['GITHUB_SHA'],
@@ -287,7 +293,9 @@ def main():
     parser.add_argument('action',choices=['prepare','execute']);parser.add_argument('--state',type=Path,required=True)
     parser.add_argument('--job',type=Path,required=True);parser.add_argument('--reservation',type=Path)
     parser.add_argument('--result',type=Path)
-    args=parser.parse_args();existing.trusted_environment()
+    args=parser.parse_args()
+    job=json.loads(args.job.read_bytes());resolve_job(approved_inputs(),job)
+    existing.trusted_environment(contextual_job=job)
     if args.action=='prepare':prepare(args.state,args.reservation,args.job);return
     config=approved_inputs();job=json.loads(args.job.read_bytes());scope=resolve_job(config,job)
     runner=Runner(args.state,config)
