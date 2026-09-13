@@ -230,7 +230,7 @@ class ExecutorContract(unittest.TestCase):
         def api(path):
             if path.startswith('actions/artifacts?'):
                 return json.dumps({'artifacts': [
-                    {'id': 10, 'name': e.PREFIX+'-reservation-123-1', 'expired': False},
+                    {'id': 10, 'name': e.PREFIX+'-reservation-123-1', 'expired': False, 'created_at':'2026-09-09T01:00:00Z'},
                     {'id': 11, 'name': e.PREFIX+'-state-123-1', 'expired': False, 'workflow_run': {'id': 123}}]}).encode()
             if path == 'actions/runs/123':
                 return json.dumps({'path': e.WORKFLOW, 'head_branch': 'main', 'event': 'workflow_dispatch'}).encode()
@@ -372,7 +372,7 @@ class ExecutorContract(unittest.TestCase):
 
     def test_restore_never_resets_missing_latest_state_or_prior_run(self):
         destination = self.root/"restore"
-        rows = [{"id": 10, "name": e.PREFIX+"-reservation-12-1", "expired": False}]
+        rows = [{"id": 10, "name": e.PREFIX+"-reservation-12-1", "expired": False, 'created_at':'2026-09-09T01:00:00Z'}]
         def api(path):
             if path.startswith("actions/artifacts?"): return json.dumps({"artifacts": rows}).encode()
             return json.dumps({"workflow_runs": [{"id": 12}]}).encode()
