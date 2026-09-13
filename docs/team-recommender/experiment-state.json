@@ -9192,6 +9192,24 @@
       "no_duplicate_request_ids_or_keys": true,
       "option1_receipt": "contextual-stage-b/option1-accounting-v1.json",
       "legacy_task_fields_are_historical": true
+    },
+    "phase1_reference_completion": {
+      "status": "reviewed-locked-ready-for-exact-dispatch",
+      "authority": "contextual-stage-b/PHASE1-REFERENCE-REPAIR-AUTHORITY.md",
+      "starting_product_sha": "ea11efdc975c41f31a874090c62cb52b54060e6d",
+      "starting_run": 34774192296,
+      "starting_charge_microusd": 5779176,
+      "starting_attempts": 660,
+      "prior_phase1_charge_microusd": 20762,
+      "maximum_remaining_phase1_microusd": 229238,
+      "maximum_new_attempts": 2,
+      "phase1_total_attempts_ceiling": 3,
+      "phase1_total_microusd_ceiling": 250000,
+      "provider_calls_this_continuation": 0,
+      "lock": "contextual-stage-b/phase1-check-execution-lock-v2.json",
+      "pre_dispatch_receipt": "contextual-stage-b/phase1-reference-pre-dispatch-v1.json",
+      "helper_pr": 240,
+      "helper_merge": "3ebe0466c202903b44c099d2b0803e2436f04e37"
     }
   },
   "active_work": "Phase 1 Option 1 closeout reported; output audit incomplete at evidence-reference validation",
