@@ -211,7 +211,7 @@
   "prior_request_rows_sha256": "640f79d9ac3f17be5b0026b96fd550126fb3db20247dabe81a8b49e91c6ba703",
   "public_activation": false,
   "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
-  "release_id": "3d15781cc4c919bfe844a674f0354f5241cf5dafc03f6ef11c27f84c15f7de60",
+  "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
   "scientific_contract": "contextual-cold-demand-references-v1",
   "scientific_retuning": false,
   "selection": {
@@ -222,6 +222,6 @@
     "primary": "existing composer option index 0"
   },
   "sizing_owner_run": 34785915676,
-  "source_inputs_sha256": "d40b16ee7b8d4a6deb9b1f783ce3bfd2a766b56c2e49caeee4e0e4c81094ac2c",
+  "source_inputs_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
   "version": "contextual-phase2-cold-v1"
 }

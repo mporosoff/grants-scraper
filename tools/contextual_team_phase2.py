@@ -18,7 +18,7 @@ from tools.contextual_team_token_preflight import Counter
 from tools.offline_ai import request_body, response_value
 from tools.offline_spend import identity, encoded, atomic_json, Deferred, ConfigurationFailure
 
-RELEASE='3d15781cc4c919bfe844a674f0354f5241cf5dafc03f6ef11c27f84c15f7de60'
+RELEASE='2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9'
 STAGES={'decomposition':'interpret','adjudication':'assess','verification':'verify'}
 
 
