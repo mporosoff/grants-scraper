@@ -24,7 +24,13 @@ def inputs():
 
 def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens):
     purpose=metadata.get('purpose');rule=PURPOSES.get(purpose)
-    if not rule or provider!=rule[1] or output_tokens!=rule[2]:
+    from tools.contextual_team_cost import CAPACITY_VERSION, ASSESSMENT_OUTPUT_TOKENS
+    if 'execution_capacity' in metadata and metadata['execution_capacity']!=CAPACITY_VERSION:
+        raise ConfigurationFailure('unapproved_contextual_execution_capacity')
+    capacity_v2=(purpose in {'cb-assess','cb-extend-assess'}
+                 and metadata.get('execution_capacity')==CAPACITY_VERSION)
+    expected_output=ASSESSMENT_OUTPUT_TOKENS if capacity_v2 else rule[2] if rule else None
+    if not rule or provider!=rule[1] or output_tokens!=expected_output:
         raise ConfigurationFailure('unapproved_contextual_purpose_or_capacity')
     rows=state['requests'];task=[r for r in rows if r.get('purpose','').startswith('cb-')]
     if (len(rows)>=669 or len(task)>=40 or sum(r['charged_microusd'] for r in rows)+amount>9_290_655
