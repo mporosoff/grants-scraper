@@ -1,0 +1,66 @@
+{
+  "version": "contextual-phase2-review-checkpoint-v1",
+  "recorded_date": "2026-09-13",
+  "status": "blocked_review_convergence",
+  "product_runtime_sha": "c5d01706ebc8eea22afc25e83cc0b643e3b7c5f7",
+  "helper_sha": "3f3db97540ce734923367ff1fb775638d8a48b65",
+  "pr": 241,
+  "initial_candidate": "d3080fa9d2172203ab6b2cc8970382dbe80fda54",
+  "initial_review": 5192252625,
+  "initial_finding": 4000899686,
+  "verification_review": 5192269500,
+  "open_finding": 4000918262,
+  "exact_head_ci": 34783073698,
+  "python_ci": "PASS",
+  "browser_ci": "PASS",
+  "focused_affected_checks": 52,
+  "reproduction": {
+    "candidate": "3f3db97540ce734923367ff1fb775638d8a48b65",
+    "review_finding": 4000918262,
+    "observations": [
+      {
+        "boundary": "before_http_response",
+        "fixture_http_calls": 1,
+        "actual_network_calls": 0,
+        "restoration_results": [
+          "checkpoint_content_hash_mismatch",
+          "checkpoint_content_hash_mismatch",
+          "checkpoint_content_hash_mismatch"
+        ],
+        "ledger_unchanged": true
+      },
+      {
+        "boundary": "after_complete_cache_write",
+        "fixture_http_calls": 1,
+        "actual_network_calls": 0,
+        "restoration_results": [
+          "checkpoint_content_hash_mismatch",
+          "checkpoint_content_hash_mismatch",
+          "checkpoint_content_hash_mismatch"
+        ],
+        "ledger_unchanged": true
+      }
+    ],
+    "changed_implementation": false
+  },
+  "merge": null,
+  "deployment": null,
+  "new_metered_attempts": 0,
+  "new_native_count_http_requests": 0,
+  "new_charge_microusd": 0,
+  "authoritative_owner_run": 34775743077,
+  "ledger_sha256": "03b81d8af0369617f1f87b0cf573c22d34dd1f30d6795869648fe7e1bf201b74",
+  "checkpoint_sha256": "7ff91ac743a74d28de323ec59dd14956059b74b3b2e22601dfd83f7df4a62981",
+  "cumulative_charge_microusd": 5821980,
+  "lifetime_attempts": 662,
+  "outstanding_reservations": 0,
+  "remaining_microusd": 4178020,
+  "remaining_attempts": 28,
+  "source_packet_sha256": "56a102550e8a231ad893bfe97dc94810c66fe2a6a20c433b4a75be00d0a24e9d",
+  "fresh_workflows": {
+    "completed": 0,
+    "required": 3
+  },
+  "public_activation": false,
+  "report": "docs/team-recommender/reports/phase-2-cold-demand-and-release-readiness.md"
+}
