@@ -1,0 +1,47 @@
+{
+  "version": "phase2-execution-lock-capability-addendum-v1",
+  "recorded_at": "2026-09-13T23:34:18.196287+00:00",
+  "prior_lock": "docs/team-recommender/contextual-stage-b/phase2-execution-lock-v1.json",
+  "prior_lock_sha256": "006f082d62e84b6e466235499e45b483375946b60389e23ee2f902cadf49e8e1",
+  "prior_product_commit": "2ec4f7a4eb63acfdbb022bc77fe1b0bc56181ed3",
+  "reviewed_helper_head": "a815adc84ccf796e1e38f04686878f7439771a08",
+  "pr": 243,
+  "review_id": 5192676772,
+  "finding_id": 4001238063,
+  "finding": "Phase2 offered a paid person-extension operation explicitly disabled by its backend.",
+  "invariant_audit": [
+    "rendered availability",
+    "selection enablement",
+    "click dispatch guard",
+    "client programmatic entry",
+    "manifest scope/person capabilities",
+    "backend denial and client error classification"
+  ],
+  "correction": "Explicit scope/person allowlists default empty; no disabled extension is offered or sent; manual edits remain local; policy refusals are not falsely reported as missing Access authentication.",
+  "prior_preview_bundle_id": "e8a6fd71ccf3997a63f61224bdb3f2fc6e849a3c5fbf2599fd4f3434fd26188e",
+  "preview_bundle_id": "f5986a177d6d9f5af076a3e087a78293c369719edb5b8b95a7a6b4b0c37618c2",
+  "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+  "files": {
+    "assets/contextual-team-client.js": "5a1fea73cbedfacccbb47b8cc881f04907d1e884afb445c7504a357d752fe938",
+    "assets/opportunity-team-panel.js": "9f9acd3c94b6fb38d75555d6d47ee3babe7ee6e255d9cd72970c113c2281cd33",
+    "tools/contextual_team_phase2_preview.mjs": "f8bda45f9d8beae5ff1086e4e2ce4d8e0a1a68e17454e223d7fe34299040142d",
+    "tools/contextual_team_validation_index.mjs": "dacf01cc34beb1b4777d86240757e390eb9fad6c6458f31cb21f47ba0a4d9fa2",
+    "tests/browser/contextual-client.test.mjs": "e075ea4b2834c6544ae438e821825e81a6ac202186ecc9f66bebf4507595e873"
+  },
+  "unchanged": [
+    "scientific prompts and provider schemas",
+    "source/registry/representation snapshots",
+    "composer and all numerical rules",
+    "source order and judge selection",
+    "authorization and complete finite budget"
+  ],
+  "tests": {
+    "helper_node_contracts": 19,
+    "helper_python_contracts": 12,
+    "product_client_composer_contracts": 18
+  },
+  "new_paid_calls": 0,
+  "new_grades": 0,
+  "status": "remediation tested; exact-head re-review required before restricted deployment",
+  "remediated_helper_head": "c1034e044d72784fae7fb9aec98b05ea4ca5bab5"
+}

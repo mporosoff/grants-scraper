@@ -217,7 +217,7 @@
       view.roles.map(function (role) { return roleRow(role, current.engine); }).join("") + '</ul></section>' +
       (missingSkills.length ? '<section class="opportunity-team-gaps"><h5>Missing skills to recruit</h5><ul>' + missingSkills.map(function (skill) { return '<li>' + escapeHtml(skill) + '</li>'; }).join("") + '</ul></section>' : '') +
       replacement +
-      (current.engine.contextual&&view.replacements.some(function(item){return item.assessment_state==='unassessed';})
+      (current.engine.contextual&&view.replacements.some(function(item){return item.assessment_state==='unassessed'&&current.engine.canAssessPerson?.(item.profile.id);})
         ? '<button type="button" class="button secondary" data-contextual-assess disabled>Assess this person’s contribution</button>' : '') +
       '<div class="opportunity-team-next"><a class="button secondary" href="' + escapeHtml(teamMatchHref(view)) + '">Continue in Team Match</a>' +
       '<a class="source-action" href="faculty_interests.html?mode=add&return=team_match&opportunity=' + encodeURIComponent(view.opportunity.id) + '">Add a missing researcher</a></div>' +
@@ -403,7 +403,7 @@
     if(event.target.closest('[data-contextual-assess]')&&reconcile(current)&&current.engine?.contextual){
       var contextualSelect=current.panel.querySelector('[data-opportunity-team-replacement]');
       var personId=contextualSelect?.value;
-      if(personId&&current.engine.unassessedIds?.().includes(personId))loadCurrent(current,{deliberate:true,personId:personId});
+      if(personId&&current.engine.canAssessPerson?.(personId)&&current.engine.unassessedIds?.().includes(personId))loadCurrent(current,{deliberate:true,personId:personId});
       return;
     }
     var remove = event.target.closest("[data-opportunity-team-remove]");
@@ -435,7 +435,7 @@
     var button = current.panel.querySelector("[data-opportunity-team-add-replacement]");
     if (button) button.disabled = !event.target.value;
     var assess=current.panel.querySelector('[data-contextual-assess]');
-    if(assess)assess.disabled=!current.engine.unassessedIds?.().includes(event.target.value);
+    if(assess)assess.disabled=!current.engine.canAssessPerson?.(event.target.value)||!current.engine.unassessedIds?.().includes(event.target.value);
   });
 
   document.addEventListener("funding-finder:before-results-render", function () {

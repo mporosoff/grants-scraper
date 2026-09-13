@@ -114,3 +114,30 @@ test('reviewed source supplement keeps raw-catalog invalidation and refreshed au
   await assert.rejects(c.ContextualTeamClient.load(f.index,f.directory,options(f,{record:replacement,fetcher,deliberate:true})),/source_version_conflict/);
   assert.equal(count,1);
 });
+
+test('release-owned person-assessment capability fails closed without hiding manual candidates',async()=>{
+  const f=fixture(),c=context(f);let calls=0;
+  const fetcher=async()=>{calls++;return response({release_id:f.index.release_id,scope_id:f.scope.id,state:'ready',result:f.graph});};
+  const unassessed=f.directory.researchers.find(p=>eligible(p)&&!f.graph.people.some(q=>q.person_id===p.id)).id;
+  await assert.rejects(c.ContextualTeamClient.load(f.index,f.directory,options(f,{fetcher,deliberate:true,personId:unassessed})),/person_assessment_not_enabled/);
+  assert.equal(calls,0);
+  const loaded=await c.ContextualTeamClient.load(f.index,f.directory,options(f,{fetcher}));
+  assert.equal(loaded.engine.canAssessPerson(unassessed),false);
+  const edited=loaded.engine.addReplacement(loaded.engine.proposal(),unassessed);
+  assert(edited.selectedIds.includes(unassessed));assert.equal(calls,1);
+  const {generation_id,...body}=f.index;body.operations={assess_person_ids:[unassessed],assessment_scope_ids:[f.scope.id]};
+  const approved={...body,generation_id:hash(body)};
+  const allowed=await c.ContextualTeamClient.load(approved,f.directory,options(f,{fetcher,personId:unassessed}));
+  assert.equal(allowed.engine.canAssessPerson(unassessed),true);assert.equal(allowed.engine.canAssessPerson('another-person'),false);
+});
+
+test('service capability denials are not misreported as failed administrator authentication',async()=>{
+  for(const [error,expected] of [['contextual_new_paid_work_disabled','contextual_new_paid_work_disabled'],
+    ['phase2_expansion_not_authorized','contextual_person_assessment_not_enabled'],
+    ['outside_option1_paid_inventory','contextual_operation_not_enabled']]){
+    const f=fixture(),c=context(f);
+    await assert.rejects(c.ContextualTeamClient.load(f.index,f.directory,options(f,{fetcher:async()=>new Response(JSON.stringify({error}),{status:403})})),new RegExp(expected));
+  }
+  const f=fixture(),c=context(f);
+  await assert.rejects(c.ContextualTeamClient.load(f.index,f.directory,options(f,{fetcher:async()=>new Response('Access login required',{status:403})})),/administrator_access_required/);
+});

@@ -13,7 +13,15 @@
   function still(options){assert(!options.signal?.aborted,'contextual_cancelled');}
   async function read(url,options,fetcher){
     const response=await fetcher(url,{credentials:'include',redirect:'error',cache:'no-store',...options});
-    if(response.status===401||response.status===403)throw Error('contextual_administrator_access_required');
+    if(response.status===401)throw Error('contextual_administrator_access_required');
+    if(response.status===403){
+      const raw=await response.arrayBuffer();assert(raw.byteLength<=200000,'contextual_response_too_large');
+      let detail;try{detail=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(raw));}catch{}
+      if(detail?.error==='phase2_expansion_not_authorized')throw Error('contextual_person_assessment_not_enabled');
+      if(detail?.error==='outside_option1_paid_inventory')throw Error('contextual_operation_not_enabled');
+      if(detail?.error==='contextual_new_paid_work_disabled')throw Error(detail.error);
+      throw Error('contextual_administrator_access_required');
+    }
     if(!response.ok)throw Error('contextual_service_'+response.status);
     const bytes=await response.arrayBuffer();assert(bytes.byteLength<=200000,'contextual_response_too_large');
     return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
@@ -32,6 +40,10 @@
     const parent=String(options.parentId||''),wanted=String(options.scopeId||parent);
     const scope=index.scopes.find(s=>s.id===wanted&&s.parent_id===parent);
     if(!scope)return unavailable(index,parent,'specific_scope_required');
+    const permittedPeople=new Set(index.operations?.assess_person_ids||[]);
+    const canAssessPerson=id=>permittedPeople.has(id)&&
+      (index.operations?.assessment_scope_ids||[]).includes(scope.id);
+    assert(!options.personId||canAssessPerson(options.personId),'contextual_person_assessment_not_enabled');
     if(scope.state==='needs_scope_selection')return unavailable(index,parent,'specific_scope_required');
     if(scope.state==='insufficient_source')return unavailable(index,parent,'contextual_insufficient_source');
     const original=options.record,child=scope.record_type==='publishable_child';
@@ -99,7 +111,7 @@
         parentRecord:(g.GRANT_CATALOG?.opportunities||[]).find(r=>String(r.opportunity_id)===parent),
         record:child?options.childCatalog?.opportunities.find(r=>String(r.opportunity_id)===scope.id):
           (g.GRANT_CATALOG?.opportunities||[]).find(r=>String(r.opportunity_id)===scope.id)})});
-    return {schema_version:4,engine:Object.freeze({...engine,contextual:true}),graph_id:graph.graph_id};
+    return {schema_version:4,engine:Object.freeze({...engine,contextual:true,canAssessPerson}),graph_id:graph.graph_id};
   }
   g.ContextualTeamClient=Object.freeze({VERSION,load,statistics:()=>({cached_scopes:cache.size,pending:pending.size}),clearForTest:()=>{cache.clear();pending.clear();}});
 })(globalThis);

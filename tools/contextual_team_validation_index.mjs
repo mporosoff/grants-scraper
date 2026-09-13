@@ -10,6 +10,7 @@ const body={schema_version:4,release_id:option1?.release_id||snapshot.snapshot_i
   roster_id:snapshot.roster_id,directory_id:snapshot.directory_id,public_activation:false,
   endpoint:'https://funding-finder-researchers.urochestercheme.workers.dev/admin/api/contextual',
   ...(option1?{transport:'access-window-v1'}:{}),
+  operations:{assess_person_ids:option1?[option1.extension.person_id]:[],assessment_scope_ids:option1?['332894']:[]},
   source_fields:SOURCE_FIELDS,condition_fields:CONDITION_FIELDS,
   runtime:{contextual_engine:hash(fs.readFileSync('assets/contextual-team-engine.js','utf8')),
     contextual_client:hash(fs.readFileSync('assets/contextual-team-client.js','utf8')),

@@ -14,6 +14,7 @@ const directory=c.RESEARCHER_DIRECTORY;
 if(directory.registry_generation!==p.registry_generation)throw Error('preview_registry_conflict');
 const indexBody={schema_version:4,release_id:p.release_id,registry_generation:p.registry_generation,
   roster_id:sources.roster_id,directory_id:hash(directory),public_activation:false,
+  operations:{assess_person_ids:[],assessment_scope_ids:[]},
   endpoint:'https://funding-finder-researchers.urochestercheme.workers.dev/admin/api/contextual',
   source_fields:SOURCE_FIELDS,condition_fields:CONDITION_FIELDS,
   runtime:{contextual_engine:hash(fs.readFileSync('assets/contextual-team-engine.js','utf8')),
@@ -49,6 +50,8 @@ for(const page of ['match_explorer.html','team_match.html']){
   let html=original.replace('<head>','<head>\n<base href="/admin/contextual/preview/">\n<script src="assets/contextual-preview-observer.js"></script>');
   html=html.replace(/(<meta name="opportunity-team-generation" content=")[a-f0-9]{64}("\s*\/?>)/,'$1'+index.generation_id+'$2');
   html=html.replace(/(data\/opportunity_team_index\.js\?v=)[a-f0-9]{64}/,'$1'+index.generation_id);
+  html=html.replace(/((?:\.\/)?(assets\/[^"?]+)\?v=)[a-f0-9]{64}/g,(whole,prefix,name)=>
+    prefix+hash(fs.readFileSync(name,'utf8').replace(/\r\n/g,'\n')));
   // Keep scripts and presentation. Restrict network connections for this private
   // preview so unrelated hosted services cannot spend or send subscriber mail.
   html=html.replace(/connect-src [^;]*;/,"connect-src 'self';");
