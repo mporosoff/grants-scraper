@@ -29,7 +29,24 @@ function configuration(resources){
       ...declared.d1_databases.map(d=>({name:d.binding,type:'d1',id:d.database_id})),
       ...declared.ratelimits.map(r=>({...r,type:'ratelimit'})),...secretNames.map(name=>({name,type:'secret_text'}))].sort(byName)};
   const actual={runtime:resources.script_runtime,bindings:(resources.bindings||[]).slice().sort(byName)};
-  if(canonical(expected)!==canonical(actual))throw Error('Serving intake runtime/bindings differ from protected configuration');
+  if(canonical(expected)!==canonical(actual)){
+    const shape=value=>value===undefined?'missing':value===null?'null':Array.isArray(value)?'array':typeof value;
+    const clean=value=>String(value).replace(/[^A-Za-z0-9_.-]/g,'?').slice(0,80);
+    const differences=[];
+    function compare(wanted,observed,path){
+      if(canonical(wanted)===canonical(observed)||differences.length>=30)return;
+      if(shape(wanted)==='object'&&shape(observed)==='object'){
+        for(const key of [...new Set([...Object.keys(wanted),...Object.keys(observed)])].sort())compare(wanted[key],observed[key],path+'.'+clean(key));
+      }else differences.push({path,expected_type:shape(wanted),actual_type:shape(observed),
+        expected_sha256:wanted===undefined?null:hash(canonical(wanted)),actual_sha256:observed===undefined?null:hash(canonical(observed))});
+    }
+    compare(expected.runtime,actual.runtime,'runtime');
+    const wanted=Object.fromEntries(expected.bindings.map(b=>[b.name,b])),observed=Object.fromEntries(actual.bindings.map(b=>[b.name,b]));
+    compare(wanted,observed,'bindings');
+    // Diagnostics contain bounded field identities, types and digests only.
+    // The same strict comparison still stops before migration or deployment.
+    throw Error('Serving intake runtime/bindings differ from protected configuration: '+JSON.stringify(differences));
+  }
   return actual;
 }
 async function routing(){
