@@ -41,11 +41,14 @@ class TokenSizing(unittest.TestCase):
 
     def test_inventory_is_fixed_public_data_and_no_inference(self):
         items=sizing.inventory()
-        self.assertEqual(len(items),164)
+        self.assertEqual(len(items),167)
         self.assertEqual(len([x for x in items if x['id'].startswith('profile:')]),155)
         self.assertTrue(all(x['body']['model']=='claude-sonnet-5' for x in items))
         self.assertTrue(all('max_tokens' not in x['body'] for x in items))
         self.assertEqual(sizing.identity(items),sizing.identity(sizing.inventory()))
+        self.assertEqual(len([x for x in items if x['id'].endswith(':judge-evidence')]),3)
+        retained=[x for x in items if not x['id'].endswith(':judge-evidence')]
+        self.assertEqual(sizing.identity(retained),'0ba9d748d10e4a03b9476bb8a0884284f88c0d48d71792c1f6ec3e2992e4ce78')
 
     def test_complete_count_cached_without_ledger_or_message_dispatch(self):
         calls=[]

@@ -62,6 +62,10 @@ def inventory():
             result.append({'id':scope['id']+':'+stage,'body':{
                 'model':'claude-sonnet-5','system':c['prompt'],
                 'messages':[{'role':'user','content':json.dumps(source,ensure_ascii=False)}]}})
+        from tools.contextual_team_check import judge_prompt
+        result.append({'id':scope['id']+':judge-evidence','body':{
+            'model':'claude-sonnet-5','system':judge_prompt(owned_references=True),
+            'messages':[{'role':'user','content':json.dumps(source,ensure_ascii=False)}]}})
     if len(result)>MAX_COUNT_HTTP_ATTEMPTS:raise ValueError('phase2_counter_inventory_bound')
     return result
 
