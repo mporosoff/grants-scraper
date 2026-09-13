@@ -14,6 +14,7 @@ from pathlib import Path, PurePosixPath
 import re
 import stat
 import subprocess
+import tempfile
 import time
 import zipfile
 import sys
@@ -368,10 +369,20 @@ def restore(destination, settings, api_call=api):
     return ExperimentLedger(destination / "ledger.json")
 
 
-def checkpoint(destination):
+def checkpoint(destination, *, token_preflight=None):
+    path = destination / "checkpoint.json"
+    prior = json.loads(path.read_bytes()) if path.exists() else {}
     files = {p.relative_to(destination).as_posix(): sha(p.read_bytes()) for p in destination.rglob("*.json") if p.name != "checkpoint.json"}
-    atomic_json(destination / "checkpoint.json", {"authorization_id": AUTHORIZATION_ID, "run_id": os.environ["GITHUB_RUN_ID"],
-                "attempt": os.environ["GITHUB_RUN_ATTEMPT"], "code_sha": os.environ["GITHUB_SHA"], "files": files})
+    value = {"authorization_id": AUTHORIZATION_ID, "run_id": os.environ["GITHUB_RUN_ID"],
+             "attempt": os.environ["GITHUB_RUN_ATTEMPT"], "code_sha": os.environ["GITHUB_SHA"], "files": files}
+    if token_preflight is not None or "phase2_token_preflight" in prior:
+        value["phase2_token_preflight"] = token_preflight if token_preflight is not None else prior["phase2_token_preflight"]
+    # The free counter and its recovery marker live in this one atomic file.
+    # Staging outside the uploaded state also excludes debris after a process kill.
+    with tempfile.TemporaryDirectory(prefix='.team-checkpoint-', dir=destination.parent) as temporary:
+        staged = Path(temporary) / 'checkpoint.json'
+        atomic_json(staged, value)
+        os.replace(staged, path)
 
 
 def prepare(destination, packet_path, reservation, commit, packet_hash):
