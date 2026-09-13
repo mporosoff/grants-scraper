@@ -63,6 +63,7 @@ class ExperimentLedger(Ledger):
             allowed_metadata={"packet_sha256", "body_sha256", "purpose", "code_sha", "row_inputs", "judge_items"}
             if is_contextual:allowed_metadata.add('execution_capacity')
             if metadata.get('purpose','').startswith('cb-o1-'):allowed_metadata.update({'option1_release','repair_of'})
+            if metadata.get('purpose','').startswith('cb-p1-'):allowed_metadata.update({'phase1_lock','response_contract_sha256','repair_of'})
             if set(metadata) - allowed_metadata:
                 raise ValueError("invalid_execution_metadata")
             if provider == "voyage" and execution_metadata is not None:
