@@ -76,14 +76,18 @@ def packet(scope,graph,members,kind,config):
 def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['prepare','execute'])
     p.add_argument('--state',type=Path,required=True);p.add_argument('--reservation',type=Path)
-    p.add_argument('--result',type=Path);args=p.parse_args();existing.trusted_environment();config=configuration()
+    p.add_argument('--result',type=Path);args=p.parse_args();existing.trusted_environment()
+    from tools.contextual_team_option1 import plan, configuration_for_job, ensure_remaining_plan_fits, Option1Runner
+    continuation=plan()
+    config=configuration_for_job({'release_id':continuation['release_id'],'scope_id':continuation['scopes'][0]['id'],'person_id':''})
     requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
-    if not isinstance(requested,list) or len(requested)>2:raise ValueError('contextual_check_two_groups_only')
+    if not isinstance(requested,list) or len(requested)>1:raise ValueError('option1_check_one_output_two_requests_only')
     if args.action=='prepare':
         if os.environ.get('CONTEXTUAL_JOB') or os.environ.get('PACKET_HASH') or os.environ.get('PACKET_COMMIT'):
             raise ValueError('contextual_check_mutually_exclusive_operation')
         ledger=existing.restore(args.state,existing.policy());existing.checkpoint(args.state)
-    selected=graphs(args.state,config)
+        ensure_remaining_plan_fits(ledger.read(),continuation)
+    selected=graphs(args.state,config)[:1]
     if [r.get('scope_id') for r in requested]!=[scope['id'] for scope,graph in selected]:
         raise ValueError('contextual_check_fixed_first_two_output_sources_required')
     packets=[]
@@ -96,18 +100,21 @@ def main():
         atomic_json(args.reservation,{'authorization_id':existing.AUTHORIZATION_ID,'run_id':os.environ['GITHUB_RUN_ID'],
             'attempt':os.environ['GITHUB_RUN_ATTEMPT'],'code_sha':os.environ['GITHUB_SHA'],'input_sha256':INPUT_SHA,
             'prior_ledger_sha256':existing.sha(ledger.path.read_bytes()),'maximum_logical_spend_usd':10,
-            'contextual_task_maximum_usd':5,'requests':len(packets)})
+            'option1_task_maximum_usd':1.5,'option1_attempts_maximum':16,
+            'option1_release':continuation['release_id'],'requests':len(packets)})
         return
-    runner=Runner(args.state,config);results=[]
+    runner=Option1Runner(args.state,config);results=[]
     try:
         for scope,kind,body,check in packets:
             # One fixed logical question per scope/kind: changed group membership
             # or rebatching does not grant another paid attempt after a claim.
-            result=runner.request('cb-check',['cb-check',config['snapshot_id'],scope['id'],kind],body,check,ceiling=JUDGE_BODY_BYTES+1024)
+            purpose='cb-o1-check-'+kind
+            result=runner.request(purpose,[purpose,config['snapshot_id'],scope['id'],kind],body,check,ceiling=JUDGE_BODY_BYTES+1024,
+                repair_metadata={'option1_release':continuation['release_id'],'repair_of':''})
             results.append({'scope_id':scope['id'],'kind':kind,'body_sha256':identity(body),'value':result})
     finally:
         atomic_json(args.result,{'version':'contextual-check-v1','results':results,'requests':runner.used,
-            'selected_scopes':[scope['id'] for scope,graph in selected],'maximum_scopes':2,
+            'selected_scopes':[scope['id'] for scope,graph in selected],'maximum_scopes':1,'maximum_requests':2,
             'same_model_family_limitation':True,'human_judgments':0})
         existing.checkpoint(args.state)
 

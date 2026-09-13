@@ -23,6 +23,9 @@ def inputs():
 
 
 def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens):
+    if metadata.get('purpose','').startswith('cb-o1-'):
+        from tools.contextual_team_option1 import check_reservation as option1_check
+        return option1_check(state,provider,metadata,amount,input_tokens,output_tokens)
     purpose=metadata.get('purpose');rule=PURPOSES.get(purpose)
     from tools.contextual_team_cost import CAPACITY_VERSION, ASSESSMENT_OUTPUT_TOKENS
     if 'execution_capacity' in metadata and metadata['execution_capacity']!=CAPACITY_VERSION:

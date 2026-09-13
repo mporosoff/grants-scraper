@@ -6,6 +6,7 @@ import {createHash} from 'node:crypto';
 import {ContextualStore,createContextualHandler} from '../../workers/researcher-intake/src/contextual.js';
 import {createHandler} from '../../workers/researcher-intake/src/index.js';
 const configuration=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/inputs-v1.json',import.meta.url)));
+const option1=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/option1-v1.json',import.meta.url)));
 const migration=fs.readFileSync(new URL('../../workers/researcher-intake/migrations/0005_contextual_validation_jobs.sql',import.meta.url),'utf8');
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 class Statement {
@@ -31,13 +32,13 @@ function fixture(){
   const env={GITHUB_REPOSITORY:'mporosoff/grants-scraper',GITHUB_DISPATCH_TOKEN:'fixture-token'};
   const request=(path,data,internal=false)=>new Request(host+path,{method:data?'POST':'GET',headers:{'Content-Type':'application/json',
     Origin:host,[internal?'x-test-workflow':'x-test-access']:'yes'},...(data?{body:JSON.stringify(data)}:{})});
-  const value={release_id:configuration.snapshot_id,scope_id:'344592:ab-0025',person_id:''};
+  const value={release_id:option1.release_id,scope_id:'332894',person_id:''};
   return {db,store,calls,clock,env,request,value,handler,dependencies};
 }
 
 test('operator control and script remain Access protected and loading them cannot claim a job',async()=>{
   const f=fixture();
-  for(const path of ['/admin/contextual','/admin/contextual/app.js']){
+  for(const path of ['/admin/contextual','/admin/contextual/app.js','/admin/contextual/access','/admin/contextual/access.js']){
     assert.equal((await f.handler(new Request(host+path),f.env)).status,403);
     const r=await f.handler(f.request(path),f.env);assert.equal(r.status,200);
     assert.match(r.headers.get('Content-Security-Policy'),/connect-src 'self'/);
@@ -78,8 +79,8 @@ test('concurrent requests share one durable dispatch; reads and repeats cannot r
   const sent=JSON.parse(f.calls[0].options.body);assert.equal(sent.event_type,'contextual-team-validation');
   assert.deepEqual(Object.keys(sent.client_payload),['contextual_job']);
   assert.deepEqual(JSON.parse(sent.client_payload.contextual_job),{...f.value,job_id:hash([f.value.release_id,f.value.scope_id,''])});
-  const other={...f.value,scope_id:'361207'};
-  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',other),f.env)).status,429);
+  const other={...f.value,scope_id:'363069'};
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',other),f.env)).status,409);
   await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(f.value)),f.env);assert.equal(f.calls.length,1);
 });
 
@@ -88,7 +89,7 @@ test('unknown remote dispatch remains recovery-required through reloads and anot
   const h=createContextualHandler({...f.dependencies,fetchImpl:async()=>{count++;throw Error('fixture lost response');}});
   assert.equal((await h(f.request('/admin/api/contextual/jobs',f.value),f.env)).status,503);
   for(let i=0;i<3;i++)assert.equal((await (await h(f.request('/admin/api/contextual/jobs',f.value),f.env)).json()).state,'recovery_required');
-  assert.equal(count,1);assert.equal((await h(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'361207'}),f.env)).status,429);
+  assert.equal(count,1);assert.equal((await h(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'363069'}),f.env)).status,409);
 });
 
 test('dispatch failure exposes only bounded status while keeping the same irreversible job',async()=>{
@@ -162,7 +163,7 @@ test('checkpointed provider uncertainty remains visible and owns the sole slot a
     const before=f.calls.length;
     for(const request of [f.request('/admin/api/contextual/jobs',f.value),f.request('/admin/api/contextual/jobs?'+new URLSearchParams(f.value))])
       assert.equal((await (await f.handler(request,f.env)).json()).state,'recovery_required');
-    assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'361207'}),f.env)).status,429);
+    assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'363069'}),f.env)).status,409);
     assert.equal(f.calls.length,before);
   }
   assert.equal((await f.handler(f.request('/internal/contextual/result',{...value,result:{state:'failed'}},true),f.env)).status,409);
@@ -184,6 +185,6 @@ test('reconciled failure and pre-dispatch budget deferral release their slot wit
     const before=f.calls.length;
     for(let i=0;i<3;i++)assert.equal((await (await f.handler(f.request('/admin/api/contextual/jobs',f.value),f.env)).json()).state,state);
     assert.equal(f.calls.length,before);
-    assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'361207'}),f.env)).status,202);
+    assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'363069'}),f.env)).status,409);
   }
 });

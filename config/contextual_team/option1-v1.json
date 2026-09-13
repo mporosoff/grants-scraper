@@ -1,0 +1,125 @@
+{
+  "version": "contextual-option1-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "input_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+  "base_snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+  "starting_ledger_sha256": "bd55da4cc6b2483b06d9ecffbb104a0ea221335b2fd17d4de7f0bde12460b82a",
+  "starting_spend_microusd": 5495902,
+  "starting_attempts": 653,
+  "maximum_new_microusd": 1500000,
+  "maximum_new_attempts": 16,
+  "preserved_microusd": 3004098,
+  "preserved_attempts": 21,
+  "contract_version": "contextual-reference-output-v2",
+  "contract_ids": {
+    "decomposition": "570ba9715022b7d965a62ba908a32df9afcb06778728f1bee9249d7327f79aa4",
+    "adjudication": "bf7aa691a7416c87a8041abe08b7f54bab3ff03ecef4ba6905f83f2cf9fd652d",
+    "verification": "0d0d6d17b98bb4840cd35fd7a739d8930c7dda4ccf6b14c7af8a45f308acbf4d"
+  },
+  "scopes": [
+    {
+      "id": "332894",
+      "original_failure": "verification_max_tokens_16000",
+      "source_id": "b898f42c6b93f3450da1169b595281fc578bb2c9c48173448d07d67d06a5b2f3"
+    },
+    {
+      "id": "363069",
+      "original_failure": "complete_assessment_reason_260_exceeded_220",
+      "source_id": "1834afce29858e54e5ef6b60f219eae2b59f38d949b2a9a58a78661df7560edf"
+    }
+  ],
+  "extension": {
+    "maximum_existing_contribution_cosine": 0.49134892423256615,
+    "person_id": "urh-000120",
+    "selection_rule": "highest maximum existing contribution cosine outside the exact initial 12; canonical-ID tie break"
+  },
+  "selection": "Two original fixed scopes with distinct observed output failures; verification truncation first, completed field-length failure second. No scientific outcome used to replace cases. The LPS valid intermediate is not verified.",
+  "reuse": {
+    "332894": {
+      "decomposition": {
+        "body_sha256": "27afebc46ffcc82e19361933db5bb0cca06e5ad2d7dbcc3a9d81cabbf4eacd8b",
+        "key": "9cbc1f4ec8c39ca63a62c87ab0e73e8c057f48044945cb1f7c1a314dcba510a2",
+        "request_id": "3660de609ab345419e50fcf8e5de1bd3"
+      },
+      "adjudication": {
+        "body_sha256": "e0fe181dd6a8c8361365340ce8a83068df27146196b7f9de8b1280e9359b3e9d",
+        "key": "a7b7d136ef23a2bbdbf75149d87038ccf26cdafd132a1c05a6e4a64321a8de16",
+        "request_id": "b9f27387e0b3462f9e6d2d5e1a0e1294"
+      }
+    },
+    "363069": {
+      "decomposition": {
+        "body_sha256": "67ef1621e06fda9d418570a47dacee56430136d96ae9d5e4d9bc89566f330805",
+        "key": "e649d4547b48f960f3690cf681ebf139e8d2dbdc07b67272194351c790c96e71",
+        "request_id": "f9da8e24522a46f4a265ae253c31959d"
+      }
+    }
+  },
+  "operations": [
+    {
+      "purpose": "cb-o1-lps-verify",
+      "stage": "verification",
+      "max_output_tokens": 24000,
+      "input_token_bound": 47029,
+      "maximum_microusd": 334058,
+      "repair_of": "a97083b5dbd14afebd5e17166d068a3e",
+      "actual_preflight_wire_bytes": 46005
+    },
+    {
+      "purpose": "cb-o1-veterans-assess",
+      "stage": "adjudication",
+      "max_output_tokens": 16000,
+      "input_token_bound": 34669,
+      "maximum_microusd": 229338,
+      "repair_of": "4dc560a939794801bb774d671a88b6e4",
+      "actual_preflight_wire_bytes": 33645
+    },
+    {
+      "purpose": "cb-o1-veterans-verify",
+      "stage": "verification",
+      "max_output_tokens": 24000,
+      "input_token_bound": 41943,
+      "maximum_microusd": 323886,
+      "repair_of": "",
+      "actual_preflight_wire_bytes": 36823
+    },
+    {
+      "purpose": "cb-o1-extension-assess",
+      "stage": "adjudication",
+      "max_output_tokens": 8000,
+      "input_token_bound": 21543,
+      "maximum_microusd": 123086,
+      "repair_of": "",
+      "actual_preflight_wire_bytes": 20519
+    },
+    {
+      "purpose": "cb-o1-extension-verify",
+      "stage": "verification",
+      "max_output_tokens": 16000,
+      "input_token_bound": 28818,
+      "maximum_microusd": 217636,
+      "repair_of": "",
+      "actual_preflight_wire_bytes": 23698
+    },
+    {
+      "purpose": "cb-o1-check-group",
+      "stage": "check",
+      "max_output_tokens": 512,
+      "input_token_bound": 45024,
+      "maximum_microusd": 95168,
+      "repair_of": ""
+    },
+    {
+      "purpose": "cb-o1-check-explanation",
+      "stage": "check",
+      "max_output_tokens": 512,
+      "input_token_bound": 45024,
+      "maximum_microusd": 95168,
+      "repair_of": ""
+    }
+  ],
+  "check_selection": "First locked scope yielding an actual automatically composed positive graph: one group/every-member request and one explanation request. If neither positive, no checks. No substitute scopes.",
+  "total_reserved_microusd": 1418340,
+  "planned_attempts": 7,
+  "release_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055"
+}
