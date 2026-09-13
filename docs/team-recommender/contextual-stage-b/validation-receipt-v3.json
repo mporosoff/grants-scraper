@@ -1,0 +1,143 @@
+{
+  "version": "contextual-stage-b-checkpoint-v3",
+  "captured_at": "2026-09-13T03:16:55.873558+00:00",
+  "product_start": "d70af4572b22174436aa9bc6a1feb8446e6e725f",
+  "product_code_sha": "732a8d80a9dae0e45925fe931dd9311762d37b6e",
+  "branch": "codex/on-demand-team-recommender",
+  "worktree": "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\on-demand-team-recommender",
+  "preserved_report": {
+    "path": "docs/team-recommender/reports/contextual-stage-b-review-checkpoint-20260913.md",
+    "sha256": "93a4675c9d6e95a62f6a35f565c248badabb9b5e3323079edbe798769a5df874"
+  },
+  "previous_receipt": {
+    "path": "docs/team-recommender/contextual-stage-b/validation-receipt-v2.json",
+    "sha256": "d194a73457f4a029dac2eac8654b99f3001e10b4d4771898fe41f1c3f9976876"
+  },
+  "report": {
+    "path": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
+    "sha256": "885278ef48059adec1aa4f949fbe1b0cda71d39cef3f99c05ab4d4ab140fd69c"
+  },
+  "browser_repair": {
+    "path": "docs/team-recommender/contextual-stage-b/browser-repair-receipt-v1.json",
+    "sha256": "391fdab2994f73d22628235c979f1c72464c0169545f6c3b04e5d6b2334dfd6c"
+  },
+  "review": {
+    "pr": 231,
+    "head": "079e06b9f2c61ea15a40bca62cd9f0fa0daceeb8",
+    "ci_run": 34733583966,
+    "python": "passed",
+    "browser": "passed",
+    "terminal_review_comment": 5650343009,
+    "terminal_review_at": "2026-09-13T02:43:38Z",
+    "consequential_unresolved": false,
+    "focused_python_passed": 42,
+    "focused_worker_node_passed": 36,
+    "merged": true,
+    "merge_sha": "311246fe48c643bd3efa375fbe4b2b624bcb6ef6",
+    "merged_at": "2026-09-13T02:44:26Z",
+    "deployed": false,
+    "prior_finding_preserved": 3998349238,
+    "recovery_invariant": "Durable reserved_unknown or missing/corrupt reconciled results require recovery; repeated restoration cannot redispatch; active Worker slot remains held.",
+    "duplicate_fixture_dispatches_on_restoration": 0
+  },
+  "diagnostic_review": {
+    "pr": 232,
+    "head": "1a42e2ef19848281eadfb8a4024c0844122ca27d",
+    "ci_run": 34734258777,
+    "required_ci": "passed",
+    "terminal_review": "Configured no-findings reaction and completed summary",
+    "review_comment": 5650465255,
+    "review_completed_at": "2026-09-13T03:00:06.053700Z",
+    "merge_sha": "8add010a3ed68e19f1b6a096616843ad4a5a6e1a",
+    "merged_at": "2026-09-13T03:01:58Z",
+    "purpose": "Bounded redacted field/type/hash mismatch diagnostics only; existing rejection unchanged",
+    "deployed": false
+  },
+  "deployment": {
+    "workflow": "deploy-researcher-intake.yml",
+    "run_id": 34733784261,
+    "run_head": "311246fe48c643bd3efa375fbe4b2b624bcb6ef6",
+    "conclusion": "failure",
+    "first_failing_step": "Capture the prior serving intake version and build exact protected modules",
+    "error": "Serving intake runtime/bindings differ from protected configuration",
+    "differing_field": "UNKNOWN; diagnostics not yet executed",
+    "D1_migration": "skipped",
+    "secret_update": "skipped",
+    "worker_deployment": "skipped",
+    "new_serving_version": null,
+    "retry_dispatched": false,
+    "automatic_approval_rejections": [
+      {
+        "attempt": "combined diagnostic merge and deployment retry",
+        "reason": "Live Worker mutation authority considered unclear; separate diagnostic merge subsequently permitted"
+      },
+      {
+        "attempt": "standalone existing workflow retry after read-only authority verification",
+        "reason": "Workflow can modify live application Worker; exact deployment retry requires clearer authority"
+      }
+    ],
+    "bypass_attempted": false
+  },
+  "release_workflows": [
+    {
+      "run": 34733784332,
+      "conclusion": "success",
+      "generated_or_published": false
+    },
+    {
+      "run": 34734478710,
+      "conclusion": "success",
+      "generated_or_published": false
+    }
+  ],
+  "inputs": {
+    "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
+    "input_lock": {
+      "path": "docs/team-recommender/contextual-stage-b/input-lock-v1.json",
+      "sha256": "8aa7c4652fe4618019c5faf12f1a83ea6b48d1dc12def9605157077b2518e752"
+    },
+    "budget_preflight": {
+      "path": "docs/team-recommender/contextual-stage-b/preflight-budget-v2.json",
+      "sha256": "104ae92e8219ffdf2ea76a53cd4073bed584fba2e771c97295658d07101ab9a8"
+    }
+  },
+  "actual_real_execution": {
+    "scope_workflows": 0,
+    "scope_denominator": 8,
+    "extensions": 0,
+    "extension_denominator": 1,
+    "check_requests": 0,
+    "check_request_ceiling": 4,
+    "graphs": 0
+  },
+  "budget": {
+    "authorization_id": "on-demand-team-offline-v2-20260909",
+    "run_id": 34606280661,
+    "artifact_id": 10266946843,
+    "checkpoint_sha256": "c6e59fe149baf5792e36be37d601fb87ab1763eafc50253b68ad861b99e4be9b",
+    "ledger_sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+    "files_verified": 1243,
+    "charged_microusd": 4290655,
+    "attempts": 629,
+    "outstanding": 0,
+    "new_task_limit_microusd": 5000000,
+    "new_task_attempt_limit": 40,
+    "new_paid_requests": 0,
+    "local_copy_read_only": true,
+    "original_task_limit_microusd": 3000000,
+    "minimum_remaining_if_fully_spent_microusd": 709345,
+    "minimum_remaining_attempts": 21,
+    "amendment": "docs/team-recommender/contextual-stage-b/BUDGET-AMENDMENT-5USD.md",
+    "new_paid_tokens": 0,
+    "remaining_microusd": 5709345,
+    "remaining_attempts": 61,
+    "complete_planned_reservation_microusd": 4995414,
+    "complete_planned_attempts": 36
+  },
+  "new_paid_requests": 0,
+  "new_paid_tokens": 0,
+  "new_cost_microusd": 0,
+  "public_activation": false,
+  "stage4": false,
+  "disposition": "BLOCKED BY A NAMED PREREQUISITE"
+}

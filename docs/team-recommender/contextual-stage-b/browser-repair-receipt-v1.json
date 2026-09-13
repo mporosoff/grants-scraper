@@ -1,0 +1,279 @@
+{
+  "version": "contextual-stage-b-browser-repair-v1",
+  "captured_at": "2026-09-13T03:16:55.873558+00:00",
+  "code_commit": "732a8d80a9dae0e45925fe931dd9311762d37b6e",
+  "code_tree": "ada808a4201e3bdea1d032a50699acdcf86b6c1a",
+  "source_dependencies": {
+    "assets/search-retrieval.js": "e73aeb0d31bfa97a778a32b97891d4e3b10fcba47b6ed35df5c8221e3b5852a4",
+    "assets/contextual-team-engine.js": "94cb2d32ee4bef6f131f511a164a2226636c86ac7d118e62b51facc66c0933c4",
+    "assets/contextual-team-client.js": "44abfb75d94ff8658f130d3ddea92574f7f966506ccfd08e6afb6aa466382690",
+    "assets/opportunity-team.js": "d33c0266c2d5bedc0811df53811401a0b372fc6f104235aa7e5dace934dcb1bb",
+    "assets/opportunity-team-panel.js": "6e7bf40f9f4b747096af44423864ad0fe40851c9127785bc10d5c5cb8bf90ead",
+    "team_match.html": "16e8ca79151c5a957d0eca6b6517dd09e75cae2ddc0c1fc59c721fbc7e23413b",
+    "match_explorer.html": "8d1926c0a6f01bd0d90dddf5d7bbf6cafda8206df4efa2c1655f6c8a7c2bf386",
+    "data/search-v2-release.json": "6c19e5d2f5766177ba03efabe383bc5fdf07831b29567b11da78e5a02bca3132",
+    "tools/contextual_team_validation_index.mjs": "3ea41ecea5f1d8e8bc8790f524593bb1ad14a4a33a73b21043c97a272b915541",
+    "tests/e2e/accessibility.spec.mjs": "316620fc6c431ae43543d6248ca7b64e9968074745e6200a56d414da818b1a3a",
+    "tests/e2e/minor-ui-fixes.spec.mjs": "09270c2431917b0d44b00f40eda09b5593924ca27b1464b83dab7a56c3139f05",
+    "tests/e2e/public-polish.spec.mjs": "db1f4c3acf25d63f6f1bc1dae6d24e0181835d86ee97841d80f5252abfd51c25",
+    "tests/e2e/recent-updates-fixture.mjs": "454c4e820e813a8e5931cb0567a09f78fb5567d3258491ad3d917bdad43dd0e5",
+    "tests/helpers/contextual-presentation-contract.mjs": "38d9deb748a44947a1301b28504a529fb92953bbffbb3a912c0cb5a8820db304",
+    "tests/browser/stage2-drawers-contract.test.mjs": "19e30d1780cd8dc04cc25cbe15be6c315b0d0dafb09b32451d7f9508e46baed3",
+    "tests/browser/team-recommender-freeze.test.mjs": "8746a5d3e89d5d4c1ee1b59a0b83900f55993c23a1574efe756e835dd5e4b02e",
+    "tests/test_pipeline_phase2.py": "21f0353feec55046129d4e3aa98dd7fd319e26412c9cfa03cc024a344c9c769e"
+  },
+  "reference_comparison": {
+    "clock": "2026-09-12T16:00:00Z",
+    "before_sha": "b7eb2e2ed01d71eae709306400309d9d8aaaaacd",
+    "after_source_sha256": "e73aeb0d31bfa97a778a32b97891d4e3b10fcba47b6ed35df5c8221e3b5852a4",
+    "names": [
+      "Alexander A. Shestopalov",
+      "Allison J. Lopatkin",
+      "Astrid M. Müller",
+      "Zachary Robinson"
+    ],
+    "variants": [
+      {
+        "variant": "before",
+        "result": [
+          {
+            "size": 2,
+            "ms": 8150.5577,
+            "results": 20,
+            "sha256": "6ef60a59c9daa13ce673b972282415ca23476de7743b9475df3d57b9e269ca36"
+          },
+          {
+            "size": 3,
+            "ms": 12814.6728,
+            "results": 19,
+            "sha256": "3f345dcfd29cf3d3795883c9293a0a981280dd3e89c98f1d382ac1e5b63bebe5"
+          },
+          {
+            "size": 4,
+            "ms": 14673.0592,
+            "results": 18,
+            "sha256": "3d461d960906b79f62fc9d87bc5c795ac4c63d0bc68c692bee64f7627f6dc081"
+          }
+        ]
+      },
+      {
+        "variant": "after",
+        "result": [
+          {
+            "size": 2,
+            "ms": 5351.390800000001,
+            "results": 20,
+            "sha256": "6ef60a59c9daa13ce673b972282415ca23476de7743b9475df3d57b9e269ca36"
+          },
+          {
+            "size": 3,
+            "ms": 6701.519300000007,
+            "results": 19,
+            "sha256": "3f345dcfd29cf3d3795883c9293a0a981280dd3e89c98f1d382ac1e5b63bebe5"
+          },
+          {
+            "size": 4,
+            "ms": 8043.3297999999995,
+            "results": 18,
+            "sha256": "3d461d960906b79f62fc9d87bc5c795ac4c63d0bc68c692bee64f7627f6dc081"
+          }
+        ]
+      }
+    ],
+    "provider_calls": 0,
+    "output_identity": true
+  },
+  "comparison_limitations": "One local Node observation per size, no physical-device or controlled latency-distribution claim.",
+  "original_full_e2e": {
+    "code_commit": "2a62f6c072a9fcfe37a5b8857acee11f4b9b1a65",
+    "passed": 113,
+    "failed": 4,
+    "total": 117,
+    "repeated_full_suite": false
+  },
+  "focused_correction_run": {
+    "stats": {
+      "startTime": "2026-09-13T02:49:07.926Z",
+      "duration": 84637.99200000001,
+      "expected": 3,
+      "skipped": 0,
+      "unexpected": 1,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "accessibility.spec.mjs",
+        "title": "Funded Awards Institutional Intelligence has no serious or critical violations",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "duration_ms": 16459
+          }
+        ]
+      },
+      {
+        "file": "minor-ui-fixes.spec.mjs",
+        "title": "Team Builder replaces the closed context without reusing the prior proposal",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration_ms": 1283
+          }
+        ]
+      },
+      {
+        "file": "public-polish.spec.mjs",
+        "title": "Funding Finder retains its hero and Team Builder contains text at phone widths and enlarged text",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration_ms": 5112
+          }
+        ]
+      },
+      {
+        "file": "team-match.spec.mjs",
+        "title": "Team Match supports directory, browser-only, team-size, history, and mobile workflows",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration_ms": 58269
+          }
+        ]
+      }
+    ],
+    "private_receipt": {
+      "path": "outputs/contextual-stage-b/browser-corrections-1/playwright-results.json",
+      "sha256": "a990a6478fd3bc7e7c2b0d6c563d8a78b1a9db8eaea39a6784850893c9a1e00c"
+    }
+  },
+  "awards_followup": {
+    "stats": {
+      "startTime": "2026-09-13T02:51:35.476Z",
+      "duration": 11412.539999999999,
+      "expected": 1,
+      "skipped": 0,
+      "unexpected": 0,
+      "flaky": 0
+    },
+    "cases": [
+      {
+        "file": "accessibility.spec.mjs",
+        "title": "Funded Awards Institutional Intelligence has no serious or critical violations",
+        "status": "expected",
+        "results": [
+          {
+            "status": "passed",
+            "duration_ms": 10260
+          }
+        ]
+      }
+    ],
+    "private_receipt": {
+      "path": "outputs/contextual-stage-b/awards-a11y-correction-2/playwright-results.json",
+      "sha256": "e1c37990386e52277d60342b9c23c37ecfe62f79f94dad23b98a30789c33561c"
+    }
+  },
+  "awards_accessibility": {
+    "scans": 7,
+    "serious_or_critical": 0,
+    "lower_severity": 0,
+    "incomplete_per_scan": [
+      3,
+      1,
+      1,
+      1,
+      3,
+      1,
+      1
+    ]
+  },
+  "all_original_failed_paths_now_pass": true,
+  "full_browser_suite_on_ending_head": "NOT RERUN; original suite plus focused corrective evidence only",
+  "python_required": {
+    "total": 1400,
+    "passed": 1399,
+    "errors": 1,
+    "original_error": "Windows cp1252 decoding of UTF-8 HTML fixture",
+    "correction": "Explicit UTF-8 in both fixture reads",
+    "affected_module_rerun_passed": 21
+  },
+  "node_required": {
+    "total": 894,
+    "passed": 892,
+    "failed": 2,
+    "original_failures": "Historical presentation freezes did not distinguish exact owner-authorized contextual button/status strings",
+    "correction": "Strict exact authorized-text exceptions; historical baselines unchanged",
+    "affected_contracts_rerun_passed": 15
+  },
+  "shared_and_currentness_passed": 21,
+  "search_frozen_queries": {
+    "queries": 37,
+    "top_ten_churn": 0
+  },
+  "P9_scoring": {
+    "cases": 50,
+    "byte_identical": true
+  },
+  "search_release_package_check": "PASS; purchased corpus and vector bytes unchanged",
+  "private_logs": [
+    {
+      "path": "outputs/contextual-stage-b/browser-corrections-1.log",
+      "sha256": "64efb05613772f7096a8ad2f589b889d992dedc912a92bda7542144b5c717db0"
+    },
+    {
+      "path": "outputs/contextual-stage-b/awards-a11y-correction-2.log",
+      "sha256": "4d72ae9e3acb122349da32f3106d7a901b670dd881591135452168645091cde6"
+    },
+    {
+      "path": "outputs/contextual-stage-b/all-browser-contracts-repair.log",
+      "sha256": "6d88d37601193b1a50960a1c344c8296c7d411698fe8fa45e45ad26e2e8c250d"
+    },
+    {
+      "path": "outputs/contextual-stage-b/freeze-corrections.log",
+      "sha256": "91f45106b2789e6bc7dd057f4d4076c14cfc2eadbe2e8187bed9fe9bf7ff689f"
+    },
+    {
+      "path": "outputs/contextual-stage-b/freeze-corrections-2.log",
+      "sha256": "eaddc65f4f3d6cbca67190d3b592c6b367c34bb94b9b4cc215b4709ebd639ead"
+    },
+    {
+      "path": "outputs/contextual-stage-b/python-required-repair.log",
+      "sha256": "7ae36b4458b1c1a96e0ee74529bf38527946b8088f588c1accf1bead69bd5662"
+    },
+    {
+      "path": "outputs/contextual-stage-b/python-encoding-correction.log",
+      "sha256": "a8d347d6460cd3dfe93ae2c81cb026841afef0637c7cbfd6b14d50b96325f8a3"
+    },
+    {
+      "path": "outputs/contextual-stage-b/matcher-focused-1.log",
+      "sha256": "cbc0a46bdf8acb29a626ed8809148a83b6524e881cc519b4872b919eb0523c48"
+    },
+    {
+      "path": "outputs/contextual-stage-b/matcher-focused-2.log",
+      "sha256": "d5e31dc61e92f7f1962ee1624824afe446955d88feebf6bbf61b291c95a86ea2"
+    },
+    {
+      "path": "outputs/contextual-stage-b/matcher-focused-3.log",
+      "sha256": "564a6e6e15dad4147213186990dcb3bd78ec34033e5172447e2efd4bfeb3e7db"
+    },
+    {
+      "path": "outputs/contextual-stage-b/frozen-query-repair.log",
+      "sha256": "fa9ee0261ee9f4a18e58effc7f885ca4bae3517d89c2c200917094429f33ada5"
+    },
+    {
+      "path": "outputs/contextual-stage-b/scoring-repair.log",
+      "sha256": "6f6b4ac05b1acf8bd411b3f930241a6056974c17ae2109321d9a2be41a635d8c"
+    }
+  ],
+  "new_paid_requests": 0,
+  "real_contextual_graphs": 0,
+  "real_contextual_cache_edit_extension_validation": "NOT RUN; restricted deployment blocked",
+  "real_graph_48MiB_memory_and_hydration": "UNMEASURED",
+  "public_presentation_changes_this_continuation": "None; HTML dependency hashes only",
+  "public_activation": false
+}
