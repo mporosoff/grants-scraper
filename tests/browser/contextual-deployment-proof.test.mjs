@@ -28,11 +28,40 @@ test('restricted serving proof rejects changed bindings, mixed traffic and chang
         bindings:[...Object.entries(config.vars).map(([name,text])=>({name,type:'plain_text',text:mode==='bindings'?'drift':text})),
           ...config.d1_databases.map(d=>({name:d.binding,type:'d1',id:mode==='database'?'wrong-id':d.database_id})),
           ...config.ratelimits.map(r=>({...r,type:'ratelimit'})),...secrets.map(name=>({name,type:'secret_text'}))]}};
+      if(result.resources){
+        const runtime=result.resources.script_runtime,bindings=result.resources.bindings,db=bindings.find(b=>b.type==='d1');
+        if(['observed','exports-missing'].includes(mode))delete runtime.exports;
+        if(['observed','alias-conflict','alias-null','alias-extra','alias-missing-id'].includes(mode))db.database_id=db.id;
+        if(mode==='alias-conflict')db.database_id='other-database';
+        if(mode==='alias-null')db.database_id=null;
+        if(mode==='alias-extra')db.unreviewed='extra';
+        if(mode==='alias-missing-id')delete db.id;
+        if(mode==='exports-null')runtime.exports=null;
+        if(mode==='exports-live')runtime.exports={Other:{type:'worker'}};
+        if(mode==='runtime-extra')runtime.unreviewed=true;
+        if(mode==='duplicate-binding')bindings.push({...db});
+        if(mode==='secret-value')bindings.find(b=>b.type==='secret_text').text='private-fixture-value';
+      }
       return new Response(JSON.stringify({success:true,result}));};`);
     const run=(action,mode='good')=>spawnSync(process.execPath,['--import',pathToFileURL(preload).href,'tools/contextual_worker_checkpoint.mjs',action,receipt,build],{
       encoding:'utf8',env:{...process.env,CLOUDFLARE_API_TOKEN:'fixture-not-a-secret',CLOUDFLARE_ACCOUNT_ID:'fixture',GITHUB_OUTPUT:'',GITHUB_SHA:'a'.repeat(40),PROOF_FIXTURE:mode}});
     let r=run('capture');assert.equal(r.status,0,r.stderr);r=run('verify');assert.equal(r.status,0,r.stderr);
     const proof=JSON.parse(fs.readFileSync(receipt.replace('.json','-verified.json')));assert.equal(proof.public_recommender_activation,false);
+    r=run('capture','observed');assert.equal(r.status,0,r.stderr);
+    const captured=JSON.parse(fs.readFileSync(receipt));
+    assert.equal(Object.hasOwn(captured.observed_configuration.runtime,'exports'),false);
+    const db=captured.observed_configuration.bindings.find(b=>b.type==='d1');assert.equal(db.id,db.database_id);
+    assert.deepEqual(captured.configuration.runtime.exports,{});
+    assert.equal(Object.hasOwn(captured.configuration.bindings.find(b=>b.type==='d1'),'database_id'),false);
+    // A wire-format change across deployment must preserve the same declared identity.
+    r=run('verify','good');assert.equal(r.status,0,r.stderr);
+    r=run('capture','good');assert.equal(r.status,0,r.stderr);
+    r=run('verify','observed');assert.equal(r.status,0,r.stderr);
+    r=run('verify','exports-missing');assert.equal(r.status,0,r.stderr);
+    for(const mode of ['alias-conflict','alias-null','alias-extra','alias-missing-id','exports-null','exports-live','runtime-extra','duplicate-binding','secret-value']){
+      for(const action of ['capture','verify'])assert.notEqual(run(action,mode).status,0,action+': '+mode);
+    }
+    assert.doesNotMatch(run('capture','secret-value').stderr,/private-fixture-value/);
     for(const mode of ['bindings','database','runtime','mixed','bytes','route','preview','cron','zone','domain'])assert.notEqual(run('verify',mode).status,0,mode);
     assert.notEqual(run('capture','bindings').status,0,'already-drifted bindings must fail before deployment');
     const mismatch=run('capture','bindings');

@@ -28,7 +28,18 @@ function configuration(resources){
     bindings:[...Object.entries(declared.vars).map(([name,text])=>({name,type:'plain_text',text})),
       ...declared.d1_databases.map(d=>({name:d.binding,type:'d1',id:d.database_id})),
       ...declared.ratelimits.map(r=>({...r,type:'ratelimit'})),...secretNames.map(name=>({name,type:'secret_text'}))].sort(byName)};
-  const actual={runtime:resources.script_runtime,bindings:(resources.bindings||[]).slice().sort(byName)};
+  // The version API omits an empty exports map and can repeat a D1's id
+  // as database_id. Normalize only these proven representations; retain
+  // every other field, and reject conflicting aliases rather than drop them.
+  const runtime={...resources.script_runtime};
+  if(!Object.hasOwn(runtime,'exports'))runtime.exports={};
+  const bindings=(resources.bindings||[]).map(binding=>{
+    if(binding.type!=='d1'||!Object.hasOwn(binding,'database_id'))return binding;
+    if(typeof binding.database_id!=='string'||binding.database_id!==binding.id)
+      throw Error('Conflicting serving D1 identity aliases');
+    const {database_id,...rest}=binding;return rest;
+  });
+  const actual={runtime,bindings:bindings.sort(byName)};
   if(canonical(expected)!==canonical(actual)){
     const shape=value=>value===undefined?'missing':value===null?'null':Array.isArray(value)?'array':typeof value;
     const clean=value=>String(value).replace(/[^A-Za-z0-9_.-]/g,'?').slice(0,80);
@@ -67,7 +78,9 @@ const version=await api('/versions/'+before.versionId);
 const config=configuration(version.resources),routeConfig=await routing();
 if(action==='capture'){
   fs.writeFileSync(path,JSON.stringify({version_id:before.versionId,deployment_id:before.deployment.id,
-    configuration:config,routing:routeConfig,declared_configuration_sha256:hash(canonical(declared)),observed_at:new Date().toISOString()},null,2)+'\n');
+    configuration:config,observed_configuration:{runtime:version.resources.script_runtime,bindings:version.resources.bindings},
+    configuration_normalization:'intake-empty-exports-equal-d1-alias-v1',
+    routing:routeConfig,declared_configuration_sha256:hash(canonical(declared)),observed_at:new Date().toISOString()},null,2)+'\n');
   if(process.env.GITHUB_OUTPUT)fs.appendFileSync(process.env.GITHUB_OUTPUT,'version_id='+before.versionId+'\n');
   console.log(JSON.stringify({previous_version_id:before.versionId}));
 }else{
@@ -90,6 +103,8 @@ if(action==='capture'){
   if(after.versionId!==before.versionId||after.deployment.id!==before.deployment.id)throw Error('Serving Worker changed during verification');
   const proof={version_id:after.versionId,deployment_id:after.deployment.id,protected_sha:process.env.GITHUB_SHA,
     module_hashes:actual,configuration_sha256:hash(canonical(config)),routing:routeConfig,
+    observed_configuration_sha256:hash(canonical({runtime:version.resources.script_runtime,bindings:version.resources.bindings})),
+    configuration_normalization:'intake-empty-exports-equal-d1-alias-v1',
     declared_configuration_sha256:hash(canonical(declared)),previous_version_id:old.version_id,
     method:'authenticated-active-modules-runtime-bindings-routes-and-triggers-vs-protected-inputs',public_recommender_activation:false};
   fs.writeFileSync(path.replace(/\.json$/,'-verified.json'),JSON.stringify(proof,null,2)+'\n');
