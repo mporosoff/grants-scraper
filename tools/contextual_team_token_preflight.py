@@ -8,6 +8,7 @@ import hashlib
 import json
 import math
 import os
+import threading
 from pathlib import Path
 import requests
 from tools import team_recommender_executor as existing
@@ -66,12 +67,21 @@ def inventory():
 
 
 class Counter:
+    _guard=threading.RLock()
+
     def __init__(self,state,post=requests.post):
-        self.path=Path(state)/'cache'/(identity([VERSION,SOURCE_SHA,'aggregate-token-counts'])+'.json');self.post=post
+        self.state=Path(state);self.path=self.state/'checkpoint.json';self.post=post
 
     def count(self,item):
+        # Cloud processes are serialized by the existing authorization workflow.
+        # Also serialize any local callers before inspecting the durable row.
+        with self._guard:return self._count(item)
+
+    def _count(self,item):
         body=count_projection(item['body']);key=identity(body)
-        saved=json.loads(self.path.read_bytes()) if self.path.exists() else {'version':VERSION,'source_sha256':SOURCE_SHA,'rows':[]}
+        checkpoint=json.loads(self.path.read_bytes())
+        if checkpoint['authorization_id']!=existing.AUTHORIZATION_ID:raise ValueError('counter_authorization_identity')
+        saved=checkpoint.get('phase2_token_preflight',{'version':VERSION,'source_sha256':SOURCE_SHA,'rows':[]})
         if saved['version']!=VERSION or saved['source_sha256']!=SOURCE_SHA:raise ValueError('counter_checkpoint_identity')
         rows=[r for r in saved['rows'] if r['key']==key]
         if rows:
@@ -81,14 +91,14 @@ class Counter:
         secret=os.environ.get('ANTHROPIC_API_KEY')
         if not secret:raise ConfigurationFailure('counter_credential_missing')
         row={'id':item['id'],'key':key,'status':'dispatched_or_uncertain','metered_inference':False,'charged_microusd':0}
-        saved['rows'].append(row);atomic_json(self.path,saved)
+        saved['rows'].append(row);existing.checkpoint(self.state,token_preflight=saved)
         response=self.post(ENDPOINT,headers={'Content-Type':'application/json','x-api-key':secret,
             'anthropic-version':'2023-06-01','User-Agent':'FundingFinder-TokenSizing/1.0'},json=body,
             timeout=(10,30),allow_redirects=False,stream=True)
         payload=json.loads(existing.bounded_response(response,2048))
         if set(payload)!={'input_tokens'} or type(payload['input_tokens']) is not int or not 0<payload['input_tokens']<=200000:
             raise ValueError('invalid_native_token_count')
-        row.update(status='complete',input_tokens=payload['input_tokens']);atomic_json(self.path,saved)
+        row.update(status='complete',input_tokens=payload['input_tokens']);existing.checkpoint(self.state,token_preflight=saved)
         return payload['input_tokens']
 
 
