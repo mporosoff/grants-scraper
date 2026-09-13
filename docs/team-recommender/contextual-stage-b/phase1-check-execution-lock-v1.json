@@ -1,0 +1,94 @@
+{
+  "version": "contextual-phase1-checks-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "authorized_date": "2026-09-13",
+  "input_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+  "release_id": "d91e57fa512745c4d8154e2b7ebadc4508dbdae082a1937297edd759a5179055",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "scope_id": "332894",
+  "graph_id": "a9ce47f194e303b6d4173bf4a8d28685e597df2e31144f45d1d9ce44acbbeb64",
+  "members": [
+    "urh-000091",
+    "urh-000099",
+    "urh-000126"
+  ],
+  "starting_attempts": 659,
+  "starting_spend_microusd": 5758414,
+  "starting_ledger_sha256": "281938a7be619dcbef286c50f262b92e7c31c312caeb8e1221d1de5c4dac5e7b",
+  "starting_request_rows_sha256": "96cc4dfe983c8e53a98310ba7694522b2a28795b581aeb15ab49ee6cc141553a",
+  "maximum_new_attempts": 2,
+  "maximum_new_microusd": 250000,
+  "preserved_attempts": 29,
+  "preserved_microusd": 3991586,
+  "response_contract_sha256": "45ccb3d959d2b3d633ada7a23fd5525a71aa58059476cb7dbc90d0d6d6afaea4",
+  "repair_of": {
+    "id": "b12fa7fbde6e45069d14358b6c73ee79",
+    "key": "04ba4da30ae3bbe7d006b88f95b43e37729bb80f9f5495f9f080dca5cb74bd4d",
+    "body_sha256": "70e2b40465c7c81881954e5633d1a1b3360c28d3a6473246ea6ae756ffc8ceb0",
+    "purpose": "cb-o1-check-group",
+    "status": "failed",
+    "charged_microusd": 16528,
+    "usage": {
+      "cache_creation": {
+        "ephemeral_1h_input_tokens": 0,
+        "ephemeral_5m_input_tokens": 0
+      },
+      "cache_creation_input_tokens": 0,
+      "cache_read_input_tokens": 0,
+      "inference_geo": "global",
+      "input_tokens": 6879,
+      "output_tokens": 277,
+      "output_tokens_details": {
+        "thinking_tokens": 0
+      },
+      "service_tier": "standard"
+    }
+  },
+  "prices": {
+    "checked": "2026-09-13",
+    "url": "https://platform.claude.com/docs/en/about-claude/pricing",
+    "model": "claude-sonnet-5",
+    "input_usd_per_million": 2,
+    "output_usd_per_million": 10,
+    "thinking": "disabled"
+  },
+  "operations": [
+    {
+      "kind": "group",
+      "purpose": "cb-p1-check-group",
+      "body_sha256": "54b67b0d73e64bcb60f39a5199c8d5a25a3a03f167e71eb88fc613bf9d008932",
+      "original_body_sha256": "70e2b40465c7c81881954e5633d1a1b3360c28d3a6473246ea6ae756ffc8ceb0",
+      "question_evidence_sha256": "0522d620e8d59c22bf219096f66ef22f91573552dd8c0a706cd98d03135d0624",
+      "question_ids": [
+        "group",
+        "person-1",
+        "person-2",
+        "person-3"
+      ],
+      "repair_of": "b12fa7fbde6e45069d14358b6c73ee79",
+      "input_token_bound": 20711,
+      "actual_wire_bytes": 19687,
+      "max_output_tokens": 2048,
+      "maximum_microusd": 61902
+    },
+    {
+      "kind": "explanation",
+      "purpose": "cb-p1-check-explanation",
+      "body_sha256": "265b3c8aea2e1bb92f60343348bef7ceb0c3a283a68ea513be6ac68e6a3a7268",
+      "original_body_sha256": "acde5f329ba8f7e25e0b25ea543011419e11765e42bb5b59b6a80cb68b42ad86",
+      "question_evidence_sha256": "3af187f304a5ec7938b7d5e0115754fd28bb89d15d151b0d4aed2c552d288183",
+      "question_ids": [
+        "explanation-1",
+        "explanation-2",
+        "explanation-3"
+      ],
+      "repair_of": "",
+      "input_token_bound": 22287,
+      "actual_wire_bytes": 21263,
+      "max_output_tokens": 2048,
+      "maximum_microusd": 65054
+    }
+  ],
+  "total_reserved_microusd": 126956,
+  "lock_id": "53dda92b8de125c925f4ccd1ce9b035517d33d759165bc67f14610ca22a7db1f"
+}

@@ -9092,9 +9092,22 @@
         "sha256": "95db1213b32a1e93299e6ee34ee766ab29efc02dc21e1731db1a89427f244c0c"
       },
       "exact_cached_occurrences": 15
+    },
+    "phase1_closeout": {
+      "status": "zero_provider_contract_repair_in_progress",
+      "authority": "contextual-stage-b/PHASE1-CLOSEOUT-AUTHORITY.md",
+      "execution_lock": "contextual-stage-b/phase1-check-execution-lock-v1.json",
+      "product_start": "0ebf52046c48a6f04797f34bf28646bb49643c3c",
+      "maximum_new_attempts": 2,
+      "maximum_new_microusd": 250000,
+      "complete_envelope_microusd": 126956,
+      "new_attempts": 0,
+      "new_microusd": 0,
+      "no_public_activation": true,
+      "no_app_deployment": true
     }
   },
-  "active_work": "contextual-stage-b-option1-integration-repair",
+  "active_work": "Phase 1 Option 1 retrospective output-check closeout; frozen scientific candidate",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
