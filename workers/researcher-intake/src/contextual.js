@@ -103,7 +103,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
           Authorization:`Bearer ${env.GITHUB_DISPATCH_TOKEN}`,Accept:'application/vnd.github+json','User-Agent':'FundingFinder-ContextualValidation/1.0'}});
         if(!response.ok)fail('contextual_run_provenance_unavailable',503);
         const run=await response.json();
-        if(run.path!==WORKFLOW||run.head_branch!=='main'||run.event!=='workflow_dispatch'||run.head_sha!==code_sha)fail('contextual_untrusted_workflow',403);
+        if(run.path!==WORKFLOW||run.head_branch!=='main'||!['workflow_dispatch','repository_dispatch'].includes(run.event)||run.head_sha!==code_sha)fail('contextual_untrusted_workflow',403);
         if(path.endsWith('/start')){
           if(Object.keys(value).sort().join(',')!=='code_sha,job_id,release_id,run_id')fail('contextual_extra_start_fields');
           const claimed=await store.start(job_id,run_id,code_sha,now().toISOString());
@@ -140,15 +140,18 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if(env.SUBMISSION_RATE_LIMITER&&!(await env.SUBMISSION_RATE_LIMITER.limit({key:'contextual:'+await hash(actor)})).success)fail('contextual_rate_limited',429);
       const inserted=await store.insert(job,now().toISOString());
       if(!inserted){row=await store.byId(job.job_id);if(row)return json(200,publicJob(row,scope,now()));fail('contextual_busy_or_finite_job_limit',429);}
+      let dispatchStatus=null;
       try{
-        const response=await fetchImpl(`https://api.github.com/repos/${env.GITHUB_REPOSITORY}/actions/workflows/team-recommender-offline.yml/dispatches`,{
+        const response=await fetchImpl(`https://api.github.com/repos/${env.GITHUB_REPOSITORY}/dispatches`,{
           method:'POST',headers:{Authorization:`Bearer ${env.GITHUB_DISPATCH_TOKEN}`,'Content-Type':'application/json',
-            Accept:'application/vnd.github+json','User-Agent':'FundingFinder-ContextualValidation/1.0'},
-          body:JSON.stringify({ref:'main',inputs:{contextual_job:JSON.stringify(job)}})});
+            Accept:'application/vnd.github+json','User-Agent':'FundingFinder-ContextualValidation/1.0','X-GitHub-Api-Version':'2022-11-28'},
+          body:JSON.stringify({event_type:'contextual-team-validation',client_payload:{contextual_job:JSON.stringify(job)}})});
+        dispatchStatus=response.status;
         if(!response.ok)throw Error('remote_dispatch_not_confirmed');
       }catch{
         await store.uncertain(job.job_id,now().toISOString());
-        return json(503,{state:'recovery_required',job_id:job.job_id,release_id:RELEASE});
+        return json(503,{state:'recovery_required',job_id:job.job_id,release_id:RELEASE,
+          dispatch_diagnostic:{http_status:dispatchStatus,category:dispatchStatus===null?'transport_unconfirmed':'remote_rejected'}});
       }
       return json(202,publicJob(await store.byId(job.job_id),scope,now()));
     }catch(error){return json(error.status||500,{state:'failed',error:error.code||'contextual_internal_failure'});}

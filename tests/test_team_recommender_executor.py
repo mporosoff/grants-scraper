@@ -66,6 +66,26 @@ class ExecutorContract(unittest.TestCase):
             with patch.dict(os.environ, {key: bad}), self.assertRaises(ConfigurationFailure):
                 e.trusted_environment()
 
+    def test_contextual_dispatch_is_exact_job_only_and_not_a_legacy_route(self):
+        job={'release_id':'a'*64,'scope_id':'361207','person_id':'','job_id':'b'*64}
+        event={'action':'contextual-team-validation','client_payload':{'contextual_job':json.dumps(job)}}
+        path=self.root/'event.json';path.write_text(json.dumps(event))
+        with patch.dict(os.environ,{'GITHUB_EVENT_NAME':'repository_dispatch','GITHUB_EVENT_PATH':str(path)}):
+            e.trusted_environment(contextual_job=job)
+            with self.assertRaises(ConfigurationFailure):e.trusted_environment()
+            for bad in [event|{'action':'researcher-registry-publish'},
+                        event|{'client_payload':event['client_payload']|{'packet_commit':'a'*40}},
+                        event|{'client_payload':{'contextual_job':job}},
+                        event|{'client_payload':{'contextual_job':json.dumps(job|{'scope_id':'other'})}},
+                        {'client_payload':{}},[]]:
+                path.write_text(json.dumps(bad))
+                with self.assertRaises(ConfigurationFailure):e.trusted_environment(contextual_job=job)
+            path.write_text(json.dumps(event))
+            for key,bad in [('GITHUB_REF','refs/heads/feature'),('GITHUB_REPOSITORY','other/repo'),
+                            ('GITHUB_WORKFLOW_REF','other/workflow'),('GITHUB_SHA','bad')]:
+                with patch.dict(os.environ,{key:bad}),self.assertRaises(ConfigurationFailure):
+                    e.trusted_environment(contextual_job=job)
+
     def test_packet_cannot_select_code_endpoint_provider_or_stage(self):
         _, _, packet = self.packet()
         e.validate_packet(packet, self.settings)
@@ -373,13 +393,30 @@ class ExecutorContract(unittest.TestCase):
             with zipfile.ZipFile(buffer, "w") as archive: archive.writestr(name, "{}")
             with self.assertRaises(ValueError): e.unpack_state(buffer.getvalue(), self.root/"bad")
 
+    def test_restore_contextual_dispatch_uses_same_checkpoint_and_rejects_untrusted_runs(self):
+        e.checkpoint(self.state);raw=self.archive(self.state);base=self.restore_api(raw)
+        for index,event in enumerate(['repository_dispatch','workflow_dispatch','pull_request','push']):
+            def api(path):
+                if path=='actions/runs/123':
+                    return json.dumps({'path':e.WORKFLOW,'head_branch':'main','event':event}).encode()
+                return base(path)
+            destination=self.root/('restore-event-'+str(index))
+            if event in {'repository_dispatch','workflow_dispatch'}:
+                e.restore(destination,self.settings,api)
+                self.assertEqual((destination/'ledger.json').read_bytes(),(self.state/'ledger.json').read_bytes())
+            else:
+                with self.assertRaisesRegex(ValueError,'untrusted_checkpoint_run'):e.restore(destination,self.settings,api)
+
     def test_workflow_only_main_manual_and_scoped_credentials(self):
         import yaml
         flow = yaml.safe_load((e.ROOT/e.WORKFLOW).read_text())
         trigger = flow.get("on", flow.get(True))
-        self.assertEqual(set(trigger), {"workflow_dispatch"})
+        self.assertEqual(set(trigger), {"workflow_dispatch", "repository_dispatch"})
+        self.assertEqual(trigger['repository_dispatch'], {'types':['contextual-team-validation']})
         self.assertEqual(flow["permissions"], {"contents": "read", "actions": "read"})
         job = flow["jobs"]["prepare-evaluate"]; self.assertIn("refs/heads/main", job["if"])
+        self.assertIn("github.event.action == 'contextual-team-validation'",job['if'])
+        self.assertIn('github.event.client_payload.contextual_job',job['env']['CONTEXTUAL_JOB'])
         steps = job["steps"]
         checkout = next(s for s in steps if s.get("uses", "").startswith("actions/checkout"))
         self.assertEqual(checkout["with"]["ref"], "${{ github.sha }}")

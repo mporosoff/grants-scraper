@@ -65,9 +65,26 @@ def policy():
     return value
 
 
-def trusted_environment():
+def trusted_environment(*, contextual_job=None):
+    event_name = os.environ.get("GITHUB_EVENT_NAME")
+    permitted_event = event_name == "workflow_dispatch"
+    if event_name == "repository_dispatch" and contextual_job is not None:
+        # Only the contextual entry points can opt into the existing Worker
+        # credential's repository-dispatch route. Legacy packets/checks cannot.
+        try:
+            raw = Path(os.environ["GITHUB_EVENT_PATH"]).read_bytes()
+            if len(raw) > 128 * 1024:
+                raise ValueError("event_envelope_bound")
+            event = json.loads(raw)
+            payload = event["client_payload"]
+            supplied = payload["contextual_job"]
+            permitted_event = (event.get("action") == "contextual-team-validation"
+                and set(payload) == {"contextual_job"} and isinstance(supplied, str)
+                and len(supplied.encode()) <= 1024 and json.loads(supplied) == contextual_job)
+        except (KeyError, TypeError, ValueError, OSError):
+            permitted_event = False
     if (os.environ.get("GITHUB_REPOSITORY") != REPOSITORY or os.environ.get("GITHUB_REF") != "refs/heads/main"
-            or os.environ.get("GITHUB_EVENT_NAME") != "workflow_dispatch"
+            or not permitted_event
             or os.environ.get("GITHUB_WORKFLOW_REF") != REPOSITORY + "/" + WORKFLOW + "@refs/heads/main"
             or not re.fullmatch(r"[a-f0-9]{40}", os.environ.get("GITHUB_SHA", ""))
             or not re.fullmatch(r"[1-9][0-9]*", os.environ.get("GITHUB_RUN_ID", ""))
@@ -331,14 +348,15 @@ def restore(destination, settings, api_call=api):
         if len(states) != 1 or states[0]["expired"]:
             raise Deferred("latest_authoritative_checkpoint_missing")
         run = json.loads(api_call("actions/runs/" + str(states[0]["workflow_run"]["id"])))
-        if run["path"] != WORKFLOW or run["head_branch"] != "main" or run["event"] != "workflow_dispatch":
+        if (run["path"] != WORKFLOW or run["head_branch"] != "main"
+                or run["event"] not in {"workflow_dispatch", "repository_dispatch"}):
             raise ValueError("untrusted_checkpoint_run")
         raw = api_call("actions/artifacts/" + str(states[0]["id"]) + "/zip")
         if len(raw) > STATE_LIMIT:
             raise ValueError("checkpoint_archive_too_large")
         unpack_state(raw, destination)
     else:
-        runs = json.loads(api_call("actions/workflows/team-recommender-offline.yml/runs?event=workflow_dispatch&branch=main&per_page=100"))["workflow_runs"]
+        runs = json.loads(api_call("actions/workflows/team-recommender-offline.yml/runs?branch=main&per_page=100"))["workflow_runs"]
         if any(str(run["id"]) != os.environ["GITHUB_RUN_ID"] for run in runs):
             raise Deferred("prior_run_without_spend_checkpoint")
         # This is the exact existing empty ledger, never a newly granted allowance.
