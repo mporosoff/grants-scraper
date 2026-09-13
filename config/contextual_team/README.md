@@ -24,6 +24,8 @@ The result is a versioned assessment graph, not a serving inventory of teams. It
 
 ## One independent check
 
+The protected operator page is `/admin/contextual`. It uses the existing Access session on the application origin. The private local application may use only `http://127.0.0.1:8876` against the contextual namespace; administrator authentication remains mandatory and all other administrative CORS behavior is unchanged. No credentials are exported. A browser that withholds the Access cookie must fail closed; this permission does not authorize changing Access policy.
+
 After the actual scope jobs, `contextual_check` accepts at most two entries containing scope ID, graph ID and the actual 2–4 selected canonical member IDs. It restores private graph receipts and requires the first two graph-producing distinct source groups in the original locked order. The existing C2 source overlay already groups 361207 and 361208 together; they cannot occupy both slots. This source-only correction precedes all contextual outputs and preserves the historical reservations. The experimental task supplies its actual deterministic primary groups; it must not pick favorable groups after grades. Trusted code creates all original source/full person evidence and fixed questions itself. One group/every-member packet and one explanation packet per source, at most four requests, use the retained rubric and 512-token output capacity. Same-family correlated errors remain possible. No historical or human labels are replaced. Changing a checked group's membership cannot re-key that scope's paid check into another attempt.
 
 ## Triggers, validation and rollback

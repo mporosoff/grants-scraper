@@ -59,6 +59,9 @@ def packet(scope,graph,members,kind,config):
     prompt=(existing.CONFIG/'judge-d1.md').read_text(encoding='utf8')+'\nThe source object contains the full retained scope and governing conditions. Read the requested activity; do not substitute a different research project. Each person document contains the unchanged audited summary and all active labels/evidence. Cite scope.science or a supplied person/claim ID. Assess every person separately from group usefulness.'
     body=request_body({'provider':'anthropic','model':'claude-sonnet-5'},
         {'schema_version':'contextual-check-v1','max_output_tokens':512},prompt,evidence,schema)
+    # Match the established compact judge transport: output capacity belongs to
+    # the explicit verdicts, not an implicit adaptive-thinking allocation.
+    body['thinking']={'type':'disabled'}
     if len(existing.encoded(body))>JUDGE_BODY_BYTES:raise ValueError('contextual_check_full_evidence_exceeds_bound')
     refs={'scope.science'}|{p['person_id'] for p in people}|{c['claim_id'] for p in people for c in p['claims']}
     def check(value,cached):

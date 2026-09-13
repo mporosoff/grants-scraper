@@ -35,6 +35,30 @@ function fixture(){
   return {db,store,calls,clock,env,request,value,handler,dependencies};
 }
 
+test('operator control and script remain Access protected and loading them cannot claim a job',async()=>{
+  const f=fixture();
+  for(const path of ['/admin/contextual','/admin/contextual/app.js']){
+    assert.equal((await f.handler(new Request(host+path),f.env)).status,403);
+    const r=await f.handler(f.request(path),f.env);assert.equal(r.status,200);
+    assert.match(r.headers.get('Content-Security-Policy'),/connect-src 'self'/);
+    const text=await r.text();assert(!text.includes('fixture-token'));
+  }
+  assert.equal(f.calls.length,0);assert.equal(f.db.prepare('SELECT count(*) AS n FROM contextual_validation_jobs').get().n,0);
+});
+
+test('only the fixed local preview may use credentialed contextual CORS; administrator authentication is still mandatory',async()=>{
+  const f=fixture(),url=host+'/admin/api/contextual/jobs';
+  const call=(origin,access)=>new Request(url,{method:'POST',headers:{Origin:origin,'Content-Type':'text/plain;charset=UTF-8',...(access?{'x-test-access':'yes'}:{})},body:JSON.stringify(f.value)});
+  assert.equal((await f.handler(call('http://127.0.0.1:8876',false),f.env)).status,403);
+  assert.equal(f.calls.length,0);
+  for(const origin of ['https://evil.example','http://localhost:8876','http://127.0.0.1:9999']){
+    const denied=await f.handler(call(origin,true),f.env);assert.equal(denied.status,403);assert.equal(denied.headers.get('Access-Control-Allow-Origin'),null);
+  }
+  const accepted=await f.handler(call('http://127.0.0.1:8876',true),f.env);
+  assert.equal(accepted.status,202);assert.equal(accepted.headers.get('Access-Control-Allow-Origin'),'http://127.0.0.1:8876');
+  assert.equal(accepted.headers.get('Access-Control-Allow-Credentials'),'true');assert.equal(f.calls.length,1);
+});
+
 test('Access guards every contextual route; ordinary app and status do not dispatch',async()=>{
   const f=fixture();const response=await f.handler(new Request(host+'/admin/api/contextual/manifest'),f.env);
   assert.equal(response.status,403);assert.equal(f.calls.length,0);

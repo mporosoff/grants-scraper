@@ -126,6 +126,7 @@ class ContextualExecutor(unittest.TestCase):
         graph=self.runner().run_scope(self.scope);members=[p['person_id'] for p in graph['people'][:2]]
         for kind in ['group','explanation']:
             body,_=packet(self.scope,graph,members,kind,self.configuration)
+            self.assertEqual(body['thinking'],{'type':'disabled'})
             data=json.loads(body['messages'][0]['content'])
             for person in data['profile_documents']:
                 self.assertEqual(person,next(p for p in self.configuration['people'] if p['person_id']==person['person_id']))

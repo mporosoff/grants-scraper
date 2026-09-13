@@ -1,16 +1,18 @@
 // Access-protected finite job coordination. Provider credentials and budget stay
 // in the existing serialized protected-main workflow, never in this Worker.
 import inputs from '../../../config/contextual_team/inputs-v1.json' with {type:'json'};
+import {CONSOLE_HTML,CONSOLE_JS} from './contextual-console.js';
 import '../../../assets/submission-schedule.js';
 import '../../../assets/search-query.js';
 import '../../../assets/search-retrieval.js';
 
 const RELEASE=inputs.snapshot_id;
+const VALIDATION_ORIGIN='http://127.0.0.1:8876';
 const WORKFLOW='.github/workflows/team-recommender-offline.yml';
 const states=new Set(['ready','ready_with_gaps','no_supported_group_in_assessed_set','needs_scope_selection',
   'insufficient_source','unsuitable','action_blocked','budget_limited','failed','recovery_required']);
 const headers={'Content-Type':'application/json','Cache-Control':'no-store','X-Content-Type-Options':'nosniff'};
-const json=(status,value)=>new Response(JSON.stringify(value),{status,headers});
+const jsonResponse=(status,value)=>new Response(JSON.stringify(value),{status,headers});
 function fail(code,status=400){throw Object.assign(Error(code),{code,status});}
 async function hash(value){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(value))))).map(x=>x.toString(16).padStart(2,'0')).join('');}
 async function body(request,maximum=1024){
@@ -65,11 +67,23 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
   fetchImpl=(...args)=>fetch(...args),now=()=>new Date(),authenticateAdmin,authenticateInternal}={}){
   return async function handle(request,env){
     const url=new URL(request.url),path=url.pathname;
-    if(!path.startsWith('/admin/api/contextual')&&!path.startsWith('/internal/contextual'))return null;
+    if(!path.startsWith('/admin/api/contextual')&&!path.startsWith('/internal/contextual')&&!path.startsWith('/admin/contextual'))return null;
+    const origin=request.headers.get('origin');
+    const json=(status,value)=>{
+      const result=jsonResponse(status,value);
+      if(path.startsWith('/admin/api/contextual')&&origin===VALIDATION_ORIGIN){
+        result.headers.set('Access-Control-Allow-Origin',VALIDATION_ORIGIN);
+        result.headers.set('Access-Control-Allow-Credentials','true');result.headers.set('Vary','Origin');
+      }
+      return result;
+    };
     try{
       const internal=path.startsWith('/internal/');
       const actor=internal?await authenticateInternal(request,env):await authenticateAdmin(request,env,fetchImpl);
-      if(request.method==='POST'&&!internal&&request.headers.get('origin')&&request.headers.get('origin')!==url.origin)
+      if(request.method==='GET'&&['/admin/contextual','/admin/contextual/app.js'].includes(path))return new Response(path.endsWith('.js')?CONSOLE_JS:CONSOLE_HTML,
+        {headers:{...headers,'Content-Type':path.endsWith('.js')?'text/javascript; charset=utf-8':'text/html; charset=utf-8',
+          'Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}});
+      if(request.method==='POST'&&!internal&&origin&&origin!==url.origin&&!(path.startsWith('/admin/api/contextual')&&origin===VALIDATION_ORIGIN))
         fail('contextual_admin_origin_required',403);
       if(path==='/admin/api/contextual/manifest'&&request.method==='GET')
         return json(200,{release_id:RELEASE,registry_generation:inputs.registry_generation,public_activation:false,
