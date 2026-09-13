@@ -3,10 +3,12 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {DatabaseSync} from 'node:sqlite';
 import {createHash} from 'node:crypto';
+import {gunzipSync} from 'node:zlib';
 import {ContextualStore,createContextualHandler} from '../../workers/researcher-intake/src/contextual.js';
 import {createHandler} from '../../workers/researcher-intake/src/index.js';
 const configuration=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/inputs-v1.json',import.meta.url)));
 const option1=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/option1-v1.json',import.meta.url)));
+const phase2=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/phase2-v1.json',import.meta.url)));
 const migration=fs.readFileSync(new URL('../../workers/researcher-intake/migrations/0005_contextual_validation_jobs.sql',import.meta.url),'utf8');
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 class Statement {
@@ -18,6 +20,7 @@ class Statement {
 const host='https://funding-finder-researchers.urochestercheme.workers.dev';
 function fixture(){
   const db=new DatabaseSync(':memory:');db.exec(migration);
+  db.exec(fs.readFileSync(new URL('../../workers/researcher-intake/migrations/0006_contextual_trial_controls.sql',import.meta.url),'utf8'));
   const store=new ContextualStore({prepare:s=>new Statement(db,s)}),calls=[];
   const clock={value:new Date('2026-09-12T16:00:00Z')};
   const fetchImpl=async(url,options)=>{
@@ -187,4 +190,64 @@ test('reconciled failure and pre-dispatch budget deferral release their slot wit
     assert.equal(f.calls.length,before);
     assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'363069'}),f.env)).status,409);
   }
+});
+
+test('Phase 2 ordinary Build joins one cold workflow and the next scope waits for completion',async()=>{
+  const f=fixture(),value={release_id:phase2.release_id,scope_id:phase2.first_scope_id,person_id:''};
+  for(let n=0;n<3;n++)assert.equal((await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(value)),f.env)).status,200);
+  assert.equal(f.calls.length,0);
+  const results=await Promise.all(Array.from({length:5},()=>f.handler(f.request('/admin/api/contextual/jobs',value),f.env)));
+  assert.equal(f.calls.length,1);assert.equal(results.filter(r=>r.status===202).length,1);
+  for(const r of results)assert.equal((await r.json()).release_id,phase2.release_id);
+  const next={...value,scope_id:'341997'};
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',next),f.env)).status,409);
+  const id=hash([value.release_id,value.scope_id,'']);
+  await f.store.start(id,'123','a'.repeat(40),f.clock.value.toISOString());
+  await f.store.finish(id,'123','a'.repeat(40),JSON.stringify({result:{state:'no_supported_group_in_assessed_set',scope_id:value.scope_id}}),f.clock.value.toISOString());
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',value),f.env)).status,200);
+  assert.equal(f.calls.length,1);
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',next),f.env)).status,202);
+  assert.equal(f.calls.length,2);
+});
+
+test('Phase 2 trial controls separate cached serving from new paid work and never enable expansion',async()=>{
+  const f=fixture(),value={release_id:phase2.release_id,scope_id:phase2.first_scope_id,person_id:''};
+  const controls='/admin/api/contextual/controls';
+  const response=await f.handler(f.request(controls,{cached_enabled:true,new_paid_enabled:false}),f.env);
+  assert.equal(response.status,200);assert.equal((await response.json()).public_activation,false);
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',value),f.env)).status,403);
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(value)),f.env)).status,200);
+  assert.equal(f.calls.length,0);
+  assert.equal((await f.handler(f.request(controls,{cached_enabled:true,new_paid_enabled:true,maximum_new_attempts:999}),f.env)).status,400);
+  await f.handler(f.request(controls,{cached_enabled:false,new_paid_enabled:true}),f.env);
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(value)),f.env)).status,503);
+  await f.handler(f.request(controls,{cached_enabled:true,new_paid_enabled:true}),f.env);
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',{...value,person_id:configuration.people[0].person_id}),f.env)).status,403);
+  assert.equal(f.calls.length,0);
+});
+
+test('Phase 2 official deadline and rolling policy use one action clock without altering the catalog',async()=>{
+  const f=fixture(),value={release_id:phase2.release_id,scope_id:phase2.first_scope_id,person_id:''};
+  // Existing Search currentness is calendar-date based, not time-of-day gating.
+  f.clock.value=new Date('2026-09-23T00:00:01Z');
+  const closed=await f.handler(f.request('/admin/api/contextual/jobs',value),f.env);
+  assert.equal((await closed.json()).state,'action_blocked');assert.equal(f.calls.length,0);
+  f.clock.value=new Date('2026-10-15T12:00:00Z');
+  const rolling=await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams({...value,scope_id:'341997'})),f.env);
+  assert.equal((await rolling.json()).state,'unassessed');assert.equal(f.calls.length,0);
+});
+
+test('actual application preview is Access protected and serves only reviewed static assets',async()=>{
+  const f=fixture(),base='/admin/contextual/preview/';
+  assert.equal((await f.handler(new Request(host+base+'match_explorer.html'),f.env)).status,403);
+  for(const name of ['match_explorer.html','team_match.html','assets/contextual-team-engine.js','data/researcher_directory.js']){
+    const r=await f.handler(f.request(base+name),f.env);assert.equal(r.status,200);
+    const raw=gunzipSync(Buffer.from(await r.arrayBuffer()));
+    assert.equal(createHash('sha256').update(raw).digest('hex'),r.headers.get('X-Content-SHA256'));
+    assert.match(r.headers.get('Content-Security-Policy'),/connect-src 'self'/);
+    if(name==='match_explorer.html')assert.match(raw.toString(),/id="team-builder-content"/);
+  }
+  for(const name of ['outputs/result.json','data/opportunity_teams.js','__proto__','provider-cache.json'])
+    assert.equal((await f.handler(f.request(base+name),f.env)).status,404);
+  assert.equal(f.calls.length,0);assert.equal(f.db.prepare('SELECT count(*) AS n FROM contextual_validation_jobs').get().n,0);
 });

@@ -1,0 +1,227 @@
+{
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "base_inputs_sha256": "d72ba3a24200133a6fdfed0b33d3d72b3c22462499a7932e5b01b5de14ba23f9",
+  "count_cushion": "ceil(native_complete_packet_tokens*1.2)+1024; exact native count is cached before the paid claim",
+  "count_http_lifetime_maximum": 190,
+  "first_scope_id": "363302:a-1",
+  "maximum_graph_bytes": 200000,
+  "maximum_inventory_microusd": 2497240,
+  "maximum_new_attempts": 18,
+  "maximum_new_microusd": 2500000,
+  "maximum_wire_bytes": 128000,
+  "new_extensions": false,
+  "operations": [
+    {
+      "id": "363302:a-1:interpret",
+      "input_token_ceiling": 18000,
+      "maximum_microusd": 116000,
+      "output_token_ceiling": 8000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-interpret",
+      "scope_id": "363302:a-1",
+      "stage": "interpret"
+    },
+    {
+      "id": "363302:a-1:query",
+      "input_token_ceiling": 25000,
+      "maximum_microusd": 3000,
+      "output_token_ceiling": 0,
+      "provider": "voyage",
+      "purpose": "cb-p2-query",
+      "scope_id": "363302:a-1",
+      "stage": "query"
+    },
+    {
+      "id": "363302:a-1:assess",
+      "input_token_ceiling": 50000,
+      "maximum_microusd": 260000,
+      "output_token_ceiling": 16000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-assess",
+      "scope_id": "363302:a-1",
+      "stage": "assess"
+    },
+    {
+      "id": "363302:a-1:verify",
+      "input_token_ceiling": 42000,
+      "maximum_microusd": 324000,
+      "output_token_ceiling": 24000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-verify",
+      "scope_id": "363302:a-1",
+      "stage": "verify"
+    },
+    {
+      "id": "363302:a-1:check-group",
+      "input_token_ceiling": 24000,
+      "maximum_microusd": 78720,
+      "output_token_ceiling": 3072,
+      "provider": "anthropic",
+      "purpose": "cb-p2-check-group",
+      "scope_id": "363302:a-1",
+      "stage": "check-group"
+    },
+    {
+      "id": "363302:a-1:check-explanation",
+      "input_token_ceiling": 20000,
+      "maximum_microusd": 55360,
+      "output_token_ceiling": 1536,
+      "provider": "anthropic",
+      "purpose": "cb-p2-check-explanation",
+      "scope_id": "363302:a-1",
+      "stage": "check-explanation"
+    },
+    {
+      "id": "341997:interpret",
+      "input_token_ceiling": 11000,
+      "maximum_microusd": 102000,
+      "output_token_ceiling": 8000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-interpret",
+      "scope_id": "341997",
+      "stage": "interpret"
+    },
+    {
+      "id": "341997:query",
+      "input_token_ceiling": 25000,
+      "maximum_microusd": 3000,
+      "output_token_ceiling": 0,
+      "provider": "voyage",
+      "purpose": "cb-p2-query",
+      "scope_id": "341997",
+      "stage": "query"
+    },
+    {
+      "id": "341997:assess",
+      "input_token_ceiling": 50000,
+      "maximum_microusd": 260000,
+      "output_token_ceiling": 16000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-assess",
+      "scope_id": "341997",
+      "stage": "assess"
+    },
+    {
+      "id": "341997:verify",
+      "input_token_ceiling": 42000,
+      "maximum_microusd": 324000,
+      "output_token_ceiling": 24000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-verify",
+      "scope_id": "341997",
+      "stage": "verify"
+    },
+    {
+      "id": "341997:check-group",
+      "input_token_ceiling": 24000,
+      "maximum_microusd": 78720,
+      "output_token_ceiling": 3072,
+      "provider": "anthropic",
+      "purpose": "cb-p2-check-group",
+      "scope_id": "341997",
+      "stage": "check-group"
+    },
+    {
+      "id": "341997:check-explanation",
+      "input_token_ceiling": 20000,
+      "maximum_microusd": 55360,
+      "output_token_ceiling": 1536,
+      "provider": "anthropic",
+      "purpose": "cb-p2-check-explanation",
+      "scope_id": "341997",
+      "stage": "check-explanation"
+    },
+    {
+      "id": "351715:interpret",
+      "input_token_ceiling": 18000,
+      "maximum_microusd": 116000,
+      "output_token_ceiling": 8000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-interpret",
+      "scope_id": "351715",
+      "stage": "interpret"
+    },
+    {
+      "id": "351715:query",
+      "input_token_ceiling": 25000,
+      "maximum_microusd": 3000,
+      "output_token_ceiling": 0,
+      "provider": "voyage",
+      "purpose": "cb-p2-query",
+      "scope_id": "351715",
+      "stage": "query"
+    },
+    {
+      "id": "351715:assess",
+      "input_token_ceiling": 50000,
+      "maximum_microusd": 260000,
+      "output_token_ceiling": 16000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-assess",
+      "scope_id": "351715",
+      "stage": "assess"
+    },
+    {
+      "id": "351715:verify",
+      "input_token_ceiling": 42000,
+      "maximum_microusd": 324000,
+      "output_token_ceiling": 24000,
+      "provider": "anthropic",
+      "purpose": "cb-p2-verify",
+      "scope_id": "351715",
+      "stage": "verify"
+    },
+    {
+      "id": "351715:check-group",
+      "input_token_ceiling": 24000,
+      "maximum_microusd": 78720,
+      "output_token_ceiling": 3072,
+      "provider": "anthropic",
+      "purpose": "cb-p2-check-group",
+      "scope_id": "351715",
+      "stage": "check-group"
+    },
+    {
+      "id": "351715:check-explanation",
+      "input_token_ceiling": 20000,
+      "maximum_microusd": 55360,
+      "output_token_ceiling": 1536,
+      "provider": "anthropic",
+      "purpose": "cb-p2-check-explanation",
+      "scope_id": "351715",
+      "stage": "check-explanation"
+    }
+  ],
+  "preserved_attempts": 10,
+  "preserved_microusd": 1678020,
+  "prices_per_million": {
+    "anthropic": {
+      "input": 2,
+      "model": "claude-sonnet-5",
+      "output": 10
+    },
+    "voyage": {
+      "input": 0.12,
+      "model": "voyage-4-large"
+    }
+  },
+  "pricing_checked_on": "2026-09-13",
+  "prior_attempts": 662,
+  "prior_charge_microusd": 5821980,
+  "prior_request_rows_sha256": "640f79d9ac3f17be5b0026b96fd550126fb3db20247dabe81a8b49e91c6ba703",
+  "public_activation": false,
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+  "scientific_contract": "contextual-cold-demand-references-v1",
+  "scientific_retuning": false,
+  "selection": {
+    "alternative": "existing composer option index 1 when present",
+    "explanations": "primary members only; actual contribution and gap; exact cited claim in full profile document",
+    "individuals": "unique union of the two groups",
+    "negative": "actual negative/gap reasoning within the assessed set; never directory-wide infeasibility",
+    "primary": "existing composer option index 0"
+  },
+  "sizing_owner_run": 34785915676,
+  "source_inputs_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+  "version": "contextual-phase2-cold-v1"
+}
