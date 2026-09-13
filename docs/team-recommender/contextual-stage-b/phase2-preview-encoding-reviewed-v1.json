@@ -1,0 +1,26 @@
+{
+  "version": "phase2-preview-encoding-reviewed-v1",
+  "recorded_at": "2026-09-13T23:55:06.171668+00:00",
+  "pr": 244,
+  "head": "f6b5ab08c023fbac3a6ff2d5dd3a6801846144b0",
+  "review_summary_comment": 5657156353,
+  "terminal_no_findings_reaction_at": "2026-09-13T23:53:05Z",
+  "head_unchanged_through_review": true,
+  "unresolved_threads": 0,
+  "required_ci_run": 34790870780,
+  "python": "PASS",
+  "browser": "PASS",
+  "merge_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+  "merged_at": "2026-09-13T23:53:58Z",
+  "restricted_deployment_run": 34791008758,
+  "preparation_and_scientific_paid_calls": 0,
+  "previous_public_release_run": 34790512095,
+  "public_release_effects": {
+    "generate": "SKIPPED",
+    "assemble": "SKIPPED",
+    "publish": "SKIPPED",
+    "pages": "SKIPPED",
+    "verify_live": "SKIPPED"
+  },
+  "local_browser_observation": "Funding Finder loads normally in local workerd; normal query locates parent 363302 and native child 363302:a-1. No Build performed locally; hosted unrelated search/telemetry blocked by restricted boundary."
+}

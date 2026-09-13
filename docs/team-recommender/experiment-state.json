@@ -9324,7 +9324,7 @@
       "four_tasks_all_passed": false
     },
     "phase2": {
-      "status": "preview_encoding_repair_tested_pending_exact_head_review",
+      "status": "preview_encoding_reviewed_merged_restricted_redeployment_running",
       "authority": "contextual-stage-b/PHASE2-COLD-DEMAND-AUTHORITY.md",
       "starting_product_sha": "c5d01706ebc8eea22afc25e83cc0b643e3b7c5f7",
       "starting_main_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
@@ -9400,7 +9400,10 @@
       "helper_review_receipt": "contextual-stage-b/phase2-pr243-reviewed-merge-v1.json",
       "restricted_deployed_version": "58993ad6-da09-4876-9b17-63a0e71e620d",
       "restricted_deployment_run": 34790511921,
-      "encoding_repair_receipt": "contextual-stage-b/phase2-preview-encoding-repair-v1.json"
+      "encoding_repair_receipt": "contextual-stage-b/phase2-preview-encoding-repair-v1.json",
+      "encoding_repair_pr": 244,
+      "encoding_repair_merge": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "encoding_repair_deploy_run": 34791008758
     }
   },
   "active_work": "phase2_cold_demand_and_restricted_release_readiness",
