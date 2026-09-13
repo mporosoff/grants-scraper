@@ -1,0 +1,54 @@
+{
+  "version": "contextual-stage-b-checkpoint-v4",
+  "captured_at": "2026-09-13T08:41:35.099373+00:00",
+  "previous_receipt": {
+    "path": "docs/team-recommender/contextual-stage-b/validation-receipt-v3.json",
+    "sha256": "863c2c196f628118a1eaf756d248211a73a85ae9e244dc399686436bdb2012bb"
+  },
+  "product_code_commit": "870737f6a13b625cb88952951ade7f2b525bfff8",
+  "lock_commit": "7d4f7b19d69864fb0a40d44e59851bc847df736f",
+  "report_sha256": "2ae0ddb9f5f58733f32addf18b1e6511b6cca18070b1cc291cc4b9a5e01c0ddf",
+  "normalization_pr": 233,
+  "reviewed_head": "acc5e8d14b99aafc2492e99a26bd86943171e60e",
+  "review_comment": 5652213850,
+  "review_finished": "2026-09-13T08:30:03.771276Z",
+  "required_ci": 34747735047,
+  "focused_checks": 35,
+  "merge": "dc48d7da8077d52773e89db76e9e772bfd0af469",
+  "failed_retry": 34747576700,
+  "successful_deployment": 34747922885,
+  "deployment_receipt_sha256": "f99ea68080d5fa501fdb3145038180295c5038560e9aefc6e16024fdf7d4220b",
+  "runtime_lock_sha256": "6cd7989316f9549a193a329399096e63735b9aa0abefb9c659c5c6161972a672",
+  "release_validation_run": 34747921215,
+  "public_publication": false,
+  "browser_access": {
+    "normal_admin": "PASS after redirect-authority verification",
+    "restricted_operator": "BLOCKED_BY_CLIENT twice",
+    "new_assessment_requests": 0,
+    "user_assisted_open_pending": true
+  },
+  "actual_real_execution": {
+    "scopes_completed": 0,
+    "scopes_planned": 8,
+    "extension_completed": 0,
+    "extension_planned": 1,
+    "check_requests": 0,
+    "check_maximum": 4
+  },
+  "ledger": {
+    "owner_run": 34606280661,
+    "sha256": "5000b84b8470ec764b41bc845bf78cb12cd42ad5f5f2cd53a15944b55673d22f",
+    "charged_microusd": 4290655,
+    "attempts": 629,
+    "new_microusd": 0,
+    "new_attempts": 0,
+    "unknown": 0,
+    "remaining_microusd": 5709345,
+    "remaining_attempts": 61
+  },
+  "prior_browser_repairs_unchanged": {
+    "path": "docs/team-recommender/contextual-stage-b/browser-repair-receipt-v1.json",
+    "sha256": "391fdab2994f73d22628235c979f1c72464c0169545f6c3b04e5d6b2334dfd6c"
+  },
+  "disposition": "BLOCKED BY A NAMED PREREQUISITE"
+}

@@ -1,6 +1,6 @@
-# Contextual Stage B — recovery repair and restricted-deployment checkpoint
+# Contextual Stage B — verified restricted deployment and browser-access checkpoint
 
-September 13, 2026 UTC / September 12 EDT. **BLOCKED BY A NAMED PREREQUISITE.** The paid-request recovery defect is corrected, independently reviewed and merged. The four previously failing browser paths are corrected. The restricted intake deployment failed its initial configuration check, and automatic approval review denied the subsequent diagnostic deployment retry. No contextual provider request ran; the eight real assessments, extension and quality check remain unexecuted. This report does not claim scientific acceptance or public activation.
+September 13, 2026 UTC. **BLOCKED BY A NAMED PREREQUISITE: restricted-page browser navigation.** The paid-request recovery defect and four original browser failures are corrected. Restricted deployment now succeeds with authenticated serving-code/configuration proof. The existing application administrator console opens, but navigation to its new `/admin/contextual` page twice returns `net::ERR_BLOCKED_BY_CLIENT`; user-assisted page access is pending. No contextual provider request ran; real assessments remain 0/8, extension 0/1 and checks 0/4 maximum. Public recommender activation remains off.
 
 The preceding reports remain unchanged in `contextual-stage-b-review-checkpoint-20260913.md` (original report SHA-256 `93a4675c9d6e95a62f6a35f565c248badabb9b5e3323079edbe798769a5df874`) and `contextual-stage-b-budget-checkpoint-20260912.md` (original $3 checkpoint). All prior scientific failures, review findings and private caches remain history.
 
@@ -9,9 +9,9 @@ The preceding reports remain unchanged in `contextual-stage-b-review-checkpoint-
 | Task | Disposition |
 |---|---|
 | Repair PR #231 recovery/job state and obtain exact-head review | COMPLETE. 42 focused Python and 36 Worker/browser contracts pass; independent review clean; protected merge completed. |
-| Restricted validation deployment | BLOCKED. First run rejected a live/protected runtime or binding mismatch before any migration, secret update or deployment. Reviewed redacted diagnostics are merged, but the manual retry was denied by automatic approval review. |
-| Eight real opportunity assessments, one unassessed-person extension, bounded independent check | NOT RUN: 0/8 scopes, 0/1 extension, 0/4 maximum check requests. Requires the restricted route. No sample substitutes for this denominator. |
-| Correct remaining browser failures, including Team Match performance | COMPLETE for the four reported failures. All four affected paths pass, with an unchanged 90-second workflow timeout. Broader contracts and their focused corrections are recorded below. Real contextual-service browser validation remains dependent on deployment. |
+| Restricted validation deployment | COMPLETE. Exact API representation mismatch diagnosed, PR233 independently reviewed and merged, deployment34747922885 passed full serving-module/configuration/routing verification. |
+| Eight real opportunity assessments, one unassessed-person extension, bounded independent check | NOT RUN: 0/8 scopes, 0/1 extension, 0/4 maximum check requests. The route is deployed, but its operator page is blocked by the browser. No sample substitutes for this denominator. |
+| Correct remaining browser failures, including Team Match performance | COMPLETE for the four reported failures. All four affected paths pass, with an unchanged 90-second workflow timeout. Broader contracts and their focused corrections are recorded below. Real contextual-service browser validation remains dependent on restricted-page access and actual graphs. |
 
 The latest owner instruction, “Ok go ahead and execute the four indicated tasks and then we will check in again,” is recorded in the existing authority/state. It did not create another spending allowance or authorize public recommender activation.
 
@@ -26,10 +26,10 @@ The latest owner instruction, “Ok go ahead and execute the four indicated task
 | Prior integrated code | `b7eb2e2ed01d71eae709306400309d9d8aaaaacd` |
 | Owner-resumption record | `53efde9` |
 | Exact prerequisite reconciliation | `c819677` copies PR #231; `802ee83` copies PR #232. No bulk main merge, reset or duplicate experimental checkout. |
-| Current local repaired code | `732a8d80a9dae0e45925fe931dd9311762d37b6e`; tree `ada808a4201e3bdea1d032a50699acdcf86b6c1a` |
+| Current local code | `870737f6a13b625cb88952951ade7f2b525bfff8`, including exact PR233 correction. Browser runtime remains the tested `732a8d80a9dae0e45925fe931dd9311762d37b6e` bytes. Validation lock committed at `7d4f7b19d69864fb0a40d44e59851bc847df736f`. |
 | Unchanged analytical branch | `58a59143ef5446b05223f52982a547903f53e24d` |
 | Protected main before this continuation | `fd37d5983405a04e650cb9d0a12aa34098ca2a76` |
-| Protected main after the two narrow prerequisites | `8add010a3ed68e19f1b6a096616843ad4a5a6e1a` |
+| Protected main after three narrow prerequisites | `dc48d7da8077d52773e89db76e9e772bfd0af469` (PR233 merge) |
 | Experimental recommender publication | NONE. Product corrections committed locally only. PR #225 remains outside protected-main release. |
 
 This report and its machine receipt are a documentation checkpoint after the named code commit; the containing report commit is resolved from file history. Untracked `outputs/` and `debug.log`, unrelated worktrees and branches were preserved. No AGENTS, permissions, real profiles or old service settings were changed.
@@ -49,17 +49,27 @@ Reviewed head: `079e06b9f2c61ea15a40bca62cd9f0fa0daceeb8`. Required CI [34733583
 
 No code edits, commits, pushes or review-thread resolutions occurred while either review was pending.
 
-## 4. Restricted deployment: first failing boundary and approval denial
+## 4. Restricted deployment completed; application page navigation unresolved
 
-Run [34733784261](https://github.com/mporosoff/grants-scraper/actions/runs/34733784261) failed in **Capture the prior serving intake version and build exact protected modules**, with `Serving intake runtime/bindings differ from protected configuration`. Worker contracts passed. Configuration update, D1 migration, secret update, deployment, health/provenance verification and rollback were all skipped. There is no new serving version to claim. The generic error did not identify the differing field; its cause remains unresolved, not presumed harmless API formatting.
+The previous failure and approval denials remain in `contextual-stage-b-deployment-checkpoint-20260913.md` and immutable receipt v3. The owner then explicitly instructed: “Yes retry and diagnose. You can continue working and retrying until the four tasks are all complete.” This approves the exact restricted Worker retry and autonomous completion, without another allowance or public activation.
 
-The minimum diagnostic follow-up, [PR #232](https://github.com/mporosoff/grants-scraper/pull/232), reports at most 30 differing field paths, JSON types and hashes, without values. It preserves the same strict rejection and changes no routes, permissions, accounting, science or workflow triggers. Exact head `1a42e2ef19848281eadfb8a4024c0844122ca27d` received a terminal no-findings reaction/summary at 03:00:06 UTC; CI [34734258777](https://github.com/mporosoff/grants-scraper/actions/runs/34734258777) passed. Merge: `8add010a3ed68e19f1b6a096616843ad4a5a6e1a` at 03:01:58 UTC.
+Authorized retry [34747576700](https://github.com/mporosoff/grants-scraper/actions/runs/34747576700) failed before mutation, but identified two exact representations: absent empty `script_runtime.exports`, and an additional D1 `database_id` alias. The observed alias SHA-256 `293d4693f1403df9749cb759cb5c808e59589389ece0c545da4937252acad5b6` equals the protected declared database ID; the original `id` also already matched. [Cloudflare’s version API](https://developers.cloudflare.com/api/resources/workers/subresources/scripts/subresources/versions/methods/get/) documents exports as optional. This was a verifier representation defect, not evidence of actual configuration drift.
 
-Automatic approval review first rejected a combined diagnostic merge/deployment command. After read-only authority/effect checks, the separately permitted diagnostic merge succeeded. A separate retry of `Deploy researcher intake` on protected main was also rejected: the reviewer classified it as capable of modifying the live application Worker and required clearer authorization for this exact retry. **The denied retry was not dispatched. No indirect alternative was attempted.**
+[PR233](https://github.com/mporosoff/grants-scraper/pull/233) normalizes only the missing empty map and an exactly equal string D1 alias. Conflicting/missing/null identifiers, nonempty/null exports, additional fields, duplicate bindings, runtime/route changes, mixed traffic and module-byte differences still fail. Raw observed configuration is retained separately. No permissions, workflow triggers, scientific contracts or other service provenance code changed.
 
-The existing task authority explicitly includes restricted validation deployment, but the automatic approval boundary remains unresolved. The smallest next owner decision is permission for this exact existing workflow retry on protected main, acknowledging it can update the application Worker only if its existing provenance/configuration checks pass. It must not activate the public recommender or waive a mismatch. If the diagnostic still finds real configuration drift, retain the failure and establish the supported correction before any deployment.
+Exact head `acc5e8d14b99aafc2492e99a26bd86943171e60e`: 35 focused checks pass; required Python/Node CI [34747735047](https://github.com/mporosoff/grants-scraper/actions/runs/34747735047) passed. Automatic review [5652213850](https://github.com/mporosoff/grants-scraper/pull/233#issuecomment-5652213850) completed clean at 08:30:03.771276 UTC with its configured no-findings reaction and zero unresolved threads. No duplicate review or pending-review edit occurred. Protected merge `dc48d7da8077d52773e89db76e9e772bfd0af469` at 08:31:51 UTC; reconciled into the experiment as `870737f`.
 
-Public release-planner runs [34733784332](https://github.com/mporosoff/grants-scraper/actions/runs/34733784332) and [34734478710](https://github.com/mporosoff/grants-scraper/actions/runs/34734478710) completed validation only. Generation, team preparation, publication and Pages deployment were not triggered by these prerequisites. Existing deployed services and public registry/recommender bytes remain unchanged.
+Deployment [34747922885](https://github.com/mporosoff/grants-scraper/actions/runs/34747922885) **SUCCEEDED**. It applied only the namespaced `0005_contextual_validation_jobs.sql` migration and its active-job uniqueness index, ran the existing secret-binding operation, and deployed the restricted intake service. All nine existing secret bindings, declared runtime, routes and the existing cron were verified unchanged. The workflow also idempotently removed the already-excluded legacy publication-token binding. No new credentials or privileges were added. No researcher/alert/publication records were edited, subscriber mail sent or public recommender activated.
+
+- Serving version: `b7498b72-e854-4d27-8385-57c72c566dd7`; deployment `aa706067-77be-45bb-bbbd-0f445ed164c9`.
+- Protected code: `dc48d7da8077d52773e89db76e9e772bfd0af469`; exact module SHA-256 `1fa8e5bcd368fc8076a903e60e16c4f0e758afc491bf9b417b76be479de1c321`.
+- Preserved previous version: `833875af-206a-4818-9668-bf57f892c1da`; rollback was not needed.
+- Artifact10314602459 and `contextual-stage-b/restricted-deployment-receipt-v1.json` retain proof.
+- Main release workflow34747921215 performed validation only; generation, assembly, publication and Pages were skipped. Public application/recommender/registry release remains unauthorized.
+
+The first browser attempt to the existing application `/admin` was automatically rejected as broader Cloudflare dashboard access. A no-cookie/no-content redirect check proved it targets the existing application Access login. The same action then succeeded, displaying the normal administrator console with no profile mutation. That classification issue is resolved. However, navigation from it to `/admin/contextual` twice failed with `net::ERR_BLOCKED_BY_CLIENT`; the page remained `/admin`, and browser error logs were empty. No alternate browser, credential extraction, dashboard route or security-policy bypass was attempted. The user was asked to open this exact restricted page, without pressing Build or changing settings. Their response remains pending. This is a browser-access limitation, not evidence that the deployed scientific executor failed.
+
+An automatic CI-status rejection also incorrectly classified the required job named `browser` as E2E. Read-only inspection of `.github/workflows/tests.yml` established it runs Node contracts/query/scoring checks, with no Playwright suite; the justified retry succeeded. No unauthorized E2E job was polled.
 
 ## 5. Audited inputs and missing real outcomes
 
@@ -134,8 +144,10 @@ The complete prior conservative plan remains $4.995414 / 36 maximum requests; th
 
 ## 8. Remaining work and decision
 
-**BLOCKED BY A NAMED PREREQUISITE: exact restricted deployment retry denied by automatic approval review, with a live/protected configuration mismatch still undiagnosed.** The real semantic portion is incomplete, not unfavorable or passed.
+**BLOCKED BY A NAMED PREREQUISITE: repeated client-side denial of the restricted operator-page navigation.** Recovery, restricted deployment and the original four browser corrections are complete. The real semantic/integration portion remains unexecuted, not unfavorable or passed.
 
-After that boundary is explicitly resolved, continue the already-locked eight scopes, one explicit unassessed-person extension and maximum four independent checks through trusted protected-main code and the same ledger. Run actual contextual browser cache/edit/extension/currentness/resource checks against the resulting graphs. Do not redraw the inventory, buy another model campaign, invent human judgments, waive integrity checks, or treat the first example as the complete assessment.
+`contextual-stage-b/real-validation-lock-v1.json` was committed before any new provider call or recommendation output. The complete $4.995414 / 36-attempt bound reproduced exactly from current inputs; current official prices were rechecked September 13. The source/shortlist/judge rules are unchanged. The single extension uses the first current locked-order scope returning a validated graph, regardless of group yield; its unassessed person is selected by the highest maximum cosine to the already-cached contribution queries, with canonical-ID ties. No extra embedding or model selects the extension. All 155 current document inputs and the eight scopes remain bound to the original snapshot.
 
-No public activation, Stage 4, additional human packet or increased budget is requested or implied. STOP FOR USER REVIEW.
+After page access is restored, continue the already-authorized eight scopes, one extension and maximum four separate output-check requests through trusted protected-main code and the same latest-restored ledger. Execute real cache/concurrency/edit/extension/currentness/resource browser checks against those graphs. Do not redraw the sample, retry a charged or uncertain logical request, invent labels, or replace the complete denominator with the first successful example.
+
+The user’s autonomous-completion authorization remains active for these four tasks. No further deployment or dollar approval is requested. This checkpoint identifies the actual unresolved browser-access dependency, while preserving all completed work. No public activation, Stage4, extra human packet or scientific retuning.

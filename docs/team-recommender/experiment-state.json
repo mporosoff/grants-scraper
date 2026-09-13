@@ -136,7 +136,7 @@
     "all_member_Team_Match_workflow": "FAIL: 90-second timeout twice; not waived",
     "peak_browser_memory": "Continuous peak NOT MEASURED; sampled failures sufficient to fail limit"
   },
-  "containing_commit": "Documentation checkpoint after product code 732a8d80a9dae0e45925fe931dd9311762d37b6e; resolve report-containing commit locally; this is not reviewed prerequisite code.",
+  "containing_commit": "Documentation after real-validation lock7d4f7b1; resolve report-containing commit locally.",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -6744,7 +6744,7 @@
   },
   "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
   "next_allowed_stage": null,
-  "next_stage_requires": "Specific permission to retry Deploy researcher intake on protected main, acknowledging live application Worker mutation only after existing checks pass; diagnose and preserve any remaining configuration mismatch. No new budget approval needed.",
+  "next_stage_requires": "Restore access to the deployed /admin/contextual page, then continue already-authorized real validation; no new budget or deployment approval needed.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "release_packages": {
@@ -7373,7 +7373,7 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "contextual-stage-b-autonomous-completion-in-progress",
+  "stage_status": "contextual-stage-b-restricted-deployed-browser-access-blocked",
   "stop": "Complete the four named tasks and report; stop only at a genuine unresolved safety/access/budget boundary. No public activation.",
   "unresolved": [
     "Additional heap ceiling FAIL: observed increase 68.94-80.04 MiB before GC; retained 10.82-19.34 MiB does not establish peak compliance",
@@ -7384,7 +7384,7 @@
     "Physical mobile and peak memory unmeasured; historical rollback preserves old Funded Awards import omission",
     "Unrelated unpublished main stylesheet change must be preserved in any future integration"
   ],
-  "updated_at": "2026-09-13T03:16:55.873558+00:00",
+  "updated_at": "2026-09-13T08:41:35.099373+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -7909,7 +7909,7 @@
     "next_stage_requires": "Resolve the named allocation/resource limit without changing shared scientific decisions; explicit owner disposition of scientific failures and separate Stage 4/release authorization. No automatic next work."
   },
   "contextual_stage_b": {
-    "status": "authorized_restricted_retry_and_four_task_completion_in_progress",
+    "status": "restricted_deployment_complete_real_assessment_blocked_browser_navigation",
     "authority": "docs/team-recommender/contextual-stage-b/AUTHORITY.md",
     "product_start": "1018d6faac2f08a6a2e828c0b72612437114d9bc",
     "analytical_start": "58a59143ef5446b05223f52982a547903f53e24d",
@@ -7955,14 +7955,14 @@
       "containing_commit": "Documentation-only closeout following exact reviewed/CI code 67a34ef1706fbd72698e2cfcf4351a81fc0b2f28; resolve local HEAD for containing report commit, never substitute it as the reviewed SHA"
     },
     "report": "docs/team-recommender/reports/contextual-stage-b-demand-implementation-report.md",
-    "blocker": "First deployment rejected live/protected configuration mismatch; automatic approval review then denied the exact diagnostic deployment retry. No deployment or real assessments executed.",
+    "blocker": "Existing admin opens; /admin/contextual navigation twice blocked by client. User-assisted exact-page opening requested. No metered work.",
     "input_lock": "docs/team-recommender/contextual-stage-b/input-lock-v1.json",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
     "budget_preflight": "docs/team-recommender/contextual-stage-b/preflight-budget-v2.json",
     "work_packages": {
       "1": "COMPLETE: PR231 recovery repair independently reviewed and protected-merged; PR232 redacted diagnostic independently reviewed and protected-merged.",
-      "2": "BLOCKED: restricted deployment failed before mutations; automatic approval review denied diagnostic retry.",
-      "3": "NOT RUN: 0/8 real scopes, 0/1 explicit extension and 0/4 maximum check requests; dependent on restricted route.",
+      "2": "COMPLETE: reviewed PR233 normalization repair and verified restricted intake deployment34747922885; public activation off.",
+      "3": "NOT RUN: 0/8 scopes, 0/1 extension and 0/4 check ceiling. Restricted-page navigation blocked by client twice; exact user-assisted opening pending.",
       "4": "COMPLETE for four reported browser failures; focused repairs pass. Real contextual integration/resource checks remain dependent on deployment."
     },
     "new_provider_calls": 0,
@@ -7981,18 +7981,18 @@
       "merged": true,
       "merge_sha": "311246fe48c643bd3efa375fbe4b2b624bcb6ef6",
       "merged_at": "2026-09-13T02:44:26Z",
-      "deployed": false,
+      "deployed": true,
       "prior_finding_preserved": 3998349238,
       "recovery_invariant": "Durable reserved_unknown or missing/corrupt reconciled results require recovery; repeated restoration cannot redispatch; active Worker slot remains held.",
       "duplicate_fixture_dispatches_on_restoration": 0
     },
-    "implementation_commit": "732a8d80a9dae0e45925fe931dd9311762d37b6e",
-    "implementation_tree": "ada808a4201e3bdea1d032a50699acdcf86b6c1a",
-    "report_sha256": "885278ef48059adec1aa4f949fbe1b0cda71d39cef3f99c05ab4d4ab140fd69c",
-    "validation_receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v3.json",
+    "implementation_commit": "870737f6a13b625cb88952951ade7f2b525bfff8",
+    "implementation_tree": "e23c4dcd7aa25fce0c9520f4214296416cbc87ef",
+    "report_sha256": "2ae0ddb9f5f58733f32addf18b1e6511b6cca18070b1cc291cc4b9a5e01c0ddf",
+    "validation_receipt": "docs/team-recommender/contextual-stage-b/validation-receipt-v4.json",
     "disposition": "BLOCKED BY A NAMED PREREQUISITE",
     "authoritative_ledger_unchanged_at_closeout": true,
-    "protected_main_at_closeout": "8add010a3ed68e19f1b6a096616843ad4a5a6e1a",
+    "protected_main_at_closeout": "dc48d7da8077d52773e89db76e9e772bfd0af469",
     "checkpoint_history": [
       {
         "status": "blocked_before_metered_dispatch",
@@ -8091,31 +8091,13 @@
       "deployed": false
     },
     "deployment": {
-      "workflow": "deploy-researcher-intake.yml",
-      "run_id": 34733784261,
-      "run_head": "311246fe48c643bd3efa375fbe4b2b624bcb6ef6",
-      "conclusion": "failure",
-      "first_failing_step": "Capture the prior serving intake version and build exact protected modules",
-      "error": "Serving intake runtime/bindings differ from protected configuration",
-      "differing_field": "UNKNOWN; diagnostics not yet executed",
-      "D1_migration": "skipped",
-      "secret_update": "skipped",
-      "worker_deployment": "skipped",
-      "new_serving_version": null,
-      "retry_dispatched": false,
-      "automatic_approval_rejections": [
-        {
-          "attempt": "combined diagnostic merge and deployment retry",
-          "reason": "Live Worker mutation authority considered unclear; separate diagnostic merge subsequently permitted"
-        },
-        {
-          "attempt": "standalone existing workflow retry after read-only authority verification",
-          "reason": "Workflow can modify live application Worker; exact deployment retry requires clearer authority"
-        }
-      ],
-      "bypass_attempted": false
+      "run_id": 34747922885,
+      "head": "dc48d7da8077d52773e89db76e9e772bfd0af469",
+      "conclusion": "success",
+      "receipt": "docs/team-recommender/contextual-stage-b/restricted-deployment-receipt-v1.json",
+      "public_activation": false
     },
-    "validation_receipt_sha256": "863c2c196f628118a1eaf756d248211a73a85ae9e244dc399686436bdb2012bb",
+    "validation_receipt_sha256": "aa248a2dea36450d2cc63af05b731d1a732601957e9caf60e322cf891dc4daeb",
     "browser_repair_receipt": {
       "path": "docs/team-recommender/contextual-stage-b/browser-repair-receipt-v1.json",
       "sha256": "391fdab2994f73d22628235c979f1c72464c0169545f6c3b04e5d6b2334dfd6c"
@@ -8136,7 +8118,49 @@
       "autonomous_named_task_completion": true,
       "public_activation": false,
       "new_allowance": false
-    }
+    },
+    "normalization_review": {
+      "normalization_pr": 233,
+      "reviewed_head": "acc5e8d14b99aafc2492e99a26bd86943171e60e",
+      "review_comment": 5652213850,
+      "review_finished": "2026-09-13T08:30:03.771276Z",
+      "required_ci": 34747735047,
+      "merge": "dc48d7da8077d52773e89db76e9e772bfd0af469"
+    },
+    "deployment_history": [
+      {
+        "workflow": "deploy-researcher-intake.yml",
+        "run_id": 34733784261,
+        "run_head": "311246fe48c643bd3efa375fbe4b2b624bcb6ef6",
+        "conclusion": "failure",
+        "first_failing_step": "Capture the prior serving intake version and build exact protected modules",
+        "error": "Serving intake runtime/bindings differ from protected configuration",
+        "differing_field": "UNKNOWN; diagnostics not yet executed",
+        "D1_migration": "skipped",
+        "secret_update": "skipped",
+        "worker_deployment": "skipped",
+        "new_serving_version": null,
+        "retry_dispatched": false,
+        "automatic_approval_rejections": [
+          {
+            "attempt": "combined diagnostic merge and deployment retry",
+            "reason": "Live Worker mutation authority considered unclear; separate diagnostic merge subsequently permitted"
+          },
+          {
+            "attempt": "standalone existing workflow retry after read-only authority verification",
+            "reason": "Workflow can modify live application Worker; exact deployment retry requires clearer authority"
+          }
+        ],
+        "bypass_attempted": false
+      }
+    ],
+    "browser_access": {
+      "normal_admin": "PASS after redirect-authority verification",
+      "restricted_operator": "BLOCKED_BY_CLIENT twice",
+      "new_assessment_requests": 0,
+      "user_assisted_open_pending": true
+    },
+    "real_validation_lock": "docs/team-recommender/contextual-stage-b/real-validation-lock-v1.json"
   },
   "active_work": "contextual-stage-b-demand-implementation"
 }
