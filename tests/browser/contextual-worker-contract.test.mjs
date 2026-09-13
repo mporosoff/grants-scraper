@@ -74,8 +74,10 @@ test('concurrent requests share one durable dispatch; reads and repeats cannot r
   const f=fixture();const results=await Promise.all(Array.from({length:10},()=>f.handler(f.request('/admin/api/contextual/jobs',f.value),f.env)));
   assert.equal(f.calls.length,1);assert.equal(results.filter(r=>r.status===202).length,1);
   assert.ok(results.every(r=>[200,202].includes(r.status)));
-  assert.equal(f.calls[0].url,'https://api.github.com/repos/mporosoff/grants-scraper/actions/workflows/team-recommender-offline.yml/dispatches');
-  const sent=JSON.parse(f.calls[0].options.body);assert.equal(sent.ref,'main');assert.deepEqual(Object.keys(sent.inputs),['contextual_job']);
+  assert.equal(f.calls[0].url,'https://api.github.com/repos/mporosoff/grants-scraper/dispatches');
+  const sent=JSON.parse(f.calls[0].options.body);assert.equal(sent.event_type,'contextual-team-validation');
+  assert.deepEqual(Object.keys(sent.client_payload),['contextual_job']);
+  assert.deepEqual(JSON.parse(sent.client_payload.contextual_job),{...f.value,job_id:hash([f.value.release_id,f.value.scope_id,''])});
   const other={...f.value,scope_id:'361207'};
   assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',other),f.env)).status,429);
   await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(f.value)),f.env);assert.equal(f.calls.length,1);
@@ -87,6 +89,28 @@ test('unknown remote dispatch remains recovery-required through reloads and anot
   assert.equal((await h(f.request('/admin/api/contextual/jobs',f.value),f.env)).status,503);
   for(let i=0;i<3;i++)assert.equal((await (await h(f.request('/admin/api/contextual/jobs',f.value),f.env)).json()).state,'recovery_required');
   assert.equal(count,1);assert.equal((await h(f.request('/admin/api/contextual/jobs',{...f.value,scope_id:'361207'}),f.env)).status,429);
+});
+
+test('dispatch failure exposes only bounded status while keeping the same irreversible job',async()=>{
+  for(const status of [403,422,503]){
+    const f=fixture();let calls=0;
+    const h=createContextualHandler({...f.dependencies,fetchImpl:async()=>{calls++;return new Response('private upstream message',{status});}});
+    const response=await (await h(f.request('/admin/api/contextual/jobs',f.value),f.env)).json();
+    assert.deepEqual(response.dispatch_diagnostic,{http_status:status,category:'remote_rejected'});
+    assert(!JSON.stringify(response).includes('private'));
+    for(let i=0;i<3;i++)assert.equal((await (await h(f.request('/admin/api/contextual/jobs',f.value),f.env)).json()).state,'recovery_required');
+    assert.equal(calls,1);
+  }
+});
+
+test('a trusted contextual repository dispatch can recover an unowned job but never replace its owner',async()=>{
+  const f=fixture();await f.handler(f.request('/admin/api/contextual/jobs',f.value),f.env);
+  const id=hash([f.value.release_id,f.value.scope_id,'']);await f.store.uncertain(id,f.clock.value.toISOString());
+  const h=createContextualHandler({...f.dependencies,fetchImpl:async()=>Response.json({path:'.github/workflows/team-recommender-offline.yml',event:'repository_dispatch',head_branch:'main',head_sha:'a'.repeat(40)})});
+  const stamp={release_id:f.value.release_id,job_id:id,run_id:'123',code_sha:'a'.repeat(40)};
+  assert.equal((await h(f.request('/internal/contextual/start',stamp,true),f.env)).status,200);
+  assert.equal((await h(f.request('/internal/contextual/start',{...stamp,run_id:'124'},true),f.env)).status,409);
+  assert.equal((await f.store.byId(id)).run_id,'123');
 });
 
 test('currentness, parent ownership, bad IDs, stale generations and broad parents make no dispatch',async()=>{
