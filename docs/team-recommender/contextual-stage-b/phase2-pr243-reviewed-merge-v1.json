@@ -1,0 +1,43 @@
+{
+  "version": "phase2-pr243-reviewed-merge-v1",
+  "recorded_at": "2026-09-13T23:44:36.606914+00:00",
+  "pr": 243,
+  "head": "c1034e044d72784fae7fb9aec98b05ea4ca5bab5",
+  "initial_review_head": "a815adc84ccf796e1e38f04686878f7439771a08",
+  "initial_review_id": 5192676772,
+  "finding": 4001238063,
+  "finding_state": "corrected, regression-tested, clean reviewed, resolved",
+  "failed_review_service_comment": 5657079844,
+  "failure": "Provider review environment could not resolve an existing GitHub commit; no code review occurred.",
+  "retry_request_comment": 5657094611,
+  "terminal_clean_review_comment": 5657111170,
+  "required_ci_run": 34790115049,
+  "required_checks": {
+    "python": "PASS",
+    "browser": "PASS"
+  },
+  "merge_sha": "be31e24d00a993178e43f0daea0ef9fa16f93389",
+  "merged_at": "2026-09-13T23:43:16Z",
+  "product_reconciliation_sha": "7c42557fbdbbd02414113bf399064f54ee4298c1",
+  "restricted_deployment_run": 34790511921,
+  "deployment_status": "in_progress",
+  "public_activation": false,
+  "new_metered_attempts": 0,
+  "new_charge_microusd": 0,
+  "focused_checks": {
+    "capability_worker_browser": 19,
+    "affected_python": 12,
+    "product_client_composer": 18
+  },
+  "local_worker_build": {
+    "upload_kib": 4523.74,
+    "gzip_kib": 2932.31,
+    "remote_deploy": false,
+    "preexisting_duplicate_evidencePolicy_warning": true
+  },
+  "log_hashes": {
+    "phase2-capability-remediation-tests.txt": "c1a4d851ae2dabd5bab519954b386380faf048952a51549dcbd319002a29596e",
+    "phase2-capability-python-tests.txt": "c8a09e576cd9a12ad70a098bbd78a7caee97d524a01f019cb4d44a7311dc755e",
+    "phase2-reviewed-build.txt": "23ccbe35733cc007bce90c2a0a2517d7c459509ba1397abed0a80113e621d611"
+  }
+}

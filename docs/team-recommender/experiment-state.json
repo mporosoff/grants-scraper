@@ -9324,7 +9324,7 @@
       "four_tasks_all_passed": false
     },
     "phase2": {
-      "status": "pr243_capability_remediation_tested_exact_head_rereview_next",
+      "status": "package_A_reviewed_merged_restricted_deployment_running",
       "authority": "contextual-stage-b/PHASE2-COLD-DEMAND-AUTHORITY.md",
       "starting_product_sha": "c5d01706ebc8eea22afc25e83cc0b643e3b7c5f7",
       "starting_main_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
@@ -9340,7 +9340,7 @@
       "public_activation": false,
       "phase1_reopened": false,
       "packages": {
-        "A": "persistence_repaired_merged_cold_path_implemented_focused_pass_pending_review",
+        "A": "completed_normal_cold_contract_implemented_reviewed_merged",
         "B": "0_of_3_workflows_0_of_6_maximum_checks",
         "C": "initial_original50_original150_routing_join_only"
       },
@@ -9394,7 +9394,10 @@
           "merge": "276de145ee082daa6b245c003e333c49c99d8488"
         }
       ],
-      "execution_lock_addendum": "contextual-stage-b/phase2-execution-lock-capability-addendum-v1.json"
+      "execution_lock_addendum": "contextual-stage-b/phase2-execution-lock-capability-addendum-v1.json",
+      "helper_merge": "be31e24d00a993178e43f0daea0ef9fa16f93389",
+      "product_reconciliation_sha": "7c42557fbdbbd02414113bf399064f54ee4298c1",
+      "helper_review_receipt": "contextual-stage-b/phase2-pr243-reviewed-merge-v1.json"
     }
   },
   "active_work": "phase2_cold_demand_and_restricted_release_readiness",
