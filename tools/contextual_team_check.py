@@ -125,7 +125,11 @@ def main():
     p=argparse.ArgumentParser(description=__doc__);p.add_argument('action',choices=['prepare','execute'])
     p.add_argument('--state',type=Path,required=True);p.add_argument('--reservation',type=Path)
     p.add_argument('--result',type=Path);args=p.parse_args();existing.trusted_environment()
-    from tools.contextual_team_phase1 import run
+    requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
+    if isinstance(requested,dict) and 'phase2_token_preflight' in requested:
+        from tools.contextual_team_token_preflight import run
+    else:
+        from tools.contextual_team_phase1 import run
     run(args)
 
 
