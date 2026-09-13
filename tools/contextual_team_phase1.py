@@ -6,7 +6,7 @@ This module only narrows the named purposes, fixed packets and remaining budget.
 import json
 import os
 from tools import team_recommender_executor as existing
-from tools.contextual_team_check import graphs, packet, RESPONSE_CONTRACT
+from tools.contextual_team_check import graphs, packet, RESPONSE_CONTRACT, OWNED_RESPONSE_CONTRACT
 from tools.contextual_team_cost import text_reservation
 from tools.contextual_team_executor import Runner, RecoveryRequired
 from tools.contextual_team_option1 import configuration_for_job
@@ -14,13 +14,13 @@ from tools.contextual_team_policy import ROOT, INPUT_SHA
 from tools.offline_spend import identity, atomic_json, Deferred, ConfigurationFailure
 
 
-def plan():
-    value=json.loads((ROOT/'config/contextual_team/phase1-checks-v1.json').read_bytes())
+def plan(version=2):
+    value=json.loads((ROOT/f'config/contextual_team/phase1-checks-v{version}.json').read_bytes())
     lock_id=value.pop('lock_id')
     if identity(value)!=lock_id:raise ConfigurationFailure('phase1_lock_identity')
     value['lock_id']=lock_id
     if (value['authorization_id']!=existing.AUTHORIZATION_ID or value['input_sha256']!=INPUT_SHA
-        or value['response_contract_sha256']!=identity(RESPONSE_CONTRACT)):
+        or value['response_contract_sha256']!=identity(OWNED_RESPONSE_CONTRACT if version==2 else RESPONSE_CONTRACT)):
         raise ConfigurationFailure('phase1_contract_identity')
     return value
 
@@ -36,13 +36,16 @@ def check_history(state,p):
         raise RecoveryRequired('phase1_uncertain_dispatch_preserved')
     if any(r.get('purpose')=='cb-o1-check-explanation' for r in rows):
         raise RecoveryRequired('phase1_original_explanation_already_claimed')
+    if p.get('owned_references') and any(r.get('purpose')=='cb-p1-check-explanation' for r in rows):
+        raise RecoveryRequired('phase1_v2_explanation_already_claimed')
 
 
 def ensure_remaining_plan_fits(state,p):
     check_history(state,p)
     rows=state['requests'];claimed={r.get('purpose') for r in rows}
     remaining=[o for o in p['operations'] if o['purpose'] not in claimed]
-    task=[r for r in rows if r.get('purpose','').startswith('cb-p1-')]
+    purposes={o['purpose'] for o in p['operations']}
+    task=[r for r in rows if r.get('purpose') in purposes]
     future=sum(o['maximum_microusd'] for o in remaining)
     if (len(rows)+len(remaining)>690-p['preserved_attempts']
         or sum(r['charged_microusd'] for r in rows)+future>10_000_000-p['preserved_microusd']
@@ -79,7 +82,7 @@ def prepared_packets(state,requested,p):
     scope,graph=selected[0];packets=[]
     for op in p['operations']:
         original,_=packet(scope,graph,p['members'],op['kind'],config)
-        body,check=packet(scope,graph,p['members'],op['kind'],config,revised=True)
+        body,check=packet(scope,graph,p['members'],op['kind'],config,revised=True,owned_references=p.get('owned_references',False))
         if (identity(original)!=op['original_body_sha256'] or identity(body)!=op['body_sha256']
             or original['messages']!=body['messages']
             or identity(body['messages'])!=op['question_evidence_sha256']
@@ -91,6 +94,7 @@ def prepared_packets(state,requested,p):
 
 def execute(runner,packets,p,result_path):
     results=[]
+    contract=OWNED_RESPONSE_CONTRACT if p.get('owned_references') else RESPONSE_CONTRACT
     try:
         for op,body,check in packets:
             purpose=op['purpose']
@@ -100,13 +104,13 @@ def execute(runner,packets,p,result_path):
             results.append({'kind':op['kind'],'scope_id':p['scope_id'],'body_sha256':identity(body),'value':value})
             # Durable request/cache already exist. Keep each accepted batch even
             # if the following provider, parser, or convenience-file write fails.
-            atomic_json(result_path,{'version':RESPONSE_CONTRACT['version'],'results':results,'requests':runner.used})
+            atomic_json(result_path,{'version':contract['version'],'results':results,'requests':runner.used})
     finally:
         # Do not confuse an empty convenience array with zero paid dispatches.
-        rows=[r for r in runner.ledger.read()['requests'] if r.get('purpose','').startswith('cb-p1-')]
-        atomic_json(result_path,{'version':RESPONSE_CONTRACT['version'],'lock_id':p['lock_id'],
+        rows=[r for r in runner.ledger.read()['requests'] if r.get('purpose') in {o['purpose'] for o in p['operations']}]
+        atomic_json(result_path,{'version':contract['version'],'lock_id':p['lock_id'],
             'results':results,'requests':runner.used,'durable_requests':rows,
-            'maximum_requests':2,'maximum_new_microusd':250000,'human_judgments':0,
+            'maximum_requests':p['maximum_new_attempts'],'maximum_new_microusd':p['maximum_new_microusd'],'human_judgments':0,
             'same_model_family_limitation':True})
         existing.checkpoint(runner.state)
 
@@ -131,7 +135,7 @@ def run(args):
             'prior_ledger_sha256':existing.sha(ledger.path.read_bytes()),
             'maximum_new_microusd':p['maximum_new_microusd'],'maximum_new_attempts':2,
             'remaining_operations':remaining,'reserved_envelope_microusd':sum(o['maximum_microusd'] for o in remaining),
-            'repair_of':p['repair_of'],'response_contract':RESPONSE_CONTRACT,
+            'repair_of':p['repair_of'],'response_contract':OWNED_RESPONSE_CONTRACT if p.get('owned_references') else RESPONSE_CONTRACT,
             'response_contract_sha256':p['response_contract_sha256']})
         return
     execute(Runner(args.state,config),packets,p,args.result)
