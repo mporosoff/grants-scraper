@@ -4,11 +4,11 @@ import math
 from tools.contextual_team_policy import ROOT, INPUT_SHA
 from tools.offline_spend import identity, ConfigurationFailure, Deferred
 
-RELEASE='0d0e2c7de98bbf15b9fdfd31bb1379f41f8c0c84de992db03aec6b392c6cf8d3'
+RELEASE='2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e'
 
 
 def plan():
-    p=json.loads((ROOT/'config/contextual_team/requirements-latency-v1.json').read_bytes())
+    p=json.loads((ROOT/'config/contextual_team/requirements-latency-v2.json').read_bytes())
     rid=p.pop('release_id')
     if rid!=RELEASE or identity(p)!=RELEASE:raise ConfigurationFailure('latency_plan_identity')
     p['release_id']=rid
