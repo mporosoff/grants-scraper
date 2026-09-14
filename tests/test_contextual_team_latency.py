@@ -201,6 +201,54 @@ class Latency(unittest.TestCase):
             too_many['S']['edges'] += [{**e,'claim_id':e['claim_id']+'-extra'} for e in arms['S']['edges']]
             with self.assertRaises(ConfigurationFailure):comparison_packet(self.state,sizing_arms=too_many)
 
+    def test_failed_arm_is_unavailable_not_retried_or_silently_judged(self):
+        from tools import contextual_team_latency_check as checks
+        from tools.offline_ai import SchemaFailure
+        data=scope_inputs(self.config['scopes'][0])|{'people':self.config['people'][:12],
+            'interpretation':{'roles':[{'id':'role-1','central':True},{'id':'role-2','central':False}]}}
+        runner=self.runner();good=runner.scientific_request('adjudication',data,'S','S')
+        original=self.provider
+        def five_in_one_role(url,**kw):
+            response=original(url,**kw)
+            value=json.loads(response.value['output'][0]['content'][0]['text'])
+            exemplar=value['edges'][0]
+            value['edges']=[{**exemplar,'claim_ref':p['claims'][0]['claim_id']+'@'+str(p['claims'][0]['revision'])}
+                for p in data['people'][:5]]
+            for p in data['people'][:5]:value['people'][p['person_id']]['outcome']='supported'
+            response.value['output'][0]['content'][0]['text']=json.dumps(value)
+            return response
+        runner.post=five_in_one_role
+        with self.assertRaises(SchemaFailure):runner.scientific_request('adjudication',data,'L','L')
+        before=(self.state/'ledger.json').read_bytes();calls=len(self.calls)
+        with patch.object(latency,'eclipse_data',return_value=(data,good)), \
+             patch.object(checks,'eclipse_data',return_value=(data,good)):
+            arms,dispositions=checks.comparison_arms(self.state)
+            self.assertEqual(set(arms),{'S'})
+            self.assertEqual(dispositions['L']['status'],'failed_unavailable')
+            self.assertEqual(dispositions['L']['scientific_outcome'],'unmeasured')
+            body,questions,_,_,_=checks.comparison_packet(self.state)
+            self.assertEqual(len(questions),14) # two exact relationships plus all12 people
+            self.assertNotIn('failed_unavailable',body['messages'][0]['content'])
+            for _ in range(3):
+                with self.assertRaises(RecoveryRequired):runner.scientific_request('adjudication',data,'L','L')
+            self.assertEqual(len(self.calls),calls)
+            self.assertEqual((self.state/'ledger.json').read_bytes(),before)
+            ledger=json.loads(before);failed=ledger['requests'][-1]
+            failed['status']='reserved_unknown';atomic_json(self.state/'ledger.json',ledger)
+            with self.assertRaises(ConfigurationFailure):checks.comparison_arms(self.state)
+            failed['status']='failed';atomic_json(self.state/'ledger.json',ledger)
+            rp=self.state/'receipts'/(failed['id']+'.json');receipt=json.loads(rp.read_bytes())
+            receipt['charged_microusd']+=1;atomic_json(rp,receipt)
+            with self.assertRaises(ConfigurationFailure):checks.comparison_arms(self.state)
+            receipt['charged_microusd']-=1;atomic_json(rp,receipt)
+            failed['body_sha256']='0'*64;atomic_json(self.state/'ledger.json',ledger)
+            with self.assertRaises(ConfigurationFailure):checks.comparison_arms(self.state)
+            failed['body_sha256']=receipt['body_sha256'];atomic_json(self.state/'ledger.json',ledger)
+            success=ledger['requests'][-2];cache=self.state/'cache'/(success['key']+'.json')
+            cache.unlink()
+            with self.assertRaises(OSError):checks.comparison_arms(self.state)
+            self.assertEqual(len(self.calls),calls)
+
     def test_complete_unicode_checker_and_question_owned_references(self):
         from tools.contextual_team_contract import obj,enum,string
         from tools.contextual_team_phase2_check import validator
