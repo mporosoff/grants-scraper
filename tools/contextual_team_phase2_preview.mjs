@@ -8,7 +8,7 @@ import {createHash} from 'node:crypto';
 import {hash,canonical,SOURCE_FIELDS,CONDITION_FIELDS} from './contextual_team_inputs.mjs';
 const helper=path.resolve(process.argv[2]),target=path.join(helper,'workers/researcher-intake/config/contextual-preview-v1.json');
 const requirements=process.argv.includes('--requirements-latency');
-const p=JSON.parse(fs.readFileSync(path.join(helper,'config/contextual_team/'+(requirements?'requirements-latency-v1.json':'phase2-v1.json'))));
+const p=JSON.parse(fs.readFileSync(path.join(helper,'config/contextual_team/'+(requirements?'requirements-latency-v2.json':'phase2-v1.json'))));
 const sources=JSON.parse(fs.readFileSync(path.join(helper,'config/contextual_team/phase2-source-inputs-v2.json')));
 if(requirements)sources.scopes=sources.scopes.filter(s=>s.id===p.workflow_scope);
 const c=vm.createContext({});vm.runInContext(fs.readFileSync('data/researcher_directory.js','utf8'),c);

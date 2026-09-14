@@ -1,0 +1,68 @@
+{
+  "all_eight_reserved_microusd": 1496405,
+  "comparison_input_ceiling": 45200,
+  "comparison_output_ceiling": 8000,
+  "comparison_question_bound": 36,
+  "final_output_ceiling": 4000,
+  "final_question_bound": 10,
+  "fixed_packets": [
+    {
+      "body_sha256": "266959a94b39ed8882be14bdc16fc142dd5fd3b031f147b01015ae830874f9e9",
+      "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+      "native_input_tokens": 18150,
+      "operation": "S",
+      "reserved_input_tokens": 22804,
+      "wire_bytes": 47772
+    },
+    {
+      "body_sha256": "25b28ec4fc1acd559ebdba4d90ffa640e0e77eb212dce7f56cf7a5ad84608aad",
+      "input_sha256": "de697a2c3dc2aaca3bdca10672f320f7ab5a1836f9055144a6e3fa8671b3bbdb",
+      "native_input_tokens": 13856,
+      "operation": "interpret",
+      "reserved_input_tokens": 17652,
+      "wire_bytes": 37603
+    },
+    {
+      "body_sha256": "b71263717e037780c69eb59e5a930dc4fd03756ea98a54007faa61aa76405435",
+      "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+      "operation": "L",
+      "reserved_input_tokens": 48691,
+      "wire_bytes": 47667
+    },
+    {
+      "body_sha256": "f58f877c9a13545303914b46dc982c8d982303eacdb86e417680ff202aac3c82",
+      "maximum_questions": 36,
+      "native_input_tokens": 29920,
+      "operation": "comparison-check",
+      "questions": 36,
+      "reserved_input_upper_bound": 45160,
+      "sizing_only": true,
+      "variable_relationship_bytes": 8232,
+      "wire_bytes": 67546
+    },
+    {
+      "operation": "assess",
+      "reserved_input_upper_bound": 44210,
+      "source_and_prompt_native_tokens": 9401,
+      "unknown_text_treated_as_bytes": true
+    },
+    {
+      "operation": "verify",
+      "reserved_input_upper_bound": 51282,
+      "source_and_prompt_native_tokens": 9401,
+      "unknown_text_treated_as_bytes": true
+    },
+    {
+      "operation": "final-check",
+      "reserved_input_upper_bound": 38491,
+      "source_and_prompt_native_tokens": 9401,
+      "unknown_text_treated_as_bytes": true
+    }
+  ],
+  "maximum_new_attempts": 8,
+  "no_profile_or_source_truncation": true,
+  "paid_dispatches": 0,
+  "profile_count_cache_reuse": 155,
+  "profile_documents": 155,
+  "release_id": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e"
+}

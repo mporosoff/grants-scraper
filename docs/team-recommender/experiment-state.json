@@ -9931,17 +9931,116 @@
   },
   "requirements_latency_repair": {
     "version": "requirements-latency-analysis-lock-v1",
-    "status": "implementation_complete_prepaid_review_and_sizing_pending",
+    "status": "reviewed_complete_preflight_passed_before_paid_comparison",
     "authority_sha256": "d8933e6bd1f9a23f87c1f993c21e9610c009fd9de2c16dac2e238b294d4256b3",
     "starting_product_sha": "39ba3f3d169d599d0be02b8d6f36b8d99b4ddf55",
     "starting_main_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
     "starting_helper_sha": "5d9f4489e1223d72e0987906e1da93ffce11b7c1",
-    "authoritative_owner": 34795980969,
+    "authoritative_owner": 34849633528,
     "prior_charged_microusd": 7232138,
     "prior_attempts": 680,
     "outstanding_requests": 0,
     "ledger_sha256": "2dc317f129c56127c59099518a78fab07db2e07dcabfc95a1e1f894cb9c53f46",
     "plan": {
+      "authorization_id": "on-demand-team-offline-v2-20260909",
+      "comparison_scope": "351715",
+      "maximum_inventory_microusd": 1496405,
+      "maximum_new_attempts": 8,
+      "maximum_new_microusd": 1500000,
+      "maximum_wire_bytes": 160000,
+      "openai_input_token_ceiling": 161024,
+      "operations": [
+        {
+          "id": "S",
+          "input_token_ceiling": 23000,
+          "maximum_microusd": 286000,
+          "output_token_ceiling": 24000,
+          "provider": "anthropic"
+        },
+        {
+          "id": "L",
+          "input_token_ceiling": 161024,
+          "maximum_microusd": 61005,
+          "output_token_ceiling": 24000,
+          "provider": "openai"
+        },
+        {
+          "id": "comparison-check",
+          "input_token_ceiling": 45200,
+          "maximum_microusd": 170400,
+          "output_token_ceiling": 8000,
+          "provider": "anthropic"
+        },
+        {
+          "id": "interpret",
+          "input_token_ceiling": 18000,
+          "maximum_microusd": 116000,
+          "output_token_ceiling": 8000,
+          "provider": "selected"
+        },
+        {
+          "id": "query",
+          "input_token_ceiling": 25000,
+          "maximum_microusd": 3000,
+          "output_token_ceiling": 0,
+          "provider": "voyage"
+        },
+        {
+          "id": "assess",
+          "input_token_ceiling": 60000,
+          "maximum_microusd": 360000,
+          "output_token_ceiling": 24000,
+          "provider": "selected"
+        },
+        {
+          "id": "verify",
+          "input_token_ceiling": 60000,
+          "maximum_microusd": 360000,
+          "output_token_ceiling": 24000,
+          "provider": "selected"
+        },
+        {
+          "id": "final-check",
+          "input_token_ceiling": 50000,
+          "maximum_microusd": 140000,
+          "output_token_ceiling": 4000,
+          "provider": "anthropic"
+        }
+      ],
+      "preserved_attempts": 2,
+      "preserved_microusd": 1267862,
+      "pricing_checked_on": "2026-09-14",
+      "prior_attempts": 680,
+      "prior_charged_microusd": 7232138,
+      "prior_owner_run": 34795980969,
+      "prior_rows_sha256": "3ac85580f1129c7ef62f6fc45e08938ebac48cb9a5937a19b7c9c894e4eecc4b",
+      "public_activation": false,
+      "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+      "release_id": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e",
+      "requirements_contract": "contextual-selected-approach-v2",
+      "routes": {
+        "L": {
+          "model": "gpt-5.6-luna",
+          "provider": "openai",
+          "reasoning": "low"
+        },
+        "S": {
+          "effort": "medium",
+          "model": "claude-sonnet-5",
+          "provider": "anthropic"
+        }
+      },
+      "sizing_receipt_run": 34847123808,
+      "source_inputs_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "supersedes_unspent_release": "0d0e2c7de98bbf15b9fdfd31bb1379f41f8c0c84de992db03aec6b392c6cf8d3",
+      "version": "contextual-requirements-latency-v2",
+      "workflow_scope": "363302:a-1"
+    },
+    "new_metered_attempts": 0,
+    "public_activation": false,
+    "human_items": 0,
+    "historical_luna": "Older source/profile/prompt scope-gate failures; not current audited-workflow validation. No old allowance is reused.",
+    "historical_initial_plan": {
       "authorization_id": "on-demand-team-offline-v2-20260909",
       "comparison_scope": "351715",
       "maximum_inventory_microusd": 1496005,
@@ -10034,9 +10133,23 @@
       "version": "contextual-requirements-latency-v1",
       "workflow_scope": "363302:a-1"
     },
-    "new_metered_attempts": 0,
-    "public_activation": false,
-    "human_items": 0,
-    "historical_luna": "Older source/profile/prompt scope-gate failures; not current audited-workflow validation. No old allowance is reused."
+    "product_reconciliation_sha": "d4f674b521eec9f562ccede5062a2f640566c726",
+    "prerequisites": [
+      {
+        "pr": 246,
+        "reviewed_head": "5d668f15b8741c22f3deec911939c3921611342b",
+        "merge": "cba2a5d86bbe53fb8c21efba9d28cb3502e65713",
+        "clean_comment": 5664395687,
+        "ci": 34846325595
+      },
+      {
+        "pr": 247,
+        "reviewed_head": "2aa8f4155f92c8b4ded8eaf24493a586fddd5255",
+        "merge": "9871906030161a7e41558b5aa176084012077729",
+        "clean_reaction_at": "2026-09-14T13:23:09Z",
+        "ci": 34847713450
+      }
+    ],
+    "failed_zero_metered_sizing_run": 34847123808
   }
 }
