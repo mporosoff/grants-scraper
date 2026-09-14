@@ -7,7 +7,7 @@ from tools import team_recommender_executor as existing
 from tools.contextual_team_check import judge_prompt, OWNED_RESPONSE_CONTRACT
 from tools.contextual_team_contract import obj, enum
 from tools.contextual_team_executor import scope_inputs, RecoveryRequired
-from tools.contextual_team_phase2 import configuration, plan, operation, RELEASE, Phase2Runner, scope_result_path, ensure_remaining_plan_fits
+from tools.contextual_team_phase2 import configuration, plan, base_plan, operation, RELEASE, Phase2Runner, scope_result_path, ensure_remaining_plan_fits
 from tools.offline_ai import request_body, response_value, validate_schema
 from tools.offline_spend import identity, encoded, atomic_json, ConfigurationFailure
 
@@ -21,7 +21,7 @@ def select(graph):
     return json.loads(raw)
 
 
-def packet(scope,graph,selection,kind,config):
+def packet(scope,graph,selection,kind,config,*,projection_only=False):
     groups=selection['groups'];people_by_id={p['person_id']:p for p in config['people']}
     people_ids=list(dict.fromkeys(pid for group in groups for pid in group))
     if not groups:people_ids=[p['person_id'] for p in graph.get('people',graph.get('verification',{}).get('people',[]))]
@@ -54,6 +54,9 @@ def packet(scope,graph,selection,kind,config):
         labels=['faithful','unsupported','insufficient-information'] if q['task_type']=='explanation_audit' else ['strong','plausible','unrelated','insufficient-information']
         fields[q['item_id']]=obj(verdict=enum(*labels),evidence_ref=enum(*sorted(refs)),reason={'type':'string','minLength':1})
     schema=obj(verdicts=obj(**fields));op=operation(scope['id'],'check-'+kind)
+    if op is None and projection_only:
+        op=next(o for o in base_plan()['operations'] if o['scope_id']==scope['id'] and o['stage']=='check-'+kind)
+    if op is None:raise ConfigurationFailure('phase2_unapproved_single_scope_check')
     output=min(op['output_token_ceiling'],512+256*len(questions))
     evidence=scope_inputs(scope)|{'profile_documents':people,'items':questions}
     body=request_body({'provider':'anthropic','model':'claude-sonnet-5'},
@@ -61,6 +64,10 @@ def packet(scope,graph,selection,kind,config):
         judge_prompt(owned_references=True),evidence,schema)
     body['thinking']={'type':'disabled'}
     if len(encoded(body))>plan()['maximum_wire_bytes']:raise ValueError('phase2_full_check_wire_capacity')
+    return op,body,validator(questions,schema)
+
+
+def validator(questions,schema):
     def check(value,cached):
         if len(encoded(value))>OWNED_RESPONSE_CONTRACT['max_response_bytes']:raise ValueError('phase2_complete_check_response_too_large')
         if cached:
@@ -71,22 +78,64 @@ def packet(scope,graph,selection,kind,config):
         else:value=response_value('anthropic',value)
         value=validate_schema(value,schema)
         return {'verdicts':[{'item_id':q['item_id'],**value['verdicts'][q['item_id']]} for q in questions]}
-    return op,body,check
+    return check
 
 
-def prepared(state,requested):
-    if not isinstance(requested,dict) or set(requested)!={'phase2_output_check','release_id','result_id'} or requested['release_id']!=RELEASE:
-        raise ConfigurationFailure('phase2_exact_output_check_request')
-    config=configuration();scope=next((s for s in config['scopes'] if s['id']==requested['phase2_output_check']),None)
+def paired_packet(cases,config):
+    """Independent source contexts, identical questions; no generation rationales."""
+    a=plan()['capacity_amendment']
+    if [scope['id'] for scope,_,_ in cases]!=a['paired_group_scope_ids']:
+        raise ConfigurationFailure('phase2_fixed_check_pair_required')
+    documents=[];questions=[];fields={}
+    for scope,graph,selection in cases:
+        _,body,_=packet(scope,graph,selection,'group',config,projection_only=True)
+        data=json.loads(body['messages'][0]['content'])
+        original=body['output_config']['format']['schema']['properties']['verdicts']['properties']
+        prefix=scope['id']+':'
+        for q in data['items']:
+            key=prefix+q['item_id'];field=original[q['item_id']]
+            refs=field['properties']['evidence_ref']['enum']
+            field['properties']['evidence_ref']['enum']=[prefix+r if r=='scope.science' else r for r in refs]
+            fields[key]=field;questions.append(q|{'item_id':key,'source_context_id':scope['id']})
+        documents.append({'source_context_id':scope['id'],'scope':data['scope'],
+                          'profile_documents':data['profile_documents']})
+    op=operation('paired-remaining','check-group-pair');schema=obj(verdicts=obj(**fields))
+    prompt=judge_prompt(owned_references=True)+'\nThis packet contains independent source_contexts. For each item use ONLY its named source_context_id and associated profile documents. Scope citations are prefixed by that context ID. Do not transfer requirements or evidence between cases.'
+    body=request_body({'provider':'anthropic','model':'claude-sonnet-5'},
+        {'schema_version':'contextual-phase2-paired-output-check-v2','max_output_tokens':min(op['output_token_ceiling'],512+256*len(questions))},
+        prompt,{'source_contexts':documents,'items':questions},schema)
+    body['thinking']={'type':'disabled'}
+    if len(encoded(body))>plan()['maximum_wire_bytes']:raise ValueError('phase2_full_paired_check_wire_capacity')
+    return op,body,validator(questions,schema)
+
+
+def actual_result(state,config,scope_id,result_id):
+    scope=next((s for s in config['scopes'] if s['id']==scope_id),None)
     if not scope:raise ConfigurationFailure('phase2_unapproved_check_scope')
     path=scope_result_path(state,scope['id'])
     if not path.exists():raise RecoveryRequired('phase2_actual_completed_scope_result_required')
     wrapper=json.loads(path.read_bytes());graph=wrapper['value']
     if (wrapper['kind']!='contextual_scope_result' or wrapper['snapshot_id']!=RELEASE
-        or wrapper['source_id']!=scope['source_id'] or identity(graph)!=requested['result_id']):
+        or wrapper['source_id']!=scope['source_id'] or identity(graph)!=result_id):
         raise ConfigurationFailure('phase2_actual_result_identity_conflict')
     selection=select(graph) if graph.get('graph_id') else {'groups':[],'option_count':0,'primary_view':[]}
-    packets=[p for kind in ('group','explanation') if (p:=packet(scope,graph,selection,kind,config)) is not None]
+    return scope,graph,selection
+
+
+def prepared(state,requested):
+    if isinstance(requested,dict) and isinstance(requested.get('phase2_output_check'),list):
+        a=plan()['capacity_amendment'];ids=a['paired_group_scope_ids']
+        if (set(requested)!={'phase2_output_check','release_id','result_ids'} or requested['release_id']!=RELEASE
+            or requested['phase2_output_check']!=ids or not isinstance(requested['result_ids'],dict)
+            or set(requested['result_ids'])!=set(ids)):
+            raise ConfigurationFailure('phase2_exact_paired_check_request')
+        config=configuration();cases=[actual_result(state,config,sid,requested['result_ids'][sid]) for sid in ids]
+        return config,{'id':'paired-remaining'},{s['id']:selection for s,_,selection in cases},[paired_packet(cases,config)]
+    if not isinstance(requested,dict) or set(requested)!={'phase2_output_check','release_id','result_id'} or requested['release_id']!=RELEASE:
+        raise ConfigurationFailure('phase2_exact_output_check_request')
+    config=configuration();scope,graph,selection=actual_result(state,config,requested['phase2_output_check'],requested['result_id'])
+    kinds=('explanation',) if scope['id'] in plan().get('capacity_amendment',{}).get('paired_group_scope_ids',[]) else ('group','explanation')
+    packets=[p for kind in kinds if (p:=packet(scope,graph,selection,kind,config)) is not None]
     return config,scope,selection,packets
 
 
@@ -110,7 +159,7 @@ def run(args):
     runner=Phase2Runner(args.state,config);runner.scope_id=scope['id'];results=[]
     try:
         for op,body,check in packets:
-            value=runner.request(op['purpose'],[op['purpose'],RELEASE,scope['id'],requested['result_id'],identity(body)],body,check)
+            value=runner.request(op['purpose'],[op['purpose'],RELEASE,scope['id'],requested.get('result_id',requested.get('result_ids')),identity(body)],body,check)
             results.append({'operation':op['id'],'body_sha256':identity(body),'evidence':json.loads(body['messages'][0]['content']),
                 'value':value})
             atomic_json(args.result,{'results':results,'selection':selection,'requests':runner.used})

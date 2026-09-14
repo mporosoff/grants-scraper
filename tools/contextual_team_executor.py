@@ -132,6 +132,7 @@ class Runner:
             # Permit completion of the fixed larger output without an unbounded
             # request or a transport timeout that could conceal metered usage.
             read_timeout=240 if provider=='anthropic' and body['max_tokens']>=16000 else 120
+            if purpose in ('cb-p2-repair-assess','cb-p2-assess') and body['max_tokens']==24000:read_timeout=420
             response=self.post(url,headers=headers,json=body,timeout=(10,read_timeout),allow_redirects=False,stream=True)
             self.crash('after_dispatch')
             receipt['http_status']=response.status_code
@@ -293,6 +294,10 @@ def resolve_job(configuration,job):
     if not scope or (job['person_id'] and job['person_id'] not in {p['person_id'] for p in configuration['people']}):
         raise ValueError('contextual_unapproved_scope_or_person')
     expected=identity([job['release_id'],job['scope_id'],job['person_id']])
+    if configuration.get('phase2_repair'):
+        from tools.contextual_team_phase2_capacity import is_repair_job, amendment
+        if not is_repair_job(job):raise ValueError('contextual_named_repair_identity')
+        expected=amendment()['repair_job_id']
     if job['job_id']!=expected:raise ValueError('contextual_job_identity')
     return scope
 

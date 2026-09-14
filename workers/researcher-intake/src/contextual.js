@@ -4,6 +4,7 @@ import inputs from '../../../config/contextual_team/inputs-v1.json' with {type:'
 import option1 from '../../../config/contextual_team/option1-v1.json' with {type:'json'};
 import phase2 from '../../../config/contextual_team/phase2-v1.json' with {type:'json'};
 import phase2Sources from '../../../config/contextual_team/phase2-source-inputs-v2.json' with {type:'json'};
+import capacity from '../../../config/contextual_team/phase2-output-capacity-v2.json' with {type:'json'};
 import {previewResponse} from './contextual-preview.js';
 import {CONSOLE_HTML,CONSOLE_JS} from './contextual-console.js';
 import {ACCESS_HTML,ACCESS_JS} from './contextual-access.js';
@@ -59,9 +60,10 @@ export class ContextualStore {
       (job_id,release_id,scope_id,person_id,state,active_slot,created_at,updated_at)
       SELECT ?,?,?,?,'dispatch_claimed',1,?,? WHERE NOT EXISTS
       (SELECT 1 FROM contextual_validation_jobs WHERE active_slot=1)
-      AND (SELECT count(*) FROM contextual_validation_jobs WHERE release_id=?)<3
+      AND (SELECT count(*) FROM contextual_validation_jobs WHERE release_id=?)<?
       AND (?='' OR NOT EXISTS (SELECT 1 FROM contextual_validation_jobs WHERE release_id=? AND person_id<>''))
-      ON CONFLICT(job_id) DO NOTHING`).bind(job.job_id,job.release_id,job.scope_id,job.person_id,now,now,job.release_id,job.person_id,job.release_id).run();
+      ON CONFLICT(job_id) DO NOTHING`).bind(job.job_id,job.release_id,job.scope_id,job.person_id,now,now,job.release_id,
+        job.release_id===phase2.release_id?4:3,job.person_id,job.release_id).run();
     return Number(result.meta?.changes||0)===1;
   }
   async start(id,run,sha,now){
@@ -125,7 +127,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
           await store.setControls(phase2.release_id,value,now().toISOString());
         }
         return json(200,{release_id:phase2.release_id,...await store.controls(phase2.release_id),
-          maximum_workflows:3,maximum_daily_workflows:3,maximum_concurrency:1,expansion_enabled:false,
+          maximum_workflows:4,maximum_daily_workflows:4,normal_workflows:3,named_corrective_workflows:1,maximum_concurrency:1,expansion_enabled:false,
           maximum_phase_microusd:phase2.maximum_new_microusd,maximum_phase_attempts:phase2.maximum_new_attempts,public_activation:false});
       }
       if(internal){
@@ -162,6 +164,17 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if(!scope||typeof value.person_id!=='string'||value.person_id&&!inputs.people.some(p=>p.person_id===value.person_id))fail('contextual_unapproved_identity');
       const job={...value,job_id:await hash([value.release_id,value.scope_id,value.person_id])};
       let row=await store.byId(job.job_id);
+      // A single reviewed correction of a named, completed output-limit failure.
+      // Keep its original immutable job. Unknown dispatches and every other
+      // failure retain their existing terminal identity; there is no retry loop.
+      if(p2&&job.job_id===capacity.repair_original_job_id&&row?.state==='complete'&&row.active_slot===null&&
+          row.run_id===capacity.repair_original_run_id&&row.code_sha===capacity.repair_original_code_sha){
+        const prior=row.result_json?JSON.parse(row.result_json):null;
+        if(prior?.result?.state==='failed'&&prior.result.reason==='incomplete_response'&&
+            prior.attempts===capacity.prior_attempts&&prior.charged_microusd===capacity.prior_cumulative_microusd){
+          job.job_id=capacity.repair_job_id;row=await store.byId(job.job_id);
+        }
+      }
       const controls=p2?await store.controls(value.release_id):null;
       if(controls&&!controls.cached_enabled)return json(503,{state:'failed',error:'contextual_cached_serving_disabled'});
       if(request.method==='GET'||row)return json(200,publicJob(row,scope,now(),value.release_id));

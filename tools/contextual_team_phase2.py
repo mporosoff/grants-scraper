@@ -22,7 +22,7 @@ RELEASE='2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9'
 STAGES={'decomposition':'interpret','adjudication':'assess','verification':'verify'}
 
 
-def plan():
+def base_plan():
     value=json.loads((ROOT/'config/contextual_team/phase2-v1.json').read_bytes())
     release=value.pop('release_id')
     if release!=RELEASE or identity(value)!=release:raise ConfigurationFailure('phase2_plan_identity')
@@ -30,6 +30,11 @@ def plan():
     if value['base_inputs_sha256']!=INPUT_SHA or value['scientific_contract']!=VERSION:
         raise ConfigurationFailure('phase2_fixed_contract_identity')
     return value
+
+
+def plan():
+    from tools.contextual_team_phase2_capacity import apply
+    return apply(base_plan())
 
 
 def configuration():
@@ -54,6 +59,9 @@ def check_history(state,p):
         raise RecoveryRequired('phase2_original_ledger_history_not_preserved')
     if any(r['status']=='reserved_unknown' for r in rows):
         raise RecoveryRequired('phase2_outstanding_dispatch_requires_recovery')
+    if p.get('capacity_amendment'):
+        from tools.contextual_team_phase2_capacity import check_original
+        check_original(state,p['capacity_amendment'])
 
 
 def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens):
@@ -62,8 +70,11 @@ def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens)
     if (metadata.get('phase2_lock')!=RELEASE or metadata.get('packet_sha256')!=p['source_inputs_sha256']
         or not op or metadata.get('purpose')!=op['purpose'] or provider!=op['provider']):
         raise ConfigurationFailure('phase2_unapproved_operation')
+    if p.get('capacity_amendment'):
+        if metadata.get('phase2_capacity')!=p['capacity_amendment']['amendment_id'] or metadata.get('repair_of')!=op.get('repair_of'):
+            raise ConfigurationFailure('phase2_capacity_or_repair_ancestry')
     if (input_tokens>op['input_token_ceiling'] or output_tokens>op['output_token_ceiling']
-        or (op['stage'] in ('interpret','assess','verify') and output_tokens!=op['output_token_ceiling'])):
+        or (op['stage'] in ('interpret','assess','verify','repair-assess') and output_tokens!=op['output_token_ceiling'])):
         raise Deferred('phase2_complete_packet_capacity_no_truncation')
     if provider=='anthropic':
         native=metadata.get('native_input_tokens')
@@ -84,6 +95,8 @@ def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens)
     # Reserve all remaining operations, including both output-check requests per
     # scope. Unneeded operations conservatively remain in this envelope.
     if (spent+amount+sum(r['maximum_microusd'] for r in remaining)>10_000_000-p['preserved_microusd']
+        or sum(r['charged_microusd'] for r in phase)+amount+sum(r['maximum_microusd'] for r in remaining)>p['maximum_new_microusd']
+        or len(phase)+1+len(remaining)>p['maximum_new_attempts']
         or len(rows)+1+len(remaining)>690-p['preserved_attempts']):
         raise Deferred('phase2_remaining_complete_inventory_does_not_fit')
     minimum=(input_tokens*3+24)//25 if provider=='voyage' else input_tokens*2+output_tokens*10
@@ -95,6 +108,8 @@ def ensure_remaining_plan_fits(state):
     check_history(state,p)
     remaining=[r for r in p['operations'] if r['id'] not in claimed]
     if (sum(r['charged_microusd'] for r in rows)+sum(r['maximum_microusd'] for r in remaining)>10_000_000-p['preserved_microusd']
+        or sum(r['charged_microusd'] for r in rows if r.get('phase2_lock')==RELEASE)+sum(r['maximum_microusd'] for r in remaining)>p['maximum_new_microusd']
+        or len([r for r in rows if r.get('phase2_lock')==RELEASE])+len(remaining)>p['maximum_new_attempts']
         or len(rows)+len(remaining)>690-p['preserved_attempts']):
         raise Deferred('phase2_complete_inventory_or_reserve_unavailable')
 
@@ -118,6 +133,9 @@ class Phase2Runner(Runner):
         kwargs['ceiling']=op['input_token_ceiling']
         kwargs['repair_metadata']={'phase2_lock':RELEASE,'phase2_operation':op['id'],
                                   'packet_sha256':plan()['source_inputs_sha256'],**kwargs.get('repair_metadata',{})}
+        if plan().get('capacity_amendment'):
+            kwargs['repair_metadata'].update(phase2_capacity=plan()['capacity_amendment']['amendment_id'])
+            if op.get('repair_of'):kwargs['repair_metadata']['repair_of']=op['repair_of']
         return super().request(purpose,logical,body,check,**kwargs)
 
     def reservation_cost(self,purpose,body,metadata):
@@ -142,6 +160,18 @@ class Phase2Runner(Runner):
         c=contract(stage,data);self.effective_contracts[stage]=identity(c)
         body=request_body(c['route'],c['settings'],c['prompt'],json.loads(encoded(projected_inputs(stage,data))),c['schema'])
         purpose='cb-p2-'+STAGES[stage]
+        a=plan().get('capacity_amendment')
+        if a and stage=='adjudication' and scope['id'] in (a['repair_scope_id'],'351715'):
+            if scope['id']==a['repair_scope_id']:
+                from tools.contextual_team_phase2_capacity import check_receipt
+                if not self.configuration.get('phase2_repair'):raise RecoveryRequired('phase2_named_repair_job_required')
+                check_receipt(self.state,self.ledger.read(),a)
+                if identity(body)!=a['repair_original_body_sha256']:raise ConfigurationFailure('phase2_repair_scientific_input_changed')
+                purpose='cb-p2-repair-assess'
+            # Only capacity changes. Preserve every scientific prompt/input/schema byte.
+            c['settings']['max_output_tokens']=a['assessment_output_tokens']
+            body['max_tokens']=a['assessment_output_tokens']
+            self.effective_contracts[stage]=identity(c)
         value=self.request(purpose,[purpose,scope['source_id'],identity(c),identity(data)],body,
             lambda value,cached:validate_resolved(stage,value,data) if cached else resolve(stage,response_value('anthropic',value),data))
         self.timings.append({'stage':stage,'cache':'exact_stage' if self.used[-1]['cache_hit'] else 'new_request','seconds':time.monotonic()-start})
@@ -161,6 +191,11 @@ class Phase2Runner(Runner):
         graph['source_receipt_id']=identity(scope['source_receipt'])
         graph['execution_capacity']={'version':VERSION,'output_tokens':{'decomposition':8000,'adjudication':16000,'verification':24000},
             'paid_retry':'none automatically; durable logical claims remain authoritative'}
+        a=plan().get('capacity_amendment')
+        if a and self.scope_id in (a['repair_scope_id'],'351715'):
+            graph['execution_capacity'].update(amendment_id=a['amendment_id'])
+            graph['execution_capacity']['output_tokens']['adjudication']=a['assessment_output_tokens']
+            if self.configuration.get('phase2_repair'):graph['execution_capacity']['repair_of']=a['repair_of']
         return graph
 
     def run_scope(self,scope,extension_person=None):

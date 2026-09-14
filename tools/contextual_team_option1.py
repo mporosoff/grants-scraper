@@ -30,6 +30,8 @@ def configuration_for_job(job):
         config=phase2_configuration()
         if job.get('person_id') or job['scope_id'] not in {s['id'] for s in config['scopes']}:
             raise ValueError('outside_locked_phase2_jobs')
+        from tools.contextual_team_phase2_capacity import is_repair_job
+        if is_repair_job(job):config['phase2_repair']=True
         return config
     config=inputs();p=plan()
     if job['release_id']==config['snapshot_id']:return config
