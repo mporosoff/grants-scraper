@@ -23,6 +23,9 @@ def inputs():
 
 
 def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens):
+    if metadata.get('purpose','').startswith('cb-lr-'):
+        from tools.contextual_team_latency_policy import check_reservation as latency_check
+        return latency_check(state,provider,metadata,amount,input_tokens,output_tokens)
     if metadata.get('purpose','').startswith('cb-p2-'):
         from tools.contextual_team_phase2 import check_reservation as phase2_check
         return phase2_check(state,provider,metadata,amount,input_tokens,output_tokens)

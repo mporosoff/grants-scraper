@@ -10,6 +10,7 @@ const configuration=JSON.parse(fs.readFileSync(new URL('../../config/contextual_
 const option1=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/option1-v1.json',import.meta.url)));
 const phase2=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/phase2-v1.json',import.meta.url)));
 const capacity=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/phase2-output-capacity-v2.json',import.meta.url)));
+const latency=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/requirements-latency-v1.json',import.meta.url)));
 const migration=fs.readFileSync(new URL('../../workers/researcher-intake/migrations/0005_contextual_validation_jobs.sql',import.meta.url),'utf8');
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 class Statement {
@@ -39,6 +40,25 @@ function fixture(){
   const value={release_id:option1.release_id,scope_id:'332894',person_id:''};
   return {db,store,calls,clock,env,request,value,handler,dependencies};
 }
+
+test('requirements repair admits only one canonical child job and shares it across readers',async()=>{
+ const f=fixture(),value={release_id:latency.release_id,scope_id:latency.workflow_scope,person_id:''};
+ for(let i=0;i<3;i++)assert.equal((await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(value)),f.env)).status,200);
+ assert.equal(f.calls.length,0);
+ for(const bad of [{...value,scope_id:'363302'},{...value,scope_id:'351715'},{...value,person_id:configuration.people[0].person_id}])
+  assert.ok((await f.handler(f.request('/admin/api/contextual/jobs',bad),f.env)).status>=400);
+ assert.equal(f.calls.length,0);
+ const responses=await Promise.all(Array.from({length:4},()=>f.handler(f.request('/admin/api/contextual/jobs',value),f.env)));
+ assert.equal(responses.filter(r=>r.status===202).length,1);assert.equal(f.calls.length,1);
+ const controls=await (await f.handler(f.request('/admin/api/contextual/controls?release_id='+latency.release_id),f.env)).json();
+ assert.equal(controls.maximum_workflows,1);assert.equal(controls.maximum_phase_attempts,8);assert.equal(controls.public_activation,false);
+});
+test('requirements repair emergency switch blocks new inference without changing Phase 2 controls',async()=>{
+ const f=fixture(),value={release_id:latency.release_id,scope_id:latency.workflow_scope,person_id:''};
+ await f.handler(f.request('/admin/api/contextual/controls?release_id='+latency.release_id,{cached_enabled:true,new_paid_enabled:false}),f.env);
+ assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',value),f.env)).status,403);
+ assert.equal(f.calls.length,0);assert.equal((await f.store.controls(phase2.release_id)).new_paid_enabled,1);
+});
 
 test('only the named completed mechanical failure permits one immutable corrective job; GET never dispatches',async()=>{
   const f=fixture(),value={release_id:phase2.release_id,scope_id:capacity.repair_scope_id,person_id:''};
