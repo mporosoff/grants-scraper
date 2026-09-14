@@ -112,3 +112,27 @@ $1.50; no extra attempt or authorization is created. A new complete preflight
 must reuse those exact count records and establish the remaining input bounds
 before either paid comparison. The new configuration supersedes an unspent
 release identity; it does not re-key any paid request or clear a failure.
+
+## One unavailable comparison arm, no replacement request
+
+Run34849855468 produced the valid S result in66.875874 seconds for$0.104570.
+Run34850150828 charged$0.003166 for L, which completed at the provider in11.349378
+seconds but failed the existing canonical four-relationships-per-contribution
+limit (five for role-1). The flat native schema enforces the overall bound,
+but the per-contribution bound is prose/local validation; it did not prevent
+this output. This is a contract failure, not scientific abstention. Its raw
+scientific answer was not retained as a valid cache and is unavailable to audit.
+No trim, invented recovery, changed assessment contract or paid retry is allowed.
+
+The single checker may inspect the actual S/reference relationship union and
+all twelve full people documents. A definite failed arm must have its exact
+reconciled ledger row and matching terminal receipt, no conflicting cache, and
+is explicitly recorded outside the blinded evidence as failed_unavailable /
+scientific outcome unmeasured. Missing, uncertain, mismatched or lost-successful
+records still fail closed. L cannot be selected. No comparison/check request
+had been dispatched before this failure-handling correction, and its original
+once-per-operation limit remains. The candidate scientific prompts, schemas,
+input identities, model settings, selection criteria and budget are unchanged.
+The comparison is necessarily incomplete for L; do not call it a measured
+scientific loss or noninferiority. A usable S result still requires the one
+checker and the already-declared scientific/speed gate before any DOE work.
