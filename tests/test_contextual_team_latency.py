@@ -57,7 +57,7 @@ class Latency(unittest.TestCase):
                 value['edges'].append(edge)
         usage={'input_tokens':10,'output_tokens':10}
         if b['model']=='gpt-5.6-luna':
-            return fixture.Response({'model':b['model'],'status':'completed','usage':usage|{'output_tokens_details':{'reasoning_tokens':2}},
+            return fixture.Response({'model':b['model']+'-2026-09-08','status':'completed','usage':usage|{'output_tokens_details':{'reasoning_tokens':2}},
                 'output':[{'type':'message','content':[{'type':'output_text','text':json.dumps(value)}]}]})
         return fixture.Response({'model':b['model'],'stop_reason':'end_turn','usage':usage,
                                 'content':[{'type':'text','text':json.dumps(value)}]})
@@ -140,6 +140,67 @@ class Latency(unittest.TestCase):
         with self.assertRaises(Deferred):r.request('cb-lr-L',['different-key'],b,check)
         self.assertEqual(len(self.calls),before)
 
+    def test_dated_response_is_preserved_and_reused_but_mismatches_remain_charged(self):
+        source=scope_inputs(self.config['scopes'][0]);c,b=wire.body('decomposition',source,'L',24000,True)
+        check=lambda v,cached:v if cached else response_value('openai',v)
+        r=self.runner();r.request('cb-lr-L',['dated'],b,check)
+        row=r.ledger.read()['requests'][-1];cache=self.state/'cache'/(row['key']+'.json')
+        receipt=json.loads((self.state/'receipts'/(row['id']+'.json')).read_bytes())
+        retained=json.loads(cache.read_bytes())
+        self.assertEqual(receipt['returned_model'],'gpt-5.6-luna-2026-09-08')
+        self.assertEqual(retained['returned_model'],receipt['returned_model'])
+        r.request('cb-lr-L',['dated'],b,check);self.assertEqual(len(self.calls),1)
+        retained['returned_model']='gpt-5.6-sol-2026-09-08';atomic_json(cache,retained)
+        with self.assertRaises(RecoveryRequired):r.request('cb-lr-L',['dated'],b,check)
+        self.assertEqual(len(self.calls),1)
+        for returned in ('gpt-5.6-sol','gpt-5.6-luna-2026-09-08-extra',None):
+            # A fresh isolated fixture ledger; never a second real spending copy.
+            dest=self.state.parent/str(returned);shutil.copytree(self.state,dest)
+            ledger=json.loads((dest/'ledger.json').read_bytes());ledger['requests']=ledger['requests'][:680]
+            atomic_json(dest/'ledger.json',ledger)
+            real=self.provider
+            def wrong(url,**kw):
+                response=real(url,**kw);response.value['model']=returned;return response
+            runner=self.runner(dest);runner.post=wrong;before=len(self.calls)
+            with self.assertRaises(ValueError):runner.request('cb-lr-L',['wrong'],b,check)
+            row=runner.ledger.read()['requests'][-1]
+            self.assertEqual(row['status'],'failed');self.assertGreater(row['charged_microusd'],0)
+            for _ in range(3):
+                with self.assertRaises(RecoveryRequired):runner.request('cb-lr-L',['wrong'],b,check)
+            self.assertEqual(len(self.calls)-before,1)
+
+    def test_nonoverlapping_maximum_union_and_full_variable_packet_bound(self):
+        from tools.contextual_team_latency_check import comparison_packet,comparison_bounds,comparison_variable_bytes,comparison_sizing_packet
+        data=scope_inputs(self.config['scopes'][0])|{'people':self.config['people'][:12],
+             'interpretation':{'roles':[{'id':'role-1'},{'id':'role-2'}]}}
+        arms={}
+        for name,start in (('S',0),('L',4),('reference',8)):
+            arms[name]={'edges':[{'role_id':role['id'],'person_id':p['person_id'],
+                'claim_id':p['claims'][0]['claim_id'],'claim_revision':p['claims'][0]['revision']}
+                for role in data['interpretation']['roles'] for p in data['people'][start:start+4]]}
+        reference=arms.pop('reference')
+        with patch('tools.contextual_team_latency_check.eclipse_data',return_value=(data,reference)):
+            full,qs,_,_,_=comparison_packet(self.state,sizing_arms=arms)
+            fixed,fqs,_,_,_=comparison_packet(self.state,sizing_arms=arms,fixed_only=True)
+            limits=comparison_bounds(data,reference)
+            self.assertEqual(limits,{'relationships':24,'people':12,'per_arm':8})
+            self.assertEqual(len(qs),36);self.assertEqual(len(fqs),12)
+            sized,_,extra=comparison_sizing_packet(self.state)
+            self.assertGreater(extra,0);self.assertGreaterEqual(extra,len(encoded(full))-len(encoded(sized)))
+            self.assertEqual(len(json.loads(sized['messages'][0]['content'])['items']),36)
+            native=wire.body('adjudication',data,'L',24000)[1]['text']['format']['schema']
+            self.assertEqual(native['properties']['edges']['maxItems'],8)
+            # A ninth edge cannot become a valid canonical paid result, even
+            # though all supplied reference identities individually exist.
+            with self.assertRaises(ValueError):
+                wire.resolve('adjudication',{'people':{p['person_id']:{'outcome':'supported'} for p in data['people']},
+                    'edges':[{'role_id':'role-1','claim_ref':p['claims'][0]['claim_id']+'@'+str(p['claims'][0]['revision']),
+                        'coverage':'direct','central':True,'reason':'Fixture reference transport only.','gap':''}
+                        for p in data['people'][:9]]},data)
+            too_many=copy.deepcopy(arms)
+            too_many['S']['edges'] += [{**e,'claim_id':e['claim_id']+'-extra'} for e in arms['S']['edges']]
+            with self.assertRaises(ConfigurationFailure):comparison_packet(self.state,sizing_arms=too_many)
+
     def test_complete_unicode_checker_and_question_owned_references(self):
         from tools.contextual_team_contract import obj,enum,string
         from tools.contextual_team_phase2_check import validator
@@ -157,6 +218,31 @@ class Latency(unittest.TestCase):
             if bad=='missing':v['verdicts'].pop('q0')
             else:v['verdicts']['q0']['evidence_ref']='q1-claim'
             with self.assertRaises(ValueError):check({'stop_reason':'end_turn','content':[{'type':'text','text':json.dumps(v)}]},False)
+
+    def test_complete_preflight_defers_oversize_comparison_before_any_paid_work(self):
+        from tools.contextual_team_latency_preflight import preflight
+        from tools.contextual_team_token_preflight import VERSION,SOURCE_SHA
+        data=scope_inputs(self.config['scopes'][0])|{'people':self.config['people'][:12],
+            'interpretation':{'roles':[{'id':'role-1'},{'id':'role-2'}]}}
+        reference={'edges':[{'role_id':role['id'],'person_id':p['person_id'],
+            'claim_id':p['claims'][0]['claim_id'],'claim_revision':p['claims'][0]['revision']}
+            for role in data['interpretation']['roles'] for p in data['people'][:4]]}
+        profile_rows=[{'id':'profile:'+p['person_id'],'input_tokens':1000,'status':'complete'} for p in self.config['people']]
+        existing.checkpoint(self.state,token_preflight={'version':VERSION,'source_sha256':SOURCE_SHA,'rows':profile_rows})
+        with patch('tools.contextual_team_latency_preflight.eclipse_data',return_value=(data,reference)), \
+             patch('tools.contextual_team_latency_check.eclipse_data',return_value=(data,reference)):
+            runner=self.runner()
+            with patch.object(runner.counter,'count',return_value=26000):
+                with self.assertRaises(Deferred):preflight(runner)
+            def counts(item):return 26000 if item['id']=='latency:comparison-complete-sizing' else 1000
+            with patch.object(runner.counter,'count',side_effect=counts):
+                with self.assertRaisesRegex(Deferred,'complete_comparison_input_capacity'):preflight(runner)
+            self.assertFalse(latency.result_path(self.state,'preflight').exists())
+            with patch.object(runner.counter,'count',return_value=1000):receipt=preflight(runner)
+            self.assertEqual(receipt['comparison_question_bound'],36)
+            self.assertEqual(receipt['profile_count_cache_reuse'],155)
+            self.assertEqual(receipt['all_eight_reserved_microusd'],1496005)
+        self.assertEqual(self.calls,[]);self.assertEqual(len(self.runner().ledger.read()['requests']),680)
 
 
 if __name__=='__main__':unittest.main()

@@ -7,7 +7,7 @@ from tools.contextual_team_latency import (LatencyRunner, configuration, eclipse
 from tools.contextual_team_latency_policy import RELEASE, plan, operation, history, remaining_fits
 from tools.contextual_team_contract import obj, enum, string
 from tools.contextual_team_check import judge_prompt
-from tools.contextual_team_executor import scope_inputs
+from tools.contextual_team_executor import scope_inputs, validate_cache_identity
 from tools.contextual_team_phase2_check import validator, select
 from tools.offline_ai import request_body, validate_schema
 from tools.offline_spend import identity, encoded, atomic_json, ConfigurationFailure
@@ -29,13 +29,20 @@ def assessment(state,route):
     rows=[r for r in ExperimentLedger(state/'ledger.json').read()['requests'] if r['key']==key]
     if len(rows)!=1 or rows[0]['status']!='valid':raise ConfigurationFailure('latency_assessment_not_complete')
     row=rows[0];value=json.loads((state/'cache'/(key+'.json')).read_bytes())
-    if (value['request_id']!=row['id'] or value['body_sha256']!=identity(body)
-        or value['model']!=body['model']):raise ConfigurationFailure('latency_assessment_cache_identity')
+    validate_cache_identity(value,row,body,c['route']['provider'])
     validate_resolved('adjudication',value['value'],data)
     return row,value['value']
 
 
-def comparison_packet(state, *, sizing_arms=None):
+def comparison_bounds(data,reference):
+    from tools.contextual_team_latency_contract import contract
+    schema=contract('adjudication',data)['schema']
+    per_arm=schema['properties']['edges']['maxItems']
+    return {'relationships':2*per_arm+len(reference['edges']),
+            'people':len(data['people']),'per_arm':per_arm}
+
+
+def comparison_packet(state, *, sizing_arms=None, fixed_only=False):
     data,reference=eclipse_data(state);arms=sizing_arms or {r:assessment(state,r)[1] for r in ('S','L')}
     # Union is independent of provider ordering. No arm, score, time, old grade or
     # generation rationale enters the evidence shown to this one checker.
@@ -44,7 +51,9 @@ def comparison_packet(state, *, sizing_arms=None):
         for edge in value['edges']:
             key=identity([edge[k] for k in ('role_id','person_id','claim_id','claim_revision')])
             union[key]={k:edge[k] for k in ('role_id','person_id','claim_id','claim_revision')}
-    questions=[{'item_id':'rel-'+key,'task_type':'aspect_person',**row} for key,row in union.items()]
+    bounds=comparison_bounds(data,reference)
+    if len(union)>bounds['relationships']:raise ConfigurationFailure('latency_comparison_union_capacity')
+    questions=[] if fixed_only else [{'item_id':'rel-'+key,'task_type':'aspect_person',**row} for key,row in union.items()]
     questions += [{'item_id':'person-'+identity(p['person_id']),'task_type':'call_person','person_id':p['person_id']}
                   for p in data['people']]
     questions.sort(key=lambda q:identity(['latency-blind-order-v1',q['item_id']]))
@@ -52,9 +61,7 @@ def comparison_packet(state, *, sizing_arms=None):
     for q in questions:
         refs=['scope.science',q['person_id'],*([q['claim_id']] if q['task_type']=='aspect_person'
               else [c['claim_id'] for c in people[q['person_id']]['claims']])]
-        fields[q['item_id']]=obj(verdict=enum('strong','plausible','unrelated','insufficient-information'),
-            supported_coverage=enum('direct','method_transfer','adjacent','insufficient_information'),
-            central_supported={'type':'boolean'},evidence_ref=enum(*sorted(refs)),reason=string(300))
+        fields[q['item_id']]=comparison_question_schema(refs)
     schema=obj(verdicts=obj(**fields))
     evidence={'scope':data['scope'],'interpretation':data['interpretation'],'profile_documents':data['people'],'items':questions}
     prompt=judge_prompt(owned_references=True)+'''
@@ -68,6 +75,48 @@ Follow this supplied keyed schema. Reasons at most 300 characters, one evidence
 reference belonging to this question. There are no requested teams or winners.
 '''
     return checker_body('comparison-check',prompt,evidence,schema),questions,schema,arms,reference
+
+
+def comparison_question_schema(refs):
+    return obj(verdict=enum('strong','plausible','unrelated','insufficient-information'),
+        supported_coverage=enum('direct','method_transfer','adjacent','insufficient_information'),
+        central_supported={'type':'boolean'},evidence_ref=enum(*sorted(refs)),reason=string(300))
+
+
+def comparison_variable_bytes(data):
+    # The sizing packet counts every invariant schema/question field. Bound all
+    # possible replacement identity strings by bytes, with no subtraction for
+    # placeholders and no assumption that hashes/IDs tokenize like prose.
+    largest=0
+    for role in data['interpretation']['roles']:
+        for person in data['people']:
+            for claim in person['claims']:
+                row={'role_id':role['id'],'person_id':person['person_id'],
+                     'claim_id':claim['claim_id'],'claim_revision':claim['revision']}
+                key='rel-'+identity(list(row.values()))
+                # item ID occurs in the evidence item, schema property key and
+                # required-key list; person/claim each occur in item and enum.
+                values=[key,key,key,role['id'],person['person_id'],person['person_id'],
+                        claim['claim_id'],claim['claim_id'],claim['revision']]
+                largest=max(largest,sum(len(encoded(json.dumps(v,ensure_ascii=False))) for v in values)+32)
+    return largest
+
+
+def comparison_sizing_packet(state):
+    body,questions,schema,_,reference=comparison_packet(state,
+        sizing_arms={'S':{'edges':[]},'L':{'edges':[]}},fixed_only=True)
+    data,_=eclipse_data(state);limits=comparison_bounds(data,reference)
+    evidence=json.loads(body['messages'][0]['content'])
+    fields=schema['properties']['verdicts']['properties']
+    for i in range(limits['relationships']):
+        key='sizing-'+str(i)
+        evidence['items'].append({'item_id':key,'task_type':'aspect_person',
+            'role_id':'r','person_id':'p','claim_id':'c','claim_revision':0})
+        fields[key]=comparison_question_schema(['scope.science','p','c'])
+    # Placeholder IDs are sizing data only, never model questions or outcomes.
+    # All original source, conditions and twelve profile documents stay whole.
+    body=checker_body('comparison-check',body['system'],evidence,obj(verdicts=obj(**fields)))
+    return body,limits,limits['relationships']*comparison_variable_bytes(data)
 
 
 def checker_body(name,prompt,evidence,schema):

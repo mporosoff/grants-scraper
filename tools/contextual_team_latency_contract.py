@@ -26,7 +26,9 @@ def contract(stage, data, repaired=False):
         example['properties'][key] = enum(*refs) if refs else enum('NO_REFERENCES')
         if stage == 'adjudication':
             example['properties']['role_id'] = enum(*roles); example['required'].append('role_id')
-        fields['edges'] = array(example,24 if refs else 0)
+        # Match the existing per-contribution canonical validator at the native
+        # boundary too. The locked two-role ECLIPSE input permits eight, not 24.
+        fields['edges'] = array(example,sum(r['maxItems'] for r in roles.values()) if refs else 0)
         c['schema'] = obj(**fields)
         old = c['prompt'].index('\nORDINARY DEMAND WIRE FORMAT:')
         tail = requirements.POLICY if repaired else ''

@@ -76,3 +76,22 @@ Prices checked2026-09-14: Sonnet5 $2/$10 per million input/output; Luna $.20/$1.
 Voyage4large $.12. [Sonnet documentation](https://platform.claude.com/docs/en/models/sonnet-5/overview)
 and [Luna documentation](https://developers.openai.com/api/docs/models/gpt-5.6-luna).
 Cached credits are not free metered work. No paid prompt-cache creation is enabled.
+
+## Exact-head review remediation
+
+PR246 review at `5e83f23d9c385087394d55a6e56ea534abdb2dd4` identified
+dated OpenAI response identity rejection and an unsafe comparison-size overlap
+adjustment. The first remediation batch uses the existing `compatible_model`
+contract for OpenAI, preserves the actual returned model in cache and receipt,
+and applies the same identity validation on replay and comparison reads.
+Incompatible responses remain charged failures and cannot be repurchased.
+
+The complete union bound now derives from the actual canonical per-contribution
+contract. ECLIPSE has two contributions, at most eight relationships per arm,
+eight retained reference relationships, and twelve people: at most36 questions.
+The native schema's overall limit matches this underlying contract. Preflight
+counts all36 schema/question structures with complete original evidence, then
+adds conservative UTF-8 bounds for every possible replacement identity. It
+never subtracts overlapping examples. Disjoint-arm, Unicode/output-reference,
+oversized-preflight, dated-model replay and crash fixtures cover this invariant.
+No paid request preceded the review or its remediation.

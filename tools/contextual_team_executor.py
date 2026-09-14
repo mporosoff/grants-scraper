@@ -17,7 +17,7 @@ from tools.contextual_team_cost import (text_reservation, generated_input_bounds
     QUERY_TOKEN_BOUND, JUDGE_BODY_BYTES, output_capacity, CAPACITY_VERSION)
 from tools.contextual_team_policy import inputs as approved_inputs, INPUT_SHA
 from tools.offline_ai import request_body, response_value, SchemaFailure, stop_reason
-from tools.offline_spend import identity, encoded, atomic_json, Deferred, ConfigurationFailure, Refusal
+from tools.offline_spend import identity, encoded, atomic_json, Deferred, ConfigurationFailure, Refusal, compatible_model
 from tools.team_recommender_budget import ExperimentLedger, AUTHORIZATION_ID
 
 HOST='https://funding-finder-researchers.urochestercheme.workers.dev'
@@ -25,6 +25,20 @@ HOST='https://funding-finder-researchers.urochestercheme.workers.dev'
 
 class RecoveryRequired(Deferred):
     """A durable paid claim/result needs inspection; never an automatic retry."""
+
+
+def returned_model_matches(provider, requested, returned):
+    return compatible_model(requested, returned) if provider=='openai' else returned==requested
+
+
+def validate_cache_identity(retained, row, body, provider):
+    fields={'key','body_sha256','model','value','request_id'}
+    if provider=='openai':fields.add('returned_model')
+    if (set(retained)!=fields or retained['key']!=row['key']
+        or retained['body_sha256']!=identity(body) or row.get('body_sha256')!=identity(body)
+        or retained['request_id']!=row['id'] or retained['model']!=body['model']
+        or provider=='openai' and not returned_model_matches(provider,body['model'],retained['returned_model'])):
+        raise ValueError('cache_identity')
 
 
 def scope_inputs(scope):
@@ -106,9 +120,7 @@ class Runner:
                 raise RecoveryRequired('contextual_claimed_request_requires_recovery')
             try:
                 retained=json.loads(cache.read_bytes())
-                if (set(retained)!={'key','body_sha256','model','value','request_id'} or retained['key']!=key
-                    or retained['body_sha256']!=body_id or retained['request_id']!=rows[0]['id']
-                    or retained['model']!=body['model']):raise ValueError('cache_identity')
+                validate_cache_identity(retained,rows[0],body,provider)
                 value=check(retained['value'],cached=True)
             except (ValueError,KeyError,TypeError,OSError) as error:
                 raise RecoveryRequired('contextual_cache_identity_requires_recovery') from error
@@ -152,12 +164,16 @@ class Runner:
             receipt.update(usage=usage,charged_microusd=charge)
             if provider=='anthropic' and usage.get('cache_creation_input_tokens',0):
                 raise ValueError('unexpected_provider_cache_creation_accounted_failure')
-            if payload.get('model')!=body['model']:raise ValueError('contextual_returned_model_mismatch')
+            receipt['returned_model']=payload.get('model')
+            if not returned_model_matches(provider,body['model'],payload.get('model')):
+                raise ValueError('contextual_returned_model_mismatch')
             value=check(payload,cached=False)
             self.crash('before_reconcile')
             self.ledger.reconcile(token,cost_usd=Decimal(charge)/1000000,usage=usage,status='valid')
             self.crash('after_reconcile')
-            atomic_json(cache,{'key':key,'body_sha256':body_id,'model':body['model'],'value':value,'request_id':token})
+            retained={'key':key,'body_sha256':body_id,'model':body['model'],'value':value,'request_id':token}
+            if provider=='openai':retained['returned_model']=payload['model']
+            atomic_json(cache,retained)
             self.crash('after_cache')
             receipt['status']='valid'
         except (ValueError,KeyError,TypeError,OSError,requests.RequestException,Deferred,Refusal) as error:

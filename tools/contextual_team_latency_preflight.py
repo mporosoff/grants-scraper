@@ -24,26 +24,18 @@ def preflight(runner):
     _,l=wire.body('adjudication',data,'L',24000)
     rows.append({'operation':'L','input_sha256':identity(data),'body_sha256':identity(l),
                  'wire_bytes':len(encoded(l)),'reserved_input_tokens':len(encoded(l))+1024})
-    from tools.contextual_team_latency_check import comparison_packet
-    # Sizing-only identities; never saved as scientific outcomes or dispatched
-    # to a model. All twelve original documents and source conditions stay whole.
-    sizing={'S':{'edges':[]},'L':{'edges':[]}}
-    for route,offset in [('S',0),('L',4)]:
-        for role in data['interpretation']['roles']:
-            for person in data['people'][offset:offset+4]:
-                claim=person['claims'][-1]
-                sizing[route]['edges'].append({'role_id':role['id'],'person_id':person['person_id'],
-                    'claim_id':claim['claim_id'],'claim_revision':claim['revision']})
-    comparison,questions,_,_,_=comparison_packet(runner.state,sizing_arms=sizing)
+    from tools.contextual_team_latency_check import comparison_sizing_packet
+    # Count every permitted question/schema, including all twelve people. Bound
+    # every unknown relationship identity separately by bytes, never by a
+    # guessed overlap discount or placeholder compression ratio.
+    comparison,bounds,extra=comparison_sizing_packet(runner.state)
     n=runner.counter.count({'id':'latency:comparison-complete-sizing','body':comparison})
-    # Account conservatively for any duplicated sizing identities that might be
-    # distinct in the real union, using a full serialized question/schema entry.
-    extra=(36-len(questions))*1200
     bound=math.ceil(n*1.2)+1024+extra
     if bound>operation('comparison-check')['input_token_ceiling']:
         raise Deferred('latency_complete_comparison_input_capacity_'+str(bound))
-    rows.append({'operation':'comparison-check','sizing_only':True,'questions':len(questions),
-                 'maximum_questions':36,'body_sha256':identity(comparison),'wire_bytes':len(encoded(comparison)),
+    rows.append({'operation':'comparison-check','sizing_only':True,'questions':bounds['relationships']+bounds['people'],
+                 'maximum_questions':sum(bounds[k] for k in ('relationships','people')),
+                 'variable_relationship_bytes':extra,'body_sha256':identity(comparison),'wire_bytes':len(encoded(comparison)),
                  'native_input_tokens':n,'reserved_input_upper_bound':bound})
     # Count one source/prompt envelope. Known complete profile token counts are
     # reused individually; new model-authored text remains bounded in bytes,
@@ -75,7 +67,8 @@ def preflight(runner):
     result={'release_id':RELEASE,'fixed_packets':rows,'profile_documents':len(people),
             'profile_count_cache_reuse':len(profile_counts),'all_eight_reserved_microusd':plan()['maximum_inventory_microusd'],
             'maximum_new_attempts':8,'paid_dispatches':0,'no_profile_or_source_truncation':True,
-            'comparison_question_bound':36,'comparison_input_ceiling':operation('comparison-check')['input_token_ceiling'],
+            'comparison_question_bound':bounds['relationships']+bounds['people'],
+            'comparison_input_ceiling':operation('comparison-check')['input_token_ceiling'],
             'comparison_output_ceiling':8000,'final_question_bound':10,'final_output_ceiling':4000}
     atomic_json(result_path(runner.state,'preflight'),result)
     return result
