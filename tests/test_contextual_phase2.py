@@ -39,7 +39,7 @@ class ColdDemand(unittest.TestCase):
                 'body_sha256':row['body_sha256'],'model':row['model'],'value':value})
         atomic_json(self.state/'ledger.json',ledger);existing.checkpoint(self.state)
         # Bind the test's artificial history, without altering the real lock.
-        original_plan=p2.plan
+        original_plan=p2.base_plan
         override=patch.object(p2,'plan',side_effect=lambda:original_plan()|{'prior_request_rows_sha256':identity(ledger['requests'])})
         override.start();self.addCleanup(override.stop)
 

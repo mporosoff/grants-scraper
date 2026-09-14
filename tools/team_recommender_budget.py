@@ -65,7 +65,7 @@ class ExperimentLedger(Ledger):
             if metadata.get('purpose','').startswith('cb-o1-'):allowed_metadata.update({'option1_release','repair_of'})
             if metadata.get('purpose','').startswith('cb-p1-'):allowed_metadata.update({'phase1_lock','response_contract_sha256','repair_of'})
             if metadata.get('purpose','').startswith('cb-p2-'):
-                allowed_metadata.update({'phase2_lock','phase2_operation','native_count_key','count_body_sha256','native_input_tokens'})
+                allowed_metadata.update({'phase2_lock','phase2_operation','native_count_key','count_body_sha256','native_input_tokens','phase2_capacity','repair_of'})
             if set(metadata) - allowed_metadata:
                 raise ValueError("invalid_execution_metadata")
             if provider == "voyage" and execution_metadata is not None:
