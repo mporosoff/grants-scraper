@@ -9,6 +9,7 @@ import {createHandler} from '../../workers/researcher-intake/src/index.js';
 const configuration=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/inputs-v1.json',import.meta.url)));
 const option1=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/option1-v1.json',import.meta.url)));
 const phase2=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/phase2-v1.json',import.meta.url)));
+const capacity=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/phase2-output-capacity-v2.json',import.meta.url)));
 const migration=fs.readFileSync(new URL('../../workers/researcher-intake/migrations/0005_contextual_validation_jobs.sql',import.meta.url),'utf8');
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 class Statement {
@@ -38,6 +39,53 @@ function fixture(){
   const value={release_id:option1.release_id,scope_id:'332894',person_id:''};
   return {db,store,calls,clock,env,request,value,handler,dependencies};
 }
+
+test('only the named completed mechanical failure permits one immutable corrective job; GET never dispatches',async()=>{
+  const f=fixture(),value={release_id:phase2.release_id,scope_id:capacity.repair_scope_id,person_id:''};
+  const first={...value,scope_id:phase2.first_scope_id};first.job_id=hash([first.release_id,first.scope_id,'']);
+  await f.store.insert(first,'now');await f.store.start(first.job_id,'first','a'.repeat(40),'now');
+  await f.store.finish(first.job_id,'first','a'.repeat(40),JSON.stringify({result:{state:'ready_with_gaps'}}),'now');
+  const original={...value,job_id:capacity.repair_original_job_id};await f.store.insert(original,'now');
+  await f.store.start(original.job_id,capacity.repair_original_run_id,capacity.repair_original_code_sha,'now');
+  const result={result:{state:'failed',reason:'incomplete_response',scope_id:value.scope_id},
+    attempts:capacity.prior_attempts,charged_microusd:capacity.prior_cumulative_microusd};
+  await f.store.finish(original.job_id,capacity.repair_original_run_id,capacity.repair_original_code_sha,JSON.stringify(result),'now');
+  const before=await f.store.byId(original.job_id);
+  for(let i=0;i<3;i++){
+    const response=await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(value)),f.env);
+    assert.equal((await response.json()).state,'unassessed');
+  }
+  assert.equal(f.calls.length,0);
+  const responses=await Promise.all(Array.from({length:8},()=>f.handler(f.request('/admin/api/contextual/jobs',value),f.env)));
+  assert.equal(f.calls.length,1);assert.equal(responses.filter(r=>r.status===202).length,1);
+  assert.deepEqual(JSON.parse(JSON.parse(f.calls[0].options.body).client_payload.contextual_job),{...value,job_id:capacity.repair_job_id});
+  assert.deepEqual(await f.store.byId(original.job_id),before);
+  await f.store.start(capacity.repair_job_id,'repair','b'.repeat(40),'later');
+  await f.store.finish(capacity.repair_job_id,'repair','b'.repeat(40),JSON.stringify({result:{state:'failed',reason:'incomplete_response'}}),'later');
+  for(let i=0;i<3;i++)assert.equal((await (await f.handler(f.request('/admin/api/contextual/jobs',value),f.env)).json()).state,'failed');
+  assert.equal(f.calls.length,1);assert.deepEqual(await f.store.byId(original.job_id),before);
+  const last={...value,scope_id:'351715'};
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',last),f.env)).status,202);
+  assert.equal(f.db.prepare('SELECT count(*) n FROM contextual_validation_jobs').get().n,4);
+});
+
+test('uncertain, unfavorable, wrong-owner and other failures never select the named repair',async()=>{
+  for(const variant of ['uncertain','unfavorable','wrong-run','wrong-code','wrong-reason','wrong-attempts']){
+    const f=fixture(),value={release_id:phase2.release_id,scope_id:capacity.repair_scope_id,person_id:''};
+    const original={...value,job_id:capacity.repair_original_job_id};await f.store.insert(original,'now');
+    const run=variant==='wrong-run'?'123':capacity.repair_original_run_id;
+    const sha=variant==='wrong-code'?'a'.repeat(40):capacity.repair_original_code_sha;
+    await f.store.start(original.job_id,run,sha,'now');
+    const state=variant==='uncertain'?'recovery_required':variant==='unfavorable'?'no_supported_group_in_assessed_set':'failed';
+    await f.store.finish(original.job_id,run,sha,JSON.stringify({result:{state,reason:variant==='wrong-reason'?'other':'incomplete_response'},
+      attempts:variant==='wrong-attempts'?670:capacity.prior_attempts,charged_microusd:capacity.prior_cumulative_microusd}),'now');
+    for(let n=0;n<3;n++){
+      const result=await (await f.handler(f.request('/admin/api/contextual/jobs',value),f.env)).json();
+      assert.equal(result.job_id,original.job_id);assert.equal(result.state,state);
+    }
+    assert.equal(f.calls.length,0,variant);
+  }
+});
 
 test('operator control and script remain Access protected and loading them cannot claim a job',async()=>{
   const f=fixture();
