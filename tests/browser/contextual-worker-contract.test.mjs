@@ -10,7 +10,7 @@ const configuration=JSON.parse(fs.readFileSync(new URL('../../config/contextual_
 const option1=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/option1-v1.json',import.meta.url)));
 const phase2=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/phase2-v1.json',import.meta.url)));
 const capacity=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/phase2-output-capacity-v2.json',import.meta.url)));
-const latency=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/requirements-latency-v1.json',import.meta.url)));
+const latency=JSON.parse(fs.readFileSync(new URL('../../config/contextual_team/requirements-latency-v2.json',import.meta.url)));
 const migration=fs.readFileSync(new URL('../../workers/researcher-intake/migrations/0005_contextual_validation_jobs.sql',import.meta.url),'utf8');
 const hash=x=>createHash('sha256').update(JSON.stringify(x)).digest('hex');
 class Statement {

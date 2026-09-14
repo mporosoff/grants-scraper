@@ -102,7 +102,7 @@ class Latency(unittest.TestCase):
     def test_whole_plan_reserves_checks_and_protected_dollars_slots(self):
         state=self.runner().ledger.read();policy.remaining_fits(state)
         self.assertLessEqual(plan_cost:=sum(o['maximum_microusd'] for o in policy.plan()['operations']),1500000)
-        self.assertEqual(plan_cost,1496005)
+        self.assertEqual(plan_cost,1496405)
         changed=copy.deepcopy(state);changed['requests'].append({'charged_microusd':10000,'status':'valid'})
         with self.assertRaises(Deferred):policy.remaining_fits(changed)
         changed=copy.deepcopy(state);changed['requests'][3]['charged_microusd']+=1
@@ -234,14 +234,14 @@ class Latency(unittest.TestCase):
             runner=self.runner()
             with patch.object(runner.counter,'count',return_value=26000):
                 with self.assertRaises(Deferred):preflight(runner)
-            def counts(item):return 26000 if item['id']=='latency:comparison-complete-sizing' else 1000
+            def counts(item):return 40000 if item['id']=='latency:comparison-complete-sizing' else 1000
             with patch.object(runner.counter,'count',side_effect=counts):
                 with self.assertRaisesRegex(Deferred,'complete_comparison_input_capacity'):preflight(runner)
             self.assertFalse(latency.result_path(self.state,'preflight').exists())
             with patch.object(runner.counter,'count',return_value=1000):receipt=preflight(runner)
             self.assertEqual(receipt['comparison_question_bound'],36)
             self.assertEqual(receipt['profile_count_cache_reuse'],155)
-            self.assertEqual(receipt['all_eight_reserved_microusd'],1496005)
+            self.assertEqual(receipt['all_eight_reserved_microusd'],1496405)
         self.assertEqual(self.calls,[]);self.assertEqual(len(self.runner().ledger.read()['requests']),680)
 
 

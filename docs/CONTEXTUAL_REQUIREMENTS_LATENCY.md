@@ -3,8 +3,8 @@
 The owner authorized one narrow comparison and, conditionally, one revised DOE
 workflow. The existing $10/690 experiment remains the only spending owner.
 Starting authoritative run34795980969: $7.232138,680 attempts, zero outstanding.
-`config/contextual_team/requirements-latency-v1.json` locks eight operations with
-a $1.496005 conservative envelope, below the new $1.50/8 ceilings. Preserve at
+`config/contextual_team/requirements-latency-v2.json` locks eight operations with
+a $1.496405 conservative envelope, below the new $1.50/8 ceilings. Preserve at
 least $1.267862 and two attempts. Historical Phase2 purposes are closed.
 
 Only reviewed protected-main code may run with keys. Use the existing manual
@@ -95,3 +95,20 @@ adds conservative UTF-8 bounds for every possible replacement identity. It
 never subtracts overlapping examples. Disjoint-arm, Unicode/output-reference,
 oversized-preflight, dated-model replay and crash fixtures cover this invariant.
 No paid request preceded the review or its remediation.
+
+## Measured preflight correction, still before paid work
+
+Run34847123808 preserved the unchanged680-request/$7.232138 ledger and completed
+three free native counts: S18,150, DOE interpretation13,856 and the complete
+comparison sizing packet29,920. Its original40,000 comparison input allowance
+failed against the conservative45,160 bound. No paid comparison ran.
+
+V1 remains immutable history. V2 assigns23,000 input tokens to S (measured bound
+22,804),18,000 to interpretation (bound17,652), and45,200 to the checker (bound
+45,160). The20% cushion,1,024 framing allowance and8,232 unknown-identity byte
+allowance remain. Evidence, prompts, models, output ceilings and all eight
+operation purposes are unchanged. The full reserve is$1.496405, still below
+$1.50; no extra attempt or authorization is created. A new complete preflight
+must reuse those exact count records and establish the remaining input bounds
+before either paid comparison. The new configuration supersedes an unspent
+release identity; it does not re-key any paid request or clear a failure.
