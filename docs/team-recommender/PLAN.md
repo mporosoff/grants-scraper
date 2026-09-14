@@ -638,3 +638,31 @@ The normal cold runner and restricted same-host application preview are implemen
 PR241 repaired the complete token-count checkpoint persistence invariant; PR242 completed free sizing. PR243 now implements the ordinary cold-demand contract and the actual restricted application preview. Its capability correction at `c1034e044d72784fae7fb9aec98b05ea4ca5bab5` passed exact-head CI and terminal clean review (comment 5657111170), then protected-merged as `be31e24d00a993178e43f0daea0ef9fa16f93389`. Product reconciliation is `7c42557fbdbbd02414113bf399064f54ee4298c1`. The one review-service missing-ref failure and retry remain in the receipt. See `contextual-stage-b/phase2-pr243-reviewed-merge-v1.json`.
 
 The restricted deployment is in progress; no Phase 2 scientific request or output check has run. Continue immediately into the three locked normal-browser workflows and fixed checks after deployment verification. The original execution lock plus capability addendum preserve source/scientific/budget identities. No public activation or release decision has occurred.
+
+
+### Phase 2 real execution and one mechanical correction — September 14 UTC
+
+Normal browser Build completed the fresh DOE child in run34791195759; two
+simultaneous pages joined one job, a later visitor reused its graph, local
+option/remove/re-add operations made no requests, and Team Match preserved the
+members and audited summaries. Its fixed two output checks returned all eight
+answers in run34791628358. Mathematical Biology then completed interpretation
+and query vectors but hit the assessment output limit in run34791671860. The
+known charge and failed response remain preserved; ECLIPSE has not started.
+
+The owner's one mechanical corrective allowance is locked in
+`contextual-stage-b/phase2-capacity-reviewed-lock-v2.json` and the retained
+`phase2-output-capacity-repair-v2.md`. PR245 exact head5d9f4489e1223d72e0987906e1da93ffce11b7c1
+passed independent review and CI, protected-merged as2e7729b690815730aa0d78b71d4919c8835cd9a8,
+and deployed restricted version76cf37ec-1870-4019-af80-06de2b2461a2 with exact
+module/configuration proof. It changes capacity only, preserves all scientific
+inputs, and permits only one linked replacement. No corrective dispatch has yet
+occurred at this lock. Remaining relevance questions share one complete
+source-separated packet; explanation checks stay separate. Nine operations fit
+the unchanged18-attempt/$2.50 limits, preserving at least$1.841692/10 slots at
+the conservative envelope. Current ledger:$6.494248/671, zero outstanding.
+
+All117 configured local browser/E2E/accessibility tests passed on unchanged
+browser bytes; actual resource/real-graph evidence and release inventory
+closeout remain separate. Continue the same Phase2 sequence. No Phase1
+rejudging, scientific retuning, new human packet, public activation or Stage4.
