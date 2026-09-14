@@ -320,3 +320,10 @@ is unestablished; source/transfer/role limitations and broader release-manifest/
 per-client/day controls remain explicit. Stage4, public application/registry
 release, new paid work, human packets and scientific campaigns are not authorized.
 Phase1 remains CLOSED. STOP FOR USER REVIEW.
+
+
+### Requirements and bounded latency repair — September 14, 2026
+
+The owner rejects the five-minute Phase 2 interaction as release-ready. The completed Phase 2 report and every original graph/grade remain history. Execute [the new authority](contextual-stage-b/REQUIREMENTS-LATENCY-AUTHORITY.md) and [the finite lock](contextual-stage-b/requirements-latency-lock-v1.json): one coherent-approach requirement repair; identical-input ECLIPSE Sonnet5 adaptive/medium versus existing Luna low; one blinded check; at most one corrected DOE child workflow and final check if a scientifically credible approximately twofold faster assessment exists. No 50/150 preparation, registration, activation, Stage4, extra campaign, profile work or human packet.
+
+Same authoritative ledger, owner34795980969: $7.232138/680 charged, zero outstanding. Maximum new $1.50/8, with $1.267862/2 preserved. Conservative eight-operation reservation $1.496005; unneeded work is not new authority. Complete-input preflight and independent exact-head review/CI precede metered dispatch. No automatic retry, fallback or rekey of an uncertain/failed request. No new spending yet.

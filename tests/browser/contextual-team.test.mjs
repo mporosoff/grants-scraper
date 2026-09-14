@@ -77,6 +77,34 @@ test('one action shares one clock',()=>{
   assert.equal(result.ok,true);f.setDate('2026-09-14T00:00:00Z');const state=e.proposal();assert.ok(e.proposalView(state));
  });assert.throws(()=>e.proposal(),/not_current/);
 });
+function selectedApproachFixture(){
+ const f=fixture();f.graph.version='contextual-audited-graph-v2';
+ f.graph.requirement_policy='contextual-selected-approach-v2';f.graph.approach='Laboratory measurement of the documented materials';
+ f.graph.roles.forEach(r=>Object.assign(r,{kind:'approach_necessary',applicability:'applies',condition:'',required:true}));
+ return f;
+}
+test('optional directions are not gaps, complementary rewards or admission evidence',()=>{
+ const f=selectedApproachFixture();Object.assign(f.graph.roles[1],{kind:'optional_direction',required:false});
+ assert.throws(()=>f.engine(),/inactive_direction_has_relationship/);
+ f.graph.edges=f.graph.edges.filter(e=>e.role_id==='role-1');
+ const e=f.engine(),s=e.proposal(),v=e.proposalView(s);
+ assert.deepEqual(Array.from(s.selectedIds),['p0','p1']);assert.equal(v.roles.length,1);
+ assert.equal(v.unfilledRoles.length,0);assert.equal(v.opportunity.missing_skills.length,0);
+ assert.equal(v.replacements.find(r=>r.profile.id==='p2').assessment_state,'assessed_uncertain');
+ assert.match(v.opportunity.why_team,/Selected scientific approach/);assert.equal(e.statistics().provider_calls,0);
+});
+test('applicable conjunctions and nonexclusive methods retain genuine gaps',()=>{
+ const f=selectedApproachFixture();f.graph.roles[1].kind='sponsor_requirement';
+ f.graph.edges=f.graph.edges.filter(e=>e.role_id==='role-1');const e=f.engine(),v=e.proposalView(e.proposal());
+ assert.equal(v.unfilledRoles.length,1);assert.deepEqual(Array.from(v.opportunity.missing_skills),['Model response']);
+ assert.match(v.roles[1].rationale,/Model-interpreted scientific source constraint/);
+});
+test('conditional requirements cannot be silently upgraded or waive unknown context',()=>{
+ const f=selectedApproachFixture();Object.assign(f.graph.roles[1],{kind:'sponsor_requirement',applicability:'unknown',condition:'Only if an unresolved source condition applies.',required:false});
+ f.graph.edges=f.graph.edges.filter(e=>e.role_id==='role-1');f.graph.limitations=['Source condition remains unresolved.'];
+ const e=f.engine();assert.match(e.proposalView(e.proposal()).opportunity.why_team,/remains unresolved/);
+ const g=selectedApproachFixture();g.graph.roles[1].required=false;assert.throws(()=>g.engine(),/derived_requirement_conflict/);
+});
 test('eight useful distinct options are capped without hiding other assessed candidates',()=>{
  const f=fixture(10);f.graph.people=f.directory.researchers.slice(0,8).map(p=>({person_id:p.id,outcome:'supported'}));
  f.graph.edges=f.directory.researchers.slice(0,8).map((p,i)=>({...f.graph.edges[0],person_id:p.id,claim_id:p.id+'-c1',
