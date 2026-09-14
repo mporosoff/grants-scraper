@@ -1,0 +1,466 @@
+{
+  "version": "requirements-latency-comparison-observations-v1",
+  "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+  "new_valid_arms": [
+    "S"
+  ],
+  "failed_unavailable_arms": [
+    "L"
+  ],
+  "checker_status": "HTTP400_recovery_required_no_verdicts",
+  "checker_body_sha256": "7f13d7aa21ccbdfc7b976c30db0e77fcd9f4f2cb206203172c1ab03cf0847405",
+  "checker_questions": [
+    {
+      "item_id": "person-2b9314f12c7ebd91949b97b09a430ff683d69ed8c25dd3ff4a14c6b5f30dcd8e",
+      "task_type": "call_person",
+      "person_id": "urh-000014"
+    },
+    {
+      "item_id": "rel-912d4a6f4913f2c64bbf9dde0aa1a6f9b80952a9b9fc90299e1d5c022d3aa86c",
+      "task_type": "aspect_person",
+      "role_id": "role-2",
+      "person_id": "urh-000033",
+      "claim_id": "urh-000033-c002",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "rel-f9287c3623dfd3e7c97a2a5d667d2c1dd4f237a72f93a366a80fdfc88d2915dc",
+      "task_type": "aspect_person",
+      "role_id": "role-2",
+      "person_id": "urh-000049",
+      "claim_id": "urh-000049-c001",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "person-f6b8880abb9202c7bff167e0cd2f6c282853ef97c20433a990eec882ba309e91",
+      "task_type": "call_person",
+      "person_id": "urh-000027"
+    },
+    {
+      "item_id": "rel-04783b94d02d6c373b8097473a8aa826fb727ae4f1f7dfa72d17b32f8ce9febe",
+      "task_type": "aspect_person",
+      "role_id": "role-1",
+      "person_id": "urh-000027",
+      "claim_id": "urh-000027-c001",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "person-8db9ac7cf62a567f4566d5098c7fb16c6ea802fae188882a349ec5eff1f6c320",
+      "task_type": "call_person",
+      "person_id": "urh-000061"
+    },
+    {
+      "item_id": "rel-4131d26c9af168c6681d4952ea731789eaf1463fa58a4810188448de76ee56a8",
+      "task_type": "aspect_person",
+      "role_id": "role-2",
+      "person_id": "urh-000033",
+      "claim_id": "urh-000033-c003",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "rel-850bd68572be5eaf2309b2d839e92e6145069c39513cb5306e419b767a93e78f",
+      "task_type": "aspect_person",
+      "role_id": "role-1",
+      "person_id": "urh-000078",
+      "claim_id": "urh-000078-c003",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "rel-32d1c3816ce914169758b739b17988e3f3151cf39f8323f8ac53582eb44c9ca0",
+      "task_type": "aspect_person",
+      "role_id": "role-2",
+      "person_id": "urh-000138",
+      "claim_id": "urh-000138-c002",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "person-deffa786eeff7d163f9c30ae06b1a5cf50ed5bb94e893da7d3a5dd2ebfab4a1a",
+      "task_type": "call_person",
+      "person_id": "urh-000059"
+    },
+    {
+      "item_id": "person-3f50edaee454bb466240acc28b22ff10d19b35ba384776e3ba696f8dddb7733d",
+      "task_type": "call_person",
+      "person_id": "urh-000138"
+    },
+    {
+      "item_id": "person-9d0a38dbc109dcbfe18204620767d5e0b78b195e77972468e48377bec8feef62",
+      "task_type": "call_person",
+      "person_id": "urh-000137"
+    },
+    {
+      "item_id": "rel-cd335012aa4166eefe5cca8847a32822f7d7e02c025afb4b31ee24ebc4943d5d",
+      "task_type": "aspect_person",
+      "role_id": "role-1",
+      "person_id": "urh-000078",
+      "claim_id": "urh-000078-c002",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "rel-7eb8091d2c2d5981a170fcd898342c2b6da8cdaaeaeb2e43676595ab7e4bc89b",
+      "task_type": "aspect_person",
+      "role_id": "role-1",
+      "person_id": "urh-000049",
+      "claim_id": "urh-000049-c001",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "rel-d504caf4d744b9ef3959f35b90d0fb7d071170955746b9a3fae4cc54b911daca",
+      "task_type": "aspect_person",
+      "role_id": "role-2",
+      "person_id": "urh-000059",
+      "claim_id": "urh-000059-c003",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "person-b88b5429613b15f89c978481841bedbf1ca5f67a8216f79e2a1b9a48c6bab1fa",
+      "task_type": "call_person",
+      "person_id": "urh-000049"
+    },
+    {
+      "item_id": "person-b70125fda5cc3a2dc81e861c87ccf7d9961a0f64a2b0213810f70ff0dfab3868",
+      "task_type": "call_person",
+      "person_id": "urh-000078"
+    },
+    {
+      "item_id": "person-6fa493340e6730bc28413522ec208b8c4e56f6234e78b0ef38e927c0ecf21e81",
+      "task_type": "call_person",
+      "person_id": "urh-000033"
+    },
+    {
+      "item_id": "person-43d648480e04ba365adcd5bbe8c9d678ace1dfe1afedf04f4e9cd70206addeb4",
+      "task_type": "call_person",
+      "person_id": "urh-000145"
+    },
+    {
+      "item_id": "rel-a993a7ec37d86adb51921c08fc90c897f9d9dad4aa5842a9ee442d06a1676433",
+      "task_type": "aspect_person",
+      "role_id": "role-1",
+      "person_id": "urh-000061",
+      "claim_id": "urh-000061-c003",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "person-e9071110802f0dd611ac3a8573602446430385f467572b2fccfc21c847fc8add",
+      "task_type": "call_person",
+      "person_id": "urh-000003"
+    },
+    {
+      "item_id": "rel-5d408bafb90ec058b975dedf6834cd3f403e415716ee4bf259fc94395ec40e46",
+      "task_type": "aspect_person",
+      "role_id": "role-1",
+      "person_id": "urh-000003",
+      "claim_id": "urh-000003-c001",
+      "claim_revision": 2
+    },
+    {
+      "item_id": "person-150a2879ca50e5c535ffb627ddb649c16ca215eae341d620355ed3a912c55ea1",
+      "task_type": "call_person",
+      "person_id": "urh-000153"
+    },
+    {
+      "item_id": "rel-25887a416aa86baa448d0ead9edf63241f2e7e8204c37807bbde1e6a19f2c260",
+      "task_type": "aspect_person",
+      "role_id": "role-2",
+      "person_id": "urh-000153",
+      "claim_id": "urh-000153-c002",
+      "claim_revision": 2
+    }
+  ],
+  "accepted_verdict_count": 0,
+  "missing_verdict_count": 24,
+  "arm_dispositions": {
+    "S": {
+      "status": "valid",
+      "request_id": "94f636c2c9b146f5ae15e1706307b834"
+    },
+    "L": {
+      "status": "failed_unavailable",
+      "request_id": "50fc958958824d2999245a80043ef301",
+      "receipt_sha256": "5711947589eb7c7e797e1210627bf07e44465869ea73793424c99aede3aef9bb",
+      "scientific_outcome": "unmeasured"
+    }
+  },
+  "person_outcomes": [
+    {
+      "person_id": "urh-000027",
+      "name": "Chuang Ren",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "supported",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000049",
+      "name": "Gilbert 'Rip' Collins",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "supported",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000078",
+      "name": "Jonathan Davies",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "supported",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000014",
+      "name": "Astrid M. Müller",
+      "S_outcome": "adjacent",
+      "retained_reference_outcome": "adjacent",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000061",
+      "name": "J. Ryan Rygg",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "supported",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000003",
+      "name": "Adam Sefkow",
+      "S_outcome": "adjacent",
+      "retained_reference_outcome": "supported",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000153",
+      "name": "Zachary Robinson",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "supported",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000138",
+      "name": "Varchas Gopalaswamy",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "adjacent",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000033",
+      "name": "David R. Harding",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "supported",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000059",
+      "name": "Ibrahim Mohammad",
+      "S_outcome": "supported",
+      "retained_reference_outcome": "credible_transfer",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000145",
+      "name": "Wolfgang Theobald",
+      "S_outcome": "adjacent",
+      "retained_reference_outcome": "adjacent",
+      "L_outcome": null,
+      "checker_verdict": null
+    },
+    {
+      "person_id": "urh-000137",
+      "name": "Valeri Goncharov",
+      "S_outcome": "adjacent",
+      "retained_reference_outcome": "adjacent",
+      "L_outcome": null,
+      "checker_verdict": null
+    }
+  ],
+  "S_relationships": [
+    {
+      "central": true,
+      "claim_id": "urh-000027-c001",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies laser-plasma behavior and hot-electron generation relevant to inertial-confinement fusion.",
+      "gap": "No stated translational discussion linking findings to a specific societal or technological need.",
+      "person_id": "urh-000027",
+      "reason": "Studies computational plasma physics for inertial-confinement fusion, including hot-electron generation, directly addressing the fundamental plasma-science investigation central to this program.",
+      "role_id": "role-1"
+    },
+    {
+      "central": true,
+      "claim_id": "urh-000049-c001",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies material behavior in high-energy-density regimes relevant to laboratory fusion.",
+      "gap": "No explicit discussion connecting findings to a stakeholder-identified technological need.",
+      "person_id": "urh-000049",
+      "reason": "Investigates matter under extreme pressure and energy density directly relevant to laboratory fusion conditions, a core plasma-science regime.",
+      "role_id": "role-1"
+    },
+    {
+      "central": true,
+      "claim_id": "urh-000078-c003",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Leads a project investigating shocks in magnetized plasmas.",
+      "gap": "No evidenced translational framing tying the results to a specific societal need.",
+      "person_id": "urh-000078",
+      "reason": "Leads experimental and computational work on magnetized shocks in laser-produced plasmas, directly addressing a fundamental plasma-physics challenge.",
+      "role_id": "role-1"
+    },
+    {
+      "central": true,
+      "claim_id": "urh-000061-c003",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Develops experimental HED platforms for astrophysics, basic science and inertial-confinement fusion.",
+      "gap": "No stated societal or technological-need discussion accompanies the experimental platform work.",
+      "person_id": "urh-000061",
+      "reason": "Develops experimental high-energy-density platforms spanning astrophysics and inertial-confinement fusion, directly addressing core plasma-science investigation.",
+      "role_id": "role-1"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000153-c002",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies material interactions relevant to hydrogen-isotope containment and separation.",
+      "gap": "Does not itself articulate the underlying fundamental plasma-science challenge required by the primary role.",
+      "person_id": "urh-000153",
+      "reason": "Investigates hydrogen-isotope containment and separation materials directly tied to fusion-fuel technology, addressing a concrete energy-technology need.",
+      "role_id": "role-2"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000138-c002",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Uses empirical and theoretical information to guide fusion experiments.",
+      "gap": "Presented as data-model reconciliation rather than an explicit societal-need discussion.",
+      "person_id": "urh-000138",
+      "reason": "Uses statistical and machine-learning methods to reconcile fusion-implosion predictions with experimental data, directly supporting improved fusion-energy experiment design.",
+      "role_id": "role-2"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000033-c003",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Develops capsule-making methods and investigates scalable cryogenic fuel delivery.",
+      "gap": "Does not present the fundamental plasma-science challenge itself, only the target-technology solution.",
+      "person_id": "urh-000033",
+      "reason": "Develops scalable fabrication and delivery methods for cryogenic fusion-fuel targets, a direct engineering solution to a stated fusion-energy technological need.",
+      "role_id": "role-2"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000059-c003",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies magnetohydrodynamic stability in liquid-metal batteries and aluminum electrolysis cells.",
+      "gap": "Work concerns industrial conducting fluids rather than ionized plasma, so the plasma-science linkage is indirect.",
+      "person_id": "urh-000059",
+      "reason": "Applies magnetohydrodynamic stability analysis of conducting fluids to liquid-metal battery and aluminum-electrolysis technologies, addressing an explicit industrial/energy need.",
+      "role_id": "role-2"
+    }
+  ],
+  "retained_reference_relationships": [
+    {
+      "central": true,
+      "claim_id": "urh-000027-c001",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies laser-plasma behavior and hot-electron generation relevant to inertial-confinement fusion.",
+      "gap": "Evidence is computational/simulation-based; no experimental validation of the hot-electron predictions is described.",
+      "person_id": "urh-000027",
+      "reason": "Directly studies laser-plasma interaction and hot-electron generation relevant to inertial-confinement fusion, a core fundamental plasma-science investigation matching the program's central scientific-challenge requirement.",
+      "role_id": "role-1"
+    },
+    {
+      "central": true,
+      "claim_id": "urh-000003-c001",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies inertial and magneto-inertial fusion in a computational plasma-physics program.",
+      "gap": "Description is program-level; specific implosion results or validation against experiment are not detailed.",
+      "person_id": "urh-000003",
+      "reason": "Runs a computational plasma-physics program directly addressing inertial and magneto-inertial fusion, a core fundamental scientific/engineering plasma challenge central to this opportunity.",
+      "role_id": "role-1"
+    },
+    {
+      "central": true,
+      "claim_id": "urh-000061-c003",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Develops experimental HED platforms for astrophysics, basic science and inertial-confinement fusion.",
+      "gap": "Specific diagnostic or analysis techniques used on these platforms are not detailed in this claim.",
+      "person_id": "urh-000061",
+      "reason": "Develops experimental high-energy-density platforms spanning astrophysics, basic science and inertial-confinement fusion, directly providing the investigative capability the central role calls for.",
+      "role_id": "role-1"
+    },
+    {
+      "central": true,
+      "claim_id": "urh-000078-c002",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies plasma generation and behavior in laser-related fusion research.",
+      "gap": "Claim describes the phenomenon studied but not specific diagnostic or theoretical contributions beyond general characterization.",
+      "person_id": "urh-000078",
+      "reason": "Studies laser-produced plasma physics directly, a foundational phenomenon underlying inertial-fusion and high-energy-density research central to this program's scope.",
+      "role_id": "role-1"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000049-c001",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies material behavior in high-energy-density regimes relevant to laboratory fusion.",
+      "gap": "Claim does not itself articulate broader stakeholder or policy framing of the societal need beyond the fusion-relevance statement.",
+      "person_id": "urh-000049",
+      "reason": "Connects laboratory-generated extreme-density material states to conditions relevant to inertial fusion, illustrating a direct translational link between fundamental HED/plasma physics and the energy-technology need of fusion.",
+      "role_id": "role-2"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000153-c002",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies material interactions relevant to hydrogen-isotope containment and separation.",
+      "gap": "Evidence centers on material interactions rather than an explicit discussion of stakeholder-identified priorities.",
+      "person_id": "urh-000153",
+      "reason": "Studies material interactions governing hydrogen-isotope containment and separation, addressing a concrete fusion-fuel-handling technology need that translates fundamental materials/plasma-adjacent science into an applied requirement.",
+      "role_id": "role-2"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000033-c002",
+      "claim_revision": 2,
+      "coverage": "direct",
+      "evidence_quote": "Studies structure and properties of solid fusion fuel.",
+      "gap": "Claim is materials-focused and does not itself present a broader societal-need discussion.",
+      "person_id": "urh-000033",
+      "reason": "Examines the structure and properties of solid deuterium-tritium fusion fuel, directly supporting the technological need for reliable fuel-target performance in inertial fusion energy development.",
+      "role_id": "role-2"
+    },
+    {
+      "central": false,
+      "claim_id": "urh-000059-c003",
+      "claim_revision": 2,
+      "coverage": "method_transfer",
+      "evidence_quote": "Studies magnetohydrodynamic stability in liquid-metal batteries and aluminum electrolysis cells.",
+      "gap": "Work is conducted on liquid-metal rather than plasma systems, so translating the stability findings to plasma-specific challenges still requires further methodological bridging.",
+      "person_id": "urh-000059",
+      "reason": "Applies magnetohydrodynamic stability analysis, a method central to plasma physics, to industrial conducting-fluid systems such as aluminum electrolysis and liquid-metal batteries, credibly transferring plasma-relevant stability methodology to concrete energy and manufacturing technology needs.",
+      "role_id": "role-2"
+    }
+  ],
+  "source_context": "Exposed retained ECLIPSE source and prior interpretation, not fresh independent validation.",
+  "selected_route": null,
+  "DOE_executed": false,
+  "human_items_requested": 0
+}

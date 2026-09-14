@@ -1,0 +1,81 @@
+{
+  "version": "requirements-latency-validation-closeout-v1",
+  "tested_runtime_commit": "c6b93b9806541eece30e085c8c8815e2c4c4cc88",
+  "product_implementation_head": "cc233813973aad3a47a438348babe497e75157ab",
+  "full_suite": {
+    "startTime": "2026-09-14T12:39:32.331Z",
+    "duration": 482994.729,
+    "expected": 117,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "full_suite_sha256": "aeba0e2ec65cbfc32971c6e2bfb9c533391f7dbfc3ea45a5822d76afa9be7912",
+  "preview_bundle": "d97eeb306ba0a36a9012053f44bd503a3b723f5fd1ea5bd7aa82fab99c072f3b",
+  "raw_bytes": 18331168,
+  "summed_computed_gzip_bytes": 2782454,
+  "preview_file_count": 61,
+  "public_activation": false,
+  "new_real_DOE_build": false,
+  "verified_render_seconds": null,
+  "new_workflow_memory": null,
+  "idle_and_search_contextual_requests": 0,
+  "idle_boundary_calls": 0,
+  "native_browser_search_blocked_unrelated_posts": 4,
+  "private_search_manifest_404s": 2,
+  "native_search_result_parent": "363302",
+  "native_search_matched_child": "Laboratory Validation of Catalysts and Unit Operations 1a",
+  "full_suite_repeated_after_offline_only_changes": false,
+  "prerequisites": [
+    {
+      "pr": 246,
+      "head": "5d668f15b8741c22f3deec911939c3921611342b",
+      "ci": 34846325595,
+      "clean_comment": 5664395687,
+      "merge": "cba2a5d86bbe53fb8c21efba9d28cb3502e65713"
+    },
+    {
+      "pr": 247,
+      "head": "2aa8f4155f92c8b4ded8eaf24493a586fddd5255",
+      "ci": 34847713450,
+      "clean_reaction_at": "2026-09-14T13:23:09Z",
+      "merge": "9871906030161a7e41558b5aa176084012077729"
+    },
+    {
+      "pr": 248,
+      "head": "cb8dd913f777be91ca7879e9291cb13fd5557299",
+      "ci": 34850858634,
+      "clean_reaction_at": "2026-09-14T13:52:03Z",
+      "merge": "31b69b0772c759d9d8f7651a02aef924c7bab7e5"
+    }
+  ],
+  "restricted_deployment": {
+    "version_id": "45f02b75-3505-4062-8886-5cb496a07c92",
+    "deployment_id": "4c1236f6-ccd1-4a84-960c-8bfafb701884",
+    "protected_sha": "9871906030161a7e41558b5aa176084012077729",
+    "module_hashes": {
+      "index.js": "258a5350e7abcc0aab22597651a4dea83440a5567ba7315870df7e08a1c026e9"
+    },
+    "configuration_sha256": "d8f72f9c25350c3010759da4d9efd59702bcd51e9cc3de71e5b7c2515eda2ad0",
+    "routing": {
+      "workers_dev": true,
+      "previews_enabled": true,
+      "crons": [
+        "17 7 * * *"
+      ],
+      "routes": [],
+      "domains": []
+    },
+    "observed_configuration_sha256": "9c1c3fc07547bde0d1fb677ca5272b9aa6090c57fff90eaa1b85075b7d0555a9",
+    "configuration_normalization": "intake-empty-exports-equal-d1-alias-v1",
+    "declared_configuration_sha256": "ab0153cfbacd55658b9e5e87f36a6f5302176cf9c685e7254ba7f64667c32fc1",
+    "previous_version_id": "0188117e-a865-477a-8209-d4c7164ad174",
+    "method": "authenticated-active-modules-runtime-bindings-routes-and-triggers-vs-protected-inputs",
+    "public_recommender_activation": false
+  },
+  "no_public_publication_runs": [
+    34847068098,
+    34849561767,
+    34852293779
+  ]
+}

@@ -331,3 +331,13 @@ Same authoritative ledger, owner34795980969: $7.232138/680 charged, zero outstan
 ### Reviewed capacity correction, before paid work (2026-09-14)
 
 PR246 merged at cba2a5d; PR247 exact-head review clean at 2aa8f4155f92c8b4ded8eaf24493a586fddd5255 and merged at 9871906030161a7e41558b5aa176084012077729. The first free preflight (34847123808) exposed a complete comparison bound of45,160 tokens, above its40,000 allowance. V1 remains history; V2 reallocates unspent capacity within$1.50/8. Successful full preflight34849633528 reserves$1.496405 for all eight possible operations with no evidence truncation. Authoritative ledger remains680/$7.232138, zero outstanding. See contextual-stage-b/requirements-latency-lock-v2.json and requirements-latency-preflight-v2.json. No paid comparison had occurred when this lock was recorded.
+
+### Requirements/latency task closeout — September 14, 2026
+
+The bounded task stops at a named technical boundary. The requirement-policy implementation and configured browser regression suite passed; all117 browser/E2E/accessibility tests passed once. Reviewed prerequisites PR246/247/248 merged; only the restricted private service deployed, with public activation off.
+
+S completed in66.875874 seconds (3.46x faster than the retained exposed reference), $0.104570, with a valid canonical assessment but no accepted quality check. L completed in11.349378 seconds, $0.003166, but failed the existing four-per-contribution limit; its scientific output is unavailable and cannot be repurchased under this instruction. The one comparison checker returned HTTP400 without retained diagnostic body or usage. Request fc618603458249348c6834d258264520 remains recovery-required/reserved_unknown, with its full$0.146074 held. Accepted verdicts0/24. No route was selected; no corrected DOE workflow or final check occurred.
+
+Authoritative cloud owner34852296018:683/690 attempts; $7.339874 reconciled plus$0.146074 uncertain hold, conservative ledger usage$7.485948. Remaining$2.514052 and7slots preserve the required$1.267862/2 reserve. This task used3 metered-purpose attempts, $0.107736 reconciled plus the hold. Five new free native-count HTTP calls are separately recorded (186/190 lifetime). No additional inference, rekey, fallback or automatic retry is authorized; unused capacity is not a request quota.
+
+Read reports/requirements-and-latency-repair-report.md and contextual-stage-b/requirements-latency-*-closeout-v1.json. Preserve all histories and private caches. Any further diagnosis/reconciliation or replacement request needs the owner's specific next decision. STOP FOR USER REVIEW; no public release,50/150 activity orStage4.

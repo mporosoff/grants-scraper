@@ -1,0 +1,240 @@
+{
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "owner_run": 34852296018,
+  "state_artifact": 10350533860,
+  "code_sha": "31b69b0772c759d9d8f7651a02aef924c7bab7e5",
+  "ledger_sha256": "981c283d1466f5b191e5b000c1d917dff16c5638de18e4bee80aca5e7ccf7e33",
+  "checkpoint_sha256": "21d38593f296e32c21c25522dc83f650efddcd78ea55496f28c287b802facc28",
+  "verified_files": 1350,
+  "file_hash_mismatches": 0,
+  "prior_attempts": 680,
+  "prior_reconciled_microusd": 7232138,
+  "attempts": 683,
+  "new_attempts": 3,
+  "new_reconciled_microusd": 107736,
+  "outstanding_held_microusd": 146074,
+  "reconciled_charged_microusd": 7339874,
+  "conservative_ledger_used_microusd": 7485948,
+  "remaining_microusd": 2514052,
+  "remaining_attempts": 7,
+  "new_known_input_tokens": 28891,
+  "new_known_output_tokens": 7675,
+  "unknown_usage_request_ids": [
+    "fc618603458249348c6834d258264520"
+  ],
+  "native_token_count_attempts": 186,
+  "new_native_count_attempts": 5,
+  "native_count_cap": 190,
+  "new_embeddings": 0,
+  "requests": [
+    {
+      "id": "94f636c2c9b146f5ae15e1706307b834",
+      "key": "92b30b346d6743b1ffeeb3123674ed84814e5b6cfb9a4f610bde65ea947c7a9a",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "purpose": "cb-lr-S",
+      "status": "valid",
+      "latency_operation": "S",
+      "latency_effort": "medium",
+      "latency_lock": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e",
+      "body_sha256": "266959a94b39ed8882be14bdc16fc142dd5fd3b031f147b01015ae830874f9e9",
+      "code_sha": "9871906030161a7e41558b5aa176084012077729",
+      "reserved_microusd": 285608,
+      "charged_microusd": 104570,
+      "reserved_input_tokens": 22804,
+      "reserved_output_tokens": 24000,
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 18150,
+        "output_tokens": 6827,
+        "output_tokens_details": {
+          "thinking_tokens": 5526
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "id": "50fc958958824d2999245a80043ef301",
+      "key": "f1341247390efb7f94dca08cc5af1349b59c7d2304f7ad448867f8d5d256d077",
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "purpose": "cb-lr-L",
+      "status": "failed",
+      "latency_operation": "L",
+      "latency_effort": "low",
+      "latency_lock": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e",
+      "body_sha256": "b71263717e037780c69eb59e5a930dc4fd03756ea98a54007faa61aa76405435",
+      "code_sha": "9871906030161a7e41558b5aa176084012077729",
+      "reserved_microusd": 38539,
+      "charged_microusd": 3166,
+      "reserved_input_tokens": 48691,
+      "reserved_output_tokens": 24000,
+      "usage": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 10741,
+        "output_tokens": 848,
+        "reasoning_tokens": 163
+      }
+    },
+    {
+      "id": "fc618603458249348c6834d258264520",
+      "key": "c4e8412f797f792cfe8c932b7424876a9eace964fe4d096be2dd1ab7fd17df59",
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "purpose": "cb-lr-comparison-check",
+      "status": "reserved_unknown",
+      "latency_operation": "comparison-check",
+      "latency_effort": "disabled",
+      "latency_lock": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e",
+      "body_sha256": "7f13d7aa21ccbdfc7b976c30db0e77fcd9f4f2cb206203172c1ab03cf0847405",
+      "code_sha": "31b69b0772c759d9d8f7651a02aef924c7bab7e5",
+      "reserved_microusd": 146074,
+      "charged_microusd": 146074,
+      "reserved_input_tokens": 33037,
+      "reserved_output_tokens": 8000,
+      "usage": null
+    }
+  ],
+  "receipts": [
+    {
+      "body_sha256": "266959a94b39ed8882be14bdc16fc142dd5fd3b031f147b01015ae830874f9e9",
+      "charged_microusd": 104570,
+      "code_sha": "9871906030161a7e41558b5aa176084012077729",
+      "count_body_sha256": "2793e6ff45eade5eb7f5c470ae81b34c8fdd0358ab3caa8b37ac040e5a6773be",
+      "elapsed_seconds": 66.875874,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "92b30b346d6743b1ffeeb3123674ed84814e5b6cfb9a4f610bde65ea947c7a9a",
+      "latency_effort": "medium",
+      "latency_lock": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e",
+      "latency_model": "claude-sonnet-5",
+      "latency_operation": "S",
+      "native_count_key": "2793e6ff45eade5eb7f5c470ae81b34c8fdd0358ab3caa8b37ac040e5a6773be",
+      "native_input_tokens": 18150,
+      "output_token_ceiling": 24000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-lr-S",
+      "request_id": "94f636c2c9b146f5ae15e1706307b834",
+      "reserved_microusd": 285608,
+      "returned_model": "claude-sonnet-5",
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 18150,
+        "output_tokens": 6827,
+        "output_tokens_details": {
+          "thinking_tokens": 5526
+        },
+        "service_tier": "standard"
+      }
+    },
+    {
+      "body_sha256": "b71263717e037780c69eb59e5a930dc4fd03756ea98a54007faa61aa76405435",
+      "charged_microusd": 3166,
+      "code_sha": "9871906030161a7e41558b5aa176084012077729",
+      "disposition": "failed",
+      "elapsed_seconds": 11.349378,
+      "error": "SchemaFailure",
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "f1341247390efb7f94dca08cc5af1349b59c7d2304f7ad448867f8d5d256d077",
+      "latency_effort": "low",
+      "latency_lock": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e",
+      "latency_model": "gpt-5.6-luna",
+      "latency_operation": "L",
+      "output_token_ceiling": 24000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "provider_stop_reason": "completed",
+      "purpose": "cb-lr-L",
+      "request_id": "50fc958958824d2999245a80043ef301",
+      "reserved_microusd": 38539,
+      "returned_model": "gpt-5.6-luna",
+      "schema_diagnostic": {
+        "actual_type": "list",
+        "expected_type": "array",
+        "missing_keys": [],
+        "path": "$.edges_by_contribution.role-1",
+        "rule": "array_length",
+        "shape": {
+          "items": [
+            {
+              "length": 5,
+              "type": "dict"
+            },
+            {
+              "length": 5,
+              "type": "dict"
+            },
+            {
+              "length": 5,
+              "type": "dict"
+            },
+            {
+              "length": 5,
+              "type": "dict"
+            },
+            {
+              "length": 5,
+              "type": "dict"
+            }
+          ],
+          "length": 5,
+          "type": "list"
+        },
+        "unexpected_keys": []
+      },
+      "status": "failed",
+      "usage": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 10741,
+        "output_tokens": 848,
+        "reasoning_tokens": 163
+      }
+    },
+    {
+      "body_sha256": "7f13d7aa21ccbdfc7b976c30db0e77fcd9f4f2cb206203172c1ab03cf0847405",
+      "code_sha": "31b69b0772c759d9d8f7651a02aef924c7bab7e5",
+      "count_body_sha256": "f57db1430baa2e046ce89fc69772681fc0a4dc0133bfb3562d9b9489ff02f088",
+      "disposition": "recovery_required",
+      "elapsed_seconds": 0.624914,
+      "error": "ConfigurationFailure",
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 400,
+      "key": "c4e8412f797f792cfe8c932b7424876a9eace964fe4d096be2dd1ab7fd17df59",
+      "latency_effort": "disabled",
+      "latency_lock": "2f3c86c5f25a357d5fb5af458f85d4ac8fe5d51bc835b36b80bc4df5300bac5e",
+      "latency_model": "claude-sonnet-5",
+      "latency_operation": "comparison-check",
+      "native_count_key": "f57db1430baa2e046ce89fc69772681fc0a4dc0133bfb3562d9b9489ff02f088",
+      "native_input_tokens": 26677,
+      "output_token_ceiling": 8000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "purpose": "cb-lr-comparison-check",
+      "request_id": "fc618603458249348c6834d258264520",
+      "reserved_microusd": 146074,
+      "status": "reserved_unknown"
+    }
+  ],
+  "no_duplicate_actual_recovery_check": {
+    "restorations": 3,
+    "provider_dispatches": 0,
+    "native_counter_dispatches": 0,
+    "ledger_unchanged": true
+  },
+  "local_mirrors": "Read-only; authoritative cloud ownership is not transferred locally."
+}
