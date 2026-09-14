@@ -19,7 +19,7 @@ def saved(state,name):
     return value
 
 
-def assessment(state,route):
+def assessment_record(state,route):
     from tools.contextual_team_latency_contract import body as build, validate_resolved
     from tools.team_recommender_budget import ExperimentLedger
     data,_=eclipse_data(state)
@@ -27,11 +27,52 @@ def assessment(state,route):
     logical=[RELEASE,route,identity(c),identity(data)]
     key=identity([existing.AUTHORIZATION_ID,'contextual-v1',logical])
     rows=[r for r in ExperimentLedger(state/'ledger.json').read()['requests'] if r['key']==key]
-    if len(rows)!=1 or rows[0]['status']!='valid':raise ConfigurationFailure('latency_assessment_not_complete')
-    row=rows[0];value=json.loads((state/'cache'/(key+'.json')).read_bytes())
+    if len(rows)!=1:raise ConfigurationFailure('latency_assessment_not_complete')
+    row=rows[0]
+    if any(row.get(k)!=v for k,v in {'body_sha256':identity(body),'model':body['model'],
+        'provider':c['route']['provider'],'latency_lock':RELEASE,'latency_operation':route,
+        'purpose':'cb-lr-'+route}.items()):raise ConfigurationFailure('latency_assessment_record_identity')
+    return data,c,body,row
+
+
+def assessment(state,route):
+    from tools.contextual_team_latency_contract import validate_resolved
+    data,c,body,row=assessment_record(state,route)
+    if row['status']!='valid':raise ConfigurationFailure('latency_assessment_not_complete')
+    value=json.loads((state/'cache'/(row['key']+'.json')).read_bytes())
     validate_cache_identity(value,row,body,c['route']['provider'])
     validate_resolved('adjudication',value['value'],data)
     return row,value['value']
+
+
+def comparison_arms(state):
+    """A definite failed arm is missing evidence, never an empty scientific result.
+
+    Uncertain dispatch or a lost successful result still requires recovery. The
+    one remaining checker can inspect actually retained evidence without paying
+    again for a failed arm or claiming its missing relationships were judged.
+    """
+    arms={};dispositions={}
+    for route in ('S','L'):
+        _,_,_,row=assessment_record(state,route)
+        if row['status']=='valid':
+            _,arms[route]=assessment(state,route)
+            dispositions[route]={'status':'valid','request_id':row['id']}
+            continue
+        receipt_path=state/'receipts'/(row['id']+'.json')
+        if row['status']!='failed' or not receipt_path.exists():
+            raise ConfigurationFailure('latency_arm_recovery_required')
+        receipt=json.loads(receipt_path.read_bytes())
+        expected={'status':'failed','disposition':'failed','request_id':row['id'],
+            'key':row['key'],'body_sha256':row['body_sha256'],
+            'latency_lock':RELEASE,'latency_operation':route,
+            'charged_microusd':row['charged_microusd'],'usage':row['usage']}
+        if any(receipt.get(k)!=v for k,v in expected.items()) or (state/'cache'/(row['key']+'.json')).exists():
+            raise ConfigurationFailure('latency_failed_arm_receipt_identity')
+        dispositions[route]={'status':'failed_unavailable','request_id':row['id'],
+            'receipt_sha256':identity(receipt),'scientific_outcome':'unmeasured'}
+    if not arms:raise ConfigurationFailure('latency_no_valid_comparison_arm')
+    return arms,dispositions
 
 
 def comparison_bounds(data,reference):
@@ -43,7 +84,8 @@ def comparison_bounds(data,reference):
 
 
 def comparison_packet(state, *, sizing_arms=None, fixed_only=False):
-    data,reference=eclipse_data(state);arms=sizing_arms or {r:assessment(state,r)[1] for r in ('S','L')}
+    data,reference=eclipse_data(state)
+    arms=sizing_arms if sizing_arms is not None else comparison_arms(state)[0]
     # Union is independent of provider ordering. No arm, score, time, old grade or
     # generation rationale enters the evidence shown to this one checker.
     union={}
@@ -127,18 +169,22 @@ def checker_body(name,prompt,evidence,schema):
     return b
 
 
-def run_check(runner,name,body,questions,schema):
+def run_check(runner,name,body,questions,schema,*,arm_dispositions=None):
     # Same exact reference-enumerated local/native schema used successfully in
     # Phase 1/2. No missing verdict can be silently accepted.
     result=runner.request('cb-lr-'+name,[RELEASE,name,identity(body)],body,validator(questions,schema,65536))
     value={'release_id':RELEASE,'body_sha256':identity(body),'questions':questions,'value':result,
            'request_id':runner.used[-1]['request_id']}
+    if arm_dispositions is not None:value['arm_dispositions']=arm_dispositions
     atomic_json(result_path(runner.state,name),value)
     return value
 
 
 def validate_selection(state,value):
     check=saved(state,'comparison-check')
+    _,dispositions=comparison_arms(state)
+    if check.get('arm_dispositions')!=dispositions:
+        raise ConfigurationFailure('latency_check_arm_dispositions_changed')
     if value.get('comparison_sha256')!=identity(check):raise ConfigurationFailure('latency_selection_check_identity')
     body,questions,schema,_,_=comparison_packet(state)
     key=identity([existing.AUTHORIZATION_ID,'contextual-v1',[RELEASE,'comparison-check',identity(body)]])
@@ -231,7 +277,8 @@ def run(args):
             result={'release_id':RELEASE,'value':value,'timings':runner.timings}
         elif action=='comparison-check':
             body,questions,schema,_,_=comparison_packet(args.state)
-            result=run_check(runner,action,body,questions,schema)
+            _,dispositions=comparison_arms(args.state)
+            result=run_check(runner,action,body,questions,schema,arm_dispositions=dispositions)
         elif action=='select':
             if request['route'] not in ('S','L'):raise ConfigurationFailure('latency_named_route_only')
             result=validate_selection(args.state,{'release_id':RELEASE,'route':request['route'],
