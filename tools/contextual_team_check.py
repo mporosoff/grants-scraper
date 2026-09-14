@@ -132,7 +132,9 @@ def main():
     p.add_argument('--state',type=Path,required=True);p.add_argument('--reservation',type=Path)
     p.add_argument('--result',type=Path);args=p.parse_args();existing.trusted_environment()
     requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
-    if isinstance(requested,dict) and 'phase2_token_preflight' in requested:
+    if isinstance(requested,dict) and 'requirements_latency' in requested:
+        from tools.contextual_team_latency_check import run
+    elif isinstance(requested,dict) and 'phase2_token_preflight' in requested:
         from tools.contextual_team_token_preflight import run
     elif isinstance(requested,dict) and 'phase2_output_check' in requested:
         from tools.contextual_team_phase2_check import run

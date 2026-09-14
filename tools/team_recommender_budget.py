@@ -39,9 +39,13 @@ class ExperimentLedger(Ledger):
             raise ConfigurationFailure("task_specific_trusted_route_unavailable")
         metadata = execution_metadata or {}
         is_contextual = metadata.get('purpose', '').startswith('cb-')
+        is_latency = metadata.get('purpose', '').startswith('cb-lr-')
         d3_embedding = provider == 'voyage' and metadata.get('purpose') in {'d3-embedding','d3-query-format'}
         s3_embedding = provider == 'voyage' and metadata.get('purpose') == 's3-embedding'
         allowed_model = (model == ('voyage-4-large' if provider == 'voyage' else 'claude-sonnet-5')) if is_contextual else model == 'voyage-4-large' if s3_embedding else model in {'voyage-4-large','voyage-context-4'} if d3_embedding else ROUTES.get(provider) == model
+        if is_latency:
+            allowed_model = {'anthropic':'claude-sonnet-5','openai':'gpt-5.6-luna','voyage':'voyage-4-large'}.get(provider)==model
+            if metadata.get('latency_model')!=model:raise ConfigurationFailure('latency_reserved_model_identity')
         if stage not in (2, 3) or stage > approved_stage or not allowed_model:
             raise ConfigurationFailure("outside_experiment_authority")
         if (stage == 3) != metadata.get('purpose','').startswith('s3-'):
@@ -62,6 +66,7 @@ class ExperimentLedger(Ledger):
             metadata = execution_metadata or {}
             allowed_metadata={"packet_sha256", "body_sha256", "purpose", "code_sha", "row_inputs", "judge_items"}
             if is_contextual:allowed_metadata.add('execution_capacity')
+            if is_latency:allowed_metadata.update({'latency_lock','latency_operation','latency_model','latency_effort','native_count_key','count_body_sha256','native_input_tokens'})
             if metadata.get('purpose','').startswith('cb-o1-'):allowed_metadata.update({'option1_release','repair_of'})
             if metadata.get('purpose','').startswith('cb-p1-'):allowed_metadata.update({'phase1_lock','response_contract_sha256','repair_of'})
             if metadata.get('purpose','').startswith('cb-p2-'):

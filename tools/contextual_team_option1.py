@@ -25,6 +25,10 @@ def plan():
 
 
 def configuration_for_job(job):
+    from tools.contextual_team_latency_policy import RELEASE as latency_release
+    if job.get('release_id')==latency_release:
+        from tools.contextual_team_latency import configuration
+        return configuration()
     from tools.contextual_team_phase2 import RELEASE as phase2_release, configuration as phase2_configuration
     if job['release_id']==phase2_release:
         config=phase2_configuration()

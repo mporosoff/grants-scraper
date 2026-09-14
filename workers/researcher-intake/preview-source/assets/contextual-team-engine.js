@@ -1,7 +1,7 @@
 /* Local composition of validated contextual relationships. No provider or network paths. */
 (function(g){
   'use strict';
-  const VERSION='contextual-composition-v1',cmp=(a,b)=>a<b?-1:a>b?1:0;
+  const VERSION='contextual-composition-v2',cmp=(a,b)=>a<b?-1:a>b?1:0;
   const check=(ok,reason)=>{if(!ok)throw Error(reason);};
   const canonical=v=>Array.isArray(v)?'['+v.map(canonical).join(',')+']':v&&typeof v==='object'
     ?'{'+Object.keys(v).sort(cmp).map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}':JSON.stringify(v);
@@ -10,10 +10,12 @@
   const eligible=p=>p.status==='active'&&p.auto_proposable===true&&['main','standby'].includes(p.pool_state)
     &&!['hidden','reference_only'].includes(p.pool_visibility);
   const useful=e=>e.coverage==='direct'||e.coverage==='method_transfer';
+  const typed=graph=>graph.version==='contextual-audited-graph-v2';
+  const needed=(graph,r)=>!typed(graph)||(r.kind!=='optional_direction'&&r.applicability==='applies');
   const safeUrl=v=>{try{const u=new URL(v);return u.protocol==='https:'&&!u.username&&!u.password?u.href:'';}catch{return '';}};
 
   function validateGraph(graph,directory,expected){
-    check(graph.version==='contextual-audited-graph-v1','graph_version_conflict');
+    check(['contextual-audited-graph-v1','contextual-audited-graph-v2'].includes(graph.version),'graph_version_conflict');
     check(/^[a-f0-9]{64}$/.test(graph.graph_id||'')&&graph.graph_id===expected.graph_id,'graph_identity_conflict');
     for(const key of ['snapshot_id','registry_generation','source_id','roster_id'])
       check(/^[a-f0-9]{64}$/.test(graph[key]||'')&&graph[key]===expected[key],'version_conflict');
@@ -22,6 +24,16 @@
     check(graph.scope.id===expected.scope_id&&graph.scope.parent_id===expected.parent_id,'scope_ownership_conflict');
     check(Array.isArray(graph.roles)&&graph.roles.length>=1&&graph.roles.length<=6,'invalid_contributions');
     const roles=new Map(graph.roles.map(r=>[r.id,r]));check(roles.size===graph.roles.length,'duplicate_contribution');
+    if(typed(graph)){
+      check(graph.requirement_policy==='contextual-selected-approach-v2'&&typeof graph.approach==='string'&&graph.approach.trim(),'selected_approach_conflict');
+      for(const r of graph.roles){
+        check(['sponsor_requirement','approach_necessary','optional_direction'].includes(r.kind)&&
+          ['applies','does_not_apply','unknown'].includes(r.applicability)&&typeof r.condition==='string','contribution_kind_conflict');
+        check(r.required===needed(graph,r)&&(!r.central||r.required),'derived_requirement_conflict');
+        check(r.applicability==='applies'||r.condition.trim(),'conditional_disposition_missing');
+      }
+      check(graph.roles.some(r=>needed(graph,r)&&r.central),'active_scientific_anchor_missing');
+    }
     // Initial shortlist plus the one explicitly bounded trial extension.
     check(Array.isArray(graph.people)&&graph.people.length<=13&&new Set(graph.people.map(p=>p.person_id)).size===graph.people.length,'invalid_assessed_set');
     check(Array.isArray(graph.edges)&&graph.edges.length<=30,'invalid_relationships');
@@ -31,6 +43,7 @@
       const p=faculty.get(e.person_id),r=roles.get(e.role_id),c=p?.claims.find(c=>c.claim_id===e.claim_id&&c.status==='active');
       const key=canonical([e.role_id,e.person_id,e.claim_id,e.claim_revision]);
       check(!seen.has(key)&&assessed.has(e.person_id)&&!!r&&!!c,'invalid_relationship_identity');seen.add(key);
+      check(needed(graph,r),'inactive_direction_has_relationship');
       check(c.revision===e.claim_revision&&typeof e.evidence_quote==='string'&&e.evidence_quote.length>=8&&c.evidence.includes(e.evidence_quote),'retired_or_changed_evidence');
       check(['direct','method_transfer','adjacent'].includes(e.coverage)&&typeof e.central==='boolean'&&(!e.central||r.central),'invalid_assessed_category');
       check(typeof e.reason==='string'&&typeof e.gap==='string','invalid_explanation');
@@ -47,6 +60,7 @@
     // including changes to researchers that were never in this graph's shortlist.
     freeze(directory);freeze(record);freeze(parentRecord);
     const graph=freeze(clone(rawGraph)),facultyById=new Map(directory.researchers.map(p=>[p.id,freeze(clone(p))]));
+    const requiredRoles=graph.roles.filter(r=>needed(graph,r));
     const eligibleIds=new Set([...facultyById.values()].filter(eligible).map(p=>p.id));
     const assessed=new Set(graph.people.map(p=>p.person_id));
     const byPerson=new Map([...assessed].map(id=>[id,graph.edges.filter(e=>e.person_id===id&&useful(e)&&eligibleIds.has(id))]));
@@ -116,7 +130,10 @@
         return {profile,evidence,roles:[],relevantTerms:claim?[claim]:[]};
       });
       const covered=roleSet(state.selectedIds);
-      const roles=graph.roles.map(r=>({id:r.id,label:r.label,required:r.required,rationale:'Model-assessed planning contribution; coverage remains unconfirmed.',
+      const roles=requiredRoles.map(r=>({id:r.id,label:r.label,required:r.required,rationale:typed(graph)
+        ?r.kind==='sponsor_requirement'?'Model-interpreted scientific source constraint; applicability and coverage remain unconfirmed.'
+          :'Planning contribution for the selected approach, not a sponsor-mandated role; coverage remains unconfirmed.'
+        :'Model-assessed planning contribution; coverage remains unconfirmed.',
         coverage:'adjacent',filled:false,directEvidence:false,selected_candidate_ids:[],
         selected_alternative_ids:state.selectedIds.filter(id=>(byPerson.get(id)||[]).some(e=>e.role_id===r.id)),source_url:safeUrl(scope.source_url)}));
       selected.forEach(p=>{p.roles=roles.filter(r=>r.selected_alternative_ids.includes(p.profile.id));});
@@ -126,7 +143,8 @@
           marginal:roleSet([...state.selectedIds,profile.id]).size-covered.size}))
         .sort((a,b)=>Number(pool.includes(b.profile.id))-Number(pool.includes(a.profile.id))||b.marginal-a.marginal||cmp(a.profile.id,b.profile.id));
       return {opportunity:{...scope,objective:graph.objective,roles,members:selected.map(m=>m.evidence),gate_state:validAutomatic(state.selectedIds)?'conditional':'fail',
-          why_team:selected.map(m=>m.evidence.why_person).join(' '),missing_skills:graph.roles.filter(r=>!covered.has(r.id)).map(r=>r.label)},
+          why_team:(typed(graph)?'Selected scientific approach: '+graph.approach+'. '+(graph.limitations||[]).map(s=>'Scope limitation: '+s).join(' ')+' ':'')+selected.map(m=>m.evidence.why_person).join(' '),
+          missing_skills:requiredRoles.filter(r=>!covered.has(r.id)).map(r=>r.label)},
         selected,selectedIds:state.selectedIds.slice(),excludedIds:state.excludedIds.slice(),roles,
         unfilledRoles:roles.filter(r=>!covered.has(r.id)),complete:false,replacements,prepared:true,
         matched_people_count:pool.length,assessed_people_count:assessed.size,unassessed_people_count:eligibleIds.size-[...assessed].filter(id=>eligibleIds.has(id)).length,

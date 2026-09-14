@@ -67,9 +67,9 @@ def packet(scope,graph,selection,kind,config,*,projection_only=False):
     return op,body,validator(questions,schema)
 
 
-def validator(questions,schema):
+def validator(questions,schema,maximum_bytes=OWNED_RESPONSE_CONTRACT['max_response_bytes']):
     def check(value,cached):
-        if len(encoded(value))>OWNED_RESPONSE_CONTRACT['max_response_bytes']:raise ValueError('phase2_complete_check_response_too_large')
+        if len(encoded(value))>maximum_bytes:raise ValueError('phase2_complete_check_response_too_large')
         if cached:
             rows=value.get('verdicts') if isinstance(value,dict) else None
             if not isinstance(rows,list) or len(rows)!=len(questions) or len({r['item_id'] for r in rows})!=len(rows):

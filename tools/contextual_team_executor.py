@@ -72,6 +72,15 @@ class Runner:
     def graph_metadata(self,graph):
         return graph
 
+    def retrieval_roles(self,interpretation):
+        return interpretation['roles']
+
+    def request_provider(self,purpose,body):
+        return 'voyage' if purpose in ('cb-documents','cb-query','cb-p2-query') else 'anthropic'
+
+    def request_usage(self,provider,payload,model):
+        return existing.usage_cost('embeddings' if provider=='voyage' else 'development-judge',payload,model)
+
     def reservation_cost(self,purpose,body,metadata):
         if purpose in ('cb-documents','cb-query'):
             bound=len(encoded(body))+1024
@@ -87,7 +96,7 @@ class Runner:
 
     def request(self,purpose,logical,body,check,*,row_inputs=(),ceiling=None,repair_metadata=None):
         if time.monotonic()>self.deadline:raise Deferred('contextual_finite_job_deadline')
-        provider='voyage' if purpose in ('cb-documents','cb-query','cb-p2-query') else 'anthropic'
+        provider=self.request_provider(purpose,body)
         key=identity([AUTHORIZATION_ID,'contextual-v1',logical])
         body_id=identity(body);cache=self.state/'cache'/(key+'.json')
         rows=[r for r in self.ledger.read()['requests'] if r['key']==key]
@@ -108,26 +117,27 @@ class Runner:
             return value
         if cache.exists():raise RecoveryRequired('contextual_orphan_result_requires_recovery')
         if self.has_unknown_request():raise RecoveryRequired('contextual_outstanding_request_requires_recovery')
-        secret=os.environ.get('VOYAGE_API_KEY' if provider=='voyage' else 'ANTHROPIC_API_KEY')
+        secret=os.environ.get({'voyage':'VOYAGE_API_KEY','anthropic':'ANTHROPIC_API_KEY','openai':'OPENAI_API_KEY'}[provider])
         if not secret:raise ConfigurationFailure('contextual_provider_credential_missing')
         bound,amount,sizing_metadata=self.reservation_cost(purpose,body,repair_metadata or {})
         if ceiling is not None and bound>ceiling:raise Deferred('contextual_complete_packet_bound_no_truncation')
         token=self.ledger.reserve_experiment(provider,body['model'],2,key,amount,1,trusted_route=True,
-            input_tokens=bound,output_tokens=body.get('max_tokens',0),
+            input_tokens=bound,output_tokens=body.get('max_tokens',body.get('max_output_tokens',0)),
             execution_metadata={'packet_sha256':INPUT_SHA,'body_sha256':body_id,'purpose':purpose,
                 'code_sha':os.environ['GITHUB_SHA'],'row_inputs':list(row_inputs),'judge_items':[],
                 'execution_capacity':CAPACITY_VERSION,**(repair_metadata or {}),**sizing_metadata})
         receipt={'key':key,'request_id':token,'purpose':purpose,'body_sha256':body_id,
                  'reserved_microusd':amount,'status':'reserved_unknown','code_sha':os.environ['GITHUB_SHA'],
-                 'execution_capacity':CAPACITY_VERSION,'output_token_ceiling':body.get('max_tokens',0),
+                 'execution_capacity':CAPACITY_VERSION,'output_token_ceiling':body.get('max_tokens',body.get('max_output_tokens',0)),
                  **(repair_metadata or {}),**sizing_metadata}
         started=time.monotonic()
         self.crash('after_reserve')
         try:
             existing.checkpoint(self.state);self.crash('after_reservation_checkpoint')
             headers={'Content-Type':'application/json','User-Agent':'FundingFinder-ContextualValidation/1.0'}
-            url='https://api.voyageai.com/v1/embeddings' if provider=='voyage' else 'https://api.anthropic.com/v1/messages'
-            headers.update({'Authorization':'Bearer '+secret} if provider=='voyage' else
+            url={'voyage':'https://api.voyageai.com/v1/embeddings','anthropic':'https://api.anthropic.com/v1/messages',
+                 'openai':'https://api.openai.com/v1/responses'}[provider]
+            headers.update({'Authorization':'Bearer '+secret} if provider in ('voyage','openai') else
                            {'x-api-key':secret,'anthropic-version':'2023-06-01'})
             # Permit completion of the fixed larger output without an unbounded
             # request or a transport timeout that could conceal metered usage.
@@ -137,8 +147,8 @@ class Runner:
             self.crash('after_dispatch')
             receipt['http_status']=response.status_code
             payload=json.loads(existing.bounded_response(response,existing.PACKET_LIMIT))
-            if provider=='anthropic':receipt['provider_stop_reason']=stop_reason(payload)
-            usage,charge=existing.usage_cost('embeddings' if provider=='voyage' else 'development-judge',payload,body['model'])
+            if provider!='voyage':receipt['provider_stop_reason']=stop_reason(payload)
+            usage,charge=self.request_usage(provider,payload,body['model'])
             receipt.update(usage=usage,charged_microusd=charge)
             if provider=='anthropic' and usage.get('cache_creation_input_tokens',0):
                 raise ValueError('unexpected_provider_cache_creation_accounted_failure')
@@ -235,7 +245,7 @@ class Runner:
         documents=self.configuration['documents'];vectors=[]
         for start in range(0,len(documents),80):vectors.extend(self.vectors(documents[start:start+80],'document'))
         queries=[]
-        for role in interpretation['roles']:
+        for role in self.retrieval_roles(interpretation):
             text='\n'.join([interpretation['objective'],role['label'],role['quote']])
             queries.append({'input_id':identity({'space':self.configuration['space'],'input_type':'query','text':text}),'text':text})
         query_vectors=self.vectors(queries,'query',scope)
@@ -315,11 +325,20 @@ def prepare(state,reservation,job_path):
     if configuration.get('phase2'):
         from tools.contextual_team_phase2 import ensure_remaining_plan_fits
         ensure_remaining_plan_fits(ledger.read())
+    if configuration.get('latency'):
+        from tools.contextual_team_latency_policy import history, remaining_fits
+        from tools.contextual_team_latency import LatencyRunner
+        history(ledger.read());remaining_fits(ledger.read())
+        route=LatencyRunner(state,configuration).selected_route()
+        with open(os.environ['GITHUB_OUTPUT'],'a') as stream:
+            stream.write('text_provider='+('openai' if route=='L' else 'anthropic')+'\n')
     atomic_json(reservation,{'authorization_id':AUTHORIZATION_ID,'run_id':os.environ['GITHUB_RUN_ID'],
         'attempt':os.environ['GITHUB_RUN_ATTEMPT'],'code_sha':os.environ['GITHUB_SHA'],
         'job_id':job['job_id'],'input_sha256':INPUT_SHA,'prior_ledger_sha256':existing.sha(ledger.path.read_bytes()),
         'maximum_logical_spend_usd':10,
-        **({'phase2_release':configuration['phase2']['release_id'],'phase2_maximum_new_microusd':2_500_000,
+        **({'latency_lock':configuration['latency']['release_id'],'maximum_new_microusd':1_500_000,
+            'maximum_new_attempts':8,'preserved_microusd':1_267_862,'preserved_attempts':2} if configuration.get('latency') else
+           {'phase2_release':configuration['phase2']['release_id'],'phase2_maximum_new_microusd':2_500_000,
             'phase2_maximum_new_attempts':18,'preserved_microusd':1_678_020,'preserved_attempts':10} if configuration.get('phase2') else
            {'option1_release':configuration['option1']['release_id'],'option1_task_maximum_usd':1.5,'option1_attempts_maximum':16,
             'preserved_microusd':3004098,'preserved_attempts':21} if configuration.get('option1') else
@@ -338,7 +357,8 @@ def main():
     if args.action=='prepare':prepare(args.state,args.reservation,args.job);return
     scope=resolve_job(config,job)
     from tools.contextual_team_phase2 import Phase2Runner
-    runner=(Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
+    from tools.contextual_team_latency import LatencyRunner
+    runner=(LatencyRunner if config.get('latency') else Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
     try:
         result=runner.run_scope(scope,job['person_id'] or None) if os.environ.get('CONTEXTUAL_ACTION_CURRENT')=='true' else {'state':'action_blocked','scope_id':scope['id']}
     except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,OSError,requests.RequestException,Refusal) as error:
