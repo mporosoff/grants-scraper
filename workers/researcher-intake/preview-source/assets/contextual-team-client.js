@@ -79,12 +79,14 @@
             // unauthenticated preflight bypass or credential export is needed.
             value=await read(ENDPOINT+'/jobs',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(ids)},fetcher);
           }
-          for(let count=0;['dispatch_claimed','in_progress'].includes(value.state)&&count<120;count++){
+          for(let count=0;['dispatch_claimed','in_progress'].includes(value.state)&&count<168;count++){
             // Polls are reads only. A closed panel abandons display, not the
             // paid server job; a later visitor can retrieve its completion.
             if(options.signal?.aborted)throw Error('contextual_cancelled');
             options.onStatus?.(value.state);
-            await (options.wait||((ms)=>new Promise(resolve=>setTimeout(resolve,ms))))(5000);
+            // One-second delivery checks during the 60-second proof window;
+            // then back off. The previous ten-minute total wait remains bounded.
+            await (options.wait||((ms)=>new Promise(resolve=>setTimeout(resolve,ms))))(count<60?1000:5000);
             value=await read(ENDPOINT+'/jobs?'+new URLSearchParams(ids),{},fetcher);
           }
           assert(value.release_id===index.release_id&&(!value.scope_id||value.scope_id===scope.id),'contextual_response_version_conflict');

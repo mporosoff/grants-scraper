@@ -47,6 +47,7 @@ jobs:
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
+          cache: pip
       - run: python -m pip install -r requirements.txt
       - name: Validate public packet and restore the single authoritative ledger
         id: prepare
@@ -116,7 +117,8 @@ jobs:
       - name: Execute the bounded contextual scientific job
         if: steps.contextual_prepare.outcome == 'success'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ steps.contextual_prepare.outputs.text_provider != 'openai' && secrets.ANTHROPIC_API_KEY || '' }}
+          OPENAI_API_KEY: ${{ steps.contextual_prepare.outputs.text_provider == 'openai' && secrets.OPENAI_API_KEY || '' }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
         run: >-
@@ -126,7 +128,8 @@ jobs:
       - name: Execute the single bounded independent check
         if: steps.contextual_check_prepare.outcome == 'success'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ steps.contextual_check_prepare.outputs.text_provider != 'openai' && steps.contextual_check_prepare.outputs.text_provider != 'none' && secrets.ANTHROPIC_API_KEY || '' }}
+          OPENAI_API_KEY: ${{ steps.contextual_check_prepare.outputs.text_provider == 'openai' && secrets.OPENAI_API_KEY || '' }}
           CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
         run: >-
           python -m tools.contextual_team_check execute

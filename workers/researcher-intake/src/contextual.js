@@ -5,6 +5,7 @@ import option1 from '../../../config/contextual_team/option1-v1.json' with {type
 import phase2 from '../../../config/contextual_team/phase2-v1.json' with {type:'json'};
 import phase2Sources from '../../../config/contextual_team/phase2-source-inputs-v2.json' with {type:'json'};
 import capacity from '../../../config/contextual_team/phase2-output-capacity-v2.json' with {type:'json'};
+import latency from '../../../config/contextual_team/requirements-latency-v1.json' with {type:'json'};
 import {previewResponse} from './contextual-preview.js';
 import {CONSOLE_HTML,CONSOLE_JS} from './contextual-console.js';
 import {ACCESS_HTML,ACCESS_JS} from './contextual-access.js';
@@ -13,8 +14,8 @@ import '../../../assets/search-query.js';
 import '../../../assets/search-retrieval.js';
 
 const RELEASE=option1.release_id;
-const allowedRelease=id=>id===RELEASE||id===inputs.snapshot_id||id===phase2.release_id;
-const releaseScopes=id=>id===phase2.release_id?phase2Sources.scopes:inputs.scopes;
+const allowedRelease=id=>id===RELEASE||id===inputs.snapshot_id||id===phase2.release_id||id===latency.release_id;
+const releaseScopes=id=>id===latency.release_id?phase2Sources.scopes.filter(s=>s.id===latency.workflow_scope):id===phase2.release_id?phase2Sources.scopes:inputs.scopes;
 const VALIDATION_ORIGIN='http://127.0.0.1:8876';
 const WORKFLOW='.github/workflows/team-recommender-offline.yml';
 const states=new Set(['ready','ready_with_gaps','no_supported_group_in_assessed_set','needs_scope_selection',
@@ -63,7 +64,7 @@ export class ContextualStore {
       AND (SELECT count(*) FROM contextual_validation_jobs WHERE release_id=?)<?
       AND (?='' OR NOT EXISTS (SELECT 1 FROM contextual_validation_jobs WHERE release_id=? AND person_id<>''))
       ON CONFLICT(job_id) DO NOTHING`).bind(job.job_id,job.release_id,job.scope_id,job.person_id,now,now,job.release_id,
-        job.release_id===phase2.release_id?4:3,job.person_id,job.release_id).run();
+        job.release_id===latency.release_id?1:job.release_id===phase2.release_id?4:3,job.person_id,job.release_id).run();
     return Number(result.meta?.changes||0)===1;
   }
   async start(id,run,sha,now){
@@ -120,12 +121,17 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
           scopes:inputs.scopes.filter(s=>option1.scopes.some(v=>v.id===s.id)).map(s=>({id:s.id,parent_id:s.parent_id,title:s.science.title,state:current(s,now())?s.state:'action_blocked'}))});
       const store=storeFactory(env);
       if(path==='/admin/api/contextual/controls'&&['GET','POST'].includes(request.method)){
+        const controlRelease=url.searchParams.get('release_id')||phase2.release_id;
+        if(![phase2.release_id,latency.release_id].includes(controlRelease))fail('contextual_control_release_conflict',409);
         if(request.method==='POST'){
           const value=await body(request);
           if(Object.keys(value).sort().join(',')!=='cached_enabled,new_paid_enabled'||
             typeof value.cached_enabled!=='boolean'||typeof value.new_paid_enabled!=='boolean')fail('contextual_invalid_control');
-          await store.setControls(phase2.release_id,value,now().toISOString());
+          await store.setControls(controlRelease,value,now().toISOString());
         }
+        if(controlRelease===latency.release_id)return json(200,{release_id:controlRelease,...await store.controls(controlRelease),
+          maximum_workflows:1,maximum_concurrency:1,expansion_enabled:false,maximum_phase_microusd:1500000,
+          maximum_phase_attempts:8,public_activation:false});
         return json(200,{release_id:phase2.release_id,...await store.controls(phase2.release_id),
           maximum_workflows:4,maximum_daily_workflows:4,normal_workflows:3,named_corrective_workflows:1,maximum_concurrency:1,expansion_enabled:false,
           maximum_phase_microusd:phase2.maximum_new_microusd,maximum_phase_attempts:phase2.maximum_new_attempts,public_activation:false});
@@ -160,7 +166,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if(path!=='/admin/api/contextual/jobs'||!['GET','POST'].includes(request.method))fail('contextual_not_found',404);
       const value=request.method==='POST'?await body(request):Object.fromEntries(url.searchParams);
       if(Object.keys(value).sort().join(',')!=='person_id,release_id,scope_id'||!allowedRelease(value.release_id))fail('contextual_version_conflict',409);
-      const scope=releaseScopes(value.release_id).find(s=>s.id===value.scope_id),p2=value.release_id===phase2.release_id;
+      const scope=releaseScopes(value.release_id).find(s=>s.id===value.scope_id),p2=value.release_id===phase2.release_id,lr=value.release_id===latency.release_id;
       if(!scope||typeof value.person_id!=='string'||value.person_id&&!inputs.people.some(p=>p.person_id===value.person_id))fail('contextual_unapproved_identity');
       const job={...value,job_id:await hash([value.release_id,value.scope_id,value.person_id])};
       let row=await store.byId(job.job_id);
@@ -175,14 +181,14 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
           job.job_id=capacity.repair_job_id;row=await store.byId(job.job_id);
         }
       }
-      const controls=p2?await store.controls(value.release_id):null;
+      const controls=p2||lr?await store.controls(value.release_id):null;
       if(controls&&!controls.cached_enabled)return json(503,{state:'failed',error:'contextual_cached_serving_disabled'});
       if(request.method==='GET'||row)return json(200,publicJob(row,scope,now(),value.release_id));
       if(!current(scope,now())||scope.state!=='unassessed')return json(200,publicJob(null,scope,now(),value.release_id));
-      if(p2&&(value.person_id||!controls.new_paid_enabled))fail(value.person_id?'phase2_expansion_not_authorized':'contextual_new_paid_work_disabled',403);
-      if(!p2&&(value.release_id!==RELEASE||!option1.scopes.some(s=>s.id===scope.id)||
+      if((p2||lr)&&(value.person_id||!controls.new_paid_enabled))fail(value.person_id?'phase2_expansion_not_authorized':'contextual_new_paid_work_disabled',403);
+      if(!p2&&!lr&&(value.release_id!==RELEASE||!option1.scopes.some(s=>s.id===scope.id)||
         (value.person_id&&(scope.id!=='332894'||value.person_id!==option1.extension.person_id))))fail('outside_option1_paid_inventory',403);
-      const firstScope=p2?phase2.first_scope_id:option1.scopes[0].id;
+      const firstScope=lr?latency.workflow_scope:p2?phase2.first_scope_id:option1.scopes[0].id;
       if(scope.id!==firstScope||value.person_id){
         const first=await store.byId(await hash([value.release_id,firstScope,'']));
         const completed=first?.result_json?JSON.parse(first.result_json).result:null;
