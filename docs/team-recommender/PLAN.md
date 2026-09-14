@@ -666,3 +666,40 @@ All117 configured local browser/E2E/accessibility tests passed on unchanged
 browser bytes; actual resource/real-graph evidence and release inventory
 closeout remain separate. Continue the same Phase2 sequence. No Phase1
 rejudging, scientific retuning, new human packet, public activation or Stage4.
+
+
+### Phase 2 completed finite execution — September 14, 2026 UTC
+
+This current status supersedes the earlier intermediate checkpoints without
+erasing their failures or receipts. The resumed persistence repair and all narrow
+prerequisites passed exact-head review/CI and protected-merged. Restricted helper
+merge `2e7729b690815730aa0d78b71d4919c8835cd9a8` serves verified version
+`76cf37ec-1870-4019-af80-06de2b2461a2`; product code checkpoint is
+`3f39db91fc17b5a6397181032779e431d4abb8e5` before this report-only commit.
+
+All three locked calls completed via normal browser Build, including the single
+linked Math output-limit correction with exact earlier-stage reuse. The five fixed
+output-check requests returned22/22: ten strong and six plausible relevance/group
+grades, six faithful explanations. No new human answers or packet. No scientific
+retuning. All117 configured browser/E2E/accessibility tests passed; real graph
+fixtures and sampled memory/edit measurements are separately recorded.
+
+Cloud owner34795980969 is authoritative: cumulative$7.232138/680 attempts,
+zero outstanding, Phase2$1.410158/18; remaining$2.767862/10. The required reserve
+is intact, but all Phase2 request authority and its one corrective allowance are
+used. Do not dispatch more Phase2 provider requests. No allowance is reset.
+
+Original50/150 proposals preserve all reservations:48/141 current routable
+unassessed,1/2 action-blocked,1/7 needing scope selection. These real local packages
+are not activated and their proposed backend release IDs are not yet registered.
+The full [Phase2 report](reports/phase-2-cold-demand-and-release-readiness.md)
+records all verdicts, currentness, costs, deployment/test identities and limits.
+The previous blocked report is preserved as
+`reports/phase-2-initial-persistence-checkpoint.md`.
+
+Disposition: IMPLEMENTED, WITH A SPECIFIC SCIENTIFIC OR OPERATIONAL CONCERN
+REQUIRING AN OWNER DECISION. The restricted workflow works, but population quality
+is unestablished; source/transfer/role limitations and broader release-manifest/
+per-client/day controls remain explicit. Stage4, public application/registry
+release, new paid work, human packets and scientific campaigns are not authorized.
+Phase1 remains CLOSED. STOP FOR USER REVIEW.

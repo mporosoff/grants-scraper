@@ -1,0 +1,284 @@
+{
+  "version": "phase2-real-resource-and-regression-v1",
+  "browser": [
+    {
+      "scope_id": "363302:a-1",
+      "graph_id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41",
+      "state": "ready_with_gaps",
+      "bundle_id": "f5986a177d6d9f5af076a3e087a78293c369719edb5b8b95a7a6b4b0c37618c2",
+      "graph_raw_bytes": 16414,
+      "graph_gzip_bytes": 5320,
+      "cached_build_render_ms": 110.50419999999986,
+      "option_ms": 24.122200000000248,
+      "remove_readd_ms": 84.09889999999996,
+      "options": 4,
+      "option_ids": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "selected": [
+        "urh-000014",
+        "urh-000150"
+      ],
+      "reachable": 158,
+      "startup_team_requests": [
+        {
+          "path": "/admin/contextual/preview/data/opportunity_team_index.js",
+          "method": "GET"
+        }
+      ],
+      "eager_routing_metadata_bytes": 8340,
+      "prepared_gets": 1,
+      "prepared_posts": 0,
+      "external_provider_requests": 0,
+      "memory_before": {
+        "usedSize": 69020864,
+        "totalSize": 141160448,
+        "embedderHeapUsedSize": 2346560,
+        "backingStorageSize": 19848218,
+        "conservative_owned_bytes": 91215642
+      },
+      "memory_after": {
+        "usedSize": 101810812,
+        "totalSize": 150990848,
+        "embedderHeapUsedSize": 11669320,
+        "backingStorageSize": 18766452,
+        "conservative_owned_bytes": 132246584
+      },
+      "memory_peak_conservative_bytes": 132246584,
+      "incremental_peak_bytes": 41030942,
+      "incremental_48mib": true,
+      "memory_samples": 7,
+      "forced_gc": false,
+      "heap_target_note": "50ms samples include JS used heap, embedder heap and backing storage; sampled peaks may miss shorter spikes.",
+      "page_errors": [],
+      "measurement_environment": "Headless local Chromium, exact restricted assets and genuine cached graph fulfilled locally; not live download or physical-device latency",
+      "private_receipt_sha256": "906a74fe1339a21e10539fc336059c11e40a52009650e48ab1f100ba178805cf"
+    },
+    {
+      "scope_id": "341997",
+      "graph_id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76",
+      "state": "ready",
+      "bundle_id": "f5986a177d6d9f5af076a3e087a78293c369719edb5b8b95a7a6b4b0c37618c2",
+      "graph_raw_bytes": 12463,
+      "graph_gzip_bytes": 4022,
+      "cached_build_render_ms": 81.63040000000001,
+      "option_ms": 30.456500000000233,
+      "remove_readd_ms": 82.47400000000016,
+      "options": 8,
+      "option_ids": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "selected": [
+        "urh-000007",
+        "urh-000037"
+      ],
+      "reachable": 158,
+      "startup_team_requests": [
+        {
+          "path": "/admin/contextual/preview/data/opportunity_team_index.js",
+          "method": "GET"
+        }
+      ],
+      "eager_routing_metadata_bytes": 8340,
+      "prepared_gets": 1,
+      "prepared_posts": 0,
+      "external_provider_requests": 0,
+      "memory_before": {
+        "usedSize": 66830936,
+        "totalSize": 138014720,
+        "embedderHeapUsedSize": 2747176,
+        "backingStorageSize": 19848305,
+        "conservative_owned_bytes": 89426417
+      },
+      "memory_after": {
+        "usedSize": 98926140,
+        "totalSize": 149716992,
+        "embedderHeapUsedSize": 11712928,
+        "backingStorageSize": 18755222,
+        "conservative_owned_bytes": 129394290
+      },
+      "memory_peak_conservative_bytes": 129394290,
+      "incremental_peak_bytes": 39967873,
+      "incremental_48mib": true,
+      "memory_samples": 6,
+      "forced_gc": false,
+      "heap_target_note": "50ms samples include JS used heap, embedder heap and backing storage; sampled peaks may miss shorter spikes.",
+      "page_errors": [],
+      "measurement_environment": "Headless local Chromium, exact restricted assets and genuine cached graph fulfilled locally; not live download or physical-device latency",
+      "private_receipt_sha256": "4225b41f1964b58fcb120425e456f56ea74e6daf2ef01a40fe7fee86e66a0074"
+    },
+    {
+      "scope_id": "351715",
+      "graph_id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0",
+      "state": "ready",
+      "bundle_id": "f5986a177d6d9f5af076a3e087a78293c369719edb5b8b95a7a6b4b0c37618c2",
+      "graph_raw_bytes": 10236,
+      "graph_gzip_bytes": 3726,
+      "cached_build_render_ms": 76.94410000000016,
+      "option_ms": 29.847999999999956,
+      "remove_readd_ms": 84.02410000000009,
+      "options": 8,
+      "option_ids": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "selected": [
+        "urh-000003",
+        "urh-000033"
+      ],
+      "reachable": 158,
+      "startup_team_requests": [
+        {
+          "path": "/admin/contextual/preview/data/opportunity_team_index.js",
+          "method": "GET"
+        }
+      ],
+      "eager_routing_metadata_bytes": 8340,
+      "prepared_gets": 1,
+      "prepared_posts": 0,
+      "external_provider_requests": 0,
+      "memory_before": {
+        "usedSize": 71268628,
+        "totalSize": 145616896,
+        "embedderHeapUsedSize": 2793344,
+        "backingStorageSize": 19848862,
+        "conservative_owned_bytes": 93910834
+      },
+      "memory_after": {
+        "usedSize": 103627284,
+        "totalSize": 155447296,
+        "embedderHeapUsedSize": 11838336,
+        "backingStorageSize": 18752080,
+        "conservative_owned_bytes": 134217700
+      },
+      "memory_peak_conservative_bytes": 134217700,
+      "incremental_peak_bytes": 40306866,
+      "incremental_48mib": true,
+      "memory_samples": 6,
+      "forced_gc": false,
+      "heap_target_note": "50ms samples include JS used heap, embedder heap and backing storage; sampled peaks may miss shorter spikes.",
+      "page_errors": [],
+      "measurement_environment": "Headless local Chromium, exact restricted assets and genuine cached graph fulfilled locally; not live download or physical-device latency",
+      "private_receipt_sha256": "acd7242d0838be8bbf4dab247125144a3aa185d5444b2843ec8dbe02c693e30d"
+    }
+  ],
+  "numerical": [
+    {
+      "scope_id": "351715",
+      "graph_id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0",
+      "clock": "2026-09-14T01:19:04.596Z",
+      "names": [
+        "Adam Sefkow",
+        "David R. Harding"
+      ],
+      "hydrate_ms": 28.817700000000002,
+      "compose_ms": 2.585300000000018,
+      "edit_ms": 0.6846000000000458,
+      "edge_count": 8,
+      "missing_contributions": [],
+      "stable_option_order": true,
+      "candidate_reachability": 158,
+      "retired_claim_rejection": true,
+      "sibling_rejection": true,
+      "whole_pool_invalidation": true,
+      "stale_selection_rejection": true,
+      "successive_action_currentness": "expiry rejected",
+      "manual_four_slots_unconfirmed": true,
+      "provider_calls": 0,
+      "environment": "local Node exact real graphs; fixture mutations isolated; no semantic quality claim"
+    },
+    {
+      "scope_id": "341997",
+      "graph_id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76",
+      "clock": "2026-09-14T01:19:04.596Z",
+      "names": [
+        "Allison J. Lopatkin",
+        "Douglas H. Kelley"
+      ],
+      "hydrate_ms": 19.611800000000017,
+      "compose_ms": 1.305499999999995,
+      "edit_ms": 0.5104999999999791,
+      "edge_count": 12,
+      "missing_contributions": [],
+      "stable_option_order": true,
+      "candidate_reachability": 158,
+      "retired_claim_rejection": true,
+      "sibling_rejection": true,
+      "whole_pool_invalidation": true,
+      "stale_selection_rejection": true,
+      "successive_action_currentness": "rolling remains supported",
+      "manual_four_slots_unconfirmed": true,
+      "provider_calls": 0,
+      "environment": "local Node exact real graphs; fixture mutations isolated; no semantic quality claim"
+    },
+    {
+      "scope_id": "363302:a-1",
+      "graph_id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41",
+      "clock": "2026-09-14T01:19:04.596Z",
+      "names": [
+        "Astrid M. Müller",
+        "Yasemin Basdogan"
+      ],
+      "hydrate_ms": 18.43149999999997,
+      "compose_ms": 1.8004000000000246,
+      "edit_ms": 0.4749999999999659,
+      "edge_count": 14,
+      "missing_contributions": [
+        "Comparative performance benchmarking against industrial baseline catalysts/processes using defined metrics",
+        "Technology maturation planning, techno-economic analysis, and Adoption Readiness Level assessment for commercialization pathway"
+      ],
+      "stable_option_order": true,
+      "candidate_reachability": 158,
+      "retired_claim_rejection": true,
+      "sibling_rejection": true,
+      "whole_pool_invalidation": true,
+      "stale_selection_rejection": true,
+      "successive_action_currentness": "expiry rejected",
+      "manual_four_slots_unconfirmed": true,
+      "provider_calls": 0,
+      "environment": "local Node exact real graphs; fixture mutations isolated; no semantic quality claim"
+    }
+  ],
+  "measurement_cautions": [
+    "Small local Chromium/Node observations, not population p95 or physical-device measurements.",
+    "Sampled memory includes used JS heap, embedder heap and backing storage without forced GC; shorter spikes may be missed.",
+    "8,340 bytes of routing metadata load eagerly, but no graph, team or contextual paid request loads during search startup."
+  ],
+  "live_edits": {
+    "DOE": {
+      "before_network_rows": 69,
+      "after_network_rows": 69
+    },
+    "ECLIPSE": {
+      "before_network_rows": 198,
+      "after_network_rows": 198
+    }
+  },
+  "full_suite": {
+    "tests": 117,
+    "passed": 117,
+    "failed": 0,
+    "skipped": 0,
+    "flaky": 0,
+    "seconds": 467.002128,
+    "runtime_product_sha": "b2d5412e2488725bed8b9da69f663f407a55c409",
+    "report_sha256": "ba906d0487e7955f5782b02607e2d40c9122737d1fdd25e5215543b3a9c4c0d0",
+    "scope": "configured local browser/E2E/accessibility suite; real live and resource evidence separately required"
+  }
+}

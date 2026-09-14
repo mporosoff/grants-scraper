@@ -1,0 +1,218 @@
+{
+  "version": "phase2-real-graph-summary-v1",
+  "graphs": [
+    {
+      "scope_id": "351715",
+      "graph_id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0",
+      "graph_cache_sha256": "6bbcc3c2b20d84f03471ed83d5811647a33d18953b07ca2101512b2bd6631095",
+      "state": "ready",
+      "assessed_count": 12,
+      "unassessed_eligible_count": 143,
+      "assessed_outcomes": {
+        "supported": 7,
+        "insufficient_information": 4,
+        "adjacent": 1
+      },
+      "contribution_count": 2,
+      "edge_count": 8,
+      "options": [
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000003+urh-000033",
+          "people": [
+            "urh-000003",
+            "urh-000033"
+          ]
+        },
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000003+urh-000049",
+          "people": [
+            "urh-000003",
+            "urh-000049"
+          ]
+        },
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000003+urh-000153",
+          "people": [
+            "urh-000003",
+            "urh-000153"
+          ]
+        },
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000027+urh-000033",
+          "people": [
+            "urh-000027",
+            "urh-000033"
+          ]
+        },
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000027+urh-000049",
+          "people": [
+            "urh-000027",
+            "urh-000049"
+          ]
+        },
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000027+urh-000153",
+          "people": [
+            "urh-000027",
+            "urh-000153"
+          ]
+        },
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000033+urh-000061",
+          "people": [
+            "urh-000033",
+            "urh-000061"
+          ]
+        },
+        {
+          "id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0:urh-000033+urh-000078",
+          "people": [
+            "urh-000033",
+            "urh-000078"
+          ]
+        }
+      ],
+      "primary_names": [
+        "Adam Sefkow",
+        "David R. Harding"
+      ],
+      "missing_contributions": []
+    },
+    {
+      "scope_id": "341997",
+      "graph_id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76",
+      "graph_cache_sha256": "b6f1a48f8343cb467596072caedc7e7961e6fc986308c9cf43bec71dfe0dbfd8",
+      "state": "ready",
+      "assessed_count": 12,
+      "unassessed_eligible_count": 143,
+      "assessed_outcomes": {
+        "supported": 4,
+        "insufficient_information": 6,
+        "credible_transfer": 2
+      },
+      "contribution_count": 3,
+      "edge_count": 12,
+      "options": [
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000007+urh-000037",
+          "people": [
+            "urh-000007",
+            "urh-000037"
+          ]
+        },
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000007+urh-000070",
+          "people": [
+            "urh-000007",
+            "urh-000070"
+          ]
+        },
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000007+urh-000083",
+          "people": [
+            "urh-000007",
+            "urh-000083"
+          ]
+        },
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000037+urh-000079",
+          "people": [
+            "urh-000037",
+            "urh-000079"
+          ]
+        },
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000037+urh-000083",
+          "people": [
+            "urh-000037",
+            "urh-000083"
+          ]
+        },
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000037+urh-000117",
+          "people": [
+            "urh-000037",
+            "urh-000117"
+          ]
+        },
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000070+urh-000079",
+          "people": [
+            "urh-000070",
+            "urh-000079"
+          ]
+        },
+        {
+          "id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76:urh-000070+urh-000083",
+          "people": [
+            "urh-000070",
+            "urh-000083"
+          ]
+        }
+      ],
+      "primary_names": [
+        "Allison J. Lopatkin",
+        "Douglas H. Kelley"
+      ],
+      "missing_contributions": []
+    },
+    {
+      "scope_id": "363302:a-1",
+      "graph_id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41",
+      "graph_cache_sha256": "3d919f29f276490116889de5614b2919a65344b7a727be27c32f61943423babf",
+      "state": "ready_with_gaps",
+      "assessed_count": 12,
+      "unassessed_eligible_count": 143,
+      "assessed_outcomes": {
+        "supported": 3,
+        "credible_transfer": 5,
+        "insufficient_information": 3,
+        "adjacent": 1
+      },
+      "contribution_count": 6,
+      "edge_count": 14,
+      "options": [
+        {
+          "id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41:urh-000014+urh-000150",
+          "people": [
+            "urh-000014",
+            "urh-000150"
+          ]
+        },
+        {
+          "id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41:urh-000020+urh-000092",
+          "people": [
+            "urh-000020",
+            "urh-000092"
+          ]
+        },
+        {
+          "id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41:urh-000044+urh-000150",
+          "people": [
+            "urh-000044",
+            "urh-000150"
+          ]
+        },
+        {
+          "id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41:urh-000092+urh-000150",
+          "people": [
+            "urh-000092",
+            "urh-000150"
+          ]
+        }
+      ],
+      "primary_names": [
+        "Astrid M. Müller",
+        "Yasemin Basdogan"
+      ],
+      "missing_contributions": [
+        "Comparative performance benchmarking against industrial baseline catalysts/processes using defined metrics",
+        "Technology maturation planning, techno-economic analysis, and Adoption Readiness Level assessment for commercialization pathway"
+      ]
+    }
+  ],
+  "eligible_directory": 155,
+  "canonical_directory": 158,
+  "saved_evaluation_groups_are_serving_inventory": false
+}

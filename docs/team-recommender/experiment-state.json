@@ -9324,7 +9324,7 @@
       "four_tasks_all_passed": false
     },
     "phase2": {
-      "status": "named_output_limit_repair_reviewed_ready_for_one_normal_build",
+      "status": "finite_phase2_execution_complete_owner_release_decision_required",
       "authority": "contextual-stage-b/PHASE2-COLD-DEMAND-AUTHORITY.md",
       "starting_product_sha": "c5d01706ebc8eea22afc25e83cc0b643e3b7c5f7",
       "starting_main_sha": "3ebe0466c202903b44c099d2b0803e2436f04e37",
@@ -9335,14 +9335,14 @@
       "maximum_new_attempts": 18,
       "minimum_remaining_microusd": 1678020,
       "minimum_remaining_attempts": 10,
-      "new_provider_attempts": 9,
-      "new_charge_microusd": 672268,
+      "new_provider_attempts": 18,
+      "new_charge_microusd": 1410158,
       "public_activation": false,
       "phase1_reopened": false,
       "packages": {
-        "A": "completed normal cold path and reviewed persistence repair",
-        "B": "DOE complete with eight answers; Mathematical Biology one mechanical repair locked; ECLIPSE not started",
-        "C": "117 configured tests pass; release/resource closeout continuing"
+        "A": "complete: reviewed ordinary cold path, persistence and restricted deployment",
+        "B": "complete finite execution: 3 graphs, one linked mechanical repair, 22/22 output verdicts, normal browser and cache/edit evidence",
+        "C": "local coherent proposals, original50/150 reconciliation, full suite and real resource checks complete; public manifest/control integration remains explicit release prerequisite"
       },
       "report": "docs/team-recommender/reports/phase-2-cold-demand-and-release-readiness.md",
       "helper_head": "5d9f4489e1223d72e0987906e1da93ffce11b7c1",
@@ -9351,11 +9351,11 @@
         "path": "docs/team-recommender/contextual-stage-b/phase2-review-checkpoint-v1.json",
         "sha256": "1ea59ce7ba755fe701ff219a277fc45074c13b2f53d1a69aa7ca9cdb7b97518b"
       },
-      "new_native_count_http_requests": 167,
-      "fresh_scopes_completed": 1,
-      "output_check_requests": 2,
-      "remaining_microusd": 3505752,
-      "remaining_attempts": 19,
+      "new_native_count_http_requests": 181,
+      "fresh_scopes_completed": 3,
+      "output_check_requests": 5,
+      "remaining_microusd": 2767862,
+      "remaining_attempts": 10,
       "full_e2e": {
         "tests": 117,
         "passed": 117,
@@ -9383,7 +9383,7 @@
         }
       ],
       "native_count_cache_reuse": 164,
-      "latest_owner_run": 34791671860,
+      "latest_owner_run": 34795980969,
       "execution_lock": "contextual-stage-b/phase2-execution-lock-v1.json",
       "release_id": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
       "preview_bundle_id": "f5986a177d6d9f5af076a3e087a78293c369719edb5b8b95a7a6b4b0c37618c2",
@@ -9418,12 +9418,55 @@
         {
           "superseded_status": "preview_encoding_reviewed_merged_restricted_redeployment_running",
           "superseded_owner_run": 34785915676
+        },
+        {
+          "superseded_status": "named_output_limit_repair_reviewed_ready_for_one_normal_build",
+          "owner_run": 34791671860,
+          "product_sha": "3f39db91fc17b5a6397181032779e431d4abb8e5",
+          "historical_lock": "contextual-stage-b/phase2-capacity-reviewed-lock-v2.json"
         }
       ],
-      "output_check_verdicts": 8,
+      "output_check_verdicts": 22,
       "capacity_lock": "contextual-stage-b/phase2-capacity-reviewed-lock-v2.json",
-      "corrective_attempts_used": 0,
-      "mathematical_biology": "completed output-limit failure, original charge preserved"
+      "corrective_attempts_used": 1,
+      "mathematical_biology": "completed linked mechanical correction; original failure and charge retained; interpretation/query reused",
+      "final_product_code_checkpoint": "3f39db91fc17b5a6397181032779e431d4abb8e5",
+      "cumulative_charge_microusd": 7232138,
+      "cumulative_attempts": 680,
+      "outstanding_microusd": 0,
+      "outstanding_requests": 0,
+      "new_human_items": 0,
+      "new_human_judgments": 0,
+      "disposition": "IMPLEMENTED, WITH A SPECIFIC SCIENTIFIC OR OPERATIONAL CONCERN REQUIRING AN OWNER DECISION",
+      "public_release_prerequisites": [
+        "owner decision on exploratory quality/source limitations",
+        "reviewed cohort-wide backend manifest registration",
+        "reviewed per-client/day/finite launch controls and public-origin connection",
+        "explicit bounded Stage4 approval"
+      ],
+      "no_further_phase2_paid_authority": true,
+      "receipts": {
+        "phase2-completed-accounting-v1.json": {
+          "path": "docs/team-recommender/contextual-stage-b/phase2-completed-accounting-v1.json",
+          "sha256": "fc735f3582a4709a387acd227197ea7bf96dc2ab01ce10e18017d4c9f2407543"
+        },
+        "phase2-output-check-verdicts-v1.json": {
+          "path": "docs/team-recommender/contextual-stage-b/phase2-output-check-verdicts-v1.json",
+          "sha256": "8ea8baec2566fac29efa2f85800ba4251d6cc03701a08243f049eb2ff521d159"
+        },
+        "phase2-real-graph-summary-v1.json": {
+          "path": "docs/team-recommender/contextual-stage-b/phase2-real-graph-summary-v1.json",
+          "sha256": "98b6899f7b7b0c6e6771bc5cfd3190142d295a7f7203af9de644b8aae200300a"
+        },
+        "phase2-real-resource-and-regression-v1.json": {
+          "path": "docs/team-recommender/contextual-stage-b/phase2-real-resource-and-regression-v1.json",
+          "sha256": "01d6a9d0729ffcd3954b4f3373cbe2a81071d780a558a2c035452405c2e07178"
+        },
+        "phase2-rollout-reconciliation-v1.json": {
+          "path": "docs/team-recommender/contextual-stage-b/phase2-rollout-reconciliation-v1.json",
+          "sha256": "51d8d0694916e2189966269b851152b5f6bd96254e76a44d8ead29a7f8fbfd41"
+        }
+      }
     }
   },
   "active_work": "phase2_cold_demand_and_restricted_release_readiness",

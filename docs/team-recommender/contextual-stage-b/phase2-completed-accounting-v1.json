@@ -1,0 +1,698 @@
+{
+  "version": "phase2-completed-accounting-v1",
+  "owner_run": 34795980969,
+  "artifact_id": 10329926662,
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "ledger_sha256": "2dc317f129c56127c59099518a78fab07db2e07dcabfc95a1e1f894cb9c53f46",
+  "checkpoint_sha256": "62e7fe884b64c7a267a70bed451be9eecfedc0116c95a31fe7b1d5a981011197",
+  "validated_checkpoint_files": 1345,
+  "cumulative_charge_microusd": 7232138,
+  "cumulative_attempts": 680,
+  "phase2_charge_microusd": 1410158,
+  "phase2_attempts": 18,
+  "outstanding_microusd": 0,
+  "outstanding_requests": 0,
+  "remaining_microusd": 2767862,
+  "remaining_attempts": 10,
+  "phase2_maximum_microusd": 2500000,
+  "phase2_maximum_attempts": 18,
+  "protected_minimum_microusd": 1678020,
+  "protected_minimum_attempts": 10,
+  "tokens": {
+    "prior": {
+      "input_tokens": 2058527,
+      "output_tokens": 169320,
+      "total_tokens": 121944
+    },
+    "phase2": {
+      "input_tokens": 229668,
+      "output_tokens": 95063,
+      "total_tokens": 1594
+    },
+    "cumulative": {
+      "input_tokens": 2288195,
+      "output_tokens": 264383,
+      "total_tokens": 123538
+    }
+  },
+  "free_native_count_http_rows": 181,
+  "free_native_count_statuses": {
+    "complete": 181
+  },
+  "metered_statuses": {
+    "valid": 17,
+    "failed": 1
+  },
+  "historical_reuse_is_budget_credit": false,
+  "corrective_reexecution_used": 1,
+  "remaining_corrective_authority": 0,
+  "requests": [
+    {
+      "body_sha256": "84f737f8381091692274aec9c58a5b11fb7fd9f0dddd655df371f72a92df16c1",
+      "charged_microusd": 49722,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "count_body_sha256": "626fcfe78adf212ef76ff680c37a985d63e5270c68e6c9027d289aaec6f7cfbd",
+      "elapsed_seconds": 28.793474,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "1eda0513e9c62cdc66951538c6045bde341f2ac1497cf2ae58dd1759846e5cb3",
+      "native_count_key": "626fcfe78adf212ef76ff680c37a985d63e5270c68e6c9027d289aaec6f7cfbd",
+      "native_input_tokens": 13106,
+      "output_token_ceiling": 8000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "363302:a-1:interpret",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-interpret",
+      "request_id": "fb028b0f76cf4e3e80f5bd467e59fa8f",
+      "reserved_microusd": 113504,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 13106,
+        "output_tokens": 2351,
+        "output_tokens_details": {
+          "thinking_tokens": 1281
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "7a380e5923e7f861896c9ec44ce01c10db90b58ff895c84a1cfe4a606c3511b5"
+    },
+    {
+      "body_sha256": "c4f49a80c8cd08a0aec78f6c679aee45f979378658b35bc70f9baed30ee5ff68",
+      "charged_microusd": 120,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "elapsed_seconds": 0.296141,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "071edbe140762ca125154c748261770771ca1427ee706766ffd604578add6675",
+      "output_token_ceiling": 0,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "363302:a-1:query",
+      "purpose": "cb-p2-query",
+      "request_id": "da0cabfadde14ad39a33cdb47dc9417b",
+      "reserved_microusd": 822,
+      "status": "valid",
+      "usage": {
+        "total_tokens": 995
+      },
+      "repair_of": null,
+      "receipt_sha256": "712e81419765bc576f18ba81059d12c63f82f270e568612d1918a8a89ddfd4b7"
+    },
+    {
+      "body_sha256": "e6df63323a4f15ce1d71aa26bc8451126a148f980f551f6f8d00b9d732268509",
+      "charged_microusd": 214830,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "count_body_sha256": "4c6562d55f1a8f50e1fe3a0d3987602c2946c6638a8e7dfe001e3b23766a2af1",
+      "elapsed_seconds": 198.964584,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "d6bbccd69235c5b7bc93e677fdba751045c5bfbffad6cfdb1c56178260f6d5a9",
+      "native_count_key": "4c6562d55f1a8f50e1fe3a0d3987602c2946c6638a8e7dfe001e3b23766a2af1",
+      "native_input_tokens": 27960,
+      "output_token_ceiling": 16000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "363302:a-1:assess",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-assess",
+      "request_id": "242cdfaeb4b848ccb00622894f4e9b33",
+      "reserved_microusd": 229152,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 27960,
+        "output_tokens": 15891,
+        "output_tokens_details": {
+          "thinking_tokens": 13374
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "7b42e2773c9dad51a0b875b943a3bec03eb6da836a40cbd379a1b658c5250efe"
+    },
+    {
+      "body_sha256": "fe95a0e0f1eedeb6eab34831e5faaf468b2b2ee79d11b809eaff6f295eee199a",
+      "charged_microusd": 129074,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "count_body_sha256": "3ed21b159d4c2c7a28331931d2164346a66d31b173029c0336404b32973c4d60",
+      "elapsed_seconds": 68.876385,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "97a2c02bb2971ce32cef1e4dc32f90198a778fae7603d4a50962e2ba06653d2a",
+      "native_count_key": "3ed21b159d4c2c7a28331931d2164346a66d31b173029c0336404b32973c4d60",
+      "native_input_tokens": 24732,
+      "output_token_ceiling": 24000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "363302:a-1:verify",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-verify",
+      "request_id": "0689a740cb584b76b15dfffb9b5e21d1",
+      "reserved_microusd": 301406,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 24732,
+        "output_tokens": 7961,
+        "output_tokens_details": {
+          "thinking_tokens": 5856
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "b642962e6d692e1f366e12f91fb841ccef85192873129db932a56e2e4635cb1e"
+    },
+    {
+      "body_sha256": "72d097ca1db4b319b1ef6138558a51ed1cc926893d886f9a652a3cce2211efde",
+      "charged_microusd": 32274,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "count_body_sha256": "58543af2879723ad406ee70c98abac87390c82878b0c3720f6bedabc9919ca21",
+      "elapsed_seconds": 12.597753,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "8072ffde984a8d3a39b7b2516b3b1e8a64904143dc1e59a1668e551d27a1b126",
+      "native_count_key": "58543af2879723ad406ee70c98abac87390c82878b0c3720f6bedabc9919ca21",
+      "native_input_tokens": 11152,
+      "output_token_ceiling": 2048,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "363302:a-1:check-group",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-check-group",
+      "request_id": "20dc5f4b46994cebbccc6e0eb6deedaf",
+      "reserved_microusd": 49294,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 11152,
+        "output_tokens": 997,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "b4f5876e2bb700b05b623c63fe9c48a7c0360fadba9ae7e62298756647300bc8"
+    },
+    {
+      "body_sha256": "2b4e73e546b94e346e9f941cd8515657347d752493f091935e6d3e4d456e76f7",
+      "charged_microusd": 20564,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "count_body_sha256": "fc5e65140278d2690c5a4fe6d4b53778fe781536f2eca72c7e93cee2de93abac",
+      "elapsed_seconds": 9.682878,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "aab1316f5462748fb49c286667635317d279c5f57bcb581da9948230bfe50be7",
+      "native_count_key": "fc5e65140278d2690c5a4fe6d4b53778fe781536f2eca72c7e93cee2de93abac",
+      "native_input_tokens": 8667,
+      "output_token_ceiling": 1024,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "363302:a-1:check-explanation",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-check-explanation",
+      "request_id": "e9488aac7b204cdaabb590913b5fb992",
+      "reserved_microusd": 33090,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 8667,
+        "output_tokens": 323,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "cac60820441421e73a11c7cdbc63bea071178244ab38296b640be3249b91ae51"
+    },
+    {
+      "body_sha256": "cbf00fab15b9a62350f003c7f3c922d2cc02315eff9e7bdd10c1c8c631ad10d0",
+      "charged_microusd": 26606,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "count_body_sha256": "32af750ab31aff609df3c4da925f9a645bc7f3e3dde9a2aed21100eca7d4e8ef",
+      "elapsed_seconds": 16.943881,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "aa5cb170ba63e5cf3421a1c5e30d57ee9d3d02814105e14bfb05b6cef241c523",
+      "native_count_key": "32af750ab31aff609df3c4da925f9a645bc7f3e3dde9a2aed21100eca7d4e8ef",
+      "native_input_tokens": 7533,
+      "output_token_ceiling": 8000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "341997:interpret",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-interpret",
+      "request_id": "2bf798f9c55a4515b5841b57c06a0107",
+      "reserved_microusd": 100128,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 7533,
+        "output_tokens": 1154,
+        "output_tokens_details": {
+          "thinking_tokens": 597
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "a7620d61482047e95fb82b704c348f75e3b2027bed265d6bf55f03f166c26631"
+    },
+    {
+      "body_sha256": "2c5ac57decdc306a55806071b2a896d52eabfd1552613af16dde7943f5d691c3",
+      "charged_microusd": 36,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "elapsed_seconds": 0.724985,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "30508a2dcbcb8b90d200eb36347619f6fbda25181c17dbad60e781237cd72f84",
+      "output_token_ceiling": 0,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "341997:query",
+      "purpose": "cb-p2-query",
+      "request_id": "2ec975ed3dd94296a430431fa7756df8",
+      "reserved_microusd": 389,
+      "status": "valid",
+      "usage": {
+        "total_tokens": 299
+      },
+      "repair_of": null,
+      "receipt_sha256": "b2c66bb24d2e71c1bade3f365eb305b4659a275b068c91d52a5e613c675ef143"
+    },
+    {
+      "body_sha256": "33359d489cb41c0c5295bb063c3831c2271a41897f9d6fb97c9360989ed5401e",
+      "charged_microusd": 199042,
+      "code_sha": "a389b3fdb4923600e7e4970fb69068046175ebed",
+      "count_body_sha256": "a480f6628f44bb85de0af8a6541b852c39199972d4c71779bf880a41587abc58",
+      "disposition": "failed",
+      "elapsed_seconds": 214.718668,
+      "error": "Incomplete",
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "b8bd784586e63fda8917ecc2e5059880cfb2aef7b0ff64363cf53d7534e49b2b",
+      "native_count_key": "a480f6628f44bb85de0af8a6541b852c39199972d4c71779bf880a41587abc58",
+      "native_input_tokens": 19521,
+      "output_token_ceiling": 16000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "341997:assess",
+      "provider_stop_reason": "max_tokens",
+      "purpose": "cb-p2-assess",
+      "request_id": "d3d56cfb377a42499955555378c96eff",
+      "reserved_microusd": 208900,
+      "status": "failed",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 19521,
+        "output_tokens": 16000,
+        "output_tokens_details": {
+          "thinking_tokens": 14304
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "685e8b73e0708e3172760ba1c0453365dd32bcce01443afd438b00e9b32d3b8f"
+    },
+    {
+      "body_sha256": "cf2208d5a2104444624d51043fd72b27b959f06c29780a07075a716011ffe175",
+      "charged_microusd": 149682,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "a480f6628f44bb85de0af8a6541b852c39199972d4c71779bf880a41587abc58",
+      "elapsed_seconds": 103.584958,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "457c008ea7b08a14f41a024bae0317169d9470c8d7f93058bfee1ee5759323fd",
+      "native_count_key": "a480f6628f44bb85de0af8a6541b852c39199972d4c71779bf880a41587abc58",
+      "native_input_tokens": 19521,
+      "output_token_ceiling": 24000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "341997:repair-assess",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-repair-assess",
+      "repair_of": "d3d56cfb377a42499955555378c96eff",
+      "request_id": "9b554b5be5e94062ac61bb100e56f41c",
+      "reserved_microusd": 288900,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 19521,
+        "output_tokens": 11064,
+        "output_tokens_details": {
+          "thinking_tokens": 9143
+        },
+        "service_tier": "standard"
+      },
+      "receipt_sha256": "0e9ab3f77857ce8cae0c34fd6d62603e4a47c02b79535a4549c959672efdb0a5"
+    },
+    {
+      "body_sha256": "506170eaf5da193d203977ae4652b4b960dae2d825c1cf0aed05d3d3c485ff21",
+      "charged_microusd": 107862,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "dc3a813aa8728ecb7a25b9465529b842bcfd8ddec1fadf03aaf5402dc16b79e7",
+      "elapsed_seconds": 65.241645,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "bcec5dc194a8f7896fef3ea28ab45e3cae5934586e7c22ee20ec3fa597a708ab",
+      "native_count_key": "dc3a813aa8728ecb7a25b9465529b842bcfd8ddec1fadf03aaf5402dc16b79e7",
+      "native_input_tokens": 18571,
+      "output_token_ceiling": 24000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "341997:verify",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-verify",
+      "request_id": "9c60e904a7cd49dfbfa5df54ff198f85",
+      "reserved_microusd": 286620,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 18571,
+        "output_tokens": 7072,
+        "output_tokens_details": {
+          "thinking_tokens": 5428
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "cd6060e57d8df63c83eab28dac71a922143c27ebda10bd5592acbd80ca321c08"
+    },
+    {
+      "body_sha256": "8efb786919478e881d8ffab5bfcf6d7b98eac69e8d260c23b086f95427ec6716",
+      "charged_microusd": 57070,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "c9cb2c17ae0ecceb2b16462c4071be4f4a889c0514137c44f087201df52e91cb",
+      "elapsed_seconds": 38.771121,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "fb2bd9e9279c52a9fec49964f82792849fabb1d05ceb1115d76e63c8ff9acbd7",
+      "native_count_key": "c9cb2c17ae0ecceb2b16462c4071be4f4a889c0514137c44f087201df52e91cb",
+      "native_input_tokens": 13015,
+      "output_token_ceiling": 8000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "351715:interpret",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-interpret",
+      "request_id": "11e3076e09914577822d2766a2ad01ad",
+      "reserved_microusd": 113284,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 13015,
+        "output_tokens": 3104,
+        "output_tokens_details": {
+          "thinking_tokens": 2506
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "bd8dfa3b4dde43f3975db621dd95bfbbf08156bde4c73bf1113a4202a88ba551"
+    },
+    {
+      "body_sha256": "023db469f2da99b83ca076f9b9fbc4f739a43ac3c7705daeccb27b46d2554b53",
+      "charged_microusd": 36,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "elapsed_seconds": 0.267696,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "8fa66895a3bbf813ae8febde42c4b365fd26676f268efbfb24a80d023a5d8356",
+      "output_token_ceiling": 0,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "351715:query",
+      "purpose": "cb-p2-query",
+      "request_id": "a9a335ea54334ab987864e5b294fa28e",
+      "reserved_microusd": 367,
+      "status": "valid",
+      "usage": {
+        "total_tokens": 300
+      },
+      "repair_of": null,
+      "receipt_sha256": "32dcacf4ddc15577dc0e8eef9ec4e925f2f92a18c54cab0d4262d05ca0a999fa"
+    },
+    {
+      "body_sha256": "17aaf325fa8b33aa3065d2df61bc96e911d578951e3569730d4f8edefc2a233b",
+      "charged_microusd": 262690,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "f0a0e9e9e367182b49a286c6d6ed8b1ff5ebf54eaf98b534ffcdfce4a364b8d8",
+      "elapsed_seconds": 231.551469,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "65549fbc7cc731c4719d36e21f9a08867cf1dae1f9599fc3018fd6915a1b50eb",
+      "native_count_key": "f0a0e9e9e367182b49a286c6d6ed8b1ff5ebf54eaf98b534ffcdfce4a364b8d8",
+      "native_input_tokens": 19055,
+      "output_token_ceiling": 24000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "351715:assess",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-assess",
+      "request_id": "ca74cefd52d04653b7040c6d19e32479",
+      "reserved_microusd": 287780,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 19055,
+        "output_tokens": 22458,
+        "output_tokens_details": {
+          "thinking_tokens": 21028
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "0d254195b3c7be40ff475a51f824f085914bf8f490d5a0362031426716b12e89"
+    },
+    {
+      "body_sha256": "01d37075d94cf8d5b732f86d84167d5abd7dfd936eb15f79a560d308cf8e8891",
+      "charged_microusd": 82356,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "4a3e93ed0988809ba8165a68f3d1a211381b81f4af15972f7dc71306d63671f0",
+      "elapsed_seconds": 44.449806,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "f37b1eed00e9bb3250ba72a185effe5129e7c1eb4390e1f40ce254243f5fecee",
+      "native_count_key": "4a3e93ed0988809ba8165a68f3d1a211381b81f4af15972f7dc71306d63671f0",
+      "native_input_tokens": 18513,
+      "output_token_ceiling": 24000,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "351715:verify",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-verify",
+      "request_id": "c2a45ac2c5a9479493582c098be5fdca",
+      "reserved_microusd": 286480,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 18513,
+        "output_tokens": 4533,
+        "output_tokens_details": {
+          "thinking_tokens": 3259
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "d1e99d98091c2568802d79133c62c6062eec1804dc10b15e9f827ecd2988c573"
+    },
+    {
+      "body_sha256": "10939cfd26736641f03cd1ceea3b6820408ef74acca18c913e36d025358cbf49",
+      "charged_microusd": 44630,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "a5d38e38ab5fc97cd737624ca1179f5f22afa38f22476e86ba1d62ce060473eb",
+      "elapsed_seconds": 17.656251,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "4d1e6a6635e8befac8eb38a1fb938240bb81a417690889414e719fe8ca48ef6d",
+      "native_count_key": "a5d38e38ab5fc97cd737624ca1179f5f22afa38f22476e86ba1d62ce060473eb",
+      "native_input_tokens": 15125,
+      "output_token_ceiling": 3072,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "paired-remaining:check-group-pair",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-check-group-pair",
+      "request_id": "6cf2b2e58c78413a946262f240adc76d",
+      "reserved_microusd": 69068,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 15125,
+        "output_tokens": 1438,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "caab2a910cb9dbd9d35620727c13fc7244a1224cb5f199976e3c50856603fbf4"
+    },
+    {
+      "body_sha256": "9cd20aa14c73d40bea843754ff361d0099b94c366de6d40687ab695ae70729ed",
+      "charged_microusd": 15148,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "5a90de47ac2237aa72ebbf7360db06f528f6f708336e491391a649378dc39418",
+      "elapsed_seconds": 5.252337,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "d29d5f70bbaf7b5a36d7c7273755a46193fcecc80b341f81b0e67a588a33da13",
+      "native_count_key": "5a90de47ac2237aa72ebbf7360db06f528f6f708336e491391a649378dc39418",
+      "native_input_tokens": 5904,
+      "output_token_ceiling": 1024,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "341997:check-explanation",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-check-explanation",
+      "request_id": "7dbd0cf10fc44d109adbd7d857b11ad0",
+      "reserved_microusd": 26458,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 5904,
+        "output_tokens": 334,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "f22f315b392300ef12034ee6e24d4000db0dc4cc850b7de27cd2d4a4880b8b26"
+    },
+    {
+      "body_sha256": "eec22a64c51552a51eb90e79be2360cb2929c9a2d4bf306954b6973c6b411f12",
+      "charged_microusd": 18416,
+      "code_sha": "2e7729b690815730aa0d78b71d4919c8835cd9a8",
+      "count_body_sha256": "4cdb793b31049dfe3742c39a95e04c3dc4a8cc58ae886b8b56dba311106be4ec",
+      "elapsed_seconds": 5.41122,
+      "execution_capacity": "contextual-output-capacity-v2",
+      "http_status": 200,
+      "key": "cb2fbf7d99f93017beb0d19e8e19118b72ca3b9b2855b1d9a02903a0e1dd803b",
+      "native_count_key": "4cdb793b31049dfe3742c39a95e04c3dc4a8cc58ae886b8b56dba311106be4ec",
+      "native_input_tokens": 7293,
+      "output_token_ceiling": 1024,
+      "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+      "phase2_capacity": "da2630fc7a14509840d9b42deddbbc1806fd5f8f0a8d011cc3c86d5bdc3d4596",
+      "phase2_lock": "2676e734548c834995e3d9bc561b033e09c0287c68c6e8c605988d6c3ea562a9",
+      "phase2_operation": "351715:check-explanation",
+      "provider_stop_reason": "end_turn",
+      "purpose": "cb-p2-check-explanation",
+      "request_id": "523b6eca94394e7284edbebe18f6fb7b",
+      "reserved_microusd": 29792,
+      "status": "valid",
+      "usage": {
+        "cache_creation": {
+          "ephemeral_1h_input_tokens": 0,
+          "ephemeral_5m_input_tokens": 0
+        },
+        "cache_creation_input_tokens": 0,
+        "cache_read_input_tokens": 0,
+        "inference_geo": "global",
+        "input_tokens": 7293,
+        "output_tokens": 383,
+        "output_tokens_details": {
+          "thinking_tokens": 0
+        },
+        "service_tier": "standard"
+      },
+      "repair_of": null,
+      "receipt_sha256": "98774fa144997c88a6ba553ef87a90a6b5f94d6bfc2b5d37122d187fcd739d6d"
+    }
+  ]
+}

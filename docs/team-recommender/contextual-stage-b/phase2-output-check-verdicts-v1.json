@@ -1,0 +1,361 @@
+{
+  "version": "phase2-fixed-output-check-results-v1",
+  "model": "claude-sonnet-5",
+  "same_model_family": true,
+  "human_judgments": 0,
+  "packets": [
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-group",
+      "body_sha256": "72d097ca1db4b319b1ef6138558a51ed1cc926893d886f9a652a3cce2211efde",
+      "raw_private_artifact_sha256": "f2beab6f15ce71f593fa2726cb3ad16d953a9ef71a66e054a505eca5277306d7",
+      "verdict_count": 6
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-explanation",
+      "body_sha256": "2b4e73e546b94e346e9f941cd8515657347d752493f091935e6d3e4d456e76f7",
+      "raw_private_artifact_sha256": "f2beab6f15ce71f593fa2726cb3ad16d953a9ef71a66e054a505eca5277306d7",
+      "verdict_count": 2
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "body_sha256": "10939cfd26736641f03cd1ceea3b6820408ef74acca18c913e36d025358cbf49",
+      "raw_private_artifact_sha256": "367ce820e553f13a802fd5e27613ff4e3426bf4a415d91544cf4ac2ada276e26",
+      "verdict_count": 10
+    },
+    {
+      "run_id": 34795459007,
+      "operation": "341997:check-explanation",
+      "body_sha256": "9cd20aa14c73d40bea843754ff361d0099b94c366de6d40687ab695ae70729ed",
+      "raw_private_artifact_sha256": "109dfcc83b4d0ea8c0108d0f2f8195b9214b49e9433222fdc1d11a3b00f57206",
+      "verdict_count": 2
+    },
+    {
+      "run_id": 34795980969,
+      "operation": "351715:check-explanation",
+      "body_sha256": "eec22a64c51552a51eb90e79be2360cb2929c9a2d4bf306954b6973c6b411f12",
+      "raw_private_artifact_sha256": "e3f40e55746aaff729b3300a650c2a6a0cb6f786614435e9c09a21c19d341fa2",
+      "verdict_count": 2
+    }
+  ],
+  "verdicts": [
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-group",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000014",
+      "item_id": "group-1",
+      "reason": "Mueller's electrocatalytic interface/selectivity engineering and pulsed-laser catalyst synthesis could contribute to catalyst discovery aspects of the call, while Basdogan's computational CO2 capture/conversion and membrane design work fits the sour gas treatment and NGL utility aspects. Both contribute to catalysis/separations themes even though neither is a verbatim match to sulfur/NGL processing; overlap on CO2-related electrocatalysis and computational catalyst/solvent design gives a coherent shared thread worth discussing together, though direct sour-gas or NGL evidence is absent for both.",
+      "verdict": "plausible",
+      "people": [
+        "urh-000014",
+        "urh-000150"
+      ],
+      "task_type": "group_usefulness"
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-group",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000092",
+      "item_id": "group-2",
+      "reason": "Porosoff's heterogeneous catalyst development for C1/C2 upgrading, CO2 hydrogenation and reactive separations directly matches multiple call aspects (catalyst discovery, reaction pathways, gas processing). Barnett's work on gas adsorption/diffusion in dynamic porous frameworks and metal-complex oxidation chemistry supports separation and selective conversion aspects. Together they cover both catalyst design and separation material development called for in the topic, forming a coherent and well-supported pairing.",
+      "verdict": "strong",
+      "people": [
+        "urh-000020",
+        "urh-000092"
+      ],
+      "task_type": "group_usefulness"
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-group",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000014-c001",
+      "item_id": "person-1",
+      "reason": "Mueller's electrocatalytic systems work, including selective CO2 reduction and organic oxidation via electrode/electrolyte engineering, offers a plausible methodological contribution to catalyst design objectives in the call, though her documented focus is on PFAS/CO2/electrocatalysis rather than sulfur gas treatment or NGL recovery specifically.",
+      "verdict": "plausible",
+      "people": [
+        "urh-000014"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-group",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000150-c001",
+      "item_id": "person-2",
+      "reason": "Basdogan's computational design of CO2-separation membranes and solvents directly aligns with the call's Sour Gas Treatment and NGL Utility aspects seeking new separation materials and methodologies, and her catalyst design for CO2 conversion supports the chemical conversion aspect as well.",
+      "verdict": "strong",
+      "people": [
+        "urh-000150"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-group",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000020-c002",
+      "item_id": "person-3",
+      "reason": "Barnett's work connecting porous framework dynamics to gas adsorption, diffusion and fluorinated-gas capture directly supports the call's interest in novel separation materials and methodologies for gas treatment, a core Topic Area 1a aspect.",
+      "verdict": "strong",
+      "people": [
+        "urh-000020"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-group",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000092-c001",
+      "item_id": "person-4",
+      "reason": "Porosoff's heterogeneous catalyst synthesis, in situ characterization, and reactive separations research directly matches the call's emphasis on high-throughput catalyst development and chemical pathway discovery for gas/NGL conversion, a core aspect of Topic Area 1a.",
+      "verdict": "strong",
+      "people": [
+        "urh-000092"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-explanation",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000014-c008",
+      "item_id": "explanation-1",
+      "reason": "The claim quoted verbatim matches urh-000014-c008 exactly, and the explanation correctly frames it as a possibly transferable synthesis method while explicitly noting the limitation that it was demonstrated for electrocatalytic systems, not hydrocarbon/NGL catalysts. It does not overstate capability or claim a certificate of fit.",
+      "verdict": "faithful",
+      "people": [
+        "urh-000014"
+      ],
+      "task_type": "explanation_audit"
+    },
+    {
+      "run_id": 34791628358,
+      "operation": "363302:a-1:check-explanation",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000150-c004",
+      "item_id": "explanation-2",
+      "reason": "The quoted evidence matches urh-000150-c004 verbatim, and the explanation appropriately characterizes it as a possible contribution (computational design/ML for materials) while flagging the limitation that the demonstrated application area is broad sustainability materials rather than hydrocarbon/sulfur catalyst systems specifically, avoiding overclaiming.",
+      "verdict": "faithful",
+      "people": [
+        "urh-000150"
+      ],
+      "task_type": "explanation_audit"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000007-c007",
+      "item_id": "341997:group-1",
+      "reason": "Lopatkin's computational/mathematical modeling of microbial dynamics is a clear fit for Mathematical Biology; Kelley's fluid-transport work (CSF, batteries) is not biological-modeling focused for this call, though his brain-fluid transport modeling could loosely connect via biological application. The group has one strong contributor and one uncertain/tangential contributor, so overall it is plausible but not strongly coherent as a mathematical-biology pairing.",
+      "verdict": "plausible",
+      "people": [
+        "urh-000007",
+        "urh-000037"
+      ],
+      "task_type": "group_usefulness"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000070-c003",
+      "item_id": "341997:group-2",
+      "reason": "Lopatkin's math/computational modeling of microbial systems fits Mathematical Biology well. Shang's brain-fluid mechanics and bioinspired sensing touches biological application but her primary methods (turbulence, vortex dynamics, high-energy-density flows) are not framed as mathematical biology; contribution to this specific call is uncertain but plausible via the brain-fluid claim.",
+      "verdict": "plausible",
+      "people": [
+        "urh-000007",
+        "urh-000070"
+      ],
+      "task_type": "group_usefulness"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000007-c007",
+      "item_id": "341997:person-1",
+      "reason": "Explicitly uses mathematical modeling, bioinformatics and data-driven tools to predict and control microbial population dynamics and gene transfer, directly matching the call's request for mathematical innovation integrated with biological relevance.",
+      "verdict": "strong",
+      "people": [
+        "urh-000007"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000037-c002",
+      "item_id": "341997:person-2",
+      "reason": "Kelley's use of physical/mathematical models to study cerebrospinal fluid and glymphatic transport represents an applicable modeling method to a biological phenomenon, a reasonable but uncertain fit for the Mathematical Biology program compared to a dedicated biological-modeling researcher.",
+      "verdict": "plausible",
+      "people": [
+        "urh-000037"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000070-c003",
+      "item_id": "341997:person-3",
+      "reason": "Shang's fluid dynamics of the brain is a biological application, and her experimental/simulation methods could contribute quantitative modeling relevant to mathematical biology, though her primary focus areas (turbulence, HED) are not biology-centered, making this a plausible but not strong fit.",
+      "verdict": "plausible",
+      "people": [
+        "urh-000070"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000033-c001",
+      "item_id": "351715:group-1",
+      "reason": "Sefkow's computational plasma physics (MHD, particle-in-cell, hybrid fluid-kinetic multiphysics for fusion/HED) pairs coherently with Harding's fuel-target fabrication (vapor deposition, microfluidics, cryogenic DT fuel) — both address core inertial-fusion plasma science challenges fitting ECLIPSE's scope on plasma-relevant technological problems, each with a clear specific contribution.",
+      "verdict": "strong",
+      "people": [
+        "urh-000003",
+        "urh-000033"
+      ],
+      "task_type": "group_usefulness"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000049-c001",
+      "item_id": "351715:group-2",
+      "reason": "Sefkow's computational fusion/HED plasma modeling complements Collins' experimental shock-compression and extreme-density material studies; both directly address high-energy-density and fusion-relevant plasma phenomena, a coherent pairing of computational and experimental HED/fusion expertise relevant to ECLIPSE.",
+      "verdict": "strong",
+      "people": [
+        "urh-000003",
+        "urh-000049"
+      ],
+      "task_type": "group_usefulness"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000003-c001",
+      "item_id": "351715:person-1",
+      "reason": "Direct computational plasma-physics work on inertial and magneto-inertial fusion and HED experiments matches ECLIPSE's plasma science and engineering scope precisely.",
+      "verdict": "strong",
+      "people": [
+        "urh-000003"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000033-c002",
+      "item_id": "351715:person-2",
+      "reason": "Harding's development of cryogenic DT fuel targets and fabrication methods directly supports inertial-fusion plasma science, a topical area well within ECLIPSE's scope even though not explicitly enumerated as a bullet, given the program's fusion/HED-adjacent plasma science interests via related programs.",
+      "verdict": "strong",
+      "people": [
+        "urh-000033"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34795345292,
+      "operation": "paired-remaining:check-group-pair",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000049-c001",
+      "item_id": "351715:person-3",
+      "reason": "Collins' laboratory studies of extreme-density material states and shock compression under fusion-relevant conditions directly connect to plasma physics and HED science within ECLIPSE's transdisciplinary scope.",
+      "verdict": "strong",
+      "people": [
+        "urh-000049"
+      ],
+      "task_type": "call_person"
+    },
+    {
+      "run_id": 34795459007,
+      "operation": "341997:check-explanation",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000007-c007",
+      "item_id": "explanation-1",
+      "reason": "The quoted evidence matches claim c007 verbatim, and the explanation's framing (modeling methodology applied to a biology-tool-development role, with the stated limitation about it not being explicit new mathematical theory and not a capability certificate) is a reasonable, non-overreaching characterization consistent with the retained profile evidence. It does not assert demonstrated capability beyond what is documented.",
+      "verdict": "faithful",
+      "people": [
+        "urh-000007"
+      ],
+      "task_type": "explanation_audit"
+    },
+    {
+      "run_id": 34795459007,
+      "operation": "341997:check-explanation",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000037-c002",
+      "item_id": "explanation-2",
+      "reason": "The quoted evidence matches claim c002 verbatim, and the explanation accurately frames this as applying a physical/mathematical modeling method to a biological transport question, while explicitly noting the method's origin in fluid mechanics and disclaiming any stated public-health collaboration or capability certification. This stays within the bounds of the supplied evidence.",
+      "verdict": "faithful",
+      "people": [
+        "urh-000037"
+      ],
+      "task_type": "explanation_audit"
+    },
+    {
+      "run_id": 34795980969,
+      "operation": "351715:check-explanation",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000003-c001",
+      "item_id": "explanation-1",
+      "reason": "The assertion's quoted evidence exactly matches the claim text for urh-000003-c001 ('Studies inertial and magneto-inertial fusion in a computational plasma-physics program.'), and the characterization as a computational plasma-physics investigation is consistent with the claim. The explanation appropriately notes the lack of explicit translational discussion and disclaims that this is not a capability certificate, matching the evidence level without overreach.",
+      "verdict": "faithful",
+      "people": [
+        "urh-000003"
+      ],
+      "task_type": "explanation_audit"
+    },
+    {
+      "run_id": 34795980969,
+      "operation": "351715:check-explanation",
+      "source": "separately_executed_model",
+      "human": false,
+      "evidence_ref": "urh-000033-c002",
+      "item_id": "explanation-2",
+      "reason": "The quoted evidence ('Studies structure and properties of solid fusion fuel.') matches claim urh-000033-c002 verbatim. The explanation's characterization as a materials description linking to fusion-target manufacture is a reasonable paraphrase consistent with the claim's label 'Cryogenic deuterium-tritium crystal growth', and it correctly flags the absence of explicit translational discussion without asserting demonstrated capability beyond what is claimed.",
+      "verdict": "faithful",
+      "people": [
+        "urh-000033"
+      ],
+      "task_type": "explanation_audit"
+    }
+  ],
+  "missing_verdicts": 0,
+  "phase1_rejudged": false
+}
