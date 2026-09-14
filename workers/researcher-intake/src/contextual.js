@@ -5,7 +5,7 @@ import option1 from '../../../config/contextual_team/option1-v1.json' with {type
 import phase2 from '../../../config/contextual_team/phase2-v1.json' with {type:'json'};
 import phase2Sources from '../../../config/contextual_team/phase2-source-inputs-v2.json' with {type:'json'};
 import capacity from '../../../config/contextual_team/phase2-output-capacity-v2.json' with {type:'json'};
-import latency from '../../../config/contextual_team/requirements-latency-v1.json' with {type:'json'};
+import latency from '../../../config/contextual_team/requirements-latency-v2.json' with {type:'json'};
 import {previewResponse} from './contextual-preview.js';
 import {CONSOLE_HTML,CONSOLE_JS} from './contextual-console.js';
 import {ACCESS_HTML,ACCESS_JS} from './contextual-access.js';
