@@ -160,7 +160,7 @@
     "helper_head": "0422356ca3f901ff7ae98d96d22781963885714e",
     "required_ci_run": 34965952818
   },
-  "containing_commit": "Local documentation commit introducing luna-contract-repair-and-scientific-check.md after execution checkpoint 7fc3c366b074869b1eff78400dd3b769b3bc5873.",
+  "containing_commit": "Documentation-only commit introducing docs/reconciliation/targeted-checker-catalog-20260915.md after code 346385e9d6c499634a9e9852c893e90d60f7258a.",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -6768,7 +6768,7 @@
   },
   "model": "Unchanged contextual candidate; completed Sonnet 5 thinking-disabled retrospective checks: strong/plausible/plausible individuals, plausible group, three faithful explanations.",
   "next_allowed_stage": null,
-  "next_stage_requires": "Explicit owner decision on bounded request/response-contract diagnosis and authoritative reconciliation of fc618603458249348c6834d258264520. No automatic paid retry, route selection, DOE workflow or Stage4.",
+  "next_stage_requires": "Explicit resumption of the bounded YIP source-identity/submission-stage repair. Any paid saved-Luna check separately requires execution authorization and authoritative recovery disposition; no automatic retry.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
@@ -7132,9 +7132,9 @@
     "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
     "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
   },
-  "recommendation": "C. NAMED TECHNICAL OR ACCOUNTING BLOCKER; IDENTIFY THE EXACT MISSING OUTPUTS. Checker compiled grammar too large; 0/24 independent verdicts. No retry or route promotion.",
+  "recommendation": "Offline checker repaired; catalog remains unpublished at the required same-subsystem review-convergence checkpoint.",
   "recommended_next_stage": "STOP FOR USER REVIEW",
-  "report": "docs/team-recommender/reports/luna-contract-repair-and-scientific-check.md",
+  "report": "docs/PROJECT_STATUS.md",
   "repository": "mporosoff/grants-scraper",
   "results": {
     "contextual_counts": {
@@ -7475,7 +7475,7 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "stopped_checker_grammar_and_unknown_usage_boundary",
+  "stage_status": "offline_checker_complete_catalog_review_convergence_checkpoint",
   "stop": true,
   "unresolved": [
     "New checker HTTP400: compiled grammar too large. All24 pair verdicts and12 derived person outcomes are missing. No new check/retry is authorized.",
@@ -9464,7 +9464,7 @@
       }
     }
   },
-  "active_work": "luna_contract_repair_bounded_closeout",
+  "active_work": "targeted_checker_and_catalog_maintenance_checkpoint",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -9661,7 +9661,7 @@
     "proposed_next_stage": "No Stage 4 or public activation. Contextual Stage B is authorized but incomplete.",
     "containing_commit": "Documentation after real-validation lock7d4f7b1; resolve report-containing commit locally."
   },
-  "active_stage_meaning": "Bounded corrective work after completed Phase2; not a new experiment stage or Stage4.",
+  "active_stage_meaning": "Maintenance and offline checker correction; no new scientific phase or Stage4.",
   "historical_pre_option1_closeout": {
     "budget_record": {
       "D1_new_usd": 1.055784,
@@ -10442,5 +10442,32 @@
       "fc618603458249348c6834d258264520"
     ],
     "token_totals_note": "Known returned usage only. Checker HTTP400 usage is unavailable and not treated as zero."
+  },
+  "historical_pre_targeted_checker_catalog": {
+    "active_work": "luna_contract_repair_bounded_closeout",
+    "active_stage_meaning": "Bounded corrective work after completed Phase2; not a new experiment stage or Stage4.",
+    "stage_status": "stopped_checker_grammar_and_unknown_usage_boundary",
+    "report": "docs/team-recommender/reports/luna-contract-repair-and-scientific-check.md",
+    "recommendation": "C. NAMED TECHNICAL OR ACCOUNTING BLOCKER; IDENTIFY THE EXACT MISSING OUTPUTS. Checker compiled grammar too large; 0/24 independent verdicts. No retry or route promotion.",
+    "next_stage_requires": "Explicit owner decision on bounded request/response-contract diagnosis and authoritative reconciliation of fc618603458249348c6834d258264520. No automatic paid retry, route selection, DOE workflow or Stage4.",
+    "containing_commit": "Local documentation commit introducing luna-contract-repair-and-scientific-check.md after execution checkpoint 7fc3c366b074869b1eff78400dd3b769b3bc5873."
+  },
+  "targeted_checker_catalog_repair": {
+    "receipt": "docs/reconciliation/targeted-checker-catalog-20260915.json",
+    "report": "docs/reconciliation/targeted-checker-catalog-20260915.md",
+    "product_code": "346385e9d6c499634a9e9852c893e90d60f7258a",
+    "source_merge": "2e9b05456ac721820f1f73e1e780b2432c2967c2",
+    "checker_pr": 256,
+    "checker_head": "3dd60868fdd3b368e804f31fdc40b7baea709b4a",
+    "checker_status": "clean_review_required_checks_passed_unmerged",
+    "catalog_pr": 257,
+    "catalog_head": "94f750752a536ccdc3e2707271846c1085943f4d",
+    "catalog_review": 5212796068,
+    "catalog_status": "consequential_P1_YIP_duplicate_and_submission_stage",
+    "new_experiment_requests": 0,
+    "new_experiment_microusd": 0,
+    "accounting_unchanged": true,
+    "public_activation": false,
+    "stop_for_user_review": true
   }
 }

@@ -1,4 +1,32 @@
-# Funding Finder — reconciliation status
+# Funding Finder — current repair status
+
+Updated September 15, 2026. This is the single current handoff; the earlier reconciliation below is retained as history.
+
+## Latest checkpoint: checker repaired; catalog publication blocked
+
+**The public catalog is still September 11 data (1,422 records), directly verified at September15 16:30:18 UTC.** Source collection is running; publication is failing its review gate. The latest September15 candidate was generated and passed all seven automated gates, but its independent review found another duplicate opportunity with a misleading deadline. It was not published.
+
+Completed in this task:
+
+- Applied the supplied compact checker patch in the existing development worktree. The complete native schema is 15,427 bytes instead of27,593, with equivalent constraints and all24 pairs retained. Development checks19/19 pass. Provider grammar acceptance is **NOT RUN**; the saved Luna result still has **0/24 independent verdicts**.
+- Repaired the stale development HTML asset version and generated search-release manifest using their existing tools. The seven other reported recovery/compatibility failures passed unchanged in this environment. No recovery guard was weakened.
+- Protected-merged source repair **PR255** as `2e9b05456ac721820f1f73e1e780b2432c2967c2` after clean exact-head review and required CI. Official NSF feed identity now joins its duplicate listings to Grants.gov, and VPR applicant-instruction prose no longer creates a false opportunity.
+- Generated and validated a real **1,398-record September15** candidate. Both named NSF duplicates are aliases of their canonical Grants.gov records; the named false fragment is absent.
+
+The remaining source defect is **PR257 review5212796068**, on `94f750752a536ccdc3e2707271846c1085943f4d`: the VPR Air Force FY2027 YIP row duplicates Grants.gov363829 and labels its October9 white-paper prerequisite as an open application deadline; the canonical application deadline is December4. Release34992708733 stopped before any Worker change, paid smoke, data merge or Pages publication. Its exact candidate `489945e6dfe720414afd575e960ed8c0be0f26e8d6eb694d87e296a7ed0b32ae`, failed review and completed generation/validation remain preserved. PR249/253 are historical held candidates, not published replacements.
+
+This is the review-convergence checkpoint required by the user-supplied repository instructions after a further consequential source-publication finding following remediation. No second autonomous source-fix/re-review loop was started. The recommended next source action is an explicitly resumed bounded YIP identity/deadline repair, preserving sponsor authority, aliases and submission-stage ownership; then review and publish the corrected package. Do not simply rerun all generation.
+
+The isolated checker **PR256** at `3dd60868fdd3b368e804f31fdc40b7baea709b4a` has clean completed review and passing Python/browser CI. It is **unmerged**: while the source change is unpublished, the verified planner would regenerate the held catalog on another main push. Holding this unrelated merge avoids duplicate generation. Recheck its exact head/checks and release dependencies before merging after source publication is resolved.
+
+Canonical product code is **`346385e9d6c499634a9e9852c893e90d60f7258a`**, in `C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender`, branch `codex/on-demand-team-recommender`. This status update is a later documentation-only commit. Protected main is2e9b054; public candidate remains `f04234e0d00fe4520fa7e46a674c680e345958e0e3fd8e8f44c8b6e456b77d26`. Public registry, experimental activation and model routes were not changed by this task; the earlier authenticated service observations below are historical, not fresh redeployment claims.
+
+**Money:** new experiment spending **$0**, new scientific requests **0**. The unchanged authoritative ledger still has **$2.301792 /5 attempts remaining**, including the protected reserve and both unknown holds. Separately, normal catalog search-vector generation used seven Voyage requests /316,721 tokens, approximately **$0.00633442** at the published price; publication smoke did not run. That usage is not an experiment-budget credit or debit. No new checker dispatch is authorized by the remaining balance.
+
+Full evidence, limitations, source/review identities, actual tests and next actions: [targeted checker and catalog report](reconciliation/targeted-checker-catalog-20260915.md), [sanitized receipt](reconciliation/targeted-checker-catalog-20260915.json), and [experiment state](team-recommender/experiment-state.json). No experimental recommender or audited registry was activated. The107-package registry compatibility decision remains separate.
+
+## Prior completed reconciliation — historical record
+
 
 Updated September 15, 2026. This is the single current handoff. Historical reports remain evidence, not competing active plans.
 
