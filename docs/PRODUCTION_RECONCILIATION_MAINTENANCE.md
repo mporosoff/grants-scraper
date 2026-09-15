@@ -66,3 +66,16 @@ credit. No request may debit or modify `on-demand-team-offline-v2-20260909`.
 Exact review, CI, assembled-package integration and live results are recorded in
 the reconciliation handoff when complete. Historical passes are not checks of
 this patch, and this note is not a scientific release qualification.
+
+The September 15 staged-package run executed all 117 configured E2E tests:
+115 passed and two exposed test-setup defects. The mobile centering assertion
+included the separate, correctly visible catalog-age warning; it now measures
+the results area and also requires notices to remain above it. The accessibility
+test mocked OpenAI but left the hosted provider selected; it now selects the
+provider it mocks. No application bytes, assertions about accessible states,
+timeouts or warning visibility were weakened. All 11 tests in the two affected
+files then passed, including their accessibility scans. Unaffected observations
+from the original run are reused, not counted as a second independent suite.
+External DNS was blocked; provider responses were fixtures. Windows test-server
+teardown required closing the verified local server before the runner emitted
+its receipt. That infrastructure cleanup was not an application timeout fix.

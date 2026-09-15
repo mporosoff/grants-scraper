@@ -155,6 +155,8 @@ test("Funded Awards Institutional Intelligence has no serious or critical violat
   await expect(page.locator("#ii-awards .ii-award-card").first()).toBeVisible();
   await scan(page, "funded-awards-institutional-intelligence", testInfo);
   await openAwardAi(page);
+  // Exercise the personal-provider response mocked above; hosted is the default.
+  await page.locator("#ii-provider").selectOption("openai");
   await page.locator("#ii-question").fill("Who has DOE BES awards?");
   await page.locator("#ii-ask-button").click();
   await expect(page.locator("#ii-question-answer")).toBeVisible({ timeout: 30_000 });

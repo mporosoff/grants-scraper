@@ -12,11 +12,22 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
     const spacing = await page.locator("#browse-all").evaluate(button => {
       const box = button.getBoundingClientRect();
       const panel = button.closest(".results-column").getBoundingClientRect();
-      return { horizontal: Math.abs((box.left - panel.left) - (panel.right - box.right)), vertical: Math.abs((box.top - panel.top) - (panel.bottom - box.bottom)), height: box.height };
+      // Freshness/source notices precede the results and must remain visible.
+      // Center the button in its results area, not in those notices plus results.
+      const results = button.closest("#results").getBoundingClientRect();
+      const notices = [...button.closest(".results-column").querySelectorAll(".notice")]
+        .filter(node => node.getClientRects().length);
+      return {
+        horizontal: Math.abs((box.left - panel.left) - (panel.right - box.right)),
+        vertical: Math.abs((box.top - results.top) - (results.bottom - box.bottom)),
+        height: box.height,
+        noticesAboveResults: notices.every(node => node.getBoundingClientRect().bottom <= results.top),
+      };
     });
     expect(spacing.horizontal).toBeLessThanOrEqual(1);
     expect(spacing.vertical).toBeLessThanOrEqual(1);
     expect(spacing.height).toBeGreaterThanOrEqual(44);
+    expect(spacing.noticesAboveResults).toBe(true);
   }
   const title = await page.locator("#page-title").textContent();
   const before = await page.locator("#funding-search").evaluate(node => getComputedStyle(node).backgroundImage);
