@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 // Contextual Stage B explicitly authorizes this separate deliberate action for
 // an unassessed person. Compare every other renderer byte to the old freeze.
 // Keep the historical baseline untouched, and reject any broader exception.
-const authorizedAction = `      (current.engine.contextual&&view.replacements.some(function(item){return item.assessment_state==='unassessed';})
+const authorizedAction = `      (current.engine.contextual&&view.replacements.some(function(item){return item.assessment_state==='unassessed'&&current.engine.canAssessPerson?.(item.profile.id);})
         ? '<button type="button" class="button secondary" data-contextual-assess disabled>Assess this person’s contribution</button>' : '') +
 `;
 export function withoutContextualAssessmentAction(source) {

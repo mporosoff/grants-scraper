@@ -590,7 +590,7 @@ class CandidateLifecycleTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Generation dependencies changed'):
             c.verify_dependencies(self.root, manifest)
 
-    def test_stale_pr_rebases_unchanged_candidate_only_after_terminal_review(self):
+    def test_stale_pr_preserves_both_histories_only_after_terminal_review(self):
         from tools.publish_release_candidate import reconcile_candidate_branch
         manifest = self.create()
         self.commit()
@@ -619,12 +619,76 @@ class CandidateLifecycleTests(unittest.TestCase):
         head, boundary = reconcile_candidate_branch(self.root, existing, manifest, 'owner/repo', execute=execute,
                                                     wait=lambda *args: observed.append(('review', *args)))
         self.assertEqual(observed[0], ('review', 'owner/repo', 10, old_head))
-        self.assertEqual(c.git(self.root, 'rev-parse', 'HEAD^'), advanced)
+        self.assertEqual(c.git(self.root, 'rev-parse', 'HEAD'), advanced)
+        self.assertEqual(c.git(self.root, 'rev-parse', f'{head}^1'), old_head)
+        self.assertEqual(c.git(self.root, 'rev-parse', f'{head}^2'), advanced)
+        self.assertEqual(c.git(self.root, 'rev-parse', f'{head}^{{tree}}'), c.git(self.root, 'write-tree'))
         self.assertNotEqual(head, old_head)
-        self.assertIn(f'--force-with-lease=refs/heads/automation/release-test:{old_head}', observed[-1])
+        self.assertEqual(observed[-1], ('git', 'push', 'origin', f'{head}:refs/heads/automation/release-test'))
         self.assertTrue(boundary)
         c.verify_files(self.root, manifest['files'])
         self.assertEqual(c.load(self.bundle)['generation_sha'], self.source_sha)
+
+    def test_review_request_covers_first_publication_without_duplicating_existing_review(self):
+        from tools import publish_release_candidate as publisher, wait_release_review as review
+        head = 'a' * 40
+        with patch.object(review, 'review_state', return_value=(False, [])), \
+             patch.object(review, 'all_pages', return_value=[]) as pages, \
+             patch.object(review, 'api', return_value={'user': {'login': 'owner'}}), \
+             patch.object(publisher, 'run') as run:
+            publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
+            self.assertIn('@codex review', (self.reports / 'verification-review.md').read_text())
+            run.assert_called_once()
+            run.reset_mock()
+            pages.return_value = [{'user': {'login': review.BOT}, 'body': f'Running `{head[:7]}`'}]
+            publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
+            self.assertNotIn('@codex', (self.reports / 'verification-review.md').read_text())
+            pages.return_value = [{'user': {'login': 'owner'}, 'body': f'<!-- funding-finder-review:{head} -->'}]
+            run.reset_mock()
+            publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
+            run.assert_not_called()
+        with patch.object(review, 'review_state', return_value=(True, [])), patch.object(publisher, 'run') as run:
+            publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
+            run.assert_not_called()
+        with patch.object(review, 'review_state', return_value=(True, [{'body': 'P1'}])), patch.object(publisher, 'run') as run:
+            with self.assertRaisesRegex(ValueError, 'findings'):
+                publisher.request_verification('owner/repo', 10, head, self.reports, c.timestamp())
+            run.assert_not_called()
+
+    def test_preparation_is_non_serving_and_keeps_checkout_on_protected_base(self):
+        from tools import publish_release_candidate as publisher, wait_release_review as review
+        manifest = self.create()
+        receipt = validate(self.root, self.bundle, self.reports, execute=self.execute([]))
+        calls = []
+        def run(*args):
+            calls.append(args)
+            if args[:2] == ('git', 'ls-remote'):
+                return self.source_sha + '\trefs/heads/main'
+            if args[:3] == ('gh', 'pr', 'list'):
+                return '[]'
+            if args[:3] == ('gh', 'pr', 'create'):
+                return 'https://github.com/owner/repo/pull/10'
+            if args[:2] in (('git', 'config'), ('git', 'add')):
+                return c.git(self.root, *args[1:])
+            return ''
+        with patch.object(c, 'ROOT', self.root), patch.object(publisher, 'run', side_effect=run), \
+             patch.object(publisher, 'request_verification') as request, patch.object(review, 'wait_for_review') as wait, \
+             patch.dict(os.environ, {'GITHUB_REPOSITORY': 'owner/repo', 'GITHUB_RUN_ID': '123', 'GITHUB_RUN_ATTEMPT': '1'}):
+            ready = publisher.prepare(self.bundle, self.reports / 'validation.json', self.reports, '123')
+        self.assertEqual(c.git(self.root, 'rev-parse', 'HEAD'), self.source_sha)
+        self.assertEqual(c.git(self.root, 'rev-parse', ready['head_sha'] + '^'), self.source_sha)
+        self.assertTrue(publisher.committed_candidate_matches(self.root, ready['head_sha'], manifest))
+        request.assert_called_once()
+        wait.assert_called_once()
+        self.assertFalse(any(row[:3] == ('gh', 'pr', 'merge') for row in calls))
+        self.assertEqual(c.read_json(self.reports / 'review-ready.json'), ready)
+        with patch.object(c, 'ROOT', self.root), patch.object(publisher, 'run', side_effect=run):
+            stale = dict(ready, base_sha='b' * 40)
+            c.write_json(self.reports / 'stale-ready.json', stale)
+            with self.assertRaisesRegex(ValueError, 'readiness does not match'):
+                publisher.publish(self.bundle, self.reports / 'validation.json', self.reports, '123',
+                                  prepared=self.reports / 'stale-ready.json')
+        self.assertFalse(any(row[:3] == ('gh', 'pr', 'merge') for row in calls))
 
     def test_live_identity_rejects_same_candidate_with_stale_publication_or_stamp(self):
         from tools import verify_release_live as live

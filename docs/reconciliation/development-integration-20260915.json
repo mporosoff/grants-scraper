@@ -1,0 +1,94 @@
+{
+  "version": "production-maintenance-forward-integration-20260915",
+  "development_base": "842cee675ffe5795b77054104f6a606b719e3a71",
+  "source_pr": 251,
+  "source_merge": "dda8d168c35a61323abc740e2193dfc244a7f5f5",
+  "scope": "Only the maintenance patch, not a historical bulk merge or helper replay",
+  "unchanged_scientific_files": {
+    "config/researcher_registry.json": "6f04795bfa5c64eec2c55240f51ed358290c0f56e563110df6b05dd0def7cf17",
+    "config/opportunity_team_model.json": "ce229e1720b12b294952048e198a8f60ffc446d10917674527d0f156073e12ec",
+    "data/faculty_matches.js": "5d71858057959630651e14dcaf395db1f0b7a7d0c43bc9af502cd4955663007a",
+    "data/researcher_directory.js": "129d5e4794c3224270438f6871be7dff3e714beb399f17ee8a90d82d02e27490",
+    "data/opportunity_teams.js": "633f6fac27edc9b07f80404761d5ed0b934c04b055a8d280d1d73854b0bbfd9c",
+    "data/opportunity_team_index.js": "579f1cd08551bade4420158f399b8a0ed2ca2bc663f854407d54508a08806993",
+    "data/search-v2-release.json": "6c19e5d2f5766177ba03efabe383bc5fdf07831b29567b11da78e5a02bca3132",
+    "assets/team-matcher.js": "6cadd56438534eb44613c61fc3d3fac3bfece213ebd45268f748a1514d106966",
+    "assets/contextual-team-engine.js": "0ed913863c3251f1982022a391f437bb806bf66bed83d60287de79abd54a7f11",
+    "assets/opportunity-team-panel.js": "9f9acd3c94b6fb38d75555d6d47ee3babe7ee6e255d9cd72970c113c2281cd33",
+    "team_match.html": "16e8ca79151c5a957d0eca6b6517dd09e75cae2ddc0c1fc59c721fbc7e23413b"
+  },
+  "conflict_dispositions": {
+    "matcher": "Existing allocation guard equivalent; preserve exact experimental bytes",
+    "registry_and_team_hashes": "Preserve audited development generations and adapters",
+    "public_imports": "Sets already equal; use reviewed formatting",
+    "production_freeze_tests": "Preserve development-specific assertions; production-only matcher guard not applied to different experimental engine",
+    "production_geometry_test": "Preserve development fixture containing extra controls, not production-only symmetric layout",
+    "contextual_fixture": "Update exact expected action string to the existing canAssessPerson restriction from 015c8efcc836453356a6bee722fd2e0726e83fd4; no runtime change"
+  },
+  "checks": {
+    "python": {
+      "passed": 86
+    },
+    "node_first": {
+      "passed": 55,
+      "failed": 1,
+      "cause": "Pre-existing contextual presentation fixture predates capability restriction"
+    },
+    "node_affected_rerun": {
+      "passed": 12,
+      "failed": 0
+    },
+    "full_e2e_development": "Not repeated: runtime bytes unchanged; production staged-suite evidence remains separate"
+  },
+  "retained_graph_replays": [
+    {
+      "scope_id": "363069",
+      "graph_id": "fab6efae6aef3a893c1e008527bf2f04249c06d437307b506cb0005c83005aee",
+      "clock": "2026-09-13T17:00:59.587Z",
+      "provider_calls": 0
+    },
+    {
+      "scope_id": "332894",
+      "graph_id": "1241059bce88414c24d3b1847597c758cea82a56889a4f7a7a0805c2c928f13f",
+      "clock": "2026-09-13T17:00:59.587Z",
+      "provider_calls": 0
+    },
+    {
+      "scope_id": "332894",
+      "graph_id": "a9ce47f194e303b6d4173bf4a8d28685e597df2e31144f45d1d9ce44acbbeb64",
+      "clock": "2026-09-13T17:00:59.587Z",
+      "provider_calls": 0
+    },
+    {
+      "scope_id": "351715",
+      "graph_id": "8bf6b1e43cf8ffbe7c175eca7c58f939ff32ec053c6b75ac350918377b808ff0",
+      "clock": "2026-09-15T14:43:45.883Z",
+      "provider_calls": 0
+    },
+    {
+      "scope_id": "341997",
+      "graph_id": "c504e008ed91a591888b0f5d37e3dd14561cb79c731df68ddae288426c5b7a76",
+      "clock": "2026-09-15T14:43:45.883Z",
+      "provider_calls": 0
+    },
+    {
+      "scope_id": "363302:a-1",
+      "graph_id": "8b4bb8d27078198b6023da1b0155679aca470d366fb3da8dc1fdc83348235f41",
+      "clock": "2026-09-15T14:43:45.883Z",
+      "provider_calls": 0
+    }
+  ],
+  "luna_replay": {
+    "kind": "retained_luna_identity_replay",
+    "assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+    "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+    "people": 12,
+    "pairs": 24,
+    "provider_calls": 0,
+    "ledger_unchanged": true,
+    "checkpoint_unchanged": true,
+    "state": "complete_unverified_assessment"
+  },
+  "scientific_provider_calls": 0,
+  "local_edit_failure": "Default Windows decoding caused temporary mojibake while resolving overlaps. Byte comparison caught it before commit; UTF-8 restored and all preserved-file hashes verified."
+}

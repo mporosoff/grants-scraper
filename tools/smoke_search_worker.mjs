@@ -181,6 +181,8 @@ async function main() {
     shared_passage_id: shared.passage_id,
     embed_model: embed.body.model,
     embed_tokens: embed.body.usage?.total_tokens || 0,
+    current_rerank_tokens: current.body.usage?.total_tokens || 0,
+    previous_rerank_tokens: previous.body.usage?.total_tokens || 0,
     current_rerank_status: current.status,
     previous_rerank_status: previous.status,
     unknown_corpus_status: unknown.status,

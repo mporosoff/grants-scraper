@@ -64,8 +64,13 @@ job reruns can load receipts retained by an earlier workflow attempt.
 
 If main advances while a generated PR is reviewed, a publication retry waits for
 that old-head review to finish, verifies unchanged generation dependencies and
-candidate bytes, and rebases the same branch using an exact force-with-lease.
+candidate bytes, and advances the same branch with a merge commit preserving both
+the old publication head and current protected-main history. It never force-pushes.
 It requests one new exact-head review only if one was not automatically started.
+Initial publication also checks all review surfaces and requests a missing review.
+The publish job obtains `review-ready.json` before Worker mutation or provider
+smoke; final protected merge rechecks its exact candidate, receipt, base and review
+after the existing compatibility gates. Pending review leaves serving unchanged.
 Old approval reactions cannot validate the new head. Publication checks committed
 hashes even when a candidate marker is already present on main.
 
