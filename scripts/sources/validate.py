@@ -15,9 +15,22 @@ snapshot instead of publishing a broken refresh.
 from __future__ import annotations
 
 from datetime import date
+import re
 
 # A close date more than this many years out is treated as a data error.
 MAX_FUTURE_DAYS = 366 * 6
+
+
+def is_application_instruction(text: str) -> bool:
+    """Recognize applicant-directed prose, including unfinished link lead-ins.
+
+    VPR sometimes bolds these instructions like headings. Keep them in the
+    enclosing opportunity instead of inventing a separately fundable record.
+    """
+    return bool(re.match(
+        r'^\s*(?:(?:potential|prospective|interested)\s+)?'
+        r'(?:applicants?|proposers?)\s+(?:are|is|should|must|may|shall)\b',
+        str(text or ''), re.I))
 
 
 def _official_url(record: dict) -> str | None:
@@ -32,6 +45,9 @@ def record_is_publishable(record: dict, as_of: date) -> tuple[bool, str]:
     """Return ``(ok, reason)`` for a single external record."""
     if not record.get("title"):
         return False, "missing_title"
+    if (str(record.get('opportunity_id') or '').startswith('vpr-email:')
+            and is_application_instruction(record['title'])):
+        return False, "application_instruction_not_opportunity"
     if not _official_url(record):
         return False, "missing_official_url"
     if record.get("source_review_after"):

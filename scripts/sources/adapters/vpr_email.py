@@ -56,6 +56,7 @@ import requests
 
 from ..base import CanonicalOpportunity, SourceAdapter
 from ..registry import register
+from ..validate import is_application_instruction
 
 DEFAULT_SENDERS = [
     "VPR_Funding_Opps@lists.rochester.edu",
@@ -640,6 +641,8 @@ def _is_title_line(line: dict, in_fundable: bool) -> bool:
     if not in_fundable:
         return False
     plain = line["plain"]
+    if is_application_instruction(plain):
+        return False
     if len(plain) < 6 or _is_field_line(plain) or _section_name(plain):
         return False
     if line.get("bold") is False:            # HTML said explicitly not bold
@@ -727,7 +730,8 @@ def extract_from_lines(lines: list[dict]) -> list[dict]:
             else:
                 # text/plain: a non-field line followed by a strong field (before
                 # the next heading-ish line) starts a new opportunity.
-                if not _is_field_line(line["plain"]) and len(line["plain"]) >= 6:
+                if (not _is_field_line(line["plain"]) and len(line["plain"]) >= 6
+                        and not is_application_instruction(line['plain'])):
                     for nxt in lines[idx + 1: idx + 12]:
                         if _STRONG_FIELD_RE.match(nxt["plain"]):
                             candidate = True
@@ -784,7 +788,7 @@ def _build_opportunity(buf: list[dict]) -> Optional[dict]:
 
     title = re.sub(r"\s+", " ", buf[0]["plain"]).strip().rstrip(":").strip()
     title = re.sub(r"\s*\bNEW\b\s*$", "", title, flags=re.IGNORECASE).strip()
-    if len(title) < 6 or _section_name(title):
+    if len(title) < 6 or _section_name(title) or is_application_instruction(title):
         return None
 
     # locate first field label -> links before it are the "top" (real) links
