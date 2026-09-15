@@ -12,6 +12,7 @@ from datetime import datetime
 import html
 import re
 from typing import Iterable, Optional
+from urllib.parse import urlsplit
 from xml.etree import ElementTree as ET
 
 from ..base import CanonicalOpportunity
@@ -180,9 +181,20 @@ class NSFFundingUpcoming(RSSAdapter):
     def parse(self, payload: str) -> Iterable[CanonicalOpportunity]:
         opportunities = self.parse_feed(payload)
         for opportunity in opportunities:
-            match = re.search(
-                r"/(nsf|pd)(\d{2}-[0-9a-z]+)(?:[/?#]|$)",
-                opportunity.url or "",
+            # This is NSF's own feed, not an aggregator's sponsor default.
+            # Require its official funding link before asserting that authority
+            # or interpreting a number; a lookalike host/title proves neither.
+            try:
+                url = urlsplit(opportunity.url or "")
+            except ValueError:
+                continue
+            if (url.scheme != 'https' or url.netloc not in ('www.nsf.gov', 'nsf.gov')
+                    or not url.path.startswith('/funding/opportunities/')):
+                continue
+            opportunity.agency = self.display_name
+            match = re.fullmatch(
+                r"/funding/opportunities/[^/]+/(nsf|pd)(\d{2}-[0-9a-z]+)/?",
+                url.path,
                 re.I,
             )
             if match:
