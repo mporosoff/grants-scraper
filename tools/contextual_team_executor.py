@@ -102,6 +102,15 @@ class Runner:
         bound,amount=text_reservation(body)
         return bound,amount,{}
 
+    def read_provider_response(self,response,provider,body,receipt):
+        return json.loads(existing.bounded_response(response,existing.PACKET_LIMIT))
+
+    def finish_diagnostics(self,receipt):
+        pass
+
+    def failure_diagnostics(self,error,receipt):
+        pass
+
     def failure_state(self,error):
         # Exception text is not a dispatch receipt. Persisted uncertainty wins
         # even if a later cache/checkpoint failure obscures the first exception.
@@ -158,7 +167,7 @@ class Runner:
             response=self.post(url,headers=headers,json=body,timeout=(10,read_timeout),allow_redirects=False,stream=True)
             self.crash('after_dispatch')
             receipt['http_status']=response.status_code
-            payload=json.loads(existing.bounded_response(response,existing.PACKET_LIMIT))
+            payload=self.read_provider_response(response,provider,body,receipt)
             if provider!='voyage':receipt['provider_stop_reason']=stop_reason(payload)
             usage,charge=self.request_usage(provider,payload,body['model'])
             receipt.update(usage=usage,charged_microusd=charge)
@@ -177,6 +186,7 @@ class Runner:
             self.crash('after_cache')
             receipt['status']='valid'
         except (ValueError,KeyError,TypeError,OSError,requests.RequestException,Deferred,Refusal) as error:
+            self.failure_diagnostics(error,receipt)
             row=next(r for r in self.ledger.read()['requests'] if r['id']==token)
             if 'charged_microusd' in receipt and row['status']=='reserved_unknown':
                 self.ledger.reconcile(token,cost_usd=Decimal(receipt['charged_microusd'])/1000000,usage=receipt['usage'],status='failed')
@@ -195,6 +205,7 @@ class Runner:
             raise
         finally:
             receipt['elapsed_seconds']=round(time.monotonic()-started,6)
+            self.finish_diagnostics(receipt)
             atomic_json(self.state/'receipts'/(token+'.json'),receipt)
             self.crash('after_receipt');existing.checkpoint(self.state)
         self.used.append({'key':key,'request_id':token,'cache_hit':False})

@@ -318,7 +318,7 @@ def unpack_state(raw, destination):
         seen = set()
         for info in files:
             name = info.filename
-            if (not re.fullmatch(r"(ledger|checkpoint)\.json|cache/[a-f0-9]{64}\.json|receipts/[a-f0-9]{32}\.json", name)
+            if (not re.fullmatch(r"(ledger|checkpoint)\.json|cache/[a-f0-9]{64}\.json|receipts/[a-f0-9]{32}\.json|diagnostics/[a-f0-9]{32}\.json", name)
                     or name in seen or stat.S_ISLNK(info.external_attr >> 16)):
                 raise ValueError("unsafe_checkpoint_member")
             seen.add(name)
