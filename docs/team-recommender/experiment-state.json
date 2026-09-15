@@ -7492,15 +7492,15 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "requirements_latency_named_technical_blocker",
-  "stop": true,
+  "stage_status": "implementing_bounded_authorized_repair",
+  "stop": false,
   "unresolved": [
     "Single comparison checker returned HTTP400; no error body or usage retained. Request fc618603458249348c6834d258264520 remains reserved_unknown with $0.146074 fully held;0/24 verdicts accepted.",
     "Luna completed but failed canonical role-1 array-length5>4. Its scientific output was not retained; quality is unavailable, not negative. No retry authorized.",
     "Sonnet medium is mechanically valid and3.46x faster on the exposed assessment; scientific adequacy is unchecked and source-based discrepancies remain.",
     "No corrected DOE workflow, requirement-meaning check, verified-render timing, new live cached edit or changed-workflow memory measurement. No selected route or public release."
   ],
-  "updated_at": "2026-09-14T14:07:02.503859+00:00",
+  "updated_at": "2026-09-15",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -9481,7 +9481,7 @@
       }
     }
   },
-  "active_work": "requirements_and_bounded_latency_repair",
+  "active_work": "luna_contract_repair_and_one_scientific_check",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -10269,5 +10269,34 @@
     "active_stage_meaning": "Historical four-stage numbering retained; Phase1 means current contextual Option1 output-check closeout only",
     "source_head_at_evidence_capture": "5dd8ad38f2954ea2610be075e2afc5f113fce5f4",
     "source_tree_at_evidence_capture": "91d20fce5823e88333efa23e5067dabb29159d01"
+  },
+  "historical_pre_luna_repair_top_level": {
+    "active_work": "requirements_and_bounded_latency_repair",
+    "stage_status": "requirements_latency_named_technical_blocker",
+    "stop": true,
+    "report": "docs/team-recommender/reports/requirements-and-latency-repair-report.md",
+    "recommendation": "NAMED TECHNICAL BLOCKER: checker HTTP400 with unreconciled usage and no accepted verdicts. No route selected or DOE run. Stop for owner review.",
+    "authority": {
+      "work_order": "Shared scientific evidence mechanism and bounded resource repair",
+      "record": "docs/team-recommender/evidence-repair/AUTHORITY.md",
+      "scope": "One zero-paid repair, exposed diagnostic comparisons, full configured browser validation and exact-head PR225 review; no profile enrichment, new human packet, deployment or automatic next revision"
+    }
+  },
+  "luna_contract_repair": {
+    "authority": "docs/team-recommender/contextual-stage-b/LUNA-CONTRACT-REPAIR-AUTHORITY.md",
+    "starting_product_sha": "e2fad03a4d8b37bb18eff0b50e993e36b113a422",
+    "starting_main_sha": "31b69b0772c759d9d8f7651a02aef924c7bab7e5",
+    "prior_owner_run": 34852296018,
+    "prior_attempts": 683,
+    "prior_reconciled_microusd": 7339874,
+    "prior_unknown_held_microusd": 146074,
+    "maximum_new_microusd": 500000,
+    "maximum_new_attempts": 2,
+    "maximum_new_native_counts": 2,
+    "new_paid_attempts": 0,
+    "new_native_counts": 0,
+    "public_activation": false,
+    "new_human_items": 0,
+    "status": "local_implementation_before_review"
   }
 }

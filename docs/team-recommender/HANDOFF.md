@@ -341,3 +341,10 @@ S completed in66.875874 seconds (3.46x faster than the retained exposed referenc
 Authoritative cloud owner34852296018:683/690 attempts; $7.339874 reconciled plus$0.146074 uncertain hold, conservative ledger usage$7.485948. Remaining$2.514052 and7slots preserve the required$1.267862/2 reserve. This task used3 metered-purpose attempts, $0.107736 reconciled plus the hold. Five new free native-count HTTP calls are separately recorded (186/190 lifetime). No additional inference, rekey, fallback or automatic retry is authorized; unused capacity is not a request quota.
 
 Read reports/requirements-and-latency-repair-report.md and contextual-stage-b/requirements-latency-*-closeout-v1.json. Preserve all histories and private caches. Any further diagnosis/reconciliation or replacement request needs the owner's specific next decision. STOP FOR USER REVIEW; no public release,50/150 activity orStage4.
+
+
+### Luna contract repair and one scientific check — September 15, 2026
+
+The owner authorizes [this exact bounded continuation](contextual-stage-b/LUNA-CONTRACT-REPAIR-AUTHORITY.md): complete the same twelve ECLIPSE researchers by two contributions, retain final-answer/error diagnostics privately, then at most one repaired Luna assessment and one separate Sonnet check. No new interpretation, vectors, profiles, production verifier, teams, DOE workflow, human packet, release or activation. Older reports/stops remain history.
+
+The authoritative checkpoint remains run34852296018/artifact10350533860, verified683 rows, $7.339874 known +$0.146074 unknown held (included once), $2.514052/seven attempts remaining. A narrowly reviewed exact terminal-error quarantine may preserve that entire hold and close its original logical request while allowing only the two newly named operations. New task ceilings are$0.50/two attempts and at most two native counts within190; protected$1.267862/two attempts remains. No allowance is reset. Local implementation and zero-provider checks precede exact-head review/CI/protected execution; no new spending has occurred.
