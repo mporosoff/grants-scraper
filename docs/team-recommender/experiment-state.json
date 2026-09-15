@@ -44,9 +44,9 @@
     }
   },
   "authority": {
-    "work_order": "Shared scientific evidence mechanism and bounded resource repair",
-    "record": "docs/team-recommender/evidence-repair/AUTHORITY.md",
-    "scope": "One zero-paid repair, exposed diagnostic comparisons, full configured browser validation and exact-head PR225 review; no profile enrichment, new human packet, deployment or automatic next revision"
+    "work_order": "Luna evidence contract repair and one scientific check",
+    "record": "docs/team-recommender/contextual-stage-b/LUNA-CONTRACT-REPAIR-AUTHORITY.md",
+    "scope": "Completed two named attempts within $0.50; no further paid request/retry, production verifier, team, release or Stage4 authorized."
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -61,8 +61,8 @@
     "D3_judge_requests": 120,
     "D3_prior_usd": 2.27911,
     "D3_spend_usd": 0.856223,
-    "actual_usd": 7.339874,
-    "authoritative_owner": "Exclusive protected-main cloud executor; paired checkpoint run34852296018. Local mirrors read-only.",
+    "actual_usd": 7.34688,
+    "authoritative_owner": "Exclusive protected-main cloud executor; checkpoint run34967272858, artifact10394804222. Local mirrors read-only.",
     "authorized_usd": 10,
     "closeout_new_requests": 24,
     "closeout_new_usd": 1.205247,
@@ -71,23 +71,23 @@
     "historical_other_task_usd": 11.971342,
     "historical_stage2_minimum_later_reserve_usd": 4,
     "id": "on-demand-team-offline-v2-20260909",
-    "input_tokens": 2317086,
-    "latest_checkpoint_sha256": "21d38593f296e32c21c25522dc83f650efddcd78ea55496f28c287b802facc28",
-    "latest_run_id": 34852296018,
-    "ledger": "Cloud state artifact10350533860, run34852296018; $7.339874 reconciled plus $0.146074 uncertain held,683/690 attempts. No duplicate ownership.",
-    "ledger_sha256": "981c283d1466f5b191e5b000c1d917dff16c5638de18e4bee80aca5e7ccf7e33",
+    "input_tokens": 2332093,
+    "latest_checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+    "latest_run_id": 34967272858,
+    "ledger": "Cloud state artifact10394804222, run34967272858; $7.346880 known + $0.351328 unknown held,685/690 attempts.",
+    "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
     "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
     "no_new_allowance_at_closeout": true,
-    "output_tokens": 272058,
+    "output_tokens": 275395,
     "path": "docs/team-recommender/preparation-budget.json",
     "reconciliation": {
-      "path": "docs/team-recommender/contextual-stage-b/requirements-latency-accounting-closeout-v1.json",
-      "sha256": "de04021de8a54b4f65d4e3459b00a267e9e880ae2f05b085ae9c1f6ad81d7ed6"
+      "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
+      "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
     },
-    "remaining_request_slots": 7,
-    "remaining_total_usd": 2.514052,
-    "requests": 683,
-    "reserved_usd": 0.146074,
+    "remaining_request_slots": 5,
+    "remaining_total_usd": 2.301792,
+    "requests": 685,
+    "reserved_usd": 0.351328,
     "stage2_cumulative_ceiling_usd": 6,
     "stage3_ceiling_new_usd": 4,
     "stage3_new_requests": 120,
@@ -114,17 +114,24 @@
     "phase1_new_requests": 3,
     "phase1_completion_new_usd": 0.042804,
     "phase1_completion_new_requests": 2,
-    "conservative_ledger_usage_usd": 7.485948,
-    "current_task_maximum_new_usd": 1.5,
-    "current_task_maximum_new_attempts": 8,
+    "conservative_ledger_usage_usd": 7.698208,
+    "current_task_maximum_new_usd": 0.5,
+    "current_task_maximum_new_attempts": 2,
     "requirements_latency_new_requests": 3,
     "requirements_latency_reconciled_usd": 0.107736,
     "requirements_latency_uncertain_usd": 0.146074,
     "usage_complete": false,
     "unknown_usage_request_ids": [
-      "fc618603458249348c6834d258264520"
+      "fc618603458249348c6834d258264520",
+      "d24a0654d72e486793519bead019b064"
     ],
-    "token_totals_note": "Known returned usage only. Checker HTTP400 usage is unavailable and not treated as zero."
+    "token_totals_note": "Known returned usage only. Both checker HTTP400 usages are unknown, not zero. New Luna85 reasoning tokens are within3337 output tokens.",
+    "luna_repair_new_requests": 2,
+    "luna_repair_known_usd": 0.007006,
+    "luna_repair_unknown_held_usd": 0.205254,
+    "luna_repair_conservative_usd": 0.21226,
+    "native_count_used": 187,
+    "native_count_limit": 190
   },
   "candidate": {
     "primary": "contextual-audited-graph-v1 implementation",
@@ -137,47 +144,23 @@
     "fallback": null
   },
   "checks": {
-    "version": "option1-validation-v1",
-    "product_code_sha": "1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
-    "helper_pr": 238,
-    "helper_head": "9344e46478d287f72547fb859443bcd423e6772c",
-    "helper_merge": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
-    "required_ci_run": 34768863329,
-    "python": {
-      "passed": 1421,
-      "seconds": 291.226,
-      "log_sha256": "5a8b3bb0e86f3ac4c5991d0737679087205f866d800eb069da3f48950dd29f10"
-    },
-    "browser_contracts": {
-      "passed": 901,
-      "seconds": 79.387,
-      "log_sha256": "faa76f856d19aaee31e980a599aa70a7d6c86dd41b4cee70b3bd348c4205a371"
-    },
-    "full_e2e": {
-      "startTime": "2026-09-13T16:50:02.877Z",
-      "duration": 943534.7710000001,
-      "expected": 117,
-      "skipped": 0,
-      "unexpected": 0,
-      "flaky": 0,
-      "errors": [],
-      "result_sha256": "f1c8c5fe2b5cc90784369476d75451bc9c43c26f3d59255fbd847b12aeacf7a0",
-      "configured_cases": 117,
-      "a11y_scans": 25,
-      "serious_or_critical_findings": 0,
-      "manual_or_incomplete_a11y_checks_remain": true,
-      "teardown": "All test workers exited; owned localhost8765 server hung. Its verified PID34784 was stopped; the original runner then exited0 and wrote117passed. No repeated full suite."
-    },
-    "focused_helper_python": 24,
-    "focused_helper_node": 17,
-    "focused_product_node": 17,
-    "crash_fixture_boundaries": 8,
+    "new_focused_methods_passed": 15,
+    "existing_focused_methods_passed": 48,
+    "ci_python_passed": 1477,
+    "ci_browser": "PASS",
+    "ci_flag_off_artifacts_unchanged": 23,
+    "crash_injection_base_boundaries": 7,
+    "additional_failure_diagnostic_boundaries": 3,
     "restorations_per_boundary": 3,
     "duplicate_fixture_dispatches": 0,
-    "no_public_presentation_changes_from_start": true,
-    "physical_mobile": "not_run"
+    "actual_assessment_lossless_validation": "PASS",
+    "actual_final_checkpoint_verification": "PASS",
+    "full_e2e": "NOT_RUN_THIS_TASK",
+    "runtime_graph_adapter_unchanged": true,
+    "helper_head": "0422356ca3f901ff7ae98d96d22781963885714e",
+    "required_ci_run": 34965952818
   },
-  "containing_commit": "Documentation commit adding requirements-and-latency-repair-report.md after implementation cc233813973aad3a47a438348babe497e75157ab.",
+  "containing_commit": "Local documentation commit introducing luna-contract-repair-and-scientific-check.md after execution checkpoint 7fc3c366b074869b1eff78400dd3b769b3bc5873.",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -7146,12 +7129,12 @@
     "trusted_execution": "PR223 exact-head reviewed/CI passed and protected-merged; three manual runs completed finite embedding/judging; one terminal failed request charged without replay."
   },
   "receipt_index": {
-    "path": "docs/team-recommender/contextual-stage-b/option1-receipt-index-v1.json",
-    "sha256": "95db1213b32a1e93299e6ee34ee766ab29efc02dc21e1731db1a89427f244c0c"
+    "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
+    "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
   },
-  "recommendation": "NAMED TECHNICAL BLOCKER: checker HTTP400 with unreconciled usage and no accepted verdicts. No route selected or DOE run. Stop for owner review.",
+  "recommendation": "C. NAMED TECHNICAL OR ACCOUNTING BLOCKER; IDENTIFY THE EXACT MISSING OUTPUTS. Checker compiled grammar too large; 0/24 independent verdicts. No retry or route promotion.",
   "recommended_next_stage": "STOP FOR USER REVIEW",
-  "report": "docs/team-recommender/reports/requirements-and-latency-repair-report.md",
+  "report": "docs/team-recommender/reports/luna-contract-repair-and-scientific-check.md",
   "repository": "mporosoff/grants-scraper",
   "results": {
     "contextual_counts": {
@@ -7492,13 +7475,13 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "implementing_bounded_authorized_repair",
-  "stop": false,
+  "stage_status": "stopped_checker_grammar_and_unknown_usage_boundary",
+  "stop": true,
   "unresolved": [
-    "Single comparison checker returned HTTP400; no error body or usage retained. Request fc618603458249348c6834d258264520 remains reserved_unknown with $0.146074 fully held;0/24 verdicts accepted.",
-    "Luna completed but failed canonical role-1 array-length5>4. Its scientific output was not retained; quality is unavailable, not negative. No retry authorized.",
-    "Sonnet medium is mechanically valid and3.46x faster on the exposed assessment; scientific adequacy is unchecked and source-based discrepancies remain.",
-    "No corrected DOE workflow, requirement-meaning check, verified-render timing, new live cached edit or changed-workflow memory measurement. No selected route or public release."
+    "New checker HTTP400: compiled grammar too large. All24 pair verdicts and12 derived person outcomes are missing. No new check/retry is authorized.",
+    "New request d24a0654d72e486793519bead019b064 has unknown usage and $0.205254 fully held; it is not covered by the historical quarantine.",
+    "Historical checker fc618603458249348c6834d258264520 remains unknown usage with $0.146074 held; original cause and verdicts remain unavailable.",
+    "The valid Luna assessment is unverified; no scientific route selection, production graph, corrected DOE workflow, full cold-workflow latency or new explanation/team qualification follows."
   ],
   "updated_at": "2026-09-15",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
@@ -9481,7 +9464,7 @@
       }
     }
   },
-  "active_work": "luna_contract_repair_and_one_scientific_check",
+  "active_work": "luna_contract_repair_bounded_closeout",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -10293,15 +10276,171 @@
     "maximum_new_microusd": 500000,
     "maximum_new_attempts": 2,
     "maximum_new_native_counts": 2,
-    "new_paid_attempts": 0,
+    "new_paid_attempts": 2,
     "new_native_counts": 1,
     "public_activation": false,
     "new_human_items": 0,
-    "status": "reviewed_complete_sizing_locked_before_paid_work",
+    "status": "bounded_execution_closed_checker_failed_no_retry",
     "lock": "docs/team-recommender/contextual-stage-b/luna-repair-prepaid-lock-v1.json",
     "preflight_run": 34966746696,
-    "authoritative_owner": 34966746696,
+    "authoritative_owner": 34967272858,
     "reviewed_helper_head": "0422356ca3f901ff7ae98d96d22781963885714e",
-    "merge_sha": "ef44f981803e2cde77a8d1a6659115e722c66e02"
+    "merge_sha": "ef44f981803e2cde77a8d1a6659115e722c66e02",
+    "state_artifact": 10394804222,
+    "assessment_run": 34967025187,
+    "check_run": 34967272858,
+    "assessment_request": "cc76321197cd497c8391654fd6e98298",
+    "checker_request": "d24a0654d72e486793519bead019b064",
+    "retained_people": 12,
+    "retained_pairs": 24,
+    "accepted_checker_pairs": 0,
+    "missing_checker_pairs": 24,
+    "new_known_microusd": 7006,
+    "new_unknown_hold_microusd": 205254,
+    "new_conservative_microusd": 212260,
+    "remaining_microusd": 2301792,
+    "remaining_paid_attempts": 5,
+    "report": "docs/team-recommender/reports/luna-contract-repair-and-scientific-check.md",
+    "receipt": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
+    "scientific_acceptance": false,
+    "stop_for_user_review": true
+  },
+  "historical_pre_luna_closeout_top_level": {
+    "report": "docs/team-recommender/reports/requirements-and-latency-repair-report.md",
+    "recommendation": "NAMED TECHNICAL BLOCKER: checker HTTP400 with unreconciled usage and no accepted verdicts. No route selected or DOE run. Stop for owner review.",
+    "unresolved": [
+      "Single comparison checker returned HTTP400; no error body or usage retained. Request fc618603458249348c6834d258264520 remains reserved_unknown with $0.146074 fully held;0/24 verdicts accepted.",
+      "Luna completed but failed canonical role-1 array-length5>4. Its scientific output was not retained; quality is unavailable, not negative. No retry authorized.",
+      "Sonnet medium is mechanically valid and3.46x faster on the exposed assessment; scientific adequacy is unchecked and source-based discrepancies remain.",
+      "No corrected DOE workflow, requirement-meaning check, verified-render timing, new live cached edit or changed-workflow memory measurement. No selected route or public release."
+    ],
+    "checks": {
+      "version": "option1-validation-v1",
+      "product_code_sha": "1a1bdfc2d4b5a68afa3cc3603177903d8d7de05a",
+      "helper_pr": 238,
+      "helper_head": "9344e46478d287f72547fb859443bcd423e6772c",
+      "helper_merge": "e2f8705e8a5b88bbe968e7ba701328a317411bd8",
+      "required_ci_run": 34768863329,
+      "python": {
+        "passed": 1421,
+        "seconds": 291.226,
+        "log_sha256": "5a8b3bb0e86f3ac4c5991d0737679087205f866d800eb069da3f48950dd29f10"
+      },
+      "browser_contracts": {
+        "passed": 901,
+        "seconds": 79.387,
+        "log_sha256": "faa76f856d19aaee31e980a599aa70a7d6c86dd41b4cee70b3bd348c4205a371"
+      },
+      "full_e2e": {
+        "startTime": "2026-09-13T16:50:02.877Z",
+        "duration": 943534.7710000001,
+        "expected": 117,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0,
+        "errors": [],
+        "result_sha256": "f1c8c5fe2b5cc90784369476d75451bc9c43c26f3d59255fbd847b12aeacf7a0",
+        "configured_cases": 117,
+        "a11y_scans": 25,
+        "serious_or_critical_findings": 0,
+        "manual_or_incomplete_a11y_checks_remain": true,
+        "teardown": "All test workers exited; owned localhost8765 server hung. Its verified PID34784 was stopped; the original runner then exited0 and wrote117passed. No repeated full suite."
+      },
+      "focused_helper_python": 24,
+      "focused_helper_node": 17,
+      "focused_product_node": 17,
+      "crash_fixture_boundaries": 8,
+      "restorations_per_boundary": 3,
+      "duplicate_fixture_dispatches": 0,
+      "no_public_presentation_changes_from_start": true,
+      "physical_mobile": "not_run"
+    },
+    "receipt_index": {
+      "path": "docs/team-recommender/contextual-stage-b/option1-receipt-index-v1.json",
+      "sha256": "95db1213b32a1e93299e6ee34ee766ab29efc02dc21e1731db1a89427f244c0c"
+    },
+    "authority": {
+      "work_order": "Shared scientific evidence mechanism and bounded resource repair",
+      "record": "docs/team-recommender/evidence-repair/AUTHORITY.md",
+      "scope": "One zero-paid repair, exposed diagnostic comparisons, full configured browser validation and exact-head PR225 review; no profile enrichment, new human packet, deployment or automatic next revision"
+    },
+    "containing_commit": "Documentation commit adding requirements-and-latency-repair-report.md after implementation cc233813973aad3a47a438348babe497e75157ab."
+  },
+  "historical_pre_luna_closeout_budget_record": {
+    "D1_new_usd": 1.055784,
+    "D1_prior_usd": 1.082518,
+    "D2_new_usd": 0.140808,
+    "D2_prior_usd": 2.138302,
+    "D3_embedding_requests": 19,
+    "D3_embedding_tokens": 51153,
+    "D3_judge_input_tokens": 366538,
+    "D3_judge_output_tokens": 11700,
+    "D3_judge_requests": 120,
+    "D3_prior_usd": 2.27911,
+    "D3_spend_usd": 0.856223,
+    "actual_usd": 7.339874,
+    "authoritative_owner": "Exclusive protected-main cloud executor; paired checkpoint run34852296018. Local mirrors read-only.",
+    "authorized_usd": 10,
+    "closeout_new_requests": 24,
+    "closeout_new_usd": 1.205247,
+    "embedding_tokens": 123538,
+    "historical_other_task_credit_usd": 0,
+    "historical_other_task_usd": 11.971342,
+    "historical_stage2_minimum_later_reserve_usd": 4,
+    "id": "on-demand-team-offline-v2-20260909",
+    "input_tokens": 2317086,
+    "latest_checkpoint_sha256": "21d38593f296e32c21c25522dc83f650efddcd78ea55496f28c287b802facc28",
+    "latest_run_id": 34852296018,
+    "ledger": "Cloud state artifact10350533860, run34852296018; $7.339874 reconciled plus $0.146074 uncertain held,683/690 attempts. No duplicate ownership.",
+    "ledger_sha256": "981c283d1466f5b191e5b000c1d917dff16c5638de18e4bee80aca5e7ccf7e33",
+    "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
+    "no_new_allowance_at_closeout": true,
+    "output_tokens": 272058,
+    "path": "docs/team-recommender/preparation-budget.json",
+    "reconciliation": {
+      "path": "docs/team-recommender/contextual-stage-b/requirements-latency-accounting-closeout-v1.json",
+      "sha256": "de04021de8a54b4f65d4e3459b00a267e9e880ae2f05b085ae9c1f6ad81d7ed6"
+    },
+    "remaining_request_slots": 7,
+    "remaining_total_usd": 2.514052,
+    "requests": 683,
+    "reserved_usd": 0.146074,
+    "stage2_cumulative_ceiling_usd": 6,
+    "stage3_ceiling_new_usd": 4,
+    "stage3_new_requests": 120,
+    "stage3_new_usd": 0.817654,
+    "stage3_recorded_ceiling_new_requests": 184,
+    "stage4_minimum_preserved_requests": 25,
+    "stage4_minimum_preserved_usd": 2.864667,
+    "profile_repair_new_usd": 0,
+    "profile_repair_new_requests": 0,
+    "post_audit_new_usd": 0.337668,
+    "post_audit_new_requests": 34,
+    "post_audit_new_input_tokens": 152954,
+    "post_audit_new_output_tokens": 3176,
+    "shared_evidence_repair_new_usd": 0,
+    "shared_evidence_repair_new_requests": 0,
+    "contextual_new_usd": 1.205247,
+    "contextual_new_requests": 24,
+    "current_task_reserve_usd": 1.267862,
+    "current_task_reserve_requests": 2,
+    "historical_reserve_fields": "stage2/stage3/stage4 fields above retain historical authorization; current contextual amendment is authoritative.",
+    "option1_new_usd": 0.262512,
+    "option1_new_requests": 6,
+    "phase1_new_usd": 0.063566,
+    "phase1_new_requests": 3,
+    "phase1_completion_new_usd": 0.042804,
+    "phase1_completion_new_requests": 2,
+    "conservative_ledger_usage_usd": 7.485948,
+    "current_task_maximum_new_usd": 1.5,
+    "current_task_maximum_new_attempts": 8,
+    "requirements_latency_new_requests": 3,
+    "requirements_latency_reconciled_usd": 0.107736,
+    "requirements_latency_uncertain_usd": 0.146074,
+    "usage_complete": false,
+    "unknown_usage_request_ids": [
+      "fc618603458249348c6834d258264520"
+    ],
+    "token_totals_note": "Known returned usage only. Checker HTTP400 usage is unavailable and not treated as zero."
   }
 }

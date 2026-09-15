@@ -1,0 +1,1450 @@
+{
+  "version": "luna-repair-closeout-v1",
+  "date": "2026-09-15",
+  "report": "docs/team-recommender/reports/luna-contract-repair-and-scientific-check.md",
+  "authority": "docs/team-recommender/contextual-stage-b/LUNA-CONTRACT-REPAIR-AUTHORITY.md",
+  "starting_product_sha": "e2fad03a4d8b37bb18eff0b50e993e36b113a422",
+  "final_execution_product_sha": "7fc3c366b074869b1eff78400dd3b769b3bc5873",
+  "final_execution_product_tree": "f83efb775072ed398df97f863ea2e494882a0ee2",
+  "product_helper_reconciliation_sha": "06b085da385cd131e7bf1983339e594f7b2b7146",
+  "helper": {
+    "pr": 250,
+    "head": "0422356ca3f901ff7ae98d96d22781963885714e",
+    "merge_sha": "ef44f981803e2cde77a8d1a6659115e722c66e02",
+    "ci_run": 34965952818,
+    "terminal_review_completed_at": "2026-09-15T12:01:56.749482Z",
+    "review_summary_comment": 5679748471,
+    "clean_reaction_at": "2026-09-15T12:02:01Z",
+    "consequential_findings": 0,
+    "remediation_rounds": 0
+  },
+  "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "source_packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+  "assessment_result_sha256": "6dda8b76770c08005316e0957690a1c5436e44e30d91a872d478c48cfb4f2a0d",
+  "assessment_value_identity": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+  "lock": "docs/team-recommender/contextual-stage-b/luna-repair-prepaid-lock-v1.json",
+  "preflight_run": 34966746696,
+  "assessment_run": 34967025187,
+  "check_run": 34967272858,
+  "assessment_receipt": {
+    "body_sha256": "ee30137fa6071bfaca1d63136c2a6aa445f347ebf00265353f2e212975c03c19",
+    "charged_microusd": 7006,
+    "code_sha": "ef44f981803e2cde77a8d1a6659115e722c66e02",
+    "diagnostic_path": "diagnostics/cc76321197cd497c8391654fd6e98298.json",
+    "diagnostic_sha256": "fbb2fbc72f6ee61c857e8bf800b586ed53bf73957cf81f6d7a8b796e8f7f2b35",
+    "elapsed_seconds": 22.894593,
+    "execution_capacity": "contextual-output-capacity-v2",
+    "http_status": 200,
+    "key": "f0c159f00c4aa2fd57b4b5fe73694b71107b4b6429aeaea0c5fd84b2c01500a5",
+    "luna_operation": "assessment",
+    "luna_repair": "luna-complete-pair-repair-v1",
+    "output_token_ceiling": 24000,
+    "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+    "pair_contract_sha256": "961b892c85eeaa58c45b3432ecb99122d820a53538e28f086611e5f082ed0aa0",
+    "provider_stop_reason": "completed",
+    "purpose": "cb-lc-assessment",
+    "repair_of": "50fc958958824d2999245a80043ef301",
+    "request_id": "cc76321197cd497c8391654fd6e98298",
+    "reserved_microusd": 41765,
+    "returned_model": "gpt-5.6-luna",
+    "status": "valid",
+    "usage": {
+      "cache_write_tokens": 0,
+      "cached_input_tokens": 0,
+      "input_tokens": 15007,
+      "output_tokens": 3337,
+      "reasoning_tokens": 85
+    }
+  },
+  "checker_receipt": {
+    "body_sha256": "858f1f252a2dec66a71a8346bcdb91e6757a55d3be2e8d6bc7def3bc7df31a4a",
+    "code_sha": "ef44f981803e2cde77a8d1a6659115e722c66e02",
+    "diagnostic_path": "diagnostics/d24a0654d72e486793519bead019b064.json",
+    "diagnostic_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+    "disposition": "recovery_required",
+    "elapsed_seconds": 0.547928,
+    "error": "ConfigurationFailure",
+    "execution_capacity": "contextual-output-capacity-v2",
+    "http_status": 400,
+    "key": "0fc94f41db71a3ec2ad7d02bfc8eab5f6bb0ced147c838a7360e008d080b9c67",
+    "luna_operation": "check",
+    "luna_repair": "luna-complete-pair-repair-v1",
+    "output_token_ceiling": 12000,
+    "packet_sha256": "e4ff1aece0a0a4214fca3f235641e5858644f7268037ef834a15859be6a23b0e",
+    "pair_contract_sha256": "2bea7e3f3da862520e5e5f5f36d277b42ffc3a8b12617bbaf46c1a5a3248fdf3",
+    "purpose": "cb-lc-check",
+    "repair_of": "fc618603458249348c6834d258264520",
+    "request_id": "d24a0654d72e486793519bead019b064",
+    "reserved_microusd": 205254,
+    "semantic_diagnostic": {
+      "code": "http_400"
+    },
+    "status": "reserved_unknown"
+  },
+  "checker_error": {
+    "message": "The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the number of strict tools.",
+    "type": "invalid_request_error"
+  },
+  "checker_provider_request_id": "req_011Cf5CdbtQ9HBdBSPfCuhnT",
+  "assessment_diagnostic": {
+    "accepted_cache": false,
+    "body_sha256": "ee30137fa6071bfaca1d63136c2a6aa445f347ebf00265353f2e212975c03c19",
+    "completion_status": "completed",
+    "final_answer_bytes": 10929,
+    "final_answer_captured": true,
+    "final_answer_complete": true,
+    "final_answer_redacted": false,
+    "final_answer_sha256": "9864192046795539378c84d9fa65e1bf56bd5197880b85473d4c0ca1120cf522",
+    "http_status": 200,
+    "observed_at": "2026-09-15T12:07:57.881566+00:00",
+    "provider": "openai",
+    "provider_request_id": "req_64a340e35847414e8d5acb6d4d656dfe",
+    "reported_usage": {
+      "input_tokens": 15007,
+      "input_tokens_details": {
+        "cached_tokens": 0
+      },
+      "output_tokens": 3337,
+      "output_tokens_details": {
+        "reasoning_tokens": 85
+      }
+    },
+    "request_id": "cc76321197cd497c8391654fd6e98298",
+    "response_envelope_sha256": "7c47638dacd686db8850c9b3071b1e94b708d2d6bf1bdfd593f6dcf35e91fe31",
+    "retained_text_sha256": "9864192046795539378c84d9fa65e1bf56bd5197880b85473d4c0ca1120cf522",
+    "retention_days": 90,
+    "returned_model": "gpt-5.6-luna",
+    "validation": {
+      "charged_microusd": 7006,
+      "status": "valid",
+      "usage": {
+        "cache_write_tokens": 0,
+        "cached_input_tokens": 0,
+        "input_tokens": 15007,
+        "output_tokens": 3337,
+        "reasoning_tokens": 85
+      }
+    },
+    "version": "public-scientific-final-diagnostic-v1"
+  },
+  "accounting": {
+    "authorization": "on-demand-team-offline-v2-20260909",
+    "authoritative_owner_run": 34967272858,
+    "state_artifact_id": 10394804222,
+    "state_artifact_digest": "sha256:93a8a61d561b9291352a2783b1f0fb8bb6cf409206f9b88b3d637c688847a840",
+    "checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+    "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
+    "original_683_rows_sha256": "9b0f4844a9cdf9a48bf8e106de3acefe955b7e4eccfa92b6bdc2bbbf00ad1aa2",
+    "original_683_rows_unchanged": true,
+    "checkpoint_files_verified": 1357,
+    "checkpoint_file_mismatches": 0,
+    "original_native_186_rows_unchanged": true,
+    "new_paid_attempts": 2,
+    "lifetime_paid_attempts": 685,
+    "lifetime_limit": 690,
+    "remaining_paid_attempts": 5,
+    "new_known_microusd": 7006,
+    "new_unknown_hold_microusd": 205254,
+    "new_conservative_microusd": 212260,
+    "prior_unknown_hold_microusd": 146074,
+    "known_lifetime_microusd": 7346880,
+    "unknown_lifetime_held_microusd": 351328,
+    "conservative_lifetime_microusd": 7698208,
+    "remaining_microusd": 2301792,
+    "protected_microusd": 1267862,
+    "protected_attempts": 2,
+    "remaining_above_protected_microusd": 1033930,
+    "remaining_above_protected_attempts": 3,
+    "new_native_counts": 1,
+    "native_count_used": 187,
+    "native_count_limit": 190,
+    "native_counts_remaining": 3,
+    "unknown_request_ids": [
+      "fc618603458249348c6834d258264520",
+      "d24a0654d72e486793519bead019b064"
+    ],
+    "known_input_tokens": 2332093,
+    "known_output_tokens": 275395,
+    "new_input_tokens": 15007,
+    "new_output_tokens": 3337,
+    "new_reasoning_tokens_within_output": 85,
+    "checker_usage": null,
+    "no_automatic_retries": true,
+    "next_dispatch_block": {
+      "type": "Deferred",
+      "reason": "luna_other_uncertain_request_requires_recovery"
+    }
+  },
+  "outcomes": {
+    "people": {
+      "supported": 10,
+      "credible_transfer": 2
+    },
+    "pairs": {
+      "direct": 14,
+      "method_transfer": 9,
+      "adjacent": 1
+    },
+    "retained_people": 12,
+    "retained_pairs": 24,
+    "checker_accepted_pairs": 0,
+    "checker_missing_pairs": 24,
+    "checker_derived_person_outcomes_missing": 12,
+    "new_human_judgments": 0
+  },
+  "people": [
+    {
+      "person_id": "urh-000027",
+      "name": "Chuang Ren",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000027-c001@2",
+            "second": "urh-000027-c003@2",
+            "third": "urh-000027-c004@1"
+          },
+          "coverage": "direct",
+          "gap": "",
+          "reason": "Documented laser-plasma, hot-electron, kinetic-shock, and particle-in-cell research directly supports defining a fundamental plasma-science challenge.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000027-c001",
+              "revision": 2,
+              "label": "Computational inertial-confinement fusion plasma physics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000027-c003",
+              "revision": 2,
+              "label": "Particle-in-cell and kinetic plasma simulation",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000027-c004",
+              "revision": 1,
+              "label": "High-performance computing for plasma astrophysics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000027-c003@2",
+            "second": "urh-000027-c004@1",
+            "third": "urh-000027-c001@2"
+          },
+          "coverage": "method_transfer",
+          "gap": "Specific translational target and stakeholder need are not identified.",
+          "reason": "Kinetic simulation and high-performance computation provide a credible bridge from plasma challenges to fusion, space, and computational technology needs, though a specific societal pathway is not documented.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000027-c003",
+              "revision": 2,
+              "label": "Particle-in-cell and kinetic plasma simulation",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000027-c004",
+              "revision": 1,
+              "label": "High-performance computing for plasma astrophysics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000027-c001",
+              "revision": 2,
+              "label": "Computational inertial-confinement fusion plasma physics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/ren_chuang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000049",
+      "name": "Gilbert 'Rip' Collins",
+      "luna_outcome": "credible_transfer",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000049-c001@2",
+            "second": "urh-000049-c002@2",
+            "third": "urh-000049-c003@2"
+          },
+          "coverage": "method_transfer",
+          "gap": "The evidence does not establish a specific plasma process or plasma diagnostic.",
+          "reason": "Extreme-density material and shock-compression research concerns stellar and fusion plasmas and offers an applicable route to fundamental plasma-material questions.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000049-c001",
+              "revision": 2,
+              "label": "Extreme-density material states and fusion conditions",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000049-c002",
+              "revision": 2,
+              "label": "Shock compression at planetary-interior pressures",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000049-c003",
+              "revision": 2,
+              "label": "Laboratory microphysics of planets and stars",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000049-c001@2",
+            "second": "urh-000049-c002@2",
+            "third": "urh-000049-c003@2"
+          },
+          "coverage": "method_transfer",
+          "gap": "No explicit stakeholder need or technology pathway is documented.",
+          "reason": "Extreme-matter measurements can inform fusion and energy-relevant material behavior, providing a credible translational bridge, but no concrete societal application is specified.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000049-c001",
+              "revision": 2,
+              "label": "Extreme-density material states and fusion conditions",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000049-c002",
+              "revision": 2,
+              "label": "Shock compression at planetary-interior pressures",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000049-c003",
+              "revision": 2,
+              "label": "Laboratory microphysics of planets and stars",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/collins_rip/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000078",
+      "name": "Jonathan Davies",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000078-c002@2",
+            "second": "urh-000078-c003@2",
+            "third": "urh-000078-c001@2"
+          },
+          "coverage": "direct",
+          "gap": "",
+          "reason": "Laser-produced plasmas, magnetized shocks, fusion simulation, and neutron diagnostics directly support fundamental plasma investigation.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000078-c002",
+              "revision": 2,
+              "label": "Laser-produced plasma physics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000078-c003",
+              "revision": 2,
+              "label": "Magnetized shocks",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000078-c001",
+              "revision": 2,
+              "label": "Fusion simulation and neutron diagnostics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000078-c001@2",
+            "second": "urh-000078-c002@2",
+            "third": "urh-000078-c003@2"
+          },
+          "coverage": "direct",
+          "gap": "The evidence does not identify a broader stakeholder or non-fusion societal need.",
+          "reason": "Fusion simulation and diagnostics connect plasma research to fusion-energy technology, while magnetized-shock studies offer a relevant physics-to-application bridge.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000078-c001",
+              "revision": 2,
+              "label": "Fusion simulation and neutron diagnostics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000078-c002",
+              "revision": 2,
+              "label": "Laser-produced plasma physics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000078-c003",
+              "revision": 2,
+              "label": "Magnetized shocks",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/davies_jonathan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000014",
+      "name": "Astrid M. Müller",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000014-c002@2",
+            "second": "urh-000014-c003@2",
+            "third": "urh-000014-c008@2"
+          },
+          "coverage": "method_transfer",
+          "gap": "The documented work is electrochemical rather than a demonstrated plasma investigation.",
+          "reason": "Electrochemical interfaces, reactive species, and pulsed-laser nanomaterial synthesis provide applicable methods for plasma-surface, plasma-chemistry, or plasma-enabled materials questions.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000014-c002",
+              "revision": 2,
+              "label": "Electrode interfaces and reactive water species",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000014-c003",
+              "revision": 2,
+              "label": "Selective organic oxidation and carbon dioxide electrocatalysis",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000014-c008",
+              "revision": 2,
+              "label": "Pulsed-laser synthesis of nanocatalysts",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000014-c001@2",
+            "second": "urh-000014-c003@2",
+            "third": "urh-000014-c008@2"
+          },
+          "coverage": "direct",
+          "gap": "The evidence does not show that plasma would be part of the proposed process.",
+          "reason": "PFAS remediation, CO2 reduction, and energy conversion are explicit societal needs, and the documented catalytic methods offer a credible translational contribution.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000014-c001",
+              "revision": 2,
+              "label": "Electrocatalytic PFAS defluorination",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000014-c003",
+              "revision": 2,
+              "label": "Selective organic oxidation and carbon dioxide electrocatalysis",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000014-c008",
+              "revision": 2,
+              "label": "Pulsed-laser synthesis of nanocatalysts",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/faculty/mueller-astrid/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000061",
+      "name": "J. Ryan Rygg",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000061-c002@2",
+            "second": "urh-000061-c003@2",
+            "third": "NONE"
+          },
+          "coverage": "direct",
+          "gap": "",
+          "reason": "Shock-wave experiments and high-energy-density plasma platforms directly support fundamental plasma and extreme-matter investigation.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000061-c002",
+              "revision": 2,
+              "label": "Shock-wave experiments and extreme matter",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000061-c003",
+              "revision": 2,
+              "label": "Experimental platforms for high-energy-density physics",
+              "source_urls": [
+                "https://www.sas.rochester.edu/pas/people/faculty/rygg_ryan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000061-c003@2",
+            "second": "urh-000061-c002@2",
+            "third": "NONE"
+          },
+          "coverage": "method_transfer",
+          "gap": "Specific translational outcome is not documented.",
+          "reason": "Experimental HED platforms have a credible bridge to astrophysics and inertial-fusion technology, but the evidence does not specify a concrete societal need.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000061-c003",
+              "revision": 2,
+              "label": "Experimental platforms for high-energy-density physics",
+              "source_urls": [
+                "https://www.sas.rochester.edu/pas/people/faculty/rygg_ryan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000061-c002",
+              "revision": 2,
+              "label": "Shock-wave experiments and extreme matter",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/Rygg_Ryan/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000003",
+      "name": "Adam Sefkow",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000003-c001@2",
+            "second": "urh-000003-c002@2",
+            "third": "urh-000003-c003@2"
+          },
+          "coverage": "direct",
+          "gap": "",
+          "reason": "Computational inertial and magneto-inertial fusion plasma physics, MHD, particle-in-cell, and hybrid multiphysics directly support the core investigation.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000003-c001",
+              "revision": 2,
+              "label": "Inertial and magneto-inertial fusion modeling",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000003-c002",
+              "revision": 2,
+              "label": "Magnetohydrodynamic and particle-in-cell methods",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000003-c003",
+              "revision": 2,
+              "label": "Hybrid fluid-kinetic multiphysics",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/adam-sefkow-recognized-research-fusion-high-energy-density-physics-263772/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000003-c001@2",
+            "second": "urh-000003-c003@2",
+            "third": "urh-000003-c002@2"
+          },
+          "coverage": "direct",
+          "gap": "A specific external stakeholder or societal priority is not stated.",
+          "reason": "Fusion modeling and hybrid simulation connect fundamental plasma resolution to fusion-energy and computational-modeling needs.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000003-c001",
+              "revision": 2,
+              "label": "Inertial and magneto-inertial fusion modeling",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000003-c003",
+              "revision": 2,
+              "label": "Hybrid fluid-kinetic multiphysics",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/adam-sefkow-recognized-research-fusion-high-energy-density-physics-263772/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000003-c002",
+              "revision": 2,
+              "label": "Magnetohydrodynamic and particle-in-cell methods",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/Sefkow_Adam/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000153",
+      "name": "Zachary Robinson",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000153-c001@2",
+            "second": "urh-000153-c002@2",
+            "third": "urh-000153-c003@2"
+          },
+          "coverage": "method_transfer",
+          "gap": "The evidence does not document direct plasma-surface experiments.",
+          "reason": "Thin-film interfaces, hydrogen-isotope interactions, and materials instrumentation offer an applicable bridge to plasma-facing or fusion-materials challenges.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000153-c001",
+              "revision": 2,
+              "label": "Atomic layer deposition and ultrathin material interfaces",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000153-c002",
+              "revision": 2,
+              "label": "Hydrogen-isotope material interactions",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000153-c003",
+              "revision": 2,
+              "label": "Experimental instrumentation for fusion fuel materials",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000153-c002@2",
+            "second": "urh-000153-c003@2",
+            "third": "urh-000153-c001@2"
+          },
+          "coverage": "direct",
+          "gap": "The evidence does not specify a broader stakeholder need beyond fusion systems.",
+          "reason": "Hydrogen-isotope containment and separation are directly relevant to fusion technology, with materials synthesis and characterization providing a translational contribution.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000153-c002",
+              "revision": 2,
+              "label": "Hydrogen-isotope material interactions",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000153-c003",
+              "revision": 2,
+              "label": "Experimental instrumentation for fusion fuel materials",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000153-c001",
+              "revision": 2,
+              "label": "Atomic layer deposition and ultrathin material interfaces",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/robinson-zachary/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000138",
+      "name": "Varchas Gopalaswamy",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000138-c003@2",
+            "second": "urh-000138-c001@2",
+            "third": "urh-000138-c002@2"
+          },
+          "coverage": "direct",
+          "gap": "",
+          "reason": "Thermonuclear plasma and inertial-fusion research using simulation-data reconciliation directly supports fundamental plasma investigation.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000138-c003",
+              "revision": 2,
+              "label": "Thermonuclear plasma and high-energy-density physics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000138-c001",
+              "revision": 2,
+              "label": "Machine-learning reconciliation of fusion simulations and data",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/artificial-intelligence-ai-laser-fusion-energy-research-622682/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000138-c002",
+              "revision": 2,
+              "label": "Statistical analysis and design of inertial-fusion implosions",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/artificial-intelligence-ai-laser-fusion-energy-research-622682/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000138-c001@2",
+            "second": "urh-000138-c002@2",
+            "third": "urh-000138-c003@2"
+          },
+          "coverage": "direct",
+          "gap": "Specific societal stakeholders are not identified.",
+          "reason": "Machine learning and statistical design explicitly connect fusion plasma understanding to improved experiments and computational modeling needs.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000138-c001",
+              "revision": 2,
+              "label": "Machine-learning reconciliation of fusion simulations and data",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/artificial-intelligence-ai-laser-fusion-energy-research-622682/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000138-c002",
+              "revision": 2,
+              "label": "Statistical analysis and design of inertial-fusion implosions",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/artificial-intelligence-ai-laser-fusion-energy-research-622682/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000138-c003",
+              "revision": 2,
+              "label": "Thermonuclear plasma and high-energy-density physics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/gopalaswamy-varchas/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000033",
+      "name": "David R. Harding",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000033-c001@2",
+            "second": "urh-000033-c002@2",
+            "third": "urh-000033-c003@2"
+          },
+          "coverage": "method_transfer",
+          "gap": "Direct plasma measurements or plasma-chemical processes are not documented.",
+          "reason": "Fusion-target fabrication, cryogenic fuel, and microfluidic delivery provide a credible applicable bridge to plasma-fusion investigation, although the claims concern targets rather than plasma physics itself.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000033-c001",
+              "revision": 2,
+              "label": "Vapor-deposited polymer capsules for fusion targets",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000033-c002",
+              "revision": 2,
+              "label": "Cryogenic deuterium-tritium crystal growth",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000033-c003",
+              "revision": 2,
+              "label": "Microfluidic fabrication and delivery of fusion targets",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000033-c003@2",
+            "second": "urh-000033-c001@2",
+            "third": "urh-000033-c002@2"
+          },
+          "coverage": "direct",
+          "gap": "No wider societal pathway beyond fusion technology is specified.",
+          "reason": "Scalable fusion-target manufacture and delivery are concrete technological needs, and the documented fabrication methods directly support translation toward fusion systems.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000033-c003",
+              "revision": 2,
+              "label": "Microfluidic fabrication and delivery of fusion targets",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000033-c001",
+              "revision": 2,
+              "label": "Vapor-deposited polymer capsules for fusion targets",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000033-c002",
+              "revision": 2,
+              "label": "Cryogenic deuterium-tritium crystal growth",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/che/people/secondary_faculty/harding_david/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000059",
+      "name": "Ibrahim Mohammad",
+      "luna_outcome": "credible_transfer",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000059-c002@2",
+            "second": "urh-000059-c003@2",
+            "third": "NONE"
+          },
+          "coverage": "adjacent",
+          "gap": "No plasma system or plasma-specific scientific challenge is documented.",
+          "reason": "Magnetohydrodynamic stability in conducting fluids shares physics with plasma MHD but the documented objectives concern liquid-metal industrial systems, not plasma investigation.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000059-c002",
+              "revision": 2,
+              "label": "Magnetohydrodynamic stability of conducting fluids",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/about/faculty/new2425.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000059-c003",
+              "revision": 2,
+              "label": "Liquid-metal battery and aluminum-cell fluid dynamics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/about/faculty/new2425.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000059-c002@2",
+            "second": "urh-000059-c003@2",
+            "third": "NONE"
+          },
+          "coverage": "method_transfer",
+          "gap": "The evidence does not connect the work to plasma-enabled translation.",
+          "reason": "Experiments, simulations, and MHD stability analysis could transfer to energy or materials-process problems, with liquid-metal batteries and aluminum cells providing explicit technology contexts.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000059-c002",
+              "revision": 2,
+              "label": "Magnetohydrodynamic stability of conducting fluids",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/about/faculty/new2425.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000059-c003",
+              "revision": 2,
+              "label": "Liquid-metal battery and aluminum-cell fluid dynamics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/about/faculty/new2425.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000145",
+      "name": "Wolfgang Theobald",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000145-c003@2",
+            "second": "urh-000145-c001@2",
+            "third": "NONE"
+          },
+          "coverage": "direct",
+          "gap": "",
+          "reason": "Short-pulse laser-plasma interaction, electron transport, and HED diagnostics directly support fundamental plasma investigation.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000145-c003",
+              "revision": 2,
+              "label": "Short-pulse laser-plasma interaction and electron transport",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/laser-scientists-receive-international-award-for-shock-ignition/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000145-c001",
+              "revision": 2,
+              "label": "High-energy-density plasma diagnostics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000145-c001@2",
+            "second": "urh-000145-c003@2",
+            "third": "NONE"
+          },
+          "coverage": "method_transfer",
+          "gap": "A specific societal need or stakeholder is not documented.",
+          "reason": "HED diagnostics and electron-transport studies offer a credible bridge to fusion-energy technology and improved plasma measurement.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000145-c001",
+              "revision": 2,
+              "label": "High-energy-density plasma diagnostics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/theobald_wolfgang/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000145-c003",
+              "revision": 2,
+              "label": "Short-pulse laser-plasma interaction and electron transport",
+              "source_urls": [
+                "https://www.rochester.edu/newscenter/laser-scientists-receive-international-award-for-shock-ignition/"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "person_id": "urh-000137",
+      "name": "Valeri Goncharov",
+      "luna_outcome": "supported",
+      "checker_outcome": null,
+      "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+      "decisions": [
+        {
+          "claim_refs": {
+            "primary": "urh-000137-c001@2",
+            "second": "urh-000137-c002@2",
+            "third": "urh-000137-c003@1"
+          },
+          "coverage": "direct",
+          "gap": "",
+          "reason": "Direct-drive fusion instability, computational plasma/fluid dynamics, and laser-plasma heat transport directly support fundamental plasma investigation.",
+          "role_id": "role-1",
+          "source_ref": "src-3ca8e2d7963131b4b6825fc37d21c0061c35b1c00b8e372dad2a7a4f5ef144dc",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000137-c001",
+              "revision": 2,
+              "label": "Hydrodynamic instability in inertial-fusion design",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000137-c002",
+              "revision": 2,
+              "label": "Computational plasma and fluid dynamics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000137-c003",
+              "revision": 1,
+              "label": "Electron thermal transport in laser-produced plasmas",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        },
+        {
+          "claim_refs": {
+            "primary": "urh-000137-c001@2",
+            "second": "urh-000137-c002@2",
+            "third": "urh-000137-c003@1"
+          },
+          "coverage": "direct",
+          "gap": "The evidence does not identify a specific external stakeholder.",
+          "reason": "Fusion target-design, instability analysis, and plasma transport connect fundamental resolution to fusion-energy and computational-modeling needs.",
+          "role_id": "role-2",
+          "source_ref": "src-add58db6c83fd5efcb416bda8eeb0ab9bfb51fd7316ebd9dfd6f0244118021a0",
+          "checker_verdict": null,
+          "checker_status": "MISSING_HTTP400_GRAMMAR_TOO_LARGE",
+          "claim_sources": [
+            {
+              "claim_id": "urh-000137-c001",
+              "revision": 2,
+              "label": "Hydrodynamic instability in inertial-fusion design",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000137-c002",
+              "revision": 2,
+              "label": "Computational plasma and fluid dynamics",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            },
+            {
+              "claim_id": "urh-000137-c003",
+              "revision": 1,
+              "label": "Electron thermal transport in laser-produced plasmas",
+              "source_urls": [
+                "https://www.hajim.rochester.edu/me/people/faculty/goncharov_valeri/index.html"
+              ],
+              "forms": [
+                "paraphrase"
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checks": {
+    "new_focused_methods_passed": 15,
+    "existing_focused_methods_passed": 48,
+    "ci_python_passed": 1477,
+    "ci_browser": "PASS",
+    "ci_flag_off_artifacts_unchanged": 23,
+    "crash_injection_base_boundaries": 7,
+    "additional_failure_diagnostic_boundaries": 3,
+    "restorations_per_boundary": 3,
+    "duplicate_fixture_dispatches": 0,
+    "actual_assessment_lossless_validation": "PASS",
+    "actual_final_checkpoint_verification": "PASS",
+    "full_e2e": "NOT_RUN_THIS_TASK",
+    "runtime_graph_adapter_unchanged": true
+  },
+  "production": {
+    "worker_deployments": 0,
+    "application_activation": false,
+    "paid_public_serving_enabled": false,
+    "release_planner_run": 34966682368,
+    "release_planner_conclusion": "success",
+    "jobs_skipped": [
+      "assemble",
+      "generate",
+      "publish",
+      "pages",
+      "verify-live"
+    ],
+    "recommender_merged": false,
+    "product_branch_pushed": false
+  },
+  "disposition": "C. NAMED TECHNICAL OR ACCOUNTING BLOCKER; IDENTIFY THE EXACT MISSING OUTPUTS.",
+  "blocker": "Sonnet compiled output grammar too large (HTTP400); 0/24 independent pair verdicts. Both named paid attempts exhausted. New checker usage unknown; hold retained. No retry authorized.",
+  "stop_for_user_review": true
+}
