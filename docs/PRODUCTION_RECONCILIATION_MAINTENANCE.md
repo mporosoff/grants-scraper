@@ -70,7 +70,11 @@ this patch, and this note is not a scientific release qualification.
 The September 15 staged-package run executed all 117 configured E2E tests:
 115 passed and two exposed test-setup defects. The mobile centering assertion
 included the separate, correctly visible catalog-age warning; it now measures
-the results area and also requires notices to remain above it. The accessibility
+against the outer panel after subtracting only notices' occupied space and
+requires the age warning when the actual catalog date calls for it. Deliberate
+results displacement and hidden-warning controls prove the checks detect those
+regressions. The initial test correction used a collapsing results-area reference;
+review rejected that weaker measurement and its finding is retained. The accessibility
 test mocked OpenAI but left the hosted provider selected; it now selects the
 provider it mocks. No application bytes, assertions about accessible states,
 timeouts or warning visibility were weakened. All 11 tests in the two affected
