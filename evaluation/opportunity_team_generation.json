@@ -1,44 +1,16 @@
 {
-  "run_id": "34610105444",
+  "run_id": "34992708733",
   "run_attempt": "1",
   "generation_requested": true,
-  "started_at": "2026-09-11T14:32:36.190901+00:00",
+  "started_at": "2026-09-15T16:10:05.943901+00:00",
   "response_contract": "team-response-1",
-  "input_generation": "1700547b2fcbbf0010dc43b2fe1a58964bc91a0ee55a3bd7c856f1f1ac10f4a0",
+  "input_generation": "17bf48f44df68979e4f5d72cb2a8c6c75732c9da16c03daf86557d6bb5dc312f",
   "mode": "maintenance",
   "queue_counts": {
-    "maintenance": 166,
-    "backfill": 1316
+    "maintenance": 199,
+    "backfill": 1266
   },
   "queue_reasons": {
-    "363537": "historical_unassessed_backfill",
-    "360510": "retryable_maintenance_failure",
-    "363363": "historical_unassessed_backfill",
-    "363798": "source_changed",
-    "363534": "historical_unassessed_backfill",
-    "363535": "historical_unassessed_backfill",
-    "363547": "retryable_maintenance_failure",
-    "363545": "historical_unassessed_backfill",
-    "363544": "historical_unassessed_backfill",
-    "363723": "historical_unassessed_backfill",
-    "363736": "historical_unassessed_backfill",
-    "363739": "historical_unassessed_backfill",
-    "363788": "retryable_maintenance_failure",
-    "363579": "retryable_maintenance_failure",
-    "363824": "historical_unassessed_backfill",
-    "vpr-email:vpr-e4ce54abf9b529bf": "retryable_maintenance_failure",
-    "363478": "retryable_maintenance_failure",
-    "363721": "historical_unassessed_backfill",
-    "362917": "historical_unassessed_backfill",
-    "362370": "historical_unassessed_backfill",
-    "363746": "source_changed",
-    "363673": "historical_unassessed_backfill",
-    "362981": "retryable_maintenance_failure",
-    "363331": "retryable_maintenance_failure",
-    "363818": "retryable_maintenance_failure",
-    "arpa-h:stream": "historical_unassessed_backfill",
-    "363744": "source_changed",
-    "363645": "historical_unassessed_backfill",
     "363015": "historical_unassessed_backfill",
     "nyserda:PON5989": "historical_unassessed_backfill",
     "359198": "historical_unassessed_backfill",
@@ -53,6 +25,7 @@
     "363297": "retryable_maintenance_failure",
     "360710": "historical_unassessed_backfill",
     "363628": "historical_unassessed_backfill",
+    "356231": "source_changed",
     "363014": "historical_unassessed_backfill",
     "363101": "retryable_maintenance_failure",
     "362962": "historical_unassessed_backfill",
@@ -62,6 +35,7 @@
     "363102": "retryable_maintenance_failure",
     "363103": "retryable_maintenance_failure",
     "363711": "retryable_maintenance_failure",
+    "360510": "retryable_maintenance_failure",
     "362851": "historical_unassessed_backfill",
     "362848": "historical_unassessed_backfill",
     "363180": "historical_unassessed_backfill",
@@ -79,7 +53,6 @@
     "363546": "historical_unassessed_backfill",
     "363682": "historical_unassessed_backfill",
     "363552": "retryable_maintenance_failure",
-    "363574": "retryable_maintenance_failure",
     "363553": "retryable_maintenance_failure",
     "363215": "retryable_maintenance_failure",
     "363321": "historical_unassessed_backfill",
@@ -96,11 +69,10 @@
     "363302:b-1": "historical_unassessed_backfill",
     "363302:2": "historical_unassessed_backfill",
     "363302:3": "historical_unassessed_backfill",
-    "363599": "retryable_maintenance_failure",
     "302273": "historical_unassessed_backfill",
     "362976": "historical_unassessed_backfill",
     "362975": "historical_unassessed_backfill",
-    "362974": "historical_unassessed_backfill",
+    "362974": "source_changed",
     "362973": "historical_unassessed_backfill",
     "362321": "historical_unassessed_backfill",
     "362329": "historical_unassessed_backfill",
@@ -114,7 +86,7 @@
     "363636": "retryable_maintenance_failure",
     "363635": "retryable_maintenance_failure",
     "363638": "retryable_maintenance_failure",
-    "363637": "source_changed",
+    "363637": "retryable_maintenance_failure",
     "363588": "retryable_maintenance_failure",
     "362178": "retryable_maintenance_failure",
     "362179": "historical_unassessed_backfill",
@@ -173,11 +145,10 @@
     "361207": "historical_unassessed_backfill",
     "352282": "retryable_maintenance_failure",
     "vpr-email:vpr-14d5155ffe141890": "historical_unassessed_backfill",
-    "363668": "source_changed",
-    "363669": "source_changed",
-    "362676": "source_changed",
-    "361249": "source_changed",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/prfb-postdoctoral-research-fellowships-biology/nsf26-504": "historical_unassessed_backfill",
+    "363668": "retryable_maintenance_failure",
+    "363669": "retryable_maintenance_failure",
+    "362676": "retryable_maintenance_failure",
+    "361249": "retryable_maintenance_failure",
     "359651": "historical_unassessed_backfill",
     "363111": "historical_unassessed_backfill",
     "358100": "historical_unassessed_backfill",
@@ -207,16 +178,15 @@
     "361370": "historical_unassessed_backfill",
     "363287": "historical_unassessed_backfill",
     "363070": "historical_unassessed_backfill",
-    "363689": "source_changed",
+    "363689": "retryable_maintenance_failure",
     "363364": "historical_unassessed_backfill",
-    "vpr-email:vpr-f068b41ca38718f9": "source_changed",
+    "vpr-email:vpr-f068b41ca38718f9": "retryable_maintenance_failure",
     "361035": "historical_unassessed_backfill",
     "358917": "historical_unassessed_backfill",
     "363757": "historical_unassessed_backfill",
     "363754": "historical_unassessed_backfill",
     "arpa-h:sbir": "historical_unassessed_backfill",
-    "355100": "source_changed",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/ate-advanced-technological-education/nsf24-584": "historical_unassessed_backfill",
+    "355100": "retryable_maintenance_failure",
     "361449": "historical_unassessed_backfill",
     "361817": "historical_unassessed_backfill",
     "361452": "historical_unassessed_backfill",
@@ -228,8 +198,7 @@
     "362204": "historical_unassessed_backfill",
     "362207": "historical_unassessed_backfill",
     "362209": "historical_unassessed_backfill",
-    "362422": "source_changed",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588": "historical_unassessed_backfill",
+    "362422": "retryable_maintenance_failure",
     "358939": "historical_unassessed_backfill",
     "358022": "stale_published_team",
     "363466": "historical_unassessed_backfill",
@@ -247,7 +216,7 @@
     "360324": "historical_unassessed_backfill",
     "358915": "historical_unassessed_backfill",
     "359268": "historical_unassessed_backfill",
-    "vpr-email:PAR-27-032": "new_since_accepted_snapshot",
+    "vpr-email:PAR-27-032": "retryable_maintenance_failure",
     "359949": "historical_unassessed_backfill",
     "361204": "historical_unassessed_backfill",
     "363489": "stale_published_team",
@@ -257,10 +226,10 @@
     "360335": "historical_unassessed_backfill",
     "359269": "stale_published_team",
     "358863": "historical_unassessed_backfill",
-    "363822": "source_changed",
-    "363820": "source_changed",
-    "363821": "source_changed",
-    "363710": "source_changed",
+    "363822": "retryable_maintenance_failure",
+    "363820": "retryable_maintenance_failure",
+    "363821": "retryable_maintenance_failure",
+    "363710": "retryable_maintenance_failure",
     "362268": "historical_unassessed_backfill",
     "362265": "historical_unassessed_backfill",
     "362267": "historical_unassessed_backfill",
@@ -270,35 +239,35 @@
     "363423": "historical_unassessed_backfill",
     "363419": "historical_unassessed_backfill",
     "363420": "historical_unassessed_backfill",
-    "363819": "source_changed",
+    "363819": "retryable_maintenance_failure",
     "359197": "retryable_maintenance_failure",
     "vpr-email:25-301": "historical_unassessed_backfill",
-    "363823": "source_changed",
+    "363823": "retryable_maintenance_failure",
     "359252": "retryable_maintenance_failure",
     "nyserda:PON5437": "historical_unassessed_backfill",
-    "363725": "source_changed",
-    "362846": "new_since_accepted_snapshot",
-    "363629": "source_changed",
+    "363725": "retryable_maintenance_failure",
+    "362846": "retryable_maintenance_failure",
+    "363629": "retryable_maintenance_failure",
+    "363574": "retryable_maintenance_failure",
     "363817": "retryable_maintenance_failure",
     "360906": "historical_unassessed_backfill",
     "360910": "historical_unassessed_backfill",
-    "362837": "new_since_accepted_snapshot",
-    "362844": "new_since_accepted_snapshot",
-    "363664": "source_changed",
+    "362837": "retryable_maintenance_failure",
+    "362844": "retryable_maintenance_failure",
+    "363664": "retryable_maintenance_failure",
     "360894": "stale_published_team",
     "362193": "historical_unassessed_backfill",
     "362190": "historical_unassessed_backfill",
     "362191": "historical_unassessed_backfill",
     "360562": "historical_unassessed_backfill",
     "363700": "historical_unassessed_backfill",
+    "vpr-email:vpr-a3ddeff815d159a4": "new_since_accepted_snapshot",
     "329325": "historical_unassessed_backfill",
-    "363712": "source_changed",
+    "363712": "retryable_maintenance_failure",
     "359271": "historical_unassessed_backfill",
-    "363233": "source_changed",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590": "retryable_maintenance_failure",
+    "363233": "retryable_maintenance_failure",
     "363732": "historical_unassessed_backfill",
-    "353936": "source_changed",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/mfai-mathematical-foundations-artificial-intelligence/nsf24-569": "retryable_maintenance_failure",
+    "353936": "retryable_maintenance_failure",
     "vpr-email:24-569": "historical_unassessed_backfill",
     "360387": "historical_unassessed_backfill",
     "360441": "historical_unassessed_backfill",
@@ -307,11 +276,13 @@
     "darpa-iarpa:darpa-darpapa250706": "historical_unassessed_backfill",
     "359202": "historical_unassessed_backfill",
     "361315": "historical_unassessed_backfill",
+    "363854": "new_since_accepted_snapshot",
     "361334": "retryable_maintenance_failure",
     "362313": "historical_unassessed_backfill",
-    "363348": "source_changed",
+    "363599": "retryable_maintenance_failure",
+    "363348": "retryable_maintenance_failure",
     "356718": "retryable_maintenance_failure",
-    "356717": "source_changed",
+    "356717": "retryable_maintenance_failure",
     "362244": "historical_unassessed_backfill",
     "362240": "historical_unassessed_backfill",
     "362245": "historical_unassessed_backfill",
@@ -320,40 +291,42 @@
     "341997": "historical_unassessed_backfill",
     "350943": "historical_unassessed_backfill",
     "350944": "historical_unassessed_backfill",
-    "363655": "source_changed",
-    "363667": "historical_unassessed_backfill",
-    "350802": "historical_unassessed_backfill",
+    "363655": "retryable_maintenance_failure",
+    "363667": "source_changed",
+    "350802": "source_changed",
     "356680": "stale_published_team",
     "nasa-roses:25-D.9-d22059cf9f": "historical_unassessed_backfill",
-    "334326": "historical_unassessed_backfill",
+    "334326": "source_changed",
     "359201": "historical_unassessed_backfill",
     "359073": "historical_unassessed_backfill",
     "arpa-h:ascent-ibo": "historical_unassessed_backfill",
     "359941": "historical_unassessed_backfill",
-    "363296": "historical_unassessed_backfill",
+    "363296": "source_changed",
     "362187": "historical_unassessed_backfill",
     "362271": "historical_unassessed_backfill",
     "362272": "historical_unassessed_backfill",
     "363559": "historical_unassessed_backfill",
     "363479": "historical_unassessed_backfill",
-    "363657": "source_changed",
+    "363657": "retryable_maintenance_failure",
     "359149": "historical_unassessed_backfill",
-    "342747": "historical_unassessed_backfill",
+    "342747": "source_changed",
     "363224": "historical_unassessed_backfill",
-    "363308": "historical_unassessed_backfill",
-    "363843": "new_since_accepted_snapshot",
+    "363308": "source_changed",
+    "363843": "source_changed",
     "363594:a-1": "historical_unassessed_backfill",
     "363594:b-1": "historical_unassessed_backfill",
     "363594:c-1": "historical_unassessed_backfill",
+    "356935": "stale_published_team",
     "362787": "historical_unassessed_backfill",
     "363590": "historical_unassessed_backfill",
+    "vpr-email:vpr-3a86f2f6b6e2925c": "new_since_accepted_snapshot",
     "360759": "historical_unassessed_backfill",
     "361317": "historical_unassessed_backfill",
     "359855": "historical_unassessed_backfill",
     "359123": "historical_unassessed_backfill",
-    "357658": "historical_unassessed_backfill",
+    "357658": "source_changed",
     "363326": "historical_unassessed_backfill",
-    "362077": "historical_unassessed_backfill",
+    "362077": "source_changed",
     "359270": "historical_unassessed_backfill",
     "darpa-iarpa:darpa-darpapa250704": "stale_published_team",
     "359853": "historical_unassessed_backfill",
@@ -366,7 +339,7 @@
     "362248": "historical_unassessed_backfill",
     "362252": "historical_unassessed_backfill",
     "nyserda:PON6201": "historical_unassessed_backfill",
-    "349280": "historical_unassessed_backfill",
+    "349280": "source_changed",
     "362175": "historical_unassessed_backfill",
     "362177": "historical_unassessed_backfill",
     "362529": "historical_unassessed_backfill",
@@ -379,6 +352,7 @@
     "nyserda:RFQL4922": "historical_unassessed_backfill",
     "363714": "historical_unassessed_backfill",
     "363690": "historical_unassessed_backfill",
+    "363852": "new_since_accepted_snapshot",
     "361002": "historical_unassessed_backfill",
     "363325": "historical_unassessed_backfill",
     "nyserda:PON6220": "historical_unassessed_backfill",
@@ -392,12 +366,12 @@
     "363160": "historical_unassessed_backfill",
     "363275": "historical_unassessed_backfill",
     "363632": "historical_unassessed_backfill",
-    "363847": "new_since_accepted_snapshot",
+    "363847": "source_changed",
     "362484": "historical_unassessed_backfill",
     "362480": "historical_unassessed_backfill",
-    "356559": "historical_unassessed_backfill",
-    "356561": "historical_unassessed_backfill",
-    "356562": "historical_unassessed_backfill",
+    "356559": "source_changed",
+    "356561": "source_changed",
+    "356562": "source_changed",
     "350338": "historical_unassessed_backfill",
     "360623": "historical_unassessed_backfill",
     "360625": "historical_unassessed_backfill",
@@ -414,7 +388,7 @@
     "362827": "historical_unassessed_backfill",
     "360048": "historical_unassessed_backfill",
     "360366": "historical_unassessed_backfill",
-    "360296": "new_since_accepted_snapshot",
+    "360296": "retryable_maintenance_failure",
     "362277": "historical_unassessed_backfill",
     "363784": "historical_unassessed_backfill",
     "340545": "historical_unassessed_backfill",
@@ -426,10 +400,10 @@
     "362607": "historical_unassessed_backfill",
     "363455": "historical_unassessed_backfill",
     "363728": "historical_unassessed_backfill",
-    "vpr-email:NSF26-511": "historical_unassessed_backfill",
+    "vpr-email:NSF26-511": "source_changed",
     "362551": "historical_unassessed_backfill",
     "vpr-email:NSF26-512": "historical_unassessed_backfill",
-    "343980": "historical_unassessed_backfill",
+    "343980": "source_changed",
     "vpr-email:NSF26-510": "historical_unassessed_backfill",
     "363481": "historical_unassessed_backfill",
     "363268": "historical_unassessed_backfill",
@@ -444,9 +418,9 @@
     "361450": "historical_unassessed_backfill",
     "360679": "historical_unassessed_backfill",
     "363241": "historical_unassessed_backfill",
-    "357204": "historical_unassessed_backfill",
-    "363830": "new_since_accepted_snapshot",
-    "363611": "historical_unassessed_backfill",
+    "357204": "source_changed",
+    "363830": "retryable_maintenance_failure",
+    "363611": "source_changed",
     "360458": "historical_unassessed_backfill",
     "361213": "historical_unassessed_backfill",
     "360400": "historical_unassessed_backfill",
@@ -455,12 +429,12 @@
     "361522": "historical_unassessed_backfill",
     "359740": "retryable_maintenance_failure",
     "360536": "historical_unassessed_backfill",
-    "362319": "historical_unassessed_backfill",
+    "362319": "source_changed",
     "arpa-h:fastpass": "historical_unassessed_backfill",
-    "363825": "source_changed",
+    "363825": "retryable_maintenance_failure",
     "360875": "historical_unassessed_backfill",
     "362965": "historical_unassessed_backfill",
-    "363764": "historical_unassessed_backfill",
+    "363764": "source_changed",
     "361431": "historical_unassessed_backfill",
     "363258": "historical_unassessed_backfill",
     "362225": "historical_unassessed_backfill",
@@ -485,18 +459,19 @@
     "363762": "historical_unassessed_backfill",
     "363775": "historical_unassessed_backfill",
     "363763": "historical_unassessed_backfill",
+    "357492": "stale_published_team",
     "357490": "stale_published_team",
     "357493": "stale_published_team",
-    "351679": "historical_unassessed_backfill",
+    "351679": "source_changed",
     "363242": "historical_unassessed_backfill",
     "360660": "historical_unassessed_backfill",
     "343166": "historical_unassessed_backfill",
     "358569": "historical_unassessed_backfill",
     "342959": "historical_unassessed_backfill",
-    "362464": "historical_unassessed_backfill",
+    "362464": "source_changed",
     "362857": "historical_unassessed_backfill",
-    "358179": "historical_unassessed_backfill",
-    "344610": "historical_unassessed_backfill",
+    "358179": "source_changed",
+    "344610": "source_changed",
     "363620": "historical_unassessed_backfill",
     "350018": "historical_unassessed_backfill",
     "362836": "historical_unassessed_backfill",
@@ -526,13 +501,14 @@
     "362305": "historical_unassessed_backfill",
     "357256": "historical_unassessed_backfill",
     "357343": "historical_unassessed_backfill",
+    "363856": "new_since_accepted_snapshot",
     "362276": "historical_unassessed_backfill",
     "358090": "historical_unassessed_backfill",
     "351124": "historical_unassessed_backfill",
     "362014": "historical_unassessed_backfill",
     "nyserda:RFP6224": "historical_unassessed_backfill",
     "darpa-iarpa:darpa-darpapa260202": "historical_unassessed_backfill",
-    "363815": "historical_unassessed_backfill",
+    "363815": "source_changed",
     "358689": "historical_unassessed_backfill",
     "347331": "historical_unassessed_backfill",
     "363055": "historical_unassessed_backfill",
@@ -551,7 +527,7 @@
     "359150": "historical_unassessed_backfill",
     "356723": "historical_unassessed_backfill",
     "356724": "historical_unassessed_backfill",
-    "363846": "new_since_accepted_snapshot",
+    "363846": "retryable_maintenance_failure",
     "363747": "historical_unassessed_backfill",
     "363829": "retryable_maintenance_failure",
     "348375": "historical_unassessed_backfill",
@@ -567,7 +543,8 @@
     "363054": "historical_unassessed_backfill",
     "362731": "historical_unassessed_backfill",
     "363752": "historical_unassessed_backfill",
-    "362871": "historical_unassessed_backfill",
+    "nyserda:PON6206": "new_since_accepted_snapshot",
+    "362871": "source_changed",
     "361896": "historical_unassessed_backfill",
     "361480": "historical_unassessed_backfill",
     "363792": "historical_unassessed_backfill",
@@ -714,6 +691,7 @@
     "363729": "retryable_maintenance_failure",
     "362029": "historical_unassessed_backfill",
     "361997": "historical_unassessed_backfill",
+    "363861": "new_since_accepted_snapshot",
     "362577": "historical_unassessed_backfill",
     "362576": "historical_unassessed_backfill",
     "354081": "historical_unassessed_backfill",
@@ -787,7 +765,7 @@
     "356902": "historical_unassessed_backfill",
     "359145": "historical_unassessed_backfill",
     "355987": "historical_unassessed_backfill",
-    "363840": "new_since_accepted_snapshot",
+    "363840": "retryable_maintenance_failure",
     "353055": "historical_unassessed_backfill",
     "363037": "historical_unassessed_backfill",
     "363789": "historical_unassessed_backfill",
@@ -798,7 +776,7 @@
     "363783": "historical_unassessed_backfill",
     "363036": "historical_unassessed_backfill",
     "363039": "historical_unassessed_backfill",
-    "363833": "new_since_accepted_snapshot",
+    "363833": "retryable_maintenance_failure",
     "363715": "historical_unassessed_backfill",
     "363332": "historical_unassessed_backfill",
     "363494": "historical_unassessed_backfill",
@@ -809,8 +787,8 @@
     "328573": "historical_unassessed_backfill",
     "363415": "historical_unassessed_backfill",
     "363113": "historical_unassessed_backfill",
-    "360149": "source_changed",
-    "363814": "historical_unassessed_backfill",
+    "360149": "retryable_maintenance_failure",
+    "363855": "new_since_accepted_snapshot",
     "363289": "historical_unassessed_backfill",
     "363204": "historical_unassessed_backfill",
     "360946": "historical_unassessed_backfill",
@@ -818,7 +796,7 @@
     "351889": "historical_unassessed_backfill",
     "356129": "historical_unassessed_backfill",
     "363292": "historical_unassessed_backfill",
-    "347026": "source_changed",
+    "347026": "retryable_maintenance_failure",
     "363050": "historical_unassessed_backfill",
     "360436": "historical_unassessed_backfill",
     "361832": "historical_unassessed_backfill",
@@ -879,7 +857,7 @@
     "363580": "historical_unassessed_backfill",
     "363166": "historical_unassessed_backfill",
     "363407": "historical_unassessed_backfill",
-    "363845": "new_since_accepted_snapshot",
+    "363845": "retryable_maintenance_failure",
     "363694": "historical_unassessed_backfill",
     "363412": "historical_unassessed_backfill",
     "363516": "historical_unassessed_backfill",
@@ -975,16 +953,17 @@
     "362945": "historical_unassessed_backfill",
     "363826": "retryable_maintenance_failure",
     "362638": "historical_unassessed_backfill",
+    "363862": "new_since_accepted_snapshot",
     "361271": "historical_unassessed_backfill",
     "363488": "historical_unassessed_backfill",
     "363577": "historical_unassessed_backfill",
     "362575": "historical_unassessed_backfill",
-    "363836": "new_since_accepted_snapshot",
-    "363834": "new_since_accepted_snapshot",
-    "363837": "new_since_accepted_snapshot",
+    "363836": "retryable_maintenance_failure",
+    "363834": "retryable_maintenance_failure",
+    "363837": "retryable_maintenance_failure",
     "359653": "historical_unassessed_backfill",
     "359655": "historical_unassessed_backfill",
-    "363842": "new_since_accepted_snapshot",
+    "363842": "retryable_maintenance_failure",
     "361521": "historical_unassessed_backfill",
     "362950": "historical_unassessed_backfill",
     "362948": "stale_published_team",
@@ -1007,10 +986,14 @@
     "358934": "historical_unassessed_backfill",
     "363349": "historical_unassessed_backfill",
     "359274": "historical_unassessed_backfill",
-    "363848": "new_since_accepted_snapshot",
+    "363848": "retryable_maintenance_failure",
     "363557": "retryable_maintenance_failure",
     "nyserda:PON6037-PhaseI": "historical_unassessed_backfill",
     "nyserda:PON6037-PhaseII": "historical_unassessed_backfill",
+    "363860": "new_since_accepted_snapshot",
+    "363858": "new_since_accepted_snapshot",
+    "363859": "new_since_accepted_snapshot",
+    "363857": "new_since_accepted_snapshot",
     "362753": "historical_unassessed_backfill",
     "357570": "retryable_maintenance_failure",
     "361270": "historical_unassessed_backfill",
@@ -1023,7 +1006,7 @@
     "363623": "historical_unassessed_backfill",
     "361915": "historical_unassessed_backfill",
     "vpr-email:NSF25-544": "historical_unassessed_backfill",
-    "339594": "source_changed",
+    "339594": "retryable_maintenance_failure",
     "357724": "historical_unassessed_backfill",
     "357941": "historical_unassessed_backfill",
     "356610": "historical_unassessed_backfill",
@@ -1057,6 +1040,9 @@
     "362955": "historical_unassessed_backfill",
     "362951": "historical_unassessed_backfill",
     "361822": "historical_unassessed_backfill",
+    "363849": "new_since_accepted_snapshot",
+    "363850": "new_since_accepted_snapshot",
+    "363851": "new_since_accepted_snapshot",
     "363681": "historical_unassessed_backfill",
     "363503": "historical_unassessed_backfill",
     "356205": "historical_unassessed_backfill",
@@ -1091,8 +1077,8 @@
     "358229": "historical_unassessed_backfill",
     "358230": "historical_unassessed_backfill",
     "359733": "historical_unassessed_backfill",
-    "363839": "new_since_accepted_snapshot",
-    "363835": "new_since_accepted_snapshot",
+    "363839": "retryable_maintenance_failure",
+    "363835": "retryable_maintenance_failure",
     "nyserda:RFP6041": "historical_unassessed_backfill",
     "357529": "historical_unassessed_backfill",
     "356870": "historical_unassessed_backfill",
@@ -1232,8 +1218,9 @@
     "359130": "historical_unassessed_backfill",
     "358411": "historical_unassessed_backfill",
     "359701": "historical_unassessed_backfill",
-    "363841": "new_since_accepted_snapshot",
-    "363838": "new_since_accepted_snapshot",
+    "363863": "new_since_accepted_snapshot",
+    "363841": "retryable_maintenance_failure",
+    "363838": "retryable_maintenance_failure",
     "362562": "historical_unassessed_backfill",
     "358823": "historical_unassessed_backfill",
     "334971": "historical_unassessed_backfill",
@@ -1271,7 +1258,7 @@
     "360654": "historical_unassessed_backfill",
     "361518": "retryable_maintenance_failure",
     "363651": "historical_unassessed_backfill",
-    "363844": "new_since_accepted_snapshot",
+    "363844": "retryable_maintenance_failure",
     "360882": "historical_unassessed_backfill",
     "360532": "historical_unassessed_backfill",
     "361187": "historical_unassessed_backfill",
@@ -1373,6 +1360,7 @@
     "349554": "historical_unassessed_backfill",
     "360258": "historical_unassessed_backfill",
     "320098": "historical_unassessed_backfill",
+    "363779": "new_since_accepted_snapshot",
     "331306": "historical_unassessed_backfill",
     "363225": "historical_unassessed_backfill",
     "361554": "historical_unassessed_backfill",
@@ -1391,7 +1379,6 @@
     "103313": "historical_unassessed_backfill",
     "346204": "historical_unassessed_backfill",
     "356055": "historical_unassessed_backfill",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/cdse-computational-data-enabled-science-engineering/pd24-8084": "historical_unassessed_backfill",
     "363615": "historical_unassessed_backfill",
     "308873": "historical_unassessed_backfill",
     "353475": "historical_unassessed_backfill",
@@ -1400,7 +1387,6 @@
     "349655": "historical_unassessed_backfill",
     "vpr-email:vpr-e1612e2acba631d2": "historical_unassessed_backfill",
     "348164": "historical_unassessed_backfill",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering/pd24-110z": "historical_unassessed_backfill",
     "359225": "historical_unassessed_backfill",
     "332012": "historical_unassessed_backfill",
     "363786": "historical_unassessed_backfill",
@@ -1433,22 +1419,20 @@
     "356537": "historical_unassessed_backfill",
     "347680": "historical_unassessed_backfill",
     "39841": "historical_unassessed_backfill",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600": "historical_unassessed_backfill",
     "329432": "historical_unassessed_backfill",
     "357580": "historical_unassessed_backfill",
     "330296": "historical_unassessed_backfill",
     "295449": "historical_unassessed_backfill",
     "336244": "historical_unassessed_backfill",
     "363617": "historical_unassessed_backfill",
-    "363618": "source_changed",
-    "363612": "source_changed",
+    "363618": "retryable_maintenance_failure",
+    "363612": "retryable_maintenance_failure",
     "363621": "historical_unassessed_backfill",
     "356425": "historical_unassessed_backfill",
     "362393": "historical_unassessed_backfill",
     "275109": "historical_unassessed_backfill",
     "318918": "historical_unassessed_backfill",
     "vpr-email:vpr-63cc8866673bd1a1": "historical_unassessed_backfill",
-    "356231": "historical_unassessed_backfill",
     "360223": "historical_unassessed_backfill",
     "vpr-email:23-615": "historical_unassessed_backfill",
     "360664": "historical_unassessed_backfill",
@@ -1477,7 +1461,6 @@
     "358882": "historical_unassessed_backfill",
     "332127": "historical_unassessed_backfill",
     "320087": "historical_unassessed_backfill",
-    "nsf-funding:https://www.nsf.gov/funding/opportunities/satc-20-security-privacy-trust-cyberspace/nsf25-515": "historical_unassessed_backfill",
     "326733": "historical_unassessed_backfill",
     "45810": "historical_unassessed_backfill",
     "360954": "historical_unassessed_backfill",
@@ -1691,34 +1674,10 @@
     "max_seconds": 900,
     "max_provider_requests": 300
   },
-  "eligible_scopes": 1569,
-  "pending_scopes": 1482,
-  "due_scopes": 166,
+  "eligible_scopes": 1549,
+  "pending_scopes": 1465,
+  "due_scopes": 199,
   "eligibility": [
-    {
-      "scope_id": "vpr-email:vpr-93df7a9faf5e4c37",
-      "parent_id": "vpr-email:vpr-93df7a9faf5e4c37",
-      "stage": "source_eligibility",
-      "state": "skipped",
-      "reason_code": "missing_source_text",
-      "retry_eligible": true
-    },
-    {
-      "scope_id": "vpr-email:vpr-167136617b79dc5d",
-      "parent_id": "vpr-email:vpr-167136617b79dc5d",
-      "stage": "source_eligibility",
-      "state": "skipped",
-      "reason_code": "missing_source_text",
-      "retry_eligible": true
-    },
-    {
-      "scope_id": "362012",
-      "parent_id": "362012",
-      "stage": "source_eligibility",
-      "state": "skipped",
-      "reason_code": "missing_source_text",
-      "retry_eligible": true
-    },
     {
       "scope_id": "360651",
       "parent_id": "360651",
@@ -1810,14 +1769,6 @@
     {
       "scope_id": "vpr-email:vpr-3f359d639f6d327f",
       "parent_id": "vpr-email:vpr-3f359d639f6d327f",
-      "stage": "source_eligibility",
-      "state": "skipped",
-      "reason_code": "missing_source_text",
-      "retry_eligible": true
-    },
-    {
-      "scope_id": "vpr-email:vpr-3a86f2f6b6e2925c",
-      "parent_id": "vpr-email:vpr-3a86f2f6b6e2925c",
       "stage": "source_eligibility",
       "state": "skipped",
       "reason_code": "missing_source_text",
@@ -2269,12 +2220,16 @@
     "358021",
     "363489",
     "358022",
+    "363538",
     "357346",
     "356953",
+    "356935",
     "357186",
     "356680",
     "363179",
-    "357493"
+    "357492",
+    "357493",
+    "357490"
   ],
   "assessment_invalidations": [
     "360006",
@@ -2295,12 +2250,6 @@
   "claim_updates": [
     {
       "scope_id": "357433",
-      "state": "needs_reassessment",
-      "reason": "remaining_graph_has_no_complementary_team",
-      "provider_requests": 0
-    },
-    {
-      "scope_id": "357490",
       "state": "needs_reassessment",
       "reason": "remaining_graph_has_no_complementary_team",
       "provider_requests": 0
@@ -2334,16 +2283,34 @@
         "reason": "source_changed"
       },
       {
+        "scope_id": "363538",
+        "state": "pending",
+        "provider_requests": 0,
+        "reason": "source_ineligible"
+      },
+      {
         "scope_id": "356953",
         "state": "pending",
         "provider_requests": 0,
         "reason": "source_changed"
       },
       {
+        "scope_id": "356935",
+        "state": "pending",
+        "provider_requests": 0,
+        "reason": "claim_retirement_proof_mismatch"
+      },
+      {
         "scope_id": "363179",
         "state": "pending",
         "provider_requests": 0,
         "reason": "source_ineligible"
+      },
+      {
+        "scope_id": "357492",
+        "state": "pending",
+        "provider_requests": 0,
+        "reason": "claim_retirement_proof_mismatch"
       },
       {
         "scope_id": "357433",
@@ -2359,18 +2326,18 @@
       },
       {
         "scope_id": "357490",
-        "state": "withheld_after_claim_retirement",
+        "state": "pending",
         "provider_requests": 0,
-        "reason": "no_complementary_team"
+        "reason": "claim_retirement_proof_mismatch"
       }
     ],
     "recovery_only": false,
-    "selected_pending_scopes": 166
+    "selected_pending_scopes": 199
   },
   "coverage_before": {
-    "scopes": 87,
-    "parent_calls": 57,
-    "team_combinations": 225
+    "scopes": 84,
+    "parent_calls": 54,
+    "team_combinations": 219
   },
   "results": [],
   "processing_failure": {
@@ -2388,7 +2355,7 @@
   },
   "embedding_reuse_permitted": true,
   "llm_usage": {
-    "logical_id": "offline-34610105444",
+    "logical_id": "offline-34992708733",
     "limit_usd": 2.0,
     "charged_usd": 0.0,
     "by_provider_model_stage": {},
@@ -2407,264 +2374,12 @@
     "llm": 0
   },
   "coverage_after": {
-    "scopes": 87,
-    "parent_calls": 57,
-    "team_combinations": 225
+    "scopes": 84,
+    "parent_calls": 54,
+    "team_combinations": 219
   },
-  "pending_after": 1482,
+  "pending_after": 1465,
   "deferred": [
-    {
-      "scope_id": "363537",
-      "parent_id": "363537",
-      "stage": "queue",
-      "input_fingerprint": "cfb73a698c41c55ac0b5e8d924040306294824db7402e16c7d80c464cc9cbe76",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "360510",
-      "parent_id": "360510",
-      "stage": "queue",
-      "input_fingerprint": "0f1355eff85905d12d7861aacabb51f5941b9b1798b355be58a8fc36cbf3b406",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363363",
-      "parent_id": "363363",
-      "stage": "queue",
-      "input_fingerprint": "d84a22f05f24833b9f6b67ffd4fa669701eeef5278564fed48bb3731828e1e1b",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363798",
-      "parent_id": "363798",
-      "stage": "queue",
-      "input_fingerprint": "33f65a0f6170f3523b7030c4ba63e097352e4ded14a84ca7bd1779017d218da8",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363534",
-      "parent_id": "363534",
-      "stage": "queue",
-      "input_fingerprint": "b78c0933092b02f9ac4d8ba88c001fc406410336ce656455c156327438398794",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363535",
-      "parent_id": "363535",
-      "stage": "queue",
-      "input_fingerprint": "142963e035d6c85c93cb0fabbb0ddef918c1a8fdb3764f0e3df0fd9c1a73e38d",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363547",
-      "parent_id": "363547",
-      "stage": "queue",
-      "input_fingerprint": "a050ca7add59ffc0e8e19673a7308c5c0e0908d2f8364e619a72b1f050484fdc",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363545",
-      "parent_id": "363545",
-      "stage": "queue",
-      "input_fingerprint": "415f81faf53c147a3bb8b34ecb95124f2567993606898f7d934f52cbd2544c19",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363544",
-      "parent_id": "363544",
-      "stage": "queue",
-      "input_fingerprint": "5ff4975c5dc47244347afc5e7dcaa4f9a28768b185794ccc0270a3be59df25f7",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363723",
-      "parent_id": "363723",
-      "stage": "queue",
-      "input_fingerprint": "4bcdcb734e0060a5566ad16afbf8d079f9b2351fe45a083fc49428dd632ec3f1",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363736",
-      "parent_id": "363736",
-      "stage": "queue",
-      "input_fingerprint": "7ed1c248a141fd2fbaba4f719031d6e74c14062fd43c35c39a00faf24c429f88",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363739",
-      "parent_id": "363739",
-      "stage": "queue",
-      "input_fingerprint": "a365180c3f010b3fa7164f90c43ce465ed7e1f1a24d3431b841113929b494bc4",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363788",
-      "parent_id": "363788",
-      "stage": "queue",
-      "input_fingerprint": "bfc7095888dcd3e22c9b3e56068f3e6e31cd6e8c88606b3e760925dbf17d2c62",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363579",
-      "parent_id": "363579",
-      "stage": "queue",
-      "input_fingerprint": "f66f51cfa7a541837484881c59ff3e2b38dda01d7e57472fd36220a73bc90335",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363824",
-      "parent_id": "363824",
-      "stage": "queue",
-      "input_fingerprint": "b50b059ae97c16c14534a1fc82b02e2fb479e3982919f2300b133b637b318712",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "vpr-email:vpr-e4ce54abf9b529bf",
-      "parent_id": "vpr-email:vpr-e4ce54abf9b529bf",
-      "stage": "queue",
-      "input_fingerprint": "c94724652b490126cb87e5f34f9d80b827289a6991832e61fdd681241ed1dd51",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363478",
-      "parent_id": "363478",
-      "stage": "queue",
-      "input_fingerprint": "dd0520dc2c151351f3661dffa777ab7bdc1028a50e4cfb4f44ed9aca84d2ca60",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363721",
-      "parent_id": "363721",
-      "stage": "queue",
-      "input_fingerprint": "d676a7ca7fd3ca8240425e77d1d166bee59c138ef2c1c4eeea7cb68816f1f564",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362917",
-      "parent_id": "362917",
-      "stage": "queue",
-      "input_fingerprint": "a953b98121551e501752aea98a52b8747b3a146b286b5969343e3b3374ee817c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362370",
-      "parent_id": "362370",
-      "stage": "queue",
-      "input_fingerprint": "a7699019d0b60a0dd8b774f65d07a958a7c7f0a516a3fdce25417d46d92dc8d3",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363746",
-      "parent_id": "363746",
-      "stage": "queue",
-      "input_fingerprint": "52e9c5c9625ca81f95834ec3cfe6ffa237b234ce203f7f21523abdf995387d06",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363673",
-      "parent_id": "363673",
-      "stage": "queue",
-      "input_fingerprint": "f6d2182bf36f9c13ca2acc35fa9a82ef59f54a2799aeb933577700ccfa10e3b0",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362981",
-      "parent_id": "362981",
-      "stage": "queue",
-      "input_fingerprint": "6ff3baf9d5a12ee5bb9970fbacb136f5db0c48d3f1e29de67db210d3a418d345",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363331",
-      "parent_id": "363331",
-      "stage": "queue",
-      "input_fingerprint": "35902fbc9e51643dc797f6cf83e14d54996a33a8cdcf50be6279e72e69d86b44",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363818",
-      "parent_id": "363818",
-      "stage": "queue",
-      "input_fingerprint": "0ac3c43ac5d63e7432396ada186f2d42b3adaf65e02f1de7a846ccbc1e0842f1",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "arpa-h:stream",
-      "parent_id": "arpa-h:stream",
-      "stage": "queue",
-      "input_fingerprint": "eb2148d08949e9c334b9f0c46fe787e34311af7fcd1650dd6e6eb242ad02ae4c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363744",
-      "parent_id": "363744",
-      "stage": "queue",
-      "input_fingerprint": "14838542c1c0843e20239a6513d8efa8711df811db022bc1732114e5bced4ad3",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363645",
-      "parent_id": "363645",
-      "stage": "queue",
-      "input_fingerprint": "261f7abce0234c3e136c2b2622df3da3020611f447d3accc08d5b434d97ca53f",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
     {
       "scope_id": "363015",
       "parent_id": "363015",
@@ -2792,6 +2507,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "356231",
+      "parent_id": "356231",
+      "stage": "queue",
+      "input_fingerprint": "66dff0530183425ecfc157bd21abf82d228341132813ec18a9b4c9afca96f305",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363014",
       "parent_id": "363014",
       "stage": "queue",
@@ -2868,6 +2592,15 @@
       "parent_id": "363711",
       "stage": "queue",
       "input_fingerprint": "acf4d3ace4bd8ed145cbc637e363bf0838ec8cc18fa6079b636afaadee28d611",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "360510",
+      "parent_id": "360510",
+      "stage": "queue",
+      "input_fingerprint": "0f1355eff85905d12d7861aacabb51f5941b9b1798b355be58a8fc36cbf3b406",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3026,15 +2759,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363574",
-      "parent_id": "363574",
-      "stage": "queue",
-      "input_fingerprint": "14d4210bac2410c4081d1333331d4bde28117295c58822d83ba72241e0b67e26",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "363553",
       "parent_id": "363553",
       "stage": "queue",
@@ -3179,15 +2903,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363599",
-      "parent_id": "363599",
-      "stage": "queue",
-      "input_fingerprint": "58308afc1819e8364302b3d4de7688ad4f27d192543320c593ab8d05e6977334",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "302273",
       "parent_id": "302273",
       "stage": "queue",
@@ -3218,7 +2933,7 @@
       "scope_id": "362974",
       "parent_id": "362974",
       "stage": "queue",
-      "input_fingerprint": "12617e8e9404b207f81ba69fb766c6e616f08732f2e7b9313c30e5a341c50e83",
+      "input_fingerprint": "796257af361940ac04476139ff0bec8727b9c8f65d1fc43aeecb631feac466ca",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3908,15 +3623,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/prfb-postdoctoral-research-fellowships-biology/nsf26-504",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/prfb-postdoctoral-research-fellowships-biology/nsf26-504",
-      "stage": "queue",
-      "input_fingerprint": "027ec5b68846f4d28365f7c4cc876494759a4fba8be759dbe1eb74f050ef56ba",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "359651",
       "parent_id": "359651",
       "stage": "queue",
@@ -4259,15 +3965,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ate-advanced-technological-education/nsf24-584",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ate-advanced-technological-education/nsf24-584",
-      "stage": "queue",
-      "input_fingerprint": "5436b196b8400cd29ec233c4d70286245b3b1c7ef4254792d052cf8f8c08803c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "361449",
       "parent_id": "361449",
       "stage": "queue",
@@ -4371,15 +4068,6 @@
       "parent_id": "362422",
       "stage": "queue",
       "input_fingerprint": "29681fca5cc4bdacfcbfd33f133509c9587e7142fb349b4f16d6afa34d825c9a",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/ecrcore-edu-core-research/nsf21-588",
-      "stage": "queue",
-      "input_fingerprint": "59a7a3324cd0df90d72ada7eeadae759cc5bb913a9114512f90aaec0ecd79928",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4826,6 +4514,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363574",
+      "parent_id": "363574",
+      "stage": "queue",
+      "input_fingerprint": "14d4210bac2410c4081d1333331d4bde28117295c58822d83ba72241e0b67e26",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363817",
       "parent_id": "363817",
       "stage": "queue",
@@ -4934,6 +4631,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "vpr-email:vpr-a3ddeff815d159a4",
+      "parent_id": "vpr-email:vpr-a3ddeff815d159a4",
+      "stage": "queue",
+      "input_fingerprint": "5eadc5a25421b2b5cb16690d1166e1624881745247fbdcf8329d3d642c5cb853",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "329325",
       "parent_id": "329325",
       "stage": "queue",
@@ -4970,15 +4676,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/eri-engineering-research-initiation/nsf24-590",
-      "stage": "queue",
-      "input_fingerprint": "96469c6c87b96a3999413644f0aff908e79aee49e0e459a0857da5e5ba2554af",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "363732",
       "parent_id": "363732",
       "stage": "queue",
@@ -4992,15 +4689,6 @@
       "parent_id": "353936",
       "stage": "queue",
       "input_fingerprint": "93325e031a4d5f424fe08551d6e6cbd4c98ace0cbaf0681a8047464bc7c8ce71",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/mfai-mathematical-foundations-artificial-intelligence/nsf24-569",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/mfai-mathematical-foundations-artificial-intelligence/nsf24-569",
-      "stage": "queue",
-      "input_fingerprint": "45943993996572cc3f0fbf3624560dfd1c302c4e185f9ac98f7ead27d709cd06",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5078,6 +4766,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363854",
+      "parent_id": "363854",
+      "stage": "queue",
+      "input_fingerprint": "303943b4be6de0629b5994dab981bb18e256a55c5ad23f4ed977c70e50f630ba",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "361334",
       "parent_id": "361334",
       "stage": "queue",
@@ -5091,6 +4788,15 @@
       "parent_id": "362313",
       "stage": "queue",
       "input_fingerprint": "49db046c4fffa61f912d9347fdb40129bc056d30a55ec4f17dda2118aacf29ab",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363599",
+      "parent_id": "363599",
+      "stage": "queue",
+      "input_fingerprint": "58308afc1819e8364302b3d4de7688ad4f27d192543320c593ab8d05e6977334",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5207,7 +4913,7 @@
       "scope_id": "363667",
       "parent_id": "363667",
       "stage": "queue",
-      "input_fingerprint": "9dc1e5caaf3a9bd4bbce3d5e88c4edb0b186d81db5ad3db9e8b56f5ce1af51ed",
+      "input_fingerprint": "e372aa9e6c5cfd3748d3e3442649c9b789ac148685d83ce5d5016d487b35b9e5",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5216,7 +4922,7 @@
       "scope_id": "350802",
       "parent_id": "350802",
       "stage": "queue",
-      "input_fingerprint": "25735d7017f12915adb1c56ddc83f45e1e5095800d190ba25d38a015d81cc649",
+      "input_fingerprint": "76f08406bcf0ed0a8f6443c6f3a32ae0fec208f5017a824ad12f36a8cdb894e1",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5243,7 +4949,7 @@
       "scope_id": "334326",
       "parent_id": "334326",
       "stage": "queue",
-      "input_fingerprint": "b24b708dc4f48eb6bab80c843bbf2d6d7f146304d33e33ff10da61fbfe815109",
+      "input_fingerprint": "7aeabff8b30f2e7af5a00d5a07397318be52539d70da0eac7bd8f0cff5208605",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5288,7 +4994,7 @@
       "scope_id": "363296",
       "parent_id": "363296",
       "stage": "queue",
-      "input_fingerprint": "2221249388b672496ddfcd3eca9e6cd520e378446f74faa7eead53f17d53c767",
+      "input_fingerprint": "f07cc831436c94fd933d91e7cb8b3930a94db71dab158872c4748dc4b6f21de4",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5360,7 +5066,7 @@
       "scope_id": "342747",
       "parent_id": "342747",
       "stage": "queue",
-      "input_fingerprint": "9dcbf5e38600961b9bef8a586ce7b308233b549e5cae550e2fbe90592dc64246",
+      "input_fingerprint": "16fc7f01e204829081bc3053c4312365f76858ea0d5e70e476bff5fb8354998b",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5378,7 +5084,7 @@
       "scope_id": "363308",
       "parent_id": "363308",
       "stage": "queue",
-      "input_fingerprint": "9d034c94a37819a61df565192f22a5f30f9336238fad3ec3e58e8e7bb23c6ceb",
+      "input_fingerprint": "23a9e1e01cbb67527afe3f3ca4166213568f895eb93c35a1ce7752c21a8f4167",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5387,7 +5093,7 @@
       "scope_id": "363843",
       "parent_id": "363843",
       "stage": "queue",
-      "input_fingerprint": "399b435dade4fdbf382210d6ba07940100da39a3c8aee95f1c6192a6688da8d7",
+      "input_fingerprint": "33b01f8333f78ebc5ba58ac9479f250f353c4b0a742cbd776be644ac6a63cc11",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5420,6 +5126,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "356935",
+      "parent_id": "356935",
+      "stage": "queue",
+      "input_fingerprint": "42a512c1564b3e1fedc58bcc3e709ec63807560e4eb4268a93a692c89e3e2d2d",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "362787",
       "parent_id": "362787",
       "stage": "queue",
@@ -5433,6 +5148,15 @@
       "parent_id": "363590",
       "stage": "queue",
       "input_fingerprint": "b7d05521bf28eede3c60f1c0772df444d9474b7e0c5a8049892bc0c5946c7e90",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "vpr-email:vpr-3a86f2f6b6e2925c",
+      "parent_id": "vpr-email:vpr-3a86f2f6b6e2925c",
+      "stage": "queue",
+      "input_fingerprint": "95ea18555ce5bfdb6b9cd69c1bae4191fcf957e1b16966ec766c1eebf149ecef",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5477,7 +5201,7 @@
       "scope_id": "357658",
       "parent_id": "357658",
       "stage": "queue",
-      "input_fingerprint": "681020763df3e8e257a020e447ed49d390fbee6a1b3b211c89e0df4140c6d1a7",
+      "input_fingerprint": "6fd4b6aae5a10e78729f992140d06ca353e4178d49bc74b7a504e5cccfa4fa07",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5495,7 +5219,7 @@
       "scope_id": "362077",
       "parent_id": "362077",
       "stage": "queue",
-      "input_fingerprint": "79ffae2529291e17dc7e8125ae4746c79138945203e1b86992b24a40d106adc4",
+      "input_fingerprint": "078116a7f42365512fbd10d8b8fa3c0f035fc8bb0cf0f208a85072a04a3d2aa2",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5612,7 +5336,7 @@
       "scope_id": "349280",
       "parent_id": "349280",
       "stage": "queue",
-      "input_fingerprint": "c14c377a8c99ee5cf80a2bfda0c5031d544b9579d48ad184a3a06098de21e389",
+      "input_fingerprint": "462b3766b9f4320e93ff3db6fe146536d1d868e33a1026107a03250edab49a94",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5721,6 +5445,15 @@
       "parent_id": "363690",
       "stage": "queue",
       "input_fingerprint": "228d6db4fc93dbebc09c0829ca7ab17d3bb2411f2b845d20efd64ed66172a0b2",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363852",
+      "parent_id": "363852",
+      "stage": "queue",
+      "input_fingerprint": "57a5e5e7d109fcf9be2572b5985a9929bac19579e9c17168c222234519be87ef",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5846,7 +5579,7 @@
       "scope_id": "363847",
       "parent_id": "363847",
       "stage": "queue",
-      "input_fingerprint": "b3ec040e3b9652f9197f7294b57d849a60da062dee5adffac22bbf511f205b45",
+      "input_fingerprint": "5736724212bc3cde82ae6f7653421e2f183b205dd1289a23c2eb5daa5ba435d1",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5873,7 +5606,7 @@
       "scope_id": "356559",
       "parent_id": "356559",
       "stage": "queue",
-      "input_fingerprint": "8bb5a04cd4d0673f0d2a73d5e9aaf97be3ad6daa7df39d6993f6eb8d77a3ed98",
+      "input_fingerprint": "0011cf55e392e9b5c2fad43e23b267022339a045fc4bccafe963bef1b32ab7b7",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5882,7 +5615,7 @@
       "scope_id": "356561",
       "parent_id": "356561",
       "stage": "queue",
-      "input_fingerprint": "07ffd84bcc0b06dbed02d0dd3c56e955832e01a0e0f3701047cc2f6d2d0f8205",
+      "input_fingerprint": "85eaa2296f4a566a9fe989b48949651b9255985280833e2f4959a3162dbdea6f",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5891,7 +5624,7 @@
       "scope_id": "356562",
       "parent_id": "356562",
       "stage": "queue",
-      "input_fingerprint": "c26da4b6b8ca1f16cb5a7904299fe783a2f79c795ada20f712a7c34ca12176dd",
+      "input_fingerprint": "3128b3a0064c6218e55b265cc4666a4c7eff72df883b13761f8017375a03ec28",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6152,7 +5885,7 @@
       "scope_id": "vpr-email:NSF26-511",
       "parent_id": "vpr-email:NSF26-511",
       "stage": "queue",
-      "input_fingerprint": "ccc5f6db4f3e6f67763cf860050eb61a7ebddafd13f53c80ff9abf4f9ab1f450",
+      "input_fingerprint": "1afde8d7fecddbee2069414aefbb944e2fb0d3f47d226d064b3ff508ee43a6ed",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6179,7 +5912,7 @@
       "scope_id": "343980",
       "parent_id": "343980",
       "stage": "queue",
-      "input_fingerprint": "017115bd8f7d1ac575c6ab93ee10339335f055a84ad578dc2ce3e3b765602946",
+      "input_fingerprint": "da2da7ef6e313dfbaafeeb25437f7ada1cb5a5c604dd5c4c20b49ce787abd3ee",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6314,7 +6047,7 @@
       "scope_id": "357204",
       "parent_id": "357204",
       "stage": "queue",
-      "input_fingerprint": "94a872194098494ac594307a95d3c0076faa6abf926089adc42e0e12105831d4",
+      "input_fingerprint": "0b29723fac2b846cefeeb32cb8aab86d786142f41305f0ef696cdd04ae9eb11a",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6332,7 +6065,7 @@
       "scope_id": "363611",
       "parent_id": "363611",
       "stage": "queue",
-      "input_fingerprint": "ea5f8f7b8c4624cc678577db38f5a4e780c51a15b572b5ed44983c2106280841",
+      "input_fingerprint": "c7898fe1ced44c3e03ba665bc915545e480196aeea4c9304eefbc52ec05517a6",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6413,7 +6146,7 @@
       "scope_id": "362319",
       "parent_id": "362319",
       "stage": "queue",
-      "input_fingerprint": "4a3b5860b39fee73feba491a27677a7fcbe58eb3901deda88962bda15b7ecc87",
+      "input_fingerprint": "521186678cb75d2d19a1975dfd8f630a895b3af7fe2afb625eb27dbcf499fcdb",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6458,7 +6191,7 @@
       "scope_id": "363764",
       "parent_id": "363764",
       "stage": "queue",
-      "input_fingerprint": "6fd58bea98ebddb7f29c85d76bdc8481565836edcec82f5c0339f2e85e7e7823",
+      "input_fingerprint": "6dbadf3f2fd13d26c45cd405c44c145af3e08d633d3219447b87e37d3a08f882",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6680,10 +6413,19 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "357492",
+      "parent_id": "357492",
+      "stage": "queue",
+      "input_fingerprint": "06f903c3e0c396c00d91d2d95681e6d3967595250121714bd68a6de4b0b72afe",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "357490",
       "parent_id": "357490",
       "stage": "queue",
-      "input_fingerprint": "54a3a635e73288f56c5d9ac15f2c40a8dae2a84e1f07c89f532ef56268413951",
+      "input_fingerprint": "4574fca2533939aa908025cb013d8827bfeef4198c1144ae983b5cade332d98f",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6701,7 +6443,7 @@
       "scope_id": "351679",
       "parent_id": "351679",
       "stage": "queue",
-      "input_fingerprint": "15fab2482cec3b973c4a1438607d866668186dbfb268f0b04eab978f632f2b8b",
+      "input_fingerprint": "f875a524a9f16c9f2a83b02419725928654e952b734bba86a82937cbd02a75b1",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6755,7 +6497,7 @@
       "scope_id": "362464",
       "parent_id": "362464",
       "stage": "queue",
-      "input_fingerprint": "be8b98986d6eeea7014fc2ee7c01cae0a0e109d572f4fa58577e657ec19c04b5",
+      "input_fingerprint": "b4dceeda2cbe047c4aa50b562a1c7fc1f1a7177d0e4165c4e670cf325daff4b4",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6773,7 +6515,7 @@
       "scope_id": "358179",
       "parent_id": "358179",
       "stage": "queue",
-      "input_fingerprint": "6a1a8791e42a72e46fdd79d4aef86076b588f3d9944e9bf5e91723b799006a3e",
+      "input_fingerprint": "257b6e3f683dd7e667141694215a865b5766b37e1c3d47c353fca3eab4fa2052",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6782,7 +6524,7 @@
       "scope_id": "344610",
       "parent_id": "344610",
       "stage": "queue",
-      "input_fingerprint": "8bdac94e287163bb3e44cc35f4205d8ff1afc75e610b8ed95e5b7ed804cc4b50",
+      "input_fingerprint": "3d41cce7f89e15d59f7ba02b89b8cc205b69967a938c5fc028b9f5e7bba91abd",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7049,6 +6791,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363856",
+      "parent_id": "363856",
+      "stage": "queue",
+      "input_fingerprint": "475bb858f4e03630dd7ccb72768738eb1ed46a516a3f1b6e243e70f62b8c1cd3",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "362276",
       "parent_id": "362276",
       "stage": "queue",
@@ -7106,7 +6857,7 @@
       "scope_id": "363815",
       "parent_id": "363815",
       "stage": "queue",
-      "input_fingerprint": "3d4e6bb7f2b3c6a1d6dc84e0136e5ff8b1dbca93b4ad6fd45ecc8d44a95ff26a",
+      "input_fingerprint": "4d8539f5ec70147c37efba8623588d01066286177e087e538e86a5cdd55d15d6",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7418,10 +7169,19 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "nyserda:PON6206",
+      "parent_id": "nyserda:PON6206",
+      "stage": "queue",
+      "input_fingerprint": "0bc6fdb4f14798277069286f451dfe62371cade428677b540747e8ce15d2154b",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "362871",
       "parent_id": "362871",
       "stage": "queue",
-      "input_fingerprint": "293fec73fdbd6b8cd36db009bb3c4189f5d0f9b6b60f0334235777d79c8de622",
+      "input_fingerprint": "a3003f23bac9a44af2e92f20c64f68276d2a49bf75d170b10e1d5d5bf6a9afc4",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8741,6 +8501,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363861",
+      "parent_id": "363861",
+      "stage": "queue",
+      "input_fingerprint": "761ce3a4699a6a253ca6ada0387e564064bb1aaa1ecbd1d19f8f785de69cf5be",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "362577",
       "parent_id": "362577",
       "stage": "queue",
@@ -9605,10 +9374,10 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363814",
-      "parent_id": "363814",
+      "scope_id": "363855",
+      "parent_id": "363855",
       "stage": "queue",
-      "input_fingerprint": "327ebc95b4cdb520b9f9ebcc2fe7c990552fbf098e81626e5d27b6c37b9e508b",
+      "input_fingerprint": "552b873ee76430a41fff84365c36dafa91073c7f3f9ffb909345f773708fb56a",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -11090,6 +10859,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363862",
+      "parent_id": "363862",
+      "stage": "queue",
+      "input_fingerprint": "f97fd59744a5843e7e9d13a15b791a3d42e461a56d0de2cd9d834febf65c3479",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "361271",
       "parent_id": "361271",
       "stage": "queue",
@@ -11409,6 +11187,42 @@
       "parent_id": "nyserda:PON6037-PhaseII",
       "stage": "queue",
       "input_fingerprint": "d1ebdfbe64aaa62f6fc78cd14d127a92e44b7d10b4efdc213850b672fc5b9861",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363860",
+      "parent_id": "363860",
+      "stage": "queue",
+      "input_fingerprint": "3737e2951b80749c8ba432bcdc49bc787aacf891a83753ceed440120341b7b1a",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363858",
+      "parent_id": "363858",
+      "stage": "queue",
+      "input_fingerprint": "ea51dd918e5f54ed619e499401eebca186d79f67d04d75d0aa147876ea564ab4",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363859",
+      "parent_id": "363859",
+      "stage": "queue",
+      "input_fingerprint": "6a8abef231e378e572af2804999f481750095bd969258067ff380c5572cf4239",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363857",
+      "parent_id": "363857",
+      "stage": "queue",
+      "input_fingerprint": "c1f348b10c154a00994c16aad92735de3c7a757e4683da5d874e0626f98cbafd",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -11823,6 +11637,33 @@
       "parent_id": "361822",
       "stage": "queue",
       "input_fingerprint": "6ceebbbdcc290a297dfadfafd6abe3cdcbe83d179d85d0aeb027b11b1e8b5bd5",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363849",
+      "parent_id": "363849",
+      "stage": "queue",
+      "input_fingerprint": "ef65fd117a64124fd7df456e8100e22362ce221c99efb37b0cd4b7d35346584b",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363850",
+      "parent_id": "363850",
+      "stage": "queue",
+      "input_fingerprint": "6768a2ba2f8a6922602a9376eb014cf11b03df611bb0ffb4e670a62b4b220f59",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363851",
+      "parent_id": "363851",
+      "stage": "queue",
+      "input_fingerprint": "f0bd300e2ac58989ea24dc3a281dde67974fd34bbe07549f8226466c362f62e4",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -13403,6 +13244,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363863",
+      "parent_id": "363863",
+      "stage": "queue",
+      "input_fingerprint": "ec7f87b73ba30fdbd04586d88c2eee91a36cc1e815ea3743f23f8bfad7c745f4",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363841",
       "parent_id": "363841",
       "stage": "queue",
@@ -14672,6 +14522,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363779",
+      "parent_id": "363779",
+      "stage": "queue",
+      "input_fingerprint": "f3be081257567267b7ff1478d8ca0c7f41705c4276b24f006abecf7f3f3b44b6",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "331306",
       "parent_id": "331306",
       "stage": "queue",
@@ -14834,15 +14693,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/cdse-computational-data-enabled-science-engineering/pd24-8084",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/cdse-computational-data-enabled-science-engineering/pd24-8084",
-      "stage": "queue",
-      "input_fingerprint": "0f6d95ec8d77b9647aea3e2e0045d7b4ff836da948426e0e99b2af13b7446a9a",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "363615",
       "parent_id": "363615",
       "stage": "queue",
@@ -14910,15 +14760,6 @@
       "parent_id": "348164",
       "stage": "queue",
       "input_fingerprint": "b3d822ba116df2b3f0386341a35487d89b115c1c974e39281f1abcdd8729e865",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering/pd24-110z",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/eclipse-ecosystem-leading-innovation-plasma-science-engineering/pd24-110z",
-      "stage": "queue",
-      "input_fingerprint": "6590d0b13adaa6deab52606856539bd4842732de17a2ae070cdc3705b6f80633",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15212,15 +15053,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/dmsnigms-joint-dmsnigms-initiative-support-research-interface/nsf22-600",
-      "stage": "queue",
-      "input_fingerprint": "c149d364a39ff8fa67ea781e2165e4ad7e8d40c43381c9eb344d95eea41f7d52",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "329432",
       "parent_id": "329432",
       "stage": "queue",
@@ -15342,15 +15174,6 @@
       "parent_id": "vpr-email:vpr-63cc8866673bd1a1",
       "stage": "queue",
       "input_fingerprint": "117c2816765883c0ec07e455f9256a9431bb5a368b36295769b5c7adcac38d73",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "356231",
-      "parent_id": "356231",
-      "stage": "queue",
-      "input_fingerprint": "3c36349cdc42b0b49ff9d1502a4e532ca53587e5e64772c57add9550f0f668ef",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15608,15 +15431,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/satc-20-security-privacy-trust-cyberspace/nsf25-515",
-      "parent_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/satc-20-security-privacy-trust-cyberspace/nsf25-515",
-      "stage": "queue",
-      "input_fingerprint": "2f7753d288f7ac98ff563be719cd35970dc02a951dc7940c93a2d700648a482e",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "326733",
       "parent_id": "326733",
       "stage": "queue",
@@ -15754,6 +15568,6 @@
   ],
   "assessed_scopes": 0,
   "outcomes": {},
-  "elapsed_seconds": 2.981,
+  "elapsed_seconds": 1.97,
   "status": "completed"
 }
