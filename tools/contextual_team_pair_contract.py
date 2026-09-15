@@ -105,6 +105,44 @@ def body(data, *, judge=False):
     return c, result
 
 
+def compact_check_body(data):
+    """Build an opt-in checker packet with shared native schema definitions.
+
+    The canonical output and local validator remain unchanged. This packet has
+    a distinct identity and is not authorized by the historical paid lock;
+    provider grammar acceptance cannot be established by this offline builder.
+    """
+    c, result = body(data, judge=True)
+    native = result['output_config']['format']['schema']
+    definitions = {}
+
+    def shared(name, value):
+        if name in definitions and definitions[name] != value:
+            raise ValueError('compact_check_shared_schema_mismatch')
+        definitions.setdefault(name, deepcopy(value))
+        return {'$ref': '#/$defs/' + name}
+
+    people = native['properties']['decisions']['properties']
+    for person_index, person in enumerate(data['people']):
+        roles = people[person['person_id']]['properties']
+        for role_index, role in enumerate(data['interpretation']['roles']):
+            fields = roles[role['id']]['properties']
+            claims = fields['claim_refs']
+            for slot in ('primary', 'second', 'third'):
+                claims['properties'][slot] = shared(
+                    'owned_claims_' + str(person_index), claims['properties'][slot])
+            fields['claim_refs'] = shared('claim_refs_' + str(person_index), claims)
+            for name in ('coverage', 'reason', 'gap', 'verdict'):
+                fields[name] = shared(name, fields[name])
+            fields['source_ref'] = shared('source_' + str(role_index), fields['source_ref'])
+    native['$defs'] = definitions
+    return c | {
+        'native_schema_version': 'contextual-complete-pairs-check-native-refs-v1',
+        'native_schema_sha256': identity(native),
+        'canonical_contract_sha256': identity(c),
+    }, result
+
+
 def resolve(value, data, *, judge=False):
     if len(encoded(value)) > MAX_FINAL_BYTES:
         raise ValueError('complete_pair_response_bytes')

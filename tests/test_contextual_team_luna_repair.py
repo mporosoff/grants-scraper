@@ -130,6 +130,99 @@ class PairContract(unittest.TestCase):
         pairs.validate_cached(pairs.resolve(answer(self.data,True),self.data,judge=True),self.data,judge=True)
 
 
+class CompactCheckerContract(unittest.TestCase):
+    @classmethod
+    def setUpClass(cls):
+        cls.data=real_data()
+        blocked=patch('socket.socket.connect',side_effect=AssertionError('offline_check_only'))
+        blocked.start();cls.addClassCleanup(blocked.stop)
+
+    @staticmethod
+    def expanded(native):
+        """Independently expand only local, acyclic, standalone schema refs."""
+        definitions=native['$defs']
+        def visit(value, active=()):
+            if isinstance(value,list):return [visit(v,active) for v in value]
+            if not isinstance(value,dict):return value
+            if '$ref' in value:
+                if set(value)!={'$ref'} or not value['$ref'].startswith('#/$defs/'):
+                    raise AssertionError('nonlocal_or_sibling_reference')
+                key=value['$ref'].removeprefix('#/$defs/')
+                if key in active:raise AssertionError('recursive_schema')
+                return visit(definitions[key],active+(key,))
+            return {k:visit(v,active) for k,v in value.items() if k!='$defs'}
+        # Validate all definitions, including any that are not referenced.
+        for key in definitions:visit({'$ref':'#/$defs/'+key})
+        return visit(native)
+
+    def test_native_expansion_preserves_every_constraint_and_reduces_wire(self):
+        for count in (1,6,12):
+            data=copy.deepcopy(self.data);data['people']=data['people'][:count]
+            original=copy.deepcopy(data)
+            _,old=pairs.body(data,judge=True)
+            _,new=pairs.compact_check_body(data)
+            before=old['output_config']['format']['schema']
+            after=new['output_config']['format']['schema']
+            self.assertEqual(self.expanded(after),before)
+            self.assertLess(len(encoded(after)),len(encoded(before)))
+            self.assertEqual(data,original)
+            self.assertEqual({k:v for k,v in new.items() if k!='output_config'},
+                             {k:v for k,v in old.items() if k!='output_config'})
+
+    def test_frozen_operations_stay_identical_and_compact_packet_has_new_identity(self):
+        for name in ('assessment','check'):
+            c,b=pairs.body(self.data,judge=name=='check')
+            op=policy.plan()['operations'][name]
+            self.assertEqual(identity(c),op['contract_sha256'])
+            self.assertEqual(identity(b),op['body_sha256'])
+        old_c,old_b=pairs.body(self.data,judge=True)
+        c,b=pairs.compact_check_body(self.data)
+        self.assertNotEqual(identity(c),identity(old_c))
+        self.assertNotEqual(identity(b),identity(old_b))
+        self.assertEqual(c['canonical_contract_sha256'],identity(old_c))
+        self.assertEqual(c['native_schema_sha256'],identity(b['output_config']['format']['schema']))
+        self.assertEqual(c['schema'],old_c['schema'])
+        self.assertEqual(c['prompt'],old_c['prompt'])
+        self.assertFalse(c['serving_approved'])
+        self.assertEqual(c['maximum_pairs'],24)
+        self.assertEqual(pairs.compact_check_body(self.data),(c,b))
+        original_body=pairs.body
+        def substituted(data, *, judge=False):
+            return (c,b) if judge else original_body(data,judge=False)
+        with patch.object(repair,'eclipse_data',return_value=(self.data,None)), patch.object(pairs,'body',side_effect=substituted):
+            with self.assertRaisesRegex(ConfigurationFailure,'locked_prompt_schema_or_input_changed'):
+                repair.locked_packets(Path('unused-offline-state'))
+
+    def test_compact_checker_rejects_missing_pairs_and_wrong_owned_evidence(self):
+        _,b=pairs.compact_check_body(self.data)
+        native=self.expanded(b['output_config']['format']['schema'])
+        a=answer(self.data,True)
+        pid=self.data['people'][0]['person_id'];other=self.data['people'][1]['person_id']
+        validate_schema(a,native)
+        pairs.validate_cached(pairs.resolve(a,self.data,judge=True),self.data,judge=True)
+        mutations=(lambda v:v['decisions'].pop(pid),
+            lambda v:v['decisions'][pid].pop('role-2'),
+            lambda v:v['decisions'].update(invented={}),
+            lambda v:v['decisions'][pid]['role-1'].pop('verdict'),
+            lambda v:v['decisions'][pid]['role-1'].update(source_ref='src-sibling'),
+            lambda v:v['decisions'][pid]['role-1']['claim_refs'].update(primary=other+'-c001@2'),
+            lambda v:v['decisions'][pid]['role-1']['claim_refs'].update(primary=pid+'-c001@99'))
+        for mutate in mutations:
+            v=copy.deepcopy(a);mutate(v)
+            with self.assertRaises(ValueError):validate_schema(v,native)
+            with self.assertRaises(ValueError):pairs.resolve(v,self.data,judge=True)
+        # Native string descriptions still defer exact bounds to the local validator.
+        v=copy.deepcopy(a);v['decisions'][pid]['role-1']['reason']='x'*701
+        with self.assertRaises(ValueError):pairs.resolve(v,self.data,judge=True)
+        v=copy.deepcopy(a);refs=v['decisions'][pid]['role-1']['claim_refs'];refs['second']=refs['primary']
+        with self.assertRaisesRegex(ValueError,'duplicate_support_claim'):pairs.resolve(v,self.data,judge=True)
+        v=copy.deepcopy(a);v['decisions'][pid]['role-1']['claim_refs']['primary']='NONE'
+        with self.assertRaisesRegex(ValueError,'positive_without_retained_support'):pairs.resolve(v,self.data,judge=True)
+        payload={'stop_reason':'end_turn','content':[{'type':'text','text':'{"decisions":{},"decisions":{}}'}]}
+        with self.assertRaisesRegex(ValueError,'duplicate_response_key'):pairs.parse(payload,'anthropic',self.data,judge=True)
+
+
+
 class Execution(unittest.TestCase):
     def setUp(self):
         self.temp=tempfile.TemporaryDirectory();self.addCleanup(self.temp.cleanup)
