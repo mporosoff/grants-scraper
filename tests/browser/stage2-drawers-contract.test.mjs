@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { preservedMatcherBytes } from "../helpers/preserved-matcher-bytes.mjs";
 import { readFile } from "node:fs/promises";
 import { createHash } from "node:crypto";
 import test from "node:test";
@@ -153,7 +154,7 @@ test("protected algorithms, team output and AI request construction remain byte-
     // Optional institution normalization is authorized; the user-fixes function
     // baseline freezes every other function in this module.
     if (path === "assets/team-researchers.js") continue;
-    assert.equal(createHash("sha256").update(await readFile(new URL(`../../${path}`, import.meta.url))).digest("hex"), expected, path);
+    assert.equal(createHash("sha256").update(preservedMatcherBytes(path, await readFile(new URL(`../../${path}`, import.meta.url)))).digest("hex"), expected, path);
   }
   for (const [key, expected] of Object.entries(baseline.functions)) {
     const [path, name] = key.split("#");

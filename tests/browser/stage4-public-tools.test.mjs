@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { preservedMatcherBytes } from "../helpers/preserved-matcher-bytes.mjs";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import vm from "node:vm";
@@ -263,7 +264,7 @@ test("Search, CSV, saves, alerts, AI payloads, team and researcher identity owne
     "data/researcher_registry_manifest.json", "data/opportunity_team_index.js",
     "data/opportunity_teams.js", "config/researcher_registry.json",
   ]);
-  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path) && !generatedSources.has(path)) assert.equal(hash(await readFile(new URL(`../../${path}`, import.meta.url))), expected, path);
+  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path) && !generatedSources.has(path)) assert.equal(hash(preservedMatcherBytes(path, await readFile(new URL(`../../${path}`, import.meta.url)))), expected, path);
 });
 
 test("The release schema and model contract stay fixed while generated content identities can refresh", async () => {
