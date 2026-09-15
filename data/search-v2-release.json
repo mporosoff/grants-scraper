@@ -34,7 +34,7 @@
     "assets/search-retrieval.js": "e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
     "assets/subtopic-runtime.js": "a6c36190f9ef26de960125aea58b9415b4b951dc9ec2f26998bbebecbc8b5d1c",
     "assets/team-hybrid.js": "00a14620c5288c0793939cd69f1b9f43314b2855eb071b5b0d7afca1c06f9e8d",
-    "assets/team-matcher.js": "40ba71f054623a718d5ecb9d0b5897884cba3c716295276b6c281d734b9d49e6",
+    "assets/team-matcher.js": "4bcfb19d7399f72cd1fff32f2aa58f54b5e7a64d45695c564867b39b1259c020",
     "assets/team-researchers.js": "9af008d5547a3553b6ef590ab6c0d22762b751438d6f4199ce1a6846ea1cd98e",
     "assets/opportunity-team.js": "62a8c2b388a475ca490316a5cf40ea037c6e40522786b94a23ba78ef2636af8e",
     "assets/opportunity-team-panel.js": "2011d7cde96d9ea824f175878fcd1981e463c7ac13d232a67fbe2b19fea6afb4",
@@ -44,7 +44,7 @@
     "data/researcher_directory.js": "93b95b1f5e0656fa527c313f3ae40ccfc244e73b92f20e5e870cbe570f82da69",
     "data/researcher_registry_manifest.json": "a2ecbb71de8e6afe20d5ae466d0842cb4a682a63f724dab91ac48b2075f837e3",
     "match_explorer.html": "529d40294e9b363f8427170ee96594ee31dd81ac189b4fc81a647cb02c6adca9",
-    "team_match.html": "331d50271218a38c219679e31e2710f156a10b0e8d275c02cb152c4a0c9f1ab4",
+    "team_match.html": "98415af22db19d08009fc6dc6b3716384e3c0775618267721e8d596d97ac1461",
     "workers/search-voyage-proxy/src/index.js": "bad06e8dd15e58355b274d7b35844097dd8c19fb9517905418c631fd2e56cf2e",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
   },

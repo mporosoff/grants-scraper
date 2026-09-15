@@ -1,0 +1,41 @@
+{
+  "base": "ef44f981803e2cde77a8d1a6659115e722c66e02",
+  "clock": "2026-09-15T13:23:47.898Z",
+  "old_sha256": "40ba71f054623a718d5ecb9d0b5897884cba3c716295276b6c281d734b9d49e6",
+  "new_sha256": "4bcfb19d7399f72cd1fff32f2aa58f54b5e7a64d45695c564867b39b1259c020",
+  "inputs": {
+    "assets/submission-schedule.js": "2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
+    "assets/search-query.js": "43ddabcf52c78008f1862fb3a62ab5913f1a5de29b4bf5657f6196adfb3b5376",
+    "assets/search-retrieval.js": "e39d337d46491b1d1baf40ca576ded37b519bf123c712fbf2551528a26b9b06d",
+    "assets/team-researchers.js": "9af008d5547a3553b6ef590ab6c0d22762b751438d6f4199ce1a6846ea1cd98e",
+    "assets/opportunity-team.js": "62a8c2b388a475ca490316a5cf40ea037c6e40522786b94a23ba78ef2636af8e",
+    "data/opportunities.js": "5a45ac7a7af2bae60dd4a74fda1d7e20473548ccf8d7497b9fe2a8ae9cec49d8",
+    "data/subtopics.js": "8f64b7ac156adf1e413e1927bcf7b594264a0c9b365889734f4e42e18dc78509",
+    "data/faculty_matches.js": "951d6117263f85fe7421086db8e8eee04bae4df29143c3d04c2a688f472d6354",
+    "data/researcher_directory.js": "93b95b1f5e0656fa527c313f3ae40ccfc244e73b92f20e5e870cbe570f82da69",
+    "data/opportunity_teams.js": "81623cb2dcbcff2042c30c735d5301e87d35139bccd1e90bb42fc87af5d116fe",
+    "data/opportunity_team_index.js": "383b3d63db15b163410057eea1592823a867940c92468ea651c78e536a008590"
+  },
+  "profile_count": 155,
+  "sets": [
+    {
+      "name": "parent",
+      "records": 1355,
+      "pairs": 210025,
+      "team_comparisons": 107,
+      "old_ms": 18346.579499999978,
+      "new_ms": 6745.149800000005,
+      "disagreements": 0
+    },
+    {
+      "name": "child",
+      "records": 223,
+      "pairs": 34565,
+      "team_comparisons": 107,
+      "old_ms": 1061.3267000000342,
+      "new_ms": 741.9563000001654,
+      "disagreements": 0
+    }
+  ],
+  "provider_calls": 0
+}

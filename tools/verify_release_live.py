@@ -50,8 +50,17 @@ def http_diagnostic(response, body):
     return result
 
 
+# Exact existing browser import closure; never expose other Worker internals.
+PUBLIC_BROWSER_IMPORTS = frozenset({
+    'workers/award-api/src/adapters/dod.js', 'workers/award-api/src/institutions.js',
+    'workers/award-api/src/ror.js', 'workers/award-api/src/snapshot.js',
+    'workers/award-api/src/http.js', 'workers/award-api/src/contract.js',
+    'workers/award-api/src/year-filter.js', 'config/award_institutions.json',
+})
+
+
 def public_path(name):
-    return name.endswith('.html') or name.startswith(('assets/', 'data/', 'feeds/'))
+    return name in PUBLIC_BROWSER_IMPORTS or name.endswith('.html') or name.startswith(('assets/', 'data/', 'feeds/'))
 
 
 def pages_path(name):
