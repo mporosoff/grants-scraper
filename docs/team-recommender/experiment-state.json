@@ -10294,9 +10294,14 @@
     "maximum_new_attempts": 2,
     "maximum_new_native_counts": 2,
     "new_paid_attempts": 0,
-    "new_native_counts": 0,
+    "new_native_counts": 1,
     "public_activation": false,
     "new_human_items": 0,
-    "status": "local_implementation_before_review"
+    "status": "reviewed_complete_sizing_locked_before_paid_work",
+    "lock": "docs/team-recommender/contextual-stage-b/luna-repair-prepaid-lock-v1.json",
+    "preflight_run": 34966746696,
+    "authoritative_owner": 34966746696,
+    "reviewed_helper_head": "0422356ca3f901ff7ae98d96d22781963885714e",
+    "merge_sha": "ef44f981803e2cde77a8d1a6659115e722c66e02"
   }
 }
