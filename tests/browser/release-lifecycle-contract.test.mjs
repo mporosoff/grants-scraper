@@ -13,7 +13,7 @@ const live = read('tools/verify_release_live.py');
 test('one serialized owner persists before validation and gates Worker, publication, Pages and live verification', () => {
   const ordered = ['  generate:', 'Persist the complete immutable candidate', 'Retain authoritative candidate even if later stages fail',
     '  validate:', 'tools.validate_release_candidate', '  publish:', 'Verify receipt before materializing the candidate',
-    'Deploy changed Worker inputs', 'tools.publish_release_candidate', 'actions/upload-pages-artifact@v5',
+    'tools.prepare_release_publication', 'Deploy changed Worker inputs', 'tools.publish_release_candidate', 'actions/upload-pages-artifact@v5',
     '\n  pages:\n', '  verify-live:'].map(s => workflow.indexOf(s));
   assert.ok(ordered.every(n => n >= 0));
   assert.deepEqual(ordered, [...ordered].sort((a,b) => a-b));
@@ -25,6 +25,8 @@ test('one serialized owner persists before validation and gates Worker, publicat
   assert.match(workflow, /needs: publish/);
   assert.match(workflow, /needs\.publish\.result == 'success'/);
   assert.doesNotMatch(workflow, /gh workflow run pages/);
+  assert.match(workflow, /--prepared "\$RUNNER_TEMP\/reports\/review-ready.json"/);
+  assert.doesNotMatch(publisher, /--force|--delete-branch/);
 });
 
 test('resume stages load candidates and never collect data or call generation providers', () => {

@@ -684,6 +684,10 @@ jobs:
         run: |
           python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/reports/validation.json"
           python -m tools.release_candidate materialize --bundle "$RUNNER_TEMP/candidate"
+      - name: Establish exact-head review readiness before changing serving state
+        run: >-
+          python -m tools.prepare_release_publication --bundle "$RUNNER_TEMP/candidate"
+          --receipt "$RUNNER_TEMP/reports/validation.json" --reports "$RUNNER_TEMP/reports" --artifact-run "$CANDIDATE_RUN"
       - name: Recheck compatibility with the package actually served by Pages
         run: |
           curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
@@ -727,6 +731,7 @@ jobs:
         run: >-
           python -m tools.publish_release_candidate --bundle "$RUNNER_TEMP/candidate"
           --receipt "$RUNNER_TEMP/reports/validation.json" --reports "$RUNNER_TEMP/reports" --artifact-run "$CANDIDATE_RUN"
+          --prepared "$RUNNER_TEMP/reports/review-ready.json"
       - name: Restore the captured serving version if pre-publication fails
         if: ${{ failure() && steps.worker-deploy.outcome == 'success' && steps.publication.outcome != 'success' }}
         env:

@@ -9,7 +9,7 @@ BOT = 'chatgpt-codex-connector[bot]'
 
 
 def api(path):
-    return json.loads(subprocess.check_output(['gh', 'api', path], text=True, timeout=45))
+    return json.loads(subprocess.check_output(['gh', 'api', path], text=True, encoding='utf-8', timeout=45))
 
 
 def all_pages(path):
@@ -35,7 +35,7 @@ def all_threads(repository, number):
         args = ['gh', 'api', 'graphql', '-f', f'query={query}', '-f', f'owner={owner}', '-f', f'name={name}', '-F', f'number={number}']
         if cursor:
             args += ['-f', f'cursor={cursor}']
-        response = json.loads(subprocess.check_output(args, text=True, timeout=45))
+        response = json.loads(subprocess.check_output(args, text=True, encoding='utf-8', timeout=45))
         if response.get('errors'):
             raise ValueError('Review thread evidence is unavailable')
         page = response['data']['repository']['pullRequest']['reviewThreads']

@@ -317,7 +317,8 @@
       const needed = groups.length <= 3 ? groups.length : Math.max(3, Math.ceil(groups.length * .7));
       let proximity = groups.length === 1;
       const windowSize = groups.length + 6;
-      for (let start = 0; !proximity && start < prepared.tokens.length; start += 1) {
+      // Proximity is only consulted when the minimum group coverage is met.
+      for (let start = 0; matchedGroups >= needed && !proximity && start < prepared.tokens.length; start += 1) {
         const nearby = new Set();
         prepared.tokens.slice(start, start + windowSize).forEach(token => {
           groupTermSets.forEach((terms, groupIndex) => {

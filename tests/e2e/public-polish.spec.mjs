@@ -7,16 +7,47 @@ test("Funding Finder retains its hero and Team Builder contains text at phone wi
   await page.setViewportSize({ width: 320, height: 780 });
   await openFundingFinder(page);
   await expect(page.locator("#open-results-chat")).toBeDisabled();
+  const staleExpected = await page.evaluate(async () => {
+    const catalog = await FUNDING_CATALOG_LOADER.ensureCatalogReady();
+    const generated = new Date(catalog.generated_at).getTime();
+    return !Number.isFinite(generated) || Date.now() - generated > 3 * 86_400_000;
+  });
+  const measure = () => page.locator("#browse-all").evaluate(button => {
+    const box = button.getBoundingClientRect();
+    const column = button.closest(".results-column");
+    const panel = column.getBoundingClientRect();
+    const notices = [...column.querySelectorAll(".notice")].filter(node => node.getClientRects().length);
+    // Remove only the notices' occupied space, independently of #results' position.
+    // Outer panel padding and any erroneous results margin remain in the residual.
+    const noticeHeight = notices.reduce((sum, node) => {
+      const style = getComputedStyle(node);
+      return sum + node.getBoundingClientRect().height + parseFloat(style.marginTop) + parseFloat(style.marginBottom);
+    }, 0);
+    return {
+      horizontal: Math.abs((box.left - panel.left) - (panel.right - box.right)),
+      vertical: Math.abs((box.top - panel.top - noticeHeight) - (panel.bottom - box.bottom)),
+      height: box.height,
+      noticesAboveResults: notices.every(node => node.getBoundingClientRect().bottom <= column.querySelector("#results").getBoundingClientRect().top),
+      staleVisible: Boolean(document.querySelector("#stale-warning")?.getClientRects().length),
+    };
+  });
   for (const width of [320, 390]) {
     await page.setViewportSize({ width, height: 780 });
-    const spacing = await page.locator("#browse-all").evaluate(button => {
-      const box = button.getBoundingClientRect();
-      const panel = button.closest(".results-column").getBoundingClientRect();
-      return { horizontal: Math.abs((box.left - panel.left) - (panel.right - box.right)), vertical: Math.abs((box.top - panel.top) - (panel.bottom - box.bottom)), height: box.height };
-    });
+    const spacing = await measure();
     expect(spacing.horizontal).toBeLessThanOrEqual(1);
     expect(spacing.vertical).toBeLessThanOrEqual(1);
     expect(spacing.height).toBeGreaterThanOrEqual(44);
+    expect(spacing.noticesAboveResults).toBe(true);
+    expect(spacing.staleVisible).toBe(staleExpected);
+  }
+  // Mutation controls prove that these checks do not pass by self-reference.
+  await page.locator("#results").evaluate(node => node.style.marginTop = "17px");
+  expect((await measure()).vertical).toBeGreaterThan(1);
+  await page.locator("#results").evaluate(node => node.style.removeProperty("margin-top"));
+  if (staleExpected) {
+    await page.locator("#stale-warning").evaluate(node => node.classList.add("hidden"));
+    expect((await measure()).staleVisible).toBe(false);
+    await page.locator("#stale-warning").evaluate(node => node.classList.remove("hidden"));
   }
   const title = await page.locator("#page-title").textContent();
   const before = await page.locator("#funding-search").evaluate(node => getComputedStyle(node).backgroundImage);
