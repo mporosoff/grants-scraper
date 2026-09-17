@@ -64,7 +64,7 @@ def request_verification(repository, number, head, reports, boundary):
     run('gh', 'pr', 'comment', str(number), '--repo', repository, '--body-file', str(body))
 
 
-def prepare(bundle, receipt_path, reports, artifact_run):
+def prepare(bundle, receipt_path, reports, artifact_run, *, review_timeout=1800):
     """Obtain exact-head review before any serving mutation or provider smoke."""
     root = c.ROOT
     manifest = c.load(bundle)
@@ -102,7 +102,9 @@ def prepare(bundle, receipt_path, reports, artifact_run):
             pr_url, head = existing[0]['url'], existing[0]['headRefOid']
             run('git', 'fetch', '--no-tags', 'origin', existing[0]['headRefName'])
             if c.git(root, 'rev-parse', f'{head}^{{tree}}') != c.git(root, 'write-tree'):
-                head, review_boundary = reconcile_candidate_branch(root, existing[0], manifest, repository)
+                from tools.wait_release_review import wait_for_review
+                head, review_boundary = reconcile_candidate_branch(root, existing[0], manifest, repository,
+                    wait=lambda repo, number, sha: wait_for_review(repo, number, sha, timeout=review_timeout))
                 reconciled = True
         else:
             head = c.git(root, 'commit-tree', c.git(root, 'write-tree'), '-p', base, '-m',
@@ -133,7 +135,7 @@ def prepare(bundle, receipt_path, reports, artifact_run):
         print(f'Generated candidate PR: {pr_url}', flush=True)
         request_verification(repository, int(pr_url.rsplit('/', 1)[1]), head, reports, review_boundary)
         from tools.wait_release_review import wait_for_review
-        wait_for_review(repository, int(pr_url.rsplit('/', 1)[1]), head)
+        wait_for_review(repository, int(pr_url.rsplit('/', 1)[1]), head, timeout=review_timeout)
     ready = {'schema_version': 1, 'candidate_id': manifest['candidate_id'], 'base_sha': base,
              'head_sha': head, 'pr_url': pr_url, 'artifact_run': str(artifact_run),
              'validation_receipt_sha256': c.digest(c.encoded(receipt)), 'timestamp': c.timestamp()}

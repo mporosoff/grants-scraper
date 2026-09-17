@@ -45,6 +45,8 @@ def document_candidates(record):
 def merge_duplicate_evidence(winner, other):
     aliases = deepcopy(winner.get('source_aliases') or [])
     alias = {key: other.get(key) for key in ('opportunity_id', 'opportunity_number', 'source', 'detail_page', 'funding_opportunity_url')}
+    if other.get('official_identity'):
+        alias['official_identity'] = deepcopy(other['official_identity'])
     if alias.get('opportunity_id') != winner.get('opportunity_id') and alias not in aliases:
         aliases.append(alias)
     for value in other.get('source_aliases') or []:

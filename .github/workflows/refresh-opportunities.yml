@@ -662,6 +662,7 @@ jobs:
     timeout-minutes: 45
     outputs:
       merge_sha: ${{ steps.publication.outputs.merge_sha }}
+      review_ready: ${{ steps.review.outputs.review_ready }}
     env:
       GH_TOKEN: ${{ github.token }}
       CANDIDATE_ID: ${{ needs.candidate.outputs.candidate_id }}
@@ -685,16 +686,19 @@ jobs:
           python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/reports/validation.json"
           python -m tools.release_candidate materialize --bundle "$RUNNER_TEMP/candidate"
       - name: Establish exact-head review readiness before changing serving state
+        id: review
         run: >-
           python -m tools.prepare_release_publication --bundle "$RUNNER_TEMP/candidate"
           --receipt "$RUNNER_TEMP/reports/validation.json" --reports "$RUNNER_TEMP/reports" --artifact-run "$CANDIDATE_RUN"
       - name: Recheck compatibility with the package actually served by Pages
+        if: steps.review.outputs.review_ready == 'true'
         run: |
           curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
             "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?predeploy=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
             -o "$RUNNER_TEMP/reports/known-good-live-release.json"
           node tools/build_search_release_package.mjs --check --published-release "$RUNNER_TEMP/reports/known-good-live-release.json"
       - name: Capture actual serving Worker provenance and compare complete input fingerprints
+        if: steps.review.outputs.review_ready == 'true'
         id: worker-inputs
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
@@ -713,12 +717,15 @@ jobs:
           npx --yes wrangler@4.125.0 deploy --config workers/search-voyage-proxy/wrangler.jsonc
           --message "protected-main:$(git rev-parse HEAD); input-sha256:$WORKER_FINGERPRINT; candidate:$CANDIDATE_ID"
       - name: Verify the candidate-compatible Worker handshake
+        if: steps.review.outputs.review_ready == 'true'
         run: python -m tools.verify_release_live worker --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke before publication
+        if: steps.review.outputs.review_ready == 'true'
         env:
           FUNDING_RELEASE_INPUT_ROOT: ${{ runner.temp }}/candidate/files
         run: node tools/smoke_search_worker.mjs
       - name: Verify the active Worker fingerprint after deployment or retention
+        if: steps.review.outputs.review_ready == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -727,6 +734,7 @@ jobs:
           node tools/search_worker_checkpoint.mjs "$RUNNER_TEMP/candidate" "$RUNNER_TEMP/deployments-after.json" "$RUNNER_TEMP/reports/worker-after.json"
           test "$(jq -r .deploy_required "$RUNNER_TEMP/reports/worker-after.json")" = false
       - name: Materialize exact candidate bytes through protected publication and verify merged hashes
+        if: steps.review.outputs.review_ready == 'true'
         id: publication
         run: >-
           python -m tools.publish_release_candidate --bundle "$RUNNER_TEMP/candidate"
@@ -743,12 +751,15 @@ jobs:
           --config workers/search-voyage-proxy/wrangler.jsonc
           --message "Automatic rollback to the captured serving version after candidate publication failure"
       - name: Package verified candidate bytes for Pages
+        if: steps.review.outputs.review_ready == 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.verify_release_live stage --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --output "$RUNNER_TEMP/site"
       - uses: actions/configure-pages@v6
+        if: steps.review.outputs.review_ready == 'true'
       - uses: actions/upload-pages-artifact@v5
+        if: steps.review.outputs.review_ready == 'true'
         with:
           path: ${{ runner.temp }}/site
       - name: Persist the publication checkpoint and exact serving-version evidence
@@ -762,7 +773,7 @@ jobs:
 
   pages:
     needs: publish
-    if: ${{ !cancelled() && needs.publish.result == 'success' }}
+    if: ${{ !cancelled() && needs.publish.result == 'success' && needs.publish.outputs.merge_sha != '' }}
     uses: ./.github/workflows/pages.yml
 
   verify-live:
@@ -841,13 +852,14 @@ jobs:
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
             const candidate = needs.candidate.outputs.candidate_id || 'not persisted';
             const generationRun = needs.candidate.outputs.candidate_run || 'none';
+            const awaiting = needs.publish.outputs.review_ready === 'false';
             const next = failed === 'pages' ? 'publish' : failed === 'verify-live' ? 'verify' : ['publish', 'validate'].includes(failed) ? failed : 'generate';
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${failed || 'completed'}\n` +
+            const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${failed || (awaiting ? 'awaiting_review' : 'completed')}\n` +
               `Release-control SHA: ${context.sha}\nProtected publication SHA: ${needs.publish.outputs.merge_sha || 'none confirmed'}\n` +
-              `Production mutation: ${needs.publish.result === 'success' ? 'protected publication completed' : needs.publish.result === 'failure' ? 'inspect publication receipt and rollback evidence' : 'none'}\n` +
+              `Production mutation: ${needs.publish.outputs.merge_sha ? 'protected publication completed' : needs.publish.result === 'failure' ? 'inspect publication receipt and rollback evidence' : 'none'}\n` +
               `Known-good live identity: publication artifact known-good-live-release.json (when Worker preparation started)\n` +
-              `Evidence and safe diagnostics: ${runUrl}#artifacts\nAllowed next retry: ${failed ? next : 'none'}\n` +
+              `Evidence and safe diagnostics: ${runUrl}#artifacts\nAllowed next retry: ${failed ? next : awaiting ? 'publish after exact-head review' : 'none'}\n` +
               `A persisted candidate must be reused after downstream failure. Caches are not release evidence.`;
             await core.summary.addRaw(body).write();
             if (failed) {
