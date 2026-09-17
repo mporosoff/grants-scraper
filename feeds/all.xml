@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-11T14:29:18Z</updated>
+  <updated>2026-09-17T15:04:09Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -63,6 +63,25 @@
     <summary>National Institutes of Health | Estimated Application 2028-01-25 | The National Institute of Neurological Disorders and Stroke (NINDS) at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the NIH Stroke Clinical Trials Network (NIH StrokeNet). The program will encourage applications for network regional clinical enrollment coordinating centers (RCC's) to support the NIH StrokeNet clinical trial network. The NIH StrokeNet c…</summary>
   </entry>
   <entry>
+    <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363877"/>
+    <id>urn:funding-finder:grants-gov:363877</id>
+    <updated>2027-12-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2028-02-16 | This notice of funding opportunity (NOFO) encourages innovative research to develop, characterize, improve or preserve research models and model related biological materials, and to develop or improve technologies, including new approach methodologies (NAMs), for studies relevant to human health and diseases. This NOFO also seeks projects aimed at improving the identification and control of factor…</summary>
+  </entry>
+  <entry>
+    <title>Technology Development Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363876"/>
+    <id>urn:funding-finder:grants-gov:363876</id>
+    <updated>2027-12-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2028-02-05 | This Technology Development funding opportunity will support technology research projects from proof-of-concept through prototype development. The program will prioritize innovation over feasibility. To maximize impact on future biomedical research, projects must focus on technological advances and should not include tests of biological hypotheses or biomedical aims.</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
     <link href="https://www.grants.gov/search-results-detail/362562"/>
     <id>urn:funding-finder:grants-gov:362562</id>
@@ -70,6 +89,15 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2028-01-27 | The Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program supports resource-limited institutions to develop and strengthen their capacity to conduct rigorous and reproducible biomedical research. Eligible organizations are expected to propose plans based on identified needs in one or more of the following areas: biomedical research environment, sponsore…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Tribal Undergraduate and Graduate Research Training and Leadership Experiences (TURTLE) Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363863"/>
+    <id>urn:funding-finder:grants-gov:363863</id>
+    <updated>2027-10-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2028-01-25 | The Tribal Undergraduate and Graduate Research Training and Leadership Experiences (TURTLE) Program supports eligible Tribal Entities to develop a pool of students who: Have the skills required to conduct Tribal health research Complete their degrees in a biomedical field, andTransition into careers in the biomedical research workforce. NIGMS will provide support for a phased award to eligible Tri…</summary>
   </entry>
   <entry>
     <title>Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT) Infrastructure - Clinical Coordinating Center (CCC) &amp; Data Coordinating Center (DCC)</title>
@@ -196,6 +224,31 @@
     <summary>National Institutes of Health | Estimated Application 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by providing critical resources, staff and facilities support for the Regional Biocontainment Laboratories (RBLs). The RBLs provide biosafety level 2 and 3 (BSL-2/3) biocontainment facilities for research on infectious diseases. They play a critical role in public health emergency response by facilitatin…</summary>
   </entry>
   <entry>
+    <title>R3PEATS Grassroots Rigor Projects: Individual Metascience and Individual Laboratory Capacity-Building (RP1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363849"/>
+    <id>urn:funding-finder:grants-gov:363849</id>
+    <updated>2027-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | R3PEATS Grassroots Rigor Projects supports two project types that generate practical tools and shared knowledge to strengthen research practices. Metascience projects develop and evaluate tools, metrics, guidelines, or infrastructure to promote high-quality research practices. Laboratory Capacity-Building projects support labs in adopting new rigor- and replicability-related techniques or processe…</summary>
+  </entry>
+  <entry>
+    <title>R3PEATS Multi-Team Triangulation: Collaborative Cross-Method Approaches to Scientific Discovery (RM1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363850"/>
+    <id>urn:funding-finder:grants-gov:363850</id>
+    <updated>2027-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | R3PEATS Multi-Team Triangulation supports coordinated teams to investigate a central biomedical research question through complementary methods, model systems, or populations. Projects must identify signal robustness and sources of biological variability while building replication into the research design. This effort is a part of the NIH Common Fund's Rigor, Replicability, &amp; Reproducibility to Pr…</summary>
+  </entry>
+  <entry>
+    <title>R3PEATS Rigor Scholar Cohort Awards (K12)</title>
+    <link href="https://www.grants.gov/search-results-detail/363851"/>
+    <id>urn:funding-finder:grants-gov:363851</id>
+    <updated>2027-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | Rigor Scholar Cohort Awards support early-career researchers to advance expertise in rigorous scientific practices, such as preregistration, blinding, randomization, and transparent dissemination, through multi-institutional collaboration. Working within local and national cohorts, scholars will co-develop procedures and share lessons, building the vital skills needed to champion good scientific p…</summary>
+  </entry>
+  <entry>
     <title>Clinical Trials in Organ Transplantation in Children and Adults</title>
     <link href="https://www.grants.gov/search-results-detail/362955"/>
     <id>urn:funding-finder:grants-gov:362955</id>
@@ -244,6 +297,45 @@
     <summary>National Institutes of Health | Estimated Application 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
   </entry>
   <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Experimental and Computational Technology Development (RM1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363860"/>
+    <id>urn:funding-finder:grants-gov:363860</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from standardized human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to issue a Notic…</summary>
+  </entry>
+  <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Genome Characterization Centers (UM1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363858"/>
+    <id>urn:funding-finder:grants-gov:363858</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
+  </entry>
+  <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: National Somatic Mosaicism Commons Data Analysis &amp; Organizational Center (UM1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363859"/>
+    <id>urn:funding-finder:grants-gov:363859</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
+  </entry>
+  <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Tissue Procurement Center (R24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363857"/>
+    <id>urn:funding-finder:grants-gov:363857</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
+  </entry>
+  <entry>
     <title>Claude D. Pepper Older Americans Independence Centers</title>
     <link href="https://www.grants.gov/search-results-detail/362098"/>
     <id>urn:funding-finder:grants-gov:362098</id>
@@ -263,6 +355,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-06-01 | This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
   </entry>
   <entry>
+    <title>Hubs of Interdisciplinary Research and Training in Global Environmental and Occupational Health (GEOHealth)</title>
+    <link href="https://www.grants.gov/search-results-detail/363873"/>
+    <id>urn:funding-finder:grants-gov:363873</id>
+    <updated>2027-04-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-22 | Robust international research collaborations are critical for advancing the environmental and occupational health science that informs the health, safety, and well-being of Americans. Environmental health problems cross national boundaries and research in international settings benefits all people who suffer from the same or related environmental health problems. The Fogarty International Center (…</summary>
+  </entry>
+  <entry>
     <title>INCLUDE Project: Omics Phenotypes Related to Down Syndrome (X01 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363349"/>
     <id>urn:funding-finder:grants-gov:363349</id>
@@ -270,6 +372,15 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
+  </entry>
+  <entry>
+    <title>Emerging Global Leader Award (K43)</title>
+    <link href="https://www.grants.gov/search-results-detail/363872"/>
+    <id>urn:funding-finder:grants-gov:363872</id>
+    <updated>2027-04-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-12 | This initiative will provide salary and research support to Low- and Middle-Income Country (LMIC) junior faculty and research scientists who are based at LMIC academic or research institutions for intensive mentored research and career development activities focused on biomedical, behavioral, and/or clinical research in LMICs. Proposals will leverage special opportunities not present in the U.S. a…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -330,6 +441,14 @@
     <category term="Health equity"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | As authorized under section 464z-3(h) of the Public Health Service Act, the purpose of the John Lewis NIMHD Research Endowment Program is to strengthen the research infrastructure and training capacity at eligible institutions of higher education to facilitate health disparities research. Specific strategic objectives include: 1) improving the institutional physical infrastructure and acquisition …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Tribal Institutional Review Board Establishment and Enhancement (TIRBEE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363862"/>
+    <id>urn:funding-finder:grants-gov:363862</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The Tribal Institutional Review Board Establishment and Enhancement (TIRBEE) Notice of Funding Opportunity will enable federally-recognized Tribes or Tribal Entities to establish or enhance Institutional Review Boards. TIRBEE builds the capacity and infrastructure for biomedical research involving human participants in federally-recognized Tribal communities by expanding their Institutional Review…</summary>
   </entry>
   <entry>
     <title>Single Source: Resource Center for the Support for Research Excellence (SuRE) Program</title>
@@ -501,6 +620,17 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-04-30 | CDC announces the availability of fiscal year (FY) 2027 funds to implement CDC-RFA-DP-27-0072, Promoting Population Health through Increased Capacity in Alcohol Epidemiology and the Prevention of Excessive Alcohol Use. The purpose of this NOFO is to build state capacity in alcohol epidemiology and provide the tools and information needed to perform core public health functions related to excessive…</summary>
+  </entry>
+  <entry>
+    <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363874"/>
+    <id>urn:funding-finder:grants-gov:363874</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
   </entry>
   <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
@@ -826,128 +956,5 @@
     <updated>2027-01-26T00:00:00Z</updated>
     <author><name>Centers for Disease Control - NCIPC</name></author>
     <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
-  </entry>
-  <entry>
-    <title>Drug-Free Communities (DFC) Support Program - NEW (Year 1)</title>
-    <link href="https://www.grants.gov/search-results-detail/363353"/>
-    <id>urn:funding-finder:grants-gov:363353</id>
-    <updated>2027-01-26T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCIPC</name></author>
-    <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-03-31 | The Drug-Free Communities (DFC) Support Program was created by the Drug-Free Communities Act of 1997 (Public Law 105-20). The Executive Office of the President, Office of National Drug Control Policy (ONDCP), and the Department of Health and Human Services (HHS), Centers for Disease Control and Prevention (CDC), National Center for Injury Prevention and Control (NCIPC) are accepting applications f…</summary>
-  </entry>
-  <entry>
-    <title>Native Hawaiian Health Care Improvement Act Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363781"/>
-    <id>urn:funding-finder:grants-gov:363781</id>
-    <updated>2027-01-26T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Public health"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-04-12 | This Notice of Funding Opportunity (NOFO) announces the opportunity to apply for funding under the Native Hawaiian Health Care Improvement Act (NHHCIA) program. The purpose of these Native Hawaiian Health Care Improvement Act (NHHCIA) awards is to provide Native Hawaiian health care programs with resources to raise the health status of Native Hawaiians to the highest possible health level. This NO…</summary>
-  </entry>
-  <entry>
-    <title>Rural Communities Opioid Response Program - Evaluation</title>
-    <link href="https://www.grants.gov/search-results-detail/363600"/>
-    <id>urn:funding-finder:grants-gov:363600</id>
-    <updated>2027-01-23T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Social and behavioral sciences"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-23 | The purpose of the Rural Communities Opioid Response Program (RCORP) - Evaluation is to evaluate the impact of rural behavioral health strategies and methods employed under the RCORP initiative, and to develop evaluation tools and resources for use in rural communities to inform future community-led rural health initiatives</summary>
-  </entry>
-  <entry>
-    <title>Rural Health Network Development Planning Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363581"/>
-    <id>urn:funding-finder:grants-gov:363581</id>
-    <updated>2027-01-23T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-23 | The Rural Health Network Development Planning Program supports the planning and development of rural integrated health care networks with specific focus on collaboration of entities to establish or improve local capacity and care coordination in underserved communities. Specifically, the program uses the concept of developing networks as a strategy for linking rural health care network participant…</summary>
-  </entry>
-  <entry>
-    <title>Rural Communities Opioid Response Program - Child and Adolescent Behavioral Health</title>
-    <link href="https://www.grants.gov/search-results-detail/363687"/>
-    <id>urn:funding-finder:grants-gov:363687</id>
-    <updated>2027-01-22T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Social and behavioral sciences"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-23 | The RCORP-Child and Adolescent Behavioral Health Program provides funding to rural communities to establish and expand behavioral health care services, including mental health and substance use disorder for rural children and adolescents.</summary>
-  </entry>
-  <entry>
-    <title>Implementation Research on Coordinated Combinations of Community-Clinical Linkage Strategies for Diabetes Prevention and Management</title>
-    <link href="https://www.grants.gov/search-results-detail/363360"/>
-    <id>urn:funding-finder:grants-gov:363360</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-22 | Diabetes causes illness and death in the United States. It leads to high health care costs. People who use Federally Qualified Health Centers (FQHCs) and other safety-net clinics face greater risks. Many community-clinical linkage (CCL) strategies show benefits when used alone. We know less about how several strategies can be combined and coordinated. Using multiple strategies together may improve…</summary>
-  </entry>
-  <entry>
-    <title>Health Promotion and Disease Prevention Research Centers: 2027 Special Interest Project Supplements (SIPS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363341"/>
-    <id>urn:funding-finder:grants-gov:363341</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Cancer"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-23 | This NOFO will provide supplemental funding to the currently funding twenty (20) CDC Prevention Research Centers (PRCs) to conduct Special Interest Projects (SIPs). The purpose of the SIPs is to inform public health practice through high-quality applied health promotion and disease prevention public health research in real-world settings to identify, design, test, assess, evaluate, disseminate, an…</summary>
-  </entry>
-  <entry>
-    <title>Pilot Testing, Implementation, and Evaluation of the Cervical, Breast and Colorectal Cancer Clinical Decision Support Tools</title>
-    <link href="https://www.grants.gov/search-results-detail/363309"/>
-    <id>urn:funding-finder:grants-gov:363309</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-23 | The Centers for Disease Control and Prevention's (CDC) National Center for Chronic Disease Prevention and Health Promotion is advancing the development of clinical decision support (CDS) tools designed to facilitate evidence-based cancer screening and management at the point of care. These CDS tools integrate up-to-date, computable guidelines into electronic health records systems to support clini…</summary>
-  </entry>
-  <entry>
-    <title>Infant-Toddler Court Program-National Resource Center</title>
-    <link href="https://www.grants.gov/search-results-detail/363511"/>
-    <id>urn:funding-finder:grants-gov:363511</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-04-21 | The Infant-Toddler Court Program's (ITCP) National Resource Center (NRC) helps states and communities to strengthen and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with the child welfare syste…</summary>
-  </entry>
-  <entry>
-    <title>Infant-Toddler Court Program-State Awards</title>
-    <link href="https://www.grants.gov/search-results-detail/363512"/>
-    <id>urn:funding-finder:grants-gov:363512</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-04-21 | The Infant-Toddler Court Program (ITCP) State Awards allow states and communities to support and expand use of enhanced child welfare practices in communities across the country that bring together courts, social services, and families to improve the safety, healthy development, and nurturing relationships of families with young children involved with child welfare. The ITCP State Awards support i…</summary>
-  </entry>
-  <entry>
-    <title>Translational Transplantation Tolerance Cooperative Study Group</title>
-    <link href="https://www.grants.gov/search-results-detail/362958"/>
-    <id>urn:funding-finder:grants-gov:362958</id>
-    <updated>2027-01-21T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-21 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Translational Transplantation Tolerance Cooperative Study Group (TTTCSG) program. The overarching goal of this program is to facilitate clinical translation of safe and effective transplant tolerance regimens that achieve long-term graft survival without the need for life-long …</summary>
-  </entry>
-  <entry>
-    <title>Rural Health Value Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363509"/>
-    <id>urn:funding-finder:grants-gov:363509</id>
-    <updated>2027-01-19T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-20 | The purpose of the Rural Health Value (RHV) Program is to fund one recipient to provide analysis and technical assistance (TA) for rural stakeholders to help them understand and engage in the value-based care landscape in the context of rural health care. The goal of this funding opportunity is to support the ability of rural providers to participate and succeed in current and emerging payment and…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part C Capacity Development Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363166"/>
-    <id>urn:funding-finder:grants-gov:363166</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-16 | The purpose of the program is to strengthen the capacity of community-based organizations to improve health outcomes and reduce HIV transmission, especially for people not yet in regular HIV care. The activities fall under two categories: HIV Care Innovation and Infrastructure Development.</summary>
-  </entry>
-  <entry>
-    <title>Alliance for Innovation on Maternal Health (AIM) Capacity Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363407"/>
-    <id>urn:funding-finder:grants-gov:363407</id>
-    <updated>2027-01-15T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Technology development"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-03-17 | The purpose of the AIM Capacity program is to strengthen state, jurisdiction, and Tribal capacity to implement, expand, and sustain AIM PSBs and associated resources across the United States. AIM PSBs promote evidence-informed maternal safety practices to improve the quality and safety of maternity care and reduce preventable maternal mortality and severe maternal morbidity.</summary>
   </entry>
 </feed>
