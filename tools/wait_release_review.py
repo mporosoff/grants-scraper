@@ -8,6 +8,13 @@ import time
 BOT = 'chatgpt-codex-connector[bot]'
 
 
+class ReviewPending(ValueError):
+    """A preserved approval boundary, not a clean review or a service failure."""
+    def __init__(self, repository, number, head):
+        super().__init__('Review remains pending; preserve candidate and continue the same review without regeneration or duplicate requests')
+        self.repository, self.number, self.head = repository, number, head
+
+
 def api(path):
     return json.loads(subprocess.check_output(['gh', 'api', path], text=True, encoding='utf-8', timeout=45))
 
@@ -120,4 +127,4 @@ def wait_for_review(repository, number, head, *, timeout=1800, interval=30):
                 return
         print(f'Awaiting terminal exact-head review of PR #{number} ({head})', flush=True)
         time.sleep(interval)
-    raise ValueError('Review remains pending; preserve candidate and continue the same review without regeneration or duplicate requests')
+    raise ReviewPending(repository, number, head)
