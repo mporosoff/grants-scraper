@@ -1,5 +1,6 @@
 """Select the least expensive release stage at one pinned protected SHA."""
 import json
+import base64
 import os
 from pathlib import Path
 import re
@@ -33,14 +34,17 @@ def latest_report(repository, candidate, kind, destination):
     from tools.offline_ai_checkpoint import api
     for page in range(1, 101):
         rows = json.loads(api(repository, f'actions/artifacts?per_page=100&page={page}'))['artifacts']
-        artifact_kind = 'validation' if kind == 'browser' else kind
+        artifact_kind = 'validation' if kind == 'browser' else 'publication' if kind == 'review' else kind
         matches = [a for a in rows if re.fullmatch(f'{artifact_kind}-{candidate}-[1-9][0-9]*', a['name']) and not a['expired']]
         for artifact in sorted(matches, key=lambda a: a['id'], reverse=True):
             run = str(artifact['workflow_run']['id'])
             target = Path(destination) / str(artifact['id'])
             fetch(repository, run, artifact['name'], target)
             report = target / {'live': 'live-verification.json', 'validation': 'validation.json',
-                              'publication': 'publication.json', 'browser': 'final-integration.json'}[kind]
+                              'publication': 'publication.json', 'browser': 'final-integration.json',
+                              'review': 'review-pending.json'}[kind]
+            if kind == 'review':
+                return run, c.read_json(report) if report.exists() else None
             if kind == 'browser' and not report.exists():
                 for receipt_name in ('validation.json', 'validation-report.json'):
                     receipt_path = target / receipt_name
@@ -77,6 +81,50 @@ def latest_report(repository, candidate, kind, destination):
         if len(rows) < 100:
             return '', None
     raise ValueError('Release evidence history exceeds bounded lookup')
+
+
+def pending_publication(root, repository, destination):
+    """Reuse an exact compatible review checkpoint before scheduled generation.
+
+    PR files are selectors, never executable inputs or approval. The trusted
+    artifact, protected generation ancestry and normal validation remain required.
+    """
+    from tools.wait_release_review import api
+    from tools.fetch_release_artifact import fetch
+    prs = api(f'repos/{repository}/pulls?state=open&base=main&per_page=100')
+    if len(prs) >= 100:
+        raise ValueError('Open publication history exceeds bounded lookup')
+    for pr in sorted(prs, key=lambda p: p['number'], reverse=True):
+        branch, head = pr['head']['ref'], pr['head']['sha']
+        if (pr['user']['login'] != 'github-actions[bot]' or pr['base']['ref'] != 'main'
+                or not re.fullmatch(r'automation/release-[a-f0-9]{16}-[1-9][0-9]*-[1-9][0-9]*', branch)
+                or (pr['head'].get('repo') or {}).get('full_name') != repository):
+            continue
+        data = api(f'repos/{repository}/contents/release/candidate-source.json?ref={head}')
+        if data.get('encoding') != 'base64' or data.get('size', 10000) > 4096:
+            raise ValueError('Invalid publication selector')
+        pointer = json.loads(base64.b64decode(data['content'], validate=False))
+        run, candidate = str(pointer.get('artifact_run', '')), pointer.get('candidate_id', '')
+        if (not re.fullmatch('[1-9][0-9]*', run) or not re.fullmatch('[a-f0-9]{64}', candidate)
+                or not branch.startswith('automation/release-' + candidate[:16] + '-')):
+            raise ValueError('Invalid publication candidate selector')
+        _, pending = latest_report(repository, candidate, 'review', Path(destination) / candidate / 'review')
+        if not pending:
+            continue
+        if (pending.get('schema_version') != 1 or pending.get('status') != 'awaiting_review'
+                or pending.get('candidate_id') != candidate or pending.get('artifact_run') != run
+                or pending.get('repository') != repository or pending.get('pr_number') != pr['number']
+                or pending.get('head_sha') != head or pending.get('production_mutated') is not False):
+            raise ValueError('Pending publication does not match its exact PR and artifact')
+        bundle = Path(destination) / candidate / 'candidate'
+        fetch(repository, run, 'candidate-' + candidate, bundle)
+        manifest = c.load(bundle, candidate)
+        changes = changed_groups(candidate_groups(root, manifest), snapshot(root))
+        if set(changes) - {'validation'}:
+            continue  # An actual changed input needs the ordinary dependency plan.
+        c.verify_dependencies(root, manifest)
+        return {'REQUESTED_STAGE': 'publish', 'CANDIDATE_RUN': run, 'CANDIDATE_ID': candidate}
+    return None
 
 
 def publication_ready(manifest, publication):
@@ -183,6 +231,12 @@ def main():
     receipt = live = publication = resumed = selected = result = None
     receipt_run = environment.get('RECEIPT_RUN', '')
     with tempfile.TemporaryDirectory() as directory:
+        if (requested in ('', 'auto') and environment.get('GITHUB_RUN_ATTEMPT', '1') == '1'
+                and not any(environment.get(k) for k in ('CANDIDATE_RUN', 'CANDIDATE_ID'))):
+            pending = pending_publication(c.ROOT, environment['GITHUB_REPOSITORY'], Path(directory) / 'pending')
+            if pending:
+                environment.update(pending)
+                requested = 'publish'
         if requested in ('validate', 'publish'):
             result = plan(c.ROOT, environment)  # Validate the exact named selector first.
             latest_run, receipt = latest_report(environment['GITHUB_REPOSITORY'], result['candidate_id'],

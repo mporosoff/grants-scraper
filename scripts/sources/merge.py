@@ -25,6 +25,7 @@ from __future__ import annotations
 from collections import Counter
 from datetime import date
 import json
+import os
 from pathlib import Path
 import re
 import tempfile
@@ -395,10 +396,20 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
     # duplicate. Similar titles alone never do. Stable public IDs are retained.
     identities = {record_identity(record): record for record in combined}
     ids = {str(record.get('opportunity_id')): record for record in combined if record.get('opportunity_id')}
+    from .official_identity import record_grants_id
+    from scripts.solicitation_identity import solicitation_key
+    grants = {str(r.get('opportunity_id')): r for r in combined if r.get('source') == 'Grants.gov'}
     added = dropped_identity = dropped_crossdup = 0
     for record in external:
         identity = record_identity(record)
         winner = identities.get(identity) or ids.get(str(record.get('opportunity_id')))
+        if winner is None:
+            linked = grants.get(record_grants_id(record))
+            if linked is not None:
+                left, right = solicitation_key(linked), solicitation_key(record)
+                if left and right and left != right:
+                    raise ValueError('Official record link conflicts with sponsor/solicitation identity')
+                winner = linked
         if winner is not None:
             if (winner.get('opportunity_id') == record.get('opportunity_id')
                 or winner.get('opportunity_number') == record.get('opportunity_number')):
@@ -527,6 +538,10 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         context={"catalog_records": base, "as_of": as_of, "intake_path": intake_path},
     )
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
+    identity_stats = {'enabled': False}
+    if os.environ.get('VPR_ENRICH_LINKS', '').casefold() == 'true':
+        from .official_identity import resolve
+        identity_stats = {'enabled': True, **resolve(external, cache.setdefault('official_identities', {}))}
     combined, stats = merge_records(base, external)
     # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with
     # program-area topics/terms so topical searches surface them.
@@ -539,6 +554,7 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         validation_ok, validation_error = False, str(exc)
 
     summary = {
+        'official_identity_resolution': identity_stats,
         "catalog_path": str(catalog_path),
         "cache_path": str(cache_path),
         "catalog_date": as_of.isoformat(),

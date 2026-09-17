@@ -51,3 +51,61 @@ the current Actions bot has no working Codex connection. Do not reuse researcher
 publication credentials for catalog review, bypass review, or represent a
 successful source build as a public update. Researcher registry activation and
 the contextual/Luna scientific checker are separate boundaries.
+
+
+## September 17 continuation: canonical deadlines and durable review waiting
+
+The owner resumed the deadline repair and publication after PR #257's completed
+review identified a duplicate YIP card. The canonical Grants.gov record 363829
+already preserves the October 9 white-paper prerequisite and December 4
+application deadline. The VPR copy incorrectly exposed October 9 as a stand-alone
+application. The fix joins the copy using its official record identity and
+retains the conflicting digest date as evidence; it does not change the deadline
+parser or infer identity from a title.
+
+The official Simpler page's labelled Grants.gov/version-history links establish
+its numeric legacy identity. Only exact HTTPS Grants.gov record paths and exact
+Simpler opportunity UUIDs are accepted. Redirects to another identity, ambiguous
+links and conflicting sponsor/solicitation facts fail closed. At most 20 distinct
+missing mappings are fetched per source refresh through the existing public
+HTTP client. Cache receipts preserve the original retrieval time, URL, UTF-8
+content hash and locator. No researcher or provider endpoint is involved.
+
+Official YIP evidence was retrieved at 2026-09-17T19:48:08.120841+00:00 from
+https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0
+(281,053 UTF-8 bytes; SHA-256
+`2b9d99f7f2f6e4a94fe7836d52911b52ed8c2a1c7e1abf0804d855a2028124a5`).
+The source-only audit also establishes native aliases for 363632, 363378 and 363745.
+Replaying the retained September 17 candidate against these identities reduces
+1,395 records to 1,391, preserving the canonical YIP prerequisite and application.
+Three cached Simpler mappings were reused with zero network/provider requests
+in that regression. Raw source pages and private cache files remain uncommitted.
+Other generic NSF/program links are not promoted to identities without evidence.
+
+The daily failure in runs 35112161731 and 35237280995 occurs after successful
+source generation and validation: the Actions account requests a Codex review
+but has no working connector, then a thirty-minute wait throws an error. The
+workflow now retains an explicit `awaiting_review` publication artifact after
+a bounded 90-second initial wait. No serving mutation, provider smoke, merge or
+Pages deployment follows that state. Actual findings, integrity failures and
+review-service outages still fail. It is not a successful publication.
+
+On an ordinary later run, the planner selects that exact open bot-owned PR and
+artifact only if its head, candidate, protected generation ancestry and current
+dependencies still match. It resumes `publish`, reusing exact validation where
+valid, rather than paying to regenerate while review is pending. Changed source
+inputs still use the ordinary dependency planner. An explicit named resume never
+substitutes a different candidate.
+
+A connected maintainer still must initiate one actual review if the Actions
+request is not acknowledged. This repair does not introduce credentials or
+repurpose researcher-specific publication tokens. After a clean exact-head
+review, use the existing manual release workflow with stage=`publish`, the
+retained artifact run and complete candidate ID. The existing protected merge,
+Worker compatibility/smoke, Pages and live verification gates remain required.
+No schedule, permission, provider allowance or experimental team activation changes.
+
+Local checks: 76 focused Python tests and 10 Node/browser lifecycle contracts
+passed. No E2E/Playwright or scientific provider requests were run. One local
+Windows line-ending fixture failure was corrected by restoring the repository
+LF checkout convention; required Linux CI and exact-head review follow.
