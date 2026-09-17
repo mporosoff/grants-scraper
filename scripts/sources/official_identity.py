@@ -116,7 +116,7 @@ def resolve(records, cache, *, client=None, limit=20):
     return stats
 
 
-def record_grants_id(record):
+def record_grants_ids(record):
     links = [record.get(k) for k in ('detail_page', 'funding_opportunity_url')]
     ids = {ident for url in links if (ident := grants_id(url))}
     receipt = record.get('official_identity')
@@ -124,4 +124,9 @@ def record_grants_id(record):
         normalized = simpler_url(url)
         if normalized and valid_receipt(receipt, normalized):
             ids.add(grants_id(receipt['target_url']))
+    return ids
+
+
+def record_grants_id(record):
+    ids = record_grants_ids(record)
     return next(iter(ids)) if len(ids) == 1 else None

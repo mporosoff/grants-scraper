@@ -60,7 +60,35 @@ class OfficialIdentity(unittest.TestCase):
         self.assertEqual(merge_records([base],[r])[0][0]['opportunity_id'],'363829')
         self.assertEqual(len(merge_records([base],[r])[0]),1)
         r['detail_page']=TARGET.replace('363829','363632')
-        self.assertEqual(len(merge_records([base],[r])[0]),2)
+        with self.assertRaisesRegex(ValueError,'conflicts'):
+            merge_records([base],[r])
+
+    def test_all_preselected_identity_paths_must_agree_before_evidence_moves(self):
+        a=dict(opportunity_id='363378',source='Grants.gov',agency='AFOSR',
+               opportunity_number='A',title='Call A')
+        b=dict(opportunity_id='363829',source='Grants.gov',agency='AFOSR',
+               opportunity_number='B',title='Call B')
+        for cached in (False,True):
+            for selection in ('number','id','number_and_id'):
+                for base in ([a,b],[b,a],[a]):
+                    with self.subTest(cached=cached,selection=selection,base=[x['opportunity_id'] for x in base]):
+                        r=dict(self.record(),agency='AFOSR',agency_authority='official',
+                            opportunity_number='A' if selection!='id' else 'B')
+                        if cached:identity.resolve([r],{},client=self.client())
+                        else:r.update(detail_page=TARGET,funding_opportunity_url=TARGET)
+                        if selection!='number':r['opportunity_id']=a['opportunity_id']
+                        before=deepcopy(base)
+                        with self.assertRaisesRegex(ValueError,'conflicts'):
+                            merge_records(base,[r])
+                        self.assertEqual(base,before)
+        # Consistent number, stable ID and official evidence remain idempotent.
+        r=dict(self.record(),agency='AFOSR',
+            agency_authority='official',opportunity_number='B')
+        identity.resolve([r],{},client=self.client())
+        r['opportunity_id']=b['opportunity_id']
+        result,_=merge_records([a,b],[r])
+        self.assertEqual(len(result),2)
+        self.assertEqual(merge_records(result,[r])[0],result)
 
     def test_untrusted_urls_redirects_wrong_anchors_and_conflicts_fail_closed(self):
         for url in ('http://www.grants.gov/search-results-detail/363829',

@@ -109,3 +109,16 @@ Local checks: 76 focused Python tests and 10 Node/browser lifecycle contracts
 passed. No E2E/Playwright or scientific provider requests were run. One local
 Windows line-ending fixture failure was corrected by restoring the repository
 LF checkout convention; required Linux CI and exact-head review follow.
+
+
+PR #260 review5240948885 on `077ff33959f9df73ab2dbea508b7429380a2ae1c`
+identified a supported-path conflict: an existing number/stable-ID winner could
+bypass an official link naming another record. The reproduction attached B's
+link to A. The consolidated repair reconciles all preselected identities and
+all official links before moving any evidence, including a linked record absent
+from the current feed. Conflicts fail closed. Consistent identity remains
+idempotent. Twenty-four focused checks (including 18 conflict combinations)
+and the unchanged real 1,395-to-1,391 replay pass. The first new fixture incorrectly
+requested VPR resolution after replacing its ID with a native ID; correcting
+fixture order exercised the actual cached-receipt path. Exact-head re-review
+and required CI are required before merge; earlier CI is historical evidence.
