@@ -1,0 +1,160 @@
+{
+  "schema_version": 1,
+  "status": "published_and_live_verified",
+  "repository": "mporosoff/grants-scraper",
+  "starting_main": "2e9b05456ac721820f1f73e1e780b2432c2967c2",
+  "starting_product": "f4b5f755dfd0079213a19e3c070d105e03481654",
+  "repair_pr": 260,
+  "initial_head": "077ff33959f9df73ab2dbea508b7429380a2ae1c",
+  "finding_review": 5240948885,
+  "finding_comment": 4041045971,
+  "reviewed_head": "90a1eb7c9d866be74430cbcfc2573a99b2f0332e",
+  "clean_review_comment": 5720967520,
+  "required_ci_run": 35271781424,
+  "python_tests": 1497,
+  "browser_contracts": 796,
+  "production_merge": "c13d1b8547cb0e1d85814835affde253a893f61c",
+  "product_reconciliation": "e2cd6090ffb872616adc3eee073208c03c741704",
+  "generation_run": 35278318943,
+  "experiment_new_requests": 0,
+  "experiment_new_microusd": 0,
+  "experimental_activation": false,
+  "e2e": "NOT RUN",
+  "known_public_before": {
+    "candidate": "f04234e0d00fe4520fa7e46a674c680e345958e0e3fd8e8f44c8b6e456b77d26",
+    "generated_at": "2026-09-11T14:27:25.265842Z",
+    "records": 1422
+  },
+  "source_identity_regression": {
+    "input_candidate": "50eeb8b981c22c704ea0f8235036459fb907c240fff02188d3c29f2e86467484",
+    "input_records": 1395,
+    "output_records": 1391,
+    "aliases_added": 4,
+    "cached_simpler_mappings": 3,
+    "provider_calls": 0,
+    "network_calls": 0
+  },
+  "unattended_review": "Actions account has no working Codex connection; connected maintainer review initiation remains required. Pending review is retained honestly without serving changes.",
+  "updated_at": "2026-09-18T19:42:45.677903+00:00",
+  "publication_pr": 261,
+  "publication_head": "c93104df1854c8356ed5ab7fd1a39ab3a1723492",
+  "publication_clean_review_comment": 5722128926,
+  "publication_sha": "957238e25f46d59c45cfef37716af8416a116ad1",
+  "publication_run": 35284101222,
+  "candidate_id": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+  "catalog_generated_at": "2026-09-17T21:45:36.229174Z",
+  "catalog_records": 1391,
+  "live": {
+    "asset_verification": "success",
+    "candidate_id": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+    "completed_at": "2026-09-17T22:56:06.531178+00:00",
+    "differences": [],
+    "live_release_identity": {
+      "current_corpus_sha256": "ed677411ec42bb8bb9e1f31731c18ce0ca15adaeb259490be2a84e53ca8a3f83",
+      "model_space_fingerprint": "8c080778811e5c47d012f0d5db1f0d9c8cac63ae604eb9a12e7892202095f06d",
+      "previous_corpus_sha256": "bd89d267b77e2f69b651e89c0017e0ec2c0ec206dd7d456435571b86fb8eaba4",
+      "worker_allowlist_sha256": "d19e15e37928f39df812699fefd03d0e262cb3b084007e783fb780c54f450ae2"
+    },
+    "next_retry_stage": null,
+    "production_mutated": false,
+    "provider_smoke": "success",
+    "publication_receipt_sha256": "e982262b644c704d36edba121faddc44cc7e77cdacc130696c6b43e59343eda5",
+    "publication_sha": "957238e25f46d59c45cfef37716af8416a116ad1",
+    "timestamp": "2026-09-17T22:55:47.431252+00:00",
+    "verified": true,
+    "worker": {
+      "budget_state": "available",
+      "corpus_sha256": "ed677411ec42bb8bb9e1f31731c18ce0ca15adaeb259490be2a84e53ca8a3f83",
+      "model_space_fingerprint": "8c080778811e5c47d012f0d5db1f0d9c8cac63ae604eb9a12e7892202095f06d",
+      "service": "available"
+    },
+    "worker_provenance": {
+      "checkpoint": {
+        "activeDeploymentId": "f04f0217-bd79-4cb5-b8de-3c4d60a29bf4",
+        "activeVersionId": "e2173419-4a97-432e-bbce-eac03555d43a",
+        "baseSha": "c13d1b8547cb0e1d85814835affde253a893f61c",
+        "source": "active-version-message"
+      },
+      "expected_version_id": "e2173419-4a97-432e-bbce-eac03555d43a",
+      "fingerprint": "fa3511b8f2fe0ee6014207d731570404e10421375115623200b8c1cacedf67b0",
+      "required_fingerprint": "fa3511b8f2fe0ee6014207d731570404e10421375115623200b8c1cacedf67b0",
+      "verified": true,
+      "verified_at": "2026-09-17T22:56:12.540Z",
+      "version_id": "e2173419-4a97-432e-bbce-eac03555d43a"
+    }
+  },
+  "direct_live": {
+    "observed_at": "2026-09-18T19:38:36.233704+00:00",
+    "url": "https://mporosoff.github.io/grants-scraper/data/opportunities.js?repair-check=20260918",
+    "sha256": "bf9db897dc2d23c0a7be119279b40014adfb1ec5e62ddc1696ac0738bf52eff5",
+    "matches_candidate": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+    "records": 1391,
+    "yip": {
+      "id": "363829",
+      "close_date": "2026-12-04",
+      "access": "verify_prerequisite",
+      "aliases": [
+        "vpr-email:vpr-a3ddeff815d159a4"
+      ]
+    }
+  },
+  "next_scheduled_checkpoint": {
+    "artifact_run": "35356750364",
+    "candidate_id": "e9c5aa5f3f76821299f05a24c3b5b5bb4d44172c28eec5922b4b4a5efae6a07a",
+    "head_sha": "7f6a38d22af8ecbbce649f3df53b84974bba332b",
+    "next_retry_stage": "publish",
+    "pr_number": 262,
+    "production_mutated": false,
+    "repository": "mporosoff/grants-scraper",
+    "schema_version": 1,
+    "status": "awaiting_review",
+    "timestamp": "2026-09-18T14:43:28.846528+00:00"
+  },
+  "closed_superseded_prs": [
+    249,
+    253,
+    257,
+    258,
+    259
+  ],
+  "validation_reused": true,
+  "source_and_vector_generation_repeated_on_publication": false,
+  "checker_pr_256": "reviewed, unmerged, no new paid dispatch authorized",
+  "normal_maintenance": {
+    "cov4_requests": 13,
+    "cov4_charged_microusd": 67150,
+    "cov4_input_tokens": 27980,
+    "cov4_output_tokens": 1119,
+    "embedding_requests": 7,
+    "embedding_rows": 1598,
+    "embedding_reused_rows": 0,
+    "embedding_tokens": 316970,
+    "embedding_usage_cost_usd": 0.0063394,
+    "smoke_client_embedding_requests": 2,
+    "smoke_client_rerank_requests": 4,
+    "smoke_returned_embedding_tokens": 2,
+    "smoke_returned_rerank_tokens": 1288,
+    "smoke_usage_cost_upper_bound_usd": 6.444e-05,
+    "combined_usage_cost_upper_bound_usd": 0.07355384,
+    "smoke_caveat": "Returned usage does not separately establish hosted cache hits; cost is an upper-bound usage calculation, not an invoice.",
+    "experiment_debit": false
+  },
+  "source_limitation": "IARPA HTTP403; combined DARPA/IARPA adapter partial_refresh with four DARPA records, not full upstream health",
+  "private_receipt_hashes": {
+    "pr260-merged-review.json": "e3beabbcd2d6b6e325d9da003fd602df6d84405426e92944f8fa8437ffb0c8a0",
+    "pr261-clean-review.json": "58c262543649dc9858bc0b6f7c4aae84c8af8289fd5c1088d443f91db6688dd1",
+    "corrected-source-check.json": "4642bad329e44bbb8cf7fef019e2fc8728a61f0dd57016feefa6a30c43708776",
+    "published-receipt/publication.json": "e982262b644c704d36edba121faddc44cc7e77cdacc130696c6b43e59343eda5",
+    "verified-live-receipt/live-verification.json": "32588db0e1bac941c1f2d0e37e63d3b4ed78611972beabb26244e2e9c0107c5c",
+    "generation-spend/usage-summary.json": "a69c161192c0d9f3a9f35f0ae84a15ca8bbaeaad82481e16892b2383cc616425",
+    "september18-waiting/review-pending.json": "4cbfdc4a435bb57e74a4960cf182828151ccbbbbbe138b6462eb2af81a8ccd9f"
+  },
+  "history_backup": {
+    "path": "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\outputs\\catalog-deadline-repair-20260917\\published-repair-history.bundle",
+    "bytes": 132129401,
+    "sha256": "e6ab54a2aa57a72e11625e7d33033c94c92a6bb6e917d1a06b04c329f397a16b",
+    "verified_complete_history": true,
+    "remote_candidate_branches_deleted": false
+  },
+  "live_receipt_scope_note": "The live verifier itself made no production mutation; publication did merge the catalog and deploy Pages and the Search Worker as recorded above."
+}

@@ -6768,7 +6768,7 @@
   },
   "model": "Unchanged contextual candidate; completed Sonnet 5 thinking-disabled retrospective checks: strong/plausible/plausible individuals, plausible group, three faithful explanations.",
   "next_allowed_stage": null,
-  "next_stage_requires": "Explicit resumption of the bounded YIP source-identity/submission-stage repair. Any paid saved-Luna check separately requires execution authorization and authoritative recovery disposition; no automatic retry.",
+  "next_stage_requires": "New owner instruction for scientific checker recovery/dispatch or registry activation; no allowance or Stage4 approval inferred. Newer catalog PR262 remains awaiting its own review.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
@@ -7132,9 +7132,9 @@
     "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
     "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
   },
-  "recommendation": "Offline checker repaired; catalog remains unpublished at the required same-subsystem review-convergence checkpoint.",
+  "recommendation": "Completed catalog deadline/publication repair. Connected-maintainer review initiation remains required; no experimental activation.",
   "recommended_next_stage": "STOP FOR USER REVIEW",
-  "report": "docs/PROJECT_STATUS.md",
+  "report": "docs/reconciliation/catalog-deadline-publication-20260918.md",
   "repository": "mporosoff/grants-scraper",
   "results": {
     "contextual_counts": {
@@ -7475,7 +7475,7 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "offline_checker_complete_catalog_review_convergence_checkpoint",
+  "stage_status": "catalog_repair_published_live_verified",
   "stop": true,
   "unresolved": [
     "New checker HTTP400: compiled grammar too large. All24 pair verdicts and12 derived person outcomes are missing. No new check/retry is authorized.",
@@ -7483,7 +7483,7 @@
     "Historical checker fc618603458249348c6834d258264520 remains unknown usage with $0.146074 held; original cause and verdicts remain unavailable.",
     "The valid Luna assessment is unverified; no scientific route selection, production graph, corrected DOE workflow, full cold-workflow latency or new explanation/team qualification follows."
   ],
-  "updated_at": "2026-09-15",
+  "updated_at": "2026-09-18T19:42:45.738936+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -9464,7 +9464,7 @@
       }
     }
   },
-  "active_work": "targeted_checker_and_catalog_maintenance_checkpoint",
+  "active_work": "catalog_deadline_publication_closeout",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -10468,6 +10468,34 @@
     "new_experiment_microusd": 0,
     "accounting_unchanged": true,
     "public_activation": false,
+    "stop_for_user_review": true
+  },
+  "historical_pre_catalog_deadline_publication": {
+    "active_work": "targeted_checker_and_catalog_maintenance_checkpoint",
+    "stage_status": "offline_checker_complete_catalog_review_convergence_checkpoint",
+    "report": "docs/PROJECT_STATUS.md",
+    "recommendation": "Offline checker repaired; catalog remains unpublished at the required same-subsystem review-convergence checkpoint.",
+    "next_stage_requires": "Explicit resumption of the bounded YIP source-identity/submission-stage repair. Any paid saved-Luna check separately requires execution authorization and authoritative recovery disposition; no automatic retry.",
+    "updated_at": "2026-09-15"
+  },
+  "catalog_deadline_publication": {
+    "report": "docs/reconciliation/catalog-deadline-publication-20260918.md",
+    "receipt": "docs/reconciliation/catalog-deadline-publication-20260918.json",
+    "repair_pr": 260,
+    "repair_merge": "c13d1b8547cb0e1d85814835affde253a893f61c",
+    "product_code": "e2cd6090ffb872616adc3eee073208c03c741704",
+    "publication_pr": 261,
+    "publication_sha": "957238e25f46d59c45cfef37716af8416a116ad1",
+    "publication_run": 35284101222,
+    "candidate_id": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+    "catalog_generated_at": "2026-09-17T21:45:36.229174Z",
+    "catalog_records": 1391,
+    "live_verified": true,
+    "new_experiment_requests": 0,
+    "new_experiment_microusd": 0,
+    "experimental_activation": false,
+    "newer_scheduled_pr": 262,
+    "newer_scheduled_status": "awaiting_review_not_published",
     "stop_for_user_review": true
   }
 }

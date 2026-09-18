@@ -1,5 +1,24 @@
 # Funding Finder — current repair status
 
+Updated September 18, 2026. This is the current handoff; earlier checkpoints below are history.
+
+## Deadline repair published and verified
+
+**The public catalog is now September 17 data, with 1,391 records.** Direct public-byte verification on September 18 confirms the reviewed candidate. The YIP duplicate is gone: canonical record 363829 retains December 4 as its application deadline and the required white-paper warning. The three other proven VPR duplicates and prior NSF/prose repairs are preserved correctly.
+
+Repair PR #260 merged as `c13d1b8547cb0e1d85814835affde253a893f61c` after clean exact-head review and 1,497 Python/796 browser checks. Publication PR #261 merged as `957238e25f46d59c45cfef37716af8416a116ad1`. Run 35284101222 reused the exact candidate validation and completed Search compatibility/smoke, Pages and live verification; no generation was repeated. The dispatch had already started before the user pause and completed remotely; resumption verified it rather than dispatching again.
+
+The daily 31-minute failure was a review timeout, not failed source collection. The repaired workflow now retains an honest `awaiting_review` checkpoint and makes no serving change until review succeeds. September 18's scheduled run 35356750364 is successful but its newer PR #262 remains awaiting review, not published. **A connected maintainer still must initiate that review; fully unattended review initiation is not solved.** No permission or schedule was changed.
+
+Product branch `codex/on-demand-team-recommender` retains its worktree and reviewed repair at `e2cd6090ffb872616adc3eee073208c03c741704`; this later documentation commit records closeout. Experimental activation and the audited registry remain unchanged. PR #256's compact checker remains reviewed/unmerged; no new scientific checker request occurred and 0/24 verdicts remain accepted. The existing IARPA upstream 403/degraded-source limitation remains separate.
+
+New experiment spend: **$0 / zero requests**. Normal catalog maintenance incurred a separate usage-cost calculation of at most **$0.07355384**, including the existing Cov4 requests, search vectors and fixed publication smoke. The experiment's two uncertain holds and protected reserve remain untouched. No E2E/Playwright run was started.
+
+Full identities, actual costs, failures, receipts and limitations: [publication closeout](reconciliation/catalog-deadline-publication-20260918.md), [sanitized receipt](reconciliation/catalog-deadline-publication-20260918.json), and [experiment state](team-recommender/experiment-state.json).
+
+## Superseded September 15 checkpoint — historical
+
+
 Updated September 15, 2026. This is the single current handoff; the earlier reconciliation below is retained as history.
 
 ## Latest checkpoint: checker repaired; catalog publication blocked
