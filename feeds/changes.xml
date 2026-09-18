@@ -4,8 +4,256 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-09-17T21:53:35Z</updated>
+  <updated>2026-09-18T14:36:42Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closed or removed: State Border Security Reinforcement Fund</title>
+    <link href="https://www.grants.gov/search-results-detail/362671"/>
+    <id>urn:funding-finder:change:ff88855dedb042533e09</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363757"/>
+    <id>urn:funding-finder:change:fef4dad89a20ef1e9e98</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Major Research Instrumentation Program: (MRI)</title>
+    <link href="https://www.grants.gov/search-results-detail/344610"/>
+    <id>urn:funding-finder:change:d777da1d490fc49dc41a</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Academic-Industrial Partnerships (AIP) to Translate and Validate In Vivo Imaging Systems (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357018"/>
+    <id>urn:funding-finder:change:c7476cc3358714c3e455</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Placement and Coordination Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362962"/>
+    <id>urn:funding-finder:change:c4f5de3a5024b13be4aa</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Improving Undergraduate STEM Education: Directorate for STEM Education (IUSE: EDU)</title>
+    <link href="https://www.grants.gov/search-results-detail/344124"/>
+    <id>urn:funding-finder:change:c347eb5c1fe530951413</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Ethical, Legal and Social Implications (ELSI) Small Research Grant (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358179"/>
+    <id>urn:funding-finder:change:bdc20e6f370b61068548</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-11-16 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Division of Chemistry: Disciplinary Research Programs (CHE-DRP)</title>
+    <link href="https://www.grants.gov/search-results-detail/347749"/>
+    <id>urn:funding-finder:change:ad1c33816abd9b467053</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NCCIH Natural Product Early Phase Clinical Trial Award (R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357492"/>
+    <id>urn:funding-finder:change:9a8b5f453cf74caba5f8</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-11-13 → 2026-10-20</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NCCIH Natural Product Early Phase Clinical Trial Phased Innovation Award (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357490"/>
+    <id>urn:funding-finder:change:6f3e75775976509f7c11</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-11-13 → 2026-10-20</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Academic-Industrial Partnerships (AIP) to Translate and Validate In Vivo Imaging Systems (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357018"/>
+    <id>urn:funding-finder:change:66c115dd4a43dfb7b873</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-01-07 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NHLBI Early Phase Clinical Trials for Therapeutics and/or Diagnostics for HLBS Disorders (R33 CT Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357542"/>
+    <id>urn:funding-finder:change:66128b8d1196d57c4a9c</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-01-07 → 2026-10-02</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Academic Research Enhancement Award (AREA) for Undergraduate-Focused Institutions (R15 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/354081"/>
+    <id>urn:funding-finder:change:640a4bbdbea15a67d1dc</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-01-07 → 2026-10-25</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: National Cancer Institute's Investigator-Initiated Early Phase Clinical Trials for Cancer Treatment and Diagnosis (R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357075"/>
+    <id>urn:funding-finder:change:63226b56cda8f7bff19a</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-01-07 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: HEAL Initiative: Pain Research Enhancement Program (PREP) (R15 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358090"/>
+    <id>urn:funding-finder:change:6161e78bfcf3f34c31be</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-11-23 → 2026-10-27</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: The DOE Quantum Genesis Q Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363869"/>
+    <id>urn:funding-finder:change:52ffd4e5998ebd583b8d</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NCCIH Multi-Site Feasibility Clinical Trials of Mind and Body Interventions (R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357301"/>
+    <id>urn:funding-finder:change:4e78f379a7863e99c10c</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-11-17 → 2026-10-20</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Major Research Instrumentation Program: (MRI)</title>
+    <link href="https://www.grants.gov/search-results-detail/344610"/>
+    <id>urn:funding-finder:change:49cc0f9b3c0f038dea8b</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-11-16 → not listed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Maternal, Infant, and Early Childhood Home Visiting Program (MIECHV)</title>
+    <link href="https://www.grants.gov/search-results-detail/363516"/>
+    <id>urn:funding-finder:change:43d6053700a11f39b796</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: National Cancer Institute's Investigator-Initiated Early Phase Clinical Trials for Cancer Treatment and Diagnosis (R01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357075"/>
+    <id>urn:funding-finder:change:43549b14cc8b6ae1d516</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363754"/>
+    <id>urn:funding-finder:change:320d56c16ce244be9408</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: ROSES25: D.3E IXPE Cycle 4 and NICER Cycle 9 General Observer</title>
+    <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&amp;path=&amp;method=init"/>
+    <id>urn:funding-finder:change:3021521f7932c3a44ff6</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NHLBI Early Phase Clinical Trials for Therapeutics and/or Diagnostics for HLBS Disorders (R33 CT Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357542"/>
+    <id>urn:funding-finder:change:2c226cfb31dc5f8b6ab9</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-02</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: U.S Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP) Regional Fire Science Exchange Announcement</title>
+    <link href="https://www.grants.gov/search-results-detail/363102"/>
+    <id>urn:funding-finder:change:23aa07f7b9f3738c5358</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Division of Chemistry: Disciplinary Research Programs: No Deadline Pilot (CHE-DRP: NDP)</title>
+    <link href="https://www.grants.gov/search-results-detail/341244"/>
+    <id>urn:funding-finder:change:1bf26db541df629fffb5</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Ethical, Legal and Social Implications (ELSI) Small Research Grant (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358179"/>
+    <id>urn:funding-finder:change:182e053acaf4401eed43</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Landmarks of History and Culture and Summer Institutes</title>
+    <link href="https://www.grants.gov/search-results-detail/363880"/>
+    <id>urn:funding-finder:change:12f57d85760e2086b0c3</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Trauma Care Readiness and Coordination Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363662"/>
+    <id>urn:funding-finder:change:12f416898e3c0a0420ce</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Advanced Technologies and Instrumentation for the Astronomical Sciences (ATI)</title>
+    <link href="https://www.grants.gov/search-results-detail/343166"/>
+    <id>urn:funding-finder:change:081f20ebc276b5814fbd</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
+    <link href="https://www.grants.gov/search-results-detail/363101"/>
+    <id>urn:funding-finder:change:01b6822e1cf491dbd0ef</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: U.S. Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP) Primary Announcement</title>
+    <link href="https://www.grants.gov/search-results-detail/363103"/>
+    <id>urn:funding-finder:change:0012d43bfeccb07a83bd</id>
+    <updated>2026-09-18T14:32:49.255063Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
   <entry>
     <title>New opportunity: Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363874"/>
@@ -1357,253 +1605,5 @@
     <updated>2026-09-09T13:58:17.257546Z</updated>
     <category term="closing_soon"/>
     <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363215"/>
-    <id>urn:funding-finder:change:e598d6e43b2700f64c18</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Optimal Treatment Strategies for use of Anti-Obesity Medications (AOMs) in Children and Adolescents Clinical Centers (U01 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360387"/>
-    <id>urn:funding-finder:change:d3c9be1fd49618b5ccc8</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Wetland Mitigation Banking Program Fiscal Year (FY) 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363288"/>
-    <id>urn:funding-finder:change:d0a57532bb7f5a196262</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Air Force Fiscal Year 2027 Young Investigator Program (YIP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363829"/>
-    <id>urn:funding-finder:change:cc405a0a5535a8c9e1ce</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Mathematical Foundations of Artificial Intelligence (MFAI)</title>
-    <link href="https://www.nsf.gov/funding/opportunities/mfai-mathematical-foundations-artificial-intelligence/nsf24-569"/>
-    <id>urn:funding-finder:change:cbe421ed72c20f3e9bf4</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Science, Technology, Engineering, and Mathematics Fields</title>
-    <link href="https://www.grants.gov/search-results-detail/363818"/>
-    <id>urn:funding-finder:change:c41a28e5dad1597a20ae</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Evaluations of Practices for Program Integrity and Fraud Prevention</title>
-    <link href="https://www.grants.gov/search-results-detail/362412"/>
-    <id>urn:funding-finder:change:c36ecd4ac7c71e3c7332</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
-    <link href="https://www.grants.gov/search-results-detail/353413"/>
-    <id>urn:funding-finder:change:c1a56a17eff7d1101265</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363645"/>
-    <id>urn:funding-finder:change:c19090a603fe7f3002ec</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Culturally Specific Domestic Violence and Sexual Assault Services</title>
-    <link href="https://www.grants.gov/search-results-detail/362378"/>
-    <id>urn:funding-finder:change:c08142b26901ded46c84</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OVW Fiscal Year 2026 STCJ Technical Assistance - Request for Required Documents</title>
-    <link href="https://www.grants.gov/search-results-detail/363827"/>
-    <id>urn:funding-finder:change:b1db1f8fb12fa9416b13</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: OVC FY26 Invited to Apply Antiterrorism and Emergency Assistance Program for Crime Victim Compensation and/or Assistance - Wisconsin Compensation</title>
-    <link href="https://www.grants.gov/search-results-detail/363778"/>
-    <id>urn:funding-finder:change:acd34ae2ac8c8c3a6ae4</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Cooperative Program for Modeling Clinical Transplantation</title>
-    <link href="https://www.grants.gov/search-results-detail/361831"/>
-    <id>urn:funding-finder:change:a88cd62ec86863b570cf</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Optimal Treatment Strategies for use of Anti-Obesity Medications (AOMs) in Children and Adolescents Research Coordinating Center (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360441"/>
-    <id>urn:funding-finder:change:a29056d1d8a8daae2851</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Engineering Research Initiation (ERI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363233"/>
-    <id>urn:funding-finder:change:9278097702d7a0f46e85</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Impact Aid Discretionary Construction Grant Program - 84.041C</title>
-    <link href="https://www.grants.gov/search-results-detail/363825"/>
-    <id>urn:funding-finder:change:81d350707dd02736a838</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Fiscal Year 2027 Regional Nutrition Hubs</title>
-    <link href="https://www.grants.gov/search-results-detail/363392"/>
-    <id>urn:funding-finder:change:7e386408df9e975fa13f</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Limited Competition: John Lewis NIMHD Research Endowment Program (S21 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/363826"/>
-    <id>urn:funding-finder:change:7b9892eec1becbd07432</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: SHINE</title>
-    <link href="https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view"/>
-    <id>urn:funding-finder:change:798e3ed97a0b49ba8172</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FYs 2024 through 2026 - Promoting Resilient Operations for Transformative, Efficient, and Cost-saving Transportation (PROTECT) Competitive Grant Program Notice of Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363732"/>
-    <id>urn:funding-finder:change:787ef40d9c76bff964c3</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Specialized Services for Abused Parents and Their Children (Demonstration Projects)</title>
-    <link href="https://www.grants.gov/search-results-detail/362404"/>
-    <id>urn:funding-finder:change:7783ccde92507445c195</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Southwest Border Resource Protection Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362754"/>
-    <id>urn:funding-finder:change:75a2736be41a9daf59bf</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Selective Harnessing of Intrinsic Neuroplasticity Engineering (SHINE)</title>
-    <link href="https://sam.gov/opp/0396f5debf814299b35bcb146365d675/view"/>
-    <id>urn:funding-finder:change:74d8da584888583d396b</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU) Equipment/Instrumentation</title>
-    <link href="https://www.grants.gov/search-results-detail/363724"/>
-    <id>urn:funding-finder:change:6f255fd36ab78790d468</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Emergency Assistance for Fundamental Freedom Defenders</title>
-    <link href="https://www.grants.gov/search-results-detail/363780"/>
-    <id>urn:funding-finder:change:6bafd483490fddf556a7</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: CONTAMINATED ALASKA NATIVE CLAIMS SETTLEMENT ACT LANDS ASSISTANCE PROGRAM</title>
-    <link href="https://www.grants.gov/search-results-detail/351547"/>
-    <id>urn:funding-finder:change:663623e41e8754022cf2</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OVW Fiscal Year 2026 STCJ Technical Assistance - Request for Required Documents</title>
-    <link href="https://www.grants.gov/search-results-detail/363827"/>
-    <id>urn:funding-finder:change:5fa73b56bbb98f212548</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-09</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Disaster Assistance for State Units on Aging (SUAs) and Tribal Organizations</title>
-    <link href="https://www.grants.gov/search-results-detail/360510"/>
-    <id>urn:funding-finder:change:5a87443c7915ff3e27bd</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-11</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Rural Housing Preservation Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363400"/>
-    <id>urn:funding-finder:change:519d6e5be6245aed3ce6</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
-    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
-    <id>urn:funding-finder:change:5011dd144f6720fd2365</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Community Economic Development Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/362237"/>
-    <id>urn:funding-finder:change:49ca565666c004b6d605</id>
-    <updated>2026-09-09T13:58:17.257546Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
   </entry>
 </feed>
