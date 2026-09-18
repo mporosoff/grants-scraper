@@ -7,7 +7,7 @@ import re
 from urllib.parse import urlparse
 from scripts.notice_semantics import clauses
 
-SCHEDULE_VERSION = "submission-fields-20"
+SCHEDULE_VERSION = "submission-fields-21"
 FIELD_LABEL = re.compile(r'^(?:Required\s+|Optional\s+)?(?:Full\s+(?:Application|Proposal)|Application|Proposal|'
     r'Concept\s+(?:Paper|Outline)|White\s+Paper|Letter\s+of\s+Intent|Pre[\s-]Application(?:\s*\([^)]{1,30}\))?)'
     r'\s+(?:Submission\s+)?(?:Deadline|Due\s+Date)(?:\(s\)|s)?\s*(?:\([^)]{1,100}\))?\s*:', re.I)
@@ -30,7 +30,13 @@ def stage_for(label):
     return None
 
 
+def conditional_requirement(text):
+    return bool(re.search(r'\b(?:if|unless|whether|(?:when|where)\s+(?:required|applicable))\b', text, re.I))
+
+
 def obligation(label):
+    if conditional_requirement(label):
+        return "conditional", None
     if re.search(r"\b(?:not\s+required|optional|not\s+mandatory)\b", label, re.I):
         return "optional", False
     if re.search(r"\b(?:required|mandatory|must\s+(?:submit|provide|receive))\b", label, re.I):
@@ -47,6 +53,8 @@ def preliminary_requirement(text, stage_label):
     subject = rf'(?:{pattern})'
     values = set()
     for sentence in re.split(r'[.;\n]', text or ''):
+        if conditional_requirement(sentence):
+            continue
         if re.search(rf'\b{subject}\s+(?:is\s+|are\s+)?(?:not\s+required|optional)\b|'
                      rf'\b(?:although|while)\s+not\s+required,\s*{subject}\b|\boptional\s+{subject}\b', sentence, re.I):
             values.add(False)
@@ -1431,6 +1439,11 @@ def apply_requirements(api, opportunity_id, facts, containers, document, stamp):
             negative = re.search(rf'\b{subject}\s+(?:(?:is|are)\s+)?(?:non[ -]binding\s+and\s+)?(?:optional|not\s+required)\b|'
                 rf'\b(?:although|while)\s+not\s+required,\s*{subject}\b', text, re.I)
             match = negative or positive
+            if match and conditional_requirement(text):
+                # A conditional template rule does not establish that this
+                # preliminary stage exists for this call. Native fields and
+                # separate unconditional assertions retain their own evidence.
+                continue
             if match and re.search(r'\b(?:if|when|whether)\s+(?:an?\s+|the\s+)?$', text[:match.start()], re.I):
                 # Generic process guidance ("if concept papers are not
                 # required") does not establish this call's obligation.
