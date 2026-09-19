@@ -71,6 +71,8 @@ class ExperimentLedger(Ledger):
             if is_contextual:allowed_metadata.add('execution_capacity')
             if is_latency:allowed_metadata.update({'latency_lock','latency_operation','latency_model','latency_effort','native_count_key','count_body_sha256','native_input_tokens'})
             if is_luna_repair:allowed_metadata.update({'luna_repair','luna_operation','pair_contract_sha256','repair_of'})
+            if metadata.get('purpose','').startswith('cb-cc-'):
+                allowed_metadata.update({'compact_continuation','continuation_lock_sha256','pair_contract_sha256','repair_of'})
             if metadata.get('purpose','').startswith('cb-o1-'):allowed_metadata.update({'option1_release','repair_of'})
             if metadata.get('purpose','').startswith('cb-p1-'):allowed_metadata.update({'phase1_lock','response_contract_sha256','repair_of'})
             if metadata.get('purpose','').startswith('cb-p2-'):
