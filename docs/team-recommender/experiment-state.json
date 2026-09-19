@@ -41,12 +41,23 @@
       "full_browser_validation": true,
       "automatic_next_revision": false,
       "deployment": false
+    },
+    "compact_check_continuation": {
+      "authorized": true,
+      "maximum_new_usd": 0.5,
+      "maximum_new_attempts": 1,
+      "maximum_native_counts": 1,
+      "planned_native_counts": 0,
+      "used_attempts": 0,
+      "used_usd": 0,
+      "existing_ledger": true,
+      "record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md"
     }
   },
   "authority": {
-    "work_order": "Luna evidence contract repair and one scientific check",
-    "record": "docs/team-recommender/contextual-stage-b/LUNA-CONTRACT-REPAIR-AUTHORITY.md",
-    "scope": "Completed two named attempts within $0.50; no further paid request/retry, production verifier, team, release or Stage4 authorized."
+    "work_order": "September19 compact checker continuation",
+    "record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+    "scope": "One new independent 24-pair checker request at most $0.50 inside the existing ledger; exact terminal-request recovery retaining both unknown holds; no automatic retry. Protected-main merge conditional on safe release planning. No public activation, registry migration, legacy withdrawal or E2E."
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -81,8 +92,8 @@
     "output_tokens": 275395,
     "path": "docs/team-recommender/preparation-budget.json",
     "reconciliation": {
-      "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
-      "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
+      "path": "docs/reconciliation/compact-check-continuation-20260919.json",
+      "sha256": "10bcf6c9f05ecc9c17d8328649da4d5da31a9e2ac528adecc08e3cf15f994e4e"
     },
     "remaining_request_slots": 5,
     "remaining_total_usd": 2.301792,
@@ -116,7 +127,7 @@
     "phase1_completion_new_requests": 2,
     "conservative_ledger_usage_usd": 7.698208,
     "current_task_maximum_new_usd": 0.5,
-    "current_task_maximum_new_attempts": 2,
+    "current_task_maximum_new_attempts": 1,
     "requirements_latency_new_requests": 3,
     "requirements_latency_reconciled_usd": 0.107736,
     "requirements_latency_uncertain_usd": 0.146074,
@@ -131,7 +142,12 @@
     "luna_repair_unknown_held_usd": 0.205254,
     "luna_repair_conservative_usd": 0.21226,
     "native_count_used": 187,
-    "native_count_limit": 190
+    "native_count_limit": 190,
+    "current_task_authority": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+    "current_task_new_requests": 0,
+    "current_task_new_usd": 0,
+    "current_task_planned_reservation_usd": 0.263282,
+    "current_task_reservation_is_spent": false
   },
   "candidate": {
     "primary": "contextual-audited-graph-v1 implementation",
@@ -144,23 +160,31 @@
     "fallback": null
   },
   "checks": {
-    "new_focused_methods_passed": 15,
-    "existing_focused_methods_passed": 48,
-    "ci_python_passed": 1477,
-    "ci_browser": "PASS",
-    "ci_flag_off_artifacts_unchanged": 23,
-    "crash_injection_base_boundaries": 7,
-    "additional_failure_diagnostic_boundaries": 3,
+    "run": 35457408680,
+    "python_passed": 1520,
+    "browser_passed": 796,
+    "no_drift_artifacts": 23,
+    "frozen_queries": 37,
+    "top10_churn": 0,
+    "scoring_cases": 50,
+    "scoring_byte_identical": true,
+    "new_continuation_methods": 14,
+    "historical_pair_methods_helper": 18,
+    "product_historical_pair_methods": 19,
+    "paid_crash_boundaries": 7,
+    "failed_diagnostic_boundaries": 3,
+    "authority_write_boundaries": 3,
     "restorations_per_boundary": 3,
     "duplicate_fixture_dispatches": 0,
-    "actual_assessment_lossless_validation": "PASS",
-    "actual_final_checkpoint_verification": "PASS",
-    "full_e2e": "NOT_RUN_THIS_TASK",
-    "runtime_graph_adapter_unchanged": true,
-    "helper_head": "0422356ca3f901ff7ae98d96d22781963885714e",
-    "required_ci_run": 34965952818
+    "initial_fixture_failure": "Missing cb-purpose on synthetic historical rows; fixture corrected, no production guard changed.",
+    "helper_head": "7d9037bdedacaf8a7145c0b113a4a5a4d42d4c59",
+    "required_ci_run": 35457408680,
+    "actual_assessment_lossless_validation": "PASS_NETWORK_BLOCKED",
+    "actual_final_checkpoint_verification": "PASS_1357_FILES",
+    "full_e2e": "NOT_RUN_NOT_AUTHORIZED",
+    "provider_grammar_acceptance": "NOT_RUN"
   },
-  "containing_commit": "Documentation checkpoint introducing automatic-publication-closeout-20260919 after product reconciliation 20e1708a1e0a681bf80235329b378782d3585399.",
+  "containing_commit": "The documentation commit introducing compact-check-continuation-20260919.json; resolve with git log for that path.",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -7129,12 +7153,12 @@
     "trusted_execution": "PR223 exact-head reviewed/CI passed and protected-merged; three manual runs completed finite embedding/judging; one terminal failed request charged without replay."
   },
   "receipt_index": {
-    "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
-    "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
+    "path": "docs/reconciliation/compact-check-continuation-20260919.json",
+    "sha256": "10bcf6c9f05ecc9c17d8328649da4d5da31a9e2ac528adecc08e3cf15f994e4e"
   },
-  "recommendation": "Reviewed repair merged. Official Grants.gov maintenance prevents source generation; preserve verified live catalog until a new compatible candidate completes automatic review/publication.",
+  "recommendation": "PR256 is clean and checked but held: the release planner selects unrelated source generation while Grants.gov is unavailable. Preserve the unused one-request authorization; resume after ordinary compatible catalog publication and a fresh planner check.",
   "recommended_next_stage": "STOP FOR USER REVIEW",
-  "report": "docs/reconciliation/automatic-publication-closeout-20260919.md",
+  "report": "docs/PROJECT_STATUS.md",
   "repository": "mporosoff/grants-scraper",
   "results": {
     "contextual_counts": {
@@ -7225,8 +7249,8 @@
   },
   "schema_version": 1,
   "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
-  "source_head_at_evidence_capture": "cc233813973aad3a47a438348babe497e75157ab",
-  "source_tree_at_evidence_capture": "2d21eb01b8739ebe6434d20240d3591ec36707db",
+  "source_head_at_evidence_capture": "98de035d4148460fc8949ff7a44c6f6695a4fa83",
+  "source_tree_at_evidence_capture": "799f1242b735fbf2464f5693c3fd5fde85570b4b",
   "stage1_receipt_index": {
     "path": "docs/team-recommender/receipt-index.json",
     "sha256": "d32ae60b40120a437b9d42c61759711a0d263a9b13f7662759ae46b1f104f0d8"
@@ -7475,15 +7499,16 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "repair_merged_publication_blocked_upstream",
+  "stage_status": "reviewed_engineering_complete_real_check_blocked_release_dependency",
   "stop": true,
   "unresolved": [
-    "New checker HTTP400: compiled grammar too large. All24 pair verdicts and12 derived person outcomes are missing. No new check/retry is authorized.",
-    "New request d24a0654d72e486793519bead019b064 has unknown usage and $0.205254 fully held; it is not covered by the historical quarantine.",
-    "Historical checker fc618603458249348c6834d258264520 remains unknown usage with $0.146074 held; original cause and verdicts remain unavailable.",
-    "The valid Luna assessment is unverified; no scientific route selection, production graph, corrected DOE workflow, full cold-workflow latency or new explanation/team qualification follows."
+    "PR256 reviewed head7d9037bdedacaf8a7145c0b113a4a5a4d42d4c59 is held because the existing planner selects generate for unpublished notice source repairs; official Grants.gov maintenance currently blocks that generation.",
+    "All24 independent checker verdicts and12 derived person outcomes remain missing. One new named operation is authorized but unspent; provider grammar acceptance is NOT RUN.",
+    "Both historical requests retain unknown usage and full holds totaling $0.351328. The newly authorized exact quarantine is implemented and reviewed but not yet appended to the authoritative cloud ledger.",
+    "Existing daily automation owns catalog recovery; rejected PR262 is not publishable. IARPA degradation remains separate.",
+    "Audited-registry activation and revalidation/withdrawal of107 legacy packages remain a separate unexecuted owner decision. No scientific nomination or population acceptance follows from engineering checks."
   ],
-  "updated_at": "2026-09-19T16:05:57.842158+00:00",
+  "updated_at": "2026-09-19T17:23:56.100299+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -9464,7 +9489,7 @@
       }
     }
   },
-  "active_work": "automatic_catalog_publication_repair",
+  "active_work": "compact_checker_continuation_and_separate_catalog_recovery",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -9661,7 +9686,7 @@
     "proposed_next_stage": "No Stage 4 or public activation. Contextual Stage B is authorized but incomplete.",
     "containing_commit": "Documentation after real-validation lock7d4f7b1; resolve report-containing commit locally."
   },
-  "active_stage_meaning": "Maintenance and offline checker correction; no new scientific phase or Stage4.",
+  "active_stage_meaning": "Bounded offline checker continuation and separate catalog recovery; no new scientific phase or Stage4.",
   "historical_pre_option1_closeout": {
     "budget_record": {
       "D1_new_usd": 1.055784,
@@ -10527,5 +10552,210 @@
     "completion_blocked_by": "official_source_maintenance",
     "expected_source_return": "2026-09-21T06:00:00-04:00",
     "new_approval_required_for_authorized_continuation": false
+  },
+  "historical_pre_compact_continuation": {
+    "active_work": "automatic_catalog_publication_repair",
+    "stage_status": "repair_merged_publication_blocked_upstream",
+    "recommendation": "Reviewed repair merged. Official Grants.gov maintenance prevents source generation; preserve verified live catalog until a new compatible candidate completes automatic review/publication.",
+    "report": "docs/reconciliation/automatic-publication-closeout-20260919.md",
+    "authority": {
+      "work_order": "Luna evidence contract repair and one scientific check",
+      "record": "docs/team-recommender/contextual-stage-b/LUNA-CONTRACT-REPAIR-AUTHORITY.md",
+      "scope": "Completed two named attempts within $0.50; no further paid request/retry, production verifier, team, release or Stage4 authorized."
+    },
+    "checks": {
+      "new_focused_methods_passed": 15,
+      "existing_focused_methods_passed": 48,
+      "ci_python_passed": 1477,
+      "ci_browser": "PASS",
+      "ci_flag_off_artifacts_unchanged": 23,
+      "crash_injection_base_boundaries": 7,
+      "additional_failure_diagnostic_boundaries": 3,
+      "restorations_per_boundary": 3,
+      "duplicate_fixture_dispatches": 0,
+      "actual_assessment_lossless_validation": "PASS",
+      "actual_final_checkpoint_verification": "PASS",
+      "full_e2e": "NOT_RUN_THIS_TASK",
+      "runtime_graph_adapter_unchanged": true,
+      "helper_head": "0422356ca3f901ff7ae98d96d22781963885714e",
+      "required_ci_run": 34965952818
+    },
+    "unresolved": [
+      "New checker HTTP400: compiled grammar too large. All24 pair verdicts and12 derived person outcomes are missing. No new check/retry is authorized.",
+      "New request d24a0654d72e486793519bead019b064 has unknown usage and $0.205254 fully held; it is not covered by the historical quarantine.",
+      "Historical checker fc618603458249348c6834d258264520 remains unknown usage with $0.146074 held; original cause and verdicts remain unavailable.",
+      "The valid Luna assessment is unverified; no scientific route selection, production graph, corrected DOE workflow, full cold-workflow latency or new explanation/team qualification follows."
+    ],
+    "receipt_index": {
+      "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
+      "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
+    },
+    "source_head_at_evidence_capture": "cc233813973aad3a47a438348babe497e75157ab",
+    "source_tree_at_evidence_capture": "2d21eb01b8739ebe6434d20240d3591ec36707db",
+    "containing_commit": "Documentation checkpoint introducing automatic-publication-closeout-20260919 after product reconciliation 20e1708a1e0a681bf80235329b378782d3585399.",
+    "budget_current_fields": {
+      "current_task_maximum_new_usd": 0.5,
+      "current_task_maximum_new_attempts": 2,
+      "reconciliation": {
+        "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
+        "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
+      }
+    }
+  },
+  "compact_check_continuation": {
+    "version": "compact-check-continuation-closeout-20260919-v1",
+    "recorded_at": "2026-09-19T17:21:22.846199+00:00",
+    "authority_path": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+    "authority_sha256": "b9ba7ce09921231ee78ad91a17e333c06899912be85f7fd80297169ec2b8b113",
+    "starting_product": "4d360463864e1653bd19ebebd6b49d6f702e715d",
+    "product_code": "98de035d4148460fc8949ff7a44c6f6695a4fa83",
+    "main": "e6692238f3bbc1603f7b1549d96360f4c42cd6ed",
+    "helper_start": "3dd60868fdd3b368e804f31fdc40b7baea709b4a",
+    "helper_main_integration": "dc5aa048bc90e3191a1f0b97983072eb538188d8",
+    "helper_head": "7d9037bdedacaf8a7145c0b113a4a5a4d42d4c59",
+    "pr": 256,
+    "pr_state": "OPEN_REVIEWED_MERGE_HELD",
+    "review": {
+      "summary_comment": 5683636190,
+      "completed_at": "2026-09-19T17:16:46.027357Z",
+      "no_findings_reaction_at": "2026-09-19T17:16:48Z",
+      "consequential_findings": 0,
+      "unresolved_threads": 0,
+      "rounds": 1
+    },
+    "ci": {
+      "run": 35457408680,
+      "python_passed": 1520,
+      "browser_passed": 796,
+      "no_drift_artifacts": 23,
+      "frozen_queries": 37,
+      "top10_churn": 0,
+      "scoring_cases": 50,
+      "scoring_byte_identical": true
+    },
+    "focused": {
+      "new_continuation_methods": 14,
+      "historical_pair_methods_helper": 18,
+      "product_historical_pair_methods": 19,
+      "paid_crash_boundaries": 7,
+      "failed_diagnostic_boundaries": 3,
+      "authority_write_boundaries": 3,
+      "restorations_per_boundary": 3,
+      "duplicate_fixture_dispatches": 0,
+      "initial_fixture_failure": "Missing cb-purpose on synthetic historical rows; fixture corrected, no production guard changed."
+    },
+    "exact_replay": {
+      "body_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
+      "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
+      "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+      "ledger_unchanged": true,
+      "lock_sha256": "cf6fd76a712ca590186304fbaf510bb393adf3538f750293570d5070c7e3c54a",
+      "native_counts": 0,
+      "pairs": 24,
+      "people": 12,
+      "provider_calls": 0,
+      "saved_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad"
+    },
+    "release_plan": {
+      "candidate_id": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+      "candidate_run": "35278318943",
+      "changes": {
+        "source": [
+          "scripts/notice_schedule.py",
+          "scripts/notice_semantics.py"
+        ],
+        "validation": [
+          ".github/workflows/deploy-researcher-intake.yml",
+          ".github/workflows/team-recommender-offline.yml",
+          "evaluation/artifact_fingerprints.txt",
+          "tests/browser/contextual-worker-contract.test.mjs",
+          "tests/fixtures/parsing/doe-conditional-requirements.json",
+          "tests/test_automatic_publication_repair.py",
+          "tests/test_contextual_team_compact_check.py",
+          "tests/test_contextual_team_luna_repair.py",
+          "tools/contextual_currentness.mjs",
+          "tools/contextual_team_check.py",
+          "tools/contextual_team_compact_check.py",
+          "tools/contextual_team_pair_contract.py",
+          "tools/contextual_team_policy.py",
+          "tools/prepare_release_publication.py",
+          "tools/team_recommender_budget.py",
+          "tools/wait_release_review.py"
+        ]
+      },
+      "live_verified": false,
+      "publication_attempt": "",
+      "publication_run": "",
+      "qualification_hold": false,
+      "reason": "Dependency fingerprints and retained release evidence",
+      "receipt_current": false,
+      "release_sha": "7d9037bdedacaf8a7145c0b113a4a5a4d42d4c59",
+      "runtime_changes": [],
+      "stage": "generate",
+      "team_generation_ready": false,
+      "team_mode": "maintenance"
+    },
+    "live_observation": {
+      "checked_at": "2026-09-19T17:15:11.742590+00:00",
+      "candidate_id": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+      "catalog_sha256": "bf9db897dc2d23c0a7be119279b40014adfb1ec5e62ddc1696ac0738bf52eff5",
+      "catalog_bytes": 14605726,
+      "manifest_match": true,
+      "provider_calls": 0
+    },
+    "catalog": {
+      "latest_run": 35453554431,
+      "latest_scheduled_run": 35447171113,
+      "status": "EXTERNAL_GRANTS_GOV_MAINTENANCE",
+      "rejected_pr": 262,
+      "manual_dispatches": 0,
+      "recovery_owner": "Existing daily automation",
+      "expected_source_return": "2026-09-21T06:00:00-04:00",
+      "source_url": "https://www.grants.gov/xml-extract",
+      "redirect": "https://grants-gov.blogspot.com/"
+    },
+    "accounting": {
+      "authorization_id": "on-demand-team-offline-v2-20260909",
+      "authoritative_run": 34967272858,
+      "artifact": 10394804222,
+      "verified_files": 1357,
+      "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
+      "checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+      "known_microusd": 7346880,
+      "unknown_holds_microusd": 351328,
+      "conservative_used_microusd": 7698208,
+      "attempts": 685,
+      "remaining_microusd": 2301792,
+      "remaining_attempts": 5,
+      "protected_microusd": 1267862,
+      "protected_attempts": 2,
+      "native_count_used": 187,
+      "native_count_limit": 190,
+      "new_attempts": 0,
+      "new_charged_microusd": 0,
+      "new_native_counts": 0,
+      "planned_reservation_microusd": 263282,
+      "planned_reservation_not_dispatched": true,
+      "new_quarantine_installed_in_cloud": false,
+      "ledger_unchanged": true
+    },
+    "scientific": {
+      "assessment_reused_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+      "expected_pairs": 24,
+      "accepted_new_verdicts": 0,
+      "missing_verdicts": 24,
+      "derived_checker_person_outcomes": 0,
+      "provider_grammar_acceptance": "NOT_RUN",
+      "automatic_retry": false,
+      "public_activation": false,
+      "new_human_items": 0
+    },
+    "e2e": "NOT_RUN_NOT_AUTHORIZED",
+    "registry_legacy_packages_unchanged": 107,
+    "registered_worktrees_preserved": 62,
+    "first_failing_boundary": "Merge dependency planner requires unpublished source generation; current official outage. User instructed holding this merge rather than triggering unrelated generation.",
+    "next_action": "After ordinary source recovery and compatible publication, recheck planner and exact-head requirements; protected-merge existing PR256 only when safe, then execute this one authorized operation once. No new approval for the same unused scope is required.",
+    "handoff": "docs/PROJECT_STATUS.md",
+    "unused_authority_requires_new_approval": false
   }
 }

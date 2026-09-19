@@ -2,7 +2,61 @@
 
 Updated September 19, 2026. This is the current handoff; earlier checkpoints below are history.
 
-## Automatic publication repair merged; upstream maintenance blocks the next catalog
+## CURRENT — compact checker reviewed and wired; merge and real check held by catalog dependencies
+
+**Engineering is complete and independently reviewed. The one newly authorized scientific check has NOT RUN.** PR [256](https://github.com/mporosoff/grants-scraper/pull/256) is open at **`7d9037bdedacaf8a7145c0b113a4a5a4d42d4c59`**. Its updated exact-head automatic review completed September19 at17:16:46 UTC with no findings; the bot's no-findings reaction at17:16:48 and all review surfaces confirm no unresolved thread. Required CI [35457408680](https://github.com/mporosoff/grants-scraper/actions/runs/35457408680) passed. No duplicate review or full-suite run was requested.
+
+The explicit merge condition in the [new continuation authority](team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md) still prevents merging: the existing release planner on this exact head selects **`generate`**, because `scripts/notice_schedule.py` and `scripts/notice_semantics.py` differ from the published candidate. Those are the already-merged PR263 source repairs, not new checker dependencies. A main push would start that unrelated generation during the official outage. No automation, schedule, permission or release gate was disabled to avoid the condition. GitHub's `CLEAN` mergeability is not permission to ignore it.
+
+Grants.gov's [extract endpoint](https://www.grants.gov/xml-extract) still redirects to its [official maintenance notice](https://grants-gov.blogspot.com/), which states September21 at06:00 Eastern as the expected return. Latest automatic run35453554431 and latest scheduled run35447171113 both failed before candidate persistence. There is no active refresh. **Existing daily automation owns recovery; no manual refresh was dispatched.** Rejected PR262 and its findings remain preserved and unpublished. IARPA degradation/issue30 is separate. Live verification at **September19 17:15:11 UTC** again matched candidate `eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62`: 1,391 September17 records,14,605,726 catalog bytes, SHA `bf9db897dc2d23c0a7be119279b40014adfb1ec5e62ddc1696ac0738bf52eff5`.
+
+### Actual code and preserved work
+
+| Location / branch | Exact checkpoint and disposition |
+| --- | --- |
+| Protected main | `e6692238f3bbc1603f7b1549d96360f4c42cd6ed`; PR263 merged prerequisite, corrected next catalog still unpublished |
+| Product `.worktrees/on-demand-team-recommender`, `codex/on-demand-team-recommender` | Resumed `4d360463864e1653bd19ebebd6b49d6f702e715d`; reviewed continuation reconciled as **`98de035d4148460fc8949ff7a44c6f6695a4fa83`**. This handoff is a later documentation commit; resolve its containing SHA with this file's Git history |
+| Existing helper `.worktrees/contextual-team-demand-service`, `codex/compact-checker-contract` | Original `3dd60868fdd3b368e804f31fdc40b7baea709b4a` preserved; main integrated at `dc5aa048bc90e3191a1f0b97983072eb538188d8`; reviewed head **`7d9037bdedacaf8a7145c0b113a4a5a4d42d4c59`**, PR256 open/held, not merged |
+| `.worktrees/production-reconciliation`, `codex/automatic-catalog-publication` | `54f7356066b6847fcf3483ba9d877516c36fc061`; merged prerequisite via PR263, not missing work |
+| Historical numerical branch | `58a59143ef5446b05223f52982a547903f53e24d`; superseded scientific development/history, no new analysis or nomination |
+| Root `codex/freeze-nofo-e2e-fixture` | `dabaed933b71fd2572403371ae6c94090ed7cbe9`; unrelated work preserved |
+
+All62 registered worktrees were retained. The product received only the seven continuation files; the three modified shared files were byte-equivalent to the helper's pre-change versions. No bulk main/catalog/registry merge occurred. The original compact-schema patch was not reapplied. Product preview HTML/debug/private outputs and the helper's pre-existing EOL-only test-file change remain unstaged; they are local-only artifacts, not release evidence. Historical reports, source groups, private answers, graphs, receipts and budgets remain intact.
+
+### What changed and what was actually checked
+
+The existing protected-main executor now has one separate manual selector, `compact_check_continuation`, for **`compact-check-continuation-20260919-v1`**, operation **`cb-cc-independent-check`**. It reconstructs the complete original evidence, validates the exact retained Luna assessment, and uses the already-reviewed compact native schema. The historical paid lock and two historical operations remain unchanged and exhausted. New instructions and frozen configuration are in [the operational note](COMPACT_CHECK_CONTINUATION.md) and [the continuation lock](../config/contextual_team/compact-check-continuation-v1.json).
+
+Preparation will restore the sole latest cloud checkpoint, verify terminal failed request `d24a0654d72e486793519bead019b064` and its exact diagnostic, reject another active spending owner, and append a narrowly scoped permanent no-replay disposition. **That new disposition has not yet been installed in the cloud**, because nothing was dispatched. Neither unknown request's row, charge, usage or status is rewritten. New uncertainty, changed history, re-keying, a failed result or a lost reconciled cache blocks another payment. Complete exact successful results remain reusable.
+
+The actual saved assessment `eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad` replayed with the network blocked and unchanged ledger/checkpoint bytes. All12 people and24 questions remain. Full packet `eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e`, contract `d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149`, and lock `cf6fd76a712ca590186304fbaf510bb393adf3538f750293570d5070c7e3c54a` are distinct from the failed checker. No Luna labels/rationales enter the independent judge evidence. Complete claims, revisions, source ownership, rubric, model and12,000-output-token ceiling are preserved.
+
+| Executed evidence | Result |
+| --- | --- |
+| New executor/accounting contracts | **14 passed** on helper and reconciled product; seven paid persistence boundaries, three failed/diagnostic boundaries, three authority-write boundaries, repeated archive restoration and concurrent callers; **zero duplicate fixture dispatches** |
+| Existing complete-pair/compact contracts | **18 passed** on helper; **19 passed** on product, including its retained private-assessment replay |
+| Required exact-head CI | **1,520 Python /796 browser contracts passed**,23 no-drift artifacts unchanged,37 frozen queries with zero top-10 churn,50 scoring cases byte-identical |
+| Initial new fixture run | One fixture lacked the historical `cb-` purpose; corrected the fixture. No production recovery guard changed to obtain a pass |
+| Provider grammar acceptance and scientific check | **NOT RUN; 0/24 accepted independent verdicts,24 missing,0 derived checker person outcomes** |
+| E2E / Playwright | **NOT RUN; not authorized here** |
+
+Old “eight Python plus one browser failure” counts are historical, not a current failure claim. Required current gates passed; no speculative repair or scientific regeneration was performed. Unit/schema success does not establish provider grammar acceptance, scientific quality, explanation faithfulness or fast cold delivery.
+
+### One ledger, unused continuation and public boundary
+
+Newest legitimate owner remains **run34967272858 / artifact10394804222**; all **1,357 files** rehashed without mismatch. Ledger SHA `4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8`; checkpoint SHA `c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c`. No active scientific dispatch or newer owner exists. The local mirror is read-only.
+
+- Known charges **$7.346880**, unknown holds **$0.146074 +$0.205254**, conservative use **$7.698208**,685/690 attempts. Holds are counted once and are not claims of known billed usage.
+- Remaining **$2.301792 /5 attempts**; protected **$1.267862 /2 attempts**. Native counts187/190. New charges, provider attempts, native counts and cloud reservations in this continuation: **zero**.
+- Newly authorized maximum: **one check /$0.50** inside that same ledger. Planned conservative reservation **$0.263282**, not yet reserved or spent. Full58,847-byte packet is bounded at71,641 input tokens plus the unchanged12,000 output tokens, using the [official September19 Sonnet5 prices](https://platform.claude.com/docs/en/models/sonnet-5/overview). No native-count call is necessary. Even if the full reservation were charged, $2.038510/four attempts would remain, preserving the required reserve.
+
+Public Search, Team Match and existing legacy packages remain live and unchanged. The Access-restricted contextual service and Phase2 results remain prior validation evidence; no new deployment or ordinary cold-flow claim is made. Historical E2/D3 are superseded scientific experiments, not active release candidates. The audited registry remains experimental. Revalidation or withdrawal of the107 affected legacy packages needs its later explicit decision; neither was performed. No public activation, team construction, profile/vector/interpretation regeneration, new human packet, subscriber activity or Stage4 occurred.
+
+**Next authorized action:** let ordinary catalog recovery produce and publish a compatible reviewed candidate; recheck the release planner and exact unchanged PR256 head/checks. Merge only when it does not trigger unrelated generation, then run the already-authorized single complete checker operation once through protected main. On failure preserve diagnostics/charges and stop; no automatic retry. On success compare all24 accepted verdicts and12 derived outcomes with saved Luna results without retuning. This unused bounded continuation requires no new dollar approval. It cannot be executed safely from the unmerged branch merely because its review passed.
+
+Machine-readable identities and evidence: [continuation receipt](reconciliation/compact-check-continuation-20260919.json), [experiment state](team-recommender/experiment-state.json). **Current disposition: reviewed engineering complete; real check blocked at the explicitly required release-dependency boundary.**
+
+## September 19 automatic-publication checkpoint — historical
 
 PR #263 is protected-merged as `e6692238f3bbc1603f7b1549d96360f4c42cd6ed` after clean exact-head automatic review and passing required CI: 1,503 Python tests, 796 browser contracts, and frozen gates. Bot-authored automatic review is restored, conditional DOE prerequisites/cost-share parsing are repaired, and the checked parser fingerprints are updated. Product reconciliation is `20e1708a1e0a681bf80235329b378782d3585399`. No owner catalog-reading task is required.
 
