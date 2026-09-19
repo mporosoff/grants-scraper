@@ -8,6 +8,13 @@ import time
 BOT = 'chatgpt-codex-connector[bot]'
 
 
+class ReviewPending(ValueError):
+    """A preserved approval boundary, not a clean review or a service failure."""
+    def __init__(self, repository, number, head):
+        super().__init__('Review remains pending; preserve candidate and continue the same review without regeneration or duplicate requests')
+        self.repository, self.number, self.head = repository, number, head
+
+
 def api(path):
     return json.loads(subprocess.check_output(['gh', 'api', path], text=True, encoding='utf-8', timeout=45))
 
@@ -67,7 +74,15 @@ def parsed_time(value):
 
 def reviewed_head(repository, body, head):
     match = re.search(r'Reviewed commit:?\*{0,2}:?\s*`?([a-f0-9]{10,40})\b', body)
-    if not match or not head.startswith(match[1]):
+    if not match:
+        # Current top-level findings identify their immutable head using full
+        # GitHub source links. A status-summary abbreviation is not completion.
+        linked = set(re.findall(r'https://github\.com/' + re.escape(repository)
+                               + r'/blob/([a-f0-9]{40})/', body))
+        # This fallback only recognizes blocking findings. It can never turn
+        # a link in an acknowledgement or an unanchored clean message into approval.
+        return linked == {head} and bool(re.search(r'\bP[012]\b', body))
+    if not head.startswith(match[1]):
         return False
     if match[1] == head:
         return True
@@ -120,4 +135,4 @@ def wait_for_review(repository, number, head, *, timeout=1800, interval=30):
                 return
         print(f'Awaiting terminal exact-head review of PR #{number} ({head})', flush=True)
         time.sleep(interval)
-    raise ValueError('Review remains pending; preserve candidate and continue the same review without regeneration or duplicate requests')
+    raise ReviewPending(repository, number, head)

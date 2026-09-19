@@ -1,0 +1,162 @@
+{
+  "provenance": {
+    "candidate": "e9c5aa5f3f76821299f05a24c3b5b5bb4d44172c28eec5922b4b4a5efae6a07a",
+    "review_pr": 262,
+    "review_comment": 5735498210,
+    "basis": "Retained public official-source excerpts; not a new retrieval"
+  },
+  "record": {
+    "opportunity_id": "363757",
+    "opportunity_number": "DE-FOA-0003617",
+    "status": "posted",
+    "close_date": "2026-09-30",
+    "cost_share_required": false,
+    "deadlines": [
+      {
+        "kind": "application",
+        "date": "2026-09-30",
+        "source": "Grants.gov XML extract"
+      }
+    ]
+  },
+  "entry": {
+    "document": {
+      "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
+      "name": "Regional State Groups NOFO Part 1-DE-FOA-0003617-001.pdf",
+      "source_kind": "primary_notice",
+      "content_type": "application/pdf",
+      "sha256": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+      "bytes": 1248159,
+      "etag": null,
+      "last_modified": null,
+      "version": 2,
+      "first_seen_at": "2026-09-18T14:34:23.114218Z",
+      "last_seen_at": "2026-09-18T14:34:23.114218Z",
+      "changed_since_previous": true
+    },
+    "checked_at": "2026-09-18T14:34:23.114218Z",
+    "status": "current",
+    "parser_dependencies": {
+      "amounts": "award-basis-11:primary-program-context-1:substantive-boundaries-2",
+      "cost_share": "cost-obligation-1:primary-program-context-1:substantive-boundaries-2",
+      "sections": "substantive-section-2:primary-program-context-1:substantive-boundaries-2",
+      "components": "component-owner-3:primary-program-context-1:substantive-boundaries-2",
+      "limits": "submission-subject-1:primary-program-context-1:substantive-boundaries-2",
+      "status": "notice-subject-2:primary-program-context-1:substantive-boundaries-2",
+      "deadlines": "submission-date-6:submission-fields-20:primary-program-context-1:substantive-boundaries-2",
+      "award_context": "award-context-1:primary-program-context-1:substantive-boundaries-2"
+    },
+    "facts": [
+      {
+        "id": "evidence-363757-1f30599928a6",
+        "type": "submission_requirement",
+        "label": "Letter of intent requirement",
+        "value": null,
+        "display_value": "Submission date not established",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061#page=27",
+          "document_name": "Regional State Groups NOFO Part 1-DE-FOA-0003617-001.pdf",
+          "sha256": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+          "page": 27,
+          "section": null,
+          "location": "page 27",
+          "quote": "…al_State_Tribal_Groups@id.doe.gov DOE will not review or consider submissions submitted that: • Are submitted after the due date and time • Are incomplete If required, you must submit a letter of intent and a concept paper by 6:00 p.m. EST on the due date listed in the Key Facts section to be eligible to submit an application. 2. Technical Review Criteria…",
+          "extracted_at": "2026-09-18T14:34:23.114218Z",
+          "structural_reference": {
+            "block_id": "pdf-27-38",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "submission",
+        "parser_version": "submission-fields-20",
+        "deadline_kind": "letter_of_intent",
+        "stage": "letter_of_intent",
+        "date": null,
+        "time": null,
+        "timezone": null,
+        "required": true,
+        "obligation": "required",
+        "application_class": "unspecified",
+        "invitation_required": null,
+        "prerequisite": null,
+        "requirement_citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061#page=27",
+          "document_name": "Regional State Groups NOFO Part 1-DE-FOA-0003617-001.pdf",
+          "sha256": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+          "page": 27,
+          "section": null,
+          "location": "page 27",
+          "quote": "…al_State_Tribal_Groups@id.doe.gov DOE will not review or consider submissions submitted that: • Are submitted after the due date and time • Are incomplete If required, you must submit a letter of intent and a concept paper by 6:00 p.m. EST on the due date listed in the Key Facts section to be eligible to submit an application. 2. Technical Review Criteria…",
+          "extracted_at": "2026-09-18T14:34:23.114218Z",
+          "structural_reference": {
+            "block_id": "pdf-27-38",
+            "kind": "line"
+          }
+        }
+      },
+      {
+        "id": "evidence-363757-b6e09a32428f",
+        "type": "cost_share",
+        "label": "Cost sharing",
+        "value": true,
+        "display_value": "Required",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061#page=7",
+          "document_name": "Regional State Groups NOFO Part 1-DE-FOA-0003617-001.pdf",
+          "sha256": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+          "page": 7,
+          "section": null,
+          "location": "page 7",
+          "quote": "…rn Region • Approximate total available funding: $1,700,000.00 • Approximate number of awards: 1 • Approximate dollar amount of individual awards: $1,400,000.00–$1,700,000.00 • Minimum cost share required: No cost share for this project • Approximate award project period: 60 Months • Anticipated length of budget periods: 12 Months Topic Area 2: Midwestern…",
+          "extracted_at": "2026-09-18T14:34:23.114218Z",
+          "structural_reference": {
+            "block_id": "pdf-7-34",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "cost_share",
+        "parser_version": "cost-obligation-1",
+        "obligation": "required",
+        "negated": false
+      },
+      {
+        "id": "evidence-363757-5c03d7fc3982",
+        "type": "cost_share",
+        "label": "Cost sharing",
+        "value": false,
+        "display_value": "Not required",
+        "confidence": "machine_extracted_needs_verification",
+        "citation": {
+          "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
+          "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061#page=10",
+          "document_name": "Regional State Groups NOFO Part 1-DE-FOA-0003617-001.pdf",
+          "sha256": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+          "page": 10,
+          "section": null,
+          "location": "page 10",
+          "quote": "…timated cost share commitments you proposed in your application if selected for award negotiations. You can find more information on cost sharing in NOFO Part 2, Eligibility. 1. Cost Share Requirements Cost sharing is not required under this NOFO.",
+          "extracted_at": "2026-09-18T14:34:23.114218Z",
+          "structural_reference": {
+            "block_id": "pdf-10-44",
+            "kind": "line"
+          }
+        },
+        "fact_contract": "typed-notice-facts-1",
+        "source_authority": "machine_extracted_official_document",
+        "subject": "cost_share",
+        "parser_version": "cost-obligation-1",
+        "obligation": "not_required",
+        "negated": true
+      }
+    ]
+  }
+}

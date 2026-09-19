@@ -7,7 +7,7 @@ Unknown qualifiers remain unknown rather than becoming an asserted obligation.
 import re
 
 SEMANTIC_VERSIONS = {
-    "amounts": "award-basis-11", "cost_share": "cost-obligation-1",
+    "amounts": "award-basis-11", "cost_share": "cost-obligation-2",
     "sections": "substantive-section-2", "components": "component-owner-3",
     "limits": "submission-subject-1", "status": "notice-subject-2",
 }
@@ -651,15 +651,27 @@ def cost_share_facts(api, opportunity_id, containers, document, stamp):
         after = next((normalized[m.end():] for m in api.COST_SHARE_RE.finditer(normalized)
                       if re.match(r"\s*(?:is\s+|are\s+)?(?:not|optional|required|mandatory|must)\b", normalized[m.end():], re.I)), "")
         obligation, value, display = "unknown", None, None
+        field = re.search(r'\b(?:minimum\s+)?cost[\s-]+shar(?:e|ing)\s+required\s*:\s*(.*)', normalized, re.I)
         native_answer = re.search(r'\bcost sharing required\?\s*(Yes|No)\b', normalized, re.I)
         if not native_answer and re.search(r'\bcost sharing required\?', normalized, re.I):
             continue
-        if native_answer:
+        if field:
+            # "Required" belongs to the question, not its answer. Preserve
+            # unknown answers rather than turning the label into an obligation.
+            answer = field.group(1)
+            if re.match(r'(?:none\b|not\s+required\b|no(?=\s*(?:[.;]|$))|no\s+cost[\s-]+shar(?:e|ing)\b)', answer, re.I):
+                value = False
+            elif re.match(r'yes\b|(?:(?:at\s+least|no\s+less\s+than)\s+)?[1-9]\d*(?:\.\d+)?\s*%', answer, re.I):
+                value = True
+            else:
+                continue
+            obligation, display = ('required', 'Required') if value else ('not_required', 'Not required')
+        elif native_answer:
             value = native_answer.group(1).casefold() == 'yes'
             obligation, display = ('required', 'Required') if value else ('not_required', 'Not required')
         elif re.search(r"\bvoluntary\s+committed\s+cost\s+sharing\s+is\s+prohibited\b", normalized, re.I):
             obligation, value, display = "voluntary_committed_prohibited", False, "Voluntary committed cost sharing prohibited"
-        elif re.search(r"^\s*(?:is\s+|are\s+)?(?:not\s+(?:an?\s+eligibility\s+requirement|required)|optional|not\s+mandatory)\b", after, re.I) or re.search(r"\bno\s+cost\s+sharing\s+(?:is\s+)?required\b", normalized, re.I):
+        elif re.search(r"^\s*(?:is\s+|are\s+)?(?:not\s+(?:an?\s+eligibility\s+requirement|required)|optional|not\s+mandatory)\b", after, re.I) or re.search(r"\bno\s+cost[\s-]+shar(?:e|ing)\s+(?:is\s+)?required\b", normalized, re.I):
             obligation, value, display = "not_required", False, "Not required"
         elif re.search(r"^\s*(?:is\s+|are\s+)?(?:required|mandatory|must\s+be\s+provided)\b", after, re.I):
             obligation, value, display = "required", True, "Required"
