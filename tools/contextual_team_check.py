@@ -132,7 +132,9 @@ def main():
     p.add_argument('--state',type=Path,required=True);p.add_argument('--reservation',type=Path)
     p.add_argument('--result',type=Path);args=p.parse_args();existing.trusted_environment()
     requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
-    if isinstance(requested,dict) and 'luna_contract_repair' in requested:
+    if isinstance(requested,dict) and 'compact_check_continuation' in requested:
+        from tools.contextual_team_compact_check import run
+    elif isinstance(requested,dict) and 'luna_contract_repair' in requested:
         from tools.contextual_team_luna_repair import run
     elif isinstance(requested,dict) and 'requirements_latency' in requested:
         from tools.contextual_team_latency_check import run
