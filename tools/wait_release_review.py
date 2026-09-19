@@ -74,7 +74,15 @@ def parsed_time(value):
 
 def reviewed_head(repository, body, head):
     match = re.search(r'Reviewed commit:?\*{0,2}:?\s*`?([a-f0-9]{10,40})\b', body)
-    if not match or not head.startswith(match[1]):
+    if not match:
+        # Current top-level findings identify their immutable head using full
+        # GitHub source links. A status-summary abbreviation is not completion.
+        linked = set(re.findall(r'https://github\.com/' + re.escape(repository)
+                               + r'/blob/([a-f0-9]{40})/', body))
+        # This fallback only recognizes blocking findings. It can never turn
+        # a link in an acknowledgement or an unanchored clean message into approval.
+        return linked == {head} and bool(re.search(r'\bP[012]\b', body))
+    if not head.startswith(match[1]):
         return False
     if match[1] == head:
         return True
