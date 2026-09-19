@@ -11,7 +11,10 @@ from tools import release_candidate as c
 def prepare_or_defer(bundle, receipt, reports, artifact_run):
     """Only missing review is a non-serving checkpoint; all other errors fail."""
     try:
-        result = prepare(bundle, receipt, reports, artifact_run, review_timeout=90)
+        # Repository-wide automatic review now covers bot-created candidates.
+        # Allow the established bounded review window inside the 45-minute job;
+        # a slower review still preserves the non-serving pending checkpoint.
+        result = prepare(bundle, receipt, reports, artifact_run, review_timeout=1800)
     except ReviewPending as pending:
         manifest = c.load(bundle)
         result = {'schema_version': 1, 'status': 'awaiting_review',
