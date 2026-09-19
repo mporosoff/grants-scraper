@@ -1,0 +1,86 @@
+{
+  "schema_version": 1,
+  "recorded_at": "2026-09-19T16:05:57.842158+00:00",
+  "status": "repair_merged_publication_blocked_upstream",
+  "repair_pr": 263,
+  "reviewed_head": "54f7356066b6847fcf3483ba9d877516c36fc061",
+  "review_summary_comment": 5735619005,
+  "review_completed_at": "2026-09-19T15:58:28.667157Z",
+  "review_positive_reaction_at": "2026-09-19T15:58:31Z",
+  "review_clean": true,
+  "required_ci_run": 35453243454,
+  "python_tests": 1503,
+  "browser_contracts": 796,
+  "frozen_artifacts": 23,
+  "hermeticity_tests": 24,
+  "repair_merge": "e6692238f3bbc1603f7b1549d96360f4c42cd6ed",
+  "merged_at": "2026-09-19T16:00:17Z",
+  "post_merge_tests": 35453554271,
+  "post_merge_tests_status": "success",
+  "release_run": 35453554431,
+  "release_status": "failure_at_source_download",
+  "candidate_created": false,
+  "catalog_published": false,
+  "serving_mutation": false,
+  "product_reconciliation": "20e1708a1e0a681bf80235329b378782d3585399",
+  "product_focused_regressions": 6,
+  "e2e": "not_run",
+  "publication_review_settings": {
+    "authors": "all_prs",
+    "trigger": "every_push"
+  },
+  "source_blocker": {
+    "url": "https://www.grants.gov/xml-extract",
+    "observed_redirect": "https://grants-gov.blogspot.com:443/",
+    "announcement": "https://grants-gov.blogspot.com/2026/09/maintenance-alert-for-september-19-21.html",
+    "announced_return": "2026-09-21T06:00:00-04:00",
+    "failure": "No enhanced Grants.gov XML extract link was found."
+  },
+  "ledgers": [
+    {
+      "run": 35447171113,
+      "logical_id": "offline-35447171113",
+      "sha256": "ce2b1954ebf33c582cc0a6cf5ad62a7983ebf3cc97a8c01bd11d501e8aafa1b0",
+      "requests": 0,
+      "events": 0,
+      "charged_microusd": 0
+    },
+    {
+      "run": 35453554431,
+      "logical_id": "offline-35453554431",
+      "sha256": "9b5723549908c6ddbf27815ca04fc9fcfbe3e185cfd1e2ebd621ee3964694f3e",
+      "requests": 0,
+      "events": 0,
+      "charged_microusd": 0
+    }
+  ],
+  "new_experiment_requests": 0,
+  "new_experiment_microusd": 0,
+  "experimental_activation": false,
+  "live_observation": {
+    "checked_at": "2026-09-19T16:01:56.867201+00:00",
+    "files": {
+      "data/opportunities.js": {
+        "sha256": "bf9db897dc2d23c0a7be119279b40014adfb1ec5e62ddc1696ac0738bf52eff5",
+        "bytes": 14605726
+      },
+      "release/candidate.json": {
+        "sha256": "a7e3624fa5da8ae472a8ce8aeb0aae92dee1f0f368f8715197b679cad652223e",
+        "bytes": 130481
+      },
+      "data/search-v2-release.json": {
+        "sha256": "e86a587d6361d7b3245a7728d2ece94680abbbfad0b890eaeb473bc3b616db91",
+        "bytes": 4578
+      }
+    },
+    "catalog": {
+      "generated_at": "2026-09-17T21:45:36.229174Z",
+      "record_count": 1391
+    },
+    "candidate_id": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+    "candidate_catalog_sha256": "bf9db897dc2d23c0a7be119279b40014adfb1ec5e62ddc1696ac0738bf52eff5",
+    "catalog_hash_matches_manifest": true
+  },
+  "superseded_failed_pr": 262,
+  "end_to_end_automatic_publication": "unmeasured_source_unavailable"
+}

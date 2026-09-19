@@ -1,6 +1,18 @@
 # Funding Finder — current repair status
 
-Updated September 18, 2026. This is the current handoff; earlier checkpoints below are history.
+Updated September 19, 2026. This is the current handoff; earlier checkpoints below are history.
+
+## Automatic publication repair merged; upstream maintenance blocks the next catalog
+
+PR #263 is protected-merged as `e6692238f3bbc1603f7b1549d96360f4c42cd6ed` after clean exact-head automatic review and passing required CI: 1,503 Python tests, 796 browser contracts, and frozen gates. Bot-authored automatic review is restored, conditional DOE prerequisites/cost-share parsing are repaired, and the checked parser fingerprints are updated. Product reconciliation is `20e1708a1e0a681bf80235329b378782d3585399`. No owner catalog-reading task is required.
+
+Automatic post-merge release **35453554431** stopped before candidate creation because Grants.gov's extract endpoint redirects to its announced September 19–21 maintenance notice (expected return September 21 at 06:00 Eastern). The same upstream failure affected scheduled run35447171113. Both durable ledgers have zero requests/events; no new provider spending or serving change occurred. The public September17 catalog still contains1,391 records and its bytes match its immutable manifest as checked September19 at16:01:56 UTC.
+
+PR #262's automatic review completed with two source findings; it is **rejected, not awaiting review or approved**, and remains unpublished with its evidence preserved. The repaired parser dependencies require a new compatible candidate. Existing daily automation can resume after source recovery; do not repeatedly dispatch during the outage, substitute old data as fresh, or bypass review. End-to-end publication under the restored configuration remains unverified until that release completes. No new owner approval is needed for the already-authorized continuation.
+
+See [the exact repair/outage checkpoint](reconciliation/automatic-publication-closeout-20260919.md), [receipt](reconciliation/automatic-publication-closeout-20260919.json), and [experiment state](team-recommender/experiment-state.json). Scientific checker, audited-registry and activation boundaries below are unchanged.
+
+## September 18 publication closeout — historical
 
 ## Deadline repair published and verified
 

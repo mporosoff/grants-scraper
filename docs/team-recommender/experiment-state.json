@@ -160,7 +160,7 @@
     "helper_head": "0422356ca3f901ff7ae98d96d22781963885714e",
     "required_ci_run": 34965952818
   },
-  "containing_commit": "Documentation-only commit introducing docs/reconciliation/targeted-checker-catalog-20260915.md after code 346385e9d6c499634a9e9852c893e90d60f7258a.",
+  "containing_commit": "Documentation checkpoint introducing automatic-publication-closeout-20260919 after product reconciliation 20e1708a1e0a681bf80235329b378782d3585399.",
   "continuation": {
     "C2": {
       "additional_repair_rounds_authorized": 2,
@@ -6768,7 +6768,7 @@
   },
   "model": "Unchanged contextual candidate; completed Sonnet 5 thinking-disabled retrospective checks: strong/plausible/plausible individuals, plausible group, three faithful explanations.",
   "next_allowed_stage": null,
-  "next_stage_requires": "New owner instruction for scientific checker recovery/dispatch or registry activation; no allowance or Stage4 approval inferred. Newer catalog PR262 remains awaiting its own review.",
+  "next_stage_requires": "Official extract recovery. Continue already-authorized publication without new owner catalog review; inspect scheduled progress before any manual retry. No scientific checker, registry or experimental activation authority is added.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
@@ -7132,9 +7132,9 @@
     "path": "docs/team-recommender/contextual-stage-b/luna-repair-closeout-v1.json",
     "sha256": "d7f66195c3e3a5e6342ce9507276751860f3b7aec8df9bfc3b6873f8c718230f"
   },
-  "recommendation": "Completed catalog deadline/publication repair. Connected-maintainer review initiation remains required; no experimental activation.",
+  "recommendation": "Reviewed repair merged. Official Grants.gov maintenance prevents source generation; preserve verified live catalog until a new compatible candidate completes automatic review/publication.",
   "recommended_next_stage": "STOP FOR USER REVIEW",
-  "report": "docs/reconciliation/catalog-deadline-publication-20260918.md",
+  "report": "docs/reconciliation/automatic-publication-closeout-20260919.md",
   "repository": "mporosoff/grants-scraper",
   "results": {
     "contextual_counts": {
@@ -7475,7 +7475,7 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "catalog_repair_published_live_verified",
+  "stage_status": "repair_merged_publication_blocked_upstream",
   "stop": true,
   "unresolved": [
     "New checker HTTP400: compiled grammar too large. All24 pair verdicts and12 derived person outcomes are missing. No new check/retry is authorized.",
@@ -7483,7 +7483,7 @@
     "Historical checker fc618603458249348c6834d258264520 remains unknown usage with $0.146074 held; original cause and verdicts remain unavailable.",
     "The valid Luna assessment is unverified; no scientific route selection, production graph, corrected DOE workflow, full cold-workflow latency or new explanation/team qualification follows."
   ],
-  "updated_at": "2026-09-18T19:42:45.738936+00:00",
+  "updated_at": "2026-09-19T16:05:57.842158+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -9464,7 +9464,7 @@
       }
     }
   },
-  "active_work": "catalog_deadline_publication_closeout",
+  "active_work": "automatic_catalog_publication_repair",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -10497,5 +10497,35 @@
     "newer_scheduled_pr": 262,
     "newer_scheduled_status": "awaiting_review_not_published",
     "stop_for_user_review": true
+  },
+  "historical_pre_automatic_publication": {
+    "active_work": "catalog_deadline_publication_closeout",
+    "stage_status": "catalog_repair_published_live_verified",
+    "report": "docs/reconciliation/catalog-deadline-publication-20260918.md",
+    "recommendation": "Completed catalog deadline/publication repair. Connected-maintainer review initiation remains required; no experimental activation.",
+    "next_stage_requires": "New owner instruction for scientific checker recovery/dispatch or registry activation; no allowance or Stage4 approval inferred. Newer catalog PR262 remains awaiting its own review.",
+    "stop": true,
+    "updated_at": "2026-09-18T19:42:45.738936+00:00",
+    "containing_commit": "Documentation-only commit introducing docs/reconciliation/targeted-checker-catalog-20260915.md after code 346385e9d6c499634a9e9852c893e90d60f7258a."
+  },
+  "automatic_catalog_publication": {
+    "report": "docs/reconciliation/automatic-publication-closeout-20260919.md",
+    "receipt": "docs/reconciliation/automatic-publication-closeout-20260919.json",
+    "repair_pr": 263,
+    "repair_merge": "e6692238f3bbc1603f7b1549d96360f4c42cd6ed",
+    "product_code": "20e1708a1e0a681bf80235329b378782d3585399",
+    "release_run": 35453554431,
+    "release_status": "failure_at_source_download",
+    "live_candidate_id": "eea186246ffe73abb2f55294c99d03f08718e388d29ec2a0eaa42a010c1b0e62",
+    "live_catalog_records": 1391,
+    "new_provider_requests": 0,
+    "new_provider_microusd": 0,
+    "new_experiment_requests": 0,
+    "new_experiment_microusd": 0,
+    "experimental_activation": false,
+    "owner_catalog_review_required": false,
+    "completion_blocked_by": "official_source_maintenance",
+    "expected_source_return": "2026-09-21T06:00:00-04:00",
+    "new_approval_required_for_authorized_continuation": false
   }
 }
