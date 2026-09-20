@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-17T21:53:50.058Z",
+  "generated_at": "2026-09-20T14:22:01.837Z",
   "canary_set_version": 1,
   "model_alias": "voyage-4-lite",
   "response_model": "voyage-4-lite",
@@ -15,7 +15,31 @@
   "batch_space_checks": [
     {
       "exact_match": false,
+      "minimum_cosine": 0.99997,
+      "mean_cosine": 0.999974,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
       "minimum_cosine": 0.999963,
+      "mean_cosine": 0.999972,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999967,
+      "mean_cosine": 0.999971,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999961,
+      "mean_cosine": 0.99997,
+      "gross_discontinuity": false
+    },
+    {
+      "exact_match": false,
+      "minimum_cosine": 0.999961,
       "mean_cosine": 0.99997,
       "gross_discontinuity": false
     },
@@ -23,30 +47,6 @@
       "exact_match": false,
       "minimum_cosine": 0.999967,
       "mean_cosine": 0.999971,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999967,
-      "mean_cosine": 0.999975,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999967,
-      "mean_cosine": 0.999973,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.999967,
-      "mean_cosine": 0.999971,
-      "gross_discontinuity": false
-    },
-    {
-      "exact_match": false,
-      "minimum_cosine": 0.99997,
-      "mean_cosine": 0.999973,
       "gross_discontinuity": false
     }
   ],

@@ -3289,21 +3289,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "340828": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "341086": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "341244": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -3325,13 +3311,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "342959": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "343166": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -10839,13 +10818,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "344610": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "344715": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -11753,13 +11725,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "345872": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "345938": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -11768,13 +11733,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "346203": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "346204": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -11823,13 +11781,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "347749": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "347858": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -11845,13 +11796,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "348164": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "348258": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -17010,20 +16954,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "358963": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "358964": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "358967": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -17102,13 +17032,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "359130": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "359132": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -21010,13 +20933,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360458": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "360510": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27599,13 +27515,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361380": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "361394": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -33784,6 +33693,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "361999": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "362014": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34533,13 +34449,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362671": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362672": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34687,13 +34596,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362848": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362849": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34702,13 +34604,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362850": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362851": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35192,13 +35087,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362962": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362965": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35388,27 +35276,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363101": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363102": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363103": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363107": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35549,13 +35416,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363180": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363189": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35637,13 +35497,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_extractable_text",
-   "subtopics": []
-  },
-  "363229": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363232": {
@@ -35732,13 +35585,6 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
-  },
-  "363260": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363268": {
@@ -37779,7 +37625,6 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363533": {
@@ -38477,13 +38322,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363662": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363663": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -38701,13 +38539,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363711": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363712": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -38842,19 +38673,21 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "93f91f52882d964b0bd6517b025e4ad957b1e55776d7ac1c4335468722b34a0c",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p6",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p7",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-09-02",
-     "last_verified": "2026-09-02",
+     "last_verified": "2026-09-20",
      "opportunity_id": "363757:ta-1",
      "ordinal_label": "1",
      "own_deadline": null,
      "own_deadline_is_advisory": true,
-     "page_end": 6,
-     "page_start": 6,
+     "page_end": 7,
+     "page_start": 7,
      "parent_id": "363757",
      "parent_opportunity_number": "DE-FOA-0003617",
      "pattern_family": "topic_area",
@@ -38863,8 +38696,8 @@ globalThis.SUBTOPIC_CATALOG={
      "publication_state": "review",
      "record_type": "subtopic",
      "segmentation_method": "heading_font",
-     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_document_hash": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
      "source_role": "authoritative_announcement",
      "status": "posted",
      "subtopic_code": "Topic Area 1",
@@ -38909,19 +38742,21 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "65bbaf65515cb4263ce3ac1c2618968e86280f74390851046649ef238b375f28",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p6",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p7",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-09-02",
-     "last_verified": "2026-09-02",
+     "last_verified": "2026-09-20",
      "opportunity_id": "363757:ta-2",
      "ordinal_label": "2",
      "own_deadline": null,
      "own_deadline_is_advisory": true,
-     "page_end": 6,
-     "page_start": 6,
+     "page_end": 7,
+     "page_start": 7,
      "parent_id": "363757",
      "parent_opportunity_number": "DE-FOA-0003617",
      "pattern_family": "topic_area",
@@ -38930,8 +38765,8 @@ globalThis.SUBTOPIC_CATALOG={
      "publication_state": "review",
      "record_type": "subtopic",
      "segmentation_method": "heading_font",
-     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_document_hash": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
      "source_role": "authoritative_announcement",
      "status": "posted",
      "subtopic_code": "Topic Area 2",
@@ -38976,19 +38811,21 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "135c70eaef5f1e70865359b7381b9075420b443d28d8d19d8047dcfeb0756085",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p6",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p7",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-09-02",
-     "last_verified": "2026-09-02",
+     "last_verified": "2026-09-20",
      "opportunity_id": "363757:ta-3",
      "ordinal_label": "3",
      "own_deadline": null,
      "own_deadline_is_advisory": true,
-     "page_end": 7,
-     "page_start": 6,
+     "page_end": 8,
+     "page_start": 7,
      "parent_id": "363757",
      "parent_opportunity_number": "DE-FOA-0003617",
      "pattern_family": "topic_area",
@@ -38997,8 +38834,8 @@ globalThis.SUBTOPIC_CATALOG={
      "publication_state": "review",
      "record_type": "subtopic",
      "segmentation_method": "heading_font",
-     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_document_hash": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
      "source_role": "authoritative_announcement",
      "status": "posted",
      "subtopic_code": "Topic Area 3",
@@ -39043,19 +38880,21 @@ globalThis.SUBTOPIC_CATALOG={
     {
      "child_type": "subject",
      "confidence": "low",
+     "cov4_approval_contract": "fb702a2e5447034981635dee3df7b0baea4839c6e16eb7e2a092fab78957e83f",
      "cov4_fundability": "accept",
      "cov4_ownership": "owned",
      "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p7",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p8",
      "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
      "first_seen": "2026-09-02",
-     "last_verified": "2026-09-02",
+     "last_verified": "2026-09-20",
      "opportunity_id": "363757:ta-4",
      "ordinal_label": "4",
      "own_deadline": null,
      "own_deadline_is_advisory": true,
-     "page_end": 7,
-     "page_start": 7,
+     "page_end": 8,
+     "page_start": 8,
      "parent_id": "363757",
      "parent_opportunity_number": "DE-FOA-0003617",
      "pattern_family": "topic_area",
@@ -39064,8 +38903,8 @@ globalThis.SUBTOPIC_CATALOG={
      "publication_state": "review",
      "record_type": "subtopic",
      "segmentation_method": "heading_font",
-     "source_document_hash": "5589c78ce3035f02acde70acf0f0cd25813d37b7a6b798a5f98368928d27db7f",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354900",
+     "source_document_hash": "ca315dae30c47eaa8bb4f2ac6cc5ae6458c2fd93794b799072363a6fdf4e4447",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355061",
      "source_role": "authoritative_announcement",
      "status": "posted",
      "subtopic_code": "Topic Area 4",
@@ -39291,21 +39130,18 @@ globalThis.SUBTOPIC_CATALOG={
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_extractable_text",
    "subtopics": []
   },
   "363791": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_extractable_text",
    "subtopics": []
   },
   "363792": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_extractable_text",
    "subtopics": []
   },
   "363796": {
@@ -39693,13 +39529,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363868": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363869": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -39862,6 +39691,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "nsf-cbet:PD-26-370Y": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nsf-funding:https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40176,6 +40012,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "vpr-email:NSF26-511": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "vpr-email:NSF26-512": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40191,6 +40034,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "vpr-email:PAR-27-032": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "vpr-email:infoready-1993899": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
