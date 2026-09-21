@@ -340,7 +340,7 @@
       return API.loadData(generationId,contextual?{parentId:current.parentId,scopeId:current.scopeId,
         record:catalogRecord(current.parentId),childCatalog:childCatalog,now:new Date(),personId:options.personId||"",
         deliberate:options.deliberate===true,signal:current.contextualAbort.signal,
-        onStatus:function(){if(reconcile(current))current.panel.querySelector('.opportunity-team-body').innerHTML='<p>Assessing the call and relevant researcher evidence. This may take a few minutes…</p>';}}:undefined);
+        onStatus:function(){if(current.scopeSequence===sequence&&reconcile(current))current.panel.querySelector('.opportunity-team-body').innerHTML='<p>Assessing the call and relevant researcher evidence. This may take a few minutes…</p>';}}:undefined);
     }).then(function (data) {
       if (!reconcile(current) || current.scopeSequence !== sequence) return;
       if (API.pageGenerationId() !== generationId) throw new Error("Superseded team package.");

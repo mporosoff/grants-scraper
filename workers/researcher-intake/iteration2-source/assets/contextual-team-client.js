@@ -1,7 +1,7 @@
 /* Restricted contextual graph loading. Only an explicit Build/Assess may POST. */
 (function(g){
   'use strict';
-  const VERSION='contextual-client-v2',ENDPOINT='https://funding-finder-researchers.urochestercheme.workers.dev/admin/api/contextual';
+  const VERSION='contextual-client-v3',ENDPOINT='https://funding-finder-researchers.urochestercheme.workers.dev/admin/api/contextual';
   const cache=new Map(),pending=new Map(),encoder=new TextEncoder();
   const incidental=new Set(['detail_checked_at','checked_at','retrieved_at','verified_on','reviewed_on','last_verified','first_seen','last_seen','updated_at']);
   const substantive=v=>Array.isArray(v)?v.map(substantive):v&&typeof v==='object'
@@ -11,6 +11,29 @@
   const assert=(v,message)=>{if(!v)throw Error(message);};
   const pick=(v,fields)=>Object.fromEntries(fields.filter(k=>v[k]!==undefined).map(k=>[k,v[k]]));
   function still(options){assert(!options.signal?.aborted,'contextual_cancelled');}
+  function subscribe(entry,options){
+    return new Promise((resolve,reject)=>{
+      let settled=false;
+      const finish=(callback,value)=>{
+        if(settled)return;
+        settled=true;entry.waiters.delete(waiter);
+        options.signal?.removeEventListener('abort',abort);
+        callback(value);
+      };
+      const abort=()=>finish(reject,Error('contextual_cancelled'));
+      const waiter={options,fail:error=>finish(reject,error)};
+      entry.waiters.add(waiter);
+      options.signal?.addEventListener('abort',abort,{once:true});
+      entry.promise.then(value=>finish(resolve,value),error=>finish(reject,error));
+      if(options.signal?.aborted)abort();
+    });
+  }
+  function notify(entry,state){
+    for(const waiter of Array.from(entry.waiters)){
+      if(waiter.options.signal?.aborted)continue;
+      try{waiter.options.onStatus?.(state);}catch(error){waiter.fail(error);}
+    }
+  }
   async function read(url,options,fetcher){
     const response=await fetcher(url,{credentials:'include',redirect:'error',cache:'no-store',...options});
     if(response.status===401)throw Error('contextual_administrator_access_required');
@@ -71,24 +94,25 @@
     const ids={release_id:index.release_id,scope_id:scope.id,person_id:person};
     let graph=cache.get(key);
     if(!graph){
-      if(!pending.has(key)){
+      let entry=pending.get(key);
+      if(!entry){
         const fetcher=options.fetcher||(index.transport==='access-window-v1'?g.ContextualTeamAccess?.fetch:g.fetch.bind(g));
         assert(typeof fetcher==='function','contextual_access_transport_unavailable');
-        // The shared finite server job survives a detached panel. No AbortSignal
-        // is placed on the cross-user workflow or on another panel's promise.
-        const task=(async()=>{
+        // One finite task is independent of its display subscribers. Closing a
+        // panel cancels only that subscriber, never another viewer or the job.
+        entry={waiters:new Set(),promise:null};
+        entry.promise=Promise.resolve().then(async()=>{
           let value=await read(ENDPOINT+'/jobs?'+new URLSearchParams(ids),{},fetcher);
-          if(value.state==='unassessed'&&options.deliberate===true){
-            still(options);
+          if(value.state==='unassessed'&&Array.from(entry.waiters).some(
+            waiter=>waiter.options.deliberate===true&&!waiter.options.signal?.aborted)){
             // A simple request keeps the existing Access login in charge; no
             // unauthenticated preflight bypass or credential export is needed.
             value=await read(ENDPOINT+'/jobs',{method:'POST',headers:{'Content-Type':'text/plain;charset=UTF-8'},body:JSON.stringify(ids)},fetcher);
           }
           for(let count=0;['dispatch_claimed','in_progress'].includes(value.state)&&count<168;count++){
-            // Polls are reads only. A closed panel abandons display, not the
-            // paid server job; a later visitor can retrieve its completion.
-            if(options.signal?.aborted)throw Error('contextual_cancelled');
-            options.onStatus?.(value.state);
+            // Continue bounded reads after dispatch, including while detached.
+            // A reopening viewer joins this task and receives its own updates.
+            notify(entry,value.state);
             // One-second delivery checks during the 60-second proof window;
             // then back off. The previous ten-minute total wait remains bounded.
             await (options.wait||((ms)=>new Promise(resolve=>setTimeout(resolve,ms))))(count<60?1000:5000);
@@ -104,10 +128,10 @@
           assert(result.source_id===scope.source_id&&result.roster_id===index.roster_id,'contextual_graph_dependencies_conflict');
           cache.set(key,result);if(cache.size>16)cache.delete(cache.keys().next().value);
           return result;
-        })().finally(()=>pending.delete(key));
-        pending.set(key,task);
+        }).finally(()=>{if(pending.get(key)===entry)pending.delete(key);});
+        pending.set(key,entry);
       }
-      graph=await pending.get(key);
+      graph=await subscribe(entry,options);
     }
     still(options);
     assert(g.RESEARCHER_DIRECTORY===directory,'contextual_profile_pool_replaced');
