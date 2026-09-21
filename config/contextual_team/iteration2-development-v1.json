@@ -1035,7 +1035,7 @@
   "selection_clock": "2026-09-21T18:32:11Z",
   "selection_uses_new_scientific_outputs": false,
   "source_inputs_path": "config/contextual_team/iteration2-source-inputs-v1.json",
-  "source_inputs_sha256": "b3e2dcd95722eca8674b0be0cd7155f5d492e2893221bc835afa1202d2bcef4a",
+  "source_inputs_sha256": "28f97ee2c0b55c19d7c41ca9233b6fe442f88735aa12657014e44983884f6825",
   "split": "development",
   "version": "funding-finder-iteration2-development-v1"
 }

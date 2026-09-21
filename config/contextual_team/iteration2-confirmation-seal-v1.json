@@ -5,7 +5,7 @@
     "scopes": 12
   },
   "denominator_policy": "Twelve original slots remain visible; source-ineligible replacements and their reasons are recorded separately, not hidden. Independent full-directory feasibility labels are required for a feasible-scope yield denominator; shortlist outcomes cannot certify infeasibility. Missing judgments remain missing; no rates are inferred now.",
-  "development_manifest_sha256": "e12a19bc16686f58768c84299982b6a49a61632e01b4466715c968fed707d52c",
+  "development_manifest_sha256": "2bcd26f69a8118cde40cda148e647a7674491e469d517ee4f9bb3a1bea94f0bb",
   "related_family_rule": "Same official program/reissue/successor/companion or identified closely related scope family, plus historical corrected C2 group closure; not merely sharing a broad discipline or technique. No same-family alternative may fill another confirmation slot.",
   "replacement_policy": {
     "allowed_triggers": [
@@ -1089,11 +1089,11 @@
       "title": "Ethical, Legal and Social Implications (ELSI) Research (R01 Clinical Trial Optional)"
     }
   ],
-  "seal_sha256": "099cd0554a995ad1c8a1e88f60541e1f514aa9d9aaa24a26be76fc30ad74eb01",
+  "seal_sha256": "514e935e5157a8ea961fec25a9ce648d624a02668c6720ded944c78c2b336520",
   "selected_before_new_paid_scoring": true,
   "selection_clock": "2026-09-21T18:32:11Z",
   "source_selection_audit_path": "outputs/iteration2-20260921/source-selection-audit-draft.json",
-  "source_selection_audit_sha256": "4e2cf3898a593f038cd4f146cdfabe26f7a399a14e1ccac1be143a4f7c39711c",
+  "source_selection_audit_sha256": "207f8feceb6246e961b12d3ae6cc2feef29b4e8b643ca342696c85b6f7fdf709",
   "source_selection_only": true,
   "split": "confirmation-reserved-for-iteration4",
   "version": "funding-finder-iteration2-confirmation-v1"

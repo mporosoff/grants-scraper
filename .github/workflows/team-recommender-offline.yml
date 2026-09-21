@@ -118,7 +118,7 @@ jobs:
         if: steps.contextual_prepare.outcome == 'success'
         env:
           ANTHROPIC_API_KEY: ${{ steps.contextual_prepare.outputs.text_provider != 'openai' && secrets.ANTHROPIC_API_KEY || '' }}
-          OPENAI_API_KEY: ${{ steps.contextual_prepare.outputs.text_provider == 'openai' && secrets.OPENAI_API_KEY || '' }}
+          OPENAI_API_KEY: ${{ (steps.contextual_prepare.outputs.text_provider == 'openai' || steps.contextual_prepare.outputs.text_provider == 'mixed') && secrets.OPENAI_API_KEY || '' }}
           VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
           CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
         run: >-
@@ -134,6 +134,7 @@ jobs:
         run: >-
           python -m tools.contextual_team_check execute
           --state "$RUNNER_TEMP/team-experiment" --result "$RUNNER_TEMP/contextual-check-result.json"
+          --reservation "$RUNNER_TEMP/team-reservation.json"
       - name: Retain exact accounting and bounded results after success or failure
         id: persist_state
         if: always() && (steps.prepare.outcome == 'success' || steps.contextual_prepare.outcome == 'success' || steps.contextual_check_prepare.outcome == 'success')

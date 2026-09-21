@@ -1,8 +1,8 @@
 {
   "version": "funding-finder-iteration2-20260921-v1",
   "authorization_id": "on-demand-team-offline-v2-20260909",
-  "development_manifest_sha256": "e12a19bc16686f58768c84299982b6a49a61632e01b4466715c968fed707d52c",
-  "source_inputs_sha256": "b3e2dcd95722eca8674b0be0cd7155f5d492e2893221bc835afa1202d2bcef4a",
+  "development_manifest_sha256": "2bcd26f69a8118cde40cda148e647a7674491e469d517ee4f9bb3a1bea94f0bb",
+  "source_inputs_sha256": "28f97ee2c0b55c19d7c41ca9233b6fe442f88735aa12657014e44983884f6825",
   "scope_ids": [
     "351715",
     "363302:a-1",
@@ -77,7 +77,7 @@
     }
   },
   "no_second_allowance": true,
-  "confirmation_seal_sha256": "dab4f63ea44d6f8a6a96006c7581e2a7c5dcb2ae162b0470de3581bd4887350e",
-  "source_selection_sha256": "4e2cf3898a593f038cd4f146cdfabe26f7a399a14e1ccac1be143a4f7c39711c",
-  "release_id": "553653bb8cb1a8759db952fbdbe526abcddd14a00e89c9910026fe45b005591b"
+  "confirmation_seal_sha256": "62701c827cd10d026820a6bf54c2a6e28e659282dcee0aebcf436f94e12c2fcd",
+  "source_selection_sha256": "207f8feceb6246e961b12d3ae6cc2feef29b4e8b643ca342696c85b6f7fdf709",
+  "release_id": "f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2"
 }
