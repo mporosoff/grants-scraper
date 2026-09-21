@@ -62,3 +62,37 @@ stops remain in force. Public recommender activation, registry cutover, legacy
 withdrawal, recurring public paid usage, later iterations and full E2E/Playwright
 execution remain disabled. A successful check is an offline independent result,
 not production verification or a release decision.
+
+## Exact retained-response recovery
+
+The real strict request in run `35631615659`, from protected code
+`5868429daec2128aaa0ded1f503b62573638048d`, returned HTTP 200 and a complete
+`end_turn` answer. The provider accepted the shared grammar. Its 24 rows used
+original canonical claim IDs and revisions instead of the requested short
+addresses; local validation correctly stopped at `answer_claim_owner_or_revision`.
+The original request `2953527aba83416aa82288888e002d4b` remains failed, with its
+known $0.077466 charge, original receipt and complete diagnostic unchanged.
+This failure does not qualify for the predeclared grammar fallback.
+
+The owner's diagnosed-correction authority covers the separate
+`iteration1-canonical-claim-alias-recovery-v1` validator. It authenticates the
+terminal run and pins the complete original checkpoint, ledger, request, receipt,
+diagnostic, scientific inputs and retained response. Every canonical reference
+must map uniquely to the original question's person and exact active revision.
+Only that serialization mapping changes. All 24 grades, reasons, limitations,
+claim order, scientific acceptance rules and fixed source mappings are retained.
+The unchanged complete-pair validator remains mandatory. An absent, incomplete,
+redacted, altered, foreign-owner, retired or ambiguous reference fails closed.
+
+The trusted selector is `{"completion_iteration1":"retained-response"}`. It
+reserves zero dollars, zero metered attempts and zero native counts, requests
+no provider credentials, and never calls a provider. A distinct derived cache,
+recovery receipt and ledger event link original generation evidence to this
+validation identity. The original failed cache key is not re-keyed for paid
+execution or changed to valid. Conflicting recovery artifacts fail closed;
+interrupted deterministic writes can be completed only from the same pinned
+original evidence. All historical requests, holds and caches remain intact.
+
+This recovery changes neither the successful strict transport's identity nor
+the predeclared fallback. Scientific disagreements in the saved answer remain
+results; they cannot authorize another scientific request.

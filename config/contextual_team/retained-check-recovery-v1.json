@@ -1,0 +1,31 @@
+{
+  "version": "iteration1-canonical-claim-alias-recovery-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "source": {
+    "run": {
+      "id": 35631615659,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "failure",
+      "path": ".github/workflows/team-recommender-offline.yml",
+      "head_branch": "main",
+      "event": "workflow_dispatch",
+      "head_sha": "5868429daec2128aaa0ded1f503b62573638048d"
+    },
+    "ledger_sha256": "e6a63622f1009148757534d3ce727f1cc20788f01a1b78eb5b510db2809482d0",
+    "checkpoint_sha256": "d599505ca84bba35cf4027977582ca1b37485e0486b1578bb9c83916268d8b4d",
+    "request_id": "2953527aba83416aa82288888e002d4b",
+    "request_sha256": "67142d7a819d4546fe775af83993539f18cdddc5169f773adbe36ae4bd69ca5d",
+    "receipt_sha256": "910e829604fdbe100b253f0b712a30290e849c1251770827dde27e5f7345d92d",
+    "diagnostic_sha256": "d772b8149382d66f4a99cd89ae8de2e8e8af8374ac864bdf95b943427155e82a",
+    "diagnostic_identity": "0c10033658304f1c9555718c450a489f3a4d4e1fdc149f7203977a77d5422bca",
+    "text_sha256": "7dc1d9c76bea2b4872f39e2d4ba66dc117a2b7d2ad42acae3837323a116d3925",
+    "body_sha256": "d3b7b91373778625218dd950421f86a91175abd7468caeeabd32bd67f73e7ab7",
+    "contract_sha256": "263f5a939a271faf416a046419d3d82c1ce71aab69db5dd375ffe898f996c9bc",
+    "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+    "requests_sha256": "687f2e2c11915980fdf9da1049792695cbdd886f37cacb2782e2b2782d58f121",
+    "native_counts_sha256": "cdf062617455c3ab1bf6c7daac901e5b5c322e08110a613820513d20d61fa748"
+  },
+  "validation_contract_sha256": "1d471ae6954bdeba2eb694c67e8659aaa503aac0c915bfe6a3ffd8e1bec09351",
+  "result_sha256": "13f5e5872a1e6903e861a441bca518464dfdcf72c895d00b36b394d491db153f"
+}
