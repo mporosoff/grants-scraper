@@ -1,0 +1,98 @@
+{
+  "version": "compact-check-predispatch-20260921-v1",
+  "recorded_at": "2026-09-21T14:09:17.977986+00:00",
+  "authority": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+  "starting_product": "b3bb7bf65cf47a170d21c9e6026a233d34273833",
+  "reviewed_helper_head": "e8e37b003efe87ca158cca5da0f00170116739ee",
+  "trusted_merge": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+  "pr": 256,
+  "review": {
+    "comment": 5683636190,
+    "completed_at": "2026-09-21T14:06:35.870342Z",
+    "no_findings_reaction_at": "2026-09-21T14:06:39Z",
+    "unresolved_threads": 0
+  },
+  "required_ci": 35609287887,
+  "focused_checks_passed": 14,
+  "release_plan": {
+    "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+    "candidate_run": "35515844236",
+    "changes": {
+      "validation": [
+        ".github/workflows/deploy-researcher-intake.yml",
+        ".github/workflows/team-recommender-offline.yml",
+        "tests/browser/contextual-worker-contract.test.mjs",
+        "tests/test_contextual_team_compact_check.py",
+        "tests/test_contextual_team_luna_repair.py",
+        "tools/contextual_currentness.mjs",
+        "tools/contextual_team_check.py",
+        "tools/contextual_team_compact_check.py",
+        "tools/contextual_team_pair_contract.py",
+        "tools/contextual_team_policy.py",
+        "tools/team_recommender_budget.py"
+      ]
+    },
+    "live_verified": true,
+    "publication_attempt": "1",
+    "publication_run": "35515844236",
+    "qualification_hold": false,
+    "reason": "Dependency fingerprints and retained release evidence",
+    "receipt_current": false,
+    "release_sha": "e8e37b003efe87ca158cca5da0f00170116739ee",
+    "runtime_changes": [],
+    "stage": "validate",
+    "team_generation_ready": false,
+    "team_mode": "maintenance"
+  },
+  "pending_compatible_publication": null,
+  "catalog_recovery": {
+    "published_pr": 265,
+    "run": 35515844236,
+    "candidate": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+    "records": 1368,
+    "rejected_pr_262_untouched": true
+  },
+  "checks": {
+    "assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+    "body_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
+    "checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+    "conservative_microusd": 7698208,
+    "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
+    "files": 1357,
+    "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
+    "lock_sha256": "cf6fd76a712ca590186304fbaf510bb393adf3538f750293570d5070c7e3c54a",
+    "native_counts": 187,
+    "new_provider_calls": 0,
+    "pairs": 24,
+    "people": 12,
+    "pricing_reconfirmed_on": "2026-09-21",
+    "remaining_after_full_reservation_microusd": 2038510,
+    "remaining_after_request_attempts": 4,
+    "requests": 685,
+    "reserved_microusd": 263282,
+    "unknown_holds_microusd": 351328
+  },
+  "ledger_owner_before_dispatch": 34967272858,
+  "ledger_artifact_before_dispatch": 10394804222,
+  "dispatch": {
+    "operation": "cb-cc-independent-check",
+    "continuation": "compact-check-continuation-20260919-v1",
+    "maximum_attempts": 1,
+    "maximum_microusd": 500000,
+    "automatic_retries": 0,
+    "native_count_calls": 0,
+    "status": "NOT_DISPATCHED"
+  },
+  "retained_holds": [
+    {
+      "id": "fc618603458249348c6834d258264520",
+      "microusd": 146074
+    },
+    {
+      "id": "d24a0654d72e486793519bead019b064",
+      "microusd": 205254
+    }
+  ],
+  "public_activation": false,
+  "e2e": "NOT_RUN_NOT_AUTHORIZED"
+}
