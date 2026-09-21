@@ -23,6 +23,9 @@ def inputs():
 
 
 def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens):
+    if metadata.get('purpose')=='cb-cc-wire-repair':
+        from tools.contextual_team_wire_repair import check_reservation as wire_check
+        return wire_check(state,provider,metadata,amount,input_tokens,output_tokens)
     if metadata.get('purpose','').startswith('cb-cc-'):
         from tools.contextual_team_compact_check import check_reservation as compact_check
         return compact_check(state,provider,metadata,amount,input_tokens,output_tokens)
