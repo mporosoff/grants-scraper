@@ -40,6 +40,43 @@ def result_path(state, scope_id):
     return Path(state)/'cache'/(identity(['iteration2-scope-result', policy.plan()['release_id'], scope_id])+'.json')
 
 
+INTERPRETATION_FORMAT = 'contextual-i2-interpretation-format-v2'
+NONCOHERENT_FORMAT = '''
+INTERPRETATION STATE FORMAT: When state is not coherent, approach MUST be the
+empty string and roles MUST be empty. Guidance about selecting a future scope
+belongs in limitations, never in approach. Do not select a scope merely to fill
+this field. Preserve source-warranted abstention and explain it in objective and
+limitations. When state is coherent, approach describes the selected approach.
+'''
+
+
+def interpretation_body(data, scope_id, ledger_state):
+    """Honor every bound operation, including an unsent prepared operation.
+
+    Only previously unbound I2 interpretations receive the format clarification.
+    The scientific validator and all historical body/cache identities stay exact.
+    """
+    contract, body = interpretation_wire.body('decomposition', data, 'L', 8000, repaired=True)
+    original_identity = identity(contract); legacy_version = contract['version']
+    purpose = policy.operation(scope_id, 'interpret')
+    bound = [e for e in ledger_state['events'] if e.get('authority') == policy.VERSION and e.get('purpose') == purpose]
+    if len(bound) > 1:
+        raise RecoveryRequired('iteration2_conflicting_interpretation_transport')
+    version = bound[0]['contract_version'] if bound else INTERPRETATION_FORMAT
+    if version == legacy_version:
+        return contract, body
+    if version != INTERPRETATION_FORMAT:
+        raise RecoveryRequired('iteration2_unknown_interpretation_transport')
+    contract['version'] = INTERPRETATION_FORMAT
+    contract['validator_contract_sha256'] = original_identity
+    contract['prompt'] += NONCOHERENT_FORMAT
+    contract['settings'].update(schema_version=INTERPRETATION_FORMAT,prompt_version=INTERPRETATION_FORMAT)
+    contract['schema']['properties']['approach']['description'] = 'Empty string unless state is coherent; future scope-selection guidance belongs in limitations.'
+    body['instructions'] = contract['prompt']
+    body['text']['format']['name'] = INTERPRETATION_FORMAT
+    return contract, body
+
+
 class Iteration2Runner(RepairRunner):
     def __init__(self, *args, counter_post=None, **kwargs):
         super().__init__(*args, **kwargs)
@@ -127,7 +164,7 @@ class Iteration2Runner(RepairRunner):
         self.scope_id = scope['id']; start = time.monotonic()
         if stage == 'decomposition':
             name = 'interpret'
-            c, body = interpretation_wire.body(stage, data, 'L', 8000, repaired=True)
+            c, body = interpretation_body(data, scope['id'], self.ledger.read())
             check = lambda v, cached: (interpretation_wire.validate_resolved(stage, v, data, repaired=True)
                 if cached else interpretation_wire.resolve(stage, response_value('openai', v), data, repaired=True))
             input_id = identity(data)

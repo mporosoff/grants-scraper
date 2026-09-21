@@ -46,9 +46,67 @@ class DevelopmentCheck(unittest.TestCase):
         blocked = patch('socket.socket.connect', side_effect=AssertionError('no_network'))
         blocked.start(); cls.addClassCleanup(blocked.stop)
 
-    def packet(self, graph=None, selection=None):
+    def packet(self, graph=None, selection=None, **kwargs):
         return check.packet(self.scope, self.graph if graph is None else graph, self.assessment,
-            self.selection if selection is None else selection, self.f.config)
+            self.selection if selection is None else selection, self.f.config, **kwargs)
+
+    def test_v2_lists_exact_owned_refs_in_one_shared_enum_without_changing_science(self):
+        old, old_body, old_validate, old_report = self.packet(version=check.LEGACY_VERSION)
+        new, body, validate, report = self.packet()
+        before = json.loads(old_body['messages'][0]['content'])
+        after = json.loads(body['messages'][0]['content'])
+        documents = {p['person_id']: p for p in after['profile_documents']}
+        union = set()
+        for question in after['items']:
+            expected = {'scope.science'} | set(question['people']) | {
+                c['claim_id']+'@'+str(c['revision'])
+                for pid in question['people'] for c in documents[pid]['claims']}
+            self.assertEqual(question.pop('allowed_evidence_refs'), sorted(expected))
+            union.update(expected)
+        self.assertEqual(after, before)
+        ref_schema = new['schema']['properties']['answers']['items']['properties']['evidence_ref']
+        self.assertEqual(ref_schema, {'type': 'string', 'enum': sorted(union)})
+        self.assertNotIn('enum', old['schema']['properties']['answers']['items']['properties']['evidence_ref'])
+        for key in ('owned_references_sha256', 'labels_sha256', 'source_id', 'snapshot_id',
+                    'graph_sha256', 'assessment_sha256'):
+            self.assertEqual(old[key], new[key])
+        self.assertEqual(old['selection_sha256'], identity(self.selection))
+        self.assertEqual(new['selection_sha256'], identity({k: v for k, v in self.selection.items() if k != 'bundle_id'}))
+        self.assertEqual({k: v for k, v in report.items() if k != 'observed_ui_bundle_id'}, old_report)
+        self.assertNotEqual(identity(old_body), identity(body))
+        self.assertNotEqual(old['evidence_sha256'], new['evidence_sha256'])
+        old_value = old_validate(payload(json.dumps(answer(old_body)), 'anthropic'), False)
+        value = validate(payload(json.dumps(answer(body)), 'anthropic'), False)
+        self.assertEqual(old_value['verdicts'], value['verdicts'])
+        for cached, validator in ((old_value, validate), (value, old_validate)):
+            with self.assertRaises(ValueError): validator(cached, True)
+
+    def test_v2_transport_reuses_science_across_only_observational_bundle_changes(self):
+        contract, body, _, report = self.packet()
+        changed = self.selection | {'bundle_id': '0'*64}
+        other, other_body, _, other_report = self.packet(selection=changed)
+        self.assertEqual((contract, body), (other, other_body))
+        self.assertEqual(report['observed_ui_bundle_id'], self.selection['bundle_id'])
+        self.assertEqual(other_report['observed_ui_bundle_id'], '0'*64)
+        changed['composer_sha256'] = 'f'*64
+        changed_contract, _, _, _ = self.packet(selection=changed)
+        self.assertNotEqual(changed_contract['selection_sha256'], contract['selection_sha256'])
+
+    def test_existing_failed_v1_operation_keeps_its_exact_transport_identity(self):
+        contract, body, _, _ = self.packet(version=check.LEGACY_VERSION)
+        purpose = policy.operation(self.scope['id'], 'check')
+        state = existing.ExperimentLedger(self.f.state/'ledger.json').read()
+        state['events'] = [e for e in state['events'] if e.get('purpose') != purpose]
+        state['events'].append(policy.packet_event(purpose, body, contract, contract['evidence_sha256']))
+        state['requests'].append({'purpose': purpose, 'status': 'failed', 'completion_transport': check.LEGACY_VERSION})
+        with patch.object(workflow, 'configuration', return_value=self.f.config), \
+             patch.object(existing.ExperimentLedger, 'read', return_value=state), \
+             patch.object(check, 'actual_result', return_value=(self.scope, self.graph, self.assessment, self.selection)):
+            prepared = check.prepared(self.f.state, {'iteration2_check': self.scope['id']})
+            self.assertEqual((prepared[2], prepared[3]), (contract, body))
+            state['events'].append(copy.deepcopy(state['events'][-1]))
+            with self.assertRaisesRegex(RecoveryRequired, 'conflicting_bound_transport'):
+                check.prepared(self.f.state, {'iteration2_check': self.scope['id']})
 
     def test_exact_production_graph_and_actual_composer_are_reconstructed_without_new_requests(self):
         before = existing.ExperimentLedger(self.f.state/'ledger.json').read()
@@ -147,6 +205,18 @@ class DevelopmentCheck(unittest.TestCase):
             with self.assertRaises(ValueError): validate(payload(json.dumps(changed), 'anthropic'), False)
         wire['answers'][1]['evidence_ref'] = claim['claim_id']+'@99'
         with self.assertRaises(ValueError): validate(payload(json.dumps(wire), 'anthropic'), False)
+        for invalid in (claim['claim_id'], ref+';scope.science', ' '+ref, ref+' ', 'claim:'+ref, person['person_id']+' '+ref):
+            wire['answers'][1]['evidence_ref'] = invalid
+            with self.subTest(reference=invalid):
+                with self.assertRaises(ValueError): validate(payload(json.dumps(wire), 'anthropic'), False)
+        # A foreign claim occurs in the global enum, but remains forbidden for
+        # this particular person and source question by the application rule.
+        foreign = next(p for p in evidence['profile_documents'] if p['person_id'] != person['person_id'])
+        foreign_ref = foreign['claims'][0]['claim_id']+'@'+str(foreign['claims'][0]['revision'])
+        for target in (0, 1):
+            changed = answer(body); changed['answers'][target]['evidence_ref'] = foreign_ref
+            with self.assertRaisesRegex(ValueError, 'exact_verdict_or_evidence_owner'):
+                validate(payload(json.dumps(changed), 'anthropic'), False)
 
     def test_complete_response_parser_and_immutable_canonical_cache(self):
         _, body, validate, _ = self.packet(); raw = json.dumps(answer(body)); response = payload(raw, 'anthropic')
@@ -156,6 +226,15 @@ class DevelopmentCheck(unittest.TestCase):
             with self.assertRaises(exc): validate(response | {'stop_reason': stop}, False)
         for bad in (raw.replace('"answers":', '"answers":[],"answers":', 1), 'NaN'):
             with self.assertRaises(ValueError): validate(payload(bad, 'anthropic'), False)
+        for bad in (raw.replace('"reason":', '"reason":"duplicate key","reason":', 1),
+                    raw.replace('"item_id":', '"item_id":"source","item_id":', 1)):
+            with self.assertRaisesRegex(ValueError, 'duplicate_response_key'):
+                validate(payload(bad, 'anthropic'), False)
+        reversed_wire = answer(body); reversed_wire['answers'].reverse()
+        self.assertEqual(validate(payload(json.dumps(reversed_wire), 'anthropic'), False), value)
+        for length in (14, 1001):
+            too_short_or_long = answer(body); too_short_or_long['answers'][0]['reason'] = 'x'*length
+            with self.assertRaises(ValueError): validate(payload(json.dumps(too_short_or_long), 'anthropic'), False)
         with patch.object(check, 'response_value', side_effect=AssertionError('bound_before_decode')):
             with self.assertRaisesRegex(ValueError, 'response_bound'):
                 validate(payload(' '*(check.MAX_RESPONSE_BYTES+1), 'anthropic'), False)
@@ -174,7 +253,7 @@ class DevelopmentCheck(unittest.TestCase):
         questions = [q for q in evidence['items'] if q['task_type'] == 'aspect_person']
         self.assertEqual(len(questions), 3); self.assertEqual(report['exclusion_pair_count'], 6)
         self.assertEqual(report['missing_exclusion_judgments'], 3)
-        self.assertTrue(all(set(q) == {'item_id', 'task_type', 'people', 'target_aspect'} for q in questions))
+        self.assertTrue(all(set(q) == {'item_id', 'task_type', 'people', 'target_aspect', 'allowed_evidence_refs'} for q in questions))
         self.assertNotIn('coverage', json.dumps(questions)); self.assertNotIn('reason', json.dumps(questions))
         self.assertTrue(report['missing_primary_group']); self.assertTrue(report['missing_first_alternative'])
         self.assertFalse(any(q['task_type'] == 'group_usefulness' for q in evidence['items']))

@@ -241,3 +241,63 @@ test('all locked current catalog projections resolve without a paid dispatch',as
   await assert.rejects(c.ContextualTeamClient.load(index,c.RESEARCHER_DIRECTORY,{...options,
     fetcher:async()=>Response.json({...envelope,wire_boundary_fixture:'x'.repeat(524288)})}),/contextual_response_too_large/);
 });
+
+test('restricted runtime reuse preserves graph cache, coalesces loads, and retries only failed script loads',async()=>{
+  const f=graphFixture(),c=f.c,scripts=[],assets=new Map();let failClient=true,gets=0,posts=0;
+  Object.assign(c,{URLSearchParams,TextEncoder,TextDecoder,Uint8Array,crypto:webcrypto,setTimeout,clearTimeout,btoa});
+  for(const name of ['assets/submission-schedule.js','assets/search-query.js','assets/search-retrieval.js',
+    'data/opportunities.js','data/subtopics.js','data/opportunity_team_index.js'])vm.runInContext(code(name),c);
+  for(const name of ['contextual-team-engine','contextual-team-client']){
+    const raw=code('assets/'+name+'.js'),digest=createHash('sha256').update(raw).digest('hex');
+    assets.set(name+':'+digest,raw);
+  }
+  c.FUNDING_FINDER_APP={boundedScripts:{sidecar:{setTimeout:cb=>setTimeout(cb,5000),clearTimeout}}};
+  c.document={createElement:()=>{const listeners={};return {addEventListener:(kind,fn)=>listeners[kind]=fn,
+    remove(){},emit:kind=>listeners[kind]()};},head:{appendChild(script){
+      const url=new URL(script.src,'https://fixture.test'),name=url.pathname.split('/').pop().replace('.js','');
+      const digest=url.searchParams.get('v'),raw=assets.get(name+':'+digest);scripts.push(name);
+      assert.equal(script.integrity,'sha256-'+Buffer.from(digest,'hex').toString('base64'));
+      queueMicrotask(()=>{
+        if(!raw||(name==='contextual-team-client'&&failClient)){failClient=false;script.emit('error');return;}
+        vm.runInContext(raw,c);script.emit('load');
+      });
+    }}};
+  vm.runInContext(code('assets/opportunity-team.js'),c);
+  const index=c.OPPORTUNITY_TEAM_INDEX,scope=index.scopes.find(s=>s.id===plan.first_scope_id);
+  const parent=c.GRANT_CATALOG.opportunities.find(r=>r.opportunity_id===scope.parent_id);
+  const graph=structuredClone(f.graph);
+  Object.assign(graph,{snapshot_id:index.release_id,source_id:scope.source_id,roster_id:index.roster_id,
+    scope:{id:scope.id,parent_id:scope.parent_id,title:scope.scope_label}});
+  delete graph.graph_id;graph.graph_id=hash(graph);
+  const options={parentId:scope.parent_id,scopeId:scope.id,record:parent,
+    childCatalog:c.FUNDING_RETRIEVAL.createChildCatalog(c.SUBTOPIC_CATALOG),now:'2026-09-21T19:00:00Z',
+    deliberate:true,fetcher:async(_url,o)=>{if(o.method==='POST')posts++;else gets++;
+      return Response.json({release_id:index.release_id,scope_id:scope.id,state:'ready',result:graph});}};
+  await assert.rejects(c.OpportunityTeam.loadData(index.generation_id,options),/integrity\/load failure/);
+  assert.equal(gets,0);assert.deepEqual(scripts,['contextual-team-engine','contextual-team-client']);
+  const [first,second]=await Promise.all([c.OpportunityTeam.loadData(index.generation_id,options),
+    c.OpportunityTeam.loadData(index.generation_id,options)]);
+  assert.equal(first.graph_id,graph.graph_id);assert.equal(second.graph_id,graph.graph_id);
+  const client=c.ContextualTeamClient,engine=c.ContextualTeamEngine;
+  for(let n=0;n<10;n++)await c.OpportunityTeam.loadData(index.generation_id,options);
+  assert.strictEqual(c.ContextualTeamClient,client);assert.strictEqual(c.ContextualTeamEngine,engine);
+  assert.equal(gets,1);assert.equal(posts,0);
+  assert.deepEqual(scripts,['contextual-team-engine','contextual-team-client','contextual-team-client']);
+  await assert.rejects(c.OpportunityTeam.loadData(index.generation_id,{...options,now:'2026-09-22T21:00:00Z'}),/not_current/);
+  c.RESEARCHER_DIRECTORY=structuredClone(c.RESEARCHER_DIRECTORY);c.RESEARCHER_DIRECTORY.researchers[154].name+=' changed';
+  await assert.rejects(c.OpportunityTeam.loadData(index.generation_id,options),/directory_content_conflict/);
+  assert.equal(gets,1);assert.equal(posts,0);
+  c.RESEARCHER_DIRECTORY=f.directory;
+  const replacementRaw=code('assets/contextual-team-client.js')+'\n// New exact runtime fixture identity.\n';
+  const replacementHash=createHash('sha256').update(replacementRaw).digest('hex');
+  assets.set('contextual-team-client:'+replacementHash,replacementRaw);
+  const replacement=structuredClone(index);replacement.runtime.contextual_client=replacementHash;
+  delete replacement.generation_id;replacement.generation_id=hash(replacement);c.OPPORTUNITY_TEAM_INDEX=replacement;
+  await c.OpportunityTeam.loadData(replacement.generation_id,options);
+  assert.notStrictEqual(c.ContextualTeamClient,client);assert.strictEqual(c.ContextualTeamEngine,engine);
+  assert.equal(scripts.length,4);assert.equal(gets,2);assert.equal(posts,0);
+  const replacedClient=c.ContextualTeamClient;c.ContextualTeamClient={load(){throw Error('unexpected module');}};
+  await c.OpportunityTeam.loadData(replacement.generation_id,options);
+  assert.notStrictEqual(c.ContextualTeamClient,replacedClient);assert.equal(scripts.length,5);
+  assert.equal(gets,3);assert.equal(posts,0);
+});
