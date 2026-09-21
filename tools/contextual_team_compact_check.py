@@ -18,7 +18,8 @@ PURPOSE = 'cb-cc-independent-check'
 OLD_ID = 'd24a0654d72e486793519bead019b064'
 PRIOR_ROWS = 'c12c5470aee336d41cf87d6bb4c96f97683f86c9649d3e0c07430677979127af'
 OLD_RECEIPT = '6c237d6db06aeaf48df9896505c74e6836a7fea9d00116f6c3ed2727af993723'
-OLD_DIAGNOSTIC = '30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c'
+OLD_DIAGNOSTIC_FILE_SHA256 = '9f5cc1a7b775fb4e442545308ca037b2b2481ce6e2b1e6a3be3d38f65457c62b'
+OLD_DIAGNOSTIC_IDENTITY = '30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c'
 EVENT = {'kind': 'exact_terminal_http_error_quarantined', 'authority': VERSION,
     'request_id': OLD_ID, 'body_sha256': prior.plan()['operations']['check']['body_sha256'],
     'held_microusd': 205254, 'usage': 'unknown', 'replay': 'permanently_closed',
@@ -47,12 +48,26 @@ def history(state, *, require_authority=True):
         raise Deferred('compact_existing_accounting_stop')
 
 
+def validate_terminal_evidence(state_path):
+    # Checkpoint files use byte hashes; diagnostics.finish links canonical JSON.
+    # Preserve both identities, including the exact historical serialization.
+    documents = {}
+    for folder, expected in (('receipts', OLD_RECEIPT), ('diagnostics', OLD_DIAGNOSTIC_FILE_SHA256)):
+        raw = (state_path/folder/(OLD_ID+'.json')).read_bytes()
+        if existing.sha(raw) != expected:
+            raise ConfigurationFailure('compact_terminal_evidence_hash')
+        documents[folder] = json.loads(raw)
+    receipt = documents['receipts']
+    if (identity(documents['diagnostics']) != OLD_DIAGNOSTIC_IDENTITY
+        or receipt.get('diagnostic_sha256') != OLD_DIAGNOSTIC_IDENTITY
+        or receipt.get('diagnostic_path') != 'diagnostics/'+OLD_ID+'.json'):
+        raise ConfigurationFailure('compact_terminal_diagnostic_link')
+
+
 def install_authority(state_path, api_call):
     ledger = existing.ExperimentLedger(state_path/'ledger.json')
     history(ledger.read(), require_authority=False)
-    for folder, expected in (('receipts', OLD_RECEIPT), ('diagnostics', OLD_DIAGNOSTIC)):
-        if existing.sha((state_path/folder/(OLD_ID+'.json')).read_bytes()) != expected:
-            raise ConfigurationFailure('compact_terminal_evidence_hash')
+    validate_terminal_evidence(state_path)
     run = json.loads(api_call('actions/runs/34967272858'))
     expected = {'id': 34967272858, 'run_attempt': 1, 'status': 'completed', 'conclusion': 'failure',
         'path': existing.WORKFLOW, 'head_branch': 'main', 'event': 'workflow_dispatch',

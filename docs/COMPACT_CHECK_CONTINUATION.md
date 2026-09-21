@@ -57,3 +57,26 @@ Green fixtures and schema equivalence do not prove provider grammar acceptance.
 This check cannot establish population quality, explanation faithfulness or
 cold end-to-end latency. Public activation and the 107 legacy-package registry
 decision remain unauthorized.
+
+## September 21 recovery authorization and evidence-identity correction
+
+Owner instruction after failed preparation run35610297158:
+
+> I am relaxing the no-retry rule. Keep working on this until everything is fixed and all changes are merged and live
+
+This supersedes the earlier stop at that preparation failure and authorizes
+continued repair, exact-head review, protected merge and resumed execution.
+That run failed before reservation/provider execution and produced no state
+artifact. The original cloud owner, both unknown holds and unused scientific
+request remain unchanged. This is not a new budget or a reset of paid requests.
+The same operation/packet and existing request, dollar and reserve limits apply.
+Uncertain dispatches still cannot be replayed or re-keyed automatically.
+
+The corrected guard verifies the retained diagnostic's exact file SHA256
+(`9f5cc1a7b775fb4e442545308ca037b2b2481ce6e2b1e6a3be3d38f65457c62b`)
+and its canonical JSON identity
+(`30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c`),
+which is the identity recorded in the original receipt. Neither historical file
+is rewritten. Regression fixtures contain only the bounded failure metadata,
+without scientific evidence, final answers, raw provider envelopes or secrets;
+their real identity constants are not substituted by the fixture.
