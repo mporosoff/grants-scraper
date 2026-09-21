@@ -68,6 +68,22 @@ class CheckpointOrderContract(unittest.TestCase):
                 with self.assertRaises(RecoveryRequired):runner.request('cb-interpret',['fixture'],{'model':'claude-sonnet-5','max_tokens':512},lambda *a:None)
         self.assertEqual(len(e.ExperimentLedger(dest/'ledger.json').read()['events']),1)
 
+    def test_unchanged_recovery_preserves_original_checkpoint_bytes_and_owner(self):
+        dest,config,plan,artifacts,latest,api,row=self.fixture()
+        with patch.object(e,'CONFIG',config),patch.object(e,'checkpoint',wraps=e.checkpoint) as seal:
+            c.recover_known_charge(dest,latest,artifacts,api,e)
+            seal.assert_called_once_with(dest)
+        original=(dest/'checkpoint.json').read_bytes()
+        self.assertEqual(json.loads(original)['run_id'],'123')
+        with patch.object(e,'CONFIG',config),patch.dict('os.environ',{
+                'GITHUB_RUN_ID':'456','GITHUB_RUN_ATTEMPT':'2','GITHUB_SHA':'b'*40}), \
+             patch.object(e,'checkpoint') as seal:
+            for _ in range(3):
+                c.recover_known_charge(dest,latest,artifacts,
+                    lambda path:self.fail('unchanged recovery fetched remote evidence'),e)
+                self.assertEqual((dest/'checkpoint.json').read_bytes(),original)
+            seal.assert_not_called()
+
     def test_crash_at_each_recovery_write_preserves_one_charge_and_zero_replays(self):
         class Crash(BaseException):pass
         for boundary in ('receipt','ledger','checkpoint'):

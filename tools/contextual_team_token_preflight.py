@@ -91,7 +91,11 @@ class Counter:
         if rows:
             if len(rows)!=1 or rows[0]['status']!='complete':raise RecoveryRequired('counter_prior_incomplete_no_automatic_repeat')
             return rows[0]['input_tokens']
-        if len(saved['rows'])>=MAX_COUNT_HTTP_ATTEMPTS:raise ValueError('counter_finite_http_limit')
+        if item.get('id','').startswith('cb-fc-'):
+            from tools.contextual_team_completion_policy import check_count_budget
+            check_count_budget(existing.ExperimentLedger(self.state/'ledger.json').read(),saved,item)
+        elif len(saved['rows'])>=MAX_COUNT_HTTP_ATTEMPTS:
+            raise ValueError('counter_finite_http_limit')
         secret=os.environ.get('ANTHROPIC_API_KEY')
         if not secret:raise ConfigurationFailure('counter_credential_missing')
         row={'id':item['id'],'key':key,'status':'dispatched_or_uncertain','metered_inference':False,'charged_microusd':0}

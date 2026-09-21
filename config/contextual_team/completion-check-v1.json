@@ -1,0 +1,35 @@
+{
+  "version": "funding-finder-completion-20260921-v1",
+  "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+  "retained_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+  "model": "claude-sonnet-5",
+  "operations": {
+    "cb-fc-shared-check": {
+      "transport": "complete-pair-shared-rows-strict-v1",
+      "body_sha256": "d3b7b91373778625218dd950421f86a91175abd7468caeeabd32bd67f73e7ab7",
+      "contract_sha256": "263f5a939a271faf416a046419d3d82c1ce71aab69db5dd375ffe898f996c9bc",
+      "wire_bytes": 52817,
+      "reserved_input_tokens": 40000,
+      "output_token_ceiling": 12000,
+      "reserved_microusd": 200000
+    },
+    "cb-fc-json-fallback": {
+      "transport": "complete-pair-shared-rows-json-text-v1",
+      "body_sha256": "a964c9c2799cfdd71fdde15618de67e46624db2d4016df514fdf81b60ad70c8b",
+      "contract_sha256": "d8e7a8156612d3070ad2e6614050a81ce9f6e0a5a885779f5c7577bf171ea90d",
+      "wire_bytes": 51956,
+      "reserved_input_tokens": 40000,
+      "output_token_ceiling": 12000,
+      "reserved_microusd": 200000
+    }
+  },
+  "fallback_trigger": "Only an authenticated terminal HTTP400 compiled grammar too large from the shared strict operation. One JSON-text fallback; no further transport variants.",
+  "prices_per_million": {
+    "input": 2,
+    "output": 10,
+    "cached": 0.2
+  },
+  "pricing_checked_on": "2026-09-21",
+  "pricing_source": "https://platform.claude.com/docs/en/models/sonnet-5/overview",
+  "public_activation": false
+}

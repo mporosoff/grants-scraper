@@ -31,6 +31,9 @@ REPOSITORY = "mporosoff/grants-scraper"
 PREFIX = AUTHORIZATION_ID
 PACKET_LIMIT = 8 * 1024 * 1024
 STATE_LIMIT = 128 * 1024 * 1024
+# Ledger + checkpoint, one cache/receipt/diagnostic per lifetime attempt, and
+# bounded amendment/recovery receipts. Byte and path allowlists remain intact.
+STATE_FILE_LIMIT = 3 * 1290 + 128
 PURPOSES = {"source": 90, "individual": 90, "group": 90, "control": 30, "explanation": 30, "order-swap": 10}
 # A later paid envelope never grants the legacy packet format new authority.
 GENERIC_JUDGE_PURPOSES = frozenset(PURPOSES)
@@ -313,7 +316,7 @@ def validate_packet(packet, settings):
 def unpack_state(raw, destination):
     with zipfile.ZipFile(io.BytesIO(raw)) as archive:
         files = [info for info in archive.infolist() if not info.is_dir()]
-        if len(files) > 1500 or sum(info.file_size for info in files) > STATE_LIMIT:
+        if len(files) > STATE_FILE_LIMIT or sum(info.file_size for info in files) > STATE_LIMIT:
             raise ValueError("checkpoint_size_exceeded")
         seen = set()
         for info in files:
