@@ -25,6 +25,14 @@ def plan():
 
 
 def configuration_for_job(job):
+    from tools.contextual_team_iteration2_policy import ROOT as iteration2_root
+    authority_path=iteration2_root/'config/contextual_team/iteration2-authority-v1.json'
+    if authority_path.exists() and job.get('release_id')==json.loads(authority_path.read_bytes()).get('release_id'):
+        from tools.contextual_team_iteration2 import configuration
+        config=configuration()
+        if job.get('person_id') or job.get('scope_id') not in {s['id'] for s in config['scopes']}:
+            raise ValueError('outside_locked_iteration2_development_jobs')
+        return config
     from tools.contextual_team_latency_policy import RELEASE as latency_release
     if job.get('release_id')==latency_release:
         from tools.contextual_team_latency import configuration

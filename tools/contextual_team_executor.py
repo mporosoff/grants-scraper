@@ -345,7 +345,15 @@ def prepare(state,reservation,job_path):
     configuration=configuration_for_job(job)
     resolve_job(configuration,job)
     existing.trusted_environment(contextual_job=job)
-    ledger=existing.restore(state,existing.policy());existing.checkpoint(state)
+    ledger=existing.restore(state,existing.policy())
+    if configuration.get('iteration2'):
+        from tools.contextual_team_iteration2_policy import install_authority, prepare_record
+        install_authority(state,existing.api)
+        atomic_json(reservation,prepare_record(state,job))
+        with open(os.environ['GITHUB_OUTPUT'],'a') as stream:
+            stream.write('text_provider=mixed\n')
+        return
+    existing.checkpoint(state)
     if configuration.get('option1'):
         from tools.contextual_team_option1 import ensure_remaining_plan_fits
         ensure_remaining_plan_fits(ledger.read(),configuration['option1'])
@@ -385,7 +393,8 @@ def main():
     scope=resolve_job(config,job)
     from tools.contextual_team_phase2 import Phase2Runner
     from tools.contextual_team_latency import LatencyRunner
-    runner=(LatencyRunner if config.get('latency') else Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
+    from tools.contextual_team_iteration2 import Iteration2Runner
+    runner=(Iteration2Runner if config.get('iteration2') else LatencyRunner if config.get('latency') else Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
     try:
         result=runner.run_scope(scope,job['person_id'] or None) if os.environ.get('CONTEXTUAL_ACTION_CURRENT')=='true' else {'state':'action_blocked','scope_id':scope['id']}
     except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,OSError,requests.RequestException,Refusal) as error:
