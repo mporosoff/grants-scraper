@@ -1,8 +1,33 @@
 # Funding Finder — current repair status
 
-Updated September 21, 2026. This is the authoritative current handoff; earlier checkpoints below are historical.
+Updated September21, 2026. This is the authoritative current handoff. Earlier checkpoints are historical.
 
-## CURRENT — catalog recovered; helper merged; checker stopped before payment
+## CURRENT — catalog live; checker repairs merged; real check blocked by grammar and budget
+
+**PRs266 and267 are protected-merged and their required checks passed. The catalog is live with1,368 September20 records. The independent checker still returned HTTP400 “compiled grammar too large”; all24 verdicts remain missing.**
+
+The owner explicitly relaxed the no-retry rule and authorized continuous named repair/review/merge. Two resumed scientific attempts were made under the SAME $0.50 continuation cap. Both failed at the provider, returned no usage, and retain full conservative holds. Only **$0.036718** remains in that continuation; the unchanged output reservation alone requires$0.12. Another complete paid check cannot fit. This is a concrete budget/provider boundary, not the superseded no-retry stop. No hold was refunded and no uncertain request was replayed.
+
+| Layer | Current disposition |
+| --- | --- |
+| Product branch/worktree | Existing `codex/on-demand-team-recommender` / `.worktrees/on-demand-team-recommender`; exact reviewed repairs reconciled as `97a582f85f969d9a6e3e084137f6a67d69f208e7` and `517a9196811c9f2214ca4b6cfae8ede3ebc6006d`. This handoff is a later documentation commit, resolved through file history. |
+| PR266 | Evidence-file/canonical-hash defect fixed. Reviewed `e68c3fd1eb31f46e1b6840f89b396c5c7894eff1`; merge `c4e0ac136c6ff528c97eace81ddb0aecae23f0c9`. |
+| PR267 | Flat owned-address wire contract and exact bounded recovery. Clean review `9f13e70255eedac2da9f57e508a551efafb541be`; merge **`f70f000f5977b923cc7e495e0a80be1a3ce84090`**. The live provider still rejected its grammar. |
+| Latest checker run | **35616677156**, terminal failure; request `c1d338226c57473ea464d002121b0167`, no verdicts. Complete input native count29,284 succeeded before inference; counting did not prove grammar acceptance. |
+| Catalog | Published PR265/release35515844236, candidate `5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700`; fresh metadata/Worker check matches. Daily automation remains enabled. |
+| Postmerge release | **35616530374 success**, all seven validation gates passed; generation/assembly/publication/Pages/paid smoke skipped. Postmerge CI35616529902 passed. |
+| Public versus experimental | Public Search/Team Match and legacy packages remain live. Contextual service stays restricted; audited registry and107 affected legacy packages unchanged. No experimental activation or Stage4. |
+| Preserved work | Rejected PR262 unpublished; historical E2/D3 and failed checker schemas preserved. Private outputs, previews, debug files, unrelated changes and worktrees retained. IARPA issue30 remains separate. |
+
+**One ledger:** authoritative owner **run35616677156 / artifact10645414639**. All1,363 checkpoint file hashes match; all686 prior request rows are unchanged. **$7.346880 known +$0.814610 unknown held = $8.161490 conservative use**,687/690 attempts. Remaining **$1.838510/three attempts**, including protected$1.267862/two attempts. New recovery work: two attempts, $0.463282 unknown held, one native count. No actual inference usage was reported for either new request. Native counts188/190.
+
+**Validation:**47 focused checks passed; required PR267 CI passed1,535 Python/796 browser contracts,23 no-drift artifacts,37 frozen queries with zero churn,50 byte-identical scoring cases. Copied-real-state rehearsal preserved the saved Luna assessment and historical ledger. Three attempts on the actual failed checkpoint were rejected with zero network calls and unchanged ledger bytes. E2E/Playwright NOT RUN. These engineering checks do not validate the missing scientific answers.
+
+**Next boundary:** the complete checker needs a provider-accepted representation and permitted accounting capacity. No further paid request fits this continuation; retain failures and reserves. Saved Luna findings remain historical/unverified, with no independent inclusion/exclusion comparison. Public activation and the registry/legacy-package decision remain outside this task. No new campaign or automatic deployment follows.
+
+Full evidence: [recovery report](reconciliation/compact-check-recovery-20260921.md), [immutable receipt](reconciliation/compact-check-recovery-20260921.json), and [experiment state](team-recommender/experiment-state.json).
+
+## Historical September21 preparation failure — superseded by CURRENT above
 
 **The public catalog contains 1,368 September 20 records. PR256 is merged. The single authorized checker workflow failed in preparation; no provider request or new charge occurred, and all 24 independent verdicts remain missing.**
 

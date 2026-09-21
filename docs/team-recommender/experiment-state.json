@@ -45,19 +45,24 @@
     "compact_check_continuation": {
       "authorized": true,
       "maximum_new_usd": 0.5,
-      "maximum_new_attempts": 1,
+      "maximum_new_attempts": 2,
       "maximum_native_counts": 1,
-      "planned_native_counts": 0,
-      "used_attempts": 0,
-      "used_usd": 0,
+      "planned_native_counts": 1,
+      "used_attempts": 2,
+      "used_usd": 0.463282,
       "existing_ledger": true,
-      "record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md"
+      "record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+      "original_attempt_ceiling": 1,
+      "retry_amendment": "I am relaxing the no-retry rule. Keep working on this until everything is fixed and all changes are merged and live",
+      "used_usd_meaning": "Conservative unknown holds, not known billed charges",
+      "additional_dispatch_fits": false
     }
   },
   "authority": {
-    "work_order": "September19 compact checker continuation",
-    "record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
-    "scope": "One new independent 24-pair checker request at most $0.50 inside the existing ledger; exact terminal-request recovery retaining both unknown holds; no automatic retry. Protected-main merge conditional on safe release planning. No public activation, registry migration, legacy withdrawal or E2E."
+    "work_order": "September21 explicitly resumed autonomous checker completion",
+    "original_record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+    "amendment": "I am relaxing the no-retry rule. Keep working on this until everything is fixed and all changes are merged and live",
+    "scope": "Continuous named checker repair/review/merge and bounded retries within the SAME $0.50; separate catalog recovery. No public experimental activation."
   },
   "branch": "codex/on-demand-team-recommender",
   "budget_record": {
@@ -73,7 +78,7 @@
     "D3_prior_usd": 2.27911,
     "D3_spend_usd": 0.856223,
     "actual_usd": 7.34688,
-    "authoritative_owner": "Exclusive protected-main cloud executor; checkpoint run34967272858, artifact10394804222. Local mirrors read-only.",
+    "authoritative_owner": "Exclusive protected-main cloud executor; checkpoint run35616677156, artifact10645414639. Local mirrors read-only.",
     "authorized_usd": 10,
     "closeout_new_requests": 24,
     "closeout_new_usd": 1.205247,
@@ -83,22 +88,22 @@
     "historical_stage2_minimum_later_reserve_usd": 4,
     "id": "on-demand-team-offline-v2-20260909",
     "input_tokens": 2332093,
-    "latest_checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
-    "latest_run_id": 34967272858,
-    "ledger": "Cloud state artifact10394804222, run34967272858; $7.346880 known + $0.351328 unknown held,685/690 attempts.",
-    "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
+    "latest_checkpoint_sha256": "b9b18c401a3393823aa08e1af9665087b20e527b10fb791210e7b257c17d2afa",
+    "latest_run_id": 35616677156,
+    "ledger": "Cloud state artifact10645414639, run35616677156; $7.346880 known + $0.814610 unknown held,687/690 attempts.",
+    "ledger_sha256": "2a2f7f61be78e4e2b2db929b4880fedaa8a3b403873bac0a0fb4a7c772fbdac6",
     "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
     "no_new_allowance_at_closeout": true,
     "output_tokens": 275395,
     "path": "docs/team-recommender/preparation-budget.json",
     "reconciliation": {
-      "path": "docs/reconciliation/compact-check-execution-20260921.json",
-      "sha256": "a4856c75bee5f23b2e5829630edf88e84a033650feac5f53cb1aab81b6300dba"
+      "path": "docs/reconciliation/compact-check-recovery-20260921.json",
+      "sha256": "5ab0c077a0ac48dce9c247cbc50a3d3a49a59dce1dad6056d92f4f756e9f72d8"
     },
-    "remaining_request_slots": 5,
-    "remaining_total_usd": 2.301792,
-    "requests": 685,
-    "reserved_usd": 0.351328,
+    "remaining_request_slots": 3,
+    "remaining_total_usd": 1.83851,
+    "requests": 687,
+    "reserved_usd": 0.81461,
     "stage2_cumulative_ceiling_usd": 6,
     "stage3_ceiling_new_usd": 4,
     "stage3_new_requests": 120,
@@ -125,31 +130,37 @@
     "phase1_new_requests": 3,
     "phase1_completion_new_usd": 0.042804,
     "phase1_completion_new_requests": 2,
-    "conservative_ledger_usage_usd": 7.698208,
+    "conservative_ledger_usage_usd": 8.16149,
     "current_task_maximum_new_usd": 0.5,
-    "current_task_maximum_new_attempts": 1,
+    "current_task_maximum_new_attempts": 2,
     "requirements_latency_new_requests": 3,
     "requirements_latency_reconciled_usd": 0.107736,
     "requirements_latency_uncertain_usd": 0.146074,
     "usage_complete": false,
     "unknown_usage_request_ids": [
       "fc618603458249348c6834d258264520",
-      "d24a0654d72e486793519bead019b064"
+      "d24a0654d72e486793519bead019b064",
+      "6a6e93add95848dcb02f9ccaf158a2eb",
+      "c1d338226c57473ea464d002121b0167"
     ],
-    "token_totals_note": "Known returned usage only. Both checker HTTP400 usages are unknown, not zero. New Luna85 reasoning tokens are within3337 output tokens.",
+    "token_totals_note": "Known returned usage only; all four HTTP400 usages remain unknown. Native count29284 is a free input estimate, not reported inference usage.",
     "luna_repair_new_requests": 2,
     "luna_repair_known_usd": 0.007006,
     "luna_repair_unknown_held_usd": 0.205254,
     "luna_repair_conservative_usd": 0.21226,
-    "native_count_used": 187,
+    "native_count_used": 188,
     "native_count_limit": 190,
     "current_task_authority": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
-    "current_task_new_requests": 0,
-    "current_task_new_usd": 0,
+    "current_task_new_requests": 2,
+    "current_task_new_usd": 0.463282,
     "current_task_planned_reservation_usd": 0.263282,
-    "current_task_reservation_is_spent": false,
-    "current_task_workflow_dispatches": 1,
-    "current_task_stop": "Pre-provider failure; no automatic repair/retry authorized."
+    "current_task_reservation_is_spent": true,
+    "current_task_workflow_dispatches": 3,
+    "current_task_stop": "Budget boundary after terminal provider grammar rejection; no full request fits remaining continuation amount.",
+    "current_task_new_known_usd": 0,
+    "current_task_new_usd_meaning": "Unknown holds included conservatively; actual usage not returned",
+    "current_task_remaining_usd": 0.036718,
+    "current_task_native_counts": 1
   },
   "candidate": {
     "primary": "contextual-audited-graph-v1 implementation",
@@ -162,35 +173,79 @@
     "fallback": null
   },
   "checks": {
-    "focused_continuation_passed": 14,
-    "required_ci": {
-      "run": 35609287887,
-      "python_passed": 1520,
-      "browser_passed": 796,
-      "no_drift_artifacts": 23,
-      "frozen_queries": 37,
-      "top10_churn": 0,
-      "scoring_cases": 50,
-      "scoring_byte_identical": true
+    "focused_wire": 12,
+    "focused_compact": 17,
+    "focused_prior_repair": 18,
+    "total_focused": 47,
+    "no_drift_artifacts": 23,
+    "frozen_queries": 37,
+    "top10_churn": 0,
+    "scoring_cases": 50,
+    "scoring_byte_identical": true,
+    "real_state_rehearsal": {
+      "body_sha256": "17f99746fbbc2ad601654c4e58152c231b88160ac6dbb91a895c5eea709e0721",
+      "contract_sha256": "b45ed06ff7da749a3eadd0bc4bf4eed531b09e241535b6eafcb5bf5a4ccc40b5",
+      "executions": 3,
+      "fixture_dispatches": 1,
+      "fixture_native_counts": 1,
+      "kind": "copied-real-state-fixture-provider-rehearsal",
+      "not_scientific_evidence": true,
+      "original_files_verified": 1360,
+      "people": 12,
+      "preparations": 3,
+      "prior_requests_unchanged": 686,
+      "questions": 24,
+      "real_native_count_calls": 0,
+      "real_provider_calls": 0,
+      "real_saved_luna_reused": true,
+      "reservation": {
+        "attempt": "1",
+        "authorization_id": "on-demand-team-offline-v2-20260909",
+        "code_sha": "c4e0ac136c6ff528c97eace81ddb0aecae23f0c9",
+        "continuation_lock_sha256": "1876e82610fcc274f3fc5474dbebfb9f2192c6707a48f55e019a71ee3c1c793f",
+        "maximum_new_attempts": 1,
+        "maximum_new_microusd": 200000,
+        "native_count_calls": 1,
+        "operation": "cb-cc-wire-repair",
+        "preserved_attempts": 2,
+        "preserved_microusd": 1267862,
+        "prior_ledger_sha256": "a2afa022f2cdc23e00bfda654a8f13bdc34fda2aeedd1194fd2d10e2fa76d158",
+        "retained_unknown_hold_microusd": 614610,
+        "run_id": "fixture-not-live"
+      },
+      "unmodified_real_identity_constants": true
     },
-    "real_authority_reproduction": {
-      "version": "compact-real-authority-reproduction-20260921-v1",
-      "verified_checkpoint_files": 1357,
-      "receipt_raw_sha256": "6c237d6db06aeaf48df9896505c74e6836a7fea9d00116f6c3ed2727af993723",
-      "diagnostic_raw_sha256": "9f5cc1a7b775fb4e442545308ca037b2b2481ce6e2b1e6a3be3d38f65457c62b",
-      "diagnostic_canonical_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
-      "locked_diagnostic_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+    "real_failed_checkpoint_repeat_rejection": {
+      "kind": "actual-failed-checkpoint-repeat-rejection",
+      "repetitions": 3,
       "provider_calls": 0,
       "api_calls": 0,
-      "authoritative_files_changed": false,
-      "exception": "ConfigurationFailure",
-      "message": "compact_terminal_evidence_hash",
-      "cloned_ledger_unchanged": true
+      "ledger_unchanged": true,
+      "perform": "contextual_claimed_request_requires_recovery",
+      "prepare_authority": "wire_repair_other_uncertainty",
+      "outstanding_request": "c1d338226c57473ea464d002121b0167"
     },
-    "e2e": "NOT_RUN_NOT_AUTHORIZED"
+    "initial_failure": "New refusal test expected ValueError; corrected to existing Refusal/Incomplete types. No production failure handling relaxed.",
+    "e2e": "NOT_RUN_NOT_AUTHORIZED",
+    "required_ci": {
+      "number": 267,
+      "reviewed_head": "9f13e70255eedac2da9f57e508a551efafb541be",
+      "merge": "f70f000f5977b923cc7e495e0a80be1a3ce84090",
+      "review": "clean",
+      "review_comment": 5762599930,
+      "review_completed_at": "2026-09-21T15:03:10.873006Z",
+      "no_findings_reaction_at": "2026-09-21T15:03:14Z",
+      "unresolved_threads": 0,
+      "ci": 35615751522,
+      "ci_result": "success",
+      "python_passed": 1535,
+      "browser_passed": 796,
+      "postmerge_ci": 35616529902,
+      "postmerge_release": 35616530374
+    }
   },
-  "containing_commit": "Documentation commit introducing docs/reconciliation/compact-check-execution-20260921.json; resolve with git log for that path.",
-  "continuation": "Current bounded run stopped after preparation failure; no provider dispatch, no automatic retry. Catalog recovery completed independently.",
+  "containing_commit": "Commit introducing docs/reconciliation/compact-check-recovery-20260921.json; resolve with git log for that path.",
+  "continuation": "No further paid request fits the existing continuation cap. Preserve failed schema variants, all unknown holds and missing verdicts. A supported complete wire representation remains unresolved; do not infer scientific acceptance or activate.",
   "decision_closeout": {
     "complete_actual_judge_items": 71,
     "evidence_audit": {
@@ -6736,7 +6791,7 @@
   },
   "model": "Unchanged contextual candidate; completed Sonnet 5 thinking-disabled retrospective checks: strong/plausible/plausible individuals, plausible group, three faithful explanations.",
   "next_allowed_stage": null,
-  "next_stage_requires": "Explicit owner continuation of the named hash-identity repair and subsequent bounded check. No public activation, registry migration or Stage4 authority.",
+  "next_stage_requires": "A safe complete provider-accepted contract and permitted accounting capacity; neither green fixtures nor the remaining overall balance permits exceeding this continuation cap. No new stage or activation.",
   "pinned_data": {
     "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
     "snapshot_id": "b22650bd814ef1e5a6180879a6e71ea945b4903ac63dbf60dbaf6ea07c29e9e1",
@@ -7100,7 +7155,7 @@
     "path": "docs/reconciliation/compact-check-continuation-20260919.json",
     "sha256": "10bcf6c9f05ecc9c17d8328649da4d5da31a9e2ac528adecc08e3cf15f994e4e"
   },
-  "recommendation": "STOP FOR USER REVIEW: PR256 merged and catalog recovered; exact diagnostic hash representation defect blocks checker preparation. No provider call occurred. No automatic repair/retry.",
+  "recommendation": "BLOCKED: merged repairs and green release validation; provider grammar still rejected. $0.036718 remains in this continuation, insufficient for another unchanged complete check. No public experimental activation.",
   "recommended_next_stage": "STOP FOR USER REVIEW",
   "report": "docs/PROJECT_STATUS.md",
   "repository": "mporosoff/grants-scraper",
@@ -7110,17 +7165,35 @@
     "accepted_verdicts": 0,
     "missing_verdicts": 24,
     "derived_checker_person_outcomes": 0,
-    "provider_grammar_acceptance": "NOT_RUN",
-    "saved_luna_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
-    "packet_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
-    "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
+    "provider_grammar_acceptance": "FAILED_HTTP400_COMPILED_GRAMMAR_TOO_LARGE",
+    "comparison": "UNMEASURED",
+    "retained_luna_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+    "luna_prior_person_outcomes": {
+      "supported": 10,
+      "credible_transfer": 2
+    },
+    "luna_prior_pairs": {
+      "direct": 14,
+      "method_transfer": 9,
+      "adjacent": 1
+    },
     "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
-    "comparison": "UNMEASURED"
+    "body_sha256": "17f99746fbbc2ad601654c4e58152c231b88160ac6dbb91a895c5eea709e0721",
+    "contract_sha256": "b45ed06ff7da749a3eadd0bc4bf4eed531b09e241535b6eafcb5bf5a4ccc40b5",
+    "wire_bytes": 67812,
+    "native_schema_bytes": 16721,
+    "native_input_estimate": 29284,
+    "reserved_input_tokens": 40000,
+    "reserved_output_tokens": 12000,
+    "model": "claude-sonnet-5",
+    "input_evidence_changed": false,
+    "luna_output_shown_to_checker": false,
+    "scientific_rubric_changed": false
   },
   "schema_version": 1,
   "source_checkpoint": "7ae6f1dce6e655a905ebd7d9d0c915cace1ab48b",
-  "source_head_at_evidence_capture": "98de035d4148460fc8949ff7a44c6f6695a4fa83",
-  "source_tree_at_evidence_capture": "799f1242b735fbf2464f5693c3fd5fde85570b4b",
+  "source_head_at_evidence_capture": "517a9196811c9f2214ca4b6cfae8ede3ebc6006d",
+  "source_tree_at_evidence_capture": "0502b827b5ed4ec53abe7935ea20347c46840ed2",
   "stage1_receipt_index": {
     "path": "docs/team-recommender/receipt-index.json",
     "sha256": "d32ae60b40120a437b9d42c61759711a0d263a9b13f7662759ae46b1f104f0d8"
@@ -7369,16 +7442,15 @@
     "trusted_merge": "8682aadce8c3a0e6881e3636dc30c3d69b10b11a",
     "trusted_pr": 223
   },
-  "stage_status": "helper_merged_catalog_recovered_checker_prepare_failed_no_provider_dispatch",
+  "stage_status": "checker_repairs_merged_catalog_live_real_check_failed_grammar_budget_block",
   "stop": true,
   "unresolved": [
-    "Merged guard compares diagnostic raw-file SHA256 with canonical-JSON identity; reproduced compact_terminal_evidence_hash before any write/API/provider call.",
-    "All24 independent checker verdicts and12 checker person outcomes remain missing. Provider grammar acceptance is NOT RUN.",
-    "Both old unknown holds totaling $0.351328 remain intact; new quarantine was not installed. Ledger remains685/690 attempts and$7.698208 conservative use.",
-    "Explicit continuation is needed for repair and another dispatch under the failure-stop rule; unused budget is not retry authority.",
-    "Audited-registry activation and107 legacy-package revalidation/withdrawal remain separate decisions. IARPA issue30 remains separate."
+    "All24 independent verdicts and12 derived checker outcomes remain missing; provider rejected the corrected schema before an answer.",
+    "$0.463282 conservatively held against the SAME $0.50 continuation; remaining $0.036718 is below the $0.12 unchanged output reservation alone.",
+    "Four unknown requests retain $0.814610 in holds. Actual billed usage is unknown; no refund or replay assumed.",
+    "Audited-registry activation and107 legacy-package revalidation/withdrawal remain unexecuted owner decisions; IARPA issue30 remains separate."
   ],
-  "updated_at": "2026-09-21T14:19:14.249299+00:00",
+  "updated_at": "2026-09-21T15:14:04.069069+00:00",
   "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
   "historical_stage3_pre_repair_state": {
     "path": "docs/team-recommender/history/profile-repair-before-experiment-state.json",
@@ -9359,7 +9431,7 @@
       }
     }
   },
-  "active_work": "compact_checker_failure_closeout_and_catalog_recovery",
+  "active_work": "compact_checker_recovery_closed_at_provider_grammar_and_finite_budget",
   "historical_pre_contextual_live_pass": {
     "model": "Pinned claude-sonnet-5 and voyage-4-large; contextual requests not executed",
     "budget_record": {
@@ -10473,201 +10545,456 @@
     }
   },
   "compact_check_continuation": {
-    "version": "compact-check-execution-20260921-v1",
-    "recorded_at": "2026-09-21T14:19:14.249299+00:00",
-    "predispatch_receipt": "docs/reconciliation/compact-check-predispatch-20260921.json",
-    "predispatch_commit": "4437242fede245044ccbc82fbb782509ce58b63e",
-    "starting_product": "b3bb7bf65cf47a170d21c9e6026a233d34273833",
-    "helper_head": "e8e37b003efe87ca158cca5da0f00170116739ee",
-    "main_merge": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
-    "pr": 256,
-    "pr_state": "MERGED",
-    "review": {
-      "comment": 5683636190,
-      "completed_at": "2026-09-21T14:06:35.870342Z",
-      "no_findings_reaction_at": "2026-09-21T14:06:39Z",
-      "unresolved_threads": 0
+    "version": "compact-check-recovery-20260921-v1",
+    "recorded_at": "2026-09-21T15:14:04.069069+00:00",
+    "owner_amendment": "I am relaxing the no-retry rule. Keep working on this until everything is fixed and all changes are merged and live",
+    "scope": "Continuous named checker repair/review/merge and bounded retries within the SAME $0.50; separate catalog recovery. No public experimental activation.",
+    "starting_product": "88888fe40d4a26a8fd48c69cfad09a4e14392969",
+    "interruption_product": "97a582f85f969d9a6e3e084137f6a67d69f208e7",
+    "ending_scientific_code_product": "517a9196811c9f2214ca4b6cfae8ede3ebc6006d",
+    "product_branch": "codex/on-demand-team-recommender",
+    "worktree": "C:/Users/Marc Porosoff/projects/grants-scraper/.worktrees/on-demand-team-recommender",
+    "prs": [
+      {
+        "number": 266,
+        "reviewed_head": "e68c3fd1eb31f46e1b6840f89b396c5c7894eff1",
+        "merge": "c4e0ac136c6ff528c97eace81ddb0aecae23f0c9",
+        "review": "clean",
+        "review_comment": 5762157513,
+        "review_completed_at": "2026-09-21T14:32:55.046099Z",
+        "ci": 35612551682,
+        "ci_result": "success",
+        "python_passed": 1523,
+        "browser_passed": 796,
+        "postmerge_ci": 35613019434,
+        "postmerge_release": 35613019525
+      },
+      {
+        "number": 267,
+        "reviewed_head": "9f13e70255eedac2da9f57e508a551efafb541be",
+        "merge": "f70f000f5977b923cc7e495e0a80be1a3ce84090",
+        "review": "clean",
+        "review_comment": 5762599930,
+        "review_completed_at": "2026-09-21T15:03:10.873006Z",
+        "no_findings_reaction_at": "2026-09-21T15:03:14Z",
+        "unresolved_threads": 0,
+        "ci": 35615751522,
+        "ci_result": "success",
+        "python_passed": 1535,
+        "browser_passed": 796,
+        "postmerge_ci": 35616529902,
+        "postmerge_release": 35616530374
+      }
+    ],
+    "executions": [
+      {
+        "run": 35613118796,
+        "attempt": 1,
+        "head_sha": "c4e0ac136c6ff528c97eace81ddb0aecae23f0c9",
+        "created_at": "2026-09-21T14:34:57Z",
+        "conclusion": "failure",
+        "artifact": 10644862881,
+        "artifact_digest": "5e97ac9f71102756706b360596e3425fa05ef578cf9d3616aebd499b3b0d46ef",
+        "request_id": "6a6e93add95848dcb02f9ccaf158a2eb",
+        "body_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
+        "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
+        "repair_of": "d24a0654d72e486793519bead019b064",
+        "status": "reserved_unknown",
+        "held_microusd": 263282,
+        "reported_usage": null,
+        "provider_error": {
+          "message": "The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the number of strict tools.",
+          "type": "invalid_request_error"
+        },
+        "elapsed_seconds": 0.55984,
+        "receipt_file_sha256": "522d74ca06bba0e96a245d3acd1c104c46765adf8c3eba3da9fbe25595daf14a",
+        "diagnostic_file_sha256": "7564dbeb4b11a8f7836acb845e56a6af3a91c344eaf047fc89a707b2f99ca148",
+        "canonical_diagnostic_sha256": "efcbdc6d40840836bd0ce0495e2547f969deae06c8bdce1cb211fcf5f74607e2",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:02Z",
+            "completedAt": "2026-09-21T14:35:03Z"
+          },
+          {
+            "name": "Run actions/checkout@v6",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:03Z",
+            "completedAt": "2026-09-21T14:35:08Z"
+          },
+          {
+            "name": "Run actions/setup-python@v6",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:08Z",
+            "completedAt": "2026-09-21T14:35:12Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:12Z",
+            "completedAt": "2026-09-21T14:35:16Z"
+          },
+          {
+            "name": "Validate public packet and restore the single authoritative ledger",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:16Z",
+            "completedAt": "2026-09-21T14:35:16Z"
+          },
+          {
+            "name": "Claim the existing Access-authorized contextual job",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:16Z",
+            "completedAt": "2026-09-21T14:35:16Z"
+          },
+          {
+            "name": "Restore the same authoritative ledger for contextual execution",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:16Z",
+            "completedAt": "2026-09-21T14:35:16Z"
+          },
+          {
+            "name": "Validate the finite independent check and restore its existing ledger",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:16Z",
+            "completedAt": "2026-09-21T14:35:23Z"
+          },
+          {
+            "name": "Persist crash protection before any metered request",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:23Z",
+            "completedAt": "2026-09-21T14:35:25Z"
+          },
+          {
+            "name": "Embed only bounded missing public inputs",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:25Z",
+            "completedAt": "2026-09-21T14:35:25Z"
+          },
+          {
+            "name": "Judge only bounded blinded development packets",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:25Z",
+            "completedAt": "2026-09-21T14:35:25Z"
+          },
+          {
+            "name": "Execute the bounded contextual scientific job",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:25Z",
+            "completedAt": "2026-09-21T14:35:25Z"
+          },
+          {
+            "name": "Execute the single bounded independent check",
+            "conclusion": "failure",
+            "startedAt": "2026-09-21T14:35:25Z",
+            "completedAt": "2026-09-21T14:35:26Z"
+          },
+          {
+            "name": "Retain exact accounting and bounded results after success or failure",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:26Z",
+            "completedAt": "2026-09-21T14:35:30Z"
+          },
+          {
+            "name": "Return the graph only after its authoritative checkpoint is durable",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:30Z",
+            "completedAt": "2026-09-21T14:35:30Z"
+          },
+          {
+            "name": "Retain private contextual check results",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:30Z",
+            "completedAt": "2026-09-21T14:35:31Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@v6",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T14:35:31Z",
+            "completedAt": "2026-09-21T14:35:31Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v6",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:31Z",
+            "completedAt": "2026-09-21T14:35:32Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T14:35:32Z",
+            "completedAt": "2026-09-21T14:35:32Z"
+          }
+        ]
+      },
+      {
+        "run": 35616677156,
+        "attempt": 1,
+        "head_sha": "f70f000f5977b923cc7e495e0a80be1a3ce84090",
+        "created_at": "2026-09-21T15:06:28Z",
+        "conclusion": "failure",
+        "artifact": 10645414639,
+        "artifact_digest": "5976992219321b384ed921f73d013bd2f9c648227da0b7fdbca89b93a92b2b98",
+        "request_id": "c1d338226c57473ea464d002121b0167",
+        "body_sha256": "17f99746fbbc2ad601654c4e58152c231b88160ac6dbb91a895c5eea709e0721",
+        "contract_sha256": "b45ed06ff7da749a3eadd0bc4bf4eed531b09e241535b6eafcb5bf5a4ccc40b5",
+        "repair_of": "6a6e93add95848dcb02f9ccaf158a2eb",
+        "status": "reserved_unknown",
+        "held_microusd": 200000,
+        "reported_usage": null,
+        "provider_error": {
+          "message": "The compiled grammar is too large, which would cause performance issues. Simplify your tool schemas or reduce the number of strict tools.",
+          "type": "invalid_request_error"
+        },
+        "elapsed_seconds": 0.596963,
+        "receipt_file_sha256": "7a244e469dac49c1b99361658b17eccceb2386ce4e2149a03d7962f10ac3d805",
+        "diagnostic_file_sha256": "eb76bf3688395f57520e08a43e03b598548b3dfe6e134dff79f104842142cb50",
+        "canonical_diagnostic_sha256": "ec342fb4c389721d0b9b66df8d4effc0875549d5b7b99ed16ada93d717467e81",
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:06:33Z",
+            "completedAt": "2026-09-21T15:06:33Z"
+          },
+          {
+            "name": "Run actions/checkout@v6",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:06:33Z",
+            "completedAt": "2026-09-21T15:06:38Z"
+          },
+          {
+            "name": "Run actions/setup-python@v6",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:06:38Z",
+            "completedAt": "2026-09-21T15:06:41Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:06:41Z",
+            "completedAt": "2026-09-21T15:06:45Z"
+          },
+          {
+            "name": "Validate public packet and restore the single authoritative ledger",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:06:45Z",
+            "completedAt": "2026-09-21T15:06:45Z"
+          },
+          {
+            "name": "Claim the existing Access-authorized contextual job",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:06:45Z",
+            "completedAt": "2026-09-21T15:06:45Z"
+          },
+          {
+            "name": "Restore the same authoritative ledger for contextual execution",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:06:45Z",
+            "completedAt": "2026-09-21T15:06:45Z"
+          },
+          {
+            "name": "Validate the finite independent check and restore its existing ledger",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:06:45Z",
+            "completedAt": "2026-09-21T15:06:51Z"
+          },
+          {
+            "name": "Persist crash protection before any metered request",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:06:51Z",
+            "completedAt": "2026-09-21T15:06:52Z"
+          },
+          {
+            "name": "Embed only bounded missing public inputs",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:06:52Z",
+            "completedAt": "2026-09-21T15:06:52Z"
+          },
+          {
+            "name": "Judge only bounded blinded development packets",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:06:52Z",
+            "completedAt": "2026-09-21T15:06:52Z"
+          },
+          {
+            "name": "Execute the bounded contextual scientific job",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:06:52Z",
+            "completedAt": "2026-09-21T15:06:52Z"
+          },
+          {
+            "name": "Execute the single bounded independent check",
+            "conclusion": "failure",
+            "startedAt": "2026-09-21T15:06:52Z",
+            "completedAt": "2026-09-21T15:06:53Z"
+          },
+          {
+            "name": "Retain exact accounting and bounded results after success or failure",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:06:53Z",
+            "completedAt": "2026-09-21T15:07:00Z"
+          },
+          {
+            "name": "Return the graph only after its authoritative checkpoint is durable",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:07:00Z",
+            "completedAt": "2026-09-21T15:07:00Z"
+          },
+          {
+            "name": "Retain private contextual check results",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:07:00Z",
+            "completedAt": "2026-09-21T15:07:01Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@v6",
+            "conclusion": "skipped",
+            "startedAt": "2026-09-21T15:07:01Z",
+            "completedAt": "2026-09-21T15:07:01Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v6",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:07:01Z",
+            "completedAt": "2026-09-21T15:07:01Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "startedAt": "2026-09-21T15:07:01Z",
+            "completedAt": "2026-09-21T15:07:01Z"
+          }
+        ]
+      }
+    ],
+    "pre_dispatch": {
+      "recorded_at": "2026-09-21T15:06:26.081881+00:00",
+      "authorization_id": "on-demand-team-offline-v2-20260909",
+      "pr": 267,
+      "reviewed_head": "9f13e70255eedac2da9f57e508a551efafb541be",
+      "trusted_main": "f70f000f5977b923cc7e495e0a80be1a3ce84090",
+      "product_reconciliation": "517a9196811c9f2214ca4b6cfae8ede3ebc6006d",
+      "restored_owner_run": 35613118796,
+      "restored_owner_artifact": 10644862881,
+      "known_microusd": 7346880,
+      "unknown_held_microusd": 614610,
+      "requests": 686,
+      "native_counts": 187,
+      "maximum_new_microusd": 200000,
+      "maximum_new_attempts": 1,
+      "maximum_new_native_counts": 1,
+      "same_continuation_cap_microusd": 500000,
+      "prior_continuation_held_microusd": 263282,
+      "maximum_combined_continuation_microusd": 463282,
+      "preserved_microusd": 1267862,
+      "preserved_attempts": 2,
+      "workflow_dispatches_for_this_contract": 1,
+      "provider_smokes": 0,
+      "public_activation": false
     },
-    "required_ci": {
-      "run": 35609287887,
-      "python_passed": 1520,
-      "browser_passed": 796,
+    "checks": {
+      "focused_wire": 12,
+      "focused_compact": 17,
+      "focused_prior_repair": 18,
+      "total_focused": 47,
       "no_drift_artifacts": 23,
       "frozen_queries": 37,
       "top10_churn": 0,
       "scoring_cases": 50,
-      "scoring_byte_identical": true
+      "scoring_byte_identical": true,
+      "real_state_rehearsal": {
+        "body_sha256": "17f99746fbbc2ad601654c4e58152c231b88160ac6dbb91a895c5eea709e0721",
+        "contract_sha256": "b45ed06ff7da749a3eadd0bc4bf4eed531b09e241535b6eafcb5bf5a4ccc40b5",
+        "executions": 3,
+        "fixture_dispatches": 1,
+        "fixture_native_counts": 1,
+        "kind": "copied-real-state-fixture-provider-rehearsal",
+        "not_scientific_evidence": true,
+        "original_files_verified": 1360,
+        "people": 12,
+        "preparations": 3,
+        "prior_requests_unchanged": 686,
+        "questions": 24,
+        "real_native_count_calls": 0,
+        "real_provider_calls": 0,
+        "real_saved_luna_reused": true,
+        "reservation": {
+          "attempt": "1",
+          "authorization_id": "on-demand-team-offline-v2-20260909",
+          "code_sha": "c4e0ac136c6ff528c97eace81ddb0aecae23f0c9",
+          "continuation_lock_sha256": "1876e82610fcc274f3fc5474dbebfb9f2192c6707a48f55e019a71ee3c1c793f",
+          "maximum_new_attempts": 1,
+          "maximum_new_microusd": 200000,
+          "native_count_calls": 1,
+          "operation": "cb-cc-wire-repair",
+          "preserved_attempts": 2,
+          "preserved_microusd": 1267862,
+          "prior_ledger_sha256": "a2afa022f2cdc23e00bfda654a8f13bdc34fda2aeedd1194fd2d10e2fa76d158",
+          "retained_unknown_hold_microusd": 614610,
+          "run_id": "fixture-not-live"
+        },
+        "unmodified_real_identity_constants": true
+      },
+      "real_failed_checkpoint_repeat_rejection": {
+        "kind": "actual-failed-checkpoint-repeat-rejection",
+        "repetitions": 3,
+        "provider_calls": 0,
+        "api_calls": 0,
+        "ledger_unchanged": true,
+        "perform": "contextual_claimed_request_requires_recovery",
+        "prepare_authority": "wire_repair_other_uncertainty",
+        "outstanding_request": "c1d338226c57473ea464d002121b0167"
+      },
+      "initial_failure": "New refusal test expected ValueError; corrected to existing Refusal/Incomplete types. No production failure handling relaxed.",
+      "e2e": "NOT_RUN_NOT_AUTHORIZED"
     },
-    "postmerge_ci": {
-      "run": 35610075995,
-      "result": "success"
-    },
-    "focused_checks_passed": 14,
-    "execution": {
-      "run": 35610297158,
-      "attempt": 1,
-      "head_sha": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
-      "created_at": "2026-09-21T14:09:53Z",
-      "conclusion": "failure",
-      "job_id": 106367437635,
-      "steps": [
-        {
-          "name": "Set up job",
-          "conclusion": "success",
-          "started_at": "2026-09-21T14:09:57Z",
-          "completed_at": "2026-09-21T14:09:58Z"
-        },
-        {
-          "name": "Run actions/checkout@v6",
-          "conclusion": "success",
-          "started_at": "2026-09-21T14:09:58Z",
-          "completed_at": "2026-09-21T14:10:03Z"
-        },
-        {
-          "name": "Run actions/setup-python@v6",
-          "conclusion": "success",
-          "started_at": "2026-09-21T14:10:03Z",
-          "completed_at": "2026-09-21T14:10:05Z"
-        },
-        {
-          "name": "Run python -m pip install -r requirements.txt",
-          "conclusion": "success",
-          "started_at": "2026-09-21T14:10:05Z",
-          "completed_at": "2026-09-21T14:10:11Z"
-        },
-        {
-          "name": "Validate public packet and restore the single authoritative ledger",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:11Z",
-          "completed_at": "2026-09-21T14:10:11Z"
-        },
-        {
-          "name": "Claim the existing Access-authorized contextual job",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:11Z",
-          "completed_at": "2026-09-21T14:10:11Z"
-        },
-        {
-          "name": "Restore the same authoritative ledger for contextual execution",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:11Z",
-          "completed_at": "2026-09-21T14:10:11Z"
-        },
-        {
-          "name": "Validate the finite independent check and restore its existing ledger",
-          "conclusion": "failure",
-          "started_at": "2026-09-21T14:10:11Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Persist crash protection before any metered request",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Embed only bounded missing public inputs",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Judge only bounded blinded development packets",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Execute the bounded contextual scientific job",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Execute the single bounded independent check",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Retain exact accounting and bounded results after success or failure",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Return the graph only after its authoritative checkpoint is durable",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Retain private contextual check results",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Post Run actions/setup-python@v6",
-          "conclusion": "skipped",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:14Z"
-        },
-        {
-          "name": "Post Run actions/checkout@v6",
-          "conclusion": "success",
-          "started_at": "2026-09-21T14:10:14Z",
-          "completed_at": "2026-09-21T14:10:15Z"
-        },
-        {
-          "name": "Complete job",
-          "conclusion": "success",
-          "started_at": "2026-09-21T14:10:15Z",
-          "completed_at": "2026-09-21T14:10:15Z"
-        }
-      ],
-      "artifacts": 0,
-      "workflow_dispatches": 1,
-      "provider_dispatches": 0,
-      "new_native_counts": 0,
-      "automatic_retries": 0,
-      "first_failure": "compact_terminal_evidence_hash"
-    },
-    "reproduction": {
-      "version": "compact-real-authority-reproduction-20260921-v1",
-      "verified_checkpoint_files": 1357,
-      "receipt_raw_sha256": "6c237d6db06aeaf48df9896505c74e6836a7fea9d00116f6c3ed2727af993723",
-      "diagnostic_raw_sha256": "9f5cc1a7b775fb4e442545308ca037b2b2481ce6e2b1e6a3be3d38f65457c62b",
-      "diagnostic_canonical_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
-      "locked_diagnostic_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
-      "provider_calls": 0,
-      "api_calls": 0,
-      "authoritative_files_changed": false,
-      "exception": "ConfigurationFailure",
-      "message": "compact_terminal_evidence_hash",
-      "cloned_ledger_unchanged": true
+    "scientific": {
+      "expected_people": 12,
+      "expected_pairs": 24,
+      "accepted_verdicts": 0,
+      "missing_verdicts": 24,
+      "derived_checker_person_outcomes": 0,
+      "provider_grammar_acceptance": "FAILED_HTTP400_COMPILED_GRAMMAR_TOO_LARGE",
+      "comparison": "UNMEASURED",
+      "retained_luna_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+      "luna_prior_person_outcomes": {
+        "supported": 10,
+        "credible_transfer": 2
+      },
+      "luna_prior_pairs": {
+        "direct": 14,
+        "method_transfer": 9,
+        "adjacent": 1
+      },
+      "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+      "body_sha256": "17f99746fbbc2ad601654c4e58152c231b88160ac6dbb91a895c5eea709e0721",
+      "contract_sha256": "b45ed06ff7da749a3eadd0bc4bf4eed531b09e241535b6eafcb5bf5a4ccc40b5",
+      "wire_bytes": 67812,
+      "native_schema_bytes": 16721,
+      "native_input_estimate": 29284,
+      "reserved_input_tokens": 40000,
+      "reserved_output_tokens": 12000,
+      "model": "claude-sonnet-5",
+      "input_evidence_changed": false,
+      "luna_output_shown_to_checker": false,
+      "scientific_rubric_changed": false
     },
     "accounting": {
       "authorization_id": "on-demand-team-offline-v2-20260909",
-      "authoritative_run": 34967272858,
-      "artifact": 10394804222,
-      "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
-      "checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+      "authoritative_run": 35616677156,
+      "artifact": 10645414639,
+      "artifact_digest": "5976992219321b384ed921f73d013bd2f9c648227da0b7fdbca89b93a92b2b98",
+      "reservation_artifact": 10645459533,
+      "reservation_digest": "8345a097b9214a3b1a432f7ec83e26bab5d11722c77b94429aee3b808b57003e",
+      "result_artifact": 10645724603,
+      "result_digest": "1c2329ef6e35e6b2eddd0a27ead8ded19fead33bb8d86eea3b02977143984f0e",
+      "ledger_sha256": "2a2f7f61be78e4e2b2db929b4880fedaa8a3b403873bac0a0fb4a7c772fbdac6",
+      "checkpoint_sha256": "b9b18c401a3393823aa08e1af9665087b20e527b10fb791210e7b257c17d2afa",
+      "verified_files": 1363,
+      "prior_686_request_rows_unchanged": true,
       "known_microusd": 7346880,
-      "unknown_holds_microusd": 351328,
-      "conservative_used_microusd": 7698208,
-      "requests": 685,
-      "remaining_microusd": 2301792,
-      "remaining_requests": 5,
-      "protected_microusd": 1267862,
-      "protected_requests": 2,
-      "new_requests": 0,
-      "new_input_tokens": 0,
-      "new_output_tokens": 0,
-      "new_microusd": 0,
-      "new_reservations": 0,
-      "native_counts_used": 187,
-      "native_count_limit": 190,
+      "unknown_holds_microusd": 814610,
       "unknown_holds": [
         {
           "id": "fc618603458249348c6834d258264520",
@@ -10676,46 +11003,78 @@
         {
           "id": "d24a0654d72e486793519bead019b064",
           "microusd": 205254
+        },
+        {
+          "id": "6a6e93add95848dcb02f9ccaf158a2eb",
+          "microusd": 263282
+        },
+        {
+          "id": "c1d338226c57473ea464d002121b0167",
+          "microusd": 200000
         }
       ],
-      "new_quarantine_installed": false,
-      "history_changed": false,
-      "retry_authorized": false
-    },
-    "scientific": {
-      "expected_people": 12,
-      "expected_pairs": 24,
-      "accepted_verdicts": 0,
-      "missing_verdicts": 24,
-      "derived_checker_person_outcomes": 0,
-      "provider_grammar_acceptance": "NOT_RUN",
-      "saved_luna_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
-      "packet_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
-      "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
-      "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
-      "comparison": "UNMEASURED"
+      "conservative_used_microusd": 8161490,
+      "requests": 687,
+      "remaining_microusd": 1838510,
+      "remaining_requests": 3,
+      "protected_microusd": 1267862,
+      "protected_requests": 2,
+      "new_requests_in_recovery": 2,
+      "new_known_microusd": 0,
+      "new_unknown_held_microusd": 463282,
+      "new_inference_usage": "UNKNOWN_NOT_ZERO",
+      "known_input_tokens": 2332093,
+      "known_output_tokens": 275395,
+      "usage_complete": false,
+      "native_counts_used": 188,
+      "native_count_limit": 190,
+      "new_native_counts": 1,
+      "latest_native_count": {
+        "charged_microusd": 0,
+        "id": "compact-wire-repair-20260921-v1:complete",
+        "input_tokens": 29284,
+        "key": "b075f94304519a26c64088c98b6ae0e6d6e6cbeab202d918dca5515ee340f99e",
+        "metered_inference": false,
+        "status": "complete"
+      },
+      "same_continuation_ceiling_microusd": 500000,
+      "continuation_remaining_microusd": 36718,
+      "unchanged_output_reservation_alone_microusd": 120000,
+      "another_complete_request_fits": false,
+      "new_authority_events_installed": 2,
+      "historical_holds_released": 0,
+      "logical_requests_replayed": 0
     },
     "catalog": {
-      "published_pr": 265,
-      "run": 35515844236,
-      "candidate": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
-      "records": 1368,
-      "rejected_pr_262_untouched": true,
       "status": "PUBLISHED_VERIFIED",
-      "postmerge_run": 35610076546,
+      "published_pr": 265,
+      "publication_run": 35515844236,
+      "publication_sha": "765cdb7da73598fb30b4a098bd8d568e10ac67c6",
+      "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+      "records": 1368,
+      "generated_date": "2026-09-20",
+      "postmerge_release": 35616530374,
       "postmerge_result": "success",
-      "postmerge_plan": {
+      "plan": {
         "anthropic": "true",
         "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
         "candidate_run": "35515844236",
         "changes": {
           "validation": [
+            "tests/fixtures/compact-check-evidence/diagnostics.json",
+            "tests/fixtures/compact-check-evidence/receipts.json",
+            "tests/fixtures/compact-wire-evidence/diagnostics.json",
+            "tests/fixtures/compact-wire-evidence/receipts.json",
+            "tests/fixtures/compact-wire-evidence/request.json",
             "tests/test_contextual_team_compact_check.py",
             "tests/test_contextual_team_luna_repair.py",
+            "tests/test_contextual_team_wire_repair.py",
             "tools/contextual_team_check.py",
+            "tools/contextual_team_check_wire.py",
             "tools/contextual_team_compact_check.py",
             "tools/contextual_team_pair_contract.py",
             "tools/contextual_team_policy.py",
+            "tools/contextual_team_wire_repair.py",
             "tools/team_recommender_budget.py"
           ]
         },
@@ -10726,8 +11085,8 @@
         "qualification_hold": false,
         "reason": "Dependency fingerprints and retained release evidence",
         "receipt_current": false,
-        "receipt_run": "35515844236",
-        "release_sha": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+        "receipt_run": "35613019525",
+        "release_sha": "f70f000f5977b923cc7e495e0a80be1a3ce84090",
         "runtime_changes": [],
         "stage": "validate",
         "team_generation_ready": false,
@@ -10746,45 +11105,50 @@
       "assembly": "skipped",
       "publication": "skipped",
       "pages": "skipped",
-      "verify_live": "skipped",
-      "manual_refreshes": 0,
-      "production_mutated_by_continuation": false,
+      "live_provider_smoke": "skipped",
       "live_observation": {
-        "checked_at": "2026-09-21T14:13:56.841566+00:00",
+        "checked_at": "2026-09-21T15:01:59.466183+00:00",
         "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
         "files": [
           {
             "path": "data/catalog-metadata.js",
-            "status": 200,
             "bytes": 575,
             "sha256": "48d8e1b876ce6791ebeacc1536a007239cf4e5e502e1668f6c6cb30ab9bf9c93",
             "manifest_match": true
           },
           {
             "path": "data/researcher_registry_manifest.json",
-            "status": 200,
             "bytes": 3457,
             "sha256": "a2ecbb71de8e6afe20d5ae466d0842cb4a682a63f724dab91ac48b2075f837e3",
             "manifest_match": true
           },
           {
             "path": "data/search-v2-release.json",
-            "status": 200,
             "bytes": 4578,
             "sha256": "ebf9511b8dab4a4af0df439a823f9be4a560fa94b66605f4d48141c84de3bf26",
             "manifest_match": true
           }
         ],
+        "worker": {
+          "budget_state": "available",
+          "corpus_sha256": "cbce0ecebf46209e301dabc6b51bde8bc92db573dfdc7ebccc81d23a8a62fc0c",
+          "model_space_fingerprint": "8c080778811e5c47d012f0d5db1f0d9c8cac63ae604eb9a12e7892202095f06d",
+          "service": "available"
+        },
         "provider_calls": 0,
-        "scope": "Three public metadata files; full package provenance retained in September20 release receipt."
-      }
+        "scope": "Three metadata files and Worker health; full package receipt retained from publication."
+      },
+      "rejected_pr_262_preserved_unpublished": true,
+      "manual_refreshes": 0,
+      "subscriber_actions": 0
     },
+    "production_changes": "Only manual protected-main checker prerequisites merged; public runtime/assets and restricted service deployments unchanged.",
     "public_activation": false,
     "audited_registry_activation": false,
     "legacy_packages_withdrawn": 0,
     "affected_legacy_packages_preserved": 107,
-    "e2e": "NOT_RUN_NOT_AUTHORIZED",
-    "next_action": "Explicit owner continuation for the minimal raw-versus-canonical diagnostic hash repair with real-identity regression, exact-head review and any subsequent single dispatch; no automatic repair/retry."
+    "disposition": "BLOCKED_PROVIDER_GRAMMAR_AND_REMAINING_CONTINUATION_BUDGET",
+    "next_action": "No further paid request fits the existing continuation cap. Preserve failed schema variants, all unknown holds and missing verdicts. A supported complete wire representation remains unresolved; do not infer scientific acceptance or activate."
   },
   "historical_pre_compact_execution_20260921": {
     "stage_status": "reviewed_engineering_complete_real_check_blocked_release_dependency",
@@ -11219,5 +11583,538 @@
       "current_task_planned_reservation_usd": 0.263282,
       "current_task_reservation_is_spent": false
     }
+  },
+  "historical_pre_compact_recovery_20260921": {
+    "authority": {
+      "work_order": "September19 compact checker continuation",
+      "record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+      "scope": "One new independent 24-pair checker request at most $0.50 inside the existing ledger; exact terminal-request recovery retaining both unknown holds; no automatic retry. Protected-main merge conditional on safe release planning. No public activation, registry migration, legacy withdrawal or E2E."
+    },
+    "stage_status": "helper_merged_catalog_recovered_checker_prepare_failed_no_provider_dispatch",
+    "active_work": "compact_checker_failure_closeout_and_catalog_recovery",
+    "updated_at": "2026-09-21T14:19:14.249299+00:00",
+    "recommendation": "STOP FOR USER REVIEW: PR256 merged and catalog recovered; exact diagnostic hash representation defect blocks checker preparation. No provider call occurred. No automatic repair/retry.",
+    "unresolved": [
+      "Merged guard compares diagnostic raw-file SHA256 with canonical-JSON identity; reproduced compact_terminal_evidence_hash before any write/API/provider call.",
+      "All24 independent checker verdicts and12 checker person outcomes remain missing. Provider grammar acceptance is NOT RUN.",
+      "Both old unknown holds totaling $0.351328 remain intact; new quarantine was not installed. Ledger remains685/690 attempts and$7.698208 conservative use.",
+      "Explicit continuation is needed for repair and another dispatch under the failure-stop rule; unused budget is not retry authority.",
+      "Audited-registry activation and107 legacy-package revalidation/withdrawal remain separate decisions. IARPA issue30 remains separate."
+    ],
+    "next_stage_requires": "Explicit owner continuation of the named hash-identity repair and subsequent bounded check. No public activation, registry migration or Stage4 authority.",
+    "checks": {
+      "focused_continuation_passed": 14,
+      "required_ci": {
+        "run": 35609287887,
+        "python_passed": 1520,
+        "browser_passed": 796,
+        "no_drift_artifacts": 23,
+        "frozen_queries": 37,
+        "top10_churn": 0,
+        "scoring_cases": 50,
+        "scoring_byte_identical": true
+      },
+      "real_authority_reproduction": {
+        "version": "compact-real-authority-reproduction-20260921-v1",
+        "verified_checkpoint_files": 1357,
+        "receipt_raw_sha256": "6c237d6db06aeaf48df9896505c74e6836a7fea9d00116f6c3ed2727af993723",
+        "diagnostic_raw_sha256": "9f5cc1a7b775fb4e442545308ca037b2b2481ce6e2b1e6a3be3d38f65457c62b",
+        "diagnostic_canonical_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+        "locked_diagnostic_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+        "provider_calls": 0,
+        "api_calls": 0,
+        "authoritative_files_changed": false,
+        "exception": "ConfigurationFailure",
+        "message": "compact_terminal_evidence_hash",
+        "cloned_ledger_unchanged": true
+      },
+      "e2e": "NOT_RUN_NOT_AUTHORIZED"
+    },
+    "results": {
+      "expected_people": 12,
+      "expected_pairs": 24,
+      "accepted_verdicts": 0,
+      "missing_verdicts": 24,
+      "derived_checker_person_outcomes": 0,
+      "provider_grammar_acceptance": "NOT_RUN",
+      "saved_luna_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+      "packet_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
+      "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
+      "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+      "comparison": "UNMEASURED"
+    },
+    "continuation": "Current bounded run stopped after preparation failure; no provider dispatch, no automatic retry. Catalog recovery completed independently.",
+    "containing_commit": "Documentation commit introducing docs/reconciliation/compact-check-execution-20260921.json; resolve with git log for that path.",
+    "compact_check_continuation": {
+      "version": "compact-check-execution-20260921-v1",
+      "recorded_at": "2026-09-21T14:19:14.249299+00:00",
+      "predispatch_receipt": "docs/reconciliation/compact-check-predispatch-20260921.json",
+      "predispatch_commit": "4437242fede245044ccbc82fbb782509ce58b63e",
+      "starting_product": "b3bb7bf65cf47a170d21c9e6026a233d34273833",
+      "helper_head": "e8e37b003efe87ca158cca5da0f00170116739ee",
+      "main_merge": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+      "pr": 256,
+      "pr_state": "MERGED",
+      "review": {
+        "comment": 5683636190,
+        "completed_at": "2026-09-21T14:06:35.870342Z",
+        "no_findings_reaction_at": "2026-09-21T14:06:39Z",
+        "unresolved_threads": 0
+      },
+      "required_ci": {
+        "run": 35609287887,
+        "python_passed": 1520,
+        "browser_passed": 796,
+        "no_drift_artifacts": 23,
+        "frozen_queries": 37,
+        "top10_churn": 0,
+        "scoring_cases": 50,
+        "scoring_byte_identical": true
+      },
+      "postmerge_ci": {
+        "run": 35610075995,
+        "result": "success"
+      },
+      "focused_checks_passed": 14,
+      "execution": {
+        "run": 35610297158,
+        "attempt": 1,
+        "head_sha": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+        "created_at": "2026-09-21T14:09:53Z",
+        "conclusion": "failure",
+        "job_id": 106367437635,
+        "steps": [
+          {
+            "name": "Set up job",
+            "conclusion": "success",
+            "started_at": "2026-09-21T14:09:57Z",
+            "completed_at": "2026-09-21T14:09:58Z"
+          },
+          {
+            "name": "Run actions/checkout@v6",
+            "conclusion": "success",
+            "started_at": "2026-09-21T14:09:58Z",
+            "completed_at": "2026-09-21T14:10:03Z"
+          },
+          {
+            "name": "Run actions/setup-python@v6",
+            "conclusion": "success",
+            "started_at": "2026-09-21T14:10:03Z",
+            "completed_at": "2026-09-21T14:10:05Z"
+          },
+          {
+            "name": "Run python -m pip install -r requirements.txt",
+            "conclusion": "success",
+            "started_at": "2026-09-21T14:10:05Z",
+            "completed_at": "2026-09-21T14:10:11Z"
+          },
+          {
+            "name": "Validate public packet and restore the single authoritative ledger",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:11Z",
+            "completed_at": "2026-09-21T14:10:11Z"
+          },
+          {
+            "name": "Claim the existing Access-authorized contextual job",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:11Z",
+            "completed_at": "2026-09-21T14:10:11Z"
+          },
+          {
+            "name": "Restore the same authoritative ledger for contextual execution",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:11Z",
+            "completed_at": "2026-09-21T14:10:11Z"
+          },
+          {
+            "name": "Validate the finite independent check and restore its existing ledger",
+            "conclusion": "failure",
+            "started_at": "2026-09-21T14:10:11Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Persist crash protection before any metered request",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Embed only bounded missing public inputs",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Judge only bounded blinded development packets",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Execute the bounded contextual scientific job",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Execute the single bounded independent check",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Retain exact accounting and bounded results after success or failure",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Return the graph only after its authoritative checkpoint is durable",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Retain private contextual check results",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Post Run actions/setup-python@v6",
+            "conclusion": "skipped",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:14Z"
+          },
+          {
+            "name": "Post Run actions/checkout@v6",
+            "conclusion": "success",
+            "started_at": "2026-09-21T14:10:14Z",
+            "completed_at": "2026-09-21T14:10:15Z"
+          },
+          {
+            "name": "Complete job",
+            "conclusion": "success",
+            "started_at": "2026-09-21T14:10:15Z",
+            "completed_at": "2026-09-21T14:10:15Z"
+          }
+        ],
+        "artifacts": 0,
+        "workflow_dispatches": 1,
+        "provider_dispatches": 0,
+        "new_native_counts": 0,
+        "automatic_retries": 0,
+        "first_failure": "compact_terminal_evidence_hash"
+      },
+      "reproduction": {
+        "version": "compact-real-authority-reproduction-20260921-v1",
+        "verified_checkpoint_files": 1357,
+        "receipt_raw_sha256": "6c237d6db06aeaf48df9896505c74e6836a7fea9d00116f6c3ed2727af993723",
+        "diagnostic_raw_sha256": "9f5cc1a7b775fb4e442545308ca037b2b2481ce6e2b1e6a3be3d38f65457c62b",
+        "diagnostic_canonical_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+        "locked_diagnostic_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+        "provider_calls": 0,
+        "api_calls": 0,
+        "authoritative_files_changed": false,
+        "exception": "ConfigurationFailure",
+        "message": "compact_terminal_evidence_hash",
+        "cloned_ledger_unchanged": true
+      },
+      "accounting": {
+        "authorization_id": "on-demand-team-offline-v2-20260909",
+        "authoritative_run": 34967272858,
+        "artifact": 10394804222,
+        "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
+        "checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+        "known_microusd": 7346880,
+        "unknown_holds_microusd": 351328,
+        "conservative_used_microusd": 7698208,
+        "requests": 685,
+        "remaining_microusd": 2301792,
+        "remaining_requests": 5,
+        "protected_microusd": 1267862,
+        "protected_requests": 2,
+        "new_requests": 0,
+        "new_input_tokens": 0,
+        "new_output_tokens": 0,
+        "new_microusd": 0,
+        "new_reservations": 0,
+        "native_counts_used": 187,
+        "native_count_limit": 190,
+        "unknown_holds": [
+          {
+            "id": "fc618603458249348c6834d258264520",
+            "microusd": 146074
+          },
+          {
+            "id": "d24a0654d72e486793519bead019b064",
+            "microusd": 205254
+          }
+        ],
+        "new_quarantine_installed": false,
+        "history_changed": false,
+        "retry_authorized": false
+      },
+      "scientific": {
+        "expected_people": 12,
+        "expected_pairs": 24,
+        "accepted_verdicts": 0,
+        "missing_verdicts": 24,
+        "derived_checker_person_outcomes": 0,
+        "provider_grammar_acceptance": "NOT_RUN",
+        "saved_luna_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+        "packet_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
+        "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
+        "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+        "comparison": "UNMEASURED"
+      },
+      "catalog": {
+        "published_pr": 265,
+        "run": 35515844236,
+        "candidate": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+        "records": 1368,
+        "rejected_pr_262_untouched": true,
+        "status": "PUBLISHED_VERIFIED",
+        "postmerge_run": 35610076546,
+        "postmerge_result": "success",
+        "postmerge_plan": {
+          "anthropic": "true",
+          "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+          "candidate_run": "35515844236",
+          "changes": {
+            "validation": [
+              "tests/test_contextual_team_compact_check.py",
+              "tests/test_contextual_team_luna_repair.py",
+              "tools/contextual_team_check.py",
+              "tools/contextual_team_compact_check.py",
+              "tools/contextual_team_pair_contract.py",
+              "tools/contextual_team_policy.py",
+              "tools/team_recommender_budget.py"
+            ]
+          },
+          "live_verified": true,
+          "openai": "false",
+          "publication_attempt": "1",
+          "publication_run": "35515844236",
+          "qualification_hold": false,
+          "reason": "Dependency fingerprints and retained release evidence",
+          "receipt_current": false,
+          "receipt_run": "35515844236",
+          "release_sha": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+          "runtime_changes": [],
+          "stage": "validate",
+          "team_generation_ready": false,
+          "team_mode": "maintenance"
+        },
+        "validation_gates": {
+          "browser": "passed",
+          "frozen-query": "passed",
+          "no-drift": "passed",
+          "notice-projection": "passed",
+          "package-integrity": "passed",
+          "python": "passed",
+          "scoring": "passed"
+        },
+        "generation": "skipped",
+        "assembly": "skipped",
+        "publication": "skipped",
+        "pages": "skipped",
+        "verify_live": "skipped",
+        "manual_refreshes": 0,
+        "production_mutated_by_continuation": false,
+        "live_observation": {
+          "checked_at": "2026-09-21T14:13:56.841566+00:00",
+          "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+          "files": [
+            {
+              "path": "data/catalog-metadata.js",
+              "status": 200,
+              "bytes": 575,
+              "sha256": "48d8e1b876ce6791ebeacc1536a007239cf4e5e502e1668f6c6cb30ab9bf9c93",
+              "manifest_match": true
+            },
+            {
+              "path": "data/researcher_registry_manifest.json",
+              "status": 200,
+              "bytes": 3457,
+              "sha256": "a2ecbb71de8e6afe20d5ae466d0842cb4a682a63f724dab91ac48b2075f837e3",
+              "manifest_match": true
+            },
+            {
+              "path": "data/search-v2-release.json",
+              "status": 200,
+              "bytes": 4578,
+              "sha256": "ebf9511b8dab4a4af0df439a823f9be4a560fa94b66605f4d48141c84de3bf26",
+              "manifest_match": true
+            }
+          ],
+          "provider_calls": 0,
+          "scope": "Three public metadata files; full package provenance retained in September20 release receipt."
+        }
+      },
+      "public_activation": false,
+      "audited_registry_activation": false,
+      "legacy_packages_withdrawn": 0,
+      "affected_legacy_packages_preserved": 107,
+      "e2e": "NOT_RUN_NOT_AUTHORIZED",
+      "next_action": "Explicit owner continuation for the minimal raw-versus-canonical diagnostic hash repair with real-identity regression, exact-head review and any subsequent single dispatch; no automatic repair/retry."
+    },
+    "budget_record": {
+      "D1_new_usd": 1.055784,
+      "D1_prior_usd": 1.082518,
+      "D2_new_usd": 0.140808,
+      "D2_prior_usd": 2.138302,
+      "D3_embedding_requests": 19,
+      "D3_embedding_tokens": 51153,
+      "D3_judge_input_tokens": 366538,
+      "D3_judge_output_tokens": 11700,
+      "D3_judge_requests": 120,
+      "D3_prior_usd": 2.27911,
+      "D3_spend_usd": 0.856223,
+      "actual_usd": 7.34688,
+      "authoritative_owner": "Exclusive protected-main cloud executor; checkpoint run34967272858, artifact10394804222. Local mirrors read-only.",
+      "authorized_usd": 10,
+      "closeout_new_requests": 24,
+      "closeout_new_usd": 1.205247,
+      "embedding_tokens": 123538,
+      "historical_other_task_credit_usd": 0,
+      "historical_other_task_usd": 11.971342,
+      "historical_stage2_minimum_later_reserve_usd": 4,
+      "id": "on-demand-team-offline-v2-20260909",
+      "input_tokens": 2332093,
+      "latest_checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+      "latest_run_id": 34967272858,
+      "ledger": "Cloud state artifact10394804222, run34967272858; $7.346880 known + $0.351328 unknown held,685/690 attempts.",
+      "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
+      "local_copy_role": "read-only exact mirror; cannot authorize dispatch",
+      "no_new_allowance_at_closeout": true,
+      "output_tokens": 275395,
+      "path": "docs/team-recommender/preparation-budget.json",
+      "reconciliation": {
+        "path": "docs/reconciliation/compact-check-execution-20260921.json",
+        "sha256": "a4856c75bee5f23b2e5829630edf88e84a033650feac5f53cb1aab81b6300dba"
+      },
+      "remaining_request_slots": 5,
+      "remaining_total_usd": 2.301792,
+      "requests": 685,
+      "reserved_usd": 0.351328,
+      "stage2_cumulative_ceiling_usd": 6,
+      "stage3_ceiling_new_usd": 4,
+      "stage3_new_requests": 120,
+      "stage3_new_usd": 0.817654,
+      "stage3_recorded_ceiling_new_requests": 184,
+      "stage4_minimum_preserved_requests": 25,
+      "stage4_minimum_preserved_usd": 2.864667,
+      "profile_repair_new_usd": 0,
+      "profile_repair_new_requests": 0,
+      "post_audit_new_usd": 0.337668,
+      "post_audit_new_requests": 34,
+      "post_audit_new_input_tokens": 152954,
+      "post_audit_new_output_tokens": 3176,
+      "shared_evidence_repair_new_usd": 0,
+      "shared_evidence_repair_new_requests": 0,
+      "contextual_new_usd": 1.205247,
+      "contextual_new_requests": 24,
+      "current_task_reserve_usd": 1.267862,
+      "current_task_reserve_requests": 2,
+      "historical_reserve_fields": "stage2/stage3/stage4 fields above retain historical authorization; current contextual amendment is authoritative.",
+      "option1_new_usd": 0.262512,
+      "option1_new_requests": 6,
+      "phase1_new_usd": 0.063566,
+      "phase1_new_requests": 3,
+      "phase1_completion_new_usd": 0.042804,
+      "phase1_completion_new_requests": 2,
+      "conservative_ledger_usage_usd": 7.698208,
+      "current_task_maximum_new_usd": 0.5,
+      "current_task_maximum_new_attempts": 1,
+      "requirements_latency_new_requests": 3,
+      "requirements_latency_reconciled_usd": 0.107736,
+      "requirements_latency_uncertain_usd": 0.146074,
+      "usage_complete": false,
+      "unknown_usage_request_ids": [
+        "fc618603458249348c6834d258264520",
+        "d24a0654d72e486793519bead019b064"
+      ],
+      "token_totals_note": "Known returned usage only. Both checker HTTP400 usages are unknown, not zero. New Luna85 reasoning tokens are within3337 output tokens.",
+      "luna_repair_new_requests": 2,
+      "luna_repair_known_usd": 0.007006,
+      "luna_repair_unknown_held_usd": 0.205254,
+      "luna_repair_conservative_usd": 0.21226,
+      "native_count_used": 187,
+      "native_count_limit": 190,
+      "current_task_authority": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md",
+      "current_task_new_requests": 0,
+      "current_task_new_usd": 0,
+      "current_task_planned_reservation_usd": 0.263282,
+      "current_task_reservation_is_spent": false,
+      "current_task_workflow_dispatches": 1,
+      "current_task_stop": "Pre-provider failure; no automatic repair/retry authorized."
+    },
+    "approvals": {
+      "budget_amendment_B1": true,
+      "continuation_C1": true,
+      "continuation_C2": true,
+      "diagnostic_revision_D1": true,
+      "embedding_revision_D3": true,
+      "evaluation_amendment_E1": true,
+      "paid_preparation_or_judging": true,
+      "production_release": false,
+      "ranking_revision_D2": true,
+      "stage1": true,
+      "stage2": true,
+      "stage2_decision_closeout": {
+        "authorized": true,
+        "instruction": {
+          "path": "docs/team-recommender/STAGE_2_CLOSEOUT_AND_VALIDATION_HANDOFF.md",
+          "sha256": "ac53c34411c5fee762f6a99d82a1379dfa5905683b195733f0fb7a8fb1da7e16"
+        },
+        "new_paid_requests": 0,
+        "scope": "Local consolidation, complete projection, exact E2 nomination and validation handoff only",
+        "stage3": false
+      },
+      "stage3": true,
+      "stage3_full_browser_validation": true,
+      "stage4": false,
+      "trusted_main_prerequisite": true,
+      "post_audit_corrective_revalidation": true,
+      "post_audit_paid_check": {
+        "maximum_new_usd": 2,
+        "maximum_new_attempts": 60,
+        "existing_ledger": true,
+        "approved": true
+      },
+      "post_audit_full_browser_validation": true,
+      "shared_evidence_repair": {
+        "authorized": true,
+        "new_usd": 0,
+        "provider_requests": 0,
+        "full_browser_validation": true,
+        "automatic_next_revision": false,
+        "deployment": false
+      },
+      "compact_check_continuation": {
+        "authorized": true,
+        "maximum_new_usd": 0.5,
+        "maximum_new_attempts": 1,
+        "maximum_native_counts": 1,
+        "planned_native_counts": 0,
+        "used_attempts": 0,
+        "used_usd": 0,
+        "existing_ledger": true,
+        "record": "docs/team-recommender/contextual-stage-b/COMPACT-CHECK-CONTINUATION-AUTHORITY.md"
+      }
+    },
+    "source_head_at_evidence_capture": "98de035d4148460fc8949ff7a44c6f6695a4fa83",
+    "source_tree_at_evidence_capture": "799f1242b735fbf2464f5693c3fd5fde85570b4b"
+  },
+  "current_code": {
+    "trusted_main": "f70f000f5977b923cc7e495e0a80be1a3ce84090",
+    "helper_head": "9f13e70255eedac2da9f57e508a551efafb541be",
+    "product_reconciliation": "517a9196811c9f2214ca4b6cfae8ede3ebc6006d",
+    "prs": [
+      266,
+      267
+    ],
+    "public_runtime_changed": false
   }
 }
