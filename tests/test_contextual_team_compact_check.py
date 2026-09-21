@@ -40,10 +40,13 @@ class CompactContinuation(unittest.TestCase):
         self.original = copy.deepcopy(s['requests'])
         self.bind(patch.object(compact,'PRIOR_ROWS',identity(s['requests'])))
         atomic_json(self.state/'ledger.json',s)
-        for folder, name in (('receipts','OLD_RECEIPT'),('diagnostics','OLD_DIAGNOSTIC')):
+        # These bounded operational fixtures retain the real serialization and
+        # identity constants. No provider response body or scientific text.
+        for folder in ('receipts', 'diagnostics'):
             path=self.state/folder/(compact.OLD_ID+'.json')
-            atomic_json(path,{'fixture':'terminal HTTP400, unknown usage'})
-            self.bind(patch.object(compact,name,existing.sha(path.read_bytes())))
+            path.parent.mkdir(parents=True, exist_ok=True)
+            shutil.copyfile(Path(__file__).parent/'fixtures/compact-check-evidence'/
+                (folder+'.json'), path)
         self.old_run = {'id':34967272858,'run_attempt':1,'status':'completed','conclusion':'failure',
             'path':existing.WORKFLOW,'head_branch':'main','event':'workflow_dispatch',
             'head_sha':'ef44f981803e2cde77a8d1a6659115e722c66e02'}
@@ -209,6 +212,38 @@ class CompactContinuation(unittest.TestCase):
         (self.state/'diagnostics'/(compact.OLD_ID+'.json')).write_text('{}')
         with self.assertRaises(ConfigurationFailure):compact.install_authority(self.state,self.api)
         self.assertFalse(self.calls)
+
+    def test_real_evidence_preserves_file_hash_and_canonical_receipt_link(self):
+        compact.validate_terminal_evidence(self.state)
+        path=self.state/'diagnostics'/(compact.OLD_ID+'.json')
+        raw=path.read_bytes()
+        self.assertNotEqual(existing.sha(raw), identity(json.loads(raw)))
+        self.assertEqual(existing.sha(raw), compact.OLD_DIAGNOSTIC_FILE_SHA256)
+        self.assertEqual(identity(json.loads(raw)), compact.OLD_DIAGNOSTIC_IDENTITY)
+        receipt=json.loads((self.state/'receipts'/(compact.OLD_ID+'.json')).read_bytes())
+        self.assertEqual(receipt['diagnostic_sha256'], compact.OLD_DIAGNOSTIC_IDENTITY)
+
+    def test_real_evidence_tamper_or_reserialization_fails_before_authority_write(self):
+        for folder in ('receipts', 'diagnostics'):
+            path=self.state/folder/(compact.OLD_ID+'.json'); original=path.read_bytes()
+            for raw in (original+b'\n', encoded(json.loads(original)), original.replace(b'400', b'200')):
+                with self.subTest(folder=folder, raw_hash=existing.sha(raw)):
+                    path.write_bytes(raw)
+                    before=(self.state/'ledger.json').read_bytes()
+                    with self.assertRaisesRegex(ConfigurationFailure,'compact_terminal_evidence_hash'):
+                        compact.install_authority(self.state,lambda *_: self.fail('API reached'))
+                    self.assertEqual((self.state/'ledger.json').read_bytes(),before)
+            path.write_bytes(original)
+        self.assertFalse(self.calls)
+
+    def test_diagnostic_link_is_not_confused_with_file_hash(self):
+        path=self.state/'receipts'/(compact.OLD_ID+'.json')
+        receipt=json.loads(path.read_bytes())
+        receipt['diagnostic_sha256']=compact.OLD_DIAGNOSTIC_FILE_SHA256
+        atomic_json(path,receipt)
+        with patch.object(compact,'OLD_RECEIPT',existing.sha(path.read_bytes())):
+            with self.assertRaisesRegex(ConfigurationFailure,'compact_terminal_diagnostic_link'):
+                compact.validate_terminal_evidence(self.state)
 
     def test_other_uncertainty_and_protected_reserves_still_block(self):
         s=self.runner().ledger.read()
