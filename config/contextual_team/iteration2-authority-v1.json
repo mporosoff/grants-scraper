@@ -1,0 +1,83 @@
+{
+  "version": "funding-finder-iteration2-20260921-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "development_manifest_sha256": "e12a19bc16686f58768c84299982b6a49a61632e01b4466715c968fed707d52c",
+  "source_inputs_sha256": "b3e2dcd95722eca8674b0be0cd7155f5d492e2893221bc835afa1202d2bcef4a",
+  "scope_ids": [
+    "351715",
+    "363302:a-1",
+    "341997",
+    "361207",
+    "361208",
+    "344592:ab-0025",
+    "344592",
+    "345241:tdac-baa-004",
+    "332894",
+    "362856",
+    "363069",
+    "363268"
+  ],
+  "first_scope_id": "363302:a-1",
+  "stages": {
+    "interpret": {
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "output_tokens": 8000
+    },
+    "query": {
+      "provider": "voyage",
+      "model": "voyage-4-large",
+      "output_tokens": 0
+    },
+    "assess": {
+      "provider": "openai",
+      "model": "gpt-5.6-luna",
+      "output_tokens": 24000
+    },
+    "verify": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "output_tokens": 24000
+    },
+    "check": {
+      "provider": "anthropic",
+      "model": "claude-sonnet-5",
+      "output_tokens": 12000
+    }
+  },
+  "maximum_wire_bytes": 524288,
+  "maximum_graph_bytes": 393216,
+  "input_token_ceilings": {
+    "interpret": 180000,
+    "query": 25000,
+    "assess": 180000,
+    "verify": 180000,
+    "check": 180000
+  },
+  "public_activation": false,
+  "recurring_paid_usage": false,
+  "starting_checkpoint": {
+    "ledger_sha256": "fb8de241874d9a11684884369c3b2eec8113c4bd184859518fc431b792d54d51",
+    "checkpoint_sha256": "e87cc8126a4aebd4cabfa639ecba8cc5b294330773e15285b1b3c53eca68e150",
+    "requests": 688,
+    "requests_sha256": "687f2e2c11915980fdf9da1049792695cbdd886f37cacb2782e2b2782d58f121",
+    "events": 22,
+    "events_sha256": "88d413057b1836296939f0ad3012d744a0d8e1159c504081047af49d01309410",
+    "native_counts": 189,
+    "native_counts_sha256": "cdf062617455c3ab1bf6c7daac901e5b5c322e08110a613820513d20d61fa748",
+    "run": {
+      "id": 35634326282,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "path": ".github/workflows/team-recommender-offline.yml",
+      "head_branch": "main",
+      "event": "workflow_dispatch",
+      "head_sha": "72cc8f0fac5138b103932cb83d00997401410f4b"
+    }
+  },
+  "no_second_allowance": true,
+  "confirmation_seal_sha256": "dab4f63ea44d6f8a6a96006c7581e2a7c5dcb2ae162b0470de3581bd4887350e",
+  "source_selection_sha256": "4e2cf3898a593f038cd4f146cdfabe26f7a399a14e1ccac1be143a4f7c39711c",
+  "release_id": "553653bb8cb1a8759db952fbdbe526abcddd14a00e89c9910026fe45b005591b"
+}

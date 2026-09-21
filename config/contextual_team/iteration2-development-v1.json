@@ -1,0 +1,1041 @@
+{
+  "controls": [
+    {
+      "directory_infeasibility_claim": false,
+      "expected_behavior": "needs_scope_selection; no team from union of sibling science",
+      "id": "broad-parent-no-team",
+      "justification": "Current canonical source resolver finds real publishable children and classifies the parent as broad.",
+      "scope_id": "344592"
+    },
+    {
+      "claim_refs": [
+        {
+          "claim_id": "urh-000027-c001",
+          "revision": 2
+        },
+        {
+          "claim_id": "urh-000027-c003",
+          "revision": 2
+        },
+        {
+          "claim_id": "urh-000027-c004",
+          "revision": 1
+        }
+      ],
+      "directory_infeasibility_claim": false,
+      "expected_behavior": "The fixed plasma-only claim packet does not justify automatic membership for Veterans history/memorialization tasks; abstain for this constrained singleton team if no source-grounded contribution is evidenced.",
+      "id": "irrelevant-person-veterans",
+      "justification": "Retained claims describe fusion/plasma simulation and plasma computing; source calls for Veteran legacy history and related memorial/education work. General computing alone does not evidence those tasks.",
+      "person_evidence_id": "ca40bcaa65bc16af27aca7970d8168d40b6b2de14198ad193e251a979586e644",
+      "person_ids": [
+        "urh-000027"
+      ],
+      "scope_id": "363069",
+      "status": "predeclared negative control; not an observed new model result"
+    }
+  ],
+  "counts": {
+    "broad_parent_gated": 1,
+    "distinct_parents": 11,
+    "forecasted_nonactionable": 3,
+    "research_families_excluding_broad_parent": 9,
+    "scopes": 12
+  },
+  "denominators": {
+    "latency": "Paid fully cold builds are only cases actually eligible and dispatched under the separate authority. Controls and missing/failed completions must be reported; do not count cached retained regressions as cold.",
+    "not_twelve_independent_parents": true,
+    "quality": "Parent metrics protocol must report raw scope/person judgments and missing labels; no observed success can select this manifest. Broad-parent and forecasted controls stay in source-case completion accounting, with route-specific team/timing eligibility reported separately.",
+    "source_cases": 12
+  },
+  "first_scope_id": "363302:a-1",
+  "registry_generation": "60169651eaff43c75e0eccd12167371d8131b76ed67592eaed18d3689d188126",
+  "replacement_rule": "Preserve mandatory ECLIPSE/DOE regressions and all original selected cases in reporting. For source availability/eligibility loss only, record the failure before any output and use the fixed unexposed source-only reserve order after full lineage/current-eligibility review. Never replace because of a scientific recommendation or unfavorable label. No fabricated child scopes.",
+  "roster_id": "1c6a29538ff8911ca01f7b4d1483f4251bbb4ab237a54f134f4872d0ae27fe60",
+  "scopes": [
+    {
+      "catalog_source_id": "996868c018ca2049d3ef56ede48c739068f78f6515c9b75534ffff0bc1bd3e39",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-29",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-29",
+              "detail_checked_at": "2026-08-15T10:39:21.428821Z",
+              "estimated": false,
+              "kind": "application",
+              "note": "The following Divisions accept proposals during this window: AGS; CBET; CMMI; ECCS",
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/351715",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [
+          "ECLIPSE deadlines depend on the receiving NSF program; 2026-09-29 catalog date is not a universal deadline."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "351715",
+      "kind": "parent",
+      "official_source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=24110Z",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "351715",
+      "related_group": "351715",
+      "research_family": "plasma-physics",
+      "roles": [
+        "retained_eclipse_regression"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "351715",
+      "selection_reason": "Retain the accepted ECLIPSE regression and source framing; no agreement-driven rerun.",
+      "source_id": "313563f65edeab3a5c463a9f6a4f072967b871a6d021c609633581854a5dab7d",
+      "title": "ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)"
+    },
+    {
+      "catalog_source_id": "7794d39d4cf45e2e9b7de7ac4e66ef1945924557f3a4dad12c59c04c94d5ab52",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-22",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-09-22",
+              "detail_checked_at": "2026-08-02T11:34:50.877871Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/363302",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": "See Section II of the Notice of Funding Opportunity, Part 1 for a full description of the eligibility requirements.",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [
+          "DOE retained official eligibility/cost-share conditions override less detailed catalog fields; application close is 2026-09-22 17:00 America/New_York; recheck before live action."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "363302:a-1",
+      "kind": "publishable_child",
+      "official_source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "363302",
+      "related_group": "363302",
+      "research_family": "catalysis-and-process-engineering",
+      "roles": [
+        "retained_doe_regression",
+        "genuine_child",
+        "selected_approach"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "363302:a-1",
+      "selection_reason": "Retain DOE selected-approach requirements regression and its genuine source-owned child.",
+      "source_id": "de697a2c3dc2aaca3bdca10672f320f7ab5a1836f9055144a6e3fa8671b3bbdb",
+      "title": "Laboratory Validation of Catalysts and Unit Operations"
+    },
+    {
+      "catalog_source_id": "f6515532e8f5026c8bf81ef38720ce271d794fa21367326bcef64a2ffa3bf49e",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-10-14",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-10-14",
+              "detail_checked_at": "2026-08-02T11:34:50.877871Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/341997",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [
+          "Catalog date 2026-10-14 conflicts with retained official accepted-anytime/2026-10-13 target-date context; official governing context controls; do not present the catalog date as a hard close."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "341997",
+      "kind": "parent",
+      "official_source_url": "https://www.nsf.gov/funding/pgm_summ.jsp?pims_id=5690",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "341997",
+      "related_group": "341997",
+      "research_family": "mathematical-biology",
+      "roles": [
+        "specific_parent"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "341997",
+      "selection_reason": "Retain distinct mathematical mechanism and biology scope with governing target-date correction.",
+      "source_id": "f1d99a76191c7fe8037a362eabd327722219ded1ec91223495ba85b06340f7e7",
+      "title": "Mathematical Biology"
+    },
+    {
+      "catalog_source_id": "178a5c40173d4bd405e347e0871ba771d999d0fef6371e5a8920daf934710773",
+      "current_eligibility": {
+        "action_current": false,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "forecasted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "State governments",
+            "County governments",
+            "City or township governments",
+            "Special district governments",
+            "Independent school districts",
+            "Public and state institutions of higher education",
+            "Federally recognized Native American tribal governments",
+            "Public and Indian housing authorities",
+            "Other Native American tribal organizations",
+            "Nonprofits with 501(c)(3) status",
+            "Nonprofits without 501(c)(3) status",
+            "Private institutions of higher education",
+            "For-profit organizations other than small businesses",
+            "Small businesses",
+            "Other"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-29",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_estimate",
+              "date": "2026-09-29",
+              "detail_checked_at": "2026-07-30T19:42:33.758283Z",
+              "estimated": true,
+              "kind": "estimated_application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "EstimatedSynopsisCloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/361207",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "eligibility_codes": [
+            "00",
+            "01",
+            "02",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "11",
+            "12",
+            "13",
+            "20",
+            "22",
+            "23",
+            "25"
+          ],
+          "eligibility_text": "Other Eligible ApplicantsIndian/Native American Tribal Governments (Other than Federally Recognized); Eligible Agencies of the Federal Government; U.S. Territory or Possession; Faith-based or Community-based Organizations; Regional Organizations;",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "forecasted"
+        },
+        "limitations": [
+          "Forecasted source is retained for regression/control only; it is not currently open for applications."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "361207",
+      "kind": "parent",
+      "official_source_url": "https://www.grants.gov/search-results-detail/361207",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "361207",
+      "related_group": "auditory-vestibular-network",
+      "research_family": "auditory-and-vestibular-research",
+      "roles": [
+        "resource_network",
+        "historical_forecasted"
+      ],
+      "route_state": "action_blocked",
+      "scientific_labels": "not newly measured",
+      "scope_id": "361207",
+      "selection_reason": "Contrast national resource-network science with its separately owned coordination companion.",
+      "source_id": "92ecdfea8a6fa23653396c36ff3d7782f62083d20a792cd87cc30cbbc7e01f35",
+      "title": "National Resource Network for the Study of Human Auditory and Vestibular Disorders"
+    },
+    {
+      "catalog_source_id": "b2c90a9786bff4b10f47b062bdd58e3e4c2b29c1cac52d40265f788e0f0a1eb4",
+      "current_eligibility": {
+        "action_current": false,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "forecasted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "State governments",
+            "County governments",
+            "City or township governments",
+            "Special district governments",
+            "Independent school districts",
+            "Public and state institutions of higher education",
+            "Federally recognized Native American tribal governments",
+            "Public and Indian housing authorities",
+            "Other Native American tribal organizations",
+            "Nonprofits with 501(c)(3) status",
+            "Nonprofits without 501(c)(3) status",
+            "Private institutions of higher education",
+            "For-profit organizations other than small businesses",
+            "Small businesses",
+            "Other"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-09-29",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_estimate",
+              "date": "2026-09-29",
+              "detail_checked_at": "2026-07-30T19:42:33.758283Z",
+              "estimated": true,
+              "kind": "estimated_application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "EstimatedSynopsisCloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/361208",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "eligibility_codes": [
+            "00",
+            "01",
+            "02",
+            "04",
+            "05",
+            "06",
+            "07",
+            "08",
+            "11",
+            "12",
+            "13",
+            "20",
+            "22",
+            "23",
+            "25"
+          ],
+          "eligibility_text": "Other Eligible ApplicantsIndian/Native American Tribal Governments (Other than Federally Recognized); Eligible Agencies of the Federal Government; U.S. Territory or Possession; Faith-based or Community-based Organizations; Regional Organizations; Non-domestic (non-U.S.) Entities (Foreign Institutions).",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "forecasted"
+        },
+        "limitations": [
+          "Forecasted source is retained for regression/control only; it is not currently open for applications."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "361208",
+      "kind": "parent",
+      "official_source_url": "https://www.grants.gov/search-results-detail/361208",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "361208",
+      "related_group": "auditory-vestibular-network",
+      "research_family": "auditory-and-vestibular-research",
+      "roles": [
+        "coordinating_center",
+        "historical_forecasted"
+      ],
+      "route_state": "action_blocked",
+      "scientific_labels": "not newly measured",
+      "scope_id": "361208",
+      "selection_reason": "Test resource versus coordination task separation within the known companion family.",
+      "source_id": "6b8239f11dd58ec356e19ab21ee5016730f4b17c47427a5d6616975bd643369b",
+      "title": "Coordinating Center for National Resource Network for the Study of Human Auditory and Vestibular Disorders"
+    },
+    {
+      "catalog_source_id": "ff0cc9af2adf1d122bd67819f19a2782e569b5743a71fc30342b66e504a35ad4",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Other"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2027-11-20",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2027-11-20",
+              "detail_checked_at": "2026-08-12T11:11:22.070143Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/344592",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "25"
+          ],
+          "eligibility_text": "Eligible applicants under this BAA include institutions of higher education, nonprofit organizations, state and local governments, foreign organizations, foreign public entities, and for-profit organizations (i.e. large and small businesses). For ARO Targeted Opportunities, please see the specific eligibility requirements in the II.A.3 ARO Targeted Opportunities section above. For specific Other Transactions for Prototypes eligibility requirements, please see the “Other Transaction for Prototype or Production” section within the II.B. Federal Award Information section.",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "344592:ab-0025",
+      "kind": "publishable_child",
+      "official_source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "344592",
+      "related_group": "344592",
+      "research_family": "electrochemical-science",
+      "roles": [
+        "genuine_child",
+        "method_transfer_probe"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "344592:ab-0025",
+      "selection_reason": "Preserve a genuine electrochemistry child and test evidence-backed method transfer without importing siblings.",
+      "source_id": "e236f4376fd2b4b68421731f5e97b80a3040f0d6d6a0e353041962cd1d5fdb2f",
+      "title": "Electrochemistry"
+    },
+    {
+      "catalog_source_id": "7c057a93165ab3f9e99aaae9a545cb05f476c9d4795c08086c1f1ae94a03f74f",
+      "current_eligibility": {
+        "action_current": false,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Other"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2027-11-20",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2027-11-20",
+              "detail_checked_at": "2026-08-12T11:11:22.070143Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/344592",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "25"
+          ],
+          "eligibility_text": "Eligible applicants under this BAA include institutions of higher education, nonprofit organizations, state and local governments, foreign organizations, foreign public entities, and for-profit organizations (i.e. large and small businesses). For ARO Targeted Opportunities, please see the specific eligibility requirements in the II.A.3 ARO Targeted Opportunities section above. For specific Other Transactions for Prototypes eligibility requirements, please see the “Other Transaction for Prototype or Production” section within the II.B. Federal Award Information section.",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [
+          "Broad parent has multiple real child scopes; no coherent team before source-owned scope selection."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "344592",
+      "kind": "parent",
+      "official_source_url": "https://www.arl.devcom.army.mil/opportunities/arl-baa/",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "344592",
+      "related_group": "344592",
+      "research_family": "multidisciplinary-army-parent",
+      "roles": [
+        "broad_parent",
+        "no_team_before_scope_selection"
+      ],
+      "route_state": "needs_scope_selection",
+      "scientific_labels": "not newly measured",
+      "scope_id": "344592",
+      "selection_reason": "Exercise existing broad-parent scope selection and abstention until a coherent child is selected.",
+      "source_id": "e57d583747bcedde20854ead868336344a272f1b0a30ee54b2a7788be8c145b7",
+      "title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH"
+    },
+    {
+      "catalog_source_id": "c0a7ba68ad1ce54b7aefc421f9ba8f9262055297cc453bf584c0cb434aa1309e",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "preliminary_stage_needs_verification",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "preliminary_stage_needs_verification",
+          "applicant_types": [
+            "Other"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2028-01-04",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2028-01-04",
+              "detail_checked_at": "2026-08-01T11:35:33.536291Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/345241",
+              "time": null,
+              "timezone": null
+            },
+            {
+              "confidence": "machine_extracted_needs_verification",
+              "date": null,
+              "detail_checked_at": "2026-08-01T11:35:33.536291Z",
+              "estimated": false,
+              "kind": "white_paper",
+              "required": false,
+              "source": "Grants.gov synopsis text",
+              "source_url": "https://www.grants.gov/search-results-detail/345241",
+              "text": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "25"
+          ],
+          "eligibility_text": "Unless dictated by the award instrument type, eligible applicants under this BAA include institutions of higher education, nonprofit organizations, state and local governments, foreign organizations, foreign public entities, and for-profit organizations (i.e. large and small businesses). For specific Other Transactions for Prototypes eligibility requirements, please see the “Other Transaction for Prototype or Production” section within the II.B. Federal Award Information section.",
+          "has_preliminary_stage": true,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": false,
+          "preliminary_stage_type": "white_paper",
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [
+          "Preliminary-stage requirements and applicant-specific readiness remain unverified; do not advertise unrestricted current application eligibility."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "345241:tdac-baa-004",
+      "kind": "publishable_child",
+      "official_source_url": "https://www.army.mil/article/261533",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "345241",
+      "related_group": "345241",
+      "research_family": "quantum-science",
+      "roles": [
+        "genuine_child",
+        "preliminary_stage_control"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "345241:tdac-baa-004",
+      "selection_reason": "Preserve genuine analytical quantum child and administrative preliminary-stage restrictions.",
+      "source_id": "fd85842d14807cab0c574bff6d30655b3325eb21c478ec528e0dc28de75e355c",
+      "title": "Analytical Methodology for Future Army Systems Enabled by Quantum Technology (Quantum)"
+    },
+    {
+      "catalog_source_id": "0c5124031d4da68afd091349cfb6cc419bf0462e9ef653854adbf5e601e1f4cb",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Independent school districts",
+            "Public and state institutions of higher education",
+            "Nonprofits with 501(c)(3) status",
+            "Nonprofits without 501(c)(3) status",
+            "Private institutions of higher education",
+            "Individuals",
+            "For-profit organizations other than small businesses",
+            "Small businesses"
+          ],
+          "career_stage_signal": "Postdoctoral",
+          "close_date": "2027-04-30",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2027-04-30",
+              "detail_checked_at": "2026-08-03T13:20:57.268810Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/332894",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "05",
+            "06",
+            "12",
+            "13",
+            "20",
+            "21",
+            "22",
+            "23"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "332894",
+      "kind": "parent",
+      "official_source_url": "https://arl.devcom.army.mil/collaborate-with-us/",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "332894",
+      "related_group": "332894",
+      "research_family": "quantum-science",
+      "roles": [
+        "specific_parent"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "332894",
+      "selection_reason": "Include quantum-device/materials collaborative program as distinct scope from analytical Army child.",
+      "source_id": "86b7fc643df1d82ad7d82033604cb19a23a0b29cbae07df754c0e7238030d69d",
+      "title": "LPS Qubit Collaboratory (LQC)"
+    },
+    {
+      "catalog_source_id": "fdc43d30d09a90c65043887786591955d34a6e8885af709209a5a87127090485",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Unrestricted"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-11-04",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-11-04",
+              "detail_checked_at": "2026-07-30T18:51:36.535366Z",
+              "document_confidence": "machine_extracted_needs_verification",
+              "document_evidence_id": "evidence-362856-96c04604d5ed",
+              "document_source_fields": {
+                "stage": {
+                  "present": false,
+                  "value": null
+                },
+                "time": {
+                  "present": true,
+                  "value": null
+                },
+                "timezone": {
+                  "present": true,
+                  "value": null
+                }
+              },
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/362856",
+              "stage": "application",
+              "time": "11:59 p.m.",
+              "timezone": "ET"
+            },
+            {
+              "application_class": "unspecified",
+              "confidence": "machine_extracted_needs_verification",
+              "cycle": null,
+              "date": "2026-10-07",
+              "estimated": false,
+              "evidence_id": "evidence-362856-e58c2805bb87",
+              "field_authority": "official_notice_field",
+              "invitation_required": null,
+              "kind": "letter_of_intent",
+              "obligation": "unknown",
+              "parser_version": "submission-fields-21",
+              "prerequisite": null,
+              "required": null,
+              "source": "Official notice (machine extracted)",
+              "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353132",
+              "stage": "letter_of_intent",
+              "subject": "submission",
+              "time": "5:00 p.m.",
+              "timezone": "Eastern",
+              "track": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "99"
+          ],
+          "eligibility_text": null,
+          "has_preliminary_stage": true,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": "letter_of_intent",
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [
+          "Preliminary-stage requirements and applicant-specific readiness remain unverified; do not advertise unrestricted current application eligibility."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "362856",
+      "kind": "parent",
+      "official_source_url": "https://www.grants.gov/search-results-detail/362856",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "362856",
+      "related_group": "362854",
+      "research_family": "hematology-and-biomedical-resources",
+      "roles": [
+        "specific_parent",
+        "resource_requirements"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "362856",
+      "selection_reason": "Include disease-specific resource development and preserve submission-stage constraints.",
+      "source_id": "0b8e9e2a7e55afe0a8edf2ff36325ebbf6bd5a15c861cf146a1afa59c4082fd8",
+      "title": "DoW Bone Marrow Failure, Resource Development Award"
+    },
+    {
+      "catalog_source_id": "1834afce29858e54e5ef6b60f219eae2b59f38d949b2a9a58a78661df7560edf",
+      "current_eligibility": {
+        "action_current": false,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "forecasted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "State governments",
+            "Independent school districts",
+            "Public and state institutions of higher education",
+            "Nonprofits with 501(c)(3) status",
+            "Private institutions of higher education"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2027-04-09",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_estimate",
+              "date": "2027-04-09",
+              "detail_checked_at": "2026-07-31T12:17:15.975581Z",
+              "estimated": true,
+              "kind": "estimated_application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "EstimatedSynopsisCloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/363069",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "eligibility_codes": [
+            "00",
+            "05",
+            "06",
+            "12",
+            "20"
+          ],
+          "eligibility_text": "The Department of Veterans Affairs (VA) National Cemetery Administration (NCA) is awarding grants for a maximum of $400,000 per awardee through the Veterans Legacy Grants Program (VLGP), authorized under 38 U.S.C. 2400 note to provide funding to educational institutions and other eligible entities to conduct cemetery research and produce educational tools for the public to utilize and learn about the histories of Veterans interred in VA national cemeteries and VA grant-funded State and Tribal Veterans’ cemeteries. This notice includes information about the process for applying for a VLGP grant; criteria for evaluating applications; priorities related to the award of grants; and other requirements and guidance regarding VLGP grants",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "forecasted"
+        },
+        "limitations": [
+          "Forecasted source is retained for regression/control only; it is not currently open for applications."
+        ],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": true,
+      "id": "363069",
+      "kind": "parent",
+      "official_source_url": "https://www.grants.gov/search-results-detail/363069",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "363069",
+      "related_group": "363069",
+      "research_family": "history-and-public-humanities",
+      "roles": [
+        "irrelevant_person_control",
+        "bounded_unsupported_control",
+        "historical_forecasted"
+      ],
+      "route_state": "action_blocked",
+      "scientific_labels": "not newly measured",
+      "scope_id": "363069",
+      "selection_reason": "Fixed plasma-only evidence versus Veterans legacy history tasks supplies a bounded irrelevant-person/no-supported-team control.",
+      "source_id": "7a5c30307b399ea80f3b9c02c7504883e814771ef1dc184e6e8a06338f962d34",
+      "title": "Veterans Legacy Grants Program"
+    },
+    {
+      "catalog_source_id": "8168fd024946a76c74ca4f9e8f5b809cafe00f76c7f06710470e796994913328",
+      "current_eligibility": {
+        "action_current": true,
+        "application_readiness_verified": false,
+        "catalog_actionability": "current_by_structured_date",
+        "catalog_generated_at": "2026-09-21T16:29:43.911983Z",
+        "catalog_status": "posted",
+        "clock": "2026-09-21T18:32:11Z",
+        "conditions": {
+          "actionability_status": "current_by_structured_date",
+          "applicant_types": [
+            "Other"
+          ],
+          "career_stage_signal": null,
+          "close_date": "2026-11-04",
+          "close_date_note": null,
+          "cost_share_required": false,
+          "deadline_source": "Grants.gov XML extract",
+          "deadlines": [
+            {
+              "confidence": "official_structured",
+              "date": "2026-11-04",
+              "detail_checked_at": "2026-08-02T11:34:50.877871Z",
+              "estimated": false,
+              "kind": "application",
+              "note": null,
+              "source": "Grants.gov XML extract",
+              "source_field": "CloseDate",
+              "source_url": "https://www.grants.gov/search-results-detail/363268",
+              "time": null,
+              "timezone": null
+            }
+          ],
+          "document_status_signals": [],
+          "eligibility_codes": [
+            "25"
+          ],
+          "eligibility_text": "*Who May Submit Proposals: Proposals may only be submitted by the following: -For-profit organizations: U.S.-based commercial organizations, including small businesses, with strong capabilities in scientific or engineering research or education and a passion for innovation. -Non-profit, non-academic organizations: Independent museums, observatories, research laboratories, professional societies and similar organizations located in the U.S. that are directly associated with educational or research activities. -Other Federal Agencies and Federally Funded Research and Development Centers (FFRDCs): Prospective proposers from other Federal Agencies and FFRDCs, including NSF sponsored FFRDCs, must follow the guidance in PAPPG Chapter I.E.2 regarding limitations on eligibility. -State and Local Governments -Institutions of Higher Education (IHEs): Two- and four-year IHEs (including community colleges) accredited in, and having a campus located in the US, acting on behalf of their faculty members. Special Instructions for International Branch Campuses of US IHEs: If the proposal includes funding to be provided to an international branch campus of a US institution of higher education (including through use of sub-awards and consultant arrangements), the proposer must explain the benefit(s) to the project of performance at the international branch campus, and justify why the project activities cannot be performed at the US campus. -Tribal Nations: An American Indian or Alaska Native tribe, band, nation, pueblo, village, or community that the Secretary of the Interior acknowledges as a federally recognized tribe pursuant to the Federally Recognized Indian Tribe List Act of 1994, 25 U.S.C. §§ 5130-5131.",
+          "has_preliminary_stage": false,
+          "limited_submission": false,
+          "limited_submission_source": "synopsis_heuristic",
+          "preliminary_required": null,
+          "preliminary_stage_type": null,
+          "rolling": false,
+          "status": "posted",
+          "submission_requirements": []
+        },
+        "limitations": [],
+        "source": "helper/data/opportunities.js and current public child catalog"
+      },
+      "historical_regression": false,
+      "id": "363268",
+      "kind": "parent",
+      "official_source_url": "https://www.nsf.gov/publications/pub_summ.jsp?ods_key=nsf26512",
+      "paid_development_permission": "gated_by_authority_and_route",
+      "parent_id": "363268",
+      "related_group": "363268",
+      "research_family": "scientific-data-infrastructure",
+      "roles": [
+        "specific_parent",
+        "selected_approach"
+      ],
+      "route_state": "unassessed",
+      "scientific_labels": "not newly measured",
+      "scope_id": "363268",
+      "selection_reason": "Add source-selected AI dataset integration/infrastructure scope; optional approaches remain optional.",
+      "source_id": "45e0a011a1e2d3b8b2b78aa949dc39db79d9c2c3f37491472d9644e8fe66d835",
+      "title": "Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)"
+    }
+  ],
+  "selection_clock": "2026-09-21T18:32:11Z",
+  "selection_uses_new_scientific_outputs": false,
+  "source_inputs_path": "config/contextual_team/iteration2-source-inputs-v1.json",
+  "source_inputs_sha256": "b3e2dcd95722eca8674b0be0cd7155f5d492e2893221bc835afa1202d2bcef4a",
+  "split": "development",
+  "version": "funding-finder-iteration2-development-v1"
+}
