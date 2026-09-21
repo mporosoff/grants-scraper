@@ -118,7 +118,12 @@ def actual_result(state, config, scope_id):
     expected['graph_id'] = identity({k: v for k, v in expected.items() if k not in ('requests', 'graph_id')})
     if graph != expected:
         raise ConfigurationFailure('iteration2_check_graph_not_exact_production_result')
-    return scope, graph, assessment, select(graph)
+    # Complete verifier abstentions remain independently evaluable, but the
+    # serving composer accepts only coherent graphs. Preserve their exact graph
+    # identity without manufacturing a group or dropping their person questions.
+    selection = ({'graph_id': graph['graph_id'], 'groups': [], 'primary_view': [], 'option_count': 0}
+        if verified['state'] in ('unsuitable', 'insufficient_source', 'needs_scope_selection') else select(graph))
+    return scope, graph, assessment, selection
 
 
 def packet(scope, graph, assessment, selection, config):

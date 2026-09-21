@@ -59,6 +59,53 @@ class DevelopmentCheck(unittest.TestCase):
         self.assertEqual(len(self.f.calls), self.starting_calls)
         self.assertEqual(selection['graph_id'], graph['graph_id']); self.assertTrue(selection['groups'])
 
+    def test_completed_verifier_abstentions_and_coherent_negatives_keep_actual_evaluation_questions(self):
+        for state in ('unsuitable', 'insufficient_source', 'needs_scope_selection', 'coherent'):
+            with self.subTest(state=state):
+                f = lifecycle.Iteration2('runTest'); f.setUp()
+                try:
+                    f.install(); original_post = f.post
+                    def post(url, **kwargs):
+                        body = kwargs['json']
+                        if body['model'] != 'claude-sonnet-5': return original_post(url, **kwargs)
+                        f.calls.append(copy.deepcopy(body))
+                        evidence = json.loads(body['messages'][0]['content'])
+                        wire = {'state': state, 'answers': [{'question_id': qid,
+                            'coverage': 'insufficient_information', 'claims': [], 'central': False,
+                            'reason': 'Fixture verifier abstains after reviewing the complete original evidence.',
+                            'gap': 'Fixture unresolved scope or scientific evidence.'} for qid in evidence['wire_questions']]}
+                        response = payload(json.dumps(wire), 'anthropic')
+                        response['usage'] = {'input_tokens': 1000, 'output_tokens': 100}
+                        return evidence_fixture.Response(response)
+                    original_vectors = workflow.Iteration2Runner.vectors
+                    chosen = {p['person_id'] for p in f.data['people']}
+                    def vectors(runner, docs, role, scope=None):
+                        if role == 'query': return original_vectors(runner, docs, role, scope)
+                        return [{'id': d['input_id'], 'embedding':
+                            ([1.0, 0.0] if d['person_id'] in chosen else [0.0, 1.0]) + [0.0]*1022} for d in docs]
+                    runner = workflow.Iteration2Runner(f.state, f.config, post=post, counter_post=f.counter)
+                    with patch.object(workflow.Iteration2Runner, 'vectors', vectors):
+                        produced = runner.run_scope(f.scope)
+                    before = runner.ledger.read(); calls = len(f.calls); counts = f.count_calls
+                    with patch.object(check, 'select', wraps=check.select) as selector:
+                        scope, graph, assessment, selection = check.actual_result(f.state, f.config, f.scope['id'])
+                    self.assertEqual(graph, produced)
+                    self.assertEqual(selector.call_count, int(state == 'coherent'))
+                    self.assertEqual(graph['state'], state if state != 'coherent' else 'no_supported_group_in_assessed_set')
+                    self.assertEqual(selection['graph_id'], graph['graph_id'])
+                    self.assertEqual(selection['groups'], []); self.assertEqual(selection['primary_view'], [])
+                    _, body, validate, report = check.packet(scope, graph, assessment, selection, f.config)
+                    questions = json.loads(body['messages'][0]['content'])['items']
+                    self.assertEqual([q['task_type'] for q in questions], ['source_suitability']+['call_person']*5+['aspect_person']*3)
+                    self.assertEqual(report['exclusion_pair_count'], 24)
+                    self.assertTrue(report['missing_primary_group']); self.assertTrue(report['missing_first_alternative'])
+                    self.assertIsNone(report['feasible_scope_yield']['denominator'])
+                    result = validate(payload(json.dumps(answer(body)), 'anthropic'), False)
+                    self.assertEqual(len(result['verdicts']), 9)
+                    self.assertEqual(runner.ledger.read(), before)
+                    self.assertEqual((len(f.calls), f.count_calls), (calls, counts))
+                finally: f.doCleanups()
+
     def test_full_evidence_fixed_questions_and_blinding_have_no_feasibility_inference(self):
         contract, body, _, report = self.packet(); evidence = json.loads(body['messages'][0]['content'])
         self.assertEqual((body['model'], body['thinking'], body['max_tokens']), ('claude-sonnet-5', {'type': 'disabled'}, 12000))

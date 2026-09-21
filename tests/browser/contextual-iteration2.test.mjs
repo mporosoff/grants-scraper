@@ -22,7 +22,9 @@ function fixture(){
   const store=new ContextualStore({prepare:sql=>query(sql)}),calls=[],clock={value:new Date('2026-09-21T19:00:00Z')};
   const handler=createContextualHandler({storeFactory:()=>store,now:()=>clock.value,
     authenticateAdmin:async()=> 'fixture-admin',authenticateInternal:async()=> 'fixture-internal',
-    fetchImpl:async(url,o)=>{calls.push({url,o});return new Response(null,{status:204});}});
+    fetchImpl:async(url,o)=>{calls.push({url,o});return url.includes('/actions/runs/')
+      ?Response.json({path:'.github/workflows/team-recommender-offline.yml',event:'repository_dispatch',head_branch:'main',head_sha:'a'.repeat(40)})
+      :new Response(null,{status:204});}});
   const request=(path,value)=>new Request('https://example.test'+path,{method:value?'POST':'GET',
     headers:{Origin:'https://example.test','Content-Type':'application/json'},...(value?{body:JSON.stringify(value)}:{})});
   return {db,store,calls,clock,handler,request,env:{GITHUB_REPOSITORY:'fixture/repo',GITHUB_DISPATCH_TOKEN:'fixture-token'},
@@ -64,6 +66,38 @@ test('DOE official time cutoff blocks new jobs at 17:00 Eastern',async()=>{
   f.clock.value=new Date('2026-09-22T21:00:00Z');
   const result=await (await f.handler(f.request('/admin/api/contextual/jobs',f.job),f.env)).json();
   assert.equal(result.state,'action_blocked');assert.equal(f.calls.length,0);
+});
+
+test('I2 maximum graph with Unicode survives its callback envelope, persisted reload and repeat callback',async()=>{
+  const f=fixture(),job={...f.job,job_id:hash([f.job.release_id,f.job.scope_id,''])};
+  await f.store.insert(job,'now');await f.store.start(job.job_id,'123','a'.repeat(40),'now');
+  const graph={state:'ready_with_gaps',scope_id:job.scope_id,wire_boundary_fixture:''};
+  const fill=plan.maximum_graph_bytes-Buffer.byteLength(JSON.stringify(graph));
+  graph.wire_boundary_fixture='α'.repeat(Math.floor(fill/2))+'x'.repeat(fill%2);
+  assert.equal(Buffer.byteLength(JSON.stringify(graph)),plan.maximum_graph_bytes);
+  const value={job_id:job.job_id,release_id:job.release_id,run_id:'123',code_sha:'a'.repeat(40),result:graph,
+    charged_microusd:7424346,attempts:688,stage_timings:Array.from({length:20},()=>({stage:'fixture-boundary',seconds:123.45}))};
+  assert(Buffer.byteLength(JSON.stringify(value))>plan.maximum_graph_bytes);
+  for(let n=0;n<2;n++)assert.equal((await f.handler(f.request('/internal/contextual/result',value),f.env)).status,200);
+  const stored=await f.store.byId(job.job_id);assert.equal(stored.active_slot,null);
+  assert.deepEqual(JSON.parse(stored.result_json),value);
+  const read=await f.handler(f.request('/admin/api/contextual/jobs?'+new URLSearchParams(f.job)),f.env);
+  const raw=await read.text();assert(Buffer.byteLength(raw)>393216);assert(Buffer.byteLength(raw)<524288);
+  assert.deepEqual(JSON.parse(raw).result,graph);
+  const beforeRepeat=f.calls.length;
+  assert.equal((await f.handler(f.request('/admin/api/contextual/jobs',f.job),f.env)).status,200);
+  assert.equal(f.calls.length,beforeRepeat);
+  assert.equal((await f.handler(f.request('/internal/contextual/result',{...value,padding:'x'.repeat(524288)}),f.env)).status,413);
+  assert.deepEqual(await f.store.byId(job.job_id),stored);
+  const next={...f.job,scope_id:'351715',job_id:hash([f.job.release_id,'351715',''])};
+  assert.equal(await f.store.insert(next,'later'),true);
+  const historical=JSON.parse(fs.readFileSync('config/contextual_team/option1-v1.json')).release_id;
+  assert.equal((await f.handler(f.request('/internal/contextual/result',{...value,release_id:historical}),f.env)).status,413);
+  const compact=JSON.stringify({release_id:historical});
+  const padded=new Request('https://example.test/internal/contextual/result',{method:'POST',
+    body:compact+' '.repeat(200001-Buffer.byteLength(compact))});
+  assert.equal((await f.handler(padded,f.env)).status,413,'historical bound measures raw bytes, including whitespace');
+  assert(f.calls.every(c=>c.url.includes('/actions/runs/')),'no dispatch or paid work in callback/reload');
 });
 
 test('restricted overlay has exact readable assets and preserves old preview bytes',async()=>{
@@ -130,4 +164,10 @@ test('all locked current catalog projections resolve without a paid dispatch',as
   const scope=index.scopes.find(s=>s.id===plan.first_scope_id),parent=c.GRANT_CATALOG.opportunities.find(r=>r.opportunity_id===scope.parent_id);
   await assert.rejects(c.ContextualTeamClient.load(index,c.RESEARCHER_DIRECTORY,{parentId:scope.parent_id,scopeId:scope.id,
     record:parent,childCatalog,now:'2026-09-22T21:00:00Z',fetcher:async()=>{throw Error('must not fetch after cutoff');}}),/not_current/);
+  const options={parentId:scope.parent_id,scopeId:scope.id,record:parent,childCatalog,now:'2026-09-21T19:00:00Z'};
+  const envelope={release_id:index.release_id,scope_id:scope.id,state:'failed',wire_boundary_fixture:'x'.repeat(400000)};
+  assert((await c.ContextualTeamClient.load(index,c.RESEARCHER_DIRECTORY,{...options,
+    fetcher:async()=>Response.json(envelope)})).engine);
+  await assert.rejects(c.ContextualTeamClient.load(index,c.RESEARCHER_DIRECTORY,{...options,
+    fetcher:async()=>Response.json({...envelope,wire_boundary_fixture:'x'.repeat(524288)})}),/contextual_response_too_large/);
 });

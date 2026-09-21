@@ -27,10 +27,12 @@ const headers={'Content-Type':'application/json','Cache-Control':'no-store','X-C
 const jsonResponse=(status,value)=>new Response(JSON.stringify(value),{status,headers});
 function fail(code,status=400){throw Object.assign(Error(code),{code,status});}
 async function hash(value){return Array.from(new Uint8Array(await crypto.subtle.digest('SHA-256',new TextEncoder().encode(JSON.stringify(value))))).map(x=>x.toString(16).padStart(2,'0')).join('');}
-async function body(request,maximum=1024){
+async function body(request,maximum=1024,limitForValue){
   if(Number(request.headers.get('content-length')||0)>maximum)fail('contextual_request_too_large',413);
   const value=await request.text();if(new TextEncoder().encode(value).length>maximum)fail('contextual_request_too_large',413);
-  try{return JSON.parse(value);}catch{fail('contextual_invalid_json');}
+  let parsed;try{parsed=JSON.parse(value);}catch{fail('contextual_invalid_json');}
+  if(limitForValue&&new TextEncoder().encode(value).length>limitForValue(parsed))fail('contextual_request_too_large',413);
+  return parsed;
 }
 function current(scope,now){
   const check=globalThis.FUNDING_RETRIEVAL.recordIsCurrent;
@@ -152,10 +154,11 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       }
       if(internal){
         if(request.method!=='POST'||!['/internal/contextual/start','/internal/contextual/result'].includes(path))fail('contextual_not_found',404);
-        const value=await body(request,393216);
+        // The complete I2 delivery envelope has room above the 384 KiB graph
+        // bound. Legacy releases retain their original raw 200,000-byte bound.
+        const value=await body(request,524288,v=>v.release_id===iteration2.release_id?524288:200000);
         const {job_id,release_id,run_id,code_sha}=value;
         if(!/^[a-f0-9]{64}$/.test(job_id||'')||!allowedRelease(release_id)||!/^\d+$/.test(run_id||'')||!/^[a-f0-9]{40}$/.test(code_sha||''))fail('contextual_callback_identity');
-        if(release_id!==iteration2.release_id&&new TextEncoder().encode(JSON.stringify(value)).length>200000)fail('contextual_request_too_large',413);
         const row=await store.byId(job_id);if(!row||row.release_id!==release_id)fail('contextual_job_not_found',404);
         const response=await fetchImpl(`https://api.github.com/repos/${env.GITHUB_REPOSITORY}/actions/runs/${run_id}`,{headers:{
           Authorization:`Bearer ${env.GITHUB_DISPATCH_TOKEN}`,Accept:'application/vnd.github+json','User-Agent':'FundingFinder-ContextualValidation/1.0'}});

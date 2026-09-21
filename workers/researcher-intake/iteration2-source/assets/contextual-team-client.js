@@ -15,7 +15,7 @@
     const response=await fetcher(url,{credentials:'include',redirect:'error',cache:'no-store',...options});
     if(response.status===401)throw Error('contextual_administrator_access_required');
     if(response.status===403){
-      const raw=await response.arrayBuffer();assert(raw.byteLength<=393216,'contextual_response_too_large');
+      const raw=await response.arrayBuffer();assert(raw.byteLength<=524288,'contextual_response_too_large');
       let detail;try{detail=JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(raw));}catch{}
       if(detail?.error==='phase2_expansion_not_authorized')throw Error('contextual_person_assessment_not_enabled');
       if(detail?.error==='outside_option1_paid_inventory')throw Error('contextual_operation_not_enabled');
@@ -23,7 +23,7 @@
       throw Error('contextual_administrator_access_required');
     }
     if(!response.ok)throw Error('contextual_service_'+response.status);
-    const bytes=await response.arrayBuffer();assert(bytes.byteLength<=393216,'contextual_response_too_large');
+    const bytes=await response.arrayBuffer();assert(bytes.byteLength<=524288,'contextual_response_too_large');
     return JSON.parse(new TextDecoder('utf-8',{fatal:true}).decode(bytes));
   }
   function unavailable(index,parent,reason){
@@ -98,6 +98,7 @@
           if(!['ready','ready_with_gaps','no_supported_group_in_assessed_set'].includes(value.state))
             return {unavailable:value.state};
           const result=value.result;
+          assert(encoder.encode(canonical(result)).byteLength<=393216,'contextual_graph_too_large');
           const {graph_id,requests,...content}=result;
           assert(await hash(content)===graph_id,'contextual_graph_content_conflict');
           assert(result.source_id===scope.source_id&&result.roster_id===index.roster_id,'contextual_graph_dependencies_conflict');

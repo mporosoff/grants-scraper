@@ -8,14 +8,27 @@ import requests
 from tools.contextual_team_executor import HOST, resolve_job
 from tools.contextual_team_option1 import configuration_for_job
 from tools.team_recommender_executor import trusted_environment, bounded_response
-from tools.offline_spend import atomic_json, ConfigurationFailure
+from tools.offline_spend import atomic_json, encoded, ConfigurationFailure
+
+ITERATION2_CALLBACK_BYTES = 524288
 
 
 def send(path,value):
     secret=os.environ.get('REGISTRY_WORKFLOW_TOKEN')
     if not secret:raise ConfigurationFailure('contextual_workflow_authentication_missing')
-    response=requests.post(HOST+'/internal/contextual/'+path,headers={'Authorization':'Bearer '+secret,
-        'User-Agent':'FundingFinder-ContextualValidation/1.0'},json=value,timeout=45,stream=True,allow_redirects=False)
+    from tools.contextual_team_iteration2_policy import plan
+    headers={'Authorization':'Bearer '+secret,'User-Agent':'FundingFinder-ContextualValidation/1.0'}
+    payload={'json':value}
+    if value.get('release_id')==plan()['release_id']:
+        # Bound the exact UTF-8 envelope, not just its graph. Retained scientific
+        # bytes are sent unchanged; requests' ASCII escaping cannot inflate it.
+        wire=encoded(value)
+        if len(wire)>ITERATION2_CALLBACK_BYTES:
+            raise ConfigurationFailure('iteration2_complete_callback_bound_no_truncation')
+        headers['Content-Type']='application/json; charset=utf-8'
+        payload={'data':wire}
+    response=requests.post(HOST+'/internal/contextual/'+path,headers=headers,
+        **payload,timeout=45,stream=True,allow_redirects=False)
     return json.loads(bounded_response(response,200000))
 
 
