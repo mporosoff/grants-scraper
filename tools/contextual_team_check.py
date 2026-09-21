@@ -132,7 +132,9 @@ def main():
     p.add_argument('--state',type=Path,required=True);p.add_argument('--reservation',type=Path)
     p.add_argument('--result',type=Path);args=p.parse_args();existing.trusted_environment()
     requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
-    if isinstance(requested,dict) and 'compact_wire_repair' in requested:
+    if isinstance(requested,dict) and 'completion_iteration1' in requested:
+        from tools.contextual_team_completion_check import run
+    elif isinstance(requested,dict) and 'compact_wire_repair' in requested:
         from tools.contextual_team_wire_repair import run
     elif isinstance(requested,dict) and 'compact_check_continuation' in requested:
         from tools.contextual_team_compact_check import run

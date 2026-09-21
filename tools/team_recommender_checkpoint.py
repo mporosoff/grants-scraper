@@ -37,7 +37,8 @@ def recover_known_charge(destination,latest,artifacts,api_call,executor):
         if len(row_matches)!=1 or identity(row_matches[0])!=plan['request_sha256']:
             raise Deferred('recovery_request_conflict')
         if receipt.exists() and executor.sha(receipt.read_bytes())==plan['receipt_sha256']:
-            executor.checkpoint(destination)
+            # No recovery occurred. Preserve the authenticated source checkpoint
+            # and its owner identity instead of relabeling it as this run's work.
             return
         if receipt.exists():raise Deferred('recovery_receipt_conflict')
     if (destination/'cache'/(plan['request_key']+'.json')).exists():raise Deferred('recovery_failed_request_has_cache')

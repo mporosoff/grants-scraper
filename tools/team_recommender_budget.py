@@ -31,6 +31,22 @@ class ExperimentLedger(Ledger):
             raise Deferred("experiment_checkpoint_missing")
         super().__init__(path, AUTHORIZATION_ID, 10, MAX_REQUESTS)
 
+    def read(self):
+        import json
+        state = json.loads(self.path.read_bytes())
+        if state.get('version') != 1 or state.get('logical_id') != AUTHORIZATION_ID:
+            raise ValueError('logical_budget_identity_mismatch')
+        if (state.get('limit_microusd'), state.get('max_requests')) == (10_000_000, MAX_REQUESTS):
+            # Do not accept a recorded amendment with only some caps updated.
+            from tools.contextual_team_completion_policy import VERSION
+            if any(e.get('authority') == VERSION for e in state.get('events', [])):
+                raise ValueError('completion_partial_budget_amendment')
+            self.limit, self.max_requests = 10_000_000, MAX_REQUESTS
+        else:
+            from tools.contextual_team_completion_policy import amended_limits
+            self.limit, self.max_requests = amended_limits(state)
+        return state
+
     def reserve_experiment(self, provider, model, stage, key, amount, attempt,
                            *, approved_stage=2, trusted_route=False, input_tokens=0, output_tokens=0,
                            execution_metadata=None, purpose_limit=None):
@@ -41,6 +57,7 @@ class ExperimentLedger(Ledger):
         is_contextual = metadata.get('purpose', '').startswith('cb-')
         is_latency = metadata.get('purpose', '').startswith('cb-lr-')
         is_luna_repair = metadata.get('purpose', '').startswith('cb-lc-')
+        is_completion = metadata.get('purpose', '').startswith('cb-fc-')
         d3_embedding = provider == 'voyage' and metadata.get('purpose') in {'d3-embedding','d3-query-format'}
         s3_embedding = provider == 'voyage' and metadata.get('purpose') == 's3-embedding'
         allowed_model = (model == ('voyage-4-large' if provider == 'voyage' else 'claude-sonnet-5')) if is_contextual else model == 'voyage-4-large' if s3_embedding else model in {'voyage-4-large','voyage-context-4'} if d3_embedding else ROUTES.get(provider) == model
@@ -71,6 +88,9 @@ class ExperimentLedger(Ledger):
             if is_contextual:allowed_metadata.add('execution_capacity')
             if is_latency:allowed_metadata.update({'latency_lock','latency_operation','latency_model','latency_effort','native_count_key','count_body_sha256','native_input_tokens'})
             if is_luna_repair:allowed_metadata.update({'luna_repair','luna_operation','pair_contract_sha256','repair_of'})
+            if is_completion:
+                allowed_metadata.update({'completion_authority','completion_transport','completion_lock_sha256',
+                    'pair_contract_sha256','repair_of','native_count_key','count_body_sha256','native_input_tokens'})
             if metadata.get('purpose','').startswith('cb-cc-'):
                 allowed_metadata.update({'compact_continuation','continuation_lock_sha256','pair_contract_sha256','repair_of'})
             if metadata.get('purpose','').startswith('cb-o1-'):allowed_metadata.update({'option1_release','repair_of'})
@@ -158,7 +178,14 @@ class ExperimentLedger(Ledger):
                 dollar_cap = 2_000_000 if post else 3_364_400 if d2 or d3 else 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
                 if sum(r['reserved_microusd'] for r in judge)+amount>dollar_cap:
                     raise Deferred('finite_judge_dollar_envelope_exhausted')
-            if spent + amount > min(self.limit, 9_290_655 if is_contextual else STAGE_CEILINGS[stage]) or len(state["requests"]) >= self.max_requests:
+            if is_completion:
+                from tools.contextual_team_completion_policy import check_pool
+                check_pool(state, amount, 1)
+            # The pooled amendment increases only exact completion operations;
+            # every older route keeps its original lifetime/stage envelope.
+            effective_limit = self.limit if is_completion else min(10_000_000, 9_290_655 if is_contextual else STAGE_CEILINGS[stage])
+            effective_attempts = self.max_requests if is_completion else MAX_REQUESTS
+            if spent + amount > effective_limit or len(state["requests"]) >= effective_attempts:
                 raise Deferred("experiment_stage_or_total_budget_exhausted")
             token = uuid.uuid4().hex
             state["requests"].append({"id": token, "provider": provider, "model": model,
