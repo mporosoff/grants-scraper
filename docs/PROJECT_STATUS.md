@@ -1,3 +1,11 @@
+# Current completion handoff
+
+Read [CURRENT](team-recommender/CURRENT.md) for the synchronized operational state. Iteration 1 is accepted; Iteration 2 is incomplete at the missing Math accounting checkpoint. New paid builds are OFF; Iteration 3 has not begun.
+
+## Archived status — historical evidence only
+
+Everything below preserves earlier reports verbatim. Statements that call themselves current or authoritative and earlier stop/permission language are historical; CURRENT governs this completion checkpoint.
+
 # Funding Finder — current repair status
 
 Updated September21, 2026. This is the authoritative current handoff. Earlier checkpoints are historical.
