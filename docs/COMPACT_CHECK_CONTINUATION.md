@@ -1,5 +1,12 @@
 # One compact independent check — September 19 continuation
 
+September 21 status: this request reached a terminal provider grammar rejection
+in run35613118796. Its full hold remains charged conservatively. The owner's
+later relaxed retry instruction is implemented by the separately frozen,
+one-request [wire repair](COMPACT_CHECK_WIRE_REPAIR.md) inside this SAME $0.50
+ceiling. The original logical request is permanently closed; the historical
+instructions and evidence below remain unchanged.
+
 This is the separately authorized continuation of the retained Luna assessment,
 not renewed authority for the two historical operations. The existing cloud
 ledger `on-demand-team-offline-v2-20260909` is the sole spending owner.
