@@ -23,7 +23,8 @@ from tools.contextual_team_executor import scope_inputs, validate_cache_identity
 from tools.offline_ai import request_body, response_value, validate_schema
 from tools.offline_spend import identity, encoded, atomic_json, ConfigurationFailure
 
-VERSION = 'contextual-iteration2-independent-evaluation-v1'
+LEGACY_VERSION = 'contextual-iteration2-independent-evaluation-v1'
+VERSION = 'contextual-iteration2-independent-evaluation-v2'
 MAX_RESPONSE_BYTES = 131072
 CONTROL_SCOPE = '363069'
 CONTROL_PERSON = 'urh-000027'
@@ -88,7 +89,7 @@ def actual_result(state, config, scope_id):
             or saved['snapshot_id'] != config['snapshot_id'] or saved['source_id'] != scope['source_id']):
         raise ConfigurationFailure('iteration2_check_result_wrapper_identity')
     source = scope_inputs(scope)
-    ic, ib = interpretation_wire.body('decomposition', source, 'L', 8000, repaired=True)
+    ic, ib = workflow.interpretation_body(source, scope_id, ledger_state)
     interpretation = _cached_stage(state, ledger_state, scope, 'interpret', ic, ib, identity(source),
         lambda v: interpretation_wire.validate_resolved('decomposition', v, source, repaired=True))
     if interpretation['state'] != 'coherent':
@@ -126,7 +127,9 @@ def actual_result(state, config, scope_id):
     return scope, graph, assessment, selection
 
 
-def packet(scope, graph, assessment, selection, config):
+def packet(scope, graph, assessment, selection, config, *, version=VERSION):
+    if version not in (LEGACY_VERSION, VERSION):
+        raise ConfigurationFailure('iteration2_check_transport_version')
     documents = {p['person_id']: p for p in config['people']}
     groups = selection['groups']; questions = [{'item_id': 'source', 'task_type': 'source_suitability', 'people': []}]
     shortlist = graph.get('retrieval', {}).get('shortlist', []) if graph else []
@@ -184,23 +187,32 @@ def packet(scope, graph, assessment, selection, config):
     evidence = scope_inputs(scope) | {'profile_documents': [documents[pid] for pid in ids], 'items': questions}
     owned = {q['item_id']: {'scope.science'} | set(q['people']) | {
         c['claim_id']+'@'+str(c['revision']) for pid in q['people'] for c in documents[pid]['claims']} for q in questions}
+    if version == VERSION:
+        for question in questions:
+            question['allowed_evidence_refs'] = sorted(owned[question['item_id']])
     labels = {q['item_id']: SOURCE_LABELS if q['task_type'] == 'source_suitability' else
         EXPLANATION_LABELS if q['task_type'] == 'explanation_audit' else USEFUL_LABELS for q in questions}
     row = obj(item_id=enum(*(q['item_id'] for q in questions)), verdict=enum(*dict.fromkeys(SOURCE_LABELS+USEFUL_LABELS+EXPLANATION_LABELS)),
         evidence_ref=string(max(len(v) for refs in owned.values() for v in refs)), reason=string(1000, 15))
+    if version == VERSION:
+        row['properties']['evidence_ref'] = enum(*sorted(set().union(*owned.values())))
     answers = array(row, len(questions)); answers['minItems'] = len(questions); schema = obj(answers=answers)
     prompt = judge_prompt(owned_references=True)
     if prompt.count(OWNED_FORMAT) != 1:
         raise ValueError('iteration2_check_original_judge_format_changed')
     prompt = prompt.replace(OWNED_FORMAT, FORMAT) + science.CLARIFICATION
-    contract = {'version': VERSION, 'schema': schema, 'prompt': prompt, 'evidence_sha256': identity(evidence),
+    if version == VERSION:
+        prompt += ('\nCopy evidence_ref exactly from that item\'s allowed_evidence_refs. '
+                   'A claim citation includes its listed @revision; the separate claim_id field alone is not a citation.\n')
+    contract = {'version': version, 'schema': schema, 'prompt': prompt, 'evidence_sha256': identity(evidence),
         'owned_references_sha256': identity({k: sorted(v) for k, v in owned.items()}),
         'labels_sha256': identity(labels), 'source_id': scope['source_id'], 'snapshot_id': config['snapshot_id'],
-        'graph_sha256': identity(graph), 'selection_sha256': identity(selection),
+        'graph_sha256': identity(graph), 'selection_sha256': identity(selection if version == LEGACY_VERSION else
+            {k: v for k, v in selection.items() if k != 'bundle_id'}),
         'assessment_sha256': identity(assessment), 'maximum_response_bytes': MAX_RESPONSE_BYTES,
         'source_only_control': control, 'production_admission': False}
     body = request_body({'provider': 'anthropic', 'model': 'claude-sonnet-5'},
-        {'schema_version': VERSION, 'max_output_tokens': 12000}, prompt, json.loads(encoded(evidence)), schema)
+        {'schema_version': version, 'max_output_tokens': 12000}, prompt, json.loads(encoded(evidence)), schema)
     body['thinking'] = {'type': 'disabled'}
     if len(encoded(body)) > policy.plan()['maximum_wire_bytes']:
         raise ValueError('iteration2_check_complete_evidence_wire_bound')
@@ -212,10 +224,14 @@ def packet(scope, graph, assessment, selection, config):
             'reason': 'A retrieval shortlist cannot establish directory-wide feasibility.'},
         'source_only_control': control, 'independent_evaluation_not_production_verification': True,
         'human_judgments': 0, 'same_model_family_limitation': True}
-    return contract, body, validator(questions, schema, owned, labels, identity(evidence)), report
+    if version == VERSION:
+        report['observed_ui_bundle_id'] = selection.get('bundle_id')
+    return contract, body, validator(questions, schema, owned, labels, identity(evidence), version=version), report
 
 
-def validator(questions, schema, owned, labels, input_id):
+def validator(questions, schema, owned, labels, input_id, *, version=VERSION):
+    if version not in (LEGACY_VERSION, VERSION):
+        raise ConfigurationFailure('iteration2_check_transport_version')
     def resolve(value):
         if len(encoded(value)) > MAX_RESPONSE_BYTES:
             raise ValueError('iteration2_check_response_bound')
@@ -226,7 +242,7 @@ def validator(questions, schema, owned, labels, input_id):
         for qid, row in answers.items():
             if row['verdict'] not in labels[qid] or row['evidence_ref'] not in owned[qid]:
                 raise ValueError('iteration2_check_exact_verdict_or_evidence_owner')
-        return {'version': VERSION, 'input_sha256': input_id,
+        return {'version': version, 'input_sha256': input_id,
             'verdicts': [deepcopy(answers[q['item_id']]) for q in questions]}
     def check(value, cached):
         if cached:
@@ -253,13 +269,19 @@ def validator(questions, schema, owned, labels, input_id):
     return check
 
 
-def prepared(state, requested):
+def prepared(state, requested, *, version=None):
     if not isinstance(requested, dict) or set(requested) != {'iteration2_check'} or not isinstance(requested['iteration2_check'], str):
         raise ConfigurationFailure('iteration2_exact_development_check_request')
     config = workflow.configuration(); scope_id = requested['iteration2_check']
-    policy.operation(scope_id, 'check')
+    purpose = policy.operation(scope_id, 'check')
+    if version is None:
+        ledger = existing.ExperimentLedger(Path(state)/'ledger.json').read()
+        bound = [e for e in ledger['events'] if e.get('authority') == policy.VERSION and e.get('purpose') == purpose]
+        if len(bound) > 1:
+            raise RecoveryRequired('iteration2_check_conflicting_bound_transport')
+        version = bound[0]['contract_version'] if bound else VERSION
     scope, graph, assessment, selection = actual_result(state, config, scope_id)
-    contract, body, check, report = packet(scope, graph, assessment, selection, config)
+    contract, body, check, report = packet(scope, graph, assessment, selection, config, version=version)
     return config, scope, contract, body, check, report, selection
 
 
@@ -270,32 +292,45 @@ def run(args):
     if args.action == 'prepare':
         existing.restore(args.state, existing.policy())
         policy.install_authority(args.state, existing.api)
-    config, scope, contract, body, check, report, selection = prepared(args.state, requested)
-    runner = workflow.Iteration2Runner(args.state, config); runner.scope_id = scope['id']
+    from tools import contextual_team_iteration2_check_recovery as recovery
+    ledger = existing.ExperimentLedger(Path(args.state)/'ledger.json')
+    recovered_scope = (requested == {'iteration2_check': recovery.SCOPE_ID} and any(
+        r.get('purpose') == policy.operation(recovery.SCOPE_ID, 'check') and r['status'] == 'failed'
+        for r in ledger.read()['requests']))
+    config, scope, contract, body, check, report, selection = (recovery.source_packet(args.state)
+        if recovered_scope else prepared(args.state, requested))
     purpose = policy.operation(scope['id'], 'check'); input_id = contract['evidence_sha256']
-    metadata = policy.bind_operation(runner.ledger, purpose, body, contract, input_id)
-    record = {'version': VERSION, 'authorization_id': existing.AUTHORIZATION_ID,
+    reused = recovery.read_recovered(args.state) if recovered_scope else None
+    runner = None
+    if reused is None:
+        runner = workflow.Iteration2Runner(args.state, config); runner.scope_id = scope['id']
+        metadata = policy.bind_operation(runner.ledger, purpose, body, contract, input_id)
+    record = {'version': contract['version'], 'authorization_id': existing.AUTHORIZATION_ID,
         'run_id': os.environ['GITHUB_RUN_ID'], 'attempt': os.environ['GITHUB_RUN_ATTEMPT'], 'code_sha': os.environ['GITHUB_SHA'],
         'release_id': policy.plan()['release_id'], 'scope_id': scope['id'], 'purpose': purpose,
         'contract_sha256': identity(contract), 'body_sha256': identity(body), 'input_sha256': input_id,
         'selection_sha256': identity(selection), 'graph_sha256': contract['graph_sha256'],
-        'maximum_new_metered_attempts': 1, 'maximum_new_native_counts': 1, 'additional_allowance': 0,
+        'maximum_new_metered_attempts': 0 if reused else 1,
+        'maximum_new_native_counts': 0 if reused else 1, 'additional_allowance': 0,
         'automatic_retries': 0, 'maximum_output_tokens': 12000, 'public_activation': False,
-        'remaining_completion_allowance': policy.remaining(runner.ledger.read(), args.state),
+        'remaining_completion_allowance': policy.remaining(ledger.read(), args.state),
         'protected': policy.pool.plan()['protected']}
+    if reused:
+        record['recovery'] = {k: v for k, v in reused.items() if k != 'value'}
     if args.action == 'prepare':
         if os.environ.get('GITHUB_OUTPUT'):
             with open(os.environ['GITHUB_OUTPUT'], 'a') as stream:
-                stream.write('text_provider=anthropic\n')
+                stream.write('text_provider='+('none' if reused else 'anthropic')+'\n')
         atomic_json(args.reservation, record)
         return
     if json.loads(args.reservation.read_bytes()) != record:
         raise ConfigurationFailure('iteration2_check_prepared_packet_changed')
     value = None
     try:
-        value = runner.request(purpose, [policy.VERSION, purpose, identity(contract), input_id], body, check, repair_metadata=metadata)
+        value = reused['value'] if reused else runner.request(
+            purpose, [policy.VERSION, purpose, identity(contract), input_id], body, check, repair_metadata=metadata)
     finally:
         atomic_json(args.result, record | {'report': report, 'selection': selection,
-            'evidence': json.loads(body['messages'][0]['content']), 'value': value, 'requests': runner.used,
-            'durable_requests': [r for r in runner.ledger.read()['requests'] if r.get('purpose') == purpose]})
+            'evidence': json.loads(body['messages'][0]['content']), 'value': value, 'requests': runner.used if runner else [],
+            'durable_requests': [r for r in ledger.read()['requests'] if r.get('purpose') == purpose]})
         existing.checkpoint(args.state)

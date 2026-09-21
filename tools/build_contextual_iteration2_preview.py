@@ -27,7 +27,8 @@ def build():
         zipped = gzip.compress(raw, mtime=0)
         files[name] = {'bytes':len(raw), 'gzip_bytes':len(zipped), 'sha256':hashlib.sha256(raw).hexdigest(),
             'gzip_base64':base64.b64encode(zipped).decode(), 'content_type':content_type}
-    for name in ('contextual-team-engine.js','contextual-team-client.js','contextual-preview-observer.js'):
+    for name in ('contextual-team-engine.js','contextual-team-client.js','contextual-preview-observer.js',
+                 'opportunity-team.js','opportunity-team-panel.js'):
         add('assets/'+name, (ROOT/'workers/researcher-intake/iteration2-source/assets'/name).read_bytes().replace(b'\r\n',b'\n'), 'text/javascript; charset=utf-8')
     # The catalog and startup metadata form one published cohort. Refuse stale
     # product-worktree inputs instead of silently rebuilding another release.
