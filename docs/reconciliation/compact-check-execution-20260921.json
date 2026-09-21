@@ -1,0 +1,314 @@
+{
+  "version": "compact-check-execution-20260921-v1",
+  "recorded_at": "2026-09-21T14:19:14.249299+00:00",
+  "predispatch_receipt": "docs/reconciliation/compact-check-predispatch-20260921.json",
+  "predispatch_commit": "4437242fede245044ccbc82fbb782509ce58b63e",
+  "starting_product": "b3bb7bf65cf47a170d21c9e6026a233d34273833",
+  "helper_head": "e8e37b003efe87ca158cca5da0f00170116739ee",
+  "main_merge": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+  "pr": 256,
+  "pr_state": "MERGED",
+  "review": {
+    "comment": 5683636190,
+    "completed_at": "2026-09-21T14:06:35.870342Z",
+    "no_findings_reaction_at": "2026-09-21T14:06:39Z",
+    "unresolved_threads": 0
+  },
+  "required_ci": {
+    "run": 35609287887,
+    "python_passed": 1520,
+    "browser_passed": 796,
+    "no_drift_artifacts": 23,
+    "frozen_queries": 37,
+    "top10_churn": 0,
+    "scoring_cases": 50,
+    "scoring_byte_identical": true
+  },
+  "postmerge_ci": {
+    "run": 35610075995,
+    "result": "success"
+  },
+  "focused_checks_passed": 14,
+  "execution": {
+    "run": 35610297158,
+    "attempt": 1,
+    "head_sha": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+    "created_at": "2026-09-21T14:09:53Z",
+    "conclusion": "failure",
+    "job_id": 106367437635,
+    "steps": [
+      {
+        "name": "Set up job",
+        "conclusion": "success",
+        "started_at": "2026-09-21T14:09:57Z",
+        "completed_at": "2026-09-21T14:09:58Z"
+      },
+      {
+        "name": "Run actions/checkout@v6",
+        "conclusion": "success",
+        "started_at": "2026-09-21T14:09:58Z",
+        "completed_at": "2026-09-21T14:10:03Z"
+      },
+      {
+        "name": "Run actions/setup-python@v6",
+        "conclusion": "success",
+        "started_at": "2026-09-21T14:10:03Z",
+        "completed_at": "2026-09-21T14:10:05Z"
+      },
+      {
+        "name": "Run python -m pip install -r requirements.txt",
+        "conclusion": "success",
+        "started_at": "2026-09-21T14:10:05Z",
+        "completed_at": "2026-09-21T14:10:11Z"
+      },
+      {
+        "name": "Validate public packet and restore the single authoritative ledger",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:11Z",
+        "completed_at": "2026-09-21T14:10:11Z"
+      },
+      {
+        "name": "Claim the existing Access-authorized contextual job",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:11Z",
+        "completed_at": "2026-09-21T14:10:11Z"
+      },
+      {
+        "name": "Restore the same authoritative ledger for contextual execution",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:11Z",
+        "completed_at": "2026-09-21T14:10:11Z"
+      },
+      {
+        "name": "Validate the finite independent check and restore its existing ledger",
+        "conclusion": "failure",
+        "started_at": "2026-09-21T14:10:11Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Persist crash protection before any metered request",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Embed only bounded missing public inputs",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Judge only bounded blinded development packets",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Execute the bounded contextual scientific job",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Execute the single bounded independent check",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Retain exact accounting and bounded results after success or failure",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Return the graph only after its authoritative checkpoint is durable",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Retain private contextual check results",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Post Run actions/setup-python@v6",
+        "conclusion": "skipped",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:14Z"
+      },
+      {
+        "name": "Post Run actions/checkout@v6",
+        "conclusion": "success",
+        "started_at": "2026-09-21T14:10:14Z",
+        "completed_at": "2026-09-21T14:10:15Z"
+      },
+      {
+        "name": "Complete job",
+        "conclusion": "success",
+        "started_at": "2026-09-21T14:10:15Z",
+        "completed_at": "2026-09-21T14:10:15Z"
+      }
+    ],
+    "artifacts": 0,
+    "workflow_dispatches": 1,
+    "provider_dispatches": 0,
+    "new_native_counts": 0,
+    "automatic_retries": 0,
+    "first_failure": "compact_terminal_evidence_hash"
+  },
+  "reproduction": {
+    "version": "compact-real-authority-reproduction-20260921-v1",
+    "verified_checkpoint_files": 1357,
+    "receipt_raw_sha256": "6c237d6db06aeaf48df9896505c74e6836a7fea9d00116f6c3ed2727af993723",
+    "diagnostic_raw_sha256": "9f5cc1a7b775fb4e442545308ca037b2b2481ce6e2b1e6a3be3d38f65457c62b",
+    "diagnostic_canonical_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+    "locked_diagnostic_sha256": "30cd6ebf824c14c3267e0aea79071c056bb9f67ae5b5c24bd37c572dceea191c",
+    "provider_calls": 0,
+    "api_calls": 0,
+    "authoritative_files_changed": false,
+    "exception": "ConfigurationFailure",
+    "message": "compact_terminal_evidence_hash",
+    "cloned_ledger_unchanged": true
+  },
+  "accounting": {
+    "authorization_id": "on-demand-team-offline-v2-20260909",
+    "authoritative_run": 34967272858,
+    "artifact": 10394804222,
+    "ledger_sha256": "4cd9494d2934aa4df3ed52905b10001e695b67a3d302581c8fa062e5da270ec8",
+    "checkpoint_sha256": "c4e38fe8c907878628f7e1360faa378098adb4a57e0b1d9c78c6c3c16e1fc78c",
+    "known_microusd": 7346880,
+    "unknown_holds_microusd": 351328,
+    "conservative_used_microusd": 7698208,
+    "requests": 685,
+    "remaining_microusd": 2301792,
+    "remaining_requests": 5,
+    "protected_microusd": 1267862,
+    "protected_requests": 2,
+    "new_requests": 0,
+    "new_input_tokens": 0,
+    "new_output_tokens": 0,
+    "new_microusd": 0,
+    "new_reservations": 0,
+    "native_counts_used": 187,
+    "native_count_limit": 190,
+    "unknown_holds": [
+      {
+        "id": "fc618603458249348c6834d258264520",
+        "microusd": 146074
+      },
+      {
+        "id": "d24a0654d72e486793519bead019b064",
+        "microusd": 205254
+      }
+    ],
+    "new_quarantine_installed": false,
+    "history_changed": false,
+    "retry_authorized": false
+  },
+  "scientific": {
+    "expected_people": 12,
+    "expected_pairs": 24,
+    "accepted_verdicts": 0,
+    "missing_verdicts": 24,
+    "derived_checker_person_outcomes": 0,
+    "provider_grammar_acceptance": "NOT_RUN",
+    "saved_luna_assessment_sha256": "eb65f24d6b2be4aff319fca8c63bf5e4f21858987a62789b367136c82cb271ad",
+    "packet_sha256": "eb7d49209b5ce1c6052a45a854924924147756c7ecab218360e3b4ba6dd35e3e",
+    "contract_sha256": "d0e44d872d57767039991c4242285ffb5a5fefc6f9a3b3d93fce9ac2dbe5f149",
+    "input_sha256": "e13acb65364347fdd5e94da992105833d7d3cb7d6bdb2764f15d28674c8c58f8",
+    "comparison": "UNMEASURED"
+  },
+  "catalog": {
+    "published_pr": 265,
+    "run": 35515844236,
+    "candidate": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+    "records": 1368,
+    "rejected_pr_262_untouched": true,
+    "status": "PUBLISHED_VERIFIED",
+    "postmerge_run": 35610076546,
+    "postmerge_result": "success",
+    "postmerge_plan": {
+      "anthropic": "true",
+      "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+      "candidate_run": "35515844236",
+      "changes": {
+        "validation": [
+          "tests/test_contextual_team_compact_check.py",
+          "tests/test_contextual_team_luna_repair.py",
+          "tools/contextual_team_check.py",
+          "tools/contextual_team_compact_check.py",
+          "tools/contextual_team_pair_contract.py",
+          "tools/contextual_team_policy.py",
+          "tools/team_recommender_budget.py"
+        ]
+      },
+      "live_verified": true,
+      "openai": "false",
+      "publication_attempt": "1",
+      "publication_run": "35515844236",
+      "qualification_hold": false,
+      "reason": "Dependency fingerprints and retained release evidence",
+      "receipt_current": false,
+      "receipt_run": "35515844236",
+      "release_sha": "e5b6947837f5ae4666f27b9897e2d5dc948e2738",
+      "runtime_changes": [],
+      "stage": "validate",
+      "team_generation_ready": false,
+      "team_mode": "maintenance"
+    },
+    "validation_gates": {
+      "browser": "passed",
+      "frozen-query": "passed",
+      "no-drift": "passed",
+      "notice-projection": "passed",
+      "package-integrity": "passed",
+      "python": "passed",
+      "scoring": "passed"
+    },
+    "generation": "skipped",
+    "assembly": "skipped",
+    "publication": "skipped",
+    "pages": "skipped",
+    "verify_live": "skipped",
+    "manual_refreshes": 0,
+    "production_mutated_by_continuation": false,
+    "live_observation": {
+      "checked_at": "2026-09-21T14:13:56.841566+00:00",
+      "candidate_id": "5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700",
+      "files": [
+        {
+          "path": "data/catalog-metadata.js",
+          "status": 200,
+          "bytes": 575,
+          "sha256": "48d8e1b876ce6791ebeacc1536a007239cf4e5e502e1668f6c6cb30ab9bf9c93",
+          "manifest_match": true
+        },
+        {
+          "path": "data/researcher_registry_manifest.json",
+          "status": 200,
+          "bytes": 3457,
+          "sha256": "a2ecbb71de8e6afe20d5ae466d0842cb4a682a63f724dab91ac48b2075f837e3",
+          "manifest_match": true
+        },
+        {
+          "path": "data/search-v2-release.json",
+          "status": 200,
+          "bytes": 4578,
+          "sha256": "ebf9511b8dab4a4af0df439a823f9be4a560fa94b66605f4d48141c84de3bf26",
+          "manifest_match": true
+        }
+      ],
+      "provider_calls": 0,
+      "scope": "Three public metadata files; full package provenance retained in September20 release receipt."
+    }
+  },
+  "public_activation": false,
+  "audited_registry_activation": false,
+  "legacy_packages_withdrawn": 0,
+  "affected_legacy_packages_preserved": 107,
+  "e2e": "NOT_RUN_NOT_AUTHORIZED",
+  "next_action": "Explicit owner continuation for the minimal raw-versus-canonical diagnostic hash repair with real-identity regression, exact-head review and any subsequent single dispatch; no automatic repair/retry."
+}

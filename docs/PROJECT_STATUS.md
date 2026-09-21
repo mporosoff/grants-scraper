@@ -1,8 +1,35 @@
 # Funding Finder — current repair status
 
-Updated September 19, 2026. This is the current handoff; earlier checkpoints below are history.
+Updated September 21, 2026. This is the authoritative current handoff; earlier checkpoints below are historical.
 
-## CURRENT — compact checker reviewed and wired; merge and real check held by catalog dependencies
+## CURRENT — catalog recovered; helper merged; checker stopped before payment
+
+**The public catalog contains 1,368 September 20 records. PR256 is merged. The single authorized checker workflow failed in preparation; no provider request or new charge occurred, and all 24 independent verdicts remain missing.**
+
+The exact failure is `compact_terminal_evidence_hash` in [run35610297158](https://github.com/mporosoff/grants-scraper/actions/runs/35610297158). The merged helper compares the old diagnostic's raw file hash with its canonical JSON hash. The preserved evidence is intact. A zero-network reproduction using real bytes confirms the mismatch before any ledger write or API/provider call. Synthetic tests replaced those constants and missed the defect. Provider grammar acceptance is **NOT RUN**; no scientific disagreement can be inferred.
+
+The continuation explicitly prohibits automatic repair/retry after failure. **Scientific work is stopped for user review.** The smallest next action is an explicitly resumed identity-format repair, an unmodified-real-identity regression and tamper rejection, normal exact-head review/CI, then the separately resumed bounded check. Do not relax provenance, rewrite receipts, refund unknown usage or regenerate the Luna assessment. Unused budget is not retry authority.
+
+| Layer | Actual disposition |
+| --- | --- |
+| Product `codex/on-demand-team-recommender` | Existing worktree preserved. Resumed `b3bb7bf65cf47a170d21c9e6026a233d34273833`; pre-dispatch record `4437242fede245044ccbc82fbb782509ce58b63e`. This later documentation commit contains the failure closeout; resolve its SHA through this file's history. Scientific code remains the previously reconciled implementation. |
+| Helper `codex/compact-checker-contract`, PR256 | Merged prerequisite. Reviewed head `e8e37b003efe87ca158cca5da0f00170116739ee`; clean terminal review and CI35609287887; protected merge `e5b6947837f5ae4666f27b9897e2d5dc948e2738`. The preparation defect above remains. |
+| Public catalog | PR265 / publication `765cdb7da73598fb30b4a098bd8d568e10ac67c6`; successful release35515844236; candidate `5315ab4d3e4f293df625097775f3c042b718759312c057ea8b5ac66aadaaa700`. Three public metadata files rechecked against exact candidate hashes September21. |
+| PR256 postmerge release | Run35610076546 passed all seven validation gates. Generation, assembly, publication, Pages and live-provider smoke skipped. No duplicate refresh or production mutation. Postmerge CI35610075995 passed. |
+| Rejected PR262 | Rejected historical candidate, preserved and unpublished; not a pending approval to execute. |
+| Public Search/Team Match and legacy teams | Remain live. No runtime change or experimental activation in this continuation. |
+| Restricted contextual service / Phase2 | Prior validation evidence; no new deployment or cold-flow claim. |
+| Historical E2/D3 and numerical work | Superseded experiments; no restarted analysis, nomination or holdout. |
+| Audited registry /107 affected legacy packages | Experimental registry preserved; activation and revalidation/withdrawal remain a separate unexecuted owner decision. |
+| Other worktrees and local artifacts | Private outputs/graphs/answers, previews, debug files and unrelated changes preserved; local-only artifacts are not release evidence. |
+
+**Accounting is unchanged:** sole owner run34967272858/artifact10394804222; $7.346880 known charges +$0.351328 historical unknown holds = **$7.698208 conservative use**, 685/690 attempts. Remaining **$2.301792/five attempts**, including protected **$1.267862/two attempts**. Native counts187/190. This continuation used one workflow dispatch but **zero provider attempts, tokens, native counts, new reservations or spending**. The new exact quarantine was not installed. The failed run produced no state artifact and is not a replacement budget owner. All 1,357 preserved checkpoint file hashes still match.
+
+**Checks:**14 focused continuation contracts passed; required candidate CI passed1,520 Python/796 browser contracts,23 no-drift artifacts,37 frozen queries with zero top-ten churn and50 byte-identical scoring cases. Those tests did not validate the real authority-installation constants. The hash reproduction is retained as a failure. E2E/Playwright was not run. No public activation, new team/profile/vector/interpretation, human packet, subscriber action or Stage4 occurred. Existing daily automation owns ordinary catalog updates; IARPA degradation/issue30 remains separate.
+
+Full evidence: [execution closeout](reconciliation/compact-check-execution-20260921.md), [sanitized receipt](reconciliation/compact-check-execution-20260921.json), [immutable pre-dispatch receipt](reconciliation/compact-check-predispatch-20260921.json), and [experiment state](team-recommender/experiment-state.json).
+
+## Historical September 19 checkpoint — superseded by CURRENT above
 
 **Engineering is complete and independently reviewed. The one newly authorized scientific check has NOT RUN.** PR [256](https://github.com/mporosoff/grants-scraper/pull/256) is open at **`7d9037bdedacaf8a7145c0b113a4a5a4d42d4c59`**. Its updated exact-head automatic review completed September19 at17:16:46 UTC with no findings; the bot's no-findings reaction at17:16:48 and all review surfaces confirm no unresolved thread. Required CI [35457408680](https://github.com/mporosoff/grants-scraper/actions/runs/35457408680) passed. No duplicate review or full-suite run was requested.
 
