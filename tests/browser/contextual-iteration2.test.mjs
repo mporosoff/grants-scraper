@@ -119,6 +119,76 @@ test('restricted overlay has exact readable assets and preserves old preview byt
   assert.equal(ui.OpportunityTeam.validateIndex(ui.OPPORTUNITY_TEAM_INDEX,overlay.index_generation).scopes.length,12);
 });
 
+test('restricted bundled catalog boots through its actual loader and rejects inherited startup metadata',async()=>{
+  const html=code('match_explorer.html'),team=code('team_match.html');
+  const metadataPath=html.match(/<script src="([^"\n]*data\/catalog-metadata\.js\?v=[^"\n]+)"/)[1];
+  const location=new URL('https://example.test'+overlay.base_path+'match_explorer.html');
+  async function boot(metadataSource){
+    const scripts=[],timers=new Map(),initialized=[];let nextTimer=0,context;
+    const document={readyState:'loading',hidden:false,currentScript:null,
+      scripts:[{src:new URL(metadataPath,location).href}],addEventListener(){},querySelectorAll:()=>[],
+      createElement(tag){
+        const events=new Map();
+        return {tagName:tag,dataset:{},addEventListener:(name,callback)=>events.set(name,callback),
+          removeEventListener:(name,callback)=>{if(events.get(name)===callback)events.delete(name);},
+          remove(){},emit:name=>events.get(name)?.()};
+      },
+      head:{append(script){
+        scripts.push(script.src);
+        queueMicrotask(()=>{
+          const url=new URL(script.src),name=url.pathname.slice(overlay.base_path.length);
+          assert.equal(url.origin,location.origin);assert(url.pathname.startsWith(overlay.base_path));
+          assert.equal(name,'data/opportunities.js');
+          document.currentScript=script;
+          try{vm.runInContext(code(name),context,{filename:name});}
+          finally{document.currentScript=null;}
+          script.emit('load');
+        });
+      }}};
+    context=vm.createContext({URL,URLSearchParams,Date,console,document,location,navigator:{},
+      performance:{getEntriesByName:()=>[],mark(){}},
+      FUNDING_FINDER_SCRIPT_CLOCK:{setTimeout(callback,ms){const id=++nextTimer;timers.set(id,{callback,ms});return id;},
+        clearTimeout:id=>timers.delete(id)}});
+    vm.runInContext(code('assets/app-config.js'),context);
+    vm.runInContext(metadataSource,context);
+    vm.runInContext(code('assets/catalog-loader.js'),context);
+    // Use the bundled application's real catalog validator, without booting its
+    // unrelated DOM or issuing search/provider requests in this focused test.
+    const app=code('assets/app.js'),start=app.indexOf('  function validateCatalog(value) {'),
+      end=app.indexOf('  function markPerformance(',start);
+    assert(start>=0&&end>start);
+    vm.runInContext(app.slice(start,end)+'globalThis.fixtureValidateCatalog=validateCatalog;',context);
+    const loader=context.FUNDING_CATALOG_LOADER;
+    loader.configure({validate:context.fixtureValidateCatalog,initialize:(catalog,startup)=>initialized.push({catalog,startup})});
+    return {context,loader,scripts,timers,initialized};
+  }
+  const stale=await boot(gunzipSync(Buffer.from(base.files['data/catalog-metadata.js'].gzip_base64,'base64')).toString());
+  await assert.rejects(stale.loader.ensureCatalogReady(),/does not match its startup metadata/);
+  assert.equal(stale.loader.getSnapshot().state,'failed');assert.equal(stale.initialized.length,0);
+  assert.equal(stale.context.GRANT_CATALOG,undefined);assert.equal(stale.scripts.length,1);assert.equal(stale.timers.size,0);
+  assert(Object.hasOwn(overlay.files,'data/catalog-metadata.js'),'current catalog must own its startup metadata');
+  const ready=await boot(code('data/catalog-metadata.js'));
+  const [first,second]=await Promise.all([ready.loader.ensureCatalogReady(),ready.loader.ensureCatalogReady()]);
+  assert.strictEqual(first,second);assert.strictEqual(await ready.loader.ensureCatalogReady(),first);
+  assert.equal(ready.loader.getSnapshot().state,'ready');assert.equal(ready.initialized.length,1);
+  assert.equal(ready.scripts.length,1);assert.equal(ready.timers.size,0);
+  assert.equal(ready.loader.getSnapshot().quarantinedCatalogAssignments,0);
+  const metadata=ready.context.GRANT_CATALOG_METADATA;
+  assert.equal(metadata.schema_version,1);assert.equal(metadata.catalog_schema_version,first.schema_version);
+  assert.equal(metadata.record_count,first.record_count);assert.equal(metadata.record_count,first.opportunities.length);
+  assert.equal(first.search_index.document_count,first.record_count);
+  assert.equal(metadata.generated_at,first.generated_at);assert.deepEqual(metadata.status_counts,first.status_counts);
+  assert.equal(metadata.release_identity,ready.loader.releaseIdentity(first));
+  assert.equal(metadata.catalog_url,'./data/opportunities.js?v='+metadata.asset_version);
+  assert.equal(new URL(ready.scripts[0]).searchParams.get('v'),metadata.asset_version);
+  assert.equal(new URL(metadataPath,location).searchParams.get('v'),metadata.asset_version);
+  const direct=team.match(/<script src="([^"\n]*data\/opportunities\.js\?v=[^"\n]+)"/)[1];
+  assert.equal(new URL(direct,location).searchParams.get('v'),metadata.asset_version);
+  assert([first.generated_at,first.detail_enrichment_generated_at,first.document_evidence_generated_at,
+    first.catalog_audit_generated_at,first.link_health_generated_at,first.diagnostics?.additional_sources?.merged_at]
+    .includes(metadata.pipeline_generated_at));
+});
+
 function graphFixture(){
   const c=vm.createContext({URL,Date});
   for(const name of ['data/researcher_directory.js','assets/contextual-team-engine.js'])vm.runInContext(code(name),c);

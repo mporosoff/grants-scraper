@@ -9,8 +9,13 @@ import hashlib
 import json
 from pathlib import Path
 from tools.offline_spend import atomic_json, identity, encoded
+from scripts.build_catalog import catalog_metadata, catalog_metadata_javascript_bytes
 
 ROOT = Path(__file__).resolve().parents[1]
+
+
+def assigned_json(raw, name):
+    return json.loads(raw.decode().split('globalThis.'+name+'=', 1)[1].strip().removesuffix(';'))
 
 
 def build():
@@ -24,9 +29,21 @@ def build():
             'gzip_base64':base64.b64encode(zipped).decode(), 'content_type':content_type}
     for name in ('contextual-team-engine.js','contextual-team-client.js','contextual-preview-observer.js'):
         add('assets/'+name, (ROOT/'workers/researcher-intake/iteration2-source/assets'/name).read_bytes().replace(b'\r\n',b'\n'), 'text/javascript; charset=utf-8')
-    # Current catalog eligibility is separate from immutable historical science.
-    for name in ('opportunities.js','subtopics.js'):
-        add('data/'+name, (ROOT/'data'/name).read_bytes().replace(b'\r\n',b'\n'), 'text/javascript; charset=utf-8')
+    # The catalog and startup metadata form one published cohort. Refuse stale
+    # product-worktree inputs instead of silently rebuilding another release.
+    catalog_raw = (ROOT/'data/opportunities.js').read_bytes().replace(b'\r\n',b'\n')
+    if hashlib.sha256(catalog_raw).hexdigest() != sources['source_catalog']['raw_sha256']:
+        raise ValueError('iteration2_locked_catalog_required')
+    catalog = assigned_json(catalog_raw, 'GRANT_CATALOG')
+    metadata_raw = (ROOT/'data/catalog-metadata.js').read_bytes().replace(b'\r\n',b'\n')
+    if metadata_raw != catalog_metadata_javascript_bytes(catalog):
+        raise ValueError('iteration2_catalog_metadata_cohort_mismatch')
+    asset_version = catalog_metadata(catalog)['asset_version']
+    old_metadata = assigned_json(gzip.decompress(base64.b64decode(
+        base['files']['data/catalog-metadata.js']['gzip_base64'])), 'GRANT_CATALOG_METADATA')
+    for name, raw in [('opportunities.js', catalog_raw), ('catalog-metadata.js', metadata_raw),
+                      ('subtopics.js', (ROOT/'data/subtopics.js').read_bytes().replace(b'\r\n',b'\n'))]:
+        add('data/'+name, raw, 'text/javascript; charset=utf-8')
     original = gzip.decompress(base64.b64decode(base['files']['data/opportunity_team_index.js']['gzip_base64'])).decode()
     index = json.loads(original[original.index('{'):original.rindex('}')+1])
     index.pop('generation_id');index.update(release_id=authority['release_id'], source_fields=sources['source_fields'],
@@ -47,6 +64,9 @@ def build():
         if html.count(old_base) != 1 or base['index_generation'] not in html:
             raise ValueError('iteration2_original_preview_html_identity')
         html = html.replace(old_base, '<base href="/admin/contextual/iteration2/">')
+        if old_metadata['asset_version'] not in html:
+            raise ValueError('iteration2_original_catalog_version_reference')
+        html = html.replace(old_metadata['asset_version'], asset_version)
         html = html.replace(base['index_generation'], index['generation_id'])
         for asset, file in files.items():
             if asset in base['files']:
