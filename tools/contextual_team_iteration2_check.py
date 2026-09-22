@@ -72,11 +72,13 @@ def _cached_stage(state, ledger_state, scope, stage, contract, body, input_id, v
 
 
 def actual_result(state, config, scope_id):
+    from tools.contextual_team_checkpoint_disposition import assert_operation_open
     scope = next((s for s in config['scopes'] if s['id'] == scope_id), None)
     if scope is None:
         raise ConfigurationFailure('iteration2_check_development_scope_only')
     ledger_state = existing.ExperimentLedger(Path(state)/'ledger.json').read()
     policy.history(ledger_state)
+    assert_operation_open(ledger_state, policy.operation(scope_id, 'check'))
     # This one fixed historical control is not a production action or a claim
     # that a blocked source was assessed through the normal serving workflow.
     if scope_id == CONTROL_SCOPE and scope['state'] != 'unassessed':
@@ -274,8 +276,10 @@ def prepared(state, requested, *, version=None):
         raise ConfigurationFailure('iteration2_exact_development_check_request')
     config = workflow.configuration(); scope_id = requested['iteration2_check']
     purpose = policy.operation(scope_id, 'check')
+    from tools.contextual_team_checkpoint_disposition import assert_operation_open
+    ledger = existing.ExperimentLedger(Path(state)/'ledger.json').read()
+    assert_operation_open(ledger, purpose)
     if version is None:
-        ledger = existing.ExperimentLedger(Path(state)/'ledger.json').read()
         bound = [e for e in ledger['events'] if e.get('authority') == policy.VERSION and e.get('purpose') == purpose]
         if len(bound) > 1:
             raise RecoveryRequired('iteration2_check_conflicting_bound_transport')

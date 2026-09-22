@@ -110,7 +110,8 @@ class Iteration2(unittest.TestCase):
             self.assertEqual(state['events'][:-1], self.original_state['events'])
             self.assertEqual(state['events'][-1], policy.event())
             self.assertEqual((state['limit_microusd'], state['max_requests']), (60000000, 1290))
-        record = policy.prepare_record(self.state, {'job_id': 'a'*64})
+        record = policy.prepare_record(self.state, {'job_id': identity([self.p['release_id'], self.scope['id'], '']),
+            'release_id': self.p['release_id'], 'scope_id': self.scope['id'], 'person_id': ''})
         self.assertEqual(record['maximum_logical_spend_usd'], 60)
         self.assertEqual(record['original_additional_allowance']['microusd'], 50000000)
         self.assertEqual(record['remaining_completion_allowance']['attempts'], 600)

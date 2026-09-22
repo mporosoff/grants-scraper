@@ -45,6 +45,8 @@ class ExperimentLedger(Ledger):
         else:
             from tools.contextual_team_completion_policy import amended_limits
             self.limit, self.max_requests = amended_limits(state)
+        from tools.contextual_team_checkpoint_disposition import validate
+        validate(state)
         return state
 
     def reserve_experiment(self, provider, model, stage, key, amount, attempt,
@@ -78,6 +80,9 @@ class ExperimentLedger(Ledger):
             raise ValueError('invalid_token_reservation')
         with self.locked():
             state = self.read()
+            from tools.contextual_team_checkpoint_disposition import exposure, assert_operation_open
+            assert_operation_open(state, metadata.get('purpose'))
+            held = exposure(state)
             # Reservation is the irreversible dispatch claim. A caller cannot
             # prove non-dispatch from a missing cache, receipt or terminal flag.
             # Check under the same lock as insertion, including legacy rows.
@@ -120,13 +125,13 @@ class ExperimentLedger(Ledger):
                 raise ConfigurationFailure(state["blocked_providers"][provider])
             if state.get("reservation_overrun"):
                 raise Deferred("recorded_reservation_overrun_requires_review")
-            spent = sum(r["charged_microusd"] for r in state["requests"])
+            spent = sum(r["charged_microusd"] for r in state["requests"]) + held['microusd']
             if is_contextual:
                 from tools.contextual_team_policy import check_reservation
                 check_reservation(state, provider, metadata, amount, input_tokens, output_tokens)
             if stage == 3:
                 validation = [r for r in state['requests'] if r['stage']==3]
-                if (len(validation)>=184 or len(state['requests'])>=665
+                if (len(validation)>=184 or len(state['requests']) + held['attempts']>=665
                         or sum(r['charged_microusd'] for r in validation)+amount>4_000_000
                         or spent+amount>7_135_333):
                     raise Deferred('stage3_or_stage4_reserve_exhausted')
@@ -180,14 +185,14 @@ class ExperimentLedger(Ledger):
                 dollar_cap = 2_000_000 if post else 3_364_400 if d2 or d3 else 4_424_000 if d1 else (5_376_000 if stage==2 else 3_993_600)
                 if sum(r['reserved_microusd'] for r in judge)+amount>dollar_cap:
                     raise Deferred('finite_judge_dollar_envelope_exhausted')
-            if is_completion:
+            if is_completion or held['attempts']:
                 from tools.contextual_team_completion_policy import check_pool
                 check_pool(state, amount, 1)
             # The pooled amendment increases only exact completion operations;
             # every older route keeps its original lifetime/stage envelope.
             effective_limit = self.limit if is_completion else min(10_000_000, 9_290_655 if is_contextual else STAGE_CEILINGS[stage])
             effective_attempts = self.max_requests if is_completion else MAX_REQUESTS
-            if spent + amount > effective_limit or len(state["requests"]) >= effective_attempts:
+            if spent + amount > effective_limit or len(state["requests"]) + held['attempts'] >= effective_attempts:
                 raise Deferred("experiment_stage_or_total_budget_exhausted")
             token = uuid.uuid4().hex
             state["requests"].append({"id": token, "provider": provider, "model": model,

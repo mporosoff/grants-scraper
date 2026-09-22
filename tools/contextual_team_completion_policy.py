@@ -58,6 +58,8 @@ def history(state, *, require_authority=True):
     expected = p['lifetime'] if installed else {'microusd': 10000000, 'attempts': 690}
     if (state['limit_microusd'], state['max_requests']) != (expected['microusd'], expected['attempts']):
         raise ConfigurationFailure('completion_interacting_ledger_caps')
+    from tools.contextual_team_checkpoint_disposition import validate
+    validate(state)
 
 
 def amended_limits(state):
@@ -74,13 +76,15 @@ def check_pool(state, amount=0, attempts=0):
     if state.get('reservation_overrun') or state['blocked_providers']:
         raise Deferred('completion_existing_accounting_stop')
     p = plan(); start = p['starting_checkpoint']; protected = p['protected']
-    rows = state['requests']; used = sum(r['charged_microusd'] for r in rows)
+    from tools.contextual_team_checkpoint_disposition import exposure
+    held = exposure(state)
+    rows = state['requests']; used = sum(r['charged_microusd'] for r in rows) + held['microusd']
     # Count ALL additions to the one ledger, not merely labelled task rows.
-    incremental = sum(r['charged_microusd'] for r in rows[start['requests']:])
+    incremental = sum(r['charged_microusd'] for r in rows[start['requests']:]) + held['microusd']
     if (used + amount > p['lifetime']['microusd'] - protected['historical_microusd'] - protected['contingency_microusd']
-        or len(rows) + attempts > p['lifetime']['attempts'] - protected['historical_attempts']
+        or len(rows) + held['attempts'] + attempts > p['lifetime']['attempts'] - protected['historical_attempts']
         or incremental + amount > p['additional']['microusd'] - protected['contingency_microusd']
-        or len(rows) - start['requests'] + attempts > p['additional']['attempts']):
+        or len(rows) - start['requests'] + held['attempts'] + attempts > p['additional']['attempts']):
         raise Deferred('completion_pool_or_protected_reserve_exhausted')
 
 
@@ -91,15 +95,18 @@ def remaining_fits(state, amount):
 def check_count_budget(state, saved, item):
     """Bound every native attempt before its durable irreversible claim."""
     history(state)
+    from tools.contextual_team_checkpoint_disposition import exposure, assert_operation_open, validate_counts
+    assert_operation_open(state, item.get('id'))
     p = plan(); start = p['starting_checkpoint']; rows = saved['rows']
+    validate_counts(state, rows); held = exposure(state)
     if (len(rows) < start['native_counts']
         or identity(rows[:start['native_counts']]) != start['native_counts_sha256']):
         raise ConfigurationFailure('completion_original_native_counts_changed')
     if not item.get('id', '').startswith(PREFIX):
         raise ConfigurationFailure('completion_native_count_scope')
     check_pool(state)
-    if (len(rows) + 1 > p['lifetime']['native_counts']
-        or len(rows) - start['native_counts'] + 1 > p['additional']['native_counts']):
+    if (len(rows) + held['native_counts'] + 1 > p['lifetime']['native_counts']
+        or len(rows) - start['native_counts'] + held['native_counts'] + 1 > p['additional']['native_counts']):
         raise Deferred('completion_native_count_allowance_exhausted')
 
 
