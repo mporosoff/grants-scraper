@@ -407,6 +407,19 @@ class ExecutorContract(unittest.TestCase):
             else:
                 with self.assertRaisesRegex(ValueError,'untrusted_checkpoint_run'):e.restore(destination,self.settings,api)
 
+    def test_checkpoint_file_limit_covers_authorized_lifetime_but_rejects_one_more_before_extracting(self):
+        self.assertEqual(e.STATE_FILE_LIMIT, 3 * 1490 + 128)
+        self.assertEqual(e.STATE_LIMIT, 128 * 1024 * 1024)
+        target = self.root/'oversize-entry-count'
+        with patch.object(e.zipfile, 'ZipFile') as opened:
+            archive = opened.return_value.__enter__.return_value
+            archive.infolist.return_value = [zipfile.ZipInfo('cache/'+format(index, '064x')+'.json')
+                for index in range(e.STATE_FILE_LIMIT + 1)]
+            with self.assertRaisesRegex(ValueError, 'checkpoint_size_exceeded'):
+                e.unpack_state(b'fixture metadata only', target)
+            archive.read.assert_not_called()
+        self.assertFalse(target.exists())
+
     def test_workflow_only_main_manual_and_scoped_credentials(self):
         import yaml
         flow = yaml.safe_load((e.ROOT/e.WORKFLOW).read_text())
@@ -422,8 +435,10 @@ class ExecutorContract(unittest.TestCase):
         self.assertEqual(checkout["with"]["ref"], "${{ github.sha }}")
         self.assertFalse(checkout["with"]["persist-credentials"])
         credential_steps = [s for s in steps if any(k.endswith("_API_KEY") for k in s.get("env", {}))]
-        self.assertEqual(len(credential_steps), 4)
-        self.assertEqual([s["name"] for s in credential_steps[2:]], ["Execute the bounded contextual scientific job", "Execute the single bounded independent check"])
+        self.assertEqual(len(credential_steps), 7)
+        self.assertEqual([s["name"] for s in credential_steps[2:]], ["Execute the bounded contextual scientific job",
+            "Execute only the named I3 assessment stage", "Execute only the named I3 production verifier",
+            "Execute only the named I3 group and explanation integrity stage", "Execute the single bounded independent check"])
         for step in credential_steps:
             self.assertNotIn("GH_TOKEN", step["env"]); self.assertIn(" execute", step["run"])
 

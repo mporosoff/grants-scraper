@@ -6,6 +6,17 @@
   var panelSequence = 0;
   var childCatalogPromise = null;
 
+  function captureMeasurement(current) {
+    try { current.measurement = global.ContextualPreviewMeasurement?.capture(); }
+    catch (_) { current.measurement = null; }
+    return current.measurement;
+  }
+
+  function mark(current, name) {
+    if (!panelOwned(current)) return;
+    try { current.measurement?.(name); } catch (_) { /* Optional diagnostics. */ }
+  }
+
   function escapeHtml(value) {
     return String(value == null ? "" : value).replace(/[&<>"']/g, function (character) {
       return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[character];
@@ -177,11 +188,14 @@
 
   function renderProposal(current) {
     if (!reconcile(current) || !current.engine || !current.state) return;
+    mark(current, "compose_start");
     var view = current.engine.proposalView(current.state);
+    mark(current, "view_ready");
     var body = current.panel.querySelector(".opportunity-team-body");
     var replacementId = current.panel.id + "-replacement";
     var rolesId = current.panel.id + "-roles";
     var options = current.engine.proposalOptions(current.state);
+    mark(current, "options_ready");
     var originalIds = view.opportunity.members.map(function (member) { return member.faculty_id; }).sort().join("|");
     var whyTeam = view.selectedIds.slice().sort().join("|") === originalIds ? view.opportunity.why_team :
       view.selected.map(function (member) {
@@ -204,7 +218,7 @@
         ? "Remove a team member to compare replacement options."
         : "No additional internal faculty member has source-backed evidence for the currently missing roles.") + '</p>';
     body.removeAttribute("role");
-    body.innerHTML = (options.length > 1 ? '<div class="opportunity-team-scope-options" aria-label="Proposed team options">' + options.map(function (option, index) {
+    var markup = (options.length > 1 ? '<div class="opportunity-team-scope-options" aria-label="Proposed team options">' + options.map(function (option, index) {
       var selected = option.state.selectedIds.slice().sort().join("|") === view.selectedIds.slice().sort().join("|");
       return '<button type="button" aria-pressed="' + selected + '" data-opportunity-team-variant="' + index + '"><strong>Team option ' + (index + 1) + '</strong><span>' + escapeHtml(option.label) + '</span></button>';
     }).join("") + '</div>' : '') + '<div class="opportunity-team-status"><span class="badge ' + (view.complete ? "open" : "warning") + '">' + escapeHtml(stateLabel(view)) + '</span>' +
@@ -222,6 +236,9 @@
       '<div class="opportunity-team-next"><a class="button secondary" href="' + escapeHtml(teamMatchHref(view)) + '">Continue in Team Match</a>' +
       '<a class="source-action" href="faculty_interests.html?mode=add&return=team_match&opportunity=' + encodeURIComponent(view.opportunity.id) + '">Add a missing researcher</a></div>' +
       '<p class="opportunity-team-caveat">This is an evidence-calibrated planning aid, not a statement of eligibility, availability, willingness, or sponsor fit. Verify the official notice and contact each proposed investigator.</p>';
+    mark(current, "dom_start");
+    body.innerHTML = markup;
+    mark(current, "dom_end");
   }
 
   function renderScopeChoice(current, scopes) {
@@ -232,6 +249,7 @@
       '<div class="opportunity-team-scope-options">' + scopes.map(function (scope) {
         return '<button type="button" data-opportunity-team-scope="' + escapeHtml(scope.id) + '"><strong>' + escapeHtml(scope.scope_label) + '</strong><span>' + escapeHtml(scope.record_type.replace(/_/g, " ")) + '</span></button>';
       }).join("") + '</div>';
+    mark(current, "scope_choice_dom");
   }
 
   function renderUnavailable(current, reason, scopes) {
@@ -260,6 +278,7 @@
     body.innerHTML = '<p>' + escapeHtml(messages[reason] || "The proposed team is temporarily unavailable.") + '</p>' +
       '<p>Ordinary Funding Finder search and Team Match remain available.</p>' +
       '<a class="button secondary" href="team_match.html">Open Team Match</a>';
+    mark(current, "unavailable_dom");
   }
 
   function renderFailure(current, error) {
@@ -268,6 +287,7 @@
     body.innerHTML = '<p>Team proposals are temporarily unavailable. Ordinary Funding Finder search and actions still work.</p>' +
       '<button type="button" class="source-action" data-opportunity-team-retry>Retry</button>';
     body.dataset.error = String(error && error.message || "load_failed").slice(0, 200);
+    mark(current, "failure_dom");
   }
 
   function loadChildCatalog() {
@@ -319,6 +339,7 @@
   }
 
   function loadCurrent(current, contextualOptions) {
+    if (current) captureMeasurement(current);
     if (!current || !panelOwned(current) || !API || !current.record) {
       if (current) renderFailure(current, new Error("Team helper or catalog record unavailable."));
       return;
@@ -329,6 +350,7 @@
       return;
     }
     var sequence = ++current.scopeSequence;
+    var measurement = current.measurement;
     current.generationId = generationId;
     var contextual=global.OPPORTUNITY_TEAM_INDEX?.schema_version===4;
     current.contextualAbort?.abort();
@@ -340,6 +362,11 @@
       return API.loadData(generationId,contextual?{parentId:current.parentId,scopeId:current.scopeId,
         record:catalogRecord(current.parentId),childCatalog:childCatalog,now:new Date(),personId:options.personId||"",
         deliberate:options.deliberate===true,signal:current.contextualAbort.signal,
+        onPhase:function(name,detail){
+          if(current.scopeSequence===sequence&&panelOwned(current)&&!current.contextualAbort.signal.aborted){
+            try{measurement?.(name,detail);}catch(_){}
+          }
+        },
         onStatus:function(){if(current.scopeSequence===sequence&&reconcile(current))current.panel.querySelector('.opportunity-team-body').innerHTML='<p>Assessing the call and relevant researcher evidence. This may take a few minutes…</p>';}}:undefined);
     }).then(function (data) {
       if (!reconcile(current) || current.scopeSequence !== sequence) return;
@@ -357,6 +384,7 @@
 
   function actCurrent(current, mutation) {
     if (!reconcile(current) || !current.state || !current.engine) return;
+    captureMeasurement(current);
     try {
       if (API.pageGenerationId() !== current.generationId) throw new Error("Team package changed; reopen the panel.");
       // One decision clock for validation, mutation, options and rendering of this action.

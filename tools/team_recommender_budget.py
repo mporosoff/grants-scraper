@@ -68,6 +68,8 @@ class ExperimentLedger(Ledger):
             if metadata.get('latency_model')!=model:raise ConfigurationFailure('latency_reserved_model_identity')
         if metadata.get('purpose', '').startswith('cb-fc-i2-'):
             allowed_model = {'anthropic':'claude-sonnet-5','openai':'gpt-5.6-luna','voyage':'voyage-4-large'}.get(provider)==model
+        if metadata.get('purpose', '').startswith('cb-fc-i3-'):
+            allowed_model = {'anthropic':'claude-sonnet-5','openai':'gpt-5.6-luna'}.get(provider)==model
         if is_luna_repair:
             allowed_model = {'anthropic':'claude-sonnet-5','openai':'gpt-5.6-luna'}.get(provider)==model
         if stage not in (2, 3) or stage > approved_stage or not allowed_model:

@@ -346,6 +346,16 @@ def prepare(state,reservation,job_path):
     resolve_job(configuration,job)
     existing.trusted_environment(contextual_job=job)
     ledger=existing.restore(state,existing.policy())
+    if configuration.get('iteration3'):
+        from tools.contextual_team_iteration3_policy import install_authority, prepare_record, workflow_stages, STAGES
+        install_authority(state,existing.api)
+        atomic_json(reservation,prepare_record(state,job))
+        with open(os.environ['GITHUB_OUTPUT'],'a') as stream:
+            stream.write('text_provider=mixed\niteration3=true\n')
+            authorized=workflow_stages(job)
+            for stage in ('assess','verify','integrity'):
+                stream.write('i3_'+stage+'_provider='+(STAGES[stage][0] if stage in authorized else 'none')+'\n')
+        return
     if configuration.get('iteration2'):
         from tools.contextual_team_iteration2_policy import install_authority, prepare_record
         install_authority(state,existing.api)
@@ -385,6 +395,7 @@ def main():
     parser.add_argument('action',choices=['prepare','execute']);parser.add_argument('--state',type=Path,required=True)
     parser.add_argument('--job',type=Path,required=True);parser.add_argument('--reservation',type=Path)
     parser.add_argument('--result',type=Path)
+    parser.add_argument('--stage',choices=['assess','verify','integrity'])
     args=parser.parse_args()
     from tools.contextual_team_option1 import configuration_for_job, Option1Runner
     job=json.loads(args.job.read_bytes());config=configuration_for_job(job);resolve_job(config,job)
@@ -394,13 +405,31 @@ def main():
     from tools.contextual_team_phase2 import Phase2Runner
     from tools.contextual_team_latency import LatencyRunner
     from tools.contextual_team_iteration2 import Iteration2Runner
-    runner=(Iteration2Runner if config.get('iteration2') else LatencyRunner if config.get('latency') else Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
+    from tools.contextual_team_iteration3 import Iteration3Runner
+    if bool(args.stage)!=bool(config.get('iteration3')):
+        raise ConfigurationFailure('contextual_stage_requires_iteration3_workflow')
+    runner=(Iteration3Runner if config.get('iteration3') else Iteration2Runner if config.get('iteration2') else LatencyRunner if config.get('latency') else Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
+    stage_complete=False
     try:
-        result=runner.run_scope(scope,job['person_id'] or None) if os.environ.get('CONTEXTUAL_ACTION_CURRENT')=='true' else {'state':'action_blocked','scope_id':scope['id']}
+        if os.environ.get('CONTEXTUAL_ACTION_CURRENT')!='true':
+            result={'state':'action_blocked','scope_id':scope['id']}
+        elif config.get('iteration3'):
+            from tools.contextual_team_stage_retention import require_prior,complete
+            require_prior(args.state,job,args.stage)
+            result=runner.run_stage(scope,args.stage)
+            complete(args.state,job,args.stage,result);stage_complete=True
+        else:
+            result=runner.run_scope(scope,job['person_id'] or None)
     except (Deferred,ConfigurationFailure,ValueError,KeyError,TypeError,OSError,requests.RequestException,Refusal) as error:
         result={'state':runner.failure_state(error),'reason':str(error)[:160],
                 'scope_id':scope['id']}
     finally:existing.checkpoint(args.state)
+    if config.get('iteration3'):
+        with open(os.environ['GITHUB_OUTPUT'],'a') as stream:
+            stream.write('stage_complete='+str(stage_complete).lower()+'\n')
+            stream.write('requires_integrity='+str(result.get('state')=='stage_complete').lower()+'\n')
+            stream.write('integrity_generation_required='+str(stage_complete and args.stage=='verify'
+                and getattr(runner,'integrity_generation_required',False) is True).lower()+'\n')
     atomic_json(args.result,{'job_id':job['job_id'],'release_id':job['release_id'],'result':result,
         'run_id':os.environ['GITHUB_RUN_ID'],'code_sha':os.environ['GITHUB_SHA'],
         'charged_microusd':sum(r['charged_microusd'] for r in runner.ledger.read()['requests']),

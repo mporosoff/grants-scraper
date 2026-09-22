@@ -2,8 +2,9 @@
 // No external asset proxy, arbitrary path loading, provider cache or new binding.
 import bundle from '../config/contextual-preview-v1.json' with {type:'json'};
 import iteration2 from '../config/contextual-iteration2-preview-v1.json' with {type:'json'};
+import iteration3 from '../config/contextual-iteration3-preview-v1.json' with {type:'json'};
 export function previewResponse(path){
-  const selected=path.startsWith(iteration2.base_path)?iteration2:bundle;
+  const selected=path.startsWith(iteration3.base_path)?iteration3:path.startsWith(iteration2.base_path)?iteration2:bundle;
   if(!path.startsWith(selected.base_path))return null;
   const name=path.slice(selected.base_path.length)||'match_explorer.html';
   const file=Object.hasOwn(selected.files,name)?selected.files[name]:Object.hasOwn(bundle.files,name)?bundle.files[name]:null;

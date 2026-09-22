@@ -115,7 +115,7 @@ jobs:
           --state "$RUNNER_TEMP/team-experiment" --packet "$RUNNER_TEMP/team-packet.json"
           --packet-sha256 "$PACKET_HASH"
       - name: Execute the bounded contextual scientific job
-        if: steps.contextual_prepare.outcome == 'success'
+        if: steps.contextual_prepare.outcome == 'success' && steps.contextual_prepare.outputs.iteration3 != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ steps.contextual_prepare.outputs.text_provider != 'openai' && secrets.ANTHROPIC_API_KEY || '' }}
           OPENAI_API_KEY: ${{ (steps.contextual_prepare.outputs.text_provider == 'openai' || steps.contextual_prepare.outputs.text_provider == 'mixed') && secrets.OPENAI_API_KEY || '' }}
@@ -125,6 +125,85 @@ jobs:
           python -m tools.contextual_team_executor execute
           --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
           --result "$RUNNER_TEMP/contextual-result.json"
+      - name: Execute only the named I3 assessment stage
+        id: i3_assess
+        if: steps.contextual_prepare.outcome == 'success' && steps.contextual_prepare.outputs.iteration3 == 'true'
+        env:
+          OPENAI_API_KEY: ${{ steps.contextual_prepare.outputs.i3_assess_provider == 'openai' && steps.contextual.outputs.action_current == 'true' && secrets.OPENAI_API_KEY || '' }}
+          CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
+        run: >-
+          python -m tools.contextual_team_executor execute --stage assess
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+          --result "$RUNNER_TEMP/contextual-result.json"
+      - name: Preserve I3 assessment before another paid stage
+        id: i3_assess_state
+        if: always() && steps.contextual_prepare.outputs.iteration3 == 'true' && (steps.i3_assess.outcome == 'success' || steps.i3_assess.outcome == 'failure')
+        uses: actions/upload-artifact@v4
+        with:
+          name: on-demand-team-offline-v2-20260909-stage-assess-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/team-experiment
+          if-no-files-found: error
+          retention-days: 90
+      - name: Authenticate the durable I3 assessment archive without provider credentials
+        id: i3_verify_barrier
+        if: steps.i3_assess.outputs.stage_complete == 'true' && steps.i3_assess_state.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          I3_PRIOR_ARTIFACT_ID: ${{ steps.i3_assess_state.outputs.artifact-id }}
+          I3_PRIOR_ARTIFACT_DIGEST: ${{ steps.i3_assess_state.outputs.artifact-digest }}
+        run: >-
+          python -m tools.contextual_team_stage_retention seal --stage verify
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+      - name: Execute only the named I3 production verifier
+        id: i3_verify
+        if: steps.i3_verify_barrier.outcome == 'success'
+        env:
+          ANTHROPIC_API_KEY: ${{ steps.contextual_prepare.outputs.i3_verify_provider == 'anthropic' && steps.contextual.outputs.action_current == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
+          CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
+          I3_PRIOR_SEAL_SHA256: ${{ steps.i3_verify_barrier.outputs.prior_seal_sha256 }}
+        run: >-
+          python -m tools.contextual_team_executor execute --stage verify
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+          --result "$RUNNER_TEMP/contextual-result.json"
+      - name: Preserve I3 verification before another paid stage
+        id: i3_verify_state
+        if: always() && steps.contextual_prepare.outputs.iteration3 == 'true' && (steps.i3_verify.outcome == 'success' || steps.i3_verify.outcome == 'failure')
+        uses: actions/upload-artifact@v4
+        with:
+          name: on-demand-team-offline-v2-20260909-stage-verify-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/team-experiment
+          if-no-files-found: error
+          retention-days: 90
+      - name: Authenticate the durable I3 verification archive without provider credentials
+        id: i3_integrity_barrier
+        if: steps.i3_verify.outputs.stage_complete == 'true' && steps.i3_verify.outputs.requires_integrity == 'true' && steps.i3_verify_state.outcome == 'success'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          I3_PRIOR_ARTIFACT_ID: ${{ steps.i3_verify_state.outputs.artifact-id }}
+          I3_PRIOR_ARTIFACT_DIGEST: ${{ steps.i3_verify_state.outputs.artifact-digest }}
+        run: >-
+          python -m tools.contextual_team_stage_retention seal --stage integrity
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+      - name: Execute only the named I3 group and explanation integrity stage
+        id: i3_integrity
+        if: steps.i3_integrity_barrier.outcome == 'success'
+        env:
+          ANTHROPIC_API_KEY: ${{ steps.contextual_prepare.outputs.i3_integrity_provider == 'anthropic' && steps.contextual.outputs.action_current == 'true' && steps.i3_verify.outputs.integrity_generation_required == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
+          CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
+          I3_PRIOR_SEAL_SHA256: ${{ steps.i3_integrity_barrier.outputs.prior_seal_sha256 }}
+        run: >-
+          python -m tools.contextual_team_executor execute --stage integrity
+          --state "$RUNNER_TEMP/team-experiment" --job "$RUNNER_TEMP/contextual-job.json"
+          --result "$RUNNER_TEMP/contextual-result.json"
+      - name: Preserve complete I3 science before finalization
+        id: i3_integrity_state
+        if: always() && steps.contextual_prepare.outputs.iteration3 == 'true' && (steps.i3_integrity.outcome == 'success' || steps.i3_integrity.outcome == 'failure')
+        uses: actions/upload-artifact@v4
+        with:
+          name: on-demand-team-offline-v2-20260909-stage-integrity-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/team-experiment
+          if-no-files-found: error
+          retention-days: 90
       - name: Execute the single bounded independent check
         if: steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider != 'none'
         env:

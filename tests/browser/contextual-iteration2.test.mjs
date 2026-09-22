@@ -105,7 +105,8 @@ test('restricted overlay has exact readable assets and preserves old preview byt
   const {bundle_id,...content}=overlay;assert.equal(hash(content),bundle_id);
   for(const [name,file] of Object.entries(overlay.files)){
     const raw=gunzipSync(Buffer.from(file.gzip_base64,'base64'));assert.equal(createHash('sha256').update(raw).digest('hex'),file.sha256);
-    if(name.startsWith('assets/'))assert.equal(fs.readFileSync('workers/researcher-intake/iteration2-source/'+name,'utf8'),raw.toString());
+    // I2 assets are historical immutable bytes. Updated source files now ship
+    // only in the separately validated I3 overlay.
   }
   assert.equal(previewResponse('/admin/contextual/preview/assets/contextual-team-engine.js').headers.get('X-Content-SHA256'),base.files['assets/contextual-team-engine.js'].sha256);
   assert.equal(previewResponse('/admin/contextual/iteration2/assets/contextual-team-engine.js').headers.get('X-Content-SHA256'),overlay.files['assets/contextual-team-engine.js'].sha256);

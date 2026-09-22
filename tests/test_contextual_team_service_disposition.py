@@ -176,16 +176,31 @@ class ProofBoundaries(unittest.TestCase):
         api = lambda path: encoded({'object': {'sha': head}} if path.startswith('git/')
             else {'protected': True, 'commit': {'sha': head}})
         git = lambda args: head if args[0] == 'rev-parse' else ''
-        self.assertEqual(service.protected_checkout(api, git), head)
-        for response in (' M tools/contextual_team_service_disposition.py', 'ahead'):
-            with self.assertRaises(ConfigurationFailure):
-                service.protected_checkout(api, lambda args: head if args[0] == 'rev-parse' else response)
-        with self.assertRaises(ConfigurationFailure):
-            service.protected_checkout(lambda path: encoded({'object': {'sha': head}}) if path.startswith('git/')
-                else encoded({'protected': False, 'commit': {'sha': head}}), git)
-        p = service.plan(); p['callback_guard_source_sha256'] = '0'*64
-        with patch.object(service, 'plan', return_value=p), self.assertRaises(ConfigurationFailure):
-            service.protected_checkout(api, git)
+        # This one-time operator intentionally remains pinned to its historical
+        # callback. Exercise checkout validation with a complete synthetic
+        # checkout/plan pair, not synthetic Git state plus the moving real file.
+        original_plan = service.CONFIG.read_bytes()
+        p = copy.deepcopy(service.plan())
+        with tempfile.TemporaryDirectory() as temporary:
+            root = Path(temporary); source = root/service.CALLBACK_SOURCE
+            source.parent.mkdir(parents=True); source.write_bytes(b'// synthetic pinned callback guard\n')
+            p['callback_guard_source_sha256'] = service.existing.sha(source.read_bytes())
+            with patch.object(service, 'ROOT', root), patch.object(service, 'plan', return_value=p):
+                self.assertEqual(service.protected_checkout(api, git), head)
+                for response in (' M tools/contextual_team_service_disposition.py', 'ahead'):
+                    with self.assertRaises(ConfigurationFailure):
+                        service.protected_checkout(api, lambda args: head if args[0] == 'rev-parse' else response)
+                with self.assertRaises(ConfigurationFailure):
+                    service.protected_checkout(lambda path: encoded({'object': {'sha': head}}) if path.startswith('git/')
+                        else encoded({'protected': False, 'commit': {'sha': head}}), git)
+                p['callback_guard_source_sha256'] = '0'*64
+                with self.assertRaisesRegex(ConfigurationFailure, 'deployed_callback_guard_source_required'):
+                    service.protected_checkout(api, git)
+                p['callback_guard_source_sha256'] = service.existing.sha(source.read_bytes())
+                source.write_bytes(source.read_bytes()+b'// changed after pin\n')
+                with self.assertRaisesRegex(ConfigurationFailure, 'deployed_callback_guard_source_required'):
+                    service.protected_checkout(api, git)
+        self.assertEqual(service.CONFIG.read_bytes(), original_plan)
 
     def test_active_queued_or_unfinished_latest_owner_blocks(self):
         for blocked in ('queued', 'in_progress', 'waiting', 'pending', 'requested'):
