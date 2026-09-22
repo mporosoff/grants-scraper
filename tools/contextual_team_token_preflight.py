@@ -92,6 +92,8 @@ class Counter:
         ledger_state = existing.ExperimentLedger(ledger_path).read() if ledger_path.exists() else {'events': []}
         assert_operation_open(ledger_state, item.get('id'))
         validate_counts(ledger_state, saved['rows'])
+        from tools.contextual_team_iteration3_capacity import validate_counts as validate_capacity_counts
+        validate_capacity_counts(ledger_state, saved['rows'])
         held = exposure(ledger_state)
         rows=[r for r in saved['rows'] if r['key']==key]
         if rows:

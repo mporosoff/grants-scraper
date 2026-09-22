@@ -55,7 +55,7 @@ def history(state, *, require_authority=True):
     installed = [e for e in state['events'] if e.get('authority') == VERSION]
     if installed != events() and (require_authority or installed):
         raise ConfigurationFailure('completion_exact_authority_missing_or_conflicting')
-    expected = p['lifetime'] if installed else {'microusd': 10000000, 'attempts': 690}
+    expected = effective_plan(state)['lifetime'] if installed else {'microusd': 10000000, 'attempts': 690}
     if (state['limit_microusd'], state['max_requests']) != (expected['microusd'], expected['attempts']):
         raise ConfigurationFailure('completion_interacting_ledger_caps')
     from tools.contextual_team_checkpoint_disposition import validate
@@ -65,8 +65,14 @@ def history(state, *, require_authority=True):
 def amended_limits(state):
     """Only this exact recorded amendment can change base Ledger identity."""
     history(state)
-    p = plan()
+    p = effective_plan(state)
     return p['lifetime']['microusd'], p['lifetime']['attempts']
+
+
+def effective_plan(state):
+    """Original dollar/baseline identity plus an exact installed capacity event."""
+    from tools.contextual_team_iteration3_capacity import effective_plan as capacity_plan
+    return capacity_plan(state, plan())
 
 
 def check_pool(state, amount=0, attempts=0):
@@ -75,7 +81,7 @@ def check_pool(state, amount=0, attempts=0):
         raise ValueError('completion_invalid_budget_request')
     if state.get('reservation_overrun') or state['blocked_providers']:
         raise Deferred('completion_existing_accounting_stop')
-    p = plan(); start = p['starting_checkpoint']; protected = p['protected']
+    p = effective_plan(state); start = p['starting_checkpoint']; protected = p['protected']
     from tools.contextual_team_checkpoint_disposition import exposure
     held = exposure(state)
     rows = state['requests']; used = sum(r['charged_microusd'] for r in rows) + held['microusd']
@@ -97,7 +103,9 @@ def check_count_budget(state, saved, item):
     history(state)
     from tools.contextual_team_checkpoint_disposition import exposure, assert_operation_open, validate_counts
     assert_operation_open(state, item.get('id'))
-    p = plan(); start = p['starting_checkpoint']; rows = saved['rows']
+    p = effective_plan(state); start = p['starting_checkpoint']; rows = saved['rows']
+    from tools.contextual_team_iteration3_capacity import validate_counts as validate_capacity_counts
+    validate_capacity_counts(state, rows)
     validate_counts(state, rows); held = exposure(state)
     if (len(rows) < start['native_counts']
         or identity(rows[:start['native_counts']]) != start['native_counts_sha256']):
