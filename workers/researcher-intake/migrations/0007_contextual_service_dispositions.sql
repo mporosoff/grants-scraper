@@ -11,7 +11,7 @@ CREATE TABLE contextual_service_dispositions (
 CREATE TRIGGER contextual_service_disposition_install
 AFTER INSERT ON contextual_service_dispositions
 BEGIN
-  SELECT CASE WHEN NOT EXISTS (SELECT 1 FROM contextual_validation_jobs WHERE
+  SELECT RAISE(ABORT,'exact_math_service_row_required') WHERE NOT EXISTS (SELECT 1 FROM contextual_validation_jobs WHERE
     job_id='816dd6d3cb281f5c7ebb1a1f7d166a5a7b37eb7c76885ab4e87e219217e67591' AND
     release_id='f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2' AND
     scope_id='341997' AND
@@ -22,12 +22,11 @@ BEGIN
     code_sha='43c109c7616ccefb63122aaf73d3c12f69748901' AND
     result_json IS NULL AND
     created_at='2026-09-21T21:08:56.488Z' AND
-    updated_at='2026-09-21T21:09:17.140Z') THEN RAISE(ABORT,'exact_math_service_row_required') END;
-  SELECT CASE WHEN NOT EXISTS (SELECT 1 FROM contextual_trial_controls
-    WHERE release_id='f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2' AND cached_enabled=1 AND new_paid_enabled=0)
-    THEN RAISE(ABORT,'service_disposition_paid_must_be_off') END;
-  SELECT CASE WHEN (SELECT count(*) FROM contextual_validation_jobs WHERE active_slot IS NOT NULL)<>1
-    THEN RAISE(ABORT,'service_disposition_exclusive_slot_required') END;
+    updated_at='2026-09-21T21:09:17.140Z');
+  SELECT RAISE(ABORT,'service_disposition_paid_must_be_off') WHERE NOT EXISTS (SELECT 1 FROM contextual_trial_controls
+    WHERE release_id='f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2' AND cached_enabled=1 AND new_paid_enabled=0);
+  SELECT RAISE(ABORT,'service_disposition_exclusive_slot_required')
+    WHERE (SELECT count(*) FROM contextual_validation_jobs WHERE active_slot IS NOT NULL)<>1;
   UPDATE contextual_validation_jobs SET state='recovery_required',active_slot=NULL
     WHERE job_id='816dd6d3cb281f5c7ebb1a1f7d166a5a7b37eb7c76885ab4e87e219217e67591' AND
     release_id='f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2' AND
