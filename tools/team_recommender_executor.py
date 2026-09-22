@@ -33,7 +33,7 @@ PACKET_LIMIT = 8 * 1024 * 1024
 STATE_LIMIT = 128 * 1024 * 1024
 # Ledger + checkpoint, one cache/receipt/diagnostic per lifetime attempt, and
 # bounded amendment/recovery receipts. Byte and path allowlists remain intact.
-STATE_FILE_LIMIT = 3 * 1290 + 128
+STATE_FILE_LIMIT = 3 * 1490 + 128
 PURPOSES = {"source": 90, "individual": 90, "group": 90, "control": 30, "explanation": 30, "order-swap": 10}
 # A later paid envelope never grants the legacy packet format new authority.
 GENERIC_JUDGE_PURPOSES = frozenset(PURPOSES)

@@ -95,6 +95,10 @@ class Counter:
         from tools.contextual_team_iteration3_capacity import validate_counts as validate_capacity_counts
         validate_capacity_counts(ledger_state, saved['rows'])
         held = exposure(ledger_state)
+        iteration3 = item.get('id', '').startswith('cb-fc-i3-')
+        if iteration3:
+            from tools.contextual_team_iteration3_policy import check_native_request
+            check_native_request(self.state, item)
         rows=[r for r in saved['rows'] if r['key']==key]
         if rows:
             if len(rows)!=1 or rows[0]['status']!='complete':raise RecoveryRequired('counter_prior_incomplete_no_automatic_repeat')
@@ -106,6 +110,8 @@ class Counter:
             raise ValueError('counter_finite_http_limit')
         secret=os.environ.get('ANTHROPIC_API_KEY')
         if not secret:raise ConfigurationFailure('counter_credential_missing')
+        if iteration3:
+            check_native_request(self.state, item, claim=True)
         row={'id':item['id'],'key':key,'status':'dispatched_or_uncertain','metered_inference':False,'charged_microusd':0}
         saved['rows'].append(row);existing.checkpoint(self.state,token_preflight=saved)
         response=self.post(ENDPOINT,headers={'Content-Type':'application/json','x-api-key':secret,

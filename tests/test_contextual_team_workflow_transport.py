@@ -5,6 +5,7 @@ from unittest.mock import patch
 
 from tools import contextual_team_workflow as workflow
 from tools.contextual_team_iteration2_policy import plan
+from tools.contextual_team_iteration3_policy import plan as iteration3_plan
 from tools.offline_spend import encoded, ConfigurationFailure
 
 
@@ -58,3 +59,22 @@ class WorkflowTransportTests(unittest.TestCase):
             workflow.send('result', value)
         self.assertEqual(post.call_args.kwargs['json'], value)
         self.assertNotIn('data', post.call_args.kwargs)
+
+    @patch.dict(os.environ, {'REGISTRY_WORKFLOW_TOKEN': 'fixture-only'})
+    def test_iteration3_preserves_complete_unicode_envelope_and_rejects_oversize_before_send(self):
+        value = self.envelope() | {'release_id': iteration3_plan()['release_id']}
+        self.assertEqual(len(encoded(value['result'])), iteration3_plan()['maximum_graph_bytes'])
+        with patch.object(workflow.requests, 'post', return_value=Response()) as post:
+            self.assertEqual(workflow.send('result', value), {'accepted': True})
+        sent = post.call_args.kwargs
+        self.assertEqual(sent['data'], encoded(value))
+        self.assertEqual(json.loads(sent['data']), value)
+        self.assertNotIn('json', sent)
+        self.assertLessEqual(len(sent['data']), workflow.ITERATION3_CALLBACK_BYTES)
+        oversized = value | {'padding': 'x' * workflow.ITERATION3_CALLBACK_BYTES}
+        original = encoded(oversized)
+        with patch.object(workflow.requests, 'post') as post:
+            with self.assertRaisesRegex(ConfigurationFailure, 'iteration3_complete_callback_bound_no_truncation'):
+                workflow.send('result', oversized)
+            post.assert_not_called()
+        self.assertEqual(encoded(oversized), original)

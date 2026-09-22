@@ -134,6 +134,8 @@ def main():
     requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
     if isinstance(requested,dict) and 'iteration3_capacity' in requested:
         from tools.contextual_team_iteration3_capacity import run
+    elif isinstance(requested,dict) and 'iteration3_check' in requested:
+        from tools.contextual_team_iteration3_check import run
     elif isinstance(requested,dict) and 'iteration2_checkpoint_disposition' in requested:
         from tools.contextual_team_checkpoint_recovery import run
     elif isinstance(requested,dict) and 'iteration2_check_recovery' in requested:

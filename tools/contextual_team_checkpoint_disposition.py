@@ -5,6 +5,7 @@ event. This module only validates its immutable identity and applies the hold.
 """
 import json
 from pathlib import Path
+import re
 
 from tools.offline_spend import ConfigurationFailure, Deferred, identity
 
@@ -57,7 +58,7 @@ def event():
 
 def _closed(purpose):
     # This disposition has one fixed scope, independent of contract/release.
-    return isinstance(purpose, str) and purpose.startswith('cb-fc-i2-341997:')
+    return isinstance(purpose, str) and re.match(r'^cb-fc-i[0-9]+-341997:', purpose) is not None
 
 
 def validate(state, require=False):

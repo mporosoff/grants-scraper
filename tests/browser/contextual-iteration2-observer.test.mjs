@@ -44,13 +44,13 @@ function fixture({longTasks='unsupported',pageState=true}={}){
     longTasks:entries=>longTaskCallback({getEntries:()=>entries}),observeOptions:()=>observeOptions};
 }
 
-test('v2 keeps click-to-second-frame completion and exposes exact phase attribution',()=>{
+test('v3 keeps the original click-to-second-frame completion and exact additive phase attribution',()=>{
   const f=fixture();f.clock.time=100;f.click();f.clock.time=150;f.render();
   assert.equal(f.read().observations.length,0);assert.equal(f.frames.size,1);
   f.frame(1150);assert.equal(f.read().observations.length,0);assert.equal(f.frames.size,1);
   f.frame(2150);
   const report=f.read(),row=report.observations[0];
-  assert.equal(report.version,'iteration2-measurement-v2');assert.equal(row.start,100100);
+  assert.equal(report.version,'iteration3-measurement-v3');assert.equal(row.start,100100);
   assert.equal(row.end,102150);assert.equal(row.elapsed_ms,2050);assert.equal(row.endpoint,'validated-composer-render');
   assert.equal(row.post_count_before,0);assert.equal(row.post_count,0);assert.equal(report.active,null);
   assert.deepEqual(row.diagnostics,{start_state:{visibility:'visible',focused:true},dom_ready_at:100150,
@@ -137,11 +137,13 @@ test('route restriction and forwarding remain exact, with zero supplemental HTTP
   const f=fixture();const options={method:'POST',body:'synthetic'};
   await f.c.fetch('/admin/api/contextual/jobs',options);
   await f.c.fetch('/admin/contextual/iteration2/asset.js');
-  for(const url of ['/admin/contextual/preview/asset.js','https://foreign.test/admin/api/contextual/jobs','/unrelated'])
+  await f.c.fetch('/admin/contextual/iteration3/asset.js');
+  for(const url of ['/admin/contextual/preview/asset.js','https://foreign.test/admin/api/contextual/jobs',
+    'https://foreign.test/admin/contextual/iteration3/asset.js','/admin/contextual/iteration30/asset.js','/unrelated'])
     await assert.rejects(f.c.fetch(url),/Restricted validation blocks unrelated service traffic/);
   f.click();f.render();f.frame(5);f.frame(10);f.emit('focus');
-  assert.equal(f.network.length,2);assert.equal(f.network[0][0],'/admin/api/contextual/jobs');assert.equal(f.network[0][1],options);
-  assert.deepEqual(f.read().calls.map(row=>row.allowed),[true,true,false,false,false]);
+  assert.equal(f.network.length,3);assert.equal(f.network[0][0],'/admin/api/contextual/jobs');assert.equal(f.network[0][1],options);
+  assert.deepEqual(f.read().calls.map(row=>row.allowed),[true,true,true,false,false,false,false,false]);
   assert.equal(f.read().observations[0].post_count,1);
 });
 
@@ -175,5 +177,68 @@ test('actual panel build, option, removal and restoration replace the proposal m
   }
   assert.deepEqual(f.read().observations.map(row=>row.kind),['build','option','local-edit','local-edit']);
   assert(f.read().observations.every(row=>row.endpoint==='validated-composer-render'));
+  for(const row of f.read().observations){
+    assert.deepEqual(f.read().diagnostics.phases.filter(p=>p.action_id===row.id).map(p=>p.name),
+      ['compose_start','view_ready','options_ready','dom_start','dom_end']);
+  }
   assert.deepEqual(f.network,[]);
+});
+
+test('phase captures remain attached to their original action and never serialize private details',()=>{
+  const f=fixture();f.click();const first=f.c.ContextualPreviewMeasurement.capture();
+  first('load_start');f.clock.time=10;first('service_start',{request:1});
+  first('PRIVATE SCIENCE');first('service_end',{request:1,reason:'PRIVATE EVIDENCE'});
+  first('service_end',{request:NaN});
+  f.clock.time=20;f.click('edit');const second=f.c.ContextualPreviewMeasurement.capture();
+  first('service_end',{request:1});second('compose_start');f.clock.time=30;f.render();f.frame(40);f.frame(50);
+  first('engine_ready');second('dom_end');f.emit('focus');
+  const d=f.read().diagnostics;
+  assert.deepEqual(d.phases.map(p=>[p.action_id,p.name,p.at]),
+    [[1,'load_start',100000],[1,'service_start',100010],[2,'compose_start',100020]]);
+  assert.equal(d.dropped.invalid_phases,3);assert.equal(d.dropped.stale_phases,3);
+  assert(!JSON.stringify(f.read()).includes('PRIVATE'));
+  assert.equal(f.read().observations[1].elapsed_ms,30);assert.deepEqual(f.network,[]);
+});
+
+test('bounded phase histories retain overflow counts without additional output, network or frames',()=>{
+  const f=fixture();f.click();const phase=f.c.ContextualPreviewMeasurement.capture(),limit=f.read().diagnostics.limits.phases;
+  const before=f.dom.document.getElementById('contextual-validation-boundary').textContent;
+  for(let n=0;n<limit+3;n++)phase('compose_start');
+  assert.equal(f.dom.document.getElementById('contextual-validation-boundary').textContent,before);
+  assert.equal(f.frames.size,0);f.emit('focus');const d=f.read().diagnostics;
+  assert.equal(d.phases.length,limit);assert.equal(d.totals.phases,limit+3);assert.equal(d.dropped.phases,3);
+  assert.equal(d.availability.host_foreground,'not-observed');assert.equal(d.availability.feature_peak_memory,'unmeasured');
+  assert.equal(d.availability.observer_cost_publication,'next-observer-output');assert(d.output_cost.calls>0);
+  assert.deepEqual(f.network,[]);
+});
+
+test('failure observations retain attempted actions without inventing completed composer latency',()=>{
+  for(const status of ['failure_dom','unavailable_dom','scope_choice_dom']){
+    const f=fixture();f.clock.time=10;f.click();const phase=f.c.ContextualPreviewMeasurement.capture();
+    f.clock.time=20;f.render();f.frame(30);f.clock.time=40;phase(status);f.frame(50);
+    const report=f.read(),row=report.observations[0];
+    assert.equal(report.active,null);assert.equal(f.frames.size,0);assert.equal(report.observations.length,1);
+    assert.equal(row.disposition,'failed-before-completion');assert.equal(row.terminal_status,status);
+    assert.equal(row.failure_elapsed_ms,30);assert.equal(row.failure_observed_at,100040);
+    assert.equal(row.end,undefined);assert.equal(row.elapsed_ms,undefined);assert.equal(row.endpoint,undefined);
+    assert.deepEqual(f.network,[]);
+  }
+});
+
+test('actual panel captures execution failure time and optional diagnostics cannot break display',async()=>{
+  for(const throwingHook of [false,true]){
+    const f=fixture();
+    if(throwingHook)f.c.ContextualPreviewMeasurement={capture(){throw Error('optional hook unavailable');}};
+    Object.assign(f.c,{SiteShell:{openDrawer:d=>{d.open=true;},closeDrawer:d=>{d.open=false;}},
+      GRANT_CATALOG:{opportunities:[{opportunity_id:'fixture'}]},
+      OpportunityTeam:{pageGenerationId:()=> 'fixture',loadData:async()=>{throw Error('PRIVATE FAILURE');}}});
+    vm.runInContext(panelSource,f.c);f.click();f.clock.time=25;
+    for(let n=0;n<10;n++)await Promise.resolve();
+    assert(f.drawer.querySelector('[data-opportunity-team-retry]'));
+    if(!throwingHook){
+      const row=f.read().observations[0];assert.equal(row.terminal_status,'failure_dom');assert.equal(row.failure_elapsed_ms,25);
+      assert(!JSON.stringify(f.read()).includes('PRIVATE FAILURE'));
+    }
+    assert.deepEqual(f.network,[]);
+  }
 });

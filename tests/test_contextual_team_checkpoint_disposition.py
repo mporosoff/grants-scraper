@@ -74,6 +74,13 @@ class CheckpointDisposition(unittest.TestCase):
             with self.assertRaisesRegex(Deferred, 'permanently_closed'):
                 disposition.assert_operation_open(self.state, 'cb-fc-i2-341997:' + stage)
         disposition.assert_operation_open(self.state, 'cb-fc-i2-363302:a-1:check')
+        # A new iteration, changed contract or child-shaped scope cannot reopen
+        # the permanently closed source under another purpose namespace.
+        for purpose in ('cb-fc-i3-341997:assess', 'cb-fc-i3-341997:integrity',
+                'cb-fc-i3-341997:a-1:check', 'cb-fc-i4-341997:changed-contract'):
+            with self.assertRaisesRegex(Deferred, 'permanently_closed'):
+                disposition.assert_operation_open(self.state, purpose)
+        disposition.assert_operation_open(self.state, 'cb-fc-i3-3419970:check')
         for collection, item in (('requests', {'purpose': 'cb-fc-i2-341997:assess'}),
                 ('events', {'purpose': 'cb-fc-i2-341997:verify'})):
             state = copy.deepcopy(self.state); state[collection].append(item)
@@ -85,6 +92,8 @@ class CheckpointDisposition(unittest.TestCase):
         with self.assertRaises(ConfigurationFailure): disposition.validate_counts(self.state, changed)
         with self.assertRaises(ConfigurationFailure):
             disposition.validate_counts(self.state, self.counts + [{'id': 'cb-fc-i2-341997:verify'}])
+        with self.assertRaises(ConfigurationFailure):
+            disposition.validate_counts(self.state, self.counts + [{'id': 'cb-fc-i3-341997:verify'}])
 
     def test_pool_limits_deduct_hold_once_and_preserve_both_reserves(self):
         available = 45000000 - 713400
