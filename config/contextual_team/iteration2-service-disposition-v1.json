@@ -1,0 +1,69 @@
+{
+  "version": "iteration2-service-slot-disposition-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "repository": "mporosoff/grants-scraper",
+  "account_id": "8cb81e39674e3ea3a2ff449371587dff",
+  "database_id": "cae0a60b-b8d1-4cdf-96fe-092db8e2a51d",
+  "database_name": "funding-finder-alerts",
+  "worker": "funding-finder-researchers",
+  "original_row": {
+    "job_id": "816dd6d3cb281f5c7ebb1a1f7d166a5a7b37eb7c76885ab4e87e219217e67591",
+    "release_id": "f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2",
+    "scope_id": "341997",
+    "person_id": "",
+    "state": "in_progress",
+    "active_slot": 1,
+    "run_id": "35655451108",
+    "code_sha": "43c109c7616ccefb63122aaf73d3c12f69748901",
+    "result_json": null,
+    "created_at": "2026-09-21T21:08:56.488Z",
+    "updated_at": "2026-09-21T21:09:17.140Z"
+  },
+  "original_row_identity": "9914dfb587f37a69b675239c3ba2cf6e9e5b01d3e5c8ce5fa11bcb3b91154acd",
+  "accounting_authority": "iteration2-missing-checkpoint-disposition-20260922-v1",
+  "accounting_plan_sha256": "ab44ea962c041d0e3836bba2f50a566b2466d8caa911de6fe1ddb72c2da8f1a9",
+  "accounting_event_identity": "0116787f20c7826418546d56fc23dc92a1232df5a325f286626e157b3ab872f5",
+  "accounting_receipt_sha256": "9722560f433841b5da779b922c8b48f97b29eca1638c1f16d6d08bcf58fffdcd",
+  "accounting_run": {
+    "id": 35730701482,
+    "run_attempt": 1,
+    "event": "workflow_dispatch",
+    "path": ".github/workflows/team-recommender-offline.yml",
+    "head_sha": "00adcf904d761737f29966bb31bd82c5931eb290",
+    "head_branch": "main",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "accounting_state_artifact": {
+    "id": 10695417260,
+    "name": "on-demand-team-offline-v2-20260909-state-35730701482-1",
+    "digest": "sha256:acfda043d4ac3400701ab4f3492130fee3957632c8c9f2ec86c511faae79b150"
+  },
+  "baseline_run": {
+    "id": 35731248457,
+    "run_attempt": 1,
+    "event": "workflow_dispatch",
+    "path": ".github/workflows/team-recommender-offline.yml",
+    "head_sha": "00adcf904d761737f29966bb31bd82c5931eb290",
+    "head_branch": "main",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "baseline_state_artifact": {
+    "id": 10695690487,
+    "name": "on-demand-team-offline-v2-20260909-state-35731248457-1",
+    "digest": "sha256:17fa7bc9ffac454807b4ee1da9eb0b6138cf5d777f13f5990b6e2996d857b4ec"
+  },
+  "baseline_ledger_sha256": "cbdf108a5bd8c667b28f4effdcdaa9f92c6f3099dd5d43c1785ca1fc8cb28463",
+  "baseline_checkpoint_sha256": "670624e426f43ff38850e6bd55f329239192d370f9d117b3dcf0bc55fe9892e3",
+  "hold": {
+    "microusd": 713400,
+    "attempts": 4,
+    "native_counts": 1
+  },
+  "callback_guard_source_sha256": "204897fa18ce4e0db787fcecd68b45670bd97a16973d4d3e2119978b32271e7e",
+  "public_activation": false,
+  "recurring_paid_usage": false,
+  "new_allowance": 0,
+  "closed_scope_replay": false
+}
