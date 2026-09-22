@@ -87,6 +87,12 @@ class Counter:
         if checkpoint['authorization_id']!=existing.AUTHORIZATION_ID:raise ValueError('counter_authorization_identity')
         saved=checkpoint.get('phase2_token_preflight',{'version':VERSION,'source_sha256':SOURCE_SHA,'rows':[]})
         if saved['version']!=VERSION or saved['source_sha256']!=SOURCE_SHA:raise ValueError('counter_checkpoint_identity')
+        from tools.contextual_team_checkpoint_disposition import assert_operation_open, exposure, validate_counts
+        ledger_path = self.state/'ledger.json'
+        ledger_state = existing.ExperimentLedger(ledger_path).read() if ledger_path.exists() else {'events': []}
+        assert_operation_open(ledger_state, item.get('id'))
+        validate_counts(ledger_state, saved['rows'])
+        held = exposure(ledger_state)
         rows=[r for r in saved['rows'] if r['key']==key]
         if rows:
             if len(rows)!=1 or rows[0]['status']!='complete':raise RecoveryRequired('counter_prior_incomplete_no_automatic_repeat')
@@ -94,7 +100,7 @@ class Counter:
         if item.get('id','').startswith('cb-fc-'):
             from tools.contextual_team_completion_policy import check_count_budget
             check_count_budget(existing.ExperimentLedger(self.state/'ledger.json').read(),saved,item)
-        elif len(saved['rows'])>=MAX_COUNT_HTTP_ATTEMPTS:
+        elif len(saved['rows']) + held['native_counts']>=MAX_COUNT_HTTP_ATTEMPTS:
             raise ValueError('counter_finite_http_limit')
         secret=os.environ.get('ANTHROPIC_API_KEY')
         if not secret:raise ConfigurationFailure('counter_credential_missing')

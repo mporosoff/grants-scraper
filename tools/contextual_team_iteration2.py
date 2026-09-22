@@ -110,6 +110,7 @@ class Iteration2Runner(RepairRunner):
         return super().read_provider_response(response, provider, body, receipt)
 
     def request(self, purpose, logical, body, check, **kwargs):
+        from tools.contextual_team_checkpoint_disposition import assert_operation_open
         if purpose == 'cb-documents':
             raise RecoveryRequired('iteration2_missing_audited_document_vectors_no_repurchase')
         if purpose == 'cb-query':
@@ -120,6 +121,7 @@ class Iteration2Runner(RepairRunner):
             kwargs['repair_metadata'] = metadata
             logical = [policy.VERSION, purpose, identity(c), identity(body['input'])]
         _, stage = policy._stage(purpose)
+        assert_operation_open(self.ledger.read(), purpose)
         provider = self.request_provider(purpose, body)
         if provider == 'openai':
             if (body.get('reasoning') != {'effort': 'low'} or body.get('store') is not False
@@ -196,9 +198,11 @@ class Iteration2Runner(RepairRunner):
 
     def run_scope(self, scope, extension_person=None):
         from tools import contextual_team_iteration2_contract as wire
+        from tools.contextual_team_checkpoint_disposition import assert_operation_open
         if extension_person:
             raise ConfigurationFailure('iteration2_manual_extension_not_authorized')
         self.scope_id = scope['id']; policy.operation(scope['id'], 'interpret')
+        assert_operation_open(self.ledger.read(), policy.operation(scope['id'], 'interpret'))
         policy.remaining(self.ledger.read(), self.state)
         started = time.monotonic(); source = scope_inputs(scope)
         if scope['state'] != 'unassessed':

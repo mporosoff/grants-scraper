@@ -346,6 +346,10 @@ def restore(destination, settings, api_call=api):
             break
     else:
         raise Deferred("checkpoint_history_bound")
+    from tools.contextual_team_checkpoint_recovery import maybe_restore, validate_restored
+    disposed = maybe_restore(destination, artifacts, api_call)
+    if disposed is not None:
+        return disposed
     from tools.team_recommender_checkpoint import latest_reservation, recover_known_charge
     reservations = [a for a in artifacts if "-reservation-" in a["name"]]
     if reservations:
@@ -361,6 +365,7 @@ def restore(destination, settings, api_call=api):
         if len(raw) > STATE_LIMIT:
             raise ValueError("checkpoint_archive_too_large")
         unpack_state(raw, destination)
+        validate_restored(destination, latest)
         recover_known_charge(destination, latest, artifacts, api_call, sys.modules[__name__])
     else:
         runs = json.loads(api_call("actions/workflows/team-recommender-offline.yml/runs?branch=main&per_page=100"))["workflow_runs"]

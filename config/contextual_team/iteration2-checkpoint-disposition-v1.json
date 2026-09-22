@@ -1,0 +1,101 @@
+{
+  "version": "iteration2-missing-checkpoint-disposition-20260922-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "prior": {
+    "run": {
+      "id": 35654812312,
+      "run_attempt": 1,
+      "event": "workflow_dispatch",
+      "path": ".github/workflows/team-recommender-offline.yml",
+      "head_sha": "43c109c7616ccefb63122aaf73d3c12f69748901",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "success"
+    },
+    "artifact": {
+      "id": 10663453472,
+      "name": "on-demand-team-offline-v2-20260909-state-35654812312-1",
+      "digest": "sha256:25c82bd5dedc5cc04a04fbbb6e7922cee39e1c39f3ab4ae7785a4633ce46ecc3"
+    },
+    "ledger_sha256": "f203bda9d1da2c6c89574d09de1e6c4f1f506e61535293b62e171295acba2ab1",
+    "checkpoint_sha256": "baf2f3d319a79349394ee056cf7658e9ead609704291a56debbeac1f431a42f4",
+    "requests": 694,
+    "requests_sha256": "6fdcd7c82465d984d1def769e2a2bc3a056fa6c649ff7b9037bec87ab2ea343e",
+    "events": 30,
+    "events_sha256": "a2e3ef8720377d89d1ef5102e435dc8e59ad43bcb358a83b56bf7f5dac75fe66",
+    "native_counts": 191,
+    "native_counts_sha256": "a88e29bc503f6879cca13d5176f3032cf2230566ce07737abad22a11d43c4863"
+  },
+  "failed": {
+    "run": {
+      "id": 35655451108,
+      "run_attempt": 1,
+      "event": "repository_dispatch",
+      "path": ".github/workflows/team-recommender-offline.yml",
+      "head_sha": "43c109c7616ccefb63122aaf73d3c12f69748901",
+      "head_branch": "main",
+      "status": "completed",
+      "conclusion": "failure"
+    },
+    "artifact": {
+      "id": 10663722887,
+      "name": "on-demand-team-offline-v2-20260909-reservation-35655451108-1",
+      "digest": "sha256:9537ed6239b89806cd6311b4c5506303a0fe2fc553b58d5573ff3527d00d8f22"
+    },
+    "reservation_sha256": "0ef42c0760a1c26c15f5af47b012cb4b6b39a8a4abd80198da676380edd20d14",
+    "reservation_identity": "63e45909918460660c98bd7803be9bc26ec4eeb8e701148afda08119ab43cb06",
+    "reservation": {
+      "attempt": "1",
+      "authorization_id": "on-demand-team-offline-v2-20260909",
+      "automatic_retries": 0,
+      "code_sha": "43c109c7616ccefb63122aaf73d3c12f69748901",
+      "input_sha256": "28f97ee2c0b55c19d7c41ca9233b6fe442f88735aa12657014e44983884f6825",
+      "iteration2_authority": "funding-finder-iteration2-20260921-v1",
+      "iteration2_release": "f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2",
+      "job_id": "816dd6d3cb281f5c7ebb1a1f7d166a5a7b37eb7c76885ab4e87e219217e67591",
+      "maximum_logical_spend_usd": 60,
+      "maximum_new_metered_attempts": 4,
+      "maximum_new_microusd": 713400,
+      "maximum_new_native_counts": 1,
+      "no_second_allowance": true,
+      "original_additional_allowance": {
+        "attempts": 600,
+        "microusd": 50000000,
+        "native_counts": 300
+      },
+      "plan_sha256": "15c4884212a2f87d98ee7d18a230cd9a13a91f33db6a02c1acc6a7d461acb91a",
+      "prior_ledger_sha256": "f203bda9d1da2c6c89574d09de1e6c4f1f506e61535293b62e171295acba2ab1",
+      "protected": {
+        "contingency_microusd": 5000000,
+        "historical_attempts": 2,
+        "historical_microusd": 1267862
+      },
+      "provider_routes": [
+        "openai",
+        "voyage",
+        "anthropic"
+      ],
+      "public_activation": false,
+      "recurring_paid_usage": false,
+      "remaining_completion_allowance": {
+        "attempts": 593,
+        "microusd": 49757221,
+        "native_counts": 297
+      },
+      "run_id": "35655451108"
+    },
+    "scope_id": "341997",
+    "job_id": "816dd6d3cb281f5c7ebb1a1f7d166a5a7b37eb7c76885ab4e87e219217e67591",
+    "release_id": "f8e9e544e08db863f79eb72737cb5434ea71b150c7ebbc00f5314452207074a2",
+    "artifact_created_at": "2026-09-21T21:09:23Z"
+  },
+  "hold": {
+    "microusd": 713400,
+    "attempts": 4,
+    "native_counts": 1
+  },
+  "closed_scope_id": "341997",
+  "no_second_allowance": true,
+  "public_activation": false,
+  "recurring_paid_usage": false
+}

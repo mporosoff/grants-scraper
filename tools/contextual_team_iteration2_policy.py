@@ -157,6 +157,8 @@ def bind_operation(ledger, purpose, body, contract, input_id):
     expected = packet_event(purpose, body, contract, input_id)
     with ledger.locked():
         state = ledger.read(); history(state)
+        from tools.contextual_team_checkpoint_disposition import assert_operation_open
+        assert_operation_open(state, purpose)
         saved = [e for e in state['events'] if e.get('authority') == VERSION and e.get('purpose') == purpose]
         if saved and saved != [expected]:
             raise Deferred('iteration2_operation_changed_no_rekey')
@@ -172,6 +174,8 @@ def bind_operation(ledger, purpose, body, contract, input_id):
 
 def check_reservation(state, provider, metadata, amount, input_tokens, output_tokens):
     history(state); purpose = metadata.get('purpose'); _, stage = _stage(purpose)
+    from tools.contextual_team_checkpoint_disposition import assert_operation_open
+    assert_operation_open(state, purpose)
     expected = [e for e in state['events'] if e.get('authority') == VERSION and e.get('purpose') == purpose]
     if len(expected) != 1:
         raise ConfigurationFailure('iteration2_exact_packet_not_predeclared')
@@ -204,14 +208,18 @@ def check_reservation(state, provider, metadata, amount, input_tokens, output_to
 
 def remaining(state, state_path):
     history(state); counts = check_counts(state_path); pool.check_pool(state)
+    from tools.contextual_team_checkpoint_disposition import exposure, validate_counts
+    validate_counts(state, counts); held = exposure(state)
     p = pool.plan(); start = p['starting_checkpoint']
-    return {'microusd': p['additional']['microusd'] - sum(r['charged_microusd'] for r in state['requests'][start['requests']:]),
-        'attempts': p['additional']['attempts'] - (len(state['requests']) - start['requests']),
-        'native_counts': p['additional']['native_counts'] - (len(counts) - start['native_counts'])}
+    return {'microusd': p['additional']['microusd'] - sum(r['charged_microusd'] for r in state['requests'][start['requests']:]) - held['microusd'],
+        'attempts': p['additional']['attempts'] - (len(state['requests']) - start['requests']) - held['attempts'],
+        'native_counts': p['additional']['native_counts'] - (len(counts) - start['native_counts']) - held['native_counts']}
 
 
 def prepare_record(state_path, job):
     ledger = existing.ExperimentLedger(Path(state_path)/'ledger.json'); state = ledger.read()
+    from tools.contextual_team_checkpoint_disposition import assert_operation_open, exposure
+    assert_operation_open(state, operation(job['scope_id'], 'interpret'))
     balance = remaining(state, state_path); p = pool.plan()
     bounds = plan()['input_token_ceilings']
     maximum = sum((bounds[stage] * 3 + 24) // 25 if provider == 'voyage' else
@@ -225,6 +233,7 @@ def prepare_record(state_path, job):
         'input_sha256': plan()['source_inputs_sha256'], 'prior_ledger_sha256': existing.sha(ledger.path.read_bytes()),
         'maximum_logical_spend_usd': 60, 'original_additional_allowance': p['additional'],
         'remaining_completion_allowance': balance, 'protected': p['protected'],
+        'aggregate_unknown_exposure': exposure(state),
         'maximum_new_microusd': maximum, 'no_second_allowance': True,
         'maximum_new_metered_attempts': 4, 'maximum_new_native_counts': 1,
         'provider_routes': ['openai', 'voyage', 'anthropic'], 'automatic_retries': 0,
