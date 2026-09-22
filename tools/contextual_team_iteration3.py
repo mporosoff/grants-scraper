@@ -251,6 +251,11 @@ class Iteration3Runner(RepairRunner):
     def run_stage(self, scope, stage):
         result = self.reconstruct(scope, stage)
         graph = result['graph']
+        # Verification determines whether integrity needs generation. Empty
+        # candidate sets still cross the durable stage boundary, without a key.
+        self.integrity_generation_required = bool(stage == 'verify' and graph
+            and result['verified']['state'] == 'coherent' and integrity.inputs(result['data'], graph,
+                [p['person_id'] for p in self.configuration['people']])['candidates'])
         if graph and (stage == 'integrity' or result['verified']['state'] != 'coherent'):
             if len(encoded(graph)) > policy.plan()['maximum_graph_bytes']:
                 raise Deferred('iteration3_complete_graph_bound_no_truncation')

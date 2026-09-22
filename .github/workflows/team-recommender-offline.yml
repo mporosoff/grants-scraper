@@ -129,7 +129,7 @@ jobs:
         id: i3_assess
         if: steps.contextual_prepare.outcome == 'success' && steps.contextual_prepare.outputs.iteration3 == 'true'
         env:
-          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_API_KEY: ${{ steps.contextual_prepare.outputs.i3_assess_provider == 'openai' && steps.contextual.outputs.action_current == 'true' && secrets.OPENAI_API_KEY || '' }}
           CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
         run: >-
           python -m tools.contextual_team_executor execute --stage assess
@@ -158,7 +158,7 @@ jobs:
         id: i3_verify
         if: steps.i3_verify_barrier.outcome == 'success'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ steps.contextual_prepare.outputs.i3_verify_provider == 'anthropic' && steps.contextual.outputs.action_current == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
           CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
           I3_PRIOR_SEAL_SHA256: ${{ steps.i3_verify_barrier.outputs.prior_seal_sha256 }}
         run: >-
@@ -188,7 +188,7 @@ jobs:
         id: i3_integrity
         if: steps.i3_integrity_barrier.outcome == 'success'
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          ANTHROPIC_API_KEY: ${{ steps.contextual_prepare.outputs.i3_integrity_provider == 'anthropic' && steps.contextual.outputs.action_current == 'true' && steps.i3_verify.outputs.integrity_generation_required == 'true' && secrets.ANTHROPIC_API_KEY || '' }}
           CONTEXTUAL_ACTION_CURRENT: ${{ steps.contextual.outputs.action_current }}
           I3_PRIOR_SEAL_SHA256: ${{ steps.i3_integrity_barrier.outputs.prior_seal_sha256 }}
         run: >-

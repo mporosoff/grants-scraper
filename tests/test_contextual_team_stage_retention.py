@@ -203,9 +203,10 @@ class StageRetention(unittest.TestCase):
         retention.require_prior(self.state, self.job, 'integrity')
         with self.assertRaises(ConfigurationFailure): retention.complete(self.state, self.job, 'integrity', self.progress('integrity'))
 
-    def execute(self, stage, result=None, error=None):
+    def execute(self, stage, result=None, error=None, integrity_generation_required=False):
         runner = Mock(); runner.ledger.read.return_value = self.ledger; runner.timings=[]
         runner.failure_state.return_value = 'failed'; runner.run_stage.side_effect = error
+        runner.integrity_generation_required=integrity_generation_required
         runner.run_stage.return_value = self.progress(stage) if result is None else result
         argv = ['executor','execute','--state',str(self.state),'--job',str(self.root/'job.json'),
             '--result',str(self.root/'result.json'),'--stage',stage]
@@ -228,7 +229,37 @@ class StageRetention(unittest.TestCase):
         graph={'graph_id':'d'*64,'version':'contextual-audited-graph-v3','state':'unsuitable','scope':{'id':self.job['scope_id']}}
         runner, result, output = self.execute('verify',graph)
         runner.run_stage.assert_called_once(); self.assertEqual(result['result'],graph)
-        self.assertTrue(output.endswith('stage_complete=true\nrequires_integrity=false\n'))
+        self.assertTrue(output.endswith('stage_complete=true\nrequires_integrity=false\nintegrity_generation_required=false\n'))
+
+    def test_prepare_emits_scope_authorized_providers_after_reservation_and_rejects_unapproved_jobs(self):
+        config=iteration3.configuration()
+        for scope,expected in [('332894',('none','none','anthropic')),
+                ('345241:tdac-baa-004',('none','none','anthropic')),('363268',('openai','anthropic','anthropic'))]:
+            job={'release_id':config['snapshot_id'],'scope_id':scope,'person_id':''}
+            job['job_id']=identity([job['release_id'],scope,'']);atomic_json(self.root/'job.json',job)
+            (self.root/'outputs').write_bytes(b'')
+            with patch.object(options,'configuration_for_job',return_value=config),patch.object(existing,'restore'), \
+                    patch.object(policy,'install_authority'),patch.object(policy,'prepare_record',return_value={'fixture':'reservation'}):
+                executor.prepare(self.state,self.root/'reservation.json',self.root/'job.json')
+            output=dict(line.split('=',1) for line in (self.root/'outputs').read_text().splitlines())
+            self.assertEqual(tuple(output['i3_'+stage+'_provider'] for stage in ('assess','verify','integrity')),expected)
+            self.assertEqual(output['iteration3'],'true')
+            self.assertEqual(json.loads((self.root/'reservation.json').read_bytes()),{'fixture':'reservation'})
+        for change in ({'scope_id':'344592:ab-0025'},{'scope_id':'341997'},{'person_id':'not-approved'},
+                {'operation':'check'},{'release_id':'f'*64},{'job_id':'f'*64}):
+            atomic_json(self.root/'job.json',job|change);(self.root/'outputs').write_bytes(b'')
+            with patch.object(options,'configuration_for_job',return_value=config),patch.object(existing,'restore') as restore:
+                with self.assertRaises(ValueError):executor.prepare(self.state,self.root/'reservation.json',self.root/'job.json')
+                restore.assert_not_called()
+            self.assertEqual((self.root/'outputs').read_bytes(),b'')
+
+    def test_verify_generation_output_requires_completed_stage_and_exact_boolean(self):
+        self.sealed_assessment()
+        _,_,output=self.execute('verify',integrity_generation_required=True)
+        self.assertTrue(output.endswith('integrity_generation_required=true\n'))
+        # A failed stage cannot publish permission from a stale runner marker.
+        _,_,output=self.execute('verify',error=ValueError('failed'),integrity_generation_required=True)
+        self.assertTrue(output.endswith('integrity_generation_required=false\n'))
 
     def test_executor_failed_stage_does_not_emit_completion_marker(self):
         runner, result, output=self.execute('assess',error=ValueError('fixture strict failure'))
@@ -255,6 +286,33 @@ class StageRetention(unittest.TestCase):
 
 
 class WorkflowBarriers(unittest.TestCase):
+    def test_selected_provider_keys_empty_for_cache_only_stages_empty_candidates_and_missing_outputs(self):
+        flow=yaml.safe_load((existing.ROOT/existing.WORKFLOW).read_bytes())
+        steps={s['id']:s for s in flow['jobs']['prepare-evaluate']['steps'] if 'id' in s}
+        def value(expression,outputs):
+            expression=expression.removeprefix('${{').removesuffix('}}').strip()
+            expression=re.sub(r'steps\.[a-z0-9_]+\.outputs\.[a-z0-9_]+',lambda m:repr(outputs.get(m[0],'')),expression)
+            expression=re.sub(r'secrets\.([A-Z0-9_]+)',lambda m:repr('fixture:'+m[1]),expression)
+            return eval(expression.replace('&&',' and ').replace('||',' or '),{'__builtins__':{}},{})
+        for scope in ('332894','345241:tdac-baa-004','363268'):
+            authorized=policy.workflow_stages({'scope_id':scope})
+            outputs={'steps.contextual.outputs.action_current':'true','steps.i3_verify.outputs.integrity_generation_required':'true'}
+            outputs.update({'steps.contextual_prepare.outputs.i3_'+stage+'_provider':policy.STAGES[stage][0] if stage in authorized else 'none'
+                for stage in ('assess','verify','integrity')})
+            for stage,key in [('assess','OPENAI_API_KEY'),('verify','ANTHROPIC_API_KEY'),('integrity','ANTHROPIC_API_KEY')]:
+                expression=steps['i3_'+stage]['env'][key]
+                self.assertEqual(value(expression,outputs),'fixture:'+key if stage in authorized else '')
+                self.assertEqual(value(expression,outputs|{'steps.contextual.outputs.action_current':'false'}),'')
+                self.assertEqual(value(expression,{}),'')
+                provider='steps.contextual_prepare.outputs.i3_'+stage+'_provider'
+                for unsupported in ('','mixed','none','wrong',True):self.assertEqual(value(expression,outputs|{provider:unsupported}),'')
+            expression=steps['i3_integrity']['env']['ANTHROPIC_API_KEY']
+            for missing in ('','false',False,True):
+                self.assertEqual(value(expression,outputs|{'steps.i3_verify.outputs.integrity_generation_required':missing}),'')
+        # Authentication and zero-provider recovery remain separate from keys.
+        for step in flow['jobs']['prepare-evaluate']['steps']:
+            if 'GH_TOKEN' in step.get('env',{}):self.assertFalse(any(k.endswith('_API_KEY') for k in step['env']))
+
     def test_real_workflow_credentials_conditions_and_final_callback(self):
         flow=yaml.safe_load((existing.ROOT/existing.WORKFLOW).read_bytes()); job=flow['jobs']['prepare-evaluate']
         steps={s['id']:s for s in job['steps'] if 'id' in s}

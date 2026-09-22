@@ -79,5 +79,29 @@ class Iteration3Workflow(unittest.TestCase):
             runner.request(workflow.policy.operation('363268','assess'),['test'],body,Mock())
         runner.post.assert_not_called();runner.counter.count.assert_not_called()
 
+    def test_actual_candidate_inventory_controls_generation_marker_without_changing_science(self):
+        runner=self.runner();before=runner.reconstruct(self.scope,'verify')['graph']
+        with patch.object(workflow.existing,'checkpoint'):
+            result=runner.run_stage(self.scope,'verify')
+        self.assertEqual(result,{'state':'stage_complete','stage':'verify','scope_id':self.scope['id']})
+        self.assertTrue(runner.integrity_generation_required)
+        self.assertEqual(runner.reconstruct(self.scope,'verify')['graph'],before)
+        # Coherent all-negative pair decisions require no integrity generation,
+        # but still produce the complete deterministic v4 empty-candidate result.
+        raw=verified_wire(self.data,self.a)
+        for row in raw['answers']:row.update(coverage='insufficient_information',central=False,claims=[])
+        self.v=science.verifier_resolve(raw,self.data,self.a)
+        runner=self.runner();runner.scientific=Mock(side_effect=AssertionError('no new inference'))
+        runner.post=Mock(side_effect=AssertionError('no provider'));runner.counter=Mock()
+        with patch.object(workflow.existing,'checkpoint'):
+            result=runner.run_stage(self.scope,'verify')
+            self.assertEqual(result['state'],'stage_complete');self.assertFalse(runner.integrity_generation_required)
+            graph=runner.run_stage(self.scope,'integrity')
+        self.assertEqual(graph['version'],'contextual-audited-graph-v4')
+        self.assertEqual(graph['integrity']['candidate_groups'],[])
+        self.assertEqual(graph['integrity']['disposition'],'not_applicable_no_candidates')
+        self.assertEqual(graph['state'],'no_supported_group_in_assessed_set')
+        runner.scientific.assert_not_called();runner.post.assert_not_called();runner.counter.count.assert_not_called()
+
 
 if __name__=='__main__':unittest.main()

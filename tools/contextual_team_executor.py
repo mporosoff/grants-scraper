@@ -347,11 +347,14 @@ def prepare(state,reservation,job_path):
     existing.trusted_environment(contextual_job=job)
     ledger=existing.restore(state,existing.policy())
     if configuration.get('iteration3'):
-        from tools.contextual_team_iteration3_policy import install_authority, prepare_record
+        from tools.contextual_team_iteration3_policy import install_authority, prepare_record, workflow_stages, STAGES
         install_authority(state,existing.api)
         atomic_json(reservation,prepare_record(state,job))
         with open(os.environ['GITHUB_OUTPUT'],'a') as stream:
             stream.write('text_provider=mixed\niteration3=true\n')
+            authorized=workflow_stages(job)
+            for stage in ('assess','verify','integrity'):
+                stream.write('i3_'+stage+'_provider='+(STAGES[stage][0] if stage in authorized else 'none')+'\n')
         return
     if configuration.get('iteration2'):
         from tools.contextual_team_iteration2_policy import install_authority, prepare_record
@@ -425,6 +428,8 @@ def main():
         with open(os.environ['GITHUB_OUTPUT'],'a') as stream:
             stream.write('stage_complete='+str(stage_complete).lower()+'\n')
             stream.write('requires_integrity='+str(result.get('state')=='stage_complete').lower()+'\n')
+            stream.write('integrity_generation_required='+str(stage_complete and args.stage=='verify'
+                and getattr(runner,'integrity_generation_required',False) is True).lower()+'\n')
     atomic_json(args.result,{'job_id':job['job_id'],'release_id':job['release_id'],'result':result,
         'run_id':os.environ['GITHUB_RUN_ID'],'code_sha':os.environ['GITHUB_SHA'],
         'charged_microusd':sum(r['charged_microusd'] for r in runner.ledger.read()['requests']),
