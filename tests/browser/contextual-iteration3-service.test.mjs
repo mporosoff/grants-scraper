@@ -228,14 +228,21 @@ test('new overlay serves exact I3 runtime identities while historical I2 assets 
   assert.equal(previewResponse('/admin/contextual/iteration30/assets/contextual-team-client.js'),null);
 });
 
-test('control page load performs only manifest and control reads, never a build',async()=>{
-  const d=shellDom('<html><body><p id="status"></p><button id="enable"></button><button id="disable"></button><ul id="cases"></ul></body></html>'),calls=[];
+test('control page load performs only manifest and control reads, never a build',{timeout:5000},async()=>{
+  const d=shellDom('<html><body><p id="status"></p><button id="enable" disabled></button><button id="disable" disabled></button><ul id="cases"></ul></body></html>'),calls=[];
+  // Native Response.json() drains a stream. Await the actual final control
+  // transition, not an assumed number of microtasks or a fixed wall-clock wait.
+  const disable=d.document.getElementById('disable'),descriptor=Object.getOwnPropertyDescriptor(disable,'disabled');
+  const loaded=new Promise(resolve=>Object.defineProperty(disable,'disabled',{...descriptor,set(value){
+    descriptor.set.call(this,value);if(value===false)resolve();
+  }}));
   d.context.fetch=async(url,o)=>{calls.push({url,o});return Response.json(url.includes('manifest')?
     {release_id:plan.release_id,public_activation:false,scopes:source.scopes.map(s=>({id:s.id,title:s.science.title,state:s.state}))}:
     {new_paid_enabled:0,cached_enabled:1});};
   vm.createContext(d.context);vm.runInContext(ITERATION3_JS,d.context);
-  for(let i=0;i<20;i++)await Promise.resolve();
+  await loaded;
   assert.equal(calls.length,2);assert(calls.every(c=>!c.o.method));assert(!calls.some(c=>c.url.includes('/jobs')));
   assert.match(d.document.getElementById('status').textContent,/New paid builds disabled/);
+  assert.equal(d.document.getElementById('enable').disabled,false);assert.equal(disable.disabled,false);
   assert.equal(d.document.getElementById('cases').querySelectorAll('li').length,3);
 });
