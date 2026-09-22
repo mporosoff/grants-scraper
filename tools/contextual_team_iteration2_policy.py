@@ -210,7 +210,9 @@ def remaining(state, state_path):
     history(state); counts = check_counts(state_path); pool.check_pool(state)
     from tools.contextual_team_checkpoint_disposition import exposure, validate_counts
     validate_counts(state, counts); held = exposure(state)
-    p = pool.plan(); start = p['starting_checkpoint']
+    from tools.contextual_team_iteration3_capacity import validate_counts as validate_capacity_counts
+    validate_capacity_counts(state, counts)
+    p = pool.effective_plan(state); start = p['starting_checkpoint']
     return {'microusd': p['additional']['microusd'] - sum(r['charged_microusd'] for r in state['requests'][start['requests']:]) - held['microusd'],
         'attempts': p['additional']['attempts'] - (len(state['requests']) - start['requests']) - held['attempts'],
         'native_counts': p['additional']['native_counts'] - (len(counts) - start['native_counts']) - held['native_counts']}
@@ -220,7 +222,7 @@ def prepare_record(state_path, job):
     ledger = existing.ExperimentLedger(Path(state_path)/'ledger.json'); state = ledger.read()
     from tools.contextual_team_checkpoint_disposition import assert_operation_open, exposure
     assert_operation_open(state, operation(job['scope_id'], 'interpret'))
-    balance = remaining(state, state_path); p = pool.plan()
+    balance = remaining(state, state_path); p = pool.effective_plan(state)
     bounds = plan()['input_token_ceilings']
     maximum = sum((bounds[stage] * 3 + 24) // 25 if provider == 'voyage' else
         (bounds[stage] + 4) // 5 + (output * 6 + 4) // 5 if provider == 'openai' else

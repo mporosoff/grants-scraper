@@ -1,0 +1,83 @@
+{
+  "version": "funding-finder-iteration3-capacity-20260922-v1",
+  "authorization_id": "on-demand-team-offline-v2-20260909",
+  "authority": "Owner sent Iteration 3 stabilization and registry integration work order on September 22, 2026; increase request and native-count capacity only. No new dollar allowance or public activation.",
+  "owner_work_order_sha256": "d70999d2a5366495626b7f357804e7c18b4656b824203f8b0cbe2d66afdd090d",
+  "original_completion_authority_sha256": "e81652b76b4bda29d62212d6b3b9cad9b2fbe15d1bbe2caf03cd1bf603a52624",
+  "original_starting_checkpoint": {
+    "run": 35616677156,
+    "artifact": 10645414639,
+    "ledger_sha256": "2a2f7f61be78e4e2b2db929b4880fedaa8a3b403873bac0a0fb4a7c772fbdac6",
+    "checkpoint_sha256": "b9b18c401a3393823aa08e1af9665087b20e527b10fb791210e7b257c17d2afa",
+    "requests": 687,
+    "requests_sha256": "d6ea2e7004836f7ac00b2a85a83b7c86c0e16639d65cc220a21ab7a2120a9add",
+    "events": 19,
+    "events_sha256": "b74f363a14c6c6007cde12e722e2c107b4d5174fd1ff3b00a922db51dd94636b",
+    "native_counts": 188,
+    "native_counts_sha256": "e8f8fea4e74c953bb3a80edfddca8b75c8ef5432e758e139bd4a534b19754e6e",
+    "known_microusd": 7346880,
+    "unknown_holds_microusd": 814610,
+    "conservative_used_microusd": 8161490
+  },
+  "source": {
+    "run": {
+      "id": 35750028417,
+      "run_attempt": 1,
+      "status": "completed",
+      "conclusion": "success",
+      "path": ".github/workflows/team-recommender-offline.yml",
+      "head_branch": "main",
+      "head_sha": "57da7629afaff8c9acf2977a415b29d0b3d93012",
+      "event": "repository_dispatch"
+    },
+    "artifact": {
+      "id": 10704920660,
+      "name": "on-demand-team-offline-v2-20260909-state-35750028417-1",
+      "digest": "sha256:26be983703b93988139f4330fdbc021fe701c54d7574d24bf9fff4588b2a6004"
+    },
+    "ledger_sha256": "3a9669ae41ef8c44eb7525817e9702c3352b4581bb38a9b5f0cd402ad0b63cdc",
+    "checkpoint_sha256": "5009736895adef7af70bed785b2390ae7e26b3d3f90d2c2fd04a5526c37dddc7",
+    "requests": 718,
+    "requests_sha256": "a550da9b8fda5c951af38247c840e160b1096b0a8b63ce9b1a08f367da0a3d17",
+    "events": 55,
+    "events_sha256": "13b8447090d03935b866e36f15d11b3d9850e2e11ec088f5a067387050da8b79",
+    "native_counts": 200,
+    "native_counts_sha256": "d947bee456ac01c3863641f58ff2282b5462e929b935ac7c9fe76136207e3dd0",
+    "checkpoint_files": 1456,
+    "checkpoint_files_sha256": "32d2a76d3d5d33df7cde19e44f041072f6ac67c40bb7b42424021917d09fb336"
+  },
+  "previous_lifetime": {
+    "microusd": 60000000,
+    "attempts": 1290,
+    "native_counts": 490
+  },
+  "previous_additional": {
+    "microusd": 50000000,
+    "attempts": 600,
+    "native_counts": 300
+  },
+  "lifetime": {
+    "microusd": 60000000,
+    "attempts": 1490,
+    "native_counts": 590
+  },
+  "additional": {
+    "microusd": 50000000,
+    "attempts": 800,
+    "native_counts": 400
+  },
+  "increment": {
+    "microusd": 0,
+    "attempts": 200,
+    "native_counts": 100
+  },
+  "protected": {
+    "historical_microusd": 1267862,
+    "historical_attempts": 2,
+    "contingency_microusd": 5000000
+  },
+  "no_second_owner": true,
+  "no_reset": true,
+  "public_activation": false,
+  "recurring_paid_usage": false
+}
