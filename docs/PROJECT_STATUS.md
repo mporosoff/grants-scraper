@@ -1,6 +1,6 @@
 # Current completion handoff
 
-Read [CURRENT](team-recommender/CURRENT.md) for the synchronized operational state. Iteration 1 is accepted; Iteration 2 is incomplete at the missing Math accounting checkpoint. New paid builds are OFF; Iteration 3 has not begun.
+Read [CURRENT](team-recommender/CURRENT.md) for the single operational handoff, latest authenticated owner, remaining work and execution boundaries. Detailed reports remain local. All reports below are preserved historical evidence.
 
 ## Archived status — historical evidence only
 
