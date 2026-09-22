@@ -1,0 +1,13 @@
+# Exact Math service disposition
+
+The completed accounting recovery for failed run `35655451108` preserves the full unknown reservation and permanently closes Math against replay. It does not change the separate Worker admission row. That row still owned the global slot after the original state upload failed, so Electrochemistry's first new Build returned HTTP 429 without dispatching scientific work.
+
+`iteration2-service-slot-disposition-v1` closes this exact service boundary. It adds an immutable archive of the original Math row and its authenticated accounting/deployment evidence, then changes only that row's state and active slot. The original run, code identity, timestamps and absent scientific result remain intact. The archive has its own application timestamp. No ledger, provider receipt, cache, budget or scientific judgment changes.
+
+The schema migration creates storage and guards only; deployment does not release any slot. First-result callbacks now require active ownership, so a late original callback cannot fill Math's missing result or reclaim its released slot. Identical callbacks for normally completed jobs retain their existing idempotence.
+
+Use `python -m tools.contextual_team_service_disposition --help` from a clean checkout of current protected main. Supply the actual successful deployment run, the existing installed Wrangler CLI and a local evidence output directory. Without `--execute`, the command only authenticates evidence and prepares the exact operation. The explicit execution repeats current owner, protected head and serving checks before its single atomic database statement.
+
+Execution requires the exact original Math row; stopped new-paid controls; no active or queued spending executor; the authenticated accounting-recovery artifact; a complete current descendant of the same spending owner with its full hold; and verified serving modules, runtime, bindings and routes containing the reviewed callback guard. Missing, changed or conflicting evidence stops execution. A repeated identical disposition is idempotent; unrelated uncertain jobs retain their slots.
+
+Retain the actual execution receipt and independently verify the terminal service row before resuming the remaining development cases. Keep the first Electrochemistry admission failure and any later corrective attempt distinct under `iteration2-protocol-v1.md`. This document and merged code alone do not prove that the disposition or a scientific build completed. Public activation, later iterations and the confirmation seal remain unchanged.

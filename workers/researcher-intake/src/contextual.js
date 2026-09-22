@@ -89,8 +89,10 @@ export class ContextualStore {
     const recovery=JSON.parse(value).result.state==='recovery_required';
     // A checkpointed uncertain request still owns the sole spending slot.
     // Preserve its immutable receipt; no expiry/repeated callback clears it.
+    // A reviewed disposition can release the slot without recovering a result;
+    // a late callback must neither populate that result nor reclaim the slot.
     await this.db.prepare(`UPDATE contextual_validation_jobs SET state=?,active_slot=?,result_json=?,updated_at=?
-      WHERE job_id=? AND run_id=? AND code_sha=? AND result_json IS NULL`)
+      WHERE job_id=? AND run_id=? AND code_sha=? AND result_json IS NULL AND active_slot=1`)
       .bind(recovery?'recovery_required':'complete',recovery?1:null,value,now,id,run,sha).run();return this.byId(id);
   }
 }
