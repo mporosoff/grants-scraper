@@ -609,21 +609,22 @@ jobs:
         run: >-
           python -m tools.catalog_correction_release create
           --work "$RUNNER_TEMP/catalog-correction" --bundle "$RUNNER_TEMP/candidate"
-      - name: Retain the standard immutable public candidate
-        if: steps.restore.outputs.candidate_id == '' && (steps.recover.outcome == 'success' || steps.persist.outcome == 'success')
-        uses: actions/upload-artifact@v4
-        with:
-          name: candidate-${{ steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}
-          path: ${{ runner.temp }}/candidate
-          include-hidden-files: true
-          if-no-files-found: error
-          retention-days: 90
       - name: Retain the safe exact-candidate recovery provenance
+        id: recovery-provenance
         if: always() && steps.recover.outcome == 'success'
         uses: actions/upload-artifact@v4
         with:
           name: catalog-candidate-recovery-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/catalog-recovery/recovery.json
+          if-no-files-found: error
+          retention-days: 90
+      - name: Retain the standard immutable public candidate
+        if: steps.restore.outputs.candidate_id == '' && ((steps.recover.outcome == 'success' && steps.recovery-provenance.outcome == 'success') || steps.persist.outcome == 'success')
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-${{ steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+          path: ${{ runner.temp }}/candidate
+          include-hidden-files: true
           if-no-files-found: error
           retention-days: 90
 
