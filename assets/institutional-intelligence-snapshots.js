@@ -12,6 +12,7 @@
   const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=65b8850c23e5fdf1c9ef9233faf1caa3ba831bc62f27614cb9a543c6ea26a9ee", document.baseURI).href;
 
   const state = {
+    opportunity: "",
     selectedInstitution: null,
     registryCandidates: [],
     registrySequence: 0,
@@ -273,6 +274,7 @@
       facet_type: state.facet.type,
       facet_key: state.facet.key,
     };
+    if (state.opportunity) value.opportunity = state.opportunity;
     if (state.programOfficerScope) Object.assign(value, {
       mode: "program_officer",
       program_officer_source: state.programOfficerScope.source,
@@ -296,6 +298,7 @@
       year_start: clean(value?.year_start, 4),
       year_end: clean(value?.year_end, 4),
     };
+    if (value?.opportunity) submitted.opportunity = clean(value.opportunity, 160);
     if (value?.mode === "program_officer") Object.assign(submitted, {
       mode: "program_officer",
       program_officer_source: clean(value?.program_officer_source || value?.agency, 10).toUpperCase(),
@@ -335,6 +338,8 @@
   }
 
   function applyFormState(value) {
+    state.opportunity = clean(value?.opportunity, 160);
+    const selected = core.selectedOpportunityContext(state.opportunity);
     const officerMode = value?.mode === "program_officer";
     state.programOfficerScope = officerMode ? {
       source: clean(value.program_officer_source || value.agency, 10).toUpperCase(),
@@ -366,6 +371,13 @@
       : `Restored ${value.institution} as the shared canonical award-source name.`;
     const lockedIds = ["ii-institution", "ii-agency", "ii-program", "ii-topic", "ii-pi", "ii-program-officer"];
     lockedIds.forEach(id => { $(id).disabled = officerMode; });
+    if (selected) {
+      $("ii-agency").value = selected.lookup?.source || "all";
+      $("ii-agency").disabled = true;
+      $("ii-program").value = selected.lookup?.label || "Exact mapping unavailable";
+      $("ii-program").disabled = true;
+    }
+    renderSelectedOpportunity(selected);
     const customYears = officerMode && state.programOfficerScope.year_preset === "custom";
     $("ii-year-start").disabled = officerMode && !customYears;
     $("ii-year-end").disabled = officerMode && !customYears;
@@ -387,7 +399,31 @@
   }
 
   function hasSearchState(value) {
-    return Boolean(value?.mode === "program_officer" || value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
+    return Boolean(value?.opportunity || value?.mode === "program_officer" || value?.institution || value?.program || value?.topic || value?.pi || value?.program_officer);
+  }
+
+  function renderSelectedOpportunity(selected) {
+    $("selected-opportunity").classList.toggle("hidden", !selected);
+    $("ii-heading").textContent = selected ? "Search awards for this opportunity" : "Search funded awards";
+    $("ii-search-help").textContent = selected
+      ? "Results use this opportunity’s exact or reviewed historical program mapping. Institution, topic, investigator and year filters narrow those awards. Clear selection to search across other programs."
+      : "Search public NSF, NIH, DOE and DoD award records. An institution search returns that institution’s awards; add a topic or program to narrow it. This does not search the funding-opportunity catalog.";
+    const identity = selected?.record ? awardLinks.programIdentityForOpportunity?.(selected.record) : null;
+    const watch = $("watch-selected-program");
+    watch.classList.toggle("hidden", !identity);
+    watch.dataset.programId = identity?.id || "";
+    watch.dataset.programLabel = identity?.label || "";
+    if (!selected) return;
+    $("selected-opportunity-heading").textContent = selected.record?.title || "Selected opportunity unavailable";
+    $("selected-opportunity-meta").textContent = [selected.record?.agency, selected.record?.opportunity_number || selected.id].filter(Boolean).join(" · ");
+    $("selected-mapping-note").textContent = selected.lookup
+      ? `Historical lookup: ${selected.lookup.label}. ${selected.lookup.mapping_basis === "reviewed_parent_program" ? "Includes the reviewed predecessor program codes; awards are not claimed to be from this funding cycle." : "Uses the exact source identifier; a new opportunity can have no historical awards yet."}`
+      : "No historical-award mapping is available for this selection. Return to Funding Finder or clear selection to start a separate search.";
+    const link = $("open-current-opportunity");
+    const url = safeUrl(selected.record?.detail_page || selected.record?.funding_opportunity_url);
+    link.classList.toggle("hidden", !url);
+    if (url) link.href = url;
+    else link.removeAttribute("href");
   }
 
   function nextHistoryEntryId() {
@@ -739,6 +775,7 @@
     absorbAwards(awards);
     $("ii-output").classList.remove("hidden");
     const institution = clean(state.submitted?.institution, 300);
+    const selected = core.selectedOpportunityContext(state.submitted?.opportunity);
     const officer = state.snapshot?.mode === "program_officer" ? state.snapshot.program_officer : null;
     $("ii-output-heading").textContent = officer
       ? `${officer.display_name} · ${officer.source} funded projects`
@@ -752,7 +789,7 @@
     const ordering = awardSortDescription(payload.sort);
     $("ii-result-scope").textContent = (officer
       ? `Exact ${officer.source} source-listed contact: ${officer.display_name}. Requested source award years: ${requestedYears}. This immutable ${payload.as_of.slice(0, 10)} snapshot contains ${totalText}; coverage is ${payload.coverage_state}. It expires ${new Date(payload.expires_at).toLocaleString()}.`
-      : `Search years: ${requestedYears}. Results retrieved on ${payload.as_of.slice(0, 10)} include ${totalText}.`) + ` ${ordering}`;
+      : `${selected ? `Selected opportunity: ${selected.record?.title || selected.id}. Historical mapping: ${selected.lookup?.label || "unavailable"}. ` : ""}Search years: ${requestedYears}. Results retrieved on ${payload.as_of.slice(0, 10)} include ${totalText}.`) + ` ${ordering}`;
     const years = payload.aggregate.year_start
       ? payload.aggregate.year_start === payload.aggregate.year_end ? String(payload.aggregate.year_start) : `${payload.aggregate.year_start}–${payload.aggregate.year_end}`
       : "Not listed";
@@ -840,7 +877,7 @@
       : null;
   }
 
-  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, sort = state.sort, controller = state.controller, clientOverlay = state.clientSnapshotOverlay }) {
+  async function requestSnapshotPage({ snapshotId, page, pageSize, facet, sort = state.sort, controller = state.controller, clientOverlay = state.clientSnapshotOverlay, searchState = state.submitted || formState() }) {
     if (String(snapshotId || "").startsWith("local-dod-")) {
       const dod = await dodBrowserModule();
       const snapshot = state.localSnapshot?.snapshot_id === snapshotId
@@ -867,6 +904,7 @@
       sort,
       facet: { type: facet.type, key: facet.key },
     }, controller);
+    core.validateSelectedSnapshot(searchState, payload);
     const matchingOverlay = clientOverlay?.snapshotId === snapshotId ? clientOverlay : null;
     const overlay = matchingOverlay || restoredClientSnapshotOverlay(payload, snapshotId);
     const integrated = applyClientSnapshotOverlay(payload, overlay);
@@ -875,6 +913,8 @@
   }
 
   function stagedSnapshotResult({ submitted, snapshot, pagePayload, localSnapshot = null, clientSnapshotOverlay = null, questionState = null }) {
+    core.validateSelectedSnapshot(submitted, snapshot);
+    core.validateSelectedSnapshot(submitted, pagePayload);
     const residentAwards = new Map();
     const sourceOffsets = new Map();
     const absorb = awards => {
@@ -1014,12 +1054,14 @@
   async function preparedSnapshotSearch({ request, submitted, pageSize, questionState = null, controller = state.controller }) {
     if (!request.sources.includes("DOD")) {
       const snapshot = await postJson(api.snapshotUrl, { sources: request.sources, criteria: request.criteria }, controller);
+      core.validateSelectedSnapshot(submitted, snapshot);
       const pagePayload = await requestSnapshotPage({
         snapshotId: snapshot.snapshot_id,
         page: 1,
         pageSize,
         facet: { type: "all", key: "" },
         controller,
+        searchState: submitted,
       });
       return stagedSnapshotResult({ submitted, snapshot, pagePayload, questionState });
     }
@@ -1108,6 +1150,7 @@
       if (resolveInstitution && preliminary.mode !== "program_officer") await resolveTypedInstitution();
       const current = searchState ? { ...searchState } : formState();
       const request = core.buildAwardRequest({ ...current, offset: 0 }, 10);
+      setStatus(`Searching ${request.sources.map(source => source === "DOD" ? "DoD" : source).join(", ")} public award records${current.opportunity ? " for the selected opportunity" : ""}…`);
       const submitted = submittedCriteria(current);
       const pageSize = current.page_size || 10;
       const staged = await preparedSnapshotSearch({
@@ -1929,7 +1972,7 @@
     clearQuestionState({ clearInput: true });
   }
 
-  function clearSearch({ historyMode = "push" } = {}) {
+  function clearSearch({ historyMode = "push", filters = null } = {}) {
     const departureHistoryState = historyMode === "push" ? historyViewState() : null;
     state.sequence += 1;
     state.pageRequestSequence += 1;
@@ -1937,10 +1980,10 @@
     setSearchActivity(false);
     state.selectedInstitution = null;
     resetResultState();
-    applyFormState({ open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", page: 1, page_size: 10, facet_type: "all", facet_key: "" });
+    applyFormState(filters || { open: true, institution: "", agency: "all", program: "", topic: "", pi: "", program_officer: "", year_start: "", year_end: "", page: 1, page_size: 10, facet_type: "all", facet_key: "" });
     for (const id of ["ii-output", "ii-source-status", "ii-question-plan", "ii-question-answer", "ii-pagination", "ii-card-pagination"]) $(id).classList.add("hidden");
     setStatus("");
-    writeHistoryUrl(core.urlForState(location.href, { open: true }), historyMode, departureHistoryState);
+    writeHistoryUrl(core.urlForState(location.href, filters || { open: true }), historyMode, departureHistoryState);
   }
 
   function programOfficerSearchState({ source, displayName, contactKey, yearPreset = "recent5", yearStart = "", yearEnd = "" }) {
@@ -2010,6 +2053,15 @@
   }
 
   function bindEvents() {
+    $("clear-opportunity").addEventListener("click", () => {
+      const filters = { ...formState(), opportunity: "", agency: "all", program: "", snapshot_id: "", page: 1, facet_type: "all", facet_key: "" };
+      clearSearch({ filters });
+      setStatus("Opportunity selection cleared. The next search uses the visible filters across award records.");
+    });
+    $("watch-selected-program").addEventListener("click", event => {
+      const identity = awardLinks.programIdentityById?.(event.currentTarget.dataset.programId);
+      if (identity) globalThis.FUNDING_ALERTS?.open?.({ type: "program", definition: { program_id: identity.id }, summary: `${identity.label} · controlled NSF program identity`, focus: event.currentTarget });
+    });
     if ("scrollRestoration" in history) history.scrollRestoration = "manual";
     window.addEventListener("scroll", scheduleCurrentHistoryViewState, { passive: true });
     document.addEventListener("focusin", scheduleCurrentHistoryViewState);
@@ -2138,7 +2190,7 @@
       state.historyRestoreDepth += 1;
       try {
         const restored = core.stateFromSearch(location.search);
-        if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) {
+        if (!hasSearchState(restored)) {
           clearSearch({ historyMode: "replace" });
           return;
         }
@@ -2179,7 +2231,7 @@
     applyFormState(restored);
     bindEvents();
     refreshProvider();
-    if (!hasSearchState(restored) || new URLSearchParams(location.search).has("opportunity")) return;
+    if (!hasSearchState(restored)) return;
     if (restored.snapshot_id) {
       state.submitted = submittedCriteria(restored);
       state.snapshot = { snapshot_id: restored.snapshot_id, sources: [] };

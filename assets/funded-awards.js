@@ -2,6 +2,8 @@
   "use strict";
 
   const $ = id => document.getElementById(id);
+  // The visible snapshot form owns selected-opportunity navigation when present.
+  if ($("institutional-intelligence") && globalThis.FUNDING_INSTITUTIONAL_INTELLIGENCE?.selectedOpportunityContext) return;
   const catalog = globalThis.GRANT_CATALOG;
   const linksApi = globalThis.FUNDING_AWARD_LINKS;
   const productApi = globalThis.FUNDING_AWARD_PRODUCT;
