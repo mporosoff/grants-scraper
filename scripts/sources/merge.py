@@ -123,7 +123,7 @@ def _cached_publishable(sources: dict, slug: str, as_of: date) -> list[dict]:
     return kept
 
 
-def _unobserved_current(sources: dict, result: AdapterResult, as_of: date) -> list[dict]:
+def _unobserved_current(sources: dict, result: AdapterResult, as_of: date, witnesses=None) -> list[dict]:
     """Carry only current records that no fresh observation supersedes.
 
     Check every observed identity before filtering. An expired, withdrawn or
@@ -134,7 +134,7 @@ def _unobserved_current(sources: dict, result: AdapterResult, as_of: date) -> li
     snapshot = sources.get(result.slug) or {}
     last_seen = str(snapshot.get("fetched_at") or "")[:10] or None
     carried = []
-    latest, _ = _incremental_observations(snapshot.get("records") or [])
+    latest, _ = _incremental_observations(snapshot.get("records") or [], witnesses)
     publishable, _ = filter_publishable(latest, as_of)
     for record in publishable:
         ident, key = record.get("opportunity_id"), record_identity(record)
@@ -180,7 +180,50 @@ def _observation_url(record: dict) -> tuple | None:
         return (str(value),)
 
 
-def _incremental_observations(records: list[dict]) -> tuple[list[dict], list[str]]:
+IDENTITY_WITNESS_LIMIT = 500
+
+
+def _identity_witness(record):
+    from .official_identity import record_grants_ids
+    url = _observation_url(record)
+    return {"id": str(record.get("opportunity_id") or ""), "key": record_identity(record),
+            "url": list(url) if url else None, "number": _norm_number(record.get("opportunity_number")),
+            "title": _canonical_title(record), "grants": sorted(record_grants_ids(record))}
+
+
+def _identity_history(snapshot, fresh):
+    """Keep bounded identity witnesses even when live/terminal records disappear.
+
+    These are identity observations, not currentness or freshness assertions.
+    Full source records remain in the retained generation artifact. A changed
+    source ID or exact official alias proof can resolve a program's identity;
+    simply dropping one conflicting email from a later window cannot do so.
+    """
+    prior = snapshot.get("identity_witnesses", {"version": 1, "observations": []})
+    if (not isinstance(prior, dict) or set(prior) != {"version", "observations"}
+            or type(prior["version"]) is not int or prior["version"] != 1
+            or not isinstance(prior["observations"], list)):
+        raise ValueError("Invalid incremental identity witness metadata")
+    observations = prior["observations"] + [_identity_witness(r) for r in (snapshot.get("records") or []) + fresh]
+    unique = {}
+    for witness in observations:
+        if (not isinstance(witness, dict) or set(witness) != {"id", "key", "url", "number", "title", "grants"}
+                or not all(isinstance(witness[k], str) and len(witness[k]) <= 2048 for k in ("id", "key", "number", "title"))
+                or not witness["id"] or not witness["key"]
+                or not isinstance(witness["grants"], list) or len(witness["grants"]) > 4
+                or any(not isinstance(x, str) or not re.fullmatch(r"[0-9]{1,40}", x) for x in witness["grants"])
+                or (witness["url"] is not None and (not isinstance(witness["url"], list)
+                    or len(witness["url"]) not in (1, 4)
+                    or any(x is not None and (type(x) not in (str, int) or len(str(x)) > 4096) for x in witness["url"])))):
+            raise ValueError("Invalid incremental identity witness fields")
+        identity = json.dumps(witness, sort_keys=True, separators=(",", ":"))
+        unique[identity] = witness
+    if len(unique) > IDENTITY_WITNESS_LIMIT:
+        raise ValueError("Incremental identity witness capacity exceeded; retained evidence requires review")
+    return {"version": 1, "observations": [unique[key] for key in sorted(unique)]}
+
+
+def _incremental_observations(records: list[dict], witnesses=None) -> tuple[list[dict], list[str]]:
     """Select latest genuine versions; quarantine unresolved stable-ID collisions.
 
     A digest title hash or a number copied into an event is not enough to merge
@@ -188,10 +231,10 @@ def _incremental_observations(records: list[dict]) -> tuple[list[dict], list[str
     source-owned number plus unchanged program title remain supported aliases.
     No missing item or collision is evidence of an official withdrawal.
     """
-    from .official_identity import record_grants_ids
+    evidence = (witnesses or {}).get("observations", []) + [_identity_witness(r) for r in records]
     groups = []
-    for record in records:
-        ident, key = record.get("opportunity_id"), record_identity(record)
+    for record in evidence:
+        ident, key = record["id"], record["key"]
         linked = [group for group in groups if ident in group[0] or key in group[1]]
         ids, keys, members = {ident}, {key}, [record]
         for group in linked:
@@ -200,14 +243,19 @@ def _incremental_observations(records: list[dict]) -> tuple[list[dict], list[str
         groups.append((ids, keys, members))
     withheld = set()
     for ids, _, members in groups:
-        urls = {_observation_url(row) for row in members} - {None}
+        urls = {tuple(row["url"]) for row in members if row["url"] is not None}
         if len(urls) <= 1:
             continue
-        grants = [record_grants_ids(row) for row in members]
+        # A later verified official mapping can add proof for an older resource
+        # without deleting that original unresolved witness from history.
+        grants = [{ident for row in members if row["url"] is not None and tuple(row["url"]) == url
+                   for ident in row["grants"]} for url in urls]
         exact_grants_alias = all(len(proof) == 1 for proof in grants) and len(set.union(*grants)) == 1
-        numbers = {_norm_number(row.get("opportunity_number")) for row in members}
+        numbers = {row["number"] for row in members}
         stable_number_and_title = (len(numbers) == 1 and bool(next(iter(numbers)))
-                                   and len({_canonical_title(row) for row in members}) == 1)
+                                   and len({row["title"] for row in members}) == 1
+                                   and bool(members[0]["title"])
+                                   and len(set.union(*grants)) <= 1)
         if not exact_grants_alias and not stable_number_and_title:
             withheld.update(ids)
     selected = _latest_observations([row for row in records if row.get("opportunity_id") not in withheld])
@@ -311,9 +359,11 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
         partial = bool((result.diagnostics or {}).get("partial_failure") and verified_prefixes
             and all(any(str(record.get("opportunity_id") or "").startswith(prefix) for prefix in verified_prefixes)
                     for record in result.records))
+        incremental = result.snapshot_complete is False
+        witnesses = (_identity_history(sources.get(slug) or {}, result.records if result.ok or partial else [])
+                     if incremental else None)
         if result.ok or partial:
-            incremental = result.snapshot_complete is False
-            fresh, collisions = _incremental_observations(result.records) if incremental else (result.records, [])
+            fresh, collisions = _incremental_observations(result.records, witnesses) if incremental else (result.records, [])
             kept, dropped = filter_publishable(fresh, as_of)
             carried = []
             terminal_observations = []
@@ -330,7 +380,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     if record_is_current(r, as_of)[1] in TERMINAL_REASONS
                     and record_is_publishable(r, as_of)[1] in {"ok", "expired"}]
                 health_count = len(kept) + len(terminal_observations)
-                carried = _unobserved_current(sources, result, as_of)
+                carried = _unobserved_current(sources, result, as_of, witnesses)
                 if result.max_records is not None and max(len(result.records), len(kept) + len(carried)) > result.max_records:
                     # No truncation or partially updated cache on overflow.
                     raise ValueError(f"{slug}: incremental snapshot exceeds maximum records")
@@ -444,7 +494,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
         else:
             if result.retain_on_failure:
                 if result.snapshot_complete is False:
-                    selected, _ = _incremental_observations((sources.get(slug) or {}).get("records") or [])
+                    selected, _ = _incremental_observations((sources.get(slug) or {}).get("records") or [], witnesses)
                     published, _ = filter_publishable(selected, as_of)
                     published = [r for r in published if record_is_current(r, as_of)[0]]
                 else:
@@ -491,6 +541,13 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 **evidence,
                 **({"snapshot_complete": False} if result.snapshot_complete is False else {}),
             })
+        if incremental:
+            # Current records are replaceable, but evidence of source identity
+            # must survive terminal observations, quarantine and failed scans.
+            # This does not assert that an old notice is still open or fresh.
+            sources.setdefault(slug, {"source": result.display_name,
+                "source_type": result.source_type, "fetched_at": None,
+                "record_count": 0, "records": []})["identity_witnesses"] = witnesses
         live.extend(published)
 
     return live, cache, summaries

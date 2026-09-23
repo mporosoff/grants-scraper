@@ -2,6 +2,7 @@
 import copy
 from datetime import date
 import unittest
+from unittest.mock import patch
 
 from scripts.build_changes import diff_catalogs
 from scripts.sources.adapters.vpr_email import VPREmailAdapter
@@ -171,6 +172,84 @@ class WindowLifecycle(unittest.TestCase):
             self.assertEqual(live, [])
             live, _, _ = resolve_live_records([observed(row("other"))], cache(old, latest), DAY)
             self.assertEqual([r["opportunity_id"] for r in live], ["vpr-email:other"])
+
+    def test_cached_identity_precedes_fresh_supersession_and_terminal_feed(self):
+        old = row("same", title="Shared foundation")
+        baseline = rebuild_catalog({}, [old], [], [])
+        for state in ("posted", "withdrawn", "closed"):
+            conflict = dict(old, detail_page="https://sponsor.example/different-program", status=state)
+            live, saved, life = resolve_live_records([observed(conflict)], cache(old), DAY)
+            self.assertEqual(live, [])
+            self.assertEqual(life[0]["identity_collision_ids"], [old["opportunity_id"]])
+            self.assertEqual(life[0]["observed_terminal_records"], [])
+            actual = rebuild_catalog(baseline, live, [], life)
+            self.assertFalse(any(e["type"] == "closed_or_removed" for e in diff_catalogs(baseline, actual, as_of=DAY)))
+            self.assertEqual(len(saved["sources"]["vpr-email"]["identity_witnesses"]["observations"]), 2)
+
+    def test_collision_witnesses_survive_rotation_failures_and_no_fallback(self):
+        old = row("same")
+        conflict = dict(old, detail_page="https://sponsor.example/other-program")
+        for retain in (True, False):
+            live, saved, _ = resolve_live_records([observed(old, conflict)], cache(), DAY)
+            self.assertEqual(live, [])
+            witness = copy.deepcopy(saved["sources"]["vpr-email"]["identity_witnesses"])
+            failure = observed(); failure.ok = False; failure.retain_on_failure = retain
+            live, saved, _ = resolve_live_records([failure], saved, DAY)
+            self.assertEqual(live, [])
+            self.assertEqual(saved["sources"]["vpr-email"]["identity_witnesses"], witness)
+            for fresh in (conflict, old, dict(conflict, status="withdrawn")):
+                live, saved, life = resolve_live_records([observed(fresh)], saved, DAY)
+                self.assertEqual(live, [])
+                self.assertEqual(life[0]["identity_collision_ids"], [old["opportunity_id"]])
+                self.assertEqual(saved["sources"]["vpr-email"]["identity_witnesses"], witness)
+
+    def test_terminal_clear_keeps_identity_but_allows_same_program_reopening(self):
+        old = row("same")
+        live, saved, _ = resolve_live_records([observed(dict(old, status="withdrawn"))], cache(old), DAY)
+        self.assertEqual(live, [])
+        self.assertEqual(saved["sources"]["vpr-email"]["records"], [])
+        reopened, _, _ = resolve_live_records([observed(old)], copy.deepcopy(saved), DAY)
+        self.assertEqual(len(reopened), 1)
+        conflict = dict(old, detail_page="https://sponsor.example/another-program")
+        live, _, life = resolve_live_records([observed(conflict)], saved, DAY)
+        self.assertEqual(live, [])
+        self.assertEqual(life[0]["identity_collision_ids"], [old["opportunity_id"]])
+
+    def test_verified_official_alias_can_resolve_retained_ambiguity(self):
+        url = "https://simpler.grants.gov/opportunity/12345678-1234-1234-1234-123456789abc"
+        old = row("same", detail_page=url, funding_opportunity_url=url)
+        official = "https://www.grants.gov/search-results-detail/123456"
+        linked = dict(old, detail_page=official, funding_opportunity_url=official)
+        live, saved, _ = resolve_live_records([observed(linked)], cache(old), DAY)
+        self.assertEqual(live, [])
+        # A retained source receipt proves the earlier URL's exact official ID.
+        mapped = dict(old, official_identity={"version": 1, "source_url": url,
+            "target_url": official, "utf8_sha256": "a" * 64,
+            "retrieved_at": "2026-09-23T12:00:00Z",
+            "locator": "View on Grants.gov / version-history anchor"})
+        live, saved, life = resolve_live_records([observed(mapped, linked)], saved, DAY)
+        self.assertEqual(len(live), 1)
+        self.assertEqual(life[0]["identity_collision_ids"], [])
+        self.assertEqual(len(saved["sources"]["vpr-email"]["identity_witnesses"]["observations"]), 3)
+        later, _, _ = resolve_live_records([observed(linked)], saved, DAY)
+        self.assertEqual(len(later), 1)
+
+    def test_contradictory_official_ids_are_not_resolved_by_number_and_title(self):
+        old = row("same", opportunity_number="EX-26-001", agency="Example agency", agency_authority="source_listed",
+            detail_page="https://www.grants.gov/search-results-detail/123456", funding_opportunity_url=None)
+        conflict = dict(old, detail_page="https://www.grants.gov/search-results-detail/654321")
+        live, _, _ = resolve_live_records([observed(conflict)], cache(old), DAY)
+        self.assertEqual(live, [])
+
+    def test_witness_capacity_and_malformed_history_fail_before_cache_mutation(self):
+        for saved in (cache(row("old")), cache()):
+            if not saved["sources"]["vpr-email"]["records"]:
+                saved["sources"]["vpr-email"]["identity_witnesses"] = {"version": True, "observations": []}
+            original = copy.deepcopy(saved)
+            with patch("scripts.sources.merge.IDENTITY_WITNESS_LIMIT", 1):
+                with self.assertRaisesRegex(ValueError, "identity witness"):
+                    resolve_live_records([observed(row("new"))], saved, DAY)
+            self.assertEqual(saved, original)
 
     def test_invalid_only_window_durably_suppresses_without_false_refresh(self):
         old = row("same")
