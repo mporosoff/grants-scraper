@@ -19,9 +19,10 @@ def send(path,value):
     if not secret:raise ConfigurationFailure('contextual_workflow_authentication_missing')
     from tools.contextual_team_iteration2_policy import plan
     from tools.contextual_team_iteration3_policy import plan as iteration3_plan
+    from tools.contextual_team_iteration3_continuation_policy import plan as continuation_plan
     headers={'Authorization':'Bearer '+secret,'User-Agent':'FundingFinder-ContextualValidation/1.0'}
     payload={'json':value}
-    i3=value.get('release_id')==iteration3_plan()['release_id']
+    i3=value.get('release_id') in (iteration3_plan()['release_id'],continuation_plan()['release_id'])
     if value.get('release_id')==plan()['release_id'] or i3:
         # Bound the exact UTF-8 envelope, not just its graph. Retained scientific
         # bytes are sent unchanged; requests' ASCII escaping cannot inflate it.
@@ -65,12 +66,16 @@ def main():
         # dispatching again. Historical acknowledged holds do not create a new
         # uncertainty; any new inference or native-count uncertainty keeps it.
         from tools import contextual_team_iteration3_policy as iteration3
-        if job['release_id']!=iteration3.plan()['release_id']:
+        from tools import contextual_team_iteration3_continuation_policy as continuation
+        if job['release_id'] not in (iteration3.plan()['release_id'],continuation.plan()['release_id']):
             raise ValueError('contextual_intermediate_result_release')
         ledger=json.loads((args.state/'ledger.json').read_bytes())
         state='failed'
         try:
-            iteration3.history(ledger);iteration3.check_counts(args.state)
+            if job['release_id']==continuation.plan()['release_id']:
+                continuation.history(ledger);continuation.counts(args.state)
+            else:
+                iteration3.history(ledger);iteration3.check_counts(args.state)
         except (Deferred,ValueError,KeyError,TypeError,OSError):
             state='recovery_required'
         value=stamp|{'result':{'scope_id':job['scope_id'],'state':state,

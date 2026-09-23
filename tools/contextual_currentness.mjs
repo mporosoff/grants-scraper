@@ -8,9 +8,11 @@ const phase2=JSON.parse(fs.readFileSync('config/contextual_team/phase2-v1.json',
 const latency=JSON.parse(fs.readFileSync('config/contextual_team/requirements-latency-v2.json','utf8'));
 const iteration2=JSON.parse(fs.readFileSync('config/contextual_team/iteration2-authority-v1.json','utf8'));
 const iteration3=JSON.parse(fs.readFileSync('config/contextual_team/iteration3-authority-v1.json','utf8'));
-const sources=job.release_id===iteration3.release_id?JSON.parse(fs.readFileSync('config/contextual_team/iteration3-source-inputs-v1.json','utf8')):job.release_id===iteration2.release_id?JSON.parse(fs.readFileSync('config/contextual_team/iteration2-source-inputs-v1.json','utf8')):[phase2.release_id,latency.release_id].includes(job.release_id)?JSON.parse(fs.readFileSync('config/contextual_team/phase2-source-inputs-v2.json','utf8')):inputs;
+const continuation=JSON.parse(fs.readFileSync('config/contextual_team/iteration3-continuation-v1.json','utf8'));
+const sources=[iteration3.release_id,continuation.release_id].includes(job.release_id)?JSON.parse(fs.readFileSync('config/contextual_team/iteration3-source-inputs-v1.json','utf8')):job.release_id===iteration2.release_id?JSON.parse(fs.readFileSync('config/contextual_team/iteration2-source-inputs-v1.json','utf8')):[phase2.release_id,latency.release_id].includes(job.release_id)?JSON.parse(fs.readFileSync('config/contextual_team/phase2-source-inputs-v2.json','utf8')):inputs;
 const scope=sources.scopes.find(s=>s.id===job.scope_id);
-if(!scope||![inputs.snapshot_id,option1.release_id,phase2.release_id,latency.release_id,iteration2.release_id,iteration3.release_id].includes(job.release_id))throw Error('contextual_job_not_in_snapshot');
+if(!scope||![inputs.snapshot_id,option1.release_id,phase2.release_id,latency.release_id,iteration2.release_id,iteration3.release_id,continuation.release_id].includes(job.release_id))throw Error('contextual_job_not_in_snapshot');
+if(job.release_id===continuation.release_id&&(job.person_id||scope.id!=='363268'||scope.state!=='unassessed'||scope.action_current!==true))throw Error('iteration3_only_exact_ai_continuation');
 if(job.release_id===iteration3.release_id&&(job.person_id||scope.state!=='unassessed'||scope.action_current!==true))throw Error('iteration3_only_named_corrective_build');
 if(job.release_id===iteration2.release_id&&(job.person_id||scope.state!=='unassessed'||scope.action_current!==true))throw Error('iteration2_only_actionable_development_build');
 if(job.release_id===latency.release_id&&(job.person_id||job.scope_id!==latency.workflow_scope))throw Error('latency_only_named_doe_workflow');

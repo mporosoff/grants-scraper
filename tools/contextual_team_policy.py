@@ -23,6 +23,9 @@ def inputs():
 
 
 def check_reservation(state,provider,metadata,amount,input_tokens,output_tokens):
+    if metadata.get('purpose','').startswith('cb-fc-i3c-'):
+        from tools.contextual_team_iteration3_continuation_policy import check_reservation as continuation_check
+        return continuation_check(state,provider,metadata,amount,input_tokens,output_tokens)
     if metadata.get('purpose','').startswith('cb-fc-i3-'):
         from tools.contextual_team_iteration3_policy import check_reservation as iteration3_check
         return iteration3_check(state,provider,metadata,amount,input_tokens,output_tokens)
