@@ -191,7 +191,7 @@ def _identity_witness(record):
             "title": _canonical_title(record), "grants": sorted(record_grants_ids(record))}
 
 
-def _identity_history(snapshot, fresh):
+def _identity_history(snapshot, fresh, proofs=None):
     """Keep bounded identity witnesses even when live/terminal records disappear.
 
     These are identity observations, not currentness or freshness assertions.
@@ -218,9 +218,42 @@ def _identity_history(snapshot, fresh):
             raise ValueError("Invalid incremental identity witness fields")
         identity = json.dumps(witness, sort_keys=True, separators=(",", ":"))
         unique[identity] = witness
+        # Historical witnesses may outlive every live row. An independently
+        # validated cached mapping can resolve that URL without erasing the
+        # original witness or asserting a new source observation.
+        proxy = _witness_proxy(witness)
+        if proxy is not None:
+            from .official_identity import record_grants_ids, resolve
+            resolve([proxy], proofs or {}, limit=0)
+            mapped = {**witness, "grants": sorted(set(witness["grants"]) | record_grants_ids(proxy))}
+            unique[json.dumps(mapped, sort_keys=True, separators=(",", ":"))] = mapped
     if len(unique) > IDENTITY_WITNESS_LIMIT:
         raise ValueError("Incremental identity witness capacity exceeded; retained evidence requires review")
     return {"version": 1, "observations": [unique[key] for key in sorted(unique)]}
+
+
+def _witness_proxy(witness):
+    from .official_identity import simpler_url
+    url = witness["url"]
+    if (not isinstance(url, list) or len(url) != 4 or url[0] != "simpler.grants.gov"
+            or url[1] is not None or url[3] != ""):
+        return None
+    exact = simpler_url("https://simpler.grants.gov" + url[2])
+    return ({"opportunity_id": witness["id"], "detail_page": exact,
+             "funding_opportunity_url": exact} if exact else None)
+
+
+def _identity_groups(evidence):
+    groups = []
+    for record in evidence:
+        ident, key = record["id"], record["key"]
+        linked = [group for group in groups if ident in group[0] or key in group[1]]
+        ids, keys, members = {ident}, {key}, [record]
+        for group in linked:
+            ids.update(group[0]); keys.update(group[1]); members.extend(group[2])
+            groups.remove(group)
+        groups.append((ids, keys, members))
+    return groups
 
 
 def _incremental_observations(records: list[dict], witnesses=None) -> tuple[list[dict], list[str]]:
@@ -232,17 +265,8 @@ def _incremental_observations(records: list[dict], witnesses=None) -> tuple[list
     No missing item or collision is evidence of an official withdrawal.
     """
     evidence = (witnesses or {}).get("observations", []) + [_identity_witness(r) for r in records]
-    groups = []
-    for record in evidence:
-        ident, key = record["id"], record["key"]
-        linked = [group for group in groups if ident in group[0] or key in group[1]]
-        ids, keys, members = {ident}, {key}, [record]
-        for group in linked:
-            ids.update(group[0]); keys.update(group[1]); members.extend(group[2])
-            groups.remove(group)
-        groups.append((ids, keys, members))
     withheld = set()
-    for ids, _, members in groups:
+    for ids, _, members in _identity_groups(evidence):
         urls = {tuple(row["url"]) for row in members if row["url"] is not None}
         if len(urls) <= 1:
             continue
@@ -337,6 +361,41 @@ def _clear_failed_source(sources: dict, result: AdapterResult) -> None:
     sources[result.slug] = cleared
 
 
+def _verified_partial(result):
+    partitions = (result.diagnostics or {}).get("partitions") or []
+    prefixes = [p.get("id_prefix") for p in partitions if isinstance(p, dict)
+        and p.get("healthy") is True and p.get("status") == "refreshed"
+        and isinstance(p.get("id_prefix"), str) and p["id_prefix"].startswith(result.slug + ":")]
+    return bool((result.diagnostics or {}).get("partial_failure") and prefixes
+        and all(any(str(r.get("opportunity_id") or "").startswith(prefix) for prefix in prefixes)
+                for r in result.records))
+
+
+def _resolve_identity_before_selection(results, cache, as_of, *, allow_fetch=True):
+    """One shared bounded lookup phase, before any identity is quarantined."""
+    from .official_identity import resolve
+    enabled = allow_fetch and os.environ.get("VPR_ENRICH_LINKS", "").casefold() == "true"
+    proofs = cache.setdefault("official_identities", {}) if enabled else cache.get("official_identities", {})
+    observations, historical = [], []
+    for result in results:
+        fresh = result.records if result.ok or _verified_partial(result) else []
+        snapshot = (cache.get("sources") or {}).get(result.slug) or {}
+        retained = [r for r in snapshot.get("records", []) if result.retain_on_failure
+                    and record_is_publishable(r, as_of)[0] and record_is_current(r, as_of)[0]]
+        observations.extend(fresh + retained)
+        if result.snapshot_complete is False:
+            history = _identity_history(snapshot, fresh, proofs)
+            active = [_identity_witness(r) for r in fresh + retained]
+            active_ids = {w["id"] for w in active}; active_keys = {w["key"] for w in active}
+            for ids, keys, members in _identity_groups(history["observations"]):
+                if ids & active_ids or keys & active_keys:
+                    historical.extend(proxy for w in members if (proxy := _witness_proxy(w)) is not None)
+    # Raw/current rows take precedence within the existing 20-GET budget.
+    # limit=0 still applies retained exact receipts when enrichment is disabled.
+    stats = resolve(observations + historical, proofs, limit=20 if enabled else 0)
+    return {"enabled": enabled, **stats}
+
+
 def resolve_live_records(results: list[AdapterResult], cache: dict,
                          as_of: date) -> tuple[list[dict], dict, list[dict]]:
     """Return ``(records_to_publish, updated_cache, per_source_summaries)``.
@@ -352,15 +411,10 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
 
     for result in results:
         slug = result.slug
-        partitions = (result.diagnostics or {}).get("partitions") or []
-        verified_prefixes = [part.get("id_prefix") for part in partitions
-            if isinstance(part, dict) and part.get("healthy") is True and part.get("status") == "refreshed"
-            and isinstance(part.get("id_prefix"), str) and part["id_prefix"].startswith(slug + ":")]
-        partial = bool((result.diagnostics or {}).get("partial_failure") and verified_prefixes
-            and all(any(str(record.get("opportunity_id") or "").startswith(prefix) for prefix in verified_prefixes)
-                    for record in result.records))
+        partial = _verified_partial(result)
         incremental = result.snapshot_complete is False
-        witnesses = (_identity_history(sources.get(slug) or {}, result.records if result.ok or partial else [])
+        witnesses = (_identity_history(sources.get(slug) or {}, result.records if result.ok or partial else [],
+                                      cache.get("official_identities"))
                      if incremental else None)
         if result.ok or partial:
             fresh, collisions = _incremental_observations(result.records, witnesses) if incremental else (result.records, [])
@@ -752,11 +806,8 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         include_disabled=include_disabled,
         context={"catalog_records": base, "as_of": as_of, "intake_path": intake_path},
     )
+    identity_stats = _resolve_identity_before_selection(results, cache, as_of)
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
-    identity_stats = {'enabled': False}
-    if os.environ.get('VPR_ENRICH_LINKS', '').casefold() == 'true':
-        from .official_identity import resolve
-        identity_stats = {'enabled': True, **resolve(external, cache.setdefault('official_identities', {}))}
     combined, stats = merge_records(base, external)
     # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with
     # program-area topics/terms so topical searches surface them.
