@@ -39,6 +39,51 @@ def registry_fixture():
 
 
 class AuditedRegistryStageTests(unittest.TestCase):
+    def timestamp_fixture(self, location, timestamp):
+        value = registry_fixture()
+        person = value['researchers'][0]
+        records = person['summary_evidence'] if location == 'summary' else person['claims'][0]['evidence_records']
+        records[0]['retrieved_at'] = timestamp
+        for claim in person['claims']:
+            claim['material_hash'] = audited.material_claim_hash(claim)
+        value['registry_generation'] = legacy.registry_generation(value)
+        return value
+
+    def test_complete_timezone_timestamps_keep_exact_evidence_and_registry_identity(self):
+        for location in ('summary', 'claim'):
+            for timestamp in ('2026-09-22T12:00:00Z', '2026-09-22T12:00:00+00:00',
+                              '2026-09-22T12:00:00.123456+05:30', '2024-02-29T23:59:59.1-04:00'):
+                with self.subTest(location=location, timestamp=timestamp):
+                    value = self.timestamp_fixture(location, timestamp)
+                    original = legacy.canonical_bytes(value)
+                    self.assertIs(audited.validate(value), value)
+                    directory = audited.directory(value)['researchers'][0]
+                    faculty = audited.faculty(value)[0]
+                    profile = audited.matching_profiles(value)[0]
+                    if location == 'summary':
+                        records = [target['summary_evidence'] for target in (directory, faculty, profile)]
+                    else:
+                        records = [directory['claims'][0]['evidence_records'],
+                                   faculty['terms'][0]['evidence_records'], profile['claims'][0]['evidence_records']]
+                    self.assertTrue(all(record[0]['retrieved_at'] == timestamp for record in records))
+                    self.assertEqual(legacy.canonical_bytes(value), original)
+
+    def test_invalid_retrieval_timestamps_reject_even_with_correct_material_and_generation_hashes(self):
+        invalid = ('2026-99-99Tbroken', '2026-02-29T12:00:00Z', '2026-04-31T12:00:00Z',
+                   '2026-09-22T24:00:00Z', '2026-09-22T12:60:00Z', '2026-09-22T12:00:60Z',
+                   '2026-09-22T12:00:00+24:00', '2026-09-22T12:00:00+01:60',
+                   '2026-09-22T12:00:00Ztrailing', '2026-09-22T12:00:00Z\n',
+                   '2026-09-22T12:00:00', '2026-09-22T', '', None, 20260922)
+        for location in ('summary', 'claim'):
+            for timestamp in invalid:
+                with self.subTest(location=location, timestamp=timestamp):
+                    value = self.timestamp_fixture(location, timestamp)
+                    original = legacy.canonical_bytes(value)
+                    for operation in (audited.validate, audited.directory, audited.faculty, audited.matching_profiles):
+                        with self.assertRaisesRegex(ValueError, 'invalid retrieval timestamp'):
+                            operation(value)
+                    self.assertEqual(legacy.canonical_bytes(value), original)
+
     def test_audited_hash_accepts_original_identity_and_leaves_input_untouched(self):
         value = registry_fixture()
         before = copy.deepcopy(value)

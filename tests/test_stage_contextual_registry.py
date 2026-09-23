@@ -23,6 +23,30 @@ if WINDOWS_NODE.is_file(): NODE = str(WINDOWS_NODE)
 
 
 class StageModelTests(unittest.TestCase):
+    def test_invalid_pinned_evidence_fails_before_output_or_package_work(self):
+        with tempfile.TemporaryDirectory() as folder:
+            base = Path(folder)
+            for location in ('summary', 'claim'):
+                with self.subTest(location=location):
+                    registry = registry_fixture()
+                    person = registry['researchers'][0]
+                    records = person['summary_evidence'] if location == 'summary' else person['claims'][0]['evidence_records']
+                    records[0]['retrieved_at'] = '2026-09-22T12:00:00Ztrailing'
+                    for claim in person['claims']:
+                        claim['material_hash'] = audited.material_claim_hash(claim)
+                    registry['registry_generation'] = legacy.registry_generation(registry)
+                    source = base/(location + '.json')
+                    stage._write(source, registry)
+                    original = source.read_bytes()
+                    output = base/('output-' + location)
+                    with patch.object(stage, '_node', side_effect=AssertionError('No package validation')), \
+                            patch.object(stage, '_forward', side_effect=AssertionError('No matching')):
+                        with self.assertRaisesRegex(ValueError, 'invalid retrieval timestamp'):
+                            stage.assemble(base/'public', source, stage.digest(original), 'a' * 64,
+                                           'b' * 64, output, '2026-09-22')
+                    self.assertEqual(source.read_bytes(), original)
+                    self.assertFalse(output.exists())
+
     def test_unavailable_model_preserves_all_original_scientific_fields(self):
         registry = registry_fixture()
         model = {'opportunities': [{'id': 'scope-1', 'review_state': 'proposed',

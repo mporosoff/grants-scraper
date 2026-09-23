@@ -5,6 +5,7 @@ No editing, migration, team restoration, publication, or provider entry point ex
 """
 from collections import Counter
 import copy
+from datetime import datetime
 import re
 
 from scripts import researcher_registry as legacy
@@ -38,8 +39,15 @@ def _evidence_records(records, label):
         legacy._require_text(record.get('locator'), label, 500)
         if not legacy._valid_date(str(record.get('reviewed_on') or '')):
             raise ValueError(f'{label} has an invalid review date')
-        if not re.match(r'^\d{4}-\d{2}-\d{2}T', str(record.get('retrieved_at') or '')):
-            raise ValueError(f'{label} has an invalid retrieval timestamp')
+        retrieved_at = record.get('retrieved_at')
+        try:
+            if not isinstance(retrieved_at, str) or not re.fullmatch(
+                    r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'
+                    r'(?:\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-5][0-9])', retrieved_at):
+                raise ValueError
+            datetime.fromisoformat(retrieved_at)
+        except ValueError:
+            raise ValueError(f'{label} has an invalid retrieval timestamp') from None
 
 
 def validate(registry):
