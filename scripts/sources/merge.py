@@ -2,9 +2,12 @@
 
 Design (addresses the source-lifecycle and currentness audit findings):
 
-- **Atomic per-source replace.** Each source's published records are replaced
+- **Atomic per-source replace.** Complete source snapshots are replaced
   wholesale on a successful refresh, so a changed deadline or a removed
   opportunity is reflected -- not left stale next to an old copy.
+- **Bounded observations.** Incremental mailbox windows retain current records
+  outside the window. Fresh observations supersede old records; absence alone
+  never verifies removal, and carried evidence keeps its actual last-seen date.
 - **Configurable failure policy.** A committed snapshot cache
   (``data/source_records.json``) holds each source's last successful records.
   Most sources republish that snapshot when a refresh fails. Sources whose
@@ -43,9 +46,10 @@ from scripts.build_catalog import (
     write_catalog,
 )
 from .registry import REGISTRY, AdapterResult, collect
-from .validate import filter_publishable, within_health_bounds
+from .validate import filter_publishable, record_is_publishable, within_health_bounds
 from .discoverability import augment_records
 from scripts.source_documents import merge_duplicate_evidence
+from scripts.currentness import record_is_current
 
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/source_records.json")
@@ -57,6 +61,7 @@ OPERATIONAL_SOURCE_EVIDENCE_KEYS = {
     "retained_data_age_days",
     "publication_decision",
 }
+TERMINAL_REASONS = {"expired", "closed", "archived", "cancelled", "canceled", "withdrawn"}
 
 
 # --------------------------------------------------------------------------
@@ -115,6 +120,31 @@ def _cached_publishable(sources: dict, slug: str, as_of: date) -> list[dict]:
     records = (sources.get(slug) or {}).get("records") or []
     kept, _ = filter_publishable(records, as_of)
     return kept
+
+
+def _unobserved_current(sources: dict, result: AdapterResult, as_of: date) -> list[dict]:
+    """Carry only current records that no fresh observation supersedes.
+
+    Check every observed identity before filtering. An expired, withdrawn or
+    invalid replacement must never resurrect the previously open record.
+    """
+    observed_ids = {r.get("opportunity_id") for r in result.records}
+    observed_keys = {record_identity(r) for r in result.records}
+    snapshot = sources.get(result.slug) or {}
+    last_seen = str(snapshot.get("fetched_at") or "")[:10] or None
+    carried = []
+    seen_ids, seen_keys = set(), set()
+    for record in _cached_publishable(sources, result.slug, as_of):
+        ident, key = record.get("opportunity_id"), record_identity(record)
+        if (ident in observed_ids or key in observed_keys or ident in seen_ids
+                or key in seen_keys or not record_is_current(record, as_of)[0]):
+            continue
+        carried.append({**record,
+            "source_last_seen_date": record.get("source_last_seen_date") or last_seen,
+            "source_observation": "retained_outside_window"})
+        seen_ids.add(ident)
+        seen_keys.add(key)
+    return carried
 
 
 def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
@@ -216,8 +246,28 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     for record in result.records))
         if result.ok or partial:
             kept, dropped = filter_publishable(result.records, as_of)
+            incremental = result.snapshot_complete is False
+            carried = []
+            terminal_observations = []
+            health_count = len(kept)
+            if incremental:
+                kept = [r for r in kept if record_is_current(r, as_of)[0]]
+                # A successfully parsed window may contain only newly closed
+                # or expired calls. That is an observation, not parser failure.
+                terminal_observations = [
+                    {**{k: r.get(k) for k in ("opportunity_id", "source", "status", "close_date",
+                                             "deadlines", "last_updated", "version")},
+                     "canonical_identity": record_identity(r)}
+                    for r in result.records
+                    if record_is_current(r, as_of)[1] in TERMINAL_REASONS
+                    and record_is_publishable(r, as_of)[1] in {"ok", "expired"}]
+                health_count = len(kept) + len(terminal_observations)
+                carried = _unobserved_current(sources, result, as_of)
+                if result.max_records is not None and len(kept) + len(carried) > result.max_records:
+                    # No truncation or partially updated cache on overflow.
+                    raise ValueError(f"{slug}: incremental snapshot exceeds maximum records")
             healthy = within_health_bounds(
-                len(kept), result.min_records, result.max_records
+                health_count, result.min_records, result.max_records
             )
             if healthy:
                 previous_snapshot = sources.get(slug) or {}
@@ -238,7 +288,11 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                         or previous_fetch_date
                         or as_of.isoformat()
                     )
+                    if incremental:
+                        refreshed["source_last_seen_date"] = as_of.isoformat()
+                        refreshed["source_observation"] = "observed_in_window"
                     refreshed_records.append(refreshed)
+                refreshed_records.extend(carried)
                 diagnostics = result.diagnostics or {}
                 source_snapshot_at = diagnostics.get("source_snapshot_at")
                 if source_snapshot_at:
@@ -276,7 +330,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     failure_class = _classify_failure(result)
             else:
                 if result.retain_on_failure:
-                    published = _cached_publishable(sources, slug, as_of)
+                    published = carried if incremental else _cached_publishable(sources, slug, as_of)
                     status = "unhealthy_kept_last_good"
                     publication_decision = "published_filtered_last_known_good"
                     retained_data_age_days = _snapshot_age_days(
@@ -304,10 +358,16 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 **evidence,
                 **({"withheld_ids": [r["opportunity_id"] for r in dropped if r["reason"] != "expired"]}
                    if any(r["reason"] != "expired" for r in dropped) else {}),
+                **({"snapshot_complete": False,
+                    "retained_outside_window_ids": [r["opportunity_id"] for r in carried],
+                    "observed_terminal_records": terminal_observations if healthy else []}
+                   if incremental else {}),
             })
         else:
             if result.retain_on_failure:
                 published = _cached_publishable(sources, slug, as_of)
+                if result.snapshot_complete is False:
+                    published = [r for r in published if record_is_current(r, as_of)[0]]
                 snapshot_age = _snapshot_age_days(sources, slug, as_of)
                 recent_snapshot = bool(
                     result.fallback_grace_days > 0
@@ -348,6 +408,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "snapshot_age_days": snapshot_age,
                 "fallback_grace_days": result.fallback_grace_days,
                 **evidence,
+                **({"snapshot_complete": False} if result.snapshot_complete is False else {}),
             })
         live.extend(published)
 
@@ -493,7 +554,8 @@ def rebuild_catalog(catalog: dict, combined: list[dict],
         "adapters": [
             {"slug": r.slug, "source": r.display_name, "source_type": r.source_type,
              "ok": r.ok, "record_count": r.record_count, "error": r.error,
-             "diagnostics": r.diagnostics}
+             "diagnostics": r.diagnostics,
+             **({"snapshot_complete": False} if r.snapshot_complete is False else {})}
             for r in results
         ],
     }

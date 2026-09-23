@@ -368,6 +368,9 @@ class SourceAdapter:
     #: Most sources retain their last good snapshot during a transient failure.
     #: Set False when an unverifiable old record is riskier than an empty source.
     retain_on_failure: bool = True
+    #: A bounded mailbox/feed window observes changes, not every open call.
+    #: Its omissions must not withdraw previously observed current records.
+    snapshot_complete: bool = True
 
     def __init__(self) -> None:
         if not self.slug:

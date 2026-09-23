@@ -901,6 +901,7 @@ class VPREmailAdapter(SourceAdapter):
     enabled = True           # validated against real Cindy (digest) + VPR (single) emails.
     min_records = 1
     max_records = 500
+    snapshot_complete = False  # The 45-day / 200-message window is incremental.
 
     def fetch(self):
         import email
