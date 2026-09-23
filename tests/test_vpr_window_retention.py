@@ -99,6 +99,30 @@ class WindowLifecycle(unittest.TestCase):
         live, _, _ = resolve_live_records([observed(alias)], cache(old), DAY)
         self.assertEqual([r["opportunity_id"] for r in live], [alias["opportunity_id"]])
 
+    def test_newest_cached_version_wins_before_currentness_filtering(self):
+        old = row("same", close_date="2026-09-28", description="Old scope")
+        latest = row("same", close_date="2026-10-20", description="Revised scope")
+        live, _, _ = resolve_live_records([observed(row("other"))], cache(old, latest), DAY)
+        kept = next(r for r in live if r["opportunity_id"] == old["opportunity_id"])
+        self.assertEqual(kept["close_date"], latest["close_date"])
+        self.assertEqual(kept["description"], latest["description"])
+        for terminal in (dict(latest, close_date="2026-09-22"), dict(latest, status="withdrawn"),
+                         dict(latest, detail_page=None, funding_opportunity_url=None)):
+            live, _, _ = resolve_live_records([observed(row("other"))], cache(old, terminal), DAY)
+            self.assertEqual([r["opportunity_id"] for r in live], ["vpr-email:other"])
+
+    def test_invalid_only_window_durably_suppresses_without_false_refresh(self):
+        old = row("same")
+        invalid = dict(old, detail_page=None, funding_opportunity_url=None)
+        one, saved, summaries = resolve_live_records([observed(invalid)], cache(old), DAY)
+        self.assertEqual(one, [])
+        self.assertFalse(summaries[0]["healthy"])
+        self.assertEqual(saved["sources"]["vpr-email"]["records"], [])
+        self.assertEqual(saved["sources"]["vpr-email"]["fetched_at"], "2026-09-07T12:00:00Z")
+        self.assertEqual(saved["sources"]["vpr-email"]["last_successful_refresh_at"], "2026-09-07T12:00:00Z")
+        two, _, _ = resolve_live_records([observed(row("other"))], saved, DAY)
+        self.assertEqual([r["opportunity_id"] for r in two], ["vpr-email:other"])
+
     def test_unsafe_old_record_and_invalid_fresh_replacement_are_not_carried(self):
         old = row("same")
         invalid = dict(row("same"), close_date="not-a-date")

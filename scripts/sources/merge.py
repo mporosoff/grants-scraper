@@ -133,18 +133,33 @@ def _unobserved_current(sources: dict, result: AdapterResult, as_of: date) -> li
     snapshot = sources.get(result.slug) or {}
     last_seen = str(snapshot.get("fetched_at") or "")[:10] or None
     carried = []
-    seen_ids, seen_keys = set(), set()
-    for record in _cached_publishable(sources, result.slug, as_of):
+    latest = _latest_observations(snapshot.get("records") or [])
+    publishable, _ = filter_publishable(latest, as_of)
+    for record in publishable:
         ident, key = record.get("opportunity_id"), record_identity(record)
-        if (ident in observed_ids or key in observed_keys or ident in seen_ids
-                or key in seen_keys or not record_is_current(record, as_of)[0]):
+        if (ident in observed_ids or key in observed_keys
+                or not record_is_current(record, as_of)[0]):
             continue
         carried.append({**record,
             "source_last_seen_date": record.get("source_last_seen_date") or last_seen,
             "source_observation": "retained_outside_window"})
-        seen_ids.add(ident)
-        seen_keys.add(key)
     return carried
+
+
+def _latest_observations(records: list[dict]) -> list[dict]:
+    """Mailbox records are ordered oldest first; select before date filtering.
+
+    An expired or invalid latest version still supersedes its older version.
+    Keep selected records in their original order for deterministic merging.
+    """
+    selected, ids, keys = [], set(), set()
+    for record in reversed(records):
+        ident, key = record.get("opportunity_id"), record_identity(record)
+        if ident not in ids and key not in keys:
+            selected.append(record)
+        ids.add(ident)
+        keys.add(key)
+    return list(reversed(selected))
 
 
 def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
@@ -245,8 +260,8 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
             and all(any(str(record.get("opportunity_id") or "").startswith(prefix) for prefix in verified_prefixes)
                     for record in result.records))
         if result.ok or partial:
-            kept, dropped = filter_publishable(result.records, as_of)
             incremental = result.snapshot_complete is False
+            kept, dropped = filter_publishable(result.records, as_of)
             carried = []
             terminal_observations = []
             health_count = len(kept)
@@ -263,7 +278,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     and record_is_publishable(r, as_of)[1] in {"ok", "expired"}]
                 health_count = len(kept) + len(terminal_observations)
                 carried = _unobserved_current(sources, result, as_of)
-                if result.max_records is not None and len(kept) + len(carried) > result.max_records:
+                if result.max_records is not None and max(len(result.records), len(kept) + len(carried)) > result.max_records:
                     # No truncation or partially updated cache on overflow.
                     raise ValueError(f"{slug}: incremental snapshot exceeds maximum records")
             healthy = within_health_bounds(
@@ -331,6 +346,15 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
             else:
                 if result.retain_on_failure:
                     published = carried if incremental else _cached_publishable(sources, slug, as_of)
+                    if incremental:
+                        # A malformed new version is not a verified withdrawal,
+                        # but it durably invalidates the older cached version.
+                        # Preserve the successful-refresh timestamp/provenance.
+                        previous = sources.get(slug) or {}
+                        sources[slug] = {**previous, "records": carried, "record_count": len(carried),
+                            "last_successful_refresh_at": _last_successful_refresh_at(sources, slug),
+                            "last_successful_record_count": previous.get("last_successful_record_count",
+                                previous.get("record_count", len(previous.get("records") or [])))}
                     status = "unhealthy_kept_last_good"
                     publication_decision = "published_filtered_last_known_good"
                     retained_data_age_days = _snapshot_age_days(
