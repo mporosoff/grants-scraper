@@ -9,7 +9,7 @@
   const credentials = globalThis.FUNDING_CREDENTIALS;
   const ai = globalThis.FUNDING_AI;
   if (!core || !awardProduct || !api || !credentials || !$(`institutional-intelligence`)) return;
-  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=65b8850c23e5fdf1c9ef9233faf1caa3ba831bc62f27614cb9a543c6ea26a9ee", document.baseURI).href;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=89310471a9763f436970df0b7e8fb934890d4de26e5206a1494c8550f597a6bd", document.baseURI).href;
 
   const state = {
     opportunity: "",
@@ -53,6 +53,7 @@
     historyEntrySequence: 0,
     historyViewCache: new Map(),
   };
+  const selectedSnapshotRequests = new Map();
   let dodBrowserModulePromise = null;
 
   function dodBrowserModule() {
@@ -877,6 +878,30 @@
       : null;
   }
 
+  function rememberSelectedSnapshot(searchState, snapshot) {
+    if (!searchState?.opportunity) return;
+    core.validateSelectedSnapshot(searchState, snapshot);
+    if (!/^[a-f0-9]{64}$/.test(snapshot?.snapshot_id || "")) throw new Error("The saved results have an invalid snapshot identity.");
+    selectedSnapshotRequests.delete(snapshot.snapshot_id);
+    selectedSnapshotRequests.set(snapshot.snapshot_id, JSON.parse(JSON.stringify(snapshot.request)));
+    if (selectedSnapshotRequests.size > 20) selectedSnapshotRequests.delete(selectedSnapshotRequests.keys().next().value);
+  }
+
+  function selectedSnapshotPage(searchState, payload, snapshotId) {
+    if (!searchState?.opportunity) return payload;
+    if (payload?.snapshot_id !== snapshotId) throw new Error("These saved results do not match the requested snapshot.");
+    // The Pages-first rollout can still reach the prior Worker. Only an exact
+    // request already validated for this immutable snapshot can fill its absent
+    // page metadata; a present but mismatched request must always be rejected.
+    if (!Object.prototype.hasOwnProperty.call(payload, "request")) {
+      const request = selectedSnapshotRequests.get(snapshotId);
+      if (!request) throw new Error("These saved results have no verified opportunity scope. Run Search again to verify this selected opportunity and its filters.");
+      payload = { ...payload, request };
+    }
+    rememberSelectedSnapshot(searchState, payload);
+    return payload;
+  }
+
   async function requestSnapshotPage({ snapshotId, page, pageSize, facet, sort = state.sort, controller = state.controller, clientOverlay = state.clientSnapshotOverlay, searchState = state.submitted || formState() }) {
     if (String(snapshotId || "").startsWith("local-dod-")) {
       const dod = await dodBrowserModule();
@@ -897,14 +922,14 @@
       Object.defineProperty(payload, "__localSnapshot", { value: snapshot });
       return payload;
     }
-    const payload = await postJson(api.snapshotPageUrl, {
+    let payload = await postJson(api.snapshotPageUrl, {
       snapshot_id: snapshotId,
       page,
       page_size: pageSize,
       sort,
       facet: { type: facet.type, key: facet.key },
     }, controller);
-    core.validateSelectedSnapshot(searchState, payload);
+    payload = selectedSnapshotPage(searchState, payload, snapshotId);
     const matchingOverlay = clientOverlay?.snapshotId === snapshotId ? clientOverlay : null;
     const overlay = matchingOverlay || restoredClientSnapshotOverlay(payload, snapshotId);
     const integrated = applyClientSnapshotOverlay(payload, overlay);
@@ -1054,7 +1079,7 @@
   async function preparedSnapshotSearch({ request, submitted, pageSize, questionState = null, controller = state.controller }) {
     if (!request.sources.includes("DOD")) {
       const snapshot = await postJson(api.snapshotUrl, { sources: request.sources, criteria: request.criteria }, controller);
-      core.validateSelectedSnapshot(submitted, snapshot);
+      rememberSelectedSnapshot(submitted, snapshot);
       const pagePayload = await requestSnapshotPage({
         snapshotId: snapshot.snapshot_id,
         page: 1,
@@ -1297,6 +1322,7 @@
 
   async function stagedSourceRetry(source, snapshotId, pageSize, submitted, clientOverlay = state.clientSnapshotOverlay) {
     const rawSnapshot = await postJson(api.snapshotRetryUrl, { snapshot_id: snapshotId, source });
+    rememberSelectedSnapshot(submitted, rawSnapshot);
     const successorOverlay = clientOverlay?.snapshotId === snapshotId
       ? { ...clientOverlay, snapshotId: rawSnapshot.snapshot_id }
       : null;
@@ -1307,6 +1333,7 @@
       pageSize,
       facet: { type: "all", key: "" },
       clientOverlay: successorOverlay,
+      searchState: submitted,
     });
     return {
       snapshot,
@@ -1950,6 +1977,7 @@
 
   function resetResultState() {
     globalThis.PublicTools?.resetAwardViews();
+    for (const id of ["ii-output", "ii-source-status", "ii-question-plan", "ii-question-answer", "ii-pagination", "ii-card-pagination"]) $(id).classList.add("hidden");
     state.snapshot = null;
     state.localSnapshot = null;
     state.clientSnapshotOverlay = null;

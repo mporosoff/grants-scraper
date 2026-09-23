@@ -99,7 +99,7 @@ class Element {
   contains() { return false; }
 }
 
-async function browser(search = "?opportunity=362061", { wrongCachedRequest = false } = {}) {
+async function browser(search = "?opportunity=362061", { wrongCachedRequest = false, legacyPages = false, wrongPageId = false, savedSnapshots = [] } = {}) {
   const elements = new Map();
   const node = id => { if (!elements.has(id)) elements.set(id, new Element(id)); return elements.get(id); };
   const events = new Map();
@@ -111,7 +111,7 @@ async function browser(search = "?opportunity=362061", { wrongCachedRequest = fa
     replaceState(value, _title, url) { this.state = value; update(url); },
     pushState(value, _title, url) { historyEntries.push(location.href); this.state = value; update(url); },
   };
-  const calls = []; const snapshots = new Map();
+  const calls = []; const snapshots = new Map(savedSnapshots);
   const context = vm.createContext({
     URL, URLSearchParams, AbortController, console, setTimeout, clearTimeout, structuredClone,
     location, history, GRANT_CATALOG: { opportunities: records },
@@ -136,7 +136,9 @@ async function browser(search = "?opportunity=362061", { wrongCachedRequest = fa
         const value = snapshots.get(request.snapshot_id);
         if (!value) throw new Error("Unknown synthetic snapshot");
         payload = snapshotPage(value, { page: request.page, pageSize: request.page_size, facet: request.facet, sort: request.sort });
+        if (legacyPages) delete payload.request;
         if (wrongCachedRequest) payload.request = { sources: ["NIH"], criteria: { topic: "unrelated" } };
+        if (wrongPageId) payload.snapshot_id = "f".repeat(64);
       } else throw new Error(`Unexpected route ${url}`);
       return { ok: true, json: async () => payload };
     },
@@ -145,7 +147,7 @@ async function browser(search = "?opportunity=362061", { wrongCachedRequest = fa
   sources.forEach(source => vm.runInContext(source, context));
   const settle = async () => { for (let i = 0; i < 30; i += 1) await new Promise(resolve => setImmediate(resolve)); };
   await settle();
-  return { node, calls, context, historyEntries, settle, async navigate(url) { update(url); for (const fn of events.get("popstate") || []) await fn({ state: history.state }); await settle(); } };
+  return { node, calls, context, historyEntries, snapshots, settle, async navigate(url) { update(url); for (const fn of events.get("popstate") || []) await fn({ state: history.state }); await settle(); } };
 }
 
 test("actual loaded controllers keep selected context through institution submit, history and explicit clearing", async () => {
@@ -195,4 +197,39 @@ test("actual snapshot response with another scope is not rendered under the sele
   assert.match(app.node("ii-status").textContent, /do not match/);
   assert.equal(app.node("ii-output").classList.contains("hidden"), true);
   assert.equal(app.calls.filter(c => c.url.endsWith("/snapshots")).length, 1);
+});
+
+test("Pages-first and Worker rollback pages reuse only exact validated session metadata", async () => {
+  const app = await browser("?opportunity=362061", { legacyPages: true });
+  assert.equal(app.node("ii-status").classList.contains("error-text"), false, app.node("ii-status").textContent);
+  const initial = app.context.location.href;
+  app.node("ii-institution").value = "Test University";
+  await app.node("ii-form").fire("submit"); await app.settle();
+  const scoped = app.context.location.href;
+  await app.navigate(initial); await app.navigate(scoped);
+  assert.equal(app.node("ii-status").classList.contains("error-text"), false, app.node("ii-status").textContent);
+  assert.equal(app.calls.filter(c => c.url.endsWith("/snapshots")).length, 2, "history introduces no new searches");
+  const unproved = await browser(new URL(scoped).search, { legacyPages: true, savedSnapshots: app.snapshots });
+  assert.match(unproved.node("ii-status").textContent, /Run Search again/);
+  assert.equal(unproved.node("ii-output").classList.contains("hidden"), true);
+  assert.equal(unproved.calls.filter(c => c.url.endsWith("/snapshots")).length, 0, "a bookmarked legacy page is not silently regenerated");
+  for (const options of [{ wrongPageId: true }, { wrongPageId: true, legacyPages: true }, { wrongCachedRequest: true, legacyPages: true }]) {
+    const bad = await browser("?opportunity=362061", options);
+    assert.match(bad.node("ii-status").textContent, /do not match/);
+    assert.equal(bad.node("ii-output").classList.contains("hidden"), true);
+  }
+});
+
+test("old scope-proof eviction stays bounded and cannot broaden later history results", async () => {
+  const app = await browser("?opportunity=362061", { legacyPages: true });
+  const original = app.context.location.href;
+  for (let index = 0; index < 20; index += 1) {
+    app.node("ii-topic").value = `Synthetic topic ${index}`;
+    await app.node("ii-form").fire("submit"); await app.settle();
+  }
+  const creations = app.calls.filter(c => c.url.endsWith("/snapshots")).length;
+  await app.navigate(original);
+  assert.match(app.node("ii-status").textContent, /Run Search again/);
+  assert.equal(app.node("ii-output").classList.contains("hidden"), true, "previous results cannot remain under the restored scope");
+  assert.equal(app.calls.filter(c => c.url.endsWith("/snapshots")).length, creations);
 });
