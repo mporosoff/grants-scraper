@@ -150,9 +150,24 @@
     return product.standaloneCriterion({ mode: "program", agency: source, query: value });
   }
 
+  function selectedOpportunityContext(id) {
+    const selectedId = clean(id, 160);
+    if (!selectedId) return null;
+    const record = (globalThis.GRANT_CATALOG?.opportunities || []).find(item =>
+      clean(item.opportunity_id || item.opportunity_number, 160) === selectedId) || null;
+    return { id: selectedId, record, lookup: record ? globalThis.FUNDING_AWARD_LINKS?.lookupForOpportunity(record) || null : null };
+  }
+
   function buildAwardRequest(state, limit = 10) {
     const institution = clean(state?.institution, 300);
-    const agency = clean(state?.agency, 10).toUpperCase();
+    const selected = selectedOpportunityContext(state?.opportunity);
+    if (selected && !selected.lookup) {
+      throw new Error(selected.record
+        ? "This opportunity has no exact historical-award mapping. Clear selection to start a separate award search."
+        : "The selected opportunity is unavailable in this catalog. Return to Funding Finder or clear selection to start a separate award search.");
+    }
+    if (selected && state?.mode === "program_officer") throw new Error("Clear the opportunity selection before opening a separate Program Officer search.");
+    const agency = selected?.lookup?.source || clean(state?.agency, 10).toUpperCase();
     const mode = clean(state?.mode, 40);
     const poSource = clean(state?.program_officer_source || agency, 10).toUpperCase();
     const rawYearStart = state?.year_start;
@@ -197,7 +212,7 @@
     }
     const sources = sourcesForAgency(agency);
     const criteria = {
-      ...programCriterion(agency, state?.program),
+      ...(selected ? selected.lookup.criteria : programCriterion(agency, state?.program)),
     };
     if (institution) criteria.institution = institution;
     const rorId = clean(state?.ror_id, 100);
@@ -222,7 +237,7 @@
     if (yearStart && yearEnd && yearEnd - yearStart + 1 > 50) {
       throw new Error("Choose a year range of 50 years or fewer.");
     }
-    if (!institution && !topic && !pi && !programOfficer && !clean(state?.program, 160)) {
+    if (!selected && !institution && !topic && !pi && !programOfficer && !clean(state?.program, 160)) {
       throw new Error("Enter an institution, topic, program, investigator, or program officer before searching.");
     }
     return {
@@ -231,6 +246,17 @@
       limit: sources.includes("DOE") ? Math.min(10, Math.max(1, Number(limit) || 10)) : Math.min(25, Math.max(1, Number(limit) || 10)),
       offset: Math.max(0, Math.min(1_000, Number(state?.offset) || 0)),
     };
+  }
+
+  function validateSelectedSnapshot(state, snapshot) {
+    if (!clean(state?.opportunity, 160)) return;
+    const expected = buildAwardRequest(state);
+    const actual = snapshot?.request;
+    const canonical = value => JSON.stringify(Object.fromEntries(Object.entries(value || {}).sort(([a], [b]) => a.localeCompare(b))));
+    if (!actual || canonical(actual.sources) !== canonical(expected.sources)
+        || canonical(actual.criteria) !== canonical(expected.criteria)) {
+      throw new Error("These saved results do not match the selected opportunity and filters. Clear the saved-result link and search this opportunity again.");
+    }
   }
 
   function chooseInstitution(query, institutions) {
@@ -895,6 +921,7 @@
       year_preset: yearPreset,
     });
     if (state.pi && params.get("ii_pi_identity") === "1") state.pi_identity = true;
+    if (clean(params.get("opportunity"), 160)) state.opportunity = clean(params.get("opportunity"), 160);
     return state;
   }
 
@@ -902,6 +929,7 @@
     const url = new URL(href, "https://funding-finder.invalid/");
     MANAGED_PARAMS.forEach(key => url.searchParams.delete(key));
     LEGACY_SEARCH_PARAMS.forEach(key => url.searchParams.delete(key));
+    if (clean(state?.opportunity, 160)) url.searchParams.set("opportunity", clean(state.opportunity, 160));
     if (state?.open || clean(state?.institution)) url.searchParams.set("ii", "1");
     if (state?.mode === "program_officer") {
       const source = clean(state.program_officer_source || state.agency, 10).toUpperCase();
@@ -955,6 +983,7 @@
 
   function sanitizeQuestionPlan(plan, currentState, question = "") {
     const agency = clean(plan?.agency, 10).toUpperCase();
+    const selected = selectedOpportunityContext(currentState?.opportunity);
     const questionText = clean(question, 1_000);
     let yearStart = validYear(plan?.year_start) || "";
     let yearEnd = validYear(plan?.year_end) || "";
@@ -975,8 +1004,8 @@
     }
     return {
       ...currentState,
-      agency: SOURCE_NAMES.includes(agency) ? agency : "all",
-      program: clean(plan?.program, 160),
+      agency: selected?.lookup?.source || (SOURCE_NAMES.includes(agency) ? agency : "all"),
+      program: selected ? currentState.program : clean(plan?.program, 160),
       topic: clean(plan?.topic, 500),
       pi: clean(plan?.pi, 160),
       program_officer: clean(plan?.program_officer, 160),
@@ -1025,6 +1054,8 @@
     aggregateAwards,
     awardMatchesInvestigator,
     buildAwardRequest,
+    selectedOpportunityContext,
+    validateSelectedSnapshot,
     chooseInstitution,
     compactPageNumbers,
     deterministicInstitutionAnswer,
