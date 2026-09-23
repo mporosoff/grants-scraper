@@ -249,9 +249,40 @@ class WorkflowContracts(unittest.TestCase):
         self.assertNotIn('API_KEY', text); self.assertNotIn('CLOUDFLARE', text)
         self.assertIn('tools.restore_generation_checkpoint', text)
         uploads = [s['with']['path'] for s in job['steps'] if s.get('uses') == 'actions/upload-artifact@v4']
-        self.assertEqual(uploads, ['${{ runner.temp }}/candidate'])
+        self.assertEqual(uploads, ['${{ runner.temp }}/candidate', '${{ runner.temp }}/catalog-recovery/recovery.json'])
         self.assertIn("needs.catalog-correction.result == 'skipped'", self.jobs['candidate']['if'])
         self.assertIn("needs.catalog-correction.result == 'success'", self.jobs['candidate']['if'])
+
+    def test_all_candidate_producers_preserve_manifested_hidden_files(self):
+        producers = {name: [s for s in job.get('steps', [])
+            if s.get('uses') == 'actions/upload-artifact@v4'
+            and s.get('with', {}).get('path') == '${{ runner.temp }}/candidate']
+            for name, job in self.jobs.items()}
+        producers = {name: steps for name, steps in producers.items() if steps}
+        self.assertEqual(set(producers), {'generate', 'assemble', 'catalog-correction'})
+        for name, steps in producers.items():
+            with self.subTest(producer=name):
+                self.assertEqual(len(steps), 1)
+                self.assertIs(steps[0]['with']['include-hidden-files'], True)
+                self.assertIsNot(steps[0]['with'].get('overwrite'), True)
+
+    def test_exact_recovery_precedes_creation_and_keeps_receipt_separate(self):
+        job = self.jobs['catalog-correction']; steps = job['steps']
+        selected = {s['id']: s for s in steps if s.get('id')}
+        self.assertLess(steps.index(selected['restore']), steps.index(selected['recover']))
+        self.assertLess(steps.index(selected['recover']), steps.index(selected['persist']))
+        self.assertEqual(selected['recover']['if'], "steps.restore.outputs.candidate_id == ''")
+        self.assertEqual(selected['recover']['run'], 'python -m tools.catalog_correction_release recover-candidate '
+            '--bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/catalog-recovery"')
+        self.assertEqual(selected['persist']['if'], "steps.restore.outputs.candidate_id == '' && steps.recover.outputs.candidate_id == ''")
+        self.assertNotIn('continue-on-error', selected['recover'])
+        self.assertEqual(job['outputs']['candidate_id'], '${{ steps.restore.outputs.candidate_id || steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}')
+        uploads = [s for s in steps if s.get('uses') == 'actions/upload-artifact@v4']
+        self.assertEqual(uploads[0]['with']['name'], 'candidate-${{ steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}')
+        self.assertEqual(uploads[0]['if'], "steps.restore.outputs.candidate_id == '' && (steps.recover.outcome == 'success' || steps.persist.outcome == 'success')")
+        self.assertEqual(uploads[1]['with']['name'], 'catalog-candidate-recovery-${{ github.run_id }}-${{ github.run_attempt }}')
+        self.assertEqual(uploads[1]['with']['path'], '${{ runner.temp }}/catalog-recovery/recovery.json')
+        self.assertEqual(uploads[1]['if'], "always() && steps.recover.outcome == 'success'")
 
     def test_fixed_candidate_cannot_execute_either_bare_paid_smoke(self):
         bare = [s for job in self.jobs.values() for s in job.get('steps', []) if s.get('run') == 'node tools/smoke_search_worker.mjs']

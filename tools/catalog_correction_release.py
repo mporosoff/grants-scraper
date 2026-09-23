@@ -487,13 +487,18 @@ def plan():
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('action', choices=('plan', 'create', 'context', 'plan-smoke', 'run-smoke', 'reuse-smoke', 'verify-worker', 'mode'))
+    parser.add_argument('action', choices=('plan', 'create', 'recover-candidate', 'context', 'plan-smoke', 'run-smoke', 'reuse-smoke', 'verify-worker', 'mode'))
     parser.add_argument('--work', type=Path); parser.add_argument('--bundle', type=Path); parser.add_argument('--reports', type=Path)
     parser.add_argument('--name', choices=smoke.NAMES)
     args = parser.parse_args()
     if args.action == 'plan': return plan()
     if args.action == 'mode': return mode(args.bundle)
-    if args.action == 'create': result = create(args.work, args.bundle)
+    if args.action == 'recover-candidate':
+        refresh_environment()
+        from tools.catalog_candidate_recovery import recover
+        result = recover(args.bundle, args.reports)
+        output({'candidate_id': result['candidate_id']})
+    elif args.action == 'create': result = create(args.work, args.bundle)
     elif args.action == 'context': result = context(args.work, args.bundle, args.reports)
     elif args.action == 'plan-smoke': result = plan_smoke(args.name, args.work, args.bundle, args.reports)
     elif args.action == 'run-smoke': result = run_smoke(args.name, args.work, args.reports)

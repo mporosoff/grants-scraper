@@ -585,7 +585,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 25
     outputs:
-      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}
     env:
       GH_TOKEN: ${{ github.token }}
     steps:
@@ -597,18 +597,33 @@ jobs:
       - name: Restore this logical run's exact completed candidate
         id: restore
         run: python -m tools.restore_generation_checkpoint
+      - name: Recover the exact retained candidate without repeating generation
+        id: recover
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.catalog_correction_release recover-candidate
+          --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/catalog-recovery"
       - name: Import the authenticated seven-vector export and retain original generation
         id: persist
-        if: steps.restore.outputs.candidate_id == ''
+        if: steps.restore.outputs.candidate_id == '' && steps.recover.outputs.candidate_id == ''
         run: >-
           python -m tools.catalog_correction_release create
           --work "$RUNNER_TEMP/catalog-correction" --bundle "$RUNNER_TEMP/candidate"
       - name: Retain the standard immutable public candidate
-        if: steps.restore.outputs.candidate_id == '' && steps.persist.outcome == 'success'
+        if: steps.restore.outputs.candidate_id == '' && (steps.recover.outcome == 'success' || steps.persist.outcome == 'success')
         uses: actions/upload-artifact@v4
         with:
-          name: candidate-${{ steps.persist.outputs.candidate_id }}
+          name: candidate-${{ steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}
           path: ${{ runner.temp }}/candidate
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Retain the safe exact-candidate recovery provenance
+        if: always() && steps.recover.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-candidate-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/catalog-recovery/recovery.json
           if-no-files-found: error
           retention-days: 90
 
