@@ -5,6 +5,7 @@ import io
 import json
 import os
 from pathlib import Path
+import re
 import tempfile
 import unittest
 from unittest.mock import Mock, patch
@@ -249,9 +250,146 @@ class WorkflowContracts(unittest.TestCase):
         self.assertNotIn('API_KEY', text); self.assertNotIn('CLOUDFLARE', text)
         self.assertIn('tools.restore_generation_checkpoint', text)
         uploads = [s['with']['path'] for s in job['steps'] if s.get('uses') == 'actions/upload-artifact@v4']
-        self.assertEqual(uploads, ['${{ runner.temp }}/candidate'])
+        self.assertEqual(uploads, ['${{ runner.temp }}/catalog-recovery/recovery.json', '${{ runner.temp }}/candidate'])
         self.assertIn("needs.catalog-correction.result == 'skipped'", self.jobs['candidate']['if'])
         self.assertIn("needs.catalog-correction.result == 'success'", self.jobs['candidate']['if'])
+
+    def test_all_candidate_producers_preserve_manifested_hidden_files(self):
+        producers = {name: [s for s in job.get('steps', [])
+            if s.get('uses') == 'actions/upload-artifact@v4'
+            and s.get('with', {}).get('path') == '${{ runner.temp }}/candidate']
+            for name, job in self.jobs.items()}
+        producers = {name: steps for name, steps in producers.items() if steps}
+        self.assertEqual(set(producers), {'generate', 'assemble', 'catalog-correction'})
+        for name, steps in producers.items():
+            with self.subTest(producer=name):
+                self.assertEqual(len(steps), 1)
+                self.assertIs(steps[0]['with']['include-hidden-files'], True)
+                self.assertIsNot(steps[0]['with'].get('overwrite'), True)
+
+    def test_exact_recovery_precedes_creation_and_keeps_receipt_separate(self):
+        job = self.jobs['catalog-correction']; steps = job['steps']
+        selected = {s['id']: s for s in steps if s.get('id')}
+        self.assertLess(steps.index(selected['restore']), steps.index(selected['recover']))
+        self.assertLess(steps.index(selected['recover']), steps.index(selected['persist']))
+        self.assertEqual(selected['recover']['if'], "steps.restore.outputs.candidate_id == ''")
+        self.assertEqual(selected['recover']['run'], 'python -m tools.catalog_correction_release recover-candidate '
+            '--bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/catalog-recovery"')
+        self.assertEqual(selected['persist']['if'], "steps.restore.outputs.candidate_id == '' && steps.recover.outputs.candidate_id == ''")
+        self.assertNotIn('continue-on-error', selected['recover'])
+        self.assertEqual(job['outputs']['candidate_id'], '${{ steps.restore.outputs.candidate_id || steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}')
+        uploads = [s for s in steps if s.get('uses') == 'actions/upload-artifact@v4']
+        self.assertEqual(uploads[0]['id'], 'recovery-provenance')
+        self.assertEqual(uploads[0]['with']['name'], 'catalog-candidate-recovery-${{ github.run_id }}-${{ github.run_attempt }}')
+        self.assertEqual(uploads[0]['with']['path'], '${{ runner.temp }}/catalog-recovery/recovery.json')
+        self.assertEqual(uploads[0]['if'], "always() && steps.recover.outcome == 'success'")
+        self.assertEqual(uploads[1]['with']['name'], 'candidate-${{ steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}')
+        self.assertEqual(uploads[1]['if'], "steps.restore.outputs.candidate_id == '' && ((steps.recover.outcome == 'success' && steps.recovery-provenance.outcome == 'success') || steps.persist.outcome == 'success')")
+        for upload in uploads:
+            self.assertEqual(upload['with']['if-no-files-found'], 'error')
+            self.assertNotIn('continue-on-error', upload)
+
+    @staticmethod
+    def correction_step_enabled(step, state, prior_success=True):
+        """Evaluate the parsed step condition, including Actions' implicit success()."""
+        expression = step.get('if', 'success()').removeprefix('${{').removesuffix('}}').strip()
+        has_status = re.search(r'\b(?:always|success|failure|cancelled)\(', expression)
+        if not has_status and not prior_success:
+            return False
+        expression = re.sub(r'steps\.([\w-]+)\.(outcome|outputs\.candidate_id)',
+            lambda match: repr(state.get(match[1], {}).get(match[2],
+                'skipped' if match[2] == 'outcome' else '')), expression)
+        expression = expression.replace('always()', 'True').replace('success()', repr(prior_success))
+        return bool(eval(expression.replace('&&', 'and').replace('||', 'or'), {'__builtins__': {}}, {}))
+
+    def correction_attempt(self, *, failed=None, restored='', recovery_candidate='a'*64):
+        """Run the real YAML's routing with injected local step outcomes only."""
+        failed = failed or {}
+        state = {'restore': {'outcome': 'success', 'outputs.candidate_id': restored}}
+        steps = self.jobs['catalog-correction']['steps']
+        after_restore = next(i for i, step in enumerate(steps) if step.get('id') == 'restore') + 1
+        successful = True; ran = []; durable = []; publication_barriers = []
+        for step in steps[after_restore:]:
+            key = step.get('id', 'candidate-upload')
+            if not self.correction_step_enabled(step, state, successful):
+                state[key] = {'outcome': 'skipped', 'outputs.candidate_id': ''}
+                continue
+            ran.append(key)
+            outcome = failed.get(key, 'success')
+            output = recovery_candidate if key == 'recover' else ('b'*64 if key == 'persist' else '')
+            state[key] = {'outcome': outcome, 'outputs.candidate_id': output if outcome == 'success' else ''}
+            if key == 'candidate-upload':
+                publication_barriers.append(tuple(durable))
+            if key in ('candidate-upload', 'recovery-provenance') and outcome == 'success':
+                durable.append(key)
+            successful = successful and outcome not in ('failure', 'cancelled')
+        return {'state': state, 'ran': ran, 'durable': durable, 'barriers': publication_barriers}
+
+    def test_recovered_candidate_requires_successful_prior_receipt_in_failure_cancel_matrix(self):
+        for failed_step in (None, 'recover', 'recovery-provenance', 'candidate-upload'):
+            for outcome in ('failure', 'cancelled'):
+                with self.subTest(step=failed_step, outcome=outcome):
+                    attempt = self.correction_attempt(failed={failed_step: outcome} if failed_step else {})
+                    self.assertNotIn('persist', attempt['ran'])
+                    for prior_uploads in attempt['barriers']:
+                        self.assertIn('recovery-provenance', prior_uploads)
+                    if failed_step in ('recover', 'recovery-provenance'):
+                        self.assertNotIn('candidate-upload', attempt['ran'])
+                        self.assertNotIn('candidate-upload', attempt['durable'])
+                    if failed_step == 'candidate-upload':
+                        self.assertEqual(attempt['durable'], ['recovery-provenance'])
+                    if failed_step is None:
+                        self.assertEqual(attempt['durable'], ['recovery-provenance', 'candidate-upload'])
+
+    def test_cancellation_after_receipt_still_suppresses_candidate_upload(self):
+        step = next(s for s in self.jobs['catalog-correction']['steps']
+            if s.get('with', {}).get('path') == '${{ runner.temp }}/candidate')
+        state = {'restore': {'outputs.candidate_id': ''}, 'recover': {'outcome': 'success'},
+            'recovery-provenance': {'outcome': 'success'}}
+        self.assertTrue(self.correction_step_enabled(step, state))
+        self.assertFalse(self.correction_step_enabled(step, state, prior_success=False))
+        self.assertNotRegex(step['if'], r'\b(?:always|failure|cancelled)\(')
+
+    def test_receipt_only_retry_selects_recovery_and_paired_retry_skips_all_mutation(self):
+        from tools import restore_generation_checkpoint as restore
+        candidate_id = 'a'*64
+        receipt = {'name': 'catalog-candidate-recovery-700-1', 'expired': False}
+        candidate = {'name': 'candidate-'+candidate_id, 'expired': False}
+        for retained in ([], [receipt], [receipt, candidate]):
+            with self.subTest(retained=[a['name'] for a in retained]), tempfile.TemporaryDirectory() as temp:
+                output = Path(temp)/'output'; output.write_bytes(b'')
+                with patch.dict(os.environ, ENV | {'RUNNER_TEMP': temp, 'GITHUB_OUTPUT': str(output)}), \
+                        patch.object(restore.subprocess, 'check_output', return_value=encoded({'artifacts': retained})), \
+                        patch.object(restore, 'fetch') as fetch, \
+                        patch.object(restore.c, 'load', return_value={'candidate_id': candidate_id}), \
+                        patch.object(restore.c, 'verify_dependencies') as dependencies:
+                    restore.main()
+                restored = output.read_text().partition('candidate_id=')[2].strip()
+                attempt = self.correction_attempt(restored=restored)
+                if candidate in retained:
+                    fetch.assert_called_once(); dependencies.assert_called_once()
+                    self.assertEqual(restored, candidate_id)
+                    self.assertEqual(attempt['ran'], [])
+                    self.assertEqual(attempt['durable'], [])
+                else:
+                    fetch.assert_not_called(); dependencies.assert_not_called()
+                    self.assertEqual(restored, '')
+                    self.assertEqual(attempt['ran'], ['recover', 'recovery-provenance', 'candidate-upload'])
+                    self.assertNotIn('persist', attempt['ran'])
+        # Both a failed receipt upload and a later failed candidate upload leave a
+        # retry on the same zero-generation recovery path until the pair exists.
+        for failed in ('recovery-provenance', 'candidate-upload'):
+            first = self.correction_attempt(failed={failed: 'failure'})
+            self.assertNotIn('candidate-upload', first['durable'])
+            retry = self.correction_attempt()
+            self.assertEqual(retry['durable'], ['recovery-provenance', 'candidate-upload'])
+            self.assertNotIn('persist', retry['ran'])
+
+    def test_ordinary_persisted_branch_retains_existing_upload_behavior(self):
+        attempt = self.correction_attempt(failed={'recover': 'skipped'}, recovery_candidate='')
+        self.assertEqual(attempt['state']['persist']['outcome'], 'success')
+        self.assertEqual(attempt['state']['recovery-provenance']['outcome'], 'skipped')
+        self.assertEqual(attempt['durable'], ['candidate-upload'])
 
     def test_fixed_candidate_cannot_execute_either_bare_paid_smoke(self):
         bare = [s for job in self.jobs.values() for s in job.get('steps', []) if s.get('run') == 'node tools/smoke_search_worker.mjs']

@@ -1,0 +1,16 @@
+{
+  "version": "catalog-candidate-marker-recovery-20260923-v1",
+  "failed_run_id": 35932387025,
+  "failed_run_attempt": 1,
+  "failed_run_head": "25b4cc54a287cbe29fbebe09f1c8ab23a992c00b",
+  "artifact_id": 10781671923,
+  "artifact_sha256": "dae2a953268ae70bf1148fba559e64e5aace3770db93ed87f015cf5885f370d7",
+  "candidate_id": "cd9872aada0a4ce3e89933bb4db95876a2debb2b0a20c5dec7774e57640fb61f",
+  "manifest_sha256": "777c8675a3164e67aca1c19d6bfbdc80081af2c0a490ece23dfc2a48b76d761d",
+  "source_plan_sha256": "96c3d445d3bb308b4ef20af2ab08e83732268ab5bfe772d2ce28488c8dfebb52",
+  "spending_plan_sha256": "045b201236550bebf336630e1193d9bd80705766a29e652b9dd7d28be4736fc5",
+  "export_sha256": "15dae6bd4278d84431a55b1cc024f07cf76f055f5e8d9d656454183042e7bb00",
+  "marker_path": ".nojekyll",
+  "marker_bytes": 1,
+  "marker_sha256": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b"
+}
