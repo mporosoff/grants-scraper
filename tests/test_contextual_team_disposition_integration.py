@@ -41,7 +41,7 @@ class ProtectedRecoveryEntry(unittest.TestCase):
         self.assertEqual(step['if'], "steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider == 'none'")
         paid = next(s for s in steps if s.get('name') == 'Execute the single bounded independent check')
         self.assertNotIn('GH_TOKEN', paid['env'])
-        self.assertEqual(paid['if'], "steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider != 'none'")
+        self.assertEqual(paid['if'], "steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider != 'none' && steps.contextual_check_prepare.outputs.text_provider != 'catalog'")
         self.assertEqual(paid['run'], step['run'])
 
 

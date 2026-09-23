@@ -141,7 +141,8 @@ test('Pages staging and live closeout re-read Worker provenance, including after
   const staging = workflow.slice(workflow.indexOf('      - name: Package verified candidate'), workflow.indexOf('\n  pages:\n'));
   const verification = workflow.slice(workflow.indexOf('  verify-live:'), workflow.indexOf('  closeout:'));
   assert.match(staging, /CLOUDFLARE_API_TOKEN/);
-  assert.equal((verification.match(/CLOUDFLARE_API_TOKEN:/g) || []).length, 2);
+  assert.equal((verification.match(/CLOUDFLARE_API_TOKEN:/g) || []).length, 3);
+  assert.match(verification, /id: live-owned-provider[\s\S]*?CLOUDFLARE_API_TOKEN:[\s\S]*?tools\.catalog_correction_release reuse-smoke/);
   assert.ok(verification.indexOf('tools.verify_release_live complete') > verification.indexOf('node tools/smoke_search_worker.mjs'));
   assert.match(live, /def stage_site[\s\S]*?worker_provenance\(bundle, reports\)/);
 });

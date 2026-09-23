@@ -156,16 +156,72 @@ def privacy_check(path):
         inspect(read_json(path))
 
 
-def create(root, output, *, generation_sha=None, run_id=None, attempt=None, parent=None, team_update=False):
+def _source_correction_inputs(root, original, receipt, export_root):
+    """Validate the one fixed affected generation without granting a generic bypass."""
+    from scripts.sources.merge import load_catalog
+    from tools import catalog_source_correction as source
+    from tools.catalog_correction_policy import PLAN_SHA
+    from tools.release_dependencies import verify
+    plan = source.plan(); export_root = Path(export_root)
+    expected = {'version': source.VERSION, 'source_plan_sha256': digest(source.CONFIG.read_bytes()),
+        'spending_plan_sha256': PLAN_SHA, 'export_sha256': digest((export_root / 'export.json').read_bytes()),
+        'owner_run': receipt.get('owner_run'), 'original_candidate_id': plan['candidate_id']}
+    if (encoded(receipt) != encoded(expected) or type(receipt.get('owner_run')) is not int
+            or receipt['owner_run'] <= 0 or original['candidate_id'] != plan['candidate_id']
+            or original['generation_sha'] != plan['prior_sha']):
+        raise ValueError('Exact catalog source-correction lineage is required')
+    git(root, 'merge-base', '--is-ancestor', original['generation_sha'], 'HEAD')
+    # Only the fixed source/vector generation is replaced. Team dependencies,
+    # every retained team/scientific output, and ordinary gates remain binding.
+    if 'dependency_groups' not in read_json(root / POLICY):
+        raise ValueError('Source correction requires the complete dependency policy')
+    verify(root, original, allowed=('source', 'semantic'))
+    exported = read_json(export_root / 'export.json')
+    required = {'version': source.VERSION, 'source_plan_sha256': expected['source_plan_sha256'],
+        'spending_plan_sha256': PLAN_SHA, 'original_candidate_id': original['candidate_id'],
+        'original_generation_sha': original['generation_sha'], 'corpus_sha256': plan['corpus_sha256'],
+        'new_provider_requests_for_export': 0, 'new_native_counts_for_export': 0, 'source_collection_requests': 0}
+    if encoded({k: exported.get(k) for k in required}) != encoded(required):
+        raise ValueError('Export is not the exact retained catalog correction')
+    expected_files = source.VECTOR_FILES | set(plan['prepared_pins'])
+    if (set(exported['files']) != expected_files
+            or {p.relative_to(export_root).as_posix() for p in export_root.rglob('*') if p.is_file()}
+                != expected_files | {'export.json'}
+            or any(exported['files'][k] != v for k, v in plan['prepared_pins'].items())):
+        raise ValueError('Unmanifested or altered catalog export')
+    verify_files(export_root, exported['files'])
+    verify_files(root, {name: exported['files'][name] for name in source.VECTOR_FILES})
+    if (load_catalog(root / 'data/opportunities.js') != source.public_catalog(read_json(export_root / 'corrected-catalog.json'))
+            or read_json(root / 'data/source_records.json') != read_json(export_root / 'corrected-source-cache.json')):
+        raise ValueError('Corrected source bytes differ from their exact export')
+    allowed = source.VECTOR_FILES | {'data/opportunities.js', 'data/catalog-metadata.js', 'data/source_records.json',
+        'README.md', 'PROJECT.md', 'evaluation/release_coverage.json'} | {n for n in original['files'] if n.startswith('feeds/')}
+    retained = {n: h for n, h in original['generation_files'].items() if n not in allowed}
+    verify_files(root, retained)
+    return retained
+
+
+def create_source_correction(root, output, original_bundle, source_receipt, export_root):
+    """The protected refresh authenticates the owner/export before this pure assembly."""
+    return create(root, output, parent=original_bundle, source_correction=source_receipt, source_export=export_root)
+
+
+def create(root, output, *, generation_sha=None, run_id=None, attempt=None, parent=None, team_update=False,
+           source_correction=None, source_export=None):
     root, output = Path(root), Path(output)
     if output.exists():
         raise ValueError("Candidate destination already exists; immutable artifacts cannot be overwritten")
     policy = read_json(root / POLICY)
     generation = generation_dependencies(root)
+    if source_correction is not None and (not parent or team_update or source_export is None):
+        raise ValueError('Source correction requires its original candidate and exact export only')
     if parent:
         original = load(parent)
-        verify_dependencies(root, original, allowed=('teams',) if team_update else ())
-        retained = {n: h for n, h in original['generation_files'].items() if not team_update or n not in policy['team_outputs']}
+        if source_correction is not None:
+            retained = _source_correction_inputs(root, original, source_correction, source_export)
+        else:
+            verify_dependencies(root, original, allowed=('teams',) if team_update else ())
+            retained = {n: h for n, h in original['generation_files'].items() if not team_update or n not in policy['team_outputs']}
         verify_files(root, retained)
     else:
         original = None
@@ -204,11 +260,29 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
     if 'dependency_groups' in policy:
         manifest['dependency_groups'] = snapshot(root)
     if original:
+        affected_generation = {key: manifest[key] for key in ('generation_sha', 'generation_run_id',
+            'generation_run_attempt', 'generation_timestamp')}
         for key in ("generation_sha", "generation_run_id", "generation_run_attempt", "generation_timestamp", "generation_dependencies", "generator_versions", "generation_baseline", "generation_files", "team_identity", "semantic_identity"):
-            if not team_update or key not in ('generation_baseline', 'generation_files', 'team_identity'):
+            if source_correction is not None:
+                if key in ('generation_sha', 'generation_run_id', 'generation_run_attempt', 'generation_timestamp', 'team_identity'):
+                    manifest[key] = original[key]
+            elif not team_update or key not in ('generation_baseline', 'generation_files', 'team_identity'):
                 manifest[key] = original[key]
         manifest["derived_from_candidate"] = original["candidate_id"]
         manifest["assembly_sha"] = git(root, "rev-parse", "HEAD")
+        if source_correction is not None:
+            manifest['original_generation'] = {key: original[key] for key in (
+                'generation_sha', 'generation_run_id', 'generation_run_attempt', 'generation_timestamp',
+                'generation_dependencies', 'generation_baseline', 'generation_files', 'semantic_identity')}
+            manifest['source_correction'] = dict(source_correction) | {
+                'affected_generation': affected_generation,
+                'retained_output_hashes': retained,
+                'affected_output_hashes': {n: h for n, h in manifest['generation_files'].items()
+                    if original['generation_files'].get(n) != h}}
+        else:
+            for key in ('source_correction', 'original_generation'):
+                if key in original:
+                    manifest[key] = original[key]
         if team_update:
             manifest['team_generation'] = {'sha': sha, 'run_id': str(run_id or os.environ['GITHUB_RUN_ID']),
                 'run_attempt': str(attempt or os.environ.get('GITHUB_RUN_ATTEMPT', '1')),

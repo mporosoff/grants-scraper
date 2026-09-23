@@ -1,0 +1,180 @@
+{
+  "version": "catalog-vpr-source-correction-v1",
+  "repository": "mporosoff/grants-scraper",
+  "candidate_id": "ccbef93b9c8ddc152704202858f371737c559ff2a46c7411f84bc5f17c38064a",
+  "candidate_run": "35878492257",
+  "candidate_artifact_id": 10760780124,
+  "candidate_artifact_digest": "sha256:e29c60b81adb188aca08e33dc0b9fadc2051ad3c50069d1c6da56c493d473c1e",
+  "prior_sha": "c7618a821c93c37277c3d8c5fe1a0f9340a96d9f",
+  "as_of": "2026-09-23",
+  "source_pins": {
+    "candidate/data/opportunities.js": "2d6cf2424cdc03c8eedab1bbd9cd0a5ec235cec23858b65868e7aa3db7d844e7",
+    "candidate/data/source_records.json": "509ed44332a3df52bb63183da949afa37995018f8d7a7b3413fb045a52895b06",
+    "prior/data/opportunities.js": "a6db815b16844938e192880d8cfef3bac60b50e3b550804bb0d905ce07a60449",
+    "prior/data/source_records.json": "dc0286271a87d97ace04f0b3e89a1a5e417487ccb9901417546d7d66272b3f11"
+  },
+  "restored_ids": [
+    "vpr-email:PAR-25-322",
+    "vpr-email:infoready-2024058",
+    "vpr-email:vpr-0f186b990288c021",
+    "vpr-email:vpr-36e6aed03b0511a5"
+  ],
+  "prepared_pins": {
+    "corrected-catalog.json": "0bccc4216373e2dd9b7bd8050d1e38eb2d13eb452be50c4a169dd49824642d07",
+    "corrected-source-cache.json": "574dd429c9ab17552cfb75193497655e534e68ec378660a45287ddd68826a075"
+  },
+  "corpus_sha256": "3abcffd7b0513848bd3766203556ff45714dc56983a0afc802ab4c7b9e96c46d",
+  "corpus_file_sha256": "08a7c80c05b35a71a9ea79e6e6b7da8ae2f3758cea23b891343698ea15b6cae1",
+  "corpus_passages": 1573,
+  "hybrid_sha256": "29db9a04d4f66600b8c50eb762fe4f8f5d0d472fce485ec19447e81ba230442d",
+  "vector_builder_sha256": "f77a20724a55ce3f923b4463245794ce6cbea5c3764de5e880e928e82d780e50",
+  "embedding_requests": [
+    {
+      "body_file": "embedding-1.json",
+      "body_sha256": "d45ab658a350029cb3f4eea643b81ff33f1e9f0dbb663dd56747cda52779bc53",
+      "wire_bytes": 155641,
+      "maximum_input_tokens": 156665,
+      "maximum_cost_microusd": 3134,
+      "model": "voyage-4-lite",
+      "provider": "voyage",
+      "corpus_passages": 250,
+      "canary_inputs": 6,
+      "total_inputs": 256,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "body_file": "embedding-2.json",
+      "body_sha256": "050b4838e0801ad537b32ca27216b1ba89748e5df12f538db9e13ef0b941c9ce",
+      "wire_bytes": 307301,
+      "maximum_input_tokens": 308325,
+      "maximum_cost_microusd": 6167,
+      "model": "voyage-4-lite",
+      "provider": "voyage",
+      "corpus_passages": 250,
+      "canary_inputs": 6,
+      "total_inputs": 256,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "body_file": "embedding-3.json",
+      "body_sha256": "275f49b8e4aa63957df53d165c8a67e7845a815a90032604ab67e41e74cabd51",
+      "wire_bytes": 298212,
+      "maximum_input_tokens": 299236,
+      "maximum_cost_microusd": 5985,
+      "model": "voyage-4-lite",
+      "provider": "voyage",
+      "corpus_passages": 250,
+      "canary_inputs": 6,
+      "total_inputs": 256,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "body_file": "embedding-4.json",
+      "body_sha256": "774b80c1aae6dc8eca48345d0049a083072381288b2093a1a393e17dd293d535",
+      "wire_bytes": 337275,
+      "maximum_input_tokens": 338299,
+      "maximum_cost_microusd": 6766,
+      "model": "voyage-4-lite",
+      "provider": "voyage",
+      "corpus_passages": 250,
+      "canary_inputs": 6,
+      "total_inputs": 256,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "body_file": "embedding-5.json",
+      "body_sha256": "9d03bfe9c1f611383f5022a799e09ae1a31ceefcdcac5a7667352ccf58ec0199",
+      "wire_bytes": 300617,
+      "maximum_input_tokens": 301641,
+      "maximum_cost_microusd": 6033,
+      "model": "voyage-4-lite",
+      "provider": "voyage",
+      "corpus_passages": 250,
+      "canary_inputs": 6,
+      "total_inputs": 256,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "body_file": "embedding-6.json",
+      "body_sha256": "5271e7463a0d5bca767643e030fd540b7355c2eb18a8510f060c84a666f14834",
+      "wire_bytes": 277744,
+      "maximum_input_tokens": 278768,
+      "maximum_cost_microusd": 5576,
+      "model": "voyage-4-lite",
+      "provider": "voyage",
+      "corpus_passages": 250,
+      "canary_inputs": 6,
+      "total_inputs": 256,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "body_file": "embedding-7.json",
+      "body_sha256": "c8ca3f66e98f9ce8b9ba36f93600c7bef19c871f197826fcb0c22c3517ac347b",
+      "wire_bytes": 40852,
+      "maximum_input_tokens": 41876,
+      "maximum_cost_microusd": 838,
+      "model": "voyage-4-lite",
+      "provider": "voyage",
+      "corpus_passages": 73,
+      "canary_inputs": 6,
+      "total_inputs": 79,
+      "native_counts": 0,
+      "retries": 0
+    }
+  ],
+  "smoke_requests": [
+    {
+      "purpose": "embed",
+      "provider": "voyage",
+      "model": "voyage-4-lite",
+      "body_file": "smoke-embed-provider.json",
+      "body_sha256": "cf3773be4bd4c005f9bfd1cdbb996b4d6bb23bf022b046d6d17bea19f9f67b3f",
+      "wire_bytes": 133,
+      "maximum_input_tokens": 1157,
+      "maximum_cost_microusd": 24,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "purpose": "current-rerank",
+      "provider": "voyage",
+      "model": "rerank-2.5",
+      "body_file": "smoke-current-rerank-provider.json",
+      "body_sha256": "97ccad6fa665473f72f8d4b4e8ac361d1a4e7655dff79b39eb4e43cf16469a79",
+      "wire_bytes": 2104,
+      "maximum_input_tokens": 3128,
+      "maximum_cost_microusd": 157,
+      "native_counts": 0,
+      "retries": 0
+    },
+    {
+      "purpose": "previous-rerank",
+      "provider": "voyage",
+      "model": "rerank-2.5",
+      "body_file": "smoke-previous-rerank-provider.json",
+      "body_sha256": "97ccad6fa665473f72f8d4b4e8ac361d1a4e7655dff79b39eb4e43cf16469a79",
+      "wire_bytes": 2104,
+      "maximum_input_tokens": 3128,
+      "maximum_cost_microusd": 157,
+      "native_counts": 0,
+      "retries": 0
+    }
+  ],
+  "previous_published_corpus_sha256": "8433bed3fc321ebcb1877aff12d5e3f074b09c5fd1aa73d5d7915f19a411b72b",
+  "smoke_passage_id": "parent:112354",
+  "smoke_passage_sha256": "7e016b00eae311440b125530590163442161114cde8b7dcb5312afa975df9abc",
+  "maximum_microusd": 34837,
+  "maximum_attempts": 10,
+  "native_counts": 0,
+  "retries": 0,
+  "withheld_ids": [
+    "vpr-email:NSF26-511",
+    "vpr-email:vpr-ddde5b48dc92bba2"
+  ]
+}

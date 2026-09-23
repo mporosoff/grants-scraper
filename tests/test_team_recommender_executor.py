@@ -435,10 +435,11 @@ class ExecutorContract(unittest.TestCase):
         self.assertEqual(checkout["with"]["ref"], "${{ github.sha }}")
         self.assertFalse(checkout["with"]["persist-credentials"])
         credential_steps = [s for s in steps if any(k.endswith("_API_KEY") for k in s.get("env", {}))]
-        self.assertEqual(len(credential_steps), 7)
+        self.assertEqual(len(credential_steps), 8)
         self.assertEqual([s["name"] for s in credential_steps[2:]], ["Execute the bounded contextual scientific job",
             "Execute only the named I3 assessment stage", "Execute only the named I3 production verifier",
-            "Execute only the named I3 group and explanation integrity stage", "Execute the single bounded independent check"])
+            "Execute only the named I3 group and explanation integrity stage", "Execute the single bounded independent check",
+            "Execute one fixed catalog embedding or accepted cache under the same owner"])
         for step in credential_steps:
             self.assertNotIn("GH_TOKEN", step["env"]); self.assertIn(" execute", step["run"])
 

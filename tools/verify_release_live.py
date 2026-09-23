@@ -122,8 +122,14 @@ def verify_worker(bundle, reports, *, attempts=12, sleep=time.sleep):
 def worker_provenance(bundle, reports):
     """Read authenticated serving metadata now, never accept a cached live observation."""
     output = Path(reports) / 'worker-live.json'
-    result = subprocess.run(['node', str(c.ROOT / 'tools/search_worker_checkpoint.mjs'), '--verify-live',
-                             str(bundle), str(Path(reports) / 'worker-after.json'), str(output)],
+    from tools.catalog_correction_release import requires_owned_smoke
+    if requires_owned_smoke(bundle):
+        command = ['python', '-m', 'tools.catalog_correction_release', 'verify-worker',
+                   '--bundle', str(bundle), '--reports', str(reports)]
+    else:
+        command = ['node', str(c.ROOT / 'tools/search_worker_checkpoint.mjs'), '--verify-live',
+                   str(bundle), str(Path(reports) / 'worker-after.json'), str(output)]
+    result = subprocess.run(command,
                             capture_output=True, text=True, timeout=600)
     state = c.read_json(output) if output.exists() else {}
     if result.returncode or state.get('verified') is not True:
