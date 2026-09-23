@@ -26,6 +26,12 @@ def plan():
 
 def configuration_for_job(job):
     from tools.contextual_team_iteration2_policy import ROOT as iteration2_root
+    continuation_path=iteration2_root/'config/contextual_team/iteration3-continuation-v1.json'
+    if continuation_path.exists() and job.get('release_id')==json.loads(continuation_path.read_bytes()).get('release_id'):
+        from tools.contextual_team_iteration3_continuation import configuration
+        if job.get('person_id') or job.get('scope_id')!='363268':
+            raise ValueError('outside_exact_iteration3_continuation_build')
+        return configuration()
     iteration3_path=iteration2_root/'config/contextual_team/iteration3-authority-v1.json'
     if iteration3_path.exists() and job.get('release_id')==json.loads(iteration3_path.read_bytes()).get('release_id'):
         from tools.contextual_team_iteration3 import configuration

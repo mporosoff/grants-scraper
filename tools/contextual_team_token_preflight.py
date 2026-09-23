@@ -91,13 +91,19 @@ class Counter:
         ledger_path = self.state/'ledger.json'
         ledger_state = existing.ExperimentLedger(ledger_path).read() if ledger_path.exists() else {'events': []}
         assert_operation_open(ledger_state, item.get('id'))
+        from tools.contextual_team_ec_disposition import assert_operation_open as assert_ec_open
+        assert_ec_open(ledger_state, item.get('id'), key)
         validate_counts(ledger_state, saved['rows'])
         from tools.contextual_team_iteration3_capacity import validate_counts as validate_capacity_counts
         validate_capacity_counts(ledger_state, saved['rows'])
         held = exposure(ledger_state)
-        iteration3 = item.get('id', '').startswith('cb-fc-i3-')
+        continuation = item.get('id', '').startswith('cb-fc-i3c-')
+        iteration3 = item.get('id', '').startswith('cb-fc-i3-') or continuation
         if iteration3:
-            from tools.contextual_team_iteration3_policy import check_native_request
+            if continuation:
+                from tools.contextual_team_iteration3_continuation_policy import check_native_request
+            else:
+                from tools.contextual_team_iteration3_policy import check_native_request
             check_native_request(self.state, item)
         rows=[r for r in saved['rows'] if r['key']==key]
         if rows:
@@ -112,6 +118,10 @@ class Counter:
         if not secret:raise ConfigurationFailure('counter_credential_missing')
         if iteration3:
             check_native_request(self.state, item, claim=True)
+        if item.get('id', '').startswith('cb-fc-i2-'):
+            from tools.contextual_team_ec_disposition import validate as ec_disposition_installed
+            if ec_disposition_installed(ledger_state):
+                raise ConfigurationFailure('iteration2_fresh_counts_closed_after_ec_disposition')
         row={'id':item['id'],'key':key,'status':'dispatched_or_uncertain','metered_inference':False,'charged_microusd':0}
         saved['rows'].append(row);existing.checkpoint(self.state,token_preflight=saved)
         response=self.post(ENDPOINT,headers={'Content-Type':'application/json','x-api-key':secret,
