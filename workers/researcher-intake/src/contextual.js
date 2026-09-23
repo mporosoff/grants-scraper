@@ -10,6 +10,7 @@ import iteration2 from '../../../config/contextual_team/iteration2-authority-v1.
 import iteration2Sources from '../../../config/contextual_team/iteration2-source-inputs-v1.json' with {type:'json'};
 import iteration3 from '../../../config/contextual_team/iteration3-authority-v1.json' with {type:'json'};
 import iteration3Sources from '../../../config/contextual_team/iteration3-source-inputs-v1.json' with {type:'json'};
+import continuation from '../../../config/contextual_team/iteration3-continuation-v1.json' with {type:'json'};
 import {previewResponse} from './contextual-preview.js';
 import {CONSOLE_HTML,CONSOLE_JS} from './contextual-console.js';
 import {ACCESS_HTML,ACCESS_JS} from './contextual-access.js';
@@ -20,8 +21,9 @@ import '../../../assets/search-query.js';
 import '../../../assets/search-retrieval.js';
 
 const RELEASE=option1.release_id;
-const allowedRelease=id=>id===RELEASE||id===inputs.snapshot_id||id===phase2.release_id||id===latency.release_id||id===iteration2.release_id||id===iteration3.release_id;
-const releaseScopes=id=>id===iteration3.release_id?iteration3Sources.scopes:id===iteration2.release_id?iteration2Sources.scopes:id===latency.release_id?phase2Sources.scopes.filter(s=>s.id===latency.workflow_scope):id===phase2.release_id?phase2Sources.scopes:inputs.scopes;
+const integrityRelease=id=>id===iteration3.release_id||id===continuation.release_id;
+const allowedRelease=id=>id===RELEASE||id===inputs.snapshot_id||id===phase2.release_id||id===latency.release_id||id===iteration2.release_id||integrityRelease(id);
+const releaseScopes=id=>id===continuation.release_id?iteration3Sources.scopes.filter(s=>s.id==='363268'):id===iteration3.release_id?iteration3Sources.scopes:id===iteration2.release_id?iteration2Sources.scopes:id===latency.release_id?phase2Sources.scopes.filter(s=>s.id===latency.workflow_scope):id===phase2.release_id?phase2Sources.scopes:inputs.scopes;
 const VALIDATION_ORIGIN='http://127.0.0.1:8876';
 const WORKFLOW='.github/workflows/team-recommender-offline.yml';
 const states=new Set(['ready','ready_with_gaps','no_supported_group_in_assessed_set','needs_scope_selection',
@@ -34,11 +36,11 @@ const canonical=v=>Array.isArray(v)?v.map(canonical):v&&typeof v==='object'
   ?Object.fromEntries(Object.keys(v).sort().map(k=>[k,canonical(v[k])])):v;
 const graphStates=new Set(['ready','ready_with_gaps','no_supported_group_in_assessed_set','no_supported_group_in_checked_candidates']);
 const verifierAbstentions=new Set(['unsuitable','insufficient_source','needs_scope_selection']);
-async function iteration3Result(graph,row){
-  const scope=iteration3Sources.scopes.find(s=>s.id===row.scope_id);
-  if(!scope||row.person_id!==''||row.job_id!==await hash([iteration3.release_id,row.scope_id,'']))fail('iteration3_result_job_conflict');
+async function iteration3Result(graph,row,release){
+  const scope=releaseScopes(release).find(s=>s.id===row.scope_id);
+  if(!integrityRelease(release)||!scope||row.person_id!==''||row.job_id!==await hash([release,row.scope_id,'']))fail('iteration3_result_job_conflict');
   if(new TextEncoder().encode(JSON.stringify(graph)).length>393216)fail('iteration3_graph_too_large',413);
-  if(graph.snapshot_id!==iteration3.release_id||graph.registry_generation!==iteration3Sources.registry_generation||
+  if(graph.snapshot_id!==release||graph.registry_generation!==iteration3Sources.registry_generation||
     graph.roster_id!==iteration3Sources.roster_id||graph.source_id!==scope.source_id||
     graph.scope?.id!==scope.id||graph.scope.parent_id!==scope.parent_id)fail('iteration3_result_graph_identity');
   const {graph_id,requests,...content}=graph;
@@ -99,7 +101,7 @@ export class ContextualStore {
   constructor(db){this.db=db;}
   async controls(release){
     return await this.db.prepare('SELECT * FROM contextual_trial_controls WHERE release_id=?').bind(release).first()
-      ||{cached_enabled:1,new_paid_enabled:[iteration2.release_id,iteration3.release_id].includes(release)?0:1};
+      ||{cached_enabled:1,new_paid_enabled:[iteration2.release_id,iteration3.release_id,continuation.release_id].includes(release)?0:1};
   }
   async setControls(release,value,now){
     await this.db.prepare(`INSERT INTO contextual_trial_controls(release_id,cached_enabled,new_paid_enabled,updated_at)
@@ -116,7 +118,7 @@ export class ContextualStore {
       AND (SELECT count(*) FROM contextual_validation_jobs WHERE release_id=?)<?
       AND (?='' OR NOT EXISTS (SELECT 1 FROM contextual_validation_jobs WHERE release_id=? AND person_id<>''))
       ON CONFLICT(job_id) DO NOTHING`).bind(job.job_id,job.release_id,job.scope_id,job.person_id,now,now,job.release_id,
-        job.release_id===iteration3.release_id?3:job.release_id===iteration2.release_id?12:job.release_id===latency.release_id?1:job.release_id===phase2.release_id?4:3,job.person_id,job.release_id).run();
+        job.release_id===continuation.release_id?1:job.release_id===iteration3.release_id?3:job.release_id===iteration2.release_id?12:job.release_id===latency.release_id?1:job.release_id===phase2.release_id?4:3,job.person_id,job.release_id).run();
     return Number(result.meta?.changes||0)===1;
   }
   async start(id,run,sha,now){
@@ -165,7 +167,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if(request.method==='GET'&&['/admin/contextual/iteration2-control','/admin/contextual/iteration2-control.js'].includes(path))return new Response(path.endsWith('.js')?ITERATION2_JS:ITERATION2_HTML,
         {headers:{...headers,'Content-Type':path.endsWith('.js')?'text/javascript; charset=utf-8':'text/html; charset=utf-8',
           'Content-Security-Policy':"default-src 'none'; script-src 'self'; style-src 'self'; connect-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}});
-      if(request.method==='GET'&&(path.startsWith('/admin/contextual/preview/')||path.startsWith('/admin/contextual/iteration2/')||path.startsWith('/admin/contextual/iteration3/')))return previewResponse(path);
+      if(request.method==='GET'&&(path.startsWith('/admin/contextual/preview/')||path.startsWith('/admin/contextual/iteration2/')||path.startsWith('/admin/contextual/iteration3/')||path.startsWith('/admin/contextual/iteration3-continuation/')))return previewResponse(path);
       if(request.method==='GET'&&['/admin/contextual/access','/admin/contextual/access.js'].includes(path))return new Response(path.endsWith('.js')?ACCESS_JS:ACCESS_HTML,
         {headers:{...headers,'Content-Type':path.endsWith('.js')?'text/javascript; charset=utf-8':'text/html; charset=utf-8',
           'Content-Security-Policy':"default-src 'none'; script-src 'self'; connect-src 'self'; base-uri 'none'; frame-ancestors 'none'",'Referrer-Policy':'no-referrer'}});
@@ -176,6 +178,9 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
         fail('contextual_admin_origin_required',403);
       if(path==='/admin/api/contextual/fixture'&&request.method==='GET')
         return json(200,{fixture:true,purpose:'routing_only',scientific_graph:false,provider_work:false,release_id:RELEASE});
+      if(path==='/admin/api/contextual/manifest'&&request.method==='GET'&&url.searchParams.get('iteration')==='3-continuation')
+        return json(200,{release_id:continuation.release_id,registry_generation:iteration3Sources.registry_generation,public_activation:false,
+          scopes:releaseScopes(continuation.release_id).map(s=>({id:s.id,parent_id:s.parent_id,title:s.science.title,state:current(s,now())?s.state:'action_blocked'}))});
       if(path==='/admin/api/contextual/manifest'&&request.method==='GET'&&url.searchParams.get('iteration')==='3')
         return json(200,{release_id:iteration3.release_id,registry_generation:iteration3Sources.registry_generation,public_activation:false,
           scopes:iteration3Sources.scopes.map(s=>({id:s.id,parent_id:s.parent_id,title:s.science.title,state:current(s,now())?s.state:'action_blocked'}))});
@@ -188,15 +193,15 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       const store=storeFactory(env);
       if(path==='/admin/api/contextual/controls'&&['GET','POST'].includes(request.method)){
         const controlRelease=url.searchParams.get('release_id')||phase2.release_id;
-        if(![phase2.release_id,latency.release_id,iteration2.release_id,iteration3.release_id].includes(controlRelease))fail('contextual_control_release_conflict',409);
+        if(![phase2.release_id,latency.release_id,iteration2.release_id,iteration3.release_id,continuation.release_id].includes(controlRelease))fail('contextual_control_release_conflict',409);
         if(request.method==='POST'){
           const value=await body(request);
           if(Object.keys(value).sort().join(',')!=='cached_enabled,new_paid_enabled'||
             typeof value.cached_enabled!=='boolean'||typeof value.new_paid_enabled!=='boolean')fail('contextual_invalid_control');
           await store.setControls(controlRelease,value,now().toISOString());
         }
-        if(controlRelease===iteration3.release_id)return json(200,{release_id:controlRelease,...await store.controls(controlRelease),
-          maximum_workflows:3,maximum_concurrency:1,expansion_enabled:false,
+        if(integrityRelease(controlRelease))return json(200,{release_id:controlRelease,...await store.controls(controlRelease),
+          maximum_workflows:controlRelease===continuation.release_id?1:3,maximum_concurrency:1,expansion_enabled:false,
           pooled_completion_authority:'funding-finder-completion-20260921-v1',public_activation:false});
         if(controlRelease===iteration2.release_id)return json(200,{release_id:controlRelease,...await store.controls(controlRelease),
           maximum_workflows:12,maximum_concurrency:1,expansion_enabled:false,
@@ -212,7 +217,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
         if(request.method!=='POST'||!['/internal/contextual/start','/internal/contextual/result'].includes(path))fail('contextual_not_found',404);
         // The complete I2/I3 delivery envelope has room above the 384 KiB graph
         // bound. Legacy releases retain their original raw 200,000-byte bound.
-        const value=await body(request,524288,v=>[iteration2.release_id,iteration3.release_id].includes(v.release_id)?524288:200000);
+        const value=await body(request,524288,v=>v.release_id===iteration2.release_id||integrityRelease(v.release_id)?524288:200000);
         const {job_id,release_id,run_id,code_sha}=value;
         if(!/^[a-f0-9]{64}$/.test(job_id||'')||!allowedRelease(release_id)||!/^\d+$/.test(run_id||'')||!/^[a-f0-9]{40}$/.test(code_sha||''))fail('contextual_callback_identity');
         const row=await store.byId(job_id);if(!row||row.release_id!==release_id)fail('contextual_job_not_found',404);
@@ -228,9 +233,9 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
           return json(200,{accepted:true,scope_id:row.scope_id,person_id:row.person_id,job_id,release_id});
         }
         if(row.run_id!==run_id||row.code_sha!==code_sha)fail('contextual_wrong_result_owner',409);
-        const i3=release_id===iteration3.release_id;
+        const i3=integrityRelease(release_id);
         if(!states.has(value.result?.state)&&!(i3&&value.result?.state==='no_supported_group_in_checked_candidates'))fail('contextual_invalid_result_state');
-        if(i3&&(graphStates.has(value.result.state)||verifierAbstentions.has(value.result.state)||value.result.graph_id))await iteration3Result(value.result,row);
+        if(i3&&(graphStates.has(value.result.state)||verifierAbstentions.has(value.result.state)||value.result.graph_id))await iteration3Result(value.result,row,release_id);
         if(value.result.scope_id&&value.result.scope_id!==row.scope_id)fail('contextual_result_scope_conflict');
         if(value.result.graph_id&&(value.result.snapshot_id!==release_id||value.result.registry_generation!==inputs.registry_generation||value.result.scope?.id!==row.scope_id))fail('contextual_result_generation_conflict');
         const serialized=JSON.stringify(value);
@@ -242,7 +247,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if(path!=='/admin/api/contextual/jobs'||!['GET','POST'].includes(request.method))fail('contextual_not_found',404);
       const value=request.method==='POST'?await body(request):Object.fromEntries(url.searchParams);
       if(Object.keys(value).sort().join(',')!=='person_id,release_id,scope_id'||!allowedRelease(value.release_id))fail('contextual_version_conflict',409);
-      const scope=releaseScopes(value.release_id).find(s=>s.id===value.scope_id),p2=value.release_id===phase2.release_id,lr=value.release_id===latency.release_id,i2=value.release_id===iteration2.release_id,i3=value.release_id===iteration3.release_id;
+      const scope=releaseScopes(value.release_id).find(s=>s.id===value.scope_id),p2=value.release_id===phase2.release_id,lr=value.release_id===latency.release_id,i2=value.release_id===iteration2.release_id,i3=integrityRelease(value.release_id),i3c=value.release_id===continuation.release_id;
       if(!scope||typeof value.person_id!=='string'||value.person_id&&!inputs.people.some(p=>p.person_id===value.person_id))fail('contextual_unapproved_identity');
       const job={...value,job_id:await hash([value.release_id,value.scope_id,value.person_id])};
       let row=await store.byId(job.job_id);
@@ -264,7 +269,7 @@ export function createContextualHandler({storeFactory=env=>new ContextualStore(e
       if((p2||lr||i2||i3)&&(value.person_id||!controls.new_paid_enabled))fail(value.person_id?'phase2_expansion_not_authorized':'contextual_new_paid_work_disabled',403);
       if(!p2&&!lr&&!i2&&!i3&&(value.release_id!==RELEASE||!option1.scopes.some(s=>s.id===scope.id)||
         (value.person_id&&(scope.id!=='332894'||value.person_id!==option1.extension.person_id))))fail('outside_option1_paid_inventory',403);
-      const firstScope=i3?iteration3.first_scope_id:i2?'363302:a-1':lr?latency.workflow_scope:p2?phase2.first_scope_id:option1.scopes[0].id;
+      const firstScope=i3c?'363268':i3?iteration3.first_scope_id:i2?'363302:a-1':lr?latency.workflow_scope:p2?phase2.first_scope_id:option1.scopes[0].id;
       if(scope.id!==firstScope||value.person_id){
         const first=await store.byId(await hash([value.release_id,firstScope,'']));
         const completed=first?.result_json?JSON.parse(first.result_json).result:null;

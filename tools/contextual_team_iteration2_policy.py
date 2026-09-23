@@ -99,7 +99,10 @@ def history(state, require_authority=True):
             raise ConfigurationFailure('iteration2_operation_event_identity')
         seen.add(item['purpose'])
     unknown = [(index, r['id']) for index, r in enumerate(state['requests']) if r['status'] == 'reserved_unknown']
-    if any(index >= start['requests'] or rid not in pool.HISTORICAL_UNKNOWN_IDS for index, rid in unknown):
+    from tools.contextual_team_ec_disposition import allowed_unknown_ids
+    disposed = allowed_unknown_ids(state)
+    if any(rid not in disposed and (index >= start['requests'] or rid not in pool.HISTORICAL_UNKNOWN_IDS)
+           for index, rid in unknown):
         raise Deferred('iteration2_new_uncertainty_requires_recovery')
 
 
@@ -157,6 +160,9 @@ def bind_operation(ledger, purpose, body, contract, input_id):
     expected = packet_event(purpose, body, contract, input_id)
     with ledger.locked():
         state = ledger.read(); history(state)
+        from tools.contextual_team_ec_disposition import validate as ec_disposed
+        if ec_disposed(state):
+            raise Deferred('iteration2_original_paid_inventory_superseded')
         from tools.contextual_team_checkpoint_disposition import assert_operation_open
         assert_operation_open(state, purpose)
         saved = [e for e in state['events'] if e.get('authority') == VERSION and e.get('purpose') == purpose]
@@ -173,6 +179,9 @@ def bind_operation(ledger, purpose, body, contract, input_id):
 
 
 def check_reservation(state, provider, metadata, amount, input_tokens, output_tokens):
+    from tools.contextual_team_ec_disposition import validate as ec_disposed
+    if ec_disposed(state):
+        raise Deferred('iteration2_original_paid_inventory_superseded')
     history(state); purpose = metadata.get('purpose'); _, stage = _stage(purpose)
     from tools.contextual_team_checkpoint_disposition import assert_operation_open
     assert_operation_open(state, purpose)

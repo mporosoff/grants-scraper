@@ -84,6 +84,8 @@ class ExperimentLedger(Ledger):
             state = self.read()
             from tools.contextual_team_checkpoint_disposition import exposure, assert_operation_open
             assert_operation_open(state, metadata.get('purpose'))
+            from tools.contextual_team_ec_disposition import assert_operation_open as assert_ec_open
+            assert_ec_open(state, metadata.get('purpose'), key)
             held = exposure(state)
             # Reservation is the irreversible dispatch claim. A caller cannot
             # prove non-dispatch from a missing cache, receipt or terminal flag.

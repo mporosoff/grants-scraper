@@ -132,7 +132,11 @@ def main():
     p.add_argument('--state',type=Path,required=True);p.add_argument('--reservation',type=Path)
     p.add_argument('--result',type=Path);args=p.parse_args();existing.trusted_environment()
     requested=json.loads(os.environ['CONTEXTUAL_CHECK'])
-    if isinstance(requested,dict) and 'iteration3_capacity' in requested:
+    if isinstance(requested,dict) and 'iteration3_ec_disposition' in requested:
+        from tools.contextual_team_ec_recovery import run
+    elif isinstance(requested,dict) and 'iteration3_continuation' in requested:
+        from tools.contextual_team_iteration3_continuation import run
+    elif isinstance(requested,dict) and 'iteration3_capacity' in requested:
         from tools.contextual_team_iteration3_capacity import run
     elif isinstance(requested,dict) and 'iteration3_check' in requested:
         from tools.contextual_team_iteration3_check import run

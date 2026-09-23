@@ -106,6 +106,13 @@ def _operation_events(state):
 
 def history(state, require_authority=True):
     pool.history(state); capacity.validate(state, require=True)
+    from tools.contextual_team_ec_disposition import allowed_unknown_ids
+    disposed_unknown = allowed_unknown_ids(state)
+    continuation = (any(r.get('purpose', '').startswith('cb-fc-i3c-') for r in state['requests'])
+        or any(e.get('authority') == 'funding-finder-iteration3-completion-20260923-v1' for e in state['events']))
+    if continuation:
+        from tools.contextual_team_iteration3_continuation_policy import validate_appended_history
+        validate_appended_history(state)
     p = plan(); start = p['starting_checkpoint']; requests = state['requests']; events = state['events']
     if (len(requests) < start['requests'] or len(events) < start['events']
             or identity(requests[:start['requests']]) != start['requests_sha256']
@@ -146,10 +153,13 @@ def history(state, require_authority=True):
             raise ConfigurationFailure('iteration3_original_failed_request_changed')
     claimed = set()
     for index, row in enumerate(requests):
-        if row.get('status') == 'reserved_unknown' and (index >= start['requests'] or row['id'] not in pool.HISTORICAL_UNKNOWN_IDS):
+        if (row.get('status') == 'reserved_unknown' and row['id'] not in disposed_unknown
+                and (index >= start['requests'] or row['id'] not in pool.HISTORICAL_UNKNOWN_IDS)):
             raise Deferred('iteration3_new_uncertainty_requires_recovery')
         if index < start['requests']:
             continue
+        if continuation and row.get('purpose', '').startswith('cb-fc-i3c-'):
+            continue  # The separate exact finite validator above owns these rows.
         purpose = row.get('purpose'); locked = seen.get(purpose)
         if not locked or purpose in claimed:
             raise ConfigurationFailure('iteration3_request_without_unique_operation')
@@ -175,8 +185,16 @@ def check_counts(state_path):
     capacity.validate_counts(state, rows)
     from tools.contextual_team_checkpoint_disposition import validate_counts
     validate_counts(state, rows)
+    from tools.contextual_team_ec_disposition import validate_counts as validate_ec_counts
+    validate_ec_counts(state, rows)
+    continuation = any(r.get('id', '').startswith('cb-fc-i3c-') for r in rows)
+    if continuation:
+        from tools.contextual_team_iteration3_continuation_policy import validate_appended_counts
+        validate_appended_counts(state, rows)
     locked = {e['purpose']: e for e in _operation_events(state)}; seen = set()
     for row in rows[start['native_counts']:]:
+        if continuation and row.get('id', '').startswith('cb-fc-i3c-'):
+            continue  # Checked against its exact event and fixed 206-row prefix.
         if row.get('status') != 'complete':
             raise Deferred('iteration3_native_uncertainty_no_continuation')
         e = locked.get(row.get('id'))
@@ -186,7 +204,7 @@ def check_counts(state_path):
                 or row['charged_microusd'] != 0):
             raise ConfigurationFailure('iteration3_native_count_operation_identity')
         seen.add(row['id'])
-    if len(rows) - start['native_counts'] > p['max_native_counts']:
+    if len(seen) > p['max_native_counts']:
         raise Deferred('iteration3_finite_native_count_inventory')
     return rows
 
@@ -202,6 +220,9 @@ def check_native_request(state_path, item, *, claim=False):
     if len(bound) != 1 or bound[0]['provider'] != 'anthropic' or bound[0]['count_body_sha256'] != key:
         raise ConfigurationFailure('iteration3_native_exact_bound_operation_required')
     if claim:
+        from tools.contextual_team_ec_disposition import validate as ec_disposed
+        if ec_disposed(state):
+            raise Deferred('iteration3_original_paid_inventory_superseded')
         if any(r.get('purpose') == purpose for r in state['requests']):
             raise Deferred('iteration3_paid_operation_claimed_no_new_count')
         if any(r.get('key') == key for r in rows):
@@ -342,6 +363,9 @@ def _amount(provider, inputs, outputs):
 
 
 def check_reservation(state, provider, metadata, amount, input_tokens, output_tokens):
+    from tools.contextual_team_ec_disposition import validate as ec_disposed
+    if ec_disposed(state):
+        raise Deferred('iteration3_original_paid_inventory_superseded')
     history(state); purpose = metadata.get('purpose'); _, stage = _stage(purpose)
     from tools.contextual_team_checkpoint_disposition import assert_operation_open
     assert_operation_open(state, purpose)

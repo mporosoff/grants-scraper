@@ -111,6 +111,11 @@ class Runner:
     def failure_diagnostics(self,error,receipt):
         pass
 
+    def provider_read_timeout(self,purpose,provider,body):
+        timeout=240 if provider=='anthropic' and body['max_tokens']>=16000 else 120
+        if purpose in ('cb-p2-repair-assess','cb-p2-assess') and body['max_tokens']==24000:timeout=420
+        return timeout
+
     def failure_state(self,error):
         # Exception text is not a dispatch receipt. Persisted uncertainty wins
         # even if a later cache/checkpoint failure obscures the first exception.
@@ -162,8 +167,7 @@ class Runner:
                            {'x-api-key':secret,'anthropic-version':'2023-06-01'})
             # Permit completion of the fixed larger output without an unbounded
             # request or a transport timeout that could conceal metered usage.
-            read_timeout=240 if provider=='anthropic' and body['max_tokens']>=16000 else 120
-            if purpose in ('cb-p2-repair-assess','cb-p2-assess') and body['max_tokens']==24000:read_timeout=420
+            read_timeout=self.provider_read_timeout(purpose,provider,body)
             response=self.post(url,headers=headers,json=body,timeout=(10,read_timeout),allow_redirects=False,stream=True)
             self.crash('after_dispatch')
             receipt['http_status']=response.status_code
@@ -346,6 +350,10 @@ def prepare(state,reservation,job_path):
     resolve_job(configuration,job)
     existing.trusted_environment(contextual_job=job)
     ledger=existing.restore(state,existing.policy())
+    if configuration.get('iteration3_continuation'):
+        from tools.contextual_team_iteration3_continuation import prepare_job
+        prepare_job(state,reservation,job)
+        return
     if configuration.get('iteration3'):
         from tools.contextual_team_iteration3_policy import install_authority, prepare_record, workflow_stages, STAGES
         install_authority(state,existing.api)
@@ -408,7 +416,11 @@ def main():
     from tools.contextual_team_iteration3 import Iteration3Runner
     if bool(args.stage)!=bool(config.get('iteration3')):
         raise ConfigurationFailure('contextual_stage_requires_iteration3_workflow')
-    runner=(Iteration3Runner if config.get('iteration3') else Iteration2Runner if config.get('iteration2') else LatencyRunner if config.get('latency') else Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
+    if config.get('iteration3_continuation'):
+        from tools.contextual_team_iteration3_continuation import ContinuationRunner
+        runner=ContinuationRunner(args.state)
+    else:
+        runner=(Iteration3Runner if config.get('iteration3') else Iteration2Runner if config.get('iteration2') else LatencyRunner if config.get('latency') else Phase2Runner if config.get('phase2') else Option1Runner if config.get('option1') else Runner)(args.state,config)
     stage_complete=False
     try:
         if os.environ.get('CONTEXTUAL_ACTION_CURRENT')!='true':
