@@ -32,6 +32,7 @@ import os
 from pathlib import Path
 import re
 import tempfile
+from urllib.parse import parse_qsl, urlencode, urlsplit
 
 from scripts.build_catalog import (
     CATALOG_GLOBAL,
@@ -133,7 +134,7 @@ def _unobserved_current(sources: dict, result: AdapterResult, as_of: date) -> li
     snapshot = sources.get(result.slug) or {}
     last_seen = str(snapshot.get("fetched_at") or "")[:10] or None
     carried = []
-    latest = _latest_observations(snapshot.get("records") or [])
+    latest, _ = _incremental_observations(snapshot.get("records") or [])
     publishable, _ = filter_publishable(latest, as_of)
     for record in publishable:
         ident, key = record.get("opportunity_id"), record_identity(record)
@@ -160,6 +161,57 @@ def _latest_observations(records: list[dict]) -> list[dict]:
         ids.add(ident)
         keys.add(key)
     return list(reversed(selected))
+
+
+def _observation_url(record: dict) -> tuple | None:
+    """Ignore presentation/tracking differences, not distinct sponsor programs."""
+    from .adapters.vpr_email import unwrap_urldefense
+    value = (record.get("detail_page") or record.get("funding_opportunity_url")
+             or record.get("primary_document_url"))
+    if not value:
+        return None  # An invalid newest observation still supersedes its old row.
+    try:
+        parsed = urlsplit(unwrap_urldefense(value))
+        host = (parsed.hostname or "").casefold().removeprefix("www.")
+        query = sorted((k, v) for k, v in parse_qsl(parsed.query, keep_blank_values=True)
+                       if not k.casefold().startswith("utm_") and k.casefold() not in {"gclid", "fbclid"})
+        return host, parsed.port if parsed.port not in (None, 80, 443) else None, parsed.path.rstrip("/"), urlencode(query)
+    except (TypeError, ValueError):
+        return (str(value),)
+
+
+def _incremental_observations(records: list[dict]) -> tuple[list[dict], list[str]]:
+    """Select latest genuine versions; quarantine unresolved stable-ID collisions.
+
+    A digest title hash or a number copied into an event is not enough to merge
+    different programs. Tracking links, exact Grants.gov aliases, and an intact
+    source-owned number plus unchanged program title remain supported aliases.
+    No missing item or collision is evidence of an official withdrawal.
+    """
+    from .official_identity import record_grants_ids
+    groups = []
+    for record in records:
+        ident, key = record.get("opportunity_id"), record_identity(record)
+        linked = [group for group in groups if ident in group[0] or key in group[1]]
+        ids, keys, members = {ident}, {key}, [record]
+        for group in linked:
+            ids.update(group[0]); keys.update(group[1]); members.extend(group[2])
+            groups.remove(group)
+        groups.append((ids, keys, members))
+    withheld = set()
+    for ids, _, members in groups:
+        urls = {_observation_url(row) for row in members} - {None}
+        if len(urls) <= 1:
+            continue
+        grants = [record_grants_ids(row) for row in members]
+        exact_grants_alias = all(len(proof) == 1 for proof in grants) and len(set.union(*grants)) == 1
+        numbers = {_norm_number(row.get("opportunity_number")) for row in members}
+        stable_number_and_title = (len(numbers) == 1 and bool(next(iter(numbers)))
+                                   and len({_canonical_title(row) for row in members}) == 1)
+        if not exact_grants_alias and not stable_number_and_title:
+            withheld.update(ids)
+    selected = _latest_observations([row for row in records if row.get("opportunity_id") not in withheld])
+    return selected, sorted(str(ident) for ident in withheld if ident)
 
 
 def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
@@ -261,7 +313,8 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     for record in result.records))
         if result.ok or partial:
             incremental = result.snapshot_complete is False
-            kept, dropped = filter_publishable(result.records, as_of)
+            fresh, collisions = _incremental_observations(result.records) if incremental else (result.records, [])
+            kept, dropped = filter_publishable(fresh, as_of)
             carried = []
             terminal_observations = []
             health_count = len(kept)
@@ -273,7 +326,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     {**{k: r.get(k) for k in ("opportunity_id", "source", "status", "close_date",
                                              "deadlines", "last_updated", "version")},
                      "canonical_identity": record_identity(r)}
-                    for r in result.records
+                    for r in fresh
                     if record_is_current(r, as_of)[1] in TERMINAL_REASONS
                     and record_is_publishable(r, as_of)[1] in {"ok", "expired"}]
                 health_count = len(kept) + len(terminal_observations)
@@ -384,14 +437,18 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                    if any(r["reason"] != "expired" for r in dropped) else {}),
                 **({"snapshot_complete": False,
                     "retained_outside_window_ids": [r["opportunity_id"] for r in carried],
+                    "identity_collision_ids": collisions,
                     "observed_terminal_records": terminal_observations if healthy else []}
                    if incremental else {}),
             })
         else:
             if result.retain_on_failure:
-                published = _cached_publishable(sources, slug, as_of)
                 if result.snapshot_complete is False:
+                    selected, _ = _incremental_observations((sources.get(slug) or {}).get("records") or [])
+                    published, _ = filter_publishable(selected, as_of)
                     published = [r for r in published if record_is_current(r, as_of)[0]]
+                else:
+                    published = _cached_publishable(sources, slug, as_of)
                 snapshot_age = _snapshot_age_days(sources, slug, as_of)
                 recent_snapshot = bool(
                     result.fallback_grace_days > 0

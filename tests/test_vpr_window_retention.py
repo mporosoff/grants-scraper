@@ -6,7 +6,7 @@ import unittest
 from scripts.build_changes import diff_catalogs
 from scripts.sources.adapters.vpr_email import VPREmailAdapter
 from scripts.sources.base import CanonicalOpportunity
-from scripts.sources.merge import resolve_live_records, rebuild_catalog
+from scripts.sources.merge import resolve_live_records, rebuild_catalog, merge_records
 from scripts.sources.registry import AdapterResult, collect
 from scripts.submission_schedule import next_submission
 
@@ -109,6 +109,67 @@ class WindowLifecycle(unittest.TestCase):
         for terminal in (dict(latest, close_date="2026-09-22"), dict(latest, status="withdrawn"),
                          dict(latest, detail_page=None, funding_opportunity_url=None)):
             live, _, _ = resolve_live_records([observed(row("other"))], cache(old, terminal), DAY)
+            self.assertEqual([r["opportunity_id"] for r in live], ["vpr-email:other"])
+
+    def test_latest_fresh_version_controls_real_merge_and_closure_feed(self):
+        old = row("same")
+        baseline = rebuild_catalog({}, [old], [], [])
+        for latest in (dict(old, close_date="2026-10-20"), dict(old, status="withdrawn"),
+                       dict(old, close_date="2026-09-22")):
+            with self.subTest(latest=latest):
+                result = observed(old, latest)
+                live, saved, lifecycle = resolve_live_records([result], cache(old), DAY)
+                combined, _ = merge_records([], live)
+                actual = rebuild_catalog(baseline, combined, [result], lifecycle)
+                events = diff_catalogs(baseline, actual, as_of=DAY)
+                if latest.get("status") == "withdrawn" or latest["close_date"] < DAY.isoformat():
+                    self.assertEqual(actual["opportunities"], [])
+                    self.assertEqual(len([e for e in events if e["type"] == "closed_or_removed"]), 1)
+                else:
+                    self.assertEqual(len(actual["opportunities"]), 1)
+                    self.assertEqual(actual["opportunities"][0]["close_date"], "2026-10-20")
+                self.assertEqual(len(saved["sources"]["vpr-email"]["records"]), len(live))
+
+    def test_current_reopening_supersedes_earlier_terminal_and_invalid_versions(self):
+        latest = row("same", close_date="2026-10-20")
+        for old in (dict(latest, status="withdrawn"), dict(latest, detail_page=None, funding_opportunity_url=None)):
+            live, _, life = resolve_live_records([observed(old, latest)], cache(old), DAY)
+            self.assertEqual(len(live), 1)
+            self.assertEqual(live[0]["status"], "posted")
+            self.assertEqual(life[0]["observed_terminal_records"], [])
+
+    def test_colliding_programs_are_withheld_without_guessing_or_claiming_closure(self):
+        old = row("same", title="Example Foundation", description="First program")
+        conflict = dict(old, detail_page="https://sponsor.example/other-program", description="Different program",
+                        close_date="2026-10-20")
+        baseline = rebuild_catalog({}, [old], [], [])
+        live, saved, life = resolve_live_records([observed(old, conflict, row("fresh"))], cache(old), DAY)
+        self.assertEqual([r["opportunity_id"] for r in live], ["vpr-email:fresh"])
+        self.assertEqual(life[0]["identity_collision_ids"], ["vpr-email:same"])
+        actual = rebuild_catalog(baseline, live, [], life)
+        self.assertFalse(any(e["type"] == "closed_or_removed" for e in diff_catalogs(baseline, actual, as_of=DAY)))
+        later, _, _ = resolve_live_records([observed(row("new"))], saved, DAY)
+        self.assertNotIn(old["opportunity_id"], [r["opportunity_id"] for r in later])
+        self.assertEqual(conflict["description"], "Different program")
+
+    def test_tracking_and_documented_number_title_aliases_allow_genuine_revision(self):
+        old = row("same", detail_page="http://www.sponsor.example/program/?utm_source=old")
+        latest = dict(old, detail_page="https://sponsor.example/program#deadline", close_date="2026-10-20")
+        live, _, life = resolve_live_records([observed(old, latest)], cache(old), DAY)
+        self.assertEqual(live[0]["close_date"], "2026-10-20")
+        self.assertEqual(life[0]["identity_collision_ids"], [])
+        numbered = dict(old, opportunity_number="EX-2026-001", agency="Example agency", agency_authority="source_listed")
+        revision = dict(numbered, detail_page="https://sponsor.example/notices/revision-2", close_date="2026-10-21")
+        live, _, _ = resolve_live_records([observed(numbered, revision)], cache(numbered), DAY)
+        self.assertEqual(live[0]["close_date"], "2026-10-21")
+
+    def test_collisions_and_terminal_versions_are_not_republished_from_failed_cache(self):
+        old = row("same")
+        for latest in (dict(old, status="withdrawn"), dict(old, detail_page="https://sponsor.example/different-program")):
+            failure = observed(); failure.ok = False
+            live, _, _ = resolve_live_records([failure], cache(old, latest), DAY)
+            self.assertEqual(live, [])
+            live, _, _ = resolve_live_records([observed(row("other"))], cache(old, latest), DAY)
             self.assertEqual([r["opportunity_id"] for r in live], ["vpr-email:other"])
 
     def test_invalid_only_window_durably_suppresses_without_false_refresh(self):
