@@ -23,6 +23,31 @@ if WINDOWS_NODE.is_file(): NODE = str(WINDOWS_NODE)
 
 
 class StageModelTests(unittest.TestCase):
+    def test_private_extra_fields_fail_before_raw_registry_copy_or_forward_matching(self):
+        with tempfile.TemporaryDirectory() as folder:
+            base = Path(folder)
+            for location in ('registry', 'person', 'claim', 'summary', 'observation', 'history'):
+                with self.subTest(location=location):
+                    registry = registry_fixture(); person = registry['researchers'][0]; claim = person['claims'][0]
+                    target = {'registry': registry, 'person': person, 'claim': claim,
+                              'summary': person['summary_evidence'][0], 'observation': claim['evidence_records'][0],
+                              'history': claim['history'][0]}[location]
+                    target['provider_cache'] = {'private_note': 'SYNTHETIC_PRIVATE_MARKER'}
+                    for prior in claim['history']:
+                        prior['material_hash'] = audited.material_claim_hash(prior)
+                    claim['material_hash'] = audited.material_claim_hash(claim)
+                    registry['registry_generation'] = legacy.registry_generation(registry)
+                    source = base/(location + '.json'); stage._write(source, registry)
+                    original = source.read_bytes(); output = base/('output-' + location)
+                    with patch.object(stage, '_copy', side_effect=AssertionError('No raw copy')), \
+                            patch.object(stage, '_forward', side_effect=AssertionError('No forward matching')), \
+                            patch.object(stage, '_node', side_effect=AssertionError('No package work')):
+                        with self.assertRaisesRegex(ValueError, 'unsupported fields'):
+                            stage.assemble(base/'public', source, stage.digest(original), 'a' * 64,
+                                           'b' * 64, output, '2026-09-22')
+                    self.assertFalse(output.exists())
+                    self.assertEqual(source.read_bytes(), original)
+
     def test_invalid_pinned_evidence_fails_before_output_or_package_work(self):
         with tempfile.TemporaryDirectory() as folder:
             base = Path(folder)

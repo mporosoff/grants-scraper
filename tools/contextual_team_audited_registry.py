@@ -14,6 +14,73 @@ from scripts.faculty_match import _pi_domains
 VERSION = 'contextual-audited-registry-stage-contract-v1'
 MATERIAL_FIELDS = ('status', 'label', 'category', 'categories', 'type', 'evidence',
                    'source_urls', 'evidence_level')
+REGISTRY_FIELDS = {'schema_version', 'registry_generation', 'researchers'}
+PERSON_TEXT = {'researcher_id', 'display_name', 'sort_name', 'home_unit', 'relationship',
+               'pool_visibility', 'status', 'orcid_id', 'research_summary', 'source_checked_date'}
+PERSON_LISTS = {'legacy_ids', 'aliases', 'source_urls'}
+PERSON_OPTIONAL = {'official_interests', 'institution', 'external_ids', 'metrics',
+                   'pool_assignment', 'source_audit', 'summary_evidence'}
+CLAIM_TEXT = {'claim_id', 'status', 'label', 'category', 'type', 'evidence',
+              'evidence_level', 'verified_on', 'material_hash'}
+CLAIM_LISTS = {'categories', 'source_urls', 'legacy_claim_ids'}
+CLAIM_FIELDS = CLAIM_TEXT | CLAIM_LISTS | {'revision'}
+CLAIM_OPTIONAL = {'evidence_records', 'history', 'retired_on', 'retirement_reason'}
+OBSERVATION_FIELDS = {'form', 'url', 'source_type', 'response_sha256', 'text_sha256',
+                      'locator', 'reviewed_on', 'retrieved_at'}
+AUDIT_FIELDS = {'version', 'baseline_material', 'disposition', 'issues', 'limitations', 'reviewed_on'}
+FORWARD_CLAIM_FIELDS = tuple(sorted(CLAIM_FIELDS | (CLAIM_OPTIONAL - {'history'})))
+
+
+def _fields(value, required, optional, label):
+    if not isinstance(value, dict) or not required <= value.keys() or value.keys() - required - optional:
+        raise ValueError(f'{label} has missing or unsupported fields')
+
+
+def _texts(value, fields, label):
+    if any(not isinstance(value[key], str) for key in fields if key in value):
+        raise ValueError(f'{label} fields must contain text, not nested data')
+
+
+def _strings(value, label):
+    if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
+        raise ValueError(f'{label} must contain only text values')
+
+
+def _claim_fields(claim, *, historical=False):
+    optional = CLAIM_OPTIONAL - ({'history'} if historical else set())
+    _fields(claim, CLAIM_FIELDS, optional, 'audited_claim')
+    _texts(claim, CLAIM_TEXT | {'retired_on', 'retirement_reason'}, 'audited_claim')
+    if type(claim['revision']) is not int or claim['revision'] < 1:
+        raise ValueError('audited_claim revision must be an integer')
+    for key in CLAIM_LISTS:
+        _strings(claim[key], 'audited_claim.' + key)
+    if 'evidence_records' in claim:
+        _evidence_records(claim['evidence_records'], 'evidence_records')
+    if 'history' in claim:
+        if not isinstance(claim['history'], list):
+            raise ValueError('audited_claim history must contain claim snapshots')
+        for prior in claim['history']:
+            _claim_fields(prior, historical=True)
+            if prior['claim_id'] != claim['claim_id'] or prior['material_hash'] != material_claim_hash(prior):
+                raise ValueError('audited_claim historical identity changed')
+
+
+def _person_fields(person):
+    _fields(person, PERSON_TEXT | PERSON_LISTS | {'claims', 'auto_proposable'}, PERSON_OPTIONAL, 'audited_researcher')
+    _texts(person, PERSON_TEXT | {'pool_assignment'}, 'audited_researcher')
+    for key in PERSON_LISTS | {'official_interests'}:
+        if key in person:
+            _strings(person[key], 'audited_researcher.' + key)
+    for key, fields in (('institution', {'name', 'ror_id'}), ('external_ids', {'openalex'}),
+                        ('source_audit', AUDIT_FIELDS)):
+        if key in person:
+            _fields(person[key], fields, set(), 'audited_researcher.' + key)
+            _texts(person[key], fields, 'audited_researcher.' + key)
+    if 'metrics' in person:
+        _fields(person['metrics'], {'openalex_works_count'}, set(), 'audited_researcher.metrics')
+        count = person['metrics']['openalex_works_count']
+        if count is not None and (type(count) is not int or count < 0):
+            raise ValueError('audited_researcher works count must be a nonnegative integer or null')
 
 
 def material_claim_hash(claim):
@@ -27,6 +94,8 @@ def _evidence_records(records, label):
     if not isinstance(records, list) or not records:
         raise ValueError(f'{label} must contain source observations')
     for record in records:
+        _fields(record, OBSERVATION_FIELDS, set(), label)
+        _texts(record, OBSERVATION_FIELDS - {'retrieved_at'}, label)
         if not isinstance(record, dict) or record.get('form') not in {'quotation', 'paraphrase'}:
             raise ValueError(f'{label} must distinguish quotation from paraphrase')
         legacy._validate_urls([record.get('url')], label)
@@ -57,12 +126,16 @@ def validate(registry):
     validator. Original audited material hashes and generation are checked first;
     neither the caller's object nor any on-disk input is rewritten.
     """
-    if not isinstance(registry, dict) or not isinstance(registry.get('researchers'), list):
+    _fields(registry, REGISTRY_FIELDS, set(), 'audited_registry')
+    if type(registry['schema_version']) is not int or not isinstance(registry['registry_generation'], str):
+        raise ValueError('audited_registry scalar fields')
+    if not isinstance(registry.get('researchers'), list):
         raise ValueError('audited_registry_shape')
     if registry.get('registry_generation') != legacy.registry_generation(registry):
         raise ValueError('audited_registry_generation')
     structural = copy.deepcopy(registry)
     for person, structural_person in zip(registry['researchers'], structural['researchers']):
+        _person_fields(person)
         if not isinstance(person, dict) or not isinstance(person.get('claims'), list):
             raise ValueError('audited_researcher_shape')
         if 'pool_assignment' in person and person['pool_assignment'] not in {'main', 'standby'}:
@@ -70,10 +143,7 @@ def validate(registry):
         if 'summary_evidence' in person:
             _evidence_records(person['summary_evidence'], 'summary_evidence')
         for claim, structural_claim in zip(person['claims'], structural_person['claims']):
-            if not isinstance(claim, dict):
-                raise ValueError('audited_claim_shape')
-            if 'evidence_records' in claim:
-                _evidence_records(claim['evidence_records'], 'evidence_records')
+            _claim_fields(claim)
             if claim.get('material_hash') != material_claim_hash(claim):
                 raise ValueError('audited_claim_material_hash')
             structural_claim['material_hash'] = legacy.material_claim_hash(claim)
@@ -143,7 +213,7 @@ def matching_profiles(registry):
     for target in value:
         person = people[target['researcher_id']]
         target['summary_evidence'] = copy.deepcopy(person.get('summary_evidence', []))
-        target['claims'] = [{key: copy.deepcopy(item) for key, item in claim.items() if key != 'history'}
+        target['claims'] = [{key: copy.deepcopy(claim[key]) for key in FORWARD_CLAIM_FIELDS if key in claim}
                             for claim in person['claims'] if claim['status'] == 'active']
         target['domains'] = matching_domains(person)
     return copy.deepcopy(value)

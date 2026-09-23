@@ -22,8 +22,12 @@ def registry_fixture():
                  'evidence': f'Synthetic measured catalytic activity in experiment {number}.',
                  'source_urls': ['https://example.edu/synthetic-profile'], 'evidence_level': 'direct',
                  'verified_on': '2026-09-22', 'legacy_claim_ids': [f'synthetic-claim-{number}'],
-                 'evidence_records': [observation()], 'history': [{'retained': 'synthetic earlier wording'}]}
+                 'evidence_records': [observation()]}
         claim['material_hash'] = audited.material_claim_hash(claim)
+        prior = {key: copy.deepcopy(item) for key, item in claim.items() if key != 'evidence_records'}
+        prior['evidence'] = f'Synthetic earlier evidence for experiment {number}.'
+        prior['material_hash'] = audited.material_claim_hash(prior)
+        claim['history'] = [prior]
         claims.append(claim)
     person = {'researcher_id': 'urh-990001', 'display_name': 'Synthetic Person',
               'sort_name': 'Person, Synthetic', 'legacy_ids': ['synthetic-person'], 'aliases': [],
@@ -40,6 +44,78 @@ def registry_fixture():
 
 
 class AuditedRegistryStageTests(unittest.TestCase):
+    def rehash(self, value):
+        for person in value['researchers']:
+            for claim in person['claims']:
+                for prior in claim.get('history', []):
+                    prior['material_hash'] = audited.material_claim_hash(prior)
+                claim['material_hash'] = audited.material_claim_hash(claim)
+        value['registry_generation'] = legacy.registry_generation(value)
+        return value
+
+    def extended_fixture(self):
+        value = registry_fixture()
+        value['researchers'][0].update(
+            institution={'name': 'Synthetic University', 'ror_id': ''},
+            external_ids={'openalex': ''}, metrics={'openalex_works_count': None},
+            source_audit={'version': 'synthetic-audit-v1', 'baseline_material': 'Synthetic snapshot',
+                          'disposition': 'corrected', 'issues': '', 'limitations': 'Synthetic limitation',
+                          'reviewed_on': '2026-09-22'})
+        return self.rehash(value)
+
+    def test_rehashed_unknown_fields_reject_across_the_complete_staged_registry_family(self):
+        for location in ('registry', 'person', 'claim', 'retired_claim', 'history',
+                         'claim_observation', 'summary_observation', 'source_audit',
+                         'institution', 'external_ids', 'metrics'):
+            for key in ('provider_cache', 'private_note'):
+                with self.subTest(location=location, key=key):
+                    value = self.extended_fixture(); person = value['researchers'][0]
+                    claim = person['claims'][0]
+                    if location == 'retired_claim': claim['status'] = 'retired'
+                    target = {'registry': value, 'person': person, 'claim': claim, 'retired_claim': claim,
+                              'history': claim['history'][0], 'claim_observation': claim['evidence_records'][0],
+                              'summary_observation': person['summary_evidence'][0],
+                              **{name: person[name] for name in ('source_audit', 'institution', 'external_ids', 'metrics')}}[location]
+                    target[key] = {'secret': 'SYNTHETIC_PRIVATE_MARKER'}
+                    self.rehash(value); original = legacy.canonical_bytes(value)
+                    for operation in (audited.validate, audited.directory, audited.faculty, audited.matching_profiles):
+                        with self.assertRaisesRegex(ValueError, 'unsupported fields'):
+                            operation(value)
+                    self.assertEqual(legacy.canonical_bytes(value), original)
+
+    def test_nested_private_objects_cannot_hide_in_legacy_coerced_text_or_lists(self):
+        for location in ('summary', 'alias', 'interest', 'claim_evidence', 'category',
+                         'observation_locator', 'history_evidence', 'audit_limitations',
+                         'external_id', 'works_count'):
+            with self.subTest(location=location):
+                value = self.extended_fixture(); person = value['researchers'][0]; claim = person['claims'][0]
+                private = {'private_note': 'SYNTHETIC_PRIVATE_MARKER'}
+                if location == 'summary': person['research_summary'] = private
+                elif location == 'alias': person['aliases'] = [private]
+                elif location == 'interest': person['official_interests'] = [private]
+                elif location == 'claim_evidence': claim['evidence'] = private
+                elif location == 'category': claim['categories'] = ['Chemistry', private]
+                elif location == 'observation_locator': claim['evidence_records'][0]['locator'] = private
+                elif location == 'history_evidence': claim['history'][0]['evidence'] = private
+                elif location == 'audit_limitations': person['source_audit']['limitations'] = private
+                elif location == 'external_id': person['external_ids']['openalex'] = private
+                else: person['metrics']['openalex_works_count'] = private
+                self.rehash(value)
+                with self.assertRaises(ValueError): audited.validate(value)
+
+    def test_legitimate_history_retirement_audit_and_summary_are_preserved_not_stripped(self):
+        value = self.extended_fixture(); person = value['researchers'][0]
+        retired = person['claims'][1]
+        retired.update(status='retired', retired_on='2026-09-22', retirement_reason='Synthetic source correction')
+        self.rehash(value); original = copy.deepcopy(value)
+        self.assertIs(audited.validate(value), value)
+        self.assertEqual(value, original)
+        profile = audited.matching_profiles(value)[0]
+        self.assertEqual(profile['claims'], [{key: item for key, item in person['claims'][0].items() if key != 'history'}])
+        self.assertEqual(audited.directory(value)['researchers'][0]['summary_evidence'], person['summary_evidence'])
+        self.assertEqual(len(audited.directory(value)['researchers'][0]['claims']), 2)
+        self.assertEqual(person['claims'][0]['history'], original['researchers'][0]['claims'][0]['history'])
+
     def timestamp_fixture(self, location, timestamp):
         value = registry_fixture()
         person = value['researchers'][0]
