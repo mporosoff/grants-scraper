@@ -14,6 +14,9 @@ const [shell, script, css, team, awards, researcher, baseline, snapshots] = awai
   read("team_match.html"), read("funded_awards.html"), read("faculty_interests.html"),
   read("tests/fixtures/stage4-public-baseline.json").then(JSON.parse), read("assets/institutional-intelligence-snapshots.js"),
 ]);
+// Keep the historical presentation baseline intact. The separately reviewed
+// opportunity-context patch admits only these exact files and function bodies.
+const opportunityContext = JSON.parse(await read("tests/fixtures/award-opportunity-context-boundaries.json"));
 
 function fixture(html, mobile = false) {
   const dom = shellDom(html, { deferredClose: true });
@@ -264,7 +267,7 @@ test("Search, CSV, saves, alerts, AI payloads, team and researcher identity owne
     "data/researcher_registry_manifest.json", "data/opportunity_team_index.js",
     "data/opportunity_teams.js", "config/researcher_registry.json",
   ]);
-  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path) && !generatedSources.has(path)) assert.equal(hash(preservedMatcherBytes(path, await readFile(new URL(`../../${path}`, import.meta.url)))), expected, path);
+  for (const [path, expected] of Object.entries(baseline.files)) if (!boundedChanges.has(path) && !generatedSources.has(path)) assert.equal(hash(preservedMatcherBytes(path, await readFile(new URL(`../../${path}`, import.meta.url)))), opportunityContext.files[path] || expected, path);
 });
 
 test("The release schema and model contract stay fixed while generated content identities can refresh", async () => {
@@ -284,9 +287,10 @@ test("All Team Match and award controller functions outside the bounded presenta
     const matches = [...source.matchAll(/^  (?:async )?function (\w+)\(/gm)];
     for (let i = 0; i < matches.length; i += 1) {
       const name = matches[i][1];
-      if (allowed[path].includes(name)) continue;
+      const contextExpected = opportunityContext.functions[path]?.[name];
+      if (!contextExpected && allowed[path].includes(name)) continue;
       const body = source.slice(matches[i].index, matches[i + 1]?.index ?? source.length);
-      assert.equal(hash(body), baseline.functions[path][name], `${path}: ${name}`);
+      assert.equal(hash(body), contextExpected || baseline.functions[path][name], `${path}: ${name}`);
     }
   }
 });

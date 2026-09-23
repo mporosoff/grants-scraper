@@ -2,12 +2,14 @@
   "use strict";
 
   const $ = id => document.getElementById(id);
+  // The visible snapshot form owns selected-opportunity navigation when present.
+  if ($("institutional-intelligence") && globalThis.FUNDING_INSTITUTIONAL_INTELLIGENCE?.selectedOpportunityContext) return;
   const catalog = globalThis.GRANT_CATALOG;
   const linksApi = globalThis.FUNDING_AWARD_LINKS;
   const productApi = globalThis.FUNDING_AWARD_PRODUCT;
   const apiConfig = globalThis.FUNDING_AWARD_API_CONFIG;
   const alertsApi = globalThis.FUNDING_ALERTS;
-  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=65b8850c23e5fdf1c9ef9233faf1caa3ba831bc62f27614cb9a543c6ea26a9ee", document.baseURI).href;
+  const DOD_BROWSER_MODULE_URL = new URL("./assets/dod-awards-browser.mjs?v=89310471a9763f436970df0b7e8fb934890d4de26e5206a1494c8550f597a6bd", document.baseURI).href;
   const INSTITUTION_STORAGE_KEY = "funding-finder.awards.institution.v1";
   const MANAGED_PARAMS = [
     "opportunity", "q", "mode", "agency", "institution", "year_start",

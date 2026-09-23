@@ -681,6 +681,7 @@ export function snapshotPage(snapshot, { page = 1, pageSize = 10, facet = { type
     snapshot_contract_version: 1,
     snapshot_id: snapshot.snapshot_id,
     query_id: snapshot.query_id,
+    request: snapshot.request,
     as_of: snapshot.as_of,
     expires_at: snapshot.expires_at,
     ordering_version: snapshot.ordering_version,
