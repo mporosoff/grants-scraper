@@ -11,6 +11,7 @@ from decimal import Decimal
 import base64
 import json
 import os
+import re
 import subprocess
 from pathlib import Path
 import tempfile
@@ -20,6 +21,7 @@ import unittest
 from unittest.mock import Mock, patch
 
 import requests
+import yaml
 
 from tools import catalog_correction_executor as executor
 from tools import catalog_correction_policy as policy
@@ -158,7 +160,10 @@ class CatalogContracts(unittest.TestCase):
                 prepared['maximum_new_native_counts']), (0, 0, 0))
             self.assertIn('catalog_provider=cache\n', output.read_text())
             args.action = 'execute'
-            executor.run(args)
+            with patch.dict(os.environ, {'VOYAGE_API_KEY': '', 'GH_TOKEN': '',
+                    'CLOUDFLARE_API_TOKEN': '', 'CLOUDFLARE_ACCOUNT_ID': ''}), \
+                    patch.object(executor.requests, 'post', side_effect=AssertionError('Cached execution must not dispatch')):
+                executor.run(args)
         self.assertEqual((f.state/'ledger.json').read_bytes(), ledger_before)
         self.assertEqual(json.loads(args.result.read_bytes())['maximum_new_metered_attempts'], 0)
 
@@ -423,6 +428,42 @@ class CatalogContracts(unittest.TestCase):
         self.assertEqual((row['status'], row['charged_microusd'], row['usage']),
             ('failed', 2, {'total_tokens': 51}))
         self.assertEqual(post.call_count, 1)
+
+
+class CatalogCredentialIsolation(unittest.TestCase):
+    def test_actual_workflow_selects_only_the_prepared_credential_scope(self):
+        flow = yaml.safe_load((policy.ROOT/'.github/workflows/team-recommender-offline.yml').read_bytes())
+        steps = flow['jobs']['prepare-evaluate']['steps']
+        embedding = next(s for s in steps if s.get('name', '').startswith('Execute one fixed catalog embedding'))
+        smoke = next(s for s in steps if s.get('name', '').startswith('Execute one fixed catalog Worker'))
+        self.assertEqual(set(embedding['env']), {'VOYAGE_API_KEY', 'CONTEXTUAL_CHECK'})
+        self.assertEqual(set(smoke['env']), {'GH_TOKEN', 'CLOUDFLARE_API_TOKEN', 'CLOUDFLARE_ACCOUNT_ID', 'CONTEXTUAL_CHECK'})
+        self.assertEqual(smoke['env']['GH_TOKEN'], '${{ github.token }}')
+        self.assertEqual(embedding['run'], smoke['run'])
+
+        def evaluate(expression, values):
+            expression = expression.removeprefix('${{').removesuffix('}}').strip()
+            expression = re.sub(r'steps\.[a-z_]+\.(?:outcome|outputs\.[a-z_]+)',
+                lambda m: repr(values.get(m[0], '')), expression)
+            expression = re.sub(r'secrets\.([A-Z_]+)', lambda m: repr('fixture:'+m[1]), expression)
+            return eval(expression.replace('&&', ' and ').replace('||', ' or '), {'__builtins__': {}}, {})
+
+        for prepared in ('success', 'failure', 'cancelled', 'skipped', ''):
+            for text in ('catalog', 'none', 'anthropic', 'openai', '', 'unknown'):
+                for provider in ('voyage', 'cache', 'none', '', 'unknown', True):
+                    with self.subTest(prepared=prepared, text=text, provider=provider):
+                        values = {'steps.contextual_check_prepare.outcome': prepared,
+                            'steps.contextual_check_prepare.outputs.text_provider': text,
+                            'steps.contextual_check_prepare.outputs.catalog_provider': provider}
+                        admitted = prepared == 'success' and text == 'catalog'
+                        embeds = evaluate(embedding['if'], values)
+                        smokes = evaluate(smoke['if'], values)
+                        self.assertEqual(embeds, admitted and provider in ('voyage', 'cache'))
+                        self.assertEqual(smokes, admitted and provider == 'none')
+                        self.assertFalse(embeds and smokes)
+                        if embeds:
+                            self.assertEqual(evaluate(embedding['env']['VOYAGE_API_KEY'], values),
+                                'fixture:VOYAGE_API_KEY' if provider == 'voyage' else '')
 
 
 class RetainedOwnerAdmission(unittest.TestCase):

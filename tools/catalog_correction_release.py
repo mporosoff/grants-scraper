@@ -173,6 +173,30 @@ def context(work, bundle, reports, *, api=smoke.existing.api, node_call=smoke.no
     prepared, exported, anchor = import_export(work, api=api)
     manifest, candidate = candidate_anchor(bundle, api=api)
     require(manifest['source_correction']['export_sha256'] == anchor['correction_export']['export_sha256'], 'same_vector_export')
+    allowlist = json.loads((bundle/'files/workers/search-voyage-proxy/generated/corpus-allowlist.json').read_bytes())
+    generations = {'current': allowlist['current'], 'previous': allowlist['previous']}
+    claimed = {policy.operation(name)['purpose'] for name in smoke.NAMES}
+    rows = smoke.existing.ExperimentLedger(work/'state/ledger.json').read()['requests']
+    if any(row.get('purpose') in claimed for row in rows):
+        # A later publication may run at a new protected head. Paid results
+        # retain their original authenticated context and serving identity.
+        verified = smoke.load_context(work/'state', prepared['root'], api=api, node_call=node_call)
+        value, proof = verified['context'], verified['serving_proof']
+        require(encoded(value['candidate']) == encoded(candidate)
+            and encoded(value['correction_export']) == encoded(anchor['correction_export'])
+            and encoded(value['generations']) == encoded(generations)
+            and value['source_plan_sha256'] == smoke.existing.sha(source.CONFIG.read_bytes())
+            and proof['fingerprint'] == manifest['worker_fingerprint'], 'same_original_context')
+        accepted = smoke.accepted_operations(work/'state', prepared['root'], verified['expected'],
+            serving_proof=proof, node_call=node_call, allow_partial=True)
+        atomic_json(reports/'worker-after.json', {**proof, 'deploy_required': False, 'required_fingerprint': manifest['worker_fingerprint']})
+        atomic_json(reports/'context-reuse.json', {'version': VERSION, 'original_refresh': value['refresh'],
+            'publication_refresh': refresh, 'candidate': candidate,
+            'accepted_claims': [{'name': next(name for name in smoke.NAMES if policy.operation(name)['purpose'] == row['purpose']),
+                'request_id': row['request_id'], 'key': row['key']} for row in accepted],
+            'new_provider_calls': 0, 'context_reused': True})
+        output({'context_reused': 'true'})
+        return value
     deployments = json.loads((reports/'deployments-after.json').read_bytes())
     rows = deployments.get('deployments', deployments) if isinstance(deployments, dict) else deployments
     # The existing classifier owns active single-version traffic validation.
@@ -185,15 +209,14 @@ def context(work, bundle, reports, *, api=smoke.existing.api, node_call=smoke.no
         'workers/search-voyage-proxy/generated/corpus-allowlist.json', 'workers/search-voyage-proxy/wrangler.jsonc')}
     proof = node_call('candidate-proof', {'candidate': candidate_proof, 'deployment': active['deployment']['id'],
         'version': active['versionId'], 'candidateInputs': overrides})
-    allowlist = json.loads((bundle/'files/workers/search-voyage-proxy/generated/corpus-allowlist.json').read_bytes())
     value = {'version': smoke.CONTEXT_VERSION, 'source_plan_sha256': smoke.existing.sha(source.CONFIG.read_bytes()),
         'refresh': refresh, 'candidate': candidate, 'correction_export': anchor['correction_export'],
-        'generations': {'current': allowlist['current'], 'previous': allowlist['previous']}, 'serving_proof': proof}
+        'generations': generations, 'serving_proof': proof}
     source.validate_context_packet(value, bundle, work/'export', work/'state', prepared['root'])
     path = work/'context/context.json'; require(not path.exists(), 'immutable_context'); atomic_json(path, value)
     atomic_json(reports/'worker-after.json', {**proof, 'deploy_required': False, 'required_fingerprint': manifest['worker_fingerprint']})
     name = f"{smoke.CONTEXT_PREFIX}{candidate['candidate_id']}-{refresh['run_id']}-{refresh['run_attempt']}"
-    output({'context_artifact': name, 'context_path': str(path)}); return value
+    output({'context_reused': 'false', 'context_artifact': name, 'context_path': str(path)}); return value
 
 
 def run_list(api=smoke.existing.api):

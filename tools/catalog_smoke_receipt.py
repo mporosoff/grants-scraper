@@ -186,17 +186,20 @@ def validate_checkpoint(state):
     return cp
 
 
-def accepted_operations(state, inputs, expected, *, serving_proof=None, node_call=node, runner=None):
+def accepted_operations(state, inputs, expected, *, serving_proof=None, node_call=node, runner=None, allow_partial=False):
     from tools import catalog_correction_executor as executor, catalog_correction_policy as policy
     state = Path(state); runner = runner or executor.CatalogRunner(state, inputs)
     ledger = runner.ledger.read(); policy.history(ledger); policy.counts(state)
     operations = []
-    require(len(expected['operations']) == 3, 'three_exact_inputs')
+    require(type(allow_partial) is bool and len(expected['operations']) == 3, 'three_exact_inputs')
     for name, requested in zip(NAMES, expected['operations'], strict=True):
-        op = policy.operation(name); body = executor.input_body(inputs, name)
-        runner.cached(name, body)
+        op = policy.operation(name)
         rows = [r for r in ledger['requests'] if r.get('purpose') == op['purpose']]
+        if allow_partial and not rows:
+            continue
         require(len(rows) == 1, 'unique_accepted_purpose')
+        body = executor.input_body(inputs, name)
+        runner.cached(name, body)
         row = rows[0]; cache = json_value((state/'cache'/(row['key']+'.json')).read_bytes())
         receipt = json_value((state/'receipts'/(row['id']+'.json')).read_bytes())
         raw = (Path(inputs)/op['body_file']).read_bytes()
@@ -223,6 +226,7 @@ def accepted_operations(state, inputs, expected, *, serving_proof=None, node_cal
             'external_http_body_sha256': receipt['external_http_body_sha256'], 'status': 'valid', 'http_status': 200,
             'usage': row['usage'], 'charged_microusd': row['charged_microusd'],
             'response_text': cache['response_text'], 'response_sha256': cache['response_sha256']})
+    require(bool(operations), 'accepted_smoke_required')
     return operations
 
 

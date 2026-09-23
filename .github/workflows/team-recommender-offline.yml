@@ -219,13 +219,21 @@ jobs:
           python -m tools.contextual_team_check execute
           --state "$RUNNER_TEMP/team-experiment" --result "$RUNNER_TEMP/contextual-check-result.json"
           --reservation "$RUNNER_TEMP/team-reservation.json"
-      - name: Execute one fixed catalog request under the same owner
-        if: steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider == 'catalog'
+      - name: Execute one fixed catalog embedding or accepted cache under the same owner
+        if: steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider == 'catalog' && (steps.contextual_check_prepare.outputs.catalog_provider == 'voyage' || steps.contextual_check_prepare.outputs.catalog_provider == 'cache')
+        env:
+          VOYAGE_API_KEY: ${{ steps.contextual_check_prepare.outputs.catalog_provider == 'voyage' && secrets.VOYAGE_API_KEY || '' }}
+          CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
+        run: >-
+          python -m tools.contextual_team_check execute
+          --state "$RUNNER_TEMP/team-experiment" --result "$RUNNER_TEMP/contextual-check-result.json"
+          --reservation "$RUNNER_TEMP/team-reservation.json"
+      - name: Execute one fixed catalog Worker smoke under the same owner
+        if: steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider == 'catalog' && steps.contextual_check_prepare.outputs.catalog_provider == 'none'
         env:
           GH_TOKEN: ${{ github.token }}
-          VOYAGE_API_KEY: ${{ steps.contextual_check_prepare.outputs.catalog_provider == 'voyage' && secrets.VOYAGE_API_KEY || '' }}
-          CLOUDFLARE_API_TOKEN: ${{ steps.contextual_check_prepare.outputs.catalog_provider == 'none' && secrets.CLOUDFLARE_API_TOKEN || '' }}
-          CLOUDFLARE_ACCOUNT_ID: ${{ steps.contextual_check_prepare.outputs.catalog_provider == 'none' && secrets.CLOUDFLARE_ACCOUNT_ID || '' }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
         run: >-
           python -m tools.contextual_team_check execute

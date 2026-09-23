@@ -263,6 +263,7 @@ class WorkflowContracts(unittest.TestCase):
         self.assertNotIn('VOYAGE_API_KEY', text)
         context_upload = next(i for i, s in enumerate(steps) if s.get('uses') == 'actions/upload-artifact@v4'
             and s['with']['path'] == '${{ runner.temp }}/catalog-context/context')
+        self.assertIn("steps.smoke-context.outputs.context_reused == 'false'", steps[context_upload]['if'])
         prior = context_upload
         for name in bridge.smoke.NAMES:
             planned = next(i for i, s in enumerate(steps) if 'plan-smoke --name '+name in s.get('run', ''))
@@ -270,6 +271,7 @@ class WorkflowContracts(unittest.TestCase):
             self.assertLess(prior, planned); self.assertLess(planned, dispatched)
             self.assertEqual(steps[planned+1]['uses'], 'actions/upload-artifact@v4')
             self.assertIn("== 'new_intent'", steps[planned+1]['if'])
+            self.assertNotIn('context_reused', steps[planned]['if'])
             self.assertNotIn('always()', steps[dispatched]['if']); prior = dispatched
 
     def test_post_pages_uses_successful_exact_receipt_with_fresh_proof(self):
@@ -285,9 +287,10 @@ class WorkflowContracts(unittest.TestCase):
         retained = next(s for s in steps if s.get('id') == 'owned-worker-retained')
         rollback = next(s for s in steps if 'wrangler@4.125.0 rollback' in s.get('run', ''))
         self.assertIn('catalog_correction_release reuse-smoke', owned['run'])
-        def enabled(step, status):
+        def enabled(step, status, review='true'):
             expression = step['if'].removeprefix('${{').removesuffix('}}').strip()
             expression = expression.replace('failure()', 'True').replace('&&', 'and')
+            expression = expression.replace('steps.review.outputs.review_ready', repr(review))
             for key, value in status.items(): expression = expression.replace('steps.'+key+'.outcome', repr(value))
             return eval(expression, {'__builtins__': {}}, {})
         for owned_status in ('success', 'failure', 'skipped', 'cancelled'):
@@ -297,6 +300,8 @@ class WorkflowContracts(unittest.TestCase):
                         status = {'owned-provider': owned_status, 'publication': published, 'worker-deploy': deployed}
                         self.assertEqual(enabled(rollback, status), deployed == 'success' and published != 'success' and owned_status != 'success')
                         self.assertEqual(enabled(retained, status), published != 'success' and owned_status == 'success')
+                        self.assertFalse(enabled(retained, status, 'false'))
+                        self.assertEqual(enabled(rollback, status, 'false'), enabled(rollback, status))
         self.assertNotIn('CLOUDFLARE', json.dumps(retained)); self.assertNotIn('API_KEY', json.dumps(retained))
 
     def test_late_failure_receipt_preserves_proof_and_does_not_invent_unmerged_status(self):

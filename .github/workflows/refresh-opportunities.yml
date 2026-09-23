@@ -779,7 +779,7 @@ jobs:
           npx --yes wrangler@4.125.0 deployments list --config workers/search-voyage-proxy/wrangler.jsonc --json > "$RUNNER_TEMP/reports/deployments-after.json"
           python -m tools.catalog_correction_release context --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-context"
       - name: Retain the authenticated public smoke context before any owner dispatch
-        if: steps.smoke-context.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-context.outcome == 'success' && steps.smoke-context.outputs.context_reused == 'false'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.smoke-context.outputs.context_artifact }}
@@ -788,13 +788,13 @@ jobs:
           retention-days: 90
       - name: Plan the fixed query smoke or exact cached reuse
         id: smoke-embed-plan
-        if: steps.smoke-context.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-context.outcome == 'success'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.catalog_correction_release plan-smoke --name smoke-embed --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Retain the query dispatch intent before submission
-        if: steps.smoke-embed-plan.outputs.smoke_status == 'new_intent'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-embed-plan.outputs.smoke_status == 'new_intent'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.smoke-embed-plan.outputs.intent_artifact }}
@@ -802,17 +802,17 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Wait for the sole owner's query smoke without redispatch
-        if: steps.smoke-embed-plan.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-embed-plan.outcome == 'success'
         run: python -m tools.catalog_correction_release run-smoke --name smoke-embed --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Plan the fixed current corpus smoke or exact cached reuse
         id: smoke-current-plan
-        if: steps.smoke-context.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-context.outcome == 'success'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.catalog_correction_release plan-smoke --name smoke-current-rerank --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Retain the current corpus dispatch intent before submission
-        if: steps.smoke-current-plan.outputs.smoke_status == 'new_intent'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-current-plan.outputs.smoke_status == 'new_intent'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.smoke-current-plan.outputs.intent_artifact }}
@@ -820,17 +820,17 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Wait for the sole owner's current corpus smoke without redispatch
-        if: steps.smoke-current-plan.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-current-plan.outcome == 'success'
         run: python -m tools.catalog_correction_release run-smoke --name smoke-current-rerank --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Plan the fixed previous corpus smoke or zero-provider receipt recovery
         id: smoke-previous-plan
-        if: steps.smoke-context.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-context.outcome == 'success'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.catalog_correction_release plan-smoke --name smoke-previous-rerank --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Retain the previous corpus or zero-provider recovery dispatch intent
-        if: steps.smoke-previous-plan.outputs.smoke_status == 'new_intent'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-previous-plan.outputs.smoke_status == 'new_intent'
         uses: actions/upload-artifact@v4
         with:
           name: ${{ steps.smoke-previous-plan.outputs.intent_artifact }}
@@ -838,11 +838,11 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Wait for the sole owner's previous corpus smoke and durable aggregate
-        if: steps.smoke-previous-plan.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-previous-plan.outcome == 'success'
         run: python -m tools.catalog_correction_release run-smoke --name smoke-previous-rerank --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Verify all three accepted owned smokes against fresh unchanged serving bytes
         id: owned-provider
-        if: steps.smoke-context.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && steps.smoke-context.outcome == 'success'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -856,7 +856,7 @@ jobs:
           --prepared "$RUNNER_TEMP/reports/review-ready.json"
       - name: Retain the fully tested Worker after a late incomplete publication
         id: owned-worker-retained
-        if: ${{ failure() && steps.owned-provider.outcome == 'success' && steps.publication.outcome != 'success' }}
+        if: ${{ failure() && steps.review.outputs.review_ready == 'true' && steps.owned-provider.outcome == 'success' && steps.publication.outcome != 'success' }}
         run: |
           python - <<'PY'
           import hashlib, json, os
@@ -1009,22 +1009,60 @@ jobs:
         uses: actions/github-script@v8
         env:
           RESULTS: ${{ toJSON(needs) }}
+          REQUESTED_STAGE: ${{ inputs.stage }}
+          REQUESTED_CANDIDATE_ID: ${{ inputs.candidate_id }}
+          REQUESTED_CANDIDATE_RUN: ${{ inputs.candidate_run }}
+          REQUESTED_RECEIPT_RUN: ${{ inputs.receipt_run }}
+          REQUESTED_PUBLICATION_RUN: ${{ inputs.publication_run }}
+          REQUESTED_PUBLICATION_ATTEMPT: ${{ inputs.publication_attempt }}
         with:
           script: |
             const needs = JSON.parse(process.env.RESULTS);
             const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const candidate = needs.candidate.outputs.candidate_id || 'not persisted';
-            const generationRun = needs.candidate.outputs.candidate_run || 'none';
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'validate', 'publish', 'verify']);
+            const planned = needs.plan.outputs.stage;
+            const originalStage = stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
+            let candidate = needs.candidate.outputs.candidate_id;
+            let generationRun = needs.candidate.outputs.candidate_run;
+            let identitySource = 'selected candidate output';
+            if (!candidate || !generationRun) {
+              const producer = ['generate', 'assemble', 'catalog-correction'].find(stage =>
+                needs[stage].result === 'success' && needs[stage].outputs.candidate_id);
+              if (producer) {
+                candidate = needs[producer].outputs.candidate_id; generationRun = String(context.runId);
+                identitySource = `successful ${producer} job; authenticate its retained artifact before reuse`;
+              } else {
+                const completePlan = needs.plan.outputs.candidate_id && needs.plan.outputs.candidate_run;
+                candidate = completePlan ? needs.plan.outputs.candidate_id : process.env.REQUESTED_CANDIDATE_ID;
+                generationRun = completePlan ? needs.plan.outputs.candidate_run : process.env.REQUESTED_CANDIDATE_RUN;
+                identitySource = 'requested checkpoint selector; artifact authentication still required';
+              }
+            }
+            const hasCheckpoint = Boolean(candidate && generationRun);
+            if (!hasCheckpoint) { candidate = 'not persisted'; generationRun = 'none'; identitySource = 'no complete checkpoint selector'; }
             const awaiting = needs.publish.outputs.review_ready === 'false';
-            const next = failed === 'pages' ? 'publish' : failed === 'verify-live' ? 'verify' : ['publish', 'validate'].includes(failed) ? failed : 'generate';
+            const next = failed === 'pages' ? 'publish' : failed === 'verify-live' ? 'verify' :
+              ['publish', 'validate'].includes(failed) ? failed : failed === 'candidate' && hasCheckpoint ?
+              (['publish', 'verify'].includes(originalStage) ? originalStage : 'validate') : originalStage;
+            const sameRequested = hasCheckpoint && ((candidate === needs.plan.outputs.candidate_id && generationRun === needs.plan.outputs.candidate_run) ||
+              (candidate === process.env.REQUESTED_CANDIDATE_ID && generationRun === process.env.REQUESTED_CANDIDATE_RUN));
+            const receiptRun = needs.validate.result === 'success' ? String(context.runId) :
+              sameRequested ? needs.plan.outputs.receipt_run || process.env.REQUESTED_RECEIPT_RUN || 'none' : 'none';
+            const publicationRun = ['success', 'failure', 'cancelled'].includes(needs.publish.result) ? String(context.runId) :
+              sameRequested ? needs.plan.outputs.publication_run || process.env.REQUESTED_PUBLICATION_RUN || 'none' : 'none';
+            const publicationAttempt = publicationRun === String(context.runId) ? process.env.GITHUB_RUN_ATTEMPT || 'unknown' :
+              sameRequested ? needs.plan.outputs.publication_attempt || process.env.REQUESTED_PUBLICATION_ATTEMPT || 'latest retained' : 'none';
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
             const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${failed || (awaiting ? 'awaiting_review' : 'completed')}\n` +
+              `Identity source: ${identitySource}\nOriginal lifecycle stage: ${originalStage}\nValidation receipt run: ${receiptRun}\n` +
+              `Publication evidence run: ${publicationRun}\nPublication evidence attempt: ${publicationAttempt}\n` +
               `Release-control SHA: ${context.sha}\nProtected publication SHA: ${needs.publish.outputs.merge_sha || 'none confirmed'}\n` +
               `Production mutation: ${needs.publish.outputs.merge_sha ? 'protected publication completed' : needs.publish.result === 'failure' ? 'inspect publication receipt and rollback evidence' : 'none'}\n` +
               `Known-good live identity: publication artifact known-good-live-release.json (when Worker preparation started)\n` +
               `Evidence and safe diagnostics: ${runUrl}#artifacts\nAllowed next retry: ${failed ? next : awaiting ? 'publish after exact-head review' : 'none'}\n` +
-              `A persisted candidate must be reused after downstream failure. Caches are not release evidence.`;
+              `Resume the same workflow for pre-candidate failures so its persisted generation checkpoint can be recovered; do not repeat completed expensive work.\n` +
+              `A persisted candidate must be reused after downstream failure. Authenticate candidate and receipt artifacts before retry; reported selectors alone are not proof. Caches are not release evidence.`;
             await core.summary.addRaw(body).write();
             if (failed) {
               const title = 'Funding Finder release checkpoint failed';
