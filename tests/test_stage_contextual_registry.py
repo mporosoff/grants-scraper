@@ -165,6 +165,33 @@ class LocalPackageTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'isolated'):
             stage.assemble(self.public, self.registry, self.registry_sha, self.directory_sha, self.release_sha, self.public/'outputs/stage', self.as_of, node=NODE)
 
+    def test_rehashed_audit_and_historical_payloads_reject_before_any_package_copy(self):
+        for fault in ('audit_body', 'audit_date', 'history_status', 'history_evidence', 'retirement_body'):
+            with self.subTest(fault=fault):
+                value = stage._json(self.registry); person = value['researchers'][0]
+                person['source_audit'] = {'version': 'full-profile-repair-v1', 'baseline_material': 'c' * 64,
+                                          'disposition': 'corrected', 'issues': 'Synthetic correction',
+                                          'limitations': '', 'reviewed_on': '2026-09-22'}
+                claim = person['claims'][0]
+                prior = {key: copy.deepcopy(item) for key, item in claim.items() if key != 'history'}
+                claim['revision'] = prior['revision'] + 1
+                claim['history'] = [prior]
+                if fault == 'audit_body': person['source_audit']['baseline_material'] = 'Synthetic private email ' * 50000
+                elif fault == 'audit_date': person['source_audit']['reviewed_on'] = '2026-02-29'
+                elif fault == 'history_status': prior['status'] = 'unreviewed'
+                elif fault == 'history_evidence': prior['evidence'] = 'Synthetic raw source ' * 50000
+                else: claim.update(status='retired', retired_on='2026-09-22', retirement_reason='x' * 501)
+                prior['material_hash'] = audited.material_claim_hash(prior)
+                claim['material_hash'] = audited.material_claim_hash(claim)
+                value['registry_generation'] = legacy.registry_generation(value)
+                registry_path = self.base/(fault + '.json'); stage._write(registry_path, value)
+                target = self.base/('unsafe-' + fault)
+                with patch.object(stage, '_copy', side_effect=AssertionError('Must reject before copying')):
+                    with self.assertRaises(ValueError):
+                        stage.assemble(self.public, registry_path, stage.digest(registry_path.read_bytes()),
+                                       self.directory_sha, self.release_sha, target, self.as_of, node=NODE)
+                self.assertFalse(target.exists())
+
     def test_lost_validation_keeps_failure_and_never_emits_completion_receipt(self):
         with patch.object(stage, '_node', side_effect=ValueError('synthetic stopped validator')):
             with self.assertRaises(ValueError): self.assemble('failed')

@@ -7,6 +7,7 @@ from collections import Counter
 import copy
 from datetime import datetime
 import re
+from urllib.parse import urlsplit
 
 from scripts import researcher_registry as legacy
 from scripts.faculty_match import _pi_domains
@@ -29,6 +30,16 @@ OBSERVATION_FIELDS = {'form', 'url', 'source_type', 'response_sha256', 'text_sha
                       'locator', 'reviewed_on', 'retrieved_at'}
 AUDIT_FIELDS = {'version', 'baseline_material', 'disposition', 'issues', 'limitations', 'reviewed_on'}
 FORWARD_CLAIM_FIELDS = tuple(sorted(CLAIM_FIELDS | (CLAIM_OPTIONAL - {'history'})))
+# These are compact authored summaries and identifiers, never raw source bodies.
+# Measure stored bytes' text length before the ordinary validator trims values.
+PERSON_LIMITS = {'researcher_id': 10, 'display_name': 120, 'sort_name': 140,
+                 'home_unit': 180, 'relationship': 40, 'pool_visibility': 30,
+                 'status': 10, 'orcid_id': 19, 'research_summary': 1200,
+                 'source_checked_date': 10, 'pool_assignment': 7}
+CLAIM_LIMITS = {'claim_id': 15, 'status': 7, 'label': 180, 'category': 140,
+                'type': 80, 'evidence': 500, 'evidence_level': 22,
+                'verified_on': 10, 'material_hash': 64, 'retired_on': 10,
+                'retirement_reason': 500}
 
 
 def _fields(value, required, optional, label):
@@ -41,45 +52,102 @@ def _texts(value, fields, label):
         raise ValueError(f'{label} fields must contain text, not nested data')
 
 
-def _strings(value, label):
-    if not isinstance(value, list) or any(not isinstance(item, str) for item in value):
-        raise ValueError(f'{label} must contain only text values')
+def _bounded_text(value, label, maximum, *, required=False):
+    if not isinstance(value, str) or len(value) > maximum or (required and not value.strip()):
+        raise ValueError(f'{label} must contain bounded text (maximum {maximum})')
+
+
+def _bounds(value, limits, label):
+    for key, maximum in limits.items():
+        if key in value:
+            _bounded_text(value[key], label + '.' + key, maximum)
+
+
+def _strings(value, label, maximum=64, item_maximum=500):
+    if not isinstance(value, list) or len(value) > maximum:
+        raise ValueError(f'{label} must contain at most {maximum} text values')
+    for item in value:
+        _bounded_text(item, label, item_maximum, required=True)
+
+
+def _urls(value, label):
+    _strings(value, label, item_maximum=500)
+    legacy._validate_urls(value, label)
+    for url in value:
+        # Existing retained outer whitespace stays byte-identical; embedded
+        # whitespace, missing hosts and credential-bearing URLs are not sources.
+        try:
+            parsed = urlsplit(url.strip())
+            if (parsed.scheme.lower() != 'https' or not parsed.hostname
+                    or parsed.username is not None or parsed.password is not None or parsed.port == 0
+                    or re.search(r'\\|\s|[\x00-\x1f\x7f]', url.strip())):
+                raise ValueError
+        except ValueError:
+            raise ValueError(f'{label} contains an invalid HTTPS source URL') from None
 
 
 def _claim_fields(claim, *, historical=False):
     optional = CLAIM_OPTIONAL - ({'history'} if historical else set())
     _fields(claim, CLAIM_FIELDS, optional, 'audited_claim')
     _texts(claim, CLAIM_TEXT | {'retired_on', 'retirement_reason'}, 'audited_claim')
-    if type(claim['revision']) is not int or claim['revision'] < 1:
-        raise ValueError('audited_claim revision must be an integer')
-    for key in CLAIM_LISTS:
-        _strings(claim[key], 'audited_claim.' + key)
+    _bounds(claim, CLAIM_LIMITS, 'audited_claim')
+    if type(claim['revision']) is not int or not 1 <= claim['revision'] <= 2**53 - 1:
+        raise ValueError('audited_claim revision must be a positive safe integer')
+    _strings(claim['categories'], 'audited_claim.categories', 12, 140)
+    _strings(claim['legacy_claim_ids'], 'audited_claim.legacy_claim_ids', 10, 80)
+    _urls(claim['source_urls'], 'audited_claim.source_urls')
+    if {'retired_on', 'retirement_reason'} & claim.keys():
+        if (not {'retired_on', 'retirement_reason'} <= claim.keys()
+                or claim['status'] != 'retired' or not legacy._valid_date(claim['retired_on'])):
+            raise ValueError('audited_claim invalid retirement metadata')
+        _bounded_text(claim['retirement_reason'], 'audited_claim.retirement_reason', 500, required=True)
     if 'evidence_records' in claim:
         _evidence_records(claim['evidence_records'], 'evidence_records')
     if 'history' in claim:
-        if not isinstance(claim['history'], list):
+        if not isinstance(claim['history'], list) or len(claim['history']) > 128:
             raise ValueError('audited_claim history must contain claim snapshots')
         for prior in claim['history']:
             _claim_fields(prior, historical=True)
             if prior['claim_id'] != claim['claim_id'] or prior['material_hash'] != material_claim_hash(prior):
                 raise ValueError('audited_claim historical identity changed')
+        revisions = [prior['revision'] for prior in claim['history']]
+        if len(set(revisions)) != len(revisions) or any(revision >= claim['revision'] for revision in revisions):
+            raise ValueError('audited_claim historical revisions must be unique and older')
 
 
 def _person_fields(person):
     _fields(person, PERSON_TEXT | PERSON_LISTS | {'claims', 'auto_proposable'}, PERSON_OPTIONAL, 'audited_researcher')
     _texts(person, PERSON_TEXT | {'pool_assignment'}, 'audited_researcher')
-    for key in PERSON_LISTS | {'official_interests'}:
-        if key in person:
-            _strings(person[key], 'audited_researcher.' + key)
+    _bounds(person, PERSON_LIMITS, 'audited_researcher')
+    for key in ('legacy_ids', 'aliases'):
+        _strings(person[key], 'audited_researcher.' + key, item_maximum=120)
+    _urls(person['source_urls'], 'audited_researcher.source_urls')
+    if 'official_interests' in person:
+        _strings(person['official_interests'], 'audited_researcher.official_interests')
     for key, fields in (('institution', {'name', 'ror_id'}), ('external_ids', {'openalex'}),
                         ('source_audit', AUDIT_FIELDS)):
         if key in person:
             _fields(person[key], fields, set(), 'audited_researcher.' + key)
             _texts(person[key], fields, 'audited_researcher.' + key)
+    if 'institution' in person:
+        _bounds(person['institution'], {'name': 300, 'ror_id': 25}, 'audited_researcher.institution')
+    if 'external_ids' in person:
+        value = person['external_ids']['openalex']
+        if value and not re.fullmatch(r'https://openalex\.org/A[0-9]{1,20}', value):
+            raise ValueError('audited_researcher invalid OpenAlex identity')
+    if 'source_audit' in person:
+        audit = person['source_audit']
+        if (audit['version'] != 'full-profile-repair-v1'
+                or not re.fullmatch(r'[a-f0-9]{64}', audit['baseline_material'])
+                or audit['disposition'] not in {'corrected', 'unresolved'}
+                or not legacy._valid_date(audit['reviewed_on'])):
+            raise ValueError('audited_researcher invalid source audit provenance')
+        _bounded_text(audit['issues'], 'audited_researcher.source_audit.issues', 500, required=True)
+        _bounded_text(audit['limitations'], 'audited_researcher.source_audit.limitations', 500)
     if 'metrics' in person:
         _fields(person['metrics'], {'openalex_works_count'}, set(), 'audited_researcher.metrics')
         count = person['metrics']['openalex_works_count']
-        if count is not None and (type(count) is not int or count < 0):
+        if count is not None and (type(count) is not int or not 0 <= count <= 2**53 - 1):
             raise ValueError('audited_researcher works count must be a nonnegative integer or null')
 
 
@@ -91,26 +159,26 @@ def material_claim_hash(claim):
 
 
 def _evidence_records(records, label):
-    if not isinstance(records, list) or not records:
+    if not isinstance(records, list) or not 1 <= len(records) <= 64:
         raise ValueError(f'{label} must contain source observations')
     for record in records:
         _fields(record, OBSERVATION_FIELDS, set(), label)
         _texts(record, OBSERVATION_FIELDS - {'retrieved_at'}, label)
         if not isinstance(record, dict) or record.get('form') not in {'quotation', 'paraphrase'}:
             raise ValueError(f'{label} must distinguish quotation from paraphrase')
-        legacy._validate_urls([record.get('url')], label)
+        _urls([record.get('url')], label)
         if record.get('source_type') not in {'official_profile', 'researcher_group',
                                             'attributed_publication', 'institutional_research_report'}:
             raise ValueError(f'{label} has an unsupported source type')
         for key in ('response_sha256', 'text_sha256'):
             if not re.fullmatch(r'[a-f0-9]{64}', str(record.get(key) or '')):
                 raise ValueError(f'{label} has an invalid source identity')
-        legacy._require_text(record.get('locator'), label, 500)
+        _bounded_text(record.get('locator'), label, 500, required=True)
         if not legacy._valid_date(str(record.get('reviewed_on') or '')):
             raise ValueError(f'{label} has an invalid review date')
         retrieved_at = record.get('retrieved_at')
         try:
-            if not isinstance(retrieved_at, str) or not re.fullmatch(
+            if not isinstance(retrieved_at, str) or len(retrieved_at) > 64 or not re.fullmatch(
                     r'[0-9]{4}-[0-9]{2}-[0-9]{2}T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]'
                     r'(?:\.[0-9]+)?(?:Z|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])', retrieved_at):
                 raise ValueError
@@ -147,6 +215,14 @@ def validate(registry):
             if claim.get('material_hash') != material_claim_hash(claim):
                 raise ValueError('audited_claim_material_hash')
             structural_claim['material_hash'] = legacy.material_claim_hash(claim)
+            for prior in claim.get('history', []):
+                # Revisions legitimately reuse their owner's legacy claim IDs.
+                # Validate each snapshot independently with all normal claim
+                # semantics, substituting only its audited material hash.
+                historical_claim = dict(prior, material_hash=legacy.material_claim_hash(prior))
+                historical_person = dict(structural_person, claims=[historical_claim])
+                legacy.validate_registry({'schema_version': registry['schema_version'],
+                                          'researchers': [historical_person]}, require_generation=False)
     legacy.validate_registry(structural, require_generation=False)
     return registry
 

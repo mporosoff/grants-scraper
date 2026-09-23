@@ -16,7 +16,7 @@ def observation(url='https://example.edu/synthetic-profile'):
 def registry_fixture():
     claims = []
     for number in (1, 2):
-        claim = {'claim_id': f'urh-990001-c00{number}', 'revision': number, 'status': 'active',
+        claim = {'claim_id': f'urh-990001-c00{number}', 'revision': number + 1, 'status': 'active',
                  'label': f'Synthetic catalysis method {number}', 'category': 'Chemistry',
                  'categories': ['Chemistry'], 'type': 'method',
                  'evidence': f'Synthetic measured catalytic activity in experiment {number}.',
@@ -25,6 +25,7 @@ def registry_fixture():
                  'evidence_records': [observation()]}
         claim['material_hash'] = audited.material_claim_hash(claim)
         prior = {key: copy.deepcopy(item) for key, item in claim.items() if key != 'evidence_records'}
+        prior['revision'] = number
         prior['evidence'] = f'Synthetic earlier evidence for experiment {number}.'
         prior['material_hash'] = audited.material_claim_hash(prior)
         claim['history'] = [prior]
@@ -58,8 +59,8 @@ class AuditedRegistryStageTests(unittest.TestCase):
         value['researchers'][0].update(
             institution={'name': 'Synthetic University', 'ror_id': ''},
             external_ids={'openalex': ''}, metrics={'openalex_works_count': None},
-            source_audit={'version': 'synthetic-audit-v1', 'baseline_material': 'Synthetic snapshot',
-                          'disposition': 'corrected', 'issues': '', 'limitations': 'Synthetic limitation',
+            source_audit={'version': 'full-profile-repair-v1', 'baseline_material': 'c' * 64,
+                          'disposition': 'corrected', 'issues': 'Synthetic source correction', 'limitations': 'Synthetic limitation',
                           'reviewed_on': '2026-09-22'})
         return self.rehash(value)
 
@@ -102,6 +103,125 @@ class AuditedRegistryStageTests(unittest.TestCase):
                 else: person['metrics']['openalex_works_count'] = private
                 self.rehash(value)
                 with self.assertRaises(ValueError): audited.validate(value)
+
+    def test_source_audit_requires_compact_authored_metadata_not_source_bodies(self):
+        cases = [('baseline_material', 'Synthetic raw email ' * 60000),
+                 ('baseline_material', 'c' * 63), ('version', 'unsupported-audit'),
+                 ('disposition', 'approved'), ('reviewed_on', '2026-02-29'),
+                 ('reviewed_on', '2026-09-22\n'), ('issues', ''),
+                 ('issues', 'x' * 501), ('limitations', 'x' * 501),
+                 ('issues', ' ' * 501 + 'Short'), ('limitations', {'private': 'text'})]
+        for key, bad in cases:
+            with self.subTest(key=key, value_type=type(bad).__name__):
+                value = self.extended_fixture()
+                value['researchers'][0]['source_audit'][key] = bad
+                self.rehash(value); original = legacy.canonical_bytes(value)
+                for operation in (audited.validate, audited.directory, audited.faculty, audited.matching_profiles):
+                    with self.assertRaises(ValueError): operation(value)
+                self.assertEqual(legacy.canonical_bytes(value), original)
+
+    def test_every_history_snapshot_uses_all_ordinary_claim_semantics(self):
+        cases = [('status', 'unreviewed'), ('evidence_level', 'inferred'),
+                 ('verified_on', '2026-02-29'), ('source_urls', ['http://example.edu/profile']),
+                 ('source_urls', ['https://']), ('label', 'x' * 181), ('category', 'x' * 141),
+                 ('type', 'x' * 81), ('evidence', 'x' * 501), ('evidence', ' ' * 501 + 'x'),
+                 ('categories', []), ('categories', ['Chemistry', 'Chemistry']),
+                 ('categories', ['Physics']), ('categories', ['Chemistry'] * 13),
+                 ('legacy_claim_ids', ['duplicate', 'DUPLICATE']),
+                 ('legacy_claim_ids', ['noncanonical ']), ('legacy_claim_ids', ['x' * 81]),
+                 ('retired_on', 'invalid')]
+        for key, bad in cases:
+            with self.subTest(key=key):
+                value = self.extended_fixture()
+                value['researchers'][0]['claims'][0]['history'][0][key] = bad
+                self.rehash(value); original = legacy.canonical_bytes(value)
+                for operation in (audited.validate, audited.directory, audited.faculty, audited.matching_profiles):
+                    with self.assertRaises(ValueError): operation(value)
+                self.assertEqual(legacy.canonical_bytes(value), original)
+
+    def test_history_revisions_are_older_unique_and_keep_reused_legacy_ids(self):
+        good = self.extended_fixture(); claim = good['researchers'][0]['claims'][0]
+        claim['revision'] = 4
+        prior = copy.deepcopy(claim['history'][0]); prior['revision'] = 3
+        claim['history'].append(prior); self.rehash(good)
+        original = copy.deepcopy(good)
+        self.assertIs(audited.validate(good), good)
+        self.assertEqual(good, original)
+        for revision in (1, 4, 5):
+            value = copy.deepcopy(good)
+            value['researchers'][0]['claims'][0]['history'][1]['revision'] = revision
+            self.rehash(value)
+            with self.assertRaisesRegex(ValueError, 'historical revisions'): audited.validate(value)
+
+    def test_other_exported_scalars_and_lists_are_bounded_and_well_typed(self):
+        cases = [('legacy_ids', ['x' * 121]), ('aliases', ['x' * 121]),
+                 ('official_interests', ['x' * 501]), ('official_interests', ['x'] * 65),
+                 ('source_urls', ['https://example.edu/' + 'x' * 500]),
+                 ('source_urls', ['https://example.edu/'] * 65),
+                 ('research_summary', ' ' * 1201 + 'Short'),
+                 ('external_ids', {'openalex': 'SYNTHETIC_PRIVATE_EMAIL'}),
+                 ('external_ids', {'openalex': 'https://unrelated.example/A123'}),
+                 ('metrics', {'openalex_works_count': True}),
+                 ('metrics', {'openalex_works_count': 2**53}),
+                 ('institution', {'name': ' ' * 301, 'ror_id': ''})]
+        for key, bad in cases:
+            with self.subTest(key=key):
+                value = self.extended_fixture(); value['researchers'][0][key] = bad
+                self.rehash(value)
+                with self.assertRaises(ValueError): audited.validate(value)
+        for location in ('current', 'history'):
+            for bad in ({'retirement_reason': 'x' * 501},
+                        {'retired_on': '2026-02-29', 'retirement_reason': 'Synthetic reason'},
+                        {'retired_on': '2026-09-22', 'retirement_reason': ''}):
+                with self.subTest(location=location, metadata=tuple(bad)):
+                    value = self.extended_fixture(); claim = value['researchers'][0]['claims'][0]
+                    target = claim if location == 'current' else claim['history'][0]
+                    target.update(status='retired', **bad); self.rehash(value)
+                    with self.assertRaises(ValueError): audited.validate(value)
+
+    def test_legitimate_boundary_values_and_historical_observations_stay_exact(self):
+        value = self.extended_fixture(); person = value['researchers'][0]
+        person['source_audit'].update(issues='x' * 500, limitations='', disposition='unresolved')
+        person['official_interests'] = ['x' * 500]
+        person['external_ids']['openalex'] = 'https://openalex.org/A1234567890'
+        person['metrics']['openalex_works_count'] = 2**53 - 1
+        claim = person['claims'][0]
+        claim['history'][0].update(evidence='x' * 500, evidence_records=[observation()])
+        claim['source_urls'] = ['https://example.edu/synthetic-profile ']
+        self.rehash(value); original = copy.deepcopy(value)
+        self.assertIs(audited.validate(value), value)
+        self.assertEqual(value, original)
+        self.assertEqual(audited.matching_profiles(value)[0]['claims'][0]['source_urls'], claim['source_urls'])
+
+    def test_urls_are_real_https_sources_across_all_exported_locations(self):
+        for location in ('person', 'claim', 'history', 'claim_observation', 'summary_observation'):
+            for bad in ('https://', 'https://@example.edu/', 'https://user:secret@example.edu/',
+                        'https://example.edu:99999/', 'https://example.edu/path with space',
+                        'https://example.edu\\synthetic'):
+                with self.subTest(location=location, url=bad):
+                    value = self.extended_fixture(); person = value['researchers'][0]; claim = person['claims'][0]
+                    if location == 'person': person['source_urls'] = [bad]
+                    elif location == 'claim': claim['source_urls'] = [bad]
+                    elif location == 'history': claim['history'][0]['source_urls'] = [bad]
+                    elif location == 'claim_observation': claim['evidence_records'][0]['url'] = bad
+                    else: person['summary_evidence'][0]['url'] = bad
+                    self.rehash(value)
+                    with self.assertRaises(ValueError): audited.validate(value)
+
+    def test_revision_identity_cannot_round_when_exported_to_javascript(self):
+        value = self.extended_fixture(); claim = value['researchers'][0]['claims'][0]
+        claim['revision'] = 2**53 - 1; claim['history'][0]['revision'] = 2**53 - 2
+        self.rehash(value); original = copy.deepcopy(value)
+        self.assertIs(audited.validate(value), value)
+        self.assertEqual(audited.directory(value)['researchers'][0]['claims'][0]['revision'], 2**53 - 1)
+        self.assertEqual(value, original)
+        for location in ('current', 'history'):
+            for bad in (2**53, 2**53 + 1, True):
+                with self.subTest(location=location, revision=bad):
+                    invalid = copy.deepcopy(value); current = invalid['researchers'][0]['claims'][0]
+                    target = current if location == 'current' else current['history'][0]
+                    target['revision'] = bad; self.rehash(invalid)
+                    with self.assertRaisesRegex(ValueError, 'safe integer'): audited.validate(invalid)
 
     def test_legitimate_history_retirement_audit_and_summary_are_preserved_not_stripped(self):
         value = self.extended_fixture(); person = value['researchers'][0]
