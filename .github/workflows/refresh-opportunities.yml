@@ -10,7 +10,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-correction, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -90,7 +90,7 @@ jobs:
           PUBLICATION_RUN: ${{ inputs.publication_run }}
           PUBLICATION_ATTEMPT: ${{ inputs.publication_attempt }}
           GH_TOKEN: ${{ github.token }}
-        run: python -m tools.plan_release
+        run: python -m tools.catalog_correction_release plan
       - uses: actions/upload-artifact@v4
         with:
           name: release-plan-${{ github.run_attempt }}
@@ -579,12 +579,45 @@ jobs:
           if-no-files-found: warn
           retention-days: 90
 
+  catalog-correction:
+    needs: plan
+    if: needs.plan.outputs.stage == 'catalog-correction'
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    outputs:
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.plan.outputs.release_sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Restore this logical run's exact completed candidate
+        id: restore
+        run: python -m tools.restore_generation_checkpoint
+      - name: Import the authenticated seven-vector export and retain original generation
+        id: persist
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.catalog_correction_release create
+          --work "$RUNNER_TEMP/catalog-correction" --bundle "$RUNNER_TEMP/candidate"
+      - name: Retain the standard immutable public candidate
+        if: steps.restore.outputs.candidate_id == '' && steps.persist.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-${{ steps.persist.outputs.candidate_id }}
+          path: ${{ runner.temp }}/candidate
+          if-no-files-found: error
+          retention-days: 90
+
   candidate:
-    needs: [plan, generate, assemble]
+    needs: [plan, generate, assemble, catalog-correction]
     if: >-
       always() && needs.plan.result == 'success' && needs.plan.outputs.stage != 'noop' &&
-      (needs.generate.result == 'success' || needs.assemble.result == 'success' ||
-       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped'))
+      (needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' ||
+       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped'))
     runs-on: ubuntu-latest
     outputs:
       candidate_id: ${{ steps.select.outputs.candidate_id }}
@@ -593,7 +626,7 @@ jobs:
       - name: Select the immutable artifact checkpoint
         id: select
         env:
-          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id }}
+          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id }}
           REQUESTED_ID: ${{ needs.plan.outputs.candidate_id }}
           REQUESTED_RUN: ${{ needs.plan.outputs.candidate_run }}
         run: |
@@ -659,7 +692,7 @@ jobs:
       !cancelled() && needs.validate.result == 'success' &&
       needs.plan.outputs.stage != 'validate' && needs.plan.outputs.stage != 'verify'
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 90
     outputs:
       merge_sha: ${{ steps.publication.outputs.merge_sha }}
       review_ready: ${{ steps.review.outputs.review_ready }}
@@ -685,6 +718,9 @@ jobs:
         run: |
           python -m tools.release_candidate receipt --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/reports/validation.json"
           python -m tools.release_candidate materialize --bundle "$RUNNER_TEMP/candidate"
+      - name: Select the exact candidate's smoke accounting route
+        id: accounting
+        run: python -m tools.catalog_correction_release mode --bundle "$RUNNER_TEMP/candidate"
       - name: Establish exact-head review readiness before changing serving state
         id: review
         run: >-
@@ -720,12 +756,12 @@ jobs:
         if: steps.review.outputs.review_ready == 'true'
         run: python -m tools.verify_release_live worker --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke before publication
-        if: steps.review.outputs.review_ready == 'true'
+        if: steps.review.outputs.review_ready == 'true' && steps.accounting.outputs.fixed_correction == 'false'
         env:
           FUNDING_RELEASE_INPUT_ROOT: ${{ runner.temp }}/candidate/files
         run: node tools/smoke_search_worker.mjs
       - name: Verify the active Worker fingerprint after deployment or retention
-        if: steps.review.outputs.review_ready == 'true'
+        if: steps.review.outputs.review_ready == 'true' && steps.accounting.outputs.fixed_correction == 'false'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -733,6 +769,84 @@ jobs:
           npx --yes wrangler@4.125.0 deployments list --config workers/search-voyage-proxy/wrangler.jsonc --json > "$RUNNER_TEMP/deployments-after.json"
           node tools/search_worker_checkpoint.mjs "$RUNNER_TEMP/candidate" "$RUNNER_TEMP/deployments-after.json" "$RUNNER_TEMP/reports/worker-after.json"
           test "$(jq -r .deploy_required "$RUNNER_TEMP/reports/worker-after.json")" = false
+      - name: Authenticate complete corrected candidate serving bytes and safe source context
+        id: smoke-context
+        if: steps.review.outputs.review_ready == 'true' && steps.accounting.outputs.fixed_correction == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: |
+          npx --yes wrangler@4.125.0 deployments list --config workers/search-voyage-proxy/wrangler.jsonc --json > "$RUNNER_TEMP/reports/deployments-after.json"
+          python -m tools.catalog_correction_release context --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-context"
+      - name: Retain the authenticated public smoke context before any owner dispatch
+        if: steps.smoke-context.outcome == 'success'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.smoke-context.outputs.context_artifact }}
+          path: ${{ runner.temp }}/catalog-context/context
+          if-no-files-found: error
+          retention-days: 90
+      - name: Plan the fixed query smoke or exact cached reuse
+        id: smoke-embed-plan
+        if: steps.smoke-context.outcome == 'success'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python -m tools.catalog_correction_release plan-smoke --name smoke-embed --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
+      - name: Retain the query dispatch intent before submission
+        if: steps.smoke-embed-plan.outputs.smoke_status == 'new_intent'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.smoke-embed-plan.outputs.intent_artifact }}
+          path: ${{ steps.smoke-embed-plan.outputs.intent_path }}
+          if-no-files-found: error
+          retention-days: 90
+      - name: Wait for the sole owner's query smoke without redispatch
+        if: steps.smoke-embed-plan.outcome == 'success'
+        run: python -m tools.catalog_correction_release run-smoke --name smoke-embed --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
+      - name: Plan the fixed current corpus smoke or exact cached reuse
+        id: smoke-current-plan
+        if: steps.smoke-context.outcome == 'success'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python -m tools.catalog_correction_release plan-smoke --name smoke-current-rerank --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
+      - name: Retain the current corpus dispatch intent before submission
+        if: steps.smoke-current-plan.outputs.smoke_status == 'new_intent'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.smoke-current-plan.outputs.intent_artifact }}
+          path: ${{ steps.smoke-current-plan.outputs.intent_path }}
+          if-no-files-found: error
+          retention-days: 90
+      - name: Wait for the sole owner's current corpus smoke without redispatch
+        if: steps.smoke-current-plan.outcome == 'success'
+        run: python -m tools.catalog_correction_release run-smoke --name smoke-current-rerank --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
+      - name: Plan the fixed previous corpus smoke or zero-provider receipt recovery
+        id: smoke-previous-plan
+        if: steps.smoke-context.outcome == 'success'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python -m tools.catalog_correction_release plan-smoke --name smoke-previous-rerank --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
+      - name: Retain the previous corpus or zero-provider recovery dispatch intent
+        if: steps.smoke-previous-plan.outputs.smoke_status == 'new_intent'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.smoke-previous-plan.outputs.intent_artifact }}
+          path: ${{ steps.smoke-previous-plan.outputs.intent_path }}
+          if-no-files-found: error
+          retention-days: 90
+      - name: Wait for the sole owner's previous corpus smoke and durable aggregate
+        if: steps.smoke-previous-plan.outcome == 'success'
+        run: python -m tools.catalog_correction_release run-smoke --name smoke-previous-rerank --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
+      - name: Verify all three accepted owned smokes against fresh unchanged serving bytes
+        id: owned-provider
+        if: steps.smoke-context.outcome == 'success'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python -m tools.catalog_correction_release reuse-smoke --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Materialize exact candidate bytes through protected publication and verify merged hashes
         if: steps.review.outputs.review_ready == 'true'
         id: publication
@@ -740,8 +854,47 @@ jobs:
           python -m tools.publish_release_candidate --bundle "$RUNNER_TEMP/candidate"
           --receipt "$RUNNER_TEMP/reports/validation.json" --reports "$RUNNER_TEMP/reports" --artifact-run "$CANDIDATE_RUN"
           --prepared "$RUNNER_TEMP/reports/review-ready.json"
+      - name: Retain the fully tested Worker after a late incomplete publication
+        id: owned-worker-retained
+        if: ${{ failure() && steps.owned-provider.outcome == 'success' && steps.publication.outcome != 'success' }}
+        run: |
+          python - <<'PY'
+          import hashlib, json, os
+          from pathlib import Path
+          from tools.offline_spend import atomic_json
+          reports = Path(os.environ['RUNNER_TEMP']) / 'reports'
+          manifest = json.loads((Path(os.environ['RUNNER_TEMP']) / 'candidate/candidate.json').read_bytes())
+          worker = json.loads((reports / 'worker-after.json').read_bytes())
+          smoke = json.loads((reports / 'catalog-smoke-reuse.json').read_bytes())
+          pages = json.loads((reports / 'known-good-live-release.json').read_bytes())
+          progress_path = reports / 'publication-progress.json'
+          progress = json.loads(progress_path.read_bytes()) if progress_path.exists() else None
+          generation = ('previous' if pages['current_corpus_sha256'] == smoke['previous_corpus_sha256'] else
+                        'current' if pages['current_corpus_sha256'] == smoke['current_corpus_sha256'] else None)
+          assert smoke['status'] == 'passed_reused' and smoke['original_provider_requests'] == 3 and generation
+          expected_space = smoke['previous_model_space_fingerprint'] if generation == 'previous' else smoke['model_space_fingerprint']
+          assert pages['model_space_fingerprint'] == expected_space and smoke['serving_version_id'] == worker['version_id']
+          assert worker['candidate']['candidate_id'] == manifest['candidate_id']
+          merged = bool(progress and progress.get('candidate_id') == manifest['candidate_id'] and progress.get('protected_merge_completed') is True)
+          record = {'version': 'catalog-owned-worker-retention-v1', 'candidate_id': manifest['candidate_id'],
+              'publication_status': 'protected_merge_recorded_publication_incomplete' if merged else 'publication_unconfirmed',
+              'pages_publication_complete': False, 'protected_merge_progress': progress,
+              'retained_version_id': worker['version_id'], 'retained_deployment_id': worker['checkpoint']['activeDeploymentId'],
+              'worker_checkpoint_sha256': hashlib.sha256((reports / 'worker-after.json').read_bytes()).hexdigest(),
+              'owned_smoke_receipt_sha256': smoke['receipt_sha256'], 'authoritative_run_id': smoke['authoritative_run_id'],
+              'authoritative_checkpoint_sha256': smoke['authoritative_checkpoint_sha256'],
+              'pages_corpus_sha256': pages['current_corpus_sha256'], 'pages_compatibility_checked_generation': generation,
+              'owned_previous_corpus_smoke': 'passed', 'new_provider_calls': 0, 'worker_mutation_performed': False,
+              'next_retry_stage': 'publish', 'resume_requires_fresh_unchanged_serving_proof': True}
+          atomic_json(reports / 'owned-worker-retained.json', record)
+          with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf8') as summary:
+              summary.write('\nPublication is incomplete; Pages completion is not claimed. The workflow retained the fully tested Worker '
+                  + worker['version_id'] + ' at deployment ' + worker['checkpoint']['activeDeploymentId']
+                  + '. The existing Pages corpus matches the checked ' + generation
+                  + ' generation, and the real previous-corpus smoke passed. Resume the exact candidate with fresh provenance and zero new provider calls.\n')
+          PY
       - name: Restore the captured serving version if pre-publication fails
-        if: ${{ failure() && steps.worker-deploy.outcome == 'success' && steps.publication.outcome != 'success' }}
+        if: ${{ failure() && steps.worker-deploy.outcome == 'success' && steps.publication.outcome != 'success' && steps.owned-provider.outcome != 'success' }}
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -797,6 +950,9 @@ jobs:
         run: >-
           python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
           --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/candidate"
+      - name: Select the published candidate's smoke accounting route
+        id: accounting
+        run: python -m tools.catalog_correction_release mode --bundle "$RUNNER_TEMP/candidate"
       - name: Load the expected publication receipt and its original validation evidence
         env:
           PUBLICATION_RUN: ${{ needs.publish.result == 'success' && github.run_id || needs.plan.outputs.publication_run }}
@@ -814,14 +970,22 @@ jobs:
         run: python -m tools.verify_release_live verify --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports"
       - name: Run a real provider smoke after Pages propagation
         id: live-provider
+        if: steps.accounting.outputs.fixed_correction == 'false'
         env:
           FUNDING_RELEASE_INPUT_ROOT: ${{ runner.temp }}/candidate/files
         run: node tools/smoke_search_worker.mjs
+      - name: Reuse the exact three owned smokes after fresh full serving reconciliation
+        id: live-owned-provider
+        if: steps.accounting.outputs.fixed_correction == 'true'
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: python -m tools.catalog_correction_release reuse-smoke --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-reuse"
       - name: Record the complete live result including provider smoke
         if: always()
         env:
           ASSET_OUTCOME: ${{ steps.live-assets.outcome }}
-          PROVIDER_OUTCOME: ${{ steps.live-provider.outcome }}
+          PROVIDER_OUTCOME: ${{ steps.accounting.outputs.fixed_correction == 'true' && steps.live-owned-provider.outcome || steps.live-provider.outcome }}
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: >-
@@ -837,7 +1001,7 @@ jobs:
           retention-days: 90
 
   closeout:
-    needs: [plan, generate, assemble, candidate, validate, publish, pages, verify-live]
+    needs: [plan, generate, assemble, catalog-correction, candidate, validate, publish, pages, verify-live]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -848,7 +1012,7 @@ jobs:
         with:
           script: |
             const needs = JSON.parse(process.env.RESULTS);
-            const order = ['plan', 'generate', 'assemble', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
+            const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
             const candidate = needs.candidate.outputs.candidate_id || 'not persisted';
             const generationRun = needs.candidate.outputs.candidate_run || 'none';

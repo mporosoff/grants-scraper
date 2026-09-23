@@ -90,7 +90,8 @@ def _metadata(e):
 def validate_appended_history(state):
     """Nonrecursive validator used by the historical I3 guard."""
     installed = [e for e in state['events'] if e.get('authority') == VERSION]
-    appended = state['requests'][START_REQUESTS:]
+    from tools.catalog_correction_policy import historical_request_end
+    appended = state['requests'][START_REQUESTS:historical_request_end(state)]
     if not installed and not appended:
         return
     _require(len(state['requests']) >= START_REQUESTS and identity(state['requests'][:START_REQUESTS]) == REQUESTS_SHA

@@ -70,6 +70,9 @@ class ExperimentLedger(Ledger):
             allowed_model = {'anthropic':'claude-sonnet-5','openai':'gpt-5.6-luna','voyage':'voyage-4-large'}.get(provider)==model
         if metadata.get('purpose', '').startswith('cb-fc-i3-'):
             allowed_model = {'anthropic':'claude-sonnet-5','openai':'gpt-5.6-luna'}.get(provider)==model
+        if metadata.get('purpose', '').startswith('cb-fc-cat-'):
+            from tools.catalog_correction_policy import PREFIX, operation
+            allowed_model = provider == 'voyage' and model == operation(metadata['purpose'][len(PREFIX):])['model']
         if is_luna_repair:
             allowed_model = {'anthropic':'claude-sonnet-5','openai':'gpt-5.6-luna'}.get(provider)==model
         if stage not in (2, 3) or stage > approved_stage or not allowed_model:
@@ -114,7 +117,11 @@ class ExperimentLedger(Ledger):
                 purchased = {item for r in state["requests"] for item in r.get("row_inputs", [])}
                 if purchased.intersection(metadata["row_inputs"]):
                     raise Deferred("paid_embedding_row_already_claimed_no_rebatch")
-                if len(purchased | set(metadata["row_inputs"])) > 3840:
+                row_input_ceiling = 3840
+                if metadata.get('purpose', '').startswith('cb-fc-cat-'):
+                    from tools.catalog_correction_policy import unique_input_limit
+                    row_input_ceiling = unique_input_limit(state)
+                if len(purchased | set(metadata["row_inputs"])) > row_input_ceiling:
                     raise Deferred("unique_embedding_inventory_exhausted")
             if metadata.get('judge_items'):
                 from tools.team_recommender_items import claimed_judge_items, historical_index

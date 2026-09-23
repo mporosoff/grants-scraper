@@ -106,6 +106,10 @@ def _operation_events(state):
 
 def history(state, require_authority=True):
     pool.history(state); capacity.validate(state, require=True)
+    from tools.catalog_correction_policy import present as catalog_present, validate_appended_history as catalog_history
+    catalog = catalog_present(state)
+    if catalog:
+        catalog_history(state)
     from tools.contextual_team_ec_disposition import allowed_unknown_ids
     disposed_unknown = allowed_unknown_ids(state)
     continuation = (any(r.get('purpose', '').startswith('cb-fc-i3c-') for r in state['requests'])
@@ -158,6 +162,8 @@ def history(state, require_authority=True):
             raise Deferred('iteration3_new_uncertainty_requires_recovery')
         if index < start['requests']:
             continue
+        if catalog and row.get('purpose', '').startswith('cb-fc-cat-'):
+            continue  # Complete prefix and finite tail were validated above.
         if continuation and row.get('purpose', '').startswith('cb-fc-i3c-'):
             continue  # The separate exact finite validator above owns these rows.
         purpose = row.get('purpose'); locked = seen.get(purpose)

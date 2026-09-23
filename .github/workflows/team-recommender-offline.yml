@@ -43,12 +43,17 @@ jobs:
       - uses: actions/checkout@v6
         with:
           ref: ${{ github.sha }}
+          fetch-depth: 0
           persist-credentials: false
       - uses: actions/setup-python@v6
         with:
           python-version: '3.13'
           cache: pip
       - run: python -m pip install -r requirements.txt
+      - uses: actions/setup-node@v6
+        if: contains(inputs.contextual_check, 'catalog_')
+        with:
+          node-version: '22'
       - name: Validate public packet and restore the single authoritative ledger
         id: prepare
         if: env.CONTEXTUAL_JOB == '' && inputs.contextual_check == ''
@@ -205,10 +210,22 @@ jobs:
           if-no-files-found: error
           retention-days: 90
       - name: Execute the single bounded independent check
-        if: steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider != 'none'
+        if: steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider != 'none' && steps.contextual_check_prepare.outputs.text_provider != 'catalog'
         env:
           ANTHROPIC_API_KEY: ${{ steps.contextual_check_prepare.outputs.text_provider != 'openai' && steps.contextual_check_prepare.outputs.text_provider != 'none' && secrets.ANTHROPIC_API_KEY || '' }}
           OPENAI_API_KEY: ${{ steps.contextual_check_prepare.outputs.text_provider == 'openai' && secrets.OPENAI_API_KEY || '' }}
+          CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
+        run: >-
+          python -m tools.contextual_team_check execute
+          --state "$RUNNER_TEMP/team-experiment" --result "$RUNNER_TEMP/contextual-check-result.json"
+          --reservation "$RUNNER_TEMP/team-reservation.json"
+      - name: Execute one fixed catalog request under the same owner
+        if: steps.contextual_check_prepare.outcome == 'success' && steps.contextual_check_prepare.outputs.text_provider == 'catalog'
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VOYAGE_API_KEY: ${{ steps.contextual_check_prepare.outputs.catalog_provider == 'voyage' && secrets.VOYAGE_API_KEY || '' }}
+          CLOUDFLARE_API_TOKEN: ${{ steps.contextual_check_prepare.outputs.catalog_provider == 'none' && secrets.CLOUDFLARE_API_TOKEN || '' }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ steps.contextual_check_prepare.outputs.catalog_provider == 'none' && secrets.CLOUDFLARE_ACCOUNT_ID || '' }}
           CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
         run: >-
           python -m tools.contextual_team_check execute
@@ -223,6 +240,17 @@ jobs:
           python -m tools.contextual_team_check execute
           --state "$RUNNER_TEMP/team-experiment" --result "$RUNNER_TEMP/contextual-check-result.json"
           --reservation "$RUNNER_TEMP/team-reservation.json"
+      - name: Bind the three catalog checks to their exact owner and serving bytes
+        if: steps.contextual_check_prepare.outputs.catalog_operation == 'smoke-previous-rerank' && success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+          CONTEXTUAL_CHECK: ${{ inputs.contextual_check }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        run: >-
+          python -m tools.catalog_smoke_receipt finalize-smoke
+          --state "$RUNNER_TEMP/team-experiment" --inputs "$RUNNER_TEMP/catalog-correction-inputs"
+          --output "$RUNNER_TEMP/catalog-smoke-result.json"
       - name: Retain exact accounting and bounded results after success or failure
         id: persist_state
         if: always() && (steps.prepare.outcome == 'success' || steps.contextual_prepare.outcome == 'success' || steps.contextual_check_prepare.outcome == 'success')
@@ -230,6 +258,23 @@ jobs:
         with:
           name: on-demand-team-offline-v2-20260909-state-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/team-experiment
+          if-no-files-found: error
+          retention-days: 90
+      - name: Export safe catalog correction bytes only after all seven responses are durable
+        if: steps.contextual_check_prepare.outputs.catalog_operation == 'embedding-7' && steps.persist_state.outcome == 'success' && success()
+        env:
+          CATALOG_STATE_ARTIFACT_ID: ${{ steps.persist_state.outputs.artifact-id }}
+          CATALOG_STATE_ARTIFACT_DIGEST: ${{ steps.persist_state.outputs.artifact-digest }}
+        run: >-
+          python -m tools.catalog_source_correction export-vectors
+          --state "$RUNNER_TEMP/team-experiment" --inputs "$RUNNER_TEMP/catalog-correction-inputs"
+          --destination "$RUNNER_TEMP/catalog-correction-safe-output"
+      - name: Retain the safe correction output for the protected release workflow
+        if: steps.contextual_check_prepare.outputs.catalog_operation == 'embedding-7' && steps.persist_state.outcome == 'success' && success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: catalog-correction-export-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/catalog-correction-safe-output
           if-no-files-found: error
           retention-days: 90
       - name: Return the graph only after its authoritative checkpoint is durable
