@@ -10,8 +10,10 @@ const bundle=JSON.parse(fs.readFileSync('workers/researcher-intake/config/contex
 const code=name=>gunzipSync(Buffer.from(bundle.files[name].gzip_base64,'base64')).toString('utf8');
 const canonical=v=>Array.isArray(v)?'['+v.map(canonical).join(',')+']':v&&typeof v==='object'?'{'+Object.keys(v).sort().map(k=>JSON.stringify(k)+':'+canonical(v[k])).join(',')+'}':JSON.stringify(v);
 const hash=v=>createHash('sha256').update(canonical(v)).digest('hex');
+const NOW='2026-09-13T12:00:00Z';
+class FixtureDate extends Date{constructor(...args){super(...(args.length?args:[NOW]));}static now(){return +new Date(NOW);}}
 function context(){
-  const c=vm.createContext({URL,URLSearchParams,Date,TextEncoder,TextDecoder,Uint8Array,crypto:webcrypto,setTimeout,clearTimeout});
+  const c=vm.createContext({URL,URLSearchParams,Date:FixtureDate,TextEncoder,TextDecoder,Uint8Array,crypto:webcrypto,setTimeout,clearTimeout});
   for(const name of ['assets/submission-schedule.js','assets/search-query.js','assets/search-retrieval.js',
     'data/researcher_directory.js','data/opportunities.js','data/subtopics.js','data/opportunity_team_index.js',
     'assets/contextual-team-engine.js','assets/contextual-team-client.js'])vm.runInContext(code(name),c,{filename:name});
@@ -69,7 +71,7 @@ test('real canonical child and official supplement adopt one graph; edits and re
 test('disabled extension has no button or dispatch; unassessed people remain manually editable',async()=>{
   const data=context(),dom=shellDom(code('match_explorer.html')),c=dom.context,index=data.OPPORTUNITY_TEAM_INDEX;
   const s=index.scopes[0],graph=fixtureGraph(data),requests=[];
-  Object.assign(c,{URL,URLSearchParams,Date,TextEncoder,TextDecoder,Uint8Array,AbortController,clearTimeout,crypto:webcrypto,btoa,
+  Object.assign(c,{URL,URLSearchParams,Date:FixtureDate,TextEncoder,TextDecoder,Uint8Array,AbortController,clearTimeout,crypto:webcrypto,btoa,
     location:{href:'https://funding-finder-researchers.urochestercheme.workers.dev/admin/contextual/preview/match_explorer.html'},
     OPPORTUNITY_TEAM_INDEX:index,RESEARCHER_DIRECTORY:data.RESEARCHER_DIRECTORY,GRANT_CATALOG:data.GRANT_CATALOG,
     FUNDING_SUBTOPICS:{loadSidecar:async()=>data.SUBTOPIC_CATALOG},
