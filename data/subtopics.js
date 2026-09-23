@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 18,
- "record_count": 430,
+ "parent_count": 19,
+ "record_count": 466,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -97,21 +97,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopics": []
   },
-  "302270": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "302271": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "302273": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -13558,13 +13544,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "351679": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "351715": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34176,21 +34155,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362321": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362325": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362329": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34442,6 +34407,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "362643": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "362644": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34659,308 +34631,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362859": {
-   "segmentation_method": "numbered",
-   "subtopic_count": 4,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_approval_contract": "ff4da7aea56a0d1bc2e3baefed616923114b8646e7c124508cab7a6e6e71736f",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-09-17",
-     "last_verified": "2026-09-17",
-     "opportunity_id": "362859:fa-1",
-     "ordinal_label": "1",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 5,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 1",
-     "subtopic_code_norm": "fa-1",
-     "subtopic_id": "362859:fa-1",
-     "subtopic_ordinal": 1,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Design, build, and demonstrate a proof-of-concept capability (laboratory based) that uses a single, configurable excitation source to generate multiple signatures (molecular, elemental composition, trace elements, isotope ratios) across a continuous range of excitation intensity from a sample for surface and bulk analysis.",
-     "term_display": {
-      "across": "across",
-      "analysi": "Analysis",
-      "area": "Area",
-      "bas": "based",
-      "build": "build",
-      "bulk": "bulk",
-      "capability": "capability",
-      "composition": "composition",
-      "configurable": "configurable",
-      "continuou": "continuous",
-      "demonstrate": "demonstrate",
-      "design": "Design",
-      "element": "elements",
-      "elemental": "elemental",
-      "excitation": "excitation",
-      "focu": "Focus",
-      "generate": "generate",
-      "integrat": "Integrated",
-      "intensity": "intensity",
-      "isotope": "isotope",
-      "laboratory": "laboratory",
-      "material": "Materials",
-      "molecular": "molecular",
-      "multiple": "multiple",
-      "ogoal": "oGoal",
-      "proof-of-concept": "proof-of-concept",
-      "range": "range",
-      "ratio": "ratios",
-      "sample": "sample",
-      "signature": "signatures",
-      "single": "single",
-      "source": "source",
-      "surface": "surface",
-      "trace": "trace",
-      "uses": "uses"
-     },
-     "title": "Integrated Materials Analysis.",
-     "title_fingerprint": "1d00a05b",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_approval_contract": "c5f98e154991522b0e5cb8683f4f8c3af39bc07633bad4730a2e8ed8b7365650",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-09-17",
-     "last_verified": "2026-09-17",
-     "opportunity_id": "362859:fa-2",
-     "ordinal_label": "2",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 5,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 2",
-     "subtopic_code_norm": "fa-2",
-     "subtopic_id": "362859:fa-2",
-     "subtopic_ordinal": 2,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Develop novel methods for multimodal surface analysis utilizing FA1’s capabilities and FA4’s optimization. Perform design studies and proof-of-concept experiments for an advanced, single-source architecture capable of surface analysis.",
-     "term_display": {
-      "advanc": "advanced",
-      "analysi": "analysis",
-      "architecture": "architecture",
-      "area": "Area",
-      "capability": "capabilities",
-      "capable": "capable",
-      "design": "design",
-      "develop": "Develop",
-      "experiment": "experiments",
-      "fa1": "FA1",
-      "fa4": "FA4",
-      "focu": "Focus",
-      "foundation": "Foundations",
-      "method": "methods",
-      "multimodal": "multimodal",
-      "novel": "novel",
-      "ogoal": "oGoal",
-      "optimization": "optimization",
-      "perform": "Perform",
-      "proof-of-concept": "proof-of-concept",
-      "single-source": "single-source",
-      "study": "studies",
-      "surface": "surface",
-      "utiliz": "utilizing"
-     },
-     "title": "Foundations for Surface Analysis.",
-     "title_fingerprint": "2e252105",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_approval_contract": "8fc384e7f12fc3b9fae37ba0f2289cd041c7eab84f5900216e7d997d0a9e605c",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-09-17",
-     "last_verified": "2026-09-17",
-     "opportunity_id": "362859:fa-3",
-     "ordinal_label": "3",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 5,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 3",
-     "subtopic_code_norm": "fa-3",
-     "subtopic_id": "362859:fa-3",
-     "subtopic_ordinal": 3,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Develop novel methods for multimodal bulk analysis utilizing FA1’s capabilities and FA4’s optimization. Perform design studies and proof-of-concept experiments for an advanced, single-source architecture capable of penetrating bulk analysis.",
-     "term_display": {
-      "advanc": "advanced",
-      "analysi": "analysis",
-      "architecture": "architecture",
-      "area": "Area",
-      "bulk": "bulk",
-      "capability": "capabilities",
-      "capable": "capable",
-      "design": "design",
-      "develop": "Develop",
-      "experiment": "experiments",
-      "fa1": "FA1",
-      "fa4": "FA4",
-      "focu": "Focus",
-      "foundation": "Foundations",
-      "method": "methods",
-      "multimodal": "multimodal",
-      "novel": "novel",
-      "ogoal": "oGoal",
-      "optimization": "optimization",
-      "penetrat": "penetrating",
-      "perform": "Perform",
-      "proof-of-concept": "proof-of-concept",
-      "single-source": "single-source",
-      "study": "studies",
-      "utiliz": "utilizing"
-     },
-     "title": "Foundations for Bulk Analysis.",
-     "title_fingerprint": "0beccc87",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "low",
-     "cov4_approval_contract": "ac985ad6aba08f52eb66d0febf64d8aeabef7eee3d6ea43312317d50ebe04180",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "cov4_prompt_version": "cov4-subject-context-1",
-     "evidence_anchor": "p5",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-09-17",
-     "last_verified": "2026-09-17",
-     "opportunity_id": "362859:fa-4",
-     "ordinal_label": "4",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 6,
-     "page_start": 5,
-     "parent_id": "362859",
-     "parent_opportunity_number": "HR001126S0013",
-     "pattern_family": "focus_area",
-     "program_area_labels": [],
-     "publication_reason": "tier_low",
-     "publication_state": "review",
-     "record_type": "subtopic",
-     "segmentation_method": "numbered",
-     "source_document_hash": "a11a485b746ffec08a317f0233b3cbb1ebf03140f59b66ef9f4e955255a635db",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/353140",
-     "source_role": "authoritative_announcement",
-     "status": "posted",
-     "subtopic_code": "Focus Area 4",
-     "subtopic_code_norm": "fa-4",
-     "subtopic_id": "362859:fa-4",
-     "subtopic_ordinal": 4,
-     "subtopic_source": "inferred",
-     "summary": "oGoal: Design, build, and demonstrate the ability to process multimodal surface and bulk analysis data in-situ for real time adaptive feedback during analysis scans with varying excitation intensities. Demonstrate optimization of selected signatures during analysis trials based on adaptive feedback. Explore novel correlations in multimodal signatures that support sample analysis and identification. Other external data sources may be integrated into data fusion models in addition. Addressing the four focus areas of MMoMA will requi",
-     "term_display": {
-      "ability": "ability",
-      "adaptive": "adaptive",
-      "addition": "addition",
-      "address": "Addressing",
-      "analysi": "analysis",
-      "area": "Area",
-      "bas": "based",
-      "build": "build",
-      "bulk": "bulk",
-      "correlation": "correlations",
-      "data": "data",
-      "demonstrate": "Demonstrate",
-      "design": "Design",
-      "dur": "during",
-      "excitation": "excitation",
-      "explore": "Explore",
-      "external": "external",
-      "feedback": "feedback",
-      "focu": "Focus",
-      "four": "four",
-      "fusion": "Fusion",
-      "identification": "identification",
-      "in-situ": "in-situ",
-      "integrat": "integrated",
-      "intensity": "intensities",
-      "into": "into",
-      "mmoma": "MMoMA",
-      "model": "models",
-      "multimodal": "multimodal",
-      "novel": "novel",
-      "ogoal": "oGoal",
-      "optimization": "optimization",
-      "process": "process",
-      "real": "real",
-      "requi": "requi",
-      "sample": "sample",
-      "scan": "scans",
-      "select": "selected",
-      "signature": "signatures",
-      "source": "sources",
-      "surface": "surface",
-      "time": "time",
-      "trial": "trials"
-     },
-     "title": "Multimodal Data Fusion.",
-     "title_fingerprint": "340a542d",
-     "topic_areas": []
-    }
-   ]
-  },
   "362865": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35102,34 +34772,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362965": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362973": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362974": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362975": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362976": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35457,27 +35099,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363212": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363214": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363215": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363217": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35698,444 +35319,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363302": {
-   "segmentation_method": "hgeo_declared_topics",
-   "subtopic_count": 5,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": [
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p15",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363302:1",
-     "ordinal_label": "1",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 16,
-     "page_start": 15,
-     "parent_id": "363302",
-     "parent_opportunity_number": "DE-FOA-0003634",
-     "pattern_family": null,
-     "program_area_labels": [],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
-     "source_role": "authoritative_announcement",
-     "source_version": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "status": "posted",
-     "subtopic_code": "1",
-     "subtopic_code_norm": "1",
-     "subtopic_id": "363302:1",
-     "subtopic_ordinal": 1,
-     "subtopic_source": "inline",
-     "summary": "Topic Area 1 will fund the development, testing, and validation of advanced technologies to improve the utilization of natural gas and natural gas liquids (NGLs) that are currently being lost through operational inefficiencies and/or technology gaps. Specifically, the targets are natural gas lost to flaring and venting, sour gas that is stranded due to its composition, and NGLs that are stranded due to a lack of effective separation and processing solutions.",
-     "term_display": {
-      "10": "10",
-      "40": "40",
-      "advanc": "Advanced",
-      "area": "Area",
-      "associat": "associated",
-      "butane": "butane",
-      "challenge": "challenges",
-      "chemical": "chemical",
-      "concentration": "concentrations",
-      "contain": "contains",
-      "cost": "costs",
-      "could": "could",
-      "domestic": "domestic",
-      "due": "due",
-      "e.g": "e.g",
-      "economic": "economic",
-      "ethane": "ethane",
-      "flar": "flaring",
-      "full": "Full",
-      "gas": "gas",
-      "improve": "improve",
-      "industrial": "industrial",
-      "lead": "lead",
-      "liquid": "liquid",
-      "lost": "lost",
-      "lower-cost": "lower-cost",
-      "natural": "natural",
-      "ngls": "NGLs",
-      "oil": "oil",
-      "operation": "operation",
-      "over": "Over",
-      "ppm": "ppm",
-      "process": "processing",
-      "production": "production",
-      "propane": "propane",
-      "requir": "required",
-      "resource": "Resource",
-      "separation": "separation",
-      "significant": "significant",
-      "solution": "solutions",
-      "sour": "sour",
-      "strand": "stranded",
-      "technology": "technologies",
-      "topic": "Topic",
-      "utilization": "utilization",
-      "validation": "Validation"
-     },
-     "title": "Enhanced Resource Utilization and Production Technologies",
-     "title_fingerprint": "ef55981a",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p16",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363302:a-1",
-     "ordinal_label": "1a",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 18,
-     "page_start": 16,
-     "parent_id": "363302",
-     "parent_opportunity_number": "DE-FOA-0003634",
-     "pattern_family": null,
-     "program_area_labels": [
-      "catalysis",
-      "separations",
-      "advanced manufacturing"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
-     "source_role": "authoritative_announcement",
-     "source_version": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "status": "posted",
-     "subtopic_code": "1a",
-     "subtopic_code_norm": "a-1",
-     "subtopic_id": "363302:a-1",
-     "subtopic_ordinal": 2,
-     "subtopic_source": "inline",
-     "summary": "The objective of Topic Area 1a is to apply computational approaches (e.g., AI/ML, computational fluid dynamics) and process intensification R&D approaches to rapidly develop and validate new catalysts, reactor systems, and separation technologies—at the laboratory through prototype-scale—to increase the production and deliverability efficiency of hydrocarbons containing high sulfur and/or excess NGLs.",
-     "term_display": {
-      "1a": "1a",
-      "acid": "acid",
-      "area": "Area",
-      "catalyst": "catalysts",
-      "chemical": "chemical",
-      "conversion": "conversion",
-      "cost": "cost",
-      "describe": "describes",
-      "design": "design",
-      "develop": "Develop",
-      "development": "development",
-      "e.g": "e.g",
-      "economic": "economic",
-      "efficiency": "efficiency",
-      "end": "end",
-      "gas": "gas",
-      "high": "high",
-      "identify": "identifies",
-      "includ": "including",
-      "industrial": "industrial",
-      "level": "Level",
-      "material": "materials",
-      "membrane": "membranes",
-      "metric": "metrics",
-      "natural": "natural",
-      "ngl": "NGL",
-      "ngls": "NGLs",
-      "operation": "operations",
-      "potential": "potential",
-      "process": "process",
-      "product": "products",
-      "propos": "proposed",
-      "rate": "rates",
-      "reaction": "reaction",
-      "recovery": "recovery",
-      "separation": "separation",
-      "technology": "technologies",
-      "topic": "Topic",
-      "treatment": "treatment",
-      "trl": "TRL",
-      "utilization": "utilization"
-     },
-     "title": "Laboratory Validation of Catalysts and Unit Operations",
-     "title_fingerprint": "16f33592",
-     "topic_areas": [
-      "Catalysis and reaction engineering",
-      "Separations and membranes",
-      "Manufacturing"
-     ]
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p18",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363302:b-1",
-     "ordinal_label": "1b",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 20,
-     "page_start": 18,
-     "parent_id": "363302",
-     "parent_opportunity_number": "DE-FOA-0003634",
-     "pattern_family": null,
-     "program_area_labels": [],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
-     "source_role": "authoritative_announcement",
-     "source_version": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "status": "posted",
-     "subtopic_code": "1b",
-     "subtopic_code_norm": "b-1",
-     "subtopic_id": "363302:b-1",
-     "subtopic_ordinal": 3,
-     "subtopic_source": "inline",
-     "summary": "The objective of Topic Area 1b is field testing across multiple oil and gas (O&G) production basins and well sites to confirm the precommercial validation of new modular decentralized gas conversion systems, sour gas processing, and other innovative direct utilization applications that validate the profitable use of unused or underutilized natural gas streams.",
-     "term_display": {
-      "1b": "1b",
-      "adoption": "Adoption",
-      "area": "Area",
-      "chemical": "chemical",
-      "commercialization": "commercialization",
-      "conversion": "conversion",
-      "cost": "costs",
-      "data": "data",
-      "decentraliz": "decentralized",
-      "describe": "describes",
-      "direct": "direct",
-      "economic": "economic",
-      "end": "end",
-      "field": "field",
-      "framework": "framework",
-      "gas": "gas",
-      "improvement": "improvement",
-      "includ": "including",
-      "include": "include",
-      "innovative": "innovative",
-      "level": "Levels",
-      "natural": "natural",
-      "ngl": "NGL",
-      "oil": "oil",
-      "overall": "Overall",
-      "process": "processing",
-      "product": "product",
-      "production": "production",
-      "propos": "proposed",
-      "readiness": "Readiness",
-      "relevant": "relevant",
-      "requir": "required",
-      "select": "selected",
-      "site": "site",
-      "sour": "sour",
-      "source": "sources",
-      "stream": "streams",
-      "such": "such",
-      "system": "systems",
-      "technology": "technology",
-      "test": "testing",
-      "topic": "Topic",
-      "transport": "transport",
-      "treatment": "treatment",
-      "trl": "TRL",
-      "underutiliz": "underutilized",
-      "utilization": "utilization",
-      "validation": "validation",
-      "well": "well"
-     },
-     "title": "Field Validation of Full System Prototypes",
-     "title_fingerprint": "c336962a",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p20",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363302:2",
-     "ordinal_label": "2",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 22,
-     "page_start": 20,
-     "parent_id": "363302",
-     "parent_opportunity_number": "DE-FOA-0003634",
-     "pattern_family": null,
-     "program_area_labels": [],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
-     "source_role": "authoritative_announcement",
-     "source_version": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "status": "posted",
-     "subtopic_code": "2",
-     "subtopic_code_norm": "2",
-     "subtopic_id": "363302:2",
-     "subtopic_ordinal": 4,
-     "subtopic_source": "inline",
-     "summary": "The objective of Topic Area 2 is to develop, validate, and field test advanced technologies to enhance the durability, reliability, and deliverability of the U.S. oil and natural gas supply chain by improving existing facility-level equipment and associated transport infrastructure, while paving the way for next-gen infrastructure. Specifically, the targets are areas of infrastructure that are subject to chronic leaks, corrosion-related failures, and unplanned downtime due to equipment operating failures.",
-     "term_display": {
-      "advanc": "advanced",
-      "area": "Area",
-      "commercialization": "commercialization",
-      "compressor": "compressor",
-      "corrosion": "corrosion",
-      "cost": "costs",
-      "deliverability": "deliverability",
-      "describe": "describes",
-      "design": "design",
-      "development": "Development",
-      "economic": "economic",
-      "efficiency": "efficiency",
-      "end": "end",
-      "engine": "engine",
-      "environment": "environment",
-      "equipment": "equipment",
-      "facility-level": "facility-level",
-      "field": "field",
-      "gas": "gas",
-      "include": "include",
-      "increase": "increase",
-      "industry": "industry",
-      "infrastructure": "infrastructure",
-      "losse": "losses",
-      "million": "million",
-      "natural": "natural",
-      "performance": "performance",
-      "product": "product",
-      "propos": "proposed",
-      "relevant": "relevant",
-      "requir": "required",
-      "select": "selected",
-      "such": "such",
-      "target": "target",
-      "technology": "technology",
-      "test": "test",
-      "topic": "Topic",
-      "trl": "TRL",
-      "validation": "validation"
-     },
-     "title": "Resilient Infrastructure Technology Enhancement",
-     "title_fingerprint": "96cffe4a",
-     "topic_areas": []
-    },
-    {
-     "child_type": "subject",
-     "confidence": "high",
-     "cov4_fundability": "accept",
-     "cov4_ownership": "owned",
-     "cov4_ownership_basis": "grants_gov_attachment_binding",
-     "evidence_anchor": "p22",
-     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-     "first_seen": "2026-08-20",
-     "last_verified": "2026-09-08",
-     "opportunity_id": "363302:3",
-     "ordinal_label": "3",
-     "own_deadline": null,
-     "own_deadline_is_advisory": true,
-     "page_end": 26,
-     "page_start": 22,
-     "parent_id": "363302",
-     "parent_opportunity_number": "DE-FOA-0003634",
-     "pattern_family": null,
-     "program_area_labels": [
-      "cybersecurity"
-     ],
-     "publication_reason": "high_confidence",
-     "publication_state": "publishable",
-     "record_type": "subtopic",
-     "segmentation_method": "hgeo_declared_topics",
-     "source_document_hash": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/354119",
-     "source_role": "authoritative_announcement",
-     "source_version": "1729f8688feeb6c7dbfc1b97c457386cea4d21091407f5029b764e6aed9350e6",
-     "status": "posted",
-     "subtopic_code": "3",
-     "subtopic_code_norm": "3",
-     "subtopic_id": "363302:3",
-     "subtopic_ordinal": 5,
-     "subtopic_source": "inline",
-     "summary": "The objective of Topic Area 3 is to increase the production efficiency and deliverability of the oil and natural gas supply chain by establishing and leveraging both controlled10 and actively operating production, processing, and transportation facilities to validate innovative continuous monitoring technologies, AI-supported digital twins, and advanced analytics and control systems. HITS will act as a full-scale, field-based validation platform to accelerate the commercial readiness of advanced surface hydrocarbon operations.",
-     "term_display": {
-      "000": "000",
-      "advanc": "advanced",
-      "ai": "AI",
-      "analytic": "analytics",
-      "area": "Area",
-      "asset": "asset",
-      "commercialization": "commercialization",
-      "compressor": "compressor",
-      "condition": "conditions",
-      "cost": "cost",
-      "could": "could",
-      "development": "Development",
-      "digital": "digital",
-      "environment": "environments",
-      "facility": "facilities",
-      "field": "field",
-      "gas": "gas",
-      "hits": "HITS",
-      "hydrocarbon": "hydrocarbon",
-      "improvement": "improvements",
-      "include": "include",
-      "increase": "increase",
-      "infrastructure": "infrastructure",
-      "life": "life",
-      "ml": "ML",
-      "model": "model",
-      "natural": "natural",
-      "oil": "oil",
-      "operat": "operating",
-      "operation": "operation",
-      "optimization": "optimization",
-      "process": "processing",
-      "production": "production",
-      "site": "site",
-      "system": "systems",
-      "technology": "technologies",
-      "test": "test",
-      "topic": "Topic",
-      "validation": "validation"
-     },
-     "title": "Hydrocarbon Infrastructure Test Sites (HITS)",
-     "title_fingerprint": "d3e51fc7",
-     "topic_areas": [
-      "Cybersecurity"
-     ]
-    }
-   ]
-  },
   "363306": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -36171,18 +35354,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363321": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
-  },
-  "363322": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
-  },
   "363323": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -36211,13 +35382,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363327": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363328": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37626,13 +36790,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363531": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363532": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37640,20 +36797,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363533": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363552": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363553": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -38234,13 +37377,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363641": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363647": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -38249,13 +37385,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363648": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363649": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -38319,13 +37448,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363660": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363663": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -38403,13 +37525,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363681": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363682": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -38519,6 +37634,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363711": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "363712": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -38583,13 +37705,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363732": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363733": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -39558,6 +38673,4020 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "363887": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363888": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363889": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363890": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363891": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363892": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363893": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363898": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363899": {
+   "segmentation_method": "outline",
+   "subtopic_count": 15,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "b25655339c708d2c5aafefd9dfd4967298fec1f88e4961b5daad9292f47024fe",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p50",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-1",
+     "ordinal_label": "1",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 53,
+     "page_start": 50,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "chemical sciences",
+      "materials science"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 1",
+     "subtopic_code_norm": "t-1",
+     "subtopic_id": "363899:t-1",
+     "subtopic_ordinal": 1,
+     "subtopic_source": "inferred",
+     "summary": "Background: Coherent spectroscopic or inelastic scattering techniques in the visible and infrared spectral regimes have been extensively exploited for probing chemical and biomolecular phenomena under chemically reactive, biologically active, and non-equilibrium conditions. These methods have been generally restricted to optically thin systems. With the advent of high-intensity extreme-ultraviolet (EUV) and X-ray light sources, there now exists the possibility of interacting with and observing inelastic scattering processes deep within optically thick systems[1].",
+     "term_display": {
+      "703": "703",
+      "afosr": "AFOSR",
+      "chemical": "chemical",
+      "coherent": "Coherent",
+      "dynamic": "dynamics",
+      "electron": "electron",
+      "euv": "EUV",
+      "interaction": "interactions",
+      "li": "Li",
+      "light": "light",
+      "mix": "mixing",
+      "model": "models",
+      "non-linear": "non-linear",
+      "optically": "optically",
+      "physic": "Physics",
+      "physical": "physical",
+      "raman": "Raman",
+      "regime": "regimes",
+      "scatter": "scattering",
+      "source": "sources",
+      "spectroscopy": "spectroscopy",
+      "stimulat": "Stimulated",
+      "such": "Such",
+      "system": "systems",
+      "technique": "techniques",
+      "theoretical": "theoretical",
+      "theory": "theory",
+      "topic": "topic",
+      "understand": "understanding",
+      "us.af.mil": "us.af.mil",
+      "x-ray": "X-ray"
+     },
+     "title": "(AFOSR) Non-linear Mixing Processes for EUV and X-ray Radiation in Optically Thick Systems",
+     "title_fingerprint": "c5e3d445",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "8110b3dc1bebe576995b38caf75689ed2f3732e8254704fae329cca9f9bf9d93",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p53",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-2",
+     "ordinal_label": "2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 55,
+     "page_start": 53,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "quantum science",
+      "microelectronics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 2",
+     "subtopic_code_norm": "t-2",
+     "subtopic_id": "363899:t-2",
+     "subtopic_ordinal": 2,
+     "subtopic_source": "inferred",
+     "summary": "Background: Traditionally, most electronic materials are characterized as having a single majority carrier type, either electrons or holes, that leads to isotropic n-type or p-type conductivity. These p-type and n-type regions are integrated together to form virtually all modern electronic and energy harvesting devices. Recently, there have been numerous advances in the discovery of single crystalline, goniopolar materials that simultaneously exhibit ntype and p-type conduction behavior along different crystallographic directions. [1-3].",
+     "term_display": {
+      "al": "al",
+      "anisotropic": "anisotropic",
+      "behavior": "behavior",
+      "carrier": "carrier",
+      "charge": "charge",
+      "control": "control",
+      "create": "create",
+      "crystal": "crystal",
+      "design": "design",
+      "develop": "Develop",
+      "dynamic": "dynamics",
+      "effort": "effort",
+      "electric": "electric",
+      "electronic": "electronic",
+      "energy": "energy",
+      "et": "et",
+      "exploit": "exploit",
+      "external": "external",
+      "field": "fields",
+      "fundamental": "fundamental",
+      "goniopolar": "goniopolar",
+      "interaction": "interactions",
+      "magnetic": "magnetic",
+      "mater": "Mater",
+      "material": "materials",
+      "property": "properties",
+      "semiconductor": "semiconductors",
+      "structure": "structure",
+      "such": "such",
+      "topic": "Topic",
+      "transport": "transport",
+      "understand": "understanding",
+      "unique": "unique"
+     },
+     "title": "(AFOSR) Tunable Goniopolar Semiconductors",
+     "title_fingerprint": "4755bdb0",
+     "topic_areas": [
+      "Materials science",
+      "Quantum science",
+      "Manufacturing"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "e154eadf3211aecf417daac45ad254963aea1724846717399ddd081ebe1ccedf",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p55",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-3",
+     "ordinal_label": "3",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 57,
+     "page_start": 55,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 3",
+     "subtopic_code_norm": "t-3",
+     "subtopic_id": "363899:t-3",
+     "subtopic_ordinal": 3,
+     "subtopic_source": "inferred",
+     "summary": "Background: Artificial Intelligence (AI), including machine learning, is increasingly pervasive in scientific discovery. But a common question, echoing various refinements of the Turing test, is whether current AI systems are capable of scientific reasoning at the human level.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "advance": "advances",
+      "afosr": "AFOSR",
+      "ai": "AI",
+      "answer": "answer",
+      "architecture": "architectures",
+      "area": "areas",
+      "but": "but",
+      "capable": "capable",
+      "causal": "causal",
+      "common": "common",
+      "constraint": "constraints",
+      "current": "current",
+      "data": "data",
+      "develop": "develop",
+      "discovery": "discovery",
+      "dr": "Dr",
+      "e.g": "e.g",
+      "embody": "embodying",
+      "framework": "frameworks",
+      "knowledge": "knowledge",
+      "language": "language",
+      "learn": "learning",
+      "library": "libraries",
+      "like": "like",
+      "likely": "likely",
+      "logical": "logical",
+      "mathematic": "mathematics",
+      "mathematical": "mathematical",
+      "model": "models",
+      "no": "no",
+      "novel": "novel",
+      "programm": "programming",
+      "query": "queries",
+      "reason": "reasoning",
+      "representation": "representation",
+      "robustness": "robustness",
+      "scientific": "scientific",
+      "such": "such",
+      "symbolic": "symbolic",
+      "system": "systems",
+      "test": "test",
+      "theory": "theory",
+      "topic": "Topic",
+      "type": "types",
+      "us.af.mil": "us.af.mil",
+      "variou": "various"
+     },
+     "title": "(AFOSR) Robustness to Novel Queries in AI for Scientific Discovery",
+     "title_fingerprint": "5ad8d854",
+     "topic_areas": [
+      "Quantum science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "43e775d04395e43116d45f8149664beed6d62d7c07b9454f2b5af2caf1411ab0",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p57",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-4",
+     "ordinal_label": "4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 59,
+     "page_start": 57,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 4",
+     "subtopic_code_norm": "t-4",
+     "subtopic_id": "363899:t-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "inferred",
+     "summary": "Background: Transmission electron microscopy (TEM) ptychography, a powerful computational imaging technique, surpasses the limitations of traditional TEM, offering significant advantages in resolution, electron dose efficiency, and a wide range of applications. Ptychography is a technique that aims to solve the diffractionpattern phase problem (loss of information that can occur when making a physical measurement) by combining multiple diffraction patterns to infer their relative phase and reconstruct a high-resolution image.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "achieve": "achieve",
+      "advancement": "advancements",
+      "afosr": "AFOSR",
+      "aims": "aims",
+      "algorithm": "algorithms",
+      "anticipat": "Anticipated",
+      "area": "areas",
+      "atomic": "atomic",
+      "beam": "beam",
+      "computational": "computational",
+      "dose": "dose",
+      "dr": "Dr",
+      "electron": "electron",
+      "fundamental": "fundamental",
+      "imag": "imaging",
+      "image": "image",
+      "limit": "limit",
+      "material": "materials",
+      "microscopy": "microscopy",
+      "phase": "phase",
+      "potential": "potential",
+      "ptychography": "ptychography",
+      "reconstruction": "reconstruction",
+      "resolution": "resolution",
+      "state": "state",
+      "system": "systems",
+      "technique": "technique",
+      "tem": "TEM",
+      "topic": "topic",
+      "transmission": "transmission",
+      "us.af.mil": "us.af.mil"
+     },
+     "title": "(AFOSR) Unlocking the Potential of TEM Ptychography",
+     "title_fingerprint": "263dc1ee",
+     "topic_areas": [
+      "Materials science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "eeaf40d485cd0ca839fd1aad4ba6970472aa8c73e40aae9e262323a5665a7311",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p59",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-5",
+     "ordinal_label": "5",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 61,
+     "page_start": 59,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 5",
+     "subtopic_code_norm": "t-5",
+     "subtopic_id": "363899:t-5",
+     "subtopic_ordinal": 5,
+     "subtopic_source": "inferred",
+     "summary": "Background: Quantum-level control over energy and matter has been a paradigm of critical significance for current and future science and applications. Over the last several decades, exquisite coherent control has been demonstrated in a vast array of basic platforms, spurring new fields like quantum information science, and applications spanning gravitational wave detection to ultra-precise timing. With the development of new tools, new opportunities have emerged.",
+     "term_display": {
+      "696": "696",
+      "703": "703",
+      "address": "address",
+      "afosr": "AFOSR",
+      "area": "Areas",
+      "attach": "attached",
+      "center": "centers",
+      "complexity": "complexity",
+      "control": "control",
+      "cool": "cooling",
+      "coupl": "coupling",
+      "cycl": "cycling",
+      "demonstrat": "demonstrated",
+      "dr": "Dr",
+      "energy": "energy",
+      "fundamental": "fundamental",
+      "guide": "guide",
+      "information": "information",
+      "laser": "laser",
+      "limit": "limits",
+      "material": "material",
+      "matter": "matter",
+      "method": "methods",
+      "model": "model",
+      "molecular": "molecular",
+      "molecule": "molecule",
+      "need": "needed",
+      "occs": "OCCs",
+      "optical": "optical",
+      "process": "processing",
+      "processe": "processes",
+      "provide": "provides",
+      "quantum": "quantum",
+      "redistribution": "redistribution",
+      "science": "science",
+      "such": "such",
+      "system": "systems",
+      "topic": "Topic",
+      "transfer": "transfer",
+      "transition": "transitions",
+      "us.af.mil": "us.af.mil"
+     },
+     "title": "(AFOSR) Science with Optical Cycling Centers for Energy Redistribution (SOCCER)",
+     "title_fingerprint": "54050836",
+     "topic_areas": [
+      "Quantum science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "a808560c01200659c2372898c73bc8523a34f78d09da69e83538da64eb129b50",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p61",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-6",
+     "ordinal_label": "6",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 63,
+     "page_start": 61,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "nuclear physics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 6",
+     "subtopic_code_norm": "t-6",
+     "subtopic_id": "363899:t-6",
+     "subtopic_ordinal": 6,
+     "subtopic_source": "inferred",
+     "summary": "Background: Thorium-229, the only nuclear isotope with a known isomer transition at laser-accessible energies, has recently had the frequency of this transition verified to 13 significant figures. This transition has been probed in several solid-state hosts including bulk crystals and thin films, but many open questions remain. For example, the lifetime of the nuclear transition appears to be roughly 4x shorter in Th thin films than in Th-doped bulk crystals.",
+     "term_display": {
+      "10.1038": "10.1038",
+      "10.1103": "10.1103",
+      "2020": "2020",
+      "2024": "2024",
+      "2025": "2025",
+      "al": "al",
+      "area": "Areas",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "atomic": "atomic",
+      "bulk": "bulk",
+      "but": "but",
+      "calculation": "calculations",
+      "clock": "clock",
+      "crystal": "crystals",
+      "design": "design",
+      "doi.org": "doi.org",
+      "dr": "Dr",
+      "electronic": "electronic",
+      "et": "et",
+      "film": "films",
+      "frequency": "frequency",
+      "host": "host",
+      "how": "how",
+      "http": "https",
+      "lett": "Lett",
+      "lifetime": "lifetime",
+      "material": "materials",
+      "method": "methods",
+      "nuclear": "nuclear",
+      "phys": "Phys",
+      "physic": "physics",
+      "potential": "potential",
+      "quantum": "quantum",
+      "question": "questions",
+      "rev": "Rev",
+      "solid-state": "solid-state",
+      "structure": "structure",
+      "system": "systems",
+      "technique": "techniques",
+      "th-229": "Th-229",
+      "thin": "thin",
+      "topic": "Topic",
+      "transition": "transition",
+      "understand": "understanding"
+     },
+     "title": "(ARO) Th-229 Enabled by the Solid State (TESS)",
+     "title_fingerprint": "79e20258",
+     "topic_areas": [
+      "Quantum science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "a13421d4ab9b208b61940d182654e51f98217dbaf83bc75f077aa730d38281ed",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p63",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-7",
+     "ordinal_label": "7",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 67,
+     "page_start": 63,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "materials science",
+      "quantum science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 7",
+     "subtopic_code_norm": "t-7",
+     "subtopic_id": "363899:t-7",
+     "subtopic_ordinal": 7,
+     "subtopic_source": "inferred",
+     "summary": "Background: Our evolving ability to exploit some of the more exotic properties of quantum mechanics is poised to reshape computing, sensing, communication, optics and more. Leveraging the fundamental unit of quantum information, the \"qubit\" is central to many approaches. There are numerous spin-bearing entities that can host a qubit, and molecular systems are intriguing because they can be made reproducibly in large quantities with control over structure and interactions through bottom-up rational design.",
+     "term_display": {
+      "240": "240",
+      "approache": "approaches",
+      "area": "Areas",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "array": "arrays",
+      "biological": "biological",
+      "both": "both",
+      "center": "centers",
+      "chemical": "chemical",
+      "chemistry": "chemistry",
+      "community": "community",
+      "control": "control",
+      "could": "could",
+      "design": "design",
+      "develop": "develop",
+      "dr": "Dr",
+      "fundamental": "fundamental",
+      "high": "high",
+      "interaction": "interactions",
+      "material": "materials",
+      "molecular": "molecular",
+      "qubit": "qubit",
+      "reticular": "reticular",
+      "screen": "screening",
+      "spin": "spin",
+      "state": "state",
+      "structure": "structure",
+      "such": "such",
+      "surface": "surface",
+      "system": "systems",
+      "topic": "Topic",
+      "toxicity": "toxicity"
+     },
+     "title": "(ARO) Reticular Qubit Assemblies",
+     "title_fingerprint": "02e77e66",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science",
+      "Quantum science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_fundability": "unresolved",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_review": true,
+     "evidence_anchor": "p67",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-9",
+     "ordinal_label": "9",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 69,
+     "page_start": 67,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "chemical sciences"
+     ],
+     "publication_reason": "cov4_fundability_unresolved",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 9",
+     "subtopic_code_norm": "t-9",
+     "subtopic_id": "363899:t-9",
+     "subtopic_ordinal": 9,
+     "subtopic_source": "inferred",
+     "summary": "Particulates Background: Bacteria, fungi, and archaea and their metabolic by-products have recently been identified as a significant component of smoke particulate matter. There is increasing evidence that more than seventy percent of these organisms remain viable through fire emission and transport and are capable of colonizing new locations upon deposition, potentially due to biotic-abiotic interactions on the pyrolyzed material. The dissemination of microbes and biological material has important implications for plant, animal, and ecosystem resilience and stability.",
+     "term_display": {
+      "919": "919",
+      "ability": "ability",
+      "across": "across",
+      "approache": "approaches",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "biogeochemical": "biogeochemical",
+      "biological": "biological",
+      "biotic-abiotic": "biotic-abiotic",
+      "capable": "capable",
+      "condition": "conditions",
+      "dr": "Dr",
+      "dur": "during",
+      "enable": "enable",
+      "extreme": "extreme",
+      "fire": "fire",
+      "identify": "identify",
+      "material": "material",
+      "microbe": "microbes",
+      "nanomaterial": "nanomaterials",
+      "particulate": "particulates",
+      "protection": "protection",
+      "pyrolyz": "pyrolyzed",
+      "smoke": "smoke",
+      "smoke-borne": "smoke-borne",
+      "source": "sources",
+      "survival": "survival",
+      "there": "there",
+      "topic": "Topic",
+      "transport": "transport"
+     },
+     "title": "(ARO) Some Like It Hot: Decoding the Biogeochemical Matrix of Fire and Smoke Borne Particulates",
+     "title_fingerprint": "2f2d48c5",
+     "topic_areas": [
+      "Catalysis and reaction engineering"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "93b13604ee3ca2be6b6aef945a46fda3bde3190fe565143306c56e68443b439b",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p69",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-10",
+     "ordinal_label": "10",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 71,
+     "page_start": 69,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "hydrometallurgy",
+      "energy storage"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 10",
+     "subtopic_code_norm": "t-10",
+     "subtopic_id": "363899:t-10",
+     "subtopic_ordinal": 10,
+     "subtopic_source": "inferred",
+     "summary": "Background: Recently discovered synthetic superconcentrated electrolytes are enabling unprecedented voltages for energy storage; however, fundamental questions related to unique ion dynamics, coordination, and phase transfer events at a superconcentrated multiphase interface are only beginning to be investigated. Subsea brine pools represent a compelling natural analog, where density and salinity drive phase segregation of seawater and superconcentrated brine to form “underwater lakes”.",
+     "term_display": {
+      "army.mil": "Army.mil",
+      "aro": "ARO",
+      "bio": "bio",
+      "biological": "biological",
+      "chemical": "chemical",
+      "coordination": "coordination",
+      "design": "design",
+      "dr": "Dr",
+      "drive": "drive",
+      "dynamic": "dynamic",
+      "electrolyte": "electrolyte",
+      "enable": "enable",
+      "energy": "energy",
+      "extreme": "extreme",
+      "formation": "formation",
+      "how": "how",
+      "interface": "interfaces",
+      "interfacial": "interfacial",
+      "ion": "ion",
+      "mechanism": "mechanisms",
+      "membrane": "membrane",
+      "microbial": "microbial",
+      "mineral": "mineral",
+      "multiphase": "multiphase",
+      "muri": "MURI",
+      "natural": "natural",
+      "phase": "phase",
+      "reactivity": "reactivity",
+      "regime": "regimes",
+      "structure": "structure",
+      "superconcentrat": "superconcentrated",
+      "synthetic": "synthetic",
+      "system": "systems",
+      "transport": "transport"
+     },
+     "title": "(ARO) Interfacial Superconcentration in Extreme Multiphase Regimes",
+     "title_fingerprint": "e4242a87",
+     "topic_areas": [
+      "Materials science",
+      "Separations and membranes",
+      "Energy"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "1ce0cc3c72191ab5106f0311c4fc5f9ce2f0b9c71ca0f0a720ea92c9391b5972",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p71",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-11",
+     "ordinal_label": "11",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 73,
+     "page_start": 71,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "microelectronics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 11",
+     "subtopic_code_norm": "t-11",
+     "subtopic_id": "363899:t-11",
+     "subtopic_ordinal": 11,
+     "subtopic_source": "inferred",
+     "summary": "Background: Heterostructures and superlattices of crystalline solids are the platforms upon which modern semiconductor electronics and optoelectronics have been built. Conventionally, integrating solid state materials relies on covalent bonding of the constituent materials but suffers from disorder defects formed due to mismatch which degrades the electronic properties [1]. This restricts such integration into a narrow set of materials with compatible structures.",
+     "term_display": {
+      "10.48550": "10.48550",
+      "al": "al",
+      "aro": "ARO",
+      "atomic": "atomic",
+      "between": "between",
+      "chiral": "chiral",
+      "crystal": "crystals",
+      "crystalline": "crystalline",
+      "doi": "DOI",
+      "electronic": "electronic",
+      "emergent": "emergent",
+      "et": "et",
+      "heterostructure": "heterostructures",
+      "hybrid": "hybrid",
+      "interaction": "interactions",
+      "intercalant": "intercalants",
+      "intercalat": "intercalated",
+      "layer": "layers",
+      "long-range": "long-range",
+      "material": "materials",
+      "molecular": "molecular",
+      "novel": "novel",
+      "order": "ordered",
+      "organic": "organic",
+      "property": "properties",
+      "quantum": "quantum",
+      "result": "resulting",
+      "solid": "solids",
+      "solid-state": "solid-state",
+      "specy": "species",
+      "superconductivity": "superconductivity",
+      "superlattice": "superlattices",
+      "superstructure": "superstructures",
+      "system": "systems",
+      "topic": "Topic",
+      "vdw": "vdW"
+     },
+     "title": "(ARO) Atomic and Molecular Hybrid Quantum Solids",
+     "title_fingerprint": "f3d4b568",
+     "topic_areas": [
+      "Quantum science",
+      "Materials science",
+      "Manufacturing"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "782af26bd9d120cc820df85871cfb8939a1f69e315e8a94a1f5d13e03e76527e",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p73",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-12",
+     "ordinal_label": "12",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 75,
+     "page_start": 73,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 12",
+     "subtopic_code_norm": "t-12",
+     "subtopic_id": "363899:t-12",
+     "subtopic_ordinal": 12,
+     "subtopic_source": "inferred",
+     "summary": "Background: Over the last few years, generative AI (GenAI) models made impressive advances. They can now solve complex problems and generate original content that we thought only humans could do. Most importantly, they can generate contents that are hard to distinguish from human created contents. For example, this year, a large language model (LLM) reached the level of gold-medal students in the International Mathematical Olympiad [1], and last year an LLM was able to generate novel research ideas that are apparently more creative than the ideas generated by human researchers.",
+     "term_display": {
+      "2024": "2024",
+      "2025": "2025",
+      "ai": "AI",
+      "arxiv": "arXiv",
+      "between": "between",
+      "content": "content",
+      "creat": "created",
+      "create": "create",
+      "creator": "creators",
+      "data": "data",
+      "design": "Design",
+      "detect": "detect",
+      "develop": "develop",
+      "distinguish": "distinguish",
+      "domain": "domains",
+      "embedd": "embedding",
+      "exist": "exist",
+      "explore": "Explore",
+      "feature": "features",
+      "genai": "GenAI",
+      "generat": "generated",
+      "generate": "generate",
+      "generative": "generative",
+      "human": "human",
+      "idea": "ideas",
+      "image": "image",
+      "learn": "learn",
+      "llms": "LLMs",
+      "method": "methods",
+      "model": "model",
+      "onr": "ONR",
+      "some": "some",
+      "such": "such",
+      "topic": "Topic",
+      "watermark": "watermarking",
+      "year": "year"
+     },
+     "title": "(ONR) Distinguishing between AI generated content and human created content",
+     "title_fingerprint": "d87d3e5b",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "aa3e47e5283c65e87195017c85e7f8152014745eab619e0f1258021f1e4fe59a",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p75",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-13",
+     "ordinal_label": "13",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 77,
+     "page_start": 75,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 13",
+     "subtopic_code_norm": "t-13",
+     "subtopic_id": "363899:t-13",
+     "subtopic_ordinal": 13,
+     "subtopic_source": "inferred",
+     "summary": "Background: While many electromagnetic communication methods require line-of-sight propagation, the tropospheric scatter phenomenon facilitates beyond visual horizon transmission of signals via random scattering of radio waves (from around VHF to X-band) in the upper troposphere. Atmospheric turbulence and moisture layers refract much of the signal, causing only a small amount of energy to be received.",
+     "term_display": {
+      "2025": "2025",
+      "948": "948",
+      "afosr": "AFOSR",
+      "al": "al",
+      "analysi": "analysis",
+      "aro": "ARO",
+      "assumption": "assumption",
+      "atmospheric": "atmospheric",
+      "better": "better",
+      "beyond": "beyond",
+      "communication": "communication",
+      "comprehensive": "comprehensive",
+      "condition": "conditions",
+      "environmental": "environmental",
+      "field": "field",
+      "frequency": "frequency",
+      "improv": "improved",
+      "learn": "learning",
+      "machine": "machine",
+      "measurement": "measurement",
+      "method": "methods",
+      "microwave": "microwave",
+      "model": "modeling",
+      "modulate": "modulate",
+      "onr": "ONR",
+      "particle": "particle",
+      "phenomena": "phenomena",
+      "radio": "radio",
+      "scatter": "scatter",
+      "signal": "signal",
+      "simulation": "simulation",
+      "state": "state",
+      "technology": "technology",
+      "topic": "Topic",
+      "troposcatter": "troposcatter",
+      "understand": "understanding",
+      "us.navy.mil": "us.navy.mil",
+      "via": "via",
+      "year": "years"
+     },
+     "title": "(ONR) Troposcatter Sensitivity to Atmospheric and Electromagnetic Conditions",
+     "title_fingerprint": "aace3817",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "527df46fd4a6208f73556dbb474c67605a0ec7d3adfc783ca3f3a29b1d3cf671",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p77",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-14",
+     "ordinal_label": "14",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 79,
+     "page_start": 77,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 14",
+     "subtopic_code_norm": "t-14",
+     "subtopic_id": "363899:t-14",
+     "subtopic_ordinal": 14,
+     "subtopic_source": "inferred",
+     "summary": "Background: Developing materials capable of guiding biofilm function offers a promising approach to address biofouling, corrosion, remediation, and biohybrid system design. However, we lack a comprehensive understanding of how specific material properties, at the molecular level, influence the recruitment, assembly, and emergent function of diverse biofilms. Current strategies focus on material and biological components separately rather than unraveling the complex interactions of materialbiological interfaces.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "across": "across",
+      "afosr": "AFOSR",
+      "anticipat": "Anticipated",
+      "area": "Areas",
+      "aro": "ARO",
+      "assembly": "assembly",
+      "biofilm": "biofilm",
+      "biological": "biological",
+      "biotic": "biotic",
+      "but": "but",
+      "cellular": "cellular",
+      "chief": "chief",
+      "community": "communities",
+      "complex": "complex",
+      "component": "components",
+      "control": "control",
+      "corrosion": "corrosion",
+      "demonstrat": "demonstrated",
+      "design": "design",
+      "deterrence": "deterrence",
+      "develop": "develop",
+      "dr": "Dr",
+      "emergent": "emergent",
+      "engineer": "engineered",
+      "environmental": "environmental",
+      "function": "function",
+      "functional": "functional",
+      "interface": "interfaces",
+      "material": "material",
+      "model": "model",
+      "muri": "MURI",
+      "natural": "natural",
+      "onr": "ONR",
+      "property": "properties",
+      "specific": "specific",
+      "such": "such",
+      "surface": "surface",
+      "system": "systems",
+      "topic": "Topic"
+     },
+     "title": "(ONR) Interface Mediated Control of Biofilm Function",
+     "title_fingerprint": "99258a4e",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "a2f3d93a4846040baa41fde919ec8c41ce591c76255c7ee46061204ad8fa535e",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p79",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-15",
+     "ordinal_label": "15",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 81,
+     "page_start": 79,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "materials science",
+      "energy storage"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 15",
+     "subtopic_code_norm": "t-15",
+     "subtopic_id": "363899:t-15",
+     "subtopic_ordinal": 15,
+     "subtopic_source": "inferred",
+     "summary": "Background: This MURI will enable unprecedented electrochemical behavior by establishing a fundamental understanding of the multivariate properties that emerge from the interplay of disparate elements in high entropy (HE) materials. High entropy materials (HEMs) leverage enhanced configurational entropy to stabilize single-phase structures comprising ≥5 principal elements, and permit crystal phases to exist outside traditional stability conditions.",
+     "term_display": {
+      "15": "15",
+      "2024": "2024",
+      "al": "al",
+      "approache": "approaches",
+      "atomic": "atomic",
+      "behavior": "behavior",
+      "bulk": "bulk",
+      "capacity": "capacity",
+      "characterization": "characterization",
+      "composition": "compositions",
+      "computational": "computational",
+      "conversion": "conversion",
+      "design": "design",
+      "dr": "Dr",
+      "electrochemical": "electrochemical",
+      "element": "elements",
+      "energy": "energy",
+      "ensemble": "ensemble",
+      "entropy": "entropy",
+      "et": "et",
+      "function": "function",
+      "fundamental": "fundamental",
+      "he": "HE",
+      "hem": "HEM",
+      "hems": "HEMs",
+      "high": "high",
+      "local": "local",
+      "material": "materials",
+      "muri": "MURI",
+      "nat": "Nat",
+      "onr": "ONR",
+      "property": "properties",
+      "stability": "stability",
+      "storage": "storage",
+      "structure": "structure",
+      "synthetic": "synthetic",
+      "topic": "Topic",
+      "traditional": "Traditional",
+      "understand": "understanding"
+     },
+     "title": "(ONR) High-Entropy Electrochemical Material",
+     "title_fingerprint": "6153543e",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science",
+      "Energy"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "776e6e9ef2fd18fbe3ace6ae4d1cc013479057bd5d52a3b6d7814232943454b8",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p81",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363899:t-16",
+     "ordinal_label": "16",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 82,
+     "page_start": 81,
+     "parent_id": "363899",
+     "parent_opportunity_number": "NOFOAFRLAFOSR20260002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence",
+      "advanced manufacturing"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "bdcef46cb59d868c1aec48661a0af561bfb758821a087cfec58dfe9e3e84601f",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355070",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 16",
+     "subtopic_code_norm": "t-16",
+     "subtopic_id": "363899:t-16",
+     "subtopic_ordinal": 16,
+     "subtopic_source": "inferred",
+     "summary": "Background: Additive generation is prevalent in nature: growth from a single cell to a complex organism occurs one cell at a time. Throughout the typical life span of an organism, small and large damage to its structures is inevitable. Organisms have developed varying solutions to mitigate any loss in their structural integrity due to damage. The self-healing (repair) solutions, for example, range from regrowth or repair of damaged tissues in some animal species to growth around damage (compartmentalization) in some tree species.",
+     "term_display": {
+      "additive": "additive",
+      "advanc": "advanced",
+      "advancement": "advancements",
+      "artificial": "artificial",
+      "autonomou": "autonomous",
+      "cell": "cell",
+      "characterization": "characterization",
+      "damage": "damage",
+      "develop": "develop",
+      "development": "Development",
+      "enable": "enable",
+      "etc": "etc",
+      "manufactur": "manufacturing",
+      "material": "materials",
+      "mechanism": "mechanisms",
+      "onr": "ONR",
+      "organism": "organism",
+      "range": "range",
+      "recurrent": "recurrent",
+      "repair": "repair",
+      "self-heal": "self-healing",
+      "situ": "situ",
+      "solution": "solutions",
+      "structure": "structures",
+      "such": "such",
+      "technology": "technologies",
+      "tissue": "tissues",
+      "topic": "topic",
+      "understand": "understanding"
+     },
+     "title": "(ONR) Bio-Inspired Autonomous and Recurrent Self-Healing in Materials and Structures",
+     "title_fingerprint": "0e7f6ee3",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science",
+      "Manufacturing"
+     ]
+    }
+   ]
+  },
+  "363900": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363901": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363903": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363904": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363905": {
+   "segmentation_method": "outline",
+   "subtopic_count": 15,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "7c166ac612d32756353de25294fa33196d9b5e99f500b32df8aaada76296748e",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p50",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-1",
+     "ordinal_label": "1",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 53,
+     "page_start": 50,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "chemical sciences",
+      "materials science"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 1",
+     "subtopic_code_norm": "t-1",
+     "subtopic_id": "363905:t-1",
+     "subtopic_ordinal": 1,
+     "subtopic_source": "inferred",
+     "summary": "Background: Coherent spectroscopic or inelastic scattering techniques in the visible and infrared spectral regimes have been extensively exploited for probing chemical and biomolecular phenomena under chemically reactive, biologically active, and non-equilibrium conditions. These methods have been generally restricted to optically thin systems. With the advent of high-intensity extreme-ultraviolet (EUV) and X-ray light sources, there now exists the possibility of interacting with and observing inelastic scattering processes deep within optically thick systems[1].",
+     "term_display": {
+      "703": "703",
+      "afosr": "AFOSR",
+      "chemical": "chemical",
+      "coherent": "Coherent",
+      "dynamic": "dynamics",
+      "electron": "electron",
+      "euv": "EUV",
+      "interaction": "interactions",
+      "li": "Li",
+      "light": "light",
+      "mix": "mixing",
+      "model": "models",
+      "non-linear": "non-linear",
+      "optically": "optically",
+      "physic": "Physics",
+      "physical": "physical",
+      "raman": "Raman",
+      "regime": "regimes",
+      "scatter": "scattering",
+      "source": "sources",
+      "spectroscopy": "spectroscopy",
+      "stimulat": "Stimulated",
+      "such": "Such",
+      "system": "systems",
+      "technique": "techniques",
+      "theoretical": "theoretical",
+      "theory": "theory",
+      "topic": "topic",
+      "understand": "understanding",
+      "us.af.mil": "us.af.mil",
+      "x-ray": "X-ray"
+     },
+     "title": "(AFOSR) Non-linear Mixing Processes for EUV and X-ray Radiation in Optically Thick Systems",
+     "title_fingerprint": "c5e3d445",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "7c7032a0b325acf17fb2d822cf0366596b43ea3a0a2155431a6f30f1c86ca7d4",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p53",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-2",
+     "ordinal_label": "2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 55,
+     "page_start": 53,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "quantum science",
+      "microelectronics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 2",
+     "subtopic_code_norm": "t-2",
+     "subtopic_id": "363905:t-2",
+     "subtopic_ordinal": 2,
+     "subtopic_source": "inferred",
+     "summary": "Background: Traditionally, most electronic materials are characterized as having a single majority carrier type, either electrons or holes, that leads to isotropic n-type or p-type conductivity. These p-type and n-type regions are integrated together to form virtually all modern electronic and energy harvesting devices. Recently, there have been numerous advances in the discovery of single crystalline, goniopolar materials that simultaneously exhibit ntype and p-type conduction behavior along different crystallographic directions. [1-3].",
+     "term_display": {
+      "al": "al",
+      "anisotropic": "anisotropic",
+      "behavior": "behavior",
+      "carrier": "carrier",
+      "charge": "charge",
+      "control": "control",
+      "create": "create",
+      "crystal": "crystal",
+      "design": "design",
+      "develop": "Develop",
+      "dynamic": "dynamics",
+      "effort": "effort",
+      "electric": "electric",
+      "electronic": "electronic",
+      "energy": "energy",
+      "et": "et",
+      "exploit": "exploit",
+      "external": "external",
+      "field": "fields",
+      "fundamental": "fundamental",
+      "goniopolar": "goniopolar",
+      "guide": "guide",
+      "interaction": "interactions",
+      "magnetic": "magnetic",
+      "mater": "Mater",
+      "material": "materials",
+      "property": "properties",
+      "semiconductor": "semiconductors",
+      "structure": "structure",
+      "such": "such",
+      "topic": "Topic",
+      "transport": "transport",
+      "understand": "understanding",
+      "unique": "unique"
+     },
+     "title": "(AFOSR) Tunable Goniopolar Semiconductors",
+     "title_fingerprint": "4755bdb0",
+     "topic_areas": [
+      "Materials science",
+      "Quantum science",
+      "Manufacturing"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "4da86376f94ddc274364e43863349e0ca747c9dd594977dec4ee5780914f131e",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p55",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-3",
+     "ordinal_label": "3",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 57,
+     "page_start": 55,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 3",
+     "subtopic_code_norm": "t-3",
+     "subtopic_id": "363905:t-3",
+     "subtopic_ordinal": 3,
+     "subtopic_source": "inferred",
+     "summary": "Background: Artificial Intelligence (AI), including machine learning, is increasingly pervasive in scientific discovery. But a common question, echoing various refinements of the Turing test, is whether current AI systems are capable of scientific reasoning at the human level.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "advance": "advances",
+      "afosr": "AFOSR",
+      "ai": "AI",
+      "answer": "answer",
+      "architecture": "architectures",
+      "area": "areas",
+      "but": "but",
+      "capable": "capable",
+      "causal": "causal",
+      "common": "common",
+      "constraint": "constraints",
+      "current": "current",
+      "data": "data",
+      "develop": "develop",
+      "discovery": "discovery",
+      "dr": "Dr",
+      "e.g": "e.g",
+      "embody": "embodying",
+      "framework": "frameworks",
+      "knowledge": "knowledge",
+      "language": "language",
+      "learn": "learning",
+      "library": "libraries",
+      "like": "like",
+      "likely": "likely",
+      "logical": "logical",
+      "mathematic": "mathematics",
+      "mathematical": "mathematical",
+      "model": "models",
+      "no": "no",
+      "novel": "novel",
+      "programm": "programming",
+      "query": "queries",
+      "reason": "reasoning",
+      "representation": "representation",
+      "robustness": "robustness",
+      "scientific": "scientific",
+      "such": "such",
+      "symbolic": "symbolic",
+      "system": "systems",
+      "test": "test",
+      "theory": "theory",
+      "topic": "Topic",
+      "type": "types",
+      "us.af.mil": "us.af.mil",
+      "variou": "various"
+     },
+     "title": "(AFOSR) Robustness to Novel Queries in AI for Scientific Discovery",
+     "title_fingerprint": "5ad8d854",
+     "topic_areas": [
+      "Quantum science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "fd98630b5b1ebd6948547cbeefc2bfd07389802ac703f809b57946e4a250637d",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p57",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-4",
+     "ordinal_label": "4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 59,
+     "page_start": 57,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 4",
+     "subtopic_code_norm": "t-4",
+     "subtopic_id": "363905:t-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "inferred",
+     "summary": "Background: Transmission electron microscopy (TEM) ptychography, a powerful computational imaging technique, surpasses the limitations of traditional TEM, offering significant advantages in resolution, electron dose efficiency, and a wide range of applications. Ptychography is a technique that aims to solve the diffractionpattern phase problem (loss of information that can occur when making a physical measurement) by combining multiple diffraction patterns to infer their relative phase and reconstruct a high-resolution image.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "achieve": "achieve",
+      "advancement": "advancements",
+      "afosr": "AFOSR",
+      "aims": "aims",
+      "algorithm": "algorithms",
+      "anticipat": "Anticipated",
+      "area": "areas",
+      "atomic": "atomic",
+      "beam": "beam",
+      "computational": "computational",
+      "dose": "dose",
+      "dr": "Dr",
+      "electron": "electron",
+      "fundamental": "fundamental",
+      "imag": "imaging",
+      "image": "image",
+      "limit": "limit",
+      "material": "materials",
+      "microscopy": "microscopy",
+      "phase": "phase",
+      "potential": "potential",
+      "ptychography": "ptychography",
+      "reconstruction": "reconstruction",
+      "resolution": "resolution",
+      "state": "state",
+      "system": "systems",
+      "technique": "technique",
+      "tem": "TEM",
+      "topic": "topic",
+      "transmission": "transmission",
+      "us.af.mil": "us.af.mil"
+     },
+     "title": "(AFOSR) Unlocking the Potential of TEM Ptychography",
+     "title_fingerprint": "263dc1ee",
+     "topic_areas": [
+      "Materials science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "9a58cfeaac762097e3b1c707f6425fd8fba3aebcd118235606b9c11a24e4aa3a",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p59",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-5",
+     "ordinal_label": "5",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 61,
+     "page_start": 59,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 5",
+     "subtopic_code_norm": "t-5",
+     "subtopic_id": "363905:t-5",
+     "subtopic_ordinal": 5,
+     "subtopic_source": "inferred",
+     "summary": "Background: Quantum-level control over energy and matter has been a paradigm of critical significance for current and future science and applications. Over the last several decades, exquisite coherent control has been demonstrated in a vast array of basic platforms, spurring new fields like quantum information science, and applications spanning gravitational wave detection to ultra-precise timing. With the development of new tools, new opportunities have emerged.",
+     "term_display": {
+      "696": "696",
+      "703": "703",
+      "address": "address",
+      "afosr": "AFOSR",
+      "area": "Areas",
+      "attach": "attached",
+      "center": "centers",
+      "complexity": "complexity",
+      "control": "control",
+      "cool": "cooling",
+      "coupl": "coupling",
+      "cycl": "cycling",
+      "demonstrat": "demonstrated",
+      "dr": "Dr",
+      "energy": "energy",
+      "fundamental": "fundamental",
+      "guide": "guide",
+      "information": "information",
+      "laser": "laser",
+      "limit": "limits",
+      "material": "material",
+      "matter": "matter",
+      "method": "methods",
+      "model": "model",
+      "molecular": "molecular",
+      "molecule": "molecule",
+      "need": "needed",
+      "occs": "OCCs",
+      "optical": "optical",
+      "process": "processing",
+      "processe": "processes",
+      "provide": "provides",
+      "quantum": "quantum",
+      "redistribution": "redistribution",
+      "science": "science",
+      "such": "such",
+      "system": "systems",
+      "topic": "Topic",
+      "transfer": "transfer",
+      "transition": "transitions",
+      "us.af.mil": "us.af.mil"
+     },
+     "title": "(AFOSR) Science with Optical Cycling Centers for Energy Redistribution (SOCCER)",
+     "title_fingerprint": "54050836",
+     "topic_areas": [
+      "Quantum science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "03d095b9d54c298ab5f4a6f520221a6b03d46405a15b74d5f547c04675bced05",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p61",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-6",
+     "ordinal_label": "6",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 63,
+     "page_start": 61,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "nuclear physics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 6",
+     "subtopic_code_norm": "t-6",
+     "subtopic_id": "363905:t-6",
+     "subtopic_ordinal": 6,
+     "subtopic_source": "inferred",
+     "summary": "Background: Thorium-229, the only nuclear isotope with a known isomer transition at laser-accessible energies, has recently had the frequency of this transition verified to 13 significant figures. This transition has been probed in several solid-state hosts including bulk crystals and thin films, but many open questions remain. For example, the lifetime of the nuclear transition appears to be roughly 4x shorter in Th thin films than in Th-doped bulk crystals.",
+     "term_display": {
+      "10.1038": "10.1038",
+      "10.1103": "10.1103",
+      "2020": "2020",
+      "2024": "2024",
+      "2025": "2025",
+      "al": "al",
+      "area": "Areas",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "atomic": "atomic",
+      "bulk": "bulk",
+      "but": "but",
+      "calculation": "calculations",
+      "clock": "clock",
+      "crystal": "crystals",
+      "design": "design",
+      "doi.org": "doi.org",
+      "dr": "Dr",
+      "electronic": "electronic",
+      "et": "et",
+      "film": "films",
+      "frequency": "frequency",
+      "host": "host",
+      "how": "how",
+      "http": "https",
+      "lett": "Lett",
+      "lifetime": "lifetime",
+      "material": "materials",
+      "method": "methods",
+      "nuclear": "nuclear",
+      "phys": "Phys",
+      "physic": "physics",
+      "potential": "potential",
+      "quantum": "quantum",
+      "question": "questions",
+      "rev": "Rev",
+      "solid-state": "solid-state",
+      "structure": "structure",
+      "system": "systems",
+      "technique": "techniques",
+      "th-229": "Th-229",
+      "thin": "thin",
+      "topic": "Topic",
+      "transition": "transition",
+      "understand": "understanding"
+     },
+     "title": "(ARO) Th-229 Enabled by the Solid State (TESS)",
+     "title_fingerprint": "79e20258",
+     "topic_areas": [
+      "Quantum science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "6775e57341cf06de183a7119ff0bc36cbb990fd2fefa424f876704e00de2cb11",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p63",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-7",
+     "ordinal_label": "7",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 67,
+     "page_start": 63,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "materials science",
+      "quantum science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 7",
+     "subtopic_code_norm": "t-7",
+     "subtopic_id": "363905:t-7",
+     "subtopic_ordinal": 7,
+     "subtopic_source": "inferred",
+     "summary": "Background: Our evolving ability to exploit some of the more exotic properties of quantum mechanics is poised to reshape computing, sensing, communication, optics and more. Leveraging the fundamental unit of quantum information, the \"qubit\" is central to many approaches. There are numerous spin-bearing entities that can host a qubit, and molecular systems are intriguing because they can be made reproducibly in large quantities with control over structure and interactions through bottom-up rational design.",
+     "term_display": {
+      "240": "240",
+      "approache": "approaches",
+      "area": "Areas",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "array": "arrays",
+      "biological": "biological",
+      "both": "both",
+      "center": "centers",
+      "chemical": "chemical",
+      "chemistry": "chemistry",
+      "community": "community",
+      "control": "control",
+      "could": "could",
+      "design": "design",
+      "develop": "develop",
+      "dr": "Dr",
+      "fundamental": "fundamental",
+      "high": "high",
+      "interaction": "interactions",
+      "material": "materials",
+      "molecular": "molecular",
+      "qubit": "qubit",
+      "reticular": "reticular",
+      "screen": "screening",
+      "spin": "spin",
+      "state": "state",
+      "structure": "structure",
+      "such": "such",
+      "surface": "surface",
+      "system": "systems",
+      "topic": "Topic",
+      "toxicity": "toxicity"
+     },
+     "title": "(ARO) Reticular Qubit Assemblies",
+     "title_fingerprint": "02e77e66",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science",
+      "Quantum science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_fundability": "unresolved",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_review": true,
+     "evidence_anchor": "p67",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-9",
+     "ordinal_label": "9",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 69,
+     "page_start": 67,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "chemical sciences"
+     ],
+     "publication_reason": "cov4_fundability_unresolved",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 9",
+     "subtopic_code_norm": "t-9",
+     "subtopic_id": "363905:t-9",
+     "subtopic_ordinal": 9,
+     "subtopic_source": "inferred",
+     "summary": "Particulates Background: Bacteria, fungi, and archaea and their metabolic by-products have recently been identified as a significant component of smoke particulate matter. There is increasing evidence that more than seventy percent of these organisms remain viable through fire emission and transport and are capable of colonizing new locations upon deposition, potentially due to biotic-abiotic interactions on the pyrolyzed material. The dissemination of microbes and biological material has important implications for plant, animal, and ecosystem resilience and stability.",
+     "term_display": {
+      "919": "919",
+      "ability": "ability",
+      "across": "across",
+      "approache": "approaches",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "biogeochemical": "biogeochemical",
+      "biological": "biological",
+      "biotic-abiotic": "biotic-abiotic",
+      "capable": "capable",
+      "condition": "conditions",
+      "dr": "Dr",
+      "dur": "during",
+      "enable": "enable",
+      "extreme": "extreme",
+      "fire": "fire",
+      "identify": "identify",
+      "material": "material",
+      "microbe": "microbes",
+      "nanomaterial": "nanomaterials",
+      "particulate": "particulates",
+      "protection": "protection",
+      "pyrolyz": "pyrolyzed",
+      "smoke": "smoke",
+      "smoke-borne": "smoke-borne",
+      "source": "sources",
+      "survival": "survival",
+      "there": "there",
+      "topic": "Topic",
+      "transport": "transport"
+     },
+     "title": "(ARO) Some Like It Hot: Decoding the Biogeochemical Matrix of Fire and Smoke Borne Particulates",
+     "title_fingerprint": "2f2d48c5",
+     "topic_areas": [
+      "Catalysis and reaction engineering"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "65ef29c37368852d282b658c7af0812de0ae8256c48b53369fb1258ad9a14aba",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p69",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-10",
+     "ordinal_label": "10",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 71,
+     "page_start": 69,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "hydrometallurgy",
+      "energy storage"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 10",
+     "subtopic_code_norm": "t-10",
+     "subtopic_id": "363905:t-10",
+     "subtopic_ordinal": 10,
+     "subtopic_source": "inferred",
+     "summary": "Background: Recently discovered synthetic superconcentrated electrolytes are enabling unprecedented voltages for energy storage; however, fundamental questions related to unique ion dynamics, coordination, and phase transfer events at a superconcentrated multiphase interface are only beginning to be investigated. Subsea brine pools represent a compelling natural analog, where density and salinity drive phase segregation of seawater and superconcentrated brine to form “underwater lakes”.",
+     "term_display": {
+      "army.mil": "Army.mil",
+      "aro": "ARO",
+      "bio": "bio",
+      "biological": "biological",
+      "chemical": "chemical",
+      "coordination": "coordination",
+      "design": "design",
+      "dr": "Dr",
+      "drive": "drive",
+      "dynamic": "dynamic",
+      "electrolyte": "electrolyte",
+      "enable": "enable",
+      "energy": "energy",
+      "extreme": "extreme",
+      "formation": "formation",
+      "how": "how",
+      "interface": "interfaces",
+      "interfacial": "interfacial",
+      "ion": "ion",
+      "mechanism": "mechanisms",
+      "membrane": "membrane",
+      "microbial": "microbial",
+      "mineral": "mineral",
+      "multiphase": "multiphase",
+      "muri": "MURI",
+      "natural": "natural",
+      "phase": "phase",
+      "reactivity": "reactivity",
+      "regime": "regimes",
+      "structure": "structure",
+      "superconcentrat": "superconcentrated",
+      "synthetic": "synthetic",
+      "system": "systems",
+      "transport": "transport"
+     },
+     "title": "(ARO) Interfacial Superconcentration in Extreme Multiphase Regimes",
+     "title_fingerprint": "e4242a87",
+     "topic_areas": [
+      "Materials science",
+      "Separations and membranes",
+      "Energy"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "5a3e57d7170480dd374e03e79700bbe8b3027d29f1fe6f5961e1c50e6756f67d",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p71",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-11",
+     "ordinal_label": "11",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 73,
+     "page_start": 71,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "microelectronics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 11",
+     "subtopic_code_norm": "t-11",
+     "subtopic_id": "363905:t-11",
+     "subtopic_ordinal": 11,
+     "subtopic_source": "inferred",
+     "summary": "Background: Heterostructures and superlattices of crystalline solids are the platforms upon which modern semiconductor electronics and optoelectronics have been built. Conventionally, integrating solid state materials relies on covalent bonding of the constituent materials but suffers from disorder defects formed due to mismatch which degrades the electronic properties [1]. This restricts such integration into a narrow set of materials with compatible structures.",
+     "term_display": {
+      "10.48550": "10.48550",
+      "240": "240",
+      "al": "al",
+      "aro": "ARO",
+      "atomic": "atomic",
+      "between": "between",
+      "chiral": "chiral",
+      "crystal": "crystals",
+      "crystalline": "crystalline",
+      "doi": "DOI",
+      "electronic": "electronic",
+      "emergent": "emergent",
+      "et": "et",
+      "heterostructure": "heterostructures",
+      "hybrid": "hybrid",
+      "interaction": "interactions",
+      "intercalant": "intercalants",
+      "intercalat": "intercalated",
+      "layer": "layers",
+      "long-range": "long-range",
+      "material": "materials",
+      "molecular": "molecular",
+      "novel": "novel",
+      "order": "ordered",
+      "organic": "organic",
+      "property": "properties",
+      "quantum": "quantum",
+      "result": "resulting",
+      "solid": "solids",
+      "solid-state": "solid-state",
+      "specy": "species",
+      "superconductivity": "superconductivity",
+      "superlattice": "superlattices",
+      "superstructure": "superstructures",
+      "system": "systems",
+      "topic": "Topic",
+      "vdw": "vdW"
+     },
+     "title": "(ARO) Atomic and Molecular Hybrid Quantum Solids",
+     "title_fingerprint": "f3d4b568",
+     "topic_areas": [
+      "Quantum science",
+      "Materials science",
+      "Manufacturing"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "29b1327e0adacbc5762b1a9431374e4bc7af8445115c966efbdbbae9e2ca55a6",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p73",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-12",
+     "ordinal_label": "12",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 75,
+     "page_start": 73,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 12",
+     "subtopic_code_norm": "t-12",
+     "subtopic_id": "363905:t-12",
+     "subtopic_ordinal": 12,
+     "subtopic_source": "inferred",
+     "summary": "Background: Over the last few years, generative AI (GenAI) models made impressive advances. They can now solve complex problems and generate original content that we thought only humans could do. Most importantly, they can generate contents that are hard to distinguish from human created contents. For example, this year, a large language model (LLM) reached the level of gold-medal students in the International Mathematical Olympiad [1], and last year an LLM was able to generate novel research ideas that are apparently more creative than the ideas generated by human researchers.",
+     "term_display": {
+      "2024": "2024",
+      "2025": "2025",
+      "ai": "AI",
+      "arxiv": "arXiv",
+      "between": "between",
+      "content": "content",
+      "creat": "created",
+      "create": "create",
+      "creator": "creators",
+      "data": "data",
+      "design": "Design",
+      "detect": "detect",
+      "develop": "develop",
+      "distinguish": "distinguish",
+      "domain": "domains",
+      "embedd": "embedding",
+      "exist": "exist",
+      "explore": "Explore",
+      "feature": "features",
+      "genai": "GenAI",
+      "generat": "generated",
+      "generate": "generate",
+      "generative": "generative",
+      "human": "human",
+      "idea": "ideas",
+      "image": "image",
+      "learn": "learn",
+      "llm": "LLM",
+      "llms": "LLMs",
+      "method": "methods",
+      "model": "model",
+      "onr": "ONR",
+      "some": "some",
+      "such": "such",
+      "topic": "Topic",
+      "watermark": "watermarking",
+      "year": "year"
+     },
+     "title": "(ONR) Distinguishing between AI generated content and human created content",
+     "title_fingerprint": "d87d3e5b",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "f2804279a9b23c6a865ad3d0436e902c1331ea9417a1cb747395c3790b7c126b",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p75",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-13",
+     "ordinal_label": "13",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 77,
+     "page_start": 75,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 13",
+     "subtopic_code_norm": "t-13",
+     "subtopic_id": "363905:t-13",
+     "subtopic_ordinal": 13,
+     "subtopic_source": "inferred",
+     "summary": "Background: While many electromagnetic communication methods require line-of-sight propagation, the tropospheric scatter phenomenon facilitates beyond visual horizon transmission of signals via random scattering of radio waves (from around VHF to X-band) in the upper troposphere. Atmospheric turbulence and moisture layers refract much of the signal, causing only a small amount of energy to be received.",
+     "term_display": {
+      "2025": "2025",
+      "948": "948",
+      "afosr": "AFOSR",
+      "al": "al",
+      "analysi": "analysis",
+      "aro": "ARO",
+      "assumption": "assumption",
+      "atmospheric": "atmospheric",
+      "better": "better",
+      "beyond": "beyond",
+      "communication": "communication",
+      "comprehensive": "comprehensive",
+      "condition": "conditions",
+      "environmental": "environmental",
+      "field": "field",
+      "frequency": "frequency",
+      "improv": "improved",
+      "learn": "learning",
+      "machine": "machine",
+      "measurement": "measurement",
+      "method": "methods",
+      "microwave": "microwave",
+      "model": "modeling",
+      "modulate": "modulate",
+      "onr": "ONR",
+      "particle": "particle",
+      "phenomena": "phenomena",
+      "radio": "radio",
+      "scatter": "scatter",
+      "signal": "signal",
+      "simulation": "simulation",
+      "state": "state",
+      "technology": "technology",
+      "topic": "Topic",
+      "troposcatter": "troposcatter",
+      "understand": "understanding",
+      "us.navy.mil": "us.navy.mil",
+      "via": "via",
+      "year": "years"
+     },
+     "title": "(ONR) Troposcatter Sensitivity to Atmospheric and Electromagnetic Conditions",
+     "title_fingerprint": "aace3817",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "991ad9a2e89f4c89f5aa6cc00d41dc5350d19990a4a4acc1934f1c744302789a",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p77",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-14",
+     "ordinal_label": "14",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 79,
+     "page_start": 77,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 14",
+     "subtopic_code_norm": "t-14",
+     "subtopic_id": "363905:t-14",
+     "subtopic_ordinal": 14,
+     "subtopic_source": "inferred",
+     "summary": "Background: Developing materials capable of guiding biofilm function offers a promising approach to address biofouling, corrosion, remediation, and biohybrid system design. However, we lack a comprehensive understanding of how specific material properties, at the molecular level, influence the recruitment, assembly, and emergent function of diverse biofilms. Current strategies focus on material and biological components separately rather than unraveling the complex interactions of materialbiological interfaces.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "across": "across",
+      "afosr": "AFOSR",
+      "anticipat": "Anticipated",
+      "area": "Areas",
+      "aro": "ARO",
+      "assembly": "assembly",
+      "biofilm": "biofilm",
+      "biological": "biological",
+      "biotic": "biotic",
+      "but": "but",
+      "cellular": "cellular",
+      "chief": "chief",
+      "community": "communities",
+      "complex": "complex",
+      "component": "components",
+      "control": "control",
+      "corrosion": "corrosion",
+      "demonstrat": "demonstrated",
+      "design": "design",
+      "deterrence": "deterrence",
+      "develop": "develop",
+      "dr": "Dr",
+      "emergent": "emergent",
+      "engineer": "engineered",
+      "environmental": "environmental",
+      "function": "function",
+      "functional": "functional",
+      "interface": "interfaces",
+      "material": "material",
+      "model": "model",
+      "muri": "MURI",
+      "natural": "natural",
+      "onr": "ONR",
+      "property": "properties",
+      "specific": "specific",
+      "such": "such",
+      "surface": "surface",
+      "system": "systems",
+      "topic": "Topic"
+     },
+     "title": "(ONR) Interface Mediated Control of Biofilm Function",
+     "title_fingerprint": "99258a4e",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "71356c3e9bf8cbfcc4473c24a824e3c617a63bb6e03d391cfa91b259f6546378",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p79",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-15",
+     "ordinal_label": "15",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 81,
+     "page_start": 79,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "materials science",
+      "energy storage"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 15",
+     "subtopic_code_norm": "t-15",
+     "subtopic_id": "363905:t-15",
+     "subtopic_ordinal": 15,
+     "subtopic_source": "inferred",
+     "summary": "Background: This MURI will enable unprecedented electrochemical behavior by establishing a fundamental understanding of the multivariate properties that emerge from the interplay of disparate elements in high entropy (HE) materials. High entropy materials (HEMs) leverage enhanced configurational entropy to stabilize single-phase structures comprising ≥5 principal elements, and permit crystal phases to exist outside traditional stability conditions.",
+     "term_display": {
+      "15": "15",
+      "2024": "2024",
+      "al": "al",
+      "approache": "approaches",
+      "atomic": "atomic",
+      "behavior": "behavior",
+      "bulk": "bulk",
+      "capacity": "capacity",
+      "characterization": "characterization",
+      "composition": "compositions",
+      "computational": "computational",
+      "conversion": "conversion",
+      "design": "design",
+      "dr": "Dr",
+      "electrochemical": "electrochemical",
+      "element": "elements",
+      "energy": "energy",
+      "ensemble": "ensemble",
+      "entropy": "entropy",
+      "et": "et",
+      "function": "function",
+      "fundamental": "fundamental",
+      "he": "HE",
+      "hem": "HEM",
+      "hems": "HEMs",
+      "high": "high",
+      "local": "local",
+      "material": "materials",
+      "muri": "MURI",
+      "nat": "Nat",
+      "onr": "ONR",
+      "property": "properties",
+      "stability": "stability",
+      "storage": "storage",
+      "structure": "structure",
+      "synthetic": "synthetic",
+      "topic": "Topic",
+      "traditional": "Traditional",
+      "understand": "understanding"
+     },
+     "title": "(ONR) High-Entropy Electrochemical Material",
+     "title_fingerprint": "6153543e",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science",
+      "Energy"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "7da36ae9677ee394c1a3cd03af53377952b838b1ac759e5f7e03b59bba2ae3ed",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p81",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363905:t-16",
+     "ordinal_label": "16",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 82,
+     "page_start": 81,
+     "parent_id": "363905",
+     "parent_opportunity_number": "W911NF26S1000",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence",
+      "advanced manufacturing"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "4500b44bd61b9aac69d03bd6bdbacb0336295da4a9e6975215cbb53c4c610235",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355072",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 16",
+     "subtopic_code_norm": "t-16",
+     "subtopic_id": "363905:t-16",
+     "subtopic_ordinal": 16,
+     "subtopic_source": "inferred",
+     "summary": "Background: Additive generation is prevalent in nature: growth from a single cell to a complex organism occurs one cell at a time. Throughout the typical life span of an organism, small and large damage to its structures is inevitable. Organisms have developed varying solutions to mitigate any loss in their structural integrity due to damage. The self-healing (repair) solutions, for example, range from regrowth or repair of damaged tissues in some animal species to growth around damage (compartmentalization) in some tree species.",
+     "term_display": {
+      "additive": "additive",
+      "advanc": "advanced",
+      "advancement": "advancements",
+      "artificial": "artificial",
+      "autonomou": "autonomous",
+      "cell": "cell",
+      "characterization": "characterization",
+      "damage": "damage",
+      "develop": "develop",
+      "development": "Development",
+      "enable": "enable",
+      "etc": "etc",
+      "manufactur": "manufacturing",
+      "material": "materials",
+      "mechanism": "mechanisms",
+      "nature": "nature",
+      "onr": "ONR",
+      "organism": "organism",
+      "range": "range",
+      "recurrent": "recurrent",
+      "repair": "repair",
+      "self-heal": "self-healing",
+      "situ": "situ",
+      "solution": "solutions",
+      "structure": "structures",
+      "such": "such",
+      "technology": "technologies",
+      "tissue": "tissues",
+      "topic": "topic",
+      "understand": "understanding"
+     },
+     "title": "(ONR) Bio-Inspired Autonomous and Recurrent Self-Healing in Materials and Structures",
+     "title_fingerprint": "0e7f6ee3",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science",
+      "Manufacturing"
+     ]
+    }
+   ]
+  },
+  "363906": {
+   "segmentation_method": "outline",
+   "subtopic_count": 15,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "c512c19b384c8d103599ccde481124e46cbc6fd5e7b476e4fc3f0f05d614745f",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p50",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-1",
+     "ordinal_label": "1",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 53,
+     "page_start": 50,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "chemical sciences",
+      "materials science"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 1",
+     "subtopic_code_norm": "t-1",
+     "subtopic_id": "363906:t-1",
+     "subtopic_ordinal": 1,
+     "subtopic_source": "inferred",
+     "summary": "Background: Coherent spectroscopic or inelastic scattering techniques in the visible and infrared spectral regimes have been extensively exploited for probing chemical and biomolecular phenomena under chemically reactive, biologically active, and non-equilibrium conditions. These methods have been generally restricted to optically thin systems. With the advent of high-intensity extreme-ultraviolet (EUV) and X-ray light sources, there now exists the possibility of interacting with and observing inelastic scattering processes deep within optically thick systems[1].",
+     "term_display": {
+      "703": "703",
+      "afosr": "AFOSR",
+      "chemical": "chemical",
+      "coherent": "Coherent",
+      "dynamic": "dynamics",
+      "electron": "electron",
+      "euv": "EUV",
+      "interaction": "interactions",
+      "li": "Li",
+      "light": "light",
+      "mix": "mixing",
+      "model": "models",
+      "non-linear": "non-linear",
+      "optically": "optically",
+      "physic": "Physics",
+      "physical": "physical",
+      "raman": "Raman",
+      "regime": "regimes",
+      "scatter": "scattering",
+      "source": "sources",
+      "spectroscopy": "spectroscopy",
+      "stimulat": "Stimulated",
+      "such": "Such",
+      "system": "systems",
+      "technique": "techniques",
+      "theoretical": "theoretical",
+      "theory": "theory",
+      "topic": "topic",
+      "understand": "understanding",
+      "us.af.mil": "us.af.mil",
+      "x-ray": "X-ray"
+     },
+     "title": "(AFOSR) Non-linear Mixing Processes for EUV and X-ray Radiation in Optically Thick Systems",
+     "title_fingerprint": "c5e3d445",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "e4c93ef9538ca117df8a5e76400801dc9a021d9fc947fab220ba84804f84bb35",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p53",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-2",
+     "ordinal_label": "2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 55,
+     "page_start": 53,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "quantum science",
+      "microelectronics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 2",
+     "subtopic_code_norm": "t-2",
+     "subtopic_id": "363906:t-2",
+     "subtopic_ordinal": 2,
+     "subtopic_source": "inferred",
+     "summary": "Background: Traditionally, most electronic materials are characterized as having a single majority carrier type, either electrons or holes, that leads to isotropic n-type or p-type conductivity. These p-type and n-type regions are integrated together to form virtually all modern electronic and energy harvesting devices. Recently, there have been numerous advances in the discovery of single crystalline, goniopolar materials that simultaneously exhibit ntype and p-type conduction behavior along different crystallographic directions. [1-3].",
+     "term_display": {
+      "al": "al",
+      "anisotropic": "anisotropic",
+      "behavior": "behavior",
+      "carrier": "carrier",
+      "charge": "charge",
+      "control": "control",
+      "create": "create",
+      "crystal": "crystal",
+      "design": "design",
+      "develop": "Develop",
+      "dynamic": "dynamics",
+      "effort": "effort",
+      "electric": "electric",
+      "electronic": "electronic",
+      "energy": "energy",
+      "et": "et",
+      "exploit": "exploit",
+      "external": "external",
+      "field": "fields",
+      "fundamental": "fundamental",
+      "goniopolar": "goniopolar",
+      "guide": "guide",
+      "interaction": "interactions",
+      "magnetic": "magnetic",
+      "mater": "Mater",
+      "material": "materials",
+      "property": "properties",
+      "semiconductor": "semiconductors",
+      "structure": "structure",
+      "such": "such",
+      "topic": "Topic",
+      "transport": "transport",
+      "understand": "understanding",
+      "unique": "unique"
+     },
+     "title": "(AFOSR) Tunable Goniopolar Semiconductors",
+     "title_fingerprint": "4755bdb0",
+     "topic_areas": [
+      "Materials science",
+      "Quantum science",
+      "Manufacturing"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "b1dd88d55bcfe6cc9e37fb438594b2fa0bdacd34521ba99275decfdf573624c7",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p55",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-3",
+     "ordinal_label": "3",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 57,
+     "page_start": 55,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 3",
+     "subtopic_code_norm": "t-3",
+     "subtopic_id": "363906:t-3",
+     "subtopic_ordinal": 3,
+     "subtopic_source": "inferred",
+     "summary": "Background: Artificial Intelligence (AI), including machine learning, is increasingly pervasive in scientific discovery. But a common question, echoing various refinements of the Turing test, is whether current AI systems are capable of scientific reasoning at the human level.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "advance": "advances",
+      "afosr": "AFOSR",
+      "ai": "AI",
+      "answer": "answer",
+      "architecture": "architectures",
+      "area": "areas",
+      "but": "but",
+      "capable": "capable",
+      "causal": "causal",
+      "common": "common",
+      "constraint": "constraints",
+      "current": "current",
+      "data": "data",
+      "develop": "develop",
+      "discovery": "discovery",
+      "dr": "Dr",
+      "e.g": "e.g",
+      "embody": "embodying",
+      "framework": "frameworks",
+      "knowledge": "knowledge",
+      "language": "language",
+      "learn": "learning",
+      "library": "libraries",
+      "like": "like",
+      "likely": "likely",
+      "logical": "logical",
+      "mathematic": "mathematics",
+      "mathematical": "mathematical",
+      "model": "models",
+      "no": "no",
+      "novel": "novel",
+      "programm": "programming",
+      "query": "queries",
+      "reason": "reasoning",
+      "representation": "representation",
+      "robustness": "robustness",
+      "scientific": "scientific",
+      "such": "such",
+      "symbolic": "symbolic",
+      "system": "systems",
+      "test": "test",
+      "theory": "theory",
+      "topic": "Topic",
+      "type": "types",
+      "us.af.mil": "us.af.mil",
+      "variou": "various"
+     },
+     "title": "(AFOSR) Robustness to Novel Queries in AI for Scientific Discovery",
+     "title_fingerprint": "5ad8d854",
+     "topic_areas": [
+      "Quantum science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "40590de54d7c6a85f06f8ce109d58ca1682328607f989cbbf557f32524a046eb",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p57",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-4",
+     "ordinal_label": "4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 59,
+     "page_start": 57,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 4",
+     "subtopic_code_norm": "t-4",
+     "subtopic_id": "363906:t-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "inferred",
+     "summary": "Background: Transmission electron microscopy (TEM) ptychography, a powerful computational imaging technique, surpasses the limitations of traditional TEM, offering significant advantages in resolution, electron dose efficiency, and a wide range of applications. Ptychography is a technique that aims to solve the diffractionpattern phase problem (loss of information that can occur when making a physical measurement) by combining multiple diffraction patterns to infer their relative phase and reconstruct a high-resolution image.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "achieve": "achieve",
+      "advancement": "advancements",
+      "afosr": "AFOSR",
+      "aims": "aims",
+      "algorithm": "algorithms",
+      "anticipat": "Anticipated",
+      "area": "areas",
+      "atomic": "atomic",
+      "beam": "beam",
+      "computational": "computational",
+      "dose": "dose",
+      "dr": "Dr",
+      "electron": "electron",
+      "fundamental": "fundamental",
+      "imag": "imaging",
+      "image": "image",
+      "limit": "limit",
+      "material": "materials",
+      "microscopy": "microscopy",
+      "phase": "phase",
+      "potential": "potential",
+      "ptychography": "ptychography",
+      "reconstruction": "reconstruction",
+      "resolution": "resolution",
+      "state": "state",
+      "system": "systems",
+      "technique": "technique",
+      "tem": "TEM",
+      "topic": "topic",
+      "transmission": "transmission",
+      "us.af.mil": "us.af.mil"
+     },
+     "title": "(AFOSR) Unlocking the Potential of TEM Ptychography",
+     "title_fingerprint": "263dc1ee",
+     "topic_areas": [
+      "Materials science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "3bb7e3e0d2af538c2b80680d5861e68ff1376b6bc96c7b3cdf5219da57e3ed94",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p59",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-5",
+     "ordinal_label": "5",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 61,
+     "page_start": 59,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 5",
+     "subtopic_code_norm": "t-5",
+     "subtopic_id": "363906:t-5",
+     "subtopic_ordinal": 5,
+     "subtopic_source": "inferred",
+     "summary": "Background: Quantum-level control over energy and matter has been a paradigm of critical significance for current and future science and applications. Over the last several decades, exquisite coherent control has been demonstrated in a vast array of basic platforms, spurring new fields like quantum information science, and applications spanning gravitational wave detection to ultra-precise timing. With the development of new tools, new opportunities have emerged.",
+     "term_display": {
+      "696": "696",
+      "703": "703",
+      "address": "address",
+      "afosr": "AFOSR",
+      "area": "Areas",
+      "attach": "attached",
+      "center": "centers",
+      "complexity": "complexity",
+      "control": "control",
+      "cool": "cooling",
+      "coupl": "coupling",
+      "cycl": "cycling",
+      "demonstrat": "demonstrated",
+      "dr": "Dr",
+      "energy": "energy",
+      "fundamental": "fundamental",
+      "guide": "guide",
+      "information": "information",
+      "laser": "laser",
+      "limit": "limits",
+      "material": "material",
+      "matter": "matter",
+      "method": "methods",
+      "model": "model",
+      "molecular": "molecular",
+      "molecule": "molecule",
+      "need": "needed",
+      "occs": "OCCs",
+      "optical": "optical",
+      "process": "processing",
+      "processe": "processes",
+      "provide": "provides",
+      "quantum": "quantum",
+      "redistribution": "redistribution",
+      "science": "science",
+      "such": "such",
+      "system": "systems",
+      "topic": "Topic",
+      "transfer": "transfer",
+      "transition": "transitions",
+      "us.af.mil": "us.af.mil"
+     },
+     "title": "(AFOSR) Science with Optical Cycling Centers for Energy Redistribution (SOCCER)",
+     "title_fingerprint": "54050836",
+     "topic_areas": [
+      "Quantum science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "3d7f89175eb4b3c99a2deeded9028a1a9ce947e9db8c9db77510434d12850f96",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p61",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-6",
+     "ordinal_label": "6",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 63,
+     "page_start": 61,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "nuclear physics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 6",
+     "subtopic_code_norm": "t-6",
+     "subtopic_id": "363906:t-6",
+     "subtopic_ordinal": 6,
+     "subtopic_source": "inferred",
+     "summary": "Background: Thorium-229, the only nuclear isotope with a known isomer transition at laser-accessible energies, has recently had the frequency of this transition verified to 13 significant figures. This transition has been probed in several solid-state hosts including bulk crystals and thin films, but many open questions remain. For example, the lifetime of the nuclear transition appears to be roughly 4x shorter in Th thin films than in Th-doped bulk crystals.",
+     "term_display": {
+      "10.1038": "10.1038",
+      "10.1103": "10.1103",
+      "2020": "2020",
+      "2024": "2024",
+      "2025": "2025",
+      "al": "al",
+      "area": "Areas",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "atomic": "atomic",
+      "bulk": "bulk",
+      "but": "but",
+      "calculation": "calculations",
+      "clock": "clock",
+      "crystal": "crystals",
+      "design": "design",
+      "doi.org": "doi.org",
+      "dr": "Dr",
+      "electronic": "electronic",
+      "et": "et",
+      "film": "films",
+      "frequency": "frequency",
+      "host": "host",
+      "how": "how",
+      "http": "https",
+      "lett": "Lett",
+      "lifetime": "lifetime",
+      "material": "materials",
+      "method": "methods",
+      "nuclear": "nuclear",
+      "phys": "Phys",
+      "physic": "physics",
+      "potential": "potential",
+      "quantum": "quantum",
+      "question": "questions",
+      "rev": "Rev",
+      "solid-state": "solid-state",
+      "structure": "structure",
+      "system": "systems",
+      "technique": "techniques",
+      "th-229": "Th-229",
+      "thin": "thin",
+      "topic": "Topic",
+      "transition": "transition",
+      "understand": "understanding"
+     },
+     "title": "(ARO) Th-229 Enabled by the Solid State (TESS)",
+     "title_fingerprint": "79e20258",
+     "topic_areas": [
+      "Quantum science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "eb2e67753de130f86da2f9637754a680365eb6040421a14ac936e416c9af9c55",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p63",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-7",
+     "ordinal_label": "7",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 67,
+     "page_start": 63,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "materials science",
+      "quantum science",
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 7",
+     "subtopic_code_norm": "t-7",
+     "subtopic_id": "363906:t-7",
+     "subtopic_ordinal": 7,
+     "subtopic_source": "inferred",
+     "summary": "Background: Our evolving ability to exploit some of the more exotic properties of quantum mechanics is poised to reshape computing, sensing, communication, optics and more. Leveraging the fundamental unit of quantum information, the \"qubit\" is central to many approaches. There are numerous spin-bearing entities that can host a qubit, and molecular systems are intriguing because they can be made reproducibly in large quantities with control over structure and interactions through bottom-up rational design.",
+     "term_display": {
+      "240": "240",
+      "approache": "approaches",
+      "area": "Areas",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "array": "arrays",
+      "biological": "biological",
+      "both": "both",
+      "center": "centers",
+      "chemical": "chemical",
+      "chemistry": "chemistry",
+      "community": "community",
+      "control": "control",
+      "could": "could",
+      "design": "design",
+      "develop": "develop",
+      "dr": "Dr",
+      "fundamental": "fundamental",
+      "high": "high",
+      "interaction": "interactions",
+      "material": "materials",
+      "molecular": "molecular",
+      "qubit": "qubit",
+      "reticular": "reticular",
+      "screen": "screening",
+      "spin": "spin",
+      "state": "state",
+      "structure": "structure",
+      "such": "such",
+      "surface": "surface",
+      "system": "systems",
+      "topic": "Topic",
+      "toxicity": "toxicity"
+     },
+     "title": "(ARO) Reticular Qubit Assemblies",
+     "title_fingerprint": "02e77e66",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science",
+      "Quantum science",
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_fundability": "unresolved",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_review": true,
+     "evidence_anchor": "p67",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-9",
+     "ordinal_label": "9",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 69,
+     "page_start": 67,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "chemical sciences"
+     ],
+     "publication_reason": "cov4_fundability_unresolved",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 9",
+     "subtopic_code_norm": "t-9",
+     "subtopic_id": "363906:t-9",
+     "subtopic_ordinal": 9,
+     "subtopic_source": "inferred",
+     "summary": "Particulates Background: Bacteria, fungi, and archaea and their metabolic by-products have recently been identified as a significant component of smoke particulate matter. There is increasing evidence that more than seventy percent of these organisms remain viable through fire emission and transport and are capable of colonizing new locations upon deposition, potentially due to biotic-abiotic interactions on the pyrolyzed material. The dissemination of microbes and biological material has important implications for plant, animal, and ecosystem resilience and stability.",
+     "term_display": {
+      "919": "919",
+      "ability": "ability",
+      "across": "across",
+      "approache": "approaches",
+      "army.mil": "army.mil",
+      "aro": "ARO",
+      "biogeochemical": "biogeochemical",
+      "biological": "biological",
+      "biotic-abiotic": "biotic-abiotic",
+      "capable": "capable",
+      "condition": "conditions",
+      "dr": "Dr",
+      "dur": "during",
+      "enable": "enable",
+      "extreme": "extreme",
+      "fire": "fire",
+      "identify": "identify",
+      "material": "material",
+      "microbe": "microbes",
+      "nanomaterial": "nanomaterials",
+      "particulate": "particulates",
+      "protection": "protection",
+      "pyrolyz": "pyrolyzed",
+      "smoke": "smoke",
+      "smoke-borne": "smoke-borne",
+      "source": "sources",
+      "survival": "survival",
+      "there": "there",
+      "topic": "Topic",
+      "transport": "transport"
+     },
+     "title": "(ARO) Some Like It Hot: Decoding the Biogeochemical Matrix of Fire and Smoke Borne Particulates",
+     "title_fingerprint": "2f2d48c5",
+     "topic_areas": [
+      "Catalysis and reaction engineering"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "c0f2b82678bd557655275b33d32a5ba25583cc202c99f604356e6635e5259d0c",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p69",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-10",
+     "ordinal_label": "10",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 71,
+     "page_start": 69,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "materials science",
+      "hydrometallurgy",
+      "energy storage"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 10",
+     "subtopic_code_norm": "t-10",
+     "subtopic_id": "363906:t-10",
+     "subtopic_ordinal": 10,
+     "subtopic_source": "inferred",
+     "summary": "Background: Recently discovered synthetic superconcentrated electrolytes are enabling unprecedented voltages for energy storage; however, fundamental questions related to unique ion dynamics, coordination, and phase transfer events at a superconcentrated multiphase interface are only beginning to be investigated. Subsea brine pools represent a compelling natural analog, where density and salinity drive phase segregation of seawater and superconcentrated brine to form “underwater lakes”.",
+     "term_display": {
+      "army.mil": "Army.mil",
+      "aro": "ARO",
+      "bio": "bio",
+      "biological": "biological",
+      "chemical": "chemical",
+      "coordination": "coordination",
+      "design": "design",
+      "dr": "Dr",
+      "drive": "drive",
+      "dynamic": "dynamic",
+      "electrolyte": "electrolyte",
+      "enable": "enable",
+      "energy": "energy",
+      "extreme": "extreme",
+      "formation": "formation",
+      "how": "how",
+      "interface": "interfaces",
+      "interfacial": "interfacial",
+      "ion": "ion",
+      "mechanism": "mechanisms",
+      "membrane": "membrane",
+      "microbial": "microbial",
+      "mineral": "mineral",
+      "multiphase": "multiphase",
+      "muri": "MURI",
+      "natural": "natural",
+      "phase": "phase",
+      "reactivity": "reactivity",
+      "regime": "regimes",
+      "structure": "structure",
+      "superconcentrat": "superconcentrated",
+      "synthetic": "synthetic",
+      "system": "systems",
+      "transport": "transport"
+     },
+     "title": "(ARO) Interfacial Superconcentration in Extreme Multiphase Regimes",
+     "title_fingerprint": "e4242a87",
+     "topic_areas": [
+      "Materials science",
+      "Separations and membranes",
+      "Energy"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "da3545865866fe57ec705b416c3f6366eed381889fed0c107ab04ac9fbd9d467",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p71",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-11",
+     "ordinal_label": "11",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 73,
+     "page_start": 71,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "quantum science",
+      "microelectronics"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 11",
+     "subtopic_code_norm": "t-11",
+     "subtopic_id": "363906:t-11",
+     "subtopic_ordinal": 11,
+     "subtopic_source": "inferred",
+     "summary": "Background: Heterostructures and superlattices of crystalline solids are the platforms upon which modern semiconductor electronics and optoelectronics have been built. Conventionally, integrating solid state materials relies on covalent bonding of the constituent materials but suffers from disorder defects formed due to mismatch which degrades the electronic properties [1]. This restricts such integration into a narrow set of materials with compatible structures.",
+     "term_display": {
+      "10.48550": "10.48550",
+      "240": "240",
+      "al": "al",
+      "aro": "ARO",
+      "atomic": "atomic",
+      "between": "between",
+      "chiral": "chiral",
+      "crystal": "crystals",
+      "crystalline": "crystalline",
+      "doi": "DOI",
+      "electronic": "electronic",
+      "emergent": "emergent",
+      "et": "et",
+      "heterostructure": "heterostructures",
+      "hybrid": "hybrid",
+      "interaction": "interactions",
+      "intercalant": "intercalants",
+      "intercalat": "intercalated",
+      "layer": "layers",
+      "long-range": "long-range",
+      "material": "materials",
+      "molecular": "molecular",
+      "novel": "novel",
+      "order": "ordered",
+      "organic": "organic",
+      "property": "properties",
+      "quantum": "quantum",
+      "result": "resulting",
+      "solid": "solids",
+      "solid-state": "solid-state",
+      "specy": "species",
+      "superconductivity": "superconductivity",
+      "superlattice": "superlattices",
+      "superstructure": "superstructures",
+      "system": "systems",
+      "topic": "Topic",
+      "vdw": "vdW"
+     },
+     "title": "(ARO) Atomic and Molecular Hybrid Quantum Solids",
+     "title_fingerprint": "f3d4b568",
+     "topic_areas": [
+      "Quantum science",
+      "Materials science",
+      "Manufacturing"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "5f037d3492f72bad698813c1e069b83c442ba7da4fe52230241234e632e28e7d",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p73",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-12",
+     "ordinal_label": "12",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 75,
+     "page_start": 73,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 12",
+     "subtopic_code_norm": "t-12",
+     "subtopic_id": "363906:t-12",
+     "subtopic_ordinal": 12,
+     "subtopic_source": "inferred",
+     "summary": "Background: Over the last few years, generative AI (GenAI) models made impressive advances. They can now solve complex problems and generate original content that we thought only humans could do. Most importantly, they can generate contents that are hard to distinguish from human created contents. For example, this year, a large language model (LLM) reached the level of gold-medal students in the International Mathematical Olympiad [1], and last year an LLM was able to generate novel research ideas that are apparently more creative than the ideas generated by human researchers.",
+     "term_display": {
+      "2024": "2024",
+      "2025": "2025",
+      "ai": "AI",
+      "arxiv": "arXiv",
+      "between": "between",
+      "content": "content",
+      "creat": "created",
+      "create": "create",
+      "creator": "creators",
+      "data": "data",
+      "design": "Design",
+      "detect": "detect",
+      "develop": "develop",
+      "distinguish": "distinguish",
+      "domain": "domains",
+      "embedd": "embedding",
+      "exist": "exist",
+      "explore": "Explore",
+      "feature": "features",
+      "genai": "GenAI",
+      "generat": "generated",
+      "generate": "generate",
+      "generative": "generative",
+      "human": "human",
+      "idea": "ideas",
+      "image": "image",
+      "learn": "learn",
+      "llm": "LLM",
+      "llms": "LLMs",
+      "method": "methods",
+      "model": "model",
+      "onr": "ONR",
+      "some": "some",
+      "such": "such",
+      "topic": "Topic",
+      "watermark": "watermarking",
+      "year": "year"
+     },
+     "title": "(ONR) Distinguishing between AI generated content and human created content",
+     "title_fingerprint": "d87d3e5b",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "6fab1093a89840cd7e0ff2945f1e6579672fa8566f4a0f1dd5d8e33c3f00c597",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p75",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-13",
+     "ordinal_label": "13",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 77,
+     "page_start": 75,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 13",
+     "subtopic_code_norm": "t-13",
+     "subtopic_id": "363906:t-13",
+     "subtopic_ordinal": 13,
+     "subtopic_source": "inferred",
+     "summary": "Background: While many electromagnetic communication methods require line-of-sight propagation, the tropospheric scatter phenomenon facilitates beyond visual horizon transmission of signals via random scattering of radio waves (from around VHF to X-band) in the upper troposphere. Atmospheric turbulence and moisture layers refract much of the signal, causing only a small amount of energy to be received.",
+     "term_display": {
+      "2025": "2025",
+      "948": "948",
+      "afosr": "AFOSR",
+      "al": "al",
+      "analysi": "analysis",
+      "aro": "ARO",
+      "assumption": "assumption",
+      "atmospheric": "atmospheric",
+      "better": "better",
+      "beyond": "beyond",
+      "communication": "communication",
+      "comprehensive": "comprehensive",
+      "condition": "conditions",
+      "environmental": "environmental",
+      "field": "field",
+      "frequency": "frequency",
+      "improv": "improved",
+      "learn": "learning",
+      "machine": "machine",
+      "measurement": "measurement",
+      "method": "methods",
+      "microwave": "microwave",
+      "model": "modeling",
+      "modulate": "modulate",
+      "onr": "ONR",
+      "particle": "particle",
+      "phenomena": "phenomena",
+      "radio": "radio",
+      "scatter": "scatter",
+      "signal": "signal",
+      "simulation": "simulation",
+      "state": "state",
+      "technology": "technology",
+      "topic": "Topic",
+      "troposcatter": "troposcatter",
+      "understand": "understanding",
+      "us.navy.mil": "us.navy.mil",
+      "via": "via",
+      "year": "years"
+     },
+     "title": "(ONR) Troposcatter Sensitivity to Atmospheric and Electromagnetic Conditions",
+     "title_fingerprint": "aace3817",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "681799dc5d40db95108723a466164273b8fc373af5bbaede86001e3621962035",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p77",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-14",
+     "ordinal_label": "14",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 79,
+     "page_start": 77,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 14",
+     "subtopic_code_norm": "t-14",
+     "subtopic_id": "363906:t-14",
+     "subtopic_ordinal": 14,
+     "subtopic_source": "inferred",
+     "summary": "Background: Developing materials capable of guiding biofilm function offers a promising approach to address biofouling, corrosion, remediation, and biohybrid system design. However, we lack a comprehensive understanding of how specific material properties, at the molecular level, influence the recruitment, assembly, and emergent function of diverse biofilms. Current strategies focus on material and biological components separately rather than unraveling the complex interactions of materialbiological interfaces.",
+     "term_display": {
+      "703": "703",
+      "ability": "ability",
+      "across": "across",
+      "afosr": "AFOSR",
+      "anticipat": "Anticipated",
+      "area": "Areas",
+      "aro": "ARO",
+      "assembly": "assembly",
+      "biofilm": "biofilm",
+      "biological": "biological",
+      "biotic": "biotic",
+      "but": "but",
+      "cellular": "cellular",
+      "chief": "chief",
+      "community": "communities",
+      "complex": "complex",
+      "component": "components",
+      "control": "control",
+      "corrosion": "corrosion",
+      "demonstrat": "demonstrated",
+      "design": "design",
+      "deterrence": "deterrence",
+      "develop": "develop",
+      "dr": "Dr",
+      "emergent": "emergent",
+      "engineer": "engineered",
+      "environmental": "environmental",
+      "function": "function",
+      "functional": "functional",
+      "interface": "interfaces",
+      "material": "material",
+      "model": "model",
+      "muri": "MURI",
+      "natural": "natural",
+      "onr": "ONR",
+      "property": "properties",
+      "specific": "specific",
+      "such": "such",
+      "surface": "surface",
+      "system": "systems",
+      "topic": "Topic"
+     },
+     "title": "(ONR) Interface Mediated Control of Biofilm Function",
+     "title_fingerprint": "99258a4e",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "8acfe0e4a634e0fa07b21af5dcfa76e6bdf21242df1af03ee30d35be9f4ec69c",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p79",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-15",
+     "ordinal_label": "15",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 81,
+     "page_start": 79,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "catalysis",
+      "materials science",
+      "energy storage"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 15",
+     "subtopic_code_norm": "t-15",
+     "subtopic_id": "363906:t-15",
+     "subtopic_ordinal": 15,
+     "subtopic_source": "inferred",
+     "summary": "Background: This MURI will enable unprecedented electrochemical behavior by establishing a fundamental understanding of the multivariate properties that emerge from the interplay of disparate elements in high entropy (HE) materials. High entropy materials (HEMs) leverage enhanced configurational entropy to stabilize single-phase structures comprising ≥5 principal elements, and permit crystal phases to exist outside traditional stability conditions.",
+     "term_display": {
+      "15": "15",
+      "2024": "2024",
+      "al": "al",
+      "approache": "approaches",
+      "atomic": "atomic",
+      "behavior": "behavior",
+      "bulk": "bulk",
+      "capacity": "capacity",
+      "characterization": "characterization",
+      "composition": "compositions",
+      "computational": "computational",
+      "conversion": "conversion",
+      "design": "design",
+      "dr": "Dr",
+      "electrochemical": "electrochemical",
+      "element": "elements",
+      "energy": "energy",
+      "ensemble": "ensemble",
+      "entropy": "entropy",
+      "et": "et",
+      "function": "function",
+      "fundamental": "fundamental",
+      "he": "HE",
+      "hem": "HEM",
+      "hems": "HEMs",
+      "high": "high",
+      "local": "local",
+      "material": "materials",
+      "muri": "MURI",
+      "nat": "Nat",
+      "onr": "ONR",
+      "property": "properties",
+      "stability": "stability",
+      "storage": "storage",
+      "structure": "structure",
+      "synthetic": "synthetic",
+      "topic": "Topic",
+      "traditional": "Traditional",
+      "understand": "understanding"
+     },
+     "title": "(ONR) High-Entropy Electrochemical Material",
+     "title_fingerprint": "6153543e",
+     "topic_areas": [
+      "Catalysis and reaction engineering",
+      "Materials science",
+      "Energy"
+     ]
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "6732d314da37f60d5b01f18965c9c1d5532f0a71e371661fdc15cabfab4c146b",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p81",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-23",
+     "last_verified": "2026-09-23",
+     "opportunity_id": "363906:t-16",
+     "ordinal_label": "16",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 82,
+     "page_start": 81,
+     "parent_id": "363906",
+     "parent_opportunity_number": "N0001426SF002",
+     "pattern_family": "dod_topic",
+     "program_area_labels": [
+      "artificial intelligence",
+      "advanced manufacturing"
+     ],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline",
+     "source_document_hash": "9b14080b38b388737e45a4573dda63a789f89929f0e93452d74a95aabc0e1e50",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355073",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Topic 16",
+     "subtopic_code_norm": "t-16",
+     "subtopic_id": "363906:t-16",
+     "subtopic_ordinal": 16,
+     "subtopic_source": "inferred",
+     "summary": "Background: Additive generation is prevalent in nature: growth from a single cell to a complex organism occurs one cell at a time. Throughout the typical life span of an organism, small and large damage to its structures is inevitable. Organisms have developed varying solutions to mitigate any loss in their structural integrity due to damage. The self-healing (repair) solutions, for example, range from regrowth or repair of damaged tissues in some animal species to growth around damage (compartmentalization) in some tree species.",
+     "term_display": {
+      "additive": "additive",
+      "advanc": "advanced",
+      "advancement": "advancements",
+      "artificial": "artificial",
+      "autonomou": "autonomous",
+      "cell": "cell",
+      "characterization": "characterization",
+      "damage": "damage",
+      "develop": "develop",
+      "development": "Development",
+      "enable": "enable",
+      "etc": "etc",
+      "manufactur": "manufacturing",
+      "material": "materials",
+      "mechanism": "mechanisms",
+      "nature": "nature",
+      "onr": "ONR",
+      "organism": "organism",
+      "range": "range",
+      "recurrent": "recurrent",
+      "repair": "repair",
+      "self-heal": "self-healing",
+      "situ": "situ",
+      "solution": "solutions",
+      "structure": "structures",
+      "such": "such",
+      "technology": "technologies",
+      "tissue": "tissues",
+      "topic": "topic",
+      "understand": "understanding"
+     },
+     "title": "(ONR) Bio-Inspired Autonomous and Recurrent Self-Healing in Materials and Structures",
+     "title_fingerprint": "0e7f6ee3",
+     "topic_areas": [
+      "Artificial intelligence and machine learning",
+      "Data science",
+      "Manufacturing"
+     ]
+    }
+   ]
+  },
+  "363908": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363909": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363910": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363911": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363913": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363914": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363915": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363916": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363917": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363918": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363919": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363921": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363922": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "39841": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40006,13 +43135,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "vpr-email:PAR-25-322": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "vpr-email:PAR-27-032": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -40021,13 +43143,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "vpr-email:infoready-1993899": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:infoready-2024058": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40055,21 +43170,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "vpr-email:vpr-0f186b990288c021": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "vpr-email:vpr-14d5155ffe141890": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-36e6aed03b0511a5": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -40142,8 +43243,8 @@ globalThis.SUBTOPIC_CATALOG={
  },
  "schema_version": 1,
  "search_index": {
-  "average_document_length": 156.0,
-  "document_count": 223,
+  "average_document_length": 146.77522935779817,
+  "document_count": 218,
   "document_lengths": [
    836,
    401,
@@ -40360,11 +43461,6 @@ globalThis.SUBTOPIC_CATALOG={
    12,
    12,
    12,
-   273,
-   430,
-   585,
-   556,
-   947,
    82,
    120,
    71
@@ -40377,12 +43473,6 @@ globalThis.SUBTOPIC_CATALOG={
    "0.1": [
     24,
     1
-   ],
-   "000": [
-    215,
-    1,
-    219,
-    7
    ],
    "09": [
     0,
@@ -40554,16 +43644,6 @@ globalThis.SUBTOPIC_CATALOG={
     25,
     1
    ],
-   "1-to-9": [
-    217,
-    1,
-    219,
-    2
-   ],
-   "1.372": [
-    218,
-    1
-   ],
    "1.4": [
     24,
     1
@@ -40576,15 +43656,7 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     81,
-    1,
-    215,
-    2,
-    217,
-    1,
-    218,
-    2,
-    219,
-    2
+    1
    ],
    "10-1000x": [
     58,
@@ -40594,9 +43666,7 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1,
     61,
-    2,
-    215,
-    1
+    2
    ],
    "1000": [
     78,
@@ -40846,9 +43916,7 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     2,
     81,
-    2,
-    219,
-    1
+    2
    ],
    "12-mile": [
     95,
@@ -40880,9 +43948,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "13": [
     4,
-    2,
-    219,
-    1
+    2
    ],
    "14": [
     4,
@@ -40890,12 +43956,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "15": [
     5,
-    2,
-    215,
-    1,
-    216,
-    1,
-    219,
     2
    ],
    "16": [
@@ -40924,18 +43984,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1
    ],
-   "1a": [
-    215,
-    1,
-    216,
-    5
-   ],
-   "1b": [
-    215,
-    1,
-    217,
-    7
-   ],
    "1d": [
     25,
     1
@@ -40948,20 +43996,10 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     2,
     95,
-    2,
-    217,
-    1,
-    218,
-    2,
-    219,
-    4
+    2
    ],
    "200": [
     72,
-    1
-   ],
-   "2023": [
-    215,
     1
    ],
    "2024": [
@@ -41136,8 +44174,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "2030": [
     95,
-    1,
-    218,
     1
    ],
    "21": [
@@ -41168,17 +44204,11 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     23,
-    1,
-    218,
     1
    ],
    "25": [
     10,
-    2,
-    218,
-    2,
-    219,
-    1
+    2
    ],
    "25th": [
     95,
@@ -41380,10 +44410,6 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     2
    ],
-   "320": [
-    218,
-    1
-   ],
    "33": [
     15,
     2
@@ -41512,9 +44538,7 @@ globalThis.SUBTOPIC_CATALOG={
     19,
     2,
     92,
-    1,
-    215,
-    2
+    1
    ],
    "41": [
     20,
@@ -41592,10 +44616,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     2
    ],
-   "463": [
-    218,
-    1
-   ],
    "467-0782": [
     31,
     1
@@ -41624,9 +44644,7 @@ globalThis.SUBTOPIC_CATALOG={
     0,
     1,
     24,
-    2,
-    218,
-    1
+    2
    ],
    "500": [
     24,
@@ -41744,10 +44762,6 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     2
    ],
-   "589": [
-    218,
-    1
-   ],
    "59": [
     29,
     2
@@ -41816,10 +44830,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1
    ],
-   "700": [
-    219,
-    1
-   ],
    "71": [
     39,
     2
@@ -41866,9 +44876,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "80": [
     47,
-    2,
-    217,
-    1
+    2
    ],
    "802-0880": [
     40,
@@ -41896,9 +44904,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "85": [
     51,
-    2,
-    215,
-    1
+    2
    ],
    "86": [
     52,
@@ -41910,10 +44916,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "873-2886": [
     53,
-    1
-   ],
-   "875.3": [
-    218,
     1
    ],
    "88": [
@@ -41939,10 +44941,6 @@ globalThis.SUBTOPIC_CATALOG={
    "90": [
     55,
     2
-   ],
-   "900": [
-    219,
-    1
    ],
    "91": [
     56,
@@ -41990,9 +44988,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "92": [
     56,
-    2,
-    218,
-    1
+    2
    ],
    "93": [
     57,
@@ -42004,9 +45000,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "94": [
     57,
-    2,
-    218,
-    1
+    2
    ],
    "949": [
     58,
@@ -42230,13 +45224,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     178,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    4
+    1
    ],
    "accelerator": [
     108,
@@ -42290,10 +45278,6 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     92,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "accessible": [
@@ -42368,9 +45352,7 @@ globalThis.SUBTOPIC_CATALOG={
     55,
     1,
     74,
-    2,
-    219,
-    1
+    2
    ],
    "accuracy-cost": [
     20,
@@ -42396,10 +45378,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1
    ],
-   "acetic": [
-    215,
-    1
-   ],
    "achiev": [
     2,
     1,
@@ -42422,8 +45400,6 @@ globalThis.SUBTOPIC_CATALOG={
     177,
     1,
     178,
-    1,
-    217,
     1
    ],
    "achievable": [
@@ -42468,18 +45444,6 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     2,
     215,
-    1,
-    216,
-    4,
-    217,
-    2,
-    220,
-    1
-   ],
-   "acidic": [
-    217,
-    1,
-    218,
     1
    ],
    "acknowledg": [
@@ -42580,20 +45544,10 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     92,
-    1,
-    215,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "act": [
     22,
-    1,
-    219,
     1
    ],
    "action": [
@@ -42666,8 +45620,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     62,
-    1,
-    219,
     1
    ],
    "activity": [
@@ -42708,13 +45660,7 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     20,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    4
+    1
    ],
    "actuation": [
     6,
@@ -42842,9 +45788,7 @@ globalThis.SUBTOPIC_CATALOG={
     70,
     1,
     88,
-    2,
-    217,
-    1
+    2
    ],
    "adaptative": [
     76,
@@ -42944,8 +45888,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    219,
     1
    ],
    "additionally": [
@@ -43000,14 +45942,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "addresse": [
@@ -43024,9 +45958,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     94,
-    2,
-    219,
-    1
+    2
    ],
    "adequacy": [
     46,
@@ -43062,15 +45994,7 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     1,
     142,
-    1,
-    216,
-    2,
-    217,
-    3,
-    218,
-    2,
-    219,
-    3
+    1
    ],
    "adsorption": [
     28,
@@ -43176,18 +46100,8 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     2,
     216,
-    1,
+    3,
     217,
-    2,
-    218,
-    3,
-    219,
-    9,
-    220,
-    2,
-    221,
-    3,
-    222,
     1
    ],
    "advance": [
@@ -43286,8 +46200,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     205,
-    1,
-    217,
     1
    ],
    "advantage": [
@@ -43472,11 +46384,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "agency": [
     88,
-    1,
-    217,
-    1,
-    219,
-    2
+    1
    ],
    "agent": [
     0,
@@ -43536,12 +46444,6 @@ globalThis.SUBTOPIC_CATALOG={
     37,
     1,
     76,
-    1
-   ],
-   "aging": [
-    218,
-    1,
-    219,
     1
    ],
    "agnostic": [
@@ -43640,12 +46542,6 @@ globalThis.SUBTOPIC_CATALOG={
     212,
     1,
     216,
-    2,
-    218,
-    2,
-    219,
-    7,
-    221,
     4
    ],
    "ai-accelerat": [
@@ -43714,14 +46610,8 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1
    ],
-   "ai-power": [
-    217,
-    1
-   ],
    "ai-support": [
     88,
-    1,
-    219,
     1
    ],
    "aid": [
@@ -43766,8 +46656,6 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     1,
     66,
-    1,
-    218,
     1
    ],
    "aims": [
@@ -43784,8 +46672,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     91,
-    1,
-    219,
     1
    ],
    "aiop": [
@@ -43959,7 +46845,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     157,
     1,
-    221,
+    216,
     2
    ],
    "algorithmic": [
@@ -44048,18 +46934,12 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     3,
     89,
-    1,
-    219,
-    2
+    1
    ],
    "alloy": [
     26,
     1,
-    216,
-    1,
-    218,
-    1,
-    222,
+    217,
     1
    ],
    "almost": [
@@ -44068,8 +46948,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     88,
-    1,
-    215,
     1
    ],
    "alone": [
@@ -44086,8 +46964,6 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     65,
-    1,
-    215,
     1
    ],
    "alongside": [
@@ -44119,11 +46995,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     1,
-    215,
-    1,
-    217,
-    1,
-    221,
+    216,
     1
    ],
    "although": [
@@ -44278,8 +47150,6 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     1,
     89,
-    1,
-    215,
     1
    ],
    "amp": [
@@ -44304,10 +47174,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     89,
-    1
-   ],
-   "analogou": [
-    219,
     1
    ],
    "analyse": [
@@ -44389,11 +47255,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     193,
     1,
-    216,
-    1,
-    217,
-    1,
-    220,
+    215,
     1
    ],
    "analyst": [
@@ -44424,9 +47286,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     7,
     95,
-    1,
-    219,
-    7
+    1
    ],
    "analytical": [
     4,
@@ -44708,22 +47568,12 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1
    ],
-   "annual": [
-    218,
-    2
-   ],
-   "annually": [
-    218,
-    1
-   ],
    "anomaly": [
     20,
     1,
     49,
     1,
-    219,
-    2,
-    221,
+    216,
     2
    ],
    "another": [
@@ -44788,14 +47638,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     83,
-    1,
-    215,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     1
    ],
    "anticipation": [
@@ -44884,8 +47726,6 @@ globalThis.SUBTOPIC_CATALOG={
     32,
     1,
     79,
-    1,
-    219,
     1
    ],
    "application-aware": [
@@ -44910,8 +47750,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     2,
     94,
-    1,
-    216,
     1
    ],
    "appreciate": [
@@ -44940,11 +47778,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    2,
-    217,
-    1,
-    219,
-    1
+    2
    ],
    "approache": [
     0,
@@ -45034,12 +47868,6 @@ globalThis.SUBTOPIC_CATALOG={
     145,
     1,
     216,
-    2,
-    218,
-    1,
-    219,
-    1,
-    221,
     1
    ],
    "appropriate": [
@@ -45054,8 +47882,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     6,
     86,
-    1,
-    217,
     1
    ],
    "approv": [
@@ -45076,11 +47902,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "approximately": [
     91,
-    1,
-    215,
-    1,
-    219,
-    4
+    1
    ],
    "approximation": [
     4,
@@ -45374,17 +48196,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     94,
-    2,
-    215,
-    4,
-    216,
-    5,
-    217,
-    7,
-    218,
-    8,
-    219,
-    9
+    2
    ],
    "argonne": [
     61,
@@ -45570,15 +48382,7 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     3,
     87,
-    1,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2,
-    219,
-    2
+    1
    ],
    "arm": [
     49,
@@ -46137,7 +48941,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    221,
+    216,
     1
    ],
    "artificially": [
@@ -46192,9 +48996,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     93,
-    3,
-    217,
-    1
+    3
    ],
    "assembly": [
     2,
@@ -46246,11 +49048,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     7,
     94,
-    1,
-    217,
-    2,
-    219,
-    4
+    1
    ],
    "assesse": [
     84,
@@ -46284,14 +49082,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     216,
-    1,
-    217,
-    2,
-    218,
-    2,
-    219,
-    2,
-    221,
     1
    ],
    "asset": [
@@ -46318,9 +49108,7 @@ globalThis.SUBTOPIC_CATALOG={
     197,
     1,
     198,
-    1,
-    219,
-    6
+    1
    ],
    "assimilation": [
     20,
@@ -46376,14 +49164,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     3,
     94,
-    1,
-    215,
-    3,
-    216,
-    2,
-    217,
-    1,
-    218,
     1
    ],
    "associate": [
@@ -46438,8 +49218,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     64,
-    1,
-    219,
     1
    ],
    "assure": [
@@ -46586,12 +49364,6 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1,
     61,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "augmentation": [
@@ -46628,9 +49400,7 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1,
     200,
-    1,
-    219,
-    2
+    1
    ],
    "automatic": [
     14,
@@ -46643,9 +49413,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     88,
     1,
-    219,
-    2,
-    220,
+    215,
     1
    ],
    "autonomou": [
@@ -46693,11 +49461,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     178,
     1,
-    217,
-    1,
-    219,
-    3,
-    221,
+    216,
     2
    ],
    "autonomously": [
@@ -46790,8 +49554,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1,
     81,
-    1,
-    219,
     1
    ],
    "aviation": [
@@ -47202,10 +49964,6 @@ globalThis.SUBTOPIC_CATALOG={
     13,
     1
    ],
-   "barrel": [
-    219,
-    1
-   ],
    "barrier": [
     47,
     1,
@@ -47252,11 +50010,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     93,
-    2,
-    216,
-    1,
-    217,
-    1
+    2
    ],
    "base": [
     6,
@@ -47264,14 +50018,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1,
     36,
-    1,
-    216,
-    1
-   ],
-   "baseline": [
-    218,
-    1,
-    219,
     1
    ],
    "basi": [
@@ -47332,12 +50078,6 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1
    ],
-   "basin": [
-    215,
-    1,
-    217,
-    1
-   ],
    "batch": [
     88,
     1
@@ -47395,10 +50135,6 @@ globalThis.SUBTOPIC_CATALOG={
    "bayesian": [
     4,
     2
-   ],
-   "bays": [
-    219,
-    1
    ],
    "beam": [
     24,
@@ -47460,12 +50196,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "beginn": [
     7,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "behavior": [
@@ -47529,7 +50259,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    221,
+    216,
     1
    ],
    "behavioral": [
@@ -47588,12 +50318,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    1,
-    216,
-    1,
-    217,
-    2,
-    218,
     1
    ],
    "benefitt": [
@@ -47618,14 +50342,6 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     81,
-    1
-   ],
-   "best-in-class": [
-    219,
-    1
-   ],
-   "best-practice": [
-    219,
     1
    ],
    "better": [
@@ -47772,14 +50488,6 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     1,
     11,
-    1
-   ],
-   "billion": [
-    215,
-    1,
-    218,
-    1,
-    219,
     1
    ],
    "binary": [
@@ -48202,12 +50910,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     88,
-    1,
-    219,
-    1
-   ],
-   "bottleneck": [
-    219,
     1
    ],
    "bottom": [
@@ -48290,18 +50992,8 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1
    ],
-   "breadboard": [
-    216,
-    1,
-    217,
-    1,
-    218,
-    1
-   ],
    "break": [
     20,
-    1,
-    218,
     1
    ],
    "breakdown": [
@@ -48363,7 +51055,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "brine": [
-    222,
+    217,
     1
    ],
    "bring": [
@@ -48472,10 +51164,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1
    ],
-   "buildout": [
-    215,
-    1
-   ],
    "built": [
     3,
     4,
@@ -48522,10 +51210,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "business": [
     91,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "but": [
@@ -48584,22 +51268,10 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     95,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
-   ],
-   "butane": [
-    215,
-    2
+    1
    ],
    "byproduct": [
-    220,
+    215,
     1
    ],
    "byrd": [
@@ -48718,8 +51390,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "calibration": [
     83,
-    1,
-    219,
     1
    ],
    "call": [
@@ -48854,8 +51524,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     6,
     95,
-    1,
-    219,
     1
    ],
    "capable": [
@@ -48884,10 +51552,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     2,
     90,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "capacitor": [
@@ -48902,14 +51566,6 @@ globalThis.SUBTOPIC_CATALOG={
     23,
     1,
     41,
-    1
-   ],
-   "capital": [
-    218,
-    1
-   ],
-   "capitaliz": [
-    217,
     1
    ],
    "capitalize": [
@@ -48935,7 +51591,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     61,
     1,
-    220,
+    215,
     3
    ],
    "carbide": [
@@ -48945,7 +51601,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "carbon": [
-    220,
+    215,
     1
    ],
    "carbon-carbon": [
@@ -48992,17 +51648,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     87,
-    2,
-    216,
-    1
-   ],
-   "cash": [
-    217,
-    1
-   ],
-   "cashflow": [
-    217,
-    1
+    2
    ],
    "cassenti": [
     42,
@@ -49018,26 +51664,14 @@ globalThis.SUBTOPIC_CATALOG={
     26,
     1,
     184,
-    1,
-    215,
-    1,
-    216,
-    6,
-    217,
     1
    ],
    "catalytic": [
     28,
-    3,
-    216,
-    2
+    3
    ],
    "catastrophic": [
     0,
-    1
-   ],
-   "caus": [
-    218,
     1
    ],
    "causal": [
@@ -49104,9 +51738,7 @@ globalThis.SUBTOPIC_CATALOG={
     172,
     2,
     173,
-    2,
-    217,
-    1
+    2
    ],
    "central": [
     6,
@@ -49176,13 +51808,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "chain": [
     91,
-    1,
-    215,
-    1,
-    218,
-    2,
-    219,
-    2
+    1
    ],
    "chalcogenide": [
     25,
@@ -49250,10 +51876,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     3,
     95,
-    1,
-    215,
-    2,
-    219,
     1
    ],
    "chang": [
@@ -49301,7 +51923,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    220,
+    215,
     1
    ],
    "channel": [
@@ -49356,8 +51978,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    219,
     1
    ],
    "characterization": [
@@ -49399,9 +52019,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     140,
     1,
-    221,
+    216,
     1,
-    222,
+    217,
     1
    ],
    "characterize": [
@@ -49496,18 +52116,6 @@ globalThis.SUBTOPIC_CATALOG={
     117,
     1,
     196,
-    1,
-    215,
-    3,
-    216,
-    7,
-    217,
-    5,
-    219,
-    1
-   ],
-   "chemical-management": [
-    219,
     1
    ],
    "chemicalthe": [
@@ -49570,10 +52178,6 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1
    ],
-   "choke": [
-    219,
-    1
-   ],
    "choose": [
     34,
     1
@@ -49584,10 +52188,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "chou.p.hung.civ": [
     23,
-    1
-   ],
-   "chronic": [
-    218,
     1
    ],
    "circuit": [
@@ -49618,10 +52218,6 @@ globalThis.SUBTOPIC_CATALOG={
     40,
     1,
     46,
-    1
-   ],
-   "citizen": [
-    219,
     1
    ],
    "civic-mind": [
@@ -49756,8 +52352,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "closed-loop": [
     23,
-    1,
-    219,
     1
    ],
    "closely": [
@@ -49776,8 +52370,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     190,
-    1,
-    219,
     1
    ],
    "cloudlet": [
@@ -49799,13 +52391,13 @@ globalThis.SUBTOPIC_CATALOG={
    "cmm": [
     134,
     1,
-    220,
+    215,
     1,
-    221,
+    216,
     1
    ],
    "co": [
-    220,
+    215,
     1
    ],
    "co-crystal": [
@@ -49837,31 +52429,27 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "co-product": [
-    220,
+    215,
     1
    ],
    "co2": [
-    216,
-    1,
-    217,
-    1,
-    220,
+    215,
     3
    ],
    "coal": [
-    220,
+    215,
     3
    ],
    "coal-bas": [
-    220,
+    215,
     1
    ],
    "coal-fir": [
-    220,
+    215,
     1
    ],
    "coal-power": [
-    220,
+    215,
     1
    ],
    "coating": [
@@ -49869,11 +52457,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     3,
-    216,
-    1,
-    218,
-    1,
-    222,
+    217,
     1
    ],
    "cod": [
@@ -49986,8 +52570,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "collaboration": [
     0,
-    1,
-    219,
     1
    ],
    "collaborative": [
@@ -50028,9 +52610,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     93,
-    2,
-    215,
-    1
+    2
    ],
    "collection": [
     4,
@@ -50211,7 +52791,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "combustion": [
-    220,
+    215,
     1
    ],
    "come": [
@@ -50240,10 +52820,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1
    ],
-   "command-and-control": [
-    219,
-    1
-   ],
    "commander": [
     16,
     1,
@@ -50262,31 +52838,7 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     92,
-    3,
-    217,
-    1,
-    219,
-    1
-   ],
-   "commercialization": [
-    216,
-    2,
-    217,
-    5,
-    218,
-    3,
-    219,
-    6
-   ],
-   "commitment": [
-    217,
-    1,
-    218,
-    1
-   ],
-   "commodity": [
-    218,
-    1
+    3
    ],
    "common": [
     2,
@@ -50382,26 +52934,14 @@ globalThis.SUBTOPIC_CATALOG={
     125,
     1
    ],
-   "company": [
-    217,
-    1,
-    218,
-    1
-   ],
    "compar": [
     92,
-    1,
-    216,
-    2
+    1
    ],
    "comparison": [
     27,
     1,
     64,
-    1,
-    216,
-    1,
-    219,
     1
    ],
    "compatibility": [
@@ -50644,12 +53184,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "complementary": [
     5,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "complete": [
@@ -50662,13 +53196,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2
+    1
    ],
    "completion": [
     95,
@@ -50798,10 +53326,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     189,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "compliant": [
@@ -50866,14 +53390,6 @@ globalThis.SUBTOPIC_CATALOG={
     214,
     1,
     216,
-    2,
-    217,
-    2,
-    218,
-    2,
-    219,
-    1,
-    221,
     2
    ],
    "component-level": [
@@ -50911,9 +53427,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     78,
     3,
-    218,
-    1,
-    222,
+    217,
     1
    ],
    "composition": [
@@ -50928,8 +53442,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1,
     80,
-    1,
-    215,
     1
    ],
    "compositional": [
@@ -50958,15 +53470,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "compression": [
     20,
-    2,
-    219,
     2
-   ],
-   "compressor": [
-    218,
-    6,
-    219,
-    5
    ],
    "compromise": [
     14,
@@ -51010,8 +53514,6 @@ globalThis.SUBTOPIC_CATALOG={
     171,
     1,
     178,
-    1,
-    219,
     1
    ],
    "computation": [
@@ -51124,8 +53626,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     154,
-    2,
-    216,
     2
    ],
    "computationally": [
@@ -51244,10 +53744,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1
    ],
-   "concentration": [
-    215,
-    2
-   ],
    "concept": [
     11,
     5,
@@ -51306,12 +53802,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     2,
     88,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     1
    ],
    "conceptual": [
@@ -51340,12 +53830,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1
    ],
-   "conclude": [
-    217,
-    1,
-    218,
-    1
-   ],
    "concrete": [
     9,
     1,
@@ -51363,10 +53847,6 @@ globalThis.SUBTOPIC_CATALOG={
    "condens": [
     31,
     2
-   ],
-   "condensate": [
-    216,
-    1
    ],
    "condition": [
     4,
@@ -51414,11 +53894,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     92,
-    1,
-    217,
-    1,
-    219,
-    5
+    1
    ],
    "conduct": [
     9,
@@ -51468,18 +53944,12 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "configurable": [
     76,
-    1,
-    219,
     1
    ],
    "configuration": [
     17,
     1,
     216,
-    1,
-    219,
-    2,
-    221,
     1
    ],
    "confin": [
@@ -51498,10 +53968,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "confirm": [
     20,
-    1,
-    217,
-    2,
-    218,
     1
    ],
    "conflict": [
@@ -51644,9 +54110,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     95,
-    2,
-    219,
-    1
+    2
    ],
    "considerable": [
     7,
@@ -51670,8 +54134,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     2,
     94,
-    1,
-    217,
     1
    ],
    "consist": [
@@ -51744,8 +54206,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     137,
-    1,
-    217,
     1
    ],
    "consumption": [
@@ -51760,10 +54220,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "contain": [
     49,
-    1,
-    215,
-    3,
-    216,
     1
    ],
    "contemplat": [
@@ -51780,10 +54236,6 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     64,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "contest": [
@@ -51846,8 +54298,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "contextualiz": [
     56,
-    1,
-    217,
     1
    ],
    "continu": [
@@ -51858,8 +54308,6 @@ globalThis.SUBTOPIC_CATALOG={
     47,
     1,
     76,
-    1,
-    219,
     1
    ],
    "continua": [
@@ -51894,16 +54342,12 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     1,
     88,
-    5,
-    219,
-    1
+    5
    ],
    "continuously": [
     0,
     1,
     74,
-    1,
-    219,
     1
    ],
    "continuum": [
@@ -51916,11 +54360,7 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1,
     82,
-    1,
-    217,
-    1,
-    219,
-    2
+    1
    ],
    "contraction": [
     20,
@@ -52016,11 +54456,7 @@ globalThis.SUBTOPIC_CATALOG={
     198,
     1,
     213,
-    1,
-    217,
-    1,
-    219,
-    3
+    1
    ],
    "controll": [
     2,
@@ -52046,16 +54482,10 @@ globalThis.SUBTOPIC_CATALOG={
     70,
     1,
     87,
-    1,
-    219,
     1
    ],
    "controllable": [
     15,
-    1
-   ],
-   "controlled10": [
-    219,
     1
    ],
    "controller": [
@@ -52128,22 +54558,14 @@ globalThis.SUBTOPIC_CATALOG={
     184,
     1,
     215,
-    1,
+    3,
     216,
-    5,
-    217,
-    3,
-    220,
-    3,
-    221,
     1
    ],
    "convert": [
     20,
     1,
     61,
-    1,
-    216,
     1
    ],
    "converter": [
@@ -52268,26 +54690,8 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     1
    ],
-   "corrosion": [
-    216,
-    2,
-    218,
-    3,
-    219,
-    1
-   ],
-   "corrosion-relat": [
-    218,
-    1
-   ],
-   "corrosion-resistant": [
-    216,
-    1
-   ],
    "corrosive": [
     78,
-    1,
-    217,
     1
    ],
    "cosmic": [
@@ -52325,32 +54729,16 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     93,
     1,
-    215,
-    3,
-    216,
-    3,
     217,
-    7,
-    218,
-    4,
-    219,
-    5,
-    222,
     1
    ],
    "cost-effective": [
     215,
-    1,
-    218,
-    1,
-    220,
     1
    ],
    "costly": [
     46,
-    2,
-    215,
-    1
+    2
    ],
    "cots": [
     68,
@@ -52388,11 +54776,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     3,
     88,
-    1,
-    215,
-    2,
-    219,
-    6
+    1
    ],
    "count": [
     24,
@@ -52512,8 +54896,6 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1,
     86,
-    1,
-    219,
     1
    ],
    "create": [
@@ -52547,9 +54929,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     1,
-    219,
-    1,
-    222,
+    217,
     1
    ],
    "creation": [
@@ -52663,11 +55043,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    219,
-    2,
-    220,
+    215,
     1,
-    222,
+    217,
     2
    ],
    "critically": [
@@ -52724,12 +55102,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1
    ],
-   "crosse": [
-    217,
-    1,
-    219,
-    1
-   ],
    "crowd": [
     56,
     1
@@ -52750,14 +55122,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     90,
-    1,
-    218,
-    1
-   ],
-   "crude": [
-    217,
-    1,
-    219,
     1
    ],
    "cruder": [
@@ -53022,12 +55386,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     94,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "currently": [
@@ -53044,12 +55402,6 @@ globalThis.SUBTOPIC_CATALOG={
     38,
     1,
     88,
-    1,
-    215,
-    1,
-    216,
-    1,
-    219,
     1
    ],
    "curriculum": [
@@ -53062,8 +55414,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "cutting-edge": [
     3,
-    1,
-    219,
     1
    ],
    "cyber": [
@@ -53160,10 +55510,6 @@ globalThis.SUBTOPIC_CATALOG={
     47,
     1
    ],
-   "cyberattack": [
-    219,
-    1
-   ],
    "cybernetic": [
     88,
     4
@@ -53178,8 +55524,6 @@ globalThis.SUBTOPIC_CATALOG={
     210,
     1,
     211,
-    1,
-    219,
     1
    ],
    "cyberspace": [
@@ -53203,7 +55547,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     146,
     1,
-    222,
+    217,
     1
    ],
    "damage": [
@@ -53368,18 +55712,6 @@ globalThis.SUBTOPIC_CATALOG={
     207,
     1,
     210,
-    1,
-    215,
-    1,
-    217,
-    3,
-    218,
-    2,
-    219,
-    3
-   ],
-   "data-acquisition": [
-    219,
     1
    ],
    "data-driven": [
@@ -53454,8 +55786,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "day": [
     11,
-    1,
-    219,
     1
    ],
    "db": [
@@ -53470,10 +55800,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "de": [
     60,
-    1
-   ],
-   "de-risk": [
-    219,
     1
    ],
    "deal": [
@@ -53510,11 +55836,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "decentraliz": [
     68,
-    1,
-    216,
-    1,
-    217,
-    3
+    1
    ],
    "deception": [
     14,
@@ -53580,9 +55902,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    219,
-    2
+    1
    ],
    "decision-mak": [
     4,
@@ -53603,7 +55923,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    221,
+    216,
     2
    ],
    "decision-maker": [
@@ -53686,8 +56006,6 @@ globalThis.SUBTOPIC_CATALOG={
     31,
     1,
     64,
-    1,
-    218,
     1
    ],
    "defeat": [
@@ -53754,10 +56072,6 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1
    ],
-   "deferr": [
-    219,
-    1
-   ],
    "deficiency": [
     46,
     1
@@ -53770,16 +56084,10 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     53,
-    1,
-    219,
     1
    ],
    "define": [
     14,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "definition": [
@@ -53844,10 +56152,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1
    ],
-   "dehydrator": [
-    218,
-    2
-   ],
    "delegation": [
     88,
     1
@@ -53870,21 +56174,7 @@ globalThis.SUBTOPIC_CATALOG={
     141,
     1,
     142,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    2
-   ],
-   "deliverability": [
-    216,
-    1,
-    218,
-    3,
-    219,
-    3
+    1
    ],
    "delivery": [
     14,
@@ -53908,11 +56198,7 @@ globalThis.SUBTOPIC_CATALOG={
     148,
     1,
     149,
-    1,
-    217,
-    1,
-    218,
-    2
+    1
    ],
    "demand": [
     36,
@@ -53934,9 +56220,7 @@ globalThis.SUBTOPIC_CATALOG={
     31,
     1,
     66,
-    1,
-    217,
-    2
+    1
    ],
    "demonstrate": [
     27,
@@ -53950,13 +56234,7 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     2,
     95,
-    2,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "demonstration": [
     27,
@@ -53968,8 +56246,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     2,
     93,
-    1,
-    217,
     1
    ],
    "deni": [
@@ -54046,9 +56322,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     92,
-    2,
-    219,
-    3
+    2
    ],
    "deployable": [
     92,
@@ -54066,12 +56340,6 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     90,
-    1,
-    217,
-    2,
-    218,
-    1,
-    219,
     1
    ],
    "depression": [
@@ -54116,15 +56384,7 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     86,
-    1,
-    216,
-    5,
-    217,
-    4,
-    218,
-    4,
-    219,
-    3
+    1
    ],
    "description": [
     0,
@@ -54446,13 +56706,7 @@ globalThis.SUBTOPIC_CATALOG={
     184,
     1,
     213,
-    1,
-    216,
-    3,
-    217,
-    2,
-    218,
-    3
+    1
    ],
    "designer": [
     17,
@@ -54484,10 +56738,6 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     82,
-    1,
-    216,
-    1,
-    218,
     1
    ],
    "desirable": [
@@ -54526,9 +56776,7 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     84,
-    2,
-    215,
-    1
+    2
    ],
    "detect": [
     11,
@@ -54581,9 +56829,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     211,
     1,
-    219,
-    2,
-    221,
+    216,
     2
    ],
    "detectivity": [
@@ -54894,13 +57140,7 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     95,
-    1,
-    216,
-    3,
-    217,
-    1,
-    218,
-    2
+    1
    ],
    "developer": [
     16,
@@ -55022,20 +57262,10 @@ globalThis.SUBTOPIC_CATALOG={
     205,
     1,
     215,
-    1,
+    2,
     216,
-    3,
-    217,
-    2,
-    218,
-    5,
-    219,
-    5,
-    220,
-    2,
-    221,
     4,
-    222,
+    217,
     4
    ],
    "developmental": [
@@ -55114,8 +57344,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     177,
-    1,
-    219,
     1
    ],
    "diamond": [
@@ -55235,13 +57463,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    218,
+    215,
     1,
-    219,
-    8,
-    220,
-    1,
-    221,
+    216,
     3
    ],
    "digitalization": [
@@ -55295,7 +57519,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "dioxide": [
-    220,
+    215,
     1
    ],
    "direct": [
@@ -55317,11 +57541,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     71,
     1,
-    216,
-    2,
     217,
-    3,
-    222,
     1
    ],
    "directed-energy": [
@@ -55354,8 +57574,6 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     95,
-    1,
-    217,
     1
    ],
    "directorate": [
@@ -55473,7 +57691,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "discharge": [
-    220,
+    215,
     1
    ],
    "discipline": [
@@ -55686,9 +57904,7 @@ globalThis.SUBTOPIC_CATALOG={
     156,
     1,
     157,
-    1,
-    216,
-    2
+    1
    ],
    "discovery": [
     3,
@@ -55854,12 +58070,6 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1
    ],
-   "disposal": [
-    215,
-    1,
-    217,
-    2
-   ],
    "disposition": [
     141,
     1
@@ -55984,9 +58194,7 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     89,
-    3,
-    217,
-    2
+    3
    ],
    "distribute": [
     0,
@@ -56286,16 +58494,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1
    ],
-   "doe": [
-    216,
-    1,
-    217,
-    2,
-    218,
-    1,
-    219,
-    3
-   ],
    "does": [
     8,
     1,
@@ -56358,9 +58556,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "domestic": [
     139,
-    1,
-    215,
-    3
+    1
    ],
    "dominance": [
     14,
@@ -56414,33 +58610,13 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     1,
     20,
-    1,
-    218,
-    1,
-    219,
-    1
-   ],
-   "downhole": [
-    218,
     1
    ],
    "downstream": [
     5,
     1,
     28,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
     1
-   ],
-   "downtime": [
-    218,
-    1,
-    219,
-    3
    ],
    "dozen": [
     84,
@@ -56484,8 +58660,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "drill": [
     217,
-    1,
-    222,
     1
    ],
    "drive": [
@@ -56532,10 +58706,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     95,
-    1
-   ],
-   "drop": [
-    218,
     1
    ],
    "drost": [
@@ -56600,11 +58770,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     3,
     93,
-    1,
-    215,
-    2,
-    218,
-    2
+    1
    ],
    "dune": [
     188,
@@ -56628,18 +58794,12 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     95,
-    1,
-    217,
-    1,
-    218,
-    2
+    1
    ],
    "durability": [
     213,
     1,
-    218,
-    1,
-    222,
+    217,
     1
    ],
    "duration": [
@@ -56732,8 +58892,6 @@ globalThis.SUBTOPIC_CATALOG={
     174,
     1,
     216,
-    1,
-    221,
     1
    ],
    "dynamical": [
@@ -56807,15 +58965,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     6,
-    215,
-    2,
     216,
-    6,
-    218,
     1,
-    221,
-    1,
-    222,
+    217,
     1
    ],
    "each": [
@@ -56861,7 +59013,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1,
-    220,
+    215,
     1
    ],
    "ease": [
@@ -56890,20 +59042,10 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     130,
-    1,
-    215,
-    3,
-    216,
-    3,
-    217,
-    6,
-    218,
-    4,
-    219,
     1
    ],
    "economically": [
-    220,
+    215,
     1
    ],
    "economy": [
@@ -56930,16 +59072,10 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     92,
-    5,
-    219,
-    4
+    5
    ],
    "edge-emitt": [
     24,
-    1
-   ],
-   "edge-to-cloud": [
-    219,
     1
    ],
    "education": [
@@ -57058,8 +59194,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    215,
     1
    ],
    "effectively": [
@@ -57134,14 +59268,6 @@ globalThis.SUBTOPIC_CATALOG={
     71,
     1,
     92,
-    2,
-    216,
-    4,
-    217,
-    1,
-    218,
-    8,
-    219,
     2
    ],
    "efficient": [
@@ -57181,13 +59307,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     215,
     1,
-    216,
-    1,
-    219,
-    2,
-    220,
-    1,
-    222,
+    217,
     1
    ],
    "efficiently": [
@@ -57264,16 +59384,10 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     2,
     93,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "egs": [
-    222,
+    217,
     2
    ],
    "einstein": [
@@ -57324,9 +59438,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    217,
-    2
+    1
    ],
    "electrically": [
     67,
@@ -57375,7 +59487,7 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     184,
     1,
-    220,
+    215,
     1
    ],
    "electrochemistry": [
@@ -57599,9 +59711,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    218,
-    1,
-    220,
+    215,
     1
    ],
    "elicit": [
@@ -57678,10 +59788,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1
    ],
-   "embedment": [
-    219,
-    1
-   ],
    "embodi": [
     6,
     2,
@@ -57734,8 +59840,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
-    1,
-    219,
     1
    ],
    "emergence": [
@@ -57770,8 +59874,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1,
     81,
-    1,
-    219,
     1
    ],
    "emissivity": [
@@ -57874,8 +59976,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     76,
-    1,
-    216,
     1
    ],
    "emps": [
@@ -57928,9 +60028,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     94,
-    2,
-    219,
-    1
+    2
    ],
    "enable": [
     0,
@@ -58026,12 +60124,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    220,
     1
    ],
    "enabler": [
@@ -58098,15 +60190,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "end": [
     141,
-    1,
-    216,
-    4,
-    217,
-    5,
-    218,
-    4,
-    219,
-    3
+    1
    ],
    "end-to-end": [
     0,
@@ -58282,18 +60366,6 @@ globalThis.SUBTOPIC_CATALOG={
     213,
     1,
     214,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    2,
-    219,
-    1
-   ],
-   "energy-efficient": [
-    219,
     1
    ],
    "energyg": [
@@ -58336,9 +60408,7 @@ globalThis.SUBTOPIC_CATALOG={
     39,
     1,
     88,
-    1,
-    218,
-    5
+    1
    ],
    "engineer": [
     2,
@@ -58403,9 +60473,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     148,
     1,
-    221,
+    216,
     1,
-    222,
+    217,
     1
    ],
    "engineerable": [
@@ -58457,13 +60527,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    215,
-    1,
-    219,
-    1,
-    221,
+    216,
     2,
-    222,
+    217,
     2
    ],
    "enhance": [
@@ -58494,8 +60560,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2,
     95,
-    1,
-    218,
     1
    ],
    "enhanced-embedd": [
@@ -58506,9 +60570,7 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     2,
     67,
-    1,
-    218,
-    2
+    1
    ],
    "enhancer": [
     58,
@@ -58596,10 +60658,6 @@ globalThis.SUBTOPIC_CATALOG={
     73,
     1,
     75,
-    1
-   ],
-   "enter": [
-    218,
     1
    ],
    "enterprise": [
@@ -58761,15 +60819,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     174,
     1,
-    216,
-    1,
     217,
-    2,
-    218,
-    4,
-    219,
-    5,
-    222,
     2
    ],
    "environment-task-technology": [
@@ -58898,17 +60948,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     93,
-    3,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    12,
-    219,
-    2
+    3
    ],
    "equipp": [
     7,
@@ -58918,10 +60958,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "equivalence": [
     56,
-    1
-   ],
-   "equivalent": [
-    219,
     1
    ],
    "ergodicity": [
@@ -58934,10 +60970,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "ergonomically": [
     66,
-    1
-   ],
-   "erosion": [
-    219,
     1
    ],
    "erp": [
@@ -59030,9 +61062,7 @@ globalThis.SUBTOPIC_CATALOG={
     33,
     1,
     46,
-    1,
-    219,
-    4
+    1
    ],
    "establishe": [
     14,
@@ -59052,11 +61082,7 @@ globalThis.SUBTOPIC_CATALOG={
     52,
     1,
     53,
-    2,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "estimate": [
     7,
@@ -59064,11 +61090,7 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     53,
-    2,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "estimation": [
     20,
@@ -59078,8 +61100,6 @@ globalThis.SUBTOPIC_CATALOG={
     27,
     1,
     53,
-    1,
-    217,
     1
    ],
    "etc": [
@@ -59107,19 +61127,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     4,
-    220,
-    1
-   ],
-   "ethane": [
     215,
-    2
+    1
    ],
    "ethically": [
     4,
-    1
-   ],
-   "ethylene": [
-    216,
     1
    ],
    "eukaryote": [
@@ -59148,8 +61160,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     94,
-    1,
-    218,
     1
    ],
    "evaluate": [
@@ -59162,9 +61172,7 @@ globalThis.SUBTOPIC_CATALOG={
     74,
     1,
     82,
-    1,
-    219,
-    2
+    1
    ],
    "evaluation": [
     46,
@@ -59178,9 +61186,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    219,
-    4
+    1
    ],
    "evaluative": [
     56,
@@ -59240,9 +61246,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     92,
-    1,
-    219,
-    2
+    1
    ],
    "eventually": [
     4,
@@ -59432,10 +61436,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1
    ],
-   "excess": [
-    216,
-    2
-   ],
    "exchang": [
     8,
     1
@@ -59522,14 +61522,6 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1
    ],
-   "exhibit": [
-    216,
-    1,
-    217,
-    1,
-    218,
-    1
-   ],
    "exist": [
     0,
     1,
@@ -59559,13 +61551,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     2,
-    216,
-    1,
-    218,
-    1,
-    219,
-    4,
-    220,
+    215,
     1
    ],
    "existence": [
@@ -59628,12 +61614,6 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     87,
-    1,
-    216,
-    1,
-    217,
-    2,
-    218,
     1
    ],
    "expectation": [
@@ -59653,14 +61633,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     42,
     4
-   ],
-   "expenditure": [
-    218,
-    1
-   ],
-   "expense": [
-    219,
-    1
    ],
    "experienc": [
     93,
@@ -59740,9 +61712,7 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     1,
     78,
-    3,
-    216,
-    1
+    3
    ],
    "experimentally": [
     6,
@@ -59805,14 +61775,6 @@ globalThis.SUBTOPIC_CATALOG={
    "explain": [
     16,
     2
-   ],
-   "explainable": [
-    219,
-    1
-   ],
-   "explanation": [
-    217,
-    1
    ],
    "explicit": [
     0,
@@ -59907,9 +61869,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     63,
     2,
-    220,
+    215,
     1,
-    221,
+    216,
     1
    ],
    "exploratory": [
@@ -59936,9 +61898,7 @@ globalThis.SUBTOPIC_CATALOG={
     39,
     1,
     82,
-    2,
-    216,
-    1
+    2
    ],
    "explosion": [
     49,
@@ -59994,9 +61954,7 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     2,
     94,
-    1,
-    219,
-    4
+    1
    ],
    "extension": [
     5,
@@ -60004,8 +61962,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     86,
-    1,
-    219,
     1
    ],
    "extensive": [
@@ -60055,19 +62011,17 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     56,
     1,
-    220,
+    215,
     1,
-    221,
+    216,
     1
    ],
    "extraction": [
     131,
     1,
-    215,
-    1,
-    221,
+    216,
     2,
-    222,
+    217,
     2
    ],
    "extraordinary": [
@@ -60139,7 +62093,7 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     119,
     1,
-    222,
+    217,
     1
    ],
    "extreme-scale": [
@@ -60188,10 +62142,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     94,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "face": [
@@ -60202,8 +62152,6 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     65,
-    1,
-    218,
     1
    ],
    "facebook": [
@@ -60248,19 +62196,7 @@ globalThis.SUBTOPIC_CATALOG={
     139,
     1,
     185,
-    1,
-    215,
-    1,
-    218,
-    2,
-    219,
-    20
-   ],
-   "facility-level": [
-    217,
-    1,
-    218,
-    3
+    1
    ],
    "fact": [
     4,
@@ -60319,11 +62255,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     1,
-    218,
-    3,
-    219,
-    3,
-    221,
+    216,
     1
    ],
    "fall": [
@@ -60420,12 +62352,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "feasibility": [
     61,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "feasible": [
@@ -60450,16 +62376,6 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     84,
-    1
-   ],
-   "federal": [
-    217,
-    1,
-    219,
-    2
-   ],
-   "feed": [
-    219,
     1
    ],
    "feedback": [
@@ -60530,10 +62446,6 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     2
    ],
-   "fiber-bas": [
-    219,
-    1
-   ],
    "fiber-coupl": [
     81,
     2
@@ -60601,27 +62513,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     87,
     2,
-    215,
-    1,
     217,
-    10,
-    218,
-    8,
-    219,
-    8,
-    222,
     1
-   ],
-   "field-bas": [
-    219,
-    2
    ],
    "field-generat": [
     49,
-    1
-   ],
-   "fieldscale": [
-    219,
     1
    ],
    "fight": [
@@ -60652,12 +62548,6 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1
    ],
-   "financial": [
-    217,
-    1,
-    218,
-    2
-   ],
    "find": [
     4,
     1,
@@ -60670,10 +62560,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "finder": [
     132,
-    1
-   ],
-   "finish": [
-    217,
     1
    ],
    "finite": [
@@ -60736,8 +62622,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "fix": [
     49,
-    1,
-    217,
     1
    ],
    "fixed-w": [
@@ -60746,14 +62630,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "flammability": [
     28,
-    1
-   ],
-   "flar": [
-    215,
-    5
-   ],
-   "flare": [
-    217,
     1
    ],
    "fleet": [
@@ -60784,8 +62660,6 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     89,
-    1,
-    215,
     1
    ],
    "flight": [
@@ -60830,11 +62704,7 @@ globalThis.SUBTOPIC_CATALOG={
     213,
     1,
     214,
-    1,
-    217,
-    1,
-    219,
-    4
+    1
    ],
    "fluctuat": [
     6,
@@ -60872,10 +62742,8 @@ globalThis.SUBTOPIC_CATALOG={
     214,
     1,
     216,
-    1,
-    221,
     2,
-    222,
+    217,
     1
    ],
    "fluorine-contain": [
@@ -60958,15 +62826,7 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     82,
-    1,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2,
-    219,
-    3
+    1
    ],
    "focuse": [
     0,
@@ -61118,9 +62978,7 @@ globalThis.SUBTOPIC_CATALOG={
     51,
     1,
     53,
-    1,
-    219,
-    3
+    1
    ],
    "foremost": [
     46,
@@ -61213,11 +63071,7 @@ globalThis.SUBTOPIC_CATALOG={
     3
    ],
    "formic": [
-    220,
-    1
-   ],
-   "formulat": [
-    216,
+    215,
     1
    ],
    "formulation": [
@@ -61256,11 +63110,7 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     47,
-    1,
-    217,
-    1,
-    219,
-    2
+    1
    ],
    "foundation": [
     0,
@@ -61518,12 +63368,8 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     4
    ],
-   "fractionation": [
-    217,
-    1
-   ],
    "fractur": [
-    221,
+    216,
     1
    ],
    "fracture": [
@@ -61531,15 +63377,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     198,
     1,
-    219,
-    1,
-    222,
+    217,
     1
    ],
    "fragment": [
     86,
-    1,
-    219,
     1
    ],
    "fragmentation": [
@@ -61572,22 +63414,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     93,
-    1,
-    216,
-    2,
-    217,
-    4,
-    218,
-    2,
-    219,
-    3
-   ],
-   "framework7": [
-    216,
-    1
-   ],
-   "framework9": [
-    218,
     1
    ],
    "fraught": [
@@ -61636,11 +63462,7 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     75,
-    1,
-    216,
-    1,
-    219,
-    2
+    1
    ],
    "frequency-control": [
     75,
@@ -61652,12 +63474,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "friction": [
     28,
-    1,
-    218,
-    1
-   ],
-   "frictional": [
-    218,
     1
    ],
    "friendly": [
@@ -61700,8 +63516,6 @@ globalThis.SUBTOPIC_CATALOG={
     139,
     2,
     146,
-    1,
-    217,
     1
    ],
    "fulda": [
@@ -61724,17 +63538,7 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     84,
-    1,
-    215,
-    2,
-    217,
-    2,
-    219,
     1
-   ],
-   "full-scale": [
-    219,
-    2
    ],
    "fully": [
     7,
@@ -61750,8 +63554,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     92,
-    1,
-    217,
     1
    ],
    "function": [
@@ -61848,8 +63650,6 @@ globalThis.SUBTOPIC_CATALOG={
     32,
     1,
     79,
-    1,
-    215,
     1
    ],
    "fundamental": [
@@ -61952,12 +63752,6 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1,
     93,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "furthermore": [
@@ -61968,8 +63762,6 @@ globalThis.SUBTOPIC_CATALOG={
     70,
     1,
     76,
-    1,
-    218,
     1
    ],
    "fus": [
@@ -62112,20 +63904,10 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     5,
     94,
-    2,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "futurist": [
     58,
-    1
-   ],
-   "fy22": [
-    218,
     1
    ],
    "g-load": [
@@ -62154,9 +63936,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     2,
     89,
-    3,
-    219,
-    1
+    3
    ],
    "gamble": [
     27,
@@ -62192,8 +63972,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "gaps": [
     90,
-    1,
-    215,
     1
    ],
    "garcia": [
@@ -62211,17 +63989,7 @@ globalThis.SUBTOPIC_CATALOG={
    "gas": [
     1,
     2,
-    215,
-    17,
     216,
-    18,
-    217,
-    24,
-    218,
-    5,
-    219,
-    8,
-    221,
     4
    ],
    "gase": [
@@ -62242,12 +64010,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "gather": [
     92,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
     1
    ],
    "gauge": [
@@ -62486,10 +64248,6 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     2,
     93,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "generate": [
@@ -62598,8 +64356,6 @@ globalThis.SUBTOPIC_CATALOG={
     200,
     1,
     207,
-    1,
-    217,
     1
    ],
    "generic": [
@@ -62629,7 +64385,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geochemical": [
-    221,
+    216,
     1
    ],
    "geographically": [
@@ -62691,7 +64447,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "geothermal": [
-    222,
+    217,
     6
    ],
    "gerde": [
@@ -62970,8 +64726,6 @@ globalThis.SUBTOPIC_CATALOG={
     194,
     2,
     195,
-    1,
-    217,
     1
    ],
    "ground": [
@@ -63006,8 +64760,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     4,
     95,
-    1,
-    219,
     1
    ],
    "ground-bas": [
@@ -63104,8 +64856,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "guideline": [
     46,
-    1,
-    219,
     1
    ],
    "gunshot": [
@@ -63113,19 +64863,11 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "gypsum": [
-    220,
+    215,
     1
    ],
    "gyroscope": [
     85,
-    1
-   ],
-   "h2s": [
-    215,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "hadronic": [
@@ -63152,8 +64894,6 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     177,
-    1,
-    215,
     1
    ],
    "handle": [
@@ -63162,10 +64902,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "handler": [
     16,
-    1
-   ],
-   "handoff": [
-    218,
     1
    ],
    "hao": [
@@ -63206,8 +64942,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     171,
-    1,
-    219,
     1
    ],
    "harikumar": [
@@ -63228,10 +64962,6 @@ globalThis.SUBTOPIC_CATALOG={
     35,
     1,
     167,
-    1,
-    218,
-    1,
-    219,
     1
    ],
    "harvest": [
@@ -63262,8 +64992,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "hazardou": [
     28,
-    1,
-    217,
     1
    ],
    "hci": [
@@ -63276,9 +65004,7 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1,
     92,
-    4,
-    219,
-    1
+    4
    ],
    "healthcare": [
     29,
@@ -63288,8 +65014,6 @@ globalThis.SUBTOPIC_CATALOG={
     53,
     1,
     54,
-    1,
-    218,
     1
    ],
    "heavily": [
@@ -63390,10 +65114,6 @@ globalThis.SUBTOPIC_CATALOG={
     51,
     1
    ],
-   "hfts": [
-    219,
-    1
-   ],
    "hierarchical": [
     2,
     1,
@@ -63484,14 +65204,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     189,
-    1,
-    215,
-    1,
-    216,
-    4,
-    217,
-    1,
-    218,
     1
    ],
    "high-altitude": [
@@ -63500,10 +65212,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "high-cost": [
     20,
-    1
-   ],
-   "high-density": [
-    219,
     1
    ],
    "high-dimensional": [
@@ -63516,8 +65224,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "high-efficiency": [
     50,
-    1,
-    218,
     1
    ],
    "high-fidelity": [
@@ -63526,9 +65232,7 @@ globalThis.SUBTOPIC_CATALOG={
     38,
     1,
     46,
-    4,
-    219,
-    2
+    4
    ],
    "high-field": [
     55,
@@ -63558,8 +65262,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     72,
-    1,
-    216,
     1
    ],
    "high-power-density": [
@@ -63567,7 +65269,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "high-pressure": [
-    222,
+    217,
     1
    ],
    "high-priority": [
@@ -63611,7 +65313,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     71,
     1,
-    222,
+    217,
     1
    ],
    "high-throughput": [
@@ -63628,8 +65330,6 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     3,
     38,
-    1,
-    216,
     1
    ],
    "higher-ly": [
@@ -63640,18 +65340,12 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1
    ],
-   "higher-pressure": [
-    218,
-    1
-   ],
    "higher-reliability": [
     50,
     1
    ],
    "highlight": [
     90,
-    1,
-    218,
     1
    ],
    "highly": [
@@ -63701,9 +65395,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     81,
     2,
-    216,
-    1,
-    222,
+    217,
     1
    ],
    "highly-contextualiz": [
@@ -63736,10 +65428,6 @@ globalThis.SUBTOPIC_CATALOG={
     12,
     1
    ],
-   "hits": [
-    219,
-    7
-   ],
    "hoc": [
     34,
     4,
@@ -63760,14 +65448,8 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     1
    ],
-   "horsepower": [
-    218,
-    1
-   ],
    "host": [
     69,
-    2,
-    219,
     2
    ],
    "hostile": [
@@ -64068,10 +65750,6 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1
    ],
-   "humanmachine": [
-    219,
-    1
-   ],
    "humidity": [
     60,
     1
@@ -64084,14 +65762,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "hung": [
     23,
-    1
-   ],
-   "hurdle": [
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "hv": [
@@ -64142,8 +65812,6 @@ globalThis.SUBTOPIC_CATALOG={
     73,
     1,
     155,
-    1,
-    216,
     1
    ],
    "hybridiz": [
@@ -64152,26 +65820,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "hybridization": [
     58,
-    1
-   ],
-   "hydraulic": [
-    219,
-    1
-   ],
-   "hydrocarbon": [
-    215,
-    1,
-    216,
-    1,
-    218,
-    3,
-    219,
-    8
-   ],
-   "hydrogen": [
-    215,
-    1,
-    216,
     1
    ],
    "hydrologic": [
@@ -64540,12 +66188,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    2,
-    216,
-    3,
-    217,
-    2,
-    218,
     2
    ],
    "ideological": [
@@ -64574,11 +66216,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     85,
-    4,
-    217,
-    2,
-    218,
-    2
+    4
    ],
    "ignor": [
     88,
@@ -64776,12 +66414,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     4,
     92,
-    1,
-    216,
-    1,
-    218,
-    3,
-    219,
     1
    ],
    "impair": [
@@ -64826,15 +66458,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     7,
     93,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "implementation": [
     24,
@@ -64844,8 +66468,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     150,
-    1,
-    219,
     1
    ],
    "implication": [
@@ -64954,9 +66576,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     2,
     94,
-    1,
-    218,
-    2
+    1
    ],
    "improve": [
     1,
@@ -65013,15 +66633,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
-    215,
-    2,
-    217,
-    1,
-    218,
-    3,
-    219,
-    1,
-    221,
+    216,
     1
    ],
    "improvement": [
@@ -65040,22 +66652,10 @@ globalThis.SUBTOPIC_CATALOG={
     74,
     1,
     85,
-    1,
-    216,
-    2,
-    217,
-    3,
-    218,
-    3,
-    219,
-    5
+    1
    ],
    "improvisation": [
     41,
-    1
-   ],
-   "impurity": [
-    215,
     1
    ],
    "in-field": [
@@ -65064,10 +66664,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "in-flight": [
     37,
-    1
-   ],
-   "in-house": [
-    219,
     1
    ],
    "in-situ": [
@@ -65094,9 +66690,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "incident": [
     62,
-    1,
-    219,
-    2
+    1
    ],
    "incipient": [
     12,
@@ -65186,16 +66780,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2,
     215,
-    1,
-    216,
-    3,
-    217,
-    9,
-    218,
-    2,
-    219,
-    4,
-    220,
     1
    ],
    "include": [
@@ -65334,15 +66918,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     4,
     94,
-    1,
-    216,
-    2,
-    217,
-    6,
-    218,
-    7,
-    219,
-    10
+    1
    ],
    "inclusion": [
     1,
@@ -65410,14 +66986,6 @@ globalThis.SUBTOPIC_CATALOG={
     38,
     1,
     63,
-    1,
-    215,
-    1,
-    217,
-    2,
-    218,
-    2,
-    219,
     1
    ],
    "increase": [
@@ -65446,17 +67014,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    4,
-    219,
-    6
+    1
    ],
    "increasingly": [
     0,
@@ -65482,8 +67040,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     90,
-    1,
-    219,
     1
    ],
    "incredibly": [
@@ -65566,8 +67122,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
-    1,
-    218,
     1
    ],
    "individually": [
@@ -65610,11 +67164,7 @@ globalThis.SUBTOPIC_CATALOG={
     121,
     1,
     122,
-    1,
-    215,
-    2,
-    216,
-    3
+    1
    ],
    "industry": [
     92,
@@ -65622,20 +67172,6 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1,
     142,
-    1,
-    217,
-    1,
-    218,
-    4,
-    219,
-    3
-   ],
-   "industry-standard": [
-    216,
-    1
-   ],
-   "inefficiency": [
-    215,
     1
    ],
    "inelastic": [
@@ -65942,22 +67478,10 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     34,
-    1,
-    215,
-    1,
-    217,
-    1,
-    218,
-    10,
-    219,
-    13
+    1
    ],
    "infrastructure-less": [
     34,
-    1
-   ],
-   "infrastructure-wide": [
-    218,
     1
    ],
    "inherent": [
@@ -65980,16 +67504,10 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1
    ],
-   "inhibitor": [
-    219,
-    1
-   ],
    "initial": [
     20,
     1,
     62,
-    1,
-    219,
     1
    ],
    "initiate": [
@@ -66012,8 +67530,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "injection": [
     14,
-    1,
-    217,
     1
    ],
    "injury": [
@@ -66021,10 +67537,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     7
-   ],
-   "inline": [
-    219,
-    1
    ],
    "innate": [
     58,
@@ -66094,10 +67606,6 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     2,
     95,
-    1,
-    217,
-    4,
-    219,
     1
    ],
    "inorganic": [
@@ -66162,20 +67670,12 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1
    ],
-   "inspection": [
-    219,
-    2
-   ],
    "instability": [
     6,
     1,
     12,
     1,
     13,
-    1
-   ],
-   "installation": [
-    219,
     1
    ],
    "instantaneou": [
@@ -66260,13 +67760,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     93,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    4
+    1
    ],
    "integrate": [
     6,
@@ -66340,8 +67834,6 @@ globalThis.SUBTOPIC_CATALOG={
     186,
     1,
     204,
-    1,
-    219,
     1
    ],
    "integrative": [
@@ -66360,8 +67852,6 @@ globalThis.SUBTOPIC_CATALOG={
     74,
     1,
     210,
-    1,
-    219,
     1
    ],
    "intelligence": [
@@ -66427,7 +67917,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     2,
-    221,
+    216,
     1
    ],
    "intelligent": [
@@ -66455,23 +67945,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     2,
-    221,
+    216,
     2
    ],
    "intelligently": [
     53,
     1,
     65,
-    1
-   ],
-   "intend": [
-    217,
-    1,
-    218,
-    1
-   ],
-   "intensification": [
-    216,
     1
    ],
    "intensity": [
@@ -66490,11 +67970,7 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1,
     88,
-    9,
-    217,
-    1,
-    218,
-    1
+    9
    ],
    "intention": [
     53,
@@ -66649,7 +68125,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     187,
     1,
-    221,
+    216,
     1
    ],
    "interactional": [
@@ -66814,12 +68290,6 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1,
     216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    221,
     1
    ],
    "interfac": [
@@ -66864,8 +68334,6 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1,
     90,
-    1,
-    219,
     1
    ],
    "interfacial": [
@@ -66888,10 +68356,6 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     1,
     64,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "intermittent": [
@@ -66924,8 +68388,6 @@ globalThis.SUBTOPIC_CATALOG={
     52,
     1,
     95,
-    1,
-    219,
     1
    ],
    "interoperable": [
@@ -66976,8 +68438,6 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     56,
-    1,
-    219,
     1
    ],
    "into": [
@@ -67042,14 +68502,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    215,
-    1,
-    216,
-    1,
-    218,
-    3,
-    219,
     1
    ],
    "intra-cellular": [
@@ -67094,8 +68546,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     85,
-    1,
-    219,
     1
    ],
    "introduce": [
@@ -67128,10 +68578,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "intuition": [
     41,
-    1
-   ],
-   "intuitive": [
-    219,
     1
    ],
    "intuitively": [
@@ -67216,10 +68662,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1
    ],
-   "investment": [
-    218,
-    1
-   ],
    "invincible": [
     58,
     1,
@@ -67280,20 +68722,12 @@ globalThis.SUBTOPIC_CATALOG={
     10,
     2
    ],
-   "iot": [
-    219,
-    1
-   ],
    "ir": [
     37,
     1
    ],
    "ironically": [
     4,
-    1
-   ],
-   "isentropic": [
-    218,
     1
    ],
    "island": [
@@ -67340,16 +68774,10 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     90,
-    1,
-    218,
     1
    ],
    "item": [
     93,
-    1
-   ],
-   "iteration": [
-    219,
     1
    ],
    "its": [
@@ -67370,10 +68798,6 @@ globalThis.SUBTOPIC_CATALOG={
     20,
     1,
     61,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "itself": [
@@ -67624,8 +69048,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     93,
-    1,
-    217,
     1
    ],
    "keyword": [
@@ -67904,12 +69326,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     92,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "kokoska": [
@@ -67954,14 +69370,6 @@ globalThis.SUBTOPIC_CATALOG={
     177,
     1,
     178,
-    1,
-    215,
-    1,
-    216,
-    2
-   ],
-   "laboratoryscale": [
-    216,
     1
    ],
    "lack": [
@@ -67974,10 +69382,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     34,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "lambeth": [
@@ -68084,10 +69488,6 @@ globalThis.SUBTOPIC_CATALOG={
     0,
     1,
     92,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "latent": [
@@ -68188,10 +69588,6 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     2,
     87,
-    1,
-    215,
-    2,
-    218,
     1
    ],
    "leader": [
@@ -68211,16 +69607,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     173,
     1
-   ],
-   "leak": [
-    218,
-    2,
-    219,
-    1
-   ],
-   "leakage": [
-    218,
-    2
    ],
    "leap": [
     68,
@@ -68311,7 +69697,7 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     95,
     1,
-    221,
+    216,
     1
    ],
    "learning-bas": [
@@ -68332,8 +69718,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "least": [
     84,
-    1,
-    217,
     1
    ],
    "left": [
@@ -68342,14 +69726,10 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     94,
-    1,
-    215,
     1
    ],
    "legacy": [
     142,
-    1,
-    218,
     1
    ],
    "length": [
@@ -68374,8 +69754,6 @@ globalThis.SUBTOPIC_CATALOG={
     24,
     2,
     84,
-    1,
-    218,
     1
    ],
    "less-local": [
@@ -68440,14 +69818,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     6
    ],
-   "letter": [
-    217,
-    2,
-    218,
-    2,
-    219,
-    2
-   ],
    "levee": [
     7,
     1
@@ -68504,14 +69874,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     92,
-    3,
-    216,
-    4,
-    217,
-    3,
-    218,
-    1,
-    219,
     3
    ],
    "leverag": [
@@ -68528,10 +69890,6 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     88,
-    2,
-    218,
-    1,
-    219,
     2
    ],
    "leverage": [
@@ -68601,11 +69959,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    219,
-    5,
-    221,
+    216,
     1,
-    222,
+    217,
     1
    ],
    "lifecycle": [
@@ -68618,10 +69974,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1
-   ],
-   "lifespan": [
-    219,
     1
    ],
    "lifi": [
@@ -68804,15 +70156,7 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     88,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "limitation": [
     26,
@@ -68826,8 +70170,6 @@ globalThis.SUBTOPIC_CATALOG={
     25,
     1,
     49,
-    1,
-    215,
     1
    ],
    "linear": [
@@ -68880,13 +70222,7 @@ globalThis.SUBTOPIC_CATALOG={
     10,
     1,
     17,
-    2,
-    215,
     2
-   ],
-   "liquifi": [
-    219,
-    1
    ],
    "list": [
     34,
@@ -68899,7 +70235,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "lithium": [
-    222,
+    217,
     1
    ],
    "lithosphere": [
@@ -68926,8 +70262,6 @@ globalThis.SUBTOPIC_CATALOG={
     58,
     2,
     82,
-    1,
-    219,
     1
    ],
    "living-nonliv": [
@@ -68937,10 +70271,6 @@ globalThis.SUBTOPIC_CATALOG={
    "lloyd": [
     66,
     1
-   ],
-   "lng": [
-    219,
-    2
    ],
    "load": [
     7,
@@ -69014,11 +70344,7 @@ globalThis.SUBTOPIC_CATALOG={
     18,
     1,
     92,
-    3,
-    217,
-    1,
-    219,
-    1
+    3
    ],
    "locomotion": [
     6,
@@ -69152,23 +70478,11 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     83,
-    1,
-    216,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "losse": [
     48,
-    1,
-    218,
-    6
-   ],
-   "lost": [
-    215,
-    3
+    1
    ],
    "low": [
     15,
@@ -69196,16 +70510,10 @@ globalThis.SUBTOPIC_CATALOG={
     67,
     1,
     68,
-    2,
-    217,
-    1
+    2
    ],
    "low-bandwidth": [
     49,
-    1
-   ],
-   "low-cost": [
-    216,
     1
    ],
    "low-dimension": [
@@ -69239,22 +70547,12 @@ globalThis.SUBTOPIC_CATALOG={
    "low-temperature": [
     170,
     1,
-    220,
+    215,
     1
    ],
    "lower": [
     20,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     1
-   ],
-   "lower-cost": [
-    215,
-    2
    ],
    "lpd": [
     34,
@@ -69347,7 +70645,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     92,
     4,
-    221,
+    216,
     1
    ],
    "machine-bas": [
@@ -69501,11 +70799,7 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     94,
     1,
-    218,
-    2,
-    219,
-    2,
-    221,
+    216,
     2
    ],
    "major": [
@@ -69677,9 +70971,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     173,
     1,
-    219,
-    1,
-    220,
+    215,
     1
    ],
    "manager": [
@@ -69850,8 +71142,6 @@ globalThis.SUBTOPIC_CATALOG={
     162,
     1,
     168,
-    1,
-    217,
     1
    ],
    "manufacture": [
@@ -69936,14 +71226,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "market": [
     130,
-    1,
-    217,
-    2
+    1
    ],
    "marketable": [
-    216,
-    1,
-    220,
+    215,
     1
    ],
    "markovian": [
@@ -69974,11 +71260,7 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     86,
-    2,
-    216,
-    1,
-    217,
-    1
+    2
    ],
    "massive": [
     7,
@@ -70128,16 +71410,8 @@ globalThis.SUBTOPIC_CATALOG={
     184,
     1,
     215,
-    1,
-    216,
-    4,
-    217,
-    1,
-    218,
-    1,
-    220,
     2,
-    222,
+    217,
     2
    ],
    "materials-by-design": [
@@ -70284,31 +71558,11 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1,
     88,
-    1,
-    216,
-    2,
-    217,
-    1,
-    218,
     1
    ],
    "mature": [
     94,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
-   ],
-   "maturity": [
-    217,
-    1,
-    219,
-    3
+    1
    ],
    "mav": [
     49,
@@ -70318,8 +71572,6 @@ globalThis.SUBTOPIC_CATALOG={
     48,
     1,
     70,
-    1,
-    217,
     1
    ],
    "maximize": [
@@ -70331,9 +71583,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     91,
     1,
-    219,
-    1,
-    221,
+    216,
     1
    ],
    "maximum": [
@@ -70374,8 +71624,6 @@ globalThis.SUBTOPIC_CATALOG={
     47,
     1,
     83,
-    1,
-    217,
     1
    ],
    "meaningful": [
@@ -70394,8 +71642,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "measurable": [
     14,
-    1,
-    219,
     1
    ],
    "measure": [
@@ -70416,8 +71662,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     93,
-    1,
-    218,
     1
    ],
    "measurement": [
@@ -70434,8 +71678,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     2,
     88,
-    1,
-    219,
     1
    ],
    "mechanic": [
@@ -70522,8 +71764,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1,
     79,
-    1,
-    218,
     1
    ],
    "mechanism": [
@@ -70578,8 +71818,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    215,
     1
    ],
    "mechanistic": [
@@ -70650,10 +71888,6 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     2,
     19,
-    1,
-    216,
-    3,
-    217,
     1
    ],
    "memory": [
@@ -70782,10 +72016,6 @@ globalThis.SUBTOPIC_CATALOG={
     43,
     1
    ],
-   "methanol": [
-    215,
-    1
-   ],
    "method": [
     0,
     1,
@@ -70887,15 +72117,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     93,
     1,
+    215,
+    1,
     216,
-    2,
-    217,
-    1,
-    218,
-    1,
-    220,
-    1,
-    221,
     1
    ],
    "methodological": [
@@ -70948,9 +72172,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     5,
     94,
-    3,
-    216,
-    1
+    3
    ],
    "metric": [
     11,
@@ -70964,13 +72186,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     88,
-    2,
-    216,
-    3,
-    217,
-    1,
-    218,
-    3
+    2
    ],
    "metrological": [
     1,
@@ -71108,23 +72324,9 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1
    ],
-   "microwave": [
-    216,
-    1
-   ],
    "mid-range": [
     7,
     1
-   ],
-   "mid-size": [
-    219,
-    2
-   ],
-   "midstream": [
-    218,
-    1,
-    219,
-    3
    ],
    "might": [
     16,
@@ -71140,10 +72342,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "miguel.hinojosa4.civ": [
     55,
-    1
-   ],
-   "mile": [
-    219,
     1
    ],
    "milestone": [
@@ -71230,18 +72428,10 @@ globalThis.SUBTOPIC_CATALOG={
     77,
     1
    ],
-   "million": [
-    218,
-    5,
-    219,
-    3
-   ],
    "mimic": [
     8,
     1,
     66,
-    1,
-    219,
     1
    ],
    "mimick": [
@@ -71251,7 +72441,7 @@ globalThis.SUBTOPIC_CATALOG={
    "min": [
     16,
     1,
-    220,
+    215,
     1
    ],
    "mindfulness": [
@@ -71283,9 +72473,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     134,
     1,
-    220,
+    215,
     1,
-    222,
+    217,
     2
    ],
    "minima": [
@@ -71308,8 +72498,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "minimize": [
     15,
-    1,
-    219,
     1
    ],
    "minute": [
@@ -71448,10 +72636,6 @@ globalThis.SUBTOPIC_CATALOG={
     27,
     1,
     94,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "mitigation": [
@@ -71548,12 +72732,6 @@ globalThis.SUBTOPIC_CATALOG={
     142,
     1,
     216,
-    1,
-    218,
-    2,
-    219,
-    5,
-    221,
     4
    ],
    "ml-bas": [
@@ -71765,11 +72943,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     212,
     1,
-    219,
-    5,
-    221,
+    216,
     3,
-    222,
+    217,
     1
    ],
    "model-bas": [
@@ -72016,12 +73192,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "modular": [
     208,
-    1,
-    215,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "modularity": [
@@ -72092,8 +73262,6 @@ globalThis.SUBTOPIC_CATALOG={
     44,
     1,
     62,
-    1,
-    216,
     1
    ],
    "molecular-scale": [
@@ -72120,14 +73288,6 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     1
    ],
-   "monetary": [
-    215,
-    1
-   ],
-   "monetization": [
-    217,
-    1
-   ],
    "money": [
     85,
     1
@@ -72143,9 +73303,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     2,
-    219,
-    2,
-    220,
+    215,
     1
    ],
    "mono": [
@@ -72178,8 +73336,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     93,
-    1,
-    219,
     1
    ],
    "morphological": [
@@ -72266,8 +73422,6 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     85,
-    1,
-    218,
     1
    ],
    "movement": [
@@ -72323,10 +73477,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     4
-   ],
-   "multi-asset": [
-    219,
-    1
    ],
    "multi-axi": [
     36,
@@ -72390,8 +73540,6 @@ globalThis.SUBTOPIC_CATALOG={
     17,
     1,
     36,
-    1,
-    216,
     1
    ],
    "multi-functionality": [
@@ -72518,10 +73666,6 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     3
    ],
-   "multiphase": [
-    219,
-    1
-   ],
    "multiple": [
     0,
     2,
@@ -72558,8 +73702,6 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     2,
     82,
-    1,
-    217,
     1
    ],
    "multiscale": [
@@ -72608,8 +73750,6 @@ globalThis.SUBTOPIC_CATALOG={
     54,
     1,
     63,
-    1,
-    216,
     1
    ],
    "nano-particle": [
@@ -72674,10 +73814,6 @@ globalThis.SUBTOPIC_CATALOG={
     53,
     1,
     86,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "national": [
@@ -72720,17 +73856,7 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     1,
     68,
-    1,
-    215,
-    11,
-    216,
-    3,
-    217,
-    7,
-    218,
-    5,
-    219,
-    7
+    1
    ],
    "natural-built": [
     3,
@@ -72834,8 +73960,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "nearly": [
     58,
-    1,
-    218,
     1
    ],
    "necessarily": [
@@ -72874,12 +73998,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     91,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "necessitate": [
@@ -72976,12 +74094,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "negative": [
     25,
-    1
-   ],
-   "negotiation": [
-    217,
-    1,
-    218,
     1
    ],
    "neither": [
@@ -73117,9 +74229,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     175,
     1,
-    219,
-    1,
-    222,
+    217,
     1
    ],
    "network-bas": [
@@ -73346,8 +74456,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "next-gen": [
     53,
-    1,
-    218,
     1
    ],
    "next-generation": [
@@ -73357,32 +74465,12 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    222,
+    217,
     1
    ],
    "nfv": [
     34,
     2
-   ],
-   "ngl": [
-    215,
-    1,
-    216,
-    6,
-    217,
-    5,
-    219,
-    2
-   ],
-   "ngls": [
-    215,
-    3,
-    216,
-    4,
-    217,
-    2,
-    218,
-    1
    ],
    "night": [
     11,
@@ -73447,12 +74535,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     80,
     1
-   ],
-   "nofo": [
-    217,
-    1,
-    219,
-    2
    ],
    "noise": [
     0,
@@ -73829,15 +74911,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
-    2,
-    218,
+    215,
     1,
-    219,
-    1,
-    220,
-    1,
-    222,
+    217,
     1
    ],
    "novelty": [
@@ -74020,15 +75096,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    2,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    1
+    2
    ],
    "objectively": [
     83,
@@ -74132,10 +75200,6 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1
    ],
-   "off-grid": [
-    217,
-    1
-   ],
    "off-platform": [
     92,
     1
@@ -74150,8 +75214,6 @@ globalThis.SUBTOPIC_CATALOG={
     26,
     1,
     85,
-    1,
-    217,
     1
    ],
    "office": [
@@ -74362,26 +75424,14 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     82,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "oil": [
-    215,
-    2,
-    217,
-    3,
-    218,
-    2,
-    219,
-    7,
-    221,
+    216,
     4
    ],
    "oilfield": [
-    221,
+    216,
     1
    ],
    "oleophobicity": [
@@ -74407,10 +75457,6 @@ globalThis.SUBTOPIC_CATALOG={
    "on-premise": [
     92,
     1
-   ],
-   "on-site": [
-    217,
-    2
    ],
    "onadvanc": [
     33,
@@ -74484,10 +75530,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2
    ],
-   "onsite": [
-    217,
-    1
-   ],
    "open": [
     0,
     5,
@@ -74544,13 +75586,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    2,
-    217,
-    2,
-    218,
-    2,
-    219,
-    10
+    2
    ],
    "operate": [
     0,
@@ -74648,18 +75684,8 @@ globalThis.SUBTOPIC_CATALOG={
     194,
     1,
     215,
-    2,
+    1,
     216,
-    4,
-    217,
-    1,
-    218,
-    1,
-    219,
-    6,
-    220,
-    1,
-    221,
     1
    ],
    "operational": [
@@ -74702,14 +75728,6 @@ globalThis.SUBTOPIC_CATALOG={
     215,
     1,
     217,
-    2,
-    218,
-    3,
-    219,
-    5,
-    220,
-    1,
-    222,
     1
    ],
    "operationally": [
@@ -74722,19 +75740,7 @@ globalThis.SUBTOPIC_CATALOG={
     12,
     1,
     88,
-    6,
-    215,
-    1,
-    217,
-    2,
-    218,
-    1,
-    219,
-    5
-   ],
-   "opex": [
-    219,
-    4
+    6
    ],
    "opinion": [
     29,
@@ -74811,9 +75817,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    217,
-    1,
-    221,
+    216,
     1
    ],
    "optimality": [
@@ -74838,12 +75842,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     216,
-    1,
-    217,
-    1,
-    219,
-    1,
-    221,
     2
    ],
    "optimization": [
@@ -74869,9 +75867,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     199,
     1,
-    219,
-    6,
-    221,
+    216,
     1
    ],
    "optimize": [
@@ -74887,13 +75883,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     91,
     1,
-    216,
-    1,
-    218,
-    1,
-    219,
-    1,
-    222,
+    217,
     1
    ],
    "optimum": [
@@ -74904,8 +75894,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     93,
-    1,
-    217,
     1
    ],
    "opto-genetic": [
@@ -75020,8 +76008,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     89,
-    1,
-    215,
     1
    ],
    "our": [
@@ -75082,8 +76068,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "outpace": [
     74,
-    1,
-    215,
     1
    ],
    "output": [
@@ -75102,8 +76086,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     81,
-    1,
-    217,
     1
    ],
    "outside": [
@@ -75154,11 +76136,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     92,
-    1,
-    215,
-    3,
-    219,
-    2
+    1
    ],
    "overall": [
     4,
@@ -75176,13 +76154,7 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     4,
     93,
-    1,
-    216,
-    1,
-    217,
-    3,
-    218,
-    2
+    1
    ],
    "overarch": [
     2,
@@ -75216,8 +76188,6 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     85,
-    1,
-    215,
     1
    ],
    "overfit": [
@@ -75228,10 +76198,6 @@ globalThis.SUBTOPIC_CATALOG={
     5,
     1,
     15,
-    1
-   ],
-   "overload": [
-    219,
     1
    ],
    "overlook": [
@@ -75306,14 +76272,6 @@ globalThis.SUBTOPIC_CATALOG={
     72,
     1,
     84,
-    2
-   ],
-   "pad": [
-    215,
-    1
-   ],
-   "pads": [
-    219,
     2
    ],
    "page": [
@@ -75492,8 +76450,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     61,
-    1,
-    219,
     1
    ],
    "partition": [
@@ -75508,10 +76464,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     2,
     95,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "partnership": [
@@ -75579,11 +76531,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     134,
     1,
-    216,
-    2,
-    217,
-    1,
-    220,
+    215,
     1
    ],
    "pattern": [
@@ -75610,8 +76558,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "pav": [
     11,
-    1,
-    218,
     1
    ],
    "pave": [
@@ -75626,10 +76572,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "payoff": [
     87,
-    1
-   ],
-   "peak": [
-    218,
     1
    ],
    "penalty": [
@@ -75660,11 +76602,7 @@ globalThis.SUBTOPIC_CATALOG={
     24,
     1,
     28,
-    3,
-    218,
-    1,
-    219,
-    2
+    3
    ],
    "perceiv": [
     14,
@@ -75676,8 +76614,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "percentage": [
     85,
-    1,
-    216,
     1
    ],
    "perception": [
@@ -75855,17 +76791,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     213,
     1,
-    215,
-    1,
-    216,
-    1,
     217,
-    1,
-    218,
-    6,
-    219,
-    2,
-    222,
     1
    ],
    "performance-driven": [
@@ -75882,8 +76808,6 @@ globalThis.SUBTOPIC_CATALOG={
     0,
     1,
     85,
-    1,
-    218,
     1
    ],
    "permafrost": [
@@ -75891,11 +76815,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "permeability": [
-    222,
-    1
-   ],
-   "permian": [
-    215,
+    217,
     1
    ],
    "permit": [
@@ -75904,14 +76824,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     82,
-    1
-   ],
-   "permit-intensive": [
-    215,
-    1
-   ],
-   "permitt": [
-    217,
     1
    ],
    "permutation": [
@@ -75970,10 +76882,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "perturbation": [
     20,
-    1
-   ],
-   "pervasive": [
-    218,
     1
    ],
    "petabyte-scale": [
@@ -76335,7 +77243,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     189,
     1,
-    221,
+    216,
     1
    ],
    "physical": [
@@ -76392,9 +77300,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     4,
     178,
-    1,
-    219,
-    4
+    1
    ],
    "physically": [
     0,
@@ -76412,9 +77318,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "physics-inform": [
     212,
-    1,
-    219,
-    2
+    1
    ],
    "physiological": [
     23,
@@ -76450,18 +77354,6 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1
    ],
-   "pip": [
-    218,
-    2
-   ],
-   "pipeline": [
-    217,
-    2,
-    218,
-    3,
-    219,
-    5
-   ],
    "pl": [
     92,
     3
@@ -76488,12 +77380,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "planar": [
@@ -76524,8 +77410,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     94,
-    1,
-    219,
     1
    ],
    "plant": [
@@ -76537,9 +77421,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     148,
     1,
-    218,
-    1,
-    220,
+    215,
     2
    ],
    "plasma": [
@@ -76552,8 +77434,6 @@ globalThis.SUBTOPIC_CATALOG={
     149,
     1,
     156,
-    1,
-    216,
     1
    ],
    "plasma-enabl": [
@@ -76632,8 +77512,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     93,
-    3,
-    219,
     3
    ],
    "platoon": [
@@ -76894,14 +77772,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1
    ],
-   "post-project": [
-    216,
-    1,
-    217,
-    1,
-    218,
-    1
-   ],
    "post-traumatic": [
     4,
     1
@@ -76958,10 +77828,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     95,
-    1,
-    216,
-    4,
-    217,
     1
    ],
    "potentially": [
@@ -77047,20 +77913,12 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     195,
     1,
-    217,
-    2,
-    218,
-    1,
-    220,
+    215,
     2
    ],
    "powertrain": [
     45,
     1
-   ],
-   "ppm": [
-    215,
-    2
    ],
    "practical": [
     6,
@@ -77074,12 +77932,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     4,
     90,
-    1
-   ],
-   "practicality": [
-    217,
-    1,
-    218,
     1
    ],
    "practically": [
@@ -77132,12 +77984,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1,
     94,
-    1
-   ],
-   "precommercial": [
-    217,
-    2,
-    219,
     1
    ],
    "precondition": [
@@ -77193,7 +78039,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     192,
     1,
-    221,
+    216,
     1
    ],
    "predictable": [
@@ -77254,9 +78100,7 @@ globalThis.SUBTOPIC_CATALOG={
     192,
     1,
     202,
-    1,
-    219,
-    2
+    1
    ],
    "predictive": [
     6,
@@ -77277,9 +78121,7 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     125,
     1,
-    219,
-    4,
-    221,
+    216,
     4
    ],
    "predominately": [
@@ -77366,22 +78208,10 @@ globalThis.SUBTOPIC_CATALOG={
     33,
     1,
     95,
-    1,
-    218,
-    1,
-    219,
-    3
+    1
    ],
    "presumably": [
     84,
-    1
-   ],
-   "pretreat": [
-    215,
-    1
-   ],
-   "pretreatment": [
-    216,
     1
    ],
    "prevalent": [
@@ -77396,8 +78226,6 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     47,
-    1,
-    219,
     1
    ],
    "previou": [
@@ -77414,14 +78242,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     58,
-    1
-   ],
-   "price": [
-    215,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "primarily": [
@@ -77506,10 +78326,6 @@ globalThis.SUBTOPIC_CATALOG={
     33,
     1,
     94,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "prioritization": [
@@ -77778,8 +78594,6 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     1,
     85,
-    1,
-    218,
     1
    ],
    "problem-to-code": [
@@ -77908,18 +78722,8 @@ globalThis.SUBTOPIC_CATALOG={
     152,
     1,
     215,
-    2,
-    216,
-    5,
-    217,
-    3,
-    218,
-    2,
-    219,
-    7,
-    220,
     1,
-    221,
+    216,
     1
    ],
    "process-property": [
@@ -77972,8 +78776,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     120,
-    1,
-    216,
     1
    ],
    "processing-microstructure-property": [
@@ -77995,19 +78797,13 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     41,
     1,
-    217,
-    1,
-    219,
-    1,
-    221,
+    216,
     1
    ],
    "produce": [
     5,
     3,
     61,
-    1,
-    215,
     1
    ],
    "product": [
@@ -78021,15 +78817,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     1,
-    216,
-    3,
-    217,
-    4,
-    218,
-    4,
-    219,
-    2,
-    220,
+    215,
     2
    ],
    "production": [
@@ -78037,19 +78825,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     61,
     1,
-    215,
-    4,
     216,
-    2,
-    217,
-    3,
-    218,
-    2,
-    219,
-    13,
-    221,
     1,
-    222,
+    217,
     1
    ],
    "productivity": [
@@ -78072,22 +78850,6 @@ globalThis.SUBTOPIC_CATALOG={
     67,
     1,
     69,
-    1
-   ],
-   "profit": [
-    216,
-    1
-   ],
-   "profitability": [
-    217,
-    1
-   ],
-   "profitable": [
-    217,
-    1
-   ],
-   "profitably": [
-    217,
     1
    ],
    "prognostic": [
@@ -78156,8 +78918,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "proof-of-concept": [
     27,
-    1,
-    219,
     1
    ],
    "propagation": [
@@ -78178,10 +78938,6 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     1
    ],
-   "propane": [
-    215,
-    2
-   ],
    "propellant": [
     48,
     1
@@ -78194,8 +78950,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1,
     22,
-    1,
-    218,
     1
    ],
    "property": [
@@ -78262,17 +79016,7 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     82,
-    1,
-    215,
-    1,
-    216,
-    5,
-    217,
-    7,
-    218,
-    7,
-    219,
-    3
+    1
    ],
    "propulsion": [
     37,
@@ -78366,18 +79110,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     2,
     93,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    2,
-    218,
-    1
-   ],
-   "prototype-scale": [
-    216,
     1
    ],
    "protrusion": [
@@ -78390,8 +79122,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "prove": [
     88,
-    1,
-    219,
     1
    ],
    "proven": [
@@ -78430,13 +79160,7 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1,
     94,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "provide": [
     0,
@@ -78528,8 +79252,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     95,
-    1,
-    215,
     1
    ],
    "prudent": [
@@ -78584,8 +79306,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "pump": [
     81,
-    2,
-    219,
     2
    ],
    "pump-coupl": [
@@ -78598,8 +79318,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "purity": [
     1,
-    1,
-    216,
     1
    ],
    "purpose": [
@@ -78640,11 +79358,7 @@ globalThis.SUBTOPIC_CATALOG={
     11,
     1,
     47,
-    3,
-    217,
-    1,
-    218,
-    1
+    3
    ],
    "push": [
     6,
@@ -78720,13 +79434,7 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     94,
-    1,
-    217,
     1
-   ],
-   "quantifi": [
-    219,
-    2
    ],
    "quantification": [
     16,
@@ -78760,9 +79468,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     94,
-    2,
-    219,
-    3
+    2
    ],
    "quantitative": [
     4,
@@ -78788,8 +79494,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     1,
     20,
-    1,
-    215,
     1
    ],
    "quantum": [
@@ -78870,10 +79574,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "quantum-classical": [
     155,
-    1
-   ],
-   "quantum-scale": [
-    216,
     1
    ],
    "quantum-to-classical": [
@@ -79148,8 +79848,6 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     82,
-    1,
-    219,
     1
    ],
    "rapidly": [
@@ -79168,9 +79866,7 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     66,
-    3,
-    216,
-    1
+    3
    ],
    "rapidly-chang": [
     7,
@@ -79181,7 +79877,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rare": [
-    220,
+    215,
     1
    ],
    "rare-earth": [
@@ -79208,11 +79904,7 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     2,
     86,
-    1,
-    216,
-    3,
-    218,
-    3
+    1
    ],
    "rather": [
     6,
@@ -79248,18 +79940,10 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "raw": [
     15,
-    1,
-    217,
     1
    ],
    "rays": [
     49,
-    1
-   ],
-   "rdd": [
-    217,
-    1,
-    219,
     1
    ],
    "rdt": [
@@ -79274,10 +79958,6 @@ globalThis.SUBTOPIC_CATALOG={
     29,
     1,
     66,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "react": [
@@ -79300,9 +79980,7 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     4,
     127,
-    1,
-    216,
-    4
+    1
    ],
    "reaction-diffusion": [
     6,
@@ -79326,12 +80004,6 @@ globalThis.SUBTOPIC_CATALOG={
     28,
     4
    ],
-   "reactor": [
-    216,
-    2,
-    217,
-    1
-   ],
    "readily": [
     31,
     1,
@@ -79348,15 +80020,7 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     92,
-    1,
-    216,
-    3,
-    217,
-    3,
-    218,
-    1,
-    219,
-    5
+    1
    ],
    "reading": [
     37,
@@ -79405,13 +80069,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     211,
     1,
-    218,
+    215,
     1,
-    219,
-    5,
-    220,
-    1,
-    221,
+    216,
     2
    ],
    "real-world": [
@@ -79430,16 +80090,12 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     64,
-    2,
-    219,
     2
    ],
    "realistic": [
     60,
     1,
     64,
-    1,
-    219,
     1
    ],
    "realiz": [
@@ -79648,12 +80304,6 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     1,
     65,
-    1,
-    215,
-    1,
-    216,
-    4,
-    217,
     1
    ],
    "recurrence": [
@@ -79692,13 +80342,7 @@ globalThis.SUBTOPIC_CATALOG={
     71,
     2,
     83,
-    1,
-    216,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "reduce": [
     22,
@@ -79720,11 +80364,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     95,
-    1,
-    218,
-    2,
-    219,
-    5
+    1
    ],
    "reduced-order": [
     38,
@@ -79748,12 +80388,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     217,
-    1,
-    218,
-    1,
-    219,
-    5,
-    222,
     1
    ],
    "reduction-oxidation": [
@@ -79765,9 +80399,9 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "ree": [
-    220,
+    215,
     1,
-    221,
+    216,
     1
    ],
    "reenvision": [
@@ -79798,8 +80432,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "refin": [
     90,
-    1,
-    217,
     1
    ],
    "refine": [
@@ -79813,7 +80445,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "refinery": [
-    221,
+    216,
     2
    ],
    "reflect": [
@@ -79832,10 +80464,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "refractory": [
     78,
-    1
-   ],
-   "refrigeration": [
-    217,
     1
    ],
    "regard": [
@@ -79902,10 +80530,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1
    ],
-   "reject": [
-    215,
-    1
-   ],
    "relat": [
     6,
     1,
@@ -79938,11 +80562,7 @@ globalThis.SUBTOPIC_CATALOG={
     77,
     1,
     93,
-    1,
-    217,
-    1,
-    218,
-    2
+    1
    ],
    "relate": [
     0,
@@ -79950,12 +80570,6 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     1,
     62,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "relation": [
@@ -80006,9 +80620,7 @@ globalThis.SUBTOPIC_CATALOG={
     37,
     1,
     46,
-    1,
-    218,
-    2
+    1
    ],
    "relatively": [
     0,
@@ -80084,13 +80696,7 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     2,
     90,
-    1,
-    216,
-    3,
-    217,
-    3,
-    218,
-    4
+    1
    ],
    "reli": [
     20,
@@ -80108,11 +80714,7 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     2,
     91,
-    2,
-    218,
-    1,
-    219,
-    1
+    2
    ],
    "reliable": [
     7,
@@ -80154,9 +80756,7 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1,
     85,
-    1,
-    219,
-    2
+    1
    ],
    "remarkable": [
     31,
@@ -80175,13 +80775,9 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     177,
     1,
-    217,
+    215,
     1,
-    219,
-    1,
-    220,
-    1,
-    221,
+    216,
     1
    ],
    "remotely": [
@@ -80194,10 +80790,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "removal": [
     80,
-    1,
-    215,
-    1,
-    216,
     1
    ],
    "render": [
@@ -80216,9 +80808,7 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     1,
     92,
-    1,
-    219,
-    2
+    1
    ],
    "repeat": [
     93,
@@ -80243,10 +80833,6 @@ globalThis.SUBTOPIC_CATALOG={
    "replicat": [
     22,
     1
-   ],
-   "replicate": [
-    219,
-    4
    ],
    "report": [
     16,
@@ -80302,10 +80888,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "representative": [
     85,
-    2,
-    216,
-    1,
-    219,
     2
    ],
    "reproduce": [
@@ -80360,17 +80942,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     3,
     92,
-    1,
-    215,
-    2,
-    216,
-    3,
-    217,
-    4,
-    218,
-    4,
-    219,
-    3
+    1
    ],
    "require": [
     0,
@@ -80416,8 +80988,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     4,
     88,
-    1,
-    215,
     1
    ],
    "requirement": [
@@ -80446,9 +81016,7 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     90,
-    4,
-    217,
-    1
+    4
    ],
    "researcher": [
     86,
@@ -80457,13 +81025,13 @@ globalThis.SUBTOPIC_CATALOG={
    "reservoir": [
     3,
     2,
-    221,
+    216,
     2,
-    222,
+    217,
     2
    ],
    "residual": [
-    220,
+    215,
     1
    ],
    "resilience": [
@@ -80506,18 +81074,10 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     65,
-    1,
-    218,
-    2,
-    219,
     1
    ],
    "resistant": [
     78,
-    1,
-    216,
-    1,
-    218,
     1
    ],
    "resolution": [
@@ -80567,13 +81127,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     128,
     1,
-    215,
-    2,
-    217,
-    1,
-    219,
-    1,
-    221,
+    216,
     3
    ],
    "resource-efficient": [
@@ -80690,13 +81244,7 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1,
     93,
-    2,
-    215,
-    1,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "resultant": [
     90,
@@ -80714,14 +81262,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "retrieve": [
     4,
-    1
-   ],
-   "retrofit": [
-    218,
-    2
-   ],
-   "retrofitt": [
-    219,
     1
    ],
    "reversible": [
@@ -80837,7 +81377,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "rheology": [
-    221,
+    216,
     1
    ],
    "rich": [
@@ -80866,8 +81406,6 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     1,
     29,
-    1,
-    219,
     1
    ],
    "rigorously": [
@@ -80900,15 +81438,7 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     94,
-    2,
-    216,
-    1,
-    217,
-    2,
-    218,
-    2,
-    219,
-    3
+    2
    ],
    "risk-aware": [
     0,
@@ -81016,9 +81546,7 @@ globalThis.SUBTOPIC_CATALOG={
     174,
     1,
     178,
-    1,
-    219,
-    2
+    1
    ],
    "robust": [
     0,
@@ -81046,8 +81574,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     87,
-    1,
-    219,
     1
    ],
    "robustly": [
@@ -81073,7 +81599,7 @@ globalThis.SUBTOPIC_CATALOG={
    "rock": [
     9,
     1,
-    221,
+    216,
     1
    ],
    "role": [
@@ -81112,8 +81638,6 @@ globalThis.SUBTOPIC_CATALOG={
     21,
     1,
     75,
-    1,
-    217,
     1
    ],
    "route": [
@@ -81138,10 +81662,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1
    ],
-   "ruggediz": [
-    219,
-    1
-   ],
    "rule": [
     2,
     1,
@@ -81156,10 +81676,6 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     92,
-    1
-   ],
-   "run-life": [
-    219,
     1
    ],
    "run-time": [
@@ -81196,12 +81712,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1
    ],
-   "safe": [
-    217,
-    1,
-    219,
-    1
-   ],
    "safely": [
     0,
     1
@@ -81232,19 +81742,7 @@ globalThis.SUBTOPIC_CATALOG={
     16,
     1,
     48,
-    1,
-    219,
     1
-   ],
-   "sale": [
-    215,
-    1,
-    217,
-    1
-   ],
-   "saleable": [
-    219,
-    2
    ],
    "salinity": [
     19,
@@ -81346,18 +81844,12 @@ globalThis.SUBTOPIC_CATALOG={
     194,
     1,
     195,
-    1,
-    217,
     1
    ],
    "scalability": [
     22,
     1,
     39,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "scalable": [
@@ -81382,8 +81874,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     215,
-    1,
-    220,
     1
    ],
    "scale": [
@@ -81428,11 +81918,7 @@ globalThis.SUBTOPIC_CATALOG={
     162,
     1,
     184,
-    1,
-    217,
-    2,
-    219,
-    4
+    1
    ],
    "scale-bridg": [
     46,
@@ -81476,8 +81962,6 @@ globalThis.SUBTOPIC_CATALOG={
     88,
     1,
     89,
-    1,
-    219,
     1
    ],
    "scene": [
@@ -81500,8 +81984,6 @@ globalThis.SUBTOPIC_CATALOG={
     15,
     1,
     67,
-    1,
-    217,
     1
    ],
    "schofield": [
@@ -81829,7 +82311,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "seal": [
-    222,
+    217,
     1
    ],
    "seamless": [
@@ -81865,18 +82347,6 @@ globalThis.SUBTOPIC_CATALOG={
    "secrest": [
     68,
     1
-   ],
-   "section": [
-    217,
-    1,
-    219,
-    2
-   ],
-   "sector": [
-    218,
-    1,
-    219,
-    2
    ],
    "secur": [
     98,
@@ -81914,8 +82384,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     139,
-    1,
-    219,
     1
    ],
    "security": [
@@ -81942,8 +82410,6 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     2,
     87,
-    1,
-    219,
     1
    ],
    "sediment": [
@@ -82046,9 +82512,7 @@ globalThis.SUBTOPIC_CATALOG={
     76,
     1,
     88,
-    1,
-    219,
-    2
+    1
    ],
    "seismic": [
     9,
@@ -82068,14 +82532,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     216,
-    3,
-    217,
-    4,
-    218,
-    4,
-    219,
-    3,
-    221,
     1
    ],
    "selection": [
@@ -82093,7 +82549,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     28,
     1,
-    222,
+    217,
     1
    ],
    "selectively": [
@@ -82106,8 +82562,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "selectivity": [
     26,
-    1,
-    216,
     1
    ],
    "self": [
@@ -82156,10 +82610,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1
    ],
-   "self-optimiz": [
-    219,
-    1
-   ],
    "self-organiz": [
     22,
     1,
@@ -82170,10 +82620,6 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     1,
     65,
-    1
-   ],
-   "sellback": [
-    217,
     1
    ],
    "semantic": [
@@ -82270,8 +82716,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     160,
-    1,
-    219,
     1
    ],
    "sense": [
@@ -82304,9 +82748,7 @@ globalThis.SUBTOPIC_CATALOG={
     21,
     1,
     49,
-    4,
-    217,
-    1
+    4
    ],
    "sensor": [
     1,
@@ -82359,9 +82801,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     170,
     1,
-    219,
-    3,
-    220,
+    215,
     1
    ],
    "sensor-selection": [
@@ -82376,9 +82816,7 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "separat": [
     12,
-    2,
-    216,
-    1
+    2
    ],
    "separate": [
     0,
@@ -82390,12 +82828,6 @@ globalThis.SUBTOPIC_CATALOG={
     12,
     2,
     26,
-    1,
-    215,
-    2,
-    216,
-    4,
-    219,
     1
    ],
    "sequenc": [
@@ -82428,12 +82860,6 @@ globalThis.SUBTOPIC_CATALOG={
     65,
     1
    ],
-   "service": [
-    217,
-    1,
-    218,
-    1
-   ],
    "set": [
     4,
     1,
@@ -82448,10 +82874,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     93,
-    1
-   ],
-   "setpoint": [
-    219,
     1
    ],
    "sets": [
@@ -82505,7 +82927,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "shale": [
-    221,
+    216,
     1
    ],
    "shap": [
@@ -82650,8 +83072,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "side": [
     85,
-    1,
-    217,
     1
    ],
    "signal": [
@@ -82728,12 +83148,6 @@ globalThis.SUBTOPIC_CATALOG={
     68,
     1,
     82,
-    1,
-    215,
-    2,
-    218,
-    1,
-    219,
     1
    ],
    "significantly": [
@@ -82858,8 +83272,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     2,
     166,
-    1,
-    216,
     1
    ],
    "simulator": [
@@ -82878,9 +83290,7 @@ globalThis.SUBTOPIC_CATALOG={
     27,
     1,
     83,
-    2,
-    215,
-    1
+    2
    ],
    "since": [
     92,
@@ -82904,8 +83314,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     86,
-    1,
-    219,
     1
    ],
    "singular": [
@@ -82920,13 +83328,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     140,
-    1,
-    217,
-    5,
-    218,
-    1,
-    219,
-    13
+    1
    ],
    "situation": [
     0,
@@ -83022,10 +83424,6 @@ globalThis.SUBTOPIC_CATALOG={
     23,
     1
    ],
-   "slip": [
-    216,
-    1
-   ],
    "slow": [
     16,
     1,
@@ -83058,9 +83456,7 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1,
     89,
-    1,
-    219,
-    2
+    1
    ],
    "small-scale": [
     36,
@@ -83070,8 +83466,6 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     1,
     24,
-    1,
-    219,
     1
    ],
    "smart": [
@@ -83079,9 +83473,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     121,
     1,
-    219,
-    1,
-    222,
+    217,
     1
    ],
    "smoothness": [
@@ -83198,8 +83590,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     203,
-    1,
-    219,
     1
    ],
    "soil": [
@@ -83340,17 +83730,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     92,
-    3,
-    215,
-    4,
-    216,
-    2,
-    217,
-    2,
-    218,
-    2,
-    219,
-    2
+    3
    ],
    "solv": [
     0,
@@ -83414,9 +83794,7 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     84,
-    2,
-    218,
-    1
+    2
    ],
    "sometime": [
     82,
@@ -83430,10 +83808,6 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     2,
     47,
-    1
-   ],
-   "sorbent": [
-    216,
     1
    ],
    "sos": [
@@ -83473,14 +83847,6 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     83,
     1
-   ],
-   "sour": [
-    215,
-    4,
-    216,
-    2,
-    217,
-    6
    ],
    "source": [
     0,
@@ -83522,9 +83888,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     3,
     93,
-    2,
-    217,
-    3
+    2
    ],
    "space": [
     0,
@@ -83588,8 +83952,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     68,
-    1,
-    219,
     1
    ],
    "sparse": [
@@ -83682,10 +84044,6 @@ globalThis.SUBTOPIC_CATALOG={
     79,
     1,
     95,
-    1,
-    215,
-    1,
-    218,
     1
    ],
    "specialization": [
@@ -83762,13 +84120,7 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     93,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "specifically": [
     4,
@@ -83782,12 +84134,6 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1,
     93,
-    1,
-    215,
-    1,
-    218,
-    1,
-    219,
     1
    ],
    "specification": [
@@ -83886,10 +84232,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     2
    ],
-   "spend": [
-    219,
-    1
-   ],
    "spent": [
     85,
     1
@@ -83924,10 +84266,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1
    ],
-   "squander": [
-    218,
-    1
-   ],
    "ssa": [
     76,
     1
@@ -83960,10 +84298,6 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     1
    ],
-   "stabilization": [
-    219,
-    2
-   ],
    "stable": [
     26,
     1,
@@ -83972,8 +84306,6 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     1,
     69,
-    1,
-    217,
     1
    ],
    "stack": [
@@ -84007,12 +84339,6 @@ globalThis.SUBTOPIC_CATALOG={
     3,
     91,
     1
-   ],
-   "standardiz": [
-    217,
-    1,
-    219,
-    2
    ],
    "standoff": [
     76,
@@ -84102,10 +84428,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "static": [
     5,
-    1
-   ],
-   "station": [
-    219,
     1
    ],
    "stationarity": [
@@ -84237,9 +84559,9 @@ globalThis.SUBTOPIC_CATALOG={
    "stimulation": [
     5,
     1,
-    221,
+    216,
     1,
-    222,
+    217,
     1
    ],
    "stimuli": [
@@ -84300,11 +84622,7 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1,
     54,
-    1,
-    216,
-    1,
-    218,
-    2
+    1
    ],
    "store": [
     0,
@@ -84334,10 +84652,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "strand": [
     13,
-    1,
-    215,
-    2,
-    217,
     1
    ],
    "strategic": [
@@ -84399,21 +84713,15 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     88,
     1,
-    221,
+    216,
     1,
-    222,
+    217,
     1
    ],
    "stream": [
     58,
     1,
-    215,
-    1,
     216,
-    3,
-    217,
-    6,
-    221,
     1
    ],
    "strength": [
@@ -84636,8 +84944,6 @@ globalThis.SUBTOPIC_CATALOG={
     91,
     1,
     93,
-    1,
-    216,
     1
    ],
    "structure-function": [
@@ -84734,10 +85040,6 @@ globalThis.SUBTOPIC_CATALOG={
     6,
     1
    ],
-   "sub-topic": [
-    215,
-    1
-   ],
    "subarea": [
     24,
     1
@@ -84760,18 +85062,10 @@ globalThis.SUBTOPIC_CATALOG={
     62,
     1,
     94,
-    1,
-    218,
     1
    ],
    "submission": [
     39,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "submitt": [
@@ -84829,20 +85123,14 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     198,
     2,
-    219,
-    1,
-    222,
+    217,
     1
    ],
    "subsystem": [
     7,
     1,
     77,
-    2,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "subterranean": [
     3,
@@ -84880,15 +85168,7 @@ globalThis.SUBTOPIC_CATALOG={
     66,
     1,
     92,
-    1,
-    216,
-    1,
-    217,
-    2,
-    218,
-    1,
-    219,
-    3
+    1
    ],
    "successfully": [
     8,
@@ -85010,15 +85290,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     94,
-    1,
-    216,
-    2,
-    217,
-    3,
-    218,
-    4,
-    219,
-    4
+    1
    ],
    "suffer": [
     4,
@@ -85050,8 +85322,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     1,
     83,
-    1,
-    215,
     1
    ],
    "suggest": [
@@ -85076,8 +85346,6 @@ globalThis.SUBTOPIC_CATALOG={
     69,
     1,
     82,
-    1,
-    216,
     1
    ],
    "suite": [
@@ -85088,18 +85356,6 @@ globalThis.SUBTOPIC_CATALOG={
     74,
     1,
     85,
-    1,
-    219,
-    1
-   ],
-   "sulfide": [
-    215,
-    1,
-    216,
-    1
-   ],
-   "sulfur": [
-    216,
     1
    ],
    "summary": [
@@ -85194,12 +85450,6 @@ globalThis.SUBTOPIC_CATALOG={
     134,
     1,
     139,
-    1,
-    215,
-    1,
-    218,
-    2,
-    219,
     1
    ],
    "supportive": [
@@ -85240,11 +85490,7 @@ globalThis.SUBTOPIC_CATALOG={
     80,
     1,
     81,
-    1,
-    218,
-    1,
-    219,
-    4
+    1
    ],
    "surge": [
     7,
@@ -85274,8 +85520,6 @@ globalThis.SUBTOPIC_CATALOG={
     9,
     1,
     94,
-    1,
-    217,
     1
    ],
    "surrounding": [
@@ -85333,7 +85577,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     89,
     1,
-    222,
+    217,
     1
    ],
    "sustainability": [
@@ -85426,10 +85670,6 @@ globalThis.SUBTOPIC_CATALOG={
     22,
     2,
     74,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "synergistic": [
@@ -85472,8 +85712,6 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     2,
     78,
-    1,
-    216,
     1
    ],
    "synthesiz": [
@@ -85689,19 +85927,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     214,
     1,
-    215,
-    2,
     216,
-    1,
+    2,
     217,
-    9,
-    218,
-    2,
-    219,
-    13,
-    221,
-    2,
-    222,
     1
    ],
    "system-level": [
@@ -85726,8 +85954,6 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     1,
     94,
-    1,
-    219,
     1
    ],
    "systemic": [
@@ -85818,8 +86044,6 @@ globalThis.SUBTOPIC_CATALOG={
     74,
     1,
     88,
-    1,
-    219,
     1
    ],
    "tailorable": [
@@ -85854,14 +86078,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1
    ],
-   "take-off": [
-    217,
-    1
-   ],
-   "takeaway": [
-    217,
-    1
-   ],
    "taken": [
     94,
     1
@@ -85884,12 +86100,6 @@ globalThis.SUBTOPIC_CATALOG={
     49,
     1,
     86,
-    1,
-    218,
-    2
-   ],
-   "tank-level": [
-    219,
     1
    ],
    "tap": [
@@ -85930,15 +86140,7 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     4,
     94,
-    1,
-    215,
-    1,
-    217,
-    2,
-    218,
-    5,
-    219,
-    3
+    1
    ],
    "task": [
     0,
@@ -86044,14 +86246,6 @@ globalThis.SUBTOPIC_CATALOG={
     95,
     1
    ],
-   "tea": [
-    216,
-    2,
-    217,
-    2,
-    218,
-    2
-   ],
    "team": [
     0,
     6,
@@ -86082,11 +86276,7 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     11,
     90,
-    2,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "team-level": [
     57,
@@ -86130,8 +86320,6 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     90,
-    1,
-    215,
     1
    ],
    "technically": [
@@ -86239,15 +86427,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     94,
     2,
-    221,
-    1
-   ],
-   "techno-economic": [
     216,
     1
    ],
    "technoeconomic": [
-    220,
+    215,
     1
    ],
    "technological": [
@@ -86376,18 +86560,8 @@ globalThis.SUBTOPIC_CATALOG={
     214,
     1,
     215,
-    5,
-    216,
-    18,
-    217,
-    20,
-    218,
-    19,
-    219,
-    26,
-    220,
     1,
-    222,
+    217,
     1
    ],
    "technology-enhanc": [
@@ -86488,11 +86662,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     94,
-    2,
-    216,
-    1,
-    219,
-    3
+    2
    ],
    "terminal": [
     6,
@@ -86555,23 +86725,11 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    215,
-    1,
-    216,
-    2,
     217,
-    9,
-    218,
-    6,
-    219,
-    22,
-    222,
     1
    ],
    "testbed": [
     87,
-    1,
-    219,
     1
    ],
    "text": [
@@ -86824,11 +86982,7 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     173,
-    1,
-    217,
-    1,
-    218,
-    3
+    1
    ],
    "thermoconductive": [
     81,
@@ -87028,11 +87182,7 @@ globalThis.SUBTOPIC_CATALOG={
     34,
     2,
     84,
-    1,
-    216,
-    1,
-    219,
-    4
+    1
    ],
    "thrust": [
     0,
@@ -87103,7 +87253,7 @@ globalThis.SUBTOPIC_CATALOG={
    "tight": [
     16,
     1,
-    221,
+    216,
     1
    ],
    "tim": [
@@ -87154,15 +87304,7 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     92,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "time-dependent": [
     6,
@@ -87183,7 +87325,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     14,
     1,
-    220,
+    215,
     1
    ],
    "timescale": [
@@ -87255,16 +87397,6 @@ globalThis.SUBTOPIC_CATALOG={
    "tj": [
     72,
     1
-   ],
-   "tmp": [
-    216,
-    2,
-    217,
-    2,
-    218,
-    2,
-    219,
-    2
    ],
    "today": [
     48,
@@ -87352,15 +87484,7 @@ globalThis.SUBTOPIC_CATALOG={
     142,
     1,
     154,
-    1,
-    216,
-    1,
-    217,
-    2,
-    218,
-    1,
-    219,
-    3
+    1
    ],
    "toopology": [
     71,
@@ -87542,17 +87666,7 @@ globalThis.SUBTOPIC_CATALOG={
     81,
     1,
     95,
-    3,
-    215,
-    3,
-    216,
-    5,
-    217,
-    7,
-    218,
-    7,
-    219,
-    7
+    3
    ],
    "topography": [
     80,
@@ -87592,10 +87706,6 @@ globalThis.SUBTOPIC_CATALOG={
     24,
     1,
     49,
-    1,
-    217,
-    1,
-    218,
     1
    ],
    "totally": [
@@ -88012,8 +88122,6 @@ globalThis.SUBTOPIC_CATALOG={
     56,
     2,
     74,
-    1,
-    216,
     1
    ],
    "transferable": [
@@ -88046,10 +88154,6 @@ globalThis.SUBTOPIC_CATALOG={
     152,
     1,
     171,
-    1,
-    216,
-    1,
-    219,
     1
    ],
    "transformation": [
@@ -88064,9 +88168,7 @@ globalThis.SUBTOPIC_CATALOG={
     26,
     1,
     33,
-    3,
-    219,
-    1
+    3
    ],
    "transformational": [
     21,
@@ -88204,19 +88306,7 @@ globalThis.SUBTOPIC_CATALOG={
     54,
     1,
     196,
-    1,
-    216,
-    1,
-    217,
-    4,
-    218,
-    3
-   ],
-   "transportation": [
-    218,
-    2,
-    219,
-    5
+    1
    ],
    "trapp": [
     75,
@@ -88236,8 +88326,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1,
     82,
-    1,
-    216,
     1
    ],
    "treatment": [
@@ -88246,13 +88334,7 @@ globalThis.SUBTOPIC_CATALOG={
     82,
     1,
     152,
-    1,
-    215,
-    1,
-    216,
-    5,
-    217,
-    3
+    1
    ],
    "tremendou": [
     73,
@@ -88279,26 +88361,6 @@ globalThis.SUBTOPIC_CATALOG={
    "trivial": [
     31,
     1
-   ],
-   "trl": [
-    216,
-    5,
-    217,
-    6,
-    218,
-    4,
-    219,
-    4
-   ],
-   "trl8": [
-    218,
-    1
-   ],
-   "trls": [
-    217,
-    1,
-    219,
-    3
    ],
    "truncation": [
     20,
@@ -88340,10 +88402,6 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     2
    ],
-   "tub": [
-    218,
-    1
-   ],
    "tun": [
     20,
     1
@@ -88384,10 +88442,6 @@ globalThis.SUBTOPIC_CATALOG={
     53,
     1
    ],
-   "turnover": [
-    216,
-    1
-   ],
    "twin": [
     20,
     1,
@@ -88395,13 +88449,9 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     186,
     1,
-    218,
+    215,
     1,
-    219,
-    5,
-    220,
-    1,
-    221,
+    216,
     2
    ],
    "twist": [
@@ -88444,9 +88494,7 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     93,
-    2,
-    215,
-    1
+    2
    ],
    "type": [
     0,
@@ -88530,13 +88578,7 @@ globalThis.SUBTOPIC_CATALOG={
     191,
     1,
     192,
-    1,
-    215,
-    1,
-    218,
-    3,
-    219,
-    2
+    1
    ],
    "uas": [
     36,
@@ -88588,8 +88630,6 @@ globalThis.SUBTOPIC_CATALOG={
     87,
     1,
     93,
-    2,
-    219,
     2
    ],
    "ultra-high": [
@@ -88705,7 +88745,7 @@ globalThis.SUBTOPIC_CATALOG={
    "unconventional": [
     68,
     1,
-    221,
+    216,
     1
    ],
    "uncover": [
@@ -88761,7 +88801,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     66,
     1,
-    221,
+    216,
     1
    ],
    "underpin": [
@@ -88910,10 +88950,6 @@ globalThis.SUBTOPIC_CATALOG={
     86,
     1
    ],
-   "underutiliz": [
-    217,
-    3
-   ],
    "underwater": [
     86,
     1
@@ -89002,8 +89038,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     95,
-    1,
-    219,
     1
    ],
    "uniquely": [
@@ -89028,10 +89062,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     2,
     93,
-    1,
-    215,
-    1,
-    216,
     1
    ],
    "universal": [
@@ -89102,12 +89132,6 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     1
    ],
-   "unplann": [
-    218,
-    2,
-    219,
-    1
-   ],
    "unprecedent": [
     3,
     1,
@@ -89126,10 +89150,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1,
     34,
-    1
-   ],
-   "unproduc": [
-    215,
     1
    ],
    "unreliable": [
@@ -89164,10 +89184,6 @@ globalThis.SUBTOPIC_CATALOG={
     7,
     1
    ],
-   "unus": [
-    217,
-    1
-   ],
    "unveil": [
     22,
     1
@@ -89184,14 +89200,10 @@ globalThis.SUBTOPIC_CATALOG={
     64,
     1,
     184,
-    1,
-    215,
-    2
+    1
    ],
    "updat": [
     90,
-    2,
-    219,
     2
    ],
    "upgrad": [
@@ -89213,16 +89225,6 @@ globalThis.SUBTOPIC_CATALOG={
    "upper": [
     197,
     1
-   ],
-   "upset": [
-    219,
-    1
-   ],
-   "upstream": [
-    215,
-    1,
-    219,
-    4
    ],
    "uq": [
     46,
@@ -89316,13 +89318,7 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     1,
     94,
-    1,
-    216,
-    1,
-    217,
-    1,
-    219,
-    3
+    1
    ],
    "useful": [
     0,
@@ -89336,9 +89332,7 @@ globalThis.SUBTOPIC_CATALOG={
     61,
     2,
     83,
-    1,
-    219,
-    2
+    1
    ],
    "usefully": [
     84,
@@ -89366,10 +89360,6 @@ globalThis.SUBTOPIC_CATALOG={
     26,
     1,
     85,
-    1,
-    216,
-    1,
-    217,
     1
    ],
    "utiliz": [
@@ -89388,9 +89378,7 @@ globalThis.SUBTOPIC_CATALOG={
     67,
     1,
     92,
-    1,
-    219,
-    2
+    1
    ],
    "utilization": [
     4,
@@ -89400,14 +89388,6 @@ globalThis.SUBTOPIC_CATALOG={
     90,
     1,
     142,
-    1,
-    215,
-    4,
-    216,
-    4,
-    217,
-    6,
-    218,
     1
    ],
    "utilize": [
@@ -89420,10 +89400,6 @@ globalThis.SUBTOPIC_CATALOG={
     59,
     1,
     72,
-    1,
-    215,
-    1,
-    217,
     1
    ],
    "uv": [
@@ -89456,28 +89432,12 @@ globalThis.SUBTOPIC_CATALOG={
     41,
     1,
     84,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
-    2
+    1
    ],
    "validate": [
     20,
     1,
     47,
-    1,
-    216,
-    3,
-    217,
-    2,
-    218,
-    2,
-    219,
     1
    ],
    "validation": [
@@ -89488,30 +89448,12 @@ globalThis.SUBTOPIC_CATALOG={
     63,
     1,
     94,
-    1,
-    215,
-    3,
-    216,
-    3,
-    217,
-    6,
-    218,
-    4,
-    219,
-    7
+    1
    ],
    "validity": [
     20,
     1,
     84,
-    1
-   ],
-   "valorization": [
-    217,
-    1
-   ],
-   "valorize": [
-    217,
     1
    ],
    "valu": [
@@ -89522,10 +89464,6 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     1,
     7,
-    1,
-    215,
-    2,
-    216,
     1
    ],
    "value": [
@@ -89536,21 +89474,7 @@ globalThis.SUBTOPIC_CATALOG={
     8,
     1,
     23,
-    1,
-    215,
-    1,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1,
-    219,
     1
-   ],
-   "valve": [
-    218,
-    2
    ],
    "vanmil": [
     73,
@@ -89588,10 +89512,6 @@ globalThis.SUBTOPIC_CATALOG={
     83,
     1,
     89,
-    1,
-    217,
-    3,
-    219,
     1
    ],
    "variation": [
@@ -89656,11 +89576,7 @@ globalThis.SUBTOPIC_CATALOG={
     84,
     1,
     92,
-    2,
-    215,
-    1,
-    219,
-    1
+    2
    ],
    "vast": [
     15,
@@ -89668,10 +89584,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     2,
     89,
-    1
-   ],
-   "vastness": [
-    219,
     1
    ],
    "vehicle": [
@@ -89758,12 +89670,6 @@ globalThis.SUBTOPIC_CATALOG={
     39,
     1
    ],
-   "vent": [
-    215,
-    2,
-    218,
-    1
-   ],
    "verbal": [
     16,
     1
@@ -89784,12 +89690,6 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     210,
-    1
-   ],
-   "verify": [
-    217,
-    1,
-    218,
     1
    ],
    "versa": [
@@ -89901,19 +89801,7 @@ globalThis.SUBTOPIC_CATALOG={
     1,
     95,
     1,
-    220,
-    1
-   ],
-   "viability": [
     215,
-    1,
-    217,
-    1
-   ],
-   "viable": [
-    217,
-    1,
-    218,
     1
    ],
    "vibration": [
@@ -90024,8 +89912,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "vital": [
     0,
-    1,
-    219,
     1
    ],
    "vlf": [
@@ -90054,12 +89940,6 @@ globalThis.SUBTOPIC_CATALOG={
     4,
     2,
     25,
-    1,
-    215,
-    1,
-    217,
-    2,
-    219,
     1
    ],
    "von": [
@@ -90094,10 +89974,6 @@ globalThis.SUBTOPIC_CATALOG={
     93,
     4,
     94,
-    1
-   ],
-   "vulnerable": [
-    219,
     1
    ],
    "w911nf-23-s-0001": [
@@ -90326,16 +90202,10 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1
    ],
-   "wast": [
-    215,
-    1
-   ],
    "waste": [
-    217,
-    2,
-    220,
+    215,
     1,
-    221,
+    216,
     1
    ],
    "water": [
@@ -90351,17 +90221,9 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     192,
     1,
-    220,
+    215,
     1,
-    221,
-    1
-   ],
-   "water-handl": [
-    219,
-    1
-   ],
-   "water-system": [
-    219,
+    216,
     1
    ],
    "wave": [
@@ -90416,8 +90278,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     1,
     92,
-    1,
-    218,
     1
    ],
    "ways": [
@@ -90623,15 +90483,7 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     94,
     1,
-    215,
-    1,
     217,
-    6,
-    218,
-    1,
-    219,
-    3,
-    222,
     1
    ],
    "well-be": [
@@ -90656,10 +90508,6 @@ globalThis.SUBTOPIC_CATALOG={
     46,
     1
    ],
-   "wellhead": [
-    217,
-    2
-   ],
    "wellness": [
     29,
     1
@@ -90680,12 +90528,6 @@ globalThis.SUBTOPIC_CATALOG={
    ],
    "west": [
     95,
-    1
-   ],
-   "wet": [
-    216,
-    1,
-    217,
     1
    ],
    "what": [
@@ -90768,8 +90610,6 @@ globalThis.SUBTOPIC_CATALOG={
     85,
     2,
     94,
-    1,
-    215,
     1
    ],
    "where": [
@@ -90802,10 +90642,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     3,
     94,
-    1,
-    217,
-    1,
-    219,
     1
    ],
    "wherea": [
@@ -90862,10 +90698,6 @@ globalThis.SUBTOPIC_CATALOG={
     89,
     1,
     90,
-    1,
-    215,
-    2,
-    218,
     1
    ],
    "white": [
@@ -90881,10 +90713,6 @@ globalThis.SUBTOPIC_CATALOG={
     2,
     95,
     2
-   ],
-   "who": [
-    219,
-    1
    ],
    "whole": [
     15,
@@ -91048,11 +90876,7 @@ globalThis.SUBTOPIC_CATALOG={
     94,
     1,
     95,
-    1,
-    218,
-    1,
-    219,
-    3
+    1
    ],
    "without": [
     22,
@@ -91070,8 +90894,6 @@ globalThis.SUBTOPIC_CATALOG={
     78,
     1,
     94,
-    1,
-    219,
     1
    ],
    "word": [
@@ -91114,13 +90936,7 @@ globalThis.SUBTOPIC_CATALOG={
     75,
     1,
     88,
-    2,
-    216,
-    1,
-    217,
-    1,
-    218,
-    1
+    2
    ],
    "worker": [
     56,
@@ -91160,10 +90976,6 @@ globalThis.SUBTOPIC_CATALOG={
     57,
     1,
     58,
-    1
-   ],
-   "worsen": [
-    218,
     1
    ],
    "worst": [
@@ -91216,10 +91028,6 @@ globalThis.SUBTOPIC_CATALOG={
     92,
     1,
     192,
-    1,
-    215,
-    1,
-    219,
     1
    ],
    "yet": [
@@ -91238,9 +91046,7 @@ globalThis.SUBTOPIC_CATALOG={
     14,
     1,
     84,
-    2,
-    216,
-    1
+    2
    ],
    "you": [
     56,
@@ -91255,7 +91061,7 @@ globalThis.SUBTOPIC_CATALOG={
     1
    ],
    "zero-liquid": [
-    220,
+    215,
     1
    ],
    "zone": [
@@ -91485,15 +91291,10 @@ globalThis.SUBTOPIC_CATALOG={
    "361526:a-21",
    "361526:b-21",
    "361526:c-21",
-   "363302:1",
-   "363302:a-1",
-   "363302:b-1",
-   "363302:2",
-   "363302:3",
    "363594:a-1",
    "363594:b-1",
    "363594:c-1"
   ]
  },
- "searchable_record_count": 223
+ "searchable_record_count": 218
 };
