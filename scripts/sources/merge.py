@@ -2,9 +2,12 @@
 
 Design (addresses the source-lifecycle and currentness audit findings):
 
-- **Atomic per-source replace.** Each source's published records are replaced
+- **Atomic per-source replace.** Complete source snapshots are replaced
   wholesale on a successful refresh, so a changed deadline or a removed
   opportunity is reflected -- not left stale next to an old copy.
+- **Bounded observations.** Incremental mailbox windows retain current records
+  outside the window. Fresh observations supersede old records; absence alone
+  never verifies removal, and carried evidence keeps its actual last-seen date.
 - **Configurable failure policy.** A committed snapshot cache
   (``data/source_records.json``) holds each source's last successful records.
   Most sources republish that snapshot when a refresh fails. Sources whose
@@ -29,6 +32,7 @@ import os
 from pathlib import Path
 import re
 import tempfile
+from urllib.parse import parse_qsl, urlencode, urlsplit
 
 from scripts.build_catalog import (
     CATALOG_GLOBAL,
@@ -43,9 +47,10 @@ from scripts.build_catalog import (
     write_catalog,
 )
 from .registry import REGISTRY, AdapterResult, collect
-from .validate import filter_publishable, within_health_bounds
+from .validate import filter_publishable, record_is_publishable, within_health_bounds
 from .discoverability import augment_records
 from scripts.source_documents import merge_duplicate_evidence
+from scripts.currentness import record_is_current
 
 DEFAULT_CATALOG = Path("data/opportunities.js")
 DEFAULT_CACHE = Path("data/source_records.json")
@@ -57,6 +62,7 @@ OPERATIONAL_SOURCE_EVIDENCE_KEYS = {
     "retained_data_age_days",
     "publication_decision",
 }
+TERMINAL_REASONS = {"expired", "closed", "archived", "cancelled", "canceled", "withdrawn"}
 
 
 # --------------------------------------------------------------------------
@@ -115,6 +121,169 @@ def _cached_publishable(sources: dict, slug: str, as_of: date) -> list[dict]:
     records = (sources.get(slug) or {}).get("records") or []
     kept, _ = filter_publishable(records, as_of)
     return kept
+
+
+def _unobserved_current(sources: dict, result: AdapterResult, as_of: date, witnesses=None) -> list[dict]:
+    """Carry only current records that no fresh observation supersedes.
+
+    Check every observed identity before filtering. An expired, withdrawn or
+    invalid replacement must never resurrect the previously open record.
+    """
+    observed_ids = {r.get("opportunity_id") for r in result.records}
+    observed_keys = {record_identity(r) for r in result.records}
+    snapshot = sources.get(result.slug) or {}
+    last_seen = str(snapshot.get("fetched_at") or "")[:10] or None
+    carried = []
+    latest, _ = _incremental_observations(snapshot.get("records") or [], witnesses)
+    publishable, _ = filter_publishable(latest, as_of)
+    for record in publishable:
+        ident, key = record.get("opportunity_id"), record_identity(record)
+        if (ident in observed_ids or key in observed_keys
+                or not record_is_current(record, as_of)[0]):
+            continue
+        carried.append({**record,
+            "source_last_seen_date": record.get("source_last_seen_date") or last_seen,
+            "source_observation": "retained_outside_window"})
+    return carried
+
+
+def _latest_observations(records: list[dict]) -> list[dict]:
+    """Mailbox records are ordered oldest first; select before date filtering.
+
+    An expired or invalid latest version still supersedes its older version.
+    Keep selected records in their original order for deterministic merging.
+    """
+    selected, ids, keys = [], set(), set()
+    for record in reversed(records):
+        ident, key = record.get("opportunity_id"), record_identity(record)
+        if ident not in ids and key not in keys:
+            selected.append(record)
+        ids.add(ident)
+        keys.add(key)
+    return list(reversed(selected))
+
+
+def _observation_url(record: dict) -> tuple | None:
+    """Ignore presentation/tracking differences, not distinct sponsor programs."""
+    from .adapters.vpr_email import unwrap_urldefense
+    value = (record.get("detail_page") or record.get("funding_opportunity_url")
+             or record.get("primary_document_url"))
+    if not value:
+        return None  # An invalid newest observation still supersedes its old row.
+    try:
+        parsed = urlsplit(unwrap_urldefense(value))
+        host = (parsed.hostname or "").casefold().removeprefix("www.")
+        query = sorted((k, v) for k, v in parse_qsl(parsed.query, keep_blank_values=True)
+                       if not k.casefold().startswith("utm_") and k.casefold() not in {"gclid", "fbclid"})
+        return host, parsed.port if parsed.port not in (None, 80, 443) else None, parsed.path.rstrip("/"), urlencode(query)
+    except (TypeError, ValueError):
+        return (str(value),)
+
+
+IDENTITY_WITNESS_LIMIT = 500
+
+
+def _identity_witness(record):
+    from .official_identity import record_grants_ids
+    url = _observation_url(record)
+    return {"id": str(record.get("opportunity_id") or ""), "key": record_identity(record),
+            "url": list(url) if url else None, "number": _norm_number(record.get("opportunity_number")),
+            "title": _canonical_title(record), "grants": sorted(record_grants_ids(record))}
+
+
+def _identity_history(snapshot, fresh, proofs=None):
+    """Keep bounded identity witnesses even when live/terminal records disappear.
+
+    These are identity observations, not currentness or freshness assertions.
+    Full source records remain in the retained generation artifact. A changed
+    source ID or exact official alias proof can resolve a program's identity;
+    simply dropping one conflicting email from a later window cannot do so.
+    """
+    prior = snapshot.get("identity_witnesses", {"version": 1, "observations": []})
+    if (not isinstance(prior, dict) or set(prior) != {"version", "observations"}
+            or type(prior["version"]) is not int or prior["version"] != 1
+            or not isinstance(prior["observations"], list)):
+        raise ValueError("Invalid incremental identity witness metadata")
+    observations = prior["observations"] + [_identity_witness(r) for r in (snapshot.get("records") or []) + fresh]
+    unique = {}
+    for witness in observations:
+        if (not isinstance(witness, dict) or set(witness) != {"id", "key", "url", "number", "title", "grants"}
+                or not all(isinstance(witness[k], str) and len(witness[k]) <= 2048 for k in ("id", "key", "number", "title"))
+                or not witness["id"] or not witness["key"]
+                or not isinstance(witness["grants"], list) or len(witness["grants"]) > 4
+                or any(not isinstance(x, str) or not re.fullmatch(r"[0-9]{1,40}", x) for x in witness["grants"])
+                or (witness["url"] is not None and (not isinstance(witness["url"], list)
+                    or len(witness["url"]) not in (1, 4)
+                    or any(x is not None and (type(x) not in (str, int) or len(str(x)) > 4096) for x in witness["url"])))):
+            raise ValueError("Invalid incremental identity witness fields")
+        identity = json.dumps(witness, sort_keys=True, separators=(",", ":"))
+        unique[identity] = witness
+        # Historical witnesses may outlive every live row. An independently
+        # validated cached mapping can resolve that URL without erasing the
+        # original witness or asserting a new source observation.
+        proxy = _witness_proxy(witness)
+        if proxy is not None:
+            from .official_identity import record_grants_ids, resolve
+            resolve([proxy], proofs or {}, limit=0)
+            mapped = {**witness, "grants": sorted(set(witness["grants"]) | record_grants_ids(proxy))}
+            unique[json.dumps(mapped, sort_keys=True, separators=(",", ":"))] = mapped
+    if len(unique) > IDENTITY_WITNESS_LIMIT:
+        raise ValueError("Incremental identity witness capacity exceeded; retained evidence requires review")
+    return {"version": 1, "observations": [unique[key] for key in sorted(unique)]}
+
+
+def _witness_proxy(witness):
+    from .official_identity import simpler_url
+    url = witness["url"]
+    if (not isinstance(url, list) or len(url) != 4 or url[0] != "simpler.grants.gov"
+            or url[1] is not None or url[3] != ""):
+        return None
+    exact = simpler_url("https://simpler.grants.gov" + url[2])
+    return ({"opportunity_id": witness["id"], "detail_page": exact,
+             "funding_opportunity_url": exact} if exact else None)
+
+
+def _identity_groups(evidence):
+    groups = []
+    for record in evidence:
+        ident, key = record["id"], record["key"]
+        linked = [group for group in groups if ident in group[0] or key in group[1]]
+        ids, keys, members = {ident}, {key}, [record]
+        for group in linked:
+            ids.update(group[0]); keys.update(group[1]); members.extend(group[2])
+            groups.remove(group)
+        groups.append((ids, keys, members))
+    return groups
+
+
+def _incremental_observations(records: list[dict], witnesses=None) -> tuple[list[dict], list[str]]:
+    """Select latest genuine versions; quarantine unresolved stable-ID collisions.
+
+    A digest title hash or a number copied into an event is not enough to merge
+    different programs. Tracking links, exact Grants.gov aliases, and an intact
+    source-owned number plus unchanged program title remain supported aliases.
+    No missing item or collision is evidence of an official withdrawal.
+    """
+    evidence = (witnesses or {}).get("observations", []) + [_identity_witness(r) for r in records]
+    withheld = set()
+    for ids, _, members in _identity_groups(evidence):
+        urls = {tuple(row["url"]) for row in members if row["url"] is not None}
+        if len(urls) <= 1:
+            continue
+        # A later verified official mapping can add proof for an older resource
+        # without deleting that original unresolved witness from history.
+        grants = [{ident for row in members if row["url"] is not None and tuple(row["url"]) == url
+                   for ident in row["grants"]} for url in urls]
+        exact_grants_alias = all(len(proof) == 1 for proof in grants) and len(set.union(*grants)) == 1
+        numbers = {row["number"] for row in members}
+        stable_number_and_title = (len(numbers) == 1 and bool(next(iter(numbers)))
+                                   and len({row["title"] for row in members}) == 1
+                                   and bool(members[0]["title"])
+                                   and len(set.union(*grants)) <= 1)
+        if not exact_grants_alias and not stable_number_and_title:
+            withheld.update(ids)
+    selected = _latest_observations([row for row in records if row.get("opportunity_id") not in withheld])
+    return selected, sorted(str(ident) for ident in withheld if ident)
 
 
 def _snapshot_age_days(sources: dict, slug: str, as_of: date) -> int | None:
@@ -192,6 +361,41 @@ def _clear_failed_source(sources: dict, result: AdapterResult) -> None:
     sources[result.slug] = cleared
 
 
+def _verified_partial(result):
+    partitions = (result.diagnostics or {}).get("partitions") or []
+    prefixes = [p.get("id_prefix") for p in partitions if isinstance(p, dict)
+        and p.get("healthy") is True and p.get("status") == "refreshed"
+        and isinstance(p.get("id_prefix"), str) and p["id_prefix"].startswith(result.slug + ":")]
+    return bool((result.diagnostics or {}).get("partial_failure") and prefixes
+        and all(any(str(r.get("opportunity_id") or "").startswith(prefix) for prefix in prefixes)
+                for r in result.records))
+
+
+def _resolve_identity_before_selection(results, cache, as_of, *, allow_fetch=True):
+    """One shared bounded lookup phase, before any identity is quarantined."""
+    from .official_identity import resolve
+    enabled = allow_fetch and os.environ.get("VPR_ENRICH_LINKS", "").casefold() == "true"
+    proofs = cache.setdefault("official_identities", {}) if enabled else cache.get("official_identities", {})
+    observations, historical = [], []
+    for result in results:
+        fresh = result.records if result.ok or _verified_partial(result) else []
+        snapshot = (cache.get("sources") or {}).get(result.slug) or {}
+        retained = [r for r in snapshot.get("records", []) if result.retain_on_failure
+                    and record_is_publishable(r, as_of)[0] and record_is_current(r, as_of)[0]]
+        observations.extend(fresh + retained)
+        if result.snapshot_complete is False:
+            history = _identity_history(snapshot, fresh, proofs)
+            active = [_identity_witness(r) for r in fresh + retained]
+            active_ids = {w["id"] for w in active}; active_keys = {w["key"] for w in active}
+            for ids, keys, members in _identity_groups(history["observations"]):
+                if ids & active_ids or keys & active_keys:
+                    historical.extend(proxy for w in members if (proxy := _witness_proxy(w)) is not None)
+    # Raw/current rows take precedence within the existing 20-GET budget.
+    # limit=0 still applies retained exact receipts when enrichment is disabled.
+    stats = resolve(observations + historical, proofs, limit=20 if enabled else 0)
+    return {"enabled": enabled, **stats}
+
+
 def resolve_live_records(results: list[AdapterResult], cache: dict,
                          as_of: date) -> tuple[list[dict], dict, list[dict]]:
     """Return ``(records_to_publish, updated_cache, per_source_summaries)``.
@@ -207,17 +411,35 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
 
     for result in results:
         slug = result.slug
-        partitions = (result.diagnostics or {}).get("partitions") or []
-        verified_prefixes = [part.get("id_prefix") for part in partitions
-            if isinstance(part, dict) and part.get("healthy") is True and part.get("status") == "refreshed"
-            and isinstance(part.get("id_prefix"), str) and part["id_prefix"].startswith(slug + ":")]
-        partial = bool((result.diagnostics or {}).get("partial_failure") and verified_prefixes
-            and all(any(str(record.get("opportunity_id") or "").startswith(prefix) for prefix in verified_prefixes)
-                    for record in result.records))
+        partial = _verified_partial(result)
+        incremental = result.snapshot_complete is False
+        witnesses = (_identity_history(sources.get(slug) or {}, result.records if result.ok or partial else [],
+                                      cache.get("official_identities"))
+                     if incremental else None)
         if result.ok or partial:
-            kept, dropped = filter_publishable(result.records, as_of)
+            fresh, collisions = _incremental_observations(result.records, witnesses) if incremental else (result.records, [])
+            kept, dropped = filter_publishable(fresh, as_of)
+            carried = []
+            terminal_observations = []
+            health_count = len(kept)
+            if incremental:
+                kept = [r for r in kept if record_is_current(r, as_of)[0]]
+                # A successfully parsed window may contain only newly closed
+                # or expired calls. That is an observation, not parser failure.
+                terminal_observations = [
+                    {**{k: r.get(k) for k in ("opportunity_id", "source", "status", "close_date",
+                                             "deadlines", "last_updated", "version")},
+                     "canonical_identity": record_identity(r)}
+                    for r in fresh
+                    if record_is_current(r, as_of)[1] in TERMINAL_REASONS
+                    and record_is_publishable(r, as_of)[1] in {"ok", "expired"}]
+                health_count = len(kept) + len(terminal_observations)
+                carried = _unobserved_current(sources, result, as_of, witnesses)
+                if result.max_records is not None and max(len(result.records), len(kept) + len(carried)) > result.max_records:
+                    # No truncation or partially updated cache on overflow.
+                    raise ValueError(f"{slug}: incremental snapshot exceeds maximum records")
             healthy = within_health_bounds(
-                len(kept), result.min_records, result.max_records
+                health_count, result.min_records, result.max_records
             )
             if healthy:
                 previous_snapshot = sources.get(slug) or {}
@@ -238,7 +460,11 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                         or previous_fetch_date
                         or as_of.isoformat()
                     )
+                    if incremental:
+                        refreshed["source_last_seen_date"] = as_of.isoformat()
+                        refreshed["source_observation"] = "observed_in_window"
                     refreshed_records.append(refreshed)
+                refreshed_records.extend(carried)
                 diagnostics = result.diagnostics or {}
                 source_snapshot_at = diagnostics.get("source_snapshot_at")
                 if source_snapshot_at:
@@ -276,7 +502,16 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                     failure_class = _classify_failure(result)
             else:
                 if result.retain_on_failure:
-                    published = _cached_publishable(sources, slug, as_of)
+                    published = carried if incremental else _cached_publishable(sources, slug, as_of)
+                    if incremental:
+                        # A malformed new version is not a verified withdrawal,
+                        # but it durably invalidates the older cached version.
+                        # Preserve the successful-refresh timestamp/provenance.
+                        previous = sources.get(slug) or {}
+                        sources[slug] = {**previous, "records": carried, "record_count": len(carried),
+                            "last_successful_refresh_at": _last_successful_refresh_at(sources, slug),
+                            "last_successful_record_count": previous.get("last_successful_record_count",
+                                previous.get("record_count", len(previous.get("records") or [])))}
                     status = "unhealthy_kept_last_good"
                     publication_decision = "published_filtered_last_known_good"
                     retained_data_age_days = _snapshot_age_days(
@@ -304,10 +539,20 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 **evidence,
                 **({"withheld_ids": [r["opportunity_id"] for r in dropped if r["reason"] != "expired"]}
                    if any(r["reason"] != "expired" for r in dropped) else {}),
+                **({"snapshot_complete": False,
+                    "retained_outside_window_ids": [r["opportunity_id"] for r in carried],
+                    "identity_collision_ids": collisions,
+                    "observed_terminal_records": terminal_observations if healthy else []}
+                   if incremental else {}),
             })
         else:
             if result.retain_on_failure:
-                published = _cached_publishable(sources, slug, as_of)
+                if result.snapshot_complete is False:
+                    selected, _ = _incremental_observations((sources.get(slug) or {}).get("records") or [], witnesses)
+                    published, _ = filter_publishable(selected, as_of)
+                    published = [r for r in published if record_is_current(r, as_of)[0]]
+                else:
+                    published = _cached_publishable(sources, slug, as_of)
                 snapshot_age = _snapshot_age_days(sources, slug, as_of)
                 recent_snapshot = bool(
                     result.fallback_grace_days > 0
@@ -348,7 +593,15 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
                 "snapshot_age_days": snapshot_age,
                 "fallback_grace_days": result.fallback_grace_days,
                 **evidence,
+                **({"snapshot_complete": False} if result.snapshot_complete is False else {}),
             })
+        if incremental:
+            # Current records are replaceable, but evidence of source identity
+            # must survive terminal observations, quarantine and failed scans.
+            # This does not assert that an old notice is still open or fresh.
+            sources.setdefault(slug, {"source": result.display_name,
+                "source_type": result.source_type, "fetched_at": None,
+                "record_count": 0, "records": []})["identity_witnesses"] = witnesses
         live.extend(published)
 
     return live, cache, summaries
@@ -493,7 +746,8 @@ def rebuild_catalog(catalog: dict, combined: list[dict],
         "adapters": [
             {"slug": r.slug, "source": r.display_name, "source_type": r.source_type,
              "ok": r.ok, "record_count": r.record_count, "error": r.error,
-             "diagnostics": r.diagnostics}
+             "diagnostics": r.diagnostics,
+             **({"snapshot_complete": False} if r.snapshot_complete is False else {})}
             for r in results
         ],
     }
@@ -552,11 +806,8 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         include_disabled=include_disabled,
         context={"catalog_records": base, "as_of": as_of, "intake_path": intake_path},
     )
+    identity_stats = _resolve_identity_before_selection(results, cache, as_of)
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
-    identity_stats = {'enabled': False}
-    if os.environ.get('VPR_ENRICH_LINKS', '').casefold() == 'true':
-        from .official_identity import resolve
-        identity_stats = {'enabled': True, **resolve(external, cache.setdefault('official_identities', {}))}
     combined, stats = merge_records(base, external)
     # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with
     # program-area topics/terms so topical searches surface them.

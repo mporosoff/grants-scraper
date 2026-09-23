@@ -22,6 +22,7 @@ from scripts.build_feeds import (
     rfc3339,
 )
 from scripts.currentness import parse_date, record_is_current
+from scripts.build_catalog import record_identity
 from scripts.submission_schedule import events as submission_events, next_submission
 
 SCHEMA_VERSION = 1
@@ -110,6 +111,8 @@ def _snapshot(record: dict) -> dict:
 
 def independently_refreshed(record, source):
     """A healthy partition may verify removal while an unrelated partition fails."""
+    if source.get("snapshot_complete") is False:
+        return False  # A successful bounded observation cannot prove absence.
     partitions = (source.get("diagnostics") or {}).get("partitions") or []
     if partitions:
         matches = [part for part in partitions if isinstance(part, dict) and isinstance(part.get("id_prefix"), str) and part["id_prefix"]
@@ -217,6 +220,22 @@ def diff_catalogs(
 
     for ident, record in before.items():
         current_record = after.get(ident) or aliases.get(ident)
+        # The source lifecycle filters terminal calls out of the live catalog.
+        # Keep its explicit observation distinct from an uninformative absence.
+        if not current_record and record.get("source") not in {None, "Grants.gov"}:
+            source_state = (current.get("diagnostics") or {}).get("additional_sources") or {}
+            for source in source_state.get("lifecycle") or []:
+                if source.get("source") != record.get("source") or not source.get("healthy"):
+                    continue
+                for observed in source.get("observed_terminal_records") or []:
+                    if (observed.get("opportunity_id") == ident
+                            or observed.get("canonical_identity") == record_identity(record)):
+                        current_record = {**record, **{k: observed[k] for k in (
+                            "source", "status", "close_date", "deadlines", "last_updated", "version")
+                            if k in observed}}
+                        break
+                if current_record:
+                    break
         if current_record and record_is_current(current_record, as_of)[0]:
             continue
         # A source that deliberately withholds unsafe cached records during an
