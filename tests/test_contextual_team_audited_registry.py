@@ -1,5 +1,6 @@
 import copy
 import unittest
+from unittest.mock import patch
 
 from scripts import researcher_registry as legacy
 from tools import contextual_team_audited_registry as audited
@@ -83,6 +84,21 @@ class AuditedRegistryStageTests(unittest.TestCase):
                         with self.assertRaisesRegex(ValueError, 'invalid retrieval timestamp'):
                             operation(value)
                     self.assertEqual(legacy.canonical_bytes(value), original)
+
+    def test_clock_and_offset_bounds_reject_before_a_permissive_datetime_parser(self):
+        for location in ('summary', 'claim'):
+            for timestamp in ('2026-09-22T24:00:00Z', '2026-09-22T24:00:00.000+00:00',
+                              '2026-09-22T12:60:00Z', '2026-09-22T12:00:60Z',
+                              '2026-09-22T12:00:00+24:00', '2026-09-22T12:00:00-24:00',
+                              '2026-09-22T12:00:00+01:60'):
+                with self.subTest(location=location, timestamp=timestamp):
+                    value = self.timestamp_fixture(location, timestamp)
+                    # Parser normalization rules differ across Python versions.
+                    # Application bounds must reject before any parser accepts it.
+                    with patch.object(audited, 'datetime') as parser:
+                        with self.assertRaisesRegex(ValueError, 'invalid retrieval timestamp'):
+                            audited.validate(value)
+                        self.assertNotIn(timestamp, [call.args[0] for call in parser.fromisoformat.call_args_list])
 
     def test_audited_hash_accepts_original_identity_and_leaves_input_untouched(self):
         value = registry_fixture()

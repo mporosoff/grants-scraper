@@ -42,8 +42,8 @@ def _evidence_records(records, label):
         retrieved_at = record.get('retrieved_at')
         try:
             if not isinstance(retrieved_at, str) or not re.fullmatch(
-                    r'[0-9]{4}-[0-9]{2}-[0-9]{2}T[0-9]{2}:[0-9]{2}:[0-9]{2}'
-                    r'(?:\.[0-9]+)?(?:Z|[+-][0-9]{2}:[0-5][0-9])', retrieved_at):
+                    r'[0-9]{4}-[0-9]{2}-[0-9]{2}T(?:[01][0-9]|2[0-3]):[0-5][0-9]:[0-5][0-9]'
+                    r'(?:\.[0-9]+)?(?:Z|[+-](?:[01][0-9]|2[0-3]):[0-5][0-9])', retrieved_at):
                 raise ValueError
             datetime.fromisoformat(retrieved_at)
         except ValueError:
