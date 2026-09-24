@@ -8,6 +8,6 @@ Fresh live Chemical Process Systems/Rochester verification showed an initial **a
 
 Closing controls at **03:54:06Z on September 24** showed paid OFF/cache ON and no active service or executor jobs. Full researcher serving proof passed at 02:06:14Z. Public activation, audited-registry cutover, legacy withdrawal and recurring paid usage remain disabled; automatic paid catalog and team generation remain held.
 
-Scientific qualification is unresolved. All measured responsiveness p90 cohorts miss their targets, and the 48 MiB feature-attributable peak remains unmeasured. The complete migration proposal remains on HOLD and uninstalled. Publication does not qualify Iteration 3 or start later iterations.
+Scientific qualification is unresolved. The new foreground diagnostic cohorts miss their p90 targets, and the 48 MiB feature-attributable peak remains unmeasured. The complete migration proposal remains on HOLD and uninstalled. Publication does not qualify Iteration 3 or start later iterations.
 
 The [authoritative CURRENT checkpoint](https://github.com/mporosoff/grants-scraper/blob/main/docs/team-recommender/CURRENT.md) records the accepted release and remaining boundaries.
