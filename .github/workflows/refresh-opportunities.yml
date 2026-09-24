@@ -792,7 +792,7 @@ jobs:
           test "$(jq -r .deploy_required "$RUNNER_TEMP/reports/worker-after.json")" = false
       - name: Authenticate complete corrected candidate serving bytes and safe source context
         id: smoke-context
-        if: steps.review.outputs.review_ready == 'true' && steps.accounting.outputs.fixed_correction == 'true'
+        if: steps.review.outputs.review_ready == 'true' && steps.accounting.outputs.fixed_correction == 'true' && steps.accounting.outputs.zero_provider_descendant != 'true'
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -863,7 +863,7 @@ jobs:
         run: python -m tools.catalog_correction_release run-smoke --name smoke-previous-rerank --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-smokes"
       - name: Verify all three accepted owned smokes against fresh unchanged serving bytes
         id: owned-provider
-        if: steps.review.outputs.review_ready == 'true' && steps.smoke-context.outcome == 'success'
+        if: steps.review.outputs.review_ready == 'true' && (steps.smoke-context.outcome == 'success' || steps.accounting.outputs.zero_provider_descendant == 'true')
         env:
           CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
@@ -878,6 +878,8 @@ jobs:
       - name: Retain the fully tested Worker after a late incomplete publication
         id: owned-worker-retained
         if: ${{ failure() && steps.review.outputs.review_ready == 'true' && steps.owned-provider.outcome == 'success' && steps.publication.outcome != 'success' }}
+        env:
+          ZERO_PROVIDER_DESCENDANT: ${{ steps.accounting.outputs.zero_provider_descendant }}
         run: |
           python - <<'PY'
           import hashlib, json, os
@@ -895,7 +897,13 @@ jobs:
           assert smoke['status'] == 'passed_reused' and smoke['original_provider_requests'] == 3 and generation
           expected_space = smoke['previous_model_space_fingerprint'] if generation == 'previous' else smoke['model_space_fingerprint']
           assert pages['model_space_fingerprint'] == expected_space and smoke['serving_version_id'] == worker['version_id']
-          assert worker['candidate']['candidate_id'] == manifest['candidate_id']
+          coverage_hash = None
+          if os.environ.get('ZERO_PROVIDER_DESCENDANT') == 'true':
+              from tools.catalog_runtime_smoke_reuse import validate_retention
+              validate_retention(Path(os.environ['RUNNER_TEMP']) / 'candidate', reports)
+              coverage_hash = hashlib.sha256((reports / 'runtime-smoke-coverage.json').read_bytes()).hexdigest()
+          else:
+              assert worker['candidate']['candidate_id'] == manifest['candidate_id']
           merged = bool(progress and progress.get('candidate_id') == manifest['candidate_id'] and progress.get('protected_merge_completed') is True)
           record = {'version': 'catalog-owned-worker-retention-v1', 'candidate_id': manifest['candidate_id'],
               'publication_status': 'protected_merge_recorded_publication_incomplete' if merged else 'publication_unconfirmed',
@@ -907,6 +915,9 @@ jobs:
               'pages_corpus_sha256': pages['current_corpus_sha256'], 'pages_compatibility_checked_generation': generation,
               'owned_previous_corpus_smoke': 'passed', 'new_provider_calls': 0, 'worker_mutation_performed': False,
               'next_retry_stage': 'publish', 'resume_requires_fresh_unchanged_serving_proof': True}
+          if coverage_hash:
+              record['runtime_smoke_coverage_sha256'] = coverage_hash
+              record['worker_proof_candidate_id'] = worker['candidate']['candidate_id']
           atomic_json(reports / 'owned-worker-retained.json', record)
           with open(os.environ['GITHUB_STEP_SUMMARY'], 'a', encoding='utf8') as summary:
               summary.write('\nPublication is incomplete; Pages completion is not claimed. The workflow retained the fully tested Worker '

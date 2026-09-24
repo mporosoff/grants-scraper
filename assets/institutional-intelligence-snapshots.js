@@ -824,6 +824,9 @@
     renderPagination();
     renderSourceStatus();
     renderQuestionAnswer();
+    setStatus(payload.completeness === "complete"
+      ? `${payload.exact_total.toLocaleString()} matching award${payload.exact_total === 1 ? "" : "s"} found across all selected sources.`
+      : `At least ${payload.at_least.toLocaleString()} matching award${payload.at_least === 1 ? "" : "s"} found in the available source results.`);
     if (focus && !globalThis.PublicTools?.awardAiOpen()) requestAnimationFrame(() => {
       globalThis.PublicTools?.showAwardProjects();
       const first = $("ii-awards").querySelector(".ii-award-card") || $("ii-output-heading");
@@ -1186,11 +1189,6 @@
       });
       if (sequence !== state.sequence) return null;
       commitSnapshotResult(staged, { historyMode, focus: false, departureHistoryState });
-      const snapshot = staged.snapshot;
-      const exact = snapshot.completeness === "complete";
-      setStatus(exact
-        ? `${snapshot.exact_total.toLocaleString()} matching award${snapshot.exact_total === 1 ? "" : "s"} found across all selected sources.`
-        : `At least ${snapshot.at_least.toLocaleString()} matching award${snapshot.at_least === 1 ? "" : "s"} found in the available source results.`);
       if (focusResults && !globalThis.PublicTools?.awardAiOpen()) requestAnimationFrame(() => {
         globalThis.PublicTools?.showAwardProjects();
         const heading = $("ii-output-heading");
@@ -1978,6 +1976,7 @@
   function resetResultState() {
     globalThis.PublicTools?.resetAwardViews();
     for (const id of ["ii-output", "ii-source-status", "ii-question-plan", "ii-question-answer", "ii-pagination", "ii-card-pagination"]) $(id).classList.add("hidden");
+    setStatus("");
     state.snapshot = null;
     state.localSnapshot = null;
     state.clientSnapshotOverlay = null;

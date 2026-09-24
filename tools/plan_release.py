@@ -224,7 +224,7 @@ def plan(root, environment, *, receipt=None, live=None, publication=None, resume
                       'Dependency fingerprints and retained release evidence'}
 
 
-def main():
+def main(*, automatic_paid_hold=False):
     environment = dict(os.environ)
     pointer = c.read_json(c.ROOT / 'release/candidate-source.json')
     requested = environment.get('REQUESTED_STAGE', '')
@@ -264,10 +264,18 @@ def main():
             _, publication = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'publication', Path(directory) / 'publication')
     if result is None:
         result = plan(c.ROOT, environment, receipt=receipt, live=live, publication=publication, resumed=resumed, selected=selected)
+    # A completed finite repair is evidence of past work, not recurring spend
+    # authorization. Its caller can retain this hold without changing the
+    # ordinary planner's dependency decisions or named manual authorizations.
+    paid_stages = ('generate', 'teams', 'backfill')
+    if automatic_paid_hold and environment['GITHUB_EVENT_NAME'] in ('push', 'schedule') and result['stage'] in paid_stages:
+        result = dict(result, held_stage=result['stage'], stage='noop',
+            reason='Finite catalog continuation keeps automatic paid generation and team work held; no new provider work is authorized')
     result['receipt_run'] = receipt_run
     from tools.team_provider import provider_names
-    result['openai'] = str('openai' in provider_names()).lower()
-    result['anthropic'] = str('anthropic' in provider_names()).lower()
+    providers = () if automatic_paid_hold and result['stage'] not in paid_stages else provider_names()
+    result['openai'] = str('openai' in providers).lower()
+    result['anthropic'] = str('anthropic' in providers).lower()
     c.write_json(Path(os.environ['RUNNER_TEMP']) / 'release-plan.json', result)
     with open(os.environ['GITHUB_OUTPUT'], 'a') as output:
         for key, value in result.items():
