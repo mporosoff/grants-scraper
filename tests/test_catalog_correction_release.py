@@ -138,6 +138,35 @@ class DispatchContracts(unittest.TestCase):
 
 
 class PlanningAndIsolation(unittest.TestCase):
+    def test_projection_selector_is_manual_fixed_and_zero_generation(self):
+        with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, ENV | {
+                'REQUESTED_STAGE': 'catalog-projection', 'RUNNER_TEMP': temp,
+                'GITHUB_OUTPUT': str(Path(temp)/'output')}, clear=True), \
+                patch.object(bridge.release, 'git', return_value='a'*40), \
+                patch('tools.plan_release.main') as ordinary, patch.object(bridge, 'correction_complete') as completion:
+            bridge.plan()
+            result = json.loads((Path(temp)/'release-plan.json').read_bytes())
+            self.assertEqual(result['stage'], 'catalog-projection')
+            self.assertEqual((result['openai'], result['anthropic']), ('false', 'false'))
+            ordinary.assert_not_called(); completion.assert_not_called()
+            for key in ('CANDIDATE_ID', 'CANDIDATE_RUN', 'RECEIPT_RUN', 'PUBLICATION_RUN', 'PUBLICATION_ATTEMPT', 'QUALIFICATION_PILOT'):
+                with self.subTest(key=key), patch.dict(os.environ, {key: 'true'}):
+                    with self.assertRaisesRegex(ConfigurationFailure, 'fixed_correction_selector'): bridge.plan()
+            with patch.dict(os.environ, {'GITHUB_EVENT_NAME': 'push'}):
+                with self.assertRaisesRegex(ConfigurationFailure, 'protected_manual_refresh'): bridge.plan()
+
+    def test_projection_failure_never_falls_back_to_marker_recovery_or_creation(self):
+        with patch.dict(os.environ, ENV | {'RECOVERY_STAGE': 'catalog-projection'}, clear=True), \
+                patch('tools.catalog_projection_recovery.repair', side_effect=ValueError('retained evidence mismatch')) as repair, \
+                patch('tools.catalog_candidate_recovery.recover') as old, patch.object(bridge, 'create') as create:
+            with self.assertRaisesRegex(ValueError, 'retained evidence mismatch'):
+                bridge.recover_candidate('bundle', 'reports')
+            repair.assert_called_once_with('bundle', 'reports'); old.assert_not_called(); create.assert_not_called()
+            with patch.dict(os.environ, {'RECOVERY_STAGE': 'unknown'}):
+                with self.assertRaisesRegex(ConfigurationFailure, 'fixed_recovery_selector'):
+                    bridge.recover_candidate('bundle', 'reports')
+            self.assertEqual(repair.call_count, 1)
+
     def test_manual_main_is_required_for_mutating_refresh_bridge(self):
         for key, value in [('GITHUB_EVENT_NAME', 'push'), ('GITHUB_REF', 'refs/heads/test'),
                            ('GITHUB_WORKFLOW_REF', 'untrusted'), ('GITHUB_REPOSITORY', 'other/repo')]:
@@ -233,6 +262,86 @@ class PlanningAndIsolation(unittest.TestCase):
                     bridge.authenticate_report_files(root, 'live', 'a'*64, api=api)
 
 
+class ProjectionCompletion(unittest.TestCase):
+    def setUp(self):
+        from tests.test_catalog_projection_recovery import ProjectionFixture
+        self.f = ProjectionFixture(); self.addCleanup(self.f.close)
+        fixed = {'version': bridge.source.VERSION,
+            'source_plan_sha256': bridge.smoke.existing.sha(bridge.source.CONFIG.read_bytes()),
+            'spending_plan_sha256': bridge.policy.PLAN_SHA,
+            'original_candidate_id': bridge.source.plan()['candidate_id']}
+        self.f.parent['source_correction'] = fixed
+        self.f.parent.pop('candidate_id')
+        self.f.parent['candidate_id'] = bridge.release.digest(bridge.release.encoded(self.f.parent))
+        self.f.parent_raw = bridge.release.encoded(self.f.parent)
+        self.f.spec['parent'].update(candidate_id=self.f.parent['candidate_id'],
+            manifest_sha256=bridge.release.digest(self.f.parent_raw),
+            canonical_manifest_sha256=bridge.release.digest(self.f.parent_raw))
+        self.f.parent_entries[0] = ('candidate.json', self.f.parent_raw)
+        self.f.refresh_archives()
+        self.manifest = self.f.derived
+        self.publication = {'pages_complete': True}
+        self.live = {'candidate_id': self.manifest['candidate_id'], 'verified': True, 'provider_smoke': 'success'}
+        self.history = self.f.stack.enter_context(patch.object(bridge, 'protected_candidates', return_value=[self.manifest]))
+        self.reports = self.f.stack.enter_context(patch('tools.plan_release.latest_report', side_effect=self.report))
+        self.f.stack.enter_context(patch('tools.plan_release.publication_ready', side_effect=lambda m, p: bool(p and p['pages_complete'])))
+        self.auth = self.f.stack.enter_context(patch.object(bridge, 'authenticate_report_files'))
+        self.owned = self.f.stack.enter_context(patch.object(bridge, 'historical_smoke'))
+
+    def report(self, repo, candidate, kind, destination):
+        self.assertEqual(candidate, self.manifest['candidate_id'])
+        if kind == 'live':
+            atomic_json(Path(destination)/'15/catalog-smoke-reuse.json', {'historical': True})
+            return '11', self.live
+        return '10', self.publication
+
+    def test_exact_projection_completes_without_parent_publication_and_unblocks_auto(self):
+        self.assertNotEqual(self.manifest['derived_from_candidate'], bridge.source.plan()['candidate_id'])
+        self.assertEqual(bridge.correction_completion('root'), self.manifest)
+        self.assertEqual(self.auth.call_count, 2)
+        self.owned.assert_called_once()
+        self.assertEqual(self.owned.call_args.args[0], self.manifest)
+        with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}, clear=True), patch('tools.plan_release.main') as ordinary:
+            bridge.plan(); ordinary.assert_called_once()
+
+    def test_projection_cannot_complete_without_publication_live_and_owned_evidence(self):
+        self.publication['pages_complete'] = False
+        self.assertFalse(bridge.correction_complete('root')); self.owned.assert_not_called()
+        self.publication['pages_complete'] = True; self.live['verified'] = False
+        self.assertFalse(bridge.correction_complete('root')); self.owned.assert_not_called()
+        self.live['verified'] = True; self.live['provider_smoke'] = 'failed'
+        with self.assertRaisesRegex(ConfigurationFailure, 'complete_live_smoke_receipt'): bridge.correction_complete('root')
+        self.live['provider_smoke'] = 'success'
+        self.auth.side_effect = ValueError('forged report')
+        with self.assertRaisesRegex(ValueError, 'forged report'): bridge.correction_complete('root')
+        self.owned.assert_not_called(); self.auth.side_effect = None
+        self.owned.side_effect = ValueError('missing owned operation')
+        with self.assertRaisesRegex(ValueError, 'missing owned operation'): bridge.correction_complete('root')
+
+    def test_forged_or_removed_projection_metadata_cannot_mint_completion(self):
+        for value in (None, {'untrusted': True}):
+            changed = deepcopy(self.manifest); changed['projection_recovery'] = value
+            changed.pop('candidate_id'); changed['candidate_id'] = bridge.release.digest(bridge.release.encoded(changed))
+            self.history.return_value = [changed]
+            with self.assertRaisesRegex(ConfigurationFailure, 'projection_recovery_'): bridge.correction_complete('root')
+        changed = deepcopy(self.manifest); changed.pop('projection_recovery')
+        changed.pop('candidate_id'); changed['candidate_id'] = bridge.release.digest(bridge.release.encoded(changed))
+        self.history.return_value = [changed]
+        self.assertFalse(bridge.correction_complete('root')); self.reports.assert_not_called()
+
+    def test_completed_projection_stays_owned_and_only_proven_descendants_resume(self):
+        child = {'candidate_id': '9'*64, 'source_correction': deepcopy(self.manifest['source_correction']),
+            'derived_from_candidate': self.manifest['candidate_id']}
+        self.history.return_value = [child, self.manifest]
+        with patch.object(bridge.release, 'load', return_value=self.manifest) as load:
+            self.assertTrue(bridge.requires_owned_smoke('bundle'))
+            load.return_value = child
+            self.assertFalse(bridge.requires_owned_smoke('bundle'))
+            child['derived_from_candidate'] = '8'*64
+            with self.assertRaisesRegex(ConfigurationFailure, 'unproven_correction_descendant|protected_correction_descendant'):
+                bridge.requires_owned_smoke('bundle')
+
+
 class WorkflowContracts(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -275,7 +384,7 @@ class WorkflowContracts(unittest.TestCase):
         self.assertEqual(selected['recover']['if'], "steps.restore.outputs.candidate_id == ''")
         self.assertEqual(selected['recover']['run'], 'python -m tools.catalog_correction_release recover-candidate '
             '--bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/catalog-recovery"')
-        self.assertEqual(selected['persist']['if'], "steps.restore.outputs.candidate_id == '' && steps.recover.outputs.candidate_id == ''")
+        self.assertEqual(selected['persist']['if'], "env.RECOVERY_STAGE == 'catalog-correction' && steps.restore.outputs.candidate_id == '' && steps.recover.outputs.candidate_id == ''")
         self.assertNotIn('continue-on-error', selected['recover'])
         self.assertEqual(job['outputs']['candidate_id'], '${{ steps.restore.outputs.candidate_id || steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}')
         uploads = [s for s in steps if s.get('uses') == 'actions/upload-artifact@v4']
@@ -290,7 +399,7 @@ class WorkflowContracts(unittest.TestCase):
             self.assertNotIn('continue-on-error', upload)
 
     @staticmethod
-    def correction_step_enabled(step, state, prior_success=True):
+    def correction_step_enabled(step, state, prior_success=True, stage='catalog-correction'):
         """Evaluate the parsed step condition, including Actions' implicit success()."""
         expression = step.get('if', 'success()').removeprefix('${{').removesuffix('}}').strip()
         has_status = re.search(r'\b(?:always|success|failure|cancelled)\(', expression)
@@ -300,9 +409,10 @@ class WorkflowContracts(unittest.TestCase):
             lambda match: repr(state.get(match[1], {}).get(match[2],
                 'skipped' if match[2] == 'outcome' else '')), expression)
         expression = expression.replace('always()', 'True').replace('success()', repr(prior_success))
+        expression = expression.replace('env.RECOVERY_STAGE', repr(stage))
         return bool(eval(expression.replace('&&', 'and').replace('||', 'or'), {'__builtins__': {}}, {}))
 
-    def correction_attempt(self, *, failed=None, restored='', recovery_candidate='a'*64):
+    def correction_attempt(self, *, failed=None, restored='', recovery_candidate='a'*64, stage='catalog-correction'):
         """Run the real YAML's routing with injected local step outcomes only."""
         failed = failed or {}
         state = {'restore': {'outcome': 'success', 'outputs.candidate_id': restored}}
@@ -311,7 +421,7 @@ class WorkflowContracts(unittest.TestCase):
         successful = True; ran = []; durable = []; publication_barriers = []
         for step in steps[after_restore:]:
             key = step.get('id', 'candidate-upload')
-            if not self.correction_step_enabled(step, state, successful):
+            if not self.correction_step_enabled(step, state, successful, stage):
                 state[key] = {'outcome': 'skipped', 'outputs.candidate_id': ''}
                 continue
             ran.append(key)
@@ -324,6 +434,25 @@ class WorkflowContracts(unittest.TestCase):
                 durable.append(key)
             successful = successful and outcome not in ('failure', 'cancelled')
         return {'state': state, 'ran': ran, 'durable': durable, 'barriers': publication_barriers}
+
+    def test_projection_path_cannot_generate_and_preserves_receipt_publication_barrier(self):
+        job = self.jobs['catalog-correction']
+        self.assertIn("needs.plan.outputs.stage == 'catalog-projection'", job['if'])
+        self.assertEqual(job['env']['RECOVERY_STAGE'], '${{ needs.plan.outputs.stage }}')
+        restore = next(s for s in job['steps'] if s.get('id') == 'restore')
+        self.assertIn('verify-projection --bundle', restore['run'])
+        for failed in (None, 'recover', 'recovery-provenance', 'candidate-upload'):
+            for outcome in ('failure', 'cancelled'):
+                with self.subTest(failed=failed, outcome=outcome):
+                    attempt = self.correction_attempt(stage='catalog-projection', failed={failed: outcome} if failed else {})
+                    self.assertNotIn('persist', attempt['ran'])
+                    for prior in attempt['barriers']: self.assertIn('recovery-provenance', prior)
+                    if failed in ('recover', 'recovery-provenance'):
+                        self.assertNotIn('candidate-upload', attempt['ran'])
+        no_result = self.correction_attempt(stage='catalog-projection', failed={'recover': 'skipped'}, recovery_candidate='')
+        self.assertEqual(no_result['ran'], ['recover'])
+        restored = self.correction_attempt(stage='catalog-projection', restored='a'*64)
+        self.assertEqual(restored['ran'], [])
 
     def test_recovered_candidate_requires_successful_prior_receipt_in_failure_cancel_matrix(self):
         for failed_step in (None, 'recover', 'recovery-provenance', 'candidate-upload'):

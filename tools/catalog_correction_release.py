@@ -416,7 +416,12 @@ def correction_completion(root, *, api=smoke.existing.api):
         fixed = manifest.get('source_correction', {})
         if fixed.get('version') != source.VERSION or fixed.get('source_plan_sha256') != smoke.existing.sha(source.CONFIG.read_bytes()):
             continue
-        if manifest.get('derived_from_candidate') != source.plan()['candidate_id']:
+        if 'projection_recovery' in manifest:
+            # Only the fixed derived manifest can complete this operation. Its
+            # immediate parent remains the recovered source-correction candidate.
+            from tools.catalog_projection_recovery import verify_manifest
+            verify_manifest(manifest)
+        elif manifest.get('derived_from_candidate') != source.plan()['candidate_id']:
             continue  # Ordinary descendants retain audit lineage, not the finite repair operation.
         candidate = manifest['candidate_id']
         if candidate in seen: continue
@@ -469,12 +474,15 @@ def mode(bundle):
 
 def plan():
     requested = os.environ.get('REQUESTED_STAGE', '')
-    if requested == 'catalog-correction':
+    if requested in ('catalog-correction', 'catalog-projection'):
         refresh_environment()
-        require(not any(os.environ.get(k) for k in ('CANDIDATE_ID', 'CANDIDATE_RUN'))
+        require(not any(os.environ.get(k) for k in ('CANDIDATE_ID', 'CANDIDATE_RUN', 'RECEIPT_RUN',
+            'PUBLICATION_RUN', 'PUBLICATION_ATTEMPT'))
             and os.environ.get('QUALIFICATION_PILOT') != 'true', 'fixed_correction_selector')
-        value = {'stage': 'catalog-correction', 'release_sha': release.git(ROOT, 'rev-parse', 'HEAD'),
-            'openai': 'false', 'anthropic': 'false', 'reason': 'Exact retained source repair and seven accepted owner vectors'}
+        value = {'stage': requested, 'release_sha': release.git(ROOT, 'rev-parse', 'HEAD'),
+            'openai': 'false', 'anthropic': 'false', 'reason':
+            'Exact five-file projection derivation from the complete retained candidate; zero generation'
+            if requested == 'catalog-projection' else 'Exact retained source repair and seven accepted owner vectors'}
     elif requested in ('validate', 'publish', 'verify') or correction_complete(ROOT):
         from tools.plan_release import main
         return main()
@@ -485,19 +493,34 @@ def plan():
     atomic_json(Path(os.environ['RUNNER_TEMP'])/'release-plan.json', value); output(value)
 
 
+def recover_candidate(bundle, reports):
+    refresh_environment()
+    stage = os.environ.get('RECOVERY_STAGE', 'catalog-correction')
+    require(stage in ('catalog-correction', 'catalog-projection'), 'fixed_recovery_selector')
+    if stage == 'catalog-projection':
+        from tools.catalog_projection_recovery import repair
+        result = repair(bundle, reports)
+    else:
+        from tools.catalog_candidate_recovery import recover
+        result = recover(bundle, reports)
+    output({'candidate_id': result['candidate_id']})
+    return result
+
+
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument('action', choices=('plan', 'create', 'recover-candidate', 'context', 'plan-smoke', 'run-smoke', 'reuse-smoke', 'verify-worker', 'mode'))
+    parser.add_argument('action', choices=('plan', 'create', 'recover-candidate', 'verify-projection', 'context', 'plan-smoke', 'run-smoke', 'reuse-smoke', 'verify-worker', 'mode'))
     parser.add_argument('--work', type=Path); parser.add_argument('--bundle', type=Path); parser.add_argument('--reports', type=Path)
     parser.add_argument('--name', choices=smoke.NAMES)
     args = parser.parse_args()
     if args.action == 'plan': return plan()
     if args.action == 'mode': return mode(args.bundle)
     if args.action == 'recover-candidate':
+        result = recover_candidate(args.bundle, args.reports)
+    elif args.action == 'verify-projection':
         refresh_environment()
-        from tools.catalog_candidate_recovery import recover
-        result = recover(args.bundle, args.reports)
-        output({'candidate_id': result['candidate_id']})
+        from tools.catalog_projection_recovery import verify_candidate
+        result = verify_candidate(args.bundle)
     elif args.action == 'create': result = create(args.work, args.bundle)
     elif args.action == 'context': result = context(args.work, args.bundle, args.reports)
     elif args.action == 'plan-smoke': result = plan_smoke(args.name, args.work, args.bundle, args.reports)

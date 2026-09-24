@@ -319,9 +319,14 @@ def validate_context_packet(context, candidate_root, export_root, state, inputs)
     from scripts.sources.merge import load_catalog
     from tools.offline_spend import encoded
     candidate_root, export_root, inputs = Path(candidate_root), Path(export_root), Path(inputs)
+    candidate = release.load(candidate_root, context['candidate']['candidate_id'])
+    projection = None
+    if 'projection_recovery' in candidate:
+        from tools.catalog_projection_recovery import verify_candidate
+        projection = verify_candidate(candidate_root, root=ROOT)
+        require(encoded(projection['manifest']) == encoded(candidate), 'exact_verified_projection_candidate')
     prepared = verify_inputs(inputs); p = plan()
     exported = verify_export(export_root, state, inputs)
-    candidate = release.load(candidate_root, context['candidate']['candidate_id'])
     require(context['version'] == 'catalog-correction-smoke-context-v1'
             and context['source_plan_sha256'] == sha(CONFIG.read_bytes())
             and context['candidate']['manifest_sha256'] == sha((candidate_root / 'candidate.json').read_bytes())
@@ -341,10 +346,15 @@ def validate_context_packet(context, candidate_root, export_root, state, inputs)
     changed_generated = {k for k, v in original['generation_files'].items() if candidate['files'].get(k) != v}
     allowed = VECTOR_FILES | {'data/opportunities.js', 'data/catalog-metadata.js', 'data/source_records.json',
         'README.md', 'PROJECT.md', 'evaluation/release_coverage.json'} | {k for k in original['files'] if k.startswith('feeds/')}
+    if projection is not None:
+        allowed.add('data/document_evidence.json')
     require(changed_generated <= allowed, 'unaffected_generation_retained')
     require(all(candidate['files'][name] == exported['files'][name] for name in VECTOR_FILES), 'exact_owned_vector_export')
     files = candidate_root / 'files'
-    require(load_catalog(files / 'data/opportunities.js') == public_catalog(json.loads((inputs / 'corrected-catalog.json').read_bytes()))
+    catalog_matches = (sha((files / 'data/opportunities.js').read_bytes())
+        == projection['manifest']['files']['data/opportunities.js'] if projection is not None else
+        load_catalog(files / 'data/opportunities.js') == public_catalog(json.loads((inputs / 'corrected-catalog.json').read_bytes())))
+    require(catalog_matches
             and json.loads((files / 'data/source_records.json').read_bytes()) == json.loads((inputs / 'corrected-source-cache.json').read_bytes()), 'complete_corrected_public_sources')
     allowlist = json.loads((files / 'workers/search-voyage-proxy/generated/corpus-allowlist.json').read_bytes())
     require(context['generations'] == {'current': allowlist['current'], 'previous': allowlist['previous']}
