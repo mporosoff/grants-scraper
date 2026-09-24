@@ -416,7 +416,12 @@ def correction_completion(root, *, api=smoke.existing.api):
         fixed = manifest.get('source_correction', {})
         if fixed.get('version') != source.VERSION or fixed.get('source_plan_sha256') != smoke.existing.sha(source.CONFIG.read_bytes()):
             continue
-        if manifest.get('derived_from_candidate') != source.plan()['candidate_id']:
+        if 'projection_recovery' in manifest:
+            # Only the fixed derived manifest can complete this operation. Its
+            # immediate parent remains the recovered source-correction candidate.
+            from tools.catalog_projection_recovery import verify_manifest
+            verify_manifest(manifest)
+        elif manifest.get('derived_from_candidate') != source.plan()['candidate_id']:
             continue  # Ordinary descendants retain audit lineage, not the finite repair operation.
         candidate = manifest['candidate_id']
         if candidate in seen: continue

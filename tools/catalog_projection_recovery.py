@@ -111,19 +111,31 @@ def _exact_inventory(bundle, manifest):
     require(actual == {release.MANIFEST} | {'files/' + p for p in manifest['files']}, 'complete_safe_inventory')
 
 
-def verify_candidate(bundle, *, root=ROOT):
-    """Pure, fixed-identity verification for downstream context consumers."""
-    spec = plan(); bundle = Path(bundle)
-    raw = (bundle / release.MANIFEST).read_bytes()
-    require(release.digest(raw) == spec['manifest_sha256'], 'derived_manifest_bytes')
-    manifest = release.load(bundle, spec['candidate_id'])
+def verify_manifest(manifest):
+    """Verify the one pinned manifest without claiming its payload files exist."""
+    spec = plan()
+    require(isinstance(manifest, dict)
+            and release.digest(release.encoded(manifest)) == spec['manifest_sha256'], 'derived_manifest_identity')
+    require(manifest.get('candidate_id') == spec['candidate_id']
+            == release.digest(release.encoded({key: value for key, value in manifest.items() if key != 'candidate_id'}))
+            and manifest.get('schema_version') == 1 and manifest.get('candidate_format') == release.VERSION,
+            'canonical_candidate_identity')
     require(manifest['files'] == spec['expected_files'], 'all_expected_payloads')
-    _exact_inventory(bundle, manifest)
     parent = parent_manifest(manifest, spec)
     require(release.digest(release.encoded(parent)) == spec['parent']['canonical_manifest_sha256'],
             'parent_manifest_reconstructed')
     return {'candidate_id': manifest['candidate_id'], 'parent_candidate_id': parent['candidate_id'],
             'manifest': manifest, 'parent_manifest': parent, 'derivation': manifest['projection_recovery']}
+
+
+def verify_candidate(bundle, *, root=ROOT):
+    """Verify fixed manifest identity and every actual candidate payload byte."""
+    spec = plan(); bundle = Path(bundle)
+    raw = (bundle / release.MANIFEST).read_bytes()
+    require(release.digest(raw) == spec['manifest_sha256'], 'derived_manifest_bytes')
+    manifest = release.load(bundle, spec['candidate_id'])
+    _exact_inventory(bundle, manifest)
+    return verify_manifest(manifest)
 
 
 def _prior_cache(root, spec):

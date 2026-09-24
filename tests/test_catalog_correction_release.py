@@ -262,6 +262,86 @@ class PlanningAndIsolation(unittest.TestCase):
                     bridge.authenticate_report_files(root, 'live', 'a'*64, api=api)
 
 
+class ProjectionCompletion(unittest.TestCase):
+    def setUp(self):
+        from tests.test_catalog_projection_recovery import ProjectionFixture
+        self.f = ProjectionFixture(); self.addCleanup(self.f.close)
+        fixed = {'version': bridge.source.VERSION,
+            'source_plan_sha256': bridge.smoke.existing.sha(bridge.source.CONFIG.read_bytes()),
+            'spending_plan_sha256': bridge.policy.PLAN_SHA,
+            'original_candidate_id': bridge.source.plan()['candidate_id']}
+        self.f.parent['source_correction'] = fixed
+        self.f.parent.pop('candidate_id')
+        self.f.parent['candidate_id'] = bridge.release.digest(bridge.release.encoded(self.f.parent))
+        self.f.parent_raw = bridge.release.encoded(self.f.parent)
+        self.f.spec['parent'].update(candidate_id=self.f.parent['candidate_id'],
+            manifest_sha256=bridge.release.digest(self.f.parent_raw),
+            canonical_manifest_sha256=bridge.release.digest(self.f.parent_raw))
+        self.f.parent_entries[0] = ('candidate.json', self.f.parent_raw)
+        self.f.refresh_archives()
+        self.manifest = self.f.derived
+        self.publication = {'pages_complete': True}
+        self.live = {'candidate_id': self.manifest['candidate_id'], 'verified': True, 'provider_smoke': 'success'}
+        self.history = self.f.stack.enter_context(patch.object(bridge, 'protected_candidates', return_value=[self.manifest]))
+        self.reports = self.f.stack.enter_context(patch('tools.plan_release.latest_report', side_effect=self.report))
+        self.f.stack.enter_context(patch('tools.plan_release.publication_ready', side_effect=lambda m, p: bool(p and p['pages_complete'])))
+        self.auth = self.f.stack.enter_context(patch.object(bridge, 'authenticate_report_files'))
+        self.owned = self.f.stack.enter_context(patch.object(bridge, 'historical_smoke'))
+
+    def report(self, repo, candidate, kind, destination):
+        self.assertEqual(candidate, self.manifest['candidate_id'])
+        if kind == 'live':
+            atomic_json(Path(destination)/'15/catalog-smoke-reuse.json', {'historical': True})
+            return '11', self.live
+        return '10', self.publication
+
+    def test_exact_projection_completes_without_parent_publication_and_unblocks_auto(self):
+        self.assertNotEqual(self.manifest['derived_from_candidate'], bridge.source.plan()['candidate_id'])
+        self.assertEqual(bridge.correction_completion('root'), self.manifest)
+        self.assertEqual(self.auth.call_count, 2)
+        self.owned.assert_called_once()
+        self.assertEqual(self.owned.call_args.args[0], self.manifest)
+        with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}, clear=True), patch('tools.plan_release.main') as ordinary:
+            bridge.plan(); ordinary.assert_called_once()
+
+    def test_projection_cannot_complete_without_publication_live_and_owned_evidence(self):
+        self.publication['pages_complete'] = False
+        self.assertFalse(bridge.correction_complete('root')); self.owned.assert_not_called()
+        self.publication['pages_complete'] = True; self.live['verified'] = False
+        self.assertFalse(bridge.correction_complete('root')); self.owned.assert_not_called()
+        self.live['verified'] = True; self.live['provider_smoke'] = 'failed'
+        with self.assertRaisesRegex(ConfigurationFailure, 'complete_live_smoke_receipt'): bridge.correction_complete('root')
+        self.live['provider_smoke'] = 'success'
+        self.auth.side_effect = ValueError('forged report')
+        with self.assertRaisesRegex(ValueError, 'forged report'): bridge.correction_complete('root')
+        self.owned.assert_not_called(); self.auth.side_effect = None
+        self.owned.side_effect = ValueError('missing owned operation')
+        with self.assertRaisesRegex(ValueError, 'missing owned operation'): bridge.correction_complete('root')
+
+    def test_forged_or_removed_projection_metadata_cannot_mint_completion(self):
+        for value in (None, {'untrusted': True}):
+            changed = deepcopy(self.manifest); changed['projection_recovery'] = value
+            changed.pop('candidate_id'); changed['candidate_id'] = bridge.release.digest(bridge.release.encoded(changed))
+            self.history.return_value = [changed]
+            with self.assertRaisesRegex(ConfigurationFailure, 'projection_recovery_'): bridge.correction_complete('root')
+        changed = deepcopy(self.manifest); changed.pop('projection_recovery')
+        changed.pop('candidate_id'); changed['candidate_id'] = bridge.release.digest(bridge.release.encoded(changed))
+        self.history.return_value = [changed]
+        self.assertFalse(bridge.correction_complete('root')); self.reports.assert_not_called()
+
+    def test_completed_projection_stays_owned_and_only_proven_descendants_resume(self):
+        child = {'candidate_id': '9'*64, 'source_correction': deepcopy(self.manifest['source_correction']),
+            'derived_from_candidate': self.manifest['candidate_id']}
+        self.history.return_value = [child, self.manifest]
+        with patch.object(bridge.release, 'load', return_value=self.manifest) as load:
+            self.assertTrue(bridge.requires_owned_smoke('bundle'))
+            load.return_value = child
+            self.assertFalse(bridge.requires_owned_smoke('bundle'))
+            child['derived_from_candidate'] = '8'*64
+            with self.assertRaisesRegex(ConfigurationFailure, 'unproven_correction_descendant|protected_correction_descendant'):
+                bridge.requires_owned_smoke('bundle')
+
+
 class WorkflowContracts(unittest.TestCase):
     @classmethod
     def setUpClass(cls):

@@ -252,6 +252,44 @@ class ProjectionRecoveryContracts(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'Candidate bytes differ'):
             recovery.verify_candidate(self.f.bundle)
 
+    def test_pure_manifest_verifies_exact_lineage_without_bundle_or_mutation(self):
+        original = deepcopy(self.f.derived)
+        self.assertFalse(self.f.bundle.exists())
+        verified = recovery.verify_manifest(self.f.derived)
+        self.assertEqual(verified['candidate_id'], self.f.spec['candidate_id'])
+        self.assertEqual(verified['parent_manifest'], self.f.parent)
+        self.assertEqual(verified['derivation'], recovery.derivation(self.f.spec))
+        self.assertEqual(len(verified['manifest']['files']), 126)
+        self.assertEqual(self.f.derived, original)
+        self.f.api.assert_not_called(); self.f.transform.assert_not_called()
+
+    def test_pure_manifest_rejects_resealed_payload_parent_and_provenance_changes(self):
+        for kind in ('payload', 'parent', 'source', 'derivation', 'extra'):
+            with self.subTest(kind=kind):
+                changed = deepcopy(self.f.derived)
+                if kind == 'payload': changed['files']['data/retained-000.json'] = '0'*64
+                elif kind == 'parent': changed['derived_from_candidate'] = '0'*64
+                elif kind == 'source': changed['source_correction']['export_sha256'] = '0'*64
+                elif kind == 'derivation': changed['projection_recovery']['provider_requests'] = 1
+                else: changed['extra'] = 'caller-minted metadata'
+                changed.pop('candidate_id'); changed['candidate_id'] = sha(encode(changed))
+                with self.assertRaisesRegex(ConfigurationFailure, 'derived_manifest_identity'):
+                    recovery.verify_manifest(changed)
+        self.f.api.assert_not_called(); self.f.transform.assert_not_called()
+
+    def test_pure_manifest_enforces_canonical_candidate_and_complete_hash_inventory(self):
+        for kind in ('identity', 'inventory'):
+            with self.subTest(kind=kind):
+                changed = deepcopy(self.f.derived); spec = deepcopy(self.f.spec)
+                if kind == 'identity': changed['candidate_id'] = '0'*64
+                else:
+                    changed['files'].pop('data/retained-000.json')
+                    changed.pop('candidate_id'); changed['candidate_id'] = sha(encode(changed))
+                spec['candidate_id'] = changed['candidate_id']; spec['manifest_sha256'] = sha(encode(changed))
+                with patch.object(recovery, 'plan', return_value=spec), self.assertRaisesRegex(
+                        ConfigurationFailure, 'canonical_candidate_identity|all_expected_payloads'):
+                    recovery.verify_manifest(changed)
+
     def test_replay_or_existing_receipt_is_never_overwritten(self):
         self.f.repair(); before = (self.f.reports/'recovery.json').read_bytes()
         calls = self.f.api.call_count
