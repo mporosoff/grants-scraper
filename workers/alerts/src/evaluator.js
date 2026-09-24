@@ -278,7 +278,8 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
     ? assets.matcher.matchDetails(definition, asOf, matchingIds)
     : new Map([...assets.matcher.matchIds(definition, asOf, matchingIds)].map(id => [id, { reasons: [] }]));
   const qualificationIds = id => identities.family(id)
-    ? [id, ...identities.family(id).notices.map(notice => notice[0])] : identities.ids(id);
+    ? [...new Set([id, ...identities.ids(id), ...identities.family(id).notices.map(notice => notice[0])])]
+    : identities.ids(id);
   const prior = await store.qualifications(subscription.id, [...new Set(changedIds.flatMap(qualificationIds))]);
   let matched = 0;
   for (const id of changedIds) {

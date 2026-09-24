@@ -276,6 +276,17 @@ test("MURI deduplication outlives delivery retention and a temporary loss of Str
   assert.equal(first.database.prepare("SELECT qualified FROM subscription_qualifications WHERE opportunity_id='call:dod-muri-fy2027'").get().qualified, 1);
 });
 
+test("MURI canonical arrival preserves the qualification of an authoritative retained source alias", async () => {
+  const records = muriAlertFixtures();
+  const alias = "vpr-email:retained-muri-alias";
+  records[0].source_aliases = [{ opportunity_id: alias }];
+  const { result, database } = await evaluateAlertFixture({ records,
+    changes: [newAlertSourceEvent(records[0], "canonical-arrival")], qualificationIds: [alias] });
+  assert.equal(result.matchedEventCount, 0);
+  assert.equal(all(database, "SELECT * FROM notification_events").length, 0);
+  assert.equal(database.prepare("SELECT qualified FROM subscription_qualifications WHERE opportunity_id='call:dod-muri-fy2027'").get().qualified, 1);
+});
+
 test("MURI queue recovery and concurrent evaluators cannot enqueue a second annual-call message", async () => {
   const records = muriAlertFixtures();
   const database = databaseThrough();
