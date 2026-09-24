@@ -1,5 +1,5 @@
 {
-  "version": "selected-opportunity-context-v1",
+  "version": "selected-opportunity-context-v2",
   "files": {
     "assets/funded-awards.js": "387f0090ea852dc5cb36043842ec3c2ba95d87961bd26ac5ced44b819ba91a13",
     "assets/institutional-intelligence-core.js": "2524fa5397c41be32fdc5a938b835fe21f21d89e55443b9a56157e364a34f695"
@@ -11,15 +11,15 @@
       "applyFormState": "144bba058d990c3ffb359bb4768bd25d9395e7987efaff56480780df8ac750d5",
       "hasSearchState": "1e4e489a81760d909764db901e974175e703ba196cc96675e87e9570fbe00261",
       "renderSelectedOpportunity": "131ce3bfebc78e607867afbaf2f7b0e04c0613493a26cb3775ed455e15eaea9d",
-      "renderPage": "3ed459d179c7ca35c14808cc24484e3a544a4eda3312b7ae8616275018de2b22",
+      "renderPage": "6caa1f0197749935f86244094962023a999f5efeb8de1cc1347b7f34b124350b",
       "rememberSelectedSnapshot": "0cfe3d9e456b64b43a3ee617d919ca050030f49f7ec7e97e784d223267583d5b",
       "selectedSnapshotPage": "b502f3a37f7e24f37eb8f0b8c6c7de9ab6b72f14b524c1aae6d7d49d02471423",
       "requestSnapshotPage": "50cfdcb0dcbb23b8623b7279077106de939a292087f10a160728d82dd7485c9c",
       "stagedSnapshotResult": "d9eeb3fb9bc5a72ff5e583d79a9534ef60fea3ae6873bb287814be766778961c",
       "preparedSnapshotSearch": "c99352994d0cfeee81acc3fdcba22cdcfd6e9e72ecb2b19838c52a9f14542486",
-      "runSearch": "0541481e2da1015cd766bc49b96a3d4db649cf8d8e59d9814a1d90c1a683e296",
+      "runSearch": "d56cd9e5da7da0fd401838720ba4d6cace215a7f3a6e46310c44386219afc68d",
       "stagedSourceRetry": "09e8a6ae67fb5ddc4fba3d18dba82f667e5da6c404ce669ba14ab6a7e62bb3de",
-      "resetResultState": "962007cce39bde6a5bb629d3ccf168e1f5888fc3e105737f008809e24330eb7b",
+      "resetResultState": "d4f6713b94452551be6a0465efa691700c2ed7dafa8e3b9957f86e55e8e722c0",
       "clearSearch": "961afb981a0c5c00f1ed2820a2a4803caf1cc4811b945bdb9f8d2876b90b4992",
       "bindEvents": "26dda700d737bb8a26661c4930d05d7784c5dde9b6496d9fbae00387bb4a3f69",
       "initialize": "72db5f50d828c72d17ada4c5137a00a0e96b95bb965e5cb19331910254e021a8"
