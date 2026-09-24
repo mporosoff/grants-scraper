@@ -10,7 +10,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, catalog-correction, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-correction, catalog-projection, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -581,13 +581,14 @@ jobs:
 
   catalog-correction:
     needs: plan
-    if: needs.plan.outputs.stage == 'catalog-correction'
+    if: needs.plan.outputs.stage == 'catalog-correction' || needs.plan.outputs.stage == 'catalog-projection'
     runs-on: ubuntu-latest
     timeout-minutes: 25
     outputs:
       candidate_id: ${{ steps.restore.outputs.candidate_id || steps.recover.outputs.candidate_id || steps.persist.outputs.candidate_id }}
     env:
       GH_TOKEN: ${{ github.token }}
+      RECOVERY_STAGE: ${{ needs.plan.outputs.stage }}
     steps:
       - uses: actions/checkout@v6
         with:
@@ -596,7 +597,11 @@ jobs:
       - uses: ./.github/actions/release-setup
       - name: Restore this logical run's exact completed candidate
         id: restore
-        run: python -m tools.restore_generation_checkpoint
+        run: |
+          python -m tools.restore_generation_checkpoint
+          if [[ "$RECOVERY_STAGE" == 'catalog-projection' && -f "$RUNNER_TEMP/candidate/candidate.json" ]]; then
+            python -m tools.catalog_correction_release verify-projection --bundle "$RUNNER_TEMP/candidate"
+          fi
       - name: Recover the exact retained candidate without repeating generation
         id: recover
         if: steps.restore.outputs.candidate_id == ''
@@ -605,7 +610,7 @@ jobs:
           --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/catalog-recovery"
       - name: Import the authenticated seven-vector export and retain original generation
         id: persist
-        if: steps.restore.outputs.candidate_id == '' && steps.recover.outputs.candidate_id == ''
+        if: env.RECOVERY_STAGE == 'catalog-correction' && steps.restore.outputs.candidate_id == '' && steps.recover.outputs.candidate_id == ''
         run: >-
           python -m tools.catalog_correction_release create
           --work "$RUNNER_TEMP/catalog-correction" --bundle "$RUNNER_TEMP/candidate"
@@ -1036,7 +1041,7 @@ jobs:
             const needs = JSON.parse(process.env.RESULTS);
             const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'validate', 'publish', 'verify']);
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'catalog-projection', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
             const originalStage = stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
             let candidate = needs.candidate.outputs.candidate_id;
