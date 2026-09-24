@@ -656,3 +656,160 @@ test("result completeness is explained in one compact, plain-language status blo
   assert.match(appSource, /setStatus\("Opened the shared results from this link\."\)/);
   assert.doesNotMatch(appSource, /Restored the shared result snapshot|safety-bounded ·|normalized awards available|exact source total/);
 });
+
+
+function snapshotStatusController() {
+  const section = (start, end) => {
+    const first = appSource.indexOf(start), last = appSource.indexOf(end, first + start.length);
+    assert.ok(first >= 0 && last > first);
+    return appSource.slice(first, last);
+  };
+  const nodes = new Map();
+  const $ = id => {
+    if (!nodes.has(id)) {
+      const classes = new Set();
+      nodes.set(id, { value: "", textContent: "", innerHTML: "", disabled: false,
+        classList: { add: (...names) => names.forEach(name => classes.add(name)),
+          remove: (...names) => names.forEach(name => classes.delete(name)), contains: name => classes.has(name),
+          toggle: (name, enabled = !classes.has(name)) => enabled ? classes.add(name) : classes.delete(name) },
+        setAttribute() {}, focus() {}, scrollIntoView() {}, querySelector() { return null; } });
+    }
+    return nodes.get(id);
+  };
+  const payload = (id, total, complete) => ({
+    snapshot_id: id.repeat(64), completeness: complete ? "complete" : "partial",
+    exact_total: complete ? total : null, at_least: total, mode: "institution",
+    as_of: "2026-09-24T01:00:00Z", expires_at: "2026-09-24T02:00:00Z",
+    sources: [{ source: "NSF", status: complete ? "complete" : "safety_bounded", result_count: total }],
+    facet: { type: "all", key: "", label: "All awards" }, sort: "newest",
+    aggregate: { project_count: total, investigator_count: 1, institution_count: 1, program_count: 1,
+      year_start: 2026, year_end: 2026, investigators: [], institutions: [], programs: [] },
+    pagination: { page: 1, page_size: 10, start: 1, end: 10, page_count: complete ? Math.ceil(total / 10) : null,
+      available_page_count: Math.ceil(total / 10), has_previous: false, has_next: true },
+    batches: [{ source: "NSF", results: [{ source: "NSF", award_id: id + "-award", snapshot_position: 1 }] }],
+  });
+  const initial = payload("a", 297, false), rochester = payload("b", 31, true);
+  const snapshots = new Map([[initial.snapshot_id, initial], [rochester.snapshot_id, rochester]]);
+  const state = { sequence: 0, pageRequestSequence: 0, page: 1, pageSize: 10, sort: "newest",
+    facet: { type: "all", key: "" }, busyDepth: 0, historyRestoreDepth: 0,
+    residentAwards: new Map(), sourceOffsets: new Map(), sourceMessages: new Map(),
+    investigatorGroups: new Map(), programGroups: new Map(), institutionGroups: new Map() };
+  const callbacks = {};
+  const location = { search: "", protocol: "https:", href: "https://example.test/funded_awards.html" };
+  let pageFailure = null, pageGate = null, creates = 0, reads = 0;
+  const harness = {
+    $, state, core, awardProduct: sandbox.FUNDING_AWARD_PRODUCT, URL, URLSearchParams, AbortController,
+    Map, Date, Number, String, Boolean, location, api: { snapshotUrl: "https://example.test/snapshot" },
+    clean: value => String(value ?? ""), escapeHtml: value => String(value ?? ""), escapeAttribute: value => String(value ?? ""),
+    awardKey: award => `${award.source}:${award.award_id}`, awardCard: award => award.award_id,
+    absorbAwards() {}, renderQuestionAnswer() {}, clearQuestionState() {}, applyFormState() {},
+    rememberSelectedSnapshot() {}, formState: () => ({ agency: "NSF" }),
+    historyViewState: () => ({}), latestHistoryViewState: () => ({}), scheduleCurrentHistoryViewState() {},
+    syncUrl() {}, clearTimeout() {}, setSearchActivity() {},
+    setBusy: busy => { state.busyDepth += busy ? 1 : -1; }, requestAnimationFrame: callback => callback(),
+    window: { addEventListener: (name, callback) => { callbacks[name] = callback; }, scrollTo() {} },
+    hasSearchState: () => true,
+    postJson: async (_url, request) => { creates += 1; return request.criteria.institution ? rochester : initial; },
+    requestSnapshotPage: async ({ snapshotId, page = 1, facet = { type: "all", key: "" }, sort = "newest" }) => {
+      reads += 1;
+      const gate = pageGate; pageGate = null;
+      if (gate) await gate;
+      if (pageFailure) throw pageFailure;
+      const value = snapshots.get(snapshotId);
+      return { ...value, sort, facet: { ...facet, label: facet.type === "all" ? "All awards" : "Current program" },
+        pagination: { ...value.pagination, page, start: (page - 1) * 10 + 1,
+          end: Math.min(page * 10, value.at_least), has_previous: page > 1 } };
+    },
+  };
+  vm.createContext(harness);
+  const popstate = section('    window.addEventListener("popstate"', "  async function initialize(")
+    .replace(/\n  }\s*$/, "");
+  // Real search, staging, commit, rendering, recovery and history controllers;
+  // only the remote snapshot boundary and unrelated card details are fixtures.
+  vm.runInContext([
+    section("  function syncResultsNote(", "  function setSearchActivity("),
+    section("  function submittedCriteria(", "  function applyFormState("),
+    section("  function pageAwards(", "  function formatMoney("),
+    section("  function sourceStatusText(", "  function unavailableDodSource("),
+    section("  function stagedSnapshotResult(", "  async function requestSourceBatch("),
+    section("  function resetResultState(", "  function clearSearch("),
+    popstate,
+    "globalThis.controller = {runSearch, fetchPage, changeFacet, resetResultState, setStatus};",
+  ].join("\n"), harness);
+  const criteria = institution => ({ open: true, agency: "NSF", institution, program: "Catalysis", page_size: 10 });
+  return { state, element: $, initial, rochester, controller: harness.controller,
+    search: institution => harness.controller.runSearch({ resolveInstitution: false, searchState: criteria(institution) }),
+    async restore(value, institution = "") {
+      const url = core.urlForState(location.href, { ...criteria(institution), snapshot_id: value.snapshot_id, page: 1, facet_type: "all" });
+      location.href = url.href; location.search = url.search;
+      await callbacks.popstate({ state: {} });
+    },
+    failPage: value => { pageFailure = value; }, gatePage: value => { pageGate = value; },
+    counts: () => ({ creates, reads }),
+  };
+}
+
+test("committed snapshot status follows initial search, institution search, Back and Forward", async () => {
+  const app = snapshotStatusController();
+  await app.search("");
+  assert.match(app.element("ii-status").textContent, /^At least 297 matching awards/);
+  await app.search("University of Rochester");
+  assert.match(app.element("ii-status").textContent, /^31 matching awards/);
+  await app.restore(app.initial);
+  assert.equal(app.state.snapshot.snapshot_id, app.initial.snapshot_id);
+  assert.match(app.element("ii-status").textContent, /^At least 297 matching awards/);
+  assert.match(app.element("ii-result-scope").textContent, /at least 297 matching awards/);
+  assert.match(app.element("ii-source-status").innerHTML, /NSF: at least 297 awards/);
+  assert.equal(app.element("ii-awards").innerHTML, "a-award");
+  await app.restore(app.rochester, "University of Rochester");
+  assert.match(app.element("ii-status").textContent, /^31 matching awards/);
+  assert.match(app.element("ii-result-scope").textContent, /31 exact matching awards/);
+  assert.match(app.element("ii-source-status").innerHTML, /NSF: all 31 awards/);
+  assert.equal(app.element("ii-awards").innerHTML, "b-award");
+  assert.deepEqual(app.counts(), { creates: 2, reads: 4 }, "history reads existing snapshots without creating searches");
+});
+
+test("reset and successful restoration clear old errors while failed restoration reports its own error", async () => {
+  const app = snapshotStatusController();
+  await app.search("University of Rochester");
+  app.controller.setStatus("Previous request failed", true);
+  let release;
+  app.gatePage(new Promise(resolve => { release = resolve; }));
+  const restoring = app.restore(app.initial);
+  assert.equal(app.element("ii-status").textContent, "", "reset clears the old snapshot's transient note while loading");
+  assert.equal(app.element("ii-results-note").classList.contains("error-text"), false);
+  release(); await restoring;
+  assert.match(app.element("ii-status").textContent, /^At least 297/);
+  assert.equal(app.element("ii-status").classList.contains("error-text"), false);
+  app.failPage(new Error("The requested snapshot could not be loaded."));
+  await app.restore(app.rochester, "University of Rochester");
+  assert.equal(app.element("ii-status").textContent, "The requested snapshot could not be loaded.");
+  assert.equal(app.element("ii-results-note").classList.contains("error-text"), true);
+  app.failPage(null);
+  await app.restore(app.rochester, "University of Rochester");
+  assert.match(app.element("ii-status").textContent, /^31 matching awards/);
+  assert.equal(app.element("ii-results-note").classList.contains("error-text"), false);
+});
+
+test("page and sort commits refresh status, preserve facet messages and ignore stale page responses", async () => {
+  const app = snapshotStatusController();
+  await app.search("University of Rochester");
+  await app.controller.changeFacet("program", "NSF:current", { historyMode: "replace", focus: false });
+  assert.equal(app.element("ii-status").textContent, "Filtering these results by Current program.");
+  await app.controller.fetchPage({ page: 2, sort: "title", historyMode: "replace" });
+  assert.match(app.element("ii-status").textContent, /^31 matching awards/);
+  assert.match(app.element("ii-card-page-label").textContent, /Awards 11–20 of 31/);
+  assert.match(app.element("ii-result-scope").textContent, /ordered by title/);
+  let release;
+  app.gatePage(new Promise(resolve => { release = resolve; }));
+  const oldPage = app.controller.fetchPage({ page: 3 });
+  await app.controller.fetchPage({ page: 1, sort: "oldest" });
+  const committedNote = app.element("ii-status").textContent;
+  release();
+  assert.equal(await oldPage, null);
+  assert.equal(app.state.page, 1);
+  assert.equal(app.state.sort, "oldest");
+  assert.equal(app.element("ii-status").textContent, committedNote);
+  await app.controller.changeFacet("all", "", { historyMode: "replace", focus: false });
+  assert.equal(app.element("ii-status").textContent, "Showing all results.");
+});

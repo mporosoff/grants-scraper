@@ -6,6 +6,7 @@ import json
 import os
 from pathlib import Path
 import re
+import subprocess
 import tempfile
 import unittest
 from unittest.mock import Mock, patch
@@ -138,6 +139,12 @@ class DispatchContracts(unittest.TestCase):
 
 
 class PlanningAndIsolation(unittest.TestCase):
+    def setUp(self):
+        no_record = patch.object(bridge, 'completion_record', return_value=None)
+        no_record.start(); self.addCleanup(no_record.stop)
+        no_runtime = patch('tools.catalog_runtime_smoke_reuse.classify', return_value=None)
+        no_runtime.start(); self.addCleanup(no_runtime.stop)
+
     def test_projection_selector_is_manual_fixed_and_zero_generation(self):
         with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, ENV | {
                 'REQUESTED_STAGE': 'catalog-projection', 'RUNNER_TEMP': temp,
@@ -193,10 +200,10 @@ class PlanningAndIsolation(unittest.TestCase):
         fixed = {'source_correction': {'version': bridge.source.VERSION, 'source_plan_sha256': bridge.smoke.existing.sha(bridge.source.CONFIG.read_bytes()),
             'spending_plan_sha256': bridge.policy.PLAN_SHA}}
         with patch.object(bridge.release, 'load', return_value=fixed), patch.object(bridge, 'correction_completion', return_value=None):
-            self.assertEqual(bridge.mode('bundle'), {'fixed_correction': 'true'})
+            self.assertEqual(bridge.mode('bundle'), {'fixed_correction': 'true', 'zero_provider_descendant': 'false'})
             fixed['source_correction']['source_plan_sha256'] = 'a'*64
             with self.assertRaisesRegex(ConfigurationFailure, 'known_source_correction'): bridge.mode('bundle')
-        with patch.object(bridge.release, 'load', return_value={}): self.assertEqual(bridge.mode('bundle'), {'fixed_correction': 'false'})
+        with patch.object(bridge.release, 'load', return_value={}): self.assertEqual(bridge.mode('bundle'), {'fixed_correction': 'false', 'zero_provider_descendant': 'false'})
 
     def test_incomplete_correction_holds_auto_but_explicit_resume_is_allowed(self):
         with tempfile.TemporaryDirectory() as temp, patch.dict(os.environ, ENV | {'RUNNER_TEMP': temp, 'GITHUB_OUTPUT': str(Path(temp)/'outputs')}), \
@@ -212,7 +219,35 @@ class PlanningAndIsolation(unittest.TestCase):
     def test_completed_fixed_repair_restores_ordinary_planning(self):
         with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}), patch.object(bridge, 'correction_complete', return_value=True), \
                 patch('tools.plan_release.main') as ordinary:
-            bridge.plan(); ordinary.assert_called_once()
+            bridge.plan(); ordinary.assert_called_once_with(automatic_paid_hold=True)
+
+    def test_completed_finite_guard_constrains_outputs_before_any_paid_stage_is_exposed(self):
+        from tools import plan_release as planner
+        for event in ('push', 'schedule', 'workflow_dispatch'):
+            for stage in ('generate', 'teams', 'backfill', 'reuse', 'validate', 'noop'):
+                with self.subTest(event=event, stage=stage), tempfile.TemporaryDirectory() as temp:
+                    root = Path(temp); outputs = root/'outputs'
+                    environment = ENV | {'GITHUB_EVENT_NAME': event, 'REQUESTED_STAGE': 'auto',
+                        'RUNNER_TEMP': temp, 'GITHUB_OUTPUT': str(outputs), 'GITHUB_STEP_SUMMARY': str(root/'summary')}
+                    with patch.dict(os.environ, environment, clear=True), \
+                            patch.object(planner, 'pending_publication', return_value=None), \
+                            patch.object(planner, 'latest_report', return_value=('', None)), \
+                            patch.object(planner, 'plan', return_value={'stage': stage, 'release_sha': 'a'*40}) as decide, \
+                            patch('tools.team_provider.provider_names', return_value=('openai', 'anthropic')) as providers, \
+                            patch('sys.stdout', new=io.StringIO()):
+                        planner.main(automatic_paid_hold=True)
+                    value = json.loads((root/'release-plan.json').read_bytes())
+                    held = event != 'workflow_dispatch' and stage in ('generate', 'teams', 'backfill')
+                    self.assertEqual(value['stage'], 'noop' if held else stage)
+                    self.assertEqual('held_stage' in value, held)
+                    if held:
+                        self.assertEqual(value['held_stage'], stage)
+                        self.assertIn('keeps automatic paid', value['reason'])
+                    paid = not held and stage in ('generate', 'teams', 'backfill')
+                    self.assertEqual((value['openai'], value['anthropic']), ('true', 'true') if paid else ('false', 'false'))
+                    self.assertEqual(providers.call_count, int(paid)); decide.assert_called_once()
+                    lines = outputs.read_text().splitlines()
+                    self.assertEqual([line for line in lines if line.startswith('stage=')], ['stage='+value['stage']])
 
     def test_historical_completion_survives_a_new_ordinary_pointer_without_live_claim(self):
         old = {'derived_from_candidate': bridge.source.plan()['candidate_id'], 'source_correction': {'version': bridge.source.VERSION, 'source_plan_sha256': bridge.smoke.existing.sha(bridge.source.CONFIG.read_bytes()),
@@ -264,6 +299,10 @@ class PlanningAndIsolation(unittest.TestCase):
 
 class ProjectionCompletion(unittest.TestCase):
     def setUp(self):
+        no_record = patch.object(bridge, 'completion_record', return_value=None)
+        no_record.start(); self.addCleanup(no_record.stop)
+        no_runtime = patch('tools.catalog_runtime_smoke_reuse.classify', return_value=None)
+        no_runtime.start(); self.addCleanup(no_runtime.stop)
         from tests.test_catalog_projection_recovery import ProjectionFixture
         self.f = ProjectionFixture(); self.addCleanup(self.f.close)
         fixed = {'version': bridge.source.VERSION,
@@ -302,7 +341,7 @@ class ProjectionCompletion(unittest.TestCase):
         self.owned.assert_called_once()
         self.assertEqual(self.owned.call_args.args[0], self.manifest)
         with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}, clear=True), patch('tools.plan_release.main') as ordinary:
-            bridge.plan(); ordinary.assert_called_once()
+            bridge.plan(); ordinary.assert_called_once_with(automatic_paid_hold=True)
 
     def test_projection_cannot_complete_without_publication_live_and_owned_evidence(self):
         self.publication['pages_complete'] = False
@@ -340,6 +379,271 @@ class ProjectionCompletion(unittest.TestCase):
             child['derived_from_candidate'] = '8'*64
             with self.assertRaisesRegex(ConfigurationFailure, 'unproven_correction_descendant|protected_correction_descendant'):
                 bridge.requires_owned_smoke('bundle')
+
+
+class ProtectedCompletionRecord(unittest.TestCase):
+    """Synthetic protected Git history, actual projection identity validator, no API."""
+    def setUp(self):
+        self.real_create = bridge.release.create
+        no_runtime = patch('tools.catalog_runtime_smoke_reuse.classify', return_value=None)
+        no_runtime.start(); self.addCleanup(no_runtime.stop)
+        from tests.test_catalog_projection_recovery import ProjectionFixture
+        from tools import catalog_projection_recovery as projection
+        self.f = ProjectionFixture(); self.addCleanup(self.f.close)
+        self.root = self.f.root/'repo'; self.root.mkdir()
+        subprocess.run(['git', 'init', '-q', str(self.root)], check=True)
+        self.git('config', 'user.name', 'Synthetic contract')
+        self.git('config', 'user.email', 'contract@example.test')
+        self.git('config', 'core.autocrlf', 'false')
+        ignore = self.f.root/'empty-global-ignore'; ignore.write_bytes(b'')
+        self.git('config', 'core.excludesFile', str(ignore))
+        for module in (bridge.source, projection):
+            target = self.root/module.CONFIG.relative_to(module.ROOT)
+            target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(module.CONFIG.read_bytes())
+        self.base = self.commit()
+        self.f.parent['source_correction'] = {'version': bridge.source.VERSION,
+            'source_plan_sha256': bridge.release.digest(bridge.source.CONFIG.read_bytes()),
+            'spending_plan_sha256': bridge.policy.PLAN_SHA,
+            'original_candidate_id': bridge.source.plan()['candidate_id']}
+        self.f.parent.pop('candidate_id'); self.f.parent['candidate_id'] = bridge.release.digest(bridge.release.encoded(self.f.parent))
+        self.f.parent_raw = bridge.release.encoded(self.f.parent)
+        self.f.spec['parent'].update(candidate_id=self.f.parent['candidate_id'],
+            manifest_sha256=bridge.release.digest(self.f.parent_raw), canonical_manifest_sha256=bridge.release.digest(self.f.parent_raw))
+        self.f.parent_entries[0] = ('candidate.json', self.f.parent_raw); self.f.refresh_archives()
+        self.anchor = self.f.derived
+        self.publication = self.publish(self.anchor)
+        digest = lambda value: bridge.release.digest(bridge.release.encoded(value))
+        self.record = {'version': bridge.COMPLETION_VERSION,
+            'source': self.anchor['source_correction'] | {'source_correction_sha256': digest(self.anchor['source_correction']),
+                'original_generation_sha256': digest(self.anchor['original_generation'])},
+            'candidate': {'candidate_id': self.anchor['candidate_id'], 'manifest_sha256': digest(self.anchor),
+                'canonical_manifest_sha256': digest(self.anchor), 'projection_configuration_sha256': bridge.release.digest(projection.CONFIG.read_bytes()),
+                'projection_derivation_sha256': digest(self.anchor['projection_recovery']), 'artifact_run_id': 201,
+                'artifact_run_attempt': 1, 'artifact_head_sha': self.base, 'artifact_id': 202, 'artifact_sha256': 'a'*64},
+            'publication': {'commit': self.publication, 'pr': 293, 'reviewed_head': self.base, 'review_comment_id': 303,
+                'run_id': 201, 'run_attempt': 1, 'receipt_sha256': 'b'*64, 'artifact_id': 304, 'artifact_sha256': 'c'*64},
+            'validation': {'sha': self.base, 'receipt_sha256': 'd'*64, 'status': 'passed'},
+            'live': {'run_id': 201, 'run_attempt': 1, 'artifact_id': 305, 'artifact_sha256': 'e'*64,
+                'receipt_sha256': 'f'*64, 'pages': 'success', 'assets': 'success', 'provider_smoke': 'success',
+                'verified': True, 'worker_proof_sha256': '1'*64, 'completed_at': '2026-01-01T00:00:00Z'},
+            'owned_smoke': {'aggregate_sha256': '2'*64, 'reuse_receipt_sha256': '3'*64, 'owner_run_id': 306,
+                'owner_run_attempt': 1, 'owner_head_sha': self.base, 'state_artifact_id': 307, 'state_artifact_sha256': '4'*64,
+                'checkpoint_sha256': '5'*64, 'ledger_sha256': '6'*64,
+                'operations': [{'purpose': 'cb-fc-cat-'+name, 'request_id': str(i+1)*32,
+                    'body_sha256': str(i+1)*64, 'response_sha256': str(i+4)*64} for i, name in enumerate(bridge.smoke.NAMES)]}}
+        self.online = self.f.stack.enter_context(patch.object(bridge.smoke.existing, 'api', side_effect=AssertionError('No remote API')))
+        self.reports = self.f.stack.enter_context(patch('tools.plan_release.latest_report', side_effect=AssertionError('No historical artifacts')))
+
+    def git(self, *args):
+        return bridge.release.git(self.root, *args)
+
+    def commit(self):
+        self.git('add', '.')
+        self.git('commit', '-qm', 'Synthetic checkpoint')
+        return self.git('rev-parse', 'HEAD')
+
+    def publish(self, manifest):
+        atomic_json(self.root/'release/candidate.json', manifest)
+        atomic_json(self.root/'release/candidate-source.json', {'candidate_id': manifest['candidate_id'], 'artifact_run': '201'})
+        return self.commit()
+
+    def install(self, record=None):
+        atomic_json(self.root/bridge.COMPLETION_PATH, self.record if record is None else record)
+        return self.commit()
+
+    def descendant(self, parent, **updates):
+        result = deepcopy(parent); result.pop('candidate_id'); result.pop('projection_recovery', None)
+        assembly = updates.pop('assembly_sha', None) or self.git('rev-parse', 'HEAD')
+        result.update(derived_from_candidate=parent['candidate_id'], assembly_sha=assembly, **updates)
+        result['candidate_id'] = bridge.release.digest(bridge.release.encoded(result))
+        return result
+
+    def owned(self, manifest):
+        with patch.object(bridge.release, 'load', return_value=manifest):
+            return bridge.requires_owned_smoke('synthetic-bundle', root=self.root)
+
+    def test_real_git_projection_record_eliminates_only_historical_lookup(self):
+        self.install()
+        self.assertEqual(bridge.correction_completion(self.root), self.anchor)
+        self.assertTrue(self.owned(self.anchor))
+        self.reports.assert_not_called()
+        # A dirty unreviewed file cannot overwrite the admitted HEAD blob.
+        (self.root/bridge.COMPLETION_PATH).write_bytes(b'{}')
+        self.assertEqual(bridge.correction_completion(self.root), self.anchor)
+        self.assertNotIn('serving_version', bridge.completion_record(self.root)[0])
+
+    def test_absent_and_present_invalid_are_different(self):
+        self.assertIsNone(bridge.completion_record(self.root))
+        with patch.object(bridge, 'protected_candidates', return_value=[]):
+            self.assertFalse(bridge.correction_complete(self.root))
+        for changed in ({}, self.record | {'private_payload': 'forbidden'}, self.record | {'version': 'unknown'}):
+            with self.subTest(changed=changed.keys()):
+                self.install(changed)
+                with self.assertRaises(ConfigurationFailure): bridge.correction_completion(self.root)
+        self.reports.assert_not_called()
+
+    def test_closed_record_rejects_incomplete_wrong_plan_boolean_ids_and_forged_hashes(self):
+        mutations = [('source', 'spending_plan_sha256', '9'*64), ('candidate', 'manifest_sha256', '9'*64),
+            ('candidate', 'canonical_manifest_sha256', '9'*64), ('candidate', 'artifact_run_id', True),
+            ('candidate', 'artifact_head_sha', '9'*40), ('validation', 'status', 'failed'),
+            ('live', 'verified', 1), ('live', 'pages', 'skipped'), ('live', 'completed_at', 'not a date'),
+            ('live', 'run_id', 202), ('publication', 'commit', '9'*40)]
+        for section, name, value in mutations:
+            with self.subTest(section=section, name=name):
+                record = deepcopy(self.record); record[section][name] = value; self.install(record)
+                with self.assertRaises((ConfigurationFailure, subprocess.CalledProcessError)):
+                    bridge.correction_completion(self.root)
+        record = deepcopy(self.record); record['owned_smoke']['operations'][1]['request_id'] = record['owned_smoke']['operations'][0]['request_id']
+        self.install(record)
+        with self.assertRaisesRegex(ConfigurationFailure, 'distinct_owned'): bridge.correction_completion(self.root)
+        self.reports.assert_not_called()
+
+    def test_protected_pointer_must_match_its_colocated_manifest(self):
+        atomic_json(self.root/'release/candidate-source.json', {'candidate_id': '9'*64, 'artifact_run': '201'})
+        wrong = self.commit(); record = deepcopy(self.record); record['publication']['commit'] = wrong
+        self.install(record)
+        with self.assertRaisesRegex(ConfigurationFailure, 'protected_manifest_pointer'): bridge.correction_completion(self.root)
+
+    def test_rehashed_changed_projection_and_same_family_source_forgery_rejected(self):
+        changed = deepcopy(self.anchor); changed['generation_timestamp'] = '2026-01-02T00:00:00Z'
+        changed.pop('candidate_id'); changed['candidate_id'] = bridge.release.digest(bridge.release.encoded(changed))
+        wrong = self.publish(changed); record = deepcopy(self.record); record['publication']['commit'] = wrong
+        record['candidate']['candidate_id'] = changed['candidate_id']; self.install(record)
+        with self.assertRaisesRegex(ConfigurationFailure, 'projection_recovery_'): bridge.correction_completion(self.root)
+
+    def test_real_runtime_constructor_retains_origin_without_copying_projection_certificate(self):
+        from tests.test_release_candidate import CandidateLifecycleTests
+        fixture = CandidateLifecycleTests(); fixture.setUp(); self.addCleanup(fixture.doCleanups)
+        original = self.real_create(fixture.root, fixture.bundle, generation_sha=fixture.source_sha, run_id='123', attempt='1')
+        original['source_correction'] = deepcopy(self.anchor['source_correction'])
+        original['original_generation'] = deepcopy(self.anchor['original_generation'])
+        original['projection_recovery'] = {'synthetic_constructor_parent': True}
+        original.pop('candidate_id'); original['candidate_id'] = bridge.release.digest(bridge.release.encoded(original))
+        bridge.release.write_json(fixture.bundle/'candidate.json', original)
+        atomic_json(fixture.root/'release/candidate.json', original)
+        atomic_json(fixture.root/'release/candidate-source.json', {'candidate_id': original['candidate_id'], 'artifact_run': '201'})
+        fixture.commit(); publication = bridge.release.git(fixture.root, 'rev-parse', 'HEAD')
+        (fixture.root/'assets/app.css').write_text('main { color: blue; }')
+        fixture.commit()
+        child_bundle = fixture.root.parent/'runtime-child'
+        child = self.real_create(fixture.root, child_bundle, parent=fixture.bundle, run_id='202')
+        self.assertNotIn('projection_recovery', child)
+        self.assertEqual(child['source_correction'], original['source_correction'])
+        self.assertEqual(child['original_generation'], original['original_generation'])
+        record = deepcopy(self.record); record['publication']['commit'] = publication
+        with patch.object(bridge, 'completion_record', return_value=(record, original)), \
+                patch.object(bridge, 'correction_completion', return_value=original):
+            self.assertFalse(bridge.requires_owned_smoke(child_bundle, root=fixture.root))
+
+    def test_one_multiple_and_over_100_runtime_publications_keep_exact_ancestry(self):
+        self.install(); latest = self.anchor; wire = bytearray()
+        branch = self.git('symbolic-ref', 'HEAD'); prior = self.git('rev-parse', 'HEAD')
+        for i in range(103):
+            latest = self.descendant(latest, assembly_sha=self.publication, team_identity={'generation_id': 'synthetic-'+str(i)})
+            wire.extend(f'commit {branch}\nmark :{i+1}\ncommitter Contract <contract@example.test> {1700000000+i} +0000\ndata 9\nSynthetic\nfrom {prior}\n'.encode())
+            for name, value in [('release/candidate.json', latest), ('release/candidate-source.json',
+                    {'candidate_id': latest['candidate_id'], 'artifact_run': '201'})]:
+                raw = bridge.release.encoded(value)
+                wire.extend(f'M 100644 inline {name}\ndata {len(raw)}\n'.encode()+raw+b'\n')
+            wire.extend(b'\n'); prior = ':'+str(i+1)
+        subprocess.run(['git', '-C', str(self.root), 'fast-import', '--quiet'], input=wire, check=True,
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE)
+        self.git('read-tree', 'HEAD')
+        atomic_json(self.root/'release/candidate.json', latest)
+        atomic_json(self.root/'release/candidate-source.json', {'candidate_id': latest['candidate_id'], 'artifact_run': '201'})
+        self.assertGreater(len(list(bridge.protected_candidates(self.root, anchor_sha=self.publication))), 100)
+        self.assertFalse(self.owned(latest))
+        unpublished = self.descendant(latest)
+        self.assertFalse(self.owned(unpublished))
+        self.assertTrue(self.owned(self.anchor)); self.reports.assert_not_called()
+
+    def test_side_branch_parent_is_not_protected_publication_history(self):
+        self.install(); main = self.git('rev-parse', 'HEAD')
+        self.git('checkout', '-qb', 'unpublished-side')
+        side = self.descendant(self.anchor); self.publish(side)
+        self.git('checkout', '--detach', main)
+        child = self.descendant(side)
+        with self.assertRaisesRegex(ConfigurationFailure, 'protected_correction_descendant'): self.owned(child)
+        record = deepcopy(self.record); record['publication']['commit'] = self.git('rev-parse', 'unpublished-side')
+        self.install(record)
+        with self.assertRaisesRegex(ConfigurationFailure, 'protected_publication_ancestor'): bridge.correction_completion(self.root)
+
+    def test_unknown_parent_changed_lineage_or_copied_projection_never_ordinary(self):
+        self.install()
+        for changes, reason in [({'derived_from_candidate': '9'*64}, 'protected_correction_descendant'),
+                ({'original_generation': {}}, 'completed_generation_lineage'),
+                ({'projection_recovery': self.anchor['projection_recovery']}, 'completed_generation_lineage')]:
+            child = self.descendant(self.anchor)
+            child.update(changes); child.pop('candidate_id'); child['candidate_id'] = bridge.release.digest(bridge.release.encoded(child))
+            with self.subTest(reason=reason), self.assertRaisesRegex(ConfigurationFailure, reason): self.owned(child)
+        child = self.descendant(self.anchor); child['source_correction'] = dict(child['source_correction'], export_sha256='9'*64)
+        with self.assertRaisesRegex(ConfigurationFailure, 'same_completed_correction_lineage'): self.owned(child)
+        with patch.object(bridge.release, 'load', return_value={}): self.assertFalse(bridge.requires_owned_smoke('ordinary', root=self.root))
+
+
+class RuntimeCoverageRouting(unittest.TestCase):
+    def test_covered_target_cannot_enter_bare_or_dispatch_paths(self):
+        with patch('tools.catalog_runtime_smoke_reuse.classify', return_value={'synthetic': True}), \
+                patch.object(bridge, 'requires_owned_smoke') as ordinary:
+            self.assertEqual(bridge.mode('target'), {'fixed_correction': 'true', 'zero_provider_descendant': 'true'})
+            ordinary.assert_not_called()
+        with patch('tools.catalog_runtime_smoke_reuse.classify', side_effect=ValueError('unproved target')), \
+                patch.object(bridge, 'requires_owned_smoke') as ordinary:
+            with self.assertRaisesRegex(ValueError, 'unproved target'): bridge.mode('target')
+            ordinary.assert_not_called()
+
+    def test_fresh_worker_adapter_uses_explicit_retained_inputs_and_no_dispatch(self):
+        result = {'worker_live': {'verified': True, 'candidate': {'candidate_id': 'original'}}}
+        with patch('tools.catalog_runtime_smoke_reuse.classify', return_value={'synthetic': True}), \
+                patch('tools.catalog_runtime_smoke_reuse.reuse', return_value=result) as reuse, \
+                patch.object(bridge, 'prepared_inputs', return_value={'root': Path('exact-inputs')}) as inputs, \
+                patch.object(bridge, 'context') as context, patch.object(bridge, 'plan_smoke') as plan, \
+                patch.object(bridge, 'run_smoke') as dispatch:
+            self.assertEqual(bridge.verify_worker('target', 'reports', work='retained-work'), result['worker_live'])
+            self.assertEqual(reuse.call_args.kwargs['inputs'], Path('exact-inputs'))
+            inputs.assert_called_once_with(Path('retained-work'))
+            context.assert_not_called(); plan.assert_not_called(); dispatch.assert_not_called()
+            reuse.side_effect = ValueError('fresh proof failed')
+            with self.assertRaisesRegex(ValueError, 'fresh proof failed'): bridge.verify_worker('target', 'reports')
+            dispatch.assert_not_called()
+
+    def test_cli_reuse_preserves_helper_failure_without_original_candidate_fallback(self):
+        with patch('sys.argv', ['bridge', 'reuse-smoke', '--bundle', 'target', '--reports', 'reports', '--work', 'work']), \
+                patch('tools.catalog_runtime_smoke_reuse.classify', return_value={'synthetic': True}), \
+                patch('tools.catalog_runtime_smoke_reuse.reuse', side_effect=ValueError('missing accepted aggregate')) as reuse, \
+                patch.object(bridge, 'prepared_inputs', return_value={'root': Path('exact-inputs')}), \
+                patch.object(bridge.smoke, 'authenticate_owner') as old, patch.object(bridge.smoke, 'node') as node:
+            with self.assertRaisesRegex(ValueError, 'missing accepted aggregate'): bridge.main()
+            old.assert_not_called(); node.assert_not_called()
+            self.assertEqual(reuse.call_args.kwargs['inputs'], Path('exact-inputs'))
+
+    def test_actual_workflow_routes_covered_target_without_context_or_three_plans(self):
+        jobs = yaml.safe_load((bridge.ROOT/'.github/workflows/refresh-opportunities.yml').read_text())['jobs']
+        def enabled(step, values):
+            expression = step.get('if', '').removeprefix('${{').removesuffix('}}').strip()
+            expression = re.sub(r'steps\.([\w-]+)\.(outcome|outputs\.[\w_]+)',
+                lambda m: repr(values.get(m[1]+'.'+m[2], 'skipped' if m[2] == 'outcome' else '')), expression)
+            return bool(eval(expression.replace('&&', 'and').replace('||', 'or'), {'__builtins__': {}}, {}))
+        for covered in (True, False):
+            values = {'review.outputs.review_ready': 'true', 'accounting.outputs.fixed_correction': 'true',
+                'accounting.outputs.zero_provider_descendant': str(covered).lower()}
+            steps = jobs['publish']['steps']
+            context = next(s for s in steps if s.get('id') == 'smoke-context')
+            self.assertEqual(enabled(context, values), not covered)
+            values['smoke-context.outcome'] = 'skipped' if covered else 'success'
+            plans = [s for s in steps if 'catalog_correction_release plan-smoke ' in s.get('run', '')]
+            self.assertEqual(len(plans), 3)
+            for step in plans:
+                self.assertEqual(enabled(step, values), not covered)
+                values[step['id']+'.outcome'] = 'skipped' if covered else 'success'
+            dispatches = [s for s in steps if 'catalog_correction_release run-smoke ' in s.get('run', '')]
+            self.assertEqual(len(dispatches), 3)
+            for step in dispatches: self.assertEqual(enabled(step, values), not covered)
+            self.assertTrue(enabled(next(s for s in steps if s.get('id') == 'owned-provider'), values))
+            self.assertFalse(enabled(next(s for s in steps if s.get('run') == 'node tools/smoke_search_worker.mjs'), values))
+            live = jobs['verify-live']['steps']
+            self.assertTrue(enabled(next(s for s in live if s.get('id') == 'live-owned-provider'), values))
+            self.assertFalse(enabled(next(s for s in live if s.get('id') == 'live-provider'), values))
 
 
 class WorkflowContracts(unittest.TestCase):
@@ -572,12 +876,13 @@ class WorkflowContracts(unittest.TestCase):
         self.assertNotIn('CLOUDFLARE', json.dumps(retained)); self.assertNotIn('API_KEY', json.dumps(retained))
 
     def test_late_failure_receipt_preserves_proof_and_does_not_invent_unmerged_status(self):
+        from tools import catalog_runtime_smoke_reuse as runtime
         step = next(s for s in self.jobs['publish']['steps'] if s.get('id') == 'owned-worker-retained')
         script = step['run'].split("python - <<'PY'\n", 1)[1].rsplit('\nPY', 1)[0]
-        for merged in (False, True):
-            with self.subTest(merged=merged), tempfile.TemporaryDirectory() as temp:
-                root = Path(temp); reports = root/'reports'; manifest = {'candidate_id': 'a'*64}
-                worker = {'candidate': manifest, 'version_id': 'tested-version', 'checkpoint': {'activeDeploymentId': 'tested-deployment'}}
+        for merged, covered in ((False, False), (True, False), (False, True), (True, True)):
+            with self.subTest(merged=merged, covered=covered), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp); reports = root/'reports'; manifest = {'candidate_id': ('b' if covered else 'a')*64}
+                worker = {'candidate': {'candidate_id': 'a'*64}, 'version_id': 'tested-version', 'checkpoint': {'activeDeploymentId': 'tested-deployment'}}
                 smoke = {'status': 'passed_reused', 'original_provider_requests': 3, 'current_corpus_sha256': 'b'*64,
                     'previous_corpus_sha256': 'c'*64, 'model_space_fingerprint': 'd'*64, 'previous_model_space_fingerprint': 'e'*64,
                     'serving_version_id': worker['version_id'], 'receipt_sha256': 'f'*64,
@@ -586,10 +891,14 @@ class WorkflowContracts(unittest.TestCase):
                 atomic_json(reports/'catalog-smoke-reuse.json', smoke)
                 atomic_json(reports/'known-good-live-release.json', {'current_corpus_sha256': smoke['previous_corpus_sha256'],
                     'model_space_fingerprint': smoke['previous_model_space_fingerprint']})
+                if covered: atomic_json(reports/'runtime-smoke-coverage.json', {'target_candidate_id': manifest['candidate_id']})
                 if merged: atomic_json(reports/'publication-progress.json', manifest | {'protected_merge_completed': True, 'publication_sha': '2'*40})
                 prior = {p.name: p.read_bytes() for p in reports.iterdir()}
-                with patch.dict(os.environ, {'RUNNER_TEMP': temp, 'GITHUB_STEP_SUMMARY': str(root/'summary.md')}):
+                env = {'RUNNER_TEMP': temp, 'GITHUB_STEP_SUMMARY': str(root/'summary.md'), 'ZERO_PROVIDER_DESCENDANT': str(covered).lower()}
+                with patch.dict(os.environ, env), patch.object(runtime, 'validate_retention') as validate:
                     exec(compile(script, '<workflow-retention>', 'exec'), {})
+                if covered: validate.assert_called_once_with(root/'candidate', reports)
+                else: validate.assert_not_called()
                 result = json.loads((reports/'owned-worker-retained.json').read_bytes())
                 self.assertEqual(result['publication_status'], 'protected_merge_recorded_publication_incomplete' if merged else 'publication_unconfirmed')
                 self.assertEqual(result['retained_version_id'], worker['version_id'])
@@ -599,6 +908,19 @@ class WorkflowContracts(unittest.TestCase):
                 self.assertFalse(result['pages_publication_complete']); self.assertEqual(result['new_provider_calls'], 0)
                 self.assertFalse(result['worker_mutation_performed']); self.assertTrue(result['resume_requires_fresh_unchanged_serving_proof'])
                 self.assertEqual({p.name: p.read_bytes() for p in reports.iterdir() if p.name in prior}, prior)
+                if covered:
+                    self.assertEqual(result['worker_proof_candidate_id'], 'a'*64)
+                    self.assertEqual(result['runtime_smoke_coverage_sha256'], bridge.release.digest(prior['runtime-smoke-coverage.json']))
+                    (reports/'owned-worker-retained.json').unlink()
+                    with patch.dict(os.environ, env), patch.object(runtime, 'validate_retention', side_effect=ValueError('invalid target coverage')):
+                        with self.assertRaisesRegex(ValueError, 'invalid target coverage'):
+                            exec(compile(script, '<workflow-retention>', 'exec'), {})
+                    self.assertFalse((reports/'owned-worker-retained.json').exists())
+                    with patch.dict(os.environ, env | {'ZERO_PROVIDER_DESCENDANT': 'false'}):
+                        with self.assertRaises(AssertionError): exec(compile(script, '<workflow-retention>', 'exec'), {})
+                    self.assertFalse((reports/'owned-worker-retained.json').exists())
+                else:
+                    self.assertNotIn('runtime_smoke_coverage_sha256', result)
 
 
 if __name__ == '__main__': unittest.main()

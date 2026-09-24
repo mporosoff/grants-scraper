@@ -5,7 +5,7 @@ bridge reads authenticated artifacts, assembles safe public bytes, and submits
 three distinct, checkpointed workflow selectors. It never calls a provider.
 """
 import argparse
-from datetime import date
+from datetime import date, datetime, timezone
 import json
 import os
 from pathlib import Path
@@ -26,6 +26,8 @@ ROOT = Path(__file__).resolve().parents[1]
 VERSION = 'catalog-correction-release-v1'
 DISPATCH_PREFIX = 'catalog-correction-dispatch-'
 FINALIZE_PREFIX = 'catalog-correction-finalize-'
+COMPLETION_PATH = 'config/catalog_correction_completion_v1.json'
+COMPLETION_VERSION = 'catalog-correction-completion-v1'
 
 
 def require(ok, why):
@@ -333,8 +335,12 @@ def run_smoke(name, work, reports, *, api=smoke.existing.api, dispatch_call=disp
 
 
 def verify_worker(bundle, reports, *, work=None):
+    from tools import catalog_runtime_smoke_reuse as runtime_smoke
     bundle, reports = Path(bundle), Path(reports)
     work = Path(work) if work else reports.parent/'catalog-reuse'
+    if runtime_smoke.classify(bundle, root=ROOT) is not None:
+        inputs = prepared_inputs(work)['root']
+        return runtime_smoke.reuse(bundle, reports, root=ROOT, inputs=inputs)['worker_live']
     inputs = prepared_inputs(work)['root']; authenticated = smoke.authenticate_owner(inputs)
     manifest = release.load(bundle); proof = authenticated['serving_proof']; candidate = proof.get('candidate', {})
     require(candidate.get('candidate_id') == manifest['candidate_id']
@@ -380,12 +386,148 @@ def historical_smoke(manifest, reuse, work, *, api=smoke.existing.api):
     require(encoded(operations) == encoded(receipt['operations']), 'historical_three_owned_rows')
 
 
-def protected_candidates(root):
-    commits = release.git(root, 'log', 'HEAD', '--format=%H', '-100', '--', 'release/candidate-source.json').splitlines()
-    for commit in commits:
-        manifest = smoke.json_value(subprocess.check_output(['git', '-C', str(root), 'show', commit+':release/candidate.json']))
-        require(manifest.get('candidate_id') == release.digest(release.encoded({k: v for k, v in manifest.items() if k != 'candidate_id'})),
-            'protected_manifest_hash')
+def _protected_blob(root, revision, name, *, optional=False):
+    entry = subprocess.check_output(['git', '-C', str(root), 'ls-tree', '-z', revision, '--', name])
+    if not entry:
+        require(optional, 'completion_missing_git_object')
+        return None
+    require(entry.count(b'\0') == 1 and entry.split(b'\t', 1)[-1] == name.encode()+b'\0'
+        and entry.startswith(b'100644 blob '), 'completion_regular_git_blob')
+    return subprocess.check_output(['git', '-C', str(root), 'show', revision+':'+name])
+
+
+def _manifest_pointer(raw, pointer_raw):
+    manifest = smoke.json_value(raw)
+    pointer = smoke.json_value(pointer_raw)
+    require(isinstance(pointer, dict) and set(pointer) == {'candidate_id', 'artifact_run'}
+        and type(pointer['artifact_run']) is str and re.fullmatch('[1-9][0-9]{0,15}', pointer['artifact_run'])
+        and pointer['candidate_id'] == manifest.get('candidate_id')
+        == release.digest(release.encoded({k: v for k, v in manifest.items() if k != 'candidate_id'})),
+        'protected_manifest_pointer')
+    return manifest, raw, pointer
+
+
+def _publication_manifest(root, commit):
+    return _manifest_pointer(_protected_blob(root, commit, 'release/candidate.json'),
+        _protected_blob(root, commit, 'release/candidate-source.json'))
+
+def _completion_fields(value, **fields):
+    require(isinstance(value, dict) and set(value) == set(fields), 'completion_record_fields')
+    for name, kind in fields.items():
+        item = value[name]
+        if kind == 'id':
+            valid = type(item) is int and 1 <= item <= 2**53-1
+        elif kind in ('sha', 'hash'):
+            valid = type(item) is str and re.fullmatch('[a-f0-9]{'+('40' if kind == 'sha' else '64')+'}', item)
+        elif kind == 'true':
+            valid = item is True
+        else:
+            valid = type(item) is str and item == kind
+        require(valid, 'completion_record_'+name)
+
+
+def completion_record(root):
+    """A reviewed Git fact; never a replacement for a fresh serving proof."""
+    raw = _protected_blob(root, 'HEAD', COMPLETION_PATH, optional=True)
+    if raw is None:
+        return None
+    return _validate_completion_record(root, raw)
+
+
+def _validate_completion_record(root, raw):
+    require(len(raw) <= 16384, 'completion_record_size')
+    record = smoke.json_value(raw)
+    require(isinstance(record, dict) and set(record) == {'version', 'source', 'candidate',
+        'publication', 'validation', 'live', 'owned_smoke'} and record['version'] == COMPLETION_VERSION,
+        'completion_record_version')
+    _completion_fields(record['source'], version=source.VERSION, source_plan_sha256='hash',
+        spending_plan_sha256='hash', original_candidate_id='hash', source_correction_sha256='hash',
+        original_generation_sha256='hash')
+    _completion_fields(record['candidate'], candidate_id='hash', manifest_sha256='hash',
+        canonical_manifest_sha256='hash', projection_configuration_sha256='hash', projection_derivation_sha256='hash',
+        artifact_run_id='id', artifact_run_attempt='id', artifact_head_sha='sha', artifact_id='id', artifact_sha256='hash')
+    _completion_fields(record['publication'], commit='sha', pr='id', reviewed_head='sha', review_comment_id='id',
+        run_id='id', run_attempt='id', receipt_sha256='hash', artifact_id='id', artifact_sha256='hash')
+    _completion_fields(record['validation'], sha='sha', receipt_sha256='hash', status='passed')
+    require(isinstance(record['live'], dict), 'completion_live_fields')
+    _completion_fields(record['live'], run_id='id', run_attempt='id', artifact_id='id', artifact_sha256='hash',
+        receipt_sha256='hash', pages='success', assets='success', provider_smoke='success', verified='true',
+        worker_proof_sha256='hash', completed_at=record['live'].get('completed_at'))
+    stamp = record['live']['completed_at']
+    require(type(stamp) is str and len(stamp) <= 40 and stamp.endswith(('Z', '+00:00')), 'completion_live_time')
+    try:
+        when = datetime.fromisoformat(stamp.replace('Z', '+00:00'))
+    except ValueError:
+        require(False, 'completion_live_time')
+    require(when.tzinfo is not None and when <= datetime.now(timezone.utc), 'completion_live_time')
+    owned = record['owned_smoke']
+    require(isinstance(owned, dict) and 'operations' in owned, 'completion_owned_fields')
+    _completion_fields({k: v for k, v in owned.items() if k != 'operations'}, aggregate_sha256='hash',
+        reuse_receipt_sha256='hash', owner_run_id='id', owner_run_attempt='id', owner_head_sha='sha',
+        state_artifact_id='id', state_artifact_sha256='hash', checkpoint_sha256='hash', ledger_sha256='hash')
+    operations = owned['operations']
+    require(isinstance(operations, list) and len(operations) == 3, 'completion_three_operations')
+    for name, operation in zip(smoke.NAMES, operations, strict=True):
+        require(isinstance(operation, dict), 'completion_owned_operation')
+        _completion_fields(operation, purpose='cb-fc-cat-'+name, request_id=operation.get('request_id'),
+            body_sha256='hash', response_sha256='hash')
+        require(type(operation['request_id']) is str and re.fullmatch('[a-f0-9]{32}', operation['request_id']),
+            'completion_owned_request')
+    require(len({o['request_id'] for o in operations}) == 3, 'completion_distinct_owned_requests')
+    publication = record['publication']; candidate = record['candidate']; fixed = record['source']
+    chain = release.git(root, 'rev-list', '--first-parent', 'HEAD').splitlines()
+    require(publication['commit'] in chain, 'completion_protected_publication_ancestor')
+    manifest, manifest_raw, pointer = _publication_manifest(root, publication['commit'])
+    from tools import catalog_projection_recovery as projection
+    verified = projection.verify_manifest(manifest)
+    projection_raw = _protected_blob(root, 'HEAD', projection.CONFIG.relative_to(projection.ROOT).as_posix())
+    source_raw = _protected_blob(root, 'HEAD', source.CONFIG.relative_to(source.ROOT).as_posix())
+    require(candidate['candidate_id'] == verified['candidate_id']
+        and candidate['manifest_sha256'] == release.digest(manifest_raw)
+        and candidate['canonical_manifest_sha256'] == release.digest(release.encoded(manifest))
+        and candidate['projection_configuration_sha256'] == release.digest(projection_raw)
+        == release.digest(projection.CONFIG.read_bytes())
+        and candidate['projection_derivation_sha256'] == release.digest(release.encoded(verified['derivation']))
+        and fixed['source_plan_sha256'] == release.digest(source_raw) == release.digest(source.CONFIG.read_bytes())
+        and fixed['spending_plan_sha256'] == policy.PLAN_SHA
+        and fixed['original_candidate_id'] == source.plan()['candidate_id']
+        and fixed['source_correction_sha256'] == release.digest(release.encoded(manifest['source_correction']))
+        and fixed['original_generation_sha256'] == release.digest(release.encoded(manifest['original_generation'])),
+        'completion_exact_fixed_manifest')
+    require(candidate['artifact_run_id'] == int(pointer['artifact_run'])
+        and candidate['artifact_head_sha'] == record['validation']['sha']
+        and publication['run_id'] == record['live']['run_id']
+        and publication['run_attempt'] == record['live']['run_attempt'], 'completion_receipt_binding')
+    for sha in (candidate['artifact_head_sha'], record['validation']['sha'], owned['owner_head_sha']):
+        release.git(root, 'merge-base', '--is-ancestor', sha, publication['commit'])
+    return record, manifest
+
+
+def protected_candidates(root, *, anchor_sha=None):
+    if anchor_sha is None:
+        commits = release.git(root, 'log', 'HEAD', '--format=%H', '-100', '--', 'release/candidate-source.json').splitlines()
+    else:
+        require(anchor_sha in release.git(root, 'rev-list', '--first-parent', 'HEAD').splitlines(),
+            'completion_protected_publication_ancestor')
+        commits = release.git(root, 'log', '--first-parent', '--format=%H', anchor_sha+'..HEAD', '--',
+            'release/candidate-source.json', 'release/candidate.json').splitlines() + [anchor_sha]
+    # One read-only batch avoids a subprocess for every historical blob. Each
+    # object is still required and paired with its colocated source pointer.
+    queries = [commit+':'+name for commit in commits for name in
+        ('release/candidate.json', 'release/candidate-source.json')]
+    raw = subprocess.check_output(['git', '-C', str(root), 'cat-file', '--batch'],
+        input=('\n'.join(queries)+'\n').encode()) if queries else b''
+    blobs = []; offset = 0
+    for _ in queries:
+        end = raw.find(b'\n', offset)
+        header = raw[offset:end]
+        require(end >= offset and re.fullmatch(rb'[a-f0-9]{40} blob [0-9]+', header), 'protected_history_object')
+        size = int(header.rsplit(b' ', 1)[1]); start = end+1
+        require(raw[start+size:start+size+1] == b'\n', 'protected_history_object_size')
+        blobs.append(raw[start:start+size]); offset = start+size+1
+    require(offset == len(raw), 'protected_history_complete')
+    for index in range(0, len(blobs), 2):
+        manifest, _, _ = _manifest_pointer(blobs[index], blobs[index+1])
         yield manifest
 
 
@@ -410,7 +552,10 @@ def correction_completion(root, *, api=smoke.existing.api):
     This is a past completion fact, not evidence of current serving identity.
     Later ordinary generations may replace the current pointer and Worker.
     """
-    root = Path(root); seen = set()
+    root = Path(root); admitted = completion_record(root)
+    if admitted is not None:
+        return admitted[1]
+    seen = set()
     from tools.plan_release import latest_report, publication_ready
     for manifest in protected_candidates(root):
         fixed = manifest.get('source_correction', {})
@@ -456,8 +601,25 @@ def requires_owned_smoke(bundle, *, root=ROOT):
     completed = correction_completion(root)
     if completed is None or manifest['candidate_id'] == completed['candidate_id']:
         return True
+    from tools import catalog_runtime_smoke_reuse as runtime_smoke
+    if runtime_smoke.classify(bundle, root=root) is not None:
+        return True
     require(encoded(fixed) == encoded(completed['source_correction']), 'same_completed_correction_lineage')
-    history = {m['candidate_id']: m for m in protected_candidates(root)}
+    admitted = completion_record(root)
+    history = {m['candidate_id']: m for m in protected_candidates(root,
+        **({'anchor_sha': admitted[0]['publication']['commit']} if admitted else {}))}
+    if admitted:
+        # Constructor-produced runtime/team descendants retain these exact
+        # scientific origins; the projection certificate belongs only to anchor.
+        def lineage(value):
+            return {key: value.get(key) for key in ('original_generation', 'generation_sha', 'generation_run_id',
+                'generation_run_attempt', 'generation_timestamp', 'semantic_identity')}
+        require(encoded(lineage(manifest)) == encoded(lineage(completed))
+            and 'projection_recovery' not in manifest, 'completed_generation_lineage')
+        for value in history.values():
+            if value.get('source_correction') == fixed and value['candidate_id'] != completed['candidate_id']:
+                require(encoded(lineage(value)) == encoded(lineage(completed))
+                    and 'projection_recovery' not in value, 'protected_generation_lineage')
     seen = set(); parent = manifest.get('derived_from_candidate')
     while parent and parent not in seen:
         if parent == completed['candidate_id']: return False
@@ -469,7 +631,11 @@ def requires_owned_smoke(bundle, *, root=ROOT):
 
 
 def mode(bundle):
-    result = {'fixed_correction': str(requires_owned_smoke(bundle)).lower()}; output(result); return result
+    from tools import catalog_runtime_smoke_reuse as runtime_smoke
+    covered = runtime_smoke.classify(bundle, root=ROOT) is not None
+    result = {'fixed_correction': str(covered or requires_owned_smoke(bundle)).lower(),
+        'zero_provider_descendant': str(covered).lower()}
+    output(result); return result
 
 
 def plan():
@@ -483,9 +649,12 @@ def plan():
             'openai': 'false', 'anthropic': 'false', 'reason':
             'Exact five-file projection derivation from the complete retained candidate; zero generation'
             if requested == 'catalog-projection' else 'Exact retained source repair and seven accepted owner vectors'}
-    elif requested in ('validate', 'publish', 'verify') or correction_complete(ROOT):
+    elif requested in ('validate', 'publish', 'verify'):
         from tools.plan_release import main
         return main()
+    elif correction_complete(ROOT):
+        from tools.plan_release import main
+        return main(automatic_paid_hold=True)
     else:
         require(requested in ('', 'auto') or os.environ.get('GITHUB_EVENT_NAME') != 'workflow_dispatch', 'ordinary_generation_waits_for_fixed_correction')
         value = {'stage': 'noop', 'release_sha': release.git(ROOT, 'rev-parse', 'HEAD'), 'openai': 'false', 'anthropic': 'false',
@@ -527,9 +696,14 @@ def main():
     elif args.action == 'run-smoke': result = run_smoke(args.name, args.work, args.reports)
     elif args.action == 'verify-worker': result = verify_worker(args.bundle, args.reports, work=args.work)
     else:
-        inputs = prepared_inputs(args.work)['root']; result = smoke.node('reuse', smoke.authenticate_owner(inputs))
-        require(result['current_corpus_sha256'] == release.load(args.bundle)['release_identity']['current_corpus_sha256'], 'reused_release_corpus')
-        atomic_json(args.reports/'catalog-smoke-reuse.json', result)
+        from tools import catalog_runtime_smoke_reuse as runtime_smoke
+        if runtime_smoke.classify(args.bundle, root=ROOT) is not None:
+            inputs = prepared_inputs(args.work)['root']
+            result = runtime_smoke.reuse(args.bundle, args.reports, root=ROOT, inputs=inputs)['reuse_receipt']
+        else:
+            inputs = prepared_inputs(args.work)['root']; result = smoke.node('reuse', smoke.authenticate_owner(inputs))
+            require(result['current_corpus_sha256'] == release.load(args.bundle)['release_identity']['current_corpus_sha256'], 'reused_release_corpus')
+            atomic_json(args.reports/'catalog-smoke-reuse.json', result)
     print(json.dumps({k: v for k, v in result.items() if k in ('status', 'candidate_id', 'verified', 'run_id')}))
 
 
