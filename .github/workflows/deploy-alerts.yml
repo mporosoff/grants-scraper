@@ -2,32 +2,12 @@ name: Deploy Funding Finder alerts
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/deploy-alerts.yml"
-      - "assets/alerts-config.js"
-      - "assets/alerts.css"
-      - "assets/alerts.js"
-      - "assets/award-links.js"
-      - "assets/saved.js"
-      - "assets/app.css"
-      - "assets/app.js"
-      - "assets/match-explain.js"
-      - "assets/search-query.js"
-      - "assets/search-retrieval.js"
-      - "assets/submission-schedule.js"
-      - "data/opportunities.js"
-      - "assets/search-v2-config.js"
-      - "assets/funded-awards.js"
-      - "match_explorer.html"
-      - "funded_awards.html"
-      - "tools/classify_worker_deployment.mjs"
-      - "tools/verify_notice_publication.py"
-      - "tools/smoke_alerts_worker.mjs"
-      - "tools/validate_alert_capability_rotation.mjs"
-      - "workers/alerts/**"
+  # The immutable release owns Pages. Start after it completes so source/UI
+  # changes cannot race the Pages-before-Worker verification below.
+  workflow_run:
+    workflows: ["Funding Finder immutable release"]
+    types: [completed]
+    branches: [main]
 permissions:
   contents: read
 
@@ -37,12 +17,13 @@ concurrency:
 
 jobs:
   deploy:
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/main' && (github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success')
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
       - uses: actions/checkout@v6
         with:
+          ref: ${{ github.sha }}
           fetch-depth: 0
       - uses: actions/setup-node@v6
         with:
@@ -64,11 +45,15 @@ jobs:
           node --check assets/saved.js &&
           node --check assets/app.js &&
           node --check assets/match-explain.js &&
+          node --check assets/search-query.js &&
+          node --check assets/search-retrieval.js &&
+          node --check assets/search-v2-config.js &&
           node --check assets/funded-awards.js &&
           node --check workers/alerts/src/contract.js &&
           node --check workers/alerts/src/crypto.js &&
           node --check workers/alerts/src/email.js &&
           node --check workers/alerts/src/evaluator.js &&
+          node --check workers/alerts/src/notification-families.js &&
           node --check workers/alerts/src/index.js &&
           node --check workers/alerts/src/provider.js &&
           node --check workers/alerts/src/scheduler-budget.js &&
@@ -125,7 +110,7 @@ jobs:
           verified=false
           verification_deadline=$((SECONDS + 180))
           while [ "$SECONDS" -lt "$verification_deadline" ]; do
-            for file in match_explorer.html funded_awards.html data/opportunities.js; do
+            for file in match_explorer.html funded_awards.html "data/opportunities.js"; do
               target="/tmp/alerts-published-$(basename "$file")"
               curl --fail --silent --show-error --max-time 10 --max-filesize 67108864 \
                 --header 'Cache-Control: no-cache' \
@@ -227,7 +212,7 @@ jobs:
               && test "$(jq -r '.database_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.email_provider_selected | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.email_provider_configured | tostring' <<<"$health" 2>/dev/null)" = "true" \
-              && test "$(jq -r '.email_template_version // empty' <<<"$health" 2>/dev/null)" = "phase4-operations-20260827" \
+              && test "$(jq -r '.email_template_version // empty' <<<"$health" 2>/dev/null)" = "call-notices-20260924" \
               && test "$(jq -r '.outbound_email_enabled | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.capability_previous_signing_ready | tostring' <<<"$health" 2>/dev/null)" = "true" \
               && test "$(jq -r '.capability_key_id // empty' <<<"$health" 2>/dev/null)" = "${{ steps.capability-secrets.outputs.current_key_id }}"; then

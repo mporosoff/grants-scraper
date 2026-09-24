@@ -23,6 +23,7 @@ import {
 
 const root = new URL("../../", import.meta.url);
 import { alertRecordIdentity } from "../../workers/alerts/src/event-identity.js";
+import { savedSearchNotificationIdentity } from "../../workers/alerts/src/notification-families.js";
 const migrationNames = [
   "0001_phase3_alerts.sql", "0002_delivery_claim_lease.sql", "0003_phase2_alert_lifecycle.sql",
   "0004_phase4_alert_operations.sql", "0005_scheduler_progress.sql", "0006_scheduler_fencing.sql",
@@ -165,7 +166,8 @@ function nsfAlertFixtures() {
 }
 
 async function evaluateAlertFixture({ records, changes, type = "saved_search", definition = { query: "plasma" },
-  qualificationIds = [], changeLimit = 25, database = null } = {}) {
+  qualificationIds = [], changeLimit = 25, database = null, matchingIds = null,
+  now = fixedNow, configureStore = () => {} } = {}) {
   database ||= databaseThrough();
   if (!database.prepare("SELECT id FROM subscribers LIMIT 1").get()) {
     insertSubscriber(database);
@@ -175,10 +177,12 @@ async function evaluateAlertFixture({ records, changes, type = "saved_search", d
     ).run(id, fixedNow.toISOString());
   }
   const store = new D1AlertStore(new SqliteD1(database));
-  const assets = { catalog: { opportunities: records }, changes: { generated_at: fixedNow.toISOString(), events: changes },
+  configureStore(store);
+  const assets = { catalog: { opportunities: records }, changes: { generated_at: now.toISOString(), events: changes },
     matcher: { prepare() {}, matchDetails: (_definition, _asOf, ids) => new Map(ids.filter(id => records.some(r => r.opportunity_id === id))
+      .filter(id => matchingIds === null || matchingIds.includes(id))
       .map(id => [id, { reasons: ["Direct plasma research evidence"] }])) } };
-  const result = await evaluateSubscriptions({ store, assets, env, now: fixedNow, changeLimit });
+  const result = await evaluateSubscriptions({ store, assets, env, now, changeLimit });
   return { database, store, result };
 }
 
@@ -186,6 +190,152 @@ function newAlertSourceEvent(record, id = "new-source") {
   return { id, type: "new", opportunity_id: record.opportunity_id, record,
     changed_at: "2026-08-28T13:00:00.000Z", detail: "First appeared in the public catalog" };
 }
+
+const muriNotices = JSON.parse(await readFile(new URL("tests/fixtures/alerts/muri-2027.json", root), "utf8"));
+function muriAlertFixtures() {
+  return structuredClone(muriNotices.records);
+}
+
+test("the three actual FY27 MURI listings produce one immediate message with every service route", async () => {
+  const records = muriAlertFixtures();
+  const { database, store, result } = await evaluateAlertFixture({ records,
+    changes: records.map((record, index) => newAlertSourceEvent(record, `muri-${index}`)) });
+  assert.equal(result.matchedEventCount, 1);
+  const event = database.prepare("SELECT * FROM notification_events").get();
+  const payload = JSON.parse(event.payload_json);
+  assert.equal(payload.notification_family, "dod-muri-fy2027");
+  assert.deepEqual(payload.related_notices.map(notice => notice.program), records.map(record => record.opportunity_number));
+  assert.deepEqual(payload.related_notices.map(notice => notice.source_close_date), records.map(record => record.close_date));
+  const provider = new ScriptedProvider();
+  const delivery = await dispatchNotifications({ store, provider, env, now: fixedNow });
+  assert.equal(delivery.deliveredCount, 1);
+  assert.equal(provider.attempts.length, 1);
+  for (const record of records) for (const format of ["html", "text"]) {
+    assert.ok(provider.attempts[0].message[format].includes(record.opportunity_number));
+    assert.ok(provider.attempts[0].message[format].includes(record.primary_document_url));
+  }
+  assert.match(provider.attempts[0].message.text, /service-specific topics and submission routes/);
+});
+
+test("MURI grouping survives separate cursor pages and chooses an actually matching service", async () => {
+  const records = muriAlertFixtures();
+  const options = { records, changes: records.map((record, index) => newAlertSourceEvent(record, `muri-${index}`)),
+    matchingIds: ["363906"], changeLimit: 1 };
+  let run = await evaluateAlertFixture(options);
+  assert.equal(run.result.matchedEventCount, 1);
+  for (let page = 1; page < 3; page++) run = await evaluateAlertFixture({ ...options, database: run.database });
+  assert.equal(run.result.continuationRequired, false);
+  const events = all(run.database, "SELECT * FROM notification_events");
+  assert.equal(events.length, 1);
+  assert.equal(events[0].opportunity_id, "363906");
+  assert.equal(JSON.parse(events[0].payload_json).agency, "Office of Naval Research");
+});
+
+test("MURI later arrivals retain history even when the initially matching service leaves the catalog", async () => {
+  const records = muriAlertFixtures();
+  const first = await evaluateAlertFixture({ records: [records[1]], changes: [newAlertSourceEvent(records[1])] });
+  const now = new Date("2026-09-02T12:00:00.000Z");
+  const later = await evaluateAlertFixture({ records: [records[0], records[2]], database: first.database, now,
+    changes: [records[0], records[2]].map((record, index) => ({ ...newAlertSourceEvent(record, `later-${index}`),
+      changed_at: "2026-09-02T11:00:00.000Z" })) });
+  assert.equal(later.result.matchedEventCount, 0);
+  assert.equal(all(first.database, "SELECT * FROM notification_events").length, 1);
+});
+
+test("existing listing qualifications and old notifications prevent a MURI replay after upgrade", async () => {
+  const records = muriAlertFixtures();
+  for (const record of records) {
+    const baseline = await evaluateAlertFixture({ records: records.filter(r => r !== record),
+      changes: [newAlertSourceEvent(records.find(r => r !== record))], qualificationIds: [record.opportunity_id] });
+    assert.equal(baseline.result.matchedEventCount, 0);
+  }
+  for (const status of ["queued", "sending", "sent", "failed", "suppressed"]) {
+    const database = databaseThrough();
+    insertSubscriber(database); insertSubscription(database, { active: 1 });
+    insertEvent(database, { id: "legacy-muri", kind: "strong_match", status });
+    database.prepare("UPDATE notification_events SET opportunity_id = '363905', provider_payload_json = ? WHERE id = 'legacy-muri'")
+      .run('{"historical":"unchanged"}');
+    const before = database.prepare("SELECT * FROM notification_events").get();
+    const run = await evaluateAlertFixture({ records, changes: records.map((r, i) => newAlertSourceEvent(r, String(i))), database });
+    assert.equal(run.result.matchedEventCount, 0);
+    assert.deepEqual(database.prepare("SELECT * FROM notification_events").get(), before);
+  }
+});
+
+test("MURI deduplication outlives delivery retention and a temporary loss of Strong matching", async () => {
+  const records = muriAlertFixtures();
+  const first = await evaluateAlertFixture({ records, changes: [newAlertSourceEvent(records[0])] });
+  first.database.prepare("DELETE FROM notification_events").run(); // ordinary terminal delivery retention
+  const update = day => records.map((r, i) => ({ ...newAlertSourceEvent(r, `${day}-${i}`), type: "amended",
+    changed_at: `2026-09-0${day}T11:00:00.000Z` }));
+  await evaluateAlertFixture({ records, database: first.database, changes: update(2), matchingIds: [],
+    now: new Date("2026-09-02T12:00:00.000Z") });
+  const returning = await evaluateAlertFixture({ records: [records[2]], database: first.database, changes: update(3).slice(2),
+    now: new Date("2026-09-03T12:00:00.000Z") });
+  assert.equal(returning.result.matchedEventCount, 0);
+  assert.equal(first.database.prepare("SELECT qualified FROM subscription_qualifications WHERE opportunity_id='call:dod-muri-fy2027'").get().qualified, 1);
+});
+
+test("MURI queue recovery and concurrent evaluators cannot enqueue a second annual-call message", async () => {
+  const records = muriAlertFixtures();
+  const database = databaseThrough();
+  insertSubscriber(database); insertSubscription(database, { active: 1 });
+  const options = { database, records, changes: records.map((r, i) => newAlertSourceEvent(r, String(i))) };
+  await assert.rejects(evaluateAlertFixture({ ...options, configureStore: store => {
+    store.setQualification = async () => { throw new Error("crash after durable enqueue"); };
+  } }), /crash after durable enqueue/);
+  const resumed = await evaluateAlertFixture(options);
+  assert.equal(resumed.result.matchedEventCount, 0);
+  assert.equal(all(database, "SELECT * FROM notification_events").length, 1);
+  const concurrent = databaseThrough();
+  insertSubscriber(concurrent); insertSubscription(concurrent, { active: 1 });
+  await Promise.all([0, 1].map(() => evaluateAlertFixture({ ...options, database: concurrent,
+    configureStore: store => { store.hasStrongMatchFor = async () => false; } })));
+  assert.equal(all(concurrent, "SELECT * FROM notification_events").length, 1);
+});
+
+test("reviewed call identity does not merge another cycle, topic, sponsor or untrusted source", () => {
+  const records = muriAlertFixtures();
+  const changes = [
+    { title: records[0].title.replace("2027", "2028") },
+    { title: `${records[0].title}: Topic 1` }, { agency_code: "NSF" },
+    { agency: "Different sponsor" }, { source: "Aggregator" }, { agency_authority: "source_default" },
+    { opportunity_number: "OTHER" }, { opportunity_id: "999999" },
+    { record_type: "subtopic" }, { parent_opportunity_id: "363899" },
+  ];
+  for (const changed of changes) {
+    const inputs = [{ ...records[0], ...changed }, ...records.slice(1)];
+    const identity = savedSearchNotificationIdentity(inputs, alertRecordIdentity(inputs));
+    assert.notEqual(identity.resolve(inputs[0].opportunity_id), identity.resolve("363906"));
+  }
+});
+
+test("MURI explicit watches keep service-specific amendments and subscriptions remain independent", async () => {
+  const records = muriAlertFixtures();
+  const changes = records.map((r, i) => ({ ...newAlertSourceEvent(r, `amend-${i}`), type: "amended" }));
+  const watched = await evaluateAlertFixture({ records, changes, type: "opportunity",
+    definition: { opportunity_ids: records.map(r => r.opportunity_id), triggers: ["amended"] } });
+  assert.equal(watched.result.matchedEventCount, 3);
+  const database = databaseThrough();
+  insertSubscriber(database); insertSubscription(database, { active: 1 });
+  insertSubscription(database, { id: "watch-2", active: 1, definitionHash: "independent-query" });
+  insertSubscriber(database, { id: "person-2", email: "second@example.edu", manageToken: "n".repeat(43) });
+  insertSubscription(database, { id: "watch-3", subscriberId: "person-2", active: 1 });
+  const saved = await evaluateAlertFixture({ records, changes, database });
+  assert.equal(saved.result.matchedEventCount, 3);
+  assert.equal(all(database, "SELECT DISTINCT subscription_id FROM notification_events").length, 3);
+});
+
+test("grouped weekly messages escape service fields and reject unsafe related links", () => {
+  const payload = { title: "MURI", related_notices: [{ agency: "<script>bad</script>", program: "<b>number</b>",
+    official_url: "javascript:alert(1)", funding_finder_url: "https://example.test/?a=1&b=2", source_close_date: "2027-04-09" }] };
+  const event = { email: "test@example.edu", event_kind: "strong_match", subscription_id: "watch-1", payload };
+  const message = digestEmail({ env, events: [event] });
+  assert.match(message.subject, /1 update/);
+  assert.match(message.html, /&lt;script&gt;bad&lt;\/script&gt;/);
+  assert.doesNotMatch(message.html + message.text, /javascript:/);
+  assert.match(message.text, /Source closing date: April 9, 2027; next submission requires verification/);
+});
 
 test("an official NSF source addition cannot announce the existing Grants.gov call as first appearance", async () => {
   const { original, alias } = nsfAlertFixtures();
@@ -1941,7 +2091,7 @@ test("Phase 2 scheduler retries verification and deployment contracts preserve r
   assert.match(workflow, /delivery_ready/);
   assert.match(workflow, /schema_version[^\n]*= "4"/);
   assert.match(workflow, /scheduler_ready/);
-  assert.match(workflow, /phase4-operations-20260827/);
+  assert.match(workflow, /call-notices-20260924/);
   assert.match(workflow, /worker_version_rollback/);
   assert.match(workflow, /recovery_required=true/);
   assert.match(workflow, /scheduler recovery execution succeeds/);
