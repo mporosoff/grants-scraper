@@ -1,11 +1,14 @@
 """Synthetic Git/payload contracts; never a claim of real provider execution."""
 from contextlib import ExitStack
 from copy import deepcopy
+import io
 import json
+import os
 from pathlib import Path
 import subprocess
 import tempfile
 import unittest
+import zipfile
 from unittest.mock import Mock, patch
 
 from tools import catalog_runtime_smoke_reuse as reuse
@@ -49,7 +52,9 @@ class RuntimeReuse(unittest.TestCase):
             'generation_timestamp': '2026-01-01T00:00:00Z', 'generation_dependencies': {'fingerprint': 'a'*64},
             'generator_versions': {}, 'generation_baseline': {},
             'generation_files': {name: identity_bytes(self.payloads[name]) for name in ('data/science.json', 'data/vectors.f16')},
-            'source_correction': {'version': bridge.source.VERSION, 'fixed': 'synthetic'},
+            'source_correction': {'version': bridge.source.VERSION, 'fixed': 'synthetic',
+                'source_plan_sha256': identity_bytes(bridge.source.CONFIG.read_bytes()),
+                'spending_plan_sha256': bridge.policy.PLAN_SHA},
             'original_generation': {'sha': self.publication}, 'projection_recovery': {'synthetic': True},
             'derived_from_candidate': 'b'*64, 'assembly_sha': self.publication,
             'files': {name: identity_bytes(raw) for name, raw in self.payloads.items()},
@@ -102,6 +107,7 @@ class RuntimeReuse(unittest.TestCase):
         self.completed = self.stack.enter_context(patch.object(bridge, 'completion_record', return_value=(self.record, self.anchor)))
         self.history = self.stack.enter_context(patch.object(bridge, 'protected_candidates', return_value=[self.anchor]))
         self.owner = self.stack.enter_context(patch.object(reuse.smoke, 'authenticate_owner', side_effect=lambda *a, **k: deepcopy(self.auth)))
+        self.real_anchor = bridge.candidate_anchor
         self.artifact = self.stack.enter_context(patch.object(bridge, 'candidate_anchor', side_effect=lambda *a, **k:
             (self.target, {'candidate_id': self.target['candidate_id'], 'manifest_sha256': identity_bytes((self.bundle/'candidate.json').read_bytes()),
                 'artifact_id': 105, 'artifact_run': 106, 'artifact_digest': 'sha256:'+'9'*64})))
@@ -139,6 +145,43 @@ class RuntimeReuse(unittest.TestCase):
     def run_reuse(self, node=None):
         return reuse.reuse(self.bundle, self.reports, root=self.root, inputs=self.base/'retained-inputs',
             api=self.no_api, node_call=node or self.node)
+
+    def authenticated_artifact(self):
+        """Actual automatic-release API shape with synthetic Git and ZIP bytes."""
+        run_id = 35948724690
+        run = {'id': run_id, 'run_attempt': 1, 'path': reuse.smoke.REFRESH,
+            'event': 'push', 'head_branch': 'main', 'head_sha': self.head,
+            'status': 'completed', 'conclusion': 'failure',
+            'repository': {'full_name': reuse.smoke.existing.REPOSITORY},
+            'head_repository': {'full_name': reuse.smoke.existing.REPOSITORY}}
+        fixture = {'run': run, 'artifact': {'id': 105, 'name': 'candidate-'+self.target['candidate_id'],
+            'expired': False, 'workflow_run': {'id': run_id, 'head_sha': self.head}}}
+        self.archive_payloads(fixture)
+        def api(path):
+            if path == f'actions/runs/{run_id}': return encoded(fixture['run'])
+            if path == 'actions/artifacts?per_page=100&page=1':
+                return encoded({'artifacts': [fixture['artifact']]})
+            if path == 'actions/artifacts/105': return encoded(fixture['artifact'])
+            if path == 'actions/artifacts/105/zip': return fixture['raw']
+            raise AssertionError('Unexpected API path: '+path)
+        fixture['api'] = Mock(side_effect=api)
+        return fixture
+
+    def archive_payloads(self, fixture, alterations=None):
+        entries = {p.relative_to(self.bundle).as_posix(): p.read_bytes()
+            for p in self.bundle.rglob('*') if p.is_file()}
+        entries.update(alterations or {})
+        output = io.BytesIO()
+        with zipfile.ZipFile(output, 'w') as archive:
+            for name, raw in entries.items(): archive.writestr(name, raw)
+        fixture['raw'] = output.getvalue()
+        fixture['artifact']['digest'] = 'sha256:'+identity_bytes(fixture['raw'])
+
+    def run_authenticated(self, fixture):
+        with patch.dict(os.environ, {'CANDIDATE_RUN': str(fixture['run']['id'])}), \
+                patch.object(bridge, 'candidate_anchor', self.real_anchor):
+            return reuse.reuse(self.bundle, self.reports, root=self.root, inputs='retained-inputs',
+                api=fixture['api'], node_call=self.node)
 
     def test_exact_two_payloads_and_original_proof_are_separate_from_target(self):
         plan = reuse.classify(self.bundle, root=self.root)
@@ -305,6 +348,87 @@ class RuntimeReuse(unittest.TestCase):
         self.history.return_value = [self.anchor]
         with self.assertRaisesRegex(ConfigurationFailure, 'immediate_protected_parent'):
             reuse.classify(self.bundle, root=self.root)
+
+    def test_automatic_push_artifact_uses_real_authenticator_and_preserves_manual_origin(self):
+        fixture = self.authenticated_artifact()
+        result = self.run_authenticated(fixture)
+        coverage = result['coverage_receipt']
+        self.assertEqual(coverage['target_artifact']['artifact_run'], 35948724690)
+        self.assertEqual(coverage['target_artifact']['artifact_digest'], fixture['artifact']['digest'])
+        self.assertEqual(coverage['target_candidate_id'], self.target['candidate_id'])
+        self.assertEqual(result['worker_live']['candidate'], self.proof['candidate'])
+        self.assertEqual(coverage['original_operations'], self.record['owned_smoke']['operations'])
+        self.assertEqual(self.calls, ['reuse']); self.no_post.assert_not_called()
+        self.assertEqual([call.args[0] for call in fixture['api'].call_args_list], [
+            'actions/runs/35948724690', 'actions/artifacts?per_page=100&page=1',
+            'actions/artifacts/105', 'actions/artifacts/105/zip'])
+
+    def test_retained_push_artifact_survives_later_protected_head_and_run_attempt(self):
+        fixture = self.authenticated_artifact()
+        self.write('later-fix.md', b'Later protected validation-only change'); self.commit()
+        self.assertNotEqual(self.git('rev-parse', 'HEAD'), fixture['run']['head_sha'])
+        # A later attempt does not rewrite the run's immutable head or artifact.
+        fixture['run'].update(run_attempt=2, status='in_progress', conclusion=None)
+        result = self.run_authenticated(fixture)
+        self.assertEqual(result['coverage_receipt']['assembly_sha'], self.head)
+        self.assertEqual(result['coverage_receipt']['target_artifact']['artifact_digest'], fixture['artifact']['digest'])
+        reuse.validate_retention(self.bundle, self.reports, root=self.root, node_call=self.node)
+
+    def test_supported_release_events_are_target_only_not_manual_paid_authority(self):
+        fixture = self.authenticated_artifact()
+        for event in ('push', 'schedule', 'workflow_dispatch'):
+            with self.subTest(event=event):
+                fixture['run']['event'] = event
+                self.run_authenticated(fixture)
+        fixture['run']['event'] = 'push'
+        with patch.dict(os.environ, {'CANDIDATE_RUN': str(fixture['run']['id'])}):
+            with self.assertRaisesRegex(ConfigurationFailure, 'trusted_manual_main_run'):
+                self.real_anchor(self.bundle, api=fixture['api'])
+        with self.assertRaisesRegex(ConfigurationFailure, 'trusted_manual_main_run'):
+            reuse.smoke.trusted_run(fixture['run']['id'], reuse.smoke.REFRESH,
+                terminal=False, allow_failed=True, api=fixture['api'])
+
+    def test_bad_target_run_metadata_fails_before_artifact_or_owner_access(self):
+        cases = [('event', 'pull_request'), ('event', 'repository_dispatch'), ('head_branch', 'feature'),
+            ('head_sha', self.publication), ('head_sha', 'f'*40), ('path', reuse.smoke.existing.WORKFLOW),
+            ('repository', {'full_name': 'foreign/repo'}), ('head_repository', {'full_name': 'foreign/repo'}),
+            ('run_attempt', None), ('run_attempt', True), ('run_attempt', 0), ('run_attempt', '1'),
+            ('status', 'queued'), ('conclusion', 'neutral'), ('status', 'waiting')]
+        for field, value in cases:
+            with self.subTest(field=field, value=value):
+                fixture = self.authenticated_artifact(); fixture['run'][field] = value
+                with self.assertRaises(ConfigurationFailure): self.run_authenticated(fixture)
+                self.assertEqual(len(fixture['api'].call_args_list), 1)
+        self.owner.assert_not_called(); self.assertEqual(self.calls, [])
+
+    def test_artifact_metadata_digest_payload_and_manifest_identity_are_all_checked(self):
+        def foreign_head(f): f['artifact']['workflow_run']['head_sha'] = self.publication
+        def wrong_run(f): f['artifact']['workflow_run']['id'] = 1
+        def expired(f): f['artifact']['expired'] = True
+        def bad_id(f): f['artifact']['id'] = True
+        def changed_raw(f): f['raw'] += b'tampered'
+        def changed_payload(f): self.archive_payloads(f, {'files/data/science.json': b'changed science'})
+        def extra_file(f): self.archive_payloads(f, {'private-note.json': b'not a public payload'})
+        def changed_manifest_bytes(f):
+            self.archive_payloads(f, {'candidate.json': (self.bundle/'candidate.json').read_bytes()+b' '})
+        def changed_manifest_value(f):
+            value = deepcopy(self.target); value['generation_timestamp'] = 'changed'
+            self.archive_payloads(f, {'candidate.json': reuse.release.encoded(value)})
+        for change in (foreign_head, wrong_run, expired, bad_id, changed_raw, changed_payload,
+                extra_file, changed_manifest_bytes, changed_manifest_value):
+            with self.subTest(change=change.__name__):
+                fixture = self.authenticated_artifact(); change(fixture)
+                with self.assertRaises((ConfigurationFailure, ValueError)): self.run_authenticated(fixture)
+        self.owner.assert_not_called(); self.assertFalse(self.reports.exists())
+
+    def test_runtime_target_route_requires_full_classification_even_when_called_directly(self):
+        fixture = self.authenticated_artifact()
+        self.completed.return_value = None
+        with patch('tools.catalog_projection_recovery.plan', return_value={'candidate_id': self.anchor['candidate_id']}), \
+                patch.dict(os.environ, {'CANDIDATE_RUN': str(fixture['run']['id'])}):
+            with self.assertRaisesRegex(ConfigurationFailure, 'protected_completion_required'):
+                self.real_anchor(self.bundle, runtime_root=self.root, api=fixture['api'])
+        fixture['api'].assert_not_called(); self.owner.assert_not_called()
 
 
 def identity_bytes(value): return reuse.release.digest(value)

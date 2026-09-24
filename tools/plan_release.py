@@ -39,12 +39,36 @@ def latest_report(repository, candidate, kind, destination):
         for artifact in sorted(matches, key=lambda a: a['id'], reverse=True):
             run = str(artifact['workflow_run']['id'])
             target = Path(destination) / str(artifact['id'])
-            fetch(repository, run, artifact['name'], target)
+            run_metadata = fetch(repository, run, artifact['name'], target)
             report = target / {'live': 'live-verification.json', 'validation': 'validation.json',
                               'publication': 'publication.json', 'browser': 'final-integration.json',
                               'review': 'review-pending.json'}[kind]
             if kind == 'review':
-                return run, c.read_json(report) if report.exists() else None
+                ready_path = target / 'review-ready.json'
+                if report.exists() and ready_path.exists():
+                    raise ValueError('Conflicting latest publication review checkpoints')
+                if report.exists():
+                    return run, c.read_json(report)
+                if not ready_path.exists():
+                    return run, None
+                ready = c.read_json(ready_path)
+                required = {'schema_version', 'candidate_id', 'base_sha', 'head_sha', 'pr_url',
+                            'artifact_run', 'validation_receipt_sha256', 'timestamp'}
+                validation = c.read_json(target / 'validation.json')
+                if (set(ready) != required or type(ready['schema_version']) is not int or ready['schema_version'] != 1
+                        or ready['candidate_id'] != candidate
+                        or not re.fullmatch('[1-9][0-9]*', str(ready['artifact_run']))
+                        or not re.fullmatch('[a-f0-9]{40}', ready['head_sha'])
+                        or ready['base_sha'] != run_metadata['head_sha']
+                        or ready['validation_receipt_sha256'] != c.digest(c.encoded(validation))
+                        or validation.get('validation_sha') != ready['base_sha']
+                        or validation.get('candidate_id') != candidate
+                        or validation.get('production_mutated') is not False
+                        or validation.get('gates') != {gate: 'passed' for gate in c.GATES}):
+                    raise ValueError('Latest ready checkpoint does not bind its protected validation receipt')
+                # This selects saved bytes after a later publication failure.
+                # It never approves another PR head or current validation code.
+                return run, ready
             if kind == 'browser' and not report.exists():
                 for receipt_name in ('validation.json', 'validation-report.json'):
                     receipt_path = target / receipt_name
@@ -84,7 +108,7 @@ def latest_report(repository, candidate, kind, destination):
 
 
 def pending_publication(root, repository, destination):
-    """Reuse an exact compatible review checkpoint before scheduled generation.
+    """Reuse an exact compatible publication checkpoint before generation.
 
     PR files are selectors, never executable inputs or approval. The trusted
     artifact, protected generation ancestry and normal validation remain required.
@@ -111,11 +135,20 @@ def pending_publication(root, repository, destination):
         _, pending = latest_report(repository, candidate, 'review', Path(destination) / candidate / 'review')
         if not pending:
             continue
-        if (pending.get('schema_version') != 1 or pending.get('status') != 'awaiting_review'
+        awaiting = (pending.get('status') == 'awaiting_review'
+                    and pending.get('repository') == repository
+                    and pending.get('pr_number') == pr['number']
+                    and pending.get('production_mutated') is False)
+        ready = ('status' not in pending
+                 and pending.get('pr_url') == f'https://github.com/{repository}/pull/{pr["number"]}'
+                 and re.fullmatch('[a-f0-9]{40}', pending.get('base_sha', ''))
+                 and re.fullmatch('[a-f0-9]{64}', pending.get('validation_receipt_sha256', '')))
+        if (pending.get('schema_version') != 1 or not (awaiting or ready)
                 or pending.get('candidate_id') != candidate or pending.get('artifact_run') != run
-                or pending.get('repository') != repository or pending.get('pr_number') != pr['number']
-                or pending.get('head_sha') != head or pending.get('production_mutated') is not False):
+                or pending.get('head_sha') != head):
             raise ValueError('Pending publication does not match its exact PR and artifact')
+        if ready and pending['base_sha'] not in c.git(root, 'rev-list', '--first-parent', 'HEAD').splitlines():
+            raise ValueError('Ready publication base is not in protected first-parent history')
         bundle = Path(destination) / candidate / 'candidate'
         fetch(repository, run, 'candidate-' + candidate, bundle)
         manifest = c.load(bundle, candidate)

@@ -151,13 +151,37 @@ def create(work, bundle, *, root=ROOT, api=smoke.existing.api):
     output({'candidate_id': manifest['candidate_id']}); return manifest
 
 
-def candidate_anchor(bundle, *, api=smoke.existing.api):
+def _runtime_candidate_run(bundle, manifest, run_id, root, api):
+    """Authenticate only the exact classified runtime target, not paid evidence."""
+    from tools import catalog_runtime_smoke_reuse as runtime
+    classified = runtime.classify(bundle, root=root)
+    require(classified is not None and classified['target_candidate_id'] == manifest['candidate_id'],
+        'classified_runtime_target_required')
+    run = smoke.json_value(api(f'actions/runs/{run_id}'))
+    require(type(run.get('id')) is int and run['id'] == run_id
+        and type(run.get('run_attempt')) is int and run['run_attempt'] > 0
+        and run.get('path') == smoke.REFRESH and run.get('head_branch') == 'main'
+        and run.get('event') in ('push', 'schedule', 'workflow_dispatch')
+        and run.get('repository', {}).get('full_name') == smoke.existing.REPOSITORY
+        and run.get('head_repository', {}).get('full_name') == smoke.existing.REPOSITORY
+        and run.get('head_sha') == classified['assembly_sha'], 'protected_runtime_candidate_run')
+    require((run.get('status') == 'in_progress' and run.get('conclusion') is None)
+        or (run.get('status') == 'completed' and run.get('conclusion') in
+            ('success', 'failure', 'cancelled', 'timed_out')), 'runtime_candidate_run_status')
+    return run
+
+
+def candidate_anchor(bundle, *, api=smoke.existing.api, runtime_root=None):
     manifest = release.load(bundle)
     require(manifest.get('source_correction', {}).get('version') == source.VERSION
         and manifest['source_correction']['source_plan_sha256'] == smoke.existing.sha(source.CONFIG.read_bytes())
         and manifest['source_correction']['spending_plan_sha256'] == policy.PLAN_SHA, 'fixed_candidate_required')
-    run_id = int(os.environ['CANDIDATE_RUN'])
-    run = smoke.trusted_run(run_id, smoke.REFRESH, terminal=False, allow_failed=True, api=api)
+    selector = os.environ.get('CANDIDATE_RUN', '')
+    require(re.fullmatch('[1-9][0-9]*', selector), 'candidate_run_selector')
+    run_id = int(selector)
+    # Original paid/context callers retain the manual-only trust boundary.
+    run = (smoke.trusted_run(run_id, smoke.REFRESH, terminal=False, allow_failed=True, api=api)
+        if runtime_root is None else _runtime_candidate_run(bundle, manifest, run_id, runtime_root, api))
     matches = [a for a in smoke.artifacts(api) if a.get('name') == 'candidate-'+manifest['candidate_id']
         and a.get('workflow_run', {}).get('id') == run_id]
     require(len(matches) == 1, 'exact_standard_candidate_artifact')
@@ -165,6 +189,11 @@ def candidate_anchor(bundle, *, api=smoke.existing.api):
     with tempfile.TemporaryDirectory(prefix='catalog-candidate-proof-') as temp:
         smoke.unpack_public(raw, temp); restored = release.load(temp, manifest['candidate_id'])
         require(encoded(restored) == encoded(manifest), 'candidate_artifact_manifest')
+        if runtime_root is not None:
+            expected = {release.MANIFEST} | {'files/'+name for name in manifest['files']}
+            require({p.relative_to(temp).as_posix() for p in Path(temp).rglob('*') if p.is_file()} == expected
+                and (Path(temp)/release.MANIFEST).read_bytes() == (Path(bundle)/release.MANIFEST).read_bytes(),
+                'exact_runtime_candidate_artifact_bytes')
     return manifest, {'candidate_id': manifest['candidate_id'], 'artifact_run': run_id,
         'artifact_id': artifact['id'], 'artifact_digest': artifact['digest'],
         'manifest_sha256': smoke.existing.sha((Path(bundle)/release.MANIFEST).read_bytes())}
