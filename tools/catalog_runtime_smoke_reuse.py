@@ -158,7 +158,7 @@ def reuse(bundle, reports, *, root=ROOT, inputs=None, api=smoke.existing.api, no
     plan = classify(bundle, root=root)
     require(plan is not None, 'covered_runtime_candidate_required')
     record, _ = _bridge().completion_record(root)
-    _, target = _bridge().candidate_anchor(bundle, api=api)
+    _, target = _bridge().candidate_anchor(bundle, api=api, runtime_root=root)
     require(target['candidate_id'] == plan['target_candidate_id']
         and target['manifest_sha256'] == plan['target_manifest_sha256'], 'target_artifact')
     authenticated = smoke.authenticate_owner(inputs, api=api, node_call=node_call)
