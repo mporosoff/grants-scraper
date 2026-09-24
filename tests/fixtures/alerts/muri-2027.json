@@ -1,0 +1,114 @@
+{
+  "source_catalog_generated_at": "2026-09-23T15:02:58.431956Z",
+  "source_commit": "36792edd1a40211b2f9c64c05c62f4b21ff698e9",
+  "records": [
+    {
+      "opportunity_id": "363899",
+      "opportunity_number": "NOFOAFRLAFOSR20260002",
+      "title": "Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)",
+      "agency": "Air Force Office of Scientific Research",
+      "agency_code": "DOD-AFOSR",
+      "source": "Grants.gov",
+      "source_type": "Federal",
+      "detail_page": "https://www.grants.gov/search-results-detail/363899",
+      "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355070",
+      "close_date": "2027-04-09",
+      "posted_date": "2026-09-21",
+      "last_updated": "2026-09-21",
+      "status": "posted",
+      "next_submission": {
+        "access": "open",
+        "application_class": "new",
+        "as_of": "2026-09-23",
+        "date": "2027-04-09",
+        "event": {
+          "confidence": "official_structured",
+          "date": "2027-04-09",
+          "detail_checked_at": "2026-09-23T15:03:20.342299Z",
+          "estimated": false,
+          "kind": "application",
+          "note": "Applications must be received no later than 09 April 2027 at 5:00 PM Eastern Time",
+          "source": "Grants.gov XML extract",
+          "source_field": "CloseDate",
+          "source_url": "https://www.grants.gov/search-results-detail/363899",
+          "time": "5:00 PM",
+          "timezone": "Eastern Time"
+        },
+        "prerequisites": [],
+        "version": 2
+      }
+    },
+    {
+      "opportunity_id": "363905",
+      "opportunity_number": "W911NF26S1000",
+      "title": "Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)",
+      "agency": "Dept of the Army -- Materiel Command",
+      "agency_code": "DOD-AMC",
+      "source": "Grants.gov",
+      "source_type": "Federal",
+      "detail_page": "https://www.grants.gov/search-results-detail/363905",
+      "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355072",
+      "close_date": "2027-04-09",
+      "posted_date": "2026-09-21",
+      "last_updated": "2026-09-21",
+      "status": "posted",
+      "next_submission": {
+        "access": "open",
+        "application_class": "new",
+        "as_of": "2026-09-23",
+        "date": "2027-04-09",
+        "event": {
+          "confidence": "official_structured",
+          "date": "2027-04-09",
+          "detail_checked_at": "2026-09-23T15:03:20.342299Z",
+          "estimated": false,
+          "kind": "application",
+          "note": "Applications must be received no later than 09 April 2027 at 5:00 PM Eastern Time",
+          "source": "Grants.gov XML extract",
+          "source_field": "CloseDate",
+          "source_url": "https://www.grants.gov/search-results-detail/363905",
+          "time": "5:00 PM",
+          "timezone": "Eastern Time"
+        },
+        "prerequisites": [],
+        "version": 2
+      }
+    },
+    {
+      "opportunity_id": "363906",
+      "opportunity_number": "N0001426SF002",
+      "title": "Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)",
+      "agency": "Office of Naval Research",
+      "agency_code": "DOD-ONR",
+      "source": "Grants.gov",
+      "source_type": "Federal",
+      "detail_page": "https://www.grants.gov/search-results-detail/363906",
+      "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/355073",
+      "close_date": "2027-04-09",
+      "posted_date": "2026-09-21",
+      "last_updated": "2026-09-21",
+      "status": "posted",
+      "next_submission": {
+        "access": "open",
+        "application_class": "new",
+        "as_of": "2026-09-23",
+        "date": "2027-04-09",
+        "event": {
+          "confidence": "official_structured",
+          "date": "2027-04-09",
+          "detail_checked_at": "2026-09-23T15:03:20.342299Z",
+          "estimated": false,
+          "kind": "application",
+          "note": null,
+          "source": "Grants.gov XML extract",
+          "source_field": "CloseDate",
+          "source_url": "https://www.grants.gov/search-results-detail/363906",
+          "time": null,
+          "timezone": null
+        },
+        "prerequisites": [],
+        "version": 2
+      }
+    }
+  ]
+}

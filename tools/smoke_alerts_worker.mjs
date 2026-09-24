@@ -14,7 +14,7 @@ assert.equal(payload.database_ready, true);
 assert.equal(payload.email_provider, "resend");
 assert.equal(payload.email_provider_selected, true);
 assert.equal(payload.email_provider_configured, true);
-assert.equal(payload.email_template_version, "phase4-operations-20260827");
+assert.equal(payload.email_template_version, "call-notices-20260924");
 assert.equal(payload.capability_signing_ready, true);
 assert.equal(payload.capability_previous_signing_ready, true);
 assert.match(payload.capability_key_id, /^[0-9a-f]{16}$/);

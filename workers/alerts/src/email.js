@@ -1,4 +1,4 @@
-export const ALERT_EMAIL_TEMPLATE_VERSION = "phase4-operations-20260827";
+export const ALERT_EMAIL_TEMPLATE_VERSION = "call-notices-20260924";
 
 function escapeHtml(value) {
   return String(value ?? "").replace(/[&<>"']/g, character => ({
@@ -121,7 +121,35 @@ function eventBody(event) {
     whyMatched,
     fundingFinderUrl: safeUrl(payload?.funding_finder_url),
     officialUrl: safeUrl(payload?.official_url || payload?.url),
+    relatedNotices: Array.isArray(payload?.related_notices) ? payload.related_notices.slice(0, 3).map(notice => ({
+      agency: clean(notice?.agency, 300),
+      program: clean(notice?.program, 300),
+      deadline: displayDate(notice?.close_date),
+      sourceClosingDate: displayDate(notice?.source_close_date),
+      fundingFinderUrl: safeUrl(notice?.funding_finder_url),
+      officialUrl: safeUrl(notice?.official_url),
+    })) : [],
   };
+}
+
+const RELATED_NOTICE_NOTE = "One annual call, with service-specific topics and submission routes. Check the notice for your topic; related listings may match your search differently.";
+
+function noticeDate(notice) {
+  return notice.deadline ? `Next submission date: ${notice.deadline}`
+    : notice.sourceClosingDate ? `Source closing date: ${notice.sourceClosingDate}; next submission requires verification`
+      : "Submission date requires verification";
+}
+
+function relatedNoticeText(body) {
+  if (!body.relatedNotices.length) return "";
+  return `\nService notices\n${RELATED_NOTICE_NOTE}\n${body.relatedNotices.map(notice =>
+    `\n${notice.agency}\nProgram: ${notice.program}\n${noticeDate(notice)}\n${actionText(notice)}`).join("\n")}`;
+}
+
+function relatedNoticeHtml(body) {
+  if (!body.relatedNotices.length) return "";
+  return `<section style="border-top:1px solid #d8dfeb;margin-top:20px;padding-top:16px"><h3>Service notices</h3><p>${escapeHtml(RELATED_NOTICE_NOTE)}</p>${body.relatedNotices.map(notice =>
+    `<div style="margin:16px 0"><p><strong>${escapeHtml(notice.agency)}</strong><br>Program: ${escapeHtml(notice.program)}<br>${escapeHtml(noticeDate(notice))}</p>${actionHtml(notice)}</div>`).join("")}</section>`;
 }
 
 function eventText(heading, body) {
@@ -135,6 +163,7 @@ function eventText(heading, body) {
     body.detail ? `Update: ${body.detail}` : "",
     body.whyMatched.length ? `\nWhy it matched:\n${body.whyMatched.map(reason => `- ${reason}`).join("\n")}` : "",
     actionText(body) ? `\n${actionText(body)}` : "",
+    relatedNoticeText(body),
   ];
   return rows.filter((row, index) => row || index === 1).join("\n");
 }
@@ -151,7 +180,7 @@ function eventHtml(heading, body, headingLevel = 1) {
   const reasons = body.whyMatched.length
     ? `<div style="background:#f3f6fb;border-radius:8px;margin-top:14px;padding:12px 14px"><p style="font-weight:700;margin:0 0 6px">Why it matched</p><ul style="margin:0;padding-left:20px">${body.whyMatched.map(reason => `<li style="margin:4px 0">${escapeHtml(reason)}</li>`).join("")}</ul></div>`
     : "";
-  return `<${tag} style="color:#001e5f;font-size:${size};line-height:1.25;margin:0 0 10px">${escapeHtml(heading)}</${tag}><p style="font-size:18px;font-weight:700;margin:0 0 10px">${escapeHtml(body.title)}</p>${facts}${reasons}${actionHtml(body)}`;
+  return `<${tag} style="color:#001e5f;font-size:${size};line-height:1.25;margin:0 0 10px">${escapeHtml(heading)}</${tag}><p style="font-size:18px;font-weight:700;margin:0 0 10px">${escapeHtml(body.title)}</p>${facts}${reasons}${actionHtml(body)}${relatedNoticeHtml(body)}`;
 }
 
 export function eventEmail({ env, event, capabilityLinks = null }) {

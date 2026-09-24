@@ -313,6 +313,15 @@ export class D1AlertStore {
     return output;
   }
 
+  async hasStrongMatchFor(subscriptionId, opportunityIds) {
+    // Consult legacy listing notifications as well as the new stable family
+    // key. Keep all historical statuses and reserved provider payloads intact.
+    const row = await this.db.prepare(
+      "SELECT 1 AS found FROM notification_events WHERE subscription_id = ? AND event_kind = 'strong_match' AND opportunity_id IN (SELECT value FROM json_each(?)) LIMIT 1",
+    ).bind(subscriptionId, JSON.stringify(opportunityIds)).first();
+    return Boolean(row);
+  }
+
   async setQualification(subscriptionId, opportunityId, qualified, now, cycle = null) {
     if (!cycle) {
       await this.db.prepare(

@@ -3,6 +3,7 @@ import "../../../assets/submission-schedule.js";
 
 import { recordId } from "./contract.js";
 import { alertRecordIdentity, isSavedSearchRestoration } from "./event-identity.js";
+import { savedSearchNotificationIdentity } from "./notification-families.js";
 import {
   capabilityUrls, randomToken, sha256Hex, verificationToken as createVerificationToken,
 } from "./crypto.js";
@@ -270,30 +271,50 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
   const definition = JSON.parse(subscription.definition_json);
   if (!changes.length) return 0;
   const asOf = isoDate(evaluationContext.evaluationAsOf || now);
-  const identities = evaluationContext.identities;
+  const identities = evaluationContext.searchIdentities;
   const changedIds = [...new Set(changes.map(event => identities.resolve(event.opportunity_id)).filter(Boolean))];
   const matchingIds = [...new Set(changedIds.flatMap(id => identities.ids(id)))];
   const matchDetails = typeof assets.matcher.matchDetails === "function"
     ? assets.matcher.matchDetails(definition, asOf, matchingIds)
     : new Map([...assets.matcher.matchIds(definition, asOf, matchingIds)].map(id => [id, { reasons: [] }]));
-  const prior = await store.qualifications(subscription.id, matchingIds);
+  const qualificationIds = id => identities.family(id)
+    ? [...new Set([id, ...identities.ids(id), ...identities.family(id).notices.map(notice => notice[0])])]
+    : identities.ids(id);
+  const prior = await store.qualifications(subscription.id, [...new Set(changedIds.flatMap(qualificationIds))]);
   let matched = 0;
   for (const id of changedIds) {
     const ids = identities.ids(id);
     const matchingId = ids.find(value => matchDetails.has(value));
     const qualifies = Boolean(matchingId);
-    const didQualify = ids.some(value => prior.get(value) === true);
+    const family = identities.family(id);
+    const didQualify = qualificationIds(id).some(value => prior.get(value) === true);
     const events = changes.filter(event => identities.resolve(event.opportunity_id) === id);
     const isNotifiable = event => CHANGE_KINDS.has(event.type)
       && !identities.isSourceAddition(event) && !isSavedSearchRestoration(event);
     const sourceEvent = events.find(isNotifiable);
-    if (qualifies && !didQualify && sourceEvent) {
-      const record = identities.record(id) || sourceEvent.record;
+    if (qualifies && !didQualify && sourceEvent
+        && (!family || !await store.hasStrongMatchFor(subscription.id, qualificationIds(id)))) {
+      const record = identities.record(matchingId) || sourceEvent.record;
+      const payload = payloadFor(record, sourceEvent.detail || "", env, matchDetails.get(matchingId)?.reasons, asOf);
+      if (family) {
+        payload.detail = "This annual call now matches your saved search.";
+        payload.notification_family = family.id;
+        payload.related_notices = family.records.map(notice => {
+          const value = payloadFor(notice, "", env, [], asOf);
+          return { opportunity_id: recordId(notice), agency: value.agency, program: value.program,
+            close_date: value.close_date, source_close_date: value.source_close_date,
+            submission_access: value.submission_access, funding_finder_url: value.funding_finder_url,
+            official_url: value.official_url };
+        });
+      }
       const inserted = await enqueue(store, subscription, {
-        eventKey: `strong:${id}:${sourceEvent?.id || assets.changes.generated_at}`,
+        // One annual-call notification per subscription, including retries,
+        // later source arrivals and qualification changes. D1's unique key
+        // protects the enqueue-before-qualification crash/concurrency boundary.
+        eventKey: family ? `strong-call:${family.id}` : `strong:${id}:${sourceEvent?.id || assets.changes.generated_at}`,
         eventKind: "strong_match",
-        opportunityId: id,
-        payload: payloadFor(record, sourceEvent.detail || "", env, matchDetails.get(matchingId)?.reasons, asOf),
+        opportunityId: family ? recordId(record) : id,
+        payload,
       }, now, evaluationContext);
       if (inserted) matched += 1;
     }
@@ -302,9 +323,15 @@ async function evaluateSavedSearch(store, subscription, assets, env, now, change
     const awaitingSubstantiveChange = !sourceEvent && assets.changes.events.some(event =>
       identities.resolve(event.opportunity_id) === id && isNotifiable(event)
       && events.some(skipped => skipped.changed_at === event.changed_at));
-    for (const member of awaitingSubstantiveChange ? [] : ids) {
-      if (qualifies === prior.get(member)) continue;
-      await store.setQualification(subscription.id, member, qualifies, now.toISOString(), {
+    // Retain a once-qualified call marker in the subscription's existing
+    // durable state. Delivery retention and later nonmatches must not turn
+    // the same annual call into a new match. Normal reactivation still owns
+    // baseline replacement, and the marker contains no recipient content.
+    const qualificationUpdates = ids.map(member => [member, qualifies]);
+    if (family && qualifies) qualificationUpdates.push([id, true]);
+    for (const [member, value] of awaitingSubstantiveChange ? [] : qualificationUpdates) {
+      if (value === prior.get(member)) continue;
+      await store.setQualification(subscription.id, member, value, now.toISOString(), {
         verificationTokenHash: subscription.verification_token_hash,
         baselineAt: subscription.baseline_at,
         claim: evaluationContext.schedulerClaim || null,
@@ -372,9 +399,10 @@ export async function evaluateSubscriptions({
     ),
   }));
   const identities = alertRecordIdentity(assets.catalog?.opportunities);
+  const searchIdentities = savedSearchNotificationIdentity(assets.catalog?.opportunities || [], identities);
   const matcherCandidates = [...new Set(batches.flatMap(batch => (
     batch.subscription.type === "saved_search"
-      ? batch.events.flatMap(event => identities.ids(event.opportunity_id)).filter(Boolean)
+      ? batch.events.flatMap(event => searchIdentities.ids(event.opportunity_id)).filter(Boolean)
       : []
   )))];
   if (matcherCandidates.length && typeof assets.matcher?.prepare === "function") {
@@ -387,6 +415,7 @@ export async function evaluateSubscriptions({
     : now;
   const evaluationContext = {
     identities,
+    searchIdentities,
     evaluationWindowStartedAt, weeklyWindowAt,
     evaluationInputGeneratedAt: generatedAt,
     evaluationSourceGeneratedAt: sourceGeneratedAt,
