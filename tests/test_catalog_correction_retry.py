@@ -160,8 +160,10 @@ class CloseoutRetry(unittest.TestCase):
     def setUpClass(cls):
         flow = yaml.safe_load((bridge.ROOT/'.github/workflows/refresh-opportunities.yml').read_text())
         cls.script = flow['jobs']['closeout']['steps'][0]['with']['script']
+        cls.plan_outputs = flow['jobs']['plan']['outputs']
 
-    def run_script(self, failed=None, stage='catalog-correction', *, requested=None, jobs=None, env=None):
+    def run_script(self, failed=None, stage='catalog-correction', *, requested=None, jobs=None, env=None,
+                   event='workflow_dispatch', issues=None):
         needs = {name: {'result': 'skipped', 'outputs': {}} for name in
             ('plan', 'generate', 'assemble', 'catalog-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live')}
         needs['plan'] = {'result': 'success', 'outputs': {'stage': stage} if stage else {}}
@@ -173,17 +175,18 @@ class CloseoutRetry(unittest.TestCase):
           const input = JSON.parse(fs.readFileSync(0, 'utf8'));
           for (const key of Object.keys(process.env)) if (key.startsWith('REQUESTED_') || key === 'GITHUB_RUN_ATTEMPT') delete process.env[key];
           Object.assign(process.env, input.env, {RESULTS: JSON.stringify(input.needs)});
-          const observed = {writes: []};
-          const core = {summary: {addRaw(body) {observed.body = body; return this;}, async write() {}}};
-          const github = {rest: {issues: {async listForRepo() {return {data: []};},
+          const observed = {writes: [], failures: []};
+          const core = {summary: {addRaw(body) {observed.body = body; return this;}, async write() {}},
+            setFailed(message) {observed.failures.push(message);}};
+          const github = {rest: {issues: {async listForRepo() {return {data: input.issues};},
             async create(value) {observed.writes.push(value);}, async update(value) {observed.writes.push(value);}}}};
-          const context = {runId: 700, sha: 'b'.repeat(40), serverUrl: 'https://github.com', repo: {owner: 'owner', repo: 'repo'}};
+          const context = {runId: 700, eventName: input.event, sha: 'b'.repeat(40), serverUrl: 'https://github.com', repo: {owner: 'owner', repo: 'repo'}};
           const AsyncFunction = Object.getPrototypeOf(async function(){}).constructor;
           new AsyncFunction('core', 'github', 'context', input.script)(core, github, context)
             .then(() => process.stdout.write(JSON.stringify(observed))).catch(error => {console.error(error); process.exitCode = 1;});
         """
         raw = subprocess.check_output([shutil.which('node') or 'node', '-e', harness],
-            input=encoded({'script': self.script, 'needs': needs, 'env': values}), cwd=bridge.ROOT, timeout=30)
+            input=encoded({'script': self.script, 'needs': needs, 'env': values, 'event': event, 'issues': issues or []}), cwd=bridge.ROOT, timeout=30)
         return json.loads(raw)
 
     def assert_route(self, result, route):
@@ -252,6 +255,99 @@ class CloseoutRetry(unittest.TestCase):
         self.assertEqual(result['writes'], [])
         result = self.run_script(jobs={'verify-live': {'result': 'success'}})
         self.assert_route(result, 'none'); self.assertEqual(result['writes'], [])
+
+    def test_schedule_hold_exposes_reason_and_fails_with_the_existing_incident(self):
+        for key in ('reason', 'held_stage'):
+            self.assertEqual(self.plan_outputs[key], '${{ steps.plan.outputs.'+key+' }}')
+        reason = 'Finite catalog continuation keeps automatic paid generation held'
+        for existing in ([], [{'number': 296, 'title': 'Funding Finder release checkpoint failed'}]):
+            with self.subTest(existing=existing):
+                result = self.run_script(stage='noop', event='schedule', issues=existing,
+                    jobs={'plan': {'outputs': {'stage': 'noop', 'held_stage': 'generate', 'reason': reason}}})
+                self.assertIn('Stage: held\n', result['body'])
+                self.assertIn('Held lifecycle stage: generate\n', result['body'])
+                self.assertIn('Planner reason: '+reason+'\n', result['body'])
+                self.assertNotIn('Stage: completed\n', result['body'])
+                self.assert_route(result, 'resolve the reported hold before resuming auto')
+                self.assertEqual(len(result['failures']), 1)
+                self.assertIn(reason, result['failures'][0])
+                self.assertEqual(len(result['writes']), 1)
+                self.assertEqual(result['writes'][0]['body'], result['body'])
+                if existing:
+                    self.assertEqual(result['writes'][0]['issue_number'], 296)
+                    self.assertNotIn('state', result['writes'][0])
+
+    def test_schedule_noop_without_hold_metadata_still_fails_truthfully(self):
+        result = self.run_script(stage='noop', event='schedule')
+        self.assertIn('Stage: held\n', result['body'])
+        self.assertIn('Planner reason: not reported\n', result['body'])
+        self.assertEqual(len(result['failures']), 1)
+        self.assertEqual(len(result['writes']), 1)
+
+    def test_push_noop_is_not_a_refresh_failure_or_an_incident_recovery(self):
+        result = self.run_script(stage='noop', event='push',
+            issues=[{'number': 296, 'title': 'Funding Finder release checkpoint failed'}])
+        self.assertIn('Stage: noop\n', result['body'])
+        self.assert_route(result, 'none')
+        self.assertEqual(result['writes'], [])
+        self.assertEqual(result['failures'], [])
+
+    def test_scheduled_review_wait_fails_without_losing_exact_resume_evidence(self):
+        result = self.run_script(stage='publish', event='schedule', jobs={
+            'candidate': {'result': 'success', 'outputs': {'candidate_id': 'retained-id', 'candidate_run': '600'}},
+            'validate': {'result': 'success'},
+            'publish': {'result': 'success', 'outputs': {'review_ready': 'false'}}})
+        self.assertIn('Stage: awaiting_review\n', result['body'])
+        self.assert_route(result, 'publish after exact-head review')
+        self.assertIn('Candidate: retained-id\nArtifact run: 600\n', result['body'])
+        self.assertIn('Validation receipt run: 700\n', result['body'])
+        self.assertIn('Publication evidence run: 700\nPublication evidence attempt: 4\n', result['body'])
+        self.assertEqual(len(result['failures']), 1)
+        self.assertIn('awaiting_review', result['failures'][0])
+        self.assertEqual(len(result['writes']), 1)
+
+    def test_scheduled_missing_live_verification_fails_without_claiming_completion(self):
+        result = self.run_script(stage='generate', event='schedule', jobs={
+            'candidate': {'result': 'success', 'outputs': {'candidate_id': 'retained-id', 'candidate_run': '600'}},
+            'validate': {'result': 'success'},
+            'publish': {'result': 'success', 'outputs': {'merge_sha': 'c'*40}},
+            'pages': {'result': 'success'}})
+        self.assertIn('Stage: incomplete_verification\n', result['body'])
+        self.assert_route(result, 'inspect the retained checkpoint before retry')
+        self.assertIn('Protected publication SHA: '+'c'*40+'\n', result['body'])
+        self.assertEqual(len(result['failures']), 1)
+        self.assertEqual(len(result['writes']), 1)
+
+    def test_scheduled_failure_keeps_the_exact_failed_stage_and_retry(self):
+        result = self.run_script('pages', stage='publish', event='schedule', jobs={
+            'candidate': {'result': 'success', 'outputs': {'candidate_id': 'retained-id', 'candidate_run': '600'}},
+            'validate': {'result': 'success'},
+            'publish': {'result': 'success', 'outputs': {'merge_sha': 'c'*40}}})
+        self.assertIn('Stage: pages\n', result['body'])
+        self.assert_route(result, 'publish')
+        self.assertEqual(len(result['failures']), 1)
+        self.assertEqual(len(result['writes']), 1)
+
+    def test_scheduled_verified_publication_recovers_only_eligible_incidents(self):
+        issues = [
+            {'number': 296, 'title': 'Funding Finder release checkpoint failed'},
+            {'number': 12, 'title': 'Automated Grants.gov refresh failed'},
+            {'number': 30, 'title': 'External funding source refresh degraded'},
+            {'number': 99, 'title': 'Another issue'},
+        ]
+        for sources_healthy, expected in (('false', {296, 12}), ('true', {296, 12, 30})):
+            with self.subTest(sources_healthy=sources_healthy):
+                result = self.run_script(stage='generate', event='schedule', issues=issues, jobs={
+                    'generate': {'result': 'success', 'outputs': {'sources_healthy': sources_healthy}},
+                    'candidate': {'result': 'success', 'outputs': {'candidate_id': 'retained-id', 'candidate_run': '600'}},
+                    'validate': {'result': 'success'},
+                    'publish': {'result': 'success', 'outputs': {'merge_sha': 'c'*40}},
+                    'pages': {'result': 'success'}, 'verify-live': {'result': 'success'}})
+                self.assertIn('Stage: completed\n', result['body'])
+                self.assert_route(result, 'none')
+                self.assertEqual(result['failures'], [])
+                self.assertEqual({write['issue_number'] for write in result['writes']}, expected)
+                self.assertTrue(all(write['state'] == 'closed' for write in result['writes']))
 
 
 if __name__ == '__main__': unittest.main()
