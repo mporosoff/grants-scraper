@@ -18,7 +18,7 @@
     "data/search-v2-voyage-canaries.json": "02ab04e1ae2295f309a3aecd863fa93926e63a7943896a2ecabfa7b3cb284036",
     "assets/app-config.js": "fb8017ca60869628a3533e81ba8480c1ff31d72f98e9e444ec077533e7bdd9d0",
     "assets/app.css": "1faa51836942124ae53e062063ccebe182fad89b19508e7f976b42815bb26298",
-    "assets/app.js": "a5b36fee11de098b92ec64d3b0b9c31c655ae3edb995e73c29f78400ca1ed184",
+    "assets/app.js": "8674b59364aa4a74043e19a25e5451d69c9a9a257ce1dbf553e60d2795e9cc8e",
     "assets/submission-schedule.js": "2e2f509aa092efc51e5ecc488e6d815766be7b1517024864d8da6377044e1a0f",
     "assets/saved.js": "87d08eac4c6b4a6614909ab8bb7dc1e7a5693f0d30b1906a017c97871a63fb60",
     "assets/site-shell.js": "cdd9cc0c687dcd995422448bfd3373a72547ad04ecb247851b00b04ac17eb2d3",
@@ -43,7 +43,7 @@
     "data/opportunity_teams.js": "8127642061bcdc21a7a483305628f769c7640593873cfe7b1c759b40d378a824",
     "data/researcher_directory.js": "93b95b1f5e0656fa527c313f3ae40ccfc244e73b92f20e5e870cbe570f82da69",
     "data/researcher_registry_manifest.json": "a2ecbb71de8e6afe20d5ae466d0842cb4a682a63f724dab91ac48b2075f837e3",
-    "match_explorer.html": "25af625b3178b72016daaf0ebac07f50969e19bb4b9b1d2a15ab5e9119589c33",
+    "match_explorer.html": "50d30520808ee94f52ca4476b1e8fbf29eb167b9704d72fec67c6eefa93606d1",
     "team_match.html": "8e19e1a2a83c8e5b044203d54b63fed988ea3a491e0dbe84799cb438f75d1a2a",
     "workers/search-voyage-proxy/src/index.js": "bad06e8dd15e58355b274d7b35844097dd8c19fb9517905418c631fd2e56cf2e",
     "workers/search-voyage-proxy/wrangler.jsonc": "28719c21328fb02c52a78b15db8404e5ba12f35142e50feb6c88992410d77812"
