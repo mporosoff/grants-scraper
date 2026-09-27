@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-23T15:07:32Z</updated>
+  <updated>2026-09-27T16:19:10Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -178,6 +178,40 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/363944"/>
+    <id>urn:funding-finder:grants-gov:363944</id>
+    <updated>2027-07-23T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-14 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting partnerships between academic (or small business) investigators and one or more industrial partner(s) for translational development of a diagnostic test that has demonstrated proof-of-concept. Novel diagnostics are needed to implement treatment strategies, evaluate vaccines and identify inf…</summary>
+  </entry>
+  <entry>
+    <title>LeverAging StraTegies to Maximize ImpLementation and Effectiveness for HIV (LAST MILE)</title>
+    <link href="https://www.grants.gov/search-results-detail/363948"/>
+    <id>urn:funding-finder:grants-gov:363948</id>
+    <updated>2027-07-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the LeverAging StraTegies to Maximize ImpLementation and Effectiveness for HIV (LAST MILE) program. This program will encourage collaborations to perform effectiveness trials that incorporate implementation in real-world settings. Examples include combined efficacy-effectiveness trials, pragmatic…</summary>
+  </entry>
+  <entry>
+    <title>The Role of the Innate Immune System in the Pathogenesis of Type 1 Diabetes</title>
+    <link href="https://www.grants.gov/search-results-detail/363943"/>
+    <id>urn:funding-finder:grants-gov:363943</id>
+    <updated>2027-07-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-13 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by utilizing Special Statutory Funding Program for Type 1 Diabetes Research funds to support studies focused on the involvement of the innate immune system in the initiation of Type 1 diabetes (T1D). This initiative directly aligns with the first goal of the congressio…</summary>
   </entry>
   <entry>
     <title>Established Clinician Investigator Award to Support Mentoring (KS1)</title>
@@ -520,6 +554,14 @@
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-21 | The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
   </entry>
   <entry>
+    <title>Strengthening Collaboration Between Tuberculosis Control Programs and Affiliated Partners in the United States.</title>
+    <link href="https://www.grants.gov/search-results-detail/363956"/>
+    <id>urn:funding-finder:grants-gov:363956</id>
+    <updated>2027-03-22T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCHHSTP</name></author>
+    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-21 | The Centers for Disease Control and Prevention announces the availability of funding to support one recipient to build on the work under the previous notice of funding opportunity (CDC-RFA-PS22-2205) by strengthening collaboration and relationships with TB control programs, TB controllers, and affiliated partners in the United States. These partners include, but are not limited to, national TB con…</summary>
+  </entry>
+  <entry>
     <title>DHQP Global NOFO</title>
     <link href="https://www.grants.gov/search-results-detail/363448"/>
     <id>urn:funding-finder:grants-gov:363448</id>
@@ -606,6 +648,14 @@
     <summary>Veterans Legacy Grants Program | Estimated Application 2027-04-09 | VLGP will provide grants to eligible entities for the purpose of conducting cemetery research related to national, State, or Tribal Veterans’ cemeteries; producing educational materials that teach about the history of Veterans interred in national, State, or Tribal Veterans’ cemeteries; and promoting community engagement with the histories of Veterans interred in national, State, or Tribal Veteran…</summary>
   </entry>
   <entry>
+    <title>Alzheimer's Disease Programs Initiative (ADPI) - Developing Dementia-Capable Community Health Worker Programs in the National Aging Network</title>
+    <link href="https://www.grants.gov/search-results-detail/363962"/>
+    <id>urn:funding-finder:grants-gov:363962</id>
+    <updated>2027-03-04T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <summary>Administration for Community Living | Estimated Application 2027-05-03 | ACL plans to award cooperative agreements to develop and expand dementia-capable community health worker (CHW) programs within the National Aging Network. Projects will integrate CHWs into community-based aging services to improve dementia screening and referral, deliver dementia-specific evidence-based or evidence-informed interventions, reduce barriers to care, and improve access to supportive s…</summary>
+  </entry>
+  <entry>
     <title>Statewide Perinatal Quality Collaboratives: Improving Perinatal Care and Outcomes</title>
     <link href="https://www.grants.gov/search-results-detail/363330"/>
     <id>urn:funding-finder:grants-gov:363330</id>
@@ -633,6 +683,16 @@
     <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-04-30 | CDC announces the availability of fiscal year (FY) 2027 funds to implement CDC-RFA-DP-27-0072, Promoting Population Health through Increased Capacity in Alcohol Epidemiology and the Prevention of Excessive Alcohol Use. The purpose of this NOFO is to build state capacity in alcohol epidemiology and provide the tools and information needed to perform core public health functions related to excessive…</summary>
   </entry>
   <entry>
+    <title>Amyotrophic Lateral Sclerosis (ALS) Intermediate Patient Population Expanded Access (U01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/363926"/>
+    <id>urn:funding-finder:grants-gov:363926</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting the conduct of scientific research utilizing data from intermediate-size patient population expanded access protocols for ALS ("intermediate expanded access protocol for ALS", see Expanded Access Categories for Drugs (Including Biologics)). Eligible intermediate expanded access protocols for ALS should:…</summary>
+  </entry>
+  <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/363874"/>
     <id>urn:funding-finder:grants-gov:363874</id>
@@ -642,6 +702,18 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
+  </entry>
+  <entry>
+    <title>Immune Drivers of Autoimmune Disease</title>
+    <link href="https://www.grants.gov/search-results-detail/363942"/>
+    <id>urn:funding-finder:grants-gov:363942</id>
+    <updated>2027-02-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Immune Drivers of Autoimmune Disease (IDAD) network. This network aims to understand the earliest steps and triggers leading to autoimmunity and flare in humans, with the vision of ultimately preventing autoimmune disease. Priorities include discovering pre-clinical i…</summary>
   </entry>
   <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
@@ -663,6 +735,15 @@
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+  </entry>
+  <entry>
+    <title>Rehabilitation Engineering Research Center on Technologies for People Who are Blind or have Low Vision</title>
+    <link href="https://www.grants.gov/search-results-detail/363974"/>
+    <id>urn:funding-finder:grants-gov:363974</id>
+    <updated>2027-02-22T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Environmental science"/>
+    <summary>Administration for Community Living | Estimated Application 2027-04-22 | The purpose of the Rehabilitation Engineering Research Centers (RERC) program is to improve the effectiveness of services authorized under the Rehabilitation Act by conducting advanced engineering research on and development of innovative technologies that are designed to solve particular rehabilitation problems or to remove environmental barriers. The purpose of this RERC is to conduct research a…</summary>
   </entry>
   <entry>
     <title>Rural Maternity and Obstetrics Management Strategies Program</title>
@@ -703,6 +784,15 @@
     <summary>Centers for Disease Control - NCEH | Estimated Application 2027-04-19 | The purpose of this Notice of Funding Opportunity is to support state, local, tribal, and territorial public health laboratories in conducting high-quality biomonitoring and assessing human exposure to environmental chemicals within their jurisdictions. Strengthened laboratory capacity for exposure assessment will help jurisdictions identify and reduce harmful exposures and evaluate the effectiven…</summary>
   </entry>
   <entry>
+    <title>Rehabilitation Engineering Research Center on Recreational, Sport, and Exercise Technologies for People with Disabilities</title>
+    <link href="https://www.grants.gov/search-results-detail/363973"/>
+    <id>urn:funding-finder:grants-gov:363973</id>
+    <updated>2027-02-15T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Environmental science"/>
+    <summary>Administration for Community Living | Estimated Application 2027-04-15 | The purpose of the Rehabilitation Engineering Research Centers (RERC) program is to improve the effectiveness of services authorized under the Rehabilitation Act by conducting advanced engineering research on and development of innovative technologies that are designed to solve particular rehabilitation problems or to remove environmental barriers. The purpose of this RERC is to conduct research a…</summary>
+  </entry>
+  <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
     <link href="https://www.grants.gov/search-results-detail/362947"/>
     <id>urn:funding-finder:grants-gov:362947</id>
@@ -711,6 +801,27 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Estimated Application 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+  </entry>
+  <entry>
+    <title>Burn Injury Model System Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/363968"/>
+    <id>urn:funding-finder:grants-gov:363968</id>
+    <updated>2027-02-08T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <summary>Administration for Community Living | Estimated Application 2027-04-08 | The Burn Model Systems Centers conduct research that contributes to the development of and access to evidence-based burn rehabilitation. The Burn Model Systems Centers must generate new knowledge that can be used to improve outcomes of individuals with burn injury in one or more domains identified in NIDILRR's Long Range Plan: health and function, community living and participation, and employment…</summary>
+  </entry>
+  <entry>
+    <title>Continuation of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363945"/>
+    <id>urn:funding-finder:grants-gov:363945</id>
+    <updated>2027-02-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-08 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to support the continued operation and expansion of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) through a single U24 cooperative agreement award. The NOFO will be open to all eligible applicants. Established in 2022, the EL DMCC serves as the central hub for NIA’s human l…</summary>
   </entry>
   <entry>
     <title>Rural Communities Opioid Response Program - Community Systems Development</title>
@@ -774,6 +885,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
   </entry>
   <entry>
+    <title>NLM Grants for Scholarly Works in Biomedicine and Health (G13 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363939"/>
+    <id>urn:funding-finder:grants-gov:363939</id>
+    <updated>2027-02-02T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | This Notice of Funding Opportunity (NOFO) solicits applications for the NLM Grants for Scholarly Works in Biomedicine and Health program. The program supports the preparation of book-length manuscripts and other scholarly works of academic and/or public health importance to U.S. health professionals, scientists, public health professionals, and other relevant audiences. This NOFO is intended to su…</summary>
+  </entry>
+  <entry>
     <title>Domestic Violence Prevention</title>
     <link href="https://www.grants.gov/search-results-detail/363491"/>
     <id>urn:funding-finder:grants-gov:363491</id>
@@ -816,6 +937,15 @@
     <summary>Indian Health Service | Estimated Application 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
   </entry>
   <entry>
+    <title>Traumatic Brain Injury Model Systems Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/363970"/>
+    <id>urn:funding-finder:grants-gov:363970</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Neuroscience"/>
+    <summary>Administration for Community Living | Estimated Application 2027-04-01 | The TBI Model Systems Centers conduct research that contributes to the development of and access to evidence-based TBI rehabilitation. The TBIMS Centers must generate new knowledge that can be used to improve outcomes of individuals with TBI in one or more domains identified in NIDILRR's Long Range Plan: health and function, community living and participation, and employment. TBIMS Center grants m…</summary>
+  </entry>
+  <entry>
     <title>Tribal Epidemiology Centers</title>
     <link href="https://www.grants.gov/search-results-detail/363492"/>
     <id>urn:funding-finder:grants-gov:363492</id>
@@ -832,134 +962,5 @@
     <author><name>Indian Health Service</name></author>
     <category term="Education and workforce"/>
     <summary>Indian Health Service | Estimated Application 2027-04-01 | The Tribal Management Grant program aims to prepare tribes and tribal organizations for assuming all or part of existing Indian Health Service programs functions services and activities under the Public Law 93 638 Indian Self Determination and Education Assistance Act as amended and to further develop and improve their health management capabilities. The Indian Health Service intends to issue five…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Self-Governance - Negotiation</title>
-    <link href="https://www.grants.gov/search-results-detail/363499"/>
-    <id>urn:funding-finder:grants-gov:363499</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
-  </entry>
-  <entry>
-    <title>Tribal Self-Governance - Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363504"/>
-    <id>urn:funding-finder:grants-gov:363504</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The Tribal Self Governance Planning and Negotiation Cooperative Agreements aim to support tribes and tribal organization in their efforts to plan and prepare for assuming responsibility for providing health care to their members through the Tribal Self Governance Program. The Indian Health Service intends to issue three awards under each program announcement.</summary>
-  </entry>
-  <entry>
-    <title>Urban Indian Health Program - Education &amp; Research</title>
-    <link href="https://www.grants.gov/search-results-detail/363502"/>
-    <id>urn:funding-finder:grants-gov:363502</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Education and workforce"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | National organization that is an urban Indian education and research partner to DUIA and all IHS contracted UIOs</summary>
-  </entry>
-  <entry>
-    <title>Strengthening Public Health Systems and Services in Indian Country</title>
-    <link href="https://www.grants.gov/search-results-detail/363416"/>
-    <id>urn:funding-finder:grants-gov:363416</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>CENTERS FOR DISEASE CONTROL CSTLTS</name></author>
-    <category term="Education and workforce"/>
-    <category term="Public health"/>
-    <summary>CENTERS FOR DISEASE CONTROL CSTLTS | Estimated Application 2027-04-02 | CDC announces the availability of supplemental funding for the 34 American Indian and Alaska Native (AI/AN) Tribes and regional AI/AN tribally designated organizations awarded funding under CDC-RFA-TO-23-0001: Strengthening Public Health Systems and Services in Indian Country. The CDC-RFA-TO-23-0001 recipients are eligible to submit applications for new FY 2027 Centers, Institute, and Offices (CIO…</summary>
-  </entry>
-  <entry>
-    <title>Chronic Care Telehealth Centers of Excellence Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363274"/>
-    <id>urn:funding-finder:grants-gov:363274</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-05-03 | The Chronic Care Telehealth Centers for Excellence Program will fund academic medical centers to integrate innovative telehealth technologies into the full spectrum of services included in chronic care models, including but not limited to, chronic disease prevention and management, and the treatment for acute episodes that result from long-term morbidity. These centers will disseminate findings th…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362638"/>
-    <id>urn:funding-finder:grants-gov:362638</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
-  </entry>
-  <entry>
-    <title>NIDA Avenir Program: Fundamental Mechanistic Research in Addiction Science</title>
-    <link href="https://www.grants.gov/search-results-detail/363842"/>
-    <id>urn:funding-finder:grants-gov:363842</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-26 | Avenir, the French word for "future," reflects NIDA's commitment to developing the next generation of leaders in addiction science. Since 2015, the Avenir Program has supported exceptionally creative early stage investigators (ESIs) in launching innovative research programs. NIDA is now expanding this program to support bold mechanistic research across a broader range of addiction science, includi…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Data Archives for the BRAIN Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/361448"/>
-    <id>urn:funding-finder:grants-gov:361448</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
-  </entry>
-  <entry>
-    <title>Clinical Data, Safety and Statistical Centers (CDSSC)</title>
-    <link href="https://www.grants.gov/search-results-detail/362957"/>
-    <id>urn:funding-finder:grants-gov:362957</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the support of the Clinical Data, Safety and Statistical Centers program. The overall objective of this program is to provide coordination and oversight for multiple activities in service to clinical research and mechanistic studies supported by NIAID, including all Division of Allergy, Immunolog…</summary>
-  </entry>
-  <entry>
-    <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
-    <link href="https://www.grants.gov/search-results-detail/363680"/>
-    <id>urn:funding-finder:grants-gov:363680</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
-  </entry>
-  <entry>
-    <title>Homeless Veterans’ Reintegration Program (HVRP), Incarcerated Veterans’ Transition Program (IVTP), and the Homeless Women Veterans' and Homeless Veterans' with Children Reintegration Grant Program (HWVHVWC) (referred to collectively</title>
-    <link href="https://www.grants.gov/search-results-detail/363845"/>
-    <id>urn:funding-finder:grants-gov:363845</id>
-    <updated>2027-01-29T00:00:00Z</updated>
-    <author><name>Veterans Employment and Training Service</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <summary>Veterans Employment and Training Service | Estimated Application 2027-03-17 | HVRP is an employment-focused, competitive federal grant program intended to enable veterans experiencing or at risk of homelessness to reach their full employment potential and obtain high-quality career outcomes. HVRP is aligned with the priorities set forth by the President's Executive Orders to deliver comprehensive employment services to eligible veterans to assist these veterans in transitio…</summary>
-  </entry>
-  <entry>
-    <title>Surveillance and Case Control Study of Stillbirth and Birth Defects (SUCCSSBD)</title>
-    <link href="https://www.grants.gov/search-results-detail/363625"/>
-    <id>urn:funding-finder:grants-gov:363625</id>
-    <updated>2027-01-29T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCBDDD</name></author>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCBDDD | Estimated Application 2027-03-31 | Birth defects affect about three percent of all births in the United States and are a leading cause of infant mortality, morbidity, and healthcare costs; the causes of two-thirds of birth defects remain unknown. In addition, stillbirths (pregnancy loss at 20 or more weeks of gestation) are an under-evaluated public health issue. Over 20,000 pregnancies in the U.S. end in a stillbirth each year. Th…</summary>
-  </entry>
-  <entry>
-    <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/361521"/>
-    <id>urn:funding-finder:grants-gov:361521</id>
-    <updated>2027-01-27T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
 </feed>

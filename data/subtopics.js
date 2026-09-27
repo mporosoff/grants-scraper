@@ -11,8 +11,8 @@ globalThis.SUBTOPIC_CATALOG={
   "frame_evidence_cache_sha256": "2e5196fceba24921b486dce76a29f5759f642ce207fa65fc9bb9a11632a1a71c",
   "top_level_fetch_failure_count": 51
  },
- "parent_count": 19,
- "record_count": 466,
+ "parent_count": 21,
+ "record_count": 473,
  "records": {
   "103313": {
    "segmentation_method": null,
@@ -78,13 +78,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "291594": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "295449": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -3149,13 +3142,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "332012": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "332052": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -3241,13 +3227,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "337086": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "338558": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -11809,13 +11788,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "348407": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "348599": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -11838,13 +11810,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "348985": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "349109": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -13313,13 +13278,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "349655": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "349724": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -13348,13 +13306,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "350299": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "350338": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -13363,13 +13314,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "350469": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "350485": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -13502,21 +13446,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "351057": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "351124": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "351234": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -13558,13 +13488,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "351889": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "351920": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -13642,13 +13565,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "352845": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "352947": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -13956,13 +13872,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_extractable_text",
    "subtopics": []
   },
-  "355855": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "355867": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -14090,27 +13999,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "356530": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "356536": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "356537": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "356538": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -15694,13 +15582,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "357105": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "357112": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -16261,27 +16142,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "357578": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357579": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357580": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "357602": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -16297,13 +16157,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "357606": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357609": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -16353,13 +16206,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "357667": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "357710": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -16961,20 +16807,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "358999": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "359000": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "359003": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -16997,13 +16829,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "359073": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "359075": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -20968,6 +20793,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "360544": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "360545": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -26808,21 +26640,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "360874": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "360875": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "360881": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27334,26 +27152,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361214": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361215": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361234": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopics": []
-  },
   "361238": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -27369,13 +27167,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361251": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361255": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27403,7 +27194,14 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361279": {
+  "361275": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "361276": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27459,13 +27257,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361318": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "361322": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -27487,13 +27278,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361348": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "361369": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -27502,13 +27286,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361370": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361394": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -27530,13 +27307,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361418": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361426": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -33526,13 +33296,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "361534": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "361554": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -33652,13 +33415,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "361915": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "361931": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -33799,27 +33555,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362177": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362178": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362179": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362180": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -34134,13 +33869,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "362314": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "362315": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -34177,13 +33905,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "362353": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "362355": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35113,13 +34834,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363223": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363224": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35131,6 +34845,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_extractable_text",
+   "subtopics": []
+  },
+  "363229": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
   "363232": {
@@ -35263,13 +34984,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363285": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363287": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -35313,13 +35027,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363299": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363306": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -35403,13 +35110,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363332": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363335": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -36831,13 +36531,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363568": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363569": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -36895,41 +36588,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363582": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363584": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363585": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363587": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363588": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363589": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37223,13 +36881,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopics": []
   },
-  "363602": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363611": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37343,34 +36994,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363634": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363635": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363636": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363637": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363638": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -37557,13 +37180,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopics": []
   },
-  "363689": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363690": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -37628,13 +37244,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363710": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363711": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -38611,13 +38220,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363863": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363864": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42631,21 +42233,7 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363914": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363915": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "363916": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42659,19 +42247,283 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "363918": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
   "363919": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
+  },
+  "363920": {
+   "segmentation_method": "heading_font",
+   "subtopic_count": 3,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "fdca9aadce6a7eb790224202af1f0e498717956e247891002776890c93929b28",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p9",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-27",
+     "last_verified": "2026-09-27",
+     "opportunity_id": "363920:c-1",
+     "ordinal_label": "1",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 10,
+     "page_start": 9,
+     "parent_id": "363920",
+     "parent_opportunity_number": "USDA-NHQ-ACEP-26-NOFO0001456",
+     "pattern_family": "component",
+     "program_area_labels": [],
+     "publication_reason": "tier_low",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "heading_font",
+     "source_document_hash": "8e21385b4e5a55588a8c771f4bf5c23c220ae6a4a2183266e847966b9ac025ac",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355082",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Component 1",
+     "subtopic_code_norm": "c-1",
+     "subtopic_id": "363920:c-1",
+     "subtopic_ordinal": 1,
+     "subtopic_source": "inferred",
+     "summary": "The awardee may be responsible for developing complete, or engineering components of, new easement restoration designs or designs to repair failed or degraded engineering practices on existing easements. These activities may require the following: a. Onsite topographic survey and gathering of onsite and offsite data of the planned restoration area and any upland or downstream impacted areas as necessary. b.",
+     "term_display": {
+      "326": "326",
+      "356": "356",
+      "395": "395",
+      "460": "460",
+      "466": "466",
+      "468": "468",
+      "500": "500",
+      "570": "570",
+      "580": "580",
+      "587": "587",
+      "606": "606",
+      "620": "620",
+      "646": "646",
+      "649": "649",
+      "656": "656",
+      "657": "657",
+      "658": "658",
+      "659": "659",
+      "activity": "activities",
+      "area": "area",
+      "awardee": "awardee",
+      "bid": "bid",
+      "bidder": "bidders",
+      "but": "but",
+      "calculation": "calculations",
+      "clear": "Clearing",
+      "complete": "complete",
+      "component": "Component",
+      "conservation": "conservation",
+      "construction": "construction",
+      "control": "Control",
+      "design": "Design",
+      "easement": "easements",
+      "engineer": "engineering",
+      "exist": "existing",
+      "improvement": "Improvement",
+      "includ": "including",
+      "land": "Land",
+      "management": "Management",
+      "necessary": "necessary",
+      "onsite": "Onsite",
+      "outlet": "Outlet",
+      "plann": "planned",
+      "practice": "practices",
+      "preparation": "preparation",
+      "repair": "repair",
+      "require": "require",
+      "restoration": "restoration",
+      "structure": "Structure",
+      "water": "Water",
+      "wetland": "Wetland"
+     },
+     "title": "Planning and Design of Engineering Practices and Improvements",
+     "title_fingerprint": "2c47827c",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "c62dcd39ed5116982386fedec5b1592caa3e1799686537267a556e904c0be2fb",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p10",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-27",
+     "last_verified": "2026-09-27",
+     "opportunity_id": "363920:c-2",
+     "ordinal_label": "2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 11,
+     "page_start": 10,
+     "parent_id": "363920",
+     "parent_opportunity_number": "USDA-NHQ-ACEP-26-NOFO0001456",
+     "pattern_family": "component",
+     "program_area_labels": [],
+     "publication_reason": "tier_low",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "heading_font",
+     "source_document_hash": "8e21385b4e5a55588a8c771f4bf5c23c220ae6a4a2183266e847966b9ac025ac",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355082",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Component 2",
+     "subtopic_code_norm": "c-2",
+     "subtopic_id": "363920:c-2",
+     "subtopic_ordinal": 2,
+     "subtopic_source": "inferred",
+     "summary": "Practices, Including Vegetative Maintenance or Re-Establishment The awardee may be responsible for developing vegetative restoration plans, or vegetative maintenance/re-establishment/management plans for existing easements with failed practices or degraded conditions. Sub-component activities may include: a. Development of planting plans in the easement business tools for new enrollments. This may require a site assessments or wetland delineations, as needed, to promote wetland plant communities using compatible/native. b.",
+     "term_display": {
+      "314": "314",
+      "315": "315",
+      "327": "327",
+      "338": "338",
+      "342": "342",
+      "380": "380",
+      "394": "394",
+      "420": "420",
+      "422": "422",
+      "484": "484",
+      "490": "490",
+      "612": "612",
+      "643": "643",
+      "business": "business",
+      "community": "communities",
+      "compatible": "compatible",
+      "condition": "conditions",
+      "conservation": "Conservation",
+      "degrad": "degraded",
+      "design": "Design",
+      "develop": "Developing",
+      "development": "Development",
+      "easement": "easement",
+      "establishment": "Establishment",
+      "fail": "failed",
+      "habitat": "Habitat",
+      "include": "include",
+      "maintenance": "maintenance",
+      "management": "Management",
+      "plan": "plans",
+      "plant": "plant",
+      "practice": "practices",
+      "re-establishment": "re-establishment",
+      "restoration": "Restoration",
+      "shrub": "Shrub",
+      "site": "Site",
+      "tool": "tools",
+      "tree": "Tree",
+      "vegetative": "Vegetative",
+      "wetland": "wetland",
+      "wildlife": "Wildlife"
+     },
+     "title": "Easement Restoration and Stewardship: Planning and Design of Vegetative",
+     "title_fingerprint": "0ef37cc1",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "low",
+     "cov4_approval_contract": "0b0a96b8cb249747ad3c8ca265dc7153b0c854d937ee0b9fd436e140e08ec8db",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p11",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-27",
+     "last_verified": "2026-09-27",
+     "opportunity_id": "363920:c-3",
+     "ordinal_label": "3",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 12,
+     "page_start": 11,
+     "parent_id": "363920",
+     "parent_opportunity_number": "USDA-NHQ-ACEP-26-NOFO0001456",
+     "pattern_family": "component",
+     "program_area_labels": [],
+     "publication_reason": "tier_low",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "heading_font",
+     "source_document_hash": "8e21385b4e5a55588a8c771f4bf5c23c220ae6a4a2183266e847966b9ac025ac",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355082",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Component 3",
+     "subtopic_code_norm": "c-3",
+     "subtopic_id": "363920:c-3",
+     "subtopic_ordinal": 3,
+     "subtopic_source": "inferred",
+     "summary": "The awardee may be responsible for onsite and offsite monitoring of existing ACEP-WRE, EWPP-FPE, and WRP easements in multiple states, which includes the following: Assess the ecological condition of restored easements and their compliance with NRCS deed terms and policies as outlined in the Conservation Program Manual (CPM) under Easement Common Provisions Monitoring (440 CPM 527, Subpart P).",
+     "term_display": {
+      "440": "440",
+      "527": "527",
+      "activity": "activities",
+      "annual": "Annual",
+      "assess": "Assess",
+      "available": "available",
+      "awardee": "awardee",
+      "common": "Common",
+      "compatible": "compatible",
+      "compliance": "compliance",
+      "condition": "conditions",
+      "conservation": "Conservation",
+      "cpm": "CPM",
+      "deed": "deed",
+      "design": "designed",
+      "each": "each",
+      "easement": "easement",
+      "ecological": "ecological",
+      "effectiveness": "effectiveness",
+      "encroachment": "encroachments",
+      "etc": "etc",
+      "exist": "existing",
+      "follow": "follow",
+      "identifi": "identified",
+      "if": "If",
+      "imagery": "Imagery",
+      "include": "include",
+      "management": "management",
+      "manual": "Manual",
+      "monitor": "Monitoring",
+      "need": "needed",
+      "nrcs": "NRCS",
+      "onsite": "onsite",
+      "package": "package",
+      "part": "Part",
+      "plan": "plans",
+      "policy": "policies",
+      "policy-compliant": "policy-compliant",
+      "potential": "potential",
+      "practice": "practices",
+      "provide": "provide",
+      "provision": "Provisions",
+      "restoration": "restoration",
+      "subpart": "Subpart",
+      "verify": "verifying",
+      "violation": "violation"
+     },
+     "title": "Monitoring of Closed and Restored Easements",
+     "title_fingerprint": "6d8b248f",
+     "topic_areas": []
+    }
+   ]
   },
   "363921": {
    "segmentation_method": null,
@@ -42681,6 +42533,477 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "363922": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363926": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363929": {
+   "segmentation_method": "outline_structural",
+   "subtopic_count": 4,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopics": [
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "64f49991ce258d505634bbfeaaf7130650fd77394e0e904ec496056b979f1362",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p5",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-27",
+     "last_verified": "2026-09-27",
+     "opportunity_id": "363929:psr-1",
+     "ordinal_label": "1",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 9,
+     "page_start": 5,
+     "parent_id": "363929",
+     "parent_opportunity_number": "NOAA-NMFS-PRPO-2026-31863",
+     "pattern_family": "structural_siblings",
+     "program_area_labels": [],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline_structural",
+     "source_document_hash": "6a365250c3c41f94c5cb2ff299c435fa32d19c3d56f06a8d3e3860ffea775d22",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355086",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Priority #1. Stranding Response",
+     "subtopic_code_norm": "psr-1",
+     "subtopic_id": "363929:psr-1",
+     "subtopic_ordinal": 1,
+     "subtopic_source": "inferred",
+     "summary": "• Priority #2. Entanglement Response • Priority #3. Diagnostic Labs & Other National or Multi-Regional Services • Priority #4. Research & Development There are both National and Regional goals listed under each Program priority. There are five NMFS Regions: • Alaska Region • Greater Atlantic Region • Pacific Islands Region • Southeast Region • West Coast Region A national map showing each region's area, and a list of authorized Stranding Network Members is provided on the Report a Stranded or Injured Marine Animal website. Priority #1.",
+     "term_display": {
+      "akr": "AKR",
+      "analysi": "analysis",
+      "area": "areas",
+      "atlantic": "Atlantic",
+      "capacity": "capacity",
+      "cetacean": "cetacean",
+      "collection": "collection",
+      "cover": "Covered",
+      "data": "data",
+      "dead": "dead",
+      "develop": "developing",
+      "e.g": "e.g",
+      "event": "events",
+      "gar": "GAR",
+      "goal": "Goal",
+      "human": "human",
+      "improve": "improve",
+      "includ": "including",
+      "include": "include",
+      "increase": "Increase",
+      "interaction": "interaction",
+      "island": "Islands",
+      "large": "large",
+      "live": "live",
+      "mammal": "mammals",
+      "marine": "marine",
+      "monitor": "monitoring",
+      "national": "National",
+      "necropsy": "necropsy",
+      "pir": "PIR",
+      "priority": "Priority",
+      "region": "Region",
+      "regional": "regional",
+      "rehabilitation": "rehabilitation",
+      "response": "response",
+      "ser": "SER",
+      "specy": "species",
+      "strand": "stranding",
+      "train": "training",
+      "wcr": "WCR",
+      "whale": "whales"
+     },
+     "title": "Priority #1. Stranding Response",
+     "title_fingerprint": "a5b14ecb",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "d6c7e2a9f212a439e1c3ee4d3bfc47d7fd56731340f516b49ab1cac802ca9bb3",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p9",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-27",
+     "last_verified": "2026-09-27",
+     "opportunity_id": "363929:per-2",
+     "ordinal_label": "2",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 11,
+     "page_start": 9,
+     "parent_id": "363929",
+     "parent_opportunity_number": "NOAA-NMFS-PRPO-2026-31863",
+     "pattern_family": "structural_siblings",
+     "program_area_labels": [],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline_structural",
+     "source_document_hash": "6a365250c3c41f94c5cb2ff299c435fa32d19c3d56f06a8d3e3860ffea775d22",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355086",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Priority #2. Entanglement Response",
+     "subtopic_code_norm": "per-2",
+     "subtopic_id": "363929:per-2",
+     "subtopic_ordinal": 2,
+     "subtopic_source": "inferred",
+     "summary": "Enhance entanglement response, training, tagging, and post-release monitoring. Proposals may also work to better understand, document, and address underlying causes of entanglement to reduce injury and mortality due to fishery gear and marine debris interactions. Development of entanglement response network capacity, including training, in areas where it is sparse is included under this priority. Below are tables with three Priority #2 National Goals from “A” to “C” ( in no particular order).",
+     "term_display": {
+      "activity": "activities",
+      "akr": "AKR",
+      "alaska": "Alaska",
+      "analyse": "analyses",
+      "atlantic": "Atlantic",
+      "authoriz": "authorized",
+      "best": "Best",
+      "cetacean": "cetacean",
+      "coast": "Coast",
+      "collaboration": "Collaboration",
+      "collection": "collection",
+      "common": "common",
+      "consistency": "consistency",
+      "cost": "costs",
+      "cover": "Covered",
+      "data": "data",
+      "develop": "Develop",
+      "encourag": "encouraged",
+      "enhance": "Enhance",
+      "entanglement": "entanglement",
+      "event": "events",
+      "exce": "exceed",
+      "gar": "GAR",
+      "gear": "Gear",
+      "goal": "Goal",
+      "guide": "Guide",
+      "large": "Large",
+      "marine": "Marine",
+      "national": "National",
+      "pinnip": "Pinniped",
+      "pir": "PIR",
+      "priority": "Priority",
+      "region": "Region",
+      "regional": "regional",
+      "remote": "remote",
+      "responder": "responders",
+      "response": "response",
+      "ser": "SER",
+      "small": "small",
+      "tool": "tools",
+      "train": "training",
+      "wcr": "WCR",
+      "west": "West",
+      "whale": "whale"
+     },
+     "title": "Priority #2. Entanglement Response",
+     "title_fingerprint": "de373be1",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "2338c6373c7094bda82308b4e4fb2abd8d1e0c891fead9b78cf7773e3fc484b6",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p11",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-27",
+     "last_verified": "2026-09-27",
+     "opportunity_id": "363929:pdlonomrs-3",
+     "ordinal_label": "3",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 11,
+     "page_start": 11,
+     "parent_id": "363929",
+     "parent_opportunity_number": "NOAA-NMFS-PRPO-2026-31863",
+     "pattern_family": "structural_siblings",
+     "program_area_labels": [],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline_structural",
+     "source_document_hash": "6a365250c3c41f94c5cb2ff299c435fa32d19c3d56f06a8d3e3860ffea775d22",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355086",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Priority #3. Diagnostic Labs & Other National or Multi-Regional Services",
+     "subtopic_code_norm": "pdlonomrs-3",
+     "subtopic_id": "363929:pdlonomrs-3",
+     "subtopic_ordinal": 3,
+     "subtopic_source": "inferred",
+     "summary": "Support collaborative, multi-organizational scientific, diagnostic, and response services provided to the Stranding and Entanglement Response Networks to enhance data collection, analyses, and improve understanding of marine mammal health, strandings, entanglements, and rehabilitation. Below is a table with three Priority #5 National Goals from “A” to “C” (in no particular order). This priority only considers National Goals. Priority #5A, B, C: Diagnostic Labs & Other National or Multi-Regional Services NATIONAL 5A.",
+     "term_display": {
+      "5a": "5A",
+      "5b": "5B",
+      "5c": "5C",
+      "additional": "additional",
+      "aging": "aging",
+      "analyse": "analyses",
+      "analysi": "analysis",
+      "archiv": "archiving",
+      "below": "Below",
+      "but": "but",
+      "capability": "capabilities",
+      "cetacean": "cetaceans",
+      "collaborative": "collaborative",
+      "collection": "collection",
+      "data": "data",
+      "diagnostic": "Diagnostic",
+      "entanglement": "entanglements",
+      "goal": "Goals",
+      "health": "health",
+      "improve": "improve",
+      "labs": "Labs",
+      "mammal": "mammal",
+      "marine": "marine",
+      "multi-regional": "Multi-Regional",
+      "national": "National",
+      "network": "Network",
+      "priority": "Priority",
+      "provid": "provided",
+      "provide": "Provide",
+      "response": "Response",
+      "service": "services",
+      "strand": "Stranding",
+      "stranding": "strandings",
+      "understand": "understanding"
+     },
+     "title": "Priority #3. Diagnostic Labs & Other National or Multi-Regional Services",
+     "title_fingerprint": "0268ffb3",
+     "topic_areas": []
+    },
+    {
+     "child_type": "subject",
+     "confidence": "medium",
+     "cov4_approval_contract": "4dded63e6745d413d0ba4f76437e0eb0dfa94a6d37133063ce78069f30fed545",
+     "cov4_fundability": "accept",
+     "cov4_ownership": "owned",
+     "cov4_ownership_basis": "grants_gov_attachment_binding",
+     "cov4_prompt_version": "cov4-subject-context-1",
+     "evidence_anchor": "p11",
+     "extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+     "first_seen": "2026-09-27",
+     "last_verified": "2026-09-27",
+     "opportunity_id": "363929:prd-4",
+     "ordinal_label": "4",
+     "own_deadline": null,
+     "own_deadline_is_advisory": true,
+     "page_end": 13,
+     "page_start": 11,
+     "parent_id": "363929",
+     "parent_opportunity_number": "NOAA-NMFS-PRPO-2026-31863",
+     "pattern_family": "structural_siblings",
+     "program_area_labels": [],
+     "publication_reason": "tier_medium",
+     "publication_state": "review",
+     "record_type": "subtopic",
+     "segmentation_method": "outline_structural",
+     "source_document_hash": "6a365250c3c41f94c5cb2ff299c435fa32d19c3d56f06a8d3e3860ffea775d22",
+     "source_document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/355086",
+     "source_role": "authoritative_announcement",
+     "status": "posted",
+     "subtopic_code": "Priority #4. Research & Development",
+     "subtopic_code_norm": "prd-4",
+     "subtopic_id": "363929:prd-4",
+     "subtopic_ordinal": 4,
+     "subtopic_source": "inferred",
+     "summary": "Develop scientific research projects designed to test hypotheses about marine mammal strandings, entanglements, and/or health/health trends, utilizing data from living and dead stranded and/or wild marine mammals. Develop tools, techniques, tests, treatments, etc. for stranded, entangled, and/or injured/distressed marine mammals. Data or samples may be collected from stranded or entangled animals as well as bycaught, subsistence hunted, or “free-swimming” wild animals, if those animals serve as controls or for comparisons in specific scientific study designs.",
+     "term_display": {
+      "agreement": "agreement",
+      "amount": "amount",
+      "animal": "animals",
+      "applicant": "applicant",
+      "collaboration": "collaboration",
+      "consider": "considered",
+      "cost": "costs",
+      "data": "data",
+      "develop": "Develop",
+      "development": "Development",
+      "dur": "during",
+      "eligibility": "Eligibility",
+      "entanglement": "Entanglement",
+      "federal": "federal",
+      "fund": "funds",
+      "health": "health",
+      "if": "If",
+      "information": "Information",
+      "involv": "involved",
+      "letter": "Letter",
+      "mammal": "mammals",
+      "marine": "marine",
+      "maximum": "maximum",
+      "need": "need",
+      "network": "Network",
+      "no": "no",
+      "noaa": "NOAA",
+      "organization": "organization",
+      "participant": "participant",
+      "period": "period",
+      "prescott": "Prescott",
+      "priority": "Priority",
+      "provide": "provide",
+      "request": "request",
+      "response": "Response",
+      "review": "Review",
+      "strand": "Stranding"
+     },
+     "title": "Priority #4. Research & Development",
+     "title_fingerprint": "9ccc9148",
+     "topic_areas": []
+    }
+   ]
+  },
+  "363931": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363935": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363936": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363937": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363939": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363940": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363941": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363942": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363943": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363944": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363945": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363946": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363947": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363948": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363949": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363956": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363958": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363960": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "363978": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -42995,6 +43318,20 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "nyserda:PON6236": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nyserda:PON6242": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "nyserda:RFP1": {
    "segmentation_method": null,
    "subtopic_count": 0,
@@ -43010,6 +43347,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "nyserda:RFP23": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "nyserda:RFP3928-Rd7": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -43121,14 +43465,14 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "vpr-email:NSF26-511": {
+  "vpr-email:NSF26-512": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
-  "vpr-email:NSF26-512": {
+  "vpr-email:PAR-25-322": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -43143,6 +43487,13 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "vpr-email:infoready-1993899": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "vpr-email:infoready-2024058": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -43170,7 +43521,21 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopic_reason": "no_layer_accepted",
    "subtopics": []
   },
+  "vpr-email:vpr-0f186b990288c021": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
   "vpr-email:vpr-14d5155ffe141890": {
+   "segmentation_method": null,
+   "subtopic_count": 0,
+   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
+   "subtopic_reason": "no_layer_accepted",
+   "subtopics": []
+  },
+  "vpr-email:vpr-36e6aed03b0511a5": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
@@ -43206,13 +43571,6 @@ globalThis.SUBTOPIC_CATALOG={
    "subtopics": []
   },
   "vpr-email:vpr-bd193799390f4580": {
-   "segmentation_method": null,
-   "subtopic_count": 0,
-   "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
-   "subtopic_reason": "no_layer_accepted",
-   "subtopics": []
-  },
-  "vpr-email:vpr-ddde5b48dc92bba2": {
    "segmentation_method": null,
    "subtopic_count": 0,
    "subtopic_extractor_version": "1.0.0+pdfplumber0.11.10+pypdf6.16.1",
