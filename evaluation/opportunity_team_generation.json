@@ -1,64 +1,16 @@
 {
-  "run_id": "35878492257",
+  "run_id": "36331552365",
   "run_attempt": "1",
   "generation_requested": true,
-  "started_at": "2026-09-23T15:13:06.220195+00:00",
+  "started_at": "2026-09-27T16:23:19.577115+00:00",
   "response_contract": "team-response-1",
-  "input_generation": "d3db9a9dfc0eb720b7b3c0fcfac852b5d7bd49558219ce3e8c631b2f1cde4a0f",
+  "input_generation": "9400a5c1334eec49cab2b743f1bf99fbcce929a8e0572b99e5198e08a36102f5",
   "mode": "maintenance",
   "queue_counts": {
-    "maintenance": 307,
-    "backfill": 1133
+    "maintenance": 343,
+    "backfill": 1083
   },
   "queue_reasons": {
-    "363711": "new_since_accepted_snapshot",
-    "363589": "retryable_maintenance_failure",
-    "363587": "retryable_maintenance_failure",
-    "363584": "retryable_maintenance_failure",
-    "nyserda:PON6121": "historical_unassessed_backfill",
-    "363223": "source_changed",
-    "363914": "new_since_accepted_snapshot",
-    "360874": "historical_unassessed_backfill",
-    "363636": "retryable_maintenance_failure",
-    "363635": "retryable_maintenance_failure",
-    "363638": "retryable_maintenance_failure",
-    "363637": "retryable_maintenance_failure",
-    "363588": "retryable_maintenance_failure",
-    "362178": "retryable_maintenance_failure",
-    "362179": "historical_unassessed_backfill",
-    "362180": "historical_unassessed_backfill",
-    "363918": "new_since_accepted_snapshot",
-    "358999": "historical_unassessed_backfill",
-    "351234": "historical_unassessed_backfill",
-    "363602": "retryable_maintenance_failure",
-    "363585": "retryable_maintenance_failure",
-    "361214": "historical_unassessed_backfill",
-    "359075": "historical_unassessed_backfill",
-    "362355": "historical_unassessed_backfill",
-    "363306": "historical_unassessed_backfill",
-    "363335": "historical_unassessed_backfill",
-    "361348": "historical_unassessed_backfill",
-    "359000": "historical_unassessed_backfill",
-    "357710": "historical_unassessed_backfill",
-    "348407": "historical_unassessed_backfill",
-    "351920": "historical_unassessed_backfill",
-    "360881": "historical_unassessed_backfill",
-    "355855": "retryable_maintenance_failure",
-    "350485": "historical_unassessed_backfill",
-    "361426": "historical_unassessed_backfill",
-    "361394": "historical_unassessed_backfill",
-    "351057": "historical_unassessed_backfill",
-    "361215": "historical_unassessed_backfill",
-    "362314": "historical_unassessed_backfill",
-    "361279": "historical_unassessed_backfill",
-    "361318": "historical_unassessed_backfill",
-    "363285": "source_changed",
-    "361255": "historical_unassessed_backfill",
-    "363568": "retryable_maintenance_failure",
-    "361234": "historical_unassessed_backfill",
-    "361534": "historical_unassessed_backfill",
-    "350299": "historical_unassessed_backfill",
-    "363864": "retryable_maintenance_failure",
     "363648": "retryable_maintenance_failure",
     "363647": "retryable_maintenance_failure",
     "356982": "historical_unassessed_backfill",
@@ -73,8 +25,9 @@
     "357634": "historical_unassessed_backfill",
     "355297": "retryable_maintenance_failure",
     "362644": "historical_unassessed_backfill",
-    "363654": "retryable_maintenance_failure",
-    "363656": "retryable_maintenance_failure",
+    "vpr-email:PAR-25-322": "new_since_accepted_snapshot",
+    "363654": "source_changed",
+    "363656": "source_changed",
     "361994": "retryable_maintenance_failure",
     "357554": "retryable_maintenance_failure",
     "360547": "historical_unassessed_backfill",
@@ -84,16 +37,16 @@
     "352282": "retryable_maintenance_failure",
     "vpr-email:vpr-14d5155ffe141890": "historical_unassessed_backfill",
     "363668": "retryable_maintenance_failure",
-    "363669": "retryable_maintenance_failure",
+    "363669": "source_changed",
     "362676": "retryable_maintenance_failure",
     "361249": "retryable_maintenance_failure",
     "359651": "historical_unassessed_backfill",
     "363111": "historical_unassessed_backfill",
     "358100": "historical_unassessed_backfill",
-    "361931": "historical_unassessed_backfill",
     "325500": "historical_unassessed_backfill",
     "358716": "historical_unassessed_backfill",
     "360698": "historical_unassessed_backfill",
+    "363960": "new_since_accepted_snapshot",
     "243973": "historical_unassessed_backfill",
     "360674": "historical_unassessed_backfill",
     "363483": "historical_unassessed_backfill",
@@ -116,9 +69,9 @@
     "361370": "historical_unassessed_backfill",
     "363287": "historical_unassessed_backfill",
     "363070": "retryable_maintenance_failure",
-    "363689": "retryable_maintenance_failure",
-    "363921": "new_since_accepted_snapshot",
-    "363919": "new_since_accepted_snapshot",
+    "363949": "new_since_accepted_snapshot",
+    "363921": "retryable_maintenance_failure",
+    "363919": "retryable_maintenance_failure",
     "363364": "historical_unassessed_backfill",
     "vpr-email:vpr-f068b41ca38718f9": "retryable_maintenance_failure",
     "361035": "historical_unassessed_backfill",
@@ -139,8 +92,7 @@
     "362207": "historical_unassessed_backfill",
     "362209": "historical_unassessed_backfill",
     "362422": "retryable_maintenance_failure",
-    "363916": "new_since_accepted_snapshot",
-    "362643": "new_since_accepted_snapshot",
+    "362643": "retryable_maintenance_failure",
     "358939": "historical_unassessed_backfill",
     "358022": "stale_published_team",
     "363466": "historical_unassessed_backfill",
@@ -150,6 +102,8 @@
     "363471": "historical_unassessed_backfill",
     "360561": "historical_unassessed_backfill",
     "359152": "historical_unassessed_backfill",
+    "363931": "new_since_accepted_snapshot",
+    "363935": "new_since_accepted_snapshot",
     "360337": "historical_unassessed_backfill",
     "360333": "historical_unassessed_backfill",
     "360338": "historical_unassessed_backfill",
@@ -198,15 +152,17 @@
     "362193": "historical_unassessed_backfill",
     "362190": "historical_unassessed_backfill",
     "362191": "historical_unassessed_backfill",
+    "361304": "stale_published_team",
     "360562": "historical_unassessed_backfill",
     "363700": "historical_unassessed_backfill",
+    "363937": "new_since_accepted_snapshot",
     "329325": "historical_unassessed_backfill",
     "363712": "retryable_maintenance_failure",
     "359271": "historical_unassessed_backfill",
     "363233": "retryable_maintenance_failure",
-    "363922": "new_since_accepted_snapshot",
-    "363732": "historical_unassessed_backfill",
-    "353936": "retryable_maintenance_failure",
+    "363922": "retryable_maintenance_failure",
+    "363732": "source_changed",
+    "353936": "source_changed",
     "360387": "historical_unassessed_backfill",
     "360441": "historical_unassessed_backfill",
     "363396": "historical_unassessed_backfill",
@@ -244,12 +200,12 @@
     "362187": "historical_unassessed_backfill",
     "362271": "historical_unassessed_backfill",
     "362272": "historical_unassessed_backfill",
-    "363559": "historical_unassessed_backfill",
+    "363559": "source_changed",
     "363479": "retryable_maintenance_failure",
     "363657": "retryable_maintenance_failure",
     "359149": "historical_unassessed_backfill",
     "342747": "retryable_maintenance_failure",
-    "363224": "source_changed",
+    "363224": "retryable_maintenance_failure",
     "363308": "retryable_maintenance_failure",
     "363843": "source_changed",
     "363594:a-1": "historical_unassessed_backfill",
@@ -257,16 +213,14 @@
     "363594:c-1": "historical_unassessed_backfill",
     "356935": "stale_published_team",
     "362787": "historical_unassessed_backfill",
-    "363590": "historical_unassessed_backfill",
+    "363590": "source_changed",
     "vpr-email:vpr-3a86f2f6b6e2925c": "retryable_maintenance_failure",
     "360759": "retryable_maintenance_failure",
     "361317": "historical_unassessed_backfill",
     "359855": "historical_unassessed_backfill",
     "359123": "historical_unassessed_backfill",
     "363423": "retryable_maintenance_failure",
-    "363421": "historical_unassessed_backfill",
-    "363419": "historical_unassessed_backfill",
-    "363420": "historical_unassessed_backfill",
+    "363941": "new_since_accepted_snapshot",
     "357658": "retryable_maintenance_failure",
     "nsf-funding:https://www.nsf.gov/funding/opportunities/grfp-nsf-graduate-research-fellowship-program/nsf26-526": "retryable_maintenance_failure",
     "363326": "historical_unassessed_backfill",
@@ -276,9 +230,11 @@
     "359853": "historical_unassessed_backfill",
     "363869": "retryable_maintenance_failure",
     "nyserda:PON6141": "historical_unassessed_backfill",
+    "363947": "new_since_accepted_snapshot",
     "363482": "retryable_maintenance_failure",
-    "348599": "historical_unassessed_backfill",
+    "348599": "source_changed",
     "360544": "historical_unassessed_backfill",
+    "363959": "new_since_accepted_snapshot",
     "362254": "historical_unassessed_backfill",
     "362248": "historical_unassessed_backfill",
     "362252": "historical_unassessed_backfill",
@@ -300,25 +256,24 @@
     "361002": "historical_unassessed_backfill",
     "363325": "historical_unassessed_backfill",
     "nyserda:PON6220": "historical_unassessed_backfill",
-    "363887": "new_since_accepted_snapshot",
-    "363889": "new_since_accepted_snapshot",
-    "363909": "new_since_accepted_snapshot",
-    "363890": "new_since_accepted_snapshot",
-    "363900": "new_since_accepted_snapshot",
-    "363901": "new_since_accepted_snapshot",
-    "363903": "new_since_accepted_snapshot",
-    "363911": "new_since_accepted_snapshot",
-    "363910": "new_since_accepted_snapshot",
-    "363904": "new_since_accepted_snapshot",
-    "vpr-email:vpr-ddde5b48dc92bba2": "retryable_maintenance_failure",
+    "363887": "source_changed",
+    "363889": "retryable_maintenance_failure",
+    "363909": "retryable_maintenance_failure",
+    "363890": "retryable_maintenance_failure",
+    "363900": "retryable_maintenance_failure",
+    "363901": "retryable_maintenance_failure",
+    "363903": "retryable_maintenance_failure",
+    "363911": "retryable_maintenance_failure",
+    "363910": "retryable_maintenance_failure",
+    "363904": "retryable_maintenance_failure",
     "vpr-email:vpr-02ca89881582e10d": "retryable_maintenance_failure",
     "nyserda:RFQL5937": "historical_unassessed_backfill",
-    "363888": "new_since_accepted_snapshot",
-    "363898": "new_since_accepted_snapshot",
-    "363907": "new_since_accepted_snapshot",
-    "363892": "new_since_accepted_snapshot",
-    "363913": "new_since_accepted_snapshot",
-    "363908": "new_since_accepted_snapshot",
+    "363888": "retryable_maintenance_failure",
+    "363898": "retryable_maintenance_failure",
+    "363907": "retryable_maintenance_failure",
+    "363892": "retryable_maintenance_failure",
+    "363913": "retryable_maintenance_failure",
+    "363908": "retryable_maintenance_failure",
     "363691": "historical_unassessed_backfill",
     "359279": "historical_unassessed_backfill",
     "359644": "historical_unassessed_backfill",
@@ -338,8 +293,8 @@
     "363159": "historical_unassessed_backfill",
     "360644": "historical_unassessed_backfill",
     "360643": "historical_unassessed_backfill",
-    "363891": "new_since_accepted_snapshot",
-    "363893": "new_since_accepted_snapshot",
+    "363891": "source_changed",
+    "363893": "retryable_maintenance_failure",
     "357604": "historical_unassessed_backfill",
     "363281": "historical_unassessed_backfill",
     "363785": "historical_unassessed_backfill",
@@ -350,7 +305,11 @@
     "360366": "historical_unassessed_backfill",
     "360296": "retryable_maintenance_failure",
     "362277": "historical_unassessed_backfill",
+    "363977": "new_since_accepted_snapshot",
+    "363961": "new_since_accepted_snapshot",
     "363784": "historical_unassessed_backfill",
+    "363957": "new_since_accepted_snapshot",
+    "363924": "new_since_accepted_snapshot",
     "340545": "historical_unassessed_backfill",
     "340544": "historical_unassessed_backfill",
     "363796": "historical_unassessed_backfill",
@@ -360,7 +319,6 @@
     "362607": "historical_unassessed_backfill",
     "363455": "historical_unassessed_backfill",
     "363728": "retryable_maintenance_failure",
-    "vpr-email:NSF26-511": "retryable_maintenance_failure",
     "362551": "historical_unassessed_backfill",
     "vpr-email:NSF26-512": "retryable_maintenance_failure",
     "343980": "retryable_maintenance_failure",
@@ -377,11 +335,11 @@
     "363374": "historical_unassessed_backfill",
     "361450": "historical_unassessed_backfill",
     "360679": "historical_unassessed_backfill",
-    "363241": "source_changed",
+    "363241": "retryable_maintenance_failure",
     "357204": "retryable_maintenance_failure",
     "363830": "retryable_maintenance_failure",
     "363611": "retryable_maintenance_failure",
-    "363902": "new_since_accepted_snapshot",
+    "363902": "retryable_maintenance_failure",
     "360458": "historical_unassessed_backfill",
     "361213": "historical_unassessed_backfill",
     "360400": "historical_unassessed_backfill",
@@ -391,13 +349,13 @@
     "359740": "retryable_maintenance_failure",
     "360536": "historical_unassessed_backfill",
     "362319": "retryable_maintenance_failure",
-    "arpa-h:fastpass": "historical_unassessed_backfill",
+    "arpa-h:fastpass": "source_changed",
     "363825": "retryable_maintenance_failure",
     "360875": "historical_unassessed_backfill",
-    "362965": "historical_unassessed_backfill",
+    "362965": "source_changed",
     "363764": "retryable_maintenance_failure",
     "361431": "historical_unassessed_backfill",
-    "363258": "source_changed",
+    "363258": "retryable_maintenance_failure",
     "362225": "historical_unassessed_backfill",
     "362224": "historical_unassessed_backfill",
     "362226": "historical_unassessed_backfill",
@@ -432,7 +390,6 @@
     "362464": "retryable_maintenance_failure",
     "362857": "historical_unassessed_backfill",
     "358179": "retryable_maintenance_failure",
-    "363620": "historical_unassessed_backfill",
     "350018": "historical_unassessed_backfill",
     "362836": "historical_unassessed_backfill",
     "363324": "historical_unassessed_backfill",
@@ -458,17 +415,19 @@
     "362302": "historical_unassessed_backfill",
     "362304": "historical_unassessed_backfill",
     "362305": "historical_unassessed_backfill",
+    "363920": "new_since_accepted_snapshot",
     "357256": "historical_unassessed_backfill",
     "357343": "historical_unassessed_backfill",
     "363856": "retryable_maintenance_failure",
     "362276": "historical_unassessed_backfill",
     "363047": "source_changed",
+    "nyserda:PON6121": "historical_unassessed_backfill",
     "358090": "retryable_maintenance_failure",
     "351124": "historical_unassessed_backfill",
     "362014": "retryable_maintenance_failure",
     "nyserda:RFP6224": "historical_unassessed_backfill",
     "darpa-iarpa:darpa-darpapa260202": "historical_unassessed_backfill",
-    "363815": "retryable_maintenance_failure",
+    "363815": "source_changed",
     "358689": "historical_unassessed_backfill",
     "347331": "historical_unassessed_backfill",
     "363055": "historical_unassessed_backfill",
@@ -476,8 +435,10 @@
     "363392": "historical_unassessed_backfill",
     "363115": "historical_unassessed_backfill",
     "363058": "historical_unassessed_backfill",
+    "363929": "new_since_accepted_snapshot",
     "362996": "historical_unassessed_backfill",
     "345738": "historical_unassessed_backfill",
+    "363229": "new_since_accepted_snapshot",
     "363484": "historical_unassessed_backfill",
     "363059": "historical_unassessed_backfill",
     "363141": "historical_unassessed_backfill",
@@ -485,17 +446,20 @@
     "363147": "historical_unassessed_backfill",
     "vpr-email:vpr-779bd2ee55b34b8e": "retryable_maintenance_failure",
     "359150": "historical_unassessed_backfill",
-    "363240": "source_changed",
+    "363240": "retryable_maintenance_failure",
     "356723": "historical_unassessed_backfill",
     "356724": "historical_unassessed_backfill",
     "363846": "retryable_maintenance_failure",
-    "363747": "source_changed",
+    "363747": "retryable_maintenance_failure",
     "363829": "retryable_maintenance_failure",
     "348375": "historical_unassessed_backfill",
     "355439": "historical_unassessed_backfill",
-    "363759": "source_changed",
+    "363759": "retryable_maintenance_failure",
     "363734": "historical_unassessed_backfill",
     "361876": "historical_unassessed_backfill",
+    "363963": "new_since_accepted_snapshot",
+    "363964": "new_since_accepted_snapshot",
+    "363965": "new_since_accepted_snapshot",
     "362977": "historical_unassessed_backfill",
     "363804": "historical_unassessed_backfill",
     "362982": "retryable_maintenance_failure",
@@ -506,6 +470,8 @@
     "363880": "retryable_maintenance_failure",
     "nyserda:PON6206": "retryable_maintenance_failure",
     "362871": "retryable_maintenance_failure",
+    "363971": "new_since_accepted_snapshot",
+    "363972": "new_since_accepted_snapshot",
     "361896": "historical_unassessed_backfill",
     "361480": "historical_unassessed_backfill",
     "363792": "retryable_maintenance_failure",
@@ -517,6 +483,7 @@
     "arpa-h:unique": "retryable_maintenance_failure",
     "362893": "historical_unassessed_backfill",
     "362718": "retryable_maintenance_failure",
+    "363966": "new_since_accepted_snapshot",
     "361526:challenge-1": "historical_unassessed_backfill",
     "361526:challenge-2": "historical_unassessed_backfill",
     "361526:challenge-3": "historical_unassessed_backfill",
@@ -633,6 +600,8 @@
     "361526:c-21": "historical_unassessed_backfill",
     "363413": "historical_unassessed_backfill",
     "363693": "historical_unassessed_backfill",
+    "363419": "historical_unassessed_backfill",
+    "363420": "historical_unassessed_backfill",
     "354620": "historical_unassessed_backfill",
     "darpa-iarpa:darpa-darpapa260201": "historical_unassessed_backfill",
     "363431": "historical_unassessed_backfill",
@@ -675,6 +644,7 @@
     "357273": "stale_published_team",
     "357021": "historical_unassessed_backfill",
     "357376": "historical_unassessed_backfill",
+    "363421": "historical_unassessed_backfill",
     "363777": "historical_unassessed_backfill",
     "362349": "historical_unassessed_backfill",
     "361164": "historical_unassessed_backfill",
@@ -686,7 +656,9 @@
     "349724": "retryable_maintenance_failure",
     "356460": "retryable_maintenance_failure",
     "363167": "historical_unassessed_backfill",
+    "vpr-email:infoready-2024058": "new_since_accepted_snapshot",
     "355219": "historical_unassessed_backfill",
+    "nyserda:RFP3928-Rd7": "new_since_accepted_snapshot",
     "358004": "retryable_maintenance_failure",
     "363409": "historical_unassessed_backfill",
     "363533": "historical_unassessed_backfill",
@@ -695,6 +667,7 @@
     "363411": "historical_unassessed_backfill",
     "363414": "historical_unassessed_backfill",
     "344608": "retryable_maintenance_failure",
+    "363936": "new_since_accepted_snapshot",
     "361821": "historical_unassessed_backfill",
     "361820": "historical_unassessed_backfill",
     "361815": "historical_unassessed_backfill",
@@ -724,7 +697,7 @@
     "356309": "historical_unassessed_backfill",
     "356310": "historical_unassessed_backfill",
     "361322": "historical_unassessed_backfill",
-    "354269": "retryable_maintenance_failure",
+    "354269": "source_changed",
     "359656": "historical_unassessed_backfill",
     "363232": "historical_unassessed_backfill",
     "356902": "retryable_maintenance_failure",
@@ -733,7 +706,7 @@
     "363840": "retryable_maintenance_failure",
     "353055": "retryable_maintenance_failure",
     "363037": "historical_unassessed_backfill",
-    "363789": "source_changed",
+    "363789": "retryable_maintenance_failure",
     "362946": "historical_unassessed_backfill",
     "362979": "historical_unassessed_backfill",
     "362978": "historical_unassessed_backfill",
@@ -747,6 +720,7 @@
     "363494": "historical_unassessed_backfill",
     "363476": "historical_unassessed_backfill",
     "363473": "historical_unassessed_backfill",
+    "363967": "new_since_accepted_snapshot",
     "363501": "historical_unassessed_backfill",
     "363272": "historical_unassessed_backfill",
     "328573": "historical_unassessed_backfill",
@@ -769,11 +743,12 @@
     "363049": "historical_unassessed_backfill",
     "356018": "retryable_maintenance_failure",
     "337086": "historical_unassessed_backfill",
+    "363958": "new_since_accepted_snapshot",
     "363591": "historical_unassessed_backfill",
     "363749": "historical_unassessed_backfill",
     "363245": "historical_unassessed_backfill",
     "vpr-email:infoready-2028504": "historical_unassessed_backfill",
-    "363912": "new_since_accepted_snapshot",
+    "363912": "retryable_maintenance_failure",
     "363475": "historical_unassessed_backfill",
     "363474": "historical_unassessed_backfill",
     "362101": "historical_unassessed_backfill",
@@ -797,10 +772,10 @@
     "363107": "historical_unassessed_backfill",
     "341086": "historical_unassessed_backfill",
     "363653": "historical_unassessed_backfill",
+    "363940": "new_since_accepted_snapshot",
     "357498": "retryable_maintenance_failure",
     "361333": "historical_unassessed_backfill",
     "363222": "historical_unassessed_backfill",
-    "357105": "retryable_maintenance_failure",
     "363195": "historical_unassessed_backfill",
     "363189": "historical_unassessed_backfill",
     "362752": "historical_unassessed_backfill",
@@ -811,6 +786,7 @@
     "351847": "retryable_maintenance_failure",
     "355867": "historical_unassessed_backfill",
     "359659": "historical_unassessed_backfill",
+    "357713": "source_changed",
     "363398": "historical_unassessed_backfill",
     "362983": "retryable_maintenance_failure",
     "363112": "historical_unassessed_backfill",
@@ -818,25 +794,29 @@
     "363751": "historical_unassessed_backfill",
     "363686": "historical_unassessed_backfill",
     "363454": "historical_unassessed_backfill",
+    "363969": "new_since_accepted_snapshot",
     "363389": "historical_unassessed_backfill",
     "363163": "historical_unassessed_backfill",
     "358093": "historical_unassessed_backfill",
     "363580": "historical_unassessed_backfill",
     "363166": "historical_unassessed_backfill",
     "363407": "historical_unassessed_backfill",
+    "363946": "new_since_accepted_snapshot",
     "363845": "retryable_maintenance_failure",
     "363694": "historical_unassessed_backfill",
     "363412": "historical_unassessed_backfill",
     "363516": "historical_unassessed_backfill",
     "363508": "historical_unassessed_backfill",
     "363509": "historical_unassessed_backfill",
-    "363360": "source_changed",
+    "363360": "retryable_maintenance_failure",
     "363341": "historical_unassessed_backfill",
     "363309": "historical_unassessed_backfill",
     "363687": "historical_unassessed_backfill",
     "363600": "historical_unassessed_backfill",
     "363581": "historical_unassessed_backfill",
     "351947": "retryable_maintenance_failure",
+    "363978": "new_since_accepted_snapshot",
+    "363975": "new_since_accepted_snapshot",
     "363697": "historical_unassessed_backfill",
     "363153": "historical_unassessed_backfill",
     "363354": "historical_unassessed_backfill",
@@ -862,9 +842,9 @@
     "355196": "historical_unassessed_backfill",
     "363601": "historical_unassessed_backfill",
     "363782": "historical_unassessed_backfill",
-    "363899": "new_since_accepted_snapshot",
-    "363905": "new_since_accepted_snapshot",
-    "363906": "new_since_accepted_snapshot",
+    "363899": "retryable_maintenance_failure",
+    "363905": "retryable_maintenance_failure",
+    "363906": "retryable_maintenance_failure",
     "358552": "retryable_maintenance_failure",
     "363069": "historical_unassessed_backfill",
     "363781": "retryable_maintenance_failure",
@@ -874,13 +854,15 @@
     "353413": "retryable_maintenance_failure",
     "358036": "historical_unassessed_backfill",
     "356888": "stale_published_team",
+    "363973": "new_since_accepted_snapshot",
     "363329": "historical_unassessed_backfill",
     "353623": "historical_unassessed_backfill",
-    "363917": "new_since_accepted_snapshot",
+    "363917": "retryable_maintenance_failure",
     "357121": "historical_unassessed_backfill",
     "363582": "historical_unassessed_backfill",
     "363511": "historical_unassessed_backfill",
     "363512": "historical_unassessed_backfill",
+    "363974": "new_since_accepted_snapshot",
     "363313": "historical_unassessed_backfill",
     "353822": "historical_unassessed_backfill",
     "353821": "historical_unassessed_backfill",
@@ -888,6 +870,7 @@
     "332894": "historical_unassessed_backfill",
     "363592": "historical_unassessed_backfill",
     "363277": "historical_unassessed_backfill",
+    "363962": "new_since_accepted_snapshot",
     "363274": "historical_unassessed_backfill",
     "363634": "historical_unassessed_backfill",
     "363330": "historical_unassessed_backfill",
@@ -911,25 +894,29 @@
     "353763": "historical_unassessed_backfill",
     "357573": "historical_unassessed_backfill",
     "357288": "historical_unassessed_backfill",
+    "363945": "new_since_accepted_snapshot",
     "353746": "historical_unassessed_backfill",
     "353745": "historical_unassessed_backfill",
     "353458": "historical_unassessed_backfill",
-    "357713": "historical_unassessed_backfill",
     "360633": "historical_unassessed_backfill",
     "363448": "historical_unassessed_backfill",
     "362953": "historical_unassessed_backfill",
     "363323": "historical_unassessed_backfill",
+    "363956": "new_since_accepted_snapshot",
     "362958": "historical_unassessed_backfill",
     "363310": "historical_unassessed_backfill",
     "362025": "historical_unassessed_backfill",
     "362945": "historical_unassessed_backfill",
+    "363926": "new_since_accepted_snapshot",
     "363826": "retryable_maintenance_failure",
     "362638": "historical_unassessed_backfill",
     "363862": "retryable_maintenance_failure",
     "361271": "historical_unassessed_backfill",
+    "363939": "new_since_accepted_snapshot",
+    "361276": "new_since_accepted_snapshot",
     "363488": "historical_unassessed_backfill",
     "363577": "historical_unassessed_backfill",
-    "363915": "new_since_accepted_snapshot",
+    "363915": "retryable_maintenance_failure",
     "362575": "historical_unassessed_backfill",
     "363836": "retryable_maintenance_failure",
     "363834": "retryable_maintenance_failure",
@@ -942,6 +929,7 @@
     "362948": "stale_published_team",
     "357622": "historical_unassessed_backfill",
     "363519": "historical_unassessed_backfill",
+    "363976": "new_since_accepted_snapshot",
     "363660": "historical_unassessed_backfill",
     "357893": "historical_unassessed_backfill",
     "361448": "historical_unassessed_backfill",
@@ -957,6 +945,7 @@
     "363680": "historical_unassessed_backfill",
     "362947": "historical_unassessed_backfill",
     "363350": "historical_unassessed_backfill",
+    "363942": "new_since_accepted_snapshot",
     "358934": "historical_unassessed_backfill",
     "363349": "historical_unassessed_backfill",
     "359274": "historical_unassessed_backfill",
@@ -1001,7 +990,7 @@
     "357712": "historical_unassessed_backfill",
     "363800": "historical_unassessed_backfill",
     "343653": "historical_unassessed_backfill",
-    "340828": "new_since_accepted_snapshot",
+    "340828": "retryable_maintenance_failure",
     "363873": "retryable_maintenance_failure",
     "362098": "historical_unassessed_backfill",
     "356517": "retryable_maintenance_failure",
@@ -1031,8 +1020,10 @@
     "363571": "historical_unassessed_backfill",
     "363570": "historical_unassessed_backfill",
     "357742": "historical_unassessed_backfill",
+    "363943": "new_since_accepted_snapshot",
     "357259": "historical_unassessed_backfill",
     "358202": "historical_unassessed_backfill",
+    "363944": "new_since_accepted_snapshot",
     "362352": "historical_unassessed_backfill",
     "357423": "historical_unassessed_backfill",
     "357426": "historical_unassessed_backfill",
@@ -1044,6 +1035,7 @@
     "357422": "historical_unassessed_backfill",
     "357979": "historical_unassessed_backfill",
     "362315": "historical_unassessed_backfill",
+    "363948": "new_since_accepted_snapshot",
     "358023": "historical_unassessed_backfill",
     "359892": "historical_unassessed_backfill",
     "357667": "historical_unassessed_backfill",
@@ -1311,7 +1303,11 @@
     "355499": "historical_unassessed_backfill",
     "356370": "historical_unassessed_backfill",
     "356623": "historical_unassessed_backfill",
+    "361275": "new_since_accepted_snapshot",
+    "360545": "new_since_accepted_snapshot",
     "nyserda:PON6149": "historical_unassessed_backfill",
+    "nyserda:PON6236": "new_since_accepted_snapshot",
+    "nyserda:PON6242": "new_since_accepted_snapshot",
     "nyserda:PON3414": "historical_unassessed_backfill",
     "nyserda:RFQL6152": "retryable_maintenance_failure",
     "nyserda:NYT-VIP": "retryable_maintenance_failure",
@@ -1344,12 +1340,10 @@
     "361554": "historical_unassessed_backfill",
     "363811": "historical_unassessed_backfill",
     "332052": "historical_unassessed_backfill",
-    "356538": "historical_unassessed_backfill",
     "343875": "historical_unassessed_backfill",
     "332137": "historical_unassessed_backfill",
     "362489": "historical_unassessed_backfill",
     "363810": "historical_unassessed_backfill",
-    "357609": "historical_unassessed_backfill",
     "362061": "historical_unassessed_backfill",
     "332125": "historical_unassessed_backfill",
     "363383": "historical_unassessed_backfill",
@@ -1360,11 +1354,9 @@
     "308873": "historical_unassessed_backfill",
     "353475": "historical_unassessed_backfill",
     "332126": "historical_unassessed_backfill",
-    "349655": "historical_unassessed_backfill",
     "vpr-email:vpr-e1612e2acba631d2": "historical_unassessed_backfill",
     "348164": "historical_unassessed_backfill",
     "359225": "historical_unassessed_backfill",
-    "332012": "historical_unassessed_backfill",
     "363786": "historical_unassessed_backfill",
     "363813": "historical_unassessed_backfill",
     "arpa-h:ehi": "retryable_maintenance_failure",
@@ -1376,32 +1368,27 @@
     "300997": "historical_unassessed_backfill",
     "352339": "historical_unassessed_backfill",
     "358403": "historical_unassessed_backfill",
-    "338558": "historical_unassessed_backfill",
-    "349109": "historical_unassessed_backfill",
     "348923": "historical_unassessed_backfill",
     "324369": "historical_unassessed_backfill",
     "334079": "historical_unassessed_backfill",
     "347414": "historical_unassessed_backfill",
     "346815": "historical_unassessed_backfill",
     "363684": "historical_unassessed_backfill",
-    "356536": "historical_unassessed_backfill",
     "363809": "historical_unassessed_backfill",
     "346203": "historical_unassessed_backfill",
     "arpa-h:ARPA-H-SOL-24-104": "retryable_maintenance_failure",
     "314126": "historical_unassessed_backfill",
-    "347679": "source_changed",
-    "356537": "historical_unassessed_backfill",
-    "347680": "source_changed",
+    "347679": "retryable_maintenance_failure",
+    "347680": "retryable_maintenance_failure",
     "39841": "historical_unassessed_backfill",
     "329432": "historical_unassessed_backfill",
-    "357580": "historical_unassessed_backfill",
     "330296": "historical_unassessed_backfill",
-    "295449": "historical_unassessed_backfill",
     "336244": "historical_unassessed_backfill",
+    "363620": "source_changed",
     "363617": "historical_unassessed_backfill",
-    "363618": "retryable_maintenance_failure",
+    "363618": "source_changed",
     "363612": "retryable_maintenance_failure",
-    "363621": "historical_unassessed_backfill",
+    "363621": "source_changed",
     "356425": "historical_unassessed_backfill",
     "362393": "historical_unassessed_backfill",
     "275109": "historical_unassessed_backfill",
@@ -1410,6 +1397,7 @@
     "360223": "historical_unassessed_backfill",
     "vpr-email:23-615": "historical_unassessed_backfill",
     "360664": "historical_unassessed_backfill",
+    "vpr-email:vpr-0f186b990288c021": "new_since_accepted_snapshot",
     "vpr-email:vpr-e4cc1ac2aa40787d": "historical_unassessed_backfill",
     "360350": "historical_unassessed_backfill",
     "359499": "historical_unassessed_backfill",
@@ -1440,7 +1428,6 @@
     "360954": "historical_unassessed_backfill",
     "363808": "historical_unassessed_backfill",
     "58617": "historical_unassessed_backfill",
-    "357578": "historical_unassessed_backfill",
     "arpa-h:spectra": "retryable_maintenance_failure",
     "339728": "historical_unassessed_backfill",
     "358684": "historical_unassessed_backfill",
@@ -1449,8 +1436,7 @@
     "325599": "historical_unassessed_backfill",
     "355211": "historical_unassessed_backfill",
     "290351": "historical_unassessed_backfill",
-    "344437": "retryable_maintenance_failure",
-    "357579": "historical_unassessed_backfill"
+    "344437": "retryable_maintenance_failure"
   },
   "provider_contract": {
     "decomposition": {
@@ -1649,9 +1635,9 @@
     "max_seconds": 900,
     "max_provider_requests": 300
   },
-  "eligible_scopes": 1521,
-  "pending_scopes": 1440,
-  "due_scopes": 307,
+  "eligible_scopes": 1505,
+  "pending_scopes": 1426,
+  "due_scopes": 343,
   "eligibility": [
     {
       "scope_id": "291594",
@@ -1822,8 +1808,24 @@
       "retry_eligible": true
     },
     {
+      "scope_id": "vpr-email:vpr-36e6aed03b0511a5",
+      "parent_id": "vpr-email:vpr-36e6aed03b0511a5",
+      "stage": "source_eligibility",
+      "state": "skipped",
+      "reason_code": "missing_source_text",
+      "retry_eligible": true
+    },
+    {
       "scope_id": "325932",
       "parent_id": "325932",
+      "stage": "source_eligibility",
+      "state": "skipped",
+      "reason_code": "missing_bounded_topics",
+      "retry_eligible": true
+    },
+    {
+      "scope_id": "363970",
+      "parent_id": "363970",
       "stage": "source_eligibility",
       "state": "skipped",
       "reason_code": "missing_bounded_topics",
@@ -1835,6 +1837,14 @@
       "stage": "source_eligibility",
       "state": "skipped",
       "reason_code": "missing_source_text",
+      "retry_eligible": true
+    },
+    {
+      "scope_id": "363968",
+      "parent_id": "363968",
+      "stage": "source_eligibility",
+      "state": "skipped",
+      "reason_code": "missing_bounded_topics",
       "retry_eligible": true
     },
     {
@@ -2156,6 +2166,7 @@
     "363489",
     "360006",
     "358022",
+    "361304",
     "356888",
     "363538",
     "357346",
@@ -2167,6 +2178,7 @@
     "363179",
     "357492",
     "darpa-iarpa:darpa-darpapa250704",
+    "352947",
     "357493",
     "357273",
     "357490"
@@ -2223,6 +2235,12 @@
         "reason": "source_changed"
       },
       {
+        "scope_id": "361304",
+        "state": "pending",
+        "provider_requests": 0,
+        "reason": "source_changed"
+      },
+      {
         "scope_id": "356888",
         "state": "pending",
         "provider_requests": 0,
@@ -2265,6 +2283,12 @@
         "reason": "claim_retirement_proof_mismatch"
       },
       {
+        "scope_id": "352947",
+        "state": "pending",
+        "provider_requests": 0,
+        "reason": "source_ineligible"
+      },
+      {
         "scope_id": "357433",
         "state": "withheld_after_claim_retirement",
         "provider_requests": 0,
@@ -2290,12 +2314,12 @@
       }
     ],
     "recovery_only": false,
-    "selected_pending_scopes": 307
+    "selected_pending_scopes": 343
   },
   "coverage_before": {
-    "scopes": 81,
-    "parent_calls": 51,
-    "team_combinations": 210
+    "scopes": 79,
+    "parent_calls": 49,
+    "team_combinations": 205
   },
   "results": [],
   "processing_failure": {
@@ -2313,29 +2337,29 @@
   },
   "embedding_reuse_permitted": true,
   "llm_usage": {
-    "logical_id": "offline-35878492257",
+    "logical_id": "offline-36331552365",
     "limit_usd": 2.0,
-    "charged_usd": 0.276084,
+    "charged_usd": 0.03956,
     "by_provider_model_stage": {
       "anthropic/claude-sonnet-5/cov4": {
-        "attempts": 45,
+        "attempts": 7,
         "retries": 0,
-        "valid_completions": 42,
-        "failures": 3,
+        "valid_completions": 7,
+        "failures": 0,
         "unknown_usage_requests": 0,
-        "charged_microusd": 276084,
-        "latency_ms": 115764,
-        "input_tokens": 120092,
+        "charged_microusd": 39560,
+        "latency_ms": 19234,
+        "input_tokens": 16695,
         "cached_input_tokens": 0,
         "cache_write_tokens": 0,
-        "output_tokens": 3590,
+        "output_tokens": 617,
         "reasoning_tokens": null,
-        "reasoning_usage_unknown": 45,
+        "reasoning_usage_unknown": 7,
         "known_usage_totals": {
-          "input_tokens": 120092,
+          "input_tokens": 16695,
           "cached_input_tokens": 0,
           "cache_write_tokens": 0,
-          "output_tokens": 3590,
+          "output_tokens": 617,
           "reasoning_tokens": 0
         }
       }
@@ -2343,7 +2367,7 @@
     "events": [
       {
         "event": "cache_miss",
-        "key": "b25655339c708d2c5aafefd9dfd4967298fec1f88e4961b5daad9292f47024fe",
+        "key": "fdca9aadce6a7eb790224202af1f0e498717956e247891002776890c93929b28",
         "model": "claude-sonnet-5",
         "provider": "anthropic",
         "reason": "missing_or_invalid_exact_contract",
@@ -2351,7 +2375,7 @@
       },
       {
         "event": "cache_miss",
-        "key": "8110b3dc1bebe576995b38caf75689ed2f3732e8254704fae329cca9f9bf9d93",
+        "key": "c62dcd39ed5116982386fedec5b1592caa3e1799686537267a556e904c0be2fb",
         "model": "claude-sonnet-5",
         "provider": "anthropic",
         "reason": "missing_or_invalid_exact_contract",
@@ -2359,7 +2383,7 @@
       },
       {
         "event": "cache_miss",
-        "key": "e154eadf3211aecf417daac45ad254963aea1724846717399ddd081ebe1ccedf",
+        "key": "0b0a96b8cb249747ad3c8ca265dc7153b0c854d937ee0b9fd436e140e08ec8db",
         "model": "claude-sonnet-5",
         "provider": "anthropic",
         "reason": "missing_or_invalid_exact_contract",
@@ -2367,7 +2391,7 @@
       },
       {
         "event": "cache_miss",
-        "key": "43e775d04395e43116d45f8149664beed6d62d7c07b9454f2b5af2caf1411ab0",
+        "key": "64f49991ce258d505634bbfeaaf7130650fd77394e0e904ec496056b979f1362",
         "model": "claude-sonnet-5",
         "provider": "anthropic",
         "reason": "missing_or_invalid_exact_contract",
@@ -2375,7 +2399,7 @@
       },
       {
         "event": "cache_miss",
-        "key": "eeaf40d485cd0ca839fd1aad4ba6970472aa8c73e40aae9e262323a5665a7311",
+        "key": "d6c7e2a9f212a439e1c3ee4d3bfc47d7fd56731340f516b49ab1cac802ca9bb3",
         "model": "claude-sonnet-5",
         "provider": "anthropic",
         "reason": "missing_or_invalid_exact_contract",
@@ -2383,7 +2407,7 @@
       },
       {
         "event": "cache_miss",
-        "key": "a808560c01200659c2372898c73bc8523a34f78d09da69e83538da64eb129b50",
+        "key": "2338c6373c7094bda82308b4e4fb2abd8d1e0c891fead9b78cf7773e3fc484b6",
         "model": "claude-sonnet-5",
         "provider": "anthropic",
         "reason": "missing_or_invalid_exact_contract",
@@ -2391,311 +2415,7 @@
       },
       {
         "event": "cache_miss",
-        "key": "a13421d4ab9b208b61940d182654e51f98217dbaf83bc75f077aa730d38281ed",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "3f1e964fc8f0dc0473c3673677cce4d3e4a81927a73fab63689e1d297e42dfbc",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "93b13604ee3ca2be6b6aef945a46fda3bde3190fe565143306c56e68443b439b",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "1ce0cc3c72191ab5106f0311c4fc5f9ce2f0b9c71ca0f0a720ea92c9391b5972",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "782af26bd9d120cc820df85871cfb8939a1f69e315e8a94a1f5d13e03e76527e",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "aa3e47e5283c65e87195017c85e7f8152014745eab619e0f1258021f1e4fe59a",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "527df46fd4a6208f73556dbb474c67605a0ec7d3adfc783ca3f3a29b1d3cf671",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "a2f3d93a4846040baa41fde919ec8c41ce591c76255c7ee46061204ad8fa535e",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "776e6e9ef2fd18fbe3ace6ae4d1cc013479057bd5d52a3b6d7814232943454b8",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "7c166ac612d32756353de25294fa33196d9b5e99f500b32df8aaada76296748e",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "7c7032a0b325acf17fb2d822cf0366596b43ea3a0a2155431a6f30f1c86ca7d4",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "4da86376f94ddc274364e43863349e0ca747c9dd594977dec4ee5780914f131e",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "fd98630b5b1ebd6948547cbeefc2bfd07389802ac703f809b57946e4a250637d",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "9a58cfeaac762097e3b1c707f6425fd8fba3aebcd118235606b9c11a24e4aa3a",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "03d095b9d54c298ab5f4a6f520221a6b03d46405a15b74d5f547c04675bced05",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "6775e57341cf06de183a7119ff0bc36cbb990fd2fefa424f876704e00de2cb11",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "00cdc9d627354f505d3645461e11fd5195e12092e87f9080e539c6d30ea218d9",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "65ef29c37368852d282b658c7af0812de0ae8256c48b53369fb1258ad9a14aba",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "5a3e57d7170480dd374e03e79700bbe8b3027d29f1fe6f5961e1c50e6756f67d",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "29b1327e0adacbc5762b1a9431374e4bc7af8445115c966efbdbbae9e2ca55a6",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "f2804279a9b23c6a865ad3d0436e902c1331ea9417a1cb747395c3790b7c126b",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "991ad9a2e89f4c89f5aa6cc00d41dc5350d19990a4a4acc1934f1c744302789a",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "71356c3e9bf8cbfcc4473c24a824e3c617a63bb6e03d391cfa91b259f6546378",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "7da36ae9677ee394c1a3cd03af53377952b838b1ac759e5f7e03b59bba2ae3ed",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "c512c19b384c8d103599ccde481124e46cbc6fd5e7b476e4fc3f0f05d614745f",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "e4c93ef9538ca117df8a5e76400801dc9a021d9fc947fab220ba84804f84bb35",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "b1dd88d55bcfe6cc9e37fb438594b2fa0bdacd34521ba99275decfdf573624c7",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "40590de54d7c6a85f06f8ce109d58ca1682328607f989cbbf557f32524a046eb",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "3bb7e3e0d2af538c2b80680d5861e68ff1376b6bc96c7b3cdf5219da57e3ed94",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "3d7f89175eb4b3c99a2deeded9028a1a9ce947e9db8c9db77510434d12850f96",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "eb2e67753de130f86da2f9637754a680365eb6040421a14ac936e416c9af9c55",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "433e1138af2feaa8c8a13c45838577e519e5e60494ae47aea22ba7d78e639b89",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "c0f2b82678bd557655275b33d32a5ba25583cc202c99f604356e6635e5259d0c",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "da3545865866fe57ec705b416c3f6366eed381889fed0c107ab04ac9fbd9d467",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "5f037d3492f72bad698813c1e069b83c442ba7da4fe52230241234e632e28e7d",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "6fab1093a89840cd7e0ff2945f1e6579672fa8566f4a0f1dd5d8e33c3f00c597",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "681799dc5d40db95108723a466164273b8fc373af5bbaede86001e3621962035",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "8acfe0e4a634e0fa07b21af5dcfa76e6bdf21242df1af03ee30d35be9f4ec69c",
-        "model": "claude-sonnet-5",
-        "provider": "anthropic",
-        "reason": "missing_or_invalid_exact_contract",
-        "stage": "cov4"
-      },
-      {
-        "event": "cache_miss",
-        "key": "6732d314da37f60d5b01f18965c9c1d5532f0a71e371661fdc15cabfab4c146b",
+        "key": "4dded63e6745d413d0ba4f76437e0eb0dfa94a6d37133063ce78069f30fed545",
         "model": "claude-sonnet-5",
         "provider": "anthropic",
         "reason": "missing_or_invalid_exact_contract",
@@ -2715,444 +2435,12 @@
     "llm": 0
   },
   "coverage_after": {
-    "scopes": 81,
-    "parent_calls": 51,
-    "team_combinations": 210
+    "scopes": 79,
+    "parent_calls": 49,
+    "team_combinations": 205
   },
-  "pending_after": 1440,
+  "pending_after": 1426,
   "deferred": [
-    {
-      "scope_id": "363711",
-      "parent_id": "363711",
-      "stage": "queue",
-      "input_fingerprint": "b5b0ca9b44c0965b65adea4c7c2968c49b39e58c6e2339d7047b4285fdbca6e3",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363589",
-      "parent_id": "363589",
-      "stage": "queue",
-      "input_fingerprint": "42c77435a4c761a25ccf4dd1b3766ddefaed78a6911d83aefef2731070f1cb60",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363587",
-      "parent_id": "363587",
-      "stage": "queue",
-      "input_fingerprint": "0513ecb3cb75786d638c377d53f0719e7ed9ba3bad47736743faaea4aa2af22b",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363584",
-      "parent_id": "363584",
-      "stage": "queue",
-      "input_fingerprint": "4b9b1d865bda3eb8ce6adcb7c721ca0c92ddceb0e3fbc158991dbef47d898467",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "nyserda:PON6121",
-      "parent_id": "nyserda:PON6121",
-      "stage": "queue",
-      "input_fingerprint": "95bdab3e1264b780e2345443599a4360de0b6e03c65dedc7cab7de155769e553",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363223",
-      "parent_id": "363223",
-      "stage": "queue",
-      "input_fingerprint": "26ea91aa384831355552bc419c024d314c742d9a2eefab2788b7f346b0db40da",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363914",
-      "parent_id": "363914",
-      "stage": "queue",
-      "input_fingerprint": "de0907dce7329987557223ab7380f306eb2e27559f58676d0bdbf335de2f5292",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "360874",
-      "parent_id": "360874",
-      "stage": "queue",
-      "input_fingerprint": "68f987d443c53dab107ad7c4f8504c651fb14476f394c5edfbe84647831be9e9",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363636",
-      "parent_id": "363636",
-      "stage": "queue",
-      "input_fingerprint": "cc3479e1d7ea40c6347989588a1de3e68dfbfa47269d90cdfc2bdb9dac333105",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363635",
-      "parent_id": "363635",
-      "stage": "queue",
-      "input_fingerprint": "e5ff78b98eb436eacc46b5ae9def8203d4b496cabe1ff0f4fb9a9886783216f8",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363638",
-      "parent_id": "363638",
-      "stage": "queue",
-      "input_fingerprint": "14033ac46be70bd24276d83dbc1e664c263b9d86e17e3c2109667f937cbf2ef5",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363637",
-      "parent_id": "363637",
-      "stage": "queue",
-      "input_fingerprint": "60f27d8db813d3ea6d99a39e4dddd57d2ca056c8632cbd8353f9cb62ff5c7601",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363588",
-      "parent_id": "363588",
-      "stage": "queue",
-      "input_fingerprint": "aa76be01f904c0b51b4daa7729c080cf1d320ecd974c5164697059f40fce9b93",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362178",
-      "parent_id": "362178",
-      "stage": "queue",
-      "input_fingerprint": "8679ff111eb235624f393f9d527a38999c4bd9cf112c60c061ad605f21d5f226",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362179",
-      "parent_id": "362179",
-      "stage": "queue",
-      "input_fingerprint": "d55bfa0bdbfc37c4e2b51d57054f4c993ced105d75cedaeda6722b164ed60f69",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362180",
-      "parent_id": "362180",
-      "stage": "queue",
-      "input_fingerprint": "ea26da0a4e3ecd6ae2aedf71bf410e6c7dbaef56794f4e92630c8608b26bc3da",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363918",
-      "parent_id": "363918",
-      "stage": "queue",
-      "input_fingerprint": "4de1079a7d67052dd363a74f03894609614ab196e09be21a1afa4cbfc750d953",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "358999",
-      "parent_id": "358999",
-      "stage": "queue",
-      "input_fingerprint": "f797fac4b22b5cc6a22d089f13117531a067dc1762d7cacf6e354de968cf3a1a",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "351234",
-      "parent_id": "351234",
-      "stage": "queue",
-      "input_fingerprint": "7885e5f32ce1ffde76fa5b026a7753ce8089460210e25afca9ba0d07a379520e",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363602",
-      "parent_id": "363602",
-      "stage": "queue",
-      "input_fingerprint": "973815e7fe2229e7df413051ff4641fe50605aaa3ade01b873b951c7468645a6",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363585",
-      "parent_id": "363585",
-      "stage": "queue",
-      "input_fingerprint": "6a94e83d98c514ca27dad644d4f350ed046505260c386c01f9885dea33fbf3dc",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361214",
-      "parent_id": "361214",
-      "stage": "queue",
-      "input_fingerprint": "75d8ee3c7f8071f2d104eda147289ca050388c66336da79a57c9bd81b1b7cf1a",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "359075",
-      "parent_id": "359075",
-      "stage": "queue",
-      "input_fingerprint": "95873698b140b7e828974fb14bd24dac6cec9f05196fc90be707eda1d552bba2",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362355",
-      "parent_id": "362355",
-      "stage": "queue",
-      "input_fingerprint": "82fc36dc25c947e7ab9e05e5a3e956e11f1cd4587ce495f4d0c758a6f2e66342",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363306",
-      "parent_id": "363306",
-      "stage": "queue",
-      "input_fingerprint": "1b8c357005cabd1978be1da00b6381a9d8cf88ff87d71fa488f4850044bb4c04",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363335",
-      "parent_id": "363335",
-      "stage": "queue",
-      "input_fingerprint": "d91b89be6eedb6f3577041e9d57b59f32473374bddb98b4b76449ff4ac4bb399",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361348",
-      "parent_id": "361348",
-      "stage": "queue",
-      "input_fingerprint": "3778c0dfdbac8f5d8c25c86507120850f1ae4d66b72a54f8163fcbdf3d3060e6",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "359000",
-      "parent_id": "359000",
-      "stage": "queue",
-      "input_fingerprint": "bcbdf49f8d54d812c4d5348244be1c41adb0c734b2f3735ec4c5701b19267277",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357710",
-      "parent_id": "357710",
-      "stage": "queue",
-      "input_fingerprint": "86deaa8baff817fa054f3fa455ae69adec1f6bcc933f332fcfb1c15ce60f768e",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "348407",
-      "parent_id": "348407",
-      "stage": "queue",
-      "input_fingerprint": "48f3e534c9529e73cf4ae1e277bc6c7d8b54f6d04eba972503d3391239f9b9a5",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "351920",
-      "parent_id": "351920",
-      "stage": "queue",
-      "input_fingerprint": "f385a011e9440530c0a3c911852bd3a653b8350b9575b29ad1cb520e729774aa",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "360881",
-      "parent_id": "360881",
-      "stage": "queue",
-      "input_fingerprint": "08a23b6a0b2af07af964df57e9b8a69090afb601f8f86327d4764030ea2a6e71",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "355855",
-      "parent_id": "355855",
-      "stage": "queue",
-      "input_fingerprint": "ac68e759a4dcdd01c7ccdc4b0f83dc9671be61032ed10c9a1bf4f54e8e8b5ea9",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "350485",
-      "parent_id": "350485",
-      "stage": "queue",
-      "input_fingerprint": "24f613f8e39943d988c5092e11c364735206022d4735bba915f3906b14e2183c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361426",
-      "parent_id": "361426",
-      "stage": "queue",
-      "input_fingerprint": "0adeb091ae7bacbd4ddeaea45a7ae2df4555c5b6ed88eb81fe64477b8c55406f",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361394",
-      "parent_id": "361394",
-      "stage": "queue",
-      "input_fingerprint": "1f29a2acd79e1f764fff007c1455ab7a514e24d882c94497011bfb1c55c424b5",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "351057",
-      "parent_id": "351057",
-      "stage": "queue",
-      "input_fingerprint": "16b78f3f0bf145f4a53272116a33fa84a8adf551e68c8a7d33420152ee4d9728",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361215",
-      "parent_id": "361215",
-      "stage": "queue",
-      "input_fingerprint": "a81553b9f0b5fbb496fbc7578c5a6f760167f3279b2b5f438144ebc36728a697",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "362314",
-      "parent_id": "362314",
-      "stage": "queue",
-      "input_fingerprint": "b66c3f191173c3a4ff6faaf72f5ef5c9688e4c01af26fcfc8632ba1b4ccc1d8e",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361279",
-      "parent_id": "361279",
-      "stage": "queue",
-      "input_fingerprint": "49e38fbe28c3b412027b0cdc6b846c5b736b7bf54752ed8516a10e1d6966c125",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361318",
-      "parent_id": "361318",
-      "stage": "queue",
-      "input_fingerprint": "bc2fe2cafe486d86f7aa2f31b5f590b7135af0674beaacd8f5da1c4af5606e3e",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363285",
-      "parent_id": "363285",
-      "stage": "queue",
-      "input_fingerprint": "e0d80e3feea86156b9445f84eee1ba3d834b132e689286fe5755aebc907c11cd",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361255",
-      "parent_id": "361255",
-      "stage": "queue",
-      "input_fingerprint": "35af708cd05b0a84dda7a766fab62a58ac6a3966bfe5981251bbab06b1d24e28",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363568",
-      "parent_id": "363568",
-      "stage": "queue",
-      "input_fingerprint": "e03071b3ac498e06ebbffce1c11bb3ef1e7e848e9925353c363797617748462c",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361234",
-      "parent_id": "361234",
-      "stage": "queue",
-      "input_fingerprint": "d82ffd1cdfa675ca71ee9885503427ce25806cd293fec2e183208065485dc5d6",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "361534",
-      "parent_id": "361534",
-      "stage": "queue",
-      "input_fingerprint": "ea6d20dead96453d56d20943182629d1c3b734361ecd391eeb55f10448ed99c7",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "350299",
-      "parent_id": "350299",
-      "stage": "queue",
-      "input_fingerprint": "47af517d5d0ab06e45ff34e59902785aaec80b6dee76be5f162d8c5a636769f7",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363864",
-      "parent_id": "363864",
-      "stage": "queue",
-      "input_fingerprint": "de5826b6e6190c35e9b6d2a2167745fe82d36a5fe3f8e6f8930cebb1d1eec4e1",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
     {
       "scope_id": "363648",
       "parent_id": "363648",
@@ -3280,10 +2568,19 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "vpr-email:PAR-25-322",
+      "parent_id": "vpr-email:PAR-25-322",
+      "stage": "queue",
+      "input_fingerprint": "3b1860a87c912906c5eab98d0e8e286aabc580c62ec8260dfa0248d0e4daea78",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363654",
       "parent_id": "363654",
       "stage": "queue",
-      "input_fingerprint": "d6d8f52eb0b6c3f455544d04b6a20d95954e3decd2eb24e1cd72b9160a3bf027",
+      "input_fingerprint": "13259609ed719ac1482a736ebffd8cf98615b40f3be3c7ab4c5c490910c1c4af",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3292,7 +2589,7 @@
       "scope_id": "363656",
       "parent_id": "363656",
       "stage": "queue",
-      "input_fingerprint": "67f947ceb436d834342f754d50583a9de0488da9bfbdd7908867ab72277f207d",
+      "input_fingerprint": "e7662470a1cf6df66c4b9c0889455e30140f6c4e05c6571f32350e4875352248",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3382,7 +2679,7 @@
       "scope_id": "363669",
       "parent_id": "363669",
       "stage": "queue",
-      "input_fingerprint": "90502e55e1b92f3b5eb56ed14f9edb376a8c90b1cb6a1851b2edb773cfcfcb02",
+      "input_fingerprint": "1376e9569cc01bcacee42df9fceb4d4328b57c04360fb5022299a4d49f09d29a",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3433,15 +2730,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "361931",
-      "parent_id": "361931",
-      "stage": "queue",
-      "input_fingerprint": "6ab2728ccee97febdceacefc208e34f8c365fcf7f5bd2bedd445e7f75468acef",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "325500",
       "parent_id": "325500",
       "stage": "queue",
@@ -3464,6 +2752,15 @@
       "parent_id": "360698",
       "stage": "queue",
       "input_fingerprint": "9759c553b8e9f0c92d51be2f09c0684e9dbadd5ced5112e25c72c7dc91ed8552",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363960",
+      "parent_id": "363960",
+      "stage": "queue",
+      "input_fingerprint": "c2a95036bdaff85f192d97ff5f76a951123006f36f76fe2ed20aa32ba8931110",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3667,10 +2964,10 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363689",
-      "parent_id": "363689",
+      "scope_id": "363949",
+      "parent_id": "363949",
       "stage": "queue",
-      "input_fingerprint": "0ab9aae7ae65749bda71ee90a68538f03a756af83f8919c0c0abf65fa28a7feb",
+      "input_fingerprint": "6d9dd38eda39e46c57c787a65ff1474f09565dcbbe9ec2bd68f3a1f44f75df89",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -3874,15 +3171,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363916",
-      "parent_id": "363916",
-      "stage": "queue",
-      "input_fingerprint": "08bd4973746f34ed8a777a9dcf8cb5024aa01ea0a71acec334675c608568738a",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "362643",
       "parent_id": "362643",
       "stage": "queue",
@@ -3968,6 +3256,24 @@
       "parent_id": "359152",
       "stage": "queue",
       "input_fingerprint": "a3f464d8e01e8a3472a6d2469a956e0b04edc5d72bf8336a79d18a06818115d9",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363931",
+      "parent_id": "363931",
+      "stage": "queue",
+      "input_fingerprint": "2776db5b2461ba6190492695f6a4d4113311696aec377f1a23794772f32cbf84",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363935",
+      "parent_id": "363935",
+      "stage": "queue",
+      "input_fingerprint": "4fb51809e609ea16b326c6c74a1db6e407b5c8a3cf099971fa505546e4380fa2",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4405,6 +3711,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "361304",
+      "parent_id": "361304",
+      "stage": "queue",
+      "input_fingerprint": "6a28cdd8ee6a006452f3faa6ad37d319a8bd48bcd8bd858c255242b2be1bf79e",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "360562",
       "parent_id": "360562",
       "stage": "queue",
@@ -4418,6 +3733,15 @@
       "parent_id": "363700",
       "stage": "queue",
       "input_fingerprint": "a5a0fbff1137d4d9455e564af447d75fa566da64f3444b549f4b45aefd31923f",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363937",
+      "parent_id": "363937",
+      "stage": "queue",
+      "input_fingerprint": "fa66dd7cccc409b29dd8c1ab333b78b97ad21d0cafb2933354c018b9f5b780f4",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4471,7 +3795,7 @@
       "scope_id": "363732",
       "parent_id": "363732",
       "stage": "queue",
-      "input_fingerprint": "0e0ca9a10b9eb07d2379c7b9ce1a8c5f7e63f781b522a2b0d729151f134a617c",
+      "input_fingerprint": "4b753efd5e03fc1d66d3a74d3ebde2cf8dae2ee7731eecd2139102d2ea010f14",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4480,7 +3804,7 @@
       "scope_id": "353936",
       "parent_id": "353936",
       "stage": "queue",
-      "input_fingerprint": "517c45b04436dc14ab14c02c5792ca992c5b5569397b2f2ef408dcc4641b48e2",
+      "input_fingerprint": "fbfbe80c6a8f2e6d7c510e6c75ad4bc07b5abacb49fd4488abfefee7f78a2de4",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4822,7 +4146,7 @@
       "scope_id": "363559",
       "parent_id": "363559",
       "stage": "queue",
-      "input_fingerprint": "6d1b28c0b777a3715d4fd82d508f2e3ec52bed2ad0d4524f8ca10311d98cb602",
+      "input_fingerprint": "11c28fa43db266e9bd435d238f7aee9b04f4ff1a5b4d01d3f915a20729e70ae3",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4885,7 +4209,7 @@
       "scope_id": "363843",
       "parent_id": "363843",
       "stage": "queue",
-      "input_fingerprint": "a29d61cc6ae142f5c8e142383418ce00ac0c468bfc38c52775308341461c6b8e",
+      "input_fingerprint": "43d2bb5579984dd9de70f15dcc09fe4c6da3c1388a5f56240614d9009b8f2439",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4939,7 +4263,7 @@
       "scope_id": "363590",
       "parent_id": "363590",
       "stage": "queue",
-      "input_fingerprint": "b7d05521bf28eede3c60f1c0772df444d9474b7e0c5a8049892bc0c5946c7e90",
+      "input_fingerprint": "722374b124ff6c5b319b74f50666e434e0e17721bb38b0253956df50753971b2",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -4999,28 +4323,10 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363421",
-      "parent_id": "363421",
+      "scope_id": "363941",
+      "parent_id": "363941",
       "stage": "queue",
-      "input_fingerprint": "e6b3a939f36498d64e6f9e8fe0585d2185ea010bc464fd390556509669e55649",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363419",
-      "parent_id": "363419",
-      "stage": "queue",
-      "input_fingerprint": "0091e68b9f5732d416246abf6ca8a3a73426b9c63dbdcf5a15f84b27526e77ab",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "363420",
-      "parent_id": "363420",
-      "stage": "queue",
-      "input_fingerprint": "32512db0564a6726f7aded2430eb21ca0f26de7605d66c3a4032c999453fb21b",
+      "input_fingerprint": "fc9dea91edbbaa49bdbb60a8ff3f24b0b6184f735a2d039188738c9eb298339e",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5107,6 +4413,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363947",
+      "parent_id": "363947",
+      "stage": "queue",
+      "input_fingerprint": "a327e0bf8fdfd48d3053cb6d9e49d77327846d214b9c657ebc1c9071bd2f201b",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363482",
       "parent_id": "363482",
       "stage": "queue",
@@ -5119,7 +4434,7 @@
       "scope_id": "348599",
       "parent_id": "348599",
       "stage": "queue",
-      "input_fingerprint": "aead6c023acd8f268dd53189822f4c13434dd85fd3396f4a613c4405d06d2945",
+      "input_fingerprint": "32bfa884d5fbf2b15cd8ea77f45b12c98ff2ab93e62397ed5cdfc60a53f19dcb",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5129,6 +4444,15 @@
       "parent_id": "360544",
       "stage": "queue",
       "input_fingerprint": "e573bedd58b1a54d326fcc7363623e45b854316fc2da3f68b5ea7cd56be1949e",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363959",
+      "parent_id": "363959",
+      "stage": "queue",
+      "input_fingerprint": "3e2d09f09db33362d3501697700cb50227299f856fd1e5a9093e3e774d8ca6de",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5326,7 +4650,7 @@
       "scope_id": "363887",
       "parent_id": "363887",
       "stage": "queue",
-      "input_fingerprint": "f7665e4ea25038f18080096156ecb6aba023ef598669637ec58d876eef1f6c3c",
+      "input_fingerprint": "d06c2a3835a643d5be4a703bd672008f97067f5775ca4195047930d97683a801",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5408,15 +4732,6 @@
       "parent_id": "363904",
       "stage": "queue",
       "input_fingerprint": "40836e8ac5e08510d1dcfa216e9a35da114d449c3ede76be25ca5f546201a1fd",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "vpr-email:vpr-ddde5b48dc92bba2",
-      "parent_id": "vpr-email:vpr-ddde5b48dc92bba2",
-      "stage": "queue",
-      "input_fingerprint": "c344e6627dbfcc5f900b3ed72f569dc1ccf4ff052c947eaf45deef18bee398ff",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5668,7 +4983,7 @@
       "scope_id": "363891",
       "parent_id": "363891",
       "stage": "queue",
-      "input_fingerprint": "0a54e9f471f1b45cd2f682ec2b8be7474ece2077a427e83cf1f91399165cc48d",
+      "input_fingerprint": "163b6d94bbddf008590770fb2af6500b72d03e924960e97d2b2b707d206b5828",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5773,10 +5088,46 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363977",
+      "parent_id": "363977",
+      "stage": "queue",
+      "input_fingerprint": "26d601199a2952d53d92346d59002762c49de3025b36d081b0414ecd81dc5614",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363961",
+      "parent_id": "363961",
+      "stage": "queue",
+      "input_fingerprint": "a89be2ebbeeb41104d636babe4afcc444dc4d8e67260f0a3f15d7d6ff14150d7",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363784",
       "parent_id": "363784",
       "stage": "queue",
       "input_fingerprint": "93c082d983263d84d0b7d54ce8d90d6215a7e0ad89ddaa23485cf77a0f3ffc06",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363957",
+      "parent_id": "363957",
+      "stage": "queue",
+      "input_fingerprint": "945231923ab7b81927bf4111731545828fa1a64e419fbbe2054784ef0719710a",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363924",
+      "parent_id": "363924",
+      "stage": "queue",
+      "input_fingerprint": "52151629603aea9e7686d2fd01cbafa5b5a661c8b188243df0e15455e24cb56b",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -5858,15 +5209,6 @@
       "parent_id": "363728",
       "stage": "queue",
       "input_fingerprint": "cb14f382d8713e0dcb85f164ab915e31e6828653d7c651fbd611098c886a5499",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "vpr-email:NSF26-511",
-      "parent_id": "vpr-email:NSF26-511",
-      "stage": "queue",
-      "input_fingerprint": "ff5258a0735ade702e4f185259c04d02dfda69efd3e344f3d4e5cb0af94a5d34",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6145,7 +5487,7 @@
       "scope_id": "arpa-h:fastpass",
       "parent_id": "arpa-h:fastpass",
       "stage": "queue",
-      "input_fingerprint": "ae4f95a91c17c4a290ae8c21b490489cac68d2a1f4ff0ab628d27c0ed7faaafa",
+      "input_fingerprint": "05c3a71e52a33f173fcbce32abfd1ab1b4a566b29f4d948dee38dd4add06d230",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6172,7 +5514,7 @@
       "scope_id": "362965",
       "parent_id": "362965",
       "stage": "queue",
-      "input_fingerprint": "d20edb0ab649ab9766c23ca01a2020e8de28bace1f876df3af6f310df117d0bb",
+      "input_fingerprint": "f0ffa0348cb099f5e452bb7655a100e7e5408c7a13334e70f8b5e342c4acdfff",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6511,15 +5853,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "363620",
-      "parent_id": "363620",
-      "stage": "queue",
-      "input_fingerprint": "4e873fc78abda4fe1de87b7fd428bee0c34f47d2cbd1ca8285185f616b0769f5",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "350018",
       "parent_id": "350018",
       "stage": "queue",
@@ -6745,6 +6078,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363920",
+      "parent_id": "363920",
+      "stage": "queue",
+      "input_fingerprint": "c30d384ef597f8b01ca6f80b4b47d057528cdb8692cb343a6a10ba35b45aeabe",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "357256",
       "parent_id": "357256",
       "stage": "queue",
@@ -6784,7 +6126,16 @@
       "scope_id": "363047",
       "parent_id": "363047",
       "stage": "queue",
-      "input_fingerprint": "86b3586881b239a5526fb342cdb4eebcbbac4f4e47a12b9af6f399bff2f11fd6",
+      "input_fingerprint": "d73a638b9a24a602ccd059e90f70038156b8e2aca91a4339d4b543840ab1848d",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "nyserda:PON6121",
+      "parent_id": "nyserda:PON6121",
+      "stage": "queue",
+      "input_fingerprint": "95bdab3e1264b780e2345443599a4360de0b6e03c65dedc7cab7de155769e553",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6838,7 +6189,7 @@
       "scope_id": "363815",
       "parent_id": "363815",
       "stage": "queue",
-      "input_fingerprint": "fc574f467600d8897e9ffb45264240f53a436a50631b4dbb45ba7366bc892eae",
+      "input_fingerprint": "dd7330a25ed3ccb356a116ab78bb11be1f9444e547377443cafcd1f9caa1a8be",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -6907,6 +6258,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363929",
+      "parent_id": "363929",
+      "stage": "queue",
+      "input_fingerprint": "6f00837f37aa3852d9d373dfc3bfee3dd487e15538abbd01e6c5966b7d6ce1d0",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "362996",
       "parent_id": "362996",
       "stage": "queue",
@@ -6920,6 +6280,15 @@
       "parent_id": "345738",
       "stage": "queue",
       "input_fingerprint": "6860deb908ceb12abc5b26246304fd7ecc978111bd5b1404de7a8d43ad32145e",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363229",
+      "parent_id": "363229",
+      "stage": "queue",
+      "input_fingerprint": "db84c6ecff67299b832d863bd0d9138ab03340073d6723a147ad8f5abe7db36a",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7087,6 +6456,33 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363963",
+      "parent_id": "363963",
+      "stage": "queue",
+      "input_fingerprint": "a8292e750dc09959b464913d04d295ed408d5969b6d7d409c3df4fbd561058af",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363964",
+      "parent_id": "363964",
+      "stage": "queue",
+      "input_fingerprint": "9b96da2343a6b037de5fb9e3cda93576c7be3c53781df255312ca8d8c18c09a4",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363965",
+      "parent_id": "363965",
+      "stage": "queue",
+      "input_fingerprint": "5ce9bf939c4d8f1ab100d8bdcd07aa96e2ffa3d902b9ec034585915d98646098",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "362977",
       "parent_id": "362977",
       "stage": "queue",
@@ -7172,6 +6568,24 @@
       "parent_id": "362871",
       "stage": "queue",
       "input_fingerprint": "a3003f23bac9a44af2e92f20c64f68276d2a49bf75d170b10e1d5d5bf6a9afc4",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363971",
+      "parent_id": "363971",
+      "stage": "queue",
+      "input_fingerprint": "ca054605be65c7fe96d6cdacc1ee4d86ff4a92c7e0e2d473b112a9cc6cf1e669",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363972",
+      "parent_id": "363972",
+      "stage": "queue",
+      "input_fingerprint": "7b6eb209fe6ff692f31f63dd2365448f57dd758cd9b48a6d1fa5ef39dfdd24b8",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -7271,6 +6685,15 @@
       "parent_id": "362718",
       "stage": "queue",
       "input_fingerprint": "0caf78d93a6f14e3c84fdea3a985f3f747e40265fa60a85610abbdc957c84b0a",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363966",
+      "parent_id": "363966",
+      "stage": "queue",
+      "input_fingerprint": "999053ba78c81dfc452f82845087d504764f76515c478b452a0e4ebb7ac7a93b",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8320,6 +7743,24 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363419",
+      "parent_id": "363419",
+      "stage": "queue",
+      "input_fingerprint": "0091e68b9f5732d416246abf6ca8a3a73426b9c63dbdcf5a15f84b27526e77ab",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363420",
+      "parent_id": "363420",
+      "stage": "queue",
+      "input_fingerprint": "32512db0564a6726f7aded2430eb21ca0f26de7605d66c3a4032c999453fb21b",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "354620",
       "parent_id": "354620",
       "stage": "queue",
@@ -8698,6 +8139,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363421",
+      "parent_id": "363421",
+      "stage": "queue",
+      "input_fingerprint": "e6b3a939f36498d64e6f9e8fe0585d2185ea010bc464fd390556509669e55649",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363777",
       "parent_id": "363777",
       "stage": "queue",
@@ -8797,10 +8247,28 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "vpr-email:infoready-2024058",
+      "parent_id": "vpr-email:infoready-2024058",
+      "stage": "queue",
+      "input_fingerprint": "5f9387fa5fe788c0bfab3a9cfffebaad13ec2e7a003963874557c02690d474a5",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "355219",
       "parent_id": "355219",
       "stage": "queue",
       "input_fingerprint": "6efdf1ae3deb29674d0bb278d9c4d96ff1dabddf254c3f723b2f5c227183c5bd",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "nyserda:RFP3928-Rd7",
+      "parent_id": "nyserda:RFP3928-Rd7",
+      "stage": "queue",
+      "input_fingerprint": "b4b9a8cd6445e99b6e61c6318f8281886b96d4de316d2bddcec91e226ed0fda7",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -8873,6 +8341,15 @@
       "parent_id": "344608",
       "stage": "queue",
       "input_fingerprint": "1488e7045491512d0847568c91a35a3a93cb002b8be757e910a3665463d91631",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363936",
+      "parent_id": "363936",
+      "stage": "queue",
+      "input_fingerprint": "5424e60cae08d6f008ff31b2cedec0d5532f7c3a5c680c1fcbdbc8a179a05e15",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9142,7 +8619,7 @@
       "scope_id": "354269",
       "parent_id": "354269",
       "stage": "queue",
-      "input_fingerprint": "43f1bfe638cde436b94f6cbeeedd36f109f3e9da98a1558312a02791962b464e",
+      "input_fingerprint": "9169e74f2d6b6bf4e5c73baac506b42039c8952049740cfc0a7d817cb8f551cd",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9346,6 +8823,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363967",
+      "parent_id": "363967",
+      "stage": "queue",
+      "input_fingerprint": "eefe1ce97204d47340d47acd50c7798dcbd218c15dd681ce5bc848cb2b778809",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363501",
       "parent_id": "363501",
       "stage": "queue",
@@ -9539,6 +9025,15 @@
       "parent_id": "337086",
       "stage": "queue",
       "input_fingerprint": "8d23d022e879c67fb6c1a98cc31ec136e84247cb81905e130d64f7745043dd63",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363958",
+      "parent_id": "363958",
+      "stage": "queue",
+      "input_fingerprint": "8024c7238eb180fb70c4b30fbefe873b3dd89b093e0882d8b184d677769df511",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9796,6 +9291,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363940",
+      "parent_id": "363940",
+      "stage": "queue",
+      "input_fingerprint": "2692622c1b535d688acb431ef639d7a33a3c5ba72deb6b752844bca32c131a85",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "357498",
       "parent_id": "357498",
       "stage": "queue",
@@ -9818,15 +9322,6 @@
       "parent_id": "363222",
       "stage": "queue",
       "input_fingerprint": "dd5722c9bdb4220083b9d8bbc895aeb79766d18592d2bc6758263f6b1a535cf4",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357105",
-      "parent_id": "357105",
-      "stage": "queue",
-      "input_fingerprint": "bb2f688cc8d659fce7d0255605f66528c82af7b941c1ac1d959898bb777507f5",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -9922,6 +9417,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "357713",
+      "parent_id": "357713",
+      "stage": "queue",
+      "input_fingerprint": "f2ffcec4df2b19277b130d266066b77e10a6e73e8f5d627b52e1571e61cdd7e2",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363398",
       "parent_id": "363398",
       "stage": "queue",
@@ -9985,6 +9489,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363969",
+      "parent_id": "363969",
+      "stage": "queue",
+      "input_fingerprint": "d2c8063e75cdf695b5d9a2cd075e49933b7b25699fa7007e654067256aec85d1",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363389",
       "parent_id": "363389",
       "stage": "queue",
@@ -10034,6 +9547,15 @@
       "parent_id": "363407",
       "stage": "queue",
       "input_fingerprint": "075ed371b6f1b6017edbcd62bb2870c4d1ca8e96f71f81c37864c7eb1c16c87b",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363946",
+      "parent_id": "363946",
+      "stage": "queue",
+      "input_fingerprint": "b6eacddae18cef56d26165290be88227a966e1782ddb82d99c80b0bec264a81e",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10151,6 +9673,24 @@
       "parent_id": "351947",
       "stage": "queue",
       "input_fingerprint": "4333b7066cf4c30123b67042fe9bd9078e73bdcb418c32b03b70e4485543033d",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363978",
+      "parent_id": "363978",
+      "stage": "queue",
+      "input_fingerprint": "895b7f95bd9a5b94138a93a639a6ab34d7e98d319b67d384aef3329a970fcb1a",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363975",
+      "parent_id": "363975",
+      "stage": "queue",
+      "input_fingerprint": "65a8488a0cd867ccadcd60a4341a133784a3d11b184ba84747c6ef3eb32b68f2",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10489,6 +10029,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363973",
+      "parent_id": "363973",
+      "stage": "queue",
+      "input_fingerprint": "3d44e8af675ed85de48ebb811805ab2473499f7055aace116400f83bf7456adc",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363329",
       "parent_id": "363329",
       "stage": "queue",
@@ -10552,6 +10101,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363974",
+      "parent_id": "363974",
+      "stage": "queue",
+      "input_fingerprint": "f5872dc2944a61ec5e7803e250431ad0adc2a65d4b87fb37c54ce2915433fe8e",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363313",
       "parent_id": "363313",
       "stage": "queue",
@@ -10610,6 +10168,15 @@
       "parent_id": "363277",
       "stage": "queue",
       "input_fingerprint": "20ed3d4f6cbb669034424e63a039a55e658486503e029d536c031cc128c1c2d3",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363962",
+      "parent_id": "363962",
+      "stage": "queue",
+      "input_fingerprint": "50bebd54fdf438848ae7486f9186f2d6692eb789631b37854797f92745ce9e5d",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10822,6 +10389,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363945",
+      "parent_id": "363945",
+      "stage": "queue",
+      "input_fingerprint": "3c1f74a4e43e113a27ce612f958ca6c999b36d21bb4dada7b4b55facfb3a35ac",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "353746",
       "parent_id": "353746",
       "stage": "queue",
@@ -10844,15 +10420,6 @@
       "parent_id": "353458",
       "stage": "queue",
       "input_fingerprint": "9c0a71a15d991b64f709e825583567a5a305f5a636617d03b75227434bfe385a",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357713",
-      "parent_id": "357713",
-      "stage": "queue",
-      "input_fingerprint": "1418e4cddf1398c07c3ac316e8b137fbe1d09e25d35c3f76c432b1a4fb4281c0",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -10894,6 +10461,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363956",
+      "parent_id": "363956",
+      "stage": "queue",
+      "input_fingerprint": "23bbbf8fa0088460b4d50ad99e2dc80b5ad4731d8b7ebdc386919a7597147aeb",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "362958",
       "parent_id": "362958",
       "stage": "queue",
@@ -10930,6 +10506,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363926",
+      "parent_id": "363926",
+      "stage": "queue",
+      "input_fingerprint": "8cf4a9a2da7b26c0b83f51a047a28ef0dc7879f76f0462667871a110e701450a",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363826",
       "parent_id": "363826",
       "stage": "queue",
@@ -10961,6 +10546,24 @@
       "parent_id": "361271",
       "stage": "queue",
       "input_fingerprint": "2e6c095a1297d96c348034921e716169fd2ba45ec56adf8a3d96200ecbd75c69",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363939",
+      "parent_id": "363939",
+      "stage": "queue",
+      "input_fingerprint": "4b5d04078b8cfbaa47fea78a566fddcd8b477d7c03bfa1f2957f3db3f76343b0",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "361276",
+      "parent_id": "361276",
+      "stage": "queue",
+      "input_fingerprint": "9829af81cad71e1ec5777d043a4f97e4310bb194dbc17b9e2f53f97212ad553e",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -11101,6 +10704,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363976",
+      "parent_id": "363976",
+      "stage": "queue",
+      "input_fingerprint": "dc6edd66e1562b5d1a876acb4c0a1c52d7992ae7cec42e3f7c5ec979a5ca5304",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "363660",
       "parent_id": "363660",
       "stage": "queue",
@@ -11231,6 +10843,15 @@
       "parent_id": "363350",
       "stage": "queue",
       "input_fingerprint": "e39ac294230cd81fd7054fcf0f0c3ea2f613007b44b1da08fd603cd317085ea1",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363942",
+      "parent_id": "363942",
+      "stage": "queue",
+      "input_fingerprint": "cd498594653c3a86d0ff75407a0c2b1204a54d122eacdf31e3099659c1203c33",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -11902,6 +11523,15 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "363943",
+      "parent_id": "363943",
+      "stage": "queue",
+      "input_fingerprint": "19d1e710576ff7b68df93726d875d2a2d5766c44e5e78ee6951d61d7bdc99131",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "357259",
       "parent_id": "357259",
       "stage": "queue",
@@ -11915,6 +11545,15 @@
       "parent_id": "358202",
       "stage": "queue",
       "input_fingerprint": "55b18fffa3c92788ed1a634e66fd1f9e47bd68f238698224254cb478d6a93983",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363944",
+      "parent_id": "363944",
+      "stage": "queue",
+      "input_fingerprint": "a58b62915cb8753d8985f675abe21c578175a4d41c6c86a1fa709b7501749c37",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -12014,6 +11653,15 @@
       "parent_id": "362315",
       "stage": "queue",
       "input_fingerprint": "ad86f1bc49f3ec940e373a75516dae146619d7c1bb2eb4e318aa11559712b28b",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "363948",
+      "parent_id": "363948",
+      "stage": "queue",
+      "input_fingerprint": "10816b8ad47e404634d1c16bc39dde3be251aaf9c5836b7d975b64586ac74d73",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -14422,10 +14070,46 @@
       "reason_code": "pending_work"
     },
     {
+      "scope_id": "361275",
+      "parent_id": "361275",
+      "stage": "queue",
+      "input_fingerprint": "ab48cd0cba511ceb63775267600c210cef0311d618fff0bef2149cddf454e0d5",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "360545",
+      "parent_id": "360545",
+      "stage": "queue",
+      "input_fingerprint": "5aa1aa7a5bf9e5c1900454af11b0ec454d858ddaadc1792de69f76ab660f042e",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
       "scope_id": "nyserda:PON6149",
       "parent_id": "nyserda:PON6149",
       "stage": "queue",
       "input_fingerprint": "cd999614f425b31d3c0d03b459d881998b296ab95a4b03589b9dca5dd04515f7",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "nyserda:PON6236",
+      "parent_id": "nyserda:PON6236",
+      "stage": "queue",
+      "input_fingerprint": "1645eebc7636ededdf60d0d412563717abeaa4832a28d4cc5f124eca64700f02",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "nyserda:PON6242",
+      "parent_id": "nyserda:PON6242",
+      "stage": "queue",
+      "input_fingerprint": "2c2becf92715a77fe7b44c7623a42cbc954dff16f7997efbe201be2669d26466",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -14719,15 +14403,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "356538",
-      "parent_id": "356538",
-      "stage": "queue",
-      "input_fingerprint": "77adbbc94307cb314b671b280b920d5180c54c53ae1e6780d55fc05dd1333b94",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "343875",
       "parent_id": "343875",
       "stage": "queue",
@@ -14759,15 +14434,6 @@
       "parent_id": "363810",
       "stage": "queue",
       "input_fingerprint": "b7a959e9a33753460b8e0c13c37536f316c47f1c2f1c56b07820b0a30a0023c0",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357609",
-      "parent_id": "357609",
-      "stage": "queue",
-      "input_fingerprint": "8035a0a2deec67104b5f5e047a2e91757cce56cafb4909dd0b2c408f6542c997",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -14863,15 +14529,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "349655",
-      "parent_id": "349655",
-      "stage": "queue",
-      "input_fingerprint": "0c4e3a9d8d7d7b2d120d1cb1cfb83c75c1c5f9906e39d38c91d032cc652b0fc8",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "vpr-email:vpr-e1612e2acba631d2",
       "parent_id": "vpr-email:vpr-e1612e2acba631d2",
       "stage": "queue",
@@ -14894,15 +14551,6 @@
       "parent_id": "359225",
       "stage": "queue",
       "input_fingerprint": "fa053b851fbfcbfb94191a05ac97bb19ef65438ef28cd03fa0778ed6e91fbc68",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "332012",
-      "parent_id": "332012",
-      "stage": "queue",
-      "input_fingerprint": "ed12201d9b75b3d24f2d156fe6cffbdda709be9fc72b28c64851308e5ea4989c",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15007,24 +14655,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "338558",
-      "parent_id": "338558",
-      "stage": "queue",
-      "input_fingerprint": "f0dfa2670326bd2c993cd928c44ac61e792430a8ea92cb7a8a9c4cc3ebd289de",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "349109",
-      "parent_id": "349109",
-      "stage": "queue",
-      "input_fingerprint": "4f624ed55ae575abc7ff210c392c92b2c161824910691833d3d419b7a70c7992",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "348923",
       "parent_id": "348923",
       "stage": "queue",
@@ -15079,15 +14709,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "356536",
-      "parent_id": "356536",
-      "stage": "queue",
-      "input_fingerprint": "93f4d1f87fe7e536e7804b9742a397fd878fa0bb15b467b048dc2dfeafc83a9f",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "363809",
       "parent_id": "363809",
       "stage": "queue",
@@ -15133,15 +14754,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "356537",
-      "parent_id": "356537",
-      "stage": "queue",
-      "input_fingerprint": "57f1d0bd41859657336d1a9fbadfc456c18619f8345b3b33578b9b3bdf171618",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "347680",
       "parent_id": "347680",
       "stage": "queue",
@@ -15169,15 +14781,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "357580",
-      "parent_id": "357580",
-      "stage": "queue",
-      "input_fingerprint": "9e7073d618077bb3d1d8b427fa951dee2b8e1fbbb76fbfd5f979c996a4728326",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "330296",
       "parent_id": "330296",
       "stage": "queue",
@@ -15187,19 +14790,19 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "295449",
-      "parent_id": "295449",
+      "scope_id": "336244",
+      "parent_id": "336244",
       "stage": "queue",
-      "input_fingerprint": "d5991b1c032a314387be3ad1008f122705d8b6b1871418f8c911e82a028ab5b8",
+      "input_fingerprint": "cf70c215f55249be9cca206f6eae26ce137e318292572654b0ac59d365bbacb6",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "336244",
-      "parent_id": "336244",
+      "scope_id": "363620",
+      "parent_id": "363620",
       "stage": "queue",
-      "input_fingerprint": "cf70c215f55249be9cca206f6eae26ce137e318292572654b0ac59d365bbacb6",
+      "input_fingerprint": "79e11e0d158075a7fae47d7b2cc481ee1d6a5e98c97a12e7dcf2dc0b233bdba0",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15217,7 +14820,7 @@
       "scope_id": "363618",
       "parent_id": "363618",
       "stage": "queue",
-      "input_fingerprint": "336451557483c11aecfc320c78372646e71fd739a9c36bc2354f56985b4dfb1a",
+      "input_fingerprint": "8c894f44b2f15b9faf7c713ecb448f4d409bbcb34dbf5f9f7eea1ffffa0e8212",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15235,7 +14838,7 @@
       "scope_id": "363621",
       "parent_id": "363621",
       "stage": "queue",
-      "input_fingerprint": "6592ef1e02abf4658e44be3bee179de0f4784ffaf8f0cf00f462ae01b99b8fe6",
+      "input_fingerprint": "952ed8a4547dd78f2a67e3b091fccda72293bd75760fdb1a882db783d2e63f7d",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15308,6 +14911,15 @@
       "parent_id": "360664",
       "stage": "queue",
       "input_fingerprint": "3cdfe9d78c0a7a79ae510de5a44a2e43520a05a420cdf264754184fb0715dda2",
+      "state": "deferred",
+      "retry_eligible": true,
+      "reason_code": "pending_work"
+    },
+    {
+      "scope_id": "vpr-email:vpr-0f186b990288c021",
+      "parent_id": "vpr-email:vpr-0f186b990288c021",
+      "stage": "queue",
+      "input_fingerprint": "6838b5a057ea89237183757f3584b435efa04e46af8d361c52d8e2f4dc544163",
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
@@ -15583,15 +15195,6 @@
       "reason_code": "pending_work"
     },
     {
-      "scope_id": "357578",
-      "parent_id": "357578",
-      "stage": "queue",
-      "input_fingerprint": "68c8f78c4eb33608f23311cae2147974e19e50196b0e29fecd4bc0192f6c9c35",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
-    },
-    {
       "scope_id": "arpa-h:spectra",
       "parent_id": "arpa-h:spectra",
       "stage": "queue",
@@ -15671,19 +15274,10 @@
       "state": "deferred",
       "retry_eligible": true,
       "reason_code": "pending_work"
-    },
-    {
-      "scope_id": "357579",
-      "parent_id": "357579",
-      "stage": "queue",
-      "input_fingerprint": "e619eb44434f4e4ef9d39bf955e88e6d130bf38a92e0f097a3ca93d08df7df66",
-      "state": "deferred",
-      "retry_eligible": true,
-      "reason_code": "pending_work"
     }
   ],
   "assessed_scopes": 0,
   "outcomes": {},
-  "elapsed_seconds": 2.951,
+  "elapsed_seconds": 2.982,
   "status": "completed"
 }
