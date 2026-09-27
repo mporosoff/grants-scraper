@@ -219,7 +219,32 @@ class PlanningAndIsolation(unittest.TestCase):
     def test_completed_fixed_repair_restores_ordinary_planning(self):
         with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}), patch.object(bridge, 'correction_complete', return_value=True), \
                 patch('tools.plan_release.main') as ordinary:
-            bridge.plan(); ordinary.assert_called_once_with(automatic_paid_hold=True)
+            bridge.plan(); ordinary.assert_called_once_with()
+
+    def test_completed_repair_allows_daily_generation_with_existing_service_controls(self):
+        from tools import plan_release as planner
+        for event in ('schedule', 'push'):
+            with self.subTest(event=event), tempfile.TemporaryDirectory() as temp:
+                root = Path(temp)
+                environment = ENV | {'GITHUB_EVENT_NAME': event, 'REQUESTED_STAGE': 'auto',
+                    'RUNNER_TEMP': temp, 'GITHUB_OUTPUT': str(root/'outputs'),
+                    'GITHUB_STEP_SUMMARY': str(root/'summary')}
+                with patch.dict(os.environ, environment, clear=True), \
+                        patch.object(bridge, 'correction_complete', return_value=True), \
+                        patch.object(planner, 'pending_publication', return_value=None), \
+                        patch.object(planner, 'latest_report', return_value=('', None)), \
+                        patch.object(planner, 'plan', return_value={'stage': 'generate', 'release_sha': 'a'*40,
+                            'team_mode': 'maintenance', 'team_generation_ready': False}) as decide, \
+                        patch('tools.team_provider.provider_names', return_value=('anthropic',)), \
+                        patch('sys.stdout', new=io.StringIO()):
+                    bridge.plan()
+                value = json.loads((root/'release-plan.json').read_bytes())
+                self.assertEqual(value['stage'], 'generate')
+                self.assertNotIn('held_stage', value)
+                self.assertEqual(value['team_mode'], 'maintenance')
+                self.assertFalse(value['team_generation_ready'])
+                self.assertEqual((value['openai'], value['anthropic']), ('false', 'true'))
+                decide.assert_called_once()
 
     def test_completed_finite_guard_constrains_outputs_before_any_paid_stage_is_exposed(self):
         from tools import plan_release as planner
@@ -341,7 +366,7 @@ class ProjectionCompletion(unittest.TestCase):
         self.owned.assert_called_once()
         self.assertEqual(self.owned.call_args.args[0], self.manifest)
         with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}, clear=True), patch('tools.plan_release.main') as ordinary:
-            bridge.plan(); ordinary.assert_called_once_with(automatic_paid_hold=True)
+            bridge.plan(); ordinary.assert_called_once_with()
 
     def test_projection_cannot_complete_without_publication_live_and_owned_evidence(self):
         self.publication['pages_complete'] = False

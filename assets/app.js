@@ -355,6 +355,7 @@
   }
 
   function metadataDateText(value) {
+    if (!value) return "unknown date";
     const generated = new Date(value);
     return Number.isNaN(generated.getTime())
       ? "unknown date"
@@ -367,11 +368,9 @@
   function renderLightweightCatalogStatus() {
     const counts = CATALOG_METADATA?.status_counts || {};
     const recordCount = Number(CATALOG_METADATA?.record_count || 0);
-    const dateText = metadataDateText(
-      CATALOG_METADATA?.pipeline_generated_at || CATALOG_METADATA?.generated_at,
-    );
+    const dateText = metadataDateText(CATALOG_METADATA?.generated_at);
     const pill = $("catalog-pill");
-    pill.classList.remove("stale");
+    renderCatalogFreshness(CATALOG_METADATA?.generated_at);
     pill.setAttribute(
       "aria-label",
       `${recordCount.toLocaleString()} catalog records; updated ${dateText}`,
@@ -719,19 +718,28 @@
   }
 
   function ageInDays(timestamp) {
+    if (!timestamp) return Infinity;
     const generated = new Date(timestamp);
     if (Number.isNaN(generated.getTime())) return Infinity;
     return Math.max(0, (Date.now() - generated.getTime()) / 86_400_000);
   }
 
-  function updateCatalogStatus() {
-    const age = ageInDays(catalog.generated_at);
+  function renderCatalogFreshness(timestamp) {
+    const age = ageInDays(timestamp);
     const stale = age > 3;
-    const generated = new Date(catalog.generated_at);
-    const dateText = Number.isNaN(generated.getTime())
-      ? "unknown date"
-      : new Intl.DateTimeFormat("en-US", { month: "short", day: "numeric" }).format(generated);
     $("catalog-pill").classList.toggle("stale", stale);
+    const warning = $("stale-warning");
+    warning.classList.toggle("hidden", !stale);
+    warning.textContent = !stale ? "" : Number.isFinite(age)
+      ? "This catalog is more than three days old. Search still works, but verify status and deadlines at each opportunity’s official source."
+      : "The catalog update date is unavailable. Verify status and deadlines at each opportunity’s official source.";
+  }
+
+  function updateCatalogStatus() {
+    const generated = new Date(catalog.generated_at);
+    const dateText = metadataDateText(catalog.generated_at);
+    const generatedText = dateText === "unknown date" ? dateText : generated.toLocaleString();
+    renderCatalogFreshness(catalog.generated_at);
     const liveCount = (state.runtimeCatalog.statusCounts.posted || 0)
       + (state.runtimeCatalog.statusCounts.forecasted || 0);
     const archivedCount = state.runtimeCatalog.statusCounts.archived || 0;
@@ -749,12 +757,7 @@
       ? ` Citation-backed notice evidence is currently available for ${evidenceCount.toLocaleString()} records and expands incrementally.`
       : " Citation-backed notice processing is queued and expands incrementally.";
     $("catalog-detail").textContent =
-      `${liveCount.toLocaleString()} current records (${(state.runtimeCatalog.statusCounts.posted || 0).toLocaleString()} open, ${(state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString()} forecasted). ${archivedCount.toLocaleString()} NSF-verified archived records are available through the Archived filter. ${state.runtimeCatalog.excluded.toLocaleString()} other non-current or informational records were hidden at runtime. Catalog generated ${generated.toLocaleString()}.${evidenceText}`;
-    if (stale) {
-      $("stale-warning").textContent =
-        "This catalog is more than three days old. Search still works, but verify status and deadlines at each opportunity’s official source.";
-      $("stale-warning").classList.remove("hidden");
-    }
+      `${liveCount.toLocaleString()} current records (${(state.runtimeCatalog.statusCounts.posted || 0).toLocaleString()} open, ${(state.runtimeCatalog.statusCounts.forecasted || 0).toLocaleString()} forecasted). ${archivedCount.toLocaleString()} NSF-verified archived records are available through the Archived filter. ${state.runtimeCatalog.excluded.toLocaleString()} other non-current or informational records were hidden at runtime. Catalog generated ${generatedText}.${evidenceText}`;
   }
 
   function renderFacet(name, search = "") {

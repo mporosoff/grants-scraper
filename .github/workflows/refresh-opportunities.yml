@@ -61,6 +61,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       stage: ${{ steps.plan.outputs.stage }}
+      reason: ${{ steps.plan.outputs.reason }}
+      held_stage: ${{ steps.plan.outputs.held_stage }}
       release_sha: ${{ steps.plan.outputs.release_sha }}
       team_mode: ${{ steps.plan.outputs.team_mode }}
       receipt_run: ${{ steps.plan.outputs.receipt_run }}
@@ -1054,6 +1056,9 @@ jobs:
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
             const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'catalog-projection', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
+            const planReason = needs.plan.outputs.reason || 'not reported';
+            const heldStage = needs.plan.outputs.held_stage || '';
+            const scheduledIncomplete = context.eventName === 'schedule' && needs['verify-live'].result !== 'success';
             const originalStage = stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
             let candidate = needs.candidate.outputs.candidate_id;
             let generationRun = needs.candidate.outputs.candidate_run;
@@ -1086,17 +1091,27 @@ jobs:
             const publicationAttempt = publicationRun === String(context.runId) ? process.env.GITHUB_RUN_ATTEMPT || 'unknown' :
               sameRequested ? needs.plan.outputs.publication_attempt || process.env.REQUESTED_PUBLICATION_ATTEMPT || 'latest retained' : 'none';
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${failed || (awaiting ? 'awaiting_review' : 'completed')}\n` +
+            const checkpoint = failed || (awaiting ? 'awaiting_review' : planned === 'noop' ?
+              (heldStage || scheduledIncomplete ? 'held' : 'noop') : scheduledIncomplete ? 'incomplete_verification' : 'completed');
+            const refreshFailure = scheduledIncomplete ?
+              `Scheduled catalog refresh did not complete live verification: ${checkpoint}. Planner reason: ${planReason}` : '';
+            const retry = failed ? next : awaiting ? 'publish after exact-head review' :
+              scheduledIncomplete ? planned === 'noop' ? 'resolve the reported hold before resuming auto' :
+              'inspect the retained checkpoint before retry' : 'none';
+            const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${checkpoint}\n` +
+              `Planned lifecycle stage: ${planned || 'not reported'}\nHeld lifecycle stage: ${heldStage || 'none'}\nPlanner reason: ${planReason}\n` +
+              (refreshFailure ? `Refresh failure: ${refreshFailure}\n` : '') +
               `Identity source: ${identitySource}\nOriginal lifecycle stage: ${originalStage}\nValidation receipt run: ${receiptRun}\n` +
               `Publication evidence run: ${publicationRun}\nPublication evidence attempt: ${publicationAttempt}\n` +
               `Release-control SHA: ${context.sha}\nProtected publication SHA: ${needs.publish.outputs.merge_sha || 'none confirmed'}\n` +
               `Production mutation: ${needs.publish.outputs.merge_sha ? 'protected publication completed' : needs.publish.result === 'failure' ? 'inspect publication receipt and rollback evidence' : 'none'}\n` +
               `Known-good live identity: publication artifact known-good-live-release.json (when Worker preparation started)\n` +
-              `Evidence and safe diagnostics: ${runUrl}#artifacts\nAllowed next retry: ${failed ? next : awaiting ? 'publish after exact-head review' : 'none'}\n` +
+              `Evidence and safe diagnostics: ${runUrl}#artifacts\nAllowed next retry: ${retry}\n` +
               `Resume the same workflow for pre-candidate failures so its persisted generation checkpoint can be recovered; do not repeat completed expensive work.\n` +
               `A persisted candidate must be reused after downstream failure. Authenticate candidate and receipt artifacts before retry; reported selectors alone are not proof. Caches are not release evidence.`;
             await core.summary.addRaw(body).write();
-            if (failed) {
+            if (failed || scheduledIncomplete) {
+              if (scheduledIncomplete) core.setFailed(refreshFailure);
               const title = 'Funding Finder release checkpoint failed';
               const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
               const existing = issues.find(issue => !issue.pull_request && issue.title === title);

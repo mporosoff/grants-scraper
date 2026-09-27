@@ -683,7 +683,9 @@ def plan():
         return main()
     elif correction_complete(ROOT):
         from tools.plan_release import main
-        return main(automatic_paid_hold=True)
+        # The completed finite repair must not suppress ordinary daily source
+        # refreshes. Existing service qualification and per-run budgets apply.
+        return main()
     else:
         require(requested in ('', 'auto') or os.environ.get('GITHUB_EVENT_NAME') != 'workflow_dispatch', 'ordinary_generation_waits_for_fixed_correction')
         value = {'stage': 'noop', 'release_sha': release.git(ROOT, 'rev-parse', 'HEAD'), 'openai': 'false', 'anthropic': 'false',

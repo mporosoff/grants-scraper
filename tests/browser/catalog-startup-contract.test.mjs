@@ -2,6 +2,8 @@ import assert from "node:assert/strict";
 import { createHash } from "node:crypto";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
+import vm from "node:vm";
+import { shellDom } from "../helpers/shell-dom.mjs";
 
 const root = new URL("../../", import.meta.url);
 const paths = {
@@ -180,4 +182,87 @@ test("release and refresh contracts publish and verify metadata with the exact c
   assert.match(sources.deploy, /manifest\['files'\]/);
   assert.match(sources.deploy, /actual == expected/);
   assert.match(sources.deploy, /public_path\(name\)/);
+});
+
+function catalogStatusHarness(metadata) {
+  const dom = shellDom(sources.explorer);
+  const context = {
+    ...dom.context,
+    $: id => dom.document.getElementById(id),
+    CATALOG_METADATA: metadata,
+    catalog: { ...metadata },
+    state: { runtimeCatalog: { statusCounts: { posted: 1021, forecasted: 350 }, excluded: 0 } },
+    Date: class extends Date {
+      static now() { return Date.parse("2026-09-27T15:00:00Z"); }
+    },
+  };
+  vm.createContext(context);
+  for (const name of ["escapeHtml", "metadataDateText", "ageInDays", "renderCatalogFreshness",
+    "renderLightweightCatalogStatus", "updateCatalogStatus"]) {
+    const source = sources.app.match(new RegExp(`  function ${name}\\([^]*?\\n  }`));
+    assert.ok(source, `${name} must be available to the status renderer`);
+    vm.runInContext(source[0], context);
+  }
+  return { context, pill: context.$("catalog-pill"), warning: context.$("stale-warning") };
+}
+
+test("startup reports stale source data before loading the catalog even after a newer pipeline run", () => {
+  const { context, pill, warning } = catalogStatusHarness({
+    generated_at: "2026-09-23T15:00:00Z",
+    pipeline_generated_at: "2026-09-27T14:00:00Z",
+    record_count: 1371,
+  });
+  context.renderLightweightCatalogStatus();
+  assert.match(pill.textContent, /updated Sep 23/);
+  assert.ok(pill.classList.contains("stale"));
+  assert.ok(!warning.classList.contains("hidden"));
+  assert.match(warning.textContent, /more than three days old/);
+  context.updateCatalogStatus();
+  assert.match(pill.textContent, /updated Sep 23/);
+  assert.ok(pill.classList.contains("stale"));
+  assert.ok(!warning.classList.contains("hidden"));
+});
+
+test("both catalog status paths share the three-day boundary and clear recovered warnings", () => {
+  const { context, pill, warning } = catalogStatusHarness({ record_count: 1371 });
+  for (const render of ["renderLightweightCatalogStatus", "updateCatalogStatus"]) {
+    for (const [generatedAt, stale] of [
+      ["2026-09-24T14:59:59Z", true],
+      ["2026-09-24T15:00:00Z", false],
+      ["2026-09-23T15:00:00Z", true],
+      ["2026-09-27T14:00:00Z", false],
+    ]) {
+      context.CATALOG_METADATA.generated_at = generatedAt;
+      context.catalog.generated_at = generatedAt;
+      context[render]();
+      assert.equal(pill.classList.contains("stale"), stale, `${render}: ${generatedAt}`);
+      assert.equal(warning.classList.contains("hidden"), !stale, `${render}: ${generatedAt}`);
+      if (!stale) assert.equal(warning.textContent, "");
+    }
+  }
+});
+
+test("unknown catalog dates stay visibly unverified and do not fall back to a fresh pipeline date", () => {
+  const { context, pill, warning } = catalogStatusHarness({
+    pipeline_generated_at: "2026-09-27T14:00:00Z",
+    record_count: 1371,
+  });
+  for (const generatedAt of [undefined, null, "", "invalid date"]) {
+    context.CATALOG_METADATA.generated_at = generatedAt;
+    context.catalog.generated_at = generatedAt;
+    for (const render of ["renderLightweightCatalogStatus", "updateCatalogStatus"]) {
+      context[render]();
+      assert.match(pill.textContent, /updated unknown date/);
+      assert.ok(pill.classList.contains("stale"));
+      assert.ok(!warning.classList.contains("hidden"));
+      assert.match(warning.textContent, /update date is unavailable/);
+      assert.doesNotMatch(warning.textContent, /more than three days old/);
+      assert.doesNotMatch(context.$("catalog-detail").textContent, /Invalid Date|1970/);
+    }
+  }
+  context.catalog.generated_at = "2026-09-27T14:00:00Z";
+  context.updateCatalogStatus();
+  assert.ok(!pill.classList.contains("stale"));
+  assert.ok(warning.classList.contains("hidden"));
+  assert.equal(warning.textContent, "");
 });
