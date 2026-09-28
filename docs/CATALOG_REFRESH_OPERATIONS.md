@@ -13,3 +13,11 @@ Team generation remains controlled separately by `config/offline_ai.json`; the s
 ## September 28, 2026 incident
 
 At 17:37 UTC, GitHub had created no September 28 repository workflow runs despite the active 10:17 UTC schedule. The public catalog and current main agreed on the September 27 source timestamp. Cache-busted reads and exact public asset hashes ruled out a stale browser/CDN copy. Previous daily events had arrived several hours late. GitHub reported no current Actions outage; the exact provider-side reason for this missing event was not established.
+
+## Notice-processing time limits
+
+The September 28 scheduled run reached the 75-minute generation cutoff inside notice extraction, before any provider request or candidate was produced. Its retained accounting recorded zero charges. The document wrapper now enforces the existing `max_seconds` budget, reserves time to save results, and limits each parsing/projection unit. Progress reports identify the phase and opportunity ID without logging source text or prompts.
+
+Timed-out work remains explicitly incomplete. It cannot advance source-check timestamps or publish unchecked derived facts or subtopics. Any deadline-exhausted or deferred work blocks vector generation, candidate creation, and the independent publication gate. The completion marker clears only after the full document phase passes existing health checks. Completed evidence checkpoints remain local to the runner; they do not survive a failed runner teardown. The generation run retains its original spending identity and exact-response cache for recovery.
+
+When recovering an original workflow run on repaired main code, rerun its plan as well as generation. Publication readiness is bound to that run's authenticated release-plan artifact, including an inherited earlier plan when only failed jobs are retried. The run's original event SHA does not necessarily identify the code selected by a later plan.

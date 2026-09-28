@@ -59,6 +59,8 @@ def retained_retrieval_failure(before, after, catalog, cache, stamp):
 
 
 def verify(catalog, cache, children=None, *, candidate_id='committed-working-copy'):
+    from scripts.document_work_budget import require_document_publication
+    require_document_publication(catalog)
     stamp = catalog.get('document_evidence_generated_at') or catalog.get('generated_at')
     if not stamp:
         raise ValueError('Missing generated notice projection timestamp')

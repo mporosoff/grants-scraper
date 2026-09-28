@@ -351,14 +351,23 @@ export async function buildGeneration({corpus, previous, config, force = false, 
       : indexes.some(index => index !== null) ? "exact_configuration_and_space_match" : "no_compatible_rows"};
 }
 
-async function run() {
+export function requireCompleteDocumentWork(catalog) {
+  const diagnostics = catalog?.diagnostics;
+  if (!diagnostics || !Object.hasOwn(diagnostics, "document_work")) return;
+  const work = diagnostics.document_work;
+  if (!work || typeof work !== "object" || Array.isArray(work) || work.publication_safe !== true) {
+    throw new Error("Document processing is incomplete; preserve the original run and complete recovery before vector generation.");
+  }
+}
+
+async function run(base) {
   const write = process.argv.includes("--write");
   const production = process.argv.includes("--production");
   const force = process.argv.includes("--force");
   if (production && !write) {
     throw new Error("--production requires --write so a complete generation is published atomically.");
   }
-  const [base, api, previous] = await Promise.all([loadHarness(), hybridApi(), existingAsset()]);
+  const [api, previous] = await Promise.all([hybridApi(), existingAsset()]);
   const harness = makeVariantHarness(base, { searchV2: true });
   const currentness = harness.parentEngine.score("funding research", { evidence: false });
   const corpus = api.buildCorpus({
@@ -507,7 +516,13 @@ async function run() {
   }, null, 2)}\n`);
 }
 
-if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) withBuildLock(new URL(".cache/", ROOT), run).catch(error => {
+async function main() {
+  const base = await loadHarness();
+  requireCompleteDocumentWork(base.catalog);
+  return withBuildLock(new URL(".cache/", ROOT), () => run(base));
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) main().catch(error => {
   process.stderr.write(`${error.message}\n`);
   process.exitCode = 1;
 });

@@ -29,6 +29,40 @@ def decide(changes, *, event, requested='', verified=False, receipt_current=Fals
     return 'noop' if verified else 'publish'
 
 
+def release_plan_sha(repository, run, publication_attempt, destination):
+    """Authenticate the plan inherited by this publication attempt."""
+    from tools.fetch_release_artifact import fetch
+    from tools.offline_ai_checkpoint import api
+    if not re.fullmatch('[1-9][0-9]*', str(publication_attempt)):
+        raise ValueError('Invalid publication attempt for release plan')
+    plans = []
+    for page in range(1, 101):
+        rows = json.loads(api(repository, f'actions/runs/{run}/artifacts?per_page=100&page={page}'))['artifacts']
+        for artifact in rows:
+            match = re.fullmatch(r'release-plan-([1-9][0-9]*)', artifact['name'])
+            if match and int(match[1]) <= int(publication_attempt):
+                plans.append((int(match[1]), artifact))
+        if len(rows) < 100:
+            break
+    else:
+        raise ValueError('Release plan evidence exceeds bounded lookup')
+    if not plans:
+        raise ValueError('Publication release plan evidence is missing')
+    # Failed-job reruns inherit an earlier successful plan. Never borrow a
+    # later plan or replace the newest applicable evidence with an older pass.
+    latest = max(attempt for attempt, _ in plans)
+    selected = [artifact for attempt, artifact in plans if attempt == latest]
+    if len(selected) != 1 or selected[0].get('expired') is not False:
+        raise ValueError('Publication release plan evidence is ambiguous or expired')
+    destination = Path(destination)
+    fetch(repository, run, selected[0]['name'], destination)
+    plan = c.read_json(destination / 'release-plan.json')
+    sha = plan.get('release_sha') if isinstance(plan, dict) else None
+    if not isinstance(sha, str) or not re.fullmatch('[a-f0-9]{40}', sha):
+        raise ValueError('Publication release plan has no complete release SHA')
+    return sha
+
+
 def latest_report(repository, candidate, kind, destination):
     from tools.fetch_release_artifact import fetch
     from tools.offline_ai_checkpoint import api
@@ -39,7 +73,7 @@ def latest_report(repository, candidate, kind, destination):
         for artifact in sorted(matches, key=lambda a: a['id'], reverse=True):
             run = str(artifact['workflow_run']['id'])
             target = Path(destination) / str(artifact['id'])
-            run_metadata = fetch(repository, run, artifact['name'], target)
+            fetch(repository, run, artifact['name'], target)
             report = target / {'live': 'live-verification.json', 'validation': 'validation.json',
                               'publication': 'publication.json', 'browser': 'final-integration.json',
                               'review': 'review-pending.json'}[kind]
@@ -55,11 +89,12 @@ def latest_report(repository, candidate, kind, destination):
                 required = {'schema_version', 'candidate_id', 'base_sha', 'head_sha', 'pr_url',
                             'artifact_run', 'validation_receipt_sha256', 'timestamp'}
                 validation = c.read_json(target / 'validation.json')
+                planned_sha = release_plan_sha(repository, run, artifact['name'].rsplit('-', 1)[1], target / 'plan')
                 if (set(ready) != required or type(ready['schema_version']) is not int or ready['schema_version'] != 1
                         or ready['candidate_id'] != candidate
                         or not re.fullmatch('[1-9][0-9]*', str(ready['artifact_run']))
                         or not re.fullmatch('[a-f0-9]{40}', ready['head_sha'])
-                        or ready['base_sha'] != run_metadata['head_sha']
+                        or ready['base_sha'] != planned_sha
                         or ready['validation_receipt_sha256'] != c.digest(c.encoded(validation))
                         or validation.get('validation_sha') != ready['base_sha']
                         or validation.get('candidate_id') != candidate

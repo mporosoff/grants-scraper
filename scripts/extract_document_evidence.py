@@ -15,6 +15,7 @@ filtering and sorting.
 
 import argparse
 from copy import deepcopy
+from contextlib import nullcontext
 from datetime import date, datetime, timedelta, timezone
 from html.parser import HTMLParser
 import hashlib
@@ -42,6 +43,7 @@ from scripts.build_catalog import (
 )
 from scripts.enrich_catalog import read_catalog
 from scripts import program_areas, notice_semantics, notice_schedule, notice_structure_cache
+from scripts.document_work_budget import WorkTimedOut
 
 
 EVIDENCE_SCHEMA_VERSION = 1
@@ -2088,6 +2090,7 @@ def build_document_entry(
         entry["last_error"] = None
         entry["status"] = "current"
         entry.pop('parser_pending', None)
+        entry.pop("processing_incomplete", None)
         entry["document"]["last_seen_at"] = fetched_at
         entry["document"]["etag"] = response.get("etag") or entry[
             "document"
@@ -2426,6 +2429,38 @@ def subtopic_only_candidates(records, *, enabled):
     return candidates
 
 
+def work_guard(budget, phase, opportunity_id="", *, finalize=False, seconds=None):
+    return (budget.guard(phase, opportunity_id, finalize=finalize, seconds=seconds)
+            if budget is not None else nullcontext())
+
+
+def incomplete_entry(previous, phase):
+    # Keep the original source receipt for recovery, but publish none of an
+    # interrupted unit's facts or child decisions. No new source check occurred.
+    entry = dict(previous or {})
+    entry.update(status="processing_incomplete", last_error="WorkTimedOut",
+                 processing_incomplete=phase, subtopics=[], subtopic_reason=phase)
+    return entry
+
+
+def incomplete_metrics():
+    return {"status": "complete", "timed_out_count": 0, "deferred_count": 0, "phases": {}}
+
+
+def record_incomplete(metrics, phase, *, deferred=False):
+    metrics["status"] = "incomplete"
+    key = "deferred_count" if deferred else "timed_out_count"
+    metrics[key] += 1
+    metrics["phases"][phase] = metrics["phases"].get(phase, 0) + 1
+
+
+def safe_record_projection(record, phase):
+    projected = merge_document_entry(record, None)
+    projected["document_evidence_status"] = "processing_incomplete"
+    projected["document_evidence_processing_reason"] = phase
+    return projected
+
+
 def refresh_subtopics_without_source(
     records,
     *,
@@ -2437,6 +2472,8 @@ def refresh_subtopics_without_source(
     previous_store=None,
     prior_checked_at=None,
     recheck_days=14,
+    work_budget=None,
+    checkpoint=None,
 ):
     """Segment the records `source_for_record()` declines. Subtopics only.
 
@@ -2463,88 +2500,113 @@ def refresh_subtopics_without_source(
         return store, metrics
     from scripts import subtopic_sources, subtopic_structured
 
-    candidates = subtopic_only_candidates(records, enabled=True)
-    candidate_ids = {opportunity_id for opportunity_id, _ in candidates}
-    store = {
-        opportunity_id: deepcopy(entry)
-        for opportunity_id, entry in (previous_store or {}).items()
-        if opportunity_id in candidate_ids
-    }
-    if prior_checked_at:
-        for entry in store.values():
-            entry.setdefault("checked_at", prior_checked_at)
-    metrics["cached_count"] = len(store)
-    unseen = [item for item in candidates if item[0] not in store]
-    due = []
-    for item in candidates:
-        opportunity_id = item[0]
-        if opportunity_id not in store:
-            continue
-        signature = source_signature(item[1], subtopic_sources.subtopic_only_primary(item[1]))
-        prior_signature = store[opportunity_id].get("source_signature")
-        if prior_signature is not None and prior_signature != signature:
-            store[opportunity_id]["status"] = "source_changed"
-            due.append(item)
-            continue
-        if subtopic_structured.needs_body_revalidation(store[opportunity_id]):
-            due.append(item)
-            continue
-        checked_at = store[opportunity_id].get("checked_at")
-        try:
-            checked = datetime.fromisoformat(
-                str(checked_at or "").replace("Z", "+00:00")
-            )
-        except ValueError:
-            due.append(item)
-            continue
-        if checked.tzinfo is None:
-            checked = checked.replace(tzinfo=timezone.utc)
-        if checked <= now - timedelta(days=recheck_days):
-            due.append(item)
-    queue = unseen + due
-    metrics["queued_new_count"] = len(unseen)
-    metrics["queued_recheck_count"] = len(due)
-    metrics["remaining_update_count"] = max(
-        0,
-        len(queue) - min(len(queue), max_documents),
-    )
-    fetched_at = iso_utc(now)
-    run_entries = []
-    for opportunity_id, record in queue[:max_documents]:
-        content, document = None, None
-        source = subtopic_sources.subtopic_only_primary(record)
-        if source:
-            metrics["agency_url_tried"] += 1
-            try:
-                response = fetcher(source["url"], {})
-                content = response.get("content")
-                document = {
-                    "url": response.get("url") or source["url"],
-                    "name": source.get("name"),
-                    "content_type": response.get("content_type"),
-                    "sha256": (
-                        hashlib.sha256(content).hexdigest() if content else None
-                    ),
-                    "source_kind": source["kind"],
-                }
-            except Exception:  # noqa: BLE001 - an agency page is optional here
-                content, document = None, None
-        fields = subtopic_fields(
-            record, content, None, document, fetched_at, True
-        ) or {
-            "subtopics": [],
-            "subtopic_reason": "no_source_or_extractable_text",
-            "subtopic_method": "none",
+    with work_guard(work_budget, "subtopic_selection", seconds=10):
+        candidates = subtopic_only_candidates(records, enabled=True)
+        candidate_ids = {opportunity_id for opportunity_id, _ in candidates}
+        store = {
+            opportunity_id: deepcopy(entry)
+            for opportunity_id, entry in (previous_store or {}).items()
+            if opportunity_id in candidate_ids
         }
-        fields["checked_at"] = fetched_at
-        fields["source_signature"] = source_signature(record, source)
-        metrics["attempted"] += 1
-        if fields.get("subtopics"):
-            metrics["with_subtopics"] += 1
-        store[opportunity_id] = fields
-        run_entries.append(fields)
-        if request_delay:
+        if prior_checked_at:
+            for entry in store.values():
+                entry.setdefault("checked_at", prior_checked_at)
+        metrics["cached_count"] = len(store)
+        unseen = [item for item in candidates if item[0] not in store]
+        due = []
+        for item in candidates:
+            opportunity_id = item[0]
+            if opportunity_id not in store:
+                continue
+            signature = source_signature(item[1], subtopic_sources.subtopic_only_primary(item[1]))
+            prior_signature = store[opportunity_id].get("source_signature")
+            if prior_signature is not None and prior_signature != signature:
+                store[opportunity_id]["status"] = "source_changed"
+                due.append(item)
+                continue
+            if (store[opportunity_id].get("status") == "processing_incomplete"
+                    or subtopic_structured.needs_body_revalidation(store[opportunity_id])):
+                due.append(item)
+                continue
+            checked_at = store[opportunity_id].get("checked_at")
+            try:
+                checked = datetime.fromisoformat(
+                    str(checked_at or "").replace("Z", "+00:00")
+                )
+            except ValueError:
+                due.append(item)
+                continue
+            if checked.tzinfo is None:
+                checked = checked.replace(tzinfo=timezone.utc)
+            if checked <= now - timedelta(days=recheck_days):
+                due.append(item)
+        queue = unseen + due
+        metrics["queued_new_count"] = len(unseen)
+        metrics["queued_recheck_count"] = len(due)
+        metrics["remaining_update_count"] = max(
+            0,
+            len(queue) - min(len(queue), max_documents),
+        )
+        fetched_at = iso_utc(now)
+    run_entries = []
+    processing = incomplete_metrics()
+    completed = 0
+    interrupted_ids = set()
+    for opportunity_id, record in queue[:max_documents]:
+        if work_budget is not None and work_budget.expired():
+            store[opportunity_id] = incomplete_entry(store.get(opportunity_id), "subtopic_budget")
+            record_incomplete(processing, "subtopic_budget", deferred=True)
+            interrupted_ids.add(opportunity_id)
+            continue
+        try:
+            with work_guard(work_budget, "subtopic_notice", opportunity_id):
+                content, document = None, None
+                source = subtopic_sources.subtopic_only_primary(record)
+                if source:
+                    metrics["agency_url_tried"] += 1
+                    try:
+                        response = fetcher(source["url"], {})
+                        content = response.get("content")
+                        document = {
+                            "url": response.get("url") or source["url"],
+                            "name": source.get("name"),
+                            "content_type": response.get("content_type"),
+                            "sha256": (
+                                hashlib.sha256(content).hexdigest() if content else None
+                            ),
+                            "source_kind": source["kind"],
+                        }
+                    except Exception:  # noqa: BLE001 - an agency page is optional here
+                        content, document = None, None
+                fields = subtopic_fields(
+                    record, content, None, document, fetched_at, True
+                ) or {
+                    "subtopics": [],
+                    "subtopic_reason": "no_source_or_extractable_text",
+                    "subtopic_method": "none",
+                }
+                fields["checked_at"] = fetched_at
+                fields["source_signature"] = source_signature(record, source)
+        except WorkTimedOut:
+            store[opportunity_id] = incomplete_entry(store.get(opportunity_id), "subtopic_timeout")
+            record_incomplete(processing, "subtopic_timeout")
+            interrupted_ids.add(opportunity_id)
+        else:
+            store[opportunity_id] = fields
+            completed += 1
+            metrics["attempted"] += 1
+            metrics["with_subtopics"] += int(bool(fields.get("subtopics")))
+            run_entries.append(fields)
+        if checkpoint is not None:
+            checkpoint(store)
+        if request_delay and not (work_budget is not None and work_budget.expired()):
             time.sleep(request_delay)
+    metrics["remaining_update_count"] = max(0, len(queue) - completed)
+    for identifier, entry in store.items():
+        if entry.get("status") == "processing_incomplete" and identifier not in interrupted_ids:
+            record_incomplete(processing, "prior_subtopic_work_pending", deferred=True)
+    if work_budget is not None or processing["status"] == "incomplete":
+        metrics["processing"] = processing
     metrics["classifier_run"] = classifier_run_metrics(run_entries)
     return store, metrics
 
@@ -2583,7 +2645,7 @@ def merge_subtopic_sidecar(cache, sources, current_parent_ids, *, as_of):
 
 
 def due_for_check(entry, signature, now, recheck_days, *, needs_subtopics=False):
-    if not entry:
+    if not entry or entry.get("status") == "processing_incomplete":
         return True
     # Parser recovery is due independently of HTTP freshness. A failed source
     # keeps its normal retry backoff even when recovery remains pending.
@@ -2670,6 +2732,7 @@ def merge_document_entry(record, entry):
     if "deadlines" in output:
         output["deadlines"] = deadlines
     output.pop("document_evidence_checked_at", None)
+    output.pop("document_evidence_processing_reason", None)
     output.pop("document_status_signals", None)
     output.pop('submission_requirements', None)
     output.pop("limited_submission_review", None)
@@ -3108,6 +3171,8 @@ def classifier_run_metrics(entries):
 
 
 def validate_refresh_health(metrics, minimum_attempts=5, maximum_failure_rate=0.8):
+    if (metrics.get("processing") or {}).get("status") == "incomplete":
+        raise RuntimeError("Official-document refresh incomplete: processing deadline exhausted.")
     classifier = (metrics.get("subtopics") or {}).get("classifier_run") or {}
     classifier_errors = sum(
         max(0, int(count or 0))
@@ -3165,17 +3230,9 @@ def withhold_outdated_topic_bodies(entry, structure_cache):
 
 
 def enrich_document_evidence(
-    catalog,
-    cache,
-    *,
-    max_documents=45,
-    max_subtopic_documents=45,
-    request_delay=0.2,
-    recheck_days=14,
-    fetcher=download_document,
-    now=None,
-    enable_subtopics=False,
-    structure_cache=None,
+    catalog, cache, *, max_documents=45, max_subtopic_documents=45,
+    request_delay=0.2, recheck_days=14, fetcher=download_document, now=None,
+    enable_subtopics=False, structure_cache=None, work_budget=None, checkpoint=None,
 ):
     now = now or utc_now()
     structure_cache = structure_cache if structure_cache is not None else notice_structure_cache.StructureCache()
@@ -3183,232 +3240,241 @@ def enrich_document_evidence(
     cached_records = cache.setdefault("records", {})
     records = catalog["opportunities"]
     classifier_run_entries = []
-    for entry in cached_records.values():
-        entry["archived_from_catalog_at"] = None
-        if entry.get("program_areas"):
-            entry["program_areas"] = validated_program_area_hits(entry)
+    prior_incomplete = {identifier for name in ("records", "subtopic_only")
+                        for identifier, entry in (cache.get(name) or {}).items()
+                        if entry.get("status") == "processing_incomplete"}
+    processing = incomplete_metrics()
+    blocked = set()
 
+    def incomplete(store, identifier, phase, *, deferred=False):
+        store[identifier] = incomplete_entry(store.get(identifier), phase)
+        blocked.add(identifier)
+        record_incomplete(processing, phase, deferred=deferred)
+
+    stores = [cached_records]
     if enable_subtopics:
-        for entry in list(cached_records.values()) + list((cache.get("subtopic_only") or {}).values()):
-            withhold_outdated_topic_bodies(entry, structure_cache)
+        stores.append(cache.get("subtopic_only") or {})
+    for store in stores:
+        for identifier, original in list(store.items()):
+            if work_budget is not None and work_budget.expired():
+                incomplete(store, identifier, "cached_preparation_budget", deferred=True)
+                continue
+            try:
+                with work_guard(work_budget, "cached_preparation", identifier, seconds=10):
+                    entry = deepcopy(original)
+                    entry["archived_from_catalog_at"] = None
+                    if store is cached_records and entry.get("program_areas"):
+                        entry["program_areas"] = validated_program_area_hits(entry)
+                    if enable_subtopics:
+                        withhold_outdated_topic_bodies(entry, structure_cache)
+            except WorkTimedOut:
+                incomplete(store, identifier, "cached_preparation_timeout")
+            else:
+                store[identifier] = entry
+    if checkpoint is not None:
+        checkpoint(cache)
 
-    candidates = []
+    candidates, sources = [], {}
     for record in records:
-        opportunity_id = str(
-            record.get("opportunity_id")
-            or record.get("opportunity_number")
-            or ""
-        )
-        source = source_for_record(record)
-        entry = cached_records.get(opportunity_id)
-        if entry:
-            prior_url = entry.get("source_url") or str(entry.get("source_signature") or "").split("|", 1)[0]
-            if not source or (prior_url and prior_url != source["url"]):
-                entry["status"] = "source_changed"
-            elif source_scope_identity(source["url"]) != entry.get("source_scope_identity"):
-                entry["status"] = "needs_revalidation"
-        if not opportunity_id or not source:
+        identifier = str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+        if identifier in blocked:
             continue
-        signature = source_signature(record, source)
-        source_recheck_days = (
-            recheck_days
-            if record.get("primary_document_url")
-            else max(30, recheck_days)
-        )
-        backfill = needs_subtopics(entry, enable_subtopics)
-        if due_for_check(
-            entry, signature, now, source_recheck_days, needs_subtopics=backfill
-        ):
-            candidates.append((record, source, signature, entry, backfill))
-    candidates.sort(
-        key=lambda item: (
-            0 if (item[3] or {}).get("subtopic_reason") == "scientific_body_revalidation_pending" else 1,
-            0
-            if item[3]
-            and item[3].get("source_signature") != item[2]
-            else 1
-            if not item[3]
-            else 2
-            if item[3].get("status") == "failed"
-            else 3,
-            0 if item[1]["kind"] == "primary_notice" else 1,
-            0
-            if (
-                item[0].get("has_preliminary_stage")
-                or item[0].get("limited_submission")
-                or item[0].get("status_verification_required")
-            )
-            else 1,
-            0
-            if not (
-                item[0].get("award_floor")
-                or item[0].get("award_ceiling")
-            )
-            else 1,
-            item[0].get("close_date") or "9999-12-31",
-        )
-    )
-
-    refreshed = 0
-    not_modified = 0
-    reparsed = requests = 0
-    # Recover only bounded full-source projections. All remaining changed
-    # families are quarantined before publication, preserving unrelated facts.
-    failures = []
-    for record, source, signature, previous, backfill in candidates[:max_documents]:
-        opportunity_id = str(
-            record.get("opportunity_id")
-            or record.get("opportunity_number")
-        )
-        headers = {}
-        if previous and not backfill:
-            recovered = reparse_from_structure(record, source, previous, now, structure_cache)
-            if recovered:
-                cached_records[opportunity_id] = previous = recovered
-                reparsed += 1
-                # Interpretation is not a source freshness check. If a check
-                # is also due, this same budget slot still performs it.
-                if not due_for_check(previous, signature, now, recheck_days):
-                    continue
-        previous_document = (previous or {}).get("document") or {}
-        # §8.3 insertion 3, gate 2. A 304 returns no body, and you cannot
-        # segment bytes you did not receive -- so a document needing backfill
-        # asks for the whole thing.
-        if (previous and not backfill and previous.get('parser_dependencies') == parser_dependencies()
-                and previous.get("source_scope_identity") == source_scope_identity(source["url"])
-                and previous_document.get("url") == source["url"]):
-            if previous_document.get("etag"):
-                headers["If-None-Match"] = previous_document["etag"]
-            if previous_document.get("last_modified"):
-                headers["If-Modified-Since"] = previous_document[
-                    "last_modified"
-                ]
+        if work_budget is not None and work_budget.expired():
+            incomplete(cached_records, identifier, "notice_selection_budget", deferred=True)
+            continue
         try:
-            requests += 1
-            response = fetcher(source["url"], headers)
-            if response.get("status_code") == 304:
-                if not previous or not headers or resolved_document_url(source, response) != previous_document.get("url"):
-                    raise ValueError("unbound not-modified response")
-                previous["checked_at"] = iso_utc(now)
-                previous.pop("last_attempt_at", None)
-                previous["status"] = "current"
-                previous["last_error"] = None
-                previous["source_signature"] = signature
-                previous_document["last_seen_at"] = iso_utc(now)
-                not_modified += 1
-            else:
-                entry, extracted = build_document_entry(
-                    record,
-                    source,
-                    response,
-                    previous,
-                    now,
-                    enable_subtopics=enable_subtopics,
-                    backfill_subtopics=backfill,
-                    structure_cache=structure_cache,
-                )
-                cached_records[opportunity_id] = entry
-                if enable_subtopics:
-                    classifier_run_entries.append(entry)
-                refreshed += int(extracted)
-                not_modified += int(not extracted)
+            with work_guard(work_budget, "notice_selection", identifier, seconds=10):
+                source = source_for_record(record)
+                entry = deepcopy(cached_records.get(identifier))
+                if entry:
+                    prior_url = entry.get("source_url") or str(entry.get("source_signature") or "").split("|", 1)[0]
+                    if not source or (prior_url and prior_url != source["url"]):
+                        entry["status"] = "source_changed"
+                    elif source_scope_identity(source["url"]) != entry.get("source_scope_identity"):
+                        entry["status"] = "needs_revalidation"
+                selected = None
+                if identifier and source:
+                    signature = source_signature(record, source)
+                    interval = recheck_days if record.get("primary_document_url") else max(30, recheck_days)
+                    backfill = needs_subtopics(entry, enable_subtopics)
+                    if due_for_check(entry, signature, now, interval, needs_subtopics=backfill):
+                        selected = (record, source, signature, entry, backfill)
+        except WorkTimedOut:
+            incomplete(cached_records, identifier, "notice_selection_timeout")
+        else:
+            sources[identifier] = source
+            if entry is not None:
+                cached_records[identifier] = entry
+            if selected:
+                candidates.append(selected)
+    candidates.sort(key=lambda item: (
+        0 if (item[3] or {}).get("subtopic_reason") == "scientific_body_revalidation_pending" else 1,
+        0 if item[3] and item[3].get("source_signature") != item[2] else
+        1 if not item[3] else 2 if item[3].get("status") == "failed" else 3,
+        0 if item[1]["kind"] == "primary_notice" else 1,
+        0 if (item[0].get("has_preliminary_stage") or item[0].get("limited_submission")
+              or item[0].get("status_verification_required")) else 1,
+        0 if not (item[0].get("award_floor") or item[0].get("award_ceiling")) else 1,
+        item[0].get("close_date") or "9999-12-31"))
+
+    refreshed = not_modified = reparsed = requests = completed = 0
+    failures = []
+    completed_ids = set()
+    for record, source, signature, original, backfill in candidates[:max_documents]:
+        identifier = str(record.get("opportunity_id") or record.get("opportunity_number"))
+        if work_budget is not None and work_budget.expired():
+            incomplete(cached_records, identifier, "notice_budget", deferred=True)
+            continue
+        phase = "notice_reparse"
+        previous = original
+        try:
+            with work_guard(work_budget, phase, identifier, seconds=10):
+                previous = deepcopy(original)
+                recovered = (reparse_from_structure(record, source, previous, now, structure_cache)
+                             if previous and not backfill else None)
+                if recovered:
+                    previous = recovered
+                needs_fetch = not recovered or due_for_check(previous, signature, now, recheck_days)
+            if not needs_fetch:
+                cached_records[identifier] = previous
+                reparsed += 1
+                completed += 1
+                completed_ids.add(identifier)
+                if checkpoint is not None:
+                    checkpoint(cache)
+                continue
+            phase = "notice_refresh"
+            with work_guard(work_budget, phase, identifier):
+                previous_document = (previous or {}).get("document") or {}
+                headers = {}
+                if (previous and not backfill and previous.get('parser_dependencies') == parser_dependencies()
+                        and previous.get("source_scope_identity") == source_scope_identity(source["url"])
+                        and previous_document.get("url") == source["url"]):
+                    if previous_document.get("etag"):
+                        headers["If-None-Match"] = previous_document["etag"]
+                    if previous_document.get("last_modified"):
+                        headers["If-Modified-Since"] = previous_document["last_modified"]
+                requests += 1
+                response = fetcher(source["url"], headers)
+                if response.get("status_code") == 304:
+                    if not previous or not headers or resolved_document_url(source, response) != previous_document.get("url"):
+                        raise ValueError("unbound not-modified response")
+                    previous.update(checked_at=iso_utc(now), status="current", last_error=None, source_signature=signature)
+                    previous.pop("last_attempt_at", None)
+                    previous.pop("processing_incomplete", None)
+                    previous_document["last_seen_at"] = iso_utc(now)
+                    entry, extracted = previous, False
+                else:
+                    entry, extracted = build_document_entry(record, source, response, previous, now,
+                        enable_subtopics=enable_subtopics, backfill_subtopics=backfill, structure_cache=structure_cache)
+            cached_records[identifier] = entry
+            reparsed += int(bool(recovered))
+            refreshed += int(extracted)
+            not_modified += int(not extracted)
+            completed += 1
+            completed_ids.add(identifier)
+            if enable_subtopics:
+                classifier_run_entries.append(entry)
+        except WorkTimedOut:
+            # The original receipt survives; partially mutated local copies do not.
+            incomplete(cached_records, identifier, phase + "_timeout")
         except Exception as exc:  # noqa: BLE001 - retain other records
-            failure = {
-                "opportunity_id": opportunity_id,
-                "url": source["url"],
-                "error": type(exc).__name__,
-            }
+            failure = {"opportunity_id": identifier, "url": source["url"], "error": type(exc).__name__}
             failures.append(failure)
-            if previous:
-                previous["status"] = "failed"
-                previous["last_attempt_at"] = iso_utc(now)
-                previous["last_error"] = failure["error"]
+            if original:
+                entry = deepcopy(original)
+                entry.update(status="failed", last_attempt_at=iso_utc(now), last_error=failure["error"])
             else:
-                cached_records[opportunity_id] = {
-                    "source_signature": signature,
-                    "checked_at": iso_utc(now),
-                    "status": "failed",
-                    "last_error": failure["error"],
-                    "document": {
-                        "url": source["url"],
-                        "name": source.get("name"),
-                        "source_kind": source["kind"],
-                    },
-                    "facts": [],
-                    "review_queue": [],
-                    "version_history": deepcopy(
-                        (previous or {}).get("version_history") or []
-                    ),
-                    "archived_from_catalog_at": None,
-                }
-        if request_delay:
+                entry = {"source_signature": signature, "checked_at": iso_utc(now), "status": "failed",
+                    "last_error": failure["error"], "document": {"url": source["url"], "name": source.get("name"),
+                    "source_kind": source["kind"]}, "facts": [], "review_queue": [], "version_history": [],
+                    "archived_from_catalog_at": None}
+            cached_records[identifier] = entry
+            completed += 1
+            completed_ids.add(identifier)
+        if checkpoint is not None:
+            checkpoint(cache)
+        if request_delay and not (work_budget is not None and work_budget.expired()):
             time.sleep(request_delay)
 
     merged = []
+    from scripts.submission_schedule import project as project_schedule
     for record in records:
-        opportunity_id = str(
-            record.get("opportunity_id")
-            or record.get("opportunity_number")
-            or ""
-        )
-        entry = cached_records.get(opportunity_id)
-        source = source_for_record(record)
-        if entry and source and entry.get('status') == 'current' and not entry.get('last_error'):
-            quarantine_legacy_facts(record, source, entry, structure_cache)
-        from scripts.submission_schedule import project as project_schedule
-        merged.append(project_schedule(merge_document_entry(record, cached_records.get(opportunity_id)), now.date()))
+        identifier = str(record.get("opportunity_id") or record.get("opportunity_number") or "")
+        if identifier in blocked or (work_budget is not None and work_budget.expired(finalize=True)):
+            if identifier not in blocked:
+                incomplete(cached_records, identifier, "projection_budget", deferred=True)
+            merged.append(safe_record_projection(record, cached_records.get(identifier, {}).get("processing_incomplete", "processing_incomplete")))
+            continue
+        try:
+            with work_guard(work_budget, "cached_projection", identifier, finalize=True, seconds=10):
+                entry = deepcopy(cached_records.get(identifier))
+                source = sources.get(identifier)
+                if entry and source and entry.get('status') == 'current' and not entry.get('last_error'):
+                    quarantine_legacy_facts(record, source, entry, structure_cache)
+                projected = project_schedule(merge_document_entry(record, entry), now.date())
+        except WorkTimedOut:
+            incomplete(cached_records, identifier, "projection_timeout")
+            projected = safe_record_projection(record, "projection_timeout")
+        else:
+            if entry is not None:
+                cached_records[identifier] = entry
+        merged.append(projected)
+    if checkpoint is not None:
+        checkpoint(cache)
     output = deepcopy(catalog)
     output["opportunities"] = merged
     output["search_index"] = build_search_index(merged)
     output["facets"] = facet_counts(merged)
     output["document_evidence_generated_at"] = iso_utc(now)
     output.setdefault("source", {})["document_evidence"] = {
-        "method": (
-            "Official PDF/HTML retrieval with deterministic extraction and "
-            "page/section citations"
-        ),
-        "raw_documents_retained": False,
-        "schema_version": EVIDENCE_SCHEMA_VERSION,
-    }
-    metrics = document_metrics(
-        merged,
-        cache,
-        refreshed,
-        not_modified,
-        failures,
-    )
-    metrics["remaining_update_count"] = max(
-        0,
-        len(candidates) - min(len(candidates), max_documents),
-    )
+        "method": "Official PDF/HTML retrieval with deterministic extraction and page/section citations",
+        "raw_documents_retained": False, "schema_version": EVIDENCE_SCHEMA_VERSION}
+    metrics = document_metrics(merged, cache, refreshed, not_modified, failures)
+    candidate_ids = {str(item[0].get("opportunity_id") or item[0].get("opportunity_number")) for item in candidates}
+    metrics["remaining_update_count"] = len((candidate_ids - completed_ids) | blocked)
     metrics['parser_recovery'] = {'reparsed_from_structure': reparsed, 'source_requests': requests,
         'pending_records': sum(bool(entry.get('parser_pending')) for entry in cached_records.values()),
         'withheld_facts': sum((entry.get('parser_pending') or {}).get('withheld_count', 0) for entry in cached_records.values()),
         'structure_cache': dict(structure_cache.counters)}
     if enable_subtopics:
-        # §8.3 insertion 4. Only present with the flag on, so the diagnostics
-        # block is byte-identical when it is off.
         metrics["subtopics"] = subtopic_metrics(cached_records)
-        # §18.1 Cov1. Runs after the administrative pass and writes nowhere
-        # near it: a separate store, a separate cache key, no record entry.
-        subtopic_only, subtopic_only_metrics = refresh_subtopics_without_source(
-            records,
-            max_documents=max_subtopic_documents,
-            fetcher=fetcher,
-            now=now,
-            request_delay=request_delay,
-            enabled=True,
-            previous_store=cache.get("subtopic_only"),
-            prior_checked_at=cache.get("generated_at"),
-            recheck_days=recheck_days,
-        )
+        def fallback_checkpoint(store):
+            cache["subtopic_only"] = store
+            if checkpoint is not None:
+                checkpoint(cache)
+        subtopic_only, subtopic_only_metrics = refresh_subtopics_without_source(records,
+            max_documents=max_subtopic_documents, fetcher=fetcher, now=now, request_delay=request_delay,
+            enabled=True, previous_store=cache.get("subtopic_only"), prior_checked_at=cache.get("generated_at"),
+            recheck_days=recheck_days, work_budget=work_budget, checkpoint=fallback_checkpoint)
         cache["subtopic_only"] = subtopic_only
         metrics["subtopics"]["subtopic_only"] = subtopic_only_metrics
-        subtopic_classifier = subtopic_only_metrics["classifier_run"]
         metrics["subtopics"]["classifier_run"] = classifier_run_metrics(
-            classifier_run_entries
-            + [{"subtopic_cov4": subtopic_classifier}]
-        )
+            classifier_run_entries + [{"subtopic_cov4": subtopic_only_metrics["classifier_run"]}])
+        fallback_processing = subtopic_only_metrics.get("processing") or {}
+        if fallback_processing.get("status") == "incomplete":
+            processing["status"] = "incomplete"
+            for key in ("timed_out_count", "deferred_count"):
+                processing[key] += fallback_processing[key]
+            for phase, count in fallback_processing["phases"].items():
+                processing["phases"][phase] = processing["phases"].get(phase, 0) + count
+    # Moving from fallback discovery to a canonical source must not silently
+    # discard an unfinished parent's obligation before that source is checked.
+    for identifier in prior_incomplete - completed_ids:
+        if (identifier not in (cache.get("subtopic_only") or {})
+                and cached_records.get(identifier, {}).get("status") != "current"
+                and identifier not in blocked):
+            incomplete(cached_records, identifier, "prior_notice_work_pending", deferred=True)
+    if not enable_subtopics:
+        for entry in (cache.get("subtopic_only") or {}).values():
+            if entry.get("status") == "processing_incomplete":
+                record_incomplete(processing, "prior_subtopic_work_pending", deferred=True)
+    for identifier, entry in cached_records.items():
+        if entry.get("status") == "processing_incomplete" and identifier not in blocked:
+            record_incomplete(processing, "prior_notice_work_pending", deferred=True)
+    metrics["remaining_update_count"] = len((candidate_ids - completed_ids) | blocked)
+    if work_budget is not None or processing["status"] == "incomplete":
+        metrics["processing"] = processing
     output.setdefault("diagnostics", {})["document_evidence"] = metrics
     cache["generated_at"] = iso_utc(now)
     return output, cache
@@ -3505,9 +3571,14 @@ def parse_args(argv=None):
     return args
 
 
-def main(argv=None):
+def main(argv=None, *, work_budget=None):
     args = parse_args(argv)
     catalog = read_catalog(args.catalog)
+    if work_budget is not None:
+        catalog.setdefault("diagnostics", {})["document_work"] = {
+            "publication_safe": False, "phase": "processing",
+        }
+        write_catalog(catalog, args.catalog)
     cache = read_cache(args.cache)
     if args.revalidate_program_areas_only:
         enriched, cache, changed_ids = revalidate_program_areas_only(
@@ -3532,6 +3603,8 @@ def main(argv=None):
         enable_subtopics=args.enable_subtopics,
         now=args.now,
         structure_cache=notice_structure_cache.StructureCache(args.structure_cache),
+        work_budget=work_budget,
+        checkpoint=(lambda value: write_cache(value, args.cache)) if work_budget is not None else None,
     )
     write_cache(cache, args.cache)
     if args.enable_subtopics:
@@ -3540,43 +3613,53 @@ def main(argv=None):
         from scripts import subtopic_records
         from scripts.currentness import filter_current
 
-        as_of = iso_utc(args.now or utc_now())[:10]
-        current_records, _ = filter_current(
-            enriched["opportunities"], date.fromisoformat(as_of)
-        )
-        current_parent_ids = {
-            str(
-                record.get("opportunity_id")
-                or record.get("opportunity_number")
-                or ""
+        with work_guard(work_budget, "subtopic_sidecar", finalize=True, seconds=30):
+            as_of = iso_utc(args.now or utc_now())[:10]
+            current_records, _ = filter_current(
+                enriched["opportunities"], date.fromisoformat(as_of)
             )
-            for record in current_records
+            current_parent_ids = {
+                str(
+                    record.get("opportunity_id")
+                    or record.get("opportunity_number")
+                    or ""
+                )
+                for record in current_records
+            }
+            current_parent_ids.discard("")
+            subtopic_cache = subtopic_records.read_cache(args.subtopic_cache)
+            sources = list((cache.get("records") or {}).items())
+            # §18.1 Cov1 results carry no evidence entry by design, so they are a
+            # second source for the same cache rather than a second cache.
+            sources += list((cache.get("subtopic_only") or {}).items())
+            merge_subtopic_sidecar(
+                subtopic_cache,
+                sources,
+                current_parent_ids,
+                as_of=as_of,
+            )
+            subtopic_records.write_cache(subtopic_cache, args.subtopic_cache)
+    if work_budget is not None:
+        # Persist useful recovery data, but keep publication closed until the
+        # complete document phase has passed every existing health check.
+        enriched.setdefault("diagnostics", {})["document_work"] = {
+            "publication_safe": False, "phase": "health_pending",
         }
-        current_parent_ids.discard("")
-        subtopic_cache = subtopic_records.read_cache(args.subtopic_cache)
-        sources = list((cache.get("records") or {}).items())
-        # §18.1 Cov1 results carry no evidence entry by design, so they are a
-        # second source for the same cache rather than a second cache.
-        sources += list((cache.get("subtopic_only") or {}).items())
-        merge_subtopic_sidecar(
-            subtopic_cache,
-            sources,
-            current_parent_ids,
-            as_of=as_of,
-        )
-        subtopic_records.write_cache(subtopic_cache, args.subtopic_cache)
     write_catalog(enriched, args.catalog)
     metrics = enriched["diagnostics"]["document_evidence"]
     classifier = (metrics.get("subtopics") or {}).get("classifier_run")
     if classifier is not None:
         payload = json.dumps(classifier, sort_keys=True, separators=(",", ":"))
-        print(f"Classifier operational diagnostics: {payload}")
+        print(f"Classifier operational diagnostics: {payload}", flush=True)
         summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
         if summary_path:
             with Path(summary_path).open("a", encoding="utf-8") as summary:
                 summary.write("### Classifier operational diagnostics\n\n")
                 summary.write(f"```json\n{payload}\n```\n\n")
     validate_refresh_health(metrics)
+    if work_budget is not None or "document_work" in enriched.get("diagnostics", {}):
+        enriched["diagnostics"]["document_work"] = {"publication_safe": True, "phase": "complete"}
+        write_catalog(enriched, args.catalog)
     print(
         "Document evidence current for "
         f"{metrics['document_current_count']:,}/"
@@ -3585,6 +3668,27 @@ def main(argv=None):
         f"{metrics['failed_request_count']:,} request failures; "
         f"{metrics['remaining_update_count']:,} queued."
     )
+
+
+def mark_document_work_incomplete(argv=None, *, phase="processing"):
+    """Block publication before setup, preserving all existing catalog data."""
+    args = parse_args(argv)
+    catalog = read_catalog(args.catalog)
+    catalog.setdefault("diagnostics", {})["document_work"] = {
+        "publication_safe": False, "phase": phase,
+    }
+    write_catalog(catalog, args.catalog)
+
+
+def safe_timeout_fallback(argv=None, *, work_budget=None, phase="outer_phase_timeout"):
+    """Preserve all existing data and explicitly prevent candidate publication.
+
+    This only records a diagnostic after the outer timer is removed. Candidate
+    assembly rejects the marker; no cache, notice, or child records are cleared.
+    """
+    mark_document_work_incomplete(argv, phase=phase)
+    print("Document processing incomplete; existing data preserved and publication blocked.", flush=True)
+    return 1
 
 
 if __name__ == "__main__":
