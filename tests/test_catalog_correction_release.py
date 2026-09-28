@@ -233,6 +233,7 @@ class PlanningAndIsolation(unittest.TestCase):
                         patch.object(bridge, 'correction_complete', return_value=True), \
                         patch.object(planner, 'pending_publication', return_value=None), \
                         patch.object(planner, 'latest_report', return_value=('', None)), \
+                        patch('tools.scheduled_catalog.resolve', side_effect=lambda root, env, result, dest, **kw: result), \
                         patch.object(planner, 'plan', return_value={'stage': 'generate', 'release_sha': 'a'*40,
                             'team_mode': 'maintenance', 'team_generation_ready': False}) as decide, \
                         patch('tools.team_provider.provider_names', return_value=('anthropic',)), \
@@ -257,6 +258,7 @@ class PlanningAndIsolation(unittest.TestCase):
                     with patch.dict(os.environ, environment, clear=True), \
                             patch.object(planner, 'pending_publication', return_value=None), \
                             patch.object(planner, 'latest_report', return_value=('', None)), \
+                            patch('tools.scheduled_catalog.resolve', side_effect=lambda root, env, result, dest, **kw: result), \
                             patch.object(planner, 'plan', return_value={'stage': stage, 'release_sha': 'a'*40}) as decide, \
                             patch('tools.team_provider.provider_names', return_value=('openai', 'anthropic')) as providers, \
                             patch('sys.stdout', new=io.StringIO()):
@@ -679,7 +681,7 @@ class WorkflowContracts(unittest.TestCase):
 
     def test_same_refresh_lock_and_schedule_no_new_credential_scope(self):
         self.assertEqual(self.workflow['concurrency'], {'group': 'funding-finder-coordinated-release', 'cancel-in-progress': False})
-        self.assertEqual(self.workflow[True]['schedule'], [{'cron': '17 10 * * *'}])
+        self.assertEqual(self.workflow[True]['schedule'], [{'cron': '17 10,14,18,22 * * *'}])
         plan = next(s for s in self.jobs['plan']['steps'] if s.get('id') == 'plan')
         self.assertEqual(plan['run'], 'python -m tools.catalog_correction_release plan')
 

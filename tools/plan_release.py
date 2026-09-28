@@ -262,6 +262,9 @@ def main(*, automatic_paid_hold=False):
     pointer = c.read_json(c.ROOT / 'release/candidate-source.json')
     requested = environment.get('REQUESTED_STAGE', '')
     receipt = live = publication = resumed = selected = result = None
+    scheduled_auto = (environment['GITHUB_EVENT_NAME'] == 'schedule' and requested in ('', 'auto')
+                      and not any(environment.get(k) for k in ('CANDIDATE_RUN', 'CANDIDATE_ID')))
+    pending_selected = False
     receipt_run = environment.get('RECEIPT_RUN', '')
     with tempfile.TemporaryDirectory() as directory:
         if (requested in ('', 'auto') and environment.get('GITHUB_RUN_ATTEMPT', '1') == '1'
@@ -270,6 +273,7 @@ def main(*, automatic_paid_hold=False):
             if pending:
                 environment.update(pending)
                 requested = 'publish'
+                pending_selected = True
         if requested in ('validate', 'publish'):
             result = plan(c.ROOT, environment)  # Validate the exact named selector first.
             latest_run, receipt = latest_report(environment['GITHUB_REPOSITORY'], result['candidate_id'],
@@ -295,8 +299,14 @@ def main(*, automatic_paid_hold=False):
             _, live = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'live', Path(directory) / 'live')
             receipt_run, receipt = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'validation', Path(directory) / 'validation')
             _, publication = latest_report(environment['GITHUB_REPOSITORY'], candidate, 'publication', Path(directory) / 'publication')
-    if result is None:
-        result = plan(c.ROOT, environment, receipt=receipt, live=live, publication=publication, resumed=resumed, selected=selected)
+        if result is None:
+            result = plan(c.ROOT, environment, receipt=receipt, live=live, publication=publication, resumed=resumed, selected=selected)
+        result['receipt_run'] = receipt_run
+        if scheduled_auto:
+            from tools.scheduled_catalog import resolve
+            result = resolve(c.ROOT, environment, result, Path(directory) / 'daily',
+                             live=live, publication=publication,
+                             explicit_resume=pending_selected or bool(resumed), reports=latest_report)
     # A completed finite repair is evidence of past work, not recurring spend
     # authorization. Its caller can retain this hold without changing the
     # ordinary planner's dependency decisions or named manual authorizations.
@@ -304,7 +314,8 @@ def main(*, automatic_paid_hold=False):
     if automatic_paid_hold and environment['GITHUB_EVENT_NAME'] in ('push', 'schedule') and result['stage'] in paid_stages:
         result = dict(result, held_stage=result['stage'], stage='noop',
             reason='Finite catalog continuation keeps automatic paid generation and team work held; no new provider work is authorized')
-    result['receipt_run'] = receipt_run
+        if scheduled_auto:
+            result['daily_status'] = 'held'
     from tools.team_provider import provider_names
     providers = () if automatic_paid_hold and result['stage'] not in paid_stages else provider_names()
     result['openai'] = str('openai' in providers).lower()

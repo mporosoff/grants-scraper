@@ -2,6 +2,7 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 import json
+import os
 from pathlib import Path
 import re
 import subprocess
@@ -232,6 +233,8 @@ def complete_live(bundle, reports, asset_outcome, provider_outcome):
     try:
         if ready:
             report['worker_provenance'] = worker_provenance(bundle, reports)
+            from tools.scheduled_catalog import catalog_generated_at
+            report['catalog_generated_at'] = catalog_generated_at(Path(bundle) / 'files', c.load(bundle))
             report.update(verified=True, next_retry_stage=None)
     except Exception as error:
         report['worker_provenance_error'] = str(error)[:400]
@@ -255,7 +258,10 @@ def main():
     elif args.command == 'worker':
         verify_worker(args.bundle, args.reports)
     elif args.command == 'complete':
-        complete_live(args.bundle, args.reports, args.asset_outcome, args.provider_outcome)
+        report = complete_live(args.bundle, args.reports, args.asset_outcome, args.provider_outcome)
+        if os.environ.get('GITHUB_OUTPUT'):
+            with open(os.environ['GITHUB_OUTPUT'], 'a', encoding='utf-8') as output:
+                output.write('catalog_generated_at=' + report['catalog_generated_at'] + '\n')
     else:
         verify(args.bundle, args.reports)
 

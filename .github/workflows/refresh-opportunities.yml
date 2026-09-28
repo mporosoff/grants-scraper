@@ -4,7 +4,8 @@ on:
   push:
     branches: [main]
   schedule:
-    - cron: "17 10 * * *"
+    # Repeated delivery opportunities; the planner permits only one fresh daily catalog.
+    - cron: "17 10,14,18,22 * * *"
   workflow_dispatch:
     inputs:
       stage:
@@ -63,6 +64,10 @@ jobs:
       stage: ${{ steps.plan.outputs.stage }}
       reason: ${{ steps.plan.outputs.reason }}
       held_stage: ${{ steps.plan.outputs.held_stage }}
+      daily_status: ${{ steps.plan.outputs.daily_status }}
+      daily_window_start: ${{ steps.plan.outputs.daily_window_start }}
+      catalog_generated_at: ${{ steps.plan.outputs.catalog_generated_at }}
+      recovery_run: ${{ steps.plan.outputs.recovery_run }}
       release_sha: ${{ steps.plan.outputs.release_sha }}
       team_mode: ${{ steps.plan.outputs.team_mode }}
       receipt_run: ${{ steps.plan.outputs.receipt_run }}
@@ -964,6 +969,8 @@ jobs:
     uses: ./.github/workflows/pages.yml
 
   verify-live:
+    outputs:
+      catalog_generated_at: ${{ steps.live-complete.outputs.catalog_generated_at }}
     needs: [plan, candidate, validate, publish, pages]
     if: >-
       !cancelled() && needs.validate.result == 'success' &&
@@ -1016,6 +1023,7 @@ jobs:
           CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
         run: python -m tools.catalog_correction_release reuse-smoke --bundle "$RUNNER_TEMP/candidate" --reports "$RUNNER_TEMP/reports" --work "$RUNNER_TEMP/catalog-reuse"
       - name: Record the complete live result including provider smoke
+        id: live-complete
         if: always()
         env:
           ASSET_OUTCOME: ${{ steps.live-assets.outcome }}
@@ -1058,7 +1066,16 @@ jobs:
             const planned = needs.plan.outputs.stage;
             const planReason = needs.plan.outputs.reason || 'not reported';
             const heldStage = needs.plan.outputs.held_stage || '';
-            const scheduledIncomplete = context.eventName === 'schedule' && needs['verify-live'].result !== 'success';
+            const dailyStatus = needs.plan.outputs.daily_status || '';
+            const dailyWindow = needs.plan.outputs.daily_window_start || '';
+            const liveComplete = needs['verify-live'].result === 'success';
+            const catalogDate = (liveComplete ? needs['verify-live'].outputs.catalog_generated_at : needs.plan.outputs.catalog_generated_at) || '';
+            const windowTime = Date.parse(dailyWindow), sourceTime = Date.parse(catalogDate);
+            const fresh = Number.isFinite(windowTime) && Number.isFinite(sourceTime) &&
+              sourceTime >= windowTime && sourceTime <= Date.now();
+            const alreadyCurrent = context.eventName === 'schedule' && needs.plan.result === 'success' &&
+              planned === 'noop' && dailyStatus === 'already_current' && fresh;
+            const scheduledIncomplete = context.eventName === 'schedule' && !(alreadyCurrent || (liveComplete && fresh));
             const originalStage = stages.has(planned) ? planned : stages.has(process.env.REQUESTED_STAGE) ? process.env.REQUESTED_STAGE : 'auto';
             let candidate = needs.candidate.outputs.candidate_id;
             let generationRun = needs.candidate.outputs.candidate_run;
@@ -1091,15 +1108,17 @@ jobs:
             const publicationAttempt = publicationRun === String(context.runId) ? process.env.GITHUB_RUN_ATTEMPT || 'unknown' :
               sameRequested ? needs.plan.outputs.publication_attempt || process.env.REQUESTED_PUBLICATION_ATTEMPT || 'latest retained' : 'none';
             const runUrl = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}/actions/runs/${context.runId}`;
-            const checkpoint = failed || (awaiting ? 'awaiting_review' : planned === 'noop' ?
-              (heldStage || scheduledIncomplete ? 'held' : 'noop') : scheduledIncomplete ? 'incomplete_verification' : 'completed');
+            const checkpoint = failed || (awaiting ? 'awaiting_review' : alreadyCurrent ? 'already_current' : planned === 'noop' ?
+              (heldStage || scheduledIncomplete ? 'held' : 'noop') : scheduledIncomplete ?
+              (liveComplete ? 'stale_catalog' : 'incomplete_verification') : 'completed');
             const refreshFailure = scheduledIncomplete ?
-              `Scheduled catalog refresh did not complete live verification: ${checkpoint}. Planner reason: ${planReason}` : '';
+              `Scheduled catalog refresh did not establish a fresh verified catalog: ${checkpoint}. Planner reason: ${planReason}` : '';
             const retry = failed ? next : awaiting ? 'publish after exact-head review' :
               scheduledIncomplete ? planned === 'noop' ? 'resolve the reported hold before resuming auto' :
               'inspect the retained checkpoint before retry' : 'none';
             const body = `Candidate: ${candidate}\nArtifact run: ${generationRun}\nStage: ${checkpoint}\n` +
               `Planned lifecycle stage: ${planned || 'not reported'}\nHeld lifecycle stage: ${heldStage || 'none'}\nPlanner reason: ${planReason}\n` +
+              `Daily state: ${dailyStatus || 'not scheduled'}\nDaily window start: ${dailyWindow || 'not applicable'}\nCatalog source timestamp: ${catalogDate || 'unknown'}\nRecovery run: ${needs.plan.outputs.recovery_run || 'none'}\n` +
               (refreshFailure ? `Refresh failure: ${refreshFailure}\n` : '') +
               `Identity source: ${identitySource}\nOriginal lifecycle stage: ${originalStage}\nValidation receipt run: ${receiptRun}\n` +
               `Publication evidence run: ${publicationRun}\nPublication evidence attempt: ${publicationAttempt}\n` +
@@ -1117,7 +1136,7 @@ jobs:
               const existing = issues.find(issue => !issue.pull_request && issue.title === title);
               if (existing) await github.rest.issues.update({...context.repo, issue_number:existing.number, body});
               else await github.rest.issues.create({...context.repo, title, body});
-            } else if (needs['verify-live'].result === 'success') {
+            } else if (liveComplete || alreadyCurrent) {
               const {data: issues} = await github.rest.issues.listForRepo({...context.repo, state:'open', per_page:100});
               const recovered = new Set(['Funding Finder release checkpoint failed', 'Automated Grants.gov refresh failed']);
               if (needs.generate.outputs.sources_healthy === 'true') recovered.add('External funding source refresh degraded');

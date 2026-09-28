@@ -716,7 +716,8 @@ class CandidateLifecycleTests(unittest.TestCase):
             return (self.bundle / 'files' / name).read_bytes()
         serving = {'verified': True, 'fingerprint': manifest['worker_fingerprint'], 'version_id': 'serving-version'}
         with patch.object(live, 'fetch', side_effect=fetch), patch.object(live, 'worker_check', return_value={'service': 'available'}), \
-             patch.object(live, 'worker_provenance', return_value=serving) as provenance:
+             patch.object(live, 'worker_provenance', return_value=serving) as provenance, \
+             patch('tools.scheduled_catalog.catalog_generated_at', return_value='2026-09-08T00:00:00+00:00'):
             site = self.root / 'staged-pages'
             live.stage_site(self.bundle, self.reports, site)
             self.assertEqual((site / '.nojekyll').read_bytes(), b'')
@@ -747,6 +748,7 @@ class CandidateLifecycleTests(unittest.TestCase):
             live.verify(self.bundle, self.reports, attempts=1)
             report = live.complete_live(self.bundle, self.reports, 'success', 'success')
         self.assertTrue(report['verified'])
+        self.assertEqual(report['catalog_generated_at'], '2026-09-08T00:00:00+00:00')
         self.assertEqual(report['publication_sha'], publication['publication_sha'])
         self.assertEqual(report['publication_receipt_sha256'], c.digest(c.encoded(publication)))
         self.assertEqual(c.load(self.bundle), manifest)
