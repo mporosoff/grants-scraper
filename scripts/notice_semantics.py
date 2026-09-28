@@ -686,6 +686,17 @@ def cost_share_facts(api, opportunity_id, containers, document, stamp):
     return facts
 
 
+def _heading_punctuation_allowed(text):
+    """Allow periods only in the leading section number, without backtracking."""
+    if not text or "!" in text or "?" in text:
+        return False
+    prefix, period, suffix = text.rpartition(".")
+    # This is the same language as (?:[A-Z0-9]+[.\s]*)*[^.!?]+.
+    # Its nested repetitions can take minutes to reject an uppercase sentence.
+    # The last period instead gives an unambiguous prefix/suffix boundary.
+    return bool(suffix) and (not period or re.fullmatch(r"[A-Z0-9][A-Z0-9.\s]*", prefix) is not None)
+
+
 def heading_excerpt(api, opportunity_id, containers, document, stamp, *, fact_type, label, heading_pattern):
     candidates = []
     for container in containers:
@@ -701,7 +712,7 @@ def heading_excerpt(api, opportunity_id, containers, document, stamp, *, fact_ty
                 raw = line.group().strip()
                 if (len(raw) <= 140 and heading_pattern.search(raw)
                     and not re.search(r"\.{3,}|\||\b(?:see|refer|must|please|below|requirements[.]|in mind)\b", raw, re.I)
-                    and re.fullmatch(r"(?:[A-Z0-9]+[.\s]*)*[^.!?]+", raw)):
+                    and _heading_punctuation_allowed(raw)):
                     candidates.append((1, container, start + line.end(), end))
             # Explicit substantive eligibility sentences remain supported even
             # when a minimal source has no heading tree.

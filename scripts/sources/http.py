@@ -16,6 +16,7 @@ from requests.adapters import HTTPAdapter
 from urllib3.poolmanager import PoolManager
 
 USER_AGENT = "Funding-Finder-Sources/1.0 (+https://mporosoff.github.io/grants-scraper/)"
+ACCEPT = "text/html,application/json,application/xml,text/plain;q=0.8,*/*;q=0.5"
 DEFAULT_TIMEOUT = (15, 60)          # (connect, read) seconds
 MAX_BYTES = 8 * 1024 * 1024         # 8 MB safety cap per response
 
@@ -124,7 +125,13 @@ class PoliteClient:
         self._pace()
         from scripts.extract_document_evidence import download_document
 
-        response = download_document(url, headers, timeout=self.timeout,
+        # Preserve the source identity and supported formats across the shared
+        # downloader, whose own defaults identify a PDF-oriented document fetch.
+        request_headers = requests.structures.CaseInsensitiveDict({
+            "User-Agent": USER_AGENT, "Accept": ACCEPT,
+        })
+        request_headers.update(headers or {})
+        response = download_document(url, request_headers, timeout=self.timeout,
                                      maximum_bytes=MAX_BYTES, session=self._session)
         self.last_url = response["url"]
         return response["content"].decode(response.get("encoding") or "utf-8", errors="replace")

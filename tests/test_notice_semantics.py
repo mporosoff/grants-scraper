@@ -311,6 +311,41 @@ class NoticeSemanticsTests(unittest.TestCase):
         self.assertIn('scientific merit', next(f['value'] for f in result if f['type'] == 'review_criteria'))
         self.assertEqual(family('Table of Contents\nEligibility ............. 3\nReview Criteria ........ 4', 'eligibility_excerpt'), [])
 
+    def test_heading_punctuation_preserves_numbered_sections_and_rejects_sentences(self):
+        body = 'Accredited public universities and nonprofit research institutions in the United States.'
+        for title, kind in [('Eligibility', 'eligibility_excerpt'), ('Review Criteria', 'review_criteria')]:
+            for prefix in ['', 'III. ', 'IV.2. ', '2.1. ', 'III.\t']:
+                with self.subTest(title=title, prefix=prefix):
+                    found = family(prefix + title + '\n' + body, kind)
+                    self.assertEqual([fact['value'] for fact in found], [body])
+            for heading in [title + '.', title + '?', title + '!', '. ' + title,
+                            'See also. ' + title, 'iii. ' + title]:
+                with self.subTest(heading=heading):
+                    self.assertEqual(family(heading + '\n' + body, kind), [])
+
+    def test_uppercase_notice_sentences_finish_without_becoming_headings(self):
+        import subprocess
+        import sys
+        from pathlib import Path
+        # The first sentence is from NSF CAREER 22-586, whose real refresh hit
+        # the 120-second notice guard inside the old heading regex. Run in a
+        # bounded child so a regression fails rather than stalling the suite.
+        program = '''
+from scripts import extract_document_evidence as e
+for text in [
+    "NO EXEMPTIONS FROM THESE ELIGIBILITY CRITERIA WILL BE GRANTED.",
+    "ALL APPLICATIONS ARE SUBJECT TO THESE MERIT REVIEW CRITERIA.",
+]:
+    container = {"text": text, "page": 1, "section": None, "anchor": None}
+    facts = e.extract_document_facts({"opportunity_id": "339594"}, [container],
+        {"url": "https://www.nsf.gov/official-notice", "sha256": "fixture"},
+        "2026-09-28T20:38:14Z", families={"sections"})
+    assert facts == [], facts
+'''
+        result = subprocess.run([sys.executable, '-B', '-c', program],
+            cwd=Path(__file__).resolve().parents[1], capture_output=True, text=True, timeout=10)
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+
     def test_page_caps_belong_to_components(self):
         text = 'PI resume must not exceed 1 page. The research narrative is limited to 12 pages.'
         self.assertEqual({f['subject']: f['value'] for f in family(text, 'page_limit')},
