@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T16:23:41.152Z",
+  "generated_at": "2026-09-28T21:54:09.792Z",
   "model": "voyage-4-lite",
   "provider_revision": "not exposed by the real-time embedding API",
   "response_model": "voyage-4-lite",
@@ -9,12 +9,12 @@
   "dimension": 1024,
   "dtype": "float16-le",
   "byte_order": "little-endian",
-  "passage_count": 1558,
-  "parent_passage_count": 1340,
+  "passage_count": 1557,
+  "parent_passage_count": 1339,
   "child_passage_count": 218,
-  "corpus_sha256": "fb2f3a049b1ba737d943021a4934692c7cbb6a96d5c0f72b37bd2c3daab0f70a",
-  "vector_sha256": "507e47be1aba312dcf96bcb3b491ea5dcc65a327bd16c8bbd865d5ed046200f1",
-  "vector_bytes": 3190784,
+  "corpus_sha256": "9493efff063036b787525cefce1f0eaa2d9e2c27720c82952cd386564ed2e0d1",
+  "vector_sha256": "07419017ea379a140a39c4e0d8cc7b562989841e49198ce9ef9174fb8f8cb75a",
+  "vector_bytes": 3188736,
   "model_space_fingerprint": "f60bce25862886594a00dabbc8527a044dca1f05e684936d269b13039e3af4af",
   "model_space": {
     "canary_set_version": 1,
@@ -55,7 +55,7 @@
   },
   "configuration_sha256": "0d744b1f0a030785424559ba7018e4375f608f6c503619753eba91dbb68fea47",
   "reuse_space_identity": "f60bce25862886594a00dabbc8527a044dca1f05e684936d269b13039e3af4af",
-  "canary_sha256": "8b80ccf4856d04a65a55cc6a881fbe233671d80c08c2533fe7d4d7a23124ffbb",
+  "canary_sha256": "c7a0be5f1b14db1e9b5af50161089f6d7c6b8e1bf1b4718239c3ff58b1b37a1b",
   "stable_passage_id_contract": "parent:<opportunity_id> or child:<subtopic_id>",
   "passages": [
     {
@@ -2055,7 +2055,7 @@
       "parent_id": "339594",
       "passage_kind": "parent",
       "record_id": "339594",
-      "text_sha256": "e274431bcff8e108ff87c5cd8c1b1d535735d4d09014c22fc6471ed2a15da199",
+      "text_sha256": "1a894b7c358ba8fef7fb43517f5e16f8ddbcb2d5dc1069e9e6a0e9dd3108578c",
       "vector_row": 249
     },
     {
@@ -2087,7 +2087,7 @@
       "parent_id": "340828",
       "passage_kind": "parent",
       "record_id": "340828",
-      "text_sha256": "ad54a670bce1dcd72abd69d1933a79ac1ae99227c685f2ef71c22b0ab6da37b8",
+      "text_sha256": "3996a69a20254310545ecb6f2bbbad66921d16fbf6b3c2f24f608dce070920a1",
       "vector_row": 253
     },
     {
@@ -2351,7 +2351,7 @@
       "parent_id": "348985",
       "passage_kind": "parent",
       "record_id": "348985",
-      "text_sha256": "da3471cb4ae30a62e2b069150e36596057c7e688c1dcf004a7bcfbeefc76f9d0",
+      "text_sha256": "97f9fec27dd36db084952243568f892f56c07ac73d6b4c8f9eec3b246d538a4d",
       "vector_row": 286
     },
     {
@@ -4447,7 +4447,7 @@
       "parent_id": "357724",
       "passage_kind": "parent",
       "record_id": "357724",
-      "text_sha256": "f2f1dc4209a07598620c6bf88b59b89f8a2d9c21e3bbd5fe276f9a39a7b0cb3d",
+      "text_sha256": "36453a1ee08f33b371f5eaf547d0c7089620374c3a2442a58fdbef51315e8961",
       "vector_row": 548
     },
     {
@@ -4591,7 +4591,7 @@
       "parent_id": "357941",
       "passage_kind": "parent",
       "record_id": "357941",
-      "text_sha256": "5944fd817d2e80813f0c17a63c8aa8f1f575dee1a80ff67487462965bc963848",
+      "text_sha256": "8860dce8eb7b2fbad232f028198a66051f781bc77a5686616d06cd3308495369",
       "vector_row": 566
     },
     {
@@ -5431,7 +5431,7 @@
       "parent_id": "359655",
       "passage_kind": "parent",
       "record_id": "359655",
-      "text_sha256": "ab273f869033194f49816ac3079e382ec89ddea8a1a1cd2a42581d165955820f",
+      "text_sha256": "49a059f89f3edaf802bc01f7e73d80c755a033814296a14d4e2656429ea08f17",
       "vector_row": 671
     },
     {
@@ -7071,7 +7071,7 @@
       "parent_id": "361915",
       "passage_kind": "parent",
       "record_id": "361915",
-      "text_sha256": "9df9e73c595b44eaca24648ef46eb748e5fd7a2cce4091f76d6e0a836fe6aebd",
+      "text_sha256": "6696493ecc81dd2de37c038e4563fd7c8f8663a0d31b498472fea02770006be0",
       "vector_row": 876
     },
     {
@@ -9983,7 +9983,7 @@
       "parent_id": "363623",
       "passage_kind": "parent",
       "record_id": "363623",
-      "text_sha256": "d1a8bf7ba7500494d81a5471d5d78b3e4c8ab1746782c273cb90e0a6548d1423",
+      "text_sha256": "880a079aee00e15a46e3595eee32120079d09c5f7f4d0a3de3a365b29f20e509",
       "vector_row": 1240
     },
     {
@@ -11311,7 +11311,7 @@
       "parent_id": "363902",
       "passage_kind": "parent",
       "record_id": "363902",
-      "text_sha256": "78bc3c5dfbf54d22642a50a7e39ea7a24b56bbea1a00d7ef9c51547741dd6486",
+      "text_sha256": "a1f5f3eff487fcd6a46fce34d23634d563269f914527b58817a3cc9669f87b2d",
       "vector_row": 1406
     },
     {
@@ -11639,7 +11639,7 @@
       "parent_id": "363961",
       "passage_kind": "parent",
       "record_id": "363961",
-      "text_sha256": "414e3e34707832448db0ff3c0a1455bb11fa85f62b68fff869897c64c0b0a199",
+      "text_sha256": "02fb71dd85b6fd8fa1d8595ff31e7ed31c619cd9216004a99537aa59db0bfc84",
       "vector_row": 1447
     },
     {
@@ -11767,7 +11767,7 @@
       "parent_id": "363977",
       "passage_kind": "parent",
       "record_id": "363977",
-      "text_sha256": "dfa810b4e30c17a0f7b754f7151d037d604c52fdcb5fac048aea7a4ceef20801",
+      "text_sha256": "cb48ad7ac746dd35160f8e9365385266dc0bdbc26efbb454b4f220272f597e78",
       "vector_row": 1463
     },
     {
@@ -12147,20 +12147,12 @@
       "vector_row": 1510
     },
     {
-      "passage_id": "parent:nyserda:PON6161",
-      "parent_id": "nyserda:PON6161",
-      "passage_kind": "parent",
-      "record_id": "nyserda:PON6161",
-      "text_sha256": "48854c935e3b7a213d1c2e390f4453bc137505e96937328bb75e8ca6bfa9b8da",
-      "vector_row": 1511
-    },
-    {
       "passage_id": "parent:nyserda:PON6201",
       "parent_id": "nyserda:PON6201",
       "passage_kind": "parent",
       "record_id": "nyserda:PON6201",
       "text_sha256": "caed0fe2ffe351d5ecf6d7d2dc120055bd91f7839c3c88ff4fd7ef0a603d7a30",
-      "vector_row": 1512
+      "vector_row": 1511
     },
     {
       "passage_id": "parent:nyserda:PON6206",
@@ -12168,7 +12160,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:PON6206",
       "text_sha256": "19e91c64e09d305d9f5ef86a47d857e595a744ed01f74badee577f099de4c215",
-      "vector_row": 1513
+      "vector_row": 1512
     },
     {
       "passage_id": "parent:nyserda:PON6220",
@@ -12176,7 +12168,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:PON6220",
       "text_sha256": "9beed6cc336865a439340d6727a64a78fb9aace88443bfde55bc3ca10d9a74ee",
-      "vector_row": 1514
+      "vector_row": 1513
     },
     {
       "passage_id": "parent:nyserda:PON6236",
@@ -12184,7 +12176,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:PON6236",
       "text_sha256": "63e044e0cf6eb7469f471eabfc602f8776db653922f9501d009af967f12011ac",
-      "vector_row": 1515
+      "vector_row": 1514
     },
     {
       "passage_id": "parent:nyserda:PON6242",
@@ -12192,7 +12184,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:PON6242",
       "text_sha256": "c0b9da55beca2bc0efcb34430b0711114e26bffc5f8477e8dcadb5c539a70f00",
-      "vector_row": 1516
+      "vector_row": 1515
     },
     {
       "passage_id": "parent:nyserda:RFP1",
@@ -12200,7 +12192,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFP1",
       "text_sha256": "550b4aedfb9dc9d0b796ce509c7145ff446fbda0878a0cf596e18b185b111b33",
-      "vector_row": 1517
+      "vector_row": 1516
     },
     {
       "passage_id": "parent:nyserda:RFP18",
@@ -12208,7 +12200,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFP18",
       "text_sha256": "965a35daf6c256a69de34ab5e8392ec8affb7b3f0b6ec7792113597f99ec3c0d",
-      "vector_row": 1518
+      "vector_row": 1517
     },
     {
       "passage_id": "parent:nyserda:RFP23",
@@ -12216,7 +12208,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFP23",
       "text_sha256": "3421fc51403d510a2e2817ac01b2488879e927ad12b4299c01eb06c5a3492b07",
-      "vector_row": 1519
+      "vector_row": 1518
     },
     {
       "passage_id": "parent:nyserda:RFP3928-Rd7",
@@ -12224,7 +12216,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFP3928-Rd7",
       "text_sha256": "47ebec9d4ff2e6678cc63d2058fcdad49d90dadb20d39da4281777d5e051db5a",
-      "vector_row": 1520
+      "vector_row": 1519
     },
     {
       "passage_id": "parent:nyserda:RFP6041",
@@ -12232,7 +12224,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFP6041",
       "text_sha256": "9fa340de74602f554d1e8aec96eb132ce1667a8accb6ea275dd50a5d4afbb43a",
-      "vector_row": 1521
+      "vector_row": 1520
     },
     {
       "passage_id": "parent:nyserda:RFP6224",
@@ -12240,7 +12232,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFP6224",
       "text_sha256": "0deb015a5cf0d5bfa73e9831b805ffb3b6c21097c99abdb30e7093cfe7267b68",
-      "vector_row": 1522
+      "vector_row": 1521
     },
     {
       "passage_id": "parent:nyserda:RFQL4922",
@@ -12248,7 +12240,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFQL4922",
       "text_sha256": "e7b8ba0688c1f05761d5aef90f35c77a452644e018ce5119387790f2b878faed",
-      "vector_row": 1523
+      "vector_row": 1522
     },
     {
       "passage_id": "parent:nyserda:RFQL5312",
@@ -12256,7 +12248,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFQL5312",
       "text_sha256": "68ea296a8b180b340d98e4a0c027b55696bd3c1710df226b7b6b1e9cbf189a03",
-      "vector_row": 1524
+      "vector_row": 1523
     },
     {
       "passage_id": "parent:nyserda:RFQL5548",
@@ -12264,7 +12256,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFQL5548",
       "text_sha256": "228b2e67a8f0c5c6d332cbf7b5cd6002290795494a64afa39396769f170e5f63",
-      "vector_row": 1525
+      "vector_row": 1524
     },
     {
       "passage_id": "parent:nyserda:RFQL5906",
@@ -12272,7 +12264,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFQL5906",
       "text_sha256": "5c08ac524f257be405bb4b62d37fe0f2c75c36b3ada3ccd626b001919daa9516",
-      "vector_row": 1526
+      "vector_row": 1525
     },
     {
       "passage_id": "parent:nyserda:RFQL5937",
@@ -12280,7 +12272,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFQL5937",
       "text_sha256": "33de7648b8cd50bed43b2b0b10ae6be7dccfc2b2cdc2853d894363b93f80122f",
-      "vector_row": 1527
+      "vector_row": 1526
     },
     {
       "passage_id": "parent:nyserda:RFQL6152",
@@ -12288,7 +12280,7 @@
       "passage_kind": "parent",
       "record_id": "nyserda:RFQL6152",
       "text_sha256": "cf23eb39c5f3296e87544d9abbfd891354d9e3448d91770d7dcabfc61e00dec9",
-      "vector_row": 1528
+      "vector_row": 1527
     },
     {
       "passage_id": "parent:vpr-email:23-615",
@@ -12296,7 +12288,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:23-615",
       "text_sha256": "7d541e6842ae02965e01f094e4f578d32b577f00bb08c53e51b5f5b5cb95e60a",
-      "vector_row": 1529
+      "vector_row": 1528
     },
     {
       "passage_id": "parent:vpr-email:24-569",
@@ -12304,7 +12296,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:24-569",
       "text_sha256": "aec7e9bbd90070640baf3c7943702ad18538d27e5a24bb77fbd61d126ff29a72",
-      "vector_row": 1530
+      "vector_row": 1529
     },
     {
       "passage_id": "parent:vpr-email:25-301",
@@ -12312,7 +12304,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:25-301",
       "text_sha256": "8937ff60d1cd2946b7c0bfe992d1975b5d13f5c8270710a883f6ca87417b1467",
-      "vector_row": 1531
+      "vector_row": 1530
     },
     {
       "passage_id": "parent:vpr-email:26-123",
@@ -12320,7 +12312,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:26-123",
       "text_sha256": "a23c66a8c9da5781209aabe66292133b80b3a27aa070d85c695b07307614fd59",
-      "vector_row": 1532
+      "vector_row": 1531
     },
     {
       "passage_id": "parent:vpr-email:26-514",
@@ -12328,7 +12320,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:26-514",
       "text_sha256": "3bb4709f93f25f10de1d6efcd153bdb47d8b8453dae74b66abb3de0fcd6e995b",
-      "vector_row": 1533
+      "vector_row": 1532
     },
     {
       "passage_id": "parent:vpr-email:26-522",
@@ -12336,7 +12328,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:26-522",
       "text_sha256": "97cff7756d489e46b8cffd14a930aee64102d83477ee4047c9be963117065e06",
-      "vector_row": 1534
+      "vector_row": 1533
     },
     {
       "passage_id": "parent:vpr-email:infoready-1993899",
@@ -12344,7 +12336,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:infoready-1993899",
       "text_sha256": "d8fe6f096ef7e1fac64623675847eb133479bd6afd647bb0adb85fef6d37d0ff",
-      "vector_row": 1535
+      "vector_row": 1534
     },
     {
       "passage_id": "parent:vpr-email:infoready-2024058",
@@ -12352,7 +12344,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:infoready-2024058",
       "text_sha256": "f4498a5efa184251abed79c4c27c95f9800a50677c9e33328bd8c88ec8a2ce8b",
-      "vector_row": 1536
+      "vector_row": 1535
     },
     {
       "passage_id": "parent:vpr-email:infoready-2028013",
@@ -12360,7 +12352,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:infoready-2028013",
       "text_sha256": "1f978db940e5762328a6f04ffe55f4a7fe1b4a0da938f97bdc27b8b23e888273",
-      "vector_row": 1537
+      "vector_row": 1536
     },
     {
       "passage_id": "parent:vpr-email:infoready-2028504",
@@ -12368,7 +12360,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:infoready-2028504",
       "text_sha256": "f473dfd71e4f0b9826b0c16b50170493b466d432f4867db30c1bcfab99070443",
-      "vector_row": 1538
+      "vector_row": 1537
     },
     {
       "passage_id": "parent:vpr-email:NSF25-544",
@@ -12376,7 +12368,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:NSF25-544",
       "text_sha256": "7044890b8bc3ea006f3b86e57cf40c03b87f48a8c8c647f2657dd965f1522f67",
-      "vector_row": 1539
+      "vector_row": 1538
     },
     {
       "passage_id": "parent:vpr-email:NSF26-510",
@@ -12384,7 +12376,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:NSF26-510",
       "text_sha256": "c924bcc05e431ebb7cfa8802ed215e3eef9872f6043debde90ca7a0c226dc85f",
-      "vector_row": 1540
+      "vector_row": 1539
     },
     {
       "passage_id": "parent:vpr-email:NSF26-512",
@@ -12392,7 +12384,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:NSF26-512",
       "text_sha256": "7ee3766607e498fc6ce832da4d8541bc6da6bef2058a7801ae12b2ac5686e768",
-      "vector_row": 1541
+      "vector_row": 1540
     },
     {
       "passage_id": "parent:vpr-email:PAR-25-322",
@@ -12400,7 +12392,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:PAR-25-322",
       "text_sha256": "03e6bea4b2b380919a9649c9add5cfe4cd778bbc2f2183868fd30c4b2c1ade53",
-      "vector_row": 1542
+      "vector_row": 1541
     },
     {
       "passage_id": "parent:vpr-email:PAR-27-032",
@@ -12408,7 +12400,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:PAR-27-032",
       "text_sha256": "402db9c00511728a7333ba9843dad7c255b9d277a21a7a9191ee902dce1752e3",
-      "vector_row": 1543
+      "vector_row": 1542
     },
     {
       "passage_id": "parent:vpr-email:vpr-02ca89881582e10d",
@@ -12416,7 +12408,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-02ca89881582e10d",
       "text_sha256": "640ff4d96ed407a0a3d39bdaefb0eb6800d830a59aea0a88518b45dff07a8b2c",
-      "vector_row": 1544
+      "vector_row": 1543
     },
     {
       "passage_id": "parent:vpr-email:vpr-0f186b990288c021",
@@ -12424,7 +12416,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-0f186b990288c021",
       "text_sha256": "6d1629368db21d04628530d1f009e98dc9ba4d602d906990d72e1f2a31287d01",
-      "vector_row": 1545
+      "vector_row": 1544
     },
     {
       "passage_id": "parent:vpr-email:vpr-14d5155ffe141890",
@@ -12432,7 +12424,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-14d5155ffe141890",
       "text_sha256": "24b8bdef46624b88c07067c8606d78404e49744f7623a97707aa16f66c1a2ce9",
-      "vector_row": 1546
+      "vector_row": 1545
     },
     {
       "passage_id": "parent:vpr-email:vpr-36e6aed03b0511a5",
@@ -12440,7 +12432,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-36e6aed03b0511a5",
       "text_sha256": "3b1a208fb9e07f45851d8ad086372d50cafef7008348691e1f7ec9a85d4c3f02",
-      "vector_row": 1547
+      "vector_row": 1546
     },
     {
       "passage_id": "parent:vpr-email:vpr-3a86f2f6b6e2925c",
@@ -12448,7 +12440,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-3a86f2f6b6e2925c",
       "text_sha256": "630ecb70e1328e1911f0df3c0b6dfe5f27d159dd1edd98761aeaae5e0673adea",
-      "vector_row": 1548
+      "vector_row": 1547
     },
     {
       "passage_id": "parent:vpr-email:vpr-3f359d639f6d327f",
@@ -12456,7 +12448,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-3f359d639f6d327f",
       "text_sha256": "9fefecbde370c42409107ab5aa6e022ec05925c0520bc7984e3d1a62bd267e18",
-      "vector_row": 1549
+      "vector_row": 1548
     },
     {
       "passage_id": "parent:vpr-email:vpr-40c8bd8449be89b5",
@@ -12464,7 +12456,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-40c8bd8449be89b5",
       "text_sha256": "673d0c7a9c24deb1e14793819b6749825c4e72cd0dab248ed690d48b645fa9f9",
-      "vector_row": 1550
+      "vector_row": 1549
     },
     {
       "passage_id": "parent:vpr-email:vpr-63cc8866673bd1a1",
@@ -12472,7 +12464,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-63cc8866673bd1a1",
       "text_sha256": "51f5a6993d20e2b6a00c87a882b28a57e7a0f4eadf4aadc9aa669c0d609832d4",
-      "vector_row": 1551
+      "vector_row": 1550
     },
     {
       "passage_id": "parent:vpr-email:vpr-779bd2ee55b34b8e",
@@ -12480,7 +12472,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-779bd2ee55b34b8e",
       "text_sha256": "cdde2f30921e170ddf911be552ca3fd1e3a44c38caae72258141b68ded29cc62",
-      "vector_row": 1552
+      "vector_row": 1551
     },
     {
       "passage_id": "parent:vpr-email:vpr-aed7d81578b24028",
@@ -12488,7 +12480,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-aed7d81578b24028",
       "text_sha256": "10ffd5e8d95a234369d409b8098a35bbb1312794517f71c01447526da8d95c8f",
-      "vector_row": 1553
+      "vector_row": 1552
     },
     {
       "passage_id": "parent:vpr-email:vpr-bd193799390f4580",
@@ -12496,7 +12488,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-bd193799390f4580",
       "text_sha256": "1142098a017dcb8a559b10ea6ee60a354bc6f5ebf1819751f2216fc6a3742848",
-      "vector_row": 1554
+      "vector_row": 1553
     },
     {
       "passage_id": "parent:vpr-email:vpr-e1612e2acba631d2",
@@ -12504,7 +12496,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-e1612e2acba631d2",
       "text_sha256": "0c19f12e451829ef4a73fda2a25b0b6a6eba4e19d23ad7c2639ac0dbef1e3cb9",
-      "vector_row": 1555
+      "vector_row": 1554
     },
     {
       "passage_id": "parent:vpr-email:vpr-e4cc1ac2aa40787d",
@@ -12512,7 +12504,7 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-e4cc1ac2aa40787d",
       "text_sha256": "96c4e2735a381e97b73bea074bcf5ff03407c44f6effdb357f626f6502d6e054",
-      "vector_row": 1556
+      "vector_row": 1555
     },
     {
       "passage_id": "parent:vpr-email:vpr-f068b41ca38718f9",
@@ -12520,8 +12512,8 @@
       "passage_kind": "parent",
       "record_id": "vpr-email:vpr-f068b41ca38718f9",
       "text_sha256": "df1b6c1b1d397f81d75f712a1f01ba41038bce92b9944d38954065d0fcd9ba9a",
-      "vector_row": 1557
+      "vector_row": 1556
     }
   ],
-  "integrity_sha256": "5c503a8c9c59d97aba7f9e045cd8e54a2998c1e00211fbebfe08a04936490f7a"
+  "integrity_sha256": "128978869dca0a7bf44d6e5d3992f9b152ba1c763621ce332886e0da33e50cbc"
 }

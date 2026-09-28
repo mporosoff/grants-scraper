@@ -1,8 +1,914 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-09-27T16:23:23Z",
+  "generated_at": "2026-09-28T21:53:55Z",
   "retention_days": 90,
   "events": [
+    {
+      "id": "a3f11c449af4a14c3dd8",
+      "type": "closed_or_removed",
+      "label": "Closed or removed",
+      "changed_at": "2026-09-28T21:48:42.702959Z",
+      "opportunity_id": "nyserda:PON6161",
+      "detail": "No longer in the current catalog",
+      "record": {
+        "opportunity_id": "nyserda:PON6161",
+        "opportunity_number": "PON 6161",
+        "title": "Large Scale Non-drop-in Alternative Fuels Based Resources and Infrastructure",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-09-28",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-09-28",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000191nvfAAA",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-09-27",
+          "application_class": "new",
+          "date": "2026-09-28",
+          "event": {
+            "kind": "application",
+            "date": "2026-09-28",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000191nvfAAA",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000191nvfAAA",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000191nvfAAA",
+        "primary_document_url": null
+      }
+    },
+    {
+      "id": "6bddce0df4705bf31ce1",
+      "type": "deadline_changed",
+      "label": "Deadline changed",
+      "changed_at": "2026-09-28T21:48:42.702959Z",
+      "opportunity_id": "357941",
+      "detail": "2027-08-11 → 2027-03-10",
+      "record": {
+        "opportunity_id": "357941",
+        "opportunity_number": "PAR-25-101",
+        "title": "Cutting-Edge Basic Research Awards (CEBRA) (R21 Clinical Trial Optional)",
+        "agency": "National Institutes of Health",
+        "source": "Grants.gov",
+        "source_type": "Federal",
+        "status": "posted",
+        "posted_date": "2024-12-30",
+        "close_date": "2027-08-11",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2027-08-11",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "note": null,
+            "estimated": false,
+            "source": "Grants.gov XML extract",
+            "source_url": "https://www.grants.gov/search-results-detail/357941",
+            "source_field": "CloseDate",
+            "confidence": "official_structured",
+            "detail_checked_at": "2026-08-03T13:20:57.268810Z",
+            "document_evidence_id": "evidence-357941-369de92925a0",
+            "document_confidence": "machine_extracted_needs_verification",
+            "document_source_fields": {
+              "time": {
+                "present": true,
+                "value": null
+              },
+              "timezone": {
+                "present": true,
+                "value": null
+              },
+              "stage": {
+                "present": false,
+                "value": null
+              },
+              "application_class": {
+                "present": false,
+                "value": null
+              },
+              "clock_citation": {
+                "present": false,
+                "value": null
+              }
+            },
+            "stage": "application",
+            "application_class": "new",
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            }
+          },
+          {
+            "kind": "application",
+            "date": "2025-03-10",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-8835c4c21660",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2025-03-10",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-4e9a8795846f",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2025-08-12",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-6ccefad26032",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2025-08-12",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-ac50a157665d",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2026-03-10",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-2079547baa90",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2026-03-10",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-8f7b589d7039",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2026-08-05",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-44c4222d0332",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2026-08-05",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-8e5256a1e41c",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2027-03-10",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-461e3a5f9c88",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2027-03-10",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-1b61f9d929d8",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          {
+            "kind": "application",
+            "date": "2027-08-11",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-2bd7e8abed59",
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "resubmission",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "submission_requirements": [
+          {
+            "kind": "letter_of_intent",
+            "date": null,
+            "time": null,
+            "timezone": null,
+            "note": "…ion Guide is required and strictly enforced. Applications that are out of compliance with these instructions may be delayed or not accepted for review. Letter of Intent Although a letter of intent is not required, is not binding, and does not enter into the review of a subsequent application, the information that it contains allows IC staff to estimate the…",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-dc1e88e4d52e",
+            "citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "2. Content and Form of Application Submission",
+              "location": "section “2. Content and Form of Application Submission”",
+              "quote": "…ion Guide is required and strictly enforced. Applications that are out of compliance with these instructions may be delayed or not accepted for review. Letter of Intent Although a letter of intent is not required, is not binding, and does not enter into the review of a subsequent application, the information that it contains allows IC staff to estimate the…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-122",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 2. Full Text of Announcement",
+                  "Section IV. Application and Submission Information",
+                  "1. Requesting an Application Package",
+                  "2. Content and Form of Application Submission"
+                ],
+                "source_position": [
+                  1141,
+                  92
+                ]
+              }
+            },
+            "required": false,
+            "subject": "submission",
+            "stage": "letter_of_intent",
+            "application_class": "unspecified",
+            "obligation": "optional",
+            "invitation_required": null,
+            "prerequisite": null,
+            "requirement_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "2. Content and Form of Application Submission",
+              "location": "section “2. Content and Form of Application Submission”",
+              "quote": "…ion Guide is required and strictly enforced. Applications that are out of compliance with these instructions may be delayed or not accepted for review. Letter of Intent Although a letter of intent is not required, is not binding, and does not enter into the review of a subsequent application, the information that it contains allows IC staff to estimate the…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-122",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 2. Full Text of Announcement",
+                  "Section IV. Application and Submission Information",
+                  "1. Requesting an Application Package",
+                  "2. Content and Form of Application Submission"
+                ],
+                "source_position": [
+                  1141,
+                  92
+                ]
+              }
+            },
+            "parser_version": "submission-fields-21"
+          }
+        ],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-09-28",
+          "application_class": "new",
+          "date": "2027-03-10",
+          "event": {
+            "kind": "application",
+            "date": "2027-03-10",
+            "time": "5:00 PM",
+            "timezone": "applicant_local",
+            "note": "…0, 2026 | March 10, 2026 | March 10, 2026 | July 2026 | October 2026 | December 2026 August 05, 2026 | August 05, 2026 | Not Applicable | November 2026 | January 2027 | April 2027 March 10, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | Ap…",
+            "estimated": false,
+            "source": "Official notice (machine extracted)",
+            "source_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+            "confidence": "machine_extracted_needs_verification",
+            "evidence_id": "evidence-357941-461e3a5f9c88",
+            "citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2026 | March 10, 2026 | March 10, 2026 | July 2026 | October 2026 | December 2026 August 05, 2026 | August 05, 2026 | Not Applicable | November 2026 | January 2027 | April 2027 March 10, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | Ap…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-43",
+                "kind": "table_row",
+                "row": 6,
+                "table_id": "table-1",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  431,
+                  4
+                ],
+                "field_label": "Application Due Dates: New",
+                "field_id": "table-1:6:0",
+                "column_header": "New"
+              }
+            },
+            "required": null,
+            "subject": "submission",
+            "stage": "application",
+            "application_class": "new",
+            "cycle": null,
+            "track": null,
+            "obligation": "unknown",
+            "invitation_required": null,
+            "prerequisite": null,
+            "clock_citation": {
+              "document_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "citation_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+              "document_name": null,
+              "sha256": "6c6985a4846cbf5688b913ecc5204e89853cc8bbba22c074608e0132554541d0",
+              "page": null,
+              "section": "Key Dates",
+              "location": "section “Key Dates”",
+              "quote": "…0, 2027 | March 10, 2027 | Not Applicable | July 2027 | October 2027 | December 2027 August 11, 2027 | August 11, 2027 | Not Applicable | November 2027 | January 2028 | April 2028 All applications are due by 5:00 PM local time of applicant organization. Applicants are encouraged to apply early to allow adequate time to make any corrections to errors found…",
+              "extracted_at": "2026-09-28T21:50:18.818037Z",
+              "structural_reference": {
+                "block_id": "html-45",
+                "kind": "paragraph",
+                "heading_path": [
+                  "Part 1. Overview Information",
+                  "Key Dates"
+                ],
+                "source_position": [
+                  485,
+                  68
+                ]
+              }
+            },
+            "field_authority": "official_notice_field",
+            "parser_version": "submission-fields-21"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": "2025-03-31",
+        "version": "Synopsis 2",
+        "topic_areas": [
+          "Education and workforce"
+        ],
+        "disciplines": [
+          "Education",
+          "Medical and Health"
+        ],
+        "applicant_types": [
+          "State governments",
+          "County governments",
+          "City or township governments",
+          "Special district governments",
+          "Independent school districts",
+          "Public and state institutions of higher education",
+          "Federally recognized Native American tribal governments",
+          "Public and Indian housing authorities",
+          "Other Native American tribal organizations",
+          "Nonprofits with 501(c)(3) status",
+          "Nonprofits without 501(c)(3) status",
+          "Private institutions of higher education",
+          "For-profit organizations other than small businesses",
+          "Small businesses",
+          "Other"
+        ],
+        "funding_instruments": [
+          "Grant"
+        ],
+        "award_floor": null,
+        "award_ceiling": 150000,
+        "detail_page": "https://www.grants.gov/search-results-detail/357941",
+        "funding_opportunity_url": "https://grants.nih.gov/grants/guide/pa-files/PAR-25-101.html",
+        "primary_document_url": null
+      },
+      "old_deadline": "2027-08-11",
+      "new_deadline": "2027-03-10"
+    },
+    {
+      "id": "53c0c010d11621ce40d3",
+      "type": "closing_soon",
+      "label": "Closing soon",
+      "changed_at": "2026-09-28T21:48:42.702959Z",
+      "opportunity_id": "nyserda:PON6220",
+      "detail": "Deadline 2026-10-28",
+      "record": {
+        "opportunity_id": "nyserda:PON6220",
+        "opportunity_number": "PON 6220",
+        "title": "Energy-Focused Air Quality and Health Effects Research",
+        "agency": "NYSERDA",
+        "source": "NYSERDA",
+        "source_type": "State",
+        "status": "posted",
+        "posted_date": null,
+        "close_date": "2026-10-28",
+        "deadlines": [
+          {
+            "kind": "application",
+            "date": "2026-10-28",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          }
+        ],
+        "submission_requirements": [],
+        "next_submission": {
+          "version": 2,
+          "as_of": "2026-09-28",
+          "application_class": "new",
+          "date": "2026-10-28",
+          "event": {
+            "kind": "application",
+            "date": "2026-10-28",
+            "time": null,
+            "timezone": null,
+            "note": null,
+            "estimated": false,
+            "source": "NYSERDA",
+            "source_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ",
+            "source_field": "source listing",
+            "confidence": "source_listed"
+          },
+          "access": "open",
+          "prerequisites": []
+        },
+        "source_aliases": null,
+        "last_updated": null,
+        "version": null,
+        "topic_areas": [
+          "Energy"
+        ],
+        "disciplines": [],
+        "applicant_types": [],
+        "funding_instruments": [],
+        "award_floor": null,
+        "award_ceiling": null,
+        "detail_page": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ",
+        "funding_opportunity_url": "https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ",
+        "primary_document_url": null
+      },
+      "deadline": "2026-10-28"
+    },
     {
       "id": "fe1446e4b2f61d859e12",
       "type": "new",

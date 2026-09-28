@@ -4,8 +4,32 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-09-27T16:23:23Z</updated>
+  <updated>2026-09-28T21:53:55Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closed or removed: Large Scale Non-drop-in Alternative Fuels Based Resources and Infrastructure</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000191nvfAAA"/>
+    <id>urn:funding-finder:change:a3f11c449af4a14c3dd8</id>
+    <updated>2026-09-28T21:48:42.702959Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Cutting-Edge Basic Research Awards (CEBRA) (R21 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357941"/>
+    <id>urn:funding-finder:change:6bddce0df4705bf31ce1</id>
+    <updated>2026-09-28T21:48:42.702959Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-08-11 → 2027-03-10</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Energy-Focused Air Quality and Health Effects Research</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001H35P3AAJ"/>
+    <id>urn:funding-finder:change:53c0c010d11621ce40d3</id>
+    <updated>2026-09-28T21:48:42.702959Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-28</summary>
+  </entry>
   <entry>
     <title>New opportunity: Easement Restoration and Stewardship</title>
     <link href="https://www.grants.gov/search-results-detail/363920"/>
@@ -1581,29 +1605,5 @@
     <updated>2026-09-23T15:02:58.431956Z</updated>
     <category term="new"/>
     <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Computational Approaches to Curation at Scale for Biomedical Research Assets (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/356888"/>
-    <id>urn:funding-finder:change:de4958d945bad0c8f7c2</id>
-    <updated>2026-09-21T16:29:43.911983Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2027-04-15 → 2027-01-15</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: National Cancer Institute's Investigator-Initiated Early Phase Clinical Trials for Cancer Treatment and Diagnosis (R01 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/357075"/>
-    <id>urn:funding-finder:change:cb3fe79ffb741755a2ee</id>
-    <updated>2026-09-21T16:29:43.911983Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2027-01-07 → 2026-10-05</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: DoW Reconstructive Transplant, Concept Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362607"/>
-    <id>urn:funding-finder:change:c968b85cd690ff9cfe79</id>
-    <updated>2026-09-21T16:29:43.911983Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-21</summary>
   </entry>
 </feed>
