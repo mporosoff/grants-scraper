@@ -2621,7 +2621,12 @@
   }
 
   function deadlineRows(record) {
+    const currentDate = isoDateOrdinal(runtimeDateIso());
     return (record.deadlines || []).map(deadline => {
+      const deadlineDate = isoDateOrdinal(deadline.date);
+      const dateStatus = currentDate !== null && deadlineDate !== null && deadlineDate < currentDate
+        ? "Past date · "
+        : "";
       const timing = [
         deadline.window_start ? `Window opens ${formatDate(deadline.window_start, { long: true })}` : "",
         deadline.date ? formatDate(deadline.date, { long: true }) : "",
@@ -2637,7 +2642,7 @@
         ? evidenceCitation(citationData, citationData.location)
         : "";
       return `<div>
-        <dt>${escapeHtml(deadline.date_qualifier === "recommended" ? `Recommended ${deadlineKindLabel(deadline.kind).toLowerCase().replace("deadline", "submission")}` : deadline.date_qualifier === "anticipated" ? `Anticipated ${deadlineKindLabel(deadline.kind).toLowerCase()}` : deadlineKindLabel(deadline.kind))}${deadline.track ? ` · ${escapeHtml(deadline.track)}` : ""}</dt>
+        <dt>${escapeHtml(dateStatus)}${escapeHtml(deadline.date_qualifier === "recommended" ? `Recommended ${deadlineKindLabel(deadline.kind).toLowerCase().replace("deadline", "submission")}` : deadline.date_qualifier === "anticipated" ? `Anticipated ${deadlineKindLabel(deadline.kind).toLowerCase()}` : deadlineKindLabel(deadline.kind))}${deadline.track ? ` · ${escapeHtml(deadline.track)}` : ""}</dt>
         <dd>${escapeHtml(timing)}${escapeHtml(verification)}${note ? `<small class="deadline-note">${escapeHtml(note)}</small>` : ""}${citation ? `<span class="inline-citation">${citation}</span>` : ""}</dd>
       </div>`;
     }).join("");

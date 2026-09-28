@@ -21,9 +21,9 @@ function fn(source, name) {
 
 test("deadline details and AI retain recommended dates and named applicant routes", () => {
   const context = { formatDate: value => value, evidenceFacts: record => record.document_evidence.facts,
-    deadlineCitation: () => null };
+    deadlineCitation: () => null, runtimeDateIso: () => "2026-09-28" };
   vm.createContext(context);
-  for (const name of ["escapeHtml", "deadlineKindLabel", "deadlineRows", "truncate", "compactJsonValue", "compactDocumentEvidence"])
+  for (const name of ["escapeHtml", "isoDateOrdinal", "deadlineKindLabel", "deadlineRows", "truncate", "compactJsonValue", "compactDocumentEvidence"])
     vm.runInContext(fn(app, name), context);
   const html = context.deadlineRows({deadlines: [{kind: "application", date: "2026-11-16",
     date_qualifier: "recommended", track: "Partner <group>"}]});

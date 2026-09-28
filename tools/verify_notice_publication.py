@@ -18,12 +18,13 @@ from scripts.enrich_catalog import read_catalog
 from scripts.notice_structure_cache import StructureCache
 
 PUBLIC_FIELDS = ('document_evidence_status', 'document_evidence', 'document_search_text',
+    'topic_areas', 'document_program_areas',
     'deadlines', 'submission_requirements', 'document_status_signals',
     'limited_submission', 'limited_submission_review', 'has_preliminary_stage',
     'preliminary_stage_type', 'preliminary_required', 'next_submission')
 
 
-VALIDATOR_VERSION = 'notice-publication-3'
+VALIDATOR_VERSION = 'notice-publication-4'
 
 
 def bounded_public_value(value, limit=2048):
@@ -32,6 +33,15 @@ def bounded_public_value(value, limit=2048):
         return value
     return {'preview': serialized[:limit], 'truncated': True,
             'sha256': hashlib.sha256(serialized.encode()).hexdigest(), 'characters': len(serialized)}
+
+
+def comparable_public_field(record, field):
+    value = record.get(field)
+    # Topic facets are an unordered tag collection. Preserve membership and
+    # duplicate/type differences without rewriting unrelated published order.
+    if field == 'topic_areas' and isinstance(value, list) and all(isinstance(item, str) for item in value):
+        return sorted(value)
+    return value
 
 
 def retained_retrieval_failure(before, after, catalog, cache, stamp):
@@ -85,7 +95,8 @@ def verify(catalog, cache, children=None, *, candidate_id='committed-working-cop
         raise ValueError('Notice projection changed canonical membership or order')
     changes, replay_observations = [], []
     for before, after in zip(published, rebuilt):
-        fields = [key for key in PUBLIC_FIELDS if before.get(key) != after.get(key)]
+        fields = [key for key in PUBLIC_FIELDS
+                  if comparable_public_field(before, key) != comparable_public_field(after, key)]
         if retained_retrieval_failure(before, after, catalog, cache, stamp):
             fields.remove('document_evidence_status')
             replay_observations.append({'opportunity_id': str(before['opportunity_id']),
