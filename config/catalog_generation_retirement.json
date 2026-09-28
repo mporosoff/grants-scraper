@@ -1,0 +1,109 @@
+{
+  "schema_version": 1,
+  "kind": "cancelled_unspent_generation_superseded",
+  "repository": "mporosoff/grants-scraper",
+  "replacement_run": "36480049073",
+  "run": {
+    "id": 36488051427,
+    "event": "push",
+    "path": ".github/workflows/refresh-opportunities.yml",
+    "head_branch": "main",
+    "head_sha": "1ce50e3cc16be1d0c9de1dc2c4643b85c3ad2b1d",
+    "run_attempt": 1,
+    "status": "completed",
+    "conclusion": "cancelled"
+  },
+  "artifacts": [
+    {
+      "id": 10999279642,
+      "name": "generation-spend-reservation-36488051427-1",
+      "digest": "sha256:59ee269d6813164bb8346134b2e9138b8af50bdf7d02fbe36a77bed156be5f93",
+      "size_in_bytes": 299,
+      "workflow_run": {
+        "id": 36488051427,
+        "repository_id": 1312068914,
+        "head_repository_id": 1312068914,
+        "head_branch": "main",
+        "head_sha": "1ce50e3cc16be1d0c9de1dc2c4643b85c3ad2b1d"
+      }
+    },
+    {
+      "id": 10999704635,
+      "name": "generation-spend-state-36488051427-1",
+      "digest": "sha256:3dbb881c51f8334da81cda10a319259b617c79e7a16a6e0ff842c43f77ceb5c5",
+      "size_in_bytes": 254,
+      "workflow_run": {
+        "id": 36488051427,
+        "repository_id": 1312068914,
+        "head_repository_id": 1312068914,
+        "head_branch": "main",
+        "head_sha": "1ce50e3cc16be1d0c9de1dc2c4643b85c3ad2b1d"
+      }
+    },
+    {
+      "id": 10998899969,
+      "name": "release-plan-1",
+      "digest": "sha256:a44b31a90795baf42f72b9d8808a5e3a94aaa0128ce83f7e7fa30e8cd95bd625",
+      "size_in_bytes": 866,
+      "workflow_run": {
+        "id": 36488051427,
+        "repository_id": 1312068914,
+        "head_repository_id": 1312068914,
+        "head_branch": "main",
+        "head_sha": "1ce50e3cc16be1d0c9de1dc2c4643b85c3ad2b1d"
+      }
+    }
+  ],
+  "jobs": [
+    {
+      "id": 109149663967,
+      "name": "plan",
+      "conclusion": "success"
+    },
+    {
+      "id": 109149899472,
+      "name": "generate",
+      "conclusion": "cancelled"
+    },
+    {
+      "id": 109149900387,
+      "name": "assemble",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 109149900665,
+      "name": "catalog-correction",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 109150826193,
+      "name": "candidate",
+      "conclusion": "cancelled"
+    },
+    {
+      "id": 109150828050,
+      "name": "closeout",
+      "conclusion": "success"
+    },
+    {
+      "id": 109150828107,
+      "name": "validate",
+      "conclusion": "cancelled"
+    },
+    {
+      "id": 109150828137,
+      "name": "publish",
+      "conclusion": "cancelled"
+    },
+    {
+      "id": 109150828656,
+      "name": "pages",
+      "conclusion": "skipped"
+    },
+    {
+      "id": 109150829592,
+      "name": "verify-live",
+      "conclusion": "cancelled"
+    }
+  ]
+}

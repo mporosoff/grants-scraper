@@ -88,7 +88,8 @@
     "tools/verify_no_drift.sh",
     "tests/**/*",
     ".github/workflows/*.yml",
-    "config/release_dependencies.json"
+    "config/release_dependencies.json",
+    "config/catalog_generation_retirement.json"
   ],
   "generation_contract": {
     "python": "3.13",
@@ -200,7 +201,8 @@
         "evaluation/*.txt",
         "tools/*.sh",
         "package.json",
-        "pnpm-lock.yaml"
+        "pnpm-lock.yaml",
+        "config/catalog_generation_retirement.json"
       ],
       "excluded": []
     }

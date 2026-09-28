@@ -6,6 +6,7 @@ import re
 import subprocess
 
 from tools import release_candidate as c
+from tools.catalog_generation_retirement import allows_skip as retired_generation
 from tools.fetch_release_artifact import fetch
 from tools.offline_ai_checkpoint import api
 from tools.release_dependencies import candidate_groups, changed_groups, snapshot
@@ -101,6 +102,9 @@ def prior_generation(root, environment, manifest):
                 raise Hold('Untrusted release run in recovery history', identifier)
             artifacts = [item for batch in _pages(repository, f'actions/runs/{identifier}/artifacts', 'artifacts')
                          for item in batch]
+            if retired_generation(root, repository, run, artifacts, published,
+                                  lambda path: api(repository, path)):
+                continue
             candidates = [a for a in artifacts if a['name'].startswith('candidate-')]
             reservations = [a for a in artifacts
                             if a['name'].startswith(f'generation-spend-reservation-{identifier}-')]

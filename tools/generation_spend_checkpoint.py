@@ -10,9 +10,11 @@ from tools.offline_ai_checkpoint import api
 from tools.offline_ai import atomic_json, config, identity, Ledger
 from tools.release_candidate import checked_path
 from tools.fetch_release_artifact import run_artifacts
+from tools.catalog_generation_retirement import assert_run_open
 
 
 def prepare(repository, run, attempt, destination, reservation, mode, *, qualification_pilot=False):
+    assert_run_open(run)
     meta = json.loads(api(repository, f'actions/runs/{run}'))
     if meta['path'] != '.github/workflows/refresh-opportunities.yml' or meta['head_branch'] != 'main':
         raise ValueError('Untrusted generation spend origin')
