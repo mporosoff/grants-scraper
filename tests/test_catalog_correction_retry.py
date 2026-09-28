@@ -168,6 +168,10 @@ class CloseoutRetry(unittest.TestCase):
             ('plan', 'generate', 'assemble', 'catalog-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live')}
         needs['plan'] = {'result': 'success', 'outputs': {'stage': stage} if stage else {}}
         for name, values in (jobs or {}).items(): needs[name].update(deepcopy(values))
+        if event == 'schedule':
+            needs['plan']['outputs'].setdefault('daily_window_start', '2026-09-28T10:17:00+00:00')
+            if needs['verify-live']['result'] == 'success':
+                needs['verify-live']['outputs'].setdefault('catalog_generated_at', '2026-09-28T16:00:00+00:00')
         if failed: needs[failed]['result'] = 'failure'
         values = {'REQUESTED_STAGE': requested or '', 'GITHUB_RUN_ATTEMPT': '4', **(env or {})}
         harness = """
@@ -175,6 +179,7 @@ class CloseoutRetry(unittest.TestCase):
           const input = JSON.parse(fs.readFileSync(0, 'utf8'));
           for (const key of Object.keys(process.env)) if (key.startsWith('REQUESTED_') || key === 'GITHUB_RUN_ATTEMPT') delete process.env[key];
           Object.assign(process.env, input.env, {RESULTS: JSON.stringify(input.needs)});
+          Date.now = () => Date.parse('2026-09-28T18:00:00Z');
           const observed = {writes: [], failures: []};
           const core = {summary: {addRaw(body) {observed.body = body; return this;}, async write() {}},
             setFailed(message) {observed.failures.push(message);}};
@@ -283,6 +288,48 @@ class CloseoutRetry(unittest.TestCase):
         self.assertIn('Planner reason: not reported\n', result['body'])
         self.assertEqual(len(result['failures']), 1)
         self.assertEqual(len(result['writes']), 1)
+
+    def test_verified_daily_noop_is_successful_and_carries_freshness_evidence(self):
+        for key in ('daily_status', 'daily_window_start', 'catalog_generated_at', 'recovery_run'):
+            self.assertEqual(self.plan_outputs[key], '${{ steps.plan.outputs.'+key+' }}')
+        result = self.run_script(stage='noop', event='schedule', jobs={
+            'plan': {'outputs': {'stage': 'noop', 'daily_status': 'already_current',
+                'catalog_generated_at': '2026-09-28T16:00:00Z'}}},
+            issues=[{'number': 296, 'title': 'Funding Finder release checkpoint failed'},
+                    {'number': 30, 'title': 'External funding source refresh degraded'}])
+        self.assertIn('Stage: already_current\n', result['body'])
+        self.assertIn('Catalog source timestamp: 2026-09-28T16:00:00Z', result['body'])
+        self.assertEqual(result['failures'], [])
+        self.assertEqual([write['issue_number'] for write in result['writes']], [296])
+        self.assertEqual(result['writes'][0]['state'], 'closed')
+        self.assert_route(result, 'none')
+
+    def test_daily_noop_rejects_missing_old_future_and_invalid_dates(self):
+        for date in ('', 'unknown', '2026-09-27T16:00:00Z', '2026-09-29T16:00:00Z'):
+            with self.subTest(date=date):
+                result = self.run_script(stage='noop', event='schedule', jobs={
+                    'plan': {'outputs': {'stage': 'noop', 'daily_status': 'already_current',
+                        'catalog_generated_at': date}}})
+                self.assertIn('Stage: held\n', result['body'])
+                self.assertEqual(len(result['failures']), 1)
+                self.assertFalse(any(write.get('state') == 'closed' for write in result['writes']))
+        result = self.run_script('plan', stage='noop', event='schedule', jobs={
+            'plan': {'outputs': {'stage': 'noop', 'daily_status': 'already_current',
+                'catalog_generated_at': '2026-09-28T16:00:00Z'}}})
+        self.assertEqual(len(result['failures']), 1)
+        self.assertIn('Stage: plan\n', result['body'])
+
+    def test_recovering_old_catalog_does_not_close_the_daily_freshness_incident(self):
+        result = self.run_script(stage='verify', event='schedule', jobs={
+            'plan': {'outputs': {'stage': 'verify', 'daily_status': 'recovering', 'recovery_run': '600'}},
+            'verify-live': {'result': 'success', 'outputs': {'catalog_generated_at': '2026-09-27T16:00:00Z'}}},
+            issues=[{'number': 296, 'title': 'Funding Finder release checkpoint failed'}])
+        self.assertIn('Stage: stale_catalog\n', result['body'])
+        self.assertIn('Recovery run: 600\n', result['body'])
+        self.assertEqual(len(result['failures']), 1)
+        self.assertEqual(result['writes'][0]['issue_number'], 296)
+        self.assertNotIn('state', result['writes'][0])
+        self.assert_route(result, 'inspect the retained checkpoint before retry')
 
     def test_push_noop_is_not_a_refresh_failure_or_an_incident_recovery(self):
         result = self.run_script(stage='noop', event='push',
