@@ -31,21 +31,15 @@ def decide(changes, *, event, requested='', verified=False, receipt_current=Fals
 
 def release_plan_sha(repository, run, publication_attempt, destination):
     """Authenticate the plan inherited by this publication attempt."""
-    from tools.fetch_release_artifact import fetch
+    from tools.fetch_release_artifact import fetch, run_artifacts
     from tools.offline_ai_checkpoint import api
     if not re.fullmatch('[1-9][0-9]*', str(publication_attempt)):
         raise ValueError('Invalid publication attempt for release plan')
     plans = []
-    for page in range(1, 101):
-        rows = json.loads(api(repository, f'actions/runs/{run}/artifacts?per_page=100&page={page}'))['artifacts']
-        for artifact in rows:
-            match = re.fullmatch(r'release-plan-([1-9][0-9]*)', artifact['name'])
-            if match and int(match[1]) <= int(publication_attempt):
-                plans.append((int(match[1]), artifact))
-        if len(rows) < 100:
-            break
-    else:
-        raise ValueError('Release plan evidence exceeds bounded lookup')
+    for artifact in run_artifacts(run, lambda path: api(repository, path)):
+        match = re.fullmatch(r'release-plan-([1-9][0-9]*)', artifact['name'])
+        if match and int(match[1]) <= int(publication_attempt):
+            plans.append((int(match[1]), artifact))
     if not plans:
         raise ValueError('Publication release plan evidence is missing')
     # Failed-job reruns inherit an earlier successful plan. Never borrow a
@@ -208,9 +202,9 @@ def completed_attempt(root, environment, destination):
     if int(environment.get('GITHUB_RUN_ATTEMPT', '1')) <= 1:
         return None
     from tools.offline_ai_checkpoint import api
-    from tools.fetch_release_artifact import fetch
+    from tools.fetch_release_artifact import fetch, run_artifacts
     repo, run = environment['GITHUB_REPOSITORY'], environment['GITHUB_RUN_ID']
-    artifacts = json.loads(api(repo, f'actions/runs/{run}/artifacts?per_page=100'))['artifacts']
+    artifacts = run_artifacts(run, lambda path: api(repo, path))
     candidates = [a for a in artifacts if a['name'].startswith('candidate-')]
     if not candidates:
         return None

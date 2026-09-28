@@ -1,7 +1,10 @@
 """Clock and alarm boundaries for serial notice work; no network or providers."""
 from contextlib import ExitStack
 import json
+from pathlib import Path
 import signal
+import subprocess
+import sys
 import threading
 import time
 from types import SimpleNamespace
@@ -257,21 +260,52 @@ class WorkBudgetContracts(unittest.TestCase):
         self.assertEqual(self.alarm.arms, [])
 
 
+def _busy_parser():
+    # Keep the CPU-bound parser in its own frame, like the real extractor calls.
+    # Python 3.13 can leave a final loop backedge outside an inline with block's
+    # exception table; the caller's guarded CALL still catches its alarm.
+    started = time.monotonic()
+    try:
+        while time.monotonic() - started < 2:
+            pass
+    except Exception:
+        return  # Ordinary broad parser handlers must not swallow WorkTimedOut.
+
+
+def _run_realtime_alarm_probe():
+    check = unittest.TestCase()
+    budget = work.WorkBudget(3, unit_seconds=0.05, reserve_seconds=0)
+    original_handler = signal.getsignal(signal.SIGALRM)
+    started = time.monotonic()
+    try:
+        with check.assertRaises(work.WorkTimedOut) as caught:
+            with budget.guard('busy_parser', '123'):
+                _busy_parser()
+        check.assertEqual(caught.exception.phase, 'busy_parser')
+        check.assertEqual(caught.exception.opportunity_id, '123')
+        check.assertLess(time.monotonic() - started, 1)
+        check.assertIs(signal.getsignal(signal.SIGALRM), original_handler)
+        check.assertEqual(signal.getitimer(signal.ITIMER_REAL), (0, 0))
+    finally:
+        signal.setitimer(signal.ITIMER_REAL, 0)
+        signal.signal(signal.SIGALRM, original_handler)
+
+
 @unittest.skipUnless(all(hasattr(signal, name) for name in ('SIGALRM', 'ITIMER_REAL', 'setitimer', 'getitimer')),
                      'Realtime Unix alarm unavailable on this platform')
 class RealtimeAlarmContract(unittest.TestCase):
     def test_busy_parser_is_interrupted_without_cooperative_checks(self):
-        budget = work.WorkBudget(3, unit_seconds=0.05, reserve_seconds=0)
-        original_handler = signal.getsignal(signal.SIGALRM)
-        started = time.monotonic()
-        with self.assertRaises(work.WorkTimedOut), patch('builtins.print'):
-            with budget.guard('busy_parser', '123'):
-                # A two-second safety bound fails promptly even if the alarm regresses.
-                while time.monotonic() - started < 2:
-                    pass
-        self.assertLess(time.monotonic() - started, 1)
-        self.assertIs(signal.getsignal(signal.SIGALRM), original_handler)
-        self.assertEqual(signal.getitimer(signal.ITIMER_REAL), (0, 0))
+        # A failed OS-timer probe must never leak a handler/timer into the suite.
+        result = subprocess.run(
+            [sys.executable, '-c',
+             'import sys; sys.path.insert(0, sys.argv[1]); '
+             'from test_document_work_budget import _run_realtime_alarm_probe; '
+             '_run_realtime_alarm_probe()', str(Path(__file__).resolve().parent)],
+            cwd=Path(__file__).resolve().parents[1],
+            capture_output=True, text=True, timeout=10, check=False,
+        )
+        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)
+        self.assertIn('"outcome": "timed_out"', result.stdout)
 
 
 if __name__ == '__main__':

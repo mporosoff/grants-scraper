@@ -1,10 +1,11 @@
 """Offline contracts for interrupted notice work and safe recovery artifacts."""
 from contextlib import contextmanager
 from copy import deepcopy
-from datetime import datetime, timezone
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 import unittest
+import tempfile
 from unittest.mock import patch
 
 from scripts import extract_document_evidence as e
@@ -93,6 +94,71 @@ class DocumentEvidenceBudget(unittest.TestCase):
         self.assertEqual(retained["checked_at"], "2026-09-27T00:00:00Z")
         self.assertIsNone(output["opportunities"][0]["document_evidence"])
         self.assertTrue(e.due_for_check(retained, retained["source_signature"], self.now, 14))
+
+    @contextmanager
+    def completed_recovery_fixture(self):
+        record = self.record("recovery")
+        old = self.now - timedelta(days=15)
+        source = self.source(record)
+        response = {"content": b"<h2>Cost Sharing</h2><p>Cost sharing is optional.</p>",
+                    "content_type": "text/html", "url": source["url"], "etag": "original-etag"}
+        with tempfile.TemporaryDirectory() as directory:
+            structure = e.notice_structure_cache.StructureCache(directory)
+            entry, _ = e.build_document_entry(record, source, response, None, old, structure_cache=structure)
+            entry["parser_dependencies"]["cost_share"] = "old"
+            next(fact for fact in entry["facts"] if fact["type"] == "cost_share")["value"] = True
+            yield record, entry, structure, old
+
+    def assert_recovery_retained(self, output, cache, old, *, timed_out):
+        entry = cache["records"]["recovery"]
+        self.assertIs(next(fact for fact in entry["facts"] if fact["type"] == "cost_share")["value"], False)
+        self.assertEqual(entry["parser_dependencies"], e.parser_dependencies())
+        self.assertEqual(entry["checked_at"], e.iso_utc(old))
+        self.assertEqual(entry["document"]["last_seen_at"], e.iso_utc(old))
+        self.assertEqual(entry["parser_migration"]["source_checked_at"], e.iso_utc(old))
+        self.assertFalse(entry["parser_migration"]["source_retrieved"])
+        self.assertEqual(entry["status"], "processing_incomplete" if timed_out else "failed")
+        self.assertIsNone(output["opportunities"][0]["document_evidence"])
+        metrics = output["diagnostics"]["document_evidence"]
+        self.assertEqual(metrics["parser_recovery"]["reparsed_from_structure"], 1)
+        self.assertEqual(metrics["parser_recovery"]["source_requests"], 1)
+        if timed_out:
+            with self.assertRaisesRegex(RuntimeError, "incomplete"):
+                e.validate_refresh_health(metrics)
+        else:
+            self.assertEqual(entry["last_attempt_at"], e.iso_utc(self.now))
+            self.assertFalse(e.due_for_check(entry, entry["source_signature"], self.now + timedelta(hours=1), 14))
+
+    def test_completed_reparse_survives_later_fetch_failure_or_timeout(self):
+        for timed_out in (False, True):
+            with self.subTest(timed_out=timed_out), self.completed_recovery_fixture() as (record, entry, structure, old):
+                def fail(*_):
+                    if timed_out:
+                        raise WorkTimedOut("notice_refresh", "recovery")
+                    raise RuntimeError("Synthetic retrieval failure")
+                snapshots = []
+                output, cache = e.enrich_document_evidence({"opportunities": [record]}, {"records": {"recovery": entry}},
+                    now=self.now, request_delay=0, structure_cache=structure, work_budget=Budget(), fetcher=fail,
+                    checkpoint=lambda value: snapshots.append(deepcopy(value)))
+                self.assert_recovery_retained(output, cache, old, timed_out=timed_out)
+                self.assertTrue(any(value["records"]["recovery"].get("parser_migration")
+                    and value["records"]["recovery"]["status"] == "current" for value in snapshots))
+
+    def test_partial_live_mutations_cannot_contaminate_completed_recovery(self):
+        for timed_out in (False, True):
+            with self.subTest(timed_out=timed_out), self.completed_recovery_fixture() as (record, entry, structure, old):
+                def corrupt(record, source, response, previous, now, **kwargs):
+                    previous["checked_at"] = "2099-01-01T00:00:00Z"
+                    previous["document"]["last_seen_at"] = "2099-01-01T00:00:00Z"
+                    next(fact for fact in previous["facts"] if fact["type"] == "cost_share")["value"] = "unvalidated"
+                    if timed_out:
+                        raise WorkTimedOut("notice_refresh", "recovery")
+                    raise ValueError("Synthetic live parser failure")
+                with patch.object(e, "build_document_entry", side_effect=corrupt):
+                    output, cache = e.enrich_document_evidence({"opportunities": [record]}, {"records": {"recovery": entry}},
+                        now=self.now, request_delay=0, structure_cache=structure, work_budget=Budget(),
+                        fetcher=lambda *_: {"status_code": 200})
+                self.assert_recovery_retained(output, cache, old, timed_out=timed_out)
 
     def test_cached_projection_timeout_strips_owned_fields_and_preserves_structured_fields(self):
         record = self.record("cached")

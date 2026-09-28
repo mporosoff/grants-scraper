@@ -3335,16 +3335,22 @@ def enrich_document_evidence(
                 if recovered:
                     previous = recovered
                 needs_fetch = not recovered or due_for_check(previous, signature, now, recheck_days)
-            if not needs_fetch:
-                cached_records[identifier] = previous
+            if recovered:
+                # A completed interpretation is independent of the later HTTP
+                # freshness check. Commit it before that next mutable unit.
+                cached_records[identifier] = recovered
                 reparsed += 1
-                completed += 1
-                completed_ids.add(identifier)
                 if checkpoint is not None:
                     checkpoint(cache)
+            if not needs_fetch:
+                completed += 1
+                completed_ids.add(identifier)
                 continue
             phase = "notice_refresh"
             with work_guard(work_budget, phase, identifier):
+                # Neither a failed parser nor a timeout after a 304 timestamp
+                # update may mutate the completed recovery baseline.
+                previous = deepcopy(cached_records.get(identifier))
                 previous_document = (previous or {}).get("document") or {}
                 headers = {}
                 if (previous and not backfill and previous.get('parser_dependencies') == parser_dependencies()
@@ -3368,7 +3374,6 @@ def enrich_document_evidence(
                     entry, extracted = build_document_entry(record, source, response, previous, now,
                         enable_subtopics=enable_subtopics, backfill_subtopics=backfill, structure_cache=structure_cache)
             cached_records[identifier] = entry
-            reparsed += int(bool(recovered))
             refreshed += int(extracted)
             not_modified += int(not extracted)
             completed += 1
@@ -3376,13 +3381,14 @@ def enrich_document_evidence(
             if enable_subtopics:
                 classifier_run_entries.append(entry)
         except WorkTimedOut:
-            # The original receipt survives; partially mutated local copies do not.
+            # The latest completed receipt survives; mutable live copies do not.
             incomplete(cached_records, identifier, phase + "_timeout")
         except Exception as exc:  # noqa: BLE001 - retain other records
             failure = {"opportunity_id": identifier, "url": source["url"], "error": type(exc).__name__}
             failures.append(failure)
-            if original:
-                entry = deepcopy(original)
+            retained = cached_records.get(identifier)
+            if retained:
+                entry = deepcopy(retained)
                 entry.update(status="failed", last_attempt_at=iso_utc(now), last_error=failure["error"])
             else:
                 entry = {"source_signature": signature, "checked_at": iso_utc(now), "status": "failed",
