@@ -426,6 +426,9 @@ def main():
     parser.add_argument('--team-update', action='store_true')
     args = parser.parse_args()
     if args.command == "create":
+        from scripts.enrich_catalog import read_catalog
+        from scripts.document_work_budget import require_document_publication
+        require_document_publication(read_catalog(args.root / "data/opportunities.js"))
         manifest = create(args.root, args.bundle, parent=args.parent, team_update=args.team_update)
     else:
         manifest = load(args.bundle, args.candidate_id)

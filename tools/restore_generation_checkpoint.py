@@ -1,17 +1,16 @@
 """A workflow rerun cannot repeat a completed, persisted expensive generation."""
-import json
 import os
 from pathlib import Path
 import subprocess
 
-from tools.fetch_release_artifact import fetch
+from tools.fetch_release_artifact import fetch, run_artifacts
 from tools import release_candidate as c
 
 
 def main():
     repo, run = os.environ['GITHUB_REPOSITORY'], os.environ['GITHUB_RUN_ID']
-    response = json.loads(subprocess.check_output(['gh', 'api', f'repos/{repo}/actions/runs/{run}/artifacts?per_page=100'], timeout=60))
-    artifacts = [a for a in response['artifacts'] if a['name'].startswith('candidate-') and not a['expired']]
+    rows = run_artifacts(run, lambda path: subprocess.check_output(['gh', 'api', f'repos/{repo}/{path}'], timeout=60))
+    artifacts = [a for a in rows if a['name'].startswith('candidate-')]
     if not artifacts:
         return
     if len(artifacts) != 1:

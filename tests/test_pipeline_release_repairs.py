@@ -174,6 +174,10 @@ class DeadlineOwnership(unittest.TestCase):
         output, _ = enrich_document_evidence({'opportunities': [record]}, cache, fetcher=not_modified,
             request_delay=0, now=datetime(2099, 9, 2, tzinfo=timezone.utc))
         self.assertIsNone(output['opportunities'][0]['document_evidence'])
+        # Guarded work commits a replacement only after the unit completes;
+        # the detached input remains unchanged and the cache is authoritative.
+        self.assertEqual(entry['status'], 'current')
+        entry = cache['records'][record['opportunity_id']]
         self.assertEqual(entry['status'], 'failed')
         rebuilt, extracted = build_document_entry(record, source_for_record(record),
             {'content': NOTICE, 'content_type': 'text/html', 'url': record['primary_document_url']},

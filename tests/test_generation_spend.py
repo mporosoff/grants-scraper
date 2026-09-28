@@ -17,21 +17,22 @@ from scripts import subtopic_cov4 as gate
 
 class GenerationSpend(unittest.TestCase):
     def test_document_entrypoint_registers_its_own_module_for_schedule_callbacks(self):
-        # The production merge_document_entry callback passes sys.modules[__name__]
-        # to notice_schedule, which requires the extractor's DATE_RE attribute.
+        from scripts import extract_document_evidence as extractor
+        from contextlib import nullcontext
+        budget = Mock(deadline=123)
+        budget.guard.return_value = nullcontext()
+        def invoke(*, work_budget):
+            self.assertIs(work_budget, budget)
+            self.assertIs(sys.modules[extractor.__name__], extractor)
+            self.assertTrue(hasattr(extractor, 'DATE_RE'))
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            (root / 'document_entry_fixture.py').write_text(
-                'import re, sys\nDATE_RE = re.compile("date")\n'
-                'assert sys.modules[__name__].DATE_RE.pattern == "date"\n', encoding='utf-8')
-            original = wrapper.runpy.run_module
-            def invoke(name, **kwargs):
-                self.assertEqual(name, 'scripts.extract_document_evidence')
-                return original('document_entry_fixture', **kwargs)
-            with patch.object(sys, 'path', [str(root), *sys.path]), \
-                    patch.dict('os.environ', {'OFFLINE_AI_STATE': str(root / 'state'), 'TEAM_MODE': 'pilot'}), \
-                    patch.object(wrapper.runpy, 'run_module', side_effect=invoke), patch.object(gate, 'classify_fundability'):
+            with patch.dict('os.environ', {'OFFLINE_AI_STATE': str(root / 'state'), 'TEAM_MODE': 'pilot'}), \
+                    patch('scripts.document_work_budget.WorkBudget', return_value=budget), \
+                    patch.object(extractor, 'mark_document_work_incomplete'), \
+                    patch.object(extractor, 'main', side_effect=invoke), patch.object(gate, 'classify_fundability') as original:
                 wrapper.main()
+                self.assertIs(gate.classify_fundability, original)
             self.assertTrue((root / 'state/usage-summary.json').exists())
 
     def test_confirmed_provider_pause_survives_into_replacement_without_requests(self):

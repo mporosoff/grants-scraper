@@ -54,6 +54,8 @@ class ReadyCheckpointResume(unittest.TestCase):
                 planner.c.write_json(destination / 'validation.json', self.validation)
             if self.extra_pending:
                 planner.c.write_json(destination / 'review-pending.json', {'status': 'awaiting_review'})
+        elif name == 'release-plan-1':
+            planner.c.write_json(destination / 'release-plan.json', {'release_sha': self.base})
         return {'head_sha': self.fetch_head, 'event': 'push', 'head_branch': 'main',
                 'path': '.github/workflows/refresh-opportunities.yml'}
 
@@ -67,8 +69,9 @@ class ReadyCheckpointResume(unittest.TestCase):
         from contextlib import ExitStack
         stack = ExitStack()
         self.addCleanup(stack.close)
-        stack.enter_context(patch('tools.offline_ai_checkpoint.api',
-                                 return_value=json.dumps({'artifacts': [self.artifact]}).encode()))
+        stack.enter_context(patch('tools.offline_ai_checkpoint.api', side_effect=lambda repository, path:
+            json.dumps({'artifacts': [{'id': 1, 'name': 'release-plan-1', 'expired': False}]
+                        if path.startswith('actions/runs/') else [self.artifact]}).encode()))
         stack.enter_context(patch('tools.fetch_release_artifact.fetch', side_effect=self.fetch))
         stack.enter_context(patch.object(reviews, 'api', side_effect=self.api))
         return stack
@@ -104,7 +107,7 @@ class ReadyCheckpointResume(unittest.TestCase):
         verify.assert_called_once()
         self.assertEqual(sum(name.startswith('candidate-') for _, name in self.downloads), 1)
 
-    def test_latest_ready_requires_paired_unchanged_validation_and_run_head(self):
+    def test_latest_ready_requires_paired_unchanged_validation_and_release_plan(self):
         self.patches()
         self.assertEqual(self.read()[1], self.ready)
         for field, value in (('validation_receipt_sha256', '0' * 64), ('candidate_id', 'c' * 64),
