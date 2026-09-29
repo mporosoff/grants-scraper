@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/space-and-aeronautics.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ROSES 2025: A.17 Hydrosphere</title>
@@ -14,7 +14,7 @@
     <author><name>NASA Headquarters</name></author>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. NOTICE: Amended September 2, 2026. This amendment adds this new program element to ROSES-2025. Step-1 proposals are due October 8, 2026, and Step-2 proposals are due January 28, 2027. Any proposal not preced…</summary>
+    <summary>NASA Headquarters | Application 2027-01-28 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is October 8, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: September 18, 2026. Several corrections have been made: (1) Information about the 2027-2028 winter field campaign has been updated in Section 5, (2) Details on the redacted and anonymized budget req…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.16 Cryosphere</title>
@@ -24,7 +24,7 @@
     <author><name>NASA Headquarters</name></author>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-12-04 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 16, 2026. See the full posting on NSPIRES for details. NOTICE: Amended September 1, 2026. This amendment adds this new program element to ROSES-2025. Mandatory Notices of Intent (see Section 4) are due by October 16, 2026, and proposals are due December 4, 2026. Any proposal not preceded by an on-time N…</summary>
+    <summary>NASA Headquarters | Application 2026-12-04 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 16, 2026. See the full posting on NSPIRES for details. ﻿NOTICE: September 18, 2026. Details on the redacted and anonymized budget requirements have been added to Table A.16-1. and instructions regarding Biographical Sketches and Current and Pending Support in Table A.16-2 have been improved. New text is…</summary>
   </entry>
   <entry>
     <title>Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)</title>
@@ -35,7 +35,7 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-12-04 | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
+    <summary>NASA Headquarters | Application 2026-12-04 | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: D.4 Theoretical and Computational Astrophysics Networks</title>
@@ -45,7 +45,7 @@
     <author><name>NASA Headquarters</name></author>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-12-03 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 15, 2026. See the full posting on NSPIRES for details. NOTICE: Amended August 31, 2026. This amendment releases the final text for this program element, which was previously TBD. Mandatory NOIs are due October 15, 2026, and proposals are due December 3, 2026. There are several major changes since the pr…</summary>
+    <summary>NASA Headquarters | Application 2026-12-03 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by October 15, 2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. The instructions regarding biographical sketches and Current and Pending Support in Table D.4-2 have been improved. New text is in bold and deleted text is struck through. NOTICE: Amended August 31, 2026. This amendment r…</summary>
   </entry>
   <entry>
     <title>ROSES25: A.10 INNOVATE</title>
@@ -57,36 +57,13 @@
     <summary>NASA Headquarters | Posted | NASA ROSES-2025 program element A.10, appendix division A. Published status: no_due_date; due dates as printed: N/A | No Due Date [4]. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
   </entry>
   <entry>
-    <title>ROSES25: D.3E IXPE Cycle 4 and NICER Cycle 9 General Observer</title>
-    <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solId={A952E51B-7AD4-B180-2F8C-4E8A79AFFAED}&amp;path=&amp;method=init"/>
-    <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-D.3E-1c60503f9d</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-09-17 | NASA ROSES-2025 program element D.3E, appendix division D. Published status: dated; due dates as printed: N/A | 09/17/2026 (Phase-1 via ARK RPS). Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
-  </entry>
-  <entry>
     <title>ROSES25: D.9 Habitable Worlds Observatory Instrument Concept Assessments</title>
     <link href="https://nspires.nasaprs.com/external/solicitations/summary.do?solNum=NNH25ZDA001N-HWOICA"/>
     <id>urn:funding-finder:nasa-roses:nasa-roses%3A25-D.9-d22059cf9f</id>
     <updated>2026-08-21T00:00:00Z</updated>
     <author><name>NASA Headquarters</name></author>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-10-14 | NASA ROSES-2025 program element D.9, appendix division D. Published status: dated; due dates as printed: N/A | 10/14/2026. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363537"/>
-    <id>urn:funding-finder:grants-gov:363537</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Closes 2026-09-11 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruc…</summary>
+    <summary>NASA Headquarters | Application 2026-10-14 | NASA ROSES-2025 program element D.9, appendix division D. Published status: dated; due dates as printed: N/A | 10/14/2026. Source: ROSES Table 3 (SOLICITED RESEARCH PROGRAMS).</summary>
   </entry>
   <entry>
     <title>ROSES25: D.8 Habitable Worlds Observatory Precursor Science Investigation</title>
@@ -97,7 +74,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-10-26 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by September 10, 2026. See the full posting on NSPIRES for details. ﻿NOTICE: Corrected, August 28, 2026. The Open Science and Data Management Plan was added to Table D.8-1 in Section 3.4. New text is in bold. The due dates remain unchanged. NOTICE: Amended July 27, 2026. This amendment presents a new program eleme…</summary>
+    <summary>NASA Headquarters | Application 2026-10-26 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by September 10, 2026. See the full posting on NSPIRES for details. ﻿NOTICE: Corrected, August 28, 2026. The Open Science and Data Management Plan was added to Table D.8-1 in Section 3.4. New text is in bold. The due dates remain unchanged. NOTICE: Amended July 27, 2026. This amendment presents a new program eleme…</summary>
   </entry>
   <entry>
     <title>ROSES25: C.4 Planetary Science Enabling Facilities</title>
@@ -108,7 +85,18 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-11-10 | ﻿NOTICE: Corrected July 29, 2026. Accidentally omitted standard budget requirements have been added to Table C.4-3 and Sections 3.3.3 and 3.5. New text is in bold and deleted text is struck through. The due date remains unchanged: Proposals are due November 10, 2026. NOTICE: Amended July 21, 2026. This amendment adds to ROSES-2025 this program element which was previously listed as not solicited t…</summary>
+    <summary>NASA Headquarters | Application 2026-11-10 | NOTICE: September 18, 2026. The instructions regarding Biographical Sketches and Current and Pending Support in Table C.4-2 have been improved. New text is in bold and deleted text is struck through ﻿NOTICE: Corrected July 29, 2026. Accidentally omitted standard budget requirements have been added to Table C.4-3 and Sections 3.3.3 and 3.5. New text is in bold and deleted text is struck through. Th…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: A.15 Biosphere</title>
+    <link href="https://www.grants.gov/search-results-detail/363241"/>
+    <id>urn:funding-finder:grants-gov:363241</id>
+    <updated>2026-07-20T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2026-11-06 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is September 4, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: September 18, 2026. Details on the redacted and anonymized budget requirements have been added to Table A.15-1 to make it consistent with Section 4.2.1, and the instructions regarding BioSketches …</summary>
   </entry>
   <entry>
     <title>ROSES25: A.14 Atmosphere</title>
@@ -120,18 +108,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-10-20 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Secti…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: A.15 Biosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363241"/>
-    <id>urn:funding-finder:grants-gov:363241</id>
-    <updated>2026-07-20T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-11-06 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is September 4, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in t…</summary>
+    <summary>NASA Headquarters | Application 2026-12-02 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. Section 3.1 on participation of NASA ISFM scientists has been improved. Details on the redacted and anonymized budget requirements have been added to Table A.14-1 to be consistent with Section 4.3.2. The instructions regarding B…</summary>
   </entry>
   <entry>
     <title>ROSES25: A.13 Accelerating Earth Solutions</title>
@@ -143,7 +120,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-10-15 | NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this in their budget, per the instructions provided in Section 7.3 of ROSES-25 A.1 Earth Science Research Overview. NOTICE: July 28, 2026. A set of slides describing the Application Readiness Levels (ARLs)…</summary>
+    <summary>NASA Headquarters | Application 2026-10-15 | verify prerequisite | NOTICE: September 18, 2026. The instructions regarding Biographical Sketches and Current and Pending Support in Table A.13-2 have been improved. New text is in bold and deleted text is struck through. NOTICE: August 4, 2026. Going forward, a $0.09/SBU charge now applies to all proposing to Earth Science (ROSES Appendix A) to use any NASA high-end computing resource. Proposers must account for this…</summary>
   </entry>
   <entry>
     <title>NASA Innovative Advanced Concepts (NIAC) Phase II</title>
@@ -154,17 +131,6 @@
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
     <summary>NASA Headquarters | Posted | The National Aeronautics and Space Administration (NASA) Headquarters anticipates release of a solicitation, titled “NASA Innovative Advanced Concepts (NIAC), Phase II,” as an Appendix to the Space Technology Mission Directorate (STMD) NASA Research Announcement (NRA), titled “Space Technology Research, Development, Demonstration, and Infusion - 2026 (SpaceTech-REDDI-2026),” on or about May 11, 20…</summary>
-  </entry>
-  <entry>
-    <title>ROSES25: B.2 Heliophysics Foundational Research</title>
-    <link href="https://www.grants.gov/search-results-detail/361234"/>
-    <id>urn:funding-finder:grants-gov:361234</id>
-    <updated>2026-02-03T00:00:00Z</updated>
-    <author><name>NASA Headquarters</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-09-25 | NOTICE: Amended July 24, 2026. This amendment announces the Step-2 due date for this program element, which was previously TBD, is now September 25, 2026. Step-2 proposals can only be submitted by those who submitted a Step-1 proposal and were invited to submit a Step-2. Also, the requirements for Biographical Sketches and Current and Pending Support have been updated, see the table of Requirement…</summary>
   </entry>
   <entry>
     <title>Space Technology Research, Development, Demonstration, and Infusion (SpaceTech REDDI-2026)</title>
@@ -188,7 +154,7 @@
     <updated>2025-08-07T00:00:00Z</updated>
     <author><name>Air Force -- Research Lab</name></author>
     <category term="Space and aeronautics"/>
-    <summary>Air Force -- Research Lab | Closes 2027-09-30 | The Air Force Research Laboratory, Human Effectiveness Directorate (RH) and the United States Air Force School of Aerospace Medicine (USAFSAM), is soliciting white papers (and potentially later technical and cost proposals) on the research located in the Statements of Objectives attached to the Continuing Human Enabling, Enhancing, Restoring and Sustaining (CHEERS) Multiple Authority Announcement …</summary>
+    <summary>Air Force -- Research Lab | Application 2027-09-30 | The Air Force Research Laboratory, Human Effectiveness Directorate (RH) and the United States Air Force School of Aerospace Medicine (USAFSAM), is soliciting white papers (and potentially later technical and cost proposals) on the research located in the Statements of Objectives attached to the Continuing Human Enabling, Enhancing, Restoring and Sustaining (CHEERS) Multiple Authority Announcement …</summary>
   </entry>
   <entry>
     <title>CHEERS Open Period 2 - All Technical Areas</title>
@@ -199,7 +165,7 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <category term="Transportation"/>
-    <summary>Air Force -- Research Lab | Closes 2027-09-30 | The Air Force Research Laboratory, Human Effectiveness Directorate (RH) and the United States Air Force School of Aerospace Medicine (USAFSAM), is soliciting white papers (and potentially later technical and cost proposals) on the research located in the Continuing Enabling, Enhancing, Restoring and Sustaining (CHEERS) Multiple Authority Announcement (MAA) Statements of Objectives, FA238424S2233. …</summary>
+    <summary>Air Force -- Research Lab | Application 2027-09-30 | The Air Force Research Laboratory, Human Effectiveness Directorate (RH) and the United States Air Force School of Aerospace Medicine (USAFSAM), is soliciting white papers (and potentially later technical and cost proposals) on the research located in the Continuing Enabling, Enhancing, Restoring and Sustaining (CHEERS) Multiple Authority Announcement (MAA) Statements of Objectives, FA238424S2233. …</summary>
   </entry>
   <entry>
     <title>ROSES 2025: C.2 Solar System Science</title>
@@ -210,7 +176,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-11-12 | This program element does not have a proposal due date. Proposals may be submitted at any time, pending certain eligibility timing issues related to resubmissions and duplicate proposal avoidance, see the program element text and appropriate overview appendix (e.g., B.1 or C.1). The date shown of 8/1/2026 is the last day that proposals may be submitted subject to the ROSES-25 rules and the current…</summary>
+    <summary>NASA Headquarters | Application 2026-11-12 | This program element does not have a proposal due date. Proposals may be submitted at any time, pending certain eligibility timing issues related to resubmissions and duplicate proposal avoidance, see the program element text and appropriate overview appendix (e.g., B.1 or C.1). The date shown of 8/1/2026 is the last day that proposals may be submitted subject to the ROSES-25 rules and the current…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.4 Rapid Response and Novel Research in Earth Science</title>
@@ -221,7 +187,7 @@
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-12-31 | This program element does not have a proposal due date. Proposals may be submitted at any time, pending certain eligibility timing issues related to resubmissions and duplicate proposal avoidance, see the program element text and appropriate overview appendix (e.g., B.1 or C.1). The date shown of 8/31/2026 is the last day that proposals may be submitted subject to the ROSES-25 rules and the curren…</summary>
+    <summary>NASA Headquarters | Application 2026-12-31 | This program element does not have a proposal due date. Proposals may be submitted at any time, pending certain eligibility timing issues related to resubmissions and duplicate proposal avoidance, see the program element text and appropriate overview appendix (e.g., B.1 or C.1). The date shown of 8/31/2026 is the last day that proposals may be submitted subject to the ROSES-25 rules and the curren…</summary>
   </entry>
   <entry>
     <title>National Science Foundation Translation to Practice</title>
@@ -236,7 +202,8 @@
     <category term="Space and aeronautics"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-17 | The U.S. NSF Directorate for Technology, Innovation and Partnerships (NSF TIP) partners across sectors to advance three primary focus areas - accelerating technology translation and development, fostering regional innovation and economic growth, and preparing the American workforce for future high-wage jobs in STEM fields. The translation of research to practice ensures that the insights and innov…</summary>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Application 2026-11-17 | The U.S. NSF Directorate for Technology, Innovation and Partnerships (NSF TIP) partners across sectors to advance three primary focus areas - accelerating technology translation and development, fostering regional innovation and economic growth, and preparing the American workforce for future high-wage jobs in STEM fields. The translation of research to practice ensures that the insights and innov…</summary>
   </entry>
   <entry>
     <title>NRL Long Range Broad Agency Announcement (BAA) for Basic and Applied Research</title>
@@ -250,7 +217,7 @@
     <category term="Materials science"/>
     <category term="Space and aeronautics"/>
     <category term="Technology development"/>
-    <summary>Naval Research Laboratory | Closes 2026-09-30 | Amendment 0007The purpose of this amendment is to add Summary Topic 61-24-06 - AFFF ALTERNATIVE PROGRAM COMPATIBILITY OF FLUORINE-FREE FOAM (F3) WITH NON-ASPIRATING SPRINKLER NOZZLES to Appendix 1 in it’s entirety. All other terms and conditions remain unchanged.--------------------------------------------------------------Amendment 0006The purpose of this amendment is to extend the due date for a…</summary>
+    <summary>Naval Research Laboratory | Application 2026-09-30 | Amendment 0007The purpose of this amendment is to add Summary Topic 61-24-06 - AFFF ALTERNATIVE PROGRAM COMPATIBILITY OF FLUORINE-FREE FOAM (F3) WITH NON-ASPIRATING SPRINKLER NOZZLES to Appendix 1 in it’s entirety. All other terms and conditions remain unchanged.--------------------------------------------------------------Amendment 0006The purpose of this amendment is to extend the due date for a…</summary>
   </entry>
   <entry>
     <title>EPSCoR Research Infrastructure Improvement (RII): EPSCoR Research Fellows</title>
@@ -260,25 +227,7 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Education and workforce"/>
     <category term="Space and aeronautics"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2027-04-13 | The Established Program to Stimulate Competitive Research is designed to fulfill the mandate of the National Science Foundation (NSF) to promote scientific progress nationwide. NSF EPSCoR facilitates the establishment of partnerships among academic institutions, government, industry, and non-profit sectors that are designed to promote sustainable improvements in a jurisdiction's research infrastru…</summary>
-  </entry>
-  <entry>
-    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/351715"/>
-    <id>urn:funding-finder:grants-gov:351715</id>
-    <updated>2024-01-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-04-13 | The Established Program to Stimulate Competitive Research is designed to fulfill the mandate of the National Science Foundation (NSF) to promote scientific progress nationwide. NSF EPSCoR facilitates the establishment of partnerships among academic institutions, government, industry, and non-profit sectors that are designed to promote sustainable improvements in a jurisdiction's research infrastru…</summary>
   </entry>
   <entry>
     <title>Pioneering Aerospace Capabilities, Engineering and Research (PACER)</title>
@@ -287,7 +236,7 @@
     <updated>2023-07-26T00:00:00Z</updated>
     <author><name>Air Force -- Research Lab</name></author>
     <category term="Space and aeronautics"/>
-    <summary>Air Force -- Research Lab | Closes 2043-05-10 | Pioneering Aerospace Capabilities, Engineering and Research (PACER)</summary>
+    <summary>Air Force -- Research Lab | Application 2043-05-10 | Pioneering Aerospace Capabilities, Engineering and Research (PACER)</summary>
   </entry>
   <entry>
     <title>National Space Grant College and Fellowship Program - Opportunities in NASA STEM FY 2020 - 2024</title>

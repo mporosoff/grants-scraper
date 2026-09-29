@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -13,7 +13,7 @@
     <updated>2027-11-27T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2028-01-27 | The Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program supports resource-limited institutions to develop and strengthen their capacity to conduct rigorous and reproducible biomedical research. Eligible organizations are expected to propose plans based on identified needs in one or more of the following areas: biomedical research environment, sponsore…</summary>
+    <summary>National Institutes of Health | Estimated Application 2028-01-27 | The Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program supports resource-limited institutions to develop and strengthen their capacity to conduct rigorous and reproducible biomedical research. Eligible organizations are expected to propose plans based on identified needs in one or more of the following areas: biomedical research environment, sponsore…</summary>
   </entry>
   <entry>
     <title>Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRC)</title>
@@ -23,7 +23,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-10-01 | This renewal of the Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRCs) continues a legislatively-mandated Centers of Excellence program, which aims to expand and intensify research on muscular dystrophy. The Centers advance basic, translational, and clinical muscular dystrophy research through interdisciplinary collaboration and shared resources for the research com…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | This renewal of the Senator Paul D. Wellstone Muscular Dystrophy Specialized Research Centers (MDSRCs) continues a legislatively-mandated Centers of Excellence program, which aims to expand and intensify research on muscular dystrophy. The Centers advance basic, translational, and clinical muscular dystrophy research through interdisciplinary collaboration and shared resources for the research com…</summary>
   </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -36,7 +36,19 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>The Role of the Innate Immune System in the Pathogenesis of Type 1 Diabetes</title>
+    <link href="https://www.grants.gov/search-results-detail/363943"/>
+    <id>urn:funding-finder:grants-gov:363943</id>
+    <updated>2027-07-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-13 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by utilizing Special Statutory Funding Program for Type 1 Diabetes Research funds to support studies focused on the involvement of the innate immune system in the initiation of Type 1 diabetes (T1D). This initiative directly aligns with the first goal of the congressio…</summary>
   </entry>
   <entry>
     <title>NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional)</title>
@@ -46,7 +58,17 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-06-01 | This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | This Notice of Funding Opportunity (NOFO) invites applications for NIDDK Disease Research and Translational Core Centers (P30 Clinical Trial Optional). These Core Centers are part of an integrated program of biomedical and translational research supporting our cystic fibrosis, diabetes, nutrition, obesity, liver and digestive diseases research. They enhance multidisciplinary collaboration, rigor, …</summary>
+  </entry>
+  <entry>
+    <title>Hubs of Interdisciplinary Research and Training in Global Environmental and Occupational Health (GEOHealth)</title>
+    <link href="https://www.grants.gov/search-results-detail/363873"/>
+    <id>urn:funding-finder:grants-gov:363873</id>
+    <updated>2027-04-22T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-22 | Robust international research collaborations are critical for advancing the environmental and occupational health science that informs the health, safety, and well-being of Americans. Environmental health problems cross national boundaries and research in international settings benefits all people who suffer from the same or related environmental health problems. The Fogarty International Center (…</summary>
   </entry>
   <entry>
     <title>DHQP Global NOFO</title>
@@ -56,7 +78,48 @@
     <author><name>Centers for Disease Control - NCEZID</name></author>
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
-    <summary>Centers for Disease Control - NCEZID | Closes 2027-05-20 | The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
+    <summary>Centers for Disease Control - NCEZID | Estimated Application 2027-05-20 | The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
+  </entry>
+  <entry>
+    <title>Rehabilitation Engineering Research Center on Technologies for People Who are Blind or have Low Vision</title>
+    <link href="https://www.grants.gov/search-results-detail/363974"/>
+    <id>urn:funding-finder:grants-gov:363974</id>
+    <updated>2027-02-22T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Environmental science"/>
+    <summary>Administration for Community Living | Estimated Application 2027-04-22 | The purpose of the Rehabilitation Engineering Research Centers (RERC) program is to improve the effectiveness of services authorized under the Rehabilitation Act by conducting advanced engineering research on and development of innovative technologies that are designed to solve particular rehabilitation problems or to remove environmental barriers. The purpose of this RERC is to conduct research a…</summary>
+  </entry>
+  <entry>
+    <title>State Biomonitoring Cooperative Agreement</title>
+    <link href="https://www.grants.gov/search-results-detail/363917"/>
+    <id>urn:funding-finder:grants-gov:363917</id>
+    <updated>2027-02-16T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCEH</name></author>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCEH | Estimated Application 2027-04-19 | The purpose of this Notice of Funding Opportunity is to support state, local, tribal, and territorial public health laboratories in conducting high-quality biomonitoring and assessing human exposure to environmental chemicals within their jurisdictions. Strengthened laboratory capacity for exposure assessment will help jurisdictions identify and reduce harmful exposures and evaluate the effectiven…</summary>
+  </entry>
+  <entry>
+    <title>Rehabilitation Engineering Research Center on Recreational, Sport, and Exercise Technologies for People with Disabilities</title>
+    <link href="https://www.grants.gov/search-results-detail/363973"/>
+    <id>urn:funding-finder:grants-gov:363973</id>
+    <updated>2027-02-15T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Environmental science"/>
+    <summary>Administration for Community Living | Estimated Application 2027-04-15 | The purpose of the Rehabilitation Engineering Research Centers (RERC) program is to improve the effectiveness of services authorized under the Rehabilitation Act by conducting advanced engineering research on and development of innovative technologies that are designed to solve particular rehabilitation problems or to remove environmental barriers. The purpose of this RERC is to conduct research a…</summary>
+  </entry>
+  <entry>
+    <title>Continuation of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363945"/>
+    <id>urn:funding-finder:grants-gov:363945</id>
+    <updated>2027-02-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-08 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to support the continued operation and expansion of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) through a single U24 cooperative agreement award. The NOFO will be open to all eligible applicants. Established in 2022, the EL DMCC serves as the central hub for NIA’s human l…</summary>
   </entry>
   <entry>
     <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
@@ -68,7 +131,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Data Archives for the BRAIN Initiative</title>
@@ -78,7 +141,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
   </entry>
   <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
@@ -90,7 +153,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
   <entry>
     <title>Partnership with Common Fund Data Ecosystem Resources</title>
@@ -102,7 +165,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
   </entry>
   <entry>
     <title>Maternal and Child Health Encounters Networks (MCHEK)</title>
@@ -113,7 +176,7 @@
     <category term="Agriculture and food"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Environmental science"/>
-    <summary>Health Resources and Services Administration | Closes 2027-03-18 | The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-03-18 | The purpose of this program is to improve maternal and infant outcomes by preventing contact with harmful materials before, during, and after pregnancy. This program aims to improve maternal and infant health outcomes by preventing harmful exposures before, during, and after pregnancy. It supports a national expert-staffed call center that provides timely, evidence-based information and personaliz…</summary>
   </entry>
   <entry>
     <title>NIOSH Exploratory/Developmental Grant Program (R21)</title>
@@ -122,7 +185,7 @@
     <updated>2026-12-16T00:00:00Z</updated>
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-16 | The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives: Identify the risks and conditions linked to workplace health issues. Develop strategies to reduce risks and limit exposure to hazardous environments. Translate significant scientific discoveries into prevention measures and products that can effectivel…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-16 | The R21 grant program is designed to advance our understanding of occupational diseases and injuries by focusing on the following three objectives: Identify the risks and conditions linked to workplace health issues. Develop strategies to reduce risks and limit exposure to hazardous environments. Translate significant scientific discoveries into prevention measures and products that can effectivel…</summary>
   </entry>
   <entry>
     <title>NIOSH National Center of Excellence for the Prevention of Childhood Agricultural Injury (U54)</title>
@@ -133,7 +196,7 @@
     <category term="Agriculture and food"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-03-03 | The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-03-03 | The National Institute for Occupational Safety and Health (NIOSH) is committed to addressing a wide range of occupational health and safety hazards affecting those who work in the agriculture, forestry, and fishing (AgFF) sector. Children and adolescents ("youth") are consistently more likely to be fatally injured working in agriculture compared to other industries. While many steps have been take…</summary>
   </entry>
   <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
@@ -147,7 +210,7 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
   </entry>
   <entry>
     <title>International Research Scientist Development Award (IRSDA)</title>
@@ -157,7 +220,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-02-09 | This initiative will provide salary and research support to advanced U.S. postdoctoral researchers and junior faculty for intensive mentored research and career development activities focused on biomedical, behavioral, and/or clinical research in low- and middle-income countries (LMICs). Proposals will leverage special opportunities not present in the U.S. and result in generalizable knowledge app…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-09 | This initiative will provide salary and research support to advanced U.S. postdoctoral researchers and junior faculty for intensive mentored research and career development activities focused on biomedical, behavioral, and/or clinical research in low- and middle-income countries (LMICs). Proposals will leverage special opportunities not present in the U.S. and result in generalizable knowledge app…</summary>
   </entry>
   <entry>
     <title>Multimodal AI to Accelerate Precision Medicine for Type 1 Diabetes (U01- Clinical Trials Not Allowed)</title>
@@ -168,7 +231,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
   </entry>
   <entry>
     <title>Digital Health Technology and Reciprocal Innovation to Improve Clinical and Public Health Outcomes</title>
@@ -179,7 +242,7 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-02-11 | This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-11 | This initiative will support research on the development, validation, feasibility, and effectiveness of innovative digital health interventions or tools (including mobile health) specifically suited for underserved settings in the U.S. and globally. Research should utilize new or emerging technologies, platforms, systems, and/or analytics to address high priority health problems, expand the eviden…</summary>
   </entry>
   <entry>
     <title>Health and Extreme Weather Research Coordination and Data Center (U2C - Clinical Trial Not Allowed)</title>
@@ -190,7 +253,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
   </entry>
   <entry>
     <title>Health and Extreme Weather Solutions-Focused Research Hubs (U54 - Clinical Trial Optional)</title>
@@ -201,7 +264,7 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose translational research hubs with multiple highly integrated components focused on research, capacity building, and community/public health translation for regionally relevant topics related to the health impacts of extreme weather and cumula…</summary>
   </entry>
   <entry>
     <title>World Trade Center Youth Research Coordinating Center (U54)</title>
@@ -214,7 +277,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
   </entry>
   <entry>
     <title>Ryan White HIV/AIDS Program Part B AIDS Drug Assistance Program Training and Technical Assistance</title>
@@ -224,7 +287,7 @@
     <author><name>Health Resources and Services Administration</name></author>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Health Resources and Services Administration | Closes 2027-01-20 | The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
+    <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
@@ -238,7 +301,17 @@
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>Collaborative Centers in Children’s Environmental Health Research and Translation (P2C Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/363940"/>
+    <id>urn:funding-finder:grants-gov:363940</id>
+    <updated>2026-11-03T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Environmental science"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-03-02 | The overall goal of this NOFO is to solicit applications to create a national network of Children's Environmental Health Research Translation Centers (CEHRT). Through external collaboration with the children's environmental health community, the Centers will protect and improve children's health by developing and testing new scientific questions and public health interventions/strategies with an e…</summary>
   </entry>
   <entry>
     <title>NIOSH Miner Safety and Health Training Program - Western United States - U60</title>
@@ -249,7 +322,7 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
@@ -260,7 +333,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
   </entry>
   <entry>
     <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
@@ -271,7 +344,30 @@
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
+    <title>Easement Restoration and Stewardship</title>
+    <link href="https://www.grants.gov/search-results-detail/363920"/>
+    <id>urn:funding-finder:grants-gov:363920</id>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <author><name>Natural Resources Conservation Service</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Environmental science"/>
+    <category term="Water"/>
+    <summary>Natural Resources Conservation Service | Application 2026-11-19 | The opportunities associated with this NOFO are for lands protected through the Wetland Reserve Easements (WRE) component of the Agricultural Conservation Easement Program (ACEP) and the Floodplain Easement (FPE) component of the Emergency Watershed Protection Program (EWPP). The types of work available through this opportunity fall into three primary categories: 1) restoration of wetland and floo…</summary>
+  </entry>
+  <entry>
+    <title>2026 Diesel Emissions Reduction Act (DERA) National Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363936"/>
+    <id>urn:funding-finder:grants-gov:363936</id>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <author><name>Environmental Protection Agency</name></author>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
+    <summary>Environmental Protection Agency | Application 2027-01-22 | This Notice of Funding Opportunity (NOFO) announces the availability of funds under the Diesel Emissions Reduction Act (DERA) Program and solicits applications from eligible entities to incentivize and accelerate the upgrade or retirement of the nation’s legacy diesel engine fleet. Eligible activities include the retrofit or replacement of existing diesel engines, vehicles, and equipment with the …</summary>
   </entry>
   <entry>
     <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
@@ -283,19 +379,64 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
   </entry>
   <entry>
-    <title>Outreach and Assistance for Veteran Farmers and Ranchers Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363816"/>
-    <id>urn:funding-finder:grants-gov:363816</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
+    <title>Advancing coastal flood protection through public-private partnerships, innovative insurance products, and improved sediment management.</title>
+    <link href="https://www.grants.gov/search-results-detail/363958"/>
+    <id>urn:funding-finder:grants-gov:363958</id>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Arts and culture"/>
     <category term="Environmental science"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-09-10 | The purpose of the OAVFR program, under assistance listing number 10.443, is to assist Veterans in owning and operating farms and ranches and to ensure they are knowledgeable and participating in full range of USDA programs. With OAVFR funding, recipient organizations can provide outreach, technical assistance, and education in agriculture, agribusiness, forestry, and agricultural-related services…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2027-02-12 | verify prerequisite | The purpose of this document is to advise the public that NOAA/NOS/National Centers for Coastal Ocean Science (NCCOS)/Competitive Research Program (CRP) [formerly Center for Sponsored Coastal Ocean Research (CSCOR)/Coastal Ocean Program (COP)], is soliciting proposals for projects that will support state-of-the-art information and products to advance the use of natural infrastructure for coastal f…</summary>
+  </entry>
+  <entry>
+    <title>F26AS00030 Cooperative Endangered Species Conservation Fund: Recovery Land Acquisition Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363856"/>
+    <id>urn:funding-finder:grants-gov:363856</id>
+    <updated>2026-09-14T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Environmental science"/>
+    <summary>Fish and Wildlife Service | Application 2026-11-20 | First awarded in fiscal year (FY) 2001, Recovery Land Acquisition grants promote State and Federal cooperation in listed species conservation by leveraging funds to acquire specific parcels of land, through fee simple or conservation easement, in support of U.S. Fish and Wildlife Service (FWS)-approved recovery plans and outlines. The Endangered Species Act (ESA) conveys the importance of recovery…</summary>
+  </entry>
+  <entry>
+    <title>Aquatic Fauna Response to Ecosystem Restoration in Southwest Florida</title>
+    <link href="https://www.grants.gov/search-results-detail/363854"/>
+    <id>urn:funding-finder:grants-gov:363854</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Fort Worth District</name></author>
+    <category term="Environmental science"/>
+    <summary>Fort Worth District | Application 2026-10-12 | Note: A full study proposal and proposed budget are NOT requested at this time. Project Title: Aquatic Fauna Response to Ecosystem Restoration in Southwest FloridaBrief Description of Anticipated Work: See attached SOO for this information. Period of Performance: The base period of the agreement will extend 12 months from date of award. There may be up to four 12-month Follow-On Periods based on a…</summary>
+  </entry>
+  <entry>
+    <title>Climate Program Office (CPO) FY2026 Earth System Science and Services Partnership</title>
+    <link href="https://www.grants.gov/search-results-detail/363852"/>
+    <id>urn:funding-finder:grants-gov:363852</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>DOC NOAA - ERA Production</name></author>
+    <category term="Environmental science"/>
+    <summary>DOC NOAA - ERA Production | Application 2026-10-26 | The Earth System Science and Services Partnership (ESSSP) supports research, programs, projects and other activities related to NOAA's mission, primarily through collaborations among scientists and professionals in areas of mutual interest associated with understanding and predicting changes in the Earth's atmosphere, oceans, coasts, land, and ice and their interrelated effects on ecosystems, weat…</summary>
+  </entry>
+  <entry>
+    <title>New York State Flexible Energy Technical Analysis</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000Dk3yAAC"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5548</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <summary>NYSERDA | Application 2026-12-31 | Establishes a pool of consulting firms qualified to provide NYSERDA with diverse technical, energy, economic, and environmental analytical capacity, some of which may be requests for support services on short notice.</summary>
+  </entry>
+  <entry>
+    <title>New York School Bus Incentive Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000EMPCAA4"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5552</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA | Application 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
   </entry>
   <entry>
     <title>American Alligators as Ecological Indicators of Everglades Restoration</title>
@@ -304,8 +445,7 @@
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>Fort Worth District</name></author>
     <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Fort Worth District | Closes 2026-10-05 | 1) Note: A full study proposal and proposed budget are NOT requested at this time.2) Project Title: American Alligators as Ecological Indicators of Everglades Restoration.3) Brief Description of Anticipated Work: See Attached SOO for more information.4) Period of Performance: Base period: 12 months from date of award. Follow-on (FO) periods: 4 12-month FO periods.5) Please send responses or direct…</summary>
+    <summary>Fort Worth District | Application 2026-10-05 | 1) Note: A full study proposal and proposed budget are NOT requested at this time.2) Project Title: American Alligators as Ecological Indicators of Everglades Restoration.3) Brief Description of Anticipated Work: See Attached SOO for more information.4) Period of Performance: Base period: 12 months from date of award. Follow-on (FO) periods: 4 12-month FO periods.5) Please send responses or direct…</summary>
   </entry>
   <entry>
     <title>Wading Bird Response to Ecosystem Restoration in Southwest Florida</title>
@@ -314,8 +454,7 @@
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>Fort Worth District</name></author>
     <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Fort Worth District | Closes 2026-10-05 | 1) Note: A full study proposal and proposed budget are NOT requested at this time.2) Project Title: Wading Bird Response to Ecosystem Restoration in Southwest Florida.3) Brief Description of Anticipated Work: See attached SOO for this information.4) Period of Performance: Base period: 12 months from date of award. Follow-on (FO) periods: (4) Four 12-month FO periods. Optional Task 5: Up to 24 mont…</summary>
+    <summary>Fort Worth District | Application 2026-10-05 | 1) Note: A full study proposal and proposed budget are NOT requested at this time.2) Project Title: Wading Bird Response to Ecosystem Restoration in Southwest Florida.3) Brief Description of Anticipated Work: See attached SOO for this information.4) Period of Performance: Base period: 12 months from date of award. Follow-on (FO) periods: (4) Four 12-month FO periods. Optional Task 5: Up to 24 mont…</summary>
   </entry>
   <entry>
     <title>DARRP Restoration Implementation Grants (2026)</title>
@@ -324,7 +463,7 @@
     <updated>2026-09-01T00:00:00Z</updated>
     <author><name>DOC NOAA - ERA Production</name></author>
     <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Closes 2026-11-18 | The principal objective of the Damage Assessment, Remediation and Restoration Program (DARRP) Restoration Implementation Grants is for NOAA to collaborate with non-federal partners to implement marine and coastal habitat restoration and conservation in order to accomplish common goals related to oil spills, hazardous substance releases, and other natural resource damages. Successful applicants wil…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2026-11-18 | The principal objective of the Damage Assessment, Remediation and Restoration Program (DARRP) Restoration Implementation Grants is for NOAA to collaborate with non-federal partners to implement marine and coastal habitat restoration and conservation in order to accomplish common goals related to oil spills, hazardous substance releases, and other natural resource damages. Successful applicants wil…</summary>
   </entry>
   <entry>
     <title>Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)</title>
@@ -335,7 +474,7 @@
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
-    <summary>NASA Headquarters | Closes 2026-12-04 | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
+    <summary>NASA Headquarters | Application 2026-12-04 | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
   </entry>
   <entry>
     <title>Clinical and Translational Science Award</title>
@@ -346,7 +485,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The purpose of the Congressionally mandated Clinical and Translational Science Award (CTSA) Program is to accelerate the translation of scientific discoveries into treatments, diagnostics, and health interventions that improve patient and public health by funding and coordinating a national network of academic medical centers that provide the infrastructure, expertise, training, and collaboration …</summary>
   </entry>
   <entry>
     <title>Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) (R03 Clinical Trial Optional)</title>
@@ -356,7 +495,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2028-07-16 | The goal of the Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) program is to provide support for early-career clinician-scientists trained in medical or surgical specialties to launch careers as future leaders in aging- or geriatric-focused research. In support of the program's goal, this GEMSSTAR Notice of Funding Opportunity (NOFO) invites applications tha…</summary>
+    <summary>National Institutes of Health | Application 2028-07-16 | The goal of the Grants for Early Medical/Surgical Specialists' Transition to Aging Research (GEMSSTAR) program is to provide support for early-career clinician-scientists trained in medical or surgical specialties to launch careers as future leaders in aging- or geriatric-focused research. In support of the program's goal, this GEMSSTAR Notice of Funding Opportunity (NOFO) invites applications tha…</summary>
   </entry>
   <entry>
     <title>NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01 Clinical Trial Not Allowed)</title>
@@ -366,19 +505,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2029-04-17 | The National Institutes of Health seek to advance their mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive DevelopmentSM (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with the respective study obj…</summary>
-  </entry>
-  <entry>
-    <title>U.S-Saudi AI Research Commercialization Accelerator Program (ReCAP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363744"/>
-    <id>urn:funding-finder:grants-gov:363744</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>U.S. Mission to Saudi Arabia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-14 | The U.S. Embassy Riyadh Public Diplomacy Section announces an open competition for organizations to design and implement the U.S.-Saudi AI Research Commercialization Accelerator (ReCAP), a 12-month initiative connecting Saudi Arabia's expanding artificial intelligence innovation ecosystem with the United States' world-leading technology, investment, and commercialization ecosystem. The program wil…</summary>
+    <summary>National Institutes of Health | Application 2029-04-17 | The National Institutes of Health seek to advance their mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive DevelopmentSM (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with the respective study obj…</summary>
   </entry>
   <entry>
     <title>Community Development Block Grant Program for Indian Tribes and Alaska Native Villages</title>
@@ -389,18 +516,7 @@
     <category term="Community development"/>
     <category term="Environmental science"/>
     <category term="Public health"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-11-16 | The primary objective of the Indian Community Development Block Grant (ICDBG) program is the development of viable Indian and Alaska Native communities, including the creation of decent housing, suitable living environments, and economic opportunities primarily for persons of low-and moderate-incomes. See the ICDBG regulations at 24 CFR 1003.2, the full text of which is available at 24 CFR part 10…</summary>
-  </entry>
-  <entry>
-    <title>Equipping Journalists to Counter Anti-American Propaganda</title>
-    <link href="https://www.grants.gov/search-results-detail/363739"/>
-    <id>urn:funding-finder:grants-gov:363739</id>
-    <updated>2026-08-28T00:00:00Z</updated>
-    <author><name>U.S. Mission to Panama</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>U.S. Mission to Panama | Closes 2026-09-13 | The U.S. Department of State’s Embassy Panama announces an open competition to design and implement a program to strengthen Panamanian journalists’ English language proficiency, applied AI skills, and digital media literacy in order to counter disinformation and advance a more informed public discourse. Panama’s media environment faces growing challenges from disinformation and external influence …</summary>
+    <summary>Department of Housing and Urban Development | Estimated Application 2026-11-16 | The primary objective of the Indian Community Development Block Grant (ICDBG) program is the development of viable Indian and Alaska Native communities, including the creation of decent housing, suitable living environments, and economic opportunities primarily for persons of low-and moderate-incomes. See the ICDBG regulations at 24 CFR 1003.2, the full text of which is available at 24 CFR part 10…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps State and National Competitive Grants</title>
@@ -412,20 +528,7 @@
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>AmeriCorps | Closes 2027-01-13 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps grants are awarded to eligible or…</summary>
-  </entry>
-  <entry>
-    <title>Annual Program Statement</title>
-    <link href="https://www.grants.gov/search-results-detail/363723"/>
-    <id>urn:funding-finder:grants-gov:363723</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>U.S. Mission to Zimbabwe</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Zimbabwe | Closes 2026-09-13 | 1. Project Background, Goals, and Objectives The Public Diplomacy Section invites proposals for programs that support one of the following U.S. Embassy priority program areas listed below. Applicants are strongly encouraged to propose collaborative approaches and programs that integrate multiple priority areas. Priority Program Areas/Goals: Applicants may submit a proposal to address one of the pr…</summary>
+    <summary>AmeriCorps | Application 2027-01-13 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps grants are awarded to eligible or…</summary>
   </entry>
   <entry>
     <title>SEFSC Bluefin Tuna Research Program</title>
@@ -435,17 +538,7 @@
     <author><name>DOC NOAA - ERA Production</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Closes 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
-  </entry>
-  <entry>
-    <title>Conservation and Forestry Program Support (2026-2031) for Environmental Natural Resources Management Division, Directorate of Public Works, Joint Readiness Training Center and Fort Polk, Louisiana</title>
-    <link href="https://www.grants.gov/search-results-detail/363721"/>
-    <id>urn:funding-finder:grants-gov:363721</id>
-    <updated>2026-08-26T00:00:00Z</updated>
-    <author><name>Fort Worth District</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Fort Worth District | Closes 2026-09-14 | NOTE: A complete study proposal and proposed budget ARE requested at this time. NOTE: For any Cooperative Agreement entered into in response to this Request for Full Proposal (RFP), a maximum 17.5% indirect cost rate will be paid on work covered by such agreement or any modifications thereto. Unless the agreement specifies otherwise, thebasis of direct costs against which the agreement’s indirect …</summary>
+    <summary>DOC NOAA - ERA Production | Application 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
   </entry>
   <entry>
     <title>FY2026 Implementation of the Quagga and Zebra Mussel Action Plan (QZAP) in the Western United States</title>
@@ -454,7 +547,7 @@
     <updated>2026-08-25T00:00:00Z</updated>
     <author><name>Fish and Wildlife Service</name></author>
     <category term="Environmental science"/>
-    <summary>Fish and Wildlife Service | Closes 2026-10-24 | Quagga and Zebra Mussels are aquatic invasive species that are rapidly expanding their range in the Western United States. Popular recreational reservoirs on or connected to the lower Colorado River are one major source of invasive mussels, which are easily transported via trailered watercraft to areas that have not yet been invaded. This funding opportunity will fund projects in the listed princi…</summary>
+    <summary>Fish and Wildlife Service | Application 2026-10-24 | Quagga and Zebra Mussels are aquatic invasive species that are rapidly expanding their range in the Western United States. Popular recreational reservoirs on or connected to the lower Colorado River are one major source of invasive mussels, which are easily transported via trailered watercraft to areas that have not yet been invaded. This funding opportunity will fund projects in the listed princi…</summary>
   </entry>
   <entry>
     <title>Assisting Specialty Crop Exports: Low Oxygen Storage and Packaging Systems for U.S. Tree Nuts with Phytosanitary Traceability</title>
@@ -464,7 +557,7 @@
     <author><name>Foreign Agricultural Service</name></author>
     <category term="Agriculture and food"/>
     <category term="Environmental science"/>
-    <summary>Foreign Agricultural Service | Closes 2026-10-26 | The occurrence of insects as well as pesticide residuals can be significant barriers for U.S. horticultural exports. Each importing country can have unique phytosanitary and maximum residue limit (MRL) requirements, which creates operational and logistical challenges. To maximize return to growers, U.S. shippers need tools that can universally address all such requirements while maintaining produc…</summary>
+    <summary>Foreign Agricultural Service | Application 2026-10-26 | The occurrence of insects as well as pesticide residuals can be significant barriers for U.S. horticultural exports. Each importing country can have unique phytosanitary and maximum residue limit (MRL) requirements, which creates operational and logistical challenges. To maximize return to growers, U.S. shippers need tools that can universally address all such requirements while maintaining produc…</summary>
   </entry>
   <entry>
     <title>F26AS00071 Cooperative Endangered Species Conservation Fund: Habitat Conservation Plan Land Acquisition Grants</title>
@@ -474,7 +567,7 @@
     <author><name>Fish and Wildlife Service</name></author>
     <category term="Environmental science"/>
     <category term="Cybersecurity"/>
-    <summary>Fish and Wildlife Service | Closes 2026-10-30 | Established by Congress in fiscal year (FY) 1997, the Habitat Conservation Plan (HCP) Land Acquisition Grant program was designed to reduce conflicts between the conservation of listed species and competing land uses on specific parcels of land associated with approved and permitted HCPs. Under this program, the U.S. Fish and Wildlife Service (FWS) provides matching grants to State agencies in sup…</summary>
+    <summary>Fish and Wildlife Service | Application 2026-10-30 | Established by Congress in fiscal year (FY) 1997, the Habitat Conservation Plan (HCP) Land Acquisition Grant program was designed to reduce conflicts between the conservation of listed species and competing land uses on specific parcels of land associated with approved and permitted HCPs. Under this program, the U.S. Fish and Wildlife Service (FWS) provides matching grants to State agencies in sup…</summary>
   </entry>
   <entry>
     <title>National Bycatch Reduction Engineering Program (BREP) - FY2026/27</title>
@@ -483,7 +576,7 @@
     <updated>2026-08-24T00:00:00Z</updated>
     <author><name>DOC NOAA - ERA Production</name></author>
     <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Closes 2027-01-22 | This grant program provides competitive grants to non-Federal researchers working to benefit U.S. fishermen and fisheries, including aquaculture, through the development of improved fishing practices and innovative gear technologies. The Magnuson-Stevens Fishery Conservation and Management Act, as amended (MSA), 16 U.S.C. 1865, requires that NOAA’s conservation and management measures minimize byc…</summary>
+    <summary>DOC NOAA - ERA Production | Preproposal 2026-10-05 | This grant program provides competitive grants to non-Federal researchers working to benefit U.S. fishermen and fisheries, including aquaculture, through the development of improved fishing practices and innovative gear technologies. The Magnuson-Stevens Fishery Conservation and Management Act, as amended (MSA), 16 U.S.C. 1865, requires that NOAA’s conservation and management measures minimize byc…</summary>
   </entry>
   <entry>
     <title>F26AS00105 National Fish Passage Program</title>
@@ -493,7 +586,7 @@
     <author><name>Fish and Wildlife Service</name></author>
     <category term="Energy"/>
     <category term="Environmental science"/>
-    <summary>Fish and Wildlife Service | Closes 2027-04-30 | The National Fish Passage Program (NFPP) provides technical and financial assistance to partners to remove instream barriers and restore aquatic connectivity, improve community safety, and support local economies. Fish passage projects benefit communities by reducing flood risk, improving recreational opportunities, and improving roads while supporting native fish populations and aquatic ecosystem…</summary>
+    <summary>Fish and Wildlife Service | Application 2027-04-30 | The National Fish Passage Program (NFPP) provides technical and financial assistance to partners to remove instream barriers and restore aquatic connectivity, improve community safety, and support local economies. Fish passage projects benefit communities by reducing flood risk, improving recreational opportunities, and improving roads while supporting native fish populations and aquatic ecosystem…</summary>
   </entry>
   <entry>
     <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
@@ -503,30 +596,9 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Environmental science"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
-  </entry>
-  <entry>
-    <title>Naval Base Kitsap-Bremerton Natural Resources Support- Juvenile Salmonid Surveys in Sinclair Inlet, WA</title>
-    <link href="https://www.grants.gov/search-results-detail/363673"/>
-    <id>urn:funding-finder:grants-gov:363673</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>Fort Worth District</name></author>
-    <category term="Environmental science"/>
-    <summary>Fort Worth District | Closes 2026-09-14 | A FULL STUDY PORPOSAL AND PROPOSED BUDGET IS REQUESTEDPROJECT: Naval Base Kitsap-Bremerton Natural Resources Support- Juvenile Salmonid Surveys in Sinclair Inlet, WANOTE: For any Cooperative Agreement entered into in response to this Request for Full Proposal (RFP), a maximum 17.5% indirect cost rate will be paid on work covered by such agreement or any modifications thereto. Unless the agreement …</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Hawaii- Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363672"/>
-    <id>urn:funding-finder:grants-gov:363672</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Closes 2026-09-20 | The USGS is offering a funding opportunity to a CESU partner for research on brown treesnakes (Boiga irregularis) in the Pacific Islands. Brown treesnakes (BTS) have caused the severe decline, extirpation, or extinction of several native terrestrial vertebrate species in Guam. The USGS Pacific Island Ecosystems Research Center (PIERC) has staff on Guam and elsewhere that conduct research on biolog…</summary>
   </entry>
   <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
@@ -540,7 +612,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Transportation"/>
-    <summary>AmeriCorps | Closes 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
+    <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
     <title>Innovative Water Infrastructure Workforce Development Grant</title>
@@ -552,7 +624,7 @@
     <category term="Environmental science"/>
     <category term="Public health"/>
     <category term="Water"/>
-    <summary>Environmental Protection Agency | Closes 2026-10-05 | The U.S. Environmental Protection Agency (EPA) is soliciting applications under the authority of the Safe Drinking Water Act (SDWA) section 1459E to accelerate career pipelines in the water utilities sector and provide access to water utility workforce opportunities. This action advances the Administration’s priorities, including the goals of Make America Healthy Again, by focusing on building the…</summary>
+    <summary>Environmental Protection Agency | Application 2026-10-15 | The U.S. Environmental Protection Agency (EPA) is soliciting applications under the authority of the Safe Drinking Water Act (SDWA) section 1459E to accelerate career pipelines in the water utilities sector and provide access to water utility workforce opportunities. This action advances the Administration’s priorities, including the goals of Make America Healthy Again, by focusing on building the…</summary>
   </entry>
   <entry>
     <title>U.S.-Africa Strategic Investment Program</title>
@@ -561,16 +633,7 @@
     <updated>2026-08-19T00:00:00Z</updated>
     <author><name>Bureau of African Affairs</name></author>
     <category term="Environmental science"/>
-    <summary>Bureau of African Affairs | Closes 2027-05-31 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
-  </entry>
-  <entry>
-    <title>NIDA Core "Center of Transformative Science" Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362314"/>
-    <id>urn:funding-finder:grants-gov:362314</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2026-09-25 | The National Institute on Drug Abuse (NIDA) seeks to advance its mission by supporting Core Center of Transformative Science Grants. These Centers will bring together investigators currently funded by NIH or other Federal or non-Federal sources to enhance and extend existing research relevant to substance use, addiction, and HIV. Centers are expected to transform the scientific field of study by f…</summary>
+    <summary>Bureau of African Affairs | Application 2027-05-31 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
   </entry>
   <entry>
     <title>BJA FY 2026 The Kevin and Avonte Program: Reducing Injury and Death of Missing Individuals with Dementia and Developmental Disabilities</title>
@@ -579,88 +642,6 @@
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>Bureau of Justice Assistance</name></author>
     <category term="Environmental science"/>
-    <summary>Bureau of Justice Assistance | Closes 2026-10-06 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Kevin and Avonte Program: Reducing Injury and Death of Missing Individuals with Dementia and Developmental Disabilities. This opportunity supports public safety efforts to reduce deaths and injuries of individuals with forms of dementia, such as Alzheimer’s disease, or developmental disabilities, such as autism, who, due to their c…</summary>
-  </entry>
-  <entry>
-    <title>Fiscal Year (FY) 2026 Funding Opportunity for Indian Tribes and Intertribal Consortia for Nonpoint Source Management Grants Under Clean Water Act Section 319</title>
-    <link href="https://www.grants.gov/search-results-detail/363611"/>
-    <id>urn:funding-finder:grants-gov:363611</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>Environmental Protection Agency</name></author>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <summary>Environmental Protection Agency | Closes 2026-11-09 | The purpose of this Notice of Funding Opportunity (NOFO) is to support eligible Tribes and intertribal consortia to implement approved Nonpoint Source (NPS) management programs developed pursuant to CWA Section 319(b)(1). The Clean Water Act (CWA) Section 319(h) authorizes the EPA to award grants to eligible Tribes and intertribal consortia to implement approved NPS management programs. This NOFO …</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363614"/>
-    <id>urn:funding-finder:grants-gov:363614</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
-  </entry>
-  <entry>
-    <title>Enhancing and Supporting the Network of American Spaces in Armenia</title>
-    <link href="https://www.grants.gov/search-results-detail/363541"/>
-    <id>urn:funding-finder:grants-gov:363541</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>U.S. Mission to Armenia</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <summary>U.S. Mission to Armenia | Closes 2026-09-10 | The American Spaces network in Armenia is one of the United States’ strongest and most trusted platforms for advancing education, innovation, and people‑to‑people engagement. These Spaces demonstrate American excellence through open, reliable environments and high‑quality programming shaped by U.S. educational and technological leadership. They provide direct access to reliable information, modern…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Californian Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363545"/>
-    <id>urn:funding-finder:grants-gov:363545</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Closes 2026-09-12 | The U.S. Geological Survey's (USGS) Western Fisheries Research Center in partnership with the Grand Canyon Science Center and Wetland and Aquatic Research Center solicits technical assistance from a CESU partner to: a) integrate a novel road network model into an existing invasive quagga and zebra mussel risk assessment model for Washington State; and b) expand that model to establish a standardiz…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363544"/>
-    <id>urn:funding-finder:grants-gov:363544</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Closes 2026-09-12 | The U.S. Geological Survey (USGS) Southwest Biological Science Center (SBSC) is offering a funding opportunity to a CESU partner for research in developing multi-month forecasts of management-relevant rangeland drought forecasts and improve a platform for delivering those forecasts to resource managers across western rangelands. Research Objectives: Wildfire and invasive species are transforming d…</summary>
-  </entry>
-  <entry>
-    <title>2026 National Urban and Community Forestry Challenge Cost Share Grant Program</title>
-    <link href="https://www.grants.gov/search-results-detail/361315"/>
-    <id>urn:funding-finder:grants-gov:361315</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Forest Service | Closes 2026-10-12 | The intent of the National Urban and Community Forestry Challenge Cost Share grant program is to advance solutions to the economic, health, and environmental challenges faced by communities. This year’s program focuses on advancing community tree resource utilization, which can reduce waste and create value by turning wood generated from pruning, removals, storm events, and pest or disease outbrea…</summary>
-  </entry>
-  <entry>
-    <title>Community Forest and Open Space Conservation Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363348"/>
-    <id>urn:funding-finder:grants-gov:363348</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Forest Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Forest Service | Closes 2026-10-13 | The U.S. Department of Agriculture (USDA), Forest Service, State, Private &amp; Tribal Forestry, is requesting applications for the Community Forest and Open Space Conservation Program (Community Forest Program or CFP). CFP is a competitive grant program that provides financial assistance to Indian Tribes, local governments, and qualified conservation non-profit organizations to establish community fo…</summary>
+    <summary>Bureau of Justice Assistance | Application 2026-10-06 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Kevin and Avonte Program: Reducing Injury and Death of Missing Individuals with Dementia and Developmental Disabilities. This opportunity supports public safety efforts to reduce deaths and injuries of individuals with forms of dementia, such as Alzheimer’s disease, or developmental disabilities, such as autism, who, due to their c…</summary>
   </entry>
 </feed>

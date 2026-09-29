@@ -4,18 +4,103 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363899"/>
+    <id>urn:funding-finder:grants-gov:363899</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-09 | Agency Name: Air Force Office of Scientific ResearchDescription: See full announcement in Related Documents folder for detailed descriptions of the SPECIFIC MURI TOPICS.</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363905"/>
+    <id>urn:funding-finder:grants-gov:363905</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-04-09 | Army Research Office (ARO): DoW's MURI program addresses high-risk basic research and attempts to understand or achieve something that has never been done before. The program was initiated 40 years ago and it has regularly produced significant scientific breakthroughs with far reaching consequences to the fields of science, economic growth, and revolutionary new military technologies. Key to the p…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363906"/>
+    <id>urn:funding-finder:grants-gov:363906</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
+  </entry>
+  <entry>
+    <title>The DOE Quantum Genesis Q Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363869"/>
+    <id>urn:funding-finder:grants-gov:363869</id>
+    <updated>2026-09-17T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
+  </entry>
+  <entry>
+    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+  </entry>
+  <entry>
+    <title>Air Force Fiscal Year 2027 Young Investigator Program (YIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363829"/>
+    <id>urn:funding-finder:grants-gov:363829</id>
+    <updated>2026-09-08T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Application 2026-12-04 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR), which will hereafter generally be referred to as “we”, “us”, “our”, or “AFOSR.” The Fiscal Year 2027 Air Force Young Investigator Research Program (YIP) intends to support individual early career scientists and engineers who have received their Ph. D. or equivalent …</summary>
+  </entry>
   <entry>
     <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
     <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-08-23T00:00:00Z</updated>
+    <updated>2026-09-07T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Quantum science"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
@@ -28,7 +113,7 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
-    <summary>Office of Naval Research | Closes 2026-10-30 | The Office of Naval Research Young Investigator Program seeks proposals addressing research areas (as described in the ONR Science and Technology Department section of ONR's website at https://www.onr.navy.mil) which are of interest to ONR Program Officers will be considered. Contact information for each division (a subgroup of an S&amp;T Department) is also listed within the S&amp;T section of the websit…</summary>
+    <summary>Office of Naval Research | Application 2026-10-30 | The Office of Naval Research Young Investigator Program seeks proposals addressing research areas (as described in the ONR Science and Technology Department section of ONR's website at https://www.onr.navy.mil) which are of interest to ONR Program Officers will be considered. Contact information for each division (a subgroup of an S&amp;T Department) is also listed within the S&amp;T section of the websit…</summary>
   </entry>
   <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
@@ -41,7 +126,7 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-02-11 | verify prerequisite | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
@@ -49,10 +134,8 @@
     <id>urn:funding-finder:grants-gov:363613</id>
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <category term="Quantum science"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
@@ -100,6 +183,19 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
+    <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
+    <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>Simons Foundation</name></author>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Simons Foundation | Application 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
+  </entry>
+  <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>
     <link href="https://www.grants.gov/search-results-detail/362681"/>
     <id>urn:funding-finder:grants-gov:362681</id>
@@ -122,13 +218,13 @@
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Separations and membranes"/>
     <category term="Materials science"/>
-    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -137,14 +233,14 @@
     <id>urn:funding-finder:grants-gov:362063</id>
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
@@ -160,7 +256,41 @@
     <category term="Manufacturing"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
-    <summary>Office of Science | Closes 2026-12-17 | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
+    <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
+  </entry>
+  <entry>
+    <title>QBIT Stage A</title>
+    <link href="https://sam.gov/opp/4a1aad28cb2a4b2ab1ee408c639202ef/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260202</id>
+    <updated>2026-03-09T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-11-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) to solicit innovative approaches addressing challenges related to quantum computing. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI is designed to rigorously verify and validate whether…</summary>
+  </entry>
+  <entry>
+    <title>Artificial Intelligence and Cybersecurity Education Innovation and Scholarship for Service (CyberAI SFS)</title>
+    <link href="https://www.grants.gov/search-results-detail/361238"/>
+    <id>urn:funding-finder:grants-gov:361238</id>
+    <updated>2026-02-04T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-04-05 | Government and the nation face a talent shortfall in artificial intelligence (AI) and cybersecurity. The CyberAICorps Scholarship for Service (CyberAI SFS) program welcomes proposals that address AI and cybersecurity education and workforce development. CyberAI refers to using AI in cybersecurity as well as providing security and resilience for AI systems. The Scholarship Track provides funding to…</summary>
+  </entry>
+  <entry>
+    <title>QBI Topic: Independent Verification and Validation</title>
+    <link href="https://sam.gov/workspace/contract/opp/3fc74819705a4a81b205327ba4537973/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260201</id>
+    <updated>2025-11-17T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-12-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) inviting submissions of innovative infrastructure, equipment, and expertise available to provide independent verification and validation. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI …</summary>
   </entry>
   <entry>
     <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
@@ -176,21 +306,52 @@
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+    <summary>Office of Science | Application 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
-    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/360651"/>
-    <id>urn:funding-finder:grants-gov:360651</id>
-    <updated>2025-09-24T00:00:00Z</updated>
-    <author><name>National Institute of Standards and Technology</name></author>
+    <title>Computer and Information Science and Engineering (CISE): Future Computing Research (Future CoRe)</title>
+    <link href="https://www.grants.gov/search-results-detail/360149"/>
+    <id>urn:funding-finder:grants-gov:360149</id>
+    <updated>2025-07-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2027-02-04 | The NSF CISE Directorate supports research and education projects that develop new knowledge in all aspects of computing, communications, and information science and engineering through the following Future Computing Research (Future CoRe) programs: Algorithmic Foundations (AF) program; Communications and Information Foundations (CIF) program; Computer Systems Research (CSR) program; Computing Edu…</summary>
+  </entry>
+  <entry>
+    <title>Security, Privacy, and Trust in Cyberspace</title>
+    <link href="https://www.grants.gov/search-results-detail/357554"/>
+    <id>urn:funding-finder:grants-gov:357554</id>
+    <updated>2024-12-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2026-09-28 | Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
+  </entry>
+  <entry>
+    <title>NSF Scholarships in Science, Technology, Engineering, and Mathematics Program</title>
+    <link href="https://www.grants.gov/search-results-detail/357498"/>
+    <id>urn:funding-finder:grants-gov:357498</id>
+    <updated>2024-12-03T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
     <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institute of Standards and Technology | Closes 2026-09-15 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
+    <summary>U.S. National Science Foundation | Application 2027-03-02 | The main goal of the S-STEM program is to enable academically talented, low-income students to pursue successful careers in promising STEM fields. Ultimately, the S-STEM program seeks to increase the number of academically promising low-income students who graduate with an S-STEM eligible degree and contribute to the American innovation economy with their STEM knowledge. Recognizing that financial…</summary>
   </entry>
   <entry>
     <title>FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology</title>
@@ -204,7 +365,7 @@
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Quantum science"/>
-    <summary>Office of Naval Research | Closes 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
+    <summary>Office of Naval Research | Application 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
   <entry>
     <title>NSF National Quantum Virtual Laboratory - Quantum Testbeds</title>
@@ -214,9 +375,23 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
+    <summary>U.S. National Science Foundation | Application 2027-04-06 | The National Quantum Initiative (NQI) Act1aims to ensure the continuing leadership of the United States (U.S.) in quantum information science and technology. In conformance with the NQI goals, an argument2-5was set forth for a renewed emphasis on identifying and fostering early adoption of quantum technologies to transform the field of Quantum Information Science and Engineering (QISE) and to acce…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Technological Education</title>
+    <link href="https://www.grants.gov/search-results-detail/355100"/>
+    <id>urn:funding-finder:grants-gov:355100</id>
+    <updated>2024-06-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2027-04-06 | The National Quantum Initiative (NQI) Act1aims to ensure the continuing leadership of the United States (U.S.) in quantum information science and technology. In conformance with the NQI goals, an argument2-5was set forth for a renewed emphasis on identifying and fostering early adoption of quantum technologies to transform the field of Quantum Information Science and Engineering (QISE) and to acce…</summary>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
   </entry>
   <entry>
     <title>IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
@@ -231,7 +406,8 @@
     <category term="Manufacturing"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-04-13 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>
@@ -242,12 +418,10 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Closes 2026-12-04 | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-12-04 | verify prerequisite | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
   </entry>
   <entry>
     <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
@@ -263,7 +437,7 @@
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
   </entry>
   <entry>
     <title>Topology</title>
@@ -272,9 +446,7 @@
     <updated>2022-05-20T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-03 | Research supported by the Topology program includes the areas listed below. This is not a comprehensive list. Proposals on other relevant topics will also be considered. Contact the program if you have questions.
+    <summary>U.S. National Science Foundation | Application 2026-11-03 | Research supported by the Topology program includes the areas listed below. This is not a comprehensive list. Proposals on other relevant topics will also be considered. Contact the program if you have questions.
 Target submission date: Proposals should be submitted to MPS Mathematical Sciences Research Programs solicitation. Target date for submissions is the First Tuesday of November.
 While prop…</summary>
   </entry>
@@ -292,7 +464,7 @@ While prop…</summary>
     <category term="Quantum science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2026-10-14 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-10-14 | The Tribal Colleges and Universities Program (TCUP) provides awards to federally recognized1 Tribal Colleges and Universities, Alaska Native-serving institutions, and Native Hawaiian-serving institutions to promote high quality science (including sociology, psychology, anthropology, linguistics, economics and bioeconomics, statistics, and other social and behavioral sciences; natural sciences; com…</summary>
   </entry>
   <entry>
     <title>LPS Qubit Collaboratory (LQC)</title>
@@ -304,7 +476,7 @@ While prop…</summary>
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2027-04-30 | The U.S. Army Research Office (ARO) in partnership with NSA’s Laboratory for Physical Science (LPS) is soliciting Incubator, Collaboration, and Fellowship research proposals for participation in the LPS Qubit Collaboratory (LQC). The mission of the LQC can be captured in three broad goals: 1) pursue disruptive fundamental research and enabling technologies with a focus on qubit development for qua…</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-04-30 | The U.S. Army Research Office (ARO) in partnership with NSA’s Laboratory for Physical Science (LPS) is soliciting Incubator, Collaboration, and Fellowship research proposals for participation in the LPS Qubit Collaboratory (LQC). The mission of the LQC can be captured in three broad goals: 1) pursue disruptive fundamental research and enabling technologies with a focus on qubit development for qua…</summary>
   </entry>
   <entry>
     <title>UNITED STATES MILITARY ACADEMY Broad Agency Announcement</title>
@@ -317,19 +489,6 @@ While prop…</summary>
     <category term="Education and workforce"/>
     <category term="Energy"/>
     <category term="Quantum science"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2027-03-31 | The U.S. Military Academy at West Point's mission is "to educate, train, and inspire the Corps of Cadets so that each graduate is a commissioned leader of character committed to the values of Duty, Honor, Country and prepared for a career of professional excellence and service to the Nation as an officer in the United States Army." The United States Military Academy is located at West Point, New Y…</summary>
-  </entry>
-  <entry>
-    <title>National Facilities</title>
-    <link href="https://www.grants.gov/search-results-detail/275109"/>
-    <id>urn:funding-finder:grants-gov:275109</id>
-    <updated>2015-03-13T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The National Facilities program supports the operation of national user facilities: National Facilities areresearch facilities with specialized instrumentation available to the scientific research community in general and the materials research community in particular. These facilities provide unique research capabilities that can be located at only a few highly specialized laboratories in the Nat…</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-03-31 | The U.S. Military Academy at West Point's mission is "to educate, train, and inspire the Corps of Cadets so that each graduate is a commissioned leader of character committed to the values of Duty, Honor, Country and prepared for a career of professional excellence and service to the Nation as an officer in the United States Army." The United States Military Academy is located at West Point, New Y…</summary>
   </entry>
 </feed>

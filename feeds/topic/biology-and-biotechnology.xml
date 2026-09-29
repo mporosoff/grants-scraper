@@ -4,8 +4,27 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363877"/>
+    <id>urn:funding-finder:grants-gov:363877</id>
+    <updated>2027-12-16T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2028-02-16 | This notice of funding opportunity (NOFO) encourages innovative research to develop, characterize, improve or preserve research models and model related biological materials, and to develop or improve technologies, including new approach methodologies (NAMs), for studies relevant to human health and diseases. This NOFO also seeks projects aimed at improving the identification and control of factor…</summary>
+  </entry>
+  <entry>
+    <title>Technology Development Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363876"/>
+    <id>urn:funding-finder:grants-gov:363876</id>
+    <updated>2027-12-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2028-02-05 | This Technology Development funding opportunity will support technology research projects from proof-of-concept through prototype development. The program will prioritize innovation over feasibility. To maximize impact on future biomedical research, projects must focus on technological advances and should not include tests of biological hypotheses or biomedical aims.</summary>
+  </entry>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362639"/>
@@ -15,7 +34,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+    <summary>National Institutes of Health | Estimated Application 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
   </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
@@ -28,7 +47,28 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+  </entry>
+  <entry>
+    <title>The Role of the Innate Immune System in the Pathogenesis of Type 1 Diabetes</title>
+    <link href="https://www.grants.gov/search-results-detail/363943"/>
+    <id>urn:funding-finder:grants-gov:363943</id>
+    <updated>2027-07-15T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-13 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance the National Institutes of Health (NIH) mission by utilizing Special Statutory Funding Program for Type 1 Diabetes Research funds to support studies focused on the involvement of the innate immune system in the initiation of Type 1 diabetes (T1D). This initiative directly aligns with the first goal of the congressio…</summary>
+  </entry>
+  <entry>
+    <title>R3PEATS Multi-Team Triangulation: Collaborative Cross-Method Approaches to Scientific Discovery (RM1)</title>
+    <link href="https://www.grants.gov/search-results-detail/363850"/>
+    <id>urn:funding-finder:grants-gov:363850</id>
+    <updated>2027-07-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-10-01 | R3PEATS Multi-Team Triangulation supports coordinated teams to investigate a central biomedical research question through complementary methods, model systems, or populations. Projects must identify signal robustness and sources of biological variability while building replication into the research design. This effort is a part of the NIH Common Fund's Rigor, Replicability, &amp; Reproducibility to Pr…</summary>
   </entry>
   <entry>
     <title>Clinical Trials in Organ Transplantation in Children and Adults</title>
@@ -39,7 +79,46 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
+  </entry>
+  <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Experimental and Computational Technology Development (RM1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363860"/>
+    <id>urn:funding-finder:grants-gov:363860</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from standardized human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to issue a Notic…</summary>
+  </entry>
+  <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Genome Characterization Centers (UM1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363858"/>
+    <id>urn:funding-finder:grants-gov:363858</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
+  </entry>
+  <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: National Somatic Mosaicism Commons Data Analysis &amp; Organizational Center (UM1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363859"/>
+    <id>urn:funding-finder:grants-gov:363859</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
+  </entry>
+  <entry>
+    <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Tissue Procurement Center (R24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363857"/>
+    <id>urn:funding-finder:grants-gov:363857</id>
+    <updated>2027-05-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-01 | The purpose of the Somatic Mosaicism across Human Tissues (SMaHT) Network is to advance the discovery of biological processes and disease mechanisms mediated by somatic mutations in human tissues. Since 2023, the program has generated multi-omic somatic mutation datasets from a standardized set of human tissues spanning all three germ layers. Building on the Stage 1 foundation, the NIH intends to …</summary>
   </entry>
   <entry>
     <title>INCLUDE Project: Omics Phenotypes Related to Down Syndrome (X01 Clinical Trial Not Allowed)</title>
@@ -48,7 +127,7 @@
     <updated>2027-04-15T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2027-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to submit samples to NIH INCLUDE Project-supported resources to generate a large volume of integrated genomic and multi-o…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -60,7 +139,27 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+  </entry>
+  <entry>
+    <title>Undiagnosed Diseases Network (UDN) Clinical Networks of Diagnostic Excellence</title>
+    <link href="https://www.grants.gov/search-results-detail/363834"/>
+    <id>urn:funding-finder:grants-gov:363834</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support multiple clinical Networks of Diagnostic Excellence (NODEs) as part of the next phase of the Undiagnosed Diseases Network (UDN). Unlike prior phases, clinical NODEs are expected to function as geographically distributed regional clinical networks rather than single-site centers. Each clinical NODE would establish and lead a regional network built on existing partnerships w…</summary>
+  </entry>
+  <entry>
+    <title>Undiagnosed Diseases Network (UDN) Diagnostic Research Innovation Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363837"/>
+    <id>urn:funding-finder:grants-gov:363837</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a Diagnostic Research Innovation Center (DRIC) for the next phase of the Undiagnosed Diseases Network (UDN). The new Network is expected to include a Clinical and Data Coordinating Center (CDCC), geographically distributed clinical Networks of Diagnostic Excellence (NODEs), the NIH Undiagnosed Diseases Program (UDP), a DRIC, the UDN Foundation, patient advocacy organizatio…</summary>
   </entry>
   <entry>
     <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
@@ -71,7 +170,28 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
+  </entry>
+  <entry>
+    <title>Amyotrophic Lateral Sclerosis (ALS) Intermediate Patient Population Expanded Access (U01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/363926"/>
+    <id>urn:funding-finder:grants-gov:363926</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting the conduct of scientific research utilizing data from intermediate-size patient population expanded access protocols for ALS ("intermediate expanded access protocol for ALS", see Expanded Access Categories for Drugs (Including Biologics)). Eligible intermediate expanded access protocols for ALS should:…</summary>
+  </entry>
+  <entry>
+    <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363874"/>
+    <id>urn:funding-finder:grants-gov:363874</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -81,7 +201,20 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+  </entry>
+  <entry>
+    <title>Continuation of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363945"/>
+    <id>urn:funding-finder:grants-gov:363945</id>
+    <updated>2027-02-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-08 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to support the continued operation and expansion of the Exceptional Longevity Data Management and Coordinating Center (EL DMCC) through a single U24 cooperative agreement award. The NOFO will be open to all eligible applicants. Established in 2022, the EL DMCC serves as the central hub for NIA’s human l…</summary>
   </entry>
   <entry>
     <title>Single Source Competition for Continuation of Understanding and Targeting the Pathophysiology of Youth-Onset Type 2 Diabetes Clinical Centers (U01 Clinical Trial Not Allowed)</title>
@@ -90,7 +223,7 @@
     <updated>2027-02-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2027-03-10 | The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The curren…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-03-10 | The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The curren…</summary>
   </entry>
   <entry>
     <title>A Holistic Approach to Study Non-Addictive Natural Products for Pain Management</title>
@@ -99,7 +232,7 @@
     <updated>2027-02-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Center for Complementary and Integrative Health (NCCIH) intends to publish a Notice of Funding Opportunity (NOFO) to support collaborative interdisciplinary research that advances foundational understanding of non-addictive natural products for chronic pain management through a holistic, system-oriented approach. This initiative aligns with the NIH Helping to End Addiction Long-term (…</summary>
   </entry>
   <entry>
     <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
@@ -111,7 +244,19 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+  </entry>
+  <entry>
+    <title>NIDA Avenir Program: Fundamental Mechanistic Research in Addiction Science</title>
+    <link href="https://www.grants.gov/search-results-detail/363842"/>
+    <id>urn:funding-finder:grants-gov:363842</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-26 | Avenir, the French word for "future," reflects NIDA's commitment to developing the next generation of leaders in addiction science. Since 2015, the Avenir Program has supported exceptionally creative early stage investigators (ESIs) in launching innovative research programs. NIDA is now expanding this program to support bold mechanistic research across a broader range of addiction science, includi…</summary>
   </entry>
   <entry>
     <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
@@ -122,7 +267,7 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Validation of Emerging Technologies for Basic and Clinical Cancer Research (R33 Clinical Trial Not Allowed)</title>
@@ -134,7 +279,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing exploratory research projects focused on further development and validation of emerging technologies for cancer research or clinical care. This NOFO solicits R33 applications where major feasibility gaps for the technology or methodology have been overcome, as demonstrated w…</summary>
   </entry>
   <entry>
     <title>Early-Stage Innovative Technology Development for Basic and Clinical Cancer Research (R61 Clinical Trial Not Allowed)</title>
@@ -146,7 +291,7 @@
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-04 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits grant applications proposing to develop innovative technologies for cancer research or clinical care. The emphasis of this NOFO is on early-stage projects proposing proof-of-concept/pilot studies to test the technical feasibility of the proposed method, tool, assay, platform, or instrument. Well-suited …</summary>
   </entry>
   <entry>
     <title>Childhood Asthma in Urban Settings Clinical Research Network</title>
@@ -157,7 +302,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Childhood Asthma in Urban Settings Clinical Research Network (CAUSE) network. The CAUSE network will support multi-site clinical studies and trials on the prevention and treatment of asthma in economically disadvantaged pediatric populations where disease burden is hi…</summary>
   </entry>
   <entry>
     <title>Bridge2AI Network for AI Health Science</title>
@@ -168,7 +313,16 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-03-01 | The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-03-01 | The purpose of this forecast is to inform the research community that the NIH Common Fund, along with its partner NIH Institutes, Centers, and Offices, is planning to issue a notice of funding opportunity (NOFO) to support the continuation of the Bridge2AI program. Stage 1 of the Bridge2AI program produced unique, large-scale, valuable, and open resource, AI-ready datasets and best practices that …</summary>
+  </entry>
+  <entry>
+    <title>Mechanistic Toxicology of METALS: Metal Exposure, Transport, Action, Localization, and Susceptibility (RP1 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363861"/>
+    <id>urn:funding-finder:grants-gov:363861</id>
+    <updated>2026-12-04T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Estimated Application 2027-01-05 | The purpose of this funding opportunity is to support mechanistic research to understand how exposure to metals and metal-containing compounds alters biological processes relevant to human health. Of particular interest are studies that elucidate the absorption, distribution, transport, cellular trafficking, biological interactions, and mechanisms of action of metals, including mechanisms through …</summary>
   </entry>
   <entry>
     <title>Opportunities for Collaborative Research with the NIH Intramural Research Program (U01 Clinical Trial Optional)</title>
@@ -177,7 +331,7 @@
     <updated>2026-12-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2027-02-05 | The goal of this program is to support collaborative translational research projects aligned with NIH efforts to enhance the translation of basic biological discoveries into clinical applications that improve health. It encourages high quality science demonstrating the potential to result in understanding an important disease process or lead to new therapeutic interventions, diagnostics, or preven…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-05 | The goal of this program is to support collaborative translational research projects aligned with NIH efforts to enhance the translation of basic biological discoveries into clinical applications that improve health. It encourages high quality science demonstrating the potential to result in understanding an important disease process or lead to new therapeutic interventions, diagnostics, or preven…</summary>
   </entry>
   <entry>
     <title>Multimodal AI to Accelerate Precision Medicine for Type 1 Diabetes (U01- Clinical Trials Not Allowed)</title>
@@ -188,7 +342,7 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-10 | Type 1 diabetes (T1D) is a complex disease involving interactions among many different cell types, tissues, organs and biological processes. Genetics, the environment, and lifestyle all play a role in disease development and progression. Over the past two decades, the National Institute of Diabetes and Digestive and Kidney Diseases (NIDDK) has supported major T1D research consortia covering basic,…</summary>
   </entry>
   <entry>
     <title>Research Resource for a National Swine Resource and Research Center (U42 Clinical Trial Not Allowed)</title>
@@ -199,7 +353,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
   </entry>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -210,7 +364,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
   </entry>
   <entry>
     <title>Translational Centers Using Microphysiologic Systems for Infectious Diseases</title>
@@ -221,7 +375,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the development of human microphysiologic systems (MPS) for infectious disease research and the development of therapeutics or biological products. MPS are in vitro platforms composed of cells or tissues maintained in a microenvironment designed to mimic the physiological aspects of in vivo…</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
@@ -235,7 +389,7 @@
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
     <title>Research on the Ethical, Legal and Social Implications (ELSI) of Genomics</title>
@@ -244,7 +398,7 @@
     <updated>2026-11-02T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2027-02-16 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications related to the ethical, legal, and social implications (ELSI) of genomics. Genomics has the potential to improve human health and well-being. Driven by advances in technology and analysis, genomics is being integrated into large swaths of biomedical research and me…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-16 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications related to the ethical, legal, and social implications (ELSI) of genomics. Genomics has the potential to improve human health and well-being. Driven by advances in technology and analysis, genomics is being integrated into large swaths of biomedical research and me…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
@@ -255,7 +409,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-12-07 | The goal of the Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) initiative is to extend the institutional, geographical, and research reach of NIEHS training. This initiative proposes to launch new and innovative environmental health training programs for research-focused predoctoral trainees at institutions that have not had a funded NIEHS T32 during…</summary>
   </entry>
   <entry>
     <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
@@ -266,7 +420,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
   </entry>
   <entry>
     <title>Transformative Technologies for Experimental and Computational RNome Characterization and Functional Analysis</title>
@@ -276,7 +430,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2027-02-15 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-15 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
   <entry>
     <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
@@ -288,7 +442,44 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+  </entry>
+  <entry>
+    <title>NEI Translational Research Program for Therapeutics (R61/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360545"/>
+    <id>urn:funding-finder:grants-gov:360545</id>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2029-11-16 | The purpose of NEI's Translational Research program (TRP) is the rapid and efficient translation of innovative laboratory research findings into therapeutics for use by clinicians to treat visual system diseases or disorders. The TRP will support the product development of biological, pharmaceutical, medical device, and/or combination therapies for any disease or disorder of the visual system. The…</summary>
+  </entry>
+  <entry>
+    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-13 | prerequisite closed | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
+  </entry>
+  <entry>
+    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
     <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
@@ -298,7 +489,7 @@
     <author><name>Centers for Disease Control and Prevention - ERA</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-11-02 | The National Mesothelioma Virtual Bank (NMVB) was established in 2006 to serve as a resource for malignant mesothelioma research. This funding opportunity will advance biomedical research for malignant mesothelioma by adding more biospecimens together with demographic data and clinical data. Examples of biospecimens include fresh frozen tumor and control tissues, paraffin embedded tissues, blood, …</summary>
   </entry>
   <entry>
     <title>The NIA Genetics of Alzheimer's Disease Data Storage Site (NIAGADS)</title>
@@ -310,7 +501,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Community development"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-11-01 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop, operate, and sustain a cloud-based data storage and computing platform that democratizes access to large-scale Alzheimer’s disease (AD) and AD-related dementias (ADRD) genetic and genomic data. The platform must be secure, scalable, and interoperable. The platform wil…</summary>
   </entry>
   <entry>
     <title>The Next Generation of the Clinical and Translational Science Awards Program Trial Innovation Network</title>
@@ -322,7 +513,7 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
   </entry>
   <entry>
     <title>Exploratory Clinical Trial Grants in Arthritis and Musculoskeletal and Skin Diseases</title>
@@ -332,7 +523,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
   </entry>
   <entry>
     <title>Single Source for the Continuation of the Epidemiology of Diabetes Interventions and Complications (EDIC) Study Research Center (Collaborative U01 Clinical Trial Not Allowed)</title>
@@ -342,7 +533,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-11-09 | This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite an application from the eligible organization to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, applications will be peer-reviewed, and only meritorious applications will be considered for funding. Through this NOFO, the National institu…</summary>
+    <summary>National Institutes of Health | Application 2026-11-09 | This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite an application from the eligible organization to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, applications will be peer-reviewed, and only meritorious applications will be considered for funding. Through this NOFO, the National institu…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Integrative Team-Research BRAIN Circuits Program - iBCP (RM1 Clinical Trial Not Allowed)</title>
@@ -352,7 +543,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2028-06-23 | This Notice of Funding Opportunity (NOFO) supports transdisciplinary research teams seeking to develop mechanistic, biologically grounded explanations of how neural circuits and their cellular building blocks give rise to central nervous system (CNS) function. Teams must integrate expertise spanning molecular and cellular through systems neuroscience, with strong collaboration between experimental…</summary>
+    <summary>National Institutes of Health | Application 2028-06-23 | This Notice of Funding Opportunity (NOFO) supports transdisciplinary research teams seeking to develop mechanistic, biologically grounded explanations of how neural circuits and their cellular building blocks give rise to central nervous system (CNS) function. Teams must integrate expertise spanning molecular and cellular through systems neuroscience, with strong collaboration between experimental…</summary>
   </entry>
   <entry>
     <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
@@ -363,7 +554,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
+    <summary>National Institutes of Health | Application 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
   </entry>
   <entry>
     <title>NINDS Efficacy and Exploratory Clinical Trials (UG3/UH3 - Clinical Trial Required)</title>
@@ -374,7 +565,18 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
+    <summary>National Institutes of Health | Application 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
+  </entry>
+  <entry>
+    <title>SHINE</title>
+    <link href="https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250706</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-09 | DSO is issuing a Disruption Opportunity, inviting submissions of innovative basic or applied research concepts in the technical domain of targeted neuroplasticity. | See Program The SHINE Disruption Opportunity aims to precisely and non-invasively target and enhance the brain’s ability to adapt and rewire itself, allowing for more complete recovery after injury. Though the key to the brain’s remar…</summary>
   </entry>
   <entry>
     <title>SEFSC Bluefin Tuna Research Program</title>
@@ -384,17 +586,7 @@
     <author><name>DOC NOAA - ERA Production</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Closes 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Hawaii- Pacific Islands Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363672"/>
-    <id>urn:funding-finder:grants-gov:363672</id>
-    <updated>2026-08-20T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Closes 2026-09-20 | The USGS is offering a funding opportunity to a CESU partner for research on brown treesnakes (Boiga irregularis) in the Pacific Islands. Brown treesnakes (BTS) have caused the severe decline, extirpation, or extinction of several native terrestrial vertebrate species in Guam. The USGS Pacific Island Ecosystems Research Center (PIERC) has staff on Guam and elsewhere that conduct research on biolog…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
   </entry>
   <entry>
     <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
@@ -406,7 +598,7 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
   </entry>
   <entry>
     <title>Centers for Structural Biology of HIV and other Infectious Diseases</title>
@@ -417,7 +609,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-12-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-12-18 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on explo…</summary>
   </entry>
   <entry>
     <title>Ancillary Studies to Ongoing Clinical Projects (RP1 Clinical Trial Not Allowed)</title>
@@ -426,7 +618,7 @@
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2026-10-15 | This Notice of Funding Opportunity (NOFO) solicits applications that propose to conduct time-sensitive ancillary studies in conjunction with privately or publicly funded, active, ongoing clinical projects (parent projects). The parent project can be an interventional clinical trial, or a clinical study such as an observational study, or a disease-specific repository that will be actively collectin…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-15 | This Notice of Funding Opportunity (NOFO) solicits applications that propose to conduct time-sensitive ancillary studies in conjunction with privately or publicly funded, active, ongoing clinical projects (parent projects). The parent project can be an interventional clinical trial, or a clinical study such as an observational study, or a disease-specific repository that will be actively collectin…</summary>
   </entry>
   <entry>
     <title>Core Research in Biological Sciences (BIO Core)</title>
@@ -449,10 +641,9 @@
     <category term="Energy"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
+    <category term="Water"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
@@ -463,224 +654,10 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
+    <category term="Materials science"/>
+    <category term="Technology development"/>
+    <category term="Energy"/>
     <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
-  </entry>
-  <entry>
-    <title>MPS Mathematical Sciences Research Programs (MPS MathSci)</title>
-    <link href="https://www.grants.gov/search-results-detail/363612"/>
-    <id>urn:funding-finder:grants-gov:363612</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Materials science"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in theoretical and applied mathematical sciences. Programs include: Algebra and Number TheoryAnalysisApplied MathematicsCombinatoricsComputational MathematicsFoundationsGeometric AnalysisMathematical BiologyProbabilityStatisticsTopology…</summary>
-  </entry>
-  <entry>
-    <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028504</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <category term="Climate change"/>
-    <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
-supports basic science, ideally with potential translational applications. Examples of current research areas we support include
-immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
-we will not consider for support include Covid-19 relat…</summary>
-  </entry>
-  <entry>
-    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Colorado Plateau Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363544"/>
-    <id>urn:funding-finder:grants-gov:363544</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <summary>Geological Survey | Closes 2026-09-12 | The U.S. Geological Survey (USGS) Southwest Biological Science Center (SBSC) is offering a funding opportunity to a CESU partner for research in developing multi-month forecasts of management-relevant rangeland drought forecasts and improve a platform for delivering those forecasts to resource managers across western rangelands. Research Objectives: Wildfire and invasive species are transforming d…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Alaska Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363537"/>
-    <id>urn:funding-finder:grants-gov:363537</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Space and aeronautics"/>
-    <category term="Water"/>
-    <summary>Geological Survey | Closes 2026-09-11 | This Notice of Funding Opportunity (NOFO) is for a U.S. Geological Survey (USGS) National and Regional Climate Adaptation Science Center (NRCASC) competitive research award to a CESU partner. Projects supported under this cooperative agreement should advance Administration priorities, including, but not limited to, American energy dominance, critical mineral development, water security, infrastruc…</summary>
-  </entry>
-  <entry>
-    <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
-    <link href="https://www.grants.gov/search-results-detail/360906"/>
-    <id>urn:funding-finder:grants-gov:360906</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
-  </entry>
-  <entry>
-    <title>Mechanisms Underlying Olfactory Dysfunction in Aging and Alzheimer’s Disease and Alzheimer’s Disease-Related Dementias</title>
-    <link href="https://www.grants.gov/search-results-detail/360893"/>
-    <id>urn:funding-finder:grants-gov:360893</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA), with the National Institute on Deafness and Other Communication Disorders (NIDCD), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that investigate the mechanisms underlying the association between olfactory decline and aging or Alzheimer's disease (AD) and AD-related dementias (ADRD). Understanding these mechanisms may help …</summary>
-  </entry>
-  <entry>
-    <title>Novel Approaches to Advance Precision Aging and Cognitive Health</title>
-    <link href="https://www.grants.gov/search-results-detail/360910"/>
-    <id>urn:funding-finder:grants-gov:360910</id>
-    <updated>2026-08-06T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
-  </entry>
-  <entry>
-    <title>Emerging Infections Network - Research for Preventing, Detecting, and Managing Travel-associated Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/360199"/>
-    <id>urn:funding-finder:grants-gov:360199</id>
-    <updated>2026-08-03T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <category term="Transportation"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-11-05 | The focus of this notice of funding opportunity (NOFO) is to produce insights into disease detection and prevention strategies, burden, severity, diagnostics, treatment, and outcomes of infectious diseases in international travelers. Timely surveillance and sentinel detection are essential for collecting actionable data. The research should: Address public health questions that improve the speed o…</summary>
-  </entry>
-  <entry>
-    <title>Cellular Senescence Network (SenNet): SenNet Data Coordination and Integration Center (SenNet DCIC) (UM1 Clinical Trials Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361817"/>
-    <id>urn:funding-finder:grants-gov:361817</id>
-    <updated>2026-08-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | The purpose of this Notice of Funding Opportunity (NOFO) is to support the SenNet Data Coordination and Integration Center (SenNet DCIC) as a core component of Stage 2 of the NIH Common Fund Cellular Senescence Network (SenNet). The DCIC will enable timely, high-quality submission, harmonization, integration, and broad dissemination of SenNet-generated data and associated resources by developing a…</summary>
-  </entry>
-  <entry>
-    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Data Coordinating Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360622"/>
-    <id>urn:funding-finder:grants-gov:360622</id>
-    <updated>2026-08-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
-  </entry>
-  <entry>
-    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Genomic Research Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/360621"/>
-    <id>urn:funding-finder:grants-gov:360621</id>
-    <updated>2026-08-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
-  </entry>
-  <entry>
-    <title>Expanding the Therapeutic Pipeline for Treating and Preventing Alzheimer's Disease and Related Dementias: Preclinical Validation and Drug Discovery for Novel Candidate Targets (U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361411"/>
-    <id>urn:funding-finder:grants-gov:361411</id>
-    <updated>2026-07-31T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <summary>National Institutes of Health | Closes 2026-10-05 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research on Alzheimer's disease (AD) and AD-related dementias (ADRD) drug target validation and early-stage drug discovery against novel targets. This NOFO will utilize the U01 activity code. The NOFO will support rigorous preclinical AD/ADRD drug target validation and early-…</summary>
-  </entry>
-  <entry>
-    <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Therapeutic Agent Identification</title>
-    <link href="https://www.grants.gov/search-results-detail/361369"/>
-    <id>urn:funding-finder:grants-gov:361369</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating NIH Institutes/Centers (ICs) seek to support applications to develop in vitro, ex vivo or in vivo assays and conduct screening efforts with the goal of identifying and characterizing potential therapeutic agents for disorder…</summary>
-  </entry>
-  <entry>
-    <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Therapeutic Agent Characterization and Preclinical Efficacy Studies</title>
-    <link href="https://www.grants.gov/search-results-detail/361370"/>
-    <id>urn:funding-finder:grants-gov:361370</id>
-    <updated>2026-07-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bureau of Land Management Invasive and Noxious Plant Management - Bureau wide</title>
-    <link href="https://www.grants.gov/search-results-detail/363335"/>
-    <id>urn:funding-finder:grants-gov:363335</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Public health"/>
-    <summary>Bureau of Land Management | Closes 2026-09-25 | BLM Invasive and Noxious Plant Management Programs work to prevent, detect, inventory, control, and monitor weed populations on public lands. Invasive species cost the public millions of dollars in control and management each year and many invasive plants and noxious weeds are highly competitive and have the ability to permanently degrade our public lands. Noxious weeds and invasive species expans…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Program for Modeling Clinical Transplantation</title>
-    <link href="https://www.grants.gov/search-results-detail/361831"/>
-    <id>urn:funding-finder:grants-gov:361831</id>
-    <updated>2026-07-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-10-09 | The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
-  </entry>
-  <entry>
-    <title>Department of Interior Wildland Fire Service BLM-National Interagency Fire Center (NIFC) Joint Fire Science Program (JFSP)Fire Leaders And Managers, Emerging Scientists (FLAMES)</title>
-    <link href="https://www.grants.gov/search-results-detail/363101"/>
-    <id>urn:funding-finder:grants-gov:363101</id>
-    <updated>2026-07-07T00:00:00Z</updated>
-    <author><name>Bureau of Land Management</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Land Management | Closes 2026-09-17 | The U.S. Wildland Fire Service Joint Fire Science Program (JFSP) is seeking proposals from current master and doctoral students enrolled at colleges or universities within the US in the field of wildland fire and related physical, biological, and social sciences to apply for a Fire Leaders And Managers, Emerging Scientists (FLAMES) award. The purpose of a FLAMES award is to enhance student exposur…</summary>
   </entry>
 </feed>

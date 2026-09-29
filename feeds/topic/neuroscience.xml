@@ -4,8 +4,46 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363841"/>
+    <id>urn:funding-finder:grants-gov:363841</id>
+    <updated>2027-12-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2028-01-25 | The National Institute of Neurological Disorders and Stroke (NINDS) at the National Institutes of Health (NIH) seeks to continue support for the infrastructure of the NIH Stroke Clinical Trials Network (NIH StrokeNet). The NIH StrokeNet conducts clinical trials focused on advancing acute stroke treatment, stroke prevention, and stroke recovery and rehabilitation across the lifespan. Its mission is…</summary>
+  </entry>
+  <entry>
+    <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - Regional Coordinating Stroke Centers (RCCs)</title>
+    <link href="https://www.grants.gov/search-results-detail/363838"/>
+    <id>urn:funding-finder:grants-gov:363838</id>
+    <updated>2027-12-20T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2028-01-25 | The National Institute of Neurological Disorders and Stroke (NINDS) at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the NIH Stroke Clinical Trials Network (NIH StrokeNet). The program will encourage applications for network regional clinical enrollment coordinating centers (RCC's) to support the NIH StrokeNet clinical trial network. The NIH StrokeNet c…</summary>
+  </entry>
+  <entry>
+    <title>Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT) Infrastructure - Clinical Coordinating Center (CCC) &amp; Data Coordinating Center (DCC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363839"/>
+    <id>urn:funding-finder:grants-gov:363839</id>
+    <updated>2027-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-11-01 | The National Institute of Neurological Disorders and Stroke (NINDS), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT). NeuroNEXT conducts clinical trials and biomarker validation studies for neurological disorders in adult and pediatric populations. By offering infrastructure, exper…</summary>
+  </entry>
+  <entry>
+    <title>Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT) Infrastructure - Clinical Research Sites (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363835"/>
+    <id>urn:funding-finder:grants-gov:363835</id>
+    <updated>2027-09-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-11-01 | The National Institute of Neurological Disorders and Stroke (NINDS), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Network for Excellence in Neuroscience Clinical Trials (NeuroNEXT). NeuroNEXT conducts clinical trials and biomarker validation studies for neurological disorders in adult and pediatric populations. By offering infrastructure, exper…</summary>
+  </entry>
   <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
     <link href="https://www.grants.gov/search-results-detail/363210"/>
@@ -17,7 +55,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-10-20 | The Eunice Kennedy Shriver National Institute of Child Health and Human Development seeks to advance its mission of supporting maternal, fetal, and child health by continuing to enhance the understanding of maternal, fetal, and child exposure to nutrients, metabolites, medications, supplements, microbiome-derived products, and environmental chemicals. This will be done by supporting a second phase…</summary>
   </entry>
   <entry>
     <title>Advancing Screening, Diagnosis, and Referral for Late Talking Children</title>
@@ -28,7 +66,18 @@
     <category term="Education and workforce"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-10-15 | The National Institutes of Health (NIH) Tackling Acquisition of Language in Kids (TALK) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit research grant applications to improve the earliest steps in clinical practice for late talking children. The overarching purpose of this funding opportunity is to inform, develop, and evaluate evidence-based practices and implement…</summary>
+  </entry>
+  <entry>
+    <title>Research to Improve Rigor, Replicability, and Reproducibility in Biomedical and Behavioral Sciences</title>
+    <link href="https://www.grants.gov/search-results-detail/363915"/>
+    <id>urn:funding-finder:grants-gov:363915</id>
+    <updated>2027-04-23T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Neurological Disorders and Stroke (NINDS), in collaboration with other National Institutes of Health (NIH) Institutes, Centers, and Offices, intends to support research projects that directly improve or evaluate biomedical and behavioral rigor, replicability, and reproducibility. Example projects include, but are not limited to: Assessing the scientific and behavioral imp…</summary>
   </entry>
   <entry>
     <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
@@ -39,7 +88,28 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-18 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose pre-clinical and early-stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that aim to prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Through the NOFO, NIA is continuing th…</summary>
+  </entry>
+  <entry>
+    <title>Amyotrophic Lateral Sclerosis (ALS) Intermediate Patient Population Expanded Access (U01 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/363926"/>
+    <id>urn:funding-finder:grants-gov:363926</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting the conduct of scientific research utilizing data from intermediate-size patient population expanded access protocols for ALS ("intermediate expanded access protocol for ALS", see Expanded Access Categories for Drugs (Including Biologics)). Eligible intermediate expanded access protocols for ALS should:…</summary>
+  </entry>
+  <entry>
+    <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/363874"/>
+    <id>urn:funding-finder:grants-gov:363874</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of …</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Development and Validation of Novel Tools and New Approaches for Neuroscience Research</title>
@@ -49,7 +119,28 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-10 | The Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research to develop novel tools and approaches that enable the interrogation of cell-specific and circuit-specific processes in the central nervous system. This NOFO consolidates three current BRAIN Initiative tool development pr…</summary>
+  </entry>
+  <entry>
+    <title>Traumatic Brain Injury Model Systems Centers</title>
+    <link href="https://www.grants.gov/search-results-detail/363970"/>
+    <id>urn:funding-finder:grants-gov:363970</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>Administration for Community Living</name></author>
+    <category term="Neuroscience"/>
+    <summary>Administration for Community Living | Estimated Application 2027-04-01 | The TBI Model Systems Centers conduct research that contributes to the development of and access to evidence-based TBI rehabilitation. The TBIMS Centers must generate new knowledge that can be used to improve outcomes of individuals with TBI in one or more domains identified in NIDILRR's Long Range Plan: health and function, community living and participation, and employment. TBIMS Center grants m…</summary>
+  </entry>
+  <entry>
+    <title>NIDA Avenir Program: Fundamental Mechanistic Research in Addiction Science</title>
+    <link href="https://www.grants.gov/search-results-detail/363842"/>
+    <id>urn:funding-finder:grants-gov:363842</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-26 | Avenir, the French word for "future," reflects NIDA's commitment to developing the next generation of leaders in addiction science. Since 2015, the Avenir Program has supported exceptionally creative early stage investigators (ESIs) in launching innovative research programs. NIDA is now expanding this program to support bold mechanistic research across a broader range of addiction science, includi…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Data Archives for the BRAIN Initiative</title>
@@ -59,7 +150,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to develop web-accessible data archives to capture, store, and curate data related to the Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative activities. The data archives teams will work with th…</summary>
   </entry>
   <entry>
     <title>Single Cell Opioid Responses in the Context of HIV (SCORCH) Program: Phase 2</title>
@@ -70,7 +161,7 @@
     <category term="Arts and culture"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-08 | NIDA seeks to further advance its mission in the area of single cell biology. Since 2020, the NIDA-funded Single Cell Opioid Responses in the Context of HIV (SCORCH) consortium has generated single-nucleus datasets from human and animal postmortem brain tissue under conditions of HIV infection, antiretroviral therapy (ART), and/or substance exposure (e.g. opioids, cocaine, methamphetamine, and can…</summary>
   </entry>
   <entry>
     <title>Partnership with Common Fund Data Ecosystem Resources</title>
@@ -82,7 +173,17 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: BRAIN Initiative: Promoting Health for All Through BRAIN Technology Partnerships</title>
+    <link href="https://www.grants.gov/search-results-detail/363848"/>
+    <id>urn:funding-finder:grants-gov:363848</id>
+    <updated>2027-01-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-17 | The Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, a collaboration of Federal and non-Federal partners led by NIH, intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to accelerate the scientific impact and broad research adoption of BRAIN Initiative-relevant neurotechologies at institutions with limited NIH Research Project Grant f…</summary>
   </entry>
   <entry>
     <title>Core State Injury Prevention Program (Core SIPP)</title>
@@ -93,7 +194,7 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <category term="Transportation"/>
-    <summary>Centers for Disease Control - NCIPC | Closes 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
+    <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-03-08 | This forecast is for CDC's Core State Injury Prevention Program (Core SIPP), a cooperative agreement to support public health infrastructure, data, and partnerships to use data to identify potential risk and inform the implementation of strategies to prevent unintentional injury. Actions using the best available evidence are intended to increase protective factors and reduce risk factors for injur…</summary>
   </entry>
   <entry>
     <title>Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN) Infrastructure - Clinical Coordinating Center (CCC) and Data Coordinating Center (DCC)</title>
@@ -102,7 +203,7 @@
     <updated>2027-01-04T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The SIREN Network performs clinical trials that impact the care of individuals with a n…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue support for the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The SIREN Network performs clinical trials that impact the care of individuals with a n…</summary>
   </entry>
   <entry>
     <title>Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN) Infrastructure - Clinical Enrollment Hubs</title>
@@ -111,7 +212,7 @@
     <updated>2027-01-04T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The program will encourage applications for network clinical enrollment hubs to support …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-03-04 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with The National Heart, Lung and Blood Institute (NHLBI), at the National Institutes of Health (NIH) seek to continue to support the Infrastructure for the Strategies to Innovate EmeRgENcy Care Clinical Trials Network (SIREN). The program will encourage applications for network clinical enrollment hubs to support …</summary>
   </entry>
   <entry>
     <title>Continuing Enhanced National Surveillance for Prion Diseases in the United States</title>
@@ -122,7 +223,17 @@
     <category term="Arts and culture"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID | Closes 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
+    <summary>Centers for Disease Control - NCEZID | Estimated Application 2027-03-27 | The CDC announces the availability of FY 2027 funds for a cooperative agreement to continue enhanced national surveillance for human prion diseases, also known as transmissible spongiform encephalopathies (TSEs), in the United States. The purpose is to continue an active surveillance program to help confirm suspected and clinically diagnosed cases of human prion disease and to monitor the occurren…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
+    <link href="https://www.grants.gov/search-results-detail/363840"/>
+    <id>urn:funding-finder:grants-gov:363840</id>
+    <updated>2026-12-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-01-28 | The Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative along with other NIH Institutes and Centers (ICs) intends to publish a Notice of Funding Opportunity (NOFO) to encourage investigators to pursue first-in-human or early-stage clinical studies for recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain. …</summary>
   </entry>
   <entry>
     <title>Establishing a Research Network to Guide Foundational Research on Human Consciousness</title>
@@ -136,7 +247,7 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-02-08 | This Funding Opportunity will establish the NIH Blueprint for Neuroscience Research Network to Guide Foundational Research on Human Consciousness, leveraging a trans-NIH collaboration of 14 Institutes, Centers, and Offices dedicated to reducing the burden of nervous system disorders. Consciousness is central to numerous serious biomedical conditions, including coma, delirium, dementia, traumatic b…</summary>
   </entry>
   <entry>
     <title>World Trade Center Youth Research Coordinating Center (U54)</title>
@@ -149,7 +260,7 @@
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
   </entry>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
@@ -160,7 +271,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
   </entry>
   <entry>
     <title>Clinical Trials and Ancillary Studies Conducted within NIH-Funded Clinical Trial Research Networks (UG3/UH3 - Clinical Trial Required)</title>
@@ -170,7 +281,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks. The program will encourage applications for multi-center clinical trials to be conducted within…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-11-10 | The National Institute of Neurological Disorders and Stroke (NINDS), in conjunction with additional Institutes/Centers (ICs)at the National Institutes of Health seek to support projects proposing Clinical Trials and Ancillary Studies that are conducted within NIH-Funded Clinical Trial Research Networks. The program will encourage applications for multi-center clinical trials to be conducted within…</summary>
   </entry>
   <entry>
     <title>Identify and Evaluate Potential Risk Factors for Amyotrophic Lateral Sclerosis (ALS)</title>
@@ -181,7 +292,29 @@
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Closes 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
+  </entry>
+  <entry>
+    <title>BJA FY 2026 Veterans Treatment Court Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363900"/>
+    <id>urn:funding-finder:grants-gov:363900</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Bureau of Justice Assistance</name></author>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Justice Assistance | Application 2026-10-29 | This is a notice of funding opportunity (NOFO) for the BJA FY2026 Veterans Treatment Court Program. This opportunity supports the implementation and enhancement of veterans’ treatment court (VTC) operations to reduce the use of opioids, stimulants, and other substances, including alcohol, by high-risk/high-need veterans in the criminal justice system. VTCs effectively integrate substance use disor…</summary>
+  </entry>
+  <entry>
+    <title>BJA FY 2026 National Center for Veterans Justice</title>
+    <link href="https://www.grants.gov/search-results-detail/363898"/>
+    <id>urn:funding-finder:grants-gov:363898</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Bureau of Justice Assistance</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 National Center for Veterans Justice. This opportunity will establish a national center to provide specialized support to state, local, and tribal criminal justice agencies; treatment and service providers; courts; corrections systems; and community supervision agencies to effectively support and respond to the needs of veterans ac…</summary>
   </entry>
   <entry>
     <title>Data Coordinating Center for the Aging and Alzheimer’s Disease Mouse Brain Atlas (AD-MBA) (U24 Clinical Trial Not Allowed)</title>
@@ -190,7 +323,7 @@
     <updated>2026-09-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-11-10 | This Notice of Funding Opportunity (NOFO) invites applications proposing a Data Coordinating Center that integrates and disseminates multiscale mouse brain datasets for the aging and Alzheimer's disease (AD) research community. The Data Coordinating Center will establish the Aging and AD Mouse Brain Atlas (AD-MBA), which will serve as a central, unified research resource for multi-omic and connect…</summary>
+    <summary>National Institutes of Health | Application 2026-11-10 | This Notice of Funding Opportunity (NOFO) invites applications proposing a Data Coordinating Center that integrates and disseminates multiscale mouse brain datasets for the aging and Alzheimer's disease (AD) research community. The Data Coordinating Center will establish the Aging and AD Mouse Brain Atlas (AD-MBA), which will serve as a central, unified research resource for multi-omic and connect…</summary>
   </entry>
   <entry>
     <title>Silvio O. Conte Centers for Basic Neuroscience or Translational Mental Health Research (P50 Clinical Trial Optional)</title>
@@ -199,7 +332,7 @@
     <updated>2026-09-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2028-05-25 | This notice of funding opportunity (NOFO) encourages applications for Silvio O. Conte Centers for Basic Neuroscience or Translational Mental Health Research. The National Institute of Mental Health (NIMH) seeks teams of integrative researchers working at different levels of analysis and employing novel, and creative experimental approaches to address high-risk, high-impact questions with the prima…</summary>
+    <summary>National Institutes of Health | Application 2028-05-25 | This notice of funding opportunity (NOFO) encourages applications for Silvio O. Conte Centers for Basic Neuroscience or Translational Mental Health Research. The National Institute of Mental Health (NIMH) seeks teams of integrative researchers working at different levels of analysis and employing novel, and creative experimental approaches to address high-risk, high-impact questions with the prima…</summary>
   </entry>
   <entry>
     <title>NIH Brain Development Cohorts (NBDC) and Population Assessment of Tobacco and Health (PATH) Study Biospecimen Access (X01 Clinical Trial Not Allowed)</title>
@@ -209,7 +342,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2029-04-17 | The National Institutes of Health seek to advance their mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive DevelopmentSM (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with the respective study obj…</summary>
+    <summary>National Institutes of Health | Application 2029-04-17 | The National Institutes of Health seek to advance their mission by providing the scientific community with the opportunity to request access to biospecimens from the Adolescent Brain Cognitive DevelopmentSM (ABCD) Study, the HEALthy Brain and Child Development (HBCD) Study, and the Population Assessment of Tobacco and Health (PATH) Study to conduct research consistent with the respective study obj…</summary>
   </entry>
   <entry>
     <title>Glioblastoma Therapeutics Network (GTN) (U19 Clinical Trial Required)</title>
@@ -220,7 +353,7 @@
     <category term="Cancer"/>
     <category term="Neuroscience"/>
     <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
+    <summary>National Institutes of Health | Application 2026-10-01 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) solicits applications for research on novel therapies for adult glioblastoma (GBM). The goal is to improve the treatment of adult GBM by developing novel effective agents that can cross the blood brain barrier (BBB) and testing them clinically. Successful early-stage trials of new drugs from this NOFO would tran…</summary>
   </entry>
   <entry>
     <title>Exploratory Clinical Neuroscience Research on Substance Use Disorders (R61/R33 Clinical Trial Optional)</title>
@@ -230,7 +363,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2028-06-16 | This notice of funding opportunity (NOFO) uses a R61/R33 Phased Innovation Award activity code to support clinical research applications that are exploratory and developmental in nature and focus on understanding the neurobiological mechanisms underlying substance use disorders (SUD), including fundamental circuitry and behavior relevant to substance use. For projects not requiring a phased resear…</summary>
+    <summary>National Institutes of Health | Application 2028-06-16 | This notice of funding opportunity (NOFO) uses a R61/R33 Phased Innovation Award activity code to support clinical research applications that are exploratory and developmental in nature and focus on understanding the neurobiological mechanisms underlying substance use disorders (SUD), including fundamental circuitry and behavior relevant to substance use. For projects not requiring a phased resear…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Integrative Team-Research BRAIN Circuits Program - iBCP (RM1 Clinical Trial Not Allowed)</title>
@@ -240,7 +373,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2028-06-23 | This Notice of Funding Opportunity (NOFO) supports transdisciplinary research teams seeking to develop mechanistic, biologically grounded explanations of how neural circuits and their cellular building blocks give rise to central nervous system (CNS) function. Teams must integrate expertise spanning molecular and cellular through systems neuroscience, with strong collaboration between experimental…</summary>
+    <summary>National Institutes of Health | Application 2028-06-23 | This Notice of Funding Opportunity (NOFO) supports transdisciplinary research teams seeking to develop mechanistic, biologically grounded explanations of how neural circuits and their cellular building blocks give rise to central nervous system (CNS) function. Teams must integrate expertise spanning molecular and cellular through systems neuroscience, with strong collaboration between experimental…</summary>
   </entry>
   <entry>
     <title>NINDS Efficacy and Exploratory Clinical Trials (UG3/UH3 - Clinical Trial Required)</title>
@@ -251,7 +384,18 @@
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
+    <summary>National Institutes of Health | Application 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
+  </entry>
+  <entry>
+    <title>SHINE</title>
+    <link href="https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250706</id>
+    <updated>2026-08-28T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-09 | DSO is issuing a Disruption Opportunity, inviting submissions of innovative basic or applied research concepts in the technical domain of targeted neuroplasticity. | See Program The SHINE Disruption Opportunity aims to precisely and non-invasively target and enhance the brain’s ability to adapt and rewire itself, allowing for more complete recovery after injury. Though the key to the brain’s remar…</summary>
   </entry>
   <entry>
     <title>BJA FY 2026 Crisis Response Training Program</title>
@@ -262,7 +406,7 @@
     <category term="Education and workforce"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Justice Assistance | Closes 2026-10-05 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Crisis Response Training Program. This opportunity supports state, local, and tribal governments, law enforcement agencies, correctional facilities, probation and parole departments, and sheriffs’ offices in developing, implementing, or expanding crisis response training programs that enhance public safety, officer safety, and oper…</summary>
+    <summary>Bureau of Justice Assistance | Application 2026-10-05 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Crisis Response Training Program. This opportunity supports state, local, and tribal governments, law enforcement agencies, correctional facilities, probation and parole departments, and sheriffs’ offices in developing, implementing, or expanding crisis response training programs that enhance public safety, officer safety, and oper…</summary>
   </entry>
   <entry>
     <title>Impact of Immunotherapies on CNS Outcomes in People with HIV: Potential Benefits, Challenges and Risks</title>
@@ -272,7 +416,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-22 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit biphasic research applications to evaluate the impact of HIV immunotherapies on central nervous system (CNS) outcomes in people with HIV and to identify mechanisms, benefits, and risks associated with their use in the CNS compartment. The primary goal is to generate evidence that inf…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-22 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit biphasic research applications to evaluate the impact of HIV immunotherapies on central nervous system (CNS) outcomes in people with HIV and to identify mechanisms, benefits, and risks associated with their use in the CNS compartment. The primary goal is to generate evidence that inf…</summary>
   </entry>
   <entry>
     <title>Expeditions in Computing (Expeditions)</title>
@@ -283,7 +427,7 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2027-07-27 | The far-reaching impact and rate of innovation in the computer and information science and engineering ﬁelds has been remarkable, generating economic prosperity, and enhancing the quality of life for people. More than a decade ago, the NSF Directorate for Computer and Information Science and Engineering (NSF CISE) established the NSF Expeditions program to provide the NSF CISE research community w…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-07-27 | verify prerequisite | The far-reaching impact and rate of innovation in the computer and information science and engineering ﬁelds has been remarkable, generating economic prosperity, and enhancing the quality of life for people. More than a decade ago, the NSF Directorate for Computer and Information Science and Engineering (NSF CISE) established the NSF Expeditions program to provide the NSF CISE research community w…</summary>
   </entry>
   <entry>
     <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
@@ -297,7 +441,7 @@
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-02-12 | prerequisite closed | The Foundation primarily
 supports basic science, ideally with potential translational applications. Examples of current research areas we support include
 immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
 we will not consider for support include Covid-19 relat…</summary>
@@ -310,7 +454,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-11-15 | The Fogarty International Center, with NINDS, NIMH, NIA, NIEHS, NICHD, NEI, NIDCD, and NCCIH, intends to continue support of neuro-health research through the Global Brain and Nervous System Disorders Research Across the Lifespan program. Awards will catalyze and strengthen collaborative research on the brain and nervous system that leverages the unique scientific contexts of low- and middle-incom…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-11-15 | The Fogarty International Center, with NINDS, NIMH, NIA, NIEHS, NICHD, NEI, NIDCD, and NCCIH, intends to continue support of neuro-health research through the Global Brain and Nervous System Disorders Research Across the Lifespan program. Awards will catalyze and strengthen collaborative research on the brain and nervous system that leverages the unique scientific contexts of low- and middle-incom…</summary>
   </entry>
   <entry>
     <title>NIH Blueprint Initiative: Tools for Germline Gene Editing in the Nervous System</title>
@@ -320,7 +464,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-10-12 | The NIH Blueprint (a consortium of NIH Institutes that support neuroscience research) seeks to advance its mission by supporting the development, optimization, validation, and application of germline and somatic transgenic and gene-editing approaches in experimental systems modeling key features of human brain anatomy, circuitry, cognition, behavior, and lifespan. This initiative will build on the…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-12 | The NIH Blueprint (a consortium of NIH Institutes that support neuroscience research) seeks to advance its mission by supporting the development, optimization, validation, and application of germline and somatic transgenic and gene-editing approaches in experimental systems modeling key features of human brain anatomy, circuitry, cognition, behavior, and lifespan. This initiative will build on the…</summary>
   </entry>
   <entry>
     <title>Illuminating AD/ADRD Genome to Enable Precision Genomic Medicine</title>
@@ -332,7 +476,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose a program that supports integrative, cross-disciplinary projects aimed at scaling up mechanistic studies to understand the genomic underpinnings of the pathogenesis and progression AD/ADRD.The proposed research projects will employ interdisciplinary approaches that i…</summary>
   </entry>
   <entry>
     <title>Novel Approaches to Advance Precision Aging and Cognitive Health</title>
@@ -343,7 +487,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that develop or incorporate novel, cutting-edge study designs/methods/analytic approaches through the use of machine learning, artificial intelligence, and adaptive designs to allow the discovery of health/function profiles at the level of the individual and that could lead to th…</summary>
   </entry>
   <entry>
     <title>Understanding Cerebellar Contributions to Cognitive and Affective Functions in Aging and Alzheimer's Disease/Alzheimer's Disease-Related Dementias</title>
@@ -352,7 +496,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research on the cerebellum’s contributions to cognitive and affective functions in healthy aging as well as in the context of Alzheimer's disease (AD) and Alzheimer's disease related dementias (ADRD). This NOFO seeks studies to address the need for improved understanding of t…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-06 | The National Institute on Aging (NIA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research on the cerebellum’s contributions to cognitive and affective functions in healthy aging as well as in the context of Alzheimer's disease (AD) and Alzheimer's disease related dementias (ADRD). This NOFO seeks studies to address the need for improved understanding of t…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
@@ -364,7 +508,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Data science"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
   </entry>
   <entry>
     <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Therapeutic Agent Identification</title>
@@ -375,7 +519,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating NIH Institutes/Centers (ICs) seek to support applications to develop in vitro, ex vivo or in vivo assays and conduct screening efforts with the goal of identifying and characterizing potential therapeutic agents for disorder…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating NIH Institutes/Centers (ICs) seek to support applications to develop in vitro, ex vivo or in vivo assays and conduct screening efforts with the goal of identifying and characterizing potential therapeutic agents for disorder…</summary>
   </entry>
   <entry>
     <title>Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Therapeutic Agent Characterization and Preclinical Efficacy Studies</title>
@@ -386,17 +530,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
-  </entry>
-  <entry>
-    <title>NextTech: Translational Development of Next-Generation Diagnostic and Therapeutic Devices (R18 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361380"/>
-    <id>urn:funding-finder:grants-gov:361380</id>
-    <updated>2026-07-17T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-09-18 | This Notice of Funding Opportunity (NOFO) is to encourage applications from investigators to advance the development and translation of next-generation technologies to prevent, monitor, diagnose, and treat disorders within the missions of the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) and The Helping to End Addiction Long-term (HEAL) Initiatives. Awarded activities w…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
   </entry>
   <entry>
     <title>Exposomic Contributions to ADRD Pathology and Resilience</title>
@@ -409,7 +543,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Environmental science"/>
     <category term="Health equity"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-05 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-05 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
   </entry>
   <entry>
     <title>HEAL Initiative: Program to Reveal and Evaluate Cells-to-gene Information that Specify Intricacies, Origins and the Nature of (PRECISION) Human Pain Network</title>
@@ -420,7 +554,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-12 | The National Institute of Neurological Disorders and Stroke, in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for comprehensive ‘omics and physiology dataset generation using primary human tissue across the pa…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-12 | The National Institute of Neurological Disorders and Stroke, in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for comprehensive ‘omics and physiology dataset generation using primary human tissue across the pa…</summary>
   </entry>
   <entry>
     <title>Autism Centers of Excellence P50</title>
@@ -431,7 +565,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-11-02 | The Eunice Kennedy Shriver National Institute for Child Health and Human Development (NICHD), with the National Institute on Deafness and Other Communication Disorders (NIDCD), National Institute of Environmental Health Sciences (NIEHS), National Institute of Mental Health (NIMH), and National Institute of Neurological Disorders and Stroke (NINDS), intends to publish a Notice of Funding Opportunit…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-11-02 | The Eunice Kennedy Shriver National Institute for Child Health and Human Development (NICHD), with the National Institute on Deafness and Other Communication Disorders (NIDCD), National Institute of Environmental Health Sciences (NIEHS), National Institute of Mental Health (NIMH), and National Institute of Neurological Disorders and Stroke (NINDS), intends to publish a Notice of Funding Opportunit…</summary>
   </entry>
   <entry>
     <title>Autism Centers of Excellence R01</title>
@@ -442,7 +576,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2026-11-02 | The Eunice Kennedy Shriver National Institute for Child Health and Human Development (NICHD), with the National Institute on Deafness and Other Communication Disorders (NIDCD), National Institute of Environmental Health Sciences (NIEHS), National Institute of Mental Health (NIMH), and National Institute of Neurological Disorders and Stroke (NINDS), intends to publish a Notice of Funding Opportunit…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-11-02 | The Eunice Kennedy Shriver National Institute for Child Health and Human Development (NICHD), with the National Institute on Deafness and Other Communication Disorders (NIDCD), National Institute of Environmental Health Sciences (NIEHS), National Institute of Mental Health (NIMH), and National Institute of Neurological Disorders and Stroke (NINDS), intends to publish a Notice of Funding Opportunit…</summary>
   </entry>
   <entry>
     <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
@@ -453,7 +587,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
   </entry>
   <entry>
     <title>Single Source: Post-Stroke Vascular Contributions to Cognitive Impairment and Dementia (VCID) in the United States (U19 - Clinical Trial Not Allowed)</title>
@@ -462,7 +596,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <updated>2026-06-30T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-09-28 | This is a non-competitive funding opportunity intended to fund a single award. The National Institute of Neurological Disorders and Stroke is announcing its intent to issue a single source cooperative agreement award to Massachusetts General Hospital to support the renewal of the Post-Stroke Vascular Cognitive Impairment &amp; Dementia (VCID) program, an ongoing, multi-site clinical research initiativ…</summary>
+    <summary>National Institutes of Health | Application 2026-09-28 | This is a non-competitive funding opportunity intended to fund a single award. The National Institute of Neurological Disorders and Stroke is announcing its intent to issue a single source cooperative agreement award to Massachusetts General Hospital to support the renewal of the Post-Stroke Vascular Cognitive Impairment &amp; Dementia (VCID) program, an ongoing, multi-site clinical research initiativ…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Brain-Behavior Quantification and Synchronization - Transformative Research on Behavior at the Organismal Level</title>
@@ -472,7 +606,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <author><name>National Institutes of Health</name></author>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-13 | The Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, a collaboration of Federal and non-Federal partners led by NIH, seeks to accelerate development and dissemination of new neurotechnologies, transdisciplinary approaches, and scientific databases to study brain function with unprecedented resolution and scope. The BRAIN Initiative’s Brain Behavior Quantification …</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-13 | The Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, a collaboration of Federal and non-Federal partners led by NIH, seeks to accelerate development and dissemination of new neurotechnologies, transdisciplinary approaches, and scientific databases to study brain function with unprecedented resolution and scope. The BRAIN Initiative’s Brain Behavior Quantification …</summary>
   </entry>
   <entry>
     <title>HEAL Initiative: Optimization of Therapeutic Medical Devices through Team Science Mechanistic Research (RM1)</title>
@@ -484,7 +618,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Biology and biotechnology"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
   </entry>
   <entry>
     <title>Causal Hypotheses on the Oral-Systemic Health Impacts of Human Behaviors among People with Chronic Conditions (U01 Clinical Trial Not Allowed)</title>
@@ -496,7 +630,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Environmental science"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2029-07-05 | This Notice of Funding Opportunity (NOFO) invites applications for innovative research on the factors that cause human behaviors and the oral-systemic health impacts of those behaviors to enhance health, lengthen life, and reduce illness and disability among people with chronic conditions. Causal hypotheses may include biological, biopsychosocial, congenital, environmental, interpersonal, neurolog…</summary>
+    <summary>National Institutes of Health | Application 2029-07-05 | This Notice of Funding Opportunity (NOFO) invites applications for innovative research on the factors that cause human behaviors and the oral-systemic health impacts of those behaviors to enhance health, lengthen life, and reduce illness and disability among people with chronic conditions. Causal hypotheses may include biological, biopsychosocial, congenital, environmental, interpersonal, neurolog…</summary>
   </entry>
   <entry>
     <title>Novel Experiential Technologies Assisting Individual Learning (NExT AI) Hubs (P20 Clinical Trial Optional)</title>
@@ -507,7 +641,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2026-10-02 | This Notice of Funding Opportunity (NOFO) invites exploratory grant applications, hereafter referred to as the Novel Experiential Technologies Assisting Individual learning Hubs or NExT AI Hubs (formerly Learning Disabilities Innovation Hubs), to address the impact of Artificial Intelligence (AI) technologies on developmental outcomes in children diagnosed with or at risk for developing a specific…</summary>
+    <summary>National Institutes of Health | Application 2026-10-02 | This Notice of Funding Opportunity (NOFO) invites exploratory grant applications, hereafter referred to as the Novel Experiential Technologies Assisting Individual learning Hubs or NExT AI Hubs (formerly Learning Disabilities Innovation Hubs), to address the impact of Artificial Intelligence (AI) technologies on developmental outcomes in children diagnosed with or at risk for developing a specific…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative Connectivity across Scales (BRAIN CONNECTS): Specialized Projects for Scalable Technologies (U01 Clinical Trial Not Allowed)</title>
@@ -516,145 +650,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <updated>2026-05-28T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-10-04 | This funding announcement, issued by the Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, seeks transformative, cutting-edge, and innovative research that embraces new technologies, ideas, and approaches to understand brain circuit function and contributions to behavior. It is a component of the BRAIN Initiative Connectivity Across Scales (BRAIN CONNECTS) Program,…</summary>
-  </entry>
-  <entry>
-    <title>DoW Traumatic Brain Injury and Psychological Health, Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362187"/>
-    <id>urn:funding-finder:grants-gov:362187</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-15 | Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Clinical Trial Award (CTA) intends to support clinical trials with the potential to have a significant impact on psychological health conditions and/or traumatic brain injury (TBI) through clinical applications, including health care products, technologies and/or practice guidelines. Dis…</summary>
-  </entry>
-  <entry>
-    <title>DoW Traumatic Brain Injury and Psychological Health, Health Services Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362271"/>
-    <id>urn:funding-finder:grants-gov:362271</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Data science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-15 | Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Health Services Research Award (HSRA) intends to fund high-impact research that bridges the gap between research, practice and policy by building real-world evidence on how interventions, clinical practices/guidelines, or policies can be deployed to targeted populations at the appropriat…</summary>
-  </entry>
-  <entry>
-    <title>DoW Traumatic Brain Injury and Psychological Health, Translational Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362272"/>
-    <id>urn:funding-finder:grants-gov:362272</id>
-    <updated>2026-05-21T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Closes 2026-10-15 | Summary: The Translational Research Award (TRA) intends to accelerate the conversion of scientific findings into impactful clinical applications. The TRA prioritizes innovative approaches over purely iterative or incremental research. Submissions focusing on minor modifications to existing standards without the intent or potential to significantly improve clinical care or patient outcomes do not m…</summary>
-  </entry>
-  <entry>
-    <title>Centers without Walls for mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD)</title>
-    <link href="https://www.grants.gov/search-results-detail/361452"/>
-    <id>urn:funding-finder:grants-gov:361452</id>
-    <updated>2026-05-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects to elucidate mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD) organized as a “Center without Walls” consortium. NINDS Centers without Walls are collaborative research networks that bring together diverse expertise from different institutions to …</summary>
-  </entry>
-  <entry>
-    <title>Functional Target Validation for Alzheimer's Disease-Related Dementias</title>
-    <link href="https://www.grants.gov/search-results-detail/361450"/>
-    <id>urn:funding-finder:grants-gov:361450</id>
-    <updated>2026-05-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Transportation"/>
-    <summary>National Institutes of Health | Closes 2026-11-06 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects that propose comprehensive functional validation of newly identified therapeutic target candidates for Alzheimer’s Disease-Related Dementias (ADRD). A major barrier to the development of effective treatments for ADRD, as well as other complex central nervous system disorders,…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Exploratory Research Opportunities Using Invasive Neural Recording and Stimulating Technologies in the Human Brain (R61 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359649"/>
-    <id>urn:funding-finder:grants-gov:359649</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-02-11 | Invasive surgical procedures in humans offer the unique opportunity to intracranially record and stimulate neuronal activity within precisely localized brain structures, enabling high-impact human neuroscience investigations. This NOFO seeks exploratory research projects, from newly formed or established multi-disciplinary teams, to understand how dynamic activity of single cells and ensembles of …</summary>
-  </entry>
-  <entry>
-    <title>Discovery of in vivo Chemical Probes for the Nervous System (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360676"/>
-    <id>urn:funding-finder:grants-gov:360676</id>
-    <updated>2026-05-04T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-03-05 | The purpose of this Notice of Funding Opportunity (NOFO) is to support investigators who have the interest and capability to join efforts for the discovery of in vivo chemical probes for novel brain targets. It is expected that applicants will have, in hand, the starting compounds (validated hits) for chemical optimization and bioassays for testing new analog compounds. Through this NOFO, NIH wish…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Integrative Management of Chronic Pain and Opioid Use Disorder (OUD) for Whole Recovery: Health Systems</title>
-    <link href="https://www.grants.gov/search-results-detail/360048"/>
-    <id>urn:funding-finder:grants-gov:360048</id>
-    <updated>2026-04-20T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-11-02 | Forty to sixty percent of individuals with opioid use disorder (OUD) have co-occurring chronic pain (CP), which impacts their ability to fully engage in treatment. Effective management of both conditions is hindered by siloed medical disciplines and health systems. HEAL Integrative Management of Chronic Pain and OUD for Whole Recovery (IMPOWR) was funded in FY21 to support 11 unique clinical trial…</summary>
-  </entry>
-  <entry>
-    <title>HEAL Initiative: Integrative Management of chronic Pain and OUD for Whole Recovery (IMPOWR) - Building Engagement, Assistance, Capacity, Outreach, and Networks (BEACON) Center</title>
-    <link href="https://www.grants.gov/search-results-detail/360366"/>
-    <id>urn:funding-finder:grants-gov:360366</id>
-    <updated>2026-04-20T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-11-02 | 40-75% percent of individuals with opioid use disorder (OUD) have co-occurring chronic pain (CP), which impacts their ability to fully engage in treatment. Effective management of both conditions is hindered by siloed medical disciplines and health systems. HEAL Integrative Management of Chronic Pain and OUD for Whole Recovery (IMPOWR) was funded in FY21 to test novel interventions for the managem…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Research Resource Grants for Technology Integration and Dissemination (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/358859"/>
-    <id>urn:funding-finder:grants-gov:358859</id>
-    <updated>2026-02-09T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2028-10-06 | This notice of funding opportunity (NOFO) supports efforts to disseminate resources for integration into neuroscience research practice. The resource(s) should be relevant to the goals of the BRAIN Initiative as outlined in the "BRAIN 2025: A Scientific Vision" and "The BRAIN Initiative 2.0: From Cells to Circuits, Toward Cures" and shared broadly to the neuroscience community. The resource(s) sho…</summary>
-  </entry>
-  <entry>
-    <title>Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12</title>
-    <link href="https://www.grants.gov/search-results-detail/361008"/>
-    <id>urn:funding-finder:grants-gov:361008</id>
-    <updated>2025-12-12T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Posted | The Collaboratory to Advance Mathematics Education and Learning (CAMEL) for K-12 initiative aims to advance mathematics learning and education through purposeful collaboration that draws on the interdisciplinary Science of Learning (including neuroscience; cognitive, developmental, and social sciences; computer science; machine learning; engineering; and education research), deep experiences in ed…</summary>
-  </entry>
-  <entry>
-    <title>Mind and Body Interventions to Restore Whole Person Health via Emotional Well-Being Mechanisms (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/359155"/>
-    <id>urn:funding-finder:grants-gov:359155</id>
-    <updated>2025-09-26T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-06-07 | The National Center for Complementary and Integrative Health (NCCIH) announces this Notice of Funding Opportunity (NOFO) to solicit applications for research on how mind and body interventions through psychological and/or physical inputs (e.g., mindfulness meditation, yoga, acupuncture, massage, and other brain and/or body based interventions) impact mechanisms of emotional well-being (EWB) and th…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Theories, Models and Methods for Analysis of Complex Data from the Brain (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359068"/>
-    <id>urn:funding-finder:grants-gov:359068</id>
-    <updated>2025-09-16T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2027-11-08 | The Theories, Models and Methods (TMM) initiative will support the development of computational tools for understanding dynamic brain circuits that are made broadly accessible to the greater research community. This program supports applications focused on tool building and dissemination in the domain of theories about neural circuit mechanisms, models of circuit structure and function, and/or com…</summary>
+    <summary>National Institutes of Health | Application 2027-10-04 | This funding announcement, issued by the Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, seeks transformative, cutting-edge, and innovative research that embraces new technologies, ideas, and approaches to understand brain circuit function and contributions to behavior. It is a component of the BRAIN Initiative Connectivity Across Scales (BRAIN CONNECTS) Program,…</summary>
   </entry>
 </feed>

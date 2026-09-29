@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -15,7 +15,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
+    <summary>National Institutes of Health | Estimated Application 2028-02-01 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to establish an ancient DNA for Modern Genomics (aDMG) program. The goal of aDMG is to establish an ethical resource of ancient and historical human DNA (aDNA) data to advance studies about contemporary human traits and biology. This NOFO aims to solicit applicatio…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -27,7 +27,31 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-11 | NCI intends to release a Notice of Funding Opportunity (NOFO) that serves to continue the advancement and sustainment of informatics tools, software, and research resources that enable the acquisition, management, analysis, visualization, and interpretation of data across the cancer research continuum, including cancer biology, diagnosis and treatment, early detection, risk assessment and preventi…</summary>
+  </entry>
+  <entry>
+    <title>Undiagnosed Diseases Network (UDN) Clinical and Data Coordinating Center</title>
+    <link href="https://www.grants.gov/search-results-detail/363836"/>
+    <id>urn:funding-finder:grants-gov:363836</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a new phase of the Undiagnosed Diseases Network (UDN) to advance diagnosis for individuals with previously undiagnosed diseases and undiagnosed diseases research. This phase would emphasize participant and family engagement, provider engagement, use of NIH and non-NIH resources, education, community engagement, research innovation and discovery, and broader implementation …</summary>
+  </entry>
+  <entry>
+    <title>Immune Drivers of Autoimmune Disease</title>
+    <link href="https://www.grants.gov/search-results-detail/363942"/>
+    <id>urn:funding-finder:grants-gov:363942</id>
+    <updated>2027-02-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-11 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Immune Drivers of Autoimmune Disease (IDAD) network. This network aims to understand the earliest steps and triggers leading to autoimmunity and flare in humans, with the vision of ultimately preventing autoimmune disease. Priorities include discovering pre-clinical i…</summary>
   </entry>
   <entry>
     <title>Maternal-Child Surveillance and Partnerships for Action, Results, and Knowledge</title>
@@ -37,7 +61,7 @@
     <author><name>Centers for Disease Control - NCBDDD</name></author>
     <category term="Data science"/>
     <category term="Public health"/>
-    <summary>Centers for Disease Control - NCBDDD | Closes 2027-04-26 | CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
+    <summary>Centers for Disease Control - NCBDDD | Estimated Application 2027-04-26 | CDC proposes to allocate funds to implement Notice of Funding Opportunity (NOFO) DD-27-0028, Maternal Child Surveillance and Partnerships for Action, Results, and Knowledge. This NOFO will integrate maternal child health surveillance with national partnership activities to address key public health challenges including alcohol use during pregnancy, fetal alcohol spectrum disorders (FASDs), neonata…</summary>
   </entry>
   <entry>
     <title>AIDS Research Center on Mental Health and HIV/AIDS (P30 Clinical Trial Optional)</title>
@@ -48,7 +72,7 @@
     <category term="Data science"/>
     <category term="Social and behavioral sciences"/>
     <category term="Technology development"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Institute of Mental Health (NIMH) seeks research applications to support the NIMH HIV/AIDS Research Centers (ARC) program, including Developmental Centers (D-ARCs) and full AIDS Research Centers (ARCs). These Research Centers aim to capitalize on the coordinated infrastructure to advance high-impact, interdisciplinary HIV/AIDS research. The ARC program supports innovative research acr…</summary>
   </entry>
   <entry>
     <title>Limited Competition: The NHGRI Analysis, Visualization, and Informatics Lab-space (AnVIL) (U54 Clinical Trial Not Allowed)</title>
@@ -60,7 +84,19 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-25 | The National Human Genome Research Institute (NHGRI) intends to issue a Notice of Funding Opportunity (NOFO) to support a limited competition renewal of the Analysis, Visualization, and Informatics Lab-space (AnVIL) program. AnVIL is a secure, cloud-based platform that enables researchers to access, share, and analyze large-scale genomic datasets without relying on local infrastructure. Currently,…</summary>
+  </entry>
+  <entry>
+    <title>NIDA Avenir Program: Fundamental Mechanistic Research in Addiction Science</title>
+    <link href="https://www.grants.gov/search-results-detail/363842"/>
+    <id>urn:funding-finder:grants-gov:363842</id>
+    <updated>2027-02-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-05-26 | Avenir, the French word for "future," reflects NIDA's commitment to developing the next generation of leaders in addiction science. Since 2015, the Avenir Program has supported exceptionally creative early stage investigators (ESIs) in launching innovative research programs. NIDA is now expanding this program to support bold mechanistic research across a broader range of addiction science, includi…</summary>
   </entry>
   <entry>
     <title>Advanced Laboratories for Accelerating the Reach and Impact of Treatments for Youth and Adults with Mental Illness (ALACRITY) Research Centers</title>
@@ -72,7 +108,7 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-05-27 | The National Institute of Mental Health (NIMH) intends to publish a notice of funding opportunity (NOFO) to solicit research applications for practice-based research centers to support interdisciplinary teams of mental health researchers to engage in high-impact studies that will significantly advance clinical practice and generate knowledge to fuel the transformation of mental health care in the …</summary>
   </entry>
   <entry>
     <title>Health and Extreme Weather Research Coordination and Data Center (U2C - Clinical Trial Not Allowed)</title>
@@ -83,7 +119,7 @@
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
   </entry>
   <entry>
     <title>Precision and Systems Biology to Uncover the Link Between Chronic and Infectious Diseases</title>
@@ -97,7 +133,7 @@
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <category term="Public health"/>
-    <summary>National Institutes of Health | Closes 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
   </entry>
   <entry>
     <title>Restoring Joint Health and Function to Reduce Pain (RE-JOIN) 2.0</title>
@@ -106,7 +142,7 @@
     <updated>2026-10-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Data science"/>
-    <summary>National Institutes of Health | Closes 2026-12-01 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-12-01 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS), in conjunction with other NIH Institutes and Centers (ICs) as a part of the congressionally mandated NIH Helping to End Addiction Long Term (HEAL) initiative intends to publish a Notice of Funding Opportunity (NOFO) to leverage and accelerate the progress achieved in the Restoring Joint Health and Function to Reduce…</summary>
   </entry>
   <entry>
     <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
@@ -118,7 +154,194 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Environmental science"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | The National Human Genome Research Institute (NHGRI), with other NIH Institutes and Centers (ICs) National Cancer Institute (NCI) and National Institute of Environmental Health Sciences (NIEHS), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to facilitate genomic research and the dissemination of its products, NHGRI proposes this RFA to support both new and exist…</summary>
+  </entry>
+  <entry>
+    <title>OJJDP FY 2026 Strengthening Internet Crimes Against Children (ICAC) Technological Investigative Capacity</title>
+    <link href="https://www.grants.gov/search-results-detail/363910"/>
+    <id>urn:funding-finder:grants-gov:363910</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Office of Juvenile Justice Delinquency Prevention</name></author>
+    <category term="Education and workforce"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Office of Juvenile Justice Delinquency Prevention | Application 2026-10-29 | This is a notice of funding opportunity (NOFO) for the OJJDP FY 2026 Strengthening Internet Crimes Against Children (ICAC)Technological Investigative Capacity program. This opportunity will increase the technological investigative capacity and associated training of ICAC task force personnel nationwide through the development, refinement, and advancement of widely used investigative tools, methods…</summary>
+  </entry>
+  <entry>
+    <title>BJA FY 2026 Rural Violent Crime Reduction Initiative</title>
+    <link href="https://www.grants.gov/search-results-detail/363907"/>
+    <id>urn:funding-finder:grants-gov:363907</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Bureau of Justice Assistance</name></author>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <category term="Transportation"/>
+    <summary>Bureau of Justice Assistance | Application 2026-10-30 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Rural Violent Crime Reduction Initiative. This opportunity supports local law enforcement in rural jurisdictions to prevent, respond to, and reduce violent crime. The goal is to equip rural law enforcement agencies and prosecutors’ offices with the resources necessary to implement a violent crime reduction strategy to solve a speci…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363899"/>
+    <id>urn:funding-finder:grants-gov:363899</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-09 | Agency Name: Air Force Office of Scientific ResearchDescription: See full announcement in Related Documents folder for detailed descriptions of the SPECIFIC MURI TOPICS.</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363905"/>
+    <id>urn:funding-finder:grants-gov:363905</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-04-09 | Army Research Office (ARO): DoW's MURI program addresses high-risk basic research and attempts to understand or achieve something that has never been done before. The program was initiated 40 years ago and it has regularly produced significant scientific breakthroughs with far reaching consequences to the fields of science, economic growth, and revolutionary new military technologies. Key to the p…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363906"/>
+    <id>urn:funding-finder:grants-gov:363906</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
+  </entry>
+  <entry>
+    <title>The DOE Quantum Genesis Q Competition</title>
+    <link href="https://www.grants.gov/search-results-detail/363869"/>
+    <id>urn:funding-finder:grants-gov:363869</id>
+    <updated>2026-09-17T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Energy"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Office of Science | Application 2026-10-19 | The Department of Energy (DOE) recently announced the establishment of the Quantum Genesis initiative to develop and deploy the world’s first fault-tolerant, scientifically relevant quantum computing (SRQC) capability for research and development. The Department seeks to realize this bold ambition through the Quantum Genesis Q Competition (herein, the Q Competition), a first of its kind effort to …</summary>
+  </entry>
+  <entry>
+    <title>Comprehensive Organ System Modeling in Outer Space (COSMOS)</title>
+    <link href="https://arpa-h.gov/explore-funding/initiatives-and-sprints/cosmos"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Acosmos</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-07 | Current ARPA-H initiative. COSMOS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); w…</summary>
+  </entry>
+  <entry>
+    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-13 | prerequisite closed | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
+  </entry>
+  <entry>
+    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Materials science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
+  </entry>
+  <entry>
+    <title>Emerging Health Innovators (EHI)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/ehi"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aehi</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Technology development"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. EHI | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window.…</summary>
+  </entry>
+  <entry>
+    <title>Air Force Fiscal Year 2027 Young Investigator Program (YIP)</title>
+    <link href="https://www.grants.gov/search-results-detail/363829"/>
+    <id>urn:funding-finder:grants-gov:363829</id>
+    <updated>2026-09-08T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Application 2026-12-04 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR), which will hereafter generally be referred to as “we”, “us”, “our”, or “AFOSR.” The Fiscal Year 2027 Air Force Young Investigator Research Program (YIP) intends to support individual early career scientists and engineers who have received their Ph. D. or equivalent …</summary>
+  </entry>
+  <entry>
+    <title>NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
+    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A24-569</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-09</summary>
+  </entry>
+  <entry>
+    <title>NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512</title>
+    <link href="https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-512</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-04</summary>
+  </entry>
+  <entry>
+    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
+    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
+with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
+scale, …</summary>
+  </entry>
+  <entry>
+    <title>Directorate of Engineering</title>
+    <link href="https://www.nsf.gov/funding/opportunities/eccs-engineering-eng-electrical-communications-computing-systems"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A26-514</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
@@ -127,20 +350,9 @@
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
-  </entry>
-  <entry>
-    <title>NSF Research in the Formation of Engineers program</title>
-    <link href="https://www.nsf.gov/funding/opportunities/rfe-research-formation-engineers"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4cc1ac2aa40787d</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+    <summary>Simons Foundation | Application 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
   </entry>
   <entry>
     <title>1890 Institution Teaching, Research, and Extension Capacity Building Grants Program</title>
@@ -152,7 +364,7 @@
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-11-04 | The 1890 CBG program, under Assistance Listing Number 10.216 is designed specifically to build the institutional teaching, research, and extension capacities of the eligible institutions through cooperative programs with Federal and non-Federal entities. The 1890 CBG Program supports Executive Order 14283, “White House Initiative to Promote Excellence and Innovation at Historically Black Colleges …</summary>
+    <summary>National Institute of Food and Agriculture | Application 2026-11-04 | The 1890 CBG program, under Assistance Listing Number 10.216 is designed specifically to build the institutional teaching, research, and extension capacities of the eligible institutions through cooperative programs with Federal and non-Federal entities. The 1890 CBG Program supports Executive Order 14283, “White House Initiative to Promote Excellence and Innovation at Historically Black Colleges …</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Extension Program Special Emphasis</title>
@@ -166,7 +378,19 @@
     <category term="Public health"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-11-02 | The TCEP-SE under assistance listing 10.517, provides informal, community-focused extension pilot projects at 1994 Institutions. Pilot projects may focus on community needs that address emerging issues such as agricultural productivity, improving food systems, community vitality, workforce and economic development, public health and well-being, engaging Tribal youths, and preparing the next genera…</summary>
+    <summary>National Institute of Food and Agriculture | Application 2026-11-02 | The TCEP-SE under assistance listing 10.517, provides informal, community-focused extension pilot projects at 1994 Institutions. Pilot projects may focus on community needs that address emerging issues such as agricultural productivity, improving food systems, community vitality, workforce and economic development, public health and well-being, engaging Tribal youths, and preparing the next genera…</summary>
+  </entry>
+  <entry>
+    <title>PFE: Research Initiation in Engineering Formation (PFE: RIEF)</title>
+    <link href="https://www.grants.gov/search-results-detail/363764"/>
+    <id>urn:funding-finder:grants-gov:363764</id>
+    <updated>2026-09-01T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2026-11-10 | The PFE: Research Initiation in Engineering Formation (PFE: RIEF) program has two goals: 1) Support research in the Professional Formation of Engineers (PFE), and 2) Increase the community of researchers conducting PFE research. PIs are expected to have little or no experience conducting social science or education research. PFE: RIEF is not intended for established researchers in engineering educ…</summary>
   </entry>
   <entry>
     <title>21st Century Museum Professionals Program (2027)</title>
@@ -178,7 +402,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | The 21st Century Museum Professionals (21MP) grant program supports projects that build career pathways, strengthen professional networks, and identify and share effective workforce education and training practices in the museum field.</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The 21st Century Museum Professionals (21MP) grant program supports projects that build career pathways, strengthen professional networks, and identify and share effective workforce education and training practices in the museum field.</summary>
   </entry>
   <entry>
     <title>Inspire Grants for Small Museums (2027)</title>
@@ -190,7 +414,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | Inspire Grants for Small Museums (Inspire) is a special initiative of the Museums for America grant program designed to support small museums of all disciplines, including small rural or small remote institutions and small museums that have not previously received federal funding. The program funds project-based efforts to serve the public through educational programs and exhibits, community partn…</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | Inspire Grants for Small Museums (Inspire) is a special initiative of the Museums for America grant program designed to support small museums of all disciplines, including small rural or small remote institutions and small museums that have not previously received federal funding. The program funds project-based efforts to serve the public through educational programs and exhibits, community partn…</summary>
   </entry>
   <entry>
     <title>Laura Bush 21st Century Librarian Program (2027)</title>
@@ -202,7 +426,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | Laura Bush 21st Century Librarian (LB21) projects build a library and archival workforce that can meet the information needs of communities of all types and sizes and increase the institutional capacity of libraries, archives, and library and information science graduate programs across the country.</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | Laura Bush 21st Century Librarian (LB21) projects build a library and archival workforce that can meet the information needs of communities of all types and sizes and increase the institutional capacity of libraries, archives, and library and information science graduate programs across the country.</summary>
   </entry>
   <entry>
     <title>Museum Grants for African American History and Culture (2027)</title>
@@ -213,7 +437,7 @@
     <category term="Arts and culture"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | The Museum Grants for African American History and Culture (AAHC) program builds the capacity of African American museums and supports the growth and development of museum professionals at African American museums. The program supports projects that nurture museum professionals, build institutional capacity, and increase access to museum and archival collections at African American museums and His…</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The Museum Grants for African American History and Culture (AAHC) program builds the capacity of African American museums and supports the growth and development of museum professionals at African American museums. The program supports projects that nurture museum professionals, build institutional capacity, and increase access to museum and archival collections at African American museums and His…</summary>
   </entry>
   <entry>
     <title>Museum Grants for American Latino History and Culture (2027)</title>
@@ -225,7 +449,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | The Museum Grants for American Latino History and Culture (ALHC) program supports projects that build the capacity of American Latino history and culture museums to serve their communities and advance the growth and development of a professional workforce in American Latino cultural institutions.</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The Museum Grants for American Latino History and Culture (ALHC) program supports projects that build the capacity of American Latino history and culture museums to serve their communities and advance the growth and development of a professional workforce in American Latino cultural institutions.</summary>
   </entry>
   <entry>
     <title>Museums Empowered (2027)</title>
@@ -237,7 +461,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | Museums Empowered: Professional Development Opportunities for Museum Staff is a special initiative of the Museums for America grant program, designed to support projects that use learning and training to generate change and growth within museums of all types and sizes.</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | Museums Empowered: Professional Development Opportunities for Museum Staff is a special initiative of the Museums for America grant program, designed to support projects that use learning and training to generate change and growth within museums of all types and sizes.</summary>
   </entry>
   <entry>
     <title>Museums for America (2027)</title>
@@ -249,7 +473,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | he Museums for America (MFA) program invests in museums of all sizes - from small to large - and disciplines in project-based efforts to serve the public through educational programs and exhibits, community partnerships, and collections stewardship activities.</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | he Museums for America (MFA) program invests in museums of all sizes - from small to large - and disciplines in project-based efforts to serve the public through educational programs and exhibits, community partnerships, and collections stewardship activities.</summary>
   </entry>
   <entry>
     <title>National Leadership Grants for Libraries (2027)</title>
@@ -261,7 +485,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | National Leadership Grants for Libraries (NLG-L) projects enhance the quality of library services nationwide. The program supports projects that: promote adult reading, and health and financial literacies; focus on programming and archival practices related to our shared American history; manage and preserve the national information infrastructure; serve the public’s information and education need…</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | National Leadership Grants for Libraries (NLG-L) projects enhance the quality of library services nationwide. The program supports projects that: promote adult reading, and health and financial literacies; focus on programming and archival practices related to our shared American history; manage and preserve the national information infrastructure; serve the public’s information and education need…</summary>
   </entry>
   <entry>
     <title>National Leadership Grants for Museums (2027)</title>
@@ -272,60 +496,7 @@
     <category term="Arts and culture"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Institute of Museum and Library Services | Closes 2026-11-13 | The National Leadership Grants for Museums program (NLG-M) invests in projects that address critical needs of the museum field. NLG-M projects have the potential to advance practice in the profession to strengthen museum services for the public through the development and replication of model practices, tools, research findings, and collaborations, including through the creative and effective use …</summary>
-  </entry>
-  <entry>
-    <title>U.S-Saudi AI Research Commercialization Accelerator Program (ReCAP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363744"/>
-    <id>urn:funding-finder:grants-gov:363744</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>U.S. Mission to Saudi Arabia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Environmental science"/>
-    <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-14 | The U.S. Embassy Riyadh Public Diplomacy Section announces an open competition for organizations to design and implement the U.S.-Saudi AI Research Commercialization Accelerator (ReCAP), a 12-month initiative connecting Saudi Arabia's expanding artificial intelligence innovation ecosystem with the United States' world-leading technology, investment, and commercialization ecosystem. The program wil…</summary>
-  </entry>
-  <entry>
-    <title>IUSE: Innovation in Two-Year College STEM Education (ITYC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363752"/>
-    <id>urn:funding-finder:grants-gov:363752</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Education and workforce"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-12-09 | The National Science Foundation (NSF) plays a prominent role in the improvement of undergraduate STEM education at the Nation’s colleges and universities. Through the IUSE: Innovation in Two-Year College STEM Education (ITYC) program, the agency seeks to extend this effort by making an intentional investment in the country’s two-year institutions of higher education, or two-year colleges. The twin…</summary>
-  </entry>
-  <entry>
-    <title>Air Force Basic Research Sciences Conference and Workshop Support</title>
-    <link href="https://www.grants.gov/search-results-detail/363745"/>
-    <id>urn:funding-finder:grants-gov:363745</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>Air Force Office of Scientific Research</name></author>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>Air Force Office of Scientific Research | Closes 2029-08-31 | The Air Force Office of Scientific Research manages the basic research investment for the Department of the Air Force. Conferences and workshops constitute key forums for research and technology interchange. We provide partial support for conferences and workshops as defined in the DoW Joint Travel Regulations in special areas of science that bring experts together to discuss recent research or ed…</summary>
-  </entry>
-  <entry>
-    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
-    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
+    <summary>Institute of Museum and Library Services | Application 2026-11-13 | The National Leadership Grants for Museums program (NLG-M) invests in projects that address critical needs of the museum field. NLG-M projects have the potential to advance practice in the profession to strengthen museum services for the public through the development and replication of model practices, tools, research findings, and collaborations, including through the creative and effective use …</summary>
   </entry>
   <entry>
     <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU) Equipment/Instrumentation</title>
@@ -337,19 +508,7 @@
     <category term="Transportation"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ddde5b48dc92bba2</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
   </entry>
   <entry>
     <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
@@ -361,7 +520,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
+    <summary>National Institute of Food and Agriculture | Application 2026-11-10 | The NLGCA Program, under assistance listing number 10.326, will assist NLGCA institutions in maintaining and expanding their capacity to conduct education, research, outreach, and integrated activities relating to agriculture, renewable resources, and other similar disciplines. NLGCA institutions may use the funds to maintain and expand capacity: 1. to successfully compete for funds from Federal g…</summary>
   </entry>
   <entry>
     <title>Tribal Colleges Education Equity Grants Program</title>
@@ -374,43 +533,7 @@
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Closes 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
-  </entry>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-08-23T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
-  </entry>
-  <entry>
-    <title>Freedom Shield: Global Forced Labor Import Prohibition Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/363531"/>
-    <id>urn:funding-finder:grants-gov:363531</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
-  </entry>
-  <entry>
-    <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
-    <link href="https://www.grants.gov/search-results-detail/363684"/>
-    <id>urn:funding-finder:grants-gov:363684</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
+    <summary>National Institute of Food and Agriculture | Application 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
   </entry>
   <entry>
     <title>Radiation Oncology-Biology Integration Network (ROBIN) Centers (U54 Clinical Trial Required)</title>
@@ -422,21 +545,7 @@
     <category term="Cancer"/>
     <category term="Data science"/>
     <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Closes 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
-  </entry>
-  <entry>
-    <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363645"/>
-    <id>urn:funding-finder:grants-gov:363645</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>U.S. Mission to Saudi Arabia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <category term="Materials science"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Radiation Oncology-Biology Integration Network (ROBIN) with applications from both new and renewing investigators. This network model will sustain an agile and effective national radiation oncology infrastructure that collectively addresses critical hypothesis-based translation…</summary>
   </entry>
   <entry>
     <title>ONR FY27 NOFO for Young Investigator Program</title>
@@ -448,19 +557,7 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
-    <summary>Office of Naval Research | Closes 2026-10-30 | The Office of Naval Research Young Investigator Program seeks proposals addressing research areas (as described in the ONR Science and Technology Department section of ONR's website at https://www.onr.navy.mil) which are of interest to ONR Program Officers will be considered. Contact information for each division (a subgroup of an S&amp;T Department) is also listed within the S&amp;T section of the websit…</summary>
-  </entry>
-  <entry>
-    <title>MPS Astronomical Sciences Research Programs (MPS Astro)</title>
-    <link href="https://www.grants.gov/search-results-detail/363620"/>
-    <id>urn:funding-finder:grants-gov:363620</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Energy"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-16 | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs in the astronomical sciences. NSF MPS funds foundational astronomical sciences research and instrumentation focused on exploring space and advancing fundamental understanding of the universe. The programs covered by this funding opportunity are: Astronomical Science…</summary>
+    <summary>Office of Naval Research | Application 2026-10-30 | The Office of Naval Research Young Investigator Program seeks proposals addressing research areas (as described in the ONR Science and Technology Department section of ONR's website at https://www.onr.navy.mil) which are of interest to ONR Program Officers will be considered. Contact information for each division (a subgroup of an S&amp;T Department) is also listed within the S&amp;T section of the websit…</summary>
   </entry>
   <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
@@ -473,7 +570,7 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-02-11 | verify prerequisite | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
     <title>Core Research in Biological Sciences (BIO Core)</title>
@@ -485,65 +582,6 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation's Directorate for Biological Sciences (NSF BIO) Core Research in Biological Sciences (BIO Core) funding opportunity supports foundational and interdisciplinary research projects that expand knowledge of biology at any level of organization, from the molecular to the biome scale. We accept proposals that cover scientific topics associated with legacy programs hi…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
-    <link href="https://www.grants.gov/search-results-detail/363616"/>
-    <id>urn:funding-finder:grants-gov:363616</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363614"/>
-    <id>urn:funding-finder:grants-gov:363614</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Electrical, Communications, and Computing Systems (ECCS)</title>
-    <link href="https://www.grants.gov/search-results-detail/363613"/>
-    <id>urn:funding-finder:grants-gov:363613</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Energy"/>
-    <category term="Quantum science"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
-  </entry>
-  <entry>
-    <title>MPS Chemistry Research Programs (MPS Chem)</title>
-    <link href="https://www.grants.gov/search-results-detail/363617"/>
-    <id>urn:funding-finder:grants-gov:363617</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
   </entry>
   <entry>
     <title>MPS Materials Research Programs (MPS Materials)</title>
@@ -588,18 +626,6 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
-    <title>Systems for Tracking and Resilience in Efficient Agricultural-input Management (STREAM)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/stream"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Astream</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-09-14 | Current ARPA-H program. STREAM | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
-  </entry>
-  <entry>
     <title>Fast Assessment of Solutions, Therapeutics, Pharmaceuticals, and Supplies (FASTPASS)</title>
     <link href="https://arpa-h.gov/explore-funding/programs/fastpass"/>
     <id>urn:funding-finder:arpa-h:arpa-h%3Afastpass</id>
@@ -608,134 +634,99 @@
     <category term="Technology development"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Closes 2026-11-10 | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-11-10 | prerequisite closed | Current ARPA-H program. FASTPASS | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wi…</summary>
   </entry>
   <entry>
-    <title>Restorative &amp; health-Enhancing Sleep Time (REST)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/rest"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Arest</id>
-    <updated>2026-08-15T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Posted | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
-  </entry>
-  <entry>
-    <title>Annual Recurring University Training and Research</title>
-    <link href="https://www.grants.gov/search-results-detail/363594"/>
-    <id>urn:funding-finder:grants-gov:363594</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Closes 2026-10-16 | Annual Recurring University Training and ResearchThe purpose of this funding opportunity is to solicit and award research and development grants to educate and train the next generation of engineers and scientists; to support novel, early-stage research at U.S. colleges and universities; to increase research and development opportunities for underrepresented and structurally marginalized communiti…</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
+    <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
+    <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
+    <category term="Manufacturing"/>
+    <summary>Simons Foundation | Application 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
   </entry>
   <entry>
-    <title>National Resource Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/362377"/>
-    <id>urn:funding-finder:grants-gov:362377</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Administration for Children and Families - OFVPS</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Administration for Children and Families - OFVPS | Closes 2026-09-08 | The Resource Centers support efforts to prevent and respond to family, domestic, and dating violence by providing information, training, and technical assistance to individuals, organizations, government agencies, and communities. The National Resource Centers on Domestic Violence focus on strengthening services and knowledge in the field. One center provides training and technical assistance on d…</summary>
-  </entry>
-  <entry>
-    <title>Pacific Disaster Center</title>
-    <link href="https://www.grants.gov/search-results-detail/363549"/>
-    <id>urn:funding-finder:grants-gov:363549</id>
-    <updated>2026-08-12T00:00:00Z</updated>
-    <author><name>Washington Headquarters Services</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Washington Headquarters Services | Closes 2026-09-15 | On behalf of the Office of the Secretary of War/Office of the Under Secretary of War for Acquisition and Sustainment (OUSW(A&amp;S)) and the Office of the Under Secretary of War for Policy (OUSW(P)), the Washington Headquarters Services, Acquisition Directorate, (WHS/AD) seeks applications for sole-source awards from the University of Hawaii for the continuation of work for the Pacific Disaster Center…</summary>
-  </entry>
-  <entry>
-    <title>Fostering the Future Together: Empowering Youth for a Safe Digital World</title>
-    <link href="https://www.grants.gov/search-results-detail/363426"/>
-    <id>urn:funding-finder:grants-gov:363426</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-10 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov. We encourage prospective applicants and interested parties to use the Grants.gov subscription option to register for future updates provided for this particular FOA.</summary>
-  </entry>
-  <entry>
-    <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
-    <link href="https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
-    <updated>2026-08-09T00:00:00Z</updated>
+    <title>NSF Plasma Physics</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
+    <updated>2026-08-14T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
   </entry>
   <entry>
-    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
-    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-510</id>
+    <title>Sloan Research Fellowships</title>
+    <link href="http://www.sloan.org/sloan-research-fellowships/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
     <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
+    <author><name>Alfred P. Sloan Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
-STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
+    <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
+Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
   </entry>
   <entry>
-    <title>NSF Ongoing - New requirement for providing e-mail documentation of Program Officer approval for the submission of RAPID and EAGER proposals</title>
-    <link href="https://new.nsf.gov/policies/pappg/24-1"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-0f186b990288c021</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
-  </entry>
-  <entry>
-    <title>Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029</title>
-    <link href="https://www.grants.gov/search-results-detail/363514"/>
-    <id>urn:funding-finder:grants-gov:363514</id>
-    <updated>2026-08-07T00:00:00Z</updated>
-    <author><name>Library of Congress</name></author>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Library of Congress | Closes 2026-09-18 | This funding opportunity is authorized under the “Legislative Branch Appropriations Act of 2023” (Pub. L. 117-389 (H.R. 8237)), subject to availability of funding. The resulting awards will be subject to the Library of Congress Regulation (LCR) 7-310. In addition, while the Library, as a legislative agency, is not subject to 2 CFR 200 - Uniform Administrative Requirements, Costs Principles and Aud…</summary>
-  </entry>
-  <entry>
-    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Research Training Programs in The Education Sciences, Assistance Listing Number (ALN) 84.305B</title>
-    <link href="https://www.grants.gov/search-results-detail/363466"/>
-    <id>urn:funding-finder:grants-gov:363466</id>
+    <title>Institute of Education Sciences (IES): National Center for Education Research (NCER): Statistical and Research Methodology in Education, Assistance Listing Number (ALN) 84.305D</title>
+    <link href="https://www.grants.gov/search-results-detail/363468"/>
+    <id>urn:funding-finder:grants-gov:363468</id>
     <updated>2026-08-06T00:00:00Z</updated>
     <author><name>Department of Education</name></author>
     <category term="Education and workforce"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
+    <summary>Department of Education | Application 2026-10-01 | The goal of the Statistical and Research Methodology in Education (Stats/Methods) grant program (84.305D) is to provide a wide range of methodological and statistical tools that will better enable applied education scientists to conduct rigorous education research. Under this program, NCER will consider only applications that address one of the following topics: (1) Core Grants or (2) Toolkits, Gu…</summary>
+  </entry>
+  <entry>
+    <title>U.S. National Science Foundation State and Regional Artificial Intelligence Infrastructure Hubs:</title>
+    <link href="https://www.grants.gov/search-results-detail/363481"/>
+    <id>urn:funding-finder:grants-gov:363481</id>
+    <updated>2026-08-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Data science"/>
     <category term="Cybersecurity"/>
-    <summary>Department of Education | Closes 2026-10-01 | NCER training programs prepare individuals to conduct education research that advances knowledge within the field and addresses issues important to education policymakers and practitioners. Under this competition, NCER will consider only applications that address one of the following programs: (1) Early Career Development and Mentoring Program for Education Research (Early Career) or (2) Methods T…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
+  </entry>
+  <entry>
+    <title>Innovative Traffic Safety Enforcement (ITSE) Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363446"/>
+    <id>urn:funding-finder:grants-gov:363446</id>
+    <updated>2026-08-03T00:00:00Z</updated>
+    <author><name>National Highway Traffic Safety Administration</name></author>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>National Highway Traffic Safety Administration | Application 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
+  </entry>
+  <entry>
+    <title>BRAIN Initiative Cell Atlas Network (BICAN): Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE)</title>
+    <link href="https://www.grants.gov/search-results-detail/361449"/>
+    <id>urn:funding-finder:grants-gov:361449</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2026-10-01 | The National Institute of Mental Health (NIMH), with other NIH Institutes and Centers (ICs), intends to publish a notice of funding opportunity (NOFO) to solicit research applications for the BRAIN Initiative Cell Atlas Network (BICAN) Coordinating Unit for Biostatistics, Informatics, and Engagement (CUBIE). In accordance with NIH standard peer-review processes, the application(s) will be peer-rev…</summary>
+  </entry>
+  <entry>
+    <title>The NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC) Data Coordinating Center</title>
+    <link href="https://www.grants.gov/search-results-detail/360622"/>
+    <id>urn:funding-finder:grants-gov:360622</id>
+    <updated>2026-08-01T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Estimated Application 2026-11-01 | The National Institute of Diabetes and Digestive Diseases and Nutrition (NIDDK) seeks to advance its mission by continuing the NIDDK Inflammatory Bowel Disease Genetics Consortium (IBDGC). The IBDGC has led collaborative efforts resulting in the identification of &gt;300 genetic risk loci for different IBD subtypes across patient populations and characterization of underlying biological mechanisms. D…</summary>
   </entry>
 </feed>
