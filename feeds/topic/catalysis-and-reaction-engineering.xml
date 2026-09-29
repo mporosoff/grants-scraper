@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>2026 Diesel Emissions Reduction Act (DERA) National Program</title>
@@ -151,13 +151,13 @@
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Separations and membranes"/>
     <category term="Materials science"/>
+    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -166,14 +166,14 @@
     <id>urn:funding-finder:grants-gov:362063</id>
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Quantum science"/>
-    <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
@@ -224,10 +224,11 @@
     <id>urn:funding-finder:grants-gov:356055</id>
     <updated>2024-08-15T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Data science"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
     <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
@@ -252,11 +253,11 @@
     <updated>2023-08-29T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
+    <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <category term="Technology development"/>
     <category term="Materials science"/>
-    <category term="Energy"/>
+    <category term="Technology development"/>
     <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
   </entry>
   <entry>

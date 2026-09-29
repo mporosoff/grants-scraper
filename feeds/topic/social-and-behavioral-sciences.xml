@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -490,17 +490,6 @@
     <summary>National Institutes of Health | Application 2029-07-05 | This Notice of Funding Opportunity (NOFO) invites applications for innovative research on the factors that cause human behaviors and the oral-systemic health impacts of those behaviors to enhance health, lengthen life, and reduce illness and disability among people with chronic conditions. Causal hypotheses may include biological, biopsychosocial, congenital, environmental, interpersonal, neurolog…</summary>
   </entry>
   <entry>
-    <title>HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/361304"/>
-    <id>urn:funding-finder:grants-gov:361304</id>
-    <updated>2026-05-31T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-07 | The National Center for Complementary and Integrative Health (NCCIH) plans to publish a Notice of Funding Opportunity (NOFO) that will support a phased mechanistic clinical research program focusing on understudied biological mechanisms that drive joint pain. The initiative responds to priorities identified in the 2023 HEAL Whole Joint Pain Workshop and supports the broader goals of the NIH Helpin…</summary>
-  </entry>
-  <entry>
     <title>Research Enhancement Award Program (REAP) for Health Professional Schools and Graduate Schools (R15 Clinical Trial Required)</title>
     <link href="https://www.grants.gov/search-results-detail/359733"/>
     <id>urn:funding-finder:grants-gov:359733</id>
@@ -652,5 +641,15 @@
     <category term="Community development"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2028-11-02 | This Notice of Funding Opportunity (NOFO) supports applications for a collaborating Data Coordinating Center (DCC) for investigator-initiated multi-site clinical trials including efficacy, comparative effectiveness, pragmatic and/or implementation research clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may inclu…</summary>
+  </entry>
+  <entry>
+    <title>Single-Site Investigator-Initiated Clinical Trials (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/358850"/>
+    <id>urn:funding-finder:grants-gov:358850</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2028-11-02 | This Notice of Funding Opportunity (NOFO) supports applications to develop and conduct investigator-initiated single site clinical trials including efficacy, comparative effectiveness, pragmatic and/or dissemination and implementation science clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may include ones that t…</summary>
   </entry>
 </feed>

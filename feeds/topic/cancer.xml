@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cancer.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -85,6 +85,17 @@
     <category term="Neuroscience"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | The NIH Office of Strategic Coordination (Common Fund) has generated many valuable and widely available datasets. The Common Fund Data Ecosystem is helping to ensure that all Common Fund (CF) data are Findable, Accessible, Interoperable, and Reusable (FAIR). The purpose of this Notice of Funding Opportunity (NOFO) is to announce the availability of funds for projects that involve collaboration bet…</summary>
+  </entry>
+  <entry>
+    <title>Promoting Cancer Surveillance Workforce, Education, and Data Use</title>
+    <link href="https://www.grants.gov/search-results-detail/363986"/>
+    <id>urn:funding-finder:grants-gov:363986</id>
+    <updated>2027-01-05T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-03-08 | This notice of funding opportunity (NOFO) will help build a workforce that's prepared to collect and use high-quality cancer data. This work is essential to understand the impact of cancer and inform public health action, research, and policy. This NOFO will support the National Program of Cancer Registries (NPCR) by: Strengthening the cancer surveillance workforce. Improving NPCR cancer data qual…</summary>
   </entry>
   <entry>
     <title>Innovative Research to Improve Native Hawaiian and Pacific Islander (NHPI) Health Outcomes (R34 - Clinical Trial Optional)</title>
@@ -301,24 +312,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>National Institutes of Health | Estimated Application 2026-10-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications that investigate the etiology of sporadic non-hereditary early-onset cancers (EOCs: ages 18 to 49 years) and the underlying biological mechanisms that play a role in these cancers to inform prevention and control strategies. The proposed research is expected to advance the understanding of t…</summary>
-  </entry>
-  <entry>
-    <title>DoW Kidney Cancer, Academy of Kidney Cancer Investigators - Early-Career Scholar Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362853"/>
-    <id>urn:funding-finder:grants-gov:362853</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-09-28 | verify prerequisite | Summary: Initially created in fiscal year 2019 (FY19), the Kidney Cancer Research Program (KCRP) Academy of Kidney Cancer Investigators (AKCI) is a unique interactive virtual academy providing intensive mentoring, national networking, collaborations, and a peer group for junior faculty. The Academy pairs Early Career Scholars (ECS) with established investigators (Designated Mentors) under the over…</summary>
-  </entry>
-  <entry>
-    <title>DoW Kidney Cancer, Idea Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362865"/>
-    <id>urn:funding-finder:grants-gov:362865</id>
-    <updated>2026-06-18T00:00:00Z</updated>
-    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
-    <category term="Cancer"/>
-    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-09-28 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Kidney Cancer Research Program (KCRP) Idea Development Award (IDA) supports the development of high-impact ideas that advance the understanding of kidney cancer and ultimately lead to improved patient outcomes. The research project should include a well-formulated, testable hypothesis based on strong scientific rationale and a well-developed and articulated res…</summary>
   </entry>
   <entry>
     <title>Discovery of the Genetic Basis of Childhood Cancers and of Congenital Anomalies: Gabriella Miller Kids First Pediatric Research Program (X01 Clinical Trial Not Allowed)</title>
@@ -625,5 +618,14 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cancer"/>
     <category term="Separations and membranes"/>
     <summary>Food and Drug Administration | Forecasted | The purpose of this program is to support new approaches that can be applied to facilitate therapeutic development in ultra-rare pediatric and adult cancers, including molecularly-defined subsets of more common cancers. Specific areas of interest include, but are not limited to, the following examples:• Development of infrastructure for a coordination network and data repository for patient-level …</summary>
+  </entry>
+  <entry>
+    <title>Cancer Center Support Grants (CCSGs) for NCI-designated Cancer Centers (P30 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/360918"/>
+    <id>urn:funding-finder:grants-gov:360918</id>
+    <updated>2025-11-26T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Cancer"/>
+    <summary>National Institutes of Health | Application 2028-09-25 | This Notice of Funding Opportunity (NOFO) invites applications for P30 Cancer Center Support Grants (CCSGs) to support NCI-Designated Cancer Centers. CCSGs support three types of Cancer Centers: 1) Comprehensive Cancer Centers, which demonstrate reasonable depth and breadth of research activities in each of three major areas: basic laboratory; clinical; and prevention, control and population-based…</summary>
   </entry>
 </feed>

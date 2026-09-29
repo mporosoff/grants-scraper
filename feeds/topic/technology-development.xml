@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -534,10 +534,10 @@ scale, …</summary>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
+    <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
     <category term="Energy"/>
-    <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
@@ -631,16 +631,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Estimated Application 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
   </entry>
   <entry>
-    <title>FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363372"/>
-    <id>urn:funding-finder:grants-gov:363372</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>DOT - Federal Transit Administration</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration | Application 2026-09-28 | The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
-  </entry>
-  <entry>
     <title>Desalination and Water Purification Research Program: Research Projects</title>
     <link href="https://www.grants.gov/search-results-detail/363375"/>
     <id>urn:funding-finder:grants-gov:363375</id>
@@ -656,14 +646,26 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>Bureau of Reclamation | Application 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
   </entry>
   <entry>
-    <title>Coordinating Agricultural Development &amp; Innovation (CADI) to enable America First Trade Wins in Europe, the South Caucasus and Central Asia</title>
-    <link href="https://www.grants.gov/search-results-detail/363359"/>
-    <id>urn:funding-finder:grants-gov:363359</id>
-    <updated>2026-07-28T00:00:00Z</updated>
-    <author><name>Foreign Agricultural Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Education and workforce"/>
+    <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
+    <link href="https://www.grants.gov/search-results-detail/363268"/>
+    <id>urn:funding-finder:grants-gov:363268</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Technology development"/>
-    <summary>Foreign Agricultural Service | Application 2026-09-28 | The CADI, funded through an interagency agreement between the U.S. Department of Agriculture's Foreign Agricultural Service (USDA/FAS) and the State Department's Bureau of European and Eurasian Affairs, supports a portfolio of projects in Eastern Europe (non-E.U.), the South Caucasus, and Central Asia. These projects are designed to make American agriculture safer, stronger, and more prosperous. S…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-11-04 | This program will advance scientific community datasets to enable scientific discovery and innovation using artificial intelligence (AI) and other methods. Its goal is to increase the value that can be derived from existing scientific datasets by leveraging novel methods and artificial intelligence (AI). This will unlock new AI-driven insights. It can enable interdisciplinary research. It also ena…</summary>
+  </entry>
+  <entry>
+    <title>Middle East Regional Cooperation (MERC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363070"/>
+    <id>urn:funding-finder:grants-gov:363070</id>
+    <updated>2026-07-06T00:00:00Z</updated>
+    <author><name>Assistance Coordination</name></author>
+    <category term="Technology development"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <category term="Water"/>
+    <summary>Assistance Coordination | Application 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Buildings of Excellence Competition</title>
@@ -58,15 +58,6 @@
     <summary>NYSERDA | Application 2026-10-06 | Through this funding opportunity the New York State Energy Research and Development Authority (NYSERDA) seeks to work with labor organizations and registered pre-apprenticeship programs across the State, to grow a diverse, equitable, and inclusive pipeline of skilled talent for the clean energy labor market. This solicitation is intended to fund Projects that create and/or expand the capacity of d…</summary>
   </entry>
   <entry>
-    <title>Charge Ready NY - Large Public Sector Project Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AchJOAAZ"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON6141</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Transportation"/>
-    <summary>NYSERDA | Application 2026-10-20 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
-  </entry>
-  <entry>
     <title>Energy Economy Planning and Growth Program</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001COlXwAAL"/>
     <id>urn:funding-finder:nyserda:nyserda%3APON6201</id>
@@ -82,6 +73,15 @@
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <summary>NYSERDA | Application 2026-10-23 | NYSERDA is seeking to expand the existing pool of qualified Community-Based Organizations (CBOs) and other entities, including Indigenous Nations and Indigenous-led Organizations, that represent New York State’s disadvantaged communities (DAC), herein referred to “DAC Consultants.” DAC Consultants participating in this pool will execute contracts with NYSERDA to provide support across multiple pro…</summary>
+  </entry>
+  <entry>
+    <title>Charge Ready NY - Large Public Sector Project Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AchJOAAZ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6141</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Transportation"/>
+    <summary>NYSERDA | Application 2026-10-27 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
   </entry>
   <entry>
     <title>Energy-Focused Air Quality and Health Effects Research</title>
