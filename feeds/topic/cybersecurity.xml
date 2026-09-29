@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Advisory Support for Establishing a National Cybersecurity Operations Center (SOC)</title>
@@ -101,11 +101,12 @@
     <id>urn:funding-finder:grants-gov:361333</id>
     <updated>2026-02-19T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2027-03-02 | The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
   </entry>
   <entry>
@@ -187,22 +188,6 @@
     <category term="Transportation"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2027-01-20 | The objective of the Cybersecurity Innovation for Cyberinfrastructure (CICI) program is to advance scientific discovery and innovation by enhancing the security and privacy of cyberinfrastructure. CICI supports efforts to develop, deploy and integrate cybersecurity that will benefit the broader scientific community by securing science data, computation, collaborations workflows, and infrastructure…</summary>
-  </entry>
-  <entry>
-    <title>Security, Privacy, and Trust in Cyberspace</title>
-    <link href="https://www.grants.gov/search-results-detail/357554"/>
-    <id>urn:funding-finder:grants-gov:357554</id>
-    <updated>2024-12-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Social and behavioral sciences"/>
-    <category term="Transportation"/>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Application 2026-09-28 | Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
   </entry>
   <entry>
     <title>Advanced Technological Education</title>

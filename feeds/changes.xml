@@ -4,8 +4,784 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/changes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/changes.xml</id>
-  <updated>2026-09-28T21:53:55Z</updated>
+  <updated>2026-09-29T16:37:11Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Closed or removed: Lewis-Houghton Civics and Democracy Initiative: New Awards for 2027-2029</title>
+    <link href="https://www.grants.gov/search-results-detail/363514"/>
+    <id>urn:funding-finder:change:fe574528959e725c3189</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJJDP FY 2026 Victims of Child Abuse Act Training and Technical Assistance for Child Abuse Professionals</title>
+    <link href="https://www.grants.gov/search-results-detail/363904"/>
+    <id>urn:funding-finder:change:fd1b702d9f32361504f2</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Academic Research Enhancement Award (AREA) for Undergraduate-Focused Institutions (R15 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357458"/>
+    <id>urn:funding-finder:change:fcebed7b1a3016116ed3</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-25</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Advisory Support for Establishing a National Cybersecurity Operations Center (SOC)</title>
+    <link href="https://www.grants.gov/search-results-detail/363843"/>
+    <id>urn:funding-finder:change:fbc94c622640c81d8d76</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Development and Validation of Model Systems to Facilitate Neurotherapeutic Discovery (R61/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356802"/>
+    <id>urn:funding-finder:change:f5e67c1b2b2a5ba7aa5d</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-10-20 → 2026-10-20</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Limited Competition: Clinical and Translational Science Award (CTSA) Program: Collaborative and Innovative Acceleration Award (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357667"/>
+    <id>urn:funding-finder:change:f2b903ac2982e98d4ff9</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-10-19 → 2026-10-19</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NIDCD Research Grants for Translating Basic Research into Clinical Practice (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357742"/>
+    <id>urn:funding-finder:change:f295aad97f70a6e6a6b5</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-10-12 → 2027-02-12</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Integration of Imaging and Fluid-Based Tumor Monitoring in Cancer Therapy (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357003"/>
+    <id>urn:funding-finder:change:f082741d018ea9793d0e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Research Experiences and/or Mentoring Networks through Research Education to Enhance Clinician-Scientists' Participation in NIDCDs Research (R25 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356620"/>
+    <id>urn:funding-finder:change:ef5709b29f6085b9fc10</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-29</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Decision, Risk and Management Sciences (DRMS)</title>
+    <link href="https://www.grants.gov/search-results-detail/348058"/>
+    <id>urn:funding-finder:change:ec6588e5c60591ede1b4</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Pilot Projects Investigating Understudied Proteins Associated with Rare Diseases (R03 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356879"/>
+    <id>urn:funding-finder:change:e9e2f0c5eb44acee0e6d</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Mechanisms that Impact Cancer Risk after Bariatric Surgery (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356341"/>
+    <id>urn:funding-finder:change:e96b47516c0e88ef82bb</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Innovative Pilot Mental Health Services Research Not Involving Clinical Trials (R34 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357947"/>
+    <id>urn:funding-finder:change:e83903e18a6439b868a4</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Catalyze: Enabling Technologies and Transformative Platforms for HLBS Research (R33 - Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357330"/>
+    <id>urn:funding-finder:change:e73f4fc8aec5c627a46f</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-12-23 → 2026-10-21</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Limited Competition: Small Grant Program for NIDDK K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358116"/>
+    <id>urn:funding-finder:change:e4c78d417e451b7e5dc6</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NCMRR Early Career Research Award (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357206"/>
+    <id>urn:funding-finder:change:e454338ec9fcc31f23d8</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: DoW Kidney Cancer, Academy of Kidney Cancer Investigators - Early-Career Scholar Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362853"/>
+    <id>urn:funding-finder:change:e0d6c19e799a5115b98e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJJDP FY 2026 Missing and Exploited Children Training and Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363903"/>
+    <id>urn:funding-finder:change:d61db217ab455f92d27e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Innovative Pilot Mental Health Services Research Not Involving Clinical Trials (R34 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357947"/>
+    <id>urn:funding-finder:change:d1b0d7bd2fb0253851e3</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361304"/>
+    <id>urn:funding-finder:change:d084e69c887f03d5d2ae</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NEI Clinical Research Study Planning Grant Program (R34 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358118"/>
+    <id>urn:funding-finder:change:cf740b258f7f23d3ef5b</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 DNA Capacity Enhancement for Backlog Reduction (CEBR)-Formula Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363889"/>
+    <id>urn:funding-finder:change:cf3eaca88e4773f510fa</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: DoW Bone Marrow Failure, Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362854"/>
+    <id>urn:funding-finder:change:cedfbb979c95db5266ac</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Limited Competition: Small Grant Program for NIDDK K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/358116"/>
+    <id>urn:funding-finder:change:ce0ff2399cfef0e1dbb9</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NASA Innovative Advanced Concepts (NIAC) Phase I</title>
+    <link href="https://www.grants.gov/search-results-detail/363983"/>
+    <id>urn:funding-finder:change:cdd8b5c8361b8af0f05b</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-28</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:change:cd8b2467ae2492a4eee2</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>not listed → 2026-11-20</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science (RC2 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357634"/>
+    <id>urn:funding-finder:change:cd88849c1bd826c11909</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Academic-Industrial Partnerships for Translation of Technologies for Diagnosis and Treatment (R01 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357962"/>
+    <id>urn:funding-finder:change:cc10325b6973b7f5c958</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Development of Animal Models and Related Biological Materials for Research (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357138"/>
+    <id>urn:funding-finder:change:ca9af7b77452ccb53711</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Security, Privacy, and Trust in Cyberspace</title>
+    <link href="https://www.grants.gov/search-results-detail/357554"/>
+    <id>urn:funding-finder:change:b886d3edbe15b3e7ec16</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: MPS Mathematical Sciences Research Programs (MPS MathSci)</title>
+    <link href="https://www.grants.gov/search-results-detail/363612"/>
+    <id>urn:funding-finder:change:b7a916ceaafb22dce668</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: BJA FY 2026 Second Chance Act Community-based Reentry Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363892"/>
+    <id>urn:funding-finder:change:b6a5c2549192bd7c9543</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJJDP FY 2026 Multistate Mentoring Programs</title>
+    <link href="https://www.grants.gov/search-results-detail/363911"/>
+    <id>urn:funding-finder:change:b5475cd1304f3a03b9c9</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: National Cancer Institute Youth Enjoy Science Research Education Program (R25 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/355297"/>
+    <id>urn:funding-finder:change:b0ab8816034134285502</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide</title>
+    <link href="https://www.grants.gov/search-results-detail/363355"/>
+    <id>urn:funding-finder:change:ad5f39dfc5339864aebc</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Innovative Screening Approaches and Therapies for Screenable Disorders in Newborns (R21 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357487"/>
+    <id>urn:funding-finder:change:acb8ea7612fa20db273d</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-11-16 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NCMRR Early Career Research Award (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357206"/>
+    <id>urn:funding-finder:change:ac56282d0c3dbf2b9e4a</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Paul Coverdell Forensic Science Improvement- Competitive Grants Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363909"/>
+    <id>urn:funding-finder:change:ac5480777d817198d10e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Development and Validation of Model Systems to Facilitate Neurotherapeutic Discovery (R61/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356802"/>
+    <id>urn:funding-finder:change:ab15033783259d3fb6b4</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-20</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Resident Opportunity and Self-Sufficiency Service Coordinator (ROSS-SC) Program - Fiscal Year 2026</title>
+    <link href="https://www.grants.gov/search-results-detail/361994"/>
+    <id>urn:funding-finder:change:a530000c01ddfc7b7e5e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: DoW Kidney Cancer, Idea Development Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362865"/>
+    <id>urn:funding-finder:change:a13a2f0b8b7eb2274e97</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJS FY 2026 Invited To Apply Statistical Support Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363987"/>
+    <id>urn:funding-finder:change:9ed0c4ff8010676df5af</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-01</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: Promoting Cancer Surveillance Workforce, Education, and Data Use</title>
+    <link href="https://www.grants.gov/search-results-detail/363986"/>
+    <id>urn:funding-finder:change:9ce8087946f41027eb3d</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: National Parks Business Plan Internship</title>
+    <link href="https://www.grants.gov/search-results-detail/363985"/>
+    <id>urn:funding-finder:change:9cae9a0d9dae1e2c7fcb</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Limited Competition: High Impact Specialized Innovation Programs in Clinical and Translational Science (RC2 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/361427"/>
+    <id>urn:funding-finder:change:9ca341bb27f20e0c04a0</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: NIDCR Behavioral and Social Intervention Clinical Trial Planning and Implementation Cooperative Agreement (UG3/UH3 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357462"/>
+    <id>urn:funding-finder:change:9bfa648dc3dd70c07d9d</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-06 → 2026-10-08</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361304"/>
+    <id>urn:funding-finder:change:9a66e67a5915b169a4d0</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-10-07 → 2026-10-30</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NIDCR Behavioral and Social Intervention Clinical Trial Planning and Implementation Cooperative Agreement (UG3/UH3 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/357462"/>
+    <id>urn:funding-finder:change:9676038488d2c140b48e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-08</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: BJS FY 2026 Invited To Apply Statistical Support Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363987"/>
+    <id>urn:funding-finder:change:96199d8816274289322e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Pilot Projects Investigating Understudied Proteins Associated with Rare Diseases (R03 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356879"/>
+    <id>urn:funding-finder:change:8b68f98a9161f33f627a</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-11-16 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: OJJDP FY 2026 Invited to Apply - National Center for Missing and Exploited Children</title>
+    <link href="https://www.grants.gov/search-results-detail/363984"/>
+    <id>urn:funding-finder:change:869579c2c34254218d67</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BJS FY 2026 National Criminal History Improvement Program (NCHIP) Training and Technical Assistance</title>
+    <link href="https://www.grants.gov/search-results-detail/363647"/>
+    <id>urn:funding-finder:change:85afb3f6808a3d4c6537</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Catalyze: Enabling Technologies and Transformative Platforms for HLBS Research (R33 - Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357330"/>
+    <id>urn:funding-finder:change:7d91fa8361102950ce32</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-21</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Prosecuting Cold Cases Using DNA</title>
+    <link href="https://www.grants.gov/search-results-detail/363890"/>
+    <id>urn:funding-finder:change:7d70552a5add63a1d887</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Mechanisms that Impact Cancer Risk after Bariatric Surgery (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356341"/>
+    <id>urn:funding-finder:change:785563a1b5cf7428c736</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Veterans Treatment Court Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363900"/>
+    <id>urn:funding-finder:change:758c5aee56f4f25482b0</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Single Source: Post-Stroke Vascular Contributions to Cognitive Impairment and Dementia (VCID) in the United States (U19 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360547"/>
+    <id>urn:funding-finder:change:7502eea38d7f8257b14c</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Academic-Industrial Partnerships for Translation of Technologies for Diagnosis and Treatment (R01 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357963"/>
+    <id>urn:funding-finder:change:73823cb0e457ca104b20</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Integration of Imaging and Fluid-Based Tumor Monitoring in Cancer Therapy (R01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357003"/>
+    <id>urn:funding-finder:change:72ca7deb6acb2acc88f6</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: OJJDP FY 2026 Invited to Apply - National Center For Missing &amp; Exploited Children - IAA USSS</title>
+    <link href="https://www.grants.gov/search-results-detail/363982"/>
+    <id>urn:funding-finder:change:726e5814e916c2567f7e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>New opportunity: NASA Innovative Advanced Concepts (NIAC) Phase I</title>
+    <link href="https://www.grants.gov/search-results-detail/363983"/>
+    <id>urn:funding-finder:change:69579d5c0150b788c856</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="new"/>
+    <summary>First appeared in the public catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Molecular Imaging of Inflammation in Cancer (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357002"/>
+    <id>urn:funding-finder:change:6819dd231bd3993bb6e3</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OVC FY 2026 Housing Assistance for Victims of Human Trafficking</title>
+    <link href="https://www.grants.gov/search-results-detail/363654"/>
+    <id>urn:funding-finder:change:5e96c2133ca36d9c6309</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Limited Competition: Clinical and Translational Science Award (CTSA) Program: Collaborative and Innovative Acceleration Award (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357667"/>
+    <id>urn:funding-finder:change:5d55c18ff972d1fc2dba</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-19</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Molecular Imaging of Inflammation in Cancer (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357002"/>
+    <id>urn:funding-finder:change:58efdb58cff3c915dc4c</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Academic Research Enhancement Award (AREA) for Undergraduate-Focused Institutions (R15 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357458"/>
+    <id>urn:funding-finder:change:5856fa08e2fc4d0ead2c</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-25</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJJDP FY 2026 Juvenile Drug Treatment Court Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363901"/>
+    <id>urn:funding-finder:change:55b1a0c9e56bb8955ff7</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357529"/>
+    <id>urn:funding-finder:change:4f0b6c4bf3ea4c49b5b0</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-11-05 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Chemical Countermeasures Research Program (CCRP) Initiative: Basic Research on The Deleterious Effects of Acute Exposure to Ultra-Potent Synthetic (UPS) Opioids (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357250"/>
+    <id>urn:funding-finder:change:4c4e8f9894fbc71a81c0</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-11-18 → 2026-11-18</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Leveraging Network Infrastructure to Conduct Innovative Research for Women, Children, Pregnant and Lactating Women, and Persons with Disabilities (UG3/UH3 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357730"/>
+    <id>urn:funding-finder:change:4b8a09dda12ede38d626</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-11-15 → 2026-11-13</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BRAIN Initiative: Next-Generation Devices for Recording and Modulation in the Human Central Nervous System (UG3/UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356981"/>
+    <id>urn:funding-finder:change:4b22b5f46378f6b6d975</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Charge Ready NY - Large Public Sector Project Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001AchJOAAZ"/>
+    <id>urn:funding-finder:change:496a932d518204a4c36e</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2026-10-20 → 2026-10-27</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357529"/>
+    <id>urn:funding-finder:change:46919c1788733d2ba62d</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Development of Animal Models and Related Biological Materials for Research (R21 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357138"/>
+    <id>urn:funding-finder:change:45f474d1f6ecc24428ea</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: NIH Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PAR-25-322.html"/>
+    <id>urn:funding-finder:change:42fb98489e7d26b880c0</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Innovative Screening Approaches and Therapies for Screenable Disorders in Newborns (R21 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357487"/>
+    <id>urn:funding-finder:change:40fce5455039da90e541</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Research Experiences and/or Mentoring Networks through Research Education to Enhance Clinician-Scientists' Participation in NIDCDs Research (R25 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356620"/>
+    <id>urn:funding-finder:change:40a54be678745537898c</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-09-29 → 2026-09-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Coordinating Agricultural Development &amp; Innovation (CADI) to enable America First Trade Wins in Europe, the South Caucasus and Central Asia</title>
+    <link href="https://www.grants.gov/search-results-detail/363359"/>
+    <id>urn:funding-finder:change:3f48015f0f46fe14fdfb</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Academic-Industrial Partnerships for Translation of Technologies for Diagnosis and Treatment (R01 - Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/357963"/>
+    <id>urn:funding-finder:change:3e07d71c59bee9b0ccde</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2028-01-07 → 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
+    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
+    <id>urn:funding-finder:change:2d6e45971a7f81dd7ed5</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System (UH3 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/356982"/>
+    <id>urn:funding-finder:change:26c459c917de1112d82f</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJJDP FY 2026 Invited to Apply - National Center For Missing &amp; Exploited Children - IAA USSS</title>
+    <link href="https://www.grants.gov/search-results-detail/363982"/>
+    <id>urn:funding-finder:change:2370a6e24c49600463b9</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-29</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: OJJDP FY 2026 Community and Schools Youth Drug Prevention Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363902"/>
+    <id>urn:funding-finder:change:205c42ea1e0460262ada</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJJDP FY 2026 Invited to Apply - National Center for Missing and Exploited Children</title>
+    <link href="https://www.grants.gov/search-results-detail/363984"/>
+    <id>urn:funding-finder:change:1fa6211dd1838ba55b5c</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-09-30</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: BJS FY 2026 Consolidated National Criminal History Improvement Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363648"/>
+    <id>urn:funding-finder:change:1c9fd8e281d7f128a195</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Academic-Industrial Partnerships for Translation of Technologies for Diagnosis and Treatment (R01 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/357962"/>
+    <id>urn:funding-finder:change:1be8d80e99ae1aa222ed</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: BJA FY 2026 Capital Case Litigation Initiative: Improving the Quality of Legal Representation in State Capital Cases</title>
+    <link href="https://www.grants.gov/search-results-detail/363887"/>
+    <id>urn:funding-finder:change:18b350b3cd905f562446</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: Strengthening Bosnia and Herzegovina’s Organized Crime Specialized Departments for Organized Crime Through Expert Advisory Support</title>
+    <link href="https://www.grants.gov/search-results-detail/363390"/>
+    <id>urn:funding-finder:change:188977d51b29385f527f</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
+    <link href="https://www.grants.gov/search-results-detail/363372"/>
+    <id>urn:funding-finder:change:16f0d6d2338fc27f250a</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: NEI Clinical Research Study Planning Grant Program (R34 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358118"/>
+    <id>urn:funding-finder:change:13e35f0051b299021f51</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-16</summary>
+  </entry>
+  <entry>
+    <title>Deadline changed: Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Neurotherapeutic Agent Identification (R61/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356800"/>
+    <id>urn:funding-finder:change:12abc3f17252e112bb8a</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="deadline_changed"/>
+    <summary>2027-10-20 → 2026-10-20</summary>
+  </entry>
+  <entry>
+    <title>Status changed: HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361304"/>
+    <id>urn:funding-finder:change:108a78d766321012ed06</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="status_changed"/>
+    <summary>forecasted → posted</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Upstate Through Wall Heat Pump Demonstration Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Vto2LAAR"/>
+    <id>urn:funding-finder:change:1011b7401b3fa9cf2e30</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Closed or removed: OVC FY 2026 Integrated Services for Minor Victims of Human Trafficking</title>
+    <link href="https://www.grants.gov/search-results-detail/363656"/>
+    <id>urn:funding-finder:change:0ce860647a32b2ba84f1</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closed_or_removed"/>
+    <summary>No longer in the current catalog</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: OJJDP FY 2026 Strengthening Internet Crimes Against Children (ICAC) Technological Investigative Capacity</title>
+    <link href="https://www.grants.gov/search-results-detail/363910"/>
+    <id>urn:funding-finder:change:09fb3597e30b4865aa0b</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-29</summary>
+  </entry>
+  <entry>
+    <title>Opportunity amended: Native American Affairs: Fiscal Year 2025 Colorado River Basin Tribal Drought Resiliency Program</title>
+    <link href="https://www.grants.gov/search-results-detail/362644"/>
+    <id>urn:funding-finder:change:0415567ab014203974b7</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="amended"/>
+    <summary>Official source record changed</summary>
+  </entry>
+  <entry>
+    <title>Closing soon: Innovation Grants to Nurture Initial Translational Efforts (IGNITE): Assay Development and Neurotherapeutic Agent Identification (R61/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/356800"/>
+    <id>urn:funding-finder:change:0234a092e648cac29fb2</id>
+    <updated>2026-09-29T16:33:27.911184Z</updated>
+    <category term="closing_soon"/>
+    <summary>Deadline 2026-10-20</summary>
+  </entry>
   <entry>
     <title>Closed or removed: Large Scale Non-drop-in Alternative Fuels Based Resources and Infrastructure</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr0000191nvfAAA"/>
@@ -829,781 +1605,5 @@
     <updated>2026-09-27T16:17:14.404727Z</updated>
     <category term="amended"/>
     <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Risk and Protective Factors of Family Health and Family Level Interventions (R01 Clinical Trial Optional)</title>
-    <link href="https://www.grants.gov/search-results-detail/357713"/>
-    <id>urn:funding-finder:change:084fbc0a9766000b596d</id>
-    <updated>2026-09-27T16:17:14.404727Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Advancing coastal flood protection through public-private partnerships, innovative insurance products, and improved sediment management.</title>
-    <link href="https://www.grants.gov/search-results-detail/363958"/>
-    <id>urn:funding-finder:change:064f3b8bb018c8fb3eae</id>
-    <updated>2026-09-27T16:17:14.404727Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Field Initiated Projects Program (Research)</title>
-    <link href="https://www.grants.gov/search-results-detail/363972"/>
-    <id>urn:funding-finder:change:0295e7f184e46f850ee9</id>
-    <updated>2026-09-27T16:17:14.404727Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: LeverAging StraTegies to Maximize ImpLementation and Effectiveness for HIV (LAST MILE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363948"/>
-    <id>urn:funding-finder:change:023aaf18b03cba73e070</id>
-    <updated>2026-09-27T16:17:14.404727Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NEI Translational Research Program for Therapeutics (R61/R33 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360545"/>
-    <id>urn:funding-finder:change:01b56e86a30d4ffb1361</id>
-    <updated>2026-09-27T16:17:14.404727Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: OVC FY 2026 Housing Assistance for Victims of Human Trafficking</title>
-    <link href="https://www.grants.gov/search-results-detail/363654"/>
-    <id>urn:funding-finder:change:0166706ab2e33ec4e24c</id>
-    <updated>2026-09-27T16:17:14.404727Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Invited To Apply - Internet Crimes Against Children (ICAC) Task Forces</title>
-    <link href="https://www.grants.gov/search-results-detail/363919"/>
-    <id>urn:funding-finder:change:f913c7dc86b32f8ed736</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Preschool Development Grant Birth Through Five (PDG B-5) SMART Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363047"/>
-    <id>urn:funding-finder:change:f85734dce7a75dde8f64</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Peer Reviewed Medical, Platform Clinical Translation Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362329"/>
-    <id>urn:funding-finder:change:f50b56ccb58075e74f18</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: NIJ FY25 Invited to Apply - Law Enforcement Advancing Data and Science (LEADS) Scholars Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363918"/>
-    <id>urn:funding-finder:change:f2d703f74b9765f88f68</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-24</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Upholding the Rule of Law and Preventing Wrongful Convictions Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363893"/>
-    <id>urn:funding-finder:change:f1b4b7958663c145e3e3</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Integrated Viral Hepatitis Surveillance, Testing, Treatment, and Prevention Programs for Health Departments (IVH-STTP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362731"/>
-    <id>urn:funding-finder:change:ec189d8398a1e9fa3c11</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: DoW Parkinson’s, Early Investigator Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362866"/>
-    <id>urn:funding-finder:change:e9dab1f33bf21fa7fdcb</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-23</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363899"/>
-    <id>urn:funding-finder:change:e7e11f93011c675f2849</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Advisory Support for Establishing a National Cybersecurity Operations Center (SOC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363843"/>
-    <id>urn:funding-finder:change:e138170a0d538e03181c</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:change:d8c4d00916a670039b48</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: ROSES25: C.4 Planetary Science Enabling Facilities</title>
-    <link href="https://www.grants.gov/search-results-detail/363258"/>
-    <id>urn:funding-finder:change:d53a1e74b66525480253</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Integrated Viral Hepatitis Surveillance, Testing, Treatment, and Prevention Programs for Health Departments (IVH-STTP)</title>
-    <link href="https://www.grants.gov/search-results-detail/362731"/>
-    <id>urn:funding-finder:change:d325b32c227e2c613088</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-12-09 → 2027-02-16</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Comprehensive Opioid, Stimulant, and Substance Use Program (COSSUP) Training and Technical Assistance (TTA)</title>
-    <link href="https://www.grants.gov/search-results-detail/363891"/>
-    <id>urn:funding-finder:change:ccb728001099b809c4a1</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: ROSES25: A.14 Atmosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363240"/>
-    <id>urn:funding-finder:change:c3cf68b7c6d6103bb422</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-10-20 → 2026-12-02</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Second Chance Act Community-based Reentry Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363892"/>
-    <id>urn:funding-finder:change:c31e07fa461262500a41</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: ROSES25: A.15 Biosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363241"/>
-    <id>urn:funding-finder:change:bf6cb059c541e131c5d5</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: State Biomonitoring Cooperative Agreement</title>
-    <link href="https://www.grants.gov/search-results-detail/363917"/>
-    <id>urn:funding-finder:change:bf26fcef3a6e3958d859</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Capital Case Litigation Initiative: Improving the Quality of Legal Representation in State Capital Cases</title>
-    <link href="https://www.grants.gov/search-results-detail/363887"/>
-    <id>urn:funding-finder:change:bdb3c7b44ff0ebd99db5</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Research to Improve Rigor, Replicability, and Reproducibility in Biomedical and Behavioral Sciences</title>
-    <link href="https://www.grants.gov/search-results-detail/363915"/>
-    <id>urn:funding-finder:change:bd38ec177a9d9ef6c382</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/351715"/>
-    <id>urn:funding-finder:change:bb2184819649cdb1e868</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: ROSES 2025: A.16 Cryosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363759"/>
-    <id>urn:funding-finder:change:ba271b09e9b2a043a18d</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Invited to Apply - Court Appointed Special Advocates (CASA) Training, Technical Assistance, and Subgrants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363921"/>
-    <id>urn:funding-finder:change:b40db5ead3f7404f9ce9</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Neurofibromatosis Investigator-Initiated Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362975"/>
-    <id>urn:funding-finder:change:ab464a2bf1cbb6bdc464</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Peer Reviewed Medical, Clinical Trial Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362321"/>
-    <id>urn:funding-finder:change:a969b8a97d48df06c9b6</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Juvenile Drug Treatment Court Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363901"/>
-    <id>urn:funding-finder:change:a908f9c30f400a76fd5b</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Infrastructure Capacity for Biological Research (Capacity)</title>
-    <link href="https://www.grants.gov/search-results-detail/347679"/>
-    <id>urn:funding-finder:change:a88d02d967dbd2eccf73</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY26 Paul Coverdell Forensic Science Improvement - Formula Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363908"/>
-    <id>urn:funding-finder:change:a7f079c5f4a99757e200</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Infrastructure Innovation for Biological Research (Innovation)</title>
-    <link href="https://www.grants.gov/search-results-detail/347680"/>
-    <id>urn:funding-finder:change:a50ba119de1ab7521bb4</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Training and Employment Guidance Letter (02-26) for FY 2026 Community Project Funding/Congressionally Directed Spending</title>
-    <link href="https://www.grants.gov/search-results-detail/363715"/>
-    <id>urn:funding-finder:change:a1e5b7f18efafccc3615</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: FY2026/2027 Community Compass Technical Assistance and Capacity Building Program Notice of Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363878"/>
-    <id>urn:funding-finder:change:a0616afd75c44e6d3755</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363285"/>
-    <id>urn:funding-finder:change:9ddfb43cc5f7a4c0e91e</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="deadline_changed"/>
-    <summary>not listed → 2026-09-25</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Veterans Treatment Court Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363900"/>
-    <id>urn:funding-finder:change:9d71283a2ecd04c844d7</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: ROSES25: A.14 Atmosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363240"/>
-    <id>urn:funding-finder:change:9c990f0bb1bf2213faca</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OJJDP FY 2026 Invited to Apply - Court Appointed Special Advocates (CASA) Training, Technical Assistance, and Subgrants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363921"/>
-    <id>urn:funding-finder:change:9b5d2afb592652b8c2b6</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-30</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Advancing Global Health</title>
-    <link href="https://www.grants.gov/search-results-detail/363912"/>
-    <id>urn:funding-finder:change:9b51890323a5828a5804</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: ROSES 2025: D.4 Theoretical and Computational Astrophysics Networks</title>
-    <link href="https://www.grants.gov/search-results-detail/363747"/>
-    <id>urn:funding-finder:change:953212b469a09cf66c5c</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: FY26 COPS Technology and Equipment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362643"/>
-    <id>urn:funding-finder:change:9441b95c1996f3479e69</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: CONTAMINATED ALASKA NATIVE CLAIMS SETTLEMENT ACT LANDS ASSISTANCE PROGRAM</title>
-    <link href="https://www.grants.gov/search-results-detail/351547"/>
-    <id>urn:funding-finder:change:941dbe5d5c67906fe877</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Adult Treatment Court Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363888"/>
-    <id>urn:funding-finder:change:8ff654597aba00362ccb</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIJ FY25 Invited to Apply - Law Enforcement Advancing Data and Science (LEADS) Scholars Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363918"/>
-    <id>urn:funding-finder:change:8f7104f3640ea8db20f8</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY23- Bellows Falls Intermodal Center Rehabilitation</title>
-    <link href="https://www.grants.gov/search-results-detail/363922"/>
-    <id>urn:funding-finder:change:8a5eb3ce10cc34349d54</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363285"/>
-    <id>urn:funding-finder:change:8a4fe2eb02f038946a8d</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-25</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: FY27 Brownfields Job Training (JT) Grants</title>
-    <link href="https://www.grants.gov/search-results-detail/363223"/>
-    <id>urn:funding-finder:change:885a66d516d258a5406e</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: ROSES 2025: A.17 Hydrosphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363789"/>
-    <id>urn:funding-finder:change:8415dea204e4b4c566c6</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NSF Ongoing - New requirement for providing e-mail documentation of Program Officer approval for the submission of RAPID and EAGER proposals</title>
-    <link href="https://new.nsf.gov/policies/pappg/24-1"/>
-    <id>urn:funding-finder:change:78195b33cf5a57a5c33a</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Strengthening Internet Crimes Against Children (ICAC) Technological Investigative Capacity</title>
-    <link href="https://www.grants.gov/search-results-detail/363910"/>
-    <id>urn:funding-finder:change:7758e7f69d62c1f1e59b</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NSF Ongoing - New requirement for providing e-mail documentation of Program Officer approval for the submission of RAPID and EAGER proposals</title>
-    <link href="https://new.nsf.gov/policies/pappg/24-1"/>
-    <id>urn:funding-finder:change:71ffd7ce5a515d5f74ad</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Community and Schools Youth Drug Prevention Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363902"/>
-    <id>urn:funding-finder:change:706d8268c3398a58a0d2</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Multistate Mentoring Programs</title>
-    <link href="https://www.grants.gov/search-results-detail/363911"/>
-    <id>urn:funding-finder:change:6887596f86488bfe528e</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Neurofibromatosis Synergistic Idea Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362973"/>
-    <id>urn:funding-finder:change:622f7f0da978d9351fe0</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Paul Coverdell Forensic Science Improvement- Competitive Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363909"/>
-    <id>urn:funding-finder:change:5fbe508c6be9b4a9f516</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 DNA Capacity Enhancement for Backlog Reduction (CEBR)-Formula Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363889"/>
-    <id>urn:funding-finder:change:5cdd55f33bec3db50c2a</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Disadvantaged Communities (DAC) Consultant Pool</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z0000007WGbAAM"/>
-    <id>urn:funding-finder:change:5a24aa28e377672ca9df</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-23</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY23-Vermont Amtrak Stations Rehabilitation Phase 1</title>
-    <link href="https://www.grants.gov/search-results-detail/363916"/>
-    <id>urn:funding-finder:change:59c1abf5042909f80210</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-01</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: Implementation Research on Multi-component Community-Clinical Linkage Approaches for Diabetes Prevention and Management</title>
-    <link href="https://www.grants.gov/search-results-detail/363360"/>
-    <id>urn:funding-finder:change:554345adb18693785faa</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: FY23-Vermont Amtrak Stations Rehabilitation Phase 1</title>
-    <link href="https://www.grants.gov/search-results-detail/363916"/>
-    <id>urn:funding-finder:change:4e28838af243690be010</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: FY26 COPS Technology and Equipment Program</title>
-    <link href="https://www.grants.gov/search-results-detail/362643"/>
-    <id>urn:funding-finder:change:4a5b1ae6eba4330a8b3e</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-01</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Camille &amp; Henry Dreyfus Foundation - Camille Dreyfus Teacher-Scholar Award (2027)</title>
-    <link href="https://rochester.infoready4.com/"/>
-    <id>urn:funding-finder:change:4a148bced2ec312e7cf3</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Students, Teachers, and Officers Preventing (STOP) School Violence Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363913"/>
-    <id>urn:funding-finder:change:48e566c536f3506ebfed</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Prosecuting Cold Cases Using DNA</title>
-    <link href="https://www.grants.gov/search-results-detail/363890"/>
-    <id>urn:funding-finder:change:480e010d6d2e8acb4e40</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: OJJDP FY 2026 Invited To Apply - Internet Crimes Against Children (ICAC) Task Forces</title>
-    <link href="https://www.grants.gov/search-results-detail/363919"/>
-    <id>urn:funding-finder:change:477151d5128997ed4234</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-30</summary>
-  </entry>
-  <entry>
-    <title>Deadline changed: Preschool Development Grant Birth Through Five (PDG B-5) SMART Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363047"/>
-    <id>urn:funding-finder:change:45e39ff376172f5938b5</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="deadline_changed"/>
-    <summary>2026-11-17 → 2026-11-20</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Camille &amp; Henry Dreyfus Foundation - Camille Dreyfus Teacher-Scholar Award (2027)</title>
-    <link href="https://rochester.infoready4.com/"/>
-    <id>urn:funding-finder:change:43dd3ada884cf36bb87a</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Advancing Global Health</title>
-    <link href="https://www.grants.gov/search-results-detail/363649"/>
-    <id>urn:funding-finder:change:43286883ba6c72751151</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NIH Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PAR-25-322.html"/>
-    <id>urn:funding-finder:change:3f41c512a2ee9dc387d1</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
-    <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
-    <id>urn:funding-finder:change:3ec54d1e0d08edfc56c7</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Victims of Child Abuse Act Training and Technical Assistance for Child Abuse Professionals</title>
-    <link href="https://www.grants.gov/search-results-detail/363904"/>
-    <id>urn:funding-finder:change:3c57f2bdcb05a164abe6</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 National Center for Veterans Justice</title>
-    <link href="https://www.grants.gov/search-results-detail/363898"/>
-    <id>urn:funding-finder:change:37e66562d3dd8ce294c1</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: ROSES25: A.13 Accelerating Earth Solutions</title>
-    <link href="https://www.grants.gov/search-results-detail/363224"/>
-    <id>urn:funding-finder:change:2de6db9a6ed8bbff92f6</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Foundations</title>
-    <link href="https://www.grants.gov/search-results-detail/302270"/>
-    <id>urn:funding-finder:change:2b8349c55721a2cfef48</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Rural Violent Crime Reduction Initiative</title>
-    <link href="https://www.grants.gov/search-results-detail/363907"/>
-    <id>urn:funding-finder:change:284b66b5aa111848e3af</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: PumpPrimer II Program for SAS and Hajim Tenure-track faculty</title>
-    <link href="https://rochester.infoready4.com/"/>
-    <id>urn:funding-finder:change:2832afb71f9ff0f452bd</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-23</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: NM-TEST1726</title>
-    <link href="https://www.grants.gov/search-results-detail/363641"/>
-    <id>urn:funding-finder:change:2674561b61ccd8b93bce</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: NIH Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PAR-25-322.html"/>
-    <id>urn:funding-finder:change:25e91610baf06802b6a5</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Neurofibromatosis Exploration-Hypothesis Development Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362976"/>
-    <id>urn:funding-finder:change:253be8c9594e12bbf401</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Opportunity amended: NRCS' Feral Swine Eradication and Control Pilot Program Fiscal Year (FY) 2026</title>
-    <link href="https://www.grants.gov/search-results-detail/363285"/>
-    <id>urn:funding-finder:change:2471497b2ca3a5aab034</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="amended"/>
-    <summary>Official source record changed</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Joint DMS/NIGMS Initiative to Support Research at the Interface of the Biological and Mathematical Sciences (DMS/NIGMS)</title>
-    <link href="https://www.grants.gov/search-results-detail/340828"/>
-    <id>urn:funding-finder:change:23c20bbb713755f1aa6a</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363905"/>
-    <id>urn:funding-finder:change:21bcbde7eae458ed89fa</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Invited to Apply - Emergency and Transitional Pet Shelter and Housing Assistance for Victims of Domestic Violence Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363914"/>
-    <id>urn:funding-finder:change:21879c2945f697d55e54</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Status changed: Preschool Development Grant Birth Through Five (PDG B-5) SMART Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/363047"/>
-    <id>urn:funding-finder:change:20399a1bd070f01eb063</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="status_changed"/>
-    <summary>forecasted → posted</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: DoW Neurofibromatosis Research Academy - Scholar Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362974"/>
-    <id>urn:funding-finder:change:1bce31bb108c29ec0b09</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: BJA FY 2026 Edward Byrne Memorial Justice Assistance Grant (JAG) Program-State Formula</title>
-    <link href="https://www.grants.gov/search-results-detail/363711"/>
-    <id>urn:funding-finder:change:19bedcd0466233a3aecc</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: Invited to Apply - Emergency and Transitional Pet Shelter and Housing Assistance for Victims of Domestic Violence Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363914"/>
-    <id>urn:funding-finder:change:179ce9cf2e8860752715</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: DoW Parkinson’s, Investigator-Initiated Research Award</title>
-    <link href="https://www.grants.gov/search-results-detail/362868"/>
-    <id>urn:funding-finder:change:0de9a52503b94429728f</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-10-23</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: FY23- Bellows Falls Intermodal Center Rehabilitation</title>
-    <link href="https://www.grants.gov/search-results-detail/363922"/>
-    <id>urn:funding-finder:change:09dd2f6f97489f292980</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: BJA FY 2026 Edward Byrne Memorial Justice Assistance Grant (JAG) Program-State Formula</title>
-    <link href="https://www.grants.gov/search-results-detail/363711"/>
-    <id>urn:funding-finder:change:0714ac1ecdc8270d61e1</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-23</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Combinatorics</title>
-    <link href="https://www.grants.gov/search-results-detail/302273"/>
-    <id>urn:funding-finder:change:055a822d8077ba8e8c57</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>Closing soon: NIH Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PAR-25-322.html"/>
-    <id>urn:funding-finder:change:0545913fa71c5406d49f</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closing_soon"/>
-    <summary>Deadline 2026-09-28</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: OJJDP FY 2026 Missing and Exploited Children Training and Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/363903"/>
-    <id>urn:funding-finder:change:04ebf6a69ebe0b816423</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
-  </entry>
-  <entry>
-    <title>Closed or removed: Advancing Oil and Natural Gas Production and Delivery</title>
-    <link href="https://www.grants.gov/search-results-detail/363302"/>
-    <id>urn:funding-finder:change:04d9bf7b8be3e437c6e9</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="closed_or_removed"/>
-    <summary>No longer in the current catalog</summary>
-  </entry>
-  <entry>
-    <title>New opportunity: Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363906"/>
-    <id>urn:funding-finder:change:00d96b81c6385f26f67c</id>
-    <updated>2026-09-23T15:02:58.431956Z</updated>
-    <category term="new"/>
-    <summary>First appeared in the public catalog</summary>
   </entry>
 </feed>

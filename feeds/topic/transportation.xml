@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/transportation.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Mentored Career Transition Award (KT1/R00)</title>
@@ -269,7 +269,7 @@
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>NYSERDA</name></author>
     <category term="Transportation"/>
-    <summary>NYSERDA | Application 2026-10-20 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
+    <summary>NYSERDA | Application 2026-10-27 | Supports public sector organizations that aim to develop large portfolios of public Level 2 electric vehicle charging sites within their jurisdictions in New York State. Program Opportunity Notice (PON) 6141 makes up to $35 million available from the Sustainable Future Program, with a minimum of $1 million and a maximum of $15 million of NYSERDA funding per award.</summary>
   </entry>
   <entry>
     <title>Charge Ready NY 2.0 Equipment and Network Qualification Process</title>
@@ -436,15 +436,6 @@ scale, …</summary>
     <summary>AmeriCorps | Application 2026-10-20 | AmeriCorps improves lives, strengthens communities, and fosters civic engagement through service and volunteering. AmeriCorps brings people together to tackle some of the country’s most pressing challenges through national service and volunteerism. AmeriCorps members and AmeriCorps Seniors volunteers serve with organizations dedicated to the improvement of communities and those serving. AmeriCorps…</summary>
   </entry>
   <entry>
-    <title>OVC FY 2026 Housing Assistance for Victims of Human Trafficking</title>
-    <link href="https://www.grants.gov/search-results-detail/363654"/>
-    <id>urn:funding-finder:grants-gov:363654</id>
-    <updated>2026-08-19T00:00:00Z</updated>
-    <author><name>Office for Victims of Crime</name></author>
-    <category term="Transportation"/>
-    <summary>Office for Victims of Crime | Application 2026-09-28 | This is a notice of funding opportunity (NOFO) for the OVC FY 2026 Housing Assistance for Victims of Human Trafficking. This opportunity will fund organizations that provide housing and associated support services to victims of human trafficking as defined by 22 U.S.C. § 7102(11). The primary focus of this program is to provide rapid rehousing (i.e., transitional housing and supportive services th…</summary>
-  </entry>
-  <entry>
     <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/361317"/>
     <id>urn:funding-finder:grants-gov:361317</id>
@@ -506,16 +497,6 @@ scale, …</summary>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>National Highway Traffic Safety Administration | Application 2027-09-01 | While the agency will consider innovative enhancements to existing countermeasures, the goal is to develop evidence-based projects that are scalable and transferable for use by State and local law enforcement agencies. The primary intent of this of the ITSE Grant Program is to 1) develop innovative traffic safety enforcement programs that demonstrate effectiveness by reducing the number of motor v…</summary>
-  </entry>
-  <entry>
-    <title>FY26 Bus Safety, Accessibility, and Innovation Notice of Funding Opportunity</title>
-    <link href="https://www.grants.gov/search-results-detail/363372"/>
-    <id>urn:funding-finder:grants-gov:363372</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>DOT - Federal Transit Administration</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>DOT - Federal Transit Administration | Application 2026-09-28 | The Federal Transit Administration (FTA) announces the opportunity to apply for competitive awards totaling up to $10 million in Public Transportation Innovation Program (49 U.S.C. 5312) funds for the Fiscal Year (FY) 2026 Bus Safety, Accessibility, and Innovation Research Program under Assistance Listing Number 20.530. As required by Federal public transportation law, funds will be awarded compet…</summary>
   </entry>
   <entry>
     <title>National Estuarine Research Reserve System (NERRS) Land Acquisition and Construction Program for Fiscal Year 2026</title>
@@ -632,5 +613,24 @@ scale, …</summary>
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>National Institutes of Health | Application 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. The purpose of this Notice of Funding Opportunity (NOFO) encourages Exploratory/Developmental Phased Innovation (R61/R33) grant applications to support development of clinical trials to treat critical and …</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Small Grant Program for NHLBI K01/K08/K23/K25 Recipients (R03 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359675"/>
+    <id>urn:funding-finder:grants-gov:359675</id>
+    <updated>2026-05-12T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2028-11-07 | This is a Notice of Funding Opportunity (NOFO) for a Limited Competition that invites applications from eligible organizations to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the applications will be peer-reviewed, and only meritorious applications will be considered. The purpose of this NOFO is to solicit current or …</summary>
+  </entry>
+  <entry>
+    <title>Functional Target Validation for Alzheimer's Disease-Related Dementias</title>
+    <link href="https://www.grants.gov/search-results-detail/361450"/>
+    <id>urn:funding-finder:grants-gov:361450</id>
+    <updated>2026-05-05T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Estimated Application 2026-11-06 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects that propose comprehensive functional validation of newly identified therapeutic target candidates for Alzheimer’s Disease-Related Dementias (ADRD). A major barrier to the development of effective treatments for ADRD, as well as other complex central nervous system disorders,…</summary>
   </entry>
 </feed>

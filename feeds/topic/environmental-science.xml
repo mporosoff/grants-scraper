@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/environmental-science.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: Biomedical Research Environment &amp; Sponsored Programs Administration Development (BRE-SPAD) Program</title>
@@ -347,6 +347,16 @@
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-01 | CDC/ATSDR is inviting research proposals to study risk factors for Amyotrophic Lateral Sclerosis (ALS). Studies on military service, contact sports, traumatic brain injury, neuroinflammation, and infections agents and exposures are encouraged. Funding will be for four funding options: Option A - Support research with strong existing evidence such as studies on known environmental or genetic risk f…</summary>
   </entry>
   <entry>
+    <title>National Parks Business Plan Internship</title>
+    <link href="https://www.grants.gov/search-results-detail/363985"/>
+    <id>urn:funding-finder:grants-gov:363985</id>
+    <updated>2026-09-28T00:00:00Z</updated>
+    <author><name>National Park Service</name></author>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <summary>National Park Service | Application 2027-01-04 | The National Parks Business Plan Internship (BPI) goal is to jointly administer a graduate-level internship program focused on improving the business management and operational health of our national parks and NPS programs. The internship program should: Provide students with in-depth training on NPS business management and operations, exposure to park and/or program level operations, and the oppo…</summary>
+  </entry>
+  <entry>
     <title>Easement Restoration and Stewardship</title>
     <link href="https://www.grants.gov/search-results-detail/363920"/>
     <id>urn:funding-finder:grants-gov:363920</id>
@@ -634,14 +644,5 @@
     <author><name>Bureau of African Affairs</name></author>
     <category term="Environmental science"/>
     <summary>Bureau of African Affairs | Application 2027-05-31 | The U.S.-Africa Strategic Investment Program advances America's national interests by harnessing market-based, private sector-led growth across two strategic focus areas: Critical Minerals Investment and Commercial Diplomacy Acceleration. This program seeks market-based solutions that strengthen the environment for foreign investment in sub-Saharan Africa through transparent and competitive proces…</summary>
-  </entry>
-  <entry>
-    <title>BJA FY 2026 The Kevin and Avonte Program: Reducing Injury and Death of Missing Individuals with Dementia and Developmental Disabilities</title>
-    <link href="https://www.grants.gov/search-results-detail/363629"/>
-    <id>urn:funding-finder:grants-gov:363629</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>Bureau of Justice Assistance</name></author>
-    <category term="Environmental science"/>
-    <summary>Bureau of Justice Assistance | Application 2026-10-06 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Kevin and Avonte Program: Reducing Injury and Death of Missing Individuals with Dementia and Developmental Disabilities. This opportunity supports public safety efforts to reduce deaths and injuries of individuals with forms of dementia, such as Alzheimer’s disease, or developmental disabilities, such as autism, who, due to their c…</summary>
   </entry>
 </feed>

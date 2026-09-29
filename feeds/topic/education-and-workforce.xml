@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -408,6 +408,17 @@
     <summary>Health Resources and Services Administration | Estimated Application 2027-03-09 | The Health Workforce Research Centers support research that helps decision-makers at the federal, state, and local levels understand health workforce needs.</summary>
   </entry>
   <entry>
+    <title>Promoting Cancer Surveillance Workforce, Education, and Data Use</title>
+    <link href="https://www.grants.gov/search-results-detail/363986"/>
+    <id>urn:funding-finder:grants-gov:363986</id>
+    <updated>2027-01-05T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Cancer"/>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-03-08 | This notice of funding opportunity (NOFO) will help build a workforce that's prepared to collect and use high-quality cancer data. This work is essential to understand the impact of cancer and inform public health action, research, and policy. This NOFO will support the National Program of Cancer Registries (NPCR) by: Strengthening the cancer surveillance workforce. Improving NPCR cancer data qual…</summary>
+  </entry>
+  <entry>
     <title>Children’s Hospitals Graduate Medical Education (CHGME) Payment Program</title>
     <link href="https://www.grants.gov/search-results-detail/363113"/>
     <id>urn:funding-finder:grants-gov:363113</id>
@@ -606,15 +617,5 @@
     <category term="Neuroscience"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
-  </entry>
-  <entry>
-    <title>Ryan White HIV/AIDS Program Part B AIDS Drug Assistance Program Training and Technical Assistance</title>
-    <link href="https://www.grants.gov/search-results-detail/363414"/>
-    <id>urn:funding-finder:grants-gov:363414</id>
-    <updated>2026-11-21T00:00:00Z</updated>
-    <author><name>Health Resources and Services Administration</name></author>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <summary>Health Resources and Services Administration | Estimated Application 2027-01-20 | The purpose of this funding is to build the capacity of ADAPs through tools and technical assistance to maximize the impact of ADAPs in improving the health outcomes of people with HIV in a changing health care environment.</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -433,6 +433,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-15 | The NIH Common Fund, in partnership with other NIH Institutes and Centers, plans to issue Notices of Funding Opportunity (NOFOs) for the RNomics program, which seeks to develop tools for studying the full set of RNA molecules (the RNome) in cells and tissues. The program will support technologies and resources that enable integrated analysis of RNA sequences, modifications, structures, locations, …</summary>
   </entry>
   <entry>
+    <title>HEAL Initiative: Whole Joint Health Program (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/361304"/>
+    <id>urn:funding-finder:grants-gov:361304</id>
+    <updated>2026-09-28T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Application 2026-10-30 | The NIH Helping to End Addiction Long-term® (HEAL) Initiative is releasing this Notice of Funding Opportunity (NOFO) to support a phased mechanistic clinical research program focusing on understudied biological mechanisms that drive joint pain. The phased projects supported by this program (of up to five years total in duration) will first identify and validate multi-tissue mechanisms underlying j…</summary>
+  </entry>
+  <entry>
     <title>Genomic Community Resources (U24 Clinical Trials Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361263"/>
     <id>urn:funding-finder:grants-gov:361263</id>
@@ -645,19 +654,5 @@
     <category term="Manufacturing"/>
     <category term="Water"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Civil, Mechanical and Manufacturing Innovation (CMMI)</title>
-    <link href="https://www.grants.gov/search-results-detail/363614"/>
-    <id>urn:funding-finder:grants-gov:363614</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <category term="Materials science"/>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
 </feed>

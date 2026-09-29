@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
@@ -91,13 +91,13 @@
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Separations and membranes"/>
     <category term="Materials science"/>
+    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -106,14 +106,14 @@
     <id>urn:funding-finder:grants-gov:362063</id>
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Quantum science"/>
-    <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>

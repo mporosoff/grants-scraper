@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/neuroscience.xml</id>
-  <updated>2026-09-28T21:50:18Z</updated>
+  <updated>2026-09-29T16:35:06Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIH Stroke Clinical Trials Network (StrokeNet) Infrastructure - National Coordinating Center (NCC) and National Data Management Center (NDMC)</title>
@@ -590,15 +590,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <summary>National Institutes of Health | Estimated Application 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
   </entry>
   <entry>
-    <title>Single Source: Post-Stroke Vascular Contributions to Cognitive Impairment and Dementia (VCID) in the United States (U19 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360547"/>
-    <id>urn:funding-finder:grants-gov:360547</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Application 2026-09-28 | This is a non-competitive funding opportunity intended to fund a single award. The National Institute of Neurological Disorders and Stroke is announcing its intent to issue a single source cooperative agreement award to Massachusetts General Hospital to support the renewal of the Post-Stroke Vascular Cognitive Impairment &amp; Dementia (VCID) program, an ongoing, multi-site clinical research initiativ…</summary>
-  </entry>
-  <entry>
     <title>BRAIN Initiative: Brain-Behavior Quantification and Synchronization - Transformative Research on Behavior at the Organismal Level</title>
     <link href="https://www.grants.gov/search-results-detail/361205"/>
     <id>urn:funding-finder:grants-gov:361205</id>
@@ -651,5 +642,16 @@ we will not consider for support include Covid-19 relat…</summary>
     <author><name>National Institutes of Health</name></author>
     <category term="Neuroscience"/>
     <summary>National Institutes of Health | Application 2027-10-04 | This funding announcement, issued by the Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, seeks transformative, cutting-edge, and innovative research that embraces new technologies, ideas, and approaches to understand brain circuit function and contributions to behavior. It is a component of the BRAIN Initiative Connectivity Across Scales (BRAIN CONNECTS) Program,…</summary>
+  </entry>
+  <entry>
+    <title>DoW Traumatic Brain Injury and Psychological Health, Clinical Trial Award</title>
+    <link href="https://www.grants.gov/search-results-detail/362187"/>
+    <id>urn:funding-finder:grants-gov:362187</id>
+    <updated>2026-05-21T00:00:00Z</updated>
+    <author><name>Defense Health Agency Contracting Activity - DHACA</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>Defense Health Agency Contracting Activity - DHACA | Application 2026-10-15 | verify prerequisite | Summary: The fiscal year 2026 (FY26) Traumatic Brain Injury and Psychological Health Research Program (TBIPHRP) Clinical Trial Award (CTA) intends to support clinical trials with the potential to have a significant impact on psychological health conditions and/or traumatic brain injury (TBI) through clinical applications, including health care products, technologies and/or practice guidelines. Dis…</summary>
   </entry>
 </feed>
