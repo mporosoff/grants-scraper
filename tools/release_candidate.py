@@ -22,6 +22,8 @@ POLICY = "config/release_dependencies.json"
 VERSION = "immutable-release-1"
 MANIFEST = "candidate.json"
 GATES = ("package-integrity", "python", "browser", "frozen-query", "scoring", "no-drift", "notice-projection")
+FACET_FEED_PATTERNS = ("feeds/topic/*.xml", "feeds/source-type/*.xml")
+FACET_FEED_NAME = re.compile(r"feeds/(?:topic|source-type)/[a-z0-9]+(?:-[a-z0-9]+)*\.xml")
 
 
 def encoded(value):
@@ -72,6 +74,83 @@ def paths(root, patterns):
                 checked_path(root, name)
                 result.add(name)
     return sorted(result)
+
+
+def facet_feed_names(root):
+    """Only direct XML children of the two directories owned by build_feeds."""
+    names = set()
+    parent = checked_path(root, 'feeds')
+    if getattr(parent, 'is_junction', lambda: False)():
+        raise ValueError('Managed feed parent is a junction')
+    for directory in ('feeds/topic', 'feeds/source-type'):
+        folder = checked_path(root, directory)
+        if getattr(folder, 'is_junction', lambda: False)():
+            raise ValueError('Managed feed directory is a junction')
+        if not folder.exists():
+            continue
+        for path in folder.glob('*.xml'):
+            name = path.relative_to(root).as_posix()
+            checked_path(root, name)
+            if not FACET_FEED_NAME.fullmatch(name) or not path.is_file():
+                raise ValueError('Unexpected managed feed path: ' + name)
+            names.add(name)
+    return names
+
+
+def complete_feed_inventory(root, names):
+    """Bind every facet index target to the selected immutable payload."""
+    names = set(names)
+    selected = {name for name in names if FACET_FEED_NAME.fullmatch(name)}
+    if 'feeds/index.json' not in names:
+        if selected:
+            raise ValueError('Facet feeds require their complete feed index')
+        return None
+    from scripts.build_feeds import FEEDS_BASE
+    index = read_json(checked_path(root, 'feeds/index.json'))
+    rows = index.get('feeds')
+    if not isinstance(rows, list):
+        raise ValueError('Invalid feed index')
+    targets = []
+    for row in rows:
+        url = row.get('url') if isinstance(row, dict) else None
+        if not isinstance(url, str) or not url.startswith(FEEDS_BASE + '/'):
+            raise ValueError('Unexpected feed index target')
+        name = 'feeds/' + url.removeprefix(FEEDS_BASE + '/')
+        if name not in ('feeds/all.xml', 'feeds/changes.xml') and not FACET_FEED_NAME.fullmatch(name):
+            raise ValueError('Unexpected feed index target: ' + name)
+        if name not in names:
+            raise ValueError('Feed index target omitted from candidate: ' + name)
+        targets.append(name)
+    declared = {name for name in targets if FACET_FEED_NAME.fullmatch(name)}
+    if ('feeds/all.xml' not in targets or len(targets) != len(set(targets))
+            or selected != declared or facet_feed_names(root) != declared):
+        raise ValueError('Candidate facet feed inventory differs from its index')
+    return {'version': 1, 'paths': sorted(declared)}
+
+
+def verify_feed_inventory(root, manifest):
+    if 'feed_inventory' in manifest and manifest['feed_inventory'] != complete_feed_inventory(root, manifest['files']):
+        raise ValueError('Candidate feed inventory identity differs')
+
+
+def prune_obsolete_feeds(root, manifest):
+    """Complete new inventories may retire obsolete facets; legacy ones may not."""
+    if 'feed_inventory' not in manifest:
+        return
+    expected = set(manifest['feed_inventory']['paths'])
+    for name in sorted(facet_feed_names(root) - expected):
+        checked_path(root, name).unlink()
+
+
+def publication_paths(root, manifest):
+    names = set(manifest['files'])
+    if 'feed_inventory' in manifest:
+        verify_feed_inventory(root, manifest)
+        # Include tracked, now-absent facet paths so their deletions are part of
+        # the reviewed tree. Other feed files remain outside this cleanup scope.
+        names.update(name for name in git(root, 'ls-files', '--', *FACET_FEED_PATTERNS).splitlines()
+                     if FACET_FEED_NAME.fullmatch(name))
+    return sorted(names)
 
 
 def file_hashes(root, names):
@@ -296,6 +375,9 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
                 'timestamp': timestamp(), 'parent_candidate_id': original['candidate_id'],
                 'pinned_inputs': original['generation_files'], 'retained_output_hashes': retained,
                 'provider_contract': read_json(root / 'config/offline_ai.json')}
+    inventory = complete_feed_inventory(root, files)
+    if inventory is not None:
+        manifest['feed_inventory'] = inventory
     manifest["candidate_id"] = digest(encoded(manifest))
     for name in names:
         privacy_check(root / name)
@@ -325,6 +407,7 @@ def load(bundle, expected_id=None):
     actual = {p.relative_to(bundle / "files").as_posix() for p in (bundle / "files").rglob("*") if p.is_file()}
     if actual != set(value["files"]):
         raise ValueError("Unmanifested candidate files")
+    verify_feed_inventory(bundle / "files", value)
     return value
 
 
@@ -335,6 +418,9 @@ def verify_dependencies(root, manifest, allowed=()):
                       stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL).returncode != 0:
         raise ValueError('Generation SHA is not in the protected release history')
     policy = read_json(Path(root) / POLICY)
+    if (set(FACET_FEED_PATTERNS) <= set(policy['generated']) and 'feeds/index.json' in manifest['files']
+            and 'feed_inventory' not in manifest):
+        raise ValueError('Legacy candidate omits complete facet feeds; use its exact retained correction')
     current = generation_dependencies(root)
     if 'dependency_groups' in policy:
         from tools.release_dependencies import verify
@@ -360,6 +446,7 @@ def materialize(root, bundle):
     for name, baseline in manifest['runtime_baseline'].items():
         if digest(checked_path(root, name).read_bytes()) not in (baseline, manifest['files'][name]):
             raise ValueError(f'Release runtime changed: {name}; assemble a reuse candidate without generation')
+    prune_obsolete_feeds(root, manifest)
     for name in manifest["files"]:
         if name in ('README.md', 'PROJECT.md') and digest(checked_path(root, name).read_bytes()) not in (
                 manifest['files'][name], manifest.get('documentation_baseline', {}).get(name)):
@@ -368,6 +455,7 @@ def materialize(root, bundle):
         target.parent.mkdir(parents=True, exist_ok=True)
         shutil.copyfile(Path(bundle) / "files" / name, target)
     verify_files(root, manifest["files"])
+    verify_feed_inventory(root, manifest)
     return manifest
 
 

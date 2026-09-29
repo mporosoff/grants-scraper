@@ -17,6 +17,10 @@ def committed_candidate_matches(root, sha, manifest):
         result = subprocess.run(['git', '-C', str(root), 'show', f'{sha}:{name}'], capture_output=True)
         if result.returncode or c.digest(result.stdout) != expected:
             return False
+    if 'feed_inventory' in manifest:
+        tracked = c.git(root, 'ls-tree', '-r', '--name-only', sha, '--', 'feeds').splitlines()
+        if {name for name in tracked if c.FACET_FEED_NAME.fullmatch(name)} != set(manifest['feed_inventory']['paths']):
+            return False
     return True
 
 
@@ -29,6 +33,8 @@ def reconcile_candidate_branch(root, existing, manifest, repository, *, execute=
     for name, expected in manifest['files'].items():
         if c.digest(subprocess.check_output(['git', '-C', str(root), 'show', f'{old_head}:{name}'])) != expected:
             raise ValueError(f'Existing PR contains a different candidate: {name}')
+    if not committed_candidate_matches(root, old_head, manifest):
+        raise ValueError('Existing PR contains a different feed inventory')
     wait(repository, int(existing['url'].rsplit('/', 1)[1]), old_head)
     # The validated staged tree includes current main's unrelated work. A merge
     # commit preserves the previous publication head without rewriting its ref.
@@ -88,7 +94,7 @@ def prepare(bundle, receipt_path, reports, artifact_run, *, review_timeout=1800)
         c.write_json(root / 'release/candidate-source.json', {'candidate_id': manifest['candidate_id'], 'artifact_run': str(artifact_run)})
         run('git', 'config', 'user.name', 'github-actions[bot]')
         run('git', 'config', 'user.email', '41898282+github-actions[bot]@users.noreply.github.com')
-        run('git', 'add', '--', *manifest['files'], 'release/candidate.json', 'release/validation.json', 'release/candidate-source.json')
+        run('git', 'add', '--', *c.publication_paths(root, manifest), 'release/candidate.json', 'release/validation.json', 'release/candidate-source.json')
         prefix = f"automation/release-{manifest['candidate_id'][:16]}-"
         opened = json.loads(run('gh', 'pr', 'list', '--state', 'open', '--base', 'main', '--limit', '100',
                                 '--json', 'headRefName,headRefOid,url'))

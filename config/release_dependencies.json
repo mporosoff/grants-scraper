@@ -53,6 +53,8 @@
     "evaluation/opportunity_team_generation.json",
     "evaluation/search_v2_hybrid_vector_build.json",
     "feeds/*",
+    "feeds/topic/*.xml",
+    "feeds/source-type/*.xml",
     "evaluation/release_coverage.json"
   ],
   "package": [

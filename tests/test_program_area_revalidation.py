@@ -114,6 +114,7 @@ class ProjectionContracts(unittest.TestCase):
         self.before = {'generated_at': '2026-09-28T21:48:42.702959Z',
             'document_evidence_generated_at': '2026-09-28T21:50:18.818037Z', 'record_count': 1,
             'opportunities': [{'opportunity_id': '359655', 'title': 'Research education',
+                'source_type': 'Federal', 'status': 'posted',
                 'topic_areas': ['Education and workforce', 'Cybersecurity'],
                 'document_program_areas': ['cybersecurity'], 'document_search_text': 'facts cybersecurity',
                 'close_date': '2027-05-26', 'next_submission': {'date': '2027-05-26', 'as_of': '2026-09-28'}}]}
@@ -125,6 +126,11 @@ class ProjectionContracts(unittest.TestCase):
         self.updated['records']['359655']['program_areas'] = []
         self.after['opportunities'][0].update(topic_areas=['Education and workforce'], document_search_text='facts')
         del self.after['opportunities'][0]['document_program_areas']
+        (self.root/'feeds').mkdir()
+        self.historical = {'feeds/changes.xml': b'<feed>original historical events</feed>\n',
+            'feeds/changes.json': b'{"changes":["original"]}\n'}
+        for name, raw in self.historical.items():
+            (self.root/name).write_bytes(raw)
 
     def project(self, transform=None, gate=True):
         after, updated = deepcopy(self.after), deepcopy(self.updated)
@@ -163,13 +169,79 @@ class ProjectionContracts(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, 'notice_projection_gate'):
             self.project(gate=False)
 
+    def test_all_regenerated_facet_feeds_match_corrected_membership_and_preserve_history(self):
+        outputs, _ = self.project()
+        self.assertIn('feeds/topic/education-and-workforce.xml', outputs)
+        self.assertIn('feeds/source-type/federal.xml', outputs)
+        self.assertNotIn('feeds/topic/cybersecurity.xml', outputs)
+        self.assertIn(b'urn:funding-finder:grants-gov:359655', outputs['feeds/topic/education-and-workforce.xml'])
+        self.assertNotIn(b'Cybersecurity', outputs['feeds/topic/education-and-workforce.xml'])
+        p.verify_feed_index(outputs, outputs, changes_present=True)
+        for name, raw in self.historical.items():
+            self.assertNotIn(name, outputs)
+            self.assertEqual((self.root/name).read_bytes(), raw)
+
+    def prepared_receipt(self):
+        outputs, changes = self.project()
+        original = {'generation_files': {n: p.sha(raw) for n, raw in self.historical.items()}}
+        receipt = p.receipt_for(original, {}, outputs, changes, '2026-09-29T01:00:00+00:00')
+        for name, raw in outputs.items():
+            path = self.root/name; path.parent.mkdir(parents=True, exist_ok=True); path.write_bytes(raw)
+        path = self.root/'receipt.json'; path.write_bytes(c.encoded(receipt))
+        return path, receipt
+
+    def test_receipt_rejects_missing_tampered_and_extra_nested_feeds(self):
+        path, receipt = self.prepared_receipt()
+        p.validate_receipt(path, self.root)
+        topic = self.root/'feeds/topic/education-and-workforce.xml'; original = topic.read_bytes()
+        topic.write_bytes(b'stale feed')
+        with self.assertRaisesRegex(ValueError, 'receipt_input_hashes'):
+            p.validate_receipt(path, self.root)
+        topic.write_bytes(original)
+        extra = self.root/'feeds/topic/stale-topic.xml'; extra.write_bytes(b'stale feed')
+        with self.assertRaisesRegex(ValueError, 'complete_local_feed_inventory'):
+            p.validate_receipt(path, self.root)
+        extra.unlink()
+        topic.unlink()
+        with self.assertRaises(FileNotFoundError):
+            p.validate_receipt(path, self.root)
+        # Even a self-consistent omitted file/hash cannot authorize vector work:
+        # the normal feed writer must reproduce the complete receipt inventory.
+        del receipt['projection_hashes']['feeds/topic/education-and-workforce.xml']
+        path.write_bytes(c.encoded(receipt))
+        with self.assertRaisesRegex(ValueError, 'deterministic_feed_projection'):
+            p.validate_receipt(path, self.root)
+
+    def test_historical_feed_changes_cannot_be_hidden_in_projection(self):
+        path, receipt = self.prepared_receipt()
+        receipt['projection_hashes']['feeds/changes.xml'] = p.sha(b'changed')
+        with self.assertRaisesRegex(ValueError, 'projection_paths_and_hashes'):
+            p.projection_names(receipt)
+        (self.root/'feeds/changes.json').write_bytes(b'changed')
+        with self.assertRaisesRegex(ValueError, 'receipt_input_hashes'):
+            p.validate_receipt(path, self.root)
+
+    def test_dynamic_projection_path_scope_is_closed(self):
+        _, receipt = self.prepared_receipt()
+        for name in ('feeds/topic/../changes.xml', 'feeds/topic/Research.xml',
+                     'feeds/topic/research.json', 'data/unrelated.json', 'feeds/changes.xml'):
+            with self.subTest(name=name):
+                changed = deepcopy(receipt); changed['projection_hashes'][name] = p.sha(b'x')
+                with self.assertRaisesRegex(ValueError, 'projection_paths_and_hashes'):
+                    p.projection_names(changed)
+
 
 class VectorOwnershipContracts(unittest.TestCase):
     def setUp(self):
         self.api = FakeAPI(); self.run = self.api.run(900, 1)
         self.owner = {'run_id': 900, 'run_attempt': 1, 'head_sha': 'a' * 40}
+        self.projected = {n: n.encode() for n in p.PROJECTION + (
+            'feeds/topic/research.xml', 'feeds/source-type/federal.xml')}
+        from scripts.build_feeds import FEEDS_BASE
+        self.projected['feeds/index.json'] = c.encoded({'feeds': [
+            {'url': FEEDS_BASE + '/' + n.removeprefix('feeds/')} for n in self.projected if n.endswith('.xml')]})
         self.receipt = {'audit_at': '2026-09-29T01:00:00+00:00',
-            'projection_hashes': {n: p.sha(n.encode()) for n in p.PROJECTION}}
+            'projection_hashes': {n: p.sha(raw) for n, raw in self.projected.items()}}
         self.reservation = {'version': p.VERSION, 'parent_candidate': p.PARENT_CANDIDATE, 'owner': self.owner,
             'max_requests': p.MAX_REQUESTS, 'max_seconds': p.MAX_SECONDS,
             'projection_hashes': self.receipt['projection_hashes'], 'receipt_sha256': p.sha(c.encoded(self.receipt))}
@@ -180,7 +252,8 @@ class VectorOwnershipContracts(unittest.TestCase):
 
     def checkpoint(self):
         files = {'receipt.json': c.encoded(self.receipt), 'reservation.json': c.encoded(self.reservation),
-            'prior-vector-receipt.json': b'prior', **{'files/' + n: n.encode() for n in p.PROJECTION + p.VECTORS}}
+            'prior-vector-receipt.json': b'prior', **{'files/' + n: raw for n, raw in self.projected.items()},
+            **{'files/' + n: n.encode() for n in p.VECTORS}}
         checkpoint = {'version': p.VERSION, 'owner': self.owner, 'files': {n: p.sha(raw) for n, raw in files.items()}}
         files['checkpoint.json'] = c.encoded(checkpoint)
         return self.api.artifact(92, p.artifact_name('state', self.owner), self.run, files)
@@ -211,12 +284,72 @@ class VectorOwnershipContracts(unittest.TestCase):
             _, files = p.history(api=self.api)
         self.assertEqual(json.loads(files['receipt.json'])['audit_at'], self.receipt['audit_at'])
         self.assertEqual(set(files), {'receipt.json', 'reservation.json', 'checkpoint.json',
-            'prior-vector-receipt.json', *('files/' + n for n in p.PROJECTION + p.VECTORS)})
+            'prior-vector-receipt.json', *('files/' + n for n in p.projection_names(self.receipt) + p.VECTORS)})
 
     def test_state_raw_tampering_rejected(self):
         self.reserve(); self.checkpoint(); self.api.raw[92] += b'tamper'
         with self.assertRaisesRegex(Exception, 'raw_artifact_digest'):
             p.history(api=self.api)
+
+    def test_checkpoint_cannot_omit_or_rewrite_nested_feeds(self):
+        self.reserve(); meta = self.checkpoint()
+        files = p.zip_files(self.api.raw[92])
+        omitted = 'files/feeds/topic/research.xml'; original = files.pop(omitted)
+        self.api.raw[92] = archive(files); meta['digest'] = 'sha256:' + p.sha(self.api.raw[92])
+        with self.assertRaisesRegex(ValueError, 'complete_checkpoint_members'):
+            p.history(api=self.api)
+        files[omitted] = original + b'tampered'
+        cp = json.loads(files['checkpoint.json']); cp['files'][omitted] = p.sha(files[omitted])
+        files['checkpoint.json'] = c.encoded(cp)
+        self.api.raw[92] = archive(files); meta['digest'] = 'sha256:' + p.sha(self.api.raw[92])
+        with patch.object(p, 'PARENT_VECTOR_RECEIPT_SHA256', p.sha(b'prior')):
+            with self.assertRaisesRegex(ValueError, 'checkpoint_projection_binding'):
+                p.history(api=self.api)
+
+    def test_checkpoint_writes_and_restore_preserves_every_nested_feed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)/'root'; state = Path(directory)/'state'
+            for name, raw in {**self.projected, **{n: n.encode() for n in p.VECTORS}}.items():
+                target = root/name; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
+            with patch.object(p, 'validate_receipt', return_value=self.receipt), \
+                 patch.object(p, 'history', return_value=(self.reservation, None)), \
+                 patch.object(p, 'owner', return_value=self.owner), patch.object(p, 'validate_vectors'), \
+                 patch.object(p.auth, 'trusted_run', return_value=self.run), \
+                 patch.object(p.auth, 'authenticated_zip', return_value=(archive({'files/' + p.VECTORS[3]: b'prior'}), {})):
+                checkpoint = p.checkpoint_vectors('unused', state, root=root)
+            for name in self.projected:
+                self.assertEqual((state/'files'/name).read_bytes(), self.projected[name])
+                self.assertEqual(checkpoint['files']['files/' + name], p.sha(self.projected[name]))
+            self.reserve()
+            self.api.artifact(92, p.artifact_name('state', self.owner), self.run,
+                {path.relative_to(state).as_posix(): path.read_bytes() for path in state.rglob('*') if path.is_file()})
+            restored = Path(directory)/'restored'
+            with patch.object(p, 'validate_receipt', return_value=self.receipt), patch.object(p, 'owner', return_value=self.owner), \
+                 patch.object(p, 'validate_vectors'), patch.object(p, 'PARENT_VECTOR_RECEIPT_SHA256', p.sha(b'prior')):
+                self.assertTrue(p.restore_vectors('unused', restored, root=root, api=self.api))
+            for name in self.projected:
+                self.assertEqual((restored/'files'/name).read_bytes(), self.projected[name])
+
+    def test_constructor_compares_every_authenticated_nested_feed(self):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            original = {'generation_files': {'data/opportunity_teams.js': p.sha(b'teams')}}
+            receipt = p.receipt_for(original, {}, self.projected, {}, self.receipt['audit_at'])
+            checkpoint = {'receipt.json': c.encoded(receipt), **{'files/' + n: raw for n, raw in self.projected.items()},
+                **{'files/' + n: n.encode() for n in p.VECTORS}}
+            for name, raw in {**self.projected, **{n: n.encode() for n in p.VECTORS}}.items():
+                target = root/name; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
+            with patch.object(p, 'validate_receipt', return_value=receipt), \
+                 patch.object(p.auth, 'trusted_run', return_value=self.run), \
+                 patch.object(p.auth, 'authenticated_zip', return_value=(b'parent', {})), \
+                 patch.object(p.auth, 'unpack_public'), patch.object(p, 'authenticate_parent', return_value=(original, {})), \
+                 patch.object(p, 'verify_dependency_scope'), patch.object(p, 'projection', return_value=(self.projected, {})), \
+                 patch.object(p, 'history', return_value=(self.reservation, checkpoint)), \
+                 patch.object(p, 'owner', return_value=self.owner), patch.object(p, 'validate_vectors'):
+                self.assertEqual(p.verify_inputs(root, original, 'unused'), original['generation_files'])
+                checkpoint['files/feeds/topic/research.xml'] = b'altered nested feed'
+                with self.assertRaisesRegex(ValueError, 'uploaded_projection_and_vector_bytes'):
+                    p.verify_inputs(root, original, 'unused')
 
     def test_second_run_cannot_own_or_restore_original_correction(self):
         with patch.object(p, 'owner', return_value={**self.owner, 'run_id': 901}):
@@ -243,6 +376,9 @@ class VectorOwnershipContracts(unittest.TestCase):
                 target = bundle/'files'/name; target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
             original = {'generation_files': {n: p.sha(raw) for n, raw in original_bytes.items()}}
             projected = {name: ('corrected ' + name).encode() for name in p.PROJECTION}
+            projected['feeds/topic/research.xml'] = b'new research feed'
+            projected['feeds/source-type/federal.xml'] = b'new federal feed'
+            obsolete = root/'feeds/topic/obsolete.xml'; obsolete.parent.mkdir(parents=True); obsolete.write_bytes(b'old feed')
             details = {'source_requests': 0}; spending = {'logical_id': 'original'}
             receipt = p.receipt_for(original, spending, projected, details, self.receipt['audit_at'])
             with patch.object(p, 'authenticate_parent', return_value=(original, spending)), \
@@ -254,6 +390,10 @@ class VectorOwnershipContracts(unittest.TestCase):
             self.assertEqual(actual['audit_at'], self.receipt['audit_at'])
             self.assertEqual(replay.call_args.args[1], self.receipt['audit_at'])
             self.assertEqual((root/'data/opportunity_teams.js').read_bytes(), b'unchanged teams')
+            self.assertFalse(obsolete.exists())
+            self.assertEqual((root/'feeds/topic/research.xml').read_bytes(), b'new research feed')
+            self.assertEqual((root/'feeds/source-type/federal.xml').read_bytes(), b'new federal feed')
+            self.assertEqual(p.managed_feed_names(root), {n for n in projected if n.startswith('feeds/')})
 
 
 class VectorReceiptContracts(unittest.TestCase):

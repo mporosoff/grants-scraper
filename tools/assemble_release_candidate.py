@@ -10,6 +10,7 @@ def assemble(root, bundle, team_update=False):
     root, bundle = Path(root), Path(bundle)
     manifest = c.load(bundle)
     c.verify_dependencies(root, manifest, allowed=('teams',) if team_update else ())
+    c.prune_obsolete_feeds(root, manifest)
     for name in manifest['generation_files']:
         target = c.checked_path(root, name)
         target.parent.mkdir(parents=True, exist_ok=True)
@@ -36,6 +37,7 @@ def assemble(root, bundle, team_update=False):
             path.write_text(update_catalog_asset_reference(path.read_text(encoding='utf-8'), catalog),
                             encoding='utf-8', newline='\n')
     c.verify_files(root, manifest['generation_files'])
+    c.verify_feed_inventory(root, manifest)
 
 
 def main():

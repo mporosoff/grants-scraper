@@ -21,7 +21,7 @@ from tools import catalog_smoke_receipt as auth, release_candidate as candidate
 from tools.offline_spend import atomic_json
 
 ROOT = Path(__file__).resolve().parents[1]
-VERSION = 'program-area-revalidation-1'
+VERSION = 'program-area-revalidation-2'
 PARENT_CANDIDATE = '85954ae156ca45aea2b6bac4db500f747e9e64725c230716087b085817c0c1de'
 PARENT_RUN = 36480049073
 PARENT_ATTEMPT = 2
@@ -39,6 +39,7 @@ PARENT_ARTIFACTS = {
 }
 PROJECTION = ('data/opportunities.js', 'data/catalog-metadata.js', 'data/document_evidence.json',
     'feeds/all.xml', 'feeds/index.html', 'feeds/index.json')
+FACET_FEED = re.compile(r'feeds/(?:topic|source-type)/[a-z0-9]+(?:-[a-z0-9]+)*\.xml')
 VECTORS = ('data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-vectors.f16',
     'data/search-v2-voyage-canaries.json', 'evaluation/search_v2_hybrid_vector_build.json')
 PREFIX = 'program-area-vectors-' + PARENT_CANDIDATE + '-'
@@ -63,6 +64,61 @@ def read(path):
 
 def hashes(root, names):
     return candidate.file_hashes(Path(root), names)
+
+
+def projection_names(receipt):
+    """The fixed catalog outputs plus a bounded, explicit managed feed inventory."""
+    values = receipt.get('projection_hashes')
+    require(isinstance(values, dict) and set(PROJECTION) <= set(values) and len(values) <= 256,
+        'complete_projection_inventory')
+    require(all(isinstance(name, str) and (name in PROJECTION or FACET_FEED.fullmatch(name))
+        and isinstance(value, str) and re.fullmatch('[a-f0-9]{64}', value) for name, value in values.items()),
+        'projection_paths_and_hashes')
+    return tuple(sorted(values))
+
+
+def managed_feed_names(root):
+    """Inventory owned feed files without following symlinks or junctions."""
+    root = Path(root)
+    for directory in (root/'feeds', root/'feeds/topic', root/'feeds/source-type'):
+        require(not directory.is_symlink() and not getattr(directory, 'is_junction', lambda: False)(),
+            'managed_feed_directory_link')
+        if directory.exists():
+            require(directory.is_dir() and directory.resolve().is_relative_to(root.resolve()), 'managed_feed_directory')
+    names = {name for name in PROJECTION[3:] if candidate.checked_path(root, name).is_file()}
+    for group in ('topic', 'source-type'):
+        for path in (root/'feeds'/group).glob('*.xml'):
+            name = path.relative_to(root).as_posix()
+            require(FACET_FEED.fullmatch(name) and candidate.checked_path(root, name).is_file(), 'managed_feed_path')
+            names.add(name)
+    return names
+
+
+def feed_projection(catalog, changes_xml=None):
+    """Use the normal feed writer and retain every generated feed, with stable LF bytes."""
+    from scripts.build_feeds import build_feeds
+    stamp = catalog['document_evidence_generated_at']
+    with tempfile.TemporaryDirectory(prefix='program-area-feeds-') as directory:
+        root = Path(directory); feeds = root/'feeds'; feeds.mkdir()
+        # Historical events are untouched. Their presence controls the index link.
+        if changes_xml is not None:
+            (feeds/'changes.xml').write_bytes(changes_xml)
+        build_feeds(catalog, feeds, as_of=timestamp(stamp).date())
+        return {name: (root/name).read_text(encoding='utf-8').encode('utf-8')
+            for name in sorted(managed_feed_names(root))}
+
+
+def verify_feed_index(files, names, *, changes_present):
+    """No advertised facet feed may be omitted from the authenticated projection."""
+    from scripts.build_feeds import FEEDS_BASE
+    rows = auth.json_value(files['feeds/index.json']).get('feeds')
+    require(isinstance(rows, list) and all(isinstance(row, dict) and isinstance(row.get('url'), str) for row in rows),
+        'feed_index')
+    urls = [row['url'] for row in rows]
+    expected = {FEEDS_BASE + '/' + name.removeprefix('feeds/') for name in names if name.endswith('.xml')}
+    if changes_present:
+        expected.add(FEEDS_BASE + '/changes.xml')
+    require(len(urls) == len(set(urls)) and set(urls) == expected, 'complete_feed_index_inventory')
 
 
 def timestamp(value):
@@ -167,19 +223,22 @@ def history(*, api=auth.existing.api):
     files, state_owner = checkpoint_artifact(states[0], 'state', api=api)
     require(state_owner == owner, 'checkpoint_owner')
     cp = auth.json_value(files.get('checkpoint.json', b'{}'))
+    receipt = auth.json_value(files.get('receipt.json', b'{}'))
+    projected = projection_names(receipt)
     expected = {'receipt.json', 'reservation.json', 'checkpoint.json',
-        'prior-vector-receipt.json', *('files/' + n for n in PROJECTION + VECTORS)}
+        'prior-vector-receipt.json', *('files/' + n for n in projected + VECTORS)}
     require(set(files) == expected and files['reservation.json'] == candidate.encoded(reservation),
         'complete_checkpoint_members')
     require(cp.get('version') == VERSION and cp.get('owner') == owner
         and cp.get('files') == {n: sha(raw) for n, raw in files.items() if n != 'checkpoint.json'},
         'checkpoint_integrity')
-    receipt = auth.json_value(files['receipt.json'])
     require(reservation['receipt_sha256'] == sha(files['receipt.json'])
         and reservation['projection_hashes'] == receipt.get('projection_hashes')
         and sha(files['prior-vector-receipt.json']) == PARENT_VECTOR_RECEIPT_SHA256
-        and {n: sha(files['files/' + n]) for n in PROJECTION} == receipt['projection_hashes'],
+        and {n: sha(files['files/' + n]) for n in projected} == receipt['projection_hashes'],
         'checkpoint_projection_binding')
+    verify_feed_index({n: files['files/' + n] for n in projected}, projected,
+        changes_present='feeds/changes.xml' in receipt.get('retained_hashes', {}))
     return reservation, files
 
 
@@ -227,16 +286,9 @@ def projection(parent_root, audit_at):
     cache_bytes = (json.dumps(updated, ensure_ascii=False, separators=(',', ':')) + '\n').encode()
     outputs = {PROJECTION[0]: catalog_javascript_bytes(after), PROJECTION[1]: catalog_metadata_javascript_bytes(after),
         PROJECTION[2]: cache_bytes}
-    from scripts.build_feeds import build_feeds
-    with tempfile.TemporaryDirectory(prefix='program-area-feeds-') as directory:
-        feeds = Path(directory)
-        # Preserve historical change events and the original package inventory.
-        # The builder sees changes.xml so its existing index entry is retained.
-        if (parent_root/'feeds/changes.xml').is_file():
-            (feeds/'changes.xml').write_bytes((parent_root/'feeds/changes.xml').read_bytes())
-        build_feeds(after, feeds, as_of=timestamp(stamp).date())
-        for name in PROJECTION[3:]:
-            outputs[name] = (feeds/Path(name).name).read_text(encoding='utf-8').encode('utf-8')
+    changes_path = parent_root/'feeds/changes.xml'
+    outputs.update(feed_projection(after, changes_path.read_bytes() if changes_path.is_file() else None))
+    verify_feed_index(outputs, outputs, changes_present=changes_path.is_file())
     return outputs, {'affected_evidence_ids': identifiers, 'affected_catalog_ids': changed,
         'original_source_at': before['generated_at'], 'original_evidence_at': stamp,
         'source_requests': 0, 'document_ai_requests': 0, 'team_requests': 0}
@@ -247,7 +299,8 @@ def receipt_for(original, spending, outputs, changes, audit_at):
         'parent_generation_sha': PARENT_GENERATION_SHA, 'parent_manifest_sha256': PARENT_MANIFEST_SHA256,
         'audit_at': audit_at, 'spending': spending, 'projection': changes,
         'projection_hashes': {n: sha(raw) for n, raw in outputs.items()},
-        'retained_hashes': {n: h for n, h in original['generation_files'].items() if n not in PROJECTION + VECTORS}}
+        'retained_hashes': {n: h for n, h in original['generation_files'].items()
+            if n not in outputs and n not in VECTORS and not FACET_FEED.fullmatch(n)}}
 
 
 def verify_dependency_scope(root, original):
@@ -277,11 +330,20 @@ def prepare(parent_bundle, receipt_path, *, root=ROOT, api=auth.existing.api):
     if files:
         require(candidate.encoded(receipt) == files['receipt.json'], 'replay_differs_from_checkpoint')
     root = Path(root)
+    # Only remove obsolete direct XML outputs in the feed writer's two owned
+    # directories. Never delete historical changes or unrecognized paths.
+    obsolete = managed_feed_names(root) - set(outputs)
+    require(all(FACET_FEED.fullmatch(name) for name in obsolete), 'obsolete_managed_feed_scope')
+    for name in obsolete:
+        candidate.checked_path(root, name).unlink()
     for name in original['generation_files']:
+        if FACET_FEED.fullmatch(name) and name not in outputs:
+            continue
         target = candidate.checked_path(root, name); target.parent.mkdir(parents=True, exist_ok=True)
         target.write_bytes((Path(parent_bundle)/'files'/name).read_bytes())
     for name, raw in outputs.items():
-        candidate.checked_path(root, name).write_bytes(raw)
+        target = candidate.checked_path(root, name); target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
+    require(managed_feed_names(root) == {n for n in outputs if n.startswith('feeds/')}, 'prepared_feed_inventory')
     atomic_json(receipt_path, receipt)
     return receipt
 
@@ -292,8 +354,17 @@ def validate_receipt(receipt_path, root):
         and receipt.get('parent_run') == PARENT_RUN and receipt.get('parent_generation_sha') == PARENT_GENERATION_SHA
         and receipt.get('parent_manifest_sha256') == PARENT_MANIFEST_SHA256, 'receipt_parent')
     timestamp(receipt['audit_at'])
-    require(hashes(root, PROJECTION) == receipt.get('projection_hashes')
+    projected = projection_names(receipt)
+    require(hashes(root, projected) == receipt.get('projection_hashes')
         and hashes(root, receipt['retained_hashes']) == receipt['retained_hashes'], 'receipt_input_hashes')
+    feeds = {n for n in projected if n.startswith('feeds/')}
+    require(managed_feed_names(root) == feeds, 'complete_local_feed_inventory')
+    from scripts.enrich_catalog import read_catalog
+    changes_path = Path(root)/'feeds/changes.xml'
+    expected = feed_projection(read_catalog(Path(root)/PROJECTION[0]),
+        changes_path.read_bytes() if changes_path.is_file() else None)
+    require({n: sha(raw) for n, raw in expected.items()} == {n: receipt['projection_hashes'][n] for n in feeds},
+        'deterministic_feed_projection')
     return receipt
 
 
@@ -374,7 +445,7 @@ def checkpoint_vectors(receipt_path, state_path, *, root=ROOT, api=auth.existing
     ident, name, digest = PARENT_ARTIFACTS['candidate']
     raw, _ = auth.authenticated_zip(ident, name, parent_run, 'sha256:' + digest, api=api)
     files['prior-vector-receipt.json'] = zip_files(raw)['files/' + VECTORS[3]]
-    files.update({'files/' + n: candidate.checked_path(root, n).read_bytes() for n in PROJECTION + VECTORS})
+    files.update({'files/' + n: candidate.checked_path(root, n).read_bytes() for n in projection_names(receipt) + VECTORS})
     cp = {'version': VERSION, 'owner': reservation['owner'], 'files': {n: sha(raw) for n, raw in files.items()}}
     for name, raw in {**files, 'checkpoint.json': candidate.encoded(cp)}.items():
         target = candidate.checked_path(state, name); target.parent.mkdir(parents=True, exist_ok=True); target.write_bytes(raw)
@@ -399,7 +470,7 @@ def verify_inputs(root, original, receipt_path, *, api=auth.existing.api):
     require_original_correction_run(reservation, api=api)
     require(reservation is not None and files is not None, 'uploaded_vector_checkpoint_required')
     require(files['receipt.json'] == candidate.encoded(receipt)
-        and all(candidate.checked_path(root, n).read_bytes() == files['files/' + n] for n in PROJECTION + VECTORS),
+        and all(candidate.checked_path(root, n).read_bytes() == files['files/' + n] for n in projection_names(receipt) + VECTORS),
         'uploaded_projection_and_vector_bytes')
     validate_vectors(root)
     return receipt['retained_hashes']

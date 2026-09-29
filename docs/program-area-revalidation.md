@@ -8,7 +8,9 @@ and ZIP digests before using the supplied parent bundle.
 
 Preparation performs no source retrieval, document AI or team generation. It
 rechecks saved program-area citations and rebuilds only the resulting catalog,
-metadata, evidence cache and existing `all.xml`/feed index projections. Source,
+metadata, evidence cache, `all.xml`, feed indexes, and every managed topic and
+source-type feed. The normal feed writer determines their complete inventory;
+every generated path and its exact bytes enter the receipt and checkpoint. Source,
 evidence, deadline and currentness clocks stay at their original values. The new
 catalog audit timestamp describes this correction and is preserved on retry.
 Historical change events and all team outputs remain byte-identical. The notice
@@ -27,7 +29,9 @@ cannot reset this reservation. After a successful build, an authenticated state
 artifact holds the complete projection, vector quartet, original vector receipt,
 reservation and hash manifest. Candidate construction requires that uploaded
 checkpoint, exact deterministic projection replay and unchanged retained output
-hashes. No fallback to uncheckpointed local vectors is allowed.
+hashes. Missing, stale or extra managed feeds fail before vector work, and missing
+or altered checkpoint feed bytes prevent restoration or candidate construction.
+No fallback to uncheckpointed local vectors is allowed.
 
 For a completed checkpoint, rerun the original correction workflow run; later
 attempts restore it without paid work and retain its original audit timestamp.
@@ -35,5 +39,15 @@ A reservation without a complete authenticated checkpoint, expired artifacts,
 multiple reservations or mismatched bytes stop recovery. Such a stop requires
 inspection of the existing owner and accounting, not a new dispatch or allowance.
 
-The original 126-file package inventory is preserved. Packaging nested topic
-feeds is a separate preexisting concern and is not changed by this correction.
+The original 126-file artifact omitted nested topic and source-type feeds.
+Those outputs are regenerated from the corrected catalog, recorded as affected
+outputs, and added to the complete immutable release inventory. They are not
+claimed as retained original bytes. Historical `changes.xml` and `changes.json`
+remain unchanged.
+
+New release manifests certify the complete managed feed inventory against
+`feeds/index.json`. Preparation and materialization remove only obsolete direct
+XML files in `feeds/topic` and `feeds/source-type`; publication stages those
+deletions. Pages receives the same complete immutable inventory. Older partial
+artifacts remain readable for exact recovery but cannot pass ordinary validation
+under the expanded inventory policy.
