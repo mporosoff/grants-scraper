@@ -4,8 +4,56 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/separations-and-membranes.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363899"/>
+    <id>urn:funding-finder:grants-gov:363899</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-09 | Agency Name: Air Force Office of Scientific ResearchDescription: See full announcement in Related Documents folder for detailed descriptions of the SPECIFIC MURI TOPICS.</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363905"/>
+    <id>urn:funding-finder:grants-gov:363905</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-04-09 | Army Research Office (ARO): DoW's MURI program addresses high-risk basic research and attempts to understand or achieve something that has never been done before. The program was initiated 40 years ago and it has regularly produced significant scientific breakthroughs with far reaching consequences to the fields of science, economic growth, and revolutionary new military technologies. Key to the p…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363906"/>
+    <id>urn:funding-finder:grants-gov:363906</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
+  </entry>
   <entry>
     <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
     <link href="https://www.grants.gov/search-results-detail/363616"/>
@@ -16,10 +64,9 @@
     <category term="Energy"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
+    <category term="Water"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
@@ -35,7 +82,7 @@
     <category term="Water"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Bureau of Reclamation | Closes 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
+    <summary>Bureau of Reclamation | Application 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
   </entry>
   <entry>
     <title>Chemical Process Systems (CPS)</title>
@@ -44,13 +91,13 @@
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Separations and membranes"/>
     <category term="Materials science"/>
-    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -59,14 +106,14 @@
     <id>urn:funding-finder:grants-gov:362063</id>
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
@@ -95,7 +142,7 @@
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+    <summary>Office of Science | Application 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
     <title>Cooperative Agreement for In Vivo High-Resolution Imaging for Inner Ear Visualization (U01 Clinical Trial Required)</title>
@@ -104,7 +151,8 @@
     <updated>2025-01-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Separations and membranes"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | This funding opportunity aims to support high risk clinical trials for the development of in vivo high-resolution structural and functional imaging technologies for the living human inner ear. Proposed projects should focus on improving the resolution of current imaging techniques or developing new imaging techniques that can visualize inner ear structures in vivo with significantly greater detail…</summary>
+    <category term="Energy"/>
+    <summary>National Institutes of Health | Application 2026-10-01 | This funding opportunity aims to support high risk clinical trials for the development of in vivo high-resolution structural and functional imaging technologies for the living human inner ear. Proposed projects should focus on improving the resolution of current imaging techniques or developing new imaging techniques that can visualize inner ear structures in vivo with significantly greater detail…</summary>
   </entry>
   <entry>
     <title>In Vivo High-Resolution Imaging for Inner Ear Visualization (R01 Clinical Trial optional)</title>
@@ -113,7 +161,7 @@
     <updated>2025-01-06T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Separations and membranes"/>
-    <summary>National Institutes of Health | Closes 2026-10-01 | This funding opportunity aims to support the development of in vivo high-resolution structural and functional imaging technologies for the living human inner ear. Proposed projects should focus on improving the resolution of current imaging techniques or developing new imaging techniques that can visualize inner ear structures in vivo with significantly greater detail and accuracy than currently p…</summary>
+    <summary>National Institutes of Health | Application 2026-10-01 | This funding opportunity aims to support the development of in vivo high-resolution structural and functional imaging technologies for the living human inner ear. Proposed projects should focus on improving the resolution of current imaging techniques or developing new imaging techniques that can visualize inner ear structures in vivo with significantly greater detail and accuracy than currently p…</summary>
   </entry>
   <entry>
     <title>FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology</title>
@@ -127,6 +175,6 @@
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Quantum science"/>
-    <summary>Office of Naval Research | Closes 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
+    <summary>Office of Naval Research | Application 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
 </feed>

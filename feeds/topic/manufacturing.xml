@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System</title>
+    <link href="https://www.grants.gov/search-results-detail/363840"/>
+    <id>urn:funding-finder:grants-gov:363840</id>
+    <updated>2026-12-10T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Manufacturing"/>
+    <category term="Neuroscience"/>
+    <summary>National Institutes of Health | Estimated Application 2027-01-28 | The Brain Research through Advancing Innovative Neurotechnologies® (BRAIN) Initiative along with other NIH Institutes and Centers (ICs) intends to publish a Notice of Funding Opportunity (NOFO) to encourage investigators to pursue first-in-human or early-stage clinical studies for recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain. …</summary>
+  </entry>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Small Molecule Drug Discovery and Development</title>
     <link href="https://www.grants.gov/search-results-detail/363095"/>
@@ -15,7 +25,134 @@
     <category term="Biology and biotechnology"/>
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+    <summary>National Institutes of Health | Estimated Application 2027-06-16 | The NIH Blueprint for Neuroscience Research is interested in continuing to support the BluePrint Neurotherapeutics Network for Small Molecules (BPN-SM)- a program designed to help investigators advance promising small-molecule therapeutics toward clinical testing. The BPN-SM program supports drug discovery and development activities in investigators’ own laboratories while also providing access to…</summary>
+  </entry>
+  <entry>
+    <title>NEI Translational Research Program for Therapeutics (R61/R33 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360545"/>
+    <id>urn:funding-finder:grants-gov:360545</id>
+    <updated>2026-09-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2029-11-16 | The purpose of NEI's Translational Research program (TRP) is the rapid and efficient translation of innovative laboratory research findings into therapeutics for use by clinicians to treat visual system diseases or disorders. The TRP will support the product development of biological, pharmaceutical, medical device, and/or combination therapies for any disease or disorder of the visual system. The…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363899"/>
+    <id>urn:funding-finder:grants-gov:363899</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-09 | Agency Name: Air Force Office of Scientific ResearchDescription: See full announcement in Related Documents folder for detailed descriptions of the SPECIFIC MURI TOPICS.</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363905"/>
+    <id>urn:funding-finder:grants-gov:363905</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-04-09 | Army Research Office (ARO): DoW's MURI program addresses high-risk basic research and attempts to understand or achieve something that has never been done before. The program was initiated 40 years ago and it has regularly produced significant scientific breakthroughs with far reaching consequences to the fields of science, economic growth, and revolutionary new military technologies. Key to the p…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363906"/>
+    <id>urn:funding-finder:grants-gov:363906</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
+  </entry>
+  <entry>
+    <title>Upstate Through Wall Heat Pump Demonstration Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Vto2LAAR"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5937</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA | Application 2026-10-29 | The New York State Energy Research and Development Authority (NYSERDA) is seeking applications from owners, managers, or operators of multifamily buildings to serve as demonstration host sites for Packaged Terminal Heat Pumps (PTHPs) through the Clean Heat for All: Room Heat Pump Program. Eligible buildings must contain at least five (5) dwelling units, be located in New York State counties within…</summary>
+  </entry>
+  <entry>
+    <title>Window Heat Pump Demonstration Program - Phase I</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Xse5XAAR"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseI</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA | Application 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
+  </entry>
+  <entry>
+    <title>Window Heat Pump Demonstration Program - Phase II</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000iqxxLAAQ"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseII</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA | Application 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
+  </entry>
+  <entry>
+    <title>The New York Truck-Voucher Incentive Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000Qp7PAAS"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ANYT-VIP</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Manufacturing"/>
+    <category term="Transportation"/>
+    <summary>NYSERDA | Application 2029-12-31 | Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
+  </entry>
+  <entry>
+    <title>Financing Arrangements for High-Performance Affordable Housing</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001GOHEzAAP"/>
+    <id>urn:funding-finder:nyserda:nyserda%3ARFP18</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA | Application 2030-05-01 | NY Green Bank’s RFP 18 invites property owners and developers, energy service companies and equipment manufacturers, capital providers, and other market participants to submit proposals for NYGB investment in the construction or retrofit of multifamily affordable housing to high levels of energy performance in New York State.</summary>
+  </entry>
+  <entry>
+    <title>New York School Bus Incentive Program</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000EMPCAA4"/>
+    <id>urn:funding-finder:nyserda:nyserda%3APON5552</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <category term="Environmental science"/>
+    <category term="Manufacturing"/>
+    <summary>NYSERDA | Application 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
+  </entry>
+  <entry>
+    <title>Critical Minerals &amp; Materials Accelerator (CMMA) - Topic Area 1</title>
+    <link href="https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226"/>
+    <id>urn:funding-finder:doe-eere-exchange:eere-exchange%3ADE-TA1-0003589</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>Advanced Materials and Manufacturing Technologies Office (AMMTO)</name></author>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Advanced Materials and Manufacturing Technologies Office (AMMTO) | Posted</summary>
   </entry>
   <entry>
     <title>Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
@@ -27,7 +164,8 @@
     <category term="Manufacturing"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>Golden Field Office | Closes 2026-12-01 | DOE CMEI is dedicated to securing America’s energy future by reinforcing domestic critical mineral supply chains, driving next-generation energy technology and manufacturing research, and promoting affordable, consumer-friendly solutions. CMEI’s AFFO is issuing this ASPECT NOFO, DE-FOA-0003647, to support research, development, and pre-pilot testing of innovative technologies that produce chemical…</summary>
+    <category term="Materials science"/>
+    <summary>Golden Field Office | Concept Paper 2026-10-09 | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
   </entry>
   <entry>
     <title>Egypt Annual Program Statement</title>
@@ -42,16 +180,6 @@
     <summary>Bureau of Near Eastern Affairs | Posted | The Bureau of Near Eastern Affairs’ Office of Assistance Coordination (NEA/AC) seeks proposals for projects in Egypt that advance U.S. commercial diplomacy and put American interests first. Proposals must demonstrate how projects will leverage assistance as a tool of statecraft to advance U.S. economic, security, and diplomatic objectives. Programming should promote trade, not aid, by leveraging a…</summary>
   </entry>
   <entry>
-    <title>Implementation of Four GCTF Classic Workshops in 2027</title>
-    <link href="https://www.grants.gov/search-results-detail/363742"/>
-    <id>urn:funding-finder:grants-gov:363742</id>
-    <updated>2026-08-28T00:00:00Z</updated>
-    <author><name>American Institute in Taiwan</name></author>
-    <category term="Education and workforce"/>
-    <category term="Manufacturing"/>
-    <summary>American Institute in Taiwan | Closes 2026-10-06 | The American Institute in Taiwan Public Diplomacy Section announces an open competition for one cooperative agreement to support the implementation of four Global Cooperation and Training Framework Classic workshops in Taiwan during calendar year 2027. The GCTF is a capacity building platform that brings together government officials, industry experts, academics, and civil society representatives …</summary>
-  </entry>
-  <entry>
     <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
     <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
@@ -61,30 +189,10 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
-  </entry>
-  <entry>
-    <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363215"/>
-    <id>urn:funding-finder:grants-gov:363215</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
-  </entry>
-  <entry>
-    <title>Protecting the American Seafood Supply Chain by Countering Unfair Labor Practices and Illegal, Unreported, and Unregulated (IUU) Fishing</title>
-    <link href="https://www.grants.gov/search-results-detail/363214"/>
-    <id>urn:funding-finder:grants-gov:363214</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
-    <category term="Manufacturing"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-09-29</summary>
   </entry>
   <entry>
     <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
@@ -94,8 +202,6 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Environmental science"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
@@ -109,7 +215,7 @@
     <category term="Agriculture and food"/>
     <category term="Manufacturing"/>
     <category term="Energy"/>
-    <summary>Agricultural Marketing Service | Closes 2026-10-01 | AMS will award these funds competitively to at least one eligible organization that meets program requirements and whose expertise is consistent with the purpose of the grant program. The selected grant recipient(s) will provide management, oversight, consultation and expertise necessary to advance the purpose and activities of the program, primarily through a subaward program to support cold stor…</summary>
+    <summary>Agricultural Marketing Service | Application 2026-10-01 | AMS will award these funds competitively to at least one eligible organization that meets program requirements and whose expertise is consistent with the purpose of the grant program. The selected grant recipient(s) will provide management, oversight, consultation and expertise necessary to advance the purpose and activities of the program, primarily through a subaward program to support cold stor…</summary>
   </entry>
   <entry>
     <title>Preservation and Reinvestment Initiative for Community Enhancement (PRICE)</title>
@@ -119,7 +225,7 @@
     <author><name>Department of Housing and Urban Development</name></author>
     <category term="Community development"/>
     <category term="Manufacturing"/>
-    <summary>Department of Housing and Urban Development | Closes 2026-10-19 | HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
+    <summary>Department of Housing and Urban Development | Estimated Application 2026-10-19 | HUD is issuing the Preservation and Reinvestment Initiative for Community Enhancement (PRICE) competition NOFO to preserve long-term housing affordability for residents of manufactured housing or an MHC, to redevelop MHCs, and to primarily benefit low- and moderate-income (LMI) residents. Congress appropriated in FY2025 these competitive grants to preserve and revitalize manufactured housing and e…</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
@@ -131,10 +237,9 @@
     <category term="Energy"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
+    <category term="Water"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
@@ -145,12 +250,10 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
-    <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
+    <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
@@ -159,10 +262,8 @@
     <id>urn:funding-finder:grants-gov:363613</id>
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <category term="Quantum science"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
@@ -174,8 +275,6 @@
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
@@ -208,17 +307,17 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
-    <title>Cooperative Agreement for Affiliated Partner with the Gulf Coast Cooperative Ecosystem Studies Unit (CESU)</title>
-    <link href="https://www.grants.gov/search-results-detail/363538"/>
-    <id>urn:funding-finder:grants-gov:363538</id>
-    <updated>2026-08-11T00:00:00Z</updated>
-    <author><name>Geological Survey</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
+    <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
+    <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
+    <updated>2026-08-14T00:00:00Z</updated>
+    <author><name>Simons Foundation</name></author>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
     <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>Geological Survey | Closes 2026-09-11 | The U.S. Geological Survey (USGS) is offering a funding opportunity to a CESU partner for research in determining the effects that variations of spatial geotechnical sediment properties have on geomorphic response during storm impacts. This effort will advance capabilities to predict impacts of storms along the Nation's coastline. Hurricanes Ian and Fiona, which caused major damage ($50-65 billion…</summary>
+    <summary>Simons Foundation | Application 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Plant Conservation and Restoration Management - Bureau wide</title>
@@ -232,106 +331,7 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>Bureau of Land Management | Closes 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
-  </entry>
-  <entry>
-    <title>Upstate Through Wall Heat Pump Demonstration Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Vto2LAAR"/>
-    <id>urn:funding-finder:nyserda:nyserda%3ARFQL5937</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <summary>NYSERDA | Closes 2026-10-29 | The New York State Energy Research and Development Authority (NYSERDA) is seeking applications from owners, managers, or operators of multifamily buildings to serve as demonstration host sites for Packaged Terminal Heat Pumps (PTHPs) through the Clean Heat for All: Room Heat Pump Program. Eligible buildings must contain at least five (5) dwelling units, be located in New York State counties within…</summary>
-  </entry>
-  <entry>
-    <title>Window Heat Pump Demonstration Program - Phase I</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000Xse5XAAR"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseI</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Manufacturing"/>
-    <summary>NYSERDA | Closes 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
-  </entry>
-  <entry>
-    <title>Window Heat Pump Demonstration Program - Phase II</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00000iqxxLAAQ"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON6037-PhaseII</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Manufacturing"/>
-    <summary>NYSERDA | Closes 2027-06-30 | NYSERDA’s Clean Heat for All: Packaged Window Heat Pump Demonstration Program provides up to $10 million in incentives to support the installation and performance monitoring of cold-climate packaged window heat pumps (PWHPs) in multifamily buildings across New York State. Through a two-phase structure, the Program qualifies manufacturers and vendors whose PWHP products meet technical and installat…</summary>
-  </entry>
-  <entry>
-    <title>The New York Truck-Voucher Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt0000000Qp7PAAS"/>
-    <id>urn:funding-finder:nyserda:nyserda%3ANYT-VIP</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Manufacturing"/>
-    <category term="Transportation"/>
-    <summary>NYSERDA | Closes 2029-12-31 | Helps fleet owners in New York State afford clean vehicle technologies that are quiet, efficient and do not emit harmful pollutants or carbon. NYTVIP provides point-of-sale vouchers to fleet owners that purchase or lease zero emission Class 3-8 vehicles, non-road equipment, and transit buses. Information about how fleets, dealers, and manufacturers can participate in NYTVIP can be found in the Imp…</summary>
-  </entry>
-  <entry>
-    <title>Financing Arrangements for High-Performance Affordable Housing</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rt000001GOHEzAAP"/>
-    <id>urn:funding-finder:nyserda:nyserda%3ARFP18</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <summary>NYSERDA | Closes 2030-05-01 | NY Green Bank’s RFP 18 invites property owners and developers, energy service companies and equipment manufacturers, capital providers, and other market participants to submit proposals for NYGB investment in the construction or retrofit of multifamily affordable housing to high levels of energy performance in New York State.</summary>
-  </entry>
-  <entry>
-    <title>New York School Bus Incentive Program</title>
-    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0r8z000000EMPCAA4"/>
-    <id>urn:funding-finder:nyserda:nyserda%3APON5552</id>
-    <updated>2026-07-27T00:00:00Z</updated>
-    <author><name>NYSERDA</name></author>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <summary>NYSERDA | Closes 2030-12-30 | The New York School Bus Incentive Program (NYSBIP) is a voucher incentive program to accelerate the deployment of zero-emission school buses and associated charging infrastructure throughout New York State using funds allocated by the 2022 Clean Water, Clean Air, and Green Jobs Environmental Bond Act (Bond Act). More information about how fleets, dealers, and manufacturers can participate in NYSBI…</summary>
-  </entry>
-  <entry>
-    <title>Advancing Oil and Natural Gas Production and Delivery</title>
-    <link href="https://www.grants.gov/search-results-detail/363302"/>
-    <id>urn:funding-finder:grants-gov:363302</id>
-    <updated>2026-07-23T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Closes 2026-09-22 | Advancing Oil and Natural Gas Production and Delivery This Notice of Funding Opportunity (NOFO) is seeking proposals to advance cost-effective technologies for improving the efficiency, reliability, and resilience of the Unites States oil and natural gas supply chain. This funding opportunity spans research and development efforts focused on enhancing resource utilization, modernizing infrastructu…</summary>
-  </entry>
-  <entry>
-    <title>Public Wireless Supply Chain Innovation Fund Grant Program - Solutions for AI-Native RAN</title>
-    <link href="https://www.grants.gov/search-results-detail/363179"/>
-    <id>urn:funding-finder:grants-gov:363179</id>
-    <updated>2026-07-14T00:00:00Z</updated>
-    <author><name>National Telecommunications and Information Admini</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>National Telecommunications and Information Admini | Closes 2026-09-09 | This NOFO is the fourth issued under NTIA’s Public Wireless Supply Chain Innovation Fund (PWSCIF or Innovation Fund). Titled “Solutions for AI-Native RAN,” the goal of this NOFO is to support the development of a secure compute environment to enable or leverage native artificial intelligence (“AI”) capabilities in the Radio Access Network (RAN) that generate revenue for operators, cost savings, an…</summary>
-  </entry>
-  <entry>
-    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
-    <link href="https://www.grants.gov/search-results-detail/363065"/>
-    <id>urn:funding-finder:grants-gov:363065</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
+    <summary>Bureau of Land Management | Application 2026-09-28 | The Bureau of Land Management"s Plant Conservation and Restoration Program (PCRP) is a national leader in building the native seed supply chain essential for restoring resilient public lands and supporting multiple use and sustained yield. PCRP advances Department of the Interior mission to protect and manage America's natural resources. The native seed PCRP adds to the commercial market enables r…</summary>
   </entry>
   <entry>
     <title>Middle East Regional Cooperation (MERC)</title>
@@ -344,7 +344,7 @@
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
     <category term="Water"/>
-    <summary>Assistance Coordination | Closes 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+    <summary>Assistance Coordination | Application 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
     <title>Genomic and Biologic Therapies for ADRD (U01 Clinical Trial Optional)</title>
@@ -355,7 +355,7 @@
     <category term="Biology and biotechnology"/>
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-11-10 | The National Institutes of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects proposing the optimization and translational development of genomic and biologic therapeutic candidates for Alzheimer’s Disease-Related Dementias (ADRD). Breakthroughs in genomic and biologic therapies are creating new opportunities to treat, prevent, and potentially modify the course…</summary>
   </entry>
   <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>
@@ -380,13 +380,13 @@
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Separations and membranes"/>
     <category term="Materials science"/>
-    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -411,14 +411,14 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <id>urn:funding-finder:grants-gov:362063</id>
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
@@ -433,7 +433,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
-    <summary>DOC NOAA - ERA Production | Closes 2028-05-01 | This announcement supports Executive Order 14276, Restoring America’s Seafood Competitiveness, by soliciting projects that support: workforce development for marine-related professions in marine science, aquaculture/mariculture, and maritime operations; enhancing seafood safety and management through training in seafood best practices, marketing, and fishery management; technological innovation in…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2028-05-01 | This announcement supports Executive Order 14276, Restoring America’s Seafood Competitiveness, by soliciting projects that support: workforce development for marine-related professions in marine science, aquaculture/mariculture, and maritime operations; enhancing seafood safety and management through training in seafood best practices, marketing, and fishery management; technological innovation in…</summary>
   </entry>
   <entry>
     <title>The Genesis Mission: Transforming Science and Energy with AI</title>
@@ -448,7 +448,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
-    <summary>Office of Science | Closes 2026-12-17 | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
+    <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
   </entry>
   <entry>
     <title>Pathways to Enable Secure Open-Source Ecosystems (PESOSE)</title>
@@ -456,14 +456,12 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <id>urn:funding-finder:grants-gov:361333</id>
     <updated>2026-02-19T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2027-03-02 | The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2027-03-02 | The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
   </entry>
   <entry>
     <title>Postdoctoral Research Fellowships in Biology</title>
@@ -476,7 +474,8 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-29 | The integration of Artificial Intelligence (AI) and Biological Research has the potential to pave the way for breakthroughs in biotechnology and bio-system design that will create innovations, new industries, and jobs. To capitalize on this promise, the Directorate for Biological Sciences (BIO) will make awards for Postdoctoral Research Fellowships in Biology (PRFB) to recent doctoral degree recip…</summary>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2026-09-29 | The integration of Artificial Intelligence (AI) and Biological Research has the potential to pave the way for breakthroughs in biotechnology and bio-system design that will create innovations, new industries, and jobs. To capitalize on this promise, the Directorate for Biological Sciences (BIO) will make awards for Postdoctoral Research Fellowships in Biology (PRFB) to recent doctoral degree recip…</summary>
   </entry>
   <entry>
     <title>Space Technology Research, Development, Demonstration, and Infusion (SpaceTech REDDI-2026)</title>
@@ -507,7 +506,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
+    <summary>Office of Science | Application 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
     <title>NSF National Innovation Corps Teams (NSF National I-Corps (TM) Teams) program</title>
@@ -519,23 +518,23 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation (NSF) continues to develop and nurture a national innovation ecosystem that guides the output of scientific discoveries closer to the development of technologies, products, processes, and services that benefit allAmericans. The goals of the NSF I-Corps™program are to spur translation of foundational research to the marketplace, to encourage collaboration betwee…</summary>
   </entry>
   <entry>
-    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/360651"/>
-    <id>urn:funding-finder:grants-gov:360651</id>
-    <updated>2025-09-24T00:00:00Z</updated>
-    <author><name>National Institute of Standards and Technology</name></author>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
+    <title>National Science Foundation Translation to Practice</title>
+    <link href="https://www.grants.gov/search-results-detail/359966"/>
+    <id>urn:funding-finder:grants-gov:359966</id>
+    <updated>2025-07-09T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Space and aeronautics"/>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
     <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institute of Standards and Technology | Closes 2026-09-15 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
+    <summary>U.S. National Science Foundation | Application 2026-11-17 | The U.S. NSF Directorate for Technology, Innovation and Partnerships (NSF TIP) partners across sectors to advance three primary focus areas - accelerating technology translation and development, fostering regional innovation and economic growth, and preparing the American workforce for future high-wage jobs in STEM fields. The translation of research to practice ensures that the insights and innov…</summary>
   </entry>
   <entry>
     <title>TTO Office Wide (OW) BAA 2025</title>
@@ -545,7 +544,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <author><name>DARPA - Tactical Technology Office</name></author>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
-    <summary>DARPA - Tactical Technology Office | Closes 2026-12-22 | The DARPA Tactical Technology Office (TTO) creates technological surprise and provides new options for national security, by demonstrating revolutionary platforms and systems with cutting-edge technology. TTO demonstrates compelling hardware at scales that demonstrate disruptive capability, with designs that reduce risk and cost by managing complexity, and which can be manufactured responsively an…</summary>
+    <summary>DARPA - Tactical Technology Office | Application 2026-12-22 | The DARPA Tactical Technology Office (TTO) creates technological surprise and provides new options for national security, by demonstrating revolutionary platforms and systems with cutting-edge technology. TTO demonstrates compelling hardware at scales that demonstrate disruptive capability, with designs that reduce risk and cost by managing complexity, and which can be manufactured responsively an…</summary>
   </entry>
   <entry>
     <title>Blueprint MedTech Translator (UG3/UH3 - Clinical Trial Optional)</title>
@@ -558,18 +557,23 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Technology development"/>
     <category term="Energy"/>
     <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2028-01-28 | The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
+    <summary>National Institutes of Health | Application 2028-01-28 | The purpose of this announcement is to encourage investigators to pursue translational activities and clinical feasibility studies to advance the development of therapeutic, and diagnostic devices for disorders that affect the nervous or neuromuscular systems. Activities supported in this program include implementation of clinical prototype devices, non-clinical safety and efficacy testing, design…</summary>
   </entry>
   <entry>
-    <title>Measurement Science and Engineering (MSE) Research Grant Programs</title>
-    <link href="https://www.grants.gov/search-results-detail/358955"/>
-    <id>urn:funding-finder:grants-gov:358955</id>
-    <updated>2025-05-14T00:00:00Z</updated>
-    <author><name>National Institute of Standards and Technology</name></author>
+    <title>Security, Privacy, and Trust in Cyberspace</title>
+    <link href="https://www.grants.gov/search-results-detail/357554"/>
+    <id>urn:funding-finder:grants-gov:357554</id>
+    <updated>2024-12-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <category term="Manufacturing"/>
-    <category term="Technology development"/>
-    <summary>National Institute of Standards and Technology | Closes 2026-09-15 | To support activities that develop, expand, strengthen, or sustain NIST partnership programs and/or support the conduct of research or a recipient's portion of collaborative research in a variety of areas including, but not limited to: Metrology; Standards; Nanotechnology; Artificial Intelligence; Advanced Communications; Advanced Manufacturing; Promotion of U.S. innovation and industrial competit…</summary>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2026-09-28 | Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
   </entry>
   <entry>
     <title>Alzheimer's Drug-Development Program (U01 Clinical Trial Optional)</title>
@@ -582,7 +586,23 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Closes 2027-11-05 | The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
+    <summary>National Institutes of Health | Application 2027-11-05 | The goal of this Notice of Funding Opportunity (NOFO) is to provide funding support for the pre-clinical and early stage clinical (Phase I) development of novel small-molecule and biologic drug candidates that prevent Alzheimer's disease (AD), slow its progression, or treat its cognitive and behavioral symptoms. Participants in this program will receive funding for therapy development activities s…</summary>
+  </entry>
+  <entry>
+    <title>NSF Scholarships in Science, Technology, Engineering, and Mathematics Program</title>
+    <link href="https://www.grants.gov/search-results-detail/357498"/>
+    <id>urn:funding-finder:grants-gov:357498</id>
+    <updated>2024-12-03T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Application 2027-03-02 | The main goal of the S-STEM program is to enable academically talented, low-income students to pursue successful careers in promising STEM fields. Ultimately, the S-STEM program seeks to increase the number of academically promising low-income students who graduate with an S-STEM eligible degree and contribute to the American innovation economy with their STEM knowledge. Recognizing that financial…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Clinical Studies to Advance Next-Generation Devices for Recording and Modulation in the Human Central Nervous System (UH3 Clinical Trial Optional)</title>
@@ -594,8 +614,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
     <category term="Energy"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institutes of Health | Closes 2026-09-28 | The purpose of this announcement is to encourage investigators to pursue a small clinical trial to obtain critical information necessary to advance recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain (e.g., Early Feasibility Study). Clinical studies supported may consist of acute or short-term procedures that are deemed Non-Significa…</summary>
+    <summary>National Institutes of Health | Application 2026-09-28 | The purpose of this announcement is to encourage investigators to pursue a small clinical trial to obtain critical information necessary to advance recording and/or stimulating devices to treat central nervous system disorders and better understand the human brain (e.g., Early Feasibility Study). Clinical studies supported may consist of acute or short-term procedures that are deemed Non-Significa…</summary>
   </entry>
   <entry>
     <title>SEEDING CRITICAL ADVANCES FOR LEADING ENERGY TECHNOLOGIES WITH UNTAPPED POTENTIAL (SCALEUP) READY</title>
@@ -608,7 +627,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>Advanced Research Projects Agency Energy | Closes 2029-09-29 | The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
+    <summary>Advanced Research Projects Agency Energy | Application 2029-09-29 | The purpose of this modification is to clarify the meaning of the Program Policy Factors in Section V.C. To obtain a copy of the Notice of Funding Opportunity (NOFO) please go to the ARPA-E website at https://arpa-e-foa.energy.gov. To apply to this NOFO, Applicants must register with and submit application materials through ARPA-E eXCHANGE (https://arpa-e-foa.energy.gov/Registration.aspx). For det…</summary>
   </entry>
   <entry>
     <title>Blueprint Neurotherapeutics Network (BPN): Biologic-based Drug Discovery and Development for Disorders of the Nervous System (UG3/UH3 Clinical Trial Optional)</title>
@@ -621,7 +640,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
-    <summary>National Institutes of Health | Closes 2027-08-18 | The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
+    <summary>National Institutes of Health | Application 2027-08-18 | The Blueprint Neurotherapeutics Network for Biologics (BPN-Biologics) provides support for biologic-based therapeutic discovery and development, from lead optimization through phase I clinical testing. This Funding Opportunity Announcement (FOA) supports preclinical discovery and development of potential therapeutic Biotechnology Products and Biologics including, but not limited to, large biologic…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Reagent Resources for Brain Cell Type-Specific Access to Broaden Distribution of Enabling Technologies for Neuroscience (U24 Clinical Trial Not Allowed)</title>
@@ -633,7 +652,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Infectious disease"/>
     <category term="Manufacturing"/>
     <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Closes 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
+    <summary>National Institutes of Health | Application 2027-06-15 | This Notice of Funding Opportunity Announcement (NOFO) from the NIH Brain Research through Advancing Innovative Neurotechnologies (BRAIN) Initiative is intended to support establishment of facilities at minority-serving institutions (MSIs) and Institutional Development Award (IDeA)-eligible institutions for scaled production and distribution of brain cell type-specific access and manipulation reag…</summary>
   </entry>
   <entry>
     <title>Computational and Data-Enabled Science and Engineering</title>
@@ -641,14 +660,12 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <id>urn:funding-finder:grants-gov:356055</id>
     <updated>2024-08-15T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Data science"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
   </entry>
   <entry>
@@ -660,7 +677,12 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Community development"/>
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
-    <summary>U.S. National Science Foundation | Closes 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
   </entry>
   <entry>
     <title>IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
@@ -675,23 +697,8 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Manufacturing"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-08 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
-  </entry>
-  <entry>
-    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/351715"/>
-    <id>urn:funding-finder:grants-gov:351715</id>
-    <updated>2024-01-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-04-13 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
   <entry>
     <title>Joint Center of Excellence for Advanced Materials Research</title>
@@ -712,7 +719,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2023-09-29T00:00:00Z</updated>
     <author><name>National Institute of Standards and Technology</name></author>
     <category term="Manufacturing"/>
-    <summary>National Institute of Standards and Technology | Closes 2026-11-01 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
+    <summary>National Institute of Standards and Technology | Application 2026-11-01 | The CHIPS Incentives Program aims to catalyze long-term economically sustainable growth in the domestic semiconductor industry in support of U.S. economic and national security. This is the second Notice of Funding Opportunity under this program and seeks applications for projects for the construction, expansion, or modernization of commercial facilities for semiconductor materials and manufacturi…</summary>
   </entry>
   <entry>
     <title>Plasma Physics</title>
@@ -721,14 +728,23 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2023-08-29T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <category term="Materials science"/>
     <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+  </entry>
+  <entry>
+    <title>Research Experiences for Undergraduates (REU)</title>
+    <link href="https://www.grants.gov/search-results-detail/348985"/>
+    <id>urn:funding-finder:grants-gov:348985</id>
+    <updated>2023-06-29T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Application 2027-08-18 | The Research Experiences for Undergraduates (REU) program supports active research participation by undergraduate students in any of the areas of research funded by the National Science Foundation. REU projects involve students in meaningful ways in ongoing research programs or in research projects specifically designed for the REU program. This solicitation features two mechanisms for supporting …</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>
@@ -739,12 +755,10 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Closes 2026-12-04 | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-12-04 | verify prerequisite | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
   </entry>
   <entry>
     <title>NDEP STEM Open NFO</title>
@@ -755,34 +769,20 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Manufacturing"/>
-    <summary>Washington Headquarters Services | Closes 2028-02-08 | This is an open NFO, applicants may apply to this posting or subsequent amendments for specific STEM activities. See the Related Documents tab for the full NFO, and amendments announcing new funding opportunities. The Department of War (DoW) Office of the Under Secretary of War for Research and Engineering (OUSW(R&amp;E)) seeks innovative applications on mechanisms to implement and research the effect…</summary>
+    <summary>Washington Headquarters Services | Application 2028-02-08 | verify prerequisite | This is an open NFO, applicants may apply to this posting or subsequent amendments for specific STEM activities. See the Related Documents tab for the full NFO, and amendments announcing new funding opportunities. The Department of War (DoW) Office of the Under Secretary of War for Research and Engineering (OUSW(R&amp;E)) seeks innovative applications on mechanisms to implement and research the effect…</summary>
   </entry>
   <entry>
-    <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
-    <link href="https://www.grants.gov/search-results-detail/344592"/>
-    <id>urn:funding-finder:grants-gov:344592</id>
-    <updated>2022-11-21T00:00:00Z</updated>
-    <author><name>Dept of the Army -- Materiel Command</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cybersecurity"/>
+    <title>Training-based Workforce Development for Advanced Cyberinfrastructure (CyberTraining)</title>
+    <link href="https://www.grants.gov/search-results-detail/344608"/>
+    <id>urn:funding-finder:grants-gov:344608</id>
+    <updated>2022-11-22T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
     <category term="Data science"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
+    <category term="Artificial intelligence and machine learning"/>
     <category term="Materials science"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
-  </entry>
-  <entry>
-    <title>Low-Cost Chip-Scale Atomic Clock (LC CSAC)</title>
-    <link href="https://www.grants.gov/search-results-detail/326841"/>
-    <id>urn:funding-finder:grants-gov:326841</id>
-    <updated>2020-05-06T00:00:00Z</updated>
-    <author><name>Dept of the Army -- Materiel Command</name></author>
-    <category term="Arts and culture"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <summary>Dept of the Army -- Materiel Command | Posted | **PLEASE REVIEW FULL SPECIAL NOTICE** Funding Opportunity Title: Low-Cost Chip-Scale Atomic Clock (LC CSAC) Funding Instrument Type: Technology investment agreement The aim of this Special Notice under the ARL BAA (W911NF-17-S-0003), under Grants.gov Opportunity W911NF-17-S-0003-SPECIALNOTICE-LC-CSAC, is to fund a team or multiple teams to design, manufacture, and deliver a battery-powered atomic …</summary>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2027-01-21 | This program seeks to prepare, nurture, and grow the national scientific research workforce for creating, utilizing, and supporting advanced cyberinfrastructure (CI) to enable and potentially transform fundamental science and engineering (S&amp;E) research and education and contribute to the Nation's overall economic competitiveness and security. The goals of this solicitation are to (i) ensure broad …</summary>
   </entry>
 </feed>

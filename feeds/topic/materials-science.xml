@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -13,43 +13,92 @@
     <updated>2026-10-01T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <category term="Materials science"/>
-    <summary>National Institutes of Health | Closes 2026-12-01 | The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
+    <summary>National Institutes of Health | Estimated Application 2026-12-01 | The goal of the Micro/Nanoplastics (M/NPs) Research and Resource Coordination Center initiative is to establish a robust center that will coordinate and advance multidisciplinary efforts among biomedical and material science researchers to gain a comprehensive understanding of the health effects of M/NPs. This coordination center will accelerate the development and dissemination of sampling and an…</summary>
   </entry>
   <entry>
-    <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
-    <link href="https://www.simonsfoundation.org/grant/utilizing-the-full-power-of-empire-ai-request-for-applications/?utm_source=Simons"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-779bd2ee55b34b8e</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363899"/>
+    <id>urn:funding-finder:grants-gov:363899</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
     <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Air Force Office of Scientific Research | Application 2027-04-09 | Agency Name: Air Force Office of Scientific ResearchDescription: See full announcement in Related Documents folder for detailed descriptions of the SPECIFIC MURI TOPICS.</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363905"/>
+    <id>urn:funding-finder:grants-gov:363905</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <category term="Manufacturing"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-04-09 | Army Research Office (ARO): DoW's MURI program addresses high-risk basic research and attempts to understand or achieve something that has never been done before. The program was initiated 40 years ago and it has regularly produced significant scientific breakthroughs with far reaching consequences to the fields of science, economic growth, and revolutionary new military technologies. Key to the p…</summary>
+  </entry>
+  <entry>
+    <title>Fiscal Year (FY) 2027 Department of War Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
+    <link href="https://www.grants.gov/search-results-detail/363906"/>
+    <id>urn:funding-finder:grants-gov:363906</id>
+    <updated>2026-09-21T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Education and workforce"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Energy"/>
+    <summary>Office of Naval Research | Application 2027-04-09 | Established in 1985, the Department of War Multidisciplinary University Research Initiative (MURI) program funds U.S. academic research teams to conduct high-impact basic research that addresses future challenges faced by the Department of War. The MURI program specifically supports U.S. university teams investigating complex, DoW-relevant problem sets at the intersection of multiple scientific di…</summary>
+  </entry>
+  <entry>
+    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
+    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
+    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
+    <updated>2026-09-11T00:00:00Z</updated>
+    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
     <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
+    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-30 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
   </entry>
   <entry>
-    <title>Staff Support for Regional Engagement with the U.S. Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363757"/>
-    <id>urn:funding-finder:grants-gov:363757</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>Idaho Field Office</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
+    <title>Critical Minerals &amp; Materials Accelerator (CMMA) - Topic Area 1</title>
+    <link href="https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226"/>
+    <id>urn:funding-finder:doe-eere-exchange:eere-exchange%3ADE-TA1-0003589</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>Advanced Materials and Manufacturing Technologies Office (AMMTO)</name></author>
     <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support for Regional State Engagement with the United States (U.S.) Department of Energy, Office of Nuclear Energy, Office of Storage &amp; Transportation on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and State government representatives in four (4) specific regions (Eastern Region, Western Region, Midwestern Region, or Southern Region of the United States) …</summary>
+    <category term="Manufacturing"/>
+    <summary>Advanced Materials and Manufacturing Technologies Office (AMMTO) | Posted</summary>
   </entry>
   <entry>
-    <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363754"/>
-    <id>urn:funding-finder:grants-gov:363754</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>Idaho Field Office</name></author>
+    <title>Accelerating Scale-up and Pre-piloting of Emerging Chemical Technologies (ASPECT)</title>
+    <link href="https://www.grants.gov/search-results-detail/363815"/>
+    <id>urn:funding-finder:grants-gov:363815</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>Golden Field Office</name></author>
     <category term="Energy"/>
-    <category term="Transportation"/>
+    <category term="Manufacturing"/>
+    <category term="Carbon management"/>
+    <category term="Climate change"/>
     <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Idaho Field Office | Closes 2026-09-30 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
+    <summary>Golden Field Office | Concept Paper 2026-10-09 | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
   </entry>
   <entry>
     <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
@@ -61,33 +110,10 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ddde5b48dc92bba2</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
-  </entry>
-  <entry>
-    <title>Ensuring “Pro-American Worker” Critical Minerals Supply Chain in the Western Hemisphere</title>
-    <link href="https://www.grants.gov/search-results-detail/363215"/>
-    <id>urn:funding-finder:grants-gov:363215</id>
-    <updated>2026-08-21T00:00:00Z</updated>
-    <author><name>Bureau of International Labor Affairs</name></author>
     <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>Bureau of International Labor Affairs | Closes 2026-09-21 | Questions regarding this Funding Opportunity Announcement (FOA) may be emailed to OGM_ILAB@dol.gov.</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-09-29</summary>
   </entry>
   <entry>
     <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
@@ -97,25 +123,18 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Environmental science"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The NSF Geosciences Research solicitation supports foundational research projects that advance the frontiers of knowledge across all areas of the geosciences. This solicitation calls for proposals in three programs: Atmospheric and Geospace Sciences (AGS) Program; Earth Sciences (EAR) Program; and Ocean Sciences (OCE) Program. These programs support projects that expand the frontiers of knowledge …</summary>
   </entry>
   <entry>
-    <title>University-led Networks for Innovation, Technology, and Expertise (UNITE)</title>
-    <link href="https://www.grants.gov/search-results-detail/363645"/>
-    <id>urn:funding-finder:grants-gov:363645</id>
-    <updated>2026-08-18T00:00:00Z</updated>
-    <author><name>U.S. Mission to Saudi Arabia</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Cybersecurity"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
+    <title>Resilient</title>
+    <link href="https://sam.gov/opp/f0e3e0d303254053922d9b2c7a67e878/view"/>
+    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250704</id>
+    <updated>2026-08-20T00:00:00Z</updated>
+    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
     <category term="Materials science"/>
-    <category term="Data science"/>
-    <summary>U.S. Mission to Saudi Arabia | Closes 2026-09-17 | The U.S. Embassy Riyadh Public Diplomacy Section is accepting applications for a cooperative agreement to run the University-led Networks for Innovation, Technology, and Expertise (UNITE) program. UNITE will support approximately four to five applied project teams - university-industry partnerships between U.S. universities, U.S. companies or technical partners, and Saudi institutions - through pr…</summary>
+    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-19 | DSO is issuing a Disruption Opportunity (DO), inviting submissions of innovative basic or applied research concepts in the technical domain of accelerated materials testing and prediction for concrete. | See Program The nation’s critical military and civilian infrastructure relies heavily on concrete structures that are aging and degrading at unpredictable rates. Current concrete testing methods f…</summary>
   </entry>
   <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
@@ -128,7 +147,7 @@
     <category term="Quantum science"/>
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
-    <summary>U.S. National Science Foundation | Closes 2027-02-11 | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-02-11 | verify prerequisite | The Emerging Frontiers in Research and Innovation (EFRI) program serves a critical role in helping the NSF Directorate for Engineering focus on important emerging areas in a timely way. The EFRI program invests in potentially transformative ideas that offer the opportunity for significant shifts in foundational engineering knowledge. EFRI-funded research must have strong potential for long-term im…</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
@@ -140,10 +159,9 @@
     <category term="Energy"/>
     <category term="Catalysis and reaction engineering"/>
     <category term="Separations and membranes"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
+    <category term="Water"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
@@ -154,12 +172,10 @@
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Biology and biotechnology"/>
     <category term="Environmental science"/>
-    <category term="Manufacturing"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
+    <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research projects for civil, mechanical, and manufacturing innovation through the following programs: The Advanced Manufacturing, Design, and Operations (AMDO) program supports foundational research on advanced manufacturing, materials and service processes; their integration into facilities, supply ch…</summary>
   </entry>
   <entry>
@@ -168,10 +184,8 @@
     <id>urn:funding-finder:grants-gov:363613</id>
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
     <category term="Quantum science"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational research for electrical, communications and computing systems through the following programs: The Electronic, Photonic, Magnetic, and Quantum Devices (EPMQD) program supports foundational engineering research on novel classical and quantum devices, exploring matter’s electronic, photonic, and magnetic …</summary>
@@ -183,8 +197,6 @@
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
@@ -232,38 +244,29 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports multiple research programs at the frontiers of discovery in physics. Physics research supported by NSF MPS enables understanding of the fundamental aspects of nature at all scales, from the quantum effects inside atoms to the mysterious dark energy spanning the entire universe. The core resea…</summary>
   </entry>
   <entry>
-    <title>Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
+    <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
+    <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
+    <category term="Quantum science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
-  </entry>
-  <entry>
-    <title>ACS Petroleum Research Fund - 2 programs</title>
-    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs.html"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-167136617b79dc5d</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>American Chemical Society Petroleum Research Fund</name></author>
     <category term="Materials science"/>
-    <summary>American Chemical Society Petroleum Research Fund | Closes 2026-09-14</summary>
+    <category term="Manufacturing"/>
+    <summary>Simons Foundation | Application 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
   </entry>
   <entry>
-    <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
-    <link href="https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
-    <updated>2026-08-09T00:00:00Z</updated>
+    <title>NSF Plasma Physics</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
+    <updated>2026-08-14T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
   </entry>
   <entry>
     <title>Doctoral New Investigator (DNI) Grants</title>
@@ -274,22 +277,6 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <summary>American Chemical Society Petroleum Research Fund | Posted</summary>
-  </entry>
-  <entry>
-    <title>Improved Oil and Gas Recovery and Produced Water Management Technologies</title>
-    <link href="https://www.grants.gov/search-results-detail/363065"/>
-    <id>urn:funding-finder:grants-gov:363065</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>National Energy Technology Laboratory</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>National Energy Technology Laboratory | Closes 2026-09-08 | Modification 000003: The purpose of this modification is to revise NOFO Part 1. Section I.A.1 is revised to correct the Topic Area 1b cost share to 20% and Section IV.C.2 is revised to delete the Environmental Considerations Summary and Environmental Impact Volume from the Summary of Application Requirements table. This Notice of Funding Opportunity (NOFO) will seek proposals for specific research…</summary>
   </entry>
   <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>
@@ -314,13 +301,13 @@
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Agriculture and food"/>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Energy"/>
     <category term="Manufacturing"/>
+    <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Separations and membranes"/>
     <category term="Materials science"/>
-    <category term="Quantum science"/>
     <summary>U.S. National Science Foundation | Posted | Society relies on chemical processes to turn raw materials into useful products. The Chemical Process Systems (CPS) program invests in fundamental research on chemical and biochemical processes to make them more efficient, sustainable, and resilient. New CPS technologies for manufacturing, biotechnology, critical minerals, energy, food, and other national priorities will help make the U.S. more co…</summary>
   </entry>
   <entry>
@@ -345,14 +332,14 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <id>urn:funding-finder:grants-gov:362063</id>
     <updated>2026-04-24T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Artificial intelligence and machine learning"/>
     <category term="Biology and biotechnology"/>
     <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Quantum science"/>
     <category term="Separations and membranes"/>
     <category term="Technology development"/>
     <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Quantum science"/>
+    <category term="Materials science"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
   </entry>
   <entry>
@@ -384,21 +371,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Separations and membranes"/>
     <category term="Carbon management"/>
     <category term="Quantum science"/>
-    <summary>Office of Science | Closes 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
-  </entry>
-  <entry>
-    <title>CHIPS Research and Development Office (CRDO) Broad Agency Announcement (BAA)</title>
-    <link href="https://www.grants.gov/search-results-detail/360651"/>
-    <id>urn:funding-finder:grants-gov:360651</id>
-    <updated>2025-09-24T00:00:00Z</updated>
-    <author><name>National Institute of Standards and Technology</name></author>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <summary>National Institute of Standards and Technology | Closes 2026-09-15 | NIST is soliciting proposals from eligible applicants for research, prototyping, and commercial solutions that advance microelectronics technology in the U.S., to be considered for funding by the CHIPS Research and Development Office (CRDO).</summary>
+    <summary>Office of Science | Application 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
     <title>Staff Research Program</title>
@@ -409,7 +382,39 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Materials science"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2030-06-02 | The ARO is soliciting proposals for Staff Research Program opportunities. The purpose of the program is to enable ARO scientific staff to maintain and expand professional competence in support of fulfilling the ARO mission through the conduct of hands-on, basic research. The staff research will be performed collaboratively with institutions external to ARO. Staff research efforts will involve scie…</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2030-06-02 | The ARO is soliciting proposals for Staff Research Program opportunities. The purpose of the program is to enable ARO scientific staff to maintain and expand professional competence in support of fulfilling the ARO mission through the conduct of hands-on, basic research. The staff research will be performed collaboratively with institutions external to ARO. Staff research efforts will involve scie…</summary>
+  </entry>
+  <entry>
+    <title>Security, Privacy, and Trust in Cyberspace</title>
+    <link href="https://www.grants.gov/search-results-detail/357554"/>
+    <id>urn:funding-finder:grants-gov:357554</id>
+    <updated>2024-12-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2026-09-28 | Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
+  </entry>
+  <entry>
+    <title>NSF Scholarships in Science, Technology, Engineering, and Mathematics Program</title>
+    <link href="https://www.grants.gov/search-results-detail/357498"/>
+    <id>urn:funding-finder:grants-gov:357498</id>
+    <updated>2024-12-03T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <summary>U.S. National Science Foundation | Application 2027-03-02 | The main goal of the S-STEM program is to enable academically talented, low-income students to pursue successful careers in promising STEM fields. Ultimately, the S-STEM program seeks to increase the number of academically promising low-income students who graduate with an S-STEM eligible degree and contribute to the American innovation economy with their STEM knowledge. Recognizing that financial…</summary>
   </entry>
   <entry>
     <title>BRAIN Initiative: Brain Behavior Quantification and Synchronization- Next Generation Sensor Technology Development (U01 Clinical Trial Optional)</title>
@@ -423,7 +428,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Energy"/>
-    <summary>National Institutes of Health | Closes 2027-06-15 | This NOFO solicits applications for next generation sensor and bioelectronic device development that will synchronize with brain recordings. The sensor and neural recording data will be used to generate new computational models of behavior in human and animal models. There has been a lack of quantitative approaches and models to understand the complexity of human and animal behavior in naturalisti…</summary>
+    <summary>National Institutes of Health | Application 2027-06-15 | This NOFO solicits applications for next generation sensor and bioelectronic device development that will synchronize with brain recordings. The sensor and neural recording data will be used to generate new computational models of behavior in human and animal models. There has been a lack of quantitative approaches and models to understand the complexity of human and animal behavior in naturalisti…</summary>
   </entry>
   <entry>
     <title>FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology</title>
@@ -437,7 +442,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Quantum science"/>
-    <summary>Office of Naval Research | Closes 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
+    <summary>Office of Naval Research | Application 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
   <entry>
     <title>Computational and Data-Enabled Science and Engineering</title>
@@ -445,15 +450,45 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <id>urn:funding-finder:grants-gov:356055</id>
     <updated>2024-08-15T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Data science"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
+    <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | Large-scale simulations and the ability to accumulate massive amounts of data have revolutionized science and engineering. The goal of the Computational and Data-enabled Science and Engineering (CDS&amp;E) meta-program is to identify and capitalize on opportunities for major scientific and engineering breakthroughs through new computational and data-analysis approaches and best practices. The CDS&amp;E me…</summary>
+  </entry>
+  <entry>
+    <title>Advanced Technological Education</title>
+    <link href="https://www.grants.gov/search-results-detail/355100"/>
+    <id>urn:funding-finder:grants-gov:355100</id>
+    <updated>2024-06-25T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Community development"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+  </entry>
+  <entry>
+    <title>IUSE / Professional Formation of Engineers: Revolutionizing Engineering Departments (IUSE/PFE: RED)</title>
+    <link href="https://www.grants.gov/search-results-detail/353413"/>
+    <id>urn:funding-finder:grants-gov:353413</id>
+    <updated>2024-04-05T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Manufacturing"/>
+    <category term="Quantum science"/>
+    <category term="Technology development"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-04-13 | Revolutionizing Engineering Departments (hereinafter referred to as RED) is designed to build upon previous efforts in engineering education research. Specifically, previous and ongoing evaluations of the NSF Engineering Education and Centers Division program and its predecessors, as well as those related programs in the Directorate for STEM Education, have shown that prior investments have signif…</summary>
   </entry>
   <entry>
     <title>NRL Long Range Broad Agency Announcement (BAA) for Basic and Applied Research</title>
@@ -467,23 +502,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Materials science"/>
     <category term="Space and aeronautics"/>
     <category term="Technology development"/>
-    <summary>Naval Research Laboratory | Closes 2026-09-30 | Amendment 0007The purpose of this amendment is to add Summary Topic 61-24-06 - AFFF ALTERNATIVE PROGRAM COMPATIBILITY OF FLUORINE-FREE FOAM (F3) WITH NON-ASPIRATING SPRINKLER NOZZLES to Appendix 1 in it’s entirety. All other terms and conditions remain unchanged.--------------------------------------------------------------Amendment 0006The purpose of this amendment is to extend the due date for a…</summary>
-  </entry>
-  <entry>
-    <title>ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE)</title>
-    <link href="https://www.grants.gov/search-results-detail/351715"/>
-    <id>urn:funding-finder:grants-gov:351715</id>
-    <updated>2024-01-06T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Climate change"/>
-    <category term="Education and workforce"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Manufacturing"/>
-    <category term="Materials science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-09-29 | Plasma science is a transdisciplinary field of research where fundamental studies in many disciplines, including plasma physics, plasma chemistry, materials science, and space science, come together to advance knowledge for discovery and technological innovation. The primary goal of the ECosystem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) program is to identify and capitali…</summary>
+    <summary>Naval Research Laboratory | Application 2026-09-30 | Amendment 0007The purpose of this amendment is to add Summary Topic 61-24-06 - AFFF ALTERNATIVE PROGRAM COMPATIBILITY OF FLUORINE-FREE FOAM (F3) WITH NON-ASPIRATING SPRINKLER NOZZLES to Appendix 1 in it’s entirety. All other terms and conditions remain unchanged.--------------------------------------------------------------Amendment 0006The purpose of this amendment is to extend the due date for a…</summary>
   </entry>
   <entry>
     <title>Joint Center of Excellence for Advanced Materials Research</title>
@@ -504,14 +523,23 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2023-08-29T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Energy"/>
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
-    <category term="Materials science"/>
     <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+    <category term="Materials science"/>
+    <category term="Energy"/>
+    <summary>U.S. National Science Foundation | Application 2026-11-16 | Proposals in the area of plasma physics submitted to the Division of Physics that are not governed by another solicitation (such as CAREER), should be submitted to the Division-wide solicitation: Division of Physics: Investigator-Initiated Research Projects. The Plasma Physics program participates in multiple NSF meta-programs such as the ECosytem for Leading Innovation in Plasma Science and Engin…</summary>
+  </entry>
+  <entry>
+    <title>Research Experiences for Undergraduates (REU)</title>
+    <link href="https://www.grants.gov/search-results-detail/348985"/>
+    <id>urn:funding-finder:grants-gov:348985</id>
+    <updated>2023-06-29T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>U.S. National Science Foundation | Application 2027-08-18 | The Research Experiences for Undergraduates (REU) program supports active research participation by undergraduate students in any of the areas of research funded by the National Science Foundation. REU projects involve students in meaningful ways in ongoing research programs or in research projects specifically designed for the REU program. This solicitation features two mechanisms for supporting …</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>
@@ -522,12 +550,10 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Closes 2026-12-04 | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-12-04 | verify prerequisite | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
   </entry>
   <entry>
     <title>Archaeometry</title>
@@ -536,9 +562,21 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2023-04-05T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
+    <summary>U.S. National Science Foundation | Application 2026-12-01 | The Archaeology Program administers an annual Archaeometry competition with a target date of December 1. The goal is to fund projects in two main categories: To develop or refine anthropologically relevant archaeometric techniques. Examples include the development of methods to identify specific types of organic residues on ceramics or development of field applicable analytic techniques. To suppor…</summary>
+  </entry>
+  <entry>
+    <title>Training-based Workforce Development for Advanced Cyberinfrastructure (CyberTraining)</title>
+    <link href="https://www.grants.gov/search-results-detail/344608"/>
+    <id>urn:funding-finder:grants-gov:344608</id>
+    <updated>2022-11-22T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Education and workforce"/>
     <category term="Data science"/>
-    <summary>U.S. National Science Foundation | Closes 2026-12-01 | The Archaeology Program administers an annual Archaeometry competition with a target date of December 1. The goal is to fund projects in two main categories: To develop or refine anthropologically relevant archaeometric techniques. Examples include the development of methods to identify specific types of organic residues on ceramics or development of field applicable analytic techniques. To suppor…</summary>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <category term="Cybersecurity"/>
+    <summary>U.S. National Science Foundation | Application 2027-01-21 | This program seeks to prepare, nurture, and grow the national scientific research workforce for creating, utilizing, and supporting advanced cyberinfrastructure (CI) to enable and potentially transform fundamental science and engineering (S&amp;E) research and education and contribute to the Nation's overall economic competitiveness and security. The goals of this solicitation are to (i) ensure broad …</summary>
   </entry>
   <entry>
     <title>DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH</title>
@@ -554,7 +592,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Energy"/>
     <category term="Manufacturing"/>
     <category term="Materials science"/>
-    <summary>Dept of the Army -- Materiel Command | Closes 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
+    <summary>Dept of the Army -- Materiel Command | Application 2027-11-20 | The purpose of this combined Broad Agency Announcement (BAA) under Federal Acquisition Regulation (FAR) Part 35 and Funding Opportunity Announcement (FOA) under 2 Code of Federal Regulations (CFR) 200.204 (henceforth referred to as “BAA”) is to solicit research proposals for submission to the U.S. Army Combat Capabilities Development Command (DEVCOM) Army Research Laboratory (ARL) for funding cons…</summary>
   </entry>
   <entry>
     <title>Research Interests of the United States Air Force Academy (formerly USAFA-BAA-2021)</title>
@@ -584,7 +622,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Environmental science"/>
     <category term="Materials science"/>
     <category term="Technology development"/>
-    <summary>Idaho Field Office | Closes 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
+    <summary>Idaho Field Office | Application 2030-10-14 | A. STATEMENT OF OBJECTIVESThis Funding Opportunity Announcement (FOA) is to award multiple cooperative agreements to accredited United States (U.S.) two- and four-year colleges and universities (Institutions of Higher Education (IHEs)) to receive and administer scholarship and fellowship funding-provided through the University Nuclear Leadership Program (UNLP) and as administered by the Department…</summary>
   </entry>
   <entry>
     <title>Crosscutting Activities in Materials Research</title>
@@ -592,11 +630,9 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <id>urn:funding-finder:grants-gov:308873</id>
     <updated>2018-09-08T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
-    <category term="Data science"/>
     <category term="Education and workforce"/>
     <category term="Health equity"/>
     <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | Crosscutting Activities in Materials Research (XC) coordinates and supports crosscutting activities within the Division of Materials Research (DMR) and more broadly across NSF.
 The emphasis within XC is diversity and inclusion, international cooperation, and education (including experiential learning at REU/RET Sites). Additionally, activities that broadly engage the community, such as summer scho…</summary>
   </entry>

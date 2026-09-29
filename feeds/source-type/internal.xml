@@ -4,16 +4,111 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-09-07T01:21:25Z</updated>
+  <updated>2026-09-28T21:50:18Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>NIH Stephen I. Katz Early Stage Investigator Research Project Grant (R01 Clinical Trial Not Allowed)</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PAR-25-322.html"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3APAR-25-322</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-09-28</summary>
+  </entry>
+  <entry>
+    <title>NIH Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)</title>
+    <link href="https://files.simpler.grants.gov/opportunities/9a4aeb2f-d0ac-403b-ac67-9d1fd24d9556/attachments/2037e87d-aae5-4621-8e37-b3fb158c3c26/PAR-27-032-Full-Announcement.pdf"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3APAR-27-032</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-02</summary>
+  </entry>
   <entry>
     <title>NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301</title>
     <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A25-301</id>
-    <updated>2026-09-04T00:00:00Z</updated>
+    <updated>2026-09-07T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Cybersecurity"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-05</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-05</summary>
+  </entry>
+  <entry>
+    <title>NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
+    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A24-569</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-09</summary>
+  </entry>
+  <entry>
+    <title>NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512</title>
+    <link href="https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-512</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-04</summary>
+  </entry>
+  <entry>
+    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
+    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-510</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Technology development"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
+STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
+  </entry>
+  <entry>
+    <title>New NSF MPS funding opportunities for core research programs</title>
+    <link href="https://links-2.govdelivery.com/CL0/https:"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A26-522</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-12-02</summary>
+  </entry>
+  <entry>
+    <title>Defense Advanced Research Projects Agency (DARPA)</title>
+    <link href="https://sam.gov/workspace/contract/opp/4bafe32bf3e14551b8164db3e8a4b990/view"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A26-123</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-04-16</summary>
+  </entry>
+  <entry>
+    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
+    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Technology development"/>
+    <category term="Transportation"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
+with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
+scale, …</summary>
+  </entry>
+  <entry>
+    <title>Directorate of Engineering</title>
+    <link href="https://www.nsf.gov/funding/opportunities/eccs-engineering-eng-electrical-communications-computing-systems"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A26-514</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+  </entry>
+  <entry>
+    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
+    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
+    <updated>2026-09-07T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>Selective Harnessing of Intrinsic Neuroplasticity Engineering (SHINE)</title>
@@ -21,7 +116,15 @@
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-3f359d639f6d327f</id>
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-09</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-09</summary>
+  </entry>
+  <entry>
+    <title>NIH Exploratory/Developmental Research Project Grant (Parent R21 Clinical Trial Not Allowed)</title>
+    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-304.html"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-3a86f2f6b6e2925c</id>
+    <updated>2026-09-04T00:00:00Z</updated>
+    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-16</summary>
   </entry>
   <entry>
     <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
@@ -30,18 +133,9 @@
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
-  </entry>
-  <entry>
-    <title>Defense Advanced Research Projects Agency (DARPA)</title>
-    <link href="https://sam.gov/workspace/contract/opp/4bafe32bf3e14551b8164db3e8a4b990/view"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A26-123</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-04-16</summary>
+    <summary>Simons Foundation | Application 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
   </entry>
   <entry>
     <title>Research Areas</title>
@@ -49,7 +143,7 @@
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-40c8bd8449be89b5</id>
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-08-27</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-08-27</summary>
   </entry>
   <entry>
     <title>NSF Research in the Formation of Engineers program</title>
@@ -57,8 +151,6 @@
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4cc1ac2aa40787d</id>
     <updated>2026-09-04T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
@@ -71,55 +163,10 @@
     <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
     <category term="Carbon management"/>
     <category term="Climate change"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-29</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation</title>
-    <link href="https://www.simonsfoundation.org/grant/simons-collaborations-in-mathematics-and-the-physical-sciences/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ddde5b48dc92bba2</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
-  </entry>
-  <entry>
-    <title>DOD Office of Naval Research (ONR) FY27 Young Investigator Program (YIP)</title>
-    <link href="https://www.grants.gov/search-results-detail/363632"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-0e50b8deed73ddc7</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-30</summary>
-  </entry>
-  <entry>
-    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
-    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
-with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
-scale, …</summary>
-  </entry>
-  <entry>
-    <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
-    <link href="https://new.nsf.gov/funding/opportunities/division-physics-investigator-initiated-research"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A23-615</id>
-    <updated>2026-08-23T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Quantum science"/>
-    <category term="Energy"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+    <category term="Manufacturing"/>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-09-29</summary>
   </entry>
   <entry>
     <title>W. M. KECK Foundation Research Program</title>
@@ -127,7 +174,7 @@ scale, …</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028013</id>
     <updated>2026-08-15T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-12-04</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-12-04 | prerequisite closed</summary>
   </entry>
   <entry>
     <title>Limited Submission Opportunity: $700,000 - The G. Harold and Leila Y. Mathers Foundation - Research Grant (Spring 2027 Cycle)</title>
@@ -141,7 +188,7 @@ scale, …</summary>
     <category term="Infectious disease"/>
     <category term="Neuroscience"/>
     <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-12 | The Foundation primarily
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-02-12 | prerequisite closed | The Foundation primarily
 supports basic science, ideally with potential translational applications. Examples of current research areas we support include
 immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
 we will not consider for support include Covid-19 relat…</summary>
@@ -152,7 +199,12 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <summary>Simons Foundation | Closes 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Materials science"/>
+    <category term="Manufacturing"/>
+    <summary>Simons Foundation | Application 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
   </entry>
   <entry>
     <title>PumpPrimer II Program for SAS and Hajim Tenure-track faculty</title>
@@ -160,7 +212,7 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-1993899</id>
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-10-23</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-23</summary>
   </entry>
   <entry>
     <title>Simons Foundation Simons Collaborations in Mathematics and the Physical Sciences</title>
@@ -168,78 +220,19 @@ we will not consider for support include Covid-19 relat…</summary>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-02ca89881582e10d</id>
     <updated>2026-08-14T00:00:00Z</updated>
     <author><name>Simons Foundation</name></author>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Simons Foundation | Closes 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
+    <summary>Simons Foundation | Letter Of Intent 2026-10-29 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Simons Collaborations in MPS program.</summary>
   </entry>
   <entry>
-    <title>Schmidt Sciences</title>
-    <link href="https://airtable.com/appDCapaPF9M0iLQO/pagRxgvY9pCkOeaxx/form"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-93df7a9faf5e4c37</id>
-    <updated>2026-08-09T00:00:00Z</updated>
+    <title>NSF Plasma Physics</title>
+    <link href="https://beta.nsf.gov/funding/opportunities/plasma-physics"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-bd193799390f4580</id>
+    <updated>2026-08-14T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-11</summary>
-  </entry>
-  <entry>
-    <title>ACS Petroleum Research Fund - 2 programs</title>
-    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs.html"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-167136617b79dc5d</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>American Chemical Society Petroleum Research Fund</name></author>
-    <category term="Materials science"/>
-    <summary>American Chemical Society Petroleum Research Fund | Closes 2026-09-14</summary>
-  </entry>
-  <entry>
-    <title>American Chemical Society, petroleum Research Fund New Directions (ND) Grants</title>
-    <link href="https://www.acs.org/funding/grants/petroleum-research-fund/programs/new-directions-grants.html"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4ce54abf9b529bf</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>American Chemical Society Petroleum Research Fund</name></author>
-    <summary>American Chemical Society Petroleum Research Fund | Closes 2026-09-14</summary>
-  </entry>
-  <entry>
-    <title>NSF Computational and Data-Enabled Science and Engineering (CDS&amp;E) | NSF - National Science Foundation PD 24-8084</title>
-    <link href="https://new.nsf.gov/funding/opportunities/computational-data-enabled-science-engineering-0"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-ca54a2886f6fb184</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Catalysis and reaction engineering"/>
     <category term="Materials science"/>
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>Sloan Research Fellowships</title>
-    <link href="http://www.sloan.org/sloan-research-fellowships/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>Alfred P. Sloan Foundation</name></author>
-    <summary>Alfred P. Sloan Foundation | Closes 2026-09-15 | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
-Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
-  </entry>
-  <entry>
-    <title>SONY RESEARCH AWARD PROGRAM</title>
-    <link href="https://www.sony.com/en/SonyInfo/research-award-program/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-122b30a8725e40bf</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>Sony Research</name></author>
-    <summary>Sony Research | Closes 2026-09-15</summary>
-  </entry>
-  <entry>
-    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
-    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-510</id>
-    <updated>2026-08-09T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
-STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-16</summary>
   </entry>
   <entry>
     <title>Damon Runyon Cancer Research Foundation Clinical Investigator Award 2027</title>
@@ -250,7 +243,7 @@ STTR proposals require that the startup issue a subaward to a not-for-profit res
     <category term="Cancer"/>
     <category term="Public health"/>
     <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-01-19 | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-01-19 | prerequisite closed | The Damon Runyon Clinical Investigator Award supports independent young physician-scientists conducting disease-oriented research that demonstrates
 a high level of innovation and creativity. The goal is to support the best young physician-scientists doing work aimed at improving the practice of cancer medicine. The Clinical Investigator Award program is specifically intended to provide outstanding…</summary>
   </entry>
   <entry>
@@ -260,7 +253,7 @@ a high level of innovation and creativity. The goal is to support the best young
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <category term="Education and workforce"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Closes 2027-02-04</summary>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-02-04 | prerequisite closed</summary>
   </entry>
   <entry>
     <title>Doctoral New Investigator (DNI) Grants</title>
@@ -286,8 +279,17 @@ a high level of innovation and creativity. The goal is to support the best young
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-0f186b990288c021</id>
     <updated>2026-08-09T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
+    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+  </entry>
+  <entry>
+    <title>Sloan Research Fellowships</title>
+    <link href="http://www.sloan.org/sloan-research-fellowships/"/>
+    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-aed7d81578b24028</id>
+    <updated>2026-08-09T00:00:00Z</updated>
+    <author><name>Alfred P. Sloan Foundation</name></author>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
+    <summary>Alfred P. Sloan Foundation | Posted | The Sloan Research Fellowship Program recognizes and rewards outstanding early-career faculty who have the potential to revolutionize their fields of study.
+Successful candidates for a Fellowship generally have a strong record of significant independent research accomplishments that demonstrate creativity and the potential to become future leaders in the scientific community. While Fellows are exp…</summary>
   </entry>
 </feed>

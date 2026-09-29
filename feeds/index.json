@@ -1,11 +1,11 @@
 {
-  "generated_at": "2026-09-27T16:19:10Z",
+  "generated_at": "2026-09-28T21:50:18Z",
   "excluded_noncurrent": 0,
   "feeds": [
     {
       "title": "All new opportunities",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/all.xml",
-      "count": 1356
+      "count": 1355
     },
     {
       "title": "Funding Finder | Federal",
@@ -20,7 +20,7 @@
     {
       "title": "Funding Finder | State",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml",
-      "count": 40
+      "count": 39
     },
     {
       "title": "Funding Finder | Agriculture and food",
@@ -30,7 +30,7 @@
     {
       "title": "Funding Finder | Artificial intelligence and machine learning",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml",
-      "count": 228
+      "count": 150
     },
     {
       "title": "Funding Finder | Arts and culture",
@@ -70,12 +70,12 @@
     {
       "title": "Funding Finder | Cybersecurity",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml",
-      "count": 185
+      "count": 22
     },
     {
       "title": "Funding Finder | Data science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml",
-      "count": 233
+      "count": 156
     },
     {
       "title": "Funding Finder | Education and workforce",
@@ -85,7 +85,7 @@
     {
       "title": "Funding Finder | Energy",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml",
-      "count": 114
+      "count": 113
     },
     {
       "title": "Funding Finder | Environmental science",
@@ -105,12 +105,12 @@
     {
       "title": "Funding Finder | Manufacturing",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/manufacturing.xml",
-      "count": 62
+      "count": 63
     },
     {
       "title": "Funding Finder | Materials science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml",
-      "count": 47
+      "count": 46
     },
     {
       "title": "Funding Finder | Neuroscience",
@@ -125,7 +125,7 @@
     {
       "title": "Funding Finder | Quantum science",
       "url": "https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml",
-      "count": 36
+      "count": 35
     },
     {
       "title": "Funding Finder | Separations and membranes",
