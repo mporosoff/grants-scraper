@@ -1363,14 +1363,60 @@ def extract_repeated_signals(
     return facts
 
 
-def extract_program_areas(containers, document, extracted_at, maximum=MAX_PROGRAM_AREAS):
-    """Detect controlled program-area terms that actually appear in the notice.
+_PROGRAM_AREA_ADMIN_SECTION = re.compile(
+    r"\b(?:award administration|administrative and national policy requirements)\b", re.I)
+_PROGRAM_AREA_NON_SCOPE_CONTEXT = [
+    ("site_navigation", re.compile(r"\bExplore All Focus Areas\b", re.I)),
+    ("recipient_security_policy", re.compile(
+        r"\bPursuant to the Cybersecurity Act\b|"
+        r"\b(?:Recipients (?:shall|must)|If awarded,? you must).{0,180}\bNIST cybersecurity framework\b|"
+        r"\bNotice of Cybersecurity Maturity Model Certification\b", re.I)),
+    ("proposal_preparation_policy", re.compile(
+        r"\bPolicy on the Use of Artificial Intelligence for NEH\b|"
+        r"\bAFOSR proposals:.{0,100}\bGenerative Artificial Intelligence\b|"
+        r"\bD\.2\.g\.\s*Use of Generative Artificial Intelligence\b|"
+        r"\bRestriction on use of Generative Artificial Intelligence Tools\b|"
+        r"\bartificial intelligence(?:\s*\(AI\))?\s+in (?:the development of|preparing) grant applications\b|"
+        r"\bguidance on the use of AI in preparing grant applications\b|"
+        r"\bArtificial Intelligence \(AI\) Application Use\s*\.{3}|"
+        r"\bfair.use.{0,120}\bgenerative artificial intelligence\b.{0,140}\bapplication\b", re.I)),
+    ("agency_disclosure_policy", re.compile(
+        r"\bDepartment of Energy may share and use within the Government any application information\b", re.I)),
+    ("recipient_data_protection", re.compile(
+        r"\bDescribe any plan to address cybersecurity and confidentiality of participants\b|"
+        r"\bCybersecurity plans?\.\s*(?:[•*-]\s*)?How you will protect personally identifiable\b|"
+        r"\bresearch security training certifications.{0,180}\bcybersecurity\b|"
+        r"\bAwardee must certify.{0,140}\bcybersecurity risk mitigation\b|"
+        r"\bEach applicant selected for Federal funding must demonstrate,? prior to the signing of the grant agreement\b|"
+        r"\bRepresentation of Limited Rights Data and Restricted Software.{0,50}\bCybersecurity Plan\b|"
+        r"\btechnical risks.{0,220}\bIdentification of security risks,? including cybersecurity\b|"
+        r"\bDHS Standard Terms and Conditions.{0,180}\bcybersecurity\b", re.I)),
+]
 
-    Returns a list of ``{"label", "topics", "citation"}`` for each program area
-    found in the official document text. These are inferred discoverability
-    signals -- kept separate from official ``facts`` -- that make an opaque
-    umbrella FOA findable by topic. Each hit carries a page/section citation, so
-    it is evidence-backed and auditable in the evidence cache.
+
+def program_area_context_rejection(citation):
+    """An official mention in navigation or recipient policy is not funded scope.
+
+    Keep this identical for new extraction and retained citations. These narrow
+    administrative contexts do not exclude research into AI, security plans,
+    privacy, or security frameworks when the notice actually funds that work.
+    """
+    reference = citation.get("structural_reference") or {}
+    headings = " ".join([citation.get("section") or "", *(reference.get("heading_path") or [])])
+    if _PROGRAM_AREA_ADMIN_SECTION.search(headings):
+        return "award_administration"
+    if ((urlparse(citation.get("document_url") or "").hostname or "").lower() in {"nsf.gov", "www.nsf.gov"}
+            and (citation.get("section") or "").strip().casefold() == "additional program resources"):
+        return "other_program_resources"
+    quote = re.sub(r"\s+", " ", citation.get("quote") or "")
+    return next((reason for reason, pattern in _PROGRAM_AREA_NON_SCOPE_CONTEXT if pattern.search(quote)), None)
+
+
+def extract_program_areas(containers, document, extracted_at, maximum=MAX_PROGRAM_AREAS):
+    """Find controlled terms with citations outside navigation/recipient policy.
+
+    An excluded first mention must not hide a later scientific occurrence.
+    These inferred discoverability signals remain separate from official facts.
     """
     hits = []
     seen = set()
@@ -1378,19 +1424,27 @@ def extract_program_areas(containers, document, extracted_at, maximum=MAX_PROGRA
         if label in seen:
             continue
         for container in containers:
-            match = pattern.search(container["text"])
-            if not match:
+            if container.get("toc") or container.get("source_component") == "nsf_submission_fields":
                 continue
-            citation = citation_for(
-                container,
-                document,
-                match.start(),
-                match.end(),
-                extracted_at,
-            )
-            hits.append({"label": label, "topics": list(topics), "citation": citation})
-            seen.add(label)
-            break
+            for match in pattern.finditer(container["text"]):
+                owned = [block for block in container.get("structure", [])
+                         if block.get("span") and block["span"][0] <= match.start() < block["span"][1]]
+                if any(block.get("toc") or block.get("repeated_header") for block in owned):
+                    continue
+                citation = citation_for(container, document, match.start(), match.end(), extracted_at)
+                if len(owned) == 1 and owned[0].get("kind") in {"paragraph", "list_item", "field"}:
+                    # Keep a policy paragraph next to scientific prose from
+                    # lending its role to the matched scientific paragraph.
+                    start, end = owned[0]["span"]
+                    citation["quote"] = context_quote(container["text"][start:end],
+                        match.start() - start, match.end() - start)
+                if program_area_context_rejection(citation):
+                    continue
+                hits.append({"label": label, "topics": list(topics), "citation": citation})
+                seen.add(label)
+                break
+            if label in seen:
+                break
         if len(hits) >= maximum:
             break
     return hits
@@ -2989,6 +3043,7 @@ def validated_program_area_hits(entry):
         and patterns_by_label[hit["label"]].search(
             ((hit.get("citation") or {}).get("quote") or "")
         )
+        and not program_area_context_rejection(hit.get("citation") or {})
     ]
 
 

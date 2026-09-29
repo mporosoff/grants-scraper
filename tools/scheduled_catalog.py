@@ -103,7 +103,9 @@ def prior_generation(root, environment, manifest):
                          for item in batch]
             candidates = [a for a in artifacts if a['name'].startswith('candidate-')]
             reservations = [a for a in artifacts
-                            if a['name'].startswith(f'generation-spend-reservation-{identifier}-')]
+                            if a['name'].startswith(f'generation-spend-reservation-{identifier}-')
+                            or re.fullmatch(r'program-area-vectors-[a-f0-9]{64}-reservation-'
+                                            + str(identifier) + r'-[1-9][0-9]*', a['name'])]
             if len(candidates) > 1:
                 raise Hold('Multiple candidate identities require an exact named recovery', identifier)
             if candidates:
@@ -125,8 +127,9 @@ def prior_generation(root, environment, manifest):
                         and run['run_attempt'] == 1 and not jobs and not artifacts):
                     continue
                 producers = [job for job in jobs if job.get('name') in ('generate', 'assemble')]
-                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2
-                        or any(job.get('conclusion') != 'skipped' for job in producers)):
+                corrections = [job for job in jobs if job.get('name') == 'program-area-revalidation']
+                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 1
+                        or any(job.get('conclusion') != 'skipped' for job in producers + corrections)):
                     raise Hold('Prior generation has no complete accounting/candidate evidence; inspect its original run', identifier)
             else:
                 raise Hold('Prior generation is still pending; preserve its original allowance', identifier)

@@ -206,7 +206,8 @@ test("Worker smoke performs the real bounded sequence and fails on provider reje
 });
 
 test("package-sensitive changes can reuse generated data through the single release owner", async () => {
-  const reuse = refreshWorkflow.slice(refreshWorkflow.indexOf('  assemble:'), refreshWorkflow.indexOf('  candidate:'));
+  const reuse = refreshWorkflow.match(/^  assemble:\r?\n[\s\S]*?(?=^  [\w-]+:\r?$)/m)?.[0];
+  assert.ok(reuse, "The assembly contract must stop at the next workflow job");
   const assembler = await readFile(new URL('tools/assemble_release_candidate.py', root), 'utf8');
   assert.match(assembler, /c.verify_dependencies\(root, manifest, allowed=\('teams',\) if team_update else \(\)\)/);
   assert.match(reuse, /tools.assemble_release_candidate/);

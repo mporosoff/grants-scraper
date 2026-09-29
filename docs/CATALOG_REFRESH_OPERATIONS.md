@@ -23,3 +23,34 @@ Timed-out work remains explicitly incomplete. It cannot advance source-check tim
 Before retrying, retain the original artifact ZIPs and their authenticated metadata/digests. Use a partial retry: rerun the specific failed generation job when the selected code is unchanged, or rerun the specific plan job and its dependent jobs when main contains a required repair. Avoid rerunning all jobs: during this incident it removed the previous attempt's spending artifacts. Publication readiness is bound to that run's authenticated release-plan artifact, including an inherited earlier plan when only failed jobs are retried. The run's original event SHA does not necessarily identify the code selected by a later plan.
 
 The retained progress log identified NSF CAREER 22-586 (339594): a nested heading expression took longer than the per-notice deadline to reject an uppercase sentence ending with a period. The replacement checks the same heading language in linear time. A bounded diagnostic of the same public notice completed in about 1.3 seconds without provider requests. The IARPA adapter also now sends its truthful source identity and text-format preferences explicitly through the shared downloader; its prior document-oriented request profile returned HTTP 403.
+
+
+## Retained September 28 program-area correction
+
+The replacement refresh `36480049073` completed source and document work, then
+publication review found administrative language classified as program scope.
+Its immutable parent is
+`85954ae156ca45aea2b6bac4db500f747e9e64725c230716087b085817c0c1de`.
+Do not rerun source collection or replace this candidate with an unrelated run.
+
+The protected manual `program-area-revalidation` stage accepts only that exact
+`candidate_run` and `candidate_id`. It authenticates the parent artifact and its
+original spend evidence, revalidates retained citation excerpts, and keeps the
+original source/evidence timestamps and all team outputs. The correction audit
+has its own timestamp; it does not claim a new source fetch.
+
+Search passages include program-area labels. A changed corpus therefore needs
+one coherent vector pass under the existing builder limits, separately from the
+unchanged document-AI ledger. A durable reservation is uploaded before any vector
+request. A completed vector checkpoint is uploaded before package assembly and
+must be reused on retry. A reservation without a complete verified checkpoint
+blocks another pass; a retry must never reset its allowance. No document or team
+provider credentials are passed to this job.
+
+The child manifest retains the original generation identity and records typed
+`program_area_revalidation` provenance for the affected outputs. Ordinary
+validation, exact-head review, protected merge, Pages publication and live
+verification still apply. Source collection and ordinary reuse remain unchanged.
+Automatic paid work is held while the protected catalog still records the known
+old extractor fingerprint; publication of the corrected candidate clears that
+specific hold and restores normal daily planning.

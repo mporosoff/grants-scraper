@@ -293,6 +293,23 @@ class ScheduledHistory(unittest.TestCase):
                 with self.assertRaises(scheduled.Hold):
                     self.discover()
 
+    def test_correction_reservation_without_candidate_holds_original_owner(self):
+        self.artifacts['200'] = [{'name': 'program-area-vectors-' + 'c' * 64 + '-reservation-200-1', 'expired': False}]
+        with self.assertRaises(scheduled.Hold) as raised:
+            self.discover()
+        self.assertEqual(raised.exception.run, '200')
+        self.assertIn('no complete candidate', str(raised.exception))
+
+    def test_started_correction_without_evidence_cannot_be_ignored(self):
+        for conclusion in ('success', 'failure', 'cancelled', None):
+            with self.subTest(conclusion=conclusion):
+                self.jobs['200'] = [{'name': name, 'conclusion': 'skipped'} for name in ('generate', 'assemble')]
+                self.jobs['200'].append({'name': 'program-area-revalidation', 'conclusion': conclusion})
+                with self.assertRaises(scheduled.Hold):
+                    self.discover()
+        self.jobs['200'][-1]['conclusion'] = 'skipped'
+        self.assertIsNone(self.discover())
+
     def test_prior_rerun_missing_earlier_attempt_evidence_holds(self):
         self.runs[0]['run_attempt'] = 2
         with self.assertRaises(scheduled.Hold):

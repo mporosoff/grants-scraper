@@ -218,8 +218,9 @@ class PlanningAndIsolation(unittest.TestCase):
 
     def test_completed_fixed_repair_restores_ordinary_planning(self):
         with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}), patch.object(bridge, 'correction_complete', return_value=True), \
+                patch('tools.program_area_release.correction_pending', return_value=False), \
                 patch('tools.plan_release.main') as ordinary:
-            bridge.plan(); ordinary.assert_called_once_with()
+            bridge.plan(); ordinary.assert_called_once_with(automatic_paid_hold=False)
 
     def test_completed_repair_allows_daily_generation_with_existing_service_controls(self):
         from tools import plan_release as planner
@@ -231,6 +232,7 @@ class PlanningAndIsolation(unittest.TestCase):
                     'GITHUB_STEP_SUMMARY': str(root/'summary')}
                 with patch.dict(os.environ, environment, clear=True), \
                         patch.object(bridge, 'correction_complete', return_value=True), \
+                        patch('tools.program_area_release.correction_pending', return_value=False), \
                         patch.object(planner, 'pending_publication', return_value=None), \
                         patch.object(planner, 'latest_report', return_value=('', None)), \
                         patch('tools.scheduled_catalog.resolve', side_effect=lambda root, env, result, dest, **kw: result), \
@@ -367,8 +369,9 @@ class ProjectionCompletion(unittest.TestCase):
         self.assertEqual(self.auth.call_count, 2)
         self.owned.assert_called_once()
         self.assertEqual(self.owned.call_args.args[0], self.manifest)
-        with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}, clear=True), patch('tools.plan_release.main') as ordinary:
-            bridge.plan(); ordinary.assert_called_once_with()
+        with patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto'}, clear=True), \
+                patch('tools.program_area_release.correction_pending', return_value=False), patch('tools.plan_release.main') as ordinary:
+            bridge.plan(); ordinary.assert_called_once_with(automatic_paid_hold=False)
 
     def test_projection_cannot_complete_without_publication_live_and_owned_evidence(self):
         self.publication['pages_complete'] = False
@@ -700,7 +703,7 @@ class WorkflowContracts(unittest.TestCase):
             and s.get('with', {}).get('path') == '${{ runner.temp }}/candidate']
             for name, job in self.jobs.items()}
         producers = {name: steps for name, steps in producers.items() if steps}
-        self.assertEqual(set(producers), {'generate', 'assemble', 'catalog-correction'})
+        self.assertEqual(set(producers), {'generate', 'assemble', 'catalog-correction', 'program-area-revalidation'})
         for name, steps in producers.items():
             with self.subTest(producer=name):
                 self.assertEqual(len(steps), 1)

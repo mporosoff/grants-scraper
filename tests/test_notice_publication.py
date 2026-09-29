@@ -56,6 +56,33 @@ class NoticePublicationTests(unittest.TestCase):
                 catalog['opportunities'][0].pop('next_submission')
             self.assertFalse(verify(catalog, cache)['publication_ready'])
 
+    def test_stale_program_area_facets_or_labels_block_even_with_unchanged_search_text(self):
+        for field, value in (('topic_areas', ['Cybersecurity']), ('document_program_areas', ['cybersecurity'])):
+            with self.subTest(field=field):
+                catalog, cache = self.candidate()
+                catalog['opportunities'][0][field] = value
+                before = deepcopy((catalog, cache))
+                report = verify(catalog, cache)
+                self.assertFalse(report['publication_ready'])
+                self.assertIn(field, report['changes'][0]['fields'])
+                self.assertEqual((report['source_requests'], report['provider_requests']), (0, 0))
+                self.assertEqual((catalog, cache), before)
+
+    def test_topic_facet_permutation_is_equivalent_but_membership_and_duplicates_are_not(self):
+        for actual, ready in ((['Energy', 'Materials science'], True),
+                              (['Energy', 'Cybersecurity'], False),
+                              (['Energy', 'Materials science', 'Energy'], False)):
+            with self.subTest(actual=actual):
+                catalog, cache = self.candidate()
+                record = catalog['opportunities'][0]
+                record['document_evidence']['source_fields']['topic_areas'] = {
+                    'present': True, 'value': ['Materials science', 'Energy']}
+                record['topic_areas'] = actual
+                before = deepcopy((catalog, cache))
+                report = verify(catalog, cache)
+                self.assertIs(report['publication_ready'], ready)
+                self.assertEqual((catalog, cache), before)
+
     def test_written_deadline_references_are_equivalent_but_wrong_citations_are_not(self):
         from scripts.build_catalog import write_catalog
         from scripts.enrich_catalog import read_catalog

@@ -669,7 +669,10 @@ def mode(bundle):
 
 def plan():
     requested = os.environ.get('REQUESTED_STAGE', '')
-    if requested in ('catalog-correction', 'catalog-projection'):
+    if requested == 'program-area-revalidation':
+        from tools.program_area_release import plan as revalidation_plan
+        value = revalidation_plan(ROOT, dict(os.environ))
+    elif requested in ('catalog-correction', 'catalog-projection'):
         refresh_environment()
         require(not any(os.environ.get(k) for k in ('CANDIDATE_ID', 'CANDIDATE_RUN', 'RECEIPT_RUN',
             'PUBLICATION_RUN', 'PUBLICATION_ATTEMPT'))
@@ -685,7 +688,8 @@ def plan():
         from tools.plan_release import main
         # The completed finite repair must not suppress ordinary daily source
         # refreshes. Existing service qualification and per-run budgets apply.
-        return main()
+        from tools.program_area_release import correction_pending
+        return main(automatic_paid_hold=correction_pending(ROOT))
     else:
         require(requested in ('', 'auto') or os.environ.get('GITHUB_EVENT_NAME') != 'workflow_dispatch', 'ordinary_generation_waits_for_fixed_correction')
         value = {'stage': 'noop', 'release_sha': release.git(ROOT, 'rev-parse', 'HEAD'), 'openai': 'false', 'anthropic': 'false',

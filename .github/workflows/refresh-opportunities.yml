@@ -11,7 +11,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, catalog-correction, catalog-projection, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-correction, catalog-projection, program-area-revalidation, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -640,12 +640,113 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  program-area-revalidation:
+    needs: plan
+    if: needs.plan.outputs.stage == 'program-area-revalidation'
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    outputs:
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.plan.outputs.release_sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Restore this run's completed immutable correction
+        id: restore
+        run: python -m tools.restore_generation_checkpoint
+      - name: Load the exact original catalog candidate
+        if: steps.restore.outputs.candidate_id == ''
+        env:
+          CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
+          CANDIDATE_ID: ${{ needs.plan.outputs.candidate_id }}
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/parent-candidate"
+      - name: Authenticate original accounting and revalidate only saved program-area evidence
+        id: prepare
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.program_area_revalidation prepare
+          --parent-bundle "$RUNNER_TEMP/parent-candidate" --receipt "$RUNNER_TEMP/program-area-receipt.json"
+      - name: Restore an already completed coherent vector pass
+        id: vectors-restore
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.program_area_revalidation vectors-restore
+          --receipt "$RUNNER_TEMP/program-area-receipt.json" --state "$RUNNER_TEMP/program-area-vectors"
+      - name: Prepare one durable correction reservation before any vector request
+        id: reserve
+        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        run: >-
+          python -m tools.program_area_revalidation vectors-reserve
+          --receipt "$RUNNER_TEMP/program-area-receipt.json" --reservation "$RUNNER_TEMP/program-area-reservation/reservation.json"
+      - name: Persist the immutable correction reservation before provider dispatch
+        id: reservation-upload
+        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.reserve.outputs.artifact_name }}
+          path: ${{ steps.reserve.outputs.artifact_path }}
+          if-no-files-found: error
+          retention-days: 90
+      - name: Rebuild only the corrected corpus under unchanged vector limits
+        id: vectors
+        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true' && steps.reservation-upload.outcome == 'success'
+        env:
+          VOYAGE_API_KEY: ${{ secrets.VOYAGE_API_KEY }}
+        run: node tools/build_search_v2_voyage_vectors.mjs --write --production
+      - name: Verify and checkpoint the complete coherent vector result
+        id: checkpoint
+        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        run: >-
+          python -m tools.program_area_revalidation vectors-checkpoint
+          --receipt "$RUNNER_TEMP/program-area-receipt.json" --state "$RUNNER_TEMP/program-area-vectors"
+      - name: Retain complete vector bytes before package or publication work
+        id: checkpoint-upload
+        if: steps.restore.outputs.candidate_id == '' && steps.vectors-restore.outputs.restored != 'true'
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ steps.checkpoint.outputs.artifact_name }}
+          path: ${{ steps.checkpoint.outputs.artifact_path }}
+          if-no-files-found: error
+          retention-days: 90
+      - name: Update public catalog and retained team references without generation
+        if: steps.restore.outputs.candidate_id == ''
+        run: python -m tools.program_area_release references
+      - name: Assemble the corrected search package against the published corpus
+        if: steps.restore.outputs.candidate_id == ''
+        run: |
+          curl --fail --silent --show-error --max-filesize 65536 --max-time 30 --retry 2 --retry-max-time 90 \
+            "https://mporosoff.github.io/grants-scraper/data/search-v2-release.json?run=${GITHUB_RUN_ID}-${GITHUB_RUN_ATTEMPT}" \
+            -o "${RUNNER_TEMP}/published-search-release.json"
+          node tools/build_search_release_package.mjs --write \
+            --published-release "${RUNNER_TEMP}/published-search-release.json"
+      - name: Persist a derived candidate with original source and spend provenance
+        id: persist
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.program_area_release --parent-bundle "$RUNNER_TEMP/parent-candidate"
+          --receipt "$RUNNER_TEMP/program-area-receipt.json" --bundle "$RUNNER_TEMP/candidate"
+      - name: Retain the immutable corrected catalog before ordinary protected validation
+        if: steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: candidate-${{ steps.persist.outputs.candidate_id }}
+          path: ${{ runner.temp }}/candidate
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+
   candidate:
-    needs: [plan, generate, assemble, catalog-correction]
+    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation]
     if: >-
       always() && needs.plan.result == 'success' && needs.plan.outputs.stage != 'noop' &&
-      (needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' ||
-       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped'))
+      (needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' || needs.program-area-revalidation.result == 'success' ||
+       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped'))
     runs-on: ubuntu-latest
     outputs:
       candidate_id: ${{ steps.select.outputs.candidate_id }}
@@ -654,7 +755,7 @@ jobs:
       - name: Select the immutable artifact checkpoint
         id: select
         env:
-          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id }}
+          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id || needs.program-area-revalidation.outputs.candidate_id }}
           REQUESTED_ID: ${{ needs.plan.outputs.candidate_id }}
           REQUESTED_RUN: ${{ needs.plan.outputs.candidate_run }}
         run: |
@@ -1043,7 +1144,7 @@ jobs:
           retention-days: 90
 
   closeout:
-    needs: [plan, generate, assemble, catalog-correction, candidate, validate, publish, pages, verify-live]
+    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation, candidate, validate, publish, pages, verify-live]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -1060,9 +1161,9 @@ jobs:
         with:
           script: |
             const needs = JSON.parse(process.env.RESULTS);
-            const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
+            const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'catalog-projection', 'validate', 'publish', 'verify']);
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
             const planReason = needs.plan.outputs.reason || 'not reported';
             const heldStage = needs.plan.outputs.held_stage || '';
@@ -1081,7 +1182,7 @@ jobs:
             let generationRun = needs.candidate.outputs.candidate_run;
             let identitySource = 'selected candidate output';
             if (!candidate || !generationRun) {
-              const producer = ['generate', 'assemble', 'catalog-correction'].find(stage =>
+              const producer = ['generate', 'assemble', 'catalog-correction', 'program-area-revalidation'].find(stage =>
                 needs[stage].result === 'success' && needs[stage].outputs.candidate_id);
               if (producer) {
                 candidate = needs[producer].outputs.candidate_id; generationRun = String(context.runId);
