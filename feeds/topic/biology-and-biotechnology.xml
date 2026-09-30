@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -80,6 +80,17 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-09-30 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Clinical Trials in Organ Transplantation in Children and Adults (CTOT-CA) program. The goal of the CTOT-CA is to improve the outcome of organ transplantation through clinical trials with mechanistic studies. The CTOT-CA will support multicenter clinical trials, with a…</summary>
+  </entry>
+  <entry>
+    <title>Early to Definitive Clinical Trials (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/363991"/>
+    <id>urn:funding-finder:grants-gov:363991</id>
+    <updated>2027-05-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-31 | The National Institutes of Health (NIH) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose early to definitive clinical trials. Trials testing drugs, devices, biologics, procedures, behavioral, social, economic, health services, or other biomedical or non-pharmacological interventions are of interest to this initiative. The trials should align with the r…</summary>
   </entry>
   <entry>
     <title>Somatic Mosaicism across Human Tissues (SMaHT) Program: Experimental and Computational Technology Development (RM1 Clinical Trial Not Allowed)</title>
@@ -639,20 +650,5 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation's Directorate for Biological Sciences (NSF BIO) Core Research in Biological Sciences (BIO Core) funding opportunity supports foundational and interdisciplinary research projects that expand knowledge of biology at any level of organization, from the molecular to the biome scale. We accept proposals that cover scientific topics associated with legacy programs hi…</summary>
-  </entry>
-  <entry>
-    <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
-    <link href="https://www.grants.gov/search-results-detail/363616"/>
-    <id>urn:funding-finder:grants-gov:363616</id>
-    <updated>2026-08-17T00:00:00Z</updated>
-    <author><name>U.S. National Science Foundation</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Separations and membranes"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <category term="Water"/>
-    <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
 </feed>

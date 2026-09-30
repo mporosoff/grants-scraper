@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/agriculture-and-food.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Tobacco Centers of Regulatory Science (TCORS) (Clinical Trial Optional)</title>
@@ -557,7 +557,9 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2025-07-11T00:00:00Z</updated>
     <author><name>Food and Drug Administration</name></author>
     <category term="Agriculture and food"/>
-    <summary>Food and Drug Administration | Application 2028-02-08 | The purpose of this notice of funding opportunity (NOFO) is to support efficient and innovative natural history studies that advance medical product development in rare diseases/conditions with unmet needs. Through the support of natural history studies with high quality and interpretable data elements, FDA expects to address critical knowledge gaps, remove major barriers to progress in the field,…</summary>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>Food and Drug Administration | Letter Of Intent 2028-01-07 | The purpose of this notice of funding opportunity (NOFO) is to support efficient and innovative natural history studies that advance medical product development in rare diseases/conditions with unmet needs. Through the support of natural history studies with high quality and interpretable data elements, FDA expects to address critical knowledge gaps, remove major barriers to progress in the field,…</summary>
   </entry>
   <entry>
     <title>Reissue of RFA-FD-23-001- Clinical Studies of Orphan Products Addressing Unmet Needs of Rare Diseases (R01 Clinical Trials Required)</title>
@@ -605,7 +607,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2028-09-07 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
+    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
   </entry>
   <entry>
     <title>Support for Research Excellence First Independent Research (SuRE-First) Award (R16 - Clinical Trial Not Allowed)</title>
@@ -618,7 +620,7 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2028-09-07 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
+    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
   </entry>
   <entry>
     <title>Ruth L. Kirschstein National Research Service Award (NRSA) Individual Fellowship for Students at Institutions with NIH-Funded Institutional Predoctoral Dual-Degree Training Programs (Parent F30)</title>
@@ -684,6 +686,8 @@ EWRE supports research that creates domestic sources of energy, advances water m
     <updated>2025-02-06T00:00:00Z</updated>
     <author><name>Food and Drug Administration</name></author>
     <category term="Agriculture and food"/>
-    <summary>Food and Drug Administration | Application 2028-01-11 | This cooperative agreement is intended to enhance the capacity and capabilities of state human and animal food testing laboratories in support of an integrated food safety system (IFSS). This is achieved through prioritized sample testing and food defense preparedness in the areas of microbiology, chemistry, and radiochemistry, as well as method development and capacity/capability development proj…</summary>
+    <category term="Separations and membranes"/>
+    <category term="Water"/>
+    <summary>Food and Drug Administration | Letter Of Intent 2026-12-14 | This cooperative agreement is intended to enhance the capacity and capabilities of state human and animal food testing laboratories in support of an integrated food safety system (IFSS). This is achieved through prioritized sample testing and food defense preparedness in the areas of microbiology, chemistry, and radiochemistry, as well as method development and capacity/capability development proj…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/technology-development.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Technology Development Program</title>
@@ -488,21 +488,6 @@ scale, …</summary>
     <summary>National Institutes of Health | Application 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
   </entry>
   <entry>
-    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
-    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Manufacturing"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-09-29</summary>
-  </entry>
-  <entry>
     <title>EMERGING FRONTIERS IN RESEARCH AND INNOVATION (EFRI-2026/27): Wave-Based Computing ( EFRI-WBC)</title>
     <link href="https://www.grants.gov/search-results-detail/363622"/>
     <id>urn:funding-finder:grants-gov:363622</id>
@@ -631,21 +616,6 @@ a high level of innovation and creativity. The goal is to support the best young
     <summary>National Institutes of Health | Estimated Application 2026-09-30 | The National Institute of Neurological Disorders and Stroke, National Institute of Aging, the NIH Helping to End Addiction Long Term (HEAL) initiative, and other participating ICs seek to support applications to conduct pharmacodynamic, pharmacokinetic, and efficacy studies to demonstrate that the proposed therapeutic agent(s) have sufficient biological activity to warrant further development as t…</summary>
   </entry>
   <entry>
-    <title>Desalination and Water Purification Research Program: Research Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/363375"/>
-    <id>urn:funding-finder:grants-gov:363375</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Separations and membranes"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation | Application 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
-  </entry>
-  <entry>
     <title>Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets)</title>
     <link href="https://www.grants.gov/search-results-detail/363268"/>
     <id>urn:funding-finder:grants-gov:363268</id>
@@ -667,5 +637,26 @@ a high level of innovation and creativity. The goal is to support the best young
     <category term="Cybersecurity"/>
     <category term="Water"/>
     <summary>Assistance Coordination | Application 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
+  </entry>
+  <entry>
+    <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/359666"/>
+    <id>urn:funding-finder:grants-gov:359666</id>
+    <updated>2026-06-30T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2026-10-19 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
+  </entry>
+  <entry>
+    <title>Limited Competition: Growing Great Ideas: Research Education Course in Entrepreneurship and Product Development for Researchers Studying Drug Use, Drug Misuse, and Drug Addiction (UE5 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360561"/>
+    <id>urn:funding-finder:grants-gov:360561</id>
+    <updated>2026-06-23T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Application 2026-10-01 | This notice of funding opportunity (NOFO) seeks to establish a course to equip researchers studying drug use, drug misuse, and drug addiction with the skills, knowledge, and practical tools needed to translate their scientific discoveries into impactful real world solutions. The course is envisioned to focus on building capacity in product development, entrepreneurship, and innovation pathways so …</summary>
   </entry>
 </feed>

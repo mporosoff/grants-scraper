@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -302,6 +302,17 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-11-10 | The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+  </entry>
+  <entry>
+    <title>Early to Definitive Clinical Trials (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/363991"/>
+    <id>urn:funding-finder:grants-gov:363991</id>
+    <updated>2027-05-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-31 | The National Institutes of Health (NIH) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose early to definitive clinical trials. Trials testing drugs, devices, biologics, procedures, behavioral, social, economic, health services, or other biomedical or non-pharmacological interventions are of interest to this initiative. The trials should align with the r…</summary>
   </entry>
   <entry>
     <title>Investigator-Focused Award (Parent R35)</title>
@@ -953,14 +964,5 @@
     <author><name>Indian Health Service</name></author>
     <category term="Public health"/>
     <summary>Indian Health Service | Estimated Application 2027-04-01 | Second cohort of TEC sites for any currently unserved Areas.</summary>
-  </entry>
-  <entry>
-    <title>Tribal Management Development</title>
-    <link href="https://www.grants.gov/search-results-detail/363498"/>
-    <id>urn:funding-finder:grants-gov:363498</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Education and workforce"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The Tribal Management Grant program aims to prepare tribes and tribal organizations for assuming all or part of existing Indian Health Service programs functions services and activities under the Public Law 93 638 Indian Self Determination and Education Assistance Act as amended and to further develop and improve their health management capabilities. The Indian Health Service intends to issue five…</summary>
   </entry>
 </feed>
