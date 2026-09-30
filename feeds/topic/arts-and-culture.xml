@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -531,15 +531,6 @@
     <summary>Bureau of Land Management | Application 2026-10-16 | The Headquarters Bureau of Land Management (BLM) offices have collaborated with Qualified Youth Corps, as authorized by the Public Lands Corps Act (PLC), to accomplish natural and cultural resource-focused projects for numerous years. This program"s projects provide opportunities to gain work experience in public lands and natural resources management. Through their BLM experience, youth gain an a…</summary>
   </entry>
   <entry>
-    <title>Partnership Agreement Grants, FY 2027</title>
-    <link href="https://www.grants.gov/search-results-detail/362676"/>
-    <id>urn:funding-finder:grants-gov:362676</id>
-    <updated>2026-06-04T00:00:00Z</updated>
-    <author><name>National Endowment for the Arts</name></author>
-    <category term="Arts and culture"/>
-    <summary>National Endowment for the Arts | Application 2026-09-29 | The National Endowment for the Arts’ State &amp; Regional Partnership Agreement grants are awarded to the nation’s 56 state and jurisdictional arts agencies (SAAs), and the six regional arts organizations (RAOs) whose members comprise SAAs.</summary>
-  </entry>
-  <entry>
     <title>Biological Testing Facility for Contraception &amp; Reproductive Health (X01 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/360583"/>
     <id>urn:funding-finder:grants-gov:360583</id>
@@ -644,5 +635,15 @@
     <category term="Biology and biotechnology"/>
     <category term="Cancer"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications for P50 Research Center Grants for Specialized Programs of Research Excellence (SPORE). This is a re-issuance of PAR-23-284. The program will fund P50 SPORE grants to support state-of-the-art investigator-initiated translational research that will contribute to improved prevention, early det…</summary>
+  </entry>
+  <entry>
+    <title>FY2026 ABPP - Battlefield Land Acquisition Grant</title>
+    <link href="https://www.grants.gov/search-results-detail/360378"/>
+    <id>urn:funding-finder:grants-gov:360378</id>
+    <updated>2025-08-28T00:00:00Z</updated>
+    <author><name>National Park Service</name></author>
+    <category term="Arts and culture"/>
+    <category term="Environmental science"/>
+    <summary>National Park Service | Application 2026-09-30 | Historic battlefields and associated sites of armed conflict are powerful reminders of the shared heritage of all Americans. In an ongoing effort to extend the conservation of natural and cultural resources beyond our park boundaries, the National Park Service American Battlefield Protection Program (NPS ABPP) promotes the preservation and interpretation of these important places. NPS ABPP support…</summary>
   </entry>
 </feed>

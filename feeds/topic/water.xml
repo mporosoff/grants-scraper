@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/water.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Easement Restoration and Stewardship</title>
@@ -64,21 +64,6 @@
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Engineering (NSF ENG) supports foundational engineering research for chemical, bioengineering, energy, and transport systems through the following programs:  The Chemical Process Systems (CPS) program supports foundational engineering research in chemical and biochemical processes for chemicals, fuels, energy, and materials. The Engineering Biol…</summary>
   </entry>
   <entry>
-    <title>Desalination and Water Purification Research Program: Research Projects</title>
-    <link href="https://www.grants.gov/search-results-detail/363375"/>
-    <id>urn:funding-finder:grants-gov:363375</id>
-    <updated>2026-07-29T00:00:00Z</updated>
-    <author><name>Bureau of Reclamation</name></author>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Separations and membranes"/>
-    <category term="Technology development"/>
-    <category term="Water"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Bureau of Reclamation | Application 2026-09-29 | The Bureau of Reclamation"s Desalination and Water Purification Research (DWPR) Program aims to increase water supplies by reducing the costs, energy requirements, and other barriers to adoption of treating impaired water for beneficial uses. This NOFO invites proposals from eligible applicants to conduct innovative laboratory and pilot-scale water treatment research. Strong applications will demo…</summary>
-  </entry>
-  <entry>
     <title>Rural Decentralized Water System Grant Program</title>
     <link href="https://www.grants.gov/search-results-detail/363364"/>
     <id>urn:funding-finder:grants-gov:363364</id>
@@ -98,7 +83,7 @@
     <category term="Environmental science"/>
     <category term="Transportation"/>
     <category term="Water"/>
-    <summary>DOC NOAA - ERA Production | Application 2026-12-01 | The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
+    <summary>DOC NOAA - ERA Production | Application 2026-09-30 | The National Estuarine Research Reserve System (NERRS) consists of estuarine areas of the United States and its territories designated and managed for research and educational purposes (Reserve) as specified in 15 C.F.R. Part 921. By funding Reserve lead agencies and universities to conduct land acquisition and construction projects that support the NERRS mission, NOAA will strengthen protection o…</summary>
   </entry>
   <entry>
     <title>Middle East Regional Cooperation (MERC)</title>
@@ -254,6 +239,17 @@
     <category term="Energy"/>
     <category term="Cybersecurity"/>
     <summary>National Institute of Food and Agriculture | Application 2026-12-31 | The AFRI Foundational and Applied Science Program supports grants in six AFRI priority areas to advance knowledge in both fundamental and applied sciences important to agriculture. The six priority areas are: Plant Health and Production and Plant Products; Animal Health and Production and Animal Products; Food Safety, Nutrition, and Health; Bioenergy, Natural Resources, and Environment; Agricultur…</summary>
+  </entry>
+  <entry>
+    <title>Laboratory Flexible Funding Model (LFFM)</title>
+    <link href="https://www.grants.gov/search-results-detail/358411"/>
+    <id>urn:funding-finder:grants-gov:358411</id>
+    <updated>2025-02-06T00:00:00Z</updated>
+    <author><name>Food and Drug Administration</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Separations and membranes"/>
+    <category term="Water"/>
+    <summary>Food and Drug Administration | Letter Of Intent 2026-12-14 | This cooperative agreement is intended to enhance the capacity and capabilities of state human and animal food testing laboratories in support of an integrated food safety system (IFSS). This is achieved through prioritized sample testing and food defense preparedness in the areas of microbiology, chemistry, and radiochemistry, as well as method development and capacity/capability development proj…</summary>
   </entry>
   <entry>
     <title>FY 2024 - 2026 Broad Agency Announcement (BAA), Office of Oceanic and Atmospheric Research (OAR)</title>

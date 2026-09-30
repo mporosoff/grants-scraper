@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -110,6 +110,17 @@
     <category term="Agriculture and food"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-11-10 | The Tobacco Regulatory Science Program, participating NIH Institutes and Centers (ICs), and the Food and Drug Administration (FDA) Center for Tobacco Products (CTP) intend to issue a Notice of Funding Opportunity (NOFO) soliciting applications for Tobacco Centers of Regulatory Science (TCORS). The awards under this NOFO will be administered by NIH using funds made available through FDA CTP and the…</summary>
+  </entry>
+  <entry>
+    <title>Early to Definitive Clinical Trials (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/363991"/>
+    <id>urn:funding-finder:grants-gov:363991</id>
+    <updated>2027-05-31T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Public health"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-07-31 | The National Institutes of Health (NIH) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications that propose early to definitive clinical trials. Trials testing drugs, devices, biologics, procedures, behavioral, social, economic, health services, or other biomedical or non-pharmacological interventions are of interest to this initiative. The trials should align with the r…</summary>
   </entry>
   <entry>
     <title>Advanced Development and Sustainment of Informatics Technologies for Cancer Research and Management (U24 Clinical Trial Optional)</title>
@@ -631,15 +642,5 @@
     <category term="Education and workforce"/>
     <category term="Public health"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-30 | NIOSH has provided financial and technical assistance to develop or expand state-level OSH surveillance capacity and infrastructure since the 1970s. From 2021-2026, NIOSH funded cooperative agreements in 23 states under announcement PAR-20-312. These programs varied in scope and focus, each providing a level of occupational health expertise to the public health system in their state. Grantees incl…</summary>
-  </entry>
-  <entry>
-    <title>Expanded Surveillance for Pediatric Infectious Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/363342"/>
-    <id>urn:funding-finder:grants-gov:363342</id>
-    <updated>2026-10-30T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2026-12-31 | The purpose of this Notice of Funding Opportunity (NOFO) is to support a network of U.S. institutions that will conduct standardized, prospective, active surveillance of pediatric acute respiratory illness (ARI) and acute gastroenteritis (AGE). The network will focus on respiratory and enteric viruses among pediatric patients seeking healthcare. In addition, the network will generate robust estima…</summary>
   </entry>
 </feed>

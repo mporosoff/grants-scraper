@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/quantum-science.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Fiscal Year (FY) 2027 Department of War (DoW) Multidisciplinary Research Program of the University Research Initiative (MURI)</title>
@@ -260,16 +260,6 @@
     <summary>Office of Science | Application 2026-12-17 | verify prerequisite | The DOE Office of Science (SC), Office of Critical Minerals and Energy Innovation (CMEI), Office of Environmental Management (EM), Office of Nuclear Energy (NE), Office of Electricity (OE), and Hydrocarbons and Geothermal Office (HGEO) hereby announce interest in receiving applications from interdisciplinary teams addressing the Genesis Mission National Science and Technology Challenges to acceler…</summary>
   </entry>
   <entry>
-    <title>QBIT Stage A</title>
-    <link href="https://sam.gov/opp/4a1aad28cb2a4b2ab1ee408c639202ef/view"/>
-    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa260202</id>
-    <updated>2026-03-09T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-11-30 | DARPA is issuing a Quantum Benchmarking Initiative topic (QBIT) to solicit innovative approaches addressing challenges related to quantum computing. | See Program QBI goals In the simplest terms, the Quantum Benchmarking Initiative (QBI) seeks to determine whether it’s possible to build an industrially-useful computer by 2033. Specifically, QBI is designed to rigorously verify and validate whether…</summary>
-  </entry>
-  <entry>
     <title>Artificial Intelligence and Cybersecurity Education Innovation and Scholarship for Service (CyberAI SFS)</title>
     <link href="https://www.grants.gov/search-results-detail/361238"/>
     <id>urn:funding-finder:grants-gov:361238</id>
@@ -323,6 +313,22 @@
     <summary>U.S. National Science Foundation | Application 2027-02-04 | The NSF CISE Directorate supports research and education projects that develop new knowledge in all aspects of computing, communications, and information science and engineering through the following Future Computing Research (Future CoRe) programs: Algorithmic Foundations (AF) program; Communications and Information Foundations (CIF) program; Computer Systems Research (CSR) program; Computing Edu…</summary>
   </entry>
   <entry>
+    <title>Security, Privacy, and Trust in Cyberspace (SaTC 2.0)</title>
+    <link href="https://www.grants.gov/search-results-detail/357554"/>
+    <id>urn:funding-finder:grants-gov:357554</id>
+    <updated>2024-12-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-01-25 | Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
+  </entry>
+  <entry>
     <title>NSF Scholarships in Science, Technology, Engineering, and Mathematics Program</title>
     <link href="https://www.grants.gov/search-results-detail/357498"/>
     <id>urn:funding-finder:grants-gov:357498</id>
@@ -350,7 +356,9 @@
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Quantum science"/>
-    <summary>Office of Naval Research | Application 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Office of Naval Research | Application 2026-12-31 | verify prerequisite | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
   <entry>
     <title>NSF National Quantum Virtual Laboratory - Quantum Testbeds</title>

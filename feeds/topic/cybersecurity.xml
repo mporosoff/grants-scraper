@@ -4,8 +4,18 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>F26AS00023 FY2026 Prescott Marine Mammal Rescue and Response Grant Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363992"/>
+    <id>urn:funding-finder:grants-gov:363992</id>
+    <updated>2026-09-29T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Education and workforce"/>
+    <category term="Cybersecurity"/>
+    <summary>Fish and Wildlife Service | Application 2026-11-30 | The John H. Prescott Marine Mammal Rescue and Response Grant Program (Prescott program) provides financial assistance to eligible marine mammal stranding participants and stranding network collaborators to provide (A) the recovery, care, or treatment of sick, injured, or entangled marine mammals; (B) responses to marine mammal stranding events that require emergency assistance; (C) the collection …</summary>
+  </entry>
   <entry>
     <title>Advisory Support for Establishing a National Cybersecurity Operations Center (SOC)</title>
     <link href="https://www.grants.gov/search-results-detail/363843"/>
@@ -188,6 +198,38 @@
     <category term="Transportation"/>
     <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2027-01-20 | The objective of the Cybersecurity Innovation for Cyberinfrastructure (CICI) program is to advance scientific discovery and innovation by enhancing the security and privacy of cyberinfrastructure. CICI supports efforts to develop, deploy and integrate cybersecurity that will benefit the broader scientific community by securing science data, computation, collaborations workflows, and infrastructure…</summary>
+  </entry>
+  <entry>
+    <title>Security, Privacy, and Trust in Cyberspace (SaTC 2.0)</title>
+    <link href="https://www.grants.gov/search-results-detail/357554"/>
+    <id>urn:funding-finder:grants-gov:357554</id>
+    <updated>2024-12-06T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Cybersecurity"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <category term="Transportation"/>
+    <category term="Quantum science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <summary>U.S. National Science Foundation | Application 2027-01-25 | Our world is at a pivotal moment where the boundaries dividing the physical and social worlds from the cyber world have become blurred. Cyberspace has evolved from an interconnected digital environment into a complex and interdependent cyber ecosystem that involves hardware, software, networks, data, people, organizations, countries, and the physical world. Critical functions of everyday life are …</summary>
+  </entry>
+  <entry>
+    <title>FY25 Long Range Broad Agency Announcement (BAA) for Navy and Marine Corps Science and Technology</title>
+    <link href="https://www.grants.gov/search-results-detail/356605"/>
+    <id>urn:funding-finder:grants-gov:356605</id>
+    <updated>2024-10-01T00:00:00Z</updated>
+    <author><name>Office of Naval Research</name></author>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Energy"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Quantum science"/>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Office of Naval Research | Application 2026-12-31 | verify prerequisite | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
   <entry>
     <title>Advanced Technological Education</title>

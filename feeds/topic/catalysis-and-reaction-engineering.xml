@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-09-29T16:35:06Z</updated>
+  <updated>2026-09-30T16:29:01Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>2026 Diesel Emissions Reduction Act (DERA) National Program</title>
@@ -76,21 +76,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Simons Foundation | Application 2026-12-01 | The Simons Foundation (SF) is accepting applications for the Utilizing the Full Power of Empire AI program. Deadline for application submission: 12 p.m. (noon) Eastern time on December 1, 2026.</summary>
-  </entry>
-  <entry>
-    <title>NSF ECosytem for Leading Innovation in Plasma Science and Engineering (ECLIPSE) PD 24-110Z</title>
-    <link href="https://new.nsf.gov/funding/opportunities/ecosystem-leading-innovation-plasma-science"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-14d5155ffe141890</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Energy"/>
-    <category term="Carbon management"/>
-    <category term="Climate change"/>
-    <category term="Manufacturing"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-09-29</summary>
   </entry>
   <entry>
     <title>Engineering (ENG): Chemical, Bioengineering, Energy, and Transport Systems (CBET)</title>
@@ -216,7 +201,9 @@
     <category term="Energy"/>
     <category term="Artificial intelligence and machine learning"/>
     <category term="Quantum science"/>
-    <summary>Office of Naval Research | Application 2026-09-30 | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
+    <category term="Data science"/>
+    <category term="Cybersecurity"/>
+    <summary>Office of Naval Research | Application 2026-12-31 | verify prerequisite | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
   <entry>
     <title>Computational and Data-Enabled Science and Engineering</title>
