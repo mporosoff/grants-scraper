@@ -187,6 +187,7 @@ a corrected or retired rule can remove its prior search terms and topic tags.
 
 | Adapter | Status | Note |
 |---|---|---|
+| `sam-gov` | Staged, disabled | Reviewed research pilot; bounded API collection, canonical merge and manual import preview are wired. Activation and evidence requirements: [SAM imports](../../docs/SAM_IMPORTS.md). |
 | `sample` | Works (offline) | Demo/tests only; stays disabled. |
 | `pnd-rfp` (Philanthropy News Digest / Candid) | Ready to configure | Confirm the live RSS URL and add a topic/eligibility filter (it's nonprofit-skewed) before enabling. |
 | `nsf-funding` | Enabled | Official NSF upcoming-due-dates feed; tolerant of the feed's malformed bare ampersands and protected by source health bounds. |

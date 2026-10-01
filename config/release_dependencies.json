@@ -6,6 +6,7 @@
     "scripts/sources/fixtures/*.json",
     "config/researcher_registry.json",
     "config/source_intake.json",
+    "config/sam_gov.json",
     "config/search_v2.json",
     "requirements.txt",
     "package.json",
@@ -116,6 +117,7 @@
         "scripts/sources/**/*.py",
         "scripts/sources/fixtures/*.json",
         "config/source_intake.json",
+        "config/sam_gov.json",
         "requirements.txt",
         "tools/run_budgeted_documents.py",
         "tools/offline_spend.py"
