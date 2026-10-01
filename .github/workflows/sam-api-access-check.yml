@@ -1,0 +1,36 @@
+name: Check SAM.gov API access
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: sam-api-access-check
+  cancel-in-progress: false
+
+jobs:
+  check:
+    if: github.repository == 'mporosoff/grants-scraper' && github.ref == 'refs/heads/main' && github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.13'
+      - name: Make one read-only opportunity request
+        env:
+          SAM_API_KEY: ${{ secrets.SAM_API_KEY }}
+        run: python -m tools.sam_access_probe --report "$RUNNER_TEMP/sam-access-check/report.json"
+      - name: Preserve the sanitized access result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sam-access-check-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/sam-access-check/report.json
+          if-no-files-found: error
+          retention-days: 30
