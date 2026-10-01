@@ -804,7 +804,9 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
     _, results = collect(
         adapters=selected_adapters,
         include_disabled=include_disabled,
-        context={"catalog_records": base, "as_of": as_of, "intake_path": intake_path},
+        context={"catalog_records": base, "as_of": as_of, "intake_path": intake_path,
+                 "source_snapshots": {slug: snapshot.get("records", [])
+                                      for slug, snapshot in cache.get("sources", {}).items()}},
     )
     identity_stats = _resolve_identity_before_selection(results, cache, as_of)
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
