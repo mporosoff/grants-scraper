@@ -155,6 +155,24 @@ def completed_live(manifest, live, publication):
             and live.get('live_release_identity') == manifest['release_identity'])
 
 
+def hold_competing_generation(root, environment, result):
+    """Keep automatic paid work behind its unfinished owner, without daily policy."""
+    try:
+        manifest = c.read_json(Path(root) / 'release/candidate.json')
+        if manifest.get('candidate_id') != c.digest(c.encoded({k: v for k, v in manifest.items() if k != 'candidate_id'})):
+            raise Hold('Protected candidate identity is invalid')
+        owner = prior_generation(root, environment, manifest)
+        if owner:
+            raise Hold('An unpublished candidate retains the generation allowance; recover its original run', owner[0])
+        return result
+    except (ValueError, KeyError, TypeError, OSError, subprocess.SubprocessError) as error:
+        run = getattr(error, 'run', '')
+        detail = str(error).replace('\r', ' ').replace('\n', ' ')[:300]
+        owner = f' Original run: {run}.' if run else ''
+        return result | {'stage': 'noop', 'held_stage': result['stage'], 'recovery_run': run,
+                         'reason': 'Automatic generation held: ' + detail + owner}
+
+
 def _recover(root, environment, result, destination, run, identifier, reports, fields, now):
     fields['recovery_run'] = str(run)
     bundle = Path(destination) / 'recovery-candidate'

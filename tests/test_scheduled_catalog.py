@@ -227,6 +227,54 @@ class ScheduledHistory(unittest.TestCase):
     def discover(self):
         return scheduled.prior_generation(Path('unused'), ENV, {'generation_run_id': '100'})
 
+    def guard_push(self, *, environment=None, corrupt=False):
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            manifest = candidate(root)
+            if corrupt:
+                manifest['generation_run_id'] = '200'
+            c.write_json(root / 'release/candidate.json', manifest)
+            return scheduled.hold_competing_generation(root, ENV | {'GITHUB_EVENT_NAME': 'push'} | (environment or {}),
+                {'stage': 'generate', 'release_sha': 'a' * 40, 'candidate_id': manifest['candidate_id'],
+                 'candidate_run': '100'})
+
+    def test_push_guard_uses_retained_reservation_and_unpublished_candidate_ownership(self):
+        for name in ('generation-spend-reservation-200-1', 'candidate-' + 'c' * 64):
+            with self.subTest(artifact=name):
+                self.artifacts['200'] = [{'name': name, 'expired': False}]
+                value = self.guard_push()
+                self.assertEqual((value['stage'], value['held_stage'], value['recovery_run']), ('noop', 'generate', '200'))
+                self.assertEqual(value['candidate_run'], '100')
+                self.assertNotIn('daily_status', value)
+
+    def test_push_guard_keeps_published_noop_and_current_owner_recovery_paths(self):
+        self.assertEqual(self.guard_push()['stage'], 'generate')
+        self.artifacts['200'] = [{'name': 'candidate-' + 'c' * 64, 'expired': False}]
+        self.published.return_value = {('200', 'c' * 64)}
+        self.assertEqual(self.guard_push()['stage'], 'generate')
+        self.published.return_value = set()
+        self.artifacts['200'] = [{'name': 'generation-spend-reservation-200-1', 'expired': False}]
+        self.api.reset_mock()
+        value = self.guard_push(environment={'GITHUB_RUN_ID': '200', 'GITHUB_RUN_ATTEMPT': '4'})
+        self.assertEqual(value['stage'], 'generate')
+        self.assertFalse(any('/200/artifacts?' in call.args[1] for call in self.api.call_args_list),
+                         'The original run restores its own allowance in the spend checkpoint step')
+
+    def test_push_guard_holds_ambiguous_missing_or_invalid_history(self):
+        self.artifacts['200'] = [{'name': 'candidate-' + char * 64, 'expired': False} for char in ('c', 'd')]
+        self.assertEqual(self.guard_push()['stage'], 'noop')
+        self.runs.insert(0, self.workflow_run(250))
+        self.artifacts['250'] = [self.artifacts['200'].pop()]
+        self.assertIn('Multiple unfinished generation runs', self.guard_push()['reason'])
+        self.runs = [self.workflow_run(200)]
+        self.artifacts['200'] = []
+        self.assertIn('boundary is missing', self.guard_push()['reason'])
+        self.runs = [self.workflow_run(200, status='in_progress'), self.workflow_run(100)]
+        self.assertIn('still pending', self.guard_push()['reason'])
+        self.api.reset_mock()
+        self.assertIn('Protected candidate identity is invalid', self.guard_push(corrupt=True)['reason'])
+        self.api.assert_not_called()
+
     def test_noop_runs_do_not_hide_a_future_due_generation(self):
         self.assertIsNone(self.discover())
 

@@ -1,0 +1,480 @@
+{
+  "version": "cov4-outline-processing-qualification-20261008",
+  "scope": "Source-owned outline boundaries and unchanged production Cov4 classification contract. No new classifier requests or expanded generation allowance.",
+  "historical_qualification": "evaluation/sonnet_cov4_qualification_20260909.json",
+  "processing_replay": {
+    "version": "cov4-processing-replay-1",
+    "historical_evidence": {
+      "path": "C:\\Users\\Marc Porosoff\\.codex\\worktrees\\catalog-refresh-boundaries\\grants-scraper\\evaluation\\sonnet_cov4_qualification_20260909.json",
+      "sha256": "75e18afdfb0cc7fbf02dddc4b3ce333c4d1e39581ec3181117d39e92db5b14ea",
+      "qualification_contract": "101eaf0470f15881e6acda59a48ac43dfe9d071f47835ddb2114465ac1e43261"
+    },
+    "processing": {
+      "modules": {
+        "scripts/subtopic_cov4.py": "af1c75125d296ebe30a4d7e07e1616c653e44d33a40b8364ed4191464ee02539",
+        "scripts/subtopic_records.py": "bebe18d9abe71be3bf099ba7240089e50cec8d833c7d3964fdbc7de6c8f991ad",
+        "scripts/subtopic_segmentation.py": "ed241981469841d02b5034a9cee38b0c4541ce475478cadd706c4a4aa15c8110",
+        "tools/run_cov4_validation.py": "eb82ef27e4e53b9a56cccaea3b42845af3f5e59adb79cf74d086d13900b6820f",
+        "tools/offline_ai.py": "423500d32f1d52c3c0e6a0e3fa138fd644ba484291b9100572a51e5f232a2e0b",
+        "tools/run_budgeted_documents.py": "03d232ddc7f04a9619d27087eb399275c432141bc4f05cd8253284f0de0183d6",
+        "tools/evaluate_team_prompt_repair.py": "c4ac267de34fcf5c70075909a8097409cf1f02002c6557520bb3f34d7a7286bd",
+        "tools/replay_cov4_processing.py": "3dba7a553bc2c7bb4660cd57eb629389fbfce56a3084d54b3e5833c5dc95dc53"
+      },
+      "instrument": "35bc1e0a9cd8a552bca8c8c3870558b9145ed6d340fa2b68ce352af33d164dc9",
+      "scientific_contract": "5176d82edb0f175b175e7c3a975710ae51fc97e8704f6b5ef6de41cf0e8b9e65",
+      "request_contract": "60d615a976383225b9d418259c39681ea5b961aca34cc7056d16f789d8869bcc"
+    },
+    "preflight_contract": "275d600f8c4a46f480590057476056d66e5969911454e9ece7919dc1848d32cf",
+    "responses": {
+      "count": 43,
+      "original_charged_microusd": 161814,
+      "hashes": {
+        "0bfeab7e01c9fa3813014950b7c663b462b1a001d3c81cbf84d799cb0b821964": "04a4ee909744857848462ba2d3da18368d88fa1ffd4683bcb1cd76ab20e2c5f4",
+        "10ea171858292272bc8602674f026341894abca460fc57225e0f7e2083c5ed21": "c4216047cb3ea1e867ab6e288cebeb55f45071aaa79b437d286e23347be6d795",
+        "1316f7d11eaddd47bf41f7a77ef13b6eb9770b52baf79a79080f6346322593ea": "89007b6e17f48bb6caa5ef6a61142c349f51a56a6153d9559cce9a6b4d85b910",
+        "13e115d2dc438970726608853efeeb00c5ba7b4b1f60e8ec61be01584d525c12": "914203dc78330a4c50cd61a22ae4bdcea51ee94395286529a8e24e7c7bdfa699",
+        "1579726a0c13a05472de7dadc97cdc07cde58bd683472b36a3e5a2cb08ea2f5e": "c80c424740dfa5d950a9be31bad41209e9483edba02b3ea7c210deedb9b3290e",
+        "15fe14be18325f5ad763a6522829f10119baa387a5c5dabea895167715be4709": "f23a4348d460a4cd9e05811d1f57fca9a7ffc6d73d79c9fd13e1c5b29343b679",
+        "2b18b0ef5418d2d6be98b03f98973942c4f878e05fd07eb8575a171a7867c33e": "cbb4192e81915d96aeab5737240805044c91ff23068e1ba5d496d0d660aa67bf",
+        "302a0d45a549c6a195029441e5d533026cbc94eabb1c8922516e5e9f2d455d5d": "32a6515706c4649b9dcb60e0d031fb3f4b15a7483f9bf423f40da0b1d1c68b32",
+        "305aa2376a95f31aa23f8183a845711d6351a1f09489aef5a6e826005fd379df": "6302999d85000118257132a638e1df20a61a1ed144be5ab059fca3f8f1911510",
+        "3145095a06f3167b6a1054e2d81639e3fe38b15e23b082061cec882553cd6c04": "e0704132e698efdf165985fefcb264c83caeb1048027b423d56e3fef0ccbfc92",
+        "379d42fc3ffe5ea23ab399d4b333c086fba66feb425a4e6857daa25e428bbfc5": "a06549afa58e338e9de9bd99caffc96a5d1c0ad86e0a019afc094d683f372e88",
+        "37ca83a5619d15a902643dd7ba06fbd7c3c481bfd964e54f593414beecccecac": "b80495b018adc4d19e7b2fb79e6228a10f8c612dd0a6a087a8c7696602728e1e",
+        "3e2bf18712f0f4d67c14668f326787912f7c373ceed774ef6584d8c2017ceb6a": "2cef3fc55d0aad74c91f564ff095f3c33559dafdb0e264575efa961a5e0f6548",
+        "3e7140079884da49b4960cd9a0fa5d1645102eeb5f1f5e00888cbbd7bba54cbe": "ac1f7ec30277b25bde1a84453cfaa3d98c7843bd30460f481b0086137e9de25b",
+        "457374a391e15746d39e1d077dced2d1c7b3989e6887c96fa5046a57a37f568f": "96a21c2d59642867f3f953e37dbb1ef3ad982b8d61ef6e67797938a27d84df27",
+        "459e27608ad6f7a7f7846ffc8af50226878466584b014bbbb496d19a0678b562": "cdf31d8f0f9a7347b47fd461012d52768a97f4775e5db33fa5e838e2e6f70b6c",
+        "45ef4f5b6a3ebec58c2ad7d0342dd1669f07c149c4c6edaf53a409ab55df3d07": "e748ba64fcb44a600c39f828f37db3d054efd0f584eaccd643b12ee188dc909e",
+        "517d9a9b52feea36b2ba513e1a9ed99855d708ad8b90b9792d24234ff72b2f2d": "1e5515d2092e64fbb5b9ba052c22bfa4fce96f5ab79ded103503662593ea1ca9",
+        "5237a68af9db4ac54bdfe1bfa43f7c7d894afd8ecb90decf57b4e0a0231709b1": "2cf6cc38f2e23aa42400f91ce56711145971dbfaa9113724d286f70d9322833f",
+        "524a3cbed9d724285369c103b960116747c47cb9071196baa33bdada91240a94": "84c3947ae45aa658c65837813e749fd5b12b0023b1790aaa3a9bcd4572ff4068",
+        "550fc125d9d7b9c80e6be574bcb574a185af32afa93dfa3b2cc5fa17a556d250": "969ffcb3cd7d018322a84e24e94fd559053cc6b966d5c00ebdfb860adee0c34a",
+        "55ccabef23d624b56d8f37cd0ff45c71a182d6fdfa6d30ebeaf4d21d07334e59": "736dad6e28084bf1ee71be7bd8534f785428f57f330496006d8087028da8ce79",
+        "573dacd7bea864076b9acfe68602191e88491893205c292b76bd985ef3e9d356": "0669ad3e9b907ef95f9499b3c5d11bc4971d3d789c36e2ad0c2898a82e384deb",
+        "634ad86f460c6afcd61cd673dee377e402fb669970d4e5c25ca87b3ae8adb295": "1ebe8992afc9864116595d18c2506610e1300e5e51fd80c14d5ec0da3ac7d4db",
+        "63895237e3d238f51817dbbb946475e16644eccb2875cae4e8171f6ddbad46cb": "2aec23f9a38c1fb5075c18429356a1587bc3e733d7178031ae4bf5ca4d7b8e99",
+        "6c5686c602f8ef5eedb71c47c93b7fcfb1c7851559787058969f5983d3e5ac86": "035c26b91ffb56ec433ed089a2aa2b560b61736ba4022df83094315b5bbd8e38",
+        "702624f93b66d1ee946ea7a0386683dd187a734a836317b7486e06c7425523a7": "f1fb76ca66bbd7f22368a7c5cb4bae63cfcb67e9861818c3d6686d92a969c2d4",
+        "76d5fc1362f99e9dd6540e09a4c6e9c19c5baa643e01d65fb7b21958d1768e9c": "18c3bec81653275be3e06ac2ef4358122c4e58ae6a16a408b4899ae35be100b8",
+        "79cddcda0e5e71bfefb5e64cbba5cfd078ababdc86d6bd3369f3abe500d35bba": "e52e5621008726ec022a046503b73731d61caec5406fd69ead450768b73e2d88",
+        "7a7653798e4eb0e2992dc7c0ba43b6a07764134a1243f28b3e1e0f46a6d83be8": "570beed31926df8c5af8f791a041af2a175d7e7dc36fe8701a54da363db4b3a9",
+        "7c245a69ce5458a0e749b28d548eb56653645c676f7802d7b00e648448b33b23": "5c7bf6a2e4f2404509924983b470cb66c5706ed58b3836e6ae9332ebafd72cf2",
+        "9e98c41b16e80072a8021eada0ef05d35dda7369534746b5c76c26a4bf8344ce": "c07e1f523af6a43df958647fa949f67ce020cd28a9ce99a0a6f47389b25fa480",
+        "a16ad1fa18bc5027f6fca42f8bb7c625c1835750910f0b75093e14e910dcada2": "87677c211b5d7d5853c504ccb958432e11671e5a33a2179bfcff736271257b07",
+        "a19010e6dbc45fa6136336ad5bfb2915f0aa5bf0455f67f5ecdc059e91e6b064": "aca32270ce6f90729888a76c2e135c9a96296521ed14e625fbb1e54d91836ca1",
+        "afaa5340309f0f751e8ef0b044ead9daa6b00a3b5b473c38701c27b3b9b94746": "72748c4a184bf449718e46893de6fd2d239b80a9041a5d021c4900a49d25694b",
+        "b660c046ce988a98711de27393cae9769f5ac571d652eb3c83258152c8086ad9": "b70aed6604b9e892033c527c9f55a0340e873c0d6a339aabeaf634d1ccf5ddd8",
+        "c1e20e9300cd343a2598b960e9812111e19800be09ccc7d35b8820835dc753c3": "7dbd785a34bb5e8883370068afba1c3b05aa79b053f830d047dab5d30b0e0779",
+        "c5b9f8c3a315392ff58efda71016cd41c24ce5c1872aa6b2ea39a12d88a60e78": "03b3a479d46058654ffce9707344e0cdc2190cd9d62d88e94a217cda54acc6f6",
+        "d1c7e412c214f0de19a45080da3464155fba43563efd5213ee2dd2bf0ba43a90": "2fc3b835d3a30f8ab357f7c19194d17183ad043fe1b564776b974de818a60eb7",
+        "e74e1f94bf02081837c0409b638161103d58e016cb89a6de02345909e6eb9b8a": "0246e5c7c76d0866a505e0fd0f2e56039c7791c8e925935c95c0d6133109ddd5",
+        "e7c7571555bcebf5ef0b32f27acfeb91f7b8046f42a4b6788bc85348c7375512": "48cd34bcfe66208c7ff04fc82b0a9225276fdc5932432267ca2e36c4a0d18471",
+        "e93b4158d99e783f0b37928054a626bba927058d3b75458e04e64c8a283edf90": "779c4b7eca4b992ea1e009f5b48bb640d261f9754f4f6728c9ad0578f3a1256a",
+        "f0cc3574562e92346c85a716c570527a02e07295f0501abae5fe2600b6cb4360": "0b4fdfd372f1f93948ef4b20fb2f8dc3d43a1d4179acfbc88f8c143c684f303c"
+      }
+    },
+    "historical_files_sha256": {
+      "C:\\Users\\Marc Porosoff\\.codex\\worktrees\\catalog-refresh-boundaries\\grants-scraper\\evaluation\\sonnet_cov4_qualification_20260909.json": "75e18afdfb0cc7fbf02dddc4b3ce333c4d1e39581ec3181117d39e92db5b14ea",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cache\\793ac341f40a7a2593c95e797c89be9d33d5332c9c2d181aa7b803409caefa06.json": "81bcac707ec96561e1a1228b15480a4475af830a557d253e803905fb56536def",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\0bfeab7e01c9fa3813014950b7c663b462b1a001d3c81cbf84d799cb0b821964.json": "cc2ac02532c19ffaf286065797b85bed3b66c4ea4d48666b024a2ac87b0ccb71",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\10ea171858292272bc8602674f026341894abca460fc57225e0f7e2083c5ed21.json": "e8f16ba88187d62e4a3597252daaba5001754c3a8c2107211610e99e8ce2a6e7",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\1316f7d11eaddd47bf41f7a77ef13b6eb9770b52baf79a79080f6346322593ea.json": "cf62c8c8a920ae3e006940721f8ee0e7d08c55ef8d0d0f4879a2d25099cee4a4",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\13e115d2dc438970726608853efeeb00c5ba7b4b1f60e8ec61be01584d525c12.json": "709fc78da5c1cf980ddd2d814dd1d86b3890d19a4007a0675947a4039961fc35",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\1579726a0c13a05472de7dadc97cdc07cde58bd683472b36a3e5a2cb08ea2f5e.json": "30a578b3d552e87003da2f9a25672c8e622e7556925c340ebfc49404d0d45c2b",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\15fe14be18325f5ad763a6522829f10119baa387a5c5dabea895167715be4709.json": "c7957aca9c4a37272f3cf73f2f216e00f8526706c08530c736045c5d14930756",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\2b18b0ef5418d2d6be98b03f98973942c4f878e05fd07eb8575a171a7867c33e.json": "d86db9ea33be8b71a5467a3a4ce566b33d18a8d8adb812cff12154c361b149b4",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\302a0d45a549c6a195029441e5d533026cbc94eabb1c8922516e5e9f2d455d5d.json": "c6e617d39dcb8cd45be70abc87565e18cc0368ed0bab6c6f7e8ae06fd20908e2",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\305aa2376a95f31aa23f8183a845711d6351a1f09489aef5a6e826005fd379df.json": "9b0de897be78b8a543cacb317463e4af882dea226738d4a8ece3850a36caebc2",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\3145095a06f3167b6a1054e2d81639e3fe38b15e23b082061cec882553cd6c04.json": "5196348692a50788eae8f8aaa3e4635d3a4efd8e2b834bc9e03f4004f55d3a10",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\379d42fc3ffe5ea23ab399d4b333c086fba66feb425a4e6857daa25e428bbfc5.json": "d05920773367c370a00af5a0f14abce36aaa534ac7ecd52dd5ff31e4b5b9fb13",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\37ca83a5619d15a902643dd7ba06fbd7c3c481bfd964e54f593414beecccecac.json": "d10d3f6f63efd6be027c388dbb2399a7358819907ef84cfe0afb6bb784ea71b6",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\3e2bf18712f0f4d67c14668f326787912f7c373ceed774ef6584d8c2017ceb6a.json": "e35245eac409927b11d4ebfbe68cdf95fdd673b72b7fe217f8c091af64db1bb5",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\3e7140079884da49b4960cd9a0fa5d1645102eeb5f1f5e00888cbbd7bba54cbe.json": "576ad74c8ffc89b00402aca768361e5792af2ce98d5f6450ec93b25aa6bd311e",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\457374a391e15746d39e1d077dced2d1c7b3989e6887c96fa5046a57a37f568f.json": "33ed7124c18f1fd168d07c5eef14d0625e07983e50f829ed845a8ac564e49b0e",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\459e27608ad6f7a7f7846ffc8af50226878466584b014bbbb496d19a0678b562.json": "090462b49cb5fcd5f7daf114cc82413996830d99d7cb1f10a11c513c88a6b7db",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\45ef4f5b6a3ebec58c2ad7d0342dd1669f07c149c4c6edaf53a409ab55df3d07.json": "cc1d6d8ba7f8c6a54ab5d6cbd7adabfc498de2d6a625bc293634601546c10a41",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\517d9a9b52feea36b2ba513e1a9ed99855d708ad8b90b9792d24234ff72b2f2d.json": "244aff24e6edf9f96dbc3eb44c1c6f26190698bd3a2815defe0974c21d0b8a41",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\5237a68af9db4ac54bdfe1bfa43f7c7d894afd8ecb90decf57b4e0a0231709b1.json": "4c1336ac44151a0fc912f920c996fba0926b63a92e1547837da3642185b6d3bc",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\524a3cbed9d724285369c103b960116747c47cb9071196baa33bdada91240a94.json": "efb5ac049be3aa90bc07db773d873e109f070d05b48b7b62fc86d0047bf973c3",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\550fc125d9d7b9c80e6be574bcb574a185af32afa93dfa3b2cc5fa17a556d250.json": "8db02ebda09e11d51345962b936f9bf8e9d6301d7d50363f6b1a65fc62c94948",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\55ccabef23d624b56d8f37cd0ff45c71a182d6fdfa6d30ebeaf4d21d07334e59.json": "7f5f1579f00a49dd699d7ef7f3b2d4748d96997977c211e90f6308454f41fd1c",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\573dacd7bea864076b9acfe68602191e88491893205c292b76bd985ef3e9d356.json": "009af1b2b601951b694faea7837c75ec137e5baa0346f35c48b8b81027915510",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\634ad86f460c6afcd61cd673dee377e402fb669970d4e5c25ca87b3ae8adb295.json": "ce8173b0b35812df6bff57ebe62e9eeeae84aecaea2206d6437c3af29d53fbe7",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\63895237e3d238f51817dbbb946475e16644eccb2875cae4e8171f6ddbad46cb.json": "9c308b60ef19354ceb8a5f0301aa921e1fa1368d580972bd314c83305adf83a9",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\6c5686c602f8ef5eedb71c47c93b7fcfb1c7851559787058969f5983d3e5ac86.json": "c3ae9a67fb3d42681f4bf9c0f29c43f9ec4795021de7a92499de4ae255281edc",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\702624f93b66d1ee946ea7a0386683dd187a734a836317b7486e06c7425523a7.json": "de988bbfcda5f5ff681d27ee3a085e7fc11738d2469552dd053c246e04189a59",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\76d5fc1362f99e9dd6540e09a4c6e9c19c5baa643e01d65fb7b21958d1768e9c.json": "a4555fda7fb30e2b0e759a34719f4b89c78389db12eb7ddf6de9973ed2dc5d08",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\79cddcda0e5e71bfefb5e64cbba5cfd078ababdc86d6bd3369f3abe500d35bba.json": "bdca5e49faca563befb42591b4055732067dd51537fa9f8f2dae7b48f55f76be",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\7a7653798e4eb0e2992dc7c0ba43b6a07764134a1243f28b3e1e0f46a6d83be8.json": "1f20f7afb657daf1b4614d92603dfe745709f5658105a72ae37c039bbaa790bc",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\7c245a69ce5458a0e749b28d548eb56653645c676f7802d7b00e648448b33b23.json": "54f5a45d94bf3e67bbfd785927e3efd0a2b96c6479bcdd620794bc1370e788e5",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\9e98c41b16e80072a8021eada0ef05d35dda7369534746b5c76c26a4bf8344ce.json": "61c41f637bc75bcdd3b9edb26b98780fedf8e0c35a0d0440ff15d90ef7892926",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\a16ad1fa18bc5027f6fca42f8bb7c625c1835750910f0b75093e14e910dcada2.json": "1e4c6daa58e7b85a6b48cdecb49fe95ab8f090d09bf766b7a5a82da7cdf1900b",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\a19010e6dbc45fa6136336ad5bfb2915f0aa5bf0455f67f5ecdc059e91e6b064.json": "d8151930caf673d71f07ddd0ea971eaa50381b019494ab56b51c47074b909a70",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\afaa5340309f0f751e8ef0b044ead9daa6b00a3b5b473c38701c27b3b9b94746.json": "2e62971e0f82ff383f35bc2b66987d230c0ee74b6565e08f621116cb0a5041ed",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\b660c046ce988a98711de27393cae9769f5ac571d652eb3c83258152c8086ad9.json": "31264f51a7a34fc456efae5accd971ac18c143fb2d1e016d291ff58831a352d5",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\c1e20e9300cd343a2598b960e9812111e19800be09ccc7d35b8820835dc753c3.json": "1bdcf778264775a8827811f5631579fcf24d8f5816e41fa5292f0eccee15b659",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\c5b9f8c3a315392ff58efda71016cd41c24ce5c1872aa6b2ea39a12d88a60e78.json": "cc4aaa0a0f52067daafc46195843884bc20206e91cc39dafaede2167b34a94cd",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\d1c7e412c214f0de19a45080da3464155fba43563efd5213ee2dd2bf0ba43a90.json": "72572727ac9e5a194a526f8b392dc4b82c4922df670df85580f208bd7be0b2df",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\e74e1f94bf02081837c0409b638161103d58e016cb89a6de02345909e6eb9b8a.json": "150c7d131bb38e73bf1aaf456618e5f923e62252758c70c871f0eadc759760b9",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\e7c7571555bcebf5ef0b32f27acfeb91f7b8046f42a4b6788bc85348c7375512.json": "692c0f787adfa2c0b7e47184336c24ba7e3a49d42e4ab66c148a7ddaa739fe2d",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\e93b4158d99e783f0b37928054a626bba927058d3b75458e04e64c8a283edf90.json": "8d980d3cf33c3395622b739849f2659586aa45333e84b4a6d1c007ec5cdb7534",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\cov4-production-cache\\f0cc3574562e92346c85a716c570527a02e07295f0501abae5fe2600b6cb4360.json": "042ae7f8348a423b74451a68d702348d242c25aeacb3ab41f51e8a379b70fede",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\ledger.json": "e467c8ef7259391da92e990cf359b8bb711f7f1257004fa98f2264b39cb093de",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\production-preflight-receipt.json": "55dc0c4b28836d4c14a2847f065d480f7083fab5a90f8b2dfc5bc751c89d536c",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\sonnet-production-cov4-2\\controls\\qualification-receipt.json": "87275388cab1f8c852539a0d35ba18c441aca6366136af360edc05eed4e1c8b1",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\sonnet-production-cov4-2\\controls\\results.jsonl": "99221dcb5b1869500753e1eafed5f3b3b2ccf35ea1d5f94d253884c90d682f95",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\sonnet-production-cov4-2\\population\\qualification-receipt.json": "f0091427759f7aaa4fda25038b60862f001a4c5584205f9a04a013b2c8b9b370",
+      "C:\\Users\\Marc Porosoff\\projects\\grants-scraper\\.worktrees\\economical-release\\.offline-rollout\\qualification\\sonnet-production-cov4-2\\population\\results.jsonl": "502aa7d1bcbe51898adfbddb20c06b18acdf6d05d4a743b757a281c9ebf8b4ee"
+    },
+    "populations": {
+      "controls": {
+        "execution_complete": true,
+        "numerical_gate_passed": true,
+        "new_provider_requests": 0,
+        "result_hash": "5d94fe177313ae3da5fdfe24d438b62e7da4551c35b4e2c3774eef315ca3f100",
+        "results_sha256": "99221dcb5b1869500753e1eafed5f3b3b2ccf35ea1d5f94d253884c90d682f95",
+        "metrics": {
+          "model": "claude-sonnet-5",
+          "repeats": 1,
+          "candidates_offered": 5,
+          "candidates_bypassed_by_provenance": {
+            "native": 5,
+            "referenced": 14
+          },
+          "bypass_classifier_calls": 0,
+          "classifier_calls": 5,
+          "ownership_outcomes": {
+            "owned": 5
+          },
+          "fundability_outcomes": {
+            "accept": 2,
+            "reject": 3
+          },
+          "api_errors": {},
+          "genuine_children_retained": 2,
+          "genuine_children_lost": 0,
+          "contaminants_rejected": 2,
+          "contaminants_published": 0,
+          "cross_opportunity_fabrications_prevented": 0,
+          "cross_opportunity_fabrications_published": 0,
+          "unresolved_truth_cases": 1,
+          "review_queue_cases": 0,
+          "dropped": 3,
+          "net_auto_publishable_before_cov4": 5,
+          "net_auto_publishable_after_cov4": 2
+        },
+        "active_requests_sha256": "cc8f2f4b48e23786df44c76d5962ae11e8069a567255316d6d8bd6f9781b73f7",
+        "historical_evaluation_contract": "7781e8c9478cb648ca2a650ffa56d3bdaddc77629aff70322d1b1a3e763aebdd"
+      },
+      "population": {
+        "execution_complete": true,
+        "numerical_gate_passed": true,
+        "new_provider_requests": 0,
+        "result_hash": "73c965fb16bf45e46b5750ac19c7959167399983d0aaa0c719fb8ff6278650e3",
+        "results_sha256": "502aa7d1bcbe51898adfbddb20c06b18acdf6d05d4a743b757a281c9ebf8b4ee",
+        "metrics": {
+          "model": "claude-sonnet-5",
+          "repeats": 1,
+          "candidates_offered": 43,
+          "candidates_bypassed_by_provenance": {
+            "native": 5,
+            "referenced": 14
+          },
+          "bypass_classifier_calls": 0,
+          "classifier_calls": 43,
+          "ownership_outcomes": {
+            "not_owned": 2,
+            "owned": 40,
+            "unestablished": 1
+          },
+          "fundability_outcomes": {
+            "accept": 31,
+            "reject": 12
+          },
+          "api_errors": {},
+          "genuine_children_retained": 28,
+          "genuine_children_lost": 0,
+          "contaminants_rejected": 11,
+          "contaminants_published": 0,
+          "cross_opportunity_fabrications_prevented": 2,
+          "cross_opportunity_fabrications_published": 0,
+          "unresolved_truth_cases": 2,
+          "review_queue_cases": 1,
+          "dropped": 14,
+          "net_auto_publishable_before_cov4": 43,
+          "net_auto_publishable_after_cov4": 28
+        },
+        "active_requests_sha256": "eed0dcf862eec7e533b7306d7acbe1843cd9211286937686ee9197ec83568987",
+        "historical_evaluation_contract": "101eaf0470f15881e6acda59a48ac43dfe9d071f47835ddb2114465ac1e43261"
+      }
+    },
+    "new_provider_requests": 0,
+    "ledger_byte_identical": true,
+    "paid_response_hashes_unchanged": true,
+    "execution_complete": true,
+    "numerical_gate_passed": true,
+    "source_review": "required",
+    "quality_gate_passed": false,
+    "production_enabled": false
+  },
+  "outline_reconstruction": {
+    "scope": "Production segmentation -> record construction -> active Cov4 contract using retained PDF and its normalized containers. Prior full document-entrypoint replay selected this same primary PDF. Classifier replaced by a capture returning unresolved; this is exact-input evidence, not provider qualification.",
+    "method": "outline_structural",
+    "reason": null,
+    "contracts": 63,
+    "unchanged_exact_valid_cache_keys": 56,
+    "changed_contracts": 7,
+    "previous_valid_changed": 6,
+    "network_calls": 0,
+    "provider_calls": 0,
+    "retained_state_files_unchanged": true,
+    "retained_state_file_count": 69,
+    "retained_ledger_sha256": "fdc206c4fd6d251c03e5b0d6b1d446f7b6f521aa72f3fddc6eba67c0b60855f1",
+    "segmentation_sha256": "ba3437dcc456cb7cb61da70c4dfe397dbc58080ff4e924272381cf76cf60a671",
+    "elapsed_seconds": 1.501,
+    "unchanged_keys": [
+      "11be109f8c8e77ee683aad555606db7474518a0274bd126784f5df1f411179de",
+      "ff256b3ab626849bf4431ee3eb340bffc36366716066d88c4b11133e380fbd99",
+      "2cd789923d5c17add6931e10ce4c45411e6b73ec1f769a646360f3ecb7c14e93",
+      "584cda785840810f8922e52475f80b76fa9104bb470382201d372312d1e367c3",
+      "e4b30d7576a53354e32058deaf518c8a97a5a223f36d437a908a79820a492d8a",
+      "006aa51ade2e07bac4becd7ebd466b6bbbdb4025c8c57b585e4ed278f57f2f94",
+      "2b309b0cc39a0affdaa8ef315eef44d202781b1f630518f1788d2cfae2871e36",
+      "4d1ce2995fdf3f84899b5cb1a0a0061eeb573a289a48342c2f25e5bdf1967f72",
+      "b0e01966a5e394565a637406816ac7bac01c199b1a1e8770b5bfdde372c9457c",
+      "3d670c2a0c203560295b7a93a26d32ddec2404ef31937278ba9420f7f558f29b",
+      "72db7df3db071c10a9b67f3f9ac64cc07ad60e6ef2fc8fa011a960f75c7477c9",
+      "3f057f7a185c161703b5c263f5dd9e59f3aca799438ba06563d349f256aede9f",
+      "8826e98f61d9913003c790a6d5601a5248d6c7f7b3be0d3847e686a48a1e85f4",
+      "023f0e66c399f1f0e906334f1ca9d49904534580c6fd3dbe437470198e169f47",
+      "3aed5519834ba0a12f91147cf29c702f0510ffb135929c275dae16e34da9e356",
+      "1ef7e39784b2ec3398e682c201af53a048e495b6bfacb6f0f32210f878f51b8a",
+      "87e3d92616f23fb999c43686f243c4945bd9d9cfa5c026a64c788f268af359ce",
+      "4c6df543d790feeb77970820ac5f975f167d9724558af000e6d2692ff6669276",
+      "dba3c6a6daed15bc2c949a401cd195c711ba4f5a2f5917179c1423980a407089",
+      "2b40567cfe805a9e78a7fe1da8fc3a50cbb82d4cbd7459ee3e0a61cab7236f19",
+      "30fbd090847eba0dae403c151ede03ed7b66d5c1c118e60ca71a0883e4b53159",
+      "e8ee54b62266ceb7a71e01d6d7fc1d6d220cdecb6bf1b6455cc190bc86df0511",
+      "5322d1b3781cf6729efb16484401092a0773e70d90ff7428c3e66d1d4f7cec43",
+      "cd3298c63437bcb0986c4dbcbda0525a8b9a886f4ac49fd2134c54abc18f3747",
+      "1a8daf2f2d3f11f2e2982abd2eca41d79803d53c6702035d15bc8c31e890357b",
+      "fe7c3d298af551da7dfeebb56addc418710a06c9a463a736412fcffaab84f0d9",
+      "6ed08bbb6c674a7de7838a48039ccaf4ffc9a3659d27c3084729b1305b336a22",
+      "e701c02a0bd7e5238ab52c6c504e1118e60f7f095dbd1344e7fad4cb4b00eb0d",
+      "3de5be6c5c6ff5603ac9f23c2d5d554917a851eeeeed6cce4a9140cfcc27ceda",
+      "dd7ec4bb2d38938bb9f906beabb50c4f110210145d22c23e84d2350a5d0f835e",
+      "e66cf5bbb1d988c969ba3742d5e76a579d9419a3ea6577286abd7353fd46f419",
+      "c3241849bb3111d16d5cf8923c4c401fa7e7075b477980c12110c3828f838e07",
+      "83b63323f65fa64c98f87027b463628151fc9c455fc15bdf83425f73652b72ee",
+      "a69762968f26848050dbd760e309c6f2923401bdcc714758ab9095d3c603dc13",
+      "186f48f10c7fc9d49093e89fac7454cc81d82dedd50c544cdc928b37d1686a76",
+      "e45823955c7a70596e5d6b559d40e72145675ea7be39cc1ce21f5a1f64bcba8c",
+      "1a7683613c214a9874e9c4cb36bdc337dc749df0c8a76c2dae8c0911d6fc32e3",
+      "a0a320ba360a47f420ededf9a856694ecd4cb050f8b77505994693aa001ea9cf",
+      "4f84022dc2a9a0a8cba7e7d7410e1e8a2ea35776ea41850a722332a454e28aeb",
+      "0a49d00b973617ee392c15bd14c45d3a68a74be3db47922880bf6841bd6af3d0",
+      "9da9102a03a99143aec7ad75af5a4ad33bfc267287345acd9ea4931731e74688",
+      "f7607166ce9ccc299749cef5b0be7804faded7a64413a1fce79b08926e5d9b75",
+      "f85171ed54b2ef6cdbcccc5aea37342d72ce5b9cfce29a3bfdf0fb37aa113c25",
+      "f6483fbf24d541eeeff8f30f021b6e4f46a0f7d3aa2489720080908ae015d98d",
+      "86373af01ba0af5c5bfefb3d86eb02270bfda77d05ef2703e6cf44a7bea4003c",
+      "d9764985213164a73122d60b5fea861ad3651ee13d286b136a41cbe80e408186",
+      "708a16af488f466981fa56ed92863bf4a49415cc84c27e80c07be6801525d6a9",
+      "3bfc3b7362b468619670e0e9dd39e3e18f4f1ed10323823c80fd6395141bd600",
+      "252ad94ff9258ddfe72d70b5daafc60b8f9b1eddf53589a3737040bf7bb264e1",
+      "a8d79bdd7a50404fda5c4dfbfa81e44ca76f10e1a42d2c591a0ec465bbe55627",
+      "4bda63eab220846dd23548a66c4f20c5c38cfc4706e8cff758b9f8a69b767abb",
+      "b9c3b00ed2cce03d480b791e28f554d1b24aedd94229ee7802c43e8bd0224766",
+      "1a3f0c5a878e7e2d855b76ca2289a32668be46fb51d3a86229e63b11a90b3240",
+      "a4ff369f6748c06b3d7cecdfaa595e413a0a11ba965d3a8562f6fea6de89fb97",
+      "7efdbd089b4c7b17f168bee88776f3f4242f45c313c27f4655e01830cb2182bc",
+      "446c3e9d9a4a2d7a059463b8071cb1ae27b223723b83e693e70ea1a3df63360a"
+    ],
+    "changes": [
+      {
+        "subtopic_id": "363993:dact",
+        "title": "(d) Advanced Computing Technologies",
+        "old_key": "8f5c1a70f23bb401a15ca10f818bd4f862d96d7be8ac5c7c59939099550ee254",
+        "new_key": "b725a893375ea2e9905c043a146fb5e66c379ed7892325ddf621d2069f3afcfc",
+        "changed_fields": [
+          "local_text",
+          "source_boundary"
+        ],
+        "old_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 50704,
+          "char_end": 57366
+        },
+        "new_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 50704,
+          "char_end": 54365
+        },
+        "previous_valid_cache_retained": true
+      },
+      {
+        "subtopic_id": "363993:keaspm",
+        "title": "(k) Electron and Scanning Probe Microscopies",
+        "old_key": "77b80a29a26531f017d65f021e656a07ecc831c8b02134336fc879d684fe569c",
+        "new_key": "92e815db7816aa4dfec7d3e1f822d6a54b7151d6f4555a1e79f9da7778e80389",
+        "changed_fields": [
+          "local_text",
+          "source_boundary"
+        ],
+        "old_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 92852,
+          "char_end": 97843
+        },
+        "new_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 92852,
+          "char_end": 95545
+        },
+        "previous_valid_cache_retained": true
+      },
+      {
+        "subtopic_id": "363993:wpb",
+        "title": "(w) Physical Biosciences",
+        "old_key": "b04c8edb833c3c25c0c2b7f73b570b1312c12c8e12f5030e8e9c91fb0f1538be",
+        "new_key": "177a50ef1f33cafb582a894c099f5c2848c25fdc5204068220d8dc6d16b5bd52",
+        "changed_fields": [
+          "local_text",
+          "source_boundary"
+        ],
+        "old_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 145966,
+          "char_end": 149780
+        },
+        "new_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 145966,
+          "char_end": 149319
+        },
+        "previous_valid_cache_retained": true
+      },
+      {
+        "subtopic_id": "363993:xbaadr",
+        "title": "(x) BES Accelerator and Detector Research",
+        "old_key": "be210e495ef5283e1b7dc57ec28a3cae48333382d198443728f1842a3d9f19c4",
+        "new_key": "aa2abf9ee12457a798a7562205b932ec2a0c102db4e85c59d1470f0fb21c31b6",
+        "changed_fields": [
+          "local_text",
+          "source_boundary"
+        ],
+        "old_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 149780,
+          "char_end": 158065
+        },
+        "new_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 149780,
+          "char_end": 152306
+        },
+        "previous_valid_cache_retained": true
+      },
+      {
+        "subtopic_id": "363993:cldrr",
+        "title": "(c) Low Dose Radiation Research",
+        "old_key": "79ab7459519ebe07d457e4fb9d63be9319849fe8502da53049292d49b89f2c8e",
+        "new_key": "3553c2a6cc06088d3b05656d988b38ca5639a7f356d380bf7520d50a3f5fbe3a",
+        "changed_fields": [
+          "source_boundary"
+        ],
+        "old_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 171844,
+          "char_end": 181958
+        },
+        "new_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 171844,
+          "char_end": 179445
+        },
+        "previous_valid_cache_retained": true
+      },
+      {
+        "subtopic_id": "363993:mppp",
+        "title": "(m) Public-Private Partnerships",
+        "old_key": "4a3a7cc546f418b3c17775768e635f1b61e75286ebe7bbd88aec317ab257e051",
+        "new_key": "81f1881abb25be4282daaea399bf4ea119e35e5e7c4cc8dd864deadfbee71eec",
+        "changed_fields": [
+          "local_text",
+          "source_boundary"
+        ],
+        "old_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 217702,
+          "char_end": 240252
+        },
+        "new_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 217702,
+          "char_end": 220689
+        },
+        "previous_valid_cache_retained": false
+      },
+      {
+        "subtopic_id": "363993:ond",
+        "title": "(o) Nuclear Data",
+        "old_key": "20fa0d3cd9c9e2125c3b88c3d32a8bf1b7f77275c28c5090172dd8b51dbaf379",
+        "new_key": "7b1a09ed7245f748e59075cd0c6cdca1e1f70d2a075747b37f348a0d1a4fb537",
+        "changed_fields": [
+          "local_text",
+          "source_boundary"
+        ],
+        "old_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 279019,
+          "char_end": 285338
+        },
+        "new_boundary": {
+          "version": "candidate-local-context-1",
+          "char_start": 279019,
+          "char_end": 281961
+        },
+        "previous_valid_cache_retained": true
+      }
+    ]
+  },
+  "source_review": {
+    "status": "passed",
+    "date": "2026-10-08",
+    "basis": "Primary implementation review plus independent bounded read-only audit of the full affected outline invariant family and all seven source transitions.",
+    "source": {
+      "notice_id": "363993",
+      "number": "DE-FOA-0003665",
+      "url": "https://grants.gov/grantsws/rest/opportunity/att/download/355112",
+      "pdf_sha256": "fb03f3abcc0e05403cc98425f7822764ef22bcfe554737c2a72b1c2f23dd8675"
+    },
+    "conclusions": [
+      "All seven corrected char_end offsets are immediately before the declared next same-or-higher outline heading; following office/division prose is absent from the prior topic classifier input.",
+      "Summary, terms, display labels, topic areas, own deadlines and page/character provenance share the corrected scope. Parent direct local classifier text retains its separate first-child boundary.",
+      "Missing or ambiguous immediate boundaries reject the candidate set rather than borrowing later evidence. A page gap requires the next selected topic's uniquely located uninterrupted ancestor introduction to begin exactly at the previous capped boundary.",
+      "The fallback last-span size estimate remains based on original selected-heading spacing, before applying explicit scope ceilings; unrelated final topics remain unchanged.",
+      "All 43 historical paid qualification inputs/decisions and 19 native/referenced bypasses remain unchanged in zero-provider replay. Genuine children retained28, contaminants rejected11, cross-opportunity fabrications prevented2.",
+      "The six previously valid changed DOE contracts and previously truncated PPP contract are not qualified by old cache responses. They require new exact-request classifications within original run36896442720. All62 paid response files remain preserved."
+    ],
+    "regressions": "128 focused segmentation/context checks, 62 planner/owner checks and10 replay-authentication checks passed. Required PR Python/browser checks remain separate.",
+    "limitation": "Source leakage is proven. Its causal role in repeated provider output truncation is unproven; production recovery/publication still must succeed."
+  },
+  "quality_gate_passed": true,
+  "production_service": "cov4",
+  "request_contract": "60d615a976383225b9d418259c39681ea5b961aca34cc7056d16f789d8869bcc",
+  "scientific_contract": "5176d82edb0f175b175e7c3a975710ae51fc97e8704f6b5ef6de41cf0e8b9e65",
+  "recovery": {
+    "run_id": "36896442720",
+    "requests_recorded": 66,
+    "charged_usd": 0.441023,
+    "retained_valid_responses": 62,
+    "logical_max_usd": 2,
+    "logical_max_requests": 300,
+    "new_allowance": false,
+    "method": "After reviewed merge, rerun original plan job110484500570 and dependents; automatic pushes hold behind unfinished generation owner."
+  },
+  "team_generation": "disabled; unchanged",
+  "publication": "pending reviewed release and original-run recovery"
+}

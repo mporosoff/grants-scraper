@@ -253,6 +253,31 @@ were reused from `34351528204`; 19 native/referenced controls use zero calls.
 zero-call replay of the integrated `sonnet-production-cov4-2` processing contract
 with identical paid response hashes. The request remains `cov4-subject-context-1`.
 
+The October 8 outline repair separately qualifies processing in
+`evaluation/sonnet_cov4_outline_qualification_20261008.json`. Outline topics end at
+the immediately following same-or-higher bookmark, even when that heading was
+not selected as a topic. Parent introductory gaps are accepted only through an
+uninterrupted, uniquely located ancestor chain. Missing/ambiguous boundaries
+remain fail-closed, and parent local classifier text still stops at its first child.
+
+`python -m tools.replay_cov4_processing --state RETAINED_QUALIFICATION --output NEW_DIRECTORY`
+authenticates the original reviewed report, 43 response hashes and paid ledger
+rows, the five controls, native transport preflight, unchanged requests and the
+19 provenance bypasses. It then replays without credentials, provider clients or
+network transport, and verifies all 51 historical evidence files remain byte
+identical. The generated processing receipt cannot approve source review or
+enable production; those remain explicit reviewed evidence in the qualification
+report. The historical ledger, allowance and receipts are never rewritten.
+
+The retained FY2027 DOE notice produces 63 topics: 56 exact valid cached requests
+remain reusable and seven source-boundary contracts change. All 62 successful
+responses and recorded charges stay in original run `36896442720`; old decisions
+are never relabeled for changed requests. Recover that run by rerunning its
+original plan job and dependents after the reviewed repair reaches main. Both
+automatic schedule and paid push plans now hold behind an unfinished generation
+owner, preventing a competing allowance during recovery. The original $2/300
+request limit and disabled team service remain unchanged.
+
 Production service gates in `config/offline_ai.json` are independent: Cov4 is
 qualified and enabled; teams remain held pending verifier qualification. The old
 insufficient-credit stop is retained in `generation_provider_pause_history` and

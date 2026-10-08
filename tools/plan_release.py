@@ -293,6 +293,8 @@ def main(*, automatic_paid_hold=False):
     receipt = live = publication = resumed = selected = result = None
     scheduled_auto = (environment['GITHUB_EVENT_NAME'] == 'schedule' and requested in ('', 'auto')
                       and not any(environment.get(k) for k in ('CANDIDATE_RUN', 'CANDIDATE_ID')))
+    push_auto = (environment['GITHUB_EVENT_NAME'] == 'push' and requested in ('', 'auto')
+                 and not any(environment.get(k) for k in ('CANDIDATE_RUN', 'CANDIDATE_ID')))
     pending_selected = False
     receipt_run = environment.get('RECEIPT_RUN', '')
     with tempfile.TemporaryDirectory() as directory:
@@ -345,8 +347,11 @@ def main(*, automatic_paid_hold=False):
             reason='Finite catalog continuation keeps automatic paid generation and team work held; no new provider work is authorized')
         if scheduled_auto:
             result['daily_status'] = 'held'
+    if push_auto and result['stage'] in paid_stages:
+        from tools.scheduled_catalog import hold_competing_generation
+        result = hold_competing_generation(c.ROOT, environment, result)
     from tools.team_provider import provider_names
-    providers = () if automatic_paid_hold and result['stage'] not in paid_stages else provider_names()
+    providers = () if result['stage'] == 'noop' or automatic_paid_hold and result['stage'] not in paid_stages else provider_names()
     result['openai'] = str('openai' in providers).lower()
     result['anthropic'] = str('anthropic' in providers).lower()
     c.write_json(Path(os.environ['RUNNER_TEMP']) / 'release-plan.json', result)
