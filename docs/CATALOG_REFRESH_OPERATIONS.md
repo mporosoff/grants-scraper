@@ -54,3 +54,50 @@ verification still apply. Source collection and ordinary reuse remain unchanged.
 Automatic paid work is held while the protected catalog still records the known
 old extractor fingerprint; publication of the corrected candidate clears that
 specific hold and restores normal daily planning.
+
+## Retained October 8 source correction
+
+Run `36896442720`, attempt 4, retained candidate
+`5801e4912b642ad70e4383b0f805adc95aad7d892b85f8b7638aeca958da85e6`.
+Its publication was stopped before deployment: the new consolidated DOE portal
+marks CMMA Topic Area 1 closed, and the completed publication review found an
+NSF digest duplicate. The bounded NSF identity audit found four duplicate digest
+entries and one stale-edition conflict. The reviewed evidence is in
+`evaluation/catalog_source_withdrawals_20261008.json`. This exact parent is
+quarantined by ordinary validation, materialization and publication.
+
+The protected manual `catalog-source-recovery` stage accepts only that run and
+candidate ID. It authenticates the candidate ZIP, all 69 retained spending-state
+files and the original reservation against pinned GitHub artifact hashes. The
+original logical document allowance remains $2/300 requests, with 66 requests
+and $0.441023 charged, including the conservative unknown-usage reservation.
+The correction stage receives no provider credentials and reserves no allowance.
+
+The derived catalog withdraws exactly the six evidenced records, removes them
+from fallback records, preserves all surviving record payloads and source clocks,
+and rebuilds indices, counts, metadata, feeds and page references. Historical
+source failures remain failures; the correction audit does not claim a complete
+source refresh. Closed-call and duplicate-correction events retain prior history.
+
+Search derivation requires the complete original corpus and asset to validate,
+then proves the new corpus is the exact ordered surviving subset. It copies
+original binary rows, retains canaries and `reuse_permitted=false`, and keeps the
+original six-request/$0.005978 vector-build receipt unchanged. Separate typed
+provenance records zero new calls and the 1,463 retained passages. The allowlist
+keeps the actual previously published generation, never the rejected parent.
+Any changed surviving passage fails closed rather than being relabeled or embedded.
+
+The child retains original generation identity with `source_recovery` provenance.
+Persist it before ordinary validation, exact-head review and protected publication.
+Reruns restore that exact child. Restore the temporarily disabled release workflow
+only after this guarded route has merged; dispatch the exact recovery selector,
+then confirm publication and normal daily planning before SAM activation.
+
+DOE collection uses the consolidated public `exchange.energy.gov/Default.aspx`
+listing with explicit ARPA-E/CMEI partitions and unchanged source IDs. Its measured
+complete response was 24,636,245 bytes; a DOE-only 32 MiB limit accommodates that
+source without changing the shared 8 MiB limit. A truncated or structurally
+incomplete response is never accepted as a complete snapshot. NSF digest identity
+requires exact official edition links or a current-day program-guidelines receipt
+within the existing shared 20-GET identity budget; supplied conflicting editions
+are withheld, not silently rewritten.

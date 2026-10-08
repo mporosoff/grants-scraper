@@ -11,7 +11,7 @@ on:
       stage:
         description: Plan affected work automatically, bounded team maintenance/backfill, or resume exact evidence
         type: choice
-        options: [auto, generate, teams, backfill, reuse, catalog-correction, catalog-projection, program-area-revalidation, validate, publish, verify]
+        options: [auto, generate, teams, backfill, reuse, catalog-correction, catalog-projection, program-area-revalidation, catalog-source-recovery, validate, publish, verify]
         default: auto
         required: true
       pilot_team_scopes:
@@ -741,12 +741,60 @@ jobs:
           if-no-files-found: error
           retention-days: 90
 
+  catalog-source-recovery:
+    needs: plan
+    if: needs.plan.outputs.stage == 'catalog-source-recovery'
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      GH_TOKEN: ${{ github.token }}
+      CANDIDATE_RUN: ${{ needs.plan.outputs.candidate_run }}
+      CANDIDATE_ID: ${{ needs.plan.outputs.candidate_id }}
+    outputs:
+      candidate_id: ${{ steps.restore.outputs.candidate_id || steps.persist.outputs.candidate_id }}
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          ref: ${{ needs.plan.outputs.release_sha }}
+          fetch-depth: 0
+      - uses: ./.github/actions/release-setup
+      - name: Restore a complete exact correction before replaying any projection
+        id: restore
+        run: python -m tools.restore_generation_checkpoint
+      - name: Load the rejected retained candidate as correction evidence only
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.fetch_release_artifact --repository "$GITHUB_REPOSITORY"
+          --run "$CANDIDATE_RUN" --name "candidate-$CANDIDATE_ID" --destination "$RUNNER_TEMP/parent-candidate"
+      - name: Derive exact corrected catalog and unchanged vector subset without provider credentials
+        id: persist
+        if: steps.restore.outputs.candidate_id == ''
+        run: >-
+          python -m tools.catalog_source_recovery --parent-bundle "$RUNNER_TEMP/parent-candidate"
+          --bundle "$RUNNER_TEMP/candidate" --receipt "$RUNNER_TEMP/source-recovery/receipt.json"
+      - uses: actions/upload-artifact@v4
+        if: steps.restore.outputs.candidate_id == '' && steps.persist.outcome == 'success'
+        with:
+          name: candidate-${{ steps.persist.outputs.candidate_id }}
+          path: ${{ runner.temp }}/candidate
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 90
+      - name: Preserve public correction provenance after any outcome
+        if: always() && steps.restore.outputs.candidate_id == ''
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-recovery-${{ github.run_id }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/source-recovery
+          if-no-files-found: warn
+          retention-days: 90
+
   candidate:
-    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation]
+    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation, catalog-source-recovery]
     if: >-
       always() && needs.plan.result == 'success' && needs.plan.outputs.stage != 'noop' &&
-      (needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' || needs.program-area-revalidation.result == 'success' ||
-       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped'))
+      (needs.generate.result == 'success' || needs.assemble.result == 'success' || needs.catalog-correction.result == 'success' || needs.program-area-revalidation.result == 'success' || needs.catalog-source-recovery.result == 'success' ||
+       (needs.generate.result == 'skipped' && needs.assemble.result == 'skipped' && needs.catalog-correction.result == 'skipped' && needs.program-area-revalidation.result == 'skipped' && needs.catalog-source-recovery.result == 'skipped'))
     runs-on: ubuntu-latest
     outputs:
       candidate_id: ${{ steps.select.outputs.candidate_id }}
@@ -755,7 +803,7 @@ jobs:
       - name: Select the immutable artifact checkpoint
         id: select
         env:
-          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id || needs.program-area-revalidation.outputs.candidate_id }}
+          GENERATED_ID: ${{ needs.generate.outputs.candidate_id || needs.assemble.outputs.candidate_id || needs.catalog-correction.outputs.candidate_id || needs.program-area-revalidation.outputs.candidate_id || needs.catalog-source-recovery.outputs.candidate_id }}
           REQUESTED_ID: ${{ needs.plan.outputs.candidate_id }}
           REQUESTED_RUN: ${{ needs.plan.outputs.candidate_run }}
         run: |
@@ -1144,7 +1192,7 @@ jobs:
           retention-days: 90
 
   closeout:
-    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation, candidate, validate, publish, pages, verify-live]
+    needs: [plan, generate, assemble, catalog-correction, program-area-revalidation, catalog-source-recovery, candidate, validate, publish, pages, verify-live]
     if: always()
     runs-on: ubuntu-latest
     steps:
@@ -1161,9 +1209,9 @@ jobs:
         with:
           script: |
             const needs = JSON.parse(process.env.RESULTS);
-            const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
+            const order = ['plan', 'generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery', 'candidate', 'validate', 'publish', 'pages', 'verify-live'];
             const failed = order.find(stage => ['failure', 'cancelled'].includes(needs[stage].result));
-            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'validate', 'publish', 'verify']);
+            const stages = new Set(['auto', 'generate', 'teams', 'backfill', 'reuse', 'catalog-correction', 'catalog-projection', 'program-area-revalidation', 'catalog-source-recovery', 'validate', 'publish', 'verify']);
             const planned = needs.plan.outputs.stage;
             const planReason = needs.plan.outputs.reason || 'not reported';
             const heldStage = needs.plan.outputs.held_stage || '';
@@ -1182,7 +1230,7 @@ jobs:
             let generationRun = needs.candidate.outputs.candidate_run;
             let identitySource = 'selected candidate output';
             if (!candidate || !generationRun) {
-              const producer = ['generate', 'assemble', 'catalog-correction', 'program-area-revalidation'].find(stage =>
+              const producer = ['generate', 'assemble', 'catalog-correction', 'program-area-revalidation', 'catalog-source-recovery'].find(stage =>
                 needs[stage].result === 'success' && needs[stage].outputs.candidate_id);
               if (producer) {
                 candidate = needs[producer].outputs.candidate_id; generationRun = String(context.runId);

@@ -286,19 +286,24 @@ def create_source_correction(root, output, original_bundle, source_receipt, expo
 
 
 def create(root, output, *, generation_sha=None, run_id=None, attempt=None, parent=None, team_update=False,
-           source_correction=None, source_export=None, program_area_revalidation=None):
+           source_correction=None, source_export=None, program_area_revalidation=None, source_recovery=None):
     root, output = Path(root), Path(output)
     if output.exists():
         raise ValueError("Candidate destination already exists; immutable artifacts cannot be overwritten")
     policy = read_json(root / POLICY)
     generation = generation_dependencies(root)
+    if source_recovery is not None and (not parent or team_update or source_correction is not None or program_area_revalidation is not None):
+        raise ValueError("Source recovery requires its exact parent without other generation modes")
     if program_area_revalidation is not None and (not parent or team_update or source_correction is not None):
         raise ValueError("Program-area revalidation requires its exact parent without other generation modes")
     if source_correction is not None and (not parent or team_update or source_export is None):
         raise ValueError('Source correction requires its original candidate and exact export only')
     if parent:
         original = load(parent)
-        if program_area_revalidation is not None:
+        if source_recovery is not None:
+            from tools.catalog_source_recovery import verify_inputs
+            retained = verify_inputs(root, original, parent, source_recovery)
+        elif program_area_revalidation is not None:
             from tools.program_area_revalidation import verify_inputs
             retained = verify_inputs(root, original, program_area_revalidation)
         elif source_correction is not None:
@@ -347,26 +352,28 @@ def create(root, output, *, generation_sha=None, run_id=None, attempt=None, pare
         affected_generation = {key: manifest[key] for key in ('generation_sha', 'generation_run_id',
             'generation_run_attempt', 'generation_timestamp')}
         for key in ("generation_sha", "generation_run_id", "generation_run_attempt", "generation_timestamp", "generation_dependencies", "generator_versions", "generation_baseline", "generation_files", "team_identity", "semantic_identity"):
-            if source_correction is not None or program_area_revalidation is not None:
+            if source_correction is not None or program_area_revalidation is not None or source_recovery is not None:
                 if key in ('generation_sha', 'generation_run_id', 'generation_run_attempt', 'generation_timestamp', 'team_identity'):
                     manifest[key] = original[key]
             elif not team_update or key not in ('generation_baseline', 'generation_files', 'team_identity'):
                 manifest[key] = original[key]
         manifest["derived_from_candidate"] = original["candidate_id"]
         manifest["assembly_sha"] = git(root, "rev-parse", "HEAD")
-        if source_correction is not None or program_area_revalidation is not None:
+        if source_correction is not None or program_area_revalidation is not None or source_recovery is not None:
             manifest['original_generation'] = {key: original[key] for key in (
                 'generation_sha', 'generation_run_id', 'generation_run_attempt', 'generation_timestamp',
                 'generation_dependencies', 'generation_baseline', 'generation_files', 'semantic_identity')}
-            correction_key = 'program_area_revalidation' if program_area_revalidation is not None else 'source_correction'
-            correction_receipt = read_json(program_area_revalidation) if program_area_revalidation is not None else source_correction
+            correction_key = ('source_recovery' if source_recovery is not None else
+                'program_area_revalidation' if program_area_revalidation is not None else 'source_correction')
+            correction_receipt = (read_json(source_recovery) if source_recovery is not None else
+                read_json(program_area_revalidation) if program_area_revalidation is not None else source_correction)
             manifest[correction_key] = dict(correction_receipt) | {
                 'affected_generation': affected_generation,
                 'retained_output_hashes': retained,
                 'affected_output_hashes': {n: h for n, h in manifest['generation_files'].items()
                     if original['generation_files'].get(n) != h}}
         else:
-            for key in ('source_correction', 'program_area_revalidation', 'original_generation'):
+            for key in ('source_correction', 'program_area_revalidation', 'source_recovery', 'original_generation'):
                 if key in original:
                     manifest[key] = original[key]
         if team_update:
@@ -412,6 +419,8 @@ def load(bundle, expected_id=None):
 
 
 def verify_dependencies(root, manifest, allowed=()):
+    from tools.catalog_source_recovery import reject_quarantined
+    reject_quarantined(manifest)
     if not re.fullmatch(r'[a-f0-9]{40}', manifest.get('generation_sha', '')):
         raise ValueError('Invalid historical generation provenance')
     if subprocess.run(['git', '-C', str(root), 'merge-base', '--is-ancestor', manifest['generation_sha'], 'HEAD'],
