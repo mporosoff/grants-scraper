@@ -2495,6 +2495,12 @@ print([r['opportunity_number'] for r in c['opportunities'] if p.match(r['opportu
 
 ### 7.5 SAM.gov adapter notes
 
+**2026-10-01 implementation update:** Credentials now work. The staged, disabled
+adapter and bounded preview are described in [SAM imports](SAM_IMPORTS.md). That
+operational policy supersedes the historical quota and cache assumptions below.
+MEAS-6 relevance and SAM-only verification remains open before activation; the
+access test alone does not satisfy it.
+
 The API's shape drives the implementation:
 
 - `postedFrom` / `postedTo` are **required**, format `MM/dd/yyyy`, window ≤365 days → page backward in ≤365-day windows.
