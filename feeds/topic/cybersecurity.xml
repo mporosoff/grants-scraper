@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/cybersecurity.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>F26AS00023 FY2026 Prescott Marine Mammal Rescue and Response Grant Program</title>
@@ -24,6 +24,18 @@
     <author><name>Bureau of Emerging Threats</name></author>
     <category term="Cybersecurity"/>
     <summary>Bureau of Emerging Threats | Application 2026-10-16 | Improve Argentina's national cybersecurity posture by providing advisory support to design, establish, and operationalize a centralized, civilian led national Cybersecurity Operations Center capable of preventing, detecting, analyzing, and responding to advanced cyber threats targeting Argentine government networks and critical infrastructure, in alignment with trusted U.S. and allied security pra…</summary>
+  </entry>
+  <entry>
+    <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
+    <link href="https://www.grants.gov/search-results-detail/363754"/>
+    <id>urn:funding-finder:grants-gov:363754</id>
+    <updated>2026-08-31T00:00:00Z</updated>
+    <author><name>Idaho Field Office</name></author>
+    <category term="Energy"/>
+    <category term="Transportation"/>
+    <category term="Materials science"/>
+    <category term="Cybersecurity"/>
+    <summary>Idaho Field Office | Application 2026-10-09 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
   </entry>
   <entry>
     <title>F26AS00071 Cooperative Endangered Species Conservation Fund: Habitat Conservation Plan Land Acquisition Grants</title>
@@ -61,19 +73,6 @@
     <category term="Data science"/>
     <category term="Cybersecurity"/>
     <summary>U.S. National Science Foundation | Application 2026-11-04 | The NSF State and Regional AI Infrastructure Hubs program aims to expand access to the compute required for AI-enabled scientific discovery and to transform the research, education, and training opportunities offered by institutions of higher education. AI Infrastructure Hubs will connect researchers to new compute infrastructure that leverages contributions from state governments, research instit…</summary>
-  </entry>
-  <entry>
-    <title>Middle East Regional Cooperation (MERC)</title>
-    <link href="https://www.grants.gov/search-results-detail/363070"/>
-    <id>urn:funding-finder:grants-gov:363070</id>
-    <updated>2026-07-06T00:00:00Z</updated>
-    <author><name>Assistance Coordination</name></author>
-    <category term="Technology development"/>
-    <category term="Energy"/>
-    <category term="Manufacturing"/>
-    <category term="Cybersecurity"/>
-    <category term="Water"/>
-    <summary>Assistance Coordination | Application 2026-09-30 | The Middle East Regional Cooperation (MERC) Program supports joint scientific research and innovation partnerships between the United States, Israel, and countries across the Middle East and North Africa (MENA). The program funds applied research projects that address shared regional challenges while advancing U.S. economic, technological, and strategic interests. MERC is designed to bring togethe…</summary>
   </entry>
   <entry>
     <title>Research Interests of the Air Force Office of Scientific Research</title>
@@ -117,6 +116,7 @@
     <category term="Environmental science"/>
     <category term="Manufacturing"/>
     <category term="Technology development"/>
+    <category term="Data science"/>
     <summary>U.S. National Science Foundation | Application 2027-03-02 | The Pathways to Enable Secure Open-Source Ecosystems (PESOSE) program supports the translation of open-source science and engineering-focused research products into safe and sustainable ecosystems that address national and societal challenges. Open-source tools such as software, hardware, machine learning models, languages, and data platforms are designed to be shared as they are publicly-accessib…</summary>
   </entry>
   <entry>
@@ -186,7 +186,7 @@
     <summary>Washington Headquarters Services | Application 2030-01-22 | See the "Related Documents" and "Package" tabs for the complete application package, including the full text of the Notice of Funding Opportunity. The Department of War (DoW) Cyber Service Academy (CSA) is authorized by Chapter 112 of Title 10, United States Code, Section 2200. The purpose of the program is to support the recruitment of new cyber talent and the retention of current highly skilled …</summary>
   </entry>
   <entry>
-    <title>Cybersecurity Innovation for Cyberinfrastructure</title>
+    <title>Cybersecurity Innovation for Cyberinfrastructure (CICI)</title>
     <link href="https://www.grants.gov/search-results-detail/358004"/>
     <id>urn:funding-finder:grants-gov:358004</id>
     <updated>2025-01-04T00:00:00Z</updated>
@@ -200,7 +200,7 @@
     <summary>U.S. National Science Foundation | Application 2027-01-20 | The objective of the Cybersecurity Innovation for Cyberinfrastructure (CICI) program is to advance scientific discovery and innovation by enhancing the security and privacy of cyberinfrastructure. CICI supports efforts to develop, deploy and integrate cybersecurity that will benefit the broader scientific community by securing science data, computation, collaborations workflows, and infrastructure…</summary>
   </entry>
   <entry>
-    <title>Security, Privacy, and Trust in Cyberspace (SaTC 2.0)</title>
+    <title>Security, Privacy, and Trust in Cyberspace (NSF SaTC)</title>
     <link href="https://www.grants.gov/search-results-detail/357554"/>
     <id>urn:funding-finder:grants-gov:357554</id>
     <updated>2024-12-06T00:00:00Z</updated>
@@ -232,7 +232,7 @@
     <summary>Office of Naval Research | Application 2026-12-31 | verify prerequisite | ONR, ONRG, and MCWL are interested in receiving proposals for Long-Range S&amp;T Projects that offer potential for advancement and improvement of Navy and Marine Corps operations. Readers should note that this is an announcement to declare ONR, ONRG and MCWL’s broad role in competitive funding of meritorious research across a spectrum of science and engineering disciplines. All responsible sources fro…</summary>
   </entry>
   <entry>
-    <title>Advanced Technological Education</title>
+    <title>Advanced Technological Education (ATE)</title>
     <link href="https://www.grants.gov/search-results-detail/355100"/>
     <id>urn:funding-finder:grants-gov:355100</id>
     <updated>2024-06-25T00:00:00Z</updated>
@@ -245,7 +245,7 @@
     <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-10-01 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
+    <summary>U.S. National Science Foundation | Application 2027-10-07 | With a focus on two-year Institutions of Higher Education (IHEs), the Advanced Technological Education (ATE) program supports the education of technicians for the high-technology fields that drive our nation's economy. The program involves partnerships between academic institutions (grades 7-12, IHEs), industry, and economic development agencies to promote improvement in the education of science a…</summary>
   </entry>
   <entry>
     <title>Centers of Research Excellence in Science and Technology (CREST)</title>
@@ -259,10 +259,10 @@
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <category term="Cybersecurity"/>
-    <summary>U.S. National Science Foundation | Application 2026-12-04 | verify prerequisite | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
+    <summary>U.S. National Science Foundation | Application 2026-12-04 | invitation required | CREST Center awards provide support to enhance the research capabilities of Minority-serving institutions (MSIs) through the establishment of centers that effectively integrate education and research. CREST Center awards promote the development of new knowledge, enhancements of the research productivity of individual faculty, and an expanded presence of students historically underrepresented in sc…</summary>
   </entry>
   <entry>
-    <title>Training-based Workforce Development for Advanced Cyberinfrastructure (CyberTraining)</title>
+    <title>Training-based Workforce Development for Advanced Cyberinfrastructure</title>
     <link href="https://www.grants.gov/search-results-detail/344608"/>
     <id>urn:funding-finder:grants-gov:344608</id>
     <updated>2022-11-22T00:00:00Z</updated>

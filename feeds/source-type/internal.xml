@@ -4,24 +4,8 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/internal.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
-  <entry>
-    <title>NIH Maximizing Investigators’ Research Award (MIRA) for Early Stage Investigators (ESI)</title>
-    <link href="https://files.simpler.grants.gov/opportunities/9a4aeb2f-d0ac-403b-ac67-9d1fd24d9556/attachments/2037e87d-aae5-4621-8e37-b3fb158c3c26/PAR-27-032-Full-Announcement.pdf"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3APAR-27-032</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-02</summary>
-  </entry>
-  <entry>
-    <title>NIH Research Project Grant (Parent R01 Clinical Trial Not Allowed) PA 25-301</title>
-    <link href="https://grants.nih.gov/grants/guide/pa-files/PA-25-301.html"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A25-301</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-05</summary>
-  </entry>
   <entry>
     <title>NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
     <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
@@ -31,26 +15,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-09</summary>
-  </entry>
-  <entry>
-    <title>NSF Unlocking Dataset Value for AI-Enabled Scientific Discovery (AI Datasets) | NSF 26-512</title>
-    <link href="https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-512</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-04</summary>
-  </entry>
-  <entry>
-    <title>Small Business Innovation Research / Small Business Technology Transfer Phase I, Phase II, Fast-Track Programs SBIR/STTR: Developing Deep Technologies that Advance U.S. Competitiveness and Security | NSF 26-510</title>
-    <link href="https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF26-510</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-11-04 | NSF seeks SBIR/STTR proposals that represent success in three criteria: Intellectual Merit, Broader Impacts, and Commercial Potential. **
-STTR proposals require that the startup issue a subaward to a not-for-profit research institution (RI) a minimum of 30% and can receive a maximum of 60% of the total project budget</summary>
   </entry>
   <entry>
     <title>New NSF MPS funding opportunities for core research programs</title>
@@ -67,30 +31,6 @@ STTR proposals require that the startup issue a subaward to a not-for-profit res
     <updated>2026-09-07T00:00:00Z</updated>
     <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-04-16</summary>
-  </entry>
-  <entry>
-    <title>NSF Integrated Data Systems &amp; Services (IDSS) | NSF 25-544</title>
-    <link href="https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3ANSF25-544</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Technology development"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-07-27 | Through this solicitation, the IDSS program is accepting proposals for three categories of projects: Category I. Development, deployment, and operation of novel national-scale integrated data systems and services, which may include interfacing
-with or leveraging other existing capabilities, systems and services, as appropriate to the project; Category II.  Transition of established smaller
-scale, …</summary>
-  </entry>
-  <entry>
-    <title>Directorate of Engineering</title>
-    <link href="https://www.nsf.gov/funding/opportunities/eccs-engineering-eng-electrical-communications-computing-systems"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A26-514</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
   </entry>
   <entry>
     <title>NSF Division of Physics: Investigator-Initiated Research Projects (PHY) 23-615</title>
@@ -138,14 +78,6 @@ scale, …</summary>
     <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2027-08-27</summary>
   </entry>
   <entry>
-    <title>NSF Research in the Formation of Engineers program</title>
-    <link href="https://www.nsf.gov/funding/opportunities/rfe-research-formation-engineers"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-e4cc1ac2aa40787d</id>
-    <updated>2026-09-04T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Posted</summary>
-  </entry>
-  <entry>
     <title>W. M. KECK Foundation Research Program</title>
     <link href="http://rochester.infoready4.com/CompetitionSpace/"/>
     <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Ainfoready-2028013</id>
@@ -169,19 +101,6 @@ scale, …</summary>
 supports basic science, ideally with potential translational applications. Examples of current research areas we support include
 immunology, microbiome, structural biology, cellular physiology, cancer biology, genetics, genomics, microbiology and infectious diseases, stem cell biology, and neuroscience. Research areas
 we will not consider for support include Covid-19 relat…</summary>
-  </entry>
-  <entry>
-    <title>Simons Foundation’s Mathematics and Physical Sciences (MPS) Targeted Grants to Institutes</title>
-    <link href="https://www.simonsfoundation.org/grant/targeted-grants-to-institutes/"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3Avpr-f068b41ca38718f9</id>
-    <updated>2026-08-14T00:00:00Z</updated>
-    <author><name>Simons Foundation</name></author>
-    <category term="Quantum science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <category term="Materials science"/>
-    <category term="Manufacturing"/>
-    <summary>Simons Foundation | Application 2026-09-30 | The Simons Foundation’s Mathematics and Physical Sciences (MPS) division invites applications for the Targeted Grants to Institutes program.</summary>
   </entry>
   <entry>
     <title>PumpPrimer II Program for SAS and Hajim Tenure-track faculty</title>
