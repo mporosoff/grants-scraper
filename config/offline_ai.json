@@ -688,8 +688,8 @@
     "cov4": {
       "enabled": true,
       "request_contract": "60d615a976383225b9d418259c39681ea5b961aca34cc7056d16f789d8869bcc",
-      "scientific_contract": "8abccd49ded637c455e6462ef1b2d985b3f2f32c31b2c8d202da719a10bb3e7b",
-      "evidence": "evaluation/sonnet_cov4_qualification_20260909.json"
+      "scientific_contract": "5176d82edb0f175b175e7c3a975710ae51fc97e8704f6b5ef6de41cf0e8b9e65",
+      "evidence": "evaluation/sonnet_cov4_outline_qualification_20261008.json"
     }
   },
   "generation_provider_pause_history": [

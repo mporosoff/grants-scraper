@@ -236,6 +236,7 @@ class PlanningAndIsolation(unittest.TestCase):
                         patch.object(planner, 'pending_publication', return_value=None), \
                         patch.object(planner, 'latest_report', return_value=('', None)), \
                         patch('tools.scheduled_catalog.resolve', side_effect=lambda root, env, result, dest, **kw: result), \
+                        patch('tools.scheduled_catalog.prior_generation', return_value=None), \
                         patch.object(planner, 'plan', return_value={'stage': 'generate', 'release_sha': 'a'*40,
                             'team_mode': 'maintenance', 'team_generation_ready': False}) as decide, \
                         patch('tools.team_provider.provider_names', return_value=('anthropic',)), \

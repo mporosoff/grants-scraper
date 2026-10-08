@@ -635,6 +635,8 @@ class _Candidate:
     enclosing_headings: tuple = ()
     child_headings: tuple = ()
     local_end: int | None = None
+    scope_end: int | None = None
+    intro_start: int | None = None
 
 
 def acceptance_failures(candidates, flat, toc_pages=(), family_type="ordinal"):
@@ -702,10 +704,17 @@ def acceptance_failures(candidates, flat, toc_pages=(), family_type="ordinal"):
     pages = [item.page for item in ordered]
     if all(page is not None for page in pages):
         page_ends = [flat.page_at(end - 1) for _start, end in bounds]
-        for previous_end, next_start in zip(page_ends, pages[1:]):
+        for index, (previous_end, next_start) in enumerate(zip(page_ends, pages[1:])):
             if previous_end is not None and next_start - previous_end > 1:
-                failures.append("page_gap")
-                break
+                # Selection may skip a parent's introductory material, but
+                # that prose never belongs to the previous selected child.
+                # Only a contiguous, located ancestor chain can explain it.
+                end = bounds[index][1]
+                explained = (ordered[index].scope_end == end
+                             and ordered[index + 1].intro_start == end)
+                if not explained:
+                    failures.append("page_gap")
+                    break
 
     # 8. Announcement-furniture veto, applied to EVERY family. The backfill
     # showed this failure is not specific to structural sets: a `component`
@@ -768,6 +777,10 @@ def _span_bounds(ordered, total):
                 min(MAX_SPAN_CHARS, int(2 * statistics.median(preceding))),
             )
             end = min(end, start + allowance)
+        # Preserve the fallback estimate based on selected-heading spacing;
+        # a verified outline boundary is an independent, stricter ceiling.
+        if ordered[position].scope_end is not None:
+            end = min(end, ordered[position].scope_end)
         bounds.append((start, end))
     return bounds
 
@@ -991,20 +1004,61 @@ def _layer_outline(content, containers, flat, deadline, toc_pages):
     return _structural_from_outline(entries, flat, toc_pages)
 
 
+def _outline_boundary(node, flat, start):
+    """Locate a unique declared heading on its page, never a later reference."""
+    matcher = _loose_matcher(node.title)
+    offsets = [lower + match.start()
+               for page, _anchor, lower, upper in flat.spans if page == node.page
+               for match in matcher.finditer(flat.text[lower:upper])
+               if lower + match.start() > start
+               and not flat.text[max(lower, flat.text.rfind("\n", lower, lower + match.start()) + 1):
+                                 lower + match.start()].strip()]
+    if len(offsets) != 1:
+        flat.record_miss("outline_boundary", node.page, node.title)
+        return None
+    return offsets[0]
+
+
 def _outline_context(candidate, entries, flat):
-    """Retain hierarchy and direct local prose without borrowing child science."""
-    matches = [node for node in entries if node.page == candidate.page
+    """Keep owned section scope separate from direct, child-free local prose."""
+    matches = [(index, node) for index, node in enumerate(entries)
+               if node.page == candidate.page
                and flat.locate(node.page, node.title, candidate.offset) == candidate.offset]
     if len(matches) != 1:
-        return candidate
-    node = matches[0]
-    children = [child for child in entries if child.chain == node.chain + (node.title,)]
-    offsets = [flat.locate(child.page, child.title, candidate.offset + 1) for child in children]
+        # An ambiguous bookmark must not leave an unbounded source span.
+        return replace(candidate, scope_end=candidate.offset)
+    index, node = matches[0]
+    following = entries[index + 1:]
+    stop = next((index for index, other in enumerate(following)
+                 if other.level <= node.level), len(following))
+    boundary = following[stop] if stop < len(following) else None
+    scope_end = _outline_boundary(boundary, flat, candidate.offset) if boundary else None
+    if boundary is not None and scope_end is None:
+        scope_end = candidate.offset  # acceptance rejects the unlocated span
+
+    children = [child for child in following[:stop]
+                if child.chain == node.chain + (node.title,)]
+    offsets = [_outline_boundary(child, flat, candidate.offset) for child in children]
     # Missing a child boundary cannot authorize using its body as parent prose.
-    local_end = (min(offsets) if all(offset is not None and offset > candidate.offset for offset in offsets)
+    local_end = (min(offsets) if all(offset is not None for offset in offsets)
                  else candidate.offset) if children else None
+
+    # Only immediately preceding ancestors explain a gap in selected siblings.
+    # Encountering an unselected sibling, an unlocated heading or non-monotonic
+    # positions stops this proof; a matching title elsewhere is insufficient.
+    intro_start = None
+    later = candidate.offset
+    for ancestor in reversed(entries[:index]):
+        path = ancestor.chain + (ancestor.title,)
+        if ancestor.level >= node.level or node.chain[:len(path)] != path:
+            break
+        offset = _outline_boundary(ancestor, flat, -1)
+        if offset is None or offset >= later:
+            break
+        intro_start = later = offset
     return replace(candidate, enclosing_headings=tuple(title[:200] for title in node.chain),
-                   child_headings=tuple(child.title[:200] for child in children), local_end=local_end)
+                   child_headings=tuple(child.title[:200] for child in children),
+                   local_end=local_end, scope_end=scope_end, intro_start=intro_start)
 
 
 # --- §6.3a structural family ------------------------------------------------
