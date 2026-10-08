@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -179,6 +179,17 @@
     <category term="Biology and biotechnology"/>
     <category term="Education and workforce"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support multiple clinical Networks of Diagnostic Excellence (NODEs) as part of the next phase of the Undiagnosed Diseases Network (UDN). Unlike prior phases, clinical NODEs are expected to function as geographically distributed regional clinical networks rather than single-site centers. Each clinical NODE would establish and lead a regional network built on existing partnerships w…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Research on Neglected Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/364027"/>
+    <id>urn:funding-finder:grants-gov:364027</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-15 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary research through the Centers for Research on Neglected Infectious Diseases (CReNIDs). Neglected infectious diseases (NIDs) comprise a diverse and understudied group of communicable viral, bacterial, parasitic, and fungal infections that cause substantial morbidity, mortali…</summary>
   </entry>
   <entry>
     <title>Medical Scientist Training Program (MSTP)</title>
@@ -604,18 +615,5 @@
     <category term="Education and workforce"/>
     <category term="Infectious disease"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
-  </entry>
-  <entry>
-    <title>World Trade Center Youth Research Coordinating Center (U54)</title>
-    <link href="https://www.grants.gov/search-results-detail/363417"/>
-    <id>urn:funding-finder:grants-gov:363417</id>
-    <updated>2026-11-24T00:00:00Z</updated>
-    <author><name>Centers for Disease Control and Prevention - ERA</name></author>
-    <category term="Community development"/>
-    <category term="Education and workforce"/>
-    <category term="Environmental science"/>
-    <category term="Neuroscience"/>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-02-23 | The National Institute for Occupational Safety and Health (NIOSH), World Trade Center (WTC) Health Program, plans to establish a WTC Youth Research Coordinating Center ("Center") through a U54 cooperative agreement. In December 2022, Congress amended the Public Health Service Act (42 U.S.C. § 300mm-51(c)) to direct the WTC Health Program Administrator to establish a research cohort for emerging he…</summary>
   </entry>
 </feed>

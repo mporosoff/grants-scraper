@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/federal.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -167,6 +167,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-09-27 | This Notice of Funding Opportunity (NOFO) invites eligible shared biomedical research facilities to buy new small instruments or scientific equipment. These facilities may include core facilities, biorepositories, model resource facilities, and other research spaces or resources that are shared by multiple researchers. The goal is to help these facilities improve, update, and operate more efficien…</summary>
   </entry>
   <entry>
+    <title>Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD), Research Program (U19 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364028"/>
+    <id>urn:funding-finder:grants-gov:364028</id>
+    <updated>2027-07-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-25 | The National Institute on Alcohol Abuse and Alcoholism (NIAAA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to continue the Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD). CIFASD is a multidisciplinary research consortium supporting coordinated basic, clinical, translational, diagnostic, intervention, and prevention research on fetal alco…</summary>
+  </entry>
+  <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
     <link href="https://www.grants.gov/search-results-detail/363210"/>
     <id>urn:funding-finder:grants-gov:363210</id>
@@ -245,6 +255,15 @@
     <updated>2027-07-13T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <summary>National Institutes of Health | Estimated Application 2027-10-12 | The Mentored Research Scientist Career Development Award provides support for a sustained period of protected time (up to five years) for intensive research career development under the guidance of an experienced mentor. The award is expected to prepare candidates with research doctoral degrees for future research independence.</summary>
+  </entry>
+  <entry>
+    <title>HIV Prevention and Alcohol (R61/R33 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364013"/>
+    <id>urn:funding-finder:grants-gov:364013</id>
+    <updated>2027-07-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -548,6 +567,17 @@
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a Diagnostic Research Innovation Center (DRIC) for the next phase of the Undiagnosed Diseases Network (UDN). The new Network is expected to include a Clinical and Data Coordinating Center (CDCC), geographically distributed clinical Networks of Diagnostic Excellence (NODEs), the NIH Undiagnosed Diseases Program (UDP), a DRIC, the UDN Foundation, patient advocacy organizatio…</summary>
   </entry>
   <entry>
+    <title>Centers for Research on Neglected Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/364027"/>
+    <id>urn:funding-finder:grants-gov:364027</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-15 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary research through the Centers for Research on Neglected Infectious Diseases (CReNIDs). Neglected infectious diseases (NIDs) comprise a diverse and understudied group of communicable viral, bacterial, parasitic, and fungal infections that cause substantial morbidity, mortali…</summary>
+  </entry>
+  <entry>
     <title>Strengthening Services to Prevent the Infectious Disease Consequences of Drug Use</title>
     <link href="https://www.grants.gov/search-results-detail/363310"/>
     <id>urn:funding-finder:grants-gov:363310</id>
@@ -555,31 +585,5 @@
     <author><name>Centers for Disease Control - NCHHSTP</name></author>
     <category term="Infectious disease"/>
     <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-24 | This NOFO aims to strengthen services to prevent the infectious disease consequences of drug use in high impact settings serving people who use drugs (PWUD) through two components. Component 1 will improve service data by conducting a biennial survey of high-impact settings that serve PWUD to document capacity, needs, access, and service gaps. It will also improve timely local data on infectious d…</summary>
-  </entry>
-  <entry>
-    <title>Direct-to-Consumer Distribution of HIV and other STI Self-Tests</title>
-    <link href="https://www.grants.gov/search-results-detail/363323"/>
-    <id>urn:funding-finder:grants-gov:363323</id>
-    <updated>2027-03-22T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-21 | The purpose of this notice of funding opportunity (NOFO) is to optimize the recipient's existing web-based ordering portal and distribution program to provide at least 1.5 million HIV and other STI self-tests to communities with a high burden of HIV. The use of the program's HIV and other STI self-tests and of resources for treatment and preventive services will increase awareness of HIV and other…</summary>
-  </entry>
-  <entry>
-    <title>Strengthening Collaboration Between Tuberculosis Control Programs and Affiliated Partners in the United States.</title>
-    <link href="https://www.grants.gov/search-results-detail/363956"/>
-    <id>urn:funding-finder:grants-gov:363956</id>
-    <updated>2027-03-22T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCHHSTP</name></author>
-    <summary>Centers for Disease Control - NCHHSTP | Estimated Application 2027-05-21 | The Centers for Disease Control and Prevention announces the availability of funding to support one recipient to build on the work under the previous notice of funding opportunity (CDC-RFA-PS22-2205) by strengthening collaboration and relationships with TB control programs, TB controllers, and affiliated partners in the United States. These partners include, but are not limited to, national TB con…</summary>
-  </entry>
-  <entry>
-    <title>DHQP Global NOFO</title>
-    <link href="https://www.grants.gov/search-results-detail/363448"/>
-    <id>urn:funding-finder:grants-gov:363448</id>
-    <updated>2027-03-21T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Environmental science"/>
-    <category term="Infectious disease"/>
-    <summary>Centers for Disease Control - NCEZID | Estimated Application 2027-05-20 | The proposed international hybrid Notice of Funding Opportunity (NOFO) will link non-research implementation with targeted research that advances CDC's mission to address antimicrobial resistance (AR) across multiple bacterial and fungal pathogens, healthcare-associated infections (HAIs), and emerging infectious disease threats including viral pathogens across healthcare, community, and environmen…</summary>
   </entry>
 </feed>

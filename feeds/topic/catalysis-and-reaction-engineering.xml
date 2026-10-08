@@ -4,8 +4,24 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/catalysis-and-reaction-engineering.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>FY 2027 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
+    <link href="https://www.grants.gov/search-results-detail/363993"/>
+    <id>urn:funding-finder:grants-gov:363993</id>
+    <updated>2026-09-30T00:00:00Z</updated>
+    <author><name>Office of Science</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Energy"/>
+    <category term="Environmental science"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Separations and membranes"/>
+    <category term="Carbon management"/>
+    <category term="Quantum science"/>
+    <summary>Office of Science | Application 2027-09-30 | SC hereby announces its continuing interest in receiving applications for support of work in the following program areas: · Advanced Scientific Computing Research· Basic Energy Sciences· Biological and Environmental Research· Fusion Energy Sciences· High Energy and Nuclear Physics· Isotope R&amp;D and Production. On September 3, 1992, DOE published in the Federal Register the Office of Energy Research…</summary>
+  </entry>
   <entry>
     <title>2026 Diesel Emissions Reduction Act (DERA) National Program</title>
     <link href="https://www.grants.gov/search-results-detail/363936"/>
@@ -99,6 +115,8 @@
     <updated>2026-08-17T00:00:00Z</updated>
     <author><name>U.S. National Science Foundation</name></author>
     <category term="Catalysis and reaction engineering"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
     <category term="Materials science"/>
     <category term="Manufacturing"/>
     <summary>U.S. National Science Foundation | Posted | The U.S. National Science Foundation Directorate for Mathematical and Physical Sciences (NSF MPS) supports foundational research through multiple programs in the chemical sciences. Programs include: Chemical CatalysisChemical Measurement and ImagingChemical Mechanism, Function, and PropertiesChemical Structure and DynamicsChemical SynthesisChemical Systems and SolutionsChemical Theory, Models and …</summary>
@@ -160,22 +178,6 @@
     <category term="Technology development"/>
     <category term="Transportation"/>
     <summary>U.S. National Science Foundation | Posted | The Transport Phenomena (TP) program supports fundamental research to understand, model, and control the transport of mass, momentum, energy, and species across multiple scales. Innovative TP research supports advances in artificial intelligence; manufacturing; biotechnology; microelectronics; energy generation, extraction, and utilization; nuclear energy; quantum science and engineering; and othe…</summary>
-  </entry>
-  <entry>
-    <title>FY 2026 Continuation of Solicitation for the Office of Science Financial Assistance Program</title>
-    <link href="https://www.grants.gov/search-results-detail/360678"/>
-    <id>urn:funding-finder:grants-gov:360678</id>
-    <updated>2025-09-30T00:00:00Z</updated>
-    <author><name>Office of Science</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Energy"/>
-    <category term="Environmental science"/>
-    <category term="Catalysis and reaction engineering"/>
-    <category term="Materials science"/>
-    <category term="Separations and membranes"/>
-    <category term="Carbon management"/>
-    <category term="Quantum science"/>
-    <summary>Office of Science | Application 2026-09-30 | The Office of Science (SC) of the Department of Energy (DOE) hereby announces its continuing interest in receiving applications for support of work in the following program areas: Advanced Scientific Computing Research, Basic Energy Sciences, Biological and Environmental Research, Fusion Energy Sciences, High Energy Physics, Nuclear Physics, and Isotope R&amp;D and Production. On September 3, 1992, DO…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Small Grant Program for the NCATS Clinical and Translational Science Award (CTSA) Program (R03 Clinical Trial Optional)</title>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -15,6 +15,16 @@
     <category term="Education and workforce"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2028-05-30 | The National Institute on Deafness and Other Communication Disorders (NIDCD) intends to publish a Notice of Funding Opportunity (NOFO) for clinical audiologists currently enrolled in Ph. D. programs. NIDCD encourages audiologists with strong research potential to integrate clinical and translational research into their career paths. A strong research foundation is essential for advancing hearing h…</summary>
+  </entry>
+  <entry>
+    <title>Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD), Research Program (U19 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364028"/>
+    <id>urn:funding-finder:grants-gov:364028</id>
+    <updated>2027-07-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-25 | The National Institute on Alcohol Abuse and Alcoholism (NIAAA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to continue the Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD). CIFASD is a multidisciplinary research consortium supporting coordinated basic, clinical, translational, diagnostic, intervention, and prevention research on fetal alco…</summary>
   </entry>
   <entry>
     <title>LeverAging StraTegies to Maximize ImpLementation and Effectiveness for HIV (LAST MILE)</title>
@@ -367,17 +377,6 @@
     <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-09 | DSO is issuing a Disruption Opportunity, inviting submissions of innovative basic or applied research concepts in the technical domain of targeted neuroplasticity. | See Program The SHINE Disruption Opportunity aims to precisely and non-invasively target and enhance the brain’s ability to adapt and rewire itself, allowing for more complete recovery after injury. Though the key to the brain’s remar…</summary>
   </entry>
   <entry>
-    <title>BJA FY 2026 Crisis Response Training Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363710"/>
-    <id>urn:funding-finder:grants-gov:363710</id>
-    <updated>2026-08-25T00:00:00Z</updated>
-    <author><name>Bureau of Justice Assistance</name></author>
-    <category term="Education and workforce"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Bureau of Justice Assistance | Application 2026-10-05 | This is a notice of funding opportunity (NOFO) for the BJA FY 2026 Crisis Response Training Program. This opportunity supports state, local, and tribal governments, law enforcement agencies, correctional facilities, probation and parole departments, and sheriffs’ offices in developing, implementing, or expanding crisis response training programs that enhance public safety, officer safety, and oper…</summary>
-  </entry>
-  <entry>
     <title>Expeditions in Computing (Expeditions)</title>
     <link href="https://www.grants.gov/search-results-detail/363623"/>
     <id>urn:funding-finder:grants-gov:363623</id>
@@ -599,7 +598,7 @@
     <summary>National Institutes of Health | Application 2028-06-15 | The NIH INvestigation of Co-occurring conditions across the Lifespan to Understand Down syndromE (INCLUDE) Project seeks to improve health and quality-of-life for individuals with Down syndrome. This Notice of Funding Opportunity (NOFO) invites researchers to submit applications for support of new exploratory and developmental research projects that address critical needs for Down syndrome project…</summary>
   </entry>
   <entry>
-    <title>Professional Formation of Engineers</title>
+    <title>Professional Formation of Engineers (PFE)</title>
     <link href="https://www.grants.gov/search-results-detail/361952"/>
     <id>urn:funding-finder:grants-gov:361952</id>
     <updated>2026-04-17T00:00:00Z</updated>
@@ -611,7 +610,7 @@
     <summary>U.S. National Science Foundation | Posted | The Professional Formation of Engineers (PFE) initiative integrates engineering research and education to improve and expand the nation’s engineering workforce. PFE is defined as the formal and informal processes and value systems by which people become engineers. The goal of PFE is to create an ethical engineering workforce with a global outlook and the ability to adapt to the rapidly evolving te…</summary>
   </entry>
   <entry>
-    <title>Arctic Doctoral Dissertation Research Improvement Grants (Arctic DDRIG) Arctic Social Sciences, Arctic System Sciences, and Arctic Observing Network</title>
+    <title>Arctic Doctoral Dissertation Research Improvement Grants (Arctic DDRIG) Arctic Social Sciences, Arctic System Sciences, and Arctic Observing Network (DDRIG)</title>
     <link href="https://www.grants.gov/search-results-detail/361896"/>
     <id>urn:funding-finder:grants-gov:361896</id>
     <updated>2026-04-14T00:00:00Z</updated>

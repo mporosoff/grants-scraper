@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -167,6 +167,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-09-27 | This Notice of Funding Opportunity (NOFO) invites eligible shared biomedical research facilities to buy new small instruments or scientific equipment. These facilities may include core facilities, biorepositories, model resource facilities, and other research spaces or resources that are shared by multiple researchers. The goal is to help these facilities improve, update, and operate more efficien…</summary>
   </entry>
   <entry>
+    <title>Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD), Research Program (U19 Clinical Trial Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364028"/>
+    <id>urn:funding-finder:grants-gov:364028</id>
+    <updated>2027-07-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-25 | The National Institute on Alcohol Abuse and Alcoholism (NIAAA) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications to continue the Collaborative Initiative on Fetal Alcohol Spectrum Disorders (CIFASD). CIFASD is a multidisciplinary research consortium supporting coordinated basic, clinical, translational, diagnostic, intervention, and prevention research on fetal alco…</summary>
+  </entry>
+  <entry>
     <title>Elucidation and Validation of the role of Transporters in the Placenta, Lactating Mammary Gland, Developing Gut, and Blood Brain Barrier</title>
     <link href="https://www.grants.gov/search-results-detail/363210"/>
     <id>urn:funding-finder:grants-gov:363210</id>
@@ -245,6 +255,15 @@
     <updated>2027-07-13T00:00:00Z</updated>
     <author><name>National Institutes of Health</name></author>
     <summary>National Institutes of Health | Estimated Application 2027-10-12 | The Mentored Research Scientist Career Development Award provides support for a sustained period of protected time (up to five years) for intensive research career development under the guidance of an experienced mentor. The award is expected to prepare candidates with research doctoral degrees for future research independence.</summary>
+  </entry>
+  <entry>
+    <title>HIV Prevention and Alcohol (R61/R33 Clinical Trials Optional)</title>
+    <link href="https://www.grants.gov/search-results-detail/364013"/>
+    <id>urn:funding-finder:grants-gov:364013</id>
+    <updated>2027-07-07T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Technology development"/>
+    <summary>National Institutes of Health | Estimated Application 2027-09-07 | This Notice of Funding Opportunity (NOFO) uses a R61/R33 Phased Innovation Award to support milestone-driven research that advances innovative HIV prevention interventions from development and feasibility testing to larger-scale efficacy, effectiveness, implementation, and dissemination studies. The R61 phase will support the development, refinement, adaptation, and pilot testing of novel or enhan…</summary>
   </entry>
   <entry>
     <title>Limited Competition: Resources and Workforce Development for the Regional Biocontainment Laboratories</title>
@@ -546,6 +565,17 @@
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-25 | NINDS intends to support a Diagnostic Research Innovation Center (DRIC) for the next phase of the Undiagnosed Diseases Network (UDN). The new Network is expected to include a Clinical and Data Coordinating Center (CDCC), geographically distributed clinical Networks of Diagnostic Excellence (NODEs), the NIH Undiagnosed Diseases Program (UDP), a DRIC, the UDN Foundation, patient advocacy organizatio…</summary>
+  </entry>
+  <entry>
+    <title>Centers for Research on Neglected Infectious Diseases</title>
+    <link href="https://www.grants.gov/search-results-detail/364027"/>
+    <id>urn:funding-finder:grants-gov:364027</id>
+    <updated>2027-03-25T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Education and workforce"/>
+    <category term="Infectious disease"/>
+    <category term="Public health"/>
+    <summary>National Institutes of Health | Estimated Application 2027-06-15 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary research through the Centers for Research on Neglected Infectious Diseases (CReNIDs). Neglected infectious diseases (NIDs) comprise a diverse and understudied group of communicable viral, bacterial, parasitic, and fungal infections that cause substantial morbidity, mortali…</summary>
   </entry>
   <entry>
     <title>Strengthening Services to Prevent the Infectious Disease Consequences of Drug Use</title>
@@ -935,34 +965,5 @@
     <category term="Public health"/>
     <category term="Social and behavioral sciences"/>
     <summary>Indian Health Service | Estimated Application 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
-  </entry>
-  <entry>
-    <title>Suicide Prevention, Intervention, and Postvention</title>
-    <link href="https://www.grants.gov/search-results-detail/363496"/>
-    <id>urn:funding-finder:grants-gov:363496</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The primary purpose of this program is to reduce suicide among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven suicide prevention, intervention, and postvention efforts that promote c…</summary>
-  </entry>
-  <entry>
-    <title>Traumatic Brain Injury Model Systems Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/363970"/>
-    <id>urn:funding-finder:grants-gov:363970</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Administration for Community Living</name></author>
-    <category term="Neuroscience"/>
-    <summary>Administration for Community Living | Estimated Application 2027-04-01 | The TBI Model Systems Centers conduct research that contributes to the development of and access to evidence-based TBI rehabilitation. The TBIMS Centers must generate new knowledge that can be used to improve outcomes of individuals with TBI in one or more domains identified in NIDILRR's Long Range Plan: health and function, community living and participation, and employment. TBIMS Center grants m…</summary>
-  </entry>
-  <entry>
-    <title>Tribal Epidemiology Centers</title>
-    <link href="https://www.grants.gov/search-results-detail/363492"/>
-    <id>urn:funding-finder:grants-gov:363492</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Public health"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | Second cohort of TEC sites for any currently unserved Areas.</summary>
   </entry>
 </feed>

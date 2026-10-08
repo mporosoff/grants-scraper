@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/arts-and-culture.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Public Health Nursing</title>
@@ -175,6 +175,26 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>Centers for Disease Control and Prevention - ERA | Estimated Application 2027-01-26 | Background: Despite advances in technology and improvements in work environments, mining remains one of the most challenging and hazardous occupations in the United States. The industry continues to experience a fatality rate nearly three times higher than the national average for all industries, according to the U.S. Bureau of Labor Statistics (BLS). Public MSHA data show that in 2025, the U.S. m…</summary>
+  </entry>
+  <entry>
+    <title>National Digital Newspaper Program</title>
+    <link href="https://www.grants.gov/search-results-detail/364030"/>
+    <id>urn:funding-finder:grants-gov:364030</id>
+    <updated>2026-10-06T00:00:00Z</updated>
+    <author><name>National Endowment for the Humanities</name></author>
+    <category term="Arts and culture"/>
+    <summary>National Endowment for the Humanities | Application 2027-01-13 | The National Endowment for the Humanities (NEH) Division of Collections and Infrastructure is accepting applications for the National Digital Newspaper Program (NDNP). The purpose of this program is to create a national digital resource of historically significant newspapers published between 1690 and 1963, from all 56 states and U.S. jurisdictions. The Library of Congress (LOC) maintains this fre…</summary>
+  </entry>
+  <entry>
+    <title>Space Technology Research Institutes</title>
+    <link href="https://www.grants.gov/search-results-detail/364024"/>
+    <id>urn:funding-finder:grants-gov:364024</id>
+    <updated>2026-10-05T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2026-11-03 | verify prerequisite | The National Aeronautics and Space Administration (NASA) Headquarters has released the solicitation “Space Technology Research Institutes (STRI26),” as an appendix to the Research and Technology Mission Directorate (RTMD) umbrella NASA Research Announcement (NRA) titled "Space Technology Research, Development, Demonstration, and Infusion 2026 (SpaceTech REDDI 2026).”. The solicitation is available…</summary>
   </entry>
   <entry>
     <title>Advancing coastal flood protection through public-private partnerships, innovative insurance products, and improved sediment management.</title>
@@ -374,19 +394,6 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting four Clinical Trials Networks (CTNs) each comprised of a Leadership and Operations Center, Statistical and Data Management Center, and Laboratory Center (LC) working with Clinical Trials Units, to test prevention and treatment strategies and conduct implementation research designed to end t…</summary>
   </entry>
   <entry>
-    <title>Tribal Colleges Education Equity Grants Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363700"/>
-    <id>urn:funding-finder:grants-gov:363700</id>
-    <updated>2026-08-24T00:00:00Z</updated>
-    <author><name>National Institute of Food and Agriculture</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Arts and culture"/>
-    <category term="Education and workforce"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>National Institute of Food and Agriculture | Application 2026-10-07 | The TCEG program (assistance listing 10.221) is designed to help build Tribal education capacity in the food and agricultural sciences for Native Alaskan/American Indian students. This NOFO will begin a new four-year continuation funding cycle. The six legislatively mandated priorities are: • Curricula design and materials development.• Faculty development and teacher preparation.• Student experie…</summary>
-  </entry>
-  <entry>
     <title>Fiscal Year (FY) 2027 AmeriCorps Seniors RSVP Competition</title>
     <link href="https://www.grants.gov/search-results-detail/363482"/>
     <id>urn:funding-finder:grants-gov:363482</id>
@@ -427,37 +434,6 @@
     <category term="Arts and culture"/>
     <category term="Education and workforce"/>
     <summary>Bureau Of Educational and Cultural Affairs | Posted | The U.S. Department of State, Bureau of Educational and Cultural Affairs, Cultural Programs Division (ECA/PE/C/CU) seeks to advance international understanding of American values by exposing foreign audiences to innovative and compelling architectural designs that reflect U.S. foreign policy and foster international dialogue on shared global challenges.</summary>
-  </entry>
-  <entry>
-    <title>Kidney Precision Medicine Project Central Hub</title>
-    <link href="https://www.grants.gov/search-results-detail/359197"/>
-    <id>urn:funding-finder:grants-gov:359197</id>
-    <updated>2026-07-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-05 | The National Institute of Diabetes and Digestive and Kidney Disease (NIDDK), intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the continuation of the Kidney Precisions Medicine Project (KPMP). The Kidney Precision Medicine Project (KPMP) was started in FY2017 with the vision to safely and ethically collect and interrogate human kidney biopsy tissue to discover …</summary>
-  </entry>
-  <entry>
-    <title>Kidney Precision Medicine Project Tissue Interrogation Sites</title>
-    <link href="https://www.grants.gov/search-results-detail/359199"/>
-    <id>urn:funding-finder:grants-gov:359199</id>
-    <updated>2026-07-05T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-05 | The National Institute of Diabetes and Digestive and Kidney Disease (NIDDK)intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for the continuation of the Kidney Precisions Medicine Project (KPMP). The Kidney Precision Medicine Project (KPMP) was started in FY2017 with the vision to safely and ethically collect and interrogate human kidney biopsy tissue to discover no…</summary>
-  </entry>
-  <entry>
-    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359152"/>
-    <id>urn:funding-finder:grants-gov:359152</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Data science"/>
-    <category term="Education and workforce"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
   </entry>
   <entry>
     <title>NEA Arts and Artifacts Domestic Indemnity Program 1, FY2027 (12/26)</title>
@@ -505,17 +481,6 @@
     <category term="Biology and biotechnology"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Application 2026-10-30 | The Genomics Research to Elucidate the Genetics of Rare Diseases: innovation (GREGoRi) initiative seeks to accelerate a paradigm shift in rare disease diagnosis by reimagining the tools, molecular technologies and analytical approaches used to identify the causal gene(s) and/or variant(s) underlying rare genetic disorders. This Notice of Funding Opportunity is intended to stimulate the development…</summary>
-  </entry>
-  <entry>
-    <title>Systematic Testing of Radionuclides in Preclinical Experiments (STRIPE, RP1 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361447"/>
-    <id>urn:funding-finder:grants-gov:361447</id>
-    <updated>2026-06-15T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Biology and biotechnology"/>
-    <category term="Cancer"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-05 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to support research projects that employ state-of-the-art cancer biology approaches and preclinical model systems to investigate the biological effects of radiation emitted by radionuclides used in radiopharmaceutical therapy (RPT). The focus of this initiative is to advance mechanistic understanding of …</summary>
   </entry>
   <entry>
     <title>FY26 Bureau of Land Management Youth Conservation Corps - Bureau wide</title>
@@ -572,17 +537,7 @@
     <summary>U.S. Mission to Austria | Posted | This is an Annual Program Statement, outlining our funding priorities, the strategic themes we focus on, and the procedures for submitting requests for funding. Purpose of Small Grants: The Austrian-American Partnership Fund (AAPF) is organized to fund projects advancing collaboration and dialogue and expand cooperation between Austria and the United States. AAPF accepts applications for funding f…</summary>
   </entry>
   <entry>
-    <title>Centers without Walls for mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD)</title>
-    <link href="https://www.grants.gov/search-results-detail/361452"/>
-    <id>urn:funding-finder:grants-gov:361452</id>
-    <updated>2026-05-18T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Arts and culture"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-01 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting ambitious research projects to elucidate mechanisms of neurodegeneration in Alzheimer’s disease-related dementias (ADRD) organized as a “Center without Walls” consortium. NINDS Centers without Walls are collaborative research networks that bring together diverse expertise from different institutions to …</summary>
-  </entry>
-  <entry>
-    <title>Arctic Doctoral Dissertation Research Improvement Grants (Arctic DDRIG) Arctic Social Sciences, Arctic System Sciences, and Arctic Observing Network</title>
+    <title>Arctic Doctoral Dissertation Research Improvement Grants (Arctic DDRIG) Arctic Social Sciences, Arctic System Sciences, and Arctic Observing Network (DDRIG)</title>
     <link href="https://www.grants.gov/search-results-detail/361896"/>
     <id>urn:funding-finder:grants-gov:361896</id>
     <updated>2026-04-14T00:00:00Z</updated>
@@ -637,13 +592,62 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) invites applications for P50 Research Center Grants for Specialized Programs of Research Excellence (SPORE). This is a re-issuance of PAR-23-284. The program will fund P50 SPORE grants to support state-of-the-art investigator-initiated translational research that will contribute to improved prevention, early det…</summary>
   </entry>
   <entry>
-    <title>FY2026 ABPP - Battlefield Land Acquisition Grant</title>
-    <link href="https://www.grants.gov/search-results-detail/360378"/>
-    <id>urn:funding-finder:grants-gov:360378</id>
-    <updated>2025-08-28T00:00:00Z</updated>
-    <author><name>National Park Service</name></author>
+    <title>US Army Combat Capabilities Development Command Broad Agency Announcement</title>
+    <link href="https://www.grants.gov/search-results-detail/360012"/>
+    <id>urn:funding-finder:grants-gov:360012</id>
+    <updated>2025-07-14T00:00:00Z</updated>
+    <author><name>ACC APG - Natick</name></author>
     <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <summary>ACC APG - Natick | Application 2030-02-27 | The Soldier Center is seeking solutions in the following scientific and technical areas: Combat Feeding &amp; Equipment - Ration development, field feeding systems Soldier Protection &amp; Survivability - Headborne protection, modular armor, chemical/biological protection, nanotechnology Modeling &amp; Simulation - Soldier effectiveness, operational survivability Human Performance &amp; Biomechanics - Body-worn s…</summary>
+  </entry>
+  <entry>
+    <title>Support for Research Excellence (SuRE) Award (R16 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358829"/>
+    <id>urn:funding-finder:grants-gov:358829</id>
+    <updated>2025-06-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
     <category term="Environmental science"/>
-    <summary>National Park Service | Application 2026-09-30 | Historic battlefields and associated sites of armed conflict are powerful reminders of the shared heritage of all Americans. In an ongoing effort to extend the conservation of natural and cultural resources beyond our park boundaries, the National Park Service American Battlefield Protection Program (NPS ABPP) promotes the preservation and interpretation of these important places. NPS ABPP support…</summary>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions by funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE awards is to provide support for investigator-initiated research at resource-limited institutions by full-time faculty who …</summary>
+  </entry>
+  <entry>
+    <title>Support for Research Excellence First Independent Research (SuRE-First) Award (R16 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358875"/>
+    <id>urn:funding-finder:grants-gov:358875</id>
+    <updated>2025-06-13T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Agriculture and food"/>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Environmental science"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-05-28 | The SuRE program supports research capacity building at eligible higher education institutions through funding investigator-initiated biomedical research inbasic, social, clinical, behavioral, or translational science that falls in the mission areas of the NIH. The purpose of SuRE-First awards is to provide support for investigator-initiated research at resource-limited institutions by full-time f…</summary>
+  </entry>
+  <entry>
+    <title>NIGMS National and Regional Resources (R24 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358934"/>
+    <id>urn:funding-finder:grants-gov:358934</id>
+    <updated>2025-06-11T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2027-06-14 | This Notice of Funding Opportunity (NOFO) encourages applications for support of resources that will provide access to state-of-the-art equipment, technologies, research tools, materials, organisms, software, and/or services to a substantial regional (multi-state) or national user base. Only those resources with technical capabilities that fall within the NIGMS-supported program areas are eligible…</summary>
+  </entry>
+  <entry>
+    <title>Staff Research Program</title>
+    <link href="https://www.grants.gov/search-results-detail/359236"/>
+    <id>urn:funding-finder:grants-gov:359236</id>
+    <updated>2025-06-03T00:00:00Z</updated>
+    <author><name>Dept of the Army -- Materiel Command</name></author>
+    <category term="Arts and culture"/>
+    <category term="Education and workforce"/>
+    <category term="Materials science"/>
+    <summary>Dept of the Army -- Materiel Command | Application 2030-06-02 | The ARO is soliciting proposals for Staff Research Program opportunities. The purpose of the program is to enable ARO scientific staff to maintain and expand professional competence in support of fulfilling the ARO mission through the conduct of hands-on, basic research. The staff research will be performed collaboratively with institutions external to ARO. Staff research efforts will involve scie…</summary>
   </entry>
 </feed>
