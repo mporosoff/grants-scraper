@@ -18,6 +18,16 @@ class RetainedTeamRecovery(unittest.TestCase):
         cls.registry = fixture['registry']
         cls.candidates = fixture['candidates']
         cls.key = '344592:ab-0013'
+        parent_fixture = json.loads(Path('tests/fixtures/retained_team_recovery_parents.json').read_bytes())
+        if parent_fixture['provenance']['source_sha'] != fixture['provenance']['source_sha']:
+            raise AssertionError('Recovery source fixtures must share the reviewed snapshot')
+        cls.parents = parent_fixture['parents']
+
+    def setUp(self):
+        # Declared branches consult parent evidence in addition to frozen scopes.
+        # Keep historical positive cases independent of live catalog withdrawals.
+        parents = patch.object(teams, '_load_catalog', return_value=copy.deepcopy(self.parents))
+        parents.start(); self.addCleanup(parents.stop)
 
     def fixture(self):
         model = copy.deepcopy(self.model)
@@ -217,6 +227,45 @@ class RetainedTeamRecovery(unittest.TestCase):
                         self.assertEqual(row['source_fingerprint'], review['reviewed_source_fingerprint'])
                         self.assertNotIn(key, teams.invalidate_stale_sources(model, teams.source_fingerprints(model, candidates)))
                         self.assertEqual(row['recovery_proof']['validation_contract'], 'curated-source-and-profile-1')
+
+
+    def test_removed_closed_or_changed_parent_never_restores_historical_curated_team(self):
+        key = 'eere-exchange:DE-TA1-0003589'
+        for change in ('removed', 'closed', 'changed'):
+            with self.subTest(change=change):
+                model, registry, settings = copy.deepcopy(self.model), copy.deepcopy(self.registry), config()
+                model['opportunities'] = [row for row in model['opportunities'] if row['id'] == key]
+                row = model['opportunities'][0]
+                review = settings['targeted_team_recovery']['reviewed_source_changes'][key]
+                row['source_fingerprint'] = review['prior_source_fingerprint']
+                row['review_state'] = 'needs_revalidation'
+                parents = copy.deepcopy(self.parents)
+                if change == 'removed':
+                    parents = []
+                elif change == 'closed':
+                    parents[0]['status'] = 'closed'
+                else:
+                    parents[0]['description'] = (parents[0].get('description') or '') + ' A subsequent amendment changes the reviewed research scope.'
+                before = copy.deepcopy(model)
+                with patch.object(teams, '_load_catalog', return_value=parents), \
+                        patch.object(teams, 'load_sidecar', return_value={'records': {}}), \
+                        patch.object(maintenance, 'config', return_value=settings), \
+                        patch('requests.post', side_effect=AssertionError('Ineligible evidence needs no provider')) as provider:
+                    candidates = teams.scopes()
+                    fingerprints = teams.source_fingerprints(model, candidates)
+                    result = maintenance.restore_proven_teams(model, candidates, registry)
+                self.assertEqual(model, before)
+                self.assertEqual(result[0]['state'], 'pending')
+                self.assertEqual(result[0]['provider_requests'], 0)
+                self.assertNotEqual(fingerprints.get(key), review['reviewed_source_fingerprint'])
+                if change == 'changed':
+                    self.assertIn(key, fingerprints)
+                    self.assertEqual(result[0]['reason'], 'source_changed')
+                else:
+                    self.assertNotIn(key, fingerprints)
+                    self.assertEqual(candidates, [])
+                    self.assertEqual(result[0]['reason'], 'source_ineligible')
+                provider.assert_not_called()
 
 
 if __name__ == '__main__':

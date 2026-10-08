@@ -1,0 +1,266 @@
+{
+  "provenance": {
+    "source_sha": "9489bc7f44b36640f8edda50887acf5e60d39387",
+    "source_path": "data/opportunities.js",
+    "source_blob_sha256": "57863ad89061032dafa1dcb129d37addab0e52ea665e52bd7dfbf1a351e9e959",
+    "purpose": "Exact historical parent records for declared-branch fingerprint checks in retained_team_recovery.json. These test inputs do not establish current eligibility."
+  },
+  "parents": [
+    {
+      "opportunity_id": "eere-exchange:DE-TA1-0003589",
+      "opportunity_number": "DE-TA1-0003589",
+      "title": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+      "agency": "Advanced Materials and Manufacturing Technologies Office (AMMTO)",
+      "agency_authority": "source_listed",
+      "agency_code": "DOE",
+      "status": "posted",
+      "source": "DOE EERE Exchange",
+      "source_type": "Federal",
+      "detail_page": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+      "funding_opportunity_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+      "primary_document_url": null,
+      "primary_document_name": null,
+      "primary_document_source": null,
+      "primary_document_confidence": null,
+      "detail_enrichment_status": "not_applicable",
+      "posted_date": null,
+      "close_date": null,
+      "close_date_note": null,
+      "deadlines": [
+        {
+          "kind": "letter_of_intent",
+          "date": "2026-04-24",
+          "time": "5:00 PM",
+          "timezone": "ET",
+          "estimated": false,
+          "source": "Official notice (machine extracted)",
+          "source_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+          "confidence": "machine_extracted_needs_verification",
+          "evidence_id": "evidence-eere-exchange:DE-TA1-0003589-4540b9d2e9f3",
+          "required": null,
+          "subject": "submission",
+          "parser_version": "official-evidence-3"
+        },
+        {
+          "kind": "application",
+          "date": "2026-05-29",
+          "time": "5:00 PM",
+          "timezone": "ET",
+          "estimated": false,
+          "source": "Official notice (machine extracted)",
+          "source_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+          "confidence": "machine_extracted_needs_verification",
+          "evidence_id": "evidence-eere-exchange:DE-TA1-0003589-3c2654fa98e9",
+          "required": null,
+          "subject": "submission",
+          "parser_version": "official-evidence-3"
+        }
+      ],
+      "deadline_source": "DOE EERE Exchange listing",
+      "archive_date": null,
+      "status_verification_required": true,
+      "last_updated": null,
+      "estimated_award_date": null,
+      "estimated_project_start": null,
+      "fiscal_year": null,
+      "version": null,
+      "rolling": false,
+      "opportunity_category": null,
+      "funding_category_codes": [],
+      "funding_categories": [],
+      "funding_instrument_codes": [],
+      "funding_instruments": [],
+      "eligibility_codes": [],
+      "applicant_types": [],
+      "eligibility_text": null,
+      "disciplines": [],
+      "topic_areas": [
+        "Materials science",
+        "Manufacturing"
+      ],
+      "aln": [],
+      "award_floor": null,
+      "award_ceiling": null,
+      "total_program_funding": null,
+      "expected_number_of_awards": null,
+      "award_source": "DOE EERE Exchange listing",
+      "cost_share_required": null,
+      "contacts": [],
+      "has_preliminary_stage": true,
+      "preliminary_required": null,
+      "preliminary_stage_type": "letter_of_intent",
+      "limited_submission": false,
+      "limited_submission_source": "synopsis_heuristic",
+      "career_stage_signal": null,
+      "description": null,
+      "detail_enriched_at": null,
+      "api_revision": null,
+      "api_version": null,
+      "api_last_updated": null,
+      "attachment_count": 0,
+      "document_urls": [],
+      "history": null,
+      "actionability_status": "verify_status",
+      "document_evidence_status": "current",
+      "document_evidence": {
+        "schema_version": 1,
+        "document": {
+          "url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+          "name": null,
+          "source_kind": "agency_notice",
+          "content_type": "text/html; charset=utf-8",
+          "sha256": "e615c0bb51ebf0c2457b3a81299029787203b24d50b757d466972913db3a0b02",
+          "version": 1,
+          "first_seen_at": "2026-09-08T09:42:24.791290Z",
+          "last_seen_at": "2026-09-08T09:42:24.791290Z",
+          "changed_since_previous": false
+        },
+        "extraction": {
+          "content_kind": "html",
+          "method": "html",
+          "page_count": null,
+          "pages_read": null,
+          "pages_with_text": 7,
+          "structure_version": "notice-blocks-2",
+          "text_characters": 8759,
+          "truncated": false,
+          "warnings": [
+            "nested_table_structure"
+          ]
+        },
+        "facts": [
+          {
+            "id": "evidence-eere-exchange:DE-TA1-0003589-4540b9d2e9f3",
+            "type": "deadline",
+            "label": "Letter of intent deadline",
+            "value": "2026-04-24",
+            "display_value": "2026-04-24 · 5:00 PM ET",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "citation_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "document_name": null,
+              "sha256": "e615c0bb51ebf0c2457b3a81299029787203b24d50b757d466972913db3a0b02",
+              "page": null,
+              "section": "Submission Deadlines",
+              "location": "section “Submission Deadlines”",
+              "quote": "…ion Submission Deadline: 5/29/2026 5:00 PM ET 1B: Recovery and production from postconsumer scrap (with an emphasis on electronic waste and drivetrains) Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET 1C: Recovery and production from blended feedstocks including mine tailings, postindustrial scrap,…",
+              "extracted_at": "2026-09-08T09:42:24.791290Z",
+              "structural_reference": {
+                "block_id": "html-67",
+                "kind": "table_row",
+                "row": 0,
+                "table_id": "table-1",
+                "heading_path": [
+                  "DE-TA1-0003589: Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+                  "Documents",
+                  "Submission Deadlines"
+                ],
+                "source_position": [
+                  237,
+                  1
+                ]
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "submission",
+            "parser_version": "official-evidence-3",
+            "deadline_kind": "letter_of_intent",
+            "date": "2026-04-24",
+            "time": "5:00 PM",
+            "timezone": "ET",
+            "required": null
+          },
+          {
+            "id": "evidence-eere-exchange:DE-TA1-0003589-3c2654fa98e9",
+            "type": "deadline",
+            "label": "Full application deadline",
+            "value": "2026-05-29",
+            "display_value": "2026-05-29 · 5:00 PM ET",
+            "confidence": "machine_extracted_needs_verification",
+            "citation": {
+              "document_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "citation_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "document_name": null,
+              "sha256": "e615c0bb51ebf0c2457b3a81299029787203b24d50b757d466972913db3a0b02",
+              "page": null,
+              "section": "Submission Deadlines",
+              "location": "section “Submission Deadlines”",
+              "quote": "…from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET | Loading…",
+              "extracted_at": "2026-09-08T09:42:24.791290Z",
+              "structural_reference": {
+                "block_id": "html-67",
+                "kind": "table_row",
+                "row": 0,
+                "table_id": "table-1",
+                "heading_path": [
+                  "DE-TA1-0003589: Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+                  "Documents",
+                  "Submission Deadlines"
+                ],
+                "source_position": [
+                  237,
+                  1
+                ]
+              }
+            },
+            "fact_contract": "typed-notice-facts-1",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "submission",
+            "parser_version": "official-evidence-3",
+            "deadline_kind": "application",
+            "date": "2026-05-29",
+            "time": "5:00 PM",
+            "timezone": "ET",
+            "required": null
+          }
+        ],
+        "review_queue": [
+          {
+            "type": "deadline_evidence_withheld",
+            "status": "needs_review",
+            "label": "Verify official submission dates; ambiguous narrative information was withheld",
+            "message": "Only locally owned submission dates and components are published."
+          }
+        ],
+        "dependency_version": 2,
+        "source_fields": {
+          "has_preliminary_stage": {
+            "present": true,
+            "value": false
+          },
+          "preliminary_stage_type": {
+            "present": true,
+            "value": null
+          },
+          "topic_areas": {
+            "present": true,
+            "value": []
+          }
+        }
+      },
+      "document_search_text": "Letter of intent deadline 2026-04-24 · 5:00 PM ET …ion Submission Deadline: 5/29/2026 5:00 PM ET 1B: Recovery and production from postconsumer scrap (with an emphasis on electronic waste and drivetrains) Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET 1C: Recovery and production from blended feedstocks including mine tailings, postindustrial scrap,… Full application deadline 2026-05-29 · 5:00 PM ET …from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET | Loading… rare earth elements critical minerals microelectronics",
+      "close_date_kind": "submission_window_end",
+      "source_facet": null,
+      "source_first_seen_date": "2026-09-07",
+      "document_evidence_checked_at": "2026-09-08T09:42:24.791290Z",
+      "submission_requirements": [],
+      "document_status_signals": [],
+      "document_program_areas": [
+        "rare earth elements",
+        "critical minerals",
+        "microelectronics"
+      ],
+      "next_submission": {
+        "version": 2,
+        "as_of": "2026-09-08",
+        "application_class": "new",
+        "date": null,
+        "event": null,
+        "access": "closed",
+        "prerequisites": []
+      }
+    }
+  ]
+}

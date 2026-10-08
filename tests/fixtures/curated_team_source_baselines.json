@@ -1,0 +1,671 @@
+{
+  "provenance": {
+    "source_sha": "a6b82f6a872ea6aeb3e3b2678574d6ea6415f5f3",
+    "as_of": "2026-10-08",
+    "purpose": "Reviewed historical curated fingerprint inputs. Current catalog withdrawal must not rewrite these baselines.",
+    "input_sha256": {
+      "config\\opportunity_team_model.json": "8b16b66ae1ed8db8b53b444cce440bc3a49072649b5526347a72ccb1ae6e5839",
+      "data\\opportunities.js": "59098eef1fb9ef31470e821b072f9015f8d02e7c9e3d5387407fdafdd5a29ef9",
+      "data\\subtopics.js": "ede79953ed7bb04c95e92774e4b6c475f251098aa0de8c2bc56800cad65968e4"
+    }
+  },
+  "opportunities": [
+    {
+      "id": "332894:superconducting-qubits",
+      "parent_id": "332894",
+      "record_type": "declared_branch",
+      "scope_label": "Fundamental studies of superconducting qubits",
+      "objective": "Improve superconducting-qubit hardware through materials, measurement, and classical control.",
+      "source_url": "https://files.simpler.grants.gov/opportunities/9feba724-7117-42d6-b42c-2a649f4ef2ec/attachments/b5f76cf3-171a-4ac5-bd2e-bf9134aedf99/W911NF21S0009_LPS_Qubit_Collaboratory_Special_Notice.pdf",
+      "source_fingerprint": "db30a27db65962943f15c173a4059e1de5cc77171257d90949259d548a41850f",
+      "review_state": "needs_revalidation"
+    },
+    {
+      "id": "344592:ab-0019",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Optoelectronic materials, devices, and integrated components",
+      "objective": "Create semiconductor sources and integrated optical components from UV through infrared.",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967",
+      "source_fingerprint": "5dfbd8eb2aec670cab2622d598fdd7d54bf1efa82959b599b9533c5c03bd85b4"
+    },
+    {
+      "id": "344592:ab-0079",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "scope_label": "Multimodal synthetic data for Army machine learning",
+      "objective": "Generate and validate mission-relevant synthetic multimodal data for recognition and decision models.",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967",
+      "source_fingerprint": "23c7433b678c6501ee97c9de0f01d5f7ea744752bbd6ec0da872d4b8921e6a47"
+    },
+    {
+      "id": "358021",
+      "parent_id": "358021",
+      "record_type": "specific_parent",
+      "scope_label": "Living-human high-resolution inner-ear imaging",
+      "objective": "Develop and quantitatively validate non-invasive imaging of living inner-ear structures in awake patients.",
+      "source_url": "https://grants.nih.gov/grants/guide/rfa-files/RFA-DC-25-003.html",
+      "source_fingerprint": "ff0caa6162d37567f4e3456878ba496e5dcd1d3bdb89df13a816fdb5d0d461e0",
+      "review_state": "needs_revalidation"
+    },
+    {
+      "id": "361050",
+      "parent_id": "361050",
+      "record_type": "specific_parent",
+      "scope_label": "Structural biology of HIV and infectious-disease complexes",
+      "objective": "Resolve and exploit biomolecular structures that enable new infectious-disease medicines and tests.",
+      "source_url": "https://www.grants.gov/search-results-detail/361050",
+      "source_fingerprint": "9875af8e2a67a32d13ae3e63c19a198661b90c92fa5e73d3a0532a9434ffd20b"
+    },
+    {
+      "id": "361205",
+      "parent_id": "361205",
+      "record_type": "specific_parent",
+      "scope_label": "Brain-behavior quantification and synchronization",
+      "objective": "Synchronize neural activity, directly measured behavior, environmental context, and computational neurobehavior models.",
+      "source_url": "https://www.grants.gov/search-results-detail/361205",
+      "source_fingerprint": "330a7ae72c5492a6b22fbaffcf0c48e94ed62c6d5360431ca5c2a622dbcff485"
+    },
+    {
+      "id": "361526:g-12",
+      "parent_id": "361526",
+      "record_type": "publishable_child",
+      "scope_label": "Electrochemical energy-conversion catalyst discovery and scale-up",
+      "objective": "Discover, characterize, and scale electrochemical catalysts for energy conversion.",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350589",
+      "source_fingerprint": "73a1123aaf0aa328c0cb1b235e126d8f6f3f9a35cbcb800119a9ff727276c6df"
+    },
+    {
+      "id": "363375",
+      "parent_id": "363375",
+      "record_type": "specific_parent",
+      "scope_label": "Desalination and water-purification research",
+      "objective": "Reduce the energy, cost, and adoption barriers of treating impaired water at laboratory and pilot scale.",
+      "source_url": "https://grants.gov/grantsws/rest/opportunity/att/download/354243",
+      "source_fingerprint": "db0a6a87c9dab32e23a4cb87a2794dc531ae4e351d0a25d2fe75874b4141872f",
+      "review_state": "needs_revalidation"
+    },
+    {
+      "id": "363489",
+      "parent_id": "363489",
+      "record_type": "specific_parent",
+      "scope_label": "Nonlinear inertial sensing and adaptive control for tactical navigation",
+      "objective": "Co-design novel inertial sensor physics with adaptive control for GPS-denied navigation.",
+      "source_url": "https://sam.gov/opp/966ffe20bcc3435cb3d0027c1ac08416/view",
+      "source_fingerprint": "680f970dca797d2d0aad6e9dc5e1705090ac7fab6124f99cc73e0dc33da18cf0",
+      "review_state": "needs_revalidation"
+    },
+    {
+      "id": "eere-exchange:DE-TA1-0003589",
+      "parent_id": "eere-exchange:DE-TA1-0003589",
+      "record_type": "declared_branch",
+      "scope_label": "Critical-material recovery from manufacturing and postconsumer scrap",
+      "objective": "Prototype recovery and production processes for critical materials and rare-earth elements from scrap feedstocks.",
+      "source_url": "https://www.energy.gov/cmei/ammto/critical-minerals-and-materials-accelerator-0",
+      "source_fingerprint": "ca89d6b1e4c72d741f3b0bd3b5ed4eefd36bbdf036989634fa3aa674dc4f6e5c"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "361205",
+      "parent_id": "361205",
+      "record_type": "specific_parent",
+      "text": "BRAIN Initiative: Brain-Behavior Quantification and Synchronization – Transformative Research on Behavior at the Organismal Level The Brain Research Through Advancing Innovative Neurotechnologies® (BRAIN) Initiative, a collaboration of Federal and non-Federal partners led by NIH, seeks to accelerate development and dissemination of new neurotechnologies, transdisciplinary approaches, and scientific databases to study brain function with unprecedented resolution and scope. The BRAIN Initiative’s Brain Behavior Quantification and Synchronization (BBQS) Program furthers this mission by supporting the development of tools for high-resolution, multimodal tracking of complex behaviors synchronously with neural activity and advancement of theoretical frameworks and computational models for understanding neurobehavioral function in real-world settings. This BRAIN Initiative-funded BBQS opportunity will support transdisciplinary research involving human subjects and/or other species aiming to advance methods to capture and model complex behavior at the organismal level in dynamic environments. Required objectives include advancing sensing technologies and approaches for minimally intrusive, high-resolution, synchronous measurement of multiple biobehavioral functions (e.g. movements, peripheral physiology and neural activity) with simultaneous, multi-level tracking of environmental variables; and developing analytic and computational approaches that will lead to new, testable models of neurobehavioral function as a complex dynamic system shaped by the organism’s environment. Participation in consortium activities will be required. This forecast is authorized under 42 U.S.C. 241&284 and 114 U.S.C. 255.",
+      "scope_label": "BRAIN Initiative: Brain-Behavior Quantification and Synchronization – Transformative Research on Behavior at the Organismal Level",
+      "source_url": "https://www.grants.gov/search-results-detail/361205",
+      "catalog_title": "BRAIN Initiative: Brain-Behavior Quantification and Synchronization – Transformative Research on Behavior at the Organismal Level",
+      "agency": "National Institutes of Health",
+      "opportunity_number": "RFA-DA-27-011",
+      "source_fingerprint": "330a7ae72c5492a6b22fbaffcf0c48e94ed62c6d5360431ca5c2a622dbcff485"
+    },
+    {
+      "id": "361526:g-12",
+      "parent_id": "361526",
+      "record_type": "publishable_child",
+      "text": "Electrochemical Energy Conversion Catalyst Discovery and Scale up Challenge Area: Designing Materials with Predictable Functionality. Focus Area: Electrochemical Energy Conversion Catalyst Discovery and Scale up.",
+      "scope_label": "Electrochemical Energy Conversion Catalyst Discovery and Scale up",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350589",
+      "catalog_title": "The Genesis Mission: Transforming Science and Energy with AI",
+      "agency": "Office of Science",
+      "opportunity_number": "DE-FOA-0003612",
+      "source_fingerprint": "73a1123aaf0aa328c0cb1b235e126d8f6f3f9a35cbcb800119a9ff727276c6df"
+    },
+    {
+      "id": "361050",
+      "parent_id": "361050",
+      "record_type": "specific_parent",
+      "text": "Centers for Structural Biology of HIV and other Infectious Diseases The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting the Centers for Structural Biology of HIV and other Infectious Diseases. This solicitation will support multidisciplinary groups of scientists to determine the 3-dimensional structures of molecules and molecular complexes involved in priority infectious diseases. The effort focuses on exploring biomolecular complexes that can be targeted to make new medicines and tests to prevent or treat infections and improve human health. The centers will drive cutting-edge research and development of structural biology technologies, including high-resolution 3D structural analyses, computational molecular dynamics, functional and mechanistic characterization at the molecular and cellular level, visualization at the atomic level of molecular complexes in cells and tissues, and advanced structure-guided design of molecules to combat infectious diseases. The centers will maximize use of common resources, establish broad collaborations, and mentor future structural biology researchers. Grant authorities that allow NIAID to forecast this opportunity are as follows: Sections 301 and 405 of the Public Health Service Act as amended (42 USC 241 and 284) and under Federal Regulations 42 CFR Part 52 and 2 CFR Part 200.",
+      "scope_label": "Centers for Structural Biology of HIV and other Infectious Diseases",
+      "source_url": "https://www.grants.gov/search-results-detail/361050",
+      "catalog_title": "Centers for Structural Biology of HIV and other Infectious Diseases",
+      "agency": "National Institutes of Health",
+      "opportunity_number": "RFA-AI-27-009",
+      "source_fingerprint": "9875af8e2a67a32d13ae3e63c19a198661b90c92fa5e73d3a0532a9434ffd20b"
+    },
+    {
+      "id": "344592:ab-0019",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "text": "Optoelectronics Research in this subarea includes novel semiconductor structures, processing techniques, and integrated optical components. The generation, guidance and control of UV through infrared signals in semiconductor, dielectric, and metallic materials are of interest. The Army has semiconductor laser research opportunities based on low dimensional semiconductor structures (quantum dots, wells, wires, etc.) operating in the eye-safer (>1.4), 3-5, and 8-12 microns regions for various applications, such as LIDAR, infrared countermeasures, and free space/integrated data links.",
+      "scope_label": "Optoelectronics",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967",
+      "catalog_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "agency": "Dept of the Army -- Materiel Command",
+      "opportunity_number": "W911NF-23-S-0001",
+      "source_fingerprint": "5dfbd8eb2aec670cab2622d598fdd7d54bf1efa82959b599b9533c5c03bd85b4"
+    },
+    {
+      "id": "344592:ab-0079",
+      "parent_id": "344592",
+      "record_type": "publishable_child",
+      "text": "Multimodal Synthetic Data for Machine Learning The use of artificial intelligence solutions for Army field applications will rely heavily on machine learning (ML) algorithms. Current ML algorithms need large amounts of mission-relevant training data to enable them to perform well in tasks such as object and activity recognition, and high-level decision making. Battlefield data sources can be heterogeneous, encompassing multiple sensing modalities. Present open-source data sets for training ML approaches provide inadequate representation of scenes and situations of interest to the Army, in both content and sensing modalities.",
+      "scope_label": "Multimodal Synthetic Data for Machine Learning",
+      "source_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/345967",
+      "catalog_title": "DEVCOM ARMY RESEARCH LABORATORY BROAD AGENCY ANNOUNCEMENT FOR FOUNDATIONAL RESEARCH",
+      "agency": "Dept of the Army -- Materiel Command",
+      "opportunity_number": "W911NF-23-S-0001",
+      "source_fingerprint": "23c7433b678c6501ee97c9de0f01d5f7ea744752bbd6ec0da872d4b8921e6a47"
+    },
+    {
+      "id": "eere-exchange:DE-TA1-0003589",
+      "parent_id": "eere-exchange:DE-TA1-0003589",
+      "record_type": "specific_parent",
+      "text": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1 Letter of intent deadline 2026-04-24 · 5:00 PM ET …ion Submission Deadline: 5/29/2026 5:00 PM ET 1B: Recovery and production from postconsumer scrap (with an emphasis on electronic waste and drivetrains) Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET 1C: Recovery and production from blended feedstocks including mine tailings, postindustrial scrap,… Full application deadline 2026-05-29 · 5:00 PM ET …from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET | Loading… rare earth elements critical minerals microelectronics",
+      "scope_label": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+      "source_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+      "catalog_title": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+      "agency": "Advanced Materials and Manufacturing Technologies Office (AMMTO)",
+      "opportunity_number": "DE-TA1-0003589",
+      "source_document_hash": "e615c0bb51ebf0c2457b3a81299029787203b24d50b757d466972913db3a0b02",
+      "source_fingerprint": "eb8a01e3247b361bd60c7f4b1d4d5289032ddc5af192a2c66cb4f72f3bb2aa2d"
+    }
+  ],
+  "parents": [
+    {
+      "opportunity_id": "332894",
+      "opportunity_number": "W911NF21S0009",
+      "title": "LPS Qubit Collaboratory (LQC)",
+      "agency": "Dept of the Army -- Materiel Command",
+      "agency_code": "DOD-AMC",
+      "status": "posted",
+      "source": "Grants.gov",
+      "source_type": "Federal",
+      "detail_page": "https://www.grants.gov/search-results-detail/332894",
+      "funding_opportunity_url": "https://arl.devcom.army.mil/collaborate-with-us/",
+      "primary_document_url": "https://grants.gov/grantsws/rest/opportunity/att/download/350603",
+      "primary_document_name": "LQC BAA W911NF-21-S-0009-3.pdf",
+      "primary_document_source": "Grants.gov attachment",
+      "primary_document_confidence": "high",
+      "detail_enrichment_status": "current",
+      "posted_date": "2021-04-16",
+      "close_date": "2027-04-30",
+      "close_date_note": null,
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2027-04-30",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/332894",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-08-03T13:20:57.268810Z"
+        }
+      ],
+      "deadline_source": "Grants.gov XML extract",
+      "archive_date": "2027-05-30",
+      "status_verification_required": false,
+      "last_updated": "2026-03-18",
+      "estimated_award_date": null,
+      "estimated_project_start": null,
+      "fiscal_year": null,
+      "version": "Synopsis 11",
+      "rolling": false,
+      "opportunity_category": "Discretionary",
+      "funding_category_codes": [
+        "ST"
+      ],
+      "funding_categories": [
+        "Science and Technology and other Research and Development"
+      ],
+      "funding_instrument_codes": [
+        "CA",
+        "G",
+        "PC"
+      ],
+      "funding_instruments": [
+        "Cooperative Agreement",
+        "Grant",
+        "Procurement Contract"
+      ],
+      "eligibility_codes": [
+        "05",
+        "06",
+        "12",
+        "13",
+        "20",
+        "21",
+        "22",
+        "23"
+      ],
+      "applicant_types": [
+        "Independent school districts",
+        "Public and state institutions of higher education",
+        "Nonprofits with 501(c)(3) status",
+        "Nonprofits without 501(c)(3) status",
+        "Private institutions of higher education",
+        "Individuals",
+        "For-profit organizations other than small businesses",
+        "Small businesses"
+      ],
+      "eligibility_text": null,
+      "disciplines": [
+        "Engineering and Physical Sciences"
+      ],
+      "topic_areas": [
+        "Education and workforce",
+        "Quantum science",
+        "Technology development",
+        "Transportation"
+      ],
+      "aln": [
+        "12.431"
+      ],
+      "award_floor": null,
+      "award_ceiling": null,
+      "total_program_funding": null,
+      "expected_number_of_awards": null,
+      "award_source": "Grants.gov XML extract",
+      "cost_share_required": false,
+      "contacts": [
+        {
+          "name": "Andrew Day\nGrants/Agreements Officer",
+          "email": "usarmy.rtp.devcom-arl.mesg.qcbox@army.mil",
+          "phone": "919-549-4267",
+          "role": "Agency contact",
+          "source_url": "https://www.grants.gov/search-results-detail/332894"
+        }
+      ],
+      "has_preliminary_stage": false,
+      "preliminary_required": null,
+      "preliminary_stage_type": null,
+      "limited_submission": false,
+      "limited_submission_source": "synopsis_heuristic",
+      "career_stage_signal": "Postdoctoral",
+      "description": "The U.S. Army Research Office (ARO) in partnership with NSA’s Laboratory for Physical Science (LPS) is soliciting Incubator, Collaboration, and Fellowship research proposals for participation in the LPS Qubit Collaboratory (LQC). The mission of the LQC can be captured in three broad goals: 1) pursue disruptive fundamental research and enabling technologies with a focus on qubit development for quantum computing and other applications (such as sensing); 2) grow deep, collaborative partnerships to tackle the most difficult and relevant long-term problems in quantum information science and technology; and 3) build a quantum workforce of tomorrow through research experiences in government at LPS and at LQC partners. The LQC will offer a mechanism for collaborative research between LPS and academia, industry, FFRDCs, and Government Laboratories to advance foundational and transformative research on challenging problems that have hindered progress in quantum information processing and associated technologies. The goal of this BAA is to seek proposals that bring together expertise from the public and private sectors and their respective research infrastructures to advance solutions that may be best approached as a collaborative team. A Collaboratory is “a center without walls, in which the nation’s researchers can perform their research without regard to physical location, interacting with colleagues, accessing instrumentation, sharing data and computational resources, [and] accessing information in digital libraries. This BAA introduces LQC Research Thrusts (A.1.1) which are the technical areas of interest—which will be updated periodically—where partners of the LQC will pursue joint research with LPS through Incubator (A.1.2) and Collaboration (A.1.3) collaborative agreements. The LQC BAA also fulfills the Government’s overarching interest--through the proposed research and on-site research experiences--in creating and training a workforce in quantum science and technology, generating pathways of solutions that feed technology development, establishing partnerships, and creating transition opportunities. In further support of training through research, Section A.1.4 calls for Quantum Computing Research (QuaCR) Graduate and Postdoctoral Fellowships for US citizens working in areas of interest. Substantial progress on solving the most difficult and long-term Quantum Information Science & Technology (QIST) research problems that unleash further rapid progress in the field will constitute LQC success. Examples of such research problems include (but are not limited to): limits of performance due to device design, material selection, and/or control, the exploration of alternative qubit physics (e.g., different approaches to qubit encoding or types of gates) and lowering of barriers to such approaches, advances in materials that improve qubit gate fidelity, reducing the overhead of classical components in quantum information technology and optimizing classical performance, and the exploration of applications of quantum technologies to new domains. Three categories of proposals are sought for this BAA:1. Incubator opportunities seek partnership proposals from single investigators and small research groups, including teaching colleges, who may have unique skillsets to contribute toward the pursuit of the research thrusts presented in A.1.1. Incubator proposals may also be the development of concepts into a detailed technical research approach to advance solution of problems of high interest to quantum information science research. Incubator proposals would avail themselves of the collaboration opportunities with LPS research staff and infrastructure made available at the Laboratory for Physical Sciences (LPS) to lay the groundwork for concepts that may be suitable for a Collaboratory proposal or responses to other DoD quantum information science research opportunities.2. Collaboratory proposals seek research proposals that bring together a strong significant collaboration--researchers from academia, industry, FFRDCs, and/or Government Laboratories--to pursue long-term projects focused on fundamental problems of interest to qubit development and/or associated science and technology. These collaborative groups will propose to work together in a focused manner for a period of time expected to be one to three years in order to demonstrate a proof-of-concept experiment and/or theory exploration to determine the feasibility of their creative idea.3. QuaCR Research Fellowship proposals seek to support talented U.S. citizen graduate students and postdoctoral researchers in the field of quantum information processing (primary interest) and quantum sensing (secondary interest). Applicants with a background from either within or outside QIS are encouraged. The proposed research areas are described in this BAA and must enhance active Quantum Information Science research efforts being supported by the Army Research Office and/or LPS. Research fellows are encouraged to complete an LPS Internship during their graduate career or visit during their postdoctoral fellowship. Funding Opportunity Title: LPS Qubit Collaboratory Special Research Topics Announcement: W911NF21S0009-SPECIALNOTICE-1The U.S. Army Combat Capabilities Development Command (DEVCOM), Army Research Laboratory (ARL)-Army Research Office (ARO) is looking for proposed research and development solutions under the Broad Agency Announcement (BAA) W911NF21S0009-2 for Basic and Applied Scientific Research in Quantum Computing. The title for this Special Notice is “LPS Qubit Collaboratory Special Topics.” Upon receipt, compliant proposals will be reviewed through a technical and programmatic process in accordance with the evaluation criteria referenced in the W911NF21S0009-2 LQC BAA to determine which proposal may be awarded Grant, Cooperative Agreement, or Procurement Contract under this topic.",
+      "source_facet": "Grants.gov",
+      "detail_enriched_at": "2026-08-03T13:20:57.268810Z",
+      "api_revision": 5,
+      "api_version": "11",
+      "api_last_updated": "2026-03-18",
+      "attachment_count": 5,
+      "document_urls": [],
+      "history": {
+        "synopsis_count": 5,
+        "forecast_count": 0,
+        "modified_field_count": 7,
+        "change_comment_count": 1
+      },
+      "actionability_status": "current_by_structured_date",
+      "document_evidence_status": "current",
+      "document_evidence_checked_at": "2026-08-24T11:07:51.132870Z",
+      "document_evidence": {
+        "schema_version": 1,
+        "document": {
+          "changed_since_previous": false,
+          "content_type": "application/pdf",
+          "first_seen_at": "2026-07-26T20:05:30.061543Z",
+          "last_seen_at": "2026-08-24T11:07:51.132870Z",
+          "name": "LQC BAA W911NF-21-S-0009-3.pdf",
+          "sha256": "30a153acbe96aa4c8a586903507fee8f1d007e6a0f625c0c9859b0d225802913",
+          "source_kind": "primary_notice",
+          "url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350603",
+          "version": 1
+        },
+        "extraction": {
+          "content_kind": "pdf",
+          "method": "pypdf",
+          "page_count": 55,
+          "pages_read": 55,
+          "pages_with_text": 55,
+          "text_characters": 132844,
+          "truncated": false
+        },
+        "facts": [
+          {
+            "citation": {
+              "citation_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350603#page=41",
+              "document_name": "LQC BAA W911NF-21-S-0009-3.pdf",
+              "document_url": "https://apply07.grants.gov:443/grantsws/rest/opportunity/att/download/350603",
+              "extracted_at": "2026-07-26T20:05:30.061543Z",
+              "location": "page 41",
+              "page": 41,
+              "quote": "…As part of its submission, the contractor will also provide the estimated total cost (if any) incurred to comply with this reporting requirement. Reporting period will be the period of performance not to exceed 12 months ending 30 September of each government fiscal year and must be reported by 31 October of each calendar year. Contractors may use a direct…",
+              "section": null,
+              "sha256": "30a153acbe96aa4c8a586903507fee8f1d007e6a0f625c0c9859b0d225802913"
+            },
+            "confidence": "machine_extracted_needs_verification",
+            "display_value": "12 months",
+            "fact_contract": "typed-notice-facts-1",
+            "id": "evidence-332894-ce497f6cff6e",
+            "interpretation_basis": "limited_cached_quote",
+            "label": "Project duration",
+            "parser_version": "official-evidence-3",
+            "source_authority": "machine_extracted_official_document",
+            "subject": "award_project",
+            "type": "project_duration",
+            "value": {
+              "amount": 12,
+              "unit": "months"
+            }
+          }
+        ],
+        "review_queue": [
+          {
+            "label": "Verify current official notice details",
+            "message": "Some cached interpretations need the original source structure; retained excerpts do not establish complete coverage.",
+            "status": "needs_review",
+            "type": "parser_revalidation_pending"
+          },
+          {
+            "label": "Verify current official notice details",
+            "message": "Some cached interpretations need the original source structure; retained excerpts do not establish complete coverage.",
+            "status": "needs_review",
+            "type": "parser_revalidation_pending"
+          }
+        ]
+      },
+      "submission_requirements": [],
+      "document_status_signals": [],
+      "document_search_text": "Project duration 12 months …As part of its submission, the contractor will also provide the estimated total cost (if any) incurred to comply with this reporting requirement. Reporting period will be the period of performance not to exceed 12 months ending 30 September of each government fiscal year and must be reported by 31 October of each calendar year. Contractors may use a direct…",
+      "next_submission": {
+        "version": 2,
+        "as_of": "2026-09-30",
+        "application_class": "new",
+        "date": "2027-04-30",
+        "event": {
+          "kind": "application",
+          "date": "2027-04-30",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/332894",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-08-03T13:20:57.268810Z"
+        },
+        "access": "open",
+        "prerequisites": []
+      }
+    },
+    {
+      "opportunity_id": "eere-exchange:DE-TA1-0003589",
+      "opportunity_number": "DE-TA1-0003589",
+      "title": "Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+      "agency": "Advanced Materials and Manufacturing Technologies Office (AMMTO)",
+      "agency_authority": "source_listed",
+      "agency_code": "DOE",
+      "status": "posted",
+      "source": "DOE EERE Exchange",
+      "source_type": "Federal",
+      "detail_page": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+      "funding_opportunity_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+      "primary_document_url": null,
+      "primary_document_name": null,
+      "primary_document_source": null,
+      "primary_document_confidence": null,
+      "detail_enrichment_status": "not_applicable",
+      "posted_date": null,
+      "close_date": null,
+      "close_date_note": null,
+      "deadlines": [
+        {
+          "kind": "letter_of_intent",
+          "date": "2026-04-24",
+          "time": "5:00 PM",
+          "timezone": "ET",
+          "estimated": false,
+          "source": "Official notice (machine extracted)",
+          "source_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+          "confidence": "machine_extracted_needs_verification",
+          "evidence_id": "evidence-eere-exchange:DE-TA1-0003589-4540b9d2e9f3",
+          "required": null,
+          "subject": "submission",
+          "parser_version": "official-evidence-3"
+        },
+        {
+          "kind": "application",
+          "date": "2026-05-29",
+          "time": "5:00 PM",
+          "timezone": "ET",
+          "estimated": false,
+          "source": "Official notice (machine extracted)",
+          "source_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+          "confidence": "machine_extracted_needs_verification",
+          "evidence_id": "evidence-eere-exchange:DE-TA1-0003589-3c2654fa98e9",
+          "required": null,
+          "subject": "submission",
+          "parser_version": "official-evidence-3"
+        }
+      ],
+      "deadline_source": "DOE EERE Exchange listing",
+      "archive_date": null,
+      "status_verification_required": true,
+      "last_updated": null,
+      "estimated_award_date": null,
+      "estimated_project_start": null,
+      "fiscal_year": null,
+      "version": null,
+      "rolling": false,
+      "opportunity_category": null,
+      "funding_category_codes": [],
+      "funding_categories": [],
+      "funding_instrument_codes": [],
+      "funding_instruments": [],
+      "eligibility_codes": [],
+      "applicant_types": [],
+      "eligibility_text": null,
+      "disciplines": [],
+      "topic_areas": [
+        "Materials science",
+        "Manufacturing"
+      ],
+      "aln": [],
+      "award_floor": null,
+      "award_ceiling": null,
+      "total_program_funding": null,
+      "expected_number_of_awards": null,
+      "award_source": "DOE EERE Exchange listing",
+      "cost_share_required": null,
+      "contacts": [],
+      "has_preliminary_stage": true,
+      "preliminary_required": null,
+      "preliminary_stage_type": "letter_of_intent",
+      "limited_submission": false,
+      "limited_submission_source": "synopsis_heuristic",
+      "career_stage_signal": null,
+      "description": null,
+      "detail_enriched_at": null,
+      "api_revision": null,
+      "api_version": null,
+      "api_last_updated": null,
+      "attachment_count": 0,
+      "document_urls": [],
+      "history": null,
+      "actionability_status": "verify_status",
+      "document_evidence_status": "current",
+      "document_evidence": {
+        "schema_version": 1,
+        "document": {
+          "changed_since_previous": false,
+          "content_type": "text/html; charset=utf-8",
+          "first_seen_at": "2026-09-08T09:42:24.791290Z",
+          "last_seen_at": "2026-09-08T09:42:24.791290Z",
+          "name": null,
+          "sha256": "e615c0bb51ebf0c2457b3a81299029787203b24d50b757d466972913db3a0b02",
+          "source_kind": "agency_notice",
+          "url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+          "version": 1
+        },
+        "extraction": {
+          "content_kind": "html",
+          "method": "html",
+          "page_count": null,
+          "pages_read": null,
+          "pages_with_text": 7,
+          "structure_version": "notice-blocks-2",
+          "text_characters": 8759,
+          "truncated": false,
+          "warnings": [
+            "nested_table_structure"
+          ]
+        },
+        "facts": [
+          {
+            "citation": {
+              "citation_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "document_name": null,
+              "document_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "extracted_at": "2026-09-08T09:42:24.791290Z",
+              "location": "section “Submission Deadlines”",
+              "page": null,
+              "quote": "…ion Submission Deadline: 5/29/2026 5:00 PM ET 1B: Recovery and production from postconsumer scrap (with an emphasis on electronic waste and drivetrains) Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET 1C: Recovery and production from blended feedstocks including mine tailings, postindustrial scrap,…",
+              "section": "Submission Deadlines",
+              "sha256": "e615c0bb51ebf0c2457b3a81299029787203b24d50b757d466972913db3a0b02",
+              "structural_reference": {
+                "block_id": "html-67",
+                "heading_path": [
+                  "DE-TA1-0003589: Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+                  "Documents",
+                  "Submission Deadlines"
+                ],
+                "kind": "table_row",
+                "row": 0,
+                "source_position": [
+                  237,
+                  1
+                ],
+                "table_id": "table-1"
+              }
+            },
+            "confidence": "machine_extracted_needs_verification",
+            "date": "2026-04-24",
+            "deadline_kind": "letter_of_intent",
+            "display_value": "2026-04-24 · 5:00 PM ET",
+            "fact_contract": "typed-notice-facts-1",
+            "id": "evidence-eere-exchange:DE-TA1-0003589-4540b9d2e9f3",
+            "interpretation_basis": "limited_cached_quote",
+            "label": "Letter of intent deadline",
+            "parser_version": "official-evidence-3",
+            "required": null,
+            "source_authority": "machine_extracted_official_document",
+            "subject": "submission",
+            "time": "5:00 PM",
+            "timezone": "ET",
+            "type": "deadline",
+            "value": "2026-04-24"
+          },
+          {
+            "citation": {
+              "citation_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "document_name": null,
+              "document_url": "https://eere-exchange.energy.gov/#FoaIdb2296432-4f64-4dd7-b0e3-730ef4584226",
+              "extracted_at": "2026-09-08T09:42:24.791290Z",
+              "location": "section “Submission Deadlines”",
+              "page": null,
+              "quote": "…from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET | Loading…",
+              "section": "Submission Deadlines",
+              "sha256": "e615c0bb51ebf0c2457b3a81299029787203b24d50b757d466972913db3a0b02",
+              "structural_reference": {
+                "block_id": "html-67",
+                "heading_path": [
+                  "DE-TA1-0003589: Critical Minerals & Materials Accelerator (CMMA) - Topic Area 1",
+                  "Documents",
+                  "Submission Deadlines"
+                ],
+                "kind": "table_row",
+                "row": 0,
+                "source_position": [
+                  237,
+                  1
+                ],
+                "table_id": "table-1"
+              }
+            },
+            "confidence": "machine_extracted_needs_verification",
+            "date": "2026-05-29",
+            "deadline_kind": "application",
+            "display_value": "2026-05-29 · 5:00 PM ET",
+            "fact_contract": "typed-notice-facts-1",
+            "id": "evidence-eere-exchange:DE-TA1-0003589-3c2654fa98e9",
+            "interpretation_basis": "limited_cached_quote",
+            "label": "Full application deadline",
+            "parser_version": "official-evidence-3",
+            "required": null,
+            "source_authority": "machine_extracted_official_document",
+            "subject": "submission",
+            "time": "5:00 PM",
+            "timezone": "ET",
+            "type": "deadline",
+            "value": "2026-05-29"
+          }
+        ],
+        "review_queue": [
+          {
+            "label": "Verify official submission dates; ambiguous narrative information was withheld",
+            "message": "Only locally owned submission dates and components are published.",
+            "status": "needs_review",
+            "type": "deadline_evidence_withheld"
+          },
+          {
+            "label": "Verify current official notice details",
+            "message": "Some cached interpretations need the original source structure; retained excerpts do not establish complete coverage.",
+            "status": "needs_review",
+            "type": "parser_revalidation_pending"
+          }
+        ],
+        "dependency_version": 2,
+        "source_fields": {
+          "has_preliminary_stage": {
+            "present": true,
+            "value": false
+          },
+          "preliminary_stage_type": {
+            "present": true,
+            "value": null
+          },
+          "topic_areas": {
+            "present": true,
+            "value": []
+          }
+        }
+      },
+      "document_search_text": "Letter of intent deadline 2026-04-24 · 5:00 PM ET …ion Submission Deadline: 5/29/2026 5:00 PM ET 1B: Recovery and production from postconsumer scrap (with an emphasis on electronic waste and drivetrains) Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET 1C: Recovery and production from blended feedstocks including mine tailings, postindustrial scrap,… Full application deadline 2026-05-29 · 5:00 PM ET …from blended feedstocks including mine tailings, postindustrial scrap, and postconsumer scrap Letter of Intent Deadline: 4/24/2026 5:00 PM ET Full Application Submission Deadline: 5/29/2026 5:00 PM ET | Loading… rare earth elements critical minerals microelectronics",
+      "close_date_kind": "submission_window_end",
+      "source_facet": null,
+      "source_first_seen_date": "2026-09-07",
+      "document_evidence_checked_at": "2026-09-08T09:42:24.791290Z",
+      "submission_requirements": [],
+      "document_status_signals": [],
+      "document_program_areas": [
+        "rare earth elements",
+        "critical minerals",
+        "microelectronics"
+      ],
+      "next_submission": {
+        "version": 2,
+        "as_of": "2026-09-30",
+        "application_class": "new",
+        "date": null,
+        "event": null,
+        "access": "closed",
+        "prerequisites": []
+      }
+    }
+  ]
+}
