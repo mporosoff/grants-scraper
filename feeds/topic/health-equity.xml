@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/health-equity.xml</id>
-  <updated>2026-09-30T16:29:01Z</updated>
+  <updated>2026-10-08T19:07:27Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Limited Competition: John Lewis NIMHD Research Endowment Program (S21 Clinical Trial Not Allowed)</title>
@@ -42,19 +42,6 @@
     <summary>NYSERDA | Application 2029-12-31 | NYSERDA is looking to establish a pool of contractors qualified to deliver training, develop curriculum and/or training tools, and provide market expertise and/or other services related to clean energy workforce development and training. Qualified contractors will have experience in one or more of the following categories: building decarbonization and energy efficiency, renewable energy, grid mode…</summary>
   </entry>
   <entry>
-    <title>Exposomic Contributions to ADRD Pathology and Resilience</title>
-    <link href="https://www.grants.gov/search-results-detail/361451"/>
-    <id>urn:funding-finder:grants-gov:361451</id>
-    <updated>2026-07-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Community development"/>
-    <category term="Environmental science"/>
-    <category term="Health equity"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-05 | The National Institute of Neurological Disorders and Stroke (NINDS) is interested in supporting research projects that investigate how specific neural exposome factors contribute mechanistically to Alzheimer’s disease-related dementias (ADRD) pathology and resilience. For the purposes of this program, exposome factors of interest include, but are not limited to, environmental toxins, sleep and cir…</summary>
-  </entry>
-  <entry>
     <title>Pilot Studies of Biological, Behavioral and Social Mechanisms Contributing to HIV Pathogenesis Within the Mission of NIDDK (R21 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/358082"/>
     <id>urn:funding-finder:grants-gov:358082</id>
@@ -75,7 +62,7 @@
     <author><name>National Institutes of Health</name></author>
     <category term="Education and workforce"/>
     <category term="Health equity"/>
-    <summary>National Institutes of Health | Application 2026-10-05 | The purpose of this initiative is to advance the science of minority health and health disparities by supporting research on family health and well-being and resilience. The NIMHD Research Framework recognizes family health, family well-being, and family resilience as critically important areas of research to decrease disparities and promote equity.</summary>
+    <summary>National Institutes of Health | Application 2027-02-05 | The purpose of this initiative is to advance the science of minority health and health disparities by supporting research on family health and well-being and resilience. The NIMHD Research Framework recognizes family health, family well-being, and family resilience as critically important areas of research to decrease disparities and promote equity.</summary>
   </entry>
   <entry>
     <title>Interventions to Reduce Sleep Health Disparities (R01 - Clinical Trials Optional)</title>
@@ -200,6 +187,20 @@
     <category term="Education and workforce"/>
     <category term="Health equity"/>
     <summary>National Institutes of Health | Application 2028-01-07 | The purpose of this initiative is to advance the science and implementation of innovative multi-level health care research for older adults from populations that experience health disparities. The initiative will support research designed to (1) gain a better understanding of appropriate screening, diagnostic, and clinical care guidelines in a primary care setting, (2) explore shared decision-maki…</summary>
+  </entry>
+  <entry>
+    <title>Developmental Sciences (DS)</title>
+    <link href="https://www.grants.gov/search-results-detail/352455"/>
+    <id>urn:funding-finder:grants-gov:352455</id>
+    <updated>2024-02-15T00:00:00Z</updated>
+    <author><name>U.S. National Science Foundation</name></author>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Education and workforce"/>
+    <category term="Health equity"/>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>U.S. National Science Foundation | Application 2027-02-01 | Developmental Sciences supports basic research that increases our understanding of perceptual, cognitive, linguistic, social, cultural, and biological processes related to human development across the lifespan. Research supported by this program will add to our knowledge of the underlying developmental processes that support social, cognitive, and behavioral functioning, thereby illuminating ways …</summary>
   </entry>
   <entry>
     <title>Research in the Formation of Engineers</title>
