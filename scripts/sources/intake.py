@@ -60,14 +60,16 @@ def supported_adapter(slug):
 
 def preview_url(url, slug, *, client=None, as_of=None):
     adapter = supported_adapter(slug)
-    public_source_url(url)
     if slug in {"arpa-e", "eere-exchange"}:
+        public_source_url(url, resolve=False)
         url = adapter.canonical_notice_url(url)
+        public_source_url(url)
         # Use the same bounded complete-list fetch, office partition and exact
         # URL conversion as the normal refresh, never the retained HTML parser.
         records = adapter.collect(client=client, as_of=as_of)
         matches = [record for record in records if record.get('detail_page') == url]
     else:
+        public_source_url(url)
         endpoint = getattr(adapter, "list_url", None) or adapter.feed_url
         expected_host = urlparse(endpoint).hostname
         if urlparse(url).hostname != expected_host:

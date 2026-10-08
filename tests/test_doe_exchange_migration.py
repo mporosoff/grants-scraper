@@ -4,6 +4,7 @@ from datetime import date
 import hashlib
 import json
 from pathlib import Path
+import socket
 import tempfile
 from types import SimpleNamespace
 import unittest
@@ -292,6 +293,8 @@ class DoeExchangeMigrationTests(unittest.TestCase):
 
 class DoeExchangeIntakeTests(unittest.TestCase):
     def test_old_and_current_notice_urls_use_current_office_parser_and_one_bounded_fetch(self):
+        from scripts import extract_document_evidence as docs
+        validate_public_url = docs.validate_public_url
         response = {'url': LIST_URL, 'status_code': 200, 'content': page(fixture()).encode('utf-8')}
         for slug, legacy, guid, number in (
                 ('arpa-e', 'arpa-e-foa.energy.gov', SCALEUP, 'DE-FOA-0003467'),
@@ -302,10 +305,22 @@ class DoeExchangeIntakeTests(unittest.TestCase):
                 with self.subTest(slug=slug, url=url):
                     injected = Mock(timeout=(15, 60))
                     adapter = intake.supported_adapter(slug)
-                    with patch('scripts.extract_document_evidence.validate_public_url', side_effect=lambda value: value), \
+                    queried = []
+
+                    def resolver(host, port):
+                        queried.append(host)
+                        if host in {'arpa-e-foa.energy.gov', 'eere-exchange.energy.gov'}:
+                            raise socket.gaierror('fixture: retired host no longer resolves')
+                        self.assertEqual(host, 'exchange.energy.gov')
+                        return [(socket.AF_INET, socket.SOCK_STREAM, 6, '', ('93.184.216.34', port))]
+
+                    with patch.object(docs, 'validate_public_url',
+                             side_effect=lambda value: validate_public_url(value, resolver=resolver)), \
                          patch('scripts.extract_document_evidence.download_document', return_value=response) as download, \
+                         patch('requests.sessions.Session.request', side_effect=AssertionError('preview network forbidden')), \
                          patch.object(adapter, 'parse_html', side_effect=AssertionError('legacy parser used')):
                         entry, record = intake.preview_url(url, slug, client=injected, as_of=AS_OF)
+                    self.assertEqual(queried, ['exchange.energy.gov'])
                     self.assertEqual(download.call_count, 1)
                     self.assertEqual(download.call_args.args[0], LIST_URL)
                     self.assertEqual(download.call_args.kwargs['maximum_bytes'], 32 * 1024 * 1024)
@@ -316,6 +331,40 @@ class DoeExchangeIntakeTests(unittest.TestCase):
                     self.assertEqual(record['opportunity_id'], slug + ':' + number)
                     self.assertEqual(record['detail_page'], canonical)
                     self.assertTrue(all(d['source_url'] == canonical for d in record['deadlines']))
+
+    def test_current_dns_must_be_public_and_resolvable_before_any_listing_fetch(self):
+        from scripts import extract_document_evidence as docs
+        validate_public_url = docs.validate_public_url
+        failures = {'private': 'non-public address', 'mixed': 'non-public address',
+                    'unresolved': 'Could not resolve', 'empty': 'no public addresses'}
+        for slug, legacy, guid in (
+                ('arpa-e', 'arpa-e-foa.energy.gov', SCALEUP),
+                ('eere-exchange', 'eere-exchange.energy.gov', ASPECT)):
+            canonical = 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + guid
+            for url in (canonical, f'https://{legacy}/#FoaId{guid}',
+                        f'https://{legacy}/Default.aspx#FoaId{guid}'):
+                for outcome, message in failures.items():
+                    with self.subTest(slug=slug, url=url, dns=outcome):
+                        queried = []
+
+                        def resolver(host, port):
+                            queried.append(host)
+                            self.assertEqual(host, 'exchange.energy.gov', 'retired selector host was queried')
+                            if outcome == 'unresolved':
+                                raise socket.gaierror('fixture: current host unavailable')
+                            addresses = {'private': ['127.0.0.1'],
+                                         'mixed': ['93.184.216.34', '10.0.0.1'], 'empty': []}[outcome]
+                            return [(socket.AF_INET, socket.SOCK_STREAM, 6, '', (address, port))
+                                    for address in addresses]
+
+                        with patch.object(docs, 'validate_public_url',
+                                 side_effect=lambda value: validate_public_url(value, resolver=resolver)), \
+                             patch.object(docs, 'download_document') as download, \
+                             patch('requests.sessions.Session.request', side_effect=AssertionError('preview network forbidden')):
+                            with self.assertRaisesRegex(RuntimeError, message):
+                                intake.preview_url(url, slug, as_of=AS_OF)
+                        self.assertEqual(queried, ['exchange.energy.gov'])
+                        download.assert_not_called()
 
     def test_cross_office_closed_and_unlisted_guids_never_preview(self):
         response = {'url': LIST_URL, 'status_code': 200, 'content': page(fixture()).encode('utf-8')}
