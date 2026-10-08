@@ -3,14 +3,18 @@ import copy
 from datetime import date
 import hashlib
 import json
+from pathlib import Path
+import tempfile
+from types import SimpleNamespace
 import unittest
-from unittest.mock import patch
+from unittest.mock import Mock, patch
 
 from scripts.sources.adapters.doe_exchange import ArpaEAdapter, EereExchangeAdapter
 from scripts.sources.adapters.doe_exchange_listing import LIST_URL, MAX_BYTES
 from scripts.sources.base import CanonicalOpportunity
 from scripts.sources.merge import resolve_live_records
 from scripts.sources.registry import collect
+from scripts.sources import intake
 
 AS_OF = date(2026, 10, 8)
 ASPECT = '4d0f9925-93dc-4997-b8f9-652937afbce3'
@@ -284,6 +288,98 @@ class DoeExchangeMigrationTests(unittest.TestCase):
             with self.assertRaisesRegex(ValueError, 'route changed'):
                 ArpaEAdapter().fetch()
             client.return_value._session.close.assert_called_once_with()
+
+
+class DoeExchangeIntakeTests(unittest.TestCase):
+    def test_old_and_current_notice_urls_use_current_office_parser_and_one_bounded_fetch(self):
+        response = {'url': LIST_URL, 'status_code': 200, 'content': page(fixture()).encode('utf-8')}
+        for slug, legacy, guid, number in (
+                ('arpa-e', 'arpa-e-foa.energy.gov', SCALEUP, 'DE-FOA-0003467'),
+                ('eere-exchange', 'eere-exchange.energy.gov', ASPECT, 'DE-FOA-0003647')):
+            canonical = 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + guid
+            for url in (canonical, f'https://{legacy}/#FoaId{guid}',
+                        f'https://{legacy}/Default.aspx#FoaId{guid.upper()}'):
+                with self.subTest(slug=slug, url=url):
+                    injected = Mock(timeout=(15, 60))
+                    adapter = intake.supported_adapter(slug)
+                    with patch('scripts.extract_document_evidence.validate_public_url', side_effect=lambda value: value), \
+                         patch('scripts.extract_document_evidence.download_document', return_value=response) as download, \
+                         patch.object(adapter, 'parse_html', side_effect=AssertionError('legacy parser used')):
+                        entry, record = intake.preview_url(url, slug, client=injected, as_of=AS_OF)
+                    self.assertEqual(download.call_count, 1)
+                    self.assertEqual(download.call_args.args[0], LIST_URL)
+                    self.assertEqual(download.call_args.kwargs['maximum_bytes'], 32 * 1024 * 1024)
+                    self.assertIs(download.call_args.kwargs['session'], injected._session)
+                    injected.get_text.assert_not_called()
+                    injected._session.close.assert_not_called()
+                    self.assertEqual(entry, {'kind': 'url', 'adapter': slug, 'url': canonical})
+                    self.assertEqual(record['opportunity_id'], slug + ':' + number)
+                    self.assertEqual(record['detail_page'], canonical)
+                    self.assertTrue(all(d['source_url'] == canonical for d in record['deadlines']))
+
+    def test_cross_office_closed_and_unlisted_guids_never_preview(self):
+        response = {'url': LIST_URL, 'status_code': 200, 'content': page(fixture()).encode('utf-8')}
+        for slug, guid in (('arpa-e', ASPECT), ('eere-exchange', SCALEUP),
+                           ('eere-exchange', CMMA), ('arpa-e', '11111111-1111-1111-1111-111111111111')):
+            with self.subTest(slug=slug, guid=guid), \
+                 patch('scripts.extract_document_evidence.validate_public_url', side_effect=lambda value: value), \
+                 patch('scripts.extract_document_evidence.download_document', return_value=response) as download:
+                with self.assertRaisesRegex(ValueError, 'exactly one'):
+                    intake.preview_url('https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + guid,
+                        slug, as_of=AS_OF)
+                self.assertEqual(download.call_count, 1)
+
+    def test_arbitrary_url_host_path_credentials_and_query_fail_before_listing_fetch(self):
+        canonical = 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + SCALEUP
+        urls = [f'https://eere-exchange.energy.gov/#FoaId{SCALEUP}',
+            canonical.replace('exchange.energy.gov', 'evil.exchange.energy.gov'),
+            canonical.replace('/FoaDetails.aspx', '/arbitrary'),
+            canonical.replace('https:', 'http:'), canonical.replace('https://', 'https://user:secret@'),
+            canonical.replace('.gov/', '.gov:444/'), canonical + '&FoaId=' + SCALEUP,
+            canonical + '&other=1', canonical + '#fragment', canonical + 'junk',
+            'https://exchange.energy.gov/Default.aspx',
+            f'https://arpa-e-foa.energy.gov/arbitrary#FoaId{SCALEUP}',
+            f'https://arpa-e-foa.energy.gov/?other=1#FoaId{SCALEUP}']
+        for url in urls:
+            with self.subTest(url=url), \
+                 patch('scripts.extract_document_evidence.validate_public_url', side_effect=lambda value: value), \
+                 patch('scripts.extract_document_evidence.download_document') as download:
+                with self.assertRaises(ValueError):
+                    intake.preview_url(url, 'arpa-e', as_of=AS_OF)
+                download.assert_not_called()
+
+    def test_saved_legacy_and_new_selectors_normalize_without_mutating_input(self):
+        old = {'kind': 'url', 'adapter': 'eere-exchange',
+               'url': 'https://eere-exchange.energy.gov/#FoaId' + ASPECT}
+        current = {'kind': 'url', 'adapter': 'arpa-e',
+                   'url': 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + SCALEUP}
+        with tempfile.TemporaryDirectory() as directory:
+            path = Path(directory) / 'intake.json'
+            path.write_text(json.dumps({'schema_version': 1, 'entries': [old, current]}), encoding='utf-8')
+            before = path.read_bytes()
+            adapter = intake.MaintainedInputs()
+            adapter.set_context({'intake_path': path, 'as_of': AS_OF})
+            with patch('requests.sessions.Session.request', side_effect=AssertionError('selector fetch')):
+                self.assertEqual(adapter.collect(), [])
+            self.assertEqual(path.read_bytes(), before)
+            self.assertEqual(adapter.diagnostics['native_url_selectors'], [
+                {'adapter': old['adapter'], 'url': 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + ASPECT},
+                {'adapter': current['adapter'], 'url': current['url']}])
+
+    def test_nsf_preview_keeps_its_existing_feed_path(self):
+        url = 'https://www.nsf.gov/funding/opportunities/example'
+        opportunity = CanonicalOpportunity(title='Research funding', external_id='example', url=url,
+            close_date='2026-12-31')
+        adapter = SimpleNamespace(slug='nsf-funding', display_name='NSF', source_type='Federal',
+            feed_url='https://www.nsf.gov/funding/feed', parse=Mock(return_value=[opportunity]))
+        client = Mock()
+        with patch.object(intake, 'supported_adapter', return_value=adapter), \
+             patch('scripts.extract_document_evidence.validate_public_url', side_effect=lambda value: value):
+            entry, record = intake.preview_url(url, 'nsf-funding', client=client, as_of=AS_OF)
+        client.get_text.assert_called_once_with(adapter.feed_url)
+        adapter.parse.assert_called_once_with(client.get_text.return_value)
+        self.assertEqual(entry['url'], url)
+        self.assertEqual(record['opportunity_id'], 'nsf-funding:example')
 
 
 if __name__ == '__main__':

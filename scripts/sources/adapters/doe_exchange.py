@@ -22,6 +22,7 @@ import hashlib
 from html import unescape
 import re
 from typing import Iterable
+from urllib.parse import parse_qsl, urlsplit
 
 from ..base import CanonicalOpportunity, SourceAdapter
 from ..http import ACCEPT, USER_AGENT, PoliteClient
@@ -123,11 +124,39 @@ class EEREExchangeAdapter(SourceAdapter):
     min_records = 0
     max_records = 300
 
-    def fetch(self) -> str:
+    def canonical_notice_url(self, url: str) -> str:
+        """Resolve a strictly scoped old selector to the current detail route.
+
+        This only identifies a notice. The parsed current office listing must
+        still prove that the selected GUID is an open funding opportunity.
+        """
+        if not isinstance(url, str) or url != url.strip() or len(url) > 2048:
+            raise ValueError('URL does not identify a supported DOE notice')
+        parsed = urlsplit(url)
+        if (parsed.scheme != 'https' or parsed.username or parsed.password
+                or parsed.port not in (None, 443) or any(c.isspace() for c in url)):
+            raise ValueError('URL does not identify a supported DOE notice')
+        guid = None
+        if (parsed.hostname == self.legacy_host and parsed.path in ('', '/', '/Default.aspx')
+                and not parsed.query):
+            match = re.fullmatch('FoaId(' + _GUID + ')', parsed.fragment, re.I)
+            guid = match[1] if match else None
+        elif (parsed.hostname == 'exchange.energy.gov' and parsed.path == '/FoaDetails.aspx'
+                and not parsed.fragment):
+            values = parse_qsl(parsed.query, strict_parsing=True, max_num_fields=2)
+            if len(values) == 1 and values[0][0] == 'FoaId':
+                guid = values[0][1]
+        if not guid or not re.fullmatch(_GUID, guid):
+            raise ValueError('URL does not identify a supported DOE notice')
+        return 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + guid.lower()
+
+    def fetch(self, *, client=None) -> str:
         from scripts.extract_document_evidence import download_document
 
         self.diagnostics = {}
-        client = PoliteClient()
+        owned_client = client is None
+        if owned_client:
+            client = PoliteClient()
         try:
             client._pace()
             response = download_document(LIST_URL,
@@ -139,19 +168,21 @@ class EEREExchangeAdapter(SourceAdapter):
                 'response_sha256': hashlib.sha256(response['content']).hexdigest()}
             return response['content'].decode('utf-8', errors='strict')
         finally:
-            client._session.close()
+            if owned_client:
+                client._session.close()
 
-    def parse(self, payload) -> Iterable[CanonicalOpportunity]:
+    def parse(self, payload, *, as_of=None) -> Iterable[CanonicalOpportunity]:
         opportunities, diagnostics = parse_listing(payload,
             organization_id=self.organization_id, organization_name=self.organization_name,
-            slug=self.slug, as_of=self.context.get('as_of') or date.today(),
+            slug=self.slug, as_of=as_of or self.context.get('as_of') or date.today(),
             maximum=self.max_records)
         self.diagnostics.update(diagnostics)
         return opportunities
 
-    def collect(self) -> list[dict]:
+    def collect(self, *, client=None, as_of=None) -> list[dict]:
         records = []
-        for opportunity in self.parse(self.fetch()):
+        payload = self.fetch() if client is None else self.fetch(client=client)
+        for opportunity in self.parse(payload, as_of=as_of):
             record = opportunity.to_record(slug=self.slug, source=self.display_name,
                 source_type=self.source_type)
             # Generic prose cleanup inserts a space after "aspx?" before the
@@ -221,6 +252,7 @@ class ArpaEAdapter(EEREExchangeAdapter):
     list_url = LIST_URL
     organization_id = 1
     organization_name = 'ARPA-E'
+    legacy_host = 'arpa-e-foa.energy.gov'
 
 
 class EereExchangeAdapter(EEREExchangeAdapter):
@@ -230,6 +262,7 @@ class EereExchangeAdapter(EEREExchangeAdapter):
     list_url = LIST_URL
     organization_id = 2
     organization_name = 'CMEI'
+    legacy_host = 'eere-exchange.energy.gov'
 
 
 register(ArpaEAdapter())

@@ -61,17 +61,25 @@ def supported_adapter(slug):
 def preview_url(url, slug, *, client=None, as_of=None):
     adapter = supported_adapter(slug)
     public_source_url(url)
-    endpoint = getattr(adapter, "list_url", None) or adapter.feed_url
-    expected_host = urlparse(endpoint).hostname
-    if urlparse(url).hostname != expected_host:
-        raise ValueError("URL does not belong to the selected official source")
-    client = client or PoliteClient()
-    payload = client.get_text(endpoint)
-    parsed = (adapter.parse_html(payload, as_of=as_of) if hasattr(adapter, "parse_html") else adapter.parse(payload))
-    matches = [p for p in parsed if p.url == url]
+    if slug in {"arpa-e", "eere-exchange"}:
+        url = adapter.canonical_notice_url(url)
+        # Use the same bounded complete-list fetch, office partition and exact
+        # URL conversion as the normal refresh, never the retained HTML parser.
+        records = adapter.collect(client=client, as_of=as_of)
+        matches = [record for record in records if record.get('detail_page') == url]
+    else:
+        endpoint = getattr(adapter, "list_url", None) or adapter.feed_url
+        expected_host = urlparse(endpoint).hostname
+        if urlparse(url).hostname != expected_host:
+            raise ValueError("URL does not belong to the selected official source")
+        client = client or PoliteClient()
+        payload = client.get_text(endpoint)
+        parsed = (adapter.parse_html(payload, as_of=as_of) if hasattr(adapter, "parse_html") else adapter.parse(payload))
+        matches = [p.to_record(slug=adapter.slug, source=adapter.display_name, source_type=adapter.source_type)
+                   for p in parsed if p.url == url]
     if len(matches) != 1:
         raise ValueError("official listing does not identify exactly one supported notice at this URL; use a cited manifest")
-    record = matches[0].to_record(slug=adapter.slug, source=adapter.display_name, source_type=adapter.source_type)
+    record = matches[0]
     ok, reason = record_is_publishable(record, as_of or date.today())
     if not ok:
         raise ValueError("source notice is not publishable: " + reason)
@@ -217,9 +225,11 @@ class MaintainedInputs(SourceAdapter):
             if entry.get("kind") == "url":
                 if set(entry) != {"kind", "adapter", "url"}:
                     raise ValueError("invalid native URL selector")
-                supported_adapter(entry["adapter"])
+                adapter = supported_adapter(entry["adapter"])
                 public_source_url(entry["url"], resolve=False)
-                selectors.append({"adapter": entry["adapter"], "url": entry["url"]})
+                url = (adapter.canonical_notice_url(entry["url"])
+                       if entry["adapter"] in {"arpa-e", "eere-exchange"} else entry["url"])
+                selectors.append({"adapter": entry["adapter"], "url": url})
             else:
                 records.append(validate_record(entry, as_of=as_of))
         self.diagnostics = {"accepted_records": len(records), "native_url_selectors": selectors}

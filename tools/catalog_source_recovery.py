@@ -38,6 +38,7 @@ VECTOR_OUTPUTS = ('data/search-v2-voyage-manifest.json', 'data/search-v2-voyage-
     'data/search-v2-release.json', 'workers/search-voyage-proxy/generated/corpus-allowlist.json')
 # Only the bounded source invariant repairs may differ from the retained run.
 SOURCE_REPAIR_FILES = {'scripts/solicitation_identity.py', 'scripts/sources/merge.py',
+    'scripts/sources/intake.py',
     'scripts/sources/official_identity.py', 'scripts/sources/nsf_identity.py', 'scripts/sources/validate.py',
     'scripts/sources/adapters/doe_exchange.py', 'scripts/sources/adapters/doe_exchange_listing.py'}
 
