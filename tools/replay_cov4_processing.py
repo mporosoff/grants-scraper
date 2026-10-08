@@ -182,6 +182,30 @@ def _check_unchanged(authenticated):
              'Historical qualification evidence changed during processing replay')
 
 
+def _portable_references(authenticated):
+    """Serialize logical input locations; resolved host paths remain runtime-only.
+
+    Repository evidence uses its checkout-relative path. A custom evidence file
+    outside the checkout is the single explicit reviewed-evidence input, identified
+    by a fixed alias and its digest, never by its private directory or filename.
+    State members use a separate namespace so equal filenames cannot collide.
+    """
+    evidence, state = authenticated['evidence'], authenticated['state']
+    try:
+        reference = {'namespace': 'repository', 'path': evidence.relative_to(ROOT.resolve()).as_posix()}
+    except ValueError:
+        reference = {'namespace': 'evidence', 'path': 'reviewed-qualification.json'}
+    files = {}
+    for name, digest in authenticated['files'].items():
+        path = Path(name)
+        if path == evidence:
+            key = reference['namespace'] + ':' + reference['path']
+        else:
+            key = 'state:' + path.relative_to(state).as_posix()
+        _require(key not in files, 'Portable evidence references must remain unique')
+        files[key] = digest
+    return reference, dict(sorted(files.items()))
+
 def replay_processing(state, output, *, evidence=DEFAULT_EVIDENCE):
     """Write a new processing receipt; never rewrite or relabel historical evidence."""
     state, output, evidence = Path(state).resolve(), Path(output).resolve(), Path(evidence).resolve()
@@ -225,8 +249,9 @@ def replay_processing(state, output, *, evidence=DEFAULT_EVIDENCE):
                 'historical_evaluation_contract': data['retained']['evaluation_contract']}
     _check_unchanged(authenticated)
     modules = {path: evaluation.module_hash(ROOT / path) for path in PROCESSING_MODULES}
-    receipt = {'version': 'cov4-processing-replay-1', 'historical_evidence': {
-            'path': str(evidence), 'sha256': authenticated['files'][str(evidence)],
+    evidence_reference, file_references = _portable_references(authenticated)
+    receipt = {'version': 'cov4-processing-replay-2', 'historical_evidence': evidence_reference | {
+            'sha256': authenticated['files'][str(evidence)],
             'qualification_contract': authenticated['report']['qualification']['evaluation_contract']},
         'processing': {'modules': modules,
             'instrument': evaluation.function_hash(documents.instrument),
@@ -236,7 +261,7 @@ def replay_processing(state, output, *, evidence=DEFAULT_EVIDENCE):
         'responses': {'count': authenticated['paid_requests'],
             'original_charged_microusd': authenticated['paid_microusd'],
             'hashes': authenticated['report']['qualification']['response_hashes']},
-        'historical_files_sha256': authenticated['files'], 'populations': results,
+        'historical_files_sha256': file_references, 'populations': results,
         'new_provider_requests': 0, 'ledger_byte_identical': True, 'paid_response_hashes_unchanged': True,
         'execution_complete': True, 'numerical_gate_passed': True,
         'source_review': 'required', 'quality_gate_passed': False, 'production_enabled': False}

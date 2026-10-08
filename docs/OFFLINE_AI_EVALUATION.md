@@ -265,7 +265,9 @@ authenticates the original reviewed report, 43 response hashes and paid ledger
 rows, the five controls, native transport preflight, unchanged requests and the
 19 provenance bypasses. It then replays without credentials, provider clients or
 network transport, and verifies all 51 historical evidence files remain byte
-identical. The generated processing receipt cannot approve source review or
+identical. Version 2 receipts name repository evidence and state members with
+separate relative-path namespaces; resolved host paths remain runtime-only.
+The generated processing receipt cannot approve source review or
 enable production; those remain explicit reviewed evidence in the qualification
 report. The historical ledger, allowance and receipts are never rewritten.
 

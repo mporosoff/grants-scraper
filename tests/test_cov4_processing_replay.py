@@ -130,6 +130,62 @@ class ProcessingReplayTests(unittest.TestCase):
         self.assertTrue((self.output / 'processing-receipt.json').is_file())
         self.assertNotIn('MUST_NOT_BE_USED', json.dumps(receipt))
 
+    def test_copied_state_and_custom_evidence_have_identical_portable_receipts(self):
+        first = self.run_replay()
+        copied = self.root / 'different-workstation-layout'
+        copied.mkdir()
+        state = copied / 'retained-evaluation'
+        shutil.copytree(self.state, state)
+        evidence = copied / 'private-operator-filename.json'
+        shutil.copyfile(self.evidence, evidence)
+        output = copied / 'replayed-processing'
+        second = replay.replay_processing(state, output, evidence=evidence)
+        self.assertEqual(first, second)
+        self.assertEqual((self.output / 'processing-receipt.json').read_bytes(),
+                         (output / 'processing-receipt.json').read_bytes())
+        self.assertEqual(first['historical_evidence']['namespace'], 'evidence')
+        self.assertEqual(first['historical_evidence']['path'], 'reviewed-qualification.json')
+        self.assertEqual(len(first['historical_files_sha256']), 51)
+        encoded = json.dumps(first)
+        for private in (str(self.root), self.root.as_posix(), self.root.name, 'different-workstation-layout',
+                        'private-operator-filename', 'retained-evaluation'):
+            self.assertNotIn(private, encoded)
+        self.assertTrue(all(name.startswith(('state:', 'evidence:'))
+                            for name in first['historical_files_sha256']))
+
+    def test_repository_evidence_uses_checkout_relative_namespace_and_preserves_filename_collisions(self):
+        checkout = self.root / 'checkout'
+        evidence = checkout / 'evaluation/qualification-receipt.json'
+        evidence.parent.mkdir(parents=True)
+        shutil.copyfile(self.evidence, evidence)
+        authenticated = replay.authenticate(self.state, evidence=evidence)
+        with patch.object(replay, 'ROOT', checkout):
+            reference, files = replay._portable_references(authenticated)
+        self.assertEqual(reference, {'namespace': 'repository', 'path': 'evaluation/qualification-receipt.json'})
+        self.assertEqual(files['repository:evaluation/qualification-receipt.json'], replay._sha(evidence))
+        for population in ('controls', 'population'):
+            name = f'sonnet-production-cov4-2/{population}/qualification-receipt.json'
+            self.assertEqual(files['state:' + name], replay._sha(self.state / name))
+        self.assertEqual(len(files), len(authenticated['files']))
+        self.assertFalse(any(chr(92) in name or name.startswith('/') for name in files))
+        self.assertNotIn(str(checkout), json.dumps((reference, files)))
+
+    def test_external_evidence_named_like_a_state_file_remains_distinct(self):
+        evidence = self.root / 'ledger.json'
+        shutil.copyfile(self.evidence, evidence)
+        authenticated = replay.authenticate(self.state, evidence=evidence)
+        reference, files = replay._portable_references(authenticated)
+        self.assertEqual(reference, {'namespace': 'evidence', 'path': 'reviewed-qualification.json'})
+        self.assertEqual(files['evidence:reviewed-qualification.json'], replay._sha(evidence))
+        self.assertEqual(files['state:ledger.json'], replay._sha(self.state / 'ledger.json'))
+        self.assertNotEqual(files['evidence:reviewed-qualification.json'], files['state:ledger.json'])
+        self.assertEqual(len(files), len(authenticated['files']))
+        # Portable serialization must not change the absolute paths used to
+        # detect tampering during a replay.
+        (self.state / 'ledger.json').write_bytes((self.state / 'ledger.json').read_bytes() + b' ')
+        with self.assertRaisesRegex(ValueError, 'evidence changed'):
+            replay._check_unchanged(authenticated)
+
     def test_changed_cached_decision_is_rejected_before_replay(self):
         path = next((self.state / 'cov4-production-cache').glob('*.json'))
         cached = json.loads(path.read_bytes())
