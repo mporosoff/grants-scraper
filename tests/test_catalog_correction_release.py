@@ -503,6 +503,34 @@ class ProtectedCompletionRecord(unittest.TestCase):
         self.assertEqual(bridge.correction_completion(self.root), self.anchor)
         self.assertNotIn('serving_version', bridge.completion_record(self.root)[0])
 
+    def test_later_ordinary_or_source_recovery_publication_keeps_admission_and_auto_route(self):
+        self.install()
+        completion_raw = (self.root/bridge.COMPLETION_PATH).read_bytes()
+        forbidden = Mock(side_effect=AssertionError('No historical fallback or remote API'))
+        for recovery in (False, True):
+            with self.subTest(source_recovery=recovery):
+                current = deepcopy(self.anchor)
+                for name in ('candidate_id', 'source_correction', 'projection_recovery', 'original_generation'):
+                    current.pop(name, None)
+                current['dependency_groups'] = {'source': {
+                    'files': {'scripts/extract_document_evidence.py': '0'*64}}}
+                if recovery:
+                    current['source_recovery'] = {'version': 'catalog-source-recovery-20261008-v1'}
+                current['candidate_id'] = bridge.release.digest(bridge.release.encoded(current))
+                self.publish(current)
+                self.assertNotIn('source_correction', current)
+                self.assertEqual((self.root/bridge.COMPLETION_PATH).read_bytes(), completion_raw)
+                with patch.object(bridge, 'protected_candidates', forbidden), \
+                        patch.object(bridge, 'ROOT', self.root), \
+                        patch.dict(os.environ, ENV | {'REQUESTED_STAGE': 'auto',
+                            'GITHUB_EVENT_NAME': 'schedule'}), \
+                        patch('tools.plan_release.main') as ordinary:
+                    self.assertEqual(bridge.correction_completion(self.root, api=forbidden), self.anchor)
+                    bridge.plan()
+                ordinary.assert_called_once_with(automatic_paid_hold=False)
+        forbidden.assert_not_called()
+        self.online.assert_not_called(); self.reports.assert_not_called()
+
     def test_absent_and_present_invalid_are_different(self):
         self.assertIsNone(bridge.completion_record(self.root))
         with patch.object(bridge, 'protected_candidates', return_value=[]):
@@ -704,7 +732,8 @@ class WorkflowContracts(unittest.TestCase):
             and s.get('with', {}).get('path') == '${{ runner.temp }}/candidate']
             for name, job in self.jobs.items()}
         producers = {name: steps for name, steps in producers.items() if steps}
-        self.assertEqual(set(producers), {'generate', 'assemble', 'catalog-correction', 'program-area-revalidation'})
+        self.assertEqual(set(producers), {'generate', 'assemble', 'catalog-correction', 'program-area-revalidation',
+            'catalog-source-recovery'})
         for name, steps in producers.items():
             with self.subTest(producer=name):
                 self.assertEqual(len(steps), 1)

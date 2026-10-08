@@ -191,7 +191,7 @@ def _identity_witness(record):
             "title": _canonical_title(record), "grants": sorted(record_grants_ids(record))}
 
 
-def _identity_history(snapshot, fresh, proofs=None):
+def _identity_history(snapshot, fresh, proofs=None, as_of=None):
     """Keep bounded identity witnesses even when live/terminal records disappear.
 
     These are identity observations, not currentness or freshness assertions.
@@ -224,8 +224,11 @@ def _identity_history(snapshot, fresh, proofs=None):
         proxy = _witness_proxy(witness)
         if proxy is not None:
             from .official_identity import record_grants_ids, resolve
-            resolve([proxy], proofs or {}, limit=0)
+            resolve([proxy], proofs or {}, limit=0, as_of=as_of)
             mapped = {**witness, "grants": sorted(set(witness["grants"]) | record_grants_ids(proxy))}
+            mapped_key = record_identity(proxy)
+            if mapped_key.startswith("solicitation:nsf:"):
+                mapped["key"] = mapped_key
             unique[json.dumps(mapped, sort_keys=True, separators=(",", ":"))] = mapped
     if len(unique) > IDENTITY_WITNESS_LIMIT:
         raise ValueError("Incremental identity witness capacity exceeded; retained evidence requires review")
@@ -234,13 +237,18 @@ def _identity_history(snapshot, fresh, proofs=None):
 
 def _witness_proxy(witness):
     from .official_identity import simpler_url
+    from .nsf_identity import program_url
     url = witness["url"]
-    if (not isinstance(url, list) or len(url) != 4 or url[0] != "simpler.grants.gov"
-            or url[1] is not None or url[3] != ""):
+    if not isinstance(url, list) or len(url) != 4 or url[1] is not None or url[3] != "":
         return None
-    exact = simpler_url("https://simpler.grants.gov" + url[2])
+    exact = None
+    if url[0] == "simpler.grants.gov":
+        exact = simpler_url("https://simpler.grants.gov" + url[2])
+    elif url[0] == "nsf.gov":
+        exact = program_url("https://www.nsf.gov" + url[2])
     return ({"opportunity_id": witness["id"], "detail_page": exact,
-             "funding_opportunity_url": exact} if exact else None)
+             "funding_opportunity_url": exact, "opportunity_number": witness["number"],
+             "agency_authority": "source_default"} if exact else None)
 
 
 def _identity_groups(evidence):
@@ -275,12 +283,16 @@ def _incremental_observations(records: list[dict], witnesses=None) -> tuple[list
         grants = [{ident for row in members if row["url"] is not None and tuple(row["url"]) == url
                    for ident in row["grants"]} for url in urls]
         exact_grants_alias = all(len(proof) == 1 for proof in grants) and len(set.union(*grants)) == 1
+        nsf_keys = [{row["key"] for row in members if row["url"] is not None
+                     and tuple(row["url"]) == url and row["key"].startswith("solicitation:nsf:")}
+                    for url in urls]
+        exact_nsf_alias = all(len(proof) == 1 for proof in nsf_keys) and len(set.union(*nsf_keys)) == 1
         numbers = {row["number"] for row in members}
         stable_number_and_title = (len(numbers) == 1 and bool(next(iter(numbers)))
                                    and len({row["title"] for row in members}) == 1
                                    and bool(members[0]["title"])
                                    and len(set.union(*grants)) <= 1)
-        if not exact_grants_alias and not stable_number_and_title:
+        if not exact_grants_alias and not exact_nsf_alias and not stable_number_and_title:
             withheld.update(ids)
     selected = _latest_observations([row for row in records if row.get("opportunity_id") not in withheld])
     return selected, sorted(str(ident) for ident in withheld if ident)
@@ -371,7 +383,7 @@ def _verified_partial(result):
                 for r in result.records))
 
 
-def _resolve_identity_before_selection(results, cache, as_of, *, allow_fetch=True):
+def _resolve_identity_before_selection(results, cache, as_of, *, allow_fetch=True, base_records=()):
     """One shared bounded lookup phase, before any identity is quarantined."""
     from .official_identity import resolve
     enabled = allow_fetch and os.environ.get("VPR_ENRICH_LINKS", "").casefold() == "true"
@@ -381,10 +393,10 @@ def _resolve_identity_before_selection(results, cache, as_of, *, allow_fetch=Tru
         fresh = result.records if result.ok or _verified_partial(result) else []
         snapshot = (cache.get("sources") or {}).get(result.slug) or {}
         retained = [r for r in snapshot.get("records", []) if result.retain_on_failure
-                    and record_is_publishable(r, as_of)[0] and record_is_current(r, as_of)[0]]
+                    and record_is_publishable(r, as_of, check_identity=False)[0] and record_is_current(r, as_of)[0]]
         observations.extend(fresh + retained)
         if result.snapshot_complete is False:
-            history = _identity_history(snapshot, fresh, proofs)
+            history = _identity_history(snapshot, fresh, proofs, as_of)
             active = [_identity_witness(r) for r in fresh + retained]
             active_ids = {w["id"] for w in active}; active_keys = {w["key"] for w in active}
             for ids, keys, members in _identity_groups(history["observations"]):
@@ -392,7 +404,7 @@ def _resolve_identity_before_selection(results, cache, as_of, *, allow_fetch=Tru
                     historical.extend(proxy for w in members if (proxy := _witness_proxy(w)) is not None)
     # Raw/current rows take precedence within the existing 20-GET budget.
     # limit=0 still applies retained exact receipts when enrichment is disabled.
-    stats = resolve(observations + historical, proofs, limit=20 if enabled else 0)
+    stats = resolve(observations + list(base_records) + historical, proofs, limit=20 if enabled else 0, as_of=as_of)
     return {"enabled": enabled, **stats}
 
 
@@ -414,7 +426,7 @@ def resolve_live_records(results: list[AdapterResult], cache: dict,
         partial = _verified_partial(result)
         incremental = result.snapshot_complete is False
         witnesses = (_identity_history(sources.get(slug) or {}, result.records if result.ok or partial else [],
-                                      cache.get("official_identities"))
+                                      cache.get("official_identities"), as_of)
                      if incremental else None)
         if result.ok or partial:
             fresh, collisions = _incremental_observations(result.records, witnesses) if incremental else (result.records, [])
@@ -642,9 +654,24 @@ def _canonical_title(record: dict) -> str:
 
 
 def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], dict]:
-    """Combine base (Grants.gov) and external records; base always wins."""
-    combined = [normalize_record_facets(dict(record)) for record in base]
-    external = [normalize_record_facets(dict(record)) for record in external]
+    """Combine sources; Grants.gov and official NSF records outrank NSF digests."""
+    from .nsf_identity import record_identity as nsf_identity
+    # A selective refresh can carry a digest row in base while newly collecting
+    # the official NSF record. Defer only identity-proven NSF digest rows so the
+    # canonical sponsor/Grants.gov record wins independently of adapter order.
+    def digest(record):
+        state, _ = nsf_identity(record)
+        if state == 'conflict':
+            raise ValueError('NSF official guidelines conflict with the digest identity')
+        return state == 'resolved'
+    deferred_base = [record for record in base if digest(record)]
+    ordinary_base = [record for record in base if not digest(record)]
+    ordinary_external = [record for record in external if not digest(record)]
+    ordered_external = (ordinary_external
+                        + deferred_base + [record for record in external if digest(record)])
+    combined = [normalize_record_facets(dict(record)) for record in ordinary_base]
+    external_count = len(external)
+    external = [normalize_record_facets(dict(record)) for record in ordered_external]
     # A normalized sponsor and complete official number prove a cross-source
     # duplicate. Similar titles alone never do. Stable public IDs are retained.
     identities = {record_identity(record): record for record in combined}
@@ -652,8 +679,9 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
     from .official_identity import record_grants_ids
     from scripts.solicitation_identity import solicitation_key
     grants = {str(r.get('opportunity_id')): r for r in combined if r.get('source') == 'Grants.gov'}
-    added = dropped_identity = dropped_crossdup = 0
-    for record in external:
+    added = dropped_identity = dropped_crossdup = dropped_base_nsf = 0
+    for index, record in enumerate(external):
+        carried_base = len(ordinary_external) <= index < len(ordinary_external) + len(deferred_base)
         identity = record_identity(record)
         by_identity, by_id = identities.get(identity), ids.get(str(record.get('opportunity_id')))
         winner = by_identity or by_id
@@ -679,18 +707,25 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
                     raise ValueError('Official record link conflicts with sponsor/solicitation identity')
                 winner = linked
         if winner is not None:
+            if carried_base:
+                dropped_base_nsf += 1
             if (winner.get('opportunity_id') == record.get('opportunity_id')
                 or winner.get('opportunity_number') == record.get('opportunity_number')):
                 dropped_identity += 1
             else:
                 dropped_crossdup += 1
             merge_duplicate_evidence(winner, record)
+            if digest(record):
+                identities[identity] = winner
+                if record.get("opportunity_id"):
+                    ids[str(record["opportunity_id"])] = winner
             continue
         combined.append(record)
         identities[identity] = record
         if record.get('opportunity_id'):
             ids[str(record['opportunity_id'])] = record
-        added += 1
+        if not carried_base:
+            added += 1
 
     combined.sort(
         key=lambda r: (
@@ -700,10 +735,11 @@ def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], d
     )
     stats = {
         "base_count": len(combined) - added,
-        "external_considered": len(external),
+        "external_considered": external_count,
         "external_added": added,
         "dropped_duplicate_identity": dropped_identity,
         "dropped_cross_source_duplicate": dropped_crossdup,
+        "dropped_base_nsf_duplicates": dropped_base_nsf,
         "final_count": len(combined),
     }
     return combined, stats
@@ -806,7 +842,15 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         include_disabled=include_disabled,
         context={"catalog_records": base, "as_of": as_of, "intake_path": intake_path},
     )
-    identity_stats = _resolve_identity_before_selection(results, cache, as_of)
+    identity_stats = _resolve_identity_before_selection(results, cache, as_of, base_records=base)
+    # Selective refreshes must also verify carried NSF digest program identities.
+    # Withholding conflicting identity is not a source withdrawal or fresh scan.
+    from .nsf_identity import record_identity as nsf_identity
+    base_withheld = [str(r.get("opportunity_id")) for r in base
+                     if nsf_identity(r, as_of)[0] in {"unresolved", "conflict"}]
+    if base_withheld:
+        identity_stats["withheld_base_ids"] = base_withheld
+        base = [r for r in base if str(r.get("opportunity_id")) not in base_withheld]
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
     combined, stats = merge_records(base, external)
     # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with
@@ -815,7 +859,7 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
 
     validation_ok, validation_error = True, None
     try:
-        validate_catalog(combined, len(base), len(base) + 20000)
+        validate_catalog(combined, len(base) - stats["dropped_base_nsf_duplicates"], len(base) + 20000)
     except Exception as exc:  # noqa: BLE001 - report, never publish an invalid catalog
         validation_ok, validation_error = False, str(exc)
 

@@ -1,22 +1,18 @@
-"""DOE eXCHANGE portals: ARPA-E eXCHANGE and DOE EERE Exchange.
+"""DOE Exchange adapters, retaining IDs from the former office portals.
 
-Both run the same server-rendered ASP.NET platform (there is no JSON/XHR API --
-the opportunity list is written into the page HTML, which is why the Network
-Fetch/XHR tab is empty). Each open opportunity appears in a summary list as two
-anchors sharing a ``#FoaId<guid>`` target (the FOA number, then the title),
-followed by the announcement type, the sponsoring office (EERE only), and up to
-two submission dates::
+The former portals migrated to exchange.energy.gov. Production collection uses
+the complete embedded JSON listing and an explicit office partition. The
+legacy parser remains available for retained source fixtures and document
+evidence. Those pages represented each notice with two anchors::
 
     <a href="#FoaId<guid>">DE-FOA-0003623</a>
     <a href="#FoaId<guid>">HORNIG ...</a>
     Notice Of Funding Opportunity (NOFO)  5/28/2026 09:30 AM ET  TBD
 
-Only Notice-of-Funding-Opportunity (NOFO) rows are kept -- Requests for
-Information, Teaming Partner Lists, and Notices of Intent are not fundable
-opportunities. The next open submission date drives the deadline; later dates
-are retained as structured deadlines. Past FOAs are dropped by the merge's
-currentness gate. Many ARPA-E/EERE FOAs are not mirrored to Grants.gov, and the
-merge dedups any that are.
+Only current Notice-of-Funding-Opportunity (NOFO) rows are published. Terminal
+source observations remain in diagnostics while the complete source snapshot
+withdraws their former records. Existing source slugs and FOA numbers retain
+their public IDs across the migration.
 """
 
 from __future__ import annotations
@@ -26,10 +22,12 @@ import hashlib
 from html import unescape
 import re
 from typing import Iterable
+from urllib.parse import parse_qsl, urlsplit
 
 from ..base import CanonicalOpportunity, SourceAdapter
-from ..http import PoliteClient
+from ..http import ACCEPT, USER_AGENT, PoliteClient
 from ..registry import register
+from .doe_exchange_listing import LIST_URL, MAX_BYTES, parse_listing
 
 _GUID = r"[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}"
 _FOA_NUMBER = r"(?:[A-Z]{2,4}-)?[A-Z0-9]{2,8}-[A-Z0-9]{3,}"
@@ -126,11 +124,76 @@ class EEREExchangeAdapter(SourceAdapter):
     min_records = 0
     max_records = 300
 
-    def fetch(self) -> str:
-        return PoliteClient().get_text(self.list_url)
+    def canonical_notice_url(self, url: str) -> str:
+        """Resolve a strictly scoped old selector to the current detail route.
 
-    def parse(self, payload) -> Iterable[CanonicalOpportunity]:
-        return self.parse_html(payload)
+        This only identifies a notice. The parsed current office listing must
+        still prove that the selected GUID is an open funding opportunity.
+        """
+        if not isinstance(url, str) or url != url.strip() or len(url) > 2048:
+            raise ValueError('URL does not identify a supported DOE notice')
+        parsed = urlsplit(url)
+        if (parsed.scheme != 'https' or parsed.username or parsed.password
+                or parsed.port not in (None, 443) or any(c.isspace() for c in url)):
+            raise ValueError('URL does not identify a supported DOE notice')
+        guid = None
+        if (parsed.hostname == self.legacy_host and parsed.path in ('', '/', '/Default.aspx')
+                and not parsed.query):
+            match = re.fullmatch('FoaId(' + _GUID + ')', parsed.fragment, re.I)
+            guid = match[1] if match else None
+        elif (parsed.hostname == 'exchange.energy.gov' and parsed.path == '/FoaDetails.aspx'
+                and not parsed.fragment):
+            values = parse_qsl(parsed.query, strict_parsing=True, max_num_fields=2)
+            if len(values) == 1 and values[0][0] == 'FoaId':
+                guid = values[0][1]
+        if not guid or not re.fullmatch(_GUID, guid):
+            raise ValueError('URL does not identify a supported DOE notice')
+        return 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + guid.lower()
+
+    def fetch(self, *, client=None) -> str:
+        from scripts.extract_document_evidence import download_document
+
+        self.diagnostics = {}
+        owned_client = client is None
+        if owned_client:
+            client = PoliteClient()
+        try:
+            client._pace()
+            response = download_document(LIST_URL,
+                {'User-Agent': USER_AGENT, 'Accept': ACCEPT}, timeout=client.timeout,
+                maximum_bytes=MAX_BYTES, session=client._session)
+            if response['url'] != LIST_URL or response['status_code'] != 200:
+                raise ValueError('DOE Exchange complete listing route changed')
+            self.diagnostics = {'response_bytes': len(response['content']),
+                'response_sha256': hashlib.sha256(response['content']).hexdigest()}
+            return response['content'].decode('utf-8', errors='strict')
+        finally:
+            if owned_client:
+                client._session.close()
+
+    def parse(self, payload, *, as_of=None) -> Iterable[CanonicalOpportunity]:
+        opportunities, diagnostics = parse_listing(payload,
+            organization_id=self.organization_id, organization_name=self.organization_name,
+            slug=self.slug, as_of=as_of or self.context.get('as_of') or date.today(),
+            maximum=self.max_records)
+        self.diagnostics.update(diagnostics)
+        return opportunities
+
+    def collect(self, *, client=None, as_of=None) -> list[dict]:
+        records = []
+        payload = self.fetch() if client is None else self.fetch(client=client)
+        for opportunity in self.parse(payload, as_of=as_of):
+            record = opportunity.to_record(slug=self.slug, source=self.display_name,
+                source_type=self.source_type)
+            # Generic prose cleanup inserts a space after "aspx?" before the
+            # uppercase query key. These URLs were constructed from a validated
+            # GUID on our fixed official route, so retain their exact spelling.
+            record['detail_page'] = record['funding_opportunity_url'] = opportunity.url
+            record['last_updated'] = opportunity.extra['last_updated']
+            for event in record['deadlines']:
+                event['source_url'] = opportunity.url
+            records.append(record)
+        return records
 
     def parse_html(self, html: str, as_of: date | None = None) -> list[CanonicalOpportunity]:
         if as_of is None:
@@ -186,14 +249,20 @@ class ArpaEAdapter(EEREExchangeAdapter):
     slug = "arpa-e"
     display_name = "ARPA-E eXCHANGE"
     enabled = True
-    list_url = "https://arpa-e-foa.energy.gov/"
+    list_url = LIST_URL
+    organization_id = 1
+    organization_name = 'ARPA-E'
+    legacy_host = 'arpa-e-foa.energy.gov'
 
 
 class EereExchangeAdapter(EEREExchangeAdapter):
     slug = "eere-exchange"
     display_name = "DOE EERE Exchange"
     enabled = True
-    list_url = "https://eere-exchange.energy.gov/"
+    list_url = LIST_URL
+    organization_id = 2
+    organization_name = 'CMEI'
+    legacy_host = 'eere-exchange.energy.gov'
 
 
 register(ArpaEAdapter())

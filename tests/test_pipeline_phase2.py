@@ -205,32 +205,45 @@ class EvidenceLifecycle(unittest.TestCase):
 
 class IntakeSafety(unittest.TestCase):
     def test_native_url_preview_acceptance_normal_refresh_and_duplicate_trace(self):
-        guid = "11111111-1111-1111-1111-111111111111"
+        from tests.test_doe_exchange_migration import fixture as doe_fixture, page, SCALEUP, LIST_URL
+        guid = SCALEUP
         url = "https://arpa-e-foa.energy.gov/#FoaId" + guid
-        listing = f'<a href="#FoaId{guid}">DE-FOA-0009999</a><a href="#FoaId{guid}">Official bounded catalyst research</a> Notice Of Funding Opportunity (NOFO) 12/31/2026 05:00 PM ET TBD'
-        listing += "".join(listing.replace(guid, guid.replace("11111111-", f"{i:08d}-", 1)).replace("0009999", f"000999{i}")
-                           .replace("Notice Of Funding Opportunity (NOFO)", "Request for Information (RFI)") for i in (2, 3))
-        with patch.object(docs, "validate_public_url", side_effect=lambda value: value):
-            entry, native = intake.preview_url(url, "arpa-e", client=Mock(get_text=Mock(return_value=listing)), as_of=fixture.AS_OF)
+        data = doe_fixture()
+        data['dbFOAList'][1].update(FoaNumber='DE-FOA-0009999', FoaTitle='Official bounded catalyst research',
+                                  ModifiedDate='2026-09-05T12:00:00')
+        data['dbfoaListDetails'][-1]['FullAppSubmissionDeadline'] = '2026-12-31T17:00:00-05:00'
+        response = {'url': LIST_URL, 'status_code': 200, 'content': page(data).encode('utf-8')}
+        with patch.object(docs, "validate_public_url", side_effect=lambda value: value), \
+             patch('requests.sessions.Session.request', side_effect=AssertionError('intake preview used network')), \
+             patch.object(docs, 'download_document', return_value=response) as download:
+            entry, native = intake.preview_url(url, "arpa-e", as_of=fixture.AS_OF)
+            self.assertEqual(download.call_count, 1)
+            self.assertEqual(download.call_args.kwargs['maximum_bytes'], 32 * 1024 * 1024)
         self.assertEqual(native["opportunity_id"], "arpa-e:DE-FOA-0009999")
         self.assertTrue(native["deadlines"][0]["time"])
-        self.assertEqual(native["deadlines"][0]["timezone"], "ET")
+        self.assertEqual(native["deadlines"][0]["timezone"], "-05:00")
+        self.assertEqual(entry['url'], 'https://exchange.energy.gov/FoaDetails.aspx?FoaId=' + guid)
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             inputs = root / "accepted.json"
-            intake.accept([entry], inputs)
+            # A selector accepted before the migration still resolves through
+            # the native current listing during the ordinary refresh.
+            intake.accept([entry | {'url': url}], inputs)
             base = native | {"opportunity_id": "990001", "source": "Grants.gov", "funding_opportunity_url": "https://grants.gov/search-results-detail/990001", "detail_page": "https://grants.gov/search-results-detail/990001"}
             build_catalog.write_catalog(build_catalog.build_catalog([base], fixture.NOW, "fixture", 0), root / "catalog.js")
-            with patch.object(PoliteClient, "get_text", return_value=listing):
+            with patch('requests.sessions.Session.request', side_effect=AssertionError('intake merge used network')), \
+                 patch.object(docs, 'download_document', return_value=response) as download:
                 summary = integrate(catalog_path=root / "catalog.js", cache_path=root / "sources.json", intake_path=inputs,
-                                    adapters=[intake.supported_adapter("arpa-e"), intake.MaintainedInputs()], write=True)
+                                    adapters=[intake.supported_adapter("arpa-e"), intake.MaintainedInputs()],
+                                    as_of=fixture.AS_OF, write=True)
+                self.assertEqual(download.call_count, 1)
             self.assertEqual(summary["intake"][0]["state"], "canonical")
             self.assertEqual(summary["intake"][0]["opportunity_ids"], ["990001"])
             self.assertEqual(summary["stats"]["final_count"], 1)
         with self.assertRaisesRegex(ValueError, "supports"):
             intake.supported_adapter("sample")
-        with patch.object(docs, "validate_public_url", side_effect=lambda value: value), self.assertRaisesRegex(ValueError, "exactly one"):
-            intake.preview_url(url + "wrong", "arpa-e", client=Mock(get_text=Mock(return_value=listing)), as_of=fixture.AS_OF)
+        with patch.object(docs, "validate_public_url", side_effect=lambda value: value), self.assertRaisesRegex(ValueError, "supported DOE notice"):
+            intake.preview_url(url + "wrong", "arpa-e", as_of=fixture.AS_OF)
 
     def test_manifest_unknowns_quotes_and_strict_schema(self):
         entry = fixture.manifest_entry()

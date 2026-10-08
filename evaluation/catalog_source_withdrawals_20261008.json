@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "candidate_id": "5801e4912b642ad70e4383b0f805adc95aad7d892b85f8b7638aeca958da85e6",
+  "audit_date": "2026-10-08",
+  "record_hash_encoding": "sha256 of UTF-8 JSON, sort_keys=True, separators=(comma,colon), ensure_ascii=False",
+  "removals": [
+    {
+      "opportunity_id": "eere-exchange:DE-TA1-0003589",
+      "record_sha256": "e03da603c3ca31e7a8d5252f980fb50ba41bffa12f871c51c5992867f24f2146",
+      "reason": "officially_closed",
+      "official_status": "Closed",
+      "official_evidence_url": "https://exchange.energy.gov/FoaDetails.aspx?FoaId=b2296432-4f64-4dd7-b0e3-730ef4584226",
+      "official_evidence_summary": "Consolidated DOE public listing explicitly marks exact unchanged FOA ID and number Closed, modified October 2, 2026.",
+      "source_observation": {
+        "FoaNumber": "DE-TA1-0003589",
+        "FoaId": "b2296432-4f64-4dd7-b0e3-730ef4584226",
+        "OrganizationId": 2,
+        "OrganizationName": "CMEI",
+        "AnnouncementStatus": "Closed",
+        "ModifiedDate": "2026-10-02T12:13:03",
+        "FOATypeName": "Notice Of Funding Opportunity (NOFO)",
+        "Archived": false,
+        "IsDeleted": false,
+        "ApprovedForPublic": true,
+        "AllowSubmissions": true,
+        "raw_object_sha256": "fa3541d87624650c9f405e446762006b1b80a333268b78937de852207fac65b6",
+        "raw_object_file": "DE-TA1-0003589-raw-object.json"
+      },
+      "source_fetch": {
+        "requested_url": "https://exchange.energy.gov/Default.aspx",
+        "final_url": "https://exchange.energy.gov/Default.aspx",
+        "status": 200,
+        "content_type": "text/html; charset=utf-8",
+        "content_length": null,
+        "response_date": "Thu, 08 Oct 2026 19:43:59 GMT",
+        "etag": null,
+        "started_at": "2026-10-08T19:43:56.048099+00:00",
+        "completed_at": "2026-10-08T19:44:01.735833+00:00",
+        "captured_bytes": 24636245,
+        "maximum_bytes": 33554432,
+        "complete": true,
+        "scope": "Public consolidated listing measurement and migration discovery",
+        "sha256": "a8dae6b9cb63fb25f5aa17b80092975ab98b88cb7a973e4070e56d7bb22ccf2a",
+        "elapsed_seconds": 5.7
+      }
+    },
+    {
+      "opportunity_id": "vpr-email:NSF26-510",
+      "record_sha256": "3a1ad11c38524f0cf47d7e8a63c339a3599947fa136ae9117aebd74cff36de24",
+      "reason": "duplicate",
+      "retained_id": "nsf-funding:https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology/nsf26-510",
+      "retained_record_sha256": "8efb00981a3e19fb12c629a5b76eff4863be42718cf45695e78889cc732ae037",
+      "official_evidence_url": "https://www.nsf.gov/funding/opportunities/small-business-innovation-research-small-business-technology",
+      "official_evidence_summary": "View guidelines NSF 26-510; full proposal November 4, 2026",
+      "alias_allowed": true
+    },
+    {
+      "opportunity_id": "vpr-email:NSF26-512",
+      "record_sha256": "0871c90262fba9307e4f7ffd6f75ed0e29263f472ba64fed1bd6642eebd0179a",
+      "reason": "duplicate",
+      "retained_id": "363268",
+      "retained_record_sha256": "7006f983936cd816f92ed97120a2130205e44a125b627148c24f9ca28814bf20",
+      "official_evidence_url": "https://www.nsf.gov/funding/opportunities/ai-datasets-unlocking-dataset-value-ai-enabled-scientific-discovery",
+      "official_evidence_summary": "View guidelines NSF 26-512; full proposal November 4, 2026",
+      "alias_allowed": true
+    },
+    {
+      "opportunity_id": "vpr-email:26-514",
+      "record_sha256": "a5662bd4adee75054ccfbc181196c83bcec667044119b6b46064f66376fb4996",
+      "reason": "duplicate",
+      "retained_id": "363613",
+      "retained_record_sha256": "ce444a1a1972d49aecd1ee6677e4666f0f572d79fd5d5b5dd9e1ac2b795136e5",
+      "official_evidence_url": "https://www.nsf.gov/funding/opportunities/eccs-engineering-electrical-communications-computing-systems",
+      "official_evidence_summary": "View guidelines NSF 26-514; full proposals accepted anytime",
+      "alias_allowed": true
+    },
+    {
+      "opportunity_id": "vpr-email:vpr-e4cc1ac2aa40787d",
+      "record_sha256": "138a28186d50c57b6b9894a70e5be721bc545b4118359a20feecb9d5887041fa",
+      "reason": "duplicate",
+      "retained_id": "350230",
+      "retained_record_sha256": "482fdb95e6d2d9bb5ddcd27ef6f9342c364bb6bad20500e7fa420f697226f133",
+      "official_evidence_url": "https://www.nsf.gov/funding/opportunities/rfe-research-formation-engineers",
+      "official_evidence_summary": "Program guidelines / Apply to PD 24-1340; full proposals accepted anytime",
+      "alias_allowed": true
+    },
+    {
+      "opportunity_id": "vpr-email:NSF25-544",
+      "record_sha256": "cb40614152c5fab4b8ccfbafe4952ae80f676fe6f09b47d6f2ace82703f4a3bd",
+      "reason": "stale_edition_conflict",
+      "retained_id": "361915",
+      "retained_record_sha256": "6b437bf94c30922cc6d98a4c869c6d5a71ec5079786bbcf9e9fe393505f34691",
+      "official_evidence_url": "https://www.nsf.gov/funding/opportunities/idss-integrated-data-systems-services",
+      "official_evidence_summary": "View guidelines NSF 26-509; July 27, 2027 deadline. Digest asserts obsolete NSF25-544; do not alias that number to 26-509",
+      "alias_allowed": false
+    }
+  ],
+  "scope": "Exact reviewed withdrawal of one officially closed DOE record, four duplicate NSF digest entries, and one stale-edition digest conflict. All surviving records and paid evidence remain unchanged."
+}

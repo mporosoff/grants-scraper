@@ -72,18 +72,29 @@ def valid_receipt(value, url):
             and value.get('locator') == 'View on Grants.gov / version-history anchor')
 
 
-def resolve(records, cache, *, client=None, limit=20):
-    """Bounded public GETs; cache immutable UUID-to-legacy-ID provenance as data."""
+def resolve(records, cache, *, client=None, limit=20, as_of=None):
+    """One bounded lookup budget for Simpler IDs and NSF program editions."""
+    from . import nsf_identity
+    if as_of is None:
+        as_of = datetime.now(timezone.utc).date()
     stats = dict(attempted=0, reused=0, resolved=0, unresolved=0)
     seen = {}
     for record in records:
         if not str(record.get('opportunity_id', '')).startswith('vpr-email:'):
             continue
-        url = simpler_url(record.get('funding_opportunity_url') or record.get('detail_page'))
+        links = [record.get(k) for k in ('funding_opportunity_url', 'detail_page')]
+        url = next((u for link in links if (u := simpler_url(link))), None)
+        nsf = False
+        if not url:
+            url = next((u for link in links if (u := nsf_identity.program_url(link))), None)
+            nsf = bool(url)
         if not url:
             continue
+        def valid(value):
+            return (nsf_identity.valid_receipt(value, url, as_of) if nsf
+                    else valid_receipt(value, url))
         receipt = cache.get(url)
-        if valid_receipt(receipt, url):
+        if valid(receipt):
             stats['reused'] += 1
         elif url in seen:
             receipt = seen[url]
@@ -92,26 +103,34 @@ def resolve(records, cache, *, client=None, limit=20):
             if client is None:
                 from .http import PoliteClient
                 client = PoliteClient()
-            # Network/parse failure must be visible; no guessed ID or fuzzy match.
             text = client.get_text(url)
-            if simpler_url(client.last_url) != url:
-                raise ValueError('Simpler identity page redirected away from its exact UUID')
-            links = LegacyLink(); links.feed(text); links.close()
+            stamp = datetime.now(timezone.utc).isoformat()
             receipt = None
-            if len(links.ids) == 1:
-                receipt = dict(version=VERSION, source_url=url,
-                    target_url='https://www.grants.gov/search-results-detail/' + next(iter(links.ids)),
-                    utf8_sha256=hashlib.sha256(text.encode('utf-8')).hexdigest(),
-                    retrieved_at=datetime.now(timezone.utc).isoformat(),
-                    locator='View on Grants.gov / version-history anchor')
+            if nsf:
+                receipt = nsf_identity.receipt_for(text, url, client.last_url,
+                    checked_on=as_of.isoformat(), retrieved_at=stamp)
+            else:
+                if simpler_url(client.last_url) != url:
+                    raise ValueError('Simpler identity page redirected away from its exact UUID')
+                links = LegacyLink(); links.feed(text); links.close()
+                if len(links.ids) == 1:
+                    receipt = dict(version=VERSION, source_url=url,
+                        target_url='https://www.grants.gov/search-results-detail/' + next(iter(links.ids)),
+                        utf8_sha256=hashlib.sha256(text.encode('utf-8')).hexdigest(),
+                        retrieved_at=stamp, locator='View on Grants.gov / version-history anchor')
+            if receipt:
                 cache[url] = receipt
             seen[url] = receipt
         else:
             receipt = None
-        if valid_receipt(receipt, url):
+        if valid(receipt):
             record['official_identity'] = dict(receipt)
             stats['resolved'] += 1
         else:
+            # A previous edition proof must not survive an unsuccessful current
+            # lookup of a mutable NSF program page.
+            if nsf and (record.get('official_identity') or {}).get('kind') in nsf_identity.KINDS:
+                record.pop('official_identity', None)
             stats['unresolved'] += 1
     return stats
 
