@@ -63,31 +63,31 @@
   "payloads": {
     "data/opportunities.js": {
       "before_sha256": "df590200564cbf1e97660bd1f269675dd547d9970e5583ce08883205a3af3f1a",
-      "after_sha256": "083817acad8cc95b7f44d2a1c0df4b59a4e4f5b10bbb576d0247fbd44693c062",
+      "after_sha256": "2330c52f2f4d4805880d0bfbaef6c2ce16af5e2760f3dee41185debdb99ffb64",
       "affected_items": {
         "nyserda:PON6201": {
           "before_sha256": "8a321bcf083350c6b454b1b4675502dd380681b3bdbedbdcbe86795f8b6a82b1",
-          "after_sha256": "8ef04f7ff579019bed3ba06beb44f53ec63e336ef514853946afc19b489661a2",
+          "after_sha256": "2405da45ad1737576b9458b0e95b6df0572e8f76f67d3eedc1119e5e20283f08",
           "url_leaf_count": 7
         },
         "nyserda:RFQL4922": {
           "before_sha256": "4102e251f4d2b741f5aa901af4297c0c05a2b270c1cfdacd2477a37fe048d68f",
-          "after_sha256": "92d29de405b6f7da1a4dc4e4798a34c73725faf925ee4b7ae66755ddc0fd56e8",
+          "after_sha256": "e8c78a5aa2399448e8615bf0b1409b04f8dda65817e4f1f59042c31da6a20ba9",
           "url_leaf_count": 10
         },
         "nyserda:PON6141": {
           "before_sha256": "790744623aba14e5a31292d8832c4819338f7ba6afd55c00826606dffc122209",
-          "after_sha256": "d99b04b93f945a75db58aac0318d31677ca5d4c989bb2f9e0267742a63c1438c",
+          "after_sha256": "915fb0d0909916869e16f328a8f90164ba23a23247ba4d7c1ba876d53344fae6",
           "url_leaf_count": 6
         },
         "nyserda:PON6220": {
           "before_sha256": "f6e4532acc05959f6e47634f3db4513f70c11f9cfaf597303ab5915570d1cb61",
-          "after_sha256": "2d0a1e1929837ced17e88f26223c01364d3668cc89e4f0166471519eb5669ef2",
+          "after_sha256": "5172ca067eb154fd447054b0d9e7797cebfffe27eed98af9d8608c1853c15428",
           "url_leaf_count": 5
         },
         "nyserda:RFQL5937": {
           "before_sha256": "5f730e258487db10887f38589cf687b8e174e5e13b438eee3832140237b7512a",
-          "after_sha256": "0f8f91a831e30f39f9f6833d63770004a45f8f5a8497066b3b158787225c1d40",
+          "after_sha256": "17e3d49d14f2e9343cffe4e3127919b4d8460f7a3458df7ae87954d01c4949bc",
           "url_leaf_count": 6
         },
         "nyserda:PON6240": {
@@ -97,102 +97,102 @@
         },
         "nyserda:PON6121": {
           "before_sha256": "15ac022e9a9b5c6e4e7dce9c044be461d4eadeb53b3aaf44c5a97679ad63cac2",
-          "after_sha256": "2f0c4a6c13ebbd5643df712b4e4e35ef718fc6ff1ad6ab84d27266ca2d1abebd",
+          "after_sha256": "7df50c41453861561a1328d4d7560c83b351801f411ab4207414e4dd893cbfb6",
           "url_leaf_count": 13
         },
         "nyserda:RFP6224": {
           "before_sha256": "df59b148443d88f3c8b1af475002d7b4c5aad0277ff7f0b54a37550058aae893",
-          "after_sha256": "cc246826876597dc09053d5104096032dab989a071f37e853aa5f778e2ff312a",
+          "after_sha256": "a993af675b730bfcd7e41837f21f5294706d96075d3cb952cff998f0a7238786",
           "url_leaf_count": 6
         },
         "nyserda:PON5437": {
           "before_sha256": "0f57c53d9d3cd5ae1127086daf3cf49457d9b3bcae2ab3ff4e2bb00d1c2a1ea8",
-          "after_sha256": "1226d55c796b742d4ae671997d0ed2612f391262519104b2bb121a18d9a201cf",
+          "after_sha256": "c06c5bdd99920548d4c1c7ece100196c37e8ebac7131fc709b7c6d29013a9866",
           "url_leaf_count": 6
         },
         "nyserda:PON6206": {
           "before_sha256": "f40f6c40bff3ed3073f62bf3b5ac949d2b2605aa50a1cee3d1c818dd93979fa2",
-          "after_sha256": "75e1a0a28bf460c4c6ef15563d847c79d6d8cb0d493d62de13302ff187b53d42",
+          "after_sha256": "d8399423faef2e96abc5ca5e38c524b81cf5b857a7a5b80a26c3623030a2a1d7",
           "url_leaf_count": 7
         },
         "nyserda:PON5859": {
           "before_sha256": "4d29992994b5180ac4155d423ad3188839878fd35e878b4c40b7621e44ddddb6",
-          "after_sha256": "d62ef64f71ef542ac7f7d3ca8f883102c3ef92c8eb56d6e96eb6abc067854cfd",
+          "after_sha256": "55df417d92131ac6725ddd728184ba0fac4a91b8b59af46e392fb39797b7038d",
           "url_leaf_count": 6
         },
         "nyserda:PON5367": {
           "before_sha256": "7f8ac083bb23ffae313b6c4891cedde6bbd6bed7e647420f3457e46f2db9bdb6",
-          "after_sha256": "1dd7a17ce745532e63ca71b9b781a70f611d08c40018df9841075f73b615849c",
+          "after_sha256": "66635fe55d33f21e87f8bd736c35c853bc4ccd456fb4c4d585a14451487628f4",
           "url_leaf_count": 6
         },
         "nyserda:RFQL5312": {
           "before_sha256": "e83dae73d8d728a28c8ab28d6cc06e816a5a82fcf8615b9115f321dc8fa98270",
-          "after_sha256": "4e077de25e5a92de09052afc7f01c906db7a16be2a07ba48630ed27aac56d807",
+          "after_sha256": "2bfeb4f6412e9d94d85b96be6afd2100f1394b6f646b7bbcc5f3ad0efdff3e86",
           "url_leaf_count": 5
         },
         "nyserda:PON5862": {
           "before_sha256": "80aa69ed59231cbe898ddabaa64c3a0c416ab6284de1e86072fc47d3cbf45806",
-          "after_sha256": "5f0ded530808f4e19a5203346eb8c063b199ffae625faedc02be12908ed94511",
+          "after_sha256": "2cc1b8aef47d8dc12e7cca073181f894771cdf8e59a09cfd3c583c3a47fa57d1",
           "url_leaf_count": 6
         },
         "nyserda:RFQL5548": {
           "before_sha256": "c1b4243d12cba06f8b154947a3e2fb0bced918796e780a77f4d9096d58127dd7",
-          "after_sha256": "32a574f430742ba61546f72c1669e257194e3522a3728ff4e4c58e1190f13555",
+          "after_sha256": "d548a6291961fef99612dcb0156bafab3bfe729589121e01fe6e4827b4dcd9e5",
           "url_leaf_count": 5
         },
         "nyserda:PON5899": {
           "before_sha256": "dcc908fdf8cab73d3a65bddc2e0ccfcde0746e1e7bf4c4bc34db763d947100fd",
-          "after_sha256": "83fa55fa60028b8baf84f78e92a7c0d0898f5fc55be5ce20c3cc41bffa5eea46",
+          "after_sha256": "9913e4a120c3f52a7e930b07d7d62b6a0fd0c96d2c2548f7e08ee95e16ade556",
           "url_leaf_count": 5
         },
         "nyserda:RFP3928-Rd7": {
           "before_sha256": "5312206dc1bee6aa7c5688b228c6e74c20ed51433725802a77a130ac2b1a5a8c",
-          "after_sha256": "97bd22854b353e3ae1b1b302b9cce9d5cc452f3f4aa7238254bbc99313c84850",
+          "after_sha256": "3a989fc26e6112834f5755e310f9889b9e300ae68117f893134f4c75b1bc0785",
           "url_leaf_count": 6
         },
         "nyserda:PON6037-PhaseI": {
           "before_sha256": "5938c70b50fa41c530d2e808c36edc35df12e6c0f7f0a4ed1ce1b84c5daf6e45",
-          "after_sha256": "ad399f7840f29072bd63e79baed5019c785b31436a279a72ebbd11d5963510e6",
+          "after_sha256": "f53c88c36a010a4e93309c8432d08ad738c1776a78ac397761f3c51968c5a5dd",
           "url_leaf_count": 6
         },
         "nyserda:PON6037-PhaseII": {
           "before_sha256": "12783bd9162a5385c8b554522e0e5d64d1c5f8942a28043b4546eefe232a6c68",
-          "after_sha256": "87731c399b78b85b4da26abb369cdc49a01d949a84fc2e4332d277714de3a25f",
+          "after_sha256": "f00c1f1af394b5233136b3fff7179a606370132c0fb57ddff320223530340ae5",
           "url_leaf_count": 6
         },
         "nyserda:RFP6041": {
           "before_sha256": "56c1cd114c0d079cfb02516f327225d99efa36bdc5f8c24963d9644225b090ca",
-          "after_sha256": "d48489d577376e0f6e84c10484ec08a4c05eb337277b7cda3393583c52ccfb3f",
+          "after_sha256": "8319670bcf922395d1ff586fd78c39fdf7ff046679d86750674c48957d3196f8",
           "url_leaf_count": 8
         },
         "nyserda:RFP23": {
           "before_sha256": "3d697e86c2a05055f65cf57929feb3bcee613cb147c404a8ab59a89605f4ad4e",
-          "after_sha256": "9519bcc80dc7a81e447b7e0a78c4c6297baa99fd4934ad60602ba315530070be",
+          "after_sha256": "05868536baa39ea06cc9e670921cff189403839fac2ba2214caa30bb67b16e2f",
           "url_leaf_count": 5
         },
         "nyserda:PON6149": {
           "before_sha256": "41f70d3463b2ffdab7d5db8782d40f1a01d01d9ac1b8ec6474c092704fe2d517",
-          "after_sha256": "5c8db88fc4163dae556b23e4bca52f4863f6c90f09735f8aa3cfce039c59514d",
+          "after_sha256": "69f1f74a7bff637495f59aee84aa6b76d6d6ccb3d91cb7fd2ff939b4ba84c36c",
           "url_leaf_count": 7
         },
         "nyserda:PON6236": {
           "before_sha256": "ff2d16b5cdc3f75c4609badefb6a548981ff3ea2f52e8774905dcd53d5e7acfa",
-          "after_sha256": "874133bb6fa0819813fa7963efc4f93fb0a1dd12c4d41ed779aaacd5df83801d",
+          "after_sha256": "03350fd6ce78d8f13ec80ddfb15702e6e03627c5c1aaf5a7b672956668f489e5",
           "url_leaf_count": 5
         },
         "nyserda:PON6242": {
           "before_sha256": "fb974dde2aae5bf074c1da2c05845235c8c8f78c8182e5141b5634f45dfd0d65",
-          "after_sha256": "f533962dafc24c413d319a5168df0fe93671ea86b4b8ecfb20158558b0add724",
+          "after_sha256": "60358be5127fd1c5dcf2c66e1b55a9032aaaf88780b9ef371fce9bc4bd8c4119",
           "url_leaf_count": 5
         },
         "nyserda:PON3414": {
           "before_sha256": "45adc9124583e6a7e559375aaedbf6982bbc580fd2a196381b9378ee19db57f3",
-          "after_sha256": "57a5f953b0063d002a664952d3b3340a92c09810ee751243afdffe18c57eaa1f",
+          "after_sha256": "1fd6e05833b1c255c07bf284482180722429f93729cea6aa10f4d650b9199260",
           "url_leaf_count": 5
         },
         "nyserda:RFQL6152": {
           "before_sha256": "d0b306d301e06176a1a8d4298ce43e96f8b08258bd3d7f40d7a7449135472ddc",
-          "after_sha256": "4a9ff690a78e0f263f99eaf9fdf6808c25e725e5d6eead69a3e8d75bb1dc3923",
+          "after_sha256": "1104e616de0f364d63c7355cb4858f1a859084ba5c1d01186de66292afbc46ba",
           "url_leaf_count": 5
         },
         "nyserda:OSWPON26-1": {
@@ -202,72 +202,72 @@
         },
         "nyserda:NYT-VIP": {
           "before_sha256": "586fe4455803ebf5dc3a6df3932db30b55c6bc7d1f5992e95189db40e3498c5d",
-          "after_sha256": "c2e2dc39086dabb3ad51058fb96f897d7f4f3702a34d8d1d5e927f4d9b70fc78",
+          "after_sha256": "b96d4ebaf62be9aeaa6e4761dace655e12cd6b275949099b10d95adcef44e5f8",
           "url_leaf_count": 6
         },
         "nyserda:RFP18": {
           "before_sha256": "b53bdbecf19850a2239b534b11d2fee0caf5c25a8e9c6e30957f232ea47d0cd1",
-          "after_sha256": "17a062140960c3ad6178d0fab47b103d9a716f994d5c4fb1e88b98dd24299611",
+          "after_sha256": "942570062038d51c84ca1b04ea0c03ab9e06338f085315099db15566cc501cdf",
           "url_leaf_count": 5
         },
         "nyserda:PON6122": {
           "before_sha256": "9504807348cbe0477722389cc2a7d347fa71597fd5aab45bedc8a6fd09d5e33b",
-          "after_sha256": "d8bfdb33f754591d41334df62d2326830aab5a7f281bffa000e8063e6892a508",
+          "after_sha256": "f716b5fbf885c636d1e33300c00f39acfd6f2a80daa54b7d926ddf164f5a7c98",
           "url_leaf_count": 7
         },
         "nyserda:PON3982": {
           "before_sha256": "3d70965ab7478b3dae7ea4350631b85b502dc584355d039dc215850904be1967",
-          "after_sha256": "a5076d651b8174ad9fcaeec8d1d0bd679373f6ede488ce667b6b12b45639f91d",
+          "after_sha256": "37d581e19155bb9052111e68908c49690c4cb7c262ad3e734462ec5459c9322a",
           "url_leaf_count": 5
         },
         "nyserda:RFP1": {
           "before_sha256": "fa40713c3d63c0efe83f306c9f1cdaf272ba2c32878e0d52fbec4073e4e1eeab",
-          "after_sha256": "b270114bd629c1d94d7582a688ed9c7ebd36ddf7a5b13a4e898ce113f1b94227",
+          "after_sha256": "0e323c672b4dd9a973deef3720c017211081b90d52efcab4109234b311848f32",
           "url_leaf_count": 5
         },
         "nyserda:PON5552": {
           "before_sha256": "61a0af646949907e7234a00f83a417ee2b80671223fd116501923ecb1df718a4",
-          "after_sha256": "c5735c5f6c51b1865aaa2e001bf7af68369f5ff3eaba6fb64b51c57198544f18",
+          "after_sha256": "8c2acb43a637585bbfadd844c27ad64d8ff24d56784be253eb0c9769016ac5aa",
           "url_leaf_count": 6
         },
         "nyserda:PON6088": {
           "before_sha256": "f53934198d2a1b4f1f2bb6b179a65000702ab9bc9d51b8b9381cebc23cd89a51",
-          "after_sha256": "fe448195d7831789ae1d69040e145593d93ed1dace48bf5e65bda2f6e61fce38",
+          "after_sha256": "1714b3e8b437550f9b8b85d48b85554f2637350409aff63bd39c2c10b0d00b79",
           "url_leaf_count": 5
         },
         "nyserda:PON4192": {
           "before_sha256": "b7e33b964c2b077d1eac1594dc2260ca6ce8c12c4c6d4535e281ca7aa42cee5c",
-          "after_sha256": "d90df529f7b85f4d8d9eb0308f99af1c4b6d1ef86b33dfa20fc459656ea31b52",
+          "after_sha256": "62e5955600e435e7eed4c3fca50469484f6c0ce70e0b5490a748251a0aea2157",
           "url_leaf_count": 5
         },
         "nyserda:RFQL5906": {
           "before_sha256": "fe43337836ffb36c09269dd3b83f1a6dab60d01fdc13d52af1916eb00df96126",
-          "after_sha256": "7377daf9f85b28b008e0851cdcd320f7fee87c8ca3729ef18802130a679fb9ba",
+          "after_sha256": "4ae29ca7d6f2283bc0c04f370982c5bea2a116c313f6efe49ebd410f39b3c204",
           "url_leaf_count": 5
         },
         "nyserda:PON3082": {
           "before_sha256": "633e1a7fcfe9aa9935d8e5b116129e0e3818bbd4862daf18d0d93030b622516d",
-          "after_sha256": "80c47176c6cb945018ed799865c35c3adf4c0278681f7958ef7be2901eb9f881",
+          "after_sha256": "441f157522d012d6f5f446301c52e1a83682a599562081449242830a44593683",
           "url_leaf_count": 5
         },
         "nyserda:PON2112": {
           "before_sha256": "259d3eaba002f3f423237c10439fd93bd2146808ef46e3c655e589df3f63cf2a",
-          "after_sha256": "b640ade0a810c1ae0650820e105922019eb9a64a8430d31aa14be2ec145a185f",
+          "after_sha256": "d6c39bd495250b3806b20f5e68ec1df917d038ef284273c34ca42095428039c3",
           "url_leaf_count": 5
         },
         "nyserda:PON3701": {
           "before_sha256": "2fb0396e9ff42e506a111f1d4c8fe80b4301e6fa996f139909ce760246df5972",
-          "after_sha256": "5f11cfa4e331b56f88d4d06ef0197ce73930d44c8155146c1af9e3a3b93bc4f3",
+          "after_sha256": "b5fbb0cbff3aa2fcdd53c8f3a2d13187501af45aaeb095fb684aa2b25b2fe38e",
           "url_leaf_count": 5
         },
         "nyserda:PON6004": {
           "before_sha256": "db6cab8bc912dcd5b6840e42d9b08dfcd2901ed5624f9b0a5d158d231ccf5b48",
-          "after_sha256": "de7b998448a14421d3b9349f6eab85d54d7139a65cd9f42951a2da61b2d92d6c",
+          "after_sha256": "0587d8648b7068e9e3924345d8e895de974d5d42db8df4a6ad7962d3bc24f84f",
           "url_leaf_count": 5
         },
         "nyserda:PON6025": {
           "before_sha256": "c16ddff07ce2b225fc4d1216f6bd9c301075a3521af0c185183b8eef8514a5d9",
-          "after_sha256": "f9ac21c0a6b88cb93a19e3bc060777bc9a3c322edff8882fd36deb7e48ccddfe",
+          "after_sha256": "cb42f16494e543c1ba17402892d63bd456474888aae2c2888539df8e6e07ca39",
           "url_leaf_count": 6
         }
       }
@@ -585,5 +585,459 @@
       }
     }
   },
-  "rationale": "Navigation/citation URL syntax only. Preserve every source value, record/event ID, type, clock, prior identity repair and historical acquisition evidence. No recollection or paid work."
+  "rationale": "Navigation/citation URL syntax only. Preserve every source value, record/event ID, type, clock, prior identity repair and historical acquisition evidence. No recollection or paid work.",
+  "evidence_invalidation_rationale": "The 39 retained NYSERDA acquisitions belong to the original malformed source URLs and contain no extracted facts, program areas or subtopics. After correcting the navigation URL, normal source-change projection withholds their public attachments and checked dates. Historical acquisition bytes, URLs, signatures, and source clocks remain unchanged; no retrieval or provider work is authorized.",
+  "evidence_invalidations": {
+    "nyserda:NYT-VIP": {
+      "after_sha256": "b96d4ebaf62be9aeaa6e4761dace655e12cd6b275949099b10d95adcef44e5f8",
+      "before_sha256": "c2e2dc39086dabb3ad51058fb96f897d7f4f3702a34d8d1d5e927f4d9b70fc78",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON2112": {
+      "after_sha256": "d6c39bd495250b3806b20f5e68ec1df917d038ef284273c34ca42095428039c3",
+      "before_sha256": "b640ade0a810c1ae0650820e105922019eb9a64a8430d31aa14be2ec145a185f",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON3082": {
+      "after_sha256": "441f157522d012d6f5f446301c52e1a83682a599562081449242830a44593683",
+      "before_sha256": "80c47176c6cb945018ed799865c35c3adf4c0278681f7958ef7be2901eb9f881",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON3414": {
+      "after_sha256": "1fd6e05833b1c255c07bf284482180722429f93729cea6aa10f4d650b9199260",
+      "before_sha256": "57a5f953b0063d002a664952d3b3340a92c09810ee751243afdffe18c57eaa1f",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON3701": {
+      "after_sha256": "b5fbb0cbff3aa2fcdd53c8f3a2d13187501af45aaeb095fb684aa2b25b2fe38e",
+      "before_sha256": "5f11cfa4e331b56f88d4d06ef0197ce73930d44c8155146c1af9e3a3b93bc4f3",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON3982": {
+      "after_sha256": "37d581e19155bb9052111e68908c49690c4cb7c262ad3e734462ec5459c9322a",
+      "before_sha256": "a5076d651b8174ad9fcaeec8d1d0bd679373f6ede488ce667b6b12b45639f91d",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON4192": {
+      "after_sha256": "62e5955600e435e7eed4c3fca50469484f6c0ce70e0b5490a748251a0aea2157",
+      "before_sha256": "d90df529f7b85f4d8d9eb0308f99af1c4b6d1ef86b33dfa20fc459656ea31b52",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON5367": {
+      "after_sha256": "66635fe55d33f21e87f8bd736c35c853bc4ccd456fb4c4d585a14451487628f4",
+      "before_sha256": "1dd7a17ce745532e63ca71b9b781a70f611d08c40018df9841075f73b615849c",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON5437": {
+      "after_sha256": "c06c5bdd99920548d4c1c7ece100196c37e8ebac7131fc709b7c6d29013a9866",
+      "before_sha256": "1226d55c796b742d4ae671997d0ed2612f391262519104b2bb121a18d9a201cf",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON5552": {
+      "after_sha256": "8c2acb43a637585bbfadd844c27ad64d8ff24d56784be253eb0c9769016ac5aa",
+      "before_sha256": "c5735c5f6c51b1865aaa2e001bf7af68369f5ff3eaba6fb64b51c57198544f18",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON5859": {
+      "after_sha256": "55df417d92131ac6725ddd728184ba0fac4a91b8b59af46e392fb39797b7038d",
+      "before_sha256": "d62ef64f71ef542ac7f7d3ca8f883102c3ef92c8eb56d6e96eb6abc067854cfd",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON5862": {
+      "after_sha256": "2cc1b8aef47d8dc12e7cca073181f894771cdf8e59a09cfd3c583c3a47fa57d1",
+      "before_sha256": "5f0ded530808f4e19a5203346eb8c063b199ffae625faedc02be12908ed94511",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON5899": {
+      "after_sha256": "9913e4a120c3f52a7e930b07d7d62b6a0fd0c96d2c2548f7e08ee95e16ade556",
+      "before_sha256": "83fa55fa60028b8baf84f78e92a7c0d0898f5fc55be5ce20c3cc41bffa5eea46",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6004": {
+      "after_sha256": "0587d8648b7068e9e3924345d8e895de974d5d42db8df4a6ad7962d3bc24f84f",
+      "before_sha256": "de7b998448a14421d3b9349f6eab85d54d7139a65cd9f42951a2da61b2d92d6c",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6025": {
+      "after_sha256": "cb42f16494e543c1ba17402892d63bd456474888aae2c2888539df8e6e07ca39",
+      "before_sha256": "f9ac21c0a6b88cb93a19e3bc060777bc9a3c322edff8882fd36deb7e48ccddfe",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6037-PhaseI": {
+      "after_sha256": "f53c88c36a010a4e93309c8432d08ad738c1776a78ac397761f3c51968c5a5dd",
+      "before_sha256": "ad399f7840f29072bd63e79baed5019c785b31436a279a72ebbd11d5963510e6",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6037-PhaseII": {
+      "after_sha256": "f00c1f1af394b5233136b3fff7179a606370132c0fb57ddff320223530340ae5",
+      "before_sha256": "87731c399b78b85b4da26abb369cdc49a01d949a84fc2e4332d277714de3a25f",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6088": {
+      "after_sha256": "1714b3e8b437550f9b8b85d48b85554f2637350409aff63bd39c2c10b0d00b79",
+      "before_sha256": "fe448195d7831789ae1d69040e145593d93ed1dace48bf5e65bda2f6e61fce38",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6121": {
+      "after_sha256": "7df50c41453861561a1328d4d7560c83b351801f411ab4207414e4dd893cbfb6",
+      "before_sha256": "2f0c4a6c13ebbd5643df712b4e4e35ef718fc6ff1ad6ab84d27266ca2d1abebd",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6122": {
+      "after_sha256": "f716b5fbf885c636d1e33300c00f39acfd6f2a80daa54b7d926ddf164f5a7c98",
+      "before_sha256": "d8bfdb33f754591d41334df62d2326830aab5a7f281bffa000e8063e6892a508",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6141": {
+      "after_sha256": "915fb0d0909916869e16f328a8f90164ba23a23247ba4d7c1ba876d53344fae6",
+      "before_sha256": "d99b04b93f945a75db58aac0318d31677ca5d4c989bb2f9e0267742a63c1438c",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6149": {
+      "after_sha256": "69f1f74a7bff637495f59aee84aa6b76d6d6ccb3d91cb7fd2ff939b4ba84c36c",
+      "before_sha256": "5c8db88fc4163dae556b23e4bca52f4863f6c90f09735f8aa3cfce039c59514d",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6201": {
+      "after_sha256": "2405da45ad1737576b9458b0e95b6df0572e8f76f67d3eedc1119e5e20283f08",
+      "before_sha256": "8ef04f7ff579019bed3ba06beb44f53ec63e336ef514853946afc19b489661a2",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6206": {
+      "after_sha256": "d8399423faef2e96abc5ca5e38c524b81cf5b857a7a5b80a26c3623030a2a1d7",
+      "before_sha256": "75e1a0a28bf460c4c6ef15563d847c79d6d8cb0d493d62de13302ff187b53d42",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6220": {
+      "after_sha256": "5172ca067eb154fd447054b0d9e7797cebfffe27eed98af9d8608c1853c15428",
+      "before_sha256": "2d0a1e1929837ced17e88f26223c01364d3668cc89e4f0166471519eb5669ef2",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6236": {
+      "after_sha256": "03350fd6ce78d8f13ec80ddfb15702e6e03627c5c1aaf5a7b672956668f489e5",
+      "before_sha256": "874133bb6fa0819813fa7963efc4f93fb0a1dd12c4d41ed779aaacd5df83801d",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:PON6242": {
+      "after_sha256": "60358be5127fd1c5dcf2c66e1b55a9032aaaf88780b9ef371fce9bc4bd8c4119",
+      "before_sha256": "f533962dafc24c413d319a5168df0fe93671ea86b4b8ecfb20158558b0add724",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFP1": {
+      "after_sha256": "0e323c672b4dd9a973deef3720c017211081b90d52efcab4109234b311848f32",
+      "before_sha256": "b270114bd629c1d94d7582a688ed9c7ebd36ddf7a5b13a4e898ce113f1b94227",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFP18": {
+      "after_sha256": "942570062038d51c84ca1b04ea0c03ab9e06338f085315099db15566cc501cdf",
+      "before_sha256": "17a062140960c3ad6178d0fab47b103d9a716f994d5c4fb1e88b98dd24299611",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFP23": {
+      "after_sha256": "05868536baa39ea06cc9e670921cff189403839fac2ba2214caa30bb67b16e2f",
+      "before_sha256": "9519bcc80dc7a81e447b7e0a78c4c6297baa99fd4934ad60602ba315530070be",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFP3928-Rd7": {
+      "after_sha256": "3a989fc26e6112834f5755e310f9889b9e300ae68117f893134f4c75b1bc0785",
+      "before_sha256": "97bd22854b353e3ae1b1b302b9cce9d5cc452f3f4aa7238254bbc99313c84850",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFP6041": {
+      "after_sha256": "8319670bcf922395d1ff586fd78c39fdf7ff046679d86750674c48957d3196f8",
+      "before_sha256": "d48489d577376e0f6e84c10484ec08a4c05eb337277b7cda3393583c52ccfb3f",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFP6224": {
+      "after_sha256": "a993af675b730bfcd7e41837f21f5294706d96075d3cb952cff998f0a7238786",
+      "before_sha256": "cc246826876597dc09053d5104096032dab989a071f37e853aa5f778e2ff312a",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFQL4922": {
+      "after_sha256": "e8c78a5aa2399448e8615bf0b1409b04f8dda65817e4f1f59042c31da6a20ba9",
+      "before_sha256": "92d29de405b6f7da1a4dc4e4798a34c73725faf925ee4b7ae66755ddc0fd56e8",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFQL5312": {
+      "after_sha256": "2bfeb4f6412e9d94d85b96be6afd2100f1394b6f646b7bbcc5f3ad0efdff3e86",
+      "before_sha256": "4e077de25e5a92de09052afc7f01c906db7a16be2a07ba48630ed27aac56d807",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFQL5548": {
+      "after_sha256": "d548a6291961fef99612dcb0156bafab3bfe729589121e01fe6e4827b4dcd9e5",
+      "before_sha256": "32a574f430742ba61546f72c1669e257194e3522a3728ff4e4c58e1190f13555",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFQL5906": {
+      "after_sha256": "4ae29ca7d6f2283bc0c04f370982c5bea2a116c313f6efe49ebd410f39b3c204",
+      "before_sha256": "7377daf9f85b28b008e0851cdcd320f7fee87c8ca3729ef18802130a679fb9ba",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFQL5937": {
+      "after_sha256": "17e3d49d14f2e9343cffe4e3127919b4d8460f7a3458df7ae87954d01c4949bc",
+      "before_sha256": "0f8f91a831e30f39f9f6833d63770004a45f8f5a8497066b3b158787225c1d40",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    },
+    "nyserda:RFQL6152": {
+      "after_sha256": "1104e616de0f364d63c7355cb4858f1a859084ba5c1d01186de66292afbc46ba",
+      "before_sha256": "4a9ff690a78e0f263f99eaf9fdf6808c25e725e5d6eead69a3e8d75bb1dc3923",
+      "changed_fields": [
+        "document_evidence",
+        "document_evidence_checked_at",
+        "document_evidence_status",
+        "document_status_signals",
+        "submission_requirements"
+      ]
+    }
+  },
+  "evidence_diagnostics": {
+    "before": {
+      "document_current_count": 705,
+      "document_pending_count": 528,
+      "document_failed_count": 39,
+      "citation_fact_count": 3173,
+      "document_deadline_count": 1004,
+      "limited_submission_review_count": 23,
+      "review_queue_count": 1414,
+      "changed_document_count": 299
+    },
+    "after": {
+      "document_current_count": 666,
+      "document_pending_count": 528,
+      "document_failed_count": 39,
+      "citation_fact_count": 3173,
+      "document_deadline_count": 1004,
+      "limited_submission_review_count": 23,
+      "review_queue_count": 1364,
+      "changed_document_count": 299
+    }
+  }
 }

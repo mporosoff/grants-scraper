@@ -135,15 +135,26 @@ def _published_access_supersedes(root, run, artifacts):
 
 
 def _published_url_supersedes(root, run, artifacts):
-    """Recognize only the authenticated 051d parent of a published URL child.
+    """Recognize the exact 051d parent and rejected3912 sibling after publication.
 
     This is publication lineage, not permission to retire arbitrary zero-spend
     runs. A later attempt or changed artifact identity remains a recovery owner.
     """
     from tools import catalog_url_correction as url
-    if run.get('id') != url.RUN:
+    superseded = url.SUPERSEDED_URL_CORRECTION
+    sibling = run.get('id') == superseded['producer']['run_id']
+    if run.get('id') == url.RUN:
+        attempt, event_sha, pins = url.ATTEMPT, url.EVENT_SHA, url.ARTIFACTS.values()
+    elif sibling:
+        owner = superseded['producer']
+        attempt, event_sha = owner['run_attempt'], owner['event_sha']
+        names = {'candidate': 'candidate-' + superseded['candidate_id'],
+                 'receipt': f"url-correction-{owner['run_id']}-{attempt}"}
+        pins = [(item['id'], names[role], item['sha256'])
+                for role, item in superseded['artifacts'].items()]
+    else:
         return False
-    expected = {'run_attempt': url.ATTEMPT, 'head_sha': url.EVENT_SHA,
+    expected = {'run_attempt': attempt, 'head_sha': event_sha,
                 'head_branch': 'main', 'path': WORKFLOW, 'event': 'workflow_dispatch',
                 'status': 'completed', 'conclusion': 'failure'}
     if (type(run.get('run_attempt')) is not int
@@ -155,7 +166,7 @@ def _published_url_supersedes(root, run, artifacts):
         return False
     if sum(item['name'].startswith('candidate-') for item in artifacts) != 1:
         return False
-    for identifier, name, digest in url.ARTIFACTS.values():
+    for identifier, name, digest in pins:
         matches = [item for item in artifacts if item.get('id') == identifier or item.get('name') == name]
         if (len(matches) != 1 or matches[0].get('id') != identifier or matches[0].get('name') != name
                 or matches[0].get('digest') != 'sha256:' + digest or matches[0].get('expired') is not False):
@@ -168,6 +179,10 @@ def _published_url_supersedes(root, run, artifacts):
         receipt = child.get('url_correction') or {}
         if (receipt.get('parent_candidate') != url.PARENT
                 or child.get('derived_from_candidate') != url.PARENT):
+            continue
+        if sibling and c.encoded(receipt.get('superseded_url_correction')) != c.encoded(superseded):
+            # Sharing the same parent never retires an unpublished sibling.
+            # The reviewed v2 projection must carry its full authenticated proof.
             continue
         valid_identity = (child.get('candidate_id') == pointer.get('candidate_id')
             == c.digest(c.encoded({key: value for key, value in child.items() if key != 'candidate_id'})))
@@ -182,7 +197,7 @@ def _published_url_supersedes(root, run, artifacts):
                 and parent_producer.get('generation_run_id') == str(url.RUN)
                 and parent_producer.get('generation_run_attempt') == str(url.ATTEMPT)
                 and parent_producer.get('generation_sha') == url.EVENT_SHA):
-            raise Hold('Published URL-correction lineage does not authenticate its exact parent', url.RUN)
+            raise Hold('Published URL-correction lineage does not authenticate its exact owner', run['id'])
         return True
     return False
 

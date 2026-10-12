@@ -157,7 +157,7 @@ parent and run, and unconditionally pins the exact before/after semantic parser
 fingerprints. A later parser change, unchanged parser, or reversion cannot reuse
 this correction selector to claim new generation. It authenticates the complete parent candidate and prior identity
 receipt, reauthenticates the original generation's spending state/reservation,
-and applies a pinned URL-only projection. It corrects navigation fields in the
+and applies a pinned navigation and public-evidence projection. It corrects navigation fields in the
 catalog, source cache and retained feed snapshots without creating new events or
 changing event times. Historical document acquisition evidence, signatures and
 link-health observations retain their original bytes; they are not relabeled as
@@ -171,3 +171,35 @@ Exact-byte gates, review, protected publication and live verification remain
 required. The rejected parent's owner is held until an authenticated protected
 URL child completes publication; only its exact failed attempt and artifact
 identity may then retire. Keep the normal workflow enabled throughout.
+
+The first URL child `3912542572b1e8d85fd5165940597a830f2f9dc122c1887fb760019b0034892a`
+(run `38286330702`, attempt 1) failed notice-projection validation before
+publication. Thirty-nine corrected NYSERDA records still attached document
+receipts acquired from the old login URLs. The v2 projection performs ordinary
+source-change invalidation: it sets `document_evidence_status` to `source_changed`,
+sets `document_evidence` to null, and removes the stale check time and two empty
+derived lists. All other record fields and the original catalog/evidence clocks
+remain exact. The two already-pending NYSERDA records stay unchanged. Historical
+acquisition files, signatures, source-cache content apart from the pinned URL
+repairs, and historical evidence remain intact. The package independently checks
+these five permitted fields and requires the complete ordered corpus to match.
+
+Use a fresh provider-free dispatch of the same selector from the retained
+`051d` parent. Do not rerun the failed job to create a second candidate in the
+same run: recovery would first restore the failed child, and multiple candidates
+must remain ambiguous. The v2 receipt authenticates the complete failed `3912`
+manifest, candidate and receipt ZIPs, original lineage and latest terminal
+attempt. Both failed candidates are quarantined. Only after protected publication
+of the exact corrected sibling may their two narrowly authenticated owners
+retire; an unpublished or unrelated sibling, changed attempt, missing/expired
+artifact, or new spend reservation retains the hold. The normal refresh workflow
+stays enabled. Rehearse the existing no-fetch notice projection and full corpus
+checks before requesting the next protected validation run.
+
+The public evidence summary is projected from the corrected published records as
+part of the same batch. All eight record-derived counters are checked against
+the original and corrected records: current evidence changes from 705 to 666 and
+review-queue items from 1,414 to 1,364; the other six counters stay exact. The
+historical acquisition, failure, parser, subtopic, remaining-work and processing
+metrics are not recomputed from a zero-fetch replay. In particular, two retained
+failed acquisitions remain represented as failed in the published records.
