@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/public-health.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Healthy Lifestyles in Youth</title>
@@ -186,6 +186,16 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-05-28 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting research to develop improved drug susceptibility tests (DSTs) for mycobacterial drugs, including those currently used for treatment of tuberculosis (TB) and clinically important non-tuberculous mycobacterial (NTM) infections, new drugs and drugs in late-stage clinical development. TB is a l…</summary>
+  </entry>
+  <entry>
+    <title>Chronic Disease Education and Awareness</title>
+    <link href="https://www.grants.gov/search-results-detail/364055"/>
+    <id>urn:funding-finder:grants-gov:364055</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-04-30 | This NOFO will support organizations to strengthen national chronic disease education and awareness for chronic diseases that are not supported through disease-specific CDC funding by implementing activities that enhance surveillance, address priority evidence gaps, develop and disseminate evidence-based educational resources, strengthen strategic partnerships, and promote the adoption of evidence…</summary>
   </entry>
   <entry>
     <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
@@ -634,14 +644,5 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
-  </entry>
-  <entry>
-    <title>Centers of Excellence in Healthcare Quality and Safety</title>
-    <link href="https://www.grants.gov/search-results-detail/361997"/>
-    <id>urn:funding-finder:grants-gov:361997</id>
-    <updated>2026-11-05T00:00:00Z</updated>
-    <author><name>Centers for Disease Control - NCEZID</name></author>
-    <category term="Public health"/>
-    <summary>Centers for Disease Control - NCEZID | Estimated Application 2027-01-04 | This Program will create a collaborative network of healthcare systems, facilities and public health partners to rapidly detect, respond to, and prevent threats to patient and healthcare worker safety. This Program will support work that improves the safety, quality and resilience of U.S. healthcare delivery. The Program will be made up of healthcare systems inclusive of multiple facilities in a v…</summary>
   </entry>
 </feed>
