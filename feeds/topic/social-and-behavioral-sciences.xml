@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/social-and-behavioral-sciences.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -299,6 +299,16 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-23 | The National Institutes of Health intends to publish a Notice of Funding Opportunity (NOFO), Pragmatic and Implementation Trials Conducted in Health Care SettingsThis funding opportunity will support large-scale pragmatic trials that test intervention effectiveness in routine clinical care and/or implementation trials that evaluate strategies for delivering interventions within health care setting…</summary>
   </entry>
   <entry>
+    <title>Neural Ensembles &amp; Used Substances (NExUS) Collaboratory: Building a Multimodal Inventory of Cell Ensembles Encoding the Effects of Addictive Substances (U01 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/360562"/>
+    <id>urn:funding-finder:grants-gov:360562</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Neuroscience"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2027-02-08 | The National Institute on Drug Abuse (NIDA) invites applications to renew and expand the Collaboratory on Neural Ensembles and Used Substances (NExUS).NExUS is a collaborative research program to decode how substance use experiences and addictive neurobehavioral states are represented in the brain at the level of cell populations. This funding opportunity seeks applications that propose systematic…</summary>
+  </entry>
+  <entry>
     <title>BJA FY 2026 National Center for Veterans Justice</title>
     <link href="https://www.grants.gov/search-results-detail/363898"/>
     <id>urn:funding-finder:grants-gov:363898</id>
@@ -366,17 +376,6 @@
     <summary>National Institutes of Health | Application 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
   </entry>
   <entry>
-    <title>SHINE</title>
-    <link href="https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view"/>
-    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250706</id>
-    <updated>2026-08-28T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-09 | DSO is issuing a Disruption Opportunity, inviting submissions of innovative basic or applied research concepts in the technical domain of targeted neuroplasticity. | See Program The SHINE Disruption Opportunity aims to precisely and non-invasively target and enhance the brain’s ability to adapt and rewire itself, allowing for more complete recovery after injury. Though the key to the brain’s remar…</summary>
-  </entry>
-  <entry>
     <title>Expeditions in Computing (Expeditions)</title>
     <link href="https://www.grants.gov/search-results-detail/363623"/>
     <id>urn:funding-finder:grants-gov:363623</id>
@@ -438,24 +437,6 @@
     <category term="Neuroscience"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Estimated Application 2026-10-30 | The National Institute of Neurological Disorders and Stroke (NINDS), with other NIH Institutes and Centers (ICs), intends to publish a Notice of Funding Opportunity (NOFO) to investigate the mechanisms of action of therapeutic medical devices with the overall goal of improving clinical outcomes with device-based approaches. Medical devices are essential in managing health conditions, complementing…</summary>
-  </entry>
-  <entry>
-    <title>Optimal Treatment Strategies for use of Anti-Obesity Medications (AOMs) in Children and Adolescents Clinical Centers (U01 Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360387"/>
-    <id>urn:funding-finder:grants-gov:360387</id>
-    <updated>2026-06-08T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2026-10-09 | This Notice of Funding Opportunity (NOFO) invites applications from clinical centers to participate in a consortium to test anti-obesity medication (AOM) treatment strategies for youth with obesity that maximize benefits and minimize risks of AOM use. Such intervention strategies should support the promotion of healthy growth and development; adequate nutritional status/intake, healthy eating and …</summary>
-  </entry>
-  <entry>
-    <title>Optimal Treatment Strategies for use of Anti-Obesity Medications (AOMs) in Children and Adolescents Research Coordinating Center (U24 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360441"/>
-    <id>urn:funding-finder:grants-gov:360441</id>
-    <updated>2026-06-08T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2026-10-09 | This Notice of Funding Opportunity (NOFO) invites applications for a Research Coordinating Center (RCC) to participate in a consortium of clinical centers that will test anti-obesity medication (AOM) treatment strategies for youth with obesity that maximize benefits and minimize risks of AOM use. Such intervention strategies should support the promotion of healthy growth and development; adequate …</summary>
   </entry>
   <entry>
     <title>NIH Research Education Program - Research Experiences (Parent R25 - Clinical Trial Not Allowed)</title>
@@ -651,5 +632,24 @@
     <category term="Community development"/>
     <category term="Social and behavioral sciences"/>
     <summary>National Institutes of Health | Application 2028-11-02 | This Notice of Funding Opportunity (NOFO) supports applications for a collaborating Data Coordinating Center (DCC) for investigator-initiated multi-site clinical trials including efficacy, comparative effectiveness, pragmatic and/or implementation research clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may inclu…</summary>
+  </entry>
+  <entry>
+    <title>Single-Site Investigator-Initiated Clinical Trials (R61/R33 Clinical Trial Required)</title>
+    <link href="https://www.grants.gov/search-results-detail/358850"/>
+    <id>urn:funding-finder:grants-gov:358850</id>
+    <updated>2026-03-18T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Community development"/>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2028-11-02 | This Notice of Funding Opportunity (NOFO) supports applications to develop and conduct investigator-initiated single site clinical trials including efficacy, comparative effectiveness, pragmatic and/or dissemination and implementation science clinical trials. Trials using innovative designs such as platform trials, adaptive, and Bayesian designs are encouraged. These trials may include ones that t…</summary>
+  </entry>
+  <entry>
+    <title>Development of Collaborative Research Facilities or Research-Resource Facilities (C06 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359701"/>
+    <id>urn:funding-finder:grants-gov:359701</id>
+    <updated>2026-03-06T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Social and behavioral sciences"/>
+    <summary>National Institutes of Health | Application 2028-01-25 | This Notice of Funding Opportunity (NOFO) solicits applications to develop shared-use research facilities or research-supporting facilities that enable collaborative research and benefit broad research communities at large. The NOFO supports two existing construction programs: the Biomedical Research Facilities (BRF) program and the HIV/AIDS Research Facilities (HRF) program. The BRF program suppo…</summary>
   </entry>
 </feed>
