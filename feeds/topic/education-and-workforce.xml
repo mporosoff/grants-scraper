@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/education-and-workforce.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -229,6 +229,16 @@
     <author><name>Centers for Disease Control - NCIPC</name></author>
     <category term="Education and workforce"/>
     <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-05-03 | The purpose of this NOFO is to provide multiyear funding to state, territorial, tribal, and local health departments to implement and evaluate comprehensive primary prevention strategies that prevent multiple forms of violence and promote healthy development among adolescents and young adults. Building on the prior PREVAYL cooperative agreement, this NOFO emphasizes: Improving data-driven decision…</summary>
+  </entry>
+  <entry>
+    <title>Chronic Disease Education and Awareness</title>
+    <link href="https://www.grants.gov/search-results-detail/364055"/>
+    <id>urn:funding-finder:grants-gov:364055</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-04-30 | This NOFO will support organizations to strengthen national chronic disease education and awareness for chronic diseases that are not supported through disease-specific CDC funding by implementing activities that enhance surveillance, address priority evidence gaps, develop and disseminate evidence-based educational resources, strengthen strategic partnerships, and promote the adoption of evidence…</summary>
   </entry>
   <entry>
     <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
@@ -604,16 +614,5 @@
     <category term="Education and workforce"/>
     <category term="Environmental science"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Environmental Health Sciences (NIEHS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for research coordination and data support for the Health and Extreme Weather (HEW) initiative. This solicitation will include two closely aligned components: research coordination and data support. The coordinating component will be responsible for faci…</summary>
-  </entry>
-  <entry>
-    <title>Research Resource for a National Swine Resource and Research Center (U42 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/362278"/>
-    <id>urn:funding-finder:grants-gov:362278</id>
-    <updated>2026-11-25T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Infectious disease"/>
-    <summary>National Institutes of Health | Estimated Application 2027-01-25 | This Notice of Funding Opportunity (NOFO) encourages applications to provide continuing support for a National Swine Resource and Research Center (NSRRC). The NSRRC aims to enable gold-standard science in biomedical research by serving as a centralized national resource for the creation, breeding, cryopreservation, and distribution of genetically modified models. By consolidating these essential f…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/infectious-disease.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Partnerships for Advancing Development of Diagnostics for Infectious Diseases</title>
@@ -276,6 +276,15 @@
     <summary>National Institutes of Health | Estimated Application 2027-01-29 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission through the continued support of the Collaborative Network for Clinical Research on Immune Tolerance. The purpose of this program is to enhance understanding of the underlying mechanisms of the induction, maintenance, and loss of immune tolerance in humans; and to develop improved tolerogenic interventio…</summary>
   </entry>
   <entry>
+    <title>Pilot Projects to Enhance the Human Virome Program (R03 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361431"/>
+    <id>urn:funding-finder:grants-gov:361431</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Infectious disease"/>
+    <summary>National Institutes of Health | Application 2026-11-10 | The Common Fund Human Virome Program (HVP) aims to extensively and comprehensively characterize the "healthy" human virome (the collection of viruses that normally reside inside the human body without evidence of disease) and create tools, models, and methods that will enable an in-depth study of its variation and composition in relation to host factors and its influence on health and disease. The…</summary>
+  </entry>
+  <entry>
     <title>Centers for Structural Biology of HIV and Other Infectious Diseases (U54 Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/361050"/>
     <id>urn:funding-finder:grants-gov:361050</id>
@@ -413,17 +422,6 @@ we will not consider for support include Covid-19 relat…</summary>
     <category term="Environmental science"/>
     <category term="Infectious disease"/>
     <summary>Animal and Plant Health Inspection Service | Application 2026-10-19 | The U.S. Department of Agriculture, Animal and Plant Health Inspection Service announce this funding opportunity to carry out the Plant Protection Act Section 7721 (PPA 7721) National Clean Plant Network (NCPN) program. APHIS will consider project proposals that clearly and directly support the strategic goals and objectives of the National Clean Plant Network as described in the NCPN Strategic Pl…</summary>
-  </entry>
-  <entry>
-    <title>Cooperative Program for Modeling Clinical Transplantation</title>
-    <link href="https://www.grants.gov/search-results-detail/361831"/>
-    <id>urn:funding-finder:grants-gov:361831</id>
-    <updated>2026-07-10T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Infectious disease"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Estimated Application 2026-10-09 | The National Institute of Allergy and Infectious Diseases (NIAID) will support its mission through the Cooperative Program for Modeling Clinical Transplantation. Advancements of new therapeutics and success in human solid organ transplantation will require innovative and clinically translatable in-vitro and in-vivo systems to model local and systemic immune responses. This program seeks applicatio…</summary>
   </entry>
   <entry>
     <title>Avant Garde/Avenir Awards for Investigators Conducting High Risk/High Reward Research on HIV and Substance Use (or Substance Use Disorders) (DP1 Clinical Trial Optional)</title>

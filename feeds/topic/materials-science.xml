@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/materials-science.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Microplastics Research and Resource Coordination Center (U24 - Clinical Trial Not Allowed)</title>
@@ -85,7 +85,6 @@
     <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
     <updated>2026-09-11T00:00:00Z</updated>
     <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <category term="Materials science"/>
@@ -104,19 +103,7 @@
     <category term="Carbon management"/>
     <category term="Climate change"/>
     <category term="Materials science"/>
-    <summary>Golden Field Office | Concept Paper 2026-10-09 | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
-  </entry>
-  <entry>
-    <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363754"/>
-    <id>urn:funding-finder:grants-gov:363754</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>Idaho Field Office</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Idaho Field Office | Application 2026-10-09 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
+    <summary>Golden Field Office | Application 2026-12-01 | prerequisite closed | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
   </entry>
   <entry>
     <title>Geosciences Core Research: Atmospheric, Geospace, Earth and Ocean Sciences (GEO Core)</title>
