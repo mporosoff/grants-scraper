@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/artificial-intelligence-and-machine-learning.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)</title>
@@ -89,6 +89,19 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359152"/>
+    <id>urn:funding-finder:grants-gov:359152</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2029-03-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
   </entry>
   <entry>
     <title>Rigorously Evaluating Approaches to Prevent Child Sexual Abuse and Problematic Sexual Behavior among Youth</title>
@@ -226,7 +239,6 @@
     <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
     <updated>2026-09-11T00:00:00Z</updated>
     <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <category term="Materials science"/>
@@ -256,16 +268,6 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Office of Scientific Research | Application 2026-12-04 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR), which will hereafter generally be referred to as “we”, “us”, “our”, or “AFOSR.” The Fiscal Year 2027 Air Force Young Investigator Research Program (YIP) intends to support individual early career scientists and engineers who have received their Ph. D. or equivalent …</summary>
-  </entry>
-  <entry>
-    <title>NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
-    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A24-569</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-09</summary>
   </entry>
   <entry>
     <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
@@ -433,18 +435,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Institute of Museum and Library Services | Application 2026-11-13 | The National Leadership Grants for Museums program (NLG-M) invests in projects that address critical needs of the museum field. NLG-M projects have the potential to advance practice in the profession to strengthen museum services for the public through the development and replication of model practices, tools, research findings, and collaborations, including through the creative and effective use …</summary>
-  </entry>
-  <entry>
-    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU) Equipment/Instrumentation</title>
-    <link href="https://www.grants.gov/search-results-detail/363724"/>
-    <id>urn:funding-finder:grants-gov:363724</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Dept of the Army -- Materiel Command</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Dept of the Army -- Materiel Command | Application 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
   </entry>
   <entry>
     <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
@@ -660,15 +650,6 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <summary>NASA Headquarters | Application 2026-12-02 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by 8/20/2026. See the full posting on NSPIRES for details. NOTICE: September 18, 2026. Section 3.1 on participation of NASA ISFM scientists has been improved. Details on the redacted and anonymized budget requirements have been added to Table A.14-1 to be consistent with Section 4.3.2. The instructions regarding B…</summary>
   </entry>
   <entry>
-    <title>Development and Testing of a Multi-use Frameworks Playbook for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/359271"/>
-    <id>urn:funding-finder:grants-gov:359271</id>
-    <updated>2026-06-30T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <summary>National Institutes of Health | Application 2026-10-09 | The overarching goal of this notice of funding opportunity (NOFO) and its companion opportunities is to establish the Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) Program to support development of innovative, reliable, cost-effective, and sustainable multimodal AI-based clinical decision support (CDS) tools. PRIMED-AI CDS tools are based on the integration of cl…</summary>
-  </entry>
-  <entry>
     <title>Model-to-Clinic (M2C) for Precision Medicine with AI: Integrating Imaging with Multimodal Data (PRIMED-AI) (UG3/UH3, Clinical Trial Optional)</title>
     <link href="https://www.grants.gov/search-results-detail/359666"/>
     <id>urn:funding-finder:grants-gov:359666</id>
@@ -739,5 +720,29 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Bureau of Reclamation | Application 2026-11-20 | The objectives of this NAA/TAP funding opportunity are to provide funding for drought relief actions/projects that mitigate drought impacts for designated federally recognized tribes within the Colorado River Basin (see Eligibility section for list of tribes), and which advance Presidential and Department of the Interior Priorities within the Basin. Proposals should meet one or more of the followi…</summary>
+  </entry>
+  <entry>
+    <title>F25AS00332 Highlands Conservation Act - Competitive Funding Round</title>
+    <link href="https://www.grants.gov/search-results-detail/362484"/>
+    <id>urn:funding-finder:grants-gov:362484</id>
+    <updated>2026-05-19T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Fish and Wildlife Service | Application 2026-10-31 | The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
+  </entry>
+  <entry>
+    <title>F25AS00379 Highlands Conservation Act - Base Funding Round</title>
+    <link href="https://www.grants.gov/search-results-detail/362480"/>
+    <id>urn:funding-finder:grants-gov:362480</id>
+    <updated>2026-05-19T00:00:00Z</updated>
+    <author><name>Fish and Wildlife Service</name></author>
+    <category term="Environmental science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Data science"/>
+    <category term="Water"/>
+    <summary>Fish and Wildlife Service | Application 2026-10-31 | The Highlands Conservation Act Program (HCA) is administered by the US Fish and Wildlife Service (Service) to assist Connecticut, New Jersey, New York, and Pennsylvania in the protection of land and natural resources in the Highlands Region. HCA grants support land conservation projects in which a State, County, or Municipal entity acquires land or an interest in land from a willing seller to cons…</summary>
   </entry>
 </feed>

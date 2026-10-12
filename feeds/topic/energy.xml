@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/energy.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Affordable Rural Cooperative (ARC) Energy Program</title>
@@ -16,6 +16,16 @@
     <category term="Community development"/>
     <category term="Energy"/>
     <summary>Rural Utilities Service | Letter Of Intent 2026-11-20 | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for applications under the Affordable Rural Cooperative (ARC) Program. In addition, the Agency is announcing the eligibility requirements, application process and deadlines, and the criteria that will be used by RUS to asses…</summary>
+  </entry>
+  <entry>
+    <title>ROSES 2025: B.8 Heliophysics Spaceflight Science Foundations</title>
+    <link href="https://www.grants.gov/search-results-detail/364039"/>
+    <id>urn:funding-finder:grants-gov:364039</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2027-02-05 | The close date above is the date for the Step-2 proposal due date. The Step-1 proposal due date is November 20, 2026. Step-2 proposals cannot be submitted if a Step-1 proposal was not submitted. ﻿NOTICE: Amended October 8, 2026. This amendment adds this new program element to ROSES-2025. A virtual telecon for potential proposers will be held October 26 at noon Eastern Time. Connect information wil…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: B.7 The Heliophysics Low-Cost Access to Space</title>
@@ -199,17 +209,6 @@
     <category term="Agriculture and food"/>
     <category term="Energy"/>
     <summary>NYSERDA | Application 2026-12-10 | Solicits proposals for the Sun and Soil Program to provide offerings that support farmers and agricultural communities so they may benefit from the integration of solar energy and active agriculture. Program Opportunity Notice (PON 6206) is designed to help farmers, communities, supporting organizations, and businesses readily adopt and adapt integrations of solar energy in ways that sustain agric…</summary>
-  </entry>
-  <entry>
-    <title>Powering Affordable Reliable Technology (PART) Energy Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363396"/>
-    <id>urn:funding-finder:grants-gov:363396</id>
-    <updated>2026-09-08T00:00:00Z</updated>
-    <author><name>Rural Utilities Service</name></author>
-    <category term="Agriculture and food"/>
-    <category term="Community development"/>
-    <category term="Energy"/>
-    <summary>Rural Utilities Service | Application 2026-10-09 | verify prerequisite | The Rural Utilities Service (RUS or the Agency), a Rural Development (RD) Agency of the United States Department of Agriculture (USDA), is soliciting Letters of Interest (LOI) for loan Applications, announcing the Application process for those loans, and providing deadlines for Applications from eligible entities under the Powering Affordable Reliable Technology (PART) Energy Program. These loan f…</summary>
   </entry>
   <entry>
     <title>Energy Economy Planning and Growth Program</title>
@@ -455,7 +454,7 @@
     <category term="Carbon management"/>
     <category term="Climate change"/>
     <category term="Materials science"/>
-    <summary>Golden Field Office | Concept Paper 2026-10-09 | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
+    <summary>Golden Field Office | Application 2026-12-01 | prerequisite closed | Modification 000002: Updated Appendix A and the definition of “Construction and demolition waste”, also denoted as “C&amp;D Waste”, to align with the programmatic authorizing statute for the Alternative Fuels and Feedstocks Office listed in NOFO Part 1, Section III.G. Statutory Authority. • “Construction and demolition waste,” for the purposes of this NOFO and consistent with the statutory authorities…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: A.17 Hydrosphere</title>
@@ -499,18 +498,6 @@
     <category term="Environmental science"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Application 2026-12-04 | prerequisite closed | The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participat…</summary>
-  </entry>
-  <entry>
-    <title>Staff Support to Tribal Radioactive Materials Transportation Committee for Engagement with the United States (U.S.) Department of Energy on Radioactive Materials Transportation Planning</title>
-    <link href="https://www.grants.gov/search-results-detail/363754"/>
-    <id>urn:funding-finder:grants-gov:363754</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>Idaho Field Office</name></author>
-    <category term="Energy"/>
-    <category term="Transportation"/>
-    <category term="Materials science"/>
-    <category term="Cybersecurity"/>
-    <summary>Idaho Field Office | Application 2026-10-09 | Staff Support to the Tribal Radioactive Materials Transportation Committee for Engagement with the U.S. Department of Energy on Radioactive Materials Transportation Planning. Facilitate engagement between DOE and federally-recognized Tribal governments throughout the United States in planning for future large-scale DOE transportation of commercial used nuclear fuel (UNF), high-level radioactive wa…</summary>
   </entry>
   <entry>
     <title>ROSES 2025: D.4 Theoretical and Computational Astrophysics Networks</title>
@@ -669,5 +656,16 @@
     <category term="Energy"/>
     <category term="Space and aeronautics"/>
     <summary>NASA Headquarters | Application 2026-10-26 | PLEASE NOTE: this program has MANDATORY Notices of Intent, which are due via NSPIRES by September 10, 2026. See the full posting on NSPIRES for details. ﻿NOTICE: Corrected, August 28, 2026. The Open Science and Data Management Plan was added to Table D.8-1 in Section 3.4. New text is in bold. The due dates remain unchanged. NOTICE: Amended July 27, 2026. This amendment presents a new program eleme…</summary>
+  </entry>
+  <entry>
+    <title>ROSES25: C.4 Planetary Science Enabling Facilities</title>
+    <link href="https://www.grants.gov/search-results-detail/363258"/>
+    <id>urn:funding-finder:grants-gov:363258</id>
+    <updated>2026-07-21T00:00:00Z</updated>
+    <author><name>NASA Headquarters</name></author>
+    <category term="Education and workforce"/>
+    <category term="Energy"/>
+    <category term="Space and aeronautics"/>
+    <summary>NASA Headquarters | Application 2026-11-10 | NOTICE: September 18, 2026. The instructions regarding Biographical Sketches and Current and Pending Support in Table C.4-2 have been improved. New text is in bold and deleted text is struck through ﻿NOTICE: Corrected July 29, 2026. Accidentally omitted standard budget requirements have been added to Table C.4-3 and Sections 3.3.3 and 3.5. New text is in bold and deleted text is struck through. Th…</summary>
   </entry>
 </feed>

@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/biology-and-biotechnology.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>Development of Models, New Approach Methodologies, and Biological Materials for Studying Human Health and Diseases (R21 Clinical Trial Not Allowed)</title>
@@ -412,6 +412,85 @@
     <summary>National Institutes of Health | Estimated Application 2027-02-16 | The National Human Genome Research Institute (NHGRI) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications related to the ethical, legal, and social implications (ELSI) of genomics. Genomics has the potential to improve human health and well-being. Driven by advances in technology and analysis, genomics is being integrated into large swaths of biomedical research and me…</summary>
   </entry>
   <entry>
+    <title>Cellular Senescence Network (SenNet): Discovery, Validation Centers (UM1 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359169"/>
+    <id>urn:funding-finder:grants-gov:359169</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to support SenNet Discovery and Validation Centers (SenNet DVCs) as a core component of Stage 2 of the NIH Common Fund Cellular Senescence Network (SenNet). Building on Stage 1 resources, DVCs will define, refine, and validate tissue- and disease-relevant cellular senescence signatures (“senotypes”) and associated biomarkers, and will inv…</summary>
+  </entry>
+  <entry>
+    <title>Cellular Senescence Network (SenNet): SenNet Data Coordination and Integration Center (SenNet DCIC) (UM1 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/361817"/>
+    <id>urn:funding-finder:grants-gov:361817</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to support the SenNet Data Coordination and Integration Center (SenNet DCIC) as a core component of Stage 2 of the NIH Common Fund Cellular Senescence Network (SenNet). The DCIC will enable timely, high-quality submission, harmonization, integration, and broad dissemination of SenNet-generated data and associated resources by developing a…</summary>
+  </entry>
+  <entry>
+    <title>Cellular Senescence Network (SenNet): SenNet Technology Projects (SenTecs) (UG3/UH3 Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359168"/>
+    <id>urn:funding-finder:grants-gov:359168</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <category term="Transportation"/>
+    <summary>National Institutes of Health | Application 2026-11-23 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit the development of innovative senescence technologies (SenTecs), or the adaptation of existing technologies focused on identification, characterization and understanding the biological consequences of senescent cell (SnC) heterogeneity in the context of the tissue environments and secretomes to facilitate novel strategies for m…</summary>
+  </entry>
+  <entry>
+    <title>Computational Modeling and Analysis of the Impact of Genomic Variation on Function (UM1, Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359170"/>
+    <id>urn:funding-finder:grants-gov:359170</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to develop, apply, and test predictive models and perform integrative analyses to determine the impact of genomic variation on genome function. Centers funded through this initiative will become a part of the Impact of Genomic Variation on Function (IGVF) Consortium. As consortium members, centers will work togethe…</summary>
+  </entry>
+  <entry>
+    <title>Genomic Variant Interactions With Other Variants Or The Environment (UM1 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359277"/>
+    <id>urn:funding-finder:grants-gov:359277</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Environmental science"/>
+    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to study the effects of genetic or environmental interactions on genomic variant impact. To accomplish this, interaction centers will first propose a research framework to investigate whether interactions with effects beyond additive are important modifiers of the impact of variants. Centers will apply their framew…</summary>
+  </entry>
+  <entry>
+    <title>IGVF Data and Coordinating Center (U24 Clinical trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358855"/>
+    <id>urn:funding-finder:grants-gov:358855</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Application 2026-12-14 | The National Human Genome Research Institute (NHGRI) is publishing a Notice of Funding Opportunity (NOFO) to solicit applications for the Impact of Genomic Variation on Function (IGVF) Data and Coordinating Center (DACC). The DACC will serve as the coordinating center for the IGVF Consortium and will be responsible for expanding and further developing a broadly accessible set of resources, includi…</summary>
+  </entry>
+  <entry>
+    <title>Systematic Characterization of Genomic Variation to Assess Effects of Individual Variants on Genome Function and Phenotype (UM1 Clinical Trials Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/358854"/>
+    <id>urn:funding-finder:grants-gov:358854</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Biology and biotechnology"/>
+    <summary>National Institutes of Health | Application 2026-12-14 | The purpose of this Notice of Funding Opportunity (NOFO) is to solicit applications to characterize genomic variation to assess the impact of individual variants on genome function. This will be accomplished by systematically perturbing variants or elements using one or more high-throughput methods; collecting data on the effects of variants in DNA, RNA, or protein-coding elements on molecular, ce…</summary>
+  </entry>
+  <entry>
+    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359152"/>
+    <id>urn:funding-finder:grants-gov:359152</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2029-03-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
+  </entry>
+  <entry>
     <title>Limited Competition: Supporting Programs to Advance Research Knowledge in Environmental Health Sciences (SPARK-EHS) (UE5/T32 - Clinical Trial Not Allowed)</title>
     <link href="https://www.grants.gov/search-results-detail/362977"/>
     <id>urn:funding-finder:grants-gov:362977</id>
@@ -537,20 +616,6 @@
     <summary>Advanced Research Projects Agency for Health (ARPA-H) | Application 2026-10-13 | prerequisite closed | Current ARPA-H program. REST | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); window…</summary>
   </entry>
   <entry>
-    <title>Unifying​ Imaging with​ Quantum​ Entanglement (UNIQUE)</title>
-    <link href="https://arpa-h.gov/explore-funding/programs/unique"/>
-    <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
-    <updated>2026-09-11T00:00:00Z</updated>
-    <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Quantum science"/>
-    <category term="Technology development"/>
-    <category term="Materials science"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Advanced Research Projects Agency for Health (ARPA-H) | Preapplication 2026-10-29 | Current ARPA-H program. UNIQUE | ARPA-H (function(w, d, s, l, i){w[l]=w[l]||[]; w[l].push({'gtm.start': new Date().getTime(), event:'gtm.js'}); var f=d.getElementsByTagName(s)[0], j=d.createElement(s), dl=l!='dataLayer'?'&amp;l='+l:''; j.async=true; j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl; f.parentNode.insertBefore(j, f); })(window, document,'script','dataLayer','GTM-W5GM3DT9'); wind…</summary>
-  </entry>
-  <entry>
     <title>Continuation and Expansion of the National Mesothelioma Virtual Bank for Translational Research (U24)</title>
     <link href="https://www.grants.gov/search-results-detail/363281"/>
     <id>urn:funding-finder:grants-gov:363281</id>
@@ -583,78 +648,5 @@
     <category term="Public health"/>
     <category term="Technology development"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-25 | The Clinical and Translational Science Awards Program Trial Innovation Network (TIN) is a collaborative initiative aimed at addressing critical roadblocks in the design and implementation of multi-center clinical trials. The goal of the TIN is to execute trials better, faster, and more cost-efficiently, as well as serve as a national laboratory to study, understand, and innovate the process of con…</summary>
-  </entry>
-  <entry>
-    <title>Exploratory Clinical Trial Grants in Arthritis and Musculoskeletal and Skin Diseases</title>
-    <link href="https://www.grants.gov/search-results-detail/362752"/>
-    <id>urn:funding-finder:grants-gov:362752</id>
-    <updated>2026-09-01T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Estimated Application 2027-03-04 | The National Institute of Arthritis and Musculoskeletal and Skin Diseases (NIAMS) intends to publish a Notice of Funding Opportunity (NOFO) to solicit applications for Exploratory Clinical Trials Grants Program in the mission areas of NIAMS. The goal of the NIAMS clinical trial program is to support research leading to the prevention or reduction of symptoms and improve outcomes and function in pa…</summary>
-  </entry>
-  <entry>
-    <title>Single Source for the Continuation of the Epidemiology of Diabetes Interventions and Complications (EDIC) Study Research Center (Collaborative U01 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/361213"/>
-    <id>urn:funding-finder:grants-gov:361213</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Public health"/>
-    <summary>National Institutes of Health | Application 2026-11-09 | invitation required | This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite an application from the eligible organization to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, applications will be peer-reviewed, and only meritorious applications will be considered for funding. Through this NOFO, the National institu…</summary>
-  </entry>
-  <entry>
-    <title>BRAIN Initiative: Integrative Team-Research BRAIN Circuits Program - iBCP (RM1 Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360398"/>
-    <id>urn:funding-finder:grants-gov:360398</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <summary>National Institutes of Health | Application 2028-06-23 | This Notice of Funding Opportunity (NOFO) supports transdisciplinary research teams seeking to develop mechanistic, biologically grounded explanations of how neural circuits and their cellular building blocks give rise to central nervous system (CNS) function. Teams must integrate expertise spanning molecular and cellular through systems neuroscience, with strong collaboration between experimental…</summary>
-  </entry>
-  <entry>
-    <title>Limited Competition: NIGMS Mature Synchrotron Resources (MSR) for Structural Biology (P30 - Clinical Trial Not Allowed)</title>
-    <link href="https://www.grants.gov/search-results-detail/360947"/>
-    <id>urn:funding-finder:grants-gov:360947</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Education and workforce"/>
-    <category term="Technology development"/>
-    <summary>National Institutes of Health | Application 2028-10-02 | This Notice of Funding Opportunity (NOFO) supports "mature" resources at synchrotron facilities that provide user access to X-ray beamlines for static and dynamic imaging of biological systems ranging from molecules to organs. "Mature" refers to the techniques made available at the resource beamlines, which must be well established and provide utility to the communities they serve without requirin…</summary>
-  </entry>
-  <entry>
-    <title>NINDS Efficacy and Exploratory Clinical Trials (UG3/UH3 - Clinical Trial Required)</title>
-    <link href="https://www.grants.gov/search-results-detail/360404"/>
-    <id>urn:funding-finder:grants-gov:360404</id>
-    <updated>2026-08-31T00:00:00Z</updated>
-    <author><name>National Institutes of Health</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>National Institutes of Health | Application 2029-03-09 | This Notice of Funding Opportunity (NOFO) encourages applications for investigator-initiated clinical trials to the National Institute of Neurological Disorders and Stroke (NINDS). These trials must address questions within the mission and research interests of the NINDS and may include studies of small molecules, biologics, devices as well as surgical, behavioral, diet-based, or rehabilitation th…</summary>
-  </entry>
-  <entry>
-    <title>SHINE</title>
-    <link href="https://sam.gov/workspace/contract/opp/3ac25ac710fb438e8d25d99783cee845/view"/>
-    <id>urn:funding-finder:darpa-iarpa-research-solicitations:darpa-iarpa%3Adarpa-darpapa250706</id>
-    <updated>2026-08-28T00:00:00Z</updated>
-    <author><name>Defense Advanced Research Projects Agency (DARPA)</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Neuroscience"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Defense Advanced Research Projects Agency (DARPA) | Application 2026-10-09 | DSO is issuing a Disruption Opportunity, inviting submissions of innovative basic or applied research concepts in the technical domain of targeted neuroplasticity. | See Program The SHINE Disruption Opportunity aims to precisely and non-invasively target and enhance the brain’s ability to adapt and rewire itself, allowing for more complete recovery after injury. Though the key to the brain’s remar…</summary>
-  </entry>
-  <entry>
-    <title>SEFSC Bluefin Tuna Research Program</title>
-    <link href="https://www.grants.gov/search-results-detail/363729"/>
-    <id>urn:funding-finder:grants-gov:363729</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>DOC NOAA - ERA Production</name></author>
-    <category term="Biology and biotechnology"/>
-    <category term="Environmental science"/>
-    <summary>DOC NOAA - ERA Production | Application 2026-12-31 | The objective of the program is to provide a basis for advancing science-based fisheries management for Atlantic bluefin tuna. Such advancement will depend upon improvements in understanding of the fisheries, total abundance, and biology of bluefin tuna, especially regarding the effects of mixing and movement between the eastern and western Atlantic populations. Contracting Parties to the Internat…</summary>
   </entry>
 </feed>

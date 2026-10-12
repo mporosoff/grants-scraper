@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/all.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/all.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>NIDCD Research Fellowship for Audiologists</title>
@@ -714,6 +714,16 @@
     <summary>Centers for Disease Control - NCIPC | Estimated Application 2027-05-03 | The purpose of this NOFO is to provide multiyear funding to state, territorial, tribal, and local health departments to implement and evaluate comprehensive primary prevention strategies that prevent multiple forms of violence and promote healthy development among adolescents and young adults. Building on the prior PREVAYL cooperative agreement, this NOFO emphasizes: Improving data-driven decision…</summary>
   </entry>
   <entry>
+    <title>Chronic Disease Education and Awareness</title>
+    <link href="https://www.grants.gov/search-results-detail/364055"/>
+    <id>urn:funding-finder:grants-gov:364055</id>
+    <updated>2027-03-01T00:00:00Z</updated>
+    <author><name>Centers for Disease Control - NCCDPHP</name></author>
+    <category term="Education and workforce"/>
+    <category term="Public health"/>
+    <summary>Centers for Disease Control - NCCDPHP | Estimated Application 2027-04-30 | This NOFO will support organizations to strengthen national chronic disease education and awareness for chronic diseases that are not supported through disease-specific CDC funding by implementing activities that enhance surveillance, address priority evidence gaps, develop and disseminate evidence-based educational resources, strengthen strategic partnerships, and promote the adoption of evidence…</summary>
+  </entry>
+  <entry>
     <title>Promoting Population Health through Increased Capacity in Alcohol Epidemiology &amp; the Prevention of Excessive Alcohol Use</title>
     <link href="https://www.grants.gov/search-results-detail/363592"/>
     <id>urn:funding-finder:grants-gov:363592</id>
@@ -954,16 +964,5 @@
     <author><name>Indian Health Service</name></author>
     <category term="Arts and culture"/>
     <summary>Indian Health Service | Estimated Application 2027-04-01 | The purpose of this IHS grant is to expand access to culturally appropriate, trauma-informed forensic healthcare (FHC) services for American Indian/Alaska Native (AI/AN) victims of domestic violence, sexual violence, child maltreatment, and human trafficking. The grant supports the development and expansion of FHC services across IHS Areas while promoting coordinated treatment, intervention, preve…</summary>
-  </entry>
-  <entry>
-    <title>Substance Abuse Prevention, Treatment, and Aftercare</title>
-    <link href="https://www.grants.gov/search-results-detail/363652"/>
-    <id>urn:funding-finder:grants-gov:363652</id>
-    <updated>2027-02-01T00:00:00Z</updated>
-    <author><name>Indian Health Service</name></author>
-    <category term="Arts and culture"/>
-    <category term="Public health"/>
-    <category term="Social and behavioral sciences"/>
-    <summary>Indian Health Service | Estimated Application 2027-04-01 | The primary purpose of this program is to reduce substance abuse among American Indian and Alaska Native (AI/AN) populations by improving care coordination, expanding culturally appropriate behavioral health services, and implementing early intervention strategies for at-risk AI/AN youth. The program supports Tribal, community-driven prevention, treatment, and recovery efforts that promote cross-s…</summary>
   </entry>
 </feed>

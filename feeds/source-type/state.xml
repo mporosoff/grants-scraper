@@ -4,8 +4,16 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/source-type/state.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
+  <entry>
+    <title>Offshore Wind Project Predevelopment Program Opportunity Notice</title>
+    <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001NP7i5AAD"/>
+    <id>urn:funding-finder:nyserda:nyserda%3AOSWPON26-1</id>
+    <updated>2026-10-08T00:00:00Z</updated>
+    <author><name>NYSERDA</name></author>
+    <summary>NYSERDA | Application 2029-12-31 | NYSERDA has launched a funding opportunity for offshore wind project predevelopment activities and will accept applications on a continuous basis until December 31, 2029, or until funds are fully committed.</summary>
+  </entry>
   <entry>
     <title>Grid Modernization Utility Challenge - National Grid</title>
     <link href="https://portal.nyserda.ny.gov/CORE_Solicitation_Detail_Page? SolicitationId=a0rcr00001L7CxyAAF"/>

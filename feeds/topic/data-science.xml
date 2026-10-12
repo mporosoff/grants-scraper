@@ -4,7 +4,7 @@
   <link href="https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml" rel="self"/>
   <link href="https://mporosoff.github.io/grants-scraper/match_explorer.html"/>
   <id>https://mporosoff.github.io/grants-scraper/feeds/topic/data-science.xml</id>
-  <updated>2026-10-08T19:07:27Z</updated>
+  <updated>2026-10-12T16:10:13Z</updated>
   <generator>Funding Finder</generator>
   <entry>
     <title>ancient DNA for Modern Genomics (aDMG) Research Projects (U01 Clinical Trials Not Allowed)</title>
@@ -134,6 +134,19 @@
     <category term="Infectious disease"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Estimated Application 2027-01-22 | The National Institute of Allergy and Infectious Diseases (NIAID) seeks to advance its mission by supporting multidisciplinary, consortium-based research using precision systems biology approaches to uncover links among chronic illnesses, infectious diseases and microbiomes. There is an urgent scientific and clinical need to understand the pathways by which infections lead to chronic lifelong heal…</summary>
+  </entry>
+  <entry>
+    <title>NIAMS P30 Centers Program (P30 - Clinical Trial Not Allowed)</title>
+    <link href="https://www.grants.gov/search-results-detail/359152"/>
+    <id>urn:funding-finder:grants-gov:359152</id>
+    <updated>2026-10-09T00:00:00Z</updated>
+    <author><name>National Institutes of Health</name></author>
+    <category term="Artificial intelligence and machine learning"/>
+    <category term="Arts and culture"/>
+    <category term="Biology and biotechnology"/>
+    <category term="Data science"/>
+    <category term="Education and workforce"/>
+    <summary>National Institutes of Health | Application 2029-03-01 | The overall goal of this program is to accelerate scientific discovery, improve research efficiency, and enhance the translation of research findings into improved health outcomes. Centers funded under this program will also foster multidisciplinary collaboration, support workforce development across career stages, and promote training in emerging areas such as data science, artificial intelligenc…</summary>
   </entry>
   <entry>
     <title>Restoring Joint Health and Function to Reduce Pain (RE-JOIN) 2.0</title>
@@ -273,7 +286,6 @@
     <id>urn:funding-finder:arpa-h:arpa-h%3Aunique</id>
     <updated>2026-09-11T00:00:00Z</updated>
     <author><name>Advanced Research Projects Agency for Health (ARPA-H)</name></author>
-    <category term="Biology and biotechnology"/>
     <category term="Quantum science"/>
     <category term="Technology development"/>
     <category term="Materials science"/>
@@ -303,16 +315,6 @@
     <category term="Data science"/>
     <category term="Artificial intelligence and machine learning"/>
     <summary>Air Force Office of Scientific Research | Application 2026-12-04 | verify prerequisite | This is a special Notice of Funding Opportunity Announcement (NOFO) sponsored by the Air Force Office of Scientific Research (AFOSR), which will hereafter generally be referred to as “we”, “us”, “our”, or “AFOSR.” The Fiscal Year 2027 Air Force Young Investigator Research Program (YIP) intends to support individual early career scientists and engineers who have received their Ph. D. or equivalent …</summary>
-  </entry>
-  <entry>
-    <title>NSF Mathematical Foundations of Artificial Intelligence (MFAI) 24-569</title>
-    <link href="https://new.nsf.gov/funding/opportunities/mathematical-foundations-artificial-intelligence"/>
-    <id>urn:funding-finder:vpr-funding-digest-limited-submissions-foundations:vpr-email%3A24-569</id>
-    <updated>2026-09-07T00:00:00Z</updated>
-    <author><name>VPR funding digest (limited submissions &amp; foundations)</name></author>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>VPR funding digest (limited submissions &amp; foundations) | Application 2026-10-09</summary>
   </entry>
   <entry>
     <title>Simons Foundation: Utilizing the Full Power of Empire AI (2026 RFA)</title>
@@ -468,18 +470,6 @@
     <category term="Artificial intelligence and machine learning"/>
     <category term="Data science"/>
     <summary>Institute of Museum and Library Services | Application 2026-11-13 | The National Leadership Grants for Museums program (NLG-M) invests in projects that address critical needs of the museum field. NLG-M projects have the potential to advance practice in the profession to strengthen museum services for the public through the development and replication of model practices, tools, research findings, and collaborations, including through the creative and effective use …</summary>
-  </entry>
-  <entry>
-    <title>Research and Education Program for Historically Black Colleges and Universities (HBCU) and Tribal Colleges and Universities (TCU) Equipment/Instrumentation</title>
-    <link href="https://www.grants.gov/search-results-detail/363724"/>
-    <id>urn:funding-finder:grants-gov:363724</id>
-    <updated>2026-08-27T00:00:00Z</updated>
-    <author><name>Dept of the Army -- Materiel Command</name></author>
-    <category term="Education and workforce"/>
-    <category term="Transportation"/>
-    <category term="Artificial intelligence and machine learning"/>
-    <category term="Data science"/>
-    <summary>Dept of the Army -- Materiel Command | Application 2026-10-09 | Under the authority of 10 U.S.C. § 4144, in alignment with Section 223 of the FY 2026 National Defense Authorization Act (NDAA), funding in the FY 2026 defense appropriations, and, Presidential Executive Order 14332, Improving Oversight of Federal Grantmaking, the DoW announces this funding opportunity for the acquisition of equipment/instrumentation at Historically Black Colleges and Universities…</summary>
   </entry>
   <entry>
     <title>Capacity Building Grants for Non-Land-Grant Colleges of Agriculture Program</title>
@@ -737,5 +727,21 @@ Successful candidates for a Fellowship generally have a strong record of signifi
     <category term="Data science"/>
     <category term="Public health"/>
     <summary>National Institutes of Health | Application 2029-02-09 | The goal of this notice of funding opportunity (NOFO) is to address the opioid crisis and/or overdose events by supporting action-oriented research, accelerating the translation of addiction epidemiology, prevention, treatment services, and recovery research to practice. Proposed studies may target the individual, provider, organizational, community, or system level. This initiative prioritizes re…</summary>
+  </entry>
+  <entry>
+    <title>Research Interests of the Air Force Office of Scientific Research</title>
+    <link href="https://www.grants.gov/search-results-detail/362681"/>
+    <id>urn:funding-finder:grants-gov:362681</id>
+    <updated>2026-06-04T00:00:00Z</updated>
+    <author><name>Air Force Office of Scientific Research</name></author>
+    <category term="Biology and biotechnology"/>
+    <category term="Transportation"/>
+    <category term="Catalysis and reaction engineering"/>
+    <category term="Materials science"/>
+    <category term="Quantum science"/>
+    <category term="Energy"/>
+    <category term="Data science"/>
+    <category term="Artificial intelligence and machine learning"/>
+    <summary>Air Force Office of Scientific Research | Posted | AFOSR plans, coordinates, and executes the Air Force Research Laboratory’s (AFRL) basic research program in response to technical guidance from AFRL and requirements of the Air Force. Additionally, the office fosters, supports, and conducts research within Air Force, university, and industry laboratories; and ensures transition of research results to support U.S. Air Force needs. The focus of AFOS…</summary>
   </entry>
 </feed>
