@@ -460,6 +460,79 @@ class AdapterTests(unittest.TestCase):
 
 
 
+class BardaPilotTests(unittest.TestCase):
+    """The observed BARDA row exercises the maintained admission configuration."""
+    def setUp(self):
+        self.root = Path(__file__).resolve().parents[1]
+        fixture = json.loads((self.root / 'tests/fixtures/sam_barda_listing_20261012.json').read_text(encoding='utf8'))
+        self.row = fixture['notice']
+        self.as_of = date.fromisoformat(fixture['observed_on'])
+
+    def observe(self, *, as_of=None):
+        client = Mock(return_value=([deepcopy(self.row), notice()],
+                                    {'request_count': 0, 'outcome': 'offline_fixture'}))
+        adapter = SamGovAdapter(config_path=self.root / 'config/sam_gov.json', client=client)
+        with patch.dict(os.environ, {'SAM_API_KEY': KEY}, clear=True), \
+                patch('urllib.request.OpenerDirector.open', side_effect=AssertionError('Live SAM call')), \
+                patch('requests.Session.request', side_effect=AssertionError('Provider call')):
+            records, results = collect([adapter], context={'as_of': as_of or self.as_of})
+        client.assert_called_once_with(KEY, today=as_of or self.as_of)
+        self.assertTrue(results[0].ok, results[0].error)
+        return records, results
+
+    def test_one_actual_approval_admits_the_observed_open_application_with_source_clock(self):
+        from scripts.submission_schedule import project
+        config = load_config(self.root / 'config/sam_gov.json')
+        self.assertTrue(config['enabled'])
+        self.assertEqual([entry['notice_id'] for entry in config['approved_notices']],
+                         ['8170c4735df64714adb2d1f8ce8671b1'])
+        records, results = self.observe()
+        self.assertEqual(len(records), 1)
+        self.assertEqual(results[0].diagnostics['exclusion_reasons'], {'unapproved': 1})
+        record = records[0]
+        self.assertEqual(record['opportunity_id'], 'sam-gov:8170c4735df64714adb2d1f8ce8671b1')
+        self.assertEqual(record['opportunity_number'], 'BAA-23-100-SOL-00004')
+        self.assertEqual(record['agency'], 'Biomedical Advanced Research and Development Authority (BARDA)')
+        self.assertEqual(record['close_date'], '2028-09-25')
+        self.assertEqual(record['posted_date'], '2026-03-20')
+        self.assertEqual(record['source_review_after'], '2026-10-19')
+        self.assertIn('academic institutions', record['eligibility_text'])
+        self.assertIn('must be registered', record['eligibility_text'])
+        self.assertEqual(len(record['deadlines']), 1)
+        selected = project(record, self.as_of)['next_submission']
+        self.assertEqual((selected['event']['kind'], selected['date'], selected['access']),
+                         ('application', '2028-09-25', 'open'))
+        self.assertEqual((selected['event']['time'], selected['event']['timezone']),
+                         ('16:30:00', '-04:00'))
+        self.assertEqual(selected['prerequisites'], [])
+        self.assertIsNot(record.get('preliminary_required'), True)
+        self.assertFalse(any(event.get('invitation_required') or event.get('prerequisite') == 'invitation'
+                             for event in record['deadlines']))
+
+    def test_same_verified_grants_identity_remains_the_canonical_record(self):
+        from scripts.sources.base import CanonicalOpportunity
+        records, _ = self.observe()
+        grants = CanonicalOpportunity(title='Canonical BARDA opportunity', external_id='fixture-barda',
+            opportunity_number='BAA-23-100-SOL-00004',
+            agency='Biomedical Advanced Research and Development Authority (BARDA)',
+            url='https://www.grants.gov/search-results-detail/100001',
+            close_date='2028-09-25').to_record(slug='grants', source='Grants.gov', source_type='Federal')
+        combined, stats = merge_records([grants], records)
+        self.assertEqual(len(combined), 1)
+        self.assertEqual(combined[0]['opportunity_id'], grants['opportunity_id'])
+        self.assertEqual(combined[0]['title'], 'Canonical BARDA opportunity')
+        self.assertEqual(combined[0]['source'], 'Grants.gov')
+        self.assertEqual(stats['external_added'], 0)
+
+    def test_review_expiry_withholds_the_real_notice_despite_its_later_submission_date(self):
+        as_of = date(2026, 11, 12)
+        _, results = self.observe(as_of=as_of)
+        live, _, _ = resolve_live_records(results, {}, as_of)
+        self.assertEqual(live, [])
+        self.assertEqual(results[0].diagnostics['exclusion_reasons'],
+                         {'approval_not_current': 1, 'unapproved': 1})
+
+
 class DescriptionTransportTests(unittest.TestCase):
     def test_description_uses_one_fixed_host_get_and_bound_body_without_following_content_links(self):
         response = Response({'description': '<p>Universities may submit proposals.</p><a href="https://example.test/attachment">Attachment</a>'})
