@@ -81,6 +81,59 @@ def _published(root):
             (json.loads(c.git(root, 'show', sha + ':release/candidate-source.json')) for sha in revisions)}
 
 
+def _published_access_supersedes(root, run, artifacts):
+    """Recognize only the authenticated ac68 parent of a published access child.
+
+    This is publication lineage, not permission to retire arbitrary zero-spend
+    runs. A later attempt or changed artifact identity remains a recovery owner.
+    """
+    from tools import catalog_access_correction as access
+    if run.get('id') != access.RUN:
+        return False
+    expected = {'run_attempt': access.ATTEMPT, 'head_sha': access.EVENT_SHA,
+                'head_branch': 'main', 'path': WORKFLOW, 'event': 'workflow_dispatch',
+                'status': 'completed', 'conclusion': 'failure'}
+    if (type(run.get('run_attempt')) is not int
+            or any(run.get(key) != value for key, value in expected.items())):
+        return False
+    if any(item['name'].startswith('generation-spend-reservation-')
+           or item['name'].startswith('program-area-vectors-') and '-reservation-' in item['name']
+           for item in artifacts):
+        return False
+    if sum(item['name'].startswith('candidate-') for item in artifacts) != 1:
+        return False
+    for identifier, name, digest in access.ARTIFACTS.values():
+        matches = [item for item in artifacts if item.get('id') == identifier or item.get('name') == name]
+        if (len(matches) != 1 or matches[0].get('id') != identifier or matches[0].get('name') != name
+                or matches[0].get('digest') != 'sha256:' + digest or matches[0].get('expired') is not False):
+            return False
+    revisions = c.git(root, 'log', '--first-parent', '--format=%H', '-100', '--',
+                      'release/candidate-source.json').splitlines()
+    for sha in revisions:
+        pointer = json.loads(c.git(root, 'show', sha + ':release/candidate-source.json'))
+        child = json.loads(c.git(root, 'show', sha + ':release/candidate.json'))
+        receipt = child.get('access_correction') or {}
+        if (receipt.get('parent_candidate') != access.PARENT
+                or child.get('derived_from_candidate') != access.PARENT):
+            continue
+        valid_identity = (child.get('candidate_id') == pointer.get('candidate_id')
+            == c.digest(c.encoded({key: value for key, value in child.items() if key != 'candidate_id'})))
+        prior = child.get('source_recovery') or {}
+        producer = receipt.get('affected_generation') or {}
+        parent_producer = prior.get('affected_generation') or {}
+        if not (valid_identity and child.get('derived_from_candidate') == access.PARENT
+                and child.get('generation_run_id') == '36896442720'
+                and receipt.get('version') == access.VERSION and receipt.get('parent_run') == access.RUN
+                and receipt.get('parent_manifest_sha256') == access.MANIFEST_SHA
+                and producer.get('generation_run_id') == pointer.get('artifact_run')
+                and parent_producer.get('generation_run_id') == str(access.RUN)
+                and parent_producer.get('generation_run_attempt') == str(access.ATTEMPT)
+                and parent_producer.get('generation_sha') == access.EVENT_SHA):
+            raise Hold('Published access-correction lineage does not authenticate its exact parent', access.RUN)
+        return True
+    return False
+
+
 def prior_generation(root, environment, manifest):
     """Find one unfinished owner after the current source generation, or hold."""
     repository = environment['GITHUB_REPOSITORY']
@@ -113,6 +166,8 @@ def prior_generation(root, environment, manifest):
                 candidate_id = artifact['name'].removeprefix('candidate-')
                 if (str(identifier), candidate_id) in published:
                     continue
+                if _published_access_supersedes(root, run, artifacts):
+                    continue
                 if artifact.get('expired') or not re.fullmatch('[a-f0-9]{64}', candidate_id):
                     raise Hold('Unpublished candidate evidence is expired or invalid', identifier)
                 owners.append((str(identifier), candidate_id))
@@ -127,8 +182,8 @@ def prior_generation(root, environment, manifest):
                         and run['run_attempt'] == 1 and not jobs and not artifacts):
                     continue
                 producers = [job for job in jobs if job.get('name') in ('generate', 'assemble')]
-                corrections = [job for job in jobs if job.get('name') in ('program-area-revalidation', 'catalog-source-recovery')]
-                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 2
+                corrections = [job for job in jobs if job.get('name') in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction')]
+                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 3
                         or any(job.get('conclusion') != 'skipped' for job in producers + corrections)):
                     raise Hold('Prior generation has no complete accounting/candidate evidence; inspect its original run', identifier)
             else:

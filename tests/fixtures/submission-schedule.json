@@ -836,5 +836,1079 @@
       "access": "prerequisite_closed",
       "kind": "application"
     }
+  },
+  {
+    "name": "DOJ invited-to-apply notice retains its source date with restricted access",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "362990",
+      "title": "DOJ FY 2026 Invited to Apply - National Integrated Ballistic Information (NIBIN) Modernization Program",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/362990",
+      "close_date": "2026-10-13",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-10-13",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/362990",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-10-08T19:04:02.960563Z"
+        }
+      ],
+      "description": "The Office of Justice Programs (OJP) is committed to advancing work that furthers the U.S. Department of Justice\u2019s (DOJ) mission to keep our country safe and secure and uphold the rule of law and protect the rights of American citizens. This NOFO is authorized under Public Law 119-21, Title X, Subtitle A, Part II, Section 100055 (codified at 34 U.S.C. \u00a7 61101), which provides funding to enhance capacity to locate and apprehend aliens who have committed crime(s) under Federal, State, or local law, in addition to being unlawfully present in the United States, investigate crimes committed by illegal aliens, counter gang and criminal activity including drug and human trafficking operations, support prosecutions, coordinate with federal immigration enforcement partners, and strengthen multi-jurisdictional responses to transnational criminal organizations threatening American communities. This grant program is a collaboration between the Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF) and the Office of Justice Programs\u2019 (OJP) Bureau of Justice Assistance (BJA) to provide state, local, and tribal law enforcement agencies with funding to acquire modern ballistic imaging equipment and implement crime gun intelligence best practices. This is an invitation to apply notice of funding opportunity (NOFO) for the FY 2026 National Integrated Ballistic Information Network (NIBIN) Modernization Program. This program will modernize NIBIN technology at 194 existing sites currently utilizing outdated technology. Grant funds will cover the cost of new NIBIN-compatible equipment and maintenance costs for five years.",
+      "eligibility_text": "Eligible applicants are jurisdictions listed in Appendix 1"
+    },
+    "record": {
+      "opportunity_id": "362990",
+      "title": "DOJ FY 2026 Invited to Apply - National Integrated Ballistic Information (NIBIN) Modernization Program",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/362990",
+      "close_date": "2026-10-13",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-10-13",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/362990",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-10-08T19:04:02.960563Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "DOJ FY 2026 Invited to Apply - National Integrated Ballistic Information (NIBIN) Modernization Program",
+            "source_url": "https://www.grants.gov/search-results-detail/362990"
+          }
+        }
+      ],
+      "description": "The Office of Justice Programs (OJP) is committed to advancing work that furthers the U.S. Department of Justice\u2019s (DOJ) mission to keep our country safe and secure and uphold the rule of law and protect the rights of American citizens. This NOFO is authorized under Public Law 119-21, Title X, Subtitle A, Part II, Section 100055 (codified at 34 U.S.C. \u00a7 61101), which provides funding to enhance capacity to locate and apprehend aliens who have committed crime(s) under Federal, State, or local law, in addition to being unlawfully present in the United States, investigate crimes committed by illegal aliens, counter gang and criminal activity including drug and human trafficking operations, support prosecutions, coordinate with federal immigration enforcement partners, and strengthen multi-jurisdictional responses to transnational criminal organizations threatening American communities. This grant program is a collaboration between the Bureau of Alcohol, Tobacco, Firearms and Explosives (ATF) and the Office of Justice Programs\u2019 (OJP) Bureau of Justice Assistance (BJA) to provide state, local, and tribal law enforcement agencies with funding to acquire modern ballistic imaging equipment and implement crime gun intelligence best practices. This is an invitation to apply notice of funding opportunity (NOFO) for the FY 2026 National Integrated Ballistic Information Network (NIBIN) Modernization Program. This program will modernize NIBIN technology at 194 existing sites currently utilizing outdated technology. Grant funds will cover the cost of new NIBIN-compatible equipment and maintenance costs for five years.",
+      "eligibility_text": "Eligible applicants are jurisdictions listed in Appendix 1"
+    },
+    "expected": {
+      "date": "2026-10-13",
+      "access": "invitation_required",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "generic source invitation to all eligible applicants is not an invitation-only notice",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "348830",
+      "title": "DoW\u2019s Energy, Installations, and Environment Innovation Partners Programs",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/348830",
+      "close_date": "2028-01-08",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2028-01-08",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/348830",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-08-01T11:35:33.536291Z"
+        }
+      ],
+      "description": "The Office of the Under Secretary of War (OUSW), intends to award non-research cooperative agreements (CA) to help manage and sustain Department of War (DoW) land in the United States. The DoW Strategic Environmental Research and Development Program (SERDP), Environmental Security Technology Certification Program (ESTCP), Readiness and Environmental Protection Integration (REPI) Program, and Legacy Resource Management Program (Legacy Program) fund high priority national and regional natural and cultural resources projects that enhance installation resilience and environmental objectives and support military readiness.",
+      "eligibility_text": "Public and private agencies, organizations, institutions, and individuals are invited to apply."
+    },
+    "record": {
+      "opportunity_id": "348830",
+      "title": "DoW\u2019s Energy, Installations, and Environment Innovation Partners Programs",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/348830",
+      "close_date": "2028-01-08",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2028-01-08",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/348830",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-08-01T11:35:33.536291Z"
+        }
+      ],
+      "description": "The Office of the Under Secretary of War (OUSW), intends to award non-research cooperative agreements (CA) to help manage and sustain Department of War (DoW) land in the United States. The DoW Strategic Environmental Research and Development Program (SERDP), Environmental Security Technology Certification Program (ESTCP), Readiness and Environmental Protection Integration (REPI) Program, and Legacy Resource Management Program (Legacy Program) fund high priority national and regional natural and cultural resources projects that enhance installation resilience and environmental objectives and support military readiness.",
+      "eligibility_text": "Public and private agencies, organizations, institutions, and individuals are invited to apply."
+    },
+    "expected": {
+      "date": "2028-01-08",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "EDA concept proposal followed by an invitation does not establish a notice-wide restriction",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "334079",
+      "title": "FY 2021 - 2023 Economic Development RNTA",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/334079",
+      "close_date": null,
+      "deadlines": [],
+      "description": "NOTICE: PLEASE READ - April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the entire grant lifecycle. As of April 6th, 2023, applications can no longer be submitted on Grants.gov, and will ONLY be accepted through EDGE. Once your concept proposal has been reviewed, you will receive an invitation to apply in EDGE. More information on how to apply is provided in the full NOFO. You must submit concept proposals to rnta@eda.gov. Program Description EDA provides strategic investments on a competitive merit basis to support economic development, foster job creation, and attract private investment in economically distressed areas of the United States. Under this NOFO, EDA solicits applications from applicants in order to provide investments that support research and technical assistance projects under EDA\u2019s R&E and NTA programs. Grants and cooperative agreements made under these programs are designed to leverage existing regional assets and support the implementation of economic development strategies that advance new ideas and creative approaches to advance economic prosperity in distressed communities. This NOFO employs a two-step application process: (1) the Concept Proposal and (2) the Full Application. EDA will only review Full Applications submitted by applicants who first submitted a Concept Proposal. Any Full Application received from an applicant that did not submit a Concept Proposal will be deemed ineligible and not considered for funding. For the Concept Proposal, applicants may use the optional template available at https://eda.gov/programs/rnta/resources/. Full Applications must be submitted through Grants.gov using the link that EDA will provide with its response to the Concept Proposal. *Please note: While the published Notice of Funding Opportunity (available under \"Related Documents\") states that the ED900A form and the SF424B form are both required for a complete application, these forms are no longer required and have therefore been removed from the package template.",
+      "eligibility_text": "Additional Information on Eligibility: Pursuant to Section 3(4) of PWEDA (42 U.S.C. \u00a7 3122(4)) and 13 C.F.R. \u00a7 300.3 (Eligible Recipient), eligible applicants for and recipients of EDA RNTA investment assistance include: a District Organization; an Indian Tribe or a consortium of Indian Tribes; a State; a city or other political subdivision of a State, including a special purpose unit of a State or local government engaged in economic or infrastructure development activities, or a consortium of political subdivisions; an institution of higher education or a consortium of institutions of higher education; a public or private non-profit organization or association acting in cooperation with officials of a political subdivision of a State; private individual; or a for-profit organization. Additional Information:"
+    },
+    "record": {
+      "opportunity_id": "334079",
+      "title": "FY 2021 - 2023 Economic Development RNTA",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/334079",
+      "close_date": null,
+      "deadlines": [],
+      "description": "NOTICE: PLEASE READ - April 6, 2023 EDA is excited to announce the launch of its new grants management platform: the Economic Development Grants Experience (EDGE). EDGE was developed to streamline the application and grants management process by implementing a single platform with increased transparency, improved user experience, higher data quality, and more efficiency throughout the entire grant lifecycle. As of April 6th, 2023, applications can no longer be submitted on Grants.gov, and will ONLY be accepted through EDGE. Once your concept proposal has been reviewed, you will receive an invitation to apply in EDGE. More information on how to apply is provided in the full NOFO. You must submit concept proposals to rnta@eda.gov. Program Description EDA provides strategic investments on a competitive merit basis to support economic development, foster job creation, and attract private investment in economically distressed areas of the United States. Under this NOFO, EDA solicits applications from applicants in order to provide investments that support research and technical assistance projects under EDA\u2019s R&E and NTA programs. Grants and cooperative agreements made under these programs are designed to leverage existing regional assets and support the implementation of economic development strategies that advance new ideas and creative approaches to advance economic prosperity in distressed communities. This NOFO employs a two-step application process: (1) the Concept Proposal and (2) the Full Application. EDA will only review Full Applications submitted by applicants who first submitted a Concept Proposal. Any Full Application received from an applicant that did not submit a Concept Proposal will be deemed ineligible and not considered for funding. For the Concept Proposal, applicants may use the optional template available at https://eda.gov/programs/rnta/resources/. Full Applications must be submitted through Grants.gov using the link that EDA will provide with its response to the Concept Proposal. *Please note: While the published Notice of Funding Opportunity (available under \"Related Documents\") states that the ED900A form and the SF424B form are both required for a complete application, these forms are no longer required and have therefore been removed from the package template.",
+      "eligibility_text": "Additional Information on Eligibility: Pursuant to Section 3(4) of PWEDA (42 U.S.C. \u00a7 3122(4)) and 13 C.F.R. \u00a7 300.3 (Eligible Recipient), eligible applicants for and recipients of EDA RNTA investment assistance include: a District Organization; an Indian Tribe or a consortium of Indian Tribes; a State; a city or other political subdivision of a State, including a special purpose unit of a State or local government engaged in economic or infrastructure development activities, or a consortium of political subdivisions; an institution of higher education or a consortium of institutions of higher education; a public or private non-profit organization or association acting in cooperation with officials of a political subdivision of a State; private individual; or a for-profit organization. Additional Information:"
+    },
+    "expected": {
+      "date": null,
+      "access": "not_listed",
+      "kind": null
+    }
+  },
+  {
+    "name": "BARDA staged open white paper is unaffected by a later invited full proposal",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "barda-staged-fixture",
+      "title": "BARDA Broad Agency Announcement",
+      "description": "Offerors may submit a white paper. Full proposals are submitted only following an invitation.",
+      "detail_page": "https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view",
+      "deadlines": [
+        {
+          "kind": "white_paper",
+          "date": "2026-10-20",
+          "required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-01",
+          "invitation_required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-03-01",
+          "cycle": "FY2027",
+          "track": "Independent track"
+        }
+      ]
+    },
+    "record": {
+      "opportunity_id": "barda-staged-fixture",
+      "title": "BARDA Broad Agency Announcement",
+      "description": "Offerors may submit a white paper. Full proposals are submitted only following an invitation.",
+      "detail_page": "https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view",
+      "deadlines": [
+        {
+          "kind": "white_paper",
+          "date": "2026-10-20",
+          "required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-01",
+          "invitation_required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-03-01",
+          "cycle": "FY2027",
+          "track": "Independent track"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2026-10-20",
+      "access": "open",
+      "kind": "white_paper"
+    }
+  },
+  {
+    "name": "BARDA invitation remains owned by its full proposal stage and track",
+    "as_of": "2026-11-01",
+    "source_record": {
+      "opportunity_id": "barda-staged-fixture",
+      "title": "BARDA Broad Agency Announcement",
+      "description": "Offerors may submit a white paper. Full proposals are submitted only following an invitation.",
+      "detail_page": "https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view",
+      "deadlines": [
+        {
+          "kind": "white_paper",
+          "date": "2026-10-20",
+          "required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-01",
+          "invitation_required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-03-01",
+          "cycle": "FY2027",
+          "track": "Independent track"
+        }
+      ]
+    },
+    "record": {
+      "opportunity_id": "barda-staged-fixture",
+      "title": "BARDA Broad Agency Announcement",
+      "description": "Offerors may submit a white paper. Full proposals are submitted only following an invitation.",
+      "detail_page": "https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view",
+      "deadlines": [
+        {
+          "kind": "white_paper",
+          "date": "2026-10-20",
+          "required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-01",
+          "invitation_required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-03-01",
+          "cycle": "FY2027",
+          "track": "Independent track"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-02-01",
+      "access": "invitation_required",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "BARDA full-proposal invitation does not cross to the independent track",
+    "as_of": "2027-02-02",
+    "source_record": {
+      "opportunity_id": "barda-staged-fixture",
+      "title": "BARDA Broad Agency Announcement",
+      "description": "Offerors may submit a white paper. Full proposals are submitted only following an invitation.",
+      "detail_page": "https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view",
+      "deadlines": [
+        {
+          "kind": "white_paper",
+          "date": "2026-10-20",
+          "required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-01",
+          "invitation_required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-03-01",
+          "cycle": "FY2027",
+          "track": "Independent track"
+        }
+      ]
+    },
+    "record": {
+      "opportunity_id": "barda-staged-fixture",
+      "title": "BARDA Broad Agency Announcement",
+      "description": "Offerors may submit a white paper. Full proposals are submitted only following an invitation.",
+      "detail_page": "https://sam.gov/opp/8170c4735df64714adb2d1f8ce8671b1/view",
+      "deadlines": [
+        {
+          "kind": "white_paper",
+          "date": "2026-10-20",
+          "required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-02-01",
+          "invitation_required": true,
+          "cycle": "FY2027",
+          "track": "Therapeutics"
+        },
+        {
+          "kind": "application",
+          "date": "2027-03-01",
+          "cycle": "FY2027",
+          "track": "Independent track"
+        }
+      ]
+    },
+    "expected": {
+      "date": "2027-03-01",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "Explicit single-source invitation 360458 preserves its source status and date",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "360458",
+      "title": "Single Source for the Continuation of the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Scientific and Data Research Center (U01 Clinical Trial Required)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/360458",
+      "close_date": "2026-11-09",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-11-09",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/360458",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T06:01:24.461096Z"
+        }
+      ],
+      "description": "Applications for a 3-year extension/renewal of the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) clinical trial consortium are requested to fully meet the enrollment targets, complete participant follow-up, and finalize data analysis and dissemination of study findings. This Notice of Funding Opportunity (NOFO) invites a Single Source application for the eligible organization, the Scientific and Data Research Center (SDRC) already involved in the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Consortium. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered. There is currently no standard of care for patients after hospitalization with acute kidney injury (AKI). Successful completion of the COPE-AKI study will provide key insights that are expected to directly inform improved clinical management strategies and the development of standard of care for Stage 2 and 3 AKI survivors.",
+      "eligibility_text": "As this NOFO is a Single Source application, only the current recipient under RFA-DK-20-012 is eligible to apply under this announcement. Refer to Section III. Eligibility Information in the NOFO for additional information on eligibility. Foreign Organizations/International CollaborationsNon-domestic (non-U.S.) Entities (Foreign Organizations) are not eligible to apply. Non-domestic (non-U.S.) components of U.S. Organizations are not eligible to apply. Foreign components, as defined in the NIH Grants Policy Statement, are not allowed."
+    },
+    "record": {
+      "opportunity_id": "360458",
+      "title": "Single Source for the Continuation of the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Scientific and Data Research Center (U01 Clinical Trial Required)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/360458",
+      "close_date": "2026-11-09",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-11-09",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/360458",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T06:01:24.461096Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "Single Source for the Continuation of the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Scientific and Data Research Center (U01 Clinical Trial Required)",
+            "source_url": "https://www.grants.gov/search-results-detail/360458",
+            "restriction": {
+              "source_field": "description",
+              "quote": "Notice of Funding Opportunity (NOFO) invites a Single Source application for the eligible organization"
+            }
+          }
+        }
+      ],
+      "description": "Applications for a 3-year extension/renewal of the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) clinical trial consortium are requested to fully meet the enrollment targets, complete participant follow-up, and finalize data analysis and dissemination of study findings. This Notice of Funding Opportunity (NOFO) invites a Single Source application for the eligible organization, the Scientific and Data Research Center (SDRC) already involved in the Caring for OutPatiEnts after Acute Kidney Injury (COPE-AKI) Consortium. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered. There is currently no standard of care for patients after hospitalization with acute kidney injury (AKI). Successful completion of the COPE-AKI study will provide key insights that are expected to directly inform improved clinical management strategies and the development of standard of care for Stage 2 and 3 AKI survivors.",
+      "eligibility_text": "As this NOFO is a Single Source application, only the current recipient under RFA-DK-20-012 is eligible to apply under this announcement. Refer to Section III. Eligibility Information in the NOFO for additional information on eligibility. Foreign Organizations/International CollaborationsNon-domestic (non-U.S.) Entities (Foreign Organizations) are not eligible to apply. Non-domestic (non-U.S.) components of U.S. Organizations are not eligible to apply. Foreign components, as defined in the NIH Grants Policy Statement, are not allowed."
+    },
+    "expected": {
+      "date": "2026-11-09",
+      "access": "invitation_required",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "Explicit single-source invitation 361213 preserves its source status and date",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "361213",
+      "title": "Single Source for the Continuation of the Epidemiology of Diabetes Interventions and Complications (EDIC) Study Research Center (Collaborative U01 Clinical Trial Not Allowed)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/361213",
+      "close_date": "2026-11-09",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-11-09",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/361213",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T06:01:24.461096Z"
+        }
+      ],
+      "description": "This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite an application from the eligible organization to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, applications will be peer-reviewed, and only meritorious applications will be considered for funding. Through this NOFO, the National institute of Diabetes and Digestive and Kidney Diseases (NIDDK) invites an application to continue to follow the Epidemiology of Diabetes Interventions and Complications (EDIC) cohort through a collaborative cooperative agreement that addresses specific knowledge gaps in the development and progression of type 1 diabetes complications. Applications should include hypothesis-based research, support for cohort infrastructure and/or maintenance, continued follow-up, and supporting collaborative research to utilize the EDIC cohort as well as its data set and biologic/genetic samples.",
+      "eligibility_text": "This is a Forecast for a single source competition that will invite application(s) from eligible organization(s) to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding. Refer to Section III. Eligibility Information in the NOFO for additional information on eligibility. Foreign Organizations/International CollaborationsNon-domestic (non-U.S.) Entities (Foreign Organizations) are not eligible to apply. Non-domestic (non-U.S.) components of U.S. Organizations are not eligible to apply. Foreign components, as defined in the NIH Grants Policy Statement, are allowed. NIH will no longer issue awards (i.e., new, renewal, or non-competing continuation) to domestic or foreign entities that involve foreign subawards/subcontracts. All NIH-funded research involving foreign subawards/subcontracts must be submitted in response to a NOFO that is specifically designated for funded international collaborations. See NIH Grants Policy Statement 16.8 Collaborative International Research Awards. Applications involving foreign subawards/subcontracts submitted in response to this NOFO will be deemed noncompliant and will not be considered for funding. This policy applies to all monetary international collaborations resulting in foreign subawards/subcontracts, however, it does not preclude unfunded international collaborations or foreign components, funding for foreign consultants, or procurement of unique equipment or supplies from foreign vendors."
+    },
+    "record": {
+      "opportunity_id": "361213",
+      "title": "Single Source for the Continuation of the Epidemiology of Diabetes Interventions and Complications (EDIC) Study Research Center (Collaborative U01 Clinical Trial Not Allowed)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/361213",
+      "close_date": "2026-11-09",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-11-09",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/361213",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T06:01:24.461096Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "Single Source for the Continuation of the Epidemiology of Diabetes Interventions and Complications (EDIC) Study Research Center (Collaborative U01 Clinical Trial Not Allowed)",
+            "source_url": "https://www.grants.gov/search-results-detail/361213",
+            "restriction": {
+              "source_field": "description",
+              "quote": "Single Source that will invite an application from the eligible organization to apply"
+            }
+          }
+        }
+      ],
+      "description": "This is a Notice of Funding Opportunity (NOFO) for a Single Source that will invite an application from the eligible organization to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, applications will be peer-reviewed, and only meritorious applications will be considered for funding. Through this NOFO, the National institute of Diabetes and Digestive and Kidney Diseases (NIDDK) invites an application to continue to follow the Epidemiology of Diabetes Interventions and Complications (EDIC) cohort through a collaborative cooperative agreement that addresses specific knowledge gaps in the development and progression of type 1 diabetes complications. Applications should include hypothesis-based research, support for cohort infrastructure and/or maintenance, continued follow-up, and supporting collaborative research to utilize the EDIC cohort as well as its data set and biologic/genetic samples.",
+      "eligibility_text": "This is a Forecast for a single source competition that will invite application(s) from eligible organization(s) to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding. Refer to Section III. Eligibility Information in the NOFO for additional information on eligibility. Foreign Organizations/International CollaborationsNon-domestic (non-U.S.) Entities (Foreign Organizations) are not eligible to apply. Non-domestic (non-U.S.) components of U.S. Organizations are not eligible to apply. Foreign components, as defined in the NIH Grants Policy Statement, are allowed. NIH will no longer issue awards (i.e., new, renewal, or non-competing continuation) to domestic or foreign entities that involve foreign subawards/subcontracts. All NIH-funded research involving foreign subawards/subcontracts must be submitted in response to a NOFO that is specifically designated for funded international collaborations. See NIH Grants Policy Statement 16.8 Collaborative International Research Awards. Applications involving foreign subawards/subcontracts submitted in response to this NOFO will be deemed noncompliant and will not be considered for funding. This policy applies to all monetary international collaborations resulting in foreign subawards/subcontracts, however, it does not preclude unfunded international collaborations or foreign components, funding for foreign consultants, or procurement of unique equipment or supplies from foreign vendors."
+    },
+    "expected": {
+      "date": "2026-11-09",
+      "access": "invitation_required",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "Explicit single-source invitation 361606 preserves its source status and date",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "361606",
+      "title": "Single Source: Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium (U24 Clinical Trial Not Allowed)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/361606",
+      "close_date": "2027-01-25",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-01-25",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/361606",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+        }
+      ],
+      "description": "Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium, which coordinates research on prevention, diagnosis, treatment, and mechanisms of resistance in SCLC. The CC manages administrative activities, centralized databases, tissue banking and a virtual biospecimen resource, biostatistics and bioinformatics support, in vivo and in vitro model repositories, and communications and website operations for the Consortium. Since its establishment in response to the Recalcitrant Cancer Research Act, the Consortium has catalyzed SCLC-focused research and enabled major advances in molecular characterization, tumor heterogeneity, microenvironment and immune evasion, biomarker development, preclinical models, therapeutic strategies, and clinical translation. The current U24 CC, based at Sloan Kettering with collaborating institutions, organizes meetings, maintains extensive -omics and model resources, supports young investigators, and provides datasets and models to the research community. The reissue NOFO will support a five-year cooperative agreement to sustain these shared resources and collaborations. This is a Forecast for a single source that will invite application(s) from eligible organization(s) to apply. Please see the Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding.",
+      "eligibility_text": "Other Eligible ApplicantsIndian/Native American Tribal Governments (Other than Federally Recognized); Eligible Agencies of the Federal Government; U.S. Territory or Possession; Faith-based or Community-based Organizations; Regional Organizations; Non-domestic (non-U.S.) Entities (Foreign Institutions)."
+    },
+    "record": {
+      "opportunity_id": "361606",
+      "title": "Single Source: Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium (U24 Clinical Trial Not Allowed)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/361606",
+      "close_date": "2027-01-25",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-01-25",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/361606",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-07-31T12:17:15.975581Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "Single Source: Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium (U24 Clinical Trial Not Allowed)",
+            "source_url": "https://www.grants.gov/search-results-detail/361606",
+            "restriction": {
+              "source_field": "description",
+              "quote": "single source that will invite application(s) from eligible organization(s) to apply"
+            }
+          }
+        }
+      ],
+      "description": "Through this Notice of Funding Opportunity (NOFO), the National Cancer Institute (NCI) intends to continue to support the Coordinating Center (CC) for the Small Cell Lung Cancer (SCLC) Consortium, which coordinates research on prevention, diagnosis, treatment, and mechanisms of resistance in SCLC. The CC manages administrative activities, centralized databases, tissue banking and a virtual biospecimen resource, biostatistics and bioinformatics support, in vivo and in vitro model repositories, and communications and website operations for the Consortium. Since its establishment in response to the Recalcitrant Cancer Research Act, the Consortium has catalyzed SCLC-focused research and enabled major advances in molecular characterization, tumor heterogeneity, microenvironment and immune evasion, biomarker development, preclinical models, therapeutic strategies, and clinical translation. The current U24 CC, based at Sloan Kettering with collaborating institutions, organizes meetings, maintains extensive -omics and model resources, supports young investigators, and provides datasets and models to the research community. The reissue NOFO will support a five-year cooperative agreement to sustain these shared resources and collaborations. This is a Forecast for a single source that will invite application(s) from eligible organization(s) to apply. Please see the Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding.",
+      "eligibility_text": "Other Eligible ApplicantsIndian/Native American Tribal Governments (Other than Federally Recognized); Eligible Agencies of the Federal Government; U.S. Territory or Possession; Faith-based or Community-based Organizations; Regional Organizations; Non-domestic (non-U.S.) Entities (Foreign Institutions)."
+    },
+    "expected": {
+      "date": "2027-01-25",
+      "access": "invitation_required",
+      "kind": "estimated_application"
+    }
+  },
+  {
+    "name": "Explicit single-source invitation 363454 preserves its source status and date",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "363454",
+      "title": "Single Source Competition for Continuation of Understanding and Targeting the Pathophysiology of Youth-Onset Type 2 Diabetes Clinical Centers (U01 Clinical Trial Not Allowed)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363454",
+      "close_date": "2027-03-10",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-03-10",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363454",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-08-05T12:17:04.607054Z"
+        }
+      ],
+      "description": "The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The current Biostatistics Research Center (BRC) serves as the consortium's central coordinating center, managing protocol implementation, data management, quality assurance, statistical design and analysis, and inter-site and consortium-wide coordination. The BRC has established the robust infrastructure and standardized processes required to support the study and preserve the integrity of the longitudinal dataset. The purpose of this single-source solicitation is to support completion of the scientific objectives of the ongoing DISCOVERY clinical consortium.",
+      "eligibility_text": "This is a Single Source competition that will invite application(s) from eligible organization(s) to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding."
+    },
+    "record": {
+      "opportunity_id": "363454",
+      "title": "Single Source Competition for Continuation of Understanding and Targeting the Pathophysiology of Youth-Onset Type 2 Diabetes Clinical Centers (U01 Clinical Trial Not Allowed)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363454",
+      "close_date": "2027-03-10",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-03-10",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363454",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-08-05T12:17:04.607054Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "Single Source Competition for Continuation of Understanding and Targeting the Pathophysiology of Youth-Onset Type 2 Diabetes Clinical Centers (U01 Clinical Trial Not Allowed)",
+            "source_url": "https://www.grants.gov/search-results-detail/363454",
+            "restriction": {
+              "source_field": "eligibility_text",
+              "quote": "Single Source competition that will invite application(s) from eligible organization(s) to apply"
+            }
+          }
+        }
+      ],
+      "description": "The DISCOVERY of Risk Factors for Type 2 Diabetes in Youth Study is a multi-center longitudinal consortium conducted across 19 clinical sites to identify risk factors and biological mechanisms driving progression to youth-onset type 2 diabetes. The study is actively recruiting and following early pubertal youth at high risk for the disease with longitudinal follow-up currently underway. The current Biostatistics Research Center (BRC) serves as the consortium's central coordinating center, managing protocol implementation, data management, quality assurance, statistical design and analysis, and inter-site and consortium-wide coordination. The BRC has established the robust infrastructure and standardized processes required to support the study and preserve the integrity of the longitudinal dataset. The purpose of this single-source solicitation is to support completion of the scientific objectives of the ongoing DISCOVERY clinical consortium.",
+      "eligibility_text": "This is a Single Source competition that will invite application(s) from eligible organization(s) to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding."
+    },
+    "expected": {
+      "date": "2027-03-10",
+      "access": "invitation_required",
+      "kind": "estimated_application"
+    }
+  },
+  {
+    "name": "Explicit single-source invitation 362575 preserves its source status and date",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "362575",
+      "title": "Single Source: Resource Center for the Support for Research Excellence (SuRE) Program",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/362575",
+      "close_date": "2027-05-25",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-05-25",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/362575",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-07-31T12:17:15.975581Z"
+        }
+      ],
+      "description": "The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the administrative research infrastructure of SuRE-eligible institutions and to provide services to advise investigators who are interested in applying for a SuRE award. Specifically, the Resource Center: (1) assists institutions with building research capacity, (2) conducts outreach and training to professional staff and faculty at eligible institutions, and (3) collects and reports data relevant to the goals of the program. This is a Forecast for a Single Source that will invite an application from an eligible organization to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application will be peer-reviewed, and only a meritorious application will be considered.",
+      "eligibility_text": "This is a non-competitive funding opportunity intended to fund a single award. Through this single source, Notice of Funding Opportunity (NOFO), the National Institute of General Medical Sciences solicits an application to fund a single award to the current recipient of the Sure Resource Center."
+    },
+    "record": {
+      "opportunity_id": "362575",
+      "title": "Single Source: Resource Center for the Support for Research Excellence (SuRE) Program",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/362575",
+      "close_date": "2027-05-25",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-05-25",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/362575",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-07-31T12:17:15.975581Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "Single Source: Resource Center for the Support for Research Excellence (SuRE) Program",
+            "source_url": "https://www.grants.gov/search-results-detail/362575",
+            "restriction": {
+              "source_field": "description",
+              "quote": "Single Source that will invite an application from an eligible organization to apply"
+            }
+          }
+        }
+      ],
+      "description": "The Support for Research Excellence (SuRE) program aims to develop and sustain research excellence at resource-limited institutions, many of which disproportionately serve regions of the U.S. that have not historically participated in substantial NIH research, by supporting investigator-initiated research with strong student participation. A SuRE Resource Center has been established to enhance the administrative research infrastructure of SuRE-eligible institutions and to provide services to advise investigators who are interested in applying for a SuRE award. Specifically, the Resource Center: (1) assists institutions with building research capacity, (2) conducts outreach and training to professional staff and faculty at eligible institutions, and (3) collects and reports data relevant to the goals of the program. This is a Forecast for a Single Source that will invite an application from an eligible organization to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application will be peer-reviewed, and only a meritorious application will be considered.",
+      "eligibility_text": "This is a non-competitive funding opportunity intended to fund a single award. Through this single source, Notice of Funding Opportunity (NOFO), the National Institute of General Medical Sciences solicits an application to fund a single award to the current recipient of the Sure Resource Center."
+    },
+    "expected": {
+      "date": "2027-05-25",
+      "access": "invitation_required",
+      "kind": "estimated_application"
+    }
+  },
+  {
+    "name": "Explicit single-source invitation 363874 preserves its source status and date",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "363874",
+      "title": "Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363874",
+      "close_date": "2027-06-01",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-06-01",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363874",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-09-17T21:45:56.464504Z"
+        }
+      ],
+      "description": "The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of SSPsyGene is to systematically study how risk genes for neurodevelopmental and psychiatric disorders (NPDs) affect molecular, cellular, circuit, systems/organismal biology. The renewed DRACC will refine its focus on developing a sustainable knowledge base, with shared terms, definitions, and data standards that are interoperable with other knowledge platforms and will enable the use of artificial intelligence to accelerate research on brain function and NPDs. This resource will be made available for broad use by the biomedical community. Projects that propose to build on the DRACC's current role in refining methods and standards to harmonize data from the SSPsyGene Assay and Data Generation Centers and facilitate submission to data archives are encouraged. This is a forecast for a single source NOFO that will invite application(s) from eligible organization(s) to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding.",
+      "eligibility_text": "Only the University of California Santa Cruz is eligible to apply for this single source NOFO."
+    },
+    "record": {
+      "opportunity_id": "363874",
+      "title": "Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363874",
+      "close_date": "2027-06-01",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-06-01",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363874",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-09-17T21:45:56.464504Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "Single Source: Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes: Data Resource and Administrative Coordination Center (U24 Clinical Trial Not Allowed)",
+            "source_url": "https://www.grants.gov/search-results-detail/363874",
+            "restriction": {
+              "source_field": "description",
+              "quote": "single source NOFO that will invite application(s) from eligible organization(s) to apply"
+            }
+          }
+        }
+      ],
+      "description": "The National Institute of Mental Health (NIMH) intends to issue a single-source cooperative agreement award to the University of California, Santa Cruz. The award will renew the Data Resource and Administrative Coordination Center (DRACC), a component of the Scalable and Systematic Neurobiology of Psychiatric and Neurodevelopmental Disorder Risk Genes (SSPsyGene) Consortium. The long-term goal of SSPsyGene is to systematically study how risk genes for neurodevelopmental and psychiatric disorders (NPDs) affect molecular, cellular, circuit, systems/organismal biology. The renewed DRACC will refine its focus on developing a sustainable knowledge base, with shared terms, definitions, and data standards that are interoperable with other knowledge platforms and will enable the use of artificial intelligence to accelerate research on brain function and NPDs. This resource will be made available for broad use by the biomedical community. Projects that propose to build on the DRACC's current role in refining methods and standards to harmonize data from the SSPsyGene Assay and Data Generation Centers and facilitate submission to data archives are encouraged. This is a forecast for a single source NOFO that will invite application(s) from eligible organization(s) to apply. Please see Section III. Eligibility for additional information. In accordance with NIH standard peer-review processes, the application(s) will be peer-reviewed, and only meritorious application(s) will be considered for funding.",
+      "eligibility_text": "Only the University of California Santa Cruz is eligible to apply for this single source NOFO."
+    },
+    "expected": {
+      "date": "2027-06-01",
+      "access": "invitation_required",
+      "kind": "estimated_application"
+    }
+  },
+  {
+    "name": "Explicit single-source invitation 362574 preserves its source status and date",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "362574",
+      "title": "Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/362574",
+      "close_date": "2027-09-28",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-09-28",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/362574",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-08-01T11:35:33.536291Z"
+        }
+      ],
+      "description": "The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical & Translational Research (CTR) award, supports clinical and translational (C&T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significantly increasing the number of clinical trials and complex observational studies in IDeA states is a pressing need that requires continued efforts to strengthen clinical research capacity and employ innovative approaches that maximize the use of existing resources. The IDeA Clinical Research Resource Center (I-CRRC) was funded in 2023 to increase the capacity in IDeA states to conduct clinical trials and complex observational studies by: strengthening communication and developing collaborations between health research institutions in IDeA states and clinical trial sponsors; anddeveloping clinical research coordinators with the knowledge and skills to manage clinical trials and complex observational studies. The goals of the continuance of the I-CCRC program are to: Address research design and compliance barriers associated with conducting clinical trials and complex observational studies. Strengthen communication and develop collaborations between health research institutions in IDeA-eligible states and clinical trial sponsors. Train clinical trial and observational study coordinators with the knowledge and skills to manage clinical studies. Provide professional development and research methodology-training services to professional staff and research investigators. Build real world data research infrastructure to engage practice-based research networks/community clinics and multi-site clinical trials to increase participation, efficiency, and impact. This is a Forecast for a Single Source that will invite an application from an eligible organization to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application will be peer-reviewed, and only a meritorious application will be considered for funding.",
+      "eligibility_text": "This is a non-competitive funding opportunity intended to fund a single award. Through this single source, Notice of Funding Opportunity (NOFO), the National Institute of General Medical Sciences solicits an application to fund a single award to the current recipient of the IDeA Clinical Research Resource Center."
+    },
+    "record": {
+      "opportunity_id": "362574",
+      "title": "Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)",
+      "status": "forecasted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/362574",
+      "close_date": "2027-09-28",
+      "deadlines": [
+        {
+          "kind": "estimated_application",
+          "date": "2027-09-28",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": true,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/362574",
+          "source_field": "EstimatedSynopsisCloseDate",
+          "confidence": "official_estimate",
+          "detail_checked_at": "2026-08-01T11:35:33.536291Z",
+          "invitation_required": true,
+          "prerequisite": "invitation",
+          "invitation_evidence": {
+            "source_field": "title",
+            "quote": "Single Source: Institutional Development Award (IDeA) Clinical Research Resource Center (I-CRRC)",
+            "source_url": "https://www.grants.gov/search-results-detail/362574",
+            "restriction": {
+              "source_field": "description",
+              "quote": "Single Source that will invite an application from an eligible organization to apply"
+            }
+          }
+        }
+      ],
+      "description": "The Institutional Development Award (IDeA) program supports biomedical research capacity building in states that have historically received low levels of NIH funding. One such program, the IDeA Clinical & Translational Research (CTR) award, supports clinical and translational (C&T) research capacity building to enable research on diseases and health challenges prevalent in IDeA states. Significantly increasing the number of clinical trials and complex observational studies in IDeA states is a pressing need that requires continued efforts to strengthen clinical research capacity and employ innovative approaches that maximize the use of existing resources. The IDeA Clinical Research Resource Center (I-CRRC) was funded in 2023 to increase the capacity in IDeA states to conduct clinical trials and complex observational studies by: strengthening communication and developing collaborations between health research institutions in IDeA states and clinical trial sponsors; anddeveloping clinical research coordinators with the knowledge and skills to manage clinical trials and complex observational studies. The goals of the continuance of the I-CCRC program are to: Address research design and compliance barriers associated with conducting clinical trials and complex observational studies. Strengthen communication and develop collaborations between health research institutions in IDeA-eligible states and clinical trial sponsors. Train clinical trial and observational study coordinators with the knowledge and skills to manage clinical studies. Provide professional development and research methodology-training services to professional staff and research investigators. Build real world data research infrastructure to engage practice-based research networks/community clinics and multi-site clinical trials to increase participation, efficiency, and impact. This is a Forecast for a Single Source that will invite an application from an eligible organization to apply. Please see Eligibility Section for additional information. In accordance with NIH standard peer-review processes, the application will be peer-reviewed, and only a meritorious application will be considered for funding.",
+      "eligibility_text": "This is a non-competitive funding opportunity intended to fund a single award. Through this single source, Notice of Funding Opportunity (NOFO), the National Institute of General Medical Sciences solicits an application to fund a single award to the current recipient of the IDeA Clinical Research Resource Center."
+    },
+    "expected": {
+      "date": "2027-09-28",
+      "access": "invitation_required",
+      "kind": "estimated_application"
+    }
+  },
+  {
+    "name": "A named eligible recipient alone does not establish an invitation flag",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "363677",
+      "title": "National Center for Narrative Intelligence (NCNI)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363677",
+      "close_date": "2031-08-19",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2031-08-19",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363677",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-08-21T16:38:23.903640Z"
+        }
+      ],
+      "description": "Under this FY26 grant agreement, academic partners will establish the National Center for Narrative Intelligence (NCNI) by executing RDT&E tasks across the following four pillars: workforce development, applied research infrastructure, collaborative networks, and strategic analysis for DoW leadership.",
+      "eligibility_text": "The only eligible applicant is the Mississippi State University; no other applications will be considered."
+    },
+    "record": {
+      "opportunity_id": "363677",
+      "title": "National Center for Narrative Intelligence (NCNI)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363677",
+      "close_date": "2031-08-19",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2031-08-19",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363677",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-08-21T16:38:23.903640Z"
+        }
+      ],
+      "description": "Under this FY26 grant agreement, academic partners will establish the National Center for Narrative Intelligence (NCNI) by executing RDT&E tasks across the following four pillars: workforce development, applied research infrastructure, collaborative networks, and strategic analysis for DoW leadership.",
+      "eligibility_text": "The only eligible applicant is the Mississippi State University; no other applications will be considered."
+    },
+    "expected": {
+      "date": "2031-08-19",
+      "access": "open",
+      "kind": "application"
+    }
+  },
+  {
+    "name": "NASA SSERVI source-owned Step-1 remains open before its required date",
+    "as_of": "2026-09-01",
+    "source_record": {
+      "opportunity_id": "363734",
+      "title": "Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363734",
+      "close_date": "2026-12-04",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-12-04",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363734",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T18:06:43.037145Z"
+        }
+      ],
+      "description": "The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participating members of the Solar System Exploration Research Virtual Institute (SSERVI). Proposals must clearly articulate an innovative research program addressing basic and/or applied research fundamental to understanding the nature of the Moon and its near space environment to enable future human exploration of the Moon with Artemis. \u201cMars forward\u201d proposals that use lunar-focused research to develop approaches to Mars exploration also are welcome. Though the SSERVI CAN is synopsized on Grants.gov, applications can only be submitted via NASA Solicitation and Proposal Integrated Review and Evaluation System (NSPIRES) at URL https://solicitation.nasaprs.com/NNH26ZDA016C. A two-step process will be used for proposal submission, in which only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal. Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026. Proposals to this CAN must be anonymous and will be reviewed using dual anonymous peer review (DAPR). Step-2 (full) proposals will be divided into two Volumes. Volume A consists of the anonymous proposal material, while Volume B contains the non-anonymous material. Proposal review, selection, and award will be implemented according to the guidelines set forth in Sections F and G of the funding announcement. Proposed research that complements current CAN-4 Institute Teams, and/or addresses important research areas not currently covered in the Institute will be given strong consideration (see: http://sservi.nasa.gov/sserviteams/). Section D.1.4 \u201cStep-2 Proposal Content\u201d provides important information regarding restrictions and deadlines for Principal Investigator and other key personnel changes and other key date placeholders. Clarification questions regarding this solicitation should be submitted via email no later than 14 calendar days prior to the Step-2 proposal due date to HQ-SSERVI@mail.nasa.gov. Depending on the nature of the question(s), NASA may respond on an individual basis by email or may post questions and answers (Q&A) no later than 10 days before the Step-2 deadline on the final SSERVI CAN-5 NSPIRES landing page. Posted Q&As are intended to address inquiries of broader interest and general clarification and will be edited to preserve the anonymity of persons and institutions who submit questions.",
+      "has_preliminary_stage": false,
+      "preliminary_required": null,
+      "preliminary_stage_type": null,
+      "document_evidence_status": "failed",
+      "document_evidence": null
+    },
+    "record": {
+      "opportunity_id": "363734",
+      "title": "Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363734",
+      "close_date": "2026-12-04",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-12-04",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363734",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T18:06:43.037145Z"
+        },
+        {
+          "kind": "preproposal",
+          "stage": "preproposal",
+          "date": "2026-09-29",
+          "required": true,
+          "source": "Grants.gov synopsis",
+          "source_url": "https://www.grants.gov/search-results-detail/363734",
+          "source_field": "description",
+          "confidence": "source_listed",
+          "citation": {
+            "source_field": "description",
+            "quote": "Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026",
+            "source_url": "https://www.grants.gov/search-results-detail/363734"
+          },
+          "requirement_citation": {
+            "source_field": "description",
+            "quote": "only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal",
+            "source_url": "https://www.grants.gov/search-results-detail/363734"
+          }
+        }
+      ],
+      "description": "The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participating members of the Solar System Exploration Research Virtual Institute (SSERVI). Proposals must clearly articulate an innovative research program addressing basic and/or applied research fundamental to understanding the nature of the Moon and its near space environment to enable future human exploration of the Moon with Artemis. \u201cMars forward\u201d proposals that use lunar-focused research to develop approaches to Mars exploration also are welcome. Though the SSERVI CAN is synopsized on Grants.gov, applications can only be submitted via NASA Solicitation and Proposal Integrated Review and Evaluation System (NSPIRES) at URL https://solicitation.nasaprs.com/NNH26ZDA016C. A two-step process will be used for proposal submission, in which only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal. Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026. Proposals to this CAN must be anonymous and will be reviewed using dual anonymous peer review (DAPR). Step-2 (full) proposals will be divided into two Volumes. Volume A consists of the anonymous proposal material, while Volume B contains the non-anonymous material. Proposal review, selection, and award will be implemented according to the guidelines set forth in Sections F and G of the funding announcement. Proposed research that complements current CAN-4 Institute Teams, and/or addresses important research areas not currently covered in the Institute will be given strong consideration (see: http://sservi.nasa.gov/sserviteams/). Section D.1.4 \u201cStep-2 Proposal Content\u201d provides important information regarding restrictions and deadlines for Principal Investigator and other key personnel changes and other key date placeholders. Clarification questions regarding this solicitation should be submitted via email no later than 14 calendar days prior to the Step-2 proposal due date to HQ-SSERVI@mail.nasa.gov. Depending on the nature of the question(s), NASA may respond on an individual basis by email or may post questions and answers (Q&A) no later than 10 days before the Step-2 deadline on the final SSERVI CAN-5 NSPIRES landing page. Posted Q&As are intended to address inquiries of broader interest and general clarification and will be edited to preserve the anonymity of persons and institutions who submit questions.",
+      "has_preliminary_stage": true,
+      "preliminary_required": true,
+      "preliminary_stage_type": "preproposal",
+      "document_evidence_status": "failed",
+      "document_evidence": null
+    },
+    "expected": {
+      "date": "2026-09-29",
+      "access": "open",
+      "kind": "preproposal"
+    }
+  },
+  {
+    "name": "NASA SSERVI missed Step-1 qualifies the unchanged Step-2 full deadline",
+    "as_of": "2026-10-08",
+    "source_record": {
+      "opportunity_id": "363734",
+      "title": "Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363734",
+      "close_date": "2026-12-04",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-12-04",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363734",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T18:06:43.037145Z"
+        }
+      ],
+      "description": "The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participating members of the Solar System Exploration Research Virtual Institute (SSERVI). Proposals must clearly articulate an innovative research program addressing basic and/or applied research fundamental to understanding the nature of the Moon and its near space environment to enable future human exploration of the Moon with Artemis. \u201cMars forward\u201d proposals that use lunar-focused research to develop approaches to Mars exploration also are welcome. Though the SSERVI CAN is synopsized on Grants.gov, applications can only be submitted via NASA Solicitation and Proposal Integrated Review and Evaluation System (NSPIRES) at URL https://solicitation.nasaprs.com/NNH26ZDA016C. A two-step process will be used for proposal submission, in which only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal. Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026. Proposals to this CAN must be anonymous and will be reviewed using dual anonymous peer review (DAPR). Step-2 (full) proposals will be divided into two Volumes. Volume A consists of the anonymous proposal material, while Volume B contains the non-anonymous material. Proposal review, selection, and award will be implemented according to the guidelines set forth in Sections F and G of the funding announcement. Proposed research that complements current CAN-4 Institute Teams, and/or addresses important research areas not currently covered in the Institute will be given strong consideration (see: http://sservi.nasa.gov/sserviteams/). Section D.1.4 \u201cStep-2 Proposal Content\u201d provides important information regarding restrictions and deadlines for Principal Investigator and other key personnel changes and other key date placeholders. Clarification questions regarding this solicitation should be submitted via email no later than 14 calendar days prior to the Step-2 proposal due date to HQ-SSERVI@mail.nasa.gov. Depending on the nature of the question(s), NASA may respond on an individual basis by email or may post questions and answers (Q&A) no later than 10 days before the Step-2 deadline on the final SSERVI CAN-5 NSPIRES landing page. Posted Q&As are intended to address inquiries of broader interest and general clarification and will be edited to preserve the anonymity of persons and institutions who submit questions.",
+      "has_preliminary_stage": false,
+      "preliminary_required": null,
+      "preliminary_stage_type": null,
+      "document_evidence_status": "failed",
+      "document_evidence": null
+    },
+    "record": {
+      "opportunity_id": "363734",
+      "title": "Solar System Exploration Research Virtual Institute Cooperative Agreement Notice-5 (SSERVI CAN-5)",
+      "status": "posted",
+      "source": "Grants.gov",
+      "detail_page": "https://www.grants.gov/search-results-detail/363734",
+      "close_date": "2026-12-04",
+      "deadlines": [
+        {
+          "kind": "application",
+          "date": "2026-12-04",
+          "time": null,
+          "timezone": null,
+          "note": null,
+          "estimated": false,
+          "source": "Grants.gov XML extract",
+          "source_url": "https://www.grants.gov/search-results-detail/363734",
+          "source_field": "CloseDate",
+          "confidence": "official_structured",
+          "detail_checked_at": "2026-09-02T18:06:43.037145Z"
+        },
+        {
+          "kind": "preproposal",
+          "stage": "preproposal",
+          "date": "2026-09-29",
+          "required": true,
+          "source": "Grants.gov synopsis",
+          "source_url": "https://www.grants.gov/search-results-detail/363734",
+          "source_field": "description",
+          "confidence": "source_listed",
+          "citation": {
+            "source_field": "description",
+            "quote": "Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026",
+            "source_url": "https://www.grants.gov/search-results-detail/363734"
+          },
+          "requirement_citation": {
+            "source_field": "description",
+            "quote": "only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal",
+            "source_url": "https://www.grants.gov/search-results-detail/363734"
+          }
+        }
+      ],
+      "description": "The National Aeronautics and Space Administration (NASA) Science Mission Directorate (SMD) and Human Spaceflight Mission Directorate (HSMD) have released the fifth Solar System Exploration Research Virtual Institute (SSERVI) Cooperative Agreement Notice (CAN-5) as NNH26ZDA016C. SSERVI CAN-5 (NNH26ZDA016C) invites the submission of multi-institutional team-based proposals for research as participating members of the Solar System Exploration Research Virtual Institute (SSERVI). Proposals must clearly articulate an innovative research program addressing basic and/or applied research fundamental to understanding the nature of the Moon and its near space environment to enable future human exploration of the Moon with Artemis. \u201cMars forward\u201d proposals that use lunar-focused research to develop approaches to Mars exploration also are welcome. Though the SSERVI CAN is synopsized on Grants.gov, applications can only be submitted via NASA Solicitation and Proposal Integrated Review and Evaluation System (NSPIRES) at URL https://solicitation.nasaprs.com/NNH26ZDA016C. A two-step process will be used for proposal submission, in which only proposers that submit a Step-1 proposal will be eligible to submit a Step-2 proposal. Step-1 proposals are due September 29, 2026, and Step-2 proposals are due December 4, 2026. Proposals to this CAN must be anonymous and will be reviewed using dual anonymous peer review (DAPR). Step-2 (full) proposals will be divided into two Volumes. Volume A consists of the anonymous proposal material, while Volume B contains the non-anonymous material. Proposal review, selection, and award will be implemented according to the guidelines set forth in Sections F and G of the funding announcement. Proposed research that complements current CAN-4 Institute Teams, and/or addresses important research areas not currently covered in the Institute will be given strong consideration (see: http://sservi.nasa.gov/sserviteams/). Section D.1.4 \u201cStep-2 Proposal Content\u201d provides important information regarding restrictions and deadlines for Principal Investigator and other key personnel changes and other key date placeholders. Clarification questions regarding this solicitation should be submitted via email no later than 14 calendar days prior to the Step-2 proposal due date to HQ-SSERVI@mail.nasa.gov. Depending on the nature of the question(s), NASA may respond on an individual basis by email or may post questions and answers (Q&A) no later than 10 days before the Step-2 deadline on the final SSERVI CAN-5 NSPIRES landing page. Posted Q&As are intended to address inquiries of broader interest and general clarification and will be edited to preserve the anonymity of persons and institutions who submit questions.",
+      "has_preliminary_stage": true,
+      "preliminary_required": true,
+      "preliminary_stage_type": "preproposal",
+      "document_evidence_status": "failed",
+      "document_evidence": null
+    },
+    "expected": {
+      "date": "2026-12-04",
+      "access": "prerequisite_closed",
+      "kind": "application"
+    }
   }
 ]

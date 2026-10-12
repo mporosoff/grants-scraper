@@ -669,7 +669,10 @@ def mode(bundle):
 
 def plan():
     requested = os.environ.get('REQUESTED_STAGE', '')
-    if requested == 'catalog-source-recovery':
+    if requested == 'catalog-access-correction':
+        from tools.catalog_access_correction import plan as access_correction_plan
+        value = access_correction_plan(ROOT, dict(os.environ))
+    elif requested == 'catalog-source-recovery':
         from tools.catalog_source_recovery import plan as source_recovery_plan
         value = source_recovery_plan(ROOT, dict(os.environ))
     elif requested == 'program-area-revalidation':

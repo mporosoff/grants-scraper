@@ -88,6 +88,7 @@
     "tools/*.py",
     "tools/*.mjs",
     "tools/verify_no_drift.sh",
+    "evaluation/catalog_access_correction_20261012.json",
     "tests/**/*",
     ".github/workflows/*.yml",
     "config/release_dependencies.json"
@@ -195,6 +196,7 @@
         "tools/*.py",
         "tools/*.mjs",
         "tools/verify_no_drift.sh",
+        "evaluation/catalog_access_correction_20261012.json",
         "tests/**/*",
         ".github/workflows/*.yml",
         "config/release_dependencies.json",
