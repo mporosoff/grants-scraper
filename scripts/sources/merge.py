@@ -26,6 +26,7 @@ with Grants.gov's own functions so external records stay indistinguishable.
 from __future__ import annotations
 
 from collections import Counter
+from copy import deepcopy
 from datetime import date
 import json
 import os
@@ -653,6 +654,104 @@ def _canonical_title(record: dict) -> str:
     return re.sub(r"[^a-z0-9]+", " ", title.casefold()).strip()
 
 
+def reconcile_source_aliases(records: list[dict], previous_records: list[dict]) -> tuple[list[dict], dict]:
+    """Retain proven public IDs across fresh Grants.gov reconstruction.
+
+    The accepted previous catalog is identity evidence only. Never carry its
+    scientific fields, deadlines, currentness, document evidence, or source age.
+    A unique sponsor/full-number match may promote an external record to Grants;
+    an unchanged Grants identity may retain its previously proven aliases.
+    """
+    from scripts.solicitation_identity import solicitation_key, normalized_number
+    from .official_identity import record_grants_ids
+    from .nsf_identity import record_identity as nsf_identity
+
+    combined = [dict(record) for record in records]
+    current_ids = {str(r.get('opportunity_id')) for r in combined}
+    current_keys, previous_keys = {}, {}
+    for record in combined:
+        key = solicitation_key(record)
+        if record.get('source') == 'Grants.gov' and key:
+            current_keys.setdefault(key, []).append(record)
+    for record in previous_records:
+        key = solicitation_key(record)
+        if key:
+            previous_keys.setdefault(key, []).append(record)
+
+    def scoped(record):
+        return bool(record.get('parent_id') or record.get('parent_opportunity_id')
+                    or record.get('subtopic_id') or record.get('record_type') == 'subtopic')
+
+    owners = {}
+    for record in combined:
+        for alias in record.get('source_aliases') or []:
+            ident = str(alias.get('opportunity_id') or '')
+            owner = str(record.get('opportunity_id'))
+            if not ident or ident in current_ids or owners.get(ident, owner) != owner:
+                raise ValueError('Source alias conflicts with a current public identity')
+            owners[ident] = owner
+
+    changed, added = [], []
+    for key, winners in current_keys.items():
+        candidates = previous_keys.get(key, [])
+        for winner in winners:
+            owner = str(winner['opportunity_id'])
+            if scoped(winner):
+                continue
+            aliases = deepcopy(winner.get('source_aliases') or [])
+            seen = {str(a['opportunity_id']) for a in aliases}
+
+            def add_alias(alias):
+                ident = str(alias.get('opportunity_id') or '')
+                proof = record_grants_ids(alias)
+                nsf_state, nsf_number = nsf_identity(alias)
+                number = normalized_number(alias.get('opportunity_number'))
+                if key[0] == 'nsf':
+                    number = re.sub(r'^nsf(?=\d{5,}$)', '', number)
+                # Exact Grants link evidence can resolve a digest's unowned or
+                # erroneous display number; a bare number cannot override it.
+                if (not ident or ident == owner or ident in current_ids
+                        or owners.get(ident, owner) != owner
+                        or (proof and proof != {owner})
+                        or nsf_state in {'unresolved', 'conflict'}
+                        or (nsf_state == 'resolved' and key != ('nsf', nsf_number))
+                        or (not proof and nsf_state != 'resolved' and number != key[1])):
+                    raise ValueError('Historical source alias lacks consistent identity proof')
+                if ident not in seen:
+                    aliases.append(deepcopy(alias))
+                    seen.add(ident)
+                    owners[ident] = owner
+                    added.append(ident)
+
+            for previous in candidates:
+                prior_id = str(previous.get('opportunity_id') or '')
+                same_grants = prior_id == owner and previous.get('source') == 'Grants.gov'
+                external = (previous.get('source') not in (None, 'Grants.gov')
+                            and prior_id not in current_ids and not scoped(previous))
+                if not (same_grants or external):
+                    continue
+                if len(winners) != 1 or len(candidates) != 1:
+                    raise ValueError('Historical source identity has ambiguous solicitation scope')
+                proof = record_grants_ids(previous)
+                if proof and proof != {owner}:
+                    raise ValueError('Historical record link conflicts with its Grants successor')
+                if external:
+                    alias = {field: previous.get(field) for field in (
+                        'opportunity_id', 'opportunity_number', 'source',
+                        'detail_page', 'funding_opportunity_url')}
+                    if previous.get('official_identity'):
+                        alias['official_identity'] = deepcopy(previous['official_identity'])
+                    add_alias(alias)
+                for alias in previous.get('source_aliases') or []:
+                    add_alias(alias)
+            if len(aliases) > 40:
+                raise ValueError('Historical source aliases exceed the public identity bound')
+            if aliases != (winner.get('source_aliases') or []):
+                winner['source_aliases'] = aliases
+                changed.append(owner)
+    return combined, {'changed_record_ids': changed, 'added_alias_ids': added}
+
+
 def merge_records(base: list[dict], external: list[dict]) -> tuple[list[dict], dict]:
     """Combine sources; Grants.gov and official NSF records outrank NSF digests."""
     from .nsf_identity import record_identity as nsf_identity
@@ -800,7 +899,8 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
               include_disabled: bool = False,
               write: bool = False,
               as_of: date | None = None,
-              intake_path: Path | None = None) -> dict:
+              intake_path: Path | None = None,
+              previous_catalog_path: Path | None = None) -> dict:
     """Collect sources, apply the safe lifecycle, and merge into the catalog.
 
     With ``write=False`` (default) nothing is written; a summary is returned so
@@ -808,6 +908,8 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
     snapshot cache are rewritten -- but only if post-merge validation passes.
     """
     catalog = load_catalog(catalog_path)
+    previous_records = (load_catalog(previous_catalog_path).get('opportunities') or []
+                        if previous_catalog_path is not None else [])
     if as_of is None:
         stamp = str(catalog.get("generated_at") or "")[:10]
         as_of = date.fromisoformat(stamp) if stamp else date.today()
@@ -855,6 +957,7 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
         base = [r for r in base if str(r.get("opportunity_id")) not in base_withheld]
     external, cache, source_summaries = resolve_live_records(results, cache, as_of)
     combined, stats = merge_records(base, external)
+    combined, alias_stats = reconcile_source_aliases(combined, previous_records)
     # Discoverability: tag opaque umbrella FOAs (e.g. DOE Office of Science) with
     # program-area topics/terms so topical searches surface them.
     augmented = augment_records(combined)
@@ -867,6 +970,7 @@ def integrate(catalog_path: Path = DEFAULT_CATALOG,
 
     summary = {
         'official_identity_resolution': identity_stats,
+        'source_alias_preservation': alias_stats,
         "catalog_path": str(catalog_path),
         "cache_path": str(cache_path),
         "catalog_date": as_of.isoformat(),

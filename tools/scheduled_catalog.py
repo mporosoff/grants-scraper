@@ -182,8 +182,8 @@ def prior_generation(root, environment, manifest):
                         and run['run_attempt'] == 1 and not jobs and not artifacts):
                     continue
                 producers = [job for job in jobs if job.get('name') in ('generate', 'assemble')]
-                corrections = [job for job in jobs if job.get('name') in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction')]
-                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 3
+                corrections = [job for job in jobs if job.get('name') in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction')]
+                if (int(run.get('run_attempt', 1)) > 1 or len(producers) != 2 or len(corrections) > 4
                         or any(job.get('conclusion') != 'skipped' for job in producers + corrections)):
                     raise Hold('Prior generation has no complete accounting/candidate evidence; inspect its original run', identifier)
             else:

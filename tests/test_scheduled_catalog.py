@@ -327,6 +327,27 @@ class ScheduledHistory(unittest.TestCase):
         self.published.return_value = {('200', 'c' * 64)}
         self.assertIsNone(self.discover())
 
+    def test_identity_child_publication_uses_original_owner_floor_without_retirement_exception(self):
+        parent_id, child_id = 'c' * 64, 'd' * 64
+        self.artifacts['200'] = [{'name': 'candidate-' + parent_id, 'expired': False}]
+        self.assertEqual(self.discover(), ('200', parent_id))
+        self.assertEqual(self.guard_push()['recovery_run'], '200')
+        self.runs.insert(0, self.workflow_run(250))
+        self.artifacts['250'] = [{'name': 'candidate-' + child_id, 'expired': False}]
+        with self.assertRaisesRegex(scheduled.Hold, 'Multiple unfinished'):
+            self.discover()
+        self.published.return_value = {('250', child_id)}
+        self.api.reset_mock()
+        # The authenticated published child retains its parent's generation run.
+        # That existing source floor excludes the rejected parent without a new
+        # blanket exemption for correction artifacts or their receipts.
+        manifest = {'generation_run_id': '200'}
+        self.assertIsNone(scheduled.prior_generation(Path('unused'), ENV, manifest))
+        self.assertFalse(any('/200/artifacts?' in call.args[1] for call in self.api.call_args_list))
+        self.runs.insert(0, self.workflow_run(275))
+        self.artifacts['275'] = [{'name': 'candidate-' + 'e' * 64, 'expired': False}]
+        self.assertEqual(scheduled.prior_generation(Path('unused'), ENV, manifest), ('275', 'e' * 64))
+
     def test_reserved_allowance_without_candidate_holds_its_owner(self):
         self.artifacts['200'] = [{'name': 'generation-spend-reservation-200-1', 'expired': False}]
         with self.assertRaises(scheduled.Hold) as raised:
@@ -349,7 +370,7 @@ class ScheduledHistory(unittest.TestCase):
         self.assertIn('no complete candidate', str(raised.exception))
 
     def test_started_correction_without_evidence_cannot_be_ignored(self):
-        for name in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction'):
+        for name in ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction'):
             for conclusion in ('success', 'failure', 'cancelled', None):
                 with self.subTest(producer=name, conclusion=conclusion):
                     self.jobs['200'] = [{'name': job, 'conclusion': 'skipped'} for job in ('generate', 'assemble')]
@@ -360,9 +381,9 @@ class ScheduledHistory(unittest.TestCase):
             self.jobs['200'][-1]['conclusion'] = 'skipped'
             self.assertIsNone(self.discover())
 
-    def test_all_three_skipped_correction_jobs_preserve_no_owner_planning(self):
+    def test_all_four_skipped_correction_jobs_preserve_no_owner_planning(self):
         self.jobs['200'].extend({'name': name, 'conclusion': 'skipped'} for name in
-            ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction'))
+            ('program-area-revalidation', 'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction'))
         self.assertIsNone(self.discover())
         self.assertEqual(self.guard_push()['stage'], 'generate')
 

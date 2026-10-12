@@ -733,7 +733,7 @@ class WorkflowContracts(unittest.TestCase):
             for name, job in self.jobs.items()}
         producers = {name: steps for name, steps in producers.items() if steps}
         self.assertEqual(set(producers), {'generate', 'assemble', 'catalog-correction', 'program-area-revalidation',
-            'catalog-source-recovery', 'catalog-access-correction'})
+            'catalog-source-recovery', 'catalog-access-correction', 'catalog-identity-correction'})
         for name, steps in producers.items():
             with self.subTest(producer=name):
                 self.assertEqual(len(steps), 1)

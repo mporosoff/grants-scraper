@@ -1,0 +1,66 @@
+{
+  "schema_version": 1,
+  "candidate_id": "75e383c2a4fe48ece7ca2e1afc4fc0a0470dfe9f3133654da9b306aefa8c41ff",
+  "candidate_manifest_sha256": "7c6435ad52fa90f5501ffc8edea190a0db5f529ce691fd99c78b1ccc293a0bd8",
+  "previous_candidate_id": "309e39320351c2ca959e4896289edeed5ff3ed4e37e1fc95a1d79b68813dbc67",
+  "previous_manifest_sha256": "8d4ffcd0d4bac644336404620f7ea696d84b64f1fa28d1d6b8692a358e0977f2",
+  "previous_record_hashes": {
+    "nasa-roses:25-B.8-c9ad18a888": "5f635341dabdbeab6e4b01912482d3de21e4498fa479ccfcce63c25c50171f74",
+    "363829": "752c852923b8731bdfe7e483c5cd519fa77b8be3fcb38843444db7131b994ca7"
+  },
+  "record_hash_encoding": "sha256 of UTF-8 JSON, sort_keys=True, separators=(comma,colon), ensure_ascii=False",
+  "record_count": 1274,
+  "original_generated_at": "2026-10-12T16:08:24.355794Z",
+  "input_hashes": {
+    "data/opportunities.js": "b6f624ae4dbb3f0d7d6e334e400fc28a1867f00518253f2be1fcc6ad86c7ddf8",
+    "data/source_records.json": "36d3ed9e024d260e68e750c063f3d85f5bca9d313eeda09ef1546793f44dbd2f",
+    "feeds/changes.json": "ba58e29095bf4e671c6e6acef1888c62035be466e9299c67b54742885056ee75"
+  },
+  "corrections": [
+    {
+      "opportunity_id": "364039",
+      "previous_opportunity_id": "nasa-roses:25-B.8-c9ad18a888",
+      "record_sha256": "398f66427fc2921ec62b1b4ed09d1cde6b62f5f50732fc9cc0a944679dd77362",
+      "expected_record_sha256": "812b8ec343918828e0c8c6e74f6ee58e52f38698ab5804bd6f462ef401c79894",
+      "source_aliases": [
+        {
+          "opportunity_id": "nasa-roses:25-B.8-c9ad18a888",
+          "opportunity_number": "NNH25ZDA001N-SSF",
+          "source": "NASA ROSES",
+          "detail_page": "https://solicitation.nasaprs.com/NNH25ZDA001N-SSF",
+          "funding_opportunity_url": "https://solicitation.nasaprs.com/NNH25ZDA001N-SSF"
+        }
+      ]
+    },
+    {
+      "opportunity_id": "363829",
+      "previous_opportunity_id": "363829",
+      "record_sha256": "948edf99479d1b43db87013a8a91c0b1332026d4491ddda544fee25b8437089d",
+      "expected_record_sha256": "f51eef3a0f33968c9420fcae76f06a0374460d2f3096f492499474776963f534",
+      "source_aliases": [
+        {
+          "opportunity_id": "vpr-email:vpr-a3ddeff815d159a4",
+          "opportunity_number": null,
+          "source": "VPR funding digest (limited submissions & foundations)",
+          "detail_page": "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0",
+          "funding_opportunity_url": "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0",
+          "official_identity": {
+            "locator": "View on Grants.gov / version-history anchor",
+            "retrieved_at": "2026-09-17T21:47:43.327770+00:00",
+            "source_url": "https://simpler.grants.gov/opportunity/c342c01d-4f34-440f-8bb2-4bdd4d763df0",
+            "target_url": "https://www.grants.gov/search-results-detail/363829",
+            "utf8_sha256": "37d3b0650328c36b20886344afe6a3ec33546dc85d6a7f52943d631640cad29b",
+            "version": 1
+          }
+        }
+      ]
+    }
+  ],
+  "removed_event_hashes": {
+    "889ae59b100100c3b09b": "1f3ce85ed5650200505203b6edac15ce168eb402ac0803fb05edca09972fd66a",
+    "7278311ccd6ffc55323b": "2bd45a62d860b70e12622cc12e61bf0769b5ee9e88cf899fdd43adbdcc96d16d"
+  },
+  "rationale": "Restore exact prior public source aliases. Suppress only the false NASA new/closure pair; preserve all other history, source clocks, scientific payloads and paid work.",
+  "retained_event_count": 3366,
+  "retained_events_sha256": "cb7fe405c3e5311105257f4ff123cb0956b0ec113fd684ff65e08e675bca5cde"
+}
